@@ -1,0 +1,7 @@
+include *.txt
+recursive-include nidaqmx_examples *.py
+recursive-include nidaqmx/system *.py
+recursive-include nidaqmx/_task_modules *.py
+recursive-include nidaqmx/tests *.py
+recursive-include nidaqmx/tests/teds *.ted
+recursive-include nidaqmx/tests/max_config *.nce
