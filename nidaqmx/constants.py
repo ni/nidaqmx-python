@@ -26,7 +26,7 @@ class ADCTimingMode(Enum):
     HIGH_SPEED = 14712  #: Increases conversion rate while decreasing resolution.
     BEST_50_HZ_REJECTION = 14713  #: Improves 50 Hz noise rejection while decreasing noise rejection at other frequencies.
     BEST_60_HZ_REJECTION = 14714  #: Improves 60 Hz noise rejection while decreasing noise rejection at other frequencies.
-    CUSTOM = 10137  #: Use **aiadc_custom_timing_mode** to specify a custom value controlling the tradeoff between speed and resolution.
+    CUSTOM = 10137  #: Use **ai_adc_custom_timing_mode** to specify a custom value controlling the tradeoff between speed and resolution.
 
 
 class AOIdleOutputBehavior(Enum):

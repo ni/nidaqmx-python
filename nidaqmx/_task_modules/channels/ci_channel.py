@@ -7752,6 +7752,25 @@ class CIChannel(Channel):
         check_for_error(error_code)
 
     @property
+    def ci_tc_reached(self):
+        """
+        bool: Indicates whether the counter rolled over. When you query
+            this property, NI-DAQmx resets it to False.
+        """
+        val = ctypes.c_bool()
+
+        cfunc = lib_importer.windll.DAQmxGetCITCReached
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str,
+            ctypes.POINTER(ctypes.c_bool)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @property
     def ci_thresh_voltage(self):
         """
         float: Specifies the digital threshold value in Volts for high
@@ -9685,23 +9704,4 @@ class CIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
-
-    @property
-    def citc_reached(self):
-        """
-        bool: Indicates whether the counter rolled over. When you query
-            this property, NI-DAQmx resets it to False.
-        """
-        val = ctypes.c_bool()
-
-        cfunc = lib_importer.windll.DAQmxGetCITCReached
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
 

@@ -25,31 +25,6 @@ NI-DAQmx.
 
 **nidaqmx** supports CPython 2.7, 3.4+, PyPy2, and PyPy3.
 
-Features
-========
-The following represents a non-exhaustive list of supported features for **nidaqmx**:
-
-- Fully-object oriented
-- Fully-featured Task class
-- Fully-featured Scale class
-- Fully-featured System sub-package with System, Device, PhysicalChannel, WatchdogTask, etc. classes
-- NI-DAQmx Events
-- NI-DAQmx Streams
-- `Enums <https://docs.python.org/3/library/enum.html>`_ support in both Python 2 and 3
-- Exceptions support
-- `Warnings <https://docs.python.org/2/library/warnings.html>`_ support
-- Collections that emulate Python container types
-- Single, dynamic read and write methods (see :ref:`usage-section`)
-- Performant, NumPy-based reader and writer classes
-- Optional parameters
-- Implicitly verified properties
-- Context managers
-
-The following features are not yet supported by the **nidaqmx** package:
-
-- Calibration methods
-- Real-time methods
-
 Installation
 ============
 
@@ -74,8 +49,8 @@ You also can download the project source and run::
 
 Usage
 =====
-The following is a basic example of using an :py:class:`nidaqmx.task.Task` object. 
-This example illustrates how the single, dynamic :py:meth:`nidaqmx.task.Task.read` 
+The following is a basic example of using an **nidaqmx.task.Task** object. 
+This example illustrates how the single, dynamic **nidaqmx.task.Task.read** 
 method returns the appropriate data type.
 
 .. code-block:: python
@@ -99,7 +74,7 @@ method returns the appropriate data type.
   ...
   [[False, True], [True, True]]
 
-A single, dynamic :py:meth:`nidaqmx.task.Task.write` method also exists.
+A single, dynamic **nidaqmx.task.Task.write** method also exists.
 
 .. code-block:: python
 
@@ -117,11 +92,11 @@ A single, dynamic :py:meth:`nidaqmx.task.Task.write` method also exists.
   ...
   5
 
-Consider using the :py:mod:`nidaqmx.stream_readers` and :py:mod:`nidaqmx.stream_writers` 
-classes to increase the performance of your application, which accept pre-allocated 
+Consider using the **nidaqmx.stream_readers** and **nidaqmx.stream_writers**
+classes to increase the performance of your application, which accept pre-allocated
 NumPy arrays.
 
-Following is an example of using an :py:class:`nidaqmx.system.System` object.
+Following is an example of using an **nidaqmx.system.System** object.
 
 .. code-block:: python
 
@@ -186,8 +161,14 @@ Please include **all** of the following information when opening an issue:
   to determine the version of NI-DAQmx you have installed.
 - The operating system and version, for example Windows 7, CentOS 7.2, ...
 
+Documentation
+=============
+
+Documentation is available `here <http://nidaqmx-python.readthedocs.io>`_.
+
 Additional Documentation
 ========================
+
 Refer to the `NI-DAQmx Help <http://digital.ni.com/express.nsf/bycode/exagg4>`_ 
 for API-agnostic information about NI-DAQmx or measurement concepts.
 
@@ -195,6 +176,8 @@ NI-DAQmx Help installs only with the full version of NI-DAQmx.
 
 License
 =======
-**nidaqmx** is licensed under an MIT-style license (see LICENSE). Other 
-incorporated projects may be licensed under different licenses. All licenses 
-allow for non-commercial and commercial use.
+
+**nidaqmx** is licensed under an MIT-style license (see
+`LICENSE <https://github.com/ni/nidaqmx-python/blob/master/LICENSE>`_).
+Other incorporated projects may be licensed under different licenses. All
+licenses allow for non-commercial and commercial use.

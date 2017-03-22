@@ -195,6 +195,7 @@ NI-DAQmx Help installs only with the full version of NI-DAQmx.
 
 License
 =======
-**nidaqmx** is licensed under an MIT-style license (see LICENSE). Other 
-incorporated projects may be licensed under different licenses. All licenses 
-allow for non-commercial and commercial use.
+**nidaqmx** is licensed under an MIT-style license (see
+`LICENSE <https://github.com/ni/nidaqmx-python/blob/master/LICENSE>`_).
+Other incorporated projects may be licensed under different licenses. All
+licenses allow for non-commercial and commercial use.

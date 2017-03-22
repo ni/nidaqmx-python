@@ -492,6 +492,92 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
+    def ai_adc_custom_timing_mode(self):
+        """
+        int: Specifies the timing mode of the ADC when
+            **ai_adc_timing_mode** is **ADCTimingMode.CUSTOM**.
+        """
+        val = ctypes.c_uint()
+
+        cfunc = lib_importer.windll.DAQmxGetAIADCCustomTimingMode
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str,
+            ctypes.POINTER(ctypes.c_uint)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ai_adc_custom_timing_mode.setter
+    def ai_adc_custom_timing_mode(self, val):
+        cfunc = lib_importer.windll.DAQmxSetAIADCCustomTimingMode
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str, ctypes.c_uint]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_adc_custom_timing_mode.deleter
+    def ai_adc_custom_timing_mode(self):
+        cfunc = lib_importer.windll.DAQmxResetAIADCCustomTimingMode
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ai_adc_timing_mode(self):
+        """
+        :class:`nidaqmx.constants.ADCTimingMode`: Specifies the ADC
+            timing mode, controlling the tradeoff between speed and
+            effective resolution. Some ADC timing modes provide
+            increased powerline noise rejection. On devices that have an
+            AI Convert clock, this setting affects both the maximum and
+            default values for **ai_conv_rate**. You must use the same
+            ADC timing mode for all channels on a device, but you can
+            use different ADC timing modes for different devices in the
+            same task.
+        """
+        val = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxGetAIADCTimingMode
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str,
+            ctypes.POINTER(ctypes.c_int)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return ADCTimingMode(val.value)
+
+    @ai_adc_timing_mode.setter
+    def ai_adc_timing_mode(self, val):
+        val = val.value
+        cfunc = lib_importer.windll.DAQmxSetAIADCTimingMode
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_adc_timing_mode.deleter
+    def ai_adc_timing_mode(self):
+        cfunc = lib_importer.windll.DAQmxResetAIADCTimingMode
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
     def ai_atten(self):
         """
         float: Specifies the amount of attenuation to use.
@@ -2177,6 +2263,47 @@ class AIChannel(Channel):
     @ai_data_xfer_req_cond.deleter
     def ai_data_xfer_req_cond(self):
         cfunc = lib_importer.windll.DAQmxResetAIDataXferReqCond
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ai_dc_offset(self):
+        """
+        float: Specifies the DC value to add to the input range of the
+            device. Use **ai_rng_high** and **ai_rng_low** to specify
+            the input range. This offset is in the native units of the
+            device .
+        """
+        val = ctypes.c_double()
+
+        cfunc = lib_importer.windll.DAQmxGetAIDCOffset
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str,
+            ctypes.POINTER(ctypes.c_double)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ai_dc_offset.setter
+    def ai_dc_offset(self, val):
+        cfunc = lib_importer.windll.DAQmxSetAIDCOffset
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_dc_offset.deleter
+    def ai_dc_offset(self):
+        cfunc = lib_importer.windll.DAQmxResetAIDCOffset
         cfunc.argtypes = [
             lib_importer.task_handle, ctypes_byte_str]
 
@@ -4111,6 +4238,126 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
+    def ai_lvdt_sensitivity(self):
+        """
+        float: Specifies the sensitivity of the LVDT. This value is in
+            the units you specify with **ai_lvdt_sensitivity_units**.
+            Refer to the sensor documentation to determine this value.
+        """
+        val = ctypes.c_double()
+
+        cfunc = lib_importer.windll.DAQmxGetAILVDTSensitivity
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str,
+            ctypes.POINTER(ctypes.c_double)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ai_lvdt_sensitivity.setter
+    def ai_lvdt_sensitivity(self, val):
+        cfunc = lib_importer.windll.DAQmxSetAILVDTSensitivity
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_lvdt_sensitivity.deleter
+    def ai_lvdt_sensitivity(self):
+        cfunc = lib_importer.windll.DAQmxResetAILVDTSensitivity
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ai_lvdt_sensitivity_units(self):
+        """
+        :class:`nidaqmx.constants.LVDTSensitivityUnits`: Specifies the
+            units of **ai_lvdt_sensitivity**.
+        """
+        val = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxGetAILVDTSensitivityUnits
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str,
+            ctypes.POINTER(ctypes.c_int)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return LVDTSensitivityUnits(val.value)
+
+    @ai_lvdt_sensitivity_units.setter
+    def ai_lvdt_sensitivity_units(self, val):
+        val = val.value
+        cfunc = lib_importer.windll.DAQmxSetAILVDTSensitivityUnits
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_lvdt_sensitivity_units.deleter
+    def ai_lvdt_sensitivity_units(self):
+        cfunc = lib_importer.windll.DAQmxResetAILVDTSensitivityUnits
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ai_lvdt_units(self):
+        """
+        :class:`nidaqmx.constants.LengthUnits`: Specifies the units to
+            use to return linear position measurements from the channel.
+        """
+        val = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxGetAILVDTUnits
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str,
+            ctypes.POINTER(ctypes.c_int)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return LengthUnits(val.value)
+
+    @ai_lvdt_units.setter
+    def ai_lvdt_units(self, val):
+        val = val.value
+        cfunc = lib_importer.windll.DAQmxSetAILVDTUnits
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_lvdt_units.deleter
+    def ai_lvdt_units(self):
+        cfunc = lib_importer.windll.DAQmxResetAILVDTUnits
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
     def ai_max(self):
         """
         float: Specifies the maximum value you expect to measure. This
@@ -5106,6 +5353,127 @@ class AIChannel(Channel):
     @ai_rtd_type.deleter
     def ai_rtd_type(self):
         cfunc = lib_importer.windll.DAQmxResetAIRTDType
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ai_rvdt_sensitivity(self):
+        """
+        float: Specifies the sensitivity of the RVDT. This value is in
+            the units you specify with **ai_rvdt_sensitivity_units**.
+            Refer to the sensor documentation to determine this value.
+        """
+        val = ctypes.c_double()
+
+        cfunc = lib_importer.windll.DAQmxGetAIRVDTSensitivity
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str,
+            ctypes.POINTER(ctypes.c_double)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ai_rvdt_sensitivity.setter
+    def ai_rvdt_sensitivity(self, val):
+        cfunc = lib_importer.windll.DAQmxSetAIRVDTSensitivity
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_rvdt_sensitivity.deleter
+    def ai_rvdt_sensitivity(self):
+        cfunc = lib_importer.windll.DAQmxResetAIRVDTSensitivity
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ai_rvdt_sensitivity_units(self):
+        """
+        :class:`nidaqmx.constants.RVDTSensitivityUnits`: Specifies the
+            units of **ai_rvdt_sensitivity**.
+        """
+        val = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxGetAIRVDTSensitivityUnits
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str,
+            ctypes.POINTER(ctypes.c_int)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return RVDTSensitivityUnits(val.value)
+
+    @ai_rvdt_sensitivity_units.setter
+    def ai_rvdt_sensitivity_units(self, val):
+        val = val.value
+        cfunc = lib_importer.windll.DAQmxSetAIRVDTSensitivityUnits
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_rvdt_sensitivity_units.deleter
+    def ai_rvdt_sensitivity_units(self):
+        cfunc = lib_importer.windll.DAQmxResetAIRVDTSensitivityUnits
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ai_rvdt_units(self):
+        """
+        :class:`nidaqmx.constants.AngleUnits`: Specifies the units to
+            use to return angular position measurements from the
+            channel.
+        """
+        val = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxGetAIRVDTUnits
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str,
+            ctypes.POINTER(ctypes.c_int)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return AngleUnits(val.value)
+
+    @ai_rvdt_units.setter
+    def ai_rvdt_units(self, val):
+        val = val.value
+        cfunc = lib_importer.windll.DAQmxSetAIRVDTUnits
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_rvdt_units.deleter
+    def ai_rvdt_units(self):
+        cfunc = lib_importer.windll.DAQmxResetAIRVDTUnits
         cfunc.argtypes = [
             lib_importer.task_handle, ctypes_byte_str]
 
@@ -6383,374 +6751,6 @@ class AIChannel(Channel):
     @ai_voltaged_b_ref.deleter
     def ai_voltaged_b_ref(self):
         cfunc = lib_importer.windll.DAQmxResetAIVoltagedBRef
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def aiadc_custom_timing_mode(self):
-        """
-        int: Specifies the timing mode of the ADC when
-            **aiadc_timing_mode** is **ADCTimingMode.CUSTOM**.
-        """
-        val = ctypes.c_uint()
-
-        cfunc = lib_importer.windll.DAQmxGetAIADCCustomTimingMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_uint)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @aiadc_custom_timing_mode.setter
-    def aiadc_custom_timing_mode(self, val):
-        cfunc = lib_importer.windll.DAQmxSetAIADCCustomTimingMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_uint]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @aiadc_custom_timing_mode.deleter
-    def aiadc_custom_timing_mode(self):
-        cfunc = lib_importer.windll.DAQmxResetAIADCCustomTimingMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def aiadc_timing_mode(self):
-        """
-        :class:`nidaqmx.constants.ADCTimingMode`: Specifies the ADC
-            timing mode, controlling the tradeoff between speed and
-            effective resolution. Some ADC timing modes provide
-            increased powerline noise rejection. On devices that have an
-            AI Convert clock, this setting affects both the maximum and
-            default values for **ai_conv_rate**. You must use the same
-            ADC timing mode for all channels on a device, but you can
-            use different ADC timing modes for different devices in the
-            same task.
-        """
-        val = ctypes.c_int()
-
-        cfunc = lib_importer.windll.DAQmxGetAIADCTimingMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return ADCTimingMode(val.value)
-
-    @aiadc_timing_mode.setter
-    def aiadc_timing_mode(self, val):
-        val = val.value
-        cfunc = lib_importer.windll.DAQmxSetAIADCTimingMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @aiadc_timing_mode.deleter
-    def aiadc_timing_mode(self):
-        cfunc = lib_importer.windll.DAQmxResetAIADCTimingMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def aidc_offset(self):
-        """
-        float: Specifies the DC value to add to the input range of the
-            device. Use **ai_rng_high** and **ai_rng_low** to specify
-            the input range. This offset is in the native units of the
-            device .
-        """
-        val = ctypes.c_double()
-
-        cfunc = lib_importer.windll.DAQmxGetAIDCOffset
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @aidc_offset.setter
-    def aidc_offset(self, val):
-        cfunc = lib_importer.windll.DAQmxSetAIDCOffset
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @aidc_offset.deleter
-    def aidc_offset(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDCOffset
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ailvdt_sensitivity(self):
-        """
-        float: Specifies the sensitivity of the LVDT. This value is in
-            the units you specify with **ailvdt_sensitivity_units**.
-            Refer to the sensor documentation to determine this value.
-        """
-        val = ctypes.c_double()
-
-        cfunc = lib_importer.windll.DAQmxGetAILVDTSensitivity
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @ailvdt_sensitivity.setter
-    def ailvdt_sensitivity(self, val):
-        cfunc = lib_importer.windll.DAQmxSetAILVDTSensitivity
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ailvdt_sensitivity.deleter
-    def ailvdt_sensitivity(self):
-        cfunc = lib_importer.windll.DAQmxResetAILVDTSensitivity
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ailvdt_sensitivity_units(self):
-        """
-        :class:`nidaqmx.constants.LVDTSensitivityUnits`: Specifies the
-            units of **ailvdt_sensitivity**.
-        """
-        val = ctypes.c_int()
-
-        cfunc = lib_importer.windll.DAQmxGetAILVDTSensitivityUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return LVDTSensitivityUnits(val.value)
-
-    @ailvdt_sensitivity_units.setter
-    def ailvdt_sensitivity_units(self, val):
-        val = val.value
-        cfunc = lib_importer.windll.DAQmxSetAILVDTSensitivityUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ailvdt_sensitivity_units.deleter
-    def ailvdt_sensitivity_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAILVDTSensitivityUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ailvdt_units(self):
-        """
-        :class:`nidaqmx.constants.LengthUnits`: Specifies the units to
-            use to return linear position measurements from the channel.
-        """
-        val = ctypes.c_int()
-
-        cfunc = lib_importer.windll.DAQmxGetAILVDTUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return LengthUnits(val.value)
-
-    @ailvdt_units.setter
-    def ailvdt_units(self, val):
-        val = val.value
-        cfunc = lib_importer.windll.DAQmxSetAILVDTUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ailvdt_units.deleter
-    def ailvdt_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAILVDTUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def airvdt_sensitivity(self):
-        """
-        float: Specifies the sensitivity of the RVDT. This value is in
-            the units you specify with **airvdt_sensitivity_units**.
-            Refer to the sensor documentation to determine this value.
-        """
-        val = ctypes.c_double()
-
-        cfunc = lib_importer.windll.DAQmxGetAIRVDTSensitivity
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @airvdt_sensitivity.setter
-    def airvdt_sensitivity(self, val):
-        cfunc = lib_importer.windll.DAQmxSetAIRVDTSensitivity
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @airvdt_sensitivity.deleter
-    def airvdt_sensitivity(self):
-        cfunc = lib_importer.windll.DAQmxResetAIRVDTSensitivity
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def airvdt_sensitivity_units(self):
-        """
-        :class:`nidaqmx.constants.RVDTSensitivityUnits`: Specifies the
-            units of **airvdt_sensitivity**.
-        """
-        val = ctypes.c_int()
-
-        cfunc = lib_importer.windll.DAQmxGetAIRVDTSensitivityUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return RVDTSensitivityUnits(val.value)
-
-    @airvdt_sensitivity_units.setter
-    def airvdt_sensitivity_units(self, val):
-        val = val.value
-        cfunc = lib_importer.windll.DAQmxSetAIRVDTSensitivityUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @airvdt_sensitivity_units.deleter
-    def airvdt_sensitivity_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIRVDTSensitivityUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def airvdt_units(self):
-        """
-        :class:`nidaqmx.constants.AngleUnits`: Specifies the units to
-            use to return angular position measurements from the
-            channel.
-        """
-        val = ctypes.c_int()
-
-        cfunc = lib_importer.windll.DAQmxGetAIRVDTUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return AngleUnits(val.value)
-
-    @airvdt_units.setter
-    def airvdt_units(self, val):
-        val = val.value
-        cfunc = lib_importer.windll.DAQmxSetAIRVDTUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @airvdt_units.deleter
-    def airvdt_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIRVDTUnits
         cfunc.argtypes = [
             lib_importer.task_handle, ctypes_byte_str]
 
