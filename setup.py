@@ -37,7 +37,7 @@ def read_contents(file_to_read):
 setup(
     name=pypi_name,
     version=get_version(),
-    description='This is the incomplete draft for NI\'s version of a NI-DAQmx Python API.',
+    description='NI-DAQmx Python API',
     long_description=read_contents('README.rst'),
     author='National Instruments',
     maintainer="Brian Lee, Neil Stoddard",
