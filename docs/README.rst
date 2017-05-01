@@ -94,7 +94,7 @@ method returns the appropriate data type.
   >>> from nidaqmx.constants import LineGrouping
   >>> with nidaqmx.Task() as task:
   ...     task.di_channels.add_di_chan(
-  ...         "cDAQ2Mod4/port0/line1:3", line_grouping=LineGrouping.CHAN_PER_LINE)
+  ...         "cDAQ2Mod4/port0/line0:1", line_grouping=LineGrouping.CHAN_PER_LINE)
   ...     task.read(number_of_samples_per_channel=2)
   ...
   [[False, True], [True, True]]
