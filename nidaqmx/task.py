@@ -889,6 +889,11 @@ class Task(object):
         DAQmxSignalEventCallbackPtr = ctypes.CFUNCTYPE(
             ctypes.c_int32, lib_importer.task_handle, ctypes.c_int32,
             ctypes.c_void_p)
+        
+        cfunc = lib_importer.daqlib.DAQmxRegisterSignalEvent
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
+            DAQmxSignalEventCallbackPtr, ctypes.c_void_p]
 
         cfunc = lib_importer.daqlib.DAQmxRegisterSignalEvent
         cfunc.argtypes = [
