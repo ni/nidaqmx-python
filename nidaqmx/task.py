@@ -716,17 +716,21 @@ class Task(object):
         DAQmxDoneEventCallbackPtr = ctypes.CFUNCTYPE(
             ctypes.c_int32, lib_importer.task_handle, ctypes.c_int32,
             ctypes.c_void_p)
-
+        
+        cfunc = lib_importer.windll.DAQmxRegisterDoneEvent
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes.c_uint, DAQmxDoneEventCallbackPtr,
+            ctypes.c_void_p]
+        
         if callback_method is not None:
             callback_method_ptr = DAQmxDoneEventCallbackPtr(callback_method)
             self._done_event_callbacks.append(callback_method_ptr)
         else:
             del self._done_event_callbacks[:]
-
-        cfunc = lib_importer.windll.DAQmxRegisterDoneEvent
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_uint, DAQmxDoneEventCallbackPtr,
-            ctypes.c_void_p]
+            callback_method_ptr = None
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_uint, ctypes.c_void_ptr,
+                ctypes.c_void_p]
 
         error_code = cfunc(
             self._handle, 0, callback_method_ptr, None)
@@ -769,7 +773,12 @@ class Task(object):
         DAQmxEveryNSamplesEventCallbackPtr = ctypes.CFUNCTYPE(
             ctypes.c_int32, lib_importer.task_handle, ctypes.c_int32,
             ctypes.c_uint32, ctypes.c_void_p)
-
+        
+        cfunc = lib_importer.windll.DAQmxRegisterEveryNSamplesEvent
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
+            ctypes.c_uint, DAQmxEveryNSamplesEventCallbackPtr, ctypes.c_void_p]
+        
         if callback_method is not None:
             callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr(
                 callback_method)
@@ -777,11 +786,10 @@ class Task(object):
                 callback_method_ptr)
         else:
             del self._every_n_acquired_event_callbacks[:]
-
-        cfunc = lib_importer.windll.DAQmxRegisterEveryNSamplesEvent
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-            ctypes.c_uint, DAQmxEveryNSamplesEventCallbackPtr, ctypes.c_void_p]
+            callback_method_ptr = None
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
+                ctypes.c_uint, ctypes.c_void_p, ctypes.c_void_p]
 
         error_code = cfunc(
             self._handle, EveryNSamplesEventType.ACQUIRED_INTO_BUFFER.value,
@@ -826,6 +834,12 @@ class Task(object):
             ctypes.c_int32, lib_importer.task_handle, ctypes.c_int32,
             ctypes.c_uint32, ctypes.c_void_p)
 
+        cfunc = lib_importer.windll.DAQmxRegisterEveryNSamplesEvent
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
+            ctypes.c_uint, DAQmxEveryNSamplesEventCallbackPtr,
+            ctypes.c_void_p]
+        
         if callback_method is not None:
             callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr(
                 callback_method)
@@ -833,13 +847,12 @@ class Task(object):
                 callback_method_ptr)
         else:
             del self._every_n_transferred_event_callbacks[:]
-
-        cfunc = lib_importer.windll.DAQmxRegisterEveryNSamplesEvent
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-            ctypes.c_uint, DAQmxEveryNSamplesEventCallbackPtr,
-            ctypes.c_void_p]
-
+            callback_method_ptr = None
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
+                ctypes.c_uint, ctypes.c_void_p,
+                ctypes.c_void_p]
+            
         error_code = cfunc(
             self._handle, EveryNSamplesEventType.TRANSFERRED_FROM_BUFFER.value,
             sample_interval, 0, callback_method_ptr, None)
@@ -877,17 +890,21 @@ class Task(object):
         DAQmxSignalEventCallbackPtr = ctypes.CFUNCTYPE(
             ctypes.c_int32, lib_importer.task_handle, ctypes.c_int32,
             ctypes.c_void_p)
+        
+        cfunc = lib_importer.daqlib.DAQmxRegisterSignalEvent
+        cfunc.argtypes = [
+            lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
+            DAQmxSignalEventCallbackPtr, ctypes.c_void_p]
 
         if callback_method is not None:
             callback_method_ptr = DAQmxSignalEventCallbackPtr(callback_method)
             self._signal_event_callbacks.append(callback_method_ptr)
         else:
             del self._signal_event_callbacks[:]
-
-        cfunc = lib_importer.daqlib.DAQmxRegisterSignalEvent
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-            DAQmxSignalEventCallbackPtr, ctypes.c_void_p]
+            callback_method_ptr = None
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
+                ctypes.c_void_ptr, ctypes.c_void_p]
 
         error_code = cfunc(
             self._handle, signal_type.value, 0, callback_method_ptr, None)
