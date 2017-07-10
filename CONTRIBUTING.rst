@@ -23,7 +23,7 @@ To contribute to this project, it is recommended that you follow these steps:
 2. Run the unit tests on your system (see Testing section). At this point,
    if any tests fail, do not begin development. Try to investigate these
    failures. If you're unable to do so, report an issue through our
-   `GitHub issues page <http://github.com/nidaqmx/issues>`_.
+   `GitHub issues page <http://github.com/ni/nidaqmx-python/issues>`_.
 3. Write new tests that demonstrate your bug or feature. Ensure that these 
    new tests fail.
 4. Make your change.
@@ -97,5 +97,5 @@ By making a contribution to this project, I certify that:
 
 (taken from `developercertificate.org <http://developercertificate.org/>`_)
 
-See `LICENSE <https://github.com/ni/nidaqmx/blob/master/LICENSE>`_
+See `LICENSE <https://github.com/ni/nidaqmx-python/blob/master/LICENSE>`_
 for details about how **nidaqmx** is licensed.

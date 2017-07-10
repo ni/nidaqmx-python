@@ -1,5 +1,4 @@
-﻿import os
-from setuptools import setup
+﻿from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
 
@@ -13,14 +12,15 @@ class PyTest(TestCommand):
         import pytest
         pytest.main(self.test_args)
 
-        
+
 pypi_name = 'nidaqmx'
 
 
-def get_version():
+def get_version(name):
+    import os
     version = None
     script_dir = os.path.dirname(os.path.realpath(__file__))
-    script_dir = os.path.join(script_dir, pypi_name)
+    script_dir = os.path.join(script_dir, name)
     if not os.path.exists(os.path.join(script_dir, 'VERSION')):
         version = '1.0.0dev0'
     else:
@@ -36,7 +36,7 @@ def read_contents(file_to_read):
 
 setup(
     name=pypi_name,
-    version=get_version(),
+    version=get_version(pypi_name),
     description='NI-DAQmx Python API',
     long_description=read_contents('README.rst'),
     author='National Instruments',

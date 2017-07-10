@@ -10,9 +10,7 @@ import platform
 from ctypes.util import find_library
 from numpy.ctypeslib import ndpointer
 
-
-class Error(Exception):
-    pass
+from nidaqmx.errors import Error
 
 
 class DaqNotFoundError(Error):
@@ -68,7 +66,7 @@ def wrapped_ndpointer(*args, **kwargs):
         if 'flags' in kwargs:
             kwargs['flags'] = tuple(
                 f.encode('ascii') for f in kwargs['flags'])
-    
+
     base = ndpointer(*args, **kwargs)
 
     def from_param(cls, obj):
@@ -208,6 +206,11 @@ class DaqLibImporter(object):
                     'Could not find an installation of NI-DAQmx. Please '
                     'ensure that NI-DAQmx is installed on this machine or '
                     'contact National Instruments for support.')
+        else:
+            raise DaqNotFoundError(
+                'NI-DAQmx Python is not supported on this platform: {0}. '
+                'Please direct any questions or feedback to National '
+                'Instruments.'.format(sys.platform))
 
         self._windll = DaqFunctionImporter(windll)
         self._cdll = DaqFunctionImporter(cdll)

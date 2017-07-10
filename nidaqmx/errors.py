@@ -6,7 +6,6 @@ from __future__ import unicode_literals
 import ctypes
 import warnings
 
-from nidaqmx._lib import lib_importer, ctypes_byte_str
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 
 __all__ = ['DaqError', 'DaqWarning', 'DaqResourceWarning']
@@ -113,6 +112,8 @@ warnings.filterwarnings("always", category=DaqResourceWarning)
 
 
 def check_for_error(error_code):
+    from nidaqmx._lib import lib_importer
+
     if error_code < 0:
         error_buffer = ctypes.create_string_buffer(2048)
 
