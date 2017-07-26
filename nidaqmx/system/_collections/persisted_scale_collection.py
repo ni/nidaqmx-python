@@ -95,8 +95,11 @@ class PersistedScaleCollection(Sequence):
             collection.
         """
         cfunc = lib_importer.windll.DAQmxGetSysScales
-        cfunc.argtypes = [
-            ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:

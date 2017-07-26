@@ -3,12 +3,13 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+from ctypes.util import find_library
 import ctypes
+from numpy.ctypeslib import ndpointer
+import platform
 import six
 import sys
-import platform
-from ctypes.util import find_library
-from numpy.ctypeslib import ndpointer
+import threading
 
 from nidaqmx.errors import Error
 
@@ -131,10 +132,16 @@ class DaqFunctionImporter(object):
 
     def __init__(self, library):
         self._library = library
+        self._lib_lock = threading.Lock()
 
     def __getattr__(self, function):
         try:
-            return getattr(self._library, function)
+            cfunc = getattr(self._library, function)
+            if not hasattr(cfunc, 'arglock'):
+                with self._lib_lock:
+                    if not hasattr(cfunc, 'arglock'):
+                        cfunc.arglock = threading.Lock()
+            return cfunc
         except AttributeError:
             raise DaqFunctionNotSupportedError(
                 'The NI-DAQmx function "{0}" is not supported in this '

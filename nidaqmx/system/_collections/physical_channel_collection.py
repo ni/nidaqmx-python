@@ -38,7 +38,7 @@ class PhysicalChannelCollection(Sequence):
         if isinstance(other, self.__class__):
             return self._name == other._name
         return False
-    
+
     def __getitem__(self, index):
         """
         Indexes a subset of physical channels on this physical channel
@@ -119,8 +119,11 @@ class AIPhysicalChannelCollection(PhysicalChannelCollection):
     @property
     def channel_names(self):
         cfunc = lib_importer.windll.DAQmxGetDevAIPhysicalChans
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -154,8 +157,11 @@ class AOPhysicalChannelCollection(PhysicalChannelCollection):
     @property
     def channel_names(self):
         cfunc = lib_importer.windll.DAQmxGetDevAOPhysicalChans
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -189,8 +195,11 @@ class CIPhysicalChannelCollection(PhysicalChannelCollection):
     @property
     def channel_names(self):
         cfunc = lib_importer.windll.DAQmxGetDevCIPhysicalChans
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -224,8 +233,11 @@ class COPhysicalChannelCollection(PhysicalChannelCollection):
     @property
     def channel_names(self):
         cfunc = lib_importer.windll.DAQmxGetDevCOPhysicalChans
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -258,8 +270,11 @@ class DILinesCollection(PhysicalChannelCollection):
     @property
     def channel_names(self):
         cfunc = lib_importer.windll.DAQmxGetDevDILines
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -292,8 +307,11 @@ class DOLinesCollection(PhysicalChannelCollection):
     @property
     def channel_names(self):
         cfunc = lib_importer.windll.DAQmxGetDevDOLines
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -326,8 +344,11 @@ class DIPortsCollection(PhysicalChannelCollection):
     @property
     def channel_names(self):
         cfunc = lib_importer.windll.DAQmxGetDevDIPorts
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -360,8 +381,11 @@ class DOPortsCollection(PhysicalChannelCollection):
     @property
     def channel_names(self):
         cfunc = lib_importer.windll.DAQmxGetDevDOPorts
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:

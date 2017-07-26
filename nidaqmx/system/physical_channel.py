@@ -61,8 +61,11 @@ class PhysicalChannel(object):
             connector or one of several calibration signals.
         """
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanAIInputSrcs
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -91,9 +94,12 @@ class PhysicalChannel(object):
             measurement types supported by the channel.
         """
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanAISupportedMeasTypes
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -125,8 +131,11 @@ class PhysicalChannel(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanAITermCfgs
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -145,8 +154,11 @@ class PhysicalChannel(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetPhysicalChanAOManualControlAmplitude)
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -166,8 +178,11 @@ class PhysicalChannel(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetPhysicalChanAOManualControlEnable)
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -179,8 +194,11 @@ class PhysicalChannel(object):
     def ao_manual_control_enable(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetPhysicalChanAOManualControlEnable)
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_bool]
 
         error_code = cfunc(
             self._name, val)
@@ -190,8 +208,11 @@ class PhysicalChannel(object):
     def ao_manual_control_enable(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetPhysicalChanAOManualControlEnable)
-        cfunc.argtypes = [
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._name)
@@ -206,8 +227,11 @@ class PhysicalChannel(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanAOManualControlFreq
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -225,8 +249,11 @@ class PhysicalChannel(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetPhysicalChanAOManualControlShortDetected)
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -242,9 +269,12 @@ class PhysicalChannel(object):
         """
         cfunc = (lib_importer.windll.
                  DAQmxGetPhysicalChanAOSupportedOutputTypes)
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -276,8 +306,11 @@ class PhysicalChannel(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetAOPowerAmpChannelEnable
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -288,8 +321,11 @@ class PhysicalChannel(object):
     @ao_power_amp_channel_enable.setter
     def ao_power_amp_channel_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOPowerAmpChannelEnable
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_bool]
 
         error_code = cfunc(
             self._name, val)
@@ -298,8 +334,11 @@ class PhysicalChannel(object):
     @ao_power_amp_channel_enable.deleter
     def ao_power_amp_channel_enable(self):
         cfunc = lib_importer.windll.DAQmxResetAOPowerAmpChannelEnable
-        cfunc.argtypes = [
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._name)
@@ -313,8 +352,11 @@ class PhysicalChannel(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAOPowerAmpGain
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -330,8 +372,11 @@ class PhysicalChannel(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAOPowerAmpOffset
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -348,8 +393,11 @@ class PhysicalChannel(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetAOPowerAmpOvercurrent
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -364,9 +412,13 @@ class PhysicalChannel(object):
             used to scale from pre-amplified values.
         """
         cfunc = lib_importer.windll.DAQmxGetAOPowerAmpScalingCoeff
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -397,9 +449,12 @@ class PhysicalChannel(object):
         """
         cfunc = (lib_importer.windll.
                  DAQmxGetPhysicalChanAOSupportedPowerUpOutputTypes)
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -431,8 +486,11 @@ class PhysicalChannel(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanAOTermCfgs
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -448,9 +506,12 @@ class PhysicalChannel(object):
             measurement types supported by the channel.
         """
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanCISupportedMeasTypes
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -480,9 +541,12 @@ class PhysicalChannel(object):
         """
         cfunc = (lib_importer.windll.
                  DAQmxGetPhysicalChanCOSupportedOutputTypes)
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -514,8 +578,11 @@ class PhysicalChannel(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetPhysicalChanDIChangeDetectSupported)
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -531,8 +598,11 @@ class PhysicalChannel(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanDIPortWidth
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -549,8 +619,11 @@ class PhysicalChannel(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanDISampClkSupported
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -566,9 +639,12 @@ class PhysicalChannel(object):
             clocked digital input.
         """
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanDISampModes
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -598,8 +674,11 @@ class PhysicalChannel(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanDOPortWidth
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -616,8 +695,11 @@ class PhysicalChannel(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanDOSampClkSupported
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -633,9 +715,12 @@ class PhysicalChannel(object):
             clocked digital output.
         """
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanDOSampModes
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -664,9 +749,12 @@ class PhysicalChannel(object):
             checksums.
         """
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanTEDSBitStream
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.uint8,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.uint8,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -696,8 +784,11 @@ class PhysicalChannel(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanTEDSMfgID
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -713,8 +804,11 @@ class PhysicalChannel(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanTEDSModelNum
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -730,8 +824,11 @@ class PhysicalChannel(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanTEDSSerialNum
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -746,9 +843,12 @@ class PhysicalChannel(object):
             in **teds_bit_stream**.
         """
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanTEDSTemplateIDs
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.uint32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.uint32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -776,8 +876,11 @@ class PhysicalChannel(object):
         str: Indicates the version letter of the sensor.
         """
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanTEDSVersionLetter
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -807,8 +910,11 @@ class PhysicalChannel(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanTEDSVersionNum
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -823,8 +929,11 @@ class PhysicalChannel(object):
         the physical channel that you performed in MAX.
         """
         cfunc = lib_importer.windll.DAQmxClearTEDS
-        cfunc.argtypes = [
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._name)
@@ -847,8 +956,11 @@ class PhysicalChannel(object):
                 to the physical channel.
         """
         cfunc = lib_importer.windll.DAQmxConfigureTEDS
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes_byte_str]
 
         error_code = cfunc(
             self._name, file_path)
@@ -875,9 +987,12 @@ class PhysicalChannel(object):
         bit_stream = numpy.uint8(bit_stream)
 
         cfunc = lib_importer.windll.DAQmxWriteToTEDSFromArray
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.uint8,
-            flags=('C','W')), ctypes.c_uint, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.uint8,
+                        flags=('C','W')), ctypes.c_uint, ctypes.c_int]
 
         error_code = cfunc(
             self._name, bit_stream, len(bit_stream), basic_teds_options.value)
@@ -897,8 +1012,11 @@ class PhysicalChannel(object):
                 bitstream.
         """
         cfunc = lib_importer.windll.DAQmxWriteToTEDSFromFile
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int]
 
         error_code = cfunc(
             self._name, file_path, basic_teds_options.value)

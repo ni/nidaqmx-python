@@ -30,8 +30,11 @@ class HandshakeTrigger(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetInterlockedHshkTrigAssertedLvl
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -43,8 +46,11 @@ class HandshakeTrigger(object):
     def interlocked_asserted_lvl(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetInterlockedHshkTrigAssertedLvl
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -53,8 +59,11 @@ class HandshakeTrigger(object):
     @interlocked_asserted_lvl.deleter
     def interlocked_asserted_lvl(self):
         cfunc = lib_importer.windll.DAQmxResetInterlockedHshkTrigAssertedLvl
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -66,8 +75,12 @@ class HandshakeTrigger(object):
         str: Specifies the source terminal of the Handshake Trigger.
         """
         cfunc = lib_importer.windll.DAQmxGetInterlockedHshkTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -92,8 +105,11 @@ class HandshakeTrigger(object):
     @interlocked_src.setter
     def interlocked_src(self, val):
         cfunc = lib_importer.windll.DAQmxSetInterlockedHshkTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, val)
@@ -102,8 +118,11 @@ class HandshakeTrigger(object):
     @interlocked_src.deleter
     def interlocked_src(self):
         cfunc = lib_importer.windll.DAQmxResetInterlockedHshkTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -118,8 +137,11 @@ class HandshakeTrigger(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetHshkTrigType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -131,8 +153,11 @@ class HandshakeTrigger(object):
     def trig_type(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetHshkTrigType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -141,8 +166,11 @@ class HandshakeTrigger(object):
     @trig_type.deleter
     def trig_type(self):
         cfunc = lib_importer.windll.DAQmxResetHshkTrigType
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)

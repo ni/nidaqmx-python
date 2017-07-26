@@ -123,11 +123,15 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIAccel4WireDCVoltageChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes.c_double, ctypes.c_int, ctypes.c_int, ctypes.c_double,
-            c_bool32, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double, c_bool32,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -191,11 +195,15 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIAccelChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes.c_double, ctypes.c_int, ctypes.c_int, ctypes.c_double,
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -253,10 +261,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIAccelChargeChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes.c_double, ctypes.c_int, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -317,10 +329,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIBridgeChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -370,10 +386,13 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIChargeChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -432,10 +451,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAICurrentChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -496,10 +519,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAICurrentRMSChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -591,14 +618,19 @@ class AIChannelCollection(ChannelCollection):
         reverse_coeffs = numpy.float64(reverse_coeffs)
 
         cfunc = lib_importer.windll.DAQmxCreateAIForceBridgePolynomialChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double,
-            wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
-            ctypes.c_uint, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint, ctypes.c_int, ctypes.c_int,
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -692,14 +724,19 @@ class AIChannelCollection(ChannelCollection):
         physical_vals = numpy.float64(physical_vals)
 
         cfunc = lib_importer.windll.DAQmxCreateAIForceBridgeTableChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double,
-            wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
-            ctypes.c_uint, ctypes.c_int,
-            wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
-            ctypes.c_uint, ctypes.c_int, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -787,12 +824,16 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIForceBridgeTwoPointLinChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_double,
-            ctypes.c_double, ctypes.c_int, ctypes.c_double, ctypes.c_double,
-            ctypes.c_int, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -858,11 +899,15 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIForceIEPEChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes.c_double, ctypes.c_int, ctypes.c_int, ctypes.c_double,
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -921,10 +966,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIFreqVoltageChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_double,
-            ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -983,10 +1032,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIMicrophoneChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_int, ctypes.c_double, ctypes.c_double,
-            ctypes.c_int, ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -1040,10 +1093,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIPosEddyCurrProxProbeChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_double,
-            ctypes.c_int, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_int,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -1113,11 +1170,15 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIPosLVDTChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_double,
-            ctypes.c_int, ctypes.c_int, ctypes.c_double, ctypes.c_double,
-            ctypes.c_int, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -1189,11 +1250,15 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIPosRVDTChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_double,
-            ctypes.c_int, ctypes.c_int, ctypes.c_double, ctypes.c_double,
-            ctypes.c_int, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -1288,14 +1353,19 @@ class AIChannelCollection(ChannelCollection):
         reverse_coeffs = numpy.float64(reverse_coeffs)
 
         cfunc = lib_importer.windll.DAQmxCreateAIPressureBridgePolynomialChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double,
-            wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
-            ctypes.c_uint, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint, ctypes.c_int, ctypes.c_int,
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -1391,14 +1461,19 @@ class AIChannelCollection(ChannelCollection):
         physical_vals = numpy.float64(physical_vals)
 
         cfunc = lib_importer.windll.DAQmxCreateAIPressureBridgeTableChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double,
-            wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
-            ctypes.c_uint, ctypes.c_int,
-            wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
-            ctypes.c_uint, ctypes.c_int, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -1488,12 +1563,16 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIPressureBridgeTwoPointLinChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_double,
-            ctypes.c_double, ctypes.c_int, ctypes.c_double, ctypes.c_double,
-            ctypes.c_int, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -1551,10 +1630,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIResistanceChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -1627,12 +1710,17 @@ class AIChannelCollection(ChannelCollection):
         rosette_meas_types = numpy.int32(rosette_meas_types)
 
         cfunc = lib_importer.windll.DAQmxCreateAIRosetteStrainGageChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_double,
-            wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
-            ctypes.c_uint, ctypes.c_int, ctypes.c_int, ctypes.c_double,
-            ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_double,
+                        wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
+                        ctypes.c_uint, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -1691,10 +1779,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIRTDChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_int, ctypes.c_double, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -1764,11 +1856,16 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIStrainGageChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_double,
-            ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -1807,9 +1904,12 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAITempBuiltInSensorChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -1863,10 +1963,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIThrmcplChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -1928,11 +2032,15 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIThrmstrChanIex
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_double,
-            ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -1997,11 +2105,15 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIThrmstrChanVex
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_double,
-            ctypes.c_double, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -2093,14 +2205,19 @@ class AIChannelCollection(ChannelCollection):
         reverse_coeffs = numpy.float64(reverse_coeffs)
 
         cfunc = lib_importer.windll.DAQmxCreateAITorqueBridgePolynomialChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double,
-            wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
-            ctypes.c_uint, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint, ctypes.c_int, ctypes.c_int,
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -2195,14 +2312,19 @@ class AIChannelCollection(ChannelCollection):
         physical_vals = numpy.float64(physical_vals)
 
         cfunc = lib_importer.windll.DAQmxCreateAITorqueBridgeTableChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double,
-            wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
-            ctypes.c_uint, ctypes.c_int,
-            wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
-            ctypes.c_uint, ctypes.c_int, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -2291,12 +2413,16 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAITorqueBridgeTwoPointLinChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_double,
-            ctypes.c_double, ctypes.c_int, ctypes.c_double, ctypes.c_double,
-            ctypes.c_int, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -2363,11 +2489,15 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIVelocityIEPEChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes.c_double, ctypes.c_int, ctypes.c_int, ctypes.c_double,
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -2418,10 +2548,13 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIVoltageChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -2488,11 +2621,15 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIVoltageChanWithExcit
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes.c_int, ctypes.c_int, ctypes.c_double, c_bool32,
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, c_bool32,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -2541,10 +2678,13 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAIVoltageRMSChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -2601,10 +2741,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAIAccelChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -2659,10 +2803,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAIBridgeChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -2722,10 +2870,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAICurrentChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -2781,10 +2933,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAIForceBridgeChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -2841,10 +2997,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAIForceIEPEChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -2903,10 +3063,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAIMicrophoneChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_int, ctypes.c_double, ctypes.c_int,
-            ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -2970,10 +3134,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAIPosLVDTChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -3038,10 +3206,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAIPosRVDTChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -3098,10 +3270,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAIPressureBridgeChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -3156,10 +3332,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAIResistanceChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -3211,10 +3391,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAIRTDChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -3272,10 +3456,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAIStrainGageChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -3327,10 +3515,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAIThrmcplChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -3383,10 +3575,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAIThrmstrChanIex
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -3442,10 +3638,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAIThrmstrChanVex
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -3500,10 +3700,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAITorqueBridgeChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes.c_int,
-            ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -3554,10 +3758,13 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAIVoltageChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -3615,10 +3822,14 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateTEDSAIVoltageChanWithExcit
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes.c_int, ctypes.c_double, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,

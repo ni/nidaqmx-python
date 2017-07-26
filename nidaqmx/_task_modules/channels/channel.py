@@ -106,9 +106,12 @@ class Channel(object):
         chan_type = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetChanType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             task_handle, virtual_or_physical_name, ctypes.byref(chan_type))
@@ -163,8 +166,11 @@ class Channel(object):
             the task.
         """
         cfunc = lib_importer.windll.DAQmxGetTaskChannels
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -195,9 +201,12 @@ class Channel(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetChanType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -211,9 +220,12 @@ class Channel(object):
         str: Specifies a user-defined description for the channel.
         """
         cfunc = lib_importer.windll.DAQmxGetChanDescr
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_char_p,
-            ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -238,8 +250,12 @@ class Channel(object):
     @description.setter
     def description(self, val):
         cfunc = lib_importer.windll.DAQmxSetChanDescr
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -248,8 +264,11 @@ class Channel(object):
     @description.deleter
     def description(self):
         cfunc = lib_importer.windll.DAQmxResetChanDescr
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -263,9 +282,12 @@ class Channel(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetChanIsGlobal
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -281,9 +303,12 @@ class Channel(object):
             virtual channel is based.
         """
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanName
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_char_p,
-            ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -309,8 +334,12 @@ class Channel(object):
     def physical_channel(self, val):
         val = val.name
         cfunc = lib_importer.windll.DAQmxSetPhysicalChanName
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -352,9 +381,12 @@ class Channel(object):
             options |= _Save.ALLOW_INTERACTIVE_DELETION.value
 
         cfunc = lib_importer.windll.DAQmxSaveGlobalChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes_byte_str, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, self._name, save_as, author, options)

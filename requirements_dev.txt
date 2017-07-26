@@ -4,6 +4,8 @@
 #
 #    pip-compile --output-file requirements_dev.txt requirements_dev.in
 #
+--index-url http://ni-pypi.amer.corp.natinst.com
+--trusted-host ni-pypi.amer.corp.natinst.com
 
 alabaster==0.7.10         # via sphinx
 babel==2.4.0              # via sphinx
@@ -15,17 +17,21 @@ idna==2.5                 # via requests
 imagesize==0.7.1          # via sphinx
 jinja2==2.9.6             # via sphinx
 markupsafe==1.0           # via jinja2
+pkginfo==1.4.1            # via twine
 pluggy==0.4.0             # via tox
 py==1.4.34                # via tox
 pygments==2.2.0           # via sphinx
 pytz==2017.2              # via babel
-requests==2.17.3          # via sphinx
+requests-toolbelt==0.8.0  # via twine
+requests==2.17.3          # via requests-toolbelt, sphinx, twine
 six==1.10.0               # via sphinx
 snowballstemmer==1.2.1    # via sphinx
 sphinx-rtd-theme==0.2.4
 sphinx==1.6.2
 sphinxcontrib-websupport==1.0.1  # via sphinx
 tox==2.7.0
+tqdm==4.14.0              # via twine
+twine==1.9.1
 typing==3.6.1             # via sphinx
 urllib3==1.21.1           # via requests
 virtualenv==15.1.0        # via tox

@@ -103,8 +103,12 @@ class OutStream(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetWriteAccessoryInsertionOrRemovalDetected)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -122,8 +126,12 @@ class OutStream(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetWriteCurrWritePos
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -142,8 +150,12 @@ class OutStream(object):
         """
         cfunc = (lib_importer.windll.
                  DAQmxGetWriteDevsWithInsertedOrRemovedAccessories)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -177,8 +189,12 @@ class OutStream(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetWriteDigitalLinesBytesPerChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -196,8 +212,12 @@ class OutStream(object):
             an error.
         """
         cfunc = lib_importer.windll.DAQmxGetWriteExternalOvervoltageChans
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -233,8 +253,12 @@ class OutStream(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetWriteExternalOvervoltageChansExist)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -251,8 +275,12 @@ class OutStream(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetWriteNumChans
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -270,8 +298,11 @@ class OutStream(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetWriteOffset
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -282,8 +313,11 @@ class OutStream(object):
     @offset.setter
     def offset(self, val):
         cfunc = lib_importer.windll.DAQmxSetWriteOffset
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -292,8 +326,11 @@ class OutStream(object):
     @offset.deleter
     def offset(self):
         cfunc = lib_importer.windll.DAQmxResetWriteOffset
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -309,8 +346,12 @@ class OutStream(object):
             error.
         """
         cfunc = lib_importer.windll.DAQmxGetWriteOpenCurrentLoopChans
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -345,8 +386,12 @@ class OutStream(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetWriteOpenCurrentLoopChansExist
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -367,8 +412,12 @@ class OutStream(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetBufOutputBufSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -379,8 +428,11 @@ class OutStream(object):
     @output_buf_size.setter
     def output_buf_size(self, val):
         cfunc = lib_importer.windll.DAQmxSetBufOutputBufSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, val)
@@ -389,8 +441,11 @@ class OutStream(object):
     @output_buf_size.deleter
     def output_buf_size(self):
         cfunc = lib_importer.windll.DAQmxResetBufOutputBufSize
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -405,8 +460,12 @@ class OutStream(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetBufOutputOnbrdBufSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -417,8 +476,11 @@ class OutStream(object):
     @output_onbrd_buf_size.setter
     def output_onbrd_buf_size(self, val):
         cfunc = lib_importer.windll.DAQmxSetBufOutputOnbrdBufSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, val)
@@ -427,8 +489,11 @@ class OutStream(object):
     @output_onbrd_buf_size.deleter
     def output_onbrd_buf_size(self):
         cfunc = lib_importer.windll.DAQmxResetBufOutputOnbrdBufSize
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -444,8 +509,12 @@ class OutStream(object):
             error.
         """
         cfunc = lib_importer.windll.DAQmxGetWriteOvercurrentChans
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -479,8 +548,12 @@ class OutStream(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetWriteOvercurrentChansExist
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -497,8 +570,12 @@ class OutStream(object):
             Otherwise, you will receive an error.
         """
         cfunc = lib_importer.windll.DAQmxGetWriteOverloadedChans
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -532,8 +609,12 @@ class OutStream(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetWriteOverloadedChansExist
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -552,8 +633,12 @@ class OutStream(object):
             of the overtemperature.
         """
         cfunc = lib_importer.windll.DAQmxGetWriteOvertemperatureChans
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -588,8 +673,12 @@ class OutStream(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetWriteOvertemperatureChansExist
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -606,8 +695,12 @@ class OutStream(object):
             property. Otherwise, you will receive an error.
         """
         cfunc = lib_importer.windll.DAQmxGetWritePowerSupplyFaultChans
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -642,8 +735,12 @@ class OutStream(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetWritePowerSupplyFaultChansExist
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -660,8 +757,12 @@ class OutStream(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetWriteRawDataWidth
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -678,8 +779,11 @@ class OutStream(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetWriteRegenMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -691,8 +795,11 @@ class OutStream(object):
     def regen_mode(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetWriteRegenMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -701,8 +808,11 @@ class OutStream(object):
     @regen_mode.deleter
     def regen_mode(self):
         cfunc = lib_importer.windll.DAQmxResetWriteRegenMode
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -719,8 +829,11 @@ class OutStream(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetRelativeTo
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -732,8 +845,11 @@ class OutStream(object):
     def relative_to(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetRelativeTo
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -742,8 +858,11 @@ class OutStream(object):
     @relative_to.deleter
     def relative_to(self):
         cfunc = lib_importer.windll.DAQmxResetRelativeTo
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -759,8 +878,12 @@ class OutStream(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetWriteSleepTime
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -771,8 +894,11 @@ class OutStream(object):
     @sleep_time.setter
     def sleep_time(self, val):
         cfunc = lib_importer.windll.DAQmxSetWriteSleepTime
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, val)
@@ -781,8 +907,11 @@ class OutStream(object):
     @sleep_time.deleter
     def sleep_time(self):
         cfunc = lib_importer.windll.DAQmxResetWriteSleepTime
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -797,8 +926,12 @@ class OutStream(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetWriteSpaceAvail
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -816,8 +949,12 @@ class OutStream(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetWriteTotalSampPerChanGenerated
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -834,8 +971,11 @@ class OutStream(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetWriteWaitMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -847,8 +987,11 @@ class OutStream(object):
     def wait_mode(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetWriteWaitMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -857,8 +1000,11 @@ class OutStream(object):
     @wait_mode.deleter
     def wait_mode(self):
         cfunc = lib_importer.windll.DAQmxResetWriteWaitMode
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)

@@ -144,9 +144,12 @@ class Device(object):
             no accessory connected.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAccessoryProductNums
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.uint32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.uint32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -178,8 +181,11 @@ class Device(object):
             accessory connected.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAccessoryProductTypes
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -210,9 +216,12 @@ class Device(object):
             contains 0 for each connector with no accessory connected.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAccessorySerialNums
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.uint32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.uint32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -243,9 +252,13 @@ class Device(object):
             value followed by the high value.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAIBridgeRngs
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -275,9 +288,13 @@ class Device(object):
             by the high value.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAIChargeRngs
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -308,8 +325,11 @@ class Device(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDevAICouplings
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -325,9 +345,13 @@ class Device(object):
             excitation values supported by this device.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAICurrentIntExcitDiscreteVals
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -357,9 +381,13 @@ class Device(object):
             value, followed by the high value.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAICurrentRngs
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -392,9 +420,13 @@ class Device(object):
         """
         cfunc = (lib_importer.windll.
                  DAQmxGetDevAIDigFltrLowpassCutoffFreqDiscreteVals)
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -428,9 +460,13 @@ class Device(object):
         """
         cfunc = (lib_importer.windll.
                  DAQmxGetDevAIDigFltrLowpassCutoffFreqRangeVals)
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -459,9 +495,12 @@ class Device(object):
             digital filter types supported by the device.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAIDigFltrTypes
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -491,9 +530,13 @@ class Device(object):
             value, followed by the high value.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAIFreqRngs
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -522,9 +565,13 @@ class Device(object):
             device.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAIGains
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -557,9 +604,13 @@ class Device(object):
         """
         cfunc = (lib_importer.windll.
                  DAQmxGetDevAILowpassCutoffFreqDiscreteVals)
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -592,9 +643,13 @@ class Device(object):
             supported  frequencies.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAILowpassCutoffFreqRangeVals
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -629,8 +684,11 @@ class Device(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetDevAIMaxMultiChanRate
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -647,8 +705,11 @@ class Device(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetDevAIMaxSingleChanRate
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -665,9 +726,12 @@ class Device(object):
             specific channels.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAISupportedMeasTypes
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -699,8 +763,11 @@ class Device(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetDevAIMinRate
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -717,9 +784,13 @@ class Device(object):
             the low value followed by the high value.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAIResistanceRngs
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -749,9 +820,12 @@ class Device(object):
             clocked analog input.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAISampModes
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -782,8 +856,11 @@ class Device(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetDevAISimultaneousSamplingSupported)
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -800,8 +877,11 @@ class Device(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDevAITrigUsage
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -820,9 +900,13 @@ class Device(object):
             excitation values.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAIVoltageIntExcitDiscreteVals
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -855,9 +939,13 @@ class Device(object):
             supported excitation values.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAIVoltageIntExcitRangeVals
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -887,9 +975,13 @@ class Device(object):
             followed by the high value.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAIVoltageRngs
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -919,8 +1011,11 @@ class Device(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetDevAnlgTrigSupported
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -936,9 +1031,13 @@ class Device(object):
             followed by the high value.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAOCurrentRngs
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -967,9 +1066,13 @@ class Device(object):
             this device.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAOGains
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -999,8 +1102,11 @@ class Device(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetDevAOMaxRate
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1016,8 +1122,11 @@ class Device(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetDevAOMinRate
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1034,9 +1143,12 @@ class Device(object):
             specific channels.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAOSupportedOutputTypes
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1067,8 +1179,11 @@ class Device(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetDevAOSampClkSupported
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1084,9 +1199,12 @@ class Device(object):
             clocked analog output.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAOSampModes
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1117,8 +1235,11 @@ class Device(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDevAOTrigUsage
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1135,9 +1256,13 @@ class Device(object):
             followed by the high value.
         """
         cfunc = lib_importer.windll.DAQmxGetDevAOVoltageRngs
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1168,8 +1293,11 @@ class Device(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDevBusType
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1186,8 +1314,11 @@ class Device(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetCarrierSerialNum
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1202,8 +1333,11 @@ class Device(object):
             containing the names of the modules in the chassis.
         """
         cfunc = lib_importer.windll.DAQmxGetDevChassisModuleDevNames
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1234,8 +1368,11 @@ class Device(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetDevCIMaxSize
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1252,8 +1389,11 @@ class Device(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetDevCIMaxTimebase
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1270,9 +1410,12 @@ class Device(object):
             specific channels.
         """
         cfunc = lib_importer.windll.DAQmxGetDevCISupportedMeasTypes
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1303,8 +1446,11 @@ class Device(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetDevCISampClkSupported
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1320,9 +1466,12 @@ class Device(object):
             clocked counter input.
         """
         cfunc = lib_importer.windll.DAQmxGetDevCISampModes
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1353,8 +1502,11 @@ class Device(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDevCITrigUsage
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1371,8 +1523,11 @@ class Device(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetDevCOMaxSize
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1389,8 +1544,11 @@ class Device(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetDevCOMaxTimebase
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1407,9 +1565,12 @@ class Device(object):
             specific channels.
         """
         cfunc = lib_importer.windll.DAQmxGetDevCOSupportedOutputTypes
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1440,8 +1601,11 @@ class Device(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetDevCOSampClkSupported
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1457,9 +1621,12 @@ class Device(object):
             clocked counter output.
         """
         cfunc = lib_importer.windll.DAQmxGetDevCOSampModes
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1490,8 +1657,11 @@ class Device(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDevCOTrigUsage
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1507,8 +1677,11 @@ class Device(object):
             CompactDAQ chassis that contains this module.
         """
         cfunc = lib_importer.windll.DAQmxGetDevCompactDAQChassisDevName
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1539,8 +1712,11 @@ class Device(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetDevCompactDAQSlotNum
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1556,8 +1732,11 @@ class Device(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetDevIsSimulated
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1574,8 +1753,11 @@ class Device(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetDevSerialNum
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1591,8 +1773,11 @@ class Device(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetDevDIMaxRate
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1609,8 +1794,11 @@ class Device(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDevDITrigUsage
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1627,8 +1815,11 @@ class Device(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetDevDigTrigSupported
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1644,8 +1835,11 @@ class Device(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetDevDOMaxRate
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1662,8 +1856,11 @@ class Device(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDevDOTrigUsage
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1680,8 +1877,11 @@ class Device(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetDevNumDMAChans
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1697,8 +1897,11 @@ class Device(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetDevPCIBusNum
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1714,8 +1917,11 @@ class Device(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetDevPCIDevNum
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1734,8 +1940,11 @@ class Device(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDevProductCategory
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1752,8 +1961,11 @@ class Device(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetDevProductNum
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1767,8 +1979,11 @@ class Device(object):
         str: Indicates the product name of the device.
         """
         cfunc = lib_importer.windll.DAQmxGetDevProductType
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1799,8 +2014,11 @@ class Device(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetDevPXIChassisNum
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1816,8 +2034,11 @@ class Device(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetDevPXISlotNum
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1833,8 +2054,11 @@ class Device(object):
             Ethernet interface cannot acquire an address.
         """
         cfunc = lib_importer.windll.DAQmxGetDevTCPIPEthernetIP
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1862,8 +2086,11 @@ class Device(object):
         str: Indicates the IPv4 hostname of the device.
         """
         cfunc = lib_importer.windll.DAQmxGetDevTCPIPHostname
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1893,8 +2120,11 @@ class Device(object):
             the wireless interface cannot acquire an address.
         """
         cfunc = lib_importer.windll.DAQmxGetDevTCPIPWirelessIP
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1924,8 +2154,11 @@ class Device(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetDevTEDSHWTEDSSupported
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1939,8 +2172,11 @@ class Device(object):
         List[str]: Indicates a list of all terminals on the device.
         """
         cfunc = lib_importer.windll.DAQmxGetDevTerminals
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1973,8 +2209,11 @@ class Device(object):
         to reset the task without starting it.
         """
         cfunc = lib_importer.windll.DAQmxResetDevice
-        cfunc.argtypes = [
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._name)
@@ -1986,8 +2225,11 @@ class Device(object):
         refer to your device documentation for more information.
         """
         cfunc = lib_importer.windll.DAQmxSelfTestDevice
-        cfunc.argtypes = [
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._name)
@@ -2023,9 +2265,12 @@ class Device(object):
             operation applied to.
         """
         cfunc = lib_importer.windll.DAQmxAddNetworkDevice
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes_byte_str, c_bool32, ctypes.c_double,
-            ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes_byte_str, c_bool32,
+                        ctypes.c_double, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -2054,8 +2299,11 @@ class Device(object):
         the device is reserved, it is unreserved before it is removed.
         """
         cfunc = lib_importer.windll.DAQmxDeleteNetworkDevice
-        cfunc.argtypes = [
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._name)
@@ -2074,8 +2322,11 @@ class Device(object):
                 to false.
         """
         cfunc = lib_importer.windll.DAQmxReserveNetworkDevice
-        cfunc.argtypes = [
-            ctypes_byte_str, c_bool32]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._name, override_reservation)
@@ -2087,8 +2338,11 @@ class Device(object):
         by the host.
         """
         cfunc = lib_importer.windll.DAQmxUnreserveNetworkDevice
-        cfunc.argtypes = [
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._name)

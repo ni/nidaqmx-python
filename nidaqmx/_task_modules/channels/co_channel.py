@@ -34,9 +34,12 @@ class COChannel(Channel):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetCOAutoIncrCnt
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -47,8 +50,12 @@ class COChannel(Channel):
     @co_auto_incr_cnt.setter
     def co_auto_incr_cnt(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOAutoIncrCnt
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -57,8 +64,11 @@ class COChannel(Channel):
     @co_auto_incr_cnt.deleter
     def co_auto_incr_cnt(self):
         cfunc = lib_importer.windll.DAQmxResetCOAutoIncrCnt
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -83,9 +93,12 @@ class COChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetCOConstrainedGenMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -97,8 +110,12 @@ class COChannel(Channel):
     def co_constrained_gen_mode(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetCOConstrainedGenMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -107,8 +124,11 @@ class COChannel(Channel):
     @co_constrained_gen_mode.deleter
     def co_constrained_gen_mode(self):
         cfunc = lib_importer.windll.DAQmxResetCOConstrainedGenMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -122,9 +142,12 @@ class COChannel(Channel):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetCOCount
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -142,9 +165,12 @@ class COChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetCOCtrTimebaseActiveEdge
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -156,8 +182,12 @@ class COChannel(Channel):
     def co_ctr_timebase_active_edge(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetCOCtrTimebaseActiveEdge
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -166,8 +196,11 @@ class COChannel(Channel):
     @co_ctr_timebase_active_edge.deleter
     def co_ctr_timebase_active_edge(self):
         cfunc = lib_importer.windll.DAQmxResetCOCtrTimebaseActiveEdge
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -182,9 +215,12 @@ class COChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetCOCtrTimebaseDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -195,8 +231,12 @@ class COChannel(Channel):
     @co_ctr_timebase_dig_fltr_enable.setter
     def co_ctr_timebase_dig_fltr_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOCtrTimebaseDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -205,8 +245,11 @@ class COChannel(Channel):
     @co_ctr_timebase_dig_fltr_enable.deleter
     def co_ctr_timebase_dig_fltr_enable(self):
         cfunc = lib_importer.windll.DAQmxResetCOCtrTimebaseDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -222,9 +265,12 @@ class COChannel(Channel):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetCOCtrTimebaseDigFltrMinPulseWidth)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -236,8 +282,12 @@ class COChannel(Channel):
     def co_ctr_timebase_dig_fltr_min_pulse_width(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetCOCtrTimebaseDigFltrMinPulseWidth)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -247,8 +297,11 @@ class COChannel(Channel):
     def co_ctr_timebase_dig_fltr_min_pulse_width(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetCOCtrTimebaseDigFltrMinPulseWidth)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -264,9 +317,12 @@ class COChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetCOCtrTimebaseDigFltrTimebaseRate
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -277,8 +333,12 @@ class COChannel(Channel):
     @co_ctr_timebase_dig_fltr_timebase_rate.setter
     def co_ctr_timebase_dig_fltr_timebase_rate(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOCtrTimebaseDigFltrTimebaseRate
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -287,8 +347,11 @@ class COChannel(Channel):
     @co_ctr_timebase_dig_fltr_timebase_rate.deleter
     def co_ctr_timebase_dig_fltr_timebase_rate(self):
         cfunc = lib_importer.windll.DAQmxResetCOCtrTimebaseDigFltrTimebaseRate
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -301,9 +364,12 @@ class COChannel(Channel):
             timebase of the pulse width filter.
         """
         cfunc = lib_importer.windll.DAQmxGetCOCtrTimebaseDigFltrTimebaseSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_char_p,
-            ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -328,8 +394,12 @@ class COChannel(Channel):
     @co_ctr_timebase_dig_fltr_timebase_src.setter
     def co_ctr_timebase_dig_fltr_timebase_src(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOCtrTimebaseDigFltrTimebaseSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -338,8 +408,11 @@ class COChannel(Channel):
     @co_ctr_timebase_dig_fltr_timebase_src.deleter
     def co_ctr_timebase_dig_fltr_timebase_src(self):
         cfunc = lib_importer.windll.DAQmxResetCOCtrTimebaseDigFltrTimebaseSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -355,9 +428,12 @@ class COChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetCOCtrTimebaseDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -368,8 +444,12 @@ class COChannel(Channel):
     @co_ctr_timebase_dig_sync_enable.setter
     def co_ctr_timebase_dig_sync_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOCtrTimebaseDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -378,8 +458,11 @@ class COChannel(Channel):
     @co_ctr_timebase_dig_sync_enable.deleter
     def co_ctr_timebase_dig_sync_enable(self):
         cfunc = lib_importer.windll.DAQmxResetCOCtrTimebaseDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -395,9 +478,12 @@ class COChannel(Channel):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetCOCtrTimebaseMasterTimebaseDiv
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -408,8 +494,12 @@ class COChannel(Channel):
     @co_ctr_timebase_master_timebase_div.setter
     def co_ctr_timebase_master_timebase_div(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOCtrTimebaseMasterTimebaseDiv
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -418,8 +508,11 @@ class COChannel(Channel):
     @co_ctr_timebase_master_timebase_div.deleter
     def co_ctr_timebase_master_timebase_div(self):
         cfunc = lib_importer.windll.DAQmxResetCOCtrTimebaseMasterTimebaseDiv
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -438,9 +531,12 @@ class COChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetCOCtrTimebaseRate
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -451,8 +547,12 @@ class COChannel(Channel):
     @co_ctr_timebase_rate.setter
     def co_ctr_timebase_rate(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOCtrTimebaseRate
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -461,8 +561,11 @@ class COChannel(Channel):
     @co_ctr_timebase_rate.deleter
     def co_ctr_timebase_rate(self):
         cfunc = lib_importer.windll.DAQmxResetCOCtrTimebaseRate
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -478,9 +581,12 @@ class COChannel(Channel):
             widths that are not possible using the internal timebases.
         """
         cfunc = lib_importer.windll.DAQmxGetCOCtrTimebaseSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_char_p,
-            ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -505,8 +611,12 @@ class COChannel(Channel):
     @co_ctr_timebase_src.setter
     def co_ctr_timebase_src(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOCtrTimebaseSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -515,8 +625,11 @@ class COChannel(Channel):
     @co_ctr_timebase_src.deleter
     def co_ctr_timebase_src(self):
         cfunc = lib_importer.windll.DAQmxResetCOCtrTimebaseSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -533,9 +646,12 @@ class COChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetCODataXferMech
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -547,8 +663,12 @@ class COChannel(Channel):
     def co_data_xfer_mech(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetCODataXferMech
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -557,8 +677,11 @@ class COChannel(Channel):
     @co_data_xfer_mech.deleter
     def co_data_xfer_mech(self):
         cfunc = lib_importer.windll.DAQmxResetCODataXferMech
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -574,9 +697,12 @@ class COChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetCODataXferReqCond
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -588,8 +714,12 @@ class COChannel(Channel):
     def co_data_xfer_req_cond(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetCODataXferReqCond
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -598,8 +728,11 @@ class COChannel(Channel):
     @co_data_xfer_req_cond.deleter
     def co_data_xfer_req_cond(self):
         cfunc = lib_importer.windll.DAQmxResetCODataXferReqCond
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -614,9 +747,12 @@ class COChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetCOEnableInitialDelayOnRetrigger
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -627,8 +763,12 @@ class COChannel(Channel):
     @co_enable_initial_delay_on_retrigger.setter
     def co_enable_initial_delay_on_retrigger(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOEnableInitialDelayOnRetrigger
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -637,8 +777,11 @@ class COChannel(Channel):
     @co_enable_initial_delay_on_retrigger.deleter
     def co_enable_initial_delay_on_retrigger(self):
         cfunc = lib_importer.windll.DAQmxResetCOEnableInitialDelayOnRetrigger
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -659,9 +802,12 @@ class COChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetCOMemMapEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -672,8 +818,12 @@ class COChannel(Channel):
     @co_mem_map_enable.setter
     def co_mem_map_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOMemMapEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -682,8 +832,11 @@ class COChannel(Channel):
     @co_mem_map_enable.deleter
     def co_mem_map_enable(self):
         cfunc = lib_importer.windll.DAQmxResetCOMemMapEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -698,9 +851,12 @@ class COChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetCOOutputState
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -717,9 +873,12 @@ class COChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetCOOutputType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -741,9 +900,12 @@ class COChannel(Channel):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetCOPrescaler
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -754,8 +916,12 @@ class COChannel(Channel):
     @co_prescaler.setter
     def co_prescaler(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOPrescaler
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -764,8 +930,11 @@ class COChannel(Channel):
     @co_prescaler.deleter
     def co_prescaler(self):
         cfunc = lib_importer.windll.DAQmxResetCOPrescaler
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -783,9 +952,12 @@ class COChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetCOPulseDone
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -804,9 +976,12 @@ class COChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetCOPulseDutyCyc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -817,8 +992,12 @@ class COChannel(Channel):
     @co_pulse_duty_cyc.setter
     def co_pulse_duty_cyc(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOPulseDutyCyc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -827,8 +1006,11 @@ class COChannel(Channel):
     @co_pulse_duty_cyc.deleter
     def co_pulse_duty_cyc(self):
         cfunc = lib_importer.windll.DAQmxResetCOPulseDutyCyc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -844,9 +1026,12 @@ class COChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetCOPulseFreq
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -857,8 +1042,12 @@ class COChannel(Channel):
     @co_pulse_freq.setter
     def co_pulse_freq(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOPulseFreq
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -867,8 +1056,11 @@ class COChannel(Channel):
     @co_pulse_freq.deleter
     def co_pulse_freq(self):
         cfunc = lib_importer.windll.DAQmxResetCOPulseFreq
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -883,9 +1075,12 @@ class COChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetCOPulseFreqInitialDelay
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -896,8 +1091,12 @@ class COChannel(Channel):
     @co_pulse_freq_initial_delay.setter
     def co_pulse_freq_initial_delay(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOPulseFreqInitialDelay
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -906,8 +1105,11 @@ class COChannel(Channel):
     @co_pulse_freq_initial_delay.deleter
     def co_pulse_freq_initial_delay(self):
         cfunc = lib_importer.windll.DAQmxResetCOPulseFreqInitialDelay
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -922,9 +1124,12 @@ class COChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetCOPulseFreqUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -936,8 +1141,12 @@ class COChannel(Channel):
     def co_pulse_freq_units(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetCOPulseFreqUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -946,8 +1155,11 @@ class COChannel(Channel):
     @co_pulse_freq_units.deleter
     def co_pulse_freq_units(self):
         cfunc = lib_importer.windll.DAQmxResetCOPulseFreqUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -961,9 +1173,12 @@ class COChannel(Channel):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetCOPulseHighTicks
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -974,8 +1189,12 @@ class COChannel(Channel):
     @co_pulse_high_ticks.setter
     def co_pulse_high_ticks(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOPulseHighTicks
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -984,8 +1203,11 @@ class COChannel(Channel):
     @co_pulse_high_ticks.deleter
     def co_pulse_high_ticks(self):
         cfunc = lib_importer.windll.DAQmxResetCOPulseHighTicks
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1001,9 +1223,12 @@ class COChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetCOPulseHighTime
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1014,8 +1239,12 @@ class COChannel(Channel):
     @co_pulse_high_time.setter
     def co_pulse_high_time(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOPulseHighTime
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1024,8 +1253,11 @@ class COChannel(Channel):
     @co_pulse_high_time.deleter
     def co_pulse_high_time(self):
         cfunc = lib_importer.windll.DAQmxResetCOPulseHighTime
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1040,9 +1272,12 @@ class COChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetCOPulseIdleState
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1054,8 +1289,12 @@ class COChannel(Channel):
     def co_pulse_idle_state(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetCOPulseIdleState
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1064,8 +1303,11 @@ class COChannel(Channel):
     @co_pulse_idle_state.deleter
     def co_pulse_idle_state(self):
         cfunc = lib_importer.windll.DAQmxResetCOPulseIdleState
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1079,9 +1321,12 @@ class COChannel(Channel):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetCOPulseLowTicks
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1092,8 +1337,12 @@ class COChannel(Channel):
     @co_pulse_low_ticks.setter
     def co_pulse_low_ticks(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOPulseLowTicks
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1102,8 +1351,11 @@ class COChannel(Channel):
     @co_pulse_low_ticks.deleter
     def co_pulse_low_ticks(self):
         cfunc = lib_importer.windll.DAQmxResetCOPulseLowTicks
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1119,9 +1371,12 @@ class COChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetCOPulseLowTime
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1132,8 +1387,12 @@ class COChannel(Channel):
     @co_pulse_low_time.setter
     def co_pulse_low_time(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOPulseLowTime
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1142,8 +1401,11 @@ class COChannel(Channel):
     @co_pulse_low_time.deleter
     def co_pulse_low_time(self):
         cfunc = lib_importer.windll.DAQmxResetCOPulseLowTime
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1155,9 +1417,12 @@ class COChannel(Channel):
         str: Specifies on which terminal to generate pulses.
         """
         cfunc = lib_importer.windll.DAQmxGetCOPulseTerm
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_char_p,
-            ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1182,8 +1447,12 @@ class COChannel(Channel):
     @co_pulse_term.setter
     def co_pulse_term(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOPulseTerm
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1192,8 +1461,11 @@ class COChannel(Channel):
     @co_pulse_term.deleter
     def co_pulse_term(self):
         cfunc = lib_importer.windll.DAQmxResetCOPulseTerm
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1208,9 +1480,12 @@ class COChannel(Channel):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetCOPulseTicksInitialDelay
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1221,8 +1496,12 @@ class COChannel(Channel):
     @co_pulse_ticks_initial_delay.setter
     def co_pulse_ticks_initial_delay(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOPulseTicksInitialDelay
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1231,8 +1510,11 @@ class COChannel(Channel):
     @co_pulse_ticks_initial_delay.deleter
     def co_pulse_ticks_initial_delay(self):
         cfunc = lib_importer.windll.DAQmxResetCOPulseTicksInitialDelay
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1247,9 +1529,12 @@ class COChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetCOPulseTimeInitialDelay
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1260,8 +1545,12 @@ class COChannel(Channel):
     @co_pulse_time_initial_delay.setter
     def co_pulse_time_initial_delay(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOPulseTimeInitialDelay
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1270,8 +1559,11 @@ class COChannel(Channel):
     @co_pulse_time_initial_delay.deleter
     def co_pulse_time_initial_delay(self):
         cfunc = lib_importer.windll.DAQmxResetCOPulseTimeInitialDelay
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1286,9 +1578,12 @@ class COChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetCOPulseTimeUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1300,8 +1595,12 @@ class COChannel(Channel):
     def co_pulse_time_units(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetCOPulseTimeUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1310,8 +1609,11 @@ class COChannel(Channel):
     @co_pulse_time_units.deleter
     def co_pulse_time_units(self):
         cfunc = lib_importer.windll.DAQmxResetCOPulseTimeUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1326,9 +1628,12 @@ class COChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetCORdyForNewVal
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1346,9 +1651,12 @@ class COChannel(Channel):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetCOUsbXferReqCount
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1359,8 +1667,12 @@ class COChannel(Channel):
     @co_usb_xfer_req_count.setter
     def co_usb_xfer_req_count(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOUsbXferReqCount
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1369,8 +1681,11 @@ class COChannel(Channel):
     @co_usb_xfer_req_count.deleter
     def co_usb_xfer_req_count(self):
         cfunc = lib_importer.windll.DAQmxResetCOUsbXferReqCount
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1386,9 +1701,12 @@ class COChannel(Channel):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetCOUsbXferReqSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1399,8 +1717,12 @@ class COChannel(Channel):
     @co_usb_xfer_req_size.setter
     def co_usb_xfer_req_size(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOUsbXferReqSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1409,8 +1731,11 @@ class COChannel(Channel):
     @co_usb_xfer_req_size.deleter
     def co_usb_xfer_req_size(self):
         cfunc = lib_importer.windll.DAQmxResetCOUsbXferReqSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1427,9 +1752,12 @@ class COChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetCOUseOnlyOnBrdMem
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1440,8 +1768,12 @@ class COChannel(Channel):
     @co_use_only_on_brd_mem.setter
     def co_use_only_on_brd_mem(self, val):
         cfunc = lib_importer.windll.DAQmxSetCOUseOnlyOnBrdMem
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1450,8 +1782,11 @@ class COChannel(Channel):
     @co_use_only_on_brd_mem.deleter
     def co_use_only_on_brd_mem(self):
         cfunc = lib_importer.windll.DAQmxResetCOUseOnlyOnBrdMem
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)

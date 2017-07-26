@@ -116,8 +116,12 @@ class ChannelCollection(Sequence):
             channel collection.
         """
         cfunc = lib_importer.windll.DAQmxGetTaskChannels
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:

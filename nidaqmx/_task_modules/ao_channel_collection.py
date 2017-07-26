@@ -81,9 +81,13 @@ class AOChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAOCurrentChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -124,9 +128,13 @@ class AOChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAOFuncGenChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,
@@ -169,9 +177,13 @@ class AOChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateAOVoltageChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, physical_channel, name_to_assign_to_channel,

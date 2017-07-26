@@ -34,9 +34,12 @@ class DIChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDIAcquireOn
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -48,8 +51,12 @@ class DIChannel(Channel):
     def di_acquire_on(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetDIAcquireOn
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -58,8 +65,11 @@ class DIChannel(Channel):
     @di_acquire_on.deleter
     def di_acquire_on(self):
         cfunc = lib_importer.windll.DAQmxResetDIAcquireOn
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -74,9 +84,12 @@ class DIChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDIDataXferMech
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -88,8 +101,12 @@ class DIChannel(Channel):
     def di_data_xfer_mech(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetDIDataXferMech
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -98,8 +115,11 @@ class DIChannel(Channel):
     @di_data_xfer_mech.deleter
     def di_data_xfer_mech(self):
         cfunc = lib_importer.windll.DAQmxResetDIDataXferMech
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -115,9 +135,12 @@ class DIChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDIDataXferReqCond
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -129,8 +152,12 @@ class DIChannel(Channel):
     def di_data_xfer_req_cond(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetDIDataXferReqCond
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -139,8 +166,11 @@ class DIChannel(Channel):
     @di_data_xfer_req_cond.deleter
     def di_data_xfer_req_cond(self):
         cfunc = lib_importer.windll.DAQmxResetDIDataXferReqCond
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -157,9 +187,12 @@ class DIChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetDIDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -170,8 +203,12 @@ class DIChannel(Channel):
     @di_dig_fltr_enable.setter
     def di_dig_fltr_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetDIDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -180,8 +217,11 @@ class DIChannel(Channel):
     @di_dig_fltr_enable.deleter
     def di_dig_fltr_enable(self):
         cfunc = lib_importer.windll.DAQmxResetDIDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -202,9 +242,12 @@ class DIChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetDIDigFltrEnableBusMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -215,8 +258,12 @@ class DIChannel(Channel):
     @di_dig_fltr_enable_bus_mode.setter
     def di_dig_fltr_enable_bus_mode(self, val):
         cfunc = lib_importer.windll.DAQmxSetDIDigFltrEnableBusMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -225,8 +272,11 @@ class DIChannel(Channel):
     @di_dig_fltr_enable_bus_mode.deleter
     def di_dig_fltr_enable_bus_mode(self):
         cfunc = lib_importer.windll.DAQmxResetDIDigFltrEnableBusMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -241,9 +291,12 @@ class DIChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetDIDigFltrMinPulseWidth
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -254,8 +307,12 @@ class DIChannel(Channel):
     @di_dig_fltr_min_pulse_width.setter
     def di_dig_fltr_min_pulse_width(self, val):
         cfunc = lib_importer.windll.DAQmxSetDIDigFltrMinPulseWidth
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -264,8 +321,11 @@ class DIChannel(Channel):
     @di_dig_fltr_min_pulse_width.deleter
     def di_dig_fltr_min_pulse_width(self):
         cfunc = lib_importer.windll.DAQmxResetDIDigFltrMinPulseWidth
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -281,9 +341,12 @@ class DIChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetDIDigFltrTimebaseRate
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -294,8 +357,12 @@ class DIChannel(Channel):
     @di_dig_fltr_timebase_rate.setter
     def di_dig_fltr_timebase_rate(self, val):
         cfunc = lib_importer.windll.DAQmxSetDIDigFltrTimebaseRate
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -304,8 +371,11 @@ class DIChannel(Channel):
     @di_dig_fltr_timebase_rate.deleter
     def di_dig_fltr_timebase_rate(self):
         cfunc = lib_importer.windll.DAQmxResetDIDigFltrTimebaseRate
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -318,9 +388,12 @@ class DIChannel(Channel):
             of the digital filter.
         """
         cfunc = lib_importer.windll.DAQmxGetDIDigFltrTimebaseSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_char_p,
-            ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -345,8 +418,12 @@ class DIChannel(Channel):
     @di_dig_fltr_timebase_src.setter
     def di_dig_fltr_timebase_src(self, val):
         cfunc = lib_importer.windll.DAQmxSetDIDigFltrTimebaseSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -355,8 +432,11 @@ class DIChannel(Channel):
     @di_dig_fltr_timebase_src.deleter
     def di_dig_fltr_timebase_src(self):
         cfunc = lib_importer.windll.DAQmxResetDIDigFltrTimebaseSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -372,9 +452,12 @@ class DIChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetDIDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -385,8 +468,12 @@ class DIChannel(Channel):
     @di_dig_sync_enable.setter
     def di_dig_sync_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetDIDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -395,8 +482,11 @@ class DIChannel(Channel):
     @di_dig_sync_enable.deleter
     def di_dig_sync_enable(self):
         cfunc = lib_importer.windll.DAQmxResetDIDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -412,9 +502,12 @@ class DIChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetDIInvertLines
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -425,8 +518,12 @@ class DIChannel(Channel):
     @di_invert_lines.setter
     def di_invert_lines(self, val):
         cfunc = lib_importer.windll.DAQmxSetDIInvertLines
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -435,8 +532,11 @@ class DIChannel(Channel):
     @di_invert_lines.deleter
     def di_invert_lines(self):
         cfunc = lib_importer.windll.DAQmxResetDIInvertLines
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -455,9 +555,12 @@ class DIChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDILogicFamily
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -469,8 +572,12 @@ class DIChannel(Channel):
     def di_logic_family(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetDILogicFamily
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -479,8 +586,11 @@ class DIChannel(Channel):
     @di_logic_family.deleter
     def di_logic_family(self):
         cfunc = lib_importer.windll.DAQmxResetDILogicFamily
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -501,9 +611,12 @@ class DIChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetDIMemMapEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -514,8 +627,12 @@ class DIChannel(Channel):
     @di_mem_map_enable.setter
     def di_mem_map_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetDIMemMapEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -524,8 +641,11 @@ class DIChannel(Channel):
     @di_mem_map_enable.deleter
     def di_mem_map_enable(self):
         cfunc = lib_importer.windll.DAQmxResetDIMemMapEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -539,9 +659,12 @@ class DIChannel(Channel):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetDINumLines
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -562,9 +685,12 @@ class DIChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetDITristate
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -575,8 +701,12 @@ class DIChannel(Channel):
     @di_tristate.setter
     def di_tristate(self, val):
         cfunc = lib_importer.windll.DAQmxSetDITristate
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -585,8 +715,11 @@ class DIChannel(Channel):
     @di_tristate.deleter
     def di_tristate(self):
         cfunc = lib_importer.windll.DAQmxResetDITristate
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -602,9 +735,12 @@ class DIChannel(Channel):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetDIUsbXferReqCount
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -615,8 +751,12 @@ class DIChannel(Channel):
     @di_usb_xfer_req_count.setter
     def di_usb_xfer_req_count(self, val):
         cfunc = lib_importer.windll.DAQmxSetDIUsbXferReqCount
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -625,8 +765,11 @@ class DIChannel(Channel):
     @di_usb_xfer_req_count.deleter
     def di_usb_xfer_req_count(self):
         cfunc = lib_importer.windll.DAQmxResetDIUsbXferReqCount
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -642,9 +785,12 @@ class DIChannel(Channel):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetDIUsbXferReqSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -655,8 +801,12 @@ class DIChannel(Channel):
     @di_usb_xfer_req_size.setter
     def di_usb_xfer_req_size(self, val):
         cfunc = lib_importer.windll.DAQmxSetDIUsbXferReqSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -665,8 +815,11 @@ class DIChannel(Channel):
     @di_usb_xfer_req_size.deleter
     def di_usb_xfer_req_size(self):
         cfunc = lib_importer.windll.DAQmxResetDIUsbXferReqSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)

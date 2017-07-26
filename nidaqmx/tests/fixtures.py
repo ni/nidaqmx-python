@@ -39,3 +39,24 @@ def bridge_device():
             return device
 
     return None
+
+
+@pytest.fixture(scope="module")
+def multi_threading_test_devices():
+    system = nidaqmx.system.System.local()
+
+    devices = []
+    for device in system.devices:
+        if (device.dev_is_simulated and
+                device.product_category == ProductCategory.X_SERIES_DAQ and
+                len(device.ai_physical_chans) >= 1):
+            devices.append(device)
+            if len(devices) == 4:
+                return devices
+
+    raise NoFixtureDetectedError(
+        'Could not detect 4 simulated X Series devices so as to meet the '
+        'requirements to be a multi-threading test test fixture. Cannot '
+        'proceed to run tests. Import the NI MAX configuration file located '
+        'at nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these '
+        'devices.')

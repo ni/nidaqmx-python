@@ -48,8 +48,11 @@ class PersistedChannel(object):
         str: Indicates the author of the global channel.
         """
         cfunc = lib_importer.windll.DAQmxGetPersistedChanAuthor
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -81,8 +84,11 @@ class PersistedChannel(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetPersistedChanAllowInteractiveEditing)
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(c_bool32)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -100,8 +106,11 @@ class PersistedChannel(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetPersistedChanAllowInteractiveDeletion)
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(c_bool32)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -117,7 +126,10 @@ class PersistedChannel(object):
         use it.
         """
         cfunc = lib_importer.windll.DAQmxDeleteSavedGlobalChan
-        cfunc.argtypes = [ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [ctypes_byte_str]
 
         error_code = cfunc(self._name)
         check_for_error(error_code)

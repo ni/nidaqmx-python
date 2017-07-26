@@ -56,9 +56,13 @@ class WatchdogTask(object):
         self._handle = lib_importer.task_handle(0)
 
         cfunc = lib_importer.windll.DAQmxCreateWatchdogTimerTaskEx
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes_byte_str,
-            ctypes.POINTER(lib_importer.task_handle), ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes_byte_str,
+                        ctypes.POINTER(lib_importer.task_handle),
+                        ctypes.c_double]
 
         error_code = cfunc(
             device_name, task_name, ctypes.byref(self._handle), timeout)
@@ -100,8 +104,11 @@ class WatchdogTask(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDigEdgeWatchdogExpirTrigEdge
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -113,8 +120,11 @@ class WatchdogTask(object):
     def expir_trig_dig_edge_edge(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetDigEdgeWatchdogExpirTrigEdge
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -123,8 +133,11 @@ class WatchdogTask(object):
     @expir_trig_dig_edge_edge.deleter
     def expir_trig_dig_edge_edge(self):
         cfunc = lib_importer.windll.DAQmxResetDigEdgeWatchdogExpirTrigEdge
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -137,8 +150,12 @@ class WatchdogTask(object):
             exists to use as the source of the Expiration Trigger.
         """
         cfunc = lib_importer.windll.DAQmxGetDigEdgeWatchdogExpirTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -163,8 +180,11 @@ class WatchdogTask(object):
     @expir_trig_dig_edge_src.setter
     def expir_trig_dig_edge_src(self, val):
         cfunc = lib_importer.windll.DAQmxSetDigEdgeWatchdogExpirTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, val)
@@ -173,8 +193,11 @@ class WatchdogTask(object):
     @expir_trig_dig_edge_src.deleter
     def expir_trig_dig_edge_src(self):
         cfunc = lib_importer.windll.DAQmxResetDigEdgeWatchdogExpirTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -192,8 +215,12 @@ class WatchdogTask(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetWatchdogExpirTrigOnNetworkConnLoss)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -205,8 +232,11 @@ class WatchdogTask(object):
     def expir_trig_trig_on_network_conn_loss(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetWatchdogExpirTrigOnNetworkConnLoss)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, val)
@@ -216,8 +246,11 @@ class WatchdogTask(object):
     def expir_trig_trig_on_network_conn_loss(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetWatchdogExpirTrigOnNetworkConnLoss)
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -232,8 +265,11 @@ class WatchdogTask(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetWatchdogExpirTrigType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -245,8 +281,11 @@ class WatchdogTask(object):
     def expir_trig_trig_type(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetWatchdogExpirTrigType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -255,8 +294,11 @@ class WatchdogTask(object):
     @expir_trig_trig_type.deleter
     def expir_trig_trig_type(self):
         cfunc = lib_importer.windll.DAQmxResetWatchdogExpirTrigType
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -271,8 +313,12 @@ class WatchdogTask(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetWatchdogHasExpired
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -291,8 +337,12 @@ class WatchdogTask(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetWatchdogTimeout
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -303,8 +353,11 @@ class WatchdogTask(object):
     @timeout.setter
     def timeout(self, val):
         cfunc = lib_importer.windll.DAQmxSetWatchdogTimeout
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, val)
@@ -313,8 +366,11 @@ class WatchdogTask(object):
     @timeout.deleter
     def timeout(self):
         cfunc = lib_importer.windll.DAQmxResetWatchdogTimeout
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -326,8 +382,12 @@ class WatchdogTask(object):
         str: Indicates the name of the task.
         """
         cfunc = lib_importer.windll.DAQmxGetTaskName
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -361,8 +421,11 @@ class WatchdogTask(object):
                 control the watchdog timer task.
         """
         cfunc = lib_importer.windll.DAQmxControlWatchdogTask
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, action.value)
@@ -403,11 +466,14 @@ class WatchdogTask(object):
             [e.output_type.value for e in expiration_states])
 
         cfunc = lib_importer.windll.DAQmxCfgWatchdogAOExpirStates
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
-            wrapped_ndpointer(dtype=numpy.int32, flags=('C', 'W')),
-            ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
+                        wrapped_ndpointer(dtype=numpy.int32, flags=('C', 'W')),
+                        ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, channel_names, expir_state, output_type,
@@ -445,10 +511,13 @@ class WatchdogTask(object):
             [e.expiration_state.value for e in expiration_states])
 
         cfunc = lib_importer.windll.DAQmxCfgWatchdogCOExpirStates
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            wrapped_ndpointer(dtype=numpy.int32, flags=('C', 'W')),
-            ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.int32, flags=('C', 'W')),
+                        ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, channel_names, expir_state, len(expiration_states))
@@ -485,10 +554,13 @@ class WatchdogTask(object):
             [e.expiration_state.value for e in expiration_states])
 
         cfunc = lib_importer.windll.DAQmxCfgWatchdogDOExpirStates
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            wrapped_ndpointer(dtype=numpy.int32, flags=('C', 'W')),
-            ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.int32, flags=('C', 'W')),
+                        ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, channel_names, expir_state, len(expiration_states))
@@ -526,8 +598,11 @@ class WatchdogTask(object):
             return
 
         cfunc = lib_importer.windll.DAQmxClearTask
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(self._handle)
         check_for_error(error_code)
@@ -543,8 +618,11 @@ class WatchdogTask(object):
                 the task state.
         """
         cfunc = lib_importer.windll.DAQmxTaskControl
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, action.value)
@@ -568,7 +646,10 @@ class WatchdogTask(object):
         is optional for others.
         """
         cfunc = lib_importer.windll.DAQmxStartTask
-        cfunc.argtypes = [lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [lib_importer.task_handle]
 
         error_code = cfunc(self._handle)
         check_for_error(error_code)
@@ -579,7 +660,10 @@ class WatchdogTask(object):
         DAQmx Start Task method ran.
         """
         cfunc = lib_importer.windll.DAQmxStopTask
-        cfunc.argtypes = [lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [lib_importer.task_handle]
 
         error_code = cfunc(self._handle)
         check_for_error(error_code)

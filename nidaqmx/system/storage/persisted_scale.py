@@ -49,8 +49,11 @@ class PersistedScale(object):
         str: Indicates the author of the custom scale.
         """
         cfunc = lib_importer.windll.DAQmxGetPersistedScaleAuthor
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -82,8 +85,11 @@ class PersistedScale(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetPersistedScaleAllowInteractiveEditing)
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(c_bool32)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -101,8 +107,11 @@ class PersistedScale(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetPersistedScaleAllowInteractiveDeletion)
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(c_bool32)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -118,7 +127,10 @@ class PersistedScale(object):
         channels that use it.
         """
         cfunc = lib_importer.windll.DAQmxDeleteSavedScale
-        cfunc.argtypes = [ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [ctypes_byte_str]
 
         error_code = cfunc(self._name)
         check_for_error(error_code)

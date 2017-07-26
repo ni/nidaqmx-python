@@ -94,8 +94,11 @@ class PersistedTaskCollection(Sequence):
         List[str]: Indicates the names of all the tasks on this collection.
         """
         cfunc = lib_importer.windll.DAQmxGetSysTasks
-        cfunc.argtypes = [
-            ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:

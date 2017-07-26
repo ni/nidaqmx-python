@@ -87,10 +87,13 @@ class COChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateCOPulseChanFreq
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_int, ctypes.c_double, ctypes.c_double,
-            ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, counter, name_to_assign_to_channel, units.value,
@@ -139,10 +142,13 @@ class COChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateCOPulseChanTicks
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes_byte_str, ctypes.c_int, ctypes.c_int, ctypes.c_int,
-            ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, counter, name_to_assign_to_channel, source_terminal,
@@ -188,10 +194,13 @@ class COChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateCOPulseChanTime
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int, ctypes.c_int, ctypes.c_double, ctypes.c_double,
-            ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, counter, name_to_assign_to_channel, units.value,

@@ -48,8 +48,11 @@ class PersistedTask(object):
         str: Indicates the author of the task.
         """
         cfunc = lib_importer.windll.DAQmxGetPersistedTaskAuthor
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -81,8 +84,11 @@ class PersistedTask(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetPersistedTaskAllowInteractiveEditing)
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(c_bool32)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -99,8 +105,11 @@ class PersistedTask(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetPersistedTaskAllowInteractiveDeletion)
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(c_bool32)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -116,7 +125,10 @@ class PersistedTask(object):
         Use the DAQmx Clear Task function to clear that copy of the task.
         """
         cfunc = lib_importer.windll.DAQmxDeleteSavedTask
-        cfunc.argtypes = [ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [ctypes_byte_str]
 
         error_code = cfunc(self._name)
         check_for_error(error_code)
@@ -134,8 +146,12 @@ class PersistedTask(object):
         task_handle = lib_importer.task_handle(0)
 
         cfunc = lib_importer.windll.DAQmxLoadTask
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(lib_importer.task_handle)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        ctypes.POINTER(lib_importer.task_handle)]
 
         error_code = cfunc(self._name, ctypes.byref(task_handle))
         check_for_error(error_code)

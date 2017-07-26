@@ -106,8 +106,11 @@ class System(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetSysNIDAQMajorVersion
-        cfunc.argtypes = [
-            ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             ctypes.byref(val))
@@ -124,8 +127,11 @@ class System(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetSysNIDAQMinorVersion
-        cfunc.argtypes = [
-            ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             ctypes.byref(val))
@@ -142,8 +148,11 @@ class System(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetSysNIDAQUpdateVersion
-        cfunc.argtypes = [
-            ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             ctypes.byref(val))
@@ -176,8 +185,11 @@ class System(object):
                 terminal.
         """
         cfunc = lib_importer.windll.DAQmxConnectTerms
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int]
 
         error_code = cfunc(
             source_terminal, destination_terminal, signal_modifiers.value)
@@ -203,8 +215,11 @@ class System(object):
                 specifying a string that contains a terminal name.
         """
         cfunc = lib_importer.windll.DAQmxDisconnectTerms
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes_byte_str]
 
         error_code = cfunc(
             source_terminal, destination_terminal)
@@ -228,8 +243,11 @@ class System(object):
                 name.
         """
         cfunc = lib_importer.windll.DAQmxTristateOutputTerm
-        cfunc.argtypes = [
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
 
         error_code = cfunc(
             output_terminal)
@@ -259,20 +277,20 @@ class System(object):
         """
         args = [device_name]
         argtypes = [ctypes_byte_str]
-        
+
         for p in power_up_states:
             args.append(p.physical_channel)
             argtypes.append(ctypes_byte_str)
-            
+
             args.append(p.power_up_state.value)
             argtypes.append(ctypes.c_int)
-        
+
         args.append(None)
 
         cfunc = lib_importer.cdll.DAQmxSetDigitalPowerUpStates
-        cfunc.argtypes = argtypes
-
-        error_code = cfunc(*args)
+        with cfunc.arglock:
+            cfunc.argtypes = argtypes
+            error_code = cfunc(*args)
         check_for_error(error_code)
 
     def get_digital_power_up_states(self, device_name):
@@ -304,19 +322,19 @@ class System(object):
         for do_line in device.do_lines:
             state = ctypes.c_int()
             states.append(state)
-            
+
             args.append(do_line.name)
             argtypes.append(ctypes_byte_str)
-            
+
             args.append(ctypes.byref(state))
             argtypes.append(ctypes.POINTER(ctypes.c_int))
 
         args.append(None)
 
         cfunc = lib_importer.cdll.DAQmxGetDigitalPowerUpStates
-        cfunc.argtypes = argtypes
-
-        error_code = cfunc(*args)
+        with cfunc.arglock:
+            cfunc.argtypes = argtypes
+            error_code = cfunc(*args)
         check_for_error(error_code)
 
         power_up_states = []
@@ -350,20 +368,20 @@ class System(object):
         """
         args = [device_name]
         argtypes = [ctypes_byte_str]
-        
+
         for p in power_up_states:
             args.append(p.physical_channel)
             argtypes.append(ctypes_byte_str)
-            
+
             args.append(p.power_up_state.value)
             argtypes.append(ctypes.c_int)
-            
+
         args.append(None)
 
         cfunc = lib_importer.cdll.DAQmxSetDigitalPullUpPullDownStates
-        cfunc.argtypes = argtypes
-
-        error_code = cfunc(*args)
+        with cfunc.arglock:
+            cfunc.argtypes = argtypes
+            error_code = cfunc(*args)
         check_for_error(error_code)
 
     def get_digital_pull_up_pull_down_states(self, device_name):
@@ -396,19 +414,19 @@ class System(object):
         for do_line in device.do_lines:
             state = ctypes.c_int()
             states.append(state)
-            
+
             args.append(do_line.name)
             argtypes.append(ctypes_byte_str)
-            
+
             args.append(ctypes.byref(state))
             argtypes.append(ctypes.POINTER(ctypes.c_int))
 
         args.append(None)
 
         cfunc = lib_importer.cdll.DAQmxGetDigitalPullUpPullDownStates
-        cfunc.argtypes = argtypes
-
-        error_code = cfunc(*args)
+        with cfunc.arglock:
+            cfunc.argtypes = argtypes
+            error_code = cfunc(*args)
         check_for_error(error_code)
 
         power_up_states = []
@@ -443,23 +461,23 @@ class System(object):
         """
         args = [device_name]
         argtypes = [ctypes_byte_str]
-        
+
         for p in power_up_states:
             args.append(p.physical_channel)
             argtypes.append(ctypes_byte_str)
-            
+
             args.append(p.power_up_state)
             argtypes.append(ctypes.c_double)
-            
+
             args.append(p.channel_type.value)
             argtypes.append(ctypes.c_int)
-            
+
         args.append(None)
 
         cfunc = lib_importer.cdll.DAQmxSetAnalogPowerUpStates
-        cfunc.argtypes = argtypes
-
-        error_code = cfunc(*args)
+        with cfunc.arglock:
+            cfunc.argtypes = argtypes
+            error_code = cfunc(*args)
         check_for_error(error_code)
 
     def set_analog_power_up_states_with_output_type(
@@ -490,10 +508,15 @@ class System(object):
             [p.channel_type.value for p in power_up_states])
 
         cfunc = lib_importer.cdll.DAQmxSetAnalogPowerUpStatesWithOutputType
-        cfunc.argtypes = [
-            ctypes_byte_str,
-            wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
-            wrapped_ndpointer(dtype=numpy.int32, flags=('C','W'))]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                                          flags=('C','W')),
+                        wrapped_ndpointer(dtype=numpy.int32,
+                                          flags=('C','W'))]
 
         error_code = cfunc(
             physical_channel, state, channel_type, len(power_up_states))
@@ -538,19 +561,19 @@ class System(object):
 
             args.append(ao_physical_chan.name)
             argtypes.append(ctypes_byte_str)
-            
+
             args.append(ctypes.byref(state))
             argtypes.append(ctypes.POINTER(ctypes.c_double))
-            
+
             args.append(ctypes.byref(channel_type))
             argtypes.append(ctypes.POINTER(ctypes.c_int))
 
         args.append(None)
 
         cfunc = lib_importer.cdll.DAQmxGetAnalogPowerUpStates
-        cfunc.argtypes = argtypes
-
-        error_code = cfunc(*args)
+        with cfunc.arglock:
+            cfunc.argtypes = argtypes
+            error_code = cfunc(*args)
         check_for_error(error_code)
 
         power_up_states = []
@@ -591,10 +614,15 @@ class System(object):
         channel_types = numpy.zeros(size, dtype=numpy.int32)
 
         cfunc = lib_importer.cdll.DAQmxGetAnalogPowerUpStatesWithOutputType
-        cfunc.argtypes = [
-            'ctypes_byte_str',
-            wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
-            wrapped_ndpointer(dtype=numpy.int32, flags=('C','W'))]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                                          flags=('C','W')),
+                        wrapped_ndpointer(dtype=numpy.int32,
+                                          flags=('C','W'))]
 
         error_code = cfunc(
             flatten_channel_string(physical_channels), states, channel_types,
@@ -628,8 +656,11 @@ class System(object):
                 and logic low voltages for these logic families.
         """
         cfunc = lib_importer.windll.DAQmxSetDigitalLogicFamilyPowerUpState
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_int]
 
         error_code = cfunc(
             device_name, logic_family.value)
@@ -644,7 +675,7 @@ class System(object):
                 of the device to which this operation applies.
         Returns:
             nidaqmx.constants.LogicFamily:
-            
+
             Specifies the logic family to set the device to when it powers
             up. A logic family corresponds to voltage thresholds that are
             compatible with a group of voltage standards. Refer to device
@@ -654,8 +685,11 @@ class System(object):
         logic_family = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDigitalLogicFamilyPowerUpState
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             device_name, ctypes.byref(logic_family))
@@ -676,10 +710,10 @@ class System(object):
         to fail.
 
         Args:
-            chassis_devices_ports (Optional[str]): Specifies the names of the 
-                CompactDAQ chassis, C Series modules, or cDAQ Sync ports in 
-                comma separated form to search. If no names are specified, all 
-                cDAQ Sync ports on connected, non-simulated devices are 
+            chassis_devices_ports (Optional[str]): Specifies the names of the
+                CompactDAQ chassis, C Series modules, or cDAQ Sync ports in
+                comma separated form to search. If no names are specified, all
+                cDAQ Sync ports on connected, non-simulated devices are
                 scanned.
             timeout (Optional[float]): Specifies the time in seconds to
                 wait for the device to respond before timing out. If a
@@ -690,16 +724,22 @@ class System(object):
             Returns the configured port-to-port connections.
         """
         cfunc = lib_importer.windll.DAQmxAutoConfigureCDAQSyncConnections
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_double]
 
         error_code = cfunc(
             chassis_devices_ports, timeout)
         check_for_error(error_code)
 
         cfunc = lib_importer.windll.DAQmxGetAutoConfiguredCDAQSyncConnections
-        cfunc.argtypes = [
-            ctypes.c_char_p, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes.c_char_p, ctypes.POINTER(ctypes.c_uint)]
 
         port_list_size = ctypes.c_uint()
 
@@ -745,10 +785,10 @@ class System(object):
         tasks cause the verification process to fail.
 
         Args:
-            chassis_devices_ports (Optional[str]): Specifies the names 
-                of the CompactDAQ chassis, C Series modules, or cDAQ 
-                Sync ports in comma separated form to search. If no 
-                names are specified, all cDAQ Sync ports on connected, 
+            chassis_devices_ports (Optional[str]): Specifies the names
+                of the CompactDAQ chassis, C Series modules, or cDAQ
+                Sync ports in comma separated form to search. If no
+                names are specified, all cDAQ Sync ports on connected,
                 non-simulated devices are scanned.
             timeout (Optional[float]): Specifies the time in seconds to
                 wait for the device to respond before timing out.
@@ -760,8 +800,12 @@ class System(object):
         disconnected_ports_exist = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxAreConfiguredCDAQSyncPortsDisconnected
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_double, ctypes.POINTER(c_bool32)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_double,
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             chassis_devices_ports, timeout,
@@ -769,8 +813,11 @@ class System(object):
         check_for_error(error_code)
 
         cfunc = lib_importer.windll.DAQmxGetDisconnectedCDAQSyncPorts
-        cfunc.argtypes = [
-            ctypes.c_char_p, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes.c_char_p, ctypes.POINTER(ctypes.c_uint)]
 
         port_list_size = ctypes.c_uint()
 
@@ -819,7 +866,10 @@ class System(object):
             [ports_to_connect.output_port, ports_to_connect.input_port])
 
         cfunc = lib_importer.windll.DAQmxAddCDAQSyncConnection
-        cfunc.argtypes = [ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [ctypes_byte_str]
 
         error_code = cfunc(port_list)
         check_for_error(error_code)
@@ -837,7 +887,10 @@ class System(object):
             [ports_to_disconnect.output_port, ports_to_disconnect.input_port])
 
         cfunc = lib_importer.windll.DAQmxRemoveCDAQSyncConnection
-        cfunc.argtypes = [ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [ctypes_byte_str]
 
         error_code = cfunc(port_list)
         check_for_error(error_code)

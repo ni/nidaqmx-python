@@ -37,9 +37,12 @@ class AOChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetAOCurrentUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -51,8 +54,12 @@ class AOChannel(Channel):
     def ao_current_units(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetAOCurrentUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -61,8 +68,11 @@ class AOChannel(Channel):
     @ao_current_units.deleter
     def ao_current_units(self):
         cfunc = lib_importer.windll.DAQmxResetAOCurrentUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -75,9 +85,12 @@ class AOChannel(Channel):
             custom scale for the channel.
         """
         cfunc = lib_importer.windll.DAQmxGetAOCustomScaleName
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_char_p,
-            ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -103,8 +116,12 @@ class AOChannel(Channel):
     def ao_custom_scale(self, val):
         val = val.name
         cfunc = lib_importer.windll.DAQmxSetAOCustomScaleName
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -113,8 +130,11 @@ class AOChannel(Channel):
     @ao_custom_scale.deleter
     def ao_custom_scale(self):
         cfunc = lib_importer.windll.DAQmxResetAOCustomScaleName
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -128,9 +148,12 @@ class AOChannel(Channel):
             valid sources for this signal vary by device.
         """
         cfunc = lib_importer.windll.DAQmxGetAODACOffsetExtSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_char_p,
-            ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -155,8 +178,12 @@ class AOChannel(Channel):
     @ao_dac_offset_ext_src.setter
     def ao_dac_offset_ext_src(self, val):
         cfunc = lib_importer.windll.DAQmxSetAODACOffsetExtSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -165,8 +192,11 @@ class AOChannel(Channel):
     @ao_dac_offset_ext_src.deleter
     def ao_dac_offset_ext_src(self):
         cfunc = lib_importer.windll.DAQmxResetAODACOffsetExtSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -182,9 +212,12 @@ class AOChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetAODACOffsetSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -196,8 +229,12 @@ class AOChannel(Channel):
     def ao_dac_offset_src(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetAODACOffsetSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -206,8 +243,11 @@ class AOChannel(Channel):
     @ao_dac_offset_src.deleter
     def ao_dac_offset_src(self):
         cfunc = lib_importer.windll.DAQmxResetAODACOffsetSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -223,9 +263,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAODACOffsetVal
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -236,8 +279,12 @@ class AOChannel(Channel):
     @ao_dac_offset_val.setter
     def ao_dac_offset_val(self, val):
         cfunc = lib_importer.windll.DAQmxSetAODACOffsetVal
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -246,8 +293,11 @@ class AOChannel(Channel):
     @ao_dac_offset_val.deleter
     def ao_dac_offset_val(self):
         cfunc = lib_importer.windll.DAQmxResetAODACOffsetVal
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -264,9 +314,12 @@ class AOChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetAODACRefAllowConnToGnd
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -277,8 +330,12 @@ class AOChannel(Channel):
     @ao_dac_ref_allow_conn_to_gnd.setter
     def ao_dac_ref_allow_conn_to_gnd(self, val):
         cfunc = lib_importer.windll.DAQmxSetAODACRefAllowConnToGnd
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -287,8 +344,11 @@ class AOChannel(Channel):
     @ao_dac_ref_allow_conn_to_gnd.deleter
     def ao_dac_ref_allow_conn_to_gnd(self):
         cfunc = lib_importer.windll.DAQmxResetAODACRefAllowConnToGnd
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -309,9 +369,12 @@ class AOChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetAODACRefConnToGnd
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -322,8 +385,12 @@ class AOChannel(Channel):
     @ao_dac_ref_conn_to_gnd.setter
     def ao_dac_ref_conn_to_gnd(self, val):
         cfunc = lib_importer.windll.DAQmxSetAODACRefConnToGnd
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -332,8 +399,11 @@ class AOChannel(Channel):
     @ao_dac_ref_conn_to_gnd.deleter
     def ao_dac_ref_conn_to_gnd(self):
         cfunc = lib_importer.windll.DAQmxResetAODACRefConnToGnd
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -347,9 +417,12 @@ class AOChannel(Channel):
             valid sources for this signal vary by device.
         """
         cfunc = lib_importer.windll.DAQmxGetAODACRefExtSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_char_p,
-            ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -374,8 +447,12 @@ class AOChannel(Channel):
     @ao_dac_ref_ext_src.setter
     def ao_dac_ref_ext_src(self, val):
         cfunc = lib_importer.windll.DAQmxSetAODACRefExtSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -384,8 +461,11 @@ class AOChannel(Channel):
     @ao_dac_ref_ext_src.deleter
     def ao_dac_ref_ext_src(self):
         cfunc = lib_importer.windll.DAQmxResetAODACRefExtSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -401,9 +481,12 @@ class AOChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetAODACRefSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -415,8 +498,12 @@ class AOChannel(Channel):
     def ao_dac_ref_src(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetAODACRefSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -425,8 +512,11 @@ class AOChannel(Channel):
     @ao_dac_ref_src.deleter
     def ao_dac_ref_src(self):
         cfunc = lib_importer.windll.DAQmxResetAODACRefSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -443,9 +533,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAODACRefVal
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -456,8 +549,12 @@ class AOChannel(Channel):
     @ao_dac_ref_val.setter
     def ao_dac_ref_val(self, val):
         cfunc = lib_importer.windll.DAQmxSetAODACRefVal
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -466,8 +563,11 @@ class AOChannel(Channel):
     @ao_dac_ref_val.deleter
     def ao_dac_ref_val(self):
         cfunc = lib_importer.windll.DAQmxResetAODACRefVal
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -483,9 +583,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAODACRngHigh
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -496,8 +599,12 @@ class AOChannel(Channel):
     @ao_dac_rng_high.setter
     def ao_dac_rng_high(self, val):
         cfunc = lib_importer.windll.DAQmxSetAODACRngHigh
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -506,8 +613,11 @@ class AOChannel(Channel):
     @ao_dac_rng_high.deleter
     def ao_dac_rng_high(self):
         cfunc = lib_importer.windll.DAQmxResetAODACRngHigh
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -523,9 +633,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAODACRngLow
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -536,8 +649,12 @@ class AOChannel(Channel):
     @ao_dac_rng_low.setter
     def ao_dac_rng_low(self, val):
         cfunc = lib_importer.windll.DAQmxSetAODACRngLow
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -546,8 +663,11 @@ class AOChannel(Channel):
     @ao_dac_rng_low.deleter
     def ao_dac_rng_low(self):
         cfunc = lib_importer.windll.DAQmxResetAODACRngLow
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -562,9 +682,12 @@ class AOChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetAODataXferMech
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -576,8 +699,12 @@ class AOChannel(Channel):
     def ao_data_xfer_mech(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetAODataXferMech
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -586,8 +713,11 @@ class AOChannel(Channel):
     @ao_data_xfer_mech.deleter
     def ao_data_xfer_mech(self):
         cfunc = lib_importer.windll.DAQmxResetAODataXferMech
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -603,9 +733,12 @@ class AOChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetAODataXferReqCond
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -617,8 +750,12 @@ class AOChannel(Channel):
     def ao_data_xfer_req_cond(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetAODataXferReqCond
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -627,8 +764,11 @@ class AOChannel(Channel):
     @ao_data_xfer_req_cond.deleter
     def ao_data_xfer_req_cond(self):
         cfunc = lib_importer.windll.DAQmxResetAODataXferReqCond
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -647,10 +787,13 @@ class AOChannel(Channel):
             channel.
         """
         cfunc = lib_importer.windll.DAQmxGetAODevScalingCoeff
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
-            ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -682,9 +825,12 @@ class AOChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetAOEnhancedImageRejectionEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -695,8 +841,12 @@ class AOChannel(Channel):
     @ao_enhanced_image_rejection_enable.setter
     def ao_enhanced_image_rejection_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOEnhancedImageRejectionEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -705,8 +855,11 @@ class AOChannel(Channel):
     @ao_enhanced_image_rejection_enable.deleter
     def ao_enhanced_image_rejection_enable(self):
         cfunc = lib_importer.windll.DAQmxResetAOEnhancedImageRejectionEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -723,9 +876,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAOFilterDelay
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -736,8 +892,12 @@ class AOChannel(Channel):
     @ao_filter_delay.setter
     def ao_filter_delay(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOFilterDelay
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -746,8 +906,11 @@ class AOChannel(Channel):
     @ao_filter_delay.deleter
     def ao_filter_delay(self):
         cfunc = lib_importer.windll.DAQmxResetAOFilterDelay
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -766,9 +929,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAOFilterDelayAdjustment
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -779,8 +945,12 @@ class AOChannel(Channel):
     @ao_filter_delay_adjustment.setter
     def ao_filter_delay_adjustment(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOFilterDelayAdjustment
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -789,8 +959,11 @@ class AOChannel(Channel):
     @ao_filter_delay_adjustment.deleter
     def ao_filter_delay_adjustment(self):
         cfunc = lib_importer.windll.DAQmxResetAOFilterDelayAdjustment
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -806,9 +979,12 @@ class AOChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetAOFilterDelayUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -820,8 +996,12 @@ class AOChannel(Channel):
     def ao_filter_delay_units(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetAOFilterDelayUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -830,8 +1010,11 @@ class AOChannel(Channel):
     @ao_filter_delay_units.deleter
     def ao_filter_delay_units(self):
         cfunc = lib_importer.windll.DAQmxResetAOFilterDelayUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -846,9 +1029,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAOFuncGenAmplitude
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -859,8 +1045,12 @@ class AOChannel(Channel):
     @ao_func_gen_amplitude.setter
     def ao_func_gen_amplitude(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOFuncGenAmplitude
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -869,8 +1059,11 @@ class AOChannel(Channel):
     @ao_func_gen_amplitude.deleter
     def ao_func_gen_amplitude(self):
         cfunc = lib_importer.windll.DAQmxResetAOFuncGenAmplitude
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -885,9 +1078,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAOFuncGenFMDeviation
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -898,8 +1094,12 @@ class AOChannel(Channel):
     @ao_func_gen_fm_deviation.setter
     def ao_func_gen_fm_deviation(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOFuncGenFMDeviation
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -908,8 +1108,11 @@ class AOChannel(Channel):
     @ao_func_gen_fm_deviation.deleter
     def ao_func_gen_fm_deviation(self):
         cfunc = lib_importer.windll.DAQmxResetAOFuncGenFMDeviation
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -924,9 +1127,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAOFuncGenFreq
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -937,8 +1143,12 @@ class AOChannel(Channel):
     @ao_func_gen_freq.setter
     def ao_func_gen_freq(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOFuncGenFreq
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -947,8 +1157,11 @@ class AOChannel(Channel):
     @ao_func_gen_freq.deleter
     def ao_func_gen_freq(self):
         cfunc = lib_importer.windll.DAQmxResetAOFuncGenFreq
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -965,9 +1178,12 @@ class AOChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetAOFuncGenModulationType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -979,8 +1195,12 @@ class AOChannel(Channel):
     def ao_func_gen_modulation_type(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetAOFuncGenModulationType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -989,8 +1209,11 @@ class AOChannel(Channel):
     @ao_func_gen_modulation_type.deleter
     def ao_func_gen_modulation_type(self):
         cfunc = lib_importer.windll.DAQmxResetAOFuncGenModulationType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1004,9 +1227,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAOFuncGenOffset
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1017,8 +1243,12 @@ class AOChannel(Channel):
     @ao_func_gen_offset.setter
     def ao_func_gen_offset(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOFuncGenOffset
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1027,8 +1257,11 @@ class AOChannel(Channel):
     @ao_func_gen_offset.deleter
     def ao_func_gen_offset(self):
         cfunc = lib_importer.windll.DAQmxResetAOFuncGenOffset
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1043,9 +1276,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAOFuncGenSquareDutyCycle
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1056,8 +1292,12 @@ class AOChannel(Channel):
     @ao_func_gen_square_duty_cycle.setter
     def ao_func_gen_square_duty_cycle(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOFuncGenSquareDutyCycle
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1066,8 +1306,11 @@ class AOChannel(Channel):
     @ao_func_gen_square_duty_cycle.deleter
     def ao_func_gen_square_duty_cycle(self):
         cfunc = lib_importer.windll.DAQmxResetAOFuncGenSquareDutyCycle
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1082,9 +1325,12 @@ class AOChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetAOFuncGenType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1096,8 +1342,12 @@ class AOChannel(Channel):
     def ao_func_gen_type(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetAOFuncGenType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1106,8 +1356,11 @@ class AOChannel(Channel):
     @ao_func_gen_type.deleter
     def ao_func_gen_type(self):
         cfunc = lib_importer.windll.DAQmxResetAOFuncGenType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1122,9 +1375,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAOGain
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1135,8 +1391,12 @@ class AOChannel(Channel):
     @ao_gain.setter
     def ao_gain(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOGain
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1145,8 +1405,11 @@ class AOChannel(Channel):
     @ao_gain.deleter
     def ao_gain(self):
         cfunc = lib_importer.windll.DAQmxResetAOGain
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1161,9 +1424,12 @@ class AOChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetAOIdleOutputBehavior
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1175,8 +1441,12 @@ class AOChannel(Channel):
     def ao_idle_output_behavior(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetAOIdleOutputBehavior
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1185,8 +1455,11 @@ class AOChannel(Channel):
     @ao_idle_output_behavior.deleter
     def ao_idle_output_behavior(self):
         cfunc = lib_importer.windll.DAQmxResetAOIdleOutputBehavior
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1201,9 +1474,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAOLoadImpedance
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1214,8 +1490,12 @@ class AOChannel(Channel):
     @ao_load_impedance.setter
     def ao_load_impedance(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOLoadImpedance
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1224,8 +1504,11 @@ class AOChannel(Channel):
     @ao_load_impedance.deleter
     def ao_load_impedance(self):
         cfunc = lib_importer.windll.DAQmxResetAOLoadImpedance
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1244,9 +1527,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAOMax
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1257,8 +1543,12 @@ class AOChannel(Channel):
     @ao_max.setter
     def ao_max(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOMax
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1267,8 +1557,11 @@ class AOChannel(Channel):
     @ao_max.deleter
     def ao_max(self):
         cfunc = lib_importer.windll.DAQmxResetAOMax
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1289,9 +1582,12 @@ class AOChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetAOMemMapEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1302,8 +1598,12 @@ class AOChannel(Channel):
     @ao_mem_map_enable.setter
     def ao_mem_map_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOMemMapEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1312,8 +1612,11 @@ class AOChannel(Channel):
     @ao_mem_map_enable.deleter
     def ao_mem_map_enable(self):
         cfunc = lib_importer.windll.DAQmxResetAOMemMapEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1332,9 +1635,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAOMin
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1345,8 +1651,12 @@ class AOChannel(Channel):
     @ao_min.setter
     def ao_min(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOMin
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1355,8 +1665,11 @@ class AOChannel(Channel):
     @ao_min.deleter
     def ao_min(self):
         cfunc = lib_importer.windll.DAQmxResetAOMin
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1371,9 +1684,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAOOutputImpedance
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1384,8 +1700,12 @@ class AOChannel(Channel):
     @ao_output_impedance.setter
     def ao_output_impedance(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOOutputImpedance
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1394,8 +1714,11 @@ class AOChannel(Channel):
     @ao_output_impedance.deleter
     def ao_output_impedance(self):
         cfunc = lib_importer.windll.DAQmxResetAOOutputImpedance
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1410,9 +1733,12 @@ class AOChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetAOOutputType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1435,9 +1761,12 @@ class AOChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetAOReglitchEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1448,8 +1777,12 @@ class AOChannel(Channel):
     @ao_reglitch_enable.setter
     def ao_reglitch_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOReglitchEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1458,8 +1791,11 @@ class AOChannel(Channel):
     @ao_reglitch_enable.deleter
     def ao_reglitch_enable(self):
         cfunc = lib_importer.windll.DAQmxResetAOReglitchEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1475,9 +1811,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAOResolution
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1494,9 +1833,12 @@ class AOChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetAOResolutionUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1508,8 +1850,12 @@ class AOChannel(Channel):
     def ao_resolution_units(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetAOResolutionUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1518,8 +1864,11 @@ class AOChannel(Channel):
     @ao_resolution_units.deleter
     def ao_resolution_units(self):
         cfunc = lib_importer.windll.DAQmxResetAOResolutionUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1534,9 +1883,12 @@ class AOChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetAOTermCfg
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1548,8 +1900,12 @@ class AOChannel(Channel):
     def ao_term_cfg(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetAOTermCfg
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1558,8 +1914,11 @@ class AOChannel(Channel):
     @ao_term_cfg.deleter
     def ao_term_cfg(self):
         cfunc = lib_importer.windll.DAQmxResetAOTermCfg
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1575,9 +1934,12 @@ class AOChannel(Channel):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetAOUsbXferReqCount
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1588,8 +1950,12 @@ class AOChannel(Channel):
     @ao_usb_xfer_req_count.setter
     def ao_usb_xfer_req_count(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOUsbXferReqCount
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1598,8 +1964,11 @@ class AOChannel(Channel):
     @ao_usb_xfer_req_count.deleter
     def ao_usb_xfer_req_count(self):
         cfunc = lib_importer.windll.DAQmxResetAOUsbXferReqCount
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1615,9 +1984,12 @@ class AOChannel(Channel):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetAOUsbXferReqSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1628,8 +2000,12 @@ class AOChannel(Channel):
     @ao_usb_xfer_req_size.setter
     def ao_usb_xfer_req_size(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOUsbXferReqSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1638,8 +2014,11 @@ class AOChannel(Channel):
     @ao_usb_xfer_req_size.deleter
     def ao_usb_xfer_req_size(self):
         cfunc = lib_importer.windll.DAQmxResetAOUsbXferReqSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1656,9 +2035,12 @@ class AOChannel(Channel):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetAOUseOnlyOnBrdMem
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1669,8 +2051,12 @@ class AOChannel(Channel):
     @ao_use_only_on_brd_mem.setter
     def ao_use_only_on_brd_mem(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOUseOnlyOnBrdMem
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1679,8 +2065,11 @@ class AOChannel(Channel):
     @ao_use_only_on_brd_mem.deleter
     def ao_use_only_on_brd_mem(self):
         cfunc = lib_importer.windll.DAQmxResetAOUseOnlyOnBrdMem
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1695,9 +2084,12 @@ class AOChannel(Channel):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAOVoltageCurrentLimit
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1708,8 +2100,12 @@ class AOChannel(Channel):
     @ao_voltage_current_limit.setter
     def ao_voltage_current_limit(self, val):
         cfunc = lib_importer.windll.DAQmxSetAOVoltageCurrentLimit
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1718,8 +2114,11 @@ class AOChannel(Channel):
     @ao_voltage_current_limit.deleter
     def ao_voltage_current_limit(self):
         cfunc = lib_importer.windll.DAQmxResetAOVoltageCurrentLimit
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)
@@ -1735,9 +2134,12 @@ class AOChannel(Channel):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetAOVoltageUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1749,8 +2151,12 @@ class AOChannel(Channel):
     def ao_voltage_units(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetAOVoltageUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1759,8 +2165,11 @@ class AOChannel(Channel):
     @ao_voltage_units.deleter
     def ao_voltage_units(self):
         cfunc = lib_importer.windll.DAQmxResetAOVoltageUnits
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._name)

@@ -32,8 +32,11 @@ class PauseTrigger(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgLvlPauseTrigCoupling
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -45,8 +48,11 @@ class PauseTrigger(object):
     def anlg_lvl_coupling(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetAnlgLvlPauseTrigCoupling
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -55,8 +61,11 @@ class PauseTrigger(object):
     @anlg_lvl_coupling.deleter
     def anlg_lvl_coupling(self):
         cfunc = lib_importer.windll.DAQmxResetAnlgLvlPauseTrigCoupling
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -76,8 +85,12 @@ class PauseTrigger(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgLvlPauseTrigDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -88,8 +101,11 @@ class PauseTrigger(object):
     @anlg_lvl_dig_fltr_enable.setter
     def anlg_lvl_dig_fltr_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetAnlgLvlPauseTrigDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, val)
@@ -98,8 +114,11 @@ class PauseTrigger(object):
     @anlg_lvl_dig_fltr_enable.deleter
     def anlg_lvl_dig_fltr_enable(self):
         cfunc = lib_importer.windll.DAQmxResetAnlgLvlPauseTrigDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -115,8 +134,12 @@ class PauseTrigger(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetAnlgLvlPauseTrigDigFltrMinPulseWidth)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -128,8 +151,11 @@ class PauseTrigger(object):
     def anlg_lvl_dig_fltr_min_pulse_width(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetAnlgLvlPauseTrigDigFltrMinPulseWidth)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, val)
@@ -139,8 +165,11 @@ class PauseTrigger(object):
     def anlg_lvl_dig_fltr_min_pulse_width(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetAnlgLvlPauseTrigDigFltrMinPulseWidth)
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -157,8 +186,12 @@ class PauseTrigger(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetAnlgLvlPauseTrigDigFltrTimebaseRate)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -170,8 +203,11 @@ class PauseTrigger(object):
     def anlg_lvl_dig_fltr_timebase_rate(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetAnlgLvlPauseTrigDigFltrTimebaseRate)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, val)
@@ -181,8 +217,11 @@ class PauseTrigger(object):
     def anlg_lvl_dig_fltr_timebase_rate(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetAnlgLvlPauseTrigDigFltrTimebaseRate)
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -196,8 +235,12 @@ class PauseTrigger(object):
         """
         cfunc = (lib_importer.windll.
                  DAQmxGetAnlgLvlPauseTrigDigFltrTimebaseSrc)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -223,8 +266,11 @@ class PauseTrigger(object):
     def anlg_lvl_dig_fltr_timebase_src(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetAnlgLvlPauseTrigDigFltrTimebaseSrc)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, val)
@@ -234,8 +280,11 @@ class PauseTrigger(object):
     def anlg_lvl_dig_fltr_timebase_src(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetAnlgLvlPauseTrigDigFltrTimebaseSrc)
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -251,8 +300,12 @@ class PauseTrigger(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgLvlPauseTrigDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -263,8 +316,11 @@ class PauseTrigger(object):
     @anlg_lvl_dig_sync_enable.setter
     def anlg_lvl_dig_sync_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetAnlgLvlPauseTrigDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, val)
@@ -273,8 +329,11 @@ class PauseTrigger(object):
     @anlg_lvl_dig_sync_enable.deleter
     def anlg_lvl_dig_sync_enable(self):
         cfunc = lib_importer.windll.DAQmxResetAnlgLvlPauseTrigDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -296,8 +355,12 @@ class PauseTrigger(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgLvlPauseTrigHyst
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -308,8 +371,11 @@ class PauseTrigger(object):
     @anlg_lvl_hyst.setter
     def anlg_lvl_hyst(self, val):
         cfunc = lib_importer.windll.DAQmxSetAnlgLvlPauseTrigHyst
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, val)
@@ -318,8 +384,11 @@ class PauseTrigger(object):
     @anlg_lvl_hyst.deleter
     def anlg_lvl_hyst(self):
         cfunc = lib_importer.windll.DAQmxResetAnlgLvlPauseTrigHyst
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -336,8 +405,12 @@ class PauseTrigger(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgLvlPauseTrigLvl
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -348,8 +421,11 @@ class PauseTrigger(object):
     @anlg_lvl_lvl.setter
     def anlg_lvl_lvl(self, val):
         cfunc = lib_importer.windll.DAQmxSetAnlgLvlPauseTrigLvl
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, val)
@@ -358,8 +434,11 @@ class PauseTrigger(object):
     @anlg_lvl_lvl.deleter
     def anlg_lvl_lvl(self):
         cfunc = lib_importer.windll.DAQmxResetAnlgLvlPauseTrigLvl
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -373,8 +452,12 @@ class PauseTrigger(object):
             trigger.
         """
         cfunc = lib_importer.windll.DAQmxGetAnlgLvlPauseTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -399,8 +482,11 @@ class PauseTrigger(object):
     @anlg_lvl_src.setter
     def anlg_lvl_src(self, val):
         cfunc = lib_importer.windll.DAQmxSetAnlgLvlPauseTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, val)
@@ -409,8 +495,11 @@ class PauseTrigger(object):
     @anlg_lvl_src.deleter
     def anlg_lvl_src(self):
         cfunc = lib_importer.windll.DAQmxResetAnlgLvlPauseTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -426,8 +515,11 @@ class PauseTrigger(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgLvlPauseTrigWhen
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -439,8 +531,11 @@ class PauseTrigger(object):
     def anlg_lvl_when(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetAnlgLvlPauseTrigWhen
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -449,8 +544,11 @@ class PauseTrigger(object):
     @anlg_lvl_when.deleter
     def anlg_lvl_when(self):
         cfunc = lib_importer.windll.DAQmxResetAnlgLvlPauseTrigWhen
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -465,8 +563,12 @@ class PauseTrigger(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgWinPauseTrigBtm
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -477,8 +579,11 @@ class PauseTrigger(object):
     @anlg_win_btm.setter
     def anlg_win_btm(self, val):
         cfunc = lib_importer.windll.DAQmxSetAnlgWinPauseTrigBtm
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, val)
@@ -487,8 +592,11 @@ class PauseTrigger(object):
     @anlg_win_btm.deleter
     def anlg_win_btm(self):
         cfunc = lib_importer.windll.DAQmxResetAnlgWinPauseTrigBtm
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -504,8 +612,11 @@ class PauseTrigger(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgWinPauseTrigCoupling
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -517,8 +628,11 @@ class PauseTrigger(object):
     def anlg_win_coupling(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetAnlgWinPauseTrigCoupling
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -527,8 +641,11 @@ class PauseTrigger(object):
     @anlg_win_coupling.deleter
     def anlg_win_coupling(self):
         cfunc = lib_importer.windll.DAQmxResetAnlgWinPauseTrigCoupling
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -547,8 +664,12 @@ class PauseTrigger(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgWinPauseTrigDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -559,8 +680,11 @@ class PauseTrigger(object):
     @anlg_win_dig_fltr_enable.setter
     def anlg_win_dig_fltr_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetAnlgWinPauseTrigDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, val)
@@ -569,8 +693,11 @@ class PauseTrigger(object):
     @anlg_win_dig_fltr_enable.deleter
     def anlg_win_dig_fltr_enable(self):
         cfunc = lib_importer.windll.DAQmxResetAnlgWinPauseTrigDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -586,8 +713,12 @@ class PauseTrigger(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetAnlgWinPauseTrigDigFltrMinPulseWidth)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -599,8 +730,11 @@ class PauseTrigger(object):
     def anlg_win_dig_fltr_min_pulse_width(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetAnlgWinPauseTrigDigFltrMinPulseWidth)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, val)
@@ -610,8 +744,11 @@ class PauseTrigger(object):
     def anlg_win_dig_fltr_min_pulse_width(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetAnlgWinPauseTrigDigFltrMinPulseWidth)
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -628,8 +765,12 @@ class PauseTrigger(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetAnlgWinPauseTrigDigFltrTimebaseRate)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -641,8 +782,11 @@ class PauseTrigger(object):
     def anlg_win_dig_fltr_timebase_rate(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetAnlgWinPauseTrigDigFltrTimebaseRate)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, val)
@@ -652,8 +796,11 @@ class PauseTrigger(object):
     def anlg_win_dig_fltr_timebase_rate(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetAnlgWinPauseTrigDigFltrTimebaseRate)
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -667,8 +814,12 @@ class PauseTrigger(object):
         """
         cfunc = (lib_importer.windll.
                  DAQmxGetAnlgWinPauseTrigDigFltrTimebaseSrc)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -694,8 +845,11 @@ class PauseTrigger(object):
     def anlg_win_dig_fltr_timebase_src(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetAnlgWinPauseTrigDigFltrTimebaseSrc)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, val)
@@ -705,8 +859,11 @@ class PauseTrigger(object):
     def anlg_win_dig_fltr_timebase_src(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetAnlgWinPauseTrigDigFltrTimebaseSrc)
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -722,8 +879,12 @@ class PauseTrigger(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgWinPauseTrigDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -734,8 +895,11 @@ class PauseTrigger(object):
     @anlg_win_dig_sync_enable.setter
     def anlg_win_dig_sync_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetAnlgWinPauseTrigDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, val)
@@ -744,8 +908,11 @@ class PauseTrigger(object):
     @anlg_win_dig_sync_enable.deleter
     def anlg_win_dig_sync_enable(self):
         cfunc = lib_importer.windll.DAQmxResetAnlgWinPauseTrigDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -759,8 +926,12 @@ class PauseTrigger(object):
             trigger.
         """
         cfunc = lib_importer.windll.DAQmxGetAnlgWinPauseTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -785,8 +956,11 @@ class PauseTrigger(object):
     @anlg_win_src.setter
     def anlg_win_src(self, val):
         cfunc = lib_importer.windll.DAQmxSetAnlgWinPauseTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, val)
@@ -795,8 +969,11 @@ class PauseTrigger(object):
     @anlg_win_src.deleter
     def anlg_win_src(self):
         cfunc = lib_importer.windll.DAQmxResetAnlgWinPauseTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -811,8 +988,12 @@ class PauseTrigger(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgWinPauseTrigTop
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -823,8 +1004,11 @@ class PauseTrigger(object):
     @anlg_win_top.setter
     def anlg_win_top(self, val):
         cfunc = lib_importer.windll.DAQmxSetAnlgWinPauseTrigTop
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, val)
@@ -833,8 +1017,11 @@ class PauseTrigger(object):
     @anlg_win_top.deleter
     def anlg_win_top(self):
         cfunc = lib_importer.windll.DAQmxResetAnlgWinPauseTrigTop
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -851,8 +1038,11 @@ class PauseTrigger(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgWinPauseTrigWhen
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -864,8 +1054,11 @@ class PauseTrigger(object):
     def anlg_win_when(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetAnlgWinPauseTrigWhen
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -874,8 +1067,11 @@ class PauseTrigger(object):
     @anlg_win_when.deleter
     def anlg_win_when(self):
         cfunc = lib_importer.windll.DAQmxResetAnlgWinPauseTrigWhen
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -890,8 +1086,12 @@ class PauseTrigger(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetDigLvlPauseTrigDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -902,8 +1102,11 @@ class PauseTrigger(object):
     @dig_lvl_dig_fltr_enable.setter
     def dig_lvl_dig_fltr_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetDigLvlPauseTrigDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, val)
@@ -912,8 +1115,11 @@ class PauseTrigger(object):
     @dig_lvl_dig_fltr_enable.deleter
     def dig_lvl_dig_fltr_enable(self):
         cfunc = lib_importer.windll.DAQmxResetDigLvlPauseTrigDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -929,8 +1135,12 @@ class PauseTrigger(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetDigLvlPauseTrigDigFltrMinPulseWidth)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -942,8 +1152,11 @@ class PauseTrigger(object):
     def dig_lvl_dig_fltr_min_pulse_width(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetDigLvlPauseTrigDigFltrMinPulseWidth)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, val)
@@ -953,8 +1166,11 @@ class PauseTrigger(object):
     def dig_lvl_dig_fltr_min_pulse_width(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetDigLvlPauseTrigDigFltrMinPulseWidth)
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -971,8 +1187,12 @@ class PauseTrigger(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetDigLvlPauseTrigDigFltrTimebaseRate)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -984,8 +1204,11 @@ class PauseTrigger(object):
     def dig_lvl_dig_fltr_timebase_rate(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetDigLvlPauseTrigDigFltrTimebaseRate)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, val)
@@ -995,8 +1218,11 @@ class PauseTrigger(object):
     def dig_lvl_dig_fltr_timebase_rate(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetDigLvlPauseTrigDigFltrTimebaseRate)
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -1010,8 +1236,12 @@ class PauseTrigger(object):
         """
         cfunc = (lib_importer.windll.
                  DAQmxGetDigLvlPauseTrigDigFltrTimebaseSrc)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1037,8 +1267,11 @@ class PauseTrigger(object):
     def dig_lvl_dig_fltr_timebase_src(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetDigLvlPauseTrigDigFltrTimebaseSrc)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, val)
@@ -1048,8 +1281,11 @@ class PauseTrigger(object):
     def dig_lvl_dig_fltr_timebase_src(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetDigLvlPauseTrigDigFltrTimebaseSrc)
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -1065,8 +1301,12 @@ class PauseTrigger(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetDigLvlPauseTrigDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1077,8 +1317,11 @@ class PauseTrigger(object):
     @dig_lvl_dig_sync_enable.setter
     def dig_lvl_dig_sync_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetDigLvlPauseTrigDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, val)
@@ -1087,8 +1330,11 @@ class PauseTrigger(object):
     @dig_lvl_dig_sync_enable.deleter
     def dig_lvl_dig_sync_enable(self):
         cfunc = lib_importer.windll.DAQmxResetDigLvlPauseTrigDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -1101,8 +1347,12 @@ class PauseTrigger(object):
             signal to use as the source of the Pause Trigger.
         """
         cfunc = lib_importer.windll.DAQmxGetDigLvlPauseTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1127,8 +1377,11 @@ class PauseTrigger(object):
     @dig_lvl_src.setter
     def dig_lvl_src(self, val):
         cfunc = lib_importer.windll.DAQmxSetDigLvlPauseTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, val)
@@ -1137,8 +1390,11 @@ class PauseTrigger(object):
     @dig_lvl_src.deleter
     def dig_lvl_src(self):
         cfunc = lib_importer.windll.DAQmxResetDigLvlPauseTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -1153,8 +1409,11 @@ class PauseTrigger(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDigLvlPauseTrigWhen
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1166,8 +1425,11 @@ class PauseTrigger(object):
     def dig_lvl_when(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetDigLvlPauseTrigWhen
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -1176,8 +1438,11 @@ class PauseTrigger(object):
     @dig_lvl_when.deleter
     def dig_lvl_when(self):
         cfunc = lib_importer.windll.DAQmxResetDigLvlPauseTrigWhen
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -1190,8 +1455,12 @@ class PauseTrigger(object):
             Pause Trigger to occur.
         """
         cfunc = lib_importer.windll.DAQmxGetDigPatternPauseTrigPattern
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1216,8 +1485,11 @@ class PauseTrigger(object):
     @dig_pattern_pattern.setter
     def dig_pattern_pattern(self, val):
         cfunc = lib_importer.windll.DAQmxSetDigPatternPauseTrigPattern
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, val)
@@ -1226,8 +1498,11 @@ class PauseTrigger(object):
     @dig_pattern_pattern.deleter
     def dig_pattern_pattern(self):
         cfunc = lib_importer.windll.DAQmxResetDigPatternPauseTrigPattern
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -1243,8 +1518,12 @@ class PauseTrigger(object):
             port are in ascending order.
         """
         cfunc = lib_importer.windll.DAQmxGetDigPatternPauseTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1270,8 +1549,11 @@ class PauseTrigger(object):
     def dig_pattern_src(self, val):
         val = val.name
         cfunc = lib_importer.windll.DAQmxSetDigPatternPauseTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, val)
@@ -1280,8 +1562,11 @@ class PauseTrigger(object):
     @dig_pattern_src.deleter
     def dig_pattern_src(self):
         cfunc = lib_importer.windll.DAQmxResetDigPatternPauseTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -1298,8 +1583,11 @@ class PauseTrigger(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDigPatternPauseTrigWhen
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1311,8 +1599,11 @@ class PauseTrigger(object):
     def dig_pattern_when(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetDigPatternPauseTrigWhen
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -1321,8 +1612,11 @@ class PauseTrigger(object):
     @dig_pattern_when.deleter
     def dig_pattern_when(self):
         cfunc = lib_importer.windll.DAQmxResetDigPatternPauseTrigWhen
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -1336,8 +1630,12 @@ class PauseTrigger(object):
             trigger source terminal.
         """
         cfunc = lib_importer.windll.DAQmxGetPauseTrigTerm
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1368,8 +1666,11 @@ class PauseTrigger(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetPauseTrigType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1381,8 +1682,11 @@ class PauseTrigger(object):
     def trig_type(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetPauseTrigType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -1391,8 +1695,11 @@ class PauseTrigger(object):
     @trig_type.deleter
     def trig_type(self):
         cfunc = lib_importer.windll.DAQmxResetPauseTrigType
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)

@@ -41,9 +41,12 @@ class ExpirationState(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetWatchdogAOExpirState
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, self._physical_channel, ctypes.byref(val))
@@ -54,8 +57,12 @@ class ExpirationState(object):
     @expir_states_ao_state.setter
     def expir_states_ao_state(self, val):
         cfunc = lib_importer.windll.DAQmxSetWatchdogAOExpirState
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
 
         error_code = cfunc(
             self._handle, self._physical_channel, val)
@@ -64,8 +71,11 @@ class ExpirationState(object):
     @expir_states_ao_state.deleter
     def expir_states_ao_state(self):
         cfunc = lib_importer.windll.DAQmxResetWatchdogAOExpirState
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._physical_channel)
@@ -81,9 +91,12 @@ class ExpirationState(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetWatchdogAOOutputType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._physical_channel, ctypes.byref(val))
@@ -95,8 +108,12 @@ class ExpirationState(object):
     def expir_states_ao_type(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetWatchdogAOOutputType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._physical_channel, val)
@@ -105,8 +122,11 @@ class ExpirationState(object):
     @expir_states_ao_type.deleter
     def expir_states_ao_type(self):
         cfunc = lib_importer.windll.DAQmxResetWatchdogAOOutputType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._physical_channel)
@@ -122,9 +142,12 @@ class ExpirationState(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetWatchdogCOExpirState
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._physical_channel, ctypes.byref(val))
@@ -136,8 +159,12 @@ class ExpirationState(object):
     def expir_states_co_state(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetWatchdogCOExpirState
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._physical_channel, val)
@@ -146,8 +173,11 @@ class ExpirationState(object):
     @expir_states_co_state.deleter
     def expir_states_co_state(self):
         cfunc = lib_importer.windll.DAQmxResetWatchdogCOExpirState
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._physical_channel)
@@ -164,9 +194,12 @@ class ExpirationState(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetWatchdogDOExpirState
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str,
-            ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, self._physical_channel, ctypes.byref(val))
@@ -178,8 +211,12 @@ class ExpirationState(object):
     def expir_states_do_state(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetWatchdogDOExpirState
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             self._handle, self._physical_channel, val)
@@ -188,8 +225,11 @@ class ExpirationState(object):
     @expir_states_do_state.deleter
     def expir_states_do_state(self):
         cfunc = lib_importer.windll.DAQmxResetWatchdogDOExpirState
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, self._physical_channel)

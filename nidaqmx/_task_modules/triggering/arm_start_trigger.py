@@ -30,8 +30,12 @@ class ArmStartTrigger(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetDigEdgeArmStartTrigDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -42,8 +46,11 @@ class ArmStartTrigger(object):
     @dig_edge_dig_fltr_enable.setter
     def dig_edge_dig_fltr_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetDigEdgeArmStartTrigDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, val)
@@ -52,8 +59,11 @@ class ArmStartTrigger(object):
     @dig_edge_dig_fltr_enable.deleter
     def dig_edge_dig_fltr_enable(self):
         cfunc = lib_importer.windll.DAQmxResetDigEdgeArmStartTrigDigFltrEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -69,8 +79,12 @@ class ArmStartTrigger(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetDigEdgeArmStartTrigDigFltrMinPulseWidth)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -82,8 +96,11 @@ class ArmStartTrigger(object):
     def dig_edge_dig_fltr_min_pulse_width(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetDigEdgeArmStartTrigDigFltrMinPulseWidth)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, val)
@@ -93,8 +110,11 @@ class ArmStartTrigger(object):
     def dig_edge_dig_fltr_min_pulse_width(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetDigEdgeArmStartTrigDigFltrMinPulseWidth)
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -111,8 +131,12 @@ class ArmStartTrigger(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetDigEdgeArmStartTrigDigFltrTimebaseRate)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -124,8 +148,11 @@ class ArmStartTrigger(object):
     def dig_edge_dig_fltr_timebase_rate(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetDigEdgeArmStartTrigDigFltrTimebaseRate)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, val)
@@ -135,8 +162,11 @@ class ArmStartTrigger(object):
     def dig_edge_dig_fltr_timebase_rate(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetDigEdgeArmStartTrigDigFltrTimebaseRate)
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -150,8 +180,12 @@ class ArmStartTrigger(object):
         """
         cfunc = (lib_importer.windll.
                  DAQmxGetDigEdgeArmStartTrigDigFltrTimebaseSrc)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -177,8 +211,11 @@ class ArmStartTrigger(object):
     def dig_edge_dig_fltr_timebase_src(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetDigEdgeArmStartTrigDigFltrTimebaseSrc)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, val)
@@ -188,8 +225,11 @@ class ArmStartTrigger(object):
     def dig_edge_dig_fltr_timebase_src(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetDigEdgeArmStartTrigDigFltrTimebaseSrc)
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -205,8 +245,12 @@ class ArmStartTrigger(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetDigEdgeArmStartTrigDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -217,8 +261,11 @@ class ArmStartTrigger(object):
     @dig_edge_dig_sync_enable.setter
     def dig_edge_dig_sync_enable(self, val):
         cfunc = lib_importer.windll.DAQmxSetDigEdgeArmStartTrigDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, val)
@@ -227,8 +274,11 @@ class ArmStartTrigger(object):
     @dig_edge_dig_sync_enable.deleter
     def dig_edge_dig_sync_enable(self):
         cfunc = lib_importer.windll.DAQmxResetDigEdgeArmStartTrigDigSyncEnable
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -243,8 +293,11 @@ class ArmStartTrigger(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetDigEdgeArmStartTrigEdge
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -256,8 +309,11 @@ class ArmStartTrigger(object):
     def dig_edge_edge(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetDigEdgeArmStartTrigEdge
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -266,8 +322,11 @@ class ArmStartTrigger(object):
     @dig_edge_edge.deleter
     def dig_edge_edge(self):
         cfunc = lib_importer.windll.DAQmxResetDigEdgeArmStartTrigEdge
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -280,8 +339,12 @@ class ArmStartTrigger(object):
             signal to use as the source of the Arm Start Trigger.
         """
         cfunc = lib_importer.windll.DAQmxGetDigEdgeArmStartTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -306,8 +369,11 @@ class ArmStartTrigger(object):
     @dig_edge_src.setter
     def dig_edge_src(self, val):
         cfunc = lib_importer.windll.DAQmxSetDigEdgeArmStartTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, val)
@@ -316,8 +382,11 @@ class ArmStartTrigger(object):
     @dig_edge_src.deleter
     def dig_edge_src(self):
         cfunc = lib_importer.windll.DAQmxResetDigEdgeArmStartTrigSrc
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -331,8 +400,12 @@ class ArmStartTrigger(object):
             name of the trigger source terminal.
         """
         cfunc = lib_importer.windll.DAQmxGetArmStartTerm
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -366,8 +439,11 @@ class ArmStartTrigger(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetArmStartTrigType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -379,8 +455,11 @@ class ArmStartTrigger(object):
     def trig_type(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetArmStartTrigType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -389,8 +468,11 @@ class ArmStartTrigger(object):
     @trig_type.deleter
     def trig_type(self):
         cfunc = lib_importer.windll.DAQmxResetArmStartTrigType
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)

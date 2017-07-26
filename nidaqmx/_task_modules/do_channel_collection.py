@@ -91,9 +91,12 @@ class DOChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         cfunc = lib_importer.windll.DAQmxCreateDOChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-            ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, lines, name_to_assign_to_lines, line_grouping.value)

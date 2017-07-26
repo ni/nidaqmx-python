@@ -85,8 +85,11 @@ class Triggers(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetTriggerSyncType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -98,8 +101,11 @@ class Triggers(object):
     def sync_type(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetTriggerSyncType
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -108,8 +114,11 @@ class Triggers(object):
     @sync_type.deleter
     def sync_type(self):
         cfunc = lib_importer.windll.DAQmxResetTriggerSyncType
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)

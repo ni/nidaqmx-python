@@ -55,8 +55,11 @@ class Scale(object):
         str: Specifies a description for the scale.
         """
         cfunc = lib_importer.windll.DAQmxGetScaleDescr
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -81,8 +84,11 @@ class Scale(object):
     @description.setter
     def description(self, val):
         cfunc = lib_importer.windll.DAQmxSetScaleDescr
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes_byte_str]
 
         error_code = cfunc(
             self._name, val)
@@ -96,8 +102,11 @@ class Scale(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetScaleLinSlope
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -108,8 +117,11 @@ class Scale(object):
     @lin_slope.setter
     def lin_slope(self, val):
         cfunc = lib_importer.windll.DAQmxSetScaleLinSlope
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_double]
 
         error_code = cfunc(
             self._name, val)
@@ -123,8 +135,11 @@ class Scale(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetScaleLinYIntercept
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -135,8 +150,11 @@ class Scale(object):
     @lin_y_intercept.setter
     def lin_y_intercept(self, val):
         cfunc = lib_importer.windll.DAQmxSetScaleLinYIntercept
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_double]
 
         error_code = cfunc(
             self._name, val)
@@ -151,8 +169,11 @@ class Scale(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetScaleMapPreScaledMax
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -163,8 +184,11 @@ class Scale(object):
     @map_pre_scaled_max.setter
     def map_pre_scaled_max(self, val):
         cfunc = lib_importer.windll.DAQmxSetScaleMapPreScaledMax
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_double]
 
         error_code = cfunc(
             self._name, val)
@@ -179,8 +203,11 @@ class Scale(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetScaleMapPreScaledMin
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -191,8 +218,11 @@ class Scale(object):
     @map_pre_scaled_min.setter
     def map_pre_scaled_min(self, val):
         cfunc = lib_importer.windll.DAQmxSetScaleMapPreScaledMin
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_double]
 
         error_code = cfunc(
             self._name, val)
@@ -210,8 +240,11 @@ class Scale(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetScaleMapScaledMax
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -222,8 +255,11 @@ class Scale(object):
     @map_scaled_max.setter
     def map_scaled_max(self, val):
         cfunc = lib_importer.windll.DAQmxSetScaleMapScaledMax
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_double]
 
         error_code = cfunc(
             self._name, val)
@@ -241,8 +277,11 @@ class Scale(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetScaleMapScaledMin
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -253,8 +292,11 @@ class Scale(object):
     @map_scaled_min.setter
     def map_scaled_min(self, val):
         cfunc = lib_importer.windll.DAQmxSetScaleMapScaledMin
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_double]
 
         error_code = cfunc(
             self._name, val)
@@ -270,9 +312,13 @@ class Scale(object):
             term of the equation is 9x^3.
         """
         cfunc = lib_importer.windll.DAQmxGetScalePolyForwardCoeff
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -298,9 +344,13 @@ class Scale(object):
     def poly_forward_coeff(self, val):
         val = numpy.float64(val)
         cfunc = lib_importer.windll.DAQmxSetScalePolyForwardCoeff
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         error_code = cfunc(
             self._name, val, len(val))
@@ -316,9 +366,13 @@ class Scale(object):
             term of the equation is 9y^3.
         """
         cfunc = lib_importer.windll.DAQmxGetScalePolyReverseCoeff
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -344,9 +398,13 @@ class Scale(object):
     def poly_reverse_coeff(self, val):
         val = numpy.float64(val)
         cfunc = lib_importer.windll.DAQmxSetScalePolyReverseCoeff
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         error_code = cfunc(
             self._name, val, len(val))
@@ -361,8 +419,11 @@ class Scale(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetScalePreScaledUnits
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -374,8 +435,11 @@ class Scale(object):
     def pre_scaled_units(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetScalePreScaledUnits
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_int]
 
         error_code = cfunc(
             self._name, val)
@@ -390,8 +454,11 @@ class Scale(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetScaleType
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -406,8 +473,11 @@ class Scale(object):
             an arbitrary string.
         """
         cfunc = lib_importer.windll.DAQmxGetScaleScaledUnits
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -432,8 +502,11 @@ class Scale(object):
     @scaled_units.setter
     def scaled_units(self, val):
         cfunc = lib_importer.windll.DAQmxSetScaleScaledUnits
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes_byte_str]
 
         error_code = cfunc(
             self._name, val)
@@ -446,9 +519,13 @@ class Scale(object):
             map directly to the values in **table_scaled_vals**.
         """
         cfunc = lib_importer.windll.DAQmxGetScaleTablePreScaledVals
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -474,9 +551,13 @@ class Scale(object):
     def table_pre_scaled_vals(self, val):
         val = numpy.float64(val)
         cfunc = lib_importer.windll.DAQmxSetScaleTablePreScaledVals
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         error_code = cfunc(
             self._name, val, len(val))
@@ -489,9 +570,13 @@ class Scale(object):
             directly to the values in **table_pre_scaled_vals**.
         """
         cfunc = lib_importer.windll.DAQmxGetScaleTableScaledVals
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -517,9 +602,13 @@ class Scale(object):
     def table_scaled_vals(self, val):
         val = numpy.float64(val)
         cfunc = lib_importer.windll.DAQmxSetScaleTableScaledVals
-        cfunc.argtypes = [
-            ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-            flags=('C','W')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
 
         error_code = cfunc(
             self._name, val, len(val))
@@ -578,11 +667,16 @@ class Scale(object):
         reverse_coeffs = numpy.zeros(size, dtype=numpy.float64)
 
         cfunc = lib_importer.windll.DAQmxCalculateReversePolyCoeff
-        cfunc.argtypes = [
-            numpy.ctypeslib.ndpointer(dtype=numpy.float64, flags=('C', 'W')),
-            ctypes.c_uint, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes.c_int,
-            numpy.ctypeslib.ndpointer(dtype=numpy.float64, flags=('C', 'W'))]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        numpy.ctypeslib.ndpointer(
+                            dtype=numpy.float64, flags=('C', 'W')),
+                        ctypes.c_uint, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int,
+                        numpy.ctypeslib.ndpointer(
+                            dtype=numpy.float64, flags=('C', 'W'))]
 
         error_code = cfunc(
             forward_coeffs, len(forward_coeffs), min_val_x, max_val_x,
@@ -619,9 +713,12 @@ class Scale(object):
         scale = Scale(scale_name)
 
         cfunc = lib_importer.windll.DAQmxCreateLinScale
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_double, ctypes.c_double, ctypes.c_int,
-            ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             scale_name, slope, y_intercept, pre_scaled_units.value,
@@ -669,9 +766,13 @@ class Scale(object):
         scale = Scale(scale_name)
 
         cfunc = lib_importer.windll.DAQmxCreateMapScale
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-            ctypes.c_double, ctypes.c_double, ctypes.c_int, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             scale_name, prescaled_min, prescaled_max, scaled_min, scaled_max,
@@ -724,12 +825,17 @@ class Scale(object):
         reverse_coeffs = numpy.float64(reverse_coeffs)
 
         cfunc = lib_importer.windll.DAQmxCreatePolynomialScale
-        cfunc.argtypes = [
-            ctypes_byte_str,
-            wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
-            ctypes.c_uint,
-            wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
-            ctypes.c_uint, ctypes.c_int, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                                          flags=('C', 'W')),
+                        ctypes.c_uint,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                                          flags=('C', 'W')),
+                        ctypes.c_uint, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             scale_name, forward_coeffs, len(forward_coeffs), reverse_coeffs,
@@ -779,12 +885,17 @@ class Scale(object):
         scaled_vals = numpy.float64(scaled_vals)
 
         cfunc = lib_importer.windll.DAQmxCreateTableScale
-        cfunc.argtypes = [
-            ctypes_byte_str,
-            wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
-            ctypes.c_uint,
-            wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
-            ctypes.c_uint, ctypes.c_int, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                                          flags=('C', 'W')),
+                        ctypes.c_uint,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                                          flags=('C', 'W')),
+                        ctypes.c_uint, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             scale_name, prescaled_vals, len(prescaled_vals), scaled_vals,
@@ -832,8 +943,12 @@ class Scale(object):
             options |= _Save.ALLOW_INTERACTIVE_DELETION.value
 
         cfunc = lib_importer.windll.DAQmxSaveScale
-        cfunc.argtypes = [
-            ctypes_byte_str, ctypes_byte_str, ctypes_byte_str, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_uint]
 
         error_code = cfunc(
             self._name, save_as, author, options)

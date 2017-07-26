@@ -82,8 +82,12 @@ class InStream(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetReadAccessoryInsertionOrRemovalDetected)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -103,8 +107,12 @@ class InStream(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetReadAutoStart
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -115,8 +123,11 @@ class InStream(object):
     @auto_start.setter
     def auto_start(self, val):
         cfunc = lib_importer.windll.DAQmxSetReadAutoStart
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, val)
@@ -125,8 +136,11 @@ class InStream(object):
     @auto_start.deleter
     def auto_start(self):
         cfunc = lib_importer.windll.DAQmxResetReadAutoStart
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -142,8 +156,12 @@ class InStream(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetReadAvailSampPerChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -161,8 +179,12 @@ class InStream(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetReadChangeDetectHasOverflowed
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -178,8 +200,12 @@ class InStream(object):
             read.
         """
         cfunc = lib_importer.windll.DAQmxGetReadChannelsToRead
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -205,8 +231,11 @@ class InStream(object):
     def channels_to_read(self, val):
         val = val.name
         cfunc = lib_importer.windll.DAQmxSetReadChannelsToRead
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, val)
@@ -215,8 +244,11 @@ class InStream(object):
     @channels_to_read.deleter
     def channels_to_read(self):
         cfunc = lib_importer.windll.DAQmxResetReadChannelsToRead
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -232,8 +264,12 @@ class InStream(object):
             property. Otherwise, you will receive an error.
         """
         cfunc = lib_importer.windll.DAQmxGetReadCommonModeRangeErrorChans
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 2048
         val = ctypes.create_string_buffer(temp_size)
@@ -261,8 +297,12 @@ class InStream(object):
 
         cfunc = (lib_importer.windll.
                  DAQmxGetReadCommonModeRangeErrorChansExist)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -279,8 +319,12 @@ class InStream(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetReadCurrReadPos
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -299,8 +343,12 @@ class InStream(object):
         """
         cfunc = (lib_importer.windll.
                  DAQmxGetReadDevsWithInsertedOrRemovedAccessories)
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -332,8 +380,12 @@ class InStream(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetReadDigitalLinesBytesPerChan
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -351,8 +403,12 @@ class InStream(object):
             an error.
         """
         cfunc = lib_importer.windll.DAQmxGetReadExcitFaultChans
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -386,8 +442,12 @@ class InStream(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetReadExcitFaultChansExist
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -408,8 +468,12 @@ class InStream(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetBufInputBufSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -420,8 +484,11 @@ class InStream(object):
     @input_buf_size.setter
     def input_buf_size(self, val):
         cfunc = lib_importer.windll.DAQmxSetBufInputBufSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, val)
@@ -430,8 +497,11 @@ class InStream(object):
     @input_buf_size.deleter
     def input_buf_size(self):
         cfunc = lib_importer.windll.DAQmxResetBufInputBufSize
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -446,8 +516,12 @@ class InStream(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetBufInputOnbrdBufSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -467,8 +541,12 @@ class InStream(object):
             path retain the same name and numbering sequence.
         """
         cfunc = lib_importer.windll.DAQmxGetLoggingFilePath
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -493,8 +571,11 @@ class InStream(object):
     @logging_file_path.setter
     def logging_file_path(self, val):
         cfunc = lib_importer.windll.DAQmxSetLoggingFilePath
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, val)
@@ -503,8 +584,11 @@ class InStream(object):
     @logging_file_path.deleter
     def logging_file_path(self):
         cfunc = lib_importer.windll.DAQmxResetLoggingFilePath
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -523,8 +607,12 @@ class InStream(object):
         val = ctypes.c_ulonglong()
 
         cfunc = lib_importer.windll.DAQmxGetLoggingFilePreallocationSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_ulonglong)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_ulonglong)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -535,8 +623,11 @@ class InStream(object):
     @logging_file_preallocation_size.setter
     def logging_file_preallocation_size(self, val):
         cfunc = lib_importer.windll.DAQmxSetLoggingFilePreallocationSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_ulonglong]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_ulonglong]
 
         error_code = cfunc(
             self._handle, val)
@@ -545,8 +636,11 @@ class InStream(object):
     @logging_file_preallocation_size.deleter
     def logging_file_preallocation_size(self):
         cfunc = lib_importer.windll.DAQmxResetLoggingFilePreallocationSize
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -562,8 +656,12 @@ class InStream(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetLoggingFileWriteSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -574,8 +672,11 @@ class InStream(object):
     @logging_file_write_size.setter
     def logging_file_write_size(self, val):
         cfunc = lib_importer.windll.DAQmxSetLoggingFileWriteSize
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_uint]
 
         error_code = cfunc(
             self._handle, val)
@@ -584,8 +685,11 @@ class InStream(object):
     @logging_file_write_size.deleter
     def logging_file_write_size(self):
         cfunc = lib_importer.windll.DAQmxResetLoggingFileWriteSize
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -604,8 +708,11 @@ class InStream(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetLoggingMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -617,8 +724,11 @@ class InStream(object):
     def logging_mode(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetLoggingMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -627,8 +737,11 @@ class InStream(object):
     @logging_mode.deleter
     def logging_mode(self):
         cfunc = lib_importer.windll.DAQmxResetLoggingMode
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -649,8 +762,12 @@ class InStream(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetLoggingPause
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -661,8 +778,11 @@ class InStream(object):
     @logging_pause.setter
     def logging_pause(self, val):
         cfunc = lib_importer.windll.DAQmxSetLoggingPause
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, val)
@@ -671,8 +791,11 @@ class InStream(object):
     @logging_pause.deleter
     def logging_pause(self):
         cfunc = lib_importer.windll.DAQmxResetLoggingPause
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -695,8 +818,12 @@ class InStream(object):
         val = ctypes.c_ulonglong()
 
         cfunc = lib_importer.windll.DAQmxGetLoggingSampsPerFile
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_ulonglong)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_ulonglong)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -707,8 +834,11 @@ class InStream(object):
     @logging_samps_per_file.setter
     def logging_samps_per_file(self, val):
         cfunc = lib_importer.windll.DAQmxSetLoggingSampsPerFile
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_ulonglong]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_ulonglong]
 
         error_code = cfunc(
             self._handle, val)
@@ -717,8 +847,11 @@ class InStream(object):
     @logging_samps_per_file.deleter
     def logging_samps_per_file(self):
         cfunc = lib_importer.windll.DAQmxResetLoggingSampsPerFile
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -738,8 +871,12 @@ class InStream(object):
             Task #2.
         """
         cfunc = lib_importer.windll.DAQmxGetLoggingTDMSGroupName
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -764,8 +901,11 @@ class InStream(object):
     @logging_tdms_group_name.setter
     def logging_tdms_group_name(self, val):
         cfunc = lib_importer.windll.DAQmxSetLoggingTDMSGroupName
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, val)
@@ -774,8 +914,11 @@ class InStream(object):
     @logging_tdms_group_name.deleter
     def logging_tdms_group_name(self):
         cfunc = lib_importer.windll.DAQmxResetLoggingTDMSGroupName
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -790,8 +933,11 @@ class InStream(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetLoggingTDMSOperation
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -803,8 +949,11 @@ class InStream(object):
     def logging_tdms_operation(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetLoggingTDMSOperation
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -813,8 +962,11 @@ class InStream(object):
     @logging_tdms_operation.deleter
     def logging_tdms_operation(self):
         cfunc = lib_importer.windll.DAQmxResetLoggingTDMSOperation
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -831,8 +983,12 @@ class InStream(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetReadNumChans
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -850,8 +1006,11 @@ class InStream(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetReadOffset
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -862,8 +1021,11 @@ class InStream(object):
     @offset.setter
     def offset(self, val):
         cfunc = lib_importer.windll.DAQmxSetReadOffset
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -872,8 +1034,11 @@ class InStream(object):
     @offset.deleter
     def offset(self):
         cfunc = lib_importer.windll.DAQmxResetReadOffset
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -887,8 +1052,12 @@ class InStream(object):
             this property. Otherwise you will receive an error.
         """
         cfunc = lib_importer.windll.DAQmxGetReadOpenChans
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -918,8 +1087,12 @@ class InStream(object):
             this property. Otherwise you will receive an error.
         """
         cfunc = lib_importer.windll.DAQmxGetReadOpenChansDetails
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -954,8 +1127,12 @@ class InStream(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetReadOpenChansExist
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -973,8 +1150,12 @@ class InStream(object):
             error.
         """
         cfunc = lib_importer.windll.DAQmxGetReadOpenCurrentLoopChans
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1009,8 +1190,12 @@ class InStream(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetReadOpenCurrentLoopChansExist
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1028,8 +1213,12 @@ class InStream(object):
             an error.
         """
         cfunc = lib_importer.windll.DAQmxGetReadOpenThrmcplChans
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1064,8 +1253,12 @@ class InStream(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetReadOpenThrmcplChansExist
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1082,8 +1275,11 @@ class InStream(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetReadOverWrite
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1095,8 +1291,11 @@ class InStream(object):
     def over_write(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetReadOverWrite
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -1105,8 +1304,11 @@ class InStream(object):
     @over_write.deleter
     def over_write(self):
         cfunc = lib_importer.windll.DAQmxResetReadOverWrite
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -1123,8 +1325,12 @@ class InStream(object):
             overcurrent channels to recover.
         """
         cfunc = lib_importer.windll.DAQmxGetReadOvercurrentChans
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1158,8 +1364,12 @@ class InStream(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetReadOvercurrentChansExist
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1176,8 +1386,12 @@ class InStream(object):
             Otherwise, you will receive an error.
         """
         cfunc = lib_importer.windll.DAQmxGetReadOverloadedChans
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1211,8 +1425,12 @@ class InStream(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetReadOverloadedChansExist
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1229,8 +1447,12 @@ class InStream(object):
             property. Otherwise, you will receive an error.
         """
         cfunc = lib_importer.windll.DAQmxGetReadOvertemperatureChans
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -1265,8 +1487,12 @@ class InStream(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetReadOvertemperatureChansExist
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1282,8 +1508,12 @@ class InStream(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetReadRawDataWidth
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1305,8 +1535,12 @@ class InStream(object):
         val = ctypes.c_bool()
 
         cfunc = lib_importer.windll.DAQmxGetReadReadAllAvailSamp
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_bool)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_bool)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1317,8 +1551,11 @@ class InStream(object):
     @read_all_avail_samp.setter
     def read_all_avail_samp(self, val):
         cfunc = lib_importer.windll.DAQmxSetReadReadAllAvailSamp
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_bool]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_bool]
 
         error_code = cfunc(
             self._handle, val)
@@ -1327,8 +1564,11 @@ class InStream(object):
     @read_all_avail_samp.deleter
     def read_all_avail_samp(self):
         cfunc = lib_importer.windll.DAQmxResetReadReadAllAvailSamp
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -1350,8 +1590,11 @@ class InStream(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetReadRelativeTo
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1363,8 +1606,11 @@ class InStream(object):
     def relative_to(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetReadRelativeTo
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -1373,8 +1619,11 @@ class InStream(object):
     @relative_to.deleter
     def relative_to(self):
         cfunc = lib_importer.windll.DAQmxResetReadRelativeTo
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -1390,8 +1639,12 @@ class InStream(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetReadSleepTime
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1402,8 +1655,11 @@ class InStream(object):
     @sleep_time.setter
     def sleep_time(self, val):
         cfunc = lib_importer.windll.DAQmxSetReadSleepTime
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_double]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_double]
 
         error_code = cfunc(
             self._handle, val)
@@ -1412,8 +1668,11 @@ class InStream(object):
     @sleep_time.deleter
     def sleep_time(self):
         cfunc = lib_importer.windll.DAQmxResetReadSleepTime
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -1431,8 +1690,12 @@ class InStream(object):
         val = ctypes.c_double()
 
         cfunc = lib_importer.windll.DAQmxGetReadTotalSampPerChanAcquired
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_double)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle,
+                        ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1449,8 +1712,11 @@ class InStream(object):
         val = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxGetReadWaitMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1462,8 +1728,11 @@ class InStream(object):
     def wait_mode(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetReadWaitMode
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, val)
@@ -1472,8 +1741,11 @@ class InStream(object):
     @wait_mode.deleter
     def wait_mode(self):
         cfunc = lib_importer.windll.DAQmxResetReadWaitMode
-        cfunc.argtypes = [
-            lib_importer.task_handle]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
 
         error_code = cfunc(
             self._handle)
@@ -1521,9 +1793,12 @@ class InStream(object):
                 Specifies how to open the TDMS file.
         """
         cfunc = lib_importer.windll.DAQmxConfigureLogging
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str, ctypes.c_int,
-            ctypes_byte_str, ctypes.c_int]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int, ctypes_byte_str, ctypes.c_int]
 
         error_code = cfunc(
             self._handle, file_path, logging_mode.value, group_name,
@@ -1740,8 +2015,11 @@ class InStream(object):
                 which you want to log data.
         """
         cfunc = lib_importer.windll.DAQmxStartNewFile
-        cfunc.argtypes = [
-            lib_importer.task_handle, ctypes_byte_str]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
             self._handle, file_path)

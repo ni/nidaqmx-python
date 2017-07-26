@@ -118,7 +118,10 @@ def check_for_error(error_code):
         error_buffer = ctypes.create_string_buffer(2048)
 
         cfunc = lib_importer.windll.DAQmxGetExtendedErrorInfo
-        cfunc.argtypes = [ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [ctypes.c_char_p, ctypes.c_uint]
         cfunc(error_buffer, 2048)
 
         raise DaqError(error_buffer.value.decode("utf-8"), error_code)
@@ -127,7 +130,11 @@ def check_for_error(error_code):
         error_buffer = ctypes.create_string_buffer(2048)
 
         cfunc = lib_importer.windll.DAQmxGetErrorString
-        cfunc.argtypes = [ctypes.c_int, ctypes.c_char_p, ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [ctypes.c_int, ctypes.c_char_p,
+                                      ctypes.c_uint]
         cfunc(error_code, error_buffer, 2048)
 
         warnings.warn(DaqWarning(
