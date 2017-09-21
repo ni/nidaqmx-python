@@ -2235,7 +2235,7 @@ class Timing(object):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_double)]
+                        ctypes.POINTER(ctypes.c_ulonglong)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
