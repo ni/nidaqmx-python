@@ -313,10 +313,10 @@ class InStream(object):
     @property
     def curr_read_pos(self):
         """
-        float: Indicates in samples per channel the current position in
+        long: Indicates in samples per channel the current position in
             the buffer.
         """
-        val = ctypes.c_double()
+        val = ctypes.c_ulonglong()
 
         cfunc = lib_importer.windll.DAQmxGetReadCurrReadPos
         if cfunc.argtypes is None:
@@ -324,7 +324,7 @@ class InStream(object):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_double)]
+                        ctypes.POINTER(ctypes.c_ulonglong)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1681,13 +1681,13 @@ class InStream(object):
     @property
     def total_samp_per_chan_acquired(self):
         """
-        float: Indicates the total number of samples acquired by each
+        long: Indicates the total number of samples acquired by each
             channel. NI-DAQmx returns a single value because this value
             is the same for all channels. For retriggered acquisitions,
             this value is the cumulative number of samples across all
             retriggered acquisitions.
         """
-        val = ctypes.c_double()
+        val = ctypes.c_ulonglong()
 
         cfunc = lib_importer.windll.DAQmxGetReadTotalSampPerChanAcquired
         if cfunc.argtypes is None:
@@ -1695,7 +1695,7 @@ class InStream(object):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_double)]
+                        ctypes.POINTER(ctypes.c_ulonglong)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))

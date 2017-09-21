@@ -196,6 +196,12 @@ class DaqLibImporter(object):
 
         if sys.platform.startswith('win') or sys.platform.startswith('cli'):
             lib_name = "nicaiu"
+
+            # Converting to ASCII to workaround issue in Python 2.7.13:
+            # https://bugs.python.org/issue29082
+            if sys.version_info < (3,):
+                lib_name = lib_name.encode('ascii')
+
             if 'iron' in platform.python_implementation().lower():
                 windll = ctypes.windll.nicaiu
                 cdll = ctypes.cdll.nicaiu

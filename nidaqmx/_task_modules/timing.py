@@ -2221,13 +2221,13 @@ class Timing(object):
     @property
     def samp_quant_samp_per_chan(self):
         """
-        float: Specifies the number of samples to acquire or generate
-            for each channel if **samp_quant_samp_mode** is
+        long: Specifies the number of samples to acquire or generate for
+            each channel if **samp_quant_samp_mode** is
             **AcquisitionType.FINITE**. If **samp_quant_samp_mode** is
             **AcquisitionType.CONTINUOUS**, NI-DAQmx uses this value to
             determine the buffer size.
         """
-        val = ctypes.c_double()
+        val = ctypes.c_ulonglong()
 
         cfunc = lib_importer.windll.DAQmxGetSampQuantSampPerChan
         if cfunc.argtypes is None:
@@ -2250,7 +2250,7 @@ class Timing(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_double]
+                        lib_importer.task_handle, ctypes.c_ulonglong]
 
         error_code = cfunc(
             self._handle, val)
