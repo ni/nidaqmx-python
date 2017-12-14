@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 import ctypes
 import numpy
 
-from nidaqmx._lib import lib_importer, ctypes_byte_str
+from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
 from nidaqmx._task_modules.channels.channel import Channel
@@ -184,7 +184,7 @@ class DIChannel(Channel):
             line basis. You do not have to enable the filter for all
             lines in a channel.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetDIDigFltrEnable
         if cfunc.argtypes is None:
@@ -192,7 +192,7 @@ class DIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -207,8 +207,7 @@ class DIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -239,7 +238,7 @@ class DIChannel(Channel):
             False, NI-DAQmx filters all lines individually. Jitter in
             one line does not affect other lines.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetDIDigFltrEnableBusMode
         if cfunc.argtypes is None:
@@ -247,7 +246,7 @@ class DIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -262,8 +261,7 @@ class DIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -449,7 +447,7 @@ class DIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetDIDigSyncEnable
         if cfunc.argtypes is None:
@@ -457,7 +455,7 @@ class DIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -472,8 +470,7 @@ class DIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -499,7 +496,7 @@ class DIChannel(Channel):
             you set this property to True, the lines are at high logic
             when off and at low logic when on.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetDIInvertLines
         if cfunc.argtypes is None:
@@ -507,7 +504,7 @@ class DIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -522,8 +519,7 @@ class DIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -608,7 +604,7 @@ class DIChannel(Channel):
             registers, it can adversely affect the operation of the
             device and possibly result in a system crash.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetDIMemMapEnable
         if cfunc.argtypes is None:
@@ -616,7 +612,7 @@ class DIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -631,8 +627,7 @@ class DIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -682,7 +677,7 @@ class DIChannel(Channel):
             lines were previously tristated. Set this property to False
             to read lines in other tasks or to read output-only lines.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetDITristate
         if cfunc.argtypes is None:
@@ -690,7 +685,7 @@ class DIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -705,8 +700,7 @@ class DIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)

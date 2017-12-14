@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 import ctypes
 import numpy
 
-from nidaqmx._lib import lib_importer, ctypes_byte_str
+from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
 from nidaqmx.constants import (
@@ -1287,7 +1287,7 @@ class ExportSignals(object):
             starts if **hshk_event_output_behavior** is
             **ExportActions5.INTERLOCKED**.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = (lib_importer.windll.
                  DAQmxGetExportedHshkEventInterlockedAssertOnStart)
@@ -1295,8 +1295,7 @@ class ExportSignals(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1312,7 +1311,7 @@ class ExportSignals(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)

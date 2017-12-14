@@ -6,7 +6,8 @@ from __future__ import unicode_literals
 import ctypes
 import numpy
 
-from nidaqmx._lib import lib_importer, wrapped_ndpointer, ctypes_byte_str
+from nidaqmx._lib import (
+    lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
 from nidaqmx.scale import Scale
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
@@ -311,7 +312,7 @@ class AOChannel(Channel):
             and set **ao_dac_ref_src** to **SourceSelection.INTERNAL**
             before you can set **ao_dac_ref_conn_to_gnd** to True.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAODACRefAllowConnToGnd
         if cfunc.argtypes is None:
@@ -319,7 +320,7 @@ class AOChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -334,8 +335,7 @@ class AOChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -366,7 +366,7 @@ class AOChannel(Channel):
             **ao_dac_ref_src** is **SourceSelection.INTERNAL** and
             **ao_dac_ref_allow_conn_to_gnd** is True.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAODACRefConnToGnd
         if cfunc.argtypes is None:
@@ -374,7 +374,7 @@ class AOChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -389,8 +389,7 @@ class AOChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -822,7 +821,7 @@ class AOChannel(Channel):
             Disable the interpolation filter to improve DAC signal-to-
             noise ratio at the expense of degraded image rejection.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAOEnhancedImageRejectionEnable
         if cfunc.argtypes is None:
@@ -830,7 +829,7 @@ class AOChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -845,8 +844,7 @@ class AOChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1579,7 +1577,7 @@ class AOChannel(Channel):
             registers, it can adversely affect the operation of the
             device and possibly result in a system crash.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAOMemMapEnable
         if cfunc.argtypes is None:
@@ -1587,7 +1585,7 @@ class AOChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1602,8 +1600,7 @@ class AOChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1758,7 +1755,7 @@ class AOChannel(Channel):
             makes it easier to filter out the noise introduced from
             glitching during spectrum analysis.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAOReglitchEnable
         if cfunc.argtypes is None:
@@ -1766,7 +1763,7 @@ class AOChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1781,8 +1778,7 @@ class AOChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -2032,7 +2028,7 @@ class AOChannel(Channel):
             Generally, you cannot update onboard memory directly after
             you start the task. Onboard memory includes data FIFOs.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAOUseOnlyOnBrdMem
         if cfunc.argtypes is None:
@@ -2040,7 +2036,7 @@ class AOChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -2055,8 +2051,7 @@ class AOChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)

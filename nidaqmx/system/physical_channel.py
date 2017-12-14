@@ -7,7 +7,8 @@ import ctypes
 import numpy
 
 from nidaqmx._lib import (
-    lib_importer, wrapped_ndpointer, enum_bitfield_to_list, ctypes_byte_str)
+    lib_importer, wrapped_ndpointer, enum_bitfield_to_list, ctypes_byte_str,
+    c_bool32)
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
 from nidaqmx.utils import unflatten_channel_string
@@ -174,7 +175,7 @@ class PhysicalChannel(object):
             cannot simultaneously control a channel manually and with
             NI-DAQmx.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = (lib_importer.windll.
                  DAQmxGetPhysicalChanAOManualControlEnable)
@@ -182,7 +183,7 @@ class PhysicalChannel(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -198,7 +199,7 @@ class PhysicalChannel(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_bool]
+                        ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._name, val)
@@ -245,7 +246,7 @@ class PhysicalChannel(object):
         bool: Indicates whether the physical channel is currently
             disabled due to a short detected on the channel.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = (lib_importer.windll.
                  DAQmxGetPhysicalChanAOManualControlShortDetected)
@@ -253,7 +254,7 @@ class PhysicalChannel(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -303,14 +304,14 @@ class PhysicalChannel(object):
             amplification. This property can also be used to check if a
             channel is enabled.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAOPowerAmpChannelEnable
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -325,7 +326,7 @@ class PhysicalChannel(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_bool]
+                        ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._name, val)
@@ -390,14 +391,14 @@ class PhysicalChannel(object):
         bool: Indicates if the channel detected an overcurrent
             condition.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAOPowerAmpOvercurrent
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -574,7 +575,7 @@ class PhysicalChannel(object):
         bool: Indicates if the change detection timing type is supported
             for the digital input physical channel.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = (lib_importer.windll.
                  DAQmxGetPhysicalChanDIChangeDetectSupported)
@@ -582,7 +583,7 @@ class PhysicalChannel(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -616,14 +617,14 @@ class PhysicalChannel(object):
         bool: Indicates if the sample clock timing type is supported for
             the digital input physical channel.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanDISampClkSupported
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -692,14 +693,14 @@ class PhysicalChannel(object):
         bool: Indicates if the sample clock timing type is supported for
             the digital output physical channel.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetPhysicalChanDOSampClkSupported
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))

@@ -7,7 +7,7 @@ import ctypes
 import numpy
 
 import nidaqmx
-from nidaqmx._lib import lib_importer, ctypes_byte_str
+from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx.system.physical_channel import PhysicalChannel
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
@@ -99,8 +99,8 @@ class Channel(object):
             virtual_or_physical_name (str): Specifies the flattened virtual
                 or physical name of a channel.
         Returns:
-            nidaqmx._task_modules.channels.channel.Channel: 
-            
+            nidaqmx._task_modules.channels.channel.Channel:
+
             Indicates an object that represents the specified channel.
         """
         chan_type = ctypes.c_int()
@@ -279,7 +279,7 @@ class Channel(object):
         """
         bool: Indicates whether the channel is a global channel.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetChanIsGlobal
         if cfunc.argtypes is None:
@@ -287,7 +287,7 @@ class Channel(object):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))

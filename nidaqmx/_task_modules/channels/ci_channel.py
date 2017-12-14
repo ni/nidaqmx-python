@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 import ctypes
 import numpy
 
-from nidaqmx._lib import lib_importer, ctypes_byte_str
+from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx.scale import Scale
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
@@ -256,7 +256,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = (lib_importer.windll.
                  DAQmxGetCICountEdgesCountDirDigFltrEnable)
@@ -265,7 +265,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -281,8 +281,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -478,7 +477,7 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = (lib_importer.windll.
                  DAQmxGetCICountEdgesCountDirDigSyncEnable)
@@ -487,7 +486,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -503,8 +502,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -683,7 +681,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = (lib_importer.windll.
                  DAQmxGetCICountEdgesCountResetDigFltrEnable)
@@ -692,7 +690,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -708,8 +706,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -904,7 +901,7 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = (lib_importer.windll.
                  DAQmxGetCICountEdgesCountResetDigSyncEnable)
@@ -913,7 +910,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -929,8 +926,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -956,7 +952,7 @@ class CIChannel(Channel):
         bool: Specifies whether to reset the count on the active edge
             specified with **ci_count_edges_count_reset_term**.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCICountEdgesCountResetEnable
         if cfunc.argtypes is None:
@@ -964,7 +960,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -979,8 +975,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1217,7 +1212,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCICountEdgesDigFltrEnable
         if cfunc.argtypes is None:
@@ -1225,7 +1220,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1240,8 +1235,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1427,7 +1421,7 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCICountEdgesDigSyncEnable
         if cfunc.argtypes is None:
@@ -1435,7 +1429,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1450,8 +1444,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1588,7 +1581,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             gate input signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCICountEdgesGateDigFltrEnable
         if cfunc.argtypes is None:
@@ -1596,7 +1589,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1611,8 +1604,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1806,7 +1798,7 @@ class CIChannel(Channel):
         bool: Specifies whether to enable the functionality to gate the
             counter input signal for a count edges measurement.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCICountEdgesGateEnable
         if cfunc.argtypes is None:
@@ -1814,7 +1806,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1829,8 +1821,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -2324,7 +2315,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCICtrTimebaseDigFltrEnable
         if cfunc.argtypes is None:
@@ -2332,7 +2323,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -2347,8 +2338,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -2537,7 +2527,7 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCICtrTimebaseDigSyncEnable
         if cfunc.argtypes is None:
@@ -2545,7 +2535,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -2560,8 +2550,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -2915,7 +2904,7 @@ class CIChannel(Channel):
             default. Setting  **ci_prescaler** disables duplicate count
             prevention unless you explicitly enable it.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIDupCountPrevention
         if cfunc.argtypes is None:
@@ -2923,7 +2912,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -2938,8 +2927,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -2964,7 +2952,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIDutyCycleDigFltrEnable
         if cfunc.argtypes is None:
@@ -2972,7 +2960,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -2987,8 +2975,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -3383,7 +3370,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIEncoderAInputDigFltrEnable
         if cfunc.argtypes is None:
@@ -3391,7 +3378,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -3406,8 +3393,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -3602,7 +3588,7 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIEncoderAInputDigSyncEnable
         if cfunc.argtypes is None:
@@ -3610,7 +3596,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -3625,8 +3611,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -3811,7 +3796,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIEncoderBInputDigFltrEnable
         if cfunc.argtypes is None:
@@ -3819,7 +3804,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -3834,8 +3819,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -4030,7 +4014,7 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIEncoderBInputDigSyncEnable
         if cfunc.argtypes is None:
@@ -4038,7 +4022,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -4053,8 +4037,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -4292,7 +4275,7 @@ class CIChannel(Channel):
         """
         bool: Specifies whether to use Z indexing for the channel.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIEncoderZIndexEnable
         if cfunc.argtypes is None:
@@ -4300,7 +4283,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -4315,8 +4298,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -4446,7 +4428,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIEncoderZInputDigFltrEnable
         if cfunc.argtypes is None:
@@ -4454,7 +4436,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -4469,8 +4451,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -4665,7 +4646,7 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIEncoderZInputDigSyncEnable
         if cfunc.argtypes is None:
@@ -4673,7 +4654,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -4688,8 +4669,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -4874,7 +4854,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIFreqDigFltrEnable
         if cfunc.argtypes is None:
@@ -4882,7 +4862,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -4897,8 +4877,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -5084,7 +5063,7 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIFreqDigSyncEnable
         if cfunc.argtypes is None:
@@ -5092,7 +5071,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -5107,8 +5086,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -5186,7 +5164,7 @@ class CIChannel(Channel):
         bool: Specifies whether to enable averaging mode for Sample
             Clock-timed frequency measurements.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIFreqEnableAveraging
         if cfunc.argtypes is None:
@@ -5194,7 +5172,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -5209,8 +5187,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -5995,7 +5972,7 @@ class CIChannel(Channel):
             registers, it can adversely affect the operation of the
             device and possibly result in a system crash.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIMemMapEnable
         if cfunc.argtypes is None:
@@ -6003,7 +5980,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -6018,8 +5995,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -6140,7 +6116,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIPeriodDigFltrEnable
         if cfunc.argtypes is None:
@@ -6148,7 +6124,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -6163,8 +6139,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -6350,7 +6325,7 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIPeriodDigSyncEnable
         if cfunc.argtypes is None:
@@ -6358,7 +6333,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -6373,8 +6348,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -6452,7 +6426,7 @@ class CIChannel(Channel):
         bool: Specifies whether to enable averaging mode for Sample
             Clock-timed period measurements.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIPeriodEnableAveraging
         if cfunc.argtypes is None:
@@ -6460,7 +6434,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -6475,8 +6449,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -6921,7 +6894,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply a digital filter to the signal
             to measure.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIPulseFreqDigFltrEnable
         if cfunc.argtypes is None:
@@ -6929,7 +6902,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -6944,8 +6917,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -7131,7 +7103,7 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIPulseFreqDigSyncEnable
         if cfunc.argtypes is None:
@@ -7139,7 +7111,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -7154,8 +7126,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -7440,7 +7411,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply a digital filter to the signal
             to measure.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIPulseTicksDigFltrEnable
         if cfunc.argtypes is None:
@@ -7448,7 +7419,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -7463,8 +7434,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -7650,7 +7620,7 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIPulseTicksDigSyncEnable
         if cfunc.argtypes is None:
@@ -7658,7 +7628,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -7673,8 +7643,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -7909,7 +7878,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply a digital filter to the signal
             to measure.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIPulseTimeDigFltrEnable
         if cfunc.argtypes is None:
@@ -7917,7 +7886,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -7932,8 +7901,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -8119,7 +8087,7 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIPulseTimeDigSyncEnable
         if cfunc.argtypes is None:
@@ -8127,7 +8095,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -8142,8 +8110,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -8429,7 +8396,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIPulseWidthDigFltrEnable
         if cfunc.argtypes is None:
@@ -8437,7 +8404,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -8452,8 +8419,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -8639,7 +8605,7 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCIPulseWidthDigSyncEnable
         if cfunc.argtypes is None:
@@ -8647,7 +8613,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -8662,8 +8628,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -9048,7 +9013,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCISemiPeriodDigFltrEnable
         if cfunc.argtypes is None:
@@ -9056,7 +9021,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -9071,8 +9036,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -9258,7 +9222,7 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCISemiPeriodDigSyncEnable
         if cfunc.argtypes is None:
@@ -9266,7 +9230,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -9281,8 +9245,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -9569,7 +9532,7 @@ class CIChannel(Channel):
         bool: Indicates whether the counter rolled over. When you query
             this property, NI-DAQmx resets it to False.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCITCReached
         if cfunc.argtypes is None:
@@ -9577,7 +9540,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -9741,7 +9704,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCITwoEdgeSepFirstDigFltrEnable
         if cfunc.argtypes is None:
@@ -9749,7 +9712,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -9764,8 +9727,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -9960,7 +9922,7 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCITwoEdgeSepFirstDigSyncEnable
         if cfunc.argtypes is None:
@@ -9968,7 +9930,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -9983,8 +9945,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -10223,7 +10184,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCITwoEdgeSepSecondDigFltrEnable
         if cfunc.argtypes is None:
@@ -10231,7 +10192,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -10246,8 +10207,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -10442,7 +10402,7 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCITwoEdgeSepSecondDigSyncEnable
         if cfunc.argtypes is None:
@@ -10450,7 +10410,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -10465,8 +10425,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -10855,7 +10814,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = (lib_importer.windll.
                  DAQmxGetCIVelocityEncoderAInputDigFltrEnable)
@@ -10864,7 +10823,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -10880,8 +10839,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -11341,7 +11299,7 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = (lib_importer.windll.
                  DAQmxGetCIVelocityEncoderBInputDigFltrEnable)
@@ -11350,7 +11308,7 @@ class CIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -11366,8 +11324,7 @@ class CIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)

@@ -6,7 +6,8 @@ from __future__ import unicode_literals
 import ctypes
 import numpy
 
-from nidaqmx._lib import lib_importer, wrapped_ndpointer, ctypes_byte_str
+from nidaqmx._lib import (
+    lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
 from nidaqmx.system.physical_channel import PhysicalChannel
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
@@ -82,15 +83,14 @@ class StartTrigger(object):
             signals that transition in and out of the hysteresis window
             rapidly.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgEdgeStartTrigDigFltrEnable
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -105,7 +105,7 @@ class StartTrigger(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)
@@ -297,15 +297,14 @@ class StartTrigger(object):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgEdgeStartTrigDigSyncEnable
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -320,7 +319,7 @@ class StartTrigger(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)
@@ -660,15 +659,14 @@ class StartTrigger(object):
             being recognized. Use filtering for noisy trigger signals
             that transition in and out of the window rapidly.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgWinStartTrigDigFltrEnable
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -683,7 +681,7 @@ class StartTrigger(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)
@@ -875,15 +873,14 @@ class StartTrigger(object):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgWinStartTrigDigSyncEnable
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -898,7 +895,7 @@ class StartTrigger(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)
@@ -1180,15 +1177,14 @@ class StartTrigger(object):
         bool: Specifies whether to apply a digital filter to the trigger
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetDigEdgeStartTrigDigFltrEnable
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1203,7 +1199,7 @@ class StartTrigger(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)
@@ -1397,15 +1393,14 @@ class StartTrigger(object):
             not recognize and act upon the trigger until the next pulse
             of the internal timebase.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetDigEdgeStartTrigDigSyncEnable
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1420,7 +1415,7 @@ class StartTrigger(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)
@@ -1731,15 +1726,14 @@ class StartTrigger(object):
             until the task stops. The device ignores a trigger if it is
             in the process of acquiring or generating signals.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetStartTrigRetriggerable
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1754,7 +1748,7 @@ class StartTrigger(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)

@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 import ctypes
 import numpy
 
-from nidaqmx._lib import lib_importer, ctypes_byte_str
+from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx._task_modules.write_functions import _write_raw
 from nidaqmx.errors import check_for_error, is_string_buffer_too_small
 from nidaqmx.utils import unflatten_channel_string
@@ -99,7 +99,7 @@ class OutStream(object):
             you read **devs_with_inserted_or_removed_accessories**.
             Otherwise, you will receive an error.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = (lib_importer.windll.
                  DAQmxGetWriteAccessoryInsertionOrRemovalDetected)
@@ -107,8 +107,7 @@ class OutStream(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -249,7 +248,7 @@ class OutStream(object):
             read External OvervoltageChans. Otherwise, you will receive
             an error.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = (lib_importer.windll.
                  DAQmxGetWriteExternalOvervoltageChansExist)
@@ -257,8 +256,7 @@ class OutStream(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -383,15 +381,14 @@ class OutStream(object):
             **open_current_loop_chans**. Otherwise, you will receive an
             error.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetWriteOpenCurrentLoopChansExist
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -545,15 +542,14 @@ class OutStream(object):
             You must read this property before you read
             **overcurrent_chans**. Otherwise, you will receive an error.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetWriteOvercurrentChansExist
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -606,15 +602,14 @@ class OutStream(object):
             read this property before you read **overloaded_chans**.
             Otherwise, you will receive an error.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetWriteOverloadedChansExist
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -670,15 +665,14 @@ class OutStream(object):
             **overtemperature_chans**. Otherwise, you will receive an
             error.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetWriteOvertemperatureChansExist
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -732,15 +726,14 @@ class OutStream(object):
             **power_supply_fault_chans**. Otherwise, you will receive an
             error.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetWritePowerSupplyFaultChansExist
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1066,9 +1059,9 @@ class OutStream(object):
             numpy_array (numpy.ndarray): Specifies a 1D NumPy array that
                 contains the raw samples to write to the task.
         Returns:
-            int: 
-            
-            Specifies the actual number of samples per channel successfully 
+            int:
+
+            Specifies the actual number of samples per channel successfully
             written to the buffer.
         """
         channels_to_write = self._task.channels

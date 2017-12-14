@@ -6,7 +6,8 @@ from __future__ import unicode_literals
 import ctypes
 import numpy
 
-from nidaqmx._lib import lib_importer, wrapped_ndpointer, ctypes_byte_str
+from nidaqmx._lib import (
+    lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
 from nidaqmx.system.physical_channel import PhysicalChannel
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
@@ -82,15 +83,14 @@ class PauseTrigger(object):
             signals that transition in and out of the hysteresis window
             rapidly.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgLvlPauseTrigDigFltrEnable
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -105,7 +105,7 @@ class PauseTrigger(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)
@@ -297,15 +297,14 @@ class PauseTrigger(object):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgLvlPauseTrigDigSyncEnable
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -320,7 +319,7 @@ class PauseTrigger(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)
@@ -661,15 +660,14 @@ class PauseTrigger(object):
             being recognized. Use filtering for noisy trigger signals
             that transition in and out of the window rapidly.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgWinPauseTrigDigFltrEnable
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -684,7 +682,7 @@ class PauseTrigger(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)
@@ -876,15 +874,14 @@ class PauseTrigger(object):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAnlgWinPauseTrigDigSyncEnable
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -899,7 +896,7 @@ class PauseTrigger(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)
@@ -1083,15 +1080,14 @@ class PauseTrigger(object):
         bool: Specifies whether to apply a digital filter to the trigger
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetDigLvlPauseTrigDigFltrEnable
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1106,7 +1102,7 @@ class PauseTrigger(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)
@@ -1298,15 +1294,14 @@ class PauseTrigger(object):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetDigLvlPauseTrigDigSyncEnable
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1321,7 +1316,7 @@ class PauseTrigger(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)

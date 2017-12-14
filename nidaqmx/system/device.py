@@ -852,7 +852,7 @@ class Device(object):
         """
         bool: Indicates if the device supports simultaneous sampling.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = (lib_importer.windll.
                  DAQmxGetDevAISimultaneousSamplingSupported)
@@ -860,7 +860,7 @@ class Device(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1008,14 +1008,14 @@ class Device(object):
         """
         bool: Indicates if the device supports analog triggering.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetDevAnlgTrigSupported
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1176,14 +1176,14 @@ class Device(object):
         bool: Indicates if the device supports the sample clock timing
             type for analog output tasks.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetDevAOSampClkSupported
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1443,14 +1443,14 @@ class Device(object):
         bool: Indicates if the device supports the sample clock timing
             type for counter input tasks.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetDevCISampClkSupported
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1598,14 +1598,14 @@ class Device(object):
         bool: Indicates if the device supports Sample Clock timing for
             counter output tasks.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetDevCOSampClkSupported
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1729,14 +1729,14 @@ class Device(object):
         """
         bool: Indicates if the device is a simulated device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetDevIsSimulated
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -1812,14 +1812,14 @@ class Device(object):
         """
         bool: Indicates if the device supports digital triggering.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetDevDigTrigSupported
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))
@@ -2151,14 +2151,14 @@ class Device(object):
         """
         bool: Indicates whether the device supports hardware TEDS.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetDevTEDSHWTEDSSupported
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_bool)]
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._name, ctypes.byref(val))

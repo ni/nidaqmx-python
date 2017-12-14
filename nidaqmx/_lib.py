@@ -32,10 +32,10 @@ class c_bool32(ctypes.c_uint):
     """
 
     def _getter(self):
-        return bool(ctypes.c_uint.value.fget(self))
+        return bool(ctypes.c_uint.value.__get__(self))
 
     def _setter(self, val):
-        ctypes.c_uint.value.fset(self, int(val))
+        ctypes.c_uint.value.__set__(self, int(val))
 
     value = property(_getter, _setter)
 

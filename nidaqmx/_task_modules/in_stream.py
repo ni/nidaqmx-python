@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 import ctypes
 import numpy
 
-from nidaqmx._lib import lib_importer, ctypes_byte_str
+from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx._task_modules.read_functions import _read_raw
 from nidaqmx.errors import check_for_error, is_string_buffer_too_small
 from nidaqmx._task_modules.channels.channel import Channel
@@ -78,7 +78,7 @@ class InStream(object):
             you read **devs_with_inserted_or_removed_accessories**.
             Otherwise, you will receive an error.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = (lib_importer.windll.
                  DAQmxGetReadAccessoryInsertionOrRemovalDetected)
@@ -86,8 +86,7 @@ class InStream(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -104,15 +103,14 @@ class InStream(object):
             acquisition task, it also stops the task after reading the
             last sample.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetReadAutoStart
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -127,7 +125,7 @@ class InStream(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)
@@ -176,15 +174,14 @@ class InStream(object):
             events occurred faster than the device could handle them.
             Some devices detect overflows differently than others.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetReadChangeDetectHasOverflowed
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -293,7 +290,7 @@ class InStream(object):
             **common_mode_range_error_chans**. Otherwise, you will
             receive an error.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = (lib_importer.windll.
                  DAQmxGetReadCommonModeRangeErrorChansExist)
@@ -301,8 +298,7 @@ class InStream(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -439,15 +435,14 @@ class InStream(object):
             in the task. You must read this property before you read
             **excit_fault_chans**. Otherwise, you will receive an error.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetReadExcitFaultChansExist
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -759,15 +754,14 @@ class InStream(object):
             to disk. A new TDMS group is written when logging is resumed
             from a paused state.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetLoggingPause
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -782,7 +776,7 @@ class InStream(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)
@@ -1124,15 +1118,14 @@ class InStream(object):
             you read **open_chans**. Otherwise, you will receive an
             error.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetReadOpenChansExist
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1187,15 +1180,14 @@ class InStream(object):
             **open_current_loop_chans**. Otherwise, you will receive an
             error.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetReadOpenCurrentLoopChansExist
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1250,15 +1242,14 @@ class InStream(object):
             read **open_thrmcpl_chans**. Otherwise, you will receive an
             error.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetReadOpenThrmcplChansExist
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1361,15 +1352,14 @@ class InStream(object):
             the task. You must read this property before you read
             **overcurrent_chans**. Otherwise, you will receive an error.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetReadOvercurrentChansExist
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1422,15 +1412,14 @@ class InStream(object):
             read this property before you read **overloaded_chans**.
             Otherwise, you will receive an error.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetReadOverloadedChansExist
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1484,15 +1473,14 @@ class InStream(object):
             **overtemperature_chans**. Otherwise, you will receive an
             error.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetReadOvertemperatureChansExist
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1532,15 +1520,14 @@ class InStream(object):
             number of samples to read is -1, a read operation always
             reads all samples currently available in the buffer.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetReadReadAllAvailSamp
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -1555,7 +1542,7 @@ class InStream(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)
@@ -1852,8 +1839,8 @@ class InStream(object):
                 the samples currently available in the buffer and does
                 not wait for the task to acquire all requested samples.
         Returns:
-            numpy.ndarray: 
-            
+            numpy.ndarray:
+
             The samples requested in the form of a 1D NumPy array. This
             method determines a NumPy array of appropriate size and data
             type to create and return based on your device specifications.
@@ -1937,8 +1924,8 @@ class InStream(object):
         to.
 
         Returns:
-            numpy.ndarray: 
-            
+            numpy.ndarray:
+
             The samples requested in the form of a 1D NumPy array. This
             method determines a NumPy array of appropriate size and data
             type to create and return based on your device specifications.

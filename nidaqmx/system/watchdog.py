@@ -8,7 +8,8 @@ import ctypes
 import numpy
 import warnings
 
-from nidaqmx._lib import lib_importer, wrapped_ndpointer, ctypes_byte_str
+from nidaqmx._lib import (
+    lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small,
     DaqResourceWarning)
@@ -211,7 +212,7 @@ class WatchdogTask(object):
             to true, the watchdog timer expires when the chassis detects
             the loss of network connection.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = (lib_importer.windll.
                  DAQmxGetWatchdogExpirTrigOnNetworkConnLoss)
@@ -219,8 +220,7 @@ class WatchdogTask(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -236,7 +236,7 @@ class WatchdogTask(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_bool]
+                        lib_importer.task_handle, c_bool32]
 
         error_code = cfunc(
             self._handle, val)
@@ -310,15 +310,14 @@ class WatchdogTask(object):
         bool: Indicates if the watchdog timer expired. You can read this
             property only while the task is running.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetWatchdogHasExpired
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, ctypes.byref(val))
@@ -454,7 +453,7 @@ class WatchdogTask(object):
                     Specifies the output type of the physical channel.
         Returns:
             List[nidaqmx.system._watchdog_modules.expiration_state.ExpirationState]:
-            
+
             Indicates the list of objects representing the configured
             expiration states.
         """
@@ -501,7 +500,7 @@ class WatchdogTask(object):
                     Specifies the value to set the channel to upon expiration.
         Returns:
             List[nidaqmx.system._watchdog_modules.expiration_state.ExpirationState]:
-            
+
             Indicates the list of objects representing the configured
             expiration states.
         """
@@ -544,7 +543,7 @@ class WatchdogTask(object):
                     value to set the channel to upon expiration.
         Returns:
             List[nidaqmx.system._watchdog_modules.expiration_state.ExpirationState]:
-            
+
             Indicates the list of objects representing the configured
             expiration states.
         """

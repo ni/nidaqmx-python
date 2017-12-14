@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 import ctypes
 import numpy
 
-from nidaqmx._lib import lib_importer, ctypes_byte_str
+from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx.scale import Scale
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
@@ -212,7 +212,7 @@ class COChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCOCtrTimebaseDigFltrEnable
         if cfunc.argtypes is None:
@@ -220,7 +220,7 @@ class COChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -235,8 +235,7 @@ class COChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -425,7 +424,7 @@ class COChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCOCtrTimebaseDigSyncEnable
         if cfunc.argtypes is None:
@@ -433,7 +432,7 @@ class COChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -448,8 +447,7 @@ class COChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -744,7 +742,7 @@ class COChannel(Channel):
         bool: Specifies whether to apply the initial delay to
             retriggered pulse trains.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCOEnableInitialDelayOnRetrigger
         if cfunc.argtypes is None:
@@ -752,7 +750,7 @@ class COChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -767,8 +765,7 @@ class COChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -799,7 +796,7 @@ class COChannel(Channel):
             registers, it can adversely affect the operation of the
             device and possibly result in a system crash.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCOMemMapEnable
         if cfunc.argtypes is None:
@@ -807,7 +804,7 @@ class COChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -822,8 +819,7 @@ class COChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -949,7 +945,7 @@ class COChannel(Channel):
             retriggerable tasks, when you query this property, NI-DAQmx
             resets it to False.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCOPulseDone
         if cfunc.argtypes is None:
@@ -957,7 +953,7 @@ class COChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1625,7 +1621,7 @@ class COChannel(Channel):
         bool: Indicates whether the counter is ready for new continuous
             pulse train values.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCORdyForNewVal
         if cfunc.argtypes is None:
@@ -1633,7 +1629,7 @@ class COChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1749,7 +1745,7 @@ class COChannel(Channel):
             Generally, you cannot update onboard memory directly after
             you start the task. Onboard memory includes data FIFOs.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetCOUseOnlyOnBrdMem
         if cfunc.argtypes is None:
@@ -1757,7 +1753,7 @@ class COChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1772,8 +1768,7 @@ class COChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)

@@ -6,7 +6,8 @@ from __future__ import unicode_literals
 import ctypes
 import numpy
 
-from nidaqmx._lib import lib_importer, wrapped_ndpointer, ctypes_byte_str
+from nidaqmx._lib import (
+    lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
 from nidaqmx.scale import Scale
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
@@ -99,7 +100,7 @@ class AIChannel(Channel):
             sensors. Set this property to False for the master channel
             and to True for the slave channels.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAIACExcitSyncEnable
         if cfunc.argtypes is None:
@@ -107,7 +108,7 @@ class AIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -122,8 +123,7 @@ class AIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -1469,7 +1469,7 @@ class AIChannel(Channel):
             Use **ai_bridge_shunt_cal_select** to select the switch(es)
             to enable.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAIBridgeShuntCalEnable
         if cfunc.argtypes is None:
@@ -1477,7 +1477,7 @@ class AIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -1492,8 +1492,7 @@ class AIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -3044,7 +3043,7 @@ class AIChannel(Channel):
         bool: Specifies whether the digital filter is enabled or
             disabled.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAIDigFltrEnable
         if cfunc.argtypes is None:
@@ -3052,7 +3051,7 @@ class AIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -3067,8 +3066,7 @@ class AIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -3439,7 +3437,7 @@ class AIChannel(Channel):
             achieve higher resolution measurements by over sampling the
             input signal and averaging the results.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAIDitherEnable
         if cfunc.argtypes is None:
@@ -3447,7 +3445,7 @@ class AIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -3462,8 +3460,7 @@ class AIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -3646,7 +3643,7 @@ class AIChannel(Channel):
             Leave this property set to the default value for most
             applications.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAIEnhancedAliasRejectionEnable
         if cfunc.argtypes is None:
@@ -3654,7 +3651,7 @@ class AIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -3669,8 +3666,7 @@ class AIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -3954,7 +3950,7 @@ class AIChannel(Channel):
             for ratiometric transducers. If you set this property to
             True, set **ai_max** and **ai_min** to reflect the scaling.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAIExcitUseForScaling
         if cfunc.argtypes is None:
@@ -3962,7 +3958,7 @@ class AIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -3977,8 +3973,7 @@ class AIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -4004,7 +3999,7 @@ class AIChannel(Channel):
             the upper half of the channels as it advances through the
             scan list.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAIExcitUseMultiplexed
         if cfunc.argtypes is None:
@@ -4012,7 +4007,7 @@ class AIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -4027,8 +4022,7 @@ class AIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -4392,7 +4386,7 @@ class AIChannel(Channel):
             operations to return the cold-junction compensation channel
             data with the other channels in the task.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAIForceReadFromChan
         if cfunc.argtypes is None:
@@ -4400,7 +4394,7 @@ class AIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -4415,8 +4409,7 @@ class AIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -4961,7 +4954,7 @@ class AIChannel(Channel):
         bool: Specifies whether to enable the lowpass filter of the
             channel.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAILowpassEnable
         if cfunc.argtypes is None:
@@ -4969,7 +4962,7 @@ class AIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -4984,8 +4977,7 @@ class AIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -5455,7 +5447,7 @@ class AIChannel(Channel):
             registers, it can adversely affect the operation of the
             device and possibly result in a system crash.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAIMemMapEnable
         if cfunc.argtypes is None:
@@ -5463,7 +5455,7 @@ class AIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -5478,8 +5470,7 @@ class AIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -5604,7 +5595,7 @@ class AIChannel(Channel):
         """
         bool: Specifies whether to enable open channel detection.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAIOpenChanDetectEnable
         if cfunc.argtypes is None:
@@ -5612,7 +5603,7 @@ class AIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -5627,8 +5618,7 @@ class AIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -5661,7 +5651,7 @@ class AIChannel(Channel):
             **open_thrmcpl_chans_exist** to determine if any channels
             were open.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAIOpenThrmcplDetectEnable
         if cfunc.argtypes is None:
@@ -5669,7 +5659,7 @@ class AIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -5684,8 +5674,7 @@ class AIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -5904,7 +5893,7 @@ class AIChannel(Channel):
         bool: Specifies if filter delay removal is enabled on the
             device.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAIRemoveFilterDelay
         if cfunc.argtypes is None:
@@ -5912,7 +5901,7 @@ class AIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -5927,8 +5916,7 @@ class AIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -6762,7 +6750,7 @@ class AIChannel(Channel):
             You can eliminate this offset by using **ai_auto_zero_mode**
             to perform an auto zero on the channel.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAISampAndHoldEnable
         if cfunc.argtypes is None:
@@ -6770,7 +6758,7 @@ class AIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -6785,8 +6773,7 @@ class AIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -6968,7 +6955,7 @@ class AIChannel(Channel):
             set on a raw strain channel that is part of a rosette
             configuration.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAIStrainGageForceReadFromChan
         if cfunc.argtypes is None:
@@ -6976,7 +6963,7 @@ class AIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
@@ -6991,8 +6978,7 @@ class AIChannel(Channel):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_bool]
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
 
         error_code = cfunc(
             self._handle, self._name, val)
@@ -7217,7 +7203,7 @@ class AIChannel(Channel):
         bool: Indicates if the virtual channel was initialized using a
             TEDS bitstream from the corresponding physical channel.
         """
-        val = ctypes.c_bool()
+        val = c_bool32()
 
         cfunc = lib_importer.windll.DAQmxGetAIIsTEDS
         if cfunc.argtypes is None:
@@ -7225,7 +7211,7 @@ class AIChannel(Channel):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_bool)]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             self._handle, self._name, ctypes.byref(val))
