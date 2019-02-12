@@ -8,7 +8,7 @@ import ctypes
 import numpy
 
 from nidaqmx._lib import (
-    lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
+    lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32, DaqFunctionNotSupportedError)
 from nidaqmx.errors import check_for_error, is_string_buffer_too_small
 from nidaqmx.system.device import Device
 from nidaqmx.system._collections.device_collection import DeviceCollection
@@ -147,7 +147,10 @@ class System(object):
         """
         val = ctypes.c_uint()
 
-        cfunc = lib_importer.windll.DAQmxGetSysNIDAQUpdateVersion
+        try:
+            cfunc = lib_importer.windll.DAQmxGetSysNIDAQUpdateVersion
+        except DaqFunctionNotSupportedError:
+            cfunc = lib_importer.windll.DAQmxGetSysNIDAQMinorVersion
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
