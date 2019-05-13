@@ -11,8 +11,7 @@ class NoFixtureDetectedError(Error):
     pass
 
 
-@pytest.fixture(scope="module")
-def x_series_device():
+def find_x_series_device():
     system = nidaqmx.system.System.local()
 
     for device in system.devices:
@@ -23,11 +22,16 @@ def x_series_device():
                 len(device.do_lines) >= 8 and
                 (len(device.di_lines) == len(device.do_lines)) and
                 len(device.ci_physical_chans) >= 4):
+            print(device)
             return device
 
     raise NoFixtureDetectedError(
         'Could not detect a device that meets the requirements to be an '
         'X Series fixture. Cannot proceed to run tests.')
+
+@pytest.fixture(scope="module")
+def x_series_device():
+    return find_x_series_device()
 
 
 @pytest.fixture(scope="module")
