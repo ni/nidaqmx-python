@@ -821,7 +821,7 @@ class OutStream(object):
         """
         val = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxGetRelativeTo
+        cfunc = lib_importer.windll.DAQmxGetWriteRelativeTo
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
@@ -837,7 +837,7 @@ class OutStream(object):
     @relative_to.setter
     def relative_to(self, val):
         val = val.value
-        cfunc = lib_importer.windll.DAQmxSetRelativeTo
+        cfunc = lib_importer.windll.DAQmxSetWriteRelativeTo
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
@@ -850,7 +850,7 @@ class OutStream(object):
 
     @relative_to.deleter
     def relative_to(self):
-        cfunc = lib_importer.windll.DAQmxResetRelativeTo
+        cfunc = lib_importer.windll.DAQmxResetWriteRelativeTo
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
