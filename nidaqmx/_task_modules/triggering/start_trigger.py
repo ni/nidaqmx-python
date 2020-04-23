@@ -1033,7 +1033,7 @@ class StartTrigger(object):
         """
         val = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxGetAnlgWinStartTrigTrigWhen
+        cfunc = lib_importer.windll.DAQmxGetAnlgWinStartTrigWhen
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
@@ -1049,7 +1049,7 @@ class StartTrigger(object):
     @anlg_win_trig_when.setter
     def anlg_win_trig_when(self, val):
         val = val.value
-        cfunc = lib_importer.windll.DAQmxSetAnlgWinStartTrigTrigWhen
+        cfunc = lib_importer.windll.DAQmxSetAnlgWinStartTrigWhen
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
@@ -1062,7 +1062,7 @@ class StartTrigger(object):
 
     @anlg_win_trig_when.deleter
     def anlg_win_trig_when(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgWinStartTrigTrigWhen
+        cfunc = lib_importer.windll.DAQmxResetAnlgWinStartTrigWhen
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
@@ -1676,7 +1676,7 @@ class StartTrigger(object):
         """
         val = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxGetDigPatternStartTrigTrigWhen
+        cfunc = lib_importer.windll.DAQmxGetDigPatternStartTrigWhen
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
@@ -1692,7 +1692,7 @@ class StartTrigger(object):
     @dig_pattern_trig_when.setter
     def dig_pattern_trig_when(self, val):
         val = val.value
-        cfunc = lib_importer.windll.DAQmxSetDigPatternStartTrigTrigWhen
+        cfunc = lib_importer.windll.DAQmxSetDigPatternStartTrigWhen
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
@@ -1705,7 +1705,7 @@ class StartTrigger(object):
 
     @dig_pattern_trig_when.deleter
     def dig_pattern_trig_when(self):
-        cfunc = lib_importer.windll.DAQmxResetDigPatternStartTrigTrigWhen
+        cfunc = lib_importer.windll.DAQmxResetDigPatternStartTrigWhen
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
