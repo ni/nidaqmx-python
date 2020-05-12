@@ -102,7 +102,7 @@ class Task(object):
             warnings.warn(
                 'Task of name "{0}" was not explicitly closed before it was '
                 'destructed. Resources on the task device may still be '
-                'reserved.'.format(self.name), DaqResourceWarning)
+                'reserved.'.format(self._saved_name), DaqResourceWarning)
 
     def __enter__(self):
         return self
