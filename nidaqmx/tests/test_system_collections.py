@@ -1,17 +1,21 @@
-import collections
 import pytest
 import six
 
+if six.PY2:
+    from collections import Sequence
+else:
+    from collections.abc import Sequence
+
 import nidaqmx
 import nidaqmx.system
-from nidaqmx.system._collections.device_collection import DeviceCollection
-from nidaqmx.system._collections.persisted_channel_collection import (
+from nidaqmx.system._device_collection import DeviceCollection
+from nidaqmx.system._persisted_channel_collection import (
     PersistedChannelCollection)
-from nidaqmx.system._collections.persisted_task_collection import (
+from nidaqmx.system._persisted_task_collection import (
     PersistedTaskCollection)
-from nidaqmx.system._collections.persisted_scale_collection import (
+from nidaqmx.system._persisted_scale_collection import (
     PersistedScaleCollection)
-from nidaqmx.system._collections.physical_channel_collection import (
+from nidaqmx.system._physical_channel_collection import (
     PhysicalChannelCollection)
 from nidaqmx.tests.fixtures import x_series_device
 
@@ -27,7 +31,7 @@ class TestSystemCollections(object):
 
         devices = system.devices
         assert isinstance(devices, DeviceCollection)
-        assert isinstance(devices, collections.Sequence)
+        assert isinstance(devices, Sequence)
 
         assert isinstance(devices[0], nidaqmx.system.Device)
         assert isinstance(devices[0].dev_is_simulated, bool)
@@ -37,7 +41,7 @@ class TestSystemCollections(object):
 
         scales = system.scales
         assert isinstance(scales, PersistedScaleCollection)
-        assert isinstance(scales, collections.Sequence)
+        assert isinstance(scales, Sequence)
 
         if len(scales) > 0:
             assert isinstance(scales[0], nidaqmx.system.storage.PersistedScale)
@@ -50,7 +54,7 @@ class TestSystemCollections(object):
 
         tasks = system.tasks
         assert isinstance(tasks, PersistedTaskCollection)
-        assert isinstance(tasks, collections.Sequence)
+        assert isinstance(tasks, Sequence)
 
         if len(tasks) > 0:
             assert isinstance(tasks[0], nidaqmx.system.storage.PersistedTask)
@@ -63,7 +67,7 @@ class TestSystemCollections(object):
 
         global_channels = system.global_channels
         assert isinstance(global_channels, PersistedChannelCollection)
-        assert isinstance(global_channels, collections.Sequence)
+        assert isinstance(global_channels, Sequence)
 
         if len(global_channels) > 0:
             assert isinstance(global_channels[0],
@@ -76,7 +80,7 @@ class TestSystemCollections(object):
         phys_chans = x_series_device.ai_physical_chans
 
         assert isinstance(phys_chans, PhysicalChannelCollection)
-        assert isinstance(phys_chans, collections.Sequence)
+        assert isinstance(phys_chans, Sequence)
 
         assert isinstance(phys_chans[0], nidaqmx.system.PhysicalChannel)
 

@@ -5,7 +5,11 @@ from __future__ import unicode_literals
 
 import ctypes
 import six
-from collections import Sequence
+
+if six.PY2:
+    from collections import Sequence
+else:
+    from collectionsa.abc import Sequence
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str
 from nidaqmx._task_modules.channels.channel import Channel
