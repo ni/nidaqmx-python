@@ -150,7 +150,7 @@ class System(object):
         try:
             cfunc = lib_importer.windll.DAQmxGetSysNIDAQUpdateVersion
         except DaqFunctionNotSupportedError:
-            cfunc = 0
+            return 0
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
