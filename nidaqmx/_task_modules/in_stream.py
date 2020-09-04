@@ -1988,7 +1988,7 @@ class InStream(object):
                 number_of_channels * channels_to_read.ai_raw_samp_size / 8))
 
         samples_read, _ = _read_raw(
-            self._handle, numpy_array, number_of_samples_per_channel,
+            self._handle, numpy_array, int(number_of_samples_per_channel),
             self.timeout)
 
         return samples_read
