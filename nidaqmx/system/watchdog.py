@@ -215,7 +215,7 @@ class WatchdogTask(object):
         val = c_bool32()
 
         cfunc = (lib_importer.windll.
-                 DAQmxGetWatchdogExpirTrigOnNetworkConnLoss)
+                 DAQmxGetWatchdogExpirTrigTrigOnNetworkConnLoss)
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
@@ -231,7 +231,7 @@ class WatchdogTask(object):
     @expir_trig_trig_on_network_conn_loss.setter
     def expir_trig_trig_on_network_conn_loss(self, val):
         cfunc = (lib_importer.windll.
-                 DAQmxSetWatchdogExpirTrigOnNetworkConnLoss)
+                 DAQmxSetWatchdogExpirTrigTrigOnNetworkConnLoss)
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
@@ -245,7 +245,7 @@ class WatchdogTask(object):
     @expir_trig_trig_on_network_conn_loss.deleter
     def expir_trig_trig_on_network_conn_loss(self):
         cfunc = (lib_importer.windll.
-                 DAQmxResetWatchdogExpirTrigOnNetworkConnLoss)
+                 DAQmxResetWatchdogExpirTrigTrigOnNetworkConnLoss)
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
