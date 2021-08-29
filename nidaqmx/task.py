@@ -1170,20 +1170,18 @@ class Task(object):
         number_of_channels = len(channels_to_write.channel_names)
         write_chan_type = channels_to_write.chan_type
 
+        if isinstance(data, list):
+            data = numpy.asarray(data)
+
         element = None
         if number_of_channels == 1:
-            if isinstance(data, list):
-                if isinstance(data[0], list):
-                    self._raise_invalid_write_num_chans_error(
-                        number_of_channels, len(data))
-
-                number_of_samples_per_channel = len(data)
-                element = data[0]
-
-            elif isinstance(data, numpy.ndarray):
+            if isinstance(data, numpy.ndarray):
                 if len(data.shape) == 2:
-                    self._raise_invalid_write_num_chans_error(
-                        number_of_channels, data.shape[0])
+                    if data.shape[0] == 1:
+                        data = data[0]
+                    else:
+                        self._raise_invalid_write_num_chans_error(
+                            number_of_channels, data.shape[0])
 
                 number_of_samples_per_channel = len(data)
                 element = data[0]
@@ -1193,19 +1191,7 @@ class Task(object):
                 element = data
 
         else:
-            if isinstance(data, list):
-                if len(data) != number_of_channels:
-                    self._raise_invalid_write_num_chans_error(
-                        number_of_channels, len(data))
-
-                if isinstance(data[0], list):
-                    number_of_samples_per_channel = len(data[0])
-                    element = data[0][0]
-                else:
-                    number_of_samples_per_channel = 1
-                    element = data[0]
-
-            elif isinstance(data, numpy.ndarray):
+            if isinstance(data, numpy.ndarray):
                 if data.shape[0] != number_of_channels:
                     self._raise_invalid_write_num_chans_error(
                         number_of_channels, data.shape[0])
