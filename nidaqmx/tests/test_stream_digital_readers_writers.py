@@ -338,8 +338,8 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
 
         num_lines = random.randint(2, 4)
         number_of_channels = random.randint(
-            2, numpy.floor(len(x_series_device.do_lines) /
-                           float(num_lines)))
+            2, int(numpy.floor(len(x_series_device.do_lines) /
+                           float(num_lines))))
 
         all_lines = random.sample(x_series_device.do_lines,
                                   num_lines * number_of_channels)
