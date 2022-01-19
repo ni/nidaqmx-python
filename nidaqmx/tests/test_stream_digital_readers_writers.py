@@ -80,11 +80,11 @@ class TestDigitalSingleChannelReaderWriter(TestDAQmxIOBase):
 
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
-    @pytest.mark.skipif(
-        not any([d.do_port_width <= 8 for d in x_series_device().do_ports]),
-        reason="Requires digital port with at most 8 lines.")
     @pytest.mark.parametrize('seed', [generate_random_seed()])
     def test_one_sample_port_byte(self, x_series_device, seed):
+        if not any([d.do_port_width <= 8 for d in x_series_device.do_ports]):
+            pytest.skip("Requires digital port with at most 8 lines.")
+
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -110,11 +110,11 @@ class TestDigitalSingleChannelReaderWriter(TestDAQmxIOBase):
 
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
-    @pytest.mark.skipif(
-        not any([d.do_port_width <= 16 for d in x_series_device().do_ports]),
-        reason="Requires digital port with at most 16 lines.")
     @pytest.mark.parametrize('seed', [generate_random_seed()])
     def test_one_sample_port_uint16(self, x_series_device, seed):
+        if not any([d.do_port_width <= 16 for d in x_series_device.do_ports]):
+            pytest.skip("Requires digital port with at most 16 lines.")
+
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -140,11 +140,11 @@ class TestDigitalSingleChannelReaderWriter(TestDAQmxIOBase):
 
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
-    @pytest.mark.skipif(
-        not any([d.do_port_width <= 32 for d in x_series_device().do_ports]),
-        reason="Requires digital port with at most 32 lines.")
     @pytest.mark.parametrize('seed', [generate_random_seed()])
     def test_one_sample_port_uint32(self, x_series_device, seed):
+        if not any([d.do_port_width <= 32 for d in x_series_device.do_ports]):
+            pytest.skip("Requires digital port with at most 32 lines.")
+
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -170,11 +170,11 @@ class TestDigitalSingleChannelReaderWriter(TestDAQmxIOBase):
 
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
-    @pytest.mark.skipif(
-        not any([d.do_port_width <= 8 for d in x_series_device().do_ports]),
-        reason="Requires digital port with at most 8 lines.")
     @pytest.mark.parametrize('seed', [generate_random_seed()])
     def test_many_sample_port_byte(self, x_series_device, seed):
+        if not any([d.do_port_width <= 8 for d in x_series_device.do_ports]):
+            pytest.skip("Requires digital port with at most 8 lines.")
+
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -211,11 +211,11 @@ class TestDigitalSingleChannelReaderWriter(TestDAQmxIOBase):
                 values_to_test[-1] for _ in range(number_of_samples)]
             numpy.testing.assert_array_equal(values_read, expected_values)
 
-    @pytest.mark.skipif(
-        not any([d.do_port_width <= 16 for d in x_series_device().do_ports]),
-        reason="Requires digital port with at most 16 lines.")
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_many_sample_port_uint16(self, x_series_device, seed):
+    def test_many_sample_port_uint16(self, x_series_device, seed):        
+        if not any([d.do_port_width <= 16 for d in x_series_device.do_ports]):
+            pytest.skip("Requires digital port with at most 16 lines.")
+
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -252,11 +252,11 @@ class TestDigitalSingleChannelReaderWriter(TestDAQmxIOBase):
                 values_to_test[-1] for _ in range(number_of_samples)]
             numpy.testing.assert_array_equal(values_read, expected_values)
 
-    @pytest.mark.skipif(
-        not any([d.do_port_width <= 32 for d in x_series_device().do_ports]),
-        reason="Requires digital port with at most 32 lines.")
     @pytest.mark.parametrize('seed', [generate_random_seed()])
     def test_many_sample_port_uint32(self, x_series_device, seed):
+        if not any([d.do_port_width <= 32 for d in x_series_device.do_ports]):
+            pytest.skip("Requires digital port with at most 32 lines.")
+
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -369,11 +369,11 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
 
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
-    @pytest.mark.skipif(
-        len([d.do_port_width <= 8 for d in x_series_device().do_ports]) < 2,
-        reason="Requires 2 digital ports with at most 8 lines.")
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_one_sample_port_byte(self, x_series_device, seed):
+    def test_one_sample_port_byte(self, x_series_device, seed):        
+        if len([d.do_port_width <= 8 for d in x_series_device.do_ports]) < 2:
+            pytest.skip("Requires 2 digital ports with at most 8 lines.")
+
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -404,11 +404,11 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
 
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
-    @pytest.mark.skipif(
-        len([d.do_port_width <= 16 for d in x_series_device().do_ports]) < 2,
-        reason="Requires 2 digital ports with at most 16 lines.")
     @pytest.mark.parametrize('seed', [generate_random_seed()])
     def test_one_sample_port_uint16(self, x_series_device, seed):
+        if len([d.do_port_width <= 16 for d in x_series_device.do_ports]) < 2:
+            pytest.skip("Requires 2 digital ports with at most 16 lines.")
+
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -439,11 +439,11 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
 
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
-    @pytest.mark.skipif(
-        len([d.do_port_width <= 32 for d in x_series_device().do_ports]) < 2,
-        reason="Requires 2 digital ports with at most 32 lines.")
     @pytest.mark.parametrize('seed', [generate_random_seed()])
     def test_one_sample_port_uint32(self, x_series_device, seed):
+        if len([d.do_port_width <= 32 for d in x_series_device.do_ports]) < 2:
+            pytest.skip("Requires 2 digital ports with at most 32 lines.")
+
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -474,11 +474,11 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
 
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
-    @pytest.mark.skipif(
-        len([d.do_port_width <= 8 for d in x_series_device().do_ports]) < 2,
-        reason="Requires 2 digital ports with at most 8 lines.")
     @pytest.mark.parametrize('seed', [generate_random_seed()])
     def test_many_sample_port_byte(self, x_series_device, seed):
+        if len([d.do_port_width <= 8 for d in x_series_device.do_ports]) < 2:
+            pytest.skip("Requires 2 digital ports with at most 8 lines.")
+
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -523,11 +523,11 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
                 for i in range(number_of_channels)]
             numpy.testing.assert_array_equal(values_read, expected_values)
 
-    @pytest.mark.skipif(
-        len([d.do_port_width <= 16 for d in x_series_device().do_ports]) < 2,
-        reason="Requires 2 digital ports with at most 16 lines.")
     @pytest.mark.parametrize('seed', [generate_random_seed()])
     def test_many_sample_port_uint16(self, x_series_device, seed):
+        if len([d.do_port_width <= 16 for d in x_series_device.do_ports]) < 2:
+            pytest.skip("Requires 2 digital ports with at most 16 lines.")
+
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -572,11 +572,11 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
                 for i in range(number_of_channels)]
             numpy.testing.assert_array_equal(values_read, expected_values)
 
-    @pytest.mark.skipif(
-        len([d.do_port_width <= 32 for d in x_series_device().do_ports]) < 2,
-        reason="Requires 2 digital ports with at most 32 lines.")
     @pytest.mark.parametrize('seed', [generate_random_seed()])
     def test_many_sample_port_uint32(self, x_series_device, seed):
+        if len([d.do_port_width <= 32 for d in x_series_device.do_ports]) < 2:
+            pytest.skip("Requires 2 digital ports with at most 32 lines.")
+
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
