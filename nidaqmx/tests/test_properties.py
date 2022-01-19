@@ -171,10 +171,11 @@ class TestPropertyListDataTypes(object):
         assert isinstance(terminals, list)
         assert isinstance(terminals[0], UsageTypeAI)
 
-    @pytest.mark.skipif(bridge_device() is None, 
-                        reason="requires bridge device")
     @pytest.mark.parametrize('seed', [generate_random_seed()])
     def test_list_of_floats_property(self, bridge_device, seed):
+        if bridge_device is None:
+            pytest.skip("requires bridge device")
+
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 

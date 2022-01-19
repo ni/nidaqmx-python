@@ -360,14 +360,11 @@ class TestDigitalReadWrite(TestDAQmxIOBase):
             assert isinstance(value_read, list)
             assert len(value_read) == 1
 
-    fixture_dev = x_series_device()
-    max_port_width = max([d.do_port_width for d in fixture_dev.do_ports])
-
-    @pytest.mark.skipif(
-        len([d.do_port_width <= 16 for d in x_series_device().do_ports]) < 2,
-        reason='task.read() accepts max of 32 bits for digital uint reads.')
     @pytest.mark.parametrize('seed', [generate_random_seed()])
     def test_uint_multi_port(self, x_series_device, seed):
+        if len([d.do_port_width <= 16 for d in x_series_device.do_ports]) < 2:
+            pytest.skip('task.read() accepts max of 32 bits for digital uint reads.')
+
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
