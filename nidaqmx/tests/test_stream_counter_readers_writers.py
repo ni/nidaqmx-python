@@ -402,8 +402,6 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             assert numpy.isclose(
                 value_read.low_tick, low_ticks, rtol=0.05, atol=1)
 
-    @pytest.mark.skip(reason="Crashes python with exit code -1073741819 "
-                             "(0xC0000005). CAR 625781")
     @pytest.mark.parametrize('seed', [generate_random_seed()])
     def test_many_sample_pulse_ticks(self, x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
@@ -445,7 +443,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             reader = CounterReader(read_task.in_stream)
 
             writer.write_many_sample_pulse_ticks(
-                high_ticks_to_test, low_ticks_to_test, auto_start=False)
+                high_ticks_to_test, low_ticks_to_test)
 
             read_task.start()
             write_task.start()
