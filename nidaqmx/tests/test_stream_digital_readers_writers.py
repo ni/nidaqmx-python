@@ -75,7 +75,7 @@ class TestDigitalSingleChannelReaderWriter(TestDAQmxIOBase):
             writer.write_one_sample_multi_line(values_to_test)
             time.sleep(0.001)
 
-            values_read = numpy.zeros(number_of_lines, dtype=numpy.bool)
+            values_read = numpy.zeros(number_of_lines, dtype=bool)
             reader.read_one_sample_multi_line(values_read)
 
             numpy.testing.assert_array_equal(values_read, values_to_test)
@@ -326,7 +326,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
             writer.write_one_sample_one_line(values_to_test)
             time.sleep(0.001)
 
-            values_read = numpy.zeros(number_of_channels, dtype=numpy.bool)
+            values_read = numpy.zeros(number_of_channels, dtype=bool)
             reader.read_one_sample_one_line(values_read)
 
             numpy.testing.assert_array_equal(values_read, values_to_test)
@@ -364,7 +364,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
             time.sleep(0.001)
 
             values_read = numpy.zeros(
-                (number_of_channels, num_lines), dtype=numpy.bool)
+                (number_of_channels, num_lines), dtype=bool)
             reader.read_one_sample_multi_line(values_read)
 
             numpy.testing.assert_array_equal(values_read, values_to_test)

@@ -242,7 +242,7 @@ def _write_digital_lines(
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, c_bool32,
                     ctypes.c_double, ctypes.c_int,
-                    wrapped_ndpointer(dtype=numpy.bool, flags=('C', 'W')),
+                    wrapped_ndpointer(dtype=bool, flags=('C', 'W')),
                     ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
     error_code = cfunc(

@@ -262,7 +262,7 @@ def _read_digital_lines(
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, ctypes.c_double,
                     ctypes.c_int,
-                    wrapped_ndpointer(dtype=numpy.bool, flags=('C', 'W')),
+                    wrapped_ndpointer(dtype=bool, flags=('C', 'W')),
                     ctypes.c_uint, ctypes.POINTER(ctypes.c_int),
                     ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
