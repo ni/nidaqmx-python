@@ -989,7 +989,7 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else True)
         
-        numpy_array = numpy.asarray([data], dtype=numpy.bool)
+        numpy_array = numpy.asarray([data], dtype=bool)
 
         return _write_digital_lines(
             self._handle, numpy_array, 1, auto_start, timeout)

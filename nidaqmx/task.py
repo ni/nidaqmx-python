@@ -632,7 +632,7 @@ class Task(object):
         elif (read_chan_type == ChannelType.DIGITAL_INPUT or
                 read_chan_type == ChannelType.DIGITAL_OUTPUT):
             if self.in_stream.di_num_booleans_per_chan == 1:
-                data = numpy.zeros(array_shape, dtype=numpy.bool)
+                data = numpy.zeros(array_shape, dtype=bool)
                 samples_read = _read_digital_lines(
                     self._handle, data, number_of_samples_per_channel, timeout
                     ).samps_per_chan_read
@@ -1238,7 +1238,7 @@ class Task(object):
         elif write_chan_type == ChannelType.DIGITAL_OUTPUT:
             if self.out_stream.do_num_booleans_per_chan == 1:
                 if (not isinstance(element, bool) and
-                        not isinstance(element, numpy.bool_)):
+                        not isinstance(element, bool_)):
                     raise DaqError(
                         'Write failed, because this write method only accepts '
                         'boolean samples when there is one digital line per '
@@ -1246,7 +1246,7 @@ class Task(object):
                         'Requested sample type: {0}'.format(type(element)),
                         DAQmxErrors.UNKNOWN.value, task_name=self.name)
 
-                data = numpy.asarray(data, dtype=numpy.bool)
+                data = numpy.asarray(data, dtype=bool)
                 return _write_digital_lines(
                     self._handle, data, number_of_samples_per_channel,
                     auto_start, timeout)

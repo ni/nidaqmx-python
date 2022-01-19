@@ -1483,7 +1483,7 @@ class DigitalSingleChannelReader(ChannelReaderBase):
 
             Indicates a single boolean sample from the task.
         """
-        data = numpy.zeros(1, dtype=numpy.bool)
+        data = numpy.zeros(1, dtype=bool)
         _read_digital_lines(self._handle, data, 1, timeout)
 
         return bool(data[0])
