@@ -1,0 +1,16 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Unit tests
+.tox/
+pytests-py*.xml
+
+# Environments
+.venv
+
+# Built artifacts
+dist/
+docs/_build/
+
+# Common editor metadata
+.vscode/
