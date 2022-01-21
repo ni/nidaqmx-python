@@ -1,0 +1,50 @@
+[tool.poetry]
+name = "nidaqmx"
+version = "0.5.8"
+license = "MIT"
+description = "NI-DAQmx Python API"
+authors = ["NI <opensource@ni.com>"]
+maintainers = ["Zach Hindes <zach.hindes@ni.com>", "Maxx Boehme <maxx.boehme@ni.com>"]
+readme = "README.rst"
+repository = "https://github.com/ni/nidaqmx-python"
+documentation = "https://nidaqmx-python.readthedocs.io"
+keywords = ["nidaqmx", "nidaq", "daqmx", "daq"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Manufacturing",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Topic :: System :: Hardware :: Hardware Drivers"
+]
+exclude = ["nidaqmx/tests"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+numpy = [
+    {version = "1.21.5", python = "~3.7"},
+    {version = "^1.22", python = "^3.8"}
+]
+six = "^1.16"
+
+[tool.poetry.dev-dependencies]
+# Test
+pytest = "^6.2"
+pykka = "^3.0"
+
+# Documentation
+Sphinx = "^4.4"
+sphinx_rtd_theme = "^1.0"
+
+[build-system]
+requires = ["poetry>=1.1.12"]
+build-backend = "poetry.masonry.api"
