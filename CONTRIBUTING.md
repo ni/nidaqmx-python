@@ -57,8 +57,7 @@ To run the unit tests in all Python interpreters supported by **nidaqmx**, run t
 commands in the root of the distribution:
 
 ```sh
-$ pip install tox
-$ tox
+$ poetry run tox
 ```
   
 This requires you to have all the Python interpreters supported by **nidaqmx** installed on your
