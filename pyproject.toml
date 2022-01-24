@@ -51,6 +51,7 @@ docs = ["sphinx", "sphinx_rtd_theme"]
 # Test
 pytest = "^6.2"
 pykka = "^3.0"
+tox = "^3.24"
 
 [build-system]
 requires = ["poetry>=1.1.12"]
