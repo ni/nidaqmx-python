@@ -1,4 +1,3 @@
-
 import re
 
 from nidaqmx.errors import DaqError

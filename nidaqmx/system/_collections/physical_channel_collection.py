@@ -1,4 +1,3 @@
-
 import ctypes
 import six
 from collections.abc import Sequence

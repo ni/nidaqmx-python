@@ -1,4 +1,3 @@
-
 import six
 
 from nidaqmx.errors import DaqError

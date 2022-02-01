@@ -1,4 +1,3 @@
-
 import numpy
 from nidaqmx import DaqError
 from nidaqmx._task_modules.write_functions import (

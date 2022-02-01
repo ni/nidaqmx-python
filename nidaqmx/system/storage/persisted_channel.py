@@ -1,4 +1,3 @@
-
 import ctypes
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32

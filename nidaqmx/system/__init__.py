@@ -1,4 +1,3 @@
-
 from nidaqmx.system.system import (
     System, AOPowerUpState, CDAQSyncConnection, DOPowerUpState,
     DOResistorPowerUpState)

@@ -1,5 +1,3 @@
-
-
 __author__ = 'National Instruments'
 __all__ = ['channel']
 

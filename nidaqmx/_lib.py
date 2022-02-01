@@ -1,4 +1,3 @@
-
 from ctypes.util import find_library
 import ctypes
 from numpy.ctypeslib import ndpointer

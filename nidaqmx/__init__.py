@@ -1,4 +1,3 @@
-
 from nidaqmx.errors import DaqError, DaqWarning, DaqResourceWarning
 from nidaqmx.scale import Scale
 from nidaqmx.task import Task
