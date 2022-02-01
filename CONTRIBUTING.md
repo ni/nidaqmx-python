@@ -82,8 +82,8 @@ $ poetry run sphinx-build -b html docs docs\_build
 3. Run tests on every supported Python version. Refer to [Testing](#testing) section for details.
 4. Build the documentation and spot check the output. Refer to [Building Documentation](#building-documentation)
 section for details. Note that [nidaqmx-python @ readthedocs.io](https://nidaqmx-python.readthedocs.io/en/latest/)
-has been configured to automatically update when the tagged GitHub release has been created in step
-6. That can be verified once that has been completed.
+has been configured to automatically update when the tagged GitHub release has been created. That
+can be verified once that has been completed.
 5. Publish **nidaqmx** to pypi by running:
    ```sh
    $ poetry publish
