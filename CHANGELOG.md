@@ -16,9 +16,19 @@ All notable changes to this project will be documented in this file.
 * ### Merged Pull Requests
     * ...
 * ### Resolved Issues
-    * ...
+    * [132: __future__ imports are now all mandatory in the minimum supported python version](https://github.com/ni/nidaqmx-python/issues/132)
 * ### Major Changes
-    * ...
+    * Add support for most NI-DAQmx 16.1-21.5 APIs.
+        * APIs using time data types are not yet supported.
+    * Various other improvements:
+        * No more empty docstrings on constants.
+        * Fix C API function mapping for attributes - dozens were incorrect.
+        * Remove some internal-only enumerations that were unused.
+        * **(compat breaker)** Fix two egregious naming issues when translating the API to `SNAKE_CASE`. `M_HZ` is now
+        `MHZ` (megahertz) and `<word>m_VOLTS` is now `MILLIVOLTS`.
+        * **(compat breaker)** Fix various constant names that didn't make any sense.
+        * Add a header to all auto-generated files indicating that they should not be edited by hand.
+
 
 ## 0.5.8
 
