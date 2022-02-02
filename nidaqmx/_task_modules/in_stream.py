@@ -607,7 +607,7 @@ class InStream(object):
             running, this takes effect on the next sample interval (if
             Logging.SampsPerFile has been set) or when DAQmx Start New
             File is called. New file paths can be specified by ending
-            with "\" or "/". Files created after specifying a new file
+            with "\\" or "/". Files created after specifying a new file
             path retain the same name and numbering sequence.
         """
         cfunc = lib_importer.windll.DAQmxGetLoggingFilePath
@@ -878,11 +878,11 @@ class InStream(object):
             created with the naming convention of <filename>_####.tdms,
             where #### starts at 0001 and increments automatically with
             each new file. For example, if the file specified is
-            C:\data.tdms, the next file name used is C:\data_0001.tdms.
-            To disable file spanning behavior, set this attribute to 0.
-            If **logging_file_path** is changed while this attribute is
-            set, the new file path takes effect on the next file
-            created.
+            C:\\data.tdms, the next file name used is
+            C:\\data_0001.tdms. To disable file spanning behavior, set
+            this attribute to 0. If **logging_file_path** is changed
+            while this attribute is set, the new file path takes effect
+            on the next file created.
         """
         val = ctypes.c_ulonglong()
 
