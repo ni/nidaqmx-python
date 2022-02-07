@@ -1,5 +1,6 @@
 # Changelog
 
+* [0.6.1](#061)
 * [0.6.0](#060)
 * [0.5.8](#058)
 * [0.5.7](#057)
@@ -11,10 +12,17 @@
 
 All notable changes to this project will be documented in this file.
 
-## 0.6.0
+## 0.6.1
 
 * ### Merged Pull Requests
     * ...
+* ### Resolved Issues
+    * ...
+* ### Major Changes
+    * ...
+
+## 0.6.0
+
 * ### Resolved Issues
     * [132: __future__ imports are now all mandatory in the minimum supported python version](https://github.com/ni/nidaqmx-python/issues/132)
 * ### Major Changes
