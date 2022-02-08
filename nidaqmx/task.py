@@ -590,7 +590,7 @@ class Task(object):
 
         Example:
             >>> task = Task()
-            >>> task.ai_channels.add_voltage_channel('Dev1/ai0:3')
+            >>> task.ai_channels.add_ai_voltage_chan('Dev1/ai0:3')
             >>> data = task.read()
             >>> type(data)
             <type 'list'>
