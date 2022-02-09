@@ -19,7 +19,7 @@ All notable changes to this project will be documented in this file.
 * ### Resolved Issues
     * ...
 * ### Major Changes
-    * ...
+    * Scrubbed all examples to ensure they all function correctly and use DAQmx best practices.
 
 ## 0.6.0
 

@@ -26,4 +26,4 @@ with nidaqmx.Task() as task:
 
     print('N Channel N Samples Read: ')
     data = task.read(number_of_samples_per_channel=2)
-    print data
+    print(data)
