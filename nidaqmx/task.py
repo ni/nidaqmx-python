@@ -1271,8 +1271,8 @@ class Task(object):
                 frequencies = []
                 duty_cycles = []
                 for sample in data:
-                    frequencies.append(sample.duty_cycle)
-                    duty_cycles.append(sample.freq)
+                    frequencies.append(sample.freq)
+                    duty_cycles.append(sample.duty_cycle)
 
                 frequencies = numpy.asarray(frequencies, dtype=numpy.float64)
                 duty_cycles = numpy.asarray(duty_cycles, dtype=numpy.float64)
