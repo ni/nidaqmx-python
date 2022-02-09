@@ -17,11 +17,13 @@ All notable changes to this project will be documented in this file.
 * ### Merged Pull Requests
     * ...
 * ### Resolved Issues
+    * [37: ai_raw example is bad](https://github.com/ni/nidaqmx-python/issues/37)
+    * [65: ci_count_edges.py REQUIRES A START COMMAND](https://github.com/ni/nidaqmx-python/issues/65)
     * [117: Error in example](https://github.com/ni/nidaqmx-python/issues/117)
     * [131: task.write for COUNTER_OUTPUT - UsageTypeCO.PULSE_FREQUENCY has frequency and duty cycle reversed](https://github.com/ni/nidaqmx-python/issues/131)
     * [124: nidaqmx_examples/system_properties.py errors out as of version 0.5.7](https://github.com/ni/nidaqmx-python/issues/124)
 * ### Major Changes
-    * ...
+    * Scrubbed all examples to ensure they all function correctly and use DAQmx best practices.
 
 ## 0.6.0
 
