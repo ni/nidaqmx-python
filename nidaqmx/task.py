@@ -590,7 +590,7 @@ class Task(object):
 
         Example:
             >>> task = Task()
-            >>> task.ai_channels.add_voltage_channel('Dev1/ai0:3')
+            >>> task.ai_channels.add_ai_voltage_chan('Dev1/ai0:3')
             >>> data = task.read()
             >>> type(data)
             <type 'list'>
@@ -1271,8 +1271,8 @@ class Task(object):
                 frequencies = []
                 duty_cycles = []
                 for sample in data:
-                    frequencies.append(sample.duty_cycle)
-                    duty_cycles.append(sample.freq)
+                    frequencies.append(sample.freq)
+                    duty_cycles.append(sample.duty_cycle)
 
                 frequencies = numpy.asarray(frequencies, dtype=numpy.float64)
                 duty_cycles = numpy.asarray(duty_cycles, dtype=numpy.float64)
