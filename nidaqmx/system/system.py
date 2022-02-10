@@ -50,6 +50,11 @@ class System(object):
         """
         return DeviceCollection()
 
+
+    DriverVersion = collections.namedtuple(
+            'DriverVersion', ['major_version', 'minor_version',
+                              'update_version'])
+
     @property
     def driver_version(self):
         """
@@ -63,12 +68,8 @@ class System(object):
             - update_version (int): Indicates the update portion of the
               installed version of NI-DAQmx, such as 1 for version 9.0.1.
         """
-        DriverVersion = collections.namedtuple(
-            'DriverVersion', ['major_version', 'minor_version',
-                              'update_version'])
-
-        return DriverVersion(self._major_version, self._minor_version,
-                             self._update_version)
+        return System.DriverVersion(self._major_version, self._minor_version,
+                                    self._update_version)
 
     @property
     def global_channels(self):
