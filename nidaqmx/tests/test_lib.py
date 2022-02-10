@@ -5,7 +5,6 @@ from nidaqmx._lib import DaqLibImporter
 from nidaqmx.system import System
 
 
-@staticmethod
 def _make_driver_version(*args):
     return System.DriverVersion._make(args)
 
