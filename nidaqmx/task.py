@@ -93,7 +93,7 @@ class Task(object):
         self._initialize(self._handle)
 
     def __del__(self):
-        if self._handle is not None:
+        if self._handle:
             warnings.warn(
                 'Task of name "{0}" was not explicitly closed before it was '
                 'destructed. Resources on the task device may still be '
