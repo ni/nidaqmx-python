@@ -65,7 +65,7 @@ class PersistedChannelCollection(Sequence):
         else:
             raise DaqError(
                 'Invalid index type "{0}" used to access collection.'
-                .format(type(index)), DAQmxErrors.UNKNOWN.value)
+                .format(type(index)), DAQmxErrors.UNKNOWN)
 
     def __iter__(self):
         for channel_name in self.global_channel_names:

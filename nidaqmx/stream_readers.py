@@ -94,7 +94,7 @@ class ChannelReaderBase(object):
                 'Shape of NumPy Array provided: {0}\n'
                 'Shape of NumPy Array required: {1}'
                 .format(data.shape, array_shape),
-                DAQmxErrors.UNKNOWN.value, task_name=self._task.name)
+                DAQmxErrors.UNKNOWN, task_name=self._task.name)
 
     def _verify_array_digital_lines(
             self, data, is_many_chan, is_many_line):
@@ -138,7 +138,7 @@ class ChannelReaderBase(object):
                 'Shape of NumPy Array provided: {0}\n'
                 'Shape of NumPy Array required: {1}'
                 .format(data.shape, array_shape),
-                DAQmxErrors.UNKNOWN.value, task_name=self._task.name)
+                DAQmxErrors.UNKNOWN, task_name=self._task.name)
 
 
 class AnalogSingleChannelReader(ChannelReaderBase):

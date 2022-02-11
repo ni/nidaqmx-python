@@ -63,7 +63,7 @@ class DeviceCollection(Sequence):
         else:
             raise DaqError(
                 'Invalid index type "{0}" used to access collection.'
-                .format(type(index)), DAQmxErrors.UNKNOWN.value)
+                .format(type(index)), DAQmxErrors.UNKNOWN)
 
     def __iter__(self):
         for device_name in self.device_names:

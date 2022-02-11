@@ -64,7 +64,7 @@ class PersistedScaleCollection(Sequence):
         else:
             raise DaqError(
                 'Invalid index type "{0}" used to access collection.'
-                .format(type(index)), DAQmxErrors.UNKNOWN.value)
+                .format(type(index)), DAQmxErrors.UNKNOWN)
 
     def __iter__(self):
         for scale_name in self.scale_names:
