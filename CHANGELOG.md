@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
     * ...
 * ### Resolved Issues
     * [37: ai_raw example is bad](https://github.com/ni/nidaqmx-python/issues/37)
+    * [64: nidaqmx-python and pynidaqmx projects use the same package name](https://github.com/ni/nidaqmx-python/issues/64)
     * [65: ci_count_edges.py REQUIRES A START COMMAND](https://github.com/ni/nidaqmx-python/issues/65)
     * [100: How to clear task and create a new task with same name?](https://github.com/ni/nidaqmx-python/issues/100)
     * [102: handle types and daqmx versions](https://github.com/ni/nidaqmx-python/issues/102)
