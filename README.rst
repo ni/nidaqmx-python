@@ -29,12 +29,26 @@ Installation
 ============
 
 Running **nidaqmx** requires NI-DAQmx or NI-DAQmx Runtime. Visit the
-`ni.com/downloads <http://www.ni.com/downloads/>`_ to download the latest version 
-of NI-DAQmx.
+`ni.com/downloads <http://www.ni.com/downloads/>`_ to download the latest
+version of NI-DAQmx.
 
 **nidaqmx** can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
   $ python -m pip install nidaqmx
+
+Similar Packages
+================
+
+There are similar packages available that also provide NI-DAQmx functionality in
+Python:
+
+- `daqmx <https://pypi.org/project/daqmx/>`_
+  (`slightlynybbled/daqmx on GitHub <https://github.com/slightlynybbled/daqmx>`_)
+  provides an abstraction of NI-DAQmx in the ``ni`` module.
+
+- PyLibNIDAQmx (`pearu/pylibnidaqmx on GitHub <https://github.com/pearu/pylibnidaqmx>`_)
+  provides an abstraction of NI-DAQmx in the ``nidaqmx`` module, which collides
+  with this package's module name.
 
 .. _usage-section:
 
