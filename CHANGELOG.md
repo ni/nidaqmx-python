@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
     * ...
 * ### Resolved Issues
     * [37: ai_raw example is bad](https://github.com/ni/nidaqmx-python/issues/37)
+    * [54: Linux supported?](https://github.com/ni/nidaqmx-python/issues/54)
     * [65: ci_count_edges.py REQUIRES A START COMMAND](https://github.com/ni/nidaqmx-python/issues/65)
     * [100: How to clear task and create a new task with same name?](https://github.com/ni/nidaqmx-python/issues/100)
     * [102: handle types and daqmx versions](https://github.com/ni/nidaqmx-python/issues/102)
@@ -26,6 +27,7 @@ All notable changes to this project will be documented in this file.
     * [124: nidaqmx_examples/system_properties.py errors out as of version 0.5.7](https://github.com/ni/nidaqmx-python/issues/124)
 * ### Major Changes
     * Scrubbed all examples to ensure they all function correctly and use DAQmx best practices.
+    * Linux is officially supported.
 
 ## 0.6.0
 
