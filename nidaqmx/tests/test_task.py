@@ -19,5 +19,5 @@ class TestTask(object):
                 # doesn't seem to be working. Regardless it will print a warning that contributors
                 # should see if it regresses.
                 del(u)
-            assert dupe_exception.value.error_code == DAQmxErrors.DUPLICATE_TASK.value
+            assert dupe_exception.value.error_code == DAQmxErrors.DUPLICATE_TASK
 

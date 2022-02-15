@@ -183,7 +183,7 @@ class ChannelWriterBase(object):
                 'No. of dimensions of NumPy Array provided: {0}\n'
                 'No. of dimensions of NumPy Array required: {1}'
                 .format(num_dimensions_in_data, num_dimensions_expected),
-                DAQmxErrors.UNKNOWN.value, task_name=self._task.name)
+                DAQmxErrors.UNKNOWN, task_name=self._task.name)
 
 
 class AnalogSingleChannelWriter(ChannelWriterBase):

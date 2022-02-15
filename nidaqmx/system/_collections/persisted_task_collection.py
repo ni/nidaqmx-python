@@ -64,7 +64,7 @@ class PersistedTaskCollection(Sequence):
         else:
             raise DaqError(
                 'Invalid index type "{0}" used to access collection.'
-                .format(type(index)), DAQmxErrors.UNKNOWN.value)
+                .format(type(index)), DAQmxErrors.UNKNOWN)
 
     def __iter__(self):
         for task_name in self.task_names:

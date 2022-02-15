@@ -65,14 +65,14 @@ class ChannelCollection(Sequence):
         else:
             raise DaqError(
                 'Invalid index type "{0}" used to access channels.'
-                .format(type(index)), DAQmxErrors.UNKNOWN.value)
+                .format(type(index)), DAQmxErrors.UNKNOWN)
 
         if channel_names:
             return Channel._factory(self._handle, channel_names)
         else:
             raise DaqError(
                 'You cannot specify an empty index when indexing channels.\n'
-                'Index used: {0}'.format(index), DAQmxErrors.UNKNOWN.value)
+                'Index used: {0}'.format(index), DAQmxErrors.UNKNOWN)
 
     def __hash__(self):
         return hash(self._handle.value)
