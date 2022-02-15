@@ -28,7 +28,7 @@ class DaqError(Error):
 
         super(DaqError, self).__init__(message)
 
-        self._error_code = error_code
+        self._error_code = int(error_code)
 
         try:
             self._error_type = DAQmxErrors(self._error_code)
@@ -64,7 +64,7 @@ class DaqWarning(Warning):
         super(DaqWarning, self).__init__(
             '\nWarning {0} occurred.\n\n{1}'.format(error_code, message))
 
-        self._error_code = error_code
+        self._error_code = int(error_code)
 
         try:
             self._error_type = DAQmxWarnings(self._error_code)
@@ -138,9 +138,9 @@ def check_for_error(error_code):
 
 def is_string_buffer_too_small(error_code):
     return (
-        error_code == DAQmxErrors.BUFFER_TOO_SMALL_FOR_STRING.value or
-        error_code == DAQmxWarnings.CAPI_STRING_TRUNCATED_TO_FIT_BUFFER.value)
+        error_code == DAQmxErrors.BUFFER_TOO_SMALL_FOR_STRING or
+        error_code == DAQmxWarnings.CAPI_STRING_TRUNCATED_TO_FIT_BUFFER)
 
 
 def is_array_buffer_too_small(error_code):
-    return error_code == DAQmxErrors.WRITE_BUFFER_TOO_SMALL.value
+    return error_code == DAQmxErrors.WRITE_BUFFER_TOO_SMALL

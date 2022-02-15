@@ -18,7 +18,7 @@ def _write_analog_f_64(
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, c_bool32,
                     ctypes.c_double, ctypes.c_int,
-                    wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
+                    wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
                     ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
     error_code = cfunc(
@@ -56,7 +56,7 @@ def _write_binary_i_16(
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, c_bool32,
                     ctypes.c_double, ctypes.c_int,
-                    wrapped_ndpointer(dtype=numpy.int16, flags=('C', 'W')),
+                    wrapped_ndpointer(dtype=numpy.int16, flags=('C')),
                     ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
     error_code = cfunc(
@@ -80,7 +80,7 @@ def _write_binary_u_16(
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, c_bool32,
                     ctypes.c_double, ctypes.c_int,
-                    wrapped_ndpointer(dtype=numpy.uint16, flags=('C', 'W')),
+                    wrapped_ndpointer(dtype=numpy.uint16, flags=('C')),
                     ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
     error_code = cfunc(
@@ -104,7 +104,7 @@ def _write_binary_i_32(
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, c_bool32,
                     ctypes.c_double, ctypes.c_int,
-                    wrapped_ndpointer(dtype=numpy.int32, flags=('C', 'W')),
+                    wrapped_ndpointer(dtype=numpy.int32, flags=('C')),
                     ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
     error_code = cfunc(
@@ -128,7 +128,7 @@ def _write_binary_u_32(
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, c_bool32,
                     ctypes.c_double, ctypes.c_int,
-                    wrapped_ndpointer(dtype=numpy.uint32, flags=('C', 'W')),
+                    wrapped_ndpointer(dtype=numpy.uint32, flags=('C')),
                     ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
     error_code = cfunc(
@@ -152,7 +152,7 @@ def _write_digital_u_8(
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, c_bool32,
                     ctypes.c_double, ctypes.c_int,
-                    wrapped_ndpointer(dtype=numpy.uint8, flags=('C', 'W')),
+                    wrapped_ndpointer(dtype=numpy.uint8, flags=('C')),
                     ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
     error_code = cfunc(
@@ -176,7 +176,7 @@ def _write_digital_u_16(
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, c_bool32,
                     ctypes.c_double, ctypes.c_int,
-                    wrapped_ndpointer(dtype=numpy.uint16, flags=('C', 'W')),
+                    wrapped_ndpointer(dtype=numpy.uint16, flags=('C')),
                     ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
     error_code = cfunc(
@@ -200,7 +200,7 @@ def _write_digital_u_32(
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, c_bool32,
                     ctypes.c_double, ctypes.c_int,
-                    wrapped_ndpointer(dtype=numpy.uint32, flags=('C', 'W')),
+                    wrapped_ndpointer(dtype=numpy.uint32, flags=('C')),
                     ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
     error_code = cfunc(
@@ -238,7 +238,7 @@ def _write_digital_lines(
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, c_bool32,
                     ctypes.c_double, ctypes.c_int,
-                    wrapped_ndpointer(dtype=bool, flags=('C', 'W')),
+                    wrapped_ndpointer(dtype=bool, flags=('C')),
                     ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
     error_code = cfunc(
@@ -262,8 +262,8 @@ def _write_ctr_freq(
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, c_bool32,
                     ctypes.c_double, ctypes.c_int,
-                    wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
-                    wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
+                    wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                    wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
                     ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
     error_code = cfunc(
@@ -301,8 +301,8 @@ def _write_ctr_time(
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, c_bool32,
                     ctypes.c_double, ctypes.c_int,
-                    wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
-                    wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
+                    wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                    wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
                     ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
     error_code = cfunc(
@@ -343,8 +343,8 @@ def _write_ctr_ticks(
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, c_bool32,
                     ctypes.c_double, ctypes.c_int,
-                    wrapped_ndpointer(dtype=numpy.uint32, flags=('C', 'W')),
-                    wrapped_ndpointer(dtype=numpy.uint32, flags=('C', 'W')),
+                    wrapped_ndpointer(dtype=numpy.uint32, flags=('C')),
+                    wrapped_ndpointer(dtype=numpy.uint32, flags=('C')),
                     ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
     error_code = cfunc(
@@ -383,7 +383,7 @@ def _write_raw(
                     lib_importer.task_handle, ctypes.c_int, c_bool32,
                     ctypes.c_double,
                     wrapped_ndpointer(dtype=numpy_array.dtype,
-                                      flags=('C', 'W')),
+                                      flags=('C')),
                     ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
     error_code = cfunc(

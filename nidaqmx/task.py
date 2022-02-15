@@ -689,7 +689,7 @@ class Task(object):
             raise DaqError(
                 'Read failed, because there are no channels in this task from '
                 'which data can be read.',
-                DAQmxErrors.READ_NO_INPUT_CHANS_IN_TASK.value,
+                DAQmxErrors.READ_NO_INPUT_CHANS_IN_TASK,
                 task_name=self.name)
 
         if (read_chan_type == ChannelType.COUNTER_INPUT and
@@ -1078,7 +1078,7 @@ class Task(object):
             'Number of Lines Per Channel in Task: {0}\n'
             'Number of Lines Per Channel in Data: {1}'
             .format(num_lines_expected, num_lines_in_data),
-            DAQmxErrors.NUM_LINES_MISMATCH_IN_READ_OR_WRITE.value,
+            DAQmxErrors.NUM_LINES_MISMATCH_IN_READ_OR_WRITE,
             task_name=self.name)
 
     def _raise_invalid_write_num_chans_error(
@@ -1093,7 +1093,7 @@ class Task(object):
             'Number of Channels in Task: {0}\n'
             'Number of Channels in Data: {1}'
             .format(number_of_channels, number_of_channels_in_data),
-            DAQmxErrors.WRITE_NUM_CHANS_MISMATCH.value, task_name=self.name)
+            DAQmxErrors.WRITE_NUM_CHANS_MISMATCH, task_name=self.name)
 
     def write(self, data, auto_start=AUTO_START_UNSET, timeout=10.0):
         """
@@ -1239,7 +1239,7 @@ class Task(object):
                         'boolean samples when there is one digital line per '
                         'channel in a task.\n\n'
                         'Requested sample type: {0}'.format(type(element)),
-                        DAQmxErrors.UNKNOWN.value, task_name=self.name)
+                        DAQmxErrors.UNKNOWN, task_name=self.name)
 
                 data = numpy.asarray(data, dtype=bool)
                 return _write_digital_lines(
@@ -1253,7 +1253,7 @@ class Task(object):
                         'unsigned 32-bit integer samples when there are '
                         'multiple digital lines per channel in a task.\n\n'
                         'Requested sample type: {0}'.format(type(element)),
-                        DAQmxErrors.UNKNOWN.value, task_name=self.name)
+                        DAQmxErrors.UNKNOWN, task_name=self.name)
 
                 data = numpy.asarray(data, dtype=numpy.uint32)
                 return _write_digital_u_32(
@@ -1312,5 +1312,5 @@ class Task(object):
             raise DaqError(
                 'Write failed, because there are no output channels in this '
                 'task to which data can be written.',
-                DAQmxErrors.WRITE_NO_OUTPUT_CHANS_IN_TASK.value,
+                DAQmxErrors.WRITE_NO_OUTPUT_CHANS_IN_TASK,
                 task_name=self.name)
