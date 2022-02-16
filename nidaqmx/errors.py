@@ -3,7 +3,7 @@ import warnings
 
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 
-__all__ = ['DaqError', 'DaqWarning', 'DaqResourceWarning']
+__all__ = ['DaqError', 'DaqWriteError', 'DaqWarning', 'DaqResourceWarning']
 
 
 class Error(Exception):
@@ -49,6 +49,39 @@ class DaqError(Error):
             error type.
         """
         return self._error_type
+
+
+class DaqWriteError(DaqError):
+    """
+    Error raised by DAQmx write method that includes the amount of data that was
+    written.
+    """
+    def __init__(self, message, error_code, samps_per_chan_written, task_name=''):
+        """
+        Args:
+            message (string): Specifies the error message.
+            error_code (int): Specifies the NI-DAQmx error code.
+        """
+        if task_name:
+            message = '{0}\n\nTask Name: {1}'.format(message, task_name)
+
+        super(DaqWriteError, self).__init__(message, error_code, task_name)
+
+        self._error_code = int(error_code)
+        self._samps_per_chan_written = samps_per_chan_written
+
+        try:
+            self._error_type = DAQmxErrors(self._error_code)
+        except ValueError:
+            self._error_type = DAQmxErrors.UNKNOWN
+
+    @property
+    def samps_per_chan_written(self):
+        """
+        int: Specifies the number of samples successfully written.
+        """
+        return self._samps_per_chan_written
+
 
 
 class DaqWarning(Warning):
@@ -106,7 +139,7 @@ warnings.filterwarnings("always", category=DaqWarning)
 warnings.filterwarnings("always", category=DaqResourceWarning)
 
 
-def check_for_error(error_code):
+def check_for_error(error_code, samps_per_chan_written=None):
     from nidaqmx._lib import lib_importer
 
     if error_code < 0:
@@ -119,7 +152,10 @@ def check_for_error(error_code):
                     cfunc.argtypes = [ctypes.c_char_p, ctypes.c_uint]
         cfunc(error_buffer, 2048)
 
-        raise DaqError(error_buffer.value.decode("utf-8"), error_code)
+        if samps_per_chan_written is not None:
+            raise DaqWriteError(error_buffer.value.decode("utf-8"), error_code, samps_per_chan_written)
+        else:
+            raise DaqError(error_buffer.value.decode("utf-8"), error_code)
 
     elif error_code > 0:
         error_buffer = ctypes.create_string_buffer(2048)
