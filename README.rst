@@ -21,7 +21,11 @@ versions of the NI-DAQmx driver. Visit the
 `ni.com/downloads <http://www.ni.com/downloads/>`_ to upgrade your version of 
 NI-DAQmx.
 
-**nidaqmx** supports only the Windows operating system.
+**nidaqmx** supports Windows and Linux operating systems where the NI-DAQmx
+driver is supported. Refer to
+`NI Hardware and Operating System Compatibility <https://www.ni.com/r/hw-support>`_
+for which versions of the driver support your hardware on a given operating
+system.
 
 **nidaqmx** supports CPython 3.7+ and PyPy3.
 
