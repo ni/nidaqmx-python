@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
     * [154: Problem with task.write() when not enough buffer free](https://github.com/ni/nidaqmx-python/issues/154)
 * ### Major Changes
     * Scrubbed all examples to ensure they all function correctly and use DAQmx best practices.
+    * Added `DaqReadError` and `DaqWriteError` subclasses of `DaqError` that provide important metadata for partial reads and writes.
 
 ## 0.6.0
 
