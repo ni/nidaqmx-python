@@ -25,7 +25,7 @@ def _write_analog_f_64(
         task_handle, num_samps_per_chan, auto_start, timeout,
         data_layout.value, write_array,
         ctypes.byref(samps_per_chan_written), None)
-    check_for_error(error_code, samps_per_chan_written.value)
+    check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
     return samps_per_chan_written.value
 
@@ -63,7 +63,7 @@ def _write_binary_i_16(
         task_handle, num_samps_per_chan, auto_start, timeout,
         data_layout.value, write_array,
         ctypes.byref(samps_per_chan_written), None)
-    check_for_error(error_code, samps_per_chan_written.value)
+    check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
     return samps_per_chan_written.value
 
@@ -87,7 +87,7 @@ def _write_binary_u_16(
         task_handle, num_samps_per_chan, auto_start, timeout,
         data_layout.value, write_array,
         ctypes.byref(samps_per_chan_written), None)
-    check_for_error(error_code, samps_per_chan_written.value)
+    check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
     return samps_per_chan_written.value
 
@@ -111,7 +111,7 @@ def _write_binary_i_32(
         task_handle, num_samps_per_chan, auto_start, timeout,
         data_layout.value, write_array,
         ctypes.byref(samps_per_chan_written), None)
-    check_for_error(error_code, samps_per_chan_written.value)
+    check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
     return samps_per_chan_written.value
 
@@ -135,7 +135,7 @@ def _write_binary_u_32(
         task_handle, num_samps_per_chan, auto_start, timeout,
         data_layout.value, write_array,
         ctypes.byref(samps_per_chan_written), None)
-    check_for_error(error_code, samps_per_chan_written.value)
+    check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
     return samps_per_chan_written.value
 
@@ -159,7 +159,7 @@ def _write_digital_u_8(
         task_handle, num_samps_per_chan, auto_start, timeout,
         data_layout.value, write_array,
         ctypes.byref(samps_per_chan_written), None)
-    check_for_error(error_code, samps_per_chan_written.value)
+    check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
     return samps_per_chan_written.value
 
@@ -183,7 +183,7 @@ def _write_digital_u_16(
         task_handle, num_samps_per_chan, auto_start, timeout,
         data_layout.value, write_array,
         ctypes.byref(samps_per_chan_written), None)
-    check_for_error(error_code, samps_per_chan_written.value)
+    check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
     return samps_per_chan_written.value
 
@@ -207,7 +207,7 @@ def _write_digital_u_32(
         task_handle, num_samps_per_chan, auto_start, timeout,
         data_layout.value, write_array,
         ctypes.byref(samps_per_chan_written), None)
-    check_for_error(error_code, samps_per_chan_written.value)
+    check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
     return samps_per_chan_written.value
 
@@ -245,7 +245,7 @@ def _write_digital_lines(
         task_handle, num_samps_per_chan, auto_start, timeout,
         data_layout.value, write_array,
         ctypes.byref(samps_per_chan_written), None)
-    check_for_error(error_code, samps_per_chan_written.value)
+    check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
     return samps_per_chan_written.value
 
@@ -270,7 +270,7 @@ def _write_ctr_freq(
         task_handle, num_samps_per_chan, auto_start, timeout,
         data_layout.value, freq, duty_cycle,
         ctypes.byref(samps_per_chan_written), None)
-    check_for_error(error_code, samps_per_chan_written.value)
+    check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
     return samps_per_chan_written.value
 
@@ -309,7 +309,7 @@ def _write_ctr_time(
         task_handle, num_samps_per_chan, auto_start, timeout,
         data_layout.value, high_time, low_time,
         ctypes.byref(samps_per_chan_written), None)
-    check_for_error(error_code, samps_per_chan_written.value)
+    check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
     return samps_per_chan_written.value
 
@@ -351,7 +351,7 @@ def _write_ctr_ticks(
         task_handle, num_samps_per_chan, auto_start, timeout,
         data_layout.value, high_tick, low_tick,
         ctypes.byref(samps_per_chan_written), None)
-    check_for_error(error_code, samps_per_chan_written.value)
+    check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
     return samps_per_chan_written.value
 
@@ -389,6 +389,6 @@ def _write_raw(
     error_code = cfunc(
         task_handle, num_samps_per_chan, auto_start, timeout, numpy_array,
         ctypes.byref(samps_per_chan_written), None)
-    check_for_error(error_code, samps_per_chan_written.value)
+    check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
     return samps_per_chan_written.value

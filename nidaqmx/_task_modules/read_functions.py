@@ -28,7 +28,7 @@ def _read_analog_f_64(
         task_handle, num_samps_per_chan, timeout, fill_mode.value,
         read_array, numpy.prod(read_array.shape),
         ctypes.byref(samps_per_chan_read), None)
-    check_for_error(error_code)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
     return samps_per_chan_read.value
 
@@ -72,7 +72,7 @@ def _read_binary_i_16(
         task_handle, num_samps_per_chan, timeout, fill_mode.value,
         read_array, numpy.prod(read_array.shape),
         ctypes.byref(samps_per_chan_read), None)
-    check_for_error(error_code)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
     return samps_per_chan_read.value
 
@@ -97,7 +97,7 @@ def _read_binary_u_16(
         task_handle, num_samps_per_chan, timeout, fill_mode.value,
         read_array, numpy.prod(read_array.shape),
         ctypes.byref(samps_per_chan_read), None)
-    check_for_error(error_code)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
     return samps_per_chan_read.value
 
@@ -122,7 +122,7 @@ def _read_binary_i_32(
         task_handle, num_samps_per_chan, timeout, fill_mode.value,
         read_array, numpy.prod(read_array.shape),
         ctypes.byref(samps_per_chan_read), None)
-    check_for_error(error_code)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
     return samps_per_chan_read.value
 
@@ -147,7 +147,7 @@ def _read_binary_u_32(
         task_handle, num_samps_per_chan, timeout, fill_mode.value,
         read_array, numpy.prod(read_array.shape),
         ctypes.byref(samps_per_chan_read), None)
-    check_for_error(error_code)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
     return samps_per_chan_read.value
 
@@ -172,7 +172,7 @@ def _read_digital_u_8(
         task_handle, num_samps_per_chan, timeout, fill_mode.value,
         read_array, numpy.prod(read_array.shape),
         ctypes.byref(samps_per_chan_read), None)
-    check_for_error(error_code)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
     return samps_per_chan_read.value
 
@@ -197,7 +197,7 @@ def _read_digital_u_16(
         task_handle, num_samps_per_chan, timeout, fill_mode.value,
         read_array, numpy.prod(read_array.shape),
         ctypes.byref(samps_per_chan_read), None)
-    check_for_error(error_code)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
     return samps_per_chan_read.value
 
@@ -222,7 +222,7 @@ def _read_digital_u_32(
         task_handle, num_samps_per_chan, timeout, fill_mode.value,
         read_array, numpy.prod(read_array.shape),
         ctypes.byref(samps_per_chan_read), None)
-    check_for_error(error_code)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
     return samps_per_chan_read.value
 
@@ -267,7 +267,7 @@ def _read_digital_lines(
         read_array, numpy.prod(read_array.shape),
         ctypes.byref(samps_per_chan_read),
         ctypes.byref(num_bytes_per_samp), None)
-    check_for_error(error_code)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
     ReadDigitalLinesReturnData = (
         collections.namedtuple(
@@ -295,7 +295,7 @@ def _read_counter_f_64(task_handle, read_array, num_samps_per_chan, timeout):
         task_handle, num_samps_per_chan, timeout,
         read_array, numpy.prod(read_array.shape),
         ctypes.byref(samps_per_chan_read), None)
-    check_for_error(error_code)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
     return samps_per_chan_read.value
 
@@ -317,7 +317,7 @@ def _read_counter_u_32(task_handle, read_array, num_samps_per_chan, timeout):
         task_handle, num_samps_per_chan, timeout,
         read_array, numpy.prod(read_array.shape),
         ctypes.byref(samps_per_chan_read), None)
-    check_for_error(error_code)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
     return samps_per_chan_read.value
 
@@ -342,7 +342,7 @@ def _read_counter_f_64_ex(
         task_handle, num_samps_per_chan, timeout, fill_mode.value,
         read_array, numpy.prod(read_array.shape),
         ctypes.byref(samps_per_chan_read), None)
-    check_for_error(error_code)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
     return samps_per_chan_read.value
 
@@ -367,7 +367,7 @@ def _read_counter_u_32_ex(
         task_handle, num_samps_per_chan, timeout, fill_mode.value,
         read_array, numpy.prod(read_array.shape),
         ctypes.byref(samps_per_chan_read), None)
-    check_for_error(error_code)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
     return samps_per_chan_read.value
 
@@ -429,7 +429,7 @@ def _read_ctr_freq(
         task_handle, num_samps_per_chan, timeout, interleaved.value,
         freq, duty_cycle, numpy.prod(freq.shape),
         ctypes.byref(samps_per_chan_read), None)
-    check_for_error(error_code)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
     return samps_per_chan_read.value
 
@@ -455,7 +455,7 @@ def _read_ctr_time(
         task_handle, num_samps_per_chan, timeout, interleaved.value,
         high_time, low_time, numpy.prod(high_time.shape),
         ctypes.byref(samps_per_chan_read), None)
-    check_for_error(error_code)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
     return samps_per_chan_read.value
 
@@ -481,7 +481,7 @@ def _read_ctr_ticks(
         task_handle, num_samps_per_chan, timeout, interleaved.value,
         high_tick, low_tick, numpy.prod(high_tick.shape),
         ctypes.byref(samps_per_chan_read), None)
-    check_for_error(error_code)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
     return samps_per_chan_read.value
 
@@ -577,6 +577,6 @@ def _read_raw(task_handle, read_array, num_samps_per_chan, timeout):
         task_handle, num_samps_per_chan, timeout, read_array,
         read_array.nbytes, ctypes.byref(samples_read),
         ctypes.byref(number_of_bytes_per_sample), None)
-    check_for_error(error_code)
+    check_for_error(error_code, samps_per_chan_read=samples_read.value)
 
     return samples_read.value, number_of_bytes_per_sample.value

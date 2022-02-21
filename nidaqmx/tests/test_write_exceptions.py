@@ -8,7 +8,7 @@ import time
 
 import nidaqmx
 from nidaqmx.constants import (
-    BusType, AcquisitionType, RegenerationMode)
+    AcquisitionType, BusType, RegenerationMode)
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.utils import flatten_channel_string
 from nidaqmx.tests.fixtures import x_series_device
@@ -17,8 +17,8 @@ from nidaqmx.tests.helpers import generate_random_seed
 
 class TestWriteExceptions(object):
     """
-    Contains a collection of pytest tests that validate the analog Read
-    and Write functions in the NI-DAQmx Python API.
+    Contains a collection of pytest tests that validate the Write error behavior
+    in the NI-DAQmx Python API.
 
     These tests use only a single X Series device by utilizing the internal
     loopback routes on the device.

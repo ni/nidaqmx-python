@@ -3,7 +3,7 @@ import warnings
 
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 
-__all__ = ['DaqError', 'DaqWriteError', 'DaqWarning', 'DaqResourceWarning']
+__all__ = ['DaqError', 'DaqReadError', 'DaqWriteError', 'DaqWarning', 'DaqResourceWarning']
 
 
 class Error(Exception):
@@ -51,6 +51,38 @@ class DaqError(Error):
         return self._error_type
 
 
+class DaqReadError(DaqError):
+    """
+    Error raised by DAQmx write method that includes the amount of data that was
+    read.
+    """
+    def __init__(self, message, error_code, samps_per_chan_read, task_name=''):
+        """
+        Args:
+            message (string): Specifies the error message.
+            error_code (int): Specifies the NI-DAQmx error code.
+        """
+        if task_name:
+            message = '{0}\n\nTask Name: {1}'.format(message, task_name)
+
+        super(DaqReadError, self).__init__(message, error_code, task_name)
+
+        self._error_code = int(error_code)
+        self._samps_per_chan_read = samps_per_chan_read
+
+        try:
+            self._error_type = DAQmxErrors(self._error_code)
+        except ValueError:
+            self._error_type = DAQmxErrors.UNKNOWN
+
+    @property
+    def samps_per_chan_read(self):
+        """
+        int: Indicates the number of samples successfully read.
+        """
+        return self._samps_per_chan_read
+
+
 class DaqWriteError(DaqError):
     """
     Error raised by DAQmx write method that includes the amount of data that was
@@ -61,6 +93,7 @@ class DaqWriteError(DaqError):
         Args:
             message (string): Specifies the error message.
             error_code (int): Specifies the NI-DAQmx error code.
+            samps_per_chan_written (int): Specifies the number of samples written.
         """
         if task_name:
             message = '{0}\n\nTask Name: {1}'.format(message, task_name)
@@ -78,7 +111,7 @@ class DaqWriteError(DaqError):
     @property
     def samps_per_chan_written(self):
         """
-        int: Specifies the number of samples successfully written.
+        int: Indicates the number of samples successfully written.
         """
         return self._samps_per_chan_written
 
@@ -139,7 +172,7 @@ warnings.filterwarnings("always", category=DaqWarning)
 warnings.filterwarnings("always", category=DaqResourceWarning)
 
 
-def check_for_error(error_code, samps_per_chan_written=None):
+def check_for_error(error_code, samps_per_chan_written=None, samps_per_chan_read=None):
     from nidaqmx._lib import lib_importer
 
     if error_code < 0:
@@ -152,7 +185,9 @@ def check_for_error(error_code, samps_per_chan_written=None):
                     cfunc.argtypes = [ctypes.c_char_p, ctypes.c_uint]
         cfunc(error_buffer, 2048)
 
-        if samps_per_chan_written is not None:
+        if samps_per_chan_read is not None:
+            raise DaqReadError(error_buffer.value.decode("utf-8"), error_code, samps_per_chan_read)
+        elif samps_per_chan_written is not None:
             raise DaqWriteError(error_buffer.value.decode("utf-8"), error_code, samps_per_chan_written)
         else:
             raise DaqError(error_buffer.value.decode("utf-8"), error_code)
