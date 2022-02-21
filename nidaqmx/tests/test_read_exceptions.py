@@ -193,7 +193,7 @@ class TestReadExceptions(object):
             # We should have read a partial dataset.
             number_of_samples_expected = (clocks_to_give - samples_to_read)
             assert timeout_exception.value.samps_per_chan_read == number_of_samples_expected
-            # The data that was read should have been unmodified.
+            # The data that was succesfully read should have been overwritten.
             assert not any(element == sentinel_value for element in data[:number_of_samples_expected])
             # The data that wasn't read should have been unmodified.
             assert all(element == sentinel_value for element in data[number_of_samples_expected:])
