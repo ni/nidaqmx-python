@@ -1,5 +1,6 @@
 # Changelog
 
+* [0.6.2](#062)
 * [0.6.1](#061)
 * [0.6.0](#060)
 * [0.5.8](#058)
@@ -12,10 +13,17 @@
 
 All notable changes to this project will be documented in this file.
 
-## 0.6.1
+## 0.6.2
 
 * ### Merged Pull Requests
     * ...
+* ### Resolved Issues
+    * ...
+* ### Major Changes
+    * ...
+
+## 0.6.1
+
 * ### Resolved Issues
     * [37: ai_raw example is bad](https://github.com/ni/nidaqmx-python/issues/37)
     * [54: Linux supported?](https://github.com/ni/nidaqmx-python/issues/54)
