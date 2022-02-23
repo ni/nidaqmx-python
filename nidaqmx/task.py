@@ -1233,7 +1233,7 @@ class Task(object):
         elif write_chan_type == ChannelType.DIGITAL_OUTPUT:
             if self.out_stream.do_num_booleans_per_chan == 1:
                 if (not isinstance(element, bool) and
-                        not isinstance(element, bool_)):
+                        not isinstance(element, numpy.bool_)):
                     raise DaqError(
                         'Write failed, because this write method only accepts '
                         'boolean samples when there is one digital line per '
