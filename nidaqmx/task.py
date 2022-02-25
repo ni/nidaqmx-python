@@ -8,9 +8,10 @@ from nidaqmx._task_modules.channels.channel import Channel
 from nidaqmx._task_modules.export_signals import ExportSignals
 from nidaqmx._task_modules.in_stream import InStream
 from nidaqmx._task_modules.read_functions import (
-    _read_analog_f_64, _read_digital_lines, _read_digital_u_32, _read_ctr_freq,
-    _read_ctr_time, _read_ctr_ticks, _read_counter_u_32_ex,
-    _read_counter_f_64_ex)
+    _read_analog_f_64, _read_power_f_64,
+    _read_digital_lines, _read_digital_u_32,
+    _read_ctr_freq,_read_ctr_time, _read_ctr_ticks,
+    _read_counter_u_32_ex, _read_counter_f_64_ex)
 from nidaqmx._task_modules.timing import Timing
 from nidaqmx._task_modules.triggers import Triggers
 from nidaqmx._task_modules.out_stream import OutStream
@@ -30,13 +31,13 @@ from nidaqmx._task_modules.write_functions import (
     _write_analog_f_64, _write_digital_lines, _write_digital_u_32,
     _write_ctr_freq, _write_ctr_time, _write_ctr_ticks)
 from nidaqmx.constants import (
-    AcquisitionType, ChannelType, UsageTypeCI, EveryNSamplesEventType,
+    AcquisitionType, ChannelType, UsageTypeAI, UsageTypeCI, EveryNSamplesEventType,
     READ_ALL_AVAILABLE, UsageTypeCO, _Save)
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, DaqError, DaqResourceWarning)
 from nidaqmx.system.device import Device
-from nidaqmx.types import CtrFreq, CtrTick, CtrTime
+from nidaqmx.types import CtrFreq, CtrTick, CtrTime, PowerMeasurement
 from nidaqmx.utils import unflatten_channel_string, flatten_channel_string
 
 __all__ = ['Task']
@@ -619,9 +620,23 @@ class Task(object):
 
         # Analog Input
         if read_chan_type == ChannelType.ANALOG_INPUT:
-            data = numpy.zeros(array_shape, dtype=numpy.float64)
-            samples_read = _read_analog_f_64(
-                self._handle, data, number_of_samples_per_channel, timeout)
+            meas_type = channels_to_read.ai_meas_type
+            if meas_type == UsageTypeAI.POWER:
+                voltages = numpy.zeros(array_shape, dtype=numpy.float64)
+                currents = numpy.zeros(array_shape, dtype=numpy.float64)
+
+                samples_read = _read_power_f_64(
+                    self._handle, voltages, currents,
+                    number_of_samples_per_channel, timeout)
+
+                data = []
+                for v, i in zip(voltages, currents):
+                    data.append(PowerMeasurement(voltage=i, current=i))
+
+            else:
+                data = numpy.zeros(array_shape, dtype=numpy.float64)
+                samples_read = _read_analog_f_64(
+                    self._handle, data, number_of_samples_per_channel, timeout)
 
         # Digital Input or Digital Output
         elif (read_chan_type == ChannelType.DIGITAL_INPUT or
@@ -700,6 +715,16 @@ class Task(object):
             if num_samples_not_set and array_shape == 1:
                 return data[0]
             # Counter pulse measurements should not have N channel versions.
+            if samples_read != number_of_samples_per_channel:
+                return data[:samples_read]
+            return data
+
+        if (read_chan_type == ChannelType.ANALOG_INPUT and
+                (meas_type == UsageTypeAI.POWER)):
+
+            if num_samples_not_set and array_shape == 1:
+                return data[0]
+            # Power measurements should not have N channel versions.
             if samples_read != number_of_samples_per_channel:
                 return data[:samples_read]
             return data

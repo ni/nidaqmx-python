@@ -3,8 +3,9 @@ from nidaqmx import DaqError
 
 from nidaqmx.constants import READ_ALL_AVAILABLE
 from nidaqmx._task_modules.read_functions import (
-    _read_analog_f_64, _read_analog_scalar_f_64, _read_binary_i_16,
-    _read_binary_i_32, _read_binary_u_16, _read_binary_u_32,
+    _read_analog_f_64, _read_analog_scalar_f_64, _read_power_f_64,
+    _read_binary_i_16, _read_binary_i_32,
+    _read_binary_u_16, _read_binary_u_32,
     _read_digital_lines, _read_digital_u_8, _read_digital_u_16,
     _read_digital_scalar_u_32, _read_digital_u_32, _read_counter_scalar_f_64,
     _read_counter_scalar_u_32, _read_counter_f_64_ex, _read_counter_u_32_ex,

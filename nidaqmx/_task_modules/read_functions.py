@@ -52,6 +52,58 @@ def _read_analog_scalar_f_64(task_handle, timeout):
     return value.value
 
 
+def _read_power_f_64(
+        task_handle, read_voltage_array, read_current_array, num_samps_per_chan,
+        timeout, fill_mode=FillMode.GROUP_BY_CHANNEL):
+    samps_per_chan_read = ctypes.c_int()
+
+    cfunc = lib_importer.windll.DAQmxReadPowerF64
+    if cfunc.argtypes is None:
+        with cfunc.arglock:
+            if cfunc.argtypes is None:
+                cfunc.argtypes = [
+                    lib_importer.task_handle, ctypes.c_int, ctypes.c_double,
+                    c_bool32,
+                    wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
+                    wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
+                    ctypes.c_uint, ctypes.POINTER(ctypes.c_int),
+                    ctypes.POINTER(c_bool32)]
+
+    error_code = cfunc(
+        task_handle, num_samps_per_chan, timeout, fill_mode.value,
+        read_voltage_array, read_current_array, numpy.prod(read_voltage_array.shape),
+        ctypes.byref(samps_per_chan_read), None)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+
+    return samps_per_chan_read.value
+
+
+def _read_power_i_16(
+        task_handle, read_voltage_array, read_current_array, num_samps_per_chan,
+        timeout, fill_mode=FillMode.GROUP_BY_CHANNEL):
+    samps_per_chan_read = ctypes.c_int()
+
+    cfunc = lib_importer.windll.DAQmxReadPowerBinaryI16
+    if cfunc.argtypes is None:
+        with cfunc.arglock:
+            if cfunc.argtypes is None:
+                cfunc.argtypes = [
+                    lib_importer.task_handle, ctypes.c_int, ctypes.c_double,
+                    c_bool32,
+                    wrapped_ndpointer(dtype=numpy.int16, flags=('C', 'W')),
+                    wrapped_ndpointer(dtype=numpy.int16, flags=('C', 'W')),
+                    ctypes.c_uint, ctypes.POINTER(ctypes.c_int),
+                    ctypes.POINTER(c_bool32)]
+
+    error_code = cfunc(
+        task_handle, num_samps_per_chan, timeout, fill_mode.value,
+        read_voltage_array, read_current_array, numpy.prod(read_voltage_array.shape),
+        ctypes.byref(samps_per_chan_read), None)
+    check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+
+    return samps_per_chan_read.value
+
+
 def _read_binary_i_16(
         task_handle, read_array, num_samps_per_chan, timeout,
         fill_mode=FillMode.GROUP_BY_CHANNEL):

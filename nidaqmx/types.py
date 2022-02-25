@@ -13,6 +13,13 @@ CtrTime = collections.namedtuple(
 
 # endregion
 
+# region Power IO namedtuples
+
+PowerMeasurement = collections.namedtuple(
+    'PowerMeasurement', ['voltage', 'current'])
+
+# endregion
+
 # region Watchdog namedtuples
 
 AOExpirationState = collections.namedtuple(
