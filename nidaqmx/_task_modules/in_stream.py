@@ -1809,6 +1809,67 @@ class InStream(object):
         check_for_error(error_code)
 
     @property
+    def remote_sense_error_chans(self):
+        """
+        List[str]: Indicates a list of names of any remote sense error
+            virtual channels. You must read Remote Sense Error Channels
+            Exist before you read this property. Otherwise, you will
+            receive an error.
+        """
+        cfunc = lib_importer.windll.DAQmxGetRemoteSenseErrorChans
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = ctypes.create_string_buffer(temp_size)
+
+            size_or_code = cfunc(
+                self._handle, val, temp_size)
+
+            if is_string_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return unflatten_channel_string(val.value.decode('ascii'))
+
+    @property
+    def remote_sense_error_chans_exist(self):
+        """
+        bool: Indicates if the device detected something is wrong on
+            hardware or remote sense connection. You must read this
+            property before you read Remote Sense Error Channels. You
+            must disable the output and solve hardware connection issue
+            to clear the remote sense error status for all the channels
+            in the task.
+        """
+        val = c_bool32()
+
+        cfunc = lib_importer.windll.DAQmxGetRemoteSenseErrorChansExist
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            self._handle, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @property
     def sleep_time(self):
         """
         float: Specifies in seconds the amount of time to sleep after

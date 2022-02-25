@@ -22,14 +22,14 @@ from nidaqmx.constants import (
     ExcitationVoltageOrCurrent, FilterResponse, FilterType,
     ForceIEPESensorSensitivityUnits, ForceUnits, FrequencyUnits, Impedance1,
     InputDataTransferCondition, LVDTSensitivityUnits, LengthUnits,
-    PressureUnits, RTDType, RVDTSensitivityUnits, RawDataCompressionType,
-    ResistanceConfiguration, ResistanceUnits, ResolutionType, ScaleType,
-    Sense, SensorPowerCfg, SensorPowerType, ShuntCalSelect,
-    SoundPressureUnits, SourceSelection, StrainGageBridgeType,
-    StrainGageRosetteMeasurementType, StrainGageRosetteType, StrainUnits,
-    TemperatureUnits, TerminalConfiguration, ThermocoupleType, TorqueUnits,
-    UsageTypeAI, VelocityIEPESensorSensitivityUnits, VelocityUnits,
-    VoltageUnits)
+    PowerIdleOutputBehavior, PowerOutputState, PressureUnits, RTDType,
+    RVDTSensitivityUnits, RawDataCompressionType, ResistanceConfiguration,
+    ResistanceUnits, ResolutionType, ScaleType, Sense, SensorPowerCfg,
+    SensorPowerType, ShuntCalSelect, SoundPressureUnits, SourceSelection,
+    StrainGageBridgeType, StrainGageRosetteMeasurementType,
+    StrainGageRosetteType, StrainUnits, TemperatureUnits,
+    TerminalConfiguration, ThermocoupleType, TorqueUnits, UsageTypeAI,
+    VelocityIEPESensorSensitivityUnits, VelocityUnits, VoltageUnits)
 
 
 class AIChannel(Channel):
@@ -9011,6 +9011,361 @@ class AIChannel(Channel):
     @ai_voltaged_b_ref.deleter
     def ai_voltaged_b_ref(self):
         cfunc = lib_importer.windll.DAQmxResetAIVoltagedBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def pwr_current_dev_scaling_coeff(self):
+        """
+        List[float]: Indicates the coefficients of a polynomial equation
+            that NI-DAQmx uses to scale values from the native format of
+            the device to amperes. Property is readable anytime in a
+            task.
+        """
+        cfunc = lib_importer.windll.DAQmxGetPwrCurrentDevScalingCoeff
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = numpy.zeros(temp_size, dtype=numpy.float64)
+
+            size_or_code = cfunc(
+                self._handle, self._name, val, temp_size)
+
+            if is_array_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return val.tolist()
+
+    @property
+    def pwr_current_setpoint(self):
+        """
+        float: Specifies the output current, in amperes unit. If the
+            load draws current exceeding this specified value, the
+            device will operate under Constant Current mode.
+        """
+        val = ctypes.c_double()
+
+        cfunc = lib_importer.windll.DAQmxGetPwrCurrentSetpoint
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @pwr_current_setpoint.setter
+    def pwr_current_setpoint(self, val):
+        cfunc = lib_importer.windll.DAQmxSetPwrCurrentSetpoint
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @pwr_current_setpoint.deleter
+    def pwr_current_setpoint(self):
+        cfunc = lib_importer.windll.DAQmxResetPwrCurrentSetpoint
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def pwr_idle_output_behavior(self):
+        """
+        :class:`nidaqmx.constants.PowerIdleOutputBehavior`: Specifies
+            whether output will be disabled or maintaining existing
+            value after the task is uncommitted.
+        """
+        val = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxGetPwrIdleOutputBehavior
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return PowerIdleOutputBehavior(val.value)
+
+    @pwr_idle_output_behavior.setter
+    def pwr_idle_output_behavior(self, val):
+        val = val.value
+        cfunc = lib_importer.windll.DAQmxSetPwrIdleOutputBehavior
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @pwr_idle_output_behavior.deleter
+    def pwr_idle_output_behavior(self):
+        cfunc = lib_importer.windll.DAQmxResetPwrIdleOutputBehavior
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def pwr_output_enable(self):
+        """
+        bool: Specifies to enables or disables output of power module.
+            By default, the output is to be enabled but it can also be
+            explicitly enabled or disabled on set. Property is settable
+            even while a task is running and it is readable anytime in a
+            task. When task is not running, enabling the output does not
+            take effect until Daqmx Commit function is called. When task
+            is running, enabling the output will take effect
+            immediately.
+        """
+        val = c_bool32()
+
+        cfunc = lib_importer.windll.DAQmxGetPwrOutputEnable
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @pwr_output_enable.setter
+    def pwr_output_enable(self, val):
+        cfunc = lib_importer.windll.DAQmxSetPwrOutputEnable
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @pwr_output_enable.deleter
+    def pwr_output_enable(self):
+        cfunc = lib_importer.windll.DAQmxResetPwrOutputEnable
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def pwr_output_state(self):
+        """
+        :class:`nidaqmx.constants.PowerOutputState`: Indicates the
+            operating state of the power channel. Property is readable
+            anytime in a task.
+        """
+        val = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxGetPwrOutputState
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return PowerOutputState(val.value)
+
+    @property
+    def pwr_remote_sense(self):
+        """
+        :class:`nidaqmx.constants.Sense`: Specifies whether to use
+            remote sense or local sense of the output voltage. DAQmx
+            Read (Power) will return remote voltage if Remote Sense
+            attribute is set to Remote. DAQmx Read (Power) will return
+            local voltage if Remote Sense attribute is set to Local.
+            Reading this property will return user defined value.
+        """
+        val = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxGetPwrRemoteSense
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return Sense(val.value)
+
+    @pwr_remote_sense.setter
+    def pwr_remote_sense(self, val):
+        val = val.value
+        cfunc = lib_importer.windll.DAQmxSetPwrRemoteSense
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @pwr_remote_sense.deleter
+    def pwr_remote_sense(self):
+        cfunc = lib_importer.windll.DAQmxResetPwrRemoteSense
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def pwr_voltage_dev_scaling_coeff(self):
+        """
+        List[float]: Indicates the coefficients of a polynomial equation
+            that NI-DAQmx uses to scale values from the native format of
+            the device to volts. Property is readable anytime in a task.
+        """
+        cfunc = lib_importer.windll.DAQmxGetPwrVoltageDevScalingCoeff
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = numpy.zeros(temp_size, dtype=numpy.float64)
+
+            size_or_code = cfunc(
+                self._handle, self._name, val, temp_size)
+
+            if is_array_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return val.tolist()
+
+    @property
+    def pwr_voltage_setpoint(self):
+        """
+        float: Specifies the constant output voltage, in volts. Property
+            is settable even while a task is running and it is readable
+            anytime in a task.
+        """
+        val = ctypes.c_double()
+
+        cfunc = lib_importer.windll.DAQmxGetPwrVoltageSetpoint
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @pwr_voltage_setpoint.setter
+    def pwr_voltage_setpoint(self, val):
+        cfunc = lib_importer.windll.DAQmxSetPwrVoltageSetpoint
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @pwr_voltage_setpoint.deleter
+    def pwr_voltage_setpoint(self):
+        cfunc = lib_importer.windll.DAQmxResetPwrVoltageSetpoint
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:

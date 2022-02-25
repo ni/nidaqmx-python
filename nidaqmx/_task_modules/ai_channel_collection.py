@@ -1267,6 +1267,49 @@ class AIChannelCollection(ChannelCollection):
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
+    def add_ai_power_chan(
+            self, physical_channel, voltage_setpoint, current_setpoint,
+            output_enable, name_to_assign_to_channel=""):
+        """
+        Creates channel(s) to measure power.
+
+        Args:
+            physical_channel (str): Specifies the names of the physical
+                channels to use to create virtual channels. The DAQmx
+                physical channel constant lists all physical channels on
+                devices and modules installed in the system.
+            voltage_setpoint (float): Specifies in volts the constant
+                output voltage.
+            current_setpoint (float): Specifies in amperes the output
+                current.
+            output_enable (bool): Specifies whether to enable or disable
+                the output.
+            name_to_assign_to_channel (Optional[str]): Specifies a name
+                to assign to the virtual channel this function creates.
+                If you do not specify a value for this input, NI-DAQmx
+                uses the physical channel name as the virtual channel
+                name.
+        Returns:
+            nidaqmx._task_modules.channels.ai_channel.AIChannel:
+            
+            Indicates the newly created channel object.
+        """
+        cfunc = lib_importer.windll.DAQmxCreateAIPowerChan
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        c_bool32]
+
+        error_code = cfunc(
+            self._handle, physical_channel, name_to_assign_to_channel,
+            voltage_setpoint, current_setpoint, output_enable)
+        check_for_error(error_code)
+
+        return self._create_chan(physical_channel, name_to_assign_to_channel)
+
     def add_ai_pressure_bridge_polynomial_chan(
             self, physical_channel, name_to_assign_to_channel="",
             min_val=-100.0, max_val=100.0,
