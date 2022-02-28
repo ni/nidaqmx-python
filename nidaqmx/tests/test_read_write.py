@@ -10,7 +10,7 @@ import nidaqmx
 from nidaqmx.constants import (
     Edge, TriggerType, AcquisitionType, LineGrouping, Level, TaskMode)
 from nidaqmx.utils import flatten_channel_string
-from nidaqmx.tests.fixtures import x_series_device
+from nidaqmx.tests.fixtures import sim_power_device, x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 
 
@@ -595,3 +595,45 @@ class TestCounterReadWrite(TestDAQmxIOBase):
 
             assert value_read.high_tick == high_ticks
             assert value_read.low_tick == low_ticks
+
+    @pytest.mark.parametrize('seed', [generate_random_seed()])
+    def test_power_1_samp(self, sim_power_device, seed):
+        # Reset the pseudorandom number generator with seed.
+        random.seed(seed)
+
+        pwr_phys_chan = f"{sim_power_device.name}/power"
+        voltage_setpoint = 0.0
+        current_setpoint = 0.03
+        output_enable = False
+        with nidaqmx.Task() as read_task:
+            read_task.ai_channels.add_ai_power_chan(
+                pwr_phys_chan, voltage_setpoint, current_setpoint, output_enable,
+                name_to_assign_to_channel="PowerChannel")
+
+            read_task.start()
+            value_read = read_task.read()
+
+            # Simulated loads are 0.
+            assert value_read.voltage == 0.0
+            assert value_read.current == 0.0
+
+    @pytest.mark.parametrize('seed', [generate_random_seed()])
+    def test_power_n_samp(self, sim_power_device, seed):
+        # Reset the pseudorandom number generator with seed.
+        random.seed(seed)
+
+        pwr_phys_chan = f"{sim_power_device.name}/power"
+        voltage_setpoint = 0.0
+        current_setpoint = 0.03
+        output_enable = False
+        with nidaqmx.Task() as read_task:
+            read_task.ai_channels.add_ai_power_chan(
+                pwr_phys_chan, voltage_setpoint, current_setpoint, output_enable,
+                name_to_assign_to_channel="PowerChannel")
+
+            read_task.start()
+            values_read = read_task.read(number_of_samples_per_channel=10)
+
+            # Simulated loads are 0.
+            assert all(sample.voltage == 0.0 for sample in values_read)
+            assert all(sample.current == 0.0 for sample in values_read)

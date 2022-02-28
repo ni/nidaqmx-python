@@ -1,3 +1,4 @@
+from nidaqmx import constants
 import numpy
 import pytest
 import random
@@ -8,7 +9,7 @@ from nidaqmx.constants import (
     CurrentShuntResistorLocation, TemperatureUnits, RTDType,
     ResistanceConfiguration, ExcitationSource, ResistanceUnits, StrainUnits,
     StrainGageBridgeType, BridgeConfiguration)
-from nidaqmx.tests.fixtures import x_series_device
+from nidaqmx.tests.fixtures import sim_power_device, x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 
 
@@ -264,3 +265,27 @@ class TestAnalogCreateChannels(object):
             assert ai_channel.ai_excit_src == ExcitationSource.EXTERNAL
             assert ai_channel.ai_excit_val == 0.1
             assert not ai_channel.ai_excit_use_for_scaling
+
+    @pytest.mark.parametrize('seed', [generate_random_seed()])
+    def test_create_ai_power_chan(self, sim_power_device, seed):
+        # Reset the pseudorandom number generator with seed.
+        random.seed(seed)
+
+        pwr_phys_chan = f"{sim_power_device.name}/power"
+        voltage_setpoint = random.random() * 6.0
+        current_setpoint = random.random() * 3.0
+        output_enable = random.choice([True, False])
+        # CPLD is fixed-point, so values are coerced to something close.
+        setpoint_tolerance = 1e-03
+
+        with nidaqmx.Task() as task:
+            pwr_channel = task.ai_channels.add_ai_power_chan(
+                pwr_phys_chan, voltage_setpoint, current_setpoint, output_enable,
+                name_to_assign_to_channel="PowerChannel")
+
+            assert pwr_channel.physical_channel.name == pwr_phys_chan
+            assert pwr_channel.name == "PowerChannel"
+            assert numpy.isclose(pwr_channel.pwr_voltage_setpoint, voltage_setpoint, atol=setpoint_tolerance)
+            assert numpy.isclose(pwr_channel.pwr_current_setpoint, current_setpoint, atol=setpoint_tolerance)
+            assert pwr_channel.pwr_output_enable == output_enable
+            assert pwr_channel.pwr_idle_output_behavior == constants.PowerIdleOutputBehavior.MAINTAIN_EXISTING_VALUE
