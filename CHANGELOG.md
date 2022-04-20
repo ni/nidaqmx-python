@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file.
 * ### Resolved Issues
     * ...
 * ### Major Changes
-    * ...
+    * Added NI-DAQmx Power Channel APIs.
 
 ## 0.6.1
 
