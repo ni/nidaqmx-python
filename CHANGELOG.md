@@ -1,5 +1,6 @@
 # Changelog
 
+* [0.6.3](#063)
 * [0.6.2](#062)
 * [0.6.1](#061)
 * [0.6.0](#060)
@@ -13,12 +14,17 @@
 
 All notable changes to this project will be documented in this file.
 
-## 0.6.2
+## 0.6.3
 
 * ### Merged Pull Requests
     * ...
 * ### Resolved Issues
     * ...
+* ### Major Changes
+    * ...
+
+## 0.6.2
+
 * ### Major Changes
     * Added NI-DAQmx Power Channel APIs.
 
