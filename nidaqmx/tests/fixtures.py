@@ -42,6 +42,17 @@ def bridge_device():
 
 
 @pytest.fixture(scope="module")
+def sim_power_device():
+    system = nidaqmx.system.System.local()
+
+    for device in system.devices:
+        if device.dev_is_simulated and UsageTypeAI.POWER in device.ai_meas_types:
+            return device
+
+    return None
+
+
+@pytest.fixture(scope="module")
 def multi_threading_test_devices():
     system = nidaqmx.system.System.local()
 
