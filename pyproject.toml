@@ -30,11 +30,7 @@ exclude = ["nidaqmx/tests"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-# Need two version blocks to match numpy's changing version requirements.
-numpy = [
-    {version="1.21.5", python = "~3.7"},
-    {version="^1.22", python = "^3.8"}
-]
+numpy = "^1.20"
 six = "^1.16"
 # This functionality was merged into python stdlib beginning in 3.8
 importlib_metadata = {version="^4.10", python="~3.7"}
