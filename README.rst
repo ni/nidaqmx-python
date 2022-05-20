@@ -8,8 +8,7 @@ About
 
 The **nidaqmx** package contains an API (Application Programming Interface)
 for interacting with the NI-DAQmx driver. The package is implemented in Python.
-This package was created by NI, however it is not officially supported until 
-a major release (versioned 1.0+). The package is implemented as a complex, 
+The package is implemented as a complex, 
 highly object-oriented wrapper around the NI-DAQmx C API using the 
 `ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
 
@@ -138,11 +137,6 @@ Following is an example of using an **nidaqmx.system.System** object.
   >>> from enum import Enum
   >>> isinstance(phys_chan.ai_term_cfgs[0], Enum)
   True
-
-Support / Feedback
-==================
-
-The **nidaqmx** package is not supported by NI, and is provided as pre-release software. 
 
 Bugs / Feature Requests
 =======================
