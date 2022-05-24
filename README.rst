@@ -172,6 +172,8 @@ Documentation is available `here <http://nidaqmx-python.readthedocs.io>`_.
 Additional Documentation
 ========================
 
+Refer to the `Getting Started with NI-DAQmx <https://www.ni.com/en-us/support/documentation/supplemental/06/getting-started-with-ni-daqmx--main-page.html>`_ page for more detailed documentation of the C and labview interfaces and higher level concepts such as Tasks. The python API follows the C API names relatilvey closely.
+
 Refer to the `NI-DAQmx Help <http://digital.ni.com/express.nsf/bycode/exagg4>`_ 
 for API-agnostic information about NI-DAQmx or measurement concepts.
 
