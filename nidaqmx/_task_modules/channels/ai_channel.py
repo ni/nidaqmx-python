@@ -9024,10 +9024,10 @@ class AIChannel(Channel):
     @property
     def pwr_current_dev_scaling_coeff(self):
         """
-        List[float]: Indicates the coefficients of a polynomial equation
-            that NI-DAQmx uses to scale values from the native format of
-            the device to amperes. Property is readable anytime in a
-            task.
+        List[float]: Indicates the coefficients of the polynomial
+            equation that NI-DAQmx uses to scale values from the native
+            format of the device to amperes. Can be read at any time
+            during a task.
         """
         cfunc = lib_importer.windll.DAQmxGetPwrCurrentDevScalingCoeff
         if cfunc.argtypes is None:
@@ -9061,9 +9061,9 @@ class AIChannel(Channel):
     @property
     def pwr_current_setpoint(self):
         """
-        float: Specifies the output current, in amperes unit. If the
-            load draws current exceeding this specified value, the
-            device will operate under Constant Current mode.
+        float: Specifies the output current, in amperes. If the load
+            draws current greater than the specified value, the device
+            will operate in Constant Current mode.
         """
         val = ctypes.c_double()
 
@@ -9112,8 +9112,8 @@ class AIChannel(Channel):
     def pwr_idle_output_behavior(self):
         """
         :class:`nidaqmx.constants.PowerIdleOutputBehavior`: Specifies
-            whether output will be disabled or maintaining existing
-            value after the task is uncommitted.
+            whether to disable the output or maintain the existing value
+            after the task is uncommitted.
         """
         val = ctypes.c_int()
 
@@ -9162,14 +9162,11 @@ class AIChannel(Channel):
     @property
     def pwr_output_enable(self):
         """
-        bool: Specifies to enables or disables output of power module.
-            By default, the output is to be enabled but it can also be
-            explicitly enabled or disabled on set. Property is settable
-            even while a task is running and it is readable anytime in a
-            task. When task is not running, enabling the output does not
-            take effect until Daqmx Commit function is called. When task
-            is running, enabling the output will take effect
-            immediately.
+        bool: Specifies whether to enable or disable power module
+            output. Can be set while a task is running. Can be read at
+            any time during a task. When a task is running, the output
+            is enabled immediately. Otherwise, the output is not enabled
+            until the task enters the Committed state.
         """
         val = c_bool32()
 
@@ -9216,9 +9213,9 @@ class AIChannel(Channel):
     @property
     def pwr_output_state(self):
         """
-        :class:`nidaqmx.constants.PowerOutputState`: Indicates the
-            operating state of the power channel. Property is readable
-            anytime in a task.
+        :class:`nidaqmx.constants.PowerOutputState`: Indicates power
+            channel operating state. Can be read at any time during a
+            task.
         """
         val = ctypes.c_int()
 
@@ -9239,12 +9236,11 @@ class AIChannel(Channel):
     @property
     def pwr_remote_sense(self):
         """
-        :class:`nidaqmx.constants.Sense`: Specifies whether to use
-            remote sense or local sense of the output voltage. DAQmx
-            Read (Power) will return remote voltage if Remote Sense
-            attribute is set to Remote. DAQmx Read (Power) will return
-            local voltage if Remote Sense attribute is set to Local.
-            Reading this property will return user defined value.
+        :class:`nidaqmx.constants.Sense`: Specifies whether to use local
+            or remote sense to sense the output voltage. DAQmx Read
+            (Power) will return remote or local voltage based on the
+            Remote Sense attribute value. Reading this property will
+            return the user-defined value.
         """
         val = ctypes.c_int()
 
@@ -9293,9 +9289,10 @@ class AIChannel(Channel):
     @property
     def pwr_voltage_dev_scaling_coeff(self):
         """
-        List[float]: Indicates the coefficients of a polynomial equation
-            that NI-DAQmx uses to scale values from the native format of
-            the device to volts. Property is readable anytime in a task.
+        List[float]: Indicates the coefficients of the polynomial
+            equation that NI-DAQmx uses to scale values from the native
+            format of the device to volts. Can be read at any time
+            during a task.
         """
         cfunc = lib_importer.windll.DAQmxGetPwrVoltageDevScalingCoeff
         if cfunc.argtypes is None:
@@ -9329,9 +9326,9 @@ class AIChannel(Channel):
     @property
     def pwr_voltage_setpoint(self):
         """
-        float: Specifies the constant output voltage, in volts. Property
-            is settable even while a task is running and it is readable
-            anytime in a task.
+        float: Specifies the constant output voltage, in volts. Can be
+            set while a task is running. Can be read at any time during
+            a task.
         """
         val = ctypes.c_double()
 

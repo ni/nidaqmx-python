@@ -1278,9 +1278,9 @@ class AIChannelCollection(ChannelCollection):
                 channels to use to create virtual channels. The DAQmx
                 physical channel constant lists all physical channels on
                 devices and modules installed in the system.
-            voltage_setpoint (float): Specifies in volts the constant
+            voltage_setpoint (float): Specifies, in volts, the constant
                 output voltage.
-            current_setpoint (float): Specifies in amperes the output
+            current_setpoint (float): Specifies, in amperes, the output
                 current.
             output_enable (bool): Specifies whether to enable or disable
                 the output.
