@@ -23,7 +23,7 @@ class TestPowerSingleChannelReader(TestDAQmxIOBase):
     These tests use simulated TestScale PPS device(s), TS-15200.
     """
 
-    @pytest.mark.skip(reason="DAQmxReadPowerScalarF64 not implemented, yet")
+    # @pytest.mark.skip(reason="DAQmxReadPowerScalarF64 not implemented, yet")
     @pytest.mark.parametrize(
         'seed,output_enable',
         [
