@@ -6,7 +6,12 @@ pp = pprint.PrettyPrinter(indent=4)
 
 
 with nidaqmx.Task() as task:
-    task.ai_channels.add_ai_power_chan("TS1Mod1/power")
+    voltage_setpoint = 0
+    current_setpoint = 0.03
+    output_enable = True
+
+    task.ai_channels.add_ai_power_chan(
+        "TS1Mod1/power", voltage_setpoint, current_setpoint, output_enable)
     
     task.timing.cfg_samp_clk_timing(
         100, sample_mode=AcquisitionType.CONTINUOUS)
