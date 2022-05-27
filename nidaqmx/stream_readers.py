@@ -4,7 +4,7 @@ from nidaqmx import DaqError
 from nidaqmx.constants import READ_ALL_AVAILABLE
 from nidaqmx._task_modules.read_functions import (
     _read_analog_f_64, _read_analog_scalar_f_64,
-    _read_power_f_64, _read_power_i_16,
+    _read_power_f_64, _read_power_scalar_f_64, _read_power_i_16,
     _read_binary_i_16, _read_binary_i_32,
     _read_binary_u_16, _read_binary_u_32,
     _read_digital_lines, _read_digital_u_8, _read_digital_u_16,
@@ -967,7 +967,7 @@ class PowerMultiChannelReader(ChannelReaderBase):
                 once to read the requested samples and returns an error
                 if it is unable to.
         """
-        self._verify_array(voltage_, 1, True, False)
+        self._verify_array(voltage_data, 1, True, False)
         self._verify_array(current_data, 1, True, False)
 
         _read_power_f_64(
