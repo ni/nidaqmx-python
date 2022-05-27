@@ -78,6 +78,29 @@ def _read_power_f_64(
     return samps_per_chan_read.value
 
 
+def _read_power_scalar_f_64(task_handle, timeout):
+    voltage_value = ctypes.c_double()
+    current_value = ctypes.c_double()
+
+    cfunc = lib_importer.windll.DAQmxReadPowerScalarF64
+    if cfunc.argtypes is None:
+        with cfunc.arglock:
+            if cfunc.argtypes is None:
+                cfunc.argtypes = [
+                    lib_importer.task_handle, ctypes.c_double,
+                    ctypes.POINTER(ctypes.c_double),
+                    ctypes.POINTER(ctypes.c_double),
+                    ctypes.POINTER(c_bool32)]
+
+    error_code = cfunc(
+        task_handle, timeout,
+        ctypes.byref(voltage_value), ctypes.byref(current_value),
+        None)
+    check_for_error(error_code)
+
+    return (voltage_value.value, current_value.value)
+
+
 def _read_power_i_16(
         task_handle, read_voltage_array, read_current_array, num_samps_per_chan,
         timeout, fill_mode=FillMode.GROUP_BY_CHANNEL):

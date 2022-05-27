@@ -1,6 +1,7 @@
 import collections
 import re
 
+import math
 import numpy
 import pytest
 import random
@@ -596,15 +597,20 @@ class TestCounterReadWrite(TestDAQmxIOBase):
             assert value_read.high_tick == high_ticks
             assert value_read.low_tick == low_ticks
 
-    @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_power_1_samp(self, sim_power_device, seed):
+    @pytest.mark.parametrize(
+        'seed,output_enable',
+        [
+            (generate_random_seed(), True),
+            (generate_random_seed(), False)
+        ]
+    )
+    def test_power_1_chan_1_samp(self, sim_power_device, seed, output_enable):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         pwr_phys_chan = f"{sim_power_device.name}/power"
         voltage_setpoint = 0.0
         current_setpoint = 0.03
-        output_enable = False
         with nidaqmx.Task() as read_task:
             read_task.ai_channels.add_ai_power_chan(
                 pwr_phys_chan, voltage_setpoint, current_setpoint, output_enable,
@@ -613,19 +619,59 @@ class TestCounterReadWrite(TestDAQmxIOBase):
             read_task.start()
             value_read = read_task.read()
 
-            # Simulated loads are 0.
-            assert value_read.voltage == 0.0
-            assert value_read.current == 0.0
+            if output_enable:
+                assert value_read.voltage == pytest.approx(voltage_setpoint)
+                assert value_read.current == pytest.approx(current_setpoint)
+            else:
+                assert math.isnan(value_read.voltage)
+                assert math.isnan(value_read.current)
 
-    @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_power_n_samp(self, sim_power_device, seed):
+    @pytest.mark.parametrize(
+        'seed,output_enables',
+        [
+            (generate_random_seed(), [True, True]),
+            (generate_random_seed(), [True, False]),
+            (generate_random_seed(), [False, True]),
+            (generate_random_seed(), [False, False])
+        ]
+    )
+    def test_power_n_chan_1_samp(self, sim_power_devices, seed, output_enables):
+        # Reset the pseudorandom number generator with seed.
+        random.seed(seed)
+
+        voltage_setpoint = 0.0
+        current_setpoint = 0.03
+        with nidaqmx.Task() as read_task:
+            for device, output_enable in zip(sim_power_devices, output_enables):
+                pwr_phys_chan = f"{device.name}/power"
+                read_task.ai_channels.add_ai_power_chan(
+                    pwr_phys_chan, voltage_setpoint, current_setpoint, output_enable)
+
+            read_task.start()
+            value_read = read_task.read()
+
+            for data_idx, output_enable in enumerate(output_enables):
+                if output_enable:
+                    assert value_read[data_idx].voltage == pytest.approx(voltage_setpoint)
+                    assert value_read[data_idx].current == pytest.approx(current_setpoint)
+                else:
+                    assert math.isnan(value_read[data_idx].voltage)
+                    assert math.isnan(value_read[data_idx].current)
+
+    @pytest.mark.parametrize(
+        'seed,output_enable',
+        [
+            (generate_random_seed(), True),
+            (generate_random_seed(), False)
+        ]
+    )
+    def test_power_1_chan_n_samp(self, sim_power_device, seed, output_enable):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         pwr_phys_chan = f"{sim_power_device.name}/power"
         voltage_setpoint = 0.0
         current_setpoint = 0.03
-        output_enable = False
         with nidaqmx.Task() as read_task:
             read_task.ai_channels.add_ai_power_chan(
                 pwr_phys_chan, voltage_setpoint, current_setpoint, output_enable,
@@ -634,6 +680,43 @@ class TestCounterReadWrite(TestDAQmxIOBase):
             read_task.start()
             values_read = read_task.read(number_of_samples_per_channel=10)
 
-            # Simulated loads are 0.
-            assert all(sample.voltage == 0.0 for sample in values_read)
-            assert all(sample.current == 0.0 for sample in values_read)
+            if output_enable:
+                assert all(sample.voltage == pytest.approx(voltage_setpoint) for sample in values_read)
+                assert all(sample.current == pytest.approx(current_setpoint) for sample in values_read)
+            else:
+                assert all(math.isnan(sample.voltage) for sample in values_read)
+                assert all(math.isnan(sample.current) for sample in values_read)
+
+    @pytest.mark.parametrize(
+        'seed,output_enables',
+        [
+            (generate_random_seed(), [True, True]),
+            (generate_random_seed(), [True, False]),
+            (generate_random_seed(), [False, True]),
+            (generate_random_seed(), [False, False])
+        ]
+    )
+    def test_power_n_chan_n_samp(self, sim_power_devices, seed, output_enables):
+        # Reset the pseudorandom number generator with seed.
+        random.seed(seed)
+
+        voltage_setpoint = 0.0
+        current_setpoint = 0.03
+        with nidaqmx.Task() as read_task:
+            for device, output_enable in zip(sim_power_devices, output_enables):
+                pwr_phys_chan = f"{device.name}/power"
+                read_task.ai_channels.add_ai_power_chan(
+                    pwr_phys_chan, voltage_setpoint, current_setpoint, output_enable)
+
+            read_task.start()
+            values_read = read_task.read(number_of_samples_per_channel=10)
+
+            for data_idx, output_enable in enumerate(output_enables):
+                # Get the data for just this channel
+                channel_values = values_read[data_idx]
+                if output_enable:
+                    assert all(sample.voltage == pytest.approx(voltage_setpoint) for sample in channel_values)
+                    assert all(sample.current == pytest.approx(current_setpoint) for sample in channel_values)
+                else:
+                    assert all(math.isnan(sample.voltage) for sample in channel_values)
+                    assert all(math.isnan(sample.current) for sample in channel_values)

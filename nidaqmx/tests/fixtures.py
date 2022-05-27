@@ -53,6 +53,18 @@ def sim_power_device():
 
 
 @pytest.fixture(scope="module")
+def sim_power_devices():
+    system = nidaqmx.system.System.local()
+
+    devices = []
+    for device in system.devices:
+        if device.dev_is_simulated and UsageTypeAI.POWER in device.ai_meas_types:
+            devices.append(device)
+
+    return devices
+
+
+@pytest.fixture(scope="module")
 def multi_threading_test_devices():
     system = nidaqmx.system.System.local()
 

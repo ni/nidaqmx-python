@@ -719,16 +719,6 @@ class Task(object):
                 return data[:samples_read]
             return data
 
-        if (read_chan_type == ChannelType.ANALOG_INPUT and
-                (meas_type == UsageTypeAI.POWER)):
-
-            if num_samples_not_set and array_shape == 1:
-                return data[0]
-            # Power measurements should not have N channel versions.
-            if samples_read != number_of_samples_per_channel:
-                return data[:samples_read]
-            return data
-
         if num_samples_not_set and array_shape == 1:
             return data.tolist()[0]
 
