@@ -498,16 +498,22 @@ class Polarity(Enum):
     ACTIVE_LOW = 10096  #: Low state is the active state.
 
 
+class PowerCalibrationType(Enum):
+    REMOTE_VOLTAGE = 15100  #: Calibrate remote voltage for the power module.
+    LOCAL_VOLTAGE = 15101  #: Calibrate local voltage for the power module.
+    CURRENT = 15102  #: Calibrate current for the power module.
+
+
 class PowerIdleOutputBehavior(Enum):
-    OUTPUT_DISABLED = 15503  #: The output of the module is disabled. Generating 0 V.
-    MAINTAIN_EXISTING_VALUE = 12528  #: Continue generating the current value.
+    OUTPUT_DISABLED = 15503  #: Disable power output.
+    MAINTAIN_EXISTING_VALUE = 12528  #: Continue generating the current power.
 
 
 class PowerOutputState(Enum):
-    CONSTANT_VOLTAGE = 15500  #: Power module channel is in constant voltage mode.
-    CONSTANT_CURRENT = 15501  #: Power module channel is in constant current mode.
-    OVERVOLTAGE = 15502  #: Power module channel is overvoltage.
-    OUTPUT_DISABLED = 15503  #: Power module channel output is disabled.
+    CONSTANT_VOLTAGE = 15500  #: Power output is maintaining a constant voltage by adjusting the current.
+    CONSTANT_CURRENT = 15501  #: Power output is maintaining a constant current by adjusting the voltage.
+    OVERVOLTAGE = 15502  #: Voltage output has exceeded its limit.
+    OUTPUT_DISABLED = 15503  #: Power output is disabled.
 
 
 class PowerUpChannelType(Enum):
@@ -965,7 +971,7 @@ class UsageTypeAI(Enum):
     PRESSURE_BRIDGE = 15902  #: Pressure measurement using a bridge-based sensor.
     TEDS = 12531  #: Measurement type defined by TEDS.
     CHARGE = 16105  #: Charge measurement.
-    POWER = 16201  #: Power measurement.
+    POWER = 16201  #: Power source and measurement.
 
 
 class UsageTypeAO(Enum):
