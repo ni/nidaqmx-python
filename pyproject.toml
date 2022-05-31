@@ -30,7 +30,11 @@ exclude = ["nidaqmx/tests"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-numpy = "^1.20"
+numpy = [
+    {version="^1.20", python = "<3.10"},
+    # precompiled wheels only available in the 1.22+
+    {version="^1.22", python = "^3.10"}
+]
 six = "^1.16"
 # This functionality was merged into python stdlib beginning in 3.8
 importlib_metadata = {version="^4.10", python="~3.7"}
