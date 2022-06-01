@@ -629,10 +629,34 @@ class Task(object):
                     self._handle, voltages, currents,
                     number_of_samples_per_channel, timeout)
 
-                data = []
-                for v, i in zip(voltages, currents):
-                    data.append(PowerMeasurement(voltage=i, current=i))
-
+                if number_of_channels > 1:
+                    if number_of_samples_per_channel == 1:
+                        # n channel, 1 sample
+                        data = []
+                        for v, i in zip(voltages, currents):
+                            data.append(PowerMeasurement(voltage=v, current=i))
+                        return data
+                    else:
+                        # n channel, n samples
+                        data = []
+                        for channel_index in range(number_of_channels):
+                            channel_data = []
+                            channel_voltages = voltages[channel_index]
+                            channel_currents = currents[channel_index]
+                            for v, i in zip(channel_voltages, channel_currents):
+                                channel_data.append(PowerMeasurement(voltage=v, current=i))
+                            data.append(channel_data)
+                        return data
+                else:
+                    if number_of_samples_per_channel == 1:
+                        # 1 channel, 1 sample
+                        return PowerMeasurement(voltage=voltages[0], current=currents[0])
+                    else:
+                        # 1 channel, n samples
+                        data = []
+                        for v, i in zip(voltages, currents):
+                            data.append(PowerMeasurement(voltage=v, current=i))
+                        return data[:samples_read]
             else:
                 data = numpy.zeros(array_shape, dtype=numpy.float64)
                 samples_read = _read_analog_f_64(
@@ -714,19 +738,11 @@ class Task(object):
 
             if num_samples_not_set and array_shape == 1:
                 return data[0]
+
             # Counter pulse measurements should not have N channel versions.
             if samples_read != number_of_samples_per_channel:
                 return data[:samples_read]
-            return data
 
-        if (read_chan_type == ChannelType.ANALOG_INPUT and
-                (meas_type == UsageTypeAI.POWER)):
-
-            if num_samples_not_set and array_shape == 1:
-                return data[0]
-            # Power measurements should not have N channel versions.
-            if samples_read != number_of_samples_per_channel:
-                return data[:samples_read]
             return data
 
         if num_samples_not_set and array_shape == 1:

@@ -1,6 +1,7 @@
 import collections
 import re
 
+import math
 import numpy
 import pytest
 import random
@@ -10,10 +11,10 @@ import nidaqmx
 from nidaqmx.constants import Edge
 from nidaqmx.utils import flatten_channel_string
 from nidaqmx.stream_readers import (
-    AnalogSingleChannelReader, AnalogMultiChannelReader, PowerSingleChannelReader, PowerSingleChannelBinaryReader)
+    AnalogSingleChannelReader, AnalogMultiChannelReader)
 from nidaqmx.stream_writers import (
     AnalogSingleChannelWriter, AnalogMultiChannelWriter)
-from nidaqmx.tests.fixtures import sim_power_device, x_series_device
+from nidaqmx.tests.fixtures import x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 from nidaqmx.tests.test_read_write import TestDAQmxIOBase
 
@@ -246,61 +247,3 @@ class TestAnalogMultiChannelReaderWriter(TestDAQmxIOBase):
 
             numpy.testing.assert_allclose(
                 values_read, values_to_test, rtol=0.05, atol=0.005)
-
-    @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_power_many_sample(self, sim_power_device, seed):
-        # Reset the pseudorandom number generator with seed.
-        random.seed(seed)
-
-        pwr_phys_chan = f"{sim_power_device.name}/power"
-        voltage_setpoint = 0.0
-        current_setpoint = 0.03
-        output_enable = False
-        number_of_samples_per_channel = 10
-        voltage_data = numpy.zeros(number_of_samples_per_channel, dtype=numpy.float64)
-        current_data = numpy.zeros(number_of_samples_per_channel, dtype=numpy.float64)
-
-        with nidaqmx.Task() as read_task:
-            read_task.ai_channels.add_ai_power_chan(
-                pwr_phys_chan, voltage_setpoint, current_setpoint, output_enable,
-                name_to_assign_to_channel="PowerChannel")
-
-            reader = PowerSingleChannelReader(read_task.in_stream)
-
-            read_task.start()
-            reader.read_many_sample(
-                voltage_data, current_data,
-                number_of_samples_per_channel=number_of_samples_per_channel)
-
-            # Simulated loads are 0.
-            assert all(sample == 0.0 for sample in voltage_data)
-            assert all(sample == 0.0 for sample in current_data)
-
-    @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_power_many_sample_binary(self, sim_power_device, seed):
-        # Reset the pseudorandom number generator with seed.
-        random.seed(seed)
-
-        pwr_phys_chan = f"{sim_power_device.name}/power"
-        voltage_setpoint = 0.0
-        current_setpoint = 0.03
-        output_enable = False
-        number_of_samples_per_channel = 10
-        voltage_data = numpy.zeros(number_of_samples_per_channel, dtype=numpy.int16)
-        current_data = numpy.zeros(number_of_samples_per_channel, dtype=numpy.int16)
-
-        with nidaqmx.Task() as read_task:
-            read_task.ai_channels.add_ai_power_chan(
-                pwr_phys_chan, voltage_setpoint, current_setpoint, output_enable,
-                name_to_assign_to_channel="PowerChannel")
-
-            reader = PowerSingleChannelBinaryReader(read_task.in_stream)
-
-            read_task.start()
-            reader.read_many_sample(
-                voltage_data, current_data,
-                number_of_samples_per_channel=number_of_samples_per_channel)
-
-            # Simulated loads are 0.
-            assert all(sample == 0 for sample in voltage_data)
-            assert all(sample == 0 for sample in current_data)
