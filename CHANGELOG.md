@@ -16,12 +16,8 @@ All notable changes to this project will be documented in this file.
 
 ## 0.6.3
 
-* ### Merged Pull Requests
-    * ...
-* ### Resolved Issues
-    * ...
 * ### Major Changes
-    * ...
+    * DAQmx 22.0 updates.
 
 ## 0.6.2
 
