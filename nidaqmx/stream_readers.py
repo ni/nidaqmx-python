@@ -18,7 +18,7 @@ from nidaqmx.types import PowerMeasurement
 __all__ = ['AnalogSingleChannelReader', 'AnalogMultiChannelReader',
            'AnalogUnscaledReader', 'CounterReader',
            'DigitalSingleChannelReader', 'DigitalMultiChannelReader',
-           'PowerSingleChannelReader', 'PowerSingleChannelBinaryReader']
+           'PowerSingleChannelReader', 'PowerMultiChannelReader', 'PowerBinaryReader']
 
 
 class ChannelReaderBase(object):
