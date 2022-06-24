@@ -173,6 +173,9 @@ warnings.filterwarnings("always", category=DaqResourceWarning)
 
 
 def check_for_error(error_code, samps_per_chan_written=None, samps_per_chan_read=None):
+    if not error_code:
+        return
+
     from nidaqmx._lib import lib_importer
 
     if error_code < 0:
