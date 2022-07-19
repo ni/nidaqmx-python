@@ -833,8 +833,8 @@ class TerminalConfiguration(Enum):
     DEFAULT = -1  #: Default.
     RSE = 10083  #: Referenced Single-Ended.
     NRSE = 10078  #: Non-Referenced Single-Ended.
-    BAL_DIFF = 10106  #: Differential.
-    PSEUDODIFFERENTIAL = 12529  #: Pseudodifferential.
+    DIFF = 10106  #: Differential.
+    PSEUDO_DIFF = 12529  #: Pseudodifferential.
 
 
 class ThermocoupleType(Enum):
@@ -1084,7 +1084,7 @@ class _Callback(Enum):
 class _CouplingTypes(Enum):
     AC = 1  #: Device supports AC coupling
     DC = 2  #: Device supports DC coupling
-    GROUND = 4  #: Device supports ground coupling
+    GND = 4  #: Device supports ground coupling
     HF_REJECT = 8  #: Device supports High Frequency Reject coupling
     LF_REJECT = 16  #: Device supports Low Frequency Reject coupling
     NOISE_REJECT = 32  #: Device supports Noise Reject coupling
