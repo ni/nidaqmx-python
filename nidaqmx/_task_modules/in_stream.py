@@ -1933,6 +1933,69 @@ class InStream(object):
         return val.value
 
     @property
+    def reverse_voltage_error_chans(self):
+        """
+        List[str]: Indicates a list of names of any virtual channels in
+            the task for which reverse voltage error condition has been
+            detected. You must read the Reverse Voltage Error Channels
+            Exist property before you read this property. Otherwise, you
+            will receive an error.
+        """
+        cfunc = lib_importer.windll.DAQmxGetReverseVoltageErrorChans
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = ctypes.create_string_buffer(temp_size)
+
+            size_or_code = cfunc(
+                self._handle, val, temp_size)
+
+            if is_string_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return unflatten_channel_string(val.value.decode('ascii'))
+
+    @property
+    def reverse_voltage_error_chans_exist(self):
+        """
+        bool: Indicates if the device(s) detected reverse voltage error
+            for any channel in the task. Reverse voltage error will
+            occured if the local voltage is equal to negative saturated
+            voltage. Reading this property clears the error condition
+            status for all channels in the task. You must read this
+            property before you read the Reverse Voltage Error Channels
+            property. Otherwise, you will receive an error.
+        """
+        val = c_bool32()
+
+        cfunc = lib_importer.windll.DAQmxGetReverseVoltageErrorChansExist
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            self._handle, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @property
     def sleep_time(self):
         """
         float: Specifies in seconds the amount of time to sleep after
