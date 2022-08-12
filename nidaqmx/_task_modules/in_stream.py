@@ -1935,10 +1935,11 @@ class InStream(object):
     @property
     def reverse_voltage_error_chans(self):
         """
-        List[str]: Indicates a list of names of any virtual channels in the
-            task for which reverse voltage error condition has been detected.
-            You must read the Reverse Voltage Error Channels Exist property before
-            you read this property. Otherwise, you will receive an error.
+        List[str]: Indicates a list of names of any virtual channels in
+            the task for which reverse voltage error condition has been
+            detected. You must read the Reverse Voltage Error Channels
+            Exist property before you read this property. Otherwise, you
+            will receive an error.
         """
         cfunc = lib_importer.windll.DAQmxGetReverseVoltageErrorChans
         if cfunc.argtypes is None:
@@ -1971,10 +1972,12 @@ class InStream(object):
     @property
     def reverse_voltage_error_chans_exist(self):
         """
-        bool: Indicates if the device(s) detected reverse voltage error for any channel in
-            the task. Reverse voltage error will occured if the local voltage is equal to negative
-            saturated voltage. Reading this property clears the error condition status for all channels
-            in the task. You must read this property before you read the Reverse Voltage Error Channels
+        bool: Indicates if the device(s) detected reverse voltage error
+            for any channel in the task. Reverse voltage error will
+            occured if the local voltage is equal to negative saturated
+            voltage. Reading this property clears the error condition
+            status for all channels in the task. You must read this
+            property before you read the Reverse Voltage Error Channels
             property. Otherwise, you will receive an error.
         """
         val = c_bool32()
