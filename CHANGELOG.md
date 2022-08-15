@@ -18,11 +18,13 @@ All notable changes to this project will be documented in this file.
 ## 0.6.4
 
 * ### Merged Pull Requests
-    * ...
+    * [179: Optimize for happy path](https://github.com/ni/nidaqmx-python/pull/179)
+    * [180: Use ndarray.size instead of numpy.prod](https://github.com/ni/nidaqmx-python/pull/180)
+    * [182: fix enum bitfields](https://github.com/ni/nidaqmx-python/pull/182)
+    * [183: add support for reverse voltage error attributes to nidaqmx-python](https://github.com/ni/nidaqmx-python/pull/183)
+    * [185: update testing to allow for some simulation](https://github.com/ni/nidaqmx-python/pull/185)
 * ### Resolved Issues
-    * ...
-* ### Major Changes
-    * ...
+    * [181: mismatched enum names in ai_term_cfgs](https://github.com/ni/nidaqmx-python/issues/181)
 
 ## 0.6.3
 
