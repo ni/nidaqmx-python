@@ -4,7 +4,7 @@ import time
 
 import nidaqmx
 from nidaqmx.constants import AcquisitionType
-from nidaqmx.tests.fixtures import x_series_device
+from nidaqmx.tests.fixtures import any_x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 
 
@@ -15,7 +15,7 @@ class TestEvents(object):
     """
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_every_n_samples_event(self, x_series_device, seed):
+    def test_every_n_samples_event(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -24,7 +24,7 @@ class TestEvents(object):
 
         with nidaqmx.Task() as task:
             task.ai_channels.add_ai_voltage_chan(
-                x_series_device.ai_physical_chans[0].name)
+                any_x_series_device.ai_physical_chans[0].name)
 
             samples_multiple = random.randint(2, 5)
             num_samples = samples_chunk * samples_multiple

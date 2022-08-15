@@ -6,7 +6,7 @@ import nidaqmx
 import nidaqmx.system
 from nidaqmx import DaqError
 from nidaqmx.constants import AcquisitionType, UsageTypeAI
-from nidaqmx.tests.fixtures import x_series_device, bridge_device
+from nidaqmx.tests.fixtures import any_x_series_device, bridge_device
 from nidaqmx.tests.helpers import generate_random_seed
 
 
@@ -16,15 +16,15 @@ class TestPropertyBasicDataTypes(object):
     setter and deleter methods for different basic data types.
     """
 
-    def test_boolean_property(self, x_series_device):
+    def test_boolean_property(self, any_x_series_device):
 
         with nidaqmx.Task() as task:
             task.ai_channels.add_ai_voltage_chan(
-                x_series_device.ai_physical_chans[0].name)
+                any_x_series_device.ai_physical_chans[0].name)
 
             task.timing.cfg_samp_clk_timing(1000)
             task.triggers.start_trigger.cfg_dig_edge_start_trig(
-                '/{0}/Ctr0InternalOutput'.format(x_series_device.name))
+                '/{0}/Ctr0InternalOutput'.format(any_x_series_device.name))
 
             # Test property initial value.
             assert not task.triggers.start_trigger.retriggerable
@@ -37,11 +37,11 @@ class TestPropertyBasicDataTypes(object):
             del task.triggers.start_trigger.retriggerable
             assert not task.triggers.start_trigger.retriggerable
 
-    def test_enum_property(self, x_series_device):
+    def test_enum_property(self, any_x_series_device):
 
         with nidaqmx.Task() as task:
             task.ai_channels.add_ai_voltage_chan(
-                x_series_device.ai_physical_chans[0].name)
+                any_x_series_device.ai_physical_chans[0].name)
 
             task.timing.cfg_samp_clk_timing(
                 1000, sample_mode=AcquisitionType.CONTINUOUS)
@@ -60,11 +60,11 @@ class TestPropertyBasicDataTypes(object):
             assert (task.timing.samp_quant_samp_mode ==
                     AcquisitionType.CONTINUOUS)
 
-    def test_float_property(self, x_series_device):
+    def test_float_property(self, any_x_series_device):
 
         with nidaqmx.Task() as task:
             ai_channel = task.ai_channels.add_ai_voltage_chan(
-                x_series_device.ai_physical_chans[0].name, max_val=5)
+                any_x_series_device.ai_physical_chans[0].name, max_val=5)
 
             # Test property default value.
             assert ai_channel.ai_max == 5
@@ -82,13 +82,13 @@ class TestPropertyBasicDataTypes(object):
             assert e.value.error_code == -200695
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_int_property(self, x_series_device, seed):
+    def test_int_property(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         with nidaqmx.Task() as task:
             task.ci_channels.add_ci_count_edges_chan(
-                x_series_device.ci_physical_chans[0].name)
+                any_x_series_device.ci_physical_chans[0].name)
 
             # Test property default value.
             assert task.in_stream.offset == 0
@@ -106,11 +106,11 @@ class TestPropertyBasicDataTypes(object):
             del task.in_stream.offset
             assert task.in_stream.offset == 0
 
-    def test_string_property(self, x_series_device):
+    def test_string_property(self, any_x_series_device):
 
         with nidaqmx.Task() as task:
             ai_channel = task.ai_channels.add_ai_voltage_chan(
-                x_series_device.ai_physical_chans[0].name)
+                any_x_series_device.ai_physical_chans[0].name)
 
             # Test property default value.
             assert ai_channel.description == ''
@@ -125,13 +125,13 @@ class TestPropertyBasicDataTypes(object):
             assert ai_channel.description == ''
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_uint_property(self, x_series_device, seed):
+    def test_uint_property(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         with nidaqmx.Task() as task:
             task.ai_channels.add_ai_voltage_chan(
-                x_series_device.ai_physical_chans[0].name)
+                any_x_series_device.ai_physical_chans[0].name)
 
             task.timing.cfg_samp_clk_timing(1000)
 
@@ -157,16 +157,16 @@ class TestPropertyListDataTypes(object):
     list data types.
     """
 
-    def test_list_of_strings_property(self, x_series_device):
+    def test_list_of_strings_property(self, any_x_series_device):
 
-        terminals = x_series_device.terminals
+        terminals = any_x_series_device.terminals
 
         assert isinstance(terminals, list)
         assert isinstance(terminals[0], six.string_types)
 
-    def test_list_of_enums_property(self, x_series_device):
+    def test_list_of_enums_property(self, any_x_series_device):
 
-        terminals = x_series_device.ai_meas_types
+        terminals = any_x_series_device.ai_meas_types
 
         assert isinstance(terminals, list)
         assert isinstance(terminals[0], UsageTypeAI)

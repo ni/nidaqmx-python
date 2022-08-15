@@ -3,7 +3,7 @@ import pytest
 import random
 
 import nidaqmx
-from nidaqmx.tests.fixtures import x_series_device
+from nidaqmx.tests.fixtures import any_x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 from nidaqmx.utils import flatten_channel_string
 
@@ -15,11 +15,11 @@ class TestContainerOperations(object):
     """
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_concatenate_operations(self, x_series_device, seed):
+    def test_concatenate_operations(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        ai_phys_chans = random.sample(x_series_device.ai_physical_chans, 2)
+        ai_phys_chans = random.sample(any_x_series_device.ai_physical_chans, 2)
 
         with nidaqmx.Task() as task:
             ai_channel_1 = task.ai_channels.add_ai_voltage_chan(
@@ -58,11 +58,11 @@ class TestContainerOperations(object):
             assert ai_channel_2.ai_min == -0.1
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_equality_operations(self, x_series_device, seed):
+    def test_equality_operations(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        ai_phys_chans = random.sample(x_series_device.ai_physical_chans, 2)
+        ai_phys_chans = random.sample(any_x_series_device.ai_physical_chans, 2)
 
         with nidaqmx.Task() as task:
             ai_channel_1 = task.ai_channels.add_ai_voltage_chan(
@@ -75,14 +75,14 @@ class TestContainerOperations(object):
             assert ai_channel_1 != ai_channel_2
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_hash_operations(self, x_series_device, seed):
+    def test_hash_operations(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        ai_phys_chans = random.sample(x_series_device.ai_physical_chans, 3)
+        ai_phys_chans = random.sample(any_x_series_device.ai_physical_chans, 3)
 
         with nidaqmx.Task() as task_1, nidaqmx.Task() as task_2:
             ai_channel_1 = task_1.ai_channels.add_ai_voltage_chan(

@@ -4,7 +4,7 @@ import random
 
 import nidaqmx
 from nidaqmx.constants import TerminalConfiguration, TEDSUnits
-from nidaqmx.tests.fixtures import x_series_device
+from nidaqmx.tests.fixtures import any_x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 
 
@@ -15,11 +15,11 @@ class TestTEDS(object):
     """
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_create_teds_ai_voltage_chan(self, x_series_device, seed):
+    def test_create_teds_ai_voltage_chan(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        ai_phys_chan = random.choice(x_series_device.ai_physical_chans)
+        ai_phys_chan = random.choice(any_x_series_device.ai_physical_chans)
 
         # Generate path to a virtual TEDS file.
         teds_file_path = os.path.join(

@@ -3,7 +3,7 @@ import random
 
 import nidaqmx
 from nidaqmx.constants import Signal
-from nidaqmx.tests.fixtures import x_series_device
+from nidaqmx.tests.fixtures import any_x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 from nidaqmx.tests.test_read_write import TestDAQmxIOBase
 
@@ -18,12 +18,12 @@ class TestExportSignals(TestDAQmxIOBase):
     """
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_export_signals(self, x_series_device, seed):
+    def test_export_signals(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        ai_chan = random.choice(x_series_device.ai_physical_chans)
-        pfi_line = random.choice(self._get_device_pfi_lines(x_series_device))
+        ai_chan = random.choice(any_x_series_device.ai_physical_chans)
+        pfi_line = random.choice(self._get_device_pfi_lines(any_x_series_device))
 
         with nidaqmx.Task() as task:
             task.ai_channels.add_ai_voltage_chan(ai_chan.name)

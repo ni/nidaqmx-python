@@ -9,7 +9,7 @@ from nidaqmx.constants import (
     CurrentShuntResistorLocation, TemperatureUnits, RTDType,
     ResistanceConfiguration, ExcitationSource, ResistanceUnits, StrainUnits,
     StrainGageBridgeType, BridgeConfiguration)
-from nidaqmx.tests.fixtures import sim_power_device, x_series_device
+from nidaqmx.tests.fixtures import sim_power_device, any_x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 
 
@@ -24,11 +24,11 @@ class TestAnalogCreateChannels(object):
     """
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_create_ai_voltage_chan(self, x_series_device, seed):
+    def test_create_ai_voltage_chan(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        ai_phys_chan = random.choice(x_series_device.ai_physical_chans).name
+        ai_phys_chan = random.choice(any_x_series_device.ai_physical_chans).name
 
         with nidaqmx.Task() as task:
             ai_channel = task.ai_channels.add_ai_voltage_chan(
@@ -48,11 +48,11 @@ class TestAnalogCreateChannels(object):
                     "double_gain_scale")
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_create_ai_current_chan(self, x_series_device, seed):
+    def test_create_ai_current_chan(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        ai_phys_chan = random.choice(x_series_device.ai_physical_chans).name
+        ai_phys_chan = random.choice(any_x_series_device.ai_physical_chans).name
 
         with nidaqmx.Task() as task:
             ai_channel = task.ai_channels.add_ai_current_chan(
@@ -73,11 +73,11 @@ class TestAnalogCreateChannels(object):
             assert ai_channel.ai_current_shunt_resistance == 100.0
 
     # @pytest.mark.parametrize('seed', [generate_random_seed()])
-    # def test_create_ai_voltage_rms_chan(self, x_series_device, seed):
+    # def test_create_ai_voltage_rms_chan(self, any_x_series_device, seed):
     #     # Reset the pseudorandom number generator with seed.
     #     random.seed(seed)
     #
-    #     ai_phys_chan = random.choice(x_series_device.ai_physical_chans).name
+    #     ai_phys_chan = random.choice(any_x_series_device.ai_physical_chans).name
     #
     #     with nidaqmx.Task() as task:
     #         ai_channel = task.ai_channels.add_ai_voltage_rms_chan(
@@ -93,11 +93,11 @@ class TestAnalogCreateChannels(object):
     #         assert ai_channel.ai_custom_scale.name == ""
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_create_ai_rtd_chan(self, x_series_device, seed):
+    def test_create_ai_rtd_chan(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        ai_phys_chan = random.choice(x_series_device.ai_physical_chans).name
+        ai_phys_chan = random.choice(any_x_series_device.ai_physical_chans).name
 
         with nidaqmx.Task() as task:
             ai_channel = task.ai_channels.add_ai_rtd_chan(
@@ -121,11 +121,11 @@ class TestAnalogCreateChannels(object):
             assert ai_channel.ai_rtd_r_0 == 100.0
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_create_ai_thrmstr_chan_iex(self, x_series_device, seed):
+    def test_create_ai_thrmstr_chan_iex(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        ai_phys_chan = random.choice(x_series_device.ai_physical_chans).name
+        ai_phys_chan = random.choice(any_x_series_device.ai_physical_chans).name
 
         with nidaqmx.Task() as task:
             ai_channel = task.ai_channels.add_ai_thrmstr_chan_iex(
@@ -151,11 +151,11 @@ class TestAnalogCreateChannels(object):
             assert ai_channel.ai_thrmstr_c == 0.000000102
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_create_ai_thrmstr_chan_vex(self, x_series_device, seed):
+    def test_create_ai_thrmstr_chan_vex(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        ai_phys_chan = random.choice(x_series_device.ai_physical_chans).name
+        ai_phys_chan = random.choice(any_x_series_device.ai_physical_chans).name
 
         with nidaqmx.Task() as task:
             ai_channel = task.ai_channels.add_ai_thrmstr_chan_vex(
@@ -182,11 +182,11 @@ class TestAnalogCreateChannels(object):
             assert ai_channel.ai_thrmstr_r_1 == 5000.0
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_create_ai_resistance_chan(self, x_series_device, seed):
+    def test_create_ai_resistance_chan(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        ai_phys_chan = random.choice(x_series_device.ai_physical_chans).name
+        ai_phys_chan = random.choice(any_x_series_device.ai_physical_chans).name
 
         with nidaqmx.Task() as task:
             ai_channel = task.ai_channels.add_ai_resistance_chan(
@@ -207,11 +207,11 @@ class TestAnalogCreateChannels(object):
             assert ai_channel.ai_excit_val == 0.002
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_ai_strain_gage_chan(self, x_series_device, seed):
+    def test_ai_strain_gage_chan(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        ai_phys_chan = random.choice(x_series_device.ai_physical_chans).name
+        ai_phys_chan = random.choice(any_x_series_device.ai_physical_chans).name
 
         with nidaqmx.Task() as task:
             ai_channel = task.ai_channels.add_ai_strain_gage_chan(
@@ -239,11 +239,11 @@ class TestAnalogCreateChannels(object):
             assert ai_channel.ai_lead_wire_resistance == 0.1
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_create_ai_voltage_chan_with_excit(self, x_series_device, seed):
+    def test_create_ai_voltage_chan_with_excit(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        ai_phys_chan = random.choice(x_series_device.ai_physical_chans).name
+        ai_phys_chan = random.choice(any_x_series_device.ai_physical_chans).name
 
         with nidaqmx.Task() as task:
             ai_channel = task.ai_channels.add_ai_voltage_chan_with_excit(

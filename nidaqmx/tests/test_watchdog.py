@@ -6,7 +6,7 @@ import nidaqmx
 import nidaqmx.system
 from nidaqmx.system.watchdog import DOExpirationState
 from nidaqmx.constants import Level
-from nidaqmx.tests.fixtures import x_series_device
+from nidaqmx.tests.fixtures import real_x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 
 
@@ -17,14 +17,14 @@ class TestWatchdog(object):
     """
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_watchdog_task(self, x_series_device, seed):
+    def test_watchdog_task(self, real_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        do_line = random.choice(x_series_device.do_lines)
+        do_line = random.choice(real_x_series_device.do_lines)
 
         with nidaqmx.system.WatchdogTask(
-                x_series_device.name, timeout=0.5) as task:
+                real_x_series_device.name, timeout=0.5) as task:
             expir_states = [DOExpirationState(
                 physical_channel=do_line.name,
                 expiration_state=Level.TRISTATE)]
@@ -52,14 +52,14 @@ class TestWatchdog(object):
             task.stop()
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_watchdog_expir_state(self, x_series_device, seed):
+    def test_watchdog_expir_state(self, real_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        do_line = random.choice(x_series_device.do_lines)
+        do_line = random.choice(real_x_series_device.do_lines)
 
         with nidaqmx.system.WatchdogTask(
-                x_series_device.name, timeout=0.1) as task:
+                real_x_series_device.name, timeout=0.1) as task:
             expir_states = [DOExpirationState(
                 physical_channel=do_line.name,
                 expiration_state=Level.TRISTATE)]

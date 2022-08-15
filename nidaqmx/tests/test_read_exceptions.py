@@ -11,7 +11,7 @@ from nidaqmx.constants import (
     AcquisitionType, BusType, Level, TaskMode)
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.utils import flatten_channel_string
-from nidaqmx.tests.fixtures import x_series_device
+from nidaqmx.tests.fixtures import real_x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 
 
@@ -24,9 +24,9 @@ class TestReadExceptions(object):
     loopback routes on the device.
     """
 
-    def test_timeout(self, x_series_device):
+    def test_timeout(self, real_x_series_device):
         # USB streaming is very tricky.
-        if not (x_series_device.bus_type == BusType.PCIE or x_series_device.bus_type == BusType.PXIE):
+        if not (real_x_series_device.bus_type == BusType.PCIE or real_x_series_device.bus_type == BusType.PXIE):
             pytest.skip("Requires a plugin device.")
 
         samples_to_read = 75
@@ -38,7 +38,7 @@ class TestReadExceptions(object):
             # Use a counter output pulse train task as the sample clock source
             # for both the AI and AO tasks.
             sample_clk_task.co_channels.add_co_pulse_chan_freq(
-                '{0}/ctr0'.format(x_series_device.name), freq=sample_rate,
+                '{0}/ctr0'.format(real_x_series_device.name), freq=sample_rate,
                 idle_state=Level.LOW)
             sample_clk_task.timing.cfg_implicit_timing(
                 samps_per_chan=clocks_to_give,
@@ -46,10 +46,10 @@ class TestReadExceptions(object):
             sample_clk_task.control(TaskMode.TASK_COMMIT)
 
             samp_clk_terminal = '/{0}/Ctr0InternalOutput'.format(
-                x_series_device.name)
+                real_x_series_device.name)
 
             read_task.ai_channels.add_ai_voltage_chan(
-                x_series_device.ai_physical_chans[0].name, max_val=10, min_val=-10)
+                real_x_series_device.ai_physical_chans[0].name, max_val=10, min_val=-10)
             read_task.timing.cfg_samp_clk_timing(
                 sample_rate, source=samp_clk_terminal, sample_mode=AcquisitionType.CONTINUOUS)
 
@@ -76,9 +76,9 @@ class TestReadExceptions(object):
             number_of_samples_expected = (clocks_to_give - samples_to_read)
             assert timeout_exception.value.samps_per_chan_read == number_of_samples_expected
 
-    def test_timeout_raw(self, x_series_device):
+    def test_timeout_raw(self, real_x_series_device):
         # USB streaming is very tricky.
-        if not (x_series_device.bus_type == BusType.PCIE or x_series_device.bus_type == BusType.PXIE):
+        if not (real_x_series_device.bus_type == BusType.PCIE or real_x_series_device.bus_type == BusType.PXIE):
             pytest.skip("Requires a plugin device.")
 
         samples_to_read = 75
@@ -90,7 +90,7 @@ class TestReadExceptions(object):
             # Use a counter output pulse train task as the sample clock source
             # for both the AI and AO tasks.
             sample_clk_task.co_channels.add_co_pulse_chan_freq(
-                '{0}/ctr0'.format(x_series_device.name), freq=sample_rate,
+                '{0}/ctr0'.format(real_x_series_device.name), freq=sample_rate,
                 idle_state=Level.LOW)
             sample_clk_task.timing.cfg_implicit_timing(
                 samps_per_chan=clocks_to_give,
@@ -98,10 +98,10 @@ class TestReadExceptions(object):
             sample_clk_task.control(TaskMode.TASK_COMMIT)
 
             samp_clk_terminal = '/{0}/Ctr0InternalOutput'.format(
-                x_series_device.name)
+                real_x_series_device.name)
 
             read_task.ai_channels.add_ai_voltage_chan(
-                x_series_device.ai_physical_chans[0].name, max_val=10, min_val=-10)
+                real_x_series_device.ai_physical_chans[0].name, max_val=10, min_val=-10)
             read_task.timing.cfg_samp_clk_timing(
                 sample_rate, source=samp_clk_terminal, sample_mode=AcquisitionType.CONTINUOUS)
 
@@ -131,9 +131,9 @@ class TestReadExceptions(object):
             number_of_samples_expected = (clocks_to_give - samples_to_read)
             assert timeout_exception.value.samps_per_chan_read == number_of_samples_expected
 
-    def test_timeout_stream(self, x_series_device):
+    def test_timeout_stream(self, real_x_series_device):
         # USB streaming is very tricky.
-        if not (x_series_device.bus_type == BusType.PCIE or x_series_device.bus_type == BusType.PXIE):
+        if not (real_x_series_device.bus_type == BusType.PCIE or real_x_series_device.bus_type == BusType.PXIE):
             pytest.skip("Requires a plugin device.")
 
         samples_to_read = 75
@@ -147,7 +147,7 @@ class TestReadExceptions(object):
             # Use a counter output pulse train task as the sample clock source
             # for both the AI and AO tasks.
             sample_clk_task.co_channels.add_co_pulse_chan_freq(
-                '{0}/ctr0'.format(x_series_device.name), freq=sample_rate,
+                '{0}/ctr0'.format(real_x_series_device.name), freq=sample_rate,
                 idle_state=Level.LOW)
             sample_clk_task.timing.cfg_implicit_timing(
                 samps_per_chan=clocks_to_give,
@@ -155,10 +155,10 @@ class TestReadExceptions(object):
             sample_clk_task.control(TaskMode.TASK_COMMIT)
 
             samp_clk_terminal = '/{0}/Ctr0InternalOutput'.format(
-                x_series_device.name)
+                real_x_series_device.name)
 
             read_task.ai_channels.add_ai_voltage_chan(
-                x_series_device.ai_physical_chans[0].name, max_val=10, min_val=-10)
+                real_x_series_device.ai_physical_chans[0].name, max_val=10, min_val=-10)
             read_task.timing.cfg_samp_clk_timing(
                 sample_rate, source=samp_clk_terminal, sample_mode=AcquisitionType.CONTINUOUS)
 
