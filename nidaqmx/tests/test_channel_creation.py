@@ -189,12 +189,13 @@ class TestAnalogCreateChannels(object):
         ai_phys_chan = random.choice(any_x_series_device.ai_physical_chans).name
 
         with nidaqmx.Task() as task:
+            # Note: 1000 ohms @ 5 mA = 5V range, which exists on most X Series devices.
             ai_channel = task.ai_channels.add_ai_resistance_chan(
                 ai_phys_chan, name_to_assign_to_channel="ResistanceChannel",
                 min_val=-1000.0, max_val=1000.0, units=ResistanceUnits.OHMS,
                 resistance_config=ResistanceConfiguration.TWO_WIRE,
                 current_excit_source=ExcitationSource.EXTERNAL,
-                current_excit_val=0.002, custom_scale_name="")
+                current_excit_val=0.005, custom_scale_name="")
 
             assert ai_channel.physical_channel.name == ai_phys_chan
             assert ai_channel.name == "ResistanceChannel"
@@ -204,7 +205,7 @@ class TestAnalogCreateChannels(object):
             assert (ai_channel.ai_resistance_cfg ==
                     ResistanceConfiguration.TWO_WIRE)
             assert ai_channel.ai_excit_src == ExcitationSource.EXTERNAL
-            assert ai_channel.ai_excit_val == 0.002
+            assert ai_channel.ai_excit_val == 0.005
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
     def test_ai_strain_gage_chan(self, any_x_series_device, seed):

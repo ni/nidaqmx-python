@@ -52,10 +52,11 @@ class TestContainerOperations(object):
 
             # Test that setting property on concatenated channel changes the
             # property values of the individual channels.
-            ai_channel_1.ai_max = 0.1
-            ai_channel_1.ai_min = -0.1
-            assert ai_channel_2.ai_max == 0.1
-            assert ai_channel_2.ai_min == -0.1
+            # Note: 0.2V range exists on most X Series devices.
+            ai_channel_1.ai_max = 0.2
+            ai_channel_1.ai_min = -0.2
+            assert ai_channel_2.ai_max == 0.2
+            assert ai_channel_2.ai_min == -0.2
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
     def test_equality_operations(self, any_x_series_device, seed):
