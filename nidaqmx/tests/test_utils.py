@@ -2,7 +2,7 @@ import pytest
 import random
 
 from nidaqmx.utils import flatten_channel_string, unflatten_channel_string
-from nidaqmx.tests.fixtures import x_series_device
+from nidaqmx.tests.fixtures import any_x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 
 
@@ -13,7 +13,7 @@ class TestUtils(object):
     """
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_flatten_channel_string(self, x_series_device, seed):
+    def test_flatten_channel_string(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -24,7 +24,7 @@ class TestUtils(object):
         assert flatten_channel_string([]) == ''
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_unflatten_channel_string(self, x_series_device, seed):
+    def test_unflatten_channel_string(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 

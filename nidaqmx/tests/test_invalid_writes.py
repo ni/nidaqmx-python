@@ -5,22 +5,22 @@ import random
 import nidaqmx
 from nidaqmx.errors import DaqError
 from nidaqmx.utils import flatten_channel_string
-from nidaqmx.tests.fixtures import x_series_device
+from nidaqmx.tests.fixtures import any_x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 
 
 class TestInvalidWrites(object):
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_insufficient_write_data(self, x_series_device, seed):
+    def test_insufficient_write_data(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         # Randomly select physical channels to test.
         number_of_channels = random.randint(
-            2, len(x_series_device.ao_physical_chans))
+            2, len(any_x_series_device.ao_physical_chans))
         channels_to_test = random.sample(
-            x_series_device.ao_physical_chans, number_of_channels)
+            any_x_series_device.ao_physical_chans, number_of_channels)
 
         with nidaqmx.Task() as task:
             task.ao_channels.add_ao_voltage_chan(
@@ -40,15 +40,15 @@ class TestInvalidWrites(object):
             assert e.value.error_code == -200524
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_insufficient_numpy_write_data(self, x_series_device, seed):
+    def test_insufficient_numpy_write_data(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         # Randomly select physical channels to test.
         number_of_channels = random.randint(
-            2, len(x_series_device.ao_physical_chans))
+            2, len(any_x_series_device.ao_physical_chans))
         channels_to_test = random.sample(
-            x_series_device.ao_physical_chans, number_of_channels)
+            any_x_series_device.ao_physical_chans, number_of_channels)
 
         with nidaqmx.Task() as task:
             task.ao_channels.add_ao_voltage_chan(
@@ -64,15 +64,15 @@ class TestInvalidWrites(object):
             assert e.value.error_code == -200524
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_extraneous_write_data(self, x_series_device, seed):
+    def test_extraneous_write_data(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         # Randomly select physical channels to test.
         number_of_channels = random.randint(
-            1, len(x_series_device.ao_physical_chans))
+            1, len(any_x_series_device.ao_physical_chans))
         channels_to_test = random.sample(
-            x_series_device.ao_physical_chans, number_of_channels)
+            any_x_series_device.ao_physical_chans, number_of_channels)
 
         with nidaqmx.Task() as task:
             task.ao_channels.add_ao_voltage_chan(
@@ -92,15 +92,15 @@ class TestInvalidWrites(object):
             assert e.value.error_code == -200524
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_extraneous_numpy_write_data(self, x_series_device, seed):
+    def test_extraneous_numpy_write_data(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         # Randomly select physical channels to test.
         number_of_channels = random.randint(
-            1, len(x_series_device.ao_physical_chans))
+            1, len(any_x_series_device.ao_physical_chans))
         channels_to_test = random.sample(
-            x_series_device.ao_physical_chans, number_of_channels)
+            any_x_series_device.ao_physical_chans, number_of_channels)
 
         with nidaqmx.Task() as task:
             task.ao_channels.add_ao_voltage_chan(
@@ -122,15 +122,15 @@ class TestInvalidWrites(object):
             assert e.value.error_code == -200524
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_numpy_write_incorrectly_shaped_data(self, x_series_device, seed):
+    def test_numpy_write_incorrectly_shaped_data(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         # Randomly select physical channels to test.
         number_of_channels = random.randint(
-            2, len(x_series_device.ao_physical_chans))
+            2, len(any_x_series_device.ao_physical_chans))
         channels_to_test = random.sample(
-            x_series_device.ao_physical_chans, number_of_channels)
+            any_x_series_device.ao_physical_chans, number_of_channels)
         number_of_samples = random.randint(50, 100)
 
         with nidaqmx.Task() as task:

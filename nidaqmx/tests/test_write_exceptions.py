@@ -11,7 +11,7 @@ from nidaqmx.constants import (
     AcquisitionType, BusType, RegenerationMode)
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.utils import flatten_channel_string
-from nidaqmx.tests.fixtures import x_series_device
+from nidaqmx.tests.fixtures import real_x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 
 
@@ -24,9 +24,9 @@ class TestWriteExceptions(object):
     loopback routes on the device.
     """
 
-    def test_overwrite(self, x_series_device):
+    def test_overwrite(self, real_x_series_device):
         # USB streaming is very tricky.
-        if not (x_series_device.bus_type == BusType.PCIE or x_series_device.bus_type == BusType.PXIE):
+        if not (real_x_series_device.bus_type == BusType.PCIE or real_x_series_device.bus_type == BusType.PXIE):
             pytest.skip("Requires a plugin device.")
 
         number_of_samples = 100
@@ -36,10 +36,10 @@ class TestWriteExceptions(object):
 
         with nidaqmx.Task() as write_task:
             samp_clk_terminal = '/{0}/Ctr0InternalOutput'.format(
-                x_series_device.name)
+                real_x_series_device.name)
 
             write_task.ao_channels.add_ao_voltage_chan(
-                x_series_device.ao_physical_chans[0].name, max_val=10, min_val=-10)
+                real_x_series_device.ao_physical_chans[0].name, max_val=10, min_val=-10)
             write_task.timing.cfg_samp_clk_timing(
                 sample_rate, source=samp_clk_terminal, sample_mode=AcquisitionType.CONTINUOUS,
                 samps_per_chan=number_of_samples)
@@ -68,9 +68,9 @@ class TestWriteExceptions(object):
             # need to get into the nitty gritty device details on how much.
             assert timeout_exception.value.samps_per_chan_written > 0
 
-    def test_overwrite_during_prime(self, x_series_device):
+    def test_overwrite_during_prime(self, real_x_series_device):
         # USB streaming is very tricky.
-        if not (x_series_device.bus_type == BusType.PCIE or x_series_device.bus_type == BusType.PXIE):
+        if not (real_x_series_device.bus_type == BusType.PCIE or real_x_series_device.bus_type == BusType.PXIE):
             pytest.skip("Requires a plugin device.")
 
         number_of_samples = 100
@@ -81,10 +81,10 @@ class TestWriteExceptions(object):
 
         with nidaqmx.Task() as write_task:
             samp_clk_terminal = '/{0}/Ctr0InternalOutput'.format(
-                x_series_device.name)
+                real_x_series_device.name)
 
             write_task.ao_channels.add_ao_voltage_chan(
-                x_series_device.ao_physical_chans[0].name, max_val=10, min_val=-10)
+                real_x_series_device.ao_physical_chans[0].name, max_val=10, min_val=-10)
             write_task.timing.cfg_samp_clk_timing(
                 sample_rate, source=samp_clk_terminal, sample_mode=AcquisitionType.CONTINUOUS,
                 samps_per_chan=number_of_samples)

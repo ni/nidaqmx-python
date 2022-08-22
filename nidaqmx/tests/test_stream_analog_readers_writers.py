@@ -14,7 +14,7 @@ from nidaqmx.stream_readers import (
     AnalogSingleChannelReader, AnalogMultiChannelReader)
 from nidaqmx.stream_writers import (
     AnalogSingleChannelWriter, AnalogMultiChannelWriter)
-from nidaqmx.tests.fixtures import x_series_device
+from nidaqmx.tests.fixtures import real_x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 from nidaqmx.tests.test_read_write import TestDAQmxIOBase
 
@@ -37,13 +37,13 @@ class TestAnalogSingleChannelReaderWriter(TestDAQmxIOBase):
     """
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_one_sample(self, x_series_device, seed):
+    def test_one_sample(self, real_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         # Select a random loopback channel pair on the device.
         loopback_channel_pairs = self._get_analog_loopback_channels(
-            x_series_device)
+            real_x_series_device)
         loopback_channel_pair = random.choice(loopback_channel_pairs)
 
         with nidaqmx.Task() as write_task, nidaqmx.Task() as read_task:
@@ -72,7 +72,7 @@ class TestAnalogSingleChannelReaderWriter(TestDAQmxIOBase):
                 values_read, values_to_test, rtol=0.05, atol=0.005)
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_many_sample(self, x_series_device, seed):
+    def test_many_sample(self, real_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -81,7 +81,7 @@ class TestAnalogSingleChannelReaderWriter(TestDAQmxIOBase):
 
         # Select a random loopback channel pair on the device.
         loopback_channel_pairs = self._get_analog_loopback_channels(
-            x_series_device)
+            real_x_series_device)
         loopback_channel_pair = random.choice(loopback_channel_pairs)
 
         with nidaqmx.Task() as write_task, nidaqmx.Task() as read_task, \
@@ -90,12 +90,12 @@ class TestAnalogSingleChannelReaderWriter(TestDAQmxIOBase):
             # Use a counter output pulse train task as the sample clock source
             # for both the AI and AO tasks.
             sample_clk_task.co_channels.add_co_pulse_chan_freq(
-                '{0}/ctr0'.format(x_series_device.name), freq=sample_rate)
+                '{0}/ctr0'.format(real_x_series_device.name), freq=sample_rate)
             sample_clk_task.timing.cfg_implicit_timing(
                 samps_per_chan=number_of_samples)
 
             samp_clk_terminal = '/{0}/Ctr0InternalOutput'.format(
-                x_series_device.name)
+                real_x_series_device.name)
 
             write_task.ao_channels.add_ao_voltage_chan(
                 loopback_channel_pair.output_channel, max_val=10, min_val=-10)
@@ -143,13 +143,13 @@ class TestAnalogMultiChannelReaderWriter(TestDAQmxIOBase):
     """
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_one_sample(self, x_series_device, seed):
+    def test_one_sample(self, real_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         # Select a random loopback channel pair on the device.
         loopback_channel_pairs = self._get_analog_loopback_channels(
-            x_series_device)
+            real_x_series_device)
 
         number_of_channels = random.randint(2, len(loopback_channel_pairs))
         channels_to_test = random.sample(
@@ -182,7 +182,7 @@ class TestAnalogMultiChannelReaderWriter(TestDAQmxIOBase):
                 values_read, values_to_test, rtol=0.05, atol=0.005)
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_many_sample(self, x_series_device, seed):
+    def test_many_sample(self, real_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -191,7 +191,7 @@ class TestAnalogMultiChannelReaderWriter(TestDAQmxIOBase):
 
         # Select a random loopback channel pair on the device.
         loopback_channel_pairs = self._get_analog_loopback_channels(
-            x_series_device)
+            real_x_series_device)
 
         number_of_channels = random.randint(2, len(loopback_channel_pairs))
         channels_to_test = random.sample(
@@ -202,12 +202,12 @@ class TestAnalogMultiChannelReaderWriter(TestDAQmxIOBase):
             # Use a counter output pulse train task as the sample clock source
             # for both the AI and AO tasks.
             sample_clk_task.co_channels.add_co_pulse_chan_freq(
-                '{0}/ctr0'.format(x_series_device.name), freq=sample_rate)
+                '{0}/ctr0'.format(real_x_series_device.name), freq=sample_rate)
             sample_clk_task.timing.cfg_implicit_timing(
                 samps_per_chan=number_of_samples)
 
             samp_clk_terminal = '/{0}/Ctr0InternalOutput'.format(
-                x_series_device.name)
+                real_x_series_device.name)
 
             write_task.ao_channels.add_ao_voltage_chan(
                 flatten_channel_string(

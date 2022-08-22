@@ -4,7 +4,7 @@ import random
 import nidaqmx
 from nidaqmx import DaqError
 from nidaqmx.constants import TriggerType, Edge, AcquisitionType, TaskMode
-from nidaqmx.tests.fixtures import x_series_device
+from nidaqmx.tests.fixtures import any_x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 from nidaqmx.tests.test_read_write import TestDAQmxIOBase
 
@@ -16,11 +16,11 @@ class TestTriggers(TestDAQmxIOBase):
     """
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_arm_start_trigger(self, x_series_device, seed):
+    def test_arm_start_trigger(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        counter = random.choice(self._get_device_counters(x_series_device))
+        counter = random.choice(self._get_device_counters(any_x_series_device))
 
         with nidaqmx.Task() as task:
             task.co_channels.add_co_pulse_chan_freq(counter)
@@ -35,11 +35,11 @@ class TestTriggers(TestDAQmxIOBase):
                     TriggerType.NONE)
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_handshake_trigger(self, x_series_device, seed):
+    def test_handshake_trigger(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        counter = random.choice(self._get_device_counters(x_series_device))
+        counter = random.choice(self._get_device_counters(any_x_series_device))
 
         with nidaqmx.Task() as task:
             task.co_channels.add_co_pulse_chan_freq(counter)
@@ -50,11 +50,11 @@ class TestTriggers(TestDAQmxIOBase):
             assert e.value.error_code == -200452
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_pause_trigger(self, x_series_device, seed):
+    def test_pause_trigger(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        counter = random.choice(self._get_device_counters(x_series_device))
+        counter = random.choice(self._get_device_counters(any_x_series_device))
 
         with nidaqmx.Task() as task:
             task.co_channels.add_co_pulse_chan_freq(counter)
@@ -72,11 +72,11 @@ class TestTriggers(TestDAQmxIOBase):
                     TriggerType.NONE)
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_reference_trigger(self, x_series_device, seed):
+    def test_reference_trigger(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        counter = random.choice(self._get_device_counters(x_series_device))
+        counter = random.choice(self._get_device_counters(any_x_series_device))
 
         with nidaqmx.Task() as task:
             task.co_channels.add_co_pulse_chan_freq(counter)
@@ -87,12 +87,12 @@ class TestTriggers(TestDAQmxIOBase):
             assert e.value.error_code == -200452
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_start_trigger(self, x_series_device, seed):
+    def test_start_trigger(self, any_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        counter = random.choice(self._get_device_counters(x_series_device))
-        pfi_line = random.choice(self._get_device_pfi_lines(x_series_device))
+        counter = random.choice(self._get_device_counters(any_x_series_device))
+        pfi_line = random.choice(self._get_device_pfi_lines(any_x_series_device))
 
         with nidaqmx.Task() as task:
             task.co_channels.add_co_pulse_chan_freq(counter)

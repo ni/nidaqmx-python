@@ -7,7 +7,7 @@ from nidaqmx.constants import (
     Edge, TriggerType, AcquisitionType, Level, TaskMode)
 from nidaqmx.stream_readers import CounterReader
 from nidaqmx.stream_writers import CounterWriter
-from nidaqmx.tests.fixtures import x_series_device
+from nidaqmx.tests.fixtures import real_x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 from nidaqmx.tests.test_read_write import TestDAQmxIOBase
 
@@ -22,7 +22,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
     """
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_one_sample_uint32(self, x_series_device, seed):
+    def test_one_sample_uint32(self, real_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -30,7 +30,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
         frequency = random.uniform(1000, 10000)
 
         # Select random counters from the device.
-        counters = random.sample(self._get_device_counters(x_series_device), 2)
+        counters = random.sample(self._get_device_counters(real_x_series_device), 2)
 
         with nidaqmx.Task() as write_task, nidaqmx.Task() as read_task:
             write_task.co_channels.add_co_pulse_chan_freq(
@@ -53,7 +53,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             assert value_read == number_of_pulses
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_multi_sample_uint32(self, x_series_device, seed):
+    def test_multi_sample_uint32(self, real_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -61,7 +61,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
         frequency = random.uniform(1000, 10000)
 
         # Select random counters from the device.
-        counters = random.sample(self._get_device_counters(x_series_device), 3)
+        counters = random.sample(self._get_device_counters(real_x_series_device), 3)
 
         with nidaqmx.Task() as write_task, nidaqmx.Task() as read_task, \
                 nidaqmx.Task() as sample_clk_task:
@@ -110,7 +110,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             assert values_read.tolist() == expected_values
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_one_sample_double(self, x_series_device, seed):
+    def test_one_sample_double(self, real_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -118,7 +118,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
 
         # Select random counters from the device.
         counters = random.sample(
-            self._get_device_counters(x_series_device), 2)
+            self._get_device_counters(real_x_series_device), 2)
 
         with nidaqmx.Task() as write_task, nidaqmx.Task() as read_task:
             write_task.co_channels.add_co_pulse_chan_freq(
@@ -143,7 +143,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
                 [value_read], [actual_frequency], rtol=0.05)
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_multi_sample_double(self, x_series_device, seed):
+    def test_multi_sample_double(self, real_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -152,7 +152,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
 
         # Select random counters from the device.
         counters = random.sample(
-            self._get_device_counters(x_series_device), 3)
+            self._get_device_counters(real_x_series_device), 3)
 
         with nidaqmx.Task() as write_task, nidaqmx.Task() as read_task:
             write_task.co_channels.add_co_pulse_chan_freq(
@@ -184,7 +184,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
                 values_read, expected_values, rtol=0.05)
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_one_sample_pulse_freq(self, x_series_device, seed):
+    def test_one_sample_pulse_freq(self, real_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -192,7 +192,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
         duty_cycle = random.uniform(0.2, 0.8)
 
         # Select random counters from the device.
-        counters = random.sample(self._get_device_counters(x_series_device), 2)
+        counters = random.sample(self._get_device_counters(real_x_series_device), 2)
 
         with nidaqmx.Task() as write_task, nidaqmx.Task() as read_task:
             write_task.co_channels.add_co_pulse_chan_freq(
@@ -217,7 +217,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             assert numpy.isclose(value_read.duty_cycle, duty_cycle, rtol=0.05)
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_many_sample_pulse_freq(self, x_series_device, seed):
+    def test_many_sample_pulse_freq(self, real_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -225,7 +225,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
 
         # Select random counters from the device.
         counters = random.sample(
-            self._get_device_counters(x_series_device), 2)
+            self._get_device_counters(real_x_series_device), 2)
 
         with nidaqmx.Task() as write_task, nidaqmx.Task() as read_task:
             write_task.co_channels.add_co_pulse_chan_freq(
@@ -273,7 +273,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
                 duty_cycles_read, duty_cycles_to_test[1:], rtol=0.05)
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_one_sample_pulse_time(self, x_series_device, seed):
+    def test_one_sample_pulse_time(self, real_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -281,7 +281,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
         low_time = random.uniform(0.0001, 0.001)
 
         # Select random counters from the device.
-        counters = random.sample(self._get_device_counters(x_series_device), 2)
+        counters = random.sample(self._get_device_counters(real_x_series_device), 2)
 
         with nidaqmx.Task() as write_task, nidaqmx.Task() as read_task:
             write_task.co_channels.add_co_pulse_chan_time(
@@ -305,7 +305,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             assert numpy.isclose(value_read.low_time, low_time, rtol=0.05)
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_many_sample_pulse_time(self, x_series_device, seed):
+    def test_many_sample_pulse_time(self, real_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -313,7 +313,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
 
         # Select random counters from the device.
         counters = random.sample(
-            self._get_device_counters(x_series_device), 2)
+            self._get_device_counters(real_x_series_device), 2)
 
         with nidaqmx.Task() as write_task, nidaqmx.Task() as read_task:
             write_task.co_channels.add_co_pulse_chan_time(
@@ -362,7 +362,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
                 low_times_read, low_times_to_test[1:], rtol=0.05)
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_pulse_ticks_1_samp(self, x_series_device, seed):
+    def test_pulse_ticks_1_samp(self, real_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -371,19 +371,19 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
         starting_edge = random.choice([Edge.RISING, Edge.FALLING])
 
         # Select random counters from the device.
-        counters = random.sample(self._get_device_counters(x_series_device), 2)
+        counters = random.sample(self._get_device_counters(real_x_series_device), 2)
 
         with nidaqmx.Task() as write_task, nidaqmx.Task() as read_task:
             write_task.co_channels.add_co_pulse_chan_ticks(
                 counters[0],
-                '/{0}/100kHzTimebase'.format(x_series_device.name),
+                '/{0}/100kHzTimebase'.format(real_x_series_device.name),
                 high_ticks=high_ticks, low_ticks=low_ticks)
             write_task.timing.cfg_implicit_timing(
                 sample_mode=AcquisitionType.CONTINUOUS)
 
             read_task.ci_channels.add_ci_pulse_chan_ticks(
                 counters[1], source_terminal='/{0}/100kHzTimebase'.format(
-                    x_series_device.name),
+                    real_x_series_device.name),
                 min_val=100, max_val=1000)
             read_task.ci_channels.all.ci_pulse_ticks_term = (
                 '/{0}InternalOutput'.format(counters[0]))
@@ -403,7 +403,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
                 value_read.low_tick, low_ticks, rtol=0.05, atol=1)
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_many_sample_pulse_ticks(self, x_series_device, seed):
+    def test_many_sample_pulse_ticks(self, real_x_series_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -411,12 +411,12 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
 
         # Select random counters from the device.
         counters = random.sample(
-            self._get_device_counters(x_series_device), 2)
+            self._get_device_counters(real_x_series_device), 2)
 
         with nidaqmx.Task() as write_task, nidaqmx.Task() as read_task:
             write_task.co_channels.add_co_pulse_chan_ticks(
                 counters[0],
-                '/{0}/100kHzTimebase'.format(x_series_device.name),
+                '/{0}/100kHzTimebase'.format(real_x_series_device.name),
                 idle_state=Level.HIGH)
             write_task.timing.cfg_implicit_timing(
                 samps_per_chan=number_of_samples + 1)
@@ -424,7 +424,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
 
             read_task.ci_channels.add_ci_pulse_chan_ticks(
                 counters[1], source_terminal='/{0}/100kHzTimebase'.format(
-                    x_series_device.name),
+                    real_x_series_device.name),
                 min_val=100, max_val=1000)
             read_task.ci_channels.all.ci_pulse_ticks_term = (
                 '/{0}InternalOutput'.format(counters[0]))
