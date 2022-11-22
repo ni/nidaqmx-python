@@ -21,7 +21,7 @@ All notable changes to this project will be documented in this file.
 * ### Merged Pull Requests
     * ...
 * ### Resolved Issues
-    * [194: Bug / IEPE and Accelerometer Sensors Not Working in Same Task](https://github.com/ni/nidaqmx-python/pull/194)
+    * [194: Multiple Voltage Measurement Types in the same task causes errors on Read](https://github.com/ni/nidaqmx-python/pull/194)
 * ### Major Changes
     * ...
 
