@@ -620,8 +620,14 @@ class Task(object):
 
         # Analog Input
         if read_chan_type == ChannelType.ANALOG_INPUT:
-            meas_type = channels_to_read.ai_meas_type
-            if meas_type == UsageTypeAI.POWER:
+            has_power_chan = False
+            for chan in channels_to_read:
+                meas_type = chan.ai_meas_type
+                has_power_chan = meas_type == UsageTypeAI.POWER
+                if has_power_chan:
+                    break
+
+            if has_power_chan:
                 voltages = numpy.zeros(array_shape, dtype=numpy.float64)
                 currents = numpy.zeros(array_shape, dtype=numpy.float64)
 

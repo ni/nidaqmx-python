@@ -11,7 +11,7 @@ import nidaqmx
 from nidaqmx.constants import (
     Edge, TriggerType, AcquisitionType, LineGrouping, Level, TaskMode)
 from nidaqmx.utils import flatten_channel_string
-from nidaqmx.tests.fixtures import sim_power_device, sim_power_devices, real_x_series_device
+from nidaqmx.tests.fixtures import sim_ts_power_device, sim_ts_power_devices, sim_ts_voltage_device, sim_x_series_device, real_x_series_device
 from nidaqmx.tests.helpers import generate_random_seed, POWER_ABS_EPSILON
 
 
@@ -613,7 +613,7 @@ class TestPowerRead(TestDAQmxIOBase):
             (generate_random_seed(), False)
         ]
     )
-    def test_power_1_chan_1_samp(self, sim_power_device, seed, output_enable):
+    def test_power_1_chan_1_samp(self, sim_ts_power_device, seed, output_enable):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -622,7 +622,7 @@ class TestPowerRead(TestDAQmxIOBase):
 
         with nidaqmx.Task() as read_task:
             read_task.ai_channels.add_ai_power_chan(
-                f"{sim_power_device.name}/power",
+                f"{sim_ts_power_device.name}/power",
                 voltage_setpoint, current_setpoint, output_enable)
 
             read_task.start()
@@ -644,7 +644,7 @@ class TestPowerRead(TestDAQmxIOBase):
             (generate_random_seed(), [False, False])
         ]
     )
-    def test_power_n_chan_1_samp(self, sim_power_devices, seed, output_enables):
+    def test_power_n_chan_1_samp(self, sim_ts_power_devices, seed, output_enables):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -652,7 +652,7 @@ class TestPowerRead(TestDAQmxIOBase):
         current_setpoint = 0.03
 
         with nidaqmx.Task() as read_task:
-            for device, output_enable in zip(sim_power_devices, output_enables):
+            for device, output_enable in zip(sim_ts_power_devices, output_enables):
                 read_task.ai_channels.add_ai_power_chan(
                     f"{device.name}/power",
                     voltage_setpoint, current_setpoint, output_enable)
@@ -675,7 +675,7 @@ class TestPowerRead(TestDAQmxIOBase):
             (generate_random_seed(), False)
         ]
     )
-    def test_power_1_chan_n_samp(self, sim_power_device, seed, output_enable):
+    def test_power_1_chan_n_samp(self, sim_ts_power_device, seed, output_enable):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -684,7 +684,7 @@ class TestPowerRead(TestDAQmxIOBase):
 
         with nidaqmx.Task() as read_task:
             read_task.ai_channels.add_ai_power_chan(
-                f"{sim_power_device.name}/power",
+                f"{sim_ts_power_device.name}/power",
                 voltage_setpoint, current_setpoint, output_enable)
 
             read_task.start()
@@ -706,7 +706,7 @@ class TestPowerRead(TestDAQmxIOBase):
             (generate_random_seed(), [False, False])
         ]
     )
-    def test_power_n_chan_n_samp(self, sim_power_devices, seed, output_enables):
+    def test_power_n_chan_n_samp(self, sim_ts_power_devices, seed, output_enables):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -714,7 +714,7 @@ class TestPowerRead(TestDAQmxIOBase):
         current_setpoint = 0.03
 
         with nidaqmx.Task() as read_task:
-            for device, output_enable in zip(sim_power_devices, output_enables):
+            for device, output_enable in zip(sim_ts_power_devices, output_enables):
                 read_task.ai_channels.add_ai_power_chan(
                     f"{device.name}/power",
                     voltage_setpoint, current_setpoint, output_enable)
@@ -731,3 +731,54 @@ class TestPowerRead(TestDAQmxIOBase):
                 else:
                     assert all(math.isnan(sample.voltage) for sample in channel_values)
                     assert all(math.isnan(sample.current) for sample in channel_values)
+
+    @pytest.mark.parametrize('seed', [generate_random_seed()])
+    def test_mixed_chans(self, sim_x_series_device, seed):
+        # Reset the pseudorandom number generator with seed.
+        random.seed(seed)
+
+        with nidaqmx.Task() as read_task:
+            read_task.ai_channels.add_ai_voltage_chan(
+                f"{sim_x_series_device.name}/ai0", max_val=10, min_val=-10)
+            read_task.ai_channels.add_ai_current_chan(
+                f"{sim_x_series_device.name}/ai1", max_val=0.01, min_val=-0.01)
+
+            read_task.start()
+            values_read = read_task.read(number_of_samples_per_channel=10)
+
+    @pytest.mark.parametrize('seed', [generate_random_seed()])
+    def test_mixed_chans(self, sim_x_series_device, seed):
+        # Reset the pseudorandom number generator with seed.
+        random.seed(seed)
+
+        with nidaqmx.Task() as read_task:
+            read_task.ai_channels.add_ai_voltage_chan(
+                f"{sim_x_series_device.name}/ai0", max_val=10, min_val=-10)
+            read_task.ai_channels.add_ai_current_chan(
+                f"{sim_x_series_device.name}/ai1", max_val=0.01, min_val=-0.01)
+
+            read_task.start()
+            # We aren't validating data, just assuring that it doesn't fail.
+            values_read = read_task.read(number_of_samples_per_channel=10)
+
+    @pytest.mark.parametrize('seed', [generate_random_seed()])
+    def test_mixed_chans_with_power(self, sim_ts_power_device, sim_ts_voltage_device, seed):
+        # Reset the pseudorandom number generator with seed.
+        random.seed(seed)
+
+        voltage_setpoint = 0.0
+        current_setpoint = 0.03
+        output_enable = False
+
+        with nidaqmx.Task() as read_task:
+            read_task.ai_channels.add_ai_power_chan(
+                f"{sim_ts_power_device.name}/power",
+                voltage_setpoint, current_setpoint, output_enable)
+            read_task.ai_channels.add_ai_voltage_chan(
+                f"{sim_ts_voltage_device.name}/ai0", max_val=10, min_val=-10)
+
+            read_task.start()
+            # We aren't validating data, just assuring that it fails. The error
+            # code is currently not very good, so we'll ignore that for now.
+            with pytest.raises(nidaqmx.errors.DaqReadError):
+                values_read = read_task.read(number_of_samples_per_channel=10)

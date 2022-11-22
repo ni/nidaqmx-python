@@ -9,7 +9,7 @@ from nidaqmx.constants import (
     CurrentShuntResistorLocation, TemperatureUnits, RTDType,
     ResistanceConfiguration, ExcitationSource, ResistanceUnits, StrainUnits,
     StrainGageBridgeType, BridgeConfiguration)
-from nidaqmx.tests.fixtures import sim_power_device, any_x_series_device
+from nidaqmx.tests.fixtures import sim_ts_power_device, any_x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 
 
@@ -268,11 +268,11 @@ class TestAnalogCreateChannels(object):
             assert not ai_channel.ai_excit_use_for_scaling
 
     @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_create_ai_power_chan(self, sim_power_device, seed):
+    def test_create_ai_power_chan(self, sim_ts_power_device, seed):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        pwr_phys_chan = f"{sim_power_device.name}/power"
+        pwr_phys_chan = f"{sim_ts_power_device.name}/power"
         voltage_setpoint = random.random() * 6.0
         current_setpoint = random.random() * 3.0
         output_enable = random.choice([True, False])

@@ -10,7 +10,7 @@ import time
 import nidaqmx
 from nidaqmx.stream_readers import (
     PowerSingleChannelReader, PowerMultiChannelReader, PowerBinaryReader)
-from nidaqmx.tests.fixtures import sim_power_device, sim_power_devices
+from nidaqmx.tests.fixtures import sim_ts_power_device, sim_ts_power_devices
 from nidaqmx.tests.helpers import generate_random_seed, POWER_ABS_EPSILON
 from nidaqmx.tests.test_read_write import TestDAQmxIOBase
 
@@ -31,7 +31,7 @@ class TestPowerSingleChannelReader(TestDAQmxIOBase):
             (generate_random_seed(), False)
         ]
     )
-    def test_power_1_chan_1_samp(self, sim_power_device, seed, output_enable):
+    def test_power_1_chan_1_samp(self, sim_ts_power_device, seed, output_enable):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -40,7 +40,7 @@ class TestPowerSingleChannelReader(TestDAQmxIOBase):
 
         with nidaqmx.Task() as read_task:
             read_task.ai_channels.add_ai_power_chan(
-                f"{sim_power_device.name}/power",
+                f"{sim_ts_power_device.name}/power",
                 voltage_setpoint, current_setpoint, output_enable)
 
             reader = PowerSingleChannelReader(read_task.in_stream)
@@ -62,7 +62,7 @@ class TestPowerSingleChannelReader(TestDAQmxIOBase):
             (generate_random_seed(), False)
         ]
     )
-    def test_power_1_chan_n_samp(self, sim_power_device, seed, output_enable):
+    def test_power_1_chan_n_samp(self, sim_ts_power_device, seed, output_enable):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -76,7 +76,7 @@ class TestPowerSingleChannelReader(TestDAQmxIOBase):
 
         with nidaqmx.Task() as read_task:
             read_task.ai_channels.add_ai_power_chan(
-                f"{sim_power_device.name}/power",
+                f"{sim_ts_power_device.name}/power",
                 voltage_setpoint, current_setpoint, output_enable)
 
             reader = PowerSingleChannelReader(read_task.in_stream)
@@ -111,7 +111,7 @@ class TestPowerMultiChannelReader(TestDAQmxIOBase):
             (generate_random_seed(), [False, False])
         ]
     )
-    def test_power_n_chan_1_samp(self, sim_power_devices, seed, output_enables):
+    def test_power_n_chan_1_samp(self, sim_ts_power_devices, seed, output_enables):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -119,11 +119,11 @@ class TestPowerMultiChannelReader(TestDAQmxIOBase):
         current_setpoint = 0.03
 
         # Fill with bad data to ensure its overwritten by read.
-        voltage_data = numpy.full(len(sim_power_devices), -1.0, dtype=numpy.float64)
-        current_data = numpy.full(len(sim_power_devices), -1.0, dtype=numpy.float64)
+        voltage_data = numpy.full(len(sim_ts_power_devices), -1.0, dtype=numpy.float64)
+        current_data = numpy.full(len(sim_ts_power_devices), -1.0, dtype=numpy.float64)
 
         with nidaqmx.Task() as read_task:
-            for device, output_enable in zip(sim_power_devices, output_enables):
+            for device, output_enable in zip(sim_ts_power_devices, output_enables):
                 read_task.ai_channels.add_ai_power_chan(
                     f"{device.name}/power",
                     voltage_setpoint, current_setpoint, output_enable)
@@ -150,7 +150,7 @@ class TestPowerMultiChannelReader(TestDAQmxIOBase):
             (generate_random_seed(), [False, False])
         ]
     )
-    def test_power_n_chan_n_samp(self, sim_power_devices, seed, output_enables):
+    def test_power_n_chan_n_samp(self, sim_ts_power_devices, seed, output_enables):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -159,11 +159,11 @@ class TestPowerMultiChannelReader(TestDAQmxIOBase):
         number_of_samples_per_channel = 10
 
         # Fill with bad data to ensure its overwritten by read.
-        voltage_data = numpy.full((len(sim_power_devices), number_of_samples_per_channel), -1.0, dtype=numpy.float64)
-        current_data = numpy.full((len(sim_power_devices), number_of_samples_per_channel), -1.0, dtype=numpy.float64)
+        voltage_data = numpy.full((len(sim_ts_power_devices), number_of_samples_per_channel), -1.0, dtype=numpy.float64)
+        current_data = numpy.full((len(sim_ts_power_devices), number_of_samples_per_channel), -1.0, dtype=numpy.float64)
 
         with nidaqmx.Task() as read_task:
-            for device, output_enable in zip(sim_power_devices, output_enables):
+            for device, output_enable in zip(sim_ts_power_devices, output_enables):
                 read_task.ai_channels.add_ai_power_chan(
                     f"{device.name}/power",
                     voltage_setpoint, current_setpoint, output_enable)
@@ -203,7 +203,7 @@ class TestPowerBinaryReader(TestDAQmxIOBase):
             (generate_random_seed(), False)
         ]
     )
-    def test_power_1_chan_n_samp_binary(self, sim_power_device, seed, output_enable):
+    def test_power_1_chan_n_samp_binary(self, sim_ts_power_device, seed, output_enable):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -217,7 +217,7 @@ class TestPowerBinaryReader(TestDAQmxIOBase):
 
         with nidaqmx.Task() as read_task:
             read_task.ai_channels.add_ai_power_chan(
-                f"{sim_power_device.name}/power",
+                f"{sim_ts_power_device.name}/power",
                 voltage_setpoint, current_setpoint, output_enable)
 
             reader = PowerBinaryReader(read_task.in_stream)
@@ -247,7 +247,7 @@ class TestPowerBinaryReader(TestDAQmxIOBase):
             (generate_random_seed(), [False, False])
         ]
     )
-    def test_power_n_chan_many_sample_binary(self, sim_power_devices, seed, output_enables):
+    def test_power_n_chan_many_sample_binary(self, sim_ts_power_devices, seed, output_enables):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
@@ -256,11 +256,11 @@ class TestPowerBinaryReader(TestDAQmxIOBase):
         number_of_samples_per_channel = 10
 
         # Fill with bad data to ensure its overwritten by read.
-        voltage_data = numpy.full((len(sim_power_devices), number_of_samples_per_channel), -32768, dtype=numpy.int16)
-        current_data = numpy.full((len(sim_power_devices), number_of_samples_per_channel), -32768, dtype=numpy.int16)
+        voltage_data = numpy.full((len(sim_ts_power_devices), number_of_samples_per_channel), -32768, dtype=numpy.int16)
+        current_data = numpy.full((len(sim_ts_power_devices), number_of_samples_per_channel), -32768, dtype=numpy.int16)
 
         with nidaqmx.Task() as read_task:
-            for device, output_enable in zip(sim_power_devices, output_enables):
+            for device, output_enable in zip(sim_ts_power_devices, output_enables):
                 read_task.ai_channels.add_ai_power_chan(
                     f"{device.name}/power",
                     voltage_setpoint, current_setpoint, output_enable)
