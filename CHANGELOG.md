@@ -1,5 +1,6 @@
 # Changelog
 
+* [0.6.6](#066)
 * [0.6.5](#065)
 * [0.6.4](#064)
 * [0.6.3](#063)
@@ -16,14 +17,19 @@
 
 All notable changes to this project will be documented in this file.
 
-## 0.6.5
+## 0.6.6
 
 * ### Merged Pull Requests
     * ...
 * ### Resolved Issues
-    * [194: Multiple Voltage Measurement Types in the same task causes errors on Read](https://github.com/ni/nidaqmx-python/pull/194)
+    * ...
 * ### Major Changes
     * ...
+
+## 0.6.5
+
+* ### Resolved Issues
+    * [194: Multiple Voltage Measurement Types in the same task causes errors on Read](https://github.com/ni/nidaqmx-python/pull/194)
 
 ## 0.6.4
 
