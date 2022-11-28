@@ -78,15 +78,15 @@ def bridge_device():
 
 
 @pytest.fixture(scope="module")
-def sim_power_device():
+def sim_ts_power_device():
     system = nidaqmx.system.System.local()
 
     for device in system.devices:
-        if device.dev_is_simulated and UsageTypeAI.POWER in device.ai_meas_types:
+        if device.dev_is_simulated and device.product_category == ProductCategory.TEST_SCALE_MODULE and UsageTypeAI.POWER in device.ai_meas_types:
             return device
 
     pytest.skip(
-        "Could not detect a device that meets the requirements to be a simulated power device. "
+        "Could not detect a device that meets the requirements to be a TestScale simulated power device. "
         "Cannot proceed to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
@@ -94,18 +94,34 @@ def sim_power_device():
 
 
 @pytest.fixture(scope="module")
-def sim_power_devices():
+def sim_ts_voltage_device():
+    system = nidaqmx.system.System.local()
+
+    for device in system.devices:
+        if device.dev_is_simulated and device.product_category == ProductCategory.TEST_SCALE_MODULE and UsageTypeAI.VOLTAGE in device.ai_meas_types:
+            return device
+
+    pytest.skip(
+        "Could not detect a device that meets the requirements to be a TestScale simulated voltage device. "
+        "Cannot proceed to run tests. Import the NI MAX configuration file located at "
+        "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
+    )
+    return None
+
+
+@pytest.fixture(scope="module")
+def sim_ts_power_devices():
     system = nidaqmx.system.System.local()
 
     devices = []
     for device in system.devices:
-        if device.dev_is_simulated and UsageTypeAI.POWER in device.ai_meas_types:
+        if device.dev_is_simulated and device.product_category == ProductCategory.TEST_SCALE_MODULE and UsageTypeAI.POWER in device.ai_meas_types:
             devices.append(device)
             if len(devices) == 2:
                 return devices
 
     pytest.skip(
-        "Could not detect two or more devices that meets the requirements to be a simulated power "
+        "Could not detect two or more devices that meets the requirements to be a TestScale simulated power "
         "device. Cannot proceed to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
