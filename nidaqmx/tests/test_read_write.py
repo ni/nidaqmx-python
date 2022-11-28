@@ -744,20 +744,6 @@ class TestPowerRead(TestDAQmxIOBase):
                 f"{sim_x_series_device.name}/ai1", max_val=0.01, min_val=-0.01)
 
             read_task.start()
-            values_read = read_task.read(number_of_samples_per_channel=10)
-
-    @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_mixed_chans(self, sim_x_series_device, seed):
-        # Reset the pseudorandom number generator with seed.
-        random.seed(seed)
-
-        with nidaqmx.Task() as read_task:
-            read_task.ai_channels.add_ai_voltage_chan(
-                f"{sim_x_series_device.name}/ai0", max_val=10, min_val=-10)
-            read_task.ai_channels.add_ai_current_chan(
-                f"{sim_x_series_device.name}/ai1", max_val=0.01, min_val=-0.01)
-
-            read_task.start()
             # We aren't validating data, just assuring that it doesn't fail.
             values_read = read_task.read(number_of_samples_per_channel=10)
 
