@@ -117,5 +117,7 @@ functions = {
         'pythonClassName':'AIChannelCollection',
         'callingConvention':'StdCall',
         'returns': 'int32',
+        'constantsUsed': 'TerminalConfiguration, AccelSensitivityUnits',
+        'typesUsed':'CtrFreq',
     }
 }
