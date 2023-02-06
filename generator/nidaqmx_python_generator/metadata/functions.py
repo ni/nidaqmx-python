@@ -7,8 +7,8 @@ functions = {
                 'type': 'TaskHandle',
                 'description': '',
                 'isList': False,
-                'bufferSizeIsExplicit':False,
-                'pythonCType':'lib_importer.task_handle',
+                'hasExplicitBufferSize':False,
+                'ctypesDataType':'lib_importer.task_handle',
                 'optional':False,
             },
             {
@@ -17,8 +17,9 @@ functions = {
                 'type': 'const char[]',
                 'description': 'Specifies the names of the physical channels to use to create virtual channels. The DAQmx physical channel constant lists all physical channels on devices and modules installed in the system.',
                 'isList': False,
-                'bufferSizeIsExplicit':False,
-                'pythonCType':'ctype.c_char_p',
+                'hasExplicitBufferSize':False,
+                'ctypesDataType':'ctypes.c_char_p',
+                'pythonDataType': 'str',
                 'optional': False,
             },
             {
@@ -27,8 +28,9 @@ functions = {
                 'type': 'const char[]',
                 'description': 'Specifies a name to assign to the virtual channel this function creates. If you do not specify a value for this input, NI-DAQmx uses the physical channel name as the virtual channel name.',
                 'isList': False,
-                'bufferSizeIsExplicit':False,
-                'pythonCType':'ctype.c_char_p',
+                'hasExplicitBufferSize':False,
+                'ctypesDataType':'ctypes.c_char_p',
+                'pythonDataType': 'str',
                 'optional':True,
                 'default':'\"\"'
             },
@@ -39,8 +41,9 @@ functions = {
                 'type': 'int32',
                 'description': 'Specifies the input terminal configuration for the channel.',
                 'isList': False,
-                'bufferSizeIsExplicit':True,
-                'pythonCType':'ctypes.c_int',
+                'hasExplicitBufferSize':True,
+                'ctypesDataType':'ctypes.c_int',
+                'pythonDataType': 'int',
                 'optional':True,
                 'default':'TerminalConfiguration.DEFAULT'
             },
@@ -50,8 +53,9 @@ functions = {
                 'type': 'const char[]',
                 'description': 'Specifies the name of a custom scale for the channel. If you want the channel to use a custom scale, specify the name of the custom scale to this input and set **units** to **FROM_CUSTOM_SCALE**.',
                 'isList': False,
-                'bufferSizeIsExplicit':False,
-                'pythonCType':'ctype.c_char_p',
+                'hasExplicitBufferSize':False,
+                'ctypesDataType':'ctypes.c_char_p',
+                'pythonDataType': 'str',
                 'optional':True,
                 'default':'\"\"',
             },
@@ -61,8 +65,9 @@ functions = {
                 'type': 'const char[]',
                 'description': 'This is a test parameter',
                 'isList': False,
-                'bufferSizeIsExplicit':False,
-                'pythonCType':'ctype.c_char_p',
+                'hasExplicitBufferSize':False,
+                'ctypesDataType':'ctypes.c_char_p',
+                'pythonDataType': 'str',
                 'optional':True,
                 'default':'\"\"',
                 'cluster':'CtrFreq',
@@ -70,11 +75,11 @@ functions = {
                 [
                     {
                         'name':'freq',
-                        'pythonCtype':'ctypes.c_double'
+                        'ctypesDataType':'ctypes.c_double'
                     },
                     {
                         'name':'duty_cycle',
-                        'pythonCtype':'ctypes.c_double'
+                        'ctypesDataType':'ctypes.c_double'
                     }
                 ],
             },
@@ -85,8 +90,9 @@ functions = {
                 'type': 'int32',
                 'description': 'Specifies the units of the **sensitivity** input.',
                 'isList': False,
-                'bufferSizeIsExplicit':False,
-                'pythonCType':'ctypes.c_int',
+                'hasExplicitBufferSize':False,
+                'ctypesDataType':'ctypes.c_int',
+                'pythonDataType': 'int',
                 'optional':False,
             }
         ],

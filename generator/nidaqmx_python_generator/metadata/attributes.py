@@ -5,7 +5,8 @@ attributes = {
             'name': 'AI_ATTEN',
             'resettable': True,
             'type': 'float64',
-            'pythonCType': 'ctypes.c_double',
+            'ctypesDataType': 'ctypes.c_double',
+            'pythonDataType': 'float',
             'description': 'Specifies the amount of attenuation to use.',
             'hasExplicitReadBufferSize': False,
             'bitFieldEnum':'N/A',
@@ -26,7 +27,7 @@ attributes = {
                 }
             },
             'isObject': False,
-            'identifier':'AI_Channel'
+            'pythonClassName':'AI_Channel'
         },
         80: {
             'access': 'read',
@@ -34,7 +35,8 @@ attributes = {
             'name': 'AI_RAW_SAMP_JUSTIFICATION',
             'resettable': False,
             'type': 'int32',
-            'pythonCType': 'ctypes.c_int',
+            'ctypesDataType': 'ctypes.c_int',
+            'pythonDataType': 'int',
             'description': 'Indicates the justification of a raw sample from the device.',
             'hasExplicitReadBufferSize': False,
             'bitFieldEnum':'N/A',
@@ -54,14 +56,15 @@ attributes = {
                     "cviName": "channel"
                 },
             },
-            'identifier':'AI_Channel'
+            'pythonClassName':'AI_Channel'
         },
         12176: {
             'access': 'read-write',
             'name': 'AI_BRIDGE_POLY_FORWARD_COEFF',
             'resettable': True,
             'type': 'float64[]',
-            'pythonCType': 'numpy.float64',
+            'ctypesDataType': 'numpy.float64',
+            'pythonDataType': 'float',
             'description': 'Specifies an list of coefficients for the polynomial that converts electrical values to physical values. Each element of the list corresponds to a term othe equation. For example, if index three of the list is 9,the fourth term of the equation is 9x^3.',
             'hasExplicitReadBufferSize': True,
             'bitFieldEnum':'N/A',
@@ -82,14 +85,15 @@ attributes = {
                 }
             },
             'isObject': False,
-            'identifier':'AI_Channel'
+            'pythonClassName':'AI_Channel'
         },
         4148: {
             'access': 'read',
             'name': 'AI_THRMCPL_CJC_CHAN',
             'resettable': False,
             'type': 'char[]',
-            'pythonCType': 'ctypes.c_char_p',
+            'ctypesDataType': 'ctypes.c_char_p',
+            'pythonDataType': 'str',
             'description': 'Indicates the channel that acquires the temperature of the cold junction if **ai_thrmcpl_cjc_src** is **CJCSource1.SCANNABLE_CHANNEL**. If the channel is a temperature channel, NI-DAQmx acquires the temperature in the correct units. Other channel types, such as a resistance channel with a custom sensor, must use a custom scale to scale values to degrees Celsius.',
             'hasExplicitReadBufferSize': True,
             'bitFieldEnum':'N/A',
@@ -120,7 +124,7 @@ attributes = {
                     "cviName": "taskHandle"
                 },
             },
-            'identifier':'AI_Channel'
+            'pythonClassName':'AI_Channel'
         }
     }
 }
