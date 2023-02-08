@@ -15,15 +15,15 @@ attributes = {
             'c_function_name':'AIAtten',
             'handle_parameters':
             {
-                'taskHandle':{
+                'task':{
                     "accessor": "self._handle", 
                     "ctypes_data_type": "lib_importer.task_handle", 
-                    "cviName": "taskHandle"
+                    "cvi_name": "taskHandle"
                 },
-                'ChannelHandle':{
+                'channel':{
                     "accessor": "self._name", 
                     "ctypes_data_type": "ctypes.c_char_p", 
-                    "cviName": "channel"
+                    "cvi_name": "channel"
                 }
             },
             'is_object': False,
@@ -45,15 +45,15 @@ attributes = {
             'c_function_name':'AIRawSampJustification',
             'handle_parameters':
             {
-                'taskHandle':{
+                'task':{
                     "accessor": "self._handle", 
                     "ctypes_data_type": "lib_importer.task_handle", 
-                    "cviName": "taskHandle"
+                    "cvi_name": "taskHandle"
                 },
-                'ChannelHandle':{
+                'channel':{
                     "accessor": "self._name", 
                     "ctypes_data_type": "ctypes.c_char_p", 
-                    "cviName": "channel"
+                    "cvi_name": "channel"
                 },
             },
             'python_class_name':'AI_Channel'
@@ -73,15 +73,15 @@ attributes = {
             'c_function_name':'AIBridgePolyForwardCoeff',
             'handle_parameters':
             {
-                'taskHandle':{
+                'task':{
                     "accessor": "self._handle", 
                     "ctypes_data_type": "lib_importer.task_handle", 
-                    "cviName": "taskHandle"
+                    "cvi_name": "taskHandle"
                 },
-                'ChannelHandle':{
+                'channel':{
                     "accessor": "self._name", 
                     "ctypes_data_type": "ctypes.c_char_p", 
-                    "cviName": "channel"
+                    "cvi_name": "channel"
                 }
             },
             'is_object': False,
@@ -102,26 +102,26 @@ attributes = {
             'c_function_name':'AIThrmcplCJCChan',
             'handle_parameters':
             {
-                'taskHandle':{
+                'task':{
                     "accessor": "self._handle", 
                     "ctypes_data_type": "lib_importer.task_handle", 
-                    "cviName": "taskHandle"
+                    "cvi_name": "taskHandle"
                 },
-                'ChannelHandle':{
+                'channel':{
                     "accessor": "self._name", 
                     "ctypes_data_type": "ctypes.c_char_p", 
-                    "cviName": "channel"
+                    "cvi_name": "channel"
                 }
             },
             'is_object': True,
             'object_type': 'Channel',
             'object_has_factory': True,
-            'objectConstructorParams':
+            'object_constructor_params':
             {
-                'taskHandle':{
+                'task':{
                     "accessor": "self._handle", 
                     "ctypes_data_type": "lib_importer.task_handle", 
-                    "cviName": "taskHandle"
+                    "cvi_name": "taskHandle"
                 },
             },
             'python_class_name':'AI_Channel'

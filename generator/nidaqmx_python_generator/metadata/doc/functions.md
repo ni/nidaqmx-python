@@ -7,13 +7,13 @@
         'c_function_name' : 'CreateAIAccel4WireDCVoltageChan', 
         'calling_convention':'StdCall',
         'description': ' Creates channel(s) that use a Wheatstone bridge to measure force or load. Use this instance with sensors whose...',
-        'isFactory': False,
+        'is_factory': False,
         'python_class_name':'AIChannelCollection',
         'handle_parameter':
         {
             "accessor": "self._handle", 
             "ctypes_data_type": "lib_importer.task_handle", 
-            "cviName": "taskHandle"
+            "cvi_name": "taskHandle"
         },
         'adaptor_parameter': {
             "adaptor": "self._create_chan(counter, name_to_assign_to_channel)", 
@@ -45,12 +45,15 @@
     - The description of the function.
     - This is used to define the doc string of the function.
 
+- `'is_factory'`
+    - if `True` the function is considered to be a static function.
+    
 - `'calling_convention'`
     - The calling convention to be followed when using the c functions.
     - Possible values
         - 'StdCall'
         - 'Cdecl'
-- `'handle_parameter'`(Optional)
+- `'handle_parameter'` (Optional)
     - The handle parameter that represents the instance the function is part of.
     - This is not applicable if the function is a static method with `is_factory` key being `True`
     - This is used when defining the c function parameters, this is usually the first input to the function.
@@ -63,11 +66,11 @@
         - '`ctypes_data_type'`
             - Defines the ctypes data_type of the handle parameter.
             - This is used when mentioning the data_type of the handle parameter.
-        - `'cviName'`
+        - `'cvi_name'`
             - The cvi name of the parameter.
             - This is kept for the gRPC client implementation.
 
-- `'adaptor_parameter'`(Optional)
+- `'adaptor_parameter'` (Optional)
     - These are additional parameters that are mentioned apart from the parameters mentioned in the `parameters`.
     - This can be useful when there is a unique implementation that has a additional input/output parameter.
     - This is currently only used for the unique return call made in the channel related functions.
@@ -95,7 +98,7 @@
     - The list of parameters in the function.
     - Refer [parameters in functions section](#parameters-in-functions) to understand more about how each parameter is defined.
 
-- `'returns'`(Optional)
+- `'returns'` (Optional)
     - The data_type of the return value.
 
 ## parameters in functions
@@ -174,17 +177,17 @@
         1. Listing required parameters first and following them up with optional parameters during function definition.
         2. Assigning default values to optional parameters during definition.
 
-- `'default'`(Optional)
+- `'default'` (Optional)
     - The default value of the parameter.
     - This is required if the `optional` is `True`.
     - This is used to define the default value of the optional parameters during function definition.
 
-- `'cluster'`(Optional)
+- `'cluster'` (Optional)
     - The name of the cluster the parameter represents.
     - This key will only be available for an cluster type parameter.
     - During code generation an parameter would be considered as an cluster if it contains this key.
 
-- `'cluster_elements`(Optional)
+- `'cluster_elements` (Optional)
     - This key is only present if the `cluster` key is defined.
     - Defines the cluster element. 
     - Each element consists of the following keys,

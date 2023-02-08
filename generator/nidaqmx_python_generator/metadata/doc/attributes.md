@@ -21,12 +21,12 @@
             'taskHandle':{
                 "accessor": "self._handle", 
                 "ctypes_data_type": "lib_importer.task_handle", 
-                "cviName": "taskHandle"
+                "cvi_name": "taskHandle"
             },
             'ChannelHandle':{
                 "accessor": "self._name", 
                 "ctypes_data_type": "ctypes.c_char_p", 
-                "cviName": "channel"
+                "cvi_name": "channel"
             }
         },
         'is_object': True,
@@ -37,7 +37,7 @@
             'taskHandle':{
                 "accessor": "self._handle", 
                 "ctypes_data_type": "lib_importer.task_handle", 
-                "cviName": "taskHandle"
+                "cvi_name": "taskHandle"
             },
         },
         'python_class_name':'AI_Channel'
@@ -91,7 +91,7 @@
     - Specifies if an explicit read buffer size has to be provided when making the c function calls for the attribute.
     - If True then an additional uint parameter would be provided when calling the c function to mention the buffer size.
 
-- `'read_buffer_size'`(Optional)
+- `'read_buffer_size'` (Optional)
     - The read buffer size to be used when calling the c function.
     - This key would only be applicable if `has_explicit_read_buffer_size` is `True`.
     - In case the `has_explicit_read_buffer_size` is `True` and this key is not present, then the ivi dance method is used to get the buffer size.
@@ -128,7 +128,7 @@
         - '`ctypes_data_type'`
             - Defines the ctypes data_type of the handle parameter.
             - This is used when mentioning the data_type of the handle parameter.
-        - `'cviName'`
+        - `'cvi_name'`
             - The cvi name of the parameter.
             - This is kept for the gRPC client implementation.
 
@@ -137,17 +137,17 @@
     - 'False' : The attribute represents the `type` value as usual.
     - During python code generation, this is used to determine if the value has to be used as an object in getters and setters.
 
-- `'object_type'`(Optional)
+- `'object_type'` (Optional)
     - This key is only present when `is_object` value is `True`.
     - The name of the object.
     - During code generation, this is used to instantiate the object.
 
-- '`object_has_factory'`(Optional)
+- '`object_has_factory'` (Optional)
     - This key is only present when `is_object` value is `True`.
     - 'True' if the object has a factory implementation.
     - If the value is `True` then the `_factory` method is used for instantiation of the object.
 
-- `'object_constructor_params'`(Optional)
+- `'object_constructor_params'` (Optional)
     - This key is only present when `is_object` value is `True`.
     - The additional parameters that needs to included in the object creation apart from the attribute value.
     - During python code generation, these parameters are added as initial inputs when creating the object.

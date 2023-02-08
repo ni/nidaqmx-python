@@ -3,7 +3,7 @@ functions = {
         'c_function_name' : 'CreateAIAccel4WireDCVoltageChan', 
         'calling_convention':'StdCall',
         'description': ' Creates channel(s) that use a Wheatstone bridge to measure force or load. Use this instance with sensors whose specifications provide a polynomial to convert electrical values to physical values. When you use this scaling type, NI-DAQmx requires coefficients for a polynomial that converts electrical values to physical values (forward), as well as coefficients for a polynomial that converts physical values to electrical values (reverse). If you only know one set of coefficients, use the DAQmx Compute Reverse Polynomial Coefficients function to generate the other set.',
-        'isFactory': False,
+        'is_factory': False,
         'python_class_name':'AIChannelCollection',
         'handle_parameters':
         {
@@ -11,7 +11,7 @@ functions = {
             {
                 "accessor": "self._handle", 
                 "ctypes_data_type": "lib_importer.task_handle", 
-                "cviName": "taskHandle"
+                "cvi_name": "taskHandle"
             }
         },
         'adaptor_parameter': {
@@ -118,7 +118,5 @@ functions = {
             }
         ],
         'returns': 'int32',
-        'constantsUsed': 'TerminalConfiguration, AccelSensitivityUnits',
-        'typesUsed':'CtrFreq',
     }
 }
