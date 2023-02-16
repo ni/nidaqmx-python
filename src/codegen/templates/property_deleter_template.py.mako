@@ -1,6 +1,6 @@
 <%def name="script_property_deleter(attribute)">\
 <%
-        from nidaqmx_python_generator.utilities.text_wrappers import wrap
+        from codegen.utilities.text_wrappers import wrap
     %>\
     @${attribute.name}.deleter
     def ${attribute.name}(self):

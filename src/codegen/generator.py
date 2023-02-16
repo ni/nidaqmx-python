@@ -7,7 +7,7 @@ from pathlib import Path
 from mako.lookup import TemplateLookup
 from mako.template import Template
 
-import nidaqmx_python_generator.metadata as metadata
+import codegen.metadata as metadata
 
 _logger = logging.getLogger(__name__)
 _logger.addHandler(logging.NullHandler())

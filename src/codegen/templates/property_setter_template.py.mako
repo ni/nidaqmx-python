@@ -1,6 +1,6 @@
 <%def name="script_property_setter(attribute)">\
 <%
-        from nidaqmx_python_generator.utilities.text_wrappers import wrap, docstring_wrap
+        from codegen.utilities.text_wrappers import wrap, docstring_wrap
     %>\
     @${attribute.name}.setter
     def ${attribute.name}(self, val):

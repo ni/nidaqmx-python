@@ -1,6 +1,6 @@
 import logging
 from collections import namedtuple
-from nidaqmx_python_generator.utilities.properties.attribute import attribute
+from codegen.utilities.properties.attribute import attribute
 
 _logger = logging.getLogger(__name__)
 _logger.addHandler(logging.NullHandler())

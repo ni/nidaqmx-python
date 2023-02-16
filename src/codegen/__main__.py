@@ -2,7 +2,7 @@ import logging
 import pathlib
 import sys
 
-import nidaqmx_python_generator.generator as generator
+import codegen.generator as generator
 
 _logger = logging.getLogger(__name__)
 _logger.addHandler(logging.NullHandler())
