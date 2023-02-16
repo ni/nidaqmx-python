@@ -1,4 +1,4 @@
-class attribute():
+class Attribute():
     
     def __init__(self, id, attribute_metadata):
         self._id  = id
@@ -24,12 +24,12 @@ class attribute():
         self._object_constructor_params = []
         if("handle_parameters" in attribute_metadata):
             for name, parameter_data in attribute_metadata["handle_parameters"].items():
-                self._handle_parameters.append(parameter(name, parameter_data))
+                self._handle_parameters.append(Parameter(name, parameter_data))
         if("object_has_factory" in attribute_metadata):
             self._object_has_factory = attribute_metadata["object_has_factory"]
         if("object_constructor_params" in attribute_metadata):
             for name, parameter_data in attribute_metadata["object_constructor_params"].items():
-                self._object_constructor_params.append(parameter(name, parameter_data))
+                self._object_constructor_params.append(Parameter(name, parameter_data))
         if("has_explicit_write_buffer_size" in attribute_metadata):
             self._has_explicit_write_buffer_size = attribute_metadata["has_explicit_write_buffer_size"]
         if("enum" in attribute_metadata):
@@ -242,7 +242,7 @@ class attribute():
         """
         return self._ctypes_data_type
 
-class parameter():
+class Parameter():
     def __init__(self, name, parameter_metadata):
         self._handle_name = name
         self._accessor = parameter_metadata["accessor"]

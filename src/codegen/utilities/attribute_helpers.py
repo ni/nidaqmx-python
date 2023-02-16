@@ -1,15 +1,15 @@
 import logging
 from collections import namedtuple
-from codegen.utilities.properties.attribute import attribute
+from codegen.properties.attribute import Attribute
 
 _logger = logging.getLogger(__name__)
 _logger.addHandler(logging.NullHandler())
 
-def get_attributes(metadata, className):
+def get_attributes(metadata, class_name):
     attributes_metadata = []
-    for group_Name, attributes in metadata["attributes"].items():
+    for group_name, attributes in metadata["attributes"].items():
         for id, attribute_data in attributes.items():
-            if(attribute_data["python_class_name"] == className):
-                attributes_metadata.append(attribute(id, attribute_data))
+            if(attribute_data["python_class_name"] == class_name):
+                attributes_metadata.append(Attribute(id, attribute_data))
     return attributes_metadata
 

@@ -27,8 +27,7 @@ def _get_template(template_file_name):
 def _generate_file(metadata, template_file_name, output_path):
     _logger.info(f"{os.path.basename(output_path)} <-- {template_file_name}")
     template = _get_template(template_file_name)
-    if not os.path.exists(output_path):
-        os.makedirs(os.path.dirname(output_path))
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, "w+", newline="") as f:
         f.write(template.render(data=metadata))
 

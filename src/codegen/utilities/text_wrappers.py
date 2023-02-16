@@ -21,12 +21,12 @@ def wrap(initial_indent, subsequent_indent):
     enable Mako filter functions to accept arguments.
     """
 
-    def d(text):
+    def text_wrap(text):
         wrapper.initial_indent = " " * initial_indent
         wrapper.subsequent_indent = " " * subsequent_indent
         return wrapper.fill(text).lstrip()
 
-    return d
+    return text_wrap
 
 
 def docstring_wrap(initial_indent, subsequent_indent):
@@ -37,9 +37,9 @@ def docstring_wrap(initial_indent, subsequent_indent):
     enable Mako filter functions to accept arguments.
     """
 
-    def d(text):
+    def doc_string_wrap(text):
         docstring_wrapper.initial_indent = " " * initial_indent
         docstring_wrapper.subsequent_indent = " " * subsequent_indent
         return docstring_wrapper.fill(text).lstrip()
 
-    return d
+    return doc_string_wrap
