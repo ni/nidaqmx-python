@@ -28,8 +28,9 @@ class AIChannelCollection(ChannelCollection):
     """
     Contains the collection of analog input channels for a DAQmx Task.
     """
-    def __init__(self, task_handle):
+    def __init__(self, task_handle, interpreter):
         super(AIChannelCollection, self).__init__(task_handle)
+        self._interpreter = interpreter
 
     def _create_chan(self, physical_channel, name_to_assign_to_channel=''):
         """
@@ -56,7 +57,7 @@ class AIChannelCollection(ChannelCollection):
         else:
             name = physical_channel
 
-        return AIChannel(self._handle, name)
+        return AIChannel(self._handle, name,self._interpreter)
 
     def add_ai_accel_4_wire_dc_voltage_chan(
             self, physical_channel, name_to_assign_to_channel="",
@@ -2587,20 +2588,7 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIVoltageChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, physical_channel, name_to_assign_to_channel,
-            terminal_config.value, min_val, max_val, units.value,
-            custom_scale_name)
-        check_for_error(error_code)
+        self._interpreter.add_ai_voltage_chan(physical_channel, name_to_assign_to_channel, terminal_config, min_val,max_val,units,custom_scale_name)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 

@@ -15,8 +15,9 @@ class ExportSignals(object):
     """
     Represents the exported signal configurations for a DAQmx task.
     """
-    def __init__(self, task_handle):
+    def __init__(self, task_handle, interpreter):
         self._handle = task_handle
+        self._interpreter = interpreter
 
     @property
     def adv_cmplt_event_delay(self):

@@ -2,6 +2,8 @@ import ctypes
 import numpy
 import six
 import warnings
+import nidaqmx._grpc_stub_interpreter as _grpc_stub_interpreter
+import nidaqmx._library_interpreter as _library_interpreter
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx._task_modules.channels.channel import Channel
@@ -39,7 +41,6 @@ from nidaqmx.errors import (
 from nidaqmx.system.device import Device
 from nidaqmx.types import CtrFreq, CtrTick, CtrTime, PowerMeasurement
 from nidaqmx.utils import unflatten_channel_string, flatten_channel_string
-
 __all__ = ['Task']
 
 
@@ -63,7 +64,7 @@ class Task(object):
     Represents a DAQmx Task.
     """
 
-    def __init__(self, new_task_name=''):
+    def __init__(self, new_task_name='', *, grpc_options=None ):
         """
         Creates a DAQmx task.
 
@@ -77,19 +78,14 @@ class Task(object):
                 attempts to create multiple tasks with the same name, which
                 results in an error.
         """
-        self._handle = lib_importer.task_handle(0)
 
-        cfunc = lib_importer.windll.DAQmxCreateTask
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        ctypes.POINTER(lib_importer.task_handle)]
+        if grpc_options:
+            self._interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
+        else:
+            self._interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
-        error_code = cfunc(
-            new_task_name, ctypes.byref(self._handle))
-        check_for_error(error_code)
+        self._handle = self._interpreter.create_task(new_task_name=new_task_name)
+        self._interpreter.set_task_handle(self._handle)
 
         self._initialize(self._handle)
 
@@ -125,33 +121,7 @@ class Task(object):
         """
         str: Indicates the name of the task.
         """
-        cfunc = lib_importer.windll.DAQmxGetTaskName
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
+        return self._interpreter.get_task_attribute_string(4726)
 
     @property
     def channels(self):
@@ -370,17 +340,17 @@ class Task(object):
         # double closes.
         self._saved_name = self.name
 
-        self._ai_channels = AIChannelCollection(task_handle)
-        self._ao_channels = AOChannelCollection(task_handle)
-        self._ci_channels = CIChannelCollection(task_handle)
-        self._co_channels = COChannelCollection(task_handle)
-        self._di_channels = DIChannelCollection(task_handle)
-        self._do_channels = DOChannelCollection(task_handle)
-        self._export_signals = ExportSignals(task_handle)
-        self._in_stream = InStream(self)
-        self._timing = Timing(task_handle)
-        self._triggers = Triggers(task_handle)
-        self._out_stream = OutStream(self)
+        self._ai_channels = AIChannelCollection(task_handle, self._interpreter)
+        self._ao_channels = AOChannelCollection(task_handle, self._interpreter)
+        self._ci_channels = CIChannelCollection(task_handle, self._interpreter)
+        self._co_channels = COChannelCollection(task_handle, self._interpreter)
+        self._di_channels = DIChannelCollection(task_handle, self._interpreter)
+        self._do_channels = DOChannelCollection(task_handle, self._interpreter)
+        self._export_signals = ExportSignals(task_handle, self._interpreter)
+        self._in_stream = InStream(self, self._interpreter)
+        self._timing = Timing(task_handle, self._interpreter)
+        self._triggers = Triggers(task_handle, self._interpreter)
+        self._out_stream = OutStream(self, self._interpreter)
 
         # These lists keep C callback objects in memory as ctypes doesn't.
         # Program will crash if callback is made after object is garbage
@@ -459,18 +429,9 @@ class Task(object):
                 'already closed.'.format(self._saved_name), DaqResourceWarning)
             return
 
-        cfunc = lib_importer.windll.DAQmxClearTask
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
-
+        self._interpreter.clear_task()
         self._handle = None
+        self._interpreter.set_task_handle(self._handle)
 
     def control(self, action):
         """

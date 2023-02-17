@@ -19,7 +19,7 @@ class Channel(object):
     """
     __slots__ = ['_handle', '_name', '__weakref__']
 
-    def __init__(self, task_handle, virtual_or_physical_name):
+    def __init__(self, task_handle, virtual_or_physical_name, interpreter):
         """
         Args:
             task_handle (TaskHandle): Specifies the handle of the task that
@@ -29,6 +29,7 @@ class Channel(object):
         """
         self._handle = task_handle
         self._name = virtual_or_physical_name
+        _interpreter = interpreter
 
     def __add__(self, other):
         if not isinstance(other, self.__class__):
