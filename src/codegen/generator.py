@@ -37,7 +37,7 @@ def generate(args):
 
     os.makedirs(args.dest, exist_ok=True)
 
-    metadata = _get_metadata()
+    codegen_metadata = _get_metadata()
 
-    for info in metadata["script_info"]["modules"]:
-        _generate_file(metadata, info["templateFile"], args.dest / info["relativeOutputPath"])
+    for info in codegen_metadata["script_info"]["modules"]:
+        _generate_file(codegen_metadata, info["templateFile"], args.dest / info["relativeOutputPath"])

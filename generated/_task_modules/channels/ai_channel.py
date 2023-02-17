@@ -25,7 +25,6 @@ class AIChannel(Channel):
     @property
     def ai_atten(self):
         """
-
         float : Specifies the amount of attenuation to use.
         """
         val = ctypes.c_double()
@@ -75,7 +74,6 @@ class AIChannel(Channel):
     @property
     def ai_raw_samp_justification(self):
         """
-
         class: DataJustification : Indicates the justification of a raw
             sample from the device.
         """
@@ -99,7 +97,6 @@ class AIChannel(Channel):
     @property
     def ai_bridge_poly_forward_coeff(self):
         """
-
         List(float) : Specifies an list of coefficients for the
             polynomial that converts electrical values to physical
             values. Each element of the list corresponds to a term of
@@ -168,7 +165,6 @@ class AIChannel(Channel):
     @property
     def ai_thrmcpl_cjc_chan(self):
         """
-
         class: Channel : Indicates the channel that acquires the
             temperature of the cold junction if **ai_thrmcpl_cjc_src**
             is **CJCSource1.SCANNABLE_CHANNEL**. If the channel is a

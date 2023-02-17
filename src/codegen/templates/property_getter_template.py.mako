@@ -5,7 +5,7 @@
     @property
     def ${attribute.name}(self):
         """
-        ${attribute.get_return_type() + " : " + attribute.description | docstring_wrap(8, 12)}
+        ${attribute.get_return_type() + " : " + attribute.description | docstring_wrap(initial_indent=8, subsequent_indent=12)}
         """
 ## Script instantiation of numpy arrays for input parameters that are lists, and ctypes variables for
 ## output parameters that will be passed by reference.
@@ -32,7 +32,7 @@
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ${', '.join(attribute.get_argument_types()) | wrap(24, 24)}]
+                        ${', '.join(attribute.get_argument_types()) | wrap(initial_indent=24)}]
 
     %endif
 \
@@ -92,7 +92,7 @@
         %endif
 \
         error_code = cfunc(
-            ${', '.join(function_call_args) | wrap(12, 12)})
+            ${', '.join(function_call_args) | wrap(initial_indent=12)})
         check_for_error(error_code)
     %endif
 

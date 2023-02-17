@@ -52,7 +52,7 @@
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ${', '.join(argtypes) | wrap(24, 24)}]
+                        ${', '.join(argtypes) | wrap(initial_indent=24)}]
 
 \
 ## Script function call.
@@ -67,6 +67,6 @@
             function_call_args.append('len(val)')
     %>\
         error_code = cfunc(
-            ${', '.join(function_call_args) | wrap(12, 12)})
+            ${', '.join(function_call_args) | wrap(initial_indent=12)})
         check_for_error(error_code)
 </%def>
