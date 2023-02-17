@@ -64,7 +64,7 @@ class Task(object):
     Represents a DAQmx Task.
     """
 
-    def __init__(self, new_task_name='', *, grpc_options=None ):
+    def __init__(self, new_task_name='', *, grpc_options=None, interpreter=None ):
         """
         Creates a DAQmx task.
 
@@ -79,10 +79,13 @@ class Task(object):
                 results in an error.
         """
 
-        if grpc_options:
-            self._interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
+        if interpreter:
+            self._interpreter = interpreter
         else:
-            self._interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+            if grpc_options:
+                self._interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
+            else:
+                self._interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         self._handle = self._interpreter.create_task(new_task_name=new_task_name)
         self._interpreter.set_task_handle(self._handle)
