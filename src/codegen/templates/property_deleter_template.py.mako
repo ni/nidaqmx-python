@@ -4,14 +4,7 @@
     %>\
     @${attribute.name}.deleter
     def ${attribute.name}(self):
-<%
-        argtypes = []
-        for handle_parameter in attribute.handle_parameters:
-            if handle_parameter.ctypes_data_type == 'ctypes.c_char_p':
-                argtypes.append('ctypes_byte_str')
-            else:
-                argtypes.append(handle_parameter.ctypes_data_type)
-    %>\
+    ## When the length of the function name is too long, it will be wrapped to the next line
     %if len(attribute.c_function_name) < 33:
         cfunc = lib_importer.${attribute.get_lib_importer_type()}.DAQmxReset${attribute.c_function_name}
     %else:
@@ -22,7 +15,7 @@
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ${', '.join(argtypes) | wrap(initial_indent=24)}]
+                        ${', '.join(attribute.get_handle_parameter_arguments()) | wrap(initial_indent=24)}]
 
 \
 ## Script function call.

@@ -287,3 +287,12 @@ class Attribute:
             return "List({0})".format(self.python_data_type)
         else:
             return self.python_data_type
+
+    def get_handle_parameter_arguments(self):
+        argtypes = []
+        for handle_parameter in self.handle_parameters:
+            if handle_parameter.ctypes_data_type == 'ctypes.c_char_p':
+                argtypes.append('ctypes_byte_str')
+            else:
+                argtypes.append(handle_parameter.ctypes_data_type)
+        return argtypes

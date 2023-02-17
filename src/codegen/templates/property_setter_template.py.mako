@@ -42,6 +42,7 @@
         if attribute.has_explicit_write_buffer_size:
             argtypes.append('ctypes.c_uint')
     %>\
+    ## When the length of the function name is too long, it will be wrapped to the next line
     %if len(attribute.c_function_name) < 33:
         cfunc = lib_importer.${attribute.get_lib_importer_type()}.DAQmxSet${attribute.c_function_name}
     %else:
