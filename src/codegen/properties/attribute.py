@@ -34,6 +34,8 @@ class Attribute:
             self._enum = attribute_metadata["enum"]
             self._is_enum = True
         self._object_type = attribute_metadata.get("object_type")
+
+    
             
     @property
     def id(self):
@@ -244,3 +246,44 @@ class Attribute:
         This is used to provide the type of the attribute when making c function calls in python.
         """
         return self._ctypes_data_type
+
+    def get_lib_importer_type(self):
+        return 'windll' if self.calling_convention=='StdCall' else 'cdll'
+
+    def get_argument_types(self):
+        argtypes = []
+        for handle_parameter in self.handle_parameters:
+            if handle_parameter.ctypes_data_type == 'ctypes.c_char_p':
+                argtypes.append('ctypes_byte_str')
+            else:
+                argtypes.append(handle_parameter.ctypes_data_type)
+
+        if (self.is_list and self.ctypes_data_type != 'ctypes.c_char_p' and
+                self.bitfield_enum is None):
+            argtypes.append("wrapped_ndpointer(dtype={0}, flags=('C','W'))"
+                            .format(self.ctypes_data_type))
+        
+        elif self.ctypes_data_type == 'ctypes.c_char_p':
+            argtypes.append(self.ctypes_data_type)
+        
+        else:
+            argtypes.append('ctypes.POINTER({0})'.format(self.ctypes_data_type))
+
+        if self.has_explicit_read_buffer_size:
+            argtypes.append('ctypes.c_uint')
+
+        return argtypes
+    
+    def get_return_type(self):
+        if self.is_enum and not self.is_list:
+            return 'class: {0}'.format(self.enum)
+        elif self.is_object and not self.is_list:
+            return 'class: {0}'.format(self.object_type)
+        elif self.is_enum and self.is_list:
+            return 'class: list({0})'.format(self.enum)
+        elif self.is_object and self.is_list:
+            return 'class: list({0})'.format(self.object_type)
+        elif self.is_list:
+            return "List({0})".format(self.python_data_type)
+        else:
+            return self.python_data_type

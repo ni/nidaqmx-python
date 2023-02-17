@@ -5,21 +5,7 @@
     @property
     def ${attribute.name}(self):
         """
-<%
-    if attribute.is_enum and not attribute.is_list:
-        returnType = 'class: {0}'.format(attribute.enum)
-    elif attribute.is_object and not attribute.is_list:
-        returnType = 'class: {0}'.format(attribute.object_type)
-    elif attribute.is_enum and attribute.is_list:
-        returnType = 'class: list({0})'.format(attribute.enum)
-    elif attribute.is_object and attribute.is_list:
-        returnType = 'class: list({0})'.format(attribute.object_type)
-    elif attribute.is_list:
-        returnType = "List({0})".format(attribute.python_data_type)
-    else:
-        returnType = attribute.python_data_type
-%>
-        ${returnType+ " : " + attribute.description | docstring_wrap(8, 12)}
+        ${attribute.get_return_type() + " : " + attribute.description | docstring_wrap(8, 12)}
         """
 ## Script instantiation of numpy arrays for input parameters that are lists, and ctypes variables for
 ## output parameters that will be passed by reference.
@@ -34,39 +20,19 @@
     %endif
 \
     %if len(attribute.c_function_name) < 33:
-        cfunc = lib_importer.${'windll' if attribute.calling_convention=='StdCall' else 'cdll'}.DAQmxGet${attribute.c_function_name}
+        cfunc = lib_importer.${attribute.get_lib_importer_type()}.DAQmxGet${attribute.c_function_name}
     %else:
-        cfunc = (lib_importer.${'windll' if attribute.calling_convention=='StdCall' else 'cdll'}.
+        cfunc = (lib_importer.${attribute.get_lib_importer_type()}.
                  DAQmxGet${attribute.c_function_name})
     %endif
 \
 ## Create argument ctypes types list.
     %if attribute.calling_convention == 'StdCall':
-<%
-            argtypes = []
-            for handle_parameter in attribute.handle_parameters:
-                if handle_parameter.ctypes_data_type == 'ctypes.c_char_p':
-                    argtypes.append('ctypes_byte_str')
-                else:
-                    argtypes.append(handle_parameter.ctypes_data_type)
-
-            if (attribute.is_list and attribute.ctypes_data_type != 'ctypes.c_char_p' and
-                    attribute.bitfield_enum is None):
-                argtypes.append("wrapped_ndpointer(dtype={0}, flags=('C','W'))"
-                                .format(attribute.ctypes_data_type))
-            elif attribute.ctypes_data_type == 'ctypes.c_char_p':
-                argtypes.append(attribute.ctypes_data_type)
-            else:
-                argtypes.append('ctypes.POINTER({0})'.format(attribute.ctypes_data_type))
-
-            if attribute.has_explicit_read_buffer_size:
-                argtypes.append('ctypes.c_uint')
-        %>\
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ${', '.join(argtypes) | wrap(24, 24)}]
+                        ${', '.join(attribute.get_argument_types()) | wrap(24, 24)}]
 
     %endif
 \

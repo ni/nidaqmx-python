@@ -13,9 +13,9 @@
                 argtypes.append(handle_parameter.ctypes_data_type)
     %>\
     %if len(attribute.c_function_name) < 33:
-        cfunc = lib_importer.${'windll' if attribute.calling_convention=='StdCall' else 'cdll'}.DAQmxReset${attribute.c_function_name}
+        cfunc = lib_importer.${attribute.get_lib_importer_type()}.DAQmxReset${attribute.c_function_name}
     %else:
-        cfunc = (lib_importer.${'windll' if attribute.calling_convention=='StdCall' else 'cdll'}.
+        cfunc = (lib_importer.${attribute.get_lib_importer_type()}.
                  DAQmxReset${attribute.c_function_name})
     %endif
         if cfunc.argtypes is None:

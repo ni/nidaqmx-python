@@ -65,7 +65,7 @@ attributes = {
             'type': 'float64[]',
             'ctypes_data_type': 'numpy.float64',
             'python_data_type': 'float',
-            'description': 'Specifies an list of coefficients for the polynomial that converts electrical values to physical values. Each element of the list corresponds to a term othe equation. For example, if index three of the list is 9,the fourth term of the equation is 9x^3.',
+            'description': 'Specifies an list of coefficients for the polynomial that converts electrical values to physical values. Each element of the list corresponds to a term of the equation. For example, if index three of the list is 9, the fourth term of the equation is 9x^3.',
             'has_explicit_read_buffer_size': True,
             'bitfield_enum':'N/A',
             'is_list':True,

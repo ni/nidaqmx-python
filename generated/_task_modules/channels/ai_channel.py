@@ -102,9 +102,9 @@ class AIChannel(Channel):
 
         List(float) : Specifies an list of coefficients for the
             polynomial that converts electrical values to physical
-            values. Each element of the list corresponds to a term othe
-            equation. For example, if index three of the list is 9,the
-            fourth term of the equation is 9x^3.
+            values. Each element of the list corresponds to a term of
+            the equation. For example, if index three of the list is 9,
+            the fourth term of the equation is 9x^3.
         """
         cfunc = lib_importer.windll.DAQmxGetAIBridgePolyForwardCoeff
         if cfunc.argtypes is None:
