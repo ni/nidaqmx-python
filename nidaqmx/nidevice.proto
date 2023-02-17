@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.ni.grpc.device";
+option java_outer_classname = "NiDevice";
+option csharp_namespace = "NationalInstruments.Grpc.Device";
+
+package nidevice_grpc;
+
+message NIComplexNumber {
+  double real = 1;
+  double imaginary = 2;
+}
+
+message NIComplexNumberF32 {
+  float real = 1;
+  float imaginary = 2;
+}
+
+message NIComplexI16 {
+  sint32 real = 1;
+  sint32 imaginary = 2;
+}
+
+message SmtSpectrumInfo {
+  uint32 spectrum_type = 1;
+  uint32 linear_db = 2;
+  uint32 window = 3;
+  sint32 window_size = 4;
+  sint32 fft_size = 5;
+}
