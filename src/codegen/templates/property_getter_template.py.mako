@@ -5,7 +5,21 @@
     @property
     def ${attribute.name}(self):
         """
-        ${attribute.description | docstring_wrap(8, 12)}
+<%
+    if attribute.is_enum and not attribute.is_list:
+        returnType = 'class: {0}'.format(attribute.enum)
+    elif attribute.is_object and not attribute.is_list:
+        returnType = 'class: {0}'.format(attribute.object_type)
+    elif attribute.is_enum and attribute.is_list:
+        returnType = 'class: list({0})'.format(attribute.enum)
+    elif attribute.is_object and attribute.is_list:
+        returnType = 'class: list({0})'.format(attribute.object_type)
+    elif attribute.is_list:
+        returnType = "List({0})".format(attribute.python_data_type)
+    else:
+        returnType = attribute.python_data_type
+%>
+        ${returnType+ " : " + attribute.description | docstring_wrap(8, 12)}
         """
 ## Script instantiation of numpy arrays for input parameters that are lists, and ctypes variables for
 ## output parameters that will be passed by reference.
@@ -122,9 +136,9 @@
         return enum_bitfield_to_list(
             val.value, ${attribute.bitfield_enum}, ${attribute.python_data_type})
     %elif attribute.is_enum and not attribute.is_list:
-        return ${attribute.python_data_type}(val.value)
+        return ${attribute.enum}(val.value)
     %elif attribute.is_enum and attribute.is_list:
-        return [${attribute.python_data_type}(e) for e in val]
+        return [${attribute.enum}(e) for e in val]
     %elif attribute.is_object and not attribute.is_list:
 <%
             object_constructor_args = []
@@ -134,9 +148,9 @@
             object_constructor_args.append("val.value.decode('ascii')")
         %>\
         %if attribute.object_has_factory:
-        return ${attribute.python_data_type}._factory(${', '.join(object_constructor_args)})
+        return ${attribute.object_type}._factory(${', '.join(object_constructor_args)})
         %else:
-        return ${attribute.python_data_type}(${', '.join(object_constructor_args)})
+        return ${attribute.object_type}(${', '.join(object_constructor_args)})
         %endif
     %elif attribute.is_object and attribute.is_list:
 <%
@@ -147,10 +161,10 @@
             object_constructor_args.append('v')
         %>\
         %if attribute.object_has_factory:
-        return [${attribute.python_data_type}._factory(${', '.join(object_constructor_args)})
+        return [${attribute.object_type}._factory(${', '.join(object_constructor_args)})
                 for v in unflatten_channel_string(val.value.decode('ascii'))]
         %else:
-        return [${attribute.python_data_type}(${', '.join(object_constructor_args)})
+        return [${attribute.object_type}(${', '.join(object_constructor_args)})
                 for v in unflatten_channel_string(val.value.decode('ascii'))]
         %endif
     %elif attribute.is_list and attribute.ctypes_data_type == 'ctypes.c_char_p':

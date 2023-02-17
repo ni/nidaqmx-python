@@ -15,28 +15,23 @@ class Attribute():
         self._is_list = attribute_metadata["is_list"]
         self._calling_convention = attribute_metadata["calling_convention"]
         self._c_function_name = attribute_metadata["c_function_name"]
-        if("is_object" in attribute_metadata): 
-            self._is_object = attribute_metadata["is_object"]
-        if("read_buffer_size" in attribute_metadata):
-            self._read_buffer_size = attribute_metadata["read_buffer_size"]
+        self._is_object = attribute_metadata.get("is_object", False)
+        self._read_buffer_size = attribute_metadata.get("read_buffer_size")
         self._python_class_name = attribute_metadata["python_class_name"]
         self._handle_parameters = []
         self._object_constructor_params = []
-        if("handle_parameters" in attribute_metadata):
+        if "handle_parameters" in attribute_metadata:
             for name, parameter_data in attribute_metadata["handle_parameters"].items():
                 self._handle_parameters.append(Parameter(name, parameter_data))
-        if("object_has_factory" in attribute_metadata):
-            self._object_has_factory = attribute_metadata["object_has_factory"]
-        if("object_constructor_params" in attribute_metadata):
+        self._object_has_factory = attribute_metadata.get("object_has_factory", False)
+        if"object_constructor_params" in attribute_metadata:
             for name, parameter_data in attribute_metadata["object_constructor_params"].items():
                 self._object_constructor_params.append(Parameter(name, parameter_data))
-        if("has_explicit_write_buffer_size" in attribute_metadata):
-            self._has_explicit_write_buffer_size = attribute_metadata["has_explicit_write_buffer_size"]
-        if("enum" in attribute_metadata):
+        self._has_explicit_write_buffer_size = attribute_metadata.get("has_explicit_write_buffer_size", False)
+        if "enum" in attribute_metadata:
             self._enum = attribute_metadata["enum"]
             self._is_enum = True
-        if("object_type" in attribute_metadata):
-            self._object_type = attribute_metadata["object_type"]
+        self._object_type = attribute_metadata.get("object_type")
             
     @property
     def id(self):
@@ -160,7 +155,7 @@ class Attribute():
         The name of the object.
         During code generation, this is used to instantiate the object.
         """
-        return self._is_object_type
+        return self._object_type
 
     @property
     def c_function_name(self):

@@ -9,7 +9,7 @@ def get_attributes(metadata, class_name):
     attributes_metadata = []
     for group_name, attributes in metadata["attributes"].items():
         for id, attribute_data in attributes.items():
-            if(attribute_data["python_class_name"] == class_name):
+            if attribute_data["python_class_name"] == class_name:
                 attributes_metadata.append(Attribute(id, attribute_data))
     return attributes_metadata
 
