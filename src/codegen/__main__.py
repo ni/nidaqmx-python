@@ -1,48 +1,22 @@
 import logging
 import pathlib
 import sys
+import click
+from collections import namedtuple
 
 import codegen.generator as generator
 
 _logger = logging.getLogger(__name__)
 _logger.addHandler(logging.NullHandler())
 
-def _parse_args(argv):
-    import argparse
-
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument(
-        "--dest",
-        type=pathlib.Path,
-        help="Destination directory",
-        required=True,
-    )
-
-    debug_group = parser.add_argument_group("Debug")
-    debug_group.add_argument(
-        "-v",
-        "--verbose",
-        action="count",
-        default=0,
-        help="Print debug information.  Can be repeated for more detailed output.",
-    )
-    debug_group.add_argument(
-        "-q",
-        "--quiet",
-        action="count",
-        default=0,
-        help="Print only essential information.  Can be repeated for quieter output.",
-    )
-
-    args = parser.parse_args(argv)
-
-    if 0 < args.verbose and 0 < args.quiet:
-        parser.error("Mixing --verbose and --quiet is contradictory")
-    verbosity = 2 + args.quiet - args.verbose
+def _get_logging_level(verbose, quiet):
+    
+    if 0 < verbose and 0 < quiet:
+       click.exceptions.error("Mixing --verbose and --quiet is contradictory")
+    verbosity = 2 + quiet - verbose
     verbosity = max(verbosity, 0)
     verbosity = min(verbosity, 4)
-    args.logging_level = {
+    logging_level = {
         0: logging.DEBUG,
         1: logging.INFO,
         2: logging.WARNING,
@@ -50,18 +24,21 @@ def _parse_args(argv):
         4: logging.CRITICAL,
     }[verbosity]
 
-    return args
+    return logging_level
 
-def main(argv=None):
-    if argv is None:
-        argv = sys.argv
-    args = _parse_args(argv[1:])
+@click.command()
+@click.option('--dest', type=str)
+@click.option('--verbose', type=int, default=0, required = False)
+@click.option('--quiet', type=int, default=0, required = False)
+def main(dest, verbose, quiet):
+
+    logging_level = _get_logging_level(verbose, quiet)
 
     log_format = "[%(relativeCreated)6d] %(levelname)-5s %(funcName)s: %(message)s"
-    logging.basicConfig(level=args.logging_level, format=log_format)
+    logging.basicConfig(level=logging_level, format=log_format)
 
     try:
-        generator.generate(args)
+        generator.generate(dest)
     except Exception:
         _logger.exception("Failed to generate")
         return 1

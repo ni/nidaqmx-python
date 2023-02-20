@@ -32,12 +32,12 @@ def _generate_file(metadata, template_file_name, output_path):
         f.write(template.render(data=metadata))
 
 
-def generate(args):
-    _logger.info(f"Generating files into {args.dest}")
+def generate(dest):
+    _logger.info(f"Generating files into {dest}")
 
-    os.makedirs(args.dest, exist_ok=True)
+    os.makedirs(dest, exist_ok=True)
 
     codegen_metadata = _get_metadata()
 
     for info in codegen_metadata["script_info"]["modules"]:
-        _generate_file(codegen_metadata, info["templateFile"], args.dest / info["relativeOutputPath"])
+        _generate_file(codegen_metadata, info["templateFile"], dest + "\\" + info["relativeOutputPath"])
