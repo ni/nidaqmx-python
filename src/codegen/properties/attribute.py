@@ -22,9 +22,10 @@ class Attribute:
         self._python_class_name = attribute_metadata["python_class_name"]
         self._handle_parameters = []
         self._object_constructor_params = []
-        if "handle_parameters" in attribute_metadata:
-            for name, parameter_data in attribute_metadata["handle_parameters"].items():
-                self._handle_parameters.append(Parameter(name, parameter_data))
+        self._handle_parameters = [
+        Parameter(name, parameter_data)
+        for name, parameter_data in attribute_metadata.get("handle_parameters", []).items()
+        ]
         self._object_has_factory = attribute_metadata.get("object_has_factory", False)
         if"object_constructor_params" in attribute_metadata:
             for name, parameter_data in attribute_metadata["object_constructor_params"].items():
@@ -108,7 +109,7 @@ class Attribute:
     @property
     def is_enum(self):
         """
-        booL: Represents if the attribute is an enum or not.
+        bool: Represents if the attribute is an enum or not.
         """
         return self._is_enum
     
@@ -276,13 +277,13 @@ class Attribute:
     
     def get_return_type(self):
         if self.is_enum and not self.is_list:
-            return 'class: {0}'.format(self.enum)
+            return ':class: {0}'.format(self.enum)
         elif self.is_object and not self.is_list:
-            return 'class: {0}'.format(self.object_type)
+            return ':class: {0}'.format(self.object_type)
         elif self.is_enum and self.is_list:
-            return 'class: list({0})'.format(self.enum)
+            return ':class: list({0})'.format(self.enum)
         elif self.is_object and self.is_list:
-            return 'class: list({0})'.format(self.object_type)
+            return ':class: list({0})'.format(self.object_type)
         elif self.is_list:
             return "List({0})".format(self.python_data_type)
         else:
