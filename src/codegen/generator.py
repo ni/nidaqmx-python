@@ -7,13 +7,13 @@ from pathlib import Path
 from mako.lookup import TemplateLookup
 from mako.template import Template
 
-import codegen.metadata as metadata
+import codegen.metadata as scrapigen_metadata
 
 _logger = logging.getLogger(__name__)
 _logger.addHandler(logging.NullHandler())
 
 def _get_metadata():
-    return metadata.metadata
+    return scrapigen_metadata.metadata
 
 def _get_template(template_file_name):
     """Instantiate the mako template in the given file."""
