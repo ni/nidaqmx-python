@@ -30,6 +30,7 @@ class Attribute:
         self._is_object = attribute_metadata.get("is_python_object", False)
         self._read_buffer_size = attribute_metadata.get("read_buffer_size")
         self._python_class_name = attribute_metadata["python_class_name"]
+        self._python_description = attribute_metadata["python_description"]
         self._handle_parameters = []
         self._object_constructor_params = []
         if "handle_parameters" in attribute_metadata:
@@ -250,6 +251,15 @@ class Attribute:
     def python_description(self):
         """
         str: The description of the attribute.
+
+        This will be used to define the docstring of the attribute when generating the code.
+        """
+        return self._python_description
+
+    @property
+    def python_description(self):
+        """
+        str: The description of the attribute as per the expected format in python.
 
         This will be used to define the docstring of the attribute when generating the code.
         """
