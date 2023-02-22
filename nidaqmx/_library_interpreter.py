@@ -228,7 +228,7 @@ class LibraryInterpreter(object):
     def reset_channel_attribute(
         self, channel_name, attribute_id):
 
-        cfunc = lib_importer.windll.DAQmxReSetChanAttribute
+        cfunc = lib_importer.windll.DAQmxResetChanAttribute
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
