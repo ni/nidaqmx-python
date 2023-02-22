@@ -35,6 +35,7 @@ numpy = [
     # precompiled wheels only available in the 1.22+
     {version="^1.22", python = "^3.10"}
 ]
+click = "^8.1"
 six = "^1.16"
 # This functionality was merged into python stdlib beginning in 3.8
 importlib_metadata = {version="^4.10", python="~3.7"}
