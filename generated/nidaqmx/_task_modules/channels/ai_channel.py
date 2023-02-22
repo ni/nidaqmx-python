@@ -21,7 +21,7 @@ from nidaqmx.constants import (
     EddyCurrentProxProbeSensitivityUnits, ExcitationDCorAC,
     ExcitationIdleOutputBehavior, ExcitationSource,
     ExcitationVoltageOrCurrent, FilterResponse, FilterType,
-    ForceIEPESensorSensitivityUnits, ForceUnits, FrequencyUnits, Impedance1,
+    ForceIEPESensorSensitivityUnits, ForceUnits, FrequencyUnits,
     InputDataTransferCondition, LVDTSensitivityUnits, LengthUnits,
     PowerIdleOutputBehavior, PowerOutputState, PressureUnits, RTDType,
     RVDTSensitivityUnits, RawDataCompressionType, ResistanceConfiguration,
@@ -32,7 +32,6 @@ from nidaqmx.constants import (
     TerminalConfiguration, ThermocoupleType, TorqueUnits, UsageTypeAI,
     VelocityIEPESensorSensitivityUnits, VelocityUnits, VoltageUnits)
 
-
 class AIChannel(Channel):
     """
     Represents one or more analog input virtual channels and their properties.
@@ -41,6 +40,7 @@ class AIChannel(Channel):
 
     def __repr__(self):
         return 'AIChannel(name={0})'.format(self._name)
+
 
     @property
     def ai_ac_excit_freq(self):
@@ -89,6 +89,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_ac_excit_sync_enable(self):
@@ -140,6 +141,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_ac_excit_wire_mode(self):
@@ -193,6 +195,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_accel_4_wire_dc_voltage_sensitivity(self):
         """
@@ -244,6 +247,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_accel_4_wire_dc_voltage_sensitivity_units(self):
@@ -298,6 +302,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_accel_charge_sensitivity(self):
         """
@@ -348,6 +353,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_accel_charge_sensitivity_units(self):
@@ -454,7 +460,7 @@ class AIChannel(Channel):
         """
         float: Specifies the sensitivity of the accelerometer. This
             value is in the units you specify with
-            **ai_accel_sensitivity_units**. Refer to the sensor
+            **AI.Accel.SensitivityUnits**. Refer to the sensor
             documentation to determine this value.
         """
         val = ctypes.c_double()
@@ -500,11 +506,12 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_accel_sensitivity_units(self):
         """
         :class:`nidaqmx.constants.AccelSensitivityUnits`: Specifies the
-            units of **ai_accel_sensitivity**.
+            units of **AI.Accel.Sensitivity**.
         """
         val = ctypes.c_int()
 
@@ -549,6 +556,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_accel_units(self):
@@ -604,7 +612,7 @@ class AIChannel(Channel):
     def ai_adc_custom_timing_mode(self):
         """
         int: Specifies the timing mode of the ADC when
-            **ai_adc_timing_mode** is **ADCTimingMode.CUSTOM**.
+            **AI.ADCTimingMode** is **ADCTimingMode.CUSTOM**.
         """
         val = ctypes.c_uint()
 
@@ -649,6 +657,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_adc_timing_mode(self):
         """
@@ -657,7 +666,7 @@ class AIChannel(Channel):
             effective resolution. Some ADC timing modes provide
             increased powerline noise rejection. On devices that have an
             AI Convert clock, this setting affects both the maximum and
-            default values for **ai_conv_rate**. You must use the same
+            default values for **AIConv.Rate**. You must use the same
             ADC timing mode for all channels on a device, but you can
             use different ADC timing modes for different devices in the
             same task.
@@ -706,6 +715,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_atten(self):
         """
@@ -753,6 +763,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_auto_zero_mode(self):
@@ -805,6 +816,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_averaging_win_size(self):
         """
@@ -855,6 +867,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_bridge_balance_coarse_pot(self):
         """
@@ -903,6 +916,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_bridge_balance_fine_pot(self):
@@ -953,6 +967,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_bridge_cfg(self):
         """
@@ -1002,6 +1017,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_bridge_electrical_units(self):
@@ -1055,6 +1071,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_bridge_initial_ratio(self):
         """
@@ -1062,12 +1079,12 @@ class AIChannel(Channel):
             from the bridge to excitation voltage supplied to the bridge
             while not under load. NI-DAQmx subtracts this value from any
             measurements before applying scaling equations. If you set
-            **ai_bridge_initial_voltage**, NI-DAQmx coerces this
-            property  to **ai_bridge_initial_voltage** divided by
-            **ai_excit_actual_val**. If you set this property, NI-DAQmx
-            coerces **ai_bridge_initial_voltage** to the value of this
-            property times **ai_excit_actual_val**. If you set both this
-            property and **ai_bridge_initial_voltage**, and their values
+            **AI.Bridge.InitialVoltage**, NI-DAQmx coerces this property
+            to **AI.Bridge.InitialVoltage** divided by
+            **AI.Excit.ActualVal**. If you set this property, NI-DAQmx
+            coerces **AI.Bridge.InitialVoltage** to the value of this
+            property times **AI.Excit.ActualVal**. If you set both this
+            property and **AI.Bridge.InitialVoltage**, and their values
             conflict, NI-DAQmx returns an error.  To avoid this error,
             reset one property to its default value before setting the
             other.
@@ -1115,22 +1132,23 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_bridge_initial_voltage(self):
         """
         float: Specifies in volts the output voltage of the bridge while
             not under load. NI-DAQmx subtracts this value from any
             measurements before applying scaling equations.  If you set
-            **ai_bridge_initial_ratio**, NI-DAQmx coerces this property
-            to **ai_bridge_initial_ratio** times
-            **ai_excit_actual_val**. This property is set by DAQmx
-            Perform Bridge Offset Nulling Calibration. If you set this
-            property, NI-DAQmx coerces **ai_bridge_initial_ratio** to
-            the value of this property divided by
-            **ai_excit_actual_val**. If you set both this property and
-            **ai_bridge_initial_ratio**, and their values conflict, NI-
-            DAQmx returns an error. To avoid this error, reset one
-            property to its default value before setting the other.
+            **AI.Bridge.InitialRatio**, NI-DAQmx coerces this property
+            to **AI.Bridge.InitialRatio** times **AI.Excit.ActualVal**.
+            This property is set by DAQmx Perform Bridge Offset Nulling
+            Calibration. If you set this property, NI-DAQmx coerces
+            **AI.Bridge.InitialRatio** to the value of this property
+            divided by **AI.Excit.ActualVal**. If you set both this
+            property and **AI.Bridge.InitialRatio**, and their values
+            conflict, NI-DAQmx returns an error. To avoid this error,
+            reset one property to its default value before setting the
+            other.
         """
         val = ctypes.c_double()
 
@@ -1174,6 +1192,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_bridge_nom_resistance(self):
@@ -1223,6 +1242,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_bridge_physical_units(self):
@@ -1275,6 +1295,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_bridge_poly_forward_coeff(self):
@@ -1343,6 +1364,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_bridge_poly_reverse_coeff(self):
         """
@@ -1410,6 +1432,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_bridge_scale_type(self):
         """
@@ -1461,11 +1484,12 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_bridge_shunt_cal_enable(self):
         """
         bool: Specifies whether to enable a shunt calibration switch.
-            Use **ai_bridge_shunt_cal_select** to select the switch(es)
+            Use **AI.Bridge.ShuntCal.Select** to select the switch(es)
             to enable.
         """
         val = c_bool32()
@@ -1509,6 +1533,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_bridge_shunt_cal_gain_adjust(self):
@@ -1561,12 +1586,13 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_bridge_shunt_cal_select(self):
         """
         :class:`nidaqmx.constants.ShuntCalSelect`: Specifies which shunt
             calibration switch(es) to enable.  Use
-            **ai_bridge_shunt_cal_enable** to enable the switch(es) you
+            **AI.Bridge.ShuntCal.Enable** to enable the switch(es) you
             specify with this property.
         """
         val = ctypes.c_int()
@@ -1612,6 +1638,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_bridge_shunt_cal_shunt_cal_a_actual_resistance(self):
@@ -1665,6 +1692,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_bridge_shunt_cal_shunt_cal_a_resistance(self):
         """
@@ -1717,6 +1745,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_bridge_shunt_cal_shunt_cal_a_src(self):
         """
@@ -1767,6 +1796,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_bridge_shunt_cal_shunt_cal_b_actual_resistance(self):
@@ -1820,6 +1850,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_bridge_shunt_cal_shunt_cal_b_resistance(self):
         """
@@ -1872,13 +1903,14 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_bridge_table_electrical_vals(self):
         """
         List[float]: Specifies the list of electrical values that map to
-            the values in **ai_bridge_table_physical_vals**. Specify
-            this value in the unit indicated by
-            **ai_bridge_electrical_units**.
+            the values in **AI.Bridge.Table.PhysicalVals**. Specify this
+            value in the unit indicated by
+            **AI.Bridge.ElectricalUnits**.
         """
         cfunc = lib_importer.windll.DAQmxGetAIBridgeTableElectricalVals
         if cfunc.argtypes is None:
@@ -1938,13 +1970,14 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_bridge_table_physical_vals(self):
         """
         List[float]: Specifies the list of physical values that map to
-            the values in **ai_bridge_table_electrical_vals**. Specify
+            the values in **AI.Bridge.Table.ElectricalVals**. Specify
             this value in the unit indicated by
-            **ai_bridge_physical_units**.
+            **AI.Bridge.PhysicalUnits**.
         """
         cfunc = lib_importer.windll.DAQmxGetAIBridgeTablePhysicalVals
         if cfunc.argtypes is None:
@@ -2004,13 +2037,14 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_bridge_two_point_lin_first_electrical_val(self):
         """
         float: Specifies the first electrical value, corresponding to
-            **ai_bridge_two_point_lin_first_physical_val**. Specify this
+            **AI.Bridge.TwoPointLin.First.PhysicalVal**. Specify this
             value in the unit indicated by
-            **ai_bridge_electrical_units**.
+            **AI.Bridge.ElectricalUnits**.
         """
         val = ctypes.c_double()
 
@@ -2058,13 +2092,13 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_bridge_two_point_lin_first_physical_val(self):
         """
         float: Specifies the first physical value, corresponding to
-            **ai_bridge_two_point_lin_first_electrical_val**. Specify
-            this value in the unit indicated by
-            **ai_bridge_physical_units**.
+            **AI.Bridge.TwoPointLin.First.ElectricalVal**. Specify this
+            value in the unit indicated by **AI.Bridge.PhysicalUnits**.
         """
         val = ctypes.c_double()
 
@@ -2112,13 +2146,14 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_bridge_two_point_lin_second_electrical_val(self):
         """
         float: Specifies the second electrical value, corresponding to
-            **ai_bridge_two_point_lin_second_physical_val**. Specify
-            this value in the unit indicated by
-            **ai_bridge_electrical_units**.
+            **AI.Bridge.TwoPointLin.Second.PhysicalVal**. Specify this
+            value in the unit indicated by
+            **AI.Bridge.ElectricalUnits**.
         """
         val = ctypes.c_double()
 
@@ -2166,13 +2201,13 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_bridge_two_point_lin_second_physical_val(self):
         """
         float: Specifies the second physical value, corresponding to
-            **ai_bridge_two_point_lin_second_electrical_val**. Specify
-            this value in the unit indicated by
-            **ai_bridge_physical_units**.
+            **AI.Bridge.TwoPointLin.Second.ElectricalVal**. Specify this
+            value in the unit indicated by **AI.Bridge.PhysicalUnits**.
         """
         val = ctypes.c_double()
 
@@ -2219,6 +2254,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_bridge_units(self):
@@ -2270,6 +2306,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_charge_units(self):
         """
@@ -2320,6 +2357,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_chop_enable(self):
         """
@@ -2368,6 +2406,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_coupling(self):
@@ -2419,6 +2458,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_current_acrms_units(self):
         """
@@ -2468,6 +2508,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_current_shunt_loc(self):
@@ -2520,6 +2561,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_current_shunt_resistance(self):
         """
@@ -2568,6 +2610,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_current_units(self):
@@ -2619,11 +2662,12 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
-    def ai_custom_scale(self):
+    def ai_custom_scale_name(self):
         """
-        :class:`nidaqmx.system.scale.Scale`: Specifies the name of a
-            custom scale for the channel.
+        :class:`nidaqmx.constants.Scale`: Specifies the name of a custom
+            scale for the channel.
         """
         cfunc = lib_importer.windll.DAQmxGetAICustomScaleName
         if cfunc.argtypes is None:
@@ -2653,8 +2697,8 @@ class AIChannel(Channel):
 
         return Scale(val.value.decode('ascii'))
 
-    @ai_custom_scale.setter
-    def ai_custom_scale(self, val):
+    @ai_custom_scale_name.setter
+    def ai_custom_scale_name(self, val):
         val = val.name
         cfunc = lib_importer.windll.DAQmxSetAICustomScaleName
         if cfunc.argtypes is None:
@@ -2668,8 +2712,8 @@ class AIChannel(Channel):
             self._handle, self._name, val)
         check_for_error(error_code)
 
-    @ai_custom_scale.deleter
-    def ai_custom_scale(self):
+    @ai_custom_scale_name.deleter
+    def ai_custom_scale_name(self):
         cfunc = lib_importer.windll.DAQmxResetAICustomScaleName
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2681,13 +2725,13 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_data_xfer_custom_threshold(self):
         """
         int: Specifies the number of samples that must be in the FIFO to
-            transfer data from the device if **ai_data_xfer_req_cond**
-            is
-            **InputDataTransferCondition.ONBOARD_MEMORY_CUSTOM_THRESHOLD**.
+            transfer data from the device if **AI.DataXferReqCond** is
+            **InputDataTransferCondition.ONBRDMEMCUSTOMTHRESHOLD**.
         """
         val = ctypes.c_uint()
 
@@ -2731,6 +2775,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_data_xfer_max_rate(self):
@@ -2784,6 +2829,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_data_xfer_mech(self):
         """
@@ -2833,6 +2879,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_data_xfer_req_cond(self):
@@ -2885,11 +2932,12 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_dc_offset(self):
         """
         float: Specifies the DC value to add to the input range of the
-            device. Use **ai_rng_high** and **ai_rng_low** to specify
+            device. Use **AI.Rng.High** and **AI.Rng.Low** to specify
             the input range. This offset is in the native units of the
             device .
         """
@@ -2936,6 +2984,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_dev_scaling_coeff(self):
         """
@@ -2975,6 +3024,7 @@ class AIChannel(Channel):
         check_for_error(size_or_code)
 
         return val.tolist()
+
 
     @property
     def ai_dig_fltr_bandpass_center_freq(self):
@@ -3025,6 +3075,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_dig_fltr_bandpass_width(self):
         """
@@ -3073,6 +3124,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_dig_fltr_coeff(self):
@@ -3137,6 +3189,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_dig_fltr_enable(self):
         """
@@ -3184,6 +3237,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_dig_fltr_highpass_cutoff_freq(self):
@@ -3234,6 +3288,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_dig_fltr_lowpass_cutoff_freq(self):
         """
@@ -3282,6 +3337,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_dig_fltr_notch_center_freq(self):
@@ -3332,6 +3388,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_dig_fltr_notch_width(self):
         """
@@ -3381,6 +3438,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_dig_fltr_order(self):
         """
@@ -3428,6 +3486,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_dig_fltr_response(self):
@@ -3479,6 +3538,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_dig_fltr_type(self):
         """
@@ -3529,6 +3589,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_dither_enable(self):
         """
@@ -3578,6 +3639,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_eddy_current_prox_probe_sensitivity(self):
@@ -3633,6 +3695,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_eddy_current_prox_probe_sensitivity_units(self):
         """
@@ -3687,6 +3750,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_eddy_current_prox_probe_units(self):
         """
@@ -3737,6 +3801,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_enhanced_alias_rejection_enable(self):
         """
@@ -3785,6 +3850,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_excit_actual_val(self):
@@ -3839,6 +3905,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_excit_d_cor_ac(self):
         """
@@ -3888,6 +3955,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_excit_idle_output_behavior(self):
@@ -3943,6 +4011,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_excit_sense(self):
         """
@@ -3992,6 +4061,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_excit_src(self):
@@ -4043,13 +4113,14 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_excit_use_for_scaling(self):
         """
         bool: Specifies if NI-DAQmx divides the measurement by the
             excitation. You should typically set this property to True
             for ratiometric transducers. If you set this property to
-            True, set **ai_max** and **ai_min** to reflect the scaling.
+            True, set **AI.Max** and **AI.Min** to reflect the scaling.
         """
         val = c_bool32()
 
@@ -4092,6 +4163,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_excit_use_multiplexed(self):
@@ -4142,14 +4214,15 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_excit_val(self):
         """
         float: Specifies the amount of excitation that the sensor
-            requires. If **ai_excit_voltage_or_current** is
-            **ExcitationVoltageOrCurrent.USE_VOLTAGE**, this value is in
-            volts. If **ai_excit_voltage_or_current** is
-            **ExcitationVoltageOrCurrent.USE_CURRENT**, this value is in
+            requires. If **AI.Excit.VoltageOrCurrent** is
+            **ExcitationVoltageOrCurrent.VOLTAGE**, this value is in
+            volts. If **AI.Excit.VoltageOrCurrent** is
+            **ExcitationVoltageOrCurrent.CURRENT**, this value is in
             amperes.
         """
         val = ctypes.c_double()
@@ -4194,6 +4267,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_excit_voltage_or_current(self):
@@ -4245,14 +4319,15 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_filter_delay(self):
         """
         float: Indicates the amount of time between when the ADC samples
             data and when the sample is read by the host device. This
             value is in the units you specify with
-            **ai_filter_delay_units**. You can adjust this amount of
-            time using **ai_filter_delay_adjustment**.
+            **AI.FilterDelayUnits**. You can adjust this amount of time
+            using **AI.FilterDelayAdjustment**.
         """
         val = ctypes.c_double()
 
@@ -4270,14 +4345,15 @@ class AIChannel(Channel):
 
         return val.value
 
+
     @property
     def ai_filter_delay_adjustment(self):
         """
         float: Specifies the amount of filter delay that gets removed if
-            **ai_remove_filter_delay** is enabled. This delay adjustment
-            is in addition to the value indicated by
-            **ai_filter_delay**. This delay adjustment is in the units
-            you specify with **ai_filter_delay_units**.
+            **AI.RemoveFilterDelay** is enabled. This delay adjustment
+            is in addition to the value indicated by **AI.FilterDelay**.
+            This delay adjustment is in the units you specify with
+            **AI.FilterDelayUnits**.
         """
         val = ctypes.c_double()
 
@@ -4322,12 +4398,13 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_filter_delay_units(self):
         """
         :class:`nidaqmx.constants.DigitalWidthUnits`: Specifies the
-            units of **ai_filter_delay** and
-            **ai_filter_delay_adjustment**.
+            units of **AI.FilterDelay** and
+            **AI.FilterDelayAdjustment**.
         """
         val = ctypes.c_int()
 
@@ -4372,6 +4449,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_filter_enable(self):
@@ -4419,6 +4497,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_filter_freq(self):
@@ -4469,6 +4548,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_filter_order(self):
         """
@@ -4517,6 +4597,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_filter_response(self):
@@ -4569,12 +4650,13 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_force_iepe_sensor_sensitivity(self):
         """
         float: Specifies the sensitivity of the IEPE force sensor
             connected to the channel. Specify this value in the unit
-            indicated by **ai_force_iepe_sensor_sensitivity_units**.
+            indicated by **AI.Force.IEPESensor.SensitivityUnits**.
         """
         val = ctypes.c_double()
 
@@ -4619,12 +4701,12 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_force_iepe_sensor_sensitivity_units(self):
         """
         :class:`nidaqmx.constants.ForceIEPESensorSensitivityUnits`:
-            Specifies the units for
-            **ai_force_iepe_sensor_sensitivity**.
+            Specifies the units for **AI.Force.IEPESensor.Sensitivity**.
         """
         val = ctypes.c_int()
 
@@ -4672,6 +4754,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_force_read_from_chan(self):
@@ -4725,6 +4808,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_force_units(self):
         """
@@ -4775,14 +4859,15 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_freq_hyst(self):
         """
         float: Specifies in volts a window below
-            **ai_freq_thresh_voltage**. The input voltage must pass
-            below **ai_freq_thresh_voltage** minus this value before NI-
-            DAQmx recognizes a waveform repetition at
-            **ai_freq_thresh_voltage**. Hysteresis can improve the
+            **AI.Freq.ThreshVoltage**. The input voltage must pass below
+            **AI.Freq.ThreshVoltage** minus this value before NI-DAQmx
+            recognizes a waveform repetition at
+            **AI.Freq.ThreshVoltage**. Hysteresis can improve the
             measurement accuracy when the signal contains noise or
             jitter.
         """
@@ -4828,6 +4913,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_freq_thresh_voltage(self):
@@ -4881,6 +4967,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_freq_units(self):
         """
@@ -4931,6 +5018,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_gain(self):
         """
@@ -4979,11 +5067,11 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_impedance(self):
         """
-        :class:`nidaqmx.constants.Impedance1`: Specifies the input
-            impedance of the channel.
+        Impedance1: Specifies the input impedance of the channel.
         """
         val = ctypes.c_double()
 
@@ -4999,11 +5087,10 @@ class AIChannel(Channel):
             self._handle, self._name, ctypes.byref(val))
         check_for_error(error_code)
 
-        return Impedance1(val.value)
+        return val.value
 
     @ai_impedance.setter
     def ai_impedance(self, val):
-        val = val.value
         cfunc = lib_importer.windll.DAQmxSetAIImpedance
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -5028,6 +5115,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_input_limits_fault_detect_enable(self):
@@ -5075,6 +5163,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_input_limits_fault_detect_lower_limit(self):
@@ -5133,6 +5222,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_input_limits_fault_detect_upper_limit(self):
         """
@@ -5189,6 +5279,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_input_src(self):
@@ -5326,12 +5417,13 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_lossy_lsb_removal_compressed_samp_size(self):
         """
         int: Specifies the number of bits to return in a raw sample when
-            **ai_raw_data_compression_type** is set to
-            **RawDataCompressionType.LOSSY_LSB_REMOVAL**.
+            **AI.RawDataCompressionType** is set to
+            **RawDataCompressionType.LOSSYLSBREMOVAL**.
         """
         val = ctypes.c_uint()
 
@@ -5378,6 +5470,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_lowpass_cutoff_freq(self):
@@ -5428,6 +5521,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_lowpass_enable(self):
         """
@@ -5475,6 +5569,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_lowpass_switch_cap_clk_src(self):
@@ -5529,11 +5624,12 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_lowpass_switch_cap_ext_clk_div(self):
         """
         int: Specifies the divisor for the external clock when you set
-            **ai_lowpass_switch_cap_clk_src** to
+            **AI.Lowpass.SwitchCap.ClkSrc** to
             **SourceSelection.EXTERNAL**. On the SCXI-1141, SCXI-1142,
             and SCXI-1143, NI-DAQmx determines the filter cutoff by
             using the equation f/(100*n), where f is the external
@@ -5583,11 +5679,12 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_lowpass_switch_cap_ext_clk_freq(self):
         """
         float: Specifies the frequency of the external clock when you
-            set **ai_lowpass_switch_cap_clk_src** to
+            set **AI.Lowpass.SwitchCap.ClkSrc** to
             **SourceSelection.EXTERNAL**.  NI-DAQmx uses this frequency
             to set the pre- and post- filters on the SCXI-1141,
             SCXI-1142, and SCXI-1143. On those devices, NI-DAQmx
@@ -5638,6 +5735,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_lowpass_switch_cap_out_clk_div(self):
@@ -5690,11 +5788,12 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_lvdt_sensitivity(self):
         """
         float: Specifies the sensitivity of the LVDT. This value is in
-            the units you specify with **ai_lvdt_sensitivity_units**.
+            the units you specify with **AI.LVDT.SensitivityUnits**.
             Refer to the sensor documentation to determine this value.
         """
         val = ctypes.c_double()
@@ -5740,11 +5839,12 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_lvdt_sensitivity_units(self):
         """
         :class:`nidaqmx.constants.LVDTSensitivityUnits`: Specifies the
-            units of **ai_lvdt_sensitivity**.
+            units of **AI.LVDT.Sensitivity**.
         """
         val = ctypes.c_int()
 
@@ -5789,6 +5889,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_lvdt_units(self):
@@ -5839,6 +5940,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_max(self):
@@ -5891,6 +5993,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_meas_type(self):
         """
@@ -5914,6 +6017,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
         return UsageTypeAI(val.value)
+
 
     @property
     def ai_mem_map_enable(self):
@@ -5969,6 +6073,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_microphone_sensitivity(self):
         """
@@ -6018,6 +6123,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_min(self):
@@ -6070,6 +6176,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_open_chan_detect_enable(self):
         """
@@ -6117,6 +6224,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_open_thrmcpl_detect_enable(self):
         """
@@ -6128,8 +6236,8 @@ class AIChannel(Channel):
             committing and starting the task. Refer to your device
             specifications for the required settling time. When open
             thermocouple detection is enabled, use
-            **open_thrmcpl_chans_exist** to determine if any channels
-            were open.
+            **OpenThrmcplChansExist** to determine if any channels were
+            open.
         """
         val = c_bool32()
 
@@ -6172,6 +6280,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_overcurrent_detect_enable(self):
@@ -6220,6 +6329,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_power_supply_fault_detect_enable(self):
         """
@@ -6266,6 +6376,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_pressure_units(self):
@@ -6317,6 +6428,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_probe_atten(self):
         """
@@ -6366,6 +6478,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_raw_data_compression_type(self):
@@ -6418,6 +6531,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_raw_samp_justification(self):
         """
@@ -6440,6 +6554,7 @@ class AIChannel(Channel):
 
         return DataJustification(val.value)
 
+
     @property
     def ai_raw_samp_size(self):
         """
@@ -6460,6 +6575,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
         return val.value
+
 
     @property
     def ai_remove_filter_delay(self):
@@ -6508,6 +6624,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_resistance_cfg(self):
@@ -6561,6 +6678,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_resistance_units(self):
         """
@@ -6611,12 +6729,13 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_resolution(self):
         """
         float: Indicates the resolution of the analog-to-digital
             converter of the channel. This value is in the units you
-            specify with **ai_resolution_units**.
+            specify with **AI.ResolutionUnits**.
         """
         val = ctypes.c_double()
 
@@ -6634,11 +6753,12 @@ class AIChannel(Channel):
 
         return val.value
 
+
     @property
     def ai_resolution_units(self):
         """
         :class:`nidaqmx.constants.ResolutionType`: Indicates the units
-            of **ai_resolution**.
+            of **AI.Resolution**.
         """
         val = ctypes.c_int()
 
@@ -6655,6 +6775,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
         return ResolutionType(val.value)
+
 
     @property
     def ai_rng_high(self):
@@ -6706,6 +6827,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_rng_low(self):
         """
@@ -6756,6 +6878,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_rosette_strain_gage_orientation(self):
         """
@@ -6804,6 +6927,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_rosette_strain_gage_rosette_meas_type(self):
@@ -6858,6 +6982,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_rosette_strain_gage_rosette_type(self):
         """
@@ -6879,6 +7004,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
         return StrainGageRosetteType(val.value)
+
 
     @property
     def ai_rosette_strain_gage_strain_chans(self):
@@ -6913,6 +7039,7 @@ class AIChannel(Channel):
         check_for_error(size_or_code)
 
         return unflatten_channel_string(val.value.decode('ascii'))
+
 
     @property
     def ai_rtd_a(self):
@@ -6964,6 +7091,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_rtd_b(self):
         """
@@ -7013,6 +7141,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_rtd_c(self):
@@ -7064,6 +7193,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_rtd_r0(self):
         """
@@ -7113,6 +7243,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_rtd_type(self):
@@ -7164,11 +7295,12 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_rvdt_sensitivity(self):
         """
         float: Specifies the sensitivity of the RVDT. This value is in
-            the units you specify with **ai_rvdt_sensitivity_units**.
+            the units you specify with **AI.RVDT.SensitivityUnits**.
             Refer to the sensor documentation to determine this value.
         """
         val = ctypes.c_double()
@@ -7214,11 +7346,12 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_rvdt_sensitivity_units(self):
         """
         :class:`nidaqmx.constants.RVDTSensitivityUnits`: Specifies the
-            units of **ai_rvdt_sensitivity**.
+            units of **AI.RVDT.Sensitivity**.
         """
         val = ctypes.c_int()
 
@@ -7263,6 +7396,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_rvdt_units(self):
@@ -7315,13 +7449,14 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_samp_and_hold_enable(self):
         """
         bool: Specifies whether to enable the sample and hold circuitry
             of the device. When you disable sample and hold circuitry, a
             small voltage offset might be introduced into the signal.
-            You can eliminate this offset by using **ai_auto_zero_mode**
+            You can eliminate this offset by using **AI.AutoZeroMode**
             to perform an auto zero on the channel.
         """
         val = c_bool32()
@@ -7365,6 +7500,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_sensor_power_cfg(self):
@@ -7417,6 +7553,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_sensor_power_type(self):
         """
@@ -7466,6 +7603,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_sensor_power_voltage(self):
@@ -7575,8 +7713,8 @@ class AIChannel(Channel):
         float: Specifies the maximum instantaneous sound pressure level
             you expect to measure. This value is in decibels, referenced
             to 20 micropascals. NI-DAQmx uses the maximum sound pressure
-            level to calculate values in pascals for **ai_max** and
-            **ai_min** for the channel.
+            level to calculate values in pascals for **AI.Max** and
+            **AI.Min** for the channel.
         """
         val = ctypes.c_double()
 
@@ -7623,6 +7761,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_sound_pressure_units(self):
@@ -7675,6 +7814,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_strain_gage_cfg(self):
         """
@@ -7724,6 +7864,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_strain_gage_force_read_from_chan(self):
@@ -7825,6 +7966,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_strain_gage_poisson_ratio(self):
         """
@@ -7873,6 +8015,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_strain_units(self):
@@ -7958,6 +8101,7 @@ class AIChannel(Channel):
 
         return val.value.decode('ascii')
 
+
     @property
     def ai_temp_units(self):
         """
@@ -8007,6 +8151,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_term_cfg(self):
@@ -8058,17 +8203,17 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_thrmcpl_cjc_chan(self):
         """
-        :class:`nidaqmx._task_modules.channels.channel.Channel`:
-            Indicates the channel that acquires the temperature of the
-            cold junction if **ai_thrmcpl_cjc_src** is
-            **CJCSource1.SCANNABLE_CHANNEL**. If the channel is a
-            temperature channel, NI-DAQmx acquires the temperature in
-            the correct units. Other channel types, such as a resistance
-            channel with a custom sensor, must use a custom scale to
-            scale values to degrees Celsius.
+        :class:`nidaqmx.constants.Channel`: Indicates the channel that
+            acquires the temperature of the cold junction if
+            **AI.Thrmcpl.CJCSrc** is **CJCSource1.CHAN**. If the channel
+            is a temperature channel, NI-DAQmx acquires the temperature
+            in the correct units. Other channel types, such as a
+            resistance channel with a custom sensor, must use a custom
+            scale to scale values to degrees Celsius.
         """
         cfunc = lib_importer.windll.DAQmxGetAIThrmcplCJCChan
         if cfunc.argtypes is None:
@@ -8098,6 +8243,7 @@ class AIChannel(Channel):
 
         return Channel._factory(self._handle, val.value.decode('ascii'))
 
+
     @property
     def ai_thrmcpl_cjc_src(self):
         """
@@ -8120,13 +8266,13 @@ class AIChannel(Channel):
 
         return CJCSource(val.value)
 
+
     @property
     def ai_thrmcpl_cjc_val(self):
         """
         float: Specifies the temperature of the cold junction if
-            **ai_thrmcpl_cjc_src** is
-            **CJCSource1.CONSTANT_USER_VALUE**. Specify this value in
-            the units of the measurement.
+            **AI.Thrmcpl.CJCSrc** is **CJCSource1.CONSTVAL**. Specify
+            this value in the units of the measurement.
         """
         val = ctypes.c_double()
 
@@ -8170,6 +8316,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_thrmcpl_lead_offset_voltage(self):
@@ -8221,6 +8368,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_thrmcpl_scale_type(self):
         """
@@ -8270,6 +8418,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_thrmcpl_type(self):
@@ -8322,6 +8471,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_thrmstr_a(self):
         """
@@ -8370,6 +8520,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_thrmstr_b(self):
@@ -8420,6 +8571,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_thrmstr_c(self):
         """
@@ -8468,6 +8620,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_thrmstr_r1(self):
@@ -8519,6 +8672,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_torque_units(self):
         """
@@ -8568,6 +8722,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_usb_xfer_req_count(self):
@@ -8619,6 +8774,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_usb_xfer_req_size(self):
         """
@@ -8668,6 +8824,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_velocity_iepe_sensor_db_ref(self):
@@ -8719,6 +8876,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_velocity_iepe_sensor_sensitivity(self):
         """
@@ -8768,6 +8926,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def ai_velocity_iepe_sensor_sensitivity_units(self):
@@ -8823,55 +8982,6 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
-    @property
-    def ai_velocity_units(self):
-        """
-        :class:`nidaqmx.constants.VelocityUnits`: Specifies in which
-            unit to return velocity measurements from the channel.
-        """
-        val = ctypes.c_int()
-
-        cfunc = lib_importer.windll.DAQmxGetAIVelocityUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return VelocityUnits(val.value)
-
-    @ai_velocity_units.setter
-    def ai_velocity_units(self, val):
-        val = val.value
-        cfunc = lib_importer.windll.DAQmxSetAIVelocityUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ai_velocity_units.deleter
-    def ai_velocity_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIVelocityUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
 
     @property
     def ai_voltage_acrms_units(self):
@@ -8923,6 +9033,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def ai_voltage_db_ref(self):
         """
@@ -8973,6 +9084,58 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
+    @property
+    def ai_voltage_db_ref(self):
+        """
+        float: Specifies the decibel reference level in the units of the
+            channel. When you read samples as a waveform, the decibel
+            reference level is included in the waveform attributes.
+        """
+        val = ctypes.c_double()
+
+        cfunc = lib_importer.windll.DAQmxGetAIVoltagedBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ai_voltage_db_ref.setter
+    def ai_voltage_db_ref(self, val):
+        cfunc = lib_importer.windll.DAQmxSetAIVoltagedBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_voltage_db_ref.deleter
+    def ai_voltage_db_ref(self):
+        cfunc = lib_importer.windll.DAQmxResetAIVoltagedBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+
     @property
     def ai_voltage_units(self):
         """
@@ -8989,9 +9152,9 @@ class AIChannel(Channel):
                         lib_importer.task_handle, ctypes_byte_str,
                         ctypes.POINTER(ctypes.c_int)]
 
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
+        temp_size = 0
+        while True:
+            val = ctypes.create_string_buffer(temp_size)
 
         return VoltageUnits(val.value)
 
@@ -9006,9 +9169,7 @@ class AIChannel(Channel):
                         lib_importer.task_handle, ctypes_byte_str,
                         ctypes.c_int]
 
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
+        check_for_error(size_or_code)
 
     @ai_voltage_units.deleter
     def ai_voltage_units(self):
@@ -9019,9 +9180,6 @@ class AIChannel(Channel):
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str]
 
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
 
     @property
     def pwr_current_dev_scaling_coeff(self):
@@ -9059,6 +9217,7 @@ class AIChannel(Channel):
         check_for_error(size_or_code)
 
         return val.tolist()
+
 
     @property
     def pwr_current_setpoint(self):
@@ -9109,6 +9268,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
     @property
     def pwr_idle_output_behavior(self):
@@ -9161,6 +9321,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def pwr_output_enable(self):
         """
@@ -9212,6 +9373,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def pwr_output_state(self):
         """
@@ -9234,6 +9396,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
         return PowerOutputState(val.value)
+
 
     @property
     def pwr_remote_sense(self):
@@ -9288,6 +9451,7 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
+
     @property
     def pwr_voltage_dev_scaling_coeff(self):
         """
@@ -9324,6 +9488,7 @@ class AIChannel(Channel):
         check_for_error(size_or_code)
 
         return val.tolist()
+
 
     @property
     def pwr_voltage_setpoint(self):
