@@ -90,6 +90,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_ac_excit_sync_enable(self):
         """
@@ -140,6 +141,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -247,7 +249,6 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
-
     @property
     def ai_accel_4_wire_dc_voltage_sensitivity_units(self):
         """
@@ -302,6 +303,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_accel_charge_sensitivity(self):
         """
@@ -354,6 +356,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_accel_charge_sensitivity_units(self):
         """
@@ -403,6 +406,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -457,6 +461,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_accel_sensitivity_units(self):
         """
@@ -506,6 +511,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -559,6 +565,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_adc_custom_timing_mode(self):
         """
@@ -607,6 +614,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -667,6 +675,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_atten(self):
         """
@@ -714,6 +723,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -768,6 +778,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_averaging_win_size(self):
         """
@@ -817,6 +828,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -869,6 +881,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_bridge_balance_fine_pot(self):
         """
@@ -917,6 +930,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -970,6 +984,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_bridge_electrical_units(self):
         """
@@ -1021,6 +1036,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -1084,6 +1100,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_bridge_initial_voltage(self):
         """
@@ -1145,6 +1162,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_bridge_nom_resistance(self):
         """
@@ -1193,6 +1211,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -1246,6 +1265,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -1316,6 +1336,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_bridge_poly_reverse_coeff(self):
         """
@@ -1384,6 +1405,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_bridge_scale_type(self):
         """
@@ -1436,6 +1458,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_bridge_shunt_cal_enable(self):
         """
@@ -1484,6 +1507,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -1536,6 +1560,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -1591,6 +1616,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_bridge_shunt_cal_shunt_cal_a_actual_resistance(self):
         """
@@ -1642,6 +1668,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -1697,6 +1724,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_bridge_shunt_cal_shunt_cal_a_src(self):
         """
@@ -1747,6 +1775,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -1802,6 +1831,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_bridge_shunt_cal_shunt_cal_b_resistance(self):
         """
@@ -1853,6 +1883,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -1922,6 +1953,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_bridge_table_physical_vals(self):
         """
@@ -1989,6 +2021,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_bridge_two_point_lin_first_electrical_val(self):
         """
@@ -2044,6 +2077,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_bridge_two_point_lin_first_physical_val(self):
         """
@@ -2096,6 +2130,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -2153,6 +2188,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_bridge_two_point_lin_second_physical_val(self):
         """
@@ -2207,6 +2243,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_bridge_units(self):
         """
@@ -2256,6 +2293,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -2309,6 +2347,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_chop_enable(self):
         """
@@ -2357,6 +2396,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -2410,6 +2450,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_current_acrms_units(self):
         """
@@ -2459,6 +2500,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -2513,6 +2555,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_current_shunt_resistance(self):
         """
@@ -2561,6 +2604,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -2612,6 +2656,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -2677,6 +2722,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_data_xfer_custom_threshold(self):
         """
@@ -2726,6 +2772,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -2781,6 +2828,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_data_xfer_mech(self):
         """
@@ -2830,6 +2878,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -2884,6 +2933,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_dc_offset(self):
         """
@@ -2936,6 +2986,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_dev_scaling_coeff(self):
         """
@@ -2975,6 +3026,7 @@ class AIChannel(Channel):
         check_for_error(size_or_code)
 
         return val.tolist()
+
 
 
     @property
@@ -3027,6 +3079,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_dig_fltr_bandpass_width(self):
         """
@@ -3075,6 +3128,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -3141,6 +3195,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_dig_fltr_enable(self):
         """
@@ -3188,6 +3243,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -3240,6 +3296,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_dig_fltr_lowpass_cutoff_freq(self):
         """
@@ -3288,6 +3345,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -3340,6 +3398,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_dig_fltr_notch_width(self):
         """
@@ -3390,6 +3449,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_dig_fltr_order(self):
         """
@@ -3437,6 +3497,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -3490,6 +3551,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_dig_fltr_type(self):
         """
@@ -3541,6 +3603,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_dither_enable(self):
         """
@@ -3590,6 +3653,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -3647,6 +3711,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_eddy_current_prox_probe_sensitivity_units(self):
         """
@@ -3701,6 +3766,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_eddy_current_prox_probe_units(self):
         """
@@ -3752,6 +3818,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_enhanced_alias_rejection_enable(self):
         """
@@ -3800,6 +3867,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -3856,6 +3924,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_excit_d_cor_ac(self):
         """
@@ -3905,6 +3974,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -3962,6 +4032,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_excit_sense(self):
         """
@@ -4011,6 +4082,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -4064,6 +4136,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_excit_use_for_scaling(self):
         """
@@ -4115,6 +4188,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_excit_use_multiplexed(self):
         """
@@ -4163,6 +4237,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -4219,6 +4294,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_excit_voltage_or_current(self):
         """
@@ -4270,6 +4346,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_filter_delay(self):
         """
@@ -4294,6 +4371,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
         return val.value
+
 
 
     @property
@@ -4349,6 +4427,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_filter_delay_units(self):
         """
@@ -4401,6 +4480,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_filter_enable(self):
         """
@@ -4447,6 +4527,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -4499,6 +4580,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_filter_order(self):
         """
@@ -4547,6 +4629,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -4601,6 +4684,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_force_iepe_sensor_sensitivity(self):
         """
@@ -4650,6 +4734,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -4706,6 +4791,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_force_read_from_chan(self):
         """
@@ -4759,6 +4845,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_force_units(self):
         """
@@ -4808,6 +4895,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -4865,6 +4953,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_freq_thresh_voltage(self):
         """
@@ -4918,6 +5007,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_freq_units(self):
         """
@@ -4969,6 +5059,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_gain(self):
         """
@@ -5016,6 +5107,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -5067,6 +5159,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_input_limits_fault_detect_enable(self):
         """
@@ -5113,6 +5206,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -5173,6 +5267,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_input_limits_fault_detect_upper_limit(self):
         """
@@ -5229,6 +5324,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -5297,6 +5393,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_lead_wire_resistance(self):
         """
@@ -5345,6 +5442,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -5401,6 +5499,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_lowpass_cutoff_freq(self):
         """
@@ -5451,6 +5550,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_lowpass_enable(self):
         """
@@ -5498,6 +5598,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -5554,6 +5655,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_lowpass_switch_cap_ext_clk_div(self):
         """
@@ -5607,6 +5709,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -5666,6 +5769,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_lowpass_switch_cap_out_clk_div(self):
         """
@@ -5716,6 +5820,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -5769,6 +5874,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_lvdt_sensitivity_units(self):
         """
@@ -5820,6 +5926,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_lvdt_units(self):
         """
@@ -5869,6 +5976,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -5923,6 +6031,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_meas_type(self):
         """
@@ -5946,6 +6055,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
         return UsageTypeAI(val.value)
+
 
 
     @property
@@ -6003,6 +6113,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_microphone_sensitivity(self):
         """
@@ -6052,6 +6163,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -6106,6 +6218,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_open_chan_detect_enable(self):
         """
@@ -6152,6 +6265,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -6211,6 +6325,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_overcurrent_detect_enable(self):
         """
@@ -6259,6 +6374,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_power_supply_fault_detect_enable(self):
         """
@@ -6305,6 +6421,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -6358,6 +6475,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_probe_atten(self):
         """
@@ -6407,6 +6525,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -6461,6 +6580,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_raw_samp_justification(self):
         """
@@ -6484,6 +6604,7 @@ class AIChannel(Channel):
         return DataJustification(val.value)
 
 
+
     @property
     def ai_raw_samp_size(self):
         """
@@ -6504,6 +6625,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
         return val.value
+
 
 
     @property
@@ -6553,6 +6675,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -6608,6 +6731,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_resistance_units(self):
         """
@@ -6659,6 +6783,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_resolution(self):
         """
@@ -6683,6 +6808,7 @@ class AIChannel(Channel):
         return val.value
 
 
+
     @property
     def ai_resolution_units(self):
         """
@@ -6704,6 +6830,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
         return ResolutionType(val.value)
+
 
 
     @property
@@ -6757,6 +6884,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_rng_low(self):
         """
@@ -6808,6 +6936,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_rosette_strain_gage_orientation(self):
         """
@@ -6856,6 +6985,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -6912,6 +7042,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_rosette_strain_gage_rosette_type(self):
         """
@@ -6933,6 +7064,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
         return StrainGageRosetteType(val.value)
+
 
 
     @property
@@ -6968,6 +7100,7 @@ class AIChannel(Channel):
         check_for_error(size_or_code)
 
         return unflatten_channel_string(val.value.decode('ascii'))
+
 
 
     @property
@@ -7021,6 +7154,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_rtd_b(self):
         """
@@ -7070,6 +7204,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -7123,6 +7258,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_rtd_r0(self):
         """
@@ -7172,6 +7308,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -7225,6 +7362,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_rvdt_sensitivity(self):
         """
@@ -7276,6 +7414,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_rvdt_sensitivity_units(self):
         """
@@ -7325,6 +7464,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -7379,6 +7519,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_samp_and_hold_enable(self):
         """
@@ -7429,6 +7570,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -7483,6 +7625,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_sensor_power_type(self):
         """
@@ -7534,6 +7677,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_sensor_power_voltage(self):
         """
@@ -7582,6 +7726,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -7635,6 +7780,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -7693,6 +7839,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_sound_pressure_units(self):
         """
@@ -7743,6 +7890,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -7796,6 +7944,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_strain_gage_force_read_from_chan(self):
         """
@@ -7844,6 +7993,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -7898,6 +8048,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_strain_gage_poisson_ratio(self):
         """
@@ -7946,6 +8097,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -7999,6 +8151,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_teds_units(self):
         """
@@ -8032,6 +8185,7 @@ class AIChannel(Channel):
         check_for_error(size_or_code)
 
         return val.value.decode('ascii')
+
 
 
     @property
@@ -8085,6 +8239,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_term_cfg(self):
         """
@@ -8136,6 +8291,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_thrmcpl_cjc_chan(self):
         """
@@ -8176,6 +8332,7 @@ class AIChannel(Channel):
         return Channel._factory(self._handle, val.value.decode('ascii'))
 
 
+
     @property
     def ai_thrmcpl_cjc_src(self):
         """
@@ -8197,6 +8354,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
         return CJCSource(val.value)
+
 
 
     @property
@@ -8250,6 +8408,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_thrmcpl_lead_offset_voltage(self):
         """
@@ -8301,6 +8460,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_thrmcpl_scale_type(self):
         """
@@ -8350,6 +8510,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -8404,6 +8565,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_thrmstr_a(self):
         """
@@ -8452,6 +8614,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -8504,6 +8667,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_thrmstr_c(self):
         """
@@ -8552,6 +8716,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -8605,6 +8770,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_torque_units(self):
         """
@@ -8654,6 +8820,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -8707,6 +8874,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_usb_xfer_req_size(self):
         """
@@ -8758,6 +8926,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_velocity_iepe_sensor_sensitivity(self):
         """
@@ -8807,6 +8976,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -8864,6 +9034,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_velocity_units(self):
         """
@@ -8913,6 +9084,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -8966,6 +9138,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def ai_voltage_db_ref(self):
         """
@@ -9015,6 +9188,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -9068,6 +9242,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def open_chans(self):
         """
@@ -9102,6 +9277,7 @@ class AIChannel(Channel):
         check_for_error(size_or_code)
 
         return unflatten_channel_string(val.value.decode('ascii'))
+
 
 
     @property
@@ -9140,6 +9316,7 @@ class AIChannel(Channel):
         check_for_error(size_or_code)
 
         return val.tolist()
+
 
 
     @property
@@ -9191,6 +9368,7 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 
 
     @property
@@ -9245,6 +9423,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def pwr_output_enable(self):
         """
@@ -9297,6 +9476,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def pwr_output_state(self):
         """
@@ -9319,6 +9499,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
         return PowerOutputState(val.value)
+
 
 
     @property
@@ -9375,6 +9556,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
+
     @property
     def pwr_voltage_dev_scaling_coeff(self):
         """
@@ -9411,6 +9593,7 @@ class AIChannel(Channel):
         check_for_error(size_or_code)
 
         return val.tolist()
+
 
 
     @property
@@ -9462,4 +9645,5 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
 

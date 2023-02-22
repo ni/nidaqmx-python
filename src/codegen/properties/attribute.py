@@ -22,6 +22,7 @@ class Attribute:
         self._is_object = attribute_metadata.get("is_object", False)
         self._read_buffer_size = attribute_metadata.get("read_buffer_size")
         self._python_class_name = attribute_metadata["python_class_name"]
+        self._python_description = attribute_metadata["python_description"]
         self._handle_parameters = []
         self._object_constructor_params = []
         if "handle_parameters" in attribute_metadata:
@@ -241,6 +242,15 @@ class Attribute:
         return self._description
 
     @property
+    def python_description(self):
+        """
+        str: The description of the attribute as per the expected format in python.
+
+        This will be used to define the docstring of the attribute when generating the code.
+        """
+        return self._python_description
+
+    @property
     def python_data_type(self):
         """
         str: The python data_type of the attribute.
@@ -290,21 +300,6 @@ class Attribute:
             argtypes.append("ctypes.c_uint")
 
         return argtypes
-
-    def get_return_type(self):
-        constants_path = "nidaqmx.constants"
-        if self.is_enum and not self.is_list:
-            return ":class:`{0}.{1}`".format(constants_path, self.enum)
-        elif self.is_object and not self.is_list:
-            return ":class:`{0}.{1}`".format(constants_path, self.object_type)
-        elif self.is_enum and self.is_list:
-            return ":class: list[`{0}.{1}`]".format(constants_path, self.enum)
-        elif self.is_object and self.is_list:
-            return ":class: list[`{0}.{1}`]".format(constants_path, self.object_type)
-        elif self.is_list:
-            return "List[{0}]".format(self.python_data_type)
-        else:
-            return self.python_data_type
 
     def get_handle_parameter_arguments(self):
         argtypes = []
