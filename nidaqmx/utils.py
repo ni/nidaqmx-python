@@ -1,6 +1,8 @@
 import re
 
 from nidaqmx.errors import DaqError
+import nidaqmx._grpc_stub_interpreter as _grpc_stub_interpreter
+import nidaqmx._library_interpreter as _library_interpreter
 
 # Method logic adapted from
 # //Measurements/Infrastructure/dmxf/trunk/2.5/source/nimuck/parseUtilities.cpp
@@ -13,7 +15,16 @@ _invalid_range_syntax_message = (
     "the colon. Colons are not allowed within the names of the individual "
     "objects.")
 
+def select_interpreter(grpc_options = None, interpreter = None):
 
+    if interpreter:
+        return interpreter
+    else:
+        if grpc_options:
+            return _grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
+        else:
+            return _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+    
 def flatten_channel_string(channel_names):
     """
     Converts a list of channel names to a comma-delimited list of names.

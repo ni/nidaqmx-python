@@ -2,8 +2,7 @@ import ctypes
 import numpy
 import six
 import warnings
-import nidaqmx._grpc_stub_interpreter as _grpc_stub_interpreter
-import nidaqmx._library_interpreter as _library_interpreter
+import nidaqmx.utils as utils
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx._task_modules.channels.channel import Channel
@@ -64,7 +63,7 @@ class Task(object):
     Represents a DAQmx Task.
     """
 
-    def __init__(self, new_task_name='', *, grpc_options=None, interpreter=None ):
+    def __init__(self, new_task_name='', *, grpc_options=None, _interpreter=None ):
         """
         Creates a DAQmx task.
 
@@ -79,13 +78,7 @@ class Task(object):
                 results in an error.
         """
 
-        if interpreter:
-            self._interpreter = interpreter
-        else:
-            if grpc_options:
-                self._interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
-            else:
-                self._interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        self._interpreter = utils.select_interpreter(grpc_options=grpc_options, interpreter=_interpreter)
 
         self._handle = self._interpreter.create_task(new_task_name=new_task_name)
         self._interpreter.set_task_handle(self._handle)

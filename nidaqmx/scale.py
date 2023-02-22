@@ -3,6 +3,8 @@
 import ctypes
 import numpy
 
+import nidaqmx.utils as utils
+
 from nidaqmx._lib import lib_importer, wrapped_ndpointer, ctypes_byte_str
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
@@ -13,18 +15,20 @@ __all__ = ['Scale']
 
 
 class Scale(object):
+   
     """
     Represents a DAQmx scale.
     """
     __slots__ = ['_name', '__weakref__']
 
-    def __init__(self, name):
+    def __init__(self, name, *, grpc_options=None, _interpreter=None):
         """
         Args:
             name (str): Specifies the name of the scale to create.
         """
         self._name = name
-
+        self._interpreter = utils.select_interpreter(grpc_options=grpc_options, interpreter=_interpreter)
+        
     def __eq__(self, other):
         if isinstance(other, self.__class__):
             return self._name == other._name
@@ -614,7 +618,7 @@ class Scale(object):
     @staticmethod
     def calculate_reverse_poly_coeff(
             forward_coeffs, min_val_x=-5.0, max_val_x=5.0,
-            num_points_to_compute=1000, reverse_poly_order=-1):
+            num_points_to_compute=1000, reverse_poly_order=-1, *, grpc_options=None, _interpreter=None):
         """
         Computes a set of coefficients for a polynomial that
         approximates the inverse of the polynomial with the coefficients
@@ -654,6 +658,8 @@ class Scale(object):
             of the equation. For example, if index three of the list is 
             9, the fourth term of the equation is 9y^3.
         """
+        interpreter = utils.select_interpreter(grpc_options=grpc_options, interpreter=_interpreter)
+
         forward_coeffs = numpy.float64(forward_coeffs)
 
         if reverse_poly_order == -1:
@@ -685,7 +691,7 @@ class Scale(object):
     @staticmethod
     def create_lin_scale(
             scale_name, slope, y_intercept=0.0,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None, _interpreter=None):
         """
         Creates a custom scale that uses the equation y=mx+b, where x is
         a pre-scaled value, and y is a scaled value. The equation is
@@ -707,7 +713,7 @@ class Scale(object):
             
             Indicates an object that represents the created custom scale.
         """
-        scale = Scale(scale_name)
+        scale = Scale(scale_name,  grpc_options= grpc_options, _interpreter = _interpreter)
 
         cfunc = lib_importer.windll.DAQmxCreateLinScale
         if cfunc.argtypes is None:
@@ -727,7 +733,7 @@ class Scale(object):
     @staticmethod
     def create_map_scale(
             scale_name, prescaled_min, prescaled_max, scaled_min, scaled_max,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None, _interpreter=None):
         """
         Creates a custom scale that scales values proportionally from a
         range of pre-scaled values to a range of scaled values.
@@ -760,7 +766,7 @@ class Scale(object):
             
             Indicates an object that represents the created custom scale.
         """
-        scale = Scale(scale_name)
+        scale = Scale(scale_name, grpc_options= grpc_options, _interpreter = _interpreter)
 
         cfunc = lib_importer.windll.DAQmxCreateMapScale
         if cfunc.argtypes is None:
@@ -781,7 +787,7 @@ class Scale(object):
     @staticmethod
     def create_polynomial_scale(
             scale_name, forward_coeffs, reverse_coeffs,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None, _interpreter=None):
         """
         Creates a custom scale that uses an nth order polynomial
         equation. NI-DAQmx requires both a polynomial to convert pre-
@@ -810,7 +816,7 @@ class Scale(object):
             
             Indicates an object that represents the created custom scale.
         """
-        scale = Scale(scale_name)
+        scale = Scale(scale_name, grpc_options= grpc_options, _interpreter = _interpreter)
 
         if forward_coeffs is None:
             forward_coeffs = []
@@ -844,7 +850,7 @@ class Scale(object):
     @staticmethod
     def create_table_scale(
             scale_name, prescaled_vals, scaled_vals,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None, _interpreter=None):
         """
         Creates a custom scale that maps an list of pre-scaled values to
         an list of corresponding scaled values. NI-DAQmx applies linear
@@ -870,7 +876,7 @@ class Scale(object):
             
             Indicates an object that represents the created custom scale.
         """
-        scale = Scale(scale_name)
+        scale = Scale(scale_name, grpc_options= grpc_options, _interpreter = _interpreter)
 
         if prescaled_vals is None:
             prescaled_vals = []
@@ -950,3 +956,5 @@ class Scale(object):
         error_code = cfunc(
             self._name, save_as, author, options)
         check_for_error(error_code)
+
+    

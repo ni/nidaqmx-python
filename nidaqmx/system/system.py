@@ -4,6 +4,9 @@ import collections
 import ctypes
 import numpy
 
+import nidaqmx._grpc_stub_interpreter as _grpc_stub_interpreter
+import nidaqmx._library_interpreter as _library_interpreter
+
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
 from nidaqmx.errors import check_for_error, is_string_buffer_too_small
@@ -34,13 +37,24 @@ class System(object):
     operations on DAQ hardware, and creates classes from which you can get
     information about the hardware.
     """
+    def __init__(self, interpreter = None):
+        self._interpreter = interpreter
 
     @staticmethod
     def local():
         """
         nidaqmx.system.system.System: Represents the local DAQmx system.
         """
-        return System()
+        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        return System(interpreter=interpreter)
+    
+    @staticmethod
+    def remote(grpc_options):
+        '''
+        nidaqmx.system.system.System: Represents the remote DAQmx system that is hosting the nidaqmx device gRPC server.
+        '''
+        interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
+        return System(interpreter=interpreter)
 
     @property
     def devices(self):
