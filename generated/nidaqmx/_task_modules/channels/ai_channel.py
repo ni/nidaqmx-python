@@ -5251,6 +5251,28 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
+    def ai_is_teds(self):
+        """
+        bool: Indicates if the virtual channel was initialized using a
+            TEDS bitstream from the corresponding physical channel.
+        """
+        val = c_bool32()
+
+        cfunc = lib_importer.windll.DAQmxGetAIIsTEDS
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @property
     def ai_lead_wire_resistance(self):
         """
         float: Specifies in ohms the resistance of the wires that lead
@@ -8642,6 +8664,56 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
+    def ai_velocity_iepe_sensor_db_ref(self):
+        """
+        float: Specifies the decibel reference level in the units of the
+            channel. When you read samples as a waveform, the decibel
+            reference level is included in the waveform attributes.
+        """
+        val = ctypes.c_double()
+
+        cfunc = lib_importer.windll.DAQmxGetAIVelocityIEPESensordBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ai_velocity_iepe_sensor_db_ref.setter
+    def ai_velocity_iepe_sensor_db_ref(self, val):
+        cfunc = lib_importer.windll.DAQmxSetAIVelocityIEPESensordBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_velocity_iepe_sensor_db_ref.deleter
+    def ai_velocity_iepe_sensor_db_ref(self):
+        cfunc = lib_importer.windll.DAQmxResetAIVelocityIEPESensordBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
     def ai_velocity_iepe_sensor_sensitivity(self):
         """
         float: Specifies the sensitivity of the IEPE velocity sensor
@@ -8944,41 +9016,6 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
-
-    @property
-    def open_chans(self):
-        """
-        List[str]: Indicates a list of names of any open virtual
-            channels. You must read **open_chans_exist** before you read
-            this property. Otherwise you will receive an error.
-        """
-        cfunc = lib_importer.windll.DAQmxGetReadOpenChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
 
     @property
     def pwr_current_dev_scaling_coeff(self):
