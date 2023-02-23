@@ -16,13 +16,13 @@ class Attribute:
             "has_explicit_read_buffer_size"
         ]
         self._bitfield_enum = attribute_metadata.get("bitfield_enum", None)
+        self._object_module_location = attribute_metadata.get("object_module_location", None)
         self._is_list = attribute_metadata["is_list"]
         self._calling_convention = attribute_metadata["calling_convention"]
         self._c_function_name = attribute_metadata["c_function_name"]
         self._is_object = attribute_metadata.get("is_object", False)
         self._read_buffer_size = attribute_metadata.get("read_buffer_size")
         self._python_class_name = attribute_metadata["python_class_name"]
-        self._python_description = attribute_metadata["python_description"]
         self._handle_parameters = []
         self._object_constructor_params = []
         if "handle_parameters" in attribute_metadata:
@@ -96,6 +96,13 @@ class Attribute:
         Here `enum` types are always represented as integers.
         """
         return self._type
+
+    @property
+    def object_module_location(self):
+        """
+        str: if return type is an object, its corresponding location will be returned
+        """
+        return self._object_module_location
 
     @property
     def has_explicit_write_buffer_size(self):
@@ -242,15 +249,6 @@ class Attribute:
         return self._description
 
     @property
-    def python_description(self):
-        """
-        str: The description of the attribute as per the expected format in python.
-
-        This will be used to define the docstring of the attribute when generating the code.
-        """
-        return self._python_description
-
-    @property
     def python_data_type(self):
         """
         str: The python data_type of the attribute.
@@ -315,3 +313,18 @@ class Attribute:
             if enum_name in alias_names:
                 return actual_enum_name
         return enum_name
+
+    def get_return_type(self):
+        constants_path = "nidaqmx.constants"
+        if self.is_enum and not self.is_list:
+            return ":class:`{0}.{1}`".format(constants_path, self.enum)
+        elif self.is_object and not self.is_list:
+            return ":class:`{0}.{1}`".format(self.object_module_location, self.object_type)
+        elif self.is_enum and self.is_list:
+            return ":class: list[`{0}.{1}`]".format(constants_path, self.enum)
+        elif self.is_object and self.is_list:
+            return ":class: list[`{0}.{1}`]".format(self.object_module_location, self.object_type)
+        elif self.is_list:
+            return "List[{0}]".format(self.python_data_type)
+        else:
+            return self.python_data_type

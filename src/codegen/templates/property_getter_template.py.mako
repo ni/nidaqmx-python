@@ -5,7 +5,7 @@
     @property
     def ${attribute.name}(self):
         """
-        ${attribute.python_description | docstring_wrap(initial_indent=8, subsequent_indent=12)}
+        ${attribute.get_return_type() + ": " + attribute.description | docstring_wrap(initial_indent=8, subsequent_indent=12)}
         """
 ## Script instantiation of numpy arrays for input parameters that are lists, and ctypes variables for
 ## output parameters that will be passed by reference.
