@@ -20,11 +20,11 @@ All notable changes to this project will be documented in this file.
 ## 0.6.6
 
 * ### Merged Pull Requests
-    * ...
+    * [211: Restructure the folder structure and add a basic code generator](https://github.com/ni/nidaqmx-python/pull/211)
 * ### Resolved Issues
     * ...
 * ### Major Changes
-    * ...
+    * Refactored the repository folder structure and added a code generator.
 
 ## 0.6.5
 
