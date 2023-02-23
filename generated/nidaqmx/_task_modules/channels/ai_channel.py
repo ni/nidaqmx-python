@@ -398,6 +398,56 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
+    def ai_accel_db_ref(self):
+        """
+        float: Specifies the decibel reference level in the units of the
+            channel. When you read samples as a waveform, the decibel
+            reference level is included in the waveform attributes.
+        """
+        val = ctypes.c_double()
+
+        cfunc = lib_importer.windll.DAQmxGetAIAcceldBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ai_accel_db_ref.setter
+    def ai_accel_db_ref(self, val):
+        cfunc = lib_importer.windll.DAQmxSetAIAcceldBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_accel_db_ref.deleter
+    def ai_accel_db_ref(self):
+        cfunc = lib_importer.windll.DAQmxResetAIAcceldBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
     def ai_accel_sensitivity(self):
         """
         float: Specifies the sensitivity of the accelerometer. This
