@@ -612,7 +612,7 @@ class AIChannel(Channel):
     def ai_adc_custom_timing_mode(self):
         """
         int: Specifies the timing mode of the ADC when
-            **aiadc_timing_mode** is **ADCTimingMode.CUSTOM**.
+            **ai_adc_timing_mode** is **ADCTimingMode.CUSTOM**.
         """
         val = ctypes.c_uint()
 
@@ -2733,7 +2733,8 @@ class AIChannel(Channel):
         """
         int: Specifies the number of samples that must be in the FIFO to
             transfer data from the device if **ai_data_xfer_req_cond**
-            is **InputDataTransferCondition.ONBRDMEMCUSTOMTHRESHOLD**.
+            is
+            **InputDataTransferCondition.ONBOARD_MEMORY_CUSTOM_THRESHOLD**.
         """
         val = ctypes.c_uint()
 
@@ -4658,7 +4659,7 @@ class AIChannel(Channel):
         """
         float: Specifies the sensitivity of the IEPE force sensor
             connected to the channel. Specify this value in the unit
-            indicated by **ai_forceiepe_sensor_sensitivity_units**.
+            indicated by **ai_force_iepe_sensor_sensitivity_units**.
         """
         val = ctypes.c_double()
 
@@ -4708,7 +4709,8 @@ class AIChannel(Channel):
     def ai_force_iepe_sensor_sensitivity_units(self):
         """
         :class:`nidaqmx.constants.ForceIEPESensorSensitivityUnits`:
-            Specifies the units for **ai_forceiepe_sensor_sensitivity**.
+            Specifies the units for
+            **ai_force_iepe_sensor_sensitivity**.
         """
         val = ctypes.c_int()
 
@@ -5425,7 +5427,7 @@ class AIChannel(Channel):
         """
         int: Specifies the number of bits to return in a raw sample when
             **ai_raw_data_compression_type** is set to
-            **RawDataCompressionType.LOSSYLSBREMOVAL**.
+            **RawDataCompressionType.LOSSY_LSB_REMOVAL**.
         """
         val = ctypes.c_uint()
 
@@ -5795,7 +5797,7 @@ class AIChannel(Channel):
     def ai_lvdt_sensitivity(self):
         """
         float: Specifies the sensitivity of the LVDT. This value is in
-            the units you specify with **ailvdt_sensitivity_units**.
+            the units you specify with **ai_lvdt_sensitivity_units**.
             Refer to the sensor documentation to determine this value.
         """
         val = ctypes.c_double()
@@ -5846,7 +5848,7 @@ class AIChannel(Channel):
     def ai_lvdt_sensitivity_units(self):
         """
         :class:`nidaqmx.constants.LVDTSensitivityUnits`: Specifies the
-            units of **ailvdt_sensitivity**.
+            units of **ai_lvdt_sensitivity**.
         """
         val = ctypes.c_int()
 
@@ -7302,7 +7304,7 @@ class AIChannel(Channel):
     def ai_rvdt_sensitivity(self):
         """
         float: Specifies the sensitivity of the RVDT. This value is in
-            the units you specify with **airvdt_sensitivity_units**.
+            the units you specify with **ai_rvdt_sensitivity_units**.
             Refer to the sensor documentation to determine this value.
         """
         val = ctypes.c_double()
@@ -7353,7 +7355,7 @@ class AIChannel(Channel):
     def ai_rvdt_sensitivity_units(self):
         """
         :class:`nidaqmx.constants.RVDTSensitivityUnits`: Specifies the
-            units of **airvdt_sensitivity**.
+            units of **ai_rvdt_sensitivity**.
         """
         val = ctypes.c_int()
 
@@ -8211,8 +8213,8 @@ class AIChannel(Channel):
         """
         :class:`nidaqmx._task_modules.channels.channel.Channel`:
             Indicates the channel that acquires the temperature of the
-            cold junction if **ai_thrmcplcjc_src** is
-            **CJCSource1.CHAN**. If the channel is a temperature
+            cold junction if **ai_thrmcpl_cjc_src** is
+            **CJCSource1.CHANNEL**. If the channel is a temperature
             channel, NI-DAQmx acquires the temperature in the correct
             units. Other channel types, such as a resistance channel
             with a custom sensor, must use a custom scale to scale
@@ -8274,8 +8276,8 @@ class AIChannel(Channel):
     def ai_thrmcpl_cjc_val(self):
         """
         float: Specifies the temperature of the cold junction if
-            **ai_thrmcplcjc_src** is **CJCSource1.CONSTVAL**. Specify
-            this value in the units of the measurement.
+            **ai_thrmcpl_cjc_src** is **CJCSource1.CONSTANT_VALUE**.
+            Specify this value in the units of the measurement.
         """
         val = ctypes.c_double()
 
