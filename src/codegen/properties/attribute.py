@@ -11,12 +11,12 @@ class Attribute:
         self._type = attribute_metadata["type"]
         self._ctypes_data_type = attribute_metadata["ctypes_data_type"]
         self._python_data_type = attribute_metadata["python_data_type"]
-        self._description = attribute_metadata["description"]
+        self._python_description = attribute_metadata["python_description"]
         self._has_explicit_read_buffer_size = attribute_metadata[
             "has_explicit_read_buffer_size"
         ]
         self._bitfield_enum = attribute_metadata.get("bitfield_enum", None)
-        self._object_module_location = attribute_metadata.get("object_module_location", None)
+        self._object_module_location = attribute_metadata.get("python_object_module_location", None)
         self._is_list = attribute_metadata["is_list"]
         self._calling_convention = attribute_metadata["calling_convention"]
         self._c_function_name = attribute_metadata["c_function_name"]
@@ -240,13 +240,13 @@ class Attribute:
         return self._read_buffer_size
 
     @property
-    def description(self):
+    def python_description(self):
         """
         str: The description of the attribute.
 
         This will be used to define the docstring of the attribute when generating the code.
         """
-        return self._description
+        return self._python_description
 
     @property
     def python_data_type(self):

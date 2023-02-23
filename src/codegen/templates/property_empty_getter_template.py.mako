@@ -5,7 +5,7 @@
     @property
     def ${attribute.name}(self):
         """
-        ${attribute.description | docstring_wrap(initial_indent=8, subsequent_indent=12)}
+        ${attribute.get_return_type() + ": " + attribute.python_description | docstring_wrap(initial_indent=8, subsequent_indent=12)}
         """
         raise NotImplementedError(
             'Reading this NI-DAQmx property is not supported.')
