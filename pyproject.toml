@@ -27,6 +27,7 @@ classifiers = [
     "Topic :: System :: Hardware :: Hardware Drivers"
 ]
 exclude = ["nidaqmx/tests"]
+packages = [{ include = "nidaqmx", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.7"
