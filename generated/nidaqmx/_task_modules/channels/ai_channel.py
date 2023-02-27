@@ -2,6 +2,7 @@
 
 import ctypes
 import numpy
+import deprecation
 
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
@@ -2618,7 +2619,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ai_custom_scale_name(self):
+    def ai_custom_scale(self):
         """
         :class:`nidaqmx.system.scale.Scale`: Specifies the name of a
             custom scale for the channel.
@@ -2651,8 +2652,8 @@ class AIChannel(Channel):
 
         return Scale(val.value.decode('ascii'))
 
-    @ai_custom_scale_name.setter
-    def ai_custom_scale_name(self, val):
+    @ai_custom_scale.setter
+    def ai_custom_scale(self, val):
         val = val.name
         cfunc = lib_importer.windll.DAQmxSetAICustomScaleName
         if cfunc.argtypes is None:
@@ -2666,8 +2667,8 @@ class AIChannel(Channel):
             self._handle, self._name, val)
         check_for_error(error_code)
 
-    @ai_custom_scale_name.deleter
-    def ai_custom_scale_name(self):
+    @ai_custom_scale.deleter
+    def ai_custom_scale(self):
         cfunc = lib_importer.windll.DAQmxResetAICustomScaleName
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3582,8 +3583,8 @@ class AIChannel(Channel):
         """
         float: Specifies the sensitivity of the eddy current proximity
             probe . This value is in the units you specify with
-            **ai_eddy_current_prox_sensitivity_units**. Refer to the
-            sensor documentation to determine this value.
+            **ai_eddy_current_prox_probe_sensitivity_units**. Refer to
+            the sensor documentation to determine this value.
         """
         val = ctypes.c_double()
 
@@ -3635,7 +3636,8 @@ class AIChannel(Channel):
     def ai_eddy_current_prox_probe_sensitivity_units(self):
         """
         :class:`nidaqmx.constants.EddyCurrentProxProbeSensitivityUnits`:
-            Specifies the units of **ai_eddy_current_prox_sensitivity**.
+            Specifies the units of
+            **ai_eddy_current_prox_probe_sensitivity**.
         """
         val = ctypes.c_int()
 
@@ -4144,9 +4146,9 @@ class AIChannel(Channel):
         """
         float: Specifies the amount of excitation that the sensor
             requires. If **ai_excit_voltage_or_current** is
-            **ExcitationVoltageOrCurrent.VOLTAGE**, this value is in
+            **ExcitationVoltageOrCurrent.USE_VOLTAGE**, this value is in
             volts. If **ai_excit_voltage_or_current** is
-            **ExcitationVoltageOrCurrent.CURRENT**, this value is in
+            **ExcitationVoltageOrCurrent.USE_CURRENT**, this value is in
             amperes.
         """
         val = ctypes.c_double()
@@ -8059,11 +8061,11 @@ class AIChannel(Channel):
         :class:`nidaqmx._task_modules.channels.channel.Channel`:
             Indicates the channel that acquires the temperature of the
             cold junction if **ai_thrmcpl_cjc_src** is
-            **CJCSource1.CHANNEL**. If the channel is a temperature
-            channel, NI-DAQmx acquires the temperature in the correct
-            units. Other channel types, such as a resistance channel
-            with a custom sensor, must use a custom scale to scale
-            values to degrees Celsius.
+            **CJCSource1.SCANNABLE_CHANNEL**. If the channel is a
+            temperature channel, NI-DAQmx acquires the temperature in
+            the correct units. Other channel types, such as a resistance
+            channel with a custom sensor, must use a custom scale to
+            scale values to degrees Celsius.
         """
         cfunc = lib_importer.windll.DAQmxGetAIThrmcplCJCChan
         if cfunc.argtypes is None:
@@ -8119,8 +8121,9 @@ class AIChannel(Channel):
     def ai_thrmcpl_cjc_val(self):
         """
         float: Specifies the temperature of the cold junction if
-            **ai_thrmcpl_cjc_src** is **CJCSource1.CONSTANT_VALUE**.
-            Specify this value in the units of the measurement.
+            **ai_thrmcpl_cjc_src** is
+            **CJCSource1.CONSTANT_USER_VALUE**. Specify this value in
+            the units of the measurement.
         """
         val = ctypes.c_double()
 
@@ -9368,4 +9371,130 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
+
+        @deprecation.deprecated
+        @property
+        def ai_eddy_current_prox_sensitivity(self):
+            return self.ai_eddy_current_prox_probe_sensitivity
+
+        @deprecation.deprecated
+        @ai_eddy_current_prox_sensitivity.setter
+        def ai_eddy_current_prox_sensitivity(self, val):
+            self.ai_eddy_current_prox_probe_sensitivity = val
+
+        @deprecation.deprecated
+        @ai_eddy_current_prox_sensitivity.deleter
+        def ai_eddy_current_prox_sensitivity(self):
+            del self.ai_eddy_current_prox_probe_sensitivity
+
+        @deprecation.deprecated
+        @property
+        def ai_eddy_current_prox_sensitivity_units(self):
+            return self.ai_eddy_current_prox_probe_sensitivity_units
+
+        @deprecation.deprecated
+        @ai_eddy_current_prox_sensitivity_units.setter
+        def ai_eddy_current_prox_sensitivity_units(self, val):
+            self.ai_eddy_current_prox_probe_sensitivity_units = val
+
+        @deprecation.deprecated
+        @ai_eddy_current_prox_sensitivity_units.deleter
+        def ai_eddy_current_prox_sensitivity_units(self):
+            del self.ai_eddy_current_prox_probe_sensitivity_units
+
+        @deprecation.deprecated
+        @property
+        def ai_eddy_current_prox_units(self):
+            return self.ai_eddy_current_prox_probe_units
+
+        @deprecation.deprecated
+        @ai_eddy_current_prox_units.setter
+        def ai_eddy_current_prox_units(self, val):
+            self.ai_eddy_current_prox_probe_units = val
+
+        @deprecation.deprecated
+        @ai_eddy_current_prox_units.deleter
+        def ai_eddy_current_prox_units(self):
+            del self.ai_eddy_current_prox_probe_units
+
+        @deprecation.deprecated
+        @property
+        def ai_teds_is_teds(self):
+            return self.ai_is_teds
+
+        @deprecation.deprecated
+        @property
+        def ai_rosette_strain_gage_gage_orientation(self):
+            return self.ai_rosette_strain_gage_orientation
+
+        @deprecation.deprecated
+        @ai_rosette_strain_gage_gage_orientation.setter
+        def ai_rosette_strain_gage_gage_orientation(self, val):
+            self.ai_rosette_strain_gage_orientation = val
+
+        @deprecation.deprecated
+        @ai_rosette_strain_gage_gage_orientation.deleter
+        def ai_rosette_strain_gage_gage_orientation(self):
+            del self.ai_rosette_strain_gage_orientation
+
+        @deprecation.deprecated
+        @property
+        def ai_rtd_r_0(self):
+            return self.ai_rtd_r0
+
+        @deprecation.deprecated
+        @ai_rtd_r_0.setter
+        def ai_rtd_r_0(self, val):
+            self.ai_rtd_r0 = val
+
+        @deprecation.deprecated
+        @ai_rtd_r_0.deleter
+        def ai_rtd_r_0(self):
+            del self.ai_rtd_r0
+
+        @deprecation.deprecated
+        @property
+        def ai_sound_pressure_b_ref(self):
+            return self.ai_sound_pressure_db_ref
+
+        @deprecation.deprecated
+        @ai_sound_pressure_b_ref.setter
+        def ai_sound_pressure_b_ref(self, val):
+            self.ai_sound_pressure_db_ref = val
+
+        @deprecation.deprecated
+        @ai_sound_pressure_b_ref.deleter
+        def ai_sound_pressure_b_ref(self):
+            del self.ai_sound_pressure_db_ref
+
+        @deprecation.deprecated
+        @property
+        def ai_strain_force_read_from_chan(self):
+            return self.ai_strain_gage_force_read_from_chan
+
+        @deprecation.deprecated
+        @ai_strain_force_read_from_chan.setter
+        def ai_strain_force_read_from_chan(self, val):
+            self.ai_strain_gage_force_read_from_chan = val
+
+        @deprecation.deprecated
+        @ai_strain_force_read_from_chan.deleter
+        def ai_strain_force_read_from_chan(self):
+            del self.ai_strain_gage_force_read_from_chan
+
+        @deprecation.deprecated
+        @property
+        def ai_thrmstr_r_1(self):
+            return self.ai_thrmstr_r1
+
+        @deprecation.deprecated
+        @ai_thrmstr_r_1.setter
+        def ai_thrmstr_r_1(self, val):
+            self.ai_thrmstr_r1 = val
+
+        @deprecation.deprecated
+        @ai_thrmstr_r_1.deleter
+        def ai_thrmstr_r_1(self):
+            del self.ai_thrmstr_r1
 

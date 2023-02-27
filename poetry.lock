@@ -79,6 +79,17 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
+name = "deprecation"
+version = "2.1.0"
+description = "A library to handle automated deprecations"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+packaging = "*"
+
+[[package]]
 name = "distlib"
 version = "0.3.4"
 description = "Distribution utilities"
@@ -549,7 +560,7 @@ docs = ["Sphinx", "sphinx_rtd_theme"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "9640be0c0acaaae08adf502b2a9dc2ed7bcbf838c8be2d4f7941acb5a87b657e"
+content-hash = "95d5a98fe3ab0466efdefd1e2bec49799ce79370b4baa58e247154c8c3e1c7f6"
 
 [metadata.files]
 alabaster = [
@@ -583,6 +594,10 @@ click = [
 colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
     {file = "colorama-0.4.4.tar.gz", hash = "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b"},
+]
+deprecation = [
+    {file = "deprecation-2.1.0-py2.py3-none-any.whl", hash = "sha256:a10811591210e1fb0e768a8c25517cabeabcba6f0bf96564f8ff45189f90b14a"},
+    {file = "deprecation-2.1.0.tar.gz", hash = "sha256:72b3bde64e5d778694b0cf68178aed03d15e15477116add3fb773e581f9518ff"},
 ]
 distlib = [
     {file = "distlib-0.3.4-py2.py3-none-any.whl", hash = "sha256:6564fe0a8f51e734df6333d08b8b94d4ea8ee6b99b5ed50613f731fd4089f34b"},

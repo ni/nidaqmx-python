@@ -2,11 +2,18 @@ from codegen.properties.parameter import Parameter
 
 
 class Attribute:
+
+    ATTRIBUTE_CHANGE_SET = {"ai_custom_scale_name" : "ai_custom_scale"}
+
     def __init__(self, id, attribute_metadata, enum_merge_set):
         self._id = id
         self._is_enum = False
         self._access = attribute_metadata["access"]
-        self._name = attribute_metadata["name"].lower()
+        attribute_name = attribute_metadata["name"].lower()
+        if  attribute_name in self.ATTRIBUTE_CHANGE_SET:
+            self._name = self.ATTRIBUTE_CHANGE_SET.get(attribute_name)
+        else:
+            self._name = attribute_name
         self._resettable = attribute_metadata["resettable"]
         self._type = attribute_metadata["type"]
         self._ctypes_data_type = attribute_metadata["ctypes_data_type"]
@@ -20,7 +27,7 @@ class Attribute:
         self._is_list = attribute_metadata["is_list"]
         self._calling_convention = attribute_metadata["calling_convention"]
         self._c_function_name = attribute_metadata["c_function_name"]
-        self._is_object = attribute_metadata.get("is_object", False)
+        self._is_object = attribute_metadata.get("is_python_object", False)
         self._read_buffer_size = attribute_metadata.get("read_buffer_size")
         self._python_class_name = attribute_metadata["python_class_name"]
         self._handle_parameters = []
@@ -34,10 +41,10 @@ class Attribute:
         self._has_explicit_write_buffer_size = attribute_metadata.get(
             "has_explicit_write_buffer_size", False
         )
-        self._object_has_factory = attribute_metadata.get("object_has_factory", False)
-        if "object_constructor_params" in attribute_metadata:
+        self._object_has_factory = attribute_metadata.get("python_object_has_factory", False)
+        if "python_object_constructor_params" in attribute_metadata:
             for name, parameter_data in attribute_metadata[
-                "object_constructor_params"
+                "python_object_constructor_params"
             ].items():
                 self._object_constructor_params.append(Parameter(name, parameter_data))
             self._object_constructor_params = sorted(
@@ -49,7 +56,7 @@ class Attribute:
         if "enum" in attribute_metadata:
             self._enum = self.merge_enums(attribute_metadata["enum"], enum_merge_set)
             self._is_enum = True
-        self._object_type = attribute_metadata.get("object_type")
+        self._object_type = attribute_metadata.get("python_object_type")
 
     @property
     def id(self):
