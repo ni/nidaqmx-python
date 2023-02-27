@@ -2619,7 +2619,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ai_custom_scale_name(self):
+    def ai_custom_scale(self):
         """
         :class:`nidaqmx.system.scale.Scale`: Specifies the name of a
             custom scale for the channel.
@@ -2652,8 +2652,8 @@ class AIChannel(Channel):
 
         return Scale(val.value.decode('ascii'))
 
-    @ai_custom_scale_name.setter
-    def ai_custom_scale_name(self, val):
+    @ai_custom_scale.setter
+    def ai_custom_scale(self, val):
         val = val.name
         cfunc = lib_importer.windll.DAQmxSetAICustomScaleName
         if cfunc.argtypes is None:
@@ -2667,8 +2667,8 @@ class AIChannel(Channel):
             self._handle, self._name, val)
         check_for_error(error_code)
 
-    @ai_custom_scale_name.deleter
-    def ai_custom_scale_name(self):
+    @ai_custom_scale.deleter
+    def ai_custom_scale(self):
         cfunc = lib_importer.windll.DAQmxResetAICustomScaleName
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -4146,9 +4146,9 @@ class AIChannel(Channel):
         """
         float: Specifies the amount of excitation that the sensor
             requires. If **ai_excit_voltage_or_current** is
-            **ExcitationVoltageOrCurrent.VOLTAGE**, this value is in
+            **ExcitationVoltageOrCurrent.USE_VOLTAGE**, this value is in
             volts. If **ai_excit_voltage_or_current** is
-            **ExcitationVoltageOrCurrent.CURRENT**, this value is in
+            **ExcitationVoltageOrCurrent.USE_CURRENT**, this value is in
             amperes.
         """
         val = ctypes.c_double()
@@ -8061,11 +8061,11 @@ class AIChannel(Channel):
         :class:`nidaqmx._task_modules.channels.channel.Channel`:
             Indicates the channel that acquires the temperature of the
             cold junction if **ai_thrmcpl_cjc_src** is
-            **CJCSource1.CHANNEL**. If the channel is a temperature
-            channel, NI-DAQmx acquires the temperature in the correct
-            units. Other channel types, such as a resistance channel
-            with a custom sensor, must use a custom scale to scale
-            values to degrees Celsius.
+            **CJCSource1.SCANNABLE_CHANNEL**. If the channel is a
+            temperature channel, NI-DAQmx acquires the temperature in
+            the correct units. Other channel types, such as a resistance
+            channel with a custom sensor, must use a custom scale to
+            scale values to degrees Celsius.
         """
         cfunc = lib_importer.windll.DAQmxGetAIThrmcplCJCChan
         if cfunc.argtypes is None:
@@ -8121,8 +8121,9 @@ class AIChannel(Channel):
     def ai_thrmcpl_cjc_val(self):
         """
         float: Specifies the temperature of the cold junction if
-            **ai_thrmcpl_cjc_src** is **CJCSource1.CONSTANT_VALUE**.
-            Specify this value in the units of the measurement.
+            **ai_thrmcpl_cjc_src** is
+            **CJCSource1.CONSTANT_USER_VALUE**. Specify this value in
+            the units of the measurement.
         """
         val = ctypes.c_double()
 

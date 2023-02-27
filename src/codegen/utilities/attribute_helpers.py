@@ -77,6 +77,7 @@ DEPRECATED_ATTRIBUTES = {
 }
 
 
+
 def get_attributes(metadata, class_name):
     attributes_metadata = []
     for group_name, attributes in metadata["attributes"].items():
