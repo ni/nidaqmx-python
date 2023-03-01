@@ -4,6 +4,7 @@ import six
 import nidaqmx
 import nidaqmx.system
 from nidaqmx.constants import TaskMode
+import nidaqmx.tests
 from nidaqmx.tests.fixtures import any_x_series_device, real_x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 
@@ -14,13 +15,12 @@ class TestChannels(object):
     objects in the NI-DAQmx Python API.
     """
 
-    def test_ai_channel(self, any_x_series_device):
-        with nidaqmx.Task() as task:
-            ai_channel = task.ai_channels.add_ai_voltage_chan(
-                any_x_series_device.ai_physical_chans[0].name, max_val=10)
+    def test_ai_channel(self, any_x_series_device, task):
+        ai_channel = task.ai_channels.add_ai_voltage_chan(
+            any_x_series_device.ai_physical_chans[0].name, max_val=10)
 
-            # Test property default value.
-            assert ai_channel.ai_max == 10
+        # Test property default value.
+        assert ai_channel.ai_max == 10
 
     def test_ao_channel(self, any_x_series_device):
         with nidaqmx.Task() as task:
