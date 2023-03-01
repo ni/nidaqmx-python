@@ -48,3 +48,4 @@ def generate(dest):
     
     _generate_file(codegen_metadata["enums"],"error_codes.mako", dest / "error_codes.py")
 
+    _generate_file(codegen_metadata,"constants.mako", dest / "constants.py")
