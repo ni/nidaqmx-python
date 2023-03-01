@@ -45,3 +45,6 @@ def generate(dest):
         _generate_file(
             codegen_metadata, info["templateFile"], dest / info["relativeOutputPath"]
         )
+    
+    _generate_file(codegen_metadata["enums"],"error_codes.mako", dest / "error_codes.py")
+
