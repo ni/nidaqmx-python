@@ -22,6 +22,13 @@ def flatten_channel_string(channel_names):
     names to a single string prior to using the DAQmx Create Channel methods or
     instantiating a DAQmx Task object.
 
+    Note: For simplicity, this implementation is not fully compatible with the
+    NI-DAQmx driver implementation, which is generally more permissive. For
+    example, the driver is more graceful with whitespace padding. It was deemed
+    valuable to implement this natively in Python, so it can be leveraged in
+    workflows that don't have the driver installed. If we have specific examples
+    where this approximation is a, we can revisit this in the future.
+
     Args:
         channel_names (List[str]): The list of physical or virtual channel
             names.
@@ -119,6 +126,13 @@ def unflatten_channel_string(channel_names):
     physical or virtual channels into a list of physical or virtual channel
     names.
 
+    Note: For simplicity, this implementation is not fully compatible with the
+    NI-DAQmx driver implementation, which is generally more permissive. For
+    example, the driver is more graceful with whitespace padding. It was deemed
+    valuable to implement this natively in Python, so it can be leveraged in
+    workflows that don't have the driver installed. If we have specific examples
+    where this approximation is a, we can revisit this in the future.
+
     Args:
         channel_names (str): The list or range of physical or virtual channels.
         
@@ -155,15 +169,16 @@ def unflatten_channel_string(channel_names):
 
             num_before_str = m_before.group(2)
             num_before = int(num_before_str)
-            # If there are any leading 0s, we want to ensure our number strings
-            # are at least the width of the first number. Otherwise, we don't
-            # care.
+            num_after_str = m_after.group(2)
+            num_after = int(num_after_str)
+
             num_min_width = 0
+            # If there are any leading 0s in the first number, we want to ensure
+            # match that width. This is established precedence in the DAQmx
+            # algorithm.
             if num_before > 0 and len(num_before_str.lstrip('0')) < len(num_before_str):
                 num_min_width = len(num_before_str)
 
-            num_after_str = m_after.group(2)
-            num_after = int(num_after_str)
             num_max = max([num_before, num_after])
             num_min = min([num_before, num_after])
             number_of_channels = (num_max - num_min) + 1
