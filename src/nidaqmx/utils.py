@@ -27,7 +27,7 @@ def flatten_channel_string(channel_names):
     example, the driver is more graceful with whitespace padding. It was deemed
     valuable to implement this natively in Python, so it can be leveraged in
     workflows that don't have the driver installed. If we have specific examples
-    where this approximation is a, we can revisit this in the future.
+    where this approximation is a problem, we can revisit this in the future.
 
     Args:
         channel_names (List[str]): The list of physical or virtual channel
@@ -131,7 +131,7 @@ def unflatten_channel_string(channel_names):
     example, the driver is more graceful with whitespace padding. It was deemed
     valuable to implement this natively in Python, so it can be leveraged in
     workflows that don't have the driver installed. If we have specific examples
-    where this approximation is a, we can revisit this in the future.
+    where this approximation is a problem, we can revisit this in the future.
 
     Args:
         channel_names (str): The list or range of physical or virtual channels.
