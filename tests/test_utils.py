@@ -2,8 +2,6 @@ import pytest
 import random
 
 from nidaqmx.utils import flatten_channel_string, unflatten_channel_string
-from nidaqmx.tests.fixtures import any_x_series_device
-from nidaqmx.tests.helpers import generate_random_seed
 
 
 class TestUtils(object):
@@ -12,24 +10,22 @@ class TestUtils(object):
     functionality in the NI-DAQmx Python API.
     """
 
-    @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_flatten_channel_string(self, any_x_series_device, seed):
-        # Reset the pseudorandom number generator with seed.
-        random.seed(seed)
-
+    def test_flatten_channel_string(self):
         channels = ['Dev1/ai0', 'Dev1/ai1', 'Dev1/ai3', 'Dev2/ai0']
         flattened_channels = 'Dev1/ai0:1,Dev1/ai3,Dev2/ai0'
         assert flatten_channel_string(channels) == flattened_channels
 
         assert flatten_channel_string([]) == ''
 
-    @pytest.mark.parametrize('seed', [generate_random_seed()])
-    def test_unflatten_channel_string(self, any_x_series_device, seed):
-        # Reset the pseudorandom number generator with seed.
-        random.seed(seed)
-
+    def test_unflatten_channel_string(self):
         channels = ['Dev1/ai0', 'Dev1/ai1', 'Dev1/ai3', 'Dev2/ai0']
         flattened_channels = 'Dev1/ai0:1,Dev1/ai3,Dev2/ai0'
         assert unflatten_channel_string(flattened_channels) == channels
 
         assert unflatten_channel_string('') == []
+
+    def test_leading_zeros_flatten_and_unflatten(self):
+        unflattened_channels = ["EV01", "EV02"]
+        flattened_channels = 'EV01:02'
+        assert flatten_channel_string(unflattened_channels) == flattened_channels
+        assert unflatten_channel_string(flattened_channels) == unflattened_channels
