@@ -159,7 +159,7 @@ def unflatten_channel_string(channel_names):
             # are at least the width of the first number. Otherwise, we don't
             # care.
             num_min_width = 0
-            if len(num_before_str.lstrip('0')) < len(num_before_str):
+            if num_before > 0 and len(num_before_str.lstrip('0')) < len(num_before_str):
                 num_min_width = len(num_before_str)
 
             num_after_str = m_after.group(2)
