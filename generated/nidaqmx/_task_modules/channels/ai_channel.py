@@ -3,6 +3,7 @@
 import ctypes
 import numpy
 import deprecation
+import __init__
 
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
@@ -21,7 +22,7 @@ from nidaqmx.constants import (
     EddyCurrentProxProbeSensitivityUnits, ExcitationDCorAC,
     ExcitationIdleOutputBehavior, ExcitationSource,
     ExcitationVoltageOrCurrent, FilterResponse, FilterType,
-    ForceIEPESensorSensitivityUnits, ForceUnits, FrequencyUnits,
+    ForceIEPESensorSensitivityUnits, ForceUnits, FrequencyUnits, Impedance1,
     InputDataTransferCondition, LVDTSensitivityUnits, LengthUnits,
     PowerIdleOutputBehavior, PowerOutputState, PressureUnits, RTDType,
     RVDTSensitivityUnits, RawDataCompressionType, ResistanceConfiguration,
@@ -31,6 +32,8 @@ from nidaqmx.constants import (
     StrainGageRosetteType, StrainUnits, TemperatureUnits,
     TerminalConfiguration, ThermocoupleType, TorqueUnits, UsageTypeAI,
     VelocityIEPESensorSensitivityUnits, VelocityUnits, VoltageUnits)
+
+__version__ = __init__.__version__
 
 class AIChannel(Channel):
     """
@@ -4981,7 +4984,8 @@ class AIChannel(Channel):
     @property
     def ai_impedance(self):
         """
-        Impedance1: Specifies the input impedance of the channel.
+        :class:`nidaqmx.constants.Impedance1`: Specifies the input
+            impedance of the channel.
         """
         val = ctypes.c_double()
 
@@ -4997,10 +5001,11 @@ class AIChannel(Channel):
             self._handle, self._name, ctypes.byref(val))
         check_for_error(error_code)
 
-        return val.value
+        return Impedance1(val.value)
 
     @ai_impedance.setter
     def ai_impedance(self, val):
+        val = val.value
         cfunc = lib_importer.windll.DAQmxSetAIImpedance
         if cfunc.argtypes is None:
             with cfunc.arglock:
