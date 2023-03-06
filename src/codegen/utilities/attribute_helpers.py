@@ -62,18 +62,18 @@ ATTRIBUTE_ENUM_MERGE_SET = {
 }
 
 DEPRECATED_ATTRIBUTES = {
-    "ai_eddy_current_prox_sensitivity": {"new_name": "ai_eddy_current_prox_probe_sensitivity", "deprecated_in": "0.66"},
-    "ai_eddy_current_prox_sensitivity_units": {"new_name": "ai_eddy_current_prox_probe_sensitivity_units", "deprecated_in": "0.66"},
-    "ai_eddy_current_prox_units": {"new_name": "ai_eddy_current_prox_probe_units", "deprecated_in": "0.66"},
-    "ai_teds_is_teds": {"new_name": "ai_is_teds", "deprecated_in": "0.66"},
-    "ai_rosette_strain_gage_gage_orientation": {"new_name": "ai_rosette_strain_gage_orientation", "deprecated_in": "0.66"},
-    "ai_rtd_r_0": {"new_name": "ai_rtd_r0", "deprecated_in": "0.66"},
-    "ai_sound_pressured_b_ref": {"new_name": "ai_sound_pressure_db_ref", "deprecated_in": "0.66"},
-    "ai_strain_force_read_from_chan": {"new_name": "ai_strain_gage_force_read_from_chan", "deprecated_in": "0.66"},
-    "ai_thrmstr_r_1": {"new_name": "ai_thrmstr_r1", "deprecated_in": "0.66"},
-    "ai_acceld_b_ref": {"new_name": "ai_accel_db_ref", "deprecated_in": "0.66"},
-    "ai_voltaged_b_ref": {"new_name": "ai_voltage_db_ref", "deprecated_in": "0.66"},
-    "ai_velocity_iepe_sensord_b_ref": {"new_name": "ai_velocity_iepe_sensor_db_ref", "deprecated_in": "0.66"},
+    "ai_eddy_current_prox_sensitivity": {"new_name": "ai_eddy_current_prox_probe_sensitivity", "deprecated_in": "0.6.6"},
+    "ai_eddy_current_prox_sensitivity_units": {"new_name": "ai_eddy_current_prox_probe_sensitivity_units", "deprecated_in": "0.6.6"},
+    "ai_eddy_current_prox_units": {"new_name": "ai_eddy_current_prox_probe_units", "deprecated_in": "0.6.6"},
+    "ai_teds_is_teds": {"new_name": "ai_is_teds", "deprecated_in": "0.6.6"},
+    "ai_rosette_strain_gage_gage_orientation": {"new_name": "ai_rosette_strain_gage_orientation", "deprecated_in": "0.6.6"},
+    "ai_rtd_r_0": {"new_name": "ai_rtd_r0", "deprecated_in": "0.6.6"},
+    "ai_sound_pressured_b_ref": {"new_name": "ai_sound_pressure_db_ref", "deprecated_in": "0.6.6"},
+    "ai_strain_force_read_from_chan": {"new_name": "ai_strain_gage_force_read_from_chan", "deprecated_in": "0.6.6"},
+    "ai_thrmstr_r_1": {"new_name": "ai_thrmstr_r1", "deprecated_in": "0.6.6"},
+    "ai_acceld_b_ref": {"new_name": "ai_accel_db_ref", "deprecated_in": "0.6.6"},
+    "ai_voltaged_b_ref": {"new_name": "ai_voltage_db_ref", "deprecated_in": "0.6.6"},
+    "ai_velocity_iepe_sensord_b_ref": {"new_name": "ai_velocity_iepe_sensor_db_ref", "deprecated_in": "0.6.6"},
 }
 
 
