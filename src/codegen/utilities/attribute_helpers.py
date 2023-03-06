@@ -62,18 +62,18 @@ ATTRIBUTE_ENUM_MERGE_SET = {
 }
 
 DEPRECATED_ATTRIBUTES = {
-    "ai_eddy_current_prox_probe_sensitivity" : "ai_eddy_current_prox_sensitivity",
-    "ai_eddy_current_prox_probe_sensitivity_units" : "ai_eddy_current_prox_sensitivity_units",
-    "ai_eddy_current_prox_probe_units" : "ai_eddy_current_prox_units",
-    "ai_is_teds" : "ai_teds_is_teds",
-    "ai_rosette_strain_gage_orientation" : "ai_rosette_strain_gage_gage_orientation",
-    "ai_rtd_r0" : "ai_rtd_r_0",
-    "ai_sound_pressure_db_ref" : "ai_sound_pressure_b_ref",
-    "ai_strain_gage_force_read_from_chan" : "ai_strain_force_read_from_chan",
-    "ai_thrmstr_r1" : "ai_thrmstr_r_1",
-    "ai_acceld_db_ref" : "ai_acceld_b_ref",
-    "ai_voltaged_db_ref" : "ai_voltaged_b_ref",
-    "ai_velocity_iepe_sensord_db_ref" : "ai_velocity_iepe_sensord_b_ref"
+    "ai_eddy_current_prox_sensitivity": {"new_name": "ai_eddy_current_prox_probe_sensitivity", "deprecated_in": "0.66"},
+    "ai_eddy_current_prox_sensitivity_units": {"new_name": "ai_eddy_current_prox_probe_sensitivity_units", "deprecated_in": "0.66"},
+    "ai_eddy_current_prox_units": {"new_name": "ai_eddy_current_prox_probe_units", "deprecated_in": "0.66"},
+    "ai_teds_is_teds": {"new_name": "ai_is_teds", "deprecated_in": "0.66"},
+    "ai_rosette_strain_gage_gage_orientation": {"new_name": "ai_rosette_strain_gage_orientation", "deprecated_in": "0.66"},
+    "ai_rtd_r_0": {"new_name": "ai_rtd_r0", "deprecated_in": "0.66"},
+    "ai_sound_pressured_b_ref": {"new_name": "ai_sound_pressure_db_ref", "deprecated_in": "0.66"},
+    "ai_strain_force_read_from_chan": {"new_name": "ai_strain_gage_force_read_from_chan", "deprecated_in": "0.66"},
+    "ai_thrmstr_r_1": {"new_name": "ai_thrmstr_r1", "deprecated_in": "0.66"},
+    "ai_acceld_b_ref": {"new_name": "ai_accel_db_ref", "deprecated_in": "0.66"},
+    "ai_voltaged_b_ref": {"new_name": "ai_voltage_db_ref", "deprecated_in": "0.66"},
+    "ai_velocity_iepe_sensord_b_ref": {"new_name": "ai_velocity_iepe_sensor_db_ref", "deprecated_in": "0.66"},
 }
 
 
@@ -100,7 +100,10 @@ def get_enums_used(attributes):
 
 def get_deprecated_attributes(attributes):
     deprecated_attributes = {}
-    for new_name, old_name in DEPRECATED_ATTRIBUTES.items():
-        if any(x for x in attributes if x.name == new_name):
-            deprecated_attributes[old_name] = next(x for x in attributes if x.name == new_name)
+    for old_name, attribute in DEPRECATED_ATTRIBUTES.items():
+        if any(x for x in attributes if x.name == attribute["new_name"]):
+            deprecated_attributes[old_name] = attribute
+            matching_attribute = next(x for x in attributes if x.name == attribute["new_name"])
+            deprecated_attributes[old_name]["access"] = matching_attribute.access
+            deprecated_attributes[old_name]["resettable"] = matching_attribute.resettable
     return deprecated_attributes

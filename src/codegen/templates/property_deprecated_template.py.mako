@@ -4,23 +4,23 @@
         deprecated_attributes = get_deprecated_attributes(attributes)
     %>\
 %for old_property, attribute in deprecated_attributes.items():
-        @deprecation.deprecated
-        @property
-        def ${old_property}(self):
-            return self.${attribute.name}
+    @property
+    @deprecation.deprecated(deprecated_in="${attribute["deprecated_in"]}", current_version=__version__, details="Use ${attribute["new_name"]} instead.")
+    def ${old_property}(self):
+        return self.${attribute["new_name"]}
 
-    %if attribute.access != "read":
-        @deprecation.deprecated
-        @${old_property}.setter
-        def ${old_property}(self, val):
-            self.${attribute.name} = val
+    %if attribute["access"] != "read":
+    @${old_property}.setter
+    @deprecation.deprecated(deprecated_in="${attribute["deprecated_in"]}", current_version=__version__, details="Use ${attribute["new_name"]} instead.")
+    def ${old_property}(self, val):
+        self.${attribute["new_name"]} = val
 
     %endif
-    %if attribute.resettable:
-        @deprecation.deprecated
-        @${old_property}.deleter
-        def ${old_property}(self):
-            del self.${attribute.name}
+    %if attribute["resettable"]:
+    @${old_property}.deleter
+    @deprecation.deprecated(deprecated_in="${attribute["deprecated_in"]}", current_version=__version__, details="Use ${attribute["new_name"]} instead.")
+    def ${old_property}(self):
+        del self.${attribute["new_name"]}
 
     %endif
 %endfor

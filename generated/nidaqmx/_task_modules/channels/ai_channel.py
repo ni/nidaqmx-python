@@ -3,6 +3,7 @@
 import ctypes
 import numpy
 import deprecation
+import __init__
 
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
@@ -21,7 +22,7 @@ from nidaqmx.constants import (
     EddyCurrentProxProbeSensitivityUnits, ExcitationDCorAC,
     ExcitationIdleOutputBehavior, ExcitationSource,
     ExcitationVoltageOrCurrent, FilterResponse, FilterType,
-    ForceIEPESensorSensitivityUnits, ForceUnits, FrequencyUnits,
+    ForceIEPESensorSensitivityUnits, ForceUnits, FrequencyUnits, Impedance1,
     InputDataTransferCondition, LVDTSensitivityUnits, LengthUnits,
     PowerIdleOutputBehavior, PowerOutputState, PressureUnits, RTDType,
     RVDTSensitivityUnits, RawDataCompressionType, ResistanceConfiguration,
@@ -31,6 +32,8 @@ from nidaqmx.constants import (
     StrainGageRosetteType, StrainUnits, TemperatureUnits,
     TerminalConfiguration, ThermocoupleType, TorqueUnits, UsageTypeAI,
     VelocityIEPESensorSensitivityUnits, VelocityUnits, VoltageUnits)
+
+__version__ = __init__.__version__
 
 class AIChannel(Channel):
     """
@@ -4981,7 +4984,8 @@ class AIChannel(Channel):
     @property
     def ai_impedance(self):
         """
-        Impedance1: Specifies the input impedance of the channel.
+        :class:`nidaqmx.constants.Impedance1`: Specifies the input
+            impedance of the channel.
         """
         val = ctypes.c_double()
 
@@ -4997,10 +5001,11 @@ class AIChannel(Channel):
             self._handle, self._name, ctypes.byref(val))
         check_for_error(error_code)
 
-        return val.value
+        return Impedance1(val.value)
 
     @ai_impedance.setter
     def ai_impedance(self, val):
+        val = val.value
         cfunc = lib_importer.windll.DAQmxSetAIImpedance
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -9373,128 +9378,172 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
 
-        @deprecation.deprecated
-        @property
-        def ai_eddy_current_prox_sensitivity(self):
-            return self.ai_eddy_current_prox_probe_sensitivity
+    @property
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_eddy_current_prox_probe_sensitivity instead.")
+    def ai_eddy_current_prox_sensitivity(self):
+        return self.ai_eddy_current_prox_probe_sensitivity
 
-        @deprecation.deprecated
-        @ai_eddy_current_prox_sensitivity.setter
-        def ai_eddy_current_prox_sensitivity(self, val):
-            self.ai_eddy_current_prox_probe_sensitivity = val
+    @ai_eddy_current_prox_sensitivity.setter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_eddy_current_prox_probe_sensitivity instead.")
+    def ai_eddy_current_prox_sensitivity(self, val):
+        self.ai_eddy_current_prox_probe_sensitivity = val
 
-        @deprecation.deprecated
-        @ai_eddy_current_prox_sensitivity.deleter
-        def ai_eddy_current_prox_sensitivity(self):
-            del self.ai_eddy_current_prox_probe_sensitivity
+    @ai_eddy_current_prox_sensitivity.deleter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_eddy_current_prox_probe_sensitivity instead.")
+    def ai_eddy_current_prox_sensitivity(self):
+        del self.ai_eddy_current_prox_probe_sensitivity
 
-        @deprecation.deprecated
-        @property
-        def ai_eddy_current_prox_sensitivity_units(self):
-            return self.ai_eddy_current_prox_probe_sensitivity_units
+    @property
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_eddy_current_prox_probe_sensitivity_units instead.")
+    def ai_eddy_current_prox_sensitivity_units(self):
+        return self.ai_eddy_current_prox_probe_sensitivity_units
 
-        @deprecation.deprecated
-        @ai_eddy_current_prox_sensitivity_units.setter
-        def ai_eddy_current_prox_sensitivity_units(self, val):
-            self.ai_eddy_current_prox_probe_sensitivity_units = val
+    @ai_eddy_current_prox_sensitivity_units.setter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_eddy_current_prox_probe_sensitivity_units instead.")
+    def ai_eddy_current_prox_sensitivity_units(self, val):
+        self.ai_eddy_current_prox_probe_sensitivity_units = val
 
-        @deprecation.deprecated
-        @ai_eddy_current_prox_sensitivity_units.deleter
-        def ai_eddy_current_prox_sensitivity_units(self):
-            del self.ai_eddy_current_prox_probe_sensitivity_units
+    @ai_eddy_current_prox_sensitivity_units.deleter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_eddy_current_prox_probe_sensitivity_units instead.")
+    def ai_eddy_current_prox_sensitivity_units(self):
+        del self.ai_eddy_current_prox_probe_sensitivity_units
 
-        @deprecation.deprecated
-        @property
-        def ai_eddy_current_prox_units(self):
-            return self.ai_eddy_current_prox_probe_units
+    @property
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_eddy_current_prox_probe_units instead.")
+    def ai_eddy_current_prox_units(self):
+        return self.ai_eddy_current_prox_probe_units
 
-        @deprecation.deprecated
-        @ai_eddy_current_prox_units.setter
-        def ai_eddy_current_prox_units(self, val):
-            self.ai_eddy_current_prox_probe_units = val
+    @ai_eddy_current_prox_units.setter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_eddy_current_prox_probe_units instead.")
+    def ai_eddy_current_prox_units(self, val):
+        self.ai_eddy_current_prox_probe_units = val
 
-        @deprecation.deprecated
-        @ai_eddy_current_prox_units.deleter
-        def ai_eddy_current_prox_units(self):
-            del self.ai_eddy_current_prox_probe_units
+    @ai_eddy_current_prox_units.deleter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_eddy_current_prox_probe_units instead.")
+    def ai_eddy_current_prox_units(self):
+        del self.ai_eddy_current_prox_probe_units
 
-        @deprecation.deprecated
-        @property
-        def ai_teds_is_teds(self):
-            return self.ai_is_teds
+    @property
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_is_teds instead.")
+    def ai_teds_is_teds(self):
+        return self.ai_is_teds
 
-        @deprecation.deprecated
-        @property
-        def ai_rosette_strain_gage_gage_orientation(self):
-            return self.ai_rosette_strain_gage_orientation
+    @property
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_rosette_strain_gage_orientation instead.")
+    def ai_rosette_strain_gage_gage_orientation(self):
+        return self.ai_rosette_strain_gage_orientation
 
-        @deprecation.deprecated
-        @ai_rosette_strain_gage_gage_orientation.setter
-        def ai_rosette_strain_gage_gage_orientation(self, val):
-            self.ai_rosette_strain_gage_orientation = val
+    @ai_rosette_strain_gage_gage_orientation.setter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_rosette_strain_gage_orientation instead.")
+    def ai_rosette_strain_gage_gage_orientation(self, val):
+        self.ai_rosette_strain_gage_orientation = val
 
-        @deprecation.deprecated
-        @ai_rosette_strain_gage_gage_orientation.deleter
-        def ai_rosette_strain_gage_gage_orientation(self):
-            del self.ai_rosette_strain_gage_orientation
+    @ai_rosette_strain_gage_gage_orientation.deleter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_rosette_strain_gage_orientation instead.")
+    def ai_rosette_strain_gage_gage_orientation(self):
+        del self.ai_rosette_strain_gage_orientation
 
-        @deprecation.deprecated
-        @property
-        def ai_rtd_r_0(self):
-            return self.ai_rtd_r0
+    @property
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_rtd_r0 instead.")
+    def ai_rtd_r_0(self):
+        return self.ai_rtd_r0
 
-        @deprecation.deprecated
-        @ai_rtd_r_0.setter
-        def ai_rtd_r_0(self, val):
-            self.ai_rtd_r0 = val
+    @ai_rtd_r_0.setter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_rtd_r0 instead.")
+    def ai_rtd_r_0(self, val):
+        self.ai_rtd_r0 = val
 
-        @deprecation.deprecated
-        @ai_rtd_r_0.deleter
-        def ai_rtd_r_0(self):
-            del self.ai_rtd_r0
+    @ai_rtd_r_0.deleter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_rtd_r0 instead.")
+    def ai_rtd_r_0(self):
+        del self.ai_rtd_r0
 
-        @deprecation.deprecated
-        @property
-        def ai_sound_pressure_b_ref(self):
-            return self.ai_sound_pressure_db_ref
+    @property
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_sound_pressure_db_ref instead.")
+    def ai_sound_pressured_b_ref(self):
+        return self.ai_sound_pressure_db_ref
 
-        @deprecation.deprecated
-        @ai_sound_pressure_b_ref.setter
-        def ai_sound_pressure_b_ref(self, val):
-            self.ai_sound_pressure_db_ref = val
+    @ai_sound_pressured_b_ref.setter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_sound_pressure_db_ref instead.")
+    def ai_sound_pressured_b_ref(self, val):
+        self.ai_sound_pressure_db_ref = val
 
-        @deprecation.deprecated
-        @ai_sound_pressure_b_ref.deleter
-        def ai_sound_pressure_b_ref(self):
-            del self.ai_sound_pressure_db_ref
+    @ai_sound_pressured_b_ref.deleter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_sound_pressure_db_ref instead.")
+    def ai_sound_pressured_b_ref(self):
+        del self.ai_sound_pressure_db_ref
 
-        @deprecation.deprecated
-        @property
-        def ai_strain_force_read_from_chan(self):
-            return self.ai_strain_gage_force_read_from_chan
+    @property
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_strain_gage_force_read_from_chan instead.")
+    def ai_strain_force_read_from_chan(self):
+        return self.ai_strain_gage_force_read_from_chan
 
-        @deprecation.deprecated
-        @ai_strain_force_read_from_chan.setter
-        def ai_strain_force_read_from_chan(self, val):
-            self.ai_strain_gage_force_read_from_chan = val
+    @ai_strain_force_read_from_chan.setter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_strain_gage_force_read_from_chan instead.")
+    def ai_strain_force_read_from_chan(self, val):
+        self.ai_strain_gage_force_read_from_chan = val
 
-        @deprecation.deprecated
-        @ai_strain_force_read_from_chan.deleter
-        def ai_strain_force_read_from_chan(self):
-            del self.ai_strain_gage_force_read_from_chan
+    @ai_strain_force_read_from_chan.deleter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_strain_gage_force_read_from_chan instead.")
+    def ai_strain_force_read_from_chan(self):
+        del self.ai_strain_gage_force_read_from_chan
 
-        @deprecation.deprecated
-        @property
-        def ai_thrmstr_r_1(self):
-            return self.ai_thrmstr_r1
+    @property
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_thrmstr_r1 instead.")
+    def ai_thrmstr_r_1(self):
+        return self.ai_thrmstr_r1
 
-        @deprecation.deprecated
-        @ai_thrmstr_r_1.setter
-        def ai_thrmstr_r_1(self, val):
-            self.ai_thrmstr_r1 = val
+    @ai_thrmstr_r_1.setter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_thrmstr_r1 instead.")
+    def ai_thrmstr_r_1(self, val):
+        self.ai_thrmstr_r1 = val
 
-        @deprecation.deprecated
-        @ai_thrmstr_r_1.deleter
-        def ai_thrmstr_r_1(self):
-            del self.ai_thrmstr_r1
+    @ai_thrmstr_r_1.deleter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_thrmstr_r1 instead.")
+    def ai_thrmstr_r_1(self):
+        del self.ai_thrmstr_r1
 
+    @property
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_accel_db_ref instead.")
+    def ai_acceld_b_ref(self):
+        return self.ai_accel_db_ref
+
+    @ai_acceld_b_ref.setter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_accel_db_ref instead.")
+    def ai_acceld_b_ref(self, val):
+        self.ai_accel_db_ref = val
+
+    @ai_acceld_b_ref.deleter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_accel_db_ref instead.")
+    def ai_acceld_b_ref(self):
+        del self.ai_accel_db_ref
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_voltage_db_ref instead.")
+    def ai_voltaged_b_ref(self):
+        return self.ai_voltage_db_ref
+
+    @ai_voltaged_b_ref.setter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_voltage_db_ref instead.")
+    def ai_voltaged_b_ref(self, val):
+        self.ai_voltage_db_ref = val
+
+    @ai_voltaged_b_ref.deleter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_voltage_db_ref instead.")
+    def ai_voltaged_b_ref(self):
+        del self.ai_voltage_db_ref
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_velocity_iepe_sensor_db_ref instead.")
+    def ai_velocity_iepe_sensord_b_ref(self):
+        return self.ai_velocity_iepe_sensor_db_ref
+
+    @ai_velocity_iepe_sensord_b_ref.setter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_velocity_iepe_sensor_db_ref instead.")
+    def ai_velocity_iepe_sensord_b_ref(self, val):
+        self.ai_velocity_iepe_sensor_db_ref = val
+
+    @ai_velocity_iepe_sensord_b_ref.deleter
+    @deprecation.deprecated(deprecated_in="0.66", current_version=__version__, details="Use ai_velocity_iepe_sensor_db_ref instead.")
+    def ai_velocity_iepe_sensord_b_ref(self):
+        del self.ai_velocity_iepe_sensor_db_ref

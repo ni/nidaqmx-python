@@ -274,6 +274,7 @@ attributes = {
             'c_function_name': 'AIImpedance',
             'calling_convention': 'StdCall',
             'ctypes_data_type': 'ctypes.c_double',
+            'enum': 'Impedance1',
             'handle_parameters': {
                 'channelHandle': {
                     'accessor': 'self._name',
