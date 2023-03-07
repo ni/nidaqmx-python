@@ -22,6 +22,13 @@ def flatten_channel_string(channel_names):
     names to a single string prior to using the DAQmx Create Channel methods or
     instantiating a DAQmx Task object.
 
+    Note: For simplicity, this implementation is not fully compatible with the
+    NI-DAQmx driver implementation, which is generally more permissive. For
+    example, the driver is more graceful with whitespace padding. It was deemed
+    valuable to implement this natively in Python, so it can be leveraged in
+    workflows that don't have the driver installed. If we have specific examples
+    where this approximation is a problem, we can revisit this in the future.
+
     Args:
         channel_names (List[str]): The list of physical or virtual channel
             names.
@@ -52,13 +59,16 @@ def flatten_channel_string(channel_names):
             previous = {
                 'base_name': channel_name,
                 'start_index': -1,
-                'end_index': -1
+                'start_index_str': "",
+                'end_index': -1,
+                'end_index_str': "",
                 }
         else:
             # If the channel name ends in a valid number, we may need to flatten
             # this channel with subsequent channels in the x:y format.
             current_base_name = m.group(1)
-            current_index = int(m.group(2))
+            current_index_str = m.group(2)
+            current_index = int(current_index_str)
 
             if current_base_name == previous['base_name'] and (
                 (current_index == previous['end_index'] + 1 and
@@ -69,6 +79,7 @@ def flatten_channel_string(channel_names):
                 # previous and it's end index differs by 1, change the end
                 # index value. It gets flattened later.
                 previous['end_index'] = current_index
+                previous['end_index_str'] = current_index_str
             else:
                 # If the current channel name has the same base name as the
                 # previous or it's end index differs by more than 1, it doesn't
@@ -78,7 +89,9 @@ def flatten_channel_string(channel_names):
                 previous = {
                     'base_name': current_base_name,
                     'start_index': current_index,
-                    'end_index': current_index
+                    'start_index_str': current_index_str,
+                    'end_index': current_index,
+                    'end_index_str': current_index_str,
                     }
 
     # Convert the final channel dictionary to a flattened string
@@ -98,11 +111,11 @@ def _channel_info_to_flattened_name(channel_info):
         return channel_info['base_name']
     elif channel_info['start_index'] == channel_info['end_index']:
         return '{0}{1}'.format(channel_info['base_name'],
-                               channel_info['start_index'])
+                               channel_info['start_index_str'])
     else:
         return '{0}{1}:{2}'.format(channel_info['base_name'],
-                                   channel_info['start_index'],
-                                   channel_info['end_index'])
+                                   channel_info['start_index_str'],
+                                   channel_info['end_index_str'])
 
                                    
 def unflatten_channel_string(channel_names):
@@ -112,6 +125,13 @@ def unflatten_channel_string(channel_names):
     You can use this method to convert a comma-delimited list or range of
     physical or virtual channels into a list of physical or virtual channel
     names.
+
+    Note: For simplicity, this implementation is not fully compatible with the
+    NI-DAQmx driver implementation, which is generally more permissive. For
+    example, the driver is more graceful with whitespace padding. It was deemed
+    valuable to implement this natively in Python, so it can be leveraged in
+    workflows that don't have the driver installed. If we have specific examples
+    where this approximation is a problem, we can revisit this in the future.
 
     Args:
         channel_names (str): The list or range of physical or virtual channels.
@@ -147,8 +167,18 @@ def unflatten_channel_string(channel_names):
                 raise DaqError(_invalid_range_syntax_message,
                                error_code=-200498)
 
-            num_before = int(m_before.group(2))
-            num_after = int(m_after.group(2))
+            num_before_str = m_before.group(2)
+            num_before = int(num_before_str)
+            num_after_str = m_after.group(2)
+            num_after = int(num_after_str)
+
+            num_min_width = 0
+            # If there are any leading 0s in the first number, we want to ensure
+            # match that width. This is established precedence in the DAQmx
+            # algorithm.
+            if num_before > 0 and len(num_before_str.lstrip('0')) < len(num_before_str):
+                num_min_width = len(num_before_str)
+
             num_max = max([num_before, num_after])
             num_min = min([num_before, num_after])
             number_of_channels = (num_max - num_min) + 1
@@ -159,8 +189,14 @@ def unflatten_channel_string(channel_names):
 
             colon_expanded_channel = []
             for i in range(number_of_channels):
-                colon_expanded_channel.append(
-                    '{0}{1}'.format(m_before.group(1), num_min + i))
+                current_number = num_min + i
+                if num_min_width > 0:
+                    # Using fstrings to create format strings. Braces for days!
+                    zero_padded_format_specifier = f"{{:0{num_min_width}d}}"
+                    current_number_str = zero_padded_format_specifier.format(current_number)
+                else:
+                    current_number_str = str(current_number)
+                colon_expanded_channel.append(f"{m_before.group(1)}{current_number_str}")
 
             if num_after < num_before:
                 colon_expanded_channel.reverse()

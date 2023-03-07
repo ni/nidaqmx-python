@@ -21,8 +21,9 @@ All notable changes to this project will be documented in this file.
 
 * ### Merged Pull Requests
     * [211: Restructure the folder structure and add a basic code generator](https://github.com/ni/nidaqmx-python/pull/211)
+    * [217: Handle leading zeros in flatten/unflatten implementation](https://github.com/ni/nidaqmx-python/issues/217)
 * ### Resolved Issues
-    * ...
+    * [216: Can read channel_names of PersistedTask but not channels](https://github.com/ni/nidaqmx-python/issues/216)
 * ### Major Changes
     * Refactored the repository folder structure and added a code generator.
 
