@@ -1,10 +1,13 @@
-import pytest
+"""Tests for validating utilities functionality."""
 import random
 
 from nidaqmx.utils import flatten_channel_string, unflatten_channel_string
 
 
 class TestUtils(object):
+    """Contains a collection of pytest tests.
+
+    These validate the utilities functionality in the NI-DAQmx Python API.
     """
     Contains a collection of pytest tests that validate the utilities
     functionality in the NI-DAQmx Python API.
