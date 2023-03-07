@@ -75,7 +75,7 @@ class TestPropertyBasicDataTypes(object):
             # error after being reset.
             del ai_channel.ai_max
             with pytest.raises(DaqError) as e:
-                read_value = ai_channel.ai_max
+                read_value = ai_channel.ai_max  # noqa: F841
             assert e.value.error_code == -200695
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])

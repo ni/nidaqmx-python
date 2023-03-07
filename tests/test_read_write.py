@@ -760,7 +760,7 @@ class TestPowerRead(TestDAQmxIOBase):
 
             read_task.start()
             # We aren't validating data, just assuring that it doesn't fail.
-            values_read = read_task.read(number_of_samples_per_channel=10)
+            values_read = read_task.read(number_of_samples_per_channel=10)  # noqa: F841
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
     def test_mixed_chans_with_power(self, sim_ts_power_device, sim_ts_voltage_device, seed):
@@ -787,4 +787,4 @@ class TestPowerRead(TestDAQmxIOBase):
             # We aren't validating data, just assuring that it fails. The error
             # code is currently not very good, so we'll ignore that for now.
             with pytest.raises(nidaqmx.errors.DaqReadError):
-                values_read = read_task.read(number_of_samples_per_channel=10)
+                values_read = read_task.read(number_of_samples_per_channel=10)  # noqa: F841

@@ -13,7 +13,7 @@ class TestTask(object):
 
     def test_task_duplicate(self):
         """Test to validate duplicate and partially constructed tasks."""
-        with Task("task") as t:
+        with Task("task") as t:  # noqa: F841
             with pytest.raises(DaqError) as dupe_exception:
                 u = Task("task")
                 # u is now partially constructed, and deleting it should be safe. This previously
