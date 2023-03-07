@@ -60,6 +60,11 @@ ni-python-styleguide = "^0.4"
 
 [tool.black]
 line-length = 100
+exclude = ["generated/",
+    "docs/",
+    "src/nidaqmx/",
+    "src/codegen/metadata/",
+    "src/codegen/templates/"]
 
 [build-system]
 requires = ["poetry>=1.1.12"]
