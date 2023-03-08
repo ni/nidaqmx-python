@@ -9,7 +9,6 @@
 import ctypes
 import numpy
 import deprecation
-import __init__
 
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
@@ -21,7 +20,6 @@ from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})
 
-__version__ = __init__.__version__
 
 class AIChannel(Channel):
     """
