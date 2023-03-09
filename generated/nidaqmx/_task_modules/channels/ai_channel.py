@@ -33,7 +33,6 @@ from nidaqmx.constants import (
     TerminalConfiguration, ThermocoupleType, TorqueUnits, UsageTypeAI,
     VelocityIEPESensorSensitivityUnits, VelocityUnits, VoltageUnits)
 
-__version__ = __init__.__version__
 
 class AIChannel(Channel):
     """
@@ -8721,7 +8720,6 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
-
     @property
     def ai_velocity_iepe_sensor_sensitivity(self):
         """
@@ -8816,6 +8814,56 @@ class AIChannel(Channel):
     def ai_velocity_iepe_sensor_sensitivity_units(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetAIVelocityIEPESensorSensitivityUnits)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ai_velocity_units(self):
+        """
+        :class:`nidaqmx.constants.VelocityUnits`: Specifies in which
+            unit to return velocity measurements from the channel.
+        """
+        val = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxGetAIVelocityUnits
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return VelocityUnits(val.value)
+
+    @ai_velocity_units.setter
+    def ai_velocity_units(self, val):
+        val = val.value
+        cfunc = lib_importer.windll.DAQmxSetAIVelocityUnits
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_velocity_units.deleter
+    def ai_velocity_units(self):
+        cfunc = lib_importer.windll.DAQmxResetAIVelocityUnits
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
@@ -8927,56 +8975,6 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ai_voltage_db_ref(self):
-        """
-        float: Specifies the decibel reference level in the units of the
-            channel. When you read samples as a waveform, the decibel
-            reference level is included in the waveform attributes.
-        """
-        val = ctypes.c_double()
-
-        cfunc = lib_importer.windll.DAQmxGetAIVoltagedBRef
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @ai_voltage_db_ref.setter
-    def ai_voltage_db_ref(self, val):
-        cfunc = lib_importer.windll.DAQmxSetAIVoltagedBRef
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ai_voltage_db_ref.deleter
-    def ai_voltage_db_ref(self):
-        cfunc = lib_importer.windll.DAQmxResetAIVoltagedBRef
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
     def ai_voltage_units(self):
         """
         :class:`nidaqmx.constants.VoltageUnits`: Specifies the units to
@@ -8992,9 +8990,9 @@ class AIChannel(Channel):
                         lib_importer.task_handle, ctypes_byte_str,
                         ctypes.POINTER(ctypes.c_int)]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
 
         return VoltageUnits(val.value)
 
@@ -9009,7 +9007,9 @@ class AIChannel(Channel):
                         lib_importer.task_handle, ctypes_byte_str,
                         ctypes.c_int]
 
-        check_for_error(size_or_code)
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
 
     @ai_voltage_units.deleter
     def ai_voltage_units(self):
@@ -9020,6 +9020,9 @@ class AIChannel(Channel):
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str]
 
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
 
     @property
     def pwr_current_dev_scaling_coeff(self):
@@ -9543,3 +9546,4 @@ class AIChannel(Channel):
     @deprecation.deprecated(deprecated_in="0.6.6", details="Use ai_velocity_iepe_sensor_db_ref instead.")
     def ai_velocity_iepe_sensord_b_ref(self):
         del self.ai_velocity_iepe_sensor_db_ref
+
