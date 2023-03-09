@@ -55,6 +55,7 @@ pykka = "^3.0"
 tox = "^3.24"
 click = "^8.1"
 Mako = "^1.2"
+deprecation = "^2.1"
 
 [build-system]
 requires = ["poetry>=1.1.12"]
