@@ -97,7 +97,6 @@ DEPRECATED_ATTRIBUTES = {
 }
 
 
-
 def get_attributes(metadata, class_name):
     """Converts the scrapigen metadata into a list of attributes."""
     attributes_metadata = []
