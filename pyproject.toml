@@ -32,9 +32,9 @@ packages = [{ include = "nidaqmx", from = "src" }]
 [tool.poetry.dependencies]
 python = "^3.7"
 numpy = [
-    {version="^1.20", python = "<3.10"},
-    # precompiled wheels only available in the 1.22+
-    {version="^1.22", python = "^3.10"}
+  {version=">=1.20,<1.22", python="<3.8"},
+  # precompiled wheels only available in the 1.22+
+  {version=">=1.22", python="^3.8"},
 ]
 six = "^1.16"
 # This functionality was merged into python stdlib beginning in 3.8
@@ -57,6 +57,7 @@ click = "^8.1"
 Mako = "^1.2"
 deprecation = "^2.1"
 ni-python-styleguide = "^0.4"
+sphinx_rtd_theme = "1.0"
 
 [tool.black]
 line-length = 100

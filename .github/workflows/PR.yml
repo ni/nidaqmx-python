@@ -36,4 +36,4 @@ jobs:
         run: git diff --exit-code
       - name: Test with pytest
         run: |
-          poetry run pytest
+          poetry run pytest .\tests\
