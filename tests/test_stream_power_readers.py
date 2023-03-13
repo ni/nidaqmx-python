@@ -11,6 +11,7 @@ from nidaqmx.stream_readers import (
     PowerMultiChannelReader,
     PowerBinaryReader,
 )
+from nidaqmx.tests.fixtures import sim_ts_power_device, sim_ts_power_devices  # noqa: F401
 from nidaqmx.tests.helpers import generate_random_seed, POWER_ABS_EPSILON
 from nidaqmx.tests.test_read_write import TestDAQmxIOBase
 
@@ -26,7 +27,7 @@ class TestPowerSingleChannelReader(TestDAQmxIOBase):
     @pytest.mark.parametrize(
         "seed,output_enable", [(generate_random_seed(), True), (generate_random_seed(), False)]
     )
-    def test_power_1_chan_1_samp(self, sim_ts_power_device, seed, output_enable):
+    def test_power_1_chan_1_samp(self, sim_ts_power_device, seed, output_enable):  # noqa: F811
         """Test to validate power read operation with sample data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -57,7 +58,7 @@ class TestPowerSingleChannelReader(TestDAQmxIOBase):
     @pytest.mark.parametrize(
         "seed,output_enable", [(generate_random_seed(), True), (generate_random_seed(), False)]
     )
-    def test_power_1_chan_n_samp(self, sim_ts_power_device, seed, output_enable):
+    def test_power_1_chan_n_samp(self, sim_ts_power_device, seed, output_enable):  # noqa: F811
         """Test to validate power read operation with sample data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -121,7 +122,7 @@ class TestPowerMultiChannelReader(TestDAQmxIOBase):
             (generate_random_seed(), [False, False]),
         ],
     )
-    def test_power_n_chan_1_samp(self, sim_ts_power_devices, seed, output_enables):
+    def test_power_n_chan_1_samp(self, sim_ts_power_devices, seed, output_enables):  # noqa: F811
         """Test to validate multi channel power read operation with sample data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -165,7 +166,7 @@ class TestPowerMultiChannelReader(TestDAQmxIOBase):
             (generate_random_seed(), [False, False]),
         ],
     )
-    def test_power_n_chan_n_samp(self, sim_ts_power_devices, seed, output_enables):
+    def test_power_n_chan_n_samp(self, sim_ts_power_devices, seed, output_enables):  # noqa: F811
         """Test to validate multi channel power read operation with sample data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -229,7 +230,9 @@ class TestPowerBinaryReader(TestDAQmxIOBase):
     @pytest.mark.parametrize(
         "seed,output_enable", [(generate_random_seed(), True), (generate_random_seed(), False)]
     )
-    def test_power_1_chan_n_samp_binary(self, sim_ts_power_device, seed, output_enable):
+    def test_power_1_chan_n_samp_binary(
+        self, sim_ts_power_device, seed, output_enable  # noqa: F811
+    ):
         """Test to validate power binary read operation with sample binary data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -279,7 +282,9 @@ class TestPowerBinaryReader(TestDAQmxIOBase):
             (generate_random_seed(), [False, False]),
         ],
     )
-    def test_power_n_chan_many_sample_binary(self, sim_ts_power_devices, seed, output_enables):
+    def test_power_n_chan_many_sample_binary(
+        self, sim_ts_power_devices, seed, output_enables  # noqa: F811
+    ):
         """Test to validate power binary read operation with sample binary data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)

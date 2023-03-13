@@ -20,6 +20,7 @@ from nidaqmx.constants import (
     StrainGageBridgeType,
     BridgeConfiguration,
 )
+from nidaqmx.tests.fixtures import sim_ts_power_device, any_x_series_device  # noqa: F401
 from nidaqmx.tests.helpers import generate_random_seed
 
 
@@ -33,7 +34,7 @@ class TestAnalogCreateChannels(object):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_create_ai_voltage_chan(self, any_x_series_device, seed):
+    def test_create_ai_voltage_chan(self, any_x_series_device, seed):  # noqa: F811
         """Test for creating AI voltage channel."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -60,7 +61,7 @@ class TestAnalogCreateChannels(object):
             assert ai_channel.ai_custom_scale.name == "double_gain_scale"
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_create_ai_current_chan(self, any_x_series_device, seed):
+    def test_create_ai_current_chan(self, any_x_series_device, seed):  # noqa: F811
         """Test for creating AI current channel."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -109,7 +110,7 @@ class TestAnalogCreateChannels(object):
     #         assert ai_channel.ai_custom_scale.name == ""
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_create_ai_rtd_chan(self, any_x_series_device, seed):
+    def test_create_ai_rtd_chan(self, any_x_series_device, seed):  # noqa: F811
         """Test for creating AI RTD channel."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -142,7 +143,7 @@ class TestAnalogCreateChannels(object):
             assert ai_channel.ai_rtd_r_0 == 100.0
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_create_ai_thrmstr_chan_iex(self, any_x_series_device, seed):
+    def test_create_ai_thrmstr_chan_iex(self, any_x_series_device, seed):  # noqa: F811
         """Test for creating AI thermistor channel with current excitation."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -178,7 +179,7 @@ class TestAnalogCreateChannels(object):
             assert ai_channel.ai_thrmstr_c == 0.000000102
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_create_ai_thrmstr_chan_vex(self, any_x_series_device, seed):
+    def test_create_ai_thrmstr_chan_vex(self, any_x_series_device, seed):  # noqa: F811
         """Test for creating AI thermistor channel with voltage excitation."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -216,7 +217,7 @@ class TestAnalogCreateChannels(object):
             assert ai_channel.ai_thrmstr_r_1 == 5000.0
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_create_ai_resistance_chan(self, any_x_series_device, seed):
+    def test_create_ai_resistance_chan(self, any_x_series_device, seed):  # noqa: F811
         """Test for creating AI resistance channel."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -247,7 +248,7 @@ class TestAnalogCreateChannels(object):
             assert ai_channel.ai_excit_val == 0.005
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_ai_strain_gage_chan(self, any_x_series_device, seed):
+    def test_ai_strain_gage_chan(self, any_x_series_device, seed):  # noqa: F811
         """Test for creating AI strain gage channel."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -286,7 +287,7 @@ class TestAnalogCreateChannels(object):
             assert ai_channel.ai_lead_wire_resistance == 0.1
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_create_ai_voltage_chan_with_excit(self, any_x_series_device, seed):
+    def test_create_ai_voltage_chan_with_excit(self, any_x_series_device, seed):  # noqa: F811
         """Test for creating AI voltage channel."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -320,7 +321,7 @@ class TestAnalogCreateChannels(object):
             assert not ai_channel.ai_excit_use_for_scaling
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_create_ai_power_chan(self, sim_ts_power_device, seed):
+    def test_create_ai_power_chan(self, sim_ts_power_device, seed):  # noqa: F811
         """Test for creating AI power channel."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)

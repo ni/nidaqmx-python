@@ -10,6 +10,7 @@ from nidaqmx.system._collections.persisted_channel_collection import PersistedCh
 from nidaqmx.system._collections.persisted_scale_collection import PersistedScaleCollection
 from nidaqmx.system._collections.persisted_task_collection import PersistedTaskCollection
 from nidaqmx.system._collections.physical_channel_collection import PhysicalChannelCollection
+from nidaqmx.tests.fixtures import any_x_series_device  # noqa: F401
 
 
 class TestSystemCollections(object):
@@ -71,7 +72,7 @@ class TestSystemCollections(object):
             # Test specific property on object.
             assert isinstance(global_channels[0].author, six.string_types)
 
-    def test_physical_channel_collection_property(self, any_x_series_device):
+    def test_physical_channel_collection_property(self, any_x_series_device):  # noqa: F811
         """Test to validate physical channel collection property."""
         phys_chans = any_x_series_device.ai_physical_chans
 

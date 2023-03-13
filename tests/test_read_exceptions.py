@@ -5,6 +5,7 @@ import pytest
 import nidaqmx
 from nidaqmx.constants import AcquisitionType, BusType, Level, TaskMode
 from nidaqmx.error_codes import DAQmxErrors
+from nidaqmx.tests.fixtures import real_x_series_device  # noqa: F401
 
 
 class TestReadExceptions(object):
@@ -15,7 +16,7 @@ class TestReadExceptions(object):
     loopback routes on the device.
     """
 
-    def test_timeout(self, real_x_series_device):
+    def test_timeout(self, real_x_series_device):  # noqa: F811
         """Test for validating read timeout."""
         # USB streaming is very tricky.
         if not (
@@ -72,7 +73,7 @@ class TestReadExceptions(object):
             number_of_samples_expected = clocks_to_give - samples_to_read
             assert timeout_exception.value.samps_per_chan_read == number_of_samples_expected
 
-    def test_timeout_raw(self, real_x_series_device):
+    def test_timeout_raw(self, real_x_series_device):  # noqa: F811
         """Test for validating read timeout."""
         # USB streaming is very tricky.
         if not (
@@ -132,7 +133,7 @@ class TestReadExceptions(object):
             number_of_samples_expected = clocks_to_give - samples_to_read
             assert timeout_exception.value.samps_per_chan_read == number_of_samples_expected
 
-    def test_timeout_stream(self, real_x_series_device):
+    def test_timeout_stream(self, real_x_series_device):  # noqa: F811
         """Test for validating read timeout."""
         # USB streaming is very tricky.
         if not (

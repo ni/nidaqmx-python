@@ -6,6 +6,7 @@ import pytest
 
 import nidaqmx
 from nidaqmx.errors import DaqError
+from nidaqmx.tests.fixtures import any_x_series_device  # noqa: F401
 from nidaqmx.tests.helpers import generate_random_seed
 from nidaqmx.utils import flatten_channel_string
 
@@ -17,7 +18,7 @@ class TestInvalidWrites(object):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_insufficient_write_data(self, any_x_series_device, seed):
+    def test_insufficient_write_data(self, any_x_series_device, seed):  # noqa: F811
         """Test for validating write functionality with insufficient data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -43,7 +44,7 @@ class TestInvalidWrites(object):
             assert e.value.error_code == -200524
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_insufficient_numpy_write_data(self, any_x_series_device, seed):
+    def test_insufficient_numpy_write_data(self, any_x_series_device, seed):  # noqa: F811
         """Test for validating write functionality with insufficient data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -67,7 +68,7 @@ class TestInvalidWrites(object):
             assert e.value.error_code == -200524
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_extraneous_write_data(self, any_x_series_device, seed):
+    def test_extraneous_write_data(self, any_x_series_device, seed):  # noqa: F811
         """Test for validating write functionality with extraneous data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -93,7 +94,7 @@ class TestInvalidWrites(object):
             assert e.value.error_code == -200524
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_extraneous_numpy_write_data(self, any_x_series_device, seed):
+    def test_extraneous_numpy_write_data(self, any_x_series_device, seed):  # noqa: F811
         """Test for validating write functionality with extraneous data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -121,7 +122,7 @@ class TestInvalidWrites(object):
             assert e.value.error_code == -200524
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_numpy_write_incorrectly_shaped_data(self, any_x_series_device, seed):
+    def test_numpy_write_incorrectly_shaped_data(self, any_x_series_device, seed):  # noqa: F811
         """Test for validating write functionality with incorrectly shaped data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)

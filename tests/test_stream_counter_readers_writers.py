@@ -8,6 +8,7 @@ import nidaqmx
 from nidaqmx.constants import Edge, TriggerType, AcquisitionType, Level, TaskMode
 from nidaqmx.stream_readers import CounterReader
 from nidaqmx.stream_writers import CounterWriter
+from nidaqmx.tests.fixtures import real_x_series_device  # noqa: F401
 from nidaqmx.tests.helpers import generate_random_seed
 from nidaqmx.tests.test_read_write import TestDAQmxIOBase
 
@@ -21,7 +22,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_one_sample_uint32(self, real_x_series_device, seed):
+    def test_one_sample_uint32(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate counter read and write operation with sample data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -50,7 +51,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             assert value_read == number_of_pulses
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_multi_sample_uint32(self, real_x_series_device, seed):
+    def test_multi_sample_uint32(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate counter read and write operation with sample data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -101,7 +102,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             assert values_read.tolist() == expected_values
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_one_sample_double(self, real_x_series_device, seed):
+    def test_one_sample_double(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate counter read and write operation with sample data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -129,7 +130,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_allclose([value_read], [actual_frequency], rtol=0.05)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_multi_sample_double(self, real_x_series_device, seed):
+    def test_multi_sample_double(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate counter read and write operation with sample data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -166,7 +167,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_allclose(values_read, expected_values, rtol=0.05)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_one_sample_pulse_freq(self, real_x_series_device, seed):
+    def test_one_sample_pulse_freq(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate counter read and write operation with sample data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -198,7 +199,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             assert numpy.isclose(value_read.duty_cycle, duty_cycle, rtol=0.05)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_many_sample_pulse_freq(self, real_x_series_device, seed):
+    def test_many_sample_pulse_freq(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate counter read and write operation with sample data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -249,7 +250,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_allclose(duty_cycles_read, duty_cycles_to_test[1:], rtol=0.05)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_one_sample_pulse_time(self, real_x_series_device, seed):
+    def test_one_sample_pulse_time(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate counter read and write operation with sample data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -280,7 +281,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             assert numpy.isclose(value_read.low_time, low_time, rtol=0.05)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_many_sample_pulse_time(self, real_x_series_device, seed):
+    def test_many_sample_pulse_time(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate counter read and write operation with sample data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -331,7 +332,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_allclose(low_times_read, low_times_to_test[1:], rtol=0.05)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_pulse_ticks_1_samp(self, real_x_series_device, seed):
+    def test_pulse_ticks_1_samp(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate counter read and write operation with pulse ticks."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -372,7 +373,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             assert numpy.isclose(value_read.low_tick, low_ticks, rtol=0.05, atol=1)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_many_sample_pulse_ticks(self, real_x_series_device, seed):
+    def test_many_sample_pulse_ticks(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate counter read and write operation with pulse ticks."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)

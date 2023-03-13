@@ -9,6 +9,7 @@ import nidaqmx
 from nidaqmx.constants import LineGrouping
 from nidaqmx.stream_readers import DigitalSingleChannelReader, DigitalMultiChannelReader
 from nidaqmx.stream_writers import DigitalSingleChannelWriter, DigitalMultiChannelWriter
+from nidaqmx.tests.fixtures import real_x_series_device  # noqa: F401
 from nidaqmx.tests.helpers import generate_random_seed
 from nidaqmx.tests.test_read_write import TestDAQmxIOBase
 from nidaqmx.utils import flatten_channel_string
@@ -23,7 +24,7 @@ class TestDigitalSingleChannelReaderWriter(TestDAQmxIOBase):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_one_sample_one_line(self, real_x_series_device, seed):
+    def test_one_sample_one_line(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate digital read and write operation with sample data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -48,7 +49,7 @@ class TestDigitalSingleChannelReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_one_sample_multi_line(self, real_x_series_device, seed):
+    def test_one_sample_multi_line(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate digital read and write operation with sample data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -79,7 +80,7 @@ class TestDigitalSingleChannelReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_one_sample_port_byte(self, real_x_series_device, seed):
+    def test_one_sample_port_byte(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate digital read and write operation with sample port byte."""
         if not any([d.do_port_width <= 8 for d in real_x_series_device.do_ports]):
             pytest.skip("Requires digital port with at most 8 lines.")
@@ -109,7 +110,7 @@ class TestDigitalSingleChannelReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_one_sample_port_uint16(self, real_x_series_device, seed):
+    def test_one_sample_port_uint16(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate digital read and write operation with sample uint16."""
         if not any([d.do_port_width <= 16 for d in real_x_series_device.do_ports]):
             pytest.skip("Requires digital port with at most 16 lines.")
@@ -141,7 +142,7 @@ class TestDigitalSingleChannelReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_one_sample_port_uint32(self, real_x_series_device, seed):
+    def test_one_sample_port_uint32(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate digital read and write operation with sample uint32."""
         if not any([d.do_port_width <= 32 for d in real_x_series_device.do_ports]):
             pytest.skip("Requires digital port with at most 32 lines.")
@@ -173,7 +174,7 @@ class TestDigitalSingleChannelReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_many_sample_port_byte(self, real_x_series_device, seed):
+    def test_many_sample_port_byte(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate digital read and write operation with sample byte."""
         if not any([d.do_port_width <= 8 for d in real_x_series_device.do_ports]):
             pytest.skip("Requires digital port with at most 8 lines.")
@@ -216,7 +217,7 @@ class TestDigitalSingleChannelReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_array_equal(values_read, expected_values)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_many_sample_port_uint16(self, real_x_series_device, seed):
+    def test_many_sample_port_uint16(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate digital read and write operation with sample uint16."""
         if not any([d.do_port_width <= 16 for d in real_x_series_device.do_ports]):
             pytest.skip("Requires digital port with at most 16 lines.")
@@ -259,7 +260,7 @@ class TestDigitalSingleChannelReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_array_equal(values_read, expected_values)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_many_sample_port_uint32(self, real_x_series_device, seed):
+    def test_many_sample_port_uint32(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate digital read and write operation with sample uint32."""
         if not any([d.do_port_width <= 32 for d in real_x_series_device.do_ports]):
             pytest.skip("Requires digital port with at most 32 lines.")
@@ -311,7 +312,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_one_sample_one_line(self, real_x_series_device, seed):
+    def test_one_sample_one_line(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate digital mutichannel read and write operation with sample data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -342,7 +343,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_one_sample_multi_line(self, real_x_series_device, seed):
+    def test_one_sample_multi_line(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate digital mutichannel read and write operation with sample data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -383,7 +384,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_one_sample_port_byte(self, real_x_series_device, seed):
+    def test_one_sample_port_byte(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate digital mutichannel read and write operation with sample bytes."""
         if len([d.do_port_width <= 8 for d in real_x_series_device.do_ports]) < 2:
             pytest.skip("Requires 2 digital ports with at most 8 lines.")
@@ -418,7 +419,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_one_sample_port_uint16(self, real_x_series_device, seed):
+    def test_one_sample_port_uint16(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate digital mutichannel read and write operation with uint16."""
         if len([d.do_port_width <= 16 for d in real_x_series_device.do_ports]) < 2:
             pytest.skip("Requires 2 digital ports with at most 16 lines.")
@@ -453,7 +454,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_one_sample_port_uint32(self, real_x_series_device, seed):
+    def test_one_sample_port_uint32(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate digital mutichannel read and write operation with uint32."""
         if len([d.do_port_width <= 32 for d in real_x_series_device.do_ports]) < 2:
             pytest.skip("Requires 2 digital ports with at most 32 lines.")
@@ -488,7 +489,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_array_equal(values_read, values_to_test)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_many_sample_port_byte(self, real_x_series_device, seed):
+    def test_many_sample_port_byte(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate digital mutichannel read and write operation with sample bytes."""
         if len([d.do_port_width <= 8 for d in real_x_series_device.do_ports]) < 2:
             pytest.skip("Requires 2 digital ports with at most 8 lines.")
@@ -544,7 +545,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_array_equal(values_read, expected_values)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_many_sample_port_uint16(self, real_x_series_device, seed):
+    def test_many_sample_port_uint16(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate digital mutichannel read and write operation with uint16."""
         if len([d.do_port_width <= 16 for d in real_x_series_device.do_ports]) < 2:
             pytest.skip("Requires 2 digital ports with at most 16 lines.")
@@ -600,7 +601,7 @@ class TestDigitalMultiChannelReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_array_equal(values_read, expected_values)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_many_sample_port_uint32(self, real_x_series_device, seed):
+    def test_many_sample_port_uint32(self, real_x_series_device, seed):  # noqa: F811
         """Test to validate digital mutichannel read and write operation with uint32."""
         if len([d.do_port_width <= 32 for d in real_x_series_device.do_ports]) < 2:
             pytest.skip("Requires 2 digital ports with at most 32 lines.")

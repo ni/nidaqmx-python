@@ -6,6 +6,7 @@ import pytest
 import nidaqmx
 from nidaqmx import DaqError
 from nidaqmx.constants import TriggerType, Edge, AcquisitionType
+from nidaqmx.tests.fixtures import any_x_series_device  # noqa: F401
 from nidaqmx.tests.helpers import generate_random_seed
 from nidaqmx.tests.test_read_write import TestDAQmxIOBase
 
@@ -17,7 +18,7 @@ class TestTriggers(TestDAQmxIOBase):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_arm_start_trigger(self, any_x_series_device, seed):
+    def test_arm_start_trigger(self, any_x_series_device, seed):  # noqa: F811
         """Test to validate start trigger functionality."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -33,7 +34,7 @@ class TestTriggers(TestDAQmxIOBase):
             assert task.triggers.arm_start_trigger.trig_type == TriggerType.NONE
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_handshake_trigger(self, any_x_series_device, seed):
+    def test_handshake_trigger(self, any_x_series_device, seed):  # noqa: F811
         """Test to validate trigger handshake."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -48,7 +49,7 @@ class TestTriggers(TestDAQmxIOBase):
             assert e.value.error_code == -200452
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_pause_trigger(self, any_x_series_device, seed):
+    def test_pause_trigger(self, any_x_series_device, seed):  # noqa: F811
         """Test to validate pause trigger."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -66,7 +67,7 @@ class TestTriggers(TestDAQmxIOBase):
             assert task.triggers.pause_trigger.trig_type == TriggerType.NONE
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_reference_trigger(self, any_x_series_device, seed):
+    def test_reference_trigger(self, any_x_series_device, seed):  # noqa: F811
         """Test to validate reference trigger."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -81,7 +82,7 @@ class TestTriggers(TestDAQmxIOBase):
             assert e.value.error_code == -200452
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_start_trigger(self, any_x_series_device, seed):
+    def test_start_trigger(self, any_x_series_device, seed):  # noqa: F811
         """Test to validate start trigger functionality."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)

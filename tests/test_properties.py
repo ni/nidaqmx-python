@@ -8,6 +8,7 @@ import nidaqmx
 import nidaqmx.system
 from nidaqmx import DaqError
 from nidaqmx.constants import AcquisitionType, UsageTypeAI
+from nidaqmx.tests.fixtures import any_x_series_device, bridge_device  # noqa: F401
 from nidaqmx.tests.helpers import generate_random_seed
 
 
@@ -17,7 +18,7 @@ class TestPropertyBasicDataTypes(object):
     This validates the property getter,setter and deleter methods for different basic data types.
     """
 
-    def test_boolean_property(self, any_x_series_device):
+    def test_boolean_property(self, any_x_series_device):  # noqa: F811
         """Test for validating boolean property."""
         with nidaqmx.Task() as task:
             task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
@@ -38,7 +39,7 @@ class TestPropertyBasicDataTypes(object):
             del task.triggers.start_trigger.retriggerable
             assert not task.triggers.start_trigger.retriggerable
 
-    def test_enum_property(self, any_x_series_device):
+    def test_enum_property(self, any_x_series_device):  # noqa: F811
         """Test for validating enum property."""
         with nidaqmx.Task() as task:
             task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
@@ -56,7 +57,7 @@ class TestPropertyBasicDataTypes(object):
             del task.timing.samp_quant_samp_mode
             assert task.timing.samp_quant_samp_mode == AcquisitionType.CONTINUOUS
 
-    def test_float_property(self, any_x_series_device):
+    def test_float_property(self, any_x_series_device):  # noqa: F811
         """Test for validating float property."""
         with nidaqmx.Task() as task:
             ai_channel = task.ai_channels.add_ai_voltage_chan(
@@ -79,7 +80,7 @@ class TestPropertyBasicDataTypes(object):
             assert e.value.error_code == -200695
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_int_property(self, any_x_series_device, seed):
+    def test_int_property(self, any_x_series_device, seed):  # noqa: F811
         """Test for validating integer property."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -103,7 +104,7 @@ class TestPropertyBasicDataTypes(object):
             del task.in_stream.offset
             assert task.in_stream.offset == 0
 
-    def test_string_property(self, any_x_series_device):
+    def test_string_property(self, any_x_series_device):  # noqa: F811
         """Test for validating string property."""
         with nidaqmx.Task() as task:
             ai_channel = task.ai_channels.add_ai_voltage_chan(
@@ -123,7 +124,7 @@ class TestPropertyBasicDataTypes(object):
             assert ai_channel.description == ""
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_uint_property(self, any_x_series_device, seed):
+    def test_uint_property(self, any_x_series_device, seed):  # noqa: F811
         """Test for validating uint property."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -154,14 +155,14 @@ class TestPropertyListDataTypes(object):
     list data types.
     """
 
-    def test_list_of_strings_property(self, any_x_series_device):
+    def test_list_of_strings_property(self, any_x_series_device):  # noqa: F811
         """Test for validating list of strings property."""
         terminals = any_x_series_device.terminals
 
         assert isinstance(terminals, list)
         assert isinstance(terminals[0], six.string_types)
 
-    def test_list_of_enums_property(self, any_x_series_device):
+    def test_list_of_enums_property(self, any_x_series_device):  # noqa: F811
         """Test for validating list of enums property."""
         terminals = any_x_series_device.ai_meas_types
 
@@ -169,7 +170,7 @@ class TestPropertyListDataTypes(object):
         assert isinstance(terminals[0], UsageTypeAI)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_list_of_floats_property(self, bridge_device, seed):
+    def test_list_of_floats_property(self, bridge_device, seed):  # noqa: F811
         """Test for validating list of float property."""
         if bridge_device is None:
             pytest.skip("requires bridge device")

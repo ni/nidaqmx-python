@@ -4,6 +4,7 @@ import numpy
 import nidaqmx
 import nidaqmx.system
 from nidaqmx.constants import TaskMode
+from nidaqmx.tests.fixtures import any_x_series_device, real_x_series_device  # noqa: F401
 
 
 class TestChannels(object):
@@ -12,7 +13,7 @@ class TestChannels(object):
     This validate the channel objects in the NI-DAQmx Python API.
     """
 
-    def test_ai_channel(self, any_x_series_device):
+    def test_ai_channel(self, any_x_series_device):  # noqa: F811
         """Tests for creating ai channel."""
         with nidaqmx.Task() as task:
             ai_channel = task.ai_channels.add_ai_voltage_chan(
@@ -22,7 +23,7 @@ class TestChannels(object):
             # Test property default value.
             assert ai_channel.ai_max == 10
 
-    def test_ao_channel(self, any_x_series_device):
+    def test_ao_channel(self, any_x_series_device):  # noqa: F811
         """Tests for creating ao channel."""
         with nidaqmx.Task() as task:
             ao_channel = task.ao_channels.add_ao_voltage_chan(
@@ -32,7 +33,7 @@ class TestChannels(object):
             # Test property default value.
             assert ao_channel.ao_max == 5
 
-    def test_ci_channel(self, real_x_series_device):
+    def test_ci_channel(self, real_x_series_device):  # noqa: F811
         """Tests for creating ci channel."""
         with nidaqmx.Task() as task:
             ci_channel = task.ci_channels.add_ci_count_edges_chan(
@@ -43,7 +44,7 @@ class TestChannels(object):
 
             assert ci_channel.ci_count == 10
 
-    def test_co_channel(self, any_x_series_device):
+    def test_co_channel(self, any_x_series_device):  # noqa: F811
         """Tests for creating co channel."""
         with nidaqmx.Task() as task:
             co_channel = task.co_channels.add_co_pulse_chan_freq(
@@ -54,14 +55,14 @@ class TestChannels(object):
 
             numpy.testing.assert_allclose([co_channel.co_pulse_freq], [5000], rtol=0.05)
 
-    def test_di_channel(self, any_x_series_device):
+    def test_di_channel(self, any_x_series_device):  # noqa: F811
         """Tests for creating di channel."""
         with nidaqmx.Task() as task:
             di_channel = task.di_channels.add_di_chan(any_x_series_device.di_lines[0].name)
 
             assert di_channel.di_num_lines == 1
 
-    def test_do_channel(self, any_x_series_device):
+    def test_do_channel(self, any_x_series_device):  # noqa: F811
         """Tests for creating do channel."""
         with nidaqmx.Task() as task:
             do_channel = task.do_channels.add_do_chan(any_x_series_device.do_lines[0].name)

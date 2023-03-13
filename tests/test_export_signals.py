@@ -5,6 +5,7 @@ import pytest
 
 import nidaqmx
 from nidaqmx.constants import Signal
+from nidaqmx.tests.fixtures import any_x_series_device  # noqa: F401
 from nidaqmx.tests.helpers import generate_random_seed
 from nidaqmx.tests.test_read_write import TestDAQmxIOBase
 
@@ -18,7 +19,7 @@ class TestExportSignals(TestDAQmxIOBase):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_export_signals(self, any_x_series_device, seed):
+    def test_export_signals(self, any_x_series_device, seed):  # noqa: F811
         """Test for validating export signals."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)

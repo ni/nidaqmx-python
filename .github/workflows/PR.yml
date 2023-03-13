@@ -28,13 +28,7 @@ jobs:
           poetry install
       - name: Run linters
         run: |
-          poetry run ni-python-styleguide lint ./src/codegen/properties
-          poetry run ni-python-styleguide lint ./src/codegen/utilities
-          poetry run ni-python-styleguide lint ./src/codegen/__init__.py
-          poetry run ni-python-styleguide lint ./src/codegen/__main__.py
-          poetry run ni-python-styleguide lint ./src/codegen/generator.py
-          poetry run ni-python-styleguide lint ./tests/
-          poetry run ni-python-styleguide lint ./nidaqmx_examples/
+          poetry run ni-python-styleguide lint
       - name: Generate ni-daqmx files
         run: poetry run python -m codegen --dest generated/nidaqmx
       - name: Check for files dirtied by codegen

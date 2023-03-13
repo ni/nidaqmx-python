@@ -6,6 +6,7 @@ import pytest
 
 import nidaqmx
 from nidaqmx.constants import TerminalConfiguration, TEDSUnits
+from nidaqmx.tests.fixtures import any_x_series_device  # noqa: F401
 from nidaqmx.tests.helpers import generate_random_seed
 
 
@@ -16,7 +17,7 @@ class TestTEDS(object):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_create_teds_ai_voltage_chan(self, any_x_series_device, seed):
+    def test_create_teds_ai_voltage_chan(self, any_x_series_device, seed):  # noqa: F811
         """Test to validate TEDS functionality."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
