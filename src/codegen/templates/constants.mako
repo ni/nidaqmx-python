@@ -1,5 +1,5 @@
 <%
-import utilities.enum_helpers as enum_helpers
+import codegen.utilities.enum_helpers as enum_helpers
 
 enums = enum_helpers.get_enums(data)
 %>\
@@ -19,7 +19,7 @@ WAIT_INFINITELY = -1.0
 % for name, enum_metadata in enums.items():
 class ${name}(Enum):
 %   for value in enum_metadata['values']:
-    ${value['name']} = ${value['value']}${enum_helpers.get_enum_value_docstring(value, data)}
+    ${value['name']} = ${value['value']}${enum_helpers.get_enum_value_docstring(value)}
 %   endfor
 
 
