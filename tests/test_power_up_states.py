@@ -3,7 +3,6 @@ import nidaqmx
 import nidaqmx.system
 from nidaqmx.constants import PowerUpStates
 from nidaqmx.system.system import DOPowerUpState
-from nidaqmx.tests.fixtures import real_x_series_device  # noqa: F401
 
 
 class TestPowerUpStates(object):
@@ -12,7 +11,7 @@ class TestPowerUpStates(object):
     This validate the power up states functions in the Python NI-DAQmx API.
     """
 
-    def test_digital_power_up_states(self, real_x_series_device):  # noqa: F811
+    def test_digital_power_up_states(self, real_x_series_device):
         """Test for validating digital power up states."""
         # The power up state for digital lines for an X Series device has to
         # be set for the whole port.
