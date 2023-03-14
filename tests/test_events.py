@@ -6,7 +6,6 @@ import pytest
 
 import nidaqmx
 from nidaqmx.constants import AcquisitionType
-from nidaqmx.tests.fixtures import any_x_series_device  # noqa: F401
 from nidaqmx.tests.helpers import generate_random_seed
 
 
@@ -17,7 +16,7 @@ class TestEvents(object):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_every_n_samples_event(self, any_x_series_device, seed):  # noqa: F811
+    def test_every_n_samples_event(self, any_x_series_device, seed):
         """Test for validating every n samples event."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)

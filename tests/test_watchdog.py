@@ -8,7 +8,6 @@ import nidaqmx
 import nidaqmx.system
 from nidaqmx.constants import Level
 from nidaqmx.system.watchdog import DOExpirationState
-from nidaqmx.tests.fixtures import real_x_series_device  # noqa: F401
 from nidaqmx.tests.helpers import generate_random_seed
 
 
@@ -19,7 +18,7 @@ class TestWatchdog(object):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_watchdog_task(self, real_x_series_device, seed):  # noqa: F811
+    def test_watchdog_task(self, real_x_series_device, seed):
         """Test to validate watchdog task."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -54,7 +53,7 @@ class TestWatchdog(object):
             task.stop()
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_watchdog_expir_state(self, real_x_series_device, seed):  # noqa: F811
+    def test_watchdog_expir_state(self, real_x_series_device, seed):
         """Test to validate watchdog expiration state."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)

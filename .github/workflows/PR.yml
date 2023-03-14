@@ -34,6 +34,3 @@ jobs:
         run: poetry run python -m codegen --dest generated/nidaqmx
       - name: Check for files dirtied by codegen
         run: git diff --exit-code
-      - name: Test with pytest
-        run: |
-          poetry run pytest

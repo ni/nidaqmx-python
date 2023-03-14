@@ -9,7 +9,6 @@ import nidaqmx
 from nidaqmx.constants import Edge
 from nidaqmx.stream_readers import AnalogSingleChannelReader, AnalogMultiChannelReader
 from nidaqmx.stream_writers import AnalogSingleChannelWriter, AnalogMultiChannelWriter
-from nidaqmx.tests.fixtures import real_x_series_device  # noqa: F401
 from nidaqmx.tests.helpers import generate_random_seed
 from nidaqmx.tests.test_read_write import TestDAQmxIOBase
 from nidaqmx.utils import flatten_channel_string
@@ -36,7 +35,7 @@ class TestAnalogSingleChannelReaderWriter(TestDAQmxIOBase):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_one_sample(self, real_x_series_device, seed):  # noqa: F811
+    def test_one_sample(self, real_x_series_device, seed):
         """Test to validate read and write analog data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -72,7 +71,7 @@ class TestAnalogSingleChannelReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_allclose(values_read, values_to_test, rtol=0.05, atol=0.005)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_many_sample(self, real_x_series_device, seed):  # noqa: F811
+    def test_many_sample(self, real_x_series_device, seed):
         """Test to validate read and write analog data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -147,7 +146,7 @@ class TestAnalogMultiChannelReaderWriter(TestDAQmxIOBase):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_one_sample(self, real_x_series_device, seed):  # noqa: F811
+    def test_one_sample(self, real_x_series_device, seed):
         """Test to validate read and write multichannel analog data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -186,7 +185,7 @@ class TestAnalogMultiChannelReaderWriter(TestDAQmxIOBase):
             numpy.testing.assert_allclose(values_read, values_to_test, rtol=0.05, atol=0.005)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_many_sample(self, real_x_series_device, seed):  # noqa: F811
+    def test_many_sample(self, real_x_series_device, seed):
         """Test to validate read and write multichannel analog data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)

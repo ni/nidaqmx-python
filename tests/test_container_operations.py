@@ -4,7 +4,6 @@ import random
 import pytest
 
 import nidaqmx
-from nidaqmx.tests.fixtures import any_x_series_device  # noqa: F401
 from nidaqmx.tests.helpers import generate_random_seed
 from nidaqmx.utils import flatten_channel_string
 
@@ -16,7 +15,7 @@ class TestContainerOperations(object):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_concatenate_operations(self, any_x_series_device, seed):  # noqa: F811
+    def test_concatenate_operations(self, any_x_series_device, seed):
         """Test for concatenate operation."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -65,7 +64,7 @@ class TestContainerOperations(object):
             assert ai_channel_2.ai_min == -0.2
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_equality_operations(self, any_x_series_device, seed):  # noqa: F811
+    def test_equality_operations(self, any_x_series_device, seed):
         """Test for equality operation."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -85,7 +84,7 @@ class TestContainerOperations(object):
             assert ai_channel_1 != ai_channel_2
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_hash_operations(self, any_x_series_device, seed):  # noqa: F811
+    def test_hash_operations(self, any_x_series_device, seed):
         """Test for hash operation."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)

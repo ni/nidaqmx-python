@@ -5,7 +5,6 @@ import pykka
 import pytest
 
 import nidaqmx
-from nidaqmx.tests.fixtures import multi_threading_test_devices  # noqa: F401
 from nidaqmx.tests.helpers import generate_random_seed
 
 
@@ -44,7 +43,7 @@ class TestMultiThreadedReads(object):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_multi_threaded_analog_read(self, multi_threading_test_devices, seed):  # noqa: F811
+    def test_multi_threaded_analog_read(self, multi_threading_test_devices, seed):
         """Test for validating multi-thread read operation."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)

@@ -5,7 +5,6 @@ import pytest
 import nidaqmx
 from nidaqmx.constants import AcquisitionType, BusType, RegenerationMode
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.tests.fixtures import real_x_series_device  # noqa: F401
 
 
 class TestWriteExceptions(object):
@@ -16,7 +15,7 @@ class TestWriteExceptions(object):
     loopback routes on the device.
     """
 
-    def test_overwrite(self, real_x_series_device):  # noqa: F811
+    def test_overwrite(self, real_x_series_device):
         """Test to validate overwrite functionality."""
         # USB streaming is very tricky.
         if not (
@@ -69,7 +68,7 @@ class TestWriteExceptions(object):
             # need to get into the nitty gritty device details on how much.
             assert timeout_exception.value.samps_per_chan_written > 0
 
-    def test_overwrite_during_prime(self, real_x_series_device):  # noqa: F811
+    def test_overwrite_during_prime(self, real_x_series_device):
         """Test to validate overwrite functionality during prime."""
         # USB streaming is very tricky.
         if not (

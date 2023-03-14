@@ -10,13 +10,6 @@ import pytest
 
 import nidaqmx
 from nidaqmx.constants import Edge, TriggerType, AcquisitionType, LineGrouping, Level, TaskMode
-from nidaqmx.tests.fixtures import (  # noqa: F401
-    sim_ts_power_device,
-    sim_ts_power_devices,
-    sim_ts_voltage_device,
-    sim_x_series_device,
-    real_x_series_device,
-)
 from nidaqmx.tests.helpers import generate_random_seed, POWER_ABS_EPSILON
 from nidaqmx.utils import flatten_channel_string
 
@@ -76,7 +69,7 @@ class TestAnalogReadWrite(TestDAQmxIOBase):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_1_chan_1_samp(self, real_x_series_device, seed):  # noqa: F811
+    def test_1_chan_1_samp(self, real_x_series_device, seed):
         """Test to validate reading and writing a sample data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -111,7 +104,7 @@ class TestAnalogReadWrite(TestDAQmxIOBase):
             assert len(value_read) == 1
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_n_chan_1_samp(self, real_x_series_device, seed):  # noqa: F811
+    def test_n_chan_1_samp(self, real_x_series_device, seed):
         """Test to validate reading and writing sample data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -151,7 +144,7 @@ class TestAnalogReadWrite(TestDAQmxIOBase):
             assert isinstance(value_read[0], list)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_1_chan_n_samp(self, real_x_series_device, seed):  # noqa: F811
+    def test_1_chan_n_samp(self, real_x_series_device, seed):
         """Test to validate reading and writing sample data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -210,7 +203,7 @@ class TestAnalogReadWrite(TestDAQmxIOBase):
             numpy.testing.assert_allclose(values_read, values_to_test, rtol=0.05, atol=0.005)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_n_chan_n_samp(self, real_x_series_device, seed):  # noqa: F811
+    def test_n_chan_n_samp(self, real_x_series_device, seed):
         """Test to validate reading and writing sample data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -286,7 +279,7 @@ class TestDigitalReadWrite(TestDAQmxIOBase):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_bool_1_chan_1_samp(self, real_x_series_device, seed):  # noqa: F811
+    def test_bool_1_chan_1_samp(self, real_x_series_device, seed):
         """Test to validate reading and writing boolean data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -314,7 +307,7 @@ class TestDigitalReadWrite(TestDAQmxIOBase):
             assert len(value_read) == 1
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_bool_n_chan_1_samp(self, real_x_series_device, seed):  # noqa: F811
+    def test_bool_n_chan_1_samp(self, real_x_series_device, seed):
         """Test to validate reading and writing boolean data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -344,7 +337,7 @@ class TestDigitalReadWrite(TestDAQmxIOBase):
             assert isinstance(value_read[0], list)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_uint_1_chan_1_samp(self, real_x_series_device, seed):  # noqa: F811
+    def test_uint_1_chan_1_samp(self, real_x_series_device, seed):
         """Test to validate reading and writing uint data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -374,7 +367,7 @@ class TestDigitalReadWrite(TestDAQmxIOBase):
             assert len(value_read) == 1
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_uint_multi_port(self, real_x_series_device, seed):  # noqa: F811
+    def test_uint_multi_port(self, real_x_series_device, seed):
         """Test to validate reading and writing uint data ."""
         if len([d.do_port_width <= 16 for d in real_x_series_device.do_ports]) < 2:
             pytest.skip("task.read() accepts max of 32 bits for digital uint reads.")
@@ -415,7 +408,7 @@ class TestCounterReadWrite(TestDAQmxIOBase):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_count_edges_1_samp(self, real_x_series_device, seed):  # noqa: F811
+    def test_count_edges_1_samp(self, real_x_series_device, seed):
         """Test to validate the set and read operations of edge count."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -448,7 +441,7 @@ class TestCounterReadWrite(TestDAQmxIOBase):
             assert value_read[0] == number_of_pulses
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_count_edges_n_samp(self, real_x_series_device, seed):  # noqa: F811
+    def test_count_edges_n_samp(self, real_x_series_device, seed):
         """Test to validate the set and read operations of edge count."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -495,7 +488,7 @@ class TestCounterReadWrite(TestDAQmxIOBase):
             assert value_read == expected_values
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_pulse_freq_1_samp(self, real_x_series_device, seed):  # noqa: F811
+    def test_pulse_freq_1_samp(self, real_x_series_device, seed):
         """Test to validate the set and read operations of pulse frequency."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -527,7 +520,7 @@ class TestCounterReadWrite(TestDAQmxIOBase):
             assert numpy.isclose(value_read.duty_cycle, duty_cycle, rtol=0.01)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_pulse_time_1_samp(self, real_x_series_device, seed):  # noqa: F811
+    def test_pulse_time_1_samp(self, real_x_series_device, seed):
         """Test to validate the set and read operations of pulse time."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -559,7 +552,7 @@ class TestCounterReadWrite(TestDAQmxIOBase):
             assert numpy.isclose(value_read.low_time, low_time, rtol=0.01)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_pulse_ticks_1_samp(self, real_x_series_device, seed):  # noqa: F811
+    def test_pulse_ticks_1_samp(self, real_x_series_device, seed):
         """Test to validate the set and read operations of pulse ticks."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -609,7 +602,7 @@ class TestPowerRead(TestDAQmxIOBase):
     @pytest.mark.parametrize(
         "seed,output_enable", [(generate_random_seed(), True), (generate_random_seed(), False)]
     )
-    def test_power_1_chan_1_samp(self, sim_ts_power_device, seed, output_enable):  # noqa: F811
+    def test_power_1_chan_1_samp(self, sim_ts_power_device, seed, output_enable):
         """Test to validate the set and read operations of power."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -644,7 +637,7 @@ class TestPowerRead(TestDAQmxIOBase):
             (generate_random_seed(), [False, False]),
         ],
     )
-    def test_power_n_chan_1_samp(self, sim_ts_power_devices, seed, output_enables):  # noqa: F811
+    def test_power_n_chan_1_samp(self, sim_ts_power_devices, seed, output_enables):
         """Test to validate the set and read operations of power."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -676,7 +669,7 @@ class TestPowerRead(TestDAQmxIOBase):
     @pytest.mark.parametrize(
         "seed,output_enable", [(generate_random_seed(), True), (generate_random_seed(), False)]
     )
-    def test_power_1_chan_n_samp(self, sim_ts_power_device, seed, output_enable):  # noqa: F811
+    def test_power_1_chan_n_samp(self, sim_ts_power_device, seed, output_enable):
         """Test to validate the set and read operations of power."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -717,7 +710,7 @@ class TestPowerRead(TestDAQmxIOBase):
             (generate_random_seed(), [False, False]),
         ],
     )
-    def test_power_n_chan_n_samp(self, sim_ts_power_devices, seed, output_enables):  # noqa: F811
+    def test_power_n_chan_n_samp(self, sim_ts_power_devices, seed, output_enables):
         """Test to validate the set and read operations of power."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -751,7 +744,7 @@ class TestPowerRead(TestDAQmxIOBase):
                     assert all(math.isnan(sample.current) for sample in channel_values)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_mixed_chans(self, sim_x_series_device, seed):  # noqa: F811
+    def test_mixed_chans(self, sim_x_series_device, seed):
         """Test to validate mixed channels."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -769,9 +762,7 @@ class TestPowerRead(TestDAQmxIOBase):
             values_read = read_task.read(number_of_samples_per_channel=10)  # noqa: F841
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_mixed_chans_with_power(
-        self, sim_ts_power_device, sim_ts_voltage_device, seed  # noqa: F811
-    ):
+    def test_mixed_chans_with_power(self, sim_ts_power_device, sim_ts_voltage_device, seed):
         """Test to validate mixed channels with power."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
