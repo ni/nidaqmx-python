@@ -274,7 +274,6 @@ attributes = {
             'c_function_name': 'AIImpedance',
             'calling_convention': 'StdCall',
             'ctypes_data_type': 'ctypes.c_double',
-            'enum': 'Impedance1',
             'handle_parameters': {
                 'channelHandle': {
                     'accessor': 'self._name',
@@ -6325,7 +6324,7 @@ attributes = {
             'name': 'CI_ENCODER_DECODING_TYPE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'EncoderType2',
-            'python_description': 'Specifies how to count and interpret the pulses the encoder generates on signal A and signal B. **EncoderType2.X1**, **EncoderType2.X2**, and **EncoderType2.X4** are valid for quadrature encoders only. **EncoderType2.TWO_PULSE_COUNTING** is valid for two-pulse encoders only.',
+            'python_description': 'Specifies how to count and interpret the pulses the encoder generates on signal A and signal B. **EncoderType2.X_1**, **EncoderType2.X_2**, and **EncoderType2.X_4** are valid for quadrature encoders only. **EncoderType2.TWO_PULSE_COUNTING** is valid for two-pulse encoders only.',
             'resettable': True,
             'type': 'int32'
         },
