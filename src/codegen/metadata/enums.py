@@ -63,7 +63,8 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Use DAQmx_AI_ADCCustomTimingMode to specify a custom value controlling the  tradeoff between speed and resolution.'
+                    'description': ' Use DAQmx_AI_ADCCustomTimingMode to specify a custom value controlling the  tradeoff between speed and resolution.',
+                    'python_description': 'Use **ai_adc_custom_timing_mode** to specify a custom value controlling the tradeoff between speed and resolution.'
                 },
                 'name': 'CUSTOM',
                 'value': 10137
@@ -685,21 +686,24 @@ enums = {
         'values': [
             {
                 'documentation': {
-                    'description': ' Sensor is a full bridge. If you set DAQmx_AI_Excit_UseForScaling to TRUE,  NI-DAQmx divides the measurement by the excitation value. Many sensors scale  data to native units using scaling of volts per excitation.'
+                    'description': ' Sensor is a full bridge. If you set DAQmx_AI_Excit_UseForScaling to True,  NI-DAQmx divides the measurement by the excitation value. Many sensors scale  data to native units using scaling of volts per excitation.',
+                    'python_description': 'Sensor is a full bridge. If you set **ai_excit_use_for_scaling** to True, NI-DAQmx divides the measurement by the excitation value. Many sensors scale data to native units using scaling of volts per excitation.'
                 },
                 'name': 'FULL_BRIDGE',
                 'value': 10182
             },
             {
                 'documentation': {
-                    'description': ' Sensor is a half bridge. If you set DAQmx_AI_Excit_UseForScaling to TRUE,  NI-DAQmx divides the measurement by the excitation value. Many sensors scale  data to native units using scaling of volts per excitation.'
+                    'description': ' Sensor is a half bridge. If you set DAQmx_AI_Excit_UseForScaling to True,  NI-DAQmx divides the measurement by the excitation value. Many sensors scale  data to native units using scaling of volts per excitation.',
+                    'python_description': 'Sensor is a half bridge. If you set **ai_excit_use_for_scaling** to True, NI-DAQmx divides the measurement by the excitation value. Many sensors scale data to native units using scaling of volts per excitation.'
                 },
                 'name': 'HALF_BRIDGE',
                 'value': 10187
             },
             {
                 'documentation': {
-                    'description': ' Sensor is a quarter bridge. If you set DAQmx_AI_Excit_UseForScaling to TRUE,  NI-DAQmx divides the measurement by the excitation value. Many sensors scale  data to native units using scaling of volts per excitation.'
+                    'description': ' Sensor is a quarter bridge. If you set DAQmx_AI_Excit_UseForScaling to True,  NI-DAQmx divides the measurement by the excitation value. Many sensors scale  data to native units using scaling of volts per excitation.',
+                    'python_description': 'Sensor is a quarter bridge. If you set **ai_excit_use_for_scaling** to True, NI-DAQmx divides the measurement by the excitation value. Many sensors scale data to native units using scaling of volts per excitation.'
                 },
                 'name': 'QUARTER_BRIDGE',
                 'value': 10270
@@ -1404,7 +1408,8 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Use a shunt resistor external to the device. You must specify the value of the  shunt resistor by using DAQmx_AI_CurrentShunt_Resistance.'
+                    'description': ' Use a shunt resistor external to the device. You must specify the value of the  shunt resistor by using DAQmx_AI_CurrentShunt_Resistance.',
+                    'python_description': 'Use a shunt resistor external to the device. You must specify the value of the shunt resistor by using **ai_current_shunt_resistance**.'
                 },
                 'name': 'EXTERNAL',
                 'value': 10167
@@ -14649,7 +14654,8 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Deassert the signal when the amount of space available in the onboard memory is  below the value specified with  DAQmx_Exported_RdyForXferEvent_DeassertCondCustomThreshold.'
+                    'description': ' Deassert the signal when the amount of space available in the onboard memory is  below the value specified with  DAQmx_Exported_RdyForXferEvent_DeassertCondCustomThreshold.',
+                    'python_description': 'Deassert the signal when the amount of space available in the onboard memory is below the value specified with **rdy_for_xfer_event_deassert_cond_custom_threshold**.'
                 },
                 'name': 'ONBRD_MEM_CUSTOM_THRESHOLD',
                 'python_name': 'ONBOARD_MEMORY_CUSTOM_THRESHOLD',
@@ -15103,14 +15109,16 @@ enums = {
         'values': [
             {
                 'documentation': {
-                    'description': ' Handshake Event deasserts after the Handshake Trigger asserts, plus the amount  of time specified with DAQmx_Exported_HshkEvent_Interlocked_DeassertDelay.'
+                    'description': ' Handshake Event deasserts after the Handshake Trigger asserts, plus the amount  of time specified with DAQmx_Exported_HshkEvent_Interlocked_DeassertDelay.',
+                    'python_description': 'Handshake Event deasserts after the Handshake Trigger asserts, plus the amount of time specified with **hshk_event_interlocked_deassert_delay**.'
                 },
                 'name': 'INTERLOCKED',
                 'value': 12549
             },
             {
                 'documentation': {
-                    'description': ' Handshake Event pulses with the pulse width specified in  DAQmx_Exported_HshkEvent_Pulse_Width.'
+                    'description': ' Handshake Event pulses with the pulse width specified in  DAQmx_Exported_HshkEvent_Pulse_Width.',
+                    'python_description': 'Handshake Event pulses with the pulse width specified in **hshk_event_pulse_width**.'
                 },
                 'name': 'PULSE',
                 'value': 10265
@@ -15428,14 +15436,16 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Use the PPS synchronization method. The GPS receiver sends one synchronization  pulse per second, but does not send any timing information. The timestamp  measurement returns the number of seconds that elapsed since the device powered  up unless you set DAQmx_CI_Timestamp_InitialSeconds.'
+                    'description': ' Use the PPS synchronization method. The GPS receiver sends one synchronization  pulse per second, but does not send any timing information. The timestamp  measurement returns the number of seconds that elapsed since the device powered  up unless you set DAQmx_CI_Timestamp_InitialSeconds.',
+                    'python_description': 'Use the PPS synchronization method. The GPS receiver sends one synchronization pulse per second, but does not send any timing information. The timestamp measurement returns the number of seconds that elapsed since the device powered up unless you set **ci_timestamp_initial_seconds**.'
                 },
                 'name': 'PPS',
                 'value': 10080
             },
             {
                 'documentation': {
-                    'description': ' Do not synchronize the counter to a GPS receiver. The timestamp measurement  returns the number of seconds that elapsed since the device powered up unless  you set  DAQmx_CI_Timestamp_InitialSeconds.'
+                    'description': ' Do not synchronize the counter to a GPS receiver. The timestamp measurement  returns the number of seconds that elapsed since the device powered up unless  you set  DAQmx_CI_Timestamp_InitialSeconds.',
+                    'python_description': 'Do not synchronize the counter to a GPS receiver. The timestamp measurement returns the number of seconds that elapsed since the device powered up unless you set  **ci_timestamp_initial_seconds**.'
                 },
                 'name': 'NONE',
                 'value': 10230
@@ -15537,7 +15547,8 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Transfer data from the device when the number of samples specified with  DAQmx_AI_DataXferCustomThreshold are in the device FIFO.'
+                    'description': ' Transfer data from the device when the number of samples specified with  DAQmx_AI_DataXferCustomThreshold are in the device FIFO.',
+                    'python_description': 'Transfer data from the device when the number of samples specified with **ai_data_xfer_custom_threshold** are in the device FIFO.'
                 },
                 'name': 'ONBRD_MEM_CUSTOM_THRESHOLD',
                 'python_name': 'ONBOARD_MEMORY_CUSTOM_THRESHOLD',
@@ -16146,7 +16157,8 @@ enums = {
         'values': [
             {
                 'documentation': {
-                    'description': ' When an acquisition encounters unread data in the buffer, the acquisition  continues and overwrites the unread samples with new ones. You can read the new  samples by setting DAQmx_Read_RelativeTo to DAQmx_Val_MostRecentSamp and  setting DAQmx_Read_Offset to the appropriate number of samples.'
+                    'description': ' When an acquisition encounters unread data in the buffer, the acquisition  continues and overwrites the unread samples with new ones. You can read the new  samples by setting DAQmx_Read_RelativeTo to DAQmx_Val_MostRecentSamp and  setting DAQmx_Read_Offset to the appropriate number of samples.',
+                    'python_description': 'When an acquisition encounters unread data in the buffer, the acquisition continues and overwrites the unread samples with new ones. You can read the new samples by setting **relative_to** to **ReadRelativeTo.MOST_RECENT_SAMPLE** and setting **offset** to the appropriate number of samples.'
                 },
                 'name': 'OVERWRITE_UNREAD_SAMPS',
                 'python_name': 'OVERWRITE_UNREAD_SAMPLES',
@@ -16541,7 +16553,8 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' You must use DAQmx_AI_RTD_A, DAQmx_AI_RTD_B, and DAQmx_AI_RTD_C to supply the  coefficients for the Callendar-Van Dusen equation.'
+                    'description': ' You must use DAQmx_AI_RTD_A, DAQmx_AI_RTD_B, and DAQmx_AI_RTD_C to supply the  coefficients for the Callendar-Van Dusen equation.',
+                    'python_description': 'You must use **ai_rtd_a**, **ai_rtd_b**, and **ai_rtd_c** to supply the coefficients for the Callendar-Van Dusen equation.'
                 },
                 'name': 'CUSTOM',
                 'value': 10137
@@ -16587,7 +16600,8 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Remove unused bits from samples. Then, if necessary, remove bits from samples  until the samples are the size specified with  DAQmx_AI_LossyLSBRemoval_CompressedSampSize. This compression type limits  resolution to the specified sample size.'
+                    'description': ' Remove unused bits from samples. Then, if necessary, remove bits from samples  until the samples are the size specified with  DAQmx_AI_LossyLSBRemoval_CompressedSampSize. This compression type limits  resolution to the specified sample size.',
+                    'python_description': 'Remove unused bits from samples. Then, if necessary, remove bits from samples until the samples are the size specified with **ai_lossy_lsb_removal_compressed_samp_size**. This compression type limits resolution to the specified sample size.'
                 },
                 'name': 'LOSSY_LSB_REMOVAL',
                 'value': 12556
@@ -16629,7 +16643,8 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Start reading samples relative to the next sample acquired. For example, use  this value and set DAQmx_Read_Offset to -1 to read the last sample acquired.'
+                    'description': ' Start reading samples relative to the next sample acquired. For example, use  this value and set DAQmx_Read_Offset to -1 to read the last sample acquired.',
+                    'python_description': 'Start reading samples relative to the next sample acquired. For example, use this value and set **offset** to -1 to read the last sample acquired.'
                 },
                 'name': 'MOST_RECENT_SAMP',
                 'python_name': 'MOST_RECENT_SAMPLE',
@@ -16932,7 +16947,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Map an array of pre-scaled values to an array of corresponding scaled values,  with all other values scaled proportionally.'
+                    'description': ' Map an list of pre-scaled values to an list of corresponding scaled values,  with all other values scaled proportionally.'
                 },
                 'name': 'TABLE',
                 'value': 10450
@@ -16951,7 +16966,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Map an array of prescaled values to an array of corresponding scaled values,  with all other values scaled proportionally.'
+                    'description': ' Map an list of prescaled values to an list of corresponding scaled values,  with all other values scaled proportionally.'
                 },
                 'name': 'TABLE',
                 'value': 10450
@@ -16970,7 +16985,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Map an array of prescaled values to an array of corresponding scaled values,  with all other values scaled proportionally.'
+                    'description': ' Map an list of prescaled values to an list of corresponding scaled values,  with all other values scaled proportionally.'
                 },
                 'name': 'TABLE',
                 'value': 10450
@@ -17000,7 +17015,8 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Map an array of electrical values to an array of corresponding physical values,  with all other values scaled proportionally. If you specify this scaling type,  DAQmx_AI_Max and DAQmx_AI_Min must be within the smallest and largest physical  values. For any data outside those endpoints, NI-DAQmx coerces that data to the  endpoints.'
+                    'description': ' Map an list of electrical values to an list of corresponding physical values,  with all other values scaled proportionally. If you specify this scaling type,  DAQmx_AI_Max and DAQmx_AI_Min must be within the smallest and largest physical  values. For any data outside those endpoints, NI-DAQmx coerces that data to the  endpoints.',
+                    'python_description': 'Map a list of electrical values to a list of corresponding physical values, with all other values scaled proportionally. If you specify this scaling type, **ai_max** and **ai_min** must be within the smallest and largest physical values. For any data outside those endpoints, NI-DAQmx coerces that data to the endpoints.'
                 },
                 'name': 'TABLE',
                 'value': 10450
@@ -18766,7 +18782,8 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Check for available samples once per the amount of time specified in  DAQmx_Read_SleepTime.'
+                    'description': ' Check for available samples once per the amount of time specified in  DAQmx_Read_SleepTime.',
+                    'python_description': 'Check for available samples once per the amount of time specified in **sleep_time**.'
                 },
                 'name': 'SLEEP',
                 'value': 12547
@@ -18792,7 +18809,8 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Check for available buffer space once per the amount of time specified in  DAQmx_Write_SleepTime.'
+                    'description': ' Check for available buffer space once per the amount of time specified in  DAQmx_Write_SleepTime.',
+                    'python_description': 'Check for available buffer space once per the amount of time specified in **sleep_time**.'
                 },
                 'name': 'SLEEP',
                 'value': 12547
