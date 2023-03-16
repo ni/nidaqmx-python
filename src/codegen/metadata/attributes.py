@@ -294,6 +294,7 @@ attributes = {
             'python_class_name': 'AIChannel',
             'python_data_type': 'Impedance1',
             'python_description': 'Specifies the input impedance of the channel.',
+            'python_enum': 'Impedance1',
             'resettable': True,
             'type': 'float64'
         },
@@ -6324,7 +6325,7 @@ attributes = {
             'name': 'CI_ENCODER_DECODING_TYPE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'EncoderType2',
-            'python_description': 'Specifies how to count and interpret the pulses the encoder generates on signal A and signal B. **EncoderType2.X1**, **EncoderType2.X2**, and **EncoderType2.X4** are valid for quadrature encoders only. **EncoderType2.TWO_PULSE_COUNTING** is valid for two-pulse encoders only.',
+            'python_description': 'Specifies how to count and interpret the pulses the encoder generates on signal A and signal B. **EncoderType2.X_1**, **EncoderType2.X_2**, and **EncoderType2.X_4** are valid for quadrature encoders only. **EncoderType2.TWO_PULSE_COUNTING** is valid for two-pulse encoders only.',
             'resettable': True,
             'type': 'int32'
         },
