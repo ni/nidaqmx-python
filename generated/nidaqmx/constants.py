@@ -93,9 +93,9 @@ class AutoZeroType(Enum):
 
 
 class BridgeConfiguration(Enum):
-    FULL_BRIDGE = 10182  #: Sensor is a full bridge. If you set **ai_excit_use_for_scaling** to TRUE, NI-DAQmx divides the measurement by the excitation value. Many sensors scale data to native units using scaling of volts per excitation.
-    HALF_BRIDGE = 10187  #: Sensor is a half bridge. If you set **ai_excit_use_for_scaling** to TRUE, NI-DAQmx divides the measurement by the excitation value. Many sensors scale data to native units using scaling of volts per excitation.
-    QUARTER_BRIDGE = 10270  #: Sensor is a quarter bridge. If you set **ai_excit_use_for_scaling** to TRUE, NI-DAQmx divides the measurement by the excitation value. Many sensors scale data to native units using scaling of volts per excitation.
+    FULL_BRIDGE = 10182  #: Sensor is a full bridge. If you set **ai_excit_use_for_scaling** to True, NI-DAQmx divides the measurement by the excitation value. Many sensors scale data to native units using scaling of volts per excitation.
+    HALF_BRIDGE = 10187  #: Sensor is a half bridge. If you set **ai_excit_use_for_scaling** to True, NI-DAQmx divides the measurement by the excitation value. Many sensors scale data to native units using scaling of volts per excitation.
+    QUARTER_BRIDGE = 10270  #: Sensor is a quarter bridge. If you set **ai_excit_use_for_scaling** to True, NI-DAQmx divides the measurement by the excitation value. Many sensors scale data to native units using scaling of volts per excitation.
     NO_BRIDGE = 10228  #: Sensor is not a Wheatstone bridge.
 
 
@@ -452,7 +452,7 @@ class OverflowBehavior(Enum):
 
 
 class OverwriteMode(Enum):
-    OVERWRITE_UNREAD_SAMPLES = 10252  #: When an acquisition encounters unread data in the buffer, the acquisition continues and overwrites the unread samples with new ones. You can read the new samples by setting **relative_to** to **MOST_RECENT_SAMP** and setting **offset** to the appropriate number of samples.
+    OVERWRITE_UNREAD_SAMPLES = 10252  #: When an acquisition encounters unread data in the buffer, the acquisition continues and overwrites the unread samples with new ones. You can read the new samples by setting **relative_to** to **ReadRelativeTo.MOST_RECENT_SAMPLE** and setting **offset** to the appropriate number of samples.
     DO_NOT_OVERWRITE_UNREAD_SAMPLES = 10159  #: The acquisition stops when it encounters a sample in the buffer that you have not read.
 
 
