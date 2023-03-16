@@ -19,7 +19,7 @@ WAIT_INFINITELY = -1.0
 % for name, enum_metadata in enums.items():
 class ${name}(Enum):
 %   for value in enum_metadata['values']:
-    ${value['name']} = ${value['value']}${enum_helpers.get_enum_value_docstring(value)}
+    ${value['name']} = ${value['value']}${enum_helpers.get_enum_value_docstring(value['documentation']['description'])}
 %   endfor
 
 
