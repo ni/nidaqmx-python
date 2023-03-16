@@ -1,7 +1,7 @@
+"""Codegenerator for generating DAQmx functions."""
 import logging
 import os
 import os.path
-
 from pathlib import Path
 
 import codegen.metadata as scrapigen_metadata
@@ -42,10 +42,8 @@ def generate(dest):
     codegen_metadata = _get_metadata()
 
     for info in codegen_metadata["script_info"]["modules"]:
-        _generate_file(
-            codegen_metadata, info["templateFile"], dest / info["relativeOutputPath"]
-        )
-    
-    _generate_file(codegen_metadata["enums"],"error_codes.mako", dest / "error_codes.py")
+        _generate_file(codegen_metadata, info["templateFile"], dest / info["relativeOutputPath"])
 
-    _generate_file(codegen_metadata,"constants.mako", dest / "constants.py")
+    _generate_file(codegen_metadata["enums"], "error_codes.mako", dest / "error_codes.py")
+
+    _generate_file(codegen_metadata, "constants.mako", dest / "constants.py")

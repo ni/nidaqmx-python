@@ -1,5 +1,4 @@
 """This contains the helper methods used in attribute generation."""
-import logging
 
 from codegen.properties.attribute import Attribute
 

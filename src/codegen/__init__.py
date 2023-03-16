@@ -1,3 +1,4 @@
+"""NI-DAQmx code generator."""
 import logging
 
 
