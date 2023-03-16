@@ -1,18 +1,27 @@
-import pytest
-import nidaqmx.system
+"""Fixtures used in the DAQmx tests."""
 from enum import Enum
+
+import pytest
+
+import nidaqmx.system
 from nidaqmx.constants import ProductCategory, UsageTypeAI
 
 
 class Error(Exception):
+    """Base error class."""
+
     pass
 
 
 class NoFixtureDetectedError(Error):
+    """Custom error class when no fixtures are available."""
+
     pass
 
 
 class DeviceType(Enum):
+    """Device Type."""
+
     ANY = (-1,)
     REAL = (0,)
     SIMULATED = 1
@@ -48,21 +57,25 @@ def _x_series_device(device_type):
 
 @pytest.fixture(scope="module")
 def any_x_series_device():
+    """Gets any x series device information."""
     return _x_series_device(DeviceType.ANY)
 
 
 @pytest.fixture(scope="module")
 def real_x_series_device():
+    """Gets the real x series device information."""
     return _x_series_device(DeviceType.REAL)
 
 
 @pytest.fixture(scope="module")
 def sim_x_series_device():
+    """Gets simulated x series device information."""
     return _x_series_device(DeviceType.SIMULATED)
 
 
 @pytest.fixture(scope="module")
 def bridge_device():
+    """Gets bridge device information."""
     system = nidaqmx.system.System.local()
 
     for device in system.devices:
@@ -79,10 +92,15 @@ def bridge_device():
 
 @pytest.fixture(scope="module")
 def sim_ts_power_device():
+    """Gets simulated power device information."""
     system = nidaqmx.system.System.local()
 
     for device in system.devices:
-        if device.dev_is_simulated and device.product_category == ProductCategory.TEST_SCALE_MODULE and UsageTypeAI.POWER in device.ai_meas_types:
+        if (
+            device.dev_is_simulated
+            and device.product_category == ProductCategory.TEST_SCALE_MODULE
+            and UsageTypeAI.POWER in device.ai_meas_types
+        ):
             return device
 
     pytest.skip(
@@ -95,10 +113,15 @@ def sim_ts_power_device():
 
 @pytest.fixture(scope="module")
 def sim_ts_voltage_device():
+    """Gets simulated voltage device information."""
     system = nidaqmx.system.System.local()
 
     for device in system.devices:
-        if device.dev_is_simulated and device.product_category == ProductCategory.TEST_SCALE_MODULE and UsageTypeAI.VOLTAGE in device.ai_meas_types:
+        if (
+            device.dev_is_simulated
+            and device.product_category == ProductCategory.TEST_SCALE_MODULE
+            and UsageTypeAI.VOLTAGE in device.ai_meas_types
+        ):
             return device
 
     pytest.skip(
@@ -111,11 +134,16 @@ def sim_ts_voltage_device():
 
 @pytest.fixture(scope="module")
 def sim_ts_power_devices():
+    """Gets simulated power devices information."""
     system = nidaqmx.system.System.local()
 
     devices = []
     for device in system.devices:
-        if device.dev_is_simulated and device.product_category == ProductCategory.TEST_SCALE_MODULE and UsageTypeAI.POWER in device.ai_meas_types:
+        if (
+            device.dev_is_simulated
+            and device.product_category == ProductCategory.TEST_SCALE_MODULE
+            and UsageTypeAI.POWER in device.ai_meas_types
+        ):
             devices.append(device)
             if len(devices) == 2:
                 return devices
@@ -130,6 +158,7 @@ def sim_ts_power_devices():
 
 @pytest.fixture(scope="module")
 def multi_threading_test_devices():
+    """Gets multi threading test devices information."""
     system = nidaqmx.system.System.local()
 
     devices = []

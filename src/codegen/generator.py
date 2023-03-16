@@ -4,13 +4,12 @@ import os.path
 
 from pathlib import Path
 
+import codegen.metadata as scrapigen_metadata
 from mako.lookup import TemplateLookup
 from mako.template import Template
 
-import codegen.metadata as scrapigen_metadata
 
 _logger = logging.getLogger(__name__)
-_logger.addHandler(logging.NullHandler())
 
 
 def _get_metadata():
@@ -35,6 +34,7 @@ def _generate_file(metadata, template_file_name, output_path):
 
 
 def generate(dest):
+    """Generates the DAQmx classes using scrapigen metadata."""
     _logger.info(f"Generating files into {dest}")
 
     os.makedirs(dest, exist_ok=True)

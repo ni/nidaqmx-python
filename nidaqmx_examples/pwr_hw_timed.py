@@ -1,3 +1,4 @@
+"""Examples for hw timed power operation."""
 import pprint
 
 import nidaqmx
@@ -19,12 +20,12 @@ with nidaqmx.Task() as task:
     number_of_samples_per_channel = 10
 
     chan = task.ai_channels.add_ai_power_chan(
-        "TS1Mod1/power", voltage_setpoint, current_setpoint, output_enable)
+        "TS1Mod1/power", voltage_setpoint, current_setpoint, output_enable
+    )
     chan.pwr_idle_output_behavior = idle_output_behavior
     chan.pwr_remote_sense = remote_sense
-    
-    task.timing.cfg_samp_clk_timing(
-        sample_rate, sample_mode=AcquisitionType.CONTINUOUS)
+
+    task.timing.cfg_samp_clk_timing(sample_rate, sample_mode=AcquisitionType.CONTINUOUS)
 
     task.start()
 
@@ -38,7 +39,7 @@ with nidaqmx.Task() as task:
 
             data = task.read(number_of_samples_per_channel=number_of_samples_per_channel)
 
-            print(f'Data:')
+            print(f"Data:")
             pp.pprint(data)
 
             print(f"output state: {chan.pwr_output_state}")

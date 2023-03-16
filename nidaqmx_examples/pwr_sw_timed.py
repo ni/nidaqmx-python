@@ -1,8 +1,9 @@
+"""Examples for sw timed power operation."""
 import pprint
 import time
 
 import nidaqmx
-from nidaqmx.constants import AcquisitionType, PowerIdleOutputBehavior, Sense
+from nidaqmx.constants import PowerIdleOutputBehavior, Sense
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -16,7 +17,8 @@ with nidaqmx.Task() as task:
     remote_sense = Sense.LOCAL
 
     chan = task.ai_channels.add_ai_power_chan(
-        "TS1Mod1/power", voltage_setpoint, current_setpoint, output_enable)
+        "TS1Mod1/power", voltage_setpoint, current_setpoint, output_enable
+    )
     chan.pwr_idle_output_behavior = idle_output_behavior
     chan.pwr_remote_sense = remote_sense
 
@@ -32,7 +34,7 @@ with nidaqmx.Task() as task:
 
             data = task.read()
 
-            print(f'Data:')
+            print(f"Data:")
             pp.pprint(data)
 
             print(f"output state: {chan.pwr_output_state}")

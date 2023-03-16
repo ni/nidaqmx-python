@@ -1,5 +1,11 @@
+"""Structure for storing parameter metadata from scrapigen."""
+
+
 class Parameter:
+    """Structure for storing parameter metadata from scrapigen."""
+
     def __init__(self, name, parameter_metadata):
+        """Structure for storing parameter metadata from scrapigen."""
         self._handle_name = name
         self._accessor = parameter_metadata["accessor"]
         self._ctypes_data_type = parameter_metadata["ctypes_data_type"]
@@ -7,15 +13,12 @@ class Parameter:
 
     @property
     def handle_name(self):
-        """
-        str: The key of the parameter.
-        """
+        """str: The key of the parameter."""
         return self._handle_name
 
     @property
     def accessor(self):
-        """
-        str: Defines how to access the handle parameter.
+        """str: Defines how to access the handle parameter.
 
         This value would be directly substituted when trying to use the handle parameter
         """
@@ -23,8 +26,7 @@ class Parameter:
 
     @property
     def ctypes_data_type(self):
-        """
-        str: Defines the ctypes data_type of the handle parameter.
+        """str: Defines the ctypes data_type of the handle parameter.
 
         This is used when mentioning the data_type of the handle parameter.
         """
@@ -32,8 +34,7 @@ class Parameter:
 
     @property
     def cvi_name(self):
-        """
-        str: The cvi name of the parameter.
+        """str: The cvi name of the parameter.
 
         This is kept for the gRPC client implementation.
         """

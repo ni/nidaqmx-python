@@ -1,4 +1,6 @@
+"""Examples for hw timed power stream operation."""
 import pprint
+
 import numpy
 
 import nidaqmx
@@ -21,12 +23,12 @@ with nidaqmx.Task() as task:
     number_of_samples_per_channel = 100
 
     chan = task.ai_channels.add_ai_power_chan(
-        "TS1Mod1/power", voltage_setpoint, current_setpoint, output_enable)
+        "TS1Mod1/power", voltage_setpoint, current_setpoint, output_enable
+    )
     chan.pwr_idle_output_behavior = idle_output_behavior
     chan.pwr_remote_sense = remote_sense
-    
-    task.timing.cfg_samp_clk_timing(
-        sample_rate, sample_mode=AcquisitionType.CONTINUOUS)
+
+    task.timing.cfg_samp_clk_timing(sample_rate, sample_mode=AcquisitionType.CONTINUOUS)
 
     stream = PowerSingleChannelReader(task.in_stream)
     voltage_data = numpy.zeros(number_of_samples_per_channel, dtype=numpy.float64)
@@ -42,12 +44,16 @@ with nidaqmx.Task() as task:
             # * pwr_current_setpoint
             # * pwr_output_enable
 
-            stream.read_many_sample(voltage_data, current_data, number_of_samples_per_channel=number_of_samples_per_channel)
+            stream.read_many_sample(
+                voltage_data,
+                current_data,
+                number_of_samples_per_channel=number_of_samples_per_channel,
+            )
 
-            print(f'Voltage Data:')
+            print(f"Voltage Data:")
             pp.pprint(voltage_data)
 
-            print(f'Current Data:')
+            print(f"Current Data:")
             pp.pprint(current_data)
 
             print(f"output state: {chan.pwr_output_state}")

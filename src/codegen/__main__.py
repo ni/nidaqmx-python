@@ -1,9 +1,9 @@
+"""DAQmx code generator."""
 import logging
 import pathlib
 import sys
-import click
-from collections import namedtuple
 
+import click
 import codegen.generator as generator
 
 _logger = logging.getLogger(__name__)
@@ -31,6 +31,7 @@ def _get_logging_level(verbose, quiet):
 @click.option("--verbose", type=int, default=0, required=False)
 @click.option("--quiet", type=int, default=0, required=False)
 def main(dest, verbose, quiet):
+    """Starts the code generator based on the out folders."""
     logging_level = _get_logging_level(verbose, quiet)
 
     log_format = "[%(relativeCreated)6d] %(levelname)-5s %(funcName)s: %(message)s"
