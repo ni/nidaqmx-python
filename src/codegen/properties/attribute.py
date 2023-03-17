@@ -52,11 +52,12 @@ class Attribute:
         self._has_explicit_write_buffer_size = attribute_metadata.get(
             "has_explicit_write_buffer_size", False
         )
-        if "enum" in attribute_metadata:
-            self._enum = self.merge_enums(attribute_metadata["enum"], enum_merge_set)
+        if "python_enum" in attribute_metadata:
+            self._enum = attribute_metadata["python_enum"]
             self._is_enum = True
-        elif "python_enum" in attribute_metadata:
-            self._python_enum = attribute_metadata["python_enum"]
+        elif "enum" in attribute_metadata:
+            self._enum = self.merge_enums(
+                attribute_metadata["enum"], enum_merge_set)
             self._is_enum = True
         self._object_type = attribute_metadata.get("python_object_type")
 
@@ -136,7 +137,7 @@ class Attribute:
         This key will only be available for an enum type attribute.
         During code generation an attribute would be considered as an enum if it contains this key.
         """
-        return self._enum if hasattr(self, "_enum") else self._python_enum
+        return self._enum
 
     @property
     def handle_parameters(self):
