@@ -686,7 +686,7 @@ enums = {
         'values': [
             {
                 'documentation': {
-                    'description': ' Sensor is a full bridge. If you set DAQmx_AI_Excit_UseForScaling to True,  NI-DAQmx divides the measurement by the excitation value. Many sensors scale  data to native units using scaling of volts per excitation.',
+                    'description': ' Sensor is a full bridge. If you set DAQmx_AI_Excit_UseForScaling to TRUE,  NI-DAQmx divides the measurement by the excitation value. Many sensors scale  data to native units using scaling of volts per excitation.',
                     'python_description': 'Sensor is a full bridge. If you set **ai_excit_use_for_scaling** to True, NI-DAQmx divides the measurement by the excitation value. Many sensors scale data to native units using scaling of volts per excitation.'
                 },
                 'name': 'FULL_BRIDGE',
@@ -694,7 +694,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Sensor is a half bridge. If you set DAQmx_AI_Excit_UseForScaling to True,  NI-DAQmx divides the measurement by the excitation value. Many sensors scale  data to native units using scaling of volts per excitation.',
+                    'description': ' Sensor is a half bridge. If you set DAQmx_AI_Excit_UseForScaling to TRUE,  NI-DAQmx divides the measurement by the excitation value. Many sensors scale  data to native units using scaling of volts per excitation.',
                     'python_description': 'Sensor is a half bridge. If you set **ai_excit_use_for_scaling** to True, NI-DAQmx divides the measurement by the excitation value. Many sensors scale data to native units using scaling of volts per excitation.'
                 },
                 'name': 'HALF_BRIDGE',
@@ -702,7 +702,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Sensor is a quarter bridge. If you set DAQmx_AI_Excit_UseForScaling to True,  NI-DAQmx divides the measurement by the excitation value. Many sensors scale  data to native units using scaling of volts per excitation.',
+                    'description': ' Sensor is a quarter bridge. If you set DAQmx_AI_Excit_UseForScaling to TRUE,  NI-DAQmx divides the measurement by the excitation value. Many sensors scale  data to native units using scaling of volts per excitation.',
                     'python_description': 'Sensor is a quarter bridge. If you set **ai_excit_use_for_scaling** to True, NI-DAQmx divides the measurement by the excitation value. Many sensors scale data to native units using scaling of volts per excitation.'
                 },
                 'name': 'QUARTER_BRIDGE',
@@ -16947,7 +16947,8 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Map an list of pre-scaled values to an list of corresponding scaled values,  with all other values scaled proportionally.'
+                    'description': ' Map an array of pre-scaled values to an array of corresponding scaled values,  with all other values scaled proportionally.',
+                    'python_description': 'Map a list of pre-scaled values to a list of corresponding scaled values, with all other values scaled proportionally.'
                 },
                 'name': 'TABLE',
                 'value': 10450
@@ -16966,7 +16967,8 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Map an list of prescaled values to an list of corresponding scaled values,  with all other values scaled proportionally.'
+                    'description': ' Map an array of prescaled values to an array of corresponding scaled values,  with all other values scaled proportionally.',
+                    'python_description': 'Map a list of prescaled values to a list of corresponding scaled values, with all other values scaled proportionally.'
                 },
                 'name': 'TABLE',
                 'value': 10450
@@ -16985,7 +16987,8 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Map an list of prescaled values to an list of corresponding scaled values,  with all other values scaled proportionally.'
+                    'description': ' Map an array of prescaled values to an array of corresponding scaled values,  with all other values scaled proportionally.',
+                    'python_description': 'Map a list of prescaled values to a list of corresponding scaled values, with all other values scaled proportionally.'
                 },
                 'name': 'TABLE',
                 'value': 10450
@@ -17015,7 +17018,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': ' Map an list of electrical values to an list of corresponding physical values,  with all other values scaled proportionally. If you specify this scaling type,  DAQmx_AI_Max and DAQmx_AI_Min must be within the smallest and largest physical  values. For any data outside those endpoints, NI-DAQmx coerces that data to the  endpoints.',
+                    'description': ' Map an array of electrical values to an array of corresponding physical values,  with all other values scaled proportionally. If you specify this scaling type,  DAQmx_AI_Max and DAQmx_AI_Min must be within the smallest and largest physical  values. For any data outside those endpoints, NI-DAQmx coerces that data to the  endpoints.',
                     'python_description': 'Map a list of electrical values to a list of corresponding physical values, with all other values scaled proportionally. If you specify this scaling type, **ai_max** and **ai_min** must be within the smallest and largest physical values. For any data outside those endpoints, NI-DAQmx coerces that data to the endpoints.'
                 },
                 'name': 'TABLE',
