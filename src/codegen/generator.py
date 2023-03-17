@@ -10,7 +10,6 @@ from mako.template import Template
 
 
 _logger = logging.getLogger(__name__)
-_logger.addHandler(logging.NullHandler())
 
 
 def _get_metadata():
@@ -44,3 +43,7 @@ def generate(dest):
 
     for info in codegen_metadata["script_info"]["modules"]:
         _generate_file(codegen_metadata, info["templateFile"], dest / info["relativeOutputPath"])
+
+    _generate_file(codegen_metadata["enums"], "error_codes.mako", dest / "error_codes.py")
+
+    _generate_file(codegen_metadata, "constants.mako", dest / "constants.py")

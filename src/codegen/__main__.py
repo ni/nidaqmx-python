@@ -7,7 +7,6 @@ import click
 import codegen.generator as generator
 
 _logger = logging.getLogger(__name__)
-_logger.addHandler(logging.NullHandler())
 
 
 def _get_logging_level(verbose, quiet):

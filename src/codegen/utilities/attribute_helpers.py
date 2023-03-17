@@ -1,10 +1,6 @@
 """This contains the helper methods used in attribute generation."""
-import logging
 
 from codegen.properties.attribute import Attribute
-
-_logger = logging.getLogger(__name__)
-_logger.addHandler(logging.NullHandler())
 
 EXCLUDED_ATTRIBUTES = [
     "AI_CHAN_CAL_HAS_VALID_CAL_INFO",
