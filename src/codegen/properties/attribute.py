@@ -56,8 +56,7 @@ class Attribute:
             self._enum = attribute_metadata["python_enum"]
             self._is_enum = True
         elif "enum" in attribute_metadata:
-            self._enum = self.merge_enums(
-                attribute_metadata["enum"], enum_merge_set)
+            self._enum = self.merge_enums(attribute_metadata["enum"], enum_merge_set)
             self._is_enum = True
         self._object_type = attribute_metadata.get("python_object_type")
 
