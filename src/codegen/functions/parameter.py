@@ -1,5 +1,6 @@
 """Structure for storing function parameter metadata from scrapigen."""
 
+
 class Parameter:
     """Structure for storing function parameter metadata from scrapigen."""
 
@@ -14,7 +15,10 @@ class Parameter:
         self._is_list = parameter_metadata.get("is_list", False)
         self._has_explicit_buffer_size = parameter_metadata.get("has_explicit_buffer_size", False)
         self._optional = parameter_metadata.get("optional", False)
-        self._default = parameter_metadata.get("default", "")
+        self._has_default = False
+        if "default" in parameter_metadata:
+            self._default = parameter_metadata.get("default")
+            self._has_default = True
         self._is_enum = False
         if "enum" in parameter_metadata:
             self._enum = parameter_metadata.get("enum")
@@ -74,3 +78,8 @@ class Parameter:
     def default(self):
         """str: The default value of the parameter."""
         return self._default
+
+    @property
+    def has_default(self):
+        """bool: Defines if the parameter has a default value."""
+        return self._has_default

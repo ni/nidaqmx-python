@@ -16,7 +16,9 @@ class Function:
         self._calling_convention = function_metadata["calling_convention"]
         self._return_type = function_metadata["returns"]
         if "handle_parameter" in function_metadata:
-            self._handle_parameters = Parameter("handle_parameter", function_metadata["handle_parameter"])
+            self._handle_parameters = Parameter(
+                "handle_parameter", function_metadata["handle_parameter"]
+            )
 
         if "parameters" in function_metadata:
             self._parameters = [FunctionParameter(p) for p in function_metadata["parameters"]]
@@ -34,7 +36,7 @@ class Function:
     def function_name(self):
         """str: The name of the function."""
         return self._function_name
-    
+
     @property
     def c_function_name(self):
         """str: The name of the c function to be called when using the function."""
