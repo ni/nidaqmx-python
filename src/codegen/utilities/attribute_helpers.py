@@ -58,7 +58,12 @@ ATTRIBUTE_ENUM_MERGE_SET = {
         "DataTransferMechanism",
         "DataTransferActiveTransferMode",
     ],
-    "TerminalConfiguration": ["TerminalConfiguration", "InputTermCfg", "OutputTermCfg", "InputTermCfg2"],
+    "TerminalConfiguration": [
+        "TerminalConfiguration",
+        "InputTermCfg",
+        "OutputTermCfg",
+        "InputTermCfg2",
+    ],
     "CountDirection": ["CountDirection1"],
     "FrequencyUnits": ["FrequencyUnits2", "FrequencyUnits3"],
     "Edge": ["Edge1"],
@@ -68,7 +73,7 @@ ATTRIBUTE_ENUM_MERGE_SET = {
     "EncoderZIndexPhase": ["EncoderZIndexPhase1"],
     "Level": ["Level1"],
     "UsageTypeCO": ["COOutputType"],
-    "ActiveOrInactiveEdgeSelection": ["SampleClockActiveOrInactiveEdgeSelection"]
+    "ActiveOrInactiveEdgeSelection": ["SampleClockActiveOrInactiveEdgeSelection"],
 }
 
 DEPRECATED_ATTRIBUTES = {
