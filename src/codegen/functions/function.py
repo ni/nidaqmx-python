@@ -24,7 +24,7 @@ class Function:
                 self._parameters.append(FunctionParameter(parameter))
 
         if "adaptor_parameter" in function_metadata:
-            self._adaptor_parameter = AdaptorParameter(function_metadata("adaptor_parameter"))
+            self._adaptor_parameter = AdaptorParameter(function_metadata["adaptor_parameter"])
 
         if "cname" in function_metadata:
             assert function_metadata["cname"].startswith("DAQmx")

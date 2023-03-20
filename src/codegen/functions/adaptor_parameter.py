@@ -6,8 +6,8 @@ class AdaptorParameter:
 
     def __init__(self, adaptor_parameter):
         """Structure for storing adaptor parameter from scrapigen."""
-        self._adaptor = adaptor_parameter["adaptor"]
-        self._data_type = adaptor_parameter["data_type"]
+        self._adaptor = adaptor_parameter["python_adaptor"]
+        self._data_type = adaptor_parameter["python_data_type"]
         self._direction = adaptor_parameter["direction"]
         self._description = adaptor_parameter["description"]
 
