@@ -20,7 +20,7 @@ class Function:
 
         if "parameters" in function_metadata:
             self._parameters = []
-            for parameter in function_metadata["parameters"].items():
+            for parameter in function_metadata["parameters"]:
                 self._parameters.append(FunctionParameter(parameter))
 
         if "adaptor_parameter" in function_metadata:
