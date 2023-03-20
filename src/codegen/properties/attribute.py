@@ -1,7 +1,9 @@
+"""Structure for storing attribute metadata from scrapigen."""
 from codegen.properties.parameter import Parameter
 
 
 class Attribute:
+    """Structure for storing attribute metadata from scrapigen."""
 
     ATTRIBUTE_CHANGE_SET = {
         "ai_custom_scale_name" : "ai_custom_scale", 
@@ -9,11 +11,12 @@ class Attribute:
         }
 
     def __init__(self, id, attribute_metadata, enum_merge_set):
+        """Structure for storing attribute metadata from scrapigen."""
         self._id = id
         self._is_enum = False
         self._access = attribute_metadata["access"]
         attribute_name = attribute_metadata["name"].lower()
-        if  attribute_name in self.ATTRIBUTE_CHANGE_SET:
+        if attribute_name in self.ATTRIBUTE_CHANGE_SET:
             self._name = self.ATTRIBUTE_CHANGE_SET.get(attribute_name)
         else:
             self._name = attribute_name
@@ -22,9 +25,7 @@ class Attribute:
         self._ctypes_data_type = attribute_metadata["ctypes_data_type"]
         self._python_data_type = attribute_metadata["python_data_type"]
         self._python_description = attribute_metadata["python_description"]
-        self._has_explicit_read_buffer_size = attribute_metadata[
-            "has_explicit_read_buffer_size"
-        ]
+        self._has_explicit_read_buffer_size = attribute_metadata["has_explicit_read_buffer_size"]
         self._bitfield_enum = attribute_metadata.get("bitfield_enum", None)
         self._object_module_location = attribute_metadata.get("python_object_module_location", None)
         self._is_list = attribute_metadata["is_list"]
@@ -38,9 +39,7 @@ class Attribute:
         if "handle_parameters" in attribute_metadata:
             for name, parameter_data in attribute_metadata["handle_parameters"].items():
                 self._handle_parameters.append(Parameter(name, parameter_data))
-            self._handle_parameters = sorted(
-                self._handle_parameters, key=lambda x: x.accessor
-            )
+            self._handle_parameters = sorted(self._handle_parameters, key=lambda x: x.accessor)
         self._has_explicit_write_buffer_size = attribute_metadata.get(
             "has_explicit_write_buffer_size", False
         )
@@ -56,7 +55,10 @@ class Attribute:
         self._has_explicit_write_buffer_size = attribute_metadata.get(
             "has_explicit_write_buffer_size", False
         )
-        if "enum" in attribute_metadata:
+        if "python_enum" in attribute_metadata:
+            self._enum = attribute_metadata["python_enum"]
+            self._is_enum = True
+        elif "enum" in attribute_metadata:
             self._enum = self.merge_enums(attribute_metadata["enum"], enum_merge_set)
         if "python_enum" in attribute_metadata:
             self._enum = self.merge_enums(attribute_metadata["python_enum"], enum_merge_set)
@@ -65,8 +67,7 @@ class Attribute:
 
     @property
     def id(self):
-        """
-        str: Represents a unique integer value that represents an attribute.
+        """str: Represents a unique integer value that represents an attribute.
 
         This is the key for the attribute itself
         """
@@ -74,18 +75,16 @@ class Attribute:
 
     @property
     def access(self):
-        """
-        str: Specifies if the attribute is read/write.
+        """str: Specifies if the attribute is read/write.
 
-        This is used to decide the generation of getters and setters of a property representing the attribute.
-        The possible values can be read, write or read-write.
+        This is used to decide the generation of getters and setters of a property representing
+        the attribute. The possible values can be read, write or read-write.
         """
         return self._access
 
     @property
     def name(self):
-        """
-        str: Name of the attribute.
+        """str: Name of the attribute.
 
         This name is used to generate the property name.
         """
@@ -93,8 +92,7 @@ class Attribute:
 
     @property
     def resettable(self):
-        """
-        bool: This attribute can be reset back to default.
+        """bool: This attribute can be reset back to default.
 
         This is also used to decide if a deleter has to be generated for the property.
         """
@@ -102,8 +100,7 @@ class Attribute:
 
     @property
     def type(self):
-        """
-        str: Data type of the attribute.
+        """str: Data type of the attribute.
 
         Here `enum` types are always represented as integers.
         """
@@ -111,17 +108,14 @@ class Attribute:
 
     @property
     def object_module_location(self):
-        """
-        str: if return type is an object, its corresponding location will be returned
-        """
+        """str: if return type is an object, its corresponding location will be returned."""
         return self._object_module_location
 
     @property
     def has_explicit_write_buffer_size(self):
-        """
-        bool: Specifies if an explicit write buffer size has to be provided when making the c function calls for the attribute.
+        """bool: Specifies if an explicit write buffer size has to be provided.
 
-        If True then an additional uint parameter would be provided when calling the c function to mention the buffer size.
+        If True then an additional uint parameter would be provided.
         """
         if not hasattr(self, "_has_explicit_write_buffer_size"):
             return None
@@ -129,8 +123,7 @@ class Attribute:
 
     @property
     def object_has_factory(self):
-        """
-        bool: If attribute is of an object type, this specifies if it uses a factory method.
+        """bool: If attribute is of an object type, this specifies if it uses a factory method.
 
         If the value is `True` then the `_factory` method is used for instantiation of the object.
         """
@@ -138,15 +131,12 @@ class Attribute:
 
     @property
     def is_enum(self):
-        """
-        bool: Represents if the attribute is an enum or not.
-        """
+        """bool: Represents if the attribute is an enum or not."""
         return self._is_enum
 
     @property
     def enum(self):
-        """
-        str: The enum type the attribute represents.
+        """str: The enum type the attribute represents.
 
         This key will only be available for an enum type attribute.
         During code generation an attribute would be considered as an enum if it contains this key.
@@ -155,42 +145,36 @@ class Attribute:
 
     @property
     def handle_parameters(self):
-        """
-        str: A list of parameters that represent handles that the attribute is part of.
+        """str: A list of parameters that represent handles that the attribute is part of.
 
-        These are used when defining the c function parameters, these are usually the first set of inputs to the function.
+        These are used when defining the c function parameters.
         """
         return self._handle_parameters
 
     @property
     def object_constructor_params(self):
-        """
-        str: This contains the additional parameters that needs to included in the object creation.
+        """str: This contains the additional parameters to be included in the object creation.
 
-        During python code generation, these parameters are added as initial inputs when creating the object.
+        These parameters are added as inputs when creating the object.
         """
         return self._object_constructor_params
 
     @property
     def python_class_name(self):
-        """
-        str: The name of the python class this attribute belongs to.
+        """str: The name of the python class this attribute belongs to.
 
-        This is used to determine which attribute goes to which class when generating the python code.
+        This is map the attribute to the class which it belongs to.
         """
         return self._python_class_name
 
     @property
     def is_object(self):
-        """
-        str: This is used to determine if the value has to be used as an object in getters and setters.
-        """
+        """str: This is used to determine if the value has to be used as an object."""
         return self._is_object
 
     @property
     def object_type(self):
-        """
-        str: The name of the object.
+        """str: The name of the object.
 
         During code generation, this is used to instantiate the object.
         """
@@ -198,33 +182,29 @@ class Attribute:
 
     @property
     def c_function_name(self):
-        """
-        str: The name of the c function to be called when using the attribute.
+        """str: The name of the c function to be called when using the attribute.
 
-        This name will be prefixed with `DAQmxSet', `DAQmxGet` and `DAQmxReset` for using in getters, setters and deleters respectively.
+        This name will be prefixed with `DAQmxSet', `DAQmxGet` and `DAQmxReset`
+        for using in getters, setters and deleters respectively.
         """
         return self._c_function_name
 
     @property
     def calling_convention(self):
-        """
-        str: The calling convention to be followed when using the c functions.
-        """
+        """str: The calling convention to be followed when using the c functions."""
         return self._calling_convention
 
     @property
     def is_list(self):
-        """
-        bool: Determines if the attribute is of type list or not
-        """
+        """bool: Determines if the attribute is of type list or not."""
         return self._is_list
 
     @property
     def bitfield_enum(self):
-        """
-        str: The name of the bitfield enum that the attribute represents
+        """str: The name of the bitfield enum that the attribute represents.
 
-        During code generation in python, this will be used to decide if the `enum_to_bitfield_list` method needs to called in the getter when returning the value.
+        During code generation in python, this will be used to decide if the `enum_to_bitfield_list`
+        method needs to called in the getter when returning the value.
         """
         if self._bitfield_enum == "N/A":
             return None
@@ -232,20 +212,20 @@ class Attribute:
 
     @property
     def has_explicit_read_buffer_size(self):
-        """
-        bool: Specifies if an explicit read buffer size has to be provided when making the c function calls for the attribute.
+        """bool: Specifies if an explicit read buffer size has to be provided for the attribute.
 
-        If True then an additional uint parameter would be provided when calling the c function to mention the buffer size.
+        If True then an additional uint parameter would be provided when calling the
+        c function to mention the buffer size.
         """
         return self._has_explicit_read_buffer_size
 
     @property
     def read_buffer_size(self):
-        """
-        str: The read buffer size to be used when calling the c function.
+        """str: The read buffer size to be used when calling the c function.
 
         This key would only be applicable if `has_explicit_read_buffer_size` is `True`.
-        In case the `has_explicit_read_buffer_size` is `True` and this key is not present, then the ivi dance method is used to get the buffer size.
+        In case the `has_explicit_read_buffer_size` is `True` and this key is not present,
+        then the ivi dance method is used to get the buffer size.
         """
         if not hasattr(self, "_read_buffer_size"):
             return None
@@ -253,8 +233,7 @@ class Attribute:
 
     @property
     def python_description(self):
-        """
-        str: The description of the attribute.
+        """str: The description of the attribute.
 
         This will be used to define the docstring of the attribute when generating the code.
         """
@@ -262,8 +241,7 @@ class Attribute:
 
     @property
     def python_data_type(self):
-        """
-        str: The python data_type of the attribute.
+        """str: The python data_type of the attribute.
 
         Currently this is used in the generation of the doc string for the attribute.
         """
@@ -271,17 +249,18 @@ class Attribute:
 
     @property
     def ctypes_data_type(self):
-        """
-        str: The type of the attribute as per the ctypes definition in python.
+        """str: The type of the attribute as per the ctypes definition in python.
 
         This is used to provide the type of the attribute when making c function calls in python.
         """
         return self._ctypes_data_type
 
     def get_lib_importer_type(self):
+        """Returns the type of c function call."""
         return "windll" if self.calling_convention == "StdCall" else "cdll"
 
     def get_argument_types(self):
+        """Returns a list of argument parameter types."""
         argtypes = []
         for handle_parameter in self.handle_parameters:
             if handle_parameter.ctypes_data_type == "ctypes.c_char_p":
@@ -295,9 +274,7 @@ class Attribute:
             and self.bitfield_enum is None
         ):
             argtypes.append(
-                "wrapped_ndpointer(dtype={0}, flags=('C','W'))".format(
-                    self.ctypes_data_type
-                )
+                "wrapped_ndpointer(dtype={0}, flags=('C','W'))".format(self.ctypes_data_type)
             )
 
         elif self.ctypes_data_type == "ctypes.c_char_p":
@@ -312,6 +289,7 @@ class Attribute:
         return argtypes
 
     def get_handle_parameter_arguments(self):
+        """Returns the list of handle parameters for the attribute."""
         argtypes = []
         for handle_parameter in self.handle_parameters:
             if handle_parameter.ctypes_data_type == "ctypes.c_char_p":
@@ -321,6 +299,7 @@ class Attribute:
         return argtypes
 
     def merge_enums(self, enum_name, enum_merge_set):
+        """Replaces the scrapigen enum name with the actual name."""
         self._is_enum = True
         for actual_enum_name, alias_names in enum_merge_set.items():
             if enum_name in alias_names:
@@ -328,6 +307,7 @@ class Attribute:
         return enum_name
 
     def get_return_type(self):
+        """Gets the return type of attributes to be used in description."""
         constants_path = "nidaqmx.constants"
         if self.is_enum and not self.is_list:
             return ":class:`{0}.{1}`".format(constants_path, self.enum)

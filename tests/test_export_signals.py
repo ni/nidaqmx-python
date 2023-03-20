@@ -1,24 +1,25 @@
-import pytest
+"""Tests for validating export signals functionality."""
 import random
+
+import pytest
 
 import nidaqmx
 from nidaqmx.constants import Signal
-from nidaqmx.tests.fixtures import any_x_series_device
 from nidaqmx.tests.helpers import generate_random_seed
 from nidaqmx.tests.test_read_write import TestDAQmxIOBase
 
 
 class TestExportSignals(TestDAQmxIOBase):
-    """
-    Contains a collection of pytest tests that validate the export signals
-    functionality in the NI-DAQmx Python API.
+    """Contains a collection of pytest tests.
 
+    These validate the export signals functionality in the NI-DAQmx Python API.
     These tests use only a single X Series device by utilizing the internal
     loopback routes on the device.
     """
 
-    @pytest.mark.parametrize('seed', [generate_random_seed()])
+    @pytest.mark.parametrize("seed", [generate_random_seed()])
     def test_export_signals(self, any_x_series_device, seed):
+        """Test for validating export signals."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 

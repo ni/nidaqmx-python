@@ -1,4 +1,6 @@
+"""Example for reading singals for every n samples."""
 import pprint
+
 import nidaqmx
 from nidaqmx.constants import AcquisitionType
 
@@ -12,20 +14,18 @@ with nidaqmx.Task() as task:
 
     samples = []
 
-    def callback(task_handle, every_n_samples_event_type,
-                 number_of_samples, callback_data):
-        print('Every N Samples callback invoked.')
+    def callback(task_handle, every_n_samples_event_type, number_of_samples, callback_data):
+        """Callback function for reading singals."""
+        print("Every N Samples callback invoked.")
 
         samples.extend(task.read(number_of_samples_per_channel=1000))
 
         return 0
 
-    task.register_every_n_samples_acquired_into_buffer_event(
-        1000, callback)
+    task.register_every_n_samples_acquired_into_buffer_event(1000, callback)
 
     task.start()
 
-    input('Running task. Press Enter to stop and see number of '
-          'accumulated samples.\n')
+    input("Running task. Press Enter to stop and see number of " "accumulated samples.\n")
 
     print(len(samples))
