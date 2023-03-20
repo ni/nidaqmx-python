@@ -6,9 +6,9 @@ class Attribute:
     """Structure for storing attribute metadata from scrapigen."""
 
     ATTRIBUTE_CHANGE_SET = {
-        "ai_custom_scale_name" : "ai_custom_scale", 
-        "ao_custom_scale_name": "ao_custom_scale"
-        }
+        "ai_custom_scale_name": "ai_custom_scale",
+        "ao_custom_scale_name": "ao_custom_scale",
+    }
 
     def __init__(self, id, attribute_metadata, enum_merge_set):
         """Structure for storing attribute metadata from scrapigen."""
