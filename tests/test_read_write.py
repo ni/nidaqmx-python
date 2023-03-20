@@ -157,7 +157,6 @@ class TestAnalogReadWrite(TestDAQmxIOBase):
         loopback_channel_pair = random.choice(loopback_channel_pairs)
 
         with nidaqmx.Task() as write_task, nidaqmx.Task() as read_task, nidaqmx.Task() as sample_clk_task:
-
             # Use a counter output pulse train task as the sample clock source
             # for both the AI and AO tasks.
             sample_clk_task.co_channels.add_co_pulse_chan_freq(
