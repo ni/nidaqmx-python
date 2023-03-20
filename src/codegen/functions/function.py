@@ -19,9 +19,7 @@ class Function:
             self._handle_parameters = Parameter("handle_parameter", function_metadata["handle_parameter"])
 
         if "parameters" in function_metadata:
-            self._parameters = []
-            for parameter in function_metadata["parameters"]:
-                self._parameters.append(FunctionParameter(parameter))
+            self._parameters = [FunctionParameter(p) for p in function_metadata["parameters"]]
 
         if "adaptor_parameter" in function_metadata:
             self._adaptor_parameter = AdaptorParameter(function_metadata["adaptor_parameter"])
