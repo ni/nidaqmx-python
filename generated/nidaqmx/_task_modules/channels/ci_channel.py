@@ -1211,7 +1211,7 @@ class CIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ci_count_edges_count_reset_reset_cnt(self):
+    def ci_count_edges_count_reset_reset_count(self):
         """
         int: Specifies the value to reset the count to.
         """
@@ -1231,8 +1231,8 @@ class CIChannel(Channel):
 
         return val.value
 
-    @ci_count_edges_count_reset_reset_cnt.setter
-    def ci_count_edges_count_reset_reset_cnt(self, val):
+    @ci_count_edges_count_reset_reset_count.setter
+    def ci_count_edges_count_reset_reset_count(self, val):
         cfunc = lib_importer.windll.DAQmxSetCICountEdgesCountResetResetCount
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -1245,8 +1245,8 @@ class CIChannel(Channel):
             self._handle, self._name, val)
         check_for_error(error_code)
 
-    @ci_count_edges_count_reset_reset_cnt.deleter
-    def ci_count_edges_count_reset_reset_cnt(self):
+    @ci_count_edges_count_reset_reset_count.deleter
+    def ci_count_edges_count_reset_reset_count(self):
         cfunc = lib_importer.windll.DAQmxResetCICountEdgesCountResetResetCount
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3325,7 +3325,7 @@ class CIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ci_dup_count_prevention(self):
+    def ci_dup_count_prevent(self):
         """
         bool: Specifies whether to enable duplicate count prevention for
             the channel. Duplicate count prevention is enabled by
@@ -3348,8 +3348,8 @@ class CIChannel(Channel):
 
         return val.value
 
-    @ci_dup_count_prevention.setter
-    def ci_dup_count_prevention(self, val):
+    @ci_dup_count_prevent.setter
+    def ci_dup_count_prevent(self, val):
         cfunc = lib_importer.windll.DAQmxSetCIDupCountPrevent
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3361,8 +3361,8 @@ class CIChannel(Channel):
             self._handle, self._name, val)
         check_for_error(error_code)
 
-    @ci_dup_count_prevention.deleter
-    def ci_dup_count_prevention(self):
+    @ci_dup_count_prevent.deleter
+    def ci_dup_count_prevent(self):
         cfunc = lib_importer.windll.DAQmxResetCIDupCountPrevent
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -7758,7 +7758,7 @@ class CIChannel(Channel):
             terminal and when that signal has a higher frequency than
             the fastest onboard timebase. Setting this value disables
             duplicate count prevention unless you explicitly set
-            **ci_dup_count_prevention** to True.
+            **ci_dup_count_prevent** to True.
         """
         val = ctypes.c_uint()
 
@@ -8111,7 +8111,7 @@ class CIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ci_pulse_freq_starting_edge(self):
+    def ci_pulse_freq_start_edge(self):
         """
         :class:`nidaqmx.constants.Edge`: Specifies on which edge of the
             input signal to begin pulse measurement.
@@ -8132,8 +8132,8 @@ class CIChannel(Channel):
 
         return Edge(val.value)
 
-    @ci_pulse_freq_starting_edge.setter
-    def ci_pulse_freq_starting_edge(self, val):
+    @ci_pulse_freq_start_edge.setter
+    def ci_pulse_freq_start_edge(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetCIPulseFreqStartEdge
         if cfunc.argtypes is None:
@@ -8147,8 +8147,8 @@ class CIChannel(Channel):
             self._handle, self._name, val)
         check_for_error(error_code)
 
-    @ci_pulse_freq_starting_edge.deleter
-    def ci_pulse_freq_starting_edge(self):
+    @ci_pulse_freq_start_edge.deleter
+    def ci_pulse_freq_start_edge(self):
         cfunc = lib_importer.windll.DAQmxResetCIPulseFreqStartEdge
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -8628,7 +8628,7 @@ class CIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ci_pulse_ticks_starting_edge(self):
+    def ci_pulse_ticks_start_edge(self):
         """
         :class:`nidaqmx.constants.Edge`: Specifies on which edge of the
             input signal to begin pulse measurement.
@@ -8649,8 +8649,8 @@ class CIChannel(Channel):
 
         return Edge(val.value)
 
-    @ci_pulse_ticks_starting_edge.setter
-    def ci_pulse_ticks_starting_edge(self, val):
+    @ci_pulse_ticks_start_edge.setter
+    def ci_pulse_ticks_start_edge(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetCIPulseTicksStartEdge
         if cfunc.argtypes is None:
@@ -8664,8 +8664,8 @@ class CIChannel(Channel):
             self._handle, self._name, val)
         check_for_error(error_code)
 
-    @ci_pulse_ticks_starting_edge.deleter
-    def ci_pulse_ticks_starting_edge(self):
+    @ci_pulse_ticks_start_edge.deleter
+    def ci_pulse_ticks_start_edge(self):
         cfunc = lib_importer.windll.DAQmxResetCIPulseTicksStartEdge
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -9095,7 +9095,7 @@ class CIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ci_pulse_time_starting_edge(self):
+    def ci_pulse_time_start_edge(self):
         """
         :class:`nidaqmx.constants.Edge`: Specifies on which edge of the
             input signal to begin pulse measurement.
@@ -9116,8 +9116,8 @@ class CIChannel(Channel):
 
         return Edge(val.value)
 
-    @ci_pulse_time_starting_edge.setter
-    def ci_pulse_time_starting_edge(self, val):
+    @ci_pulse_time_start_edge.setter
+    def ci_pulse_time_start_edge(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetCIPulseTimeStartEdge
         if cfunc.argtypes is None:
@@ -9131,8 +9131,8 @@ class CIChannel(Channel):
             self._handle, self._name, val)
         check_for_error(error_code)
 
-    @ci_pulse_time_starting_edge.deleter
-    def ci_pulse_time_starting_edge(self):
+    @ci_pulse_time_start_edge.deleter
+    def ci_pulse_time_start_edge(self):
         cfunc = lib_importer.windll.DAQmxResetCIPulseTimeStartEdge
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -11724,389 +11724,6 @@ class CIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ci_velocity_a_input_dig_fltr_enable(self):
-        """
-        bool: Specifies whether to apply the pulse width filter to the
-            signal.
-        """
-        val = c_bool32()
-
-        cfunc = (lib_importer.windll.
-                 DAQmxGetCIVelocityEncoderAInputDigFltrEnable)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @ci_velocity_a_input_dig_fltr_enable.setter
-    def ci_velocity_a_input_dig_fltr_enable(self, val):
-        cfunc = (lib_importer.windll.
-                 DAQmxSetCIVelocityEncoderAInputDigFltrEnable)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ci_velocity_a_input_dig_fltr_enable.deleter
-    def ci_velocity_a_input_dig_fltr_enable(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderAInputDigFltrEnable)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ci_velocity_a_input_dig_fltr_min_pulse_width(self):
-        """
-        float: Specifies in seconds the minimum pulse width the digital
-            filter recognizes.
-        """
-        val = ctypes.c_double()
-
-        cfunc = (lib_importer.windll.
-                 DAQmxGetCIVelocityEncoderAInputDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @ci_velocity_a_input_dig_fltr_min_pulse_width.setter
-    def ci_velocity_a_input_dig_fltr_min_pulse_width(self, val):
-        cfunc = (lib_importer.windll.
-                 DAQmxSetCIVelocityEncoderAInputDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ci_velocity_a_input_dig_fltr_min_pulse_width.deleter
-    def ci_velocity_a_input_dig_fltr_min_pulse_width(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderAInputDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ci_velocity_a_input_dig_fltr_timebase_rate(self):
-        """
-        float: Specifies in hertz the rate of the pulse width filter
-            timebase. NI-DAQmx uses this value to compute settings for
-            the filter.
-        """
-        val = ctypes.c_double()
-
-        cfunc = (lib_importer.windll.
-                 DAQmxGetCIVelocityEncoderAInputDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @ci_velocity_a_input_dig_fltr_timebase_rate.setter
-    def ci_velocity_a_input_dig_fltr_timebase_rate(self, val):
-        cfunc = (lib_importer.windll.
-                 DAQmxSetCIVelocityEncoderAInputDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ci_velocity_a_input_dig_fltr_timebase_rate.deleter
-    def ci_velocity_a_input_dig_fltr_timebase_rate(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderAInputDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ci_velocity_a_input_dig_fltr_timebase_src(self):
-        """
-        str: Specifies the input terminal of the signal to use as the
-            timebase of the pulse width filter.
-        """
-        cfunc = (lib_importer.windll.
-                 DAQmxGetCIVelocityEncoderAInputDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_char_p, ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
-
-    @ci_velocity_a_input_dig_fltr_timebase_src.setter
-    def ci_velocity_a_input_dig_fltr_timebase_src(self, val):
-        cfunc = (lib_importer.windll.
-                 DAQmxSetCIVelocityEncoderAInputDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ci_velocity_a_input_dig_fltr_timebase_src.deleter
-    def ci_velocity_a_input_dig_fltr_timebase_src(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderAInputDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ci_velocity_a_input_logic_lvl_behavior(self):
-        """
-        :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
-            level behavior of the input terminal.
-        """
-        val = ctypes.c_int()
-
-        cfunc = (lib_importer.windll.
-                 DAQmxGetCIVelocityEncoderAInputLogicLvlBehavior)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return LogicLvlBehavior(val.value)
-
-    @ci_velocity_a_input_logic_lvl_behavior.setter
-    def ci_velocity_a_input_logic_lvl_behavior(self, val):
-        val = val.value
-        cfunc = (lib_importer.windll.
-                 DAQmxSetCIVelocityEncoderAInputLogicLvlBehavior)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ci_velocity_a_input_logic_lvl_behavior.deleter
-    def ci_velocity_a_input_logic_lvl_behavior(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderAInputLogicLvlBehavior)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ci_velocity_a_input_term(self):
-        """
-        str: Specifies the terminal to which signal A is connected.
-        """
-        cfunc = lib_importer.windll.DAQmxGetCIVelocityEncoderAInputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_char_p, ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
-
-    @ci_velocity_a_input_term.setter
-    def ci_velocity_a_input_term(self, val):
-        cfunc = lib_importer.windll.DAQmxSetCIVelocityEncoderAInputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ci_velocity_a_input_term.deleter
-    def ci_velocity_a_input_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCIVelocityEncoderAInputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ci_velocity_a_input_term_cfg(self):
-        """
-        :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
-            input terminal configuration.
-        """
-        val = ctypes.c_int()
-
-        cfunc = lib_importer.windll.DAQmxGetCIVelocityEncoderAInputTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return TerminalConfiguration(val.value)
-
-    @ci_velocity_a_input_term_cfg.setter
-    def ci_velocity_a_input_term_cfg(self, val):
-        val = val.value
-        cfunc = lib_importer.windll.DAQmxSetCIVelocityEncoderAInputTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ci_velocity_a_input_term_cfg.deleter
-    def ci_velocity_a_input_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCIVelocityEncoderAInputTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
     def ci_velocity_ang_encoder_pulses_per_rev(self):
         """
         int: Specifies the number of pulses the encoder generates per
@@ -12209,389 +11826,6 @@ class CIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ci_velocity_b_input_dig_fltr_enable(self):
-        """
-        bool: Specifies whether to apply the pulse width filter to the
-            signal.
-        """
-        val = c_bool32()
-
-        cfunc = (lib_importer.windll.
-                 DAQmxGetCIVelocityEncoderBInputDigFltrEnable)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @ci_velocity_b_input_dig_fltr_enable.setter
-    def ci_velocity_b_input_dig_fltr_enable(self, val):
-        cfunc = (lib_importer.windll.
-                 DAQmxSetCIVelocityEncoderBInputDigFltrEnable)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ci_velocity_b_input_dig_fltr_enable.deleter
-    def ci_velocity_b_input_dig_fltr_enable(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderBInputDigFltrEnable)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ci_velocity_b_input_dig_fltr_min_pulse_width(self):
-        """
-        float: Specifies in seconds the minimum pulse width the digital
-            filter recognizes.
-        """
-        val = ctypes.c_double()
-
-        cfunc = (lib_importer.windll.
-                 DAQmxGetCIVelocityEncoderBInputDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @ci_velocity_b_input_dig_fltr_min_pulse_width.setter
-    def ci_velocity_b_input_dig_fltr_min_pulse_width(self, val):
-        cfunc = (lib_importer.windll.
-                 DAQmxSetCIVelocityEncoderBInputDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ci_velocity_b_input_dig_fltr_min_pulse_width.deleter
-    def ci_velocity_b_input_dig_fltr_min_pulse_width(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderBInputDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ci_velocity_b_input_dig_fltr_timebase_rate(self):
-        """
-        float: Specifies in hertz the rate of the pulse width filter
-            timebase. NI-DAQmx uses this value to compute settings for
-            the filter.
-        """
-        val = ctypes.c_double()
-
-        cfunc = (lib_importer.windll.
-                 DAQmxGetCIVelocityEncoderBInputDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @ci_velocity_b_input_dig_fltr_timebase_rate.setter
-    def ci_velocity_b_input_dig_fltr_timebase_rate(self, val):
-        cfunc = (lib_importer.windll.
-                 DAQmxSetCIVelocityEncoderBInputDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ci_velocity_b_input_dig_fltr_timebase_rate.deleter
-    def ci_velocity_b_input_dig_fltr_timebase_rate(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderBInputDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ci_velocity_b_input_dig_fltr_timebase_src(self):
-        """
-        str: Specifies the input terminal of the signal to use as the
-            timebase of the pulse width filter.
-        """
-        cfunc = (lib_importer.windll.
-                 DAQmxGetCIVelocityEncoderBInputDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_char_p, ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
-
-    @ci_velocity_b_input_dig_fltr_timebase_src.setter
-    def ci_velocity_b_input_dig_fltr_timebase_src(self, val):
-        cfunc = (lib_importer.windll.
-                 DAQmxSetCIVelocityEncoderBInputDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ci_velocity_b_input_dig_fltr_timebase_src.deleter
-    def ci_velocity_b_input_dig_fltr_timebase_src(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderBInputDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ci_velocity_b_input_logic_lvl_behavior(self):
-        """
-        :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
-            level behavior of the input terminal.
-        """
-        val = ctypes.c_int()
-
-        cfunc = (lib_importer.windll.
-                 DAQmxGetCIVelocityEncoderBInputLogicLvlBehavior)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return LogicLvlBehavior(val.value)
-
-    @ci_velocity_b_input_logic_lvl_behavior.setter
-    def ci_velocity_b_input_logic_lvl_behavior(self, val):
-        val = val.value
-        cfunc = (lib_importer.windll.
-                 DAQmxSetCIVelocityEncoderBInputLogicLvlBehavior)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ci_velocity_b_input_logic_lvl_behavior.deleter
-    def ci_velocity_b_input_logic_lvl_behavior(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderBInputLogicLvlBehavior)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ci_velocity_b_input_term(self):
-        """
-        str: Specifies the terminal to which signal B is connected.
-        """
-        cfunc = lib_importer.windll.DAQmxGetCIVelocityEncoderBInputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_char_p, ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
-
-    @ci_velocity_b_input_term.setter
-    def ci_velocity_b_input_term(self, val):
-        cfunc = lib_importer.windll.DAQmxSetCIVelocityEncoderBInputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ci_velocity_b_input_term.deleter
-    def ci_velocity_b_input_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCIVelocityEncoderBInputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ci_velocity_b_input_term_cfg(self):
-        """
-        :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
-            input terminal configuration.
-        """
-        val = ctypes.c_int()
-
-        cfunc = lib_importer.windll.DAQmxGetCIVelocityEncoderBInputTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return TerminalConfiguration(val.value)
-
-    @ci_velocity_b_input_term_cfg.setter
-    def ci_velocity_b_input_term_cfg(self, val):
-        val = val.value
-        cfunc = lib_importer.windll.DAQmxSetCIVelocityEncoderBInputTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ci_velocity_b_input_term_cfg.deleter
-    def ci_velocity_b_input_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCIVelocityEncoderBInputTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
     def ci_velocity_div(self):
         """
         int: Specifies the value by which to divide the input signal.
@@ -12629,6 +11863,772 @@ class CIChannel(Channel):
     @ci_velocity_div.deleter
     def ci_velocity_div(self):
         cfunc = lib_importer.windll.DAQmxResetCIVelocityDiv
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ci_velocity_encoder_a_input_dig_fltr_enable(self):
+        """
+        bool: Specifies whether to apply the pulse width filter to the
+            signal.
+        """
+        val = c_bool32()
+
+        cfunc = (lib_importer.windll.
+                 DAQmxGetCIVelocityEncoderAInputDigFltrEnable)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ci_velocity_encoder_a_input_dig_fltr_enable.setter
+    def ci_velocity_encoder_a_input_dig_fltr_enable(self, val):
+        cfunc = (lib_importer.windll.
+                 DAQmxSetCIVelocityEncoderAInputDigFltrEnable)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ci_velocity_encoder_a_input_dig_fltr_enable.deleter
+    def ci_velocity_encoder_a_input_dig_fltr_enable(self):
+        cfunc = (lib_importer.windll.
+                 DAQmxResetCIVelocityEncoderAInputDigFltrEnable)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ci_velocity_encoder_a_input_dig_fltr_min_pulse_width(self):
+        """
+        float: Specifies in seconds the minimum pulse width the digital
+            filter recognizes.
+        """
+        val = ctypes.c_double()
+
+        cfunc = (lib_importer.windll.
+                 DAQmxGetCIVelocityEncoderAInputDigFltrMinPulseWidth)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ci_velocity_encoder_a_input_dig_fltr_min_pulse_width.setter
+    def ci_velocity_encoder_a_input_dig_fltr_min_pulse_width(self, val):
+        cfunc = (lib_importer.windll.
+                 DAQmxSetCIVelocityEncoderAInputDigFltrMinPulseWidth)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ci_velocity_encoder_a_input_dig_fltr_min_pulse_width.deleter
+    def ci_velocity_encoder_a_input_dig_fltr_min_pulse_width(self):
+        cfunc = (lib_importer.windll.
+                 DAQmxResetCIVelocityEncoderAInputDigFltrMinPulseWidth)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ci_velocity_encoder_a_input_dig_fltr_timebase_rate(self):
+        """
+        float: Specifies in hertz the rate of the pulse width filter
+            timebase. NI-DAQmx uses this value to compute settings for
+            the filter.
+        """
+        val = ctypes.c_double()
+
+        cfunc = (lib_importer.windll.
+                 DAQmxGetCIVelocityEncoderAInputDigFltrTimebaseRate)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ci_velocity_encoder_a_input_dig_fltr_timebase_rate.setter
+    def ci_velocity_encoder_a_input_dig_fltr_timebase_rate(self, val):
+        cfunc = (lib_importer.windll.
+                 DAQmxSetCIVelocityEncoderAInputDigFltrTimebaseRate)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ci_velocity_encoder_a_input_dig_fltr_timebase_rate.deleter
+    def ci_velocity_encoder_a_input_dig_fltr_timebase_rate(self):
+        cfunc = (lib_importer.windll.
+                 DAQmxResetCIVelocityEncoderAInputDigFltrTimebaseRate)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ci_velocity_encoder_a_input_dig_fltr_timebase_src(self):
+        """
+        str: Specifies the input terminal of the signal to use as the
+            timebase of the pulse width filter.
+        """
+        cfunc = (lib_importer.windll.
+                 DAQmxGetCIVelocityEncoderAInputDigFltrTimebaseSrc)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_char_p, ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = ctypes.create_string_buffer(temp_size)
+
+            size_or_code = cfunc(
+                self._handle, self._name, val, temp_size)
+
+            if is_string_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return val.value.decode('ascii')
+
+    @ci_velocity_encoder_a_input_dig_fltr_timebase_src.setter
+    def ci_velocity_encoder_a_input_dig_fltr_timebase_src(self, val):
+        cfunc = (lib_importer.windll.
+                 DAQmxSetCIVelocityEncoderAInputDigFltrTimebaseSrc)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ci_velocity_encoder_a_input_dig_fltr_timebase_src.deleter
+    def ci_velocity_encoder_a_input_dig_fltr_timebase_src(self):
+        cfunc = (lib_importer.windll.
+                 DAQmxResetCIVelocityEncoderAInputDigFltrTimebaseSrc)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ci_velocity_encoder_a_input_logic_lvl_behavior(self):
+        """
+        :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
+            level behavior of the input terminal.
+        """
+        val = ctypes.c_int()
+
+        cfunc = (lib_importer.windll.
+                 DAQmxGetCIVelocityEncoderAInputLogicLvlBehavior)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return LogicLvlBehavior(val.value)
+
+    @ci_velocity_encoder_a_input_logic_lvl_behavior.setter
+    def ci_velocity_encoder_a_input_logic_lvl_behavior(self, val):
+        val = val.value
+        cfunc = (lib_importer.windll.
+                 DAQmxSetCIVelocityEncoderAInputLogicLvlBehavior)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ci_velocity_encoder_a_input_logic_lvl_behavior.deleter
+    def ci_velocity_encoder_a_input_logic_lvl_behavior(self):
+        cfunc = (lib_importer.windll.
+                 DAQmxResetCIVelocityEncoderAInputLogicLvlBehavior)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ci_velocity_encoder_a_input_term(self):
+        """
+        str: Specifies the terminal to which signal A is connected.
+        """
+        cfunc = lib_importer.windll.DAQmxGetCIVelocityEncoderAInputTerm
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_char_p, ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = ctypes.create_string_buffer(temp_size)
+
+            size_or_code = cfunc(
+                self._handle, self._name, val, temp_size)
+
+            if is_string_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return val.value.decode('ascii')
+
+    @ci_velocity_encoder_a_input_term.setter
+    def ci_velocity_encoder_a_input_term(self, val):
+        cfunc = lib_importer.windll.DAQmxSetCIVelocityEncoderAInputTerm
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ci_velocity_encoder_a_input_term.deleter
+    def ci_velocity_encoder_a_input_term(self):
+        cfunc = lib_importer.windll.DAQmxResetCIVelocityEncoderAInputTerm
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ci_velocity_encoder_a_input_term_cfg(self):
+        """
+        :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
+            input terminal configuration.
+        """
+        val = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxGetCIVelocityEncoderAInputTermCfg
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return TerminalConfiguration(val.value)
+
+    @ci_velocity_encoder_a_input_term_cfg.setter
+    def ci_velocity_encoder_a_input_term_cfg(self, val):
+        val = val.value
+        cfunc = lib_importer.windll.DAQmxSetCIVelocityEncoderAInputTermCfg
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ci_velocity_encoder_a_input_term_cfg.deleter
+    def ci_velocity_encoder_a_input_term_cfg(self):
+        cfunc = lib_importer.windll.DAQmxResetCIVelocityEncoderAInputTermCfg
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ci_velocity_encoder_b_input_dig_fltr_enable(self):
+        """
+        bool: Specifies whether to apply the pulse width filter to the
+            signal.
+        """
+        val = c_bool32()
+
+        cfunc = (lib_importer.windll.
+                 DAQmxGetCIVelocityEncoderBInputDigFltrEnable)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ci_velocity_encoder_b_input_dig_fltr_enable.setter
+    def ci_velocity_encoder_b_input_dig_fltr_enable(self, val):
+        cfunc = (lib_importer.windll.
+                 DAQmxSetCIVelocityEncoderBInputDigFltrEnable)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ci_velocity_encoder_b_input_dig_fltr_enable.deleter
+    def ci_velocity_encoder_b_input_dig_fltr_enable(self):
+        cfunc = (lib_importer.windll.
+                 DAQmxResetCIVelocityEncoderBInputDigFltrEnable)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ci_velocity_encoder_b_input_dig_fltr_min_pulse_width(self):
+        """
+        float: Specifies in seconds the minimum pulse width the digital
+            filter recognizes.
+        """
+        val = ctypes.c_double()
+
+        cfunc = (lib_importer.windll.
+                 DAQmxGetCIVelocityEncoderBInputDigFltrMinPulseWidth)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ci_velocity_encoder_b_input_dig_fltr_min_pulse_width.setter
+    def ci_velocity_encoder_b_input_dig_fltr_min_pulse_width(self, val):
+        cfunc = (lib_importer.windll.
+                 DAQmxSetCIVelocityEncoderBInputDigFltrMinPulseWidth)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ci_velocity_encoder_b_input_dig_fltr_min_pulse_width.deleter
+    def ci_velocity_encoder_b_input_dig_fltr_min_pulse_width(self):
+        cfunc = (lib_importer.windll.
+                 DAQmxResetCIVelocityEncoderBInputDigFltrMinPulseWidth)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ci_velocity_encoder_b_input_dig_fltr_timebase_rate(self):
+        """
+        float: Specifies in hertz the rate of the pulse width filter
+            timebase. NI-DAQmx uses this value to compute settings for
+            the filter.
+        """
+        val = ctypes.c_double()
+
+        cfunc = (lib_importer.windll.
+                 DAQmxGetCIVelocityEncoderBInputDigFltrTimebaseRate)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ci_velocity_encoder_b_input_dig_fltr_timebase_rate.setter
+    def ci_velocity_encoder_b_input_dig_fltr_timebase_rate(self, val):
+        cfunc = (lib_importer.windll.
+                 DAQmxSetCIVelocityEncoderBInputDigFltrTimebaseRate)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ci_velocity_encoder_b_input_dig_fltr_timebase_rate.deleter
+    def ci_velocity_encoder_b_input_dig_fltr_timebase_rate(self):
+        cfunc = (lib_importer.windll.
+                 DAQmxResetCIVelocityEncoderBInputDigFltrTimebaseRate)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ci_velocity_encoder_b_input_dig_fltr_timebase_src(self):
+        """
+        str: Specifies the input terminal of the signal to use as the
+            timebase of the pulse width filter.
+        """
+        cfunc = (lib_importer.windll.
+                 DAQmxGetCIVelocityEncoderBInputDigFltrTimebaseSrc)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_char_p, ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = ctypes.create_string_buffer(temp_size)
+
+            size_or_code = cfunc(
+                self._handle, self._name, val, temp_size)
+
+            if is_string_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return val.value.decode('ascii')
+
+    @ci_velocity_encoder_b_input_dig_fltr_timebase_src.setter
+    def ci_velocity_encoder_b_input_dig_fltr_timebase_src(self, val):
+        cfunc = (lib_importer.windll.
+                 DAQmxSetCIVelocityEncoderBInputDigFltrTimebaseSrc)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ci_velocity_encoder_b_input_dig_fltr_timebase_src.deleter
+    def ci_velocity_encoder_b_input_dig_fltr_timebase_src(self):
+        cfunc = (lib_importer.windll.
+                 DAQmxResetCIVelocityEncoderBInputDigFltrTimebaseSrc)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ci_velocity_encoder_b_input_logic_lvl_behavior(self):
+        """
+        :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
+            level behavior of the input terminal.
+        """
+        val = ctypes.c_int()
+
+        cfunc = (lib_importer.windll.
+                 DAQmxGetCIVelocityEncoderBInputLogicLvlBehavior)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return LogicLvlBehavior(val.value)
+
+    @ci_velocity_encoder_b_input_logic_lvl_behavior.setter
+    def ci_velocity_encoder_b_input_logic_lvl_behavior(self, val):
+        val = val.value
+        cfunc = (lib_importer.windll.
+                 DAQmxSetCIVelocityEncoderBInputLogicLvlBehavior)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ci_velocity_encoder_b_input_logic_lvl_behavior.deleter
+    def ci_velocity_encoder_b_input_logic_lvl_behavior(self):
+        cfunc = (lib_importer.windll.
+                 DAQmxResetCIVelocityEncoderBInputLogicLvlBehavior)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ci_velocity_encoder_b_input_term(self):
+        """
+        str: Specifies the terminal to which signal B is connected.
+        """
+        cfunc = lib_importer.windll.DAQmxGetCIVelocityEncoderBInputTerm
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_char_p, ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = ctypes.create_string_buffer(temp_size)
+
+            size_or_code = cfunc(
+                self._handle, self._name, val, temp_size)
+
+            if is_string_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return val.value.decode('ascii')
+
+    @ci_velocity_encoder_b_input_term.setter
+    def ci_velocity_encoder_b_input_term(self, val):
+        cfunc = lib_importer.windll.DAQmxSetCIVelocityEncoderBInputTerm
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ci_velocity_encoder_b_input_term.deleter
+    def ci_velocity_encoder_b_input_term(self):
+        cfunc = lib_importer.windll.DAQmxResetCIVelocityEncoderBInputTerm
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
+    def ci_velocity_encoder_b_input_term_cfg(self):
+        """
+        :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
+            input terminal configuration.
+        """
+        val = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxGetCIVelocityEncoderBInputTermCfg
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return TerminalConfiguration(val.value)
+
+    @ci_velocity_encoder_b_input_term_cfg.setter
+    def ci_velocity_encoder_b_input_term_cfg(self, val):
+        val = val.value
+        cfunc = lib_importer.windll.DAQmxSetCIVelocityEncoderBInputTermCfg
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ci_velocity_encoder_b_input_term_cfg.deleter
+    def ci_velocity_encoder_b_input_term_cfg(self):
+        cfunc = lib_importer.windll.DAQmxResetCIVelocityEncoderBInputTermCfg
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:

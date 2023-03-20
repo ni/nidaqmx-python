@@ -24,7 +24,7 @@ EXCLUDED_ATTRIBUTES = [
 ATTRIBUTE_ENUM_MERGE_SET = {
     "AccelSensitivityUnits": ["AccelSensitivityUnits1", "AccelSensitivityUnits"],
     "AccelUnits": ["AccelUnits", "AccelUnits2"],
-    "AngleUnits": ["AngleUnits", "AngleUnits1"],
+    "AngleUnits": ["AngleUnits", "AngleUnits1", "AngleUnits2"],
     "AutoZeroType": ["AutoZeroType", "AutoZeroType1"],
     "BridgeConfiguration": ["BridgeConfiguration", "BridgeConfiguration1"],
     "CJCSource": ["CJCSource1", "CJCSource"],
@@ -39,7 +39,7 @@ ATTRIBUTE_ENUM_MERGE_SET = {
     "FilterResponse": ["FilterResponse1", "FilterResponse"],
     "FilterType": ["FilterType", "FilterType2"],
     "LVDTSensitivityUnits": ["LVDTSensitivityUnits1", "LVDTSensitivityUnits"],
-    "LengthUnits": ["LengthUnits", "LengthUnits2"],
+    "LengthUnits": ["LengthUnits", "LengthUnits2", "LengthUnits3"],
     "RTDType": ["RTDType", "RTDType1"],
     "RVDTSensitivityUnits": ["RVDTSensitivityUnits", "RVDTSensitivityUnits1"],
     "ResistanceUnits": ["ResistanceUnits", "ResistanceUnits1"],
@@ -53,11 +53,22 @@ ATTRIBUTE_ENUM_MERGE_SET = {
     "VoltageUnits": ["VoltageUnits", "VoltageUnits1", "VoltageUnits2"],
     "UsageTypeAI": ["UsageTypeAI", "AIMeasurementType"],
     "UsageTypeAO": ["AOOutputChannelType"],
+    "UsageTypeCI": ["CIMeasurementType"],
     "DataTransferActiveTransferMode": [
         "DataTransferMechanism",
         "DataTransferActiveTransferMode",
     ],
-    "TerminalConfiguration": ["TerminalConfiguration", "InputTermCfg", "OutputTermCfg"],
+    "TerminalConfiguration": ["TerminalConfiguration", "InputTermCfg", "OutputTermCfg", "InputTermCfg2"],
+    "CountDirection": ["CountDirection1"],
+    "FrequencyUnits": ["FrequencyUnits2", "FrequencyUnits3"],
+    "Edge": ["Edge1"],
+    "TimeUnits": ["TimeUnits2", "TimeUnits3"],
+    "EncoderType": ["EncoderType2"],
+    "GpsSignalType": ["GpsSignalType1"],
+    "EncoderZIndexPhase": ["EncoderZIndexPhase1"],
+    "Level": ["Level1"],
+    "UsageTypeCO": ["COOutputType"],
+    "ActiveOrInactiveEdgeSelection": ["SampleClockActiveOrInactiveEdgeSelection"]
 }
 
 DEPRECATED_ATTRIBUTES = {
