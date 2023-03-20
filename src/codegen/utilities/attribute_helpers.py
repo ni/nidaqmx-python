@@ -71,7 +71,7 @@ ATTRIBUTE_ENUM_MERGE_SET = {
     "EncoderType": ["EncoderType2"],
     "GpsSignalType": ["GpsSignalType1"],
     "EncoderZIndexPhase": ["EncoderZIndexPhase1"],
-    "Level": ["Level1"],
+    "Level": ["Level1", "DigitalLineState"],
     "UsageTypeCO": ["COOutputType"],
     "ActiveOrInactiveEdgeSelection": ["SampleClockActiveOrInactiveEdgeSelection"],
 }

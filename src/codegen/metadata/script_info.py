@@ -21,8 +21,8 @@ script_info = {
             "templateFile": "_task_modules\\channels\\di_channel.py.mako"
         },
         {
-            "relativeOutputPath": "_task_modules\\channels\\di_channel.py", 
-            "templateFile": "_task_modules\\channels\\di_channel.py.mako"
+            "relativeOutputPath": "_task_modules\\channels\\do_channel.py", 
+            "templateFile": "_task_modules\\channels\\do_channel.py.mako"
         },
     ]
 }
