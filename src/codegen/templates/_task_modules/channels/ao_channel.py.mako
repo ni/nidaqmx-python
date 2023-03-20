@@ -8,7 +8,6 @@
 
 import ctypes
 import numpy
-import deprecation
 
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
@@ -33,5 +32,3 @@ class AOChannel(Channel):
 %for attribute in attributes:
 ${property_template.script_property(attribute)}\
 %endfor
-<%namespace name="deprecated_template" file="/property_deprecated_template.py.mako"/>\
-${deprecated_template.script_deprecated_property(attributes)}\

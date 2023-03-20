@@ -3,7 +3,10 @@ from codegen.properties.parameter import Parameter
 
 class Attribute:
 
-    ATTRIBUTE_CHANGE_SET = {"ai_custom_scale_name" : "ai_custom_scale"}
+    ATTRIBUTE_CHANGE_SET = {
+        "ai_custom_scale_name" : "ai_custom_scale", 
+        "ao_custom_scale_name": "ao_custom_scale"
+        }
 
     def __init__(self, id, attribute_metadata, enum_merge_set):
         self._id = id
@@ -55,7 +58,9 @@ class Attribute:
         )
         if "enum" in attribute_metadata:
             self._enum = self.merge_enums(attribute_metadata["enum"], enum_merge_set)
-            self._is_enum = True
+        if "python_enum" in attribute_metadata:
+            self._enum = self.merge_enums(attribute_metadata["python_enum"], enum_merge_set)
+
         self._object_type = attribute_metadata.get("python_object_type")
 
     @property
@@ -316,6 +321,7 @@ class Attribute:
         return argtypes
 
     def merge_enums(self, enum_name, enum_merge_set):
+        self._is_enum = True
         for actual_enum_name, alias_names in enum_merge_set.items():
             if enum_name in alias_names:
                 return actual_enum_name

@@ -2,7 +2,6 @@
 
 import ctypes
 import numpy
-import deprecation
 
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
@@ -11,10 +10,10 @@ from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
 from nidaqmx._task_modules.channels.channel import Channel
 from nidaqmx.constants import (
-    AOIdleOutputBehavior, AOOutputChannelType, AOPowerUpOutputBehavior,
-    CurrentUnits, DataTransferActiveTransferMode, DigitalWidthUnits,
-    FuncGenType, ModulationType, OutputDataTransferCondition, OutputTermCfg,
-    ResolutionType, SourceSelection, VoltageUnits2)
+    AOIdleOutputBehavior, AOPowerUpOutputBehavior, CurrentUnits,
+    DataTransferActiveTransferMode, DigitalWidthUnits, FuncGenType,
+    ModulationType, OutputDataTransferCondition, ResolutionType,
+    SourceSelection, TerminalConfiguration, UsageTypeAO, VoltageUnits)
 
 
 class AOChannel(Channel):
@@ -128,7 +127,7 @@ class AOChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ao_custom_scale_name(self):
+    def ao_custom_scale(self):
         """
         :class:`nidaqmx.system.scale.Scale`: Specifies the name of a
             custom scale for the channel.
@@ -161,8 +160,8 @@ class AOChannel(Channel):
 
         return Scale(val.value.decode('ascii'))
 
-    @ao_custom_scale_name.setter
-    def ao_custom_scale_name(self, val):
+    @ao_custom_scale.setter
+    def ao_custom_scale(self, val):
         val = val.name
         cfunc = lib_importer.windll.DAQmxSetAOCustomScaleName
         if cfunc.argtypes is None:
@@ -176,8 +175,8 @@ class AOChannel(Channel):
             self._handle, self._name, val)
         check_for_error(error_code)
 
-    @ao_custom_scale_name.deleter
-    def ao_custom_scale_name(self):
+    @ao_custom_scale.deleter
+    def ao_custom_scale(self):
         cfunc = lib_importer.windll.DAQmxResetAOCustomScaleName
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -1821,9 +1820,8 @@ class AOChannel(Channel):
     @property
     def ao_output_type(self):
         """
-        :class:`nidaqmx.constants.AOOutputChannelType`: Indicates
-            whether the channel generates voltage,  current, or a
-            waveform.
+        :class:`nidaqmx.constants.UsageTypeAO`: Indicates whether the
+            channel generates voltage,  current, or a waveform.
         """
         val = ctypes.c_int()
 
@@ -1839,7 +1837,7 @@ class AOChannel(Channel):
             self._handle, self._name, ctypes.byref(val))
         check_for_error(error_code)
 
-        return AOOutputChannelType(val.value)
+        return UsageTypeAO(val.value)
 
     @property
     def ao_reglitch_enable(self):
@@ -1971,8 +1969,8 @@ class AOChannel(Channel):
     @property
     def ao_term_cfg(self):
         """
-        :class:`nidaqmx.constants.OutputTermCfg`: Specifies the terminal
-            configuration of the channel.
+        :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
+            terminal configuration of the channel.
         """
         val = ctypes.c_int()
 
@@ -1988,7 +1986,7 @@ class AOChannel(Channel):
             self._handle, self._name, ctypes.byref(val))
         check_for_error(error_code)
 
-        return OutputTermCfg(val.value)
+        return TerminalConfiguration(val.value)
 
     @ao_term_cfg.setter
     def ao_term_cfg(self, val):
@@ -2220,8 +2218,8 @@ class AOChannel(Channel):
     @property
     def ao_voltage_units(self):
         """
-        :class:`nidaqmx.constants.VoltageUnits2`: Specifies in what
-            units to generate voltage on the channel. Write data to the
+        :class:`nidaqmx.constants.VoltageUnits`: Specifies in what units
+            to generate voltage on the channel. Write data to the
             channel in the units you select.
         """
         val = ctypes.c_int()
@@ -2238,7 +2236,7 @@ class AOChannel(Channel):
             self._handle, self._name, ctypes.byref(val))
         check_for_error(error_code)
 
-        return VoltageUnits2(val.value)
+        return VoltageUnits(val.value)
 
     @ao_voltage_units.setter
     def ao_voltage_units(self, val):
@@ -2303,5 +2301,4 @@ class AOChannel(Channel):
         check_for_error(size_or_code)
 
         return [AOPowerUpOutputBehavior(e) for e in val]
-
 

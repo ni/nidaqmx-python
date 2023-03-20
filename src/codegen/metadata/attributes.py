@@ -294,6 +294,7 @@ attributes = {
             'python_class_name': 'AIChannel',
             'python_data_type': 'Impedance1',
             'python_description': 'Specifies the input impedance of the channel.',
+            'python_enum': 'Impedance1',
             'resettable': True,
             'type': 'float64'
         },

@@ -9545,3 +9545,4 @@ class AIChannel(Channel):
     @deprecation.deprecated(deprecated_in="0.6.6", details="Use ai_velocity_iepe_sensor_db_ref instead.")
     def ai_velocity_iepe_sensord_b_ref(self):
         del self.ai_velocity_iepe_sensor_db_ref
+

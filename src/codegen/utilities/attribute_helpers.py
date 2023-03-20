@@ -52,13 +52,14 @@ ATTRIBUTE_ENUM_MERGE_SET = {
     "StrainUnits": ["StrainUnits", "StrainUnits1"],
     "TemperatureUnits": ["TemperatureUnits", "TemperatureUnits1"],
     "ThermocoupleType": ["ThermocoupleType", "ThermocoupleType1"],
-    "VoltageUnits": ["VoltageUnits", "VoltageUnits1"],
+    "VoltageUnits": ["VoltageUnits", "VoltageUnits1", "VoltageUnits2"],
     "UsageTypeAI": ["UsageTypeAI", "AIMeasurementType"],
+    "UsageTypeAO": ["AOOutputChannelType"],
     "DataTransferActiveTransferMode": [
         "DataTransferMechanism",
         "DataTransferActiveTransferMode",
     ],
-    "TerminalConfiguration": ["TerminalConfiguration", "InputTermCfg"],
+    "TerminalConfiguration": ["TerminalConfiguration", "InputTermCfg", "OutputTermCfg"],
 }
 
 DEPRECATED_ATTRIBUTES = {
