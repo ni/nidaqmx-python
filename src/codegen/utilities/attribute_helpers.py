@@ -107,6 +107,50 @@ DEPRECATED_ATTRIBUTES = {
         "new_name": "ai_velocity_iepe_sensor_db_ref",
         "deprecated_in": "0.6.6",
     },
+    "ci_count_edges_count_reset_reset_cnt": {
+        "new_name": "ci_count_edges_count_reset_reset_count",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_pulse_freq_starting_edge": {
+        "new_name": "ci_pulse_freq_start_edge",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_pulse_ticks_starting_edge": {
+        "new_name": "ci_pulse_ticks_start_edge",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_pulse_time_starting_edge": {
+        "new_name": "ci_pulse_time_start_edge",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_velocity_a_input_dig_fltr_enable": {
+        "new_name": "ci_velocity_encoder_a_input_dig_fltr_enable",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_velocity_a_input_dig_fltr_min_pulse_width": {
+        "new_name": "ci_velocity_encoder_a_input_dig_fltr_min_pulse_width",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_velocity_a_input_dig_fltr_timebase_rate": {
+        "new_name": "ci_velocity_encoder_a_input_dig_fltr_timebase_rate",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_velocity_a_input_dig_fltr_timebase_src": {
+        "new_name": "ci_velocity_encoder_a_input_dig_fltr_timebase_src",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_velocity_a_input_logic_lvl_behavior": {
+        "new_name": "ci_velocity_encoder_a_input_logic_lvl_behavior",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_velocity_a_input_term": {
+        "new_name": "ci_velocity_encoder_a_input_term",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_velocity_a_input_term_cfg": {
+        "new_name": "ci_velocity_encoder_a_input_term_cfg",
+        "deprecated_in": "0.6.6",
+    },
 }
 
 

@@ -8,6 +8,7 @@
 
 import ctypes
 import numpy
+import deprecation
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx.scale import Scale
@@ -31,3 +32,5 @@ class CIChannel(Channel):
 %for attribute in attributes:
 ${property_template.script_property(attribute)}\
 %endfor
+<%namespace name="deprecated_template" file="/property_deprecated_template.py.mako"/>\
+${deprecated_template.script_deprecated_property(attributes)}
