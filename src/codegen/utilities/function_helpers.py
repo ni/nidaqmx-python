@@ -19,7 +19,7 @@ def get_functions(metadata, class_name):
 
 
 def get_function_name(function_name: str):
-    """Replaces the 'create' with 'add' and converts function name to camel to snake case."""
+    """Replaces the 'create' with 'add' and converts function name from camel to snake case."""
     if function_name.startswith("Create"):
         function_name = "add" + function_name[6:]
     return camel_to_snake_case(function_name)
@@ -38,7 +38,7 @@ def get_enums_used(functions):
 
 
 def order_function_parameters_by_optional(function_parameters):
-    """Sorts function prameters by optional and non optional for function defintion."""
+    """Sorts optional parameters and non optional parameters for function defintion."""
     optional_params = []
     non_optional_params = []
     for param in function_parameters:
@@ -106,7 +106,7 @@ def get_instantiation_lines(function_parameters):
 
 
 def get_arguments_type(functions_metadata):
-    """Gets the type of parameters."""
+    """Gets the 'type' of parameters."""
     argtypes = []
     if functions_metadata.handle_parameters:
         if functions_metadata.handle_parameters.ctypes_data_type != "ctypes.c_char_p":
