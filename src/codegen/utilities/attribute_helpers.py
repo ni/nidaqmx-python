@@ -50,13 +50,14 @@ ATTRIBUTE_ENUM_MERGE_SET = {
     "StrainUnits": ["StrainUnits", "StrainUnits1"],
     "TemperatureUnits": ["TemperatureUnits", "TemperatureUnits1"],
     "ThermocoupleType": ["ThermocoupleType", "ThermocoupleType1"],
-    "VoltageUnits": ["VoltageUnits", "VoltageUnits1"],
+    "VoltageUnits": ["VoltageUnits", "VoltageUnits1", "VoltageUnits2"],
     "UsageTypeAI": ["UsageTypeAI", "AIMeasurementType"],
+    "UsageTypeAO": ["AOOutputChannelType"],
     "DataTransferActiveTransferMode": [
         "DataTransferMechanism",
         "DataTransferActiveTransferMode",
     ],
-    "TerminalConfiguration": ["TerminalConfiguration", "InputTermCfg"],
+    "TerminalConfiguration": ["TerminalConfiguration", "InputTermCfg", "OutputTermCfg"],
 }
 
 DEPRECATED_ATTRIBUTES = {
@@ -99,7 +100,8 @@ def get_attributes(metadata, class_name):
     for group_name, attributes in metadata["attributes"].items():
         for id, attribute_data in attributes.items():
             if (
-                attribute_data["python_class_name"] == class_name
+                "python_class_name" in attribute_data
+                and attribute_data["python_class_name"] == class_name
                 and not attribute_data["name"] in EXCLUDED_ATTRIBUTES
             ):
                 attributes_metadata.append(Attribute(id, attribute_data, ATTRIBUTE_ENUM_MERGE_SET))
