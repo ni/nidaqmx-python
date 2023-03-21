@@ -23,7 +23,7 @@ class Parameter:
             self._default = parameter_metadata.get("default")
             self._has_default = True
         else:
-            self._default = "\"\""
+            self._default = '""'
         self._is_enum = False
         if "enum" in parameter_metadata:
             self._enum = parameter_metadata.get("enum")
