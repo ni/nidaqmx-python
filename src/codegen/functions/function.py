@@ -16,7 +16,7 @@ class Function:
         self._calling_convention = function_metadata["calling_convention"]
         self._return_type = function_metadata["returns"]
         if "handle_parameter" in function_metadata:
-            self._handle_parameters = Parameter(
+            self._handle_parameter = Parameter(
                 "handle_parameter", function_metadata["handle_parameter"]
             )
 
@@ -75,9 +75,9 @@ class Function:
         return self._return_type
 
     @property
-    def handle_parameters(self):
+    def handle_parameter(self):
         """Handle parameter: The handle parameter for the instance the function."""
-        return self._handle_parameters
+        return self._handle_parameter
 
     @property
     def parameters(self):
