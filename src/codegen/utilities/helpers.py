@@ -10,10 +10,6 @@ CAMEL_TO_SNAKE_CASE_REGEXES = [
     re.compile('([^_0-9])([0-9])')
 ]
 
-CAMEL_CASE_SPLIT_REGEX = re.compile(
-    '.+?(?:(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|$)')
-
-
 def camel_to_snake_case(camel_case_string):
     """Converts a camelCase string to a snake_case string."""   
     camel_case_string = _fix_tedsairtd(camel_case_string)
@@ -25,15 +21,9 @@ def camel_to_snake_case(camel_case_string):
 
     return partial.lower()
 
-def camel_case_split(camel_case_string):
-    """Converts string to camel to snake case."""
-    matches = re.finditer(CAMEL_CASE_SPLIT_REGEX, camel_case_string)
-    return ' '.join([m.group(0) for m in matches])
-
 def _fix_tedsairtd(input_string: str) -> str:
     # change TEDSAIRTD to TEDS_AI_RTD.
     return input_string.replace("TEDSAIRTD", "TEDS_AI_RTD")
-
 
 def _fix_tedsai(input_string: str) -> str:
     # change TEDSAI to TEDS_AI.
