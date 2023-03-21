@@ -1,13 +1,16 @@
 """Structure for storing function parameter metadata from scrapigen."""
 
 
+from codegen.utilities.helpers import camel_to_snake_case
+
+
 class Parameter:
     """Structure for storing function parameter metadata from scrapigen."""
 
     def __init__(self, parameter_metadata):
         """Structure for storing function parameter metadata from scrapigen."""
         self._direction = parameter_metadata["direction"]
-        self._parameters_name = parameter_metadata["name"]
+        self._parameters_name = camel_to_snake_case(parameter_metadata["name"])
         self._type = parameter_metadata["type"]
         self._ctypes_data_type = parameter_metadata["ctypes_data_type"]
         self._python_data_type = parameter_metadata["python_data_type"]
@@ -19,6 +22,8 @@ class Parameter:
         if "default" in parameter_metadata:
             self._default = parameter_metadata.get("default")
             self._has_default = True
+        else:
+            self._default = "\"\""
         self._is_enum = False
         if "enum" in parameter_metadata:
             self._enum = parameter_metadata.get("enum")
