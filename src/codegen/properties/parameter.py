@@ -7,7 +7,11 @@ class Parameter:
     def __init__(self, name, parameter_metadata):
         """Structure for storing parameter metadata from scrapigen."""
         self._handle_name = name
-        self._accessor = parameter_metadata["accessor"] if "accessor" in parameter_metadata else parameter_metadata["python_accessor"]
+        self._accessor = (
+            parameter_metadata["accessor"]
+            if "accessor" in parameter_metadata
+            else parameter_metadata["python_accessor"]
+        )
         self._ctypes_data_type = parameter_metadata["ctypes_data_type"]
         self._cvi_name = parameter_metadata["cvi_name"]
 
