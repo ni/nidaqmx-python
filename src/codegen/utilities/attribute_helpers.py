@@ -92,8 +92,8 @@ DEPRECATED_ATTRIBUTES = {
     },
 }
 
-PYTHON_CLASS_ENUM_MERGE_SET = { 
-    "InStream": ["AcquisitionType","READ_ALL_AVAILABLE"],
+PYTHON_CLASS_ENUM_MERGE_SET = {
+    "InStream": ["AcquisitionType", "READ_ALL_AVAILABLE"],
     "OutStream": ["ResolutionType"],
 }
 
@@ -103,8 +103,9 @@ def get_attributes(metadata, class_name):
     attributes_metadata = []
     for group_name, attributes in metadata["attributes"].items():
         for id, attribute_data in attributes.items():
-            if ("python_class_name" in attribute_data and
-                attribute_data["python_class_name"] == class_name
+            if (
+                "python_class_name" in attribute_data
+                and attribute_data["python_class_name"] == class_name
                 and not attribute_data["name"] in EXCLUDED_ATTRIBUTES
             ):
                 attributes_metadata.append(Attribute(id, attribute_data, ATTRIBUTE_ENUM_MERGE_SET))
