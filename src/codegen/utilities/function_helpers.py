@@ -24,7 +24,7 @@ def get_function_name(function_name: str):
 
 
 def get_enums_used(functions):
-    """Gets the list of enums used in the attribute metadata."""
+    """Gets the list of enums used in the functions metadata."""
     used_enums = []
     for function_data in functions:
         for param in function_data._parameters:
