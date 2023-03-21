@@ -227,7 +227,7 @@ class InStream(object):
         return val.value
 
     @property
-    def change_detect_overflowed(self):
+    def change_detect_has_overflowed(self):
         """
         bool: Indicates if samples were missed because change detection
             events occurred faster than the device could handle them.
@@ -437,7 +437,7 @@ class InStream(object):
         return unflatten_channel_string(val.value.decode('ascii'))
 
     @property
-    def di_num_booleans_per_chan(self):
+    def digital_lines_bytes_per_chan(self):
         """
         int: Indicates the number of booleans per channel that NI-DAQmx
             returns in a sample for line-based reads. If a channel has
@@ -1395,54 +1395,6 @@ class InStream(object):
         return val.value
 
     @property
-    def over_write(self):
-        """
-        :class:`nidaqmx.constants.OverwriteMode`: Specifies whether to
-            overwrite samples in the buffer that you have not yet read.
-        """
-        val = ctypes.c_int()
-
-        cfunc = lib_importer.windll.DAQmxGetReadOverWrite
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return OverwriteMode(val.value)
-
-    @over_write.setter
-    def over_write(self, val):
-        val = val.value
-        cfunc = lib_importer.windll.DAQmxSetReadOverWrite
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
-
-    @over_write.deleter
-    def over_write(self):
-        cfunc = lib_importer.windll.DAQmxResetReadOverWrite
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
-
-    @property
     def overcurrent_chans(self):
         """
         List[str]: Indicates a list of names of any virtual channels in
@@ -1624,6 +1576,54 @@ class InStream(object):
         check_for_error(error_code)
 
         return val.value
+
+    @property
+    def overwrite(self):
+        """
+        :class:`nidaqmx.constants.OverwriteMode`: Specifies whether to
+            overwrite samples in the buffer that you have not yet read.
+        """
+        val = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxGetReadOverWrite
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+
+        error_code = cfunc(
+            self._handle, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return OverwriteMode(val.value)
+
+    @overwrite.setter
+    def overwrite(self, val):
+        val = val.value
+        cfunc = lib_importer.windll.DAQmxSetReadOverWrite
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
+
+        error_code = cfunc(
+            self._handle, val)
+        check_for_error(error_code)
+
+    @overwrite.deleter
+    def overwrite(self):
+        cfunc = lib_importer.windll.DAQmxResetReadOverWrite
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
+
+        error_code = cfunc(
+            self._handle)
+        check_for_error(error_code)
 
     @property
     def pll_unlocked_chans(self):
@@ -1935,7 +1935,7 @@ class InStream(object):
     @property
     def reverse_voltage_error_chans(self):
         """
-        List[str]: Indicates a list of names of any virtual channels in
+        List[str]: Indicates a list of names of all virtual channels in
             the task for which reverse voltage error condition has been
             detected. You must read the Reverse Voltage Error Channels
             Exist property before you read this property. Otherwise, you
@@ -1973,12 +1973,12 @@ class InStream(object):
     def reverse_voltage_error_chans_exist(self):
         """
         bool: Indicates if the device(s) detected reverse voltage error
-            for any channel in the task. Reverse voltage error will
-            occured if the local voltage is equal to negative saturated
-            voltage. Reading this property clears the error condition
-            status for all channels in the task. You must read this
-            property before you read the Reverse Voltage Error Channels
-            property. Otherwise, you will receive an error.
+            for any of the channels in the task. Reverse voltage error
+            occurs if the local voltage is equal to the negative
+            saturated voltage. Reading this property clears the error
+            condition status for all channels in the task. You must read
+            this property before you read the Reverse Voltage Error
+            Channels property. Otherwise, you will receive an error.
         """
         val = c_bool32()
 

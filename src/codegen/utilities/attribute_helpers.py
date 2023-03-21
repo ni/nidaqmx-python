@@ -8,9 +8,6 @@ EXCLUDED_ATTRIBUTES = [
     "AI_CHAN_CAL_DESC",
     "AI_CHAN_CAL_APPLY_CAL_IF_EXP",
     "AI_BRIDGE_SHUNT_CAL_SHUNT_CAL_B_SRC",
-    "OPEN_CHANS",
-    "OPEN_CHANS_EXIST",
-    "OPEN_CHANS_DETAILS",
     "AI_CHAN_CAL_VERIF_REF_VALS",
     "AI_CHAN_CAL_VERIF_ACQ_VALS",
     "AI_CHAN_CAL_TABLE_SCALED_VALS",
@@ -57,6 +54,9 @@ ATTRIBUTE_ENUM_MERGE_SET = {
         "DataTransferActiveTransferMode",
     ],
     "TerminalConfiguration": ["TerminalConfiguration", "InputTermCfg"],
+    "OverwriteMode": ["OverwriteMode", "OverwriteMode1"],
+    "RegenerationMode": ["RegenerationMode", "RegenerationMode1"],
+    "WaitMode": ["WaitMode", "WaitMode2"],
 }
 
 DEPRECATED_ATTRIBUTES = {
@@ -92,13 +92,18 @@ DEPRECATED_ATTRIBUTES = {
     },
 }
 
+PYTHON_CLASS_ENUM_MERGE_SET = { 
+    "InStream": ["AcquisitionType","READ_ALL_AVAILABLE"],
+    "OutStream": ["ResolutionType"],
+}
+
 
 def get_attributes(metadata, class_name):
     """Converts the scrapigen metadata into a list of attributes."""
     attributes_metadata = []
     for group_name, attributes in metadata["attributes"].items():
         for id, attribute_data in attributes.items():
-            if (
+            if ("python_class_name" in attribute_data and
                 attribute_data["python_class_name"] == class_name
                 and not attribute_data["name"] in EXCLUDED_ATTRIBUTES
             ):
@@ -109,9 +114,16 @@ def get_attributes(metadata, class_name):
 def get_enums_used(attributes):
     """Gets the list of enums used in the attribute metadata."""
     enums = []
+    python_classes = []
+    for attribute in attributes:
+        python_classes.append(attribute.python_class_name)
+    python_classes = list(set(python_classes))
     for attribute in attributes:
         if attribute.is_enum:
             enums.append(attribute.enum)
+    for python_class in python_classes:
+        if python_class in PYTHON_CLASS_ENUM_MERGE_SET:
+            enums.extend(PYTHON_CLASS_ENUM_MERGE_SET[python_class])
     enums = list(set(enums))
     return sorted(enums)
 
