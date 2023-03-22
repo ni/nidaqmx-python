@@ -154,6 +154,9 @@ DEPRECATED_ATTRIBUTES = {
 }
 
 
+PYTHON_CLASS_ENUM_MERGE_SET = {"Channel": ["_Save"]}
+
+
 def get_attributes(metadata, class_name):
     """Converts the scrapigen metadata into a list of attributes."""
     attributes_metadata = []
@@ -172,6 +175,11 @@ def get_enums_used(attributes):
     """Gets the list of enums used in the attribute metadata."""
     enums = []
     for attribute in attributes:
+        if (
+            attribute.python_class_name in PYTHON_CLASS_ENUM_MERGE_SET
+        ):
+            for enum_value in PYTHON_CLASS_ENUM_MERGE_SET[attribute.python_class_name]:
+                enums.append(enum_value)
         if attribute.is_enum:
             enums.append(attribute.enum)
     enums = list(set(enums))
