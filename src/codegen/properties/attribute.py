@@ -1,5 +1,6 @@
 """Structure for storing attribute metadata from scrapigen."""
 from codegen.properties.parameter import Parameter
+from codegen.utilities.enum_helpers import merge_enums
 
 
 class Attribute:
@@ -7,7 +8,7 @@ class Attribute:
 
     ATTRIBUTE_CHANGE_SET = {"ai_custom_scale_name": "ai_custom_scale"}
 
-    def __init__(self, id, attribute_metadata, enum_merge_set):
+    def __init__(self, id, attribute_metadata):
         """Structure for storing attribute metadata from scrapigen."""
         self._id = id
         self._is_enum = False
@@ -56,7 +57,7 @@ class Attribute:
             self._enum = attribute_metadata["python_enum"]
             self._is_enum = True
         elif "enum" in attribute_metadata:
-            self._enum = self.merge_enums(attribute_metadata["enum"], enum_merge_set)
+            self._enum = merge_enums(attribute_metadata["enum"])
             self._is_enum = True
         self._object_type = attribute_metadata.get("python_object_type")
 
@@ -292,13 +293,6 @@ class Attribute:
             else:
                 argtypes.append(handle_parameter.ctypes_data_type)
         return argtypes
-
-    def merge_enums(self, enum_name, enum_merge_set):
-        """Replaces the scrapigen enum name with the actual name."""
-        for actual_enum_name, alias_names in enum_merge_set.items():
-            if enum_name in alias_names:
-                return actual_enum_name
-        return enum_name
 
     def get_return_type(self):
         """Gets the return type of attributes to be used in description."""
