@@ -8,6 +8,8 @@ class Attribute:
     ATTRIBUTE_CHANGE_SET = {
         "ai_custom_scale_name": "ai_custom_scale",
         "ao_custom_scale_name": "ao_custom_scale",
+        "ci_custom_scale_name": "ci_custom_scale",
+        "ci_dup_count_prevent": "ci_dup_count_prevention"
     }
 
     def __init__(self, id, attribute_metadata, enum_merge_set):
