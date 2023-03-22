@@ -190,7 +190,29 @@ class Channel(object):
         return val.value.decode('ascii')
 
     @property
-    def chan_descr(self):
+    def chan_type(self):
+        """
+        :class:`nidaqmx.constants.ChannelType`: Indicates the type of
+            the virtual channel.
+        """
+        val = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxGetChanType
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return ChannelType(val.value)
+
+    @property
+    def description(self):
         """
         str: Specifies a user-defined description for the channel.
         """
@@ -222,8 +244,8 @@ class Channel(object):
 
         return val.value.decode('ascii')
 
-    @chan_descr.setter
-    def chan_descr(self, val):
+    @description.setter
+    def description(self, val):
         cfunc = lib_importer.windll.DAQmxSetChanDescr
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -236,8 +258,8 @@ class Channel(object):
             self._handle, self._name, val)
         check_for_error(error_code)
 
-    @chan_descr.deleter
-    def chan_descr(self):
+    @description.deleter
+    def description(self):
         cfunc = lib_importer.windll.DAQmxResetChanDescr
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -250,7 +272,7 @@ class Channel(object):
         check_for_error(error_code)
 
     @property
-    def chan_is_global(self):
+    def is_global(self):
         """
         bool: Indicates whether the channel is a global channel.
         """
@@ -271,80 +293,7 @@ class Channel(object):
         return val.value
 
     @property
-    def chan_sync_unlock_behavior(self):
-        """
-        :class:`nidaqmx.constants.SyncUnlockBehavior`: Specifies the
-            action to take if the target loses its synchronization to
-            the grand master.
-        """
-        val = ctypes.c_int()
-
-        cfunc = lib_importer.windll.DAQmxGetChanSyncUnlockBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return SyncUnlockBehavior(val.value)
-
-    @chan_sync_unlock_behavior.setter
-    def chan_sync_unlock_behavior(self, val):
-        val = val.value
-        cfunc = lib_importer.windll.DAQmxSetChanSyncUnlockBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @chan_sync_unlock_behavior.deleter
-    def chan_sync_unlock_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetChanSyncUnlockBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def chan_type(self):
-        """
-        :class:`nidaqmx.constants.ChannelType`: Indicates the type of
-            the virtual channel.
-        """
-        val = ctypes.c_int()
-
-        cfunc = lib_importer.windll.DAQmxGetChanType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return ChannelType(val.value)
-
-    @property
-    def physical_chan_name(self):
+    def physical_channel(self):
         """
         :class:`nidaqmx.system.physical_channel.PhysicalChannel`:
             Specifies the name of the physical channel upon which this
@@ -378,8 +327,8 @@ class Channel(object):
 
         return PhysicalChannel(val.value.decode('ascii'))
 
-    @physical_chan_name.setter
-    def physical_chan_name(self, val):
+    @physical_channel.setter
+    def physical_channel(self, val):
         val = val.name
         cfunc = lib_importer.windll.DAQmxSetPhysicalChanName
         if cfunc.argtypes is None:
@@ -391,6 +340,57 @@ class Channel(object):
 
         error_code = cfunc(
             self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @property
+    def sync_unlock_behavior(self):
+        """
+        :class:`nidaqmx.constants.SyncUnlockBehavior`: Specifies the
+            action to take if the target loses its synchronization to
+            the grand master.
+        """
+        val = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxGetChanSyncUnlockBehavior
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_int)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return SyncUnlockBehavior(val.value)
+
+    @sync_unlock_behavior.setter
+    def sync_unlock_behavior(self, val):
+        val = val.value
+        cfunc = lib_importer.windll.DAQmxSetChanSyncUnlockBehavior
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @sync_unlock_behavior.deleter
+    def sync_unlock_behavior(self):
+        cfunc = lib_importer.windll.DAQmxResetChanSyncUnlockBehavior
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
         check_for_error(error_code)
 
     def save(self, save_as="", author="", overwrite_existing_channel=False,
