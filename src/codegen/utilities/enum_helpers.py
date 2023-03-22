@@ -98,6 +98,7 @@ def merge_enums(enum_name):
             return actual_enum_name
     return enum_name
 
+
 def _merge_enum_values(value_lists):
     result_set = {}
 
