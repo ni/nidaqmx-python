@@ -13,7 +13,6 @@ functions = {
     },
     'AddGlobalChansToTask': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -225,8 +224,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies on which slope of the signal the Reference Trigger occurs.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -296,8 +301,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies on which slope of the signal to start acquiring or generating samples when the signal crosses **trigger_level**.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -439,8 +450,13 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'description': [
+                    'TaskHandle',
+                    'Specifies the minimum number of samples to acquire per channel before recognizing the Reference Trigger. The number of post-trigger samples per channel is equal to **number of samples per channel** in the DAQmx Timing function minus **task_handle**.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': False,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -521,8 +537,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Is the name of a virtual channel or terminal where there is an analog signal to use as the source of the trigger.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -592,8 +614,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies the number of samples to acquire or generate for each channel in the task if **sample_mode** is **FINITE_SAMPLES**. If **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses this value to determine the buffer size. This function returns an error if the specified value is negative.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -705,8 +733,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies the number of samples to acquire or generate for each channel in the task if **sample_mode** is **FINITE_SAMPLES**. If **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses this value to determine the buffer size. This function returns an error if the specified value is negative.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -818,8 +852,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies the number of samples to acquire from each channel in the task if **sample_mode** is **FINITE_SAMPLES**. This function returns an error if the specified value is negative.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -891,8 +931,13 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'description': [
+                    'TaskHandle',
+                    'Specifies the minimum number of samples to acquire per channel before recognizing the Reference Trigger. The number of post-trigger samples per channel is equal to **number of samples per channel** in the DAQmx Timing function minus **task_handle**.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': False,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -949,8 +994,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies on which edge of the digital signal to start acquiring or generating samples.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -995,8 +1046,13 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'description': [
+                    'TaskHandle',
+                    'Specifies the minimum number of samples to acquire per channel before recognizing the Reference Trigger. The number of post-trigger samples per channel is equal to **number of samples per channel** in the DAQmx Timing function minus **task_handle**.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': False,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -1065,8 +1121,13 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'description': [
+                    'TaskHandle',
+                    'Specifies the physical channels to use for pattern matching. The order of the physical channels determines the order of the pattern. If a port is included, the order of the physical channels within the port is in ascending order.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': False,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -1123,8 +1184,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies the number of samples to acquire or generate for each channel in the task if **sample_mode** is **FINITE_SAMPLES**. If **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses this value to determine the buffer size. This function returns an error if the specified value is negative.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -1170,8 +1237,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies the number of samples to acquire or generate for each channel in the task if **sample_mode** is **FINITE_SAMPLES**. If **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses this value to determine the buffer size. This function returns an error if the specified value is negative.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -1208,7 +1281,6 @@ functions = {
     },
     'CfgInputBuffer': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -1225,7 +1297,6 @@ functions = {
     },
     'CfgOutputBuffer': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -1251,8 +1322,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies the number of samples to acquire or generate for each channel in the task if **sample_mode** is **FINITE_SAMPLES**. If **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses this value to determine the buffer size. This function returns an error if the specified value is negative.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -1337,8 +1414,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies the number of samples to acquire or generate for each channel in the task if **sample_mode** is **FINITE_SAMPLES**. If **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses this value to determine the buffer size. This function returns an error if the specified value is negative.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -1417,19 +1500,42 @@ functions = {
         'description': 'New Start Trigger',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies the start trigger timestamp time scale.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
+                'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': None,
+                'description': [
+                    'nidaqmx.constants.DateTime',
+                    'Specifies when to trigger.'
+                ],
                 'direction': 'in',
                 'name': 'when',
+                'optional': False,
+                'python_data_type': 'DateTime',
                 'type': 'CVIAbsoluteTime'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
+                'default': 'Timescale.USE_HOST',
+                'description': [
+                    'Optional[nidaqmx.constants.Timescale]',
+                    'Specifies the start trigger timestamp time scale.'
+                ],
                 'direction': 'in',
                 'enum': 'Timescale2',
                 'name': 'timescale',
+                'optional': True,
+                'python_data_type': 'Timescale',
                 'type': 'int32'
             }
         ],
@@ -1553,8 +1659,13 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
+                'description': [
+                    'str',
+                    ''
+                ],
                 'direction': 'in',
                 'name': 'physicalChannel',
+                'optional': False,
                 'python_data_type': 'str',
                 'type': 'const char[]'
             }
@@ -1610,7 +1721,7 @@ functions = {
     },
     'ConfigureTEDS': {
         'calling_convention': 'StdCall',
-        'description': 'Associates TEDS information with the physical channel you specify. If you do not specify the filename of a data sheet in the **file_path** input, this function attempts to find a TEDS sensor connected to the physical channel. This function temporarily overrides any TEDS configuration for the physical channel that you performed in MAX.',
+        'description': 'Associates TEDS information with the physical channel you specify. If you do not specify the filename of a data sheet in the **physical_channel** input, this function attempts to find a TEDS sensor connected to the physical channel. This function temporarily overrides any TEDS configuration for the physical channel that you performed in MAX.',
         'handle_parameter': {
             'ctypes_data_type': 'ctypes.c_char_p',
             'cvi_name': 'physicalChannel',
@@ -1619,8 +1730,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
+                'default': '""',
+                'description': [
+                    'Optional[str]',
+                    'Is the path to a Virtual TEDS data sheet that you want to associate with the physical channel. If you do not specify anything for this input, this function attempts to find a TEDS sensor connected to the physical channel.'
+                ],
                 'direction': 'in',
                 'name': 'physicalChannel',
+                'optional': True,
                 'python_data_type': 'str',
                 'type': 'const char[]'
             },
@@ -1646,19 +1763,41 @@ functions = {
         'description': 'Creates a route between a source and destination terminal. The route can carry a variety of digital signals, such as triggers, clocks, and hardware events.',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'description': [
+                    'str',
+                    'Specifies the originating terminal of the route. A DAQmx terminal constant lists all terminals available on devices installed in the system. You also can specify a source terminal by specifying a string that contains a terminal name.'
+                ],
                 'direction': 'in',
                 'name': 'sourceTerminal',
+                'optional': False,
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'description': [
+                    'str',
+                    'Specifies the receiving terminal of the route. A DAQmx terminal constant provides a list of all terminals available on devices installed in the system. You also can specify a destination terminal by specifying a string that contains a terminal name.'
+                ],
                 'direction': 'in',
                 'name': 'destinationTerminal',
+                'optional': False,
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
+                'default': 'SignalModifiers.DO_NOT_INVERT_POLARITY',
+                'description': [
+                    'Optional[nidaqmx.constants.SignalModifiers]',
+                    'Specifies whether to invert the signal this function routes from the source terminal to the destination terminal.'
+                ],
                 'direction': 'in',
                 'enum': 'InvertPolarity',
                 'name': 'signalModifiers',
+                'optional': True,
+                'python_data_type': 'SignalModifiers',
                 'type': 'int32'
             }
         ],
@@ -1700,8 +1839,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -1885,8 +2030,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -2057,8 +2208,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -2202,8 +2359,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -2360,8 +2523,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -2478,8 +2647,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -2623,8 +2798,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -2768,8 +2949,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -3002,8 +3189,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -3236,8 +3429,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -3474,8 +3673,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -3646,8 +3851,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -3776,8 +3987,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies a name to assign to the virtual channel this function creates. If you do not specify a value for this input, NI-DAQmx uses the physical channel name as the virtual channel name.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -3921,8 +4138,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -4052,8 +4275,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -4237,8 +4466,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -4422,8 +4657,13 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'description': [
+                    'TaskHandle',
+                    'Specifies whether to enable or disable the output.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': False,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -4509,8 +4749,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -4743,8 +4989,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -4977,8 +5229,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -5215,8 +5473,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -5374,8 +5638,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -5519,8 +5789,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies information about the bridge configuration and measurement.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -5737,8 +6013,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies information about the bridge configuration and measurement.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -5947,8 +6229,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies a name to assign to the virtual channel this function creates. If you do not specify a value for this input, NI-DAQmx uses the physical channel name as the virtual channel name.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -6012,8 +6300,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -6157,8 +6451,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -6328,8 +6628,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -6512,8 +6818,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -6746,8 +7058,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -6980,8 +7298,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -7218,8 +7542,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -7390,8 +7720,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -7508,8 +7844,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -7680,8 +8022,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -7798,8 +8146,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -7902,8 +8256,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies a name to assign to the virtual channel this function creates. If you do not specify a value for this input, NI-DAQmx uses the physical channel name as the virtual channel name.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -8006,8 +8366,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to generate.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -8110,8 +8476,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Is the starting angle of the encoder. This value is in the units you specify with the **units** input.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -8268,8 +8640,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -8399,8 +8777,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies a name to assign to the virtual channel this function creates. If you do not specify a value for this input, NI-DAQmx uses the physical channel name as the virtual channel name.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -8491,8 +8875,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies between which edges to measure the frequency or period of the signal.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -8595,8 +8985,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies between which edges to measure the frequency or period of the signal.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -8753,8 +9149,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies a name to assign to the virtual channel this function creates. If you do not specify a value for this input, NI-DAQmx uses the physical channel name as the virtual channel name.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -8845,8 +9247,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies a name to assign to the virtual channel this function creates. If you do not specify a value for this input, NI-DAQmx uses the physical channel name as the virtual channel name.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -9003,8 +9411,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -9134,8 +9548,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies between which edges to measure the frequency or period of the signal.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -9292,8 +9712,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -9383,8 +9809,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -9473,8 +9905,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -9555,7 +9993,7 @@ functions = {
             'python_data_type': 'nidaqmx._task_modules.channels.ci_channel.CIChannel'
         },
         'calling_convention': 'StdCall',
-        'description': 'Creates a channel to measure the width of a digital pulse. **edge** determines whether to measure a high pulse or low pulse. With the exception of devices that support multi-counter tasks, you can create only one counter input channel at a time with this function because a task can contain only one counter input channel. To read from multiple counters simultaneously, use a separate task for each counter. Connect the input signal to the default input terminal of the counter unless you select a different input terminal.',
+        'description': 'Creates a channel to measure the width of a digital pulse. **starting_edge** determines whether to measure a high pulse or low pulse. With the exception of devices that support multi-counter tasks, you can create only one counter input channel at a time with this function because a task can contain only one counter input channel. To read from multiple counters simultaneously, use a separate task for each counter. Connect the input signal to the default input terminal of the counter unless you select a different input terminal.',
         'handle_parameter': {
             'ctypes_data_type': 'lib_importer.task_handle',
             'cvi_name': 'taskHandle',
@@ -9564,8 +10002,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies on which edge to begin measuring pulse width.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -9682,8 +10126,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -9786,8 +10236,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies on which edge of the second signal to stop each measurement.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -9918,8 +10374,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies a name to assign to the virtual channel this function creates. If you do not specify a value for this input, NI-DAQmx uses the physical channel name as the virtual channel name.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -10036,8 +10498,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies a name to assign to the virtual channel this function creates. If you do not specify a value for this input, NI-DAQmx uses the physical channel name as the virtual channel name.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -10152,8 +10620,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies a name to assign to the virtual channel this function creates. If you do not specify a value for this input, NI-DAQmx uses the physical channel name as the virtual channel name.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -10270,8 +10744,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies a name to assign to the virtual channel this function creates. If you do not specify a value for this input, NI-DAQmx uses the physical channel name as the virtual channel name.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -10335,8 +10815,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies a name to assign to the virtual channel this function creates. If you do not specify a value for this input, NI-DAQmx uses the physical channel name as the virtual channel name.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -10535,8 +11021,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -10680,8 +11172,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -10811,8 +11309,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -10956,8 +11460,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -11087,8 +11597,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -11232,8 +11748,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies a name to assign to the virtual channel this function creates. If you do not specify a value for this input, NI-DAQmx uses the physical channel name as the virtual channel name.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -11364,8 +11886,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -11522,8 +12050,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -11680,8 +12214,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -11811,8 +12351,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -11943,8 +12489,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -12088,8 +12640,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies information about the bridge configuration and measurement.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -12245,8 +12803,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -12376,8 +12940,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -12508,8 +13078,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -12653,8 +13229,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -12784,8 +13366,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -12902,8 +13490,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'default': None,
+                'description': [
+                    'Optional[TaskHandle]',
+                    'Specifies in **units** the maximum value you expect to measure.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': True,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -13192,7 +13786,6 @@ functions = {
     },
     'CreateWatchdogTimerTaskEx': {
         'calling_convention': 'StdCall',
-        'description': '',
         'init_method': True,
         'parameters': [
             {
@@ -13285,7 +13878,6 @@ functions = {
     },
     'DeviceSupportsCal': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -13311,8 +13903,13 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'description': [
+                    'TaskHandle',
+                    ''
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': False,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             }
@@ -13331,8 +13928,13 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'description': [
+                    'TaskHandle',
+                    ''
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': False,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             }
@@ -13345,13 +13947,27 @@ functions = {
         'description': 'Removes signal routes you created by using the DAQmx Connect Terminals function. The DAQmx Disconnect Terminals function cannot remove task-based routes, such as those you create through timing and triggering configuration.',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'description': [
+                    'str',
+                    'Specifies the originating terminal of the route. A DAQmx terminal constant lists all terminals available on devices installed in the system. You also can specify a source terminal by specifying a string that contains a terminal name.'
+                ],
                 'direction': 'in',
                 'name': 'sourceTerminal',
+                'optional': False,
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'description': [
+                    'str',
+                    'Specifies the receiving terminal of the route. A DAQmx terminal constant provides a list of all terminals available on devices installed in the system. You also can specify a destination terminal by specifying a string that contains a terminal name.'
+                ],
                 'direction': 'in',
                 'name': 'destinationTerminal',
+                'optional': False,
+                'python_data_type': 'str',
                 'type': 'const char[]'
             }
         ],
@@ -13369,8 +13985,13 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
+                'description': [
+                    'TaskHandle',
+                    'Is the name of the trigger, clock, or event to export.'
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': False,
                 'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
@@ -13405,7 +14026,6 @@ functions = {
     },
     'GetAIChanCalCalDate': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -13447,7 +14067,6 @@ functions = {
     },
     'GetAIChanCalExpDate': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -13489,7 +14108,6 @@ functions = {
     },
     'GetAnalogPowerUpStates': {
         'calling_convention': 'Cdecl',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -13574,7 +14192,6 @@ functions = {
     },
     'GetArmStartTrigTimestampVal': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -13591,7 +14208,6 @@ functions = {
     },
     'GetArmStartTrigTrigWhen': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -13608,7 +14224,6 @@ functions = {
     },
     'GetAutoConfiguredCDAQSyncConnections': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'out',
@@ -13630,7 +14245,6 @@ functions = {
     'GetBufferAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetBufferAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -13654,7 +14268,6 @@ functions = {
     'GetCalInfoAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -13685,7 +14298,6 @@ functions = {
     'GetCalInfoAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -13716,7 +14328,6 @@ functions = {
     'GetCalInfoAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -13749,7 +14360,6 @@ functions = {
     'GetCalInfoAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -13780,7 +14390,6 @@ functions = {
     'GetChanAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -13816,7 +14425,6 @@ functions = {
     'GetChanAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -13852,7 +14460,6 @@ functions = {
     'GetChanAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -13890,7 +14497,6 @@ functions = {
     'GetChanAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -13926,7 +14532,6 @@ functions = {
     'GetChanAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -13964,7 +14569,6 @@ functions = {
     'GetChanAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14000,7 +14604,6 @@ functions = {
     'GetDeviceAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14031,7 +14634,6 @@ functions = {
     'GetDeviceAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14062,7 +14664,6 @@ functions = {
     'GetDeviceAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14095,7 +14696,6 @@ functions = {
     'GetDeviceAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14126,7 +14726,6 @@ functions = {
     'GetDeviceAttributeInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14159,7 +14758,6 @@ functions = {
     'GetDeviceAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14192,7 +14790,6 @@ functions = {
     'GetDeviceAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14223,7 +14820,6 @@ functions = {
     'GetDeviceAttributeUInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14255,7 +14851,6 @@ functions = {
     },
     'GetDigitalLogicFamilyPowerUpState': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14272,7 +14867,6 @@ functions = {
     },
     'GetDigitalPowerUpStates': {
         'calling_convention': 'Cdecl',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14313,7 +14907,6 @@ functions = {
     },
     'GetDigitalPullUpPullDownStates': {
         'calling_convention': 'Cdecl',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14354,7 +14947,6 @@ functions = {
     },
     'GetDisconnectedCDAQSyncPorts': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'out',
@@ -14375,7 +14967,6 @@ functions = {
     },
     'GetErrorString': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14402,7 +14993,6 @@ functions = {
     'GetExportedSignalAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14433,7 +15023,6 @@ functions = {
     'GetExportedSignalAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14464,7 +15053,6 @@ functions = {
     'GetExportedSignalAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14495,7 +15083,6 @@ functions = {
     'GetExportedSignalAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14528,7 +15115,6 @@ functions = {
     'GetExportedSignalAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14559,7 +15145,6 @@ functions = {
     'GetExtendedErrorInfo': {
         'calling_convention': 'StdCall',
         'codegen_method': 'private',
-        'description': '',
         'parameters': [
             {
                 'direction': 'out',
@@ -14580,7 +15165,6 @@ functions = {
     },
     'GetFirstSampClkWhen': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14597,7 +15181,6 @@ functions = {
     },
     'GetFirstSampTimestampVal': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14614,7 +15197,6 @@ functions = {
     },
     'GetNthTaskChannel': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14645,7 +15227,6 @@ functions = {
     },
     'GetNthTaskDevice': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14676,7 +15257,6 @@ functions = {
     },
     'GetNthTaskReadChannel': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14708,7 +15288,6 @@ functions = {
     'GetPersistedChanAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPersistedChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14739,7 +15318,6 @@ functions = {
     'GetPersistedChanAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPersistedChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14772,7 +15350,6 @@ functions = {
     'GetPersistedScaleAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPersistedScaleAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14803,7 +15380,6 @@ functions = {
     'GetPersistedScaleAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPersistedScaleAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14836,7 +15412,6 @@ functions = {
     'GetPersistedTaskAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPersistedTaskAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14867,7 +15442,6 @@ functions = {
     'GetPersistedTaskAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPersistedTaskAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14900,7 +15474,6 @@ functions = {
     'GetPhysicalChanAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14931,7 +15504,6 @@ functions = {
     'GetPhysicalChanAttributeBytes': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14964,7 +15536,6 @@ functions = {
     'GetPhysicalChanAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -14995,7 +15566,6 @@ functions = {
     'GetPhysicalChanAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15028,7 +15598,6 @@ functions = {
     'GetPhysicalChanAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15059,7 +15628,6 @@ functions = {
     'GetPhysicalChanAttributeInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15092,7 +15660,6 @@ functions = {
     'GetPhysicalChanAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15125,7 +15692,6 @@ functions = {
     'GetPhysicalChanAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15156,7 +15722,6 @@ functions = {
     'GetPhysicalChanAttributeUInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15189,7 +15754,6 @@ functions = {
     'GetReadAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15220,7 +15784,6 @@ functions = {
     'GetReadAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15251,7 +15814,6 @@ functions = {
     'GetReadAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15282,7 +15844,6 @@ functions = {
     'GetReadAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15315,7 +15876,6 @@ functions = {
     'GetReadAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15346,7 +15906,6 @@ functions = {
     'GetReadAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15377,7 +15936,6 @@ functions = {
     'GetRealTimeAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetRealTimeAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15408,7 +15966,6 @@ functions = {
     'GetRealTimeAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetRealTimeAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15439,7 +15996,6 @@ functions = {
     'GetRealTimeAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetRealTimeAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15469,7 +16025,6 @@ functions = {
     },
     'GetRefTrigTimestampVal': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15487,7 +16042,6 @@ functions = {
     'GetScaleAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetScaleAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15518,7 +16072,6 @@ functions = {
     'GetScaleAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetScaleAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15551,7 +16104,6 @@ functions = {
     'GetScaleAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetScaleAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15582,7 +16134,6 @@ functions = {
     'GetScaleAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetScaleAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15614,7 +16165,6 @@ functions = {
     },
     'GetSelfCalLastDateAndTime': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15651,7 +16201,6 @@ functions = {
     },
     'GetStartTrigTimestampVal': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15668,7 +16217,6 @@ functions = {
     },
     'GetStartTrigTrigWhen': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15685,7 +16233,6 @@ functions = {
     },
     'GetSyncPulseTimeWhen': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15703,7 +16250,6 @@ functions = {
     'GetSystemInfoAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetSystemInfoAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15731,7 +16277,6 @@ functions = {
     'GetSystemInfoAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetSystemInfoAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15757,7 +16302,6 @@ functions = {
     'GetTaskAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTaskAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15788,7 +16332,6 @@ functions = {
     'GetTaskAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTaskAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15821,7 +16364,6 @@ functions = {
     'GetTaskAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTaskAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15852,7 +16394,6 @@ functions = {
     'GetTimingAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15883,7 +16424,6 @@ functions = {
     'GetTimingAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15914,7 +16454,6 @@ functions = {
     'GetTimingAttributeExBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15950,7 +16489,6 @@ functions = {
     'GetTimingAttributeExDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -15986,7 +16524,6 @@ functions = {
     'GetTimingAttributeExInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16022,7 +16559,6 @@ functions = {
     'GetTimingAttributeExString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16060,7 +16596,6 @@ functions = {
     'GetTimingAttributeExTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16096,7 +16631,6 @@ functions = {
     'GetTimingAttributeExUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16132,7 +16666,6 @@ functions = {
     'GetTimingAttributeExUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16168,7 +16701,6 @@ functions = {
     'GetTimingAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16199,7 +16731,6 @@ functions = {
     'GetTimingAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16232,7 +16763,6 @@ functions = {
     'GetTimingAttributeTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16263,7 +16793,6 @@ functions = {
     'GetTimingAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16294,7 +16823,6 @@ functions = {
     'GetTimingAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16325,7 +16853,6 @@ functions = {
     'GetTrigAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16356,7 +16883,6 @@ functions = {
     'GetTrigAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16387,7 +16913,6 @@ functions = {
     'GetTrigAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16420,7 +16945,6 @@ functions = {
     'GetTrigAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16451,7 +16975,6 @@ functions = {
     'GetTrigAttributeInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16484,7 +17007,6 @@ functions = {
     'GetTrigAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16517,7 +17039,6 @@ functions = {
     'GetTrigAttributeTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16548,7 +17069,6 @@ functions = {
     'GetTrigAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16579,7 +17099,6 @@ functions = {
     'GetWatchdogAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWatchdogAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16615,7 +17134,6 @@ functions = {
     'GetWatchdogAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWatchdogAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16651,7 +17169,6 @@ functions = {
     'GetWatchdogAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWatchdogAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16687,7 +17204,6 @@ functions = {
     'GetWatchdogAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWatchdogAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16725,7 +17241,6 @@ functions = {
     'GetWriteAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16756,7 +17271,6 @@ functions = {
     'GetWriteAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16787,7 +17301,6 @@ functions = {
     'GetWriteAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16818,7 +17331,6 @@ functions = {
     'GetWriteAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16851,7 +17363,6 @@ functions = {
     'GetWriteAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16882,7 +17393,6 @@ functions = {
     'GetWriteAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -16929,7 +17439,6 @@ functions = {
     },
     'LoadTask': {
         'calling_convention': 'StdCall',
-        'description': '',
         'init_method': True,
         'parameters': [
             {
@@ -16964,7 +17473,6 @@ functions = {
     },
     'ReadAnalogF64': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17020,7 +17528,6 @@ functions = {
     },
     'ReadAnalogScalarF64': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17050,7 +17557,6 @@ functions = {
     },
     'ReadBinaryI16': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17107,7 +17613,6 @@ functions = {
     },
     'ReadBinaryI32': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17163,7 +17668,6 @@ functions = {
     },
     'ReadBinaryU16': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17220,7 +17724,6 @@ functions = {
     },
     'ReadBinaryU32': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17276,7 +17779,6 @@ functions = {
     },
     'ReadCounterF64': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17326,7 +17828,6 @@ functions = {
     },
     'ReadCounterF64Ex': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17382,7 +17883,6 @@ functions = {
     },
     'ReadCounterScalarF64': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17412,7 +17912,6 @@ functions = {
     },
     'ReadCounterScalarU32': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17442,7 +17941,6 @@ functions = {
     },
     'ReadCounterU32': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17492,7 +17990,6 @@ functions = {
     },
     'ReadCounterU32Ex': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17548,7 +18045,6 @@ functions = {
     },
     'ReadCtrFreq': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17612,7 +18108,6 @@ functions = {
     },
     'ReadCtrFreqScalar': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17647,7 +18142,6 @@ functions = {
     },
     'ReadCtrTicks': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17711,7 +18205,6 @@ functions = {
     },
     'ReadCtrTicksScalar': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17746,7 +18239,6 @@ functions = {
     },
     'ReadCtrTime': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17810,7 +18302,6 @@ functions = {
     },
     'ReadCtrTimeScalar': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17845,7 +18336,6 @@ functions = {
     },
     'ReadDigitalLines': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17906,7 +18396,6 @@ functions = {
     },
     'ReadDigitalScalarU32': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17936,7 +18425,6 @@ functions = {
     },
     'ReadDigitalU16': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -17993,7 +18481,6 @@ functions = {
     },
     'ReadDigitalU32': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -18049,7 +18536,6 @@ functions = {
     },
     'ReadDigitalU8': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -18233,7 +18719,6 @@ functions = {
     },
     'ReadPowerScalarF64': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -18268,7 +18753,6 @@ functions = {
     },
     'ReadRaw': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -18323,7 +18807,6 @@ functions = {
     },
     'RegisterDoneEvent': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -18370,7 +18853,6 @@ functions = {
     },
     'RegisterEveryNSamplesEvent': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -18434,7 +18916,6 @@ functions = {
     },
     'RegisterSignalEvent': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -18516,7 +18997,6 @@ functions = {
     },
     'ResetBufferAttribute': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -18534,7 +19014,6 @@ functions = {
     },
     'ResetChanAttribute': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -18566,8 +19045,13 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
+                'description': [
+                    'str',
+                    ''
+                ],
                 'direction': 'in',
                 'name': 'deviceName',
+                'optional': False,
                 'python_data_type': 'str',
                 'type': 'const char[]'
             }
@@ -18577,17 +19061,30 @@ functions = {
     },
     'ResetExportedSignalAttribute': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
+                'description': [
+                    'TaskHandle',
+                    ''
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': False,
+                'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
+                'description': [
+                    'int',
+                    ''
+                ],
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
                 'name': 'attribute',
+                'optional': False,
+                'python_data_type': 'int',
                 'type': 'int32'
             }
         ],
@@ -18595,7 +19092,6 @@ functions = {
     },
     'ResetReadAttribute': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -18613,7 +19109,6 @@ functions = {
     },
     'ResetRealTimeAttribute': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -18631,17 +19126,30 @@ functions = {
     },
     'ResetTimingAttribute': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
+                'description': [
+                    'TaskHandle',
+                    ''
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': False,
+                'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
+                'description': [
+                    'int',
+                    ''
+                ],
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
                 'name': 'attribute',
+                'optional': False,
+                'python_data_type': 'int',
                 'type': 'int32'
             }
         ],
@@ -18649,22 +19157,42 @@ functions = {
     },
     'ResetTimingAttributeEx': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
+                'description': [
+                    'TaskHandle',
+                    ''
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': False,
+                'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'description': [
+                    'str',
+                    ''
+                ],
                 'direction': 'in',
                 'name': 'deviceNames',
+                'optional': False,
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
+                'description': [
+                    'int',
+                    ''
+                ],
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
                 'name': 'attribute',
+                'optional': False,
+                'python_data_type': 'int',
                 'type': 'int32'
             }
         ],
@@ -18672,17 +19200,30 @@ functions = {
     },
     'ResetTrigAttribute': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
+                'description': [
+                    'TaskHandle',
+                    ''
+                ],
                 'direction': 'in',
                 'name': 'task',
+                'optional': False,
+                'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
+                'description': [
+                    'int',
+                    ''
+                ],
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
                 'name': 'attribute',
+                'optional': False,
+                'python_data_type': 'int',
                 'type': 'int32'
             }
         ],
@@ -18690,7 +19231,6 @@ functions = {
     },
     'ResetWatchdogAttribute': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -18713,7 +19253,6 @@ functions = {
     },
     'ResetWriteAttribute': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -18820,7 +19359,6 @@ functions = {
     },
     'SelfCal': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -18841,8 +19379,13 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
+                'description': [
+                    'str',
+                    ''
+                ],
                 'direction': 'in',
                 'name': 'deviceName',
+                'optional': False,
                 'python_data_type': 'str',
                 'type': 'const char[]'
             }
@@ -18852,7 +19395,6 @@ functions = {
     },
     'SetAIChanCalCalDate': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -18894,7 +19436,6 @@ functions = {
     },
     'SetAIChanCalExpDate': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -18936,7 +19477,6 @@ functions = {
     },
     'SetAnalogPowerUpStates': {
         'calling_convention': 'Cdecl',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19014,7 +19554,6 @@ functions = {
     },
     'SetArmStartTrigTrigWhen': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19032,7 +19571,6 @@ functions = {
     'SetBufferAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetBufferAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19056,7 +19594,6 @@ functions = {
     'SetCalInfoAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19087,7 +19624,6 @@ functions = {
     'SetCalInfoAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19118,7 +19654,6 @@ functions = {
     'SetCalInfoAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19149,7 +19684,6 @@ functions = {
     'SetCalInfoAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19180,7 +19714,6 @@ functions = {
     'SetChanAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19216,7 +19749,6 @@ functions = {
     'SetChanAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19252,7 +19784,6 @@ functions = {
     'SetChanAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19290,7 +19821,6 @@ functions = {
     'SetChanAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19326,7 +19856,6 @@ functions = {
     'SetChanAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19362,7 +19891,6 @@ functions = {
     'SetChanAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19397,7 +19925,6 @@ functions = {
     },
     'SetDigitalLogicFamilyPowerUpState': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19415,7 +19942,6 @@ functions = {
     },
     'SetDigitalPowerUpStates': {
         'calling_convention': 'Cdecl',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19450,7 +19976,6 @@ functions = {
     },
     'SetDigitalPullUpPullDownStates': {
         'calling_convention': 'Cdecl',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19486,7 +20011,6 @@ functions = {
     'SetExportedSignalAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19517,7 +20041,6 @@ functions = {
     'SetExportedSignalAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19548,7 +20071,6 @@ functions = {
     'SetExportedSignalAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19579,7 +20101,6 @@ functions = {
     'SetExportedSignalAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19610,7 +20131,6 @@ functions = {
     'SetExportedSignalAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19640,7 +20160,6 @@ functions = {
     },
     'SetFirstSampClkWhen': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19658,7 +20177,6 @@ functions = {
     'SetReadAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19689,7 +20207,6 @@ functions = {
     'SetReadAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19720,7 +20237,6 @@ functions = {
     'SetReadAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19751,7 +20267,6 @@ functions = {
     'SetReadAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19782,7 +20297,6 @@ functions = {
     'SetReadAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19813,7 +20327,6 @@ functions = {
     'SetReadAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19844,7 +20357,6 @@ functions = {
     'SetRealTimeAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetRealTimeAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19875,7 +20387,6 @@ functions = {
     'SetRealTimeAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetRealTimeAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19906,7 +20417,6 @@ functions = {
     'SetRealTimeAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetRealTimeAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19937,7 +20447,6 @@ functions = {
     'SetScaleAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetScaleAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -19968,7 +20477,6 @@ functions = {
     'SetScaleAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetScaleAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20001,7 +20509,6 @@ functions = {
     'SetScaleAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetScaleAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20032,7 +20539,6 @@ functions = {
     'SetScaleAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetScaleAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20062,7 +20568,6 @@ functions = {
     },
     'SetStartTrigTrigWhen': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20079,7 +20584,6 @@ functions = {
     },
     'SetSyncPulseTimeWhen': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20097,7 +20601,6 @@ functions = {
     'SetTimingAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20128,7 +20631,6 @@ functions = {
     'SetTimingAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20159,7 +20661,6 @@ functions = {
     'SetTimingAttributeExBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20195,7 +20696,6 @@ functions = {
     'SetTimingAttributeExDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20231,7 +20731,6 @@ functions = {
     'SetTimingAttributeExInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20267,7 +20766,6 @@ functions = {
     'SetTimingAttributeExString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20303,7 +20801,6 @@ functions = {
     'SetTimingAttributeExTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20339,7 +20836,6 @@ functions = {
     'SetTimingAttributeExUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20375,7 +20871,6 @@ functions = {
     'SetTimingAttributeExUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20411,7 +20906,6 @@ functions = {
     'SetTimingAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20442,7 +20936,6 @@ functions = {
     'SetTimingAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20473,7 +20966,6 @@ functions = {
     'SetTimingAttributeTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20504,7 +20996,6 @@ functions = {
     'SetTimingAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20535,7 +21026,6 @@ functions = {
     'SetTimingAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20566,7 +21056,6 @@ functions = {
     'SetTrigAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20597,7 +21086,6 @@ functions = {
     'SetTrigAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20628,7 +21116,6 @@ functions = {
     'SetTrigAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20661,7 +21148,6 @@ functions = {
     'SetTrigAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20692,7 +21178,6 @@ functions = {
     'SetTrigAttributeInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20725,7 +21210,6 @@ functions = {
     'SetTrigAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20756,7 +21240,6 @@ functions = {
     'SetTrigAttributeTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20787,7 +21270,6 @@ functions = {
     'SetTrigAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20818,7 +21300,6 @@ functions = {
     'SetWatchdogAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWatchdogAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20854,7 +21335,6 @@ functions = {
     'SetWatchdogAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWatchdogAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20890,7 +21370,6 @@ functions = {
     'SetWatchdogAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWatchdogAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20926,7 +21405,6 @@ functions = {
     'SetWatchdogAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWatchdogAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20962,7 +21440,6 @@ functions = {
     'SetWriteAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -20993,7 +21470,6 @@ functions = {
     'SetWriteAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21024,7 +21500,6 @@ functions = {
     'SetWriteAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21055,7 +21530,6 @@ functions = {
     'SetWriteAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21086,7 +21560,6 @@ functions = {
     'SetWriteAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21117,7 +21590,6 @@ functions = {
     'SetWriteAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21188,7 +21660,6 @@ functions = {
     },
     'TaskControl': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21209,8 +21680,15 @@ functions = {
         'description': 'Sets a terminal to high-impedance state. If you connect an external signal to a terminal on the I/O connector, the terminal must be in high-impedance state. Otherwise, the device could double-drive the terminal and damage the hardware. If you use this function on a terminal in an active route, the function fails and returns an error.',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'description': [
+                    'str',
+                    'Specifies the terminal on the I/O connector to set to high-impedance state. A DAQmx terminal constant lists all available terminals on installed devices. You also can specify an output terminal by using a string that contains a terminal name.'
+                ],
                 'direction': 'in',
                 'name': 'outputTerminal',
+                'optional': False,
+                'python_data_type': 'str',
                 'type': 'const char[]'
             }
         ],
@@ -21281,7 +21759,6 @@ functions = {
     },
     'WaitUntilTaskDone': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21298,7 +21775,6 @@ functions = {
     },
     'WriteAnalogF64': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21350,7 +21826,6 @@ functions = {
     },
     'WriteAnalogScalarF64': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21385,7 +21860,6 @@ functions = {
     },
     'WriteBinaryI16': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21438,7 +21912,6 @@ functions = {
     },
     'WriteBinaryI32': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21490,7 +21963,6 @@ functions = {
     },
     'WriteBinaryU16': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21543,7 +22015,6 @@ functions = {
     },
     'WriteBinaryU32': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21595,7 +22066,6 @@ functions = {
     },
     'WriteCtrFreq': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21651,7 +22121,6 @@ functions = {
     },
     'WriteCtrFreqScalar': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21691,7 +22160,6 @@ functions = {
     },
     'WriteCtrTicks': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21747,7 +22215,6 @@ functions = {
     },
     'WriteCtrTicksScalar': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21787,7 +22254,6 @@ functions = {
     },
     'WriteCtrTime': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21843,7 +22309,6 @@ functions = {
     },
     'WriteCtrTimeScalar': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21883,7 +22348,6 @@ functions = {
     },
     'WriteDigitalLines': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21935,7 +22399,6 @@ functions = {
     },
     'WriteDigitalScalarU32': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -21970,7 +22433,6 @@ functions = {
     },
     'WriteDigitalU16': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -22023,7 +22485,6 @@ functions = {
     },
     'WriteDigitalU32': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -22075,7 +22536,6 @@ functions = {
     },
     'WriteDigitalU8': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -22127,7 +22587,6 @@ functions = {
     },
     'WriteRaw': {
         'calling_convention': 'StdCall',
-        'description': '',
         'parameters': [
             {
                 'direction': 'in',
@@ -22181,8 +22640,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
+                'default': '""',
+                'description': [
+                    'Optional[str]',
+                    'Specifies how to handle basic TEDS data in the bitstream.'
+                ],
                 'direction': 'in',
                 'name': 'physicalChannel',
+                'optional': True,
                 'python_data_type': 'str',
                 'type': 'const char[]'
             },
@@ -22239,8 +22704,14 @@ functions = {
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
+                'default': '""',
+                'description': [
+                    'Optional[str]',
+                    'Specifies how to handle basic TEDS data in the bitstream.'
+                ],
                 'direction': 'in',
                 'name': 'physicalChannel',
+                'optional': True,
                 'python_data_type': 'str',
                 'type': 'const char[]'
             },
