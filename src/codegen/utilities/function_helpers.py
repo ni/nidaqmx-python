@@ -2,6 +2,8 @@
 from codegen.functions.function import Function
 from codegen.utilities.helpers import camel_to_snake_case
 
+FUNCTION_NAME_CHANGE_SET = {"TEDSAIRTD": "TEDS_AI_RTD", "TEDSAI": "TEDS_AI", "AIRTD": "AI_RTD"}
+
 
 def get_functions(metadata, class_name):
     """Converts the scrapigen metadata into a list of functions."""
@@ -19,9 +21,14 @@ def get_functions(metadata, class_name):
 
 
 def get_function_name(function_name: str):
-    """Replaces the 'create' with 'add' and converts function name from camel to snake case."""
+    """Performs naming substitutions and converts function name from camel to snake case."""
     if function_name.startswith("Create"):
         function_name = "add" + function_name[6:]
+
+    for actual_names, alias_names in FUNCTION_NAME_CHANGE_SET.items():
+        if actual_names in function_name:
+            function_name = function_name.replace(actual_names, alias_names)
+
     return camel_to_snake_case(function_name)
 
 
