@@ -15,6 +15,7 @@ class Function:
         self._python_class_name = function_metadata["python_class_name"]
         self._calling_convention = function_metadata["calling_convention"]
         self._return_type = function_metadata["returns"]
+        self._handle_parameter = None
         if "handle_parameter" in function_metadata:
             self._handle_parameter = Parameter(
                 "handle_parameter", function_metadata["handle_parameter"]
@@ -30,6 +31,7 @@ class Function:
                     if parameter["direction"] == "output":
                         self._output_parameters.append(self._parameters)
 
+        self._adaptor_parameter = None
         if "adaptor_parameter" in function_metadata:
             self._adaptor_parameter = AdaptorParameter(function_metadata["adaptor_parameter"])
 

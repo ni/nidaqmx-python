@@ -108,7 +108,7 @@ def get_instantiation_lines(function_parameters):
 def get_arguments_type(functions_metadata):
     """Gets the 'type' of parameters."""
     argtypes = []
-    if functions_metadata.handle_parameter:
+    if functions_metadata.handle_parameter is not None:
         if functions_metadata.handle_parameter.ctypes_data_type != "ctypes.c_char_p":
             argtypes.append(functions_metadata.handle_parameter.ctypes_data_type)
         else:

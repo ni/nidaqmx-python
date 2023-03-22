@@ -37,10 +37,12 @@
             %endif
         %endfor
     %endif
+    %if func.adaptor_parameter is not None:
         Returns:
             ${func.adaptor_parameter.data_type}:
             
             ${func.adaptor_parameter.description | docstring_wrap(12, 12)}
+    %endif
         """
 \
 ################################################################################
@@ -114,7 +116,9 @@
         check_for_error(error_code)
     %endif
 \
-## Script return call.
 
+## Script return call.
+    %if func.adaptor_parameter is not None:
         return ${func.adaptor_parameter.adaptor}
+    %endif
 </%def>
