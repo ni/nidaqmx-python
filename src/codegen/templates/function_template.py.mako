@@ -116,9 +116,9 @@
         check_for_error(error_code)
     %endif
 \
-
 ## Script return call.
     %if func.adaptor_parameter is not None:
+
         return ${func.adaptor_parameter.adaptor}
     %endif
 </%def>
