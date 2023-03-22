@@ -108,9 +108,9 @@ def get_instantiation_lines(function_parameters):
 def get_arguments_type(functions_metadata):
     """Gets the 'type' of parameters."""
     argtypes = []
-    if functions_metadata.handle_parameters:
-        if functions_metadata.handle_parameters.ctypes_data_type != "ctypes.c_char_p":
-            argtypes.append(functions_metadata.handle_parameters.ctypes_data_type)
+    if functions_metadata.handle_parameter:
+        if functions_metadata.handle_parameter.ctypes_data_type != "ctypes.c_char_p":
+            argtypes.append(functions_metadata.handle_parameter.ctypes_data_type)
         else:
             argtypes.append("ctypes_byte_str")
 
@@ -161,8 +161,8 @@ def get_explicit_output_param(output_parameters):
 def generate_function_call_args(function_metadata):
     """Gets function call arguments."""
     function_call_args = []
-    if function_metadata.handle_parameters is not None:
-        function_call_args.append(function_metadata.handle_parameters.accessor)
+    if function_metadata.handle_parameter is not None:
+        function_call_args.append(function_metadata.handle_parameter.accessor)
 
     for param in function_metadata.parameters:
         if param.direction == "in":
