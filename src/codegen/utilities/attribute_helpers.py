@@ -57,6 +57,9 @@ ATTRIBUTE_ENUM_MERGE_SET = {
     "OverwriteMode": ["OverwriteMode", "OverwriteMode1"],
     "RegenerationMode": ["RegenerationMode", "RegenerationMode1"],
     "WaitMode": ["WaitMode", "WaitMode2"],
+    "Edge": ["Edge1", "Edge"],
+    "TriggerType": ["TriggerType4", "TriggerType"],
+    "Level": ["DigitalLineState", "Level"],
 }
 
 DEPRECATED_ATTRIBUTES = {
@@ -95,6 +98,7 @@ DEPRECATED_ATTRIBUTES = {
 PYTHON_CLASS_ENUM_MERGE_SET = { 
     "InStream": ["AcquisitionType","READ_ALL_AVAILABLE"],
     "OutStream": ["ResolutionType"],
+    "Watchdog": ["WDTTaskAction"],
 }
 
 
