@@ -10875,29 +10875,67 @@ functions = {
         'is_python_factory': True,
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'description': [
+                    'str',
+                    'Identifies the custom scale for later use, such as with the DAQmx Create Virtual Channel VI'
+                ],
                 'direction': 'in',
                 'name': 'name',
+                'optional': False,
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
+                'description': [
+                    'float',
+                    'Is the slope, m, in the equation.'
+                ],
                 'direction': 'in',
                 'name': 'slope',
+                'optional': False,
+                'python_data_type': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
+                'default': '0.0',
+                'description': [
+                    'Optional[float]',
+                    'Is the y-intercept, b, in the equation.'
+                ],
                 'direction': 'in',
                 'name': 'yIntercept',
+                'optional': True,
+                'python_data_type': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
+                'default': 'UnitsPreScaled.VOLTS',
+                'description': [
+                    'Optional[nidaqmx.constants.UnitsPreScaled]',
+                    'Is the units of the values to scale.'
+                ],
                 'direction': 'in',
                 'enum': 'UnitsPreScaled',
                 'name': 'preScaledUnits',
+                'optional': True,
+                'python_data_type': 'UnitsPreScaled',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'default': None,
+                'description': [
+                    'Optional[str]',
+                    'Is the units to use for the scaled value. You can use an arbitrary string. NI-DAQmx uses the units to label a graph or chart.'
+                ],
                 'direction': 'in',
                 'name': 'scaledUnits',
+                'optional': True,
+                'python_data_type': 'str',
                 'type': 'const char[]'
             }
         ],
@@ -10910,39 +10948,90 @@ functions = {
         'is_python_factory': True,
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'description': [
+                    'str',
+                    'Identifies the custom scale for later use, such as with the DAQmx Create Virtual Channel VI'
+                ],
                 'direction': 'in',
                 'name': 'name',
+                'optional': False,
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
+                'description': [
+                    'float',
+                    'Is the smallest value in the range of pre-scaled values. NI-DAQmx maps this value to **scaled_min**.'
+                ],
                 'direction': 'in',
                 'name': 'prescaledMin',
+                'optional': False,
+                'python_data_type': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
+                'description': [
+                    'float',
+                    'Is the largest value in the range of pre-scaled values. NI-DAQmx maps this value to **scaled_max**.'
+                ],
                 'direction': 'in',
                 'name': 'prescaledMax',
+                'optional': False,
+                'python_data_type': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
+                'description': [
+                    'float',
+                    'Is the smallest value in the range of scaled values. NI-DAQmx maps this value to **prescaled_min**. Read operations clip samples that are smaller than this value. Write operations generate errors for samples that are smaller than this value.'
+                ],
                 'direction': 'in',
                 'name': 'scaledMin',
+                'optional': False,
+                'python_data_type': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
+                'description': [
+                    'float',
+                    'Is the largest value in the range of scaled values. NI-DAQmx maps this value to **prescaled_max**. Read operations clip samples that are larger than this value. Write operations generate errors for samples that are larger than this value.'
+                ],
                 'direction': 'in',
                 'name': 'scaledMax',
+                'optional': False,
+                'python_data_type': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
+                'default': 'UnitsPreScaled.VOLTS',
+                'description': [
+                    'Optional[nidaqmx.constants.UnitsPreScaled]',
+                    'Is the units of the values to scale.'
+                ],
                 'direction': 'in',
                 'enum': 'UnitsPreScaled',
                 'name': 'preScaledUnits',
+                'optional': True,
+                'python_data_type': 'UnitsPreScaled',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'default': None,
+                'description': [
+                    'Optional[str]',
+                    'Is the units to use for the scaled value. You can use an arbitrary string. NI-DAQmx uses the units to label a graph or chart.'
+                ],
                 'direction': 'in',
                 'name': 'scaledUnits',
+                'optional': True,
+                'python_data_type': 'str',
                 'type': 'const char[]'
             }
         ],
@@ -10955,14 +11044,29 @@ functions = {
         'is_python_factory': True,
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'description': [
+                    'str',
+                    'Identifies the custom scale for later use, such as with the DAQmx Create Virtual Channel VI'
+                ],
                 'direction': 'in',
                 'name': 'name',
+                'optional': False,
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
+                'description': [
+                    'List[float]',
+                    'Is an list of coefficients for the polynomial that converts pre-scaled values to scaled values. Each element of the list corresponds to a term of the equation.'
+                ],
                 'direction': 'in',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
                 'name': 'forwardCoeffs',
+                'optional': False,
+                'python_data_type': 'float',
                 'size': {
                     'mechanism': 'len',
                     'value': 'numForwardCoeffsIn'
@@ -10975,9 +11079,17 @@ functions = {
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
+                'description': [
+                    'List[float]',
+                    'Is an list of coefficients for the polynomial that converts scaled values to pre-scaled values. Each element of the list corresponds to a term of the equation.'
+                ],
                 'direction': 'in',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
                 'name': 'reverseCoeffs',
+                'optional': False,
+                'python_data_type': 'float',
                 'size': {
                     'mechanism': 'len',
                     'value': 'numReverseCoeffsIn'
@@ -10990,14 +11102,30 @@ functions = {
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
+                'default': 'UnitsPreScaled.VOLTS',
+                'description': [
+                    'Optional[nidaqmx.constants.UnitsPreScaled]',
+                    'Is the units of the values to scale.'
+                ],
                 'direction': 'in',
                 'enum': 'UnitsPreScaled',
                 'name': 'preScaledUnits',
+                'optional': True,
+                'python_data_type': 'UnitsPreScaled',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'default': None,
+                'description': [
+                    'Optional[str]',
+                    'Is the units to use for the scaled value. You can use an arbitrary string. NI-DAQmx uses the units to label a graph or chart.'
+                ],
                 'direction': 'in',
                 'name': 'scaledUnits',
+                'optional': True,
+                'python_data_type': 'str',
                 'type': 'const char[]'
             }
         ],
@@ -13630,14 +13758,29 @@ functions = {
         'is_python_factory': True,
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'description': [
+                    'str',
+                    'Identifies the custom scale for later use, such as with the DAQmx Create Virtual Channel VI'
+                ],
                 'direction': 'in',
                 'name': 'name',
+                'optional': False,
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
+                'description': [
+                    'List[float]',
+                    'Is the list of pre-scaled values that map to the values in **scaled_vals**.'
+                ],
                 'direction': 'in',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
                 'name': 'prescaledVals',
+                'optional': False,
+                'python_data_type': 'float',
                 'size': {
                     'mechanism': 'len',
                     'value': 'numPrescaledValsIn'
@@ -13650,9 +13793,17 @@ functions = {
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
+                'description': [
+                    'List[float]',
+                    'Is the list of scaled values that map to the values in **prescaled_vals**.'
+                ],
                 'direction': 'in',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
                 'name': 'scaledVals',
+                'optional': False,
+                'python_data_type': 'float',
                 'size': {
                     'mechanism': 'len',
                     'value': 'numScaledValsIn'
@@ -13665,14 +13816,30 @@ functions = {
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
+                'default': 'UnitsPreScaled.VOLTS',
+                'description': [
+                    'Optional[nidaqmx.constants.UnitsPreScaled]',
+                    'Is the units of the values to scale.'
+                ],
                 'direction': 'in',
                 'enum': 'UnitsPreScaled',
                 'name': 'preScaledUnits',
+                'optional': True,
+                'python_data_type': 'UnitsPreScaled',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'default': None,
+                'description': [
+                    'Optional[str]',
+                    'Is the units to use for the scaled value. You can use an arbitrary string. NI-DAQmx uses the units to label a graph or chart.'
+                ],
                 'direction': 'in',
                 'name': 'scaledUnits',
+                'optional': True,
+                'python_data_type': 'str',
                 'type': 'const char[]'
             }
         ],

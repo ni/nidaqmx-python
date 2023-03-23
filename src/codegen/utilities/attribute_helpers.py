@@ -126,9 +126,7 @@ def get_enums_used(attributes):
     """Gets the list of enums used in the attribute metadata."""
     enums = []
     for attribute in attributes:
-        if (
-            attribute.python_class_name in PYTHON_CLASS_ENUM_MERGE_SET
-        ):
+        if attribute.python_class_name in PYTHON_CLASS_ENUM_MERGE_SET:
             for enum_value in PYTHON_CLASS_ENUM_MERGE_SET[attribute.python_class_name]:
                 enums.append(enum_value)
         if attribute.is_enum:
