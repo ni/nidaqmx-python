@@ -384,6 +384,62 @@ class CIChannelCollection(ChannelCollection):
 
         return self._create_chan(counter, name_to_assign_to_channel)
 
+    def add_ci_gps_timestamp_chan(
+            self, counter, name_to_assign_to_channel="",
+            units=TimeUnits.SECONDS, sync_method=GpsSignalType.IRIGB,
+            custom_scale_name=""):
+        """
+        Creates a channel that uses a special purpose counter to take a
+        timestamp and synchronizes that counter to a GPS receiver. With
+        the exception of devices that support multi-counter tasks, you
+        can create only one counter input channel at a time with this
+        function because a task can contain only one counter input
+        channel. To read from multiple counters simultaneously, use a
+        separate task for each counter. Connect the input signals to the
+        default input terminals of the counter unless you select
+        different input terminals.
+
+        Args:
+            counter (str): Specifies the name of the counter to use to
+                create the virtual channel. The DAQmx physical channel
+                constant lists all physical channels, including
+                counters, for devices installed in the system.
+            name_to_assign_to_channel (Optional[str]): Specifies a name
+                to assign to the virtual channel this function creates.
+                If you do not specify a value for this input, NI-DAQmx
+                uses the physical channel name as the virtual channel
+                name.
+            units (Optional[nidaqmx.constants.TimeUnits]): Specifies the
+                units to use to return the timestamp.
+            sync_method (Optional[nidaqmx.constants.GpsSignalType]): 
+                Specifies the method to use to synchronize the counter
+                to a GPS receiver.
+            custom_scale_name (Optional[str]): Specifies the name of a
+                custom scale for the channel. If you want the channel to
+                use a custom scale, specify the name of the custom scale
+                to this input and set **units** to
+                **FROM_CUSTOM_SCALE**.
+        Returns:
+            nidaqmx._task_modules.channels.ci_channel.CIChannel:
+            
+            Indicates the newly created channel object.
+        """
+        cfunc = lib_importer.windll.DAQmxCreateCIGPSTimestampChan
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_int,
+                        ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, counter, name_to_assign_to_channel, units.value,
+            sync_method.value, custom_scale_name)
+        check_for_error(error_code)
+
+        return self._create_chan(counter, name_to_assign_to_channel)
+
     def add_ci_lin_encoder_chan(
             self, counter, name_to_assign_to_channel="",
             decoding_type=EncoderType.X_4, zidx_enable=False, zidx_val=0,
@@ -778,14 +834,14 @@ class CIChannelCollection(ChannelCollection):
             custom_scale_name=""):
         """
         Creates a channel to measure the width of a digital pulse.
-        **edge** determines whether to measure a high pulse or low
-        pulse. With the exception of devices that support multi-counter
-        tasks, you can create only one counter input channel at a time
-        with this function because a task can contain only one counter
-        input channel. To read from multiple counters simultaneously,
-        use a separate task for each counter. Connect the input signal
-        to the default input terminal of the counter unless you select a
-        different input terminal.
+        **starting_edge** determines whether to measure a high pulse or
+        low pulse. With the exception of devices that support multi-
+        counter tasks, you can create only one counter input channel at
+        a time with this function because a task can contain only one
+        counter input channel. To read from multiple counters
+        simultaneously, use a separate task for each counter. Connect
+        the input signal to the default input terminal of the counter
+        unless you select a different input terminal.
 
         Args:
             counter (str): Specifies the name of the counter to use to
@@ -948,62 +1004,6 @@ class CIChannelCollection(ChannelCollection):
             self._handle, counter, name_to_assign_to_channel, min_val,
             max_val, units.value, first_edge.value, second_edge.value,
             custom_scale_name)
-        check_for_error(error_code)
-
-        return self._create_chan(counter, name_to_assign_to_channel)
-
-    def add_cigps_timestamp_chan(
-            self, counter, name_to_assign_to_channel="",
-            units=TimeUnits.SECONDS, sync_method=GpsSignalType.IRIGB,
-            custom_scale_name=""):
-        """
-        Creates a channel that uses a special purpose counter to take a
-        timestamp and synchronizes that counter to a GPS receiver. With
-        the exception of devices that support multi-counter tasks, you
-        can create only one counter input channel at a time with this
-        function because a task can contain only one counter input
-        channel. To read from multiple counters simultaneously, use a
-        separate task for each counter. Connect the input signals to the
-        default input terminals of the counter unless you select
-        different input terminals.
-
-        Args:
-            counter (str): Specifies the name of the counter to use to
-                create the virtual channel. The DAQmx physical channel
-                constant lists all physical channels, including
-                counters, for devices installed in the system.
-            name_to_assign_to_channel (Optional[str]): Specifies a name
-                to assign to the virtual channel this function creates.
-                If you do not specify a value for this input, NI-DAQmx
-                uses the physical channel name as the virtual channel
-                name.
-            units (Optional[nidaqmx.constants.TimeUnits]): Specifies the
-                units to use to return the timestamp.
-            sync_method (Optional[nidaqmx.constants.GpsSignalType]): 
-                Specifies the method to use to synchronize the counter
-                to a GPS receiver.
-            custom_scale_name (Optional[str]): Specifies the name of a
-                custom scale for the channel. If you want the channel to
-                use a custom scale, specify the name of the custom scale
-                to this input and set **units** to
-                **FROM_CUSTOM_SCALE**.
-        Returns:
-            nidaqmx._task_modules.channels.ci_channel.CIChannel:
-            
-            Indicates the newly created channel object.
-        """
-        cfunc = lib_importer.windll.DAQmxCreateCIGPSTimestampChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_int,
-                        ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, counter, name_to_assign_to_channel, units.value,
-            sync_method.value, custom_scale_name)
         check_for_error(error_code)
 
         return self._create_chan(counter, name_to_assign_to_channel)
