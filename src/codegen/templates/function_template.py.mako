@@ -30,10 +30,10 @@
         Args:
         %for input_param in sorted_params:
 <%          initial_len, first_line = get_parameters_docstring_lines_length(input_param)%>\
-            ${input_param.parameter_name} (${input_param.description[0]}): ${
-                input_param.description[1] if first_line else '' | docstring_wrap(initial_len, 16)}
+            ${input_param.parameter_name} (${input_param.python_type_annotation}): ${
+                input_param.description if first_line else '' | docstring_wrap(initial_len, 16)}
             %if not first_line:
-                ${input_param.description[1] | docstring_wrap(16, 16)}
+                ${input_param.description | docstring_wrap(16, 16)}
             %endif
         %endfor
     %endif
