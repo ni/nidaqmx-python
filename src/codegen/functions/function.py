@@ -22,6 +22,7 @@ class Function:
             )
 
         self._output_parameters = []
+        self._parameters = None
         if "parameters" in function_metadata:
             self._parameters = []
             for parameter in function_metadata["parameters"]:
