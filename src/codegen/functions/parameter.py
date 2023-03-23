@@ -44,7 +44,7 @@ class Parameter:
     def description(self):
         """str: The description of the parameter."""
         return self._description
-         
+
     @property
     def python_type_annotation(self):
         """str: This is used to define the type annotation of the parameter."""
