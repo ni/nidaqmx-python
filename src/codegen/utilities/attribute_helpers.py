@@ -1,6 +1,7 @@
 """This contains the helper methods used in attribute generation."""
 
 from copy import deepcopy
+
 from codegen.properties.attribute import Attribute
 
 EXCLUDED_ATTRIBUTES = [
