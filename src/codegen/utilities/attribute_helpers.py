@@ -21,7 +21,7 @@ EXCLUDED_ATTRIBUTES = [
 ATTRIBUTE_ENUM_MERGE_SET = {
     "AccelSensitivityUnits": ["AccelSensitivityUnits1", "AccelSensitivityUnits"],
     "AccelUnits": ["AccelUnits", "AccelUnits2"],
-    "AngleUnits": ["AngleUnits", "AngleUnits1"],
+    "AngleUnits": ["AngleUnits", "AngleUnits1", "AngleUnits2"],
     "AutoZeroType": ["AutoZeroType", "AutoZeroType1"],
     "BridgeConfiguration": ["BridgeConfiguration", "BridgeConfiguration1"],
     "CJCSource": ["CJCSource1", "CJCSource"],
@@ -36,7 +36,7 @@ ATTRIBUTE_ENUM_MERGE_SET = {
     "FilterResponse": ["FilterResponse1", "FilterResponse"],
     "FilterType": ["FilterType", "FilterType2"],
     "LVDTSensitivityUnits": ["LVDTSensitivityUnits1", "LVDTSensitivityUnits"],
-    "LengthUnits": ["LengthUnits", "LengthUnits2"],
+    "LengthUnits": ["LengthUnits", "LengthUnits2", "LengthUnits3"],
     "RTDType": ["RTDType", "RTDType1"],
     "RVDTSensitivityUnits": ["RVDTSensitivityUnits", "RVDTSensitivityUnits1"],
     "ResistanceUnits": ["ResistanceUnits", "ResistanceUnits1"],
@@ -47,13 +47,30 @@ ATTRIBUTE_ENUM_MERGE_SET = {
     "StrainUnits": ["StrainUnits", "StrainUnits1"],
     "TemperatureUnits": ["TemperatureUnits", "TemperatureUnits1"],
     "ThermocoupleType": ["ThermocoupleType", "ThermocoupleType1"],
-    "VoltageUnits": ["VoltageUnits", "VoltageUnits1"],
+    "VoltageUnits": ["VoltageUnits", "VoltageUnits1", "VoltageUnits2"],
     "UsageTypeAI": ["UsageTypeAI", "AIMeasurementType"],
+    "UsageTypeAO": ["AOOutputChannelType"],
+    "UsageTypeCI": ["CIMeasurementType"],
     "DataTransferActiveTransferMode": [
         "DataTransferMechanism",
         "DataTransferActiveTransferMode",
     ],
-    "TerminalConfiguration": ["TerminalConfiguration", "InputTermCfg"],
+    "TerminalConfiguration": [
+        "TerminalConfiguration",
+        "InputTermCfg",
+        "OutputTermCfg",
+        "InputTermCfg2",
+    ],
+    "CountDirection": ["CountDirection1"],
+    "FrequencyUnits": ["FrequencyUnits2", "FrequencyUnits3"],
+    "Edge": ["Edge1"],
+    "TimeUnits": ["TimeUnits2", "TimeUnits3"],
+    "EncoderType": ["EncoderType2"],
+    "GpsSignalType": ["GpsSignalType1"],
+    "EncoderZIndexPhase": ["EncoderZIndexPhase1"],
+    "Level": ["Level1", "DigitalLineState"],
+    "UsageTypeCO": ["COOutputType"],
+    "ActiveOrInactiveEdgeSelection": ["SampleClockActiveOrInactiveEdgeSelection"],
     "OverwriteMode": ["OverwriteMode", "OverwriteMode1"],
     "RegenerationMode": ["RegenerationMode", "RegenerationMode1"],
     "WaitMode": ["WaitMode", "WaitMode2"],
@@ -93,12 +110,80 @@ DEPRECATED_ATTRIBUTES = {
         "new_name": "ai_velocity_iepe_sensor_db_ref",
         "deprecated_in": "0.6.6",
     },
+    "ci_count_edges_count_reset_reset_cnt": {
+        "new_name": "ci_count_edges_count_reset_reset_count",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_pulse_freq_starting_edge": {
+        "new_name": "ci_pulse_freq_start_edge",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_pulse_ticks_starting_edge": {
+        "new_name": "ci_pulse_ticks_start_edge",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_pulse_time_starting_edge": {
+        "new_name": "ci_pulse_time_start_edge",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_velocity_a_input_dig_fltr_enable": {
+        "new_name": "ci_velocity_encoder_a_input_dig_fltr_enable",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_velocity_a_input_dig_fltr_min_pulse_width": {
+        "new_name": "ci_velocity_encoder_a_input_dig_fltr_min_pulse_width",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_velocity_a_input_dig_fltr_timebase_rate": {
+        "new_name": "ci_velocity_encoder_a_input_dig_fltr_timebase_rate",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_velocity_a_input_dig_fltr_timebase_src": {
+        "new_name": "ci_velocity_encoder_a_input_dig_fltr_timebase_src",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_velocity_a_input_logic_lvl_behavior": {
+        "new_name": "ci_velocity_encoder_a_input_logic_lvl_behavior",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_velocity_a_input_term": {
+        "new_name": "ci_velocity_encoder_a_input_term",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_velocity_a_input_term_cfg": {
+        "new_name": "ci_velocity_encoder_a_input_term_cfg",
+        "deprecated_in": "0.6.6",
+    },
+    "over_write": {"new_name": "overwrite", "deprecated_in": "0.6.6"},
 }
 
-PYTHON_CLASS_ENUM_MERGE_SET = { 
-    "InStream": ["AcquisitionType","READ_ALL_AVAILABLE"],
+PYTHON_CLASS_ENUM_MERGE_SET = {
+    "Channel": ["_Save"],
+    "InStream": ["AcquisitionType", "READ_ALL_AVAILABLE"],
     "OutStream": ["ResolutionType"],
     "Watchdog": ["WDTTaskAction"],
+}
+
+
+ATTRIBUTE_CHANGE_SET = {
+    "AIChannel": {"ai_custom_scale_name": "ai_custom_scale"},
+    "AOChannel": {"ao_custom_scale_name": "ao_custom_scale"},
+    "CIChannel": {
+        "ci_custom_scale_name": "ci_custom_scale",
+        "ci_dup_count_prevent": "ci_dup_count_prevention",
+        "ci_dup_count_prevent": "ci_dup_count_prevention",
+    },
+    "Channel": {
+        "chan_descr": "description",
+        "chan_sync_unlock_behavior": "sync_unlock_behavior",
+        "chan_is_global": "is_global",
+        "physical_chan_name": "physical_channel",
+    },
+    "InStream": {
+        "change_detect_has_overflowed": "change_detect_overflowed",
+        "digital_lines_bytes_per_chan": "di_num_booleans_per_chan",
+    },
+    "OutStream": {"digital_lines_bytes_per_chan": "do_num_booleans_per_chan"},
 }
 
 
@@ -107,27 +192,35 @@ def get_attributes(metadata, class_name):
     attributes_metadata = []
     for group_name, attributes in metadata["attributes"].items():
         for id, attribute_data in attributes.items():
-            if ("python_class_name" in attribute_data and
-                attribute_data["python_class_name"] == class_name
+            if (
+                "python_class_name" in attribute_data
+                and attribute_data["python_class_name"] == class_name
                 and not attribute_data["name"] in EXCLUDED_ATTRIBUTES
             ):
                 attributes_metadata.append(Attribute(id, attribute_data, ATTRIBUTE_ENUM_MERGE_SET))
     return sorted(attributes_metadata, key=lambda x: x.name)
 
 
+def transform_attributes(attributes, class_name):
+    """Updates the attribute name with the expected name."""
+    if class_name in ATTRIBUTE_CHANGE_SET:
+        updated_names = ATTRIBUTE_CHANGE_SET[class_name]
+        for attribute in attributes:
+            if attribute.name in updated_names:
+                attribute.update_attribute_name(updated_names[attribute.name])
+        return sorted(attributes, key=lambda x: x.name)
+    return attributes
+
+
 def get_enums_used(attributes):
     """Gets the list of enums used in the attribute metadata."""
     enums = []
-    python_classes = []
     for attribute in attributes:
-        python_classes.append(attribute.python_class_name)
-    python_classes = list(set(python_classes))
-    for attribute in attributes:
+        if attribute.python_class_name in PYTHON_CLASS_ENUM_MERGE_SET:
+            for enum_value in PYTHON_CLASS_ENUM_MERGE_SET[attribute.python_class_name]:
+                enums.append(enum_value)
         if attribute.is_enum:
             enums.append(attribute.enum)
-    for python_class in python_classes:
-        if python_class in PYTHON_CLASS_ENUM_MERGE_SET:
-            enums.extend(PYTHON_CLASS_ENUM_MERGE_SET[python_class])
     enums = list(set(enums))
     return sorted(enums)
 

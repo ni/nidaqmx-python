@@ -5,18 +5,12 @@ from codegen.properties.parameter import Parameter
 class Attribute:
     """Structure for storing attribute metadata from scrapigen."""
 
-    ATTRIBUTE_CHANGE_SET = {"ai_custom_scale_name": "ai_custom_scale"}
-
     def __init__(self, id, attribute_metadata, enum_merge_set):
         """Structure for storing attribute metadata from scrapigen."""
         self._id = id
         self._is_enum = False
         self._access = attribute_metadata["access"]
-        attribute_name = attribute_metadata["name"].lower()
-        if attribute_name in self.ATTRIBUTE_CHANGE_SET:
-            self._name = self.ATTRIBUTE_CHANGE_SET.get(attribute_name)
-        else:
-            self._name = attribute_name
+        self._name = attribute_metadata["name"].lower()
         self._resettable = attribute_metadata["resettable"]
         self._type = attribute_metadata["type"]
         self._ctypes_data_type = attribute_metadata["ctypes_data_type"]
@@ -52,12 +46,11 @@ class Attribute:
         self._has_explicit_write_buffer_size = attribute_metadata.get(
             "has_explicit_write_buffer_size", False
         )
-        if "python_enum" in attribute_metadata:
-            self._enum = attribute_metadata["python_enum"]
-            self._is_enum = True
-        elif "enum" in attribute_metadata:
+        if "enum" in attribute_metadata:
             self._enum = self.merge_enums(attribute_metadata["enum"], enum_merge_set)
-            self._is_enum = True
+        if "python_enum" in attribute_metadata:
+            self._enum = self.merge_enums(attribute_metadata["python_enum"], enum_merge_set)
+
         self._object_type = attribute_metadata.get("python_object_type")
 
     @property
@@ -295,6 +288,7 @@ class Attribute:
 
     def merge_enums(self, enum_name, enum_merge_set):
         """Replaces the scrapigen enum name with the actual name."""
+        self._is_enum = True
         for actual_enum_name, alias_names in enum_merge_set.items():
             if enum_name in alias_names:
                 return actual_enum_name
@@ -315,3 +309,7 @@ class Attribute:
             return "List[{0}]".format(self.python_data_type)
         else:
             return self.python_data_type
+
+    def update_attribute_name(self, attribute_name):
+        """Updates the attribute name."""
+        self._name = attribute_name.lower()

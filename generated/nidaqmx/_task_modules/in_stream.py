@@ -227,7 +227,7 @@ class InStream(object):
         return val.value
 
     @property
-    def change_detect_has_overflowed(self):
+    def change_detect_overflowed(self):
         """
         bool: Indicates if samples were missed because change detection
             events occurred faster than the device could handle them.
@@ -437,7 +437,7 @@ class InStream(object):
         return unflatten_channel_string(val.value.decode('ascii'))
 
     @property
-    def digital_lines_bytes_per_chan(self):
+    def di_num_booleans_per_chan(self):
         """
         int: Indicates the number of booleans per channel that NI-DAQmx
             returns in a sample for line-based reads. If a channel has
@@ -2446,3 +2446,20 @@ class InStream(object):
         error_code = cfunc(
             self._handle, file_path)
         check_for_error(error_code)
+
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use overwrite instead.")
+    def over_write(self):
+        return self.overwrite
+
+    @over_write.setter
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use overwrite instead.")
+    def over_write(self, val):
+        self.overwrite = val
+
+    @over_write.deleter
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use overwrite instead.")
+    def over_write(self):
+        del self.overwrite
+
