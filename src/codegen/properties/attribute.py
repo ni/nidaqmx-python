@@ -5,6 +5,17 @@ from codegen.properties.parameter import Parameter
 class Attribute:
     """Structure for storing attribute metadata from scrapigen."""
 
+    ATTRIBUTE_CHANGE_SET = {
+        "ai_custom_scale_name": "ai_custom_scale",
+        "ao_custom_scale_name": "ao_custom_scale",
+        "ci_custom_scale_name": "ci_custom_scale",
+        "ci_dup_count_prevent": "ci_dup_count_prevention",
+        "chan_descr": "description",
+        "chan_sync_unlock_behavior": "sync_unlock_behavior",
+        "chan_is_global": "is_global",
+        "physical_chan_name": "physical_channel",
+    }
+
     def __init__(self, id, attribute_metadata, enum_merge_set):
         """Structure for storing attribute metadata from scrapigen."""
         self._id = id
@@ -46,12 +57,11 @@ class Attribute:
         self._has_explicit_write_buffer_size = attribute_metadata.get(
             "has_explicit_write_buffer_size", False
         )
-        if "python_enum" in attribute_metadata:
-            self._enum = attribute_metadata["python_enum"]
-            self._is_enum = True
-        elif "enum" in attribute_metadata:
+        if "enum" in attribute_metadata:
             self._enum = self.merge_enums(attribute_metadata["enum"], enum_merge_set)
-            self._is_enum = True
+        if "python_enum" in attribute_metadata:
+            self._enum = self.merge_enums(attribute_metadata["python_enum"], enum_merge_set)
+
         self._object_type = attribute_metadata.get("python_object_type")
 
     @property
@@ -289,6 +299,7 @@ class Attribute:
 
     def merge_enums(self, enum_name, enum_merge_set):
         """Replaces the scrapigen enum name with the actual name."""
+        self._is_enum = True
         for actual_enum_name, alias_names in enum_merge_set.items():
             if enum_name in alias_names:
                 return actual_enum_name
