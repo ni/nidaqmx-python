@@ -76,7 +76,7 @@ ATTRIBUTE_ENUM_MERGE_SET = {
     "WaitMode": ["WaitMode", "WaitMode2"],
     "Edge": ["Edge1", "Edge"],
     "TriggerType": ["TriggerType4", "TriggerType"],
-    "Level": ["DigitalLineState", "Level"],
+    "Level": ["DigitalLineState", "Level", "Level1"],
 }
 
 DEPRECATED_ATTRIBUTES = {
