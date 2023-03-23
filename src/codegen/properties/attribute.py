@@ -15,7 +15,9 @@ class Attribute:
         "chan_sync_unlock_behavior": "sync_unlock_behavior",
         "chan_is_global": "is_global",
         "physical_chan_name": "physical_channel",
-        "on_demand_simultaneous_ao_enable" : "simultaneous_ao_enable"
+        "on_demand_simultaneous_ao_enable" : "simultaneous_ao_enable",
+        "10_mhz_ref_clk_output_term": "exported_10_mhz_ref_clk_output_term",
+        "20_mhz_timebase_output_term": "exported_20_mhz_timebase_output_term",
     }
 
     def __init__(self, id, attribute_metadata):

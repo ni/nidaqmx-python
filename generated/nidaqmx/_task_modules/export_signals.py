@@ -19,125 +19,6 @@ class ExportSignals(object):
         self._handle = task_handle
 
     @property
-    def 10_mhz_ref_clk_output_term(self):
-        """
-        str: Specifies the terminal to which to route the 10MHz Clock.
-        """
-        cfunc = lib_importer.windll.DAQmxGetExported10MHzRefClkOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
-
-    @10_mhz_ref_clk_output_term.setter
-    def 10_mhz_ref_clk_output_term(self, val):
-        cfunc = lib_importer.windll.DAQmxSetExported10MHzRefClkOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
-
-    @10_mhz_ref_clk_output_term.deleter
-    def 10_mhz_ref_clk_output_term(self):
-        cfunc = lib_importer.windll.DAQmxResetExported10MHzRefClkOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
-
-    @property
-    def 20_mhz_timebase_output_term(self):
-        """
-        str: Specifies the terminal to which to route the 20MHz
-            Timebase.
-        """
-        cfunc = lib_importer.windll.DAQmxGetExported20MHzTimebaseOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
-
-    @20_mhz_timebase_output_term.setter
-    def 20_mhz_timebase_output_term(self, val):
-        cfunc = lib_importer.windll.DAQmxSetExported20MHzTimebaseOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
-
-    @20_mhz_timebase_output_term.deleter
-    def 20_mhz_timebase_output_term(self):
-        cfunc = lib_importer.windll.DAQmxResetExported20MHzTimebaseOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
-
-    @property
     def adv_cmplt_event_delay(self):
         """
         float: Specifies the output signal delay in periods of the
@@ -1218,6 +1099,125 @@ class ExportSignals(object):
     def divided_samp_clk_timebase_output_term(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetExportedDividedSampClkTimebaseOutputTerm)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
+
+        error_code = cfunc(
+            self._handle)
+        check_for_error(error_code)
+
+    @property
+    def exported_10_mhz_ref_clk_output_term(self):
+        """
+        str: Specifies the terminal to which to route the 10MHz Clock.
+        """
+        cfunc = lib_importer.windll.DAQmxGetExported10MHzRefClkOutputTerm
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = ctypes.create_string_buffer(temp_size)
+
+            size_or_code = cfunc(
+                self._handle, val, temp_size)
+
+            if is_string_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return val.value.decode('ascii')
+
+    @exported_10_mhz_ref_clk_output_term.setter
+    def exported_10_mhz_ref_clk_output_term(self, val):
+        cfunc = lib_importer.windll.DAQmxSetExported10MHzRefClkOutputTerm
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, val)
+        check_for_error(error_code)
+
+    @exported_10_mhz_ref_clk_output_term.deleter
+    def exported_10_mhz_ref_clk_output_term(self):
+        cfunc = lib_importer.windll.DAQmxResetExported10MHzRefClkOutputTerm
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
+
+        error_code = cfunc(
+            self._handle)
+        check_for_error(error_code)
+
+    @property
+    def exported_20_mhz_timebase_output_term(self):
+        """
+        str: Specifies the terminal to which to route the 20MHz
+            Timebase.
+        """
+        cfunc = lib_importer.windll.DAQmxGetExported20MHzTimebaseOutputTerm
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_char_p,
+                        ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = ctypes.create_string_buffer(temp_size)
+
+            size_or_code = cfunc(
+                self._handle, val, temp_size)
+
+            if is_string_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return val.value.decode('ascii')
+
+    @exported_20_mhz_timebase_output_term.setter
+    def exported_20_mhz_timebase_output_term(self, val):
+        cfunc = lib_importer.windll.DAQmxSetExported20MHzTimebaseOutputTerm
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, val)
+        check_for_error(error_code)
+
+    @exported_20_mhz_timebase_output_term.deleter
+    def exported_20_mhz_timebase_output_term(self):
+        cfunc = lib_importer.windll.DAQmxResetExported20MHzTimebaseOutputTerm
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
