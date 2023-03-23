@@ -35,6 +35,10 @@ script_info = {
         {
             "relativeOutputPath": "_task_modules\\timing.py",
             "templateFile": "_task_modules\\timing.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\export_signals.py",
+            "templateFile": "_task_modules\\export_signals.py.mako",
         }
     ]
 }
