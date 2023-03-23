@@ -105,7 +105,7 @@ PYTHON_CLASS_ENUM_MERGE_SET = {"Channel": ["_Save"]}
 def get_attributes(metadata, class_name):
     """Converts the scrapigen metadata into a list of attributes."""
     attributes_metadata = []
-    for group_name, attributes in metadata["attributes"].items():
+    for group_name, attributes in metadata["attributes"].copy().items():
         for id, attribute_data in attributes.items():
             if (
                 "python_class_name" in attribute_data
