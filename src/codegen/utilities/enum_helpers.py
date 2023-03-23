@@ -4,7 +4,7 @@ from copy import deepcopy
 
 # Merge enums based on the python_name.
 ENUM_MERGE_SET = {
-   "AccelSensitivityUnits": ["AccelSensitivityUnits1", "AccelSensitivityUnits"],
+    "AccelSensitivityUnits": ["AccelSensitivityUnits1", "AccelSensitivityUnits"],
     "AccelUnits": ["AccelUnits", "AccelUnits2"],
     "AngleUnits": ["AngleUnits", "AngleUnits1", "AngleUnits2"],
     "AutoZeroType": ["AutoZeroType", "AutoZeroType1"],
