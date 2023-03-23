@@ -174,7 +174,7 @@ class OutStream(object):
         return unflatten_channel_string(val.value.decode('ascii'))
 
     @property
-    def digital_lines_bytes_per_chan(self):
+    def do_num_booleans_per_chan(self):
         """
         int: Indicates the number of Boolean values expected per channel
             in a sample for line-based writes. This property is

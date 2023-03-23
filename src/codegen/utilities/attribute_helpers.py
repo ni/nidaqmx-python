@@ -90,11 +90,22 @@ DEPRECATED_ATTRIBUTES = {
         "new_name": "ai_velocity_iepe_sensor_db_ref",
         "deprecated_in": "0.6.6",
     },
+    "over_write": {"new_name": "overwrite", "deprecated_in": "0.6.6"},
 }
 
 PYTHON_CLASS_ENUM_MERGE_SET = {
     "InStream": ["AcquisitionType", "READ_ALL_AVAILABLE"],
     "OutStream": ["ResolutionType"],
+}
+
+
+ATTRIBUTE_CHANGE_SET = {
+    "AIChannel": {"ai_custom_scale_name": "ai_custom_scale"},
+    "InStream": {
+        "change_detect_has_overflowed": "change_detect_overflowed",
+        "digital_lines_bytes_per_chan": "di_num_booleans_per_chan",
+    },
+    "OutStream": {"digital_lines_bytes_per_chan": "do_num_booleans_per_chan"},
 }
 
 
@@ -110,6 +121,17 @@ def get_attributes(metadata, class_name):
             ):
                 attributes_metadata.append(Attribute(id, attribute_data, ATTRIBUTE_ENUM_MERGE_SET))
     return sorted(attributes_metadata, key=lambda x: x.name)
+
+
+def transform_attributes(attributes, class_name):
+    """Updates the attribute name with the expected name."""
+    if class_name in ATTRIBUTE_CHANGE_SET:
+        updated_names = ATTRIBUTE_CHANGE_SET[class_name]
+        for attribute in attributes:
+            if attribute.name in updated_names:
+                attribute.update_attribute_name(updated_names[attribute.name])
+        return attributes
+    return attributes
 
 
 def get_enums_used(attributes):
