@@ -2,7 +2,12 @@
 from codegen.functions.function import Function
 from codegen.utilities.helpers import camel_to_snake_case
 
-FUNCTION_NAME_CHANGE_SET = {"TEDSAIRTD": "TEDS_AI_RTD", "TEDSAI": "TEDS_AI", "AIRTD": "AI_RTD"}
+FUNCTION_NAME_CHANGE_SET = {
+    "TEDSAIRTD": "TEDS_AI_RTD",
+    "TEDSAI": "TEDS_AI",
+    "AIRTD": "AI_RTD",
+    "CIGPS": "CI_GPS",
+}
 
 
 def get_functions(metadata, class_name):
