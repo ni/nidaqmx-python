@@ -1,4 +1,5 @@
 """This contains the helper methods used in functions generation."""
+from copy import deepcopy
 from codegen.functions.function import Function
 from codegen.utilities.helpers import camel_to_snake_case
 
@@ -12,7 +13,7 @@ FUNCTION_NAME_CHANGE_SET = {
 
 def get_functions(metadata, class_name):
     """Converts the scrapigen metadata into a list of functions."""
-    all_functions = metadata["functions"].copy()
+    all_functions = deepcopy(metadata["functions"])
     functions_metadata = []
     for function_name, function_data in all_functions.items():
         if (
