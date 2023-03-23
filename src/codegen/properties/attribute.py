@@ -15,6 +15,7 @@ class Attribute:
         "chan_sync_unlock_behavior": "sync_unlock_behavior",
         "chan_is_global": "is_global",
         "physical_chan_name": "physical_channel",
+        "on_demand_simultaneous_ao_enable" : "simultaneous_ao_enable"
     }
 
     def __init__(self, id, attribute_metadata):
