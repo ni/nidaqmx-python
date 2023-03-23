@@ -155,6 +155,7 @@ DEPRECATED_ATTRIBUTES = {
 }
 
 PYTHON_CLASS_ENUM_MERGE_SET = {
+    "Channel": ["_Save"],
     "InStream": ["AcquisitionType", "READ_ALL_AVAILABLE"],
     "OutStream": ["ResolutionType"],
 }
@@ -162,15 +163,24 @@ PYTHON_CLASS_ENUM_MERGE_SET = {
 
 ATTRIBUTE_CHANGE_SET = {
     "AIChannel": {"ai_custom_scale_name": "ai_custom_scale"},
+    "AOChannel": {"ao_custom_scale_name": "ao_custom_scale"},
+    "CIChannel": {
+        "ci_custom_scale_name": "ci_custom_scale",
+        "ci_dup_count_prevent": "ci_dup_count_prevention",
+        "ci_dup_count_prevent": "ci_dup_count_prevention",
+    },
+    "Channel": {
+        "chan_descr": "description",
+        "chan_sync_unlock_behavior": "sync_unlock_behavior",
+        "chan_is_global": "is_global",
+        "physical_chan_name": "physical_channel",
+    },
     "InStream": {
         "change_detect_has_overflowed": "change_detect_overflowed",
         "digital_lines_bytes_per_chan": "di_num_booleans_per_chan",
     },
     "OutStream": {"digital_lines_bytes_per_chan": "do_num_booleans_per_chan"},
 }
-
-
-PYTHON_CLASS_ENUM_MERGE_SET = {"Channel": ["_Save"]}
 
 
 def get_attributes(metadata, class_name):
@@ -194,28 +204,19 @@ def transform_attributes(attributes, class_name):
         for attribute in attributes:
             if attribute.name in updated_names:
                 attribute.update_attribute_name(updated_names[attribute.name])
-        return attributes
+        return sorted(attributes, key=lambda x: x.name)
     return attributes
 
 
 def get_enums_used(attributes):
     """Gets the list of enums used in the attribute metadata."""
     enums = []
-    python_classes = []
     for attribute in attributes:
-        python_classes.append(attribute.python_class_name)
-    python_classes = list(set(python_classes))
-    for attribute in attributes:
-        if (
-            attribute.python_class_name in PYTHON_CLASS_ENUM_MERGE_SET
-        ):
+        if attribute.python_class_name in PYTHON_CLASS_ENUM_MERGE_SET:
             for enum_value in PYTHON_CLASS_ENUM_MERGE_SET[attribute.python_class_name]:
                 enums.append(enum_value)
         if attribute.is_enum:
             enums.append(attribute.enum)
-    for python_class in python_classes:
-        if python_class in PYTHON_CLASS_ENUM_MERGE_SET:
-            enums.extend(PYTHON_CLASS_ENUM_MERGE_SET[python_class])
     enums = list(set(enums))
     return sorted(enums)
 
