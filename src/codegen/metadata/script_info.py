@@ -32,5 +32,17 @@ script_info = {
             "relativeOutputPath": "_task_modules\\ai_channel_collection.py",
             "templateFile": "_task_modules\\ai_channel_collection.py.mako",
         },
+        {
+            "relativeOutputPath": "system\\device.py", 
+            "templateFile": "system\\device.py.mako",
+        },
+        {
+            "relativeOutputPath": "system\\physical_channel.py", 
+            "templateFile": "system\\physical_channel.py.mako",
+        },
+        {
+            "relativeOutputPath": "system\\system.py", 
+            "templateFile": "system\\system.py.mako",
+        },
     ]
 }

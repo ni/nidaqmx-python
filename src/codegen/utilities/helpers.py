@@ -18,3 +18,10 @@ def camel_to_snake_case(camel_case_string):
         partial = regex.sub(r"\1_\2", partial)
 
     return partial.lower()
+
+
+def strip_prefix(name: str, prefix: str):
+    """Strips prefix from name."""
+    if name is not None:
+        return name[len(prefix) + 1 :] if name.lower().startswith(prefix) else name
+    return None

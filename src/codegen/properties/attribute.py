@@ -15,6 +15,7 @@ class Attribute:
         "chan_sync_unlock_behavior": "sync_unlock_behavior",
         "chan_is_global": "is_global",
         "physical_chan_name": "physical_channel",
+        "teds_template_i_ds": "teds_template_ids",
     }
 
     def __init__(self, id, attribute_metadata):
@@ -64,9 +65,11 @@ class Attribute:
         )
         if "python_enum" in attribute_metadata:
             self._enum = attribute_metadata["python_enum"]
+            self._python_data_type = self._enum
             self._is_enum = True
         elif "enum" in attribute_metadata:
             self._enum = merge_enums(attribute_metadata["enum"])
+            self._python_data_type = self._enum
             self._is_enum = True
         self._object_type = attribute_metadata.get("python_object_type")
 
@@ -311,9 +314,9 @@ class Attribute:
         elif self.is_object and not self.is_list:
             return ":class:`{0}.{1}`".format(self.object_module_location, self.object_type)
         elif self.is_enum and self.is_list:
-            return ":class: list[`{0}.{1}`]".format(constants_path, self.enum)
+            return "List[:class:`{0}.{1}`]".format(constants_path, self.enum)
         elif self.is_object and self.is_list:
-            return ":class: list[`{0}.{1}`]".format(self.object_module_location, self.object_type)
+            return "List[:class:`{0}.{1}`]".format(self.object_module_location, self.object_type)
         elif self.is_list:
             return "List[{0}]".format(self.python_data_type)
         else:
