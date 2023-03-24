@@ -86,40 +86,6 @@ class PhysicalChannel(object):
         return unflatten_channel_string(val.value.decode('ascii'))
 
     @property
-    def ai_meas_types(self):
-        """
-        List[:class:`nidaqmx.constants.UsageTypeAI`]: Indicates the
-            measurement types supported by the channel.
-        """
-        cfunc = lib_importer.windll.DAQmxGetPhysicalChanAISupportedMeasTypes
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-                        flags=('C','W')), ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = numpy.zeros(temp_size, dtype=numpy.int32)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_array_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return [UsageTypeAI(e) for e in val]
-
-    @property
     def ai_power_control_enable(self):
         """
         bool: Specifies whether to turn on the sensor's power supply.
@@ -380,6 +346,40 @@ class PhysicalChannel(object):
         return val.tolist()
 
     @property
+    def ai_supported_meas_types(self):
+        """
+        List[:class:`nidaqmx.constants.UsageTypeAI`]: Indicates the
+            measurement types supported by the channel.
+        """
+        cfunc = lib_importer.windll.DAQmxGetPhysicalChanAISupportedMeasTypes
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = numpy.zeros(temp_size, dtype=numpy.int32)
+
+            size_or_code = cfunc(
+                self._name, val, temp_size)
+
+            if is_array_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return [UsageTypeAI(e) for e in val]
+
+    @property
     def ai_term_cfgs(self):
         """
         List[:class:`nidaqmx.constants.TerminalConfiguration`]:
@@ -518,41 +518,6 @@ class PhysicalChannel(object):
         check_for_error(error_code)
 
         return val.value
-
-    @property
-    def ao_output_types(self):
-        """
-        List[:class:`nidaqmx.constants.UsageTypeAO`]: Indicates the
-            output types supported by the channel.
-        """
-        cfunc = (lib_importer.windll.
-                 DAQmxGetPhysicalChanAOSupportedOutputTypes)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-                        flags=('C','W')), ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = numpy.zeros(temp_size, dtype=numpy.int32)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_array_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return [UsageTypeAO(e) for e in val]
 
     @property
     def ao_power_amp_channel_enable(self):
@@ -699,7 +664,42 @@ class PhysicalChannel(object):
         return val.tolist()
 
     @property
-    def ao_power_up_output_types(self):
+    def ao_supported_output_types(self):
+        """
+        List[:class:`nidaqmx.constants.UsageTypeAO`]: Indicates the
+            output types supported by the channel.
+        """
+        cfunc = (lib_importer.windll.
+                 DAQmxGetPhysicalChanAOSupportedOutputTypes)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = numpy.zeros(temp_size, dtype=numpy.int32)
+
+            size_or_code = cfunc(
+                self._name, val, temp_size)
+
+            if is_array_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return [UsageTypeAO(e) for e in val]
+
+    @property
+    def ao_supported_power_up_output_types(self):
         """
         List[:class:`nidaqmx.constants.AOPowerUpOutputBehavior`]:
             Indicates the power up output types supported by the
@@ -758,7 +758,7 @@ class PhysicalChannel(object):
             val.value, _TermCfg, TerminalConfiguration)
 
     @property
-    def ci_meas_types(self):
+    def ci_supported_meas_types(self):
         """
         List[:class:`nidaqmx.constants.UsageTypeCI`]: Indicates the
             measurement types supported by the channel.
@@ -792,7 +792,7 @@ class PhysicalChannel(object):
         return [UsageTypeCI(e) for e in val]
 
     @property
-    def co_output_types(self):
+    def co_supported_output_types(self):
         """
         List[:class:`nidaqmx.constants.UsageTypeCO`]: Indicates the
             output types supported by the channel.
@@ -1180,33 +1180,62 @@ class PhysicalChannel(object):
 
         return val.value
 
-    def clear_teds(self):
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ai_supported_meas_types instead.")
+    def ai_meas_types(self):
+        return self.ai_supported_meas_types
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ao_supported_output_types instead.")
+    def ao_output_types(self):
+        return self.ao_supported_output_types
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_supported_meas_types instead.")
+    def ci_meas_types(self):
+        return self.ci_supported_meas_types
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use co_supported_output_types instead.")
+    def co_output_types(self):
+        return self.co_supported_output_types
+
+    def clear_teds(self, physical_channel):
         """
         Removes TEDS information from the physical channel you specify.
         This function temporarily overrides any TEDS configuration for
         the physical channel that you performed in MAX.
+
+        Args:
+            physical_channel (str): 
         """
         cfunc = lib_importer.windll.DAQmxClearTEDS
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str]
+                        ctypes_byte_str, ctypes_byte_str]
 
         error_code = cfunc(
-            self._name)
+            self._name, physical_channel)
         check_for_error(error_code)
 
-    def configure_teds(self, file_path=""):
+    def configure_teds(self, physical_channel="", file_path=""):
         """
         Associates TEDS information with the physical channel you
         specify. If you do not specify the filename of a data sheet in
-        the **file_path** input, this function attempts to find a TEDS
-        sensor connected to the physical channel. This function
+        the **physical_channel** input, this function attempts to find a
+        TEDS sensor connected to the physical channel. This function
         temporarily overrides any TEDS configuration for the physical
         channel that you performed in MAX.
 
         Args:
+            physical_channel (Optional[str]): Is the path to a Virtual
+                TEDS data sheet that you want to associate with the
+                physical channel. If you do not specify anything for
+                this input, this function attempts to find a TEDS sensor
+                connected to the physical channel.
             file_path (Optional[str]): Is the path to a Virtual TEDS
                 data sheet that you want to associate with the physical
                 channel. If you do not specify anything for this input,
@@ -1218,20 +1247,22 @@ class PhysicalChannel(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str]
+                        ctypes_byte_str, ctypes_byte_str, ctypes_byte_str]
 
         error_code = cfunc(
-            self._name, file_path)
+            self._name, physical_channel, file_path)
         check_for_error(error_code)
 
     def write_to_teds_from_array(
-            self, bit_stream=None,
+            self, physical_channel="", bit_stream=None,
             basic_teds_options=WriteBasicTEDSOptions.DO_NOT_WRITE):
         """
         Writes data from a 1D list of 8-bit unsigned integers to the
         TEDS sensor.
 
         Args:
+            physical_channel (Optional[str]): Specifies how to handle
+                basic TEDS data in the bitstream.
             bit_stream (Optional[List[int]]): Is the TEDS bitstream to
                 write to the sensor. This bitstream must be constructed
                 according to the IEEE 1451.4 specification.
@@ -1249,20 +1280,24 @@ class PhysicalChannel(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.uint8,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int]
+                        ctypes_byte_str, ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.uint8, flags=('C','W')),
+                        ctypes.c_uint, ctypes.c_int]
 
         error_code = cfunc(
-            self._name, bit_stream, len(bit_stream), basic_teds_options.value)
+            self._name, physical_channel, bit_stream, len(bit_stream),
+            basic_teds_options.value)
         check_for_error(error_code)
 
     def write_to_teds_from_file(
-            self, file_path="",
+            self, physical_channel="", file_path="",
             basic_teds_options=WriteBasicTEDSOptions.DO_NOT_WRITE):
         """
         Writes data from a virtual TEDS file to the TEDS sensor.
 
         Args:
+            physical_channel (Optional[str]): Specifies how to handle
+                basic TEDS data in the bitstream.
             file_path (Optional[str]): Specifies the filename of a
                 virtual TEDS file that contains the bitstream to write.
             basic_teds_options (Optional[nidaqmx.constants.WriteBasicTEDSOptions]): 
@@ -1274,9 +1309,10 @@ class PhysicalChannel(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int]
+                        ctypes_byte_str, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
-            self._name, file_path, basic_teds_options.value)
+            self._name, physical_channel, file_path, basic_teds_options.value)
         check_for_error(error_code)
 
