@@ -84,12 +84,12 @@ def get_parameters_docstring_lines_length(input_param):
     # work around this if "param name" + "param data type docstring" is too long.
 
     # Script docstring on first line after param name and type if the following is True.
-    initial_len = 17 + len(input_param.parameter_name) + len(input_param.description[0])
+    initial_len = 17 + len(input_param.parameter_name) + len(input_param.python_type_annotation)
 
     # If length of whitespace + length of param name + length of data type docstring +
     # length of first word in docstring > docstring max line width.
     first_line = (
-        True if (initial_len + len(input_param.description[1].split(" ", 1)[0])) <= 72 else False
+        True if (initial_len + len(input_param.description.split(" ", 1)[0])) <= 72 else False
     )
 
     return initial_len, first_line
