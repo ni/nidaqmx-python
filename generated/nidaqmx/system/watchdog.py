@@ -92,7 +92,7 @@ class WatchdogTask(object):
         return self._expiration_states
 
     @property
-    def dig_edge_watchdog_expir_trig_edge(self):
+    def expiration_trigger_dig_edge_edge(self):
         """
         :class:`nidaqmx.constants.Edge`: Specifies on which edge of a
             digital signal to expire the watchdog task.
@@ -112,8 +112,8 @@ class WatchdogTask(object):
 
         return Edge(val.value)
 
-    @dig_edge_watchdog_expir_trig_edge.setter
-    def dig_edge_watchdog_expir_trig_edge(self, val):
+    @expiration_trigger_dig_edge_edge.setter
+    def expiration_trigger_dig_edge_edge(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetDigEdgeWatchdogExpirTrigEdge
         if cfunc.argtypes is None:
@@ -126,8 +126,8 @@ class WatchdogTask(object):
             self._handle, val)
         check_for_error(error_code)
 
-    @dig_edge_watchdog_expir_trig_edge.deleter
-    def dig_edge_watchdog_expir_trig_edge(self):
+    @expiration_trigger_dig_edge_edge.deleter
+    def expiration_trigger_dig_edge_edge(self):
         cfunc = lib_importer.windll.DAQmxResetDigEdgeWatchdogExpirTrigEdge
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -140,7 +140,7 @@ class WatchdogTask(object):
         check_for_error(error_code)
 
     @property
-    def dig_edge_watchdog_expir_trig_src(self):
+    def expiration_trigger_dig_edge_src(self):
         """
         str: Specifies the name of a terminal where a digital signal
             exists to use as the source of the Expiration Trigger.
@@ -173,8 +173,8 @@ class WatchdogTask(object):
 
         return val.value.decode('ascii')
 
-    @dig_edge_watchdog_expir_trig_src.setter
-    def dig_edge_watchdog_expir_trig_src(self, val):
+    @expiration_trigger_dig_edge_src.setter
+    def expiration_trigger_dig_edge_src(self, val):
         cfunc = lib_importer.windll.DAQmxSetDigEdgeWatchdogExpirTrigSrc
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -186,8 +186,8 @@ class WatchdogTask(object):
             self._handle, val)
         check_for_error(error_code)
 
-    @dig_edge_watchdog_expir_trig_src.deleter
-    def dig_edge_watchdog_expir_trig_src(self):
+    @expiration_trigger_dig_edge_src.deleter
+    def expiration_trigger_dig_edge_src(self):
         cfunc = lib_importer.windll.DAQmxResetDigEdgeWatchdogExpirTrigSrc
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -200,7 +200,7 @@ class WatchdogTask(object):
         check_for_error(error_code)
 
     @property
-    def expir_trig_trig_on_network_conn_loss(self):
+    def expiration_trigger_trig_on_network_conn_loss(self):
         """
         bool: Specifies the watchdog timer behavior when the network
             connection is lost between the host and the chassis. If set
@@ -223,8 +223,8 @@ class WatchdogTask(object):
 
         return val.value
 
-    @expir_trig_trig_on_network_conn_loss.setter
-    def expir_trig_trig_on_network_conn_loss(self, val):
+    @expiration_trigger_trig_on_network_conn_loss.setter
+    def expiration_trigger_trig_on_network_conn_loss(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetWatchdogExpirTrigTrigOnNetworkConnLoss)
         if cfunc.argtypes is None:
@@ -237,8 +237,8 @@ class WatchdogTask(object):
             self._handle, val)
         check_for_error(error_code)
 
-    @expir_trig_trig_on_network_conn_loss.deleter
-    def expir_trig_trig_on_network_conn_loss(self):
+    @expiration_trigger_trig_on_network_conn_loss.deleter
+    def expiration_trigger_trig_on_network_conn_loss(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetWatchdogExpirTrigTrigOnNetworkConnLoss)
         if cfunc.argtypes is None:
@@ -252,7 +252,7 @@ class WatchdogTask(object):
         check_for_error(error_code)
 
     @property
-    def expir_trig_type(self):
+    def expiration_trigger_type(self):
         """
         :class:`nidaqmx.constants.TriggerType`: Specifies the type of
             trigger to use to expire a watchdog task.
@@ -272,8 +272,8 @@ class WatchdogTask(object):
 
         return TriggerType(val.value)
 
-    @expir_trig_type.setter
-    def expir_trig_type(self, val):
+    @expiration_trigger_type.setter
+    def expiration_trigger_type(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetWatchdogExpirTrigType
         if cfunc.argtypes is None:
@@ -286,8 +286,8 @@ class WatchdogTask(object):
             self._handle, val)
         check_for_error(error_code)
 
-    @expir_trig_type.deleter
-    def expir_trig_type(self):
+    @expiration_trigger_type.deleter
+    def expiration_trigger_type(self):
         cfunc = lib_importer.windll.DAQmxResetWatchdogExpirTrigType
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -300,7 +300,7 @@ class WatchdogTask(object):
         check_for_error(error_code)
 
     @property
-    def has_expired(self):
+    def expired(self):
         """
         bool: Indicates if the watchdog timer expired. You can read this
             property only while the task is running.

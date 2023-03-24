@@ -30,55 +30,6 @@ class ExpirationState(object):
         return not self.__eq__(other)
 
     @property
-    def ao_expir_state(self):
-        """
-        float: Specifies the state to set the analog output physical
-            channels when the watchdog task expires.
-        """
-        val = ctypes.c_double()
-
-        cfunc = lib_importer.windll.DAQmxGetWatchdogAOExpirState
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._handle, self._physical_channel, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @ao_expir_state.setter
-    def ao_expir_state(self, val):
-        cfunc = lib_importer.windll.DAQmxSetWatchdogAOExpirState
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double]
-
-        error_code = cfunc(
-            self._handle, self._physical_channel, val)
-        check_for_error(error_code)
-
-    @ao_expir_state.deleter
-    def ao_expir_state(self):
-        cfunc = lib_importer.windll.DAQmxResetWatchdogAOExpirState
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._physical_channel)
-        check_for_error(error_code)
-
-    @property
     def ao_output_type(self):
         """
         :class:`nidaqmx.constants.WatchdogAOExpirState`: Specifies the
@@ -130,7 +81,56 @@ class ExpirationState(object):
         check_for_error(error_code)
 
     @property
-    def co_expir_state(self):
+    def ao_state(self):
+        """
+        float: Specifies the state to set the analog output physical
+            channels when the watchdog task expires.
+        """
+        val = ctypes.c_double()
+
+        cfunc = lib_importer.windll.DAQmxGetWatchdogAOExpirState
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
+
+        error_code = cfunc(
+            self._handle, self._physical_channel, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ao_state.setter
+    def ao_state(self, val):
+        cfunc = lib_importer.windll.DAQmxSetWatchdogAOExpirState
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
+
+        error_code = cfunc(
+            self._handle, self._physical_channel, val)
+        check_for_error(error_code)
+
+    @ao_state.deleter
+    def ao_state(self):
+        cfunc = lib_importer.windll.DAQmxResetWatchdogAOExpirState
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._physical_channel)
+        check_for_error(error_code)
+
+    @property
+    def co_state(self):
         """
         :class:`nidaqmx.constants.WatchdogCOExpirState`: Specifies the
             state to set the counter output channel terminal when the
@@ -152,8 +152,8 @@ class ExpirationState(object):
 
         return WatchdogCOExpirState(val.value)
 
-    @co_expir_state.setter
-    def co_expir_state(self, val):
+    @co_state.setter
+    def co_state(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetWatchdogCOExpirState
         if cfunc.argtypes is None:
@@ -167,8 +167,8 @@ class ExpirationState(object):
             self._handle, self._physical_channel, val)
         check_for_error(error_code)
 
-    @co_expir_state.deleter
-    def co_expir_state(self):
+    @co_state.deleter
+    def co_state(self):
         cfunc = lib_importer.windll.DAQmxResetWatchdogCOExpirState
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -181,7 +181,7 @@ class ExpirationState(object):
         check_for_error(error_code)
 
     @property
-    def do_expir_state(self):
+    def do_state(self):
         """
         :class:`nidaqmx.constants.Level`: Specifies the state to which
             to set the digital physical channels when the watchdog task
@@ -204,8 +204,8 @@ class ExpirationState(object):
 
         return Level(val.value)
 
-    @do_expir_state.setter
-    def do_expir_state(self, val):
+    @do_state.setter
+    def do_state(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetWatchdogDOExpirState
         if cfunc.argtypes is None:
@@ -219,8 +219,8 @@ class ExpirationState(object):
             self._handle, self._physical_channel, val)
         check_for_error(error_code)
 
-    @do_expir_state.deleter
-    def do_expir_state(self):
+    @do_state.deleter
+    def do_state(self):
         cfunc = lib_importer.windll.DAQmxResetWatchdogDOExpirState
         if cfunc.argtypes is None:
             with cfunc.arglock:

@@ -184,6 +184,18 @@ ATTRIBUTE_CHANGE_SET = {
         "digital_lines_bytes_per_chan": "di_num_booleans_per_chan",
     },
     "OutStream": {"digital_lines_bytes_per_chan": "do_num_booleans_per_chan"},
+    "ExpirationState": {
+        "ao_expir_state": "ao_state",
+        "co_expir_state": "co_state",
+        "do_expir_state": "do_state",
+    },
+    "Watchdog": {
+        "expir_trig_type": "expiration_trigger_type",
+        "has_expired": "expired",
+        "dig_edge_watchdog_expir_trig_edge": "expiration_trigger_dig_edge_edge",
+        "dig_edge_watchdog_expir_trig_src": "expiration_trigger_dig_edge_src",
+        "expir_trig_trig_on_network_conn_loss": "expiration_trigger_trig_on_network_conn_loss",
+    }
 }
 
 
