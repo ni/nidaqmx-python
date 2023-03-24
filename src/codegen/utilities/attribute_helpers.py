@@ -63,12 +63,10 @@ ATTRIBUTE_ENUM_MERGE_SET = {
     ],
     "CountDirection": ["CountDirection1"],
     "FrequencyUnits": ["FrequencyUnits2", "FrequencyUnits3"],
-    "Edge": ["Edge1"],
     "TimeUnits": ["TimeUnits2", "TimeUnits3"],
     "EncoderType": ["EncoderType2"],
     "GpsSignalType": ["GpsSignalType1"],
     "EncoderZIndexPhase": ["EncoderZIndexPhase1"],
-    "Level": ["Level1", "DigitalLineState"],
     "UsageTypeCO": ["COOutputType"],
     "ActiveOrInactiveEdgeSelection": ["SampleClockActiveOrInactiveEdgeSelection"],
     "OverwriteMode": ["OverwriteMode", "OverwriteMode1"],
@@ -155,6 +153,20 @@ DEPRECATED_ATTRIBUTES = {
         "deprecated_in": "0.6.6",
     },
     "over_write": {"new_name": "overwrite", "deprecated_in": "0.6.6"},
+    "expir_states_ao_type": {"new_name": "ao_output_type", "deprecated_in": "0.6.6"},
+    "expir_states_co_state": {"new_name": "co_state", "deprecated_in": "0.6.6"},
+    "expir_states_do_state": {"new_name": "do_state", "deprecated_in": "0.6.6"},
+    "expir_states_ao_state": {"new_name": "ao_state", "deprecated_in": "0.6.6"},
+    "expir_trig_trig_type": {"new_name": "expiration_trigger_type", "deprecated_in": "0.6.6"},
+    "expir_trig_dig_edge_edge": {
+        "new_name": "expiration_trigger_dig_edge_edge",
+        "deprecated_in": "0.6.6",
+    },
+    "expir_trig_dig_edge_src": {"new_name": "expiration_trigger_type", "deprecated_in": "0.6.6"},
+    "expir_trig_trig_on_network_conn_loss": {
+        "new_name": "expiration_trigger_trig_on_network_conn_loss",
+        "deprecated_in": "0.6.6",
+    },
 }
 
 PYTHON_CLASS_ENUM_MERGE_SET = {
@@ -195,7 +207,7 @@ ATTRIBUTE_CHANGE_SET = {
         "dig_edge_watchdog_expir_trig_edge": "expiration_trigger_dig_edge_edge",
         "dig_edge_watchdog_expir_trig_src": "expiration_trigger_dig_edge_src",
         "expir_trig_trig_on_network_conn_loss": "expiration_trigger_trig_on_network_conn_loss",
-    }
+    },
 }
 
 

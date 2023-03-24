@@ -9,6 +9,7 @@
 
 import collections
 import ctypes
+import deprecation
 import numpy
 import warnings
 
@@ -394,3 +395,6 @@ ${property_template.script_property(attribute)}\
 
         error_code = cfunc(self._handle)
         check_for_error(error_code)
+
+<%namespace name="deprecated_template" file="/property_deprecated_template.py.mako"/>\
+${deprecated_template.script_deprecated_property(attributes)}\
