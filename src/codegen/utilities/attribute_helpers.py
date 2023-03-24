@@ -249,12 +249,7 @@ def _strip_physical_chan_in_description(attribute_description):
 
 
 def _strip_name(attribute_name, class_name):
-    """Strips class nme from attritube name."""
+    """Strips class name from attribute name."""
     # Strip PHYSICAL_CHAN prefix from the name.
     if class_name == "PhysicalChannel":
         return strip_prefix(attribute_name, "physical_chan")
-
-    # Strip ARM_START_TRIG prefix from the name.
-    if class_name == "ArmStartTrigger":
-        return strip_prefix(attribute_name, "arm_start_trig")
-    return attribute_name
