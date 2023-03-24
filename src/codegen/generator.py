@@ -2,8 +2,8 @@
 import logging
 import os
 import os.path
-from pathlib import Path
 import shutil
+from pathlib import Path
 
 import codegen.metadata as scrapigen_metadata
 from mako.lookup import TemplateLookup
@@ -33,14 +33,16 @@ def _generate_file(metadata, template_file_name, output_path):
     with open(output_path, "w+", newline="") as f:
         f.write(template.render(data=metadata))
 
+
 def _copy_handwritten_files(source_path, output_path):
     parent_dir = Path(__file__).parent.parent
     source_path = parent_dir / "nidaqmx" / source_path
     output_directory = os.path.dirname(output_path)
-    
-    if (not os.path.isdir(output_directory)):
+
+    if not os.path.isdir(output_directory):
         os.mkdir(output_directory)
     shutil.copy(source_path, output_path, follow_symlinks=True)
+
 
 def generate(dest):
     """Generates the DAQmx classes using scrapigen metadata."""
