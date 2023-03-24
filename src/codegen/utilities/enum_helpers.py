@@ -2,6 +2,62 @@
 import html
 from copy import deepcopy
 
+# Merge enums based on the python_name.
+ENUM_MERGE_SET = {
+    "AccelSensitivityUnits": ["AccelSensitivityUnits1", "AccelSensitivityUnits"],
+    "AccelUnits": ["AccelUnits", "AccelUnits2"],
+    "AngleUnits": ["AngleUnits", "AngleUnits1", "AngleUnits2"],
+    "AutoZeroType": ["AutoZeroType", "AutoZeroType1"],
+    "BridgeConfiguration": ["BridgeConfiguration", "BridgeConfiguration1"],
+    "CJCSource": ["CJCSource1", "CJCSource"],
+    "Coupling": ["Coupling1", "Coupling"],
+    "CurrentShuntResistorLocation": [
+        "CurrentShuntResistorLocation",
+        "CurrentShuntResistorLocation1",
+    ],
+    "CurrentUnits": ["CurrentUnits1", "CurrentUnits"],
+    "DataJustification": ["DataJustification", "DataJustification1"],
+    "DigitalWidthUnits": ["DigitalWidthUnits", "DigitalWidthUnits4"],
+    "FilterResponse": ["FilterResponse1", "FilterResponse"],
+    "FilterType": ["FilterType", "FilterType2"],
+    "LVDTSensitivityUnits": ["LVDTSensitivityUnits1", "LVDTSensitivityUnits"],
+    "LengthUnits": ["LengthUnits", "LengthUnits2", "LengthUnits3"],
+    "RTDType": ["RTDType", "RTDType1"],
+    "RVDTSensitivityUnits": ["RVDTSensitivityUnits", "RVDTSensitivityUnits1"],
+    "ResistanceUnits": ["ResistanceUnits", "ResistanceUnits1"],
+    "ResolutionType": ["ResolutionType1", "ResolutionType"],
+    "ScaleType": ["ScaleType2", "ScaleType4", "ScaleType"],
+    "SoundPressureUnits": ["SoundPressureUnits", "SoundPressureUnits1"],
+    "StrainGageBridgeType": ["StrainGageBridgeType", "StrainGageBridgeType1"],
+    "StrainUnits": ["StrainUnits", "StrainUnits1"],
+    "TemperatureUnits": ["TemperatureUnits", "TemperatureUnits1"],
+    "ThermocoupleType": ["ThermocoupleType", "ThermocoupleType1"],
+    "VoltageUnits": ["VoltageUnits", "VoltageUnits1", "VoltageUnits2"],
+    "UsageTypeAI": ["UsageTypeAI", "AIMeasurementType"],
+    "UsageTypeAO": ["AOOutputChannelType"],
+    "UsageTypeCI": ["CIMeasurementType"],
+    "DataTransferActiveTransferMode": [
+        "DataTransferMechanism",
+        "DataTransferActiveTransferMode",
+    ],
+    "TerminalConfiguration": [
+        "TerminalConfiguration",
+        "InputTermCfg",
+        "OutputTermCfg",
+        "InputTermCfg2",
+    ],
+    "CountDirection": ["CountDirection1"],
+    "FrequencyUnits": ["FrequencyUnits2", "FrequencyUnits3"],
+    "Edge": ["Edge1"],
+    "TimeUnits": ["TimeUnits2", "TimeUnits3"],
+    "EncoderType": ["EncoderType2"],
+    "GpsSignalType": ["GpsSignalType1"],
+    "EncoderZIndexPhase": ["EncoderZIndexPhase1"],
+    "Level": ["Level1", "DigitalLineState"],
+    "UsageTypeCO": ["COOutputType"],
+    "ActiveOrInactiveEdgeSelection": ["SampleClockActiveOrInactiveEdgeSelection"],
+}
+
 # We don't need this stuff.
 ENUMS_BLACKLIST = [
     "AltRef",
@@ -50,6 +106,14 @@ NAME_SUBSTITUTIONS = {
 
 # bitfield type enums are prefixed with '_'.
 BITFIELD_ENUMS = ["CouplingTypes", "Callback", "TriggerUsageTypes", "Save", "TermCfg"]
+
+
+def merge_enums(enum_name):
+    """Replaces the scrapigen enum name with the actual name."""
+    for actual_enum_name, alias_names in ENUM_MERGE_SET.items():
+        if enum_name in alias_names:
+            return actual_enum_name
+    return enum_name
 
 
 def _merge_enum_values(value_lists):

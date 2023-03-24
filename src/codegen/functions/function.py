@@ -10,18 +10,29 @@ class Function:
     def __init__(self, function_name, function_metadata):
         """Structure for storing function metadata from scrapigen."""
         self._function_name = function_name
-        self._description = function_metadata["description"]
+        self._description = function_metadata["python_description"]
         self._is_python_factory = function_metadata.get("is_python_factory", False)
         self._python_class_name = function_metadata["python_class_name"]
         self._calling_convention = function_metadata["calling_convention"]
         self._return_type = function_metadata["returns"]
+        self._handle_parameter = None
         if "handle_parameter" in function_metadata:
             self._handle_parameter = Parameter(
                 "handle_parameter", function_metadata["handle_parameter"]
             )
 
-        self._parameters = [FunctionParameter(p) for p in function_metadata["parameters"]]
+        self._output_parameters = []
+        self._parameters = None
+        if "parameters" in function_metadata:
+            self._parameters = []
+            for parameter in function_metadata["parameters"]:
+                if parameter["name"] != "task" and "python_data_type" in parameter:
+                    self._parameters.append(FunctionParameter(parameter))
 
+                    if parameter["direction"] == "output":
+                        self._output_parameters.append(self._parameters)
+
+        self._adaptor_parameter = None
         if "adaptor_parameter" in function_metadata:
             self._adaptor_parameter = AdaptorParameter(function_metadata["adaptor_parameter"])
 
@@ -29,7 +40,7 @@ class Function:
             assert function_metadata["cname"].startswith("DAQmx")
             self._c_function_name = function_metadata["cname"][5:]
         else:
-            self._c_function_name = function_name
+            self._c_function_name = function_metadata["c_function_name"]
 
     @property
     def function_name(self):
@@ -75,3 +86,13 @@ class Function:
     def parameters(self):
         """List of parameters: The list of parameters in the function."""
         return self._parameters
+
+    @property
+    def output_parameters(self):
+        """List of output parameters: The list of output parameters in the function."""
+        return self._output_parameters
+
+    @property
+    def adaptor_parameter(self):
+        """List of adaptor parameters: The list of adaptor parameters in the function."""
+        return self._adaptor_parameter
