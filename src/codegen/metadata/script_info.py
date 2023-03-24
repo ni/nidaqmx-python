@@ -32,5 +32,9 @@ script_info = {
             "relativeOutputPath": "_task_modules\\ai_channel_collection.py",
             "templateFile": "_task_modules\\ai_channel_collection.py.mako",
         },
+        {
+            "relativeOutputPath": "scale.py", 
+            "templateFile": "scale.py.mako",
+        },
     ]
 }
