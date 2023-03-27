@@ -51,7 +51,6 @@ ENUM_MERGE_SET = {
     ],
     "CountDirection": ["CountDirection1"],
     "FrequencyUnits": ["FrequencyUnits2", "FrequencyUnits3"],
-    "Edge": ["Edge1"],
     "TimeUnits": ["TimeUnits2", "TimeUnits3"],
     "EncoderType": ["EncoderType2"],
     "GpsSignalType": ["GpsSignalType1"],
@@ -59,6 +58,9 @@ ENUM_MERGE_SET = {
     "Level": ["Level1", "DigitalLineState"],
     "UsageTypeCO": ["COOutputType"],
     "ActiveOrInactiveEdgeSelection": ["SampleClockActiveOrInactiveEdgeSelection"],
+    "OverwriteMode": ["OverwriteMode", "OverwriteMode1"],
+    "RegenerationMode": ["RegenerationMode", "RegenerationMode1"],
+    "WaitMode": ["WaitMode", "WaitMode2"],
     "ExportAction": ["ExportActions", "ExportActions2", "ExportActions3", "ExportActions5"],
     "Polarity": ["Polarity", "Polarity2"],
 }

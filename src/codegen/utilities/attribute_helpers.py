@@ -8,9 +8,6 @@ EXCLUDED_ATTRIBUTES = [
     "AI_CHAN_CAL_DESC",
     "AI_CHAN_CAL_APPLY_CAL_IF_EXP",
     "AI_BRIDGE_SHUNT_CAL_SHUNT_CAL_B_SRC",
-    "OPEN_CHANS",
-    "OPEN_CHANS_EXIST",
-    "OPEN_CHANS_DETAILS",
     "AI_CHAN_CAL_VERIF_REF_VALS",
     "AI_CHAN_CAL_VERIF_ACQ_VALS",
     "AI_CHAN_CAL_TABLE_SCALED_VALS",
@@ -102,10 +99,37 @@ DEPRECATED_ATTRIBUTES = {
         "new_name": "ci_velocity_encoder_a_input_term_cfg",
         "deprecated_in": "0.6.6",
     },
+    "over_write": {"new_name": "overwrite", "deprecated_in": "0.6.6"},
+}
+
+PYTHON_CLASS_ENUM_MERGE_SET = {
+    "Channel": ["_Save"],
+    "InStream": ["AcquisitionType", "READ_ALL_AVAILABLE"],
+    "OutStream": ["ResolutionType"],
 }
 
 
-PYTHON_CLASS_ENUM_MERGE_SET = {"Channel": ["_Save"]}
+ATTRIBUTE_CHANGE_SET = {
+    "AIChannel": {"ai_custom_scale_name": "ai_custom_scale"},
+    "AOChannel": {"ao_custom_scale_name": "ao_custom_scale"},
+    "CIChannel": {
+        "ci_custom_scale_name": "ci_custom_scale",
+        "ci_dup_count_prevent": "ci_dup_count_prevention",
+        "ci_dup_count_prevent": "ci_dup_count_prevention",
+    },
+    "Channel": {
+        "chan_descr": "description",
+        "chan_sync_unlock_behavior": "sync_unlock_behavior",
+        "chan_is_global": "is_global",
+        "physical_chan_name": "physical_channel",
+    },
+    "InStream": {
+        "change_detect_has_overflowed": "change_detect_overflowed",
+        "digital_lines_bytes_per_chan": "di_num_booleans_per_chan",
+    },
+    "OutStream": {"digital_lines_bytes_per_chan": "do_num_booleans_per_chan"},
+    "Timing": {"on_demand_simultaneous_ao_enable": "simultaneous_ao_enable"},
+}
 
 
 def get_attributes(metadata, class_name):
@@ -120,6 +144,17 @@ def get_attributes(metadata, class_name):
             ):
                 attributes_metadata.append(Attribute(id, attribute_data))
     return sorted(attributes_metadata, key=lambda x: x.name)
+
+
+def transform_attributes(attributes, class_name):
+    """Updates the attribute name with the expected name."""
+    if class_name in ATTRIBUTE_CHANGE_SET:
+        updated_names = ATTRIBUTE_CHANGE_SET[class_name]
+        for attribute in attributes:
+            if attribute.name in updated_names:
+                attribute.update_attribute_name(updated_names[attribute.name])
+        return sorted(attributes, key=lambda x: x.name)
+    return attributes
 
 
 def get_enums_used(attributes):

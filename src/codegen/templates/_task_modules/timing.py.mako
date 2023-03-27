@@ -1,11 +1,12 @@
 <%
     from codegen.utilities.text_wrappers import wrap
     from codegen.utilities.function_helpers import get_functions
-    from codegen.utilities.attribute_helpers import get_attributes
+    from codegen.utilities.attribute_helpers import get_attributes, transform_attributes
     from codegen.utilities.function_helpers import get_enums_used as get_enums_used_in_functions
     from codegen.utilities.attribute_helpers import get_enums_used as get_enums_used_in_attributes
     from codegen.utilities.helpers import get_enums_to_import
     attributes = get_attributes(data,"Timing")
+    attributes =  transform_attributes(attributes, "Timing")
     functions = get_functions(data,"Timing")
     enums_in_attributes = get_enums_used_in_attributes(attributes)
     enums_in_functions = get_enums_used_in_functions(functions)
