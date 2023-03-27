@@ -17,7 +17,12 @@ ENUM_MERGE_SET = {
     ],
     "CurrentUnits": ["CurrentUnits1", "CurrentUnits"],
     "DataJustification": ["DataJustification", "DataJustification1"],
-    "DigitalWidthUnits": ["DigitalWidthUnits", "DigitalWidthUnits2", "DigitalWidthUnits3", "DigitalWidthUnits4"],
+    "DigitalWidthUnits": [
+        "DigitalWidthUnits",
+        "DigitalWidthUnits2",
+        "DigitalWidthUnits3",
+        "DigitalWidthUnits4",
+    ],
     "Edge": ["Edge", "Edge1"],
     "FilterResponse": ["FilterResponse1", "FilterResponse"],
     "FilterType": ["FilterType", "FilterType2"],

@@ -1,11 +1,12 @@
 <%
-    from codegen.utilities.attribute_helpers import get_attributes
+    from codegen.utilities.attribute_helpers import get_attributes, transform_attributes
     from codegen.utilities.attribute_helpers import get_enums_used as get_enums_used_in_attributes
     from codegen.utilities.function_helpers import get_functions
     from codegen.utilities.function_helpers import get_enums_used as get_enums_used_in_functions
     from codegen.utilities.helpers import get_enums_to_import
     from codegen.utilities.text_wrappers import wrap
     attributes = get_attributes(data,"ExportSignals")
+    attributes =  transform_attributes(attributes, "ExportSignals")
     functions = get_functions(data,"ExportSignals")
     enums_in_attributes = get_enums_used_in_attributes(attributes)
     enums_in_functions = get_enums_used_in_functions(functions)

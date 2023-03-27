@@ -129,6 +129,11 @@ ATTRIBUTE_CHANGE_SET = {
     },
     "OutStream": {"digital_lines_bytes_per_chan": "do_num_booleans_per_chan"},
     "Timing": {"on_demand_simultaneous_ao_enable": "simultaneous_ao_enable"},
+    "ExportSignals": {
+        "on_demand_simultaneous_ao_enable": "simultaneous_ao_enable",
+        "10_mhz_ref_clk_output_term": "exported_10_mhz_ref_clk_output_term",
+        "20_mhz_timebase_output_term": "exported_20_mhz_timebase_output_term",
+    },
 }
 
 
