@@ -10,7 +10,7 @@ class Function:
     def __init__(self, function_name, function_metadata):
         """Structure for storing function metadata from scrapigen."""
         self._function_name = function_name
-        self._description = function_metadata["description"]
+        self._description = function_metadata["python_description"]
         self._is_python_factory = function_metadata.get("is_python_factory", False)
         self._python_class_name = function_metadata["python_class_name"]
         self._calling_convention = function_metadata["calling_convention"]

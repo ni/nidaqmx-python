@@ -33,6 +33,10 @@ script_info = {
             "templateFile": "_task_modules\\channels\\do_channel.py.mako",
         },
         {
+            "relativeOutputPath": "_task_modules\\ai_channel_collection.py",
+            "templateFile": "_task_modules\\ai_channel_collection.py.mako",
+        },
+        {
             "relativeOutputPath": "_task_modules\\timing.py",
             "templateFile": "_task_modules\\timing.py.mako",
         },

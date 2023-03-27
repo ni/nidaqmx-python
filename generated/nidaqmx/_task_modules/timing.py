@@ -3110,11 +3110,11 @@ class Timing(object):
         Clock edges later. Pipelining allows higher data transfer rates
         at the cost of increased trigger response latency. Refer to the
         device documentation for information about which triggers
-        pipelining affects.<br/><br/>This timing type allows handshaking
-        using the Pause trigger and either the Ready for Transfer event
-        or the Data Active event. Refer to the device documentation for
-        more information.<br/><br/>This timing type is supported only by
-        the NI 6536 and NI 6537.
+        pipelining affects.  This timing type allows handshaking using
+        the Pause trigger and either the Ready for Transfer event or the
+        Data Active event. Refer to the device documentation for more
+        information.  This timing type is supported only by the NI 6536
+        and NI 6537.
 
         Args:
             rate (float): Specifies the sampling rate in samples per
