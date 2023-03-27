@@ -6,29 +6,12 @@ from codegen.utilities.enum_helpers import merge_enums
 class Attribute:
     """Structure for storing attribute metadata from scrapigen."""
 
-    ATTRIBUTE_CHANGE_SET = {
-        "ai_custom_scale_name": "ai_custom_scale",
-        "ao_custom_scale_name": "ao_custom_scale",
-        "ci_custom_scale_name": "ci_custom_scale",
-        "ci_dup_count_prevent": "ci_dup_count_prevention",
-        "chan_descr": "description",
-        "chan_sync_unlock_behavior": "sync_unlock_behavior",
-        "chan_is_global": "is_global",
-        "physical_chan_name": "physical_channel",
-        "type": "scale_type",
-        "descr": "description",
-    }
-
     def __init__(self, id, attribute_metadata):
         """Structure for storing attribute metadata from scrapigen."""
         self._id = id
         self._is_enum = False
         self._access = attribute_metadata["access"]
-        attribute_name = attribute_metadata["name"].lower()
-        if attribute_name in self.ATTRIBUTE_CHANGE_SET:
-            self._name = self.ATTRIBUTE_CHANGE_SET.get(attribute_name)
-        else:
-            self._name = attribute_name
+        self._name = attribute_metadata["name"].lower()
         self._resettable = attribute_metadata["resettable"]
         self._type = attribute_metadata["type"]
         self._ctypes_data_type = attribute_metadata["ctypes_data_type"]
@@ -65,7 +48,7 @@ class Attribute:
             "has_explicit_write_buffer_size", False
         )
         if "python_enum" in attribute_metadata:
-            self._enum = attribute_metadata["python_enum"]
+            self._enum = merge_enums(attribute_metadata["python_enum"])
             self._is_enum = True
         elif "enum" in attribute_metadata:
             self._enum = merge_enums(attribute_metadata["enum"])
@@ -320,3 +303,7 @@ class Attribute:
             return "List[{0}]".format(self.python_data_type)
         else:
             return self.python_data_type
+
+    def update_attribute_name(self, attribute_name):
+        """Updates the attribute name."""
+        self._name = attribute_name.lower()
