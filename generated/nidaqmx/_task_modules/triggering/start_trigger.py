@@ -2252,7 +2252,7 @@ class StartTrigger(object):
         return val.value.decode('ascii')
 
     @property
-    def time_timescale(self):
+    def timescale(self):
         """
         :class:`nidaqmx.constants.Timescale`: Specifies the timescale to
             be used for timestamps used in a time trigger.
@@ -2272,8 +2272,8 @@ class StartTrigger(object):
 
         return Timescale(val.value)
 
-    @time_timescale.setter
-    def time_timescale(self, val):
+    @timescale.setter
+    def timescale(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetStartTrigTimescale
         if cfunc.argtypes is None:
@@ -2286,8 +2286,8 @@ class StartTrigger(object):
             self._handle, val)
         check_for_error(error_code)
 
-    @time_timescale.deleter
-    def time_timescale(self):
+    @timescale.deleter
+    def timescale(self):
         cfunc = lib_importer.windll.DAQmxResetStartTrigTimescale
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2498,6 +2498,22 @@ class StartTrigger(object):
         error_code = cfunc(
             self._handle)
         check_for_error(error_code)
+
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use timescale instead.")
+    def time_timescale(self):
+        return self.timescale
+
+    @time_timescale.setter
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use timescale instead.")
+    def time_timescale(self, val):
+        self.timescale = val
+
+    @time_timescale.deleter
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use timescale instead.")
+    def time_timescale(self):
+        del self.timescale
 
     def cfg_anlg_edge_start_trig(
             self, trigger_source="", trigger_slope=Slope.RISING,
