@@ -6,6 +6,7 @@ enums = {
                     'description': '4-wire.'
                 },
                 'name': '4_WIRE',
+                'python_name': 'FOUR_WIRE',
                 'value': 4
             },
             {
@@ -13,6 +14,7 @@ enums = {
                     'description': '5-wire.'
                 },
                 'name': '5_WIRE',
+                'python_name': 'FIVE_WIRE',
                 'value': 5
             },
             {
@@ -20,6 +22,7 @@ enums = {
                     'description': '6-wire.'
                 },
                 'name': '6_WIRE',
+                'python_name': 'SIX_WIRE',
                 'value': 6
             }
         ]
@@ -15882,7 +15885,7 @@ enums = {
                     'description': 'Compatible with 2.5 V CMOS signals.'
                 },
                 'name': '2POINT_5_V',
-                'python_name': '2_POINT_5_V',
+                'python_name': 'TWO_POINT_FIVE_V',
                 'value': 14620
             },
             {
@@ -15890,7 +15893,7 @@ enums = {
                     'description': 'Compatible with LVTTL signals.'
                 },
                 'name': '3POINT_3_V',
-                'python_name': '3_POINT_3_V',
+                'python_name': 'THREE_POINT_THREE_V',
                 'value': 14621
             },
             {
@@ -15898,6 +15901,7 @@ enums = {
                     'description': 'Compatible with TTL and 5 V CMOS signals.'
                 },
                 'name': '5_V',
+                'python_name': 'FIVE_V',
                 'value': 14619
             }
         ]
@@ -15945,7 +15949,7 @@ enums = {
                     'description': 'Use the onboard 100 MHz timebase.'
                 },
                 'name': '100_MHZ_TIMEBASE',
-                'python_name': '100_MHZ_TIMEBASE',
+                'python_name': 'ONE_HUNDRED_MHZ_TIMEBASE',
                 'value': 15857
             },
             {
@@ -15953,7 +15957,7 @@ enums = {
                     'description': 'Use the onboard 80 MHz timebase.'
                 },
                 'name': '80_MHZ_TIMEBASE',
-                'python_name': '80_MHZ_TIMEBASE',
+                'python_name': 'EIGHTY_MHZ_TIMEBASE',
                 'value': 14636
             },
             {
@@ -15961,7 +15965,7 @@ enums = {
                     'description': 'Use the onboard 20 MHz timebase.'
                 },
                 'name': '20_MHZ_TIMEBASE',
-                'python_name': '20_MHZ_TIMEBASE',
+                'python_name': 'TWENTY_MHZ_TIMEBASE',
                 'value': 12537
             },
             {
@@ -15969,6 +15973,7 @@ enums = {
                     'description': 'Use the onboard 8 MHz timebase.'
                 },
                 'name': '8_MHZ_TIMEBASE',
+                'python_name': 'EIGHT_MHZ_TIMEBASE',
                 'value': 16023
             }
         ]
@@ -16680,6 +16685,7 @@ enums = {
                     'description': '2-wire mode.'
                 },
                 'name': '2_WIRE',
+                'python_name': 'TWO_WIRE',
                 'value': 2
             },
             {
@@ -16687,6 +16693,7 @@ enums = {
                     'description': '3-wire mode.'
                 },
                 'name': '3_WIRE',
+                'python_name': 'THREE_WIRE',
                 'value': 3
             },
             {
@@ -16694,6 +16701,7 @@ enums = {
                     'description': '4-wire mode.'
                 },
                 'name': '4_WIRE',
+                'python_name': 'FOUR_WIRE',
                 'value': 4
             }
         ]
@@ -17134,10 +17142,12 @@ enums = {
             },
             {
                 'name': '10_MHZ_REF_CLOCK',
+                'python_name': 'TEN_MHZ_REF_CLOCK',
                 'value': 12536
             },
             {
                 'name': '20_MHZ_TIMEBASE_CLOCK',
+                'python_name': 'TWENTY_MHZ_TIMEBASE_CLOCK',
                 'value': 12486
             },
             {

@@ -18,65 +18,6 @@ EXCLUDED_ATTRIBUTES = [
     "AI_CHAN_CAL_OPERATOR_NAME",
 ]
 
-ATTRIBUTE_ENUM_MERGE_SET = {
-    "AccelSensitivityUnits": ["AccelSensitivityUnits1", "AccelSensitivityUnits"],
-    "AccelUnits": ["AccelUnits", "AccelUnits2"],
-    "AngleUnits": ["AngleUnits", "AngleUnits1", "AngleUnits2"],
-    "AutoZeroType": ["AutoZeroType", "AutoZeroType1"],
-    "BridgeConfiguration": ["BridgeConfiguration", "BridgeConfiguration1"],
-    "CJCSource": ["CJCSource1", "CJCSource"],
-    "Coupling": ["Coupling1", "Coupling"],
-    "CurrentShuntResistorLocation": [
-        "CurrentShuntResistorLocation",
-        "CurrentShuntResistorLocation1",
-    ],
-    "CurrentUnits": ["CurrentUnits1", "CurrentUnits"],
-    "DataJustification": ["DataJustification", "DataJustification1"],
-    "DigitalWidthUnits": ["DigitalWidthUnits", "DigitalWidthUnits4"],
-    "FilterResponse": ["FilterResponse1", "FilterResponse"],
-    "FilterType": ["FilterType", "FilterType2"],
-    "LVDTSensitivityUnits": ["LVDTSensitivityUnits1", "LVDTSensitivityUnits"],
-    "LengthUnits": ["LengthUnits", "LengthUnits2", "LengthUnits3"],
-    "RTDType": ["RTDType", "RTDType1"],
-    "RVDTSensitivityUnits": ["RVDTSensitivityUnits", "RVDTSensitivityUnits1"],
-    "ResistanceUnits": ["ResistanceUnits", "ResistanceUnits1"],
-    "ResolutionType": ["ResolutionType1", "ResolutionType"],
-    "ScaleType": ["ScaleType2", "ScaleType4", "ScaleType"],
-    "SoundPressureUnits": ["SoundPressureUnits", "SoundPressureUnits1"],
-    "StrainGageBridgeType": ["StrainGageBridgeType", "StrainGageBridgeType1"],
-    "StrainUnits": ["StrainUnits", "StrainUnits1"],
-    "TemperatureUnits": ["TemperatureUnits", "TemperatureUnits1"],
-    "ThermocoupleType": ["ThermocoupleType", "ThermocoupleType1"],
-    "VoltageUnits": ["VoltageUnits", "VoltageUnits1", "VoltageUnits2"],
-    "UsageTypeAI": ["UsageTypeAI", "AIMeasurementType"],
-    "UsageTypeAO": ["AOOutputChannelType"],
-    "UsageTypeCI": ["CIMeasurementType"],
-    "DataTransferActiveTransferMode": [
-        "DataTransferMechanism",
-        "DataTransferActiveTransferMode",
-    ],
-    "TerminalConfiguration": [
-        "TerminalConfiguration",
-        "InputTermCfg",
-        "OutputTermCfg",
-        "InputTermCfg2",
-    ],
-    "CountDirection": ["CountDirection1"],
-    "FrequencyUnits": ["FrequencyUnits2", "FrequencyUnits3"],
-    "TimeUnits": ["TimeUnits2", "TimeUnits3"],
-    "EncoderType": ["EncoderType2"],
-    "GpsSignalType": ["GpsSignalType1"],
-    "EncoderZIndexPhase": ["EncoderZIndexPhase1"],
-    "UsageTypeCO": ["COOutputType"],
-    "ActiveOrInactiveEdgeSelection": ["SampleClockActiveOrInactiveEdgeSelection"],
-    "OverwriteMode": ["OverwriteMode", "OverwriteMode1"],
-    "RegenerationMode": ["RegenerationMode", "RegenerationMode1"],
-    "WaitMode": ["WaitMode", "WaitMode2"],
-    "Edge": ["Edge1", "Edge"],
-    "TriggerType": ["TriggerType4", "TriggerType"],
-    "Level": ["DigitalLineState", "Level", "Level1"],
-}
-
 DEPRECATED_ATTRIBUTES = {
     "ai_eddy_current_prox_sensitivity": {
         "new_name": "ai_eddy_current_prox_probe_sensitivity",
@@ -221,7 +162,7 @@ def get_attributes(metadata, class_name):
                 and attribute_data["python_class_name"] == class_name
                 and not attribute_data["name"] in EXCLUDED_ATTRIBUTES
             ):
-                attributes_metadata.append(Attribute(id, attribute_data, ATTRIBUTE_ENUM_MERGE_SET))
+                attributes_metadata.append(Attribute(id, attribute_data))
     return sorted(attributes_metadata, key=lambda x: x.name)
 
 
