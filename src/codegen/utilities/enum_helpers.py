@@ -10,14 +10,14 @@ ENUM_MERGE_SET = {
     "AutoZeroType": ["AutoZeroType", "AutoZeroType1"],
     "BridgeConfiguration": ["BridgeConfiguration", "BridgeConfiguration1"],
     "CJCSource": ["CJCSource1", "CJCSource"],
-    "Coupling": ["Coupling1", "Coupling"],
+    "Coupling": ["Coupling1", "Coupling", "Coupling2"],
     "CurrentShuntResistorLocation": [
         "CurrentShuntResistorLocation",
         "CurrentShuntResistorLocation1",
     ],
     "CurrentUnits": ["CurrentUnits1", "CurrentUnits"],
     "DataJustification": ["DataJustification", "DataJustification1"],
-    "DigitalWidthUnits": ["DigitalWidthUnits", "DigitalWidthUnits4"],
+    "DigitalWidthUnits": ["DigitalWidthUnits", "DigitalWidthUnits1", "DigitalWidthUnits4"],
     "FilterResponse": ["FilterResponse1", "FilterResponse"],
     "FilterType": ["FilterType", "FilterType2"],
     "LVDTSensitivityUnits": ["LVDTSensitivityUnits1", "LVDTSensitivityUnits"],
@@ -56,6 +56,16 @@ ENUM_MERGE_SET = {
     "Level": ["Level1", "DigitalLineState"],
     "UsageTypeCO": ["COOutputType"],
     "ActiveOrInactiveEdgeSelection": ["SampleClockActiveOrInactiveEdgeSelection"],
+    "Timescale": ["Timescale2"],
+    "TriggerType": [
+        "TriggerType4",
+        "TriggerType6",
+        "TriggerType8",
+        "TriggerType9",
+        "TriggerType10",
+    ],
+    "DigitalPatternCondition": ["DigitalPatternCondition1"],
+    "Slope": ["Slope1"],
 }
 
 # We don't need this stuff.

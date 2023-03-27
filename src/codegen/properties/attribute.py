@@ -16,6 +16,7 @@ class Attribute:
         "chan_is_global": "is_global",
         "physical_chan_name": "physical_channel",
         "teds_template_i_ds": "teds_template_ids",
+        "timescale": "time_timescale"
     }
 
     def __init__(self, id, attribute_metadata):
