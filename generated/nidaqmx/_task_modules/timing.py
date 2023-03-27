@@ -2892,7 +2892,6 @@ class Timing(object):
             self._handle)
         check_for_error(error_code)
 
-
     def cfg_burst_handshaking_timing_export_clock(
             self, sample_clk_rate, sample_clk_outp_term,
             sample_mode=AcquisitionType.FINITE, samps_per_chan=1000,
