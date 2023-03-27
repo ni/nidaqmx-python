@@ -424,7 +424,7 @@ class ArmStartTrigger(object):
         return val.value.decode('ascii')
 
     @property
-    def time_timescale(self):
+    def timescale(self):
         """
         :class:`nidaqmx.constants.Timescale`: Specifies the timescale to
             be used for timestamps used in an arm start time trigger.
@@ -444,8 +444,8 @@ class ArmStartTrigger(object):
 
         return Timescale(val.value)
 
-    @time_timescale.setter
-    def time_timescale(self, val):
+    @timescale.setter
+    def timescale(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetArmStartTrigTimescale
         if cfunc.argtypes is None:
@@ -458,8 +458,8 @@ class ArmStartTrigger(object):
             self._handle, val)
         check_for_error(error_code)
 
-    @time_timescale.deleter
-    def time_timescale(self):
+    @timescale.deleter
+    def timescale(self):
         cfunc = lib_importer.windll.DAQmxResetArmStartTrigTimescale
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -568,7 +568,7 @@ class ArmStartTrigger(object):
         check_for_error(error_code)
 
     @property
-    def trig_type(self):
+    def type(self):
         """
         :class:`nidaqmx.constants.TriggerType`: Specifies the type of
             trigger to use to arm the task for a Start Trigger. If you
@@ -591,8 +591,8 @@ class ArmStartTrigger(object):
 
         return TriggerType(val.value)
 
-    @trig_type.setter
-    def trig_type(self, val):
+    @type.setter
+    def type(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetArmStartTrigType
         if cfunc.argtypes is None:
@@ -605,8 +605,8 @@ class ArmStartTrigger(object):
             self._handle, val)
         check_for_error(error_code)
 
-    @trig_type.deleter
-    def trig_type(self):
+    @type.deleter
+    def type(self):
         cfunc = lib_importer.windll.DAQmxResetArmStartTrigType
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -617,4 +617,36 @@ class ArmStartTrigger(object):
         error_code = cfunc(
             self._handle)
         check_for_error(error_code)
+
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use timescale instead.")
+    def time_timescale(self):
+        return self.timescale
+
+    @time_timescale.setter
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use timescale instead.")
+    def time_timescale(self, val):
+        self.timescale = val
+
+    @time_timescale.deleter
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use timescale instead.")
+    def time_timescale(self):
+        del self.timescale
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use type instead.")
+    def trig_type(self):
+        return self.type
+
+    @trig_type.setter
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use type instead.")
+    def trig_type(self, val):
+        self.type = val
+
+    @trig_type.deleter
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use type instead.")
+    def trig_type(self):
+        del self.type
+
 
