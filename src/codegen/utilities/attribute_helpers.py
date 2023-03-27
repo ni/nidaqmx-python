@@ -16,6 +16,12 @@ EXCLUDED_ATTRIBUTES = [
     "AI_CHAN_CAL_POLY_REVERSE_COEFF",
     "AI_CHAN_CAL_POLY_FORWARD_COEFF",
     "AI_CHAN_CAL_OPERATOR_NAME",
+    "FIRST_SAMP_CLK_OFFSET",
+    "FIRST_SAMP_CLK_TIMESCALE",
+    "FIRST_SAMP_CLK_WHEN",
+    "FIRST_SAMP_TIMESTAMP_VAL",
+    "SYNC_PULSE_TIME_WHEN",
+    "TIMING_SYNC_PULSE_FORCE",
 ]
 
 DEPRECATED_ATTRIBUTES = {
@@ -122,6 +128,7 @@ ATTRIBUTE_CHANGE_SET = {
         "digital_lines_bytes_per_chan": "di_num_booleans_per_chan",
     },
     "OutStream": {"digital_lines_bytes_per_chan": "do_num_booleans_per_chan"},
+    "Timing": {"on_demand_simultaneous_ao_enable": "simultaneous_ao_enable"},
 }
 
 

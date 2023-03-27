@@ -1,4 +1,4 @@
-<%def name="script_deprecated_property(attributes)">
+<%def name="script_deprecated_property(attributes)">\
 <%
         from codegen.utilities.attribute_helpers import get_deprecated_attributes
         deprecated_attributes = get_deprecated_attributes(attributes)
