@@ -51,7 +51,6 @@ ENUM_MERGE_SET = {
     ],
     "CountDirection": ["CountDirection1"],
     "FrequencyUnits": ["FrequencyUnits2", "FrequencyUnits3"],
-    "Edge": ["Edge1"],
     "TimeUnits": ["TimeUnits2", "TimeUnits3"],
     "EncoderType": ["EncoderType2"],
     "GpsSignalType": ["GpsSignalType1"],

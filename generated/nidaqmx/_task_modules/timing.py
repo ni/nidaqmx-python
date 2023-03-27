@@ -2892,7 +2892,6 @@ class Timing(object):
             self._handle)
         check_for_error(error_code)
 
-
     def cfg_burst_handshaking_timing_export_clock(
             self, sample_clk_rate, sample_clk_outp_term,
             sample_mode=AcquisitionType.FINITE, samps_per_chan=1000,
@@ -3110,11 +3109,11 @@ class Timing(object):
         Clock edges later. Pipelining allows higher data transfer rates
         at the cost of increased trigger response latency. Refer to the
         device documentation for information about which triggers
-        pipelining affects.<br/><br/>This timing type allows handshaking
-        using the Pause trigger and either the Ready for Transfer event
-        or the Data Active event. Refer to the device documentation for
-        more information.<br/><br/>This timing type is supported only by
-        the NI 6536 and NI 6537.
+        pipelining affects.  This timing type allows handshaking using
+        the Pause trigger and either the Ready for Transfer event or the
+        Data Active event. Refer to the device documentation for more
+        information.  This timing type is supported only by the NI 6536
+        and NI 6537.
 
         Args:
             rate (float): Specifies the sampling rate in samples per
