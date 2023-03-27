@@ -106,11 +106,12 @@ PYTHON_CLASS_ENUM_MERGE_SET = {
     "Channel": ["_Save"],
     "InStream": ["AcquisitionType", "READ_ALL_AVAILABLE"],
     "OutStream": ["ResolutionType"],
+    "Scale": ["_Save"],
 }
 
 
 ATTRIBUTE_CHANGE_SET = {
-    "AIChannel": ["_Save"], "Scale": {"ai_custom_scale_name": "ai_custom_scale"},
+    "AIChannel": {"ai_custom_scale_name": "ai_custom_scale"},
     "AOChannel": {"ao_custom_scale_name": "ao_custom_scale"},
     "CIChannel": {
         "ci_custom_scale_name": "ci_custom_scale",
@@ -129,6 +130,10 @@ ATTRIBUTE_CHANGE_SET = {
     },
     "OutStream": {"digital_lines_bytes_per_chan": "do_num_booleans_per_chan"},
     "Timing": {"on_demand_simultaneous_ao_enable": "simultaneous_ao_enable"},
+    "Scale": {
+        "type": "scale_type",
+        "descr": "description",
+    },
 }
 
 
