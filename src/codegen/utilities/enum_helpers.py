@@ -59,6 +59,7 @@ ENUM_MERGE_SET = {
     "OverwriteMode": ["OverwriteMode", "OverwriteMode1"],
     "RegenerationMode": ["RegenerationMode", "RegenerationMode1"],
     "WaitMode": ["WaitMode", "WaitMode2"],
+    "TriggerType": ["TriggerType4", "TriggerType"],
 }
 
 # We don't need this stuff.
