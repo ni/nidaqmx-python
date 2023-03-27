@@ -56,6 +56,8 @@ ENUM_MERGE_SET = {
     "Level": ["Level1", "DigitalLineState"],
     "UsageTypeCO": ["COOutputType"],
     "ActiveOrInactiveEdgeSelection": ["SampleClockActiveOrInactiveEdgeSelection"],
+    "Timescale": ["Timescale2"],
+    "TriggerType": ["TriggerType4"],
 }
 
 # We don't need this stuff.
