@@ -568,7 +568,7 @@ class ArmStartTrigger(object):
         check_for_error(error_code)
 
     @property
-    def type(self):
+    def trig_type(self):
         """
         :class:`nidaqmx.constants.TriggerType`: Specifies the type of
             trigger to use to arm the task for a Start Trigger. If you
@@ -591,8 +591,8 @@ class ArmStartTrigger(object):
 
         return TriggerType(val.value)
 
-    @type.setter
-    def type(self, val):
+    @trig_type.setter
+    def trig_type(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetArmStartTrigType
         if cfunc.argtypes is None:
@@ -605,8 +605,8 @@ class ArmStartTrigger(object):
             self._handle, val)
         check_for_error(error_code)
 
-    @type.deleter
-    def type(self):
+    @trig_type.deleter
+    def trig_type(self):
         cfunc = lib_importer.windll.DAQmxResetArmStartTrigType
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -633,20 +633,4 @@ class ArmStartTrigger(object):
     @deprecation.deprecated(deprecated_in="0.6.6", details="Use timescale instead.")
     def time_timescale(self):
         del self.timescale
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use type instead.")
-    def trig_type(self):
-        return self.type
-
-    @trig_type.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use type instead.")
-    def trig_type(self, val):
-        self.type = val
-
-    @trig_type.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use type instead.")
-    def trig_type(self):
-        del self.type
-
 
