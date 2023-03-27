@@ -99,11 +99,7 @@ DEPRECATED_ATTRIBUTES = {
     "ci_velocity_a_input_term_cfg": {
         "new_name": "ci_velocity_encoder_a_input_term_cfg",
         "deprecated_in": "0.6.6",
-    },
-    "time_timescale": {
-        "new_name": "timescale",
-        "deprecated_in": "0.6.6",
-    },
+    }
 }
 
 
