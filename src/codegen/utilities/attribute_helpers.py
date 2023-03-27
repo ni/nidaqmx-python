@@ -99,10 +99,7 @@ DEPRECATED_ATTRIBUTES = {
 }
 
 
-PYTHON_CLASS_ENUM_MERGE_SET = {
-    "Channel": ["_Save"],
-    "Scale": ["_Save"]
-    }
+PYTHON_CLASS_ENUM_MERGE_SET = {"Channel": ["_Save"], "Scale": ["_Save"]}
 
 
 def get_attributes(metadata, class_name):
