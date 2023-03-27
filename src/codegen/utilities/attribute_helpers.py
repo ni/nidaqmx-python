@@ -192,14 +192,6 @@ def get_attributes(metadata, class_name):
                 and attribute_data["python_class_name"] == class_name
                 and not attribute_data["name"] in EXCLUDED_ATTRIBUTES
             ):
-                # Strip PHYSICAL_CHAN prefix from the description.
-                attribute_data["python_description"] = _strip_physical_chan_in_description(
-                    attribute_data["python_description"]
-                )
-
-                # Strip class name prefix in the attribute name.
-                attribute_data["name"] = _strip_name(attribute_data["name"], class_name)
-
                 attributes_metadata.append(Attribute(id, attribute_data))
     return sorted(attributes_metadata, key=lambda x: x.name)
 
