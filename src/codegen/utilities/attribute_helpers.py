@@ -170,13 +170,13 @@ DEPRECATED_ATTRIBUTES = {
     },
 }
 
-PHYSICAL_CHAN_STRIP_IN_DESCRIPTION = [
-    "physical_chan_ai_supported_meas_types",
-    "physical_chan_teds_bit_stream",
-    "physical_chan_ao_supported_output_types",
-    "physical_chan_ci_supported_meas_types",
-    "physical_chan_co_supported_output_types",
-]
+PHYSICAL_CHAN_STRIP_IN_DESCRIPTION = {
+    "physical_chan_ai_supported_meas_types": "ai_supported_meas_types",
+    "physical_chan_teds_bit_stream": "teds_bit_stream",
+    "physical_chan_ao_supported_output_types": "ao_supported_output_types",
+    "physical_chan_ci_supported_meas_types": "ci_supported_meas_types",
+    "physical_chan_co_supported_output_types": "co_supported_output_types",
+}
 
 
 PYTHON_CLASS_ENUM_MERGE_SET = {"Channel": ["_Save"]}
@@ -240,10 +240,10 @@ def get_enums_to_import(enums_in_attributes, enums_in_functions):
 
 def _strip_physical_chan_in_description(attribute_description):
     """Strips physical_chan prefix in attribute description."""
-    for attribute_name in PHYSICAL_CHAN_STRIP_IN_DESCRIPTION:
-        if attribute_name in attribute_description:
+    for old_attribute_name, new_attribute_name in PHYSICAL_CHAN_STRIP_IN_DESCRIPTION.items():
+        if old_attribute_name in attribute_description:
             attribute_description = attribute_description.replace(
-                attribute_name, strip_prefix(attribute_name, "physical_chan")
+                old_attribute_name, new_attribute_name
             )
     return attribute_description
 
@@ -252,4 +252,6 @@ def _strip_name(attribute_name, class_name):
     """Strips class name from attribute name."""
     # Strip PHYSICAL_CHAN prefix from the name.
     if class_name == "PhysicalChannel":
-        return strip_prefix(attribute_name, "physical_chan")
+        return strip_prefix(attribute_name, "PHYSICAL_CHAN_")
+
+    return attribute_name
