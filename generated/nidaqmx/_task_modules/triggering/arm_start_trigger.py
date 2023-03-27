@@ -424,7 +424,7 @@ class ArmStartTrigger(object):
         return val.value.decode('ascii')
 
     @property
-    def timescale(self):
+    def time_timescale(self):
         """
         :class:`nidaqmx.constants.Timescale`: Specifies the timescale to
             be used for timestamps used in an arm start time trigger.
@@ -444,8 +444,8 @@ class ArmStartTrigger(object):
 
         return Timescale(val.value)
 
-    @timescale.setter
-    def timescale(self, val):
+    @time_timescale.setter
+    def time_timescale(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetArmStartTrigTimescale
         if cfunc.argtypes is None:
@@ -458,8 +458,8 @@ class ArmStartTrigger(object):
             self._handle, val)
         check_for_error(error_code)
 
-    @timescale.deleter
-    def timescale(self):
+    @time_timescale.deleter
+    def time_timescale(self):
         cfunc = lib_importer.windll.DAQmxResetArmStartTrigTimescale
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -617,20 +617,4 @@ class ArmStartTrigger(object):
         error_code = cfunc(
             self._handle)
         check_for_error(error_code)
-
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use timescale instead.")
-    def time_timescale(self):
-        return self.timescale
-
-    @time_timescale.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use timescale instead.")
-    def time_timescale(self, val):
-        self.timescale = val
-
-    @time_timescale.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use timescale instead.")
-    def time_timescale(self):
-        del self.timescale
 
