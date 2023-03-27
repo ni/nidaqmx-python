@@ -2447,7 +2447,6 @@ class InStream(object):
             self._handle, file_path)
         check_for_error(error_code)
 
-
     @property
     @deprecation.deprecated(deprecated_in="0.6.6", details="Use overwrite instead.")
     def over_write(self):

@@ -128,6 +128,7 @@ ATTRIBUTE_CHANGE_SET = {
         "digital_lines_bytes_per_chan": "di_num_booleans_per_chan",
     },
     "OutStream": {"digital_lines_bytes_per_chan": "do_num_booleans_per_chan"},
+    "Timing": {"on_demand_simultaneous_ao_enable": "simultaneous_ao_enable"},
 }
 
 
