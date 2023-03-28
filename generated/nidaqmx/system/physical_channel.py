@@ -1201,41 +1201,33 @@ class PhysicalChannel(object):
     def co_output_types(self):
         return self.co_supported_output_types
 
-    def clear_teds(self, physical_channel):
+    def clear_teds(self):
         """
         Removes TEDS information from the physical channel you specify.
         This function temporarily overrides any TEDS configuration for
         the physical channel that you performed in MAX.
-
-        Args:
-            physical_channel (str): 
         """
         cfunc = lib_importer.windll.DAQmxClearTEDS
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str]
+                        ctypes_byte_str]
 
         error_code = cfunc(
-            self._name, physical_channel)
+            self._name)
         check_for_error(error_code)
 
-    def configure_teds(self, physical_channel="", file_path=""):
+    def configure_teds(self, file_path=""):
         """
         Associates TEDS information with the physical channel you
         specify. If you do not specify the filename of a data sheet in
-        the **physical_channel** input, this function attempts to find a
-        TEDS sensor connected to the physical channel. This function
+        the **file_path** input, this function attempts to find a TEDS
+        sensor connected to the physical channel. This function
         temporarily overrides any TEDS configuration for the physical
         channel that you performed in MAX.
 
         Args:
-            physical_channel (Optional[str]): Is the path to a Virtual
-                TEDS data sheet that you want to associate with the
-                physical channel. If you do not specify anything for
-                this input, this function attempts to find a TEDS sensor
-                connected to the physical channel.
             file_path (Optional[str]): Is the path to a Virtual TEDS
                 data sheet that you want to associate with the physical
                 channel. If you do not specify anything for this input,
@@ -1247,22 +1239,20 @@ class PhysicalChannel(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes_byte_str]
+                        ctypes_byte_str, ctypes_byte_str]
 
         error_code = cfunc(
-            self._name, physical_channel, file_path)
+            self._name, file_path)
         check_for_error(error_code)
 
     def write_to_teds_from_array(
-            self, physical_channel="", bit_stream=None,
+            self, bit_stream=None,
             basic_teds_options=WriteBasicTEDSOptions.DO_NOT_WRITE):
         """
         Writes data from a 1D list of 8-bit unsigned integers to the
         TEDS sensor.
 
         Args:
-            physical_channel (Optional[str]): Specifies how to handle
-                basic TEDS data in the bitstream.
             bit_stream (Optional[List[int]]): Is the TEDS bitstream to
                 write to the sensor. This bitstream must be constructed
                 according to the IEEE 1451.4 specification.
@@ -1280,24 +1270,20 @@ class PhysicalChannel(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.uint8, flags=('C','W')),
-                        ctypes.c_uint, ctypes.c_int]
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.uint8,
+                        flags=('C','W')), ctypes.c_uint, ctypes.c_int]
 
         error_code = cfunc(
-            self._name, physical_channel, bit_stream, len(bit_stream),
-            basic_teds_options.value)
+            self._name, bit_stream, len(bit_stream), basic_teds_options.value)
         check_for_error(error_code)
 
     def write_to_teds_from_file(
-            self, physical_channel="", file_path="",
+            self, file_path="",
             basic_teds_options=WriteBasicTEDSOptions.DO_NOT_WRITE):
         """
         Writes data from a virtual TEDS file to the TEDS sensor.
 
         Args:
-            physical_channel (Optional[str]): Specifies how to handle
-                basic TEDS data in the bitstream.
             file_path (Optional[str]): Specifies the filename of a
                 virtual TEDS file that contains the bitstream to write.
             basic_teds_options (Optional[nidaqmx.constants.WriteBasicTEDSOptions]): 
@@ -1309,10 +1295,9 @@ class PhysicalChannel(object):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes_byte_str,
-                        ctypes.c_int]
+                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int]
 
         error_code = cfunc(
-            self._name, physical_channel, file_path, basic_teds_options.value)
+            self._name, file_path, basic_teds_options.value)
         check_for_error(error_code)
 

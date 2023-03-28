@@ -2565,7 +2565,7 @@ class Device(object):
     def tedshwteds_supported(self):
         return self.teds_hwteds_supported
 
-    def reset_device(self, device_name):
+    def reset_device(self):
         """
         Immediately aborts all active tasks associated with a device,
         disconnects any routes, and returns the device to an initialized
@@ -2574,38 +2574,32 @@ class Device(object):
         puts the task into an unstable but recoverable state. To recover
         the task, use DAQmx Start to restart the task or use DAQmx Stop
         to reset the task without starting it.
-
-        Args:
-            device_name (str): 
         """
         cfunc = lib_importer.windll.DAQmxResetDevice
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str]
+                        ctypes_byte_str]
 
         error_code = cfunc(
-            self._name, device_name)
+            self._name)
         check_for_error(error_code)
 
-    def self_test_device(self, device_name):
+    def self_test_device(self):
         """
         Performs a brief test of device resources. If a failure occurs,
         refer to your device documentation for more information.
-
-        Args:
-            device_name (str): 
         """
         cfunc = lib_importer.windll.DAQmxSelfTestDevice
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str]
+                        ctypes_byte_str]
 
         error_code = cfunc(
-            self._name, device_name)
+            self._name)
         check_for_error(error_code)
 
     # region Network Device Functions
