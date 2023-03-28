@@ -34,14 +34,10 @@ def _generate_file(metadata, template_file_name, output_path):
         f.write(template.render(data=metadata))
 
 
-def _copy_handwritten_files(source_path, output_path):
+def _copy_handwritten_files(dest):
     parent_dir = Path(__file__).parent.parent
-    source_path = parent_dir / "nidaqmx" / source_path
-    output_directory = os.path.dirname(output_path)
-
-    if not os.path.isdir(output_directory):
-        os.mkdir(output_directory)
-    shutil.copy(source_path, output_path, follow_symlinks=True)
+    source_path = parent_dir / "handwritten"
+    shutil.copytree(source_path, dest, dirs_exist_ok= True)
 
 
 def generate(dest):
@@ -52,12 +48,12 @@ def generate(dest):
 
     codegen_metadata = _get_metadata()
 
-    for info in codegen_metadata["script_info"]["modulesToGenerate"]:
+    for info in codegen_metadata["script_info"]["modules"]:
         _generate_file(codegen_metadata, info["templateFile"], dest / info["relativeOutputPath"])
 
     _generate_file(codegen_metadata["enums"], "error_codes.mako", dest / "error_codes.py")
 
     _generate_file(codegen_metadata, "constants.mako", dest / "constants.py")
 
-    for info in codegen_metadata["script_info"]["modulesToCopy"]:
-        _copy_handwritten_files(info["sourceFilePath"], dest / info["relativeOutputPath"])
+    _copy_handwritten_files(dest)
+
