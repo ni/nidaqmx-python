@@ -126,7 +126,37 @@ DEPRECATED_ATTRIBUTES = {
 }
 
 
-PYTHON_CLASS_ENUM_MERGE_SET = {"Channel": ["_Save"]}
+ATTRIBUTE_CHANGE_SET = {
+    "AIChannel": {"ai_custom_scale_name": "ai_custom_scale"},
+    "AOChannel": {"ao_custom_scale_name": "ao_custom_scale"},
+    "CIChannel": {
+        "ci_custom_scale_name": "ci_custom_scale",
+        "ci_dup_count_prevent": "ci_dup_count_prevention",
+        "ci_dup_count_prevent": "ci_dup_count_prevention",
+    },
+    "Channel": {
+        "chan_descr": "description",
+        "chan_sync_unlock_behavior": "sync_unlock_behavior",
+        "chan_is_global": "is_global",
+        "physical_chan_name": "physical_channel",
+    },
+    "InStream": {
+        "change_detect_has_overflowed": "change_detect_overflowed",
+        "digital_lines_bytes_per_chan": "di_num_booleans_per_chan",
+    },
+    "OutStream": {"digital_lines_bytes_per_chan": "do_num_booleans_per_chan"},
+    "Timing": {"on_demand_simultaneous_ao_enable": "simultaneous_ao_enable"},
+    "Scale": {
+        "type": "scale_type",
+        "descr": "description",
+    },
+    "ArmStartTrigger": {
+        "timescale": "time_timescale",
+    },
+    "StartTrigger": {
+        "timescale": "time_timescale",
+    },
+}
 
 ATTR_NAME_CHANGE_IN_DESCRIPTION = {
     "anlg_lvl_pause_trig_when": "anlg_lvl_when",
