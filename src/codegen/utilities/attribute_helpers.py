@@ -251,6 +251,7 @@ def get_deprecated_attributes(attributes):
             deprecated_attributes[old_name]["resettable"] = matching_attribute.resettable
     return deprecated_attributes
 
+
 def _strip_attr_name_in_description(attribute_description):
     """Strips physical_chan prefix in attribute description."""
     for old_attribute_name, new_attribute_name in ATTR_NAME_CHANGE_IN_DESCRIPTION.items():
@@ -266,7 +267,7 @@ def _strip_name(attribute_name, class_name):
     # Strip PHYSICAL_CHAN prefix from the name.
     if class_name == "PhysicalChannel":
         return strip_class_name(attribute_name, "PHYSICAL_CHAN_")
-    
+
     # Strip ARM_START_TRIG prefix from the name.
     if class_name == "ArmStartTrigger":
         if attribute_name == "ARM_START_TRIG_TYPE":

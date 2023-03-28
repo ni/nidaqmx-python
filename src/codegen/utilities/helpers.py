@@ -19,11 +19,13 @@ def camel_to_snake_case(camel_case_string):
 
     return partial.lower()
 
+
 def get_enums_to_import(enums_in_attributes, enums_in_functions):
     """Combines both attribute and function enums."""
     enums_to_import = enums_in_attributes + enums_in_functions
     enums_to_import = list(set(enums_to_import))
     return sorted(enums_to_import)
+
 
 def strip_class_name(name: str, class_name: str, replace_with=""):
     """Strips class name from name."""
