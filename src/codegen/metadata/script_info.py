@@ -41,10 +41,6 @@ script_info = {
             "templateFile": "_task_modules\\ai_channel_collection.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\ai_channel_collection.py",
-            "templateFile": "_task_modules\\ai_channel_collection.py.mako",
-        },
-        {
             "relativeOutputPath": "_task_modules\\ao_channel_collection.py",
             "templateFile": "_task_modules\\ao_channel_collection.py.mako",
         },
@@ -69,8 +65,12 @@ script_info = {
             "templateFile": "_task_modules\\timing.py.mako",
         },
         {
+            "relativeOutputPath": "scale.py", 
+            "templateFile": "scale.py.mako",
+        },
+        {
             "relativeOutputPath": "_task_modules\\export_signals.py",
             "templateFile": "_task_modules\\export_signals.py.mako",
-        }
+        },
     ]
 }
