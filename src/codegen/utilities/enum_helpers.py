@@ -10,7 +10,7 @@ ENUM_MERGE_SET = {
     "AutoZeroType": ["AutoZeroType", "AutoZeroType1"],
     "BridgeConfiguration": ["BridgeConfiguration", "BridgeConfiguration1"],
     "CJCSource": ["CJCSource1", "CJCSource"],
-    "Coupling": ["Coupling1", "Coupling"],
+    "Coupling": ["Coupling1", "Coupling2", "Coupling"],
     "CurrentShuntResistorLocation": [
         "CurrentShuntResistorLocation",
         "CurrentShuntResistorLocation1",
@@ -19,6 +19,7 @@ ENUM_MERGE_SET = {
     "DataJustification": ["DataJustification", "DataJustification1"],
     "DigitalWidthUnits": [
         "DigitalWidthUnits",
+        "DigitalWidthUnits1",
         "DigitalWidthUnits2",
         "DigitalWidthUnits3",
         "DigitalWidthUnits4",
