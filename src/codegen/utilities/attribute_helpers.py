@@ -9,9 +9,6 @@ EXCLUDED_ATTRIBUTES = [
     "AI_CHAN_CAL_DESC",
     "AI_CHAN_CAL_APPLY_CAL_IF_EXP",
     "AI_BRIDGE_SHUNT_CAL_SHUNT_CAL_B_SRC",
-    "OPEN_CHANS",
-    "OPEN_CHANS_EXIST",
-    "OPEN_CHANS_DETAILS",
     "AI_CHAN_CAL_VERIF_REF_VALS",
     "AI_CHAN_CAL_VERIF_ACQ_VALS",
     "AI_CHAN_CAL_TABLE_SCALED_VALS",
@@ -20,58 +17,41 @@ EXCLUDED_ATTRIBUTES = [
     "AI_CHAN_CAL_POLY_REVERSE_COEFF",
     "AI_CHAN_CAL_POLY_FORWARD_COEFF",
     "AI_CHAN_CAL_OPERATOR_NAME",
+    "FIRST_SAMP_CLK_OFFSET",
+    "FIRST_SAMP_CLK_TIMESCALE",
+    "FIRST_SAMP_CLK_WHEN",
+    "FIRST_SAMP_TIMESTAMP_VAL",
+    "SYNC_PULSE_TIME_WHEN",
+    "TIMING_SYNC_PULSE_FORCE",
     "ARM_START_TRIG_TIMESTAMP_VAL",
     "REF_TRIG_TIMESTAMP_VAL",
     "START_TRIG_TIMESTAMP_VAL",
 ]
 
-ATTRIBUTE_ENUM_MERGE_SET = {
-    "AccelSensitivityUnits": ["AccelSensitivityUnits1", "AccelSensitivityUnits"],
-    "AccelUnits": ["AccelUnits", "AccelUnits2"],
-    "AngleUnits": ["AngleUnits", "AngleUnits1"],
-    "AutoZeroType": ["AutoZeroType", "AutoZeroType1"],
-    "BridgeConfiguration": ["BridgeConfiguration", "BridgeConfiguration1"],
-    "CJCSource": ["CJCSource1", "CJCSource"],
-    "Coupling": ["Coupling1", "Coupling"],
-    "CurrentShuntResistorLocation": [
-        "CurrentShuntResistorLocation",
-        "CurrentShuntResistorLocation1",
-    ],
-    "CurrentUnits": ["CurrentUnits1", "CurrentUnits"],
-    "DataJustification": ["DataJustification", "DataJustification1"],
-    "DigitalWidthUnits": ["DigitalWidthUnits", "DigitalWidthUnits4"],
-    "FilterResponse": ["FilterResponse1", "FilterResponse"],
-    "FilterType": ["FilterType", "FilterType2"],
-    "LVDTSensitivityUnits": ["LVDTSensitivityUnits1", "LVDTSensitivityUnits"],
-    "LengthUnits": ["LengthUnits", "LengthUnits2"],
-    "RTDType": ["RTDType", "RTDType1"],
-    "RVDTSensitivityUnits": ["RVDTSensitivityUnits", "RVDTSensitivityUnits1"],
-    "ResistanceUnits": ["ResistanceUnits", "ResistanceUnits1"],
-    "ResolutionType": ["ResolutionType1", "ResolutionType"],
-    "ScaleType": ["ScaleType2", "ScaleType4", "ScaleType"],
-    "SoundPressureUnits": ["SoundPressureUnits", "SoundPressureUnits1"],
-    "StrainGageBridgeType": ["StrainGageBridgeType", "StrainGageBridgeType1"],
-    "StrainUnits": ["StrainUnits", "StrainUnits1"],
-    "TemperatureUnits": ["TemperatureUnits", "TemperatureUnits1"],
-    "ThermocoupleType": ["ThermocoupleType", "ThermocoupleType1"],
-    "VoltageUnits": ["VoltageUnits", "VoltageUnits1"],
-    "UsageTypeAI": ["UsageTypeAI", "AIMeasurementType"],
-    "DataTransferActiveTransferMode": [
-        "DataTransferMechanism",
-        "DataTransferActiveTransferMode",
-    ],
-    "TerminalConfiguration": ["TerminalConfiguration", "InputTermCfg"],
-}
-
 DEPRECATED_ATTRIBUTES = {
-    "ai_eddy_current_prox_sensitivity": {"new_name": "ai_eddy_current_prox_probe_sensitivity", "deprecated_in": "0.6.6"},
-    "ai_eddy_current_prox_sensitivity_units": {"new_name": "ai_eddy_current_prox_probe_sensitivity_units", "deprecated_in": "0.6.6"},
-    "ai_eddy_current_prox_units": {"new_name": "ai_eddy_current_prox_probe_units", "deprecated_in": "0.6.6"},
+    "ai_eddy_current_prox_sensitivity": {
+        "new_name": "ai_eddy_current_prox_probe_sensitivity",
+        "deprecated_in": "0.6.6",
+    },
+    "ai_eddy_current_prox_sensitivity_units": {
+        "new_name": "ai_eddy_current_prox_probe_sensitivity_units",
+        "deprecated_in": "0.6.6",
+    },
+    "ai_eddy_current_prox_units": {
+        "new_name": "ai_eddy_current_prox_probe_units",
+        "deprecated_in": "0.6.6",
+    },
     "ai_teds_is_teds": {"new_name": "ai_is_teds", "deprecated_in": "0.6.6"},
-    "ai_rosette_strain_gage_gage_orientation": {"new_name": "ai_rosette_strain_gage_orientation", "deprecated_in": "0.6.6"},
+    "ai_rosette_strain_gage_gage_orientation": {
+        "new_name": "ai_rosette_strain_gage_orientation",
+        "deprecated_in": "0.6.6",
+    },
     "ai_rtd_r_0": {"new_name": "ai_rtd_r0", "deprecated_in": "0.6.6"},
     "ai_sound_pressured_b_ref": {"new_name": "ai_sound_pressure_db_ref", "deprecated_in": "0.6.6"},
-    "ai_strain_force_read_from_chan": {"new_name": "ai_strain_gage_force_read_from_chan", "deprecated_in": "0.6.6"},
+    "ai_strain_force_read_from_chan": {
+        "new_name": "ai_strain_gage_force_read_from_chan",
+        "deprecated_in": "0.6.6",
+    },
     "ai_thrmstr_r_1": {"new_name": "ai_thrmstr_r1", "deprecated_in": "0.6.6"},
     "ai_acceld_b_ref": {"new_name": "ai_accel_db_ref", "deprecated_in": "0.6.6"},
     "ai_voltaged_b_ref": {"new_name": "ai_voltage_db_ref", "deprecated_in": "0.6.6"},
@@ -122,7 +102,15 @@ DEPRECATED_ATTRIBUTES = {
     "ci_velocity_a_input_term_cfg": {
         "new_name": "ci_velocity_encoder_a_input_term_cfg",
         "deprecated_in": "0.6.6",
-    }
+    },
+    "over_write": {"new_name": "overwrite", "deprecated_in": "0.6.6"},
+}
+
+PYTHON_CLASS_ENUM_MERGE_SET = {
+    "Channel": ["_Save"],
+    "InStream": ["AcquisitionType", "READ_ALL_AVAILABLE"],
+    "OutStream": ["ResolutionType"],
+    "Scale": ["_Save"],
 }
 
 
@@ -185,11 +173,13 @@ ATTR_NAME_CHANGE_IN_DESCRIPTION = {
 
 
 def get_attributes(metadata, class_name):
+    """Converts the scrapigen metadata into a list of attributes."""
     attributes_metadata = []
     for group_name, attributes in metadata["attributes"].items():
         for id, attribute_data in attributes.items():
             if (
-                attribute_data["python_class_name"] == class_name
+                "python_class_name" in attribute_data
+                and attribute_data["python_class_name"] == class_name
                 and not attribute_data["name"] in EXCLUDED_ATTRIBUTES
             ):
                 # Strip class name in attribute name from the description.
@@ -199,20 +189,36 @@ def get_attributes(metadata, class_name):
 
                 # Strip class name in the attribute name.
                 attribute_data["name"] = _strip_name(attribute_data["name"], class_name)
-                attributes_metadata.append(
-                    Attribute(id, attribute_data, ATTRIBUTE_ENUM_MERGE_SET)
-                )
+                attributes_metadata.append(Attribute(id, attribute_data))
     return sorted(attributes_metadata, key=lambda x: x.name)
 
+
+def transform_attributes(attributes, class_name):
+    """Updates the attribute name with the expected name."""
+    if class_name in ATTRIBUTE_CHANGE_SET:
+        updated_names = ATTRIBUTE_CHANGE_SET[class_name]
+        for attribute in attributes:
+            if attribute.name in updated_names:
+                attribute.update_attribute_name(updated_names[attribute.name])
+        return sorted(attributes, key=lambda x: x.name)
+    return attributes
+
+
 def get_enums_used(attributes):
+    """Gets the list of enums used in the attribute metadata."""
     enums = []
     for attribute in attributes:
+        if attribute.python_class_name in PYTHON_CLASS_ENUM_MERGE_SET:
+            for enum_value in PYTHON_CLASS_ENUM_MERGE_SET[attribute.python_class_name]:
+                enums.append(enum_value)
         if attribute.is_enum:
             enums.append(attribute.enum)
     enums = list(set(enums))
     return sorted(enums)
 
+
 def get_deprecated_attributes(attributes):
+    """Gets the list of attributes to be deprecated."""
     deprecated_attributes = {}
     for old_name, attribute in DEPRECATED_ATTRIBUTES.items():
         if any(x for x in attributes if x.name == attribute["new_name"]):

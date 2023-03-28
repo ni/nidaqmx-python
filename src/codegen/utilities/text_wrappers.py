@@ -1,4 +1,5 @@
-﻿import textwrap
+﻿"""This contains the helpers methods for wrapping texts."""
+import textwrap
 
 """
  Use global text wrapper objects and reassign properties each time instead
@@ -14,8 +15,7 @@ docstring_wrapper = textwrap.TextWrapper(width=72, break_long_words=False)
 
 
 def wrap(initial_indent, subsequent_indent=None):
-    """
-    Returns custom Mako filter function that wraps code text.
+    """Returns custom Mako filter function that wraps code text.
 
     Returning another function from within this function is a trick used to
     enable Mako filter functions to accept arguments.
@@ -33,8 +33,7 @@ def wrap(initial_indent, subsequent_indent=None):
 
 
 def docstring_wrap(initial_indent, subsequent_indent=None):
-    """
-    Returns custom Mako filter function that wraps docstring text.
+    """Returns custom Mako filter function that wraps docstring text.
 
     Returning another function from within this function is a trick used to
     enable Mako filter functions to accept arguments.

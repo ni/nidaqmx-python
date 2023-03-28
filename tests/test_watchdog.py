@@ -1,33 +1,34 @@
-import pytest
+"""Tests for validating watchdog functionality."""
 import random
 import time
 
+import pytest
+
 import nidaqmx
 import nidaqmx.system
-from nidaqmx.system.watchdog import DOExpirationState
 from nidaqmx.constants import Level
-from nidaqmx.tests.fixtures import real_x_series_device
+from nidaqmx.system.watchdog import DOExpirationState
 from nidaqmx.tests.helpers import generate_random_seed
 
 
 class TestWatchdog(object):
-    """
-    Contains a collection of pytest tests that validate the watchdog
-    functionality in the NI-DAQmx Python API.
+    """Contains a collection of pytest tests.
+
+    These validate the watchdog functionality in the NI-DAQmx Python API.
     """
 
-    @pytest.mark.parametrize('seed', [generate_random_seed()])
+    @pytest.mark.parametrize("seed", [generate_random_seed()])
     def test_watchdog_task(self, real_x_series_device, seed):
+        """Test to validate watchdog task."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         do_line = random.choice(real_x_series_device.do_lines)
 
-        with nidaqmx.system.WatchdogTask(
-                real_x_series_device.name, timeout=0.5) as task:
-            expir_states = [DOExpirationState(
-                physical_channel=do_line.name,
-                expiration_state=Level.TRISTATE)]
+        with nidaqmx.system.WatchdogTask(real_x_series_device.name, timeout=0.5) as task:
+            expir_states = [
+                DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
+            ]
 
             task.cfg_watchdog_do_expir_states(expir_states)
             task.start()
@@ -48,21 +49,21 @@ class TestWatchdog(object):
                 task.reset_timer()
                 time.sleep(0.2)
                 assert not task.expired
-                
+
             task.stop()
 
-    @pytest.mark.parametrize('seed', [generate_random_seed()])
+    @pytest.mark.parametrize("seed", [generate_random_seed()])
     def test_watchdog_expir_state(self, real_x_series_device, seed):
+        """Test to validate watchdog expiration state."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         do_line = random.choice(real_x_series_device.do_lines)
 
-        with nidaqmx.system.WatchdogTask(
-                real_x_series_device.name, timeout=0.1) as task:
-            expir_states = [DOExpirationState(
-                physical_channel=do_line.name,
-                expiration_state=Level.TRISTATE)]
+        with nidaqmx.system.WatchdogTask(real_x_series_device.name, timeout=0.1) as task:
+            expir_states = [
+                DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
+            ]
 
             task.cfg_watchdog_do_expir_states(expir_states)
 

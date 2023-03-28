@@ -1,3 +1,4 @@
+"""This contains the helpers methods used in the DAQmx tests."""
 import random
 import sys
 
@@ -7,4 +8,5 @@ POWER_ABS_EPSILON = 1e-3
 
 
 def generate_random_seed():
+    """Creates a random integer."""
     return random.randint(0, sys.maxsize)

@@ -62,11 +62,6 @@ class AcquisitionType(Enum):
     HW_TIMED_SINGLE_POINT = 12522  #: Acquire or generate samples continuously using hardware timing without a buffer. Hardware timed single point sample mode is supported only for the sample clock and change detection timing types.
 
 
-class Action(Enum):
-    COMMIT = 0  #: Commit
-    CANCEL = 1  #: Cancel
-
-
 class ActiveLevel(Enum):
     ABOVE = 10093  #: Pause the measurement or generation while the signal is above the threshold.
     BELOW = 10107  #: Pause the measurement or generation while the signal is below the threshold.
@@ -80,8 +75,8 @@ class ActiveOrInactiveEdgeSelection(Enum):
 class AngleUnits(Enum):
     DEGREES = 10146  #: Degrees.
     RADIANS = 10273  #: Radians.
-    TICKS = 10304  #: Ticks.
     FROM_CUSTOM_SCALE = 10065  #: Units a custom scale specifies. If you select this value, you must specify a custom scale name.
+    TICKS = 10304  #: Ticks.
 
 
 class AngularVelocityUnits(Enum):
@@ -97,17 +92,10 @@ class AutoZeroType(Enum):
     EVERY_SAMPLE = 10164  #: Perform an auto zero at every sample of the acquisition.
 
 
-class BreakMode(Enum):
-    NO_ACTION = 10227  #: When advancing to the next entry in the scan list, leave all previous connections intact.
-    BREAK_BEFORE_MAKE = 10110  #: When advancing to the next entry in the scan list, disconnect all previous connections before making any new connections.
-
-
 class BridgeConfiguration(Enum):
     FULL_BRIDGE = 10182  #: Sensor is a full bridge. If you set **ai_excit_use_for_scaling** to True, NI-DAQmx divides the measurement by the excitation value. Many sensors scale data to native units using scaling of volts per excitation.
     HALF_BRIDGE = 10187  #: Sensor is a half bridge. If you set **ai_excit_use_for_scaling** to True, NI-DAQmx divides the measurement by the excitation value. Many sensors scale data to native units using scaling of volts per excitation.
     QUARTER_BRIDGE = 10270  #: Sensor is a quarter bridge. If you set **ai_excit_use_for_scaling** to True, NI-DAQmx divides the measurement by the excitation value. Many sensors scale data to native units using scaling of volts per excitation.
-    QUARTER_BRIDGE_120_OHM_COMPLETION_RESISTOR = 16163
-    QUARTER_BRIDGE_350_OHM_COMPLETION_RESISTOR = 16164
     NO_BRIDGE = 10228  #: Sensor is not a Wheatstone bridge.
 
 
@@ -121,8 +109,8 @@ class BridgePhysicalUnits(Enum):
     POUNDS = 15876  #: Pounds.
     KILOGRAM_FORCE = 15877  #: kilograms-force.
     PASCALS = 10081  #: Pascals.
-    BAR = 15880  #: Bar.
     POUNDS_PER_SQ_INCH = 15879  #: Pounds per square inch.
+    BAR = 15880  #: Bar.
     NEWTON_METERS = 15881  #: Newton metres.
     INCH_OUNCES = 15882  #: Ounce-inches.
     INCH_POUNDS = 15883  #: Pound-inches.
@@ -150,10 +138,10 @@ class BusType(Enum):
     SCC = 14707  #: SCC.
     PC_CARD = 12585  #: PC Card/PCMCIA.
     USB = 12586  #: USB.
-    UNKNOWN = 12588  #: Unknown bus type.
     COMPACT_DAQ = 14637  #: CompactDAQ.
     COMPACT_RIO = 16143  #: CompactRIO.
     TCPIP = 14828  #: TCP/IP.
+    UNKNOWN = 12588  #: Unknown bus type.
     SWITCH_BLOCK = 15870  #: SwitchBlock.
 
 
@@ -161,11 +149,6 @@ class CJCSource(Enum):
     BUILT_IN = 10200  #: Use a cold-junction compensation channel built into the terminal block.
     CONSTANT_USER_VALUE = 10116  #: You must specify the cold-junction temperature.
     SCANNABLE_CHANNEL = 10113  #: Use a channel for cold-junction compensation.
-
-
-class CalibrationTerminalConfig(Enum):
-    DIFF = 10106  #: Differential
-    PSEUDO_DIFF = 12529  #: Pseudodifferential
 
 
 class ChannelType(Enum):
@@ -210,9 +193,9 @@ class Coupling(Enum):
 
 
 class CurrentShuntResistorLocation(Enum):
-    LET_DRIVER_CHOOSE = -1
     INTERNAL = 10200  #: Use the built-in shunt resistor of the device.
     EXTERNAL = 10167  #: Use a shunt resistor external to the device. You must specify the value of the shunt resistor by using **ai_current_shunt_resistance**.
+    LET_DRIVER_CHOOSE = -1
 
 
 class CurrentUnits(Enum):
@@ -229,7 +212,7 @@ class DataJustification(Enum):
 class DataTransferActiveTransferMode(Enum):
     DMA = 10054  #: Direct Memory Access. Data transfers take place independently from the application.
     INTERRUPT = 10204  #: Data transfers take place independently from the application. Using interrupts increases CPU usage because the CPU must service interrupt requests. Typically, you should use interrupts if the device is out of DMA channels.
-    POLLED = 10264  #: Data transfers take place when you call DAQmx Read or DAQmx Write.
+    POLLED = 10264  #: Data transfers take place when you call an NI-DAQmx Read function or an NI-DAQmx Write function.
     USB_BULK = 12590  #: Data transfers take place independently from the application using a USB bulk pipe.
 
 
@@ -272,7 +255,7 @@ class EncoderType(Enum):
     X_1 = 10090  #: If signal A leads signal B, count the rising edges of signal A. If signal B leads signal A, count the falling edges of signal A.
     X_2 = 10091  #: Count the rising and falling edges of signal A.
     X_4 = 10092  #: Count the rising and falling edges of signal A and signal B.
-    TWO_PULSE_COUNTING = 10313  #: Two pulse counting.
+    TWO_PULSE_COUNTING = 10313  #: Increment the count on rising edges of signal A. Decrement the count on rising edges of signal B.
 
 
 class EncoderZIndexPhase(Enum):
@@ -280,11 +263,6 @@ class EncoderZIndexPhase(Enum):
     AHIGH_BLOW = 10041  #: Reset the measurement when signal A is high and signal B is low.
     ALOW_BHIGH = 10042  #: Reset the measurement when signal A is low and signal B high.
     ALOW_BLOW = 10043  #: Reset the measurement when signal A and signal B are low.
-
-
-class EndCalAction(Enum):
-    COMMIT = 0
-    CANCEL = 1
 
 
 class EveryNSamplesEventType(Enum):
@@ -326,13 +304,13 @@ class FillMode(Enum):
 
 
 class FilterResponse(Enum):
-    BRICKWALL = 16155  #: Brickwall filter response.
-    COMB = 16152  #: Comb filter response.
-    BESSEL = 16153  #: Bessel filter response.
     CONSTANT_GROUP_DELAY = 16075  #: Constant group delay filter response.
     BUTTERWORTH = 16076  #: Butterworth filter response.
     ELLIPTICAL = 16077  #: Elliptical filter response.
     HARDWARE_DEFINED = 10191  #: Use the hardware-defined filter response.
+    COMB = 16152  #: Comb filter response.
+    BESSEL = 16153  #: Bessel filter response.
+    BRICKWALL = 16155  #: Brickwall filter response.
 
 
 class FilterType(Enum):
@@ -344,8 +322,8 @@ class FilterType(Enum):
 
 
 class ForceIEPESensorSensitivityUnits(Enum):
-    MILLIVOLTS_PER_POUND = 15892  #: Millivolts per pound.
     MILLIVOLTS_PER_NEWTON = 15891  #: Millivolts per newton.
+    MILLIVOLTS_PER_POUND = 15892  #: Millivolts per pound.
 
 
 class ForceUnits(Enum):
@@ -357,8 +335,8 @@ class ForceUnits(Enum):
 
 class FrequencyUnits(Enum):
     HZ = 10373  #: Hertz.
-    TICKS = 10304  #: Timebase ticks.
     FROM_CUSTOM_SCALE = 10065  #: Units a custom scale specifies. If you select this value, you must specify a custom scale name.
+    TICKS = 10304  #: Timebase ticks.
 
 
 class FuncGenType(Enum):
@@ -371,7 +349,7 @@ class FuncGenType(Enum):
 class GpsSignalType(Enum):
     IRIGB = 10070  #: Use the IRIG-B synchronization method. The GPS receiver sends one synchronization pulse per second, as well as information about the number of days, hours, minutes, and seconds that elapsed since the beginning of the current year.
     PPS = 10080  #: Use the PPS synchronization method. The GPS receiver sends one synchronization pulse per second, but does not send any timing information. The timestamp measurement returns the number of seconds that elapsed since the device powered up unless you set **ci_timestamp_initial_seconds**.
-    NONE = 10230  #: Do not synchronize the counter to a GPS receiver. The timestamp measurement returns the number of seconds that elapsed since the device powered up unless you set  **ci_timestamp_initial_seconds**.
+    NONE = 10230  #: Do not synchronize the counter to a GPS receiver. The timestamp measurement returns the number of seconds that elapsed since the device powered up unless you set **ci_timestamp_initial_seconds**.
 
 
 class HandshakeStartCondition(Enum):
@@ -385,12 +363,6 @@ class Impedance1(Enum):
     SEVENTY_FIVE_OHMS = 75  #: 75 Ohms.
     ONE_M_OHM = 1000000  #: 1 M Ohm.
     TEN_G_OHMS = 10000000000  #: 10 G Ohm.
-
-
-class InputCalSource(Enum):
-    LOOPBACK_0 = 0  #: Loopback 0 degree shift
-    LOOPBACK_180 = 1  #: Loopback 180 degree shift
-    GROUND = 2  #: Ground
 
 
 class InputDataTransferCondition(Enum):
@@ -413,15 +385,15 @@ class LVDTSensitivityUnits(Enum):
 class LengthUnits(Enum):
     METERS = 10219  #: Meters.
     INCHES = 10379  #: Inches.
-    TICKS = 10304  #: Ticks.
     FROM_CUSTOM_SCALE = 10065  #: Units a custom scale specifies. If you select this value, you must specify a custom scale name.
+    TICKS = 10304  #: Ticks.
 
 
 class Level(Enum):
     HIGH = 10192  #: Logic high.
     LOW = 10214  #: Logic low.
+    TRISTATE = 10310  #: High-impedance state. You can select this state only on devices with bidirectional lines. You cannot select this state for dedicated digital output lines. On some devices, you can select this value only for entire ports.
     NO_CHANGE = 10160  #: Do not change the state of the lines. On some devices, you can select this value only for entire ports.
-    TRISTATE = 10310  #: High-impedance state. You can select this state only on devices with bidirectional lines.  You cannot select this state for dedicated digital output lines. On some devices, you can select this value only for entire ports.
 
 
 class LineGrouping(Enum):
@@ -431,8 +403,8 @@ class LineGrouping(Enum):
 
 class LoggingMode(Enum):
     OFF = 10231  #: Disable logging for the task.
-    LOG = 15844  #: Enable logging for the task. You cannot read data using DAQmx Read when using this mode. If you require access to the data, read from the TDMS file.
-    LOG_AND_READ = 15842  #: Enable both logging and reading data for the task. You must use DAQmx Read to read samples for NI-DAQmx to stream them to disk.
+    LOG = 15844  #: Enable logging for the task. You cannot read data using an NI-DAQmx Read function when using this mode. If you require access to the data, read from the TDMS file.
+    LOG_AND_READ = 15842  #: Enable both logging and reading data for the task. You must use an NI-DAQmx Read function to read samples for NI-DAQmx to stream them to disk.
 
 
 class LoggingOperation(Enum):
@@ -455,11 +427,11 @@ class LogicLvlBehavior(Enum):
 
 class MIOAIConvertTimebaseSource(Enum):
     SAME_AS_SAMP_TIMEBASE = 10284  #: Use the same source as Sample Clock timebase.
-    EIGHT_MHZ_TIMEBASE = 16023  #: Use the onboard 8 MHz timebase.
-    ONE_HUNDRED_MHZ_TIMEBASE = 15857  #: Use the onboard 100 MHz timebase.
     SAME_AS_MASTER_TIMEBASE = 10282  #: Use the same source as the Master Timebase.
-    TWENTY_MHZ_TIMEBASE = 12537  #: Use the onboard 20 MHz timebase.
+    ONE_HUNDRED_MHZ_TIMEBASE = 15857  #: Use the onboard 100 MHz timebase.
     EIGHTY_MHZ_TIMEBASE = 14636  #: Use the onboard 80 MHz timebase.
+    TWENTY_MHZ_TIMEBASE = 12537  #: Use the onboard 20 MHz timebase.
+    EIGHT_MHZ_TIMEBASE = 16023  #: Use the onboard 8 MHz timebase.
 
 
 class ModulationType(Enum):
@@ -484,24 +456,9 @@ class OverwriteMode(Enum):
     DO_NOT_OVERWRITE_UNREAD_SAMPLES = 10159  #: The acquisition stops when it encounters a sample in the buffer that you have not read.
 
 
-class PathCapability(Enum):
-    PATH_AVAILABLE = 10431
-    PATH_ALREADY_EXISTS = 10432
-    PATH_UNSUPPORTED = 10433
-    CHANNEL_IN_USE = 10434
-    CHANNEL_SOURCE_CONFLICT = 10435
-    CHANNEL_RESERVED_FOR_ROUTING = 10436
-
-
 class Polarity(Enum):
     ACTIVE_HIGH = 10095  #: High state is the active state.
     ACTIVE_LOW = 10096  #: Low state is the active state.
-
-
-class PowerCalibrationType(Enum):
-    REMOTE_VOLTAGE = 15100  #: Calibrate remote voltage for the power module.
-    LOCAL_VOLTAGE = 15101  #: Calibrate local voltage for the power module.
-    CURRENT = 15102  #: Calibrate current for the power module.
 
 
 class PowerIdleOutputBehavior(Enum):
@@ -525,7 +482,7 @@ class PowerUpChannelType(Enum):
 class PowerUpStates(Enum):
     HIGH = 10192  #: Logic high.
     LOW = 10214  #: Logic low.
-    TRISTATE = 10310  #: High-impedance state. You can select this state only on devices with bidirectional lines.  You cannot select this state for dedicated digital output lines. On some devices, you can select this value only for entire ports.
+    TRISTATE = 10310  #: High-impedance state. You can select this state only on devices with bidirectional lines. You cannot select this state for dedicated digital output lines. On some devices, you can select this value only for entire ports.
 
 
 class PressureUnits(Enum):
@@ -557,10 +514,10 @@ class ProductCategory(Enum):
     NIELVIS = 14755  #: NI ELVIS.
     NETWORK_DAQ = 14829  #: Network DAQ.
     SC_EXPRESS = 15886  #: SC Express.
-    UNKNOWN = 12588  #: Unknown category.
     FIELD_DAQ = 16151  #: FieldDAQ.
     TEST_SCALE_CHASSIS = 16180  #: TestScale chassis.
     TEST_SCALE_MODULE = 16181  #: TestScale I/O module.
+    UNKNOWN = 12588  #: Unknown category.
 
 
 class RTDType(Enum):
@@ -597,11 +554,6 @@ class RegenerationMode(Enum):
     DONT_ALLOW_REGENERATION = 10158  #: Do not allow NI-DAQmx to regenerate samples the device previously generated. When you choose this value, NI-DAQmx waits for you to write more samples to the buffer or until the timeout expires.
 
 
-class RelayPosition(Enum):
-    OPEN = 10437
-    CLOSED = 10438
-
-
 class ResistanceConfiguration(Enum):
     TWO_WIRE = 2  #: 2-wire mode.
     THREE_WIRE = 3  #: 3-wire mode.
@@ -615,22 +567,12 @@ class ResistanceUnits(Enum):
 
 
 class ResistorState(Enum):
-    PULL_UP = 15950  #: pull up state for pull up/pull down resistors
-    PULL_DOWN = 15951  #: pull down state for pull up pull down resistors
+    PULL_UP = 15950  #: Pull up.
+    PULL_DOWN = 15951  #: Pull down.
 
 
 class ResolutionType(Enum):
     BITS = 10109  #: Bits.
-
-
-class SCXI1124Range(Enum):
-    ZERO_TO_ONE_V = 14629
-    ZERO_TO_FIVE_V = 14630
-    ZERO_TO_TEN_V = 14631
-    NEG_1_TO_1_V = 14632
-    NEG_5_TO_5_V = 14633
-    NEG_10_TO_10_V = 14634
-    ZERO_TO_TWENTY_M_A = 14635
 
 
 class SampClkOverrunBehavior(Enum):
@@ -650,7 +592,7 @@ class SampleTimingType(Enum):
     IMPLICIT = 10451  #: Configure only the duration of the task.
     ON_DEMAND = 10390  #: Acquire or generate a sample on each read or write operation. This timing type is also referred to as static or software-timed.
     CHANGE_DETECTION = 12504  #: Acquire samples when a change occurs in the state of one or more digital input lines. The lines must be contained within a digital input channel.
-    PIPELINED_SAMPLE_CLOCK = 14668  #: Device acquires or generates samples on each sample clock edge, but does not respond to certain triggers until a few sample clock edges later. Pipelining allows higher data transfer rates at the cost of increased trigger response latency.  Refer to the device documentation for information about which triggers pipelining affects. This timing type allows handshaking with some devices using the Pause trigger, the Ready for Transfer event, or the Data Active event. Refer to the device documentation for more information.
+    PIPELINED_SAMPLE_CLOCK = 14668  #: Device acquires or generates samples on each sample clock edge, but does not respond to certain triggers until a few sample clock edges later. Pipelining allows higher data transfer rates at the cost of increased trigger response latency. Refer to the device documentation for information about which triggers pipelining affects. This timing type allows handshaking with some devices using the Pause trigger, the Ready for Transfer event, or the Data Active event. Refer to the device documentation for more information.
 
 
 class ScaleType(Enum):
@@ -660,11 +602,6 @@ class ScaleType(Enum):
     TABLE = 10450  #: Map a list of pre-scaled values to a list of corresponding scaled values, with all other values scaled proportionally.
     NONE = 10230  #: Do not scale electrical values to physical units.
     TWO_POINT_LINEAR = 15898  #: You provide two pairs of electrical values and their corresponding physical values. NI-DAQmx uses those values to calculate the slope and y-intercept of a linear equation and uses that equation to scale electrical values to physical values.
-
-
-class ScanRepeatMode(Enum):
-    FINITE = 10172  #: The task advances through the scan list one time only. NI-DAQmx ignores any Advance Triggers after completing the scan list.
-    CONTINUOUS = 10117  #: The task returns to the beginning of the scan list when it reaches the end of the scan list.
 
 
 class Sense(Enum):
@@ -688,19 +625,6 @@ class ShuntCalSelect(Enum):
     A = 12513  #: Switch A.
     B = 12514  #: Switch B.
     AAND_B = 12515  #: Switches A and B.
-
-
-class ShuntElementLocation(Enum):
-    R_1 = 12465
-    R_2 = 12466
-    R_3 = 12467
-    R_4 = 14813
-    NONE = 10230
-
-
-class ShuntResistorSelect(Enum):
-    A = 12513  #: A
-    B = 12514  #: B
 
 
 class Signal(Enum):
@@ -727,10 +651,6 @@ class SignalModifiers(Enum):
 class Slope(Enum):
     RISING = 10280  #: Trigger on the rising slope of the signal.
     FALLING = 10171  #: Trigger on the falling slope of the signal.
-
-
-class SoftwareTrigger(Enum):
-    ADVANCE_TRIGGER = 12488  #: Place holder enum to make editting internal enum easier.
 
 
 class SoundPressureUnits(Enum):
@@ -775,12 +695,6 @@ class StrainUnits(Enum):
     FROM_CUSTOM_SCALE = 10065  #: Units a custom scale specifies. If you select this value, you must specify a custom scale name.
 
 
-class SwitchChannelUsage(Enum):
-    SOURCE_CHANNEL = 10439  #: You can use the channel only as an input for a signal.
-    LOAD_CHANNEL = 10440  #: You can use the channel only as the output for a signal passing through the switch.
-    RESERVED_FOR_ROUTING_CHANNEL = 10441  #: You can use the channel only to complete routes within a switch.
-
-
 class SyncPulseType(Enum):
     ONBOARD = 16128  #: Use the synchronization pulse type specified by the device.
     DIGITAL_EDGE = 10150  #: Digital Edge synchronization.
@@ -813,14 +727,6 @@ class TaskMode(Enum):
     TASK_ABORT = 6  #: Abort
 
 
-class TaskState(Enum):
-    VERIFY = 2
-    RESERVE = 4
-    COMMIT = 3
-    UNRESERVE = 5
-    ABORT = 6
-
-
 class TemperatureUnits(Enum):
     DEG_C = 10143  #: Degrees Celsius.
     DEG_F = 10144  #: Degrees Fahrenheit.
@@ -830,11 +736,11 @@ class TemperatureUnits(Enum):
 
 
 class TerminalConfiguration(Enum):
-    DEFAULT = -1  #: Default.
     RSE = 10083  #: Referenced Single-Ended.
     NRSE = 10078  #: Non-Referenced Single-Ended.
     DIFF = 10106  #: Differential.
     PSEUDO_DIFF = 12529  #: Pseudodifferential.
+    DEFAULT = -1  #: Default.
 
 
 class ThermocoupleType(Enum):
@@ -850,8 +756,8 @@ class ThermocoupleType(Enum):
 
 class TimeUnits(Enum):
     SECONDS = 10364  #: Seconds.
-    TICKS = 10304  #: Timebase ticks.
     FROM_CUSTOM_SCALE = 10065  #: Units a custom scale specifies. If you select this value, you must specify a custom scale name.
+    TICKS = 10304  #: Timebase ticks.
 
 
 class Timescale(Enum):
@@ -868,23 +774,24 @@ class TimestampEvent(Enum):
 
 class TorqueUnits(Enum):
     NEWTON_METERS = 15881  #: Newton meters.
-    FOOT_POUNDS = 15884  #: Pound-feet.
-    INCH_POUNDS = 15883  #: Pound-inches.
     INCH_OUNCES = 15882  #: Ounce-inches.
+    INCH_POUNDS = 15883  #: Pound-inches.
+    FOOT_POUNDS = 15884  #: Pound-feet.
     FROM_CUSTOM_SCALE = 10065  #: Units a custom scale specifies. If you select this value, you must specify a custom scale name.
 
 
 class TriggerType(Enum):
-    NONE = 10230  #: Disable reference triggering for the task.
-    ANALOG_LEVEL = 10101  #: Pause the measurement or generation while an analog signal is above or below a level.
-    ANALOG_WINDOW = 10103  #: Trigger when an analog signal enters or leaves a range of values.
-    DIGITAL_EDGE = 10150  #: Trigger on a rising or falling edge of a digital pulse.
-    DIGITAL_LEVEL = 10152  #: Pause the measurement or generation while a digital signal is at either a high or low state.
-    DIGITAL_PATTERN = 10398  #: Pause the measurement or generation while digital physical channels either match or do not match a digital pattern.
-    ANALOG_EDGE = 10099  #: Trigger when an analog signal crosses a threshold.
+    ANALOG_EDGE = 10099  #: Trigger when an analog signal signal crosses a threshold.
     ANALOG_MULTI_EDGE = 16108  #: Trigger when any of the configured analog signals cross their respective thresholds.
-    INTERLOCKED = 12549  #: Use the Handshake Trigger as a control signal for asynchronous handshaking, such as 8255 handshaking.
+    DIGITAL_EDGE = 10150  #: Trigger on the rising or falling edge of a digital signal.
+    DIGITAL_PATTERN = 10398  #: Trigger when digital physical channels match a digital pattern.
+    ANALOG_WINDOW = 10103  #: Trigger when an analog signal enters or leaves a range of values. The range is in the units of the measurement.
     TIME = 15996  #: Trigger when a specified time is reached.
+    NONE = 10230  #: Disable triggering for the task.
+    SOFTWARE = 10292  #: Advance to the next entry in a scan list when you call DAQmxSendSoftwareTrigger().
+    ANALOG_LEVEL = 10101  #: Pause the measurement or generation while an analog signal is above or below a level.
+    DIGITAL_LEVEL = 10152  #: Pause the measurement or generation while a digital signal is at either a high or low state.
+    INTERLOCKED = 12549  #: Use the Handshake Trigger as a control signal for asynchronous handshaking, such as 8255 handshaking.
 
 
 class TriggerUsage(Enum):
@@ -929,8 +836,8 @@ class UnitsPreScaled(Enum):
     NEWTONS = 15875  #: Newtons.
     POUNDS = 15876  #: Pounds.
     KILOGRAM_FORCE = 15877  #: Kilograms-force.
-    BAR = 15880  #: Bar.
     POUNDS_PER_SQ_INCH = 15879  #: Pounds per square inch.
+    BAR = 15880  #: Bar.
     NEWTON_METERS = 15881  #: Newton meters.
     INCH_OUNCES = 15882  #: Ounce-inches.
     INCH_POUNDS = 15883  #: Pound-inches.
@@ -945,30 +852,30 @@ class UnitsPreScaled(Enum):
 class UsageTypeAI(Enum):
     VOLTAGE = 10322  #: Voltage measurement.
     VOLTAGE_ACRMS = 10350  #: Voltage RMS measurement.
-    VOLTAGE_CUSTOM_WITH_EXCITATION = 10323  #: Voltage measurement with an excitation source. You can use this measurement type for custom sensors that require excitation, but you must use a custom scale to scale the measured voltage.
     CURRENT = 10134  #: Current measurement.
     CURRENT_ACRMS = 10351  #: Current RMS measurement.
+    VOLTAGE_CUSTOM_WITH_EXCITATION = 10323  #: Voltage measurement with an excitation source. You can use this measurement type for custom sensors that require excitation, but you must use a custom scale to scale the measured voltage.
+    BRIDGE = 15908  #: Measure voltage ratios from a Wheatstone bridge.
     FREQUENCY_VOLTAGE = 10181  #: Frequency measurement using a frequency to voltage converter.
     RESISTANCE = 10278  #: Resistance measurement.
     TEMPERATURE_THERMOCOUPLE = 10303  #: Temperature measurement using a thermocouple.
     TEMPERATURE_THERMISTOR = 10302  #: Temperature measurement using a thermistor.
-    TEMPERATURE_BUILT_IN_SENSOR = 10311  #: Temperature measurement using a built-in sensor on a terminal block or device. On SCXI modules, for example, this could be the CJC sensor.
     TEMPERATURE_RTD = 10301  #: Temperature measurement using an RTD.
+    TEMPERATURE_BUILT_IN_SENSOR = 10311  #: Temperature measurement using a built-in sensor on a terminal block or device. On SCXI modules, for example, this could be the CJC sensor.
+    STRAIN_STRAIN_GAGE = 10300  #: Strain measurement.
+    ROSETTE_STRAIN_GAGE = 15980  #: Strain measurement using a rosette strain gage.
     POSITION_LINEAR_LVDT = 10352  #: Position measurement using an LVDT.
     POSITION_ANGULAR_RVDT = 10353  #: Position measurement using an RVDT.
     POSITION_EDDY_CURRENT_PROX_PROBE = 14835  #: Position measurement using an eddy current proximity probe.
-    SOUND_PRESSURE_MICROPHONE = 10354  #: Sound pressure measurement using a microphone.
-    STRAIN_STRAIN_GAGE = 10300  #: Strain measurement.
-    ROSETTE_STRAIN_GAGE = 15980  #: Strain measurement using a rosette strain gage.
     ACCELERATION_ACCELEROMETER_CURRENT_INPUT = 10356  #: Acceleration measurement using an accelerometer.
     ACCELERATION_CHARGE = 16104  #: Acceleration measurement using a charge-based sensor.
     ACCELERATION_4_WIRE_DC_VOLTAGE = 16106  #: Acceleration measurement using a 4 wire DC voltage based sensor.
     VELOCITY_IEPE_SENSOR = 15966  #: Velocity measurement using an IEPE Sensor.
-    FORCE_IEPE_SENSOR = 15895  #: Force measurement using an IEPE Sensor.
     FORCE_BRIDGE = 15899  #: Force measurement using a bridge-based sensor.
-    BRIDGE = 15908  #: Measure voltage ratios from a Wheatstone bridge.
-    TORQUE_BRIDGE = 15905  #: Torque measurement using a bridge-based sensor.
+    FORCE_IEPE_SENSOR = 15895  #: Force measurement using an IEPE Sensor.
     PRESSURE_BRIDGE = 15902  #: Pressure measurement using a bridge-based sensor.
+    SOUND_PRESSURE_MICROPHONE = 10354  #: Sound pressure measurement using a microphone.
+    TORQUE_BRIDGE = 15905  #: Torque measurement using a bridge-based sensor.
     TEDS = 12531  #: Measurement type defined by TEDS.
     CHARGE = 16105  #: Charge measurement.
     POWER = 16201  #: Power source and measurement.
@@ -981,21 +888,21 @@ class UsageTypeAO(Enum):
 
 
 class UsageTypeCI(Enum):
+    COUNT_EDGES = 10125  #: Count edges of a digital signal.
     FREQUENCY = 10179  #: Measure the frequency of a digital signal.
     PERIOD = 10256  #: Measure the period of a digital signal.
     PULSE_WIDTH_DIGITAL = 10359  #: Measure the width of a pulse of a digital signal.
-    PULSE_WIDTH_DIGITAL_TWO_EDGE_SEPARATION = 10267  #: Measure time between edges of two digital signals.
     PULSE_WIDTH_DIGITAL_SEMI_PERIOD = 10289  #: Measure the time between state transitions of a digital signal.
     PULSE_FREQ = 15864  #: Pulse measurement, returning the result as frequency and duty cycle.
     PULSE_TIME = 15865  #: Pulse measurement, returning the result as high time and low time.
     PULSE_TICKS = 15866  #: Pulse measurement, returning the result as high ticks and low ticks.
-    COUNT_EDGES = 10125  #: Count edges of a digital signal.
+    DUTY_CYCLE = 16070  #: Measure the duty cycle of a digital signal.
     POSITION_ANGULAR_ENCODER = 10360  #: Angular position measurement using an angular encoder.
     POSITION_LINEAR_ENCODER = 10361  #: Linear position measurement using a linear encoder.
-    TIME_GPS = 10362  #: Timestamp measurement, synchronizing the counter to a GPS receiver.
-    DUTY_CYCLE = 16070  #: Measure the duty cycle of a digital signal.
     VELOCITY_ANGULAR_ENCODER = 16078  #: Angular velocity measurement using an angular encoder.
     VELOCITY_LINEAR_ENCODER = 16079  #: Linear velocity measurement using a linear encoder.
+    PULSE_WIDTH_DIGITAL_TWO_EDGE_SEPARATION = 10267  #: Measure time between edges of two digital signals.
+    TIME_GPS = 10362  #: Timestamp measurement, synchronizing the counter to a GPS receiver.
 
 
 class UsageTypeCO(Enum):
@@ -1045,17 +952,6 @@ class WatchdogCOExpirState(Enum):
     NO_CHANGE = 10160  #: Expiration does not affect the state of the counter output. The channels retain their states at the time of the watchdog timer expiration, and no further counter generation runs.
 
 
-class WatchdogTaskAction(Enum):
-    RESET_TIMER = 0
-    CLEAR_EXPIRATION = 1
-
-
-class WaveformAttributes(Enum):
-    SAMPLES_ONLY = 10287  #: Return only samples.
-    SAMPLES_AND_TIMING = 10140  #: Return the samples and timing information.
-    SAMPLES_TIMING_AND_ATTRIBUTES = 10141  #: Return the samples, timing information, and other attributes, such as the name of the channel.
-
-
 class WindowTriggerCondition1(Enum):
     ENTERING_WINDOW = 10163  #: Trigger when the signal enters the window.
     LEAVING_WINDOW = 10208  #: Trigger when the signal leaves the window.
@@ -1067,18 +963,14 @@ class WindowTriggerCondition2(Enum):
 
 
 class WriteBasicTEDSOptions(Enum):
-    WRITE_TO_EEPROM = 12538  #: blah
-    WRITE_TO_PROM = 12539  #: blah
-    DO_NOT_WRITE = 12540  #: blah
+    WRITE_TO_EEPROM = 12538  #: Write basic TEDS data to the EEPROM, even if the sensor includes a PROM. You cannot write basic TEDS data if the PROM contains data.
+    WRITE_TO_PROM = 12539  #: Write basic TEDS data to the PROM. Any subsequent attempts to write basic TEDS data result in an error.
+    DO_NOT_WRITE = 12540  #: Ignore basic TEDS data.
 
 
 class WriteRelativeTo(Enum):
     FIRST_SAMPLE = 10424  #: Write samples relative to the first sample.
     CURRENT_WRITE_POSITION = 10430  #: Write samples relative to the current position in the buffer.
-
-
-class _Callback(Enum):
-    SYNCHRONOUS_EVENT_CALLBACKS = 1  #: Synchronous callbacks
 
 
 class _CouplingTypes(Enum):
@@ -1110,3 +1002,5 @@ class _TriggerUsageTypes(Enum):
     START = 8  #: Device supports start triggers
     HANDSHAKE = 16  #: Device supports handshake triggers
     ARM_START = 32  #: Device supports arm start triggers
+
+

@@ -32,17 +32,17 @@ packages = [{ include = "nidaqmx", from = "src" }]
 [tool.poetry.dependencies]
 python = "^3.7"
 numpy = [
-    {version="^1.20", python = "<3.10"},
-    # precompiled wheels only available in the 1.22+
-    {version="^1.22", python = "^3.10"}
+  # numpy 1.22 dropped support for Python 3.7.
+  {version=">=1.20,<1.22", python="<3.8"},
+  {version=">=1.22", python="^3.8"},
 ]
 six = "^1.16"
 # This functionality was merged into python stdlib beginning in 3.8
-importlib_metadata = {version="^4.10", python="~3.7"}
+importlib_metadata = {version="^4.2", python="~3.7"}
 # Documentation, must be in main dependencies (but optional) list for
 # readthedocs integration.
 # See https://github.com/readthedocs/readthedocs.org/issues/4912.
-Sphinx = {version="^4.4", optional=true}
+Sphinx = {version="^4.3", optional=true}
 sphinx_rtd_theme = {version="^1.0", optional=true}
 
 [tool.poetry.extras]
@@ -56,6 +56,15 @@ tox = "^3.24"
 click = "^8.1"
 Mako = "^1.2"
 deprecation = "^2.1"
+ni-python-styleguide = "^0.4"
+sphinx_rtd_theme = "1.0"
+
+[tool.black]
+line-length = 100
+extend_exclude = "docs,generated,src/nidaqmx,src/codegen/metadata,src/codegen/templates"
+
+[tool.ni-python-styleguide]
+extend_exclude = "docs,generated,src/nidaqmx,src/codegen/metadata,src/codegen/templates"
 
 [build-system]
 requires = ["poetry>=1.1.12"]

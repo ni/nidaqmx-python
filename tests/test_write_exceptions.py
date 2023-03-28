@@ -1,32 +1,27 @@
-import collections
-import re
-
+"""Tests for validating write error behavior."""
 import numpy
 import pytest
-import random
-import time
 
 import nidaqmx
-from nidaqmx.constants import (
-    AcquisitionType, BusType, RegenerationMode)
+from nidaqmx.constants import AcquisitionType, BusType, RegenerationMode
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.utils import flatten_channel_string
-from nidaqmx.tests.fixtures import real_x_series_device
-from nidaqmx.tests.helpers import generate_random_seed
 
 
 class TestWriteExceptions(object):
-    """
-    Contains a collection of pytest tests that validate the Write error behavior
-    in the NI-DAQmx Python API.
+    """Contains a collection of pytest tests.
 
+    These validate the Write error behavior in the NI-DAQmx Python API.
     These tests use only a single X Series device by utilizing the internal
     loopback routes on the device.
     """
 
     def test_overwrite(self, real_x_series_device):
+        """Test to validate overwrite functionality."""
         # USB streaming is very tricky.
-        if not (real_x_series_device.bus_type == BusType.PCIE or real_x_series_device.bus_type == BusType.PXIE):
+        if not (
+            real_x_series_device.bus_type == BusType.PCIE
+            or real_x_series_device.bus_type == BusType.PXIE
+        ):
             pytest.skip("Requires a plugin device.")
 
         number_of_samples = 100
@@ -35,21 +30,26 @@ class TestWriteExceptions(object):
         host_buffer_size = 1000
 
         with nidaqmx.Task() as write_task:
-            samp_clk_terminal = '/{0}/Ctr0InternalOutput'.format(
-                real_x_series_device.name)
+            samp_clk_terminal = "/{0}/Ctr0InternalOutput".format(real_x_series_device.name)
 
             write_task.ao_channels.add_ao_voltage_chan(
-                real_x_series_device.ao_physical_chans[0].name, max_val=10, min_val=-10)
+                real_x_series_device.ao_physical_chans[0].name, max_val=10, min_val=-10
+            )
             write_task.timing.cfg_samp_clk_timing(
-                sample_rate, source=samp_clk_terminal, sample_mode=AcquisitionType.CONTINUOUS,
-                samps_per_chan=number_of_samples)
+                sample_rate,
+                source=samp_clk_terminal,
+                sample_mode=AcquisitionType.CONTINUOUS,
+                samps_per_chan=number_of_samples,
+            )
 
             # Don't allow regeneration - this enables explicit hardware flow control.
             write_task.out_stream.regen_mode = RegenerationMode.DONT_ALLOW_REGENERATION
 
             # This is the only entrypoint that correctly sets number_of_samples_written in error
             # conditions prior to DAQmx 21.8.
-            writer = nidaqmx.stream_writers.AnalogUnscaledWriter(write_task.out_stream, auto_start=False)
+            writer = nidaqmx.stream_writers.AnalogUnscaledWriter(
+                write_task.out_stream, auto_start=False
+            )
 
             # Fill up the host buffer first.
             initial_write_data = numpy.zeros((1, host_buffer_size), dtype=numpy.int16)
@@ -59,7 +59,7 @@ class TestWriteExceptions(object):
             write_task.start()
 
             # Now write more data than can fit in the FIFO + host buffer.
-            large_write_data = numpy.zeros((1, fifo_size*2), dtype=numpy.int16)
+            large_write_data = numpy.zeros((1, fifo_size * 2), dtype=numpy.int16)
             with pytest.raises(nidaqmx.DaqWriteError) as timeout_exception:
                 writer.write_int16(large_write_data, timeout=2.0)
 
@@ -69,8 +69,12 @@ class TestWriteExceptions(object):
             assert timeout_exception.value.samps_per_chan_written > 0
 
     def test_overwrite_during_prime(self, real_x_series_device):
+        """Test to validate overwrite functionality during prime."""
         # USB streaming is very tricky.
-        if not (real_x_series_device.bus_type == BusType.PCIE or real_x_series_device.bus_type == BusType.PXIE):
+        if not (
+            real_x_series_device.bus_type == BusType.PCIE
+            or real_x_series_device.bus_type == BusType.PXIE
+        ):
             pytest.skip("Requires a plugin device.")
 
         number_of_samples = 100
@@ -80,14 +84,17 @@ class TestWriteExceptions(object):
         total_buffer_size = fifo_size + host_buffer_size
 
         with nidaqmx.Task() as write_task:
-            samp_clk_terminal = '/{0}/Ctr0InternalOutput'.format(
-                real_x_series_device.name)
+            samp_clk_terminal = "/{0}/Ctr0InternalOutput".format(real_x_series_device.name)
 
             write_task.ao_channels.add_ao_voltage_chan(
-                real_x_series_device.ao_physical_chans[0].name, max_val=10, min_val=-10)
+                real_x_series_device.ao_physical_chans[0].name, max_val=10, min_val=-10
+            )
             write_task.timing.cfg_samp_clk_timing(
-                sample_rate, source=samp_clk_terminal, sample_mode=AcquisitionType.CONTINUOUS,
-                samps_per_chan=number_of_samples)
+                sample_rate,
+                source=samp_clk_terminal,
+                sample_mode=AcquisitionType.CONTINUOUS,
+                samps_per_chan=number_of_samples,
+            )
 
             # Don't allow regeneration - this enables explicit hardware flow control.
             write_task.out_stream.regen_mode = RegenerationMode.DONT_ALLOW_REGENERATION
@@ -96,10 +103,12 @@ class TestWriteExceptions(object):
 
             # This is the only entrypoint that correctly sets number_of_samples_written in error
             # conditions prior to DAQmx 21.8.
-            writer = nidaqmx.stream_writers.AnalogUnscaledWriter(write_task.out_stream, auto_start=False)
+            writer = nidaqmx.stream_writers.AnalogUnscaledWriter(
+                write_task.out_stream, auto_start=False
+            )
 
             # This is more data than can be primed, so this should fail.
-            initial_write_data = numpy.zeros((1, total_buffer_size*2), dtype=numpy.int16)
+            initial_write_data = numpy.zeros((1, total_buffer_size * 2), dtype=numpy.int16)
             with pytest.raises(nidaqmx.DaqWriteError) as timeout_exception:
                 writer.write_int16(initial_write_data)
 
