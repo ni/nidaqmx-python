@@ -7,6 +7,7 @@ class Attribute:
     """Structure for storing attribute metadata from scrapigen."""
 
     def __init__(self, id, attribute_metadata):
+        """Structure for storing attribute metadata from scrapigen."""
         self._id = id
         self._is_enum = False
         self._access = attribute_metadata["access"]

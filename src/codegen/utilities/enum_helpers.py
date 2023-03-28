@@ -68,7 +68,6 @@ ENUM_MERGE_SET = {
     "WaitMode": ["WaitMode", "WaitMode2"],
     "ExportAction": ["ExportActions", "ExportActions2", "ExportActions3", "ExportActions5"],
     "Polarity": ["Polarity", "Polarity2"],
-    "Timescale": ["Timescale2"],
     "TriggerType": [
         "TriggerType4",
         "TriggerType6",
