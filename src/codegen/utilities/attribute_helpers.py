@@ -134,6 +134,11 @@ ATTRIBUTE_CHANGE_SET = {
         "type": "scale_type",
         "descr": "description",
     },
+    "ExportSignals": {
+        "on_demand_simultaneous_ao_enable": "simultaneous_ao_enable",
+        "10_mhz_ref_clk_output_term": "exported_10_mhz_ref_clk_output_term",
+        "20_mhz_timebase_output_term": "exported_20_mhz_timebase_output_term",
+    },
 }
 
 

@@ -68,5 +68,9 @@ script_info = {
             "relativeOutputPath": "scale.py", 
             "templateFile": "scale.py.mako",
         },
+        {
+            "relativeOutputPath": "_task_modules\\export_signals.py",
+            "templateFile": "_task_modules\\export_signals.py.mako",
+        },
    ]
 }
