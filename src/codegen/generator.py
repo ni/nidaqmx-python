@@ -37,7 +37,7 @@ def _generate_file(metadata, template_file_name, output_path):
 def _copy_handwritten_files(dest):
     parent_dir = Path(__file__).parent.parent
     source_path = parent_dir / "handwritten"
-    shutil.copytree(source_path, dest, dirs_exist_ok= True)
+    shutil.copytree(source_path, dest, dirs_exist_ok=True)
 
 
 def generate(dest):
@@ -56,4 +56,3 @@ def generate(dest):
     _generate_file(codegen_metadata, "constants.mako", dest / "constants.py")
 
     _copy_handwritten_files(dest)
-
