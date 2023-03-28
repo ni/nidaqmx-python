@@ -69,6 +69,10 @@ script_info = {
             "templateFile": "scale.py.mako",
         },
         {
+            "relativeOutputPath": "_task_modules\\export_signals.py",
+            "templateFile": "_task_modules\\export_signals.py.mako",
+        },
+        {
             "relativeOutputPath": "_task_modules\\triggering\\arm_start_trigger.py",
             "templateFile": "_task_modules\\triggering\\arm_start_trigger.py.mako",
         },

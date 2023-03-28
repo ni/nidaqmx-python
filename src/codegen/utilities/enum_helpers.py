@@ -17,7 +17,12 @@ ENUM_MERGE_SET = {
     ],
     "CurrentUnits": ["CurrentUnits1", "CurrentUnits"],
     "DataJustification": ["DataJustification", "DataJustification1"],
-    "DigitalWidthUnits": ["DigitalWidthUnits", "DigitalWidthUnits2", "DigitalWidthUnits4"],
+    "DigitalWidthUnits": [
+        "DigitalWidthUnits",
+        "DigitalWidthUnits2",
+        "DigitalWidthUnits3",
+        "DigitalWidthUnits4",
+    ],
     "Edge": ["Edge", "Edge1"],
     "FilterResponse": ["FilterResponse1", "FilterResponse"],
     "FilterType": ["FilterType", "FilterType2"],
@@ -61,6 +66,8 @@ ENUM_MERGE_SET = {
     "OverwriteMode": ["OverwriteMode", "OverwriteMode1"],
     "RegenerationMode": ["RegenerationMode", "RegenerationMode1"],
     "WaitMode": ["WaitMode", "WaitMode2"],
+    "ExportAction": ["ExportActions", "ExportActions2", "ExportActions3", "ExportActions5"],
+    "Polarity": ["Polarity", "Polarity2"],
     "Timescale": ["Timescale2"],
     "TriggerType": [
         "TriggerType4",
