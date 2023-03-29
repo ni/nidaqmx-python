@@ -296,9 +296,9 @@ class Attribute:
         elif self.is_object and not self.is_list:
             return ":class:`{0}.{1}`".format(self.object_module_location, self.object_type)
         elif self.is_enum and self.is_list:
-            return ":class: list[`{0}.{1}`]".format(constants_path, self.enum)
+            return "List[:class:`{0}.{1}`]".format(constants_path, self.enum)
         elif self.is_object and self.is_list:
-            return ":class: list[`{0}.{1}`]".format(self.object_module_location, self.object_type)
+            return "List[:class:`{0}.{1}`]".format(self.object_module_location, self.object_type)
         elif self.is_list:
             return "List[{0}]".format(self.python_data_type)
         else:

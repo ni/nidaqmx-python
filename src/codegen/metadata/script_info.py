@@ -72,5 +72,25 @@ script_info = {
             "relativeOutputPath": "_task_modules\\export_signals.py",
             "templateFile": "_task_modules\\export_signals.py.mako",
         },
-   ]
+        {
+            "relativeOutputPath": "_task_modules\\triggering\\arm_start_trigger.py",
+            "templateFile": "_task_modules\\triggering\\arm_start_trigger.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\triggering\\handshake_trigger.py",
+            "templateFile": "_task_modules\\triggering\\handshake_trigger.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\triggering\\pause_trigger.py",
+            "templateFile": "_task_modules\\triggering\\pause_trigger.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\triggering\\reference_trigger.py",
+            "templateFile": "_task_modules\\triggering\\reference_trigger.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\triggering\\start_trigger.py",
+            "templateFile": "_task_modules\\triggering\\start_trigger.py.mako",
+        },
+    ]
 }

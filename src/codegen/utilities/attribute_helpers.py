@@ -1,6 +1,7 @@
 """This contains the helper methods used in attribute generation."""
 
 from codegen.properties.attribute import Attribute
+from codegen.utilities.helpers import strip_class_name
 
 EXCLUDED_ATTRIBUTES = [
     "AI_CHAN_CAL_HAS_VALID_CAL_INFO",
@@ -22,6 +23,9 @@ EXCLUDED_ATTRIBUTES = [
     "FIRST_SAMP_TIMESTAMP_VAL",
     "SYNC_PULSE_TIME_WHEN",
     "TIMING_SYNC_PULSE_FORCE",
+    "ARM_START_TRIG_TIMESTAMP_VAL",
+    "REF_TRIG_TIMESTAMP_VAL",
+    "START_TRIG_TIMESTAMP_VAL",
 ]
 
 DEPRECATED_ATTRIBUTES = {
@@ -139,6 +143,37 @@ ATTRIBUTE_CHANGE_SET = {
         "10_mhz_ref_clk_output_term": "exported_10_mhz_ref_clk_output_term",
         "20_mhz_timebase_output_term": "exported_20_mhz_timebase_output_term",
     },
+    "ArmStartTrigger": {
+        "timescale": "time_timescale",
+    },
+    "StartTrigger": {
+        "timescale": "time_timescale",
+    },
+}
+
+ATTR_NAME_CHANGE_IN_DESCRIPTION = {
+    "anlg_lvl_pause_trig_when": "anlg_lvl_when",
+    "anlg_lvl_pause_trig_lvl": "anlg_lvl_lvl",
+    "anlg_win_pause_trig_btm": "anlg_win_btm",
+    "anlg_win_pause_trig_top": "anlg_win_top",
+    "dig_pattern_pause_trig_src": "dig_pattern_src",
+    "dig_pattern_pause_trig_pattern": "dig_pattern_pattern",
+    "anlg_edge_ref_trig_slope": "anlg_edge_slope",
+    "anlg_edge_ref_trig_slope": "anlg_edge_slope",
+    "anlg_edge_ref_trig_lvl": "anlg_edge_lvl",
+    "anlg_win_ref_trig_btm": "anlg_win_btm",
+    "anlg_win_ref_trig_top": "anlg_win_top",
+    "ref_trig_auto_trig_enable": "auto_trig_enable",
+    "dig_pattern_ref_trig_src": "dig_pattern_src",
+    "dig_pattern_ref_trig_pattern": "dig_pattern_pattern",
+    "anlg_edge_start_trig_slope": "anlg_edge_slope",
+    "anlg_edge_start_trig_lvl": "anlg_edge_lvl",
+    "anlg_win_start_trig_btm": "anlg_win_btm",
+    "anlg_win_start_trig_top": "anlg_win_top",
+    "start_trig_delay_units": "delay_units",
+    "start_trig_delay": "delay",
+    "dig_pattern_start_trig_src": "dig_pattern_src",
+    "dig_pattern_start_trig_pattern": "dig_pattern_pattern",
 }
 
 
@@ -152,6 +187,13 @@ def get_attributes(metadata, class_name):
                 and attribute_data["python_class_name"] == class_name
                 and not attribute_data["name"] in EXCLUDED_ATTRIBUTES
             ):
+                # Strip class name in attribute name from the description.
+                attribute_data["python_description"] = _strip_attr_name_in_description(
+                    attribute_data["python_description"]
+                )
+
+                # Strip class name in the attribute name.
+                attribute_data["name"] = _strip_name(attribute_data["name"], class_name)
                 attributes_metadata.append(Attribute(id, attribute_data))
     return sorted(attributes_metadata, key=lambda x: x.name)
 
@@ -190,3 +232,58 @@ def get_deprecated_attributes(attributes):
             deprecated_attributes[old_name]["access"] = matching_attribute.access
             deprecated_attributes[old_name]["resettable"] = matching_attribute.resettable
     return deprecated_attributes
+
+
+def _strip_attr_name_in_description(attribute_description):
+    """Strips physical_chan prefix in attribute description."""
+    for old_attribute_name, new_attribute_name in ATTR_NAME_CHANGE_IN_DESCRIPTION.items():
+        if old_attribute_name in attribute_description:
+            attribute_description = attribute_description.replace(
+                old_attribute_name, new_attribute_name
+            )
+    return attribute_description
+
+
+def _strip_name(attribute_name, class_name):
+    """Strips class name from attribute name."""
+    # Strip ARM_START_TRIG prefix from the name.
+    if class_name == "ArmStartTrigger":
+        if attribute_name == "ARM_START_TRIG_TYPE":
+            return strip_class_name(attribute_name, "ARM_START_")
+        return strip_class_name(attribute_name, "ARM_START_TRIG_|ARM_START_")
+
+    # Strip HSHK_TRIG prefix from the name.
+    if class_name == "HandshakeTrigger":
+        attribute_name = strip_class_name(attribute_name, "_HSHK_TRIG_", "_")
+        return strip_class_name(attribute_name, "HSHK_")
+
+    # Strip PAUSE_TRIG prefix from the name.
+    if class_name == "PauseTrigger":
+        attribute_name = strip_class_name(attribute_name, "_PAUSE_TRIG_", "_")
+        if attribute_name == "PAUSE_TRIG_TYPE":
+            return strip_class_name(attribute_name, "PAUSE_")
+        return strip_class_name(attribute_name, "PAUSE_TRIG_")
+
+    # Strip REF_TRIG prefix from the name.
+    if class_name == "ReferenceTrigger":
+        if attribute_name.lower() in [
+            "ref_trig_type",
+            "ref_trig_win",
+            "dig_pattern_ref_trig_when",
+            "anlg_win_ref_trig_when",
+        ]:
+            return strip_class_name(attribute_name, "REF_")
+        return strip_class_name(attribute_name, "REF_TRIG_")
+
+    # Strip START_TRIG prefix from the name.
+    if class_name == "StartTrigger":
+        if attribute_name.lower() in [
+            "anlg_win_start_trig_when",
+            "dig_pattern_start_trig_when",
+            "start_trig_type",
+            "start_trig_win",
+        ]:
+            return strip_class_name(attribute_name, "START_")
+        return strip_class_name(attribute_name, "START_TRIG_")
+
+    return attribute_name
