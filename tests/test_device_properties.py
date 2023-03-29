@@ -33,7 +33,8 @@ class TestDevicePropertyDataTypes(object):
 
     def test_list_of_float_property(self, bridge_device):
         """Test for validating the device property of a float array type."""
-        assert bridge_device.ai_voltage_rngs == []
+        assert len(bridge_device.ai_bridge_rngs) == 4
+        assert bridge_device.ai_bridge_rngs == [-0.025, 0.025, -0.1, 0.1]
 
     def test_list_of_enums_property(self, bridge_device):
         """Test for validating the device property of a enum array type."""
