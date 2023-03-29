@@ -6,19 +6,6 @@ from codegen.utilities.enum_helpers import merge_enums
 class Attribute:
     """Structure for storing attribute metadata from scrapigen."""
 
-    ATTRIBUTE_CHANGE_SET = {
-        "ai_custom_scale_name": "ai_custom_scale",
-        "ao_custom_scale_name": "ao_custom_scale",
-        "ci_custom_scale_name": "ci_custom_scale",
-        "ci_dup_count_prevent": "ci_dup_count_prevention",
-        "chan_descr": "description",
-        "chan_sync_unlock_behavior": "sync_unlock_behavior",
-        "chan_is_global": "is_global",
-        "physical_chan_name": "physical_channel",
-        "teds_template_i_ds": "teds_template_ids",
-        "timescale": "time_timescale",
-    }
-
     def __init__(self, id, attribute_metadata):
         """Structure for storing attribute metadata from scrapigen."""
         self._id = id
