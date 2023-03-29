@@ -33,15 +33,24 @@ class TestDevicePropertyDataTypes(object):
 
     def test_list_of_float_property(self, bridge_device):
         """Test for validating the device property of a float array type."""
-        assert len(bridge_device.ai_bridge_rngs) == 4
-        assert bridge_device.ai_bridge_rngs == [-0.025, 0.025, -0.1, 0.1]
+        ai_bridge_ranges = bridge_device.ai_bridge_rngs
+
+        assert isinstance(ai_bridge_ranges, list)
+        assert len(ai_bridge_ranges) == 4
+        assert ai_bridge_ranges == [-0.025, 0.025, -0.1, 0.1]
 
     def test_list_of_enums_property(self, bridge_device):
         """Test for validating the device property of a enum array type."""
-        assert len(bridge_device.ai_trig_usage) == 2
-        assert bridge_device.ai_trig_usage == [TriggerUsage.REFERENCE, TriggerUsage.START]
+        ai_trigger_usage = bridge_device.ai_trig_usage
+
+        assert isinstance(ai_trigger_usage, list)
+        assert len(ai_trigger_usage) == 2
+        assert ai_trigger_usage == [TriggerUsage.REFERENCE, TriggerUsage.START]
 
     def test_list_of_uint_property(self, bridge_device):
         """Test for validating the device property of uint array type."""
-        assert len(bridge_device.accessory_product_nums) == 1
-        assert bridge_device.accessory_product_nums == [31122]
+        accessory_product_numbers = bridge_device.accessory_product_nums
+        
+        assert isinstance(accessory_product_numbers, list)
+        assert len(accessory_product_numbers) == 1
+        assert accessory_product_numbers == [31122]
