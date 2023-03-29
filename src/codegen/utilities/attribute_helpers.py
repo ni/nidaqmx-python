@@ -140,30 +140,6 @@ DEPRECATED_ATTRIBUTES = {
         "new_name": "co_supported_output_types",
         "deprecated_in": "0.6.6",
     },
-    "teds_hwteds_supported": {
-        "new_name": "tedshwteds_supported",
-        "deprecated_in": "0.6.6",
-    },
-    "chassis_module_devices": {
-        "new_name": "chassis_module_dev_names",
-        "deprecated_in": "0.6.6",
-    },
-    "compact_daq_chassis_device": {
-        "new_name": "compact_daq_chassis_dev_name",
-        "deprecated_in": "0.6.6",
-    },
-    "compact_rio_chassis_device": {
-        "new_name": "compact_rio_chassis_dev_name",
-        "deprecated_in": "0.6.6",
-    },
-    "field_daq_bank_devices": {
-        "new_name": "field_daq_bank_dev_names",
-        "deprecated_in": "0.6.6",
-    },
-    "field_daq_device": {
-        "new_name": "field_daq_dev_name",
-        "deprecated_in": "0.6.6",
-    },
     "dev_is_simulated": {
         "new_name": "is_simulated",
         "deprecated_in": "0.6.6",
@@ -173,7 +149,7 @@ DEPRECATED_ATTRIBUTES = {
         "deprecated_in": "0.6.6",
     },
     "tedshwteds_supported": {
-        "new_name": "teds_hwteds_supported",
+        "new_name": "hwteds_supported",
         "deprecated_in": "0.6.6",
     },
 }
@@ -220,6 +196,17 @@ ATTRIBUTE_CHANGE_SET = {
     "StartTrigger": {
         "timescale": "time_timescale",
     },
+    "Device": {
+        "teds_hwteds_supported": "hwteds_supported",
+        "chassis_module_dev_names": "chassis_module_devices",
+        "compact_daq_chassis_dev_name": "compact_daq_chassis_device",
+        "compact_rio_chassis_dev_name": "compact_rio_chassis_device",
+        "field_daq_bank_dev_names": "field_daq_bank_devices",
+        "field_daq_dev_name": "field_daq_device",
+    },
+    "PhysicalChannel": {
+        "teds_template_i_ds": "teds_template_ids",
+    },
 }
 
 ATTR_NAME_CHANGE_IN_DESCRIPTION = {
@@ -245,6 +232,11 @@ ATTR_NAME_CHANGE_IN_DESCRIPTION = {
     "start_trig_delay": "delay",
     "dig_pattern_start_trig_src": "dig_pattern_src",
     "dig_pattern_start_trig_pattern": "dig_pattern_pattern",
+    "physical_chan_ai_supported_meas_types": "ai_supported_meas_types",
+    "physical_chan_ao_supported_output_types": "ao_supported_output_types",
+    "physical_chan_ci_supported_meas_types": "ci_supported_meas_types",
+    "physical_chan_co_supported_output_types": "co_supported_output_types",
+    "physical_chan_teds_bit_stream": "teds_bit_stream",
 }
 
 
