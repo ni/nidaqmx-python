@@ -1,3 +1,4 @@
+"""Tests for validating device properties for different basic data types."""
 from nidaqmx.constants import BusType, TriggerUsage
 
 
