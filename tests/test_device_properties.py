@@ -50,7 +50,7 @@ class TestDevicePropertyDataTypes(object):
     def test_list_of_uint_property(self, bridge_device):
         """Test for validating the device property of uint array type."""
         accessory_product_numbers = bridge_device.accessory_product_nums
-        
+
         assert isinstance(accessory_product_numbers, list)
         assert len(accessory_product_numbers) == 1
         assert accessory_product_numbers == [31122]
