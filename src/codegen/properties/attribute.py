@@ -24,11 +24,7 @@ class Attribute:
         self._id = id
         self._is_enum = False
         self._access = attribute_metadata["access"]
-        attribute_name = attribute_metadata["name"].lower()
-        if attribute_name in self.ATTRIBUTE_CHANGE_SET:
-            self._name = self.ATTRIBUTE_CHANGE_SET.get(attribute_name)
-        else:
-            self._name = attribute_name
+        self._name = attribute_metadata["name"].lower()
         self._resettable = attribute_metadata["resettable"]
         self._type = attribute_metadata["type"]
         self._ctypes_data_type = attribute_metadata["ctypes_data_type"]
@@ -322,3 +318,7 @@ class Attribute:
             return "List[{0}]".format(self.python_data_type)
         else:
             return self.python_data_type
+
+    def update_attribute_name(self, attribute_name):
+        """Updates the attribute name."""
+        self._name = attribute_name.lower()

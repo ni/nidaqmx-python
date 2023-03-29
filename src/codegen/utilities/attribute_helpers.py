@@ -9,9 +9,6 @@ EXCLUDED_ATTRIBUTES = [
     "AI_CHAN_CAL_DESC",
     "AI_CHAN_CAL_APPLY_CAL_IF_EXP",
     "AI_BRIDGE_SHUNT_CAL_SHUNT_CAL_B_SRC",
-    "OPEN_CHANS",
-    "OPEN_CHANS_EXIST",
-    "OPEN_CHANS_DETAILS",
     "AI_CHAN_CAL_VERIF_REF_VALS",
     "AI_CHAN_CAL_VERIF_ACQ_VALS",
     "AI_CHAN_CAL_TABLE_SCALED_VALS",
@@ -40,6 +37,12 @@ EXCLUDED_ATTRIBUTES = [
     "ARM_START_TRIG_TIMESTAMP_VAL",
     "REF_TRIG_TIMESTAMP_VAL",
     "START_TRIG_TIMESTAMP_VAL",
+    "FIRST_SAMP_CLK_OFFSET",
+    "FIRST_SAMP_CLK_TIMESCALE",
+    "FIRST_SAMP_CLK_WHEN",
+    "FIRST_SAMP_TIMESTAMP_VAL",
+    "SYNC_PULSE_TIME_WHEN",
+    "TIMING_SYNC_PULSE_FORCE",
 ]
 
 DEPRECATED_ATTRIBUTES = {
@@ -117,6 +120,7 @@ DEPRECATED_ATTRIBUTES = {
         "new_name": "ci_velocity_encoder_a_input_term_cfg",
         "deprecated_in": "0.6.6",
     },
+    "over_write": {"new_name": "overwrite", "deprecated_in": "0.6.6"},
     "ai_meas_types": {
         "new_name": "ai_supported_meas_types",
         "deprecated_in": "0.6.6",
@@ -171,14 +175,51 @@ DEPRECATED_ATTRIBUTES = {
     },
 }
 
-PYTHON_CLASS_ENUM_MERGE_SET = {"Channel": ["_Save"]}
+PYTHON_CLASS_ENUM_MERGE_SET = {
+    "Channel": ["_Save"],
+    "InStream": ["AcquisitionType", "READ_ALL_AVAILABLE"],
+    "OutStream": ["ResolutionType"],
+    "Scale": ["_Save"],
+}
+
+ATTRIBUTE_CHANGE_SET = {
+    "AIChannel": {"ai_custom_scale_name": "ai_custom_scale"},
+    "AOChannel": {"ao_custom_scale_name": "ao_custom_scale"},
+    "CIChannel": {
+        "ci_custom_scale_name": "ci_custom_scale",
+        "ci_dup_count_prevent": "ci_dup_count_prevention",
+        "ci_dup_count_prevent": "ci_dup_count_prevention",
+    },
+    "Channel": {
+        "chan_descr": "description",
+        "chan_sync_unlock_behavior": "sync_unlock_behavior",
+        "chan_is_global": "is_global",
+        "physical_chan_name": "physical_channel",
+    },
+    "InStream": {
+        "change_detect_has_overflowed": "change_detect_overflowed",
+        "digital_lines_bytes_per_chan": "di_num_booleans_per_chan",
+    },
+    "OutStream": {"digital_lines_bytes_per_chan": "do_num_booleans_per_chan"},
+    "Timing": {"on_demand_simultaneous_ao_enable": "simultaneous_ao_enable"},
+    "Scale": {
+        "type": "scale_type",
+        "descr": "description",
+    },
+    "ExportSignals": {
+        "on_demand_simultaneous_ao_enable": "simultaneous_ao_enable",
+        "10_mhz_ref_clk_output_term": "exported_10_mhz_ref_clk_output_term",
+        "20_mhz_timebase_output_term": "exported_20_mhz_timebase_output_term",
+    },
+    "ArmStartTrigger": {
+        "timescale": "time_timescale",
+    },
+    "StartTrigger": {
+        "timescale": "time_timescale",
+    },
+}
 
 ATTR_NAME_CHANGE_IN_DESCRIPTION = {
-    "physical_chan_ai_supported_meas_types": "ai_supported_meas_types",
-    "physical_chan_teds_bit_stream": "teds_bit_stream",
-    "physical_chan_ao_supported_output_types": "ao_supported_output_types",
-    "physical_chan_ci_supported_meas_types": "ci_supported_meas_types",
-    "physical_chan_co_supported_output_types": "co_supported_output_types",
     "anlg_lvl_pause_trig_when": "anlg_lvl_when",
     "anlg_lvl_pause_trig_lvl": "anlg_lvl_lvl",
     "anlg_win_pause_trig_btm": "anlg_win_btm",
@@ -223,6 +264,17 @@ def get_attributes(metadata, class_name):
                 attribute_data["name"] = _strip_name(attribute_data["name"], class_name)
                 attributes_metadata.append(Attribute(id, attribute_data))
     return sorted(attributes_metadata, key=lambda x: x.name)
+
+
+def transform_attributes(attributes, class_name):
+    """Updates the attribute name with the expected name."""
+    if class_name in ATTRIBUTE_CHANGE_SET:
+        updated_names = ATTRIBUTE_CHANGE_SET[class_name]
+        for attribute in attributes:
+            if attribute.name in updated_names:
+                attribute.update_attribute_name(updated_names[attribute.name])
+        return sorted(attributes, key=lambda x: x.name)
+    return attributes
 
 
 def get_enums_used(attributes):

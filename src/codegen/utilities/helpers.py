@@ -21,7 +21,7 @@ def camel_to_snake_case(camel_case_string):
 
 
 def get_enums_to_import(enums_in_attributes, enums_in_functions):
-    """Combines both attribute and function enums."""
+    """Gets the enums that needs to imported for the attributes and functions used."""
     enums_to_import = enums_in_attributes + enums_in_functions
     enums_to_import = list(set(enums_to_import))
     return sorted(enums_to_import)
