@@ -9,10 +9,12 @@ class Function:
 
     def __init__(self, function_name, function_metadata):
         """Structure for storing function metadata from scrapigen."""
+        if "python_description" in function_metadata:
+            self._description = function_metadata["python_description"]
         self._function_name = function_name
-        self._description = function_metadata["python_description"]
         self._is_python_factory = function_metadata.get("is_python_factory", False)
-        self._python_class_name = function_metadata["python_class_name"]
+        if "python_class_name" in function_metadata:
+            self._python_class_name = function_metadata["python_class_name"]
         self._calling_convention = function_metadata["calling_convention"]
         self._return_type = function_metadata["returns"]
         self._handle_parameter = None
@@ -39,7 +41,7 @@ class Function:
         if "cname" in function_metadata:
             assert function_metadata["cname"].startswith("DAQmx")
             self._c_function_name = function_metadata["cname"][5:]
-        else:
+        elif "c_function_name" in function_metadata:
             self._c_function_name = function_metadata["c_function_name"]
 
     @property
