@@ -1408,7 +1408,7 @@ class Device(object):
         return val.value
 
     @property
-    def chassis_module_dev_names(self):
+    def chassis_module_devices(self):
         """
         List[:class:`nidaqmx.system.device.Device`]: Indicates a list
             containing the names of the modules in the chassis.
@@ -1752,7 +1752,7 @@ class Device(object):
             val.value, _TriggerUsageTypes, TriggerUsage)
 
     @property
-    def compact_daq_chassis_dev_name(self):
+    def compact_daq_chassis_device(self):
         """
         :class:`nidaqmx.system.device.Device`: Indicates the name of the
             CompactDAQ chassis that contains this module.
@@ -1806,7 +1806,7 @@ class Device(object):
         return val.value
 
     @property
-    def compact_rio_chassis_dev_name(self):
+    def compact_rio_chassis_device(self):
         """
         :class:`nidaqmx.system.device.Device`: Indicates the name of the
             CompactRIO chassis that contains this module.
@@ -2006,7 +2006,7 @@ class Device(object):
             val.value, _TriggerUsageTypes, TriggerUsage)
 
     @property
-    def field_daq_bank_dev_names(self):
+    def field_daq_bank_devices(self):
         """
         List[:class:`nidaqmx.system.device.Device`]: Indicates a list
             containing the names of the banks in the FieldDAQ.
@@ -2040,7 +2040,7 @@ class Device(object):
                 for v in unflatten_channel_string(val.value.decode('ascii'))]
 
     @property
-    def field_daq_dev_name(self):
+    def field_daq_device(self):
         """
         :class:`nidaqmx.system.device.Device`: Indicates the parent
             device which this bank is located in.
@@ -2071,6 +2071,26 @@ class Device(object):
         check_for_error(size_or_code)
 
         return Device(val.value.decode('ascii'))
+
+    @property
+    def hwteds_supported(self):
+        """
+        bool: Indicates whether the device supports hardware TEDS.
+        """
+        val = c_bool32()
+
+        cfunc = lib_importer.windll.DAQmxGetDevTEDSHWTEDSSupported
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
 
     @property
     def is_simulated(self):
@@ -2433,26 +2453,6 @@ class Device(object):
         return val.value.decode('ascii')
 
     @property
-    def teds_hwteds_supported(self):
-        """
-        bool: Indicates whether the device supports hardware TEDS.
-        """
-        val = c_bool32()
-
-        cfunc = lib_importer.windll.DAQmxGetDevTEDSHWTEDSSupported
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @property
     def terminals(self):
         """
         List[str]: Indicates a list of all terminals on the device.
@@ -2504,7 +2504,6 @@ class Device(object):
 
         return val.value
 
-
     @property
     @deprecation.deprecated(deprecated_in="0.6.6", details="Use ai_supported_meas_types instead.")
     def ai_meas_types(self):
@@ -2526,31 +2525,6 @@ class Device(object):
         return self.co_supported_output_types
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use chassis_module_dev_names instead.")
-    def chassis_module_devices(self):
-        return self.chassis_module_dev_names
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use compact_daq_chassis_dev_name instead.")
-    def compact_daq_chassis_device(self):
-        return self.compact_daq_chassis_dev_name
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use compact_rio_chassis_dev_name instead.")
-    def compact_rio_chassis_device(self):
-        return self.compact_rio_chassis_dev_name
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use field_daq_bank_dev_names instead.")
-    def field_daq_bank_devices(self):
-        return self.field_daq_bank_dev_names
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use field_daq_dev_name instead.")
-    def field_daq_device(self):
-        return self.field_daq_dev_name
-
-    @property
     @deprecation.deprecated(deprecated_in="0.6.6", details="Use is_simulated instead.")
     def dev_is_simulated(self):
         return self.is_simulated
@@ -2561,9 +2535,9 @@ class Device(object):
         return self.serial_num
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use teds_hwteds_supported instead.")
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use hwteds_supported instead.")
     def tedshwteds_supported(self):
-        return self.teds_hwteds_supported
+        return self.hwteds_supported
 
     def reset_device(self):
         """

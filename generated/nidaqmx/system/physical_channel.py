@@ -1180,7 +1180,6 @@ class PhysicalChannel(object):
 
         return val.value
 
-
     @property
     @deprecation.deprecated(deprecated_in="0.6.6", details="Use ai_supported_meas_types instead.")
     def ai_meas_types(self):
