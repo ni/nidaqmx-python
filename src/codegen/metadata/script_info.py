@@ -63,7 +63,7 @@ script_info = {
         {
             "relativeOutputPath": "_task_modules\\timing.py",
             "templateFile": "_task_modules\\timing.py.mako",
-        },
+        },  
         {
             "relativeOutputPath": "scale.py", 
             "templateFile": "scale.py.mako",
