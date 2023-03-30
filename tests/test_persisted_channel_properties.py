@@ -24,5 +24,5 @@ class TestPersistedChannelPropertyDataTypes(object):
         assert voltage_tester_channel.allow_interactive_editing
 
     def test_string_property(self, voltage_tester_channel):
-        """Test for validating boolean properties in persisted channel."""
+        """Test for validating string properties in persisted channel."""
         assert voltage_tester_channel.author == "Test Author"
