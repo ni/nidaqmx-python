@@ -161,7 +161,7 @@ DEPRECATED_ATTRIBUTES = {
         "new_name": "expiration_trigger_dig_edge_edge",
         "deprecated_in": "0.6.6",
     },
-    "expir_trig_dig_edge_src": {"new_name": "expiration_trigger_type", "deprecated_in": "0.6.6"},
+    "expir_trig_dig_edge_src": {"new_name": "expiration_trigger_dig_edge_src", "deprecated_in": "0.6.6"},
     "expir_trig_trig_on_network_conn_loss": {
         "new_name": "expiration_trigger_trig_on_network_conn_loss",
         "deprecated_in": "0.6.6",
@@ -221,6 +221,11 @@ ATTRIBUTE_CHANGE_SET = {
     },
     "PhysicalChannel": {
         "teds_template_i_ds": "teds_template_ids",
+    },
+    "ExpirationState": {
+        "ao_expir_state": "ao_state",
+        "co_expir_state": "co_state",
+        "do_expir_state": "do_state",
     },
     "Watchdog": {
         "expir_trig_type": "expiration_trigger_type",

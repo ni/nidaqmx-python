@@ -233,7 +233,6 @@ class ExpirationState(object):
             self._handle, self._physical_channel)
         check_for_error(error_code)
 
-
     @property
     @deprecation.deprecated(deprecated_in="0.6.6", details="Use ao_output_type instead.")
     def expir_states_ao_type(self):

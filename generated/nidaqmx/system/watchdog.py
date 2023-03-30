@@ -663,7 +663,6 @@ class WatchdogTask(object):
         error_code = cfunc(self._handle)
         check_for_error(error_code)
 
-
     @property
     @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_type instead.")
     def expir_trig_trig_type(self):
@@ -695,19 +694,19 @@ class WatchdogTask(object):
         del self.expiration_trigger_dig_edge_edge
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_type instead.")
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_dig_edge_src instead.")
     def expir_trig_dig_edge_src(self):
-        return self.expiration_trigger_type
+        return self.expiration_trigger_dig_edge_src
 
     @expir_trig_dig_edge_src.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_type instead.")
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_dig_edge_src instead.")
     def expir_trig_dig_edge_src(self, val):
-        self.expiration_trigger_type = val
+        self.expiration_trigger_dig_edge_src = val
 
     @expir_trig_dig_edge_src.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_type instead.")
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_dig_edge_src instead.")
     def expir_trig_dig_edge_src(self):
-        del self.expiration_trigger_type
+        del self.expiration_trigger_dig_edge_src
 
     @property
     @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_trig_on_network_conn_loss instead.")
