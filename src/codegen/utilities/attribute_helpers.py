@@ -161,7 +161,10 @@ DEPRECATED_ATTRIBUTES = {
         "new_name": "expiration_trigger_dig_edge_edge",
         "deprecated_in": "0.6.6",
     },
-    "expir_trig_dig_edge_src": {"new_name": "expiration_trigger_dig_edge_src", "deprecated_in": "0.6.6"},
+    "expir_trig_dig_edge_src": {
+        "new_name": "expiration_trigger_dig_edge_src",
+        "deprecated_in": "0.6.6",
+    },
     "expir_trig_trig_on_network_conn_loss": {
         "new_name": "expiration_trigger_trig_on_network_conn_loss",
         "deprecated_in": "0.6.6",
