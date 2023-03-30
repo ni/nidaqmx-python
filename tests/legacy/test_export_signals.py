@@ -5,8 +5,8 @@ import pytest
 
 import nidaqmx
 from nidaqmx.constants import Signal
-from nidaqmx.tests.helpers import generate_random_seed
-from nidaqmx.tests.test_read_write import TestDAQmxIOBase
+from tests.helpers import generate_random_seed
+from tests.legacy.test_read_write import TestDAQmxIOBase
 
 
 class TestExportSignals(TestDAQmxIOBase):

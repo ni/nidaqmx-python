@@ -6,7 +6,7 @@ import pytest
 
 import nidaqmx
 from nidaqmx.constants import AcquisitionType
-from nidaqmx.tests.helpers import generate_random_seed
+from tests.helpers import generate_random_seed
 
 
 class TestEvents(object):

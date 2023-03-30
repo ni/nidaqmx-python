@@ -7,11 +7,11 @@ import pytest
 
 import nidaqmx
 from nidaqmx.constants import Edge
-from nidaqmx.stream_readers import AnalogSingleChannelReader, AnalogMultiChannelReader
-from nidaqmx.stream_writers import AnalogSingleChannelWriter, AnalogMultiChannelWriter
-from nidaqmx.tests.helpers import generate_random_seed
-from nidaqmx.tests.test_read_write import TestDAQmxIOBase
+from nidaqmx.stream_readers import AnalogMultiChannelReader, AnalogSingleChannelReader
+from nidaqmx.stream_writers import AnalogMultiChannelWriter, AnalogSingleChannelWriter
 from nidaqmx.utils import flatten_channel_string
+from tests.helpers import generate_random_seed
+from tests.legacy.test_read_write import TestDAQmxIOBase
 
 
 class Error(Exception):

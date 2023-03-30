@@ -5,9 +5,9 @@ import pytest
 
 import nidaqmx
 from nidaqmx import DaqError
-from nidaqmx.constants import TriggerType, Edge, AcquisitionType
-from nidaqmx.tests.helpers import generate_random_seed
-from nidaqmx.tests.test_read_write import TestDAQmxIOBase
+from nidaqmx.constants import AcquisitionType, Edge, TriggerType
+from tests.helpers import generate_random_seed
+from tests.legacy.test_read_write import TestDAQmxIOBase
 
 
 class TestTriggers(TestDAQmxIOBase):

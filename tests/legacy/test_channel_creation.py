@@ -20,7 +20,7 @@ from nidaqmx.constants import (
     StrainGageBridgeType,
     BridgeConfiguration,
 )
-from nidaqmx.tests.helpers import generate_random_seed
+from tests.helpers import generate_random_seed
 
 
 class TestAnalogCreateChannels(object):

@@ -9,9 +9,16 @@ import numpy
 import pytest
 
 import nidaqmx
-from nidaqmx.constants import Edge, TriggerType, AcquisitionType, LineGrouping, Level, TaskMode
-from nidaqmx.tests.helpers import generate_random_seed, POWER_ABS_EPSILON
+from nidaqmx.constants import (
+    AcquisitionType,
+    Edge,
+    Level,
+    LineGrouping,
+    TaskMode,
+    TriggerType,
+)
 from nidaqmx.utils import flatten_channel_string
+from tests.helpers import POWER_ABS_EPSILON, generate_random_seed
 
 
 class Error(Exception):
