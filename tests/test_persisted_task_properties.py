@@ -16,7 +16,7 @@ class TestPersistedTaskPropertyDataTypes(object):
     def voltage_tester_task(self):
         """Gets the voltage tester task from the persisted tasks in the system."""
         system = nidaqmx.system.System.local()
-        voltage_tester_task = system.tasks[0]
+        voltage_tester_task = system.tasks["VoltageTesterTask"]
         return voltage_tester_task
 
     def test_boolean_property(self, voltage_tester_task):
@@ -25,6 +25,4 @@ class TestPersistedTaskPropertyDataTypes(object):
 
     def test_string_property(self, voltage_tester_task):
         """Test for validating boolean properties in persisted task."""
-        author = voltage_tester_task.author
-
-        assert isinstance(author, str)
+        assert voltage_tester_task.author == "Test Author"
