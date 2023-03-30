@@ -5,7 +5,7 @@ import pytest
 
 import nidaqmx
 from nidaqmx.constants import Signal
-from .helpers import generate_random_seed
+from ..helpers import generate_random_seed
 from .test_read_write import TestDAQmxIOBase
 
 

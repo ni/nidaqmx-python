@@ -6,7 +6,7 @@ import pytest
 import nidaqmx
 from nidaqmx import DaqError
 from nidaqmx.constants import TriggerType, Edge, AcquisitionType
-from .helpers import generate_random_seed
+from ..helpers import generate_random_seed
 from .test_read_write import TestDAQmxIOBase
 
 

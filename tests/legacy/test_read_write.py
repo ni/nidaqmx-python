@@ -10,7 +10,7 @@ import pytest
 
 import nidaqmx
 from nidaqmx.constants import Edge, TriggerType, AcquisitionType, LineGrouping, Level, TaskMode
-from .helpers import generate_random_seed, POWER_ABS_EPSILON
+from ..helpers import generate_random_seed, POWER_ABS_EPSILON
 from nidaqmx.utils import flatten_channel_string
 
 

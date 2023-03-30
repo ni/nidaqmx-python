@@ -11,7 +11,7 @@ from nidaqmx.stream_readers import (
     PowerMultiChannelReader,
     PowerBinaryReader,
 )
-from .helpers import generate_random_seed, POWER_ABS_EPSILON
+from ..helpers import generate_random_seed, POWER_ABS_EPSILON
 from .test_read_write import TestDAQmxIOBase
 
 

@@ -6,7 +6,7 @@ import pytest
 
 import nidaqmx
 from nidaqmx.constants import TerminalConfiguration, TEDSUnits
-from .helpers import generate_random_seed
+from ..helpers import generate_random_seed
 
 
 class TestTEDS(object):
@@ -24,7 +24,7 @@ class TestTEDS(object):
         ai_phys_chan = random.choice(any_x_series_device.ai_physical_chans)
 
         # Generate path to a virtual TEDS file.
-        teds_file_path = os.path.join(os.path.dirname(__file__), "teds", "Voltage.ted")
+        teds_file_path = os.path.join(os.path.dirname(__file__), "..", "teds", "Voltage.ted")
 
         ai_phys_chan.configure_teds(teds_file_path)
 

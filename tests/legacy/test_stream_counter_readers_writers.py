@@ -8,7 +8,7 @@ import nidaqmx
 from nidaqmx.constants import Edge, TriggerType, AcquisitionType, Level, TaskMode
 from nidaqmx.stream_readers import CounterReader
 from nidaqmx.stream_writers import CounterWriter
-from .helpers import generate_random_seed
+from ..helpers import generate_random_seed
 from .test_read_write import TestDAQmxIOBase
 
 
