@@ -9,8 +9,8 @@ import nidaqmx
 from nidaqmx.constants import Edge
 from nidaqmx.stream_readers import AnalogSingleChannelReader, AnalogMultiChannelReader
 from nidaqmx.stream_writers import AnalogSingleChannelWriter, AnalogMultiChannelWriter
-from nidaqmx.tests.helpers import generate_random_seed
-from nidaqmx.tests.test_read_write import TestDAQmxIOBase
+from .helpers import generate_random_seed
+from .test_read_write import TestDAQmxIOBase
 from nidaqmx.utils import flatten_channel_string
 
 

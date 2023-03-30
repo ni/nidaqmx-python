@@ -11,8 +11,8 @@ from nidaqmx.stream_readers import (
     PowerMultiChannelReader,
     PowerBinaryReader,
 )
-from nidaqmx.tests.helpers import generate_random_seed, POWER_ABS_EPSILON
-from nidaqmx.tests.test_read_write import TestDAQmxIOBase
+from .helpers import generate_random_seed, POWER_ABS_EPSILON
+from .test_read_write import TestDAQmxIOBase
 
 
 class TestPowerSingleChannelReader(TestDAQmxIOBase):

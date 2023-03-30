@@ -6,7 +6,7 @@ import pytest
 
 import nidaqmx
 from nidaqmx.errors import DaqError
-from nidaqmx.tests.helpers import generate_random_seed
+from .helpers import generate_random_seed
 from nidaqmx.utils import flatten_channel_string
 
 
