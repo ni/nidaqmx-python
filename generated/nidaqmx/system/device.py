@@ -715,42 +715,6 @@ class Device(object):
         return val.value
 
     @property
-    def ai_meas_types(self):
-        """
-        List[:class:`nidaqmx.constants.UsageTypeAI`]: Indicates the
-            measurement types supported by the physical channels of the
-            device. Refer to **ai_meas_types** for information on
-            specific channels.
-        """
-        cfunc = lib_importer.windll.DAQmxGetDevAISupportedMeasTypes
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-                        flags=('C','W')), ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = numpy.zeros(temp_size, dtype=numpy.int32)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_array_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return [UsageTypeAI(e) for e in val]
-
-    @property
     def ai_min_rate(self):
         """
         float: Indicates the minimum rate for an analog input task on
@@ -906,6 +870,42 @@ class Device(object):
         check_for_error(error_code)
 
         return val.value
+
+    @property
+    def ai_supported_meas_types(self):
+        """
+        List[:class:`nidaqmx.constants.UsageTypeAI`]: Indicates the
+            measurement types supported by the physical channels of the
+            device. Refer to **ai_supported_meas_types** for information
+            on specific channels.
+        """
+        cfunc = lib_importer.windll.DAQmxGetDevAISupportedMeasTypes
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = numpy.zeros(temp_size, dtype=numpy.int32)
+
+            size_or_code = cfunc(
+                self._name, val, temp_size)
+
+            if is_array_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return [UsageTypeAI(e) for e in val]
 
     @property
     def ai_trig_usage(self):
@@ -1216,42 +1216,6 @@ class Device(object):
         return val.value
 
     @property
-    def ao_output_types(self):
-        """
-        List[:class:`nidaqmx.constants.UsageTypeAO`]: Indicates the
-            generation types supported by the physical channels of the
-            device. Refer to **ao_output_types** for information on
-            specific channels.
-        """
-        cfunc = lib_importer.windll.DAQmxGetDevAOSupportedOutputTypes
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-                        flags=('C','W')), ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = numpy.zeros(temp_size, dtype=numpy.int32)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_array_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return [UsageTypeAO(e) for e in val]
-
-    @property
     def ao_samp_clk_supported(self):
         """
         bool: Indicates if the device supports the sample clock timing
@@ -1306,6 +1270,42 @@ class Device(object):
         check_for_error(size_or_code)
 
         return [AcquisitionType(e) for e in val]
+
+    @property
+    def ao_supported_output_types(self):
+        """
+        List[:class:`nidaqmx.constants.UsageTypeAO`]: Indicates the
+            generation types supported by the physical channels of the
+            device. Refer to **ao_supported_output_types** for
+            information on specific channels.
+        """
+        cfunc = lib_importer.windll.DAQmxGetDevAOSupportedOutputTypes
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = numpy.zeros(temp_size, dtype=numpy.int32)
+
+            size_or_code = cfunc(
+                self._name, val, temp_size)
+
+            if is_array_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return [UsageTypeAO(e) for e in val]
 
     @property
     def ao_trig_usage(self):
@@ -1483,42 +1483,6 @@ class Device(object):
         return val.value
 
     @property
-    def ci_meas_types(self):
-        """
-        List[:class:`nidaqmx.constants.UsageTypeCI`]: Indicates the
-            measurement types supported by the physical channels of the
-            device. Refer to **ci_meas_types** for information on
-            specific channels.
-        """
-        cfunc = lib_importer.windll.DAQmxGetDevCISupportedMeasTypes
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-                        flags=('C','W')), ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = numpy.zeros(temp_size, dtype=numpy.int32)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_array_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return [UsageTypeCI(e) for e in val]
-
-    @property
     def ci_samp_clk_supported(self):
         """
         bool: Indicates if the device supports the sample clock timing
@@ -1573,6 +1537,42 @@ class Device(object):
         check_for_error(size_or_code)
 
         return [AcquisitionType(e) for e in val]
+
+    @property
+    def ci_supported_meas_types(self):
+        """
+        List[:class:`nidaqmx.constants.UsageTypeCI`]: Indicates the
+            measurement types supported by the physical channels of the
+            device. Refer to **ci_supported_meas_types** for information
+            on specific channels.
+        """
+        cfunc = lib_importer.windll.DAQmxGetDevCISupportedMeasTypes
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = numpy.zeros(temp_size, dtype=numpy.int32)
+
+            size_or_code = cfunc(
+                self._name, val, temp_size)
+
+            if is_array_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return [UsageTypeCI(e) for e in val]
 
     @property
     def ci_trig_usage(self):
@@ -1638,42 +1638,6 @@ class Device(object):
         return val.value
 
     @property
-    def co_output_types(self):
-        """
-        List[:class:`nidaqmx.constants.UsageTypeCO`]: Indicates the
-            generation types supported by the physical channels of the
-            device. Refer to **co_output_types** for information on
-            specific channels.
-        """
-        cfunc = lib_importer.windll.DAQmxGetDevCOSupportedOutputTypes
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-                        flags=('C','W')), ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = numpy.zeros(temp_size, dtype=numpy.int32)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_array_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return [UsageTypeCO(e) for e in val]
-
-    @property
     def co_samp_clk_supported(self):
         """
         bool: Indicates if the device supports Sample Clock timing for
@@ -1728,6 +1692,42 @@ class Device(object):
         check_for_error(size_or_code)
 
         return [AcquisitionType(e) for e in val]
+
+    @property
+    def co_supported_output_types(self):
+        """
+        List[:class:`nidaqmx.constants.UsageTypeCO`]: Indicates the
+            generation types supported by the physical channels of the
+            device. Refer to **co_supported_output_types** for
+            information on specific channels.
+        """
+        cfunc = lib_importer.windll.DAQmxGetDevCOSupportedOutputTypes
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = numpy.zeros(temp_size, dtype=numpy.int32)
+
+            size_or_code = cfunc(
+                self._name, val, temp_size)
+
+            if is_array_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return [UsageTypeCO(e) for e in val]
 
     @property
     def co_trig_usage(self):
@@ -1847,47 +1847,6 @@ class Device(object):
         val = ctypes.c_uint()
 
         cfunc = lib_importer.windll.DAQmxGetDevCompactRIOSlotNum
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @property
-    def dev_is_simulated(self):
-        """
-        bool: Indicates if the device is a simulated device.
-        """
-        val = c_bool32()
-
-        cfunc = lib_importer.windll.DAQmxGetDevIsSimulated
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @property
-    def dev_serial_num(self):
-        """
-        int: Indicates the serial number of the device. This value is
-            zero if the device does not have a serial number.
-        """
-        val = ctypes.c_uint()
-
-        cfunc = lib_importer.windll.DAQmxGetDevSerialNum
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
@@ -2114,6 +2073,46 @@ class Device(object):
         return Device(val.value.decode('ascii'))
 
     @property
+    def hwteds_supported(self):
+        """
+        bool: Indicates whether the device supports hardware TEDS.
+        """
+        val = c_bool32()
+
+        cfunc = lib_importer.windll.DAQmxGetDevTEDSHWTEDSSupported
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @property
+    def is_simulated(self):
+        """
+        bool: Indicates if the device is a simulated device.
+        """
+        val = c_bool32()
+
+        cfunc = lib_importer.windll.DAQmxGetDevIsSimulated
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @property
     def num_dma_chans(self):
         """
         int: Indicates the number of DMA channels on the device.
@@ -2333,6 +2332,27 @@ class Device(object):
         return val.value
 
     @property
+    def serial_num(self):
+        """
+        int: Indicates the serial number of the device. This value is
+            zero if the device does not have a serial number.
+        """
+        val = ctypes.c_uint()
+
+        cfunc = lib_importer.windll.DAQmxGetDevSerialNum
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+
+        error_code = cfunc(
+            self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @property
     def tcpip_ethernet_ip(self):
         """
         str: Indicates the IPv4 address of the Ethernet interface in
@@ -2433,26 +2453,6 @@ class Device(object):
         return val.value.decode('ascii')
 
     @property
-    def tedshwteds_supported(self):
-        """
-        bool: Indicates whether the device supports hardware TEDS.
-        """
-        val = c_bool32()
-
-        cfunc = lib_importer.windll.DAQmxGetDevTEDSHWTEDSSupported
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @property
     def terminals(self):
         """
         List[str]: Indicates a list of all terminals on the device.
@@ -2503,6 +2503,41 @@ class Device(object):
         check_for_error(error_code)
 
         return val.value
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ai_supported_meas_types instead.")
+    def ai_meas_types(self):
+        return self.ai_supported_meas_types
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ao_supported_output_types instead.")
+    def ao_output_types(self):
+        return self.ao_supported_output_types
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_supported_meas_types instead.")
+    def ci_meas_types(self):
+        return self.ci_supported_meas_types
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use co_supported_output_types instead.")
+    def co_output_types(self):
+        return self.co_supported_output_types
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use is_simulated instead.")
+    def dev_is_simulated(self):
+        return self.is_simulated
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use serial_num instead.")
+    def dev_serial_num(self):
+        return self.serial_num
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.6.6", details="Use hwteds_supported instead.")
+    def tedshwteds_supported(self):
+        return self.hwteds_supported
 
     def reset_device(self):
         """

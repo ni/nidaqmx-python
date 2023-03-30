@@ -17,6 +17,26 @@ EXCLUDED_ATTRIBUTES = [
     "AI_CHAN_CAL_POLY_REVERSE_COEFF",
     "AI_CHAN_CAL_POLY_FORWARD_COEFF",
     "AI_CHAN_CAL_OPERATOR_NAME",
+    "AI_PHYSICAL_CHANS",
+    "AO_PHYSICAL_CHANS",
+    "DI_LINES",
+    "DI_PORTS",
+    "DO_PORTS",
+    "DO_LINES",
+    "EXT_CAL_LAST_TEMP",
+    "SELF_CAL_LAST_TEMP",
+    "CAL_ACC_CONNECTION_COUNT",
+    "CAL_RECOMMENDED_ACC_CONNECTION_COUNT_LIMIT",
+    "CAL_USER_DEFINED_INFO_MAX_SIZE",
+    "SELF_CAL_SUPPORTED",
+    "CAL_DEV_TEMP",
+    "CAL_USER_DEFINED_INFO",
+    "CI_PHYSICAL_CHANS",
+    "CO_PHYSICAL_CHANS",
+    "EXT_CAL_RECOMMENDED_INTERVAL",
+    "ARM_START_TRIG_TIMESTAMP_VAL",
+    "REF_TRIG_TIMESTAMP_VAL",
+    "START_TRIG_TIMESTAMP_VAL",
     "FIRST_SAMP_CLK_OFFSET",
     "FIRST_SAMP_CLK_TIMESCALE",
     "FIRST_SAMP_CLK_WHEN",
@@ -104,6 +124,34 @@ DEPRECATED_ATTRIBUTES = {
         "deprecated_in": "0.6.6",
     },
     "over_write": {"new_name": "overwrite", "deprecated_in": "0.6.6"},
+    "ai_meas_types": {
+        "new_name": "ai_supported_meas_types",
+        "deprecated_in": "0.6.6",
+    },
+    "ao_output_types": {
+        "new_name": "ao_supported_output_types",
+        "deprecated_in": "0.6.6",
+    },
+    "ci_meas_types": {
+        "new_name": "ci_supported_meas_types",
+        "deprecated_in": "0.6.6",
+    },
+    "co_output_types": {
+        "new_name": "co_supported_output_types",
+        "deprecated_in": "0.6.6",
+    },
+    "dev_is_simulated": {
+        "new_name": "is_simulated",
+        "deprecated_in": "0.6.6",
+    },
+    "dev_serial_num": {
+        "new_name": "serial_num",
+        "deprecated_in": "0.6.6",
+    },
+    "tedshwteds_supported": {
+        "new_name": "hwteds_supported",
+        "deprecated_in": "0.6.6",
+    },
 }
 
 PYTHON_CLASS_ENUM_MERGE_SET = {
@@ -112,7 +160,6 @@ PYTHON_CLASS_ENUM_MERGE_SET = {
     "OutStream": ["ResolutionType"],
     "Scale": ["_Save"],
 }
-
 
 ATTRIBUTE_CHANGE_SET = {
     "AIChannel": {"ai_custom_scale_name": "ai_custom_scale"},
@@ -149,6 +196,17 @@ ATTRIBUTE_CHANGE_SET = {
     "StartTrigger": {
         "timescale": "time_timescale",
     },
+    "Device": {
+        "teds_hwteds_supported": "hwteds_supported",
+        "chassis_module_dev_names": "chassis_module_devices",
+        "compact_daq_chassis_dev_name": "compact_daq_chassis_device",
+        "compact_rio_chassis_dev_name": "compact_rio_chassis_device",
+        "field_daq_bank_dev_names": "field_daq_bank_devices",
+        "field_daq_dev_name": "field_daq_device",
+    },
+    "PhysicalChannel": {
+        "teds_template_i_ds": "teds_template_ids",
+    },
 }
 
 ATTR_NAME_CHANGE_IN_DESCRIPTION = {
@@ -174,6 +232,11 @@ ATTR_NAME_CHANGE_IN_DESCRIPTION = {
     "start_trig_delay": "delay",
     "dig_pattern_start_trig_src": "dig_pattern_src",
     "dig_pattern_start_trig_pattern": "dig_pattern_pattern",
+    "physical_chan_ai_supported_meas_types": "ai_supported_meas_types",
+    "physical_chan_ao_supported_output_types": "ao_supported_output_types",
+    "physical_chan_ci_supported_meas_types": "ci_supported_meas_types",
+    "physical_chan_co_supported_output_types": "co_supported_output_types",
+    "physical_chan_teds_bit_stream": "teds_bit_stream",
 }
 
 
@@ -218,6 +281,8 @@ def get_enums_used(attributes):
                 enums.append(enum_value)
         if attribute.is_enum:
             enums.append(attribute.enum)
+        if attribute.bitfield_enum is not None:
+            enums.append(attribute.bitfield_enum)
     enums = list(set(enums))
     return sorted(enums)
 
@@ -246,6 +311,10 @@ def _strip_attr_name_in_description(attribute_description):
 
 def _strip_name(attribute_name, class_name):
     """Strips class name from attribute name."""
+    # Strip PHYSICAL_CHAN prefix from the name.
+    if class_name == "PhysicalChannel":
+        return strip_class_name(attribute_name, "PHYSICAL_CHAN_")
+
     # Strip ARM_START_TRIG prefix from the name.
     if class_name == "ArmStartTrigger":
         if attribute_name == "ARM_START_TRIG_TYPE":

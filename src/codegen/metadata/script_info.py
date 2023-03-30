@@ -92,5 +92,17 @@ script_info = {
             "relativeOutputPath": "_task_modules\\triggering\\start_trigger.py",
             "templateFile": "_task_modules\\triggering\\start_trigger.py.mako",
         },
+        {
+            "relativeOutputPath": "system\\system.py",
+            "templateFile": "system\\system.py.mako",
+        },
+        {
+            "relativeOutputPath": "system\\device.py",
+            "templateFile": "system\\device.py.mako",
+        },
+        {
+            "relativeOutputPath": "system\\physical_channel.py",
+            "templateFile": "system\\physical_channel.py.mako",
+        },
     ]
 }
