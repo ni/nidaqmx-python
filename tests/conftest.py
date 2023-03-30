@@ -1,5 +1,6 @@
 """Fixtures used in the DAQmx tests."""
 from enum import Enum
+import pathlib
 
 import pytest
 
@@ -178,3 +179,9 @@ def multi_threading_test_devices():
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
     return None
+
+
+@pytest.fixture(scope="module")
+def test_assets_directory() -> pathlib.Path:
+    """Gets path to test_assets directory."""
+    return pathlib.Path(__file__).parent / "test_assets"

@@ -16,7 +16,7 @@ class TestTEDS(object):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_create_teds_ai_voltage_chan(self, any_x_series_device, seed):
+    def test_create_teds_ai_voltage_chan(self, any_x_series_device, seed, test_assets_directory):
         """Test to validate TEDS functionality."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -24,7 +24,7 @@ class TestTEDS(object):
         ai_phys_chan = random.choice(any_x_series_device.ai_physical_chans)
 
         # Generate path to a virtual TEDS file.
-        teds_file_path = os.path.join(os.path.dirname(__file__), "..", "teds", "Voltage.ted")
+        teds_file_path = str(test_assets_directory / "teds" / "Voltage.ted")
 
         ai_phys_chan.configure_teds(teds_file_path)
 
