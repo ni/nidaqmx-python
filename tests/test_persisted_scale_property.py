@@ -11,11 +11,11 @@ class TestPersistedScaleProperty(TestDAQmxIOBase):
     def test_bool_property(self):
         """Test for validating bool attributes in persisted scale."""
         system = nidaqmx.system.System.local()
-        persisted_scale = system.scales[0]
+        persisted_scale = system.scales["double_gain_scale"]
         assert persisted_scale.allow_interactive_editing
 
     def test_string_property(self):
         """Test for validating string attributes in persisted scale."""
         system = nidaqmx.system.System.local()
-        persisted_scale = system.scales[0]
-        persisted_scale.author
+        persisted_scale = system.scales["double_gain_scale"]
+        assert persisted_scale.author == "Test Author"
