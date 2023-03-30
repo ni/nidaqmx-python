@@ -178,3 +178,12 @@ def multi_threading_test_devices():
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
     return None
+
+
+@pytest.fixture(scope="module")
+def persisted_scale(request):
+    """Gets the device information based on the device name."""
+    system = nidaqmx.system.System.local()
+    if request.param in system.scales:
+        return system.scales[request.param]
+    return None
