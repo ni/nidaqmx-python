@@ -182,6 +182,23 @@ def multi_threading_test_devices():
 
 
 @pytest.fixture(scope="module")
+def test_device(request):
+    """Gets the device information based on the device name."""
+    system = nidaqmx.system.System.local()
+
+    for device in system.devices:
+        if device.name == request.param:
+            return device
+
+    pytest.skip(
+        "Could not detect a device that has the given name. Cannot proceed to run tests. "
+        "Import the NI MAX configuration file located at "
+        "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
+    )
+    return None
+
+
+@pytest.fixture(scope="module")
 def test_assets_directory() -> pathlib.Path:
     """Gets path to test_assets directory."""
     return pathlib.Path(__file__).parent / "test_assets"
