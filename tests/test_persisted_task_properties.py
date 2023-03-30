@@ -24,5 +24,5 @@ class TestPersistedTaskPropertyDataTypes(object):
         assert voltage_tester_task.allow_interactive_editing
 
     def test_string_property(self, voltage_tester_task):
-        """Test for validating boolean properties in persisted task."""
+        """Test for validating string properties in persisted task."""
         assert voltage_tester_task.author == "Test Author"
