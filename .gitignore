@@ -4,7 +4,10 @@ __pycache__/
 # Unit tests
 .tox/
 pytests-py*.xml
+
+# Coverage output
 .coverage
+htmlcov/
 
 # Environments
 .venv
