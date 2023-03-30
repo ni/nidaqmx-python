@@ -5,11 +5,11 @@ import numpy
 import pytest
 
 import nidaqmx
-from nidaqmx.constants import Edge, TriggerType, AcquisitionType, Level, TaskMode
+from nidaqmx.constants import AcquisitionType, Edge, Level, TaskMode, TriggerType
 from nidaqmx.stream_readers import CounterReader
 from nidaqmx.stream_writers import CounterWriter
-from ..helpers import generate_random_seed
-from .test_read_write import TestDAQmxIOBase
+from tests.helpers import generate_random_seed
+from tests.legacy.test_read_write import TestDAQmxIOBase
 
 
 class TestCounterReaderWriter(TestDAQmxIOBase):

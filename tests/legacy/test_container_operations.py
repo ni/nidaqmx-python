@@ -4,8 +4,8 @@ import random
 import pytest
 
 import nidaqmx
-from ..helpers import generate_random_seed
 from nidaqmx.utils import flatten_channel_string
+from tests.helpers import generate_random_seed
 
 
 class TestContainerOperations(object):

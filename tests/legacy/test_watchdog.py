@@ -8,7 +8,7 @@ import nidaqmx
 import nidaqmx.system
 from nidaqmx.constants import Level
 from nidaqmx.system.watchdog import DOExpirationState
-from ..helpers import generate_random_seed
+from tests.helpers import generate_random_seed
 
 
 class TestWatchdog(object):

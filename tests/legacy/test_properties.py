@@ -8,7 +8,7 @@ import nidaqmx
 import nidaqmx.system
 from nidaqmx import DaqError
 from nidaqmx.constants import AcquisitionType, UsageTypeAI
-from ..helpers import generate_random_seed
+from tests.helpers import generate_random_seed
 
 
 class TestPropertyBasicDataTypes(object):

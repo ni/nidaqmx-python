@@ -7,11 +7,11 @@ import pytest
 
 import nidaqmx
 from nidaqmx.constants import LineGrouping
-from nidaqmx.stream_readers import DigitalSingleChannelReader, DigitalMultiChannelReader
-from nidaqmx.stream_writers import DigitalSingleChannelWriter, DigitalMultiChannelWriter
-from ..helpers import generate_random_seed
-from .test_read_write import TestDAQmxIOBase
+from nidaqmx.stream_readers import DigitalMultiChannelReader, DigitalSingleChannelReader
+from nidaqmx.stream_writers import DigitalMultiChannelWriter, DigitalSingleChannelWriter
 from nidaqmx.utils import flatten_channel_string
+from tests.helpers import generate_random_seed
+from tests.legacy.test_read_write import TestDAQmxIOBase
 
 
 class TestDigitalSingleChannelReaderWriter(TestDAQmxIOBase):

@@ -7,8 +7,8 @@
 # from nidaqmx.errors import DaqError
 # from nidaqmx.utils import flatten_channel_string
 # from .fixtures import any_x_series_device
-# from ..helpers import generate_random_seed
-# from .test_read_write import TestDAQmxIOBase
+# from tests.helpers import generate_random_seed
+# from tests.legacy.test_read_write import TestDAQmxIOBase
 
 
 # class TestInvalidReads(TestReadWriteBase):

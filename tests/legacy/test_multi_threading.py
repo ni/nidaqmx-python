@@ -5,7 +5,7 @@ import pykka
 import pytest
 
 import nidaqmx
-from ..helpers import generate_random_seed
+from tests.helpers import generate_random_seed
 
 
 class Error(Exception):

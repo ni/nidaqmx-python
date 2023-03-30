@@ -1,6 +1,6 @@
 """Fixtures used in the DAQmx tests."""
-from enum import Enum
 import pathlib
+from enum import Enum
 
 import pytest
 

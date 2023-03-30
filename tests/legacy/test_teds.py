@@ -1,12 +1,11 @@
 """Tests for validating TEDS functionality."""
-import os
 import random
 
 import pytest
 
 import nidaqmx
-from nidaqmx.constants import TerminalConfiguration, TEDSUnits
-from ..helpers import generate_random_seed
+from nidaqmx.constants import TEDSUnits, TerminalConfiguration
+from tests.helpers import generate_random_seed
 
 
 class TestTEDS(object):
