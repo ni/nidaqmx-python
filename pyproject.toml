@@ -50,7 +50,8 @@ docs = ["sphinx", "sphinx_rtd_theme"]
 
 [tool.poetry.dev-dependencies]
 # Test
-pytest = "^6.2"
+pytest = ">=7.2"
+pytest-cov = ">=4.0"
 pykka = "^3.0"
 tox = "^3.24"
 click = "^8.1"
