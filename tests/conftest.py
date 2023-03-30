@@ -1,4 +1,5 @@
 """Fixtures used in the DAQmx tests."""
+import pathlib
 from enum import Enum
 
 import pytest
@@ -181,9 +182,6 @@ def multi_threading_test_devices():
 
 
 @pytest.fixture(scope="module")
-def persisted_scale(request):
-    """Gets the device information based on the device name."""
-    system = nidaqmx.system.System.local()
-    if request.param in system.scales:
-        return system.scales[request.param]
-    return None
+def test_assets_directory() -> pathlib.Path:
+    """Gets path to test_assets directory."""
+    return pathlib.Path(__file__).parent / "test_assets"
