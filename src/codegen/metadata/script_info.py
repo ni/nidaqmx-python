@@ -48,5 +48,69 @@ script_info = {
             "relativeOutputPath": "_task_modules\\ai_channel_collection.py",
             "templateFile": "_task_modules\\ai_channel_collection.py.mako",
         },
+        {
+            "relativeOutputPath": "_task_modules\\ao_channel_collection.py",
+            "templateFile": "_task_modules\\ao_channel_collection.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\ci_channel_collection.py",
+            "templateFile": "_task_modules\\ci_channel_collection.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\co_channel_collection.py",
+            "templateFile": "_task_modules\\co_channel_collection.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\di_channel_collection.py",
+            "templateFile": "_task_modules\\di_channel_collection.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\do_channel_collection.py",
+            "templateFile": "_task_modules\\do_channel_collection.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\timing.py",
+            "templateFile": "_task_modules\\timing.py.mako",
+        },  
+        {
+            "relativeOutputPath": "scale.py", 
+            "templateFile": "scale.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\export_signals.py",
+            "templateFile": "_task_modules\\export_signals.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\triggering\\arm_start_trigger.py",
+            "templateFile": "_task_modules\\triggering\\arm_start_trigger.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\triggering\\handshake_trigger.py",
+            "templateFile": "_task_modules\\triggering\\handshake_trigger.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\triggering\\pause_trigger.py",
+            "templateFile": "_task_modules\\triggering\\pause_trigger.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\triggering\\reference_trigger.py",
+            "templateFile": "_task_modules\\triggering\\reference_trigger.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\triggering\\start_trigger.py",
+            "templateFile": "_task_modules\\triggering\\start_trigger.py.mako",
+        },
+        {
+            "relativeOutputPath": "system\\system.py",
+            "templateFile": "system\\system.py.mako",
+        },
+        {
+            "relativeOutputPath": "system\\device.py",
+            "templateFile": "system\\device.py.mako",
+        },
+        {
+            "relativeOutputPath": "system\\physical_channel.py",
+            "templateFile": "system\\physical_channel.py.mako",
+        },
     ]
 }

@@ -32,9 +32,13 @@ system.
 Installation
 ============
 
-Running **nidaqmx** requires NI-DAQmx or NI-DAQmx Runtime. Visit the
+Running **nidaqmx** requires NI-DAQmx to be installed. Visit
 `ni.com/downloads <http://www.ni.com/downloads/>`_ to download the latest
-version of NI-DAQmx.
+version of NI-DAQmx. None of the recommended **Additional items** are required
+for **nidaqmx** to function, and they can be removed to minimize installation
+size. It is recommended you continue to install the **NI Certificates** package
+to allow your Operating System to trust NI built binaries, improving your
+software and hardware installation experience.
 
 **nidaqmx** can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 

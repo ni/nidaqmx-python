@@ -9375,7 +9375,6 @@ class AIChannel(Channel):
             self._handle, self._name)
         check_for_error(error_code)
 
-
     @property
     @deprecation.deprecated(deprecated_in="0.6.6", details="Use ai_eddy_current_prox_probe_sensitivity instead.")
     def ai_eddy_current_prox_sensitivity(self):
