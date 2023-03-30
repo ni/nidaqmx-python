@@ -179,6 +179,7 @@ def multi_threading_test_devices():
     )
     return None
 
+
 @pytest.fixture(scope="module")
 def persisted_scale(request):
     """Gets the device information based on the device name."""
