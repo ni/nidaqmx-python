@@ -152,6 +152,23 @@ DEPRECATED_ATTRIBUTES = {
         "new_name": "hwteds_supported",
         "deprecated_in": "0.6.6",
     },
+    "expir_states_ao_type": {"new_name": "ao_output_type", "deprecated_in": "0.6.6"},
+    "expir_states_co_state": {"new_name": "co_state", "deprecated_in": "0.6.6"},
+    "expir_states_do_state": {"new_name": "do_state", "deprecated_in": "0.6.6"},
+    "expir_states_ao_state": {"new_name": "ao_state", "deprecated_in": "0.6.6"},
+    "expir_trig_trig_type": {"new_name": "expiration_trigger_type", "deprecated_in": "0.6.6"},
+    "expir_trig_dig_edge_edge": {
+        "new_name": "expiration_trigger_dig_edge_edge",
+        "deprecated_in": "0.6.6",
+    },
+    "expir_trig_dig_edge_src": {
+        "new_name": "expiration_trigger_dig_edge_src",
+        "deprecated_in": "0.6.6",
+    },
+    "expir_trig_trig_on_network_conn_loss": {
+        "new_name": "expiration_trigger_trig_on_network_conn_loss",
+        "deprecated_in": "0.6.6",
+    },
 }
 
 PYTHON_CLASS_ENUM_MERGE_SET = {
@@ -159,6 +176,7 @@ PYTHON_CLASS_ENUM_MERGE_SET = {
     "InStream": ["AcquisitionType", "READ_ALL_AVAILABLE"],
     "OutStream": ["ResolutionType"],
     "Scale": ["_Save"],
+    "Watchdog": ["WDTTaskAction"],
 }
 
 ATTRIBUTE_CHANGE_SET = {
@@ -206,6 +224,18 @@ ATTRIBUTE_CHANGE_SET = {
     },
     "PhysicalChannel": {
         "teds_template_i_ds": "teds_template_ids",
+    },
+    "ExpirationState": {
+        "ao_expir_state": "ao_state",
+        "co_expir_state": "co_state",
+        "do_expir_state": "do_state",
+    },
+    "Watchdog": {
+        "expir_trig_type": "expiration_trigger_type",
+        "has_expired": "expired",
+        "dig_edge_watchdog_expir_trig_edge": "expiration_trigger_dig_edge_edge",
+        "dig_edge_watchdog_expir_trig_src": "expiration_trigger_dig_edge_src",
+        "expir_trig_trig_on_network_conn_loss": "expiration_trigger_trig_on_network_conn_loss",
     },
 }
 
