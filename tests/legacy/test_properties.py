@@ -169,9 +169,10 @@ class TestPropertyListDataTypes(object):
         assert isinstance(terminals[0], UsageTypeAI)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_list_of_floats_property(self, bridge_device, seed):
+    @pytest.mark.parametrize("device_by_name", ["bridgeTester"], indirect=True)
+    def test_list_of_floats_property(self, device_by_name, seed):
         """Test for validating list of float property."""
-        if bridge_device is None:
+        if device_by_name is None:
             pytest.skip("requires bridge device")
 
         # Reset the pseudorandom number generator with seed.
@@ -179,7 +180,7 @@ class TestPropertyListDataTypes(object):
 
         with nidaqmx.Task() as task:
             ai_channel = task.ai_channels.add_ai_bridge_chan(
-                bridge_device.ai_physical_chans[0].name
+                device_by_name.ai_physical_chans[0].name
             )
 
             # Test default property value.
