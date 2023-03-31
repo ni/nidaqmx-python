@@ -11,7 +11,7 @@ CAMEL_TO_SNAKE_CASE_REGEXES = [
 ]
 
 
-def camel_to_snake_case(camel_case_string, custom_regexes = []):
+def camel_to_snake_case(camel_case_string, custom_regexes=[]):
     """Converts a camelCase string to a snake_case string."""
     regexes = CAMEL_TO_SNAKE_CASE_REGEXES
     if custom_regexes:

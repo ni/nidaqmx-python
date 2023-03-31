@@ -1,6 +1,6 @@
 """This contains the helper methods used in functions generation."""
-from copy import deepcopy
 import re
+from copy import deepcopy
 
 from codegen.functions.function import Function
 from codegen.utilities.helpers import camel_to_snake_case
@@ -17,6 +17,7 @@ CUSTOM_CAMEL_TO_SNAKE_CASE_REGEXES = [
     re.compile("([a-z])([A-Z])"),
     re.compile("([0-9])([^_0-9])"),
 ]
+
 
 def get_functions(metadata, class_name=""):
     """Converts the scrapigen metadata into a list of functions."""
