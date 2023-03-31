@@ -50,7 +50,8 @@ docs = ["sphinx", "sphinx_rtd_theme"]
 
 [tool.poetry.dev-dependencies]
 # Test
-pytest = "^6.2"
+pytest = ">=7.2"
+pytest-cov = ">=4.0"
 pykka = "^3.0"
 tox = "^3.24"
 click = "^8.1"
@@ -64,7 +65,7 @@ line-length = 100
 extend_exclude = "docs,generated,src/nidaqmx,src/codegen/metadata,src/codegen/templates"
 
 [tool.ni-python-styleguide]
-extend_exclude = "docs,generated,src/nidaqmx,src/codegen/metadata,src/codegen/templates"
+extend_exclude = "docs,generated,src/nidaqmx,src/codegen/metadata,src/codegen/templates,src/handwritten"
 
 [build-system]
 requires = ["poetry>=1.1.12"]

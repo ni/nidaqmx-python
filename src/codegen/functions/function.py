@@ -30,6 +30,11 @@ class Function:
             self._base_parameters = []
             for parameter in function_metadata["parameters"]:
                 self._base_parameters.append(FunctionParameter(parameter))
+                if (
+                    parameter["name"] != "task"
+                    and "python_data_type" in parameter
+                    and parameter.get("use_in_python_api") is not False
+                ):
                 if parameter["name"] != "task" and "python_data_type" in parameter:
                     self._parameters.append(FunctionParameter(parameter))
 
