@@ -34,13 +34,14 @@ def test__timing__reset_boolean_property__returns_default_value(any_x_series_dev
     with nidaqmx.Task() as task:
         task.ao_channels.add_ao_voltage_chan(any_x_series_device.ao_physical_chans[0].name)
         task.timing.samp_timing_type = SampleTimingType.ON_DEMAND
+        task.timing.simultaneous_ao_enable = True
 
         del task.timing.simultaneous_ao_enable
 
         assert not task.timing.simultaneous_ao_enable
 
 
-def test__timing__getter_string_property__returns_value(any_x_series_device):
+def test__timing__get_string_property__returns_value(any_x_series_device):
     """Test for validating getter string property."""
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
@@ -49,7 +50,7 @@ def test__timing__getter_string_property__returns_value(any_x_series_device):
         assert task.timing.samp_clk_src == f"/{any_x_series_device.name}/ai/SampleClockTimebase"
 
 
-def test__timing__setter_string_property__returns_assigned_value(any_x_series_device):
+def test__timing__set_string_property__returns_assigned_value(any_x_series_device):
     """Test for validating setter string property."""
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
@@ -64,7 +65,7 @@ def test__timing__reset_string_property__returns_default_value(any_x_series_devi
     """Test for validating reset string property."""
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
-        task.timing.cfg_samp_clk_timing(1000)
+        task.timing.cfg_samp_clk_timing(1000, source="PFI0")
 
         del task.timing.samp_clk_src
 
@@ -83,7 +84,7 @@ def test__timing__set_invalid_source_terminal_name__throws_daqerror(any_x_series
         assert e.value.error_type == DAQmxErrors.INVALID_ROUTING_SOURCE_TERMINAL_NAME_ROUTING
 
 
-def test__timing__getter_enum_property__returns_value(any_x_series_device):
+def test__timing__get_enum_property__returns_value(any_x_series_device):
     """Test for validating getter for enum property."""
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
@@ -92,7 +93,7 @@ def test__timing__getter_enum_property__returns_value(any_x_series_device):
         assert task.timing.samp_quant_samp_mode == AcquisitionType.CONTINUOUS
 
 
-def test__timing__setter_enum_property__returns_assigned_value(any_x_series_device):
+def test__timing__set_enum_property__returns_assigned_value(any_x_series_device):
     """Test for validating setter for enum property."""
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
@@ -114,7 +115,7 @@ def test__timing__reset_enum_property__returns_default_value(any_x_series_device
         assert task.timing.samp_quant_samp_mode == AcquisitionType.CONTINUOUS
 
 
-def test__timing__getter_float64_property__returns_value(any_x_series_device):
+def test__timing__get_float64_property__returns_value(any_x_series_device):
     """Test for validating getter for float64 property."""
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
@@ -123,7 +124,7 @@ def test__timing__getter_float64_property__returns_value(any_x_series_device):
         assert task.timing.samp_clk_rate == 1000
 
 
-def test__timing__setter_float64_property__returns_assigned_value(any_x_series_device):
+def test__timing__set_float64_property__returns_assigned_value(any_x_series_device):
     """Test for validating setter for float64 property."""
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
@@ -146,7 +147,7 @@ def test__timing__reset_float64_property__returns_default_value(any_x_series_dev
         assert task.timing.samp_clk_rate == default_value
 
 
-def test__timing__getter_uint32_property__returns_value(any_x_series_device):
+def test__timing__get_uint32_property__returns_value(any_x_series_device):
     """Test for validating getter for unsigned int32 property."""
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
@@ -155,7 +156,7 @@ def test__timing__getter_uint32_property__returns_value(any_x_series_device):
         assert task.timing.samp_clk_timebase_div == 100000
 
 
-def test__timing__setter_uint32_property__returns_assigned_value(any_x_series_device):
+def test__timing__set_uint32_property__returns_assigned_value(any_x_series_device):
     """Test for validating setter for unsigned int32 property."""
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
@@ -170,15 +171,17 @@ def test__timing__reset_uint32_property__returns_default_value(any_x_series_devi
     """Test for validating reset for unsigned int32 property."""
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
+        task.timing.cfg_samp_clk_timing(1000)
         default_value = task.timing.samp_clk_timebase_div
-        task.timing.cfg_samp_clk_timing(500)
+        task.timing.samp_clk_timebase_div = 200000
+        assert task.timing.samp_clk_rate == 500
 
         del task.timing.samp_clk_timebase_div
 
         assert task.timing.samp_clk_timebase_div == default_value
 
 
-def test__timing__getter_uint64_property__returns_value(any_x_series_device):
+def test__timing__get_uint64_property__returns_value(any_x_series_device):
     """Test for validating getter for unsigned int64 property."""
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
@@ -187,7 +190,7 @@ def test__timing__getter_uint64_property__returns_value(any_x_series_device):
         assert task.timing.samp_quant_samp_per_chan == 100
 
 
-def test__timing__setter_uint64_property__returns_assigned_value(any_x_series_device):
+def test__timing__set_uint64_property__returns_assigned_value(any_x_series_device):
     """Test for validating setter for unsigned int64 property."""
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
