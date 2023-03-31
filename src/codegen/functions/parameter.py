@@ -11,11 +11,15 @@ class Parameter:
         """Structure for storing function parameter metadata from scrapigen."""
         self._direction = parameter_metadata["direction"]
         self._parameters_name = camel_to_snake_case(parameter_metadata["name"])
-        self._type = parameter_metadata["type"]
-        self._ctypes_data_type = parameter_metadata["ctypes_data_type"]
-        self._python_data_type = parameter_metadata["python_data_type"]
-        self._description = parameter_metadata["description"]
-        self._python_type_annotation = parameter_metadata["python_type_annotation"]
+        self._type = parameter_metadata.get("type", None)
+        if "ctypes_data_type" in parameter_metadata:
+            self._ctypes_data_type = parameter_metadata["ctypes_data_type"]
+        if "python_data_type" in parameter_metadata:
+            self._python_data_type = parameter_metadata["python_data_type"]
+        if "description" in parameter_metadata:
+            self._description = parameter_metadata["description"]
+        if "python_type_annotation" in parameter_metadata:
+            self._python_type_annotation = parameter_metadata["python_type_annotation"]
         self._is_list = parameter_metadata.get("is_list", False)
         self._has_explicit_buffer_size = parameter_metadata.get("has_explicit_buffer_size", False)
         self._optional = parameter_metadata.get("optional", False)
@@ -34,6 +38,11 @@ class Parameter:
     def direction(self):
         """str: Direction of the parameter."""
         return self._direction
+
+    @property
+    def type(self):
+        """str: Type of the parameter."""
+        return self._type
 
     @property
     def parameter_name(self):

@@ -27,7 +27,9 @@ class Function:
         self._parameters = None
         if "parameters" in function_metadata:
             self._parameters = []
+            self._base_parameters = []
             for parameter in function_metadata["parameters"]:
+                self._base_parameters.append(FunctionParameter(parameter))
                 if parameter["name"] != "task" and "python_data_type" in parameter:
                     self._parameters.append(FunctionParameter(parameter))
 
@@ -98,3 +100,8 @@ class Function:
     def adaptor_parameter(self):
         """List of adaptor parameters: The list of adaptor parameters in the function."""
         return self._adaptor_parameter
+
+    @property
+    def base_parameters(self):
+        """List of all parameters: The list of all in the function."""
+        return self._base_parameters

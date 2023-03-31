@@ -1,5 +1,6 @@
 """This contains the helper methods used in functions generation."""
 from copy import deepcopy
+import re
 
 from codegen.functions.function import Function
 from codegen.utilities.helpers import camel_to_snake_case
@@ -11,6 +12,11 @@ FUNCTION_NAME_CHANGE_SET = {
     "CIGPS": "CI_GPS",
 }
 
+CUSTOM_CAMEL_TO_SNAKE_CASE_REGEXES = [
+    re.compile("([^_\n])([A-Z][a-z]+)"),
+    re.compile("([a-z])([A-Z])"),
+    re.compile("([0-9])([^_0-9])"),
+]
 
 def get_functions(metadata, class_name=""):
     """Converts the scrapigen metadata into a list of functions."""
@@ -23,6 +29,24 @@ def get_functions(metadata, class_name=""):
         ) or class_name == "":
             function_data["c_function_name"] = function_name
             functions_metadata.append(Function(get_function_name(function_name), function_data))
+
+    return sorted(functions_metadata, key=lambda x: x._function_name)
+
+
+def get_all_functions(metadata):
+    """Converts the scrapigen metadata into a list of functions."""
+    all_functions = deepcopy(metadata["functions"])
+    functions_metadata = []
+    for function_name, function_data in all_functions.items():
+        function_data["c_function_name"] = function_name
+        function_name = camel_to_snake_case(function_name, CUSTOM_CAMEL_TO_SNAKE_CASE_REGEXES)
+        function_name = function_name.replace("_u_int", "_uint")
+        functions_metadata.append(
+            Function(
+                function_name,
+                function_data,
+            )
+        )
 
     return sorted(functions_metadata, key=lambda x: x._function_name)
 
@@ -73,6 +97,18 @@ def get_parameter_signature(is_python_factory, sorted_params):
         if param._optional:
             params_with_defaults.append("{0}={1}".format(param.parameter_name, param.default))
         else:
+            params_with_defaults.append(param.parameter_name)
+
+    return ", ".join(params_with_defaults)
+
+
+def get_all_parameter_signature(is_python_factory, params):
+    """Gets parameter signature for function defintion."""
+    params_with_defaults = []
+    if not is_python_factory:
+        params_with_defaults.append("self")
+    for param in params:
+        if param.type:
             params_with_defaults.append(param.parameter_name)
 
     return ", ".join(params_with_defaults)
