@@ -182,6 +182,22 @@ def multi_threading_test_devices():
 
 
 @pytest.fixture(scope="module")
+def persisted_task():
+    """Gets the voltage tester task from the persisted tasks in the system."""
+    system = nidaqmx.system.System.local()
+
+    if "VoltageTesterTask" in system.tasks.task_names:
+        return system.tasks["VoltageTesterTask"]
+
+    pytest.skip(
+        "Could not detect a persisted task named VoltageTesterTask. "
+        "Cannot proceed to run tests. Import the NI MAX configuration file located at "
+        "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required tasks."
+    )
+    return None
+
+
+@pytest.fixture(scope="module")
 def test_assets_directory() -> pathlib.Path:
     """Gets path to test_assets directory."""
     return pathlib.Path(__file__).parent / "test_assets"
