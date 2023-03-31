@@ -32,8 +32,14 @@ def test__shipping_example__run__no_errors(example_path: Path):
         pytest.skip("Example times out if there is no signal.")
     if re.search(r"\binput\(|\bKeyboardInterrupt\b", example_source):
         pytest.skip("Example waits for keyboard input.")
+    if example_path.name == "nidaqmx_warnings.py":
+        # Ignore warnings from this example.
+        context_manager = warnings.catch_warnings(record=True)
+    else:
+        context_manager = contextlib.nullcontext()
 
-    runpy.run_path(str(example_path))
+    with context_manager:
+        runpy.run_path(str(example_path))
 
 
 def _find_device_names(source: str) -> set[str]:
