@@ -31,7 +31,7 @@ def test__shipping_example__run__no_errors(example_path: Path):
     if example_path.name == "every_n_samples_event.py":
         pytest.skip("Example waits for keyboard input.")
 
-    runpy.run_path(example_path)
+    runpy.run_path(str(example_path))
 
 
 def _find_device_names(source: str) -> set[str]:
