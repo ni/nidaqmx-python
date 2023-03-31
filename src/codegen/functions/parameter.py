@@ -16,8 +16,8 @@ class Parameter:
             self._ctypes_data_type = parameter_metadata["ctypes_data_type"]
         if "python_data_type" in parameter_metadata:
             self._python_data_type = parameter_metadata["python_data_type"]
-        if "description" in parameter_metadata:
-            self._description = parameter_metadata["description"]
+        if "python_description" in parameter_metadata:
+            self._description = parameter_metadata["python_description"]
         if "python_type_annotation" in parameter_metadata:
             self._python_type_annotation = parameter_metadata["python_type_annotation"]
         self._is_list = parameter_metadata.get("is_list", False)

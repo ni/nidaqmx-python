@@ -30,7 +30,7 @@ class BaseInterpreter:
         pass
 
     def cfg_anlg_edge_ref_trig(
-            self, trigger_source, pretrigger_samples, task, trigger_slope,
+            self, task, trigger_source, pretrigger_samples, trigger_slope,
             trigger_level):
         pass
 
@@ -54,18 +54,18 @@ class BaseInterpreter:
         pass
 
     def cfg_anlg_window_start_trig(
-            self, window_top, window_bottom, task, trigger_source,
+            self, task, window_top, window_bottom, trigger_source,
             trigger_when):
         pass
 
     def cfg_burst_handshaking_timing_export_clock(
-            self, sample_clk_rate, sample_clk_outp_term, task, sample_mode,
+            self, task, sample_clk_rate, sample_clk_outp_term, sample_mode,
             samps_per_chan, sample_clk_pulse_polarity, pause_when,
             ready_event_active_level):
         pass
 
     def cfg_burst_handshaking_timing_import_clock(
-            self, sample_clk_rate, sample_clk_src, task, sample_mode,
+            self, task, sample_clk_rate, sample_clk_src, sample_mode,
             samps_per_chan, sample_clk_active_edge, pause_when,
             ready_event_active_level):
         pass
@@ -79,7 +79,7 @@ class BaseInterpreter:
             self, task, trigger_source, pretrigger_samples, trigger_edge):
         pass
 
-    def cfg_dig_edge_start_trig(self, trigger_source, task, trigger_edge):
+    def cfg_dig_edge_start_trig(self, task, trigger_source, trigger_edge):
         pass
 
     def cfg_dig_pattern_ref_trig(
@@ -104,16 +104,16 @@ class BaseInterpreter:
         pass
 
     def cfg_pipelined_samp_clk_timing(
-            self, rate, task, source, active_edge, sample_mode,
+            self, task, rate, source, active_edge, sample_mode,
             samps_per_chan):
         pass
 
     def cfg_samp_clk_timing(
-            self, rate, task, source, active_edge, sample_mode,
+            self, task, rate, source, active_edge, sample_mode,
             samps_per_chan):
         pass
 
-    def cfg_time_start_trig(self, when, task, timescale):
+    def cfg_time_start_trig(self, task, when, timescale):
         pass
 
     def cfg_watchdog_ao_expir_states(
@@ -150,66 +150,66 @@ class BaseInterpreter:
         pass
 
     def create_ai_accel4_wire_dc_voltage_chan(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, sensitivity,
             sensitivity_units, voltage_excit_source, voltage_excit_val,
             use_excit_for_scaling, custom_scale_name):
         pass
 
     def create_ai_accel_chan(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, sensitivity,
             sensitivity_units, current_excit_source, current_excit_val,
             custom_scale_name):
         pass
 
     def create_ai_accel_charge_chan(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, sensitivity,
             sensitivity_units, custom_scale_name):
         pass
 
     def create_ai_bridge_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, bridge_config, voltage_excit_source,
             voltage_excit_val, nominal_bridge_resistance, custom_scale_name):
         pass
 
     def create_ai_charge_chan(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, custom_scale_name):
         pass
 
     def create_ai_current_chan(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, shunt_resistor_loc,
             ext_shunt_resistor_val, custom_scale_name):
         pass
 
     def create_ai_current_rms_chan(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, shunt_resistor_loc,
             ext_shunt_resistor_val, custom_scale_name):
         pass
 
     def create_ai_force_bridge_polynomial_chan(
-            self, physical_channel, num_forward_coeffs, num_reverse_coeffs,
-            task, name_to_assign_to_channel, min_val, max_val, units,
-            bridge_config, voltage_excit_source, voltage_excit_val,
+            self, task, physical_channel, num_forward_coeffs,
+            num_reverse_coeffs, name_to_assign_to_channel, min_val, max_val,
+            units, bridge_config, voltage_excit_source, voltage_excit_val,
             nominal_bridge_resistance, forward_coeffs, reverse_coeffs,
             electrical_units, physical_units, custom_scale_name):
         pass
 
     def create_ai_force_bridge_table_chan(
-            self, physical_channel, num_electrical_vals, num_physical_vals,
-            task, name_to_assign_to_channel, min_val, max_val, units,
-            bridge_config, voltage_excit_source, voltage_excit_val,
+            self, task, physical_channel, num_electrical_vals,
+            num_physical_vals, name_to_assign_to_channel, min_val, max_val,
+            units, bridge_config, voltage_excit_source, voltage_excit_val,
             nominal_bridge_resistance, electrical_vals, electrical_units,
             physical_vals, physical_units, custom_scale_name):
         pass
 
     def create_ai_force_bridge_two_point_lin_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, bridge_config, voltage_excit_source,
             voltage_excit_val, nominal_bridge_resistance,
             first_electrical_val, second_electrical_val, electrical_units,
@@ -218,38 +218,38 @@ class BaseInterpreter:
         pass
 
     def create_ai_force_iepe_chan(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, sensitivity,
             sensitivity_units, current_excit_source, current_excit_val,
             custom_scale_name):
         pass
 
     def create_ai_freq_voltage_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, threshold_level, hysteresis, custom_scale_name):
         pass
 
     def create_ai_microphone_chan(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, units, mic_sensitivity, max_snd_press_level,
             current_excit_source, current_excit_val, custom_scale_name):
         pass
 
     def create_ai_pos_eddy_curr_prox_probe_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, sensitivity, sensitivity_units,
             custom_scale_name):
         pass
 
     def create_ai_pos_lvdt_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, sensitivity, sensitivity_units,
             voltage_excit_source, voltage_excit_val, voltage_excit_freq,
             ac_excit_wire_mode, custom_scale_name):
         pass
 
     def create_ai_pos_rvdt_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, sensitivity, sensitivity_units,
             voltage_excit_source, voltage_excit_val, voltage_excit_freq,
             ac_excit_wire_mode, custom_scale_name):
@@ -261,23 +261,23 @@ class BaseInterpreter:
         pass
 
     def create_ai_pressure_bridge_polynomial_chan(
-            self, physical_channel, num_forward_coeffs, num_reverse_coeffs,
-            task, name_to_assign_to_channel, min_val, max_val, units,
-            bridge_config, voltage_excit_source, voltage_excit_val,
+            self, task, physical_channel, num_forward_coeffs,
+            num_reverse_coeffs, name_to_assign_to_channel, min_val, max_val,
+            units, bridge_config, voltage_excit_source, voltage_excit_val,
             nominal_bridge_resistance, forward_coeffs, reverse_coeffs,
             electrical_units, physical_units, custom_scale_name):
         pass
 
     def create_ai_pressure_bridge_table_chan(
-            self, physical_channel, num_electrical_vals, num_physical_vals,
-            task, name_to_assign_to_channel, min_val, max_val, units,
-            bridge_config, voltage_excit_source, voltage_excit_val,
+            self, task, physical_channel, num_electrical_vals,
+            num_physical_vals, name_to_assign_to_channel, min_val, max_val,
+            units, bridge_config, voltage_excit_source, voltage_excit_val,
             nominal_bridge_resistance, electrical_vals, electrical_units,
             physical_vals, physical_units, custom_scale_name):
         pass
 
     def create_ai_pressure_bridge_two_point_lin_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, bridge_config, voltage_excit_source,
             voltage_excit_val, nominal_bridge_resistance,
             first_electrical_val, second_electrical_val, electrical_units,
@@ -286,21 +286,21 @@ class BaseInterpreter:
         pass
 
     def create_ai_resistance_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, resistance_config, current_excit_source,
             current_excit_val, custom_scale_name):
         pass
 
     def create_ai_rosette_strain_gage_chan(
-            self, physical_channel, rosette_type, gage_orientation,
-            rosette_meas_types, num_rosette_meas_types, task,
+            self, task, physical_channel, rosette_type, gage_orientation,
+            rosette_meas_types, num_rosette_meas_types,
             name_to_assign_to_channel, min_val, max_val, strain_config,
             voltage_excit_source, voltage_excit_val, gage_factor,
             nominal_gage_resistance, poisson_ratio, lead_wire_resistance):
         pass
 
     def create_ai_strain_gage_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, strain_config, voltage_excit_source,
             voltage_excit_val, gage_factor, initial_bridge_voltage,
             nominal_gage_resistance, poisson_ratio, lead_wire_resistance,
@@ -308,45 +308,45 @@ class BaseInterpreter:
         pass
 
     def create_ai_temp_built_in_sensor_chan(
-            self, physical_channel, task, name_to_assign_to_channel, units):
+            self, task, physical_channel, name_to_assign_to_channel, units):
         pass
 
     def create_ai_thrmcpl_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, thermocouple_type, cjc_source, cjc_val,
             cjc_channel):
         pass
 
     def create_ai_thrmstr_chan_iex(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, resistance_config, current_excit_source,
             current_excit_val, a, b, c):
         pass
 
     def create_ai_thrmstr_chan_vex(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, resistance_config, voltage_excit_source,
             voltage_excit_val, a, b, c, r_1):
         pass
 
     def create_ai_torque_bridge_polynomial_chan(
-            self, physical_channel, num_forward_coeffs, num_reverse_coeffs,
-            task, name_to_assign_to_channel, min_val, max_val, units,
-            bridge_config, voltage_excit_source, voltage_excit_val,
+            self, task, physical_channel, num_forward_coeffs,
+            num_reverse_coeffs, name_to_assign_to_channel, min_val, max_val,
+            units, bridge_config, voltage_excit_source, voltage_excit_val,
             nominal_bridge_resistance, forward_coeffs, reverse_coeffs,
             electrical_units, physical_units, custom_scale_name):
         pass
 
     def create_ai_torque_bridge_table_chan(
-            self, physical_channel, num_electrical_vals, num_physical_vals,
-            task, name_to_assign_to_channel, min_val, max_val, units,
-            bridge_config, voltage_excit_source, voltage_excit_val,
+            self, task, physical_channel, num_electrical_vals,
+            num_physical_vals, name_to_assign_to_channel, min_val, max_val,
+            units, bridge_config, voltage_excit_source, voltage_excit_val,
             nominal_bridge_resistance, electrical_vals, electrical_units,
             physical_vals, physical_units, custom_scale_name):
         pass
 
     def create_ai_torque_bridge_two_point_lin_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, bridge_config, voltage_excit_source,
             voltage_excit_val, nominal_bridge_resistance,
             first_electrical_val, second_electrical_val, electrical_units,
@@ -355,148 +355,148 @@ class BaseInterpreter:
         pass
 
     def create_ai_velocity_iepe_chan(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, sensitivity,
             sensitivity_units, current_excit_source, current_excit_val,
             custom_scale_name):
         pass
 
     def create_ai_voltage_chan(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, custom_scale_name):
         pass
 
     def create_ai_voltage_chan_with_excit(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, bridge_config,
             voltage_excit_source, voltage_excit_val, use_excit_for_scaling,
             custom_scale_name):
         pass
 
     def create_ai_voltage_rms_chan(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, custom_scale_name):
         pass
 
     def create_airtd_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, rtd_type, resistance_config, current_excit_source,
             current_excit_val, r_0):
         pass
 
     def create_ao_current_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, custom_scale_name):
         pass
 
     def create_ao_func_gen_chan(
-            self, physical_channel, task, name_to_assign_to_channel, type,
+            self, task, physical_channel, name_to_assign_to_channel, type,
             freq, amplitude, offset):
         pass
 
     def create_ao_voltage_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, custom_scale_name):
         pass
 
     def create_ci_ang_encoder_chan(
-            self, counter, task, name_to_assign_to_channel, decoding_type,
+            self, task, counter, name_to_assign_to_channel, decoding_type,
             zidx_enable, zidx_val, zidx_phase, units, pulses_per_rev,
             initial_angle, custom_scale_name):
         pass
 
     def create_ci_ang_velocity_chan(
-            self, counter, task, name_to_assign_to_channel, min_val, max_val,
+            self, task, counter, name_to_assign_to_channel, min_val, max_val,
             decoding_type, units, pulses_per_rev, custom_scale_name):
         pass
 
     def create_ci_count_edges_chan(
-            self, counter, task, name_to_assign_to_channel, edge,
+            self, task, counter, name_to_assign_to_channel, edge,
             initial_count, count_direction):
         pass
 
     def create_ci_duty_cycle_chan(
-            self, counter, task, name_to_assign_to_channel, min_freq,
+            self, task, counter, name_to_assign_to_channel, min_freq,
             max_freq, edge, custom_scale_name):
         pass
 
     def create_ci_freq_chan(
-            self, counter, task, name_to_assign_to_channel, min_val, max_val,
+            self, task, counter, name_to_assign_to_channel, min_val, max_val,
             units, edge, meas_method, meas_time, divisor, custom_scale_name):
         pass
 
     def create_ci_lin_encoder_chan(
-            self, counter, task, name_to_assign_to_channel, decoding_type,
+            self, task, counter, name_to_assign_to_channel, decoding_type,
             zidx_enable, zidx_val, zidx_phase, units, dist_per_pulse,
             initial_pos, custom_scale_name):
         pass
 
     def create_ci_lin_velocity_chan(
-            self, counter, task, name_to_assign_to_channel, min_val, max_val,
+            self, task, counter, name_to_assign_to_channel, min_val, max_val,
             decoding_type, units, dist_per_pulse, custom_scale_name):
         pass
 
     def create_ci_period_chan(
-            self, counter, task, name_to_assign_to_channel, min_val, max_val,
+            self, task, counter, name_to_assign_to_channel, min_val, max_val,
             units, edge, meas_method, meas_time, divisor, custom_scale_name):
         pass
 
     def create_ci_pulse_chan_freq(
-            self, counter, task, name_to_assign_to_channel, min_val, max_val,
+            self, task, counter, name_to_assign_to_channel, min_val, max_val,
             units):
         pass
 
     def create_ci_pulse_chan_ticks(
-            self, counter, task, name_to_assign_to_channel, source_terminal,
+            self, task, counter, name_to_assign_to_channel, source_terminal,
             min_val, max_val):
         pass
 
     def create_ci_pulse_chan_time(
-            self, counter, task, name_to_assign_to_channel, min_val, max_val,
+            self, task, counter, name_to_assign_to_channel, min_val, max_val,
             units):
         pass
 
     def create_ci_pulse_width_chan(
-            self, counter, task, name_to_assign_to_channel, min_val, max_val,
+            self, task, counter, name_to_assign_to_channel, min_val, max_val,
             units, starting_edge, custom_scale_name):
         pass
 
     def create_ci_semi_period_chan(
-            self, counter, task, name_to_assign_to_channel, min_val, max_val,
+            self, task, counter, name_to_assign_to_channel, min_val, max_val,
             units, custom_scale_name):
         pass
 
     def create_ci_two_edge_sep_chan(
-            self, counter, task, name_to_assign_to_channel, min_val, max_val,
+            self, task, counter, name_to_assign_to_channel, min_val, max_val,
             units, first_edge, second_edge, custom_scale_name):
         pass
 
     def create_cigps_timestamp_chan(
-            self, counter, task, name_to_assign_to_channel, units,
+            self, task, counter, name_to_assign_to_channel, units,
             sync_method, custom_scale_name):
         pass
 
     def create_co_pulse_chan_freq(
-            self, counter, task, name_to_assign_to_channel, units, idle_state,
+            self, task, counter, name_to_assign_to_channel, units, idle_state,
             initial_delay, freq, duty_cycle):
         pass
 
     def create_co_pulse_chan_ticks(
-            self, counter, source_terminal, task, name_to_assign_to_channel,
+            self, task, counter, source_terminal, name_to_assign_to_channel,
             idle_state, initial_delay, low_ticks, high_ticks):
         pass
 
     def create_co_pulse_chan_time(
-            self, counter, task, name_to_assign_to_channel, units, idle_state,
+            self, task, counter, name_to_assign_to_channel, units, idle_state,
             initial_delay, low_time, high_time):
         pass
 
     def create_di_chan(
-            self, lines, task, name_to_assign_to_lines, line_grouping):
+            self, task, lines, name_to_assign_to_lines, line_grouping):
         pass
 
     def create_do_chan(
-            self, lines, task, name_to_assign_to_lines, line_grouping):
+            self, task, lines, name_to_assign_to_lines, line_grouping):
         pass
 
     @staticmethod
@@ -529,107 +529,107 @@ class BaseInterpreter:
         pass
 
     def create_tedsai_accel_chan(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, current_excit_source,
             current_excit_val, custom_scale_name):
         pass
 
     def create_tedsai_bridge_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, voltage_excit_source, voltage_excit_val,
             custom_scale_name):
         pass
 
     def create_tedsai_current_chan(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, shunt_resistor_loc,
             ext_shunt_resistor_val, custom_scale_name):
         pass
 
     def create_tedsai_force_bridge_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, voltage_excit_source, voltage_excit_val,
             custom_scale_name):
         pass
 
     def create_tedsai_force_iepe_chan(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, current_excit_source,
             current_excit_val, custom_scale_name):
         pass
 
     def create_tedsai_microphone_chan(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, units, max_snd_press_level, current_excit_source,
             current_excit_val, custom_scale_name):
         pass
 
     def create_tedsai_pos_lvdt_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, voltage_excit_source, voltage_excit_val,
             voltage_excit_freq, ac_excit_wire_mode, custom_scale_name):
         pass
 
     def create_tedsai_pos_rvdt_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, voltage_excit_source, voltage_excit_val,
             voltage_excit_freq, ac_excit_wire_mode, custom_scale_name):
         pass
 
     def create_tedsai_pressure_bridge_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, voltage_excit_source, voltage_excit_val,
             custom_scale_name):
         pass
 
     def create_tedsai_resistance_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, resistance_config, current_excit_source,
             current_excit_val, custom_scale_name):
         pass
 
     def create_tedsai_strain_gage_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, voltage_excit_source, voltage_excit_val,
             initial_bridge_voltage, lead_wire_resistance, custom_scale_name):
         pass
 
     def create_tedsai_thrmcpl_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, cjc_source, cjc_val, cjc_channel):
         pass
 
     def create_tedsai_thrmstr_chan_iex(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, resistance_config, current_excit_source,
             current_excit_val):
         pass
 
     def create_tedsai_thrmstr_chan_vex(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, resistance_config, voltage_excit_source,
             voltage_excit_val, r_1):
         pass
 
     def create_tedsai_torque_bridge_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, voltage_excit_source, voltage_excit_val,
             custom_scale_name):
         pass
 
     def create_tedsai_voltage_chan(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, custom_scale_name):
         pass
 
     def create_tedsai_voltage_chan_with_excit(
-            self, physical_channel, task, name_to_assign_to_channel,
+            self, task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, voltage_excit_source,
             voltage_excit_val, custom_scale_name):
         pass
 
     def create_tedsairtd_chan(
-            self, physical_channel, task, name_to_assign_to_channel, min_val,
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, resistance_config, current_excit_source,
             current_excit_val):
         pass
@@ -1611,7 +1611,7 @@ class BaseInterpreter:
         pass
 
     def write_to_teds_from_array(
-            self, array_size, physical_channel, bit_stream,
+            self, physical_channel, array_size, bit_stream,
             basic_teds_options):
         pass
 
