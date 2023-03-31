@@ -1,7 +1,9 @@
 """Acceptance tests for shipping examples."""
 
+import contextlib
 import re
 import runpy
+import warnings
 from pathlib import Path
 
 import pytest
@@ -28,25 +30,27 @@ def test__shipping_example__run__no_errors(example_path: Path):
                 )
     if example_path.name == "ci_pulse_freq.py":
         pytest.skip("Example times out if there is no signal.")
-    if example_path.name == "every_n_samples_event.py":
+    if re.search(r"\binput\(|\bKeyboardInterrupt\b", example_source):
         pytest.skip("Example waits for keyboard input.")
 
     runpy.run_path(str(example_path))
 
 
 def _find_device_names(source: str) -> set[str]:
-    return set(re.findall(r"cDAQ\d+Mod\d+|Dev\d+|PXI\d+Slot\d+|TS\d+Mod\d+", source))
+    return set(re.findall(r"\b(?:cDAQ\d+Mod\d+|Dev\d+|PXI\d+Slot\d+|TS\d+Mod\d+)\b", source))
 
 
 def _find_physical_channel_names(source: str, device_name: str) -> set[str]:
     return set(
         re.findall(
-            device_name + r"/(?:ai\d+|ao\d+|ctr\d+|port\d+(?:/line\d+)?|power)(?::\d+)?", source
+            r"\b" + device_name + r"/(?:ai\d+|ao\d+|ctr\d+|port\d+(?:/line\d+)?|power)(?::\d+)?\b", source
         )
     )
 
 
 def _has_physical_channel(device: nidaqmx.system.Device, physical_channel_name: str) -> bool:
+    if physical_channel_name.endswith("/power") and nidaqmx.constants.UsageTypeAI.POWER in device.ai_meas_types:
+        return True
     collections = [
         device.ai_physical_chans,
         device.ao_physical_chans,
