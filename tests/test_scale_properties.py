@@ -1,7 +1,6 @@
 "Contains collection of pytest tests that validates the scale properties."
 
 import pytest
-from pytest import approx
 
 from nidaqmx.constants import UnitsPreScaled
 from nidaqmx.error_codes import DAQmxErrors
@@ -32,7 +31,7 @@ def test__persisted_scale__get_float64_list_property__returns_persisted_value(pe
     """Test for validating getter for float list property."""
     scale = persisted_scale.load()
 
-    assert scale.poly_forward_coeff == [approx(0.0), approx(1.0)]
+    assert scale.poly_forward_coeff == [0.0, 1.0]
 
 
 @pytest.mark.parametrize("persisted_scale", ["polynomial_scale"], indirect=True)
