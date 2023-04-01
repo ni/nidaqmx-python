@@ -49,13 +49,17 @@ def _find_device_names(source: str) -> set[str]:
 def _find_physical_channel_names(source: str, device_name: str) -> set[str]:
     return set(
         re.findall(
-            r"\b" + device_name + r"/(?:ai\d+|ao\d+|ctr\d+|port\d+(?:/line\d+)?|power)(?::\d+)?\b", source
+            r"\b" + device_name + r"/(?:ai\d+|ao\d+|ctr\d+|port\d+(?:/line\d+)?|power)(?::\d+)?\b",
+            source,
         )
     )
 
 
 def _has_physical_channel(device: nidaqmx.system.Device, physical_channel_name: str) -> bool:
-    if physical_channel_name.endswith("/power") and nidaqmx.constants.UsageTypeAI.POWER in device.ai_meas_types:
+    if (
+        physical_channel_name.endswith("/power")
+        and nidaqmx.constants.UsageTypeAI.POWER in device.ai_meas_types
+    ):
         return True
     collections = [
         device.ai_physical_chans,
