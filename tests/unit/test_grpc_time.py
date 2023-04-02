@@ -22,8 +22,7 @@ except ImportError:
 
 @pytest.mark.parametrize("from_dt", [(JAN_01_2002_DATETIME), (JAN_01_2002_HIGHTIME)])
 def test___utc_datetime_after_1970___convert_to_timestamp___is_reversible(from_dt):
-    to_ts = GrpcTimestamp()
-    grpc_time.convert_time_to_timestamp(from_dt, to_ts)
+    to_ts = grpc_time.convert_time_to_timestamp(from_dt)
     roundtrip_dt = grpc_time.convert_timestamp_to_time(to_ts, tzinfo=timezone.utc)
 
     total_nanoseconds = to_ts.ToNanoseconds()
@@ -35,8 +34,7 @@ def test___utc_datetime_after_1970___convert_to_timestamp___is_reversible(from_d
 
 @pytest.mark.parametrize("from_dt", [(JAN_01_1850_DATETIME), (JAN_01_1850_HIGHTIME)])
 def test___utc_datetime_before_1970___convert_to_timestamp___is_reversible(from_dt):
-    to_ts = GrpcTimestamp()
-    grpc_time.convert_time_to_timestamp(from_dt, to_ts)
+    to_ts = grpc_time.convert_time_to_timestamp(from_dt)
     roundtrip_dt = grpc_time.convert_timestamp_to_time(to_ts, tzinfo=timezone.utc)
 
     total_nanoseconds = to_ts.ToNanoseconds()
@@ -175,8 +173,7 @@ def test___tz_datetime_before_1970___convert_to_timestamp___is_reversible(
 ):
     from_dt = datetime_cls(1850, 1, 1, tzinfo=tzinfo)
 
-    to_ts = GrpcTimestamp()
-    grpc_time.convert_time_to_timestamp(from_dt, to_ts)
+    to_ts = grpc_time.convert_time_to_timestamp(from_dt)
     roundtrip_dt = grpc_time.convert_timestamp_to_time(to_ts, tzinfo=tzinfo)
 
     assert to_ts.seconds == JAN_01_1850_TIMESTAMP_1970_EPOCH + expected_offset
@@ -236,8 +233,7 @@ def test___datetime_before_1970_with_microseconds___convert_to_timestamp___is_re
 ):
     from_dt = base_dt.replace(microsecond=microsecond)
 
-    to_ts = GrpcTimestamp()
-    grpc_time.convert_time_to_timestamp(from_dt, to_ts)
+    to_ts = grpc_time.convert_time_to_timestamp(from_dt)
     roundtrip_dt = grpc_time.convert_timestamp_to_time(to_ts, tzinfo=timezone.utc)
 
     assert to_ts.seconds == JAN_01_1850_TIMESTAMP_1970_EPOCH
@@ -298,8 +294,7 @@ def test___datetime_before_1970_with_femtoseconds___convert_to_timestamp___is_re
 ):
     from_dt = base_dt.replace(femtosecond=femtosecond)
 
-    to_ts = GrpcTimestamp()
-    grpc_time.convert_time_to_timestamp(from_dt, to_ts)
+    to_ts = grpc_time.convert_time_to_timestamp(from_dt)
     roundtrip_dt = grpc_time.convert_timestamp_to_time(to_ts, tzinfo=timezone.utc)
 
     assert to_ts.seconds == JAN_01_1850_TIMESTAMP_1970_EPOCH
