@@ -48,10 +48,12 @@ class Attribute:
             "has_explicit_write_buffer_size", False
         )
         if "python_enum" in attribute_metadata:
-            self._enum = merge_enums(attribute_metadata["python_enum"])
+            self._enum = attribute_metadata["python_enum"]
+            self._python_data_type = self._enum
             self._is_enum = True
         elif "enum" in attribute_metadata:
             self._enum = merge_enums(attribute_metadata["enum"])
+            self._python_data_type = self._enum
             self._is_enum = True
         self._object_type = attribute_metadata.get("python_object_type")
 
