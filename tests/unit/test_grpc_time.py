@@ -1,5 +1,6 @@
 from datetime import datetime as std_datetime, timedelta, timezone
 
+import pytz
 import pytest
 from hightime import datetime as ht_datetime
 
@@ -87,6 +88,49 @@ def test___grpc_response_before_1970___convert_to_timestamp___succeeds(response_
     to_dt = grpc_time.convert_timestamp_to_time(response.data, tzinfo=timezone.utc)
 
     assert to_dt == JAN_01_1850_HIGHTIME
+
+
+@pytest.mark.parametrize(
+    "date",
+    [
+        (std_datetime(1904, 1, 1, tzinfo=timezone.utc)),
+        (std_datetime(2023, 1, 1, tzinfo=timezone.utc)),
+        (std_datetime(2023, 2, 1, tzinfo=timezone.utc)),
+        (std_datetime(2023, 3, 1, tzinfo=timezone.utc)),
+        (std_datetime(2023, 4, 1, tzinfo=timezone.utc)),
+        (std_datetime(2023, 5, 1, tzinfo=timezone.utc)),
+        (std_datetime(2023, 6, 1, tzinfo=timezone.utc)),
+        (std_datetime(2023, 7, 1, tzinfo=timezone.utc)),
+        (std_datetime(2023, 8, 1, tzinfo=timezone.utc)),
+        (std_datetime(2023, 9, 1, tzinfo=timezone.utc)),
+        (std_datetime(2023, 10, 1, tzinfo=timezone.utc)),
+        (std_datetime(2023, 11, 1, tzinfo=timezone.utc)),
+        (std_datetime(2023, 12, 1, tzinfo=timezone.utc)),
+        (ht_datetime(2023, 1, 1, tzinfo=timezone.utc)),
+        (ht_datetime(2023, 2, 1, tzinfo=timezone.utc)),
+        (ht_datetime(2023, 3, 1, tzinfo=timezone.utc)),
+        (ht_datetime(2023, 4, 1, tzinfo=timezone.utc)),
+        (ht_datetime(2023, 5, 1, tzinfo=timezone.utc)),
+        (ht_datetime(2023, 6, 1, tzinfo=timezone.utc)),
+        (ht_datetime(2023, 7, 1, tzinfo=timezone.utc)),
+        (ht_datetime(2023, 8, 1, tzinfo=timezone.utc)),
+        (ht_datetime(2023, 9, 1, tzinfo=timezone.utc)),
+        (ht_datetime(2023, 10, 1, tzinfo=timezone.utc)),
+        (ht_datetime(2023, 11, 1, tzinfo=timezone.utc)),
+        (ht_datetime(2023, 12, 1, tzinfo=timezone.utc)),
+    ],
+)
+def test___utc_datetime___convert_to_timestamp_with_DST___is_reversible_grpc(
+    date
+):
+    # we use a location that has daylight savings date change on the dates above
+    target_timezone = pytz.timezone('America/Los_Angeles') # Pacific Time
+    astimezone_date = date.astimezone(target_timezone)
+
+    to_ts = grpc_time.convert_time_to_timestamp(date)
+    roundtrip_dt = grpc_time.convert_timestamp_to_time(to_ts, tzinfo=target_timezone)
+
+    assert astimezone_date == roundtrip_dt
 
 
 @pytest.mark.parametrize(

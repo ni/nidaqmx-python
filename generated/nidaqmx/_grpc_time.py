@@ -3,6 +3,7 @@ from datetime import datetime as std_datetime
 from hightime import datetime as ht_datetime
 from hightime import timedelta as ht_timedelta
 from typing import Optional, Union
+from nidaqmx._time import _convert_to_desired_timezone
 
 from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
 
@@ -17,24 +18,6 @@ _YS_PER_NS = 10**15
 _YS_PER_FS = 10**9
 
 _EPOCH_1970 = ht_datetime(1970, 1, 1, tzinfo=timezone.utc)
-
-def _convert_to_desired_timezone(expected_time_utc: Union[std_datetime, ht_datetime], tzinfo: Optional[timezone] = None):
-    current_time_utc = ht_datetime.now(timezone.utc)
-    desired_timezone_offset = current_time_utc.astimezone(tz=tzinfo).utcoffset()
-    desired_expected_time = expected_time_utc + desired_timezone_offset
-    new_datetime = ht_datetime(
-        desired_expected_time.year,
-        desired_expected_time.month,
-        desired_expected_time.day,
-        desired_expected_time.hour,
-        desired_expected_time.minute,
-        desired_expected_time.second,
-        desired_expected_time.microsecond,
-        desired_expected_time.femtosecond,
-        desired_expected_time.yoctosecond,
-        tzinfo = tzinfo)
-    return new_datetime
-
 
 def convert_time_to_timestamp(dt: Union[std_datetime, ht_datetime], ts: Optional[GrpcTimestamp] = None) -> GrpcTimestamp:
     seconds_since_1970 = int((dt - _EPOCH_1970).total_seconds())
