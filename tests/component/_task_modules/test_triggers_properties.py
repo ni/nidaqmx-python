@@ -3,12 +3,12 @@ from datetime import timezone
 import pytest
 from hightime import datetime as ht_datetime
 
+from nidaqmx._time import _convert_to_desired_timezone
 from nidaqmx.constants import TaskMode, TriggerType
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import DaqError
 from nidaqmx.task import Task
 from tests.unit._time_utils import JAN_01_1904_HIGHTIME, JAN_01_2002_HIGHTIME
-from nidaqmx._time import _convert_to_desired_timezone
 
 
 @pytest.fixture()
