@@ -102,8 +102,9 @@ def test__channel__set_uint32_property__returns_assigned_value(
     ai_voltage_chan_with_excit: AIChannel,
 ):
     """Test to validate setter for channel property of uint32 type."""
-    ai_voltage_chan_with_excit.ai_lossy_lsb_removal_compressed_samp_size = 15
-    assert ai_voltage_chan_with_excit.ai_lossy_lsb_removal_compressed_samp_size == 15
+    value_to_set = 15
+    ai_voltage_chan_with_excit.ai_lossy_lsb_removal_compressed_samp_size = value_to_set
+    assert ai_voltage_chan_with_excit.ai_lossy_lsb_removal_compressed_samp_size == value_to_set
 
 
 def test__channel__reset_uint32_property__returns_initial_value(
