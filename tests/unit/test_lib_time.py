@@ -95,7 +95,7 @@ def test___utc_datetime_before_1904___convert_to_timestamp___is_reversible(from_
         (ht_datetime(2023, 12, 1, tzinfo=timezone.utc)),
     ],
 )
-def test___utc_datetime___convert_to_timestamp_with_DST___is_reversible(date):
+def test___utc_datetime___convert_to_timestamp_with_dst___is_reversible(date):
     # we use a location that has daylight savings date change on the dates above
     target_timezone = pytz.timezone("America/Los_Angeles")  # Pacific Time
     astimezone_date = date.astimezone(target_timezone)

@@ -1,7 +1,4 @@
-from datetime import timezone
-
 import pytest
-from hightime import datetime as ht_datetime
 
 from nidaqmx._time import _convert_to_desired_timezone
 from nidaqmx.constants import TaskMode, TriggerType
