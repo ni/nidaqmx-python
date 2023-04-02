@@ -7,7 +7,7 @@ from datetime import datetime as std_datetime
 from hightime import datetime as ht_datetime
 from hightime import timedelta as ht_timedelta
 from typing import Optional, Union
-
+from nidaqmx._time import _convert_to_desired_timezone
 
 @functools.total_ordering
 class AbsoluteTime(ctypes.Structure):
@@ -32,22 +32,6 @@ class AbsoluteTime(ctypes.Structure):
 
     _EPOCH_1904 = ht_datetime(1904, 1, 1, tzinfo=timezone.utc)
 
-    def _convert_to_desired_timezone(self, expected_time_utc: Union[std_datetime, ht_datetime], tzinfo: Optional[timezone] = None):
-        current_time_utc = ht_datetime.now(timezone.utc)
-        desired_timezone_offset = current_time_utc.astimezone(tz=tzinfo).utcoffset()
-        desired_expected_time = expected_time_utc + desired_timezone_offset
-        new_datetime = ht_datetime(
-            desired_expected_time.year,
-            desired_expected_time.month,
-            desired_expected_time.day,
-            desired_expected_time.hour,
-            desired_expected_time.minute,
-            desired_expected_time.second,
-            desired_expected_time.microsecond,
-            desired_expected_time.femtosecond,
-            desired_expected_time.yoctosecond,
-            tzinfo = tzinfo)
-        return new_datetime
 
     @classmethod
     def from_datetime(cls, dt: Union[std_datetime, ht_datetime]) -> AbsoluteTime:
@@ -73,7 +57,7 @@ class AbsoluteTime(ctypes.Structure):
             round(AbsoluteTime._YS_PER_S * self.lsb / AbsoluteTime._NUM_SUBSECONDS)
         )
         dt = AbsoluteTime._EPOCH_1904 + ht_timedelta(seconds=self.msb) + ht_timedelta(yoctoseconds=total_yoctoseconds)
-        return self._convert_to_desired_timezone(dt,tzinfo)
+        return _convert_to_desired_timezone(dt,tzinfo)
 
     def __str__(self) -> str:
         return f"AbsoluteTime(lsb=0x{self.lsb:x}, msb=0x{self.msb:x})"
