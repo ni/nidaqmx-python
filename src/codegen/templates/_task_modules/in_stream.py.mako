@@ -9,6 +9,7 @@
 
 import ctypes
 import numpy
+import deprecation
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx._task_modules.read_functions import _read_raw
