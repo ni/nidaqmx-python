@@ -11,7 +11,8 @@ jobs:
       - ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.7"]
+        # The codegen scripts require Python 3.8 or later.
+        python-version: ["3.8"]
 
     steps:
       - uses: actions/checkout@v3
