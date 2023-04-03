@@ -8,7 +8,7 @@ from nidaqmx.constants import TEDSUnits, TerminalConfiguration
 from tests.helpers import generate_random_seed
 
 
-class TestTEDS(object):
+class TestTEDS:
     """Contains a collection of pytest tests.
 
     These validate the TEDS functionality in the NI-DAQmx Python API.

@@ -7,7 +7,7 @@ from nidaqmx.errors import (
 __all__ = ['PersistedTask']
 
 
-class PersistedTask(object):
+class PersistedTask:
     """
     Represents a saved DAQmx task.
 
@@ -35,7 +35,7 @@ class PersistedTask(object):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return 'PersistedTask(name={0})'.format(self._name)
+        return f'PersistedTask(name={self._name})'
 
     @property
     def author(self):

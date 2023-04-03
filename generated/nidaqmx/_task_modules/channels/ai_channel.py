@@ -40,7 +40,7 @@ class AIChannel(Channel):
     __slots__ = []
 
     def __repr__(self):
-        return 'AIChannel(name={0})'.format(self._name)
+        return f'AIChannel(name={self._name})'
 
     @property
     def ai_ac_excit_freq(self):

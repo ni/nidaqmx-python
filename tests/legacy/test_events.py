@@ -9,7 +9,7 @@ from nidaqmx.constants import AcquisitionType
 from tests.helpers import generate_random_seed
 
 
-class TestEvents(object):
+class TestEvents:
     """Contains a collection of pytest tests.
 
     This validate the NI-DAQmx events functionality in the Python NI-DAQmx API.

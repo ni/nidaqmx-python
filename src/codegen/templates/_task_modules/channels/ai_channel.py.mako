@@ -29,7 +29,7 @@ class AIChannel(Channel):
     __slots__ = []
 
     def __repr__(self):
-        return 'AIChannel(name={0})'.format(self._name)
+        return f'AIChannel(name={self._name})'
 
 <%namespace name="property_template" file="/property_template.py.mako"/>\
 %for attribute in attributes:

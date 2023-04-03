@@ -25,7 +25,7 @@ class DAQmxReaderActor(pykka.ThreadingActor):
 
     def __init__(self, task):
         """A proxy for reading samples."""
-        super(DAQmxReaderActor, self).__init__()
+        super().__init__()
         self.task = task
 
     def read(self, samples_per_read, number_of_reads, timeout=10):
@@ -34,7 +34,7 @@ class DAQmxReaderActor(pykka.ThreadingActor):
             self.task.read(number_of_samples_per_channel=samples_per_read, timeout=timeout)
 
 
-class TestMultiThreadedReads(object):
+class TestMultiThreadedReads:
     """Contains a collection of pytest tests.
 
     This validates multi-threaded reads using the NI-DAQmx Python API.
@@ -105,6 +105,5 @@ class TestMultiThreadedReads(object):
                     actor_ref.stop(timeout=(number_of_samples / sample_rate) + 10)
                 except pykka.Timeout:
                     print(
-                        "Could not stop actor {0} within the specified "
-                        "timeout.".format(actor_ref)
+                        "Could not stop actor {} within the specified " "timeout.".format(actor_ref)
                     )

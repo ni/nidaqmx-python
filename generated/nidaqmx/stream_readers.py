@@ -21,7 +21,7 @@ __all__ = ['AnalogSingleChannelReader', 'AnalogMultiChannelReader',
            'PowerSingleChannelReader', 'PowerMultiChannelReader', 'PowerBinaryReader']
 
 
-class ChannelReaderBase(object):
+class ChannelReaderBase:
     """
     Defines base class for all NI-DAQmx stream readers.
     """
@@ -95,8 +95,8 @@ class ChannelReaderBase(object):
                 'NumPy array of the correct shape based on the number of '
                 'channels in task and the number of samples per channel '
                 'requested.\n\n'
-                'Shape of NumPy Array provided: {0}\n'
-                'Shape of NumPy Array required: {1}'
+                'Shape of NumPy Array provided: {}\n'
+                'Shape of NumPy Array required: {}'
                 .format(data.shape, array_shape),
                 DAQmxErrors.UNKNOWN, task_name=self._task.name)
 
@@ -139,8 +139,8 @@ class ChannelReaderBase(object):
                 'NumPy array of the correct shape based on the number of '
                 'channels in task and the number of digital lines per '
                 'channel.\n\n'
-                'Shape of NumPy Array provided: {0}\n'
-                'Shape of NumPy Array required: {1}'
+                'Shape of NumPy Array provided: {}\n'
+                'Shape of NumPy Array required: {}'
                 .format(data.shape, array_shape),
                 DAQmxErrors.UNKNOWN, task_name=self._task.name)
 

@@ -33,7 +33,7 @@ class NoFixtureDetectedError(Error):
     pass
 
 
-class TestDAQmxIOBase(object):
+class TestDAQmxIOBase:
     """Contains a collection of methods that are used in read and write tests.
 
     Classes which validate the Task Read and Write functions in the NI-DAQmx Python API
@@ -60,7 +60,7 @@ class TestDAQmxIOBase(object):
 
             loopback_channel_pairs.append(
                 TestDAQmxIOBase.ChannelPair(
-                    ao_physical_chan.name, "{0}/_{1}_vs_aognd".format(device_name, ao_channel_name)
+                    ao_physical_chan.name, f"{device_name}/_{ao_channel_name}_vs_aognd"
                 )
             )
 
@@ -167,12 +167,12 @@ class TestAnalogReadWrite(TestDAQmxIOBase):
             # Use a counter output pulse train task as the sample clock source
             # for both the AI and AO tasks.
             sample_clk_task.co_channels.add_co_pulse_chan_freq(
-                "{0}/ctr0".format(real_x_series_device.name), freq=sample_rate, idle_state=Level.LOW
+                f"{real_x_series_device.name}/ctr0", freq=sample_rate, idle_state=Level.LOW
             )
             sample_clk_task.timing.cfg_implicit_timing(samps_per_chan=number_of_samples)
             sample_clk_task.control(TaskMode.TASK_COMMIT)
 
-            samp_clk_terminal = "/{0}/Ctr0InternalOutput".format(real_x_series_device.name)
+            samp_clk_terminal = f"/{real_x_series_device.name}/Ctr0InternalOutput"
 
             write_task.ao_channels.add_ao_voltage_chan(
                 loopback_channel_pair.output_channel, max_val=10, min_val=-10
@@ -227,12 +227,12 @@ class TestAnalogReadWrite(TestDAQmxIOBase):
             # Use a counter output pulse train task as the sample clock source
             # for both the AI and AO tasks.
             sample_clk_task.co_channels.add_co_pulse_chan_freq(
-                "{0}/ctr0".format(real_x_series_device.name), freq=sample_rate
+                f"{real_x_series_device.name}/ctr0", freq=sample_rate
             )
             sample_clk_task.timing.cfg_implicit_timing(samps_per_chan=number_of_samples)
             sample_clk_task.control(TaskMode.TASK_COMMIT)
 
-            samp_clk_terminal = "/{0}/Ctr0InternalOutput".format(real_x_series_device.name)
+            samp_clk_terminal = f"/{real_x_series_device.name}/Ctr0InternalOutput"
 
             write_task.ao_channels.add_ao_voltage_chan(
                 flatten_channel_string([c.output_channel for c in channels_to_test]),
@@ -430,7 +430,7 @@ class TestCounterReadWrite(TestDAQmxIOBase):
             write_task.timing.cfg_implicit_timing(samps_per_chan=number_of_pulses)
 
             ci_channel = read_task.ci_channels.add_ci_count_edges_chan(counters[1])
-            ci_channel.ci_count_edges_term = "/{0}InternalOutput".format(counters[0])
+            ci_channel.ci_count_edges_term = f"/{counters[0]}InternalOutput"
 
             read_task.start()
             write_task.start()
@@ -465,7 +465,7 @@ class TestCounterReadWrite(TestDAQmxIOBase):
             actual_frequency = sample_clk_task.co_channels.all.co_pulse_freq
             sample_clk_task.timing.cfg_implicit_timing(samps_per_chan=number_of_samples)
             sample_clk_task.control(TaskMode.TASK_COMMIT)
-            samp_clk_terminal = "/{0}InternalOutput".format(counters[0])
+            samp_clk_terminal = f"/{counters[0]}InternalOutput"
 
             write_task.co_channels.add_co_pulse_chan_freq(counters[1], freq=actual_frequency)
             write_task.timing.cfg_implicit_timing(samps_per_chan=number_of_samples)
@@ -474,7 +474,7 @@ class TestCounterReadWrite(TestDAQmxIOBase):
             write_task.triggers.arm_start_trigger.dig_edge_src = samp_clk_terminal
 
             read_task.ci_channels.add_ci_count_edges_chan(counters[2], edge=Edge.RISING)
-            read_task.ci_channels.all.ci_count_edges_term = "/{0}InternalOutput".format(counters[1])
+            read_task.ci_channels.all.ci_count_edges_term = f"/{counters[1]}InternalOutput"
             read_task.timing.cfg_samp_clk_timing(
                 actual_frequency,
                 source=samp_clk_terminal,
@@ -513,7 +513,7 @@ class TestCounterReadWrite(TestDAQmxIOBase):
             write_task.timing.cfg_implicit_timing(sample_mode=AcquisitionType.CONTINUOUS)
 
             read_task.ci_channels.add_ci_pulse_chan_freq(counters[1], min_val=100, max_val=1000)
-            read_task.ci_channels.all.ci_pulse_freq_term = "/{0}InternalOutput".format(counters[0])
+            read_task.ci_channels.all.ci_pulse_freq_term = f"/{counters[0]}InternalOutput"
             read_task.ci_channels.all.ci_pulse_freq_starting_edge = starting_edge
 
             read_task.start()
@@ -545,7 +545,7 @@ class TestCounterReadWrite(TestDAQmxIOBase):
             write_task.timing.cfg_implicit_timing(sample_mode=AcquisitionType.CONTINUOUS)
 
             read_task.ci_channels.add_ci_pulse_chan_time(counters[1], min_val=0.001, max_val=0.01)
-            read_task.ci_channels.all.ci_pulse_time_term = "/{0}InternalOutput".format(counters[0])
+            read_task.ci_channels.all.ci_pulse_time_term = f"/{counters[0]}InternalOutput"
             read_task.ci_channels.all.ci_pulse_time_starting_edge = starting_edge
 
             read_task.start()
@@ -573,7 +573,7 @@ class TestCounterReadWrite(TestDAQmxIOBase):
         with nidaqmx.Task() as write_task, nidaqmx.Task() as read_task:
             write_task.co_channels.add_co_pulse_chan_ticks(
                 counters[0],
-                "/{0}/100kHzTimebase".format(real_x_series_device.name),
+                f"/{real_x_series_device.name}/100kHzTimebase",
                 high_ticks=high_ticks,
                 low_ticks=low_ticks,
             )
@@ -581,11 +581,11 @@ class TestCounterReadWrite(TestDAQmxIOBase):
 
             read_task.ci_channels.add_ci_pulse_chan_ticks(
                 counters[1],
-                source_terminal="/{0}/100kHzTimebase".format(real_x_series_device.name),
+                source_terminal=f"/{real_x_series_device.name}/100kHzTimebase",
                 min_val=100,
                 max_val=1000,
             )
-            read_task.ci_channels.all.ci_pulse_ticks_term = "/{0}InternalOutput".format(counters[0])
+            read_task.ci_channels.all.ci_pulse_ticks_term = f"/{counters[0]}InternalOutput"
             read_task.ci_channels.all.ci_pulse_ticks_starting_edge = starting_edge
 
             read_task.start()

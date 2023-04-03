@@ -5,7 +5,7 @@ from nidaqmx import Task, DaqError
 from nidaqmx.error_codes import DAQmxErrors
 
 
-class TestTask(object):
+class TestTask:
     """Contains a collection of pytest tests.
 
     These validate duplicate and partially constructed tasks.

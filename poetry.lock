@@ -547,7 +547,7 @@ use_chardet_on_py3 = ["chardet (>=3.0.2,<6)"]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 
@@ -781,7 +781,7 @@ docs = ["Sphinx", "sphinx_rtd_theme"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "9b07b576533cf85d85c5cc8bb5988d68b7d0b705aec6a8c08eb021aa47b2b462"
+content-hash = "e1712ff89fa7c687142a4d4e037ab4c13fc9ba1a6b521bea7ae8b714cd9a3c76"
 
 [metadata.files]
 alabaster = [
