@@ -182,6 +182,23 @@ def multi_threading_test_devices():
 
 
 @pytest.fixture(scope="module")
+def persisted_task(request):
+    """Gets the persisted task based on the task name."""
+    system = nidaqmx.system.System.local()
+    task_name = request.param
+
+    if task_name in system.tasks.task_names:
+        return system.tasks[task_name]
+
+    pytest.skip(
+        "Could not detect a persisted task that has the given name."
+        "Cannot proceed to run tests. Import the NI MAX configuration file located at "
+        "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required tasks."
+    )
+    return None
+
+
+@pytest.fixture(scope="module")
 def persisted_channel(request):
     """Gets the persisted channel based on the channel name."""
     system = nidaqmx.system.System.local()
