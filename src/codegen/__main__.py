@@ -3,6 +3,7 @@ import logging
 import pathlib
 import sys
 
+sys.path.append(str(pathlib.Path(__file__).parent.parent))
 import click
 import codegen.generator as generator
 
