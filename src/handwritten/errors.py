@@ -153,20 +153,7 @@ class DaqWarning(Warning):
         return self._error_type
 
 
-class _ResourceWarning(Warning):
-    """
-    Resource warning raised by any NI-DAQmx method.
-
-    Used in place of built-in ResourceWarning to allow Python 2.7 support.
-    """
-    pass
-
-
-# If ResourceWarning is in exceptions, it is also in the built-in namespace.
-try:
-    DaqResourceWarning = ResourceWarning
-except NameError:
-    DaqResourceWarning = _ResourceWarning
+DaqResourceWarning = ResourceWarning
 
 warnings.filterwarnings("always", category=DaqWarning)
 warnings.filterwarnings("always", category=DaqResourceWarning)
