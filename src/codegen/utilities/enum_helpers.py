@@ -10,14 +10,20 @@ ENUM_MERGE_SET = {
     "AutoZeroType": ["AutoZeroType", "AutoZeroType1"],
     "BridgeConfiguration": ["BridgeConfiguration", "BridgeConfiguration1"],
     "CJCSource": ["CJCSource1", "CJCSource"],
-    "Coupling": ["Coupling1", "Coupling"],
+    "Coupling": ["Coupling1", "Coupling2", "Coupling"],
     "CurrentShuntResistorLocation": [
         "CurrentShuntResistorLocation",
         "CurrentShuntResistorLocation1",
     ],
     "CurrentUnits": ["CurrentUnits1", "CurrentUnits"],
     "DataJustification": ["DataJustification", "DataJustification1"],
-    "DigitalWidthUnits": ["DigitalWidthUnits", "DigitalWidthUnits2", "DigitalWidthUnits4"],
+    "DigitalWidthUnits": [
+        "DigitalWidthUnits",
+        "DigitalWidthUnits1",
+        "DigitalWidthUnits2",
+        "DigitalWidthUnits3",
+        "DigitalWidthUnits4",
+    ],
     "Edge": ["Edge", "Edge1"],
     "FilterResponse": ["FilterResponse1", "FilterResponse"],
     "FilterType": ["FilterType", "FilterType2"],
@@ -61,6 +67,17 @@ ENUM_MERGE_SET = {
     "OverwriteMode": ["OverwriteMode", "OverwriteMode1"],
     "RegenerationMode": ["RegenerationMode", "RegenerationMode1"],
     "WaitMode": ["WaitMode", "WaitMode2"],
+    "ExportAction": ["ExportActions", "ExportActions2", "ExportActions3", "ExportActions5"],
+    "Polarity": ["Polarity", "Polarity2"],
+    "TriggerType": [
+        "TriggerType4",
+        "TriggerType6",
+        "TriggerType8",
+        "TriggerType9",
+        "TriggerType10",
+    ],
+    "DigitalPatternCondition": ["DigitalPatternCondition1"],
+    "Slope": ["Slope1"],
 }
 
 # We don't need this stuff.

@@ -17,6 +17,14 @@ script_info = {
             "templateFile": "_task_modules\\out_stream.py.mako",
         },
         {
+            "relativeOutputPath": "system\\_watchdog_modules\\expiration_state.py",
+            "templateFile": "system\\_watchdog_modules\\expiration_state.py.mako",
+        },
+        {
+            "relativeOutputPath": "system\\watchdog.py",
+            "templateFile": "system\\watchdog.py.mako",
+        },
+        {
             "relativeOutputPath": "_task_modules\\channels\\ao_channel.py",
             "templateFile": "_task_modules\\channels\\ao_channel.py.mako",
         },
@@ -63,10 +71,46 @@ script_info = {
         {
             "relativeOutputPath": "_task_modules\\timing.py",
             "templateFile": "_task_modules\\timing.py.mako",
-        },
+        },  
         {
             "relativeOutputPath": "scale.py", 
             "templateFile": "scale.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\export_signals.py",
+            "templateFile": "_task_modules\\export_signals.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\triggering\\arm_start_trigger.py",
+            "templateFile": "_task_modules\\triggering\\arm_start_trigger.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\triggering\\handshake_trigger.py",
+            "templateFile": "_task_modules\\triggering\\handshake_trigger.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\triggering\\pause_trigger.py",
+            "templateFile": "_task_modules\\triggering\\pause_trigger.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\triggering\\reference_trigger.py",
+            "templateFile": "_task_modules\\triggering\\reference_trigger.py.mako",
+        },
+        {
+            "relativeOutputPath": "_task_modules\\triggering\\start_trigger.py",
+            "templateFile": "_task_modules\\triggering\\start_trigger.py.mako",
+        },
+        {
+            "relativeOutputPath": "system\\system.py",
+            "templateFile": "system\\system.py.mako",
+        },
+        {
+            "relativeOutputPath": "system\\device.py",
+            "templateFile": "system\\device.py.mako",
+        },
+        {
+            "relativeOutputPath": "system\\physical_channel.py",
+            "templateFile": "system\\physical_channel.py.mako",
         },
     ]
 }

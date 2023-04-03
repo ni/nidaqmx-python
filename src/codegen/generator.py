@@ -2,6 +2,7 @@
 import logging
 import os
 import os.path
+import shutil
 from pathlib import Path
 
 import codegen.metadata as scrapigen_metadata
@@ -33,6 +34,12 @@ def _generate_file(metadata, template_file_name, output_path):
         f.write(template.render(data=metadata))
 
 
+def _copy_handwritten_files(dest):
+    parent_dir = Path(__file__).parent.parent
+    source_path = parent_dir / "handwritten"
+    shutil.copytree(source_path, dest, dirs_exist_ok=True)
+
+
 def generate(dest):
     """Generates the DAQmx classes using scrapigen metadata."""
     _logger.info(f"Generating files into {dest}")
@@ -47,3 +54,5 @@ def generate(dest):
     _generate_file(codegen_metadata["enums"], "error_codes.mako", dest / "error_codes.py")
 
     _generate_file(codegen_metadata, "constants.mako", dest / "constants.py")
+
+    _copy_handwritten_files(dest)
