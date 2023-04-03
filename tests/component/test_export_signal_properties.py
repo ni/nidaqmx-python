@@ -2,84 +2,62 @@
 
 import pytest
 
-import nidaqmx
 from nidaqmx.constants import ExportAction
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import DaqError
-from nidaqmx.system.device import Device
+from nidaqmx.task import Task
 
 
-def test__export_signal__get_enum_property__returns_value(any_x_series_device: Device):
+def test__export_signal__get_enum_property__returns_value(ai_voltage_chan_task: Task):
     """Test to validate getter for export signal property of enum type."""
-    with nidaqmx.Task() as task:
-        task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
-
-        assert task.export_signals.samp_clk_output_behavior == ExportAction.PULSE
+    assert ai_voltage_chan_task.export_signals.samp_clk_output_behavior == ExportAction.PULSE
 
 
-def test__export_signal__set_enum_property__returns_assigned_value(any_x_series_device: Device):
+def test__export_signal__set_enum_property__returns_assigned_value(ai_voltage_chan_task: Task):
     """Test to validate setter for export signal property of enum type."""
-    with nidaqmx.Task() as task:
-        task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
+    value_to_set = ExportAction.LEVEL
+    ai_voltage_chan_task.export_signals.samp_clk_output_behavior = value_to_set
 
-        value_to_set = ExportAction.LEVEL
-        task.export_signals.samp_clk_output_behavior = value_to_set
-
-        assert task.export_signals.samp_clk_output_behavior == value_to_set
+    assert ai_voltage_chan_task.export_signals.samp_clk_output_behavior == value_to_set
 
 
-def test__export_signal__reset_enum_property__returns_initial_value(any_x_series_device: Device):
+def test__export_signal__reset_enum_property__returns_initial_value(ai_voltage_chan_task: Task):
     """Test to validate resetting export signal property of enum type."""
-    with nidaqmx.Task() as task:
-        task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
+    ai_voltage_chan_task.export_signals.samp_clk_output_behavior == ExportAction.INTERLOCKED
 
-        task.export_signals.samp_clk_output_behavior == ExportAction.INTERLOCKED
+    del ai_voltage_chan_task.export_signals.samp_clk_output_behavior
 
-        del task.export_signals.samp_clk_output_behavior
-
-        assert task.export_signals.samp_clk_output_behavior == ExportAction.PULSE
+    assert ai_voltage_chan_task.export_signals.samp_clk_output_behavior == ExportAction.PULSE
 
 
-def test__export_signal__get_string_property__returns_value(any_x_series_device: Device):
+def test__export_signal__get_string_property__returns_value(ai_voltage_chan_task: Task):
     """Test to validate getter for export signal property of string type."""
-    with nidaqmx.Task() as task:
-        task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
-
-        assert task.export_signals.start_trig_output_term == ""
+    assert ai_voltage_chan_task.export_signals.start_trig_output_term == ""
 
 
 def test__export_signal__set_invalid_routing_destination__throws_daqerror(
-    any_x_series_device: Device,
+    ai_voltage_chan_task: Task,
 ):
     """Test to validate setter for export signal property of string type."""
-    with nidaqmx.Task() as task:
-        task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
+    ai_voltage_chan_task.export_signals.start_trig_output_term = "RTSI"
 
-        task.export_signals.start_trig_output_term = "RTSI"
-
-        with pytest.raises(DaqError) as e:
-            _ = task.export_signals.start_trig_output_term
-        assert e.value.error_type == DAQmxErrors.INVALID_ROUTING_DESTINATION_TERMINAL_NAME_ROUTING
+    with pytest.raises(DaqError) as e:
+        _ = ai_voltage_chan_task.export_signals.start_trig_output_term
+    assert e.value.error_type == DAQmxErrors.INVALID_ROUTING_DESTINATION_TERMINAL_NAME_ROUTING
 
 
-def test__export_signal__set_string_property__returns_assigned_value(any_x_series_device: Device):
+def test__export_signal__set_string_property__returns_assigned_value(ao_voltage_chan_task: Task):
     """Test to validate setter for export signal property of string type."""
-    with nidaqmx.Task() as task:
-        task.ao_channels.add_ao_voltage_chan(any_x_series_device.ao_physical_chans[0].name)
+    value_to_set = "RSE"
+    ao_voltage_chan_task.export_signals.start_trig_output_term = value_to_set
 
-        value_to_set = "RSE"
-        task.export_signals.start_trig_output_term = value_to_set
-
-        assert task.export_signals.start_trig_output_term == value_to_set
+    assert ao_voltage_chan_task.export_signals.start_trig_output_term == value_to_set
 
 
-def test__export_signal__reset_string_property__returns_initial_value(any_x_series_device: Device):
+def test__export_signal__reset_string_property__returns_initial_value(ao_voltage_chan_task: Task):
     """Test to validate resetting export signal property of string type."""
-    with nidaqmx.Task() as task:
-        task.ao_channels.add_ao_voltage_chan(any_x_series_device.ao_physical_chans[0].name)
+    ao_voltage_chan_task.export_signals.start_trig_output_term = "DIFF"
 
-        task.export_signals.start_trig_output_term = "DIFF"
+    del ao_voltage_chan_task.export_signals.start_trig_output_term
 
-        del task.export_signals.start_trig_output_term
-
-        assert task.export_signals.start_trig_output_term == ""
+    assert ao_voltage_chan_task.export_signals.start_trig_output_term == ""
