@@ -31,6 +31,6 @@ jobs:
         run: |
           poetry run ni-python-styleguide lint
       - name: Generate ni-daqmx files
-        run: poetry run python -m src/codegen --dest generated/nidaqmx
+        run: poetry run python src/codegen --dest generated/nidaqmx
       - name: Check for files dirtied by codegen
         run: git diff --exit-code
