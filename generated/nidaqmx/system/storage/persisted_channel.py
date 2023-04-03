@@ -7,7 +7,7 @@ from nidaqmx.errors import (
 __all__ = ['PersistedChannel']
 
 
-class PersistedChannel(object):
+class PersistedChannel:
     """
     Represents a saved DAQmx global channel.
 
@@ -35,7 +35,7 @@ class PersistedChannel(object):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return 'PersistedChannel(name={0})'.format(self._name)
+        return f'PersistedChannel(name={self._name})'
 
     @property
     def author(self):
