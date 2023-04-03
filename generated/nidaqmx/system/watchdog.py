@@ -17,6 +17,8 @@ from nidaqmx.system._watchdog_modules.expiration_states_collection import (
 from nidaqmx.utils import flatten_channel_string
 from nidaqmx.constants import (
     Edge, TriggerType, WDTTaskAction)
+from nidaqmx.types import (
+    AOExpirationState, COExpirationState, DOExpirationState)
 
 __all__ = ['WatchdogTask']
 

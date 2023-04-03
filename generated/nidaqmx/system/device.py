@@ -2,6 +2,7 @@
 
 import ctypes
 import numpy
+import deprecation
 
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, enum_bitfield_to_list, ctypes_byte_str,

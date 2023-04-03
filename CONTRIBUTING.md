@@ -24,7 +24,9 @@ begin development. Try to investigate these failures. If you're unable to do so,
 through our [GitHub issues page](http://github.com/ni/nidaqmx-python/issues).
 5. Write new tests that demonstrate your bug or feature. Ensure that these new tests fail.
 6. Make your change.
-7. Once the necessary changes are done, update the auto-generated code using ``poetry run python -m codegen --dest generated/nidaqmx``. This will ensure that the latest files are present in ``generated`` folder.
+7. Once the necessary changes are done, update the auto-generated code using ``poetry run python src/codegen --dest generated/nidaqmx``. This will ensure that the latest files are present in the ``generated`` folder.
+   > **Note**
+   > The codegen scripts require Python 3.8 or later.
 8. Run all the unit tests again (which include the tests you just added), and confirm that they all
 pass.
 9. Send a GitHub Pull Request to the main repository's master branch. GitHub Pull Requests are the
@@ -44,7 +46,7 @@ requirements:
 
 Before running any unit tests, an NI MAX configuration needs be imported. The MAX configuration
 simply contains some custom scales used during testing. The MAX configuration file is located at
-``nidaqmx\tests\max_config\nidaqmxMaxConfig.ini``. Refer to this [KB article](http://digital.ni.com/public.nsf/allkb/0E0D3D7C4AA8903886256B29000C9D5A)
+``tests\max_config\nidaqmxMaxConfig.ini``. Refer to this [KB article](http://digital.ni.com/public.nsf/allkb/0E0D3D7C4AA8903886256B29000C9D5A)
 for details on how to import a MAX Configuration.
 
 To run the **nidaqmx** unit tests in a specific version of Python, run the following command in the
