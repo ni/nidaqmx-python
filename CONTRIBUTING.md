@@ -46,7 +46,7 @@ requirements:
 
 Before running any unit tests, an NI MAX configuration needs be imported. The MAX configuration
 simply contains some custom scales used during testing. The MAX configuration file is located at
-``nidaqmx\tests\max_config\nidaqmxMaxConfig.ini``. Refer to this [KB article](http://digital.ni.com/public.nsf/allkb/0E0D3D7C4AA8903886256B29000C9D5A)
+``tests\max_config\nidaqmxMaxConfig.ini``. Refer to this [KB article](http://digital.ni.com/public.nsf/allkb/0E0D3D7C4AA8903886256B29000C9D5A)
 for details on how to import a MAX Configuration.
 
 To run the **nidaqmx** unit tests in a specific version of Python, run the following command in the
