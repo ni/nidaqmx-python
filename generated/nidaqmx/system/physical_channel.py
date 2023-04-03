@@ -18,7 +18,7 @@ from nidaqmx.constants import (
 __all__ = ['PhysicalChannel']
 
 
-class PhysicalChannel(object):
+class PhysicalChannel:
     """
     Represents a DAQmx physical channel.
     """
@@ -43,7 +43,7 @@ class PhysicalChannel(object):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return 'PhysicalChannel(name={0})'.format(self._name)
+        return f'PhysicalChannel(name={self._name})'
 
     @property
     def name(self):

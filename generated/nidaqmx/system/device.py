@@ -22,7 +22,7 @@ from nidaqmx.constants import (
 __all__ = ['Device']
 
 
-class Device(object):
+class Device:
     """
     Represents a DAQmx device.
     """
@@ -47,7 +47,7 @@ class Device(object):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return 'Device(name={0})'.format(self._name)
+        return f'Device(name={self._name})'
 
     @property
     def name(self):

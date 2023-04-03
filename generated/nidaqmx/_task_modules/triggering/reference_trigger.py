@@ -13,7 +13,7 @@ from nidaqmx.constants import (
     WindowTriggerCondition1)
 
 
-class ReferenceTrigger(object):
+class ReferenceTrigger:
     """
     Represents the reference trigger configurations for a DAQmx task.
     """

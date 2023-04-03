@@ -25,7 +25,7 @@ class CIChannel(Channel):
     __slots__ = []
 
     def __repr__(self):
-        return 'CIChannel(name={0})'.format(self._name)
+        return f'CIChannel(name={self._name})'
 
     @property
     def ci_ang_encoder_initial_angle(self):

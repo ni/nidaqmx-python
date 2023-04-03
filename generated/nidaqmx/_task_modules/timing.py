@@ -14,7 +14,7 @@ from nidaqmx.constants import (
     UnderflowBehavior)
 
 
-class Timing(object):
+class Timing:
     """
     Represents the timing configurations for a DAQmx task.
     """

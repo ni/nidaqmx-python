@@ -25,7 +25,7 @@ from nidaqmx.types import (
 __all__ = ['System']
 
 
-class System(object):
+class System:
     """
     Represents a DAQmx system.
 
