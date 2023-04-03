@@ -1,6 +1,5 @@
 """Contains a collection of pytest tests that validates trigger properties."""
 
-import pytest
 import nidaqmx
 from nidaqmx.constants import TriggerType
 from nidaqmx.error_codes import DAQmxErrors
@@ -77,7 +76,7 @@ def test__trigger__set_enum_property__returns_assigned_value(any_x_series_device
     """Test to validate setter for trigger property of enum type."""
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
-        
+
         task.timing.cfg_samp_clk_timing(1000)
 
         value_to_test = TriggerType.ANALOG_EDGE
@@ -86,11 +85,10 @@ def test__trigger__set_enum_property__returns_assigned_value(any_x_series_device
 
 
 def test__trigger__set_trig_type_without_cfg_samp_clk__throws_daqerror(any_x_series_device):
-    """Test to validate error while setting trigger type without 
-     configuring sample clock for trigger property of enum type."""
+    """Test to validate error while setting trigger type without configuring sample clock."""
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
-        
+
         try:
             value_to_test = TriggerType.ANALOG_EDGE
             task.triggers.start_trigger.trig_type = value_to_test
