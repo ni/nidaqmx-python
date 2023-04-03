@@ -237,6 +237,7 @@ ATTRIBUTE_CHANGE_SET = {
         "dig_edge_watchdog_expir_trig_src": "expiration_trigger_dig_edge_src",
         "expir_trig_trig_on_network_conn_loss": "expiration_trigger_trig_on_network_conn_loss",
     },
+    "Triggers": {"trigger_sync_type": "sync_type"},
 }
 
 ATTR_NAME_CHANGE_IN_DESCRIPTION = {
