@@ -33,6 +33,8 @@ def test__export_signal__reset_enum_property__returns_initial_value(any_x_series
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
 
+        task.export_signals.samp_clk_output_behavior == ExportAction.INTERLOCKED
+
         del task.export_signals.samp_clk_output_behavior
 
         assert task.export_signals.samp_clk_output_behavior == ExportAction.PULSE
@@ -74,7 +76,9 @@ def test__export_signal__set_string_property__returns_assigned_value(any_x_serie
 def test__export_signal__reset_string_property__returns_initial_value(any_x_series_device: Device):
     """Test to validate resetting export signal property of string type."""
     with nidaqmx.Task() as task:
-        task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
+        task.ao_channels.add_ao_voltage_chan(any_x_series_device.ao_physical_chans[0].name)
+
+        task.export_signals.start_trig_output_term = "DIFF"
 
         del task.export_signals.start_trig_output_term
 
