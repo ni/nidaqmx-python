@@ -39,11 +39,7 @@ def main(dest, verbose, quiet):
     log_format = "[%(relativeCreated)6d] %(levelname)-5s %(funcName)s: %(message)s"
     logging.basicConfig(level=logging_level, format=log_format)
 
-    try:
-        generator.generate(dest)
-    except Exception:
-        _logger.exception("Failed to generate")
-        return 1
+    generator.generate(dest)
 
 
 if __name__ == "__main__":
