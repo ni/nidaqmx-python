@@ -24,6 +24,8 @@ from nidaqmx.system._watchdog_modules.expiration_states_collection import (
 from nidaqmx.utils import flatten_channel_string
 from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})
+from nidaqmx.types import (
+    AOExpirationState, COExpirationState, DOExpirationState)
 
 __all__ = ['WatchdogTask']
 
