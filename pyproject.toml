@@ -36,7 +36,6 @@ numpy = [
   {version=">=1.20,<1.22", python="<3.8"},
   {version=">=1.22", python="^3.8"},
 ]
-six = "^1.16"
 deprecation = ">=2.1"
 # This functionality was merged into python stdlib beginning in 3.8
 importlib_metadata = {version="^4.2", python="~3.7"}
