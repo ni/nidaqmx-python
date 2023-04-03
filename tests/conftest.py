@@ -197,6 +197,7 @@ def persisted_task(request):
     )
     return None
 
+
 @pytest.fixture(scope="module")
 def persisted_scale(request):
     """Gets the persisted scale based on the scale name."""
@@ -209,6 +210,7 @@ def persisted_scale(request):
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required scales."
     )
     return None
+
 
 @pytest.fixture(scope="module")
 def test_assets_directory() -> pathlib.Path:
