@@ -29,12 +29,12 @@ All notable changes to this project will be documented in this file.
     * [216: Can read channel_names of PersistedTask but not channels](https://github.com/ni/nidaqmx-python/issues/216)
 * ### Major Changes
     * Added a generator that produces the `nidaqmx` module code.
+    * Some properties were renamed in an effort to improve the consistency of the `nidaqmx` module and to support maintainability of the generator. The previous names are still usable, but will emit a `DeprecationWarning` on usage. These deprecated properties may be resolved in a future update.
     * Refactored the repository folder structure as follows:
         * `generated/nidaqmx/` - The output of the code generator and source for the build `nidaqmx` module. Do not directly modify any files in this folder.
         * `nidaqmx_examples/` - Example programs demonstrating how to use the `nidaqmx` module.
         * `src/codegen/` - The code generator.
         * `src/handwritten/` - Hand-maintained files that are copied as-is during code generation.
-        * `src/nidaqmx` - Original location of the `nidaqmx` source code. This is now deprecated and no longer exists.
         * `tests` - Test code that exercises the `nidaqmx` module to ensure it functions correctly and doesn't introduce regressions.
     * Multiple various test improvements in support of the generator refactoring.
 
