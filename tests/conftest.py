@@ -202,3 +202,19 @@ def persisted_task(request):
 def test_assets_directory() -> pathlib.Path:
     """Gets path to test_assets directory."""
     return pathlib.Path(__file__).parent / "test_assets"
+
+
+@pytest.fixture(scope="module")
+def ai_voltage_chan_task(any_x_series_device):
+    """Gets AI Channel task."""
+    with nidaqmx.Task() as task:
+        task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
+        yield task
+
+
+@pytest.fixture(scope="module")
+def ao_voltage_chan_task(any_x_series_device):
+    """Gets AO Channel task."""
+    with nidaqmx.Task() as task:
+        task.ao_channels.add_ao_voltage_chan(any_x_series_device.ao_physical_chans[0].name)
+        yield task
