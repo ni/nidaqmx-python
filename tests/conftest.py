@@ -199,6 +199,20 @@ def persisted_task(request):
 
 
 @pytest.fixture(scope="module")
+def persisted_scale(request):
+    """Gets the persisted scale based on the scale name."""
+    system = nidaqmx.system.System.local()
+    if request.param in system.scales:
+        return system.scales[request.param]
+    pytest.skip(
+        "Could not detect a persisted scale with the requested scale name.  Cannot proceed "
+        "to run tests. Import the NI MAX configuration file located at "
+        "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required scales."
+    )
+    return None
+
+
+@pytest.fixture(scope="module")
 def persisted_channel(request):
     """Gets the persisted channel based on the channel name."""
     system = nidaqmx.system.System.local()
