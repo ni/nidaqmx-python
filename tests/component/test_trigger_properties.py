@@ -22,6 +22,7 @@ def test__trigger__set_float_property__returns_assigned_value(any_x_series_devic
 
         value_to_test = 2.505
         task.triggers.start_trigger.dig_edge_dig_fltr_timebase_rate = value_to_test
+
         assert task.triggers.start_trigger.dig_edge_dig_fltr_timebase_rate == value_to_test
 
 
@@ -30,8 +31,10 @@ def test__trigger__reset_float_property__returns_initial_value(any_x_series_devi
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
 
-        # Default Rate of the pulse width filter timebase in NI PCIe-6363 device is 0.0
+        task.triggers.start_trigger.dig_edge_dig_fltr_timebase_rate = 1.2
+
         del task.triggers.start_trigger.dig_edge_dig_fltr_timebase_rate
+
         assert task.triggers.start_trigger.dig_edge_dig_fltr_timebase_rate == 0.0
 
 
@@ -51,6 +54,7 @@ def test__trigger__set_string_property__returns_assigned_value(any_x_series_devi
 
         value_to_test = "Test Value for Digital Edge Digital Filter Timebase Source"
         task.triggers.start_trigger.dig_edge_dig_fltr_timebase_src = value_to_test
+
         assert task.triggers.start_trigger.dig_edge_dig_fltr_timebase_src == value_to_test
 
 
@@ -59,7 +63,12 @@ def test__trigger__reset_string_property__returns_initial_value(any_x_series_dev
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
 
+        task.triggers.start_trigger.dig_edge_dig_fltr_timebase_src = (
+            "Test Value for Digital Edge Digital Filter Timebase Source"
+        )
+
         del task.triggers.start_trigger.dig_edge_dig_fltr_timebase_src
+
         assert task.triggers.start_trigger.dig_edge_dig_fltr_timebase_src == ""
 
 
@@ -81,6 +90,7 @@ def test__trigger__set_enum_property__returns_assigned_value(any_x_series_device
 
         value_to_test = TriggerType.ANALOG_EDGE
         task.triggers.start_trigger.trig_type = value_to_test
+
         assert task.triggers.start_trigger.trig_type == value_to_test
 
 
@@ -101,8 +111,10 @@ def test__trigger__reset_enum_property__returns_initial_value(any_x_series_devic
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
 
-        # The default trig_type value in NI PCIe-6363 device is "NONE"
+        task.triggers.start_trigger.trig_type = TriggerType.ANALOG_EDGE
+
         del task.triggers.start_trigger.trig_type
+
         assert task.triggers.start_trigger.trig_type == TriggerType.NONE
 
 
@@ -120,9 +132,9 @@ def test__trigger__set_uint32_property__returns_assigned_value(any_x_series_devi
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
 
-        # Test property setter and getter.
         value_to_test = 54544544
         task.triggers.reference_trigger.pretrig_samples = value_to_test
+
         assert task.triggers.reference_trigger.pretrig_samples == value_to_test
 
 
@@ -131,6 +143,8 @@ def test__trigger__reset_uint32_property__returns_initial_value(any_x_series_dev
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
 
-        # The default pretrig_samples value in NI PCIe-6363 device is 2
+        task.triggers.reference_trigger.pretrig_samples = 10
+
         del task.triggers.reference_trigger.pretrig_samples
+
         assert task.triggers.reference_trigger.pretrig_samples == 2
