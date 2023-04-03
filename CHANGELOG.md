@@ -1,6 +1,6 @@
 # Changelog
 
-* [0.6.6](#066)
+* [0.7.0](#070)
 * [0.6.5](#065)
 * [0.6.4](#064)
 * [0.6.3](#063)
@@ -17,15 +17,26 @@
 
 All notable changes to this project will be documented in this file.
 
-## 0.6.6
+## 0.7.0
 
 * ### Merged Pull Requests
-    * [211: Restructure the folder structure and add a basic code generator](https://github.com/ni/nidaqmx-python/pull/211)
     * [217: Handle leading zeros in flatten/unflatten implementation](https://github.com/ni/nidaqmx-python/issues/217)
+    * [219: nidaqmx: Use in-project virtualenvs](https://github.com/ni/nidaqmx-python/pull/219)
+    * [Query: Closed PRs with label:generator_refactor](https://github.com/ni/nidaqmx-python/pulls?page=1&q=is%3Apr+is%3Aclosed+label%3Agenerator_refactor)
+    * [Query: Closed PRs with label:test_improvements](https://github.com/ni/nidaqmx-python/pulls?page=1&q=is%3Apr+is%3Aclosed+label%3Atest_improvements)
+    * [256: nidaqmx: Remove Python 2.7 workarounds](https://github.com/ni/nidaqmx-python/pull/256)
 * ### Resolved Issues
     * [216: Can read channel_names of PersistedTask but not channels](https://github.com/ni/nidaqmx-python/issues/216)
 * ### Major Changes
-    * Refactored the repository folder structure and added a code generator.
+    * Added a generator that produces the `nidaqmx` module code.
+    * Refactored the repository folder structure as follows:
+        * `generated/nidaqmx/` - The output of the code generator and source for the build `nidaqmx` module. Do not directly modify any files in this folder.
+        * `nidaqmx_examples/` - Example programs demonstrating how to use the `nidaqmx` module.
+        * `src/codegen/` - The code generator.
+        * `src/handwritten/` - Hand-maintained files that are copied as-is during code generation.
+        * `src/nidaqmx` - Original location of the `nidaqmx` source code. This is now deprecated and no longer exists.
+        * `tests` - Test code that exercises the `nidaqmx` module to ensure it functions correctly and doesn't introduce regressions.
+    * Multiple various test improvements in support of the generator refactoring.
 
 ## 0.6.5
 

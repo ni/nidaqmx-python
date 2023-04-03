@@ -2506,37 +2506,37 @@ class Device(object):
         return val.value
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ai_supported_meas_types instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_supported_meas_types instead.")
     def ai_meas_types(self):
         return self.ai_supported_meas_types
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ao_supported_output_types instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ao_supported_output_types instead.")
     def ao_output_types(self):
         return self.ao_supported_output_types
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_supported_meas_types instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_supported_meas_types instead.")
     def ci_meas_types(self):
         return self.ci_supported_meas_types
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use co_supported_output_types instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use co_supported_output_types instead.")
     def co_output_types(self):
         return self.co_supported_output_types
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use is_simulated instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use is_simulated instead.")
     def dev_is_simulated(self):
         return self.is_simulated
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use serial_num instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use serial_num instead.")
     def dev_serial_num(self):
         return self.serial_num
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use hwteds_supported instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use hwteds_supported instead.")
     def tedshwteds_supported(self):
         return self.hwteds_supported
 
