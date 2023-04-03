@@ -25,7 +25,7 @@ from nidaqmx.constants import (
 %endif
 
 
-class ReferenceTrigger(object):
+class ReferenceTrigger:
     """
     Represents the reference trigger configurations for a DAQmx task.
     """

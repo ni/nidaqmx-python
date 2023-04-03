@@ -32,7 +32,7 @@ from nidaqmx.constants import (
 %endif
 
 
-class Triggers(object):
+class Triggers:
     """
     Represents the trigger configurations for a DAQmx task.
     """

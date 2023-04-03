@@ -27,7 +27,7 @@ class AOChannel(Channel):
     __slots__ = []
 
     def __repr__(self):
-        return 'AOChannel(name={0})'.format(self._name)
+        return f'AOChannel(name={self._name})'
 
 <%namespace name="property_template" file="/property_template.py.mako"/>\
 %for attribute in attributes:
