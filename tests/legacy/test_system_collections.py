@@ -1,8 +1,6 @@
 """Tests for validating systems collections."""
 import collections.abc
 
-import six
-
 import nidaqmx
 import nidaqmx.system
 from nidaqmx.system._collections.device_collection import DeviceCollection
@@ -12,7 +10,7 @@ from nidaqmx.system._collections.persisted_task_collection import PersistedTaskC
 from nidaqmx.system._collections.physical_channel_collection import PhysicalChannelCollection
 
 
-class TestSystemCollections(object):
+class TestSystemCollections:
     """Contains a collection of pytest tests.
 
     These validate the system collections functionality in the NI-DAQmx Python API.
@@ -41,7 +39,7 @@ class TestSystemCollections(object):
             assert isinstance(scales[0], nidaqmx.system.storage.PersistedScale)
 
             # Test specific property on object.
-            assert isinstance(scales[0].author, six.string_types)
+            assert isinstance(scales[0].author, str)
 
     def test_persisted_task_collection_property(self):
         """Test to validate persisted task collection property."""
@@ -55,7 +53,7 @@ class TestSystemCollections(object):
             assert isinstance(tasks[0], nidaqmx.system.storage.PersistedTask)
 
             # Test specific property on object.
-            assert isinstance(tasks[0].author, six.string_types)
+            assert isinstance(tasks[0].author, str)
 
     def test_persisted_channel_collection_property(self):
         """Test to validate persisted channel collection property."""
@@ -69,7 +67,7 @@ class TestSystemCollections(object):
             assert isinstance(global_channels[0], nidaqmx.system.storage.PersistedChannel)
 
             # Test specific property on object.
-            assert isinstance(global_channels[0].author, six.string_types)
+            assert isinstance(global_channels[0].author, str)
 
     def test_physical_channel_collection_property(self, any_x_series_device):
         """Test to validate physical channel collection property."""

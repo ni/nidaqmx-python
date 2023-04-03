@@ -8,7 +8,7 @@ from nidaqmx.utils import flatten_channel_string
 from tests.helpers import generate_random_seed
 
 
-class TestContainerOperations(object):
+class TestContainerOperations:
     """Contains a collection of pytest tests.
 
     This validate the container operations in the Python NI-DAQmx API.

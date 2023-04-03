@@ -5,7 +5,7 @@ import nidaqmx
 from nidaqmx import DaqResourceWarning
 
 
-class TestResourceWarnings(object):
+class TestResourceWarnings:
     """Contains a collection of pytest tests.
 
     These validate the ResourceWarning behavior of the Python NI-DAQmx API.
