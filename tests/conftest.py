@@ -210,13 +210,13 @@ def ai_voltage_chan_with_excit(any_x_series_device):
 
     Used in testing channel property of uint32 and boolean data types.
     """
-    task = nidaqmx.Task()
-    ai_channel = task.ai_channels.add_ai_voltage_chan_with_excit(
-        any_x_series_device.ai_physical_chans[0].name,
-        voltage_excit_source=ExcitationSource.EXTERNAL,
-        voltage_excit_val=0.1,
-    )
-    return ai_channel
+    with nidaqmx.Task() as task:
+        ai_channel = task.ai_channels.add_ai_voltage_chan_with_excit(
+            any_x_series_device.ai_physical_chans[0].name,
+            voltage_excit_source=ExcitationSource.EXTERNAL,
+            voltage_excit_val=0.1,
+        )
+        yield ai_channel
 
 
 @pytest.fixture(scope="module")
@@ -225,14 +225,14 @@ def ai_power_chan(sim_ts_power_device):
 
     Used in testing channel property of enum data type.
     """
-    task = nidaqmx.Task()
-    ai_pwr_channel = task.ai_channels.add_ai_power_chan(
-        f"{sim_ts_power_device.name}/power",
-        voltage_setpoint=6.0,
-        current_setpoint=3.0,
-        output_enable=True,
-    )
-    return ai_pwr_channel
+    with nidaqmx.Task() as task:
+        ai_pwr_channel = task.ai_channels.add_ai_power_chan(
+            f"{sim_ts_power_device.name}/power",
+            voltage_setpoint=6.0,
+            current_setpoint=3.0,
+            output_enable=True,
+        )
+        yield ai_pwr_channel
 
 
 @pytest.fixture(scope="module")
@@ -241,12 +241,12 @@ def ai_rtd_chan(any_x_series_device):
 
     Used in testing channel property of float data type.
     """
-    task = nidaqmx.Task()
-    ai_channel = task.ai_channels.add_ai_rtd_chan(
-        any_x_series_device.ai_physical_chans[0].name,
-        rtd_type=RTDType.PT_3750,
-    )
-    return ai_channel
+    with nidaqmx.Task() as task:
+        ai_channel = task.ai_channels.add_ai_rtd_chan(
+            any_x_series_device.ai_physical_chans[0].name,
+            rtd_type=RTDType.PT_3750,
+        )
+        yield ai_channel
 
 
 @pytest.fixture(scope="module")
@@ -255,8 +255,8 @@ def ci_pulse_width_chan(any_x_series_device):
 
     Used in testing channel property of string data type.
     """
-    task = nidaqmx.Task()
-    ci_channel = task.ci_channels.add_ci_pulse_width_chan(
-        any_x_series_device.ci_physical_chans[0].name,
-    )
-    return ci_channel
+    with nidaqmx.Task() as task:
+        ci_channel = task.ci_channels.add_ci_pulse_width_chan(
+            any_x_series_device.ci_physical_chans[0].name,
+        )
+        yield ci_channel
