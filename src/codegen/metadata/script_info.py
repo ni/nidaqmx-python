@@ -112,5 +112,9 @@ script_info = {
             "relativeOutputPath": "system\\physical_channel.py",
             "templateFile": "system\\physical_channel.py.mako",
         },
+        {
+            "relativeOutputPath": "_task_modules\\triggers.py",
+            "templateFile": "_task_modules\\triggers.py.mako",
+        },
     ]
 }
