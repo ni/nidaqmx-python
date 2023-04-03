@@ -113,9 +113,7 @@ def get_instantiation_lines(function_parameters):
                     )
         else:
             if not param.has_explicit_buffer_size:
-                instantiation_lines.append(
-                    f"{param.parameter_name} = {param.ctypes_data_type}()"
-                )
+                instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
     return instantiation_lines
 
 

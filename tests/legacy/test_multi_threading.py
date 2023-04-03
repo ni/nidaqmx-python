@@ -105,6 +105,5 @@ class TestMultiThreadedReads:
                     actor_ref.stop(timeout=(number_of_samples / sample_rate) + 10)
                 except pykka.Timeout:
                     print(
-                        "Could not stop actor {} within the specified "
-                        "timeout.".format(actor_ref)
+                        "Could not stop actor {} within the specified " "timeout.".format(actor_ref)
                     )

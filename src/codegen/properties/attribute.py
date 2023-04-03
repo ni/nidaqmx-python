@@ -265,9 +265,7 @@ class Attribute:
             and self.ctypes_data_type != "ctypes.c_char_p"
             and self.bitfield_enum is None
         ):
-            argtypes.append(
-                f"wrapped_ndpointer(dtype={self.ctypes_data_type}, flags=('C','W'))"
-            )
+            argtypes.append(f"wrapped_ndpointer(dtype={self.ctypes_data_type}, flags=('C','W'))")
 
         elif self.ctypes_data_type == "ctypes.c_char_p":
             argtypes.append(self.ctypes_data_type)
