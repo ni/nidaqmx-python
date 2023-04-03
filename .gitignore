@@ -5,6 +5,10 @@ __pycache__/
 .tox/
 pytests-py*.xml
 
+# Coverage output
+.coverage
+htmlcov/
+
 # Environments
 .venv
 

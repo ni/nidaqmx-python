@@ -1,4 +1,5 @@
 """Fixtures used in the DAQmx tests."""
+import pathlib
 from enum import Enum
 
 import pytest
@@ -181,6 +182,22 @@ def multi_threading_test_devices():
 
 
 @pytest.fixture(scope="module")
+def persisted_task(request):
+    """Gets the persisted task based on the task name."""
+    system = nidaqmx.system.System.local()
+    task_name = request.param
+
+    if task_name in system.tasks.task_names:
+        return system.tasks[task_name]
+
+    pytest.skip(
+        "Could not detect a persisted task that has the given name."
+        "Cannot proceed to run tests. Import the NI MAX configuration file located at "
+        "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required tasks."
+    )
+    return None
+
+@pytest.fixture(scope="module")
 def persisted_scale(request):
     """Gets the persisted scale based on the scale name."""
     system = nidaqmx.system.System.local()
@@ -192,3 +209,8 @@ def persisted_scale(request):
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required scales."
     )
     return None
+
+@pytest.fixture(scope="module")
+def test_assets_directory() -> pathlib.Path:
+    """Gets path to test_assets directory."""
+    return pathlib.Path(__file__).parent / "test_assets"

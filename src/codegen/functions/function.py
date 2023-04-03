@@ -26,7 +26,11 @@ class Function:
         if "parameters" in function_metadata:
             self._parameters = []
             for parameter in function_metadata["parameters"]:
-                if parameter["name"] != "task" and "python_data_type" in parameter:
+                if (
+                    parameter["name"] != "task"
+                    and "python_data_type" in parameter
+                    and parameter.get("use_in_python_api") is not False
+                ):
                     self._parameters.append(FunctionParameter(parameter))
 
                     if parameter["direction"] == "output":
