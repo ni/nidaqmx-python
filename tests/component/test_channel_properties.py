@@ -8,7 +8,7 @@ from nidaqmx._task_modules.channels.ci_channel import CIChannel
 from nidaqmx.constants import ExcitationSource, PowerIdleOutputBehavior, RTDType
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def ai_voltage_chan_with_excit(any_x_series_device):
     """Creates AI Channel object to measure Voltage.
 
@@ -23,7 +23,7 @@ def ai_voltage_chan_with_excit(any_x_series_device):
         yield ai_channel
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def ai_power_chan(sim_ts_power_device):
     """Creates AI Channel object to measure Power.
 
@@ -39,7 +39,7 @@ def ai_power_chan(sim_ts_power_device):
         yield ai_pwr_channel
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def ai_rtd_chan(any_x_series_device):
     """Creates AI Channel object that use an RTD to measure temperature.
 
@@ -53,7 +53,7 @@ def ai_rtd_chan(any_x_series_device):
         yield ai_channel
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def ci_pulse_width_chan(any_x_series_device):
     """Creates CI Channel object to measure the width of a digital pulse.
 
