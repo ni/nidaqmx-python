@@ -3,10 +3,11 @@ import pytest
 
 import nidaqmx
 from nidaqmx.constants import SampleTimingType
+from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import DaqError
 
 
-def test__buffer__set_int32_property__value_is_set(any_x_series_device):
+def test__ai_task__set_int32_property__value_is_set(any_x_series_device):
     """Test for validating int32 attributes in buffer."""
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
@@ -18,21 +19,22 @@ def test__buffer__set_int32_property__value_is_set(any_x_series_device):
         assert task.in_stream.input_buf_size == 2000000000
 
 
-def test__buffer__set_invalid_int32_value__default_value_is_retained(any_x_series_device):
-    """Test for validating int32 attributes in buffer."""
+def test__ai_task__set_valid_value_to_unsupported_property__unsupported_error_raised(
+    any_x_series_device,
+):
+    """Test for validating unsupported attribute in buffer."""
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
         task.timing.samp_timing_type = SampleTimingType.SAMPLE_CLOCK
 
         # Setting a invalid input buffer size greater than int32
-        with pytest.raises(DaqError):
-            task.in_stream.input_buf_size = 800000000000
-            task.in_stream.read()
+        with pytest.raises(DaqError) as exc_info:
+            task.out_stream.output_buf_size = 2000
 
-        assert task.in_stream.input_buf_size == 1136082944
+        assert exc_info.value.error_code == DAQmxErrors.ATTRIBUTE_NOT_SUPPORTED_IN_TASK_CONTEXT
 
 
-def test__buffer__reset_int32_property__value_is_set_to_default(any_x_series_device):
+def test__ai_task__reset_int32_property__value_is_set_to_default(any_x_series_device):
     """Test for validating int32 attributes in buffer."""
     with nidaqmx.Task() as task:
         task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
