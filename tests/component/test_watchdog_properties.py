@@ -21,7 +21,6 @@ def test__watchdog_task__get_expired__returns_false(any_x_series_device):
 def test__watchdog_task__set_boolean_property__returns_assigned_value(device_by_name):
     """Test to validate setter for boolean property."""
     with nidaqmx.system.WatchdogTask(device_by_name.name, timeout=0.5) as task:
-
         task.expir_trig_trig_on_network_conn_loss = True
 
         assert task.expir_trig_trig_on_network_conn_loss
@@ -30,8 +29,7 @@ def test__watchdog_task__set_boolean_property__returns_assigned_value(device_by_
 @pytest.mark.parametrize("device_by_name", ["cDAQ1"], indirect=True)
 def test__watchdog_task__reset_boolean_property__returns_default_value(device_by_name):
     """Test to validate reset for boolean property."""
-
-    with nidaqmx.system.WatchdogTask(device_by_name.name, timeout=0.5) as task:     
+    with nidaqmx.system.WatchdogTask(device_by_name.name, timeout=0.5) as task:
         task.expir_trig_trig_on_network_conn_loss = True
 
         del task.expir_trig_trig_on_network_conn_loss
@@ -39,14 +37,18 @@ def test__watchdog_task__reset_boolean_property__returns_default_value(device_by
         assert not task.expir_trig_trig_on_network_conn_loss
 
 
-def test__watchdog_task__task_not_running_get_expired_property___throws_daqerror(any_x_series_device):
+def test__watchdog_task__task_not_running_get_expired_property___throws_daqerror(
+    any_x_series_device,
+):
     """Test to validate error case for boolean property."""
     with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
-
         with pytest.raises(DaqError) as exc_info:
             _ = task.expired
 
-        assert exc_info.value.error_type == DAQmxErrors.CANNOT_GET_PROPERTY_WHEN_TASK_NOT_RESERVED_COMMITTED_OR_RUNNING
+        assert (
+            exc_info.value.error_type
+            == DAQmxErrors.CANNOT_GET_PROPERTY_WHEN_TASK_NOT_RESERVED_COMMITTED_OR_RUNNING
+        )
 
 
 def test__watchdog_task__get_enum_property__returns_value(any_x_series_device):
@@ -126,7 +128,7 @@ def test__watchdog_task__reset_float64_property__returns_default_value(any_x_ser
         task.cfg_watchdog_do_expir_states(expir_states)
 
         del task.timeout
-        
+
         assert task.timeout == 10
 
 
@@ -167,5 +169,5 @@ def test__watchdog_task__reset_string_property__returns_default_value(any_x_seri
         task.expir_trig_dig_edge_src = "PFI0"
 
         del task.expir_trig_dig_edge_src
-        
+
         assert task.expir_trig_dig_edge_src == ""
