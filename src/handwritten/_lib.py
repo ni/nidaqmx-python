@@ -1,9 +1,12 @@
+from __future__ import annotations
+
 from ctypes.util import find_library
 import ctypes
 from numpy.ctypeslib import ndpointer
 import platform
 import sys
 import threading
+from typing import Union
 
 from nidaqmx.errors import Error
 
@@ -20,20 +23,31 @@ class InvalidHandleError(Error):
     pass
 
 
-class c_bool32(ctypes.c_uint):
+class c_bool32(ctypes.Structure):
     """
     Specifies a custom ctypes data type to represent 32-bit booleans.
     """
+    _fields_ = [("_as_u32", ctypes.c_uint32)]
 
-    def _getter(self):
-        return bool(ctypes.c_uint.value.__get__(self))
+    def __init__(self, val: Union[bool, int] = False):
+        self._as_u32 = int(val)
 
-    def _setter(self, val):
-        ctypes.c_uint.value.__set__(self, int(val))
+    @property
+    def value(self) -> bool:
+        return bool(self._as_u32)
+    
+    @value.setter
+    def value(self, val: Union[bool, int]) -> None:
+        self._as_u32 = int(val)
 
-    value = property(_getter, _setter)
-
-    del _getter, _setter
+    @classmethod
+    def from_param(self, param: Union[bool, int, c_bool32]) -> c_bool32:
+        if isinstance(param, (bool, int)):
+            return c_bool32(param)
+        elif isinstance(param, c_bool32):
+            return param
+        else:
+            raise TypeError(f"Expected bool/int/c_bool32 instead of {type(param)}")
 
 
 class CtypesByteString:
