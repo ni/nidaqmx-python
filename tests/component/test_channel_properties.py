@@ -93,8 +93,6 @@ def test__channel__reset_boolean_property__returns_default_value(
 
 def test__channel__get_enum_property__returns_value(ai_power_chan: AIChannel):
     """Test to validate getter for channel property of enum type."""
-    # Default value is to maintain the existing value after the task is uncommitted
-    # in NI TS-15200 device
     assert ai_power_chan.pwr_idle_output_behavior == PowerIdleOutputBehavior.MAINTAIN_EXISTING_VALUE
 
 
@@ -107,8 +105,6 @@ def test__channel__set_enum_property__returns_assigned_value(ai_power_chan: AICh
 
 def test__channel__reset_enum_property__returns_default_value(ai_power_chan: AIChannel):
     """Test to validate resetting channel property of enum type."""
-    # Default value is to maintain the existing value after the task is uncommitted
-    # in NI TS-15200 device
     ai_power_chan.pwr_idle_output_behavior = PowerIdleOutputBehavior.OUTPUT_DISABLED
 
     del ai_power_chan.pwr_idle_output_behavior
@@ -118,8 +114,6 @@ def test__channel__reset_enum_property__returns_default_value(ai_power_chan: AIC
 
 def test__channel__get_float_property__returns_value(ai_rtd_chan: AIChannel):
     """Test to validate getter for channel property of float type."""
-    # Default 'A' constant of the Callendar-Van Dusen equation
-    # in the NI PCIe-6363 device is "0.00381"
     assert ai_rtd_chan.ai_rtd_a == 0.00381
 
 
@@ -133,8 +127,6 @@ def test__channel__set_float_property__returns_assigned_value(ai_rtd_chan: AICha
 
 def test__channel__reset_float_property__returns_default_value(ai_rtd_chan: AIChannel):
     """Test to validate resetting channel property of float type."""
-    # Default 'A' constant of the Callendar-Van Dusen equation
-    # in the NI PCIe-6363 device is "0.00381"
     ai_rtd_chan.ai_rtd_a = 0.058388
 
     del ai_rtd_chan.ai_rtd_a
@@ -144,8 +136,6 @@ def test__channel__reset_float_property__returns_default_value(ai_rtd_chan: AICh
 
 def test__channel__get_string_property__returns_value(ci_pulse_width_chan: CIChannel):
     """Test to validate getter for channel property of string type."""
-    # Default timebase value of the pulse width filter
-    # in the NI PCIe-6363 device is "100MHzTimebase"
     assert ci_pulse_width_chan.ci_ctr_timebase_dig_fltr_timebase_src == "100MHzTimebase"
 
 
@@ -159,8 +149,6 @@ def test__channel__set_string_property__returns_assigned_value(ci_pulse_width_ch
 
 def test__channel__reset_string_property__returns_default_value(ci_pulse_width_chan: CIChannel):
     """Test to validate resetting channel property of string type."""
-    # Default timebase value of the pulse width filter
-    # in the NI PCIe-6363 device is "100MHzTimebase"
     ci_pulse_width_chan.ci_ctr_timebase_dig_fltr_timebase_src = "20MHzTimebase"
 
     del ci_pulse_width_chan.ci_ctr_timebase_dig_fltr_timebase_src
@@ -170,8 +158,6 @@ def test__channel__reset_string_property__returns_default_value(ci_pulse_width_c
 
 def test__channel__get_uint32_property__returns_value(ai_voltage_chan_with_excit: AIChannel):
     """Test to validate getter for channel property of uint32 type."""
-    # Default number of bits to return in a raw sample
-    # in the NI PCIe-6363 device is "16"
     assert ai_voltage_chan_with_excit.ai_lossy_lsb_removal_compressed_samp_size == 16
 
 
@@ -189,7 +175,6 @@ def test__channel__reset_uint32_property__returns_default_value(
     ai_voltage_chan_with_excit: AIChannel,
 ):
     """Test to validate resetting channel property of uint32 type."""
-    # Default number of bits to return in a raw sample in the NI PCIe-6363 device is "16"
     ai_voltage_chan_with_excit.ai_lossy_lsb_removal_compressed_samp_size = 15
 
     del ai_voltage_chan_with_excit.ai_lossy_lsb_removal_compressed_samp_size
