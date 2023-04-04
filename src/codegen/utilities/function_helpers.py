@@ -261,6 +261,7 @@ def instantiate_explicit_output_param(param):
 
 
 def get_return_value_for_func(func):
+    """Gets return value for the function."""
     for output_parameter in func.base_parameters:
         if output_parameter.direction == "out" and FUNCTION_RETURN_TYPE_MAP_SET.get(
             output_parameter.type, None
@@ -270,10 +271,12 @@ def get_return_value_for_func(func):
 
 
 def get_input_params(func):
+    """Gets input parameters for the function."""
     return (p for p in func.base_parameters if p.direction == "in")
 
 
 def get_skippable_param_for_func(func):
+    """Gets parameter name that needs to be skipped for the function."""
     for param in func["parameters"]:
         size = param.get("size", dict())
         if size.get("mechanism", None) == "ivi-dance":
