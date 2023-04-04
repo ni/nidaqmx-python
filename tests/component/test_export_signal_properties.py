@@ -3,7 +3,7 @@
 import pytest
 
 import nidaqmx
-from nidaqmx.constants import ExportAction
+from nidaqmx.constants import ExportAction, TaskMode
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import DaqError
 from nidaqmx.task import Task
@@ -56,10 +56,10 @@ def test__export_signal__set_invalid_routing_destination__throws_daqerror(
     ai_voltage_task: Task,
 ):
     """Test to validate setter for export signal property of string type."""
-    ai_voltage_task.export_signals.start_trig_output_term = "RTSI"
-
     with pytest.raises(DaqError) as exc_info:
-        _ = ai_voltage_task.export_signals.start_trig_output_term
+        ai_voltage_task.export_signals.start_trig_output_term = "RTSI"
+        _ = ai_voltage_task.control(TaskMode.TASK_VERIFY)
+        
     assert (
         exc_info.value.error_type == DAQmxErrors.INVALID_ROUTING_DESTINATION_TERMINAL_NAME_ROUTING
     )
