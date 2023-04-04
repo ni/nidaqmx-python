@@ -32,7 +32,7 @@
 
         if (attribute.is_list and attribute.ctypes_data_type != 'ctypes.c_char_p' and
                 attribute.bitfield_enum is None):
-            argtypes.append("wrapped_ndpointer(dtype={0}, flags=('C','W'))"
+            argtypes.append("wrapped_ndpointer(dtype={}, flags=('C','W'))"
                             .format(attribute.ctypes_data_type))
         elif attribute.ctypes_data_type == 'ctypes.c_char_p':
             argtypes.append('ctypes_byte_str')

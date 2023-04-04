@@ -27,7 +27,7 @@ from nidaqmx.constants import (
 %endif
 
 
-class Timing(object):
+class Timing:
     """
     Represents the timing configurations for a DAQmx task.
     """

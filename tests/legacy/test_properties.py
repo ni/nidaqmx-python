@@ -2,7 +2,6 @@
 import random
 
 import pytest
-import six
 
 import nidaqmx
 import nidaqmx.system
@@ -11,7 +10,7 @@ from nidaqmx.constants import AcquisitionType, UsageTypeAI
 from tests.helpers import generate_random_seed
 
 
-class TestPropertyBasicDataTypes(object):
+class TestPropertyBasicDataTypes:
     """Contains a collection of pytest tests.
 
     This validates the property getter,setter and deleter methods for different basic data types.
@@ -24,7 +23,7 @@ class TestPropertyBasicDataTypes(object):
 
             task.timing.cfg_samp_clk_timing(1000)
             task.triggers.start_trigger.cfg_dig_edge_start_trig(
-                "/{0}/Ctr0InternalOutput".format(any_x_series_device.name)
+                f"/{any_x_series_device.name}/Ctr0InternalOutput"
             )
 
             # Test property initial value.
@@ -146,7 +145,7 @@ class TestPropertyBasicDataTypes(object):
             assert task.timing.samp_clk_timebase_div == 100000
 
 
-class TestPropertyListDataTypes(object):
+class TestPropertyListDataTypes:
     """Contains a collection of pytest tests.
 
     This validates the property getter, setter, and deleter methods for list data types.
@@ -159,7 +158,7 @@ class TestPropertyListDataTypes(object):
         terminals = any_x_series_device.terminals
 
         assert isinstance(terminals, list)
-        assert isinstance(terminals[0], six.string_types)
+        assert isinstance(terminals[0], str)
 
     def test_list_of_enums_property(self, any_x_series_device):
         """Test for validating list of enums property."""
@@ -172,9 +171,6 @@ class TestPropertyListDataTypes(object):
     @pytest.mark.parametrize("device_by_name", ["bridgeTester"], indirect=True)
     def test_list_of_floats_property(self, device_by_name, seed):
         """Test for validating list of float property."""
-        if device_by_name is None:
-            pytest.skip("requires bridge device")
-
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 

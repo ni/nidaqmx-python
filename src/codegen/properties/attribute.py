@@ -265,15 +265,13 @@ class Attribute:
             and self.ctypes_data_type != "ctypes.c_char_p"
             and self.bitfield_enum is None
         ):
-            argtypes.append(
-                "wrapped_ndpointer(dtype={0}, flags=('C','W'))".format(self.ctypes_data_type)
-            )
+            argtypes.append(f"wrapped_ndpointer(dtype={self.ctypes_data_type}, flags=('C','W'))")
 
         elif self.ctypes_data_type == "ctypes.c_char_p":
             argtypes.append(self.ctypes_data_type)
 
         else:
-            argtypes.append("ctypes.POINTER({0})".format(self.ctypes_data_type))
+            argtypes.append(f"ctypes.POINTER({self.ctypes_data_type})")
 
         if self.has_explicit_read_buffer_size:
             argtypes.append("ctypes.c_uint")
@@ -294,15 +292,15 @@ class Attribute:
         """Gets the return type of attributes to be used in description."""
         constants_path = "nidaqmx.constants"
         if self.is_enum and not self.is_list:
-            return ":class:`{0}.{1}`".format(constants_path, self.enum)
+            return f":class:`{constants_path}.{self.enum}`"
         elif self.is_object and not self.is_list:
-            return ":class:`{0}.{1}`".format(self.object_module_location, self.object_type)
+            return f":class:`{self.object_module_location}.{self.object_type}`"
         elif self.is_enum and self.is_list:
-            return "List[:class:`{0}.{1}`]".format(constants_path, self.enum)
+            return f"List[:class:`{constants_path}.{self.enum}`]"
         elif self.is_object and self.is_list:
-            return "List[:class:`{0}.{1}`]".format(self.object_module_location, self.object_type)
+            return f"List[:class:`{self.object_module_location}.{self.object_type}`]"
         elif self.is_list:
-            return "List[{0}]".format(self.python_data_type)
+            return f"List[{self.python_data_type}]"
         else:
             return self.python_data_type
 

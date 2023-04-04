@@ -26,7 +26,7 @@ from nidaqmx.constants import (
 %endif
 
 
-class StartTrigger(object):
+class StartTrigger:
     """
     Represents the start trigger configurations for a DAQmx task.
     """

@@ -2,7 +2,6 @@ from ctypes.util import find_library
 import ctypes
 from numpy.ctypeslib import ndpointer
 import platform
-import six
 import sys
 import threading
 
@@ -37,13 +36,13 @@ class c_bool32(ctypes.c_uint):
     del _getter, _setter
 
 
-class CtypesByteString(object):
+class CtypesByteString:
     """
     Custom argtype that automatically converts unicode strings to ASCII
     strings in Python 3.
     """
     def from_param(self, param):
-        if isinstance(param, six.text_type):
+        if isinstance(param, str):
             param = param.encode('ascii')
         return ctypes.c_char_p(param)
 
@@ -117,7 +116,7 @@ def enum_list_to_bitfield(enum_list, bitfield_enum_type):
     return bitfield_value
 
 
-class DaqFunctionImporter(object):
+class DaqFunctionImporter:
     """
     Wraps the function getter function of a ctypes library.
 
@@ -139,12 +138,12 @@ class DaqFunctionImporter(object):
             return cfunc
         except AttributeError:
             raise DaqFunctionNotSupportedError(
-                'The NI-DAQmx function "{0}" is not supported in this '
+                'The NI-DAQmx function "{}" is not supported in this '
                 'version of NI-DAQmx. Visit ni.com/downloads to upgrade your '
                 'version of NI-DAQmx.'.format(function))
 
 
-class DaqLibImporter(object):
+class DaqLibImporter:
     """
     Encapsulates NI-DAQmx library importing and handle type parsing logic.
     """
@@ -190,19 +189,12 @@ class DaqLibImporter(object):
         cdll = None
 
         if sys.platform.startswith('win') or sys.platform.startswith('cli'):
-            lib_name = "nicaiu"
-
-            # Converting to ASCII to workaround issue in Python 2.7.13:
-            # https://bugs.python.org/issue29082
-            if sys.version_info < (3,):
-                lib_name = lib_name.encode('ascii')
-
             if 'iron' in platform.python_implementation().lower():
                 windll = ctypes.windll.nicaiu
                 cdll = ctypes.cdll.nicaiu
             else:
-                windll = ctypes.windll.LoadLibrary(lib_name)
-                cdll = ctypes.cdll.LoadLibrary(lib_name)
+                windll = ctypes.windll.LoadLibrary('nicaiu')
+                cdll = ctypes.cdll.LoadLibrary('nicaiu')
 
         elif sys.platform.startswith('linux'):
             # On linux you can use the command find_library('nidaqmx')
@@ -216,7 +208,7 @@ class DaqLibImporter(object):
                     'contact National Instruments for support.')
         else:
             raise DaqNotFoundError(
-                'NI-DAQmx Python is not supported on this platform: {0}. '
+                'NI-DAQmx Python is not supported on this platform: {}. '
                 'Please direct any questions or feedback to National '
                 'Instruments.'.format(sys.platform))
 

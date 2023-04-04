@@ -11,7 +11,7 @@ from nidaqmx.constants import (
     Signal)
 
 
-class ExportSignals(object):
+class ExportSignals:
     """
     Represents the exported signal configurations for a DAQmx task.
     """

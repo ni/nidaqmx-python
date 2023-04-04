@@ -11,7 +11,8 @@ jobs:
       - ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.7"]
+        # The codegen scripts require Python 3.8 or later.
+        python-version: ["3.8"]
 
     steps:
       - uses: actions/checkout@v3
@@ -31,6 +32,8 @@ jobs:
         run: |
           poetry run ni-python-styleguide lint
       - name: Generate ni-daqmx files
-        run: poetry run python -m codegen --dest generated/nidaqmx
+        run: |
+          rm -fr generated/nidaqmx
+          poetry run python src/codegen --dest generated/nidaqmx
       - name: Check for files dirtied by codegen
         run: git diff --exit-code

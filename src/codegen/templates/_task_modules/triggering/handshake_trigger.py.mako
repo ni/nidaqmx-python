@@ -24,7 +24,7 @@ from nidaqmx.constants import (
 %endif
 
 
-class HandshakeTrigger(object):
+class HandshakeTrigger:
     """
     Represents the handshake trigger configurations for a DAQmx task.
     """

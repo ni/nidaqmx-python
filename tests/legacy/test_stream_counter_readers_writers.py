@@ -37,7 +37,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             write_task.timing.cfg_implicit_timing(samps_per_chan=number_of_pulses)
 
             read_task.ci_channels.add_ci_count_edges_chan(counters[1])
-            read_task.ci_channels.all.ci_count_edges_term = "/{0}InternalOutput".format(counters[0])
+            read_task.ci_channels.all.ci_count_edges_term = f"/{counters[0]}InternalOutput"
 
             reader = CounterReader(read_task.in_stream)
 
@@ -67,7 +67,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             sample_clk_task.co_channels.add_co_pulse_chan_freq(counters[0], freq=frequency)
             actual_frequency = sample_clk_task.co_channels.all.co_pulse_freq
             sample_clk_task.timing.cfg_implicit_timing(samps_per_chan=number_of_samples)
-            samp_clk_terminal = "/{0}InternalOutput".format(counters[0])
+            samp_clk_terminal = f"/{counters[0]}InternalOutput"
 
             write_task.co_channels.add_co_pulse_chan_freq(counters[1], freq=actual_frequency)
             write_task.timing.cfg_implicit_timing(samps_per_chan=number_of_samples)
@@ -76,7 +76,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             write_task.triggers.arm_start_trigger.dig_edge_src = samp_clk_terminal
 
             read_task.ci_channels.add_ci_count_edges_chan(counters[2], edge=Edge.RISING)
-            read_task.ci_channels.all.ci_count_edges_term = "/{0}InternalOutput".format(counters[1])
+            read_task.ci_channels.all.ci_count_edges_term = f"/{counters[1]}InternalOutput"
             read_task.timing.cfg_samp_clk_timing(
                 actual_frequency,
                 source=samp_clk_terminal,
@@ -117,7 +117,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             actual_frequency = write_task.co_channels.all.co_pulse_freq
 
             read_task.ci_channels.add_ci_freq_chan(counters[1], min_val=1000, max_val=10000)
-            read_task.ci_channels.all.ci_freq_term = "/{0}InternalOutput".format(counters[0])
+            read_task.ci_channels.all.ci_freq_term = f"/{counters[0]}InternalOutput"
 
             reader = CounterReader(read_task.in_stream)
 
@@ -147,7 +147,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             read_task.ci_channels.add_ci_freq_chan(
                 counters[2], min_val=1000, max_val=10000, edge=Edge.RISING
             )
-            read_task.ci_channels.all.ci_freq_term = "/{0}InternalOutput".format(counters[1])
+            read_task.ci_channels.all.ci_freq_term = f"/{counters[1]}InternalOutput"
             read_task.timing.cfg_implicit_timing(samps_per_chan=number_of_samples)
 
             read_task.start()
@@ -184,7 +184,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             write_task.timing.cfg_implicit_timing(sample_mode=AcquisitionType.CONTINUOUS)
 
             read_task.ci_channels.add_ci_pulse_chan_freq(counters[1], min_val=1000, max_val=10000)
-            read_task.ci_channels.all.ci_pulse_freq_term = "/{0}InternalOutput".format(counters[0])
+            read_task.ci_channels.all.ci_pulse_freq_term = f"/{counters[0]}InternalOutput"
 
             read_task.start()
             write_task.start()
@@ -214,7 +214,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             write_task.control(TaskMode.TASK_COMMIT)
 
             read_task.ci_channels.add_ci_pulse_chan_freq(counters[1], min_val=1000, max_val=10000)
-            read_task.ci_channels.all.ci_pulse_freq_term = "/{0}InternalOutput".format(counters[0])
+            read_task.ci_channels.all.ci_pulse_freq_term = f"/{counters[0]}InternalOutput"
             read_task.timing.cfg_implicit_timing(samps_per_chan=number_of_samples)
 
             frequencies_to_test = numpy.array(
@@ -267,7 +267,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             write_task.timing.cfg_implicit_timing(sample_mode=AcquisitionType.CONTINUOUS)
 
             read_task.ci_channels.add_ci_pulse_chan_time(counters[1], min_val=0.0001, max_val=0.001)
-            read_task.ci_channels.all.ci_pulse_time_term = "/{0}InternalOutput".format(counters[0])
+            read_task.ci_channels.all.ci_pulse_time_term = f"/{counters[0]}InternalOutput"
 
             read_task.start()
             write_task.start()
@@ -296,7 +296,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
             write_task.control(TaskMode.TASK_COMMIT)
 
             read_task.ci_channels.add_ci_pulse_chan_time(counters[1], min_val=0.0001, max_val=0.001)
-            read_task.ci_channels.all.ci_pulse_time_term = "/{0}InternalOutput".format(counters[0])
+            read_task.ci_channels.all.ci_pulse_time_term = f"/{counters[0]}InternalOutput"
             read_task.timing.cfg_implicit_timing(samps_per_chan=number_of_samples)
 
             high_times_to_test = numpy.array(
@@ -346,7 +346,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
         with nidaqmx.Task() as write_task, nidaqmx.Task() as read_task:
             write_task.co_channels.add_co_pulse_chan_ticks(
                 counters[0],
-                "/{0}/100kHzTimebase".format(real_x_series_device.name),
+                f"/{real_x_series_device.name}/100kHzTimebase",
                 high_ticks=high_ticks,
                 low_ticks=low_ticks,
             )
@@ -354,11 +354,11 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
 
             read_task.ci_channels.add_ci_pulse_chan_ticks(
                 counters[1],
-                source_terminal="/{0}/100kHzTimebase".format(real_x_series_device.name),
+                source_terminal=f"/{real_x_series_device.name}/100kHzTimebase",
                 min_val=100,
                 max_val=1000,
             )
-            read_task.ci_channels.all.ci_pulse_ticks_term = "/{0}InternalOutput".format(counters[0])
+            read_task.ci_channels.all.ci_pulse_ticks_term = f"/{counters[0]}InternalOutput"
             read_task.ci_channels.all.ci_pulse_ticks_starting_edge = starting_edge
 
             read_task.start()
@@ -385,7 +385,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
         with nidaqmx.Task() as write_task, nidaqmx.Task() as read_task:
             write_task.co_channels.add_co_pulse_chan_ticks(
                 counters[0],
-                "/{0}/100kHzTimebase".format(real_x_series_device.name),
+                f"/{real_x_series_device.name}/100kHzTimebase",
                 idle_state=Level.HIGH,
             )
             write_task.timing.cfg_implicit_timing(samps_per_chan=number_of_samples + 1)
@@ -393,11 +393,11 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
 
             read_task.ci_channels.add_ci_pulse_chan_ticks(
                 counters[1],
-                source_terminal="/{0}/100kHzTimebase".format(real_x_series_device.name),
+                source_terminal=f"/{real_x_series_device.name}/100kHzTimebase",
                 min_val=100,
                 max_val=1000,
             )
-            read_task.ci_channels.all.ci_pulse_ticks_term = "/{0}InternalOutput".format(counters[0])
+            read_task.ci_channels.all.ci_pulse_ticks_term = f"/{counters[0]}InternalOutput"
             read_task.timing.cfg_implicit_timing(samps_per_chan=number_of_samples)
 
             high_ticks_to_test = numpy.array(

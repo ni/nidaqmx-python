@@ -24,9 +24,9 @@ class DaqError(Error):
             error_code (int): Specifies the NI-DAQmx error code.
         """
         if task_name:
-            message = '{0}\n\nTask Name: {1}'.format(message, task_name)
+            message = f'{message}\n\nTask Name: {task_name}'
 
-        super(DaqError, self).__init__(message)
+        super().__init__(message)
 
         self._error_code = int(error_code)
 
@@ -63,9 +63,9 @@ class DaqReadError(DaqError):
             error_code (int): Specifies the NI-DAQmx error code.
         """
         if task_name:
-            message = '{0}\n\nTask Name: {1}'.format(message, task_name)
+            message = f'{message}\n\nTask Name: {task_name}'
 
-        super(DaqReadError, self).__init__(message, error_code, task_name)
+        super().__init__(message, error_code, task_name)
 
         self._error_code = int(error_code)
         self._samps_per_chan_read = samps_per_chan_read
@@ -96,9 +96,9 @@ class DaqWriteError(DaqError):
             samps_per_chan_written (int): Specifies the number of samples written.
         """
         if task_name:
-            message = '{0}\n\nTask Name: {1}'.format(message, task_name)
+            message = f'{message}\n\nTask Name: {task_name}'
 
-        super(DaqWriteError, self).__init__(message, error_code, task_name)
+        super().__init__(message, error_code, task_name)
 
         self._error_code = int(error_code)
         self._samps_per_chan_written = samps_per_chan_written
@@ -127,8 +127,8 @@ class DaqWarning(Warning):
             message (string): Specifies the warning message.
             error_code (int): Specifies the NI-DAQmx error code.
         """
-        super(DaqWarning, self).__init__(
-            '\nWarning {0} occurred.\n\n{1}'.format(error_code, message))
+        super().__init__(
+            f'\nWarning {error_code} occurred.\n\n{message}')
 
         self._error_code = int(error_code)
 
@@ -153,20 +153,7 @@ class DaqWarning(Warning):
         return self._error_type
 
 
-class _ResourceWarning(Warning):
-    """
-    Resource warning raised by any NI-DAQmx method.
-
-    Used in place of built-in ResourceWarning to allow Python 2.7 support.
-    """
-    pass
-
-
-# If ResourceWarning is in exceptions, it is also in the built-in namespace.
-try:
-    DaqResourceWarning = ResourceWarning
-except NameError:
-    DaqResourceWarning = _ResourceWarning
+DaqResourceWarning = ResourceWarning
 
 warnings.filterwarnings("always", category=DaqWarning)
 warnings.filterwarnings("always", category=DaqResourceWarning)
