@@ -2,6 +2,7 @@
 
 import ctypes
 import numpy
+import deprecation
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx._task_modules.read_functions import _read_raw
@@ -13,7 +14,7 @@ from nidaqmx.constants import (
     READ_ALL_AVAILABLE, ReadRelativeTo, WaitMode)
 
 
-class InStream(object):
+class InStream:
     """
     Exposes an input data stream on a DAQmx task.
 
@@ -26,7 +27,7 @@ class InStream(object):
         self._handle = task._handle
         self._timeout = 10.0
 
-        super(InStream, self).__init__()
+        super().__init__()
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -41,7 +42,7 @@ class InStream(object):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return 'InStream(task={0})'.format(self._task.name)
+        return f'InStream(task={self._task.name})'
 
     @property
     def timeout(self):

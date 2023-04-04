@@ -6,7 +6,7 @@ import nidaqmx.system
 from nidaqmx.constants import TaskMode
 
 
-class TestChannels(object):
+class TestChannels:
     """Contains a collection of pytest tests.
 
     This validate the channel objects in the NI-DAQmx Python API.

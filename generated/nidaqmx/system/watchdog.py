@@ -17,11 +17,13 @@ from nidaqmx.system._watchdog_modules.expiration_states_collection import (
 from nidaqmx.utils import flatten_channel_string
 from nidaqmx.constants import (
     Edge, TriggerType, WDTTaskAction)
+from nidaqmx.types import (
+    AOExpirationState, COExpirationState, DOExpirationState)
 
 __all__ = ['WatchdogTask']
 
 
-class WatchdogTask(object):
+class WatchdogTask:
     """
     Represents the watchdog configurations for a DAQmx task.
     """
@@ -73,7 +75,7 @@ class WatchdogTask(object):
     def __del__(self):
         if self._handle is not None:
             warnings.warn(
-                'Task of name "{0}" was not explicitly closed before it was '
+                'Task of name "{}" was not explicitly closed before it was '
                 'destructed. Resources on the task device may still be '
                 'reserved.'.format(self.name), DaqResourceWarning)
 
@@ -588,7 +590,7 @@ class WatchdogTask(object):
         """
         if self._handle is None:
             warnings.warn(
-                'Attempted to close NI-DAQmx task of name "{0}" but task was '
+                'Attempted to close NI-DAQmx task of name "{}" but task was '
                 'already closed.'.format(self._saved_name), DaqResourceWarning)
             return
 

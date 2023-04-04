@@ -1,6 +1,5 @@
 import ctypes
 import numpy
-import six
 import warnings
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
@@ -43,11 +42,11 @@ from nidaqmx.utils import unflatten_channel_string, flatten_channel_string
 __all__ = ['Task']
 
 
-class UnsetNumSamplesSentinel(object):
+class UnsetNumSamplesSentinel:
     pass
 
 
-class UnsetAutoStartSentinel(object):
+class UnsetAutoStartSentinel:
     pass
 
 
@@ -58,7 +57,7 @@ del UnsetNumSamplesSentinel
 del UnsetAutoStartSentinel
 
 
-class Task(object):
+class Task:
     """
     Represents a DAQmx Task.
     """
@@ -96,7 +95,7 @@ class Task(object):
     def __del__(self):
         if self._handle:
             warnings.warn(
-                'Task of name "{0}" was not explicitly closed before it was '
+                'Task of name "{}" was not explicitly closed before it was '
                 'destructed. Resources on the task device may still be '
                 'reserved.'.format(self._saved_name), DaqResourceWarning)
 
@@ -118,7 +117,7 @@ class Task(object):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return 'Task(name={0})'.format(self.name)
+        return f'Task(name={self.name})'
 
     @property
     def name(self):
@@ -455,7 +454,7 @@ class Task(object):
         """
         if self._handle is None:
             warnings.warn(
-                'Attempted to close NI-DAQmx task of name "{0}" but task was '
+                'Attempted to close NI-DAQmx task of name "{}" but task was '
                 'already closed.'.format(self._saved_name), DaqResourceWarning)
             return
 
@@ -1122,8 +1121,8 @@ class Task(object):
             'If you are using boolean data, make sure the array dimension '
             'for lines in the data matches the number of lines in the '
             'channel.\n\n'
-            'Number of Lines Per Channel in Task: {0}\n'
-            'Number of Lines Per Channel in Data: {1}'
+            'Number of Lines Per Channel in Task: {}\n'
+            'Number of Lines Per Channel in Data: {}'
             .format(num_lines_expected, num_lines_in_data),
             DAQmxErrors.NUM_LINES_MISMATCH_IN_READ_OR_WRITE,
             task_name=self.name)
@@ -1137,8 +1136,8 @@ class Task(object):
             'When writing, supply data for all channels in the task. '
             'Alternatively, modify the task to contain the same number of '
             'channels as the data written.\n\n'
-            'Number of Channels in Task: {0}\n'
-            'Number of Channels in Data: {1}'
+            'Number of Channels in Task: {}\n'
+            'Number of Channels in Data: {}'
             .format(number_of_channels, number_of_channels_in_data),
             DAQmxErrors.WRITE_NUM_CHANS_MISMATCH, task_name=self.name)
 
@@ -1285,7 +1284,7 @@ class Task(object):
                         'Write failed, because this write method only accepts '
                         'boolean samples when there is one digital line per '
                         'channel in a task.\n\n'
-                        'Requested sample type: {0}'.format(type(element)),
+                        'Requested sample type: {}'.format(type(element)),
                         DAQmxErrors.UNKNOWN, task_name=self.name)
 
                 data = numpy.asarray(data, dtype=bool)
@@ -1293,13 +1292,13 @@ class Task(object):
                     self._handle, data, number_of_samples_per_channel,
                     auto_start, timeout)
             else:
-                if (not isinstance(element, six.integer_types) and
+                if (not isinstance(element, int) and
                         not isinstance(element, numpy.uint32)):
                     raise DaqError(
                         'Write failed, because this write method only accepts '
                         'unsigned 32-bit integer samples when there are '
                         'multiple digital lines per channel in a task.\n\n'
-                        'Requested sample type: {0}'.format(type(element)),
+                        'Requested sample type: {}'.format(type(element)),
                         DAQmxErrors.UNKNOWN, task_name=self.name)
 
                 data = numpy.asarray(data, dtype=numpy.uint32)

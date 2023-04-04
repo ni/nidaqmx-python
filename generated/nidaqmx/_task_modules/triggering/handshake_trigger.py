@@ -11,7 +11,7 @@ from nidaqmx.constants import (
     Level, TriggerType)
 
 
-class HandshakeTrigger(object):
+class HandshakeTrigger:
     """
     Represents the handshake trigger configurations for a DAQmx task.
     """

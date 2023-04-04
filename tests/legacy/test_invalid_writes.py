@@ -10,7 +10,7 @@ from nidaqmx.utils import flatten_channel_string
 from tests.helpers import generate_random_seed
 
 
-class TestInvalidWrites(object):
+class TestInvalidWrites:
     """Contains a collection of pytest tests.
 
     These validate the write functionality with improper data.

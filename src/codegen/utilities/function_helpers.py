@@ -110,7 +110,7 @@ def get_parameter_signature(is_python_factory, sorted_params):
         params_with_defaults.append("self")
     for param in sorted_params:
         if param._optional:
-            params_with_defaults.append("{0}={1}".format(param.parameter_name, param.default))
+            params_with_defaults.append(f"{param.parameter_name}={param.default}")
         else:
             params_with_defaults.append(param.parameter_name)
 
@@ -164,9 +164,7 @@ def get_instantiation_lines(function_parameters):
                     )
         else:
             if not param.has_explicit_buffer_size:
-                instantiation_lines.append(
-                    "{0} = {1}()".format(param.parameter_name, param.ctypes_data_type)
-                )
+                instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
     return instantiation_lines
 
 
@@ -190,7 +188,7 @@ def get_arguments_type(functions_metadata):
 def to_param_argtype(parameter):
     """Formats argument types."""
     if parameter.is_list:
-        return "wrapped_ndpointer(dtype={0}, flags=('C','W'))".format(parameter.ctypes_data_type)
+        return f"wrapped_ndpointer(dtype={parameter.ctypes_data_type}, flags=('C','W'))"
     else:
         if parameter.direction == "in":
             # If is string input parameter, use separate custom
@@ -203,7 +201,7 @@ def to_param_argtype(parameter):
             if parameter.ctypes_data_type == "ctypes.c_char_p":
                 return parameter.ctypes_data_type
             else:
-                return "ctypes.POINTER({0})".format(parameter.ctypes_data_type)
+                return f"ctypes.POINTER({parameter.ctypes_data_type})"
 
 
 def get_explicit_output_param(output_parameters):
@@ -216,7 +214,7 @@ def get_explicit_output_param(output_parameters):
             'calls the C function once with "buffer_size = 0" to get the '
             "buffer size from the returned integer, which is normally an "
             "error code.\n\n"
-            "Output parameters with explicit buffer sizes: {0}".format(explicit_output_params)
+            "Output parameters with explicit buffer sizes: {}".format(explicit_output_params)
         )
     if len(explicit_output_params) == 1:
         return explicit_output_params[0]
@@ -232,17 +230,17 @@ def generate_function_call_args(function_metadata):
     for param in function_metadata.parameters:
         if param.direction == "in":
             if param.is_enum and not param.is_list:
-                function_call_args.append("{0}.value".format(param.parameter_name))
+                function_call_args.append(f"{param.parameter_name}.value")
             else:
                 function_call_args.append(param.parameter_name)
                 if param.has_explicit_buffer_size:
-                    function_call_args.append("len({0})".format(param.parameter_name))
+                    function_call_args.append(f"len({param.parameter_name})")
         else:
             if param.has_explicit_buffer_size:
                 function_call_args.append(param.parameter_name)
                 function_call_args.append("temp_size")
             else:
-                function_call_args.append("ctypes.byref({0})".format(param.parameter_name))
+                function_call_args.append(f"ctypes.byref({param.parameter_name})")
 
     if function_metadata.calling_convention == "Cdecl":
         function_call_args.append("None")
@@ -253,12 +251,13 @@ def generate_function_call_args(function_metadata):
 def instantiate_explicit_output_param(param):
     """Gets instantiate lines for output parameters."""
     if param.is_list:
-        return "{0} = numpy.zeros(temp_size, dtype={1})".format(
+        return "{} = numpy.zeros(temp_size, dtype={})".format(
             param.parameter_name, param.ctypes_data_type
         )
     elif param.ctypes_data_type == "ctypes.c_char_p":
-        return "{0} = ctypes.create_string_buffer(temp_size)".format(param.parameter_name)
+        return f"{param.parameter_name} = ctypes.create_string_buffer(temp_size)"
     
+
 def get_return_value_for_func(func):
     for output_parameter in func.base_parameters:
         if output_parameter.direction == "out" and FUNCTION_RETURN_TYPE_MAP_SET.get(output_parameter.type,None):

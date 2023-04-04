@@ -13,7 +13,7 @@ from nidaqmx.constants import (
     Timescale, TriggerType, WindowTriggerCondition1)
 
 
-class StartTrigger(object):
+class StartTrigger:
     """
     Represents the start trigger configurations for a DAQmx task.
     """

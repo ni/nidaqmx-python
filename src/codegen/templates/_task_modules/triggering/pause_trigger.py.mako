@@ -25,7 +25,7 @@ from nidaqmx.constants import (
 %endif
 
 
-class PauseTrigger(object):
+class PauseTrigger:
     """
     Represents the pause trigger configurations for a DAQmx task.
     """

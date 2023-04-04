@@ -10,7 +10,7 @@ from nidaqmx.constants import (
     Level, WatchdogAOExpirState, WatchdogCOExpirState)
 
 
-class ExpirationState(object):
+class ExpirationState:
     """
     Represents a DAQmx Watchdog expiration state.
     """

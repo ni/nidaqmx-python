@@ -23,7 +23,7 @@ from nidaqmx.constants import (
 from tests.helpers import generate_random_seed
 
 
-class TestAnalogCreateChannels(object):
+class TestAnalogCreateChannels:
     """Contains a collection of pytest tests.
 
     These validate the analog Create Channel functions in the NI-DAQmx Python API.

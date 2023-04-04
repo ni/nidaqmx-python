@@ -17,7 +17,7 @@ class DOChannelCollection(ChannelCollection):
     Contains the collection of digital output channels for a DAQmx Task.
     """
     def __init__(self, task_handle):
-        super(DOChannelCollection, self).__init__(task_handle)
+        super().__init__(task_handle)
 
     def _create_chan(self, lines, line_grouping, name_to_assign_to_lines=''):
         """
@@ -47,7 +47,7 @@ class DOChannelCollection(ChannelCollection):
         else:
             if name_to_assign_to_lines:
                 if num_lines > 1:
-                    name = '{0}0:{1}'.format(
+                    name = '{}0:{}'.format(
                         name_to_assign_to_lines, num_lines-1)
                 else:
                     name = name_to_assign_to_lines

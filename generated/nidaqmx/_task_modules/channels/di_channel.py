@@ -19,7 +19,7 @@ class DIChannel(Channel):
     __slots__ = []
 
     def __repr__(self):
-        return 'DIChannel(name={0})'.format(self._name)
+        return f'DIChannel(name={self._name})'
 
     @property
     def di_acquire_on(self):

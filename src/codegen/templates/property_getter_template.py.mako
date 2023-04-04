@@ -12,7 +12,7 @@
 <%
         instantiation_line = None
         if not attribute.has_explicit_read_buffer_size:
-            instantiation_line = 'val = {0}()'.format(attribute.ctypes_data_type)
+            instantiation_line = 'val = {}()'.format(attribute.ctypes_data_type)
     %>\
     %if instantiation_line:
         ${instantiation_line}
