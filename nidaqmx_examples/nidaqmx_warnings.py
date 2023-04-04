@@ -22,11 +22,13 @@ with nidaqmx.Task() as task:
         task.write([1.1, 2.2, 3.3, 4.4, 5.5], auto_start=True)
         task.stop()
 
-        # Verify some things
-        assert len(w) == 1
-        assert issubclass(w[-1].category, nidaqmx.DaqWarning)
+        if not task.devices[0].is_simulated:
+            # Verify some things
+            assert len(w) == 1
+            assert issubclass(w[-1].category, nidaqmx.DaqWarning)
 
-        print("DaqWarning caught: {0}\n".format(w[-1].message))
+        if w:
+            print("DaqWarning caught: {0}\n".format(w[-1].message))
 
 
 # Raising warnings as exceptions.
