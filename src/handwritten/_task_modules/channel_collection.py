@@ -1,5 +1,4 @@
 import ctypes
-import six
 from collections.abc import Sequence
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str
@@ -23,7 +22,7 @@ class ChannelCollection(Sequence):
     def __contains__(self, item):
         channel_names = self.channel_names
 
-        if isinstance(item, six.string_types):
+        if isinstance(item, str):
             items = unflatten_channel_string(item)
         elif isinstance(item, Channel):
             items = item.channel_names
@@ -56,15 +55,15 @@ class ChannelCollection(Sequence):
             Indicates a channel object representing the subset of virtual
             channels indexed.
         """
-        if isinstance(index, six.integer_types):
+        if isinstance(index, int):
             channel_names = self.channel_names[index]
         elif isinstance(index, slice):
             channel_names = flatten_channel_string(self.channel_names[index])
-        elif isinstance(index, six.string_types):
+        elif isinstance(index, str):
             channel_names = index
         else:
             raise DaqError(
-                'Invalid index type "{0}" used to access channels.'
+                'Invalid index type "{}" used to access channels.'
                 .format(type(index)), DAQmxErrors.UNKNOWN)
 
         if channel_names:
@@ -72,7 +71,7 @@ class ChannelCollection(Sequence):
         else:
             raise DaqError(
                 'You cannot specify an empty index when indexing channels.\n'
-                'Index used: {0}'.format(index), DAQmxErrors.UNKNOWN)
+                'Index used: {}'.format(index), DAQmxErrors.UNKNOWN)
 
     def __hash__(self):
         return hash(self._handle.value)

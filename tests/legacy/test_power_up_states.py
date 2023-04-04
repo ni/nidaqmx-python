@@ -5,7 +5,7 @@ from nidaqmx.constants import PowerUpStates
 from nidaqmx.system.system import DOPowerUpState
 
 
-class TestPowerUpStates(object):
+class TestPowerUpStates:
     """Contains a collection of pytest tests.
 
     This validate the power up states functions in the Python NI-DAQmx API.

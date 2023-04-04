@@ -87,11 +87,11 @@ class TestAnalogSingleChannelReaderWriter(TestDAQmxIOBase):
             # Use a counter output pulse train task as the sample clock source
             # for both the AI and AO tasks.
             sample_clk_task.co_channels.add_co_pulse_chan_freq(
-                "{0}/ctr0".format(real_x_series_device.name), freq=sample_rate
+                f"{real_x_series_device.name}/ctr0", freq=sample_rate
             )
             sample_clk_task.timing.cfg_implicit_timing(samps_per_chan=number_of_samples)
 
-            samp_clk_terminal = "/{0}/Ctr0InternalOutput".format(real_x_series_device.name)
+            samp_clk_terminal = f"/{real_x_series_device.name}/Ctr0InternalOutput"
 
             write_task.ao_channels.add_ao_voltage_chan(
                 loopback_channel_pair.output_channel, max_val=10, min_val=-10
@@ -202,11 +202,11 @@ class TestAnalogMultiChannelReaderWriter(TestDAQmxIOBase):
             # Use a counter output pulse train task as the sample clock source
             # for both the AI and AO tasks.
             sample_clk_task.co_channels.add_co_pulse_chan_freq(
-                "{0}/ctr0".format(real_x_series_device.name), freq=sample_rate
+                f"{real_x_series_device.name}/ctr0", freq=sample_rate
             )
             sample_clk_task.timing.cfg_implicit_timing(samps_per_chan=number_of_samples)
 
-            samp_clk_terminal = "/{0}/Ctr0InternalOutput".format(real_x_series_device.name)
+            samp_clk_terminal = f"/{real_x_series_device.name}/Ctr0InternalOutput"
 
             write_task.ao_channels.add_ao_voltage_chan(
                 flatten_channel_string([c.output_channel for c in channels_to_test]),

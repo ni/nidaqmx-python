@@ -1,5 +1,4 @@
 import ctypes
-import six
 from collections.abc import Sequence
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str
@@ -19,7 +18,7 @@ class DeviceCollection(Sequence):
     def __contains__(self, item):
         device_names = self.device_names
 
-        if isinstance(item, six.string_types):
+        if isinstance(item, str):
             items = unflatten_channel_string(item)
             return all([i in device_names for i in items])
         elif isinstance(item, Device):
@@ -51,18 +50,18 @@ class DeviceCollection(Sequence):
             
             Indicates the subset of devices indexed.
         """
-        if isinstance(index, six.integer_types):
+        if isinstance(index, int):
             return Device(self.device_names[index])
         elif isinstance(index, slice):
             return [Device(name) for name in self.device_names[index]]
-        elif isinstance(index, six.string_types):
+        elif isinstance(index, str):
             device_names = unflatten_channel_string(index)
             if len(device_names) == 1:
                 return Device(device_names[0])
             return [Device(name) for name in device_names]
         else:
             raise DaqError(
-                'Invalid index type "{0}" used to access collection.'
+                'Invalid index type "{}" used to access collection.'
                 .format(type(index)), DAQmxErrors.UNKNOWN)
 
     def __iter__(self):

@@ -25,7 +25,7 @@ class COChannel(Channel):
     __slots__ = []
 
     def __repr__(self):
-        return 'COChannel(name={0})'.format(self._name)
+        return f'COChannel(name={self._name})'
 
 <%namespace name="property_template" file="/property_template.py.mako"/>\
 %for attribute in attributes:

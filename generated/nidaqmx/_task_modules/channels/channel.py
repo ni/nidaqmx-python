@@ -13,7 +13,7 @@ from nidaqmx.constants import (
     ChannelType, SyncUnlockBehavior, _Save)
 
 
-class Channel(object):
+class Channel:
     """
     Represents virtual channel or a list of virtual channels.
     """
@@ -33,7 +33,7 @@ class Channel(object):
     def __add__(self, other):
         if not isinstance(other, self.__class__):
             raise NotImplementedError(
-                'Cannot concatenate objects of type {0} and {1}'
+                'Cannot concatenate objects of type {} and {}'
                 .format(self.__class__, other.__class__))
 
         if self._handle != other._handle:
@@ -83,7 +83,7 @@ class Channel(object):
             yield Channel._factory(self._handle, channel_name)
 
     def __repr__(self):
-        return 'Channel(name={0})'.format(self.name)
+        return f'Channel(name={self.name})'
 
     @staticmethod
     def _factory(task_handle, virtual_or_physical_name):

@@ -18,7 +18,7 @@ from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})
 
 
-class OutStream(object):
+class OutStream:
     """
     Exposes an output data stream on a DAQmx task.
 
@@ -32,7 +32,7 @@ class OutStream(object):
         self._auto_start = False
         self._timeout = 10.0
 
-        super(OutStream, self).__init__()
+        super().__init__()
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -48,7 +48,7 @@ class OutStream(object):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return 'OutStream(task={0})'.format(self._task.name)
+        return f'OutStream(task={self._task.name})'
 
     @property
     def auto_start(self):

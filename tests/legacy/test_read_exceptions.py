@@ -7,7 +7,7 @@ from nidaqmx.constants import AcquisitionType, BusType, Level, TaskMode
 from nidaqmx.error_codes import DAQmxErrors
 
 
-class TestReadExceptions(object):
+class TestReadExceptions:
     """Contains a collection of pytest tests.
 
     This validates the Read error behavior in the NI-DAQmx Python API.
@@ -32,14 +32,14 @@ class TestReadExceptions(object):
             # Use a counter output pulse train task as the sample clock source
             # for both the AI and AO tasks.
             sample_clk_task.co_channels.add_co_pulse_chan_freq(
-                "{0}/ctr0".format(real_x_series_device.name), freq=sample_rate, idle_state=Level.LOW
+                f"{real_x_series_device.name}/ctr0", freq=sample_rate, idle_state=Level.LOW
             )
             sample_clk_task.timing.cfg_implicit_timing(
                 samps_per_chan=clocks_to_give, sample_mode=AcquisitionType.FINITE
             )
             sample_clk_task.control(TaskMode.TASK_COMMIT)
 
-            samp_clk_terminal = "/{0}/Ctr0InternalOutput".format(real_x_series_device.name)
+            samp_clk_terminal = f"/{real_x_series_device.name}/Ctr0InternalOutput"
 
             read_task.ai_channels.add_ai_voltage_chan(
                 real_x_series_device.ai_physical_chans[0].name, max_val=10, min_val=-10
@@ -88,14 +88,14 @@ class TestReadExceptions(object):
             # Use a counter output pulse train task as the sample clock source
             # for both the AI and AO tasks.
             sample_clk_task.co_channels.add_co_pulse_chan_freq(
-                "{0}/ctr0".format(real_x_series_device.name), freq=sample_rate, idle_state=Level.LOW
+                f"{real_x_series_device.name}/ctr0", freq=sample_rate, idle_state=Level.LOW
             )
             sample_clk_task.timing.cfg_implicit_timing(
                 samps_per_chan=clocks_to_give, sample_mode=AcquisitionType.FINITE
             )
             sample_clk_task.control(TaskMode.TASK_COMMIT)
 
-            samp_clk_terminal = "/{0}/Ctr0InternalOutput".format(real_x_series_device.name)
+            samp_clk_terminal = f"/{real_x_series_device.name}/Ctr0InternalOutput"
 
             read_task.ai_channels.add_ai_voltage_chan(
                 real_x_series_device.ai_physical_chans[0].name, max_val=10, min_val=-10
@@ -149,14 +149,14 @@ class TestReadExceptions(object):
             # Use a counter output pulse train task as the sample clock source
             # for both the AI and AO tasks.
             sample_clk_task.co_channels.add_co_pulse_chan_freq(
-                "{0}/ctr0".format(real_x_series_device.name), freq=sample_rate, idle_state=Level.LOW
+                f"{real_x_series_device.name}/ctr0", freq=sample_rate, idle_state=Level.LOW
             )
             sample_clk_task.timing.cfg_implicit_timing(
                 samps_per_chan=clocks_to_give, sample_mode=AcquisitionType.FINITE
             )
             sample_clk_task.control(TaskMode.TASK_COMMIT)
 
-            samp_clk_terminal = "/{0}/Ctr0InternalOutput".format(real_x_series_device.name)
+            samp_clk_terminal = f"/{real_x_series_device.name}/Ctr0InternalOutput"
 
             read_task.ai_channels.add_ai_voltage_chan(
                 real_x_series_device.ai_physical_chans[0].name, max_val=10, min_val=-10

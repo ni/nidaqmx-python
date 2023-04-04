@@ -1,5 +1,4 @@
 import ctypes
-import six
 from collections.abc import Sequence
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str
@@ -22,7 +21,7 @@ class PhysicalChannelCollection(Sequence):
     def __contains__(self, item):
         channel_names = self.channel_names
 
-        if isinstance(item, six.string_types):
+        if isinstance(item, str):
             items = unflatten_channel_string(item)
             return all([i in channel_names for i in items])
         elif isinstance(item, PhysicalChannel):
@@ -57,15 +56,15 @@ class PhysicalChannelCollection(Sequence):
             
             Indicates the subset of physical channels indexed.
         """
-        if isinstance(index, six.integer_types):
+        if isinstance(index, int):
             return PhysicalChannel(self.channel_names[index])
         elif isinstance(index, slice):
             return PhysicalChannel(self.channel_names[index])
-        elif isinstance(index, six.string_types):
-            return PhysicalChannel('{0}/{1}'.format(self._name, index))
+        elif isinstance(index, str):
+            return PhysicalChannel(f'{self._name}/{index}')
         else:
             raise DaqError(
-                'Invalid index type "{0}" used to access collection.'
+                'Invalid index type "{}" used to access collection.'
                 .format(type(index)), DAQmxErrors.UNKNOWN)
 
     def __iter__(self):

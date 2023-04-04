@@ -2,6 +2,7 @@
 
 import ctypes
 import numpy
+import deprecation
 
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, enum_bitfield_to_list, ctypes_byte_str,
@@ -17,7 +18,7 @@ from nidaqmx.constants import (
 __all__ = ['PhysicalChannel']
 
 
-class PhysicalChannel(object):
+class PhysicalChannel:
     """
     Represents a DAQmx physical channel.
     """
@@ -42,7 +43,7 @@ class PhysicalChannel(object):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return 'PhysicalChannel(name={0})'.format(self._name)
+        return f'PhysicalChannel(name={self._name})'
 
     @property
     def name(self):
@@ -1181,22 +1182,22 @@ class PhysicalChannel(object):
         return val.value
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ai_supported_meas_types instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_supported_meas_types instead.")
     def ai_meas_types(self):
         return self.ai_supported_meas_types
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ao_supported_output_types instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ao_supported_output_types instead.")
     def ao_output_types(self):
         return self.ao_supported_output_types
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_supported_meas_types instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_supported_meas_types instead.")
     def ci_meas_types(self):
         return self.ci_supported_meas_types
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use co_supported_output_types instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use co_supported_output_types instead.")
     def co_output_types(self):
         return self.co_supported_output_types
 

@@ -27,7 +27,7 @@ from nidaqmx.constants import (
 %endif
 
 
-class ArmStartTrigger(object):
+class ArmStartTrigger:
     """
     Represents the arm start trigger configurations for a DAQmx task.
     """

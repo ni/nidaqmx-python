@@ -1,5 +1,4 @@
 import ctypes
-import six
 from collections.abc import Sequence
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str
@@ -19,7 +18,7 @@ class PersistedChannelCollection(Sequence):
     def __contains__(self, item):
         channel_names = self.global_channel_names
 
-        if isinstance(item, six.string_types):
+        if isinstance(item, str):
             items = unflatten_channel_string(item)
             return all([i in channel_names for i in items])
         elif isinstance(item, PersistedChannel):
@@ -52,19 +51,19 @@ class PersistedChannelCollection(Sequence):
             
             Indicates the of global channels indexed.
         """
-        if isinstance(index, six.integer_types):
+        if isinstance(index, int):
             return PersistedChannel(self.global_channel_names[index])
         elif isinstance(index, slice):
             return [PersistedChannel(name) for name in
                     self.global_channel_names[index]]
-        elif isinstance(index, six.string_types):
+        elif isinstance(index, str):
             names = unflatten_channel_string(index)
             if len(names) == 1:
                 return PersistedChannel(names[0])
             return [PersistedChannel(name) for name in names]
         else:
             raise DaqError(
-                'Invalid index type "{0}" used to access collection.'
+                'Invalid index type "{}" used to access collection.'
                 .format(type(index)), DAQmxErrors.UNKNOWN)
 
     def __iter__(self):

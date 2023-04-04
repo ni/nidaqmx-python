@@ -159,7 +159,7 @@ Please include **all** of the following information when opening an issue:
 
   $ python -c "import sys; print(sys.version)"
 
-- The versions of the **nidaqmx**, numpy, six and enum34 packages used::
+- The versions of the **nidaqmx** and numpy packages used::
 
   $ python -m pip list
 

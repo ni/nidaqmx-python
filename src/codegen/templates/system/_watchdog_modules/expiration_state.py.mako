@@ -17,7 +17,7 @@ from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})
 
 
-class ExpirationState(object):
+class ExpirationState:
     """
     Represents a DAQmx Watchdog expiration state.
     """
