@@ -85,3 +85,21 @@ testpaths = ["tests"]
 [build-system]
 requires = ["poetry>=1.2"]
 build-backend = "poetry.masonry.api"
+
+[tool.mypy]
+check_untyped_defs = true
+# TODO: remove _grpc_interpreter once r_0 and event functions are fixed.
+exclude = [
+  "nidaqmx/_grpc_interpreter.py",
+  "nidaqmx/_stubs"
+]
+plugins = "numpy.typing.mypy_plugin"
+
+[[tool.mypy.overrides]]
+module = [
+  "deprecation",
+  "grpc.*",
+  "importlib_metadata",
+  "mako.*"
+]
+ignore_missing_imports = true
