@@ -55,7 +55,9 @@ def get_interpreter_functions(metadata):
         function_name = function_name.replace("_u_int", "_uint")
         skippable_param = get_skippable_param_for_func(function_data)
         if skippable_param:
-            function_data["parameters"] = (p for p in function_data["parameters"] if p["name"] != skippable_param)
+            function_data["parameters"] = (
+                p for p in function_data["parameters"] if p["name"] != skippable_param
+            )
         functions_metadata.append(
             Function(
                 function_name,
@@ -256,20 +258,23 @@ def instantiate_explicit_output_param(param):
         )
     elif param.ctypes_data_type == "ctypes.c_char_p":
         return f"{param.parameter_name} = ctypes.create_string_buffer(temp_size)"
-    
+
 
 def get_return_value_for_func(func):
     for output_parameter in func.base_parameters:
-        if output_parameter.direction == "out" and FUNCTION_RETURN_TYPE_MAP_SET.get(output_parameter.type,None):
+        if output_parameter.direction == "out" and FUNCTION_RETURN_TYPE_MAP_SET.get(
+            output_parameter.type, None
+        ):
             return FUNCTION_RETURN_TYPE_MAP_SET[output_parameter.type]
     return None
 
+
 def get_input_params(func):
     return (p for p in func.base_parameters if p.direction == "in")
+
 
 def get_skippable_param_for_func(func):
     for param in func["parameters"]:
         size = param.get("size", dict())
         if size.get("mechanism", None) == "ivi-dance":
             return size["value"]
-            
