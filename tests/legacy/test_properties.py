@@ -172,9 +172,6 @@ class TestPropertyListDataTypes(object):
     @pytest.mark.parametrize("device_by_name", ["bridgeTester"], indirect=True)
     def test_list_of_floats_property(self, device_by_name, seed):
         """Test for validating list of float property."""
-        if device_by_name is None:
-            pytest.skip("requires bridge device")
-
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
