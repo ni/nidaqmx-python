@@ -25,7 +25,7 @@ class COChannelCollection(ChannelCollection):
     Contains the collection of counter output channels for a DAQmx Task.
     """
     def __init__(self, task_handle):
-        super(COChannelCollection, self).__init__(task_handle)
+        super().__init__(task_handle)
 
     def _create_chan(self, counter, name_to_assign_to_channel=''):
         """
@@ -45,7 +45,7 @@ class COChannelCollection(ChannelCollection):
             num_counters = len(unflatten_channel_string(counter))
 
             if num_counters > 1:
-                name = '{0}0:{1}'.format(
+                name = '{}0:{}'.format(
                     name_to_assign_to_channel, num_counters-1)
             else:
                 name = name_to_assign_to_channel

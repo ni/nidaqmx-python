@@ -3,12 +3,11 @@ import logging
 import os
 import os.path
 import shutil
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 
 import codegen.metadata as scrapigen_metadata
 from mako.lookup import TemplateLookup
 from mako.template import Template
-
 
 _logger = logging.getLogger(__name__)
 
@@ -49,7 +48,11 @@ def generate(dest):
     codegen_metadata = _get_metadata()
 
     for info in codegen_metadata["script_info"]["modules"]:
-        _generate_file(codegen_metadata, info["templateFile"], dest / info["relativeOutputPath"])
+        _generate_file(
+            codegen_metadata,
+            PureWindowsPath(info["templateFile"]),
+            dest / PureWindowsPath(info["relativeOutputPath"]),
+        )
 
     _generate_file(codegen_metadata["enums"], "error_codes.mako", dest / "error_codes.py")
 

@@ -11,7 +11,7 @@ from nidaqmx.system.watchdog import DOExpirationState
 from tests.helpers import generate_random_seed
 
 
-class TestWatchdog(object):
+class TestWatchdog:
     """Contains a collection of pytest tests.
 
     These validate the watchdog functionality in the NI-DAQmx Python API.

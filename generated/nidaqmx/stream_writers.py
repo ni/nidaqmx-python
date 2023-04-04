@@ -14,7 +14,7 @@ __all__ = ['AnalogSingleChannelWriter', 'AnalogMultiChannelWriter',
            'DigitalSingleChannelWriter', 'DigitalMultiChannelWriter']
 
 
-class UnsetAutoStartSentinel(object):
+class UnsetAutoStartSentinel:
     pass
 
 
@@ -23,7 +23,7 @@ AUTO_START_UNSET = UnsetAutoStartSentinel()
 del UnsetAutoStartSentinel
 
 
-class ChannelWriterBase(object):
+class ChannelWriterBase:
     """
     Defines base class for all NI-DAQmx stream writers.
     """
@@ -180,8 +180,8 @@ class ChannelWriterBase(object):
                 'into this function is not shaped correctly. '
                 'You must pass in a NumPy array of the correct number of '
                 'dimensions based on the write method you use.\n\n'
-                'No. of dimensions of NumPy Array provided: {0}\n'
-                'No. of dimensions of NumPy Array required: {1}'
+                'No. of dimensions of NumPy Array provided: {}\n'
+                'No. of dimensions of NumPy Array required: {}'
                 .format(num_dimensions_in_data, num_dimensions_expected),
                 DAQmxErrors.UNKNOWN, task_name=self._task.name)
 

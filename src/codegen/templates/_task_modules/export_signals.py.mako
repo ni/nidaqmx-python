@@ -24,7 +24,7 @@ from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})
 
 
-class ExportSignals(object):
+class ExportSignals:
     """
     Represents the exported signal configurations for a DAQmx task.
     """

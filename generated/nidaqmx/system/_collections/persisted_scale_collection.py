@@ -1,5 +1,4 @@
 import ctypes
-import six
 from collections.abc import Sequence
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str
@@ -19,7 +18,7 @@ class PersistedScaleCollection(Sequence):
     def __contains__(self, item):
         scale_names = self.scale_names
 
-        if isinstance(item, six.string_types):
+        if isinstance(item, str):
             items = unflatten_channel_string(item)
             return all([i in scale_names for i in items])
         elif isinstance(item, PersistedScale):
@@ -51,19 +50,19 @@ class PersistedScaleCollection(Sequence):
             
             Indicates the subset of custom scales indexed.
         """
-        if isinstance(index, six.integer_types):
+        if isinstance(index, int):
             return PersistedScale(self.scale_names[index])
         elif isinstance(index, slice):
             return [PersistedScale(name) for name in
                     self.scale_names[index]]
-        elif isinstance(index, six.string_types):
+        elif isinstance(index, str):
             names = unflatten_channel_string(index)
             if len(names) == 1:
                 return PersistedScale(names[0])
             return [PersistedScale(name) for name in names]
         else:
             raise DaqError(
-                'Invalid index type "{0}" used to access collection.'
+                'Invalid index type "{}" used to access collection.'
                 .format(type(index)), DAQmxErrors.UNKNOWN)
 
     def __iter__(self):

@@ -110,10 +110,10 @@ def _channel_info_to_flattened_name(channel_info):
     if channel_info['start_index'] == -1:
         return channel_info['base_name']
     elif channel_info['start_index'] == channel_info['end_index']:
-        return '{0}{1}'.format(channel_info['base_name'],
+        return '{}{}'.format(channel_info['base_name'],
                                channel_info['start_index_str'])
     else:
-        return '{0}{1}:{2}'.format(channel_info['base_name'],
+        return '{}{}:{}'.format(channel_info['base_name'],
                                    channel_info['start_index_str'],
                                    channel_info['end_index_str'])
 

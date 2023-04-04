@@ -10,7 +10,7 @@ from nidaqmx.constants import (
     Level, WatchdogAOExpirState, WatchdogCOExpirState)
 
 
-class ExpirationState(object):
+class ExpirationState:
     """
     Represents a DAQmx Watchdog expiration state.
     """
@@ -234,62 +234,62 @@ class ExpirationState(object):
         check_for_error(error_code)
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ao_output_type instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ao_output_type instead.")
     def expir_states_ao_type(self):
         return self.ao_output_type
 
     @expir_states_ao_type.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ao_output_type instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ao_output_type instead.")
     def expir_states_ao_type(self, val):
         self.ao_output_type = val
 
     @expir_states_ao_type.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ao_output_type instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ao_output_type instead.")
     def expir_states_ao_type(self):
         del self.ao_output_type
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use co_state instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use co_state instead.")
     def expir_states_co_state(self):
         return self.co_state
 
     @expir_states_co_state.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use co_state instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use co_state instead.")
     def expir_states_co_state(self, val):
         self.co_state = val
 
     @expir_states_co_state.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use co_state instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use co_state instead.")
     def expir_states_co_state(self):
         del self.co_state
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use do_state instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use do_state instead.")
     def expir_states_do_state(self):
         return self.do_state
 
     @expir_states_do_state.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use do_state instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use do_state instead.")
     def expir_states_do_state(self, val):
         self.do_state = val
 
     @expir_states_do_state.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use do_state instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use do_state instead.")
     def expir_states_do_state(self):
         del self.do_state
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ao_state instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ao_state instead.")
     def expir_states_ao_state(self):
         return self.ao_state
 
     @expir_states_ao_state.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ao_state instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ao_state instead.")
     def expir_states_ao_state(self, val):
         self.ao_state = val
 
     @expir_states_ao_state.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ao_state instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ao_state instead.")
     def expir_states_ao_state(self):
         del self.ao_state
 

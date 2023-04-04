@@ -7,7 +7,7 @@ from nidaqmx.constants import AcquisitionType, BusType, RegenerationMode
 from nidaqmx.error_codes import DAQmxErrors
 
 
-class TestWriteExceptions(object):
+class TestWriteExceptions:
     """Contains a collection of pytest tests.
 
     These validate the Write error behavior in the NI-DAQmx Python API.
@@ -30,7 +30,7 @@ class TestWriteExceptions(object):
         host_buffer_size = 1000
 
         with nidaqmx.Task() as write_task:
-            samp_clk_terminal = "/{0}/Ctr0InternalOutput".format(real_x_series_device.name)
+            samp_clk_terminal = f"/{real_x_series_device.name}/Ctr0InternalOutput"
 
             write_task.ao_channels.add_ao_voltage_chan(
                 real_x_series_device.ao_physical_chans[0].name, max_val=10, min_val=-10
@@ -84,7 +84,7 @@ class TestWriteExceptions(object):
         total_buffer_size = fifo_size + host_buffer_size
 
         with nidaqmx.Task() as write_task:
-            samp_clk_terminal = "/{0}/Ctr0InternalOutput".format(real_x_series_device.name)
+            samp_clk_terminal = f"/{real_x_series_device.name}/Ctr0InternalOutput"
 
             write_task.ao_channels.add_ao_voltage_chan(
                 real_x_series_device.ao_physical_chans[0].name, max_val=10, min_val=-10

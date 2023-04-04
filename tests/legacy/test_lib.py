@@ -9,7 +9,7 @@ def _make_driver_version(*args):
     return System.DriverVersion._make(args)
 
 
-class TestLib(object):
+class TestLib:
     """Contains a collection of pytest tests.
 
     This validates the lib loading functionality in the NI-DAQmx Python API.

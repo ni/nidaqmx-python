@@ -17,11 +17,13 @@ from nidaqmx.system._watchdog_modules.expiration_states_collection import (
 from nidaqmx.utils import flatten_channel_string
 from nidaqmx.constants import (
     Edge, TriggerType, WDTTaskAction)
+from nidaqmx.types import (
+    AOExpirationState, COExpirationState, DOExpirationState)
 
 __all__ = ['WatchdogTask']
 
 
-class WatchdogTask(object):
+class WatchdogTask:
     """
     Represents the watchdog configurations for a DAQmx task.
     """
@@ -73,7 +75,7 @@ class WatchdogTask(object):
     def __del__(self):
         if self._handle is not None:
             warnings.warn(
-                'Task of name "{0}" was not explicitly closed before it was '
+                'Task of name "{}" was not explicitly closed before it was '
                 'destructed. Resources on the task device may still be '
                 'reserved.'.format(self.name), DaqResourceWarning)
 
@@ -588,7 +590,7 @@ class WatchdogTask(object):
         """
         if self._handle is None:
             warnings.warn(
-                'Attempted to close NI-DAQmx task of name "{0}" but task was '
+                'Attempted to close NI-DAQmx task of name "{}" but task was '
                 'already closed.'.format(self._saved_name), DaqResourceWarning)
             return
 
@@ -664,62 +666,62 @@ class WatchdogTask(object):
         check_for_error(error_code)
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_type instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_type instead.")
     def expir_trig_trig_type(self):
         return self.expiration_trigger_type
 
     @expir_trig_trig_type.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_type instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_type instead.")
     def expir_trig_trig_type(self, val):
         self.expiration_trigger_type = val
 
     @expir_trig_trig_type.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_type instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_type instead.")
     def expir_trig_trig_type(self):
         del self.expiration_trigger_type
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_dig_edge_edge instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_dig_edge_edge instead.")
     def expir_trig_dig_edge_edge(self):
         return self.expiration_trigger_dig_edge_edge
 
     @expir_trig_dig_edge_edge.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_dig_edge_edge instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_dig_edge_edge instead.")
     def expir_trig_dig_edge_edge(self, val):
         self.expiration_trigger_dig_edge_edge = val
 
     @expir_trig_dig_edge_edge.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_dig_edge_edge instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_dig_edge_edge instead.")
     def expir_trig_dig_edge_edge(self):
         del self.expiration_trigger_dig_edge_edge
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_dig_edge_src instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_dig_edge_src instead.")
     def expir_trig_dig_edge_src(self):
         return self.expiration_trigger_dig_edge_src
 
     @expir_trig_dig_edge_src.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_dig_edge_src instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_dig_edge_src instead.")
     def expir_trig_dig_edge_src(self, val):
         self.expiration_trigger_dig_edge_src = val
 
     @expir_trig_dig_edge_src.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_dig_edge_src instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_dig_edge_src instead.")
     def expir_trig_dig_edge_src(self):
         del self.expiration_trigger_dig_edge_src
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_trig_on_network_conn_loss instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_trig_on_network_conn_loss instead.")
     def expir_trig_trig_on_network_conn_loss(self):
         return self.expiration_trigger_trig_on_network_conn_loss
 
     @expir_trig_trig_on_network_conn_loss.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_trig_on_network_conn_loss instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_trig_on_network_conn_loss instead.")
     def expir_trig_trig_on_network_conn_loss(self, val):
         self.expiration_trigger_trig_on_network_conn_loss = val
 
     @expir_trig_trig_on_network_conn_loss.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use expiration_trigger_trig_on_network_conn_loss instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_trig_on_network_conn_loss instead.")
     def expir_trig_trig_on_network_conn_loss(self):
         del self.expiration_trigger_trig_on_network_conn_loss
 

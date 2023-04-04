@@ -3,7 +3,7 @@
 from nidaqmx.utils import flatten_channel_string, unflatten_channel_string
 
 
-class TestUtils(object):
+class TestUtils:
     """Contains a collection of pytest tests.
 
     These validate the utilities functionality in the NI-DAQmx Python API.

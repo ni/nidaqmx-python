@@ -19,7 +19,7 @@ from nidaqmx.constants import (
 __all__ = ['Scale']
 
 
-class Scale(object):
+class Scale:
     """
     Represents a DAQmx scale.
     """
@@ -44,7 +44,7 @@ class Scale(object):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return 'Scale(name={0})'.format(self._name)
+        return f'Scale(name={self._name})'
 
     @property
     def name(self):
