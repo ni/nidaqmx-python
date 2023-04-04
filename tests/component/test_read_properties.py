@@ -1,6 +1,7 @@
 """Tests for validating Read properties."""
 
 import pytest
+
 import nidaqmx
 import nidaqmx.system
 from nidaqmx.constants import ReadRelativeTo
