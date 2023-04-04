@@ -114,7 +114,7 @@ def test__ao_current_task__get_string_list_property__returns_default_value(devic
 
 
 @pytest.mark.parametrize("device_by_name", ["aoTester"], indirect=True)
-def test__ao_current_task__read_property_out_of_order__throws_daqerror(device_by_name):
+def test__ao_current_task__read_property__out_of_order__throws_daqerror(device_by_name):
     """Test to validate error scenario for string property."""
     with nidaqmx.Task() as ao_current_task:
         ao_current_task.ao_channels.add_ao_current_chan(device_by_name.ao_physical_chans[0].name)
