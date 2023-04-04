@@ -75,11 +75,34 @@ def sim_x_series_device():
 
 
 @pytest.fixture(scope="module")
-def sim_ts_power_device():
-    """Gets simulated power device information."""
+def sim_ts_chassis():
+    """Gets simulated TestScale chassis information."""
     system = nidaqmx.system.System.local()
 
+    # Prefer tsChassisTester if available so that multi-module tests will use
+    # modules from the same chassis.
+    if "tsChassisTester" in system.devices:
+        return system.devices["tsChassisTester"]
+
     for device in system.devices:
+        if (
+            device.dev_is_simulated
+            and device.product_category == ProductCategory.TEST_SCALE_CHASSIS
+        ):
+            return device
+
+    pytest.skip(
+        "Could not detect a device that meets the requirements to be a TestScale simulated chassis. "
+        "Cannot proceed to run tests. Import the NI MAX configuration file located at "
+        "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
+    )
+    return None
+
+
+@pytest.fixture(scope="module")
+def sim_ts_power_device(sim_ts_chassis):
+    """Gets simulated power device information."""
+    for device in sim_ts_chassis.chassis_module_devices:
         if (
             device.dev_is_simulated
             and device.product_category == ProductCategory.TEST_SCALE_MODULE
@@ -96,11 +119,9 @@ def sim_ts_power_device():
 
 
 @pytest.fixture(scope="module")
-def sim_ts_voltage_device():
+def sim_ts_voltage_device(sim_ts_chassis):
     """Gets simulated voltage device information."""
-    system = nidaqmx.system.System.local()
-
-    for device in system.devices:
+    for device in sim_ts_chassis.chassis_module_devices:
         if (
             device.dev_is_simulated
             and device.product_category == ProductCategory.TEST_SCALE_MODULE
@@ -117,12 +138,10 @@ def sim_ts_voltage_device():
 
 
 @pytest.fixture(scope="module")
-def sim_ts_power_devices():
+def sim_ts_power_devices(sim_ts_chassis):
     """Gets simulated power devices information."""
-    system = nidaqmx.system.System.local()
-
     devices = []
-    for device in system.devices:
+    for device in sim_ts_chassis.chassis_module_devices:
         if (
             device.dev_is_simulated
             and device.product_category == ProductCategory.TEST_SCALE_MODULE
