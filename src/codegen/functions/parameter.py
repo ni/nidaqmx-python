@@ -12,14 +12,10 @@ class Parameter:
         self._direction = parameter_metadata["direction"]
         self._parameters_name = camel_to_snake_case(parameter_metadata["name"])
         self._type = parameter_metadata.get("type", None)
-        if "ctypes_data_type" in parameter_metadata:
-            self._ctypes_data_type = parameter_metadata["ctypes_data_type"]
-        if "python_data_type" in parameter_metadata:
-            self._python_data_type = parameter_metadata["python_data_type"]
-        if "python_description" in parameter_metadata:
-            self._description = parameter_metadata["python_description"]
-        if "python_type_annotation" in parameter_metadata:
-            self._python_type_annotation = parameter_metadata["python_type_annotation"]
+        self._ctypes_data_type = parameter_metadata.get("ctypes_data_type", None)
+        self._python_data_type = parameter_metadata.get("python_data_type", None)
+        self._description = parameter_metadata.get("python_description", None)
+        self._python_type_annotation = parameter_metadata.get("python_type_annotation", None)
         self._is_list = parameter_metadata.get("is_list", False)
         self._has_explicit_buffer_size = parameter_metadata.get("has_explicit_buffer_size", False)
         self._optional = parameter_metadata.get("optional", False)

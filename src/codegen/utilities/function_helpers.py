@@ -12,10 +12,19 @@ FUNCTION_NAME_CHANGE_SET = {
     "CIGPS": "CI_GPS",
 }
 
+FUNCTION_RETURN_TYPE_MAP_SET = {
+    "char[]": "str",
+}
+
+# This custom regex list doesn't split the string before the number.
 CUSTOM_CAMEL_TO_SNAKE_CASE_REGEXES = [
     re.compile("([^_\n])([A-Z][a-z]+)"),
     re.compile("([a-z])([A-Z])"),
     re.compile("([0-9])([^_0-9])"),
+]
+
+INTERPRETER_IGNORED_FUNCTIONS = [
+    "GetExtendedErrorInfo",
 ]
 
 
@@ -39,9 +48,14 @@ def get_all_functions(metadata):
     all_functions = deepcopy(metadata["functions"])
     functions_metadata = []
     for function_name, function_data in all_functions.items():
+        if function_name in INTERPRETER_IGNORED_FUNCTIONS:
+            continue
         function_data["c_function_name"] = function_name
         function_name = camel_to_snake_case(function_name, CUSTOM_CAMEL_TO_SNAKE_CASE_REGEXES)
         function_name = function_name.replace("_u_int", "_uint")
+        skippable_param = get_skipped_param_for_func(function_data)
+        if skippable_param:
+            function_data["parameters"] = (p for p in function_data["parameters"] if p["name"] != skippable_param)
         functions_metadata.append(
             Function(
                 function_name,
@@ -103,7 +117,7 @@ def get_parameter_signature(is_python_factory, sorted_params):
     return ", ".join(params_with_defaults)
 
 
-def get_all_parameter_signature(is_python_factory, params):
+def get_interpreter_parameter_signature(is_python_factory, params):
     """Gets parameter signature for function defintion."""
     params_with_defaults = []
     if not is_python_factory:
@@ -244,3 +258,19 @@ def instantiate_explicit_output_param(param):
         )
     elif param.ctypes_data_type == "ctypes.c_char_p":
         return "{0} = ctypes.create_string_buffer(temp_size)".format(param.parameter_name)
+    
+def get_return_value_for_func(func):
+    for output_parameter in func.base_parameters:
+        if output_parameter.direction == "out" and FUNCTION_RETURN_TYPE_MAP_SET.get(output_parameter.type,None):
+            return FUNCTION_RETURN_TYPE_MAP_SET[output_parameter.type]
+    return None
+
+def get_input_params(func):
+    return (p for p in func.base_parameters if p.direction == "in")
+
+def get_skipped_param_for_func(func):
+    for param in func["parameters"]:
+        size = param.get("size", dict())
+        if size.get("mechanism", None) == "ivi-dance":
+            return size["value"]
+            

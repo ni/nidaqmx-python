@@ -37,7 +37,7 @@ class Function:
                 ):
                     self._parameters.append(FunctionParameter(parameter))
 
-                    if parameter["direction"] == "output":
+                    if parameter["direction"] == "out":
                         self._output_parameters.append(self._parameters)
 
         self._adaptor_parameter = None
