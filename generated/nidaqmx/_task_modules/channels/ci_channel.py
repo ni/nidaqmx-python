@@ -12844,167 +12844,167 @@ class CIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_count_edges_count_reset_reset_count instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_count_edges_count_reset_reset_count instead.")
     def ci_count_edges_count_reset_reset_cnt(self):
         return self.ci_count_edges_count_reset_reset_count
 
     @ci_count_edges_count_reset_reset_cnt.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_count_edges_count_reset_reset_count instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_count_edges_count_reset_reset_count instead.")
     def ci_count_edges_count_reset_reset_cnt(self, val):
         self.ci_count_edges_count_reset_reset_count = val
 
     @ci_count_edges_count_reset_reset_cnt.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_count_edges_count_reset_reset_count instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_count_edges_count_reset_reset_count instead.")
     def ci_count_edges_count_reset_reset_cnt(self):
         del self.ci_count_edges_count_reset_reset_count
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_pulse_freq_start_edge instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_pulse_freq_start_edge instead.")
     def ci_pulse_freq_starting_edge(self):
         return self.ci_pulse_freq_start_edge
 
     @ci_pulse_freq_starting_edge.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_pulse_freq_start_edge instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_pulse_freq_start_edge instead.")
     def ci_pulse_freq_starting_edge(self, val):
         self.ci_pulse_freq_start_edge = val
 
     @ci_pulse_freq_starting_edge.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_pulse_freq_start_edge instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_pulse_freq_start_edge instead.")
     def ci_pulse_freq_starting_edge(self):
         del self.ci_pulse_freq_start_edge
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_pulse_ticks_start_edge instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_pulse_ticks_start_edge instead.")
     def ci_pulse_ticks_starting_edge(self):
         return self.ci_pulse_ticks_start_edge
 
     @ci_pulse_ticks_starting_edge.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_pulse_ticks_start_edge instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_pulse_ticks_start_edge instead.")
     def ci_pulse_ticks_starting_edge(self, val):
         self.ci_pulse_ticks_start_edge = val
 
     @ci_pulse_ticks_starting_edge.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_pulse_ticks_start_edge instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_pulse_ticks_start_edge instead.")
     def ci_pulse_ticks_starting_edge(self):
         del self.ci_pulse_ticks_start_edge
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_pulse_time_start_edge instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_pulse_time_start_edge instead.")
     def ci_pulse_time_starting_edge(self):
         return self.ci_pulse_time_start_edge
 
     @ci_pulse_time_starting_edge.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_pulse_time_start_edge instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_pulse_time_start_edge instead.")
     def ci_pulse_time_starting_edge(self, val):
         self.ci_pulse_time_start_edge = val
 
     @ci_pulse_time_starting_edge.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_pulse_time_start_edge instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_pulse_time_start_edge instead.")
     def ci_pulse_time_starting_edge(self):
         del self.ci_pulse_time_start_edge
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_dig_fltr_enable instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_dig_fltr_enable instead.")
     def ci_velocity_a_input_dig_fltr_enable(self):
         return self.ci_velocity_encoder_a_input_dig_fltr_enable
 
     @ci_velocity_a_input_dig_fltr_enable.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_dig_fltr_enable instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_dig_fltr_enable instead.")
     def ci_velocity_a_input_dig_fltr_enable(self, val):
         self.ci_velocity_encoder_a_input_dig_fltr_enable = val
 
     @ci_velocity_a_input_dig_fltr_enable.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_dig_fltr_enable instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_dig_fltr_enable instead.")
     def ci_velocity_a_input_dig_fltr_enable(self):
         del self.ci_velocity_encoder_a_input_dig_fltr_enable
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_dig_fltr_min_pulse_width instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_dig_fltr_min_pulse_width instead.")
     def ci_velocity_a_input_dig_fltr_min_pulse_width(self):
         return self.ci_velocity_encoder_a_input_dig_fltr_min_pulse_width
 
     @ci_velocity_a_input_dig_fltr_min_pulse_width.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_dig_fltr_min_pulse_width instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_dig_fltr_min_pulse_width instead.")
     def ci_velocity_a_input_dig_fltr_min_pulse_width(self, val):
         self.ci_velocity_encoder_a_input_dig_fltr_min_pulse_width = val
 
     @ci_velocity_a_input_dig_fltr_min_pulse_width.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_dig_fltr_min_pulse_width instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_dig_fltr_min_pulse_width instead.")
     def ci_velocity_a_input_dig_fltr_min_pulse_width(self):
         del self.ci_velocity_encoder_a_input_dig_fltr_min_pulse_width
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_dig_fltr_timebase_rate instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_dig_fltr_timebase_rate instead.")
     def ci_velocity_a_input_dig_fltr_timebase_rate(self):
         return self.ci_velocity_encoder_a_input_dig_fltr_timebase_rate
 
     @ci_velocity_a_input_dig_fltr_timebase_rate.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_dig_fltr_timebase_rate instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_dig_fltr_timebase_rate instead.")
     def ci_velocity_a_input_dig_fltr_timebase_rate(self, val):
         self.ci_velocity_encoder_a_input_dig_fltr_timebase_rate = val
 
     @ci_velocity_a_input_dig_fltr_timebase_rate.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_dig_fltr_timebase_rate instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_dig_fltr_timebase_rate instead.")
     def ci_velocity_a_input_dig_fltr_timebase_rate(self):
         del self.ci_velocity_encoder_a_input_dig_fltr_timebase_rate
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_dig_fltr_timebase_src instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_dig_fltr_timebase_src instead.")
     def ci_velocity_a_input_dig_fltr_timebase_src(self):
         return self.ci_velocity_encoder_a_input_dig_fltr_timebase_src
 
     @ci_velocity_a_input_dig_fltr_timebase_src.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_dig_fltr_timebase_src instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_dig_fltr_timebase_src instead.")
     def ci_velocity_a_input_dig_fltr_timebase_src(self, val):
         self.ci_velocity_encoder_a_input_dig_fltr_timebase_src = val
 
     @ci_velocity_a_input_dig_fltr_timebase_src.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_dig_fltr_timebase_src instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_dig_fltr_timebase_src instead.")
     def ci_velocity_a_input_dig_fltr_timebase_src(self):
         del self.ci_velocity_encoder_a_input_dig_fltr_timebase_src
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_logic_lvl_behavior instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_logic_lvl_behavior instead.")
     def ci_velocity_a_input_logic_lvl_behavior(self):
         return self.ci_velocity_encoder_a_input_logic_lvl_behavior
 
     @ci_velocity_a_input_logic_lvl_behavior.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_logic_lvl_behavior instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_logic_lvl_behavior instead.")
     def ci_velocity_a_input_logic_lvl_behavior(self, val):
         self.ci_velocity_encoder_a_input_logic_lvl_behavior = val
 
     @ci_velocity_a_input_logic_lvl_behavior.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_logic_lvl_behavior instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_logic_lvl_behavior instead.")
     def ci_velocity_a_input_logic_lvl_behavior(self):
         del self.ci_velocity_encoder_a_input_logic_lvl_behavior
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_term instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_term instead.")
     def ci_velocity_a_input_term(self):
         return self.ci_velocity_encoder_a_input_term
 
     @ci_velocity_a_input_term.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_term instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_term instead.")
     def ci_velocity_a_input_term(self, val):
         self.ci_velocity_encoder_a_input_term = val
 
     @ci_velocity_a_input_term.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_term instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_term instead.")
     def ci_velocity_a_input_term(self):
         del self.ci_velocity_encoder_a_input_term
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_term_cfg instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_term_cfg instead.")
     def ci_velocity_a_input_term_cfg(self):
         return self.ci_velocity_encoder_a_input_term_cfg
 
     @ci_velocity_a_input_term_cfg.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_term_cfg instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_term_cfg instead.")
     def ci_velocity_a_input_term_cfg(self, val):
         self.ci_velocity_encoder_a_input_term_cfg = val
 
     @ci_velocity_a_input_term_cfg.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use ci_velocity_encoder_a_input_term_cfg instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_velocity_encoder_a_input_term_cfg instead.")
     def ci_velocity_a_input_term_cfg(self):
         del self.ci_velocity_encoder_a_input_term_cfg
 

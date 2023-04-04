@@ -2449,17 +2449,17 @@ class InStream:
         check_for_error(error_code)
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use overwrite instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use overwrite instead.")
     def over_write(self):
         return self.overwrite
 
     @over_write.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use overwrite instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use overwrite instead.")
     def over_write(self, val):
         self.overwrite = val
 
     @over_write.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use overwrite instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use overwrite instead.")
     def over_write(self):
         del self.overwrite
 
