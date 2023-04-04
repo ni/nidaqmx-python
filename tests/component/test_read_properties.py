@@ -8,7 +8,7 @@ from nidaqmx.constants import ReadRelativeTo
 from nidaqmx.task import Task
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def read_task(any_x_series_device):
     """Gets AI voltage task."""
     with nidaqmx.Task() as task:
