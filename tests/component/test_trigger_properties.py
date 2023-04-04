@@ -9,7 +9,7 @@ from nidaqmx.errors import DaqError
 from nidaqmx.task import Task
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def ai_voltage_task(any_x_series_device):
     """Gets AI voltage task."""
     with nidaqmx.Task() as task:
