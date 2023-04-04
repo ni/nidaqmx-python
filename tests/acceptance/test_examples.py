@@ -10,7 +10,7 @@ import pytest
 
 import nidaqmx
 
-EXAMPLES_DIRECTORY = Path(__file__).parent.parent.parent / "nidaqmx_examples"
+EXAMPLES_DIRECTORY = Path(__file__).parent.parent.parent / "examples"
 EXAMPLE_PATHS = [p for p in EXAMPLES_DIRECTORY.glob("**/*.py") if p.name != "__init__.py"]
 
 
