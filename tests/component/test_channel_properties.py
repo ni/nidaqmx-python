@@ -80,7 +80,7 @@ def test__channel__set_boolean_property__returns_assigned_value(
     assert ai_voltage_chan_with_excit.ai_excit_use_for_scaling
 
 
-def test__channel__reset_boolean_property__returns_initial_value(
+def test__channel__reset_boolean_property__returns_default_value(
     ai_voltage_chan_with_excit: AIChannel,
 ):
     """Test to validate resetting channel property of boolean type."""
@@ -105,7 +105,7 @@ def test__channel__set_enum_property__returns_assigned_value(ai_power_chan: AICh
     assert ai_power_chan.pwr_idle_output_behavior == PowerIdleOutputBehavior.OUTPUT_DISABLED
 
 
-def test__channel__reset_enum_property__returns_initial_value(ai_power_chan: AIChannel):
+def test__channel__reset_enum_property__returns_default_value(ai_power_chan: AIChannel):
     """Test to validate resetting channel property of enum type."""
     # Default value is to maintain the existing value after the task is uncommitted
     # in NI TS-15200 device
@@ -131,7 +131,7 @@ def test__channel__set_float_property__returns_assigned_value(ai_rtd_chan: AICha
     assert ai_rtd_chan.ai_rtd_a == value_to_set
 
 
-def test__channel__reset_float_property__returns_initial_value(ai_rtd_chan: AIChannel):
+def test__channel__reset_float_property__returns_default_value(ai_rtd_chan: AIChannel):
     """Test to validate resetting channel property of float type."""
     # Default 'A' constant of the Callendar-Van Dusen equation
     # in the NI PCIe-6363 device is "0.00381"
@@ -157,7 +157,7 @@ def test__channel__set_string_property__returns_assigned_value(ci_pulse_width_ch
     assert ci_pulse_width_chan.ci_ctr_timebase_dig_fltr_timebase_src == value_to_set
 
 
-def test__channel__reset_string_property__returns_initial_value(ci_pulse_width_chan: CIChannel):
+def test__channel__reset_string_property__returns_default_value(ci_pulse_width_chan: CIChannel):
     """Test to validate resetting channel property of string type."""
     # Default timebase value of the pulse width filter
     # in the NI PCIe-6363 device is "100MHzTimebase"
@@ -185,7 +185,7 @@ def test__channel__set_uint32_property__returns_assigned_value(
     assert ai_voltage_chan_with_excit.ai_lossy_lsb_removal_compressed_samp_size == value_to_set
 
 
-def test__channel__reset_uint32_property__returns_initial_value(
+def test__channel__reset_uint32_property__returns_default_value(
     ai_voltage_chan_with_excit: AIChannel,
 ):
     """Test to validate resetting channel property of uint32 type."""
