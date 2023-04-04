@@ -66,7 +66,7 @@ def ci_pulse_width_chan(any_x_series_device):
         yield ci_channel
 
 
-def test__channel__get_boolean_property__returns_value(ai_voltage_chan_with_excit: AIChannel):
+def test__channel__get_boolean_property__returns_default_value(ai_voltage_chan_with_excit: AIChannel):
     """Test to validate getter for channel property of boolean type."""
     assert not ai_voltage_chan_with_excit.ai_excit_use_for_scaling
 
@@ -91,7 +91,7 @@ def test__channel__reset_boolean_property__returns_default_value(
     assert not ai_voltage_chan_with_excit.ai_excit_use_for_scaling
 
 
-def test__channel__get_enum_property__returns_value(ai_power_chan: AIChannel):
+def test__channel__get_enum_property__returns_default_value(ai_power_chan: AIChannel):
     """Test to validate getter for channel property of enum type."""
     assert ai_power_chan.pwr_idle_output_behavior == PowerIdleOutputBehavior.MAINTAIN_EXISTING_VALUE
 
@@ -112,7 +112,7 @@ def test__channel__reset_enum_property__returns_default_value(ai_power_chan: AIC
     assert ai_power_chan.pwr_idle_output_behavior == PowerIdleOutputBehavior.MAINTAIN_EXISTING_VALUE
 
 
-def test__channel__get_float_property__returns_value(ai_rtd_chan: AIChannel):
+def test__channel__get_float_property__returns_default_value(ai_rtd_chan: AIChannel):
     """Test to validate getter for channel property of float type."""
     assert ai_rtd_chan.ai_rtd_a == 0.00381
 
@@ -134,7 +134,7 @@ def test__channel__reset_float_property__returns_default_value(ai_rtd_chan: AICh
     assert ai_rtd_chan.ai_rtd_a == 0.00381
 
 
-def test__channel__get_string_property__returns_value(ci_pulse_width_chan: CIChannel):
+def test__channel__get_string_property__returns_default_value(ci_pulse_width_chan: CIChannel):
     """Test to validate getter for channel property of string type."""
     assert ci_pulse_width_chan.ci_ctr_timebase_dig_fltr_timebase_src == "100MHzTimebase"
 
@@ -156,7 +156,7 @@ def test__channel__reset_string_property__returns_default_value(ci_pulse_width_c
     assert ci_pulse_width_chan.ci_ctr_timebase_dig_fltr_timebase_src == "100MHzTimebase"
 
 
-def test__channel__get_uint32_property__returns_value(ai_voltage_chan_with_excit: AIChannel):
+def test__channel__get_uint32_property__returns_default_value(ai_voltage_chan_with_excit: AIChannel):
     """Test to validate getter for channel property of uint32 type."""
     assert ai_voltage_chan_with_excit.ai_lossy_lsb_removal_compressed_samp_size == 16
 
