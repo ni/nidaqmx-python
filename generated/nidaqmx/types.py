@@ -1,56 +1,70 @@
-import collections
+import typing
 
-# region Task Counter IO namedtuples
+import nidaqmx.constants
 
-CtrFreq = collections.namedtuple(
-    'CtrFreq', ['freq', 'duty_cycle'])
+# region Task Counter IO named tuples
 
-CtrTick = collections.namedtuple(
-    'CtrTick', ['high_tick', 'low_tick'])
+class CtrFreq(typing.NamedTuple):
+    freq: float
+    duty_cycle: float
 
-CtrTime = collections.namedtuple(
-    'CtrTime', ['high_time', 'low_time'])
+class CtrTick(typing.NamedTuple):
+    high_tick: int
+    low_tick: int
 
-# endregion
-
-# region Power IO namedtuples
-
-PowerMeasurement = collections.namedtuple(
-    'PowerMeasurement', ['voltage', 'current'])
+class CtrTime(typing.NamedTuple):
+    high_time: float
+    low_time: float
 
 # endregion
 
-# region Watchdog namedtuples
+# region Power IO named tuples
 
-AOExpirationState = collections.namedtuple(
-    'AOExpirationState',
-    ['physical_channel', 'expiration_state', 'output_type'])
-
-COExpirationState = collections.namedtuple(
-    'COExpirationState', ['physical_channel', 'expiration_state'])
-
-DOExpirationState = collections.namedtuple(
-    'DOExpirationState', ['physical_channel', 'expiration_state'])
+class PowerMeasurement(typing.NamedTuple):
+    voltage: float
+    current: float
 
 # endregion
 
-# region Power Up States namedtuples
+# region Watchdog named tuples
 
-AOPowerUpState = collections.namedtuple(
-    'AOPowerUpState', ['physical_channel', 'power_up_state', 'channel_type'])
+class AOExpirationState(typing.NamedTuple):
+    physical_channel: str
+    expiration_state: float
+    output_type: nidaqmx.constants.WatchdogAOExpirState
 
-DOPowerUpState = collections.namedtuple(
-    'DOPowerUpState', ['physical_channel', 'power_up_state'])
+class COExpirationState(typing.NamedTuple):
+    physical_channel: str
+    expiration_state: nidaqmx.constants.WatchdogCOExpirState
 
-DOResistorPowerUpState = collections.namedtuple(
-    'DOResistorPowerUpState', ['physical_channel', 'power_up_state'])
+class DOExpirationState(typing.NamedTuple):
+    physical_channel: str
+    expiration_state: bool
 
 # endregion
 
-# region System namedtuples
+# region Power Up States named tuples
 
-CDAQSyncConnection = collections.namedtuple(
-    'CDAQSyncConnection', ['output_port', 'input_port'])
+class AOPowerUpState(typing.NamedTuple):
+    physical_channel: str
+    power_up_state: float
+    channel_type: nidaqmx.constants.AOPowerUpOutputBehavior
+
+class DOPowerUpState(typing.NamedTuple):
+    physical_channel: str
+    power_up_state: nidaqmx.constants.PowerUpStates
+
+class DOResistorPowerUpState(typing.NamedTuple):
+    physical_channel: str
+    power_up_state: nidaqmx.constants.ResistorState
+
+# endregion
+
+# region System named tuples
+
+class CDAQSyncConnection(typing.NamedTuple):
+    output_port: str
+    input_port: str
 
 # endregion
 
