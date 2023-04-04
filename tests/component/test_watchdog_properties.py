@@ -17,7 +17,7 @@ def test__watchdog_task__get_expired__returns_false(any_x_series_device):
         assert not task.expired
 
 
-@pytest.mark.parametrize("device_by_name", ["cDAQ1"], indirect=True)
+@pytest.mark.parametrize("device_by_name", ["cdaqChassisTester"], indirect=True)
 def test__watchdog_task__set_boolean_property__returns_assigned_value(device_by_name):
     """Test to validate setter for boolean property."""
     with nidaqmx.system.WatchdogTask(device_by_name.name, timeout=0.5) as task:
@@ -26,7 +26,7 @@ def test__watchdog_task__set_boolean_property__returns_assigned_value(device_by_
         assert task.expir_trig_trig_on_network_conn_loss
 
 
-@pytest.mark.parametrize("device_by_name", ["cDAQ1"], indirect=True)
+@pytest.mark.parametrize("device_by_name", ["cdaqChassisTester"], indirect=True)
 def test__watchdog_task__reset_boolean_property__returns_default_value(device_by_name):
     """Test to validate reset for boolean property."""
     with nidaqmx.system.WatchdogTask(device_by_name.name, timeout=0.5) as task:
