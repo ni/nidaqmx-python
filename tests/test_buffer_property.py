@@ -28,7 +28,7 @@ def test__buffer__set_invalid_int32_value__default_value_is_retained(any_x_serie
         with pytest.raises(DaqError):
             task.in_stream.input_buf_size = 800000000000
             task.in_stream.read()
-    
+
         assert task.in_stream.input_buf_size == 1136082944
 
 
