@@ -43,7 +43,7 @@ def get_functions(metadata, class_name=""):
     return sorted(functions_metadata, key=lambda x: x._function_name)
 
 
-def get_all_functions(metadata):
+def get_interpreter_functions(metadata):
     """Converts the scrapigen metadata into a list of functions."""
     all_functions = deepcopy(metadata["functions"])
     functions_metadata = []
@@ -53,7 +53,7 @@ def get_all_functions(metadata):
         function_data["c_function_name"] = function_name
         function_name = camel_to_snake_case(function_name, CUSTOM_CAMEL_TO_SNAKE_CASE_REGEXES)
         function_name = function_name.replace("_u_int", "_uint")
-        skippable_param = get_skipped_param_for_func(function_data)
+        skippable_param = get_skippable_param_for_func(function_data)
         if skippable_param:
             function_data["parameters"] = (p for p in function_data["parameters"] if p["name"] != skippable_param)
         functions_metadata.append(
@@ -268,7 +268,7 @@ def get_return_value_for_func(func):
 def get_input_params(func):
     return (p for p in func.base_parameters if p.direction == "in")
 
-def get_skipped_param_for_func(func):
+def get_skippable_param_for_func(func):
     for param in func["parameters"]:
         size = param.get("size", dict())
         if size.get("mechanism", None) == "ivi-dance":
