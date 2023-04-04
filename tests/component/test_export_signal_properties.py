@@ -24,6 +24,7 @@ def ao_voltage_task(any_x_series_device):
         task.ao_channels.add_ao_voltage_chan(any_x_series_device.ao_physical_chans[0].name)
         yield task
 
+
 def test__export_signal__get_enum_property__returns_default_value(ai_voltage_task: Task):
     """Test to validate getter for export signal property of enum type."""
     assert ai_voltage_task.export_signals.samp_clk_output_behavior == ExportAction.PULSE
@@ -59,7 +60,9 @@ def test__export_signal__set_invalid_routing_destination__throws_daqerror(
 
     with pytest.raises(DaqError) as exc_info:
         _ = ai_voltage_task.export_signals.start_trig_output_term
-    assert exc_info.value.error_type == DAQmxErrors.INVALID_ROUTING_DESTINATION_TERMINAL_NAME_ROUTING
+    assert (
+        exc_info.value.error_type == DAQmxErrors.INVALID_ROUTING_DESTINATION_TERMINAL_NAME_ROUTING
+    )
 
 
 def test__export_signal__set_string_property__returns_assigned_value(ao_voltage_task: Task):
