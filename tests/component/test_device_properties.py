@@ -2,6 +2,7 @@
 import pytest
 
 from nidaqmx.constants import BusType, TriggerUsage
+from nidaqmx.system import Device
 
 
 @pytest.mark.parametrize("device_by_name", ["bridgeTester"], indirect=True)
@@ -61,3 +62,14 @@ def test__device__list_of_uint_property__returns_value(device_by_name):
 
     assert isinstance(accessory_product_numbers, list)
     assert accessory_product_numbers == [0x7992]
+
+
+@pytest.mark.parametrize("device_by_name", ["bridgeTester"], indirect=True)
+def test__device__get_deprecated_properties__reports_warnings(device_by_name: Device):
+    """Test to validate deprecated properties."""
+    with pytest.deprecated_call():
+        assert device_by_name.is_simulated == device_by_name.dev_is_simulated
+    with pytest.deprecated_call():
+        assert device_by_name.serial_num == device_by_name.dev_serial_num
+    with pytest.deprecated_call():
+        assert device_by_name.hwteds_supported == device_by_name.tedshwteds_supported
