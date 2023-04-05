@@ -5,22 +5,6 @@ from copy import deepcopy
 from codegen.functions.function import Function
 from codegen.utilities.helpers import camel_to_snake_case
 
-FUNCTION_RETURN_TYPE_MAP_SET = {
-    "char[]": "str",
-    "float64": "float",
-    "float64[]": "List[float]",
-    "int16[]": "List[int]",
-    "int32": "int",
-    "int32[]": "List[int]",
-    "uInt8[]": "List[int]",
-    "uInt16[]": "List[int]",
-    "uInt32": "int",
-    "uInt32[]": "List[int]",
-    "uInt64": "int",
-    "bool32": "bool",
-    "TaskHandle": "object",
-}
-
 # This custom regex list doesn't split the string before the number.
 INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES = [
     re.compile("([^_\n])([A-Z][a-z]+)"),
@@ -77,20 +61,6 @@ def get_interpreter_parameter_signature(is_python_factory, params):
             params_with_defaults.append(param.parameter_name)
 
     return ", ".join(params_with_defaults)
-
-
-def get_return_value_for_interpreter_func(func):
-    """Gets return value for the function."""
-    out_params = (p for p in func.base_parameters if p.direction == "out")
-    return_values = []
-    for param in out_params:
-        return_value = FUNCTION_RETURN_TYPE_MAP_SET.get(param.type)
-        if return_value:
-            return_values.append(return_value)
-    if len(return_values) == 1:
-        return return_values[0]
-    elif len(return_values) > 1:
-        return "Tuple[" + ", ".join(return_values) + "]"
 
 
 def get_input_params(func):
