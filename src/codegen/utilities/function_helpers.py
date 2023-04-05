@@ -1,5 +1,4 @@
 """This contains the helper methods used in functions generation."""
-import re
 from copy import deepcopy
 
 from codegen.functions.function import Function
@@ -11,21 +10,6 @@ FUNCTION_NAME_CHANGE_SET = {
     "AIRTD": "AI_RTD",
     "CIGPS": "CI_GPS",
 }
-
-FUNCTION_RETURN_TYPE_MAP_SET = {
-    "char[]": "str",
-}
-
-# This custom regex list doesn't split the string before the number.
-CUSTOM_CAMEL_TO_SNAKE_CASE_REGEXES = [
-    re.compile("([^_\n])([A-Z][a-z]+)"),
-    re.compile("([a-z])([A-Z])"),
-    re.compile("([0-9])([^_0-9])"),
-]
-
-INTERPRETER_IGNORED_FUNCTIONS = [
-    "GetExtendedErrorInfo",
-]
 
 
 def get_functions(metadata, class_name=""):
@@ -39,31 +23,6 @@ def get_functions(metadata, class_name=""):
         ) or class_name == "":
             function_data["c_function_name"] = function_name
             functions_metadata.append(Function(get_function_name(function_name), function_data))
-
-    return sorted(functions_metadata, key=lambda x: x._function_name)
-
-
-def get_interpreter_functions(metadata):
-    """Converts the scrapigen metadata into a list of functions."""
-    all_functions = deepcopy(metadata["functions"])
-    functions_metadata = []
-    for function_name, function_data in all_functions.items():
-        if function_name in INTERPRETER_IGNORED_FUNCTIONS:
-            continue
-        function_data["c_function_name"] = function_name
-        function_name = camel_to_snake_case(function_name, CUSTOM_CAMEL_TO_SNAKE_CASE_REGEXES)
-        function_name = function_name.replace("_u_int", "_uint")
-        skippable_param = get_skippable_param_for_func(function_data)
-        if skippable_param:
-            function_data["parameters"] = (
-                p for p in function_data["parameters"] if p["name"] != skippable_param
-            )
-        functions_metadata.append(
-            Function(
-                function_name,
-                function_data,
-            )
-        )
 
     return sorted(functions_metadata, key=lambda x: x._function_name)
 
@@ -114,18 +73,6 @@ def get_parameter_signature(is_python_factory, sorted_params):
         if param._optional:
             params_with_defaults.append(f"{param.parameter_name}={param.default}")
         else:
-            params_with_defaults.append(param.parameter_name)
-
-    return ", ".join(params_with_defaults)
-
-
-def get_interpreter_parameter_signature(is_python_factory, params):
-    """Gets parameter signature for function defintion."""
-    params_with_defaults = []
-    if not is_python_factory:
-        params_with_defaults.append("self")
-    for param in params:
-        if param.type:
             params_with_defaults.append(param.parameter_name)
 
     return ", ".join(params_with_defaults)
@@ -258,26 +205,3 @@ def instantiate_explicit_output_param(param):
         )
     elif param.ctypes_data_type == "ctypes.c_char_p":
         return f"{param.parameter_name} = ctypes.create_string_buffer(temp_size)"
-
-
-def get_return_value_for_func(func):
-    """Gets return value for the function."""
-    for output_parameter in func.base_parameters:
-        if output_parameter.direction == "out" and FUNCTION_RETURN_TYPE_MAP_SET.get(
-            output_parameter.type, None
-        ):
-            return FUNCTION_RETURN_TYPE_MAP_SET[output_parameter.type]
-    return None
-
-
-def get_input_params(func):
-    """Gets input parameters for the function."""
-    return (p for p in func.base_parameters if p.direction == "in")
-
-
-def get_skippable_param_for_func(func):
-    """Gets parameter name that needs to be skipped for the function."""
-    for param in func["parameters"]:
-        size = param.get("size", dict())
-        if size.get("mechanism", None) == "ivi-dance":
-            return size["value"]

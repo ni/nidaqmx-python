@@ -11,11 +11,11 @@ class Parameter:
         """Structure for storing function parameter metadata from scrapigen."""
         self._direction = parameter_metadata["direction"]
         self._parameters_name = camel_to_snake_case(parameter_metadata["name"])
-        self._type = parameter_metadata.get("type", None)
-        self._ctypes_data_type = parameter_metadata.get("ctypes_data_type", None)
-        self._python_data_type = parameter_metadata.get("python_data_type", None)
-        self._description = parameter_metadata.get("python_description", None)
-        self._python_type_annotation = parameter_metadata.get("python_type_annotation", None)
+        self._type = parameter_metadata.get("type")
+        self._ctypes_data_type = parameter_metadata.get("ctypes_data_type")
+        self._python_data_type = parameter_metadata.get("python_data_type")
+        self._description = parameter_metadata.get("python_description")
+        self._python_type_annotation = parameter_metadata.get("python_type_annotation")
         self._is_list = parameter_metadata.get("is_list", False)
         self._has_explicit_buffer_size = parameter_metadata.get("has_explicit_buffer_size", False)
         self._optional = parameter_metadata.get("optional", False)
