@@ -9,7 +9,7 @@ from nidaqmx.errors import DaqError
 from nidaqmx.task import Task
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture()
 def ai_voltage_task(any_x_series_device):
     """Gets AI voltage task."""
     with nidaqmx.Task() as task:
@@ -69,10 +69,10 @@ def test__ai_task__get_enum_property__returns_default_value(ai_voltage_task: Tas
 def test__ai_task_without_cfg_samp_clk__set_trig_type__throws_daqerror(ai_voltage_task: Task):
     """Test to validate error while setting trigger type without configuring sample clock."""
     value_to_test = TriggerType.ANALOG_EDGE
-    ai_voltage_task.triggers.start_trigger.trig_type = value_to_test
 
+    ai_voltage_task.triggers.start_trigger.trig_type = value_to_test
     with pytest.raises(DaqError) as exc_info:
-        _ = ai_voltage_task.control(TaskMode.TASK_VERIFY)
+        ai_voltage_task.control(TaskMode.TASK_VERIFY)
 
     assert exc_info.value.error_type == DAQmxErrors.TRIG_WHEN_ON_DEMAND_SAMP_TIMING
 
