@@ -95,7 +95,7 @@ class WatchdogTask:
         return self._expiration_states
 
     @property
-    def expiration_trigger_dig_edge_edge(self):
+    def expir_trig_dig_edge_edge(self):
         """
         :class:`nidaqmx.constants.Edge`: Specifies on which edge of a
             digital signal to expire the watchdog task.
@@ -115,8 +115,8 @@ class WatchdogTask:
 
         return Edge(val.value)
 
-    @expiration_trigger_dig_edge_edge.setter
-    def expiration_trigger_dig_edge_edge(self, val):
+    @expir_trig_dig_edge_edge.setter
+    def expir_trig_dig_edge_edge(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetDigEdgeWatchdogExpirTrigEdge
         if cfunc.argtypes is None:
@@ -129,8 +129,8 @@ class WatchdogTask:
             self._handle, val)
         check_for_error(error_code)
 
-    @expiration_trigger_dig_edge_edge.deleter
-    def expiration_trigger_dig_edge_edge(self):
+    @expir_trig_dig_edge_edge.deleter
+    def expir_trig_dig_edge_edge(self):
         cfunc = lib_importer.windll.DAQmxResetDigEdgeWatchdogExpirTrigEdge
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -143,7 +143,7 @@ class WatchdogTask:
         check_for_error(error_code)
 
     @property
-    def expiration_trigger_dig_edge_src(self):
+    def expir_trig_dig_edge_src(self):
         """
         str: Specifies the name of a terminal where a digital signal
             exists to use as the source of the Expiration Trigger.
@@ -176,8 +176,8 @@ class WatchdogTask:
 
         return val.value.decode('ascii')
 
-    @expiration_trigger_dig_edge_src.setter
-    def expiration_trigger_dig_edge_src(self, val):
+    @expir_trig_dig_edge_src.setter
+    def expir_trig_dig_edge_src(self, val):
         cfunc = lib_importer.windll.DAQmxSetDigEdgeWatchdogExpirTrigSrc
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -189,8 +189,8 @@ class WatchdogTask:
             self._handle, val)
         check_for_error(error_code)
 
-    @expiration_trigger_dig_edge_src.deleter
-    def expiration_trigger_dig_edge_src(self):
+    @expir_trig_dig_edge_src.deleter
+    def expir_trig_dig_edge_src(self):
         cfunc = lib_importer.windll.DAQmxResetDigEdgeWatchdogExpirTrigSrc
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -203,7 +203,7 @@ class WatchdogTask:
         check_for_error(error_code)
 
     @property
-    def expiration_trigger_trig_on_network_conn_loss(self):
+    def expir_trig_trig_on_network_conn_loss(self):
         """
         bool: Specifies the watchdog timer behavior when the network
             connection is lost between the host and the chassis. If set
@@ -226,8 +226,8 @@ class WatchdogTask:
 
         return val.value
 
-    @expiration_trigger_trig_on_network_conn_loss.setter
-    def expiration_trigger_trig_on_network_conn_loss(self, val):
+    @expir_trig_trig_on_network_conn_loss.setter
+    def expir_trig_trig_on_network_conn_loss(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetWatchdogExpirTrigTrigOnNetworkConnLoss)
         if cfunc.argtypes is None:
@@ -240,8 +240,8 @@ class WatchdogTask:
             self._handle, val)
         check_for_error(error_code)
 
-    @expiration_trigger_trig_on_network_conn_loss.deleter
-    def expiration_trigger_trig_on_network_conn_loss(self):
+    @expir_trig_trig_on_network_conn_loss.deleter
+    def expir_trig_trig_on_network_conn_loss(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetWatchdogExpirTrigTrigOnNetworkConnLoss)
         if cfunc.argtypes is None:
@@ -255,7 +255,7 @@ class WatchdogTask:
         check_for_error(error_code)
 
     @property
-    def expiration_trigger_type(self):
+    def expir_trig_trig_type(self):
         """
         :class:`nidaqmx.constants.TriggerType`: Specifies the type of
             trigger to use to expire a watchdog task.
@@ -275,8 +275,8 @@ class WatchdogTask:
 
         return TriggerType(val.value)
 
-    @expiration_trigger_type.setter
-    def expiration_trigger_type(self, val):
+    @expir_trig_trig_type.setter
+    def expir_trig_trig_type(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetWatchdogExpirTrigType
         if cfunc.argtypes is None:
@@ -289,8 +289,8 @@ class WatchdogTask:
             self._handle, val)
         check_for_error(error_code)
 
-    @expiration_trigger_type.deleter
-    def expiration_trigger_type(self):
+    @expir_trig_trig_type.deleter
+    def expir_trig_trig_type(self):
         cfunc = lib_importer.windll.DAQmxResetWatchdogExpirTrigType
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -664,64 +664,4 @@ class WatchdogTask:
 
         error_code = cfunc(self._handle)
         check_for_error(error_code)
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_type instead.")
-    def expir_trig_trig_type(self):
-        return self.expiration_trigger_type
-
-    @expir_trig_trig_type.setter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_type instead.")
-    def expir_trig_trig_type(self, val):
-        self.expiration_trigger_type = val
-
-    @expir_trig_trig_type.deleter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_type instead.")
-    def expir_trig_trig_type(self):
-        del self.expiration_trigger_type
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_dig_edge_edge instead.")
-    def expir_trig_dig_edge_edge(self):
-        return self.expiration_trigger_dig_edge_edge
-
-    @expir_trig_dig_edge_edge.setter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_dig_edge_edge instead.")
-    def expir_trig_dig_edge_edge(self, val):
-        self.expiration_trigger_dig_edge_edge = val
-
-    @expir_trig_dig_edge_edge.deleter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_dig_edge_edge instead.")
-    def expir_trig_dig_edge_edge(self):
-        del self.expiration_trigger_dig_edge_edge
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_dig_edge_src instead.")
-    def expir_trig_dig_edge_src(self):
-        return self.expiration_trigger_dig_edge_src
-
-    @expir_trig_dig_edge_src.setter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_dig_edge_src instead.")
-    def expir_trig_dig_edge_src(self, val):
-        self.expiration_trigger_dig_edge_src = val
-
-    @expir_trig_dig_edge_src.deleter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_dig_edge_src instead.")
-    def expir_trig_dig_edge_src(self):
-        del self.expiration_trigger_dig_edge_src
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_trig_on_network_conn_loss instead.")
-    def expir_trig_trig_on_network_conn_loss(self):
-        return self.expiration_trigger_trig_on_network_conn_loss
-
-    @expir_trig_trig_on_network_conn_loss.setter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_trig_on_network_conn_loss instead.")
-    def expir_trig_trig_on_network_conn_loss(self, val):
-        self.expiration_trigger_trig_on_network_conn_loss = val
-
-    @expir_trig_trig_on_network_conn_loss.deleter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use expiration_trigger_trig_on_network_conn_loss instead.")
-    def expir_trig_trig_on_network_conn_loss(self):
-        del self.expiration_trigger_trig_on_network_conn_loss
 
