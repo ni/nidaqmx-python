@@ -1,7 +1,8 @@
-from copy import deepcopy
+"""This contains the helper methods used in interpreter generation."""
 import re
-from codegen.functions.function import Function
+from copy import deepcopy
 
+from codegen.functions.function import Function
 from codegen.utilities.helpers import camel_to_snake_case
 
 FUNCTION_RETURN_TYPE_MAP_SET = {
@@ -110,10 +111,9 @@ def get_skippable_params_for_interpreter_func(func):
 
 
 def is_skippable_param(param: dict) -> bool:
+    """Checks whether the parameter can be skipped or not while generating interpreter."""
     if (
-        param.get("include_in_proto", True) == False
-        and (param["name"] == "size" or "reserved")
-        or param.get("proto_only")
-    ):
+        not param.get("include_in_proto", True) and (param["name"] == "size" or "reserved")
+    ) or param.get("proto_only"):
         return True
     return False
