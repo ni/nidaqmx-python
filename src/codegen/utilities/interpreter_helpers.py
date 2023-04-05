@@ -112,8 +112,9 @@ def get_skippable_params_for_interpreter_func(func):
 
 def is_skippable_param(param: dict) -> bool:
     """Checks whether the parameter can be skipped or not while generating interpreter."""
-    if (
-        not param.get("include_in_proto", True) and (param["name"] == "size" or "reserved")
-    ) or param.get("proto_only"):
+    ignored_params = ["size", "reserved"]
+    if (not param.get("include_in_proto", True) and (param["name"] in ignored_params)) or param.get(
+        "proto_only"
+    ):
         return True
     return False

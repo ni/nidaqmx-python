@@ -762,7 +762,8 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_analog_power_up_states(self, device_name):
+    def get_analog_power_up_states(
+            self, device_name, channel_name, channel_type) -> float:
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -859,11 +860,11 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_digital_power_up_states(self, device_name):
+    def get_digital_power_up_states(self, device_name, channel_name) -> int:
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_digital_pull_up_pull_down_states(self, device_name):
+    def get_digital_pull_up_pull_down_states(self, device_name, channel_name) -> int:
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1324,16 +1325,19 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def register_done_event(self, task):
+    def register_done_event(
+            self, task, options, callback_function, callback_data):
         raise NotImplementedError
 
     @abc.abstractmethod
     def register_every_n_samples_event(
-            self, task, every_n_samples_event_type, n_samples):
+            self, task, every_n_samples_event_type, n_samples, options,
+            callback_function, callback_data):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def register_signal_event(self, task, signal_id):
+    def register_signal_event(
+            self, task, signal_id, options, callback_function, callback_data):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1419,7 +1423,8 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def set_analog_power_up_states(self, device_name):
+    def set_analog_power_up_states(
+            self, device_name, channel_names, state, channel_type):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1482,11 +1487,12 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def set_digital_power_up_states(self, device_name):
+    def set_digital_power_up_states(self, device_name, channel_names, state):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def set_digital_pull_up_pull_down_states(self, device_name):
+    def set_digital_pull_up_pull_down_states(
+            self, device_name, channel_names, state):
         raise NotImplementedError
 
     @abc.abstractmethod
