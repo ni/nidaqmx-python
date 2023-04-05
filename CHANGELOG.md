@@ -32,7 +32,7 @@ All notable changes to this project will be documented in this file.
     * Some properties were renamed in an effort to improve the consistency of the `nidaqmx` module and to support maintainability of the generator. The previous names are still usable, but will emit a `DeprecationWarning` on usage. These deprecated properties may be removed in a future update.
     * Refactored the repository folder structure as follows:
         * `generated/nidaqmx/` - The output of the code generator and source for the build `nidaqmx` module. Do not directly modify any files in this folder.
-        * `nidaqmx_examples/` - Example programs demonstrating how to use the `nidaqmx` module.
+        * `examples/` - Example programs demonstrating how to use the `nidaqmx` module.
         * `src/codegen/` - The code generator.
         * `src/handwritten/` - Hand-maintained files that are copied as-is during code generation.
         * `tests` - Test code that exercises the `nidaqmx` module to ensure it functions correctly and doesn't introduce regressions.
