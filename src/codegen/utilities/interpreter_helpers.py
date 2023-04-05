@@ -35,11 +35,13 @@ INTERPRETER_IGNORED_FUNCTIONS = [
 ]
 
 
-def get_interpreter_functions(metadata):
+def get_interpreter_functions(metadata, exclude_grpc_only_functions=False):
     """Converts the scrapigen metadata into a list of functions."""
     all_functions = deepcopy(metadata["functions"])
     functions_metadata = []
     for function_name, function_data in all_functions.items():
+        if exclude_grpc_only_functions and is_grpc_only_function(function_data):
+            continue
         if function_name in INTERPRETER_IGNORED_FUNCTIONS:
             continue
         function_data["c_function_name"] = function_name
@@ -57,6 +59,37 @@ def get_interpreter_functions(metadata):
         )
 
     return sorted(functions_metadata, key=lambda x: x._function_name)
+
+
+def is_grpc_only_function(function_data):
+    """Returns true if the function is a grpc only function."""
+    if "codegen_method" in function_data:
+        if function_data["codegen_method"] == "grpc-only":
+            return True
+
+
+def generate_interpreter_function_call_args(function_metadata):
+    """Gets function call arguments."""
+    function_call_args = []
+    # if function_metadata.handle_parameter is not None:
+    #     if function_metadata.handle_parameter.cvi_name == "taskHandle":
+    #         function_call_args.append("task")
+    for param in function_metadata.base_parameters:
+        if param.direction == "in":
+            function_call_args.append(param.parameter_name)
+            if param.has_explicit_buffer_size:
+                function_call_args.append(f"len({param.parameter_name})")
+        else:
+            if param.has_explicit_buffer_size:
+                function_call_args.append(param.parameter_name)
+                function_call_args.append("temp_size")
+            else:
+                function_call_args.append(f"ctypes.byref({param.parameter_name})")
+
+    if function_metadata.calling_convention == "Cdecl":
+        function_call_args.append("None")
+
+    return function_call_args
 
 
 def get_interpreter_parameter_signature(is_python_factory, params):
@@ -101,3 +134,19 @@ def is_skippable_param(param: dict) -> bool:
     ):
         return True
     return False
+
+
+def get_output_params(func):
+    """Gets input parameters for the function."""
+    return (p for p in func.base_parameters if p.direction == "out")
+
+
+def get_output_parameter_names(func):
+    """Gets the names of the output parameters of the given function."""
+    output_parameters = get_output_params(func)
+    return [p.parameter_name for p in output_parameters]
+
+
+def get_c_function_call_template(func):
+    """Gets the template to use for generating the logic of calling the c functions."""
+    return "/default_c_function_call.py.mako"
