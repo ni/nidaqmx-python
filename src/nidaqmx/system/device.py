@@ -2,6 +2,7 @@
 
 import ctypes
 import numpy
+import deprecation
 
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, enum_bitfield_to_list, ctypes_byte_str,
@@ -21,7 +22,7 @@ from nidaqmx.constants import (
 __all__ = ['Device']
 
 
-class Device(object):
+class Device:
     """
     Represents a DAQmx device.
     """
@@ -46,7 +47,7 @@ class Device(object):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return 'Device(name={0})'.format(self._name)
+        return f'Device(name={self._name})'
 
     @property
     def name(self):
@@ -1860,47 +1861,6 @@ class Device(object):
         return val.value
 
     @property
-    def dev_is_simulated(self):
-        """
-        bool: Indicates if the device is a simulated device.
-        """
-        val = c_bool32()
-
-        cfunc = lib_importer.windll.DAQmxGetDevIsSimulated
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @property
-    def dev_serial_num(self):
-        """
-        int: Indicates the serial number of the device. This value is
-            zero if the device does not have a serial number.
-        """
-        val = ctypes.c_uint()
-
-        cfunc = lib_importer.windll.DAQmxGetDevSerialNum
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @property
     def di_max_rate(self):
         """
         float: Indicates the maximum digital input rate of the device.
@@ -2112,6 +2072,46 @@ class Device(object):
         check_for_error(size_or_code)
 
         return Device(val.value.decode('ascii'))
+
+    @property
+    def hwteds_supported(self):
+        """
+        bool: Indicates whether the device supports hardware TEDS.
+        """
+        val = c_bool32()
+
+        cfunc = lib_importer.windll.DAQmxGetDevTEDSHWTEDSSupported
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @property
+    def is_simulated(self):
+        """
+        bool: Indicates if the device is a simulated device.
+        """
+        val = c_bool32()
+
+        cfunc = lib_importer.windll.DAQmxGetDevIsSimulated
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
 
     @property
     def num_dma_chans(self):
@@ -2333,6 +2333,27 @@ class Device(object):
         return val.value
 
     @property
+    def serial_num(self):
+        """
+        int: Indicates the serial number of the device. This value is
+            zero if the device does not have a serial number.
+        """
+        val = ctypes.c_uint()
+
+        cfunc = lib_importer.windll.DAQmxGetDevSerialNum
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint)]
+
+        error_code = cfunc(
+            self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @property
     def tcpip_ethernet_ip(self):
         """
         str: Indicates the IPv4 address of the Ethernet interface in
@@ -2433,26 +2454,6 @@ class Device(object):
         return val.value.decode('ascii')
 
     @property
-    def tedshwteds_supported(self):
-        """
-        bool: Indicates whether the device supports hardware TEDS.
-        """
-        val = c_bool32()
-
-        cfunc = lib_importer.windll.DAQmxGetDevTEDSHWTEDSSupported
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @property
     def terminals(self):
         """
         List[str]: Indicates a list of all terminals on the device.
@@ -2503,6 +2504,21 @@ class Device(object):
         check_for_error(error_code)
 
         return val.value
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use is_simulated instead.")
+    def dev_is_simulated(self):
+        return self.is_simulated
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use serial_num instead.")
+    def dev_serial_num(self):
+        return self.serial_num
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use hwteds_supported instead.")
+    def tedshwteds_supported(self):
+        return self.hwteds_supported
 
     def reset_device(self):
         """

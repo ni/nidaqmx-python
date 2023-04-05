@@ -2,6 +2,7 @@
 
 import ctypes
 import numpy
+import deprecation
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx._task_modules.read_functions import _read_raw
@@ -13,7 +14,7 @@ from nidaqmx.constants import (
     READ_ALL_AVAILABLE, ReadRelativeTo, WaitMode)
 
 
-class InStream(object):
+class InStream:
     """
     Exposes an input data stream on a DAQmx task.
 
@@ -26,7 +27,7 @@ class InStream(object):
         self._handle = task._handle
         self._timeout = 10.0
 
-        super(InStream, self).__init__()
+        super().__init__()
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -41,7 +42,7 @@ class InStream(object):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return 'InStream(task={0})'.format(self._task.name)
+        return f'InStream(task={self._task.name})'
 
     @property
     def timeout(self):
@@ -1395,54 +1396,6 @@ class InStream(object):
         return val.value
 
     @property
-    def over_write(self):
-        """
-        :class:`nidaqmx.constants.OverwriteMode`: Specifies whether to
-            overwrite samples in the buffer that you have not yet read.
-        """
-        val = ctypes.c_int()
-
-        cfunc = lib_importer.windll.DAQmxGetReadOverWrite
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return OverwriteMode(val.value)
-
-    @over_write.setter
-    def over_write(self, val):
-        val = val.value
-        cfunc = lib_importer.windll.DAQmxSetReadOverWrite
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
-
-    @over_write.deleter
-    def over_write(self):
-        cfunc = lib_importer.windll.DAQmxResetReadOverWrite
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
-
-    @property
     def overcurrent_chans(self):
         """
         List[str]: Indicates a list of names of any virtual channels in
@@ -1624,6 +1577,54 @@ class InStream(object):
         check_for_error(error_code)
 
         return val.value
+
+    @property
+    def overwrite(self):
+        """
+        :class:`nidaqmx.constants.OverwriteMode`: Specifies whether to
+            overwrite samples in the buffer that you have not yet read.
+        """
+        val = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxGetReadOverWrite
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
+
+        error_code = cfunc(
+            self._handle, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return OverwriteMode(val.value)
+
+    @overwrite.setter
+    def overwrite(self, val):
+        val = val.value
+        cfunc = lib_importer.windll.DAQmxSetReadOverWrite
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
+
+        error_code = cfunc(
+            self._handle, val)
+        check_for_error(error_code)
+
+    @overwrite.deleter
+    def overwrite(self):
+        cfunc = lib_importer.windll.DAQmxResetReadOverWrite
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle]
+
+        error_code = cfunc(
+            self._handle)
+        check_for_error(error_code)
 
     @property
     def pll_unlocked_chans(self):
@@ -1935,7 +1936,7 @@ class InStream(object):
     @property
     def reverse_voltage_error_chans(self):
         """
-        List[str]: Indicates a list of names of any virtual channels in
+        List[str]: Indicates a list of names of all virtual channels in
             the task for which reverse voltage error condition has been
             detected. You must read the Reverse Voltage Error Channels
             Exist property before you read this property. Otherwise, you
@@ -1973,12 +1974,12 @@ class InStream(object):
     def reverse_voltage_error_chans_exist(self):
         """
         bool: Indicates if the device(s) detected reverse voltage error
-            for any channel in the task. Reverse voltage error will
-            occured if the local voltage is equal to negative saturated
-            voltage. Reading this property clears the error condition
-            status for all channels in the task. You must read this
-            property before you read the Reverse Voltage Error Channels
-            property. Otherwise, you will receive an error.
+            for any of the channels in the task. Reverse voltage error
+            occurs if the local voltage is equal to the negative
+            saturated voltage. Reading this property clears the error
+            condition status for all channels in the task. You must read
+            this property before you read the Reverse Voltage Error
+            Channels property. Otherwise, you will receive an error.
         """
         val = c_bool32()
 
@@ -2446,3 +2447,19 @@ class InStream(object):
         error_code = cfunc(
             self._handle, file_path)
         check_for_error(error_code)
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use overwrite instead.")
+    def over_write(self):
+        return self.overwrite
+
+    @over_write.setter
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use overwrite instead.")
+    def over_write(self, val):
+        self.overwrite = val
+
+    @over_write.deleter
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use overwrite instead.")
+    def over_write(self):
+        del self.overwrite
+

@@ -8,7 +8,7 @@ from nidaqmx.errors import (
 __all__ = ['PersistedScale']
 
 
-class PersistedScale(object):
+class PersistedScale:
     """
     Represents a saved DAQmx custom scale.
 
@@ -36,7 +36,7 @@ class PersistedScale(object):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return 'PersistedScale(name={0})'.format(self._name)
+        return f'PersistedScale(name={self._name})'
 
     @property
     def author(self):

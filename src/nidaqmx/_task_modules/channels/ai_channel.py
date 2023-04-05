@@ -2,6 +2,7 @@
 
 import ctypes
 import numpy
+import deprecation
 
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
@@ -39,7 +40,7 @@ class AIChannel(Channel):
     __slots__ = []
 
     def __repr__(self):
-        return 'AIChannel(name={0})'.format(self._name)
+        return f'AIChannel(name={self._name})'
 
     @property
     def ai_ac_excit_freq(self):
@@ -399,6 +400,56 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
+    def ai_accel_db_ref(self):
+        """
+        float: Specifies the decibel reference level in the units of the
+            channel. When you read samples as a waveform, the decibel
+            reference level is included in the waveform attributes.
+        """
+        val = ctypes.c_double()
+
+        cfunc = lib_importer.windll.DAQmxGetAIAcceldBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ai_accel_db_ref.setter
+    def ai_accel_db_ref(self, val):
+        cfunc = lib_importer.windll.DAQmxSetAIAcceldBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_accel_db_ref.deleter
+    def ai_accel_db_ref(self):
+        cfunc = lib_importer.windll.DAQmxResetAIAcceldBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
     def ai_accel_sensitivity(self):
         """
         float: Specifies the sensitivity of the accelerometer. This
@@ -539,56 +590,6 @@ class AIChannel(Channel):
     @ai_accel_units.deleter
     def ai_accel_units(self):
         cfunc = lib_importer.windll.DAQmxResetAIAccelUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ai_acceld_b_ref(self):
-        """
-        float: Specifies the decibel reference level in the units of the
-            channel. When you read samples as a waveform, the decibel
-            reference level is included in the waveform attributes.
-        """
-        val = ctypes.c_double()
-
-        cfunc = lib_importer.windll.DAQmxGetAIAcceldBRef
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @ai_acceld_b_ref.setter
-    def ai_acceld_b_ref(self, val):
-        cfunc = lib_importer.windll.DAQmxSetAIAcceldBRef
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ai_acceld_b_ref.deleter
-    def ai_acceld_b_ref(self):
-        cfunc = lib_importer.windll.DAQmxResetAIAcceldBRef
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
@@ -7041,7 +7042,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ai_rtd_r_0(self):
+    def ai_rtd_r0(self):
         """
         float: Specifies in ohms the sensor resistance at 0 deg C. The
             Callendar-Van Dusen equation requires this value. Refer to
@@ -7063,8 +7064,8 @@ class AIChannel(Channel):
 
         return val.value
 
-    @ai_rtd_r_0.setter
-    def ai_rtd_r_0(self, val):
+    @ai_rtd_r0.setter
+    def ai_rtd_r0(self, val):
         cfunc = lib_importer.windll.DAQmxSetAIRTDR0
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -7077,8 +7078,8 @@ class AIChannel(Channel):
             self._handle, self._name, val)
         check_for_error(error_code)
 
-    @ai_rtd_r_0.deleter
-    def ai_rtd_r_0(self):
+    @ai_rtd_r0.deleter
+    def ai_rtd_r0(self):
         cfunc = lib_importer.windll.DAQmxResetAIRTDR0
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -7493,6 +7494,59 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
+    def ai_sound_pressure_db_ref(self):
+        """
+        float: Specifies the decibel reference level in the units of the
+            channel. When you read samples as a waveform, the decibel
+            reference level is included in the waveform attributes. NI-
+            DAQmx also uses the decibel reference level when converting
+            **ai_sound_pressure_max_sound_pressure_lvl** to a voltage
+            level.
+        """
+        val = ctypes.c_double()
+
+        cfunc = lib_importer.windll.DAQmxGetAISoundPressuredBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ai_sound_pressure_db_ref.setter
+    def ai_sound_pressure_db_ref(self, val):
+        cfunc = lib_importer.windll.DAQmxSetAISoundPressuredBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_sound_pressure_db_ref.deleter
+    def ai_sound_pressure_db_ref(self):
+        cfunc = lib_importer.windll.DAQmxResetAISoundPressuredBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
     def ai_sound_pressure_max_sound_pressure_lvl(self):
         """
         float: Specifies the maximum instantaneous sound pressure level
@@ -7588,59 +7642,6 @@ class AIChannel(Channel):
     @ai_sound_pressure_units.deleter
     def ai_sound_pressure_units(self):
         cfunc = lib_importer.windll.DAQmxResetAISoundPressureUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ai_sound_pressured_b_ref(self):
-        """
-        float: Specifies the decibel reference level in the units of the
-            channel. When you read samples as a waveform, the decibel
-            reference level is included in the waveform attributes. NI-
-            DAQmx also uses the decibel reference level when converting
-            **ai_sound_pressure_max_sound_pressure_lvl** to a voltage
-            level.
-        """
-        val = ctypes.c_double()
-
-        cfunc = lib_importer.windll.DAQmxGetAISoundPressuredBRef
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @ai_sound_pressured_b_ref.setter
-    def ai_sound_pressured_b_ref(self, val):
-        cfunc = lib_importer.windll.DAQmxSetAISoundPressuredBRef
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ai_sound_pressured_b_ref.deleter
-    def ai_sound_pressured_b_ref(self):
-        cfunc = lib_importer.windll.DAQmxResetAISoundPressuredBRef
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
@@ -8468,7 +8469,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ai_thrmstr_r_1(self):
+    def ai_thrmstr_r1(self):
         """
         float: Specifies in ohms the value of the reference resistor for
             the thermistor if you use voltage excitation. NI-DAQmx
@@ -8490,8 +8491,8 @@ class AIChannel(Channel):
 
         return val.value
 
-    @ai_thrmstr_r_1.setter
-    def ai_thrmstr_r_1(self, val):
+    @ai_thrmstr_r1.setter
+    def ai_thrmstr_r1(self, val):
         cfunc = lib_importer.windll.DAQmxSetAIThrmstrR1
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -8504,8 +8505,8 @@ class AIChannel(Channel):
             self._handle, self._name, val)
         check_for_error(error_code)
 
-    @ai_thrmstr_r_1.deleter
-    def ai_thrmstr_r_1(self):
+    @ai_thrmstr_r1.deleter
+    def ai_thrmstr_r1(self):
         cfunc = lib_importer.windll.DAQmxResetAIThrmstrR1
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -8668,6 +8669,56 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
+    def ai_velocity_iepe_sensor_db_ref(self):
+        """
+        float: Specifies the decibel reference level in the units of the
+            channel. When you read samples as a waveform, the decibel
+            reference level is included in the waveform attributes.
+        """
+        val = ctypes.c_double()
+
+        cfunc = lib_importer.windll.DAQmxGetAIVelocityIEPESensordBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ai_velocity_iepe_sensor_db_ref.setter
+    def ai_velocity_iepe_sensor_db_ref(self, val):
+        cfunc = lib_importer.windll.DAQmxSetAIVelocityIEPESensordBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_velocity_iepe_sensor_db_ref.deleter
+    def ai_velocity_iepe_sensor_db_ref(self):
+        cfunc = lib_importer.windll.DAQmxResetAIVelocityIEPESensordBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
     def ai_velocity_iepe_sensor_sensitivity(self):
         """
         float: Specifies the sensitivity of the IEPE velocity sensor
@@ -8761,56 +8812,6 @@ class AIChannel(Channel):
     def ai_velocity_iepe_sensor_sensitivity_units(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetAIVelocityIEPESensorSensitivityUnits)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ai_velocity_iepe_sensord_b_ref(self):
-        """
-        float: Specifies the decibel reference level in the units of the
-            channel. When you read samples as a waveform, the decibel
-            reference level is included in the waveform attributes.
-        """
-        val = ctypes.c_double()
-
-        cfunc = lib_importer.windll.DAQmxGetAIVelocityIEPESensordBRef
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @ai_velocity_iepe_sensord_b_ref.setter
-    def ai_velocity_iepe_sensord_b_ref(self, val):
-        cfunc = lib_importer.windll.DAQmxSetAIVelocityIEPESensordBRef
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ai_velocity_iepe_sensord_b_ref.deleter
-    def ai_velocity_iepe_sensord_b_ref(self):
-        cfunc = lib_importer.windll.DAQmxResetAIVelocityIEPESensordBRef
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
@@ -8922,6 +8923,56 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
+    def ai_voltage_db_ref(self):
+        """
+        float: Specifies the decibel reference level in the units of the
+            channel. When you read samples as a waveform, the decibel
+            reference level is included in the waveform attributes.
+        """
+        val = ctypes.c_double()
+
+        cfunc = lib_importer.windll.DAQmxGetAIVoltagedBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(ctypes.c_double)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ai_voltage_db_ref.setter
+    def ai_voltage_db_ref(self, val):
+        cfunc = lib_importer.windll.DAQmxSetAIVoltagedBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_double]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_voltage_db_ref.deleter
+    def ai_voltage_db_ref(self):
+        cfunc = lib_importer.windll.DAQmxResetAIVoltagedBRef
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
     def ai_voltage_units(self):
         """
         :class:`nidaqmx.constants.VoltageUnits`: Specifies the units to
@@ -8961,56 +9012,6 @@ class AIChannel(Channel):
     @ai_voltage_units.deleter
     def ai_voltage_units(self):
         cfunc = lib_importer.windll.DAQmxResetAIVoltageUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ai_voltaged_b_ref(self):
-        """
-        float: Specifies the decibel reference level in the units of the
-            channel. When you read samples as a waveform, the decibel
-            reference level is included in the waveform attributes.
-        """
-        val = ctypes.c_double()
-
-        cfunc = lib_importer.windll.DAQmxGetAIVoltagedBRef
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @ai_voltaged_b_ref.setter
-    def ai_voltaged_b_ref(self, val):
-        cfunc = lib_importer.windll.DAQmxSetAIVoltagedBRef
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ai_voltaged_b_ref.deleter
-    def ai_voltaged_b_ref(self):
-        cfunc = lib_importer.windll.DAQmxResetAIVoltagedBRef
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
@@ -9372,4 +9373,94 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_rtd_r0 instead.")
+    def ai_rtd_r_0(self):
+        return self.ai_rtd_r0
+
+    @ai_rtd_r_0.setter
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_rtd_r0 instead.")
+    def ai_rtd_r_0(self, val):
+        self.ai_rtd_r0 = val
+
+    @ai_rtd_r_0.deleter
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_rtd_r0 instead.")
+    def ai_rtd_r_0(self):
+        del self.ai_rtd_r0
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_sound_pressure_db_ref instead.")
+    def ai_sound_pressured_b_ref(self):
+        return self.ai_sound_pressure_db_ref
+
+    @ai_sound_pressured_b_ref.setter
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_sound_pressure_db_ref instead.")
+    def ai_sound_pressured_b_ref(self, val):
+        self.ai_sound_pressure_db_ref = val
+
+    @ai_sound_pressured_b_ref.deleter
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_sound_pressure_db_ref instead.")
+    def ai_sound_pressured_b_ref(self):
+        del self.ai_sound_pressure_db_ref
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_thrmstr_r1 instead.")
+    def ai_thrmstr_r_1(self):
+        return self.ai_thrmstr_r1
+
+    @ai_thrmstr_r_1.setter
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_thrmstr_r1 instead.")
+    def ai_thrmstr_r_1(self, val):
+        self.ai_thrmstr_r1 = val
+
+    @ai_thrmstr_r_1.deleter
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_thrmstr_r1 instead.")
+    def ai_thrmstr_r_1(self):
+        del self.ai_thrmstr_r1
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_accel_db_ref instead.")
+    def ai_acceld_b_ref(self):
+        return self.ai_accel_db_ref
+
+    @ai_acceld_b_ref.setter
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_accel_db_ref instead.")
+    def ai_acceld_b_ref(self, val):
+        self.ai_accel_db_ref = val
+
+    @ai_acceld_b_ref.deleter
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_accel_db_ref instead.")
+    def ai_acceld_b_ref(self):
+        del self.ai_accel_db_ref
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_voltage_db_ref instead.")
+    def ai_voltaged_b_ref(self):
+        return self.ai_voltage_db_ref
+
+    @ai_voltaged_b_ref.setter
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_voltage_db_ref instead.")
+    def ai_voltaged_b_ref(self, val):
+        self.ai_voltage_db_ref = val
+
+    @ai_voltaged_b_ref.deleter
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_voltage_db_ref instead.")
+    def ai_voltaged_b_ref(self):
+        del self.ai_voltage_db_ref
+
+    @property
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_velocity_iepe_sensor_db_ref instead.")
+    def ai_velocity_iepe_sensord_b_ref(self):
+        return self.ai_velocity_iepe_sensor_db_ref
+
+    @ai_velocity_iepe_sensord_b_ref.setter
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_velocity_iepe_sensor_db_ref instead.")
+    def ai_velocity_iepe_sensord_b_ref(self, val):
+        self.ai_velocity_iepe_sensor_db_ref = val
+
+    @ai_velocity_iepe_sensord_b_ref.deleter
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_velocity_iepe_sensor_db_ref instead.")
+    def ai_velocity_iepe_sensord_b_ref(self):
+        del self.ai_velocity_iepe_sensor_db_ref
 

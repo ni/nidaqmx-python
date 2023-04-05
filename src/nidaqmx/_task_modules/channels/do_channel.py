@@ -19,7 +19,7 @@ class DOChannel(Channel):
     __slots__ = []
 
     def __repr__(self):
-        return 'DOChannel(name={0})'.format(self._name)
+        return f'DOChannel(name={self._name})'
 
     @property
     def do_data_xfer_mech(self):

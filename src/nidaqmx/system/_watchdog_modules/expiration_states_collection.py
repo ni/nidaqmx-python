@@ -1,10 +1,8 @@
-import six
-
 from nidaqmx.errors import DaqError
 from nidaqmx.system._watchdog_modules.expiration_state import ExpirationState
 
 
-class ExpirationStatesCollection(object):
+class ExpirationStatesCollection:
     """
     Contains the collection of expiration states for a DAQmx Watchdog Task.
     
@@ -36,9 +34,9 @@ class ExpirationStatesCollection(object):
             
             The object representing the indexed expiration state.
         """
-        if isinstance(index, six.string_types):
+        if isinstance(index, str):
             return ExpirationState(self._handle, index)
         else:
             raise DaqError(
-                'Invalid index type "{0}" used to access expiration states.'
+                'Invalid index type "{}" used to access expiration states.'
                 .format(type(index)), -1)

@@ -17,7 +17,7 @@ from nidaqmx.constants import (
 __all__ = ['PhysicalChannel']
 
 
-class PhysicalChannel(object):
+class PhysicalChannel:
     """
     Represents a DAQmx physical channel.
     """
@@ -42,7 +42,7 @@ class PhysicalChannel(object):
         return not self.__eq__(other)
 
     def __repr__(self):
-        return 'PhysicalChannel(name={0})'.format(self._name)
+        return f'PhysicalChannel(name={self._name})'
 
     @property
     def name(self):
@@ -699,7 +699,7 @@ class PhysicalChannel(object):
         return val.tolist()
 
     @property
-    def ao_power_up_output_types(self):
+    def ao_supported_power_up_output_types(self):
         """
         List[:class:`nidaqmx.constants.AOPowerUpOutputBehavior`]:
             Indicates the power up output types supported by the

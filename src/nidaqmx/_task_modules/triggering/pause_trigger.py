@@ -13,7 +13,7 @@ from nidaqmx.constants import (
     WindowTriggerCondition2)
 
 
-class PauseTrigger(object):
+class PauseTrigger:
     """
     Represents the pause trigger configurations for a DAQmx task.
     """
