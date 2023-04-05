@@ -3580,12 +3580,12 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ai_eddy_current_prox_probe_sensitivity(self):
+    def ai_eddy_current_prox_sensitivity(self):
         """
         float: Specifies the sensitivity of the eddy current proximity
             probe . This value is in the units you specify with
-            **ai_eddy_current_prox_probe_sensitivity_units**. Refer to
-            the sensor documentation to determine this value.
+            **ai_eddy_current_prox_sensitivity_units**. Refer to the
+            sensor documentation to determine this value.
         """
         val = ctypes.c_double()
 
@@ -3604,8 +3604,8 @@ class AIChannel(Channel):
 
         return val.value
 
-    @ai_eddy_current_prox_probe_sensitivity.setter
-    def ai_eddy_current_prox_probe_sensitivity(self, val):
+    @ai_eddy_current_prox_sensitivity.setter
+    def ai_eddy_current_prox_sensitivity(self, val):
         cfunc = (lib_importer.windll.
                  DAQmxSetAIEddyCurrentProxProbeSensitivity)
         if cfunc.argtypes is None:
@@ -3619,8 +3619,8 @@ class AIChannel(Channel):
             self._handle, self._name, val)
         check_for_error(error_code)
 
-    @ai_eddy_current_prox_probe_sensitivity.deleter
-    def ai_eddy_current_prox_probe_sensitivity(self):
+    @ai_eddy_current_prox_sensitivity.deleter
+    def ai_eddy_current_prox_sensitivity(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetAIEddyCurrentProxProbeSensitivity)
         if cfunc.argtypes is None:
@@ -3634,11 +3634,10 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ai_eddy_current_prox_probe_sensitivity_units(self):
+    def ai_eddy_current_prox_sensitivity_units(self):
         """
         :class:`nidaqmx.constants.EddyCurrentProxProbeSensitivityUnits`:
-            Specifies the units of
-            **ai_eddy_current_prox_probe_sensitivity**.
+            Specifies the units of **ai_eddy_current_prox_sensitivity**.
         """
         val = ctypes.c_int()
 
@@ -3657,8 +3656,8 @@ class AIChannel(Channel):
 
         return EddyCurrentProxProbeSensitivityUnits(val.value)
 
-    @ai_eddy_current_prox_probe_sensitivity_units.setter
-    def ai_eddy_current_prox_probe_sensitivity_units(self, val):
+    @ai_eddy_current_prox_sensitivity_units.setter
+    def ai_eddy_current_prox_sensitivity_units(self, val):
         val = val.value
         cfunc = (lib_importer.windll.
                  DAQmxSetAIEddyCurrentProxProbeSensitivityUnits)
@@ -3673,8 +3672,8 @@ class AIChannel(Channel):
             self._handle, self._name, val)
         check_for_error(error_code)
 
-    @ai_eddy_current_prox_probe_sensitivity_units.deleter
-    def ai_eddy_current_prox_probe_sensitivity_units(self):
+    @ai_eddy_current_prox_sensitivity_units.deleter
+    def ai_eddy_current_prox_sensitivity_units(self):
         cfunc = (lib_importer.windll.
                  DAQmxResetAIEddyCurrentProxProbeSensitivityUnits)
         if cfunc.argtypes is None:
@@ -3688,7 +3687,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ai_eddy_current_prox_probe_units(self):
+    def ai_eddy_current_prox_units(self):
         """
         :class:`nidaqmx.constants.LengthUnits`: Specifies the units to
             use to return proximity measurements from the channel.
@@ -3709,8 +3708,8 @@ class AIChannel(Channel):
 
         return LengthUnits(val.value)
 
-    @ai_eddy_current_prox_probe_units.setter
-    def ai_eddy_current_prox_probe_units(self, val):
+    @ai_eddy_current_prox_units.setter
+    def ai_eddy_current_prox_units(self, val):
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetAIEddyCurrentProxProbeUnits
         if cfunc.argtypes is None:
@@ -3724,8 +3723,8 @@ class AIChannel(Channel):
             self._handle, self._name, val)
         check_for_error(error_code)
 
-    @ai_eddy_current_prox_probe_units.deleter
-    def ai_eddy_current_prox_probe_units(self):
+    @ai_eddy_current_prox_units.deleter
+    def ai_eddy_current_prox_units(self):
         cfunc = lib_importer.windll.DAQmxResetAIEddyCurrentProxProbeUnits
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -5256,28 +5255,6 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ai_is_teds(self):
-        """
-        bool: Indicates if the virtual channel was initialized using a
-            TEDS bitstream from the corresponding physical channel.
-        """
-        val = c_bool32()
-
-        cfunc = lib_importer.windll.DAQmxGetAIIsTEDS
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @property
     def ai_lead_wire_resistance(self):
         """
         float: Specifies in ohms the resistance of the wires that lead
@@ -6757,7 +6734,7 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    def ai_rosette_strain_gage_orientation(self):
+    def ai_rosette_strain_gage_gage_orientation(self):
         """
         float: Specifies gage orientation in degrees with respect to the
             X axis.
@@ -6778,8 +6755,8 @@ class AIChannel(Channel):
 
         return val.value
 
-    @ai_rosette_strain_gage_orientation.setter
-    def ai_rosette_strain_gage_orientation(self, val):
+    @ai_rosette_strain_gage_gage_orientation.setter
+    def ai_rosette_strain_gage_gage_orientation(self, val):
         cfunc = lib_importer.windll.DAQmxSetAIRosetteStrainGageOrientation
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -6792,8 +6769,8 @@ class AIChannel(Channel):
             self._handle, self._name, val)
         check_for_error(error_code)
 
-    @ai_rosette_strain_gage_orientation.deleter
-    def ai_rosette_strain_gage_orientation(self):
+    @ai_rosette_strain_gage_gage_orientation.deleter
+    def ai_rosette_strain_gage_gage_orientation(self):
         cfunc = lib_importer.windll.DAQmxResetAIRosetteStrainGageOrientation
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -7676,6 +7653,55 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
+    def ai_strain_force_read_from_chan(self):
+        """
+        bool: Specifies whether the data is returned by DAQmx Read when
+            set on a raw strain channel that is part of a rosette
+            configuration.
+        """
+        val = c_bool32()
+
+        cfunc = lib_importer.windll.DAQmxGetAIStrainGageForceReadFromChan
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
+
+    @ai_strain_force_read_from_chan.setter
+    def ai_strain_force_read_from_chan(self, val):
+        cfunc = lib_importer.windll.DAQmxSetAIStrainGageForceReadFromChan
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
+
+        error_code = cfunc(
+            self._handle, self._name, val)
+        check_for_error(error_code)
+
+    @ai_strain_force_read_from_chan.deleter
+    def ai_strain_force_read_from_chan(self):
+        cfunc = lib_importer.windll.DAQmxResetAIStrainGageForceReadFromChan
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str]
+
+        error_code = cfunc(
+            self._handle, self._name)
+        check_for_error(error_code)
+
+    @property
     def ai_strain_gage_cfg(self):
         """
         :class:`nidaqmx.constants.StrainGageBridgeType`: Specifies the
@@ -7715,55 +7741,6 @@ class AIChannel(Channel):
     @ai_strain_gage_cfg.deleter
     def ai_strain_gage_cfg(self):
         cfunc = lib_importer.windll.DAQmxResetAIStrainGageCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
-
-    @property
-    def ai_strain_gage_force_read_from_chan(self):
-        """
-        bool: Specifies whether the data is returned by DAQmx Read when
-            set on a raw strain channel that is part of a rosette
-            configuration.
-        """
-        val = c_bool32()
-
-        cfunc = lib_importer.windll.DAQmxGetAIStrainGageForceReadFromChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
-
-    @ai_strain_gage_force_read_from_chan.setter
-    def ai_strain_gage_force_read_from_chan(self, val):
-        cfunc = lib_importer.windll.DAQmxSetAIStrainGageForceReadFromChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str, c_bool32]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
-
-    @ai_strain_gage_force_read_from_chan.deleter
-    def ai_strain_gage_force_read_from_chan(self):
-        cfunc = lib_importer.windll.DAQmxResetAIStrainGageForceReadFromChan
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
@@ -7923,6 +7900,28 @@ class AIChannel(Channel):
         error_code = cfunc(
             self._handle, self._name)
         check_for_error(error_code)
+
+    @property
+    def ai_teds_is_teds(self):
+        """
+        bool: Indicates if the virtual channel was initialized using a
+            TEDS bitstream from the corresponding physical channel.
+        """
+        val = c_bool32()
+
+        cfunc = lib_importer.windll.DAQmxGetAIIsTEDS
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            self._handle, self._name, ctypes.byref(val))
+        check_for_error(error_code)
+
+        return val.value
 
     @property
     def ai_teds_units(self):
@@ -9376,71 +9375,6 @@ class AIChannel(Channel):
         check_for_error(error_code)
 
     @property
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_eddy_current_prox_probe_sensitivity instead.")
-    def ai_eddy_current_prox_sensitivity(self):
-        return self.ai_eddy_current_prox_probe_sensitivity
-
-    @ai_eddy_current_prox_sensitivity.setter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_eddy_current_prox_probe_sensitivity instead.")
-    def ai_eddy_current_prox_sensitivity(self, val):
-        self.ai_eddy_current_prox_probe_sensitivity = val
-
-    @ai_eddy_current_prox_sensitivity.deleter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_eddy_current_prox_probe_sensitivity instead.")
-    def ai_eddy_current_prox_sensitivity(self):
-        del self.ai_eddy_current_prox_probe_sensitivity
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_eddy_current_prox_probe_sensitivity_units instead.")
-    def ai_eddy_current_prox_sensitivity_units(self):
-        return self.ai_eddy_current_prox_probe_sensitivity_units
-
-    @ai_eddy_current_prox_sensitivity_units.setter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_eddy_current_prox_probe_sensitivity_units instead.")
-    def ai_eddy_current_prox_sensitivity_units(self, val):
-        self.ai_eddy_current_prox_probe_sensitivity_units = val
-
-    @ai_eddy_current_prox_sensitivity_units.deleter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_eddy_current_prox_probe_sensitivity_units instead.")
-    def ai_eddy_current_prox_sensitivity_units(self):
-        del self.ai_eddy_current_prox_probe_sensitivity_units
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_eddy_current_prox_probe_units instead.")
-    def ai_eddy_current_prox_units(self):
-        return self.ai_eddy_current_prox_probe_units
-
-    @ai_eddy_current_prox_units.setter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_eddy_current_prox_probe_units instead.")
-    def ai_eddy_current_prox_units(self, val):
-        self.ai_eddy_current_prox_probe_units = val
-
-    @ai_eddy_current_prox_units.deleter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_eddy_current_prox_probe_units instead.")
-    def ai_eddy_current_prox_units(self):
-        del self.ai_eddy_current_prox_probe_units
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_is_teds instead.")
-    def ai_teds_is_teds(self):
-        return self.ai_is_teds
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_rosette_strain_gage_orientation instead.")
-    def ai_rosette_strain_gage_gage_orientation(self):
-        return self.ai_rosette_strain_gage_orientation
-
-    @ai_rosette_strain_gage_gage_orientation.setter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_rosette_strain_gage_orientation instead.")
-    def ai_rosette_strain_gage_gage_orientation(self, val):
-        self.ai_rosette_strain_gage_orientation = val
-
-    @ai_rosette_strain_gage_gage_orientation.deleter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_rosette_strain_gage_orientation instead.")
-    def ai_rosette_strain_gage_gage_orientation(self):
-        del self.ai_rosette_strain_gage_orientation
-
-    @property
     @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_rtd_r0 instead.")
     def ai_rtd_r_0(self):
         return self.ai_rtd_r0
@@ -9469,21 +9403,6 @@ class AIChannel(Channel):
     @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_sound_pressure_db_ref instead.")
     def ai_sound_pressured_b_ref(self):
         del self.ai_sound_pressure_db_ref
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_strain_gage_force_read_from_chan instead.")
-    def ai_strain_force_read_from_chan(self):
-        return self.ai_strain_gage_force_read_from_chan
-
-    @ai_strain_force_read_from_chan.setter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_strain_gage_force_read_from_chan instead.")
-    def ai_strain_force_read_from_chan(self, val):
-        self.ai_strain_gage_force_read_from_chan = val
-
-    @ai_strain_force_read_from_chan.deleter
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_strain_gage_force_read_from_chan instead.")
-    def ai_strain_force_read_from_chan(self):
-        del self.ai_strain_gage_force_read_from_chan
 
     @property
     @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_thrmstr_r1 instead.")

@@ -1,10 +1,9 @@
 """Tests for validating Read properties."""
-
 import pytest
 
 import nidaqmx
 import nidaqmx.system
-from nidaqmx.constants import ReadRelativeTo
+from nidaqmx.constants import OverwriteMode, ReadRelativeTo
 from nidaqmx.task import Task
 
 
@@ -162,3 +161,21 @@ def test__ai_task__reset_string_property__returns_default_value(ai_task: Task):
     del ai_task.in_stream.logging_file_path
 
     assert ai_task.in_stream.logging_file_path == ""
+
+
+def test__ai_task__get_deprecated_properties__reports_warnings(ai_task: Task):
+    """Test to validate deprecated properties."""
+    with pytest.deprecated_call():
+        assert ai_task.in_stream.overwrite == ai_task.in_stream.over_write
+
+
+def test__ai_task__set_deprecated_properties__reports_warnings(ai_task: Task):
+    """Test to validate deprecated properties."""
+    with pytest.deprecated_call():
+        ai_task.in_stream.over_write = OverwriteMode.DO_NOT_OVERWRITE_UNREAD_SAMPLES
+
+
+def test__ai_task__reset_deprecated_properties__reports_warnings(ai_task: Task):
+    """Test to validate deprecated properties."""
+    with pytest.deprecated_call():
+        del ai_task.in_stream.over_write

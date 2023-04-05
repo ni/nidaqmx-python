@@ -34,8 +34,8 @@ def _x_series_device(device_type):
     for device in system.devices:
         device_type_match = (
             device_type == DeviceType.ANY
-            or (device_type == DeviceType.REAL and not device.dev_is_simulated)
-            or (device_type == DeviceType.SIMULATED and device.dev_is_simulated)
+            or (device_type == DeviceType.REAL and not device.is_simulated)
+            or (device_type == DeviceType.SIMULATED and device.is_simulated)
         )
         if (
             device_type_match
@@ -85,10 +85,7 @@ def sim_ts_chassis():
         return system.devices["tsChassisTester"]
 
     for device in system.devices:
-        if (
-            device.dev_is_simulated
-            and device.product_category == ProductCategory.TEST_SCALE_CHASSIS
-        ):
+        if device.is_simulated and device.product_category == ProductCategory.TEST_SCALE_CHASSIS:
             return device
 
     pytest.skip(
@@ -104,7 +101,7 @@ def sim_ts_power_device(sim_ts_chassis):
     """Gets simulated power device information."""
     for device in sim_ts_chassis.chassis_module_devices:
         if (
-            device.dev_is_simulated
+            device.is_simulated
             and device.product_category == ProductCategory.TEST_SCALE_MODULE
             and UsageTypeAI.POWER in device.ai_meas_types
         ):
@@ -123,7 +120,7 @@ def sim_ts_voltage_device(sim_ts_chassis):
     """Gets simulated voltage device information."""
     for device in sim_ts_chassis.chassis_module_devices:
         if (
-            device.dev_is_simulated
+            device.is_simulated
             and device.product_category == ProductCategory.TEST_SCALE_MODULE
             and UsageTypeAI.VOLTAGE in device.ai_meas_types
         ):
@@ -143,7 +140,7 @@ def sim_ts_power_devices(sim_ts_chassis):
     devices = []
     for device in sim_ts_chassis.chassis_module_devices:
         if (
-            device.dev_is_simulated
+            device.is_simulated
             and device.product_category == ProductCategory.TEST_SCALE_MODULE
             and UsageTypeAI.POWER in device.ai_meas_types
         ):
@@ -167,7 +164,7 @@ def multi_threading_test_devices():
     devices = []
     for device in system.devices:
         if (
-            device.dev_is_simulated
+            device.is_simulated
             and device.product_category == ProductCategory.X_SERIES_DAQ
             and len(device.ai_physical_chans) >= 1
         ):

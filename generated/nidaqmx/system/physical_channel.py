@@ -2,7 +2,6 @@
 
 import ctypes
 import numpy
-import deprecation
 
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, enum_bitfield_to_list, ctypes_byte_str,
@@ -85,6 +84,40 @@ class PhysicalChannel:
         check_for_error(size_or_code)
 
         return unflatten_channel_string(val.value.decode('ascii'))
+
+    @property
+    def ai_meas_types(self):
+        """
+        List[:class:`nidaqmx.constants.UsageTypeAI`]: Indicates the
+            measurement types supported by the channel.
+        """
+        cfunc = lib_importer.windll.DAQmxGetPhysicalChanAISupportedMeasTypes
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = numpy.zeros(temp_size, dtype=numpy.int32)
+
+            size_or_code = cfunc(
+                self._name, val, temp_size)
+
+            if is_array_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return [UsageTypeAI(e) for e in val]
 
     @property
     def ai_power_control_enable(self):
@@ -347,40 +380,6 @@ class PhysicalChannel:
         return val.tolist()
 
     @property
-    def ai_supported_meas_types(self):
-        """
-        List[:class:`nidaqmx.constants.UsageTypeAI`]: Indicates the
-            measurement types supported by the channel.
-        """
-        cfunc = lib_importer.windll.DAQmxGetPhysicalChanAISupportedMeasTypes
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-                        flags=('C','W')), ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = numpy.zeros(temp_size, dtype=numpy.int32)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_array_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return [UsageTypeAI(e) for e in val]
-
-    @property
     def ai_term_cfgs(self):
         """
         List[:class:`nidaqmx.constants.TerminalConfiguration`]:
@@ -519,6 +518,41 @@ class PhysicalChannel:
         check_for_error(error_code)
 
         return val.value
+
+    @property
+    def ao_output_types(self):
+        """
+        List[:class:`nidaqmx.constants.UsageTypeAO`]: Indicates the
+            output types supported by the channel.
+        """
+        cfunc = (lib_importer.windll.
+                 DAQmxGetPhysicalChanAOSupportedOutputTypes)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
+
+        temp_size = 0
+        while True:
+            val = numpy.zeros(temp_size, dtype=numpy.int32)
+
+            size_or_code = cfunc(
+                self._name, val, temp_size)
+
+            if is_array_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+
+        check_for_error(size_or_code)
+
+        return [UsageTypeAO(e) for e in val]
 
     @property
     def ao_power_amp_channel_enable(self):
@@ -665,41 +699,6 @@ class PhysicalChannel:
         return val.tolist()
 
     @property
-    def ao_supported_output_types(self):
-        """
-        List[:class:`nidaqmx.constants.UsageTypeAO`]: Indicates the
-            output types supported by the channel.
-        """
-        cfunc = (lib_importer.windll.
-                 DAQmxGetPhysicalChanAOSupportedOutputTypes)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.int32,
-                        flags=('C','W')), ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = numpy.zeros(temp_size, dtype=numpy.int32)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_array_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return [UsageTypeAO(e) for e in val]
-
-    @property
     def ao_supported_power_up_output_types(self):
         """
         List[:class:`nidaqmx.constants.AOPowerUpOutputBehavior`]:
@@ -759,7 +758,7 @@ class PhysicalChannel:
             val.value, _TermCfg, TerminalConfiguration)
 
     @property
-    def ci_supported_meas_types(self):
+    def ci_meas_types(self):
         """
         List[:class:`nidaqmx.constants.UsageTypeCI`]: Indicates the
             measurement types supported by the channel.
@@ -793,7 +792,7 @@ class PhysicalChannel:
         return [UsageTypeCI(e) for e in val]
 
     @property
-    def co_supported_output_types(self):
+    def co_output_types(self):
         """
         List[:class:`nidaqmx.constants.UsageTypeCO`]: Indicates the
             output types supported by the channel.
@@ -1180,26 +1179,6 @@ class PhysicalChannel:
         check_for_error(error_code)
 
         return val.value
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_supported_meas_types instead.")
-    def ai_meas_types(self):
-        return self.ai_supported_meas_types
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ao_supported_output_types instead.")
-    def ao_output_types(self):
-        return self.ao_supported_output_types
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use ci_supported_meas_types instead.")
-    def ci_meas_types(self):
-        return self.ci_supported_meas_types
-
-    @property
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use co_supported_output_types instead.")
-    def co_output_types(self):
-        return self.co_supported_output_types
 
     def clear_teds(self):
         """

@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
 * ### Major Changes
     * Added a generator that produces the `nidaqmx` module code.
     * Some properties were renamed in an effort to improve the consistency of the `nidaqmx` module and to support maintainability of the generator. The previous names are still usable, but will emit a `DeprecationWarning` on usage. These deprecated properties may be removed in a future update.
+    * Unused enums have been removed. This affects enums that are solely used by DAQmx features that are not supported in the `nidaqmx` module, such as external calibration, the DAQmx switch API, and internal APIs.
     * Refactored the repository folder structure as follows:
         * `generated/nidaqmx/` - The output of the code generator and source for the build `nidaqmx` module. Do not directly modify any files in this folder.
         * `examples/` - Example programs demonstrating how to use the `nidaqmx` module.

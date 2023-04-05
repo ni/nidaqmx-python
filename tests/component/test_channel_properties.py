@@ -1,5 +1,4 @@
 """Contains a collection of pytest tests that validates channel properties."""
-
 import pytest
 
 import nidaqmx
@@ -61,6 +60,16 @@ def ci_pulse_width_chan(any_x_series_device):
     """
     with nidaqmx.Task() as task:
         ci_channel = task.ci_channels.add_ci_pulse_width_chan(
+            any_x_series_device.ci_physical_chans[0].name,
+        )
+        yield ci_channel
+
+
+@pytest.fixture(scope="function")
+def ci_count_edges_chan(any_x_series_device):
+    """Creates CI Channel object to count edges."""
+    with nidaqmx.Task() as task:
+        ci_channel = task.ci_channels.add_ci_count_edges_chan(
             any_x_series_device.ci_physical_chans[0].name,
         )
         yield ci_channel
@@ -184,3 +193,21 @@ def test__channel__reset_uint32_property__returns_default_value(
     del ai_voltage_chan_with_excit.ai_lossy_lsb_removal_compressed_samp_size
 
     assert ai_voltage_chan_with_excit.ai_lossy_lsb_removal_compressed_samp_size == 16
+
+
+def test__channel__get_deprecated_properties__reports_warnings(ai_rtd_chan: AIChannel):
+    """Test to validate deprecated properties."""
+    with pytest.deprecated_call():
+        assert ai_rtd_chan.ai_rtd_r0 == ai_rtd_chan.ai_rtd_r_0
+
+
+def test__channel__set_deprecated_properties__reports_warnings(ai_rtd_chan: AIChannel):
+    """Test to validate deprecated properties."""
+    with pytest.deprecated_call():
+        ai_rtd_chan.ai_rtd_r_0 = 1000.0
+
+
+def test__channel__reset_deprecated_properties__reports_warnings(ai_rtd_chan: AIChannel):
+    """Test to validate deprecated properties."""
+    with pytest.deprecated_call():
+        del ai_rtd_chan.ai_rtd_r_0

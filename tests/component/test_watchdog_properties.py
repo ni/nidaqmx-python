@@ -1,10 +1,9 @@
 """Tests for validating watchdog properties."""
-
 import pytest
 
 import nidaqmx
 import nidaqmx.system
-from nidaqmx.constants import Level, Edge
+from nidaqmx.constants import Edge, Level
 from nidaqmx.errors import DaqError, DAQmxErrors
 from nidaqmx.system.watchdog import DOExpirationState
 
@@ -171,3 +170,45 @@ def test__watchdog_task__reset_string_property__returns_default_value(any_x_seri
         del task.expir_trig_dig_edge_src
 
         assert task.expir_trig_dig_edge_src == ""
+
+
+def test__watchdog_task__get_deprecated_properties__reports_warnings(any_x_series_device):
+    """Test to validate deprecated properties."""
+    do_line = any_x_series_device.do_lines[0]
+    with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
+        expir_states = [
+            DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
+        ]
+        task.cfg_watchdog_do_expir_states(expir_states)
+
+        with pytest.deprecated_call():
+            assert (
+                task.expiration_states[do_line.name].do_state
+                == task.expiration_states[do_line.name].expir_states_do_state
+            )
+
+
+def test__watchdog_task__set_deprecated_properties__reports_warnings(any_x_series_device):
+    """Test to validate deprecated properties."""
+    do_line = any_x_series_device.do_lines[0]
+    with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
+        expir_states = [
+            DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
+        ]
+        task.cfg_watchdog_do_expir_states(expir_states)
+
+        with pytest.deprecated_call():
+            task.expiration_states[do_line.name].expir_states_do_state = Level.HIGH
+
+
+def test__watchdog_task__reset_deprecated_properties__reports_warnings(any_x_series_device):
+    """Test to validate deprecated properties."""
+    do_line = any_x_series_device.do_lines[0]
+    with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
+        expir_states = [
+            DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
+        ]
+        task.cfg_watchdog_do_expir_states(expir_states)
+
+        with pytest.deprecated_call():
+            del task.expiration_states[do_line.name].expir_states_do_state

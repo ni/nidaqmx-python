@@ -139,7 +139,7 @@ class TestAnalogCreateChannels:
             assert ai_channel.ai_resistance_cfg == ResistanceConfiguration.TWO_WIRE
             assert ai_channel.ai_excit_src == ExcitationSource.EXTERNAL
             assert ai_channel.ai_excit_val == 0.0025
-            assert ai_channel.ai_rtd_r_0 == 100.0
+            assert ai_channel.ai_rtd_r0 == 100.0
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
     def test_create_ai_thrmstr_chan_iex(self, any_x_series_device, seed):
@@ -213,7 +213,7 @@ class TestAnalogCreateChannels:
             assert ai_channel.ai_thrmstr_a == 0.001295361
             assert ai_channel.ai_thrmstr_b == 0.0002343159
             assert ai_channel.ai_thrmstr_c == 0.0000001018703
-            assert ai_channel.ai_thrmstr_r_1 == 5000.0
+            assert ai_channel.ai_thrmstr_r1 == 5000.0
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
     def test_create_ai_resistance_chan(self, any_x_series_device, seed):

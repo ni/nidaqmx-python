@@ -14,7 +14,6 @@
 
 import ctypes
 import numpy
-import deprecation
 
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, enum_bitfield_to_list, ctypes_byte_str,
@@ -69,8 +68,6 @@ class PhysicalChannel:
 ${property_template.script_property(attribute)}\
 %endfor
 \
-<%namespace name="deprecated_template" file="/property_deprecated_template.py.mako"/>\
-${deprecated_template.script_deprecated_property(attributes)}\
 <%namespace name="function_template" file="/function_template.py.mako"/>\
 %for function_object in functions:
 ${function_template.script_function(function_object)}
