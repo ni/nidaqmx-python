@@ -8,6 +8,7 @@ from nidaqmx.constants import TerminalConfiguration
 def test__physical_channel__get_bool_property__returns_value(any_x_series_device):
     """Test for validating boolean attributes in physical channel."""
     phys_chans = any_x_series_device.di_lines
+
     assert phys_chans[0].di_change_detect_supported
 
 
@@ -18,7 +19,6 @@ def test__physical_channel_with_teds__get_bit_stream__returns_configured_value(
     phys_chans = any_x_series_device.ai_physical_chans
     expected_value = numpy.array(VALUES_IN_TED, dtype=numpy.uint8)
 
-    # Generate path to a virtual TEDS file.
     phys_chans["ai0"].configure_teds(teds_file_path)
 
     assert (phys_chans["ai0"].teds_bit_stream == expected_value).all()
@@ -33,6 +33,7 @@ def test__physical_channel__get_int32_array_property__returns_default_value(any_
         TerminalConfiguration.NRSE,
         TerminalConfiguration.DIFF,
     ]
+
     assert ai_channel.ai_term_cfgs == expected_configs
 
 
@@ -41,8 +42,6 @@ def test__physical_channel_with_teds__get_string_property__returns_configured_va
 ):
     """Test for validating string attributes in physical channel."""
     phys_chans = any_x_series_device.ai_physical_chans
-
-    # Generate path to a virtual TEDS file.
     phys_chans["ai0"].configure_teds(teds_file_path)
 
     assert phys_chans["ai0"].teds_version_letter == "A"
@@ -53,8 +52,6 @@ def test__physical_channel_with_teds__get_uint32_array_property__returns_configu
 ):
     """Test for validating uint32 array attributes in physical channel."""
     phys_chans = any_x_series_device.ai_physical_chans
-
-    # Generate path to a virtual TEDS file.
     phys_chans["ai0"].configure_teds(teds_file_path)
 
     assert phys_chans["ai0"].teds_template_ids == [30]
@@ -65,8 +62,6 @@ def test__physical_channel_with_teds__get_uint32_property__returns_configured_va
 ):
     """Test for validating uint32 attributes in physical channel."""
     phys_chans = any_x_series_device.ai_physical_chans
-
-    # Generate path to a virtual TEDS file.
     phys_chans["ai0"].configure_teds(teds_file_path)
 
     assert phys_chans["ai0"].teds_mfg_id == 17
