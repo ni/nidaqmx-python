@@ -59,6 +59,7 @@ click = "^8.1"
 Mako = "^1.2"
 ni-python-styleguide = "^0.4"
 sphinx_rtd_theme = "1.0"
+poetry-grpc-plugin = "^0.1.0"
 
 [tool.black]
 line-length = 100
