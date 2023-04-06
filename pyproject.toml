@@ -62,10 +62,10 @@ sphinx_rtd_theme = "1.0"
 
 [tool.black]
 line-length = 100
-extend_exclude = "docs,generated,src/nidaqmx,src/codegen/metadata,src/codegen/templates"
+extend_exclude = "docs,generated,src/codegen/metadata,src/codegen/templates"
 
 [tool.ni-python-styleguide]
-extend_exclude = "docs,generated,src/nidaqmx,src/codegen/metadata,src/codegen/templates,src/handwritten"
+extend_exclude = "docs,generated,src/codegen/metadata,src/codegen/templates,src/handwritten"
 
 [build-system]
 requires = ["poetry>=1.1.12"]
