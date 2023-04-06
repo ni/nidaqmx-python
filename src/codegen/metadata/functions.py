@@ -591,10 +591,10 @@ functions = {
                 'direction': 'in',
                 'is_optional_in_python': True,
                 'name': 'sampsPerChan',
-                'python_data_type': 'int',
+                'python_data_type': 'long',
                 'python_default_value': '1000',
                 'python_description': 'Specifies the number of samples to acquire or generate for each channel in the task if **sample_mode** is **FINITE_SAMPLES**. If **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses this value to determine the buffer size. This function returns an error if the specified value is negative.',
-                'python_type_annotation': 'Optional[int]',
+                'python_type_annotation': 'Optional[long]',
                 'type': 'uInt64'
             },
             {
@@ -693,10 +693,10 @@ functions = {
                 'direction': 'in',
                 'is_optional_in_python': True,
                 'name': 'sampsPerChan',
-                'python_data_type': 'int',
+                'python_data_type': 'long',
                 'python_default_value': '1000',
                 'python_description': 'Specifies the number of samples to acquire or generate for each channel in the task if **sample_mode** is **FINITE_SAMPLES**. If **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses this value to determine the buffer size. This function returns an error if the specified value is negative.',
-                'python_type_annotation': 'Optional[int]',
+                'python_type_annotation': 'Optional[long]',
                 'type': 'uInt64'
             },
             {
@@ -817,10 +817,10 @@ functions = {
                 'direction': 'in',
                 'is_optional_in_python': True,
                 'name': 'sampsPerChan',
-                'python_data_type': 'int',
+                'python_data_type': 'long',
                 'python_default_value': '1000',
                 'python_description': 'Specifies the number of samples to acquire from each channel in the task if **sample_mode** is **FINITE_SAMPLES**. This function returns an error if the specified value is negative.',
-                'python_type_annotation': 'Optional[int]',
+                'python_type_annotation': 'Optional[long]',
                 'type': 'uInt64'
             }
         ],
@@ -1083,10 +1083,10 @@ functions = {
                 'direction': 'in',
                 'is_optional_in_python': True,
                 'name': 'sampsPerChan',
-                'python_data_type': 'int',
+                'python_data_type': 'long',
                 'python_default_value': '1000',
                 'python_description': 'Specifies the number of samples to acquire or generate for each channel in the task if **sample_mode** is **FINITE_SAMPLES**. If **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses this value to determine the buffer size. This function returns an error if the specified value is negative.',
-                'python_type_annotation': 'Optional[int]',
+                'python_type_annotation': 'Optional[long]',
                 'type': 'uInt64'
             }
         ],
@@ -1129,10 +1129,10 @@ functions = {
                 'direction': 'in',
                 'is_optional_in_python': True,
                 'name': 'sampsPerChan',
-                'python_data_type': 'int',
+                'python_data_type': 'long',
                 'python_default_value': '1000',
                 'python_description': 'Specifies the number of samples to acquire or generate for each channel in the task if **sample_mode** is **FINITE_SAMPLES**. If **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses this value to determine the buffer size. This function returns an error if the specified value is negative.',
-                'python_type_annotation': 'Optional[int]',
+                'python_type_annotation': 'Optional[long]',
                 'type': 'uInt64'
             }
         ],
@@ -1242,10 +1242,10 @@ functions = {
                 'direction': 'in',
                 'is_optional_in_python': True,
                 'name': 'sampsPerChan',
-                'python_data_type': 'int',
+                'python_data_type': 'long',
                 'python_default_value': '1000',
                 'python_description': 'Specifies the number of samples to acquire or generate for each channel in the task if **sample_mode** is **FINITE_SAMPLES**. If **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses this value to determine the buffer size. This function returns an error if the specified value is negative.',
-                'python_type_annotation': 'Optional[int]',
+                'python_type_annotation': 'Optional[long]',
                 'type': 'uInt64'
             }
         ],
@@ -1321,10 +1321,10 @@ functions = {
                 'direction': 'in',
                 'is_optional_in_python': True,
                 'name': 'sampsPerChan',
-                'python_data_type': 'int',
+                'python_data_type': 'long',
                 'python_default_value': '1000',
                 'python_description': 'Specifies the number of samples to acquire or generate for each channel in the task if **sample_mode** is **FINITE_SAMPLES**. If **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses this value to determine the buffer size. This function returns an error if the specified value is negative.',
-                'python_type_annotation': 'Optional[int]',
+                'python_type_annotation': 'Optional[long]',
                 'type': 'uInt64'
             }
         ],

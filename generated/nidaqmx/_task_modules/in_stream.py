@@ -380,7 +380,7 @@ class InStream:
     @property
     def curr_read_pos(self):
         """
-        int: Indicates in samples per channel the current position in
+        long: Indicates in samples per channel the current position in
             the buffer.
         """
         val = ctypes.c_ulonglong()
@@ -730,7 +730,7 @@ class InStream:
     @property
     def logging_file_preallocation_size(self):
         """
-        int: Specifies a size in samples to be used to pre-allocate
+        long: Specifies a size in samples to be used to pre-allocate
             space on disk.  Pre-allocation can improve file I/O
             performance, especially in situations where multiple files
             are being written to disk.  For finite tasks, the default
@@ -936,7 +936,7 @@ class InStream:
     @property
     def logging_samps_per_file(self):
         """
-        int: Specifies how many samples to write to each file. When the
+        long: Specifies how many samples to write to each file. When the
             file reaches the number of samples specified, a new file is
             created with the naming convention of <filename>_####.tdms,
             where #### starts at 0001 and increments automatically with
@@ -2104,7 +2104,7 @@ class InStream:
     @property
     def total_samp_per_chan_acquired(self):
         """
-        int: Indicates the total number of samples acquired by each
+        long: Indicates the total number of samples acquired by each
             channel. NI-DAQmx returns a single value because this value
             is the same for all channels. For retriggered acquisitions,
             this value is the cumulative number of samples across all
