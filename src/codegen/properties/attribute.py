@@ -11,7 +11,11 @@ class Attribute:
         self._id = id
         self._is_enum = False
         self._access = attribute_metadata["access"]
-        self._name = attribute_metadata["python_name"].lower() if "python_name" in attribute_metadata else attribute_metadata["name"].lower()
+        self._name = (
+            attribute_metadata["python_name"].lower()
+            if "python_name" in attribute_metadata
+            else attribute_metadata["name"].lower()
+        )
         self._resettable = attribute_metadata["resettable"]
         self._type = attribute_metadata["type"]
         self._ctypes_data_type = attribute_metadata["ctypes_data_type"]
