@@ -22245,7 +22245,6 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to enable or disable a channel for amplification. This property can also be used to check if a channel is enabled.',
-            'python_name': 'ao_power_amp_channel_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -22269,7 +22268,6 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'float',
             'python_description': 'Indicates the coefficients of a polynomial equation used to scale from pre-amplified values.',
-            'python_name': 'ao_power_amp_scaling_coeff',
             'resettable': False,
             'type': 'float64[]'
         },
@@ -22293,7 +22291,6 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
             'python_description': 'Indicates if the channel detected an overcurrent condition.',
-            'python_name': 'ao_power_amp_overcurrent',
             'resettable': False,
             'type': 'bool32'
         },
@@ -22317,7 +22314,6 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'float',
             'python_description': 'Indicates the calibrated gain of the channel.',
-            'python_name': 'ao_power_amp_gain',
             'resettable': False,
             'type': 'float64'
         },
@@ -22341,7 +22337,6 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'float',
             'python_description': 'Indicates the calibrated offset of the channel in volts.',
-            'python_name': 'ao_power_amp_offset',
             'resettable': False,
             'type': 'float64'
         },
