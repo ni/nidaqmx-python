@@ -100,9 +100,8 @@ class Parameter:
     def has_default(self):
         """bool: Defines if the parameter has a default value."""
         return self._has_default
-    
+
     @property
     def size(self):
         """Dict: Defines the array parameter's mechanism and value."""
         return self._size
-
