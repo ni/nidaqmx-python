@@ -11,15 +11,16 @@ class Parameter:
         """Structure for storing function parameter metadata from scrapigen."""
         self._direction = parameter_metadata["direction"]
         self._parameters_name = camel_to_snake_case(parameter_metadata["name"])
-        self._type = parameter_metadata["type"]
-        self._ctypes_data_type = parameter_metadata["ctypes_data_type"]
-        self._python_data_type = parameter_metadata["python_data_type"]
-        self._description = parameter_metadata["python_description"]
-        self._python_type_annotation = parameter_metadata["python_type_annotation"]
+        self._type = parameter_metadata.get("type")
+        self._ctypes_data_type = parameter_metadata.get("ctypes_data_type")
+        self._python_data_type = parameter_metadata.get("python_data_type")
+        self._description = parameter_metadata.get("python_description")
+        self._python_type_annotation = parameter_metadata.get("python_type_annotation")
         self._is_list = parameter_metadata.get("is_list", False)
         self._has_explicit_buffer_size = parameter_metadata.get("has_explicit_buffer_size", False)
         self._optional = parameter_metadata.get("is_optional_in_python", False)
         self._has_default = False
+        self._size = parameter_metadata.get("size")
         if "python_default_value" in parameter_metadata:
             self._default = parameter_metadata.get("python_default_value")
             self._has_default = True
@@ -34,6 +35,11 @@ class Parameter:
     def direction(self):
         """str: Direction of the parameter."""
         return self._direction
+
+    @property
+    def type(self):
+        """str: Type of the parameter."""
+        return self._type
 
     @property
     def parameter_name(self):
@@ -94,3 +100,8 @@ class Parameter:
     def has_default(self):
         """bool: Defines if the parameter has a default value."""
         return self._has_default
+
+    @property
+    def size(self):
+        """Dict: Defines the array parameter's mechanism and value."""
+        return self._size
