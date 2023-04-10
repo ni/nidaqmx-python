@@ -83,9 +83,10 @@ def get_interpreter_params(func):
 def get_skippable_params_for_interpreter_func(func):
     """Gets parameter name that needs to be skipped for the function."""
     skippable_params = []
+    ignored_mechanisms = ["ivi-dance", "passed-in"]
     for param in func["parameters"]:
         size = param.get("size", {})
-        if size.get("mechanism") == "ivi-dance":
+        if size.get("mechanism") in ignored_mechanisms:
             skippable_params.append(size.get("value"))
         if is_skippable_param(param):
             skippable_params.append(param["name"])
