@@ -34,8 +34,8 @@ def _x_series_device(device_type):
     for device in system.devices:
         device_type_match = (
             device_type == DeviceType.ANY
-            or (device_type == DeviceType.REAL and not device.dev_is_simulated)
-            or (device_type == DeviceType.SIMULATED and device.dev_is_simulated)
+            or (device_type == DeviceType.REAL and not device.is_simulated)
+            or (device_type == DeviceType.SIMULATED and device.is_simulated)
         )
         if (
             device_type_match
@@ -75,30 +75,33 @@ def sim_x_series_device():
 
 
 @pytest.fixture(scope="module")
-def bridge_device():
-    """Gets bridge device information."""
+def sim_ts_chassis():
+    """Gets simulated TestScale chassis information."""
     system = nidaqmx.system.System.local()
 
+    # Prefer tsChassisTester if available so that multi-module tests will use
+    # modules from the same chassis.
+    if "tsChassisTester" in system.devices:
+        return system.devices["tsChassisTester"]
+
     for device in system.devices:
-        if UsageTypeAI.BRIDGE in device.ai_meas_types:
+        if device.is_simulated and device.product_category == ProductCategory.TEST_SCALE_CHASSIS:
             return device
 
     pytest.skip(
-        "Could not detect a device that meets the requirements to be a bridge device. Cannot "
-        "proceed to run tests. Import the NI MAX configuration file located at "
+        "Could not detect a device that meets the requirements to be a TestScale simulated chassis. "
+        "Cannot proceed to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
     return None
 
 
 @pytest.fixture(scope="module")
-def sim_ts_power_device():
+def sim_ts_power_device(sim_ts_chassis):
     """Gets simulated power device information."""
-    system = nidaqmx.system.System.local()
-
-    for device in system.devices:
+    for device in sim_ts_chassis.chassis_module_devices:
         if (
-            device.dev_is_simulated
+            device.is_simulated
             and device.product_category == ProductCategory.TEST_SCALE_MODULE
             and UsageTypeAI.POWER in device.ai_meas_types
         ):
@@ -113,13 +116,11 @@ def sim_ts_power_device():
 
 
 @pytest.fixture(scope="module")
-def sim_ts_voltage_device():
+def sim_ts_voltage_device(sim_ts_chassis):
     """Gets simulated voltage device information."""
-    system = nidaqmx.system.System.local()
-
-    for device in system.devices:
+    for device in sim_ts_chassis.chassis_module_devices:
         if (
-            device.dev_is_simulated
+            device.is_simulated
             and device.product_category == ProductCategory.TEST_SCALE_MODULE
             and UsageTypeAI.VOLTAGE in device.ai_meas_types
         ):
@@ -134,14 +135,12 @@ def sim_ts_voltage_device():
 
 
 @pytest.fixture(scope="module")
-def sim_ts_power_devices():
+def sim_ts_power_devices(sim_ts_chassis):
     """Gets simulated power devices information."""
-    system = nidaqmx.system.System.local()
-
     devices = []
-    for device in system.devices:
+    for device in sim_ts_chassis.chassis_module_devices:
         if (
-            device.dev_is_simulated
+            device.is_simulated
             and device.product_category == ProductCategory.TEST_SCALE_MODULE
             and UsageTypeAI.POWER in device.ai_meas_types
         ):
@@ -165,7 +164,7 @@ def multi_threading_test_devices():
     devices = []
     for device in system.devices:
         if (
-            device.dev_is_simulated
+            device.is_simulated
             and device.product_category == ProductCategory.X_SERIES_DAQ
             and len(device.ai_physical_chans) >= 1
         ):
@@ -176,6 +175,23 @@ def multi_threading_test_devices():
     pytest.skip(
         "Could not detect 4 simulated X Series devices for multithreading tests.  Cannot proceed "
         "to run tests. Import the NI MAX configuration file located at "
+        "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
+    )
+    return None
+
+
+@pytest.fixture(scope="module")
+def device_by_name(request):
+    """Gets the device information based on the device name."""
+    system = nidaqmx.system.System.local()
+
+    for device in system.devices:
+        if device.name == request.param:
+            return device
+
+    pytest.skip(
+        "Could not detect a device that has the given name. Cannot proceed to run tests. "
+        "Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
     return None

@@ -49,126 +49,32 @@ EXCLUDED_ATTRIBUTES = [
 ]
 
 DEPRECATED_ATTRIBUTES = {
-    "ai_eddy_current_prox_sensitivity": {
-        "new_name": "ai_eddy_current_prox_probe_sensitivity",
-        "deprecated_in": "0.6.6",
-    },
-    "ai_eddy_current_prox_sensitivity_units": {
-        "new_name": "ai_eddy_current_prox_probe_sensitivity_units",
-        "deprecated_in": "0.6.6",
-    },
-    "ai_eddy_current_prox_units": {
-        "new_name": "ai_eddy_current_prox_probe_units",
-        "deprecated_in": "0.6.6",
-    },
-    "ai_teds_is_teds": {"new_name": "ai_is_teds", "deprecated_in": "0.6.6"},
-    "ai_rosette_strain_gage_gage_orientation": {
-        "new_name": "ai_rosette_strain_gage_orientation",
-        "deprecated_in": "0.6.6",
-    },
-    "ai_rtd_r_0": {"new_name": "ai_rtd_r0", "deprecated_in": "0.6.6"},
-    "ai_sound_pressured_b_ref": {"new_name": "ai_sound_pressure_db_ref", "deprecated_in": "0.6.6"},
-    "ai_strain_force_read_from_chan": {
-        "new_name": "ai_strain_gage_force_read_from_chan",
-        "deprecated_in": "0.6.6",
-    },
-    "ai_thrmstr_r_1": {"new_name": "ai_thrmstr_r1", "deprecated_in": "0.6.6"},
-    "ai_acceld_b_ref": {"new_name": "ai_accel_db_ref", "deprecated_in": "0.6.6"},
-    "ai_voltaged_b_ref": {"new_name": "ai_voltage_db_ref", "deprecated_in": "0.6.6"},
+    "ai_rtd_r_0": {"new_name": "ai_rtd_r0", "deprecated_in": "0.7.0"},
+    "ai_sound_pressured_b_ref": {"new_name": "ai_sound_pressure_db_ref", "deprecated_in": "0.7.0"},
+    "ai_thrmstr_r_1": {"new_name": "ai_thrmstr_r1", "deprecated_in": "0.7.0"},
+    "ai_acceld_b_ref": {"new_name": "ai_accel_db_ref", "deprecated_in": "0.7.0"},
+    "ai_voltaged_b_ref": {"new_name": "ai_voltage_db_ref", "deprecated_in": "0.7.0"},
     "ai_velocity_iepe_sensord_b_ref": {
         "new_name": "ai_velocity_iepe_sensor_db_ref",
-        "deprecated_in": "0.6.6",
+        "deprecated_in": "0.7.0",
     },
-    "ci_count_edges_count_reset_reset_cnt": {
-        "new_name": "ci_count_edges_count_reset_reset_count",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_pulse_freq_starting_edge": {
-        "new_name": "ci_pulse_freq_start_edge",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_pulse_ticks_starting_edge": {
-        "new_name": "ci_pulse_ticks_start_edge",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_pulse_time_starting_edge": {
-        "new_name": "ci_pulse_time_start_edge",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_velocity_a_input_dig_fltr_enable": {
-        "new_name": "ci_velocity_encoder_a_input_dig_fltr_enable",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_velocity_a_input_dig_fltr_min_pulse_width": {
-        "new_name": "ci_velocity_encoder_a_input_dig_fltr_min_pulse_width",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_velocity_a_input_dig_fltr_timebase_rate": {
-        "new_name": "ci_velocity_encoder_a_input_dig_fltr_timebase_rate",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_velocity_a_input_dig_fltr_timebase_src": {
-        "new_name": "ci_velocity_encoder_a_input_dig_fltr_timebase_src",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_velocity_a_input_logic_lvl_behavior": {
-        "new_name": "ci_velocity_encoder_a_input_logic_lvl_behavior",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_velocity_a_input_term": {
-        "new_name": "ci_velocity_encoder_a_input_term",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_velocity_a_input_term_cfg": {
-        "new_name": "ci_velocity_encoder_a_input_term_cfg",
-        "deprecated_in": "0.6.6",
-    },
-    "over_write": {"new_name": "overwrite", "deprecated_in": "0.6.6"},
-    "ai_meas_types": {
-        "new_name": "ai_supported_meas_types",
-        "deprecated_in": "0.6.6",
-    },
-    "ao_output_types": {
-        "new_name": "ao_supported_output_types",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_meas_types": {
-        "new_name": "ci_supported_meas_types",
-        "deprecated_in": "0.6.6",
-    },
-    "co_output_types": {
-        "new_name": "co_supported_output_types",
-        "deprecated_in": "0.6.6",
-    },
+    "over_write": {"new_name": "overwrite", "deprecated_in": "0.7.0"},
     "dev_is_simulated": {
         "new_name": "is_simulated",
-        "deprecated_in": "0.6.6",
+        "deprecated_in": "0.7.0",
     },
     "dev_serial_num": {
         "new_name": "serial_num",
-        "deprecated_in": "0.6.6",
+        "deprecated_in": "0.7.0",
     },
     "tedshwteds_supported": {
         "new_name": "hwteds_supported",
-        "deprecated_in": "0.6.6",
+        "deprecated_in": "0.7.0",
     },
-    "expir_states_ao_type": {"new_name": "ao_output_type", "deprecated_in": "0.6.6"},
-    "expir_states_co_state": {"new_name": "co_state", "deprecated_in": "0.6.6"},
-    "expir_states_do_state": {"new_name": "do_state", "deprecated_in": "0.6.6"},
-    "expir_states_ao_state": {"new_name": "ao_state", "deprecated_in": "0.6.6"},
-    "expir_trig_trig_type": {"new_name": "expiration_trigger_type", "deprecated_in": "0.6.6"},
-    "expir_trig_dig_edge_edge": {
-        "new_name": "expiration_trigger_dig_edge_edge",
-        "deprecated_in": "0.6.6",
-    },
-    "expir_trig_dig_edge_src": {
-        "new_name": "expiration_trigger_dig_edge_src",
-        "deprecated_in": "0.6.6",
-    },
-    "expir_trig_trig_on_network_conn_loss": {
-        "new_name": "expiration_trigger_trig_on_network_conn_loss",
-        "deprecated_in": "0.6.6",
-    },
+    "expir_states_ao_type": {"new_name": "ao_output_type", "deprecated_in": "0.7.0"},
+    "expir_states_co_state": {"new_name": "co_state", "deprecated_in": "0.7.0"},
+    "expir_states_do_state": {"new_name": "do_state", "deprecated_in": "0.7.0"},
+    "expir_states_ao_state": {"new_name": "ao_state", "deprecated_in": "0.7.0"},
 }
 
 PYTHON_CLASS_ENUM_MERGE_SET = {
@@ -180,12 +86,37 @@ PYTHON_CLASS_ENUM_MERGE_SET = {
 }
 
 ATTRIBUTE_CHANGE_SET = {
-    "AIChannel": {"ai_custom_scale_name": "ai_custom_scale"},
+    "AIChannel": {
+        "ai_custom_scale_name": "ai_custom_scale",
+        "ai_strain_gage_force_read_from_chan": "ai_strain_force_read_from_chan",
+        "ai_eddy_current_prox_probe_sensitivity": "ai_eddy_current_prox_sensitivity",
+        "ai_eddy_current_prox_probe_sensitivity_units": "ai_eddy_current_prox_sensitivity_units",
+        "ai_eddy_current_prox_probe_units": "ai_eddy_current_prox_units",
+        "ai_is_teds": "ai_teds_is_teds",
+        "ai_rosette_strain_gage_orientation": "ai_rosette_strain_gage_gage_orientation",
+    },
     "AOChannel": {"ao_custom_scale_name": "ao_custom_scale"},
     "CIChannel": {
+        "ci_count_edges_count_reset_reset_count": "ci_count_edges_count_reset_reset_cnt",
         "ci_custom_scale_name": "ci_custom_scale",
         "ci_dup_count_prevent": "ci_dup_count_prevention",
-        "ci_dup_count_prevent": "ci_dup_count_prevention",
+        "ci_pulse_freq_start_edge": "ci_pulse_freq_starting_edge",
+        "ci_pulse_ticks_start_edge": "ci_pulse_ticks_starting_edge",
+        "ci_pulse_time_start_edge": "ci_pulse_time_starting_edge",
+        "ci_velocity_encoder_a_input_dig_fltr_enable": "ci_velocity_a_input_dig_fltr_enable",
+        "ci_velocity_encoder_a_input_dig_fltr_min_pulse_width": "ci_velocity_a_input_dig_fltr_min_pulse_width",
+        "ci_velocity_encoder_a_input_dig_fltr_timebase_rate": "ci_velocity_a_input_dig_fltr_timebase_rate",
+        "ci_velocity_encoder_a_input_dig_fltr_timebase_src": "ci_velocity_a_input_dig_fltr_timebase_src",
+        "ci_velocity_encoder_a_input_logic_lvl_behavior": "ci_velocity_a_input_logic_lvl_behavior",
+        "ci_velocity_encoder_a_input_term": "ci_velocity_a_input_term",
+        "ci_velocity_encoder_a_input_term_cfg": "ci_velocity_a_input_term_cfg",
+        "ci_velocity_encoder_b_input_dig_fltr_enable": "ci_velocity_b_input_dig_fltr_enable",
+        "ci_velocity_encoder_b_input_dig_fltr_min_pulse_width": "ci_velocity_b_input_dig_fltr_min_pulse_width",
+        "ci_velocity_encoder_b_input_dig_fltr_timebase_rate": "ci_velocity_b_input_dig_fltr_timebase_rate",
+        "ci_velocity_encoder_b_input_dig_fltr_timebase_src": "ci_velocity_b_input_dig_fltr_timebase_src",
+        "ci_velocity_encoder_b_input_logic_lvl_behavior": "ci_velocity_b_input_logic_lvl_behavior",
+        "ci_velocity_encoder_b_input_term": "ci_velocity_b_input_term",
+        "ci_velocity_encoder_b_input_term_cfg": "ci_velocity_b_input_term_cfg",
     },
     "Channel": {
         "chan_descr": "description",
@@ -221,9 +152,17 @@ ATTRIBUTE_CHANGE_SET = {
         "compact_rio_chassis_dev_name": "compact_rio_chassis_device",
         "field_daq_bank_dev_names": "field_daq_bank_devices",
         "field_daq_dev_name": "field_daq_device",
+        "ai_supported_meas_types": "ai_meas_types",
+        "ao_supported_output_types": "ao_output_types",
+        "ci_supported_meas_types": "ci_meas_types",
+        "co_supported_output_types": "co_output_types",
     },
     "PhysicalChannel": {
         "teds_template_i_ds": "teds_template_ids",
+        "ai_supported_meas_types": "ai_meas_types",
+        "ao_supported_output_types": "ao_output_types",
+        "ci_supported_meas_types": "ci_meas_types",
+        "co_supported_output_types": "co_output_types",
     },
     "ExpirationState": {
         "ao_expir_state": "ao_state",
@@ -231,11 +170,10 @@ ATTRIBUTE_CHANGE_SET = {
         "do_expir_state": "do_state",
     },
     "Watchdog": {
-        "expir_trig_type": "expiration_trigger_type",
+        "expir_trig_type": "expir_trig_trig_type",
         "has_expired": "expired",
-        "dig_edge_watchdog_expir_trig_edge": "expiration_trigger_dig_edge_edge",
-        "dig_edge_watchdog_expir_trig_src": "expiration_trigger_dig_edge_src",
-        "expir_trig_trig_on_network_conn_loss": "expiration_trigger_trig_on_network_conn_loss",
+        "dig_edge_watchdog_expir_trig_edge": "expir_trig_dig_edge_edge",
+        "dig_edge_watchdog_expir_trig_src": "expir_trig_dig_edge_src",
     },
     "Triggers": {"trigger_sync_type": "sync_type"},
 }
@@ -268,6 +206,13 @@ ATTR_NAME_CHANGE_IN_DESCRIPTION = {
     "physical_chan_ci_supported_meas_types": "ci_supported_meas_types",
     "physical_chan_co_supported_output_types": "co_supported_output_types",
     "physical_chan_teds_bit_stream": "teds_bit_stream",
+    "ai_eddy_current_prox_probe_sensitivity": "ai_eddy_current_prox_sensitivity",
+    "ai_eddy_current_prox_probe_sensitivity_units": "ai_eddy_current_prox_sensitivity_units",
+    "ci_dup_count_prevent": "ci_dup_count_prevention",
+    "ai_supported_meas_types": "ai_meas_types",
+    "ao_supported_output_types": "ao_output_types",
+    "ci_supported_meas_types": "ci_meas_types",
+    "co_supported_output_types": "co_output_types",
 }
 
 
