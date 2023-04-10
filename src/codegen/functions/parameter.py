@@ -20,6 +20,7 @@ class Parameter:
         self._has_explicit_buffer_size = parameter_metadata.get("has_explicit_buffer_size", False)
         self._optional = parameter_metadata.get("optional", False)
         self._has_default = False
+        self._size = parameter_metadata.get("size")
         if "default" in parameter_metadata:
             self._default = parameter_metadata.get("default")
             self._has_default = True
@@ -99,3 +100,9 @@ class Parameter:
     def has_default(self):
         """bool: Defines if the parameter has a default value."""
         return self._has_default
+    
+    @property
+    def size(self):
+        """Dict: Defines the array parameter's mechanism and value."""
+        return self._size
+

@@ -24,6 +24,14 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetTimingAttributeExTimestamp",
     "SetTimingAttributeTimestamp",
     "SetTrigAttributeTimestamp",
+    "GetArmStartTrigTrigWhen",
+    "GetFirstSampClkWhen",
+    "GetStartTrigTrigWhen",
+    "GetSyncPulseTimeWhen",
+    "SetArmStartTrigTrigWhen",
+    "SetFirstSampClkWhen",
+    "SetStartTrigTrigWhen",
+    "SetSyncPulseTimeWhen",
 ]
 
 
@@ -63,9 +71,13 @@ def get_interpreter_parameter_signature(is_python_factory, params):
     return ", ".join(params_with_defaults)
 
 
-def get_input_params(func):
-    """Gets input parameters for the function."""
-    return (p for p in func.base_parameters if p.direction == "in")
+def get_interpreter_params(func):
+    """Gets interpreter parameters for the function."""
+    return (
+        p
+        for p in func.base_parameters
+        if p.direction == "in" or (p.size and p.size.get("mechanism") == "passed-in")
+    )
 
 
 def get_skippable_params_for_interpreter_func(func):
