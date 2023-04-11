@@ -1,10 +1,9 @@
 <%
     from codegen.utilities.text_wrappers import wrap
     from codegen.utilities.function_helpers import get_functions,  get_enums_used as function_enums
-    from codegen.utilities.attribute_helpers import get_attributes,  get_enums_used as attribute_enums, transform_attributes
+    from codegen.utilities.attribute_helpers import get_attributes,  get_enums_used as attribute_enums
     from codegen.utilities.helpers import get_enums_to_import
     attributes = get_attributes(data, "PhysicalChannel")
-    attributes = transform_attributes(attributes, "PhysicalChannel")
     functions = get_functions(data,"PhysicalChannel")
     attr_enums = attribute_enums(attributes)
     func_enums = function_enums(functions)
@@ -14,7 +13,6 @@
 
 import ctypes
 import numpy
-import deprecation
 
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, enum_bitfield_to_list, ctypes_byte_str,
@@ -69,8 +67,6 @@ class PhysicalChannel:
 ${property_template.script_property(attribute)}\
 %endfor
 \
-<%namespace name="deprecated_template" file="/property_deprecated_template.py.mako"/>\
-${deprecated_template.script_deprecated_property(attributes)}\
 <%namespace name="function_template" file="/function_template.py.mako"/>\
 %for function_object in functions:
 ${function_template.script_function(function_object)}

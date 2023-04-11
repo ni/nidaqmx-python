@@ -25,7 +25,7 @@ class TestSystemCollections:
         assert isinstance(devices, collections.abc.Sequence)
 
         assert isinstance(devices[0], nidaqmx.system.Device)
-        assert isinstance(devices[0].dev_is_simulated, bool)
+        assert isinstance(devices[0].is_simulated, bool)
 
     def test_persisted_scale_collection_property(self):
         """Test to validate persisted scale property."""

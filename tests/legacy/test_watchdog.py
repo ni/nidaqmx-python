@@ -68,7 +68,7 @@ class TestWatchdog:
             task.cfg_watchdog_do_expir_states(expir_states)
 
             expir_state_obj = task.expiration_states[do_line.name]
-            assert expir_state_obj.expir_states_do_state == Level.TRISTATE
+            assert expir_state_obj.do_state == Level.TRISTATE
 
-            expir_state_obj.expir_states_do_state = Level.LOW
-            assert expir_state_obj.expir_states_do_state == Level.LOW
+            expir_state_obj.do_state = Level.LOW
+            assert expir_state_obj.do_state == Level.LOW

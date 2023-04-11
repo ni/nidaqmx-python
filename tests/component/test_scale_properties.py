@@ -1,5 +1,7 @@
 "Contains collection of pytest tests that validates the scale properties."
 
+import pytest
+
 from nidaqmx.constants import UnitsPreScaled
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import DaqError
@@ -46,10 +48,11 @@ def test__scale__set_float64_list_property__returns_assigned_value():
 def test__linear_scale__get_poly_scale_property__throws_daqerror():
     """Test for validating getter for polynomial scale float list property in linear scale."""
     linear_scale = Scale.create_lin_scale("custom_linear_scale", 1)
-    try:
+
+    with pytest.raises(DaqError) as exc_info:
         _ = linear_scale.poly_forward_coeff
-    except DaqError as e:
-        assert e.error_type == DAQmxErrors.PROPERTY_NOT_SUPPORTED_FOR_SCALE_TYPE
+
+    assert exc_info.value.error_type == DAQmxErrors.PROPERTY_NOT_SUPPORTED_FOR_SCALE_TYPE
 
 
 def test__scale__get_enum_property__returns_assigned_value():
