@@ -11,7 +11,7 @@ import pkg_resources
 from black.mode import Mode
 
 
-STUBS_NAMESPACE = "generated.nidaqmx.stubs"
+STUBS_NAMESPACE = "generated.nidaqmx._stubs"
 PROTO_PARENT_NAMESPACES = ["src.codegen", "protos"]
 STUBS_PATH = pathlib.Path(__file__).parent.parent.parent / STUBS_NAMESPACE.replace(".", "/")
 PROTO_PATH = pathlib.Path(__file__).parent.parent.parent / "src" / "codegen" / "protos"
