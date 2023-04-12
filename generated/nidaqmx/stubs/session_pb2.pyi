@@ -6,43 +6,41 @@ import builtins
 import google.protobuf.descriptor
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
-import sys
 import typing
+import typing_extensions
 
-if sys.version_info >= (3, 10):
-    import typing as typing_extensions
-else:
-    import typing_extensions
+DESCRIPTOR: google.protobuf.descriptor.FileDescriptor = ...
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+class SessionInitializationBehavior(
+    _SessionInitializationBehavior, metaclass=_SessionInitializationBehaviorEnumTypeWrapper
+):
+    pass
 
 class _SessionInitializationBehavior:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    V = typing.NewType("V", builtins.int)
 
-class _SessionInitializationBehaviorEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SessionInitializationBehavior.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    SESSION_INITIALIZATION_BEHAVIOR_UNSPECIFIED: _SessionInitializationBehavior.ValueType  # 0
-    SESSION_INITIALIZATION_BEHAVIOR_INITIALIZE_NEW: _SessionInitializationBehavior.ValueType  # 1
-    SESSION_INITIALIZATION_BEHAVIOR_ATTACH_TO_EXISTING: _SessionInitializationBehavior.ValueType  # 2
+class _SessionInitializationBehaviorEnumTypeWrapper(
+    google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SessionInitializationBehavior.V],
+    builtins.type,
+):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor = ...
+    SESSION_INITIALIZATION_BEHAVIOR_UNSPECIFIED = SessionInitializationBehavior.V(0)
+    SESSION_INITIALIZATION_BEHAVIOR_INITIALIZE_NEW = SessionInitializationBehavior.V(1)
+    SESSION_INITIALIZATION_BEHAVIOR_ATTACH_TO_EXISTING = SessionInitializationBehavior.V(2)
 
-class SessionInitializationBehavior(_SessionInitializationBehavior, metaclass=_SessionInitializationBehaviorEnumTypeWrapper): ...
-
-SESSION_INITIALIZATION_BEHAVIOR_UNSPECIFIED: SessionInitializationBehavior.ValueType  # 0
-SESSION_INITIALIZATION_BEHAVIOR_INITIALIZE_NEW: SessionInitializationBehavior.ValueType  # 1
-SESSION_INITIALIZATION_BEHAVIOR_ATTACH_TO_EXISTING: SessionInitializationBehavior.ValueType  # 2
+SESSION_INITIALIZATION_BEHAVIOR_UNSPECIFIED = SessionInitializationBehavior.V(0)
+SESSION_INITIALIZATION_BEHAVIOR_INITIALIZE_NEW = SessionInitializationBehavior.V(1)
+SESSION_INITIALIZATION_BEHAVIOR_ATTACH_TO_EXISTING = SessionInitializationBehavior.V(2)
 global___SessionInitializationBehavior = SessionInitializationBehavior
 
-@typing_extensions.final
 class Session(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor = ...
     NAME_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    name: typing.Text = ...
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
+        name: typing.Text = ...,
     ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["name", b"name"]) -> None: ...
 
