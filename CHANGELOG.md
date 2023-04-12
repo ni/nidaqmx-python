@@ -1,5 +1,6 @@
 # Changelog
 
+* [0.7.1](#071)
 * [0.7.0](#070)
 * [0.6.5](#065)
 * [0.6.4](#064)
@@ -16,6 +17,15 @@
 * [0.5.0](#050)
 
 All notable changes to this project will be documented in this file.
+
+## 0.7.1
+
+* ### Merged Pull Requests
+    * ...
+* ### Resolved Issues
+    * ...
+* ### Major Changes
+    * ...
 
 ## 0.7.0
 

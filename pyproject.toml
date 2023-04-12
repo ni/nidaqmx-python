@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nidaqmx"
-version = "0.7.0"
+version = "0.7.1"
 license = "MIT"
 description = "NI-DAQmx Python API"
 authors = ["NI <opensource@ni.com>"]
@@ -66,10 +66,10 @@ protobuf = "^3.20"
 
 [tool.black]
 line-length = 100
-extend_exclude = "docs,generated,src/nidaqmx,src/codegen/metadata,src/codegen/templates"
+extend_exclude = "docs,generated,src/codegen/metadata,src/codegen/templates"
 
 [tool.ni-python-styleguide]
-extend_exclude = "docs,generated,src/nidaqmx,src/codegen/metadata,src/codegen/templates,src/handwritten"
+extend_exclude = "docs,generated,src/codegen/metadata,src/codegen/templates,src/handwritten"
 
 [build-system]
 requires = ["poetry>=1.1.12"]

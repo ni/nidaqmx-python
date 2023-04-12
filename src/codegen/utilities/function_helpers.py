@@ -12,7 +12,7 @@ FUNCTION_NAME_CHANGE_SET = {
 }
 
 
-def get_functions(metadata, class_name):
+def get_functions(metadata, class_name=""):
     """Converts the scrapigen metadata into a list of functions."""
     all_functions = deepcopy(metadata["functions"])
     functions_metadata = []
@@ -20,7 +20,7 @@ def get_functions(metadata, class_name):
         if (
             "python_class_name" in all_functions[function_name]
             and all_functions[function_name]["python_class_name"] == class_name
-        ):
+        ) or class_name == "":
             function_data["c_function_name"] = function_name
             functions_metadata.append(Function(get_function_name(function_name), function_data))
 

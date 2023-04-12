@@ -1,6 +1,10 @@
 script_info = {
     "modules": [
         {
+            "relativeOutputPath": "_base_interpreter.py",
+            "templateFile": "_base_interpreter.py.mako",
+        },
+        {
             "relativeOutputPath": "_task_modules\\channels\\channel.py",
             "templateFile": "_task_modules\\channels\\channel.py.mako",
         },
