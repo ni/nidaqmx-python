@@ -16,8 +16,9 @@ class ArmStartTrigger:
     """
     Represents the arm start trigger configurations for a DAQmx task.
     """
-    def __init__(self, task_handle):
+    def __init__(self, task_handle, interpreter):
         self._handle = task_handle
+        self._interpreter = interpreter
 
     @property
     def dig_edge_dig_fltr_enable(self):

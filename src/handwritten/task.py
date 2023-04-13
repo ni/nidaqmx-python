@@ -1,7 +1,7 @@
 import ctypes
 import numpy
 import warnings
-from handwritten import utils
+from generated.nidaqmx import utils
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx._task_modules.channels.channel import Channel
@@ -91,7 +91,7 @@ class Task:
             new_task_name, ctypes.byref(self._handle))
         check_for_error(error_code)
 
-        self._initialize(self._handle)
+        self._initialize(self._handle, self._interpreter)
 
     def __del__(self):
         if self._handle:
