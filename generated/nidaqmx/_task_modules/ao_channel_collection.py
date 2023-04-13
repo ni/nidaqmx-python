@@ -15,8 +15,8 @@ class AOChannelCollection(ChannelCollection):
     """
     Contains the collection of analog output channels for a DAQmx Task.
     """
-    def __init__(self, task_handle):
-        super().__init__(task_handle)
+    def __init__(self, task_handle, interpreter):
+        super().__init__(task_handle, interpreter)
 
     def _create_chan(self, physical_channel, name_to_assign_to_channel=''):
         """

@@ -24,8 +24,8 @@ class CIChannelCollection(ChannelCollection):
     """
     Contains the collection of counter input channels for a DAQmx Task.
     """
-    def __init__(self, task_handle):
-        super().__init__(task_handle)
+    def __init__(self, task_handle, interpreter):
+        super().__init__(task_handle, interpreter)
 
     def _create_chan(self, counter, name_to_assign_to_channel=''):
         """
