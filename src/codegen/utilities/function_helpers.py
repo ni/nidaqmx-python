@@ -34,28 +34,6 @@ EXCLUDED_FUNCTIONS = [
     "SetDigitalPullUpPullDownStates",
 ]
 
-EXCLUDED_FUNCTIONS = [
-    "AddNetworkDevice",
-    "DeleteNetworkDevice",
-    "ReserveNetworkDevice",
-    "UnreserveNetworkDevice",
-    "AddCDAQSyncConnection",
-    "AreConfiguredCDAQSyncPortsDisconnected",
-    "AutoConfigureCDAQSyncConnections",
-    "GetAnalogPowerUpStates",
-    "GetAnalogPowerUpStatesWithOutputType",
-    "GetAutoConfiguredCDAQSyncConnections",
-    "GetDigitalLogicFamilyPowerUpState",
-    "GetDigitalPowerUpStates",
-    "GetDigitalPullUpPullDownStates",
-    "GetDisconnectedCDAQSyncPorts",
-    "RemoveCDAQSyncConnection",
-    "SetAnalogPowerUpStates",
-    "SetAnalogPowerUpStatesWithOutputType",
-    "SetDigitalLogicFamilyPowerUpState",
-    "SetDigitalPowerUpStates",
-    "SetDigitalPullUpPullDownStates",
-]
 
 def get_functions(metadata, class_name=""):
     """Converts the scrapigen metadata into a list of functions."""
