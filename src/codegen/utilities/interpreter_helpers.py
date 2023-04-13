@@ -136,4 +136,11 @@ def get_output_parameter_names(func):
 
 def get_c_function_call_template(func):
     """Gets the template to use for generating the logic of calling the c functions."""
+    if hasattr(func,"stream_response") and func.stream_response is True:
+       return "/signal_event_function_call.py.mako"
     return "/default_c_function_call.py.mako"
+
+
+def get_callback_param_data_types(params):
+    """Gets the data types for call back function parameters"""
+    return [p["ctypes_data_type"] for p in params]
