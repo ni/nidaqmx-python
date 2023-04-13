@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nidaqmx"
-version = "0.6.6"
+version = "0.7.1"
 license = "MIT"
 description = "NI-DAQmx Python API"
 authors = ["NI <opensource@ni.com>"]
@@ -22,6 +22,7 @@ classifiers = [
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Topic :: System :: Hardware :: Hardware Drivers"
@@ -61,10 +62,10 @@ sphinx_rtd_theme = "1.0"
 
 [tool.black]
 line-length = 100
-extend_exclude = "docs,generated,src/nidaqmx,src/codegen/metadata,src/codegen/templates"
+extend_exclude = "docs,generated,src/codegen/metadata,src/codegen/templates"
 
 [tool.ni-python-styleguide]
-extend_exclude = "docs,generated,src/nidaqmx,src/codegen/metadata,src/codegen/templates,src/handwritten"
+extend_exclude = "docs,generated,src/codegen/metadata,src/codegen/templates,src/handwritten"
 
 [build-system]
 requires = ["poetry>=1.1.12"]

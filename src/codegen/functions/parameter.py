@@ -18,10 +18,11 @@ class Parameter:
         self._python_type_annotation = parameter_metadata.get("python_type_annotation")
         self._is_list = parameter_metadata.get("is_list", False)
         self._has_explicit_buffer_size = parameter_metadata.get("has_explicit_buffer_size", False)
-        self._optional = parameter_metadata.get("optional", False)
+        self._optional = parameter_metadata.get("is_optional_in_python", False)
         self._has_default = False
-        if "default" in parameter_metadata:
-            self._default = parameter_metadata.get("default")
+        self._size = parameter_metadata.get("size")
+        if "python_default_value" in parameter_metadata:
+            self._default = parameter_metadata.get("python_default_value")
             self._has_default = True
         else:
             self._default = '""'
