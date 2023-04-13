@@ -16338,30 +16338,56 @@ functions = {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'fillMode',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArray',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'List[float]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -16371,84 +16397,141 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySizeInSamps',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadAnalogScalarF64': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'value',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadBinaryI16': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'fillMode',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
                 'coerced': True,
+                'ctypes_data_type': 'numpy.int16',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -16458,53 +16541,90 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySizeInSamps',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadBinaryI32': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'fillMode',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.int32',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -16514,54 +16634,91 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySizeInSamps',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadBinaryU16': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'fillMode',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
                 'coerced': True,
+                'ctypes_data_type': 'numpy.uint16',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -16571,53 +16728,90 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySizeInSamps',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadBinaryU32': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'fillMode',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.uint32',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -16627,47 +16821,79 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySizeInSamps',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadCounterF64': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArray',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'List[float]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -16677,53 +16903,90 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySizeInSamps',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadCounterF64Ex': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'fillMode',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArray',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'List[float]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -16733,107 +16996,179 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySizeInSamps',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadCounterScalarF64': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'value',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadCounterScalarU32': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'value',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadCounterU32': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'numpy.uint32',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -16843,53 +17178,90 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySizeInSamps',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadCounterU32Ex': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'fillMode',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.uint32',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -16899,52 +17271,88 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySizeInSamps',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadCtrFreq': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'interleaved',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'out',
+                'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArrayFrequency',
+                'python_data_type': 'float',
+                'python_type_annotation': 'List[float]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -16952,8 +17360,13 @@ functions = {
                 'type': 'float64[]'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'out',
+                'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArrayDutyCycle',
+                'python_data_type': 'float',
+                'python_type_annotation': 'List[float]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -16963,87 +17376,146 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySizeInSamps',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadCtrFreqScalar': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'frequency',
+                'python_data_type': 'float',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'dutyCycle',
+                'python_data_type': 'float',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadCtrTicks': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'interleaved',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.uint32',
                 'direction': 'out',
+                'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArrayHighTicks',
+                'python_data_type': 'int',
+                'python_type_annotation': 'List[int]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -17051,8 +17523,13 @@ functions = {
                 'type': 'uInt32[]'
             },
             {
+                'ctypes_data_type': 'numpy.uint32',
                 'direction': 'out',
+                'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArrayLowTicks',
+                'python_data_type': 'int',
+                'python_type_annotation': 'List[int]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -17062,87 +17539,148 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySizeInSamps',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadCtrTicksScalar': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'highTicks',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'lowTicks',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadCtrTime': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'interleaved',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'out',
+                'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArrayHighTime',
+                'python_data_type': 'float',
+                'python_type_annotation': 'List[float]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -17150,8 +17688,13 @@ functions = {
                 'type': 'float64[]'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'out',
+                'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArrayLowTime',
+                'python_data_type': 'float',
+                'python_type_annotation': 'List[float]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -17161,88 +17704,142 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySizeInSamps',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadCtrTimeScalar': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
                 'direction': 'out',
                 'name': 'highTime',
-                'type': 'float64'
+                'type': 'float64',
+                'use_in_python_api': False
             },
             {
                 'direction': 'out',
                 'name': 'lowTime',
-                'type': 'float64'
+                'type': 'float64',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadDigitalLines': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'fillMode',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.uint8',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInBytes'
@@ -17252,89 +17849,151 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySizeInBytes',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'numBytesPerSamp',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadDigitalScalarU32': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'value',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadDigitalU16': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'fillMode',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
                 'coerced': True,
+                'ctypes_data_type': 'numpy.uint16',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -17344,53 +18003,90 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySizeInSamps',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadDigitalU32': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'fillMode',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.uint32',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -17400,53 +18096,90 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySizeInSamps',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadDigitalU8': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'fillMode',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.uint8',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -17456,23 +18189,34 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySizeInSamps',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadPowerBinaryI16': {
@@ -17609,35 +18353,60 @@ functions = {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'voltage',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'current',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadRaw': {
@@ -18317,14 +19086,24 @@ functions = {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_optional_in_python': False,
                 'name': 'attribute',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             }
         ],
@@ -18596,12 +19375,11 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
-                'is_optional_in_python': True,
+                'is_optional_in_python': False,
                 'name': 'channelNames',
                 'python_data_type': 'str',
-                'python_default_value': '""',
                 'python_description': '',
-                'python_type_annotation': 'Optional[str]',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
@@ -21057,870 +21835,1535 @@ functions = {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'dataLayout',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'in',
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'writeArray',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'List[float]',
                 'type': 'const float64[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanWritten',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteAnalogScalarF64': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'value',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteBinaryI16': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'dataLayout',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
                 'coerced': True,
+                'ctypes_data_type': 'numpy.int16',
                 'direction': 'in',
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'writeArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'type': 'const int16[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanWritten',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteBinaryI32': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'dataLayout',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.int32',
                 'direction': 'in',
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'writeArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'type': 'const int32[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanWritten',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteBinaryU16': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'dataLayout',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
                 'coerced': True,
+                'ctypes_data_type': 'numpy.uint16',
                 'direction': 'in',
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'writeArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'type': 'const uInt16[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanWritten',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteBinaryU32': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'dataLayout',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.uint32',
                 'direction': 'in',
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'writeArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'type': 'const uInt32[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanWritten',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteCtrFreq': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'dataLayout',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'in',
+                'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'frequency',
+                'python_data_type': 'float',
+                'python_type_annotation': 'List[float]',
                 'type': 'const float64[]'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'in',
+                'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'dutyCycle',
+                'python_data_type': 'float',
+                'python_type_annotation': 'List[float]',
                 'type': 'const float64[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChanWritten',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteCtrFreqScalar': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'frequency',
+                'python_data_type': 'float',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'dutyCycle',
+                'python_data_type': 'float',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteCtrTicks': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'dataLayout',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.uint32',
                 'direction': 'in',
+                'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'highTicks',
+                'python_data_type': 'int',
+                'python_type_annotation': 'List[int]',
                 'type': 'const uInt32[]'
             },
             {
+                'ctypes_data_type': 'numpy.uint32',
                 'direction': 'in',
+                'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'lowTicks',
+                'python_data_type': 'int',
+                'python_type_annotation': 'List[int]',
                 'type': 'const uInt32[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChanWritten',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteCtrTicksScalar': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'highTicks',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'lowTicks',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteCtrTime': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'dataLayout',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'in',
+                'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'highTime',
+                'python_data_type': 'float',
+                'python_type_annotation': 'List[float]',
                 'type': 'const float64[]'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'in',
+                'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'lowTime',
+                'python_data_type': 'float',
+                'python_type_annotation': 'List[float]',
                 'type': 'const float64[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChanWritten',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteCtrTimeScalar': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'highTime',
+                'python_data_type': 'float',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'lowTime',
+                'python_data_type': 'float',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteDigitalLines': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'dataLayout',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.uint8',
                 'direction': 'in',
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'writeArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'type': 'const uInt8[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanWritten',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteDigitalScalarU32': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'value',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteDigitalU16': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'dataLayout',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
                 'coerced': True,
+                'ctypes_data_type': 'numpy.uint16',
                 'direction': 'in',
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'writeArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'type': 'const uInt16[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanWritten',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteDigitalU32': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'dataLayout',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.uint32',
                 'direction': 'in',
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'writeArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'type': 'const uInt32[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanWritten',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteDigitalU8': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'dataLayout',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.uint8',
                 'direction': 'in',
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'writeArray',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'List[int]',
                 'type': 'const uInt8[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanWritten',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteRaw': {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSamps',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'autoStart',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'numpy.generic',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'writeArray',
+                'python_data_type': 'dynamic',
+                'python_type_annotation': 'dynamic',
                 'type': 'const uInt8[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanWritten',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],

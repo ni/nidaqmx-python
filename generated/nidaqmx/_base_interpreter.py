@@ -1436,7 +1436,7 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def set_analog_power_up_states_with_output_type(
-            self, state_array, channel_type_array, array_size, channel_names):
+            self, channel_names, state_array, channel_type_array, array_size):
         raise NotImplementedError
 
     @abc.abstractmethod
