@@ -7,6 +7,7 @@ import click
 
 sys.path.append(str(pathlib.Path(__file__).parent.parent))
 import codegen.generator as generator  # noqa E402: module level import not at top of file
+import codegen.generate_grpc_stubs as stub_generator
 
 _logger = logging.getLogger(__name__)
 
@@ -40,6 +41,7 @@ def main(dest, verbose, quiet):
     logging.basicConfig(level=logging_level, format=log_format)
 
     generator.generate(dest)
+    stub_generator.generate_stubs()
 
 
 if __name__ == "__main__":

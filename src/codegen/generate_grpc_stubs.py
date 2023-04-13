@@ -1,14 +1,11 @@
 """Generates gRPC Python stubs from proto files."""
 
-import itertools
 import pathlib
 import shutil
 from typing import Sequence
 
-import black
 import grpc_tools.protoc
 import pkg_resources
-from black.mode import Mode
 
 
 STUBS_NAMESPACE = "nidaqmx._stubs"
@@ -18,13 +15,12 @@ PROTO_PATH = pathlib.Path(__file__).parent.parent.parent / "src" / "codegen" / "
 PROTO_FILES = list(PROTO_PATH.rglob("*.proto"))
 
 
-def main():
+def generate_stubs():
     """Generate and fixup gRPC Python stubs."""
     remove_generated_files(STUBS_PATH, PROTO_PATH)
     generate_python_files(STUBS_PATH, PROTO_PATH, PROTO_FILES)
     fix_import_paths(STUBS_PATH, STUBS_NAMESPACE, PROTO_PARENT_NAMESPACES)
     add_init_files(STUBS_PATH, PROTO_PATH)
-    blacken_code(STUBS_PATH)
 
 
 def is_relative_to(path: pathlib.PurePath, other: pathlib.PurePath) -> bool:
@@ -95,17 +91,3 @@ def add_init_files(stubs_path: pathlib.Path, proto_path: pathlib.Path):
             init_path = dir / "__init__.py"
             print(f"Creating {init_path}")
             init_path.write_bytes(b'"""Auto generated gRPC files."""\n')
-
-
-def blacken_code(stubs_path: pathlib.Path):
-    """Run black on generated files."""
-    print("Running black")
-    for py_path in itertools.chain(stubs_path.rglob("*.py"), stubs_path.rglob("*.pyi")):
-        if black.format_file_in_place(
-            src=py_path, fast=False, mode=Mode(line_length=100), write_back=black.WriteBack.YES
-        ):
-            print(f"reformatted {py_path}")
-
-
-if __name__ == "__main__":
-    main()
