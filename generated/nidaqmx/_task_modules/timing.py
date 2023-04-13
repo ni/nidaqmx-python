@@ -2308,7 +2308,7 @@ class Timing:
     @property
     def samp_quant_samp_per_chan(self):
         """
-        long: Specifies the number of samples to acquire or generate for
+        int: Specifies the number of samples to acquire or generate for
             each channel if **samp_quant_samp_mode** is
             **AcquisitionType.FINITE**. If **samp_quant_samp_mode** is
             **AcquisitionType.CONTINUOUS**, NI-DAQmx uses this value to
@@ -2914,7 +2914,7 @@ class Timing:
                 Specifies if the task acquires or generates samples
                 continuously or if it acquires or generates a finite
                 number of samples.
-            samps_per_chan (Optional[long]): Specifies the number of
+            samps_per_chan (Optional[int]): Specifies the number of
                 samples to acquire or generate for each channel in the
                 task if **sample_mode** is **FINITE_SAMPLES**. If
                 **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses
@@ -2963,7 +2963,7 @@ class Timing:
                 Specifies if the task acquires or generates samples
                 continuously or if it acquires or generates a finite
                 number of samples.
-            samps_per_chan (Optional[long]): Specifies the number of
+            samps_per_chan (Optional[int]): Specifies the number of
                 samples to acquire or generate for each channel in the
                 task if **sample_mode** is **FINITE_SAMPLES**. If
                 **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses
@@ -3015,7 +3015,7 @@ class Timing:
             sample_mode (Optional[nidaqmx.constants.AcquisitionType]): 
                 Specifies if the task acquires samples continuously or
                 if it acquires a finite number of samples.
-            samps_per_chan (Optional[long]): Specifies the number of
+            samps_per_chan (Optional[int]): Specifies the number of
                 samples to acquire from each channel in the task if
                 **sample_mode** is **FINITE_SAMPLES**. This function
                 returns an error if the specified value is negative.
@@ -3045,7 +3045,7 @@ class Timing:
                 Specifies if the task acquires or generates samples
                 continuously or if it acquires or generates a finite
                 number of samples.
-            samps_per_chan (Optional[long]): Specifies the number of
+            samps_per_chan (Optional[int]): Specifies the number of
                 samples to acquire or generate for each channel in the
                 task if **sample_mode** is **FINITE_SAMPLES**. If
                 **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses
@@ -3080,7 +3080,7 @@ class Timing:
                 Specifies if the task acquires or generates samples
                 continuously or if it acquires or generates a finite
                 number of samples.
-            samps_per_chan (Optional[long]): Specifies the number of
+            samps_per_chan (Optional[int]): Specifies the number of
                 samples to acquire or generate for each channel in the
                 task if **sample_mode** is **FINITE_SAMPLES**. If
                 **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses
@@ -3131,7 +3131,7 @@ class Timing:
                 Specifies if the task acquires or generates samples
                 continuously or if it acquires or generates a finite
                 number of samples.
-            samps_per_chan (Optional[long]): Specifies the number of
+            samps_per_chan (Optional[int]): Specifies the number of
                 samples to acquire or generate for each channel in the
                 task if **sample_mode** is **FINITE_SAMPLES**. If
                 **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses
@@ -3174,7 +3174,7 @@ class Timing:
                 Specifies if the task acquires or generates samples
                 continuously or if it acquires or generates a finite
                 number of samples.
-            samps_per_chan (Optional[long]): Specifies the number of
+            samps_per_chan (Optional[int]): Specifies the number of
                 samples to acquire or generate for each channel in the
                 task if **sample_mode** is **FINITE_SAMPLES**. If
                 **sample_mode** is **CONTINUOUS_SAMPLES**, NI-DAQmx uses

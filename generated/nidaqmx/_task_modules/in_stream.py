@@ -381,7 +381,7 @@ class InStream:
     @property
     def curr_read_pos(self):
         """
-        long: Indicates in samples per channel the current position in
+        int: Indicates in samples per channel the current position in
             the buffer.
         """
         val = ctypes.c_ulonglong()
@@ -731,7 +731,7 @@ class InStream:
     @property
     def logging_file_preallocation_size(self):
         """
-        long: Specifies a size in samples to be used to pre-allocate
+        int: Specifies a size in samples to be used to pre-allocate
             space on disk.  Pre-allocation can improve file I/O
             performance, especially in situations where multiple files
             are being written to disk.  For finite tasks, the default
@@ -937,7 +937,7 @@ class InStream:
     @property
     def logging_samps_per_file(self):
         """
-        long: Specifies how many samples to write to each file. When the
+        int: Specifies how many samples to write to each file. When the
             file reaches the number of samples specified, a new file is
             created with the naming convention of <filename>_####.tdms,
             where #### starts at 0001 and increments automatically with
@@ -2105,7 +2105,7 @@ class InStream:
     @property
     def total_samp_per_chan_acquired(self):
         """
-        long: Indicates the total number of samples acquired by each
+        int: Indicates the total number of samples acquired by each
             channel. NI-DAQmx returns a single value because this value
             is the same for all channels. For retriggered acquisitions,
             this value is the cumulative number of samples across all
@@ -2450,17 +2450,17 @@ class InStream:
         check_for_error(error_code)
 
     @property
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use overwrite instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use overwrite instead.")
     def over_write(self):
         return self.overwrite
 
     @over_write.setter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use overwrite instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use overwrite instead.")
     def over_write(self, val):
         self.overwrite = val
 
     @over_write.deleter
-    @deprecation.deprecated(deprecated_in="0.6.6", details="Use overwrite instead.")
+    @deprecation.deprecated(deprecated_in="0.7.0", details="Use overwrite instead.")
     def over_write(self):
         del self.overwrite
 

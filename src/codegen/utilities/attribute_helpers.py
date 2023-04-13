@@ -1,7 +1,6 @@
 """This contains the helper methods used in attribute generation."""
 
 from codegen.properties.attribute import Attribute
-from codegen.utilities.helpers import strip_class_name
 
 EXCLUDED_ATTRIBUTES = [
     "AI_CHAN_CAL_HAS_VALID_CAL_INFO",
@@ -49,126 +48,32 @@ EXCLUDED_ATTRIBUTES = [
 ]
 
 DEPRECATED_ATTRIBUTES = {
-    "ai_eddy_current_prox_sensitivity": {
-        "new_name": "ai_eddy_current_prox_probe_sensitivity",
-        "deprecated_in": "0.6.6",
-    },
-    "ai_eddy_current_prox_sensitivity_units": {
-        "new_name": "ai_eddy_current_prox_probe_sensitivity_units",
-        "deprecated_in": "0.6.6",
-    },
-    "ai_eddy_current_prox_units": {
-        "new_name": "ai_eddy_current_prox_probe_units",
-        "deprecated_in": "0.6.6",
-    },
-    "ai_teds_is_teds": {"new_name": "ai_is_teds", "deprecated_in": "0.6.6"},
-    "ai_rosette_strain_gage_gage_orientation": {
-        "new_name": "ai_rosette_strain_gage_orientation",
-        "deprecated_in": "0.6.6",
-    },
-    "ai_rtd_r_0": {"new_name": "ai_rtd_r0", "deprecated_in": "0.6.6"},
-    "ai_sound_pressured_b_ref": {"new_name": "ai_sound_pressure_db_ref", "deprecated_in": "0.6.6"},
-    "ai_strain_force_read_from_chan": {
-        "new_name": "ai_strain_gage_force_read_from_chan",
-        "deprecated_in": "0.6.6",
-    },
-    "ai_thrmstr_r_1": {"new_name": "ai_thrmstr_r1", "deprecated_in": "0.6.6"},
-    "ai_acceld_b_ref": {"new_name": "ai_accel_db_ref", "deprecated_in": "0.6.6"},
-    "ai_voltaged_b_ref": {"new_name": "ai_voltage_db_ref", "deprecated_in": "0.6.6"},
+    "ai_rtd_r_0": {"new_name": "ai_rtd_r0", "deprecated_in": "0.7.0"},
+    "ai_sound_pressured_b_ref": {"new_name": "ai_sound_pressure_db_ref", "deprecated_in": "0.7.0"},
+    "ai_thrmstr_r_1": {"new_name": "ai_thrmstr_r1", "deprecated_in": "0.7.0"},
+    "ai_acceld_b_ref": {"new_name": "ai_accel_db_ref", "deprecated_in": "0.7.0"},
+    "ai_voltaged_b_ref": {"new_name": "ai_voltage_db_ref", "deprecated_in": "0.7.0"},
     "ai_velocity_iepe_sensord_b_ref": {
         "new_name": "ai_velocity_iepe_sensor_db_ref",
-        "deprecated_in": "0.6.6",
+        "deprecated_in": "0.7.0",
     },
-    "ci_count_edges_count_reset_reset_cnt": {
-        "new_name": "ci_count_edges_count_reset_reset_count",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_pulse_freq_starting_edge": {
-        "new_name": "ci_pulse_freq_start_edge",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_pulse_ticks_starting_edge": {
-        "new_name": "ci_pulse_ticks_start_edge",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_pulse_time_starting_edge": {
-        "new_name": "ci_pulse_time_start_edge",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_velocity_a_input_dig_fltr_enable": {
-        "new_name": "ci_velocity_encoder_a_input_dig_fltr_enable",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_velocity_a_input_dig_fltr_min_pulse_width": {
-        "new_name": "ci_velocity_encoder_a_input_dig_fltr_min_pulse_width",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_velocity_a_input_dig_fltr_timebase_rate": {
-        "new_name": "ci_velocity_encoder_a_input_dig_fltr_timebase_rate",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_velocity_a_input_dig_fltr_timebase_src": {
-        "new_name": "ci_velocity_encoder_a_input_dig_fltr_timebase_src",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_velocity_a_input_logic_lvl_behavior": {
-        "new_name": "ci_velocity_encoder_a_input_logic_lvl_behavior",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_velocity_a_input_term": {
-        "new_name": "ci_velocity_encoder_a_input_term",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_velocity_a_input_term_cfg": {
-        "new_name": "ci_velocity_encoder_a_input_term_cfg",
-        "deprecated_in": "0.6.6",
-    },
-    "over_write": {"new_name": "overwrite", "deprecated_in": "0.6.6"},
-    "ai_meas_types": {
-        "new_name": "ai_supported_meas_types",
-        "deprecated_in": "0.6.6",
-    },
-    "ao_output_types": {
-        "new_name": "ao_supported_output_types",
-        "deprecated_in": "0.6.6",
-    },
-    "ci_meas_types": {
-        "new_name": "ci_supported_meas_types",
-        "deprecated_in": "0.6.6",
-    },
-    "co_output_types": {
-        "new_name": "co_supported_output_types",
-        "deprecated_in": "0.6.6",
-    },
+    "over_write": {"new_name": "overwrite", "deprecated_in": "0.7.0"},
     "dev_is_simulated": {
         "new_name": "is_simulated",
-        "deprecated_in": "0.6.6",
+        "deprecated_in": "0.7.0",
     },
     "dev_serial_num": {
         "new_name": "serial_num",
-        "deprecated_in": "0.6.6",
+        "deprecated_in": "0.7.0",
     },
     "tedshwteds_supported": {
         "new_name": "hwteds_supported",
-        "deprecated_in": "0.6.6",
+        "deprecated_in": "0.7.0",
     },
-    "expir_states_ao_type": {"new_name": "ao_output_type", "deprecated_in": "0.6.6"},
-    "expir_states_co_state": {"new_name": "co_state", "deprecated_in": "0.6.6"},
-    "expir_states_do_state": {"new_name": "do_state", "deprecated_in": "0.6.6"},
-    "expir_states_ao_state": {"new_name": "ao_state", "deprecated_in": "0.6.6"},
-    "expir_trig_trig_type": {"new_name": "expiration_trigger_type", "deprecated_in": "0.6.6"},
-    "expir_trig_dig_edge_edge": {
-        "new_name": "expiration_trigger_dig_edge_edge",
-        "deprecated_in": "0.6.6",
-    },
-    "expir_trig_dig_edge_src": {
-        "new_name": "expiration_trigger_dig_edge_src",
-        "deprecated_in": "0.6.6",
-    },
-    "expir_trig_trig_on_network_conn_loss": {
-        "new_name": "expiration_trigger_trig_on_network_conn_loss",
-        "deprecated_in": "0.6.6",
-    },
+    "expir_states_ao_type": {"new_name": "ao_output_type", "deprecated_in": "0.7.0"},
+    "expir_states_co_state": {"new_name": "co_state", "deprecated_in": "0.7.0"},
+    "expir_states_do_state": {"new_name": "do_state", "deprecated_in": "0.7.0"},
+    "expir_states_ao_state": {"new_name": "ao_state", "deprecated_in": "0.7.0"},
 }
 
 PYTHON_CLASS_ENUM_MERGE_SET = {
@@ -180,12 +85,37 @@ PYTHON_CLASS_ENUM_MERGE_SET = {
 }
 
 ATTRIBUTE_CHANGE_SET = {
-    "AIChannel": {"ai_custom_scale_name": "ai_custom_scale"},
+    "AIChannel": {
+        "ai_custom_scale_name": "ai_custom_scale",
+        "ai_strain_gage_force_read_from_chan": "ai_strain_force_read_from_chan",
+        "ai_eddy_current_prox_probe_sensitivity": "ai_eddy_current_prox_sensitivity",
+        "ai_eddy_current_prox_probe_sensitivity_units": "ai_eddy_current_prox_sensitivity_units",
+        "ai_eddy_current_prox_probe_units": "ai_eddy_current_prox_units",
+        "ai_is_teds": "ai_teds_is_teds",
+        "ai_rosette_strain_gage_orientation": "ai_rosette_strain_gage_gage_orientation",
+    },
     "AOChannel": {"ao_custom_scale_name": "ao_custom_scale"},
     "CIChannel": {
+        "ci_count_edges_count_reset_reset_count": "ci_count_edges_count_reset_reset_cnt",
         "ci_custom_scale_name": "ci_custom_scale",
         "ci_dup_count_prevent": "ci_dup_count_prevention",
-        "ci_dup_count_prevent": "ci_dup_count_prevention",
+        "ci_pulse_freq_start_edge": "ci_pulse_freq_starting_edge",
+        "ci_pulse_ticks_start_edge": "ci_pulse_ticks_starting_edge",
+        "ci_pulse_time_start_edge": "ci_pulse_time_starting_edge",
+        "ci_velocity_encoder_a_input_dig_fltr_enable": "ci_velocity_a_input_dig_fltr_enable",
+        "ci_velocity_encoder_a_input_dig_fltr_min_pulse_width": "ci_velocity_a_input_dig_fltr_min_pulse_width",
+        "ci_velocity_encoder_a_input_dig_fltr_timebase_rate": "ci_velocity_a_input_dig_fltr_timebase_rate",
+        "ci_velocity_encoder_a_input_dig_fltr_timebase_src": "ci_velocity_a_input_dig_fltr_timebase_src",
+        "ci_velocity_encoder_a_input_logic_lvl_behavior": "ci_velocity_a_input_logic_lvl_behavior",
+        "ci_velocity_encoder_a_input_term": "ci_velocity_a_input_term",
+        "ci_velocity_encoder_a_input_term_cfg": "ci_velocity_a_input_term_cfg",
+        "ci_velocity_encoder_b_input_dig_fltr_enable": "ci_velocity_b_input_dig_fltr_enable",
+        "ci_velocity_encoder_b_input_dig_fltr_min_pulse_width": "ci_velocity_b_input_dig_fltr_min_pulse_width",
+        "ci_velocity_encoder_b_input_dig_fltr_timebase_rate": "ci_velocity_b_input_dig_fltr_timebase_rate",
+        "ci_velocity_encoder_b_input_dig_fltr_timebase_src": "ci_velocity_b_input_dig_fltr_timebase_src",
+        "ci_velocity_encoder_b_input_logic_lvl_behavior": "ci_velocity_b_input_logic_lvl_behavior",
+        "ci_velocity_encoder_b_input_term": "ci_velocity_b_input_term",
+        "ci_velocity_encoder_b_input_term_cfg": "ci_velocity_b_input_term_cfg",
     },
     "Channel": {
         "chan_descr": "description",
@@ -221,9 +151,17 @@ ATTRIBUTE_CHANGE_SET = {
         "compact_rio_chassis_dev_name": "compact_rio_chassis_device",
         "field_daq_bank_dev_names": "field_daq_bank_devices",
         "field_daq_dev_name": "field_daq_device",
+        "ai_supported_meas_types": "ai_meas_types",
+        "ao_supported_output_types": "ao_output_types",
+        "ci_supported_meas_types": "ci_meas_types",
+        "co_supported_output_types": "co_output_types",
     },
     "PhysicalChannel": {
         "teds_template_i_ds": "teds_template_ids",
+        "ai_supported_meas_types": "ai_meas_types",
+        "ao_supported_output_types": "ao_output_types",
+        "ci_supported_meas_types": "ci_meas_types",
+        "co_supported_output_types": "co_output_types",
     },
     "ExpirationState": {
         "ao_expir_state": "ao_state",
@@ -231,11 +169,10 @@ ATTRIBUTE_CHANGE_SET = {
         "do_expir_state": "do_state",
     },
     "Watchdog": {
-        "expir_trig_type": "expiration_trigger_type",
+        "expir_trig_type": "expir_trig_trig_type",
         "has_expired": "expired",
-        "dig_edge_watchdog_expir_trig_edge": "expiration_trigger_dig_edge_edge",
-        "dig_edge_watchdog_expir_trig_src": "expiration_trigger_dig_edge_src",
-        "expir_trig_trig_on_network_conn_loss": "expiration_trigger_trig_on_network_conn_loss",
+        "dig_edge_watchdog_expir_trig_edge": "expir_trig_dig_edge_edge",
+        "dig_edge_watchdog_expir_trig_src": "expir_trig_dig_edge_src",
     },
     "Triggers": {"trigger_sync_type": "sync_type"},
 }
@@ -268,6 +205,13 @@ ATTR_NAME_CHANGE_IN_DESCRIPTION = {
     "physical_chan_ci_supported_meas_types": "ci_supported_meas_types",
     "physical_chan_co_supported_output_types": "co_supported_output_types",
     "physical_chan_teds_bit_stream": "teds_bit_stream",
+    "ai_eddy_current_prox_probe_sensitivity": "ai_eddy_current_prox_sensitivity",
+    "ai_eddy_current_prox_probe_sensitivity_units": "ai_eddy_current_prox_sensitivity_units",
+    "ci_dup_count_prevent": "ci_dup_count_prevention",
+    "ai_supported_meas_types": "ai_meas_types",
+    "ao_supported_output_types": "ao_output_types",
+    "ci_supported_meas_types": "ci_meas_types",
+    "co_supported_output_types": "co_output_types",
 }
 
 
@@ -281,26 +225,8 @@ def get_attributes(metadata, class_name):
                 and attribute_data["python_class_name"] == class_name
                 and not attribute_data["name"] in EXCLUDED_ATTRIBUTES
             ):
-                # Strip class name in attribute name from the description.
-                attribute_data["python_description"] = _strip_attr_name_in_description(
-                    attribute_data["python_description"]
-                )
-
-                # Strip class name in the attribute name.
-                attribute_data["name"] = _strip_name(attribute_data["name"], class_name)
                 attributes_metadata.append(Attribute(id, attribute_data))
     return sorted(attributes_metadata, key=lambda x: x.name)
-
-
-def transform_attributes(attributes, class_name):
-    """Updates the attribute name with the expected name."""
-    if class_name in ATTRIBUTE_CHANGE_SET:
-        updated_names = ATTRIBUTE_CHANGE_SET[class_name]
-        for attribute in attributes:
-            if attribute.name in updated_names:
-                attribute.update_attribute_name(updated_names[attribute.name])
-        return sorted(attributes, key=lambda x: x.name)
-    return attributes
 
 
 def get_enums_used(attributes):
@@ -328,62 +254,3 @@ def get_deprecated_attributes(attributes):
             deprecated_attributes[old_name]["access"] = matching_attribute.access
             deprecated_attributes[old_name]["resettable"] = matching_attribute.resettable
     return deprecated_attributes
-
-
-def _strip_attr_name_in_description(attribute_description):
-    """Strips physical_chan prefix in attribute description."""
-    for old_attribute_name, new_attribute_name in ATTR_NAME_CHANGE_IN_DESCRIPTION.items():
-        if old_attribute_name in attribute_description:
-            attribute_description = attribute_description.replace(
-                old_attribute_name, new_attribute_name
-            )
-    return attribute_description
-
-
-def _strip_name(attribute_name, class_name):
-    """Strips class name from attribute name."""
-    # Strip PHYSICAL_CHAN prefix from the name.
-    if class_name == "PhysicalChannel":
-        return strip_class_name(attribute_name, "PHYSICAL_CHAN_")
-
-    # Strip ARM_START_TRIG prefix from the name.
-    if class_name == "ArmStartTrigger":
-        if attribute_name == "ARM_START_TRIG_TYPE":
-            return strip_class_name(attribute_name, "ARM_START_")
-        return strip_class_name(attribute_name, "ARM_START_TRIG_|ARM_START_")
-
-    # Strip HSHK_TRIG prefix from the name.
-    if class_name == "HandshakeTrigger":
-        attribute_name = strip_class_name(attribute_name, "_HSHK_TRIG_", "_")
-        return strip_class_name(attribute_name, "HSHK_")
-
-    # Strip PAUSE_TRIG prefix from the name.
-    if class_name == "PauseTrigger":
-        attribute_name = strip_class_name(attribute_name, "_PAUSE_TRIG_", "_")
-        if attribute_name == "PAUSE_TRIG_TYPE":
-            return strip_class_name(attribute_name, "PAUSE_")
-        return strip_class_name(attribute_name, "PAUSE_TRIG_")
-
-    # Strip REF_TRIG prefix from the name.
-    if class_name == "ReferenceTrigger":
-        if attribute_name.lower() in [
-            "ref_trig_type",
-            "ref_trig_win",
-            "dig_pattern_ref_trig_when",
-            "anlg_win_ref_trig_when",
-        ]:
-            return strip_class_name(attribute_name, "REF_")
-        return strip_class_name(attribute_name, "REF_TRIG_")
-
-    # Strip START_TRIG prefix from the name.
-    if class_name == "StartTrigger":
-        if attribute_name.lower() in [
-            "anlg_win_start_trig_when",
-            "dig_pattern_start_trig_when",
-            "start_trig_type",
-            "start_trig_win",
-        ]:
-            return strip_class_name(attribute_name, "START_")
-        return strip_class_name(attribute_name, "START_TRIG_")
-
-    return attribute_name
