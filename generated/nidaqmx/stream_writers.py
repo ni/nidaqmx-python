@@ -1,5 +1,5 @@
 import numpy
-from handwritten import utils
+from nidaqmx import utils
 from nidaqmx import DaqError
 from nidaqmx._task_modules.write_functions import (
     _write_analog_f_64, _write_analog_scalar_f_64, _write_binary_i_16,

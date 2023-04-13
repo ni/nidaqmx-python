@@ -1,6 +1,6 @@
 import numpy
 from nidaqmx import DaqError
-from handwritten import utils
+from nidaqmx import utils
 
 from nidaqmx.constants import READ_ALL_AVAILABLE
 from nidaqmx._task_modules.read_functions import (

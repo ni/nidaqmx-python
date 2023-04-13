@@ -6,7 +6,7 @@ import numpy
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
-from generated.nidaqmx._task_modules.channels.channel import Channel
+from nidaqmx._task_modules.channels.channel import Channel
 from nidaqmx.constants import (
     ActiveOrInactiveEdgeSelection, DataTransferActiveTransferMode,
     InputDataTransferCondition, LogicFamily)

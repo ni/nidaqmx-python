@@ -1,7 +1,7 @@
 import ctypes
 import numpy
 import warnings
-from generated.nidaqmx import utils
+from nidaqmx import utils
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx._task_modules.channels.channel import Channel

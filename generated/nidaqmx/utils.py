@@ -1,7 +1,7 @@
 import re
 
 from nidaqmx.errors import DaqError
-from generated.nidaqmx._library_interpreter import LibraryInterpreter
+from nidaqmx._library_interpreter import LibraryInterpreter
 
 # Method logic adapted from
 # //Measurements/Infrastructure/dmxf/trunk/2.5/source/nimuck/parseUtilities.cpp
