@@ -35,12 +35,12 @@ INTERPRETER_IGNORED_FUNCTIONS = [
 ]
 
 
-def get_interpreter_functions(metadata, exclude_grpc_only_functions=False):
+def get_interpreter_functions(metadata, exclude_non_python_codegen_methods=False):
     """Converts the scrapigen metadata into a list of functions."""
     all_functions = deepcopy(metadata["functions"])
     functions_metadata = []
     for function_name, function_data in all_functions.items():
-        if exclude_grpc_only_functions and is_grpc_only_function(function_data):
+        if exclude_non_python_codegen_methods and is_python_codegen_method(function_data):
             continue
         if function_name in INTERPRETER_IGNORED_FUNCTIONS:
             continue
@@ -135,6 +135,10 @@ def is_skippable_param(param: dict) -> bool:
         return True
     return False
 
+def is_python_codegen_method(func: dict) -> bool:
+    if "python_codegen_method" in func:
+        return func["python_codegen_method"] != "no"
+    return True
 
 def get_output_params(func):
     """Gets input parameters for the function."""
