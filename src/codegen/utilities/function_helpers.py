@@ -31,8 +31,9 @@ EXCLUDED_FUNCTIONS = [
     "SetAnalogPowerUpStatesWithOutputType",
     "SetDigitalLogicFamilyPowerUpState",
     "SetDigitalPowerUpStates",
-    "SetDigitalPullUpPullDownStates"
+    "SetDigitalPullUpPullDownStates",
 ]
+
 
 def get_functions(metadata, class_name=""):
     """Converts the scrapigen metadata into a list of functions."""
