@@ -1,62 +1,112 @@
 functions = {
     'AddCDAQSyncConnection': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'portList',
+                'python_data_type': 'str',
+                'python_description': 'Specifies the cDAQ Sync ports to connect.',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             }
         ],
+        'python_class_name': 'System',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Adds a cDAQ Sync connection between devices. The connection is not verified.',
         'returns': 'int32'
     },
     'AddGlobalChansToTask': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'channelNames',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             }
         ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'AddNetworkDevice': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'is_python_factory': True,
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'ipAddress',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': True,
                 'name': 'deviceName',
+                'python_data_type': 'str',
+                'python_default_value': '""',
+                'python_description': 'Indicates the name to assign to the device. If unspecified, NI-DAQmx chooses the device name.',
+                'python_type_annotation': 'Optional[str]',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': True,
                 'name': 'attemptReservation',
+                'python_data_type': 'bool',
+                'python_default_value': False,
+                'python_description': 'Indicates if a reservation should be attempted after the device is successfully added. By default, this parameter is set to false.',
+                'python_type_annotation': 'Optional[bool]',
                 'type': 'bool32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': True,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_default_value': '10.0',
+                'python_description': 'Specifies the time in seconds to wait for the device to respond before timing out.',
+                'python_type_annotation': 'Optional[float]',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
+                'is_optional_in_python': False,
                 'name': 'deviceNameOut',
+                'python_data_type': 'str',
+                'python_description': 'Indicates the name to assign to the device. If unspecified, NI-DAQmx chooses the device name.',
+                'python_type_annotation': 'str',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'deviceNameOutBufferSize'
@@ -66,50 +116,83 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'deviceNameOutBufferSize',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             }
         ],
+        'python_class_name': 'Device',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Adds a Network cDAQ device to the system and, if specified, attempts to reserve it.',
         'returns': 'int32'
     },
     'AreConfiguredCDAQSyncPortsDisconnected': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': True,
                 'name': 'chassisDevicesPorts',
+                'python_data_type': 'str',
+                'python_default_value': '""',
+                'python_description': 'Returns the port-to-port connections that failed verification.',
+                'python_type_annotation': 'Optional[str]',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': True,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_default_value': 'WAIT_INFINITELY',
+                'python_description': 'Specifies the time in seconds to wait for the device to respond before timing out.',
+                'python_type_annotation': 'Optional[float]',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'disconnectedPortsExist',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
+        'python_class_name': 'System',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Verifies configured cDAQ Sync connections between devices. Failures generally indicate a specifying issue or that a device has been powered off or removed. Stop all NI-DAQmx tasks running on the devices prior to running this function because any running tasks cause the verification process to fail.',
         'returns': 'int32'
     },
     'AutoConfigureCDAQSyncConnections': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'chassisDevicesPorts',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': True,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_default_value': 'WAIT_INFINITELY',
+                'python_description': 'Specifies the time in seconds to wait for the device to respond before timing out. If a timeout occurs, no configuration is changed.',
+                'python_type_annotation': 'Optional[float]',
                 'type': 'float64'
             }
         ],
+        'python_class_name': 'System',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Detects and configures cDAQ Sync connections between devices. Stop all NI-DAQmx tasks running on the devices prior to running this function because any running tasks cause auto-configuration to fail.',
         'returns': 'int32'
     },
@@ -332,7 +415,6 @@ functions = {
     },
     'CfgAnlgMultiEdgeRefTrig': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -373,11 +455,11 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'CfgAnlgMultiEdgeStartTrig': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -413,6 +495,7 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'CfgAnlgWindowRefTrig': {
@@ -1142,7 +1225,6 @@ functions = {
     },
     'CfgInputBuffer': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -1155,11 +1237,11 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'CfgOutputBuffer': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -1172,6 +1254,7 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'CfgPipelinedSampClkTiming': {
@@ -1334,7 +1417,6 @@ functions = {
     },
     'CfgTimeStartTrig': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -1369,21 +1451,36 @@ functions = {
                 'type': 'int32'
             }
         ],
+        'python_codegen_method': 'no',
         'python_description': 'New Start Trigger',
         'returns': 'int32'
     },
     'CfgWatchdogAOExpirStates': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'channelNames',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
@@ -1393,7 +1490,8 @@ functions = {
                     'mechanism': 'len',
                     'value': 'arraySize'
                 },
-                'type': 'const float64[]'
+                'type': 'const float64[]',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
@@ -1403,36 +1501,60 @@ functions = {
                     'mechanism': 'len',
                     'value': 'arraySize'
                 },
-                'type': 'const int32[]'
+                'type': 'const int32[]',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
                 'name': 'arraySize',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             }
         ],
+        'python_class_name': 'Watchdog',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Configures the expiration states for an analog watchdog timer task.',
         'returns': 'int32'
     },
     'CfgWatchdogCOExpirStates': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'channelNames',
+                'python_data_type': 'str',
+                'python_description': 'Contains the states to which to set counter physical channels when the watchdog timer expires. Each element of the list contains a counter physical channel name and the corresponding state for that counter physical channel.',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'numpy.int32',
                 'direction': 'in',
                 'enum': 'WatchdogCOExpirState',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'expirStateArray',
+                'python_data_type': 'int',
+                'python_description': 'Contains the states to which to set counter physical channels when the watchdog timer expires. Each element of the list contains a counter physical channel name and the corresponding state for that counter physical channel.',
+                'python_type_annotation': 'List[int]',
                 'size': {
                     'mechanism': 'len',
                     'value': 'arraySize'
@@ -1442,31 +1564,54 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySize',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             }
         ],
+        'python_class_name': 'Watchdog',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Configures the expiration states for a counter watchdog timer task.',
         'returns': 'int32'
     },
     'CfgWatchdogDOExpirStates': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'channelNames',
+                'python_data_type': 'str',
+                'python_description': 'Contains the states to which to set digital physical channels when the watchdog timer expires. Each element of the list contains a digital physical channel name and the corresponding state for that digital physical channel.',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'numpy.int32',
                 'direction': 'in',
                 'enum': 'DigitalLineState',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'expirStateArray',
+                'python_data_type': 'int',
+                'python_description': 'Contains the states to which to set digital physical channels when the watchdog timer expires. Each element of the list contains a digital physical channel name and the corresponding state for that digital physical channel.',
+                'python_type_annotation': 'List[int]',
                 'size': {
                     'mechanism': 'len',
                     'value': 'arraySize'
@@ -1476,9 +1621,12 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySize',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             }
         ],
+        'python_class_name': 'Watchdog',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Configures the expiration states for a digital watchdog timer task.',
         'returns': 'int32'
     },
@@ -1508,49 +1656,94 @@ functions = {
     },
     'ClearTask': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             }
         ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Clears the task. Before clearing, this function aborts the task, if necessary, and releases any resources the task reserved. You cannot use a task after you clear it unless you recreate the task.',
         'returns': 'int32'
     },
     'ConfigureLogging': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'filePath',
+                'python_data_type': 'str',
+                'python_description': 'Specifies the path to the TDMS file to which you want to log data.',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'LoggingMode',
+                'is_optional_in_python': True,
                 'name': 'loggingMode',
+                'python_data_type': 'LoggingMode',
+                'python_default_value': 'LoggingMode.LOG_AND_READ',
+                'python_description': 'Specifies whether to enable logging and whether to allow reading data while logging. **LOG** mode allows for the best performance. However, you cannot read data while logging if you specify this mode. If you want to read data while logging, specify **LOG_AND_READ** mode.',
+                'python_type_annotation': 'Optional[nidaqmx.constants.LoggingMode]',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': True,
                 'name': 'groupName',
+                'python_data_type': 'str',
+                'python_default_value': '""',
+                'python_description': 'Specifies the name of the group to create within the TDMS file for data from this task. If you append data to an existing file and the specified group already exists, NI-DAQmx appends a number symbol and a number to the group name, incrementing that number until finding a group name that does not exist. For example, if you specify a group name of Voltage Task, and that group already exists, NI-DAQmx assigns the group name Voltage Task #1, then Voltage Task #2. If you do not specify a group name, NI-DAQmx uses the name of the task.',
+                'python_type_annotation': 'Optional[str]',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'LoggingOperation',
+                'is_optional_in_python': True,
                 'name': 'operation',
+                'python_data_type': 'LoggingOperation',
+                'python_default_value': 'LoggingOperation.OPEN_OR_CREATE',
+                'python_description': 'Specifies how to open the TDMS file.',
+                'python_type_annotation': 'Optional[nidaqmx.constants.LoggingOperation]',
                 'type': 'int32'
             }
         ],
+        'python_class_name': 'InStream',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Configures TDMS file logging for the task.',
         'returns': 'int32'
     },
@@ -1631,20 +1824,36 @@ functions = {
     },
     'ControlWatchdogTask': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'WatchdogControlAction',
+                'is_optional_in_python': False,
                 'name': 'action',
+                'python_data_type': 'WDTTaskAction',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.WDTTaskAction',
                 'type': 'int32'
             }
         ],
+        'python_class_name': 'Watchdog',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Controls the watchdog timer task according to the action you specify. This function does not program the watchdog timer on a real-time controller. Use the Real-Time Watchdog VIs to program the watchdog timer on a real-time controller.',
         'returns': 'int32'
     },
@@ -12040,19 +12249,34 @@ functions = {
     },
     'CreateTask': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'init_method': True,
         'is_python_factory': True,
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': True,
                 'is_session_name': True,
                 'name': 'sessionName',
+                'python_data_type': 'str',
+                'python_default_value': '""',
+                'python_description': 'Is the name to assign to the task. If you use this function in a loop and specify a name for the task, you must use the DAQmx Clear Task function within the loop after you are finished with the task. Otherwise, NI-DAQmx attempts to create multiple tasks with the same name, which results in an error. Refer to Task Creation and Destruction for more information.',
+                'python_type_annotation': 'Optional[str]',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
@@ -12072,12 +12296,13 @@ functions = {
                 'type': 'bool'
             }
         ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Creates a task and adds virtual channels to that task if you specify them in the **globalvirtualchannels** input. If you specify a **tasktocopy**, this function duplicates the configuration of the specified task in the newly created task before it adds any additional global virtual channels.',
         'returns': 'int32'
     },
     'CreateWatchdogTimerTask': {
         'calling_convention': 'Cdecl',
-        'codegen_method': 'grpc-only',
         'init_method': True,
         'is_python_factory': True,
         'parameters': [
@@ -12142,33 +12367,58 @@ functions = {
                 'type': 'bool'
             }
         ],
+        'python_codegen_method': 'no',
         'python_description': "Creates and configures a task that controls the watchdog timer of a device. The timer activates when you start the task. Use the digital physical channel expiration states input to set expiration states for digital channels. If your device supports expiration states for other channel types, use the DAQmx Configure Watchdog Expiration States to configure those channels' expiration states. This function does not program the watchdog timer on a real-time controller. Use the Real-Time Watchdog VIs to program the watchdog timer on a real-time controller.",
         'returns': 'int32'
     },
     'CreateWatchdogTimerTaskEx': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'init_method': True,
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'deviceName',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'is_session_name': True,
                 'name': 'sessionName',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
@@ -12188,24 +12438,36 @@ functions = {
                 'type': 'bool'
             }
         ],
+        'python_class_name': 'Watchdog',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'DeleteNetworkDevice': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'deviceName',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             }
         ],
+        'python_class_name': 'Device',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Deletes a Network DAQ device previously added to the host. If the device is reserved, it is unreserved before it is removed.',
         'returns': 'int32'
     },
     'DeleteSavedGlobalChan': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12213,12 +12475,12 @@ functions = {
                 'type': 'const char[]'
             }
         ],
+        'python_codegen_method': 'no',
         'python_description': 'Deletes the specified global channel from MAX. This function does not remove the global channel from tasks that use it.',
         'returns': 'int32'
     },
     'DeleteSavedScale': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12226,12 +12488,12 @@ functions = {
                 'type': 'const char[]'
             }
         ],
+        'python_codegen_method': 'no',
         'python_description': 'Deletes the specified custom scale from MAX. This function does not remove the custom scale from virtual channels that use it.',
         'returns': 'int32'
     },
     'DeleteSavedTask': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12239,12 +12501,12 @@ functions = {
                 'type': 'const char[]'
             }
         ],
+        'python_codegen_method': 'no',
         'python_description': 'Deletes the specified task from MAX. This function does not clear the copy of the task stored in memory. Use the DAQmx Clear Task function to clear that copy of the task.',
         'returns': 'int32'
     },
     'DeviceSupportsCal': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12257,6 +12519,7 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'DisableRefTrig': {
@@ -12379,7 +12642,6 @@ functions = {
     },
     'GetAIChanCalCalDate': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12417,11 +12679,11 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetAIChanCalExpDate': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12459,30 +12721,33 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetAnalogPowerUpStates': {
         'calling_convention': 'Cdecl',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'deviceName',
-                'type': 'const char[]'
+                'type': 'const char[]',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
                 'include_in_proto': False,
                 'name': 'channelName',
                 'repeating_argument': True,
-                'type': 'const char[]'
+                'type': 'const char[]',
+                'use_in_python_api': False
             },
             {
                 'direction': 'out',
                 'include_in_proto': False,
                 'name': 'state',
                 'repeating_argument': True,
-                'type': 'float64'
+                'type': 'float64',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
@@ -12490,7 +12755,8 @@ functions = {
                 'include_in_proto': False,
                 'name': 'channelType',
                 'repeating_argument': True,
-                'type': 'int32'
+                'type': 'int32',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
@@ -12508,15 +12774,21 @@ functions = {
                 'repeated_var_args': True
             }
         ],
+        'python_class_name': 'System',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetAnalogPowerUpStatesWithOutputType': {
         'calling_convention': 'Cdecl',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'channelNames',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
@@ -12526,7 +12798,8 @@ functions = {
                     'mechanism': 'passed-in-by-ptr',
                     'value': 'arraySize'
                 },
-                'type': 'float64[]'
+                'type': 'float64[]',
+                'use_in_python_api': False
             },
             {
                 'direction': 'out',
@@ -12536,20 +12809,27 @@ functions = {
                     'mechanism': 'passed-in-by-ptr',
                     'value': 'arraySize'
                 },
-                'type': 'int32[]'
+                'type': 'int32[]',
+                'use_in_python_api': False
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'arraySize',
+                'python_data_type': 'int',
+                'python_description': 'Contains the physical channels and power up states. Each element of the list contains a physical channel and the power up state for that physical channel.',
+                'python_type_annotation': 'int',
                 'type': 'uInt32'
             }
         ],
+        'python_class_name': 'System',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Gets the power up states for analog physical channels.',
         'returns': 'int32'
     },
     'GetArmStartTrigTimestampVal': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12562,11 +12842,11 @@ functions = {
                 'type': 'CVIAbsoluteTime'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetArmStartTrigTrigWhen': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12579,15 +12859,21 @@ functions = {
                 'type': 'CVIAbsoluteTime'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetAutoConfiguredCDAQSyncConnections': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
+                'is_optional_in_python': False,
                 'name': 'portList',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'portListSize'
@@ -12597,15 +12883,17 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'portListSize',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             }
         ],
+        'python_class_name': 'System',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetBufferAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetBufferAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12624,12 +12912,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetCalInfoAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12655,12 +12943,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetCalInfoAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12686,12 +12974,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetCalInfoAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12719,12 +13007,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetCalInfoAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12750,12 +13038,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetChanAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12786,12 +13074,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetChanAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12822,12 +13110,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetChanAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12860,12 +13148,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetChanAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12896,12 +13184,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetChanAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12934,12 +13222,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetChanAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -12970,12 +13258,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetDeviceAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13001,12 +13289,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetDeviceAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13032,12 +13320,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetDeviceAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13065,12 +13353,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetDeviceAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13096,12 +13384,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetDeviceAttributeInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13129,12 +13417,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetDeviceAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13162,12 +13450,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetDeviceAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13193,12 +13481,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetDeviceAttributeUInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13226,40 +13514,53 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetDigitalLogicFamilyPowerUpState': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'deviceName',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'logicFamily',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             }
         ],
+        'python_class_name': 'System',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetDigitalPowerUpStates': {
         'calling_convention': 'Cdecl',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'deviceName',
-                'type': 'const char[]'
+                'type': 'const char[]',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
                 'include_in_proto': False,
                 'name': 'channelName',
                 'repeating_argument': True,
-                'type': 'const char[]'
+                'type': 'const char[]',
+                'use_in_python_api': False
             },
             {
                 'direction': 'out',
@@ -13267,7 +13568,8 @@ functions = {
                 'include_in_proto': False,
                 'name': 'state',
                 'repeating_argument': True,
-                'type': 'int32'
+                'type': 'int32',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
@@ -13284,23 +13586,26 @@ functions = {
                 'repeated_var_args': True
             }
         ],
+        'python_class_name': 'System',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetDigitalPullUpPullDownStates': {
         'calling_convention': 'Cdecl',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'deviceName',
-                'type': 'const char[]'
+                'type': 'const char[]',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
                 'include_in_proto': False,
                 'name': 'channelName',
                 'repeating_argument': True,
-                'type': 'const char[]'
+                'type': 'const char[]',
+                'use_in_python_api': False
             },
             {
                 'direction': 'out',
@@ -13308,7 +13613,8 @@ functions = {
                 'include_in_proto': False,
                 'name': 'state',
                 'repeating_argument': True,
-                'type': 'int32'
+                'type': 'int32',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
@@ -13325,15 +13631,22 @@ functions = {
                 'repeated_var_args': True
             }
         ],
+        'python_class_name': 'System',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetDisconnectedCDAQSyncPorts': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
+                'is_optional_in_python': False,
                 'name': 'portList',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'portListSize'
@@ -13343,14 +13656,16 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'portListSize',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             }
         ],
+        'python_class_name': 'System',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetErrorString': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13372,12 +13687,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetExportedSignalAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13403,12 +13718,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetExportedSignalAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13434,12 +13749,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetExportedSignalAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13465,12 +13780,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetExportedSignalAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13498,12 +13813,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetExportedSignalAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13529,6 +13844,7 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetExtendedErrorInfo': {
@@ -13550,11 +13866,11 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetFirstSampClkWhen': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13567,11 +13883,11 @@ functions = {
                 'type': 'CVIAbsoluteTime'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetFirstSampTimestampVal': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13584,25 +13900,41 @@ functions = {
                 'type': 'CVIAbsoluteTime'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetNthTaskChannel': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'index',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
+                'is_optional_in_python': False,
                 'name': 'buffer',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'bufferSize'
@@ -13615,25 +13947,41 @@ functions = {
                 'type': 'int32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetNthTaskDevice': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'index',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
+                'is_optional_in_python': False,
                 'name': 'buffer',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'bufferSize'
@@ -13646,25 +13994,41 @@ functions = {
                 'type': 'int32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetNthTaskReadChannel': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'index',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
+                'is_optional_in_python': False,
                 'name': 'buffer',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'bufferSize'
@@ -13677,12 +14041,12 @@ functions = {
                 'type': 'int32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetPersistedChanAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPersistedChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13708,12 +14072,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetPersistedChanAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPersistedChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13741,12 +14105,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetPersistedScaleAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPersistedScaleAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13772,12 +14136,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetPersistedScaleAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPersistedScaleAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13805,12 +14169,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetPersistedTaskAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPersistedTaskAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13836,12 +14200,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetPersistedTaskAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPersistedTaskAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13869,12 +14233,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13900,12 +14264,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeBytes': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13933,12 +14297,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13964,12 +14328,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -13997,12 +14361,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14028,12 +14392,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14061,12 +14425,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14094,12 +14458,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14125,12 +14489,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeUInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14158,12 +14522,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetReadAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14189,12 +14553,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetReadAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14220,12 +14584,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetReadAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14251,12 +14615,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetReadAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14284,12 +14648,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetReadAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14315,12 +14679,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetReadAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14346,12 +14710,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetRealTimeAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetRealTimeAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14377,12 +14741,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetRealTimeAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetRealTimeAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14408,12 +14772,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetRealTimeAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetRealTimeAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14439,11 +14803,11 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetRefTrigTimestampVal': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14456,12 +14820,12 @@ functions = {
                 'type': 'CVIAbsoluteTime'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetScaleAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetScaleAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14487,12 +14851,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetScaleAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetScaleAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14520,12 +14884,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetScaleAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetScaleAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14551,12 +14915,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetScaleAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetScaleAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14584,11 +14948,11 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetSelfCalLastDateAndTime': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14621,11 +14985,11 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetStartTrigTimestampVal': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14638,11 +15002,11 @@ functions = {
                 'type': 'CVIAbsoluteTime'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetStartTrigTrigWhen': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14655,11 +15019,11 @@ functions = {
                 'type': 'CVIAbsoluteTime'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetSyncPulseTimeWhen': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14672,12 +15036,12 @@ functions = {
                 'type': 'CVIAbsoluteTime'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetSystemInfoAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetSystemInfoAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14700,12 +15064,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetSystemInfoAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetSystemInfoAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14726,12 +15090,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTaskAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTaskAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14757,12 +15121,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTaskAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTaskAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14790,12 +15154,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTaskAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTaskAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14821,12 +15185,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTimingAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14852,12 +15216,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTimingAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14883,12 +15247,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTimingAttributeExBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14919,12 +15283,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTimingAttributeExDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14955,12 +15319,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTimingAttributeExInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -14991,12 +15355,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTimingAttributeExString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15029,12 +15393,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTimingAttributeExTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15065,12 +15429,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTimingAttributeExUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15101,12 +15465,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTimingAttributeExUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15137,12 +15501,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTimingAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15168,12 +15532,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTimingAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15201,12 +15565,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTimingAttributeTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15232,12 +15596,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTimingAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15263,12 +15627,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTimingAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15294,12 +15658,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTrigAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15325,12 +15689,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTrigAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15356,12 +15720,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTrigAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15389,12 +15753,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTrigAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15420,12 +15784,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTrigAttributeInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15453,12 +15817,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTrigAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15486,12 +15850,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTrigAttributeTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15517,12 +15881,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetTrigAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15548,12 +15912,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetWatchdogAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWatchdogAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15584,12 +15948,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetWatchdogAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWatchdogAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15620,12 +15984,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetWatchdogAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWatchdogAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15656,12 +16020,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetWatchdogAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWatchdogAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15694,12 +16058,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetWriteAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15725,12 +16089,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetWriteAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15756,12 +16120,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetWriteAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15787,12 +16151,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetWriteAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15820,12 +16184,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetWriteAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15851,12 +16215,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'GetWriteAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15882,40 +16246,71 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'IsTaskDone': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'isTaskDone',
+                'python_data_type': 'bool',
+                'python_description': 'Indicates if the measurement or generation completed.',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Queries the status of the task and indicates if it completed execution. Use this function to ensure that the specified operation is complete before you stop the task.',
         'returns': 'int32'
     },
     'LoadTask': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'init_method': True,
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'is_session_name': True,
                 'name': 'sessionName',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
@@ -15935,11 +16330,12 @@ functions = {
                 'type': 'bool'
             }
         ],
+        'python_class_name': 'PersistedTask',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ReadAnalogF64': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -15991,11 +16387,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadAnalogScalarF64': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16021,11 +16417,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadBinaryI16': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16078,11 +16474,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadBinaryI32': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16134,11 +16530,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadBinaryU16': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16191,11 +16587,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadBinaryU32': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16247,11 +16643,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadCounterF64': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16297,11 +16693,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadCounterF64Ex': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16353,11 +16749,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadCounterScalarF64': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16383,11 +16779,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadCounterScalarU32': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16413,11 +16809,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadCounterU32': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16463,11 +16859,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadCounterU32Ex': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16519,11 +16915,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadCtrFreq': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16583,11 +16979,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadCtrFreqScalar': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16618,11 +17014,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadCtrTicks': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16682,11 +17078,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadCtrTicksScalar': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16717,11 +17113,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadCtrTime': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16781,11 +17177,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadCtrTimeScalar': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16816,11 +17212,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadDigitalLines': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16877,11 +17273,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadDigitalScalarU32': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16907,11 +17303,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadDigitalU16': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -16964,11 +17360,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadDigitalU32': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -17020,11 +17416,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadDigitalU8': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -17076,11 +17472,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadPowerBinaryI16': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -17142,11 +17538,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadPowerF64': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -17206,11 +17602,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadPowerScalarF64': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -17241,31 +17637,52 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ReadRaw': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'numpy.unknown',
                 'direction': 'out',
+                'has_explicit_buffer_size': True,
                 'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'readArray',
+                'python_data_type': 'dynamic',
+                'python_description': '',
+                'python_type_annotation': 'List[dynamic]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInBytes'
@@ -17278,40 +17695,70 @@ functions = {
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'numBytesPerSamp',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'RegisterDoneEvent': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint',
                 'direction': 'in',
                 'hardcoded_value': '0U',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'options',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
@@ -17328,48 +17775,84 @@ functions = {
                         'type': 'int32'
                     }
                 ],
+                'ctypes_data_type': None,
                 'direction': 'in',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'callbackFunction',
+                'python_data_type': 'DAQmxDoneEventCallbackPtr',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.DAQmxDoneEventCallbackPtr',
                 'type': 'DAQmxDoneEventCallbackPtr'
             },
             {
                 'callback_token': True,
+                'ctypes_data_type': 'ctypes.unknown',
                 'direction': 'in',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'callbackData',
                 'pointer': True,
+                'python_data_type': 'dynamic',
+                'python_description': '',
+                'python_type_annotation': 'dynamic',
                 'type': 'void'
             }
         ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32',
         'stream_response': True
     },
     'RegisterEveryNSamplesEvent': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'EveryNSamplesEventType',
+                'is_optional_in_python': False,
                 'name': 'everyNSamplesEventType',
+                'python_data_type': 'EveryNSamplesEventType',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.EveryNSamplesEventType',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'nSamples',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint',
                 'direction': 'in',
                 'hardcoded_value': '0U',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'options',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
@@ -17392,43 +17875,74 @@ functions = {
                         'type': 'uInt32'
                     }
                 ],
+                'ctypes_data_type': None,
                 'direction': 'in',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'callbackFunction',
+                'python_data_type': 'DAQmxEveryNSamplesEventCallbackPtr',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.DAQmxEveryNSamplesEventCallbackPtr',
                 'type': 'DAQmxEveryNSamplesEventCallbackPtr'
             },
             {
                 'callback_token': True,
+                'ctypes_data_type': 'ctypes.unknown',
                 'direction': 'in',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'callbackData',
                 'pointer': True,
+                'python_data_type': 'dynamic',
+                'python_description': '',
+                'python_type_annotation': 'dynamic',
                 'type': 'void'
             }
         ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32',
         'stream_response': True
     },
     'RegisterSignalEvent': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'Signal2',
+                'is_optional_in_python': False,
                 'name': 'signalID',
+                'python_data_type': 'Signal',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.Signal',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint',
                 'direction': 'in',
                 'hardcoded_value': '0U',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'options',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
@@ -17445,57 +17959,91 @@ functions = {
                         'type': 'int32'
                     }
                 ],
+                'ctypes_data_type': None,
                 'direction': 'in',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'callbackFunction',
+                'python_data_type': 'DAQmxSignalEventCallbackPtr',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.DAQmxSignalEventCallbackPtr',
                 'type': 'DAQmxSignalEventCallbackPtr'
             },
             {
                 'callback_token': True,
+                'ctypes_data_type': 'ctypes.unknown',
                 'direction': 'in',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'callbackData',
                 'pointer': True,
+                'python_data_type': 'dynamic',
+                'python_description': '',
+                'python_type_annotation': 'dynamic',
                 'type': 'void'
             }
         ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32',
         'stream_response': True
     },
     'RemoveCDAQSyncConnection': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'portList',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             }
         ],
+        'python_class_name': 'System',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Removes a cDAQ Sync connection between devices. The connection is not verified.',
         'returns': 'int32'
     },
     'ReserveNetworkDevice': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'deviceName',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
+                'is_optional_in_python': True,
                 'name': 'overrideReservation',
+                'python_data_type': 'bool',
+                'python_default_value': False,
+                'python_description': 'Indicates if an existing reservation on the device should be overridden by this reservation. By default, this parameter is set to false.',
+                'python_type_annotation': 'Optional[bool]',
                 'type': 'bool32'
             }
         ],
+        'python_class_name': 'Device',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Reserves the Network DAQ device for the current host. Reservation is required to run NI-DAQmx tasks, and the device must be added in MAX before it can be reserved.',
         'returns': 'int32'
     },
     'ResetBufferAttribute': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -17509,11 +18057,11 @@ functions = {
                 'type': 'int32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ResetChanAttribute': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -17532,6 +18080,7 @@ functions = {
                 'type': 'int32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ResetDevice': {
@@ -17560,7 +18109,6 @@ functions = {
     },
     'ResetExportedSignalAttribute': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -17584,29 +18132,39 @@ functions = {
                 'type': 'int32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ResetReadAttribute': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_optional_in_python': False,
                 'name': 'attribute',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ResetRealTimeAttribute': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -17620,11 +18178,11 @@ functions = {
                 'type': 'int32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ResetTimingAttribute': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -17648,11 +18206,11 @@ functions = {
                 'type': 'int32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ResetTimingAttributeEx': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -17686,11 +18244,11 @@ functions = {
                 'type': 'int32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ResetTrigAttribute': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -17714,34 +18272,49 @@ functions = {
                 'type': 'int32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ResetWatchdogAttribute': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'lines',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_optional_in_python': False,
                 'name': 'attribute',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'ResetWriteAttribute': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -17755,11 +18328,11 @@ functions = {
                 'type': 'int32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SaveGlobalChan': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -17788,12 +18361,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'python_description': 'Saves the specified local or global channel to MAX as a global channel. You must specify both the local or global channel to save and a task that contains that channel.',
         'returns': 'int32'
     },
     'SaveScale': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -17817,12 +18390,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'python_description': 'Saves the specified custom scale to MAX.',
         'returns': 'int32'
     },
     'SaveTask': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -17846,12 +18419,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'python_description': 'Saves the specified task and any  local channels it contains to MAX. This function does not save global channels. Use the DAQmx Save Global Channel function to save global channels.',
         'returns': 'int32'
     },
     'SelfCal': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -17859,6 +18432,7 @@ functions = {
                 'type': 'const char[]'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SelfTestDevice': {
@@ -17887,7 +18461,6 @@ functions = {
     },
     'SetAIChanCalCalDate': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -17925,11 +18498,11 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetAIChanCalExpDate': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -17967,30 +18540,33 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetAnalogPowerUpStates': {
         'calling_convention': 'Cdecl',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'deviceName',
-                'type': 'const char[]'
+                'type': 'const char[]',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
                 'include_in_proto': False,
                 'name': 'channelNames',
                 'repeating_argument': True,
-                'type': 'const char[]'
+                'type': 'const char[]',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
                 'include_in_proto': False,
                 'name': 'state',
                 'repeating_argument': True,
-                'type': 'float64'
+                'type': 'float64',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
@@ -17998,7 +18574,8 @@ functions = {
                 'include_in_proto': False,
                 'name': 'channelType',
                 'repeating_argument': True,
-                'type': 'int32'
+                'type': 'int32',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
@@ -18009,15 +18586,22 @@ functions = {
                 'repeated_var_args': True
             }
         ],
+        'python_class_name': 'System',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetAnalogPowerUpStatesWithOutputType': {
         'calling_convention': 'Cdecl',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': True,
                 'name': 'channelNames',
+                'python_data_type': 'str',
+                'python_default_value': '""',
+                'python_description': '',
+                'python_type_annotation': 'Optional[str]',
                 'type': 'const char[]'
             },
             {
@@ -18027,7 +18611,8 @@ functions = {
                     'mechanism': 'len',
                     'value': 'arraySize'
                 },
-                'type': 'const float64[]'
+                'type': 'const float64[]',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
@@ -18037,20 +18622,23 @@ functions = {
                     'mechanism': 'len',
                     'value': 'arraySize'
                 },
-                'type': 'const int32[]'
+                'type': 'const int32[]',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
                 'name': 'arraySize',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             }
         ],
+        'python_class_name': 'System',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Updates power up states for analog physical channels.',
         'returns': 'int32'
     },
     'SetArmStartTrigTrigWhen': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18063,12 +18651,12 @@ functions = {
                 'type': 'CVIAbsoluteTime'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetBufferAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetBufferAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18087,12 +18675,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetCalInfoAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18118,12 +18706,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetCalInfoAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18149,12 +18737,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetCalInfoAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18180,12 +18768,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetCalInfoAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18211,12 +18799,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetChanAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18247,12 +18835,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetChanAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18283,12 +18871,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetChanAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18321,12 +18909,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetChanAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18357,12 +18945,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetChanAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18393,12 +18981,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetChanAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18429,41 +19017,54 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetDigitalLogicFamilyPowerUpState': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'deviceName',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'LogicFamily',
+                'is_optional_in_python': False,
                 'name': 'logicFamily',
+                'python_data_type': 'LogicFamily',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.LogicFamily',
                 'type': 'int32'
             }
         ],
+        'python_class_name': 'System',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetDigitalPowerUpStates': {
         'calling_convention': 'Cdecl',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'deviceName',
-                'type': 'const char[]'
+                'type': 'const char[]',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
                 'include_in_proto': False,
                 'name': 'channelNames',
                 'repeating_argument': True,
-                'type': 'const char[]'
+                'type': 'const char[]',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
@@ -18471,7 +19072,8 @@ functions = {
                 'include_in_proto': False,
                 'name': 'state',
                 'repeating_argument': True,
-                'type': 'int32'
+                'type': 'int32',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
@@ -18482,23 +19084,26 @@ functions = {
                 'repeated_var_args': True
             }
         ],
+        'python_class_name': 'System',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetDigitalPullUpPullDownStates': {
         'calling_convention': 'Cdecl',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
                 'name': 'deviceName',
-                'type': 'const char[]'
+                'type': 'const char[]',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
                 'include_in_proto': False,
                 'name': 'channelNames',
                 'repeating_argument': True,
-                'type': 'const char[]'
+                'type': 'const char[]',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
@@ -18506,7 +19111,8 @@ functions = {
                 'include_in_proto': False,
                 'name': 'state',
                 'repeating_argument': True,
-                'type': 'int32'
+                'type': 'int32',
+                'use_in_python_api': False
             },
             {
                 'direction': 'in',
@@ -18517,12 +19123,13 @@ functions = {
                 'repeated_var_args': True
             }
         ],
+        'python_class_name': 'System',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetExportedSignalAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18548,12 +19155,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetExportedSignalAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18579,12 +19186,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetExportedSignalAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18610,12 +19217,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetExportedSignalAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18641,12 +19248,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetExportedSignalAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18672,11 +19279,11 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetFirstSampClkWhen': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18689,12 +19296,12 @@ functions = {
                 'type': 'CVIAbsoluteTime'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetReadAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18720,12 +19327,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetReadAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18751,12 +19358,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetReadAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18782,12 +19389,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetReadAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18813,12 +19420,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetReadAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18844,12 +19451,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetReadAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18875,12 +19482,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetRealTimeAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetRealTimeAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18906,12 +19513,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetRealTimeAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetRealTimeAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18937,12 +19544,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetRealTimeAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetRealTimeAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18968,12 +19575,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetScaleAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetScaleAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -18999,12 +19606,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetScaleAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetScaleAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19032,12 +19639,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetScaleAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetScaleAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19063,12 +19670,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetScaleAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetScaleAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19094,11 +19701,11 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetStartTrigTrigWhen': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19111,11 +19718,11 @@ functions = {
                 'type': 'CVIAbsoluteTime'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetSyncPulseTimeWhen': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19128,12 +19735,12 @@ functions = {
                 'type': 'CVIAbsoluteTime'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTimingAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19159,12 +19766,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTimingAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19190,12 +19797,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTimingAttributeExBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19226,12 +19833,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTimingAttributeExDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19262,12 +19869,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTimingAttributeExInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19298,12 +19905,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTimingAttributeExString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19334,12 +19941,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTimingAttributeExTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19370,12 +19977,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTimingAttributeExUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19406,12 +20013,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTimingAttributeExUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19442,12 +20049,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTimingAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19473,12 +20080,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTimingAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19504,12 +20111,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTimingAttributeTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19535,12 +20142,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTimingAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19566,12 +20173,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTimingAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19597,12 +20204,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTrigAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19628,12 +20235,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTrigAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19659,12 +20266,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTrigAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19692,12 +20299,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTrigAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19723,12 +20330,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTrigAttributeInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19756,12 +20363,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTrigAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19787,12 +20394,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTrigAttributeTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19818,12 +20425,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetTrigAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19849,12 +20456,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetWatchdogAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWatchdogAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19885,12 +20492,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetWatchdogAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWatchdogAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19921,12 +20528,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetWatchdogAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWatchdogAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19957,12 +20564,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetWatchdogAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWatchdogAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -19993,12 +20600,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetWriteAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20024,12 +20631,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetWriteAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20055,12 +20662,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetWriteAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20086,12 +20693,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetWriteAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20117,12 +20724,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetWriteAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20148,12 +20755,12 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SetWriteAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20179,68 +20786,123 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'StartNewFile': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'filePath',
+                'python_data_type': 'str',
+                'python_description': 'Specifies the path to the TDMS file to which you want to log data.',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             }
         ],
+        'python_class_name': 'InStream',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Starts a new TDMS file the next time data is written to disk.',
         'returns': 'int32'
     },
     'StartTask': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             }
         ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Transitions the task to the running state to begin the measurement or generation. Using this function is required for some applications and is optional for others.',
         'returns': 'int32'
     },
     'StopTask': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             }
         ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Stops the task and returns it to the state the task was in before the DAQmx Start Task function ran or the DAQmx Write function ran with the **autostart** input set to True.',
         'returns': 'int32'
     },
     'TaskControl': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'TaskControlAction',
+                'is_optional_in_python': False,
                 'name': 'action',
+                'python_data_type': 'TaskMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.TaskMode',
                 'type': 'int32'
             }
         ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'TristateOutputTerm': {
@@ -20263,20 +20925,30 @@ functions = {
     },
     'UnreserveNetworkDevice': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'deviceName',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             }
         ],
+        'python_class_name': 'Device',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Unreserves or releases a Network DAQ device previously reserved by the host.',
         'returns': 'int32'
     },
     'WaitForNextSampleClock': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20294,58 +20966,95 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'python_description': 'Waits until the next pulse of the Sample Clock occurs. If an extra Sample Clock pulse occurs between calls to this VI, the second call returns an error or warning and waits for the next Sample Clock pulse. Use the Convert Late Errors to Warnings DAQmx Real-Time property to specify whether this function returns errors or warnings. If that property is True, any warnings this function returns do not include the **source** string.  Use this function to ensure I/O cycles complete within Sample Clock periods. National Instruments recommends you use this function for certain applications only.',
         'returns': 'int32'
     },
     'WaitForValidTimestamp': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': None,
                 'direction': 'in',
                 'enum': 'TimestampEvent',
+                'is_optional_in_python': False,
                 'name': 'timestampEvent',
+                'python_data_type': 'timestampEvent',
+                'python_description': 'Specifies the timestamp type to wait on.',
+                'python_type_annotation': 'nidaqmx.constants.timestampEvent',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': True,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_default_value': '10.0',
+                'python_description': '**timeout (sec)** specifies the maximum amount of time in seconds to wait for a valid timestamp. This function returns an error if the time elapses. The default is 10. If you set **timeout (sec)** to -1, the function waits indefinitely.',
+                'python_type_annotation': 'Optional[float]',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': None,
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'timestamp',
+                'python_data_type': 'DateTime',
+                'python_description': 'Specifies the timestamp type to wait on.',
+                'python_type_annotation': 'nidaqmx.constants.DateTime',
                 'type': 'CVIAbsoluteTime'
             }
         ],
+        'python_codegen_method': 'no',
         'python_description': 'DAQmx Wait for Valid Timestamp',
         'returns': 'int32'
     },
     'WaitUntilTaskDone': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeToWait',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             }
         ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'WriteAnalogF64': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20393,11 +21102,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteAnalogScalarF64': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20428,11 +21137,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteBinaryI16': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20481,11 +21190,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteBinaryI32': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20533,11 +21242,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteBinaryU16': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20586,11 +21295,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteBinaryU32': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20638,11 +21347,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteCtrFreq': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20694,11 +21403,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteCtrFreqScalar': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20734,11 +21443,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteCtrTicks': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20790,11 +21499,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteCtrTicksScalar': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20830,11 +21539,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteCtrTime': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20886,11 +21595,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteCtrTimeScalar': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20926,11 +21635,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteDigitalLines': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -20978,11 +21687,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteDigitalScalarU32': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -21013,11 +21722,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteDigitalU16': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -21066,11 +21775,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteDigitalU32': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -21118,11 +21827,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteDigitalU8': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -21170,11 +21879,11 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteRaw': {
         'calling_convention': 'StdCall',
-        'codegen_method': 'grpc-only',
         'parameters': [
             {
                 'direction': 'in',
@@ -21215,6 +21924,7 @@ functions = {
                 'type': 'bool32'
             }
         ],
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'WriteToTEDSFromArray': {
