@@ -17674,7 +17674,7 @@ functions = {
                 'type': 'float64'
             },
             {
-                'ctypes_data_type': 'numpy.unknown',
+                'ctypes_data_type': 'numpy.generic',
                 'direction': 'out',
                 'has_explicit_buffer_size': True,
                 'is_list': True,
@@ -17787,7 +17787,7 @@ functions = {
             },
             {
                 'callback_token': True,
-                'ctypes_data_type': 'ctypes.unknown',
+                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'in',
                 'include_in_proto': False,
                 'is_optional_in_python': False,
@@ -17887,7 +17887,7 @@ functions = {
             },
             {
                 'callback_token': True,
-                'ctypes_data_type': 'ctypes.unknown',
+                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'in',
                 'include_in_proto': False,
                 'is_optional_in_python': False,
@@ -17971,7 +17971,7 @@ functions = {
             },
             {
                 'callback_token': True,
-                'ctypes_data_type': 'ctypes.unknown',
+                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'in',
                 'include_in_proto': False,
                 'is_optional_in_python': False,
@@ -21001,7 +21001,7 @@ functions = {
                 'name': 'timeout',
                 'python_data_type': 'float',
                 'python_default_value': '10.0',
-                'python_description': '**timeout (sec)** specifies the maximum amount of time in seconds to wait for a valid timestamp. This function returns an error if the time elapses. The default is 10. If you set **timeout (sec)** to -1, the function waits indefinitely.',
+                'python_description': 'Specifies the maximum amount of time in seconds to wait for a valid timestamp. This function returns an error if the time elapses. The default is 10. If you set **timeout** to -1, the function waits indefinitely.',
                 'python_type_annotation': 'Optional[float]',
                 'type': 'float64'
             },
