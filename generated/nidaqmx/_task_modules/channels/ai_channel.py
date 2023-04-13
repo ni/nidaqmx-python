@@ -9,7 +9,7 @@ from nidaqmx._lib import (
 from nidaqmx.scale import Scale
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
-from nidaqmx._task_modules.channels.channel import Channel
+from generated.nidaqmx._task_modules.channels.channel import Channel
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     ACExcitWireMode, ADCTimingMode, AccelChargeSensitivityUnits,
