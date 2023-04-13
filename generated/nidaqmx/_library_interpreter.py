@@ -54,7 +54,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             ip_address, device_name, attempt_reservation, timeout,
-            ctypes.byref(device_name_out))
+            device_name_out, temp_size)
         check_for_error(error_code)
         return device_name_out
 
@@ -2293,7 +2293,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             device_name, channel_name, ctypes.byref(state), channel_type,
-            channels, ctypes.byref(power_up_states))
+            channels, ctypes.byref(power_up_states), None)
         check_for_error(error_code)
         return state, power_up_states
 
@@ -2304,7 +2304,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             channel_names, ctypes.byref(state_array),
-            ctypes.byref(channel_type_array), array_size)
+            ctypes.byref(channel_type_array), array_size, None)
         check_for_error(error_code)
         return state_array, channel_type_array
 
@@ -2318,7 +2318,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_char_p, ctypes.c_uint]
 
         error_code = cfunc(
-            ctypes.byref(port_list))
+            port_list, temp_size)
         check_for_error(error_code)
         return port_list
 
@@ -2343,7 +2343,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             device_name, channel_name, ctypes.byref(state), channel_name,
-            ctypes.byref(power_up_states))
+            ctypes.byref(power_up_states), None)
         check_for_error(error_code)
         return state, power_up_states
 
@@ -2354,7 +2354,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             device_name, channel_name, ctypes.byref(state), channel_name,
-            ctypes.byref(pull_up_pull_down_states))
+            ctypes.byref(pull_up_pull_down_states), None)
         check_for_error(error_code)
         return state, pull_up_pull_down_states
 
@@ -2368,7 +2368,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_char_p, ctypes.c_uint]
 
         error_code = cfunc(
-            ctypes.byref(port_list))
+            port_list, temp_size)
         check_for_error(error_code)
         return port_list
 
@@ -2415,8 +2415,8 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
-            task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            task, num_samps_per_chan, timeout, fill_mode, read_array,
+            temp_size, ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
@@ -2448,8 +2448,8 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_uint, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
-            task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            task, num_samps_per_chan, timeout, fill_mode, read_array,
+            temp_size, ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
@@ -2467,8 +2467,8 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_uint, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
-            task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            task, num_samps_per_chan, timeout, fill_mode, read_array,
+            temp_size, ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
@@ -2487,8 +2487,8 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
-            task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            task, num_samps_per_chan, timeout, fill_mode, read_array,
+            temp_size, ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
@@ -2507,8 +2507,8 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
-            task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            task, num_samps_per_chan, timeout, fill_mode, read_array,
+            temp_size, ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
@@ -2527,7 +2527,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
-            task, num_samps_per_chan, timeout, ctypes.byref(read_array),
+            task, num_samps_per_chan, timeout, read_array, temp_size,
             ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
@@ -2547,8 +2547,8 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
-            task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            task, num_samps_per_chan, timeout, fill_mode, read_array,
+            temp_size, ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
@@ -2595,7 +2595,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
-            task, num_samps_per_chan, timeout, ctypes.byref(read_array),
+            task, num_samps_per_chan, timeout, read_array, temp_size,
             ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
@@ -2615,8 +2615,8 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
-            task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            task, num_samps_per_chan, timeout, fill_mode, read_array,
+            temp_size, ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
@@ -2748,8 +2748,8 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
-            task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read),
+            task, num_samps_per_chan, timeout, fill_mode, read_array,
+            temp_size, ctypes.byref(samps_per_chan_read),
             ctypes.byref(num_bytes_per_samp))
         check_for_error(error_code)
         return read_array, samps_per_chan_read, num_bytes_per_samp
@@ -2783,8 +2783,8 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
-            task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            task, num_samps_per_chan, timeout, fill_mode, read_array,
+            temp_size, ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
@@ -2803,8 +2803,8 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
-            task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            task, num_samps_per_chan, timeout, fill_mode, read_array,
+            temp_size, ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
@@ -2822,8 +2822,8 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_uint, ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
-            task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            task, num_samps_per_chan, timeout, fill_mode, read_array,
+            temp_size, ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
@@ -2900,7 +2900,8 @@ class LibraryInterpreter(BaseInterpreter):
         cfunc = lib_importer.cdll.DAQmxSetAnalogPowerUpStates
 
         error_code = cfunc(
-            device_name, channel_names, state, channel_type, power_up_states)
+            device_name, channel_names, state, channel_type, power_up_states,
+            None)
         check_for_error(error_code)
 
     def set_analog_power_up_states_with_output_type(
@@ -2909,7 +2910,7 @@ class LibraryInterpreter(BaseInterpreter):
         cfunc = lib_importer.cdll.DAQmxSetAnalogPowerUpStatesWithOutputType
 
         error_code = cfunc(
-            channel_names, state_array, channel_type_array, array_size)
+            channel_names, state_array, channel_type_array, array_size, None)
         check_for_error(error_code)
 
     def set_digital_logic_family_power_up_state(
@@ -2931,7 +2932,7 @@ class LibraryInterpreter(BaseInterpreter):
         cfunc = lib_importer.cdll.DAQmxSetDigitalPowerUpStates
 
         error_code = cfunc(
-            device_name, channel_names, state, power_up_states)
+            device_name, channel_names, state, power_up_states, None)
         check_for_error(error_code)
 
     def set_digital_pull_up_pull_down_states(
@@ -2940,7 +2941,7 @@ class LibraryInterpreter(BaseInterpreter):
         cfunc = lib_importer.cdll.DAQmxSetDigitalPullUpPullDownStates
 
         error_code = cfunc(
-            device_name, channel_names, state, pull_up_pull_down_states)
+            device_name, channel_names, state, pull_up_pull_down_states, None)
         check_for_error(error_code)
 
     def start_new_file(self, task, file_path):

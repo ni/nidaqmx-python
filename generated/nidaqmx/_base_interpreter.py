@@ -47,18 +47,6 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def cfg_anlg_multi_edge_ref_trig(
-            self, task, trigger_sources, trigger_slope_array,
-            trigger_level_array, pretrigger_samples, array_size):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def cfg_anlg_multi_edge_start_trig(
-            self, task, trigger_sources, trigger_slope_array,
-            trigger_level_array, array_size):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def cfg_anlg_window_ref_trig(
             self, task, trigger_source, window_top, window_bottom,
             pretrigger_samples, trigger_when):
@@ -119,14 +107,6 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def cfg_input_buffer(self, task, num_samps_per_chan):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def cfg_output_buffer(self, task, num_samps_per_chan):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def cfg_pipelined_samp_clk_timing(
             self, task, rate, source, active_edge, sample_mode,
             samps_per_chan):
@@ -136,10 +116,6 @@ class BaseInterpreter(abc.ABC):
     def cfg_samp_clk_timing(
             self, task, rate, source, active_edge, sample_mode,
             samps_per_chan):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def cfg_time_start_trig(self, task, when, timescale):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -744,33 +720,12 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def create_watchdog_timer_task(
-            self, device_name, session_name, timeout, lines, exp_state):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def create_watchdog_timer_task_ex(
             self, device_name, session_name, timeout):
         raise NotImplementedError
 
     @abc.abstractmethod
     def delete_network_device(self, device_name):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def delete_saved_global_chan(self, channel_name):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def delete_saved_scale(self, scale_name):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def delete_saved_task(self, task_name):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def device_supports_cal(self, device_name):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -790,14 +745,6 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_ai_chan_cal_cal_date(self, task, channel_name):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_ai_chan_cal_exp_date(self, task, channel_name):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def get_analog_power_up_states(
             self, device_name, channel_name, channel_type):
         raise NotImplementedError
@@ -809,82 +756,6 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def get_auto_configured_cdaq_sync_connections(self):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_buffer_attribute_uint32(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_cal_info_attribute_bool(self, device_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_cal_info_attribute_double(self, device_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_cal_info_attribute_string(self, device_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_cal_info_attribute_uint32(self, device_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_chan_attribute_bool(self, task, channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_chan_attribute_double(self, task, channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_chan_attribute_double_array(self, task, channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_chan_attribute_int32(self, task, channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_chan_attribute_string(self, task, channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_chan_attribute_uint32(self, task, channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_device_attribute_bool(self, device_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_device_attribute_double(self, device_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_device_attribute_double_array(self, device_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_device_attribute_int32(self, device_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_device_attribute_int32_array(self, device_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_device_attribute_string(self, device_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_device_attribute_uint32(self, device_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_device_attribute_uint32_array(self, device_name, attribute):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -901,297 +772,6 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def get_disconnected_cdaq_sync_ports(self):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_error_string(self, error_code):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_exported_signal_attribute_bool(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_exported_signal_attribute_double(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_exported_signal_attribute_int32(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_exported_signal_attribute_string(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_exported_signal_attribute_uint32(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_nth_task_channel(self, task, index):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_nth_task_device(self, task, index):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_nth_task_read_channel(self, task, index):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_persisted_chan_attribute_bool(self, channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_persisted_chan_attribute_string(self, channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_persisted_scale_attribute_bool(self, scale_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_persisted_scale_attribute_string(self, scale_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_persisted_task_attribute_bool(self, task_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_persisted_task_attribute_string(self, task_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_physical_chan_attribute_bool(self, physical_channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_physical_chan_attribute_bytes(self, physical_channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_physical_chan_attribute_double(self, physical_channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_physical_chan_attribute_double_array(
-            self, physical_channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_physical_chan_attribute_int32(self, physical_channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_physical_chan_attribute_int32_array(
-            self, physical_channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_physical_chan_attribute_string(self, physical_channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_physical_chan_attribute_uint32(self, physical_channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_physical_chan_attribute_uint32_array(
-            self, physical_channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_read_attribute_bool(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_read_attribute_double(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_read_attribute_int32(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_read_attribute_string(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_read_attribute_uint32(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_read_attribute_uint64(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_real_time_attribute_bool(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_real_time_attribute_int32(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_real_time_attribute_uint32(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_scale_attribute_double(self, scale_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_scale_attribute_double_array(self, scale_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_scale_attribute_int32(self, scale_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_scale_attribute_string(self, scale_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_self_cal_last_date_and_time(self, device_name):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_system_info_attribute_string(self, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_system_info_attribute_uint32(self, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_task_attribute_bool(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_task_attribute_string(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_task_attribute_uint32(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_timing_attribute_bool(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_timing_attribute_double(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_timing_attribute_ex_bool(self, task, device_names, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_timing_attribute_ex_double(self, task, device_names, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_timing_attribute_ex_int32(self, task, device_names, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_timing_attribute_ex_string(self, task, device_names, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_timing_attribute_ex_uint32(self, task, device_names, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_timing_attribute_ex_uint64(self, task, device_names, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_timing_attribute_int32(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_timing_attribute_string(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_timing_attribute_uint32(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_timing_attribute_uint64(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_trig_attribute_bool(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_trig_attribute_double(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_trig_attribute_double_array(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_trig_attribute_int32(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_trig_attribute_int32_array(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_trig_attribute_string(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_trig_attribute_uint32(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_watchdog_attribute_bool(self, task, lines, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_watchdog_attribute_double(self, task, lines, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_watchdog_attribute_int32(self, task, lines, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_watchdog_attribute_string(self, task, lines, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_write_attribute_bool(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_write_attribute_double(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_write_attribute_int32(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_write_attribute_string(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_write_attribute_uint32(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_write_attribute_uint64(self, task, attribute):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1312,39 +892,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_power_binary_i16(
-            self, task, num_samps_per_chan, timeout, fill_mode,
-            read_array_voltage, read_array_current):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def read_power_f64(
-            self, task, num_samps_per_chan, timeout, fill_mode,
-            read_array_voltage, read_array_current):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def read_power_scalar_f64(self, task, timeout):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def read_raw(self, task, num_samps_per_chan, timeout, read_array):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def register_done_event(
-            self, task, options, callback_function, callback_data):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def register_every_n_samples_event(
-            self, task, every_n_samples_event_type, n_samples, options,
-            callback_function, callback_data):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def register_signal_event(
-            self, task, signal_id, options, callback_function, callback_data):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1356,77 +904,11 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def reset_buffer_attribute(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def reset_chan_attribute(self, task, channel, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def reset_device(self, device_name):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def reset_exported_signal_attribute(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def reset_read_attribute(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def reset_real_time_attribute(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def reset_timing_attribute(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def reset_timing_attribute_ex(self, task, device_names, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def reset_trig_attribute(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def reset_watchdog_attribute(self, task, lines, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def reset_write_attribute(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def save_global_chan(self, task, channel_name, save_as, author, options):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def save_scale(self, scale_name, save_as, author, options):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def save_task(self, task, save_as, author, options):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def self_cal(self, device_name):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def self_test_device(self, device_name):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_ai_chan_cal_cal_date(
-            self, task, channel_name, year, month, day, hour, minute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_ai_chan_cal_exp_date(
-            self, task, channel_name, year, month, day, hour, minute):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1437,51 +919,6 @@ class BaseInterpreter(abc.ABC):
     @abc.abstractmethod
     def set_analog_power_up_states_with_output_type(
             self, channel_names, state_array, channel_type_array, array_size):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_buffer_attribute_uint32(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_cal_info_attribute_bool(self, device_name, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_cal_info_attribute_double(self, device_name, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_cal_info_attribute_string(self, device_name, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_cal_info_attribute_uint32(self, device_name, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_chan_attribute_bool(self, task, channel, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_chan_attribute_double(self, task, channel, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_chan_attribute_double_array(
-            self, task, channel, attribute, value, size):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_chan_attribute_int32(self, task, channel, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_chan_attribute_string(self, task, channel, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_chan_attribute_uint32(self, task, channel, attribute, value):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1496,201 +933,6 @@ class BaseInterpreter(abc.ABC):
     @abc.abstractmethod
     def set_digital_pull_up_pull_down_states(
             self, device_name, channel_names, state):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_exported_signal_attribute_bool(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_exported_signal_attribute_double(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_exported_signal_attribute_int32(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_exported_signal_attribute_string(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_exported_signal_attribute_uint32(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_read_attribute_bool(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_read_attribute_double(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_read_attribute_int32(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_read_attribute_string(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_read_attribute_uint32(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_read_attribute_uint64(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_real_time_attribute_bool(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_real_time_attribute_int32(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_real_time_attribute_uint32(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_scale_attribute_double(self, scale_name, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_scale_attribute_double_array(
-            self, scale_name, attribute, value, size):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_scale_attribute_int32(self, scale_name, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_scale_attribute_string(self, scale_name, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_timing_attribute_bool(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_timing_attribute_double(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_timing_attribute_ex_bool(
-            self, task, device_names, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_timing_attribute_ex_double(
-            self, task, device_names, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_timing_attribute_ex_int32(
-            self, task, device_names, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_timing_attribute_ex_string(
-            self, task, device_names, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_timing_attribute_ex_uint32(
-            self, task, device_names, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_timing_attribute_ex_uint64(
-            self, task, device_names, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_timing_attribute_int32(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_timing_attribute_string(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_timing_attribute_uint32(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_timing_attribute_uint64(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_trig_attribute_bool(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_trig_attribute_double(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_trig_attribute_double_array(self, task, attribute, value, size):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_trig_attribute_int32(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_trig_attribute_int32_array(self, task, attribute, value, size):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_trig_attribute_string(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_trig_attribute_uint32(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_watchdog_attribute_bool(self, task, lines, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_watchdog_attribute_double(self, task, lines, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_watchdog_attribute_int32(self, task, lines, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_watchdog_attribute_string(self, task, lines, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_write_attribute_bool(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_write_attribute_double(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_write_attribute_int32(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_write_attribute_string(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_write_attribute_uint32(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_write_attribute_uint64(self, task, attribute, value):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1715,14 +957,6 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def unreserve_network_device(self, device_name):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def wait_for_next_sample_clock(self, task, timeout):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def wait_for_valid_timestamp(self, task, timestamp_event, timeout):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1822,10 +1056,6 @@ class BaseInterpreter(abc.ABC):
     def write_digital_u8(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def write_raw(self, task, num_samps, auto_start, timeout, write_array):
         raise NotImplementedError
 
     @abc.abstractmethod
