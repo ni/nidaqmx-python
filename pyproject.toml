@@ -54,18 +54,21 @@ grpc = ["grpcio", "protobuf"]
 
 [tool.poetry.dev-dependencies]
 # Test
+[tool.poetry.group.dev.dependencies]
 pytest = ">=7.2"
 pytest-cov = ">=4.0"
 pykka = "^3.0"
 tox = "^3.24"
-click = "^8.1"
-Mako = "^1.2"
 ni-python-styleguide = "^0.4"
 sphinx_rtd_theme = "1.0"
-grpcio-tools = "1.49.1"
 mypy = ">=1.0"
-mypy-protobuf = ">=3.4"
 types-protobuf = "^4.21"
+
+[tool.poetry.group.codegen.dependencies]
+click = "^8.1"
+Mako = "^1.2"
+grpcio-tools = "1.49.1"
+mypy-protobuf = ">=3.4"
 
 [tool.black]
 line-length = 100
@@ -75,5 +78,5 @@ extend_exclude = "docs,generated,src/codegen/metadata,src/codegen/templates"
 extend_exclude = "docs,generated,src/codegen/metadata,src/codegen/templates,src/handwritten"
 
 [build-system]
-requires = ["poetry>=1.1.12"]
+requires = ["poetry>=1.2"]
 build-backend = "poetry.masonry.api"
