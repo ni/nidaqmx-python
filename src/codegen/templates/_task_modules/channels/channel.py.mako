@@ -32,7 +32,7 @@ class Channel:
                 this channel is associated with.
             virtual_or_physical_name (str): Specifies the flattened virtual or
                 physical name of a channel.
-            interpreter: Specifies the interpreter instance assigned.
+            interpreter (BaseInterpreter): Specifies the interpreter instance.
         """
         self._handle = task_handle
         self._name = virtual_or_physical_name
@@ -103,7 +103,7 @@ class Channel:
                 this channel is associated with.
             virtual_or_physical_name (str): Specifies the flattened virtual
                 or physical name of a channel.
-            interpreter: Specifies the interpreter instance assigned.
+            interpreter (BaseInterpreter): Specifies the interpreter instance.
         Returns:
             nidaqmx._task_modules.channels.channel.Channel:
 

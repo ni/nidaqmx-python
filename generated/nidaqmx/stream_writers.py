@@ -47,7 +47,7 @@ class ChannelWriterBase:
         self._out_stream = task_out_stream
         self._task = task_out_stream._task
         self._handle = task_out_stream._task._handle
-        self._interpreter = utils._select_interpreter()
+        self._interpreter = task_out_stream._task._interpreter
 
         self._verify_array_shape = True
         self._auto_start = auto_start

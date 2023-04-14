@@ -36,7 +36,7 @@ class ChannelReaderBase:
         self._in_stream = task_in_stream
         self._task = task_in_stream._task
         self._handle = task_in_stream._task._handle
-        self._interpreter = utils._select_interpreter()
+        self._interpreter = task_in_stream._task._interpreter
 
         self._verify_array_shape = True
 
