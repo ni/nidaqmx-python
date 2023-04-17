@@ -111,4 +111,5 @@ class Parameter:
     
     @property
     def callback_params(self):
+        """Dict: Defines the params for callback functions."""
         return self._callback_params
