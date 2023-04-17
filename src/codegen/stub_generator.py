@@ -1,7 +1,6 @@
 """Generates gRPC Python stubs from proto files."""
 
 import pathlib
-import shutil
 from typing import Sequence
 
 import grpc_tools.protoc
