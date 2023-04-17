@@ -11,12 +11,37 @@ FUNCTION_NAME_CHANGE_SET = {
     "CIGPS": "CI_GPS",
 }
 
+EXCLUDED_FUNCTIONS = [
+    "AddNetworkDevice",
+    "DeleteNetworkDevice",
+    "ReserveNetworkDevice",
+    "UnreserveNetworkDevice",
+    "AddCDAQSyncConnection",
+    "AreConfiguredCDAQSyncPortsDisconnected",
+    "AutoConfigureCDAQSyncConnections",
+    "GetAnalogPowerUpStates",
+    "GetAnalogPowerUpStatesWithOutputType",
+    "GetAutoConfiguredCDAQSyncConnections",
+    "GetDigitalLogicFamilyPowerUpState",
+    "GetDigitalPowerUpStates",
+    "GetDigitalPullUpPullDownStates",
+    "GetDisconnectedCDAQSyncPorts",
+    "RemoveCDAQSyncConnection",
+    "SetAnalogPowerUpStates",
+    "SetAnalogPowerUpStatesWithOutputType",
+    "SetDigitalLogicFamilyPowerUpState",
+    "SetDigitalPowerUpStates",
+    "SetDigitalPullUpPullDownStates",
+]
+
 
 def get_functions(metadata, class_name=""):
     """Converts the scrapigen metadata into a list of functions."""
     all_functions = deepcopy(metadata["functions"])
     functions_metadata = []
     for function_name, function_data in all_functions.items():
+        if "pythod_codegen_method" in function_data or function_name in EXCLUDED_FUNCTIONS:
+            continue
         if (
             "python_class_name" in all_functions[function_name]
             and all_functions[function_name]["python_class_name"] == class_name

@@ -1,10 +1,9 @@
 <%
     from codegen.utilities.text_wrappers import wrap
     from codegen.utilities.function_helpers import get_functions
-    from codegen.utilities.attribute_helpers import get_attributes,  get_enums_used, transform_attributes
+    from codegen.utilities.attribute_helpers import get_attributes,  get_enums_used
     from codegen.utilities.text_wrappers import wrap
     attributes = get_attributes(data, "Device")
-    attributes = transform_attributes(attributes, "Device")
     functions = get_functions(data,"Device")
     enums_used = get_enums_used(attributes)
 %>\

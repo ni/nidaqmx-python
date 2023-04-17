@@ -19,7 +19,7 @@ To contribute to this project, it is recommended that you follow these steps:
 1. Ensure you have [poetry](https://python-poetry.org/) [installed](https://python-poetry.org/docs/#installation)
 2. Fork the repository on GitHub.
 3. Install **nidaqmx** dependencies using ``poetry install``
-4. Run the unit tests on your system (see Testing section). At this point, if any tests fail, do not
+4. Run the regression tests on your system (see Testing section). At this point, if any tests fail, do not
 begin development. Try to investigate these failures. If you're unable to do so, report an issue
 through our [GitHub issues page](http://github.com/ni/nidaqmx-python/issues).
 5. Write new tests that demonstrate your bug or feature. Ensure that these new tests fail.
@@ -27,36 +27,40 @@ through our [GitHub issues page](http://github.com/ni/nidaqmx-python/issues).
 7. Once the necessary changes are done, update the auto-generated code using ``poetry run python src/codegen --dest generated/nidaqmx``. This will ensure that the latest files are present in the ``generated`` folder.
    > **Note**
    > The codegen scripts require Python 3.8 or later.
-8. Run all the unit tests again (which include the tests you just added), and confirm that they all
+8. Run all the regression tests again (including the tests you just added), and confirm that they all
 pass.
 9. Send a GitHub Pull Request to the main repository's master branch. GitHub Pull Requests are the
 expected method of code collaboration on this project.
 
 # Testing
 
-In order to be able to run the **nidaqmx** unit tests, your setup should meet the following minimum
+In order to be able to run the **nidaqmx** regression tests, your setup should meet the following minimum
 requirements:
 
 - Setup has a machine with NI-DAQmx or the NI-DAQmx Runtime installed.
    - Currently the minimum supported NI-DAQmx version to run all tests is 21.3.
 - Machine has a supported version of CPython or PyPy installed.
 - Machine has [poetry](https://python-poetry.org/) installed.
-- Machine has an X-Series DAQ device connected to it (we ran the tests 
+- Machine has an X Series DAQ device connected to it (we ran the tests 
   using a PCIe-6363 or a USB-6351).
 
-Before running any unit tests, an NI MAX configuration needs be imported. The MAX configuration
-simply contains some custom scales used during testing. The MAX configuration file is located at
-``tests\max_config\nidaqmxMaxConfig.ini``. Refer to this [KB article](http://digital.ni.com/public.nsf/allkb/0E0D3D7C4AA8903886256B29000C9D5A)
-for details on how to import a MAX Configuration.
+Before running the regression tests, import the appropriate NI MAX configuration files:
+- ``tests\max_config\nidaqmxMaxConfig.ini``: Contains custom scales, global channels, simulated devices, 
+  and tasks used by many regression tests.
+- ``tests\max_config\examplesMaxConfig.ini``: Contains simulated devices used by the example programs.
+  Importing this file is optional. It is used to run a subset of the example programs as test cases.
 
-To run the **nidaqmx** unit tests in a specific version of Python, run the following command in the
+Refer to this [KB article](http://digital.ni.com/public.nsf/allkb/0E0D3D7C4AA8903886256B29000C9D5A) for
+details on how to import a MAX configuration.
+
+To run the **nidaqmx** regression tests in a specific version of Python, run the following command in the
 root of the distribution:
 
 ```sh
 $ poetry run pytest
 ```
 
-To run the unit tests in all Python interpreters supported by **nidaqmx**, run the following
+To run the regression tests in all Python interpreters supported by **nidaqmx**, run the following
 commands in the root of the distribution:
 
 ```sh

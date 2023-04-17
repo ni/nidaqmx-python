@@ -2837,6 +2837,7 @@ attributes = {
             'python_class_name': 'AOChannel',
             'python_data_type': 'Scale',
             'python_description': 'Specifies the name of a custom scale for the channel.',
+            'python_name': 'ao_custom_scale',
             'python_object_module_location': 'nidaqmx.system.scale',
             'python_object_type': 'Scale',
             'resettable': True,
@@ -3094,6 +3095,7 @@ attributes = {
             'python_class_name': 'AIChannel',
             'python_data_type': 'Scale',
             'python_description': 'Specifies the name of a custom scale for the channel.',
+            'python_name': 'ai_custom_scale',
             'python_object_module_location': 'nidaqmx.system.scale',
             'python_object_type': 'Scale',
             'resettable': True,
@@ -4642,6 +4644,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'Scale',
             'python_description': 'Specifies the name of a custom scale for the channel.',
+            'python_name': 'ci_custom_scale',
             'python_object_module_location': 'nidaqmx.system.scale',
             'python_object_type': 'Scale',
             'resettable': True,
@@ -5551,6 +5554,7 @@ attributes = {
             'python_class_name': 'Channel',
             'python_data_type': 'PhysicalChannel',
             'python_description': 'Specifies the name of the physical channel upon which this virtual channel is based.',
+            'python_name': 'physical_channel',
             'python_object_module_location': 'nidaqmx.system.physical_channel',
             'python_object_type': 'PhysicalChannel',
             'resettable': False,
@@ -5637,6 +5641,7 @@ attributes = {
             'python_class_name': 'Channel',
             'python_data_type': 'str',
             'python_description': 'Specifies a user-defined description for the channel.',
+            'python_name': 'description',
             'resettable': True,
             'type': 'char[]'
         },
@@ -6145,6 +6150,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to enable duplicate count prevention for the channel. Duplicate count prevention is enabled by default. Setting  **ci_prescaler** disables duplicate count prevention unless you explicitly enable it.',
+            'python_name': 'ci_dup_count_prevention',
             'resettable': True,
             'type': 'bool32'
         },
@@ -7882,7 +7888,7 @@ attributes = {
             'name': 'CI_PRESCALER',
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
-            'python_description': 'Specifies the divisor to apply to the signal you connect to the counter source terminal. Scaled data that you read takes this setting into account. You should use a prescaler only when you connect an external signal to the counter source terminal and when that signal has a higher frequency than the fastest onboard timebase. Setting this value disables duplicate count prevention unless you explicitly set **ci_dup_count_prevent** to True.',
+            'python_description': 'Specifies the divisor to apply to the signal you connect to the counter source terminal. Scaled data that you read takes this setting into account. You should use a prescaler only when you connect an external signal to the counter source terminal and when that signal has a higher frequency than the fastest onboard timebase. Setting this value disables duplicate count prevention unless you explicitly set **ci_dup_count_prevention** to True.',
             'resettable': True,
             'type': 'uInt32'
         },
@@ -8981,6 +8987,7 @@ attributes = {
             'python_class_name': 'Channel',
             'python_data_type': 'bool',
             'python_description': 'Indicates whether the channel is a global channel.',
+            'python_name': 'is_global',
             'resettable': False,
             'type': 'bool32'
         },
@@ -9296,6 +9303,7 @@ attributes = {
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
             'python_description': 'Indicates if the virtual channel was initialized using a TEDS bitstream from the corresponding physical channel.',
+            'python_name': 'ai_teds_is_teds',
             'resettable': False,
             'type': 'bool32'
         },
@@ -10028,7 +10036,8 @@ attributes = {
             'name': 'AI_EDDY_CURRENT_PROX_PROBE_SENSITIVITY',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
-            'python_description': 'Specifies the sensitivity of the eddy current proximity probe . This value is in the units you specify with **ai_eddy_current_prox_probe_sensitivity_units**. Refer to the sensor documentation to determine this value.',
+            'python_description': 'Specifies the sensitivity of the eddy current proximity probe . This value is in the units you specify with **ai_eddy_current_prox_sensitivity_units**. Refer to the sensor documentation to determine this value.',
+            'python_name': 'ai_eddy_current_prox_sensitivity',
             'resettable': True,
             'type': 'float64'
         },
@@ -10057,7 +10066,8 @@ attributes = {
             'name': 'AI_EDDY_CURRENT_PROX_PROBE_SENSITIVITY_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'EddyCurrentProxProbeSensitivityUnits',
-            'python_description': 'Specifies the units of **ai_eddy_current_prox_probe_sensitivity**.',
+            'python_description': 'Specifies the units of **ai_eddy_current_prox_sensitivity**.',
+            'python_name': 'ai_eddy_current_prox_sensitivity_units',
             'resettable': True,
             'type': 'int32'
         },
@@ -10087,6 +10097,7 @@ attributes = {
             'python_class_name': 'AIChannel',
             'python_data_type': 'LengthUnits2',
             'python_description': 'Specifies the units to use to return proximity measurements from the channel.',
+            'python_name': 'ai_eddy_current_prox_units',
             'resettable': True,
             'type': 'int32'
         },
@@ -10511,6 +10522,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'Edge1',
             'python_description': 'Specifies on which edge of the input signal to begin pulse measurement.',
+            'python_name': 'ci_pulse_freq_starting_edge',
             'resettable': True,
             'type': 'int32'
         },
@@ -10737,6 +10749,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'Edge1',
             'python_description': 'Specifies on which edge of the input signal to begin pulse measurement.',
+            'python_name': 'ci_pulse_time_starting_edge',
             'resettable': True,
             'type': 'int32'
         },
@@ -10963,6 +10976,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'Edge1',
             'python_description': 'Specifies on which edge of the input signal to begin pulse measurement.',
+            'python_name': 'ci_pulse_ticks_starting_edge',
             'resettable': True,
             'type': 'int32'
         },
@@ -11839,6 +11853,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
             'python_description': 'Specifies the value to reset the count to.',
+            'python_name': 'ci_count_edges_count_reset_reset_cnt',
             'resettable': True,
             'type': 'uInt32'
         },
@@ -12290,6 +12305,7 @@ attributes = {
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether the data is returned by DAQmx Read when set on a raw strain channel that is part of a rosette configuration.',
+            'python_name': 'ai_strain_force_read_from_chan',
             'resettable': True,
             'type': 'bool32'
         },
@@ -12346,6 +12362,7 @@ attributes = {
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
             'python_description': 'Specifies gage orientation in degrees with respect to the X axis.',
+            'python_name': 'ai_rosette_strain_gage_gage_orientation',
             'resettable': True,
             'type': 'float64'
         },
@@ -14707,6 +14724,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
             'python_description': 'Specifies the terminal to which signal A is connected.',
+            'python_name': 'ci_velocity_a_input_term',
             'resettable': True,
             'type': 'char[]'
         },
@@ -14736,6 +14754,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
             'python_description': 'Specifies the input terminal configuration.',
+            'python_name': 'ci_velocity_a_input_term_cfg',
             'resettable': True,
             'type': 'int32'
         },
@@ -14765,6 +14784,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
             'python_description': 'Specifies the logic level behavior of the input terminal.',
+            'python_name': 'ci_velocity_a_input_logic_lvl_behavior',
             'resettable': True,
             'type': 'int32'
         },
@@ -14793,6 +14813,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to apply the pulse width filter to the signal.',
+            'python_name': 'ci_velocity_a_input_dig_fltr_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -14821,6 +14842,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
             'python_description': 'Specifies in seconds the minimum pulse width the digital filter recognizes.',
+            'python_name': 'ci_velocity_a_input_dig_fltr_min_pulse_width',
             'resettable': True,
             'type': 'float64'
         },
@@ -14849,6 +14871,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
             'python_description': 'Specifies the input terminal of the signal to use as the timebase of the pulse width filter.',
+            'python_name': 'ci_velocity_a_input_dig_fltr_timebase_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -14877,6 +14900,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
             'python_description': 'Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter.',
+            'python_name': 'ci_velocity_a_input_dig_fltr_timebase_rate',
             'resettable': True,
             'type': 'float64'
         },
@@ -14905,6 +14929,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
             'python_description': 'Specifies the terminal to which signal B is connected.',
+            'python_name': 'ci_velocity_b_input_term',
             'resettable': True,
             'type': 'char[]'
         },
@@ -14934,6 +14959,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
             'python_description': 'Specifies the input terminal configuration.',
+            'python_name': 'ci_velocity_b_input_term_cfg',
             'resettable': True,
             'type': 'int32'
         },
@@ -14963,6 +14989,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
             'python_description': 'Specifies the logic level behavior of the input terminal.',
+            'python_name': 'ci_velocity_b_input_logic_lvl_behavior',
             'resettable': True,
             'type': 'int32'
         },
@@ -14991,6 +15018,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to apply the pulse width filter to the signal.',
+            'python_name': 'ci_velocity_b_input_dig_fltr_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -15019,6 +15047,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
             'python_description': 'Specifies in seconds the minimum pulse width the digital filter recognizes.',
+            'python_name': 'ci_velocity_b_input_dig_fltr_min_pulse_width',
             'resettable': True,
             'type': 'float64'
         },
@@ -15047,6 +15076,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
             'python_description': 'Specifies the input terminal of the signal to use as the timebase of the pulse width filter.',
+            'python_name': 'ci_velocity_b_input_dig_fltr_timebase_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -15075,6 +15105,7 @@ attributes = {
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
             'python_description': 'Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter.',
+            'python_name': 'ci_velocity_b_input_dig_fltr_timebase_rate',
             'resettable': True,
             'type': 'float64'
         },
@@ -15672,6 +15703,7 @@ attributes = {
             'python_class_name': 'Channel',
             'python_data_type': 'SyncUnlockBehavior',
             'python_description': 'Specifies the action to take if the target loses its synchronization to the grand master.',
+            'python_name': 'sync_unlock_behavior',
             'resettable': True,
             'type': 'int32'
         },
@@ -18035,6 +18067,7 @@ attributes = {
             'python_class_name': 'Device',
             'python_data_type': 'Device',
             'python_description': 'Indicates a list containing the names of the modules in the chassis.',
+            'python_name': 'chassis_module_devices',
             'python_object_module_location': 'nidaqmx.system.device',
             'python_object_type': 'Device',
             'resettable': False,
@@ -18060,6 +18093,7 @@ attributes = {
             'python_class_name': 'Device',
             'python_data_type': 'Device',
             'python_description': 'Indicates the name of the CompactDAQ chassis that contains this module.',
+            'python_name': 'compact_daq_chassis_device',
             'python_object_module_location': 'nidaqmx.system.device',
             'python_object_type': 'Device',
             'resettable': False,
@@ -18453,7 +18487,8 @@ attributes = {
             'name': 'AI_SUPPORTED_MEAS_TYPES',
             'python_class_name': 'Device',
             'python_data_type': 'AIMeasurementType',
-            'python_description': 'Indicates the measurement types supported by the physical channels of the device. Refer to **physical_chan_ai_supported_meas_types** for information on specific channels.',
+            'python_description': 'Indicates the measurement types supported by the physical channels of the device. Refer to **ai_meas_types** for information on specific channels.',
+            'python_name': 'ai_meas_types',
             'resettable': False,
             'type': 'int32[]'
         },
@@ -18477,7 +18512,8 @@ attributes = {
             'name': 'AO_SUPPORTED_OUTPUT_TYPES',
             'python_class_name': 'Device',
             'python_data_type': 'AOOutputChannelType',
-            'python_description': 'Indicates the generation types supported by the physical channels of the device. Refer to **physical_chan_ao_supported_output_types** for information on specific channels.',
+            'python_description': 'Indicates the generation types supported by the physical channels of the device. Refer to **ao_output_types** for information on specific channels.',
+            'python_name': 'ao_output_types',
             'resettable': False,
             'type': 'int32[]'
         },
@@ -18501,7 +18537,8 @@ attributes = {
             'name': 'CI_SUPPORTED_MEAS_TYPES',
             'python_class_name': 'Device',
             'python_data_type': 'CIMeasurementType',
-            'python_description': 'Indicates the measurement types supported by the physical channels of the device. Refer to **physical_chan_ci_supported_meas_types** for information on specific channels.',
+            'python_description': 'Indicates the measurement types supported by the physical channels of the device. Refer to **ci_meas_types** for information on specific channels.',
+            'python_name': 'ci_meas_types',
             'resettable': False,
             'type': 'int32[]'
         },
@@ -18525,7 +18562,8 @@ attributes = {
             'name': 'CO_SUPPORTED_OUTPUT_TYPES',
             'python_class_name': 'Device',
             'python_data_type': 'COOutputType',
-            'python_description': 'Indicates the generation types supported by the physical channels of the device. Refer to **physical_chan_co_supported_output_types** for information on specific channels.',
+            'python_description': 'Indicates the generation types supported by the physical channels of the device. Refer to **co_output_types** for information on specific channels.',
+            'python_name': 'co_output_types',
             'resettable': False,
             'type': 'int32[]'
         },
@@ -18549,6 +18587,7 @@ attributes = {
             'python_class_name': 'Device',
             'python_data_type': 'bool',
             'python_description': 'Indicates whether the device supports hardware TEDS.',
+            'python_name': 'hwteds_supported',
             'resettable': False,
             'type': 'bool32'
         },
@@ -19299,6 +19338,7 @@ attributes = {
             'python_class_name': 'Device',
             'python_data_type': 'Device',
             'python_description': 'Indicates the name of the CompactRIO chassis that contains this module.',
+            'python_name': 'compact_rio_chassis_device',
             'python_object_module_location': 'nidaqmx.system.device',
             'python_object_type': 'Device',
             'resettable': False,
@@ -19485,6 +19525,7 @@ attributes = {
             'python_class_name': 'Device',
             'python_data_type': 'Device',
             'python_description': 'Indicates the parent device which this bank is located in.',
+            'python_name': 'field_daq_device',
             'python_object_module_location': 'nidaqmx.system.device',
             'python_object_type': 'Device',
             'resettable': False,
@@ -19510,6 +19551,7 @@ attributes = {
             'python_class_name': 'Device',
             'python_data_type': 'Device',
             'python_description': 'Indicates a list containing the names of the banks in the FieldDAQ.',
+            'python_name': 'field_daq_bank_devices',
             'python_object_module_location': 'nidaqmx.system.device',
             'python_object_type': 'Device',
             'resettable': False,
@@ -20114,6 +20156,7 @@ attributes = {
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
             'python_description': 'Specifies the terminal to which to route the 20MHz Timebase.',
+            'python_name': 'exported_20_mhz_timebase_output_term',
             'resettable': True,
             'type': 'char[]'
         },
@@ -21013,6 +21056,7 @@ attributes = {
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
             'python_description': 'Specifies the terminal to which to route the 10MHz Clock.',
+            'python_name': 'exported_10_mhz_ref_clk_output_term',
             'resettable': True,
             'type': 'char[]'
         },
@@ -21543,6 +21587,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'int',
             'python_description': 'Indicates the manufacturer ID of the sensor.',
+            'python_name': 'teds_mfg_id',
             'resettable': False,
             'type': 'uInt32'
         },
@@ -21566,6 +21611,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'int',
             'python_description': 'Indicates the model number of the sensor.',
+            'python_name': 'teds_model_num',
             'resettable': False,
             'type': 'uInt32'
         },
@@ -21589,6 +21635,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'int',
             'python_description': 'Indicates the serial number of the sensor.',
+            'python_name': 'teds_serial_num',
             'resettable': False,
             'type': 'uInt32'
         },
@@ -21612,6 +21659,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'int',
             'python_description': 'Indicates the version number of the sensor.',
+            'python_name': 'teds_version_num',
             'resettable': False,
             'type': 'uInt32'
         },
@@ -21635,6 +21683,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'str',
             'python_description': 'Indicates the version letter of the sensor.',
+            'python_name': 'teds_version_letter',
             'resettable': False,
             'type': 'char[]'
         },
@@ -21658,6 +21707,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'int',
             'python_description': 'Indicates the TEDS binary bitstream without checksums.',
+            'python_name': 'teds_bit_stream',
             'resettable': False,
             'type': 'uInt8[]'
         },
@@ -21680,7 +21730,8 @@ attributes = {
             'name': 'PHYSICAL_CHAN_TEDS_TEMPLATE_I_DS',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'int',
-            'python_description': 'Indicates the IDs of the templates in the bitstream in **physical_chan_teds_bit_stream**.',
+            'python_description': 'Indicates the IDs of the templates in the bitstream in **teds_bit_stream**.',
+            'python_name': 'teds_template_ids',
             'resettable': False,
             'type': 'uInt32[]'
         },
@@ -21706,6 +21757,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'InputTermCfg',
             'python_description': 'Indicates the list of terminal configurations supported by the channel.',
+            'python_name': 'ai_term_cfgs',
             'resettable': False,
             'type': 'int32[]'
         },
@@ -21731,6 +21783,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'OutputTermCfg',
             'python_description': 'Indicates the list of terminal configurations supported by the channel.',
+            'python_name': 'ao_term_cfgs',
             'resettable': False,
             'type': 'int32[]'
         },
@@ -21754,6 +21807,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'int',
             'python_description': 'Indicates in bits the width of digital input port.',
+            'python_name': 'di_port_width',
             'resettable': False,
             'type': 'uInt32'
         },
@@ -21777,6 +21831,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
             'python_description': 'Indicates if the sample clock timing type is supported for the digital input physical channel.',
+            'python_name': 'di_samp_clk_supported',
             'resettable': False,
             'type': 'bool32'
         },
@@ -21800,6 +21855,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
             'python_description': 'Indicates if the change detection timing type is supported for the digital input physical channel.',
+            'python_name': 'di_change_detect_supported',
             'resettable': False,
             'type': 'bool32'
         },
@@ -21823,6 +21879,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'int',
             'python_description': 'Indicates in bits the width of digital output port.',
+            'python_name': 'do_port_width',
             'resettable': False,
             'type': 'uInt32'
         },
@@ -21846,6 +21903,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
             'python_description': 'Indicates if the sample clock timing type is supported for the digital output physical channel.',
+            'python_name': 'do_samp_clk_supported',
             'resettable': False,
             'type': 'bool32'
         },
@@ -21869,6 +21927,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
             'python_description': 'Specifies if you can control the physical channel externally via a manual control located on the device. You cannot simultaneously control a channel manually and with NI-DAQmx.',
+            'python_name': 'ao_manual_control_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -21892,6 +21951,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'float',
             'python_description': 'Indicates the current value of the front panel amplitude control for the physical channel in volts.',
+            'python_name': 'ao_manual_control_amplitude',
             'resettable': False,
             'type': 'float64'
         },
@@ -21915,6 +21975,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'float',
             'python_description': 'Indicates the current value of the front panel frequency control for the physical channel in hertz.',
+            'python_name': 'ao_manual_control_freq',
             'resettable': False,
             'type': 'float64'
         },
@@ -21938,6 +21999,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
             'python_description': 'Indicates whether the physical channel is currently disabled due to a short detected on the channel.',
+            'python_name': 'ao_manual_control_short_detected',
             'resettable': False,
             'type': 'bool32'
         },
@@ -21962,6 +22024,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'AIMeasurementType',
             'python_description': 'Indicates the measurement types supported by the channel.',
+            'python_name': 'ai_meas_types',
             'resettable': False,
             'type': 'int32[]'
         },
@@ -21985,6 +22048,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'str',
             'python_description': 'Indicates the list of input sources supported by the channel. Channels may support using the signal from the I/O connector or one of several calibration signals.',
+            'python_name': 'ai_input_srcs',
             'resettable': False,
             'type': 'char[]'
         },
@@ -22009,6 +22073,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'AOOutputChannelType',
             'python_description': 'Indicates the output types supported by the channel.',
+            'python_name': 'ao_output_types',
             'resettable': False,
             'type': 'int32[]'
         },
@@ -22033,6 +22098,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'CIMeasurementType',
             'python_description': 'Indicates the measurement types supported by the channel.',
+            'python_name': 'ci_meas_types',
             'resettable': False,
             'type': 'int32[]'
         },
@@ -22057,6 +22123,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'COOutputType',
             'python_description': 'Indicates the output types supported by the channel.',
+            'python_name': 'co_output_types',
             'resettable': False,
             'type': 'int32[]'
         },
@@ -22081,6 +22148,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'AcquisitionType',
             'python_description': 'Indicates the sample modes supported by devices that support sample clocked digital input.',
+            'python_name': 'di_samp_modes',
             'resettable': False,
             'type': 'int32[]'
         },
@@ -22105,6 +22173,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'AcquisitionType',
             'python_description': 'Indicates the sample modes supported by devices that support sample clocked digital output.',
+            'python_name': 'do_samp_modes',
             'resettable': False,
             'type': 'int32[]'
         },
@@ -22152,6 +22221,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'AOPowerUpOutputBehavior',
             'python_description': 'Indicates the power up output types supported by the channel.',
+            'python_name': 'ao_supported_power_up_output_types',
             'resettable': False,
             'type': 'int32[]'
         },
@@ -22290,6 +22360,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'float',
             'python_description': "Specifies the voltage level for the sensor's power supply.",
+            'python_name': 'ai_power_control_voltage',
             'resettable': True,
             'type': 'float64'
         },
@@ -22313,6 +22384,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
             'python_description': "Specifies whether to turn on the sensor's power supply.",
+            'python_name': 'ai_power_control_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -22337,6 +22409,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'SensorPowerType',
             'python_description': 'Specifies the type of power supplied to the sensor.',
+            'python_name': 'ai_power_control_type',
             'resettable': True,
             'type': 'int32'
         },
@@ -22361,6 +22434,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'SensorPowerType',
             'python_description': 'Indicates the types of power supplied to the sensor supported by this channel.',
+            'python_name': 'ai_sensor_power_types',
             'resettable': False,
             'type': 'int32[]'
         },
@@ -22384,6 +22458,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'float',
             'python_description': 'Indicates pairs of sensor power voltage ranges supported by this channel. Each pair consists of the low value followed by the high value.',
+            'python_name': 'ai_sensor_power_voltage_range_vals',
             'resettable': False,
             'type': 'float64[]'
         },
@@ -22407,6 +22482,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
             'python_description': 'Indicates whether there is an open channel or undercurrent condition on the channel.',
+            'python_name': 'ai_sensor_power_open_chan',
             'resettable': False,
             'type': 'bool32'
         },
@@ -22430,6 +22506,7 @@ attributes = {
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
             'python_description': 'Indicates whether there is an overcurrent condition on the channel.',
+            'python_name': 'ai_sensor_power_overcurrent',
             'resettable': False,
             'type': 'bool32'
         }
@@ -22500,7 +22577,7 @@ attributes = {
             'is_python_object': False,
             'name': 'CURR_READ_POS',
             'python_class_name': 'InStream',
-            'python_data_type': 'long',
+            'python_data_type': 'int',
             'python_description': 'Indicates in samples per channel the current position in the buffer.',
             'resettable': False,
             'type': 'uInt64'
@@ -22649,7 +22726,7 @@ attributes = {
             'is_python_object': False,
             'name': 'TOTAL_SAMP_PER_CHAN_ACQUIRED',
             'python_class_name': 'InStream',
-            'python_data_type': 'long',
+            'python_data_type': 'int',
             'python_description': 'Indicates the total number of samples acquired by each channel. NI-DAQmx returns a single value because this value is the same for all channels. For retriggered acquisitions, this value is the cumulative number of samples across all retriggered acquisitions.',
             'resettable': False,
             'type': 'uInt64'
@@ -22766,6 +22843,7 @@ attributes = {
             'python_class_name': 'InStream',
             'python_data_type': 'int',
             'python_description': 'Indicates the number of booleans per channel that NI-DAQmx returns in a sample for line-based reads. If a channel has fewer lines than this number, the extra booleans are False.',
+            'python_name': 'di_num_booleans_per_chan',
             'resettable': False,
             'type': 'uInt32'
         },
@@ -22789,6 +22867,7 @@ attributes = {
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
             'python_description': 'Indicates if samples were missed because change detection events occurred faster than the device could handle them. Some devices detect overflows differently than others.',
+            'python_name': 'change_detect_overflowed',
             'resettable': False,
             'type': 'bool32'
         },
@@ -23204,7 +23283,7 @@ attributes = {
             'is_python_object': False,
             'name': 'LOGGING_FILE_PREALLOCATION_SIZE',
             'python_class_name': 'InStream',
-            'python_data_type': 'long',
+            'python_data_type': 'int',
             'python_description': 'Specifies a size in samples to be used to pre-allocate space on disk.  Pre-allocation can improve file I/O performance, especially in situations where multiple files are being written to disk.  For finite tasks, the default behavior is to pre-allocate the file based on the number of samples you configure the task to acquire.',
             'resettable': True,
             'type': 'uInt64'
@@ -23250,7 +23329,7 @@ attributes = {
             'is_python_object': False,
             'name': 'LOGGING_SAMPS_PER_FILE',
             'python_class_name': 'InStream',
-            'python_data_type': 'long',
+            'python_data_type': 'int',
             'python_description': 'Specifies how many samples to write to each file. When the file reaches the number of samples specified, a new file is created with the naming convention of <filename>_####.tdms, where #### starts at 0001 and increments automatically with each new file. For example, if the file specified is C:\\\\data.tdms, the next file name used is C:\\\\data_0001.tdms. To disable file spanning behavior, set this attribute to 0. If **logging_file_path** is changed while this attribute is set, the new file path takes effect on the next file created.',
             'resettable': True,
             'type': 'uInt64'
@@ -23866,6 +23945,7 @@ attributes = {
             'python_class_name': 'Scale',
             'python_data_type': 'str',
             'python_description': 'Specifies a description for the scale.',
+            'python_name': 'description',
             'resettable': False,
             'type': 'char[]'
         },
@@ -24167,6 +24247,7 @@ attributes = {
             'python_class_name': 'Scale',
             'python_data_type': 'ScaleType',
             'python_description': 'Indicates the method or equation form that the custom scale uses.',
+            'python_name': 'scale_type',
             'resettable': False,
             'type': 'int32'
         }
@@ -24565,7 +24646,7 @@ attributes = {
             'is_python_object': False,
             'name': 'SAMP_QUANT_SAMP_PER_CHAN',
             'python_class_name': 'Timing',
-            'python_data_type': 'long',
+            'python_data_type': 'int',
             'python_description': 'Specifies the number of samples to acquire or generate for each channel if **samp_quant_samp_mode** is **AcquisitionType.FINITE**. If **samp_quant_samp_mode** is **AcquisitionType.CONTINUOUS**, NI-DAQmx uses this value to determine the buffer size.',
             'resettable': True,
             'type': 'uInt64'
@@ -24989,6 +25070,7 @@ attributes = {
             'python_class_name': 'Timing',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to update all channels in the task simultaneously, rather than updating channels independently when you write a sample to that channel.',
+            'python_name': 'simultaneous_ao_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -25991,6 +26073,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'TriggerType6',
             'python_description': 'Specifies the type of trigger to use to pause a task.',
+            'python_name': 'trig_type',
             'resettable': True,
             'type': 'int32'
         },
@@ -26013,7 +26096,8 @@ attributes = {
             'name': 'ANLG_LVL_PAUSE_TRIG_HYST',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
-            'python_description': 'Specifies a hysteresis level in the units of the measurement or generation. If **anlg_lvl_pause_trig_when** is **ActiveLevel.ABOVE**, the trigger does not deassert until the source signal passes below **anlg_lvl_pause_trig_lvl** minus the hysteresis. If **anlg_lvl_pause_trig_when** is **ActiveLevel.BELOW**, the trigger does not deassert until the source signal passes above **anlg_lvl_pause_trig_lvl** plus the hysteresis. Hysteresis is always enabled. Set this property to a non-zero value to use hysteresis.',
+            'python_description': 'Specifies a hysteresis level in the units of the measurement or generation. If **anlg_lvl_when** is **ActiveLevel.ABOVE**, the trigger does not deassert until the source signal passes below **anlg_lvl_lvl** minus the hysteresis. If **anlg_lvl_when** is **ActiveLevel.BELOW**, the trigger does not deassert until the source signal passes above **anlg_lvl_lvl** plus the hysteresis. Hysteresis is always enabled. Set this property to a non-zero value to use hysteresis.',
+            'python_name': 'anlg_lvl_hyst',
             'resettable': True,
             'type': 'float64'
         },
@@ -26036,7 +26120,8 @@ attributes = {
             'name': 'ANLG_LVL_PAUSE_TRIG_LVL',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
-            'python_description': 'Specifies the threshold at which to pause the task. Specify this value in the units of the measurement or generation. Use **anlg_lvl_pause_trig_when** to specify whether the task pauses above or below this threshold.',
+            'python_description': 'Specifies the threshold at which to pause the task. Specify this value in the units of the measurement or generation. Use **anlg_lvl_when** to specify whether the task pauses above or below this threshold.',
+            'python_name': 'anlg_lvl_lvl',
             'resettable': True,
             'type': 'float64'
         },
@@ -26060,6 +26145,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the name of a virtual channel or terminal where there is an analog signal to use as the source of the trigger.',
+            'python_name': 'anlg_lvl_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -26083,7 +26169,8 @@ attributes = {
             'name': 'ANLG_LVL_PAUSE_TRIG_WHEN',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'ActiveLevel',
-            'python_description': 'Specifies whether the task pauses above or below the threshold you specify with **anlg_lvl_pause_trig_lvl**.',
+            'python_description': 'Specifies whether the task pauses above or below the threshold you specify with **anlg_lvl_lvl**.',
+            'python_name': 'anlg_lvl_when',
             'resettable': True,
             'type': 'int32'
         },
@@ -26107,6 +26194,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the name of a virtual channel or terminal where there is an analog signal to use as the source of the trigger.',
+            'python_name': 'anlg_win_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -26130,7 +26218,8 @@ attributes = {
             'name': 'ANLG_WIN_PAUSE_TRIG_WHEN',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'WindowTriggerCondition2',
-            'python_description': 'Specifies whether the task pauses while the trigger signal is inside or outside the window you specify with **anlg_win_pause_trig_btm** and **anlg_win_pause_trig_top**.',
+            'python_description': 'Specifies whether the task pauses while the trigger signal is inside or outside the window you specify with **anlg_win_btm** and **anlg_win_top**.',
+            'python_name': 'anlg_win_when',
             'resettable': True,
             'type': 'int32'
         },
@@ -26154,6 +26243,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies the lower limit of the window. Specify this value in the units of the measurement or generation.',
+            'python_name': 'anlg_win_btm',
             'resettable': True,
             'type': 'float64'
         },
@@ -26177,6 +26267,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies the upper limit of the window. Specify this value in the units of the measurement or generation.',
+            'python_name': 'anlg_win_top',
             'resettable': True,
             'type': 'float64'
         },
@@ -26200,6 +26291,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the name of a terminal where there is a digital signal to use as the source of the Pause Trigger.',
+            'python_name': 'dig_lvl_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -26224,6 +26316,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'Level1',
             'python_description': 'Specifies whether the task pauses while the signal is high or low.',
+            'python_name': 'dig_lvl_when',
             'resettable': True,
             'type': 'int32'
         },
@@ -26248,6 +26341,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'TriggerType10',
             'python_description': 'Specifies the type of trigger to use to start a task.',
+            'python_name': 'trig_type',
             'resettable': True,
             'type': 'int32'
         },
@@ -26270,7 +26364,8 @@ attributes = {
             'name': 'ANLG_EDGE_START_TRIG_HYST',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
-            'python_description': 'Specifies a hysteresis level in the units of the measurement or generation. If **anlg_edge_start_trig_slope** is **Slope1.RISING**, the trigger does not deassert until the source signal passes below  **anlg_edge_start_trig_lvl** minus the hysteresis. If **anlg_edge_start_trig_slope** is **Slope1.FALLING**, the trigger does not deassert until the source signal passes above **anlg_edge_start_trig_lvl** plus the hysteresis. Hysteresis is always enabled. Set this property to a non-zero value to use hysteresis.',
+            'python_description': 'Specifies a hysteresis level in the units of the measurement or generation. If **anlg_edge_slope** is **Slope1.RISING**, the trigger does not deassert until the source signal passes below  **anlg_edge_lvl** minus the hysteresis. If **anlg_edge_slope** is **Slope1.FALLING**, the trigger does not deassert until the source signal passes above **anlg_edge_lvl** plus the hysteresis. Hysteresis is always enabled. Set this property to a non-zero value to use hysteresis.',
+            'python_name': 'anlg_edge_hyst',
             'resettable': True,
             'type': 'float64'
         },
@@ -26293,7 +26388,8 @@ attributes = {
             'name': 'ANLG_EDGE_START_TRIG_LVL',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
-            'python_description': 'Specifies at what threshold in the units of the measurement or generation to start acquiring or generating samples. Use **anlg_edge_start_trig_slope** to specify on which slope to trigger on this threshold.',
+            'python_description': 'Specifies at what threshold in the units of the measurement or generation to start acquiring or generating samples. Use **anlg_edge_slope** to specify on which slope to trigger on this threshold.',
+            'python_name': 'anlg_edge_lvl',
             'resettable': True,
             'type': 'float64'
         },
@@ -26318,6 +26414,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'Slope1',
             'python_description': 'Specifies on which slope of the trigger signal to start acquiring or generating samples.',
+            'python_name': 'anlg_edge_slope',
             'resettable': True,
             'type': 'int32'
         },
@@ -26341,6 +26438,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the name of a virtual channel or terminal where there is an analog signal to use as the source of the Start Trigger.',
+            'python_name': 'anlg_edge_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -26364,6 +26462,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the name of a virtual channel or terminal where there is an analog signal to use as the source of the Start Trigger.',
+            'python_name': 'anlg_win_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -26387,7 +26486,8 @@ attributes = {
             'name': 'ANLG_WIN_START_TRIG_WHEN',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'WindowTriggerCondition1',
-            'python_description': 'Specifies whether the task starts acquiring or generating samples when the signal enters or leaves the window you specify with **anlg_win_start_trig_btm** and **anlg_win_start_trig_top**.',
+            'python_description': 'Specifies whether the task starts acquiring or generating samples when the signal enters or leaves the window you specify with **anlg_win_btm** and **anlg_win_top**.',
+            'python_name': 'anlg_win_trig_when',
             'resettable': True,
             'type': 'int32'
         },
@@ -26411,6 +26511,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies the lower limit of the window. Specify this value in the units of the measurement or generation.',
+            'python_name': 'anlg_win_btm',
             'resettable': True,
             'type': 'float64'
         },
@@ -26434,6 +26535,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies the upper limit of the window. Specify this value in the units of the measurement or generation.',
+            'python_name': 'anlg_win_top',
             'resettable': True,
             'type': 'float64'
         },
@@ -26458,6 +26560,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'Edge1',
             'python_description': 'Specifies on which edge of a digital pulse to start acquiring or generating samples.',
+            'python_name': 'dig_edge_edge',
             'resettable': True,
             'type': 'int32'
         },
@@ -26481,6 +26584,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the name of a terminal where there is a digital signal to use as the source of the Start Trigger.',
+            'python_name': 'dig_edge_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -26504,6 +26608,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'PhysicalChannel',
             'python_description': 'Specifies the physical channels to use for pattern matching. The order of the physical channels determines the order of the pattern. If a port is included, the order of the physical channels within the port is in ascending order.',
+            'python_name': 'dig_pattern_src',
             'python_object_module_location': 'nidaqmx.system.physical_channel',
             'python_object_type': 'PhysicalChannel',
             'resettable': True,
@@ -26529,7 +26634,8 @@ attributes = {
             'name': 'DIG_PATTERN_START_TRIG_WHEN',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'DigitalPatternCondition1',
-            'python_description': 'Specifies whether the Start Trigger occurs when the physical channels specified with **dig_pattern_start_trig_src** match or differ from the digital pattern specified with **dig_pattern_start_trig_pattern**.',
+            'python_description': 'Specifies whether the Start Trigger occurs when the physical channels specified with **dig_pattern_src** match or differ from the digital pattern specified with **dig_pattern_pattern**.',
+            'python_name': 'dig_pattern_trig_when',
             'resettable': True,
             'type': 'int32'
         },
@@ -26554,6 +26660,7 @@ attributes = {
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'TriggerType4',
             'python_description': 'Specifies the type of trigger to use to arm the task for a Start Trigger. If you configure an Arm Start Trigger, the task does not respond to a Start Trigger until the device receives the Arm Start Trigger.',
+            'python_name': 'trig_type',
             'resettable': True,
             'type': 'int32'
         },
@@ -26578,6 +26685,7 @@ attributes = {
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'Edge1',
             'python_description': 'Specifies on which edge of a digital signal to arm the task for a Start Trigger.',
+            'python_name': 'dig_edge_edge',
             'resettable': True,
             'type': 'int32'
         },
@@ -26601,6 +26709,7 @@ attributes = {
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the name of a terminal where there is a digital signal to use as the source of the Arm Start Trigger.',
+            'python_name': 'dig_edge_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -26625,6 +26734,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'TriggerType8',
             'python_description': 'Specifies the type of trigger to use to mark a reference point for the measurement.',
+            'python_name': 'trig_type',
             'resettable': True,
             'type': 'int32'
         },
@@ -26647,7 +26757,8 @@ attributes = {
             'name': 'ANLG_EDGE_REF_TRIG_HYST',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
-            'python_description': 'Specifies a hysteresis level in the units of the measurement. If **anlg_edge_ref_trig_slope** is **Slope1.RISING**, the trigger does not deassert until the source signal passes below **anlg_edge_ref_trig_lvl** minus the hysteresis. If **anlg_edge_ref_trig_slope** is **Slope1.FALLING**, the trigger does not deassert until the source signal passes above **anlg_edge_ref_trig_lvl** plus the hysteresis. Hysteresis is always enabled. Set this property to a non-zero value to use hysteresis.',
+            'python_description': 'Specifies a hysteresis level in the units of the measurement. If **anlg_edge_slope** is **Slope1.RISING**, the trigger does not deassert until the source signal passes below **anlg_edge_lvl** minus the hysteresis. If **anlg_edge_slope** is **Slope1.FALLING**, the trigger does not deassert until the source signal passes above **anlg_edge_lvl** plus the hysteresis. Hysteresis is always enabled. Set this property to a non-zero value to use hysteresis.',
+            'python_name': 'anlg_edge_hyst',
             'resettable': True,
             'type': 'float64'
         },
@@ -26670,7 +26781,8 @@ attributes = {
             'name': 'ANLG_EDGE_REF_TRIG_LVL',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
-            'python_description': 'Specifies in the units of the measurement the threshold at which the Reference Trigger occurs.  Use **anlg_edge_ref_trig_slope** to specify on which slope to trigger at this threshold.',
+            'python_description': 'Specifies in the units of the measurement the threshold at which the Reference Trigger occurs.  Use **anlg_edge_slope** to specify on which slope to trigger at this threshold.',
+            'python_name': 'anlg_edge_lvl',
             'resettable': True,
             'type': 'float64'
         },
@@ -26695,6 +26807,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'Slope1',
             'python_description': 'Specifies on which slope of the source signal the Reference Trigger occurs.',
+            'python_name': 'anlg_edge_slope',
             'resettable': True,
             'type': 'int32'
         },
@@ -26718,6 +26831,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the name of a virtual channel or terminal where there is an analog signal to use as the source of the Reference Trigger.',
+            'python_name': 'anlg_edge_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -26741,6 +26855,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the name of a virtual channel or terminal where there is an analog signal to use as the source of the Reference Trigger.',
+            'python_name': 'anlg_win_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -26764,7 +26879,8 @@ attributes = {
             'name': 'ANLG_WIN_REF_TRIG_WHEN',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'WindowTriggerCondition1',
-            'python_description': 'Specifies whether the Reference Trigger occurs when the source signal enters the window or when it leaves the window. Use **anlg_win_ref_trig_btm** and **anlg_win_ref_trig_top** to specify the window.',
+            'python_description': 'Specifies whether the Reference Trigger occurs when the source signal enters the window or when it leaves the window. Use **anlg_win_btm** and **anlg_win_top** to specify the window.',
+            'python_name': 'anlg_win_trig_when',
             'resettable': True,
             'type': 'int32'
         },
@@ -26788,6 +26904,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies the lower limit of the window. Specify this value in the units of the measurement.',
+            'python_name': 'anlg_win_btm',
             'resettable': True,
             'type': 'float64'
         },
@@ -26811,6 +26928,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies the upper limit of the window. Specify this value in the units of the measurement.',
+            'python_name': 'anlg_win_top',
             'resettable': True,
             'type': 'float64'
         },
@@ -26835,6 +26953,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'Edge1',
             'python_description': 'Specifies on what edge of a digital pulse the Reference Trigger occurs.',
+            'python_name': 'dig_edge_edge',
             'resettable': True,
             'type': 'int32'
         },
@@ -26858,6 +26977,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the name of a terminal where there is a digital signal to use as the source of the Reference Trigger.',
+            'python_name': 'dig_edge_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -26881,6 +27001,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'PhysicalChannel',
             'python_description': 'Specifies the physical channels to use for pattern matching. The order of the physical channels determines the order of the pattern. If a port is included, the order of the physical channels within the port is in ascending order.',
+            'python_name': 'dig_pattern_src',
             'python_object_module_location': 'nidaqmx.system.physical_channel',
             'python_object_type': 'PhysicalChannel',
             'resettable': True,
@@ -26906,7 +27027,8 @@ attributes = {
             'name': 'DIG_PATTERN_REF_TRIG_WHEN',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'DigitalPatternCondition1',
-            'python_description': 'Specifies whether the Reference Trigger occurs when the physical channels specified with **dig_pattern_ref_trig_src** match or differ from the digital pattern specified with **dig_pattern_ref_trig_pattern**.',
+            'python_description': 'Specifies whether the Reference Trigger occurs when the physical channels specified with **dig_pattern_src** match or differ from the digital pattern specified with **dig_pattern_pattern**.',
+            'python_name': 'dig_pattern_trig_when',
             'resettable': True,
             'type': 'int32'
         },
@@ -26930,6 +27052,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'int',
             'python_description': 'Specifies the minimum number of pretrigger samples to acquire from each channel before recognizing the reference trigger. Post-trigger samples per channel are equal to **samp_quant_samp_per_chan** minus the number of pretrigger samples per channel.',
+            'python_name': 'pretrig_samples',
             'resettable': True,
             'type': 'uInt32'
         },
@@ -26953,6 +27076,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in seconds the time to wait after the device receives the Reference Trigger before switching from pretrigger to posttrigger samples.',
+            'python_name': 'delay',
             'resettable': True,
             'type': 'float64'
         },
@@ -26975,7 +27099,8 @@ attributes = {
             'name': 'START_TRIG_DELAY',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
-            'python_description': 'Specifies an amount of time to wait after the Start Trigger is received before acquiring or generating the first sample. This value is in the units you specify with **start_trig_delay_units**.',
+            'python_description': 'Specifies an amount of time to wait after the Start Trigger is received before acquiring or generating the first sample. This value is in the units you specify with **delay_units**.',
+            'python_name': 'delay',
             'resettable': True,
             'type': 'float64'
         },
@@ -27000,6 +27125,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'Coupling2',
             'python_description': 'Specifies the coupling for the source signal of the trigger if the source is a terminal rather than a virtual channel.',
+            'python_name': 'anlg_win_coupling',
             'resettable': True,
             'type': 'int32'
         },
@@ -27023,7 +27149,8 @@ attributes = {
             'name': 'START_TRIG_DELAY_UNITS',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'DigitalWidthUnits1',
-            'python_description': 'Specifies the units of **start_trig_delay**.',
+            'python_description': 'Specifies the units of **delay**.',
+            'python_name': 'delay_units',
             'resettable': True,
             'type': 'int32'
         },
@@ -27047,6 +27174,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether a finite task resets and waits for another Start Trigger after the task completes. When you set this property to True, the device performs a finite acquisition or generation each time the Start Trigger occurs until the task stops. The device ignores a trigger if it is in the process of acquiring or generating signals.',
+            'python_name': 'retriggerable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -27070,6 +27198,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'PhysicalChannel',
             'python_description': 'Specifies the physical channels to use for pattern matching. The order of the physical channels determines the order of the pattern. If a port is included, the lines within the port are in ascending order.',
+            'python_name': 'dig_pattern_src',
             'python_object_module_location': 'nidaqmx.system.physical_channel',
             'python_object_type': 'PhysicalChannel',
             'resettable': True,
@@ -27095,7 +27224,8 @@ attributes = {
             'name': 'DIG_PATTERN_PAUSE_TRIG_WHEN',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'DigitalPatternCondition1',
-            'python_description': 'Specifies if the Pause Trigger occurs when the physical channels specified with **dig_pattern_pause_trig_src** match or differ from the digital pattern specified with **dig_pattern_pause_trig_pattern**.',
+            'python_description': 'Specifies if the Pause Trigger occurs when the physical channels specified with **dig_pattern_src** match or differ from the digital pattern specified with **dig_pattern_pattern**.',
+            'python_name': 'dig_pattern_when',
             'resettable': True,
             'type': 'int32'
         },
@@ -27119,6 +27249,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the digital pattern that must be met for the Start Trigger to occur.',
+            'python_name': 'dig_pattern_pattern',
             'resettable': True,
             'type': 'char[]'
         },
@@ -27142,6 +27273,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the digital pattern that must be met for the Reference Trigger to occur.',
+            'python_name': 'dig_pattern_pattern',
             'resettable': True,
             'type': 'char[]'
         },
@@ -27165,6 +27297,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the digital pattern that must be met for the Pause Trigger to occur.',
+            'python_name': 'dig_pattern_pattern',
             'resettable': True,
             'type': 'char[]'
         },
@@ -27188,6 +27321,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to apply a digital filter to the trigger signal.',
+            'python_name': 'dig_edge_dig_fltr_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -27211,6 +27345,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in seconds the minimum pulse width the filter recognizes.',
+            'python_name': 'dig_edge_dig_fltr_min_pulse_width',
             'resettable': True,
             'type': 'float64'
         },
@@ -27234,6 +27369,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the input terminal of the signal to use as the timebase of the pulse width filter.',
+            'python_name': 'dig_edge_dig_fltr_timebase_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -27257,6 +27393,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter.',
+            'python_name': 'dig_edge_dig_fltr_timebase_rate',
             'resettable': True,
             'type': 'float64'
         },
@@ -27280,6 +27417,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device. If you set this property to True, the device does not recognize and act upon the trigger until the next pulse of the internal timebase.',
+            'python_name': 'dig_edge_dig_sync_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -27303,6 +27441,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to apply a digital filter to the trigger signal.',
+            'python_name': 'dig_lvl_dig_fltr_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -27326,6 +27465,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in seconds the minimum pulse width the filter recognizes.',
+            'python_name': 'dig_lvl_dig_fltr_min_pulse_width',
             'resettable': True,
             'type': 'float64'
         },
@@ -27349,6 +27489,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the input terminal of the signal to use as the timebase of the pulse width filter.',
+            'python_name': 'dig_lvl_dig_fltr_timebase_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -27372,6 +27513,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter.',
+            'python_name': 'dig_lvl_dig_fltr_timebase_rate',
             'resettable': True,
             'type': 'float64'
         },
@@ -27395,6 +27537,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device.',
+            'python_name': 'dig_lvl_dig_sync_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -27418,6 +27561,7 @@ attributes = {
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to apply the pulse width filter to the signal.',
+            'python_name': 'dig_edge_dig_fltr_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -27441,6 +27585,7 @@ attributes = {
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in seconds the minimum pulse width the filter recognizes.',
+            'python_name': 'dig_edge_dig_fltr_min_pulse_width',
             'resettable': True,
             'type': 'float64'
         },
@@ -27464,6 +27609,7 @@ attributes = {
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the input terminal of the signal to use as the timebase of the pulse width filter.',
+            'python_name': 'dig_edge_dig_fltr_timebase_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -27487,6 +27633,7 @@ attributes = {
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter.',
+            'python_name': 'dig_edge_dig_fltr_timebase_rate',
             'resettable': True,
             'type': 'float64'
         },
@@ -27510,6 +27657,7 @@ attributes = {
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device.',
+            'python_name': 'dig_edge_dig_sync_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -27534,6 +27682,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'Coupling2',
             'python_description': 'Specifies the coupling for the source signal of the trigger if the source is a terminal rather than a virtual channel.',
+            'python_name': 'anlg_edge_coupling',
             'resettable': True,
             'type': 'int32'
         },
@@ -27558,6 +27707,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'Coupling2',
             'python_description': 'Specifies the coupling for the source signal of the trigger if the source is a terminal rather than a virtual channel.',
+            'python_name': 'anlg_win_coupling',
             'resettable': True,
             'type': 'int32'
         },
@@ -27582,6 +27732,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'Coupling2',
             'python_description': 'Specifies the coupling for the source signal of the trigger if the source is a terminal rather than a virtual channel.',
+            'python_name': 'anlg_edge_coupling',
             'resettable': True,
             'type': 'int32'
         },
@@ -27606,6 +27757,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'Coupling2',
             'python_description': 'Specifies the coupling for the source signal of the trigger if the source is a terminal rather than a virtual channel.',
+            'python_name': 'anlg_lvl_coupling',
             'resettable': True,
             'type': 'int32'
         },
@@ -27630,6 +27782,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'Coupling2',
             'python_description': 'Specifies the coupling for the source signal of the terminal if the source is a terminal rather than a virtual channel.',
+            'python_name': 'anlg_win_coupling',
             'resettable': True,
             'type': 'int32'
         },
@@ -27669,6 +27822,7 @@ attributes = {
             'python_class_name': 'HandshakeTrigger',
             'python_data_type': 'TriggerType9',
             'python_description': 'Specifies the type of Handshake Trigger to use.',
+            'python_name': 'trig_type',
             'resettable': True,
             'type': 'int32'
         },
@@ -27692,6 +27846,7 @@ attributes = {
             'python_class_name': 'HandshakeTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the source terminal of the Handshake Trigger.',
+            'python_name': 'interlocked_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -27716,6 +27871,7 @@ attributes = {
             'python_class_name': 'HandshakeTrigger',
             'python_data_type': 'Level1',
             'python_description': 'Specifies the asserted level of the Handshake Trigger.',
+            'python_name': 'interlocked_asserted_lvl',
             'resettable': True,
             'type': 'int32'
         },
@@ -27739,6 +27895,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to send a software trigger to the device when a hardware trigger is no longer active in order to prevent a timeout.',
+            'python_name': 'auto_trig_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -27761,7 +27918,8 @@ attributes = {
             'name': 'REF_TRIG_AUTO_TRIGGERED',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
-            'python_description': 'Indicates whether a completed acquisition was triggered by the auto trigger. If an acquisition has not completed after the task starts, this property returns False. This property is only applicable when **ref_trig_auto_trig_enable**  is True.',
+            'python_description': 'Indicates whether a completed acquisition was triggered by the auto trigger. If an acquisition has not completed after the task starts, this property returns False. This property is only applicable when **auto_trig_enable**  is True.',
+            'python_name': 'auto_triggered',
             'resettable': False,
             'type': 'bool32'
         },
@@ -27785,6 +27943,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to apply a digital filter to the trigger signal.',
+            'python_name': 'dig_edge_dig_fltr_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -27808,6 +27967,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in seconds the minimum pulse width the filter recognizes.',
+            'python_name': 'dig_edge_dig_fltr_min_pulse_width',
             'resettable': True,
             'type': 'float64'
         },
@@ -27831,6 +27991,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the terminal of the signal to use as the timebase of the digital filter.',
+            'python_name': 'dig_edge_dig_fltr_timebase_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -27854,6 +28015,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in hertz the rate of the digital filter timebase. NI-DAQmx uses this value to compute settings for the filter.',
+            'python_name': 'dig_edge_dig_fltr_timebase_rate',
             'resettable': True,
             'type': 'float64'
         },
@@ -27877,6 +28039,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device.',
+            'python_name': 'dig_edge_dig_sync_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -27900,6 +28063,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to apply a digital filter to the digital output of the analog triggering circuitry (the Analog Comparison Event). When enabled, the analog signal must stay above or below the trigger level for the minimum pulse width before being recognized. Use filtering  for noisy trigger signals that transition in and out of the hysteresis window rapidly.',
+            'python_name': 'anlg_edge_dig_fltr_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -27923,6 +28087,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in seconds the minimum pulse width the filter recognizes.',
+            'python_name': 'anlg_edge_dig_fltr_min_pulse_width',
             'resettable': True,
             'type': 'float64'
         },
@@ -27946,6 +28111,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the terminal of the signal to use as the timebase of the digital filter.',
+            'python_name': 'anlg_edge_dig_fltr_timebase_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -27969,6 +28135,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in hertz the rate of the digital filter timebase. NI-DAQmx uses this value to compute settings for the filter.',
+            'python_name': 'anlg_edge_dig_fltr_timebase_rate',
             'resettable': True,
             'type': 'float64'
         },
@@ -27992,6 +28159,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device.',
+            'python_name': 'anlg_edge_dig_sync_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -28015,6 +28183,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to apply a digital filter to the digital output of the analog triggering circuitry (the Analog Comparison Event). When enabled, the analog signal must stay above or below the trigger level for the minimum pulse width before being recognized. Use filtering  for noisy trigger signals that transition in and out of the hysteresis window rapidly.',
+            'python_name': 'anlg_edge_dig_fltr_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -28038,6 +28207,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in seconds the minimum pulse width thefilter recognizes.',
+            'python_name': 'anlg_edge_dig_fltr_min_pulse_width',
             'resettable': True,
             'type': 'float64'
         },
@@ -28061,6 +28231,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the terminal of the signal to use as the timebase of the digital filter.',
+            'python_name': 'anlg_edge_dig_fltr_timebase_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -28084,6 +28255,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in hertz the rate of the digital filter timebase. NI-DAQmx uses this value to compute settings for the filter.',
+            'python_name': 'anlg_edge_dig_fltr_timebase_rate',
             'resettable': True,
             'type': 'float64'
         },
@@ -28107,6 +28279,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device.',
+            'python_name': 'anlg_edge_dig_sync_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -28130,6 +28303,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to apply a digital filter to the digital output of the analog triggering circuitry (the Analog Comparison Event). When enabled, the analog signal must stay within the trigger window for the minimum pulse width before being recognized. Use filtering for noisy trigger signals that transition in and out of the window rapidly.',
+            'python_name': 'anlg_win_dig_fltr_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -28153,6 +28327,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in seconds the minimum pulse width the filter recognizes.',
+            'python_name': 'anlg_win_dig_fltr_min_pulse_width',
             'resettable': True,
             'type': 'float64'
         },
@@ -28176,6 +28351,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the terminal of the signal to use as the timebase of the digital filter.',
+            'python_name': 'anlg_win_dig_fltr_timebase_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -28199,6 +28375,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in hertz the rate of the digital filter timebase. NI-DAQmx uses this value to compute settings for the filter.',
+            'python_name': 'anlg_win_dig_fltr_timebase_rate',
             'resettable': True,
             'type': 'float64'
         },
@@ -28222,6 +28399,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device.',
+            'python_name': 'anlg_win_dig_sync_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -28245,6 +28423,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to apply a digital filter to the digital output of the analog triggering circuitry (the Analog Comparison Event). When enabled, the analog signal must stay above or below the trigger level for the minimum pulse width before being recognized. Use filtering  for noisy trigger signals that transition in and out of the hysteresis window rapidly.',
+            'python_name': 'anlg_lvl_dig_fltr_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -28268,6 +28447,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in seconds the minimum pulse width the filter recognizes.',
+            'python_name': 'anlg_lvl_dig_fltr_min_pulse_width',
             'resettable': True,
             'type': 'float64'
         },
@@ -28291,6 +28471,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the terminal of the signal to use as the timebase of the digital filter.',
+            'python_name': 'anlg_lvl_dig_fltr_timebase_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -28314,6 +28495,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in hertz the rate of the digital filter timebase. NI-DAQmx uses this value to compute settings for the filter.',
+            'python_name': 'anlg_lvl_dig_fltr_timebase_rate',
             'resettable': True,
             'type': 'float64'
         },
@@ -28337,6 +28519,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device.',
+            'python_name': 'anlg_lvl_dig_sync_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -28360,6 +28543,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to apply a digital filter to the digital output of the analog triggering circuitry (the Analog Comparison Event). When enabled, the analog signal must stay within the trigger window for the minimum pulse width before being recognized. Use filtering for noisy trigger signals that transition in and out of the window rapidly.',
+            'python_name': 'anlg_win_dig_fltr_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -28383,6 +28567,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in seconds the minimum pulse width the filter recognizes.',
+            'python_name': 'anlg_win_dig_fltr_min_pulse_width',
             'resettable': True,
             'type': 'float64'
         },
@@ -28406,6 +28591,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the terminal of the signal to use as the timebase of the digital filter.',
+            'python_name': 'anlg_win_dig_fltr_timebase_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -28429,6 +28615,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in hertz the rate of the digital filter timebase. NI-DAQmx uses this value to compute settings for the filter.',
+            'python_name': 'anlg_win_dig_fltr_timebase_rate',
             'resettable': True,
             'type': 'float64'
         },
@@ -28452,6 +28639,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device.',
+            'python_name': 'anlg_win_dig_sync_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -28475,6 +28663,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to apply a digital filter to the digital output of the analog triggering circuitry (the Analog Comparison Event). When enabled, the analog signal must stay within the trigger window for the minimum pulse width before being recognized. Use filtering for noisy trigger signals that transition in and out of the window rapidly.',
+            'python_name': 'anlg_win_dig_fltr_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -28498,6 +28687,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in seconds the minimum pulse width the filter recognizes.',
+            'python_name': 'anlg_win_dig_fltr_min_pulse_width',
             'resettable': True,
             'type': 'float64'
         },
@@ -28521,6 +28711,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies the terminal of the signal to use as the timebase of the digital filter.',
+            'python_name': 'anlg_win_dig_fltr_timebase_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -28544,6 +28735,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies in hertz the rate of the digital filter timebase. NI-DAQmx uses this value to compute settings for the filter.',
+            'python_name': 'anlg_win_dig_fltr_timebase_rate',
             'resettable': True,
             'type': 'float64'
         },
@@ -28567,6 +28759,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device.',
+            'python_name': 'anlg_win_dig_sync_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -28590,6 +28783,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
             'python_description': 'Indicates the name of the internal Start Trigger terminal for the task. This property does not return the name of the trigger source terminal.',
+            'python_name': 'term',
             'resettable': False,
             'type': 'char[]'
         },
@@ -28613,6 +28807,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
             'python_description': 'Indicates the name of the internal Reference Trigger terminal for the task. This property does not return the name of the trigger source terminal.',
+            'python_name': 'term',
             'resettable': False,
             'type': 'char[]'
         },
@@ -28636,6 +28831,7 @@ attributes = {
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'str',
             'python_description': 'Indicates the name of the internal Pause Trigger terminal for the task. This property does not return the name of the trigger source terminal.',
+            'python_name': 'term',
             'resettable': False,
             'type': 'char[]'
         },
@@ -28659,6 +28855,7 @@ attributes = {
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'str',
             'python_description': 'Indicates the name of the internal Arm Start Trigger terminal for the task. This property does not return the name of the trigger source terminal.',
+            'python_name': 'term',
             'resettable': False,
             'type': 'char[]'
         },
@@ -28683,6 +28880,7 @@ attributes = {
             'python_class_name': 'Triggers',
             'python_data_type': 'SyncType',
             'python_description': 'Specifies the role of the device in a synchronized system. Setting this value to  **SyncType.MASTER** or  **SyncType.SLAVE** enables trigger skew correction. If you enable trigger skew correction, set this property to **SyncType.MASTER** on only one device, and set this property to **SyncType.SLAVE** on the other devices.',
+            'python_name': 'sync_type',
             'resettable': True,
             'type': 'int32'
         },
@@ -28729,6 +28927,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'Timescale2',
             'python_description': 'Specifies the timescale to be used for timestamps used in a time trigger.',
+            'python_name': 'time_timescale',
             'resettable': True,
             'type': 'int32'
         },
@@ -28775,6 +28974,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies the period of time in seconds after the task starts during which the device may trigger. Once the window has expired, the device stops detecting triggers, and the task will finish after the device finishes acquiring post-trigger samples for any triggers detected. If no triggers are detected during the entire period, then no data will be returned. Ensure the period of time specified covers the entire time span desired for trigger detection to avoid missed triggers. Specifying a Trigger Window of -1 causes the window to be infinite.',
+            'python_name': 'trig_win',
             'resettable': True,
             'type': 'float64'
         },
@@ -28798,6 +28998,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies the period of time in seconds after each trigger during which the device may trigger. Once the window has expired, the device stops detecting triggers, and the task will finish after the device finishes acquiring post-trigger samples that it already started. Ensure the period of time specified covers the entire time span desired for retrigger detection to avoid missed triggers. Specifying a Retrigger Window of -1 causes the window to be infinite.',
+            'python_name': 'retrigger_win',
             'resettable': True,
             'type': 'float64'
         },
@@ -28821,6 +29022,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'int',
             'python_description': 'Specifies the maximum number of times the task will detect a start trigger during the task. The number of times a trigger is detected and acted upon by the module may be less than the specified amount if the task stops early because of trigger/retrigger window expiration. Specifying the Maximum Number of Triggers to Detect to be 0 causes the driver to automatically set this value to the maximum possible number of triggers detectable by the device and configuration combination. Note: The number of detected triggers may be less than number of trigger events occurring, because the devices were unable to respond to the trigger.',
+            'python_name': 'max_num_trigs_to_detect',
             'resettable': True,
             'type': 'uInt32'
         },
@@ -28844,6 +29046,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether a finite task resets, acquires pretrigger samples, and waits for another Reference Trigger after the task completes. When you set this property to True, the device will acquire post-trigger samples, reset, and acquire pretrigger samples each time the Reference Trigger occurs until the task stops. The device ignores a trigger if it is in the process of acquiring signals.',
+            'python_name': 'retriggerable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -28867,6 +29070,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies the duration in seconds after the task starts during which the device may trigger. Once the window has passed, the device stops detecting triggers, and the task will stop after the device finishes acquiring post-trigger samples that it already started. If no triggers are detected during the entire period, then no data will be returned. Specifying a Trigger Window of -1 causes the window to be infinite.',
+            'python_name': 'trig_win',
             'resettable': True,
             'type': 'float64'
         },
@@ -28890,6 +29094,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies the duration in seconds after each trigger during which the device may trigger. Once the window has passed, the device stops detecting triggers, and the task will stop after the device finishes acquiring post-trigger samples that it already started. Specifying a Retrigger Window of -1 causes the window to be infinite.',
+            'python_name': 'retrigger_win',
             'resettable': True,
             'type': 'float64'
         },
@@ -28913,6 +29118,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'int',
             'python_description': 'Specifies the maximum number of times the task will detect a reference trigger during the task. The number of times a trigger is detected and acted upon by the module may be less than the specified amount if the task stops early because of trigger/retrigger window expiration. Specifying the Maximum Number of Triggers to Detect to be 0 causes the driver to automatically set this value to the maximum possible number of triggers detectable by the device and configuration combination. Note: The number of detected triggers may be less than number of trigger events occurring, because the devices were unable to respond to the trigger.',
+            'python_name': 'max_num_trigs_to_detect',
             'resettable': True,
             'type': 'uInt32'
         },
@@ -28936,6 +29142,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies a list and/or range of analog sources that are going to be used for Analog triggering. Each source corresponds to an element in each of the Analog Multi Edge property lists, if they are not empty.',
+            'python_name': 'anlg_multi_edge_srcs',
             'resettable': True,
             'type': 'char[]'
         },
@@ -28960,6 +29167,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'Slope1',
             'python_description': 'Specifies an list of slopes on which to trigger task to start generating or acquiring samples. Each element of the list corresponds to a source in Start.AnlgMultiEdge.Srcs and an element in each of the other Analog Multi Edge property lists, if they are not empty.',
+            'python_name': 'anlg_multi_edge_slopes',
             'resettable': True,
             'type': 'int32[]'
         },
@@ -28983,6 +29191,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies an list of thresholds in the units of the measurement or generation to start acquiring or generating samples. Each element of the list corresponds to a source in Start.AnlgMultiEdge.Srcs and an element in each of the other Analog Multi Edge property lists, if they are not empty.',
+            'python_name': 'anlg_multi_edge_lvls',
             'resettable': True,
             'type': 'float64[]'
         },
@@ -29006,6 +29215,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies an list of hysteresis levels in the units of the measurement or generation. If the corresponding element of Start.AnlgMultiEdge.Slopes is Rising, the trigger does not deassert until the source signal passes below the corresponding element of Start.AnlgMultiEdge.Lvls minus the hysteresis. If Start.AnlgEdge.Slope is Falling, the trigger does not deassert until the source signal passes above Start.AnlgEdge.Lvl plus the hysteresis. Hysteresis is always enabled. Set this property to a non-zero value to use hysteresis. Each element of the list corresponds to a source in Start.AnlgMultiEdge.Srcs and an element in each of the other Analog Multi Edge property lists, if they are not empty.',
+            'python_name': 'anlg_multi_edge_hysts',
             'resettable': True,
             'type': 'float64[]'
         },
@@ -29030,6 +29240,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'Coupling2',
             'python_description': 'Specifies an list that describes the couplings for the corresponding source signal of the trigger if the source is a terminal rather than a virtual channel. Each element of the list corresponds to a source in Start.AnlgMultiEdge.Srcs and an element in each of the other Analog Multi Edge property lists, if they are not empty.',
+            'python_name': 'anlg_multi_edge_couplings',
             'resettable': True,
             'type': 'int32[]'
         },
@@ -29053,6 +29264,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
             'python_description': 'Specifies a List and/or range of analog sources that are going to be used for Analog triggering. Each source corresponds to an element in each of the Analog Multi Edge property lists, if they are not empty.',
+            'python_name': 'anlg_multi_edge_srcs',
             'resettable': True,
             'type': 'char[]'
         },
@@ -29077,6 +29289,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'Slope1',
             'python_description': 'Specifies an list of slopes on which to trigger task to start generating or acquiring samples. Each element of the list corresponds to a source in Ref.AnlgMultiEdge.Srcs and an element in each of the other Analog Multi Edge property lists, if they are not empty.',
+            'python_name': 'anlg_multi_edge_slopes',
             'resettable': True,
             'type': 'int32[]'
         },
@@ -29100,6 +29313,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies an list of thresholds in the units of the measurement or generation to start acquiring or generating samples. Each element of the list corresponds to a source in Ref.AnlgMultiEdge.Srcs and an element in each of the other Analog Multi Edge property lists, if they are not empty.',
+            'python_name': 'anlg_multi_edge_lvls',
             'resettable': True,
             'type': 'float64[]'
         },
@@ -29123,6 +29337,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
             'python_description': 'Specifies an list of hysteresis levels in the units of the measurement or generation. If the corresponding element of Ref.AnlgMultiEdge.Slopes is Rising, the trigger does not deassert until the source signal passes below the corresponding element of Ref.AnlgMultiEdge.Lvls minus the hysteresis. If Ref.AnlgEdge.Slope is Falling, the trigger does not deassert until the source signal passes above Ref.AnlgEdge.Lvl plus the hysteresis. Hysteresis is always enabled. Set this property to a non-zero value to use hysteresis. Each element of the list corresponds to a source in Ref.AnlgMultiEdge.Srcs and an element in each of the other Analog Multi Edge property lists, if they are not empty.',
+            'python_name': 'anlg_multi_edge_hysts',
             'resettable': True,
             'type': 'float64[]'
         },
@@ -29147,6 +29362,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'Coupling2',
             'python_description': 'Specifies an list that describes the couplings for the corresponding source signal of the trigger if the source is a terminal rather than a virtual channel. Each element of the list corresponds to a source in Ref.AnlgMultiEdge.Srcs and an element in each of the other Analog Multi Edge property lists, if they are not empty.',
+            'python_name': 'anlg_multi_edge_couplings',
             'resettable': True,
             'type': 'int32[]'
         },
@@ -29171,6 +29387,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'Timescale2',
             'python_description': 'Specifies the start trigger timestamp timescale.',
+            'python_name': 'timestamp_timescale',
             'resettable': True,
             'type': 'int32'
         },
@@ -29194,6 +29411,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether the reference trigger timestamp is enabled. If the timestamp is enabled but no resources are available, an error will be returned at run time.',
+            'python_name': 'timestamp_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -29217,6 +29435,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'unknown',
             'python_description': 'Indicates the reference trigger timestamp value.',
+            'python_name': 'timestamp_val',
             'resettable': False,
             'type': 'CVIAbsoluteTime'
         },
@@ -29241,6 +29460,7 @@ attributes = {
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'Timescale2',
             'python_description': 'Specifies the reference trigger timestamp timescale.',
+            'python_name': 'timestamp_timescale',
             'resettable': True,
             'type': 'int32'
         },
@@ -29288,6 +29508,7 @@ attributes = {
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'Timescale2',
             'python_description': 'Specifies the timescale to be used for timestamps used in an arm start time trigger.',
+            'python_name': 'time_timescale',
             'resettable': True,
             'type': 'int32'
         },
@@ -29311,6 +29532,7 @@ attributes = {
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether the arm start trigger timestamp is enabled. If the timestamp is enabled but no resources are available, an error will be returned at run time.',
+            'python_name': 'timestamp_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -29334,6 +29556,7 @@ attributes = {
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'unknown',
             'python_description': 'Indicates the arm start trigger timestamp value.',
+            'python_name': 'timestamp_val',
             'resettable': False,
             'type': 'CVIAbsoluteTime'
         },
@@ -29358,6 +29581,7 @@ attributes = {
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'Timescale2',
             'python_description': 'Specifies the arm start trigger timestamp timescale.',
+            'python_name': 'timestamp_timescale',
             'resettable': True,
             'type': 'int32'
         },
@@ -29381,6 +29605,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'bool',
             'python_description': 'Specifies whether the start trigger timestamp is enabled. If the timestamp is enabled but no resources are available, an error will be returned at run time.',
+            'python_name': 'timestamp_enable',
             'resettable': True,
             'type': 'bool32'
         },
@@ -29404,6 +29629,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'unknown',
             'python_description': 'Indicates the start trigger timestamp value.',
+            'python_name': 'timestamp_val',
             'resettable': False,
             'type': 'CVIAbsoluteTime'
         }
@@ -29430,6 +29656,7 @@ attributes = {
             'python_class_name': 'Watchdog',
             'python_data_type': 'TriggerType4',
             'python_description': 'Specifies the type of trigger to use to expire a watchdog task.',
+            'python_name': 'expir_trig_trig_type',
             'resettable': True,
             'type': 'int32'
         },
@@ -29453,6 +29680,7 @@ attributes = {
             'python_class_name': 'Watchdog',
             'python_data_type': 'str',
             'python_description': 'Specifies the name of a terminal where a digital signal exists to use as the source of the Expiration Trigger.',
+            'python_name': 'expir_trig_dig_edge_src',
             'resettable': True,
             'type': 'char[]'
         },
@@ -29477,6 +29705,7 @@ attributes = {
             'python_class_name': 'Watchdog',
             'python_data_type': 'Edge1',
             'python_description': 'Specifies on which edge of a digital signal to expire the watchdog task.',
+            'python_name': 'expir_trig_dig_edge_edge',
             'resettable': True,
             'type': 'int32'
         },
@@ -29506,6 +29735,7 @@ attributes = {
             'python_class_name': 'ExpirationState',
             'python_data_type': 'DigitalLineState',
             'python_description': 'Specifies the state to which to set the digital physical channels when the watchdog task expires.  You cannot modify the expiration state of dedicated digital input physical channels.',
+            'python_name': 'do_state',
             'resettable': True,
             'type': 'int32'
         },
@@ -29529,6 +29759,7 @@ attributes = {
             'python_class_name': 'Watchdog',
             'python_data_type': 'bool',
             'python_description': 'Indicates if the watchdog timer expired. You can read this property only while the task is running.',
+            'python_name': 'expired',
             'resettable': False,
             'type': 'bool32'
         },
@@ -29632,6 +29863,7 @@ attributes = {
             'python_class_name': 'ExpirationState',
             'python_data_type': 'float',
             'python_description': 'Specifies the state to set the analog output physical channels when the watchdog task expires.',
+            'python_name': 'ao_state',
             'resettable': True,
             'type': 'float64'
         },
@@ -29661,6 +29893,7 @@ attributes = {
             'python_class_name': 'ExpirationState',
             'python_data_type': 'WatchdogCOExpirState',
             'python_description': 'Specifies the state to set the counter output channel terminal when the watchdog task expires.',
+            'python_name': 'co_state',
             'resettable': True,
             'type': 'int32'
         }
@@ -29708,7 +29941,7 @@ attributes = {
             'is_python_object': False,
             'name': 'CURR_WRITE_POS',
             'python_class_name': 'OutStream',
-            'python_data_type': 'long',
+            'python_data_type': 'int',
             'python_description': 'Indicates the position in the buffer of the next sample to generate. This value is identical for all channels in the task.',
             'resettable': False,
             'type': 'uInt64'
@@ -29801,7 +30034,7 @@ attributes = {
             'is_python_object': False,
             'name': 'TOTAL_SAMP_PER_CHAN_GENERATED',
             'python_class_name': 'OutStream',
-            'python_data_type': 'long',
+            'python_data_type': 'int',
             'python_description': 'Indicates the total number of samples generated by each channel in the task. This value is identical for all channels in the task.',
             'resettable': False,
             'type': 'uInt64'
@@ -29872,6 +30105,7 @@ attributes = {
             'python_class_name': 'OutStream',
             'python_data_type': 'int',
             'python_description': 'Indicates the number of Boolean values expected per channel in a sample for line-based writes. This property is determined by the channel in the task with the most digital lines. If a channel has fewer lines than this number, NI-DAQmx ignores the extra Boolean values.',
+            'python_name': 'do_num_booleans_per_chan',
             'resettable': False,
             'type': 'uInt32'
         },

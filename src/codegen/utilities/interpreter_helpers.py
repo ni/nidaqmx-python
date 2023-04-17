@@ -24,16 +24,34 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetTimingAttributeExTimestamp",
     "SetTimingAttributeTimestamp",
     "SetTrigAttributeTimestamp",
+    "GetArmStartTrigTrigWhen",
+    "GetFirstSampClkWhen",
+    "GetStartTrigTrigWhen",
+    "GetSyncPulseTimeWhen",
+    "SetArmStartTrigTrigWhen",
+    "SetFirstSampClkWhen",
+    "SetStartTrigTrigWhen",
+    "SetSyncPulseTimeWhen",
+]
+
+LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
+    "RegisterSignalEvent",
+    "RegisterEveryNSamplesEvent",
+    "RegisterDoneEvent",
 ]
 
 
-def get_interpreter_functions(metadata, exclude_grpc_only_functions=False):
+def get_interpreter_functions(metadata, is_base_interpreter=False):
     """Converts the scrapigen metadata into a list of functions."""
     all_functions = deepcopy(metadata["functions"])
     functions_metadata = []
     for function_name, function_data in all_functions.items():
-        if exclude_grpc_only_functions and is_grpc_only_function(function_data):
-            continue
+        if not is_base_interpreter:
+            if (
+                not is_python_codegen_method(function_data)
+                or function_name in LIBRARY_INTERPRETER_IGNORED_FUNCTIONS
+            ):
+                continue
         if function_name in INTERPRETER_IGNORED_FUNCTIONS:
             continue
         function_data["c_function_name"] = function_name
@@ -53,33 +71,16 @@ def get_interpreter_functions(metadata, exclude_grpc_only_functions=False):
     return sorted(functions_metadata, key=lambda x: x._function_name)
 
 
-def is_grpc_only_function(function_data):
-    """Returns true if the function is a grpc only function."""
-    if "codegen_method" in function_data:
-        if function_data["codegen_method"] == "grpc-only":
-            return True
-
-
 def generate_interpreter_function_call_args(function_metadata):
     """Gets function call arguments."""
     function_call_args = []
-    # if function_metadata.handle_parameter is not None:
-    #     if function_metadata.handle_parameter.cvi_name == "taskHandle":
-    #         function_call_args.append("task")
     for param in function_metadata.base_parameters:
         if param.direction == "in":
             function_call_args.append(param.parameter_name)
             if param.has_explicit_buffer_size:
                 function_call_args.append(f"len({param.parameter_name})")
         else:
-            if param.has_explicit_buffer_size:
-                function_call_args.append(param.parameter_name)
-                function_call_args.append("temp_size")
-            else:
-                function_call_args.append(f"ctypes.byref({param.parameter_name})")
-
-    if function_metadata.calling_convention == "Cdecl":
-        function_call_args.append("None")
+            function_call_args.append(f"ctypes.byref({param.parameter_name})")
 
     return function_call_args
 
@@ -96,17 +97,22 @@ def get_interpreter_parameter_signature(is_python_factory, params):
     return ", ".join(params_with_defaults)
 
 
-def get_input_params(func):
-    """Gets input parameters for the function."""
-    return (p for p in func.base_parameters if p.direction == "in")
+def get_interpreter_params(func):
+    """Gets interpreter parameters for the function."""
+    return (
+        p
+        for p in func.base_parameters
+        if p.direction == "in" or (p.size and p.size.get("mechanism") == "passed-in")
+    )
 
 
 def get_skippable_params_for_interpreter_func(func):
-    """Gets parameter name that needs to be skipped for the function."""
+    """Gets parameter names that needs to be skipped for the function."""
     skippable_params = []
+    ignored_mechanisms = ["ivi-dance", "passed-in"]
     for param in func["parameters"]:
         size = param.get("size", {})
-        if size.get("mechanism") == "ivi-dance":
+        if size.get("mechanism") in ignored_mechanisms:
             skippable_params.append(size.get("value"))
         if is_skippable_param(param):
             skippable_params.append(param["name"])
@@ -121,6 +127,13 @@ def is_skippable_param(param: dict) -> bool:
     ):
         return True
     return False
+
+
+def is_python_codegen_method(func: dict) -> bool:
+    """Returns True if the method is a python codegen method."""
+    if "python_codegen_method" in func:
+        return func["python_codegen_method"] != "no"
+    return True
 
 
 def get_output_params(func):
