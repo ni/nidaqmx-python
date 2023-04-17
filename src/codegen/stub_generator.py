@@ -10,7 +10,9 @@ import pkg_resources
 
 STUBS_NAMESPACE = "nidaqmx._stubs"
 PROTO_PARENT_NAMESPACES = ["src.codegen", "protos"]
-STUBS_PATH = pathlib.Path(__file__).parent.parent.parent / "generated" / STUBS_NAMESPACE.replace(".", "/")
+STUBS_PATH = (
+    pathlib.Path(__file__).parent.parent.parent / "generated" / STUBS_NAMESPACE.replace(".", "/")
+)
 PROTO_PATH = pathlib.Path(__file__).parent.parent.parent / "src" / "codegen" / "protos"
 PROTO_FILES = list(PROTO_PATH.rglob("*.proto"))
 

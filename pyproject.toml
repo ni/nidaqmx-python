@@ -52,7 +52,6 @@ protobuf = { version = "^4.21", optional = true }
 docs = ["sphinx", "sphinx_rtd_theme"]
 grpc = ["grpcio", "protobuf"]
 
-[tool.poetry.dev-dependencies]
 # Test
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.2"

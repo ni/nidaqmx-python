@@ -7,7 +7,7 @@ import click
 
 sys.path.append(str(pathlib.Path(__file__).parent.parent))
 import codegen.generator as generator  # noqa E402: module level import not at top of file
-import codegen.generate_grpc_stubs as stub_generator
+import codegen.stub_generator as stub_generator # noqa E402: module level import not at top of file
 
 _logger = logging.getLogger(__name__)
 
