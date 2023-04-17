@@ -19,6 +19,15 @@ class LibraryInterpreter(BaseInterpreter):
     This class is responsible for interpreting the Library's C API.
 
     """
+    
+    def __init__(self):
+        # These lists keep C callback objects in memory as ctypes doesn't.
+        # Program will crash if callback is made after object is garbage
+        # collected.
+        self._done_event_callbacks = []
+        self._every_n_samples_event_callbacks = []
+        self._signal_event_callbacks = []
+        
 % for func in functions:
 <%
     sorted_params = order_function_parameters_by_optional(func.base_parameters)

@@ -1,16 +1,18 @@
 <%page args="function"/>\
 <%
+    import re
     from codegen.utilities.function_helpers import get_arguments_type
     from codegen.utilities.interpreter_helpers import generate_interpreter_function_call_args, get_callback_param_data_types
     from codegen.utilities.text_wrappers import wrap
 %>
 <% 
 callback_func_param = ""
+function_callback = f'{re.sub("register", "", function.function_name)}_callbacks'
 %>\
 %for parameter in function.base_parameters:
     %if parameter.parameter_name == "callback_function":
         ${parameter.type} = ctypes.CFUNCTYPE(
-            ${', '.join(get_callback_param_data_types(parameter.callback_params)) | wrap(24, 24)})        
+            ${', '.join(get_callback_param_data_types(parameter.callback_params)) | wrap(16, 20)})        
         <% 
             callback_func_param = parameter.type
         %>
@@ -23,9 +25,11 @@ callback_func_param = ""
         with cfunc.arglock:
             if callback_function is not None:
                 callback_method_ptr = ${callback_func_param}(callback_function)
+                self.${function_callback}.append(callback_method_ptr)
                 cfunc.argtypes = [
-                    ${', '.join(arguments_type) | wrap(24, 24)}]
+                    ${', '.join(arguments_type) | wrap(16, 20)}]
             else:
+                del self.${function_callback}[:]
                 callback_method_ptr = None
 <%
 for arg_type in arguments_type:
@@ -33,10 +37,10 @@ for arg_type in arguments_type:
         arguments_type = list(map(lambda x:x.replace(arg_type, "ctypes.c_void_p"), arguments_type))
 %>\
                 cfunc.argtypes = [
-                    ${', '.join(arguments_type) | wrap(24, 24)}]
+                    ${', '.join(arguments_type) | wrap(16, 20)}]
         <%
             function_call_args = generate_interpreter_function_call_args(function)
         %>
             error_code = cfunc(
-                ${', '.join(function_call_args) | wrap(12, 12)})
+                ${', '.join(function_call_args) | wrap(16)})
         check_for_error(error_code)
