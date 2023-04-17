@@ -2928,20 +2928,11 @@ class Timing:
             ready_event_active_level (Optional[nidaqmx.constants.Polarity]): 
                 Specifies the polarity of the Ready for Transfer Event.
         """
-        cfunc = lib_importer.windll.DAQmxCfgBurstHandshakingTimingExportClock
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_ulonglong, ctypes.c_double, ctypes_byte_str,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int]
 
-        error_code = cfunc(
+        self._interpreter.cfg_burst_handshaking_timing_export_clock(
             self._handle, sample_mode.value, samps_per_chan, sample_clk_rate,
             sample_clk_outp_term, sample_clk_pulse_polarity.value,
             pause_when.value, ready_event_active_level.value)
-        check_for_error(error_code)
 
     def cfg_burst_handshaking_timing_import_clock(
             self, sample_clk_rate, sample_clk_src,
@@ -2978,20 +2969,11 @@ class Timing:
             ready_event_active_level (Optional[nidaqmx.constants.Polarity]): 
                 Specifies the polarity of the Ready for Transfer Event.
         """
-        cfunc = lib_importer.windll.DAQmxCfgBurstHandshakingTimingImportClock
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_ulonglong, ctypes.c_double, ctypes_byte_str,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int]
 
-        error_code = cfunc(
+        self._interpreter.cfg_burst_handshaking_timing_import_clock(
             self._handle, sample_mode.value, samps_per_chan, sample_clk_rate,
             sample_clk_src, sample_clk_active_edge.value, pause_when.value,
             ready_event_active_level.value)
-        check_for_error(error_code)
 
     def cfg_change_detection_timing(
             self, rising_edge_chan="", falling_edge_chan="",
@@ -3020,18 +3002,10 @@ class Timing:
                 **sample_mode** is **FINITE_SAMPLES**. This function
                 returns an error if the specified value is negative.
         """
-        cfunc = lib_importer.windll.DAQmxCfgChangeDetectionTiming
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_ulonglong]
 
-        error_code = cfunc(
+        self._interpreter.cfg_change_detection_timing(
             self._handle, rising_edge_chan, falling_edge_chan,
             sample_mode.value, samps_per_chan)
-        check_for_error(error_code)
 
     def cfg_handshaking_timing(
             self, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000):
@@ -3052,17 +3026,9 @@ class Timing:
                 this value to determine the buffer size. This function
                 returns an error if the specified value is negative.
         """
-        cfunc = lib_importer.windll.DAQmxCfgHandshakingTiming
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_ulonglong]
 
-        error_code = cfunc(
+        self._interpreter.cfg_handshaking_timing(
             self._handle, sample_mode.value, samps_per_chan)
-        check_for_error(error_code)
 
     def cfg_implicit_timing(
             self, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000):
@@ -3087,17 +3053,9 @@ class Timing:
                 this value to determine the buffer size. This function
                 returns an error if the specified value is negative.
         """
-        cfunc = lib_importer.windll.DAQmxCfgImplicitTiming
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_ulonglong]
 
-        error_code = cfunc(
+        self._interpreter.cfg_implicit_timing(
             self._handle, sample_mode.value, samps_per_chan)
-        check_for_error(error_code)
 
     def cfg_pipelined_samp_clk_timing(
             self, rate, source="", active_edge=Edge.RISING,
@@ -3138,19 +3096,10 @@ class Timing:
                 this value to determine the buffer size. This function
                 returns an error if the specified value is negative.
         """
-        cfunc = lib_importer.windll.DAQmxCfgPipelinedSampClkTiming
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_ulonglong]
 
-        error_code = cfunc(
+        self._interpreter.cfg_pipelined_samp_clk_timing(
             self._handle, source, rate, active_edge.value, sample_mode.value,
             samps_per_chan)
-        check_for_error(error_code)
 
     def cfg_samp_clk_timing(
             self, rate, source="", active_edge=Edge.RISING,
@@ -3181,17 +3130,8 @@ class Timing:
                 this value to determine the buffer size. This function
                 returns an error if the specified value is negative.
         """
-        cfunc = lib_importer.windll.DAQmxCfgSampClkTiming
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_ulonglong]
 
-        error_code = cfunc(
+        self._interpreter.cfg_samp_clk_timing(
             self._handle, source, rate, active_edge.value, sample_mode.value,
             samps_per_chan)
-        check_for_error(error_code)
 

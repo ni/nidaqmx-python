@@ -1,5 +1,7 @@
 <%def name="script_function(func)">\
 <%
+    from codegen.utilities.interpreter_helpers import INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES
+    from codegen.utilities.helpers import camel_to_snake_case
     from codegen.utilities.function_helpers import get_function_name,order_function_parameters_by_optional,get_parameters_docstring_lines_length,get_parameter_signature,get_instantiation_lines,get_arguments_type,get_explicit_output_param,generate_function_call_args,instantiate_explicit_output_param
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
     %>\
@@ -11,6 +13,7 @@
 %endif
 <%
     sorted_params = order_function_parameters_by_optional(func.parameters)
+    interpreter_func_name = camel_to_snake_case(func.c_function_name, INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES)
     parameter_signature = get_parameter_signature(is_python_factory, sorted_params)
     %>\
     %if (len(func.function_name) + len(parameter_signature)) > 68:
@@ -70,51 +73,12 @@
         %endfor
 
     %endif
-\
-        cfunc = lib_importer.${'windll' if func.calling_convention == 'StdCall' else 'cdll'}.DAQmx${func.c_function_name}
-\
-## Create argument ctypes types list.
-    %if func.calling_convention == 'StdCall':
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ${', '.join(get_arguments_type(func)) | wrap(24, 24)}]
-    %endif
-
 <%
     function_call_args = generate_function_call_args(func)
-    explicit_output_param = get_explicit_output_param(func.output_parameters)
-%>\
-## Script buffer-size-checking function call.
-    %if explicit_output_param is not None:
-        temp_size = 0
-        while True:
+%>
 \
-## Script instantiation of explicit output parameter with temp buffer size.
-        ${instantiate_explicit_output_param(explicit_output_param)}
-            size_or_code = cfunc(
-                ${', '.join(function_call_args) | wrap(16, 16)})
-        %if explicit_output_param.ctypes_data_type == 'ctypes.c_char_p':
-            if is_string_buffer_too_small(size_or_code):
-        %else:
-            if is_array_buffer_too_small(size_or_code):
-        %endif
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-        check_for_error(size_or_code)
-\
-## Script non-buffer-size-checking function call.
-    %else:
-        error_code = cfunc(
+        self._interpreter.${interpreter_func_name}(
             ${', '.join(function_call_args) | wrap(12, 12)})
-        check_for_error(error_code)
-    %endif
 \
 ## Script return call.
     %if func.adaptor_parameter is not None:

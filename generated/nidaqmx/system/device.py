@@ -2530,32 +2530,18 @@ class Device:
         the task, use DAQmx Start to restart the task or use DAQmx Stop
         to reset the task without starting it.
         """
-        cfunc = lib_importer.windll.DAQmxResetDevice
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.reset_device(
             self._name)
-        check_for_error(error_code)
 
     def self_test_device(self):
         """
         Performs a brief test of device resources. If a failure occurs,
         refer to your device documentation for more information.
         """
-        cfunc = lib_importer.windll.DAQmxSelfTestDevice
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.self_test_device(
             self._name)
-        check_for_error(error_code)
 
     # region Network Device Functions
 

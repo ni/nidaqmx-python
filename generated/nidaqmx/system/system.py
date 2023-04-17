@@ -182,16 +182,9 @@ class System:
                 routes from the source terminal to the destination
                 terminal.
         """
-        cfunc = lib_importer.windll.DAQmxConnectTerms
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int]
 
-        error_code = cfunc(
+        self._interpreter.connect_terms(
             source_terminal, destination_terminal, signal_modifiers.value)
-        check_for_error(error_code)
 
     def disconnect_terms(self, source_terminal, destination_terminal):
         """
@@ -212,16 +205,9 @@ class System:
                 system. You also can specify a destination terminal by
                 specifying a string that contains a terminal name.
         """
-        cfunc = lib_importer.windll.DAQmxDisconnectTerms
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.disconnect_terms(
             source_terminal, destination_terminal)
-        check_for_error(error_code)
 
     def tristate_output_term(self, output_terminal):
         """
@@ -240,16 +226,9 @@ class System:
                 terminal by using a string that contains a terminal
                 name.
         """
-        cfunc = lib_importer.windll.DAQmxTristateOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.tristate_output_term(
             output_terminal)
-        check_for_error(error_code)
 
     # region Power Up States Functions
 

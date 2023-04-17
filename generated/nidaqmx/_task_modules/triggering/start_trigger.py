@@ -2521,17 +2521,9 @@ class StartTrigger:
                 **trigger_slope** to specify on which slope to trigger
                 at this threshold.
         """
-        cfunc = lib_importer.windll.DAQmxCfgAnlgEdgeStartTrig
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int, ctypes.c_double]
 
-        error_code = cfunc(
+        self._interpreter.cfg_anlg_edge_start_trig(
             self._handle, trigger_source, trigger_slope.value, trigger_level)
-        check_for_error(error_code)
 
     def cfg_anlg_window_start_trig(
             self, window_top, window_bottom, trigger_source="",
@@ -2556,18 +2548,10 @@ class StartTrigger:
                 when it leaves the window. Use **window_bottom** and
                 **window_top** to specify the limits of the window.
         """
-        cfunc = lib_importer.windll.DAQmxCfgAnlgWindowStartTrig
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_double]
 
-        error_code = cfunc(
+        self._interpreter.cfg_anlg_window_start_trig(
             self._handle, trigger_source, trigger_when.value, window_top,
             window_bottom)
-        check_for_error(error_code)
 
     def cfg_dig_edge_start_trig(
             self, trigger_source, trigger_edge=Edge.RISING):
@@ -2583,17 +2567,9 @@ class StartTrigger:
                 on which edge of the digital signal to start acquiring
                 or generating samples.
         """
-        cfunc = lib_importer.windll.DAQmxCfgDigEdgeStartTrig
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int]
 
-        error_code = cfunc(
+        self._interpreter.cfg_dig_edge_start_trig(
             self._handle, trigger_source, trigger_edge.value)
-        check_for_error(error_code)
 
     def cfg_dig_pattern_start_trig(
             self, trigger_source, trigger_pattern,
@@ -2613,31 +2589,16 @@ class StartTrigger:
             trigger_when (Optional[nidaqmx.constants.DigitalPatternCondition]): 
                 Specifies the condition under which the trigger occurs.
         """
-        cfunc = lib_importer.windll.DAQmxCfgDigPatternStartTrig
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int]
 
-        error_code = cfunc(
+        self._interpreter.cfg_dig_pattern_start_trig(
             self._handle, trigger_source, trigger_pattern, trigger_when.value)
-        check_for_error(error_code)
 
     def disable_start_trig(self):
         """
         Configures the task to start acquiring or generating samples
         immediately upon starting the task.
         """
-        cfunc = lib_importer.windll.DAQmxDisableStartTrig
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
 
-        error_code = cfunc(
+        self._interpreter.disable_start_trig(
             self._handle)
-        check_for_error(error_code)
 

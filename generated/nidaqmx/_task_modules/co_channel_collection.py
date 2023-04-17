@@ -83,19 +83,10 @@ class COChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateCOPulseChanFreq
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_double]
 
-        error_code = cfunc(
+        self._interpreter.create_co_pulse_chan_freq(
             self._handle, counter, name_to_assign_to_channel, units.value,
             idle_state.value, initial_delay, freq, duty_cycle)
-        check_for_error(error_code)
 
         return self._create_chan(counter, name_to_assign_to_channel)
 
@@ -138,19 +129,10 @@ class COChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateCOPulseChanTicks
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int]
 
-        error_code = cfunc(
+        self._interpreter.create_co_pulse_chan_ticks(
             self._handle, counter, name_to_assign_to_channel, source_terminal,
             idle_state.value, initial_delay, low_ticks, high_ticks)
-        check_for_error(error_code)
 
         return self._create_chan(counter, name_to_assign_to_channel)
 
@@ -190,19 +172,10 @@ class COChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateCOPulseChanTime
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_double]
 
-        error_code = cfunc(
+        self._interpreter.create_co_pulse_chan_time(
             self._handle, counter, name_to_assign_to_channel, units.value,
             idle_state.value, initial_delay, low_time, high_time)
-        check_for_error(error_code)
 
         return self._create_chan(counter, name_to_assign_to_channel)
 
