@@ -106,6 +106,18 @@ def get_interpreter_params(func):
     )
 
 
+def get_grpc_interpreter_call_params(params):
+    """Gets the interpreter parameters for grpc request."""
+    grpc_params = []
+    for param in params:
+        if param.is_enum:
+            grpc_params.append(f"{param.parameter_name}_raw={param.parameter_name}")
+        else:
+            grpc_params.append(f"{param.parameter_name}={param.parameter_name}")
+
+    return ", ".join(grpc_params)
+
+
 def get_skippable_params_for_interpreter_func(func):
     """Gets parameter names that needs to be skipped for the function."""
     skippable_params = []
@@ -145,6 +157,14 @@ def get_output_parameter_names(func):
     """Gets the names of the output parameters of the given function."""
     output_parameters = get_output_params(func)
     return [p.parameter_name for p in output_parameters]
+
+
+def get_reponse_parameters(output_parameters: list):
+    """Gets the list of parameters in grpc response."""
+    response_parameters = []
+    for parameter in output_parameters:
+        response_parameters.append(f"response.{parameter}")
+    return ",".join(response_parameters)
 
 
 def get_c_function_call_template(func):
