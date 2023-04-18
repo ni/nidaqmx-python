@@ -5,7 +5,7 @@ import numpy
 
 from nidaqmx._base_interpreter import BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer
-from nidaqmx.errors import check_for_error
+from nidaqmx.errors import check_for_error, is_string_buffer_too_small, is_array_buffer_too_small
 
 class LibraryInterpreter(BaseInterpreter):
     """
@@ -48,10 +48,21 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes_byte_str, ctypes_byte_str, c_bool32,
                         ctypes.c_double, ctypes.c_char_p, ctypes.c_uint]
 
-        error_code = cfunc(
-            ip_address, device_name, attempt_reservation, timeout,
-            ctypes.byref(device_name_out))
-        check_for_error(error_code)
+        temp_size = 0
+        while True:
+            device_name_out = ctypes.create_string_buffer(temp_size)
+            size_or_code = cfunc(
+                ip_address, device_name, attempt_reservation, timeout,
+                device_name_out, temp_size)
+            if is_string_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+        check_for_error(size_or_code)
         return device_name_out
 
     def are_configured_cdaq_sync_ports_disconnected(
@@ -96,7 +107,7 @@ class LibraryInterpreter(BaseInterpreter):
                         flags=('C','W')), ctypes.c_uint, ctypes.c_double,
                         ctypes.c_double, ctypes.c_int, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W'))]
+                        flags=('C','W')), ctypes.c_uint]
 
         error_code = cfunc(
             forward_coeffs, len(forward_coeffs), num_forward_coeffs_in,
@@ -347,8 +358,8 @@ class LibraryInterpreter(BaseInterpreter):
                         lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
-            task, channel_names, expir_state_array, output_type_array,
-            array_size)
+            task, channel_names, expir_state_array, len(expir_state_array),
+            output_type_array, len(output_type_array), array_size)
         check_for_error(error_code)
 
     def cfg_watchdog_co_expir_states(
@@ -2196,9 +2207,20 @@ class LibraryInterpreter(BaseInterpreter):
                     cfunc.argtypes = [
                         ctypes.c_char_p, ctypes.c_uint]
 
-        error_code = cfunc(
-            ctypes.byref(port_list))
-        check_for_error(error_code)
+        temp_size = 0
+        while True:
+            port_list = ctypes.create_string_buffer(temp_size)
+            size_or_code = cfunc(
+                port_list, temp_size)
+            if is_string_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+        check_for_error(size_or_code)
         return port_list
 
     def get_digital_logic_family_power_up_state(self, device_name):
@@ -2240,9 +2262,20 @@ class LibraryInterpreter(BaseInterpreter):
                     cfunc.argtypes = [
                         ctypes.c_char_p, ctypes.c_uint]
 
-        error_code = cfunc(
-            ctypes.byref(port_list))
-        check_for_error(error_code)
+        temp_size = 0
+        while True:
+            port_list = ctypes.create_string_buffer(temp_size)
+            size_or_code = cfunc(
+                port_list, temp_size)
+            if is_string_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+        check_for_error(size_or_code)
         return port_list
 
     def is_task_done(self, task):
@@ -2272,7 +2305,8 @@ class LibraryInterpreter(BaseInterpreter):
         return task
 
     def read_analog_f64(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadAnalogF64
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2285,7 +2319,8 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
@@ -2303,7 +2338,8 @@ class LibraryInterpreter(BaseInterpreter):
         return value
 
     def read_binary_i16(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadBinaryI16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2315,12 +2351,14 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
     def read_binary_i32(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadBinaryI32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2332,12 +2370,14 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
     def read_binary_u16(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadBinaryU16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2350,12 +2390,14 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
     def read_binary_u32(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadBinaryU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2368,11 +2410,13 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
-    def read_counter_f64(self, task, num_samps_per_chan, timeout, read_array):
+    def read_counter_f64(
+            self, task, num_samps_per_chan, timeout, array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadCounterF64
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2385,12 +2429,13 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, ctypes.byref(read_array),
-            ctypes.byref(samps_per_chan_read))
+            array_size_in_samps, ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
     def read_counter_f64_ex(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadCounterF64Ex
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2403,7 +2448,8 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
@@ -2433,7 +2479,8 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return value
 
-    def read_counter_u32(self, task, num_samps_per_chan, timeout, read_array):
+    def read_counter_u32(
+            self, task, num_samps_per_chan, timeout, array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadCounterU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2446,12 +2493,13 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, ctypes.byref(read_array),
-            ctypes.byref(samps_per_chan_read))
+            array_size_in_samps, ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
     def read_counter_u32_ex(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadCounterU32Ex
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2464,13 +2512,14 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
     def read_ctr_freq(
             self, task, num_samps_per_chan, timeout, interleaved,
-            read_array_frequency, read_array_duty_cycle):
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadCtrFreq
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2480,12 +2529,13 @@ class LibraryInterpreter(BaseInterpreter):
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')),
                         wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.POINTER(ctypes.c_int)]
+                        flags=('C','W')), ctypes.c_uint,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
             ctypes.byref(read_array_frequency),
-            ctypes.byref(read_array_duty_cycle),
+            ctypes.byref(read_array_duty_cycle), array_size_in_samps,
             ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array_frequency, read_array_duty_cycle, samps_per_chan_read
@@ -2506,7 +2556,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def read_ctr_ticks(
             self, task, num_samps_per_chan, timeout, interleaved,
-            read_array_high_ticks, read_array_low_ticks):
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadCtrTicks
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2516,12 +2566,13 @@ class LibraryInterpreter(BaseInterpreter):
                         wrapped_ndpointer(dtype=numpy.uint32,
                         flags=('C','W')),
                         wrapped_ndpointer(dtype=numpy.uint32,
-                        flags=('C','W')), ctypes.POINTER(ctypes.c_int)]
+                        flags=('C','W')), ctypes.c_uint,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
             ctypes.byref(read_array_high_ticks),
-            ctypes.byref(read_array_low_ticks),
+            ctypes.byref(read_array_low_ticks), array_size_in_samps,
             ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array_high_ticks, read_array_low_ticks, samps_per_chan_read
@@ -2542,7 +2593,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def read_ctr_time(
             self, task, num_samps_per_chan, timeout, interleaved,
-            read_array_high_time, read_array_low_time):
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadCtrTime
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2552,12 +2603,13 @@ class LibraryInterpreter(BaseInterpreter):
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')),
                         wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.POINTER(ctypes.c_int)]
+                        flags=('C','W')), ctypes.c_uint,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
             ctypes.byref(read_array_high_time),
-            ctypes.byref(read_array_low_time),
+            ctypes.byref(read_array_low_time), array_size_in_samps,
             ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array_high_time, read_array_low_time, samps_per_chan_read
@@ -2576,7 +2628,8 @@ class LibraryInterpreter(BaseInterpreter):
         return high_time, low_time
 
     def read_digital_lines(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_bytes):
         cfunc = lib_importer.windll.DAQmxReadDigitalLines
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2589,7 +2642,8 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read),
+            ctypes.byref(read_array), array_size_in_bytes,
+            ctypes.byref(samps_per_chan_read),
             ctypes.byref(num_bytes_per_samp))
         check_for_error(error_code)
         return read_array, samps_per_chan_read, num_bytes_per_samp
@@ -2608,7 +2662,8 @@ class LibraryInterpreter(BaseInterpreter):
         return value
 
     def read_digital_u16(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadDigitalU16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2621,12 +2676,14 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
     def read_digital_u32(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadDigitalU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2639,12 +2696,14 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
     def read_digital_u8(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadDigitalU8
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2656,7 +2715,8 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
@@ -2735,7 +2795,8 @@ class LibraryInterpreter(BaseInterpreter):
         cfunc = lib_importer.cdll.DAQmxSetAnalogPowerUpStatesWithOutputType
 
         error_code = cfunc(
-            channel_names, state_array, channel_type_array, array_size)
+            channel_names, state_array, len(state_array), channel_type_array,
+            len(channel_type_array), array_size)
         check_for_error(error_code)
 
     def set_digital_logic_family_power_up_state(

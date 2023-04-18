@@ -87,6 +87,7 @@ def generate_interpreter_function_call_args(function_metadata):
                 elif (
                     param.size.mechanism == "passed-in"
                     or param.size.mechanism == "passed-in-by-ptr"
+                    or param.size.mechanism == "custom-code"
                 ):
                     function_call_args.append(f"ctypes.byref({param.parameter_name})")
             else:

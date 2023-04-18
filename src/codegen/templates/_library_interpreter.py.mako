@@ -33,7 +33,7 @@ class LibraryInterpreter(BaseInterpreter):
     def ${func.function_name}(${parameter_signature}):
     %endif
 \
-<%include file="${'/library_interpreter_templates' + get_c_function_call_template(func)}" args="function=func" />
+<%include file="${'/library_interpreter' + get_c_function_call_template(func)}" args="function=func" />
     %if len(list(output_parameters_names)) != 0:
         return ${', '.join(output_parameters_names)}
     %endif
