@@ -67,6 +67,8 @@ class LibraryInterpreter(BaseInterpreter):
 
     def are_configured_cdaq_sync_ports_disconnected(
             self, chassis_devices_ports, timeout):
+        disconnected_ports_exist = c_bool32()
+
         cfunc = lib_importer.windll.DAQmxAreConfiguredCDAQSyncPortsDisconnected
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2224,6 +2226,8 @@ class LibraryInterpreter(BaseInterpreter):
         return port_list
 
     def get_digital_logic_family_power_up_state(self, device_name):
+        logic_family = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxGetDigitalLogicFamilyPowerUpState
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2279,6 +2283,8 @@ class LibraryInterpreter(BaseInterpreter):
         return port_list
 
     def is_task_done(self, task):
+        is_task_done = c_bool32()
+
         cfunc = lib_importer.windll.DAQmxIsTaskDone
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2307,6 +2313,9 @@ class LibraryInterpreter(BaseInterpreter):
     def read_analog_f64(
             self, task, num_samps_per_chan, timeout, fill_mode,
             array_size_in_samps):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.float64)
+        samps_per_chan_read = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxReadAnalogF64
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2325,6 +2334,8 @@ class LibraryInterpreter(BaseInterpreter):
         return read_array, samps_per_chan_read
 
     def read_analog_scalar_f64(self, task, timeout):
+        value = ctypes.c_double()
+
         cfunc = lib_importer.windll.DAQmxReadAnalogScalarF64
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2340,6 +2351,9 @@ class LibraryInterpreter(BaseInterpreter):
     def read_binary_i16(
             self, task, num_samps_per_chan, timeout, fill_mode,
             array_size_in_samps):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.int16)
+        samps_per_chan_read = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxReadBinaryI16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2359,6 +2373,9 @@ class LibraryInterpreter(BaseInterpreter):
     def read_binary_i32(
             self, task, num_samps_per_chan, timeout, fill_mode,
             array_size_in_samps):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.int32)
+        samps_per_chan_read = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxReadBinaryI32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2378,6 +2395,9 @@ class LibraryInterpreter(BaseInterpreter):
     def read_binary_u16(
             self, task, num_samps_per_chan, timeout, fill_mode,
             array_size_in_samps):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.uint16)
+        samps_per_chan_read = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxReadBinaryU16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2398,6 +2418,9 @@ class LibraryInterpreter(BaseInterpreter):
     def read_binary_u32(
             self, task, num_samps_per_chan, timeout, fill_mode,
             array_size_in_samps):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.uint32)
+        samps_per_chan_read = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxReadBinaryU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2417,6 +2440,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def read_counter_f64(
             self, task, num_samps_per_chan, timeout, array_size_in_samps):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.float64)
+        samps_per_chan_read = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxReadCounterF64
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2436,6 +2462,9 @@ class LibraryInterpreter(BaseInterpreter):
     def read_counter_f64_ex(
             self, task, num_samps_per_chan, timeout, fill_mode,
             array_size_in_samps):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.float64)
+        samps_per_chan_read = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxReadCounterF64Ex
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2454,6 +2483,8 @@ class LibraryInterpreter(BaseInterpreter):
         return read_array, samps_per_chan_read
 
     def read_counter_scalar_f64(self, task, timeout):
+        value = ctypes.c_double()
+
         cfunc = lib_importer.windll.DAQmxReadCounterScalarF64
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2467,6 +2498,8 @@ class LibraryInterpreter(BaseInterpreter):
         return value
 
     def read_counter_scalar_u32(self, task, timeout):
+        value = ctypes.c_uint()
+
         cfunc = lib_importer.windll.DAQmxReadCounterScalarU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2481,6 +2514,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def read_counter_u32(
             self, task, num_samps_per_chan, timeout, array_size_in_samps):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.uint32)
+        samps_per_chan_read = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxReadCounterU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2500,6 +2536,9 @@ class LibraryInterpreter(BaseInterpreter):
     def read_counter_u32_ex(
             self, task, num_samps_per_chan, timeout, fill_mode,
             array_size_in_samps):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.uint32)
+        samps_per_chan_read = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxReadCounterU32Ex
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2520,6 +2559,10 @@ class LibraryInterpreter(BaseInterpreter):
     def read_ctr_freq(
             self, task, num_samps_per_chan, timeout, interleaved,
             array_size_in_samps):
+        read_array_frequency = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.float64)
+        read_array_duty_cycle = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.float64)
+        samps_per_chan_read = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxReadCtrFreq
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2541,6 +2584,9 @@ class LibraryInterpreter(BaseInterpreter):
         return read_array_frequency, read_array_duty_cycle, samps_per_chan_read
 
     def read_ctr_freq_scalar(self, task, timeout):
+        frequency = ctypes.c_double()
+        duty_cycle = ctypes.c_double()
+
         cfunc = lib_importer.windll.DAQmxReadCtrFreqScalar
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2557,6 +2603,10 @@ class LibraryInterpreter(BaseInterpreter):
     def read_ctr_ticks(
             self, task, num_samps_per_chan, timeout, interleaved,
             array_size_in_samps):
+        read_array_high_ticks = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.uint32)
+        read_array_low_ticks = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.uint32)
+        samps_per_chan_read = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxReadCtrTicks
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2578,6 +2628,9 @@ class LibraryInterpreter(BaseInterpreter):
         return read_array_high_ticks, read_array_low_ticks, samps_per_chan_read
 
     def read_ctr_ticks_scalar(self, task, timeout):
+        high_ticks = ctypes.c_uint()
+        low_ticks = ctypes.c_uint()
+
         cfunc = lib_importer.windll.DAQmxReadCtrTicksScalar
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2594,6 +2647,10 @@ class LibraryInterpreter(BaseInterpreter):
     def read_ctr_time(
             self, task, num_samps_per_chan, timeout, interleaved,
             array_size_in_samps):
+        read_array_high_time = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.float64)
+        read_array_low_time = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.float64)
+        samps_per_chan_read = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxReadCtrTime
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2630,6 +2687,10 @@ class LibraryInterpreter(BaseInterpreter):
     def read_digital_lines(
             self, task, num_samps_per_chan, timeout, fill_mode,
             array_size_in_bytes):
+        read_array = numpy.zeros(array_size_in_bytes, dtype=numpy.numpy.uint8)
+        samps_per_chan_read = ctypes.c_int()
+        num_bytes_per_samp = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxReadDigitalLines
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2649,6 +2710,8 @@ class LibraryInterpreter(BaseInterpreter):
         return read_array, samps_per_chan_read, num_bytes_per_samp
 
     def read_digital_scalar_u32(self, task, timeout):
+        value = ctypes.c_uint()
+
         cfunc = lib_importer.windll.DAQmxReadDigitalScalarU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2664,6 +2727,9 @@ class LibraryInterpreter(BaseInterpreter):
     def read_digital_u16(
             self, task, num_samps_per_chan, timeout, fill_mode,
             array_size_in_samps):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.uint16)
+        samps_per_chan_read = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxReadDigitalU16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2684,6 +2750,9 @@ class LibraryInterpreter(BaseInterpreter):
     def read_digital_u32(
             self, task, num_samps_per_chan, timeout, fill_mode,
             array_size_in_samps):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.uint32)
+        samps_per_chan_read = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxReadDigitalU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2704,6 +2773,9 @@ class LibraryInterpreter(BaseInterpreter):
     def read_digital_u8(
             self, task, num_samps_per_chan, timeout, fill_mode,
             array_size_in_samps):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.numpy.uint8)
+        samps_per_chan_read = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxReadDigitalU8
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2721,6 +2793,9 @@ class LibraryInterpreter(BaseInterpreter):
         return read_array, samps_per_chan_read
 
     def read_power_scalar_f64(self, task, timeout):
+        voltage = ctypes.c_double()
+        current = ctypes.c_double()
+
         cfunc = lib_importer.windll.DAQmxReadPowerScalarF64
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2914,6 +2989,8 @@ class LibraryInterpreter(BaseInterpreter):
     def write_analog_f64(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        samps_per_chan_written = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxWriteAnalogF64
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2944,6 +3021,8 @@ class LibraryInterpreter(BaseInterpreter):
     def write_binary_i16(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        samps_per_chan_written = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxWriteBinaryI16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2962,6 +3041,8 @@ class LibraryInterpreter(BaseInterpreter):
     def write_binary_i32(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        samps_per_chan_written = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxWriteBinaryI32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2980,6 +3061,8 @@ class LibraryInterpreter(BaseInterpreter):
     def write_binary_u16(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        samps_per_chan_written = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxWriteBinaryU16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2998,6 +3081,8 @@ class LibraryInterpreter(BaseInterpreter):
     def write_binary_u32(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        samps_per_chan_written = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxWriteBinaryU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3016,6 +3101,8 @@ class LibraryInterpreter(BaseInterpreter):
     def write_ctr_freq(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             frequency, duty_cycle):
+        num_samps_per_chan_written = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxWriteCtrFreq
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3050,6 +3137,8 @@ class LibraryInterpreter(BaseInterpreter):
     def write_ctr_ticks(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             high_ticks, low_ticks):
+        num_samps_per_chan_written = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxWriteCtrTicks
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3084,6 +3173,8 @@ class LibraryInterpreter(BaseInterpreter):
     def write_ctr_time(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             high_time, low_time):
+        num_samps_per_chan_written = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxWriteCtrTime
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3118,6 +3209,8 @@ class LibraryInterpreter(BaseInterpreter):
     def write_digital_lines(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        samps_per_chan_written = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxWriteDigitalLines
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3148,6 +3241,8 @@ class LibraryInterpreter(BaseInterpreter):
     def write_digital_u16(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        samps_per_chan_written = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxWriteDigitalU16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3166,6 +3261,8 @@ class LibraryInterpreter(BaseInterpreter):
     def write_digital_u32(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        samps_per_chan_written = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxWriteDigitalU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3184,6 +3281,8 @@ class LibraryInterpreter(BaseInterpreter):
     def write_digital_u8(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        samps_per_chan_written = ctypes.c_int()
+
         cfunc = lib_importer.windll.DAQmxWriteDigitalU8
         if cfunc.argtypes is None:
             with cfunc.arglock:
