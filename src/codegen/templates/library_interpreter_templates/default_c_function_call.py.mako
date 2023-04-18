@@ -4,7 +4,6 @@
     from codegen.utilities.function_helpers import get_arguments_type
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
 %>\
-
         cfunc = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
 \
 ## Create argument ctypes types list.
