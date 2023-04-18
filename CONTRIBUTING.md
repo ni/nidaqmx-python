@@ -107,6 +107,15 @@ can be verified once that has been completed.
    * If updating a minor or major version, update `version` and `release` in `docs/conf.py`.
    * Add a section to `CHANGELOG.md` for the new version with empty subsections.
 
+# Updating gRPC stubs when the .proto file is modified
+
+The `generated\nidaqmx\_stubs` directory contains the auto-generated Python files based on the NI-DAQmx protobuf (`.proto`) file.
+
+The latest NI-DAQmx .proto file is available in the [grpc-device GitHub repo](https://github.com/ni/grpc-device/blob/main/generated/nidaqmx/nidaqmx.proto). Manually download and overwrite the `.proto` file under the location `codegen\protos\nidaqmx.proto`.
+
+Run `poetry run python src/codegen --dest generated/nidaqmx`. This will ensure that the latest stub files are present in the `generated\nidaqmx\_stubs` folder.
+
+
 # Developer Certificate of Origin (DCO)
 
 Developer's Certificate of Origin 1.1
