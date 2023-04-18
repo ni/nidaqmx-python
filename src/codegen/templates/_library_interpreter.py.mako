@@ -1,6 +1,6 @@
 <%
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
-    from codegen.utilities.interpreter_helpers import get_interpreter_functions,get_interpreter_parameter_signature,get_c_function_call_template, get_output_parameter_names, get_interpreter_params
+    from codegen.utilities.interpreter_helpers import get_interpreter_functions,get_interpreter_parameter_signature,get_c_function_call_template, get_output_parameter_names, get_interpreter_params, get_instantiation_lines_for_output_params
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
     functions = get_interpreter_functions(data)
 %>\
@@ -31,6 +31,18 @@ class LibraryInterpreter(BaseInterpreter):
             ${parameter_signature + '):' | wrap(12, 12)}
     %else:
     def ${func.function_name}(${parameter_signature}):
+    %endif
+\
+## Script instantiation for output parameters that will be passed by reference.
+<%
+    instantiation_lines = get_instantiation_lines_for_output_params(func.output_parameters)
+    %>\
+\
+    %if len(instantiation_lines) > 0:
+        %for instantiation_line in instantiation_lines:
+        ${instantiation_line}
+        %endfor
+
     %endif
 \
 <%include file="${'/library_interpreter' + get_c_function_call_template(func)}" args="function=func" />

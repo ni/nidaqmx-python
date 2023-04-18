@@ -108,6 +108,22 @@ def get_interpreter_parameter_signature(is_python_factory, params):
     return ", ".join(params_with_defaults)
 
 
+def get_instantiation_lines_for_output_params(output_parameters):
+    """Gets the lines of code for instantiation of output parameters."""
+    instantiation_lines = []
+    for param in output_parameters:
+        if param.has_explicit_buffer_size:
+            if (
+                param.size.mechanism == "passed-in" or param.size.mechanism == "passed-in-by-ptr"
+            ) and param.is_list:
+                instantiation_lines.append(
+                    f"{param.parameter_name} = numpy.zeros({param.size.value}, dtype=numpy.{param.ctypes_data_type})"
+                )
+        else:
+            instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
+    return instantiation_lines
+
+
 def get_interpreter_params(func):
     """Gets interpreter parameters for the function."""
     return (p for p in func.base_parameters if p.direction == "in")
