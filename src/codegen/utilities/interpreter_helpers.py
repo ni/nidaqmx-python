@@ -34,11 +34,6 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetSyncPulseTimeWhen",
 ]
 
-LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
-    "RegisterSignalEvent",
-    "RegisterEveryNSamplesEvent",
-    "RegisterDoneEvent",
-]
 
 def get_interpreter_functions(metadata, is_base_interpreter=False):
     """Converts the scrapigen metadata into a list of functions."""
