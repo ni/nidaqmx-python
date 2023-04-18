@@ -12,7 +12,7 @@ function_callback = f'{re.sub("register", "", function.function_name)}_callbacks
 %for parameter in function.base_parameters:
     %if parameter.parameter_name == "callback_function":
         ${parameter.type} = ctypes.CFUNCTYPE(
-            ${', '.join(get_callback_param_data_types(parameter.callback_params)) | wrap(16, 20)})        
+            ${', '.join(get_callback_param_data_types(parameter.callback_params)) | wrap(12)})        
         <% 
             callback_func_param = parameter.type
         %>
@@ -27,7 +27,7 @@ function_callback = f'{re.sub("register", "", function.function_name)}_callbacks
                 callback_method_ptr = ${callback_func_param}(callback_function)
                 self.${function_callback}.append(callback_method_ptr)
                 cfunc.argtypes = [
-                    ${', '.join(arguments_type) | wrap(16, 20)}]
+                    ${', '.join(arguments_type) | wrap(20)}]
             else:
                 del self.${function_callback}[:]
                 callback_method_ptr = None
@@ -37,7 +37,7 @@ for arg_type in arguments_type:
         arguments_type = list(map(lambda x:x.replace(arg_type, "ctypes.c_void_p"), arguments_type))
 %>\
                 cfunc.argtypes = [
-                    ${', '.join(arguments_type) | wrap(16, 20)}]
+                    ${', '.join(arguments_type) | wrap(20)}]
         <%
             function_call_args = generate_interpreter_function_call_args(function)
         %>
