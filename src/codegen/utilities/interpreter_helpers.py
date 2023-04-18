@@ -41,9 +41,7 @@ def get_interpreter_functions(metadata, is_base_interpreter=False):
     functions_metadata = []
     for function_name, function_data in all_functions.items():
         if not is_base_interpreter:
-            if (
-                not is_python_codegen_method(function_data)
-            ):
+            if not is_python_codegen_method(function_data):
                 continue
         if function_name in INTERPRETER_IGNORED_FUNCTIONS:
             continue
@@ -143,7 +141,7 @@ def get_output_parameter_names(func):
 def get_c_function_call_template(func):
     """Gets the template to use for generating the logic of calling the c functions."""
     if func.stream_response:
-       return "/event_function_call.py.mako"
+        return "/event_function_call.py.mako"
     return "/default_c_function_call.py.mako"
 
 
