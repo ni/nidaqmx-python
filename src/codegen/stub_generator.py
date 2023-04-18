@@ -1,5 +1,6 @@
 """Generates gRPC Python stubs from proto files."""
 
+import os
 import pathlib
 from typing import Sequence
 
@@ -36,6 +37,7 @@ def generate_python_files(
     stubs_path: pathlib.Path, proto_path: pathlib.Path, proto_files: Sequence[pathlib.Path]
 ):
     """Generate python files from .proto files with protoc."""
+    os.makedirs(stubs_path, exist_ok=True)
     arguments = [
         "protoc",
         f"--proto_path={str(proto_path)}",
