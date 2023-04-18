@@ -9,8 +9,7 @@ class Function:
 
     def __init__(self, function_name, function_metadata):
         """Structure for storing function metadata from scrapigen."""
-        if "python_description" in function_metadata:
-            self._description = function_metadata["python_description"]
+        self._description = function_metadata.get("python_description", "")
         self._function_name = function_name
         self._is_python_factory = function_metadata.get("is_python_factory", False)
         if "python_class_name" in function_metadata:
@@ -38,7 +37,7 @@ class Function:
                     self._parameters.append(FunctionParameter(parameter))
 
                     if parameter["direction"] == "out":
-                        self._output_parameters.append(self._parameters)
+                        self._output_parameters.append(self._parameters[-1])
 
         self._adaptor_parameter = None
         if "adaptor_parameter" in function_metadata:
