@@ -20,13 +20,14 @@ class Triggers:
     """
     Represents the trigger configurations for a DAQmx task.
     """
-    def __init__(self, task_handle):
+    def __init__(self, task_handle, interpreter):
         self._handle = task_handle
-        self._arm_start_trigger = ArmStartTrigger(self._handle)
-        self._handshake_trigger = HandshakeTrigger(self._handle)
-        self._pause_trigger = PauseTrigger(self._handle)
-        self._reference_trigger = ReferenceTrigger(self._handle)
-        self._start_trigger = StartTrigger(self._handle)
+        self._interpreter = interpreter
+        self._arm_start_trigger = ArmStartTrigger(self._handle, self._interpreter)
+        self._handshake_trigger = HandshakeTrigger(self._handle, self._interpreter)
+        self._pause_trigger = PauseTrigger(self._handle, self._interpreter)
+        self._reference_trigger = ReferenceTrigger(self._handle, self._interpreter)
+        self._start_trigger = StartTrigger(self._handle, self._interpreter)
 
     @property
     def arm_start_trigger(self):

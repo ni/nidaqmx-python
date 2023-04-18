@@ -1,6 +1,7 @@
 import re
 
 from nidaqmx.errors import DaqError
+from nidaqmx._library_interpreter import LibraryInterpreter
 
 # Method logic adapted from
 # //Measurements/Infrastructure/dmxf/trunk/2.5/source/nimuck/parseUtilities.cpp
@@ -204,3 +205,13 @@ def unflatten_channel_string(channel_names):
             channel_list_to_return.extend(colon_expanded_channel)
 
     return channel_list_to_return
+
+
+def _select_interpreter(grpc_options = None, interpreter = None):
+    if interpreter:
+        return interpreter
+    else:
+        if grpc_options:
+            return None
+        else:
+            return LibraryInterpreter()

@@ -19,16 +19,18 @@ class Channel:
     """
     __slots__ = ['_handle', '_name', '__weakref__']
 
-    def __init__(self, task_handle, virtual_or_physical_name):
+    def __init__(self, task_handle, virtual_or_physical_name, interpreter):
         """
         Args:
             task_handle (TaskHandle): Specifies the handle of the task that
                 this channel is associated with.
             virtual_or_physical_name (str): Specifies the flattened virtual or
                 physical name of a channel.
+            interpreter (BaseInterpreter): Specifies the interpreter instance.
         """
         self._handle = task_handle
         self._name = virtual_or_physical_name
+        self._interpreter = interpreter
 
     def __add__(self, other):
         if not isinstance(other, self.__class__):
@@ -86,7 +88,7 @@ class Channel:
         return f'Channel(name={self.name})'
 
     @staticmethod
-    def _factory(task_handle, virtual_or_physical_name):
+    def _factory(task_handle, virtual_or_physical_name, interpreter):
         """
         Implements the factory pattern for nidaqmx channels.
 
@@ -95,6 +97,7 @@ class Channel:
                 this channel is associated with.
             virtual_or_physical_name (str): Specifies the flattened virtual
                 or physical name of a channel.
+            interpreter (BaseInterpreter): Specifies the interpreter instance.
         Returns:
             nidaqmx._task_modules.channels.channel.Channel:
 
@@ -118,22 +121,22 @@ class Channel:
 
         if channel_type == ChannelType.ANALOG_INPUT:
             return nidaqmx._task_modules.channels.AIChannel(
-                task_handle, virtual_or_physical_name)
+                task_handle, virtual_or_physical_name, interpreter)
         elif channel_type == ChannelType.ANALOG_OUTPUT:
             return nidaqmx._task_modules.channels.AOChannel(
-                task_handle, virtual_or_physical_name)
+                task_handle, virtual_or_physical_name, interpreter)
         elif channel_type == ChannelType.COUNTER_INPUT:
             return nidaqmx._task_modules.channels.CIChannel(
-                task_handle, virtual_or_physical_name)
+                task_handle, virtual_or_physical_name, interpreter)
         elif channel_type == ChannelType.COUNTER_OUTPUT:
             return nidaqmx._task_modules.channels.COChannel(
-                task_handle, virtual_or_physical_name)
+                task_handle, virtual_or_physical_name, interpreter)
         elif channel_type == ChannelType.DIGITAL_INPUT:
             return nidaqmx._task_modules.channels.DIChannel(
-                task_handle, virtual_or_physical_name)
+                task_handle, virtual_or_physical_name, interpreter)
         elif channel_type == ChannelType.DIGITAL_OUTPUT:
             return nidaqmx._task_modules.channels.DOChannel(
-                task_handle, virtual_or_physical_name)
+                task_handle, virtual_or_physical_name, interpreter)
 
     @property
     def name(self):

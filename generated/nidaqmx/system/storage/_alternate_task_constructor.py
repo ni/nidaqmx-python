@@ -1,5 +1,7 @@
 from nidaqmx.task import Task
 
+from nidaqmx import utils
+
 
 class _TaskAlternateConstructor(Task):
     """
@@ -22,7 +24,9 @@ class _TaskAlternateConstructor(Task):
                 Task object.
         """
         self._handle = task_handle
-        self._initialize(self._handle)
+        self._interpreter = utils._select_interpreter()
+
+        self._initialize(self._handle, self._interpreter)
 
         # Use meta-programming to change the type of this object to Task,
         # so the user isn't confused when doing introspection. Not pretty,
