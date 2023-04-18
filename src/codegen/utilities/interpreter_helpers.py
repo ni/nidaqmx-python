@@ -34,12 +34,24 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetSyncPulseTimeWhen",
 ]
 
+LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
+    "RegisterSignalEvent",
+    "RegisterEveryNSamplesEvent",
+    "RegisterDoneEvent",
+]
 
-def get_interpreter_functions(metadata):
+
+def get_interpreter_functions(metadata, is_base_interpreter=False):
     """Converts the scrapigen metadata into a list of functions."""
     all_functions = deepcopy(metadata["functions"])
     functions_metadata = []
     for function_name, function_data in all_functions.items():
+        if not is_base_interpreter:
+            if (
+                not is_python_codegen_method(function_data)
+                or function_name in LIBRARY_INTERPRETER_IGNORED_FUNCTIONS
+            ):
+                continue
         if function_name in INTERPRETER_IGNORED_FUNCTIONS:
             continue
         function_data["c_function_name"] = function_name
@@ -57,6 +69,20 @@ def get_interpreter_functions(metadata):
         )
 
     return sorted(functions_metadata, key=lambda x: x._function_name)
+
+
+def generate_interpreter_function_call_args(function_metadata):
+    """Gets function call arguments."""
+    function_call_args = []
+    for param in function_metadata.base_parameters:
+        if param.direction == "in":
+            function_call_args.append(param.parameter_name)
+            if param.has_explicit_buffer_size:
+                function_call_args.append(f"len({param.parameter_name})")
+        else:
+            function_call_args.append(f"ctypes.byref({param.parameter_name})")
+
+    return function_call_args
 
 
 def get_interpreter_parameter_signature(is_python_factory, params):
@@ -101,3 +127,26 @@ def is_skippable_param(param: dict) -> bool:
     ):
         return True
     return False
+
+
+def is_python_codegen_method(func: dict) -> bool:
+    """Returns True if the method is a python codegen method."""
+    if "python_codegen_method" in func:
+        return func["python_codegen_method"] != "no"
+    return True
+
+
+def get_output_params(func):
+    """Gets input parameters for the function."""
+    return (p for p in func.base_parameters if p.direction == "out")
+
+
+def get_output_parameter_names(func):
+    """Gets the names of the output parameters of the given function."""
+    output_parameters = get_output_params(func)
+    return [p.parameter_name for p in output_parameters]
+
+
+def get_c_function_call_template(func):
+    """Gets the template to use for generating the logic of calling the c functions."""
+    return "/default_c_function_call.py.mako"
