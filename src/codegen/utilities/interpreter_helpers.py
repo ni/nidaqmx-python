@@ -148,5 +148,5 @@ def get_c_function_call_template(func):
 
 
 def get_callback_param_data_types(params):
-    """Gets the data types for call back function parameters"""
+    """Gets the data types for call back function parameters."""
     return [p["ctypes_data_type"] for p in params]

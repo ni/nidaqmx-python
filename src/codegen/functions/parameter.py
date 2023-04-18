@@ -107,8 +107,7 @@ class Parameter:
     def size(self):
         """Dict: Defines the array parameter's mechanism and value."""
         return self._size
-        
-    
+
     @property
     def callback_params(self):
         """Dict: Defines the params for callback functions."""

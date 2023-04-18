@@ -109,9 +109,8 @@ class Function:
     def base_parameters(self):
         """List of all parameters: The list of all in the function."""
         return self._base_parameters
-    
-    
+
     @property
     def stream_response(self):
-        """bool: Defines if the function uses server streaming to send multiple responses. """
+        """bool: Defines if the function uses server streaming to send multiple responses."""
         return self._stream_response
