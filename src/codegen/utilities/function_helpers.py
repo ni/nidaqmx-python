@@ -40,7 +40,7 @@ def get_functions(metadata, class_name=""):
     all_functions = deepcopy(metadata["functions"])
     functions_metadata = []
     for function_name, function_data in all_functions.items():
-        if "pythod_codegen_method" in function_data or function_name in EXCLUDED_FUNCTIONS:
+        if "python_codegen_method" in function_data or function_name in EXCLUDED_FUNCTIONS:
             continue
         if (
             "python_class_name" in all_functions[function_name]

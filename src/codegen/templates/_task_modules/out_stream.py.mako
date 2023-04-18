@@ -25,9 +25,10 @@ class OutStream:
     used in conjunction with writer classes to write samples to an
     NI-DAQmx task.
     """
-    def __init__(self, task):
+    def __init__(self, task, interpreter):
         self._task = task
         self._handle = task._handle
+        self._interpreter = interpreter
         self._auto_start = False
         self._timeout = 10.0
 

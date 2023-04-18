@@ -15,8 +15,9 @@ class HandshakeTrigger:
     """
     Represents the handshake trigger configurations for a DAQmx task.
     """
-    def __init__(self, task_handle):
+    def __init__(self, task_handle, interpreter):
         self._handle = task_handle
+        self._interpreter = interpreter
 
     @property
     def interlocked_asserted_lvl(self):

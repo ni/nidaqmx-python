@@ -27,8 +27,9 @@ class ExportSignals:
     """
     Represents the exported signal configurations for a DAQmx task.
     """
-    def __init__(self, task_handle):
+    def __init__(self, task_handle, interpreter):
         self._handle = task_handle
+        self._interpreter = interpreter
 
 <%namespace name="property_template" file="/property_template.py.mako"/>\
 %for attribute in attributes:

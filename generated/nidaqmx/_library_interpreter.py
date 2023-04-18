@@ -48,8 +48,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
 
     def add_network_device(
-            self, ip_address, device_name_out, device_name,
-            attempt_reservation, timeout):
+            self, ip_address, device_name, attempt_reservation, timeout):
         cfunc = lib_importer.windll.DAQmxAddNetworkDevice
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -65,7 +64,7 @@ class LibraryInterpreter(BaseInterpreter):
         return device_name_out
 
     def are_configured_cdaq_sync_ports_disconnected(
-            self, disconnected_ports_exist, chassis_devices_ports, timeout):
+            self, chassis_devices_ports, timeout):
         cfunc = lib_importer.windll.DAQmxAreConfiguredCDAQSyncPortsDisconnected
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -94,8 +93,8 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
 
     def calculate_reverse_poly_coeff(
-            self, forward_coeffs, num_forward_coeffs_in, reverse_coeffs,
-            min_val_x, max_val_x, num_points_to_compute, reverse_poly_order):
+            self, forward_coeffs, num_forward_coeffs_in, min_val_x, max_val_x,
+            num_points_to_compute, reverse_poly_order):
         cfunc = lib_importer.windll.DAQmxCalculateReversePolyCoeff
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -1734,7 +1733,7 @@ class LibraryInterpreter(BaseInterpreter):
             pre_scaled_units, scaled_units)
         check_for_error(error_code)
 
-    def create_task(self, task, session_name):
+    def create_task(self, session_name):
         cfunc = lib_importer.windll.DAQmxCreateTask
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2103,7 +2102,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
 
     def create_watchdog_timer_task_ex(
-            self, device_name, session_name, task, timeout):
+            self, device_name, session_name, timeout):
         cfunc = lib_importer.windll.DAQmxCreateWatchdogTimerTaskEx
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2179,7 +2178,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
 
     def get_analog_power_up_states(
-            self, device_name, channel_name, state, channel_type):
+            self, device_name, channel_name, channel_type):
         cfunc = lib_importer.cdll.DAQmxGetAnalogPowerUpStates
 
         error_code = cfunc(
@@ -2189,7 +2188,7 @@ class LibraryInterpreter(BaseInterpreter):
         return state, power_up_states
 
     def get_analog_power_up_states_with_output_type(
-            self, channel_names, state_array, channel_type_array, array_size):
+            self, channel_names, array_size):
         cfunc = lib_importer.cdll.DAQmxGetAnalogPowerUpStatesWithOutputType
 
         error_code = cfunc(
@@ -2198,7 +2197,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return state_array, channel_type_array
 
-    def get_auto_configured_cdaq_sync_connections(self, port_list):
+    def get_auto_configured_cdaq_sync_connections(self):
         cfunc = lib_importer.windll.DAQmxGetAutoConfiguredCDAQSyncConnections
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2211,8 +2210,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return port_list
 
-    def get_digital_logic_family_power_up_state(
-            self, device_name, logic_family):
+    def get_digital_logic_family_power_up_state(self, device_name):
         cfunc = lib_importer.windll.DAQmxGetDigitalLogicFamilyPowerUpState
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2225,7 +2223,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return logic_family
 
-    def get_digital_power_up_states(self, device_name, channel_name, state):
+    def get_digital_power_up_states(self, device_name, channel_name):
         cfunc = lib_importer.cdll.DAQmxGetDigitalPowerUpStates
 
         error_code = cfunc(
@@ -2234,8 +2232,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return state, power_up_states
 
-    def get_digital_pull_up_pull_down_states(
-            self, device_name, channel_name, state):
+    def get_digital_pull_up_pull_down_states(self, device_name, channel_name):
         cfunc = lib_importer.cdll.DAQmxGetDigitalPullUpPullDownStates
 
         error_code = cfunc(
@@ -2244,7 +2241,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return state, pull_up_pull_down_states
 
-    def get_disconnected_cdaq_sync_ports(self, port_list):
+    def get_disconnected_cdaq_sync_ports(self):
         cfunc = lib_importer.windll.DAQmxGetDisconnectedCDAQSyncPorts
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2257,7 +2254,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return port_list
 
-    def is_task_done(self, task, is_task_done):
+    def is_task_done(self, task):
         cfunc = lib_importer.windll.DAQmxIsTaskDone
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2270,7 +2267,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return is_task_done
 
-    def load_task(self, session_name, task):
+    def load_task(self, session_name):
         cfunc = lib_importer.windll.DAQmxLoadTask
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2284,8 +2281,7 @@ class LibraryInterpreter(BaseInterpreter):
         return task
 
     def read_analog_f64(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         cfunc = lib_importer.windll.DAQmxReadAnalogF64
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2302,7 +2298,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
-    def read_analog_scalar_f64(self, task, timeout, value):
+    def read_analog_scalar_f64(self, task, timeout):
         cfunc = lib_importer.windll.DAQmxReadAnalogScalarF64
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2316,8 +2312,7 @@ class LibraryInterpreter(BaseInterpreter):
         return value
 
     def read_binary_i16(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         cfunc = lib_importer.windll.DAQmxReadBinaryI16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2334,8 +2329,7 @@ class LibraryInterpreter(BaseInterpreter):
         return read_array, samps_per_chan_read
 
     def read_binary_i32(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         cfunc = lib_importer.windll.DAQmxReadBinaryI32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2352,8 +2346,7 @@ class LibraryInterpreter(BaseInterpreter):
         return read_array, samps_per_chan_read
 
     def read_binary_u16(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         cfunc = lib_importer.windll.DAQmxReadBinaryU16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2371,8 +2364,7 @@ class LibraryInterpreter(BaseInterpreter):
         return read_array, samps_per_chan_read
 
     def read_binary_u32(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         cfunc = lib_importer.windll.DAQmxReadBinaryU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2389,9 +2381,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
-    def read_counter_f64(
-            self, task, num_samps_per_chan, timeout, read_array,
-            samps_per_chan_read):
+    def read_counter_f64(self, task, num_samps_per_chan, timeout, read_array):
         cfunc = lib_importer.windll.DAQmxReadCounterF64
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2409,8 +2399,7 @@ class LibraryInterpreter(BaseInterpreter):
         return read_array, samps_per_chan_read
 
     def read_counter_f64_ex(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         cfunc = lib_importer.windll.DAQmxReadCounterF64Ex
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2427,7 +2416,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
-    def read_counter_scalar_f64(self, task, timeout, value):
+    def read_counter_scalar_f64(self, task, timeout):
         cfunc = lib_importer.windll.DAQmxReadCounterScalarF64
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2440,7 +2429,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return value
 
-    def read_counter_scalar_u32(self, task, timeout, value):
+    def read_counter_scalar_u32(self, task, timeout):
         cfunc = lib_importer.windll.DAQmxReadCounterScalarU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2453,9 +2442,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return value
 
-    def read_counter_u32(
-            self, task, num_samps_per_chan, timeout, read_array,
-            samps_per_chan_read):
+    def read_counter_u32(self, task, num_samps_per_chan, timeout, read_array):
         cfunc = lib_importer.windll.DAQmxReadCounterU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2473,8 +2460,7 @@ class LibraryInterpreter(BaseInterpreter):
         return read_array, samps_per_chan_read
 
     def read_counter_u32_ex(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         cfunc = lib_importer.windll.DAQmxReadCounterU32Ex
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2493,7 +2479,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def read_ctr_freq(
             self, task, num_samps_per_chan, timeout, interleaved,
-            read_array_frequency, read_array_duty_cycle, samps_per_chan_read):
+            read_array_frequency, read_array_duty_cycle):
         cfunc = lib_importer.windll.DAQmxReadCtrFreq
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2513,7 +2499,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return read_array_frequency, read_array_duty_cycle, samps_per_chan_read
 
-    def read_ctr_freq_scalar(self, task, timeout, frequency, duty_cycle):
+    def read_ctr_freq_scalar(self, task, timeout):
         cfunc = lib_importer.windll.DAQmxReadCtrFreqScalar
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2529,7 +2515,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def read_ctr_ticks(
             self, task, num_samps_per_chan, timeout, interleaved,
-            read_array_high_ticks, read_array_low_ticks, samps_per_chan_read):
+            read_array_high_ticks, read_array_low_ticks):
         cfunc = lib_importer.windll.DAQmxReadCtrTicks
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2549,7 +2535,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return read_array_high_ticks, read_array_low_ticks, samps_per_chan_read
 
-    def read_ctr_ticks_scalar(self, task, timeout, high_ticks, low_ticks):
+    def read_ctr_ticks_scalar(self, task, timeout):
         cfunc = lib_importer.windll.DAQmxReadCtrTicksScalar
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2565,7 +2551,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def read_ctr_time(
             self, task, num_samps_per_chan, timeout, interleaved,
-            read_array_high_time, read_array_low_time, samps_per_chan_read):
+            read_array_high_time, read_array_low_time):
         cfunc = lib_importer.windll.DAQmxReadCtrTime
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2585,7 +2571,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return read_array_high_time, read_array_low_time, samps_per_chan_read
 
-    def read_ctr_time_scalar(self, task, timeout, high_time, low_time):
+    def read_ctr_time_scalar(self, task, timeout):
         cfunc = lib_importer.windll.DAQmxReadCtrTimeScalar
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2599,8 +2585,7 @@ class LibraryInterpreter(BaseInterpreter):
         return high_time, low_time
 
     def read_digital_lines(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read, num_bytes_per_samp):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         cfunc = lib_importer.windll.DAQmxReadDigitalLines
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2618,7 +2603,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return read_array, samps_per_chan_read, num_bytes_per_samp
 
-    def read_digital_scalar_u32(self, task, timeout, value):
+    def read_digital_scalar_u32(self, task, timeout):
         cfunc = lib_importer.windll.DAQmxReadDigitalScalarU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2632,8 +2617,7 @@ class LibraryInterpreter(BaseInterpreter):
         return value
 
     def read_digital_u16(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         cfunc = lib_importer.windll.DAQmxReadDigitalU16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2651,8 +2635,7 @@ class LibraryInterpreter(BaseInterpreter):
         return read_array, samps_per_chan_read
 
     def read_digital_u32(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         cfunc = lib_importer.windll.DAQmxReadDigitalU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2670,8 +2653,7 @@ class LibraryInterpreter(BaseInterpreter):
         return read_array, samps_per_chan_read
 
     def read_digital_u8(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         cfunc = lib_importer.windll.DAQmxReadDigitalU8
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2687,7 +2669,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
-    def read_power_scalar_f64(self, task, timeout, voltage, current):
+    def read_power_scalar_f64(self, task, timeout):
         cfunc = lib_importer.windll.DAQmxReadPowerScalarF64
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2700,90 +2682,6 @@ class LibraryInterpreter(BaseInterpreter):
             task, timeout, ctypes.byref(voltage), ctypes.byref(current))
         check_for_error(error_code)
         return voltage, current
-
-    def register_done_event(
-            self, task, options, callback_function, callback_data):
-
-        DAQmxDoneEventCallbackPtr = ctypes.CFUNCTYPE(
-            lib_importer.task_handle, ctypes.c_int)        
-        
-        cfunc = lib_importer.windll.DAQmxRegisterDoneEvent
-        
-        with cfunc.arglock:
-            if callback_function is not None:
-                callback_method_ptr = DAQmxDoneEventCallbackPtr(callback_function)
-                self._done_event_callbacks.append(callback_method_ptr)
-                cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_uint,
-                    DAQmxDoneEventCallbackPtr, ctypes.c_void_p]
-            else:
-                del self._done_event_callbacks[:]
-                callback_method_ptr = None
-                cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_uint, ctypes.c_void_p,
-                    ctypes.c_void_p]
-        
-            error_code = cfunc(
-                task, options, callback_function, callback_data)
-        check_for_error(error_code)
-
-
-    def register_every_n_samples_event(
-            self, task, every_n_samples_event_type, n_samples, options,
-            callback_function, callback_data):
-
-        DAQmxEveryNSamplesEventCallbackPtr = ctypes.CFUNCTYPE(
-            lib_importer.task_handle, ctypes.c_int, ctypes.c_uint)        
-        
-        cfunc = lib_importer.windll.DAQmxRegisterEveryNSamplesEvent
-        
-        with cfunc.arglock:
-            if callback_function is not None:
-                callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr(callback_function)
-                self._every_n_samples_event_callbacks.append(callback_method_ptr)
-                cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-                    ctypes.c_uint, DAQmxEveryNSamplesEventCallbackPtr,
-                    ctypes.c_void_p]
-            else:
-                del self._every_n_samples_event_callbacks[:]
-                callback_method_ptr = None
-                cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-                    ctypes.c_uint, ctypes.c_void_p, ctypes.c_void_p]
-        
-            error_code = cfunc(
-                task, every_n_samples_event_type, n_samples, options,
-                callback_function, callback_data)
-        check_for_error(error_code)
-
-
-    def register_signal_event(
-            self, task, signal_id, options, callback_function, callback_data):
-
-        DAQmxSignalEventCallbackPtr = ctypes.CFUNCTYPE(
-            lib_importer.task_handle, ctypes.c_int)        
-        
-        cfunc = lib_importer.windll.DAQmxRegisterSignalEvent
-        
-        with cfunc.arglock:
-            if callback_function is not None:
-                callback_method_ptr = DAQmxSignalEventCallbackPtr(callback_function)
-                self._signal_event_callbacks.append(callback_method_ptr)
-                cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-                    DAQmxSignalEventCallbackPtr, ctypes.c_void_p]
-            else:
-                del self._signal_event_callbacks[:]
-                callback_method_ptr = None
-                cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-                    ctypes.c_void_p, ctypes.c_void_p]
-        
-            error_code = cfunc(
-                task, signal_id, options, callback_function, callback_data)
-        check_for_error(error_code)
-
 
     def remove_cdaq_sync_connection(self, port_list):
         cfunc = lib_importer.windll.DAQmxRemoveCDAQSyncConnection
@@ -2963,7 +2861,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def write_analog_f64(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         cfunc = lib_importer.windll.DAQmxWriteAnalogF64
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2993,7 +2891,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def write_binary_i16(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         cfunc = lib_importer.windll.DAQmxWriteBinaryI16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3011,7 +2909,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def write_binary_i32(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         cfunc = lib_importer.windll.DAQmxWriteBinaryI32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3029,7 +2927,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def write_binary_u16(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         cfunc = lib_importer.windll.DAQmxWriteBinaryU16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3047,7 +2945,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def write_binary_u32(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         cfunc = lib_importer.windll.DAQmxWriteBinaryU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3065,7 +2963,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def write_ctr_freq(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            frequency, duty_cycle, num_samps_per_chan_written):
+            frequency, duty_cycle):
         cfunc = lib_importer.windll.DAQmxWriteCtrFreq
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3099,7 +2997,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def write_ctr_ticks(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            high_ticks, low_ticks, num_samps_per_chan_written):
+            high_ticks, low_ticks):
         cfunc = lib_importer.windll.DAQmxWriteCtrTicks
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3133,7 +3031,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def write_ctr_time(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            high_time, low_time, num_samps_per_chan_written):
+            high_time, low_time):
         cfunc = lib_importer.windll.DAQmxWriteCtrTime
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3167,7 +3065,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def write_digital_lines(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         cfunc = lib_importer.windll.DAQmxWriteDigitalLines
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3197,7 +3095,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def write_digital_u16(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         cfunc = lib_importer.windll.DAQmxWriteDigitalU16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3215,7 +3113,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def write_digital_u32(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         cfunc = lib_importer.windll.DAQmxWriteDigitalU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3233,7 +3131,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def write_digital_u8(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         cfunc = lib_importer.windll.DAQmxWriteDigitalU8
         if cfunc.argtypes is None:
             with cfunc.arglock:

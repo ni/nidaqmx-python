@@ -1,6 +1,7 @@
 import ctypes
 import numpy
 import warnings
+from nidaqmx import utils
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx._task_modules.channels.channel import Channel
@@ -77,7 +78,7 @@ class Task:
                 results in an error.
         """
         self._handle = lib_importer.task_handle(0)
-
+        self._interpreter = utils._select_interpreter()
         cfunc = lib_importer.windll.DAQmxCreateTask
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -90,7 +91,7 @@ class Task:
             new_task_name, ctypes.byref(self._handle))
         check_for_error(error_code)
 
-        self._initialize(self._handle)
+        self._initialize(self._handle, self._interpreter)
 
     def __del__(self):
         if self._handle:
@@ -358,7 +359,7 @@ class Task:
         """
         return self._triggers
 
-    def _initialize(self, task_handle):
+    def _initialize(self, task_handle, interpreter):
         """
         Instantiates and populates various attributes used by this task.
 
@@ -369,17 +370,17 @@ class Task:
         # double closes.
         self._saved_name = self.name
 
-        self._ai_channels = AIChannelCollection(task_handle)
-        self._ao_channels = AOChannelCollection(task_handle)
-        self._ci_channels = CIChannelCollection(task_handle)
-        self._co_channels = COChannelCollection(task_handle)
-        self._di_channels = DIChannelCollection(task_handle)
-        self._do_channels = DOChannelCollection(task_handle)
-        self._export_signals = ExportSignals(task_handle)
-        self._in_stream = InStream(self)
-        self._timing = Timing(task_handle)
-        self._triggers = Triggers(task_handle)
-        self._out_stream = OutStream(self)
+        self._ai_channels = AIChannelCollection(task_handle, interpreter)
+        self._ao_channels = AOChannelCollection(task_handle, interpreter)
+        self._ci_channels = CIChannelCollection(task_handle, interpreter)
+        self._co_channels = COChannelCollection(task_handle, interpreter)
+        self._di_channels = DIChannelCollection(task_handle, interpreter)
+        self._do_channels = DOChannelCollection(task_handle, interpreter)
+        self._export_signals = ExportSignals(task_handle, interpreter)
+        self._in_stream = InStream(self, interpreter)
+        self._timing = Timing(task_handle, interpreter)
+        self._triggers = Triggers(task_handle, interpreter)
+        self._out_stream = OutStream(self, interpreter)
 
         # These lists keep C callback objects in memory as ctypes doesn't.
         # Program will crash if callback is made after object is garbage

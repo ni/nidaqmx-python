@@ -1,6 +1,6 @@
 <%
-    from codegen.utilities.interpreter_helpers import get_interpreter_functions,get_interpreter_parameter_signature,get_c_function_call_template, get_output_parameter_names
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
+    from codegen.utilities.interpreter_helpers import get_interpreter_functions,get_interpreter_parameter_signature,get_c_function_call_template, get_output_parameter_names, get_interpreter_params
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
     functions = get_interpreter_functions(data)
 %>\
@@ -30,7 +30,8 @@ class LibraryInterpreter(BaseInterpreter):
         
 % for func in functions:
 <%
-    sorted_params = order_function_parameters_by_optional(func.base_parameters)
+    params = get_interpreter_params(func)
+    sorted_params = order_function_parameters_by_optional(params)
     parameter_signature = get_interpreter_parameter_signature(is_python_factory, sorted_params)
     output_parameters_names = get_output_parameter_names(func)
     %>
