@@ -185,4 +185,6 @@ def get_output_parameter_names(func):
 
 def get_c_function_call_template(func):
     """Gets the template to use for generating the logic of calling the c functions."""
+    if has_parameter_with_ivi_dance_size_mechanism(func):
+        return "/double_c_function_call.py.mako"
     return "/default_c_function_call.py.mako"

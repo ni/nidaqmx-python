@@ -11,7 +11,7 @@ import numpy
 
 from nidaqmx._base_interpreter import BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer
-from nidaqmx.errors import check_for_error
+from nidaqmx.errors import check_for_error, is_string_buffer_too_small, is_array_buffer_too_small
 
 class LibraryInterpreter(BaseInterpreter):
     """
