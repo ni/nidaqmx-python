@@ -2683,6 +2683,90 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return voltage, current
 
+    def register_done_event(
+            self, task, options, callback_function, callback_data):
+
+        DAQmxDoneEventCallbackPtr = ctypes.CFUNCTYPE(
+            lib_importer.task_handle, ctypes.c_int)        
+        
+        cfunc = lib_importer.windll.DAQmxRegisterDoneEvent
+        
+        with cfunc.arglock:
+            if callback_function is not None:
+                callback_method_ptr = DAQmxDoneEventCallbackPtr(callback_function)
+                self._done_event_callbacks.append(callback_method_ptr)
+                cfunc.argtypes = [
+                    lib_importer.task_handle, ctypes.c_uint,
+                    DAQmxDoneEventCallbackPtr, ctypes.c_void_p]
+            else:
+                del self._done_event_callbacks[:]
+                callback_method_ptr = None
+                cfunc.argtypes = [
+                    lib_importer.task_handle, ctypes.c_uint, ctypes.c_void_p,
+                    ctypes.c_void_p]
+        
+            error_code = cfunc(
+                task, options, callback_function, callback_data)
+        check_for_error(error_code)
+
+
+    def register_every_n_samples_event(
+            self, task, every_n_samples_event_type, n_samples, options,
+            callback_function, callback_data):
+
+        DAQmxEveryNSamplesEventCallbackPtr = ctypes.CFUNCTYPE(
+            lib_importer.task_handle, ctypes.c_int, ctypes.c_uint)        
+        
+        cfunc = lib_importer.windll.DAQmxRegisterEveryNSamplesEvent
+        
+        with cfunc.arglock:
+            if callback_function is not None:
+                callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr(callback_function)
+                self._every_n_samples_event_callbacks.append(callback_method_ptr)
+                cfunc.argtypes = [
+                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
+                    ctypes.c_uint, DAQmxEveryNSamplesEventCallbackPtr,
+                    ctypes.c_void_p]
+            else:
+                del self._every_n_samples_event_callbacks[:]
+                callback_method_ptr = None
+                cfunc.argtypes = [
+                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
+                    ctypes.c_uint, ctypes.c_void_p, ctypes.c_void_p]
+        
+            error_code = cfunc(
+                task, every_n_samples_event_type, n_samples, options,
+                callback_function, callback_data)
+        check_for_error(error_code)
+
+
+    def register_signal_event(
+            self, task, signal_id, options, callback_function, callback_data):
+
+        DAQmxSignalEventCallbackPtr = ctypes.CFUNCTYPE(
+            lib_importer.task_handle, ctypes.c_int)        
+        
+        cfunc = lib_importer.windll.DAQmxRegisterSignalEvent
+        
+        with cfunc.arglock:
+            if callback_function is not None:
+                callback_method_ptr = DAQmxSignalEventCallbackPtr(callback_function)
+                self._signal_event_callbacks.append(callback_method_ptr)
+                cfunc.argtypes = [
+                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
+                    DAQmxSignalEventCallbackPtr, ctypes.c_void_p]
+            else:
+                del self._signal_event_callbacks[:]
+                callback_method_ptr = None
+                cfunc.argtypes = [
+                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
+                    ctypes.c_void_p, ctypes.c_void_p]
+        
+            error_code = cfunc(
+                task, signal_id, options, callback_function, callback_data)
+        check_for_error(error_code)
+
+
     def remove_cdaq_sync_connection(self, port_list):
         cfunc = lib_importer.windll.DAQmxRemoveCDAQSyncConnection
         if cfunc.argtypes is None:
