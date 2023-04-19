@@ -35,6 +35,8 @@ class Parameter:
         if "enum" in parameter_metadata:
             self._enum = parameter_metadata.get("enum")
             self._is_enum = True
+        if "callback_params" in parameter_metadata:
+            self._callback_params = parameter_metadata.get("callback_params")
 
     @property
     def direction(self):
@@ -116,3 +118,8 @@ class Parameter:
             size_info = BufferSizeInfo(self._size.get("mechanism"), python_size_value)
             return size_info
         return None
+
+    @property
+    def callback_params(self):
+        """Dict: Defines the params for callback functions."""
+        return self._callback_params
