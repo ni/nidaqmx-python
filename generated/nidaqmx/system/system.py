@@ -96,7 +96,7 @@ class System:
         nidaqmx.system._collections.PersistedScaleCollection: Indicates
             the collection of custom scales for this DAQmx system.
         """
-        return PersistedScaleCollection()
+        return PersistedScaleCollection(self._interpreter)
 
     @property
     def tasks(self):
