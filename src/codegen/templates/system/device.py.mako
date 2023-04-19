@@ -18,7 +18,7 @@ from nidaqmx._lib import (
     c_bool32)
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
-from nidaqmx.utils import unflatten_channel_string, _select_interpreter
+from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.system._collections.physical_channel_collection import (
     AIPhysicalChannelCollection, AOPhysicalChannelCollection,
     CIPhysicalChannelCollection, COPhysicalChannelCollection,
