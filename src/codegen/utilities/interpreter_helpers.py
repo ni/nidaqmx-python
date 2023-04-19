@@ -34,6 +34,21 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetSyncPulseTimeWhen",
 ]
 
+LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
+    "RegisterSignalEvent",
+    "RegisterEveryNSamplesEvent",
+    "RegisterDoneEvent",
+]
+
+CDLL_EXEC_STYLE_VARARGS_FUNCTIONS = [
+    "set_digital_power_up_states",
+    "get_digital_power_up_states",
+    "set_digital_pull_up_pull_down_states",
+    "get_digital_pull_up_pull_down_states",
+    "set_analog_power_up_states",
+    "get_analog_power_up_states",
+]
+
 
 def get_interpreter_functions(metadata):
     """Converts the scrapigen metadata into a list of functions."""
@@ -84,6 +99,8 @@ def generate_interpreter_function_call_args(function_metadata):
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
 
+    if function_metadata.function_name in CDLL_EXEC_STYLE_VARARGS_FUNCTIONS:
+        function_call_args.append("None")
     return function_call_args
 
 
