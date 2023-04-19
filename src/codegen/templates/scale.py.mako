@@ -25,7 +25,7 @@ class Scale:
     """
     __slots__ = ['_name', '__weakref__']
 
-    def __init__(self, name, grpc_options, interpreter):
+    def __init__(self, name,*, grpc_options=None, interpreter=None):
         """
         Args:
             name (str): Specifies the name of the scale to create.
