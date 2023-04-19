@@ -156,4 +156,4 @@ class PersistedTask:
         from nidaqmx.system.storage._alternate_task_constructor import (
             _TaskAlternateConstructor)
 
-        return _TaskAlternateConstructor(task_handle, interpreter=self._interpreter)
+        return _TaskAlternateConstructor(task_handle, self._interpreter)
