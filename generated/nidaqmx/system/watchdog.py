@@ -6,6 +6,7 @@ import deprecation
 import numpy
 import warnings
 
+from nidaqmx import utils
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
 from nidaqmx.errors import (
@@ -14,7 +15,7 @@ from nidaqmx.errors import (
 from nidaqmx.system._watchdog_modules.expiration_state import ExpirationState
 from nidaqmx.system._watchdog_modules.expiration_states_collection import (
     ExpirationStatesCollection)
-from nidaqmx.utils import flatten_channel_string, _select_interpreter
+from nidaqmx.utils import flatten_channel_string
 from nidaqmx.constants import (
     Edge, TriggerType, WDTTaskAction)
 from nidaqmx.types import (
@@ -52,7 +53,7 @@ class WatchdogTask:
                 device sets the physical channels to the states you specify
                 with the digital physical channel expiration states input.
         """
-        self._interpreter = _select_interpreter(grpc_options)
+        self._interpreter = utils._select_interpreter(grpc_options)
 
         self._handle = lib_importer.task_handle(0)
 

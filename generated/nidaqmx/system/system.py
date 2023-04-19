@@ -4,6 +4,7 @@ import collections
 import ctypes
 import numpy
 
+from nidaqmx import utils
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
 from nidaqmx.errors import check_for_error, is_string_buffer_too_small
@@ -15,7 +16,7 @@ from nidaqmx.system._collections.persisted_scale_collection import (
     PersistedScaleCollection)
 from nidaqmx.system._collections.persisted_task_collection import (
     PersistedTaskCollection)
-from nidaqmx.utils import flatten_channel_string, unflatten_channel_string, _select_interpreter
+from nidaqmx.utils import flatten_channel_string, unflatten_channel_string
 from nidaqmx.constants import (
     AOPowerUpOutputBehavior, LogicFamily, PowerUpStates, ResistorState,
     SignalModifiers, WAIT_INFINITELY)
@@ -36,7 +37,7 @@ class System:
     """
 
     def __init__(self, grpc_options=None):
-        self._interpreter = _select_interpreter(grpc_options)
+        self._interpreter = utils._select_interpreter(grpc_options)
 
     @staticmethod
     def local():
