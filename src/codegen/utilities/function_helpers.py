@@ -170,7 +170,7 @@ def to_param_argtype(parameter):
             if parameter.ctypes_data_type == "ctypes.c_char_p":
                 return "ctypes_byte_str"
             else:
-                return parameter.ctypes_data_type
+                return parameter.ctypes_data_type or parameter.python_data_type
         else:
             if parameter.ctypes_data_type == "ctypes.c_char_p":
                 return parameter.ctypes_data_type

@@ -16,6 +16,7 @@ class Function:
             self._python_class_name = function_metadata["python_class_name"]
         self._calling_convention = function_metadata["calling_convention"]
         self._return_type = function_metadata["returns"]
+        self._stream_response = function_metadata.get("stream_response", False)
         self._handle_parameter = None
         if "handle_parameter" in function_metadata:
             self._handle_parameter = Parameter(
@@ -108,3 +109,8 @@ class Function:
     def base_parameters(self):
         """List of all parameters: The list of all in the function."""
         return self._base_parameters
+
+    @property
+    def stream_response(self):
+        """bool: Defines if the function uses server streaming to send multiple responses."""
+        return self._stream_response
