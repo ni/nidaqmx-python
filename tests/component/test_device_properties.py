@@ -1,8 +1,44 @@
 """Tests for validating device properties for different basic data types."""
 import pytest
 
+from nidaqmx import DaqError
 from nidaqmx.constants import BusType, TriggerUsage
+from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system import Device
+
+
+def test__constructed_device__get_property__returns_value():
+    """Test construction."""
+    device = Device("bridgeTester")
+
+    assert device.product_type == "PXIe-4331"
+
+
+def test__nonexistent_device__get_property__raises_invalid_device_id():
+    """Test construction."""
+    device = Device("NonexistentDevice")
+
+    with pytest.raises(DaqError) as exc_info:
+        _ = device.product_type
+
+    assert exc_info.value.error_code == DAQmxErrors.INVALID_DEVICE_ID
+
+
+def test__devices_with_same_name__compare__equal():
+    """Test comparison."""
+    device1 = Device("bridgeTester")
+    device2 = Device("bridgeTester")
+
+    assert device1 is not device2
+    assert device1 == device2
+
+
+def test__devices_with_different_names__compare__not_equal():
+    """Test comparison."""
+    device1 = Device("bridgeTester")
+    device2 = Device("tsVoltageTester1")
+
+    assert device1 != device2
 
 
 @pytest.mark.parametrize("device_by_name", ["bridgeTester"], indirect=True)
