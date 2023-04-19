@@ -25,7 +25,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             response = func(request, metadata=metadata)
             error_code = response.status
             error_message = ''
-        #Todo: AB 2325876: The error handling logic will be updated.
+        #Todo: AB#2325876: The error handling logic will be updated.
         except grpc.RpcError as rpc_error:
             raise rpc_error
         return response
@@ -33,29 +33,28 @@ class GrpcStubInterpreter(BaseInterpreter):
     def add_cdaq_sync_connection(self, port_list):
         response = self._invoke(
             self._client.AddCDAQSyncConnection,
-            grpc_types.AddCDAQSyncConnectionRequest(self, port_list),
+            grpc_types.AddCDAQSyncConnectionRequest(port_list=port_list),
         )
 
     def add_global_chans_to_task(self, task, channel_names):
         response = self._invoke(
             self._client.AddGlobalChansToTask,
-            grpc_types.AddGlobalChansToTaskRequest(self, task, channel_names),
+            grpc_types.AddGlobalChansToTaskRequest(task=task, channel_names=channel_names),
         )
 
     def add_network_device(
-            self, ip_address, device_name_out, device_name,
-            attempt_reservation, timeout):
+            self, ip_address, device_name, attempt_reservation, timeout):
         response = self._invoke(
             self._client.AddNetworkDevice,
-            grpc_types.AddNetworkDeviceRequest(self, ip_address, device_name_out, device_name, attempt_reservation, timeout),
+            grpc_types.AddNetworkDeviceRequest(ip_address=ip_address, device_name=device_name, attempt_reservation=attempt_reservation, timeout=timeout),
         )
         return response.device_name_out
 
     def are_configured_cdaq_sync_ports_disconnected(
-            self, disconnected_ports_exist, chassis_devices_ports, timeout):
+            self, chassis_devices_ports, timeout):
         response = self._invoke(
             self._client.AreConfiguredCDAQSyncPortsDisconnected,
-            grpc_types.AreConfiguredCDAQSyncPortsDisconnectedRequest(self, disconnected_ports_exist, chassis_devices_ports, timeout),
+            grpc_types.AreConfiguredCDAQSyncPortsDisconnectedRequest(chassis_devices_ports=chassis_devices_ports, timeout=timeout),
         )
         return response.disconnected_ports_exist
 
@@ -63,15 +62,15 @@ class GrpcStubInterpreter(BaseInterpreter):
             self, chassis_devices_ports, timeout):
         response = self._invoke(
             self._client.AutoConfigureCDAQSyncConnections,
-            grpc_types.AutoConfigureCDAQSyncConnectionsRequest(self, chassis_devices_ports, timeout),
+            grpc_types.AutoConfigureCDAQSyncConnectionsRequest(chassis_devices_ports=chassis_devices_ports, timeout=timeout),
         )
 
     def calculate_reverse_poly_coeff(
-            self, forward_coeffs, num_forward_coeffs_in, reverse_coeffs,
-            min_val_x, max_val_x, num_points_to_compute, reverse_poly_order):
+            self, forward_coeffs, num_forward_coeffs_in, min_val_x, max_val_x,
+            num_points_to_compute, reverse_poly_order):
         response = self._invoke(
             self._client.CalculateReversePolyCoeff,
-            grpc_types.CalculateReversePolyCoeffRequest(self, forward_coeffs, num_forward_coeffs_in, reverse_coeffs, min_val_x, max_val_x, num_points_to_compute, reverse_poly_order),
+            grpc_types.CalculateReversePolyCoeffRequest(min_val_x=min_val_x, num_forward_coeffs_in=num_forward_coeffs_in, forward_coeffs=forward_coeffs, num_points_to_compute=num_points_to_compute, reverse_poly_order=reverse_poly_order, max_val_x=max_val_x),
         )
         return response.reverse_coeffs
 
@@ -80,14 +79,30 @@ class GrpcStubInterpreter(BaseInterpreter):
             trigger_level):
         response = self._invoke(
             self._client.CfgAnlgEdgeRefTrig,
-            grpc_types.CfgAnlgEdgeRefTrigRequest(self, task, trigger_source, pretrigger_samples, trigger_slope, trigger_level),
+            grpc_types.CfgAnlgEdgeRefTrigRequest(pretrigger_samples=pretrigger_samples, task=task, trigger_level=trigger_level, trigger_slope_raw=trigger_slope, trigger_source=trigger_source),
         )
 
     def cfg_anlg_edge_start_trig(
             self, task, trigger_source, trigger_slope, trigger_level):
         response = self._invoke(
             self._client.CfgAnlgEdgeStartTrig,
-            grpc_types.CfgAnlgEdgeStartTrigRequest(self, task, trigger_source, trigger_slope, trigger_level),
+            grpc_types.CfgAnlgEdgeStartTrigRequest(trigger_level=trigger_level, task=task, trigger_slope_raw=trigger_slope, trigger_source=trigger_source),
+        )
+
+    def cfg_anlg_multi_edge_ref_trig(
+            self, task, trigger_sources, trigger_slope_array,
+            trigger_level_array, pretrigger_samples, array_size):
+        response = self._invoke(
+            self._client.CfgAnlgMultiEdgeRefTrig,
+            grpc_types.CfgAnlgMultiEdgeRefTrigRequest(array_size=array_size, pretrigger_samples=pretrigger_samples, trigger_slope_array=trigger_slope_array, trigger_level_array=trigger_level_array, task=task, trigger_sources=trigger_sources),
+        )
+
+    def cfg_anlg_multi_edge_start_trig(
+            self, task, trigger_sources, trigger_slope_array,
+            trigger_level_array, array_size):
+        response = self._invoke(
+            self._client.CfgAnlgMultiEdgeStartTrig,
+            grpc_types.CfgAnlgMultiEdgeStartTrigRequest(array_size=array_size, trigger_slope_array=trigger_slope_array, trigger_level_array=trigger_level_array, task=task, trigger_sources=trigger_sources),
         )
 
     def cfg_anlg_window_ref_trig(
@@ -95,7 +110,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             pretrigger_samples, trigger_when):
         response = self._invoke(
             self._client.CfgAnlgWindowRefTrig,
-            grpc_types.CfgAnlgWindowRefTrigRequest(self, task, trigger_source, window_top, window_bottom, pretrigger_samples, trigger_when),
+            grpc_types.CfgAnlgWindowRefTrigRequest(pretrigger_samples=pretrigger_samples, trigger_when_raw=trigger_when, task=task, window_bottom=window_bottom, trigger_source=trigger_source, window_top=window_top),
         )
 
     def cfg_anlg_window_start_trig(
@@ -103,7 +118,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             trigger_when):
         response = self._invoke(
             self._client.CfgAnlgWindowStartTrig,
-            grpc_types.CfgAnlgWindowStartTrigRequest(self, task, window_top, window_bottom, trigger_source, trigger_when),
+            grpc_types.CfgAnlgWindowStartTrigRequest(trigger_when_raw=trigger_when, task=task, window_bottom=window_bottom, trigger_source=trigger_source, window_top=window_top),
         )
 
     def cfg_burst_handshaking_timing_export_clock(
@@ -112,7 +127,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             ready_event_active_level):
         response = self._invoke(
             self._client.CfgBurstHandshakingTimingExportClock,
-            grpc_types.CfgBurstHandshakingTimingExportClockRequest(self, task, sample_clk_rate, sample_clk_outp_term, sample_mode, samps_per_chan, sample_clk_pulse_polarity, pause_when, ready_event_active_level),
+            grpc_types.CfgBurstHandshakingTimingExportClockRequest(sample_mode_raw=sample_mode, sample_clk_rate=sample_clk_rate, samps_per_chan=samps_per_chan, task=task, sample_clk_pulse_polarity_raw=sample_clk_pulse_polarity, pause_when_raw=pause_when, ready_event_active_level_raw=ready_event_active_level, sample_clk_outp_term=sample_clk_outp_term),
         )
 
     def cfg_burst_handshaking_timing_import_clock(
@@ -121,7 +136,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             ready_event_active_level):
         response = self._invoke(
             self._client.CfgBurstHandshakingTimingImportClock,
-            grpc_types.CfgBurstHandshakingTimingImportClockRequest(self, task, sample_clk_rate, sample_clk_src, sample_mode, samps_per_chan, sample_clk_active_edge, pause_when, ready_event_active_level),
+            grpc_types.CfgBurstHandshakingTimingImportClockRequest(sample_mode_raw=sample_mode, sample_clk_rate=sample_clk_rate, sample_clk_src=sample_clk_src, ready_event_active_level_raw=ready_event_active_level, samps_per_chan=samps_per_chan, task=task, pause_when_raw=pause_when, sample_clk_active_edge_raw=sample_clk_active_edge),
         )
 
     def cfg_change_detection_timing(
@@ -129,20 +144,20 @@ class GrpcStubInterpreter(BaseInterpreter):
             samps_per_chan):
         response = self._invoke(
             self._client.CfgChangeDetectionTiming,
-            grpc_types.CfgChangeDetectionTimingRequest(self, task, rising_edge_chan, falling_edge_chan, sample_mode, samps_per_chan),
+            grpc_types.CfgChangeDetectionTimingRequest(sample_mode_raw=sample_mode, rising_edge_chan=rising_edge_chan, samps_per_chan=samps_per_chan, falling_edge_chan=falling_edge_chan, task=task),
         )
 
     def cfg_dig_edge_ref_trig(
             self, task, trigger_source, pretrigger_samples, trigger_edge):
         response = self._invoke(
             self._client.CfgDigEdgeRefTrig,
-            grpc_types.CfgDigEdgeRefTrigRequest(self, task, trigger_source, pretrigger_samples, trigger_edge),
+            grpc_types.CfgDigEdgeRefTrigRequest(trigger_edge_raw=trigger_edge, pretrigger_samples=pretrigger_samples, task=task, trigger_source=trigger_source),
         )
 
     def cfg_dig_edge_start_trig(self, task, trigger_source, trigger_edge):
         response = self._invoke(
             self._client.CfgDigEdgeStartTrig,
-            grpc_types.CfgDigEdgeStartTrigRequest(self, task, trigger_source, trigger_edge),
+            grpc_types.CfgDigEdgeStartTrigRequest(trigger_edge_raw=trigger_edge, task=task, trigger_source=trigger_source),
         )
 
     def cfg_dig_pattern_ref_trig(
@@ -150,26 +165,38 @@ class GrpcStubInterpreter(BaseInterpreter):
             trigger_when):
         response = self._invoke(
             self._client.CfgDigPatternRefTrig,
-            grpc_types.CfgDigPatternRefTrigRequest(self, task, trigger_source, trigger_pattern, pretrigger_samples, trigger_when),
+            grpc_types.CfgDigPatternRefTrigRequest(pretrigger_samples=pretrigger_samples, trigger_when_raw=trigger_when, task=task, trigger_pattern=trigger_pattern, trigger_source=trigger_source),
         )
 
     def cfg_dig_pattern_start_trig(
             self, task, trigger_source, trigger_pattern, trigger_when):
         response = self._invoke(
             self._client.CfgDigPatternStartTrig,
-            grpc_types.CfgDigPatternStartTrigRequest(self, task, trigger_source, trigger_pattern, trigger_when),
+            grpc_types.CfgDigPatternStartTrigRequest(trigger_when_raw=trigger_when, task=task, trigger_pattern=trigger_pattern, trigger_source=trigger_source),
         )
 
     def cfg_handshaking_timing(self, task, sample_mode, samps_per_chan):
         response = self._invoke(
             self._client.CfgHandshakingTiming,
-            grpc_types.CfgHandshakingTimingRequest(self, task, sample_mode, samps_per_chan),
+            grpc_types.CfgHandshakingTimingRequest(sample_mode_raw=sample_mode, task=task, samps_per_chan=samps_per_chan),
         )
 
     def cfg_implicit_timing(self, task, sample_mode, samps_per_chan):
         response = self._invoke(
             self._client.CfgImplicitTiming,
-            grpc_types.CfgImplicitTimingRequest(self, task, sample_mode, samps_per_chan),
+            grpc_types.CfgImplicitTimingRequest(sample_mode_raw=sample_mode, task=task, samps_per_chan=samps_per_chan),
+        )
+
+    def cfg_input_buffer(self, task, num_samps_per_chan):
+        response = self._invoke(
+            self._client.CfgInputBuffer,
+            grpc_types.CfgInputBufferRequest(num_samps_per_chan=num_samps_per_chan, task=task),
+        )
+
+    def cfg_output_buffer(self, task, num_samps_per_chan):
+        response = self._invoke(
+            self._client.CfgOutputBuffer,
+            grpc_types.CfgOutputBufferRequest(num_samps_per_chan=num_samps_per_chan, task=task),
         )
 
     def cfg_pipelined_samp_clk_timing(
@@ -177,7 +204,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             samps_per_chan):
         response = self._invoke(
             self._client.CfgPipelinedSampClkTiming,
-            grpc_types.CfgPipelinedSampClkTimingRequest(self, task, rate, source, active_edge, sample_mode, samps_per_chan),
+            grpc_types.CfgPipelinedSampClkTimingRequest(sample_mode_raw=sample_mode, rate=rate, samps_per_chan=samps_per_chan, source=source, active_edge_raw=active_edge, task=task),
         )
 
     def cfg_samp_clk_timing(
@@ -185,7 +212,13 @@ class GrpcStubInterpreter(BaseInterpreter):
             samps_per_chan):
         response = self._invoke(
             self._client.CfgSampClkTiming,
-            grpc_types.CfgSampClkTimingRequest(self, task, rate, source, active_edge, sample_mode, samps_per_chan),
+            grpc_types.CfgSampClkTimingRequest(sample_mode_raw=sample_mode, rate=rate, samps_per_chan=samps_per_chan, source=source, active_edge_raw=active_edge, task=task),
+        )
+
+    def cfg_time_start_trig(self, task, when, timescale):
+        response = self._invoke(
+            self._client.CfgTimeStartTrig,
+            grpc_types.CfgTimeStartTrigRequest(when=when, timescale_raw=timescale, task=task),
         )
 
     def cfg_watchdog_ao_expir_states(
@@ -193,59 +226,59 @@ class GrpcStubInterpreter(BaseInterpreter):
             array_size):
         response = self._invoke(
             self._client.CfgWatchdogAOExpirStates,
-            grpc_types.CfgWatchdogAOExpirStatesRequest(self, task, channel_names, expir_state_array, output_type_array, array_size),
+            grpc_types.CfgWatchdogAOExpirStatesRequest(array_size=array_size, task=task, output_type_array_raw=output_type_array, channel_names=channel_names, expir_state_array=expir_state_array),
         )
 
     def cfg_watchdog_co_expir_states(
             self, task, channel_names, expir_state_array, array_size):
         response = self._invoke(
             self._client.CfgWatchdogCOExpirStates,
-            grpc_types.CfgWatchdogCOExpirStatesRequest(self, task, channel_names, expir_state_array, array_size),
+            grpc_types.CfgWatchdogCOExpirStatesRequest(array_size=array_size, expir_state_array_raw=expir_state_array, task=task, channel_names=channel_names),
         )
 
     def cfg_watchdog_do_expir_states(
             self, task, channel_names, expir_state_array, array_size):
         response = self._invoke(
             self._client.CfgWatchdogDOExpirStates,
-            grpc_types.CfgWatchdogDOExpirStatesRequest(self, task, channel_names, expir_state_array, array_size),
+            grpc_types.CfgWatchdogDOExpirStatesRequest(array_size=array_size, expir_state_array_raw=expir_state_array, task=task, channel_names=channel_names),
         )
 
     def clear_task(self, task):
         response = self._invoke(
             self._client.ClearTask,
-            grpc_types.ClearTaskRequest(self, task),
+            grpc_types.ClearTaskRequest(task=task),
         )
 
     def clear_teds(self, physical_channel):
         response = self._invoke(
             self._client.ClearTEDS,
-            grpc_types.ClearTEDSRequest(self, physical_channel),
+            grpc_types.ClearTEDSRequest(physical_channel=physical_channel),
         )
 
     def configure_logging(
             self, task, file_path, logging_mode, group_name, operation):
         response = self._invoke(
             self._client.ConfigureLogging,
-            grpc_types.ConfigureLoggingRequest(self, task, file_path, logging_mode, group_name, operation),
+            grpc_types.ConfigureLoggingRequest(group_name=group_name, task=task, operation_raw=operation, logging_mode_raw=logging_mode, file_path=file_path),
         )
 
     def configure_teds(self, physical_channel, file_path):
         response = self._invoke(
             self._client.ConfigureTEDS,
-            grpc_types.ConfigureTEDSRequest(self, physical_channel, file_path),
+            grpc_types.ConfigureTEDSRequest(file_path=file_path, physical_channel=physical_channel),
         )
 
     def connect_terms(
             self, source_terminal, destination_terminal, signal_modifiers):
         response = self._invoke(
             self._client.ConnectTerms,
-            grpc_types.ConnectTermsRequest(self, source_terminal, destination_terminal, signal_modifiers),
+            grpc_types.ConnectTermsRequest(destination_terminal=destination_terminal, source_terminal=source_terminal, signal_modifiers_raw=signal_modifiers),
         )
 
     def control_watchdog_task(self, task, action):
         response = self._invoke(
             self._client.ControlWatchdogTask,
-            grpc_types.ControlWatchdogTaskRequest(self, task, action),
+            grpc_types.ControlWatchdogTaskRequest(action_raw=action, task=task),
         )
 
     def create_ai_accel4_wire_dc_voltage_chan(
@@ -255,7 +288,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             use_excit_for_scaling, custom_scale_name):
         response = self._invoke(
             self._client.CreateAIAccel4WireDCVoltageChan,
-            grpc_types.CreateAIAccel4WireDCVoltageChanRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, min_val, max_val, units, sensitivity, sensitivity_units, voltage_excit_source, voltage_excit_val, use_excit_for_scaling, custom_scale_name),
+            grpc_types.CreateAIAccel4WireDCVoltageChanRequest(voltage_excit_source_raw=voltage_excit_source, sensitivity=sensitivity, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, use_excit_for_scaling=use_excit_for_scaling, terminal_config_raw=terminal_config, max_val=max_val, custom_scale_name=custom_scale_name, sensitivity_units_raw=sensitivity_units),
         )
 
     def create_ai_accel_chan(
@@ -265,7 +298,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             custom_scale_name):
         response = self._invoke(
             self._client.CreateAIAccelChan,
-            grpc_types.CreateAIAccelChanRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, min_val, max_val, units, sensitivity, sensitivity_units, current_excit_source, current_excit_val, custom_scale_name),
+            grpc_types.CreateAIAccelChanRequest(sensitivity=sensitivity, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, terminal_config_raw=terminal_config, max_val=max_val, current_excit_val=current_excit_val, sensitivity_units_raw=sensitivity_units, current_excit_source_raw=current_excit_source),
         )
 
     def create_ai_accel_charge_chan(
@@ -274,7 +307,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             sensitivity_units, custom_scale_name):
         response = self._invoke(
             self._client.CreateAIAccelChargeChan,
-            grpc_types.CreateAIAccelChargeChanRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, min_val, max_val, units, sensitivity, sensitivity_units, custom_scale_name),
+            grpc_types.CreateAIAccelChargeChanRequest(sensitivity=sensitivity, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, terminal_config_raw=terminal_config, max_val=max_val, sensitivity_units_raw=sensitivity_units),
         )
 
     def create_ai_bridge_chan(
@@ -283,7 +316,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             voltage_excit_val, nominal_bridge_resistance, custom_scale_name):
         response = self._invoke(
             self._client.CreateAIBridgeChan,
-            grpc_types.CreateAIBridgeChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, bridge_config, voltage_excit_source, voltage_excit_val, nominal_bridge_resistance, custom_scale_name),
+            grpc_types.CreateAIBridgeChanRequest(voltage_excit_source_raw=voltage_excit_source, name_to_assign_to_channel=name_to_assign_to_channel, nominal_bridge_resistance=nominal_bridge_resistance, bridge_config_raw=bridge_config, min_val=min_val, task=task, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val),
         )
 
     def create_ai_charge_chan(
@@ -291,7 +324,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             terminal_config, min_val, max_val, units, custom_scale_name):
         response = self._invoke(
             self._client.CreateAIChargeChan,
-            grpc_types.CreateAIChargeChanRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, min_val, max_val, units, custom_scale_name),
+            grpc_types.CreateAIChargeChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, terminal_config_raw=terminal_config, max_val=max_val),
         )
 
     def create_ai_current_chan(
@@ -300,7 +333,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             ext_shunt_resistor_val, custom_scale_name):
         response = self._invoke(
             self._client.CreateAICurrentChan,
-            grpc_types.CreateAICurrentChanRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, min_val, max_val, units, shunt_resistor_loc, ext_shunt_resistor_val, custom_scale_name),
+            grpc_types.CreateAICurrentChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, terminal_config_raw=terminal_config, max_val=max_val, shunt_resistor_loc_raw=shunt_resistor_loc, ext_shunt_resistor_val=ext_shunt_resistor_val),
         )
 
     def create_ai_current_rms_chan(
@@ -309,7 +342,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             ext_shunt_resistor_val, custom_scale_name):
         response = self._invoke(
             self._client.CreateAICurrentRMSChan,
-            grpc_types.CreateAICurrentRMSChanRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, min_val, max_val, units, shunt_resistor_loc, ext_shunt_resistor_val, custom_scale_name),
+            grpc_types.CreateAICurrentRMSChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, terminal_config_raw=terminal_config, max_val=max_val, shunt_resistor_loc_raw=shunt_resistor_loc, ext_shunt_resistor_val=ext_shunt_resistor_val),
         )
 
     def create_ai_force_bridge_polynomial_chan(
@@ -320,7 +353,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             electrical_units, physical_units, custom_scale_name):
         response = self._invoke(
             self._client.CreateAIForceBridgePolynomialChan,
-            grpc_types.CreateAIForceBridgePolynomialChanRequest(self, task, physical_channel, num_forward_coeffs, num_reverse_coeffs, name_to_assign_to_channel, min_val, max_val, units, bridge_config, voltage_excit_source, voltage_excit_val, nominal_bridge_resistance, forward_coeffs, reverse_coeffs, electrical_units, physical_units, custom_scale_name),
+            grpc_types.CreateAIForceBridgePolynomialChanRequest(voltage_excit_source_raw=voltage_excit_source, name_to_assign_to_channel=name_to_assign_to_channel, num_forward_coeffs=num_forward_coeffs, bridge_config_raw=bridge_config, nominal_bridge_resistance=nominal_bridge_resistance, reverse_coeffs=reverse_coeffs, min_val=min_val, task=task, electrical_units_raw=electrical_units, num_reverse_coeffs=num_reverse_coeffs, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, forward_coeffs=forward_coeffs, max_val=max_val, custom_scale_name=custom_scale_name, physical_units_raw=physical_units),
         )
 
     def create_ai_force_bridge_table_chan(
@@ -331,7 +364,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             physical_vals, physical_units, custom_scale_name):
         response = self._invoke(
             self._client.CreateAIForceBridgeTableChan,
-            grpc_types.CreateAIForceBridgeTableChanRequest(self, task, physical_channel, num_electrical_vals, num_physical_vals, name_to_assign_to_channel, min_val, max_val, units, bridge_config, voltage_excit_source, voltage_excit_val, nominal_bridge_resistance, electrical_vals, electrical_units, physical_vals, physical_units, custom_scale_name),
+            grpc_types.CreateAIForceBridgeTableChanRequest(voltage_excit_source_raw=voltage_excit_source, physical_vals=physical_vals, name_to_assign_to_channel=name_to_assign_to_channel, nominal_bridge_resistance=nominal_bridge_resistance, bridge_config_raw=bridge_config, min_val=min_val, task=task, electrical_units_raw=electrical_units, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, num_electrical_vals=num_electrical_vals, num_physical_vals=num_physical_vals, physical_units_raw=physical_units, electrical_vals=electrical_vals),
         )
 
     def create_ai_force_bridge_two_point_lin_chan(
@@ -343,7 +376,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             custom_scale_name):
         response = self._invoke(
             self._client.CreateAIForceBridgeTwoPointLinChan,
-            grpc_types.CreateAIForceBridgeTwoPointLinChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, bridge_config, voltage_excit_source, voltage_excit_val, nominal_bridge_resistance, first_electrical_val, second_electrical_val, electrical_units, first_physical_val, second_physical_val, physical_units, custom_scale_name),
+            grpc_types.CreateAIForceBridgeTwoPointLinChanRequest(voltage_excit_source_raw=voltage_excit_source, second_physical_val=second_physical_val, first_physical_val=first_physical_val, name_to_assign_to_channel=name_to_assign_to_channel, nominal_bridge_resistance=nominal_bridge_resistance, bridge_config_raw=bridge_config, min_val=min_val, task=task, electrical_units_raw=electrical_units, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, first_electrical_val=first_electrical_val, max_val=max_val, custom_scale_name=custom_scale_name, second_electrical_val=second_electrical_val, physical_units_raw=physical_units),
         )
 
     def create_ai_force_iepe_chan(
@@ -353,7 +386,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             custom_scale_name):
         response = self._invoke(
             self._client.CreateAIForceIEPEChan,
-            grpc_types.CreateAIForceIEPEChanRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, min_val, max_val, units, sensitivity, sensitivity_units, current_excit_source, current_excit_val, custom_scale_name),
+            grpc_types.CreateAIForceIEPEChanRequest(sensitivity=sensitivity, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, terminal_config_raw=terminal_config, max_val=max_val, current_excit_val=current_excit_val, sensitivity_units_raw=sensitivity_units, current_excit_source_raw=current_excit_source),
         )
 
     def create_ai_freq_voltage_chan(
@@ -361,7 +394,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             max_val, units, threshold_level, hysteresis, custom_scale_name):
         response = self._invoke(
             self._client.CreateAIFreqVoltageChan,
-            grpc_types.CreateAIFreqVoltageChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, threshold_level, hysteresis, custom_scale_name),
+            grpc_types.CreateAIFreqVoltageChanRequest(hysteresis=hysteresis, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, threshold_level=threshold_level),
         )
 
     def create_ai_microphone_chan(
@@ -370,7 +403,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             current_excit_source, current_excit_val, custom_scale_name):
         response = self._invoke(
             self._client.CreateAIMicrophoneChan,
-            grpc_types.CreateAIMicrophoneChanRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, units, mic_sensitivity, max_snd_press_level, current_excit_source, current_excit_val, custom_scale_name),
+            grpc_types.CreateAIMicrophoneChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, task=task, physical_channel=physical_channel, units_raw=units, mic_sensitivity=mic_sensitivity, terminal_config_raw=terminal_config, custom_scale_name=custom_scale_name, current_excit_val=current_excit_val, max_snd_press_level=max_snd_press_level, current_excit_source_raw=current_excit_source),
         )
 
     def create_ai_pos_eddy_curr_prox_probe_chan(
@@ -379,7 +412,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             custom_scale_name):
         response = self._invoke(
             self._client.CreateAIPosEddyCurrProxProbeChan,
-            grpc_types.CreateAIPosEddyCurrProxProbeChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, sensitivity, sensitivity_units, custom_scale_name),
+            grpc_types.CreateAIPosEddyCurrProxProbeChanRequest(sensitivity=sensitivity, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, sensitivity_units_raw=sensitivity_units),
         )
 
     def create_ai_pos_lvdt_chan(
@@ -389,7 +422,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             ac_excit_wire_mode, custom_scale_name):
         response = self._invoke(
             self._client.CreateAIPosLVDTChan,
-            grpc_types.CreateAIPosLVDTChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, sensitivity, sensitivity_units, voltage_excit_source, voltage_excit_val, voltage_excit_freq, ac_excit_wire_mode, custom_scale_name),
+            grpc_types.CreateAIPosLVDTChanRequest(voltage_excit_source_raw=voltage_excit_source, voltage_excit_freq=voltage_excit_freq, sensitivity=sensitivity, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, ac_excit_wire_mode_raw=ac_excit_wire_mode, sensitivity_units_raw=sensitivity_units),
         )
 
     def create_ai_pos_rvdt_chan(
@@ -399,7 +432,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             ac_excit_wire_mode, custom_scale_name):
         response = self._invoke(
             self._client.CreateAIPosRVDTChan,
-            grpc_types.CreateAIPosRVDTChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, sensitivity, sensitivity_units, voltage_excit_source, voltage_excit_val, voltage_excit_freq, ac_excit_wire_mode, custom_scale_name),
+            grpc_types.CreateAIPosRVDTChanRequest(voltage_excit_source_raw=voltage_excit_source, voltage_excit_freq=voltage_excit_freq, sensitivity=sensitivity, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, ac_excit_wire_mode_raw=ac_excit_wire_mode, sensitivity_units_raw=sensitivity_units),
         )
 
     def create_ai_power_chan(
@@ -407,7 +440,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             output_enable, name_to_assign_to_channel):
         response = self._invoke(
             self._client.CreateAIPowerChan,
-            grpc_types.CreateAIPowerChanRequest(self, task, physical_channel, voltage_setpoint, current_setpoint, output_enable, name_to_assign_to_channel),
+            grpc_types.CreateAIPowerChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, task=task, physical_channel=physical_channel, voltage_setpoint=voltage_setpoint, output_enable=output_enable, current_setpoint=current_setpoint),
         )
 
     def create_ai_pressure_bridge_polynomial_chan(
@@ -418,7 +451,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             electrical_units, physical_units, custom_scale_name):
         response = self._invoke(
             self._client.CreateAIPressureBridgePolynomialChan,
-            grpc_types.CreateAIPressureBridgePolynomialChanRequest(self, task, physical_channel, num_forward_coeffs, num_reverse_coeffs, name_to_assign_to_channel, min_val, max_val, units, bridge_config, voltage_excit_source, voltage_excit_val, nominal_bridge_resistance, forward_coeffs, reverse_coeffs, electrical_units, physical_units, custom_scale_name),
+            grpc_types.CreateAIPressureBridgePolynomialChanRequest(voltage_excit_source_raw=voltage_excit_source, name_to_assign_to_channel=name_to_assign_to_channel, num_forward_coeffs=num_forward_coeffs, bridge_config_raw=bridge_config, nominal_bridge_resistance=nominal_bridge_resistance, reverse_coeffs=reverse_coeffs, min_val=min_val, task=task, electrical_units_raw=electrical_units, num_reverse_coeffs=num_reverse_coeffs, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, forward_coeffs=forward_coeffs, max_val=max_val, custom_scale_name=custom_scale_name, physical_units_raw=physical_units),
         )
 
     def create_ai_pressure_bridge_table_chan(
@@ -429,7 +462,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             physical_vals, physical_units, custom_scale_name):
         response = self._invoke(
             self._client.CreateAIPressureBridgeTableChan,
-            grpc_types.CreateAIPressureBridgeTableChanRequest(self, task, physical_channel, num_electrical_vals, num_physical_vals, name_to_assign_to_channel, min_val, max_val, units, bridge_config, voltage_excit_source, voltage_excit_val, nominal_bridge_resistance, electrical_vals, electrical_units, physical_vals, physical_units, custom_scale_name),
+            grpc_types.CreateAIPressureBridgeTableChanRequest(voltage_excit_source_raw=voltage_excit_source, physical_vals=physical_vals, name_to_assign_to_channel=name_to_assign_to_channel, nominal_bridge_resistance=nominal_bridge_resistance, bridge_config_raw=bridge_config, min_val=min_val, task=task, electrical_units_raw=electrical_units, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, num_electrical_vals=num_electrical_vals, num_physical_vals=num_physical_vals, physical_units_raw=physical_units, electrical_vals=electrical_vals),
         )
 
     def create_ai_pressure_bridge_two_point_lin_chan(
@@ -441,7 +474,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             custom_scale_name):
         response = self._invoke(
             self._client.CreateAIPressureBridgeTwoPointLinChan,
-            grpc_types.CreateAIPressureBridgeTwoPointLinChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, bridge_config, voltage_excit_source, voltage_excit_val, nominal_bridge_resistance, first_electrical_val, second_electrical_val, electrical_units, first_physical_val, second_physical_val, physical_units, custom_scale_name),
+            grpc_types.CreateAIPressureBridgeTwoPointLinChanRequest(voltage_excit_source_raw=voltage_excit_source, second_physical_val=second_physical_val, first_physical_val=first_physical_val, name_to_assign_to_channel=name_to_assign_to_channel, nominal_bridge_resistance=nominal_bridge_resistance, bridge_config_raw=bridge_config, min_val=min_val, task=task, electrical_units_raw=electrical_units, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, first_electrical_val=first_electrical_val, max_val=max_val, custom_scale_name=custom_scale_name, second_electrical_val=second_electrical_val, physical_units_raw=physical_units),
         )
 
     def create_ai_resistance_chan(
@@ -450,7 +483,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             current_excit_val, custom_scale_name):
         response = self._invoke(
             self._client.CreateAIResistanceChan,
-            grpc_types.CreateAIResistanceChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, resistance_config, current_excit_source, current_excit_val, custom_scale_name),
+            grpc_types.CreateAIResistanceChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, resistance_config_raw=resistance_config, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, current_excit_val=current_excit_val, current_excit_source_raw=current_excit_source),
         )
 
     def create_ai_rosette_strain_gage_chan(
@@ -461,7 +494,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             nominal_gage_resistance, poisson_ratio, lead_wire_resistance):
         response = self._invoke(
             self._client.CreateAIRosetteStrainGageChan,
-            grpc_types.CreateAIRosetteStrainGageChanRequest(self, task, physical_channel, rosette_type, gage_orientation, rosette_meas_types, num_rosette_meas_types, name_to_assign_to_channel, min_val, max_val, strain_config, voltage_excit_source, voltage_excit_val, gage_factor, nominal_gage_resistance, poisson_ratio, lead_wire_resistance),
+            grpc_types.CreateAIRosetteStrainGageChanRequest(voltage_excit_source_raw=voltage_excit_source, nominal_gage_resistance=nominal_gage_resistance, lead_wire_resistance=lead_wire_resistance, name_to_assign_to_channel=name_to_assign_to_channel, rosette_type_raw=rosette_type, min_val=min_val, gage_orientation=gage_orientation, task=task, poisson_ratio=poisson_ratio, physical_channel=physical_channel, strain_config_raw=strain_config, rosette_meas_types=rosette_meas_types, num_rosette_meas_types=num_rosette_meas_types, max_val=max_val, voltage_excit_val=voltage_excit_val, gage_factor=gage_factor),
         )
 
     def create_ai_strain_gage_chan(
@@ -472,14 +505,14 @@ class GrpcStubInterpreter(BaseInterpreter):
             custom_scale_name):
         response = self._invoke(
             self._client.CreateAIStrainGageChan,
-            grpc_types.CreateAIStrainGageChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, strain_config, voltage_excit_source, voltage_excit_val, gage_factor, initial_bridge_voltage, nominal_gage_resistance, poisson_ratio, lead_wire_resistance, custom_scale_name),
+            grpc_types.CreateAIStrainGageChanRequest(voltage_excit_source_raw=voltage_excit_source, nominal_gage_resistance=nominal_gage_resistance, lead_wire_resistance=lead_wire_resistance, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, poisson_ratio=poisson_ratio, physical_channel=physical_channel, strain_config_raw=strain_config, units_raw=units, voltage_excit_val=voltage_excit_val, max_val=max_val, custom_scale_name=custom_scale_name, gage_factor=gage_factor, initial_bridge_voltage=initial_bridge_voltage),
         )
 
     def create_ai_temp_built_in_sensor_chan(
             self, task, physical_channel, name_to_assign_to_channel, units):
         response = self._invoke(
             self._client.CreateAITempBuiltInSensorChan,
-            grpc_types.CreateAITempBuiltInSensorChanRequest(self, task, physical_channel, name_to_assign_to_channel, units),
+            grpc_types.CreateAITempBuiltInSensorChanRequest(units_raw=units, task=task, name_to_assign_to_channel=name_to_assign_to_channel, physical_channel=physical_channel),
         )
 
     def create_ai_thrmcpl_chan(
@@ -488,7 +521,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             cjc_channel):
         response = self._invoke(
             self._client.CreateAIThrmcplChan,
-            grpc_types.CreateAIThrmcplChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, thermocouple_type, cjc_source, cjc_val, cjc_channel),
+            grpc_types.CreateAIThrmcplChanRequest(thermocouple_type_raw=thermocouple_type, cjc_val=cjc_val, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, cjc_channel=cjc_channel, physical_channel=physical_channel, units_raw=units, max_val=max_val, cjc_source_raw=cjc_source),
         )
 
     def create_ai_thrmstr_chan_iex(
@@ -497,7 +530,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             current_excit_val, a, b, c):
         response = self._invoke(
             self._client.CreateAIThrmstrChanIex,
-            grpc_types.CreateAIThrmstrChanIexRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, resistance_config, current_excit_source, current_excit_val, a, b, c),
+            grpc_types.CreateAIThrmstrChanIexRequest(a=a, name_to_assign_to_channel=name_to_assign_to_channel, resistance_config_raw=resistance_config, min_val=min_val, task=task, physical_channel=physical_channel, c=c, units_raw=units, max_val=max_val, b=b, current_excit_val=current_excit_val, current_excit_source_raw=current_excit_source),
         )
 
     def create_ai_thrmstr_chan_vex(
@@ -506,7 +539,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             voltage_excit_val, a, b, c, r_1):
         response = self._invoke(
             self._client.CreateAIThrmstrChanVex,
-            grpc_types.CreateAIThrmstrChanVexRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, resistance_config, voltage_excit_source, voltage_excit_val, a, b, c, r_1),
+            grpc_types.CreateAIThrmstrChanVexRequest(voltage_excit_source_raw=voltage_excit_source, a=a, name_to_assign_to_channel=name_to_assign_to_channel, resistance_config_raw=resistance_config, min_val=min_val, task=task, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, c=c, max_val=max_val, b=b, r_1=r_1),
         )
 
     def create_ai_torque_bridge_polynomial_chan(
@@ -517,7 +550,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             electrical_units, physical_units, custom_scale_name):
         response = self._invoke(
             self._client.CreateAITorqueBridgePolynomialChan,
-            grpc_types.CreateAITorqueBridgePolynomialChanRequest(self, task, physical_channel, num_forward_coeffs, num_reverse_coeffs, name_to_assign_to_channel, min_val, max_val, units, bridge_config, voltage_excit_source, voltage_excit_val, nominal_bridge_resistance, forward_coeffs, reverse_coeffs, electrical_units, physical_units, custom_scale_name),
+            grpc_types.CreateAITorqueBridgePolynomialChanRequest(voltage_excit_source_raw=voltage_excit_source, name_to_assign_to_channel=name_to_assign_to_channel, num_forward_coeffs=num_forward_coeffs, bridge_config_raw=bridge_config, nominal_bridge_resistance=nominal_bridge_resistance, reverse_coeffs=reverse_coeffs, min_val=min_val, task=task, electrical_units_raw=electrical_units, num_reverse_coeffs=num_reverse_coeffs, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, forward_coeffs=forward_coeffs, max_val=max_val, custom_scale_name=custom_scale_name, physical_units_raw=physical_units),
         )
 
     def create_ai_torque_bridge_table_chan(
@@ -528,7 +561,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             physical_vals, physical_units, custom_scale_name):
         response = self._invoke(
             self._client.CreateAITorqueBridgeTableChan,
-            grpc_types.CreateAITorqueBridgeTableChanRequest(self, task, physical_channel, num_electrical_vals, num_physical_vals, name_to_assign_to_channel, min_val, max_val, units, bridge_config, voltage_excit_source, voltage_excit_val, nominal_bridge_resistance, electrical_vals, electrical_units, physical_vals, physical_units, custom_scale_name),
+            grpc_types.CreateAITorqueBridgeTableChanRequest(voltage_excit_source_raw=voltage_excit_source, physical_vals=physical_vals, name_to_assign_to_channel=name_to_assign_to_channel, nominal_bridge_resistance=nominal_bridge_resistance, bridge_config_raw=bridge_config, min_val=min_val, task=task, electrical_units_raw=electrical_units, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, num_electrical_vals=num_electrical_vals, num_physical_vals=num_physical_vals, physical_units_raw=physical_units, electrical_vals=electrical_vals),
         )
 
     def create_ai_torque_bridge_two_point_lin_chan(
@@ -540,7 +573,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             custom_scale_name):
         response = self._invoke(
             self._client.CreateAITorqueBridgeTwoPointLinChan,
-            grpc_types.CreateAITorqueBridgeTwoPointLinChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, bridge_config, voltage_excit_source, voltage_excit_val, nominal_bridge_resistance, first_electrical_val, second_electrical_val, electrical_units, first_physical_val, second_physical_val, physical_units, custom_scale_name),
+            grpc_types.CreateAITorqueBridgeTwoPointLinChanRequest(voltage_excit_source_raw=voltage_excit_source, second_physical_val=second_physical_val, first_physical_val=first_physical_val, name_to_assign_to_channel=name_to_assign_to_channel, nominal_bridge_resistance=nominal_bridge_resistance, bridge_config_raw=bridge_config, min_val=min_val, task=task, electrical_units_raw=electrical_units, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, first_electrical_val=first_electrical_val, max_val=max_val, custom_scale_name=custom_scale_name, second_electrical_val=second_electrical_val, physical_units_raw=physical_units),
         )
 
     def create_ai_velocity_iepe_chan(
@@ -550,7 +583,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             custom_scale_name):
         response = self._invoke(
             self._client.CreateAIVelocityIEPEChan,
-            grpc_types.CreateAIVelocityIEPEChanRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, min_val, max_val, units, sensitivity, sensitivity_units, current_excit_source, current_excit_val, custom_scale_name),
+            grpc_types.CreateAIVelocityIEPEChanRequest(sensitivity=sensitivity, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, terminal_config_raw=terminal_config, max_val=max_val, current_excit_val=current_excit_val, sensitivity_units_raw=sensitivity_units, current_excit_source_raw=current_excit_source),
         )
 
     def create_ai_voltage_chan(
@@ -558,7 +591,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             terminal_config, min_val, max_val, units, custom_scale_name):
         response = self._invoke(
             self._client.CreateAIVoltageChan,
-            grpc_types.CreateAIVoltageChanRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, min_val, max_val, units, custom_scale_name),
+            grpc_types.CreateAIVoltageChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, terminal_config_raw=terminal_config, max_val=max_val),
         )
 
     def create_ai_voltage_chan_with_excit(
@@ -568,7 +601,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             custom_scale_name):
         response = self._invoke(
             self._client.CreateAIVoltageChanWithExcit,
-            grpc_types.CreateAIVoltageChanWithExcitRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, min_val, max_val, units, bridge_config, voltage_excit_source, voltage_excit_val, use_excit_for_scaling, custom_scale_name),
+            grpc_types.CreateAIVoltageChanWithExcitRequest(voltage_excit_source_raw=voltage_excit_source, name_to_assign_to_channel=name_to_assign_to_channel, bridge_config_raw=bridge_config, min_val=min_val, task=task, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, use_excit_for_scaling=use_excit_for_scaling, terminal_config_raw=terminal_config, max_val=max_val, custom_scale_name=custom_scale_name),
         )
 
     def create_ai_voltage_rms_chan(
@@ -576,7 +609,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             terminal_config, min_val, max_val, units, custom_scale_name):
         response = self._invoke(
             self._client.CreateAIVoltageRMSChan,
-            grpc_types.CreateAIVoltageRMSChanRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, min_val, max_val, units, custom_scale_name),
+            grpc_types.CreateAIVoltageRMSChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, terminal_config_raw=terminal_config, max_val=max_val),
         )
 
     def create_airtd_chan(
@@ -585,7 +618,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             current_excit_val, r_0):
         response = self._invoke(
             self._client.CreateAIRTDChan,
-            grpc_types.CreateAIRTDChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, rtd_type, resistance_config, current_excit_source, current_excit_val, r_0),
+            grpc_types.CreateAIRTDChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, r_0=r_0, rtd_type_raw=rtd_type, resistance_config_raw=resistance_config, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, max_val=max_val, current_excit_val=current_excit_val, current_excit_source_raw=current_excit_source),
         )
 
     def create_ao_current_chan(
@@ -593,7 +626,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             max_val, units, custom_scale_name):
         response = self._invoke(
             self._client.CreateAOCurrentChan,
-            grpc_types.CreateAOCurrentChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, custom_scale_name),
+            grpc_types.CreateAOCurrentChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val),
         )
 
     def create_ao_func_gen_chan(
@@ -601,7 +634,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             freq, amplitude, offset):
         response = self._invoke(
             self._client.CreateAOFuncGenChan,
-            grpc_types.CreateAOFuncGenChanRequest(self, task, physical_channel, name_to_assign_to_channel, type, freq, amplitude, offset),
+            grpc_types.CreateAOFuncGenChanRequest(amplitude=amplitude, name_to_assign_to_channel=name_to_assign_to_channel, task=task, physical_channel=physical_channel, offset=offset, freq=freq, type_raw=type),
         )
 
     def create_ao_voltage_chan(
@@ -609,7 +642,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             max_val, units, custom_scale_name):
         response = self._invoke(
             self._client.CreateAOVoltageChan,
-            grpc_types.CreateAOVoltageChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, custom_scale_name),
+            grpc_types.CreateAOVoltageChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val),
         )
 
     def create_ci_ang_encoder_chan(
@@ -618,7 +651,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             initial_angle, custom_scale_name):
         response = self._invoke(
             self._client.CreateCIAngEncoderChan,
-            grpc_types.CreateCIAngEncoderChanRequest(self, task, counter, name_to_assign_to_channel, decoding_type, zidx_enable, zidx_val, zidx_phase, units, pulses_per_rev, initial_angle, custom_scale_name),
+            grpc_types.CreateCIAngEncoderChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, initial_angle=initial_angle, task=task, zidx_enable=zidx_enable, counter=counter, units_raw=units, custom_scale_name=custom_scale_name, zidx_phase_raw=zidx_phase, pulses_per_rev=pulses_per_rev, zidx_val=zidx_val, decoding_type_raw=decoding_type),
         )
 
     def create_ci_ang_velocity_chan(
@@ -626,7 +659,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             decoding_type, units, pulses_per_rev, custom_scale_name):
         response = self._invoke(
             self._client.CreateCIAngVelocityChan,
-            grpc_types.CreateCIAngVelocityChanRequest(self, task, counter, name_to_assign_to_channel, min_val, max_val, decoding_type, units, pulses_per_rev, custom_scale_name),
+            grpc_types.CreateCIAngVelocityChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, counter=counter, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, pulses_per_rev=pulses_per_rev, decoding_type_raw=decoding_type),
         )
 
     def create_ci_count_edges_chan(
@@ -634,7 +667,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             initial_count, count_direction):
         response = self._invoke(
             self._client.CreateCICountEdgesChan,
-            grpc_types.CreateCICountEdgesChanRequest(self, task, counter, name_to_assign_to_channel, edge, initial_count, count_direction),
+            grpc_types.CreateCICountEdgesChanRequest(initial_count=initial_count, name_to_assign_to_channel=name_to_assign_to_channel, edge_raw=edge, task=task, counter=counter, count_direction_raw=count_direction),
         )
 
     def create_ci_duty_cycle_chan(
@@ -642,7 +675,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             max_freq, edge, custom_scale_name):
         response = self._invoke(
             self._client.CreateCIDutyCycleChan,
-            grpc_types.CreateCIDutyCycleChanRequest(self, task, counter, name_to_assign_to_channel, min_freq, max_freq, edge, custom_scale_name),
+            grpc_types.CreateCIDutyCycleChanRequest(min_freq=min_freq, max_freq=max_freq, name_to_assign_to_channel=name_to_assign_to_channel, edge_raw=edge, task=task, counter=counter, custom_scale_name=custom_scale_name),
         )
 
     def create_ci_freq_chan(
@@ -650,7 +683,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             units, edge, meas_method, meas_time, divisor, custom_scale_name):
         response = self._invoke(
             self._client.CreateCIFreqChan,
-            grpc_types.CreateCIFreqChanRequest(self, task, counter, name_to_assign_to_channel, min_val, max_val, units, edge, meas_method, meas_time, divisor, custom_scale_name),
+            grpc_types.CreateCIFreqChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, edge_raw=edge, counter=counter, meas_method_raw=meas_method, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, divisor=divisor, meas_time=meas_time),
         )
 
     def create_ci_lin_encoder_chan(
@@ -659,7 +692,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             initial_pos, custom_scale_name):
         response = self._invoke(
             self._client.CreateCILinEncoderChan,
-            grpc_types.CreateCILinEncoderChanRequest(self, task, counter, name_to_assign_to_channel, decoding_type, zidx_enable, zidx_val, zidx_phase, units, dist_per_pulse, initial_pos, custom_scale_name),
+            grpc_types.CreateCILinEncoderChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, task=task, zidx_enable=zidx_enable, counter=counter, units_raw=units, custom_scale_name=custom_scale_name, zidx_phase_raw=zidx_phase, initial_pos=initial_pos, zidx_val=zidx_val, decoding_type_raw=decoding_type, dist_per_pulse=dist_per_pulse),
         )
 
     def create_ci_lin_velocity_chan(
@@ -667,7 +700,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             decoding_type, units, dist_per_pulse, custom_scale_name):
         response = self._invoke(
             self._client.CreateCILinVelocityChan,
-            grpc_types.CreateCILinVelocityChanRequest(self, task, counter, name_to_assign_to_channel, min_val, max_val, decoding_type, units, dist_per_pulse, custom_scale_name),
+            grpc_types.CreateCILinVelocityChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, counter=counter, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, decoding_type_raw=decoding_type, dist_per_pulse=dist_per_pulse),
         )
 
     def create_ci_period_chan(
@@ -675,7 +708,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             units, edge, meas_method, meas_time, divisor, custom_scale_name):
         response = self._invoke(
             self._client.CreateCIPeriodChan,
-            grpc_types.CreateCIPeriodChanRequest(self, task, counter, name_to_assign_to_channel, min_val, max_val, units, edge, meas_method, meas_time, divisor, custom_scale_name),
+            grpc_types.CreateCIPeriodChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, edge_raw=edge, counter=counter, meas_method_raw=meas_method, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, divisor=divisor, meas_time=meas_time),
         )
 
     def create_ci_pulse_chan_freq(
@@ -683,7 +716,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             units):
         response = self._invoke(
             self._client.CreateCIPulseChanFreq,
-            grpc_types.CreateCIPulseChanFreqRequest(self, task, counter, name_to_assign_to_channel, min_val, max_val, units),
+            grpc_types.CreateCIPulseChanFreqRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, counter=counter, units_raw=units, max_val=max_val),
         )
 
     def create_ci_pulse_chan_ticks(
@@ -691,7 +724,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             min_val, max_val):
         response = self._invoke(
             self._client.CreateCIPulseChanTicks,
-            grpc_types.CreateCIPulseChanTicksRequest(self, task, counter, name_to_assign_to_channel, source_terminal, min_val, max_val),
+            grpc_types.CreateCIPulseChanTicksRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, counter=counter, max_val=max_val, source_terminal=source_terminal),
         )
 
     def create_ci_pulse_chan_time(
@@ -699,7 +732,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             units):
         response = self._invoke(
             self._client.CreateCIPulseChanTime,
-            grpc_types.CreateCIPulseChanTimeRequest(self, task, counter, name_to_assign_to_channel, min_val, max_val, units),
+            grpc_types.CreateCIPulseChanTimeRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, counter=counter, units_raw=units, max_val=max_val),
         )
 
     def create_ci_pulse_width_chan(
@@ -707,7 +740,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             units, starting_edge, custom_scale_name):
         response = self._invoke(
             self._client.CreateCIPulseWidthChan,
-            grpc_types.CreateCIPulseWidthChanRequest(self, task, counter, name_to_assign_to_channel, min_val, max_val, units, starting_edge, custom_scale_name),
+            grpc_types.CreateCIPulseWidthChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, counter=counter, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, starting_edge_raw=starting_edge),
         )
 
     def create_ci_semi_period_chan(
@@ -715,7 +748,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             units, custom_scale_name):
         response = self._invoke(
             self._client.CreateCISemiPeriodChan,
-            grpc_types.CreateCISemiPeriodChanRequest(self, task, counter, name_to_assign_to_channel, min_val, max_val, units, custom_scale_name),
+            grpc_types.CreateCISemiPeriodChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, counter=counter, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val),
         )
 
     def create_ci_two_edge_sep_chan(
@@ -723,7 +756,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             units, first_edge, second_edge, custom_scale_name):
         response = self._invoke(
             self._client.CreateCITwoEdgeSepChan,
-            grpc_types.CreateCITwoEdgeSepChanRequest(self, task, counter, name_to_assign_to_channel, min_val, max_val, units, first_edge, second_edge, custom_scale_name),
+            grpc_types.CreateCITwoEdgeSepChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, counter=counter, second_edge_raw=second_edge, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, first_edge_raw=first_edge),
         )
 
     def create_cigps_timestamp_chan(
@@ -731,7 +764,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             sync_method, custom_scale_name):
         response = self._invoke(
             self._client.CreateCIGPSTimestampChan,
-            grpc_types.CreateCIGPSTimestampChanRequest(self, task, counter, name_to_assign_to_channel, units, sync_method, custom_scale_name),
+            grpc_types.CreateCIGPSTimestampChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, task=task, counter=counter, units_raw=units, custom_scale_name=custom_scale_name, sync_method_raw=sync_method),
         )
 
     def create_co_pulse_chan_freq(
@@ -739,7 +772,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             initial_delay, freq, duty_cycle):
         response = self._invoke(
             self._client.CreateCOPulseChanFreq,
-            grpc_types.CreateCOPulseChanFreqRequest(self, task, counter, name_to_assign_to_channel, units, idle_state, initial_delay, freq, duty_cycle),
+            grpc_types.CreateCOPulseChanFreqRequest(name_to_assign_to_channel=name_to_assign_to_channel, duty_cycle=duty_cycle, task=task, idle_state_raw=idle_state, counter=counter, units_raw=units, freq=freq, initial_delay=initial_delay),
         )
 
     def create_co_pulse_chan_ticks(
@@ -747,7 +780,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             idle_state, initial_delay, low_ticks, high_ticks):
         response = self._invoke(
             self._client.CreateCOPulseChanTicks,
-            grpc_types.CreateCOPulseChanTicksRequest(self, task, counter, source_terminal, name_to_assign_to_channel, idle_state, initial_delay, low_ticks, high_ticks),
+            grpc_types.CreateCOPulseChanTicksRequest(high_ticks=high_ticks, name_to_assign_to_channel=name_to_assign_to_channel, task=task, idle_state_raw=idle_state, counter=counter, source_terminal=source_terminal, initial_delay=initial_delay, low_ticks=low_ticks),
         )
 
     def create_co_pulse_chan_time(
@@ -755,28 +788,28 @@ class GrpcStubInterpreter(BaseInterpreter):
             initial_delay, low_time, high_time):
         response = self._invoke(
             self._client.CreateCOPulseChanTime,
-            grpc_types.CreateCOPulseChanTimeRequest(self, task, counter, name_to_assign_to_channel, units, idle_state, initial_delay, low_time, high_time),
+            grpc_types.CreateCOPulseChanTimeRequest(name_to_assign_to_channel=name_to_assign_to_channel, low_time=low_time, task=task, idle_state_raw=idle_state, counter=counter, units_raw=units, initial_delay=initial_delay, high_time=high_time),
         )
 
     def create_di_chan(
             self, task, lines, name_to_assign_to_lines, line_grouping):
         response = self._invoke(
             self._client.CreateDIChan,
-            grpc_types.CreateDIChanRequest(self, task, lines, name_to_assign_to_lines, line_grouping),
+            grpc_types.CreateDIChanRequest(line_grouping_raw=line_grouping, lines=lines, task=task, name_to_assign_to_lines=name_to_assign_to_lines),
         )
 
     def create_do_chan(
             self, task, lines, name_to_assign_to_lines, line_grouping):
         response = self._invoke(
             self._client.CreateDOChan,
-            grpc_types.CreateDOChanRequest(self, task, lines, name_to_assign_to_lines, line_grouping),
+            grpc_types.CreateDOChanRequest(line_grouping_raw=line_grouping, lines=lines, task=task, name_to_assign_to_lines=name_to_assign_to_lines),
         )
 
     def create_lin_scale(
             self, name, slope, y_intercept, pre_scaled_units, scaled_units):
         response = self._invoke(
             self._client.CreateLinScale,
-            grpc_types.CreateLinScaleRequest(self, name, slope, y_intercept, pre_scaled_units, scaled_units),
+            grpc_types.CreateLinScaleRequest(slope=slope, name=name, pre_scaled_units_raw=pre_scaled_units, scaled_units=scaled_units, y_intercept=y_intercept),
         )
 
     def create_map_scale(
@@ -784,7 +817,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             pre_scaled_units, scaled_units):
         response = self._invoke(
             self._client.CreateMapScale,
-            grpc_types.CreateMapScaleRequest(self, name, prescaled_min, prescaled_max, scaled_min, scaled_max, pre_scaled_units, scaled_units),
+            grpc_types.CreateMapScaleRequest(scaled_min=scaled_min, prescaled_max=prescaled_max, name=name, pre_scaled_units_raw=pre_scaled_units, prescaled_min=prescaled_min, scaled_units=scaled_units, scaled_max=scaled_max),
         )
 
     def create_polynomial_scale(
@@ -792,7 +825,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             num_reverse_coeffs_in, pre_scaled_units, scaled_units):
         response = self._invoke(
             self._client.CreatePolynomialScale,
-            grpc_types.CreatePolynomialScaleRequest(self, name, forward_coeffs, num_forward_coeffs_in, reverse_coeffs, num_reverse_coeffs_in, pre_scaled_units, scaled_units),
+            grpc_types.CreatePolynomialScaleRequest(num_forward_coeffs_in=num_forward_coeffs_in, name=name, reverse_coeffs=reverse_coeffs, num_reverse_coeffs_in=num_reverse_coeffs_in, pre_scaled_units_raw=pre_scaled_units, forward_coeffs=forward_coeffs, scaled_units=scaled_units),
         )
 
     def create_table_scale(
@@ -800,13 +833,13 @@ class GrpcStubInterpreter(BaseInterpreter):
             num_scaled_vals_in, pre_scaled_units, scaled_units):
         response = self._invoke(
             self._client.CreateTableScale,
-            grpc_types.CreateTableScaleRequest(self, name, prescaled_vals, num_prescaled_vals_in, scaled_vals, num_scaled_vals_in, pre_scaled_units, scaled_units),
+            grpc_types.CreateTableScaleRequest(name=name, num_scaled_vals_in=num_scaled_vals_in, num_prescaled_vals_in=num_prescaled_vals_in, pre_scaled_units_raw=pre_scaled_units, scaled_units=scaled_units, scaled_vals=scaled_vals, prescaled_vals=prescaled_vals),
         )
 
-    def create_task(self, task, session_name):
+    def create_task(self, session_name):
         response = self._invoke(
             self._client.CreateTask,
-            grpc_types.CreateTaskRequest(self, task, session_name),
+            grpc_types.CreateTaskRequest(session_name=session_name),
         )
         return response.task
 
@@ -816,7 +849,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             current_excit_val, custom_scale_name):
         response = self._invoke(
             self._client.CreateTEDSAIAccelChan,
-            grpc_types.CreateTEDSAIAccelChanRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, min_val, max_val, units, current_excit_source, current_excit_val, custom_scale_name),
+            grpc_types.CreateTEDSAIAccelChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, terminal_config_raw=terminal_config, max_val=max_val, current_excit_val=current_excit_val, current_excit_source_raw=current_excit_source),
         )
 
     def create_tedsai_bridge_chan(
@@ -825,7 +858,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             custom_scale_name):
         response = self._invoke(
             self._client.CreateTEDSAIBridgeChan,
-            grpc_types.CreateTEDSAIBridgeChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, voltage_excit_source, voltage_excit_val, custom_scale_name),
+            grpc_types.CreateTEDSAIBridgeChanRequest(voltage_excit_source_raw=voltage_excit_source, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val),
         )
 
     def create_tedsai_current_chan(
@@ -834,7 +867,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             ext_shunt_resistor_val, custom_scale_name):
         response = self._invoke(
             self._client.CreateTEDSAICurrentChan,
-            grpc_types.CreateTEDSAICurrentChanRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, min_val, max_val, units, shunt_resistor_loc, ext_shunt_resistor_val, custom_scale_name),
+            grpc_types.CreateTEDSAICurrentChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, terminal_config_raw=terminal_config, max_val=max_val, shunt_resistor_loc_raw=shunt_resistor_loc, ext_shunt_resistor_val=ext_shunt_resistor_val),
         )
 
     def create_tedsai_force_bridge_chan(
@@ -843,7 +876,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             custom_scale_name):
         response = self._invoke(
             self._client.CreateTEDSAIForceBridgeChan,
-            grpc_types.CreateTEDSAIForceBridgeChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, voltage_excit_source, voltage_excit_val, custom_scale_name),
+            grpc_types.CreateTEDSAIForceBridgeChanRequest(voltage_excit_source_raw=voltage_excit_source, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val),
         )
 
     def create_tedsai_force_iepe_chan(
@@ -852,7 +885,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             current_excit_val, custom_scale_name):
         response = self._invoke(
             self._client.CreateTEDSAIForceIEPEChan,
-            grpc_types.CreateTEDSAIForceIEPEChanRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, min_val, max_val, units, current_excit_source, current_excit_val, custom_scale_name),
+            grpc_types.CreateTEDSAIForceIEPEChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, terminal_config_raw=terminal_config, max_val=max_val, current_excit_val=current_excit_val, current_excit_source_raw=current_excit_source),
         )
 
     def create_tedsai_microphone_chan(
@@ -861,7 +894,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             current_excit_val, custom_scale_name):
         response = self._invoke(
             self._client.CreateTEDSAIMicrophoneChan,
-            grpc_types.CreateTEDSAIMicrophoneChanRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, units, max_snd_press_level, current_excit_source, current_excit_val, custom_scale_name),
+            grpc_types.CreateTEDSAIMicrophoneChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, terminal_config_raw=terminal_config, current_excit_val=current_excit_val, max_snd_press_level=max_snd_press_level, current_excit_source_raw=current_excit_source),
         )
 
     def create_tedsai_pos_lvdt_chan(
@@ -870,7 +903,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             voltage_excit_freq, ac_excit_wire_mode, custom_scale_name):
         response = self._invoke(
             self._client.CreateTEDSAIPosLVDTChan,
-            grpc_types.CreateTEDSAIPosLVDTChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, voltage_excit_source, voltage_excit_val, voltage_excit_freq, ac_excit_wire_mode, custom_scale_name),
+            grpc_types.CreateTEDSAIPosLVDTChanRequest(voltage_excit_source_raw=voltage_excit_source, voltage_excit_freq=voltage_excit_freq, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, ac_excit_wire_mode_raw=ac_excit_wire_mode),
         )
 
     def create_tedsai_pos_rvdt_chan(
@@ -879,7 +912,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             voltage_excit_freq, ac_excit_wire_mode, custom_scale_name):
         response = self._invoke(
             self._client.CreateTEDSAIPosRVDTChan,
-            grpc_types.CreateTEDSAIPosRVDTChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, voltage_excit_source, voltage_excit_val, voltage_excit_freq, ac_excit_wire_mode, custom_scale_name),
+            grpc_types.CreateTEDSAIPosRVDTChanRequest(voltage_excit_source_raw=voltage_excit_source, voltage_excit_freq=voltage_excit_freq, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, ac_excit_wire_mode_raw=ac_excit_wire_mode),
         )
 
     def create_tedsai_pressure_bridge_chan(
@@ -888,7 +921,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             custom_scale_name):
         response = self._invoke(
             self._client.CreateTEDSAIPressureBridgeChan,
-            grpc_types.CreateTEDSAIPressureBridgeChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, voltage_excit_source, voltage_excit_val, custom_scale_name),
+            grpc_types.CreateTEDSAIPressureBridgeChanRequest(voltage_excit_source_raw=voltage_excit_source, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val),
         )
 
     def create_tedsai_resistance_chan(
@@ -897,7 +930,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             current_excit_val, custom_scale_name):
         response = self._invoke(
             self._client.CreateTEDSAIResistanceChan,
-            grpc_types.CreateTEDSAIResistanceChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, resistance_config, current_excit_source, current_excit_val, custom_scale_name),
+            grpc_types.CreateTEDSAIResistanceChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, resistance_config_raw=resistance_config, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, current_excit_val=current_excit_val, current_excit_source_raw=current_excit_source),
         )
 
     def create_tedsai_strain_gage_chan(
@@ -906,7 +939,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             initial_bridge_voltage, lead_wire_resistance, custom_scale_name):
         response = self._invoke(
             self._client.CreateTEDSAIStrainGageChan,
-            grpc_types.CreateTEDSAIStrainGageChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, voltage_excit_source, voltage_excit_val, initial_bridge_voltage, lead_wire_resistance, custom_scale_name),
+            grpc_types.CreateTEDSAIStrainGageChanRequest(voltage_excit_source_raw=voltage_excit_source, lead_wire_resistance=lead_wire_resistance, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val, initial_bridge_voltage=initial_bridge_voltage),
         )
 
     def create_tedsai_thrmcpl_chan(
@@ -914,7 +947,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             max_val, units, cjc_source, cjc_val, cjc_channel):
         response = self._invoke(
             self._client.CreateTEDSAIThrmcplChan,
-            grpc_types.CreateTEDSAIThrmcplChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, cjc_source, cjc_val, cjc_channel),
+            grpc_types.CreateTEDSAIThrmcplChanRequest(cjc_val=cjc_val, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, cjc_channel=cjc_channel, physical_channel=physical_channel, units_raw=units, max_val=max_val, cjc_source_raw=cjc_source),
         )
 
     def create_tedsai_thrmstr_chan_iex(
@@ -923,7 +956,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             current_excit_val):
         response = self._invoke(
             self._client.CreateTEDSAIThrmstrChanIex,
-            grpc_types.CreateTEDSAIThrmstrChanIexRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, resistance_config, current_excit_source, current_excit_val),
+            grpc_types.CreateTEDSAIThrmstrChanIexRequest(name_to_assign_to_channel=name_to_assign_to_channel, resistance_config_raw=resistance_config, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, max_val=max_val, current_excit_val=current_excit_val, current_excit_source_raw=current_excit_source),
         )
 
     def create_tedsai_thrmstr_chan_vex(
@@ -932,7 +965,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             voltage_excit_val, r_1):
         response = self._invoke(
             self._client.CreateTEDSAIThrmstrChanVex,
-            grpc_types.CreateTEDSAIThrmstrChanVexRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, resistance_config, voltage_excit_source, voltage_excit_val, r_1),
+            grpc_types.CreateTEDSAIThrmstrChanVexRequest(voltage_excit_source_raw=voltage_excit_source, name_to_assign_to_channel=name_to_assign_to_channel, resistance_config_raw=resistance_config, min_val=min_val, task=task, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, max_val=max_val, r_1=r_1),
         )
 
     def create_tedsai_torque_bridge_chan(
@@ -941,7 +974,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             custom_scale_name):
         response = self._invoke(
             self._client.CreateTEDSAITorqueBridgeChan,
-            grpc_types.CreateTEDSAITorqueBridgeChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, voltage_excit_source, voltage_excit_val, custom_scale_name),
+            grpc_types.CreateTEDSAITorqueBridgeChanRequest(voltage_excit_source_raw=voltage_excit_source, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, custom_scale_name=custom_scale_name, max_val=max_val),
         )
 
     def create_tedsai_voltage_chan(
@@ -949,7 +982,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             terminal_config, min_val, max_val, units, custom_scale_name):
         response = self._invoke(
             self._client.CreateTEDSAIVoltageChan,
-            grpc_types.CreateTEDSAIVoltageChanRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, min_val, max_val, units, custom_scale_name),
+            grpc_types.CreateTEDSAIVoltageChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, custom_scale_name=custom_scale_name, terminal_config_raw=terminal_config, max_val=max_val),
         )
 
     def create_tedsai_voltage_chan_with_excit(
@@ -958,7 +991,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             voltage_excit_val, custom_scale_name):
         response = self._invoke(
             self._client.CreateTEDSAIVoltageChanWithExcit,
-            grpc_types.CreateTEDSAIVoltageChanWithExcitRequest(self, task, physical_channel, name_to_assign_to_channel, terminal_config, min_val, max_val, units, voltage_excit_source, voltage_excit_val, custom_scale_name),
+            grpc_types.CreateTEDSAIVoltageChanWithExcitRequest(voltage_excit_source_raw=voltage_excit_source, name_to_assign_to_channel=name_to_assign_to_channel, min_val=min_val, task=task, physical_channel=physical_channel, voltage_excit_val=voltage_excit_val, units_raw=units, custom_scale_name=custom_scale_name, terminal_config_raw=terminal_config, max_val=max_val),
         )
 
     def create_tedsairtd_chan(
@@ -967,471 +1000,1656 @@ class GrpcStubInterpreter(BaseInterpreter):
             current_excit_val):
         response = self._invoke(
             self._client.CreateTEDSAIRTDChan,
-            grpc_types.CreateTEDSAIRTDChanRequest(self, task, physical_channel, name_to_assign_to_channel, min_val, max_val, units, resistance_config, current_excit_source, current_excit_val),
+            grpc_types.CreateTEDSAIRTDChanRequest(name_to_assign_to_channel=name_to_assign_to_channel, resistance_config_raw=resistance_config, min_val=min_val, task=task, physical_channel=physical_channel, units_raw=units, max_val=max_val, current_excit_val=current_excit_val, current_excit_source_raw=current_excit_source),
         )
 
+    def create_watchdog_timer_task(
+            self, device_name, session_name, timeout, lines, exp_state):
+        response = self._invoke(
+            self._client.CreateWatchdogTimerTask,
+            grpc_types.CreateWatchdogTimerTaskRequest(session_name=session_name, device_name=device_name, exp_state_raw=exp_state, timeout=timeout, exp_states=exp_states, lines=lines),
+        )
+        return response.task
+
     def create_watchdog_timer_task_ex(
-            self, device_name, session_name, task, timeout):
+            self, device_name, session_name, timeout):
         response = self._invoke(
             self._client.CreateWatchdogTimerTaskEx,
-            grpc_types.CreateWatchdogTimerTaskExRequest(self, device_name, session_name, task, timeout),
+            grpc_types.CreateWatchdogTimerTaskExRequest(session_name=session_name, device_name=device_name, timeout=timeout),
         )
         return response.task
 
     def delete_network_device(self, device_name):
         response = self._invoke(
             self._client.DeleteNetworkDevice,
-            grpc_types.DeleteNetworkDeviceRequest(self, device_name),
+            grpc_types.DeleteNetworkDeviceRequest(device_name=device_name),
         )
+
+    def delete_saved_global_chan(self, channel_name):
+        response = self._invoke(
+            self._client.DeleteSavedGlobalChan,
+            grpc_types.DeleteSavedGlobalChanRequest(channel_name=channel_name),
+        )
+
+    def delete_saved_scale(self, scale_name):
+        response = self._invoke(
+            self._client.DeleteSavedScale,
+            grpc_types.DeleteSavedScaleRequest(scale_name=scale_name),
+        )
+
+    def delete_saved_task(self, task_name):
+        response = self._invoke(
+            self._client.DeleteSavedTask,
+            grpc_types.DeleteSavedTaskRequest(task_name=task_name),
+        )
+
+    def device_supports_cal(self, device_name):
+        response = self._invoke(
+            self._client.DeviceSupportsCal,
+            grpc_types.DeviceSupportsCalRequest(device_name=device_name),
+        )
+        return response.cal_supported
 
     def disable_ref_trig(self, task):
         response = self._invoke(
             self._client.DisableRefTrig,
-            grpc_types.DisableRefTrigRequest(self, task),
+            grpc_types.DisableRefTrigRequest(task=task),
         )
 
     def disable_start_trig(self, task):
         response = self._invoke(
             self._client.DisableStartTrig,
-            grpc_types.DisableStartTrigRequest(self, task),
+            grpc_types.DisableStartTrigRequest(task=task),
         )
 
     def disconnect_terms(self, source_terminal, destination_terminal):
         response = self._invoke(
             self._client.DisconnectTerms,
-            grpc_types.DisconnectTermsRequest(self, source_terminal, destination_terminal),
+            grpc_types.DisconnectTermsRequest(destination_terminal=destination_terminal, source_terminal=source_terminal),
         )
 
     def export_signal(self, task, signal_id, output_terminal):
         response = self._invoke(
             self._client.ExportSignal,
-            grpc_types.ExportSignalRequest(self, task, signal_id, output_terminal),
+            grpc_types.ExportSignalRequest(output_terminal=output_terminal, task=task, signal_id_raw=signal_id),
         )
 
+    def get_ai_chan_cal_cal_date(self, task, channel_name):
+        response = self._invoke(
+            self._client.GetAIChanCalCalDate,
+            grpc_types.GetAIChanCalCalDateRequest(channel_name=channel_name, task=task),
+        )
+        return response.year,response.month,response.day,response.hour,response.minute
+
+    def get_ai_chan_cal_exp_date(self, task, channel_name):
+        response = self._invoke(
+            self._client.GetAIChanCalExpDate,
+            grpc_types.GetAIChanCalExpDateRequest(channel_name=channel_name, task=task),
+        )
+        return response.year,response.month,response.day,response.hour,response.minute
+
     def get_analog_power_up_states(
-            self, device_name, channel_name, state, channel_type):
+            self, device_name, channel_name, channel_type):
         response = self._invoke(
             self._client.GetAnalogPowerUpStates,
-            grpc_types.GetAnalogPowerUpStatesRequest(self, device_name, channel_name, state, channel_type),
+            grpc_types.GetAnalogPowerUpStatesRequest(channel_name=channel_name, channels=channels, device_name=device_name, channel_type_raw=channel_type),
         )
         return response.state,response.power_up_states
 
     def get_analog_power_up_states_with_output_type(
-            self, channel_names, state_array, channel_type_array, array_size):
+            self, channel_names, array_size):
         response = self._invoke(
             self._client.GetAnalogPowerUpStatesWithOutputType,
-            grpc_types.GetAnalogPowerUpStatesWithOutputTypeRequest(self, channel_names, state_array, channel_type_array, array_size),
+            grpc_types.GetAnalogPowerUpStatesWithOutputTypeRequest(array_size=array_size, channel_names=channel_names),
         )
         return response.state_array,response.channel_type_array
 
-    def get_auto_configured_cdaq_sync_connections(self, port_list):
+    def get_auto_configured_cdaq_sync_connections(self):
         response = self._invoke(
             self._client.GetAutoConfiguredCDAQSyncConnections,
-            grpc_types.GetAutoConfiguredCDAQSyncConnectionsRequest(self, port_list),
+            grpc_types.GetAutoConfiguredCDAQSyncConnectionsRequest(),
         )
         return response.port_list
 
-    def get_digital_logic_family_power_up_state(
-            self, device_name, logic_family):
+    def get_buffer_attribute_uint32(self, task, attribute):
+        response = self._invoke(
+            self._client.GetBufferAttributeUInt32,
+            grpc_types.GetBufferAttributeUInt32Request(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_cal_info_attribute_bool(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetCalInfoAttributeBool,
+            grpc_types.GetCalInfoAttributeBoolRequest(attribute=attribute, device_name=device_name),
+        )
+        return response.value
+
+    def get_cal_info_attribute_double(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetCalInfoAttributeDouble,
+            grpc_types.GetCalInfoAttributeDoubleRequest(attribute=attribute, device_name=device_name),
+        )
+        return response.value
+
+    def get_cal_info_attribute_string(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetCalInfoAttributeString,
+            grpc_types.GetCalInfoAttributeStringRequest(attribute=attribute, device_name=device_name),
+        )
+        return response.value
+
+    def get_cal_info_attribute_uint32(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetCalInfoAttributeUInt32,
+            grpc_types.GetCalInfoAttributeUInt32Request(attribute=attribute, device_name=device_name),
+        )
+        return response.value
+
+    def get_chan_attribute_bool(self, task, channel, attribute):
+        response = self._invoke(
+            self._client.GetChanAttributeBool,
+            grpc_types.GetChanAttributeBoolRequest(channel=channel, attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_chan_attribute_double(self, task, channel, attribute):
+        response = self._invoke(
+            self._client.GetChanAttributeDouble,
+            grpc_types.GetChanAttributeDoubleRequest(channel=channel, attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_chan_attribute_double_array(self, task, channel, attribute):
+        response = self._invoke(
+            self._client.GetChanAttributeDoubleArray,
+            grpc_types.GetChanAttributeDoubleArrayRequest(channel=channel, attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_chan_attribute_int32(self, task, channel, attribute):
+        response = self._invoke(
+            self._client.GetChanAttributeInt32,
+            grpc_types.GetChanAttributeInt32Request(channel=channel, attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_chan_attribute_string(self, task, channel, attribute):
+        response = self._invoke(
+            self._client.GetChanAttributeString,
+            grpc_types.GetChanAttributeStringRequest(channel=channel, attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_chan_attribute_uint32(self, task, channel, attribute):
+        response = self._invoke(
+            self._client.GetChanAttributeUInt32,
+            grpc_types.GetChanAttributeUInt32Request(channel=channel, attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_device_attribute_bool(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetDeviceAttributeBool,
+            grpc_types.GetDeviceAttributeBoolRequest(attribute=attribute, device_name=device_name),
+        )
+        return response.value
+
+    def get_device_attribute_double(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetDeviceAttributeDouble,
+            grpc_types.GetDeviceAttributeDoubleRequest(attribute=attribute, device_name=device_name),
+        )
+        return response.value
+
+    def get_device_attribute_double_array(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetDeviceAttributeDoubleArray,
+            grpc_types.GetDeviceAttributeDoubleArrayRequest(attribute=attribute, device_name=device_name),
+        )
+        return response.value
+
+    def get_device_attribute_int32(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetDeviceAttributeInt32,
+            grpc_types.GetDeviceAttributeInt32Request(attribute=attribute, device_name=device_name),
+        )
+        return response.value
+
+    def get_device_attribute_int32_array(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetDeviceAttributeInt32Array,
+            grpc_types.GetDeviceAttributeInt32ArrayRequest(attribute=attribute, device_name=device_name),
+        )
+        return response.value
+
+    def get_device_attribute_string(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetDeviceAttributeString,
+            grpc_types.GetDeviceAttributeStringRequest(attribute=attribute, device_name=device_name),
+        )
+        return response.value
+
+    def get_device_attribute_uint32(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetDeviceAttributeUInt32,
+            grpc_types.GetDeviceAttributeUInt32Request(attribute=attribute, device_name=device_name),
+        )
+        return response.value
+
+    def get_device_attribute_uint32_array(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetDeviceAttributeUInt32Array,
+            grpc_types.GetDeviceAttributeUInt32ArrayRequest(attribute=attribute, device_name=device_name),
+        )
+        return response.value
+
+    def get_digital_logic_family_power_up_state(self, device_name):
         response = self._invoke(
             self._client.GetDigitalLogicFamilyPowerUpState,
-            grpc_types.GetDigitalLogicFamilyPowerUpStateRequest(self, device_name, logic_family),
+            grpc_types.GetDigitalLogicFamilyPowerUpStateRequest(device_name=device_name),
         )
         return response.logic_family
 
-    def get_digital_power_up_states(self, device_name, channel_name, state):
+    def get_digital_power_up_states(self, device_name, channel_name):
         response = self._invoke(
             self._client.GetDigitalPowerUpStates,
-            grpc_types.GetDigitalPowerUpStatesRequest(self, device_name, channel_name, state),
+            grpc_types.GetDigitalPowerUpStatesRequest(channel_name=channel_name, device_name=device_name),
         )
         return response.state,response.power_up_states
 
-    def get_digital_pull_up_pull_down_states(
-            self, device_name, channel_name, state):
+    def get_digital_pull_up_pull_down_states(self, device_name, channel_name):
         response = self._invoke(
             self._client.GetDigitalPullUpPullDownStates,
-            grpc_types.GetDigitalPullUpPullDownStatesRequest(self, device_name, channel_name, state),
+            grpc_types.GetDigitalPullUpPullDownStatesRequest(channel_name=channel_name, device_name=device_name),
         )
         return response.state,response.pull_up_pull_down_states
 
-    def get_disconnected_cdaq_sync_ports(self, port_list):
+    def get_disconnected_cdaq_sync_ports(self):
         response = self._invoke(
             self._client.GetDisconnectedCDAQSyncPorts,
-            grpc_types.GetDisconnectedCDAQSyncPortsRequest(self, port_list),
+            grpc_types.GetDisconnectedCDAQSyncPortsRequest(),
         )
         return response.port_list
 
-    def is_task_done(self, task, is_task_done):
+    def get_error_string(self, error_code):
+        response = self._invoke(
+            self._client.GetErrorString,
+            grpc_types.GetErrorStringRequest(error_code=error_code),
+        )
+        return response.error_string
+
+    def get_exported_signal_attribute_bool(self, task, attribute):
+        response = self._invoke(
+            self._client.GetExportedSignalAttributeBool,
+            grpc_types.GetExportedSignalAttributeBoolRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_exported_signal_attribute_double(self, task, attribute):
+        response = self._invoke(
+            self._client.GetExportedSignalAttributeDouble,
+            grpc_types.GetExportedSignalAttributeDoubleRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_exported_signal_attribute_int32(self, task, attribute):
+        response = self._invoke(
+            self._client.GetExportedSignalAttributeInt32,
+            grpc_types.GetExportedSignalAttributeInt32Request(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_exported_signal_attribute_string(self, task, attribute):
+        response = self._invoke(
+            self._client.GetExportedSignalAttributeString,
+            grpc_types.GetExportedSignalAttributeStringRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_exported_signal_attribute_uint32(self, task, attribute):
+        response = self._invoke(
+            self._client.GetExportedSignalAttributeUInt32,
+            grpc_types.GetExportedSignalAttributeUInt32Request(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_nth_task_channel(self, task, index):
+        response = self._invoke(
+            self._client.GetNthTaskChannel,
+            grpc_types.GetNthTaskChannelRequest(index=index, task=task),
+        )
+        return response.buffer
+
+    def get_nth_task_device(self, task, index):
+        response = self._invoke(
+            self._client.GetNthTaskDevice,
+            grpc_types.GetNthTaskDeviceRequest(index=index, task=task),
+        )
+        return response.buffer
+
+    def get_nth_task_read_channel(self, task, index):
+        response = self._invoke(
+            self._client.GetNthTaskReadChannel,
+            grpc_types.GetNthTaskReadChannelRequest(index=index, task=task),
+        )
+        return response.buffer
+
+    def get_persisted_chan_attribute_bool(self, channel, attribute):
+        response = self._invoke(
+            self._client.GetPersistedChanAttributeBool,
+            grpc_types.GetPersistedChanAttributeBoolRequest(channel=channel, attribute=attribute),
+        )
+        return response.value
+
+    def get_persisted_chan_attribute_string(self, channel, attribute):
+        response = self._invoke(
+            self._client.GetPersistedChanAttributeString,
+            grpc_types.GetPersistedChanAttributeStringRequest(channel=channel, attribute=attribute),
+        )
+        return response.value
+
+    def get_persisted_scale_attribute_bool(self, scale_name, attribute):
+        response = self._invoke(
+            self._client.GetPersistedScaleAttributeBool,
+            grpc_types.GetPersistedScaleAttributeBoolRequest(attribute=attribute, scale_name=scale_name),
+        )
+        return response.value
+
+    def get_persisted_scale_attribute_string(self, scale_name, attribute):
+        response = self._invoke(
+            self._client.GetPersistedScaleAttributeString,
+            grpc_types.GetPersistedScaleAttributeStringRequest(attribute=attribute, scale_name=scale_name),
+        )
+        return response.value
+
+    def get_persisted_task_attribute_bool(self, task_name, attribute):
+        response = self._invoke(
+            self._client.GetPersistedTaskAttributeBool,
+            grpc_types.GetPersistedTaskAttributeBoolRequest(attribute=attribute, task_name=task_name),
+        )
+        return response.value
+
+    def get_persisted_task_attribute_string(self, task_name, attribute):
+        response = self._invoke(
+            self._client.GetPersistedTaskAttributeString,
+            grpc_types.GetPersistedTaskAttributeStringRequest(attribute=attribute, task_name=task_name),
+        )
+        return response.value
+
+    def get_physical_chan_attribute_bool(self, physical_channel, attribute):
+        response = self._invoke(
+            self._client.GetPhysicalChanAttributeBool,
+            grpc_types.GetPhysicalChanAttributeBoolRequest(attribute=attribute, physical_channel=physical_channel),
+        )
+        return response.value
+
+    def get_physical_chan_attribute_bytes(self, physical_channel, attribute):
+        response = self._invoke(
+            self._client.GetPhysicalChanAttributeBytes,
+            grpc_types.GetPhysicalChanAttributeBytesRequest(attribute=attribute, physical_channel=physical_channel),
+        )
+        return response.value
+
+    def get_physical_chan_attribute_double(self, physical_channel, attribute):
+        response = self._invoke(
+            self._client.GetPhysicalChanAttributeDouble,
+            grpc_types.GetPhysicalChanAttributeDoubleRequest(attribute=attribute, physical_channel=physical_channel),
+        )
+        return response.value
+
+    def get_physical_chan_attribute_double_array(
+            self, physical_channel, attribute):
+        response = self._invoke(
+            self._client.GetPhysicalChanAttributeDoubleArray,
+            grpc_types.GetPhysicalChanAttributeDoubleArrayRequest(attribute=attribute, physical_channel=physical_channel),
+        )
+        return response.value
+
+    def get_physical_chan_attribute_int32(self, physical_channel, attribute):
+        response = self._invoke(
+            self._client.GetPhysicalChanAttributeInt32,
+            grpc_types.GetPhysicalChanAttributeInt32Request(attribute=attribute, physical_channel=physical_channel),
+        )
+        return response.value
+
+    def get_physical_chan_attribute_int32_array(
+            self, physical_channel, attribute):
+        response = self._invoke(
+            self._client.GetPhysicalChanAttributeInt32Array,
+            grpc_types.GetPhysicalChanAttributeInt32ArrayRequest(attribute=attribute, physical_channel=physical_channel),
+        )
+        return response.value
+
+    def get_physical_chan_attribute_string(self, physical_channel, attribute):
+        response = self._invoke(
+            self._client.GetPhysicalChanAttributeString,
+            grpc_types.GetPhysicalChanAttributeStringRequest(attribute=attribute, physical_channel=physical_channel),
+        )
+        return response.value
+
+    def get_physical_chan_attribute_uint32(self, physical_channel, attribute):
+        response = self._invoke(
+            self._client.GetPhysicalChanAttributeUInt32,
+            grpc_types.GetPhysicalChanAttributeUInt32Request(attribute=attribute, physical_channel=physical_channel),
+        )
+        return response.value
+
+    def get_physical_chan_attribute_uint32_array(
+            self, physical_channel, attribute):
+        response = self._invoke(
+            self._client.GetPhysicalChanAttributeUInt32Array,
+            grpc_types.GetPhysicalChanAttributeUInt32ArrayRequest(attribute=attribute, physical_channel=physical_channel),
+        )
+        return response.value
+
+    def get_read_attribute_bool(self, task, attribute):
+        response = self._invoke(
+            self._client.GetReadAttributeBool,
+            grpc_types.GetReadAttributeBoolRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_read_attribute_double(self, task, attribute):
+        response = self._invoke(
+            self._client.GetReadAttributeDouble,
+            grpc_types.GetReadAttributeDoubleRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_read_attribute_int32(self, task, attribute):
+        response = self._invoke(
+            self._client.GetReadAttributeInt32,
+            grpc_types.GetReadAttributeInt32Request(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_read_attribute_string(self, task, attribute):
+        response = self._invoke(
+            self._client.GetReadAttributeString,
+            grpc_types.GetReadAttributeStringRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_read_attribute_uint32(self, task, attribute):
+        response = self._invoke(
+            self._client.GetReadAttributeUInt32,
+            grpc_types.GetReadAttributeUInt32Request(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_read_attribute_uint64(self, task, attribute):
+        response = self._invoke(
+            self._client.GetReadAttributeUInt64,
+            grpc_types.GetReadAttributeUInt64Request(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_real_time_attribute_bool(self, task, attribute):
+        response = self._invoke(
+            self._client.GetRealTimeAttributeBool,
+            grpc_types.GetRealTimeAttributeBoolRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_real_time_attribute_int32(self, task, attribute):
+        response = self._invoke(
+            self._client.GetRealTimeAttributeInt32,
+            grpc_types.GetRealTimeAttributeInt32Request(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_real_time_attribute_uint32(self, task, attribute):
+        response = self._invoke(
+            self._client.GetRealTimeAttributeUInt32,
+            grpc_types.GetRealTimeAttributeUInt32Request(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_scale_attribute_double(self, scale_name, attribute):
+        response = self._invoke(
+            self._client.GetScaleAttributeDouble,
+            grpc_types.GetScaleAttributeDoubleRequest(attribute=attribute, scale_name=scale_name),
+        )
+        return response.value
+
+    def get_scale_attribute_double_array(self, scale_name, attribute):
+        response = self._invoke(
+            self._client.GetScaleAttributeDoubleArray,
+            grpc_types.GetScaleAttributeDoubleArrayRequest(attribute=attribute, scale_name=scale_name),
+        )
+        return response.value
+
+    def get_scale_attribute_int32(self, scale_name, attribute):
+        response = self._invoke(
+            self._client.GetScaleAttributeInt32,
+            grpc_types.GetScaleAttributeInt32Request(attribute=attribute, scale_name=scale_name),
+        )
+        return response.value
+
+    def get_scale_attribute_string(self, scale_name, attribute):
+        response = self._invoke(
+            self._client.GetScaleAttributeString,
+            grpc_types.GetScaleAttributeStringRequest(attribute=attribute, scale_name=scale_name),
+        )
+        return response.value
+
+    def get_self_cal_last_date_and_time(self, device_name):
+        response = self._invoke(
+            self._client.GetSelfCalLastDateAndTime,
+            grpc_types.GetSelfCalLastDateAndTimeRequest(device_name=device_name),
+        )
+        return response.year,response.month,response.day,response.hour,response.minute
+
+    def get_system_info_attribute_string(self, attribute):
+        response = self._invoke(
+            self._client.GetSystemInfoAttributeString,
+            grpc_types.GetSystemInfoAttributeStringRequest(attribute=attribute),
+        )
+        return response.value
+
+    def get_system_info_attribute_uint32(self, attribute):
+        response = self._invoke(
+            self._client.GetSystemInfoAttributeUInt32,
+            grpc_types.GetSystemInfoAttributeUInt32Request(attribute=attribute),
+        )
+        return response.value
+
+    def get_task_attribute_bool(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTaskAttributeBool,
+            grpc_types.GetTaskAttributeBoolRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_task_attribute_string(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTaskAttributeString,
+            grpc_types.GetTaskAttributeStringRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_task_attribute_uint32(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTaskAttributeUInt32,
+            grpc_types.GetTaskAttributeUInt32Request(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_timing_attribute_bool(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTimingAttributeBool,
+            grpc_types.GetTimingAttributeBoolRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_timing_attribute_double(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTimingAttributeDouble,
+            grpc_types.GetTimingAttributeDoubleRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_timing_attribute_ex_bool(self, task, device_names, attribute):
+        response = self._invoke(
+            self._client.GetTimingAttributeExBool,
+            grpc_types.GetTimingAttributeExBoolRequest(attribute=attribute, device_names=device_names, task=task),
+        )
+        return response.value
+
+    def get_timing_attribute_ex_double(self, task, device_names, attribute):
+        response = self._invoke(
+            self._client.GetTimingAttributeExDouble,
+            grpc_types.GetTimingAttributeExDoubleRequest(attribute=attribute, device_names=device_names, task=task),
+        )
+        return response.value
+
+    def get_timing_attribute_ex_int32(self, task, device_names, attribute):
+        response = self._invoke(
+            self._client.GetTimingAttributeExInt32,
+            grpc_types.GetTimingAttributeExInt32Request(attribute=attribute, device_names=device_names, task=task),
+        )
+        return response.value
+
+    def get_timing_attribute_ex_string(self, task, device_names, attribute):
+        response = self._invoke(
+            self._client.GetTimingAttributeExString,
+            grpc_types.GetTimingAttributeExStringRequest(attribute=attribute, device_names=device_names, task=task),
+        )
+        return response.value
+
+    def get_timing_attribute_ex_uint32(self, task, device_names, attribute):
+        response = self._invoke(
+            self._client.GetTimingAttributeExUInt32,
+            grpc_types.GetTimingAttributeExUInt32Request(attribute=attribute, device_names=device_names, task=task),
+        )
+        return response.value
+
+    def get_timing_attribute_ex_uint64(self, task, device_names, attribute):
+        response = self._invoke(
+            self._client.GetTimingAttributeExUInt64,
+            grpc_types.GetTimingAttributeExUInt64Request(attribute=attribute, device_names=device_names, task=task),
+        )
+        return response.value
+
+    def get_timing_attribute_int32(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTimingAttributeInt32,
+            grpc_types.GetTimingAttributeInt32Request(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_timing_attribute_string(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTimingAttributeString,
+            grpc_types.GetTimingAttributeStringRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_timing_attribute_uint32(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTimingAttributeUInt32,
+            grpc_types.GetTimingAttributeUInt32Request(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_timing_attribute_uint64(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTimingAttributeUInt64,
+            grpc_types.GetTimingAttributeUInt64Request(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_trig_attribute_bool(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTrigAttributeBool,
+            grpc_types.GetTrigAttributeBoolRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_trig_attribute_double(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTrigAttributeDouble,
+            grpc_types.GetTrigAttributeDoubleRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_trig_attribute_double_array(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTrigAttributeDoubleArray,
+            grpc_types.GetTrigAttributeDoubleArrayRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_trig_attribute_int32(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTrigAttributeInt32,
+            grpc_types.GetTrigAttributeInt32Request(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_trig_attribute_int32_array(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTrigAttributeInt32Array,
+            grpc_types.GetTrigAttributeInt32ArrayRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_trig_attribute_string(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTrigAttributeString,
+            grpc_types.GetTrigAttributeStringRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_trig_attribute_uint32(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTrigAttributeUInt32,
+            grpc_types.GetTrigAttributeUInt32Request(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_watchdog_attribute_bool(self, task, lines, attribute):
+        response = self._invoke(
+            self._client.GetWatchdogAttributeBool,
+            grpc_types.GetWatchdogAttributeBoolRequest(attribute=attribute, lines=lines, task=task),
+        )
+        return response.value
+
+    def get_watchdog_attribute_double(self, task, lines, attribute):
+        response = self._invoke(
+            self._client.GetWatchdogAttributeDouble,
+            grpc_types.GetWatchdogAttributeDoubleRequest(attribute=attribute, lines=lines, task=task),
+        )
+        return response.value
+
+    def get_watchdog_attribute_int32(self, task, lines, attribute):
+        response = self._invoke(
+            self._client.GetWatchdogAttributeInt32,
+            grpc_types.GetWatchdogAttributeInt32Request(attribute=attribute, lines=lines, task=task),
+        )
+        return response.value
+
+    def get_watchdog_attribute_string(self, task, lines, attribute):
+        response = self._invoke(
+            self._client.GetWatchdogAttributeString,
+            grpc_types.GetWatchdogAttributeStringRequest(attribute=attribute, lines=lines, task=task),
+        )
+        return response.value
+
+    def get_write_attribute_bool(self, task, attribute):
+        response = self._invoke(
+            self._client.GetWriteAttributeBool,
+            grpc_types.GetWriteAttributeBoolRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_write_attribute_double(self, task, attribute):
+        response = self._invoke(
+            self._client.GetWriteAttributeDouble,
+            grpc_types.GetWriteAttributeDoubleRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_write_attribute_int32(self, task, attribute):
+        response = self._invoke(
+            self._client.GetWriteAttributeInt32,
+            grpc_types.GetWriteAttributeInt32Request(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_write_attribute_string(self, task, attribute):
+        response = self._invoke(
+            self._client.GetWriteAttributeString,
+            grpc_types.GetWriteAttributeStringRequest(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_write_attribute_uint32(self, task, attribute):
+        response = self._invoke(
+            self._client.GetWriteAttributeUInt32,
+            grpc_types.GetWriteAttributeUInt32Request(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def get_write_attribute_uint64(self, task, attribute):
+        response = self._invoke(
+            self._client.GetWriteAttributeUInt64,
+            grpc_types.GetWriteAttributeUInt64Request(attribute=attribute, task=task),
+        )
+        return response.value
+
+    def is_task_done(self, task):
         response = self._invoke(
             self._client.IsTaskDone,
-            grpc_types.IsTaskDoneRequest(self, task, is_task_done),
+            grpc_types.IsTaskDoneRequest(task=task),
         )
         return response.is_task_done
 
-    def load_task(self, session_name, task):
+    def load_task(self, session_name):
         response = self._invoke(
             self._client.LoadTask,
-            grpc_types.LoadTaskRequest(self, session_name, task),
+            grpc_types.LoadTaskRequest(session_name=session_name),
         )
         return response.task
 
     def read_analog_f64(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadAnalogF64,
-            grpc_types.ReadAnalogF64Request(self, task, num_samps_per_chan, timeout, fill_mode, read_array, samps_per_chan_read),
+            grpc_types.ReadAnalogF64Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, read_array=read_array, task=task, fill_mode_raw=fill_mode),
         )
         return response.read_array,response.samps_per_chan_read
 
-    def read_analog_scalar_f64(self, task, timeout, value):
+    def read_analog_scalar_f64(self, task, timeout):
         response = self._invoke(
             self._client.ReadAnalogScalarF64,
-            grpc_types.ReadAnalogScalarF64Request(self, task, timeout, value),
+            grpc_types.ReadAnalogScalarF64Request(task=task, timeout=timeout),
         )
         return response.value
 
     def read_binary_i16(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadBinaryI16,
-            grpc_types.ReadBinaryI16Request(self, task, num_samps_per_chan, timeout, fill_mode, read_array, samps_per_chan_read),
+            grpc_types.ReadBinaryI16Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, read_array=read_array, task=task, fill_mode_raw=fill_mode),
         )
         return response.read_array,response.samps_per_chan_read
 
     def read_binary_i32(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadBinaryI32,
-            grpc_types.ReadBinaryI32Request(self, task, num_samps_per_chan, timeout, fill_mode, read_array, samps_per_chan_read),
+            grpc_types.ReadBinaryI32Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, read_array=read_array, task=task, fill_mode_raw=fill_mode),
         )
         return response.read_array,response.samps_per_chan_read
 
     def read_binary_u16(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadBinaryU16,
-            grpc_types.ReadBinaryU16Request(self, task, num_samps_per_chan, timeout, fill_mode, read_array, samps_per_chan_read),
+            grpc_types.ReadBinaryU16Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, read_array=read_array, task=task, fill_mode_raw=fill_mode),
         )
         return response.read_array,response.samps_per_chan_read
 
     def read_binary_u32(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadBinaryU32,
-            grpc_types.ReadBinaryU32Request(self, task, num_samps_per_chan, timeout, fill_mode, read_array, samps_per_chan_read),
+            grpc_types.ReadBinaryU32Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, read_array=read_array, task=task, fill_mode_raw=fill_mode),
         )
         return response.read_array,response.samps_per_chan_read
 
-    def read_counter_f64(
-            self, task, num_samps_per_chan, timeout, read_array,
-            samps_per_chan_read):
+    def read_counter_f64(self, task, num_samps_per_chan, timeout, read_array):
         response = self._invoke(
             self._client.ReadCounterF64,
-            grpc_types.ReadCounterF64Request(self, task, num_samps_per_chan, timeout, read_array, samps_per_chan_read),
+            grpc_types.ReadCounterF64Request(read_array=read_array, num_samps_per_chan=num_samps_per_chan, task=task, timeout=timeout),
         )
         return response.read_array,response.samps_per_chan_read
 
     def read_counter_f64_ex(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadCounterF64Ex,
-            grpc_types.ReadCounterF64ExRequest(self, task, num_samps_per_chan, timeout, fill_mode, read_array, samps_per_chan_read),
+            grpc_types.ReadCounterF64ExRequest(num_samps_per_chan=num_samps_per_chan, timeout=timeout, read_array=read_array, task=task, fill_mode_raw=fill_mode),
         )
         return response.read_array,response.samps_per_chan_read
 
-    def read_counter_scalar_f64(self, task, timeout, value):
+    def read_counter_scalar_f64(self, task, timeout):
         response = self._invoke(
             self._client.ReadCounterScalarF64,
-            grpc_types.ReadCounterScalarF64Request(self, task, timeout, value),
+            grpc_types.ReadCounterScalarF64Request(task=task, timeout=timeout),
         )
         return response.value
 
-    def read_counter_scalar_u32(self, task, timeout, value):
+    def read_counter_scalar_u32(self, task, timeout):
         response = self._invoke(
             self._client.ReadCounterScalarU32,
-            grpc_types.ReadCounterScalarU32Request(self, task, timeout, value),
+            grpc_types.ReadCounterScalarU32Request(task=task, timeout=timeout),
         )
         return response.value
 
-    def read_counter_u32(
-            self, task, num_samps_per_chan, timeout, read_array,
-            samps_per_chan_read):
+    def read_counter_u32(self, task, num_samps_per_chan, timeout, read_array):
         response = self._invoke(
             self._client.ReadCounterU32,
-            grpc_types.ReadCounterU32Request(self, task, num_samps_per_chan, timeout, read_array, samps_per_chan_read),
+            grpc_types.ReadCounterU32Request(read_array=read_array, num_samps_per_chan=num_samps_per_chan, task=task, timeout=timeout),
         )
         return response.read_array,response.samps_per_chan_read
 
     def read_counter_u32_ex(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadCounterU32Ex,
-            grpc_types.ReadCounterU32ExRequest(self, task, num_samps_per_chan, timeout, fill_mode, read_array, samps_per_chan_read),
+            grpc_types.ReadCounterU32ExRequest(num_samps_per_chan=num_samps_per_chan, timeout=timeout, read_array=read_array, task=task, fill_mode_raw=fill_mode),
         )
         return response.read_array,response.samps_per_chan_read
 
     def read_ctr_freq(
             self, task, num_samps_per_chan, timeout, interleaved,
-            read_array_frequency, read_array_duty_cycle, samps_per_chan_read):
+            read_array_frequency, read_array_duty_cycle):
         response = self._invoke(
             self._client.ReadCtrFreq,
-            grpc_types.ReadCtrFreqRequest(self, task, num_samps_per_chan, timeout, interleaved, read_array_frequency, read_array_duty_cycle, samps_per_chan_read),
+            grpc_types.ReadCtrFreqRequest(num_samps_per_chan=num_samps_per_chan, timeout=timeout, task=task, read_array_frequency=read_array_frequency, interleaved_raw=interleaved, read_array_duty_cycle=read_array_duty_cycle),
         )
         return response.read_array_frequency,response.read_array_duty_cycle,response.samps_per_chan_read
 
-    def read_ctr_freq_scalar(self, task, timeout, frequency, duty_cycle):
+    def read_ctr_freq_scalar(self, task, timeout):
         response = self._invoke(
             self._client.ReadCtrFreqScalar,
-            grpc_types.ReadCtrFreqScalarRequest(self, task, timeout, frequency, duty_cycle),
+            grpc_types.ReadCtrFreqScalarRequest(task=task, timeout=timeout),
         )
         return response.frequency,response.duty_cycle
 
     def read_ctr_ticks(
             self, task, num_samps_per_chan, timeout, interleaved,
-            read_array_high_ticks, read_array_low_ticks, samps_per_chan_read):
+            read_array_high_ticks, read_array_low_ticks):
         response = self._invoke(
             self._client.ReadCtrTicks,
-            grpc_types.ReadCtrTicksRequest(self, task, num_samps_per_chan, timeout, interleaved, read_array_high_ticks, read_array_low_ticks, samps_per_chan_read),
+            grpc_types.ReadCtrTicksRequest(num_samps_per_chan=num_samps_per_chan, timeout=timeout, read_array_high_ticks=read_array_high_ticks, task=task, read_array_low_ticks=read_array_low_ticks, interleaved_raw=interleaved),
         )
         return response.read_array_high_ticks,response.read_array_low_ticks,response.samps_per_chan_read
 
-    def read_ctr_ticks_scalar(self, task, timeout, high_ticks, low_ticks):
+    def read_ctr_ticks_scalar(self, task, timeout):
         response = self._invoke(
             self._client.ReadCtrTicksScalar,
-            grpc_types.ReadCtrTicksScalarRequest(self, task, timeout, high_ticks, low_ticks),
+            grpc_types.ReadCtrTicksScalarRequest(task=task, timeout=timeout),
         )
         return response.high_ticks,response.low_ticks
 
     def read_ctr_time(
             self, task, num_samps_per_chan, timeout, interleaved,
-            read_array_high_time, read_array_low_time, samps_per_chan_read):
+            read_array_high_time, read_array_low_time):
         response = self._invoke(
             self._client.ReadCtrTime,
-            grpc_types.ReadCtrTimeRequest(self, task, num_samps_per_chan, timeout, interleaved, read_array_high_time, read_array_low_time, samps_per_chan_read),
+            grpc_types.ReadCtrTimeRequest(num_samps_per_chan=num_samps_per_chan, timeout=timeout, read_array_high_time=read_array_high_time, task=task, read_array_low_time=read_array_low_time, interleaved_raw=interleaved),
         )
         return response.read_array_high_time,response.read_array_low_time,response.samps_per_chan_read
 
-    def read_ctr_time_scalar(self, task, timeout, high_time, low_time):
+    def read_ctr_time_scalar(self, task, timeout):
         response = self._invoke(
             self._client.ReadCtrTimeScalar,
-            grpc_types.ReadCtrTimeScalarRequest(self, task, timeout, high_time, low_time),
+            grpc_types.ReadCtrTimeScalarRequest(task=task, timeout=timeout),
         )
         return response.high_time,response.low_time
 
     def read_digital_lines(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read, num_bytes_per_samp):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadDigitalLines,
-            grpc_types.ReadDigitalLinesRequest(self, task, num_samps_per_chan, timeout, fill_mode, read_array, samps_per_chan_read, num_bytes_per_samp),
+            grpc_types.ReadDigitalLinesRequest(num_samps_per_chan=num_samps_per_chan, timeout=timeout, read_array=read_array, task=task, fill_mode_raw=fill_mode),
         )
         return response.read_array,response.samps_per_chan_read,response.num_bytes_per_samp
 
-    def read_digital_scalar_u32(self, task, timeout, value):
+    def read_digital_scalar_u32(self, task, timeout):
         response = self._invoke(
             self._client.ReadDigitalScalarU32,
-            grpc_types.ReadDigitalScalarU32Request(self, task, timeout, value),
+            grpc_types.ReadDigitalScalarU32Request(task=task, timeout=timeout),
         )
         return response.value
 
     def read_digital_u16(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadDigitalU16,
-            grpc_types.ReadDigitalU16Request(self, task, num_samps_per_chan, timeout, fill_mode, read_array, samps_per_chan_read),
+            grpc_types.ReadDigitalU16Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, read_array=read_array, task=task, fill_mode_raw=fill_mode),
         )
         return response.read_array,response.samps_per_chan_read
 
     def read_digital_u32(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadDigitalU32,
-            grpc_types.ReadDigitalU32Request(self, task, num_samps_per_chan, timeout, fill_mode, read_array, samps_per_chan_read),
+            grpc_types.ReadDigitalU32Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, read_array=read_array, task=task, fill_mode_raw=fill_mode),
         )
         return response.read_array,response.samps_per_chan_read
 
     def read_digital_u8(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array,
-            samps_per_chan_read):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadDigitalU8,
-            grpc_types.ReadDigitalU8Request(self, task, num_samps_per_chan, timeout, fill_mode, read_array, samps_per_chan_read),
+            grpc_types.ReadDigitalU8Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, read_array=read_array, task=task, fill_mode_raw=fill_mode),
         )
         return response.read_array,response.samps_per_chan_read
 
-    def read_power_scalar_f64(self, task, timeout, voltage, current):
+    def read_power_binary_i16(
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            read_array_voltage, read_array_current):
+        response = self._invoke(
+            self._client.ReadPowerBinaryI16,
+            grpc_types.ReadPowerBinaryI16Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, task=task, fill_mode_raw=fill_mode, read_array_current=read_array_current, read_array_voltage=read_array_voltage),
+        )
+        return response.read_array_voltage,response.read_array_current,response.samps_per_chan_read
+
+    def read_power_f64(
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            read_array_voltage, read_array_current):
+        response = self._invoke(
+            self._client.ReadPowerF64,
+            grpc_types.ReadPowerF64Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, task=task, fill_mode_raw=fill_mode, read_array_current=read_array_current, read_array_voltage=read_array_voltage),
+        )
+        return response.read_array_voltage,response.read_array_current,response.samps_per_chan_read
+
+    def read_power_scalar_f64(self, task, timeout):
         response = self._invoke(
             self._client.ReadPowerScalarF64,
-            grpc_types.ReadPowerScalarF64Request(self, task, timeout, voltage, current),
+            grpc_types.ReadPowerScalarF64Request(task=task, timeout=timeout),
         )
         return response.voltage,response.current
+
+    def read_raw(self, task, num_samps_per_chan, timeout, read_array):
+        response = self._invoke(
+            self._client.ReadRaw,
+            grpc_types.ReadRawRequest(read_array=read_array, num_samps_per_chan=num_samps_per_chan, task=task, timeout=timeout),
+        )
+        return response.read_array,response.samps_read,response.num_bytes_per_samp
+
+    def register_done_event(
+            self, task, options, callback_function, callback_data):
+        response = self._invoke(
+            self._client.RegisterDoneEvent,
+            grpc_types.RegisterDoneEventRequest(callback_function=callback_function, options=options, task=task, callback_data=callback_data),
+        )
+
+    def register_every_n_samples_event(
+            self, task, every_n_samples_event_type, n_samples, options,
+            callback_function, callback_data):
+        response = self._invoke(
+            self._client.RegisterEveryNSamplesEvent,
+            grpc_types.RegisterEveryNSamplesEventRequest(callback_data=callback_data, task=task, every_n_samples_event_type_raw=every_n_samples_event_type, n_samples=n_samples, callback_function=callback_function, options=options),
+        )
+
+    def register_signal_event(
+            self, task, signal_id, options, callback_function, callback_data):
+        response = self._invoke(
+            self._client.RegisterSignalEvent,
+            grpc_types.RegisterSignalEventRequest(callback_data=callback_data, task=task, signal_id_raw=signal_id, callback_function=callback_function, options=options),
+        )
 
     def remove_cdaq_sync_connection(self, port_list):
         response = self._invoke(
             self._client.RemoveCDAQSyncConnection,
-            grpc_types.RemoveCDAQSyncConnectionRequest(self, port_list),
+            grpc_types.RemoveCDAQSyncConnectionRequest(port_list=port_list),
         )
 
     def reserve_network_device(self, device_name, override_reservation):
         response = self._invoke(
             self._client.ReserveNetworkDevice,
-            grpc_types.ReserveNetworkDeviceRequest(self, device_name, override_reservation),
+            grpc_types.ReserveNetworkDeviceRequest(override_reservation=override_reservation, device_name=device_name),
+        )
+
+    def reset_buffer_attribute(self, task, attribute):
+        response = self._invoke(
+            self._client.ResetBufferAttribute,
+            grpc_types.ResetBufferAttributeRequest(attribute=attribute, task=task),
+        )
+
+    def reset_chan_attribute(self, task, channel, attribute):
+        response = self._invoke(
+            self._client.ResetChanAttribute,
+            grpc_types.ResetChanAttributeRequest(channel=channel, attribute=attribute, task=task),
         )
 
     def reset_device(self, device_name):
         response = self._invoke(
             self._client.ResetDevice,
-            grpc_types.ResetDeviceRequest(self, device_name),
+            grpc_types.ResetDeviceRequest(device_name=device_name),
+        )
+
+    def reset_exported_signal_attribute(self, task, attribute):
+        response = self._invoke(
+            self._client.ResetExportedSignalAttribute,
+            grpc_types.ResetExportedSignalAttributeRequest(attribute=attribute, task=task),
+        )
+
+    def reset_read_attribute(self, task, attribute):
+        response = self._invoke(
+            self._client.ResetReadAttribute,
+            grpc_types.ResetReadAttributeRequest(attribute=attribute, task=task),
+        )
+
+    def reset_real_time_attribute(self, task, attribute):
+        response = self._invoke(
+            self._client.ResetRealTimeAttribute,
+            grpc_types.ResetRealTimeAttributeRequest(attribute=attribute, task=task),
+        )
+
+    def reset_timing_attribute(self, task, attribute):
+        response = self._invoke(
+            self._client.ResetTimingAttribute,
+            grpc_types.ResetTimingAttributeRequest(attribute=attribute, task=task),
+        )
+
+    def reset_timing_attribute_ex(self, task, device_names, attribute):
+        response = self._invoke(
+            self._client.ResetTimingAttributeEx,
+            grpc_types.ResetTimingAttributeExRequest(attribute=attribute, device_names=device_names, task=task),
+        )
+
+    def reset_trig_attribute(self, task, attribute):
+        response = self._invoke(
+            self._client.ResetTrigAttribute,
+            grpc_types.ResetTrigAttributeRequest(attribute=attribute, task=task),
+        )
+
+    def reset_watchdog_attribute(self, task, lines, attribute):
+        response = self._invoke(
+            self._client.ResetWatchdogAttribute,
+            grpc_types.ResetWatchdogAttributeRequest(attribute=attribute, lines=lines, task=task),
+        )
+
+    def reset_write_attribute(self, task, attribute):
+        response = self._invoke(
+            self._client.ResetWriteAttribute,
+            grpc_types.ResetWriteAttributeRequest(attribute=attribute, task=task),
+        )
+
+    def save_global_chan(self, task, channel_name, save_as, author, options):
+        response = self._invoke(
+            self._client.SaveGlobalChan,
+            grpc_types.SaveGlobalChanRequest(author=author, channel_name=channel_name, task=task, options_raw=options, save_as=save_as),
+        )
+
+    def save_scale(self, scale_name, save_as, author, options):
+        response = self._invoke(
+            self._client.SaveScale,
+            grpc_types.SaveScaleRequest(options_raw=options, author=author, save_as=save_as, scale_name=scale_name),
+        )
+
+    def save_task(self, task, save_as, author, options):
+        response = self._invoke(
+            self._client.SaveTask,
+            grpc_types.SaveTaskRequest(author=author, options_raw=options, save_as=save_as, task=task),
+        )
+
+    def self_cal(self, device_name):
+        response = self._invoke(
+            self._client.SelfCal,
+            grpc_types.SelfCalRequest(device_name=device_name),
         )
 
     def self_test_device(self, device_name):
         response = self._invoke(
             self._client.SelfTestDevice,
-            grpc_types.SelfTestDeviceRequest(self, device_name),
+            grpc_types.SelfTestDeviceRequest(device_name=device_name),
+        )
+
+    def set_ai_chan_cal_cal_date(
+            self, task, channel_name, year, month, day, hour, minute):
+        response = self._invoke(
+            self._client.SetAIChanCalCalDate,
+            grpc_types.SetAIChanCalCalDateRequest(year=year, channel_name=channel_name, month=month, task=task, minute=minute, hour=hour, day=day),
+        )
+
+    def set_ai_chan_cal_exp_date(
+            self, task, channel_name, year, month, day, hour, minute):
+        response = self._invoke(
+            self._client.SetAIChanCalExpDate,
+            grpc_types.SetAIChanCalExpDateRequest(year=year, channel_name=channel_name, month=month, task=task, minute=minute, hour=hour, day=day),
         )
 
     def set_analog_power_up_states(
             self, device_name, channel_names, state, channel_type):
         response = self._invoke(
             self._client.SetAnalogPowerUpStates,
-            grpc_types.SetAnalogPowerUpStatesRequest(self, device_name, channel_names, state, channel_type),
+            grpc_types.SetAnalogPowerUpStatesRequest(state=state, power_up_states=power_up_states, device_name=device_name, channel_type_raw=channel_type, channel_names=channel_names),
         )
 
     def set_analog_power_up_states_with_output_type(
             self, channel_names, state_array, channel_type_array, array_size):
         response = self._invoke(
             self._client.SetAnalogPowerUpStatesWithOutputType,
-            grpc_types.SetAnalogPowerUpStatesWithOutputTypeRequest(self, channel_names, state_array, channel_type_array, array_size),
+            grpc_types.SetAnalogPowerUpStatesWithOutputTypeRequest(array_size=array_size, state_array=state_array, channel_type_array_raw=channel_type_array, channel_names=channel_names),
+        )
+
+    def set_buffer_attribute_uint32(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetBufferAttributeUInt32,
+            grpc_types.SetBufferAttributeUInt32Request(value=value, attribute=attribute, task=task),
+        )
+
+    def set_cal_info_attribute_bool(self, device_name, attribute, value):
+        response = self._invoke(
+            self._client.SetCalInfoAttributeBool,
+            grpc_types.SetCalInfoAttributeBoolRequest(value=value, attribute=attribute, device_name=device_name),
+        )
+
+    def set_cal_info_attribute_double(self, device_name, attribute, value):
+        response = self._invoke(
+            self._client.SetCalInfoAttributeDouble,
+            grpc_types.SetCalInfoAttributeDoubleRequest(value=value, attribute=attribute, device_name=device_name),
+        )
+
+    def set_cal_info_attribute_string(self, device_name, attribute, value):
+        response = self._invoke(
+            self._client.SetCalInfoAttributeString,
+            grpc_types.SetCalInfoAttributeStringRequest(value=value, attribute=attribute, device_name=device_name),
+        )
+
+    def set_cal_info_attribute_uint32(self, device_name, attribute, value):
+        response = self._invoke(
+            self._client.SetCalInfoAttributeUInt32,
+            grpc_types.SetCalInfoAttributeUInt32Request(value=value, attribute=attribute, device_name=device_name),
+        )
+
+    def set_chan_attribute_bool(self, task, channel, attribute, value):
+        response = self._invoke(
+            self._client.SetChanAttributeBool,
+            grpc_types.SetChanAttributeBoolRequest(value=value, channel=channel, attribute=attribute, task=task),
+        )
+
+    def set_chan_attribute_double(self, task, channel, attribute, value):
+        response = self._invoke(
+            self._client.SetChanAttributeDouble,
+            grpc_types.SetChanAttributeDoubleRequest(value=value, channel=channel, attribute=attribute, task=task),
+        )
+
+    def set_chan_attribute_double_array(
+            self, task, channel, attribute, value, size):
+        response = self._invoke(
+            self._client.SetChanAttributeDoubleArray,
+            grpc_types.SetChanAttributeDoubleArrayRequest(task=task, size=size, value=value, channel=channel, attribute=attribute),
+        )
+
+    def set_chan_attribute_int32(self, task, channel, attribute, value):
+        response = self._invoke(
+            self._client.SetChanAttributeInt32,
+            grpc_types.SetChanAttributeInt32Request(value=value, channel=channel, attribute=attribute, task=task),
+        )
+
+    def set_chan_attribute_string(self, task, channel, attribute, value):
+        response = self._invoke(
+            self._client.SetChanAttributeString,
+            grpc_types.SetChanAttributeStringRequest(value=value, channel=channel, attribute=attribute, task=task),
+        )
+
+    def set_chan_attribute_uint32(self, task, channel, attribute, value):
+        response = self._invoke(
+            self._client.SetChanAttributeUInt32,
+            grpc_types.SetChanAttributeUInt32Request(value=value, channel=channel, attribute=attribute, task=task),
         )
 
     def set_digital_logic_family_power_up_state(
             self, device_name, logic_family):
         response = self._invoke(
             self._client.SetDigitalLogicFamilyPowerUpState,
-            grpc_types.SetDigitalLogicFamilyPowerUpStateRequest(self, device_name, logic_family),
+            grpc_types.SetDigitalLogicFamilyPowerUpStateRequest(logic_family_raw=logic_family, device_name=device_name),
         )
 
     def set_digital_power_up_states(self, device_name, channel_names, state):
         response = self._invoke(
             self._client.SetDigitalPowerUpStates,
-            grpc_types.SetDigitalPowerUpStatesRequest(self, device_name, channel_names, state),
+            grpc_types.SetDigitalPowerUpStatesRequest(channel_names=channel_names, power_up_states=power_up_states, device_name=device_name, state_raw=state),
         )
 
     def set_digital_pull_up_pull_down_states(
             self, device_name, channel_names, state):
         response = self._invoke(
             self._client.SetDigitalPullUpPullDownStates,
-            grpc_types.SetDigitalPullUpPullDownStatesRequest(self, device_name, channel_names, state),
+            grpc_types.SetDigitalPullUpPullDownStatesRequest(channel_names=channel_names, pull_up_pull_down_states=pull_up_pull_down_states, device_name=device_name, state_raw=state),
+        )
+
+    def set_exported_signal_attribute_bool(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetExportedSignalAttributeBool,
+            grpc_types.SetExportedSignalAttributeBoolRequest(value=value, attribute=attribute, task=task),
+        )
+
+    def set_exported_signal_attribute_double(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetExportedSignalAttributeDouble,
+            grpc_types.SetExportedSignalAttributeDoubleRequest(value=value, attribute=attribute, task=task),
+        )
+
+    def set_exported_signal_attribute_int32(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetExportedSignalAttributeInt32,
+            grpc_types.SetExportedSignalAttributeInt32Request(value=value, attribute=attribute, task=task),
+        )
+
+    def set_exported_signal_attribute_string(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetExportedSignalAttributeString,
+            grpc_types.SetExportedSignalAttributeStringRequest(value=value, attribute=attribute, task=task),
+        )
+
+    def set_exported_signal_attribute_uint32(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetExportedSignalAttributeUInt32,
+            grpc_types.SetExportedSignalAttributeUInt32Request(value=value, attribute=attribute, task=task),
+        )
+
+    def set_read_attribute_bool(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetReadAttributeBool,
+            grpc_types.SetReadAttributeBoolRequest(value=value, attribute=attribute, task=task),
+        )
+
+    def set_read_attribute_double(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetReadAttributeDouble,
+            grpc_types.SetReadAttributeDoubleRequest(value=value, attribute=attribute, task=task),
+        )
+
+    def set_read_attribute_int32(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetReadAttributeInt32,
+            grpc_types.SetReadAttributeInt32Request(value=value, attribute=attribute, task=task),
+        )
+
+    def set_read_attribute_string(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetReadAttributeString,
+            grpc_types.SetReadAttributeStringRequest(value=value, attribute=attribute, task=task),
+        )
+
+    def set_read_attribute_uint32(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetReadAttributeUInt32,
+            grpc_types.SetReadAttributeUInt32Request(value=value, attribute=attribute, task=task),
+        )
+
+    def set_read_attribute_uint64(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetReadAttributeUInt64,
+            grpc_types.SetReadAttributeUInt64Request(value=value, attribute=attribute, task=task),
+        )
+
+    def set_real_time_attribute_bool(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetRealTimeAttributeBool,
+            grpc_types.SetRealTimeAttributeBoolRequest(value=value, attribute=attribute, task=task),
+        )
+
+    def set_real_time_attribute_int32(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetRealTimeAttributeInt32,
+            grpc_types.SetRealTimeAttributeInt32Request(value=value, attribute=attribute, task=task),
+        )
+
+    def set_real_time_attribute_uint32(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetRealTimeAttributeUInt32,
+            grpc_types.SetRealTimeAttributeUInt32Request(value=value, attribute=attribute, task=task),
+        )
+
+    def set_scale_attribute_double(self, scale_name, attribute, value):
+        response = self._invoke(
+            self._client.SetScaleAttributeDouble,
+            grpc_types.SetScaleAttributeDoubleRequest(value=value, attribute=attribute, scale_name=scale_name),
+        )
+
+    def set_scale_attribute_double_array(
+            self, scale_name, attribute, value, size):
+        response = self._invoke(
+            self._client.SetScaleAttributeDoubleArray,
+            grpc_types.SetScaleAttributeDoubleArrayRequest(value=value, attribute=attribute, scale_name=scale_name, size=size),
+        )
+
+    def set_scale_attribute_int32(self, scale_name, attribute, value):
+        response = self._invoke(
+            self._client.SetScaleAttributeInt32,
+            grpc_types.SetScaleAttributeInt32Request(value=value, attribute=attribute, scale_name=scale_name),
+        )
+
+    def set_scale_attribute_string(self, scale_name, attribute, value):
+        response = self._invoke(
+            self._client.SetScaleAttributeString,
+            grpc_types.SetScaleAttributeStringRequest(value=value, attribute=attribute, scale_name=scale_name),
+        )
+
+    def set_timing_attribute_bool(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetTimingAttributeBool,
+            grpc_types.SetTimingAttributeBoolRequest(value=value, attribute=attribute, task=task),
+        )
+
+    def set_timing_attribute_double(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetTimingAttributeDouble,
+            grpc_types.SetTimingAttributeDoubleRequest(value=value, attribute=attribute, task=task),
+        )
+
+    def set_timing_attribute_ex_bool(
+            self, task, device_names, attribute, value):
+        response = self._invoke(
+            self._client.SetTimingAttributeExBool,
+            grpc_types.SetTimingAttributeExBoolRequest(attribute=attribute, value=value, device_names=device_names, task=task),
+        )
+
+    def set_timing_attribute_ex_double(
+            self, task, device_names, attribute, value):
+        response = self._invoke(
+            self._client.SetTimingAttributeExDouble,
+            grpc_types.SetTimingAttributeExDoubleRequest(attribute=attribute, value=value, device_names=device_names, task=task),
+        )
+
+    def set_timing_attribute_ex_int32(
+            self, task, device_names, attribute, value):
+        response = self._invoke(
+            self._client.SetTimingAttributeExInt32,
+            grpc_types.SetTimingAttributeExInt32Request(attribute=attribute, value=value, device_names=device_names, task=task),
+        )
+
+    def set_timing_attribute_ex_string(
+            self, task, device_names, attribute, value):
+        response = self._invoke(
+            self._client.SetTimingAttributeExString,
+            grpc_types.SetTimingAttributeExStringRequest(attribute=attribute, value=value, device_names=device_names, task=task),
+        )
+
+    def set_timing_attribute_ex_uint32(
+            self, task, device_names, attribute, value):
+        response = self._invoke(
+            self._client.SetTimingAttributeExUInt32,
+            grpc_types.SetTimingAttributeExUInt32Request(attribute=attribute, value=value, device_names=device_names, task=task),
+        )
+
+    def set_timing_attribute_ex_uint64(
+            self, task, device_names, attribute, value):
+        response = self._invoke(
+            self._client.SetTimingAttributeExUInt64,
+            grpc_types.SetTimingAttributeExUInt64Request(attribute=attribute, value=value, device_names=device_names, task=task),
+        )
+
+    def set_timing_attribute_int32(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetTimingAttributeInt32,
+            grpc_types.SetTimingAttributeInt32Request(value=value, attribute=attribute, task=task),
+        )
+
+    def set_timing_attribute_string(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetTimingAttributeString,
+            grpc_types.SetTimingAttributeStringRequest(value=value, attribute=attribute, task=task),
+        )
+
+    def set_timing_attribute_uint32(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetTimingAttributeUInt32,
+            grpc_types.SetTimingAttributeUInt32Request(value=value, attribute=attribute, task=task),
+        )
+
+    def set_timing_attribute_uint64(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetTimingAttributeUInt64,
+            grpc_types.SetTimingAttributeUInt64Request(value=value, attribute=attribute, task=task),
+        )
+
+    def set_trig_attribute_bool(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetTrigAttributeBool,
+            grpc_types.SetTrigAttributeBoolRequest(value=value, attribute=attribute, task=task),
+        )
+
+    def set_trig_attribute_double(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetTrigAttributeDouble,
+            grpc_types.SetTrigAttributeDoubleRequest(value=value, attribute=attribute, task=task),
+        )
+
+    def set_trig_attribute_double_array(self, task, attribute, value, size):
+        response = self._invoke(
+            self._client.SetTrigAttributeDoubleArray,
+            grpc_types.SetTrigAttributeDoubleArrayRequest(value=value, attribute=attribute, task=task, size=size),
+        )
+
+    def set_trig_attribute_int32(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetTrigAttributeInt32,
+            grpc_types.SetTrigAttributeInt32Request(value=value, attribute=attribute, task=task),
+        )
+
+    def set_trig_attribute_int32_array(self, task, attribute, value, size):
+        response = self._invoke(
+            self._client.SetTrigAttributeInt32Array,
+            grpc_types.SetTrigAttributeInt32ArrayRequest(value=value, attribute=attribute, task=task, size=size),
+        )
+
+    def set_trig_attribute_string(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetTrigAttributeString,
+            grpc_types.SetTrigAttributeStringRequest(value=value, attribute=attribute, task=task),
+        )
+
+    def set_trig_attribute_uint32(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetTrigAttributeUInt32,
+            grpc_types.SetTrigAttributeUInt32Request(value=value, attribute=attribute, task=task),
+        )
+
+    def set_watchdog_attribute_bool(self, task, lines, attribute, value):
+        response = self._invoke(
+            self._client.SetWatchdogAttributeBool,
+            grpc_types.SetWatchdogAttributeBoolRequest(attribute=attribute, value=value, lines=lines, task=task),
+        )
+
+    def set_watchdog_attribute_double(self, task, lines, attribute, value):
+        response = self._invoke(
+            self._client.SetWatchdogAttributeDouble,
+            grpc_types.SetWatchdogAttributeDoubleRequest(attribute=attribute, value=value, lines=lines, task=task),
+        )
+
+    def set_watchdog_attribute_int32(self, task, lines, attribute, value):
+        response = self._invoke(
+            self._client.SetWatchdogAttributeInt32,
+            grpc_types.SetWatchdogAttributeInt32Request(attribute=attribute, value=value, lines=lines, task=task),
+        )
+
+    def set_watchdog_attribute_string(self, task, lines, attribute, value):
+        response = self._invoke(
+            self._client.SetWatchdogAttributeString,
+            grpc_types.SetWatchdogAttributeStringRequest(attribute=attribute, value=value, lines=lines, task=task),
+        )
+
+    def set_write_attribute_bool(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetWriteAttributeBool,
+            grpc_types.SetWriteAttributeBoolRequest(value=value, attribute=attribute, task=task),
+        )
+
+    def set_write_attribute_double(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetWriteAttributeDouble,
+            grpc_types.SetWriteAttributeDoubleRequest(value=value, attribute=attribute, task=task),
+        )
+
+    def set_write_attribute_int32(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetWriteAttributeInt32,
+            grpc_types.SetWriteAttributeInt32Request(value=value, attribute=attribute, task=task),
+        )
+
+    def set_write_attribute_string(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetWriteAttributeString,
+            grpc_types.SetWriteAttributeStringRequest(value=value, attribute=attribute, task=task),
+        )
+
+    def set_write_attribute_uint32(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetWriteAttributeUInt32,
+            grpc_types.SetWriteAttributeUInt32Request(value=value, attribute=attribute, task=task),
+        )
+
+    def set_write_attribute_uint64(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetWriteAttributeUInt64,
+            grpc_types.SetWriteAttributeUInt64Request(value=value, attribute=attribute, task=task),
         )
 
     def start_new_file(self, task, file_path):
         response = self._invoke(
             self._client.StartNewFile,
-            grpc_types.StartNewFileRequest(self, task, file_path),
+            grpc_types.StartNewFileRequest(task=task, file_path=file_path),
         )
 
     def start_task(self, task):
         response = self._invoke(
             self._client.StartTask,
-            grpc_types.StartTaskRequest(self, task),
+            grpc_types.StartTaskRequest(task=task),
         )
 
     def stop_task(self, task):
         response = self._invoke(
             self._client.StopTask,
-            grpc_types.StopTaskRequest(self, task),
+            grpc_types.StopTaskRequest(task=task),
         )
 
     def task_control(self, task, action):
         response = self._invoke(
             self._client.TaskControl,
-            grpc_types.TaskControlRequest(self, task, action),
+            grpc_types.TaskControlRequest(action_raw=action, task=task),
         )
 
     def tristate_output_term(self, output_terminal):
         response = self._invoke(
             self._client.TristateOutputTerm,
-            grpc_types.TristateOutputTermRequest(self, output_terminal),
+            grpc_types.TristateOutputTermRequest(output_terminal=output_terminal),
         )
 
     def unreserve_network_device(self, device_name):
         response = self._invoke(
             self._client.UnreserveNetworkDevice,
-            grpc_types.UnreserveNetworkDeviceRequest(self, device_name),
+            grpc_types.UnreserveNetworkDeviceRequest(device_name=device_name),
         )
+
+    def wait_for_next_sample_clock(self, task, timeout):
+        response = self._invoke(
+            self._client.WaitForNextSampleClock,
+            grpc_types.WaitForNextSampleClockRequest(task=task, timeout=timeout),
+        )
+        return response.is_late
+
+    def wait_for_valid_timestamp(self, task, timestamp_event, timeout):
+        response = self._invoke(
+            self._client.WaitForValidTimestamp,
+            grpc_types.WaitForValidTimestampRequest(timestamp_event_raw=timestamp_event, task=task, timeout=timeout),
+        )
+        return response.timestamp
 
     def wait_until_task_done(self, task, time_to_wait):
         response = self._invoke(
             self._client.WaitUntilTaskDone,
-            grpc_types.WaitUntilTaskDoneRequest(self, task, time_to_wait),
+            grpc_types.WaitUntilTaskDoneRequest(task=task, time_to_wait=time_to_wait),
         )
 
     def write_analog_f64(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         response = self._invoke(
             self._client.WriteAnalogF64,
-            grpc_types.WriteAnalogF64Request(self, task, num_samps_per_chan, auto_start, timeout, data_layout, write_array, samps_per_chan_written),
+            grpc_types.WriteAnalogF64Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, task=task, data_layout_raw=data_layout, auto_start=auto_start, write_array=write_array),
         )
         return response.samps_per_chan_written
 
     def write_analog_scalar_f64(self, task, auto_start, timeout, value):
         response = self._invoke(
             self._client.WriteAnalogScalarF64,
-            grpc_types.WriteAnalogScalarF64Request(self, task, auto_start, timeout, value),
+            grpc_types.WriteAnalogScalarF64Request(value=value, auto_start=auto_start, task=task, timeout=timeout),
         )
 
     def write_binary_i16(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         response = self._invoke(
             self._client.WriteBinaryI16,
-            grpc_types.WriteBinaryI16Request(self, task, num_samps_per_chan, auto_start, timeout, data_layout, write_array, samps_per_chan_written),
+            grpc_types.WriteBinaryI16Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, task=task, data_layout_raw=data_layout, auto_start=auto_start, write_array=write_array),
         )
         return response.samps_per_chan_written
 
     def write_binary_i32(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         response = self._invoke(
             self._client.WriteBinaryI32,
-            grpc_types.WriteBinaryI32Request(self, task, num_samps_per_chan, auto_start, timeout, data_layout, write_array, samps_per_chan_written),
+            grpc_types.WriteBinaryI32Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, task=task, data_layout_raw=data_layout, auto_start=auto_start, write_array=write_array),
         )
         return response.samps_per_chan_written
 
     def write_binary_u16(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         response = self._invoke(
             self._client.WriteBinaryU16,
-            grpc_types.WriteBinaryU16Request(self, task, num_samps_per_chan, auto_start, timeout, data_layout, write_array, samps_per_chan_written),
+            grpc_types.WriteBinaryU16Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, task=task, data_layout_raw=data_layout, auto_start=auto_start, write_array=write_array),
         )
         return response.samps_per_chan_written
 
     def write_binary_u32(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         response = self._invoke(
             self._client.WriteBinaryU32,
-            grpc_types.WriteBinaryU32Request(self, task, num_samps_per_chan, auto_start, timeout, data_layout, write_array, samps_per_chan_written),
+            grpc_types.WriteBinaryU32Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, task=task, data_layout_raw=data_layout, auto_start=auto_start, write_array=write_array),
         )
         return response.samps_per_chan_written
 
     def write_ctr_freq(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            frequency, duty_cycle, num_samps_per_chan_written):
+            frequency, duty_cycle):
         response = self._invoke(
             self._client.WriteCtrFreq,
-            grpc_types.WriteCtrFreqRequest(self, task, num_samps_per_chan, auto_start, timeout, data_layout, frequency, duty_cycle, num_samps_per_chan_written),
+            grpc_types.WriteCtrFreqRequest(num_samps_per_chan=num_samps_per_chan, timeout=timeout, duty_cycle=duty_cycle, task=task, data_layout_raw=data_layout, frequency=frequency, auto_start=auto_start),
         )
         return response.num_samps_per_chan_written
 
@@ -1439,15 +2657,15 @@ class GrpcStubInterpreter(BaseInterpreter):
             self, task, auto_start, timeout, frequency, duty_cycle):
         response = self._invoke(
             self._client.WriteCtrFreqScalar,
-            grpc_types.WriteCtrFreqScalarRequest(self, task, auto_start, timeout, frequency, duty_cycle),
+            grpc_types.WriteCtrFreqScalarRequest(timeout=timeout, duty_cycle=duty_cycle, task=task, frequency=frequency, auto_start=auto_start),
         )
 
     def write_ctr_ticks(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            high_ticks, low_ticks, num_samps_per_chan_written):
+            high_ticks, low_ticks):
         response = self._invoke(
             self._client.WriteCtrTicks,
-            grpc_types.WriteCtrTicksRequest(self, task, num_samps_per_chan, auto_start, timeout, data_layout, high_ticks, low_ticks, num_samps_per_chan_written),
+            grpc_types.WriteCtrTicksRequest(num_samps_per_chan=num_samps_per_chan, high_ticks=high_ticks, timeout=timeout, task=task, data_layout_raw=data_layout, auto_start=auto_start, low_ticks=low_ticks),
         )
         return response.num_samps_per_chan_written
 
@@ -1455,15 +2673,15 @@ class GrpcStubInterpreter(BaseInterpreter):
             self, task, auto_start, timeout, high_ticks, low_ticks):
         response = self._invoke(
             self._client.WriteCtrTicksScalar,
-            grpc_types.WriteCtrTicksScalarRequest(self, task, auto_start, timeout, high_ticks, low_ticks),
+            grpc_types.WriteCtrTicksScalarRequest(high_ticks=high_ticks, timeout=timeout, task=task, auto_start=auto_start, low_ticks=low_ticks),
         )
 
     def write_ctr_time(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            high_time, low_time, num_samps_per_chan_written):
+            high_time, low_time):
         response = self._invoke(
             self._client.WriteCtrTime,
-            grpc_types.WriteCtrTimeRequest(self, task, num_samps_per_chan, auto_start, timeout, data_layout, high_time, low_time, num_samps_per_chan_written),
+            grpc_types.WriteCtrTimeRequest(num_samps_per_chan=num_samps_per_chan, timeout=timeout, task=task, data_layout_raw=data_layout, auto_start=auto_start, low_time=low_time, high_time=high_time),
         )
         return response.num_samps_per_chan_written
 
@@ -1471,48 +2689,55 @@ class GrpcStubInterpreter(BaseInterpreter):
             self, task, auto_start, timeout, high_time, low_time):
         response = self._invoke(
             self._client.WriteCtrTimeScalar,
-            grpc_types.WriteCtrTimeScalarRequest(self, task, auto_start, timeout, high_time, low_time),
+            grpc_types.WriteCtrTimeScalarRequest(timeout=timeout, task=task, auto_start=auto_start, low_time=low_time, high_time=high_time),
         )
 
     def write_digital_lines(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         response = self._invoke(
             self._client.WriteDigitalLines,
-            grpc_types.WriteDigitalLinesRequest(self, task, num_samps_per_chan, auto_start, timeout, data_layout, write_array, samps_per_chan_written),
+            grpc_types.WriteDigitalLinesRequest(num_samps_per_chan=num_samps_per_chan, timeout=timeout, task=task, data_layout_raw=data_layout, auto_start=auto_start, write_array=write_array),
         )
         return response.samps_per_chan_written
 
     def write_digital_scalar_u32(self, task, auto_start, timeout, value):
         response = self._invoke(
             self._client.WriteDigitalScalarU32,
-            grpc_types.WriteDigitalScalarU32Request(self, task, auto_start, timeout, value),
+            grpc_types.WriteDigitalScalarU32Request(value=value, auto_start=auto_start, task=task, timeout=timeout),
         )
 
     def write_digital_u16(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         response = self._invoke(
             self._client.WriteDigitalU16,
-            grpc_types.WriteDigitalU16Request(self, task, num_samps_per_chan, auto_start, timeout, data_layout, write_array, samps_per_chan_written),
+            grpc_types.WriteDigitalU16Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, task=task, data_layout_raw=data_layout, auto_start=auto_start, write_array=write_array),
         )
         return response.samps_per_chan_written
 
     def write_digital_u32(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         response = self._invoke(
             self._client.WriteDigitalU32,
-            grpc_types.WriteDigitalU32Request(self, task, num_samps_per_chan, auto_start, timeout, data_layout, write_array, samps_per_chan_written),
+            grpc_types.WriteDigitalU32Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, task=task, data_layout_raw=data_layout, auto_start=auto_start, write_array=write_array),
         )
         return response.samps_per_chan_written
 
     def write_digital_u8(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
-            write_array, samps_per_chan_written):
+            write_array):
         response = self._invoke(
             self._client.WriteDigitalU8,
-            grpc_types.WriteDigitalU8Request(self, task, num_samps_per_chan, auto_start, timeout, data_layout, write_array, samps_per_chan_written),
+            grpc_types.WriteDigitalU8Request(num_samps_per_chan=num_samps_per_chan, timeout=timeout, task=task, data_layout_raw=data_layout, auto_start=auto_start, write_array=write_array),
+        )
+        return response.samps_per_chan_written
+
+    def write_raw(self, task, num_samps, auto_start, timeout, write_array):
+        response = self._invoke(
+            self._client.WriteRaw,
+            grpc_types.WriteRawRequest(timeout=timeout, num_samps=num_samps, task=task, auto_start=auto_start, write_array=write_array),
         )
         return response.samps_per_chan_written
 
@@ -1521,12 +2746,12 @@ class GrpcStubInterpreter(BaseInterpreter):
             basic_teds_options):
         response = self._invoke(
             self._client.WriteToTEDSFromArray,
-            grpc_types.WriteToTEDSFromArrayRequest(self, physical_channel, array_size, bit_stream, basic_teds_options),
+            grpc_types.WriteToTEDSFromArrayRequest(array_size=array_size, basic_teds_options_raw=basic_teds_options, bit_stream=bit_stream, physical_channel=physical_channel),
         )
 
     def write_to_teds_from_file(
             self, physical_channel, file_path, basic_teds_options):
         response = self._invoke(
             self._client.WriteToTEDSFromFile,
-            grpc_types.WriteToTEDSFromFileRequest(self, physical_channel, file_path, basic_teds_options),
+            grpc_types.WriteToTEDSFromFileRequest(file_path=file_path, basic_teds_options_raw=basic_teds_options, physical_channel=physical_channel),
         )
