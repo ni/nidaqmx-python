@@ -63,7 +63,7 @@ class Task:
     Represents a DAQmx Task.
     """
 
-    def __init__(self, new_task_name='',*, grpc_options=None, interpreter=None):
+    def __init__(self, new_task_name='', grpc_options=None):
         """
         Creates a DAQmx task.
 
