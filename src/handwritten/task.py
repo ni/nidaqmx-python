@@ -63,7 +63,7 @@ class Task:
     Represents a DAQmx Task.
     """
 
-    def __init__(self, new_task_name=''):
+    def __init__(self, new_task_name='', grpc_options=None):
         """
         Creates a DAQmx task.
 
@@ -78,7 +78,7 @@ class Task:
                 results in an error.
         """
         self._handle = lib_importer.task_handle(0)
-        self._interpreter = utils._select_interpreter()
+        self._interpreter = utils._select_interpreter(grpc_options)
         cfunc = lib_importer.windll.DAQmxCreateTask
         if cfunc.argtypes is None:
             with cfunc.arglock:
