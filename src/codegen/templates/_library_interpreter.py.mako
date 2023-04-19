@@ -1,6 +1,6 @@
 <%
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
-    from codegen.utilities.interpreter_helpers import get_interpreter_functions,get_interpreter_parameter_signature,get_c_function_call_template, get_output_parameter_names, get_interpreter_params
+    from codegen.utilities.interpreter_helpers import get_interpreter_functions,get_interpreter_parameter_signature,get_c_function_call_template, get_return_values, get_interpreter_params
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
     functions = get_interpreter_functions(data)
 %>\
@@ -24,7 +24,7 @@ class LibraryInterpreter(BaseInterpreter):
     params = get_interpreter_params(func)
     sorted_params = order_function_parameters_by_optional(params)
     parameter_signature = get_interpreter_parameter_signature(is_python_factory, sorted_params)
-    output_parameters_names = get_output_parameter_names(func)
+    return_values = get_return_values(func)
     %>
     %if (len(func.function_name) + len(parameter_signature)) > 68:
     def ${func.function_name}(
@@ -34,7 +34,7 @@ class LibraryInterpreter(BaseInterpreter):
     %endif
 \
 <%include file="${'/library_interpreter' + get_c_function_call_template(func)}" args="function=func" />
-    %if len(list(output_parameters_names)) != 0:
-        return ${', '.join(output_parameters_names)}
+    %if len(list(return_values)) != 0:
+        return ${', '.join(return_values)}
     %endif
 %endfor

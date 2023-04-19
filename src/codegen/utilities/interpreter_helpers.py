@@ -178,11 +178,20 @@ def get_output_params(func):
     return (p for p in func.base_parameters if p.direction == "out")
 
 
-def get_output_parameter_names(func):
-    """Gets the names of the output parameters of the given function."""
+def get_return_values(func):
+    """Gets the values to add to return statement of the function."""
     output_parameters = get_output_params(func)
-    return [p.parameter_name for p in output_parameters]
-
+    return_values = []
+    for param in output_parameters:
+        if param.ctypes_data_type == "ctypes.c_char_p":
+            return_values.append(f"{param.parameter_name}.value.decode('ascii')")
+        elif param.is_list:
+            return_values.append(f"{param.parameter_name}.tolist()")
+        elif param.type == "TaskHandle":
+            return_values.append(param.parameter_name)
+        else:
+            return_values.append(f"{param.parameter_name}.value")
+    return return_values
 
 def get_c_function_call_template(func):
     """Gets the template to use for generating the logic of calling the c functions."""
