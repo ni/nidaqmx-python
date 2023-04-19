@@ -14,6 +14,7 @@
 import ctypes
 import numpy
 
+from nidaqmx import utils
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, enum_bitfield_to_list, ctypes_byte_str,
     c_bool32)
@@ -34,14 +35,14 @@ class PhysicalChannel:
     """
     __slots__ = ['_name', '__weakref__']
 
-    def __init__(self, name, interpreter):
+    def __init__(self, name, *, grpc_options=None):
         """
         Args:
             name (str): Specifies the name of the physical channel.
-            interpreter: Specifies the interpreter instance.
+            grpc_options(GrpcSessionOptions): Specifies the gRPC session options.
         """
         self._name = name
-        self._interpreter = interpreter
+        self._interpreter = utils._select_interpreter(grpc_options)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -73,3 +74,28 @@ ${property_template.script_property(attribute)}\
 %for function_object in functions:
 ${function_template.script_function(function_object)}
 %endfor
+
+
+class _PhysicalChannelAlternateConstructor(PhysicalChannel):
+    """
+    Provide an alternate constructor for the PhysicalChannel object.
+
+    Since we want the user to create a Physical Channel simply by instantiating a
+    PhysicalChannel object, thus, the PhysicalChannel object's constructor has a DAQmx Create
+    PhysicalChannel call.
+
+    Instantiating a PhysicalChannel object from a PhysicalChannel with passed in interpreter, 
+    requires that we either change the original constructor's prototype and add a parameter, 
+    or that we create this derived class to 'overload' the constructor.
+    """
+
+    def __init__(self, name, interpreter):
+        """
+        Args:
+            name: Specifies the name of the Physical Channel.
+            interpreter: Specifies the interpreter instance.
+            
+        """
+        self._name = name
+        self._interpreter = utils._select_interpreter(interpreter)
+        self.__class__ = PhysicalChannel

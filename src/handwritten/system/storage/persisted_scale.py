@@ -1,5 +1,6 @@
 import ctypes
 
+from nidaqmx import utils
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx.scale import Scale
 from nidaqmx.errors import (
@@ -17,14 +18,14 @@ class PersistedScale:
     """
     __slots__ = ['_name', '__weakref__']
 
-    def __init__(self, name, interpreter):
+    def __init__(self, name, *, grpc_options=None):
         """
         Args:
             name: Specifies the name of the saved scale.
-            interpreter: Specifies the interpreter instance.
+            grpc_options: Specifies the gRPC session options.
         """
         self._name = name
-        self._interpreter = interpreter
+        self._interpreter = utils._select_interpreter(grpc_options)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -140,3 +141,28 @@ class PersistedScale:
             nidaqmx.scale.Scale: Indicates the loaded Scale object.
         """
         return Scale(self._name)
+
+
+class _PersistedScaleAlternateConstructor(PersistedScale):
+    """
+    Provide an alternate constructor for the PersistedScale object.
+
+    Since we want the user to create a Persisted Scale simply by instantiating a
+    PersistedScale object, thus, the PersistedScale object's constructor has a DAQmx Create
+    PersistedScale call.
+
+    Instantiating a PersistedScale object from a PersistedScale with passed in interpreter, 
+    requires that we either change the original constructor's prototype and add a parameter, 
+    or that we create this derived class to 'overload' the constructor.
+    """
+
+    def __init__(self, name, interpreter):
+        """
+        Args:
+            name: Specifies the name of the PersistedScale.
+            interpreter: Specifies the interpreter instance.
+            
+        """
+        self._name = name
+        self._interpreter = utils._select_interpreter(interpreter)
+        self.__class__ = PersistedScale

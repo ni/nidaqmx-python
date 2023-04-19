@@ -1,5 +1,6 @@
 import ctypes
 
+from nidaqmx import utils
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
@@ -16,14 +17,14 @@ class PersistedChannel:
     """
     __slots__ = ['_name', '__weakref__']
 
-    def __init__(self, name, interpreter):
+    def __init__(self, name, *, grpc_options=None):
         """
         Args:
             name: Specifies the name of the global channel.
-            interpreter: Specifies the interpreter instance.
+            grpc_options: Specifies the gRPC session options.
         """
         self._name = name
-        self._interpreter = interpreter
+        self._interpreter = utils._select_interpreter(grpc_options)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -130,3 +131,28 @@ class PersistedChannel:
 
         error_code = cfunc(self._name)
         check_for_error(error_code)
+
+
+class _PersistedChannelAlternateConstructor(PersistedChannel):
+    """
+    Provide an alternate constructor for the PersistedChannel object.
+
+    Since we want the user to create a Persisted Channel simply by instantiating a
+    PersistedChannel object, thus, the PersistedChannel object's constructor has a DAQmx Create
+    PersistedChannel call.
+
+    Instantiating a PersistedChannel object from a PersistedChannel with passed in interpreter, 
+    requires that we either change the original constructor's prototype and add a parameter, 
+    or that we create this derived class to 'overload' the constructor.
+    """
+
+    def __init__(self, name, interpreter):
+        """
+        Args:
+            name: Specifies the name of the PersistedChannel.
+            interpreter: Specifies the interpreter instance.
+            
+        """
+        self._name = name
+        self._interpreter = utils._select_interpreter(interpreter)
+        self.__class__ = PersistedChannel

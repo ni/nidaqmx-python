@@ -13,6 +13,7 @@ import ctypes
 import numpy
 import deprecation
 
+from nidaqmx import utils
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, enum_bitfield_to_list, ctypes_byte_str,
     c_bool32)
@@ -37,14 +38,14 @@ class Device:
     """
     __slots__ = ['_name', '__weakref__']
 
-    def __init__(self, name, interpreter):
+    def __init__(self, name, *, grpc_options=None):
         """
         Args:
             name (str): Specifies the name of the device.
-            interpreter: Specifies the interpreter instance.
+            grpc_options(GrpcSessionOptions): Specifies the gRPC session options.
         """
         self._name = name
-        self._interpreter = interpreter
+        self._interpreter = utils._select_interpreter(grpc_options)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -269,3 +270,29 @@ ${function_template.script_function(function_object)}
         check_for_error(error_code)
 
     # endregion
+
+
+class _DeviceAlternateConstructor(Device):
+    """
+    Provide an alternate constructor for the Device object.
+
+    Since we want the user to create a Device simply by instantiating a
+    Device object, thus, the Device object's constructor has a DAQmx Create
+    Device call.
+
+    Instantiating a Device object from a Device with passed in interpreter, 
+    requires that we either change the original constructor's prototype 
+    and add a parameter, or that we create this derived class to 'overload' 
+    the constructor.
+    """
+
+    def __init__(self, name, interpreter):
+        """
+        Args:
+            name: Specifies the name of the Device.
+            interpreter: Specifies the interpreter instance.
+            
+        """
+        self._name = name
+        self._interpreter = utils._select_interpreter(interpreter)
+        self.__class__ = Device

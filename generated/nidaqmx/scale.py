@@ -19,13 +19,14 @@ class Scale:
     """
     __slots__ = ['_name', '__weakref__']
 
-    def __init__(self, name,*, grpc_options=None, interpreter=None):
+    def __init__(self, name, *, grpc_options=None):
         """
         Args:
             name (str): Specifies the name of the scale to create.
+            grpc_options(GrpcSessionOptions): Specifies the gRPC session options.
         """
         self._name = name
-        self._interpreter = utils._select_interpreter(grpc_options, interpreter)
+        self._interpreter = utils._select_interpreter(grpc_options)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -952,3 +953,29 @@ class Scale:
         error_code = cfunc(
             self._name, save_as, author, options)
         check_for_error(error_code)
+
+
+class _ScaleAlternateConstructor(Scale):
+    """
+    Provide an alternate constructor for the Scale object.
+
+    Since we want the user to create a Scale simply by instantiating a
+    Scale object, thus, the Scale object's constructor has a DAQmx Create
+    Scale call.
+
+    Instantiating a Scale object from a Scale with passed in interpreter, 
+    requires that we either change the original constructor's prototype 
+    and add a parameter, or that we create this derived class to 'overload' 
+    the constructor.
+    """
+
+    def __init__(self, name, interpreter):
+        """
+        Args:
+            name: Specifies the name of the Scale.
+            interpreter: Specifies the interpreter instance.
+            
+        """
+        self._name = name
+        self._interpreter = utils._select_interpreter(interpreter)
+        self.__class__ = Scale
