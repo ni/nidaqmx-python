@@ -31,6 +31,7 @@ def test__persisted_scales_with_same_name__compare__equal():
     assert persisted_scale1 is not persisted_scale2
     assert persisted_scale1 == persisted_scale2
 
+
 def test__persisted_scales_with_different_names__compare__not_equal():
     """Test comparison."""
     persisted_scale1 = PersistedScale("Scale1")
