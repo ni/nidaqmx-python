@@ -17,7 +17,7 @@ class _TaskAlternateConstructor(Task):
     derived class to 'overload' the constructor.
     """
 
-    def __init__(self, task_handle, interpreter=None):
+    def __init__(self, task_handle, interpreter):
         """
         Args:
             task_handle: Specifies the task handle from which to create a
