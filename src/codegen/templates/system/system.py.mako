@@ -42,23 +42,22 @@ class System:
     information about the hardware.
     """
 
-    def __init__(self, grpc_options, interpreter):
-        self._grpc_options = grpc_options
-        self._interpreter = _select_interpreter(grpc_options, interpreter)
+    def __init__(self, grpc_options=None):
+        self._interpreter = _select_interpreter(grpc_options)
 
     @staticmethod
     def local():
         """
         nidaqmx.system.system.System: Represents the local DAQmx system.
         """
-        return System(System._grpc_options, System._interpreter)
+        return System()
 
     @staticmethod
-    def remote():
+    def remote(grpc_options):
         """
-        nidaqmx.system.system.System._interpreter: Represents the interpreter instance.
+        nidaqmx.system.system.System: Represents the remote DAQmx system with interpreter.
         """
-        return System._interpreter
+        return System(grpc_options)
 
     @property
     def devices(self):
