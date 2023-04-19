@@ -9,7 +9,7 @@ from nidaqmx._lib import (
     c_bool32)
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
-from nidaqmx.utils import unflatten_channel_string
+from nidaqmx.utils import unflatten_channel_string, _select_interpreter
 from nidaqmx.system._collections.physical_channel_collection import (
     AIPhysicalChannelCollection, AOPhysicalChannelCollection,
     CIPhysicalChannelCollection, COPhysicalChannelCollection,
@@ -28,12 +28,13 @@ class Device:
     """
     __slots__ = ['_name', '__weakref__']
 
-    def __init__(self, name):
+    def __init__(self, name, interpreter):
         """
         Args:
             name (str): Specifies the name of the device.
         """
         self._name = name
+        self._interpreter = interpreter
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -65,7 +66,7 @@ class Device:
             Indicates a collection that contains all the analog input
             physical channels available on the device.
         """
-        return AIPhysicalChannelCollection(self._name)
+        return AIPhysicalChannelCollection(self._name, self._interpreter)
 
     @property
     def ao_physical_chans(self):
@@ -74,7 +75,7 @@ class Device:
             Indicates a collection that contains all the analog output
             physical channels available on the device.
         """
-        return AOPhysicalChannelCollection(self._name)
+        return AOPhysicalChannelCollection(self._name, self._interpreter)
 
     @property
     def ci_physical_chans(self):
@@ -83,7 +84,7 @@ class Device:
             Indicates a collection that contains all the counter input
             physical channels available on the device.
         """
-        return CIPhysicalChannelCollection(self._name)
+        return CIPhysicalChannelCollection(self._name, self._interpreter)
 
     @property
     def co_physical_chans(self):
@@ -92,7 +93,7 @@ class Device:
             Indicates a collection that contains all the counter output
             physical channels available on the device.
         """
-        return COPhysicalChannelCollection(self._name)
+        return COPhysicalChannelCollection(self._name, self._interpreter)
 
     @property
     def di_lines(self):
@@ -101,7 +102,7 @@ class Device:
             Indicates a collection that contains all the digital input
             lines available on the device.
         """
-        return DILinesCollection(self._name)
+        return DILinesCollection(self._name, self._interpreter)
 
     @property
     def di_ports(self):
@@ -110,7 +111,7 @@ class Device:
             Indicates a collection that contains all the digital input
             ports available on the device.
         """
-        return DIPortsCollection(self._name)
+        return DIPortsCollection(self._name, self._interpreter)
 
     @property
     def do_lines(self):
@@ -119,7 +120,7 @@ class Device:
             Indicates a collection that contains all the digital output
             lines available on the device.
         """
-        return DOLinesCollection(self._name)
+        return DOLinesCollection(self._name, self._interpreter)
 
     @property
     def do_ports(self):
@@ -128,7 +129,7 @@ class Device:
             Indicates a collection that contains all the digital output
             ports available on the device.
         """
-        return DOPortsCollection(self._name)
+        return DOPortsCollection(self._name, self._interpreter)
 
     # endregion
 

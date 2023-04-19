@@ -20,7 +20,7 @@ from nidaqmx.errors import (
 from nidaqmx.system._watchdog_modules.expiration_state import ExpirationState
 from nidaqmx.system._watchdog_modules.expiration_states_collection import (
     ExpirationStatesCollection)
-from nidaqmx.utils import flatten_channel_string
+from nidaqmx.utils import flatten_channel_string, _select_interpreter
 from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})
 from nidaqmx.types import (
@@ -33,7 +33,7 @@ class WatchdogTask:
     """
     Represents the watchdog configurations for a DAQmx task.
     """
-    def __init__(self, device_name, task_name='', timeout=10):
+    def __init__(self, device_name, task_name='', timeout=10, grpc_options=None):
         """
         Creates and configures a task that controls the watchdog timer of a
         device. The timer activates when you start the task.
@@ -58,6 +58,8 @@ class WatchdogTask:
                 device sets the physical channels to the states you specify
                 with the digital physical channel expiration states input.
         """
+        self._interpreter = _select_interpreter(grpc_options)
+
         self._handle = lib_importer.task_handle(0)
 
         cfunc = lib_importer.windll.DAQmxCreateWatchdogTimerTaskEx
@@ -76,7 +78,7 @@ class WatchdogTask:
         # Saved name is used in self.close() to throw graceful error on
         # double closes.
         self._saved_name = self.name
-        self._expiration_states = ExpirationStatesCollection(self._handle)
+        self._expiration_states = ExpirationStatesCollection(self._handle, self._interpreter)
 
     def __del__(self):
         if self._handle is not None:

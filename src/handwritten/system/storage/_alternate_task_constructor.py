@@ -17,14 +17,15 @@ class _TaskAlternateConstructor(Task):
     derived class to 'overload' the constructor.
     """
 
-    def __init__(self, task_handle):
+    def __init__(self, task_handle, grpc_options):
         """
         Args:
             task_handle: Specifies the task handle from which to create a
                 Task object.
+            grpc_options: Specifies the gRPC session options.
         """
         self._handle = task_handle
-        self._interpreter = utils._select_interpreter()
+        self._interpreter = utils._select_interpreter(grpc_options)
 
         self._initialize(self._handle, self._interpreter)
 

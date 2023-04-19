@@ -15,7 +15,7 @@ from nidaqmx.system._collections.persisted_scale_collection import (
     PersistedScaleCollection)
 from nidaqmx.system._collections.persisted_task_collection import (
     PersistedTaskCollection)
-from nidaqmx.utils import flatten_channel_string, unflatten_channel_string
+from nidaqmx.utils import flatten_channel_string, unflatten_channel_string, _select_interpreter
 from nidaqmx.constants import (
     AOPowerUpOutputBehavior, LogicFamily, PowerUpStates, ResistorState,
     SignalModifiers, WAIT_INFINITELY)
@@ -35,12 +35,23 @@ class System:
     information about the hardware.
     """
 
+    def __init__(self, grpc_options, interpreter):
+        self._grpc_options = grpc_options
+        self._interpreter = _select_interpreter(grpc_options, interpreter)
+
     @staticmethod
     def local():
         """
         nidaqmx.system.system.System: Represents the local DAQmx system.
         """
-        return System()
+        return System(System._grpc_options, System._interpreter)
+
+    @staticmethod
+    def remote():
+        """
+        nidaqmx.system.system.System._interpreter: Represents the interpreter instance.
+        """
+        return System._interpreter
 
     @property
     def devices(self):
@@ -48,7 +59,7 @@ class System:
         nidaqmx.system._collections.DeviceCollection: Indicates the
             collection of devices for this DAQmx system.
         """
-        return DeviceCollection()
+        return DeviceCollection(self._interpreter)
 
 
     DriverVersion = collections.namedtuple(
@@ -77,7 +88,7 @@ class System:
         nidaqmx.system._collections.PersistedChannelCollection: Indicates
             the collection of global channels for this DAQmx system.
         """
-        return PersistedChannelCollection()
+        return PersistedChannelCollection(self._interpreter)
 
     @property
     def scales(self):
@@ -93,7 +104,7 @@ class System:
         nidaqmx.system._collections.PersistedTaskCollection: Indicates
             the collection of saved tasks for this DAQmx system.
         """
-        return PersistedTaskCollection()
+        return PersistedTaskCollection(self._interpreter)
 
     @property
     def _major_version(self):

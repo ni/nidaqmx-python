@@ -16,12 +16,14 @@ class PersistedChannel:
     """
     __slots__ = ['_name', '__weakref__']
 
-    def __init__(self, name):
+    def __init__(self, name, interpreter):
         """
         Args:
             name: Specifies the name of the global channel.
+            interpreter: Specifies the interpreter instance.
         """
         self._name = name
+        self._interpreter = interpreter
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):

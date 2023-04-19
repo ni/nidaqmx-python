@@ -15,8 +15,9 @@ class PhysicalChannelCollection(Sequence):
     
     This class defines methods that implements a container object.
     """
-    def __init__(self, device_name):
+    def __init__(self, device_name, interpreter):
         self._name = device_name
+        self._interpreter = interpreter
 
     def __contains__(self, item):
         channel_names = self.channel_names
