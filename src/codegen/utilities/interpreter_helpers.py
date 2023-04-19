@@ -99,10 +99,10 @@ def get_interpreter_parameter_signature(is_python_factory, params):
     return ", ".join(params_with_defaults)
 
 
-def get_instantiation_lines_for_output_params(output_parameters):
-    """Gets the lines of code for instantiation of output parameters."""
+def get_instantiation_lines_for_output(output_values):
+    """Gets the lines of code for instantiation of output values."""
     instantiation_lines = []
-    for param in output_parameters:
+    for param in output_values:
         if param.has_explicit_buffer_size:
             if (
                 param.size.mechanism == "passed-in" or param.size.mechanism == "passed-in-by-ptr"
