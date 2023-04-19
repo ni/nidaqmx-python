@@ -110,6 +110,11 @@ def get_instantiation_lines_for_output(output_values):
                 instantiation_lines.append(
                     f"{param.parameter_name} = numpy.zeros({param.size.value}, dtype=numpy.{param.ctypes_data_type})"
                 )
+            elif param.size.mechanism == "custom-code":
+                instantiation_lines.append(f"size = {param.size.value}")
+                instantiation_lines.append(
+                    f"{param.parameter_name} = numpy.zeros(size, dtype=numpy.{param.ctypes_data_type})"
+                )
         else:
             instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
     return instantiation_lines

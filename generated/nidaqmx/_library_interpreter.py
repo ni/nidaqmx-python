@@ -108,6 +108,9 @@ class LibraryInterpreter(BaseInterpreter):
     def calculate_reverse_poly_coeff(
             self, forward_coeffs, num_forward_coeffs_in, min_val_x, max_val_x,
             num_points_to_compute, reverse_poly_order):
+        size = (reverse_poly_order < _0_) ? num_forward_coeffs_in : reverse_poly_order + _1
+        reverse_coeffs = numpy.zeros(size, dtype=numpy.numpy.float64)
+
         cfunc = lib_importer.windll.DAQmxCalculateReversePolyCoeff
         if cfunc.argtypes is None:
             with cfunc.arglock:
