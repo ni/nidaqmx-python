@@ -8,6 +8,7 @@ from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
 from nidaqmx.constants import (
     ScaleType, UnitsPreScaled, _Save)
+from nidaqmx.utils import _select_interpreter
 
 __all__ = ['Scale']
 
@@ -18,12 +19,13 @@ class Scale:
     """
     __slots__ = ['_name', '__weakref__']
 
-    def __init__(self, name):
+    def __init__(self, name, grpc_options, interpreter):
         """
         Args:
             name (str): Specifies the name of the scale to create.
         """
         self._name = name
+        self._interpreter = _select_interpreter(grpc_options, interpreter)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
