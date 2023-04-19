@@ -58,6 +58,7 @@ class WatchdogTask:
                 Trigger to expire the watchdog task. If this time elapses, the
                 device sets the physical channels to the states you specify
                 with the digital physical channel expiration states input.
+            grpc_options (GrpcSessionOptions): Specifies the gRPC session options.
         """
         self._interpreter = utils._select_interpreter(grpc_options)
 

@@ -41,6 +41,7 @@ class Device:
         """
         Args:
             name (str): Specifies the name of the device.
+            interpreter: Specifies the interpreter instance.
         """
         self._name = name
         self._interpreter = interpreter

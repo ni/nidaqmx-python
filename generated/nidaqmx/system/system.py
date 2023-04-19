@@ -37,6 +37,10 @@ class System:
     """
 
     def __init__(self, grpc_options=None):
+        """
+        Args:
+            grpc_options: Specifies the gRPC session options.
+        """
         self._interpreter = utils._select_interpreter(grpc_options)
 
     @staticmethod
@@ -49,7 +53,10 @@ class System:
     @staticmethod
     def remote(grpc_options):
         """
-        nidaqmx.system.system.System: Represents the remote DAQmx system with interpreter.
+        nidaqmx.system.system.System: Represents the remote DAQmx system.
+
+        Args:
+            grpc_options: Specifies the gRPC session options.
         """
         return System(grpc_options)
 

@@ -23,6 +23,8 @@ class _TaskAlternateConstructor(Task):
             task_handle: Specifies the task handle from which to create a
                 Task object.
             grpc_options: Specifies the gRPC session options.
+            interpreter: Specifies the interpreter instance.
+            
         """
         self._handle = task_handle
         self._interpreter = utils._select_interpreter(grpc_options, interpreter)

@@ -27,6 +27,7 @@ class PhysicalChannel:
         """
         Args:
             name (str): Specifies the name of the physical channel.
+            interpreter: Specifies the interpreter instance.
         """
         self._name = name
         self._interpreter = interpreter
