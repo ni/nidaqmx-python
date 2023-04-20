@@ -44,7 +44,7 @@ class LibraryInterpreter(BaseInterpreter):
 \
 ## Script instantiation for output parameters that will be passed by reference.
 <%
-    instantiation_lines = get_instantiation_lines_for_output(func.output_parameters)
+    instantiation_lines = get_instantiation_lines_for_output(func)
     %>\
 \
     %if len(instantiation_lines) > 0:

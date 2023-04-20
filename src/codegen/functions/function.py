@@ -116,8 +116,8 @@ class Function:
     def stream_response(self):
         """bool: Defines if the function uses server streaming to send multiple responses."""
         return self._stream_response
-    
+
     @property
     def python_codegen_method(self):
-        """python codegen method: The python codegen method of the function."""
+        """str: The python codegen method of the function."""
         return self._python_codegen_method
