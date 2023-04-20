@@ -78,6 +78,15 @@ class Task:
                 results in an error.
         """
         self._handle = lib_importer.task_handle(0)
+
+        if grpc_options and not (
+            grpc_options.session_name == "" or grpc_options.session_name == new_task_name
+        ):
+            raise DaqError(
+                'The given session name is invalid , it should either match with default value or task name',
+                DAQmxErrors.UNKNOWN,
+                task_name=self.name)
+    
         self._interpreter = utils._select_interpreter(grpc_options)
         cfunc = lib_importer.windll.DAQmxCreateTask
         if cfunc.argtypes is None:
