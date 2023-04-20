@@ -12894,25 +12894,36 @@ functions = {
     'GetBufferAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetBufferAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'BufferAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetCalInfoAttributeBool': {
@@ -12920,30 +12931,29 @@ functions = {
         'cname': 'DAQmxGetCalInfoAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'CalibrationInfoAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetCalInfoAttributeDouble': {
@@ -12951,30 +12961,29 @@ functions = {
         'cname': 'DAQmxGetCalInfoAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'CalibrationInfoAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetCalInfoAttributeString': {
@@ -12982,18 +12991,24 @@ functions = {
         'cname': 'DAQmxGetCalInfoAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'CalibrationInfoAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -13002,12 +13017,14 @@ functions = {
                 'type': 'char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetCalInfoAttributeUInt32': {
@@ -13015,126 +13032,150 @@ functions = {
         'cname': 'DAQmxGetCalInfoAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'CalibrationInfoAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetChanAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'channel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetChanAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'channel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetChanAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'channel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -13143,72 +13184,93 @@ functions = {
                 'type': 'float64[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetChanAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'channel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetChanAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'channel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -13217,129 +13279,156 @@ functions = {
                 'type': 'char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetChanAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'channel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetDeviceAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'DeviceAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetDeviceAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'DeviceAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetDeviceAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'DeviceAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -13348,62 +13437,79 @@ functions = {
                 'type': 'float64[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetDeviceAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'DeviceAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetDeviceAttributeInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'DeviceAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.int32',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -13412,31 +13518,44 @@ functions = {
                 'type': 'int32[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetDeviceAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'DeviceAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -13445,62 +13564,79 @@ functions = {
                 'type': 'char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetDeviceAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'DeviceAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetDeviceAttributeUInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetDeviceAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'DeviceAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.uint32',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -13509,12 +13645,14 @@ functions = {
                 'type': 'uInt32[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetDigitalLogicFamilyPowerUpState': {
@@ -13693,113 +13831,136 @@ functions = {
     'GetExportedSignalAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetExportedSignalAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetExportedSignalAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetExportedSignalAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -13808,43 +13969,49 @@ functions = {
                 'type': 'char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetExportedSignalAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetExtendedErrorInfo': {
@@ -14047,51 +14214,66 @@ functions = {
     'GetPersistedChanAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPersistedChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'channel',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'channel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PersistedChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetPersistedChanAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPersistedChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'channel',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'channel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PersistedChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -14100,12 +14282,14 @@ functions = {
                 'type': 'char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetPersistedScaleAttributeBool': {
@@ -14113,30 +14297,29 @@ functions = {
         'cname': 'DAQmxGetPersistedScaleAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'scaleName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PersistedScaleAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetPersistedScaleAttributeString': {
@@ -14144,18 +14327,24 @@ functions = {
         'cname': 'DAQmxGetPersistedScaleAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'scaleName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PersistedScaleAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -14164,12 +14353,14 @@ functions = {
                 'type': 'char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetPersistedTaskAttributeBool': {
@@ -14177,30 +14368,29 @@ functions = {
         'cname': 'DAQmxGetPersistedTaskAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'taskName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PersistedTaskAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetPersistedTaskAttributeString': {
@@ -14208,18 +14398,24 @@ functions = {
         'cname': 'DAQmxGetPersistedTaskAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'taskName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PersistedTaskAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -14228,62 +14424,79 @@ functions = {
                 'type': 'char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'channel',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'physicalChannel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeBytes': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'channel',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'physicalChannel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.generic',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -14292,62 +14505,79 @@ functions = {
                 'type': 'uInt8[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'channel',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'physicalChannel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'channel',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'physicalChannel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -14356,62 +14586,79 @@ functions = {
                 'type': 'float64[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'channel',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'physicalChannel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'channel',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'physicalChannel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.int32',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -14420,31 +14667,44 @@ functions = {
                 'type': 'int32[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'channel',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'physicalChannel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -14453,62 +14713,79 @@ functions = {
                 'type': 'char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'channel',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'physicalChannel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetPhysicalChanAttributeUInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetPhysicalChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'channel',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'physicalChannel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.uint32',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -14517,124 +14794,149 @@ functions = {
                 'type': 'uInt32[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetReadAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetReadAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetReadAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetReadAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -14643,167 +14945,189 @@ functions = {
                 'type': 'char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetReadAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetReadAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint64',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'uInt64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetRealTimeAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetRealTimeAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'RealTimeAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetRealTimeAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetRealTimeAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'RealTimeAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetRealTimeAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetRealTimeAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'RealTimeAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetRefTrigTimestampVal': {
@@ -14828,30 +15152,29 @@ functions = {
         'cname': 'DAQmxGetScaleAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'scaleName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ScaleAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetScaleAttributeDoubleArray': {
@@ -14859,18 +15182,24 @@ functions = {
         'cname': 'DAQmxGetScaleAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'scaleName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ScaleAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -14879,12 +15208,14 @@ functions = {
                 'type': 'float64[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetScaleAttributeInt32': {
@@ -14892,30 +15223,29 @@ functions = {
         'cname': 'DAQmxGetScaleAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'scaleName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ScaleAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetScaleAttributeString': {
@@ -14923,18 +15253,24 @@ functions = {
         'cname': 'DAQmxGetScaleAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'scaleName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ScaleAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -14943,12 +15279,14 @@ functions = {
                 'type': 'char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetSelfCalLastDateAndTime': {
@@ -15044,13 +15382,17 @@ functions = {
         'cname': 'DAQmxGetSystemInfoAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'SystemAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -15059,12 +15401,14 @@ functions = {
                 'type': 'char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetSystemInfoAttributeUInt32': {
@@ -15072,75 +15416,87 @@ functions = {
         'cname': 'DAQmxGetSystemInfoAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'SystemAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTaskAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTaskAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TaskAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTaskAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTaskAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TaskAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -15149,237 +15505,282 @@ functions = {
                 'type': 'char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTaskAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTaskAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TaskAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTimingAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTimingAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTimingAttributeExBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceNames',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTimingAttributeExDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceNames',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTimingAttributeExInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceNames',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTimingAttributeExString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceNames',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -15388,170 +15789,205 @@ functions = {
                 'type': 'char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTimingAttributeExTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceNames',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'CVIAbsoluteTime'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTimingAttributeExUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceNames',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTimingAttributeExUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceNames',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint64',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'uInt64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTimingAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTimingAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -15560,186 +15996,219 @@ functions = {
                 'type': 'char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTimingAttributeTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'CVIAbsoluteTime'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTimingAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTimingAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint64',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'uInt64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTrigAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTrigAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTrigAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -15748,62 +16217,79 @@ functions = {
                 'type': 'float64[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTrigAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTrigAttributeInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.int32',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -15812,31 +16298,44 @@ functions = {
                 'type': 'int32[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTrigAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -15845,206 +16344,247 @@ functions = {
                 'type': 'char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTrigAttributeTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'CVIAbsoluteTime'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetTrigAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetWatchdogAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWatchdogAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'lines',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetWatchdogAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWatchdogAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'lines',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetWatchdogAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWatchdogAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'lines',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetWatchdogAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWatchdogAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'lines',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -16053,124 +16593,149 @@ functions = {
                 'type': 'char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetWriteAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetWriteAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetWriteAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetWriteAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'ivi-dance',
@@ -16179,74 +16744,84 @@ functions = {
                 'type': 'char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetWriteAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetWriteAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint64',
                 'direction': 'out',
+                'is_list': False,
                 'name': 'value',
                 'type': 'uInt64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'IsTaskDone': {
@@ -18533,12 +19108,14 @@ functions = {
             {
                 'callback_params': [
                     {
+                        'ctypes_data_type': 'lib_importer.task_handle',
                         'direction': 'out',
                         'include_in_proto': False,
                         'name': 'task',
                         'type': 'TaskHandle'
                     },
                     {
+                        'ctypes_data_type': 'ctypes.c_int',
                         'direction': 'out',
                         'name': 'status',
                         'type': 'int32'
@@ -18627,18 +19204,21 @@ functions = {
             {
                 'callback_params': [
                     {
+                        'ctypes_data_type': 'lib_importer.task_handle',
                         'direction': 'out',
                         'include_in_proto': False,
                         'name': 'task',
                         'type': 'TaskHandle'
                     },
                     {
+                        'ctypes_data_type': 'ctypes.c_int',
                         'direction': 'out',
                         'enum': 'EveryNSamplesEventType',
                         'name': 'everyNSamplesEventType',
                         'type': 'int32'
                     },
                     {
+                        'ctypes_data_type': 'ctypes.c_uint',
                         'direction': 'out',
                         'name': 'nSamples',
                         'type': 'uInt32'
@@ -18717,12 +19297,14 @@ functions = {
             {
                 'callback_params': [
                     {
+                        'ctypes_data_type': 'lib_importer.task_handle',
                         'direction': 'out',
                         'include_in_proto': False,
                         'name': 'task',
                         'type': 'TaskHandle'
                     },
                     {
+                        'ctypes_data_type': 'ctypes.c_int',
                         'direction': 'out',
                         'name': 'signalID',
                         'type': 'int32'
@@ -19435,25 +20017,36 @@ functions = {
     'SetBufferAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetBufferAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'BufferAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetCalInfoAttributeBool': {
@@ -19461,30 +20054,29 @@ functions = {
         'cname': 'DAQmxSetCalInfoAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'CalibrationInfoAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetCalInfoAttributeDouble': {
@@ -19492,30 +20084,29 @@ functions = {
         'cname': 'DAQmxSetCalInfoAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'CalibrationInfoAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetCalInfoAttributeString': {
@@ -19523,30 +20114,29 @@ functions = {
         'cname': 'DAQmxSetCalInfoAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'CalibrationInfoAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'value',
                 'type': 'const char[]'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetCalInfoAttributeUInt32': {
@@ -19554,126 +20144,150 @@ functions = {
         'cname': 'DAQmxSetCalInfoAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'CalibrationInfoAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetChanAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'channel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetChanAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'channel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetChanAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'channel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'len',
@@ -19682,120 +20296,140 @@ functions = {
                 'type': 'const float64[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetChanAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'channel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetChanAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'channel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'value',
                 'type': 'const char[]'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetChanAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'channel',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetDigitalLogicFamilyPowerUpState': {
@@ -19908,156 +20542,176 @@ functions = {
     'SetExportedSignalAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetExportedSignalAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetExportedSignalAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetExportedSignalAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'value',
                 'type': 'const char[]'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetExportedSignalAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetFirstSampClkWhen': {
@@ -20080,280 +20734,316 @@ functions = {
     'SetReadAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetReadAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetReadAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetReadAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'value',
                 'type': 'const char[]'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetReadAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetReadAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint64',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'uInt64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetRealTimeAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetRealTimeAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'RealTimeAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetRealTimeAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetRealTimeAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'RealTimeAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetRealTimeAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetRealTimeAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'RealTimeAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetScaleAttributeDouble': {
@@ -20361,30 +21051,29 @@ functions = {
         'cname': 'DAQmxSetScaleAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'scaleName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ScaleAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetScaleAttributeDoubleArray': {
@@ -20392,18 +21081,24 @@ functions = {
         'cname': 'DAQmxSetScaleAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'scaleName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ScaleAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'len',
@@ -20412,12 +21107,14 @@ functions = {
                 'type': 'const float64[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetScaleAttributeInt32': {
@@ -20425,30 +21122,29 @@ functions = {
         'cname': 'DAQmxSetScaleAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'scaleName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ScaleAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetScaleAttributeString': {
@@ -20456,30 +21152,29 @@ functions = {
         'cname': 'DAQmxSetScaleAttribute',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'scaleName',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ScaleAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'value',
                 'type': 'const char[]'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetStartTrigTrigWhen': {
@@ -20519,551 +21214,640 @@ functions = {
     'SetTimingAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTimingAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTimingAttributeExBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceNames',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTimingAttributeExDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceNames',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTimingAttributeExInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceNames',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTimingAttributeExString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceNames',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'value',
                 'type': 'const char[]'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTimingAttributeExTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceNames',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'CVIAbsoluteTime'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTimingAttributeExUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceNames',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTimingAttributeExUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'deviceNames',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint64',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'uInt64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTimingAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTimingAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'value',
                 'type': 'const char[]'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTimingAttributeTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'CVIAbsoluteTime'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTimingAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTimingAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint64',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'uInt64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTrigAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTrigAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTrigAttributeDoubleArray': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'len',
@@ -21072,62 +21856,79 @@ functions = {
                 'type': 'const float64[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTrigAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTrigAttributeInt32Array': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.int32',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'value',
                 'size': {
                     'mechanism': 'len',
@@ -21136,435 +21937,497 @@ functions = {
                 'type': 'const int32[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTrigAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'value',
                 'type': 'const char[]'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTrigAttributeTimestamp': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'CVIAbsoluteTime'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetTrigAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetWatchdogAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWatchdogAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'lines',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetWatchdogAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWatchdogAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'lines',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetWatchdogAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWatchdogAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'lines',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetWatchdogAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWatchdogAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'lines',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'value',
                 'type': 'const char[]'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetWriteAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_bool32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'bool32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetWriteAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'float64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetWriteAttributeInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'int32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetWriteAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_list': True,
                 'name': 'value',
                 'type': 'const char[]'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetWriteAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
-                'type': 'uInt32'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SetWriteAttributeUInt64': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'task',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_list': False,
                 'name': 'attribute',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint64',
                 'direction': 'in',
+                'is_list': False,
                 'name': 'value',
                 'type': 'uInt64'
-            },
-            {
-                'direction': 'in',
-                'hardcoded_value': '0U',
-                'include_in_proto': False,
-                'name': 'size',
-                'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'StartNewFile': {

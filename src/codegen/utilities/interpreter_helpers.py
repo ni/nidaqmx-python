@@ -34,12 +34,6 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetSyncPulseTimeWhen",
 ]
 
-LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
-    "RegisterSignalEvent",
-    "RegisterEveryNSamplesEvent",
-    "RegisterDoneEvent",
-]
-
 
 def get_interpreter_functions(metadata, is_base_interpreter=False):
     """Converts the scrapigen metadata into a list of functions."""
@@ -47,10 +41,7 @@ def get_interpreter_functions(metadata, is_base_interpreter=False):
     functions_metadata = []
     for function_name, function_data in all_functions.items():
         if not is_base_interpreter:
-            if (
-                not is_python_codegen_method(function_data)
-                or function_name in LIBRARY_INTERPRETER_IGNORED_FUNCTIONS
-            ):
+            if not is_python_codegen_method(function_data):
                 continue
         if function_name in INTERPRETER_IGNORED_FUNCTIONS:
             continue
@@ -149,4 +140,11 @@ def get_output_parameter_names(func):
 
 def get_c_function_call_template(func):
     """Gets the template to use for generating the logic of calling the c functions."""
+    if func.stream_response:
+        return "/event_function_call.py.mako"
     return "/default_c_function_call.py.mako"
+
+
+def get_callback_param_data_types(params):
+    """Gets the data types for call back function parameters."""
+    return [p["ctypes_data_type"] for p in params]

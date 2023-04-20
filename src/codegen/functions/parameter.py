@@ -30,6 +30,8 @@ class Parameter:
         if "enum" in parameter_metadata:
             self._enum = parameter_metadata.get("enum")
             self._is_enum = True
+        if "callback_params" in parameter_metadata:
+            self._callback_params = parameter_metadata.get("callback_params")
 
     @property
     def direction(self):
@@ -105,3 +107,8 @@ class Parameter:
     def size(self):
         """Dict: Defines the array parameter's mechanism and value."""
         return self._size
+
+    @property
+    def callback_params(self):
+        """Dict: Defines the params for callback functions."""
+        return self._callback_params
