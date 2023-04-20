@@ -54,7 +54,7 @@ class DOChannelCollection(ChannelCollection):
             else:
                 name = lines
 
-        return DOChannel(self._handle, name)
+        return DOChannel(self._handle, name, self._interpreter)
 
     def add_do_chan(
             self, lines, name_to_assign_to_lines="",

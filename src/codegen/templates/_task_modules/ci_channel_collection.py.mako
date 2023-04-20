@@ -52,7 +52,7 @@ class CIChannelCollection(ChannelCollection):
         else:
             name = counter
 
-        return CIChannel(self._handle, name)
+        return CIChannel(self._handle, name, self._interpreter)
 
 <%namespace name="function_template" file="/function_template.py.mako"/>\
 %for function_object in functions:

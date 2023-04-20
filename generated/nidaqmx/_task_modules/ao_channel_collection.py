@@ -43,7 +43,7 @@ class AOChannelCollection(ChannelCollection):
         else:
             name = physical_channel
 
-        return AOChannel(self._handle, name)
+        return AOChannel(self._handle, name, self._interpreter)
 
     def add_ao_current_chan(
             self, physical_channel, name_to_assign_to_channel="", min_val=0.0,
