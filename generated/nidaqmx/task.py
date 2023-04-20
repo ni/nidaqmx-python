@@ -83,7 +83,7 @@ class Task:
             grpc_options.session_name == "" or grpc_options.session_name == new_task_name
         ):
             raise DaqError(
-                'The given session name is invalid , it should either match with default value or task name',
+                f'Unsupported session name: "{grpc_options.session_name}". If a session name is specified, it must match the task name.',
                 DAQmxErrors.UNKNOWN,
                 task_name=self.name)
     

@@ -30,7 +30,7 @@ class AIChannelCollection(ChannelCollection):
     """
     def __init__(self, task_handle, interpreter):
         """
-        Do not construct this object directly; instead, call nidaqmx.Task.ai_channels.
+        Do not construct this object directly; instead, construct a nidaqmx.Task and use the task.ai_channels property.
         """
         super().__init__(task_handle, interpreter)
 

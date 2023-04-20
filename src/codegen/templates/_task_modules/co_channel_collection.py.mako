@@ -26,7 +26,7 @@ class COChannelCollection(ChannelCollection):
     """
     def __init__(self, task_handle, interpreter):
         """
-        Do not construct this object directly; instead, call nidaqmx.Task.co_channels.
+        Do not construct this object directly; instead, construct a nidaqmx.Task and use the task.co_channels property.
         """
         super().__init__(task_handle, interpreter)
 

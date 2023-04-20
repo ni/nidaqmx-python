@@ -26,7 +26,7 @@ class DIChannelCollection(ChannelCollection):
     """
     def __init__(self, task_handle, interpreter):
         """
-        Do not construct this object directly; instead, call nidaqmx.Task.di_channels.
+        Do not construct this object directly; instead, construct a nidaqmx.Task and use the task.di_channels property.
         """
         super().__init__(task_handle, interpreter)
 
