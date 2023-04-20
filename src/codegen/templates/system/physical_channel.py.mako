@@ -91,7 +91,7 @@ class _PhysicalChannelAlternateConstructor(PhysicalChannel):
             
         """
         self._name = name
-        self._interpreter = utils._select_interpreter(interpreter)
+        self._interpreter = interpreter
 
         # Use meta-programming to change the type of this object to PhysicalChannel,
         # so the user isn't confused when doing introspection.

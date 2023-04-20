@@ -1379,7 +1379,7 @@ class _TaskAlternateConstructor(Task):
             
         """
         self._handle = task_handle
-        self._interpreter = utils._select_interpreter(interpreter)
+        self._interpreter = interpreter
 
         self._initialize(self._handle, self._interpreter)
 
