@@ -17,6 +17,9 @@ class DIChannelCollection(ChannelCollection):
     Contains the collection of digital input channels for a DAQmx Task.
     """
     def __init__(self, task_handle, interpreter):
+        """
+        Do not construct this object directly; instead, call nidaqmx.Task.di_channels.
+        """
         super().__init__(task_handle, interpreter)
 
     def _create_chan(self, lines, line_grouping, name_to_assign_to_lines=''):

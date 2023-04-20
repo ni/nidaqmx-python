@@ -16,6 +16,9 @@ class PersistedTaskCollection(Sequence):
     This class defines methods that implements a container object.
     """
     def __init__(self, interpreter):
+        """
+        Do not construct this object directly; instead, call nidaqmx.system.System.local().tasks.
+        """
         self._interpreter = interpreter
     
     def __contains__(self, item):
