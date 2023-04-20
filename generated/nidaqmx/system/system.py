@@ -39,7 +39,7 @@ class System:
     def __init__(self, grpc_options=None):
         """
         Args:
-            grpc_options: Specifies the gRPC session options.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
         """
         self._interpreter = utils._select_interpreter(grpc_options)
 

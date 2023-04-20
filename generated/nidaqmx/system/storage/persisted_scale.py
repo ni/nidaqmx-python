@@ -21,8 +21,8 @@ class PersistedScale:
     def __init__(self, name, *, grpc_options=None):
         """
         Args:
-            name: Specifies the name of the saved scale.
-            grpc_options: Specifies the gRPC session options.
+            name (str): Specifies the name of the saved scale.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
         """
         self._name = name
         self._interpreter = utils._select_interpreter(grpc_options)

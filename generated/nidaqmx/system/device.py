@@ -33,7 +33,7 @@ class Device:
         """
         Args:
             name (str): Specifies the name of the device.
-            grpc_options(GrpcSessionOptions): Specifies the gRPC session options.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
         """
         self._name = name
         self._interpreter = utils._select_interpreter(grpc_options)

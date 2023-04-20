@@ -23,7 +23,7 @@ class Scale:
         """
         Args:
             name (str): Specifies the name of the scale to create.
-            grpc_options(GrpcSessionOptions): Specifies the gRPC session options.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
         """
         self._name = name
         self._interpreter = utils._select_interpreter(grpc_options)
