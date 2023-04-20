@@ -16,7 +16,7 @@ class PersistedScale:
     Use the DAQmx Persisted Scale properties to query information about
     programmatically saved custom scales.
     """
-    __slots__ = ['_name', '__weakref__']
+    __slots__ = ['_name', '_interpreter', '__weakref__']
 
     def __init__(self, name, *, grpc_options=None):
         """

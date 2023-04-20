@@ -17,7 +17,7 @@ class Channel:
     """
     Represents virtual channel or a list of virtual channels.
     """
-    __slots__ = ['_handle', '_name', '__weakref__']
+    __slots__ = ['_handle', '_name', '_interpreter', '__weakref__']
 
     def __init__(self, task_handle, virtual_or_physical_name, interpreter):
         """

@@ -16,7 +16,7 @@ class PersistedTask:
     Use the DAQmx Persisted Task properties to query information about
     programmatically saved tasks.
     """
-    __slots__ = ['_name', '__weakref__']
+    __slots__ = ['_name', '_interpreter', '__weakref__']
 
     def __init__(self, name, *, grpc_options=None):
         """
