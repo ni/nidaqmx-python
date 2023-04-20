@@ -2680,14 +2680,7 @@ class _DeviceAlternateConstructor(Device):
     """
     Provide an alternate constructor for the Device object.
 
-    Since we want the user to create a Device simply by instantiating a
-    Device object, thus, the Device object's constructor has a DAQmx Create
-    Device call.
-
-    Instantiating a Device object from a Device with passed in interpreter, 
-    requires that we either change the original constructor's prototype 
-    and add a parameter, or that we create this derived class to 'overload' 
-    the constructor.
+    This is a private API used to instantiate a Device with an existing interpreter.
     """
 
     def __init__(self, name, interpreter):
@@ -2699,4 +2692,7 @@ class _DeviceAlternateConstructor(Device):
         """
         self._name = name
         self._interpreter = utils._select_interpreter(interpreter)
+
+        # Use meta-programming to change the type of this object to Device,
+        # so the user isn't confused when doing introspection.
         self.__class__ = Device

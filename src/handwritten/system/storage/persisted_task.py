@@ -1,5 +1,6 @@
 import ctypes
 
+from nidaqmx import task
 from nidaqmx import utils
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx.errors import (
@@ -154,23 +155,14 @@ class PersistedTask:
         error_code = cfunc(self._name, ctypes.byref(task_handle))
         check_for_error(error_code)
 
-        from nidaqmx.system.storage._alternate_task_constructor import (
-            _TaskAlternateConstructor)
-
-        return _TaskAlternateConstructor(task_handle, self._interpreter)
+        return task._TaskAlternateConstructor(task_handle, self._interpreter)
     
 
 class _PersistedTaskAlternateConstructor(PersistedTask):
     """
     Provide an alternate constructor for the PersistedTask object.
 
-    Since we want the user to create a Persisted Task simply by instantiating a
-    PersistedTask object, thus, the PersistedTask object's constructor has a DAQmx Create
-    PersistedTask call.
-
-    Instantiating a PersistedTask object from a PersistedTask with passed in interpreter, 
-    requires that we either change the original constructor's prototype and add a parameter, 
-    or that we create this derived class to 'overload' the constructor.
+    This is a private API used to instantiate a PersistedTask with an existing interpreter.
     """
 
     def __init__(self, name, interpreter):
@@ -182,4 +174,7 @@ class _PersistedTaskAlternateConstructor(PersistedTask):
         """
         self._name = name
         self._interpreter = utils._select_interpreter(interpreter)
+
+        # Use meta-programming to change the type of this object to Scale,
+        # so the user isn't confused when doing introspection.
         self.__class__ = PersistedTask

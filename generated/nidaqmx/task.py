@@ -1361,3 +1361,28 @@ class Task:
                 'task to which data can be written.',
                 DAQmxErrors.WRITE_NO_OUTPUT_CHANS_IN_TASK,
                 task_name=self.name)
+
+
+class _TaskAlternateConstructor(Task):
+    """
+    Provide an alternate constructor for the Task object.
+
+    This is a private API used to instantiate a Task with an existing task handle and interpreter.
+    """
+
+    def __init__(self, task_handle, interpreter):
+        """
+        Args:
+            task_handle: Specifies the task handle from which to create a
+                Task object.
+            interpreter: Specifies the interpreter instance.
+            
+        """
+        self._handle = task_handle
+        self._interpreter = utils._select_interpreter(interpreter)
+
+        self._initialize(self._handle, self._interpreter)
+
+        # Use meta-programming to change the type of this object to Task,
+        # so the user isn't confused when doing introspection.
+        self.__class__ = Task

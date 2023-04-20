@@ -80,13 +80,7 @@ class _PhysicalChannelAlternateConstructor(PhysicalChannel):
     """
     Provide an alternate constructor for the PhysicalChannel object.
 
-    Since we want the user to create a Physical Channel simply by instantiating a
-    PhysicalChannel object, thus, the PhysicalChannel object's constructor has a DAQmx Create
-    PhysicalChannel call.
-
-    Instantiating a PhysicalChannel object from a PhysicalChannel with passed in interpreter, 
-    requires that we either change the original constructor's prototype and add a parameter, 
-    or that we create this derived class to 'overload' the constructor.
+    This is a private API used to instantiate a PhysicalChannel with an existing interpreter.     
     """
 
     def __init__(self, name, interpreter):
@@ -98,4 +92,7 @@ class _PhysicalChannelAlternateConstructor(PhysicalChannel):
         """
         self._name = name
         self._interpreter = utils._select_interpreter(interpreter)
+
+        # Use meta-programming to change the type of this object to PhysicalChannel,
+        # so the user isn't confused when doing introspection.
         self.__class__ = PhysicalChannel
