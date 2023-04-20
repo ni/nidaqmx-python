@@ -84,6 +84,10 @@ def generate_interpreter_function_call_args(function_metadata):
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
 
+    # C function call for reserved parameter for read/write function is passed as None.
+    if function_metadata.python_codegen_method == "CustomCode_Read_Write":
+        function_call_args.append("None")
+
     return function_call_args
 
 
@@ -218,3 +222,13 @@ def get_c_function_call_template(func):
 def get_callback_param_data_types(params):
     """Gets the data types for call back function parameters."""
     return [p["ctypes_data_type"] for p in params]
+
+def get_samps_per_chan_read_or_write_param(func_params):
+    """Gets samps per read/ samps per write parameter."""
+    for param in func_params:
+        if param.parameter_name  == "samps_per_chan_read":
+            return f"samps_per_chan_read={param.parameter_name}"
+        
+        if param.parameter_name in ("samps_per_chan_written", "num_samps_per_chan_written"):
+            return f"samps_per_chan_written={param.parameter_name}"
+    return None

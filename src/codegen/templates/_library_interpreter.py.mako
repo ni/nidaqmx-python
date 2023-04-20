@@ -59,3 +59,95 @@ class LibraryInterpreter(BaseInterpreter):
         return ${', '.join(return_values)}
     %endif
 %endfor
+
+    def read_power_i16(
+            task, read_voltage_array, read_current_array, num_samps_per_chan,
+            timeout, fill_mode):
+        samps_per_chan_read = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxReadPowerBinaryI16
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int, ctypes.c_double,
+                        c_bool32,
+                        wrapped_ndpointer(dtype=numpy.int16, flags=('C', 'W')),
+                        wrapped_ndpointer(dtype=numpy.int16, flags=('C', 'W')),
+                        ctypes.c_uint, ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            task, num_samps_per_chan, timeout, fill_mode,
+            read_voltage_array, read_current_array, read_voltage_array.size,
+            ctypes.byref(samps_per_chan_read), None)
+        check_for_error(error_code, samps_per_chan_read.value)
+
+        return samps_per_chan_read.value
+
+    def read_power_f64(
+            task, read_voltage_array, read_current_array, num_samps_per_chan,
+            timeout, fill_mode):
+        samps_per_chan_read = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxReadPowerF64
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int, ctypes.c_double,
+                        c_bool32,
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
+                        ctypes.c_uint, ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            task, num_samps_per_chan, timeout, fill_mode,
+            read_voltage_array, read_current_array, read_voltage_array.size,
+            ctypes.byref(samps_per_chan_read), None)
+        check_for_error(error_code, samps_per_chan_read.value)
+
+    def read_raw(task, read_array, num_samps_per_chan, timeout):
+        samples_read = ctypes.c_int()
+        number_of_bytes_per_sample = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxReadRaw
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int, ctypes.c_double,
+                        wrapped_ndpointer(dtype=read_array.dtype, flags=('C', 'W')),
+                        ctypes.c_uint, ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            task, num_samps_per_chan, timeout, read_array,
+            read_array.nbytes, ctypes.byref(samples_read),
+            ctypes.byref(number_of_bytes_per_sample), None)
+        check_for_error(error_code, samples_read.value)
+
+        return samples_read.value, number_of_bytes_per_sample.value
+
+    def _write_raw(
+            task_handle, num_samps_per_chan, numpy_array, auto_start, timeout):
+        samps_per_chan_written = ctypes.c_int()
+
+        cfunc = lib_importer.windll.DAQmxWriteRaw
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int, c_bool32,
+                        ctypes.c_double,
+                        wrapped_ndpointer(dtype=numpy_array.dtype,
+                                        flags=('C')),
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            task_handle, num_samps_per_chan, auto_start, timeout, numpy_array,
+            ctypes.byref(samps_per_chan_written), None)
+        check_for_error(error_code, samps_per_chan_written.value)
+
+        return samps_per_chan_written.value
