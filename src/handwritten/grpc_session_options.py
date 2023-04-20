@@ -7,7 +7,7 @@ GRPC_SERVICE_INTERFACE_NAME = 'nidaqmx_grpc.NiDAQmx'
 
 # This constant specifies the API license key required by the NI gRPC Device Server that comes with
 # MeasurementLink 2023 Q1.
-MEASUREMENTLINK_23Q1_PYTHON_API_KEY = 'DE10751B-3EE0-44EC-A93B-800E6A3C89E4'
+MEASUREMENTLINK_23Q1_NIDAQMX_PYTHON_API_KEY = '147D9BA7-BE75-4B29-8591-BA4A737AA8CF'
 
 
 class SessionInitializationBehavior(IntEnum):
@@ -44,7 +44,7 @@ class GrpcSessionOptions(object):
         grpc_channel,
         session_name,
         *,
-        api_key=MEASUREMENTLINK_23Q1_PYTHON_API_KEY,
+        api_key=MEASUREMENTLINK_23Q1_NIDAQMX_PYTHON_API_KEY,
         initialization_behavior=SessionInitializationBehavior.AUTO
     ):
         r'''Collection of options that specifies session behaviors related to gRPC.
