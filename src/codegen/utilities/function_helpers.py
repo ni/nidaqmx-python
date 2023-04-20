@@ -34,7 +34,7 @@ EXCLUDED_FUNCTIONS = [
     "SetDigitalPullUpPullDownStates",
 ]
 
-CHANGE_FILLMODE_TYPE_FUNCTIONS = "read_analog_f64"
+CHANGE_FILLMODE_TYPE_FUNCTIONS = ["read_analog_f64"]
 
 
 def get_functions(metadata, class_name=""):
