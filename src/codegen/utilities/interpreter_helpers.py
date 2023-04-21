@@ -116,6 +116,8 @@ def get_interpreter_parameter_signature(is_python_factory, params):
 def get_instantiation_lines_for_output(func):
     """Gets the lines of code for instantiation of output values."""
     instantiation_lines = []
+    if func.is_init_method:
+        instantiation_lines.append(f"task = lib_importer.task_handle(0)")
     for param in func.output_parameters:
         if param.has_explicit_buffer_size:
             if is_custom_read_write_function(func) and param.size.mechanism == "passed-in":
@@ -215,9 +217,8 @@ def get_output_params(func):
 
 def get_return_values(func):
     """Gets the values to add to return statement of the function."""
-    output_parameters = get_output_params(func)
     return_values = []
-    for param in output_parameters:
+    for param in func.output_parameters:
         if param.ctypes_data_type == "ctypes.c_char_p":
             return_values.append(f"{param.parameter_name}.value.decode('ascii')")
         elif param.is_list:

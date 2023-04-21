@@ -19,6 +19,7 @@ class Function:
         self._stream_response = function_metadata.get("stream_response", False)
         self._handle_parameter = None
         self._is_python_codegen_method = function_metadata.get("python_codegen_method") != "no"
+        self._is_init_method = function_metadata.get("init_method", False)
         if "handle_parameter" in function_metadata:
             self._handle_parameter = Parameter(
                 "handle_parameter", function_metadata["handle_parameter"]
@@ -127,3 +128,8 @@ class Function:
     def is_python_codegen_method(self):
         """bool: Defines if the function is a python codegen function."""
         return self._is_python_codegen_method
+
+    @property
+    def is_init_method(self):
+        """bool: Defines if the method is an init method."""
+        return self._is_init_method

@@ -47,6 +47,7 @@ class LibraryInterpreter(BaseInterpreter):
     instantiation_lines = get_instantiation_lines_for_output(func)
     %>\
 \
+%if func.is_python_codegen_method and func.calling_convention == "StdCall":
     %if len(instantiation_lines) > 0:
         %for instantiation_line in instantiation_lines:
         ${instantiation_line}
@@ -54,7 +55,6 @@ class LibraryInterpreter(BaseInterpreter):
 
     %endif
 \
-%if func.is_python_codegen_method:
 <%include file="${'/library_interpreter' + get_c_function_call_template(func)}" args="function=func" />
     %if len(list(return_values)) != 0:
         return ${', '.join(return_values)}
