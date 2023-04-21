@@ -69,15 +69,9 @@ def generate_interpreter_function_call_args(function_metadata):
                 function_call_args.append(f"len({param.parameter_name})")
         else:
             if param.has_explicit_buffer_size:
+                function_call_args.append(param.parameter_name)
                 if param.size.mechanism == "ivi-dance":
-                    function_call_args.append(param.parameter_name)
                     function_call_args.append("temp_size")
-                elif (
-                    param.size.mechanism == "passed-in"
-                    or param.size.mechanism == "passed-in-by-ptr"
-                    or param.size.mechanism == "custom-code"
-                ):
-                    function_call_args.append(f"ctypes.byref({param.parameter_name})")
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
 
@@ -107,12 +101,12 @@ def get_instantiation_lines_for_output(func):
                 param.size.mechanism == "passed-in" or param.size.mechanism == "passed-in-by-ptr"
             ) and param.is_list:
                 instantiation_lines.append(
-                    f"{param.parameter_name} = numpy.zeros({param.size.value}, dtype=numpy.{param.ctypes_data_type})"
+                    f"{param.parameter_name} = numpy.zeros({param.size.value}, dtype={param.ctypes_data_type})"
                 )
             elif param.size.mechanism == "custom-code":
                 instantiation_lines.append(f"size = {param.size.value}")
                 instantiation_lines.append(
-                    f"{param.parameter_name} = numpy.zeros(size, dtype=numpy.{param.ctypes_data_type})"
+                    f"{param.parameter_name} = numpy.zeros(size, dtype={param.ctypes_data_type})"
                 )
         else:
             instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
