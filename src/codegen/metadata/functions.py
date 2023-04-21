@@ -281,7 +281,7 @@ functions = {
                 'python_type_annotation': 'List[float]',
                 'size': {
                     'mechanism': 'custom-code',
-                    'python_value': 'len(forward_coeffs) if (reverse_poly_order < 0) else reverse_poly_order + 1',
+                    'python_value': 'len(forward_coeffs) if reverse_poly_order < 0 else reverse_poly_order + 1',
                     'value': '(reversePolyOrder < 0) ? numForwardCoeffsIn : reversePolyOrder + 1'
                 },
                 'type': 'float64[]'

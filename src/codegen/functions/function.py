@@ -18,6 +18,7 @@ class Function:
         self._return_type = function_metadata["returns"]
         self._stream_response = function_metadata.get("stream_response", False)
         self._handle_parameter = None
+        self._is_python_codegen_method = function_metadata.get("python_codegen_method") != "no"
         if "handle_parameter" in function_metadata:
             self._handle_parameter = Parameter(
                 "handle_parameter", function_metadata["handle_parameter"]
@@ -121,3 +122,8 @@ class Function:
     def python_codegen_method(self):
         """str: The python codegen method of the function."""
         return self._python_codegen_method
+
+    @property
+    def is_python_codegen_method(self):
+        """bool: Defines if the function is a python codegen function."""
+        return self._is_python_codegen_method
