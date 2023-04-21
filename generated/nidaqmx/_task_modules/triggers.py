@@ -80,34 +80,17 @@ class Triggers:
             set this property to **SyncType.SLAVE** on the other
             devices.
         """
-        val = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxGetTriggerSyncType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return SyncType(val.value)
+        val = self._interpreter.get_trig_attribute_int32(
+                self._handle, 12160)
+        return SyncType(val)
 
     @sync_type.setter
     def sync_type(self, val):
         val = val.value
-        cfunc = lib_importer.windll.DAQmxSetTriggerSyncType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_trig_attribute_int32(
+                self._handle, 12160, val)
 
     @sync_type.deleter
     def sync_type(self):

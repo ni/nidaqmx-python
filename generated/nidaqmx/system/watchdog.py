@@ -104,34 +104,17 @@ class WatchdogTask:
         :class:`nidaqmx.constants.Edge`: Specifies on which edge of a
             digital signal to expire the watchdog task.
         """
-        val = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxGetDigEdgeWatchdogExpirTrigEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return Edge(val.value)
+        val = self._interpreter.get_watchdog_attribute_int32(
+                self._handle, 8613)
+        return Edge(val)
 
     @expir_trig_dig_edge_edge.setter
     def expir_trig_dig_edge_edge(self, val):
         val = val.value
-        cfunc = lib_importer.windll.DAQmxSetDigEdgeWatchdogExpirTrigEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_watchdog_attribute_int32(
+                self._handle, 8613, val)
 
     @expir_trig_dig_edge_edge.deleter
     def expir_trig_dig_edge_edge(self):
@@ -152,46 +135,16 @@ class WatchdogTask:
         str: Specifies the name of a terminal where a digital signal
             exists to use as the source of the Expiration Trigger.
         """
-        cfunc = lib_importer.windll.DAQmxGetDigEdgeWatchdogExpirTrigSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
 
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
+        val = self._interpreter.get_watchdog_attribute_string(
+                self._handle, 8612)
+        return val
 
     @expir_trig_dig_edge_src.setter
     def expir_trig_dig_edge_src(self, val):
-        cfunc = lib_importer.windll.DAQmxSetDigEdgeWatchdogExpirTrigSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_watchdog_attribute_string(
+                self._handle, 8612, val)
 
     @expir_trig_dig_edge_src.deleter
     def expir_trig_dig_edge_src(self):
@@ -214,35 +167,16 @@ class WatchdogTask:
             to true, the watchdog timer expires when the chassis detects
             the loss of network connection.
         """
-        val = c_bool32()
 
-        cfunc = (lib_importer.windll.
-                 DAQmxGetWatchdogExpirTrigTrigOnNetworkConnLoss)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_watchdog_attribute_bool(
+                self._handle, 12381)
+        return val
 
     @expir_trig_trig_on_network_conn_loss.setter
     def expir_trig_trig_on_network_conn_loss(self, val):
-        cfunc = (lib_importer.windll.
-                 DAQmxSetWatchdogExpirTrigTrigOnNetworkConnLoss)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, c_bool32]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_watchdog_attribute_bool(
+                self._handle, 12381, val)
 
     @expir_trig_trig_on_network_conn_loss.deleter
     def expir_trig_trig_on_network_conn_loss(self):
@@ -264,34 +198,17 @@ class WatchdogTask:
         :class:`nidaqmx.constants.TriggerType`: Specifies the type of
             trigger to use to expire a watchdog task.
         """
-        val = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxGetWatchdogExpirTrigType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
 
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return TriggerType(val.value)
+        val = self._interpreter.get_watchdog_attribute_int32(
+                self._handle, 8611)
+        return TriggerType(val)
 
     @expir_trig_trig_type.setter
     def expir_trig_trig_type(self, val):
         val = val.value
-        cfunc = lib_importer.windll.DAQmxSetWatchdogExpirTrigType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_watchdog_attribute_int32(
+                self._handle, 8611, val)
 
     @expir_trig_trig_type.deleter
     def expir_trig_trig_type(self):
@@ -312,20 +229,11 @@ class WatchdogTask:
         bool: Indicates if the watchdog timer expired. You can read this
             property only while the task is running.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetWatchdogHasExpired
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
 
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_watchdog_attribute_bool(
+                self._handle, 8616)
+        return val
 
     @property
     def timeout(self):
@@ -335,34 +243,16 @@ class WatchdogTask:
             timer never expires. Set this input to -1 if you use an
             Expiration Trigger to expire the watchdog task.
         """
-        val = ctypes.c_double()
 
-        cfunc = lib_importer.windll.DAQmxGetWatchdogTimeout
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_double)]
 
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_watchdog_attribute_double(
+                self._handle, 8617)
+        return val
 
     @timeout.setter
     def timeout(self, val):
-        cfunc = lib_importer.windll.DAQmxSetWatchdogTimeout
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_double]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_watchdog_attribute_double(
+                self._handle, 8617, val)
 
     @timeout.deleter
     def timeout(self):
