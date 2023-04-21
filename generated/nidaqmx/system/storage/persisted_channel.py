@@ -15,7 +15,7 @@ class PersistedChannel:
     Use the DAQmx Persisted Channel properties to query information about
     programmatically saved global channels.
     """
-    __slots__ = ['_name', '__weakref__']
+    __slots__ = ['_name', '_interpreter', '__weakref__']
 
     def __init__(self, name, *, grpc_options=None):
         """
@@ -148,7 +148,7 @@ class _PersistedChannelAlternateConstructor(PersistedChannel):
             
         """
         self._name = name
-        self._interpreter = utils._select_interpreter(interpreter)
+        self._interpreter = interpreter
 
         # Use meta-programming to change the type of this object to PersistedChannel,
         # so the user isn't confused when doing introspection.

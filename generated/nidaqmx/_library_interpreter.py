@@ -144,6 +144,16 @@ class LibraryInterpreter(BaseInterpreter):
             task, trigger_source, trigger_slope, trigger_level)
         check_for_error(error_code)
 
+    def cfg_anlg_multi_edge_ref_trig(
+            self, task, trigger_sources, trigger_slope_array,
+            trigger_level_array, pretrigger_samples, array_size):
+        raise NotImplementedError
+
+    def cfg_anlg_multi_edge_start_trig(
+            self, task, trigger_sources, trigger_slope_array,
+            trigger_level_array, array_size):
+        raise NotImplementedError
+
     def cfg_anlg_window_ref_trig(
             self, task, trigger_source, window_top, window_bottom,
             pretrigger_samples, trigger_when):
@@ -313,6 +323,12 @@ class LibraryInterpreter(BaseInterpreter):
             task, sample_mode, samps_per_chan)
         check_for_error(error_code)
 
+    def cfg_input_buffer(self, task, num_samps_per_chan):
+        raise NotImplementedError
+
+    def cfg_output_buffer(self, task, num_samps_per_chan):
+        raise NotImplementedError
+
     def cfg_pipelined_samp_clk_timing(
             self, task, rate, source, active_edge, sample_mode,
             samps_per_chan):
@@ -344,6 +360,9 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, source, rate, active_edge, sample_mode, samps_per_chan)
         check_for_error(error_code)
+
+    def cfg_time_start_trig(self, task, when, timescale):
+        raise NotImplementedError
 
     def cfg_watchdog_ao_expir_states(
             self, task, channel_names, expir_state_array, output_type_array,
@@ -2101,6 +2120,10 @@ class LibraryInterpreter(BaseInterpreter):
             current_excit_val)
         check_for_error(error_code)
 
+    def create_watchdog_timer_task(
+            self, device_name, session_name, timeout, lines, exp_state):
+        raise NotImplementedError
+
     def create_watchdog_timer_task_ex(
             self, device_name, session_name, timeout):
         cfunc = lib_importer.windll.DAQmxCreateWatchdogTimerTaskEx
@@ -2127,6 +2150,18 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             device_name)
         check_for_error(error_code)
+
+    def delete_saved_global_chan(self, channel_name):
+        raise NotImplementedError
+
+    def delete_saved_scale(self, scale_name):
+        raise NotImplementedError
+
+    def delete_saved_task(self, task_name):
+        raise NotImplementedError
+
+    def device_supports_cal(self, device_name):
+        raise NotImplementedError
 
     def disable_ref_trig(self, task):
         cfunc = lib_importer.windll.DAQmxDisableRefTrig
@@ -2176,6 +2211,12 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, signal_id, output_terminal)
         check_for_error(error_code)
+
+    def get_ai_chan_cal_cal_date(self, task, channel_name):
+        raise NotImplementedError
+
+    def get_ai_chan_cal_exp_date(self, task, channel_name):
+        raise NotImplementedError
 
     def get_analog_power_up_states(
             self, device_name, channel_name, channel_type):
@@ -2406,6 +2447,9 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return port_list
 
+    def get_error_string(self, error_code):
+        raise NotImplementedError
+
     def get_exported_signal_attribute_bool(self, task, attribute):
         cfunc = lib_importer.cdll.DAQmxGetExportedSignalAttribute
 
@@ -2445,6 +2489,15 @@ class LibraryInterpreter(BaseInterpreter):
             task, attribute, ctypes.byref(value))
         check_for_error(error_code)
         return value
+
+    def get_nth_task_channel(self, task, index):
+        raise NotImplementedError
+
+    def get_nth_task_device(self, task, index):
+        raise NotImplementedError
+
+    def get_nth_task_read_channel(self, task, index):
+        raise NotImplementedError
 
     def get_persisted_chan_attribute_bool(self, channel, attribute):
         cfunc = lib_importer.cdll.DAQmxGetPersistedChanAttribute
@@ -2672,6 +2725,9 @@ class LibraryInterpreter(BaseInterpreter):
             scale_name, attribute, ctypes.byref(value))
         check_for_error(error_code)
         return value
+
+    def get_self_cal_last_date_and_time(self, device_name):
+        raise NotImplementedError
 
     def get_system_info_attribute_string(self, attribute):
         cfunc = lib_importer.cdll.DAQmxGetSystemInfoAttribute
@@ -3360,6 +3416,16 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return read_array, samps_per_chan_read
 
+    def read_power_binary_i16(
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            read_array_voltage, read_array_current):
+        raise NotImplementedError
+
+    def read_power_f64(
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            read_array_voltage, read_array_current):
+        raise NotImplementedError
+
     def read_power_scalar_f64(self, task, timeout):
         cfunc = lib_importer.windll.DAQmxReadPowerScalarF64
         if cfunc.argtypes is None:
@@ -3373,6 +3439,9 @@ class LibraryInterpreter(BaseInterpreter):
             task, timeout, ctypes.byref(voltage), ctypes.byref(current))
         check_for_error(error_code)
         return voltage, current
+
+    def read_raw(self, task, num_samps_per_chan, timeout, read_array):
+        raise NotImplementedError
 
     def register_done_event(
             self, task, options, callback_function, callback_data):
@@ -3482,6 +3551,12 @@ class LibraryInterpreter(BaseInterpreter):
             device_name, override_reservation)
         check_for_error(error_code)
 
+    def reset_buffer_attribute(self, task, attribute):
+        raise NotImplementedError
+
+    def reset_chan_attribute(self, task, channel, attribute):
+        raise NotImplementedError
+
     def reset_device(self, device_name):
         cfunc = lib_importer.windll.DAQmxResetDevice
         if cfunc.argtypes is None:
@@ -3494,6 +3569,42 @@ class LibraryInterpreter(BaseInterpreter):
             device_name)
         check_for_error(error_code)
 
+    def reset_exported_signal_attribute(self, task, attribute):
+        raise NotImplementedError
+
+    def reset_read_attribute(self, task, attribute):
+        raise NotImplementedError
+
+    def reset_real_time_attribute(self, task, attribute):
+        raise NotImplementedError
+
+    def reset_timing_attribute(self, task, attribute):
+        raise NotImplementedError
+
+    def reset_timing_attribute_ex(self, task, device_names, attribute):
+        raise NotImplementedError
+
+    def reset_trig_attribute(self, task, attribute):
+        raise NotImplementedError
+
+    def reset_watchdog_attribute(self, task, lines, attribute):
+        raise NotImplementedError
+
+    def reset_write_attribute(self, task, attribute):
+        raise NotImplementedError
+
+    def save_global_chan(self, task, channel_name, save_as, author, options):
+        raise NotImplementedError
+
+    def save_scale(self, scale_name, save_as, author, options):
+        raise NotImplementedError
+
+    def save_task(self, task, save_as, author, options):
+        raise NotImplementedError
+
+    def self_cal(self, device_name):
+        raise NotImplementedError
+
     def self_test_device(self, device_name):
         cfunc = lib_importer.windll.DAQmxSelfTestDevice
         if cfunc.argtypes is None:
@@ -3505,6 +3616,14 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             device_name)
         check_for_error(error_code)
+
+    def set_ai_chan_cal_cal_date(
+            self, task, channel_name, year, month, day, hour, minute):
+        raise NotImplementedError
+
+    def set_ai_chan_cal_exp_date(
+            self, task, channel_name, year, month, day, hour, minute):
+        raise NotImplementedError
 
     def set_analog_power_up_states(
             self, device_name, channel_names, state, channel_type):
@@ -4036,6 +4155,12 @@ class LibraryInterpreter(BaseInterpreter):
             device_name)
         check_for_error(error_code)
 
+    def wait_for_next_sample_clock(self, task, timeout):
+        raise NotImplementedError
+
+    def wait_for_valid_timestamp(self, task, timestamp_event, timeout):
+        raise NotImplementedError
+
     def wait_until_task_done(self, task, time_to_wait):
         cfunc = lib_importer.windll.DAQmxWaitUntilTaskDone
         if cfunc.argtypes is None:
@@ -4335,6 +4460,9 @@ class LibraryInterpreter(BaseInterpreter):
             write_array, ctypes.byref(samps_per_chan_written))
         check_for_error(error_code)
         return samps_per_chan_written
+
+    def write_raw(self, task, num_samps, auto_start, timeout, write_array):
+        raise NotImplementedError
 
     def write_to_teds_from_array(
             self, physical_channel, array_size, bit_stream,

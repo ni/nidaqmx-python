@@ -16,6 +16,9 @@ class PhysicalChannelCollection(Sequence):
     This class defines methods that implements a container object.
     """
     def __init__(self, device_name, interpreter):
+        """
+        Do not construct this object directly; instead, construct a nidaqmx.system.Device and use the appropriate property, such as device.ai_physical_channels.
+        """
         self._name = device_name
         self._interpreter = interpreter
 
