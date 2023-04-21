@@ -18,8 +18,7 @@ class Function:
         self._return_type = function_metadata["returns"]
         self._stream_response = function_metadata.get("stream_response", False)
         self._handle_parameter = None
-        self._python_codegen_method = function_metadata.get("python_codegen_method")
-        self._is_python_codegen_method = self._python_codegen_method != "no"
+        self._is_python_codegen_method = function_metadata.get("python_codegen_method") != "no"
         if "handle_parameter" in function_metadata:
             self._handle_parameter = Parameter(
                 "handle_parameter", function_metadata["handle_parameter"]
