@@ -130,7 +130,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         return samples_read.value, number_of_bytes_per_sample.value
 
-    def _write_raw(
+    def write_raw(
             task_handle, num_samps_per_chan, numpy_array, auto_start, timeout):
         samps_per_chan_written = ctypes.c_int()
 
