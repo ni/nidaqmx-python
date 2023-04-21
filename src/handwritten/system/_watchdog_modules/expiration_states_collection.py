@@ -8,8 +8,9 @@ class ExpirationStatesCollection:
     
     This class defines methods that implements a container object.
     """
-    def __init__(self, task_handle):
+    def __init__(self, task_handle, interpreter):
         self._handle = task_handle
+        self._interpreter = interpreter
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):

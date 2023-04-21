@@ -13,6 +13,7 @@ import ctypes
 import numpy
 import deprecation
 
+from nidaqmx import utils
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, enum_bitfield_to_list, ctypes_byte_str,
     c_bool32)
@@ -37,12 +38,14 @@ class Device:
     """
     __slots__ = ['_name', '__weakref__']
 
-    def __init__(self, name):
+    def __init__(self, name, *, grpc_options=None):
         """
         Args:
             name (str): Specifies the name of the device.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
         """
         self._name = name
+        self._interpreter = utils._select_interpreter(grpc_options)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -74,7 +77,7 @@ class Device:
             Indicates a collection that contains all the analog input
             physical channels available on the device.
         """
-        return AIPhysicalChannelCollection(self._name)
+        return AIPhysicalChannelCollection(self._name, self._interpreter)
 
     @property
     def ao_physical_chans(self):
@@ -83,7 +86,7 @@ class Device:
             Indicates a collection that contains all the analog output
             physical channels available on the device.
         """
-        return AOPhysicalChannelCollection(self._name)
+        return AOPhysicalChannelCollection(self._name, self._interpreter)
 
     @property
     def ci_physical_chans(self):
@@ -92,7 +95,7 @@ class Device:
             Indicates a collection that contains all the counter input
             physical channels available on the device.
         """
-        return CIPhysicalChannelCollection(self._name)
+        return CIPhysicalChannelCollection(self._name, self._interpreter)
 
     @property
     def co_physical_chans(self):
@@ -101,7 +104,7 @@ class Device:
             Indicates a collection that contains all the counter output
             physical channels available on the device.
         """
-        return COPhysicalChannelCollection(self._name)
+        return COPhysicalChannelCollection(self._name, self._interpreter)
 
     @property
     def di_lines(self):
@@ -110,7 +113,7 @@ class Device:
             Indicates a collection that contains all the digital input
             lines available on the device.
         """
-        return DILinesCollection(self._name)
+        return DILinesCollection(self._name, self._interpreter)
 
     @property
     def di_ports(self):
@@ -119,7 +122,7 @@ class Device:
             Indicates a collection that contains all the digital input
             ports available on the device.
         """
-        return DIPortsCollection(self._name)
+        return DIPortsCollection(self._name, self._interpreter)
 
     @property
     def do_lines(self):
@@ -128,7 +131,7 @@ class Device:
             Indicates a collection that contains all the digital output
             lines available on the device.
         """
-        return DOLinesCollection(self._name)
+        return DOLinesCollection(self._name, self._interpreter)
 
     @property
     def do_ports(self):
@@ -137,7 +140,7 @@ class Device:
             Indicates a collection that contains all the digital output
             ports available on the device.
         """
-        return DOPortsCollection(self._name)
+        return DOPortsCollection(self._name, self._interpreter)
 
     # endregion
 
@@ -267,3 +270,25 @@ ${function_template.script_function(function_object)}
         check_for_error(error_code)
 
     # endregion
+
+
+class _DeviceAlternateConstructor(Device):
+    """
+    Provide an alternate constructor for the Device object.
+
+    This is a private API used to instantiate a Device with an existing interpreter.
+    """
+
+    def __init__(self, name, interpreter):
+        """
+        Args:
+            name: Specifies the name of the Device.
+            interpreter: Specifies the interpreter instance.
+            
+        """
+        self._name = name
+        self._interpreter = interpreter
+
+        # Use meta-programming to change the type of this object to Device,
+        # so the user isn't confused when doing introspection.
+        self.__class__ = Device

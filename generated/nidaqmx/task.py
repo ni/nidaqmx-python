@@ -63,7 +63,7 @@ class Task:
     Represents a DAQmx Task.
     """
 
-    def __init__(self, new_task_name=''):
+    def __init__(self, new_task_name='', *, grpc_options=None):
         """
         Creates a DAQmx task.
 
@@ -78,7 +78,16 @@ class Task:
                 results in an error.
         """
         self._handle = lib_importer.task_handle(0)
-        self._interpreter = utils._select_interpreter()
+
+        if grpc_options and not (
+            grpc_options.session_name == "" or grpc_options.session_name == new_task_name
+        ):
+            raise DaqError(
+                f'Unsupported session name: "{grpc_options.session_name}". If a session name is specified, it must match the task name.',
+                DAQmxErrors.UNKNOWN,
+                task_name=self.name)
+    
+        self._interpreter = utils._select_interpreter(grpc_options)
         cfunc = lib_importer.windll.DAQmxCreateTask
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -1361,3 +1370,28 @@ class Task:
                 'task to which data can be written.',
                 DAQmxErrors.WRITE_NO_OUTPUT_CHANS_IN_TASK,
                 task_name=self.name)
+
+
+class _TaskAlternateConstructor(Task):
+    """
+    Provide an alternate constructor for the Task object.
+
+    This is a private API used to instantiate a Task with an existing task handle and interpreter.
+    """
+
+    def __init__(self, task_handle, interpreter):
+        """
+        Args:
+            task_handle: Specifies the task handle from which to create a
+                Task object.
+            interpreter: Specifies the interpreter instance.
+            
+        """
+        self._handle = task_handle
+        self._interpreter = interpreter
+
+        self._initialize(self._handle, self._interpreter)
+
+        # Use meta-programming to change the type of this object to Task,
+        # so the user isn't confused when doing introspection.
+        self.__class__ = Task

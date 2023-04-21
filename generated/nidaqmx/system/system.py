@@ -4,6 +4,7 @@ import collections
 import ctypes
 import numpy
 
+from nidaqmx import utils
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
 from nidaqmx.errors import check_for_error, is_string_buffer_too_small
@@ -35,6 +36,13 @@ class System:
     information about the hardware.
     """
 
+    def __init__(self, grpc_options=None):
+        """
+        Args:
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
+        """
+        self._interpreter = utils._select_interpreter(grpc_options)
+
     @staticmethod
     def local():
         """
@@ -42,13 +50,23 @@ class System:
         """
         return System()
 
+    @staticmethod
+    def remote(grpc_options):
+        """
+        nidaqmx.system.system.System: Represents the remote DAQmx system.
+
+        Args:
+            grpc_options: Specifies the gRPC session options.
+        """
+        return System(grpc_options)
+
     @property
     def devices(self):
         """
         nidaqmx.system._collections.DeviceCollection: Indicates the
             collection of devices for this DAQmx system.
         """
-        return DeviceCollection()
+        return DeviceCollection(self._interpreter)
 
 
     DriverVersion = collections.namedtuple(
@@ -77,7 +95,7 @@ class System:
         nidaqmx.system._collections.PersistedChannelCollection: Indicates
             the collection of global channels for this DAQmx system.
         """
-        return PersistedChannelCollection()
+        return PersistedChannelCollection(self._interpreter)
 
     @property
     def scales(self):
@@ -85,7 +103,7 @@ class System:
         nidaqmx.system._collections.PersistedScaleCollection: Indicates
             the collection of custom scales for this DAQmx system.
         """
-        return PersistedScaleCollection()
+        return PersistedScaleCollection(self._interpreter)
 
     @property
     def tasks(self):
@@ -93,7 +111,7 @@ class System:
         nidaqmx.system._collections.PersistedTaskCollection: Indicates
             the collection of saved tasks for this DAQmx system.
         """
-        return PersistedTaskCollection()
+        return PersistedTaskCollection(self._interpreter)
 
     @property
     def _major_version(self):

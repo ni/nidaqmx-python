@@ -14,6 +14,7 @@
 import ctypes
 import numpy
 
+from nidaqmx import utils
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, enum_bitfield_to_list, ctypes_byte_str,
     c_bool32)
@@ -34,12 +35,14 @@ class PhysicalChannel:
     """
     __slots__ = ['_name', '__weakref__']
 
-    def __init__(self, name):
+    def __init__(self, name, *, grpc_options=None):
         """
         Args:
             name (str): Specifies the name of the physical channel.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
         """
         self._name = name
+        self._interpreter = utils._select_interpreter(grpc_options)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -71,3 +74,25 @@ ${property_template.script_property(attribute)}\
 %for function_object in functions:
 ${function_template.script_function(function_object)}
 %endfor
+
+
+class _PhysicalChannelAlternateConstructor(PhysicalChannel):
+    """
+    Provide an alternate constructor for the PhysicalChannel object.
+
+    This is a private API used to instantiate a PhysicalChannel with an existing interpreter.     
+    """
+
+    def __init__(self, name, interpreter):
+        """
+        Args:
+            name: Specifies the name of the Physical Channel.
+            interpreter: Specifies the interpreter instance.
+            
+        """
+        self._name = name
+        self._interpreter = interpreter
+
+        # Use meta-programming to change the type of this object to PhysicalChannel,
+        # so the user isn't confused when doing introspection.
+        self.__class__ = PhysicalChannel
