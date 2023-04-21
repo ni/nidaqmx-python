@@ -2981,6 +2981,8 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes.c_double,
+                        ctypes.POINTER(ctypes.c_double),
+                        ctypes.POINTER(ctypes.c_double),
                         ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
