@@ -1162,7 +1162,7 @@ class StartTrigger:
 
         val = self._interpreter.get_trig_attribute_string(
                 self._handle, 5136)
-        return PhysicalChannel(val.value.decode('ascii'))
+        return PhysicalChannel(val)
 
     @dig_pattern_src.setter
     def dig_pattern_src(self, val):

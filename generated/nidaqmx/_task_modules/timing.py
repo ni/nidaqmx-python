@@ -353,7 +353,7 @@ class Timing:
 
         val = self._interpreter.get_timing_attribute_string(
                 self._handle, 8598)
-        return PhysicalChannel(val.value.decode('ascii'))
+        return PhysicalChannel(val)
 
     @change_detect_di_falling_edge_physical_chans.setter
     def change_detect_di_falling_edge_physical_chans(self, val):
@@ -388,7 +388,7 @@ class Timing:
 
         val = self._interpreter.get_timing_attribute_string(
                 self._handle, 8597)
-        return PhysicalChannel(val.value.decode('ascii'))
+        return PhysicalChannel(val)
 
     @change_detect_di_rising_edge_physical_chans.setter
     def change_detect_di_rising_edge_physical_chans(self, val):

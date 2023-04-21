@@ -919,7 +919,7 @@ class PauseTrigger:
 
         val = self._interpreter.get_trig_attribute_string(
                 self._handle, 8559)
-        return PhysicalChannel(val.value.decode('ascii'))
+        return PhysicalChannel(val)
 
     @dig_pattern_src.setter
     def dig_pattern_src(self, val):

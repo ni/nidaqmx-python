@@ -1895,7 +1895,7 @@ class CIChannel(Channel):
 
         val = self._interpreter.get_chan_attribute_string(
                 self._handle, self._name, 6302)
-        return Scale(val.value.decode('ascii'))
+        return Scale(val)
 
     @ci_custom_scale.setter
     def ci_custom_scale(self, val):

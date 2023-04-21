@@ -98,7 +98,7 @@ class AOChannel(Channel):
 
         val = self._interpreter.get_chan_attribute_string(
                 self._handle, self._name, 4488)
-        return Scale(val.value.decode('ascii'))
+        return Scale(val)
 
     @ao_custom_scale.setter
     def ao_custom_scale(self, val):

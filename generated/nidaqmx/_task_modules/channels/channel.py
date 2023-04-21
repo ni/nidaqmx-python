@@ -255,7 +255,7 @@ class Channel:
 
         val = self._interpreter.get_chan_attribute_string(
                 self._handle, self._name, 6389)
-        return PhysicalChannel(val.value.decode('ascii'))
+        return PhysicalChannel(val)
 
     @physical_channel.setter
     def physical_channel(self, val):
