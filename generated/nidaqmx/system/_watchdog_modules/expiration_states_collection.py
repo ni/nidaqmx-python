@@ -8,8 +8,9 @@ class ExpirationStatesCollection:
     
     This class defines methods that implements a container object.
     """
-    def __init__(self, task_handle):
+    def __init__(self, task_handle, interpreter):
         self._handle = task_handle
+        self._interpreter = interpreter
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -35,7 +36,7 @@ class ExpirationStatesCollection:
             The object representing the indexed expiration state.
         """
         if isinstance(index, str):
-            return ExpirationState(self._handle, index)
+            return ExpirationState(self._handle, index, self._interpreter)
         else:
             raise DaqError(
                 'Invalid index type "{}" used to access expiration states.'

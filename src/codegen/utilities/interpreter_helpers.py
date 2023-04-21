@@ -35,14 +35,11 @@ INTERPRETER_IGNORED_FUNCTIONS = [
 ]
 
 
-def get_interpreter_functions(metadata, is_base_interpreter=False):
+def get_interpreter_functions(metadata):
     """Converts the scrapigen metadata into a list of functions."""
     all_functions = deepcopy(metadata["functions"])
     functions_metadata = []
     for function_name, function_data in all_functions.items():
-        if not is_base_interpreter:
-            if not is_python_codegen_method(function_data):
-                continue
         if function_name in INTERPRETER_IGNORED_FUNCTIONS:
             continue
         function_data["c_function_name"] = function_name
@@ -148,11 +145,34 @@ def is_skippable_param(param: dict) -> bool:
     return False
 
 
-def is_python_codegen_method(func: dict) -> bool:
-    """Returns True if the method is a python codegen method."""
-    if "python_codegen_method" in func:
-        return func["python_codegen_method"] != "no"
-    return True
+def get_output_param_with_ivi_dance_mechanism(output_parameters):
+    """Gets the output parameters with explicit buffer size."""
+    explicit_output_params = [p for p in output_parameters if p.has_explicit_buffer_size]
+    params_with_ivi_dance_mechanism = [
+        p for p in explicit_output_params if p.size.mechanism == "ivi-dance"
+    ]
+    if len(params_with_ivi_dance_mechanism) > 1:
+        raise NotImplementedError(
+            "There is more than one output parameter with an explicit "
+            "buffer size that follows ivi dance mechanism."
+            "This cannot be handled by this template because it "
+            'calls the C function once with "buffer_size = 0" to get the '
+            "buffer size from the returned integer, which is normally an "
+            "error code.\n\n"
+            "Output parameters with explicit buffer sizes: {}".format(
+                params_with_ivi_dance_mechanism
+            )
+        )
+
+    if len(params_with_ivi_dance_mechanism) == 1:
+        return params_with_ivi_dance_mechanism[0]
+    return None
+
+
+def has_parameter_with_ivi_dance_size_mechanism(func):
+    """Returns true if the function has a parameter with ivi dance size mechanism."""
+    parameter_with_size_buffer = get_output_param_with_ivi_dance_mechanism(func.output_parameters)
+    return parameter_with_size_buffer is not None
 
 
 def get_output_param_with_ivi_dance_mechanism(output_parameters):
