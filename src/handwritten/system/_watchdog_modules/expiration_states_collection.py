@@ -36,7 +36,7 @@ class ExpirationStatesCollection:
             The object representing the indexed expiration state.
         """
         if isinstance(index, str):
-            return ExpirationState(self._handle, index)
+            return ExpirationState(self._handle, index, self._interpreter)
         else:
             raise DaqError(
                 'Invalid index type "{}" used to access expiration states.'

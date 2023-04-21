@@ -283,7 +283,7 @@ class InStream:
 
         check_for_error(size_or_code)
 
-        return Channel._factory(self._handle, val.value.decode('ascii'))
+        return Channel._factory(self._handle, val.value.decode('ascii'), self._interpreter)
 
     @channels_to_read.setter
     def channels_to_read(self, val):

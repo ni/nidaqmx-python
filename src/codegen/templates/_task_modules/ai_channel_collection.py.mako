@@ -56,7 +56,7 @@ class AIChannelCollection(ChannelCollection):
         else:
             name = physical_channel
 
-        return AIChannel(self._handle, name)
+        return AIChannel(self._handle, name, self._interpreter)
 
 <%namespace name="function_template" file="/function_template.py.mako"/>\
 %for function_object in functions:

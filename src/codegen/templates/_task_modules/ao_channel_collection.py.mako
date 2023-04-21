@@ -54,7 +54,7 @@ class AOChannelCollection(ChannelCollection):
         else:
             name = physical_channel
 
-        return AOChannel(self._handle, name)
+        return AOChannel(self._handle, name, self._interpreter)
 
 <%namespace name="function_template" file="/function_template.py.mako"/>\
 %for function_object in functions:

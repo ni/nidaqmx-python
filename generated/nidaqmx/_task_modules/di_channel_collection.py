@@ -57,7 +57,7 @@ class DIChannelCollection(ChannelCollection):
             else:
                 name = lines
 
-        return DIChannel(self._handle, name)
+        return DIChannel(self._handle, name, self._interpreter)
 
     def add_di_chan(
             self, lines, name_to_assign_to_lines="",

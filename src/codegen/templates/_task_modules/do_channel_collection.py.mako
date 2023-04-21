@@ -65,7 +65,7 @@ class DOChannelCollection(ChannelCollection):
             else:
                 name = lines
 
-        return DOChannel(self._handle, name)
+        return DOChannel(self._handle, name, self._interpreter)
 
 <%namespace name="function_template" file="/function_template.py.mako"/>\
 %for function_object in functions:

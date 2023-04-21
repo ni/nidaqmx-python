@@ -22,7 +22,7 @@ class PhysicalChannel:
     """
     Represents a DAQmx physical channel.
     """
-    __slots__ = ['_name', '__weakref__']
+    __slots__ = ['_name', '_interpreter', '__weakref__']
 
     def __init__(self, name, *, grpc_options=None):
         """

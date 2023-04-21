@@ -27,7 +27,7 @@ class Device:
     """
     Represents a DAQmx device.
     """
-    __slots__ = ['_name', '__weakref__']
+    __slots__ = ['_name', '_interpreter', '__weakref__']
 
     def __init__(self, name, *, grpc_options=None):
         """

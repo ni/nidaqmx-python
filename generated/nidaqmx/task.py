@@ -170,7 +170,7 @@ class Task:
             channels in this task.
         """
         return Channel._factory(
-            self._handle, flatten_channel_string(self.channel_names))
+            self._handle, flatten_channel_string(self.channel_names), self._interpreter)
 
     @property
     def channel_names(self):
