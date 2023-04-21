@@ -52,7 +52,7 @@ class COChannelCollection(ChannelCollection):
         else:
             name = counter
 
-        return COChannel(self._handle, name)
+        return COChannel(self._handle, name, self._interpreter)
 
 <%namespace name="function_template" file="/function_template.py.mako"/>\
 %for function_object in functions:

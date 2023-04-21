@@ -46,7 +46,7 @@ class CIChannelCollection(ChannelCollection):
         else:
             name = counter
 
-        return CIChannel(self._handle, name)
+        return CIChannel(self._handle, name, self._interpreter)
 
     def add_ci_ang_encoder_chan(
             self, counter, name_to_assign_to_channel="",

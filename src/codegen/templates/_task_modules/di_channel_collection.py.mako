@@ -62,7 +62,7 @@ class DIChannelCollection(ChannelCollection):
             else:
                 name = lines
 
-        return DIChannel(self._handle, name)
+        return DIChannel(self._handle, name, self._interpreter)
 
 <%namespace name="function_template" file="/function_template.py.mako"/>\
 %for function_object in functions:

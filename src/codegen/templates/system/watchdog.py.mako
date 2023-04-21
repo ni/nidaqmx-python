@@ -213,7 +213,7 @@ ${property_template.script_property(attribute)}\
             len(expiration_states))
         check_for_error(error_code)
 
-        return [ExpirationState(self._handle, e.physical_channel)
+        return [ExpirationState(self._handle, e.physical_channel, self._interpreter)
                 for e in expiration_states]
 
     def cfg_watchdog_co_expir_states(self, expiration_states):
@@ -256,7 +256,7 @@ ${property_template.script_property(attribute)}\
             self._handle, channel_names, expir_state, len(expiration_states))
         check_for_error(error_code)
 
-        return [ExpirationState(self._handle, e.physical_channel)
+        return [ExpirationState(self._handle, e.physical_channel, self._interpreter)
                 for e in expiration_states]
 
     def cfg_watchdog_do_expir_states(self, expiration_states):
@@ -299,7 +299,7 @@ ${property_template.script_property(attribute)}\
             self._handle, channel_names, expir_state, len(expiration_states))
         check_for_error(error_code)
 
-        return [ExpirationState(self._handle, e.physical_channel)
+        return [ExpirationState(self._handle, e.physical_channel, self._interpreter)
                 for e in expiration_states]
 
     def clear_expiration(self):
