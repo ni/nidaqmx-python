@@ -4567,7 +4567,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, fill_mode,
             read_voltage_array, read_current_array, read_voltage_array.size,
             ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read.value)
+        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
         return samps_per_chan_read.value
 
@@ -4592,7 +4592,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, fill_mode,
             read_voltage_array, read_current_array, read_voltage_array.size,
             ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read.value)
+        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
     def read_raw(task, read_array, num_samps_per_chan, timeout):
         samples_read = ctypes.c_int()
@@ -4612,7 +4612,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, read_array,
             read_array.nbytes, ctypes.byref(samples_read),
             ctypes.byref(number_of_bytes_per_sample), None)
-        check_for_error(error_code, samples_read.value)
+        check_for_error(error_code, samps_per_chan_read=samples_read.value)
 
         return samples_read.value, number_of_bytes_per_sample.value
 
@@ -4634,6 +4634,6 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task_handle, num_samps_per_chan, auto_start, timeout, numpy_array,
             ctypes.byref(samps_per_chan_written), None)
-        check_for_error(error_code, samps_per_chan_written.value)
+        check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
         return samps_per_chan_written.value
