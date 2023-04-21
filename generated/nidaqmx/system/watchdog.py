@@ -6,6 +6,7 @@ import deprecation
 import numpy
 import warnings
 
+from nidaqmx import utils
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
 from nidaqmx.errors import (
@@ -27,7 +28,7 @@ class WatchdogTask:
     """
     Represents the watchdog configurations for a DAQmx task.
     """
-    def __init__(self, device_name, task_name='', timeout=10):
+    def __init__(self, device_name, task_name='', timeout=10, grpc_options=None):
         """
         Creates and configures a task that controls the watchdog timer of a
         device. The timer activates when you start the task.
@@ -51,7 +52,10 @@ class WatchdogTask:
                 Trigger to expire the watchdog task. If this time elapses, the
                 device sets the physical channels to the states you specify
                 with the digital physical channel expiration states input.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
         """
+        self._interpreter = utils._select_interpreter(grpc_options)
+
         self._handle = lib_importer.task_handle(0)
 
         cfunc = lib_importer.windll.DAQmxCreateWatchdogTimerTaskEx
@@ -70,7 +74,7 @@ class WatchdogTask:
         # Saved name is used in self.close() to throw graceful error on
         # double closes.
         self._saved_name = self.name
-        self._expiration_states = ExpirationStatesCollection(self._handle)
+        self._expiration_states = ExpirationStatesCollection(self._handle, self._interpreter)
 
     def __del__(self):
         if self._handle is not None:

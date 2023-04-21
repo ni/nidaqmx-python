@@ -3,6 +3,7 @@
 import ctypes
 import numpy
 
+from nidaqmx import utils
 from nidaqmx._lib import lib_importer, wrapped_ndpointer, ctypes_byte_str
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
@@ -18,12 +19,14 @@ class Scale:
     """
     __slots__ = ['_name', '__weakref__']
 
-    def __init__(self, name):
+    def __init__(self, name, *, grpc_options=None):
         """
         Args:
             name (str): Specifies the name of the scale to create.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
         """
         self._name = name
+        self._interpreter = utils._select_interpreter(grpc_options)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -950,3 +953,25 @@ class Scale:
         error_code = cfunc(
             self._name, save_as, author, options)
         check_for_error(error_code)
+
+
+class _ScaleAlternateConstructor(Scale):
+    """
+    Provide an alternate constructor for the Scale object.
+
+    This is a private API used to instantiate a Scale with an existing interpreter.
+    """
+
+    def __init__(self, name, interpreter):
+        """
+        Args:
+            name: Specifies the name of the Scale.
+            interpreter: Specifies the interpreter instance.
+            
+        """
+        self._name = name
+        self._interpreter = interpreter
+
+        # Use meta-programming to change the type of this object to Scale,
+        # so the user isn't confused when doing introspection.
+        self.__class__ = Scale

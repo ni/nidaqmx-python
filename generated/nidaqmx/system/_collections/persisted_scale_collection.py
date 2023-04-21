@@ -15,6 +15,12 @@ class PersistedScaleCollection(Sequence):
     
     This class defines methods that implements a container object.
     """
+    def __init__(self, interpreter):
+        """
+        Do not construct this object directly; instead, call nidaqmx.system.System.local().scales.
+        """
+        self._interpreter = interpreter
+    
     def __contains__(self, item):
         scale_names = self.scale_names
 

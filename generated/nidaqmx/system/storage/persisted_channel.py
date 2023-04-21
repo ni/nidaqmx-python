@@ -1,5 +1,6 @@
 import ctypes
 
+from nidaqmx import utils
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
@@ -16,12 +17,14 @@ class PersistedChannel:
     """
     __slots__ = ['_name', '__weakref__']
 
-    def __init__(self, name):
+    def __init__(self, name, *, grpc_options=None):
         """
         Args:
-            name: Specifies the name of the global channel.
+            name (str): Specifies the name of the global channel.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
         """
         self._name = name
+        self._interpreter = utils._select_interpreter(grpc_options)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -128,3 +131,25 @@ class PersistedChannel:
 
         error_code = cfunc(self._name)
         check_for_error(error_code)
+
+
+class _PersistedChannelAlternateConstructor(PersistedChannel):
+    """
+    Provide an alternate constructor for the PersistedChannel object.
+
+    This is a private API used to instantiate a PersistedChannel with an existing interpreter.
+    """
+
+    def __init__(self, name, interpreter):
+        """
+        Args:
+            name: Specifies the name of the PersistedChannel.
+            interpreter: Specifies the interpreter instance.
+            
+        """
+        self._name = name
+        self._interpreter = interpreter
+
+        # Use meta-programming to change the type of this object to PersistedChannel,
+        # so the user isn't confused when doing introspection.
+        self.__class__ = PersistedChannel

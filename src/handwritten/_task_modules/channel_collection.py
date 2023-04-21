@@ -16,8 +16,12 @@ class ChannelCollection(Sequence):
     
     This class defines methods that implements a container object.
     """
-    def __init__(self, task_handle):
+    def __init__(self, task_handle, interpreter):
+        """
+        Do not construct this object directly; instead, construct a nidaqmx.Task and use the appropriate property, such as task.ai_channels.
+        """
         self._handle = task_handle
+        self._interpreter = interpreter
 
     def __contains__(self, item):
         channel_names = self.channel_names
