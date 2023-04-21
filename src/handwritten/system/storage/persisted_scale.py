@@ -1,5 +1,6 @@
 import ctypes
 
+from nidaqmx import utils
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx.scale import Scale
 from nidaqmx.errors import (
@@ -15,14 +16,16 @@ class PersistedScale:
     Use the DAQmx Persisted Scale properties to query information about
     programmatically saved custom scales.
     """
-    __slots__ = ['_name', '__weakref__']
+    __slots__ = ['_name', '_interpreter', '__weakref__']
 
-    def __init__(self, name):
+    def __init__(self, name, *, grpc_options=None):
         """
         Args:
-            name: Specifies the name of the saved scale.
+            name (str): Specifies the name of the saved scale.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
         """
         self._name = name
+        self._interpreter = utils._select_interpreter(grpc_options)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -138,3 +141,25 @@ class PersistedScale:
             nidaqmx.scale.Scale: Indicates the loaded Scale object.
         """
         return Scale(self._name)
+
+
+class _PersistedScaleAlternateConstructor(PersistedScale):
+    """
+    Provide an alternate constructor for the PersistedScale object.
+
+    This is a private API used to instantiate a PersistedScale with an existing interpreter.
+    """
+
+    def __init__(self, name, interpreter):
+        """
+        Args:
+            name: Specifies the name of the PersistedScale.
+            interpreter: Specifies the interpreter instance.
+            
+        """
+        self._name = name
+        self._interpreter = interpreter
+
+        # Use meta-programming to change the type of this object to PersistedScale,
+        # so the user isn't confused when doing introspection.
+        self.__class__ = PersistedScale

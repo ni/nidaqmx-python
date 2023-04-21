@@ -17,6 +17,9 @@ class COChannelCollection(ChannelCollection):
     Contains the collection of counter output channels for a DAQmx Task.
     """
     def __init__(self, task_handle, interpreter):
+        """
+        Do not construct this object directly; instead, construct a nidaqmx.Task and use the task.co_channels property.
+        """
         super().__init__(task_handle, interpreter)
 
     def _create_chan(self, counter, name_to_assign_to_channel=''):
@@ -44,7 +47,7 @@ class COChannelCollection(ChannelCollection):
         else:
             name = counter
 
-        return COChannel(self._handle, name)
+        return COChannel(self._handle, name, self._interpreter)
 
     def add_co_pulse_chan_freq(
             self, counter, name_to_assign_to_channel="",

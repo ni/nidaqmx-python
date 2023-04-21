@@ -42,8 +42,12 @@ class LibraryInterpreter(BaseInterpreter):
     def ${func.function_name}(${parameter_signature}):
     %endif
 \
+%if func.is_python_codegen_method:
 <%include file="${'/library_interpreter' + get_c_function_call_template(func)}" args="function=func" />
     %if len(list(return_values)) != 0:
         return ${', '.join(return_values)}
     %endif
+%else:
+        raise NotImplementedError
+%endif
 %endfor

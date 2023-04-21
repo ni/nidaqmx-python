@@ -24,6 +24,9 @@ class AOChannelCollection(ChannelCollection):
     Contains the collection of analog output channels for a DAQmx Task.
     """
     def __init__(self, task_handle, interpreter):
+        """
+        Do not construct this object directly; instead, construct a nidaqmx.Task and use the task.ao_channels property.
+        """
         super().__init__(task_handle, interpreter)
 
     def _create_chan(self, physical_channel, name_to_assign_to_channel=''):
@@ -51,7 +54,7 @@ class AOChannelCollection(ChannelCollection):
         else:
             name = physical_channel
 
-        return AOChannel(self._handle, name)
+        return AOChannel(self._handle, name, self._interpreter)
 
 <%namespace name="function_template" file="/function_template.py.mako"/>\
 %for function_object in functions:

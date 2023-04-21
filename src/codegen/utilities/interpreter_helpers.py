@@ -35,14 +35,11 @@ INTERPRETER_IGNORED_FUNCTIONS = [
 ]
 
 
-def get_interpreter_functions(metadata, is_base_interpreter=False):
+def get_interpreter_functions(metadata):
     """Converts the scrapigen metadata into a list of functions."""
     all_functions = deepcopy(metadata["functions"])
     functions_metadata = []
     for function_name, function_data in all_functions.items():
-        if not is_base_interpreter:
-            if not is_python_codegen_method(function_data):
-                continue
         if function_name in INTERPRETER_IGNORED_FUNCTIONS:
             continue
         function_data["c_function_name"] = function_name
@@ -125,13 +122,6 @@ def is_skippable_param(param: dict) -> bool:
     ):
         return True
     return False
-
-
-def is_python_codegen_method(func: dict) -> bool:
-    """Returns True if the method is a python codegen method."""
-    if "python_codegen_method" in func:
-        return func["python_codegen_method"] != "no"
-    return True
 
 
 def get_output_param_with_ivi_dance_mechanism(output_parameters):
