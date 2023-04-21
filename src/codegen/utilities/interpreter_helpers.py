@@ -175,36 +175,6 @@ def has_parameter_with_ivi_dance_size_mechanism(func):
     return parameter_with_size_buffer is not None
 
 
-def get_output_param_with_ivi_dance_mechanism(output_parameters):
-    """Gets the output parameters with explicit buffer size."""
-    explicit_output_params = [p for p in output_parameters if p.has_explicit_buffer_size]
-    params_with_ivi_dance_mechanism = [
-        p for p in explicit_output_params if p.size.mechanism == "ivi-dance"
-    ]
-    if len(params_with_ivi_dance_mechanism) > 1:
-        raise NotImplementedError(
-            "There is more than one output parameter with an explicit "
-            "buffer size that follows ivi dance mechanism."
-            "This cannot be handled by this template because it "
-            'calls the C function once with "buffer_size = 0" to get the '
-            "buffer size from the returned integer, which is normally an "
-            "error code.\n\n"
-            "Output parameters with explicit buffer sizes: {}".format(
-                params_with_ivi_dance_mechanism
-            )
-        )
-
-    if len(params_with_ivi_dance_mechanism) == 1:
-        return params_with_ivi_dance_mechanism[0]
-    return None
-
-
-def has_parameter_with_ivi_dance_size_mechanism(func):
-    """Returns true if the function has a parameter with ivi dance size mechanism."""
-    parameter_with_size_buffer = get_output_param_with_ivi_dance_mechanism(func.output_parameters)
-    return parameter_with_size_buffer is not None
-
-
 def get_output_params(func):
     """Gets input parameters for the function."""
     return (p for p in func.base_parameters if p.direction == "out")
