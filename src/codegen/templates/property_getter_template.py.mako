@@ -115,7 +115,7 @@
             object_constructor_args.append("val.value.decode('ascii')")
         %>\
         %if attribute.object_has_factory:
-        return ${attribute.object_type}._factory(${', '.join(object_constructor_args)})
+        return ${attribute.object_type}._factory(${', '.join(object_constructor_args)}, self._interpreter)
         %else:
         return ${attribute.object_type}(${', '.join(object_constructor_args)})
         %endif
@@ -128,7 +128,7 @@
             object_constructor_args.append('v')
         %>\
         %if attribute.object_has_factory:
-        return [${attribute.object_type}._factory(${', '.join(object_constructor_args)})
+        return [${attribute.object_type}._factory(${', '.join(object_constructor_args)}, self._interpreter)
                 for v in unflatten_channel_string(val.value.decode('ascii'))]
         %else:
         return [${attribute.object_type}(${', '.join(object_constructor_args)})

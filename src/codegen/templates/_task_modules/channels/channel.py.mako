@@ -49,7 +49,7 @@ class Channel:
                 'Cannot concatenate Channel objects from different tasks.')
 
         name = flatten_channel_string([self.name, other.name])
-        return Channel._factory(self._handle, name)
+        return Channel._factory(self._handle, name, self._interpreter)
 
     def __contains__(self, item):
         channel_names = self.channel_names
@@ -75,7 +75,7 @@ class Channel:
 
     def __iter__(self):
         for channel_name in self.channel_names:
-            yield Channel._factory(self._handle, channel_name)
+            yield Channel._factory(self._handle, channel_name, self._interpreter)
 
     def __len__(self):
         return len(self.channel_names)
@@ -88,7 +88,7 @@ class Channel:
         channel_names.reverse()
 
         for channel_name in channel_names:
-            yield Channel._factory(self._handle, channel_name)
+            yield Channel._factory(self._handle, channel_name, self._interpreter)
 
     def __repr__(self):
         return f'Channel(name={self.name})'
