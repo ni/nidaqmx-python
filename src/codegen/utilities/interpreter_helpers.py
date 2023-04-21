@@ -62,7 +62,7 @@ def get_interpreter_functions(metadata):
 def generate_interpreter_function_call_args(function_metadata):
     """Gets function call arguments."""
     function_call_args = []
-    for param in function_metadata.base_parameters:
+    for param in function_metadata.interpreter_parameters:
         if param.direction == "in":
             function_call_args.append(param.parameter_name)
             if param.has_explicit_buffer_size:
@@ -115,7 +115,7 @@ def get_instantiation_lines_for_output(func):
 
 def get_interpreter_params(func):
     """Gets interpreter parameters for the function."""
-    return (p for p in func.base_parameters if p.direction == "in")
+    return (p for p in func.interpreter_parameters if p.direction == "in")
 
 
 def get_skippable_params_for_interpreter_func(func):
