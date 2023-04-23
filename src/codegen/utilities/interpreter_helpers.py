@@ -63,7 +63,7 @@ def generate_interpreter_function_call_args(function_metadata):
     """Gets function call arguments."""
     function_call_args = []
     size_value = []
-    size_param_index = []
+    size_param_index = None
     for param in function_metadata.interpreter_parameters:
         ## Deleting repeated size parameters
         if param.has_explicit_buffer_size:
