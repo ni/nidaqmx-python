@@ -198,11 +198,6 @@ functions = {
     },
     'CalculateReversePolyCoeff': {
         'calling_convention': 'StdCall',
-        'handle_parameter': {
-            'ctypes_data_type': 'ctypes.c_char_p',
-            'cvi_name': 'name',
-            'python_accessor': 'self._name'
-        },
         'parameters': [
             {
                 'ctypes_data_type': 'numpy.float64',
@@ -1467,43 +1462,43 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
-                'is_optional_in_python': False,
                 'name': 'task',
                 'python_data_type': 'TaskHandle',
-                'python_description': '',
-                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
-                'is_optional_in_python': False,
                 'name': 'channelNames',
                 'python_data_type': 'str',
-                'python_description': '',
-                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'in',
+                'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'expirStateArray',
+                'python_data_type': 'float',
+                'python_type_annotation': 'List[float]',
                 'size': {
                     'mechanism': 'len',
                     'value': 'arraySize'
                 },
-                'type': 'const float64[]',
-                'use_in_python_api': False
+                'type': 'const float64[]'
             },
             {
+                'ctypes_data_type': 'numpy.int32',
                 'direction': 'in',
                 'enum': 'WatchdogAOOutputType',
+                'is_list': True,
                 'name': 'outputTypeArray',
+                'python_data_type': 'WatchdogAOOutputType',
                 'size': {
                     'mechanism': 'len',
                     'value': 'arraySize'
                 },
-                'type': 'const int32[]',
-                'use_in_python_api': False
+                'type': 'const int32[]'
             },
             {
                 'direction': 'in',

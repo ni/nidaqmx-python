@@ -116,7 +116,6 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str,
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')), ctypes.c_uint, ctypes.c_double,
                         ctypes.c_double, ctypes.c_int, ctypes.c_int,
@@ -379,16 +378,21 @@ class LibraryInterpreter(BaseInterpreter):
     def cfg_time_start_trig(self, task, when, timescale):
         raise NotImplementedError
 
-    def cfg_watchdog_ao_expir_states(self, task, channel_names):
+    def cfg_watchdog_ao_expir_states(
+            self, task, channel_names, expir_state_array, output_type_array):
         cfunc = lib_importer.windll.DAQmxCfgWatchdogAOExpirStates
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
+                        lib_importer.task_handle, ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         error_code = cfunc(
-            task, channel_names)
+            task, channel_names, expir_state_array, output_type_array,
+            len(output_type_array))
         check_for_error(error_code)
 
     def cfg_watchdog_co_expir_states(
@@ -2848,8 +2852,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
-            read_array_frequency, read_array_duty_cycle,
-            ctypes.byref(samps_per_chan_read))
+            read_array_duty_cycle, ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array_frequency.tolist(), read_array_duty_cycle.tolist(), samps_per_chan_read.value
 
@@ -2889,8 +2892,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
-            read_array_high_ticks, read_array_low_ticks,
-            ctypes.byref(samps_per_chan_read))
+            read_array_low_ticks, ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array_high_ticks.tolist(), read_array_low_ticks.tolist(), samps_per_chan_read.value
 
@@ -2930,8 +2932,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
-            read_array_high_time, read_array_low_time,
-            ctypes.byref(samps_per_chan_read))
+            read_array_low_time, ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array_high_time.tolist(), read_array_low_time.tolist(), samps_per_chan_read.value
 

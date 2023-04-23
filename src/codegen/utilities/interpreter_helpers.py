@@ -62,11 +62,20 @@ def get_interpreter_functions(metadata):
 def generate_interpreter_function_call_args(function_metadata):
     """Gets function call arguments."""
     function_call_args = []
+    size_value = []
+    size_param_index = []
     for param in function_metadata.interpreter_parameters:
+        ## Deleting repeated size parameters
+        if param.has_explicit_buffer_size:
+            if size_value == param.size.value:
+                del function_call_args[size_param_index]
+
         if param.direction == "in":
             function_call_args.append(param.parameter_name)
             if param.has_explicit_buffer_size:
                 function_call_args.append(f"len({param.parameter_name})")
+                size_value = param.size.value
+                size_param_index = len(function_call_args) - 1
         else:
             if param.has_explicit_buffer_size:
                 function_call_args.append(param.parameter_name)

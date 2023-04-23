@@ -143,7 +143,8 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def cfg_watchdog_ao_expir_states(self, task, channel_names):
+    def cfg_watchdog_ao_expir_states(
+            self, task, channel_names, expir_state_array, output_type_array):
         raise NotImplementedError
 
     @abc.abstractmethod
