@@ -17,6 +17,9 @@ class DOChannelCollection(ChannelCollection):
     Contains the collection of digital output channels for a DAQmx Task.
     """
     def __init__(self, task_handle, interpreter):
+        """
+        Do not construct this object directly; instead, construct a nidaqmx.Task and use the task.do_channels property.
+        """
         super().__init__(task_handle, interpreter)
 
     def _create_chan(self, lines, line_grouping, name_to_assign_to_lines=''):
@@ -54,7 +57,7 @@ class DOChannelCollection(ChannelCollection):
             else:
                 name = lines
 
-        return DOChannel(self._handle, name)
+        return DOChannel(self._handle, name, self._interpreter)
 
     def add_do_chan(
             self, lines, name_to_assign_to_lines="",

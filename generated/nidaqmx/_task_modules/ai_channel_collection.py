@@ -29,6 +29,9 @@ class AIChannelCollection(ChannelCollection):
     Contains the collection of analog input channels for a DAQmx Task.
     """
     def __init__(self, task_handle, interpreter):
+        """
+        Do not construct this object directly; instead, construct a nidaqmx.Task and use the task.ai_channels property.
+        """
         super().__init__(task_handle, interpreter)
 
     def _create_chan(self, physical_channel, name_to_assign_to_channel=''):
@@ -56,7 +59,7 @@ class AIChannelCollection(ChannelCollection):
         else:
             name = physical_channel
 
-        return AIChannel(self._handle, name)
+        return AIChannel(self._handle, name, self._interpreter)
 
     def add_ai_accel_4_wire_dc_voltage_chan(
             self, physical_channel, name_to_assign_to_channel="",

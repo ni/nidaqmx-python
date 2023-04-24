@@ -25,7 +25,7 @@ All notable changes to this project will be documented in this file.
 * ### Resolved Issues
     * ...
 * ### Major Changes
-    * ...
+    * The signature of the collection classes' __init__ methods have been changed and any code that constructs these objects directly should be updated to get them from the appropriate object (e.g. System.devices, Task.channels)
 
 ## 0.7.0
 

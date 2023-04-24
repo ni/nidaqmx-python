@@ -16,7 +16,9 @@ class Function:
             self._python_class_name = function_metadata["python_class_name"]
         self._calling_convention = function_metadata["calling_convention"]
         self._return_type = function_metadata["returns"]
+        self._stream_response = function_metadata.get("stream_response", False)
         self._handle_parameter = None
+        self._is_python_codegen_method = function_metadata.get("python_codegen_method") != "no"
         if "handle_parameter" in function_metadata:
             self._handle_parameter = Parameter(
                 "handle_parameter", function_metadata["handle_parameter"]
@@ -108,3 +110,13 @@ class Function:
     def base_parameters(self):
         """List of all parameters: The list of all in the function."""
         return self._base_parameters
+
+    @property
+    def stream_response(self):
+        """bool: Defines if the function uses server streaming to send multiple responses."""
+        return self._stream_response
+
+    @property
+    def is_python_codegen_method(self):
+        """bool: Defines if the function is a python codegen function."""
+        return self._is_python_codegen_method

@@ -1,5 +1,7 @@
 import ctypes
 
+from nidaqmx import task
+from nidaqmx import utils
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small)
@@ -14,14 +16,16 @@ class PersistedTask:
     Use the DAQmx Persisted Task properties to query information about
     programmatically saved tasks.
     """
-    __slots__ = ['_name', '__weakref__']
+    __slots__ = ['_name', '_interpreter', '__weakref__']
 
-    def __init__(self, name):
+    def __init__(self, name, *, grpc_options=None):
         """
         Args:
-            name: Specifies the name of the saved task.
+            name (str): Specifies the name of the saved task.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
         """
         self._name = name
+        self._interpreter = utils._select_interpreter(grpc_options)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -151,7 +155,26 @@ class PersistedTask:
         error_code = cfunc(self._name, ctypes.byref(task_handle))
         check_for_error(error_code)
 
-        from nidaqmx.system.storage._alternate_task_constructor import (
-            _TaskAlternateConstructor)
+        return task._TaskAlternateConstructor(task_handle, self._interpreter)
+    
 
-        return _TaskAlternateConstructor(task_handle)
+class _PersistedTaskAlternateConstructor(PersistedTask):
+    """
+    Provide an alternate constructor for the PersistedTask object.
+
+    This is a private API used to instantiate a PersistedTask with an existing interpreter.
+    """
+
+    def __init__(self, name, interpreter):
+        """
+        Args:
+            name: Specifies the name of the PersistedTask.
+            interpreter: Specifies the interpreter instance.
+            
+        """
+        self._name = name
+        self._interpreter = interpreter
+
+        # Use meta-programming to change the type of this object to Scale,
+        # so the user isn't confused when doing introspection.
+        self.__class__ = PersistedTask

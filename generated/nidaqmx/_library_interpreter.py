@@ -5,7 +5,7 @@ import numpy
 
 from nidaqmx._base_interpreter import BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer
-from nidaqmx.errors import check_for_error
+from nidaqmx.errors import check_for_error, is_string_buffer_too_small, is_array_buffer_too_small
 
 class LibraryInterpreter(BaseInterpreter):
     """
@@ -13,6 +13,15 @@ class LibraryInterpreter(BaseInterpreter):
     This class is responsible for interpreting the Library's C API.
 
     """
+    
+    def __init__(self):
+        # These lists keep C callback objects in memory as ctypes doesn't.
+        # Program will crash if callback is made after object is garbage
+        # collected.
+        self._done_event_callbacks = []
+        self._every_n_samples_event_callbacks = []
+        self._signal_event_callbacks = []
+        
 
     def add_cdaq_sync_connection(self, port_list):
         cfunc = lib_importer.windll.DAQmxAddCDAQSyncConnection
@@ -48,11 +57,22 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes_byte_str, ctypes_byte_str, c_bool32,
                         ctypes.c_double, ctypes.c_char_p, ctypes.c_uint]
 
-        error_code = cfunc(
-            ip_address, device_name, attempt_reservation, timeout,
-            ctypes.byref(device_name_out))
-        check_for_error(error_code)
-        return device_name_out
+        temp_size = 0
+        while True:
+            device_name_out = ctypes.create_string_buffer(temp_size)
+            size_or_code = cfunc(
+                ip_address, device_name, attempt_reservation, timeout,
+                device_name_out, temp_size)
+            if is_string_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+        check_for_error(size_or_code)
+        return device_name_out.value.decode('ascii')
 
     def are_configured_cdaq_sync_ports_disconnected(
             self, chassis_devices_ports, timeout):
@@ -68,7 +88,7 @@ class LibraryInterpreter(BaseInterpreter):
             chassis_devices_ports, timeout,
             ctypes.byref(disconnected_ports_exist))
         check_for_error(error_code)
-        return disconnected_ports_exist
+        return disconnected_ports_exist.value
 
     def auto_configure_cdaq_sync_connections(
             self, chassis_devices_ports, timeout):
@@ -96,14 +116,14 @@ class LibraryInterpreter(BaseInterpreter):
                         flags=('C','W')), ctypes.c_uint, ctypes.c_double,
                         ctypes.c_double, ctypes.c_int, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W'))]
+                        flags=('C','W')), ctypes.c_uint]
 
         error_code = cfunc(
             forward_coeffs, len(forward_coeffs), num_forward_coeffs_in,
             min_val_x, max_val_x, num_points_to_compute, reverse_poly_order,
             ctypes.byref(reverse_coeffs))
         check_for_error(error_code)
-        return reverse_coeffs
+        return reverse_coeffs.tolist()
 
     def cfg_anlg_edge_ref_trig(
             self, task, trigger_source, pretrigger_samples, trigger_slope,
@@ -134,6 +154,16 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, trigger_source, trigger_slope, trigger_level)
         check_for_error(error_code)
+
+    def cfg_anlg_multi_edge_ref_trig(
+            self, task, trigger_sources, trigger_slope_array,
+            trigger_level_array, pretrigger_samples, array_size):
+        raise NotImplementedError
+
+    def cfg_anlg_multi_edge_start_trig(
+            self, task, trigger_sources, trigger_slope_array,
+            trigger_level_array, array_size):
+        raise NotImplementedError
 
     def cfg_anlg_window_ref_trig(
             self, task, trigger_source, window_top, window_bottom,
@@ -304,6 +334,12 @@ class LibraryInterpreter(BaseInterpreter):
             task, sample_mode, samps_per_chan)
         check_for_error(error_code)
 
+    def cfg_input_buffer(self, task, num_samps_per_chan):
+        raise NotImplementedError
+
+    def cfg_output_buffer(self, task, num_samps_per_chan):
+        raise NotImplementedError
+
     def cfg_pipelined_samp_clk_timing(
             self, task, rate, source, active_edge, sample_mode,
             samps_per_chan):
@@ -336,6 +372,9 @@ class LibraryInterpreter(BaseInterpreter):
             task, source, rate, active_edge, sample_mode, samps_per_chan)
         check_for_error(error_code)
 
+    def cfg_time_start_trig(self, task, when, timescale):
+        raise NotImplementedError
+
     def cfg_watchdog_ao_expir_states(
             self, task, channel_names, expir_state_array, output_type_array,
             array_size):
@@ -347,8 +386,8 @@ class LibraryInterpreter(BaseInterpreter):
                         lib_importer.task_handle, ctypes_byte_str]
 
         error_code = cfunc(
-            task, channel_names, expir_state_array, output_type_array,
-            array_size)
+            task, channel_names, expir_state_array, len(expir_state_array),
+            output_type_array, len(output_type_array), array_size)
         check_for_error(error_code)
 
     def cfg_watchdog_co_expir_states(
@@ -2092,6 +2131,10 @@ class LibraryInterpreter(BaseInterpreter):
             current_excit_val)
         check_for_error(error_code)
 
+    def create_watchdog_timer_task(
+            self, device_name, session_name, timeout, lines, exp_state):
+        raise NotImplementedError
+
     def create_watchdog_timer_task_ex(
             self, device_name, session_name, timeout):
         cfunc = lib_importer.windll.DAQmxCreateWatchdogTimerTaskEx
@@ -2118,6 +2161,18 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             device_name)
         check_for_error(error_code)
+
+    def delete_saved_global_chan(self, channel_name):
+        raise NotImplementedError
+
+    def delete_saved_scale(self, scale_name):
+        raise NotImplementedError
+
+    def delete_saved_task(self, task_name):
+        raise NotImplementedError
+
+    def device_supports_cal(self, device_name):
+        raise NotImplementedError
 
     def disable_ref_trig(self, task):
         cfunc = lib_importer.windll.DAQmxDisableRefTrig
@@ -2168,6 +2223,12 @@ class LibraryInterpreter(BaseInterpreter):
             task, signal_id, output_terminal)
         check_for_error(error_code)
 
+    def get_ai_chan_cal_cal_date(self, task, channel_name):
+        raise NotImplementedError
+
+    def get_ai_chan_cal_exp_date(self, task, channel_name):
+        raise NotImplementedError
+
     def get_analog_power_up_states(
             self, device_name, channel_name, channel_type):
         cfunc = lib_importer.cdll.DAQmxGetAnalogPowerUpStates
@@ -2176,7 +2237,7 @@ class LibraryInterpreter(BaseInterpreter):
             device_name, channel_name, ctypes.byref(state), channel_type,
             channels, ctypes.byref(power_up_states))
         check_for_error(error_code)
-        return state, power_up_states
+        return state.value, power_up_states.value
 
     def get_analog_power_up_states_with_output_type(
             self, channel_names, array_size):
@@ -2186,7 +2247,7 @@ class LibraryInterpreter(BaseInterpreter):
             channel_names, ctypes.byref(state_array),
             ctypes.byref(channel_type_array), array_size)
         check_for_error(error_code)
-        return state_array, channel_type_array
+        return state_array.value, channel_type_array.value
 
     def get_auto_configured_cdaq_sync_connections(self):
         cfunc = lib_importer.windll.DAQmxGetAutoConfiguredCDAQSyncConnections
@@ -2196,10 +2257,173 @@ class LibraryInterpreter(BaseInterpreter):
                     cfunc.argtypes = [
                         ctypes.c_char_p, ctypes.c_uint]
 
+        temp_size = 0
+        while True:
+            port_list = ctypes.create_string_buffer(temp_size)
+            size_or_code = cfunc(
+                port_list, temp_size)
+            if is_string_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+        check_for_error(size_or_code)
+        return port_list.value.decode('ascii')
+
+    def get_buffer_attribute_uint32(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetBufferAttribute
+
         error_code = cfunc(
-            ctypes.byref(port_list))
+            task, attribute, ctypes.byref(value))
         check_for_error(error_code)
-        return port_list
+        return value.value
+
+    def get_cal_info_attribute_bool(self, device_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetCalInfoAttribute
+
+        error_code = cfunc(
+            device_name, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_cal_info_attribute_double(self, device_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetCalInfoAttribute
+
+        error_code = cfunc(
+            device_name, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_cal_info_attribute_string(self, device_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetCalInfoAttribute
+
+        error_code = cfunc(
+            device_name, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.value.decode('ascii')
+
+    def get_cal_info_attribute_uint32(self, device_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetCalInfoAttribute
+
+        error_code = cfunc(
+            device_name, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_chan_attribute_bool(self, task, channel, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetChanAttribute
+
+        error_code = cfunc(
+            task, channel, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_chan_attribute_double(self, task, channel, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetChanAttribute
+
+        error_code = cfunc(
+            task, channel, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_chan_attribute_double_array(self, task, channel, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetChanAttribute
+
+        error_code = cfunc(
+            task, channel, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.tolist()
+
+    def get_chan_attribute_int32(self, task, channel, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetChanAttribute
+
+        error_code = cfunc(
+            task, channel, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_chan_attribute_string(self, task, channel, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetChanAttribute
+
+        error_code = cfunc(
+            task, channel, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.value.decode('ascii')
+
+    def get_chan_attribute_uint32(self, task, channel, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetChanAttribute
+
+        error_code = cfunc(
+            task, channel, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_device_attribute_bool(self, device_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetDeviceAttribute
+
+        error_code = cfunc(
+            device_name, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_device_attribute_double(self, device_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetDeviceAttribute
+
+        error_code = cfunc(
+            device_name, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_device_attribute_double_array(self, device_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetDeviceAttribute
+
+        error_code = cfunc(
+            device_name, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.tolist()
+
+    def get_device_attribute_int32(self, device_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetDeviceAttribute
+
+        error_code = cfunc(
+            device_name, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_device_attribute_int32_array(self, device_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetDeviceAttribute
+
+        error_code = cfunc(
+            device_name, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.tolist()
+
+    def get_device_attribute_string(self, device_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetDeviceAttribute
+
+        error_code = cfunc(
+            device_name, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.value.decode('ascii')
+
+    def get_device_attribute_uint32(self, device_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetDeviceAttribute
+
+        error_code = cfunc(
+            device_name, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_device_attribute_uint32_array(self, device_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetDeviceAttribute
+
+        error_code = cfunc(
+            device_name, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.tolist()
 
     def get_digital_logic_family_power_up_state(self, device_name):
         cfunc = lib_importer.windll.DAQmxGetDigitalLogicFamilyPowerUpState
@@ -2212,7 +2436,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             device_name, ctypes.byref(logic_family))
         check_for_error(error_code)
-        return logic_family
+        return logic_family.value
 
     def get_digital_power_up_states(self, device_name, channel_name):
         cfunc = lib_importer.cdll.DAQmxGetDigitalPowerUpStates
@@ -2221,7 +2445,7 @@ class LibraryInterpreter(BaseInterpreter):
             device_name, channel_name, ctypes.byref(state), channel_name,
             ctypes.byref(power_up_states))
         check_for_error(error_code)
-        return state, power_up_states
+        return state.value, power_up_states.value
 
     def get_digital_pull_up_pull_down_states(self, device_name, channel_name):
         cfunc = lib_importer.cdll.DAQmxGetDigitalPullUpPullDownStates
@@ -2230,7 +2454,7 @@ class LibraryInterpreter(BaseInterpreter):
             device_name, channel_name, ctypes.byref(state), channel_name,
             ctypes.byref(pull_up_pull_down_states))
         check_for_error(error_code)
-        return state, pull_up_pull_down_states
+        return state.value, pull_up_pull_down_states.value
 
     def get_disconnected_cdaq_sync_ports(self):
         cfunc = lib_importer.windll.DAQmxGetDisconnectedCDAQSyncPorts
@@ -2240,10 +2464,575 @@ class LibraryInterpreter(BaseInterpreter):
                     cfunc.argtypes = [
                         ctypes.c_char_p, ctypes.c_uint]
 
+        temp_size = 0
+        while True:
+            port_list = ctypes.create_string_buffer(temp_size)
+            size_or_code = cfunc(
+                port_list, temp_size)
+            if is_string_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+        check_for_error(size_or_code)
+        return port_list.value.decode('ascii')
+
+    def get_error_string(self, error_code):
+        raise NotImplementedError
+
+    def get_exported_signal_attribute_bool(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetExportedSignalAttribute
+
         error_code = cfunc(
-            ctypes.byref(port_list))
+            task, attribute, ctypes.byref(value))
         check_for_error(error_code)
-        return port_list
+        return value.value
+
+    def get_exported_signal_attribute_double(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetExportedSignalAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_exported_signal_attribute_int32(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetExportedSignalAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_exported_signal_attribute_string(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetExportedSignalAttribute
+
+        error_code = cfunc(
+            task, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.value.decode('ascii')
+
+    def get_exported_signal_attribute_uint32(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetExportedSignalAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_nth_task_channel(self, task, index):
+        raise NotImplementedError
+
+    def get_nth_task_device(self, task, index):
+        raise NotImplementedError
+
+    def get_nth_task_read_channel(self, task, index):
+        raise NotImplementedError
+
+    def get_persisted_chan_attribute_bool(self, channel, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetPersistedChanAttribute
+
+        error_code = cfunc(
+            channel, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_persisted_chan_attribute_string(self, channel, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetPersistedChanAttribute
+
+        error_code = cfunc(
+            channel, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.value.decode('ascii')
+
+    def get_persisted_scale_attribute_bool(self, scale_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetPersistedScaleAttribute
+
+        error_code = cfunc(
+            scale_name, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_persisted_scale_attribute_string(self, scale_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetPersistedScaleAttribute
+
+        error_code = cfunc(
+            scale_name, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.value.decode('ascii')
+
+    def get_persisted_task_attribute_bool(self, task_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetPersistedTaskAttribute
+
+        error_code = cfunc(
+            task_name, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_persisted_task_attribute_string(self, task_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetPersistedTaskAttribute
+
+        error_code = cfunc(
+            task_name, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.value.decode('ascii')
+
+    def get_physical_chan_attribute_bool(self, physical_channel, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
+
+        error_code = cfunc(
+            physical_channel, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_physical_chan_attribute_bytes(self, physical_channel, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
+
+        error_code = cfunc(
+            physical_channel, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.tolist()
+
+    def get_physical_chan_attribute_double(self, physical_channel, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
+
+        error_code = cfunc(
+            physical_channel, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_physical_chan_attribute_double_array(
+            self, physical_channel, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
+
+        error_code = cfunc(
+            physical_channel, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.tolist()
+
+    def get_physical_chan_attribute_int32(self, physical_channel, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
+
+        error_code = cfunc(
+            physical_channel, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_physical_chan_attribute_int32_array(
+            self, physical_channel, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
+
+        error_code = cfunc(
+            physical_channel, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.tolist()
+
+    def get_physical_chan_attribute_string(self, physical_channel, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
+
+        error_code = cfunc(
+            physical_channel, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.value.decode('ascii')
+
+    def get_physical_chan_attribute_uint32(self, physical_channel, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
+
+        error_code = cfunc(
+            physical_channel, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_physical_chan_attribute_uint32_array(
+            self, physical_channel, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
+
+        error_code = cfunc(
+            physical_channel, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.tolist()
+
+    def get_read_attribute_bool(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetReadAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_read_attribute_double(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetReadAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_read_attribute_int32(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetReadAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_read_attribute_string(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetReadAttribute
+
+        error_code = cfunc(
+            task, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.value.decode('ascii')
+
+    def get_read_attribute_uint32(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetReadAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_read_attribute_uint64(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetReadAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_real_time_attribute_bool(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetRealTimeAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_real_time_attribute_int32(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetRealTimeAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_real_time_attribute_uint32(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetRealTimeAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_scale_attribute_double(self, scale_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetScaleAttribute
+
+        error_code = cfunc(
+            scale_name, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_scale_attribute_double_array(self, scale_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetScaleAttribute
+
+        error_code = cfunc(
+            scale_name, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.tolist()
+
+    def get_scale_attribute_int32(self, scale_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetScaleAttribute
+
+        error_code = cfunc(
+            scale_name, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_scale_attribute_string(self, scale_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetScaleAttribute
+
+        error_code = cfunc(
+            scale_name, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.value.decode('ascii')
+
+    def get_self_cal_last_date_and_time(self, device_name):
+        raise NotImplementedError
+
+    def get_system_info_attribute_string(self, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetSystemInfoAttribute
+
+        error_code = cfunc(
+            attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.value.decode('ascii')
+
+    def get_system_info_attribute_uint32(self, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetSystemInfoAttribute
+
+        error_code = cfunc(
+            attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_task_attribute_bool(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTaskAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_task_attribute_string(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTaskAttribute
+
+        error_code = cfunc(
+            task, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.value.decode('ascii')
+
+    def get_task_attribute_uint32(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTaskAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_timing_attribute_bool(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTimingAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_timing_attribute_double(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTimingAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_timing_attribute_ex_bool(self, task, device_names, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTimingAttributeEx
+
+        error_code = cfunc(
+            task, device_names, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_timing_attribute_ex_double(self, task, device_names, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTimingAttributeEx
+
+        error_code = cfunc(
+            task, device_names, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_timing_attribute_ex_int32(self, task, device_names, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTimingAttributeEx
+
+        error_code = cfunc(
+            task, device_names, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_timing_attribute_ex_string(self, task, device_names, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTimingAttributeEx
+
+        error_code = cfunc(
+            task, device_names, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.value.decode('ascii')
+
+    def get_timing_attribute_ex_uint32(self, task, device_names, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTimingAttributeEx
+
+        error_code = cfunc(
+            task, device_names, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_timing_attribute_ex_uint64(self, task, device_names, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTimingAttributeEx
+
+        error_code = cfunc(
+            task, device_names, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_timing_attribute_int32(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTimingAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_timing_attribute_string(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTimingAttribute
+
+        error_code = cfunc(
+            task, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.value.decode('ascii')
+
+    def get_timing_attribute_uint32(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTimingAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_timing_attribute_uint64(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTimingAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_trig_attribute_bool(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTrigAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_trig_attribute_double(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTrigAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_trig_attribute_double_array(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTrigAttribute
+
+        error_code = cfunc(
+            task, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.tolist()
+
+    def get_trig_attribute_int32(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTrigAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_trig_attribute_int32_array(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTrigAttribute
+
+        error_code = cfunc(
+            task, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.tolist()
+
+    def get_trig_attribute_string(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTrigAttribute
+
+        error_code = cfunc(
+            task, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.value.decode('ascii')
+
+    def get_trig_attribute_uint32(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetTrigAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_watchdog_attribute_bool(self, task, lines, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetWatchdogAttribute
+
+        error_code = cfunc(
+            task, lines, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_watchdog_attribute_double(self, task, lines, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetWatchdogAttribute
+
+        error_code = cfunc(
+            task, lines, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_watchdog_attribute_int32(self, task, lines, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetWatchdogAttribute
+
+        error_code = cfunc(
+            task, lines, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_watchdog_attribute_string(self, task, lines, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetWatchdogAttribute
+
+        error_code = cfunc(
+            task, lines, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.value.decode('ascii')
+
+    def get_write_attribute_bool(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetWriteAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_write_attribute_double(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetWriteAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_write_attribute_int32(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetWriteAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_write_attribute_string(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetWriteAttribute
+
+        error_code = cfunc(
+            task, attribute, value, temp_size)
+        check_for_error(error_code)
+        return value.value.decode('ascii')
+
+    def get_write_attribute_uint32(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetWriteAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
+
+    def get_write_attribute_uint64(self, task, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetWriteAttribute
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        check_for_error(error_code)
+        return value.value
 
     def is_task_done(self, task):
         cfunc = lib_importer.windll.DAQmxIsTaskDone
@@ -2256,7 +3045,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, ctypes.byref(is_task_done))
         check_for_error(error_code)
-        return is_task_done
+        return is_task_done.value
 
     def load_task(self, session_name):
         cfunc = lib_importer.windll.DAQmxLoadTask
@@ -2272,7 +3061,8 @@ class LibraryInterpreter(BaseInterpreter):
         return task
 
     def read_analog_f64(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadAnalogF64
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2285,9 +3075,10 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
-        return read_array, samps_per_chan_read
+        return read_array.tolist(), samps_per_chan_read.value
 
     def read_analog_scalar_f64(self, task, timeout):
         cfunc = lib_importer.windll.DAQmxReadAnalogScalarF64
@@ -2300,10 +3091,11 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, timeout, ctypes.byref(value))
         check_for_error(error_code)
-        return value
+        return value.value
 
     def read_binary_i16(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadBinaryI16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2315,12 +3107,14 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
-        return read_array, samps_per_chan_read
+        return read_array.tolist(), samps_per_chan_read.value
 
     def read_binary_i32(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadBinaryI32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2332,12 +3126,14 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
-        return read_array, samps_per_chan_read
+        return read_array.tolist(), samps_per_chan_read.value
 
     def read_binary_u16(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadBinaryU16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2350,12 +3146,14 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
-        return read_array, samps_per_chan_read
+        return read_array.tolist(), samps_per_chan_read.value
 
     def read_binary_u32(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadBinaryU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2368,11 +3166,13 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
-        return read_array, samps_per_chan_read
+        return read_array.tolist(), samps_per_chan_read.value
 
-    def read_counter_f64(self, task, num_samps_per_chan, timeout, read_array):
+    def read_counter_f64(
+            self, task, num_samps_per_chan, timeout, array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadCounterF64
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2385,12 +3185,13 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, ctypes.byref(read_array),
-            ctypes.byref(samps_per_chan_read))
+            array_size_in_samps, ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
-        return read_array, samps_per_chan_read
+        return read_array.tolist(), samps_per_chan_read.value
 
     def read_counter_f64_ex(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadCounterF64Ex
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2403,9 +3204,10 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
-        return read_array, samps_per_chan_read
+        return read_array.tolist(), samps_per_chan_read.value
 
     def read_counter_scalar_f64(self, task, timeout):
         cfunc = lib_importer.windll.DAQmxReadCounterScalarF64
@@ -2418,7 +3220,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, timeout, ctypes.byref(value))
         check_for_error(error_code)
-        return value
+        return value.value
 
     def read_counter_scalar_u32(self, task, timeout):
         cfunc = lib_importer.windll.DAQmxReadCounterScalarU32
@@ -2431,9 +3233,10 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, timeout, ctypes.byref(value))
         check_for_error(error_code)
-        return value
+        return value.value
 
-    def read_counter_u32(self, task, num_samps_per_chan, timeout, read_array):
+    def read_counter_u32(
+            self, task, num_samps_per_chan, timeout, array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadCounterU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2446,12 +3249,13 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, ctypes.byref(read_array),
-            ctypes.byref(samps_per_chan_read))
+            array_size_in_samps, ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
-        return read_array, samps_per_chan_read
+        return read_array.tolist(), samps_per_chan_read.value
 
     def read_counter_u32_ex(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadCounterU32Ex
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2464,13 +3268,14 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
-        return read_array, samps_per_chan_read
+        return read_array.tolist(), samps_per_chan_read.value
 
     def read_ctr_freq(
             self, task, num_samps_per_chan, timeout, interleaved,
-            read_array_frequency, read_array_duty_cycle):
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadCtrFreq
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2480,15 +3285,16 @@ class LibraryInterpreter(BaseInterpreter):
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')),
                         wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.POINTER(ctypes.c_int)]
+                        flags=('C','W')), ctypes.c_uint,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
             ctypes.byref(read_array_frequency),
-            ctypes.byref(read_array_duty_cycle),
+            ctypes.byref(read_array_duty_cycle), array_size_in_samps,
             ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
-        return read_array_frequency, read_array_duty_cycle, samps_per_chan_read
+        return read_array_frequency.tolist(), read_array_duty_cycle.tolist(), samps_per_chan_read.value
 
     def read_ctr_freq_scalar(self, task, timeout):
         cfunc = lib_importer.windll.DAQmxReadCtrFreqScalar
@@ -2502,11 +3308,11 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, timeout, ctypes.byref(frequency), ctypes.byref(duty_cycle))
         check_for_error(error_code)
-        return frequency, duty_cycle
+        return frequency.value, duty_cycle.value
 
     def read_ctr_ticks(
             self, task, num_samps_per_chan, timeout, interleaved,
-            read_array_high_ticks, read_array_low_ticks):
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadCtrTicks
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2516,15 +3322,16 @@ class LibraryInterpreter(BaseInterpreter):
                         wrapped_ndpointer(dtype=numpy.uint32,
                         flags=('C','W')),
                         wrapped_ndpointer(dtype=numpy.uint32,
-                        flags=('C','W')), ctypes.POINTER(ctypes.c_int)]
+                        flags=('C','W')), ctypes.c_uint,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
             ctypes.byref(read_array_high_ticks),
-            ctypes.byref(read_array_low_ticks),
+            ctypes.byref(read_array_low_ticks), array_size_in_samps,
             ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
-        return read_array_high_ticks, read_array_low_ticks, samps_per_chan_read
+        return read_array_high_ticks.tolist(), read_array_low_ticks.tolist(), samps_per_chan_read.value
 
     def read_ctr_ticks_scalar(self, task, timeout):
         cfunc = lib_importer.windll.DAQmxReadCtrTicksScalar
@@ -2538,11 +3345,11 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, timeout, ctypes.byref(high_ticks), ctypes.byref(low_ticks))
         check_for_error(error_code)
-        return high_ticks, low_ticks
+        return high_ticks.value, low_ticks.value
 
     def read_ctr_time(
             self, task, num_samps_per_chan, timeout, interleaved,
-            read_array_high_time, read_array_low_time):
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadCtrTime
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2552,15 +3359,16 @@ class LibraryInterpreter(BaseInterpreter):
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')),
                         wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.POINTER(ctypes.c_int)]
+                        flags=('C','W')), ctypes.c_uint,
+                        ctypes.POINTER(ctypes.c_int)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
             ctypes.byref(read_array_high_time),
-            ctypes.byref(read_array_low_time),
+            ctypes.byref(read_array_low_time), array_size_in_samps,
             ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
-        return read_array_high_time, read_array_low_time, samps_per_chan_read
+        return read_array_high_time.tolist(), read_array_low_time.tolist(), samps_per_chan_read.value
 
     def read_ctr_time_scalar(self, task, timeout):
         cfunc = lib_importer.windll.DAQmxReadCtrTimeScalar
@@ -2573,10 +3381,11 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, timeout, ctypes.byref(high_time), ctypes.byref(low_time))
         check_for_error(error_code)
-        return high_time, low_time
+        return high_time.value, low_time.value
 
     def read_digital_lines(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_bytes):
         cfunc = lib_importer.windll.DAQmxReadDigitalLines
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2589,10 +3398,11 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read),
+            ctypes.byref(read_array), array_size_in_bytes,
+            ctypes.byref(samps_per_chan_read),
             ctypes.byref(num_bytes_per_samp))
         check_for_error(error_code)
-        return read_array, samps_per_chan_read, num_bytes_per_samp
+        return read_array.tolist(), samps_per_chan_read.value, num_bytes_per_samp.value
 
     def read_digital_scalar_u32(self, task, timeout):
         cfunc = lib_importer.windll.DAQmxReadDigitalScalarU32
@@ -2605,10 +3415,11 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, timeout, ctypes.byref(value))
         check_for_error(error_code)
-        return value
+        return value.value
 
     def read_digital_u16(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadDigitalU16
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2621,12 +3432,14 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
-        return read_array, samps_per_chan_read
+        return read_array.tolist(), samps_per_chan_read.value
 
     def read_digital_u32(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadDigitalU32
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2639,12 +3452,14 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
-        return read_array, samps_per_chan_read
+        return read_array.tolist(), samps_per_chan_read.value
 
     def read_digital_u8(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
         cfunc = lib_importer.windll.DAQmxReadDigitalU8
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2656,9 +3471,20 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode,
-            ctypes.byref(read_array), ctypes.byref(samps_per_chan_read))
+            ctypes.byref(read_array), array_size_in_samps,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
-        return read_array, samps_per_chan_read
+        return read_array.tolist(), samps_per_chan_read.value
+
+    def read_power_binary_i16(
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
+        raise NotImplementedError
+
+    def read_power_f64(
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            array_size_in_samps):
+        raise NotImplementedError
 
     def read_power_scalar_f64(self, task, timeout):
         cfunc = lib_importer.windll.DAQmxReadPowerScalarF64
@@ -2672,7 +3498,94 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, timeout, ctypes.byref(voltage), ctypes.byref(current))
         check_for_error(error_code)
-        return voltage, current
+        return voltage.value, current.value
+
+    def read_raw(self, task, num_samps_per_chan, timeout, array_size_in_bytes):
+        raise NotImplementedError
+
+    def register_done_event(
+            self, task, options, callback_function, callback_data):
+
+        DAQmxDoneEventCallbackPtr = ctypes.CFUNCTYPE(
+            lib_importer.task_handle, ctypes.c_int)        
+        
+        cfunc = lib_importer.windll.DAQmxRegisterDoneEvent
+        
+        with cfunc.arglock:
+            if callback_function is not None:
+                callback_method_ptr = DAQmxDoneEventCallbackPtr(callback_function)
+                self._done_event_callbacks.append(callback_method_ptr)
+                cfunc.argtypes = [
+                    lib_importer.task_handle, ctypes.c_uint,
+                    DAQmxDoneEventCallbackPtr, ctypes.c_void_p]
+            else:
+                del self._done_event_callbacks[:]
+                callback_method_ptr = None
+                cfunc.argtypes = [
+                    lib_importer.task_handle, ctypes.c_uint, ctypes.c_void_p,
+                    ctypes.c_void_p]
+        
+            error_code = cfunc(
+                task, options, callback_function, callback_data)
+        check_for_error(error_code)
+
+
+    def register_every_n_samples_event(
+            self, task, every_n_samples_event_type, n_samples, options,
+            callback_function, callback_data):
+
+        DAQmxEveryNSamplesEventCallbackPtr = ctypes.CFUNCTYPE(
+            lib_importer.task_handle, ctypes.c_int, ctypes.c_uint)        
+        
+        cfunc = lib_importer.windll.DAQmxRegisterEveryNSamplesEvent
+        
+        with cfunc.arglock:
+            if callback_function is not None:
+                callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr(callback_function)
+                self._every_n_samples_event_callbacks.append(callback_method_ptr)
+                cfunc.argtypes = [
+                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
+                    ctypes.c_uint, DAQmxEveryNSamplesEventCallbackPtr,
+                    ctypes.c_void_p]
+            else:
+                del self._every_n_samples_event_callbacks[:]
+                callback_method_ptr = None
+                cfunc.argtypes = [
+                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
+                    ctypes.c_uint, ctypes.c_void_p, ctypes.c_void_p]
+        
+            error_code = cfunc(
+                task, every_n_samples_event_type, n_samples, options,
+                callback_function, callback_data)
+        check_for_error(error_code)
+
+
+    def register_signal_event(
+            self, task, signal_id, options, callback_function, callback_data):
+
+        DAQmxSignalEventCallbackPtr = ctypes.CFUNCTYPE(
+            lib_importer.task_handle, ctypes.c_int)        
+        
+        cfunc = lib_importer.windll.DAQmxRegisterSignalEvent
+        
+        with cfunc.arglock:
+            if callback_function is not None:
+                callback_method_ptr = DAQmxSignalEventCallbackPtr(callback_function)
+                self._signal_event_callbacks.append(callback_method_ptr)
+                cfunc.argtypes = [
+                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
+                    DAQmxSignalEventCallbackPtr, ctypes.c_void_p]
+            else:
+                del self._signal_event_callbacks[:]
+                callback_method_ptr = None
+                cfunc.argtypes = [
+                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
+                    ctypes.c_void_p, ctypes.c_void_p]
+        
+            error_code = cfunc(
+                task, signal_id, options, callback_function, callback_data)
+        check_for_error(error_code)
+
 
     def remove_cdaq_sync_connection(self, port_list):
         cfunc = lib_importer.windll.DAQmxRemoveCDAQSyncConnection
@@ -2698,6 +3611,12 @@ class LibraryInterpreter(BaseInterpreter):
             device_name, override_reservation)
         check_for_error(error_code)
 
+    def reset_buffer_attribute(self, task, attribute):
+        raise NotImplementedError
+
+    def reset_chan_attribute(self, task, channel, attribute):
+        raise NotImplementedError
+
     def reset_device(self, device_name):
         cfunc = lib_importer.windll.DAQmxResetDevice
         if cfunc.argtypes is None:
@@ -2710,6 +3629,42 @@ class LibraryInterpreter(BaseInterpreter):
             device_name)
         check_for_error(error_code)
 
+    def reset_exported_signal_attribute(self, task, attribute):
+        raise NotImplementedError
+
+    def reset_read_attribute(self, task, attribute):
+        raise NotImplementedError
+
+    def reset_real_time_attribute(self, task, attribute):
+        raise NotImplementedError
+
+    def reset_timing_attribute(self, task, attribute):
+        raise NotImplementedError
+
+    def reset_timing_attribute_ex(self, task, device_names, attribute):
+        raise NotImplementedError
+
+    def reset_trig_attribute(self, task, attribute):
+        raise NotImplementedError
+
+    def reset_watchdog_attribute(self, task, lines, attribute):
+        raise NotImplementedError
+
+    def reset_write_attribute(self, task, attribute):
+        raise NotImplementedError
+
+    def save_global_chan(self, task, channel_name, save_as, author, options):
+        raise NotImplementedError
+
+    def save_scale(self, scale_name, save_as, author, options):
+        raise NotImplementedError
+
+    def save_task(self, task, save_as, author, options):
+        raise NotImplementedError
+
+    def self_cal(self, device_name):
+        raise NotImplementedError
+
     def self_test_device(self, device_name):
         cfunc = lib_importer.windll.DAQmxSelfTestDevice
         if cfunc.argtypes is None:
@@ -2721,6 +3676,14 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             device_name)
         check_for_error(error_code)
+
+    def set_ai_chan_cal_cal_date(
+            self, task, channel_name, year, month, day, hour, minute):
+        raise NotImplementedError
+
+    def set_ai_chan_cal_exp_date(
+            self, task, channel_name, year, month, day, hour, minute):
+        raise NotImplementedError
 
     def set_analog_power_up_states(
             self, device_name, channel_names, state, channel_type):
@@ -2735,7 +3698,86 @@ class LibraryInterpreter(BaseInterpreter):
         cfunc = lib_importer.cdll.DAQmxSetAnalogPowerUpStatesWithOutputType
 
         error_code = cfunc(
-            channel_names, state_array, channel_type_array, array_size)
+            channel_names, state_array, len(state_array), channel_type_array,
+            len(channel_type_array), array_size)
+        check_for_error(error_code)
+
+    def set_buffer_attribute_uint32(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetBufferAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_cal_info_attribute_bool(self, device_name, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetCalInfoAttribute
+
+        error_code = cfunc(
+            device_name, attribute, value)
+        check_for_error(error_code)
+
+    def set_cal_info_attribute_double(self, device_name, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetCalInfoAttribute
+
+        error_code = cfunc(
+            device_name, attribute, value)
+        check_for_error(error_code)
+
+    def set_cal_info_attribute_string(self, device_name, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetCalInfoAttribute
+
+        error_code = cfunc(
+            device_name, attribute, value)
+        check_for_error(error_code)
+
+    def set_cal_info_attribute_uint32(self, device_name, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetCalInfoAttribute
+
+        error_code = cfunc(
+            device_name, attribute, value)
+        check_for_error(error_code)
+
+    def set_chan_attribute_bool(self, task, channel, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetChanAttribute
+
+        error_code = cfunc(
+            task, channel, attribute, value)
+        check_for_error(error_code)
+
+    def set_chan_attribute_double(self, task, channel, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetChanAttribute
+
+        error_code = cfunc(
+            task, channel, attribute, value)
+        check_for_error(error_code)
+
+    def set_chan_attribute_double_array(
+            self, task, channel, attribute, value, size):
+        cfunc = lib_importer.cdll.DAQmxSetChanAttribute
+
+        error_code = cfunc(
+            task, channel, attribute, value, len(value), size)
+        check_for_error(error_code)
+
+    def set_chan_attribute_int32(self, task, channel, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetChanAttribute
+
+        error_code = cfunc(
+            task, channel, attribute, value)
+        check_for_error(error_code)
+
+    def set_chan_attribute_string(self, task, channel, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetChanAttribute
+
+        error_code = cfunc(
+            task, channel, attribute, value)
+        check_for_error(error_code)
+
+    def set_chan_attribute_uint32(self, task, channel, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetChanAttribute
+
+        error_code = cfunc(
+            task, channel, attribute, value)
         check_for_error(error_code)
 
     def set_digital_logic_family_power_up_state(
@@ -2764,6 +3806,342 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             device_name, channel_names, state, pull_up_pull_down_states)
+        check_for_error(error_code)
+
+    def set_exported_signal_attribute_bool(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetExportedSignalAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_exported_signal_attribute_double(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetExportedSignalAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_exported_signal_attribute_int32(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetExportedSignalAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_exported_signal_attribute_string(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetExportedSignalAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_exported_signal_attribute_uint32(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetExportedSignalAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_read_attribute_bool(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetReadAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_read_attribute_double(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetReadAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_read_attribute_int32(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetReadAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_read_attribute_string(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetReadAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_read_attribute_uint32(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetReadAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_read_attribute_uint64(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetReadAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_real_time_attribute_bool(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetRealTimeAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_real_time_attribute_int32(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetRealTimeAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_real_time_attribute_uint32(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetRealTimeAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_scale_attribute_double(self, scale_name, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetScaleAttribute
+
+        error_code = cfunc(
+            scale_name, attribute, value)
+        check_for_error(error_code)
+
+    def set_scale_attribute_double_array(
+            self, scale_name, attribute, value, size):
+        cfunc = lib_importer.cdll.DAQmxSetScaleAttribute
+
+        error_code = cfunc(
+            scale_name, attribute, value, len(value), size)
+        check_for_error(error_code)
+
+    def set_scale_attribute_int32(self, scale_name, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetScaleAttribute
+
+        error_code = cfunc(
+            scale_name, attribute, value)
+        check_for_error(error_code)
+
+    def set_scale_attribute_string(self, scale_name, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetScaleAttribute
+
+        error_code = cfunc(
+            scale_name, attribute, value)
+        check_for_error(error_code)
+
+    def set_timing_attribute_bool(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_timing_attribute_double(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_timing_attribute_ex_bool(
+            self, task, device_names, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTimingAttributeEx
+
+        error_code = cfunc(
+            task, device_names, attribute, value)
+        check_for_error(error_code)
+
+    def set_timing_attribute_ex_double(
+            self, task, device_names, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTimingAttributeEx
+
+        error_code = cfunc(
+            task, device_names, attribute, value)
+        check_for_error(error_code)
+
+    def set_timing_attribute_ex_int32(
+            self, task, device_names, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTimingAttributeEx
+
+        error_code = cfunc(
+            task, device_names, attribute, value)
+        check_for_error(error_code)
+
+    def set_timing_attribute_ex_string(
+            self, task, device_names, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTimingAttributeEx
+
+        error_code = cfunc(
+            task, device_names, attribute, value)
+        check_for_error(error_code)
+
+    def set_timing_attribute_ex_uint32(
+            self, task, device_names, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTimingAttributeEx
+
+        error_code = cfunc(
+            task, device_names, attribute, value)
+        check_for_error(error_code)
+
+    def set_timing_attribute_ex_uint64(
+            self, task, device_names, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTimingAttributeEx
+
+        error_code = cfunc(
+            task, device_names, attribute, value)
+        check_for_error(error_code)
+
+    def set_timing_attribute_int32(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_timing_attribute_string(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_timing_attribute_uint32(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_timing_attribute_uint64(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_trig_attribute_bool(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_trig_attribute_double(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_trig_attribute_double_array(self, task, attribute, value, size):
+        cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
+
+        error_code = cfunc(
+            task, attribute, value, len(value), size)
+        check_for_error(error_code)
+
+    def set_trig_attribute_int32(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_trig_attribute_int32_array(self, task, attribute, value, size):
+        cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
+
+        error_code = cfunc(
+            task, attribute, value, len(value), size)
+        check_for_error(error_code)
+
+    def set_trig_attribute_string(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_trig_attribute_uint32(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_watchdog_attribute_bool(self, task, lines, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetWatchdogAttribute
+
+        error_code = cfunc(
+            task, lines, attribute, value)
+        check_for_error(error_code)
+
+    def set_watchdog_attribute_double(self, task, lines, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetWatchdogAttribute
+
+        error_code = cfunc(
+            task, lines, attribute, value)
+        check_for_error(error_code)
+
+    def set_watchdog_attribute_int32(self, task, lines, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetWatchdogAttribute
+
+        error_code = cfunc(
+            task, lines, attribute, value)
+        check_for_error(error_code)
+
+    def set_watchdog_attribute_string(self, task, lines, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetWatchdogAttribute
+
+        error_code = cfunc(
+            task, lines, attribute, value)
+        check_for_error(error_code)
+
+    def set_write_attribute_bool(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_write_attribute_double(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_write_attribute_int32(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_write_attribute_string(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_write_attribute_uint32(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
+        check_for_error(error_code)
+
+    def set_write_attribute_uint64(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
+
+        error_code = cfunc(
+            task, attribute, value)
         check_for_error(error_code)
 
     def start_new_file(self, task, file_path):
@@ -2838,6 +4216,12 @@ class LibraryInterpreter(BaseInterpreter):
             device_name)
         check_for_error(error_code)
 
+    def wait_for_next_sample_clock(self, task, timeout):
+        raise NotImplementedError
+
+    def wait_for_valid_timestamp(self, task, timestamp_event, timeout):
+        raise NotImplementedError
+
     def wait_until_task_done(self, task, time_to_wait):
         cfunc = lib_importer.windll.DAQmxWaitUntilTaskDone
         if cfunc.argtypes is None:
@@ -2866,7 +4250,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written))
         check_for_error(error_code)
-        return samps_per_chan_written
+        return samps_per_chan_written.value
 
     def write_analog_scalar_f64(self, task, auto_start, timeout, value):
         cfunc = lib_importer.windll.DAQmxWriteAnalogScalarF64
@@ -2896,7 +4280,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written))
         check_for_error(error_code)
-        return samps_per_chan_written
+        return samps_per_chan_written.value
 
     def write_binary_i32(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -2914,7 +4298,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written))
         check_for_error(error_code)
-        return samps_per_chan_written
+        return samps_per_chan_written.value
 
     def write_binary_u16(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -2932,7 +4316,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written))
         check_for_error(error_code)
-        return samps_per_chan_written
+        return samps_per_chan_written.value
 
     def write_binary_u32(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -2950,7 +4334,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written))
         check_for_error(error_code)
-        return samps_per_chan_written
+        return samps_per_chan_written.value
 
     def write_ctr_freq(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -2970,7 +4354,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             frequency, duty_cycle, ctypes.byref(num_samps_per_chan_written))
         check_for_error(error_code)
-        return num_samps_per_chan_written
+        return num_samps_per_chan_written.value
 
     def write_ctr_freq_scalar(
             self, task, auto_start, timeout, frequency, duty_cycle):
@@ -3004,7 +4388,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             high_ticks, low_ticks, ctypes.byref(num_samps_per_chan_written))
         check_for_error(error_code)
-        return num_samps_per_chan_written
+        return num_samps_per_chan_written.value
 
     def write_ctr_ticks_scalar(
             self, task, auto_start, timeout, high_ticks, low_ticks):
@@ -3038,7 +4422,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             high_time, low_time, ctypes.byref(num_samps_per_chan_written))
         check_for_error(error_code)
-        return num_samps_per_chan_written
+        return num_samps_per_chan_written.value
 
     def write_ctr_time_scalar(
             self, task, auto_start, timeout, high_time, low_time):
@@ -3070,7 +4454,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written))
         check_for_error(error_code)
-        return samps_per_chan_written
+        return samps_per_chan_written.value
 
     def write_digital_scalar_u32(self, task, auto_start, timeout, value):
         cfunc = lib_importer.windll.DAQmxWriteDigitalScalarU32
@@ -3100,7 +4484,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written))
         check_for_error(error_code)
-        return samps_per_chan_written
+        return samps_per_chan_written.value
 
     def write_digital_u32(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -3118,7 +4502,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written))
         check_for_error(error_code)
-        return samps_per_chan_written
+        return samps_per_chan_written.value
 
     def write_digital_u8(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -3136,7 +4520,10 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written))
         check_for_error(error_code)
-        return samps_per_chan_written
+        return samps_per_chan_written.value
+
+    def write_raw(self, task, num_samps, auto_start, timeout, write_array):
+        raise NotImplementedError
 
     def write_to_teds_from_array(
             self, physical_channel, array_size, bit_stream,

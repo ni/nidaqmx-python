@@ -8095,7 +8095,7 @@ class AIChannel(Channel):
 
         check_for_error(size_or_code)
 
-        return Channel._factory(self._handle, val.value.decode('ascii'))
+        return Channel._factory(self._handle, val.value.decode('ascii'), self._interpreter)
 
     @property
     def ai_thrmcpl_cjc_src(self):

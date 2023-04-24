@@ -1,7 +1,10 @@
 """Structure for storing function parameter metadata from scrapigen."""
 
+import collections
 
 from codegen.utilities.helpers import camel_to_snake_case
+
+BufferSizeInfo = collections.namedtuple("BufferSizeInfo", ["mechanism", "value"])
 
 
 class Parameter:
@@ -17,11 +20,13 @@ class Parameter:
         self._description = parameter_metadata.get("python_description")
         self._python_type_annotation = parameter_metadata.get("python_type_annotation")
         self._is_list = parameter_metadata.get("is_list", False)
-        self._has_explicit_buffer_size = parameter_metadata.get("has_explicit_buffer_size", False)
+        self._size = parameter_metadata.get("size")
+        self._has_explicit_buffer_size = (
+            parameter_metadata.get("has_explicit_buffer_size", False) or self.size is not None
+        )
         self._optional = parameter_metadata.get("is_optional_in_python", False)
         self._is_compound_type = parameter_metadata.get("is_compound_type", False)
         self._has_default = False
-        self._size = parameter_metadata.get("size")
         if "python_default_value" in parameter_metadata:
             self._default = parameter_metadata.get("python_default_value")
             self._has_default = True
@@ -31,6 +36,8 @@ class Parameter:
         if "enum" in parameter_metadata:
             self._enum = parameter_metadata.get("enum")
             self._is_enum = True
+        if "callback_params" in parameter_metadata:
+            self._callback_params = parameter_metadata.get("callback_params")
 
     @property
     def direction(self):
@@ -104,8 +111,19 @@ class Parameter:
 
     @property
     def size(self):
-        """Dict: Defines the array parameter's mechanism and value."""
-        return self._size
+        """BufferSizeInfo: Defines the information on a parameter's size."""
+        if self._size is not None:
+            python_size_value = self._size.get("python_value")
+            if python_size_value is None:
+                python_size_value = camel_to_snake_case(self._size.get("value"))
+            size_info = BufferSizeInfo(self._size.get("mechanism"), python_size_value)
+            return size_info
+        return None
+
+    @property
+    def callback_params(self):
+        """Dict: Defines the params for callback functions."""
+        return self._callback_params
 
     @property
     def is_compound_type(self):

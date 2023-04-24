@@ -1,6 +1,6 @@
 <%
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
-    from codegen.utilities.interpreter_helpers import get_interpreter_functions,get_interpreter_parameter_signature,get_c_function_call_template, get_output_parameter_names, get_interpreter_params
+    from codegen.utilities.interpreter_helpers import get_interpreter_functions,get_interpreter_parameter_signature,get_c_function_call_template, get_return_values, get_interpreter_params
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
     functions = get_interpreter_functions(data)
 %>\
@@ -11,7 +11,7 @@ import numpy
 
 from nidaqmx._base_interpreter import BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer
-from nidaqmx.errors import check_for_error
+from nidaqmx.errors import check_for_error, is_string_buffer_too_small, is_array_buffer_too_small
 
 class LibraryInterpreter(BaseInterpreter):
     """
@@ -19,12 +19,21 @@ class LibraryInterpreter(BaseInterpreter):
     This class is responsible for interpreting the Library's C API.
 
     """
+    
+    def __init__(self):
+        # These lists keep C callback objects in memory as ctypes doesn't.
+        # Program will crash if callback is made after object is garbage
+        # collected.
+        self._done_event_callbacks = []
+        self._every_n_samples_event_callbacks = []
+        self._signal_event_callbacks = []
+        
 % for func in functions:
 <%
     params = get_interpreter_params(func)
     sorted_params = order_function_parameters_by_optional(params)
     parameter_signature = get_interpreter_parameter_signature(is_python_factory, sorted_params)
-    output_parameters_names = get_output_parameter_names(func)
+    return_values = get_return_values(func)
     %>
     %if (len(func.function_name) + len(parameter_signature)) > 68:
     def ${func.function_name}(
@@ -33,8 +42,12 @@ class LibraryInterpreter(BaseInterpreter):
     def ${func.function_name}(${parameter_signature}):
     %endif
 \
-<%include file="${'/library_interpreter_templates' + get_c_function_call_template(func)}" args="function=func" />
-    %if len(list(output_parameters_names)) != 0:
-        return ${', '.join(output_parameters_names)}
+%if func.is_python_codegen_method:
+<%include file="${'/library_interpreter' + get_c_function_call_template(func)}" args="function=func" />
+    %if len(list(return_values)) != 0:
+        return ${', '.join(return_values)}
     %endif
+%else:
+        raise NotImplementedError
+%endif
 %endfor

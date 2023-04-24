@@ -151,11 +151,22 @@ def get_arguments_type(functions_metadata):
         else:
             argtypes.append("ctypes_byte_str")
 
+    size_param_info = tuple()
     for param in functions_metadata.parameters:
         argtypes.append(to_param_argtype(param))
 
         if param.has_explicit_buffer_size:
+            # Removing previously added argument type of the size parameter if the same size
+            # parameter is used by another parameter in the same function. In such cases the
+            # size parameter argument definition should always come after the last parameter
+            # that is using the size argument.
+            if len(size_param_info) != 0:
+                size_param, parameter_index = size_param_info
+                if size_param.size == param.size:
+                    del argtypes[parameter_index]
+                    size_param_info = tuple()
             argtypes.append("ctypes.c_uint")
+            size_param_info = param, (len(argtypes) - 1)
     return argtypes
 
 
@@ -170,7 +181,7 @@ def to_param_argtype(parameter):
             if parameter.ctypes_data_type == "ctypes.c_char_p":
                 return "ctypes_byte_str"
             else:
-                return parameter.ctypes_data_type
+                return parameter.ctypes_data_type or parameter.python_data_type
         else:
             if parameter.ctypes_data_type == "ctypes.c_char_p":
                 return parameter.ctypes_data_type

@@ -2,7 +2,46 @@
 import numpy
 import pytest
 
-from nidaqmx.constants import TerminalConfiguration
+from nidaqmx import DaqError
+from nidaqmx.constants import TerminalConfiguration, UsageTypeAI
+from nidaqmx.error_codes import DAQmxErrors
+from nidaqmx.system import PhysicalChannel
+
+
+def test__constructed_physical_channel__get_property__returns_value():
+    """Test construction."""
+    phys_chan = PhysicalChannel("bridgeTester/ai2")
+
+    assert UsageTypeAI.BRIDGE in phys_chan.ai_meas_types
+
+
+def test__nonexistent_physical_channel__get_property__raises_physical_chan_does_not_exist():
+    """Test construction."""
+    phys_chan = PhysicalChannel("bridgeTester/ai1234")
+
+    with pytest.raises(DaqError) as exc_info:
+        _ = phys_chan.ai_meas_types
+
+    assert exc_info.value.error_code == DAQmxErrors.PHYSICAL_CHAN_DOES_NOT_EXIST
+
+
+def test__physical_channels_with_same_name__compare__are_equal():
+    """Test comparison."""
+    phys_chan1 = PhysicalChannel("bridgeTester/ai2")
+    phys_chan2 = PhysicalChannel("bridgeTester/ai2")
+
+    assert phys_chan1 is not phys_chan2
+    assert phys_chan1 == phys_chan2
+
+
+def test__physical_channels_with_different_names__compare__are_not_equal():
+    """Test comparison."""
+    phys_chan1 = PhysicalChannel("bridgeTester/ai2")
+    phys_chan2 = PhysicalChannel("bridgeTester/ai3")
+    phys_chan3 = PhysicalChannel("tsVoltageTester1/ai2")
+
+    assert phys_chan1 != phys_chan2
+    assert phys_chan1 != phys_chan3
 
 
 def test__physical_channel__get_bool_property__returns_value(any_x_series_device):

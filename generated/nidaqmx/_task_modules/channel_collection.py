@@ -16,8 +16,12 @@ class ChannelCollection(Sequence):
     
     This class defines methods that implements a container object.
     """
-    def __init__(self, task_handle):
+    def __init__(self, task_handle, interpreter):
+        """
+        Do not construct this object directly; instead, construct a nidaqmx.Task and use the appropriate property, such as task.ai_channels.
+        """
         self._handle = task_handle
+        self._interpreter = interpreter
 
     def __contains__(self, item):
         channel_names = self.channel_names
@@ -67,7 +71,7 @@ class ChannelCollection(Sequence):
                 .format(type(index)), DAQmxErrors.UNKNOWN)
 
         if channel_names:
-            return Channel._factory(self._handle, channel_names)
+            return Channel._factory(self._handle, channel_names, self._interpreter)
         else:
             raise DaqError(
                 'You cannot specify an empty index when indexing channels.\n'
@@ -78,7 +82,7 @@ class ChannelCollection(Sequence):
 
     def __iter__(self):
         for channel_name in self.channel_names:
-            yield Channel._factory(self._handle, channel_name)
+            yield Channel._factory(self._handle, channel_name, self._interpreter)
 
     def __len__(self):
         return len(self.channel_names)
@@ -91,7 +95,7 @@ class ChannelCollection(Sequence):
         channel_names.reverse()
 
         for channel_name in channel_names:
-            yield Channel._factory(self._handle, channel_name)
+            yield Channel._factory(self._handle, channel_name, self._interpreter)
 
     @property
     def all(self):
@@ -101,7 +105,7 @@ class ChannelCollection(Sequence):
             virtual channels on this channel collection.
         """
         # Passing a blank string means all channels.
-        return Channel._factory(self._handle, '')
+        return Channel._factory(self._handle, '', self._interpreter)
 
     @property
     def channel_names(self):
