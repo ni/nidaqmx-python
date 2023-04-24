@@ -105,6 +105,7 @@ def get_instantiation_lines_for_output(func):
     if func.is_init_method:
         instantiation_lines.append(f"task = lib_importer.task_handle(0)")
     for param in get_output_parameters(func):
+    for param in get_output_parameters(func):
         if param.has_explicit_buffer_size:
             if (
                 param.size.mechanism == "passed-in" or param.size.mechanism == "passed-in-by-ptr"
@@ -193,6 +194,7 @@ def get_output_parameters(func):
 def get_return_values(func):
     """Gets the values to add to return statement of the function."""
     return_values = []
+    for param in get_output_parameters(func):
     for param in get_output_parameters(func):
         if param.ctypes_data_type == "ctypes.c_char_p":
             return_values.append(f"{param.parameter_name}.value.decode('ascii')")
