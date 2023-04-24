@@ -2852,7 +2852,8 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
-            read_array_duty_cycle, ctypes.byref(samps_per_chan_read))
+            read_array_frequency, read_array_duty_cycle,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array_frequency.tolist(), read_array_duty_cycle.tolist(), samps_per_chan_read.value
 
@@ -2892,7 +2893,8 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
-            read_array_low_ticks, ctypes.byref(samps_per_chan_read))
+            read_array_high_ticks, read_array_low_ticks,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array_high_ticks.tolist(), read_array_low_ticks.tolist(), samps_per_chan_read.value
 
@@ -2932,7 +2934,8 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
-            read_array_low_time, ctypes.byref(samps_per_chan_read))
+            read_array_high_time, read_array_low_time,
+            ctypes.byref(samps_per_chan_read))
         check_for_error(error_code)
         return read_array_high_time.tolist(), read_array_low_time.tolist(), samps_per_chan_read.value
 
