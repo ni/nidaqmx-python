@@ -142,23 +142,6 @@ def get_grpc_interpreter_call_params(function_name, params):
     return ", ".join(grpc_params)
 
 
-def get_grpc_interpreter_call_params(function_name, params):
-    """Gets the interpreter parameters for grpc request."""
-    compound_params = FUNCTIONS_WITH_COMPOUND_PARAMETERS.get(function_name, None)
-    merged_params = []
-    if compound_params is not None:
-        merged_params = compound_params["parameters"]
-    grpc_params = []
-    for param in params:
-        if param.parameter_name not in merged_params:
-            if param.is_enum:
-                grpc_params.append(f"{param.parameter_name}_raw={param.parameter_name}")
-            else:
-                grpc_params.append(f"{param.parameter_name}={param.parameter_name}")
-    grpc_params = sorted(list(set(grpc_params)))
-    return ", ".join(grpc_params)
-
-
 def get_skippable_params_for_interpreter_func(func):
     """Gets parameter names that needs to be skipped for the function."""
     skippable_params = []
@@ -231,9 +214,6 @@ def get_return_values(func):
         else:
             return_values.append(f"{param.parameter_name}.value")
     return return_values
-
-
-
 
 
 def get_c_function_call_template(func):
