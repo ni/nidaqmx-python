@@ -135,7 +135,7 @@ class LibraryInterpreter(BaseInterpreter):
         return samples_read.value, number_of_bytes_per_sample.value
 
     def write_raw(
-            task_handle, num_samps_per_chan, numpy_array, auto_start, timeout):
+            task_handle, num_samps_per_chan, auto_start, timeout, numpy_array):
         samps_per_chan_written = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxWriteRaw
