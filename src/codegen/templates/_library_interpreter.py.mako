@@ -47,7 +47,7 @@ class LibraryInterpreter(BaseInterpreter):
     instantiation_lines = get_instantiation_lines_for_output(func)
     %>\
 \
-%if func.is_python_codegen_method and func.calling_convention == "StdCall":
+%if func.is_python_codegen_method:
     %if len(instantiation_lines) > 0:
         %for instantiation_line in instantiation_lines:
         ${instantiation_line}

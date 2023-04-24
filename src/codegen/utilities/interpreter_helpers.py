@@ -154,7 +154,7 @@ def get_argument_definition_lines_for_varargs(varargs_params):
             argument_defininion_lines.append(f"args.append({param.parameter_name}[index])")
         else:
             argument_defininion_lines.append(f"args.append(ctypes.byref({param.parameter_name}_element))")
-        argument_defininion_lines.append(f"argtypes.append({argtype}")
+        argument_defininion_lines.append(f"argtypes.append({argtype})")
         argument_defininion_lines.append("")
     return argument_defininion_lines
 
