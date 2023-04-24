@@ -1,6 +1,6 @@
 <%
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
-    from codegen.utilities.interpreter_helpers import get_interpreter_functions,get_interpreter_parameter_signature,get_c_function_call_template, get_output_parameter_names, get_interpreter_params
+    from codegen.utilities.interpreter_helpers import get_interpreter_functions,get_interpreter_parameter_signature,get_c_function_call_template, get_return_values, get_interpreter_params, get_instantiation_lines_for_output
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
     functions = get_interpreter_functions(data)
 %>\
@@ -11,7 +11,7 @@ import numpy
 
 from nidaqmx._base_interpreter import BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer
-from nidaqmx.errors import check_for_error
+from nidaqmx.errors import check_for_error, is_string_buffer_too_small, is_array_buffer_too_small
 
 class LibraryInterpreter(BaseInterpreter):
     """
@@ -33,7 +33,7 @@ class LibraryInterpreter(BaseInterpreter):
     params = get_interpreter_params(func)
     sorted_params = order_function_parameters_by_optional(params)
     parameter_signature = get_interpreter_parameter_signature(is_python_factory, sorted_params)
-    output_parameters_names = get_output_parameter_names(func)
+    return_values = get_return_values(func)
     %>
     %if (len(func.function_name) + len(parameter_signature)) > 68:
     def ${func.function_name}(
@@ -42,10 +42,22 @@ class LibraryInterpreter(BaseInterpreter):
     def ${func.function_name}(${parameter_signature}):
     %endif
 \
-%if func.is_python_codegen_method:
+## Script instantiation for output parameters that will be passed by reference.
+<%
+    instantiation_lines = get_instantiation_lines_for_output(func)
+    %>\
+\
+%if func.is_python_codegen_method and func.calling_convention == "StdCall":
+    %if len(instantiation_lines) > 0:
+        %for instantiation_line in instantiation_lines:
+        ${instantiation_line}
+        %endfor
+
+    %endif
+\
 <%include file="${'/library_interpreter' + get_c_function_call_template(func)}" args="function=func" />
-    %if len(list(output_parameters_names)) != 0:
-        return ${', '.join(output_parameters_names)}
+    %if len(list(return_values)) != 0:
+        return ${', '.join(return_values)}
     %endif
 %else:
         raise NotImplementedError
