@@ -2617,7 +2617,7 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_double, c_bool32,
+                        ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')), ctypes.c_uint,
                         ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
