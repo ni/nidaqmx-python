@@ -36,7 +36,7 @@ class Function:
                 function_parameter = FunctionParameter(parameter)
                 self._base_parameters.append(function_parameter)
                 if parameter.get("use_in_python_api") is not False:
-                    if parameter["name"] != "task" and "python_data_type" in parameter:
+                    if parameter["name"] != "task" and parameter.get("python_data_type", None) is not None:
                         self._parameters.append(function_parameter)
                         if parameter["direction"] == "out":
                             self._output_parameters.append(self._parameters[-1])
