@@ -19,6 +19,7 @@ class Parameter:
         self._is_list = parameter_metadata.get("is_list", False)
         self._has_explicit_buffer_size = parameter_metadata.get("has_explicit_buffer_size", False)
         self._optional = parameter_metadata.get("is_optional_in_python", False)
+        self._is_compound_type = parameter_metadata.get("is_compound_type", False)
         self._has_default = False
         self._size = parameter_metadata.get("size")
         if "python_default_value" in parameter_metadata:
@@ -105,3 +106,8 @@ class Parameter:
     def size(self):
         """Dict: Defines the array parameter's mechanism and value."""
         return self._size
+
+    @property
+    def is_compound_type(self):
+        """Dict: Defines if the parameter is of compound type."""
+        return self._is_compound_type

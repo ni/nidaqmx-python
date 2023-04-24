@@ -40,6 +40,29 @@ LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
     "RegisterDoneEvent",
 ]
 
+FUNCTIONS_WITH_COMPOUND_PARAMETERS = {
+    "get_analog_power_up_states": {
+        "compound_parameter_type": "AnalogPowerUpChannelAndType",
+        "parameters": ["channel_name", "channel_type"],
+    },
+    "create_watchdog_timer_task": {
+        "compound_parameter_type": "WatchdogExpChannelsAndState",
+        "parameters": ["lines", "exp_state"],
+    },
+    "set_analog_power_up_states": {
+        "compound_parameter_type": "AnalogPowerUpChannelsAndState",
+        "parameters": ["channel_names", "state", "channel_type"],
+    },
+    "set_digital_power_up_states": {
+        "compound_parameter_type": "DigitalPowerUpChannelsAndState",
+        "parameters": ["channel_names", "state"],
+    },
+    "set_digital_pull_up_pull_down_states": {
+        "compound_parameter_type": "DigitalPowerUpChannelsAndState",
+        "parameters": ["channel_names", "state"],
+    },
+}
+
 
 def get_interpreter_functions(metadata, is_base_interpreter=False):
     """Converts the scrapigen metadata into a list of functions."""
@@ -106,14 +129,19 @@ def get_interpreter_params(func):
     )
 
 
-def get_grpc_interpreter_call_params(params):
+def get_grpc_interpreter_call_params(function_name, params):
     """Gets the interpreter parameters for grpc request."""
+    compound_params = FUNCTIONS_WITH_COMPOUND_PARAMETERS.get(function_name, None)
+    merged_params = []
+    if compound_params is not None:
+        merged_params = compound_params["parameters"]
     grpc_params = []
     for param in params:
-        if param.is_enum:
-            grpc_params.append(f"{param.parameter_name}_raw={param.parameter_name}")
-        else:
-            grpc_params.append(f"{param.parameter_name}={param.parameter_name}")
+        if param.parameter_name not in merged_params:
+            if param.is_enum:
+                grpc_params.append(f"{param.parameter_name}_raw={param.parameter_name}")
+            else:
+                grpc_params.append(f"{param.parameter_name}={param.parameter_name}")
     grpc_params = sorted(list(set(grpc_params)))
     return ", ".join(grpc_params)
 
@@ -170,3 +198,24 @@ def get_reponse_parameters(output_parameters: list):
 def get_c_function_call_template(func):
     """Gets the template to use for generating the logic of calling the c functions."""
     return "/default_c_function_call.py.mako"
+
+
+def get_compound_parameter(params):
+    """Returns the compound parameter associated with the given function."""
+    return next((x for x in params if x.is_compound_type), None)
+
+
+def get_input_arguments_for_compound_params(function_name):
+    """Returs a list of input parameter for creating the compound parameter."""
+    return FUNCTIONS_WITH_COMPOUND_PARAMETERS[function_name]["parameters"]
+
+
+def create_compound_parameter_request(function_name):
+    """Gets the input parameters for createing the compound type parameter."""
+    parameters = []
+    compound_parameter_type = FUNCTIONS_WITH_COMPOUND_PARAMETERS[function_name][
+        "compound_parameter_type"
+    ]
+    for parameter in FUNCTIONS_WITH_COMPOUND_PARAMETERS[function_name]["parameters"]:
+        parameters.append(f"{parameter}={parameter}[index]")
+    return f"grpc_types.{compound_parameter_type}(" + ", ".join(parameters) + ")"
