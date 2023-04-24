@@ -139,6 +139,8 @@ class _PersistedChannelAlternateConstructor(PersistedChannel):
 
     This is a private API used to instantiate a PersistedChannel with an existing interpreter.
     """
+    # Added an empty __slots__ to avoid layout error while running tests.
+    __slots__ = []
 
     def __init__(self, name, interpreter):
         """

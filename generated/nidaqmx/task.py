@@ -1378,6 +1378,8 @@ class _TaskAlternateConstructor(Task):
 
     This is a private API used to instantiate a Task with an existing task handle and interpreter.
     """
+    # Added an empty __slots__ to avoid layout error while running tests.
+    __slots__ = []
 
     def __init__(self, task_handle, interpreter):
         """

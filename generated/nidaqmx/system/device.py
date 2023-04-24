@@ -2622,6 +2622,8 @@ class _DeviceAlternateConstructor(Device):
 
     This is a private API used to instantiate a Device with an existing interpreter.
     """
+    # Added an empty __slots__ to avoid layout error while running tests.
+    __slots__ = []
 
     def __init__(self, name, interpreter):
         """

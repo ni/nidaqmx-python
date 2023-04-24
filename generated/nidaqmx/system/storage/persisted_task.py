@@ -164,6 +164,8 @@ class _PersistedTaskAlternateConstructor(PersistedTask):
 
     This is a private API used to instantiate a PersistedTask with an existing interpreter.
     """
+    # Added an empty __slots__ to avoid layout error while running tests.
+    __slots__ = []
 
     def __init__(self, name, interpreter):
         """
