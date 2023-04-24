@@ -9,6 +9,10 @@ script_info = {
             "templateFile": "_library_interpreter.py.mako",
         },
         {
+            "relativeOutputPath": "_grpc_interpreter.py",
+            "templateFile": "_grpc_interpreter.py.mako",
+        },
+        {
             "relativeOutputPath": "_task_modules\\channels\\channel.py",
             "templateFile": "_task_modules\\channels\\channel.py.mako",
         },
