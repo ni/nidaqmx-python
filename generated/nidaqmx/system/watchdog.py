@@ -107,14 +107,14 @@ class WatchdogTask:
 
 
         val = self._interpreter.get_watchdog_attribute_int32(
-                self._handle, 8613)
+                self._handle, "", 8613)
         return Edge(val)
 
     @expir_trig_dig_edge_edge.setter
     def expir_trig_dig_edge_edge(self, val):
         val = val.value
         self._interpreter.set_watchdog_attribute_int32(
-                self._handle, 8613, val)
+                self._handle, "", 8613, val)
 
     @expir_trig_dig_edge_edge.deleter
     def expir_trig_dig_edge_edge(self):
@@ -138,13 +138,13 @@ class WatchdogTask:
 
 
         val = self._interpreter.get_watchdog_attribute_string(
-                self._handle, 8612)
+                self._handle, "", 8612)
         return val
 
     @expir_trig_dig_edge_src.setter
     def expir_trig_dig_edge_src(self, val):
         self._interpreter.set_watchdog_attribute_string(
-                self._handle, 8612, val)
+                self._handle, "", 8612, val)
 
     @expir_trig_dig_edge_src.deleter
     def expir_trig_dig_edge_src(self):
@@ -170,13 +170,13 @@ class WatchdogTask:
 
 
         val = self._interpreter.get_watchdog_attribute_bool(
-                self._handle, 12381)
+                self._handle, "", 12381)
         return val
 
     @expir_trig_trig_on_network_conn_loss.setter
     def expir_trig_trig_on_network_conn_loss(self, val):
         self._interpreter.set_watchdog_attribute_bool(
-                self._handle, 12381, val)
+                self._handle, "", 12381, val)
 
     @expir_trig_trig_on_network_conn_loss.deleter
     def expir_trig_trig_on_network_conn_loss(self):
@@ -201,14 +201,14 @@ class WatchdogTask:
 
 
         val = self._interpreter.get_watchdog_attribute_int32(
-                self._handle, 8611)
+                self._handle, "", 8611)
         return TriggerType(val)
 
     @expir_trig_trig_type.setter
     def expir_trig_trig_type(self, val):
         val = val.value
         self._interpreter.set_watchdog_attribute_int32(
-                self._handle, 8611, val)
+                self._handle, "", 8611, val)
 
     @expir_trig_trig_type.deleter
     def expir_trig_trig_type(self):
@@ -232,7 +232,7 @@ class WatchdogTask:
 
 
         val = self._interpreter.get_watchdog_attribute_bool(
-                self._handle, 8616)
+                self._handle, "", 8616)
         return val
 
     @property
@@ -246,13 +246,13 @@ class WatchdogTask:
 
 
         val = self._interpreter.get_watchdog_attribute_double(
-                self._handle, 8617)
+                self._handle, "", 8617)
         return val
 
     @timeout.setter
     def timeout(self, val):
         self._interpreter.set_watchdog_attribute_double(
-                self._handle, 8617, val)
+                self._handle, "", 8617, val)
 
     @timeout.deleter
     def timeout(self):

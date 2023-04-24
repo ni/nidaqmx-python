@@ -16,6 +16,8 @@
     function_call_args = []
     for handle_parameter in attribute.handle_parameters:
         function_call_args.append(handle_parameter.accessor)
+    if attribute.python_class_name == "Watchdog":
+        function_call_args.append("\"\"")
     function_call_args.append(str(attribute.id))
 %>
 \
