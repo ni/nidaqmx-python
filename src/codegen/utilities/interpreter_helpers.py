@@ -79,8 +79,15 @@ def generate_interpreter_function_call_args(function_metadata):
         else:
             if param.has_explicit_buffer_size:
                 function_call_args.append(param.parameter_name)
-                if param.size.mechanism == "ivi-dance":
+                if (
+                    is_custom_read_write_function(function_metadata)
+                    and param.size.mechanism == "passed-in"
+                ):
+                    function_call_args.append(f"{param.parameter_name}.size")
+                elif param.size.mechanism == "ivi-dance":
                     function_call_args.append("temp_size")
+                size_value = param.size.value
+                size_param_index = len(function_call_args) - 1
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
 
@@ -130,7 +137,14 @@ def get_instantiation_lines_for_output(func):
 
 def get_interpreter_params(func):
     """Gets interpreter parameters for the function."""
-    return (p for p in func.interpreter_parameters if p.direction == "in")
+    interpreter_parameters = []
+    for param in func.interpreter_parameters:
+        if param.direction == "in":
+            interpreter_parameters.append(param)
+        elif is_custom_read_write_function(func) and param.has_explicit_buffer_size:
+            if param.size.mechanism == "passed-in":
+                interpreter_parameters.append(param)
+    return interpreter_parameters
 
 
 def get_skippable_params_for_interpreter_func(func):
