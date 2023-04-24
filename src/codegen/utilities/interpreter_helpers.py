@@ -3,8 +3,8 @@ import re
 from copy import deepcopy
 
 from codegen.functions.function import Function
-from codegen.utilities.helpers import camel_to_snake_case
 from codegen.utilities.function_helpers import to_param_argtype
+from codegen.utilities.helpers import camel_to_snake_case
 
 # This custom regex list doesn't split the string before the number.
 INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES = [
@@ -99,8 +99,9 @@ def generate_interpreter_function_call_args(function_metadata):
                     function_call_args.append("temp_size")
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
-                
+
     return function_call_args
+
 
 def get_interpreter_parameter_signature(is_python_factory, params):
     """Gets parameter signature for function defintion."""
@@ -140,25 +141,33 @@ def get_instantiation_lines_for_output(func):
             instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
     return instantiation_lines
 
+
 def get_instantiation_lines_for_varargs(func):
+    """Gets instantiation lines for functions with variable arguments."""
     instantiation_lines = []
     if func.function_name in CDLL_EXEC_STYLE_VARARGS_FUNCTIONS:
         for param in func.output_parameters:
             instantiation_lines.append(f"{param.parameter_name}_element = {param.ctypes_data_type}")
-            instantiation_lines.append(f"{param.parameter_name}.append({param.parameter_name}_element)")
+            instantiation_lines.append(
+                f"{param.parameter_name}.append({param.parameter_name}_element)"
+            )
     return instantiation_lines
 
+
 def get_argument_definition_lines_for_varargs(varargs_params):
-    argument_defininion_lines =[]
+    argument_defininion_lines = []
     for param in varargs_params:
         argtype = to_param_argtype(param)
         if param.direction == "in":
             argument_defininion_lines.append(f"args.append({param.parameter_name}[index])")
         else:
-            argument_defininion_lines.append(f"args.append(ctypes.byref({param.parameter_name}_element))")
+            argument_defininion_lines.append(
+                f"args.append(ctypes.byref({param.parameter_name}_element))"
+            )
         argument_defininion_lines.append(f"argtypes.append({argtype})")
         argument_defininion_lines.append("")
     return argument_defininion_lines
+
 
 def get_varargs_parameters(func):
     varargs_parameters = []
@@ -166,6 +175,7 @@ def get_varargs_parameters(func):
         varargs_parameters = func.parameters
         del varargs_parameters[0]
     return varargs_parameters
+
 
 def get_interpreter_params(func):
     """Gets interpreter parameters for the function."""
