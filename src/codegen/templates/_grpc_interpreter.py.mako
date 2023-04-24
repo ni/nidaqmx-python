@@ -1,5 +1,5 @@
 <%
-    from codegen.utilities.interpreter_helpers import get_interpreter_functions, get_grpc_interpreter_call_params, get_interpreter_params, get_interpreter_parameter_signature, get_output_params, get_reponse_parameters, get_compound_parameter, create_compound_parameter_request, get_input_arguments_for_compound_params
+    from codegen.utilities.interpreter_helpers import get_interpreter_functions, get_grpc_interpreter_call_params, get_interpreter_params, get_interpreter_parameter_signature, get_output_params, get_response_parameters, get_compound_parameter, create_compound_parameter_request, get_input_arguments_for_compound_params
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
     from codegen.utilities.helpers import snake_to_pascal
@@ -49,18 +49,18 @@ class GrpcStubInterpreter(BaseInterpreter):
     %endif
     %if (compound_parameter is not None):
         ${compound_parameter.parameter_name} = []
-        for index in range(len(${get_input_arguments_for_compound_params(func.function_name)[0]})):
-            ${compound_parameter.parameter_name}.append(${create_compound_parameter_request(func.function_name)})
+        for index in range(len(${get_input_arguments_for_compound_params(func)[0]})):
+            ${compound_parameter.parameter_name}.append(${create_compound_parameter_request(func)})
     %endif
         response = self._invoke(
             self._client.${snake_to_pascal(func.function_name)},
-        %if (len(func.function_name) + len(get_grpc_interpreter_call_params(func.function_name, sorted_params))) > 68:
+        %if (len(func.function_name) + len(get_grpc_interpreter_call_params(func, sorted_params))) > 68:
             grpc_types.${snake_to_pascal(func.function_name)}Request(
-            ${get_grpc_interpreter_call_params(func.function_name, sorted_params) + ')' | wrap(12, 12)})
+                ${get_grpc_interpreter_call_params(func, sorted_params) + ')' | wrap(16, 16)})
         %else:
-            grpc_types.${snake_to_pascal(func.function_name)}Request(${get_grpc_interpreter_call_params(func.function_name, sorted_params)+ ')'})
+            grpc_types.${snake_to_pascal(func.function_name)}Request(${get_grpc_interpreter_call_params(func, sorted_params)+ ')'})
         %endif
         %if len(output_parameters)  > 0:
-        return ${get_reponse_parameters(output_parameters)}
+        return ${get_response_parameters(output_parameters)}
         %endif
 % endfor

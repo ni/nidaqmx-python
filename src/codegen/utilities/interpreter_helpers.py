@@ -35,30 +35,6 @@ INTERPRETER_IGNORED_FUNCTIONS = [
 ]
 
 
-FUNCTIONS_WITH_COMPOUND_PARAMETERS = {
-    "get_analog_power_up_states": {
-        "compound_parameter_type": "AnalogPowerUpChannelAndType",
-        "parameters": ["channel_name", "channel_type"],
-    },
-    "create_watchdog_timer_task": {
-        "compound_parameter_type": "WatchdogExpChannelsAndState",
-        "parameters": ["lines", "exp_state"],
-    },
-    "set_analog_power_up_states": {
-        "compound_parameter_type": "AnalogPowerUpChannelsAndState",
-        "parameters": ["channel_names", "state", "channel_type"],
-    },
-    "set_digital_power_up_states": {
-        "compound_parameter_type": "DigitalPowerUpChannelsAndState",
-        "parameters": ["channel_names", "state"],
-    },
-    "set_digital_pull_up_pull_down_states": {
-        "compound_parameter_type": "DigitalPowerUpChannelsAndState",
-        "parameters": ["channel_names", "state"],
-    },
-}
-
-
 def get_interpreter_functions(metadata):
     """Converts the scrapigen metadata into a list of functions."""
     all_functions = deepcopy(metadata["functions"])
@@ -125,15 +101,12 @@ def get_interpreter_params(func):
     return (p for p in func.base_parameters if p.direction == "in")
 
 
-def get_grpc_interpreter_call_params(function_name, params):
+def get_grpc_interpreter_call_params(func, params):
     """Gets the interpreter parameters for grpc request."""
-    compound_params = FUNCTIONS_WITH_COMPOUND_PARAMETERS.get(function_name, None)
-    merged_params = []
-    if compound_params is not None:
-        merged_params = compound_params["parameters"]
+    compound_params = get_input_arguments_for_compound_params(func)
     grpc_params = []
     for param in params:
-        if param.parameter_name not in merged_params:
+        if param.parameter_name not in compound_params:
             if param.is_enum:
                 grpc_params.append(f"{param.parameter_name}_raw={param.parameter_name}")
             else:
@@ -235,25 +208,34 @@ def get_compound_parameter(params):
     return next((x for x in params if x.is_compound_type), None)
 
 
-def get_input_arguments_for_compound_params(function_name):
-    """Returs a list of input parameter for creating the compound parameter."""
-    return FUNCTIONS_WITH_COMPOUND_PARAMETERS[function_name]["parameters"]
+def get_input_arguments_for_compound_params(func):
+    """Returns a list of input parameter for creating the compound parameter."""
+    compound_params = []
+    if any(x for x in func.base_parameters if x.is_compound_type):
+        for parameter in func.base_parameters:
+            if parameter.direction == "in" and parameter.repeating_argument:
+                compound_params.append(parameter.parameter_name)
+    return compound_params
 
 
-def create_compound_parameter_request(function_name):
+def create_compound_parameter_request(func):
     """Gets the input parameters for createing the compound type parameter."""
     parameters = []
-    compound_parameter_type = FUNCTIONS_WITH_COMPOUND_PARAMETERS[function_name][
-        "compound_parameter_type"
-    ]
-    for parameter in FUNCTIONS_WITH_COMPOUND_PARAMETERS[function_name]["parameters"]:
+    compound_parameter_type = ""
+    for parameter in func.base_parameters:
+        if parameter.direction == "in" and parameter.repeated_var_args:
+            compound_parameter_type = parameter.grpc_type.replace("repeated ", "")
+            break
+
+    for parameter in get_input_arguments_for_compound_params(func):
         parameters.append(f"{parameter}={parameter}[index]")
     return f"grpc_types.{compound_parameter_type}(" + ", ".join(parameters) + ")"
 
 
-def get_reponse_parameters(output_parameters: list):
+def get_response_parameters(output_parameters: list):
     """Gets the list of parameters in grpc response."""
     response_parameters = []
     for parameter in output_parameters:
-        response_parameters.append(f"response.{parameter.parameter_name}")
-    return ",".join(response_parameters)
+        if not parameter.repeating_argument:
+            response_parameters.append(f"response.{parameter.parameter_name}")
+    return ", ".join(response_parameters)
