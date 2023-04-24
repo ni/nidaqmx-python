@@ -1,7 +1,6 @@
 <%def name="script_property_setter(attribute)">\
 <%
         from codegen.utilities.text_wrappers import wrap, docstring_wrap
-        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name
     %>\
     @${attribute.name}.setter
     def ${attribute.name}(self, val):
@@ -23,20 +22,47 @@
         val = ${attribute.ctypes_data_type}(val)
     %endif
 \
-## Script interpreter call.
 <%
-        generic_attribute_func = get_generic_attribute_function_name(attribute)
+        argtypes = []
+        for handle_parameter in attribute.handle_parameters:
+            if handle_parameter.ctypes_data_type == 'ctypes.c_char_p':
+                argtypes.append('ctypes_byte_str')
+            else:
+                argtypes.append(handle_parameter.ctypes_data_type)
+        if (attribute.is_list and attribute.ctypes_data_type != 'ctypes.c_char_p' and
+                attribute.bitfield_enum is None):
+            argtypes.append("wrapped_ndpointer(dtype={}, flags=('C','W'))"
+                            .format(attribute.ctypes_data_type))
+        elif attribute.ctypes_data_type == 'ctypes.c_char_p':
+            argtypes.append('ctypes_byte_str')
+        else:
+            argtypes.append(attribute.ctypes_data_type)
+        if attribute.has_explicit_write_buffer_size:
+            argtypes.append('ctypes.c_uint')
+    %>\
+    ## When the length of the function name is too long, it will be wrapped to the next line
+    %if len(attribute.c_function_name) < 33:
+        cfunc = lib_importer.${attribute.get_lib_importer_type()}.DAQmxSet${attribute.c_function_name}
+    %else:
+        cfunc = (lib_importer.${attribute.get_lib_importer_type()}.
+                 DAQmxSet${attribute.c_function_name})
+    %endif
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ${', '.join(argtypes) | wrap(initial_indent=24)}]
+\
+## Script function call.
+<%
         function_call_args = []
         for handle_parameter in attribute.handle_parameters:
             function_call_args.append(handle_parameter.accessor)
-        if attribute.python_class_name == "Watchdog":
-            function_call_args.append("\"\"")
-        function_call_args.append(str(attribute.id))
         function_call_args.append('val')
-
         if attribute.has_explicit_write_buffer_size:
             function_call_args.append('len(val)')
     %>\
-        self._interpreter.set_${generic_attribute_func}(
-                ${', '.join(function_call_args) | wrap(initial_indent=12)})
+        error_code = cfunc(
+            ${', '.join(function_call_args) | wrap(initial_indent=12)})
+        check_for_error(error_code)
 </%def>

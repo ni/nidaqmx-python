@@ -92,8 +92,15 @@ class PhysicalChannel:
 
     @ai_power_control_enable.setter
     def ai_power_control_enable(self, val):
-        self._interpreter.set_physical_chan_attribute_bool(
-                self._name, 12653, val)
+        cfunc = lib_importer.windll.DAQmxSetPhysicalChanAIPowerControlEnable
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, c_bool32]
+        error_code = cfunc(
+            self._name, val)
+        check_for_error(error_code)
 
     @ai_power_control_enable.deleter
     def ai_power_control_enable(self):
@@ -123,8 +130,15 @@ class PhysicalChannel:
     @ai_power_control_type.setter
     def ai_power_control_type(self, val):
         val = val.value
-        self._interpreter.set_physical_chan_attribute_int32(
-                self._name, 12654, val)
+        cfunc = lib_importer.windll.DAQmxSetPhysicalChanAIPowerControlType
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_int]
+        error_code = cfunc(
+            self._name, val)
+        check_for_error(error_code)
 
     @ai_power_control_type.deleter
     def ai_power_control_type(self):
@@ -153,8 +167,16 @@ class PhysicalChannel:
 
     @ai_power_control_voltage.setter
     def ai_power_control_voltage(self, val):
-        self._interpreter.set_physical_chan_attribute_double(
-                self._name, 12652, val)
+        cfunc = (lib_importer.windll.
+                 DAQmxSetPhysicalChanAIPowerControlVoltage)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_double]
+        error_code = cfunc(
+            self._name, val)
+        check_for_error(error_code)
 
     @ai_power_control_voltage.deleter
     def ai_power_control_voltage(self):
@@ -262,8 +284,16 @@ class PhysicalChannel:
 
     @ao_manual_control_enable.setter
     def ao_manual_control_enable(self, val):
-        self._interpreter.set_physical_chan_attribute_bool(
-                self._name, 10782, val)
+        cfunc = (lib_importer.windll.
+                 DAQmxSetPhysicalChanAOManualControlEnable)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, c_bool32]
+        error_code = cfunc(
+            self._name, val)
+        check_for_error(error_code)
 
     @ao_manual_control_enable.deleter
     def ao_manual_control_enable(self):
@@ -330,8 +360,15 @@ class PhysicalChannel:
 
     @ao_power_amp_channel_enable.setter
     def ao_power_amp_channel_enable(self, val):
-        self._interpreter.set_physical_chan_attribute_bool(
-                self._name, 12386, val)
+        cfunc = lib_importer.windll.DAQmxSetAOPowerAmpChannelEnable
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, c_bool32]
+        error_code = cfunc(
+            self._name, val)
+        check_for_error(error_code)
 
     @ao_power_amp_channel_enable.deleter
     def ao_power_amp_channel_enable(self):
