@@ -195,9 +195,9 @@ def has_parameter_with_ivi_dance_size_mechanism(func):
     return parameter_with_size_buffer is not None
 
 
-def get_output_params(func):
-    """Gets input parameters for the function."""
-    return (p for p in func.base_parameters if p.direction == "out")
+def get_output_params(func)-> list:
+    """Gets ouput parameters for the function."""
+    return list(p for p in func.base_parameters if p.direction == "out")
 
 
 def get_return_values(func):
@@ -249,3 +249,11 @@ def create_compound_parameter_request(function_name):
     for parameter in FUNCTIONS_WITH_COMPOUND_PARAMETERS[function_name]["parameters"]:
         parameters.append(f"{parameter}={parameter}[index]")
     return f"grpc_types.{compound_parameter_type}(" + ", ".join(parameters) + ")"
+
+
+def get_reponse_parameters(output_parameters: list):
+    """Gets the list of parameters in grpc response."""
+    response_parameters = []
+    for parameter in output_parameters:
+        response_parameters.append(f"response.{parameter.parameter_name}")
+    return ",".join(response_parameters)
