@@ -34,9 +34,6 @@ EXCLUDED_FUNCTIONS = [
     "SetDigitalPullUpPullDownStates",
 ]
 
-CHANGE_FILLMODE_TYPE_FUNCTIONS = ["read_analog_f64"]
-
-
 def get_functions(metadata, class_name=""):
     """Converts the scrapigen metadata into a list of functions."""
     all_functions = deepcopy(metadata["functions"])
@@ -155,14 +152,7 @@ def get_arguments_type(functions_metadata):
 
     size_param_info = tuple()
     for param in functions_metadata.parameters:
-        # The c type for fill mode is taken as "c_bool32" in c call for some read functions.
-        if (
-            param.parameter_name == "fill_mode"
-            and functions_metadata.function_name in CHANGE_FILLMODE_TYPE_FUNCTIONS
-        ):
-            argtypes.append("c_bool32")
-        else:
-            argtypes.append(to_param_argtype(param))
+        argtypes.append(to_param_argtype(param))
 
         if param.has_explicit_buffer_size:
             # Removing previously added argument type of the size parameter if the same size
