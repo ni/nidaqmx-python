@@ -195,7 +195,7 @@ def has_parameter_with_ivi_dance_size_mechanism(func):
     return parameter_with_size_buffer is not None
 
 
-def get_output_params(func)-> list:
+def get_output_params(func) -> list:
     """Gets ouput parameters for the function."""
     return list(p for p in func.base_parameters if p.direction == "out")
 
