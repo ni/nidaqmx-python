@@ -161,7 +161,7 @@ ${function_template.script_function(function_object)}
     @staticmethod
     def add_network_device(
             ip_address, device_name="", attempt_reservation=False,
-            timeout=10.0):
+            timeout=10.0, *, grpc_options=None, interpreter=None):
         """
         Adds a Network cDAQ device to the system and, if specified,
         attempts to reserve it.
@@ -185,50 +185,20 @@ ${function_template.script_function(function_object)}
             Specifies the object that represents the device this
             operation applied to.
         """
-        cfunc = lib_importer.windll.DAQmxAddNetworkDevice
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, c_bool32,
-                        ctypes.c_double, ctypes.c_char_p, ctypes.c_uint]
+        interpreter = utils._select_interpreter(grpc_options, interpreter)
 
-        temp_size = 0
-        while True:
-            device_name_out = ctypes.create_string_buffer(temp_size)
+        device_name_out = interpreter.add_network_device(
+            ip_address, device_name, attempt_reservation, timeout)
 
-            size_or_code = cfunc(
-                ip_address, device_name, attempt_reservation, timeout,
-                device_name_out, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return Device(device_name_out.value.decode('ascii'))
+        return _DeviceAlternateConstructor(device_name_out, interpreter)
 
     def delete_network_device(self):
         """
         Deletes a Network DAQ device previously added to the host. If
         the device is reserved, it is unreserved before it is removed.
         """
-        cfunc = lib_importer.windll.DAQmxDeleteNetworkDevice
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str]
 
-        error_code = cfunc(
-            self._name)
-        check_for_error(error_code)
+        self._interpreter.delete_network_device(self._name)
 
     def reserve_network_device(self, override_reservation=None):
         """
@@ -242,32 +212,16 @@ ${function_template.script_function(function_object)}
                 by this reservation. By default, this parameter is set
                 to false.
         """
-        cfunc = lib_importer.windll.DAQmxReserveNetworkDevice
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, c_bool32]
 
-        error_code = cfunc(
-            self._name, override_reservation)
-        check_for_error(error_code)
+        self._interpreter.reserve_network_device(self._name, override_reservation)
 
     def unreserve_network_device(self):
         """
         Unreserves or releases a Network DAQ device previously reserved
         by the host.
         """
-        cfunc = lib_importer.windll.DAQmxUnreserveNetworkDevice
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str]
 
-        error_code = cfunc(
-            self._name)
-        check_for_error(error_code)
+        self._interpreter.unreserve_network_device(self._name)
 
     # endregion
 

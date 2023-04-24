@@ -63,7 +63,7 @@ ${property_template.script_property(attribute)}\
     @staticmethod
     def calculate_reverse_poly_coeff(
             forward_coeffs, min_val_x=-5.0, max_val_x=5.0,
-            num_points_to_compute=1000, reverse_poly_order=-1):
+            num_points_to_compute=1000, reverse_poly_order=-1, *, grpc_options=None, interpreter=None):
         """
         Computes a set of coefficients for a polynomial that
         approximates the inverse of the polynomial with the coefficients
@@ -105,36 +105,17 @@ ${property_template.script_property(attribute)}\
         """
         forward_coeffs = numpy.float64(forward_coeffs)
 
-        if reverse_poly_order == -1:
-            size = len(forward_coeffs)
-        else:
-            size = reverse_poly_order + 1
+        interpreter = utils._select_interpreter(grpc_options, interpreter)
 
-        reverse_coeffs = numpy.zeros(size, dtype=numpy.float64)
+        reverse_coeffs = interpreter.calculate_reverse_poly_coeff(
+            forward_coeffs, min_val_x, max_val_x, num_points_to_compute, reverse_poly_order)
 
-        cfunc = lib_importer.windll.DAQmxCalculateReversePolyCoeff
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        numpy.ctypeslib.ndpointer(
-                            dtype=numpy.float64, flags=('C', 'W')),
-                        ctypes.c_uint, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int,
-                        numpy.ctypeslib.ndpointer(
-                            dtype=numpy.float64, flags=('C', 'W'))]
-
-        error_code = cfunc(
-            forward_coeffs, len(forward_coeffs), min_val_x, max_val_x,
-            num_points_to_compute, reverse_poly_order, reverse_coeffs)
-        check_for_error(error_code)
-
-        return reverse_coeffs.tolist()
+        return reverse_coeffs
 
     @staticmethod
     def create_lin_scale(
             scale_name, slope, y_intercept=0.0,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None, interpreter=None):
         """
         Creates a custom scale that uses the equation y=mx+b, where x is
         a pre-scaled value, and y is a scaled value. The equation is
@@ -156,27 +137,19 @@ ${property_template.script_property(attribute)}\
             
             Indicates an object that represents the created custom scale.
         """
-        scale = Scale(scale_name)
+        interpreter = utils._select_interpreter(grpc_options, interpreter)
 
-        cfunc = lib_importer.windll.DAQmxCreateLinScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes_byte_str]
+        scale = _ScaleAlternateConstructor(scale_name, interpreter)
 
-        error_code = cfunc(
-            scale_name, slope, y_intercept, pre_scaled_units.value,
-            scaled_units)
-        check_for_error(error_code)
+        scale._interpreter.create_lin_scale(
+            scale_name, slope, y_intercept, pre_scaled_units.value, scaled_units)
 
         return scale
 
     @staticmethod
     def create_map_scale(
             scale_name, prescaled_min, prescaled_max, scaled_min, scaled_max,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None, interpreter=None):
         """
         Creates a custom scale that scales values proportionally from a
         range of pre-scaled values to a range of scaled values.
@@ -209,28 +182,20 @@ ${property_template.script_property(attribute)}\
             
             Indicates an object that represents the created custom scale.
         """
-        scale = Scale(scale_name)
+        interpreter = utils._select_interpreter(grpc_options, interpreter)
 
-        cfunc = lib_importer.windll.DAQmxCreateMapScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
-                        ctypes_byte_str]
+        scale = _ScaleAlternateConstructor(scale_name, interpreter)
 
-        error_code = cfunc(
-            scale_name, prescaled_min, prescaled_max, scaled_min, scaled_max,
+        scale._interpreter.create_map_scale(
+            scale_name, prescaled_min, prescaled_max, scaled_min, scaled_max, 
             pre_scaled_units.value, scaled_units)
-        check_for_error(error_code)
 
         return scale
 
     @staticmethod
     def create_polynomial_scale(
             scale_name, forward_coeffs, reverse_coeffs,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None, interpreter=None):
         """
         Creates a custom scale that uses an nth order polynomial
         equation. NI-DAQmx requires both a polynomial to convert pre-
@@ -259,8 +224,6 @@ ${property_template.script_property(attribute)}\
             
             Indicates an object that represents the created custom scale.
         """
-        scale = Scale(scale_name)
-
         if forward_coeffs is None:
             forward_coeffs = []
 
@@ -270,30 +233,19 @@ ${property_template.script_property(attribute)}\
         forward_coeffs = numpy.float64(forward_coeffs)
         reverse_coeffs = numpy.float64(reverse_coeffs)
 
-        cfunc = lib_importer.windll.DAQmxCreatePolynomialScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                                          flags=('C', 'W')),
-                        ctypes.c_uint,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                                          flags=('C', 'W')),
-                        ctypes.c_uint, ctypes.c_int, ctypes_byte_str]
+        interpreter = utils._select_interpreter(grpc_options, interpreter)
 
-        error_code = cfunc(
-            scale_name, forward_coeffs, len(forward_coeffs), reverse_coeffs,
-            len(reverse_coeffs), pre_scaled_units.value, scaled_units)
-        check_for_error(error_code)
+        scale = _ScaleAlternateConstructor(scale_name, interpreter)
+
+        scale._interpreter.create_polynomial_scale(
+            scale_name, forward_coeffs, reverse_coeffs, pre_scaled_units.value, scaled_units)
 
         return scale
 
     @staticmethod
     def create_table_scale(
             scale_name, prescaled_vals, scaled_vals,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None, interpreter=None):
         """
         Creates a custom scale that maps an list of pre-scaled values to
         an list of corresponding scaled values. NI-DAQmx applies linear
@@ -319,8 +271,6 @@ ${property_template.script_property(attribute)}\
             
             Indicates an object that represents the created custom scale.
         """
-        scale = Scale(scale_name)
-
         if prescaled_vals is None:
             prescaled_vals = []
 
@@ -329,24 +279,13 @@ ${property_template.script_property(attribute)}\
 
         prescaled_vals = numpy.float64(prescaled_vals)
         scaled_vals = numpy.float64(scaled_vals)
+        
+        interpreter = utils._select_interpreter(grpc_options, interpreter)
 
-        cfunc = lib_importer.windll.DAQmxCreateTableScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                                          flags=('C', 'W')),
-                        ctypes.c_uint,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                                          flags=('C', 'W')),
-                        ctypes.c_uint, ctypes.c_int, ctypes_byte_str]
+        scale = _ScaleAlternateConstructor(scale_name, interpreter)
 
-        error_code = cfunc(
-            scale_name, prescaled_vals, len(prescaled_vals), scaled_vals,
-            len(scaled_vals), pre_scaled_units.value, scaled_units)
-        check_for_error(error_code)
+        scale._interpreter.create_table_scale(
+            scale_name, prescaled_vals, scaled_vals, pre_scaled_units.value, scaled_units)
 
         return scale
 
@@ -420,4 +359,4 @@ class _ScaleAlternateConstructor(Scale):
 
         # Use meta-programming to change the type of this object to Scale,
         # so the user isn't confused when doing introspection.
-        self.__class__ = Scale
+        #self.__class__ = Scale
