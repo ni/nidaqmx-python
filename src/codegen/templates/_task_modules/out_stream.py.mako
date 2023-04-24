@@ -168,5 +168,5 @@ ${property_template.script_property(attribute)}\
                 number_of_channels * channels_to_write.ao_resolution / 8))
 
         return self._interpreter.write_raw(
-            self._handle, number_of_samples_per_channel, numpy_array, 
-            self.auto_start, self.timeout)
+            self._handle, number_of_samples_per_channel, 
+            self.auto_start, self.timeout, numpy_array)

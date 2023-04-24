@@ -317,8 +317,8 @@ ${property_template.script_property(attribute)}\
                 number_of_channels * channels_to_read.ai_raw_samp_size / 8))
 
         samples_read, _ = self._interpreter.read_raw(
-            self._handle, numpy_array, number_of_samples_per_channel,
-            self.timeout)
+            self._handle, number_of_samples_per_channel,
+            self.timeout, numpy_array)
 
         return samples_read
 
