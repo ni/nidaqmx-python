@@ -237,8 +237,9 @@ def get_return_values(func):
     """Gets the values to add to return statement of the function."""
     return_values = []
     for param in get_output_parameters(func):
-    for param in get_output_parameters(func):
-        if param.ctypes_data_type == "ctypes.c_char_p":
+        if func.function_name in CDLL_EXEC_STYLE_VARARGS_FUNCTIONS:
+            return_values.append(param.parameter_name)
+        elif param.ctypes_data_type == "ctypes.c_char_p":
             return_values.append(f"{param.parameter_name}.value.decode('ascii')")
         elif param.is_list:
             return_values.append(f"{param.parameter_name}.tolist()")
