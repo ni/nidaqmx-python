@@ -42,16 +42,8 @@ class Timing:
 
     @ai_conv_active_edge.deleter
     def ai_conv_active_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetAIConvActiveEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 6227)
 
     @property
     def ai_conv_dig_fltr_enable(self):
@@ -72,16 +64,8 @@ class Timing:
 
     @ai_conv_dig_fltr_enable.deleter
     def ai_conv_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAIConvDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 11996)
 
     @property
     def ai_conv_dig_fltr_min_pulse_width(self):
@@ -102,16 +86,8 @@ class Timing:
 
     @ai_conv_dig_fltr_min_pulse_width.deleter
     def ai_conv_dig_fltr_min_pulse_width(self):
-        cfunc = lib_importer.windll.DAQmxResetAIConvDigFltrMinPulseWidth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 11997)
 
     @property
     def ai_conv_dig_fltr_timebase_rate(self):
@@ -133,16 +109,8 @@ class Timing:
 
     @ai_conv_dig_fltr_timebase_rate.deleter
     def ai_conv_dig_fltr_timebase_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetAIConvDigFltrTimebaseRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 11999)
 
     @property
     def ai_conv_dig_fltr_timebase_src(self):
@@ -163,16 +131,8 @@ class Timing:
 
     @ai_conv_dig_fltr_timebase_src.deleter
     def ai_conv_dig_fltr_timebase_src(self):
-        cfunc = lib_importer.windll.DAQmxResetAIConvDigFltrTimebaseSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 11998)
 
     @property
     def ai_conv_dig_sync_enable(self):
@@ -194,16 +154,8 @@ class Timing:
 
     @ai_conv_dig_sync_enable.deleter
     def ai_conv_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAIConvDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 12000)
 
     @property
     def ai_conv_max_rate(self):
@@ -237,16 +189,8 @@ class Timing:
 
     @ai_conv_rate.deleter
     def ai_conv_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetAIConvRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 6216)
 
     @property
     def ai_conv_src(self):
@@ -267,16 +211,8 @@ class Timing:
 
     @ai_conv_src.deleter
     def ai_conv_src(self):
-        cfunc = lib_importer.windll.DAQmxResetAIConvSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 5378)
 
     @property
     def ai_conv_timebase_div(self):
@@ -297,16 +233,8 @@ class Timing:
 
     @ai_conv_timebase_div.deleter
     def ai_conv_timebase_div(self):
-        cfunc = lib_importer.windll.DAQmxResetAIConvTimebaseDiv
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 4917)
 
     @property
     def ai_conv_timebase_src(self):
@@ -329,16 +257,8 @@ class Timing:
 
     @ai_conv_timebase_src.deleter
     def ai_conv_timebase_src(self):
-        cfunc = lib_importer.windll.DAQmxResetAIConvTimebaseSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 4921)
 
     @property
     def change_detect_di_falling_edge_physical_chans(self):
@@ -363,17 +283,8 @@ class Timing:
 
     @change_detect_di_falling_edge_physical_chans.deleter
     def change_detect_di_falling_edge_physical_chans(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetChangeDetectDIFallingEdgePhysicalChans)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 8598)
 
     @property
     def change_detect_di_rising_edge_physical_chans(self):
@@ -398,17 +309,8 @@ class Timing:
 
     @change_detect_di_rising_edge_physical_chans.deleter
     def change_detect_di_rising_edge_physical_chans(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetChangeDetectDIRisingEdgePhysicalChans)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 8597)
 
     @property
     def change_detect_di_tristate(self):
@@ -439,16 +341,8 @@ class Timing:
 
     @change_detect_di_tristate.deleter
     def change_detect_di_tristate(self):
-        cfunc = lib_importer.windll.DAQmxResetChangeDetectDITristate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 12026)
 
     @property
     def delay_from_samp_clk_delay(self):
@@ -471,16 +365,8 @@ class Timing:
 
     @delay_from_samp_clk_delay.deleter
     def delay_from_samp_clk_delay(self):
-        cfunc = lib_importer.windll.DAQmxResetDelayFromSampClkDelay
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 4887)
 
     @property
     def delay_from_samp_clk_delay_units(self):
@@ -502,16 +388,8 @@ class Timing:
 
     @delay_from_samp_clk_delay_units.deleter
     def delay_from_samp_clk_delay_units(self):
-        cfunc = lib_importer.windll.DAQmxResetDelayFromSampClkDelayUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 4868)
 
     @property
     def first_samp_timestamp_enable(self):
@@ -531,16 +409,8 @@ class Timing:
 
     @first_samp_timestamp_enable.deleter
     def first_samp_timestamp_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetFirstSampTimestampEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 12601)
 
     @property
     def first_samp_timestamp_timescale(self):
@@ -562,16 +432,8 @@ class Timing:
 
     @first_samp_timestamp_timescale.deleter
     def first_samp_timestamp_timescale(self):
-        cfunc = lib_importer.windll.DAQmxResetFirstSampTimestampTimescale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 12603)
 
     @property
     def hshk_delay_after_xfer(self):
@@ -592,16 +454,8 @@ class Timing:
 
     @hshk_delay_after_xfer.deleter
     def hshk_delay_after_xfer(self):
-        cfunc = lib_importer.windll.DAQmxResetHshkDelayAfterXfer
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 8898)
 
     @property
     def hshk_sample_input_data_when(self):
@@ -624,16 +478,8 @@ class Timing:
 
     @hshk_sample_input_data_when.deleter
     def hshk_sample_input_data_when(self):
-        cfunc = lib_importer.windll.DAQmxResetHshkSampleInputDataWhen
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 8900)
 
     @property
     def hshk_start_cond(self):
@@ -656,16 +502,8 @@ class Timing:
 
     @hshk_start_cond.deleter
     def hshk_start_cond(self):
-        cfunc = lib_importer.windll.DAQmxResetHshkStartCond
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 8899)
 
     @property
     def implicit_underflow_behavior(self):
@@ -688,16 +526,8 @@ class Timing:
 
     @implicit_underflow_behavior.deleter
     def implicit_underflow_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetImplicitUnderflowBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 12029)
 
     @property
     def master_timebase_rate(self):
@@ -717,16 +547,8 @@ class Timing:
 
     @master_timebase_rate.deleter
     def master_timebase_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetMasterTimebaseRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 5269)
 
     @property
     def master_timebase_src(self):
@@ -748,16 +570,8 @@ class Timing:
 
     @master_timebase_src.deleter
     def master_timebase_src(self):
-        cfunc = lib_importer.windll.DAQmxResetMasterTimebaseSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 4931)
 
     @property
     def ref_clk_rate(self):
@@ -777,16 +591,8 @@ class Timing:
 
     @ref_clk_rate.deleter
     def ref_clk_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetRefClkRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 4885)
 
     @property
     def ref_clk_src(self):
@@ -807,16 +613,8 @@ class Timing:
 
     @ref_clk_src.deleter
     def ref_clk_src(self):
-        cfunc = lib_importer.windll.DAQmxResetRefClkSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 4886)
 
     @property
     def samp_clk_active_edge(self):
@@ -840,16 +638,8 @@ class Timing:
 
     @samp_clk_active_edge.deleter
     def samp_clk_active_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetSampClkActiveEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 4865)
 
     @property
     def samp_clk_dig_fltr_enable(self):
@@ -870,16 +660,8 @@ class Timing:
 
     @samp_clk_dig_fltr_enable.deleter
     def samp_clk_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetSampClkDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 8734)
 
     @property
     def samp_clk_dig_fltr_min_pulse_width(self):
@@ -900,16 +682,8 @@ class Timing:
 
     @samp_clk_dig_fltr_min_pulse_width.deleter
     def samp_clk_dig_fltr_min_pulse_width(self):
-        cfunc = lib_importer.windll.DAQmxResetSampClkDigFltrMinPulseWidth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 8735)
 
     @property
     def samp_clk_dig_fltr_timebase_rate(self):
@@ -931,16 +705,8 @@ class Timing:
 
     @samp_clk_dig_fltr_timebase_rate.deleter
     def samp_clk_dig_fltr_timebase_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetSampClkDigFltrTimebaseRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 8737)
 
     @property
     def samp_clk_dig_fltr_timebase_src(self):
@@ -961,16 +727,8 @@ class Timing:
 
     @samp_clk_dig_fltr_timebase_src.deleter
     def samp_clk_dig_fltr_timebase_src(self):
-        cfunc = lib_importer.windll.DAQmxResetSampClkDigFltrTimebaseSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 8736)
 
     @property
     def samp_clk_dig_sync_enable(self):
@@ -992,16 +750,8 @@ class Timing:
 
     @samp_clk_dig_sync_enable.deleter
     def samp_clk_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetSampClkDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 8738)
 
     @property
     def samp_clk_max_rate(self):
@@ -1040,16 +790,8 @@ class Timing:
 
     @samp_clk_overrun_behavior.deleter
     def samp_clk_overrun_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetSampClkOverrunBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 12028)
 
     @property
     def samp_clk_rate(self):
@@ -1071,16 +813,8 @@ class Timing:
 
     @samp_clk_rate.deleter
     def samp_clk_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetSampClkRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 4932)
 
     @property
     def samp_clk_src(self):
@@ -1101,16 +835,8 @@ class Timing:
 
     @samp_clk_src.deleter
     def samp_clk_src(self):
-        cfunc = lib_importer.windll.DAQmxResetSampClkSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 6226)
 
     @property
     def samp_clk_term(self):
@@ -1148,16 +874,8 @@ class Timing:
 
     @samp_clk_timebase_active_edge.deleter
     def samp_clk_timebase_active_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetSampClkTimebaseActiveEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 6380)
 
     @property
     def samp_clk_timebase_div(self):
@@ -1178,16 +896,8 @@ class Timing:
 
     @samp_clk_timebase_div.deleter
     def samp_clk_timebase_div(self):
-        cfunc = lib_importer.windll.DAQmxResetSampClkTimebaseDiv
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 6379)
 
     @property
     def samp_clk_timebase_master_timebase_div(self):
@@ -1209,16 +919,8 @@ class Timing:
 
     @samp_clk_timebase_master_timebase_div.deleter
     def samp_clk_timebase_master_timebase_div(self):
-        cfunc = lib_importer.windll.DAQmxResetSampClkTimebaseMasterTimebaseDiv
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 4869)
 
     @property
     def samp_clk_timebase_rate(self):
@@ -1242,16 +944,8 @@ class Timing:
 
     @samp_clk_timebase_rate.deleter
     def samp_clk_timebase_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetSampClkTimebaseRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 4867)
 
     @property
     def samp_clk_timebase_src(self):
@@ -1272,16 +966,8 @@ class Timing:
 
     @samp_clk_timebase_src.deleter
     def samp_clk_timebase_src(self):
-        cfunc = lib_importer.windll.DAQmxResetSampClkTimebaseSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 4872)
 
     @property
     def samp_clk_timebase_term(self):
@@ -1318,16 +1004,8 @@ class Timing:
 
     @samp_clk_underflow_behavior.deleter
     def samp_clk_underflow_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetSampClkUnderflowBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 10593)
 
     @property
     def samp_clk_write_wfm_use_initial_wfm_dt(self):
@@ -1349,16 +1027,8 @@ class Timing:
 
     @samp_clk_write_wfm_use_initial_wfm_dt.deleter
     def samp_clk_write_wfm_use_initial_wfm_dt(self):
-        cfunc = lib_importer.windll.DAQmxResetSampClkWriteWfmUseInitialWfmDT
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 12540)
 
     @property
     def samp_quant_samp_mode(self):
@@ -1381,16 +1051,8 @@ class Timing:
 
     @samp_quant_samp_mode.deleter
     def samp_quant_samp_mode(self):
-        cfunc = lib_importer.windll.DAQmxResetSampQuantSampMode
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 4864)
 
     @property
     def samp_quant_samp_per_chan(self):
@@ -1414,16 +1076,8 @@ class Timing:
 
     @samp_quant_samp_per_chan.deleter
     def samp_quant_samp_per_chan(self):
-        cfunc = lib_importer.windll.DAQmxResetSampQuantSampPerChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 4880)
 
     @property
     def samp_timing_engine(self):
@@ -1443,16 +1097,8 @@ class Timing:
 
     @samp_timing_engine.deleter
     def samp_timing_engine(self):
-        cfunc = lib_importer.windll.DAQmxResetSampTimingEngine
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 10790)
 
     @property
     def samp_timing_type(self):
@@ -1474,16 +1120,8 @@ class Timing:
 
     @samp_timing_type.deleter
     def samp_timing_type(self):
-        cfunc = lib_importer.windll.DAQmxResetSampTimingType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 4935)
 
     @property
     def simultaneous_ao_enable(self):
@@ -1505,16 +1143,8 @@ class Timing:
 
     @simultaneous_ao_enable.deleter
     def simultaneous_ao_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetOnDemandSimultaneousAOEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 8608)
 
     @property
     def sync_clk_interval(self):
@@ -1538,16 +1168,8 @@ class Timing:
 
     @sync_clk_interval.deleter
     def sync_clk_interval(self):
-        cfunc = lib_importer.windll.DAQmxResetSyncClkInterval
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 12158)
 
     @property
     def sync_pulse_min_delay_to_start(self):
@@ -1569,16 +1191,8 @@ class Timing:
 
     @sync_pulse_min_delay_to_start.deleter
     def sync_pulse_min_delay_to_start(self):
-        cfunc = lib_importer.windll.DAQmxResetSyncPulseMinDelayToStart
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 8767)
 
     @property
     def sync_pulse_reset_delay(self):
@@ -1604,16 +1218,8 @@ class Timing:
 
     @sync_pulse_reset_delay.deleter
     def sync_pulse_reset_delay(self):
-        cfunc = lib_importer.windll.DAQmxResetSyncPulseResetDelay
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 12157)
 
     @property
     def sync_pulse_reset_time(self):
@@ -1651,16 +1257,8 @@ class Timing:
 
     @sync_pulse_src.deleter
     def sync_pulse_src(self):
-        cfunc = lib_importer.windll.DAQmxResetSyncPulseSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 8765)
 
     @property
     def sync_pulse_sync_time(self):
@@ -1708,16 +1306,8 @@ class Timing:
 
     @sync_pulse_time_timescale.deleter
     def sync_pulse_time_timescale(self):
-        cfunc = lib_importer.windll.DAQmxResetSyncPulseTimeTimescale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 12600)
 
     @property
     def sync_pulse_type(self):
@@ -1739,16 +1329,8 @@ class Timing:
 
     @sync_pulse_type.deleter
     def sync_pulse_type(self):
-        cfunc = lib_importer.windll.DAQmxResetSyncPulseType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_timing_attribute(
+                self._handle, 12598)
 
     def cfg_burst_handshaking_timing_export_clock(
             self, sample_clk_rate, sample_clk_outp_term,

@@ -45,16 +45,8 @@ class CIChannel(Channel):
 
     @ci_ang_encoder_initial_angle.deleter
     def ci_ang_encoder_initial_angle(self):
-        cfunc = lib_importer.windll.DAQmxResetCIAngEncoderInitialAngle
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2177)
 
     @property
     def ci_ang_encoder_pulses_per_rev(self):
@@ -77,16 +69,8 @@ class CIChannel(Channel):
 
     @ci_ang_encoder_pulses_per_rev.deleter
     def ci_ang_encoder_pulses_per_rev(self):
-        cfunc = lib_importer.windll.DAQmxResetCIAngEncoderPulsesPerRev
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2165)
 
     @property
     def ci_ang_encoder_units(self):
@@ -109,16 +93,8 @@ class CIChannel(Channel):
 
     @ci_ang_encoder_units.deleter
     def ci_ang_encoder_units(self):
-        cfunc = lib_importer.windll.DAQmxResetCIAngEncoderUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6310)
 
     @property
     def ci_count(self):
@@ -151,16 +127,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_active_edge.deleter
     def ci_count_edges_active_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesActiveEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 1687)
 
     @property
     def ci_count_edges_count_dir_dig_fltr_enable(self):
@@ -181,17 +149,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_dir_dig_fltr_enable.deleter
     def ci_count_edges_count_dir_dig_fltr_enable(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICountEdgesCountDirDigFltrEnable)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8689)
 
     @property
     def ci_count_edges_count_dir_dig_fltr_min_pulse_width(self):
@@ -212,17 +171,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_dir_dig_fltr_min_pulse_width.deleter
     def ci_count_edges_count_dir_dig_fltr_min_pulse_width(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICountEdgesCountDirDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8690)
 
     @property
     def ci_count_edges_count_dir_dig_fltr_timebase_rate(self):
@@ -244,17 +194,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_dir_dig_fltr_timebase_rate.deleter
     def ci_count_edges_count_dir_dig_fltr_timebase_rate(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICountEdgesCountDirDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8692)
 
     @property
     def ci_count_edges_count_dir_dig_fltr_timebase_src(self):
@@ -275,17 +216,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_dir_dig_fltr_timebase_src.deleter
     def ci_count_edges_count_dir_dig_fltr_timebase_src(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICountEdgesCountDirDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8691)
 
     @property
     def ci_count_edges_count_dir_dig_sync_enable(self):
@@ -307,17 +239,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_dir_dig_sync_enable.deleter
     def ci_count_edges_count_dir_dig_sync_enable(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICountEdgesCountDirDigSyncEnable)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8693)
 
     @property
     def ci_count_edges_count_dir_hyst(self):
@@ -341,16 +264,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_dir_hyst.deleter
     def ci_count_edges_count_dir_hyst(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesCountDirHyst
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12722)
 
     @property
     def ci_count_edges_count_dir_logic_lvl_behavior(self):
@@ -372,17 +287,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_dir_logic_lvl_behavior.deleter
     def ci_count_edges_count_dir_logic_lvl_behavior(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICountEdgesCountDirLogicLvlBehavior)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12446)
 
     @property
     def ci_count_edges_count_dir_term_cfg(self):
@@ -404,16 +310,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_dir_term_cfg.deleter
     def ci_count_edges_count_dir_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesCountDirTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12445)
 
     @property
     def ci_count_edges_count_dir_thresh_voltage(self):
@@ -436,17 +334,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_dir_thresh_voltage.deleter
     def ci_count_edges_count_dir_thresh_voltage(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICountEdgesCountDirThreshVoltage)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12721)
 
     @property
     def ci_count_edges_count_reset_active_edge(self):
@@ -468,16 +357,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_reset_active_edge.deleter
     def ci_count_edges_count_reset_active_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesCountResetActiveEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12210)
 
     @property
     def ci_count_edges_count_reset_dig_fltr_enable(self):
@@ -498,17 +379,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_reset_dig_fltr_enable.deleter
     def ci_count_edges_count_reset_dig_fltr_enable(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICountEdgesCountResetDigFltrEnable)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12211)
 
     @property
     def ci_count_edges_count_reset_dig_fltr_min_pulse_width(self):
@@ -528,17 +400,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_reset_dig_fltr_min_pulse_width.deleter
     def ci_count_edges_count_reset_dig_fltr_min_pulse_width(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICountEdgesCountResetDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12212)
 
     @property
     def ci_count_edges_count_reset_dig_fltr_timebase_rate(self):
@@ -560,17 +423,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_reset_dig_fltr_timebase_rate.deleter
     def ci_count_edges_count_reset_dig_fltr_timebase_rate(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICountEdgesCountResetDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12214)
 
     @property
     def ci_count_edges_count_reset_dig_fltr_timebase_src(self):
@@ -591,17 +445,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_reset_dig_fltr_timebase_src.deleter
     def ci_count_edges_count_reset_dig_fltr_timebase_src(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICountEdgesCountResetDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12213)
 
     @property
     def ci_count_edges_count_reset_dig_sync_enable(self):
@@ -623,17 +468,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_reset_dig_sync_enable.deleter
     def ci_count_edges_count_reset_dig_sync_enable(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICountEdgesCountResetDigSyncEnable)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12215)
 
     @property
     def ci_count_edges_count_reset_enable(self):
@@ -654,16 +490,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_reset_enable.deleter
     def ci_count_edges_count_reset_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesCountResetEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12207)
 
     @property
     def ci_count_edges_count_reset_hyst(self):
@@ -694,16 +522,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_reset_hyst.deleter
     def ci_count_edges_count_reset_hyst(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesCountResetHyst
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12724)
 
     @property
     def ci_count_edges_count_reset_logic_lvl_behavior(self):
@@ -725,17 +545,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_reset_logic_lvl_behavior.deleter
     def ci_count_edges_count_reset_logic_lvl_behavior(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICountEdgesCountResetLogicLvlBehavior)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12448)
 
     @property
     def ci_count_edges_count_reset_reset_cnt(self):
@@ -755,16 +566,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_reset_reset_cnt.deleter
     def ci_count_edges_count_reset_reset_cnt(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesCountResetResetCount
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12208)
 
     @property
     def ci_count_edges_count_reset_term(self):
@@ -785,16 +588,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_reset_term.deleter
     def ci_count_edges_count_reset_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesCountResetTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12209)
 
     @property
     def ci_count_edges_count_reset_term_cfg(self):
@@ -816,16 +611,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_reset_term_cfg.deleter
     def ci_count_edges_count_reset_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesCountResetTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12447)
 
     @property
     def ci_count_edges_count_reset_thresh_voltage(self):
@@ -846,17 +633,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_count_reset_thresh_voltage.deleter
     def ci_count_edges_count_reset_thresh_voltage(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICountEdgesCountResetThreshVoltage)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12723)
 
     @property
     def ci_count_edges_dig_fltr_enable(self):
@@ -877,16 +655,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_dig_fltr_enable.deleter
     def ci_count_edges_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8694)
 
     @property
     def ci_count_edges_dig_fltr_min_pulse_width(self):
@@ -907,16 +677,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_dig_fltr_min_pulse_width.deleter
     def ci_count_edges_dig_fltr_min_pulse_width(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesDigFltrMinPulseWidth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8695)
 
     @property
     def ci_count_edges_dig_fltr_timebase_rate(self):
@@ -938,16 +700,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_dig_fltr_timebase_rate.deleter
     def ci_count_edges_dig_fltr_timebase_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesDigFltrTimebaseRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8697)
 
     @property
     def ci_count_edges_dig_fltr_timebase_src(self):
@@ -968,16 +722,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_dig_fltr_timebase_src.deleter
     def ci_count_edges_dig_fltr_timebase_src(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesDigFltrTimebaseSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8696)
 
     @property
     def ci_count_edges_dig_sync_enable(self):
@@ -999,16 +745,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_dig_sync_enable.deleter
     def ci_count_edges_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8698)
 
     @property
     def ci_count_edges_dir(self):
@@ -1030,16 +768,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_dir.deleter
     def ci_count_edges_dir(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesDir
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 1686)
 
     @property
     def ci_count_edges_dir_term(self):
@@ -1061,16 +791,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_dir_term.deleter
     def ci_count_edges_dir_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesDirTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8673)
 
     @property
     def ci_count_edges_gate_dig_fltr_enable(self):
@@ -1091,16 +813,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_gate_dig_fltr_enable.deleter
     def ci_count_edges_gate_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesGateDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12529)
 
     @property
     def ci_count_edges_gate_dig_fltr_min_pulse_width(self):
@@ -1121,17 +835,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_gate_dig_fltr_min_pulse_width.deleter
     def ci_count_edges_gate_dig_fltr_min_pulse_width(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICountEdgesGateDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12530)
 
     @property
     def ci_count_edges_gate_dig_fltr_timebase_rate(self):
@@ -1153,17 +858,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_gate_dig_fltr_timebase_rate.deleter
     def ci_count_edges_gate_dig_fltr_timebase_rate(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICountEdgesGateDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12532)
 
     @property
     def ci_count_edges_gate_dig_fltr_timebase_src(self):
@@ -1184,17 +880,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_gate_dig_fltr_timebase_src.deleter
     def ci_count_edges_gate_dig_fltr_timebase_src(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICountEdgesGateDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12531)
 
     @property
     def ci_count_edges_gate_enable(self):
@@ -1215,16 +902,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_gate_enable.deleter
     def ci_count_edges_gate_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesGateEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12525)
 
     @property
     def ci_count_edges_gate_hyst(self):
@@ -1251,16 +930,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_gate_hyst.deleter
     def ci_count_edges_gate_hyst(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesGateHyst
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12726)
 
     @property
     def ci_count_edges_gate_logic_lvl_behavior(self):
@@ -1282,16 +953,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_gate_logic_lvl_behavior.deleter
     def ci_count_edges_gate_logic_lvl_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesGateLogicLvlBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12528)
 
     @property
     def ci_count_edges_gate_term(self):
@@ -1311,16 +974,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_gate_term.deleter
     def ci_count_edges_gate_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesGateTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12526)
 
     @property
     def ci_count_edges_gate_term_cfg(self):
@@ -1342,16 +997,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_gate_term_cfg.deleter
     def ci_count_edges_gate_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesGateTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12527)
 
     @property
     def ci_count_edges_gate_thresh_voltage(self):
@@ -1372,16 +1019,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_gate_thresh_voltage.deleter
     def ci_count_edges_gate_thresh_voltage(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesGateThreshVoltage
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12725)
 
     @property
     def ci_count_edges_gate_when(self):
@@ -1403,16 +1042,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_gate_when.deleter
     def ci_count_edges_gate_when(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesGateWhen
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12533)
 
     @property
     def ci_count_edges_hyst(self):
@@ -1441,16 +1072,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_hyst.deleter
     def ci_count_edges_hyst(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesHyst
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12720)
 
     @property
     def ci_count_edges_initial_cnt(self):
@@ -1470,16 +1093,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_initial_cnt.deleter
     def ci_count_edges_initial_cnt(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesInitialCnt
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 1688)
 
     @property
     def ci_count_edges_logic_lvl_behavior(self):
@@ -1501,16 +1116,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_logic_lvl_behavior.deleter
     def ci_count_edges_logic_lvl_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesLogicLvlBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12444)
 
     @property
     def ci_count_edges_term(self):
@@ -1530,16 +1137,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_term.deleter
     def ci_count_edges_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6343)
 
     @property
     def ci_count_edges_term_cfg(self):
@@ -1561,16 +1160,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_term_cfg.deleter
     def ci_count_edges_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12443)
 
     @property
     def ci_count_edges_thresh_voltage(self):
@@ -1594,16 +1185,8 @@ class CIChannel(Channel):
 
     @ci_count_edges_thresh_voltage.deleter
     def ci_count_edges_thresh_voltage(self):
-        cfunc = lib_importer.windll.DAQmxResetCICountEdgesThreshVoltage
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12719)
 
     @property
     def ci_ctr_timebase_active_edge(self):
@@ -1626,16 +1209,8 @@ class CIChannel(Channel):
 
     @ci_ctr_timebase_active_edge.deleter
     def ci_ctr_timebase_active_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetCICtrTimebaseActiveEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 322)
 
     @property
     def ci_ctr_timebase_dig_fltr_enable(self):
@@ -1656,16 +1231,8 @@ class CIChannel(Channel):
 
     @ci_ctr_timebase_dig_fltr_enable.deleter
     def ci_ctr_timebase_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCICtrTimebaseDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8817)
 
     @property
     def ci_ctr_timebase_dig_fltr_min_pulse_width(self):
@@ -1686,17 +1253,8 @@ class CIChannel(Channel):
 
     @ci_ctr_timebase_dig_fltr_min_pulse_width.deleter
     def ci_ctr_timebase_dig_fltr_min_pulse_width(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCICtrTimebaseDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8818)
 
     @property
     def ci_ctr_timebase_dig_fltr_timebase_rate(self):
@@ -1718,16 +1276,8 @@ class CIChannel(Channel):
 
     @ci_ctr_timebase_dig_fltr_timebase_rate.deleter
     def ci_ctr_timebase_dig_fltr_timebase_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetCICtrTimebaseDigFltrTimebaseRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8820)
 
     @property
     def ci_ctr_timebase_dig_fltr_timebase_src(self):
@@ -1748,16 +1298,8 @@ class CIChannel(Channel):
 
     @ci_ctr_timebase_dig_fltr_timebase_src.deleter
     def ci_ctr_timebase_dig_fltr_timebase_src(self):
-        cfunc = lib_importer.windll.DAQmxResetCICtrTimebaseDigFltrTimebaseSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8819)
 
     @property
     def ci_ctr_timebase_dig_sync_enable(self):
@@ -1779,16 +1321,8 @@ class CIChannel(Channel):
 
     @ci_ctr_timebase_dig_sync_enable.deleter
     def ci_ctr_timebase_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCICtrTimebaseDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8821)
 
     @property
     def ci_ctr_timebase_master_timebase_div(self):
@@ -1810,16 +1344,8 @@ class CIChannel(Channel):
 
     @ci_ctr_timebase_master_timebase_div.deleter
     def ci_ctr_timebase_master_timebase_div(self):
-        cfunc = lib_importer.windll.DAQmxResetCICtrTimebaseMasterTimebaseDiv
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6323)
 
     @property
     def ci_ctr_timebase_rate(self):
@@ -1844,16 +1370,8 @@ class CIChannel(Channel):
 
     @ci_ctr_timebase_rate.deleter
     def ci_ctr_timebase_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetCICtrTimebaseRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6322)
 
     @property
     def ci_ctr_timebase_src(self):
@@ -1874,16 +1392,8 @@ class CIChannel(Channel):
 
     @ci_ctr_timebase_src.deleter
     def ci_ctr_timebase_src(self):
-        cfunc = lib_importer.windll.DAQmxResetCICtrTimebaseSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 323)
 
     @property
     def ci_custom_scale(self):
@@ -1905,16 +1415,8 @@ class CIChannel(Channel):
 
     @ci_custom_scale.deleter
     def ci_custom_scale(self):
-        cfunc = lib_importer.windll.DAQmxResetCICustomScaleName
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6302)
 
     @property
     def ci_data_xfer_mech(self):
@@ -1936,16 +1438,8 @@ class CIChannel(Channel):
 
     @ci_data_xfer_mech.deleter
     def ci_data_xfer_mech(self):
-        cfunc = lib_importer.windll.DAQmxResetCIDataXferMech
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 512)
 
     @property
     def ci_data_xfer_req_cond(self):
@@ -1968,16 +1462,8 @@ class CIChannel(Channel):
 
     @ci_data_xfer_req_cond.deleter
     def ci_data_xfer_req_cond(self):
-        cfunc = lib_importer.windll.DAQmxResetCIDataXferReqCond
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12027)
 
     @property
     def ci_dup_count_prevention(self):
@@ -2000,16 +1486,8 @@ class CIChannel(Channel):
 
     @ci_dup_count_prevention.deleter
     def ci_dup_count_prevention(self):
-        cfunc = lib_importer.windll.DAQmxResetCIDupCountPrevent
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8620)
 
     @property
     def ci_duty_cycle_dig_fltr_enable(self):
@@ -2030,16 +1508,8 @@ class CIChannel(Channel):
 
     @ci_duty_cycle_dig_fltr_enable.deleter
     def ci_duty_cycle_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIDutyCycleDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12430)
 
     @property
     def ci_duty_cycle_dig_fltr_min_pulse_width(self):
@@ -2060,16 +1530,8 @@ class CIChannel(Channel):
 
     @ci_duty_cycle_dig_fltr_min_pulse_width.deleter
     def ci_duty_cycle_dig_fltr_min_pulse_width(self):
-        cfunc = lib_importer.windll.DAQmxResetCIDutyCycleDigFltrMinPulseWidth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12431)
 
     @property
     def ci_duty_cycle_dig_fltr_timebase_rate(self):
@@ -2091,16 +1553,8 @@ class CIChannel(Channel):
 
     @ci_duty_cycle_dig_fltr_timebase_rate.deleter
     def ci_duty_cycle_dig_fltr_timebase_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetCIDutyCycleDigFltrTimebaseRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12433)
 
     @property
     def ci_duty_cycle_dig_fltr_timebase_src(self):
@@ -2121,16 +1575,8 @@ class CIChannel(Channel):
 
     @ci_duty_cycle_dig_fltr_timebase_src.deleter
     def ci_duty_cycle_dig_fltr_timebase_src(self):
-        cfunc = lib_importer.windll.DAQmxResetCIDutyCycleDigFltrTimebaseSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12432)
 
     @property
     def ci_duty_cycle_logic_lvl_behavior(self):
@@ -2152,16 +1598,8 @@ class CIChannel(Channel):
 
     @ci_duty_cycle_logic_lvl_behavior.deleter
     def ci_duty_cycle_logic_lvl_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetCIDutyCycleLogicLvlBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12450)
 
     @property
     def ci_duty_cycle_starting_edge(self):
@@ -2183,16 +1621,8 @@ class CIChannel(Channel):
 
     @ci_duty_cycle_starting_edge.deleter
     def ci_duty_cycle_starting_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetCIDutyCycleStartingEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12434)
 
     @property
     def ci_duty_cycle_term(self):
@@ -2212,16 +1642,8 @@ class CIChannel(Channel):
 
     @ci_duty_cycle_term.deleter
     def ci_duty_cycle_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCIDutyCycleTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12429)
 
     @property
     def ci_duty_cycle_term_cfg(self):
@@ -2243,16 +1665,8 @@ class CIChannel(Channel):
 
     @ci_duty_cycle_term_cfg.deleter
     def ci_duty_cycle_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCIDutyCycleTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12449)
 
     @property
     def ci_encoder_a_input_dig_fltr_enable(self):
@@ -2273,16 +1687,8 @@ class CIChannel(Channel):
 
     @ci_encoder_a_input_dig_fltr_enable.deleter
     def ci_encoder_a_input_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderAInputDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8699)
 
     @property
     def ci_encoder_a_input_dig_fltr_min_pulse_width(self):
@@ -2303,17 +1709,8 @@ class CIChannel(Channel):
 
     @ci_encoder_a_input_dig_fltr_min_pulse_width.deleter
     def ci_encoder_a_input_dig_fltr_min_pulse_width(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIEncoderAInputDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8700)
 
     @property
     def ci_encoder_a_input_dig_fltr_timebase_rate(self):
@@ -2335,17 +1732,8 @@ class CIChannel(Channel):
 
     @ci_encoder_a_input_dig_fltr_timebase_rate.deleter
     def ci_encoder_a_input_dig_fltr_timebase_rate(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIEncoderAInputDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8702)
 
     @property
     def ci_encoder_a_input_dig_fltr_timebase_src(self):
@@ -2366,17 +1754,8 @@ class CIChannel(Channel):
 
     @ci_encoder_a_input_dig_fltr_timebase_src.deleter
     def ci_encoder_a_input_dig_fltr_timebase_src(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIEncoderAInputDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8701)
 
     @property
     def ci_encoder_a_input_dig_sync_enable(self):
@@ -2398,16 +1777,8 @@ class CIChannel(Channel):
 
     @ci_encoder_a_input_dig_sync_enable.deleter
     def ci_encoder_a_input_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderAInputDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8703)
 
     @property
     def ci_encoder_a_input_logic_lvl_behavior(self):
@@ -2429,16 +1800,8 @@ class CIChannel(Channel):
 
     @ci_encoder_a_input_logic_lvl_behavior.deleter
     def ci_encoder_a_input_logic_lvl_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderAInputLogicLvlBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12452)
 
     @property
     def ci_encoder_a_input_term(self):
@@ -2458,16 +1821,8 @@ class CIChannel(Channel):
 
     @ci_encoder_a_input_term.deleter
     def ci_encoder_a_input_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderAInputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8605)
 
     @property
     def ci_encoder_a_input_term_cfg(self):
@@ -2489,16 +1844,8 @@ class CIChannel(Channel):
 
     @ci_encoder_a_input_term_cfg.deleter
     def ci_encoder_a_input_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderAInputTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12451)
 
     @property
     def ci_encoder_b_input_dig_fltr_enable(self):
@@ -2519,16 +1866,8 @@ class CIChannel(Channel):
 
     @ci_encoder_b_input_dig_fltr_enable.deleter
     def ci_encoder_b_input_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderBInputDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8704)
 
     @property
     def ci_encoder_b_input_dig_fltr_min_pulse_width(self):
@@ -2549,17 +1888,8 @@ class CIChannel(Channel):
 
     @ci_encoder_b_input_dig_fltr_min_pulse_width.deleter
     def ci_encoder_b_input_dig_fltr_min_pulse_width(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIEncoderBInputDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8705)
 
     @property
     def ci_encoder_b_input_dig_fltr_timebase_rate(self):
@@ -2581,17 +1911,8 @@ class CIChannel(Channel):
 
     @ci_encoder_b_input_dig_fltr_timebase_rate.deleter
     def ci_encoder_b_input_dig_fltr_timebase_rate(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIEncoderBInputDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8707)
 
     @property
     def ci_encoder_b_input_dig_fltr_timebase_src(self):
@@ -2612,17 +1933,8 @@ class CIChannel(Channel):
 
     @ci_encoder_b_input_dig_fltr_timebase_src.deleter
     def ci_encoder_b_input_dig_fltr_timebase_src(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIEncoderBInputDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8706)
 
     @property
     def ci_encoder_b_input_dig_sync_enable(self):
@@ -2644,16 +1956,8 @@ class CIChannel(Channel):
 
     @ci_encoder_b_input_dig_sync_enable.deleter
     def ci_encoder_b_input_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderBInputDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8708)
 
     @property
     def ci_encoder_b_input_logic_lvl_behavior(self):
@@ -2675,16 +1979,8 @@ class CIChannel(Channel):
 
     @ci_encoder_b_input_logic_lvl_behavior.deleter
     def ci_encoder_b_input_logic_lvl_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderBInputLogicLvlBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12454)
 
     @property
     def ci_encoder_b_input_term(self):
@@ -2704,16 +2000,8 @@ class CIChannel(Channel):
 
     @ci_encoder_b_input_term.deleter
     def ci_encoder_b_input_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderBInputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8606)
 
     @property
     def ci_encoder_b_input_term_cfg(self):
@@ -2735,16 +2023,8 @@ class CIChannel(Channel):
 
     @ci_encoder_b_input_term_cfg.deleter
     def ci_encoder_b_input_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderBInputTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12453)
 
     @property
     def ci_encoder_decoding_type(self):
@@ -2770,16 +2050,8 @@ class CIChannel(Channel):
 
     @ci_encoder_decoding_type.deleter
     def ci_encoder_decoding_type(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderDecodingType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8678)
 
     @property
     def ci_encoder_z_index_enable(self):
@@ -2799,16 +2071,8 @@ class CIChannel(Channel):
 
     @ci_encoder_z_index_enable.deleter
     def ci_encoder_z_index_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderZIndexEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2192)
 
     @property
     def ci_encoder_z_index_phase(self):
@@ -2834,16 +2098,8 @@ class CIChannel(Channel):
 
     @ci_encoder_z_index_phase.deleter
     def ci_encoder_z_index_phase(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderZIndexPhase
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2185)
 
     @property
     def ci_encoder_z_index_val(self):
@@ -2866,16 +2122,8 @@ class CIChannel(Channel):
 
     @ci_encoder_z_index_val.deleter
     def ci_encoder_z_index_val(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderZIndexVal
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2184)
 
     @property
     def ci_encoder_z_input_dig_fltr_enable(self):
@@ -2896,16 +2144,8 @@ class CIChannel(Channel):
 
     @ci_encoder_z_input_dig_fltr_enable.deleter
     def ci_encoder_z_input_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderZInputDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8709)
 
     @property
     def ci_encoder_z_input_dig_fltr_min_pulse_width(self):
@@ -2926,17 +2166,8 @@ class CIChannel(Channel):
 
     @ci_encoder_z_input_dig_fltr_min_pulse_width.deleter
     def ci_encoder_z_input_dig_fltr_min_pulse_width(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIEncoderZInputDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8710)
 
     @property
     def ci_encoder_z_input_dig_fltr_timebase_rate(self):
@@ -2958,17 +2189,8 @@ class CIChannel(Channel):
 
     @ci_encoder_z_input_dig_fltr_timebase_rate.deleter
     def ci_encoder_z_input_dig_fltr_timebase_rate(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIEncoderZInputDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8712)
 
     @property
     def ci_encoder_z_input_dig_fltr_timebase_src(self):
@@ -2989,17 +2211,8 @@ class CIChannel(Channel):
 
     @ci_encoder_z_input_dig_fltr_timebase_src.deleter
     def ci_encoder_z_input_dig_fltr_timebase_src(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIEncoderZInputDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8711)
 
     @property
     def ci_encoder_z_input_dig_sync_enable(self):
@@ -3021,16 +2234,8 @@ class CIChannel(Channel):
 
     @ci_encoder_z_input_dig_sync_enable.deleter
     def ci_encoder_z_input_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderZInputDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8713)
 
     @property
     def ci_encoder_z_input_logic_lvl_behavior(self):
@@ -3052,16 +2257,8 @@ class CIChannel(Channel):
 
     @ci_encoder_z_input_logic_lvl_behavior.deleter
     def ci_encoder_z_input_logic_lvl_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderZInputLogicLvlBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12456)
 
     @property
     def ci_encoder_z_input_term(self):
@@ -3081,16 +2278,8 @@ class CIChannel(Channel):
 
     @ci_encoder_z_input_term.deleter
     def ci_encoder_z_input_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderZInputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8607)
 
     @property
     def ci_encoder_z_input_term_cfg(self):
@@ -3112,16 +2301,8 @@ class CIChannel(Channel):
 
     @ci_encoder_z_input_term_cfg.deleter
     def ci_encoder_z_input_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCIEncoderZInputTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12455)
 
     @property
     def ci_filter_delay(self):
@@ -3157,16 +2338,8 @@ class CIChannel(Channel):
 
     @ci_filter_delay_units.deleter
     def ci_filter_delay_units(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFilterDelayUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12732)
 
     @property
     def ci_filter_enable(self):
@@ -3186,16 +2359,8 @@ class CIChannel(Channel):
 
     @ci_filter_enable.deleter
     def ci_filter_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFilterEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12727)
 
     @property
     def ci_filter_freq(self):
@@ -3216,16 +2381,8 @@ class CIChannel(Channel):
 
     @ci_filter_freq.deleter
     def ci_filter_freq(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFilterFreq
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12728)
 
     @property
     def ci_filter_order(self):
@@ -3246,16 +2403,8 @@ class CIChannel(Channel):
 
     @ci_filter_order.deleter
     def ci_filter_order(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFilterOrder
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12730)
 
     @property
     def ci_filter_response(self):
@@ -3278,16 +2427,8 @@ class CIChannel(Channel):
 
     @ci_filter_response.deleter
     def ci_filter_response(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFilterResponse
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12729)
 
     @property
     def ci_freq_dig_fltr_enable(self):
@@ -3308,16 +2449,8 @@ class CIChannel(Channel):
 
     @ci_freq_dig_fltr_enable.deleter
     def ci_freq_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFreqDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8679)
 
     @property
     def ci_freq_dig_fltr_min_pulse_width(self):
@@ -3338,16 +2471,8 @@ class CIChannel(Channel):
 
     @ci_freq_dig_fltr_min_pulse_width.deleter
     def ci_freq_dig_fltr_min_pulse_width(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFreqDigFltrMinPulseWidth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8680)
 
     @property
     def ci_freq_dig_fltr_timebase_rate(self):
@@ -3369,16 +2494,8 @@ class CIChannel(Channel):
 
     @ci_freq_dig_fltr_timebase_rate.deleter
     def ci_freq_dig_fltr_timebase_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFreqDigFltrTimebaseRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8682)
 
     @property
     def ci_freq_dig_fltr_timebase_src(self):
@@ -3399,16 +2516,8 @@ class CIChannel(Channel):
 
     @ci_freq_dig_fltr_timebase_src.deleter
     def ci_freq_dig_fltr_timebase_src(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFreqDigFltrTimebaseSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8681)
 
     @property
     def ci_freq_dig_sync_enable(self):
@@ -3430,16 +2539,8 @@ class CIChannel(Channel):
 
     @ci_freq_dig_sync_enable.deleter
     def ci_freq_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFreqDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8683)
 
     @property
     def ci_freq_div(self):
@@ -3464,16 +2565,8 @@ class CIChannel(Channel):
 
     @ci_freq_div.deleter
     def ci_freq_div(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFreqDiv
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 327)
 
     @property
     def ci_freq_enable_averaging(self):
@@ -3494,16 +2587,8 @@ class CIChannel(Channel):
 
     @ci_freq_enable_averaging.deleter
     def ci_freq_enable_averaging(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFreqEnableAveraging
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 11984)
 
     @property
     def ci_freq_hyst(self):
@@ -3531,16 +2616,8 @@ class CIChannel(Channel):
 
     @ci_freq_hyst.deleter
     def ci_freq_hyst(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFreqHyst
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12716)
 
     @property
     def ci_freq_logic_lvl_behavior(self):
@@ -3562,16 +2639,8 @@ class CIChannel(Channel):
 
     @ci_freq_logic_lvl_behavior.deleter
     def ci_freq_logic_lvl_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFreqLogicLvlBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12440)
 
     @property
     def ci_freq_meas_meth(self):
@@ -3593,16 +2662,8 @@ class CIChannel(Channel):
 
     @ci_freq_meas_meth.deleter
     def ci_freq_meas_meth(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFreqMeasMeth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 324)
 
     @property
     def ci_freq_meas_time(self):
@@ -3629,16 +2690,8 @@ class CIChannel(Channel):
 
     @ci_freq_meas_time.deleter
     def ci_freq_meas_time(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFreqMeasTime
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 325)
 
     @property
     def ci_freq_starting_edge(self):
@@ -3660,16 +2713,8 @@ class CIChannel(Channel):
 
     @ci_freq_starting_edge.deleter
     def ci_freq_starting_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFreqStartingEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 1945)
 
     @property
     def ci_freq_term(self):
@@ -3689,16 +2734,8 @@ class CIChannel(Channel):
 
     @ci_freq_term.deleter
     def ci_freq_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFreqTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6306)
 
     @property
     def ci_freq_term_cfg(self):
@@ -3720,16 +2757,8 @@ class CIChannel(Channel):
 
     @ci_freq_term_cfg.deleter
     def ci_freq_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFreqTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12439)
 
     @property
     def ci_freq_thresh_voltage(self):
@@ -3753,16 +2782,8 @@ class CIChannel(Channel):
 
     @ci_freq_thresh_voltage.deleter
     def ci_freq_thresh_voltage(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFreqThreshVoltage
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12715)
 
     @property
     def ci_freq_units(self):
@@ -3784,16 +2805,8 @@ class CIChannel(Channel):
 
     @ci_freq_units.deleter
     def ci_freq_units(self):
-        cfunc = lib_importer.windll.DAQmxResetCIFreqUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6305)
 
     @property
     def ci_gps_sync_method(self):
@@ -3815,16 +2828,8 @@ class CIChannel(Channel):
 
     @ci_gps_sync_method.deleter
     def ci_gps_sync_method(self):
-        cfunc = lib_importer.windll.DAQmxResetCIGPSSyncMethod
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 4242)
 
     @property
     def ci_gps_sync_src(self):
@@ -3845,16 +2850,8 @@ class CIChannel(Channel):
 
     @ci_gps_sync_src.deleter
     def ci_gps_sync_src(self):
-        cfunc = lib_importer.windll.DAQmxResetCIGPSSyncSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 4243)
 
     @property
     def ci_lin_encoder_dist_per_pulse(self):
@@ -3876,16 +2873,8 @@ class CIChannel(Channel):
 
     @ci_lin_encoder_dist_per_pulse.deleter
     def ci_lin_encoder_dist_per_pulse(self):
-        cfunc = lib_importer.windll.DAQmxResetCILinEncoderDistPerPulse
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2321)
 
     @property
     def ci_lin_encoder_initial_pos(self):
@@ -3907,16 +2896,8 @@ class CIChannel(Channel):
 
     @ci_lin_encoder_initial_pos.deleter
     def ci_lin_encoder_initial_pos(self):
-        cfunc = lib_importer.windll.DAQmxResetCILinEncoderInitialPos
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2325)
 
     @property
     def ci_lin_encoder_units(self):
@@ -3938,16 +2919,8 @@ class CIChannel(Channel):
 
     @ci_lin_encoder_units.deleter
     def ci_lin_encoder_units(self):
-        cfunc = lib_importer.windll.DAQmxResetCILinEncoderUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6313)
 
     @property
     def ci_max(self):
@@ -3971,16 +2944,8 @@ class CIChannel(Channel):
 
     @ci_max.deleter
     def ci_max(self):
-        cfunc = lib_importer.windll.DAQmxResetCIMax
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6300)
 
     @property
     def ci_max_meas_period(self):
@@ -4006,16 +2971,8 @@ class CIChannel(Channel):
 
     @ci_max_meas_period.deleter
     def ci_max_meas_period(self):
-        cfunc = lib_importer.windll.DAQmxResetCIMaxMeasPeriod
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12437)
 
     @property
     def ci_meas_type(self):
@@ -4054,16 +3011,8 @@ class CIChannel(Channel):
 
     @ci_mem_map_enable.deleter
     def ci_mem_map_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIMemMapEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 11986)
 
     @property
     def ci_min(self):
@@ -4087,16 +3036,8 @@ class CIChannel(Channel):
 
     @ci_min.deleter
     def ci_min(self):
-        cfunc = lib_importer.windll.DAQmxResetCIMin
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6301)
 
     @property
     def ci_num_possibly_invalid_samps(self):
@@ -4141,16 +3082,8 @@ class CIChannel(Channel):
 
     @ci_period_dig_fltr_enable.deleter
     def ci_period_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPeriodDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8684)
 
     @property
     def ci_period_dig_fltr_min_pulse_width(self):
@@ -4171,16 +3104,8 @@ class CIChannel(Channel):
 
     @ci_period_dig_fltr_min_pulse_width.deleter
     def ci_period_dig_fltr_min_pulse_width(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPeriodDigFltrMinPulseWidth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8685)
 
     @property
     def ci_period_dig_fltr_timebase_rate(self):
@@ -4202,16 +3127,8 @@ class CIChannel(Channel):
 
     @ci_period_dig_fltr_timebase_rate.deleter
     def ci_period_dig_fltr_timebase_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPeriodDigFltrTimebaseRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8687)
 
     @property
     def ci_period_dig_fltr_timebase_src(self):
@@ -4232,16 +3149,8 @@ class CIChannel(Channel):
 
     @ci_period_dig_fltr_timebase_src.deleter
     def ci_period_dig_fltr_timebase_src(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPeriodDigFltrTimebaseSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8686)
 
     @property
     def ci_period_dig_sync_enable(self):
@@ -4263,16 +3172,8 @@ class CIChannel(Channel):
 
     @ci_period_dig_sync_enable.deleter
     def ci_period_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPeriodDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8688)
 
     @property
     def ci_period_div(self):
@@ -4297,16 +3198,8 @@ class CIChannel(Channel):
 
     @ci_period_div.deleter
     def ci_period_div(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPeriodDiv
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6446)
 
     @property
     def ci_period_enable_averaging(self):
@@ -4327,16 +3220,8 @@ class CIChannel(Channel):
 
     @ci_period_enable_averaging.deleter
     def ci_period_enable_averaging(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPeriodEnableAveraging
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 11985)
 
     @property
     def ci_period_hyst(self):
@@ -4365,16 +3250,8 @@ class CIChannel(Channel):
 
     @ci_period_hyst.deleter
     def ci_period_hyst(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPeriodHyst
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12718)
 
     @property
     def ci_period_logic_lvl_behavior(self):
@@ -4396,16 +3273,8 @@ class CIChannel(Channel):
 
     @ci_period_logic_lvl_behavior.deleter
     def ci_period_logic_lvl_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPeriodLogicLvlBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12442)
 
     @property
     def ci_period_meas_meth(self):
@@ -4427,16 +3296,8 @@ class CIChannel(Channel):
 
     @ci_period_meas_meth.deleter
     def ci_period_meas_meth(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPeriodMeasMeth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6444)
 
     @property
     def ci_period_meas_time(self):
@@ -4463,16 +3324,8 @@ class CIChannel(Channel):
 
     @ci_period_meas_time.deleter
     def ci_period_meas_time(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPeriodMeasTime
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6445)
 
     @property
     def ci_period_starting_edge(self):
@@ -4494,16 +3347,8 @@ class CIChannel(Channel):
 
     @ci_period_starting_edge.deleter
     def ci_period_starting_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPeriodStartingEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2130)
 
     @property
     def ci_period_term(self):
@@ -4523,16 +3368,8 @@ class CIChannel(Channel):
 
     @ci_period_term.deleter
     def ci_period_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPeriodTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6308)
 
     @property
     def ci_period_term_cfg(self):
@@ -4554,16 +3391,8 @@ class CIChannel(Channel):
 
     @ci_period_term_cfg.deleter
     def ci_period_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPeriodTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12441)
 
     @property
     def ci_period_thresh_voltage(self):
@@ -4587,16 +3416,8 @@ class CIChannel(Channel):
 
     @ci_period_thresh_voltage.deleter
     def ci_period_thresh_voltage(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPeriodThreshVoltage
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12717)
 
     @property
     def ci_period_units(self):
@@ -4618,16 +3439,8 @@ class CIChannel(Channel):
 
     @ci_period_units.deleter
     def ci_period_units(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPeriodUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6307)
 
     @property
     def ci_prescaler(self):
@@ -4654,16 +3467,8 @@ class CIChannel(Channel):
 
     @ci_prescaler.deleter
     def ci_prescaler(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPrescaler
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8761)
 
     @property
     def ci_pulse_freq_dig_fltr_enable(self):
@@ -4684,16 +3489,8 @@ class CIChannel(Channel):
 
     @ci_pulse_freq_dig_fltr_enable.deleter
     def ci_pulse_freq_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseFreqDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12038)
 
     @property
     def ci_pulse_freq_dig_fltr_min_pulse_width(self):
@@ -4714,16 +3511,8 @@ class CIChannel(Channel):
 
     @ci_pulse_freq_dig_fltr_min_pulse_width.deleter
     def ci_pulse_freq_dig_fltr_min_pulse_width(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseFreqDigFltrMinPulseWidth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12039)
 
     @property
     def ci_pulse_freq_dig_fltr_timebase_rate(self):
@@ -4745,16 +3534,8 @@ class CIChannel(Channel):
 
     @ci_pulse_freq_dig_fltr_timebase_rate.deleter
     def ci_pulse_freq_dig_fltr_timebase_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseFreqDigFltrTimebaseRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12041)
 
     @property
     def ci_pulse_freq_dig_fltr_timebase_src(self):
@@ -4775,16 +3556,8 @@ class CIChannel(Channel):
 
     @ci_pulse_freq_dig_fltr_timebase_src.deleter
     def ci_pulse_freq_dig_fltr_timebase_src(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseFreqDigFltrTimebaseSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12040)
 
     @property
     def ci_pulse_freq_dig_sync_enable(self):
@@ -4806,16 +3579,8 @@ class CIChannel(Channel):
 
     @ci_pulse_freq_dig_sync_enable.deleter
     def ci_pulse_freq_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseFreqDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12042)
 
     @property
     def ci_pulse_freq_logic_lvl_behavior(self):
@@ -4837,16 +3602,8 @@ class CIChannel(Channel):
 
     @ci_pulse_freq_logic_lvl_behavior.deleter
     def ci_pulse_freq_logic_lvl_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseFreqLogicLvlBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12466)
 
     @property
     def ci_pulse_freq_starting_edge(self):
@@ -4868,16 +3625,8 @@ class CIChannel(Channel):
 
     @ci_pulse_freq_starting_edge.deleter
     def ci_pulse_freq_starting_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseFreqStartEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12037)
 
     @property
     def ci_pulse_freq_term(self):
@@ -4897,16 +3646,8 @@ class CIChannel(Channel):
 
     @ci_pulse_freq_term.deleter
     def ci_pulse_freq_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseFreqTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12036)
 
     @property
     def ci_pulse_freq_term_cfg(self):
@@ -4928,16 +3669,8 @@ class CIChannel(Channel):
 
     @ci_pulse_freq_term_cfg.deleter
     def ci_pulse_freq_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseFreqTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12465)
 
     @property
     def ci_pulse_freq_units(self):
@@ -4959,16 +3692,8 @@ class CIChannel(Channel):
 
     @ci_pulse_freq_units.deleter
     def ci_pulse_freq_units(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseFreqUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12043)
 
     @property
     def ci_pulse_ticks_dig_fltr_enable(self):
@@ -4989,16 +3714,8 @@ class CIChannel(Channel):
 
     @ci_pulse_ticks_dig_fltr_enable.deleter
     def ci_pulse_ticks_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTicksDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12054)
 
     @property
     def ci_pulse_ticks_dig_fltr_min_pulse_width(self):
@@ -5019,16 +3736,8 @@ class CIChannel(Channel):
 
     @ci_pulse_ticks_dig_fltr_min_pulse_width.deleter
     def ci_pulse_ticks_dig_fltr_min_pulse_width(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTicksDigFltrMinPulseWidth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12055)
 
     @property
     def ci_pulse_ticks_dig_fltr_timebase_rate(self):
@@ -5050,16 +3759,8 @@ class CIChannel(Channel):
 
     @ci_pulse_ticks_dig_fltr_timebase_rate.deleter
     def ci_pulse_ticks_dig_fltr_timebase_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTicksDigFltrTimebaseRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12057)
 
     @property
     def ci_pulse_ticks_dig_fltr_timebase_src(self):
@@ -5080,16 +3781,8 @@ class CIChannel(Channel):
 
     @ci_pulse_ticks_dig_fltr_timebase_src.deleter
     def ci_pulse_ticks_dig_fltr_timebase_src(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTicksDigFltrTimebaseSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12056)
 
     @property
     def ci_pulse_ticks_dig_sync_enable(self):
@@ -5111,16 +3804,8 @@ class CIChannel(Channel):
 
     @ci_pulse_ticks_dig_sync_enable.deleter
     def ci_pulse_ticks_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTicksDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12058)
 
     @property
     def ci_pulse_ticks_logic_lvl_behavior(self):
@@ -5142,16 +3827,8 @@ class CIChannel(Channel):
 
     @ci_pulse_ticks_logic_lvl_behavior.deleter
     def ci_pulse_ticks_logic_lvl_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTicksLogicLvlBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12470)
 
     @property
     def ci_pulse_ticks_starting_edge(self):
@@ -5173,16 +3850,8 @@ class CIChannel(Channel):
 
     @ci_pulse_ticks_starting_edge.deleter
     def ci_pulse_ticks_starting_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTicksStartEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12053)
 
     @property
     def ci_pulse_ticks_term(self):
@@ -5202,16 +3871,8 @@ class CIChannel(Channel):
 
     @ci_pulse_ticks_term.deleter
     def ci_pulse_ticks_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTicksTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12052)
 
     @property
     def ci_pulse_ticks_term_cfg(self):
@@ -5233,16 +3894,8 @@ class CIChannel(Channel):
 
     @ci_pulse_ticks_term_cfg.deleter
     def ci_pulse_ticks_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTicksTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12469)
 
     @property
     def ci_pulse_time_dig_fltr_enable(self):
@@ -5263,16 +3916,8 @@ class CIChannel(Channel):
 
     @ci_pulse_time_dig_fltr_enable.deleter
     def ci_pulse_time_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTimeDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12046)
 
     @property
     def ci_pulse_time_dig_fltr_min_pulse_width(self):
@@ -5293,16 +3938,8 @@ class CIChannel(Channel):
 
     @ci_pulse_time_dig_fltr_min_pulse_width.deleter
     def ci_pulse_time_dig_fltr_min_pulse_width(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTimeDigFltrMinPulseWidth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12047)
 
     @property
     def ci_pulse_time_dig_fltr_timebase_rate(self):
@@ -5324,16 +3961,8 @@ class CIChannel(Channel):
 
     @ci_pulse_time_dig_fltr_timebase_rate.deleter
     def ci_pulse_time_dig_fltr_timebase_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTimeDigFltrTimebaseRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12049)
 
     @property
     def ci_pulse_time_dig_fltr_timebase_src(self):
@@ -5354,16 +3983,8 @@ class CIChannel(Channel):
 
     @ci_pulse_time_dig_fltr_timebase_src.deleter
     def ci_pulse_time_dig_fltr_timebase_src(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTimeDigFltrTimebaseSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12048)
 
     @property
     def ci_pulse_time_dig_sync_enable(self):
@@ -5385,16 +4006,8 @@ class CIChannel(Channel):
 
     @ci_pulse_time_dig_sync_enable.deleter
     def ci_pulse_time_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTimeDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12050)
 
     @property
     def ci_pulse_time_logic_lvl_behavior(self):
@@ -5416,16 +4029,8 @@ class CIChannel(Channel):
 
     @ci_pulse_time_logic_lvl_behavior.deleter
     def ci_pulse_time_logic_lvl_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTimeLogicLvlBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12468)
 
     @property
     def ci_pulse_time_starting_edge(self):
@@ -5447,16 +4052,8 @@ class CIChannel(Channel):
 
     @ci_pulse_time_starting_edge.deleter
     def ci_pulse_time_starting_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTimeStartEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12045)
 
     @property
     def ci_pulse_time_term(self):
@@ -5476,16 +4073,8 @@ class CIChannel(Channel):
 
     @ci_pulse_time_term.deleter
     def ci_pulse_time_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTimeTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12044)
 
     @property
     def ci_pulse_time_term_cfg(self):
@@ -5507,16 +4096,8 @@ class CIChannel(Channel):
 
     @ci_pulse_time_term_cfg.deleter
     def ci_pulse_time_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTimeTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12467)
 
     @property
     def ci_pulse_time_units(self):
@@ -5539,16 +4120,8 @@ class CIChannel(Channel):
 
     @ci_pulse_time_units.deleter
     def ci_pulse_time_units(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseTimeUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12051)
 
     @property
     def ci_pulse_width_dig_fltr_enable(self):
@@ -5569,16 +4142,8 @@ class CIChannel(Channel):
 
     @ci_pulse_width_dig_fltr_enable.deleter
     def ci_pulse_width_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseWidthDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8714)
 
     @property
     def ci_pulse_width_dig_fltr_min_pulse_width(self):
@@ -5599,16 +4164,8 @@ class CIChannel(Channel):
 
     @ci_pulse_width_dig_fltr_min_pulse_width.deleter
     def ci_pulse_width_dig_fltr_min_pulse_width(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseWidthDigFltrMinPulseWidth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8715)
 
     @property
     def ci_pulse_width_dig_fltr_timebase_rate(self):
@@ -5630,16 +4187,8 @@ class CIChannel(Channel):
 
     @ci_pulse_width_dig_fltr_timebase_rate.deleter
     def ci_pulse_width_dig_fltr_timebase_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseWidthDigFltrTimebaseRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8717)
 
     @property
     def ci_pulse_width_dig_fltr_timebase_src(self):
@@ -5660,16 +4209,8 @@ class CIChannel(Channel):
 
     @ci_pulse_width_dig_fltr_timebase_src.deleter
     def ci_pulse_width_dig_fltr_timebase_src(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseWidthDigFltrTimebaseSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8716)
 
     @property
     def ci_pulse_width_dig_sync_enable(self):
@@ -5691,16 +4232,8 @@ class CIChannel(Channel):
 
     @ci_pulse_width_dig_sync_enable.deleter
     def ci_pulse_width_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseWidthDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8718)
 
     @property
     def ci_pulse_width_logic_lvl_behavior(self):
@@ -5722,16 +4255,8 @@ class CIChannel(Channel):
 
     @ci_pulse_width_logic_lvl_behavior.deleter
     def ci_pulse_width_logic_lvl_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseWidthLogicLvlBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12458)
 
     @property
     def ci_pulse_width_starting_edge(self):
@@ -5753,16 +4278,8 @@ class CIChannel(Channel):
 
     @ci_pulse_width_starting_edge.deleter
     def ci_pulse_width_starting_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseWidthStartingEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2085)
 
     @property
     def ci_pulse_width_term(self):
@@ -5782,16 +4299,8 @@ class CIChannel(Channel):
 
     @ci_pulse_width_term.deleter
     def ci_pulse_width_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseWidthTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6314)
 
     @property
     def ci_pulse_width_term_cfg(self):
@@ -5813,16 +4322,8 @@ class CIChannel(Channel):
 
     @ci_pulse_width_term_cfg.deleter
     def ci_pulse_width_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseWidthTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12457)
 
     @property
     def ci_pulse_width_units(self):
@@ -5844,16 +4345,8 @@ class CIChannel(Channel):
 
     @ci_pulse_width_units.deleter
     def ci_pulse_width_units(self):
-        cfunc = lib_importer.windll.DAQmxResetCIPulseWidthUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2083)
 
     @property
     def ci_samp_clk_overrun_behavior(self):
@@ -5876,16 +4369,8 @@ class CIChannel(Channel):
 
     @ci_samp_clk_overrun_behavior.deleter
     def ci_samp_clk_overrun_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetCISampClkOverrunBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12435)
 
     @property
     def ci_samp_clk_overrun_sentinel_val(self):
@@ -5906,16 +4391,8 @@ class CIChannel(Channel):
 
     @ci_samp_clk_overrun_sentinel_val.deleter
     def ci_samp_clk_overrun_sentinel_val(self):
-        cfunc = lib_importer.windll.DAQmxResetCISampClkOverrunSentinelVal
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12436)
 
     @property
     def ci_semi_period_dig_fltr_enable(self):
@@ -5936,16 +4413,8 @@ class CIChannel(Channel):
 
     @ci_semi_period_dig_fltr_enable.deleter
     def ci_semi_period_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCISemiPeriodDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8729)
 
     @property
     def ci_semi_period_dig_fltr_min_pulse_width(self):
@@ -5966,16 +4435,8 @@ class CIChannel(Channel):
 
     @ci_semi_period_dig_fltr_min_pulse_width.deleter
     def ci_semi_period_dig_fltr_min_pulse_width(self):
-        cfunc = lib_importer.windll.DAQmxResetCISemiPeriodDigFltrMinPulseWidth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8730)
 
     @property
     def ci_semi_period_dig_fltr_timebase_rate(self):
@@ -5997,16 +4458,8 @@ class CIChannel(Channel):
 
     @ci_semi_period_dig_fltr_timebase_rate.deleter
     def ci_semi_period_dig_fltr_timebase_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetCISemiPeriodDigFltrTimebaseRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8732)
 
     @property
     def ci_semi_period_dig_fltr_timebase_src(self):
@@ -6027,16 +4480,8 @@ class CIChannel(Channel):
 
     @ci_semi_period_dig_fltr_timebase_src.deleter
     def ci_semi_period_dig_fltr_timebase_src(self):
-        cfunc = lib_importer.windll.DAQmxResetCISemiPeriodDigFltrTimebaseSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8731)
 
     @property
     def ci_semi_period_dig_sync_enable(self):
@@ -6058,16 +4503,8 @@ class CIChannel(Channel):
 
     @ci_semi_period_dig_sync_enable.deleter
     def ci_semi_period_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCISemiPeriodDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8733)
 
     @property
     def ci_semi_period_logic_lvl_behavior(self):
@@ -6089,16 +4526,8 @@ class CIChannel(Channel):
 
     @ci_semi_period_logic_lvl_behavior.deleter
     def ci_semi_period_logic_lvl_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetCISemiPeriodLogicLvlBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12464)
 
     @property
     def ci_semi_period_starting_edge(self):
@@ -6122,16 +4551,8 @@ class CIChannel(Channel):
 
     @ci_semi_period_starting_edge.deleter
     def ci_semi_period_starting_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetCISemiPeriodStartingEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8958)
 
     @property
     def ci_semi_period_term(self):
@@ -6151,16 +4572,8 @@ class CIChannel(Channel):
 
     @ci_semi_period_term.deleter
     def ci_semi_period_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCISemiPeriodTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6320)
 
     @property
     def ci_semi_period_term_cfg(self):
@@ -6182,16 +4595,8 @@ class CIChannel(Channel):
 
     @ci_semi_period_term_cfg.deleter
     def ci_semi_period_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCISemiPeriodTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12463)
 
     @property
     def ci_semi_period_units(self):
@@ -6213,16 +4618,8 @@ class CIChannel(Channel):
 
     @ci_semi_period_units.deleter
     def ci_semi_period_units(self):
-        cfunc = lib_importer.windll.DAQmxResetCISemiPeriodUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6319)
 
     @property
     def ci_tc_reached(self):
@@ -6256,16 +4653,8 @@ class CIChannel(Channel):
 
     @ci_thresh_voltage.deleter
     def ci_thresh_voltage(self):
-        cfunc = lib_importer.windll.DAQmxResetCIThreshVoltage
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12471)
 
     @property
     def ci_timestamp_initial_seconds(self):
@@ -6287,16 +4676,8 @@ class CIChannel(Channel):
 
     @ci_timestamp_initial_seconds.deleter
     def ci_timestamp_initial_seconds(self):
-        cfunc = lib_importer.windll.DAQmxResetCITimestampInitialSeconds
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8884)
 
     @property
     def ci_timestamp_units(self):
@@ -6318,16 +4699,8 @@ class CIChannel(Channel):
 
     @ci_timestamp_units.deleter
     def ci_timestamp_units(self):
-        cfunc = lib_importer.windll.DAQmxResetCITimestampUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8883)
 
     @property
     def ci_two_edge_sep_first_dig_fltr_enable(self):
@@ -6348,16 +4721,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_first_dig_fltr_enable.deleter
     def ci_two_edge_sep_first_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCITwoEdgeSepFirstDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8719)
 
     @property
     def ci_two_edge_sep_first_dig_fltr_min_pulse_width(self):
@@ -6378,17 +4743,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_first_dig_fltr_min_pulse_width.deleter
     def ci_two_edge_sep_first_dig_fltr_min_pulse_width(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCITwoEdgeSepFirstDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8720)
 
     @property
     def ci_two_edge_sep_first_dig_fltr_timebase_rate(self):
@@ -6410,17 +4766,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_first_dig_fltr_timebase_rate.deleter
     def ci_two_edge_sep_first_dig_fltr_timebase_rate(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCITwoEdgeSepFirstDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8722)
 
     @property
     def ci_two_edge_sep_first_dig_fltr_timebase_src(self):
@@ -6441,17 +4788,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_first_dig_fltr_timebase_src.deleter
     def ci_two_edge_sep_first_dig_fltr_timebase_src(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCITwoEdgeSepFirstDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8721)
 
     @property
     def ci_two_edge_sep_first_dig_sync_enable(self):
@@ -6473,16 +4811,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_first_dig_sync_enable.deleter
     def ci_two_edge_sep_first_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCITwoEdgeSepFirstDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8723)
 
     @property
     def ci_two_edge_sep_first_edge(self):
@@ -6504,16 +4834,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_first_edge.deleter
     def ci_two_edge_sep_first_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetCITwoEdgeSepFirstEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2099)
 
     @property
     def ci_two_edge_sep_first_logic_lvl_behavior(self):
@@ -6535,17 +4857,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_first_logic_lvl_behavior.deleter
     def ci_two_edge_sep_first_logic_lvl_behavior(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCITwoEdgeSepFirstLogicLvlBehavior)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12460)
 
     @property
     def ci_two_edge_sep_first_term(self):
@@ -6566,16 +4879,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_first_term.deleter
     def ci_two_edge_sep_first_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCITwoEdgeSepFirstTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6317)
 
     @property
     def ci_two_edge_sep_first_term_cfg(self):
@@ -6597,16 +4902,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_first_term_cfg.deleter
     def ci_two_edge_sep_first_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCITwoEdgeSepFirstTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12459)
 
     @property
     def ci_two_edge_sep_second_dig_fltr_enable(self):
@@ -6627,16 +4924,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_second_dig_fltr_enable.deleter
     def ci_two_edge_sep_second_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCITwoEdgeSepSecondDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8724)
 
     @property
     def ci_two_edge_sep_second_dig_fltr_min_pulse_width(self):
@@ -6657,17 +4946,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_second_dig_fltr_min_pulse_width.deleter
     def ci_two_edge_sep_second_dig_fltr_min_pulse_width(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCITwoEdgeSepSecondDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8725)
 
     @property
     def ci_two_edge_sep_second_dig_fltr_timebase_rate(self):
@@ -6689,17 +4969,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_second_dig_fltr_timebase_rate.deleter
     def ci_two_edge_sep_second_dig_fltr_timebase_rate(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCITwoEdgeSepSecondDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8727)
 
     @property
     def ci_two_edge_sep_second_dig_fltr_timebase_src(self):
@@ -6720,17 +4991,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_second_dig_fltr_timebase_src.deleter
     def ci_two_edge_sep_second_dig_fltr_timebase_src(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCITwoEdgeSepSecondDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8726)
 
     @property
     def ci_two_edge_sep_second_dig_sync_enable(self):
@@ -6752,16 +5014,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_second_dig_sync_enable.deleter
     def ci_two_edge_sep_second_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetCITwoEdgeSepSecondDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8728)
 
     @property
     def ci_two_edge_sep_second_edge(self):
@@ -6783,16 +5037,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_second_edge.deleter
     def ci_two_edge_sep_second_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetCITwoEdgeSepSecondEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2100)
 
     @property
     def ci_two_edge_sep_second_logic_lvl_behavior(self):
@@ -6814,17 +5060,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_second_logic_lvl_behavior.deleter
     def ci_two_edge_sep_second_logic_lvl_behavior(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCITwoEdgeSepSecondLogicLvlBehavior)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12462)
 
     @property
     def ci_two_edge_sep_second_term(self):
@@ -6845,16 +5082,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_second_term.deleter
     def ci_two_edge_sep_second_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCITwoEdgeSepSecondTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6318)
 
     @property
     def ci_two_edge_sep_second_term_cfg(self):
@@ -6876,16 +5105,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_second_term_cfg.deleter
     def ci_two_edge_sep_second_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCITwoEdgeSepSecondTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12461)
 
     @property
     def ci_two_edge_sep_units(self):
@@ -6907,16 +5128,8 @@ class CIChannel(Channel):
 
     @ci_two_edge_sep_units.deleter
     def ci_two_edge_sep_units(self):
-        cfunc = lib_importer.windll.DAQmxResetCITwoEdgeSepUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6316)
 
     @property
     def ci_usb_xfer_req_count(self):
@@ -6938,16 +5151,8 @@ class CIChannel(Channel):
 
     @ci_usb_xfer_req_count.deleter
     def ci_usb_xfer_req_count(self):
-        cfunc = lib_importer.windll.DAQmxResetCIUsbXferReqCount
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12292)
 
     @property
     def ci_usb_xfer_req_size(self):
@@ -6969,16 +5174,8 @@ class CIChannel(Channel):
 
     @ci_usb_xfer_req_size.deleter
     def ci_usb_xfer_req_size(self):
-        cfunc = lib_importer.windll.DAQmxResetCIUsbXferReqSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10898)
 
     @property
     def ci_velocity_a_input_dig_fltr_enable(self):
@@ -6999,17 +5196,8 @@ class CIChannel(Channel):
 
     @ci_velocity_a_input_dig_fltr_enable.deleter
     def ci_velocity_a_input_dig_fltr_enable(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderAInputDigFltrEnable)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12512)
 
     @property
     def ci_velocity_a_input_dig_fltr_min_pulse_width(self):
@@ -7030,17 +5218,8 @@ class CIChannel(Channel):
 
     @ci_velocity_a_input_dig_fltr_min_pulse_width.deleter
     def ci_velocity_a_input_dig_fltr_min_pulse_width(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderAInputDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12513)
 
     @property
     def ci_velocity_a_input_dig_fltr_timebase_rate(self):
@@ -7062,17 +5241,8 @@ class CIChannel(Channel):
 
     @ci_velocity_a_input_dig_fltr_timebase_rate.deleter
     def ci_velocity_a_input_dig_fltr_timebase_rate(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderAInputDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12515)
 
     @property
     def ci_velocity_a_input_dig_fltr_timebase_src(self):
@@ -7093,17 +5263,8 @@ class CIChannel(Channel):
 
     @ci_velocity_a_input_dig_fltr_timebase_src.deleter
     def ci_velocity_a_input_dig_fltr_timebase_src(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderAInputDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12514)
 
     @property
     def ci_velocity_a_input_logic_lvl_behavior(self):
@@ -7125,17 +5286,8 @@ class CIChannel(Channel):
 
     @ci_velocity_a_input_logic_lvl_behavior.deleter
     def ci_velocity_a_input_logic_lvl_behavior(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderAInputLogicLvlBehavior)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12511)
 
     @property
     def ci_velocity_a_input_term(self):
@@ -7155,16 +5307,8 @@ class CIChannel(Channel):
 
     @ci_velocity_a_input_term.deleter
     def ci_velocity_a_input_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCIVelocityEncoderAInputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12509)
 
     @property
     def ci_velocity_a_input_term_cfg(self):
@@ -7186,16 +5330,8 @@ class CIChannel(Channel):
 
     @ci_velocity_a_input_term_cfg.deleter
     def ci_velocity_a_input_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCIVelocityEncoderAInputTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12510)
 
     @property
     def ci_velocity_ang_encoder_pulses_per_rev(self):
@@ -7218,16 +5354,8 @@ class CIChannel(Channel):
 
     @ci_velocity_ang_encoder_pulses_per_rev.deleter
     def ci_velocity_ang_encoder_pulses_per_rev(self):
-        cfunc = lib_importer.windll.DAQmxResetCIVelocityAngEncoderPulsesPerRev
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12505)
 
     @property
     def ci_velocity_ang_encoder_units(self):
@@ -7250,16 +5378,8 @@ class CIChannel(Channel):
 
     @ci_velocity_ang_encoder_units.deleter
     def ci_velocity_ang_encoder_units(self):
-        cfunc = lib_importer.windll.DAQmxResetCIVelocityAngEncoderUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12504)
 
     @property
     def ci_velocity_b_input_dig_fltr_enable(self):
@@ -7280,17 +5400,8 @@ class CIChannel(Channel):
 
     @ci_velocity_b_input_dig_fltr_enable.deleter
     def ci_velocity_b_input_dig_fltr_enable(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderBInputDigFltrEnable)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12519)
 
     @property
     def ci_velocity_b_input_dig_fltr_min_pulse_width(self):
@@ -7311,17 +5422,8 @@ class CIChannel(Channel):
 
     @ci_velocity_b_input_dig_fltr_min_pulse_width.deleter
     def ci_velocity_b_input_dig_fltr_min_pulse_width(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderBInputDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12520)
 
     @property
     def ci_velocity_b_input_dig_fltr_timebase_rate(self):
@@ -7343,17 +5445,8 @@ class CIChannel(Channel):
 
     @ci_velocity_b_input_dig_fltr_timebase_rate.deleter
     def ci_velocity_b_input_dig_fltr_timebase_rate(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderBInputDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12522)
 
     @property
     def ci_velocity_b_input_dig_fltr_timebase_src(self):
@@ -7374,17 +5467,8 @@ class CIChannel(Channel):
 
     @ci_velocity_b_input_dig_fltr_timebase_src.deleter
     def ci_velocity_b_input_dig_fltr_timebase_src(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderBInputDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12521)
 
     @property
     def ci_velocity_b_input_logic_lvl_behavior(self):
@@ -7406,17 +5490,8 @@ class CIChannel(Channel):
 
     @ci_velocity_b_input_logic_lvl_behavior.deleter
     def ci_velocity_b_input_logic_lvl_behavior(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetCIVelocityEncoderBInputLogicLvlBehavior)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12518)
 
     @property
     def ci_velocity_b_input_term(self):
@@ -7436,16 +5511,8 @@ class CIChannel(Channel):
 
     @ci_velocity_b_input_term.deleter
     def ci_velocity_b_input_term(self):
-        cfunc = lib_importer.windll.DAQmxResetCIVelocityEncoderBInputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12516)
 
     @property
     def ci_velocity_b_input_term_cfg(self):
@@ -7467,16 +5534,8 @@ class CIChannel(Channel):
 
     @ci_velocity_b_input_term_cfg.deleter
     def ci_velocity_b_input_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetCIVelocityEncoderBInputTermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12517)
 
     @property
     def ci_velocity_div(self):
@@ -7496,16 +5555,8 @@ class CIChannel(Channel):
 
     @ci_velocity_div.deleter
     def ci_velocity_div(self):
-        cfunc = lib_importer.windll.DAQmxResetCIVelocityDiv
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12524)
 
     @property
     def ci_velocity_encoder_decoding_type(self):
@@ -7530,16 +5581,8 @@ class CIChannel(Channel):
 
     @ci_velocity_encoder_decoding_type.deleter
     def ci_velocity_encoder_decoding_type(self):
-        cfunc = lib_importer.windll.DAQmxResetCIVelocityEncoderDecodingType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12508)
 
     @property
     def ci_velocity_lin_encoder_dist_per_pulse(self):
@@ -7561,16 +5604,8 @@ class CIChannel(Channel):
 
     @ci_velocity_lin_encoder_dist_per_pulse.deleter
     def ci_velocity_lin_encoder_dist_per_pulse(self):
-        cfunc = lib_importer.windll.DAQmxResetCIVelocityLinEncoderDistPerPulse
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12507)
 
     @property
     def ci_velocity_lin_encoder_units(self):
@@ -7593,16 +5628,8 @@ class CIChannel(Channel):
 
     @ci_velocity_lin_encoder_units.deleter
     def ci_velocity_lin_encoder_units(self):
-        cfunc = lib_importer.windll.DAQmxResetCIVelocityLinEncoderUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12506)
 
     @property
     def ci_velocity_meas_time(self):
@@ -7623,14 +5650,6 @@ class CIChannel(Channel):
 
     @ci_velocity_meas_time.deleter
     def ci_velocity_meas_time(self):
-        cfunc = lib_importer.windll.DAQmxResetCIVelocityMeasTime
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12523)
 

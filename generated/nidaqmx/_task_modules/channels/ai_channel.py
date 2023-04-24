@@ -60,16 +60,8 @@ class AIChannel(Channel):
 
     @ai_ac_excit_freq.deleter
     def ai_ac_excit_freq(self):
-        cfunc = lib_importer.windll.DAQmxResetAIACExcitFreq
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 257)
 
     @property
     def ai_ac_excit_sync_enable(self):
@@ -93,16 +85,8 @@ class AIChannel(Channel):
 
     @ai_ac_excit_sync_enable.deleter
     def ai_ac_excit_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAIACExcitSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 258)
 
     @property
     def ai_ac_excit_wire_mode(self):
@@ -126,16 +110,8 @@ class AIChannel(Channel):
 
     @ai_ac_excit_wire_mode.deleter
     def ai_ac_excit_wire_mode(self):
-        cfunc = lib_importer.windll.DAQmxResetAIACExcitWireMode
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6349)
 
     @property
     def ai_accel_4_wire_dc_voltage_sensitivity(self):
@@ -159,16 +135,8 @@ class AIChannel(Channel):
 
     @ai_accel_4_wire_dc_voltage_sensitivity.deleter
     def ai_accel_4_wire_dc_voltage_sensitivity(self):
-        cfunc = lib_importer.windll.DAQmxResetAIAccel4WireDCVoltageSensitivity
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12565)
 
     @property
     def ai_accel_4_wire_dc_voltage_sensitivity_units(self):
@@ -190,17 +158,8 @@ class AIChannel(Channel):
 
     @ai_accel_4_wire_dc_voltage_sensitivity_units.deleter
     def ai_accel_4_wire_dc_voltage_sensitivity_units(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAIAccel4WireDCVoltageSensitivityUnits)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12566)
 
     @property
     def ai_accel_charge_sensitivity(self):
@@ -223,16 +182,8 @@ class AIChannel(Channel):
 
     @ai_accel_charge_sensitivity.deleter
     def ai_accel_charge_sensitivity(self):
-        cfunc = lib_importer.windll.DAQmxResetAIAccelChargeSensitivity
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12563)
 
     @property
     def ai_accel_charge_sensitivity_units(self):
@@ -254,16 +205,8 @@ class AIChannel(Channel):
 
     @ai_accel_charge_sensitivity_units.deleter
     def ai_accel_charge_sensitivity_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIAccelChargeSensitivityUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12564)
 
     @property
     def ai_accel_db_ref(self):
@@ -285,16 +228,8 @@ class AIChannel(Channel):
 
     @ai_accel_db_ref.deleter
     def ai_accel_db_ref(self):
-        cfunc = lib_importer.windll.DAQmxResetAIAcceldBRef
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10674)
 
     @property
     def ai_accel_sensitivity(self):
@@ -317,16 +252,8 @@ class AIChannel(Channel):
 
     @ai_accel_sensitivity.deleter
     def ai_accel_sensitivity(self):
-        cfunc = lib_importer.windll.DAQmxResetAIAccelSensitivity
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 1682)
 
     @property
     def ai_accel_sensitivity_units(self):
@@ -348,16 +275,8 @@ class AIChannel(Channel):
 
     @ai_accel_sensitivity_units.deleter
     def ai_accel_sensitivity_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIAccelSensitivityUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8604)
 
     @property
     def ai_accel_units(self):
@@ -379,16 +298,8 @@ class AIChannel(Channel):
 
     @ai_accel_units.deleter
     def ai_accel_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIAccelUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 1651)
 
     @property
     def ai_adc_custom_timing_mode(self):
@@ -409,16 +320,8 @@ class AIChannel(Channel):
 
     @ai_adc_custom_timing_mode.deleter
     def ai_adc_custom_timing_mode(self):
-        cfunc = lib_importer.windll.DAQmxResetAIADCCustomTimingMode
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12139)
 
     @property
     def ai_adc_timing_mode(self):
@@ -447,16 +350,8 @@ class AIChannel(Channel):
 
     @ai_adc_timing_mode.deleter
     def ai_adc_timing_mode(self):
-        cfunc = lib_importer.windll.DAQmxResetAIADCTimingMode
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10745)
 
     @property
     def ai_atten(self):
@@ -476,16 +371,8 @@ class AIChannel(Channel):
 
     @ai_atten.deleter
     def ai_atten(self):
-        cfunc = lib_importer.windll.DAQmxResetAIAtten
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6145)
 
     @property
     def ai_auto_zero_mode(self):
@@ -508,16 +395,8 @@ class AIChannel(Channel):
 
     @ai_auto_zero_mode.deleter
     def ai_auto_zero_mode(self):
-        cfunc = lib_importer.windll.DAQmxResetAIAutoZeroMode
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 5984)
 
     @property
     def ai_averaging_win_size(self):
@@ -539,16 +418,8 @@ class AIChannel(Channel):
 
     @ai_averaging_win_size.deleter
     def ai_averaging_win_size(self):
-        cfunc = lib_importer.windll.DAQmxResetAIAveragingWinSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12270)
 
     @property
     def ai_bridge_balance_coarse_pot(self):
@@ -569,16 +440,8 @@ class AIChannel(Channel):
 
     @ai_bridge_balance_coarse_pot.deleter
     def ai_bridge_balance_coarse_pot(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgeBalanceCoarsePot
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6129)
 
     @property
     def ai_bridge_balance_fine_pot(self):
@@ -599,16 +462,8 @@ class AIChannel(Channel):
 
     @ai_bridge_balance_fine_pot.deleter
     def ai_bridge_balance_fine_pot(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgeBalanceFinePot
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6388)
 
     @property
     def ai_bridge_cfg(self):
@@ -630,16 +485,8 @@ class AIChannel(Channel):
 
     @ai_bridge_cfg.deleter
     def ai_bridge_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgeCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 135)
 
     @property
     def ai_bridge_electrical_units(self):
@@ -663,16 +510,8 @@ class AIChannel(Channel):
 
     @ai_bridge_electrical_units.deleter
     def ai_bridge_electrical_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgeElectricalUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12167)
 
     @property
     def ai_bridge_initial_ratio(self):
@@ -704,16 +543,8 @@ class AIChannel(Channel):
 
     @ai_bridge_initial_ratio.deleter
     def ai_bridge_initial_ratio(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgeInitialRatio
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12166)
 
     @property
     def ai_bridge_initial_voltage(self):
@@ -745,16 +576,8 @@ class AIChannel(Channel):
 
     @ai_bridge_initial_voltage.deleter
     def ai_bridge_initial_voltage(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgeInitialVoltage
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6125)
 
     @property
     def ai_bridge_nom_resistance(self):
@@ -775,16 +598,8 @@ class AIChannel(Channel):
 
     @ai_bridge_nom_resistance.deleter
     def ai_bridge_nom_resistance(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgeNomResistance
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6124)
 
     @property
     def ai_bridge_physical_units(self):
@@ -808,16 +623,8 @@ class AIChannel(Channel):
 
     @ai_bridge_physical_units.deleter
     def ai_bridge_physical_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgePhysicalUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12168)
 
     @property
     def ai_bridge_poly_forward_coeff(self):
@@ -842,16 +649,8 @@ class AIChannel(Channel):
 
     @ai_bridge_poly_forward_coeff.deleter
     def ai_bridge_poly_forward_coeff(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgePolyForwardCoeff
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12176)
 
     @property
     def ai_bridge_poly_reverse_coeff(self):
@@ -876,16 +675,8 @@ class AIChannel(Channel):
 
     @ai_bridge_poly_reverse_coeff.deleter
     def ai_bridge_poly_reverse_coeff(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgePolyReverseCoeff
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12177)
 
     @property
     def ai_bridge_scale_type(self):
@@ -908,16 +699,8 @@ class AIChannel(Channel):
 
     @ai_bridge_scale_type.deleter
     def ai_bridge_scale_type(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgeScaleType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12169)
 
     @property
     def ai_bridge_shunt_cal_enable(self):
@@ -939,16 +722,8 @@ class AIChannel(Channel):
 
     @ai_bridge_shunt_cal_enable.deleter
     def ai_bridge_shunt_cal_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgeShuntCalEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 148)
 
     @property
     def ai_bridge_shunt_cal_gain_adjust(self):
@@ -971,16 +746,8 @@ class AIChannel(Channel):
 
     @ai_bridge_shunt_cal_gain_adjust.deleter
     def ai_bridge_shunt_cal_gain_adjust(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgeShuntCalGainAdjust
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6463)
 
     @property
     def ai_bridge_shunt_cal_select(self):
@@ -1004,16 +771,8 @@ class AIChannel(Channel):
 
     @ai_bridge_shunt_cal_select.deleter
     def ai_bridge_shunt_cal_select(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgeShuntCalSelect
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8661)
 
     @property
     def ai_bridge_shunt_cal_shunt_cal_a_actual_resistance(self):
@@ -1034,17 +793,8 @@ class AIChannel(Channel):
 
     @ai_bridge_shunt_cal_shunt_cal_a_actual_resistance.deleter
     def ai_bridge_shunt_cal_shunt_cal_a_actual_resistance(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAIBridgeShuntCalShuntCalAActualResistance)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12153)
 
     @property
     def ai_bridge_shunt_cal_shunt_cal_a_resistance(self):
@@ -1065,17 +815,8 @@ class AIChannel(Channel):
 
     @ai_bridge_shunt_cal_shunt_cal_a_resistance.deleter
     def ai_bridge_shunt_cal_shunt_cal_a_resistance(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAIBridgeShuntCalShuntCalAResistance)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12152)
 
     @property
     def ai_bridge_shunt_cal_shunt_cal_a_src(self):
@@ -1098,16 +839,8 @@ class AIChannel(Channel):
 
     @ai_bridge_shunt_cal_shunt_cal_a_src.deleter
     def ai_bridge_shunt_cal_shunt_cal_a_src(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgeShuntCalShuntCalASrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12490)
 
     @property
     def ai_bridge_shunt_cal_shunt_cal_b_actual_resistance(self):
@@ -1128,17 +861,8 @@ class AIChannel(Channel):
 
     @ai_bridge_shunt_cal_shunt_cal_b_actual_resistance.deleter
     def ai_bridge_shunt_cal_shunt_cal_b_actual_resistance(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAIBridgeShuntCalShuntCalBActualResistance)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12155)
 
     @property
     def ai_bridge_shunt_cal_shunt_cal_b_resistance(self):
@@ -1159,17 +883,8 @@ class AIChannel(Channel):
 
     @ai_bridge_shunt_cal_shunt_cal_b_resistance.deleter
     def ai_bridge_shunt_cal_shunt_cal_b_resistance(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAIBridgeShuntCalShuntCalBResistance)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12154)
 
     @property
     def ai_bridge_table_electrical_vals(self):
@@ -1193,16 +908,8 @@ class AIChannel(Channel):
 
     @ai_bridge_table_electrical_vals.deleter
     def ai_bridge_table_electrical_vals(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgeTableElectricalVals
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12174)
 
     @property
     def ai_bridge_table_physical_vals(self):
@@ -1226,16 +933,8 @@ class AIChannel(Channel):
 
     @ai_bridge_table_physical_vals.deleter
     def ai_bridge_table_physical_vals(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgeTablePhysicalVals
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12175)
 
     @property
     def ai_bridge_two_point_lin_first_electrical_val(self):
@@ -1258,17 +957,8 @@ class AIChannel(Channel):
 
     @ai_bridge_two_point_lin_first_electrical_val.deleter
     def ai_bridge_two_point_lin_first_electrical_val(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAIBridgeTwoPointLinFirstElectricalVal)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12170)
 
     @property
     def ai_bridge_two_point_lin_first_physical_val(self):
@@ -1291,17 +981,8 @@ class AIChannel(Channel):
 
     @ai_bridge_two_point_lin_first_physical_val.deleter
     def ai_bridge_two_point_lin_first_physical_val(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAIBridgeTwoPointLinFirstPhysicalVal)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12171)
 
     @property
     def ai_bridge_two_point_lin_second_electrical_val(self):
@@ -1324,17 +1005,8 @@ class AIChannel(Channel):
 
     @ai_bridge_two_point_lin_second_electrical_val.deleter
     def ai_bridge_two_point_lin_second_electrical_val(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAIBridgeTwoPointLinSecondElectricalVal)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12172)
 
     @property
     def ai_bridge_two_point_lin_second_physical_val(self):
@@ -1357,17 +1029,8 @@ class AIChannel(Channel):
 
     @ai_bridge_two_point_lin_second_physical_val.deleter
     def ai_bridge_two_point_lin_second_physical_val(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAIBridgeTwoPointLinSecondPhysicalVal)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12173)
 
     @property
     def ai_bridge_units(self):
@@ -1389,16 +1052,8 @@ class AIChannel(Channel):
 
     @ai_bridge_units.deleter
     def ai_bridge_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIBridgeUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12178)
 
     @property
     def ai_charge_units(self):
@@ -1420,16 +1075,8 @@ class AIChannel(Channel):
 
     @ai_charge_units.deleter
     def ai_charge_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIChargeUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12562)
 
     @property
     def ai_chop_enable(self):
@@ -1451,16 +1098,8 @@ class AIChannel(Channel):
 
     @ai_chop_enable.deleter
     def ai_chop_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAIChopEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12611)
 
     @property
     def ai_coupling(self):
@@ -1482,16 +1121,8 @@ class AIChannel(Channel):
 
     @ai_coupling.deleter
     def ai_coupling(self):
-        cfunc = lib_importer.windll.DAQmxResetAICoupling
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 100)
 
     @property
     def ai_current_acrms_units(self):
@@ -1513,16 +1144,8 @@ class AIChannel(Channel):
 
     @ai_current_acrms_units.deleter
     def ai_current_acrms_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAICurrentACRMSUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6115)
 
     @property
     def ai_current_shunt_loc(self):
@@ -1545,16 +1168,8 @@ class AIChannel(Channel):
 
     @ai_current_shunt_loc.deleter
     def ai_current_shunt_loc(self):
-        cfunc = lib_importer.windll.DAQmxResetAICurrentShuntLoc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6130)
 
     @property
     def ai_current_shunt_resistance(self):
@@ -1575,16 +1190,8 @@ class AIChannel(Channel):
 
     @ai_current_shunt_resistance.deleter
     def ai_current_shunt_resistance(self):
-        cfunc = lib_importer.windll.DAQmxResetAICurrentShuntResistance
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6131)
 
     @property
     def ai_current_units(self):
@@ -1606,16 +1213,8 @@ class AIChannel(Channel):
 
     @ai_current_units.deleter
     def ai_current_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAICurrentUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 1793)
 
     @property
     def ai_custom_scale(self):
@@ -1637,16 +1236,8 @@ class AIChannel(Channel):
 
     @ai_custom_scale.deleter
     def ai_custom_scale(self):
-        cfunc = lib_importer.windll.DAQmxResetAICustomScaleName
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6112)
 
     @property
     def ai_data_xfer_custom_threshold(self):
@@ -1669,16 +1260,8 @@ class AIChannel(Channel):
 
     @ai_data_xfer_custom_threshold.deleter
     def ai_data_xfer_custom_threshold(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDataXferCustomThreshold
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8972)
 
     @property
     def ai_data_xfer_max_rate(self):
@@ -1702,16 +1285,8 @@ class AIChannel(Channel):
 
     @ai_data_xfer_max_rate.deleter
     def ai_data_xfer_max_rate(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDataXferMaxRate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12567)
 
     @property
     def ai_data_xfer_mech(self):
@@ -1733,16 +1308,8 @@ class AIChannel(Channel):
 
     @ai_data_xfer_mech.deleter
     def ai_data_xfer_mech(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDataXferMech
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6177)
 
     @property
     def ai_data_xfer_req_cond(self):
@@ -1765,16 +1332,8 @@ class AIChannel(Channel):
 
     @ai_data_xfer_req_cond.deleter
     def ai_data_xfer_req_cond(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDataXferReqCond
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6283)
 
     @property
     def ai_dc_offset(self):
@@ -1797,16 +1356,8 @@ class AIChannel(Channel):
 
     @ai_dc_offset.deleter
     def ai_dc_offset(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDCOffset
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10889)
 
     @property
     def ai_dev_scaling_coeff(self):
@@ -1844,16 +1395,8 @@ class AIChannel(Channel):
 
     @ai_dig_fltr_bandpass_center_freq.deleter
     def ai_dig_fltr_bandpass_center_freq(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDigFltrBandpassCenterFreq
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12483)
 
     @property
     def ai_dig_fltr_bandpass_width(self):
@@ -1874,16 +1417,8 @@ class AIChannel(Channel):
 
     @ai_dig_fltr_bandpass_width.deleter
     def ai_dig_fltr_bandpass_width(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDigFltrBandpassWidth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12484)
 
     @property
     def ai_dig_fltr_coeff(self):
@@ -1904,16 +1439,8 @@ class AIChannel(Channel):
 
     @ai_dig_fltr_coeff.deleter
     def ai_dig_fltr_coeff(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDigFltrCoeff
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12487)
 
     @property
     def ai_dig_fltr_enable(self):
@@ -1934,16 +1461,8 @@ class AIChannel(Channel):
 
     @ai_dig_fltr_enable.deleter
     def ai_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12477)
 
     @property
     def ai_dig_fltr_highpass_cutoff_freq(self):
@@ -1964,16 +1483,8 @@ class AIChannel(Channel):
 
     @ai_dig_fltr_highpass_cutoff_freq.deleter
     def ai_dig_fltr_highpass_cutoff_freq(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDigFltrHighpassCutoffFreq
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12482)
 
     @property
     def ai_dig_fltr_lowpass_cutoff_freq(self):
@@ -1994,16 +1505,8 @@ class AIChannel(Channel):
 
     @ai_dig_fltr_lowpass_cutoff_freq.deleter
     def ai_dig_fltr_lowpass_cutoff_freq(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDigFltrLowpassCutoffFreq
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12481)
 
     @property
     def ai_dig_fltr_notch_center_freq(self):
@@ -2024,16 +1527,8 @@ class AIChannel(Channel):
 
     @ai_dig_fltr_notch_center_freq.deleter
     def ai_dig_fltr_notch_center_freq(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDigFltrNotchCenterFreq
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12485)
 
     @property
     def ai_dig_fltr_notch_width(self):
@@ -2054,16 +1549,8 @@ class AIChannel(Channel):
 
     @ai_dig_fltr_notch_width.deleter
     def ai_dig_fltr_notch_width(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDigFltrNotchWidth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12486)
 
     @property
     def ai_dig_fltr_order(self):
@@ -2083,16 +1570,8 @@ class AIChannel(Channel):
 
     @ai_dig_fltr_order.deleter
     def ai_dig_fltr_order(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDigFltrOrder
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12480)
 
     @property
     def ai_dig_fltr_response(self):
@@ -2114,16 +1593,8 @@ class AIChannel(Channel):
 
     @ai_dig_fltr_response.deleter
     def ai_dig_fltr_response(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDigFltrResponse
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12479)
 
     @property
     def ai_dig_fltr_type(self):
@@ -2145,16 +1616,8 @@ class AIChannel(Channel):
 
     @ai_dig_fltr_type.deleter
     def ai_dig_fltr_type(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDigFltrType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12478)
 
     @property
     def ai_dither_enable(self):
@@ -2177,16 +1640,8 @@ class AIChannel(Channel):
 
     @ai_dither_enable.deleter
     def ai_dither_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAIDitherEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 104)
 
     @property
     def ai_eddy_current_prox_sensitivity(self):
@@ -2209,17 +1664,8 @@ class AIChannel(Channel):
 
     @ai_eddy_current_prox_sensitivity.deleter
     def ai_eddy_current_prox_sensitivity(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAIEddyCurrentProxProbeSensitivity)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10942)
 
     @property
     def ai_eddy_current_prox_sensitivity_units(self):
@@ -2241,17 +1687,8 @@ class AIChannel(Channel):
 
     @ai_eddy_current_prox_sensitivity_units.deleter
     def ai_eddy_current_prox_sensitivity_units(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAIEddyCurrentProxProbeSensitivityUnits)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10943)
 
     @property
     def ai_eddy_current_prox_units(self):
@@ -2273,16 +1710,8 @@ class AIChannel(Channel):
 
     @ai_eddy_current_prox_units.deleter
     def ai_eddy_current_prox_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIEddyCurrentProxProbeUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10944)
 
     @property
     def ai_enhanced_alias_rejection_enable(self):
@@ -2304,16 +1733,8 @@ class AIChannel(Channel):
 
     @ai_enhanced_alias_rejection_enable.deleter
     def ai_enhanced_alias_rejection_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAIEnhancedAliasRejectionEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8852)
 
     @property
     def ai_excit_actual_val(self):
@@ -2338,16 +1759,8 @@ class AIChannel(Channel):
 
     @ai_excit_actual_val.deleter
     def ai_excit_actual_val(self):
-        cfunc = lib_importer.windll.DAQmxResetAIExcitActualVal
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6275)
 
     @property
     def ai_excit_d_cor_ac(self):
@@ -2369,16 +1782,8 @@ class AIChannel(Channel):
 
     @ai_excit_d_cor_ac.deleter
     def ai_excit_d_cor_ac(self):
-        cfunc = lib_importer.windll.DAQmxResetAIExcitDCorAC
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6139)
 
     @property
     def ai_excit_idle_output_behavior(self):
@@ -2404,16 +1809,8 @@ class AIChannel(Channel):
 
     @ai_excit_idle_output_behavior.deleter
     def ai_excit_idle_output_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetAIExcitIdleOutputBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12472)
 
     @property
     def ai_excit_sense(self):
@@ -2435,16 +1832,8 @@ class AIChannel(Channel):
 
     @ai_excit_sense.deleter
     def ai_excit_sense(self):
-        cfunc = lib_importer.windll.DAQmxResetAIExcitSense
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12541)
 
     @property
     def ai_excit_src(self):
@@ -2466,16 +1855,8 @@ class AIChannel(Channel):
 
     @ai_excit_src.deleter
     def ai_excit_src(self):
-        cfunc = lib_importer.windll.DAQmxResetAIExcitSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6132)
 
     @property
     def ai_excit_use_for_scaling(self):
@@ -2498,16 +1879,8 @@ class AIChannel(Channel):
 
     @ai_excit_use_for_scaling.deleter
     def ai_excit_use_for_scaling(self):
-        cfunc = lib_importer.windll.DAQmxResetAIExcitUseForScaling
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6140)
 
     @property
     def ai_excit_use_multiplexed(self):
@@ -2529,16 +1902,8 @@ class AIChannel(Channel):
 
     @ai_excit_use_multiplexed.deleter
     def ai_excit_use_multiplexed(self):
-        cfunc = lib_importer.windll.DAQmxResetAIExcitUseMultiplexed
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8576)
 
     @property
     def ai_excit_val(self):
@@ -2563,16 +1928,8 @@ class AIChannel(Channel):
 
     @ai_excit_val.deleter
     def ai_excit_val(self):
-        cfunc = lib_importer.windll.DAQmxResetAIExcitVal
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6133)
 
     @property
     def ai_excit_voltage_or_current(self):
@@ -2594,16 +1951,8 @@ class AIChannel(Channel):
 
     @ai_excit_voltage_or_current.deleter
     def ai_excit_voltage_or_current(self):
-        cfunc = lib_importer.windll.DAQmxResetAIExcitVoltageOrCurrent
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6134)
 
     @property
     def ai_filter_delay(self):
@@ -2642,16 +1991,8 @@ class AIChannel(Channel):
 
     @ai_filter_delay_adjustment.deleter
     def ai_filter_delay_adjustment(self):
-        cfunc = lib_importer.windll.DAQmxResetAIFilterDelayAdjustment
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12404)
 
     @property
     def ai_filter_delay_units(self):
@@ -2674,16 +2015,8 @@ class AIChannel(Channel):
 
     @ai_filter_delay_units.deleter
     def ai_filter_delay_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIFilterDelayUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12401)
 
     @property
     def ai_filter_enable(self):
@@ -2703,16 +2036,8 @@ class AIChannel(Channel):
 
     @ai_filter_enable.deleter
     def ai_filter_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAIFilterEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12659)
 
     @property
     def ai_filter_freq(self):
@@ -2733,16 +2058,8 @@ class AIChannel(Channel):
 
     @ai_filter_freq.deleter
     def ai_filter_freq(self):
-        cfunc = lib_importer.windll.DAQmxResetAIFilterFreq
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12660)
 
     @property
     def ai_filter_order(self):
@@ -2763,16 +2080,8 @@ class AIChannel(Channel):
 
     @ai_filter_order.deleter
     def ai_filter_order(self):
-        cfunc = lib_importer.windll.DAQmxResetAIFilterOrder
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12662)
 
     @property
     def ai_filter_response(self):
@@ -2795,16 +2104,8 @@ class AIChannel(Channel):
 
     @ai_filter_response.deleter
     def ai_filter_response(self):
-        cfunc = lib_importer.windll.DAQmxResetAIFilterResponse
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12661)
 
     @property
     def ai_force_iepe_sensor_sensitivity(self):
@@ -2826,16 +2127,8 @@ class AIChannel(Channel):
 
     @ai_force_iepe_sensor_sensitivity.deleter
     def ai_force_iepe_sensor_sensitivity(self):
-        cfunc = lib_importer.windll.DAQmxResetAIForceIEPESensorSensitivity
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12161)
 
     @property
     def ai_force_iepe_sensor_sensitivity_units(self):
@@ -2858,17 +2151,8 @@ class AIChannel(Channel):
 
     @ai_force_iepe_sensor_sensitivity_units.deleter
     def ai_force_iepe_sensor_sensitivity_units(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAIForceIEPESensorSensitivityUnits)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12162)
 
     @property
     def ai_force_read_from_chan(self):
@@ -2893,16 +2177,8 @@ class AIChannel(Channel):
 
     @ai_force_read_from_chan.deleter
     def ai_force_read_from_chan(self):
-        cfunc = lib_importer.windll.DAQmxResetAIForceReadFromChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6392)
 
     @property
     def ai_force_units(self):
@@ -2924,16 +2200,8 @@ class AIChannel(Channel):
 
     @ai_force_units.deleter
     def ai_force_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIForceUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12149)
 
     @property
     def ai_freq_hyst(self):
@@ -2959,16 +2227,8 @@ class AIChannel(Channel):
 
     @ai_freq_hyst.deleter
     def ai_freq_hyst(self):
-        cfunc = lib_importer.windll.DAQmxResetAIFreqHyst
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2068)
 
     @property
     def ai_freq_thresh_voltage(self):
@@ -2992,16 +2252,8 @@ class AIChannel(Channel):
 
     @ai_freq_thresh_voltage.deleter
     def ai_freq_thresh_voltage(self):
-        cfunc = lib_importer.windll.DAQmxResetAIFreqThreshVoltage
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2069)
 
     @property
     def ai_freq_units(self):
@@ -3023,16 +2275,8 @@ class AIChannel(Channel):
 
     @ai_freq_units.deleter
     def ai_freq_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIFreqUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2054)
 
     @property
     def ai_gain(self):
@@ -3052,16 +2296,8 @@ class AIChannel(Channel):
 
     @ai_gain.deleter
     def ai_gain(self):
-        cfunc = lib_importer.windll.DAQmxResetAIGain
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6168)
 
     @property
     def ai_impedance(self):
@@ -3083,16 +2319,8 @@ class AIChannel(Channel):
 
     @ai_impedance.deleter
     def ai_impedance(self):
-        cfunc = lib_importer.windll.DAQmxResetAIImpedance
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 98)
 
     @property
     def ai_input_limits_fault_detect_enable(self):
@@ -3112,16 +2340,8 @@ class AIChannel(Channel):
 
     @ai_input_limits_fault_detect_enable.deleter
     def ai_input_limits_fault_detect_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAIInputLimitsFaultDetectEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12686)
 
     @property
     def ai_input_limits_fault_detect_lower_limit(self):
@@ -3147,17 +2367,8 @@ class AIChannel(Channel):
 
     @ai_input_limits_fault_detect_lower_limit.deleter
     def ai_input_limits_fault_detect_lower_limit(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAIInputLimitsFaultDetectLowerLimit)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12685)
 
     @property
     def ai_input_limits_fault_detect_upper_limit(self):
@@ -3183,17 +2394,8 @@ class AIChannel(Channel):
 
     @ai_input_limits_fault_detect_upper_limit.deleter
     def ai_input_limits_fault_detect_upper_limit(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAIInputLimitsFaultDetectUpperLimit)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12684)
 
     @property
     def ai_input_src(self):
@@ -3218,16 +2420,8 @@ class AIChannel(Channel):
 
     @ai_input_src.deleter
     def ai_input_src(self):
-        cfunc = lib_importer.windll.DAQmxResetAIInputSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8600)
 
     @property
     def ai_lead_wire_resistance(self):
@@ -3248,16 +2442,8 @@ class AIChannel(Channel):
 
     @ai_lead_wire_resistance.deleter
     def ai_lead_wire_resistance(self):
-        cfunc = lib_importer.windll.DAQmxResetAILeadWireResistance
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6126)
 
     @property
     def ai_lossy_lsb_removal_compressed_samp_size(self):
@@ -3279,17 +2465,8 @@ class AIChannel(Channel):
 
     @ai_lossy_lsb_removal_compressed_samp_size.deleter
     def ai_lossy_lsb_removal_compressed_samp_size(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAILossyLSBRemovalCompressedSampSize)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8921)
 
     @property
     def ai_lowpass_cutoff_freq(self):
@@ -3310,16 +2487,8 @@ class AIChannel(Channel):
 
     @ai_lowpass_cutoff_freq.deleter
     def ai_lowpass_cutoff_freq(self):
-        cfunc = lib_importer.windll.DAQmxResetAILowpassCutoffFreq
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6147)
 
     @property
     def ai_lowpass_enable(self):
@@ -3340,16 +2509,8 @@ class AIChannel(Channel):
 
     @ai_lowpass_enable.deleter
     def ai_lowpass_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAILowpassEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6146)
 
     @property
     def ai_lowpass_switch_cap_clk_src(self):
@@ -3374,16 +2535,8 @@ class AIChannel(Channel):
 
     @ai_lowpass_switch_cap_clk_src.deleter
     def ai_lowpass_switch_cap_clk_src(self):
-        cfunc = lib_importer.windll.DAQmxResetAILowpassSwitchCapClkSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6276)
 
     @property
     def ai_lowpass_switch_cap_ext_clk_div(self):
@@ -3409,16 +2562,8 @@ class AIChannel(Channel):
 
     @ai_lowpass_switch_cap_ext_clk_div.deleter
     def ai_lowpass_switch_cap_ext_clk_div(self):
-        cfunc = lib_importer.windll.DAQmxResetAILowpassSwitchCapExtClkDiv
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6278)
 
     @property
     def ai_lowpass_switch_cap_ext_clk_freq(self):
@@ -3446,16 +2591,8 @@ class AIChannel(Channel):
 
     @ai_lowpass_switch_cap_ext_clk_freq.deleter
     def ai_lowpass_switch_cap_ext_clk_freq(self):
-        cfunc = lib_importer.windll.DAQmxResetAILowpassSwitchCapExtClkFreq
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6277)
 
     @property
     def ai_lowpass_switch_cap_out_clk_div(self):
@@ -3478,16 +2615,8 @@ class AIChannel(Channel):
 
     @ai_lowpass_switch_cap_out_clk_div.deleter
     def ai_lowpass_switch_cap_out_clk_div(self):
-        cfunc = lib_importer.windll.DAQmxResetAILowpassSwitchCapOutClkDiv
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6279)
 
     @property
     def ai_lvdt_sensitivity(self):
@@ -3509,16 +2638,8 @@ class AIChannel(Channel):
 
     @ai_lvdt_sensitivity.deleter
     def ai_lvdt_sensitivity(self):
-        cfunc = lib_importer.windll.DAQmxResetAILVDTSensitivity
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2361)
 
     @property
     def ai_lvdt_sensitivity_units(self):
@@ -3540,16 +2661,8 @@ class AIChannel(Channel):
 
     @ai_lvdt_sensitivity_units.deleter
     def ai_lvdt_sensitivity_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAILVDTSensitivityUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8602)
 
     @property
     def ai_lvdt_units(self):
@@ -3571,16 +2684,8 @@ class AIChannel(Channel):
 
     @ai_lvdt_units.deleter
     def ai_lvdt_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAILVDTUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2320)
 
     @property
     def ai_max(self):
@@ -3603,16 +2708,8 @@ class AIChannel(Channel):
 
     @ai_max.deleter
     def ai_max(self):
-        cfunc = lib_importer.windll.DAQmxResetAIMax
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6109)
 
     @property
     def ai_meas_type(self):
@@ -3653,16 +2750,8 @@ class AIChannel(Channel):
 
     @ai_mem_map_enable.deleter
     def ai_mem_map_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAIMemMapEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6284)
 
     @property
     def ai_microphone_sensitivity(self):
@@ -3684,16 +2773,8 @@ class AIChannel(Channel):
 
     @ai_microphone_sensitivity.deleter
     def ai_microphone_sensitivity(self):
-        cfunc = lib_importer.windll.DAQmxResetAIMicrophoneSensitivity
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 5430)
 
     @property
     def ai_min(self):
@@ -3716,16 +2797,8 @@ class AIChannel(Channel):
 
     @ai_min.deleter
     def ai_min(self):
-        cfunc = lib_importer.windll.DAQmxResetAIMin
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6110)
 
     @property
     def ai_open_chan_detect_enable(self):
@@ -3745,16 +2818,8 @@ class AIChannel(Channel):
 
     @ai_open_chan_detect_enable.deleter
     def ai_open_chan_detect_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAIOpenChanDetectEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12543)
 
     @property
     def ai_open_thrmcpl_detect_enable(self):
@@ -3783,16 +2848,8 @@ class AIChannel(Channel):
 
     @ai_open_thrmcpl_detect_enable.deleter
     def ai_open_thrmcpl_detect_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAIOpenThrmcplDetectEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12146)
 
     @property
     def ai_overcurrent_detect_enable(self):
@@ -3812,16 +2869,8 @@ class AIChannel(Channel):
 
     @ai_overcurrent_detect_enable.deleter
     def ai_overcurrent_detect_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAIOvercurrentDetectEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12692)
 
     @property
     def ai_power_supply_fault_detect_enable(self):
@@ -3841,16 +2890,8 @@ class AIChannel(Channel):
 
     @ai_power_supply_fault_detect_enable.deleter
     def ai_power_supply_fault_detect_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAIPowerSupplyFaultDetectEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12689)
 
     @property
     def ai_pressure_units(self):
@@ -3872,16 +2913,8 @@ class AIChannel(Channel):
 
     @ai_pressure_units.deleter
     def ai_pressure_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIPressureUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12150)
 
     @property
     def ai_probe_atten(self):
@@ -3903,16 +2936,8 @@ class AIChannel(Channel):
 
     @ai_probe_atten.deleter
     def ai_probe_atten(self):
-        cfunc = lib_importer.windll.DAQmxResetAIProbeAtten
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10888)
 
     @property
     def ai_raw_data_compression_type(self):
@@ -3935,16 +2960,8 @@ class AIChannel(Channel):
 
     @ai_raw_data_compression_type.deleter
     def ai_raw_data_compression_type(self):
-        cfunc = lib_importer.windll.DAQmxResetAIRawDataCompressionType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8920)
 
     @property
     def ai_raw_samp_justification(self):
@@ -3988,16 +3005,8 @@ class AIChannel(Channel):
 
     @ai_remove_filter_delay.deleter
     def ai_remove_filter_delay(self):
-        cfunc = lib_importer.windll.DAQmxResetAIRemoveFilterDelay
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12221)
 
     @property
     def ai_resistance_cfg(self):
@@ -4021,16 +3030,8 @@ class AIChannel(Channel):
 
     @ai_resistance_cfg.deleter
     def ai_resistance_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetAIResistanceCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6273)
 
     @property
     def ai_resistance_units(self):
@@ -4052,16 +3053,8 @@ class AIChannel(Channel):
 
     @ai_resistance_units.deleter
     def ai_resistance_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIResistanceUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2389)
 
     @property
     def ai_resolution(self):
@@ -4108,16 +3101,8 @@ class AIChannel(Channel):
 
     @ai_rng_high.deleter
     def ai_rng_high(self):
-        cfunc = lib_importer.windll.DAQmxResetAIRngHigh
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6165)
 
     @property
     def ai_rng_low(self):
@@ -4139,16 +3124,8 @@ class AIChannel(Channel):
 
     @ai_rng_low.deleter
     def ai_rng_low(self):
-        cfunc = lib_importer.windll.DAQmxResetAIRngLow
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6166)
 
     @property
     def ai_rosette_strain_gage_gage_orientation(self):
@@ -4169,16 +3146,8 @@ class AIChannel(Channel):
 
     @ai_rosette_strain_gage_gage_orientation.deleter
     def ai_rosette_strain_gage_gage_orientation(self):
-        cfunc = lib_importer.windll.DAQmxResetAIRosetteStrainGageOrientation
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12284)
 
     @property
     def ai_rosette_strain_gage_rosette_meas_type(self):
@@ -4200,17 +3169,8 @@ class AIChannel(Channel):
 
     @ai_rosette_strain_gage_rosette_meas_type.deleter
     def ai_rosette_strain_gage_rosette_meas_type(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAIRosetteStrainGageRosetteMeasType)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12285)
 
     @property
     def ai_rosette_strain_gage_rosette_type(self):
@@ -4256,16 +3216,8 @@ class AIChannel(Channel):
 
     @ai_rtd_a.deleter
     def ai_rtd_a(self):
-        cfunc = lib_importer.windll.DAQmxResetAIRTDA
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 4112)
 
     @property
     def ai_rtd_b(self):
@@ -4287,16 +3239,8 @@ class AIChannel(Channel):
 
     @ai_rtd_b.deleter
     def ai_rtd_b(self):
-        cfunc = lib_importer.windll.DAQmxResetAIRTDB
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 4113)
 
     @property
     def ai_rtd_c(self):
@@ -4318,16 +3262,8 @@ class AIChannel(Channel):
 
     @ai_rtd_c.deleter
     def ai_rtd_c(self):
-        cfunc = lib_importer.windll.DAQmxResetAIRTDC
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 4115)
 
     @property
     def ai_rtd_r0(self):
@@ -4349,16 +3285,8 @@ class AIChannel(Channel):
 
     @ai_rtd_r0.deleter
     def ai_rtd_r0(self):
-        cfunc = lib_importer.windll.DAQmxResetAIRTDR0
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 4144)
 
     @property
     def ai_rtd_type(self):
@@ -4380,16 +3308,8 @@ class AIChannel(Channel):
 
     @ai_rtd_type.deleter
     def ai_rtd_type(self):
-        cfunc = lib_importer.windll.DAQmxResetAIRTDType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 4146)
 
     @property
     def ai_rvdt_sensitivity(self):
@@ -4411,16 +3331,8 @@ class AIChannel(Channel):
 
     @ai_rvdt_sensitivity.deleter
     def ai_rvdt_sensitivity(self):
-        cfunc = lib_importer.windll.DAQmxResetAIRVDTSensitivity
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2307)
 
     @property
     def ai_rvdt_sensitivity_units(self):
@@ -4442,16 +3354,8 @@ class AIChannel(Channel):
 
     @ai_rvdt_sensitivity_units.deleter
     def ai_rvdt_sensitivity_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIRVDTSensitivityUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8603)
 
     @property
     def ai_rvdt_units(self):
@@ -4474,16 +3378,8 @@ class AIChannel(Channel):
 
     @ai_rvdt_units.deleter
     def ai_rvdt_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIRVDTUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2167)
 
     @property
     def ai_samp_and_hold_enable(self):
@@ -4507,16 +3403,8 @@ class AIChannel(Channel):
 
     @ai_samp_and_hold_enable.deleter
     def ai_samp_and_hold_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAISampAndHoldEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6170)
 
     @property
     def ai_sensor_power_cfg(self):
@@ -4539,16 +3427,8 @@ class AIChannel(Channel):
 
     @ai_sensor_power_cfg.deleter
     def ai_sensor_power_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetAISensorPowerCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12650)
 
     @property
     def ai_sensor_power_type(self):
@@ -4570,16 +3450,8 @@ class AIChannel(Channel):
 
     @ai_sensor_power_type.deleter
     def ai_sensor_power_type(self):
-        cfunc = lib_importer.windll.DAQmxResetAISensorPowerType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12651)
 
     @property
     def ai_sensor_power_voltage(self):
@@ -4600,16 +3472,8 @@ class AIChannel(Channel):
 
     @ai_sensor_power_voltage.deleter
     def ai_sensor_power_voltage(self):
-        cfunc = lib_importer.windll.DAQmxResetAISensorPowerVoltage
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12649)
 
     @property
     def ai_sound_pressure_db_ref(self):
@@ -4634,16 +3498,8 @@ class AIChannel(Channel):
 
     @ai_sound_pressure_db_ref.deleter
     def ai_sound_pressure_db_ref(self):
-        cfunc = lib_importer.windll.DAQmxResetAISoundPressuredBRef
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10673)
 
     @property
     def ai_sound_pressure_max_sound_pressure_lvl(self):
@@ -4667,17 +3523,8 @@ class AIChannel(Channel):
 
     @ai_sound_pressure_max_sound_pressure_lvl.deleter
     def ai_sound_pressure_max_sound_pressure_lvl(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAISoundPressureMaxSoundPressureLvl)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8762)
 
     @property
     def ai_sound_pressure_units(self):
@@ -4700,16 +3547,8 @@ class AIChannel(Channel):
 
     @ai_sound_pressure_units.deleter
     def ai_sound_pressure_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAISoundPressureUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 5416)
 
     @property
     def ai_strain_force_read_from_chan(self):
@@ -4731,16 +3570,8 @@ class AIChannel(Channel):
 
     @ai_strain_force_read_from_chan.deleter
     def ai_strain_force_read_from_chan(self):
-        cfunc = lib_importer.windll.DAQmxResetAIStrainGageForceReadFromChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12282)
 
     @property
     def ai_strain_gage_cfg(self):
@@ -4762,16 +3593,8 @@ class AIChannel(Channel):
 
     @ai_strain_gage_cfg.deleter
     def ai_strain_gage_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetAIStrainGageCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2434)
 
     @property
     def ai_strain_gage_gage_factor(self):
@@ -4794,16 +3617,8 @@ class AIChannel(Channel):
 
     @ai_strain_gage_gage_factor.deleter
     def ai_strain_gage_gage_factor(self):
-        cfunc = lib_importer.windll.DAQmxResetAIStrainGageGageFactor
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2452)
 
     @property
     def ai_strain_gage_poisson_ratio(self):
@@ -4824,16 +3639,8 @@ class AIChannel(Channel):
 
     @ai_strain_gage_poisson_ratio.deleter
     def ai_strain_gage_poisson_ratio(self):
-        cfunc = lib_importer.windll.DAQmxResetAIStrainGagePoissonRatio
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2456)
 
     @property
     def ai_strain_units(self):
@@ -4855,16 +3662,8 @@ class AIChannel(Channel):
 
     @ai_strain_units.deleter
     def ai_strain_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIStrainUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 2433)
 
     @property
     def ai_teds_is_teds(self):
@@ -4910,16 +3709,8 @@ class AIChannel(Channel):
 
     @ai_temp_units.deleter
     def ai_temp_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAITempUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 4147)
 
     @property
     def ai_term_cfg(self):
@@ -4941,16 +3732,8 @@ class AIChannel(Channel):
 
     @ai_term_cfg.deleter
     def ai_term_cfg(self):
-        cfunc = lib_importer.windll.DAQmxResetAITermCfg
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 4247)
 
     @property
     def ai_thrmcpl_cjc_chan(self):
@@ -5003,16 +3786,8 @@ class AIChannel(Channel):
 
     @ai_thrmcpl_cjc_val.deleter
     def ai_thrmcpl_cjc_val(self):
-        cfunc = lib_importer.windll.DAQmxResetAIThrmcplCJCVal
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 4150)
 
     @property
     def ai_thrmcpl_lead_offset_voltage(self):
@@ -5034,16 +3809,8 @@ class AIChannel(Channel):
 
     @ai_thrmcpl_lead_offset_voltage.deleter
     def ai_thrmcpl_lead_offset_voltage(self):
-        cfunc = lib_importer.windll.DAQmxResetAIThrmcplLeadOffsetVoltage
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12216)
 
     @property
     def ai_thrmcpl_scale_type(self):
@@ -5065,16 +3832,8 @@ class AIChannel(Channel):
 
     @ai_thrmcpl_scale_type.deleter
     def ai_thrmcpl_scale_type(self):
-        cfunc = lib_importer.windll.DAQmxResetAIThrmcplScaleType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10704)
 
     @property
     def ai_thrmcpl_type(self):
@@ -5097,16 +3856,8 @@ class AIChannel(Channel):
 
     @ai_thrmcpl_type.deleter
     def ai_thrmcpl_type(self):
-        cfunc = lib_importer.windll.DAQmxResetAIThrmcplType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 4176)
 
     @property
     def ai_thrmstr_a(self):
@@ -5127,16 +3878,8 @@ class AIChannel(Channel):
 
     @ai_thrmstr_a.deleter
     def ai_thrmstr_a(self):
-        cfunc = lib_importer.windll.DAQmxResetAIThrmstrA
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6345)
 
     @property
     def ai_thrmstr_b(self):
@@ -5157,16 +3900,8 @@ class AIChannel(Channel):
 
     @ai_thrmstr_b.deleter
     def ai_thrmstr_b(self):
-        cfunc = lib_importer.windll.DAQmxResetAIThrmstrB
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6347)
 
     @property
     def ai_thrmstr_c(self):
@@ -5187,16 +3922,8 @@ class AIChannel(Channel):
 
     @ai_thrmstr_c.deleter
     def ai_thrmstr_c(self):
-        cfunc = lib_importer.windll.DAQmxResetAIThrmstrC
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6346)
 
     @property
     def ai_thrmstr_r1(self):
@@ -5218,16 +3945,8 @@ class AIChannel(Channel):
 
     @ai_thrmstr_r1.deleter
     def ai_thrmstr_r1(self):
-        cfunc = lib_importer.windll.DAQmxResetAIThrmstrR1
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 4193)
 
     @property
     def ai_torque_units(self):
@@ -5249,16 +3968,8 @@ class AIChannel(Channel):
 
     @ai_torque_units.deleter
     def ai_torque_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAITorqueUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12151)
 
     @property
     def ai_usb_xfer_req_count(self):
@@ -5280,16 +3991,8 @@ class AIChannel(Channel):
 
     @ai_usb_xfer_req_count.deleter
     def ai_usb_xfer_req_count(self):
-        cfunc = lib_importer.windll.DAQmxResetAIUsbXferReqCount
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12288)
 
     @property
     def ai_usb_xfer_req_size(self):
@@ -5311,16 +4014,8 @@ class AIChannel(Channel):
 
     @ai_usb_xfer_req_size.deleter
     def ai_usb_xfer_req_size(self):
-        cfunc = lib_importer.windll.DAQmxResetAIUsbXferReqSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10894)
 
     @property
     def ai_velocity_iepe_sensor_db_ref(self):
@@ -5342,16 +4037,8 @@ class AIChannel(Channel):
 
     @ai_velocity_iepe_sensor_db_ref.deleter
     def ai_velocity_iepe_sensor_db_ref(self):
-        cfunc = lib_importer.windll.DAQmxResetAIVelocityIEPESensordBRef
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12277)
 
     @property
     def ai_velocity_iepe_sensor_sensitivity(self):
@@ -5373,16 +4060,8 @@ class AIChannel(Channel):
 
     @ai_velocity_iepe_sensor_sensitivity.deleter
     def ai_velocity_iepe_sensor_sensitivity(self):
-        cfunc = lib_importer.windll.DAQmxResetAIVelocityIEPESensorSensitivity
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12278)
 
     @property
     def ai_velocity_iepe_sensor_sensitivity_units(self):
@@ -5405,17 +4084,8 @@ class AIChannel(Channel):
 
     @ai_velocity_iepe_sensor_sensitivity_units.deleter
     def ai_velocity_iepe_sensor_sensitivity_units(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAIVelocityIEPESensorSensitivityUnits)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12279)
 
     @property
     def ai_velocity_units(self):
@@ -5437,16 +4107,8 @@ class AIChannel(Channel):
 
     @ai_velocity_units.deleter
     def ai_velocity_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIVelocityUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12276)
 
     @property
     def ai_voltage_acrms_units(self):
@@ -5468,16 +4130,8 @@ class AIChannel(Channel):
 
     @ai_voltage_acrms_units.deleter
     def ai_voltage_acrms_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIVoltageACRMSUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6114)
 
     @property
     def ai_voltage_db_ref(self):
@@ -5499,16 +4153,8 @@ class AIChannel(Channel):
 
     @ai_voltage_db_ref.deleter
     def ai_voltage_db_ref(self):
-        cfunc = lib_importer.windll.DAQmxResetAIVoltagedBRef
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10672)
 
     @property
     def ai_voltage_units(self):
@@ -5530,16 +4176,8 @@ class AIChannel(Channel):
 
     @ai_voltage_units.deleter
     def ai_voltage_units(self):
-        cfunc = lib_importer.windll.DAQmxResetAIVoltageUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 4244)
 
     @property
     def pwr_current_dev_scaling_coeff(self):
@@ -5575,16 +4213,8 @@ class AIChannel(Channel):
 
     @pwr_current_setpoint.deleter
     def pwr_current_setpoint(self):
-        cfunc = lib_importer.windll.DAQmxResetPwrCurrentSetpoint
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12757)
 
     @property
     def pwr_idle_output_behavior(self):
@@ -5607,16 +4237,8 @@ class AIChannel(Channel):
 
     @pwr_idle_output_behavior.deleter
     def pwr_idle_output_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetPwrIdleOutputBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12760)
 
     @property
     def pwr_output_enable(self):
@@ -5640,16 +4262,8 @@ class AIChannel(Channel):
 
     @pwr_output_enable.deleter
     def pwr_output_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetPwrOutputEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12758)
 
     @property
     def pwr_output_state(self):
@@ -5687,16 +4301,8 @@ class AIChannel(Channel):
 
     @pwr_remote_sense.deleter
     def pwr_remote_sense(self):
-        cfunc = lib_importer.windll.DAQmxResetPwrRemoteSense
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12763)
 
     @property
     def pwr_voltage_dev_scaling_coeff(self):
@@ -5732,16 +4338,8 @@ class AIChannel(Channel):
 
     @pwr_voltage_setpoint.deleter
     def pwr_voltage_setpoint(self):
-        cfunc = lib_importer.windll.DAQmxResetPwrVoltageSetpoint
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12756)
 
     @property
     @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_rtd_r0 instead.")

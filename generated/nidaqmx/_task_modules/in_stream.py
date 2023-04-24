@@ -105,16 +105,8 @@ class InStream:
 
     @auto_start.deleter
     def auto_start(self):
-        cfunc = lib_importer.windll.DAQmxResetReadAutoStart
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(
+                self._handle, 6182)
 
     @property
     def aux_power_error_chans(self):
@@ -194,16 +186,8 @@ class InStream:
 
     @channels_to_read.deleter
     def channels_to_read(self):
-        cfunc = lib_importer.windll.DAQmxResetReadChannelsToRead
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(
+                self._handle, 6179)
 
     @property
     def common_mode_range_error_chans(self):
@@ -332,16 +316,8 @@ class InStream:
 
     @input_buf_size.deleter
     def input_buf_size(self):
-        cfunc = lib_importer.windll.DAQmxResetBufInputBufSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_buffer_attribute(
+                self._handle, 6252)
 
     @property
     def input_limits_fault_chans(self):
@@ -415,16 +391,8 @@ class InStream:
 
     @logging_file_path.deleter
     def logging_file_path(self):
-        cfunc = lib_importer.windll.DAQmxResetLoggingFilePath
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(
+                self._handle, 11972)
 
     @property
     def logging_file_preallocation_size(self):
@@ -449,16 +417,8 @@ class InStream:
 
     @logging_file_preallocation_size.deleter
     def logging_file_preallocation_size(self):
-        cfunc = lib_importer.windll.DAQmxResetLoggingFilePreallocationSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(
+                self._handle, 12230)
 
     @property
     def logging_file_write_size(self):
@@ -480,16 +440,8 @@ class InStream:
 
     @logging_file_write_size.deleter
     def logging_file_write_size(self):
-        cfunc = lib_importer.windll.DAQmxResetLoggingFileWriteSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(
+                self._handle, 12227)
 
     @property
     def logging_mode(self):
@@ -515,16 +467,8 @@ class InStream:
 
     @logging_mode.deleter
     def logging_mode(self):
-        cfunc = lib_importer.windll.DAQmxResetLoggingMode
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(
+                self._handle, 11973)
 
     @property
     def logging_pause(self):
@@ -551,16 +495,8 @@ class InStream:
 
     @logging_pause.deleter
     def logging_pause(self):
-        cfunc = lib_importer.windll.DAQmxResetLoggingPause
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(
+                self._handle, 12259)
 
     @property
     def logging_samps_per_file(self):
@@ -589,16 +525,8 @@ class InStream:
 
     @logging_samps_per_file.deleter
     def logging_samps_per_file(self):
-        cfunc = lib_importer.windll.DAQmxResetLoggingSampsPerFile
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(
+                self._handle, 12260)
 
     @property
     def logging_tdms_group_name(self):
@@ -626,16 +554,8 @@ class InStream:
 
     @logging_tdms_group_name.deleter
     def logging_tdms_group_name(self):
-        cfunc = lib_importer.windll.DAQmxResetLoggingTDMSGroupName
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(
+                self._handle, 11974)
 
     @property
     def logging_tdms_operation(self):
@@ -657,16 +577,8 @@ class InStream:
 
     @logging_tdms_operation.deleter
     def logging_tdms_operation(self):
-        cfunc = lib_importer.windll.DAQmxResetLoggingTDMSOperation
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(
+                self._handle, 11975)
 
     @property
     def num_chans(self):
@@ -702,16 +614,8 @@ class InStream:
 
     @offset.deleter
     def offset(self):
-        cfunc = lib_importer.windll.DAQmxResetReadOffset
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(
+                self._handle, 6411)
 
     @property
     def open_chans(self):
@@ -927,16 +831,8 @@ class InStream:
 
     @overwrite.deleter
     def overwrite(self):
-        cfunc = lib_importer.windll.DAQmxResetReadOverWrite
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(
+                self._handle, 4625)
 
     @property
     def pll_unlocked_chans(self):
@@ -1028,16 +924,8 @@ class InStream:
 
     @read_all_avail_samp.deleter
     def read_all_avail_samp(self):
-        cfunc = lib_importer.windll.DAQmxResetReadReadAllAvailSamp
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(
+                self._handle, 4629)
 
     @property
     def relative_to(self):
@@ -1066,16 +954,8 @@ class InStream:
 
     @relative_to.deleter
     def relative_to(self):
-        cfunc = lib_importer.windll.DAQmxResetReadRelativeTo
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(
+                self._handle, 6410)
 
     @property
     def remote_sense_error_chans(self):
@@ -1160,16 +1040,8 @@ class InStream:
 
     @sleep_time.deleter
     def sleep_time(self):
-        cfunc = lib_importer.windll.DAQmxResetReadSleepTime
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(
+                self._handle, 8880)
 
     @property
     def sync_unlocked_chans(self):
@@ -1231,16 +1103,8 @@ class InStream:
 
     @wait_mode.deleter
     def wait_mode(self):
-        cfunc = lib_importer.windll.DAQmxResetReadWaitMode
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(
+                self._handle, 8754)
 
     def _calculate_num_samps_per_chan(self, num_samps_per_chan):
         if num_samps_per_chan == -1:

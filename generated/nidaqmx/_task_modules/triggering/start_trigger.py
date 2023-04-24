@@ -42,16 +42,8 @@ class StartTrigger:
 
     @anlg_edge_coupling.deleter
     def anlg_edge_coupling(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgEdgeStartTrigCoupling
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 8755)
 
     @property
     def anlg_edge_dig_fltr_enable(self):
@@ -77,16 +69,8 @@ class StartTrigger:
 
     @anlg_edge_dig_fltr_enable.deleter
     def anlg_edge_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgEdgeStartTrigDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12001)
 
     @property
     def anlg_edge_dig_fltr_min_pulse_width(self):
@@ -107,17 +91,8 @@ class StartTrigger:
 
     @anlg_edge_dig_fltr_min_pulse_width.deleter
     def anlg_edge_dig_fltr_min_pulse_width(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAnlgEdgeStartTrigDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12002)
 
     @property
     def anlg_edge_dig_fltr_timebase_rate(self):
@@ -139,17 +114,8 @@ class StartTrigger:
 
     @anlg_edge_dig_fltr_timebase_rate.deleter
     def anlg_edge_dig_fltr_timebase_rate(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAnlgEdgeStartTrigDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12004)
 
     @property
     def anlg_edge_dig_fltr_timebase_src(self):
@@ -170,17 +136,8 @@ class StartTrigger:
 
     @anlg_edge_dig_fltr_timebase_src.deleter
     def anlg_edge_dig_fltr_timebase_src(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAnlgEdgeStartTrigDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12003)
 
     @property
     def anlg_edge_dig_sync_enable(self):
@@ -202,16 +159,8 @@ class StartTrigger:
 
     @anlg_edge_dig_sync_enable.deleter
     def anlg_edge_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgEdgeStartTrigDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12005)
 
     @property
     def anlg_edge_hyst(self):
@@ -239,16 +188,8 @@ class StartTrigger:
 
     @anlg_edge_hyst.deleter
     def anlg_edge_hyst(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgEdgeStartTrigHyst
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 5013)
 
     @property
     def anlg_edge_lvl(self):
@@ -271,16 +212,8 @@ class StartTrigger:
 
     @anlg_edge_lvl.deleter
     def anlg_edge_lvl(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgEdgeStartTrigLvl
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 5014)
 
     @property
     def anlg_edge_slope(self):
@@ -302,16 +235,8 @@ class StartTrigger:
 
     @anlg_edge_slope.deleter
     def anlg_edge_slope(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgEdgeStartTrigSlope
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 5015)
 
     @property
     def anlg_edge_src(self):
@@ -333,16 +258,8 @@ class StartTrigger:
 
     @anlg_edge_src.deleter
     def anlg_edge_src(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgEdgeStartTrigSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 5016)
 
     @property
     def anlg_multi_edge_couplings(self):
@@ -369,16 +286,8 @@ class StartTrigger:
 
     @anlg_multi_edge_couplings.deleter
     def anlg_multi_edge_couplings(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgMultiEdgeStartTrigCouplings
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12581)
 
     @property
     def anlg_multi_edge_hysts(self):
@@ -411,16 +320,8 @@ class StartTrigger:
 
     @anlg_multi_edge_hysts.deleter
     def anlg_multi_edge_hysts(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgMultiEdgeStartTrigHysts
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12580)
 
     @property
     def anlg_multi_edge_lvls(self):
@@ -445,16 +346,8 @@ class StartTrigger:
 
     @anlg_multi_edge_lvls.deleter
     def anlg_multi_edge_lvls(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgMultiEdgeStartTrigLvls
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12579)
 
     @property
     def anlg_multi_edge_slopes(self):
@@ -480,16 +373,8 @@ class StartTrigger:
 
     @anlg_multi_edge_slopes.deleter
     def anlg_multi_edge_slopes(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgMultiEdgeStartTrigSlopes
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12578)
 
     @property
     def anlg_multi_edge_srcs(self):
@@ -512,16 +397,8 @@ class StartTrigger:
 
     @anlg_multi_edge_srcs.deleter
     def anlg_multi_edge_srcs(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgMultiEdgeStartTrigSrcs
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12577)
 
     @property
     def anlg_win_btm(self):
@@ -542,16 +419,8 @@ class StartTrigger:
 
     @anlg_win_btm.deleter
     def anlg_win_btm(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgWinStartTrigBtm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 5122)
 
     @property
     def anlg_win_coupling(self):
@@ -574,16 +443,8 @@ class StartTrigger:
 
     @anlg_win_coupling.deleter
     def anlg_win_coupling(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgWinStartTrigCoupling
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 8756)
 
     @property
     def anlg_win_dig_fltr_enable(self):
@@ -608,16 +469,8 @@ class StartTrigger:
 
     @anlg_win_dig_fltr_enable.deleter
     def anlg_win_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgWinStartTrigDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12031)
 
     @property
     def anlg_win_dig_fltr_min_pulse_width(self):
@@ -638,17 +491,8 @@ class StartTrigger:
 
     @anlg_win_dig_fltr_min_pulse_width.deleter
     def anlg_win_dig_fltr_min_pulse_width(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAnlgWinStartTrigDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12032)
 
     @property
     def anlg_win_dig_fltr_timebase_rate(self):
@@ -670,17 +514,8 @@ class StartTrigger:
 
     @anlg_win_dig_fltr_timebase_rate.deleter
     def anlg_win_dig_fltr_timebase_rate(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAnlgWinStartTrigDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12034)
 
     @property
     def anlg_win_dig_fltr_timebase_src(self):
@@ -701,17 +536,8 @@ class StartTrigger:
 
     @anlg_win_dig_fltr_timebase_src.deleter
     def anlg_win_dig_fltr_timebase_src(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetAnlgWinStartTrigDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12033)
 
     @property
     def anlg_win_dig_sync_enable(self):
@@ -733,16 +559,8 @@ class StartTrigger:
 
     @anlg_win_dig_sync_enable.deleter
     def anlg_win_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgWinStartTrigDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12035)
 
     @property
     def anlg_win_src(self):
@@ -764,16 +582,8 @@ class StartTrigger:
 
     @anlg_win_src.deleter
     def anlg_win_src(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgWinStartTrigSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 5120)
 
     @property
     def anlg_win_top(self):
@@ -794,16 +604,8 @@ class StartTrigger:
 
     @anlg_win_top.deleter
     def anlg_win_top(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgWinStartTrigTop
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 5123)
 
     @property
     def anlg_win_trig_when(self):
@@ -827,16 +629,8 @@ class StartTrigger:
 
     @anlg_win_trig_when.deleter
     def anlg_win_trig_when(self):
-        cfunc = lib_importer.windll.DAQmxResetAnlgWinStartTrigWhen
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 5121)
 
     @property
     def delay(self):
@@ -859,16 +653,8 @@ class StartTrigger:
 
     @delay.deleter
     def delay(self):
-        cfunc = lib_importer.windll.DAQmxResetStartTrigDelay
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 6230)
 
     @property
     def delay_units(self):
@@ -890,16 +676,8 @@ class StartTrigger:
 
     @delay_units.deleter
     def delay_units(self):
-        cfunc = lib_importer.windll.DAQmxResetStartTrigDelayUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 6344)
 
     @property
     def dig_edge_dig_fltr_enable(self):
@@ -920,16 +698,8 @@ class StartTrigger:
 
     @dig_edge_dig_fltr_enable.deleter
     def dig_edge_dig_fltr_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetDigEdgeStartTrigDigFltrEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 8739)
 
     @property
     def dig_edge_dig_fltr_min_pulse_width(self):
@@ -950,17 +720,8 @@ class StartTrigger:
 
     @dig_edge_dig_fltr_min_pulse_width.deleter
     def dig_edge_dig_fltr_min_pulse_width(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetDigEdgeStartTrigDigFltrMinPulseWidth)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 8740)
 
     @property
     def dig_edge_dig_fltr_timebase_rate(self):
@@ -982,17 +743,8 @@ class StartTrigger:
 
     @dig_edge_dig_fltr_timebase_rate.deleter
     def dig_edge_dig_fltr_timebase_rate(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetDigEdgeStartTrigDigFltrTimebaseRate)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 8742)
 
     @property
     def dig_edge_dig_fltr_timebase_src(self):
@@ -1013,17 +765,8 @@ class StartTrigger:
 
     @dig_edge_dig_fltr_timebase_src.deleter
     def dig_edge_dig_fltr_timebase_src(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetDigEdgeStartTrigDigFltrTimebaseSrc)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 8741)
 
     @property
     def dig_edge_dig_sync_enable(self):
@@ -1047,16 +790,8 @@ class StartTrigger:
 
     @dig_edge_dig_sync_enable.deleter
     def dig_edge_dig_sync_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetDigEdgeStartTrigDigSyncEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 8743)
 
     @property
     def dig_edge_edge(self):
@@ -1078,16 +813,8 @@ class StartTrigger:
 
     @dig_edge_edge.deleter
     def dig_edge_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetDigEdgeStartTrigEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 5124)
 
     @property
     def dig_edge_src(self):
@@ -1108,16 +835,8 @@ class StartTrigger:
 
     @dig_edge_src.deleter
     def dig_edge_src(self):
-        cfunc = lib_importer.windll.DAQmxResetDigEdgeStartTrigSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 5127)
 
     @property
     def dig_pattern_pattern(self):
@@ -1138,16 +857,8 @@ class StartTrigger:
 
     @dig_pattern_pattern.deleter
     def dig_pattern_pattern(self):
-        cfunc = lib_importer.windll.DAQmxResetDigPatternStartTrigPattern
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 8582)
 
     @property
     def dig_pattern_src(self):
@@ -1172,16 +883,8 @@ class StartTrigger:
 
     @dig_pattern_src.deleter
     def dig_pattern_src(self):
-        cfunc = lib_importer.windll.DAQmxResetDigPatternStartTrigSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 5136)
 
     @property
     def dig_pattern_trig_when(self):
@@ -1205,16 +908,8 @@ class StartTrigger:
 
     @dig_pattern_trig_when.deleter
     def dig_pattern_trig_when(self):
-        cfunc = lib_importer.windll.DAQmxResetDigPatternStartTrigWhen
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 5137)
 
     @property
     def max_num_trigs_to_detect(self):
@@ -1244,16 +939,8 @@ class StartTrigger:
 
     @max_num_trigs_to_detect.deleter
     def max_num_trigs_to_detect(self):
-        cfunc = lib_importer.windll.DAQmxResetStartTrigMaxNumTrigsToDetect
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12572)
 
     @property
     def retrigger_win(self):
@@ -1280,16 +967,8 @@ class StartTrigger:
 
     @retrigger_win.deleter
     def retrigger_win(self):
-        cfunc = lib_importer.windll.DAQmxResetStartTrigRetriggerWin
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12571)
 
     @property
     def retriggerable(self):
@@ -1314,16 +993,8 @@ class StartTrigger:
 
     @retriggerable.deleter
     def retriggerable(self):
-        cfunc = lib_importer.windll.DAQmxResetStartTrigRetriggerable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 6415)
 
     @property
     def term(self):
@@ -1358,16 +1029,8 @@ class StartTrigger:
 
     @time_timescale.deleter
     def time_timescale(self):
-        cfunc = lib_importer.windll.DAQmxResetStartTrigTimescale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12342)
 
     @property
     def timestamp_enable(self):
@@ -1389,16 +1052,8 @@ class StartTrigger:
 
     @timestamp_enable.deleter
     def timestamp_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetStartTrigTimestampEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12618)
 
     @property
     def timestamp_timescale(self):
@@ -1420,16 +1075,8 @@ class StartTrigger:
 
     @timestamp_timescale.deleter
     def timestamp_timescale(self):
-        cfunc = lib_importer.windll.DAQmxResetStartTrigTimestampTimescale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12589)
 
     @property
     def trig_type(self):
@@ -1451,16 +1098,8 @@ class StartTrigger:
 
     @trig_type.deleter
     def trig_type(self):
-        cfunc = lib_importer.windll.DAQmxResetStartTrigType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 5011)
 
     @property
     def trig_win(self):
@@ -1489,16 +1128,8 @@ class StartTrigger:
 
     @trig_win.deleter
     def trig_win(self):
-        cfunc = lib_importer.windll.DAQmxResetStartTrigTrigWin
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12570)
 
     def cfg_anlg_edge_start_trig(
             self, trigger_source="", trigger_slope=Slope.RISING,

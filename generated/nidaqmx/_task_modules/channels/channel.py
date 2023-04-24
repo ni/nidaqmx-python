@@ -222,16 +222,8 @@ class Channel:
 
     @description.deleter
     def description(self):
-        cfunc = lib_importer.windll.DAQmxResetChanDescr
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6438)
 
     @property
     def is_global(self):
@@ -284,16 +276,8 @@ class Channel:
 
     @sync_unlock_behavior.deleter
     def sync_unlock_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetChanSyncUnlockBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12604)
 
     def save(self, save_as="", author="", overwrite_existing_channel=False,
              allow_interactive_editing=True, allow_interactive_deletion=True):

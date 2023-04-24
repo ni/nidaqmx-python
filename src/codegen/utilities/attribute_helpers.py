@@ -290,8 +290,12 @@ def get_generic_attribute_function_name(attribute):
                     group_name,
                     camel_to_snake_case(group_name, INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES),
                 )
-                mapped_attribute_type = GENERIC_ATTRIBUTE_TYPE_MAP.get(
-                    attribute.type,
-                    camel_to_snake_case(attribute.type, INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES),
-                )
-                return mapped_attribute_group + "_attribute_" + mapped_attribute_type
+                return mapped_attribute_group + "_attribute"
+            
+
+def get_mapped_attribute_function_type(attribute):
+    mapped_attribute_type = GENERIC_ATTRIBUTE_TYPE_MAP.get(
+        attribute.type,
+        camel_to_snake_case(attribute.type, INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES),
+    )
+    return mapped_attribute_type

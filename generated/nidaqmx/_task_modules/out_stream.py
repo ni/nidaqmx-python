@@ -209,16 +209,8 @@ class OutStream:
 
     @offset.deleter
     def offset(self):
-        cfunc = lib_importer.windll.DAQmxResetWriteOffset
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_write_attribute(
+                self._handle, 6413)
 
     @property
     def open_current_loop_chans(self):
@@ -274,16 +266,8 @@ class OutStream:
 
     @output_buf_size.deleter
     def output_buf_size(self):
-        cfunc = lib_importer.windll.DAQmxResetBufOutputBufSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_buffer_attribute(
+                self._handle, 6253)
 
     @property
     def output_onbrd_buf_size(self):
@@ -304,16 +288,8 @@ class OutStream:
 
     @output_onbrd_buf_size.deleter
     def output_onbrd_buf_size(self):
-        cfunc = lib_importer.windll.DAQmxResetBufOutputOnbrdBufSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_buffer_attribute(
+                self._handle, 8971)
 
     @property
     def overcurrent_chans(self):
@@ -468,16 +444,8 @@ class OutStream:
 
     @regen_mode.deleter
     def regen_mode(self):
-        cfunc = lib_importer.windll.DAQmxResetWriteRegenMode
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_write_attribute(
+                self._handle, 5203)
 
     @property
     def relative_to(self):
@@ -501,16 +469,8 @@ class OutStream:
 
     @relative_to.deleter
     def relative_to(self):
-        cfunc = lib_importer.windll.DAQmxResetWriteRelativeTo
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_write_attribute(
+                self._handle, 6412)
 
     @property
     def sleep_time(self):
@@ -532,16 +492,8 @@ class OutStream:
 
     @sleep_time.deleter
     def sleep_time(self):
-        cfunc = lib_importer.windll.DAQmxResetWriteSleepTime
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_write_attribute(
+                self._handle, 8882)
 
     @property
     def space_avail(self):
@@ -613,16 +565,8 @@ class OutStream:
 
     @wait_mode.deleter
     def wait_mode(self):
-        cfunc = lib_importer.windll.DAQmxResetWriteWaitMode
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_write_attribute(
+                self._handle, 8881)
 
     def write(self, numpy_array):
         """

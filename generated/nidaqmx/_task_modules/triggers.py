@@ -94,14 +94,6 @@ class Triggers:
 
     @sync_type.deleter
     def sync_type(self):
-        cfunc = lib_importer.windll.DAQmxResetTriggerSyncType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 12160)
 

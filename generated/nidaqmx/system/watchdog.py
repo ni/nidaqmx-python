@@ -118,16 +118,8 @@ class WatchdogTask:
 
     @expir_trig_dig_edge_edge.deleter
     def expir_trig_dig_edge_edge(self):
-        cfunc = lib_importer.windll.DAQmxResetDigEdgeWatchdogExpirTrigEdge
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_watchdog_attribute(
+                self._handle, "", 8613)
 
     @property
     def expir_trig_dig_edge_src(self):
@@ -148,16 +140,8 @@ class WatchdogTask:
 
     @expir_trig_dig_edge_src.deleter
     def expir_trig_dig_edge_src(self):
-        cfunc = lib_importer.windll.DAQmxResetDigEdgeWatchdogExpirTrigSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_watchdog_attribute(
+                self._handle, "", 8612)
 
     @property
     def expir_trig_trig_on_network_conn_loss(self):
@@ -180,17 +164,8 @@ class WatchdogTask:
 
     @expir_trig_trig_on_network_conn_loss.deleter
     def expir_trig_trig_on_network_conn_loss(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetWatchdogExpirTrigTrigOnNetworkConnLoss)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_watchdog_attribute(
+                self._handle, "", 12381)
 
     @property
     def expir_trig_trig_type(self):
@@ -212,16 +187,8 @@ class WatchdogTask:
 
     @expir_trig_trig_type.deleter
     def expir_trig_trig_type(self):
-        cfunc = lib_importer.windll.DAQmxResetWatchdogExpirTrigType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_watchdog_attribute(
+                self._handle, "", 8611)
 
     @property
     def expired(self):
@@ -256,16 +223,8 @@ class WatchdogTask:
 
     @timeout.deleter
     def timeout(self):
-        cfunc = lib_importer.windll.DAQmxResetWatchdogTimeout
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_watchdog_attribute(
+                self._handle, "", 8617)
 
     @property
     def name(self):

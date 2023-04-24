@@ -104,16 +104,8 @@ class PhysicalChannel:
 
     @ai_power_control_enable.deleter
     def ai_power_control_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetPhysicalChanAIPowerControlEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str]
-
-        error_code = cfunc(
-            self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_physical_chan_attribute(
+                self._name, 12653)
 
     @property
     def ai_power_control_type(self):
@@ -142,16 +134,8 @@ class PhysicalChannel:
 
     @ai_power_control_type.deleter
     def ai_power_control_type(self):
-        cfunc = lib_importer.windll.DAQmxResetPhysicalChanAIPowerControlType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str]
-
-        error_code = cfunc(
-            self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_physical_chan_attribute(
+                self._name, 12654)
 
     @property
     def ai_power_control_voltage(self):
@@ -180,17 +164,8 @@ class PhysicalChannel:
 
     @ai_power_control_voltage.deleter
     def ai_power_control_voltage(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetPhysicalChanAIPowerControlVoltage)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str]
-
-        error_code = cfunc(
-            self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_physical_chan_attribute(
+                self._name, 12652)
 
     @property
     def ai_sensor_power_open_chan(self):
@@ -297,17 +272,8 @@ class PhysicalChannel:
 
     @ao_manual_control_enable.deleter
     def ao_manual_control_enable(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetPhysicalChanAOManualControlEnable)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str]
-
-        error_code = cfunc(
-            self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_physical_chan_attribute(
+                self._name, 10782)
 
     @property
     def ao_manual_control_freq(self):
@@ -372,16 +338,8 @@ class PhysicalChannel:
 
     @ao_power_amp_channel_enable.deleter
     def ao_power_amp_channel_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetAOPowerAmpChannelEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str]
-
-        error_code = cfunc(
-            self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_physical_chan_attribute(
+                self._name, 12386)
 
     @property
     def ao_power_amp_gain(self):

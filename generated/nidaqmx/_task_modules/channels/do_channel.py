@@ -41,16 +41,8 @@ class DOChannel(Channel):
 
     @do_data_xfer_mech.deleter
     def do_data_xfer_mech(self):
-        cfunc = lib_importer.windll.DAQmxResetDODataXferMech
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8806)
 
     @property
     def do_data_xfer_req_cond(self):
@@ -73,16 +65,8 @@ class DOChannel(Channel):
 
     @do_data_xfer_req_cond.deleter
     def do_data_xfer_req_cond(self):
-        cfunc = lib_importer.windll.DAQmxResetDODataXferReqCond
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8807)
 
     @property
     def do_generate_on(self):
@@ -105,16 +89,8 @@ class DOChannel(Channel):
 
     @do_generate_on.deleter
     def do_generate_on(self):
-        cfunc = lib_importer.windll.DAQmxResetDOGenerateOn
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10601)
 
     @property
     def do_invert_lines(self):
@@ -136,16 +112,8 @@ class DOChannel(Channel):
 
     @do_invert_lines.deleter
     def do_invert_lines(self):
-        cfunc = lib_importer.windll.DAQmxResetDOInvertLines
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 4403)
 
     @property
     def do_line_states_done_state(self):
@@ -168,16 +136,8 @@ class DOChannel(Channel):
 
     @do_line_states_done_state.deleter
     def do_line_states_done_state(self):
-        cfunc = lib_importer.windll.DAQmxResetDOLineStatesDoneState
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10600)
 
     @property
     def do_line_states_paused_state(self):
@@ -199,16 +159,8 @@ class DOChannel(Channel):
 
     @do_line_states_paused_state.deleter
     def do_line_states_paused_state(self):
-        cfunc = lib_importer.windll.DAQmxResetDOLineStatesPausedState
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10599)
 
     @property
     def do_line_states_start_state(self):
@@ -230,16 +182,8 @@ class DOChannel(Channel):
 
     @do_line_states_start_state.deleter
     def do_line_states_start_state(self):
-        cfunc = lib_importer.windll.DAQmxResetDOLineStatesStartState
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10610)
 
     @property
     def do_logic_family(self):
@@ -265,16 +209,8 @@ class DOChannel(Channel):
 
     @do_logic_family.deleter
     def do_logic_family(self):
-        cfunc = lib_importer.windll.DAQmxResetDOLogicFamily
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10606)
 
     @property
     def do_mem_map_enable(self):
@@ -301,16 +237,8 @@ class DOChannel(Channel):
 
     @do_mem_map_enable.deleter
     def do_mem_map_enable(self):
-        cfunc = lib_importer.windll.DAQmxResetDOMemMapEnable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10603)
 
     @property
     def do_num_lines(self):
@@ -343,16 +271,8 @@ class DOChannel(Channel):
 
     @do_output_drive_type.deleter
     def do_output_drive_type(self):
-        cfunc = lib_importer.windll.DAQmxResetDOOutputDriveType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 4407)
 
     @property
     def do_overcurrent_auto_reenable(self):
@@ -374,16 +294,8 @@ class DOChannel(Channel):
 
     @do_overcurrent_auto_reenable.deleter
     def do_overcurrent_auto_reenable(self):
-        cfunc = lib_importer.windll.DAQmxResetDOOvercurrentAutoReenable
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10886)
 
     @property
     def do_overcurrent_limit(self):
@@ -407,16 +319,8 @@ class DOChannel(Channel):
 
     @do_overcurrent_limit.deleter
     def do_overcurrent_limit(self):
-        cfunc = lib_importer.windll.DAQmxResetDOOvercurrentLimit
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10885)
 
     @property
     def do_overcurrent_reenable_period(self):
@@ -438,16 +342,8 @@ class DOChannel(Channel):
 
     @do_overcurrent_reenable_period.deleter
     def do_overcurrent_reenable_period(self):
-        cfunc = lib_importer.windll.DAQmxResetDOOvercurrentReenablePeriod
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10887)
 
     @property
     def do_tristate(self):
@@ -469,16 +365,8 @@ class DOChannel(Channel):
 
     @do_tristate.deleter
     def do_tristate(self):
-        cfunc = lib_importer.windll.DAQmxResetDOTristate
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 6387)
 
     @property
     def do_usb_xfer_req_count(self):
@@ -500,16 +388,8 @@ class DOChannel(Channel):
 
     @do_usb_xfer_req_count.deleter
     def do_usb_xfer_req_count(self):
-        cfunc = lib_importer.windll.DAQmxResetDOUsbXferReqCount
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 12291)
 
     @property
     def do_usb_xfer_req_size(self):
@@ -531,16 +411,8 @@ class DOChannel(Channel):
 
     @do_usb_xfer_req_size.deleter
     def do_usb_xfer_req_size(self):
-        cfunc = lib_importer.windll.DAQmxResetDOUsbXferReqSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 10897)
 
     @property
     def do_use_only_on_brd_mem(self):
@@ -563,14 +435,6 @@ class DOChannel(Channel):
 
     @do_use_only_on_brd_mem.deleter
     def do_use_only_on_brd_mem(self):
-        cfunc = lib_importer.windll.DAQmxResetDOUseOnlyOnBrdMem
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(
+                self._handle, self._name, 8805)
 

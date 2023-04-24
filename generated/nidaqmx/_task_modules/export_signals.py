@@ -38,16 +38,8 @@ class ExportSignals:
 
     @adv_cmplt_event_delay.deleter
     def adv_cmplt_event_delay(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedAdvCmpltEventDelay
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5975)
 
     @property
     def adv_cmplt_event_output_term(self):
@@ -68,16 +60,8 @@ class ExportSignals:
 
     @adv_cmplt_event_output_term.deleter
     def adv_cmplt_event_output_term(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedAdvCmpltEventOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5713)
 
     @property
     def adv_cmplt_event_pulse_polarity(self):
@@ -99,17 +83,8 @@ class ExportSignals:
 
     @adv_cmplt_event_pulse_polarity.deleter
     def adv_cmplt_event_pulse_polarity(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedAdvCmpltEventPulsePolarity)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5714)
 
     @property
     def adv_cmplt_event_pulse_width(self):
@@ -130,16 +105,8 @@ class ExportSignals:
 
     @adv_cmplt_event_pulse_width.deleter
     def adv_cmplt_event_pulse_width(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedAdvCmpltEventPulseWidth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5716)
 
     @property
     def adv_trig_output_term(self):
@@ -160,16 +127,8 @@ class ExportSignals:
 
     @adv_trig_output_term.deleter
     def adv_trig_output_term(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedAdvTrigOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5701)
 
     @property
     def adv_trig_pulse_polarity(self):
@@ -203,16 +162,8 @@ class ExportSignals:
 
     @adv_trig_pulse_width.deleter
     def adv_trig_pulse_width(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedAdvTrigPulseWidth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5704)
 
     @property
     def adv_trig_pulse_width_units(self):
@@ -234,16 +185,8 @@ class ExportSignals:
 
     @adv_trig_pulse_width_units.deleter
     def adv_trig_pulse_width_units(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedAdvTrigPulseWidthUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5703)
 
     @property
     def ai_conv_clk_output_term(self):
@@ -264,16 +207,8 @@ class ExportSignals:
 
     @ai_conv_clk_output_term.deleter
     def ai_conv_clk_output_term(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedAIConvClkOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5767)
 
     @property
     def ai_conv_clk_pulse_polarity(self):
@@ -308,17 +243,8 @@ class ExportSignals:
 
     @ai_hold_cmplt_event_output_term.deleter
     def ai_hold_cmplt_event_output_term(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedAIHoldCmpltEventOutputTerm)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 6381)
 
     @property
     def ai_hold_cmplt_event_pulse_polarity(self):
@@ -340,17 +266,8 @@ class ExportSignals:
 
     @ai_hold_cmplt_event_pulse_polarity.deleter
     def ai_hold_cmplt_event_pulse_polarity(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedAIHoldCmpltEventPulsePolarity)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 6382)
 
     @property
     def change_detect_event_output_term(self):
@@ -371,17 +288,8 @@ class ExportSignals:
 
     @change_detect_event_output_term.deleter
     def change_detect_event_output_term(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedChangeDetectEventOutputTerm)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 8599)
 
     @property
     def change_detect_event_pulse_polarity(self):
@@ -403,17 +311,8 @@ class ExportSignals:
 
     @change_detect_event_pulse_polarity.deleter
     def change_detect_event_pulse_polarity(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedChangeDetectEventPulsePolarity)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 8963)
 
     @property
     def ctr_out_event_output_behavior(self):
@@ -436,17 +335,8 @@ class ExportSignals:
 
     @ctr_out_event_output_behavior.deleter
     def ctr_out_event_output_behavior(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedCtrOutEventOutputBehavior)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5967)
 
     @property
     def ctr_out_event_output_term(self):
@@ -467,16 +357,8 @@ class ExportSignals:
 
     @ctr_out_event_output_term.deleter
     def ctr_out_event_output_term(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedCtrOutEventOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5911)
 
     @property
     def ctr_out_event_pulse_polarity(self):
@@ -502,16 +384,8 @@ class ExportSignals:
 
     @ctr_out_event_pulse_polarity.deleter
     def ctr_out_event_pulse_polarity(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedCtrOutEventPulsePolarity
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5912)
 
     @property
     def ctr_out_event_toggle_idle_state(self):
@@ -536,17 +410,8 @@ class ExportSignals:
 
     @ctr_out_event_toggle_idle_state.deleter
     def ctr_out_event_toggle_idle_state(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedCtrOutEventToggleIdleState)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 6250)
 
     @property
     def data_active_event_lvl_active_lvl(self):
@@ -568,17 +433,8 @@ class ExportSignals:
 
     @data_active_event_lvl_active_lvl.deleter
     def data_active_event_lvl_active_lvl(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedDataActiveEventLvlActiveLvl)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5684)
 
     @property
     def data_active_event_output_term(self):
@@ -599,17 +455,8 @@ class ExportSignals:
 
     @data_active_event_output_term.deleter
     def data_active_event_output_term(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedDataActiveEventOutputTerm)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5683)
 
     @property
     def divided_samp_clk_timebase_output_term(self):
@@ -630,17 +477,8 @@ class ExportSignals:
 
     @divided_samp_clk_timebase_output_term.deleter
     def divided_samp_clk_timebase_output_term(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedDividedSampClkTimebaseOutputTerm)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 8609)
 
     @property
     def exported_10_mhz_ref_clk_output_term(self):
@@ -660,16 +498,8 @@ class ExportSignals:
 
     @exported_10_mhz_ref_clk_output_term.deleter
     def exported_10_mhz_ref_clk_output_term(self):
-        cfunc = lib_importer.windll.DAQmxResetExported10MHzRefClkOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 8814)
 
     @property
     def exported_20_mhz_timebase_output_term(self):
@@ -690,16 +520,8 @@ class ExportSignals:
 
     @exported_20_mhz_timebase_output_term.deleter
     def exported_20_mhz_timebase_output_term(self):
-        cfunc = lib_importer.windll.DAQmxResetExported20MHzTimebaseOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5719)
 
     @property
     def hshk_event_delay(self):
@@ -721,16 +543,8 @@ class ExportSignals:
 
     @hshk_event_delay.deleter
     def hshk_event_delay(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedHshkEventDelay
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 8892)
 
     @property
     def hshk_event_interlocked_assert_on_start(self):
@@ -752,17 +566,8 @@ class ExportSignals:
 
     @hshk_event_interlocked_assert_on_start.deleter
     def hshk_event_interlocked_assert_on_start(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedHshkEventInterlockedAssertOnStart)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 8894)
 
     @property
     def hshk_event_interlocked_asserted_lvl(self):
@@ -786,17 +591,8 @@ class ExportSignals:
 
     @hshk_event_interlocked_asserted_lvl.deleter
     def hshk_event_interlocked_asserted_lvl(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedHshkEventInterlockedAssertedLvl)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 8893)
 
     @property
     def hshk_event_interlocked_deassert_delay(self):
@@ -819,17 +615,8 @@ class ExportSignals:
 
     @hshk_event_interlocked_deassert_delay.deleter
     def hshk_event_interlocked_deassert_delay(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedHshkEventInterlockedDeassertDelay)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 8895)
 
     @property
     def hshk_event_output_behavior(self):
@@ -851,16 +638,8 @@ class ExportSignals:
 
     @hshk_event_output_behavior.deleter
     def hshk_event_output_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedHshkEventOutputBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 8891)
 
     @property
     def hshk_event_output_term(self):
@@ -881,16 +660,8 @@ class ExportSignals:
 
     @hshk_event_output_term.deleter
     def hshk_event_output_term(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedHshkEventOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 8890)
 
     @property
     def hshk_event_pulse_polarity(self):
@@ -913,16 +684,8 @@ class ExportSignals:
 
     @hshk_event_pulse_polarity.deleter
     def hshk_event_pulse_polarity(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedHshkEventPulsePolarity
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 8896)
 
     @property
     def hshk_event_pulse_width(self):
@@ -944,16 +707,8 @@ class ExportSignals:
 
     @hshk_event_pulse_width.deleter
     def hshk_event_pulse_width(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedHshkEventPulseWidth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 8897)
 
     @property
     def pause_trig_lvl_active_lvl(self):
@@ -975,16 +730,8 @@ class ExportSignals:
 
     @pause_trig_lvl_active_lvl.deleter
     def pause_trig_lvl_active_lvl(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedPauseTrigLvlActiveLvl
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5654)
 
     @property
     def pause_trig_output_term(self):
@@ -1004,16 +751,8 @@ class ExportSignals:
 
     @pause_trig_output_term.deleter
     def pause_trig_output_term(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedPauseTrigOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5653)
 
     @property
     def rdy_for_start_event_lvl_active_lvl(self):
@@ -1035,17 +774,8 @@ class ExportSignals:
 
     @rdy_for_start_event_lvl_active_lvl.deleter
     def rdy_for_start_event_lvl_active_lvl(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedRdyForStartEventLvlActiveLvl)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5969)
 
     @property
     def rdy_for_start_event_output_term(self):
@@ -1066,17 +796,8 @@ class ExportSignals:
 
     @rdy_for_start_event_output_term.deleter
     def rdy_for_start_event_output_term(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedRdyForStartEventOutputTerm)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5641)
 
     @property
     def rdy_for_xfer_event_deassert_cond(self):
@@ -1098,17 +819,8 @@ class ExportSignals:
 
     @rdy_for_xfer_event_deassert_cond.deleter
     def rdy_for_xfer_event_deassert_cond(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedRdyForXferEventDeassertCond)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 10595)
 
     @property
     def rdy_for_xfer_event_deassert_cond_custom_threshold(self):
@@ -1133,17 +845,8 @@ class ExportSignals:
 
     @rdy_for_xfer_event_deassert_cond_custom_threshold.deleter
     def rdy_for_xfer_event_deassert_cond_custom_threshold(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedRdyForXferEventDeassertCondCustomThreshold)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 10596)
 
     @property
     def rdy_for_xfer_event_lvl_active_lvl(self):
@@ -1165,17 +868,8 @@ class ExportSignals:
 
     @rdy_for_xfer_event_lvl_active_lvl.deleter
     def rdy_for_xfer_event_lvl_active_lvl(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedRdyForXferEventLvlActiveLvl)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 8886)
 
     @property
     def rdy_for_xfer_event_output_term(self):
@@ -1196,17 +890,8 @@ class ExportSignals:
 
     @rdy_for_xfer_event_output_term.deleter
     def rdy_for_xfer_event_output_term(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedRdyForXferEventOutputTerm)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 8885)
 
     @property
     def ref_trig_output_term(self):
@@ -1227,16 +912,8 @@ class ExportSignals:
 
     @ref_trig_output_term.deleter
     def ref_trig_output_term(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedRefTrigOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 1424)
 
     @property
     def ref_trig_pulse_polarity(self):
@@ -1258,16 +935,8 @@ class ExportSignals:
 
     @ref_trig_pulse_polarity.deleter
     def ref_trig_pulse_polarity(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedRefTrigPulsePolarity
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 1425)
 
     @property
     def samp_clk_delay_offset(self):
@@ -1290,16 +959,8 @@ class ExportSignals:
 
     @samp_clk_delay_offset.deleter
     def samp_clk_delay_offset(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedSampClkDelayOffset
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 8644)
 
     @property
     def samp_clk_output_behavior(self):
@@ -1323,16 +984,8 @@ class ExportSignals:
 
     @samp_clk_output_behavior.deleter
     def samp_clk_output_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedSampClkOutputBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 6251)
 
     @property
     def samp_clk_output_term(self):
@@ -1352,16 +1005,8 @@ class ExportSignals:
 
     @samp_clk_output_term.deleter
     def samp_clk_output_term(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedSampClkOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5731)
 
     @property
     def samp_clk_pulse_polarity(self):
@@ -1384,16 +1029,8 @@ class ExportSignals:
 
     @samp_clk_pulse_polarity.deleter
     def samp_clk_pulse_polarity(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedSampClkPulsePolarity
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 5732)
 
     @property
     def samp_clk_timebase_output_term(self):
@@ -1414,17 +1051,8 @@ class ExportSignals:
 
     @samp_clk_timebase_output_term.deleter
     def samp_clk_timebase_output_term(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedSampClkTimebaseOutputTerm)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 6393)
 
     @property
     def start_trig_output_term(self):
@@ -1444,16 +1072,8 @@ class ExportSignals:
 
     @start_trig_output_term.deleter
     def start_trig_output_term(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedStartTrigOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 1412)
 
     @property
     def start_trig_pulse_polarity(self):
@@ -1475,16 +1095,8 @@ class ExportSignals:
 
     @start_trig_pulse_polarity.deleter
     def start_trig_pulse_polarity(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedStartTrigPulsePolarity
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 1413)
 
     @property
     def sync_pulse_event_output_term(self):
@@ -1505,16 +1117,8 @@ class ExportSignals:
 
     @sync_pulse_event_output_term.deleter
     def sync_pulse_event_output_term(self):
-        cfunc = lib_importer.windll.DAQmxResetExportedSyncPulseEventOutputTerm
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 8764)
 
     @property
     def watchdog_expired_event_output_term(self):
@@ -1535,17 +1139,8 @@ class ExportSignals:
 
     @watchdog_expired_event_output_term.deleter
     def watchdog_expired_event_output_term(self):
-        cfunc = (lib_importer.windll.
-                 DAQmxResetExportedWatchdogExpiredEventOutputTerm)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_exported_signal_attribute(
+                self._handle, 8618)
 
     def export_signal(self, signal_id, output_terminal):
         """

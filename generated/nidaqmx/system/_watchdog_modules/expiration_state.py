@@ -52,16 +52,8 @@ class ExpirationState:
 
     @ao_output_type.deleter
     def ao_output_type(self):
-        cfunc = lib_importer.windll.DAQmxResetWatchdogAOOutputType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._physical_channel)
-        check_for_error(error_code)
+        self._interpreter.reset_watchdog_attribute(
+                self._handle, self._physical_channel, 12382)
 
     @property
     def ao_state(self):
@@ -82,16 +74,8 @@ class ExpirationState:
 
     @ao_state.deleter
     def ao_state(self):
-        cfunc = lib_importer.windll.DAQmxResetWatchdogAOExpirState
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._physical_channel)
-        check_for_error(error_code)
+        self._interpreter.reset_watchdog_attribute(
+                self._handle, self._physical_channel, 12383)
 
     @property
     def co_state(self):
@@ -114,16 +98,8 @@ class ExpirationState:
 
     @co_state.deleter
     def co_state(self):
-        cfunc = lib_importer.windll.DAQmxResetWatchdogCOExpirState
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._physical_channel)
-        check_for_error(error_code)
+        self._interpreter.reset_watchdog_attribute(
+                self._handle, self._physical_channel, 12384)
 
     @property
     def do_state(self):
@@ -147,16 +123,8 @@ class ExpirationState:
 
     @do_state.deleter
     def do_state(self):
-        cfunc = lib_importer.windll.DAQmxResetWatchdogDOExpirState
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._physical_channel)
-        check_for_error(error_code)
+        self._interpreter.reset_watchdog_attribute(
+                self._handle, self._physical_channel, 8615)
 
     @property
     @deprecation.deprecated(deprecated_in="0.7.0", details="Use ao_output_type instead.")

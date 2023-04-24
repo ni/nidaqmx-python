@@ -39,16 +39,8 @@ class HandshakeTrigger:
 
     @interlocked_asserted_lvl.deleter
     def interlocked_asserted_lvl(self):
-        cfunc = lib_importer.windll.DAQmxResetInterlockedHshkTrigAssertedLvl
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 8889)
 
     @property
     def interlocked_src(self):
@@ -68,16 +60,8 @@ class HandshakeTrigger:
 
     @interlocked_src.deleter
     def interlocked_src(self):
-        cfunc = lib_importer.windll.DAQmxResetInterlockedHshkTrigSrc
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 8888)
 
     @property
     def trig_type(self):
@@ -99,14 +83,6 @@ class HandshakeTrigger:
 
     @trig_type.deleter
     def trig_type(self):
-        cfunc = lib_importer.windll.DAQmxResetHshkTrigType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(
+                self._handle, 8887)
 
