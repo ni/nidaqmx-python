@@ -183,7 +183,11 @@ def has_parameter_with_ivi_dance_size_mechanism(func):
 
 def get_output_parameters(func):
     """Gets the output parameters used by the methods in the interpreters."""
-    return (param for param in func.interpreter_parameters if param.direction == "out")
+    return (
+        param
+        for param in func.interpreter_parameters
+        if param.direction == "out" and param.python_data_type is not None
+    )
 
 
 def get_return_values(func):
