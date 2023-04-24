@@ -19439,43 +19439,63 @@ functions = {
     },
     'ResetBufferAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'BufferAttribute',
                 'name': 'attribute',
+                'python_data_type': 'int',
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetChanAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
                 'name': 'channel',
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
                 'name': 'attribute',
+                'python_data_type': 'int',
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetDevice': {
@@ -19504,6 +19524,11 @@ functions = {
     },
     'ResetExportedSignalAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -19527,11 +19552,16 @@ functions = {
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetReadAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -19555,29 +19585,43 @@ functions = {
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetRealTimeAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'RealTimeAttribute',
                 'name': 'attribute',
+                'python_data_type': 'int',
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetTimingAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -19601,11 +19645,16 @@ functions = {
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetTimingAttributeEx': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -19639,11 +19688,16 @@ functions = {
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetTrigAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -19667,11 +19721,16 @@ functions = {
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetWatchdogAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -19705,11 +19764,16 @@ functions = {
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetWriteAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -19733,7 +19797,7 @@ functions = {
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SaveGlobalChan': {
