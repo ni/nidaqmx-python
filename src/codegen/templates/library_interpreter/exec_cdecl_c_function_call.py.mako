@@ -10,7 +10,7 @@
     varargs_parameters = get_varargs_parameters(function)
     
     ## This is under the assumption that the varargs passes are all arrays of the same size.
-    varargs_array_length = varargs_parameters[0].size
+    varargs_array_length = f"len({varargs_parameters[0].parameter_name})"
     instantiation_lines = get_instantiation_lines_for_varargs(function)
     argument_definition_lines = get_argument_definition_lines_for_varargs(varargs_parameters)
 %>
