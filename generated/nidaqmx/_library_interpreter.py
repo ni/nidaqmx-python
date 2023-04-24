@@ -106,27 +106,25 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
 
     def calculate_reverse_poly_coeff(
-            self, forward_coeffs, num_forward_coeffs_in, min_val_x, max_val_x,
-            num_points_to_compute, reverse_poly_order):
+            self, forward_coeffs, min_val_x, max_val_x, num_points_to_compute,
+            reverse_poly_order):
         size = len(forward_coeffs) if reverse_poly_order < 0 else reverse_poly_order + 1
-        reverse_coeffs = numpy.zeros(size, dtype=numpy.numpy.float64)
+        reverse_coeffs = numpy.zeros(size, dtype=numpy.float64)
 
         cfunc = lib_importer.windll.DAQmxCalculateReversePolyCoeff
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str,
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')), ctypes.c_uint, ctypes.c_double,
                         ctypes.c_double, ctypes.c_int, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint]
+                        flags=('C','W'))]
 
         error_code = cfunc(
-            forward_coeffs, len(forward_coeffs), num_forward_coeffs_in,
-            min_val_x, max_val_x, num_points_to_compute, reverse_poly_order,
-            ctypes.byref(reverse_coeffs))
+            forward_coeffs, len(forward_coeffs), min_val_x, max_val_x,
+            num_points_to_compute, reverse_poly_order, reverse_coeffs)
         check_for_error(error_code)
         return reverse_coeffs.tolist()
 
@@ -381,22 +379,24 @@ class LibraryInterpreter(BaseInterpreter):
         raise NotImplementedError
 
     def cfg_watchdog_ao_expir_states(
-            self, task, channel_names, expir_state_array, output_type_array,
-            array_size):
+            self, task, channel_names, expir_state_array, output_type_array):
         cfunc = lib_importer.windll.DAQmxCfgWatchdogAOExpirStates
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
+                        lib_importer.task_handle, ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint]
 
         error_code = cfunc(
-            task, channel_names, expir_state_array, len(expir_state_array),
-            output_type_array, len(output_type_array), array_size)
+            task, channel_names, expir_state_array, output_type_array,
+            len(output_type_array))
         check_for_error(error_code)
 
     def cfg_watchdog_co_expir_states(
-            self, task, channel_names, expir_state_array, array_size):
+            self, task, channel_names, expir_state_array):
         cfunc = lib_importer.windll.DAQmxCfgWatchdogCOExpirStates
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -407,12 +407,11 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_uint]
 
         error_code = cfunc(
-            task, channel_names, expir_state_array, len(expir_state_array),
-            array_size)
+            task, channel_names, expir_state_array, len(expir_state_array))
         check_for_error(error_code)
 
     def cfg_watchdog_do_expir_states(
-            self, task, channel_names, expir_state_array, array_size):
+            self, task, channel_names, expir_state_array):
         cfunc = lib_importer.windll.DAQmxCfgWatchdogDOExpirStates
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -423,8 +422,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_uint]
 
         error_code = cfunc(
-            task, channel_names, expir_state_array, len(expir_state_array),
-            array_size)
+            task, channel_names, expir_state_array, len(expir_state_array))
         check_for_error(error_code)
 
     def clear_task(self, task):
@@ -646,11 +644,11 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
 
     def create_ai_force_bridge_polynomial_chan(
-            self, task, physical_channel, num_forward_coeffs,
-            num_reverse_coeffs, name_to_assign_to_channel, min_val, max_val,
-            units, bridge_config, voltage_excit_source, voltage_excit_val,
-            nominal_bridge_resistance, forward_coeffs, reverse_coeffs,
-            electrical_units, physical_units, custom_scale_name):
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
+            max_val, units, bridge_config, voltage_excit_source,
+            voltage_excit_val, nominal_bridge_resistance, forward_coeffs,
+            reverse_coeffs, electrical_units, physical_units,
+            custom_scale_name):
         cfunc = lib_importer.windll.DAQmxCreateAIForceBridgePolynomialChan
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -670,17 +668,16 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, bridge_config, voltage_excit_source,
             voltage_excit_val, nominal_bridge_resistance, forward_coeffs,
-            len(forward_coeffs), num_forward_coeffs, reverse_coeffs,
-            len(reverse_coeffs), num_reverse_coeffs, electrical_units,
-            physical_units, custom_scale_name)
+            len(forward_coeffs), reverse_coeffs, len(reverse_coeffs),
+            electrical_units, physical_units, custom_scale_name)
         check_for_error(error_code)
 
     def create_ai_force_bridge_table_chan(
-            self, task, physical_channel, num_electrical_vals,
-            num_physical_vals, name_to_assign_to_channel, min_val, max_val,
-            units, bridge_config, voltage_excit_source, voltage_excit_val,
-            nominal_bridge_resistance, electrical_vals, electrical_units,
-            physical_vals, physical_units, custom_scale_name):
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
+            max_val, units, bridge_config, voltage_excit_source,
+            voltage_excit_val, nominal_bridge_resistance, electrical_vals,
+            electrical_units, physical_vals, physical_units,
+            custom_scale_name):
         cfunc = lib_importer.windll.DAQmxCreateAIForceBridgeTableChan
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -700,9 +697,8 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, bridge_config, voltage_excit_source,
             voltage_excit_val, nominal_bridge_resistance, electrical_vals,
-            len(electrical_vals), num_electrical_vals, electrical_units,
-            physical_vals, len(physical_vals), num_physical_vals,
-            physical_units, custom_scale_name)
+            len(electrical_vals), electrical_units, physical_vals,
+            len(physical_vals), physical_units, custom_scale_name)
         check_for_error(error_code)
 
     def create_ai_force_bridge_two_point_lin_chan(
@@ -877,11 +873,11 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
 
     def create_ai_pressure_bridge_polynomial_chan(
-            self, task, physical_channel, num_forward_coeffs,
-            num_reverse_coeffs, name_to_assign_to_channel, min_val, max_val,
-            units, bridge_config, voltage_excit_source, voltage_excit_val,
-            nominal_bridge_resistance, forward_coeffs, reverse_coeffs,
-            electrical_units, physical_units, custom_scale_name):
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
+            max_val, units, bridge_config, voltage_excit_source,
+            voltage_excit_val, nominal_bridge_resistance, forward_coeffs,
+            reverse_coeffs, electrical_units, physical_units,
+            custom_scale_name):
         cfunc = lib_importer.windll.DAQmxCreateAIPressureBridgePolynomialChan
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -901,17 +897,16 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, bridge_config, voltage_excit_source,
             voltage_excit_val, nominal_bridge_resistance, forward_coeffs,
-            len(forward_coeffs), num_forward_coeffs, reverse_coeffs,
-            len(reverse_coeffs), num_reverse_coeffs, electrical_units,
-            physical_units, custom_scale_name)
+            len(forward_coeffs), reverse_coeffs, len(reverse_coeffs),
+            electrical_units, physical_units, custom_scale_name)
         check_for_error(error_code)
 
     def create_ai_pressure_bridge_table_chan(
-            self, task, physical_channel, num_electrical_vals,
-            num_physical_vals, name_to_assign_to_channel, min_val, max_val,
-            units, bridge_config, voltage_excit_source, voltage_excit_val,
-            nominal_bridge_resistance, electrical_vals, electrical_units,
-            physical_vals, physical_units, custom_scale_name):
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
+            max_val, units, bridge_config, voltage_excit_source,
+            voltage_excit_val, nominal_bridge_resistance, electrical_vals,
+            electrical_units, physical_vals, physical_units,
+            custom_scale_name):
         cfunc = lib_importer.windll.DAQmxCreateAIPressureBridgeTableChan
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -931,9 +926,8 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, bridge_config, voltage_excit_source,
             voltage_excit_val, nominal_bridge_resistance, electrical_vals,
-            len(electrical_vals), num_electrical_vals, electrical_units,
-            physical_vals, len(physical_vals), num_physical_vals,
-            physical_units, custom_scale_name)
+            len(electrical_vals), electrical_units, physical_vals,
+            len(physical_vals), physical_units, custom_scale_name)
         check_for_error(error_code)
 
     def create_ai_pressure_bridge_two_point_lin_chan(
@@ -986,10 +980,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def create_ai_rosette_strain_gage_chan(
             self, task, physical_channel, rosette_type, gage_orientation,
-            rosette_meas_types, num_rosette_meas_types,
-            name_to_assign_to_channel, min_val, max_val, strain_config,
-            voltage_excit_source, voltage_excit_val, gage_factor,
-            nominal_gage_resistance, poisson_ratio, lead_wire_resistance):
+            rosette_meas_types, name_to_assign_to_channel, min_val, max_val,
+            strain_config, voltage_excit_source, voltage_excit_val,
+            gage_factor, nominal_gage_resistance, poisson_ratio,
+            lead_wire_resistance):
         cfunc = lib_importer.windll.DAQmxCreateAIRosetteStrainGageChan
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -1006,9 +1000,9 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, rosette_type, gage_orientation, rosette_meas_types,
-            len(rosette_meas_types), num_rosette_meas_types, strain_config,
-            voltage_excit_source, voltage_excit_val, gage_factor,
-            nominal_gage_resistance, poisson_ratio, lead_wire_resistance)
+            len(rosette_meas_types), strain_config, voltage_excit_source,
+            voltage_excit_val, gage_factor, nominal_gage_resistance,
+            poisson_ratio, lead_wire_resistance)
         check_for_error(error_code)
 
     def create_ai_strain_gage_chan(
@@ -1114,11 +1108,11 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
 
     def create_ai_torque_bridge_polynomial_chan(
-            self, task, physical_channel, num_forward_coeffs,
-            num_reverse_coeffs, name_to_assign_to_channel, min_val, max_val,
-            units, bridge_config, voltage_excit_source, voltage_excit_val,
-            nominal_bridge_resistance, forward_coeffs, reverse_coeffs,
-            electrical_units, physical_units, custom_scale_name):
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
+            max_val, units, bridge_config, voltage_excit_source,
+            voltage_excit_val, nominal_bridge_resistance, forward_coeffs,
+            reverse_coeffs, electrical_units, physical_units,
+            custom_scale_name):
         cfunc = lib_importer.windll.DAQmxCreateAITorqueBridgePolynomialChan
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -1138,17 +1132,16 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, bridge_config, voltage_excit_source,
             voltage_excit_val, nominal_bridge_resistance, forward_coeffs,
-            len(forward_coeffs), num_forward_coeffs, reverse_coeffs,
-            len(reverse_coeffs), num_reverse_coeffs, electrical_units,
-            physical_units, custom_scale_name)
+            len(forward_coeffs), reverse_coeffs, len(reverse_coeffs),
+            electrical_units, physical_units, custom_scale_name)
         check_for_error(error_code)
 
     def create_ai_torque_bridge_table_chan(
-            self, task, physical_channel, num_electrical_vals,
-            num_physical_vals, name_to_assign_to_channel, min_val, max_val,
-            units, bridge_config, voltage_excit_source, voltage_excit_val,
-            nominal_bridge_resistance, electrical_vals, electrical_units,
-            physical_vals, physical_units, custom_scale_name):
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
+            max_val, units, bridge_config, voltage_excit_source,
+            voltage_excit_val, nominal_bridge_resistance, electrical_vals,
+            electrical_units, physical_vals, physical_units,
+            custom_scale_name):
         cfunc = lib_importer.windll.DAQmxCreateAITorqueBridgeTableChan
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -1168,9 +1161,8 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, bridge_config, voltage_excit_source,
             voltage_excit_val, nominal_bridge_resistance, electrical_vals,
-            len(electrical_vals), num_electrical_vals, electrical_units,
-            physical_vals, len(physical_vals), num_physical_vals,
-            physical_units, custom_scale_name)
+            len(electrical_vals), electrical_units, physical_vals,
+            len(physical_vals), physical_units, custom_scale_name)
         check_for_error(error_code)
 
     def create_ai_torque_bridge_two_point_lin_chan(
@@ -1727,8 +1719,8 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
 
     def create_polynomial_scale(
-            self, name, forward_coeffs, num_forward_coeffs_in, reverse_coeffs,
-            num_reverse_coeffs_in, pre_scaled_units, scaled_units):
+            self, name, forward_coeffs, reverse_coeffs, pre_scaled_units,
+            scaled_units):
         cfunc = lib_importer.windll.DAQmxCreatePolynomialScale
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -1742,14 +1734,13 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes_byte_str]
 
         error_code = cfunc(
-            name, forward_coeffs, len(forward_coeffs), num_forward_coeffs_in,
-            reverse_coeffs, len(reverse_coeffs), num_reverse_coeffs_in,
-            pre_scaled_units, scaled_units)
+            name, forward_coeffs, len(forward_coeffs), reverse_coeffs,
+            len(reverse_coeffs), pre_scaled_units, scaled_units)
         check_for_error(error_code)
 
     def create_table_scale(
-            self, name, prescaled_vals, num_prescaled_vals_in, scaled_vals,
-            num_scaled_vals_in, pre_scaled_units, scaled_units):
+            self, name, prescaled_vals, scaled_vals, pre_scaled_units,
+            scaled_units):
         cfunc = lib_importer.windll.DAQmxCreateTableScale
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -1763,9 +1754,8 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes_byte_str]
 
         error_code = cfunc(
-            name, prescaled_vals, len(prescaled_vals), num_prescaled_vals_in,
-            scaled_vals, len(scaled_vals), num_scaled_vals_in,
-            pre_scaled_units, scaled_units)
+            name, prescaled_vals, len(prescaled_vals), scaled_vals,
+            len(scaled_vals), pre_scaled_units, scaled_units)
         check_for_error(error_code)
 
     def create_task(self, session_name):
@@ -2618,8 +2608,8 @@ class LibraryInterpreter(BaseInterpreter):
             session_name, ctypes.byref(task))
         check_for_error(error_code)
 
-    def read_analog_f64(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+    def read_analog_f64(self, task, num_samps_per_chan, timeout, fill_mode):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.float64)
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadAnalogF64
@@ -2635,8 +2625,8 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
-            read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+            ctypes.byref(samps_per_chan_read))
+        check_for_error(error_code)
         return read_array.tolist(), samps_per_chan_read.value
 
     def read_analog_scalar_f64(self, task, timeout):
@@ -2656,8 +2646,8 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return value.value
 
-    def read_binary_i16(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+    def read_binary_i16(self, task, num_samps_per_chan, timeout, fill_mode):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.int16)
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadBinaryI16
@@ -2673,12 +2663,12 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
-            read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+            ctypes.byref(samps_per_chan_read))
+        check_for_error(error_code)
         return read_array.tolist(), samps_per_chan_read.value
 
-    def read_binary_i32(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+    def read_binary_i32(self, task, num_samps_per_chan, timeout, fill_mode):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.int32)
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadBinaryI32
@@ -2694,12 +2684,12 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
-            read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+            ctypes.byref(samps_per_chan_read))
+        check_for_error(error_code)
         return read_array.tolist(), samps_per_chan_read.value
 
-    def read_binary_u16(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+    def read_binary_u16(self, task, num_samps_per_chan, timeout, fill_mode):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.uint16)
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadBinaryU16
@@ -2715,12 +2705,12 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
-            read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+            ctypes.byref(samps_per_chan_read))
+        check_for_error(error_code)
         return read_array.tolist(), samps_per_chan_read.value
 
-    def read_binary_u32(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+    def read_binary_u32(self, task, num_samps_per_chan, timeout, fill_mode):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.uint32)
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadBinaryU32
@@ -2736,11 +2726,12 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
-            read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+            ctypes.byref(samps_per_chan_read))
+        check_for_error(error_code)
         return read_array.tolist(), samps_per_chan_read.value
 
-    def read_counter_f64(self, task, num_samps_per_chan, timeout, read_array):
+    def read_counter_f64(self, task, num_samps_per_chan, timeout):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.float64)
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadCounterF64
@@ -2755,13 +2746,14 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
-            task, num_samps_per_chan, timeout, read_array, read_array.size,
-            ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+            task, num_samps_per_chan, timeout, read_array,
+            ctypes.byref(samps_per_chan_read))
+        check_for_error(error_code)
         return read_array.tolist(), samps_per_chan_read.value
 
     def read_counter_f64_ex(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.float64)
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadCounterF64Ex
@@ -2777,8 +2769,8 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
-            read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+            ctypes.byref(samps_per_chan_read))
+        check_for_error(error_code)
         return read_array.tolist(), samps_per_chan_read.value
 
     def read_counter_scalar_f64(self, task, timeout):
@@ -2815,7 +2807,8 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return value.value
 
-    def read_counter_u32(self, task, num_samps_per_chan, timeout, read_array):
+    def read_counter_u32(self, task, num_samps_per_chan, timeout):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.uint32)
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadCounterU32
@@ -2829,13 +2822,14 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
-            task, num_samps_per_chan, timeout, read_array, read_array.size,
-            ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+            task, num_samps_per_chan, timeout, read_array,
+            ctypes.byref(samps_per_chan_read))
+        check_for_error(error_code)
         return read_array.tolist(), samps_per_chan_read.value
 
     def read_counter_u32_ex(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+            self, task, num_samps_per_chan, timeout, fill_mode):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.uint32)
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadCounterU32Ex
@@ -2851,13 +2845,13 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
-            read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+            ctypes.byref(samps_per_chan_read))
+        check_for_error(error_code)
         return read_array.tolist(), samps_per_chan_read.value
 
-    def read_ctr_freq(
-            self, task, num_samps_per_chan, timeout, interleaved,
-            read_array_frequency, read_array_duty_cycle):
+    def read_ctr_freq(self, task, num_samps_per_chan, timeout, interleaved):
+        read_array_frequency = numpy.zeros(array_size_in_samps, dtype=numpy.float64)
+        read_array_duty_cycle = numpy.zeros(array_size_in_samps, dtype=numpy.float64)
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadCtrFreq
@@ -2876,9 +2870,8 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
             read_array_frequency, read_array_duty_cycle,
-            read_array_duty_cycle.size, ctypes.byref(samps_per_chan_read),
-            None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+            ctypes.byref(samps_per_chan_read))
+        check_for_error(error_code)
         return read_array_frequency.tolist(), read_array_duty_cycle.tolist(), samps_per_chan_read.value
 
     def read_ctr_freq_scalar(self, task, timeout):
@@ -2901,9 +2894,9 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return frequency.value, duty_cycle.value
 
-    def read_ctr_ticks(
-            self, task, num_samps_per_chan, timeout, interleaved,
-            read_array_high_ticks, read_array_low_ticks):
+    def read_ctr_ticks(self, task, num_samps_per_chan, timeout, interleaved):
+        read_array_high_ticks = numpy.zeros(array_size_in_samps, dtype=numpy.uint32)
+        read_array_low_ticks = numpy.zeros(array_size_in_samps, dtype=numpy.uint32)
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadCtrTicks
@@ -2922,8 +2915,8 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
             read_array_high_ticks, read_array_low_ticks,
-            read_array_low_ticks.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+            ctypes.byref(samps_per_chan_read))
+        check_for_error(error_code)
         return read_array_high_ticks.tolist(), read_array_low_ticks.tolist(), samps_per_chan_read.value
 
     def read_ctr_ticks_scalar(self, task, timeout):
@@ -2946,9 +2939,9 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return high_ticks.value, low_ticks.value
 
-    def read_ctr_time(
-            self, task, num_samps_per_chan, timeout, interleaved,
-            read_array_high_time, read_array_low_time):
+    def read_ctr_time(self, task, num_samps_per_chan, timeout, interleaved):
+        read_array_high_time = numpy.zeros(array_size_in_samps, dtype=numpy.float64)
+        read_array_low_time = numpy.zeros(array_size_in_samps, dtype=numpy.float64)
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadCtrTime
@@ -2967,8 +2960,8 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
             read_array_high_time, read_array_low_time,
-            read_array_low_time.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+            ctypes.byref(samps_per_chan_read))
+        check_for_error(error_code)
         return read_array_high_time.tolist(), read_array_low_time.tolist(), samps_per_chan_read.value
 
     def read_ctr_time_scalar(self, task, timeout):
@@ -2991,8 +2984,8 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return high_time.value, low_time.value
 
-    def read_digital_lines(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+    def read_digital_lines(self, task, num_samps_per_chan, timeout, fill_mode):
+        read_array = numpy.zeros(array_size_in_bytes, dtype=numpy.uint8)
         samps_per_chan_read = ctypes.c_int()
         num_bytes_per_samp = ctypes.c_int()
 
@@ -3009,9 +3002,9 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
-            read_array.size, ctypes.byref(samps_per_chan_read),
-            ctypes.byref(num_bytes_per_samp), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+            ctypes.byref(samps_per_chan_read),
+            ctypes.byref(num_bytes_per_samp))
+        check_for_error(error_code)
         return read_array.tolist(), samps_per_chan_read.value, num_bytes_per_samp.value
 
     def read_digital_scalar_u32(self, task, timeout):
@@ -3031,8 +3024,8 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return value.value
 
-    def read_digital_u16(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+    def read_digital_u16(self, task, num_samps_per_chan, timeout, fill_mode):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.uint16)
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadDigitalU16
@@ -3048,12 +3041,12 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
-            read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+            ctypes.byref(samps_per_chan_read))
+        check_for_error(error_code)
         return read_array.tolist(), samps_per_chan_read.value
 
-    def read_digital_u32(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+    def read_digital_u32(self, task, num_samps_per_chan, timeout, fill_mode):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.uint32)
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadDigitalU32
@@ -3069,12 +3062,12 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
-            read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+            ctypes.byref(samps_per_chan_read))
+        check_for_error(error_code)
         return read_array.tolist(), samps_per_chan_read.value
 
-    def read_digital_u8(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+    def read_digital_u8(self, task, num_samps_per_chan, timeout, fill_mode):
+        read_array = numpy.zeros(array_size_in_samps, dtype=numpy.uint8)
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadDigitalU8
@@ -3090,8 +3083,8 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
-            read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+            ctypes.byref(samps_per_chan_read))
+        check_for_error(error_code)
         return read_array.tolist(), samps_per_chan_read.value
 
     def read_power_binary_i16(
@@ -3951,8 +3944,7 @@ class LibraryInterpreter(BaseInterpreter):
         raise NotImplementedError
 
     def write_to_teds_from_array(
-            self, physical_channel, array_size, bit_stream,
-            basic_teds_options):
+            self, physical_channel, bit_stream, basic_teds_options):
         cfunc = lib_importer.windll.DAQmxWriteToTEDSFromArray
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3962,8 +3954,7 @@ class LibraryInterpreter(BaseInterpreter):
                         flags=('C','W')), ctypes.c_uint, ctypes.c_int]
 
         error_code = cfunc(
-            physical_channel, bit_stream, len(bit_stream), array_size,
-            basic_teds_options)
+            physical_channel, bit_stream, len(bit_stream), basic_teds_options)
         check_for_error(error_code)
 
     def write_to_teds_from_file(

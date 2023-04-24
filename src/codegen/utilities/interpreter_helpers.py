@@ -62,35 +62,25 @@ def get_interpreter_functions(metadata):
 def generate_interpreter_function_call_args(function_metadata):
     """Gets function call arguments."""
     function_call_args = []
-    size_value = None
+    size_value = []
     size_param_index = None
-    for param in function_metadata.base_parameters:
+    for param in function_metadata.interpreter_parameters:
+        ## Deleting repeated size parameters
+        if param.has_explicit_buffer_size:
+            if size_value == param.size.value:
+                del function_call_args[size_param_index]
+
         if param.direction == "in":
             function_call_args.append(param.parameter_name)
             if param.has_explicit_buffer_size:
                 function_call_args.append(f"len({param.parameter_name})")
+                size_value = param.size.value
+                size_param_index = len(function_call_args) - 1
         else:
             if param.has_explicit_buffer_size:
-                if (
-                    is_custom_read_write_function(function_metadata)
-                    and param.size.mechanism == "passed-in"
-                ):
-                    # Removing previously added size parameter with the same size value.
-                    if size_value == param.size.value:
-                        del function_call_args[size_param_index]
-                    function_call_args.append(param.parameter_name)
-                    function_call_args.append(f"{param.parameter_name}.size")
-                    size_value = param.size.value
-                    size_param_index = len(function_call_args) - 1
-                elif param.size.mechanism == "ivi-dance":
-                    function_call_args.append(param.parameter_name)
+                function_call_args.append(param.parameter_name)
+                if param.size.mechanism == "ivi-dance":
                     function_call_args.append("temp_size")
-                elif (
-                    param.size.mechanism == "passed-in"
-                    or param.size.mechanism == "passed-in-by-ptr"
-                    or param.size.mechanism == "custom-code"
-                ):
-                    function_call_args.append(f"ctypes.byref({param.parameter_name})")
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
 
@@ -126,12 +116,12 @@ def get_instantiation_lines_for_output(func):
                 param.size.mechanism == "passed-in" or param.size.mechanism == "passed-in-by-ptr"
             ) and param.is_list:
                 instantiation_lines.append(
-                    f"{param.parameter_name} = numpy.zeros({param.size.value}, dtype=numpy.{param.ctypes_data_type})"
+                    f"{param.parameter_name} = numpy.zeros({param.size.value}, dtype={param.ctypes_data_type})"
                 )
             elif param.size.mechanism == "custom-code":
                 instantiation_lines.append(f"size = {param.size.value}")
                 instantiation_lines.append(
-                    f"{param.parameter_name} = numpy.zeros(size, dtype=numpy.{param.ctypes_data_type})"
+                    f"{param.parameter_name} = numpy.zeros(size, dtype={param.ctypes_data_type})"
                 )
         else:
             instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
@@ -140,14 +130,7 @@ def get_instantiation_lines_for_output(func):
 
 def get_interpreter_params(func):
     """Gets interpreter parameters for the function."""
-    interpreter_parameters = []
-    for param in func.base_parameters:
-        if param.direction == "in":
-            interpreter_parameters.append(param)
-        elif is_custom_read_write_function(func) and param.has_explicit_buffer_size:
-            if param.size.mechanism == "passed-in":
-                interpreter_parameters.append(param)
-    return interpreter_parameters
+    return (p for p in func.interpreter_parameters if p.direction == "in")
 
 
 def get_skippable_params_for_interpreter_func(func):

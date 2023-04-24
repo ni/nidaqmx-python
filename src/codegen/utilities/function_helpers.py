@@ -169,6 +169,8 @@ def get_arguments_type(functions_metadata):
             # parameter is used by another parameter in the same function. In such cases the
             # size parameter argument definition should always come after the last parameter
             # that is using the size argument.
+            if param.size.mechanism == "custom-code":
+                continue
             if len(size_param_info) != 0:
                 size_param, parameter_index = size_param_info
                 if size_param.size == param.size:
