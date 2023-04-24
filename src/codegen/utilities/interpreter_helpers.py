@@ -119,7 +119,7 @@ def get_instantiation_lines_for_output(func):
     instantiation_lines = []
     if func.is_init_method:
         instantiation_lines.append(f"task = lib_importer.task_handle(0)")
-    for param in func.output_parameters:
+    for param in get_output_parameters(func):
         if func.function_name in CDLL_EXEC_STYLE_VARARGS_FUNCTIONS:
             instantiation_lines.append(f"{param.parameter_name} = []")
         elif param.has_explicit_buffer_size:
@@ -193,8 +193,9 @@ def is_skippable_param(param: dict) -> bool:
     return False
 
 
-def get_output_param_with_ivi_dance_mechanism(output_parameters):
+def get_output_param_with_ivi_dance_mechanism(func):
     """Gets the output parameters with explicit buffer size."""
+    output_parameters = get_output_parameters(func)
     explicit_output_params = [p for p in output_parameters if p.has_explicit_buffer_size]
     params_with_ivi_dance_mechanism = [
         p for p in explicit_output_params if p.size.mechanism == "ivi-dance"
@@ -219,15 +220,26 @@ def get_output_param_with_ivi_dance_mechanism(output_parameters):
 
 def has_parameter_with_ivi_dance_size_mechanism(func):
     """Returns true if the function has a parameter with ivi dance size mechanism."""
-    parameter_with_size_buffer = get_output_param_with_ivi_dance_mechanism(func.output_parameters)
+    parameter_with_size_buffer = get_output_param_with_ivi_dance_mechanism(func)
     return parameter_with_size_buffer is not None
+
+
+def get_output_parameters(func):
+    """Gets the output parameters used by the methods in the interpreters."""
+    return (
+        param
+        for param in func.interpreter_parameters
+        if param.direction == "out" and param.python_data_type is not None
+    )
 
 
 def get_return_values(func):
     """Gets the values to add to return statement of the function."""
     return_values = []
-    for param in func.output_parameters:
-        if param.ctypes_data_type == "ctypes.c_char_p":
+    for param in get_output_parameters(func):
+        if func.function_name in CDLL_EXEC_STYLE_VARARGS_FUNCTIONS:
+            return_values.append(param.parameter_name)
+        elif param.ctypes_data_type == "ctypes.c_char_p":
             return_values.append(f"{param.parameter_name}.value.decode('ascii')")
         elif param.is_list:
             return_values.append(f"{param.parameter_name}.tolist()")

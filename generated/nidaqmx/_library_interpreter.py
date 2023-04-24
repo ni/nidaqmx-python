@@ -1760,6 +1760,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def create_task(self, session_name):
         task = lib_importer.task_handle(0)
+        task = ctypes.TaskHandle()
 
         cfunc = lib_importer.windll.DAQmxCreateTask
         if cfunc.argtypes is None:
@@ -1771,6 +1772,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             session_name, ctypes.byref(task))
         check_for_error(error_code)
+        return task
 
     def create_tedsai_accel_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -2134,6 +2136,7 @@ class LibraryInterpreter(BaseInterpreter):
     def create_watchdog_timer_task_ex(
             self, device_name, session_name, timeout):
         task = lib_importer.task_handle(0)
+        task = ctypes.TaskHandle()
 
         cfunc = lib_importer.windll.DAQmxCreateWatchdogTimerTaskEx
         if cfunc.argtypes is None:
@@ -2146,6 +2149,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             device_name, session_name, ctypes.byref(task), timeout)
         check_for_error(error_code)
+        return task
 
     def delete_network_device(self, device_name):
         cfunc = lib_importer.windll.DAQmxDeleteNetworkDevice
@@ -2233,7 +2237,7 @@ class LibraryInterpreter(BaseInterpreter):
         args = [device_name]
         argtypes = [ctypes_byte_str]
 
-        for index in range(None):
+        for index in range(len(channel_name)):
             state_element = ctypes.c_double
             state.append(state_element)
 
@@ -2253,7 +2257,7 @@ class LibraryInterpreter(BaseInterpreter):
             cfunc.argtypes = argtypes
             error_code = cfunc(*args)
         check_for_error(error_code)
-        return state.value
+        return state
 
     def get_analog_power_up_states_with_output_type(
             self, channel_names, array_size):
@@ -2691,7 +2695,7 @@ class LibraryInterpreter(BaseInterpreter):
         args = [device_name]
         argtypes = [ctypes_byte_str]
 
-        for index in range(None):
+        for index in range(len(channel_name)):
             state_element = ctypes.c_int32
             state.append(state_element)
 
@@ -2708,7 +2712,7 @@ class LibraryInterpreter(BaseInterpreter):
             cfunc.argtypes = argtypes
             error_code = cfunc(*args)
         check_for_error(error_code)
-        return state.value
+        return state
 
     def get_digital_pull_up_pull_down_states(self, device_name, channel_name):
         state = []
@@ -2716,7 +2720,7 @@ class LibraryInterpreter(BaseInterpreter):
         args = [device_name]
         argtypes = [ctypes_byte_str]
 
-        for index in range(None):
+        for index in range(len(channel_name)):
             state_element = ctypes.c_int32
             state.append(state_element)
 
@@ -2733,7 +2737,7 @@ class LibraryInterpreter(BaseInterpreter):
             cfunc.argtypes = argtypes
             error_code = cfunc(*args)
         check_for_error(error_code)
-        return state.value
+        return state
 
     def get_disconnected_cdaq_sync_ports(self):
         cfunc = lib_importer.windll.DAQmxGetDisconnectedCDAQSyncPorts
@@ -4046,6 +4050,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def load_task(self, session_name):
         task = lib_importer.task_handle(0)
+        task = ctypes.TaskHandle()
 
         cfunc = lib_importer.windll.DAQmxLoadTask
         if cfunc.argtypes is None:
@@ -4057,6 +4062,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             session_name, ctypes.byref(task))
         check_for_error(error_code)
+        return task
 
     def read_analog_f64(self, task, num_samps_per_chan, timeout, fill_mode):
         read_array = numpy.zeros(array_size_in_samps, dtype=numpy.float64)
@@ -4719,7 +4725,7 @@ class LibraryInterpreter(BaseInterpreter):
         args = [device_name]
         argtypes = [ctypes_byte_str]
 
-        for index in range(None):
+        for index in range(len(channel_names)):
 
             args.append(channel_names[index])
             argtypes.append(ctypes_byte_str)
@@ -4913,7 +4919,7 @@ class LibraryInterpreter(BaseInterpreter):
         args = [device_name]
         argtypes = [ctypes_byte_str]
 
-        for index in range(None):
+        for index in range(len(channel_names)):
 
             args.append(channel_names[index])
             argtypes.append(ctypes_byte_str)
@@ -4934,7 +4940,7 @@ class LibraryInterpreter(BaseInterpreter):
         args = [device_name]
         argtypes = [ctypes_byte_str]
 
-        for index in range(None):
+        for index in range(len(channel_names)):
 
             args.append(channel_names[index])
             argtypes.append(ctypes_byte_str)
