@@ -12,6 +12,8 @@ from nidaqmx._stubs import session_pb2 as session_grpc_types
 
 class GrpcStubInterpreter(BaseInterpreter):
     '''Interpreter for interacting with a gRPC Stub class'''
+    __slots__ = ['_grpc_options', '_client']
+
 
     def __init__(self, grpc_options):
         self._grpc_options = grpc_options
