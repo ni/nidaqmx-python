@@ -62,8 +62,10 @@ class WatchdogTask:
         """
         self._interpreter = utils._select_interpreter(grpc_options)
 
-        self._interpreter.create_watchdog_timer_task_ex(
-            device_name, task_name, timeout)
+
+        self._handle = lib_importer.task_handle(0)
+
+        self._handle = self._interpreter.create_watchdog_timer_task_ex(device_name, task_name, timeout)
 
         # Saved name is used in self.close() to throw graceful error on
         # double closes.
