@@ -32,6 +32,10 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetFirstSampClkWhen",
     "SetStartTrigTrigWhen",
     "SetSyncPulseTimeWhen",
+    "ReadPowerBinaryI16",
+    "ReadPowerF64",
+    "ReadRaw",
+    "WriteRaw",
 ]
 
 

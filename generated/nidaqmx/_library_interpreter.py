@@ -3084,16 +3084,6 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
         return read_array, samps_per_chan_read.value
 
-    def read_power_binary_i16(
-            self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
-        raise NotImplementedError
-
-    def read_power_f64(
-            self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
-        raise NotImplementedError
-
     def read_power_scalar_f64(self, task, timeout):
         voltage = ctypes.c_double()
         current = ctypes.c_double()
@@ -3112,9 +3102,6 @@ class LibraryInterpreter(BaseInterpreter):
             task, timeout, ctypes.byref(voltage), ctypes.byref(current), None)
         check_for_error(error_code)
         return voltage.value, current.value
-
-    def read_raw(self, task, num_samps_per_chan, timeout, array_size_in_bytes):
-        raise NotImplementedError
 
     def register_done_event(
             self, task, options, callback_function, callback_data):
@@ -3937,9 +3924,6 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
         return samps_per_chan_written.value
 
-    def write_raw(self, task, num_samps, auto_start, timeout, write_array):
-        raise NotImplementedError
-
     def write_to_teds_from_array(
             self, physical_channel, bit_stream, basic_teds_options):
         cfunc = lib_importer.windll.DAQmxWriteToTEDSFromArray
@@ -3967,9 +3951,9 @@ class LibraryInterpreter(BaseInterpreter):
             physical_channel, file_path, basic_teds_options)
         check_for_error(error_code)
 
-    def read_power_i16(
-            task, read_voltage_array, read_current_array, num_samps_per_chan,
-            timeout, fill_mode):
+    def read_power_binary_i16(
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            read_voltage_array, read_current_array):
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadPowerBinaryI16
@@ -3993,8 +3977,8 @@ class LibraryInterpreter(BaseInterpreter):
         return samps_per_chan_read.value
 
     def read_power_f64(
-            task, read_voltage_array, read_current_array, num_samps_per_chan,
-            timeout, fill_mode):
+            self, task, num_samps_per_chan, timeout, fill_mode, 
+            read_voltage_array, read_current_array):
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadPowerF64
@@ -4015,7 +3999,7 @@ class LibraryInterpreter(BaseInterpreter):
             ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
-    def read_raw(task, read_array, num_samps_per_chan, timeout):
+    def read_raw(self, task, num_samps_per_chan, timeout, read_array):
         samples_read = ctypes.c_int()
         number_of_bytes_per_sample = ctypes.c_int()
 
@@ -4038,7 +4022,7 @@ class LibraryInterpreter(BaseInterpreter):
         return samples_read.value, number_of_bytes_per_sample.value
 
     def write_raw(
-            task_handle, num_samps_per_chan, auto_start, timeout, numpy_array):
+            self, task_handle, num_samps_per_chan, auto_start, timeout, numpy_array):
         samps_per_chan_written = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxWriteRaw
