@@ -1819,12 +1819,14 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def read_power_binary_i16(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_voltage_array, read_current_array):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_voltage_array, 
+            read_current_array):
         raise NotImplementedError
 
     @abc.abstractmethod
     def read_power_f64(
-            self, task, num_samps_per_chan, timeout, fill_mode, read_voltage_array, read_current_array):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_voltage_array, 
+            read_current_array):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1832,5 +1834,5 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def write_raw(self, task, num_samps, auto_start, timeout, write_array):
+    def write_raw(self, task, num_samps_per_chan, auto_start, timeout, numpy_array):
         raise NotImplementedError

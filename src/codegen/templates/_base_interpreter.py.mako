@@ -49,5 +49,5 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def write_raw(self, task, num_samps, auto_start, timeout, write_array):
+    def write_raw(self, task, num_samps_per_chan, auto_start, timeout, numpy_array):
         raise NotImplementedError
