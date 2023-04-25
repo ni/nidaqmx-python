@@ -1,5 +1,6 @@
 """This contains the helper methods used in interpreter generation."""
 import re
+import collections
 from copy import deepcopy
 
 from codegen.functions.function import Function
@@ -62,28 +63,33 @@ def get_interpreter_functions(metadata):
 def generate_interpreter_function_call_args(function_metadata):
     """Gets function call arguments."""
     function_call_args = []
-    size_value = []
-    size_param_index = None
+    size_values = {}
+    SizeParameter = collections.namedtuple(
+        "SizeParameter", ["name", "size"]
+    )
     for param in function_metadata.interpreter_parameters:
-        ## Deleting repeated size parameters
         if param.has_explicit_buffer_size:
-            if size_value == param.size.value:
-                del function_call_args[size_param_index]
+            if param.direction == "in":
+                size_values[param.size.value] = SizeParameter(
+                    param.parameter_name, f"len({param.parameter_name})"
+                )
+            elif param.direction == "out":
+                if param.size.mechanism == "ivi-dance":
+                    size_values[param.size.value] = SizeParameter(param.parameter_name, "temp_size")
 
+    for param in function_metadata.interpreter_parameters:
         if param.direction == "in":
             function_call_args.append(param.parameter_name)
-            if param.has_explicit_buffer_size:
-                function_call_args.append(f"len({param.parameter_name})")
-                size_value = param.size.value
-                size_param_index = len(function_call_args) - 1
-        else:
+        elif param.direction == "out":
             if param.has_explicit_buffer_size:
                 function_call_args.append(param.parameter_name)
-                if param.size.mechanism == "ivi-dance":
-                    function_call_args.append("temp_size")
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
-
+        if param.has_explicit_buffer_size:
+            if param.size.value in size_values:
+                size_parameter = size_values[param.size.value]
+                if param.parameter_name == size_parameter.name:
+                    function_call_args.append(size_parameter.size)
     return function_call_args
 
 
