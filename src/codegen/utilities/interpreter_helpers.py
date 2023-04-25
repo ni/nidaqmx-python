@@ -177,6 +177,8 @@ def get_return_values(func):
     """Gets the values to add to return statement of the function."""
     output_parameters = get_output_params(func)
     return_values = []
+    if func.is_init_method:
+        return_values.append("True")
     for param in output_parameters:
         if param.ctypes_data_type == "ctypes.c_char_p":
             return_values.append(f"{param.parameter_name}.value.decode('ascii')")

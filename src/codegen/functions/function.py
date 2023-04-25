@@ -17,6 +17,7 @@ class Function:
         self._calling_convention = function_metadata["calling_convention"]
         self._return_type = function_metadata["returns"]
         self._stream_response = function_metadata.get("stream_response", False)
+        self._is_init_method = function_metadata.get("init_method", False)
         self._handle_parameter = None
         self._is_python_codegen_method = function_metadata.get("python_codegen_method") != "no"
         if "handle_parameter" in function_metadata:
@@ -120,3 +121,8 @@ class Function:
     def is_python_codegen_method(self):
         """bool: Defines if the function is a python codegen function."""
         return self._is_python_codegen_method
+    
+    @property
+    def is_init_method(self):
+        """bool: Defines if the function is a initialization function."""
+        return self._is_init_method

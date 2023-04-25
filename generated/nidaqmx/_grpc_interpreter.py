@@ -1247,6 +1247,9 @@ class GrpcStubInterpreter(BaseInterpreter):
                 scaled_vals=scaled_vals))
 
     def create_task(self, session_name):
+        metadata = (
+            ('ni-api-key', self._grpc_options.api_key),
+        )
         response = self._invoke(
             self._client.CreateTask,
             grpc_types.CreateTaskRequest(session_name=session_name))
@@ -1520,20 +1523,28 @@ class GrpcStubInterpreter(BaseInterpreter):
         exp_states = []
         for index in range(len(lines)):
             exp_states.append(grpc_types.WatchdogExpChannelsAndState(lines=lines[index], exp_state=exp_state[index]))
+        metadata = (
+            ('ni-api-key', self._grpc_options.api_key),
+        )
         response = self._invoke(
             self._client.CreateWatchdogTimerTask,
             grpc_types.CreateWatchdogTimerTaskRequest(
                 device_name=device_name, exp_states=exp_states,
-                session_name=session_name, timeout=timeout))
+                session_name=session_name, timeout=timeout),
+            metadata=metadata)
         return response.task
 
     def create_watchdog_timer_task_ex(
             self, device_name, session_name, timeout):
+        metadata = (
+            ('ni-api-key', self._grpc_options.api_key),
+        )
         response = self._invoke(
             self._client.CreateWatchdogTimerTaskEx,
             grpc_types.CreateWatchdogTimerTaskExRequest(
                 device_name=device_name, session_name=session_name,
-                timeout=timeout))
+                timeout=timeout),
+            metadata=metadata)
         return response.task
 
     def delete_network_device(self, device_name):
@@ -2248,6 +2259,9 @@ class GrpcStubInterpreter(BaseInterpreter):
         return response.is_task_done
 
     def load_task(self, session_name):
+        metadata = (
+            ('ni-api-key', self._grpc_options.api_key),
+        )
         response = self._invoke(
             self._client.LoadTask,
             grpc_types.LoadTaskRequest(session_name=session_name))

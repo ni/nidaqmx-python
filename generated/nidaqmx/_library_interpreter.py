@@ -1774,7 +1774,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             session_name, ctypes.byref(task))
         check_for_error(error_code)
-        return task
+        return True, task
 
     def create_tedsai_accel_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -2148,7 +2148,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             device_name, session_name, ctypes.byref(task), timeout)
         check_for_error(error_code)
-        return task
+        return True, task
 
     def delete_network_device(self, device_name):
         cfunc = lib_importer.windll.DAQmxDeleteNetworkDevice
@@ -3058,7 +3058,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             session_name, ctypes.byref(task))
         check_for_error(error_code)
-        return task
+        return True, task
 
     def read_analog_f64(
             self, task, num_samps_per_chan, timeout, fill_mode,
