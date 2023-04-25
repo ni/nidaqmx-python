@@ -4,7 +4,7 @@ import pytest
 import nidaqmx
 
 
-def test__polynomial__calcualte_reverse_coeff__returns_expected_reverse_coeff():
+def test__polynomial__calculate_reverse_poly_coeff__returns_reverse_coeff():
     """Test the working of the calculate_reverse_coeff function."""
     # The given values represents the polynomial y = 2x + 1
     forward_coeff = [1.0, 2.0]
@@ -18,4 +18,4 @@ def test__polynomial__calcualte_reverse_coeff__returns_expected_reverse_coeff():
     )
 
     # The expected inverted polynomial is 0.5y - 0.5 = x
-    assert pytest.approx(reverse_coeff) == [-0.5, 0.5]
+    assert reverse_coeff == pytest.approx([-0.5, 0.5])
