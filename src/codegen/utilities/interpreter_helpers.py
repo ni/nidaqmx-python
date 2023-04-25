@@ -3,6 +3,7 @@ import re
 from copy import deepcopy
 
 from codegen.functions.function import Function
+from codegen.utilities.function_helpers import to_param_argtype
 from codegen.utilities.helpers import camel_to_snake_case
 from codegen.utilities.function_helpers import to_param_argtype
 
@@ -39,15 +40,6 @@ LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
     "RegisterSignalEvent",
     "RegisterEveryNSamplesEvent",
     "RegisterDoneEvent",
-]
-
-CDLL_EXEC_STYLE_VARARGS_FUNCTIONS = [
-    "set_digital_power_up_states",
-    "get_digital_power_up_states",
-    "set_digital_pull_up_pull_down_states",
-    "get_digital_pull_up_pull_down_states",
-    "set_analog_power_up_states",
-    "get_analog_power_up_states",
 ]
 
 
@@ -120,7 +112,9 @@ def get_instantiation_lines_for_output(func):
     if func.is_init_method:
         instantiation_lines.append(f"task = lib_importer.task_handle(0)")
     for param in get_output_parameters(func):
-        if func.function_name in CDLL_EXEC_STYLE_VARARGS_FUNCTIONS:
+        if param.parameter_name == "task":
+            continue
+        elif any(get_varargs_parameters(func)):
             instantiation_lines.append(f"{param.parameter_name} = []")
         elif param.has_explicit_buffer_size:
             if (
@@ -138,32 +132,39 @@ def get_instantiation_lines_for_output(func):
             instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
     return instantiation_lines
 
+
 def get_instantiation_lines_for_varargs(func):
+    """Gets instantiation lines for functions with variable arguments."""
     instantiation_lines = []
-    if func.function_name in CDLL_EXEC_STYLE_VARARGS_FUNCTIONS:
+    if any(get_varargs_parameters(func)):
         for param in func.output_parameters:
             instantiation_lines.append(f"{param.parameter_name}_element = {param.ctypes_data_type}")
-            instantiation_lines.append(f"{param.parameter_name}.append({param.parameter_name}_element)")
+            instantiation_lines.append(
+                f"{param.parameter_name}.append({param.parameter_name}_element)"
+            )
     return instantiation_lines
 
+
 def get_argument_definition_lines_for_varargs(varargs_params):
-    argument_defininion_lines =[]
+    """Gets the lines for defining the variable arguments for a function."""
+    argument_definition_lines = []
     for param in varargs_params:
         argtype = to_param_argtype(param)
         if param.direction == "in":
-            argument_defininion_lines.append(f"args.append({param.parameter_name}[index])")
+            argument_definition_lines.append(f"args.append({param.parameter_name}[index])")
         else:
-            argument_defininion_lines.append(f"args.append(ctypes.byref({param.parameter_name}_element))")
-        argument_defininion_lines.append(f"argtypes.append({argtype})")
-        argument_defininion_lines.append("")
-    return argument_defininion_lines
+            argument_definition_lines.append(
+                f"args.append(ctypes.byref({param.parameter_name}_element))"
+            )
+        argument_definition_lines.append(f"argtypes.append({argtype})")
+        argument_definition_lines.append("")
+    return argument_definition_lines
+
 
 def get_varargs_parameters(func):
-    varargs_parameters = []
-    if func.function_name in CDLL_EXEC_STYLE_VARARGS_FUNCTIONS:
-        varargs_parameters = func.parameters
-        del varargs_parameters[0]
-    return varargs_parameters
+    """Gets variable arguments of a function."""
+    return [p for p in func.parameters if p.is_repeating_argument]
+
 
 def get_interpreter_params(func):
     """Gets interpreter parameters for the function."""
@@ -186,9 +187,7 @@ def get_skippable_params_for_interpreter_func(func):
 def is_skippable_param(param: dict) -> bool:
     """Checks whether the parameter can be skipped or not while generating interpreter."""
     ignored_params = ["size", "reserved"]
-    if (not param.get("include_in_proto", True) and (param["name"] in ignored_params)) or param.get(
-        "proto_only"
-    ):
+    if not param.get("include_in_proto", True) and (param["name"] in ignored_params):
         return True
     return False
 
@@ -237,7 +236,7 @@ def get_return_values(func):
     """Gets the values to add to return statement of the function."""
     return_values = []
     for param in get_output_parameters(func):
-        if func.function_name in CDLL_EXEC_STYLE_VARARGS_FUNCTIONS:
+        if any(get_varargs_parameters(func)):
             return_values.append(param.parameter_name)
         elif param.ctypes_data_type == "ctypes.c_char_p":
             return_values.append(f"{param.parameter_name}.value.decode('ascii')")
@@ -254,7 +253,7 @@ def get_c_function_call_template(func):
     """Gets the template to use for generating the logic of calling the c functions."""
     if func.stream_response:
         return "/event_function_call.py.mako"
-    elif func.function_name in CDLL_EXEC_STYLE_VARARGS_FUNCTIONS:
+    elif any(get_varargs_parameters(func)):
         return "/exec_cdecl_c_function_call.py.mako"
     elif has_parameter_with_ivi_dance_size_mechanism(func):
         return "/double_c_function_call.py.mako"
