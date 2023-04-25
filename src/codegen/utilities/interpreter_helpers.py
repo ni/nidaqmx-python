@@ -1,6 +1,6 @@
 """This contains the helper methods used in interpreter generation."""
-import re
 import collections
+import re
 from copy import deepcopy
 
 from codegen.functions.function import Function
@@ -64,9 +64,7 @@ def generate_interpreter_function_call_args(function_metadata):
     """Gets function call arguments."""
     function_call_args = []
     size_values = {}
-    SizeParameter = collections.namedtuple(
-        "SizeParameter", ["name", "size"]
-    )
+    SizeParameter = collections.namedtuple("SizeParameter", ["name", "size"])
     for param in function_metadata.interpreter_parameters:
         if param.has_explicit_buffer_size:
             if param.direction == "in":
