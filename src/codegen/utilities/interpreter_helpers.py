@@ -118,7 +118,7 @@ def get_instantiation_lines_for_output(func):
     for param in get_output_parameters(func):
         if param.parameter_name == "task":
             continue
-        elif any(get_varargs_parameters(func)):
+        elif param.is_repeating_argument:
             instantiation_lines.append(f"{param.parameter_name} = []")
         elif param.has_explicit_buffer_size:
             if (
@@ -240,7 +240,7 @@ def get_return_values(func):
     """Gets the values to add to return statement of the function."""
     return_values = []
     for param in get_output_parameters(func):
-        if any(get_varargs_parameters(func)):
+        if param.is_repeating_argument:
             return_values.append(f"{param.parameter_name}.tolist()")
         elif param.ctypes_data_type == "ctypes.c_char_p":
             return_values.append(f"{param.parameter_name}.value.decode('ascii')")
