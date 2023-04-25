@@ -2551,7 +2551,7 @@ class Device:
     @staticmethod
     def add_network_device(
             ip_address, device_name="", attempt_reservation=False,
-            timeout=10.0, *, grpc_options=None, interpreter=None):
+            timeout=10.0, *, grpc_options=None):
         """
         Adds a Network cDAQ device to the system and, if specified,
         attempts to reserve it.
@@ -2569,18 +2569,20 @@ class Device:
                 False.
             timeout (Optional[float]): Specifies the time in seconds to
                 wait for the device to respond before timing out.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
+                gRPC session options.
         Returns:
             nidaqmx.system.device.Device: 
             
             Specifies the object that represents the device this
             operation applied to.
         """
-        interpreter = utils._select_interpreter(grpc_options, interpreter)
-
-        device_name_out = interpreter.add_network_device(
+        device = Device("", grpc_options=grpc_options)
+        
+        device._name = device._interpreter.add_network_device(
             ip_address, device_name, attempt_reservation, timeout)
 
-        return _DeviceAlternateConstructor(device_name_out, interpreter)
+        return device
 
     def delete_network_device(self):
         """
@@ -2622,7 +2624,7 @@ class _DeviceAlternateConstructor(Device):
 
     This is a private API used to instantiate a Device with an existing interpreter.
     """
-    # Added an empty __slots__ to avoid layout error while running tests.
+    # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
     __slots__ = []
 
     def __init__(self, name, interpreter):

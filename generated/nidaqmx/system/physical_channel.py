@@ -1262,7 +1262,7 @@ class _PhysicalChannelAlternateConstructor(PhysicalChannel):
 
     This is a private API used to instantiate a PhysicalChannel with an existing interpreter.     
     """
-    # Added an empty __slots__ to avoid layout error while running tests.
+    # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
     __slots__ = []
 
     def __init__(self, name, interpreter):

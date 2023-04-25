@@ -617,7 +617,7 @@ class Scale:
     @staticmethod
     def calculate_reverse_poly_coeff(
             forward_coeffs, min_val_x=-5.0, max_val_x=5.0,
-            num_points_to_compute=1000, reverse_poly_order=-1, *, grpc_options=None, interpreter=None):
+            num_points_to_compute=1000, reverse_poly_order=-1, *, grpc_options=None):
         """
         Computes a set of coefficients for a polynomial that
         approximates the inverse of the polynomial with the coefficients
@@ -649,6 +649,8 @@ class Scale:
                 3 indicates a 3rd order polynomial. A value of -1
                 indicates a reverse polynomial of the same order as the
                 forward polynomial.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
+                gRPC session options.
         Returns:
             List[float]: 
             
@@ -659,7 +661,7 @@ class Scale:
         """
         forward_coeffs = numpy.float64(forward_coeffs)
 
-        interpreter = utils._select_interpreter(grpc_options, interpreter)
+        interpreter = utils._select_interpreter(grpc_options)
 
         reverse_coeffs = interpreter.calculate_reverse_poly_coeff(
             forward_coeffs, min_val_x, max_val_x, num_points_to_compute, reverse_poly_order)
@@ -669,7 +671,7 @@ class Scale:
     @staticmethod
     def create_lin_scale(
             scale_name, slope, y_intercept=0.0,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None, interpreter=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None):
         """
         Creates a custom scale that uses the equation y=mx+b, where x is
         a pre-scaled value, and y is a scaled value. The equation is
@@ -686,14 +688,14 @@ class Scale:
             scaled_units (Optional[str]): Is the units to use for the
                 scaled value. You can use an arbitrary string. NI-DAQmx
                 uses the units to label a graph or chart.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
+                gRPC session options.
         Returns:
             nidaqmx.scale.Scale:
             
             Indicates an object that represents the created custom scale.
         """
-        interpreter = utils._select_interpreter(grpc_options, interpreter)
-
-        scale = _ScaleAlternateConstructor(scale_name, interpreter)
+        scale = Scale(scale_name, grpc_options=grpc_options)
 
         scale._interpreter.create_lin_scale(
             scale_name, slope, y_intercept, pre_scaled_units.value, scaled_units)
@@ -703,7 +705,7 @@ class Scale:
     @staticmethod
     def create_map_scale(
             scale_name, prescaled_min, prescaled_max, scaled_min, scaled_max,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None, interpreter=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None):
         """
         Creates a custom scale that scales values proportionally from a
         range of pre-scaled values to a range of scaled values.
@@ -731,14 +733,14 @@ class Scale:
             scaled_units (Optional[str]): Is the units to use for the
                 scaled value. You can use an arbitrary string. NI-DAQmx
                 uses the units to label a graph or chart.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
+                gRPC session options.
         Returns:
             nidaqmx.scale.Scale: 
             
             Indicates an object that represents the created custom scale.
         """
-        interpreter = utils._select_interpreter(grpc_options, interpreter)
-
-        scale = _ScaleAlternateConstructor(scale_name, interpreter)
+        scale = Scale(scale_name, grpc_options=grpc_options)
 
         scale._interpreter.create_map_scale(
             scale_name, prescaled_min, prescaled_max, scaled_min, scaled_max, 
@@ -749,7 +751,7 @@ class Scale:
     @staticmethod
     def create_polynomial_scale(
             scale_name, forward_coeffs, reverse_coeffs,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None, interpreter=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None):
         """
         Creates a custom scale that uses an nth order polynomial
         equation. NI-DAQmx requires both a polynomial to convert pre-
@@ -773,6 +775,8 @@ class Scale:
             scaled_units (Optional[str]): Is the units to use for the
                 scaled value. You can use an arbitrary string. NI-DAQmx
                 uses the units to label a graph or chart.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
+                gRPC session options.
         Returns:
             nidaqmx.scale.Scale: 
             
@@ -787,9 +791,7 @@ class Scale:
         forward_coeffs = numpy.float64(forward_coeffs)
         reverse_coeffs = numpy.float64(reverse_coeffs)
 
-        interpreter = utils._select_interpreter(grpc_options, interpreter)
-
-        scale = _ScaleAlternateConstructor(scale_name, interpreter)
+        scale = Scale(scale_name, grpc_options=grpc_options)
 
         scale._interpreter.create_polynomial_scale(
             scale_name, forward_coeffs, reverse_coeffs, pre_scaled_units.value, scaled_units)
@@ -799,7 +801,7 @@ class Scale:
     @staticmethod
     def create_table_scale(
             scale_name, prescaled_vals, scaled_vals,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None, interpreter=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None):
         """
         Creates a custom scale that maps an list of pre-scaled values to
         an list of corresponding scaled values. NI-DAQmx applies linear
@@ -820,6 +822,8 @@ class Scale:
             scaled_units (Optional[str]): Is the units to use for the
                 scaled value. You can use an arbitrary string. NI-DAQmx
                 uses the units to label a graph or chart.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
+                gRPC session options.
         Returns:
             nidaqmx.scale.Scale: 
             
@@ -834,9 +838,7 @@ class Scale:
         prescaled_vals = numpy.float64(prescaled_vals)
         scaled_vals = numpy.float64(scaled_vals)
         
-        interpreter = utils._select_interpreter(grpc_options, interpreter)
-
-        scale = _ScaleAlternateConstructor(scale_name, interpreter)
+        scale = Scale(scale_name, grpc_options=grpc_options)
 
         scale._interpreter.create_table_scale(
             scale_name, prescaled_vals, scaled_vals, pre_scaled_units.value, scaled_units)
@@ -900,7 +902,7 @@ class _ScaleAlternateConstructor(Scale):
 
     This is a private API used to instantiate a Scale with an existing interpreter.
     """
-    # Added an empty __slots__ to avoid layout error while running tests.
+    # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
     __slots__ = []
 
     def __init__(self, name, interpreter):

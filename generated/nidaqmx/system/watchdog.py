@@ -56,20 +56,8 @@ class WatchdogTask:
         """
         self._interpreter = utils._select_interpreter(grpc_options)
 
-        self._handle = lib_importer.task_handle(0)
-
-        cfunc = lib_importer.windll.DAQmxCreateWatchdogTimerTaskEx
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str,
-                        ctypes.POINTER(lib_importer.task_handle),
-                        ctypes.c_double]
-
-        error_code = cfunc(
-            device_name, task_name, ctypes.byref(self._handle), timeout)
-        check_for_error(error_code)
+        self._interpreter.create_watchdog_timer_task_ex(
+            device_name, task_name, timeout)
 
         # Saved name is used in self.close() to throw graceful error on
         # double closes.
