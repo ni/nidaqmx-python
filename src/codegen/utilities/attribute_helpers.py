@@ -226,7 +226,7 @@ GENERIC_ATTRIBUTE_TYPE_MAP = {
     "uInt64": "uint64",
     "float64[]": "double_array",
     "int32[]": "int32_array",
-    "uInt8[]": "uint8_array",
+    "uInt8[]": "bytes",
     "uInt32[]": "uint32_array",
 }
 
@@ -291,11 +291,13 @@ def get_generic_attribute_function_name(attribute):
                     camel_to_snake_case(group_name, INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES),
                 )
                 return mapped_attribute_group + "_attribute"
-            
+
 
 def get_mapped_attribute_function_type(attribute):
     mapped_attribute_type = GENERIC_ATTRIBUTE_TYPE_MAP.get(
         attribute.type,
         camel_to_snake_case(attribute.type, INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES),
     )
+    if attribute.bitfield_enum:
+        return mapped_attribute_type.strip("_array")
     return mapped_attribute_type

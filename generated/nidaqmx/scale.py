@@ -57,13 +57,13 @@ class Scale:
 
 
         val = self._interpreter.get_scale_attribute_string(
-                self._name, 4646)
+                self._name, 0x1226)
         return val
 
     @description.setter
     def description(self, val):
         self._interpreter.set_scale_attribute_string(
-                self._name, 4646, val)
+                self._name, 0x1226, val)
 
     @property
     def lin_slope(self):
@@ -73,13 +73,13 @@ class Scale:
 
 
         val = self._interpreter.get_scale_attribute_double(
-                self._name, 4647)
+                self._name, 0x1227)
         return val
 
     @lin_slope.setter
     def lin_slope(self, val):
         self._interpreter.set_scale_attribute_double(
-                self._name, 4647, val)
+                self._name, 0x1227, val)
 
     @property
     def lin_y_intercept(self):
@@ -89,13 +89,13 @@ class Scale:
 
 
         val = self._interpreter.get_scale_attribute_double(
-                self._name, 4648)
+                self._name, 0x1228)
         return val
 
     @lin_y_intercept.setter
     def lin_y_intercept(self, val):
         self._interpreter.set_scale_attribute_double(
-                self._name, 4648, val)
+                self._name, 0x1228, val)
 
     @property
     def map_pre_scaled_max(self):
@@ -106,13 +106,13 @@ class Scale:
 
 
         val = self._interpreter.get_scale_attribute_double(
-                self._name, 4657)
+                self._name, 0x1231)
         return val
 
     @map_pre_scaled_max.setter
     def map_pre_scaled_max(self, val):
         self._interpreter.set_scale_attribute_double(
-                self._name, 4657, val)
+                self._name, 0x1231, val)
 
     @property
     def map_pre_scaled_min(self):
@@ -123,13 +123,13 @@ class Scale:
 
 
         val = self._interpreter.get_scale_attribute_double(
-                self._name, 4658)
+                self._name, 0x1232)
         return val
 
     @map_pre_scaled_min.setter
     def map_pre_scaled_min(self, val):
         self._interpreter.set_scale_attribute_double(
-                self._name, 4658, val)
+                self._name, 0x1232, val)
 
     @property
     def map_scaled_max(self):
@@ -143,13 +143,13 @@ class Scale:
 
 
         val = self._interpreter.get_scale_attribute_double(
-                self._name, 4649)
+                self._name, 0x1229)
         return val
 
     @map_scaled_max.setter
     def map_scaled_max(self, val):
         self._interpreter.set_scale_attribute_double(
-                self._name, 4649, val)
+                self._name, 0x1229, val)
 
     @property
     def map_scaled_min(self):
@@ -163,13 +163,13 @@ class Scale:
 
 
         val = self._interpreter.get_scale_attribute_double(
-                self._name, 4656)
+                self._name, 0x1230)
         return val
 
     @map_scaled_min.setter
     def map_scaled_min(self, val):
         self._interpreter.set_scale_attribute_double(
-                self._name, 4656, val)
+                self._name, 0x1230, val)
 
     @property
     def poly_forward_coeff(self):
@@ -183,14 +183,14 @@ class Scale:
 
 
         val = self._interpreter.get_scale_attribute_double_array(
-                self._name, 4660)
+                self._name, 0x1234)
         return val
 
     @poly_forward_coeff.setter
     def poly_forward_coeff(self, val):
         val = numpy.float64(val)
         self._interpreter.set_scale_attribute_double_array(
-                self._name, 4660, val, len(val))
+                self._name, 0x1234, val, len(val))
 
     @property
     def poly_reverse_coeff(self):
@@ -204,14 +204,14 @@ class Scale:
 
 
         val = self._interpreter.get_scale_attribute_double_array(
-                self._name, 4661)
+                self._name, 0x1235)
         return val
 
     @poly_reverse_coeff.setter
     def poly_reverse_coeff(self, val):
         val = numpy.float64(val)
         self._interpreter.set_scale_attribute_double_array(
-                self._name, 4661, val, len(val))
+                self._name, 0x1235, val, len(val))
 
     @property
     def pre_scaled_units(self):
@@ -222,14 +222,14 @@ class Scale:
 
 
         val = self._interpreter.get_scale_attribute_int32(
-                self._name, 6391)
+                self._name, 0x18f7)
         return UnitsPreScaled(val)
 
     @pre_scaled_units.setter
     def pre_scaled_units(self, val):
         val = val.value
         self._interpreter.set_scale_attribute_int32(
-                self._name, 6391, val)
+                self._name, 0x18f7, val)
 
     @property
     def scale_type(self):
@@ -240,7 +240,7 @@ class Scale:
 
 
         val = self._interpreter.get_scale_attribute_int32(
-                self._name, 6441)
+                self._name, 0x1929)
         return ScaleType(val)
 
     @property
@@ -252,13 +252,13 @@ class Scale:
 
 
         val = self._interpreter.get_scale_attribute_string(
-                self._name, 6427)
+                self._name, 0x191b)
         return val
 
     @scaled_units.setter
     def scaled_units(self, val):
         self._interpreter.set_scale_attribute_string(
-                self._name, 6427, val)
+                self._name, 0x191b, val)
 
     @property
     def table_pre_scaled_vals(self):
@@ -269,14 +269,14 @@ class Scale:
 
 
         val = self._interpreter.get_scale_attribute_double_array(
-                self._name, 4663)
+                self._name, 0x1237)
         return val
 
     @table_pre_scaled_vals.setter
     def table_pre_scaled_vals(self, val):
         val = numpy.float64(val)
         self._interpreter.set_scale_attribute_double_array(
-                self._name, 4663, val, len(val))
+                self._name, 0x1237, val, len(val))
 
     @property
     def table_scaled_vals(self):
@@ -287,14 +287,14 @@ class Scale:
 
 
         val = self._interpreter.get_scale_attribute_double_array(
-                self._name, 4662)
+                self._name, 0x1236)
         return val
 
     @table_scaled_vals.setter
     def table_scaled_vals(self, val):
         val = numpy.float64(val)
         self._interpreter.set_scale_attribute_double_array(
-                self._name, 4662, val, len(val))
+                self._name, 0x1236, val, len(val))
 
     @staticmethod
     def calculate_reverse_poly_coeff(

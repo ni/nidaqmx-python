@@ -147,7 +147,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32_array(
-                self._name, 12142)
+                self._name, 0x2f6e)
         return val
 
     @property
@@ -162,7 +162,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_string(
-                self._name, 12141)
+                self._name, 0x2f6d)
         return unflatten_channel_string(val)
 
     @property
@@ -176,7 +176,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32_array(
-                self._name, 12143)
+                self._name, 0x2f6f)
         return val
 
     @property
@@ -190,7 +190,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double_array(
-                self._name, 12240)
+                self._name, 0x2fd0)
         return val
 
     @property
@@ -203,7 +203,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double_array(
-                self._name, 12561)
+                self._name, 0x3111)
         return val
 
     @property
@@ -214,8 +214,8 @@ class Device:
         """
 
 
-        val = self._interpreter.get_device_attribute_int32_array(
-                self._name, 10644)
+        val = self._interpreter.get_device_attribute_int32(
+                self._name, 0x2994)
         return enum_bitfield_to_list(
             val, _CouplingTypes, Coupling)
 
@@ -228,7 +228,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double_array(
-                self._name, 10699)
+                self._name, 0x29cb)
         return val
 
     @property
@@ -241,7 +241,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double_array(
-                self._name, 10641)
+                self._name, 0x2991)
         return val
 
     @property
@@ -256,7 +256,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double_array(
-                self._name, 12488)
+                self._name, 0x30c8)
         return val
 
     @property
@@ -272,7 +272,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double_array(
-                self._name, 12489)
+                self._name, 0x30c9)
         return val
 
     @property
@@ -284,7 +284,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_int32_array(
-                self._name, 12551)
+                self._name, 0x3107)
         return [FilterType(e) for e in val]
 
     @property
@@ -297,7 +297,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double_array(
-                self._name, 10642)
+                self._name, 0x2992)
         return val
 
     @property
@@ -309,7 +309,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double_array(
-                self._name, 10643)
+                self._name, 0x2993)
         return val
 
     @property
@@ -324,7 +324,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double_array(
-                self._name, 10645)
+                self._name, 0x2995)
         return val
 
     @property
@@ -340,7 +340,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double_array(
-                self._name, 10703)
+                self._name, 0x29cf)
         return val
 
     @property
@@ -356,7 +356,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double(
-                self._name, 10637)
+                self._name, 0x298d)
         return val
 
     @property
@@ -368,7 +368,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double(
-                self._name, 10636)
+                self._name, 0x298c)
         return val
 
     @property
@@ -382,7 +382,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_int32_array(
-                self._name, 12242)
+                self._name, 0x2fd2)
         return [UsageTypeAI(e) for e in val]
 
     @property
@@ -395,7 +395,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double(
-                self._name, 10638)
+                self._name, 0x298e)
         return val
 
     @property
@@ -407,7 +407,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 12643)
+                self._name, 0x3163)
         return val
 
     @property
@@ -419,7 +419,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 12644)
+                self._name, 0x3164)
         return val
 
     @property
@@ -433,7 +433,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double_array(
-                self._name, 10773)
+                self._name, 0x2a15)
         return val
 
     @property
@@ -446,7 +446,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_int32_array(
-                self._name, 12252)
+                self._name, 0x2fdc)
         return [AcquisitionType(e) for e in val]
 
     @property
@@ -457,7 +457,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_bool(
-                self._name, 10639)
+                self._name, 0x298f)
         return val
 
     @property
@@ -468,8 +468,8 @@ class Device:
         """
 
 
-        val = self._interpreter.get_device_attribute_int32_array(
-                self._name, 10630)
+        val = self._interpreter.get_device_attribute_int32(
+                self._name, 0x2986)
         return enum_bitfield_to_list(
             val, _TriggerUsageTypes, TriggerUsage)
 
@@ -485,7 +485,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double_array(
-                self._name, 10697)
+                self._name, 0x29c9)
         return val
 
     @property
@@ -501,7 +501,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double_array(
-                self._name, 10698)
+                self._name, 0x29ca)
         return val
 
     @property
@@ -514,7 +514,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double_array(
-                self._name, 10640)
+                self._name, 0x2990)
         return val
 
     @property
@@ -525,7 +525,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_bool(
-                self._name, 10628)
+                self._name, 0x2984)
         return val
 
     @property
@@ -538,7 +538,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double_array(
-                self._name, 10652)
+                self._name, 0x299c)
         return val
 
     @property
@@ -550,7 +550,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double_array(
-                self._name, 10653)
+                self._name, 0x299d)
         return val
 
     @property
@@ -561,7 +561,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double(
-                self._name, 10647)
+                self._name, 0x2997)
         return val
 
     @property
@@ -572,7 +572,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double(
-                self._name, 10648)
+                self._name, 0x2998)
         return val
 
     @property
@@ -584,7 +584,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 12645)
+                self._name, 0x3165)
         return val
 
     @property
@@ -596,7 +596,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 12646)
+                self._name, 0x3166)
         return val
 
     @property
@@ -610,7 +610,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_int32_array(
-                self._name, 12243)
+                self._name, 0x2fd3)
         return [UsageTypeAO(e) for e in val]
 
     @property
@@ -622,7 +622,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_bool(
-                self._name, 10646)
+                self._name, 0x2996)
         return val
 
     @property
@@ -635,7 +635,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_int32_array(
-                self._name, 12253)
+                self._name, 0x2fdd)
         return [AcquisitionType(e) for e in val]
 
     @property
@@ -646,8 +646,8 @@ class Device:
         """
 
 
-        val = self._interpreter.get_device_attribute_int32_array(
-                self._name, 10631)
+        val = self._interpreter.get_device_attribute_int32(
+                self._name, 0x2987)
         return enum_bitfield_to_list(
             val, _TriggerUsageTypes, TriggerUsage)
 
@@ -661,7 +661,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double_array(
-                self._name, 10651)
+                self._name, 0x299b)
         return val
 
     @property
@@ -673,7 +673,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_int32(
-                self._name, 8998)
+                self._name, 0x2326)
         return BusType(val)
 
     @property
@@ -685,7 +685,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 10890)
+                self._name, 0x2a8a)
         return val
 
     @property
@@ -697,7 +697,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_string(
-                self._name, 10678)
+                self._name, 0x29b6)
         return [Device(v)
                 for v in unflatten_channel_string(val)]
 
@@ -709,7 +709,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 10655)
+                self._name, 0x299f)
         return val
 
     @property
@@ -721,7 +721,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double(
-                self._name, 10656)
+                self._name, 0x29a0)
         return val
 
     @property
@@ -735,7 +735,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_int32_array(
-                self._name, 12244)
+                self._name, 0x2fd4)
         return [UsageTypeCI(e) for e in val]
 
     @property
@@ -747,7 +747,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_bool(
-                self._name, 10654)
+                self._name, 0x299e)
         return val
 
     @property
@@ -760,7 +760,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_int32_array(
-                self._name, 12254)
+                self._name, 0x2fde)
         return [AcquisitionType(e) for e in val]
 
     @property
@@ -771,8 +771,8 @@ class Device:
         """
 
 
-        val = self._interpreter.get_device_attribute_int32_array(
-                self._name, 10634)
+        val = self._interpreter.get_device_attribute_int32(
+                self._name, 0x298a)
         return enum_bitfield_to_list(
             val, _TriggerUsageTypes, TriggerUsage)
 
@@ -784,7 +784,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 10657)
+                self._name, 0x29a1)
         return val
 
     @property
@@ -796,7 +796,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double(
-                self._name, 10658)
+                self._name, 0x29a2)
         return val
 
     @property
@@ -810,7 +810,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_int32_array(
-                self._name, 12245)
+                self._name, 0x2fd5)
         return [UsageTypeCO(e) for e in val]
 
     @property
@@ -822,7 +822,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_bool(
-                self._name, 12123)
+                self._name, 0x2f5b)
         return val
 
     @property
@@ -835,7 +835,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_int32_array(
-                self._name, 12255)
+                self._name, 0x2fdf)
         return [AcquisitionType(e) for e in val]
 
     @property
@@ -846,8 +846,8 @@ class Device:
         """
 
 
-        val = self._interpreter.get_device_attribute_int32_array(
-                self._name, 10635)
+        val = self._interpreter.get_device_attribute_int32(
+                self._name, 0x298b)
         return enum_bitfield_to_list(
             val, _TriggerUsageTypes, TriggerUsage)
 
@@ -860,7 +860,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_string(
-                self._name, 10679)
+                self._name, 0x29b7)
         return Device(val)
 
     @property
@@ -872,7 +872,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 10680)
+                self._name, 0x29b8)
         return val
 
     @property
@@ -884,7 +884,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_string(
-                self._name, 12641)
+                self._name, 0x3161)
         return Device(val)
 
     @property
@@ -896,7 +896,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 12642)
+                self._name, 0x3162)
         return val
 
     @property
@@ -907,7 +907,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double(
-                self._name, 10649)
+                self._name, 0x2999)
         return val
 
     @property
@@ -919,7 +919,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 12647)
+                self._name, 0x3167)
         return val
 
     @property
@@ -930,8 +930,8 @@ class Device:
         """
 
 
-        val = self._interpreter.get_device_attribute_int32_array(
-                self._name, 10632)
+        val = self._interpreter.get_device_attribute_int32(
+                self._name, 0x2988)
         return enum_bitfield_to_list(
             val, _TriggerUsageTypes, TriggerUsage)
 
@@ -943,7 +943,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_bool(
-                self._name, 10629)
+                self._name, 0x2985)
         return val
 
     @property
@@ -954,7 +954,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_double(
-                self._name, 10650)
+                self._name, 0x299a)
         return val
 
     @property
@@ -966,7 +966,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 12648)
+                self._name, 0x3168)
         return val
 
     @property
@@ -977,8 +977,8 @@ class Device:
         """
 
 
-        val = self._interpreter.get_device_attribute_int32_array(
-                self._name, 10633)
+        val = self._interpreter.get_device_attribute_int32(
+                self._name, 0x2989)
         return enum_bitfield_to_list(
             val, _TriggerUsageTypes, TriggerUsage)
 
@@ -991,7 +991,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_string(
-                self._name, 12664)
+                self._name, 0x3178)
         return [Device(v)
                 for v in unflatten_channel_string(val)]
 
@@ -1004,7 +1004,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_string(
-                self._name, 12657)
+                self._name, 0x3171)
         return Device(val)
 
     @property
@@ -1015,7 +1015,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_bool(
-                self._name, 12246)
+                self._name, 0x2fd6)
         return val
 
     @property
@@ -1026,7 +1026,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_bool(
-                self._name, 8906)
+                self._name, 0x22ca)
         return val
 
     @property
@@ -1037,7 +1037,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 9020)
+                self._name, 0x233c)
         return val
 
     @property
@@ -1049,7 +1049,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 12609)
+                self._name, 0x3141)
         return val
 
     @property
@@ -1061,7 +1061,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 12610)
+                self._name, 0x3142)
         return val
 
     @property
@@ -1072,7 +1072,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 8999)
+                self._name, 0x2327)
         return val
 
     @property
@@ -1083,7 +1083,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 9000)
+                self._name, 0x2328)
         return val
 
     @property
@@ -1097,7 +1097,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_int32(
-                self._name, 10665)
+                self._name, 0x29a9)
         return ProductCategory(val)
 
     @property
@@ -1109,7 +1109,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 8989)
+                self._name, 0x231d)
         return val
 
     @property
@@ -1120,7 +1120,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_string(
-                self._name, 1585)
+                self._name, 0x631)
         return val
 
     @property
@@ -1132,7 +1132,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 9001)
+                self._name, 0x2329)
         return val
 
     @property
@@ -1143,7 +1143,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 9002)
+                self._name, 0x232a)
         return val
 
     @property
@@ -1155,7 +1155,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_uint32(
-                self._name, 1586)
+                self._name, 0x632)
         return val
 
     @property
@@ -1168,7 +1168,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_string(
-                self._name, 10892)
+                self._name, 0x2a8c)
         return val
 
     @property
@@ -1179,7 +1179,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_string(
-                self._name, 10891)
+                self._name, 0x2a8b)
         return val
 
     @property
@@ -1192,7 +1192,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_string(
-                self._name, 10893)
+                self._name, 0x2a8d)
         return val
 
     @property
@@ -1203,7 +1203,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_string(
-                self._name, 10816)
+                self._name, 0x2a40)
         return unflatten_channel_string(val)
 
     @property
@@ -1214,7 +1214,7 @@ class Device:
 
 
         val = self._interpreter.get_device_attribute_bool(
-                self._name, 12319)
+                self._name, 0x301f)
         return val
 
     @property

@@ -80,7 +80,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 12144)
+                self._handle, 0x2f70)
         return val
 
     @property
@@ -95,18 +95,18 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 6182)
+                self._handle, 0x1826)
         return val
 
     @auto_start.setter
     def auto_start(self, val):
         self._interpreter.set_read_attribute_bool(
-                self._handle, 6182, val)
+                self._handle, 0x1826, val)
 
     @auto_start.deleter
     def auto_start(self):
         self._interpreter.reset_read_attribute(
-                self._handle, 6182)
+                self._handle, 0x1826)
 
     @property
     def aux_power_error_chans(self):
@@ -120,7 +120,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 12768)
+                self._handle, 0x31e0)
         return unflatten_channel_string(val)
 
     @property
@@ -136,7 +136,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 12767)
+                self._handle, 0x31df)
         return val
 
     @property
@@ -149,7 +149,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_uint32(
-                self._handle, 4643)
+                self._handle, 0x1223)
         return val
 
     @property
@@ -162,7 +162,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 8596)
+                self._handle, 0x2194)
         return val
 
     @property
@@ -175,19 +175,19 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 6179)
+                self._handle, 0x1823)
         return Channel._factory(self._handle, val, self._interpreter)
 
     @channels_to_read.setter
     def channels_to_read(self, val):
         val = val.name
         self._interpreter.set_read_attribute_string(
-                self._handle, 6179, val)
+                self._handle, 0x1823, val)
 
     @channels_to_read.deleter
     def channels_to_read(self):
         self._interpreter.reset_read_attribute(
-                self._handle, 6179)
+                self._handle, 0x1823)
 
     @property
     def common_mode_range_error_chans(self):
@@ -201,7 +201,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 10905)
+                self._handle, 0x2a99)
         return unflatten_channel_string(val)
 
     @property
@@ -220,7 +220,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 10904)
+                self._handle, 0x2a98)
         return val
 
     @property
@@ -232,7 +232,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_uint64(
-                self._handle, 4641)
+                self._handle, 0x1221)
         return val
 
     @property
@@ -247,7 +247,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 12145)
+                self._handle, 0x2f71)
         return unflatten_channel_string(val)
 
     @property
@@ -260,7 +260,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_uint32(
-                self._handle, 8572)
+                self._handle, 0x217c)
         return val
 
     @property
@@ -275,7 +275,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 12425)
+                self._handle, 0x3089)
         return unflatten_channel_string(val)
 
     @property
@@ -290,7 +290,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 12424)
+                self._handle, 0x3088)
         return val
 
     @property
@@ -306,18 +306,18 @@ class InStream:
 
 
         val = self._interpreter.get_buffer_attribute_uint32(
-                self._handle, 6252)
+                self._handle, 0x186c)
         return val
 
     @input_buf_size.setter
     def input_buf_size(self, val):
         self._interpreter.set_buffer_attribute_uint32(
-                self._handle, 6252, val)
+                self._handle, 0x186c, val)
 
     @input_buf_size.deleter
     def input_buf_size(self):
         self._interpreter.reset_buffer_attribute(
-                self._handle, 6252)
+                self._handle, 0x186c)
 
     @property
     def input_limits_fault_chans(self):
@@ -331,7 +331,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 12688)
+                self._handle, 0x3190)
         return unflatten_channel_string(val)
 
     @property
@@ -352,7 +352,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 12687)
+                self._handle, 0x318f)
         return val
 
     @property
@@ -364,7 +364,7 @@ class InStream:
 
 
         val = self._interpreter.get_buffer_attribute_uint32(
-                self._handle, 8970)
+                self._handle, 0x230a)
         return val
 
     @property
@@ -381,18 +381,18 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 11972)
+                self._handle, 0x2ec4)
         return val
 
     @logging_file_path.setter
     def logging_file_path(self, val):
         self._interpreter.set_read_attribute_string(
-                self._handle, 11972, val)
+                self._handle, 0x2ec4, val)
 
     @logging_file_path.deleter
     def logging_file_path(self):
         self._interpreter.reset_read_attribute(
-                self._handle, 11972)
+                self._handle, 0x2ec4)
 
     @property
     def logging_file_preallocation_size(self):
@@ -407,18 +407,18 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_uint64(
-                self._handle, 12230)
+                self._handle, 0x2fc6)
         return val
 
     @logging_file_preallocation_size.setter
     def logging_file_preallocation_size(self, val):
         self._interpreter.set_read_attribute_uint64(
-                self._handle, 12230, val)
+                self._handle, 0x2fc6, val)
 
     @logging_file_preallocation_size.deleter
     def logging_file_preallocation_size(self):
         self._interpreter.reset_read_attribute(
-                self._handle, 12230)
+                self._handle, 0x2fc6)
 
     @property
     def logging_file_write_size(self):
@@ -430,18 +430,18 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_uint32(
-                self._handle, 12227)
+                self._handle, 0x2fc3)
         return val
 
     @logging_file_write_size.setter
     def logging_file_write_size(self, val):
         self._interpreter.set_read_attribute_uint32(
-                self._handle, 12227, val)
+                self._handle, 0x2fc3, val)
 
     @logging_file_write_size.deleter
     def logging_file_write_size(self):
         self._interpreter.reset_read_attribute(
-                self._handle, 12227)
+                self._handle, 0x2fc3)
 
     @property
     def logging_mode(self):
@@ -456,19 +456,19 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_int32(
-                self._handle, 11973)
+                self._handle, 0x2ec5)
         return LoggingMode(val)
 
     @logging_mode.setter
     def logging_mode(self, val):
         val = val.value
         self._interpreter.set_read_attribute_int32(
-                self._handle, 11973, val)
+                self._handle, 0x2ec5, val)
 
     @logging_mode.deleter
     def logging_mode(self):
         self._interpreter.reset_read_attribute(
-                self._handle, 11973)
+                self._handle, 0x2ec5)
 
     @property
     def logging_pause(self):
@@ -485,18 +485,18 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 12259)
+                self._handle, 0x2fe3)
         return val
 
     @logging_pause.setter
     def logging_pause(self, val):
         self._interpreter.set_read_attribute_bool(
-                self._handle, 12259, val)
+                self._handle, 0x2fe3, val)
 
     @logging_pause.deleter
     def logging_pause(self):
         self._interpreter.reset_read_attribute(
-                self._handle, 12259)
+                self._handle, 0x2fe3)
 
     @property
     def logging_samps_per_file(self):
@@ -515,18 +515,18 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_uint64(
-                self._handle, 12260)
+                self._handle, 0x2fe4)
         return val
 
     @logging_samps_per_file.setter
     def logging_samps_per_file(self, val):
         self._interpreter.set_read_attribute_uint64(
-                self._handle, 12260, val)
+                self._handle, 0x2fe4, val)
 
     @logging_samps_per_file.deleter
     def logging_samps_per_file(self):
         self._interpreter.reset_read_attribute(
-                self._handle, 12260)
+                self._handle, 0x2fe4)
 
     @property
     def logging_tdms_group_name(self):
@@ -544,18 +544,18 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 11974)
+                self._handle, 0x2ec6)
         return val
 
     @logging_tdms_group_name.setter
     def logging_tdms_group_name(self, val):
         self._interpreter.set_read_attribute_string(
-                self._handle, 11974, val)
+                self._handle, 0x2ec6, val)
 
     @logging_tdms_group_name.deleter
     def logging_tdms_group_name(self):
         self._interpreter.reset_read_attribute(
-                self._handle, 11974)
+                self._handle, 0x2ec6)
 
     @property
     def logging_tdms_operation(self):
@@ -566,19 +566,19 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_int32(
-                self._handle, 11975)
+                self._handle, 0x2ec7)
         return LoggingOperation(val)
 
     @logging_tdms_operation.setter
     def logging_tdms_operation(self, val):
         val = val.value
         self._interpreter.set_read_attribute_int32(
-                self._handle, 11975, val)
+                self._handle, 0x2ec7, val)
 
     @logging_tdms_operation.deleter
     def logging_tdms_operation(self):
         self._interpreter.reset_read_attribute(
-                self._handle, 11975)
+                self._handle, 0x2ec7)
 
     @property
     def num_chans(self):
@@ -591,7 +591,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_uint32(
-                self._handle, 8571)
+                self._handle, 0x217b)
         return val
 
     @property
@@ -604,18 +604,18 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_int32(
-                self._handle, 6411)
+                self._handle, 0x190b)
         return val
 
     @offset.setter
     def offset(self, val):
         self._interpreter.set_read_attribute_int32(
-                self._handle, 6411, val)
+                self._handle, 0x190b, val)
 
     @offset.deleter
     def offset(self):
         self._interpreter.reset_read_attribute(
-                self._handle, 6411)
+                self._handle, 0x190b)
 
     @property
     def open_chans(self):
@@ -627,7 +627,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 12545)
+                self._handle, 0x3101)
         return unflatten_channel_string(val)
 
     @property
@@ -640,7 +640,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 12546)
+                self._handle, 0x3102)
         return unflatten_channel_string(val)
 
     @property
@@ -656,7 +656,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 12544)
+                self._handle, 0x3100)
         return val
 
     @property
@@ -671,7 +671,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 10762)
+                self._handle, 0x2a0a)
         return unflatten_channel_string(val)
 
     @property
@@ -687,7 +687,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 10761)
+                self._handle, 0x2a09)
         return val
 
     @property
@@ -702,7 +702,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 10903)
+                self._handle, 0x2a97)
         return unflatten_channel_string(val)
 
     @property
@@ -718,7 +718,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 10902)
+                self._handle, 0x2a96)
         return val
 
     @property
@@ -734,7 +734,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 10727)
+                self._handle, 0x29e7)
         return unflatten_channel_string(val)
 
     @property
@@ -749,7 +749,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 10726)
+                self._handle, 0x29e6)
         return val
 
     @property
@@ -763,7 +763,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 8565)
+                self._handle, 0x2175)
         return unflatten_channel_string(val)
 
     @property
@@ -778,7 +778,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 8564)
+                self._handle, 0x2174)
         return val
 
     @property
@@ -792,7 +792,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 12418)
+                self._handle, 0x3082)
         return unflatten_channel_string(val)
 
     @property
@@ -808,7 +808,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 12417)
+                self._handle, 0x3081)
         return val
 
     @property
@@ -820,19 +820,19 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_int32(
-                self._handle, 4625)
+                self._handle, 0x1211)
         return OverwriteMode(val)
 
     @overwrite.setter
     def overwrite(self, val):
         val = val.value
         self._interpreter.set_read_attribute_int32(
-                self._handle, 4625, val)
+                self._handle, 0x1211, val)
 
     @overwrite.deleter
     def overwrite(self):
         self._interpreter.reset_read_attribute(
-                self._handle, 4625)
+                self._handle, 0x1211)
 
     @property
     def pll_unlocked_chans(self):
@@ -842,7 +842,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 12569)
+                self._handle, 0x3119)
         return unflatten_channel_string(val)
 
     @property
@@ -856,7 +856,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 12568)
+                self._handle, 0x3118)
         return val
 
     @property
@@ -870,7 +870,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 12691)
+                self._handle, 0x3193)
         return unflatten_channel_string(val)
 
     @property
@@ -886,7 +886,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 12690)
+                self._handle, 0x3192)
         return val
 
     @property
@@ -897,7 +897,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_uint32(
-                self._handle, 8570)
+                self._handle, 0x217a)
         return val
 
     @property
@@ -914,18 +914,18 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 4629)
+                self._handle, 0x1215)
         return val
 
     @read_all_avail_samp.setter
     def read_all_avail_samp(self, val):
         self._interpreter.set_read_attribute_bool(
-                self._handle, 4629, val)
+                self._handle, 0x1215, val)
 
     @read_all_avail_samp.deleter
     def read_all_avail_samp(self):
         self._interpreter.reset_read_attribute(
-                self._handle, 4629)
+                self._handle, 0x1215)
 
     @property
     def relative_to(self):
@@ -943,19 +943,19 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_int32(
-                self._handle, 6410)
+                self._handle, 0x190a)
         return ReadRelativeTo(val)
 
     @relative_to.setter
     def relative_to(self, val):
         val = val.value
         self._interpreter.set_read_attribute_int32(
-                self._handle, 6410, val)
+                self._handle, 0x190a, val)
 
     @relative_to.deleter
     def relative_to(self):
         self._interpreter.reset_read_attribute(
-                self._handle, 6410)
+                self._handle, 0x190a)
 
     @property
     def remote_sense_error_chans(self):
@@ -969,7 +969,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 12766)
+                self._handle, 0x31de)
         return unflatten_channel_string(val)
 
     @property
@@ -985,7 +985,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 12765)
+                self._handle, 0x31dd)
         return val
 
     @property
@@ -1000,7 +1000,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 12775)
+                self._handle, 0x31e7)
         return unflatten_channel_string(val)
 
     @property
@@ -1017,7 +1017,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 12774)
+                self._handle, 0x31e6)
         return val
 
     @property
@@ -1030,18 +1030,18 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_double(
-                self._handle, 8880)
+                self._handle, 0x22b0)
         return val
 
     @sleep_time.setter
     def sleep_time(self, val):
         self._interpreter.set_read_attribute_double(
-                self._handle, 8880, val)
+                self._handle, 0x22b0, val)
 
     @sleep_time.deleter
     def sleep_time(self):
         self._interpreter.reset_read_attribute(
-                self._handle, 8880)
+                self._handle, 0x22b0)
 
     @property
     def sync_unlocked_chans(self):
@@ -1052,7 +1052,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_string(
-                self._handle, 12606)
+                self._handle, 0x313e)
         return unflatten_channel_string(val)
 
     @property
@@ -1065,7 +1065,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_bool(
-                self._handle, 12605)
+                self._handle, 0x313d)
         return val
 
     @property
@@ -1080,7 +1080,7 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_uint64(
-                self._handle, 6442)
+                self._handle, 0x192a)
         return val
 
     @property
@@ -1092,19 +1092,19 @@ class InStream:
 
 
         val = self._interpreter.get_read_attribute_int32(
-                self._handle, 8754)
+                self._handle, 0x2232)
         return WaitMode(val)
 
     @wait_mode.setter
     def wait_mode(self, val):
         val = val.value
         self._interpreter.set_read_attribute_int32(
-                self._handle, 8754, val)
+                self._handle, 0x2232, val)
 
     @wait_mode.deleter
     def wait_mode(self):
         self._interpreter.reset_read_attribute(
-                self._handle, 8754)
+                self._handle, 0x2232)
 
     def _calculate_num_samps_per_chan(self, num_samps_per_chan):
         if num_samps_per_chan == -1:

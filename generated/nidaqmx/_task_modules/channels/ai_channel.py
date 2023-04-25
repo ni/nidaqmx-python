@@ -50,18 +50,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 257)
+                self._handle, self._name, 0x101)
         return val
 
     @ai_ac_excit_freq.setter
     def ai_ac_excit_freq(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 257, val)
+                self._handle, self._name, 0x101, val)
 
     @ai_ac_excit_freq.deleter
     def ai_ac_excit_freq(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 257)
+                self._handle, self._name, 0x101)
 
     @property
     def ai_ac_excit_sync_enable(self):
@@ -75,18 +75,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 258)
+                self._handle, self._name, 0x102)
         return val
 
     @ai_ac_excit_sync_enable.setter
     def ai_ac_excit_sync_enable(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 258, val)
+                self._handle, self._name, 0x102, val)
 
     @ai_ac_excit_sync_enable.deleter
     def ai_ac_excit_sync_enable(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 258)
+                self._handle, self._name, 0x102)
 
     @property
     def ai_ac_excit_wire_mode(self):
@@ -99,19 +99,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 6349)
+                self._handle, self._name, 0x18cd)
         return ACExcitWireMode(val)
 
     @ai_ac_excit_wire_mode.setter
     def ai_ac_excit_wire_mode(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 6349, val)
+                self._handle, self._name, 0x18cd, val)
 
     @ai_ac_excit_wire_mode.deleter
     def ai_ac_excit_wire_mode(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6349)
+                self._handle, self._name, 0x18cd)
 
     @property
     def ai_accel_4_wire_dc_voltage_sensitivity(self):
@@ -125,18 +125,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12565)
+                self._handle, self._name, 0x3115)
         return val
 
     @ai_accel_4_wire_dc_voltage_sensitivity.setter
     def ai_accel_4_wire_dc_voltage_sensitivity(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12565, val)
+                self._handle, self._name, 0x3115, val)
 
     @ai_accel_4_wire_dc_voltage_sensitivity.deleter
     def ai_accel_4_wire_dc_voltage_sensitivity(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12565)
+                self._handle, self._name, 0x3115)
 
     @property
     def ai_accel_4_wire_dc_voltage_sensitivity_units(self):
@@ -147,19 +147,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12566)
+                self._handle, self._name, 0x3116)
         return AccelSensitivityUnits(val)
 
     @ai_accel_4_wire_dc_voltage_sensitivity_units.setter
     def ai_accel_4_wire_dc_voltage_sensitivity_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12566, val)
+                self._handle, self._name, 0x3116, val)
 
     @ai_accel_4_wire_dc_voltage_sensitivity_units.deleter
     def ai_accel_4_wire_dc_voltage_sensitivity_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12566)
+                self._handle, self._name, 0x3116)
 
     @property
     def ai_accel_charge_sensitivity(self):
@@ -172,18 +172,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12563)
+                self._handle, self._name, 0x3113)
         return val
 
     @ai_accel_charge_sensitivity.setter
     def ai_accel_charge_sensitivity(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12563, val)
+                self._handle, self._name, 0x3113, val)
 
     @ai_accel_charge_sensitivity.deleter
     def ai_accel_charge_sensitivity(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12563)
+                self._handle, self._name, 0x3113)
 
     @property
     def ai_accel_charge_sensitivity_units(self):
@@ -194,19 +194,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12564)
+                self._handle, self._name, 0x3114)
         return AccelChargeSensitivityUnits(val)
 
     @ai_accel_charge_sensitivity_units.setter
     def ai_accel_charge_sensitivity_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12564, val)
+                self._handle, self._name, 0x3114, val)
 
     @ai_accel_charge_sensitivity_units.deleter
     def ai_accel_charge_sensitivity_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12564)
+                self._handle, self._name, 0x3114)
 
     @property
     def ai_accel_db_ref(self):
@@ -218,18 +218,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 10674)
+                self._handle, self._name, 0x29b2)
         return val
 
     @ai_accel_db_ref.setter
     def ai_accel_db_ref(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 10674, val)
+                self._handle, self._name, 0x29b2, val)
 
     @ai_accel_db_ref.deleter
     def ai_accel_db_ref(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 10674)
+                self._handle, self._name, 0x29b2)
 
     @property
     def ai_accel_sensitivity(self):
@@ -242,18 +242,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 1682)
+                self._handle, self._name, 0x692)
         return val
 
     @ai_accel_sensitivity.setter
     def ai_accel_sensitivity(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 1682, val)
+                self._handle, self._name, 0x692, val)
 
     @ai_accel_sensitivity.deleter
     def ai_accel_sensitivity(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 1682)
+                self._handle, self._name, 0x692)
 
     @property
     def ai_accel_sensitivity_units(self):
@@ -264,19 +264,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 8604)
+                self._handle, self._name, 0x219c)
         return AccelSensitivityUnits(val)
 
     @ai_accel_sensitivity_units.setter
     def ai_accel_sensitivity_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 8604, val)
+                self._handle, self._name, 0x219c, val)
 
     @ai_accel_sensitivity_units.deleter
     def ai_accel_sensitivity_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 8604)
+                self._handle, self._name, 0x219c)
 
     @property
     def ai_accel_units(self):
@@ -287,19 +287,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 1651)
+                self._handle, self._name, 0x673)
         return AccelUnits(val)
 
     @ai_accel_units.setter
     def ai_accel_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 1651, val)
+                self._handle, self._name, 0x673, val)
 
     @ai_accel_units.deleter
     def ai_accel_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 1651)
+                self._handle, self._name, 0x673)
 
     @property
     def ai_adc_custom_timing_mode(self):
@@ -310,18 +310,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 12139)
+                self._handle, self._name, 0x2f6b)
         return val
 
     @ai_adc_custom_timing_mode.setter
     def ai_adc_custom_timing_mode(self, val):
         self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 12139, val)
+                self._handle, self._name, 0x2f6b, val)
 
     @ai_adc_custom_timing_mode.deleter
     def ai_adc_custom_timing_mode(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12139)
+                self._handle, self._name, 0x2f6b)
 
     @property
     def ai_adc_timing_mode(self):
@@ -339,19 +339,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 10745)
+                self._handle, self._name, 0x29f9)
         return ADCTimingMode(val)
 
     @ai_adc_timing_mode.setter
     def ai_adc_timing_mode(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 10745, val)
+                self._handle, self._name, 0x29f9, val)
 
     @ai_adc_timing_mode.deleter
     def ai_adc_timing_mode(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 10745)
+                self._handle, self._name, 0x29f9)
 
     @property
     def ai_atten(self):
@@ -361,18 +361,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6145)
+                self._handle, self._name, 0x1801)
         return val
 
     @ai_atten.setter
     def ai_atten(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6145, val)
+                self._handle, self._name, 0x1801, val)
 
     @ai_atten.deleter
     def ai_atten(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6145)
+                self._handle, self._name, 0x1801)
 
     @property
     def ai_auto_zero_mode(self):
@@ -384,19 +384,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 5984)
+                self._handle, self._name, 0x1760)
         return AutoZeroType(val)
 
     @ai_auto_zero_mode.setter
     def ai_auto_zero_mode(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 5984, val)
+                self._handle, self._name, 0x1760, val)
 
     @ai_auto_zero_mode.deleter
     def ai_auto_zero_mode(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 5984)
+                self._handle, self._name, 0x1760)
 
     @property
     def ai_averaging_win_size(self):
@@ -408,18 +408,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 12270)
+                self._handle, self._name, 0x2fee)
         return val
 
     @ai_averaging_win_size.setter
     def ai_averaging_win_size(self, val):
         self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 12270, val)
+                self._handle, self._name, 0x2fee, val)
 
     @ai_averaging_win_size.deleter
     def ai_averaging_win_size(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12270)
+                self._handle, self._name, 0x2fee)
 
     @property
     def ai_bridge_balance_coarse_pot(self):
@@ -430,18 +430,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 6129)
+                self._handle, self._name, 0x17f1)
         return val
 
     @ai_bridge_balance_coarse_pot.setter
     def ai_bridge_balance_coarse_pot(self, val):
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 6129, val)
+                self._handle, self._name, 0x17f1, val)
 
     @ai_bridge_balance_coarse_pot.deleter
     def ai_bridge_balance_coarse_pot(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6129)
+                self._handle, self._name, 0x17f1)
 
     @property
     def ai_bridge_balance_fine_pot(self):
@@ -452,18 +452,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 6388)
+                self._handle, self._name, 0x18f4)
         return val
 
     @ai_bridge_balance_fine_pot.setter
     def ai_bridge_balance_fine_pot(self, val):
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 6388, val)
+                self._handle, self._name, 0x18f4, val)
 
     @ai_bridge_balance_fine_pot.deleter
     def ai_bridge_balance_fine_pot(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6388)
+                self._handle, self._name, 0x18f4)
 
     @property
     def ai_bridge_cfg(self):
@@ -474,19 +474,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 135)
+                self._handle, self._name, 0x87)
         return BridgeConfiguration(val)
 
     @ai_bridge_cfg.setter
     def ai_bridge_cfg(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 135, val)
+                self._handle, self._name, 0x87, val)
 
     @ai_bridge_cfg.deleter
     def ai_bridge_cfg(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 135)
+                self._handle, self._name, 0x87)
 
     @property
     def ai_bridge_electrical_units(self):
@@ -499,19 +499,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12167)
+                self._handle, self._name, 0x2f87)
         return BridgeElectricalUnits(val)
 
     @ai_bridge_electrical_units.setter
     def ai_bridge_electrical_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12167, val)
+                self._handle, self._name, 0x2f87, val)
 
     @ai_bridge_electrical_units.deleter
     def ai_bridge_electrical_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12167)
+                self._handle, self._name, 0x2f87)
 
     @property
     def ai_bridge_initial_ratio(self):
@@ -533,18 +533,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12166)
+                self._handle, self._name, 0x2f86)
         return val
 
     @ai_bridge_initial_ratio.setter
     def ai_bridge_initial_ratio(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12166, val)
+                self._handle, self._name, 0x2f86, val)
 
     @ai_bridge_initial_ratio.deleter
     def ai_bridge_initial_ratio(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12166)
+                self._handle, self._name, 0x2f86)
 
     @property
     def ai_bridge_initial_voltage(self):
@@ -566,18 +566,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6125)
+                self._handle, self._name, 0x17ed)
         return val
 
     @ai_bridge_initial_voltage.setter
     def ai_bridge_initial_voltage(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6125, val)
+                self._handle, self._name, 0x17ed, val)
 
     @ai_bridge_initial_voltage.deleter
     def ai_bridge_initial_voltage(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6125)
+                self._handle, self._name, 0x17ed)
 
     @property
     def ai_bridge_nom_resistance(self):
@@ -588,18 +588,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6124)
+                self._handle, self._name, 0x17ec)
         return val
 
     @ai_bridge_nom_resistance.setter
     def ai_bridge_nom_resistance(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6124, val)
+                self._handle, self._name, 0x17ec, val)
 
     @ai_bridge_nom_resistance.deleter
     def ai_bridge_nom_resistance(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6124)
+                self._handle, self._name, 0x17ec)
 
     @property
     def ai_bridge_physical_units(self):
@@ -612,19 +612,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12168)
+                self._handle, self._name, 0x2f88)
         return BridgePhysicalUnits(val)
 
     @ai_bridge_physical_units.setter
     def ai_bridge_physical_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12168, val)
+                self._handle, self._name, 0x2f88, val)
 
     @ai_bridge_physical_units.deleter
     def ai_bridge_physical_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12168)
+                self._handle, self._name, 0x2f88)
 
     @property
     def ai_bridge_poly_forward_coeff(self):
@@ -638,19 +638,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double_array(
-                self._handle, self._name, 12176)
+                self._handle, self._name, 0x2f90)
         return val
 
     @ai_bridge_poly_forward_coeff.setter
     def ai_bridge_poly_forward_coeff(self, val):
         val = numpy.float64(val)
         self._interpreter.set_chan_attribute_double_array(
-                self._handle, self._name, 12176, val, len(val))
+                self._handle, self._name, 0x2f90, val, len(val))
 
     @ai_bridge_poly_forward_coeff.deleter
     def ai_bridge_poly_forward_coeff(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12176)
+                self._handle, self._name, 0x2f90)
 
     @property
     def ai_bridge_poly_reverse_coeff(self):
@@ -664,19 +664,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double_array(
-                self._handle, self._name, 12177)
+                self._handle, self._name, 0x2f91)
         return val
 
     @ai_bridge_poly_reverse_coeff.setter
     def ai_bridge_poly_reverse_coeff(self, val):
         val = numpy.float64(val)
         self._interpreter.set_chan_attribute_double_array(
-                self._handle, self._name, 12177, val, len(val))
+                self._handle, self._name, 0x2f91, val, len(val))
 
     @ai_bridge_poly_reverse_coeff.deleter
     def ai_bridge_poly_reverse_coeff(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12177)
+                self._handle, self._name, 0x2f91)
 
     @property
     def ai_bridge_scale_type(self):
@@ -688,19 +688,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12169)
+                self._handle, self._name, 0x2f89)
         return ScaleType(val)
 
     @ai_bridge_scale_type.setter
     def ai_bridge_scale_type(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12169, val)
+                self._handle, self._name, 0x2f89, val)
 
     @ai_bridge_scale_type.deleter
     def ai_bridge_scale_type(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12169)
+                self._handle, self._name, 0x2f89)
 
     @property
     def ai_bridge_shunt_cal_enable(self):
@@ -712,18 +712,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 148)
+                self._handle, self._name, 0x94)
         return val
 
     @ai_bridge_shunt_cal_enable.setter
     def ai_bridge_shunt_cal_enable(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 148, val)
+                self._handle, self._name, 0x94, val)
 
     @ai_bridge_shunt_cal_enable.deleter
     def ai_bridge_shunt_cal_enable(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 148)
+                self._handle, self._name, 0x94)
 
     @property
     def ai_bridge_shunt_cal_gain_adjust(self):
@@ -736,18 +736,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6463)
+                self._handle, self._name, 0x193f)
         return val
 
     @ai_bridge_shunt_cal_gain_adjust.setter
     def ai_bridge_shunt_cal_gain_adjust(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6463, val)
+                self._handle, self._name, 0x193f, val)
 
     @ai_bridge_shunt_cal_gain_adjust.deleter
     def ai_bridge_shunt_cal_gain_adjust(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6463)
+                self._handle, self._name, 0x193f)
 
     @property
     def ai_bridge_shunt_cal_select(self):
@@ -760,19 +760,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 8661)
+                self._handle, self._name, 0x21d5)
         return ShuntCalSelect(val)
 
     @ai_bridge_shunt_cal_select.setter
     def ai_bridge_shunt_cal_select(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 8661, val)
+                self._handle, self._name, 0x21d5, val)
 
     @ai_bridge_shunt_cal_select.deleter
     def ai_bridge_shunt_cal_select(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 8661)
+                self._handle, self._name, 0x21d5)
 
     @property
     def ai_bridge_shunt_cal_shunt_cal_a_actual_resistance(self):
@@ -783,18 +783,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12153)
+                self._handle, self._name, 0x2f79)
         return val
 
     @ai_bridge_shunt_cal_shunt_cal_a_actual_resistance.setter
     def ai_bridge_shunt_cal_shunt_cal_a_actual_resistance(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12153, val)
+                self._handle, self._name, 0x2f79, val)
 
     @ai_bridge_shunt_cal_shunt_cal_a_actual_resistance.deleter
     def ai_bridge_shunt_cal_shunt_cal_a_actual_resistance(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12153)
+                self._handle, self._name, 0x2f79)
 
     @property
     def ai_bridge_shunt_cal_shunt_cal_a_resistance(self):
@@ -805,18 +805,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12152)
+                self._handle, self._name, 0x2f78)
         return val
 
     @ai_bridge_shunt_cal_shunt_cal_a_resistance.setter
     def ai_bridge_shunt_cal_shunt_cal_a_resistance(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12152, val)
+                self._handle, self._name, 0x2f78, val)
 
     @ai_bridge_shunt_cal_shunt_cal_a_resistance.deleter
     def ai_bridge_shunt_cal_shunt_cal_a_resistance(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12152)
+                self._handle, self._name, 0x2f78)
 
     @property
     def ai_bridge_shunt_cal_shunt_cal_a_src(self):
@@ -828,19 +828,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12490)
+                self._handle, self._name, 0x30ca)
         return BridgeShuntCalSource(val)
 
     @ai_bridge_shunt_cal_shunt_cal_a_src.setter
     def ai_bridge_shunt_cal_shunt_cal_a_src(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12490, val)
+                self._handle, self._name, 0x30ca, val)
 
     @ai_bridge_shunt_cal_shunt_cal_a_src.deleter
     def ai_bridge_shunt_cal_shunt_cal_a_src(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12490)
+                self._handle, self._name, 0x30ca)
 
     @property
     def ai_bridge_shunt_cal_shunt_cal_b_actual_resistance(self):
@@ -851,18 +851,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12155)
+                self._handle, self._name, 0x2f7b)
         return val
 
     @ai_bridge_shunt_cal_shunt_cal_b_actual_resistance.setter
     def ai_bridge_shunt_cal_shunt_cal_b_actual_resistance(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12155, val)
+                self._handle, self._name, 0x2f7b, val)
 
     @ai_bridge_shunt_cal_shunt_cal_b_actual_resistance.deleter
     def ai_bridge_shunt_cal_shunt_cal_b_actual_resistance(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12155)
+                self._handle, self._name, 0x2f7b)
 
     @property
     def ai_bridge_shunt_cal_shunt_cal_b_resistance(self):
@@ -873,18 +873,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12154)
+                self._handle, self._name, 0x2f7a)
         return val
 
     @ai_bridge_shunt_cal_shunt_cal_b_resistance.setter
     def ai_bridge_shunt_cal_shunt_cal_b_resistance(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12154, val)
+                self._handle, self._name, 0x2f7a, val)
 
     @ai_bridge_shunt_cal_shunt_cal_b_resistance.deleter
     def ai_bridge_shunt_cal_shunt_cal_b_resistance(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12154)
+                self._handle, self._name, 0x2f7a)
 
     @property
     def ai_bridge_table_electrical_vals(self):
@@ -897,19 +897,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double_array(
-                self._handle, self._name, 12174)
+                self._handle, self._name, 0x2f8e)
         return val
 
     @ai_bridge_table_electrical_vals.setter
     def ai_bridge_table_electrical_vals(self, val):
         val = numpy.float64(val)
         self._interpreter.set_chan_attribute_double_array(
-                self._handle, self._name, 12174, val, len(val))
+                self._handle, self._name, 0x2f8e, val, len(val))
 
     @ai_bridge_table_electrical_vals.deleter
     def ai_bridge_table_electrical_vals(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12174)
+                self._handle, self._name, 0x2f8e)
 
     @property
     def ai_bridge_table_physical_vals(self):
@@ -922,19 +922,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double_array(
-                self._handle, self._name, 12175)
+                self._handle, self._name, 0x2f8f)
         return val
 
     @ai_bridge_table_physical_vals.setter
     def ai_bridge_table_physical_vals(self, val):
         val = numpy.float64(val)
         self._interpreter.set_chan_attribute_double_array(
-                self._handle, self._name, 12175, val, len(val))
+                self._handle, self._name, 0x2f8f, val, len(val))
 
     @ai_bridge_table_physical_vals.deleter
     def ai_bridge_table_physical_vals(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12175)
+                self._handle, self._name, 0x2f8f)
 
     @property
     def ai_bridge_two_point_lin_first_electrical_val(self):
@@ -947,18 +947,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12170)
+                self._handle, self._name, 0x2f8a)
         return val
 
     @ai_bridge_two_point_lin_first_electrical_val.setter
     def ai_bridge_two_point_lin_first_electrical_val(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12170, val)
+                self._handle, self._name, 0x2f8a, val)
 
     @ai_bridge_two_point_lin_first_electrical_val.deleter
     def ai_bridge_two_point_lin_first_electrical_val(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12170)
+                self._handle, self._name, 0x2f8a)
 
     @property
     def ai_bridge_two_point_lin_first_physical_val(self):
@@ -971,18 +971,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12171)
+                self._handle, self._name, 0x2f8b)
         return val
 
     @ai_bridge_two_point_lin_first_physical_val.setter
     def ai_bridge_two_point_lin_first_physical_val(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12171, val)
+                self._handle, self._name, 0x2f8b, val)
 
     @ai_bridge_two_point_lin_first_physical_val.deleter
     def ai_bridge_two_point_lin_first_physical_val(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12171)
+                self._handle, self._name, 0x2f8b)
 
     @property
     def ai_bridge_two_point_lin_second_electrical_val(self):
@@ -995,18 +995,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12172)
+                self._handle, self._name, 0x2f8c)
         return val
 
     @ai_bridge_two_point_lin_second_electrical_val.setter
     def ai_bridge_two_point_lin_second_electrical_val(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12172, val)
+                self._handle, self._name, 0x2f8c, val)
 
     @ai_bridge_two_point_lin_second_electrical_val.deleter
     def ai_bridge_two_point_lin_second_electrical_val(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12172)
+                self._handle, self._name, 0x2f8c)
 
     @property
     def ai_bridge_two_point_lin_second_physical_val(self):
@@ -1019,18 +1019,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12173)
+                self._handle, self._name, 0x2f8d)
         return val
 
     @ai_bridge_two_point_lin_second_physical_val.setter
     def ai_bridge_two_point_lin_second_physical_val(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12173, val)
+                self._handle, self._name, 0x2f8d, val)
 
     @ai_bridge_two_point_lin_second_physical_val.deleter
     def ai_bridge_two_point_lin_second_physical_val(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12173)
+                self._handle, self._name, 0x2f8d)
 
     @property
     def ai_bridge_units(self):
@@ -1041,19 +1041,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12178)
+                self._handle, self._name, 0x2f92)
         return BridgeUnits(val)
 
     @ai_bridge_units.setter
     def ai_bridge_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12178, val)
+                self._handle, self._name, 0x2f92, val)
 
     @ai_bridge_units.deleter
     def ai_bridge_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12178)
+                self._handle, self._name, 0x2f92)
 
     @property
     def ai_charge_units(self):
@@ -1064,19 +1064,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12562)
+                self._handle, self._name, 0x3112)
         return ChargeUnits(val)
 
     @ai_charge_units.setter
     def ai_charge_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12562, val)
+                self._handle, self._name, 0x3112, val)
 
     @ai_charge_units.deleter
     def ai_charge_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12562)
+                self._handle, self._name, 0x3112)
 
     @property
     def ai_chop_enable(self):
@@ -1088,18 +1088,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 12611)
+                self._handle, self._name, 0x3143)
         return val
 
     @ai_chop_enable.setter
     def ai_chop_enable(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 12611, val)
+                self._handle, self._name, 0x3143, val)
 
     @ai_chop_enable.deleter
     def ai_chop_enable(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12611)
+                self._handle, self._name, 0x3143)
 
     @property
     def ai_coupling(self):
@@ -1110,19 +1110,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 100)
+                self._handle, self._name, 0x64)
         return Coupling(val)
 
     @ai_coupling.setter
     def ai_coupling(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 100, val)
+                self._handle, self._name, 0x64, val)
 
     @ai_coupling.deleter
     def ai_coupling(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 100)
+                self._handle, self._name, 0x64)
 
     @property
     def ai_current_acrms_units(self):
@@ -1133,19 +1133,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 6115)
+                self._handle, self._name, 0x17e3)
         return CurrentUnits(val)
 
     @ai_current_acrms_units.setter
     def ai_current_acrms_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 6115, val)
+                self._handle, self._name, 0x17e3, val)
 
     @ai_current_acrms_units.deleter
     def ai_current_acrms_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6115)
+                self._handle, self._name, 0x17e3)
 
     @property
     def ai_current_shunt_loc(self):
@@ -1157,19 +1157,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 6130)
+                self._handle, self._name, 0x17f2)
         return CurrentShuntResistorLocation(val)
 
     @ai_current_shunt_loc.setter
     def ai_current_shunt_loc(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 6130, val)
+                self._handle, self._name, 0x17f2, val)
 
     @ai_current_shunt_loc.deleter
     def ai_current_shunt_loc(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6130)
+                self._handle, self._name, 0x17f2)
 
     @property
     def ai_current_shunt_resistance(self):
@@ -1180,18 +1180,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6131)
+                self._handle, self._name, 0x17f3)
         return val
 
     @ai_current_shunt_resistance.setter
     def ai_current_shunt_resistance(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6131, val)
+                self._handle, self._name, 0x17f3, val)
 
     @ai_current_shunt_resistance.deleter
     def ai_current_shunt_resistance(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6131)
+                self._handle, self._name, 0x17f3)
 
     @property
     def ai_current_units(self):
@@ -1202,19 +1202,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 1793)
+                self._handle, self._name, 0x701)
         return CurrentUnits(val)
 
     @ai_current_units.setter
     def ai_current_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 1793, val)
+                self._handle, self._name, 0x701, val)
 
     @ai_current_units.deleter
     def ai_current_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 1793)
+                self._handle, self._name, 0x701)
 
     @property
     def ai_custom_scale(self):
@@ -1225,19 +1225,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 6112)
+                self._handle, self._name, 0x17e0)
         return Scale(val)
 
     @ai_custom_scale.setter
     def ai_custom_scale(self, val):
         val = val.name
         self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 6112, val)
+                self._handle, self._name, 0x17e0, val)
 
     @ai_custom_scale.deleter
     def ai_custom_scale(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6112)
+                self._handle, self._name, 0x17e0)
 
     @property
     def ai_data_xfer_custom_threshold(self):
@@ -1250,18 +1250,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 8972)
+                self._handle, self._name, 0x230c)
         return val
 
     @ai_data_xfer_custom_threshold.setter
     def ai_data_xfer_custom_threshold(self, val):
         self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 8972, val)
+                self._handle, self._name, 0x230c, val)
 
     @ai_data_xfer_custom_threshold.deleter
     def ai_data_xfer_custom_threshold(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 8972)
+                self._handle, self._name, 0x230c)
 
     @property
     def ai_data_xfer_max_rate(self):
@@ -1275,18 +1275,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12567)
+                self._handle, self._name, 0x3117)
         return val
 
     @ai_data_xfer_max_rate.setter
     def ai_data_xfer_max_rate(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12567, val)
+                self._handle, self._name, 0x3117, val)
 
     @ai_data_xfer_max_rate.deleter
     def ai_data_xfer_max_rate(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12567)
+                self._handle, self._name, 0x3117)
 
     @property
     def ai_data_xfer_mech(self):
@@ -1297,19 +1297,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 6177)
+                self._handle, self._name, 0x1821)
         return DataTransferActiveTransferMode(val)
 
     @ai_data_xfer_mech.setter
     def ai_data_xfer_mech(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 6177, val)
+                self._handle, self._name, 0x1821, val)
 
     @ai_data_xfer_mech.deleter
     def ai_data_xfer_mech(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6177)
+                self._handle, self._name, 0x1821)
 
     @property
     def ai_data_xfer_req_cond(self):
@@ -1321,19 +1321,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 6283)
+                self._handle, self._name, 0x188b)
         return InputDataTransferCondition(val)
 
     @ai_data_xfer_req_cond.setter
     def ai_data_xfer_req_cond(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 6283, val)
+                self._handle, self._name, 0x188b, val)
 
     @ai_data_xfer_req_cond.deleter
     def ai_data_xfer_req_cond(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6283)
+                self._handle, self._name, 0x188b)
 
     @property
     def ai_dc_offset(self):
@@ -1346,18 +1346,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 10889)
+                self._handle, self._name, 0x2a89)
         return val
 
     @ai_dc_offset.setter
     def ai_dc_offset(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 10889, val)
+                self._handle, self._name, 0x2a89, val)
 
     @ai_dc_offset.deleter
     def ai_dc_offset(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 10889)
+                self._handle, self._name, 0x2a89)
 
     @property
     def ai_dev_scaling_coeff(self):
@@ -1373,7 +1373,7 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double_array(
-                self._handle, self._name, 6448)
+                self._handle, self._name, 0x1930)
         return val
 
     @property
@@ -1385,18 +1385,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12483)
+                self._handle, self._name, 0x30c3)
         return val
 
     @ai_dig_fltr_bandpass_center_freq.setter
     def ai_dig_fltr_bandpass_center_freq(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12483, val)
+                self._handle, self._name, 0x30c3, val)
 
     @ai_dig_fltr_bandpass_center_freq.deleter
     def ai_dig_fltr_bandpass_center_freq(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12483)
+                self._handle, self._name, 0x30c3)
 
     @property
     def ai_dig_fltr_bandpass_width(self):
@@ -1407,18 +1407,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12484)
+                self._handle, self._name, 0x30c4)
         return val
 
     @ai_dig_fltr_bandpass_width.setter
     def ai_dig_fltr_bandpass_width(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12484, val)
+                self._handle, self._name, 0x30c4, val)
 
     @ai_dig_fltr_bandpass_width.deleter
     def ai_dig_fltr_bandpass_width(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12484)
+                self._handle, self._name, 0x30c4)
 
     @property
     def ai_dig_fltr_coeff(self):
@@ -1428,19 +1428,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double_array(
-                self._handle, self._name, 12487)
+                self._handle, self._name, 0x30c7)
         return val
 
     @ai_dig_fltr_coeff.setter
     def ai_dig_fltr_coeff(self, val):
         val = numpy.float64(val)
         self._interpreter.set_chan_attribute_double_array(
-                self._handle, self._name, 12487, val, len(val))
+                self._handle, self._name, 0x30c7, val, len(val))
 
     @ai_dig_fltr_coeff.deleter
     def ai_dig_fltr_coeff(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12487)
+                self._handle, self._name, 0x30c7)
 
     @property
     def ai_dig_fltr_enable(self):
@@ -1451,18 +1451,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 12477)
+                self._handle, self._name, 0x30bd)
         return val
 
     @ai_dig_fltr_enable.setter
     def ai_dig_fltr_enable(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 12477, val)
+                self._handle, self._name, 0x30bd, val)
 
     @ai_dig_fltr_enable.deleter
     def ai_dig_fltr_enable(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12477)
+                self._handle, self._name, 0x30bd)
 
     @property
     def ai_dig_fltr_highpass_cutoff_freq(self):
@@ -1473,18 +1473,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12482)
+                self._handle, self._name, 0x30c2)
         return val
 
     @ai_dig_fltr_highpass_cutoff_freq.setter
     def ai_dig_fltr_highpass_cutoff_freq(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12482, val)
+                self._handle, self._name, 0x30c2, val)
 
     @ai_dig_fltr_highpass_cutoff_freq.deleter
     def ai_dig_fltr_highpass_cutoff_freq(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12482)
+                self._handle, self._name, 0x30c2)
 
     @property
     def ai_dig_fltr_lowpass_cutoff_freq(self):
@@ -1495,18 +1495,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12481)
+                self._handle, self._name, 0x30c1)
         return val
 
     @ai_dig_fltr_lowpass_cutoff_freq.setter
     def ai_dig_fltr_lowpass_cutoff_freq(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12481, val)
+                self._handle, self._name, 0x30c1, val)
 
     @ai_dig_fltr_lowpass_cutoff_freq.deleter
     def ai_dig_fltr_lowpass_cutoff_freq(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12481)
+                self._handle, self._name, 0x30c1)
 
     @property
     def ai_dig_fltr_notch_center_freq(self):
@@ -1517,18 +1517,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12485)
+                self._handle, self._name, 0x30c5)
         return val
 
     @ai_dig_fltr_notch_center_freq.setter
     def ai_dig_fltr_notch_center_freq(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12485, val)
+                self._handle, self._name, 0x30c5, val)
 
     @ai_dig_fltr_notch_center_freq.deleter
     def ai_dig_fltr_notch_center_freq(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12485)
+                self._handle, self._name, 0x30c5)
 
     @property
     def ai_dig_fltr_notch_width(self):
@@ -1539,18 +1539,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12486)
+                self._handle, self._name, 0x30c6)
         return val
 
     @ai_dig_fltr_notch_width.setter
     def ai_dig_fltr_notch_width(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12486, val)
+                self._handle, self._name, 0x30c6, val)
 
     @ai_dig_fltr_notch_width.deleter
     def ai_dig_fltr_notch_width(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12486)
+                self._handle, self._name, 0x30c6)
 
     @property
     def ai_dig_fltr_order(self):
@@ -1560,18 +1560,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 12480)
+                self._handle, self._name, 0x30c0)
         return val
 
     @ai_dig_fltr_order.setter
     def ai_dig_fltr_order(self, val):
         self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 12480, val)
+                self._handle, self._name, 0x30c0, val)
 
     @ai_dig_fltr_order.deleter
     def ai_dig_fltr_order(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12480)
+                self._handle, self._name, 0x30c0)
 
     @property
     def ai_dig_fltr_response(self):
@@ -1582,19 +1582,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12479)
+                self._handle, self._name, 0x30bf)
         return FilterResponse(val)
 
     @ai_dig_fltr_response.setter
     def ai_dig_fltr_response(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12479, val)
+                self._handle, self._name, 0x30bf, val)
 
     @ai_dig_fltr_response.deleter
     def ai_dig_fltr_response(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12479)
+                self._handle, self._name, 0x30bf)
 
     @property
     def ai_dig_fltr_type(self):
@@ -1605,19 +1605,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12478)
+                self._handle, self._name, 0x30be)
         return FilterType(val)
 
     @ai_dig_fltr_type.setter
     def ai_dig_fltr_type(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12478, val)
+                self._handle, self._name, 0x30be, val)
 
     @ai_dig_fltr_type.deleter
     def ai_dig_fltr_type(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12478)
+                self._handle, self._name, 0x30be)
 
     @property
     def ai_dither_enable(self):
@@ -1630,18 +1630,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 104)
+                self._handle, self._name, 0x68)
         return val
 
     @ai_dither_enable.setter
     def ai_dither_enable(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 104, val)
+                self._handle, self._name, 0x68, val)
 
     @ai_dither_enable.deleter
     def ai_dither_enable(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 104)
+                self._handle, self._name, 0x68)
 
     @property
     def ai_eddy_current_prox_sensitivity(self):
@@ -1654,18 +1654,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 10942)
+                self._handle, self._name, 0x2abe)
         return val
 
     @ai_eddy_current_prox_sensitivity.setter
     def ai_eddy_current_prox_sensitivity(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 10942, val)
+                self._handle, self._name, 0x2abe, val)
 
     @ai_eddy_current_prox_sensitivity.deleter
     def ai_eddy_current_prox_sensitivity(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 10942)
+                self._handle, self._name, 0x2abe)
 
     @property
     def ai_eddy_current_prox_sensitivity_units(self):
@@ -1676,19 +1676,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 10943)
+                self._handle, self._name, 0x2abf)
         return EddyCurrentProxProbeSensitivityUnits(val)
 
     @ai_eddy_current_prox_sensitivity_units.setter
     def ai_eddy_current_prox_sensitivity_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 10943, val)
+                self._handle, self._name, 0x2abf, val)
 
     @ai_eddy_current_prox_sensitivity_units.deleter
     def ai_eddy_current_prox_sensitivity_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 10943)
+                self._handle, self._name, 0x2abf)
 
     @property
     def ai_eddy_current_prox_units(self):
@@ -1699,19 +1699,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 10944)
+                self._handle, self._name, 0x2ac0)
         return LengthUnits(val)
 
     @ai_eddy_current_prox_units.setter
     def ai_eddy_current_prox_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 10944, val)
+                self._handle, self._name, 0x2ac0, val)
 
     @ai_eddy_current_prox_units.deleter
     def ai_eddy_current_prox_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 10944)
+                self._handle, self._name, 0x2ac0)
 
     @property
     def ai_enhanced_alias_rejection_enable(self):
@@ -1723,18 +1723,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 8852)
+                self._handle, self._name, 0x2294)
         return val
 
     @ai_enhanced_alias_rejection_enable.setter
     def ai_enhanced_alias_rejection_enable(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 8852, val)
+                self._handle, self._name, 0x2294, val)
 
     @ai_enhanced_alias_rejection_enable.deleter
     def ai_enhanced_alias_rejection_enable(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 8852)
+                self._handle, self._name, 0x2294)
 
     @property
     def ai_excit_actual_val(self):
@@ -1749,18 +1749,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6275)
+                self._handle, self._name, 0x1883)
         return val
 
     @ai_excit_actual_val.setter
     def ai_excit_actual_val(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6275, val)
+                self._handle, self._name, 0x1883, val)
 
     @ai_excit_actual_val.deleter
     def ai_excit_actual_val(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6275)
+                self._handle, self._name, 0x1883)
 
     @property
     def ai_excit_d_cor_ac(self):
@@ -1771,19 +1771,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 6139)
+                self._handle, self._name, 0x17fb)
         return ExcitationDCorAC(val)
 
     @ai_excit_d_cor_ac.setter
     def ai_excit_d_cor_ac(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 6139, val)
+                self._handle, self._name, 0x17fb, val)
 
     @ai_excit_d_cor_ac.deleter
     def ai_excit_d_cor_ac(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6139)
+                self._handle, self._name, 0x17fb)
 
     @property
     def ai_excit_idle_output_behavior(self):
@@ -1798,19 +1798,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12472)
+                self._handle, self._name, 0x30b8)
         return ExcitationIdleOutputBehavior(val)
 
     @ai_excit_idle_output_behavior.setter
     def ai_excit_idle_output_behavior(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12472, val)
+                self._handle, self._name, 0x30b8, val)
 
     @ai_excit_idle_output_behavior.deleter
     def ai_excit_idle_output_behavior(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12472)
+                self._handle, self._name, 0x30b8)
 
     @property
     def ai_excit_sense(self):
@@ -1821,19 +1821,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12541)
+                self._handle, self._name, 0x30fd)
         return Sense(val)
 
     @ai_excit_sense.setter
     def ai_excit_sense(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12541, val)
+                self._handle, self._name, 0x30fd, val)
 
     @ai_excit_sense.deleter
     def ai_excit_sense(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12541)
+                self._handle, self._name, 0x30fd)
 
     @property
     def ai_excit_src(self):
@@ -1844,19 +1844,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 6132)
+                self._handle, self._name, 0x17f4)
         return ExcitationSource(val)
 
     @ai_excit_src.setter
     def ai_excit_src(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 6132, val)
+                self._handle, self._name, 0x17f4, val)
 
     @ai_excit_src.deleter
     def ai_excit_src(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6132)
+                self._handle, self._name, 0x17f4)
 
     @property
     def ai_excit_use_for_scaling(self):
@@ -1869,18 +1869,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 6140)
+                self._handle, self._name, 0x17fc)
         return val
 
     @ai_excit_use_for_scaling.setter
     def ai_excit_use_for_scaling(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 6140, val)
+                self._handle, self._name, 0x17fc, val)
 
     @ai_excit_use_for_scaling.deleter
     def ai_excit_use_for_scaling(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6140)
+                self._handle, self._name, 0x17fc)
 
     @property
     def ai_excit_use_multiplexed(self):
@@ -1892,18 +1892,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 8576)
+                self._handle, self._name, 0x2180)
         return val
 
     @ai_excit_use_multiplexed.setter
     def ai_excit_use_multiplexed(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 8576, val)
+                self._handle, self._name, 0x2180, val)
 
     @ai_excit_use_multiplexed.deleter
     def ai_excit_use_multiplexed(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 8576)
+                self._handle, self._name, 0x2180)
 
     @property
     def ai_excit_val(self):
@@ -1918,18 +1918,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6133)
+                self._handle, self._name, 0x17f5)
         return val
 
     @ai_excit_val.setter
     def ai_excit_val(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6133, val)
+                self._handle, self._name, 0x17f5, val)
 
     @ai_excit_val.deleter
     def ai_excit_val(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6133)
+                self._handle, self._name, 0x17f5)
 
     @property
     def ai_excit_voltage_or_current(self):
@@ -1940,19 +1940,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 6134)
+                self._handle, self._name, 0x17f6)
         return ExcitationVoltageOrCurrent(val)
 
     @ai_excit_voltage_or_current.setter
     def ai_excit_voltage_or_current(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 6134, val)
+                self._handle, self._name, 0x17f6, val)
 
     @ai_excit_voltage_or_current.deleter
     def ai_excit_voltage_or_current(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6134)
+                self._handle, self._name, 0x17f6)
 
     @property
     def ai_filter_delay(self):
@@ -1966,7 +1966,7 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12269)
+                self._handle, self._name, 0x2fed)
         return val
 
     @property
@@ -1981,18 +1981,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12404)
+                self._handle, self._name, 0x3074)
         return val
 
     @ai_filter_delay_adjustment.setter
     def ai_filter_delay_adjustment(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12404, val)
+                self._handle, self._name, 0x3074, val)
 
     @ai_filter_delay_adjustment.deleter
     def ai_filter_delay_adjustment(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12404)
+                self._handle, self._name, 0x3074)
 
     @property
     def ai_filter_delay_units(self):
@@ -2004,19 +2004,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12401)
+                self._handle, self._name, 0x3071)
         return DigitalWidthUnits(val)
 
     @ai_filter_delay_units.setter
     def ai_filter_delay_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12401, val)
+                self._handle, self._name, 0x3071, val)
 
     @ai_filter_delay_units.deleter
     def ai_filter_delay_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12401)
+                self._handle, self._name, 0x3071)
 
     @property
     def ai_filter_enable(self):
@@ -2026,18 +2026,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 12659)
+                self._handle, self._name, 0x3173)
         return val
 
     @ai_filter_enable.setter
     def ai_filter_enable(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 12659, val)
+                self._handle, self._name, 0x3173, val)
 
     @ai_filter_enable.deleter
     def ai_filter_enable(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12659)
+                self._handle, self._name, 0x3173)
 
     @property
     def ai_filter_freq(self):
@@ -2048,18 +2048,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12660)
+                self._handle, self._name, 0x3174)
         return val
 
     @ai_filter_freq.setter
     def ai_filter_freq(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12660, val)
+                self._handle, self._name, 0x3174, val)
 
     @ai_filter_freq.deleter
     def ai_filter_freq(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12660)
+                self._handle, self._name, 0x3174)
 
     @property
     def ai_filter_order(self):
@@ -2070,18 +2070,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 12662)
+                self._handle, self._name, 0x3176)
         return val
 
     @ai_filter_order.setter
     def ai_filter_order(self, val):
         self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 12662, val)
+                self._handle, self._name, 0x3176, val)
 
     @ai_filter_order.deleter
     def ai_filter_order(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12662)
+                self._handle, self._name, 0x3176)
 
     @property
     def ai_filter_response(self):
@@ -2093,19 +2093,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12661)
+                self._handle, self._name, 0x3175)
         return FilterResponse(val)
 
     @ai_filter_response.setter
     def ai_filter_response(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12661, val)
+                self._handle, self._name, 0x3175, val)
 
     @ai_filter_response.deleter
     def ai_filter_response(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12661)
+                self._handle, self._name, 0x3175)
 
     @property
     def ai_force_iepe_sensor_sensitivity(self):
@@ -2117,18 +2117,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12161)
+                self._handle, self._name, 0x2f81)
         return val
 
     @ai_force_iepe_sensor_sensitivity.setter
     def ai_force_iepe_sensor_sensitivity(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12161, val)
+                self._handle, self._name, 0x2f81, val)
 
     @ai_force_iepe_sensor_sensitivity.deleter
     def ai_force_iepe_sensor_sensitivity(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12161)
+                self._handle, self._name, 0x2f81)
 
     @property
     def ai_force_iepe_sensor_sensitivity_units(self):
@@ -2140,19 +2140,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12162)
+                self._handle, self._name, 0x2f82)
         return ForceIEPESensorSensitivityUnits(val)
 
     @ai_force_iepe_sensor_sensitivity_units.setter
     def ai_force_iepe_sensor_sensitivity_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12162, val)
+                self._handle, self._name, 0x2f82, val)
 
     @ai_force_iepe_sensor_sensitivity_units.deleter
     def ai_force_iepe_sensor_sensitivity_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12162)
+                self._handle, self._name, 0x2f82)
 
     @property
     def ai_force_read_from_chan(self):
@@ -2167,18 +2167,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 6392)
+                self._handle, self._name, 0x18f8)
         return val
 
     @ai_force_read_from_chan.setter
     def ai_force_read_from_chan(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 6392, val)
+                self._handle, self._name, 0x18f8, val)
 
     @ai_force_read_from_chan.deleter
     def ai_force_read_from_chan(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6392)
+                self._handle, self._name, 0x18f8)
 
     @property
     def ai_force_units(self):
@@ -2189,19 +2189,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12149)
+                self._handle, self._name, 0x2f75)
         return ForceUnits(val)
 
     @ai_force_units.setter
     def ai_force_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12149, val)
+                self._handle, self._name, 0x2f75, val)
 
     @ai_force_units.deleter
     def ai_force_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12149)
+                self._handle, self._name, 0x2f75)
 
     @property
     def ai_freq_hyst(self):
@@ -2217,18 +2217,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 2068)
+                self._handle, self._name, 0x814)
         return val
 
     @ai_freq_hyst.setter
     def ai_freq_hyst(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 2068, val)
+                self._handle, self._name, 0x814, val)
 
     @ai_freq_hyst.deleter
     def ai_freq_hyst(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 2068)
+                self._handle, self._name, 0x814)
 
     @property
     def ai_freq_thresh_voltage(self):
@@ -2242,18 +2242,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 2069)
+                self._handle, self._name, 0x815)
         return val
 
     @ai_freq_thresh_voltage.setter
     def ai_freq_thresh_voltage(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 2069, val)
+                self._handle, self._name, 0x815, val)
 
     @ai_freq_thresh_voltage.deleter
     def ai_freq_thresh_voltage(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 2069)
+                self._handle, self._name, 0x815)
 
     @property
     def ai_freq_units(self):
@@ -2264,19 +2264,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 2054)
+                self._handle, self._name, 0x806)
         return FrequencyUnits(val)
 
     @ai_freq_units.setter
     def ai_freq_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 2054, val)
+                self._handle, self._name, 0x806, val)
 
     @ai_freq_units.deleter
     def ai_freq_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 2054)
+                self._handle, self._name, 0x806)
 
     @property
     def ai_gain(self):
@@ -2286,18 +2286,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6168)
+                self._handle, self._name, 0x1818)
         return val
 
     @ai_gain.setter
     def ai_gain(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6168, val)
+                self._handle, self._name, 0x1818, val)
 
     @ai_gain.deleter
     def ai_gain(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6168)
+                self._handle, self._name, 0x1818)
 
     @property
     def ai_impedance(self):
@@ -2308,19 +2308,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 98)
+                self._handle, self._name, 0x62)
         return Impedance1(val)
 
     @ai_impedance.setter
     def ai_impedance(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 98, val)
+                self._handle, self._name, 0x62, val)
 
     @ai_impedance.deleter
     def ai_impedance(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 98)
+                self._handle, self._name, 0x62)
 
     @property
     def ai_input_limits_fault_detect_enable(self):
@@ -2330,18 +2330,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 12686)
+                self._handle, self._name, 0x318e)
         return val
 
     @ai_input_limits_fault_detect_enable.setter
     def ai_input_limits_fault_detect_enable(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 12686, val)
+                self._handle, self._name, 0x318e, val)
 
     @ai_input_limits_fault_detect_enable.deleter
     def ai_input_limits_fault_detect_enable(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12686)
+                self._handle, self._name, 0x318e)
 
     @property
     def ai_input_limits_fault_detect_lower_limit(self):
@@ -2357,18 +2357,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12685)
+                self._handle, self._name, 0x318d)
         return val
 
     @ai_input_limits_fault_detect_lower_limit.setter
     def ai_input_limits_fault_detect_lower_limit(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12685, val)
+                self._handle, self._name, 0x318d, val)
 
     @ai_input_limits_fault_detect_lower_limit.deleter
     def ai_input_limits_fault_detect_lower_limit(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12685)
+                self._handle, self._name, 0x318d)
 
     @property
     def ai_input_limits_fault_detect_upper_limit(self):
@@ -2384,18 +2384,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12684)
+                self._handle, self._name, 0x318c)
         return val
 
     @ai_input_limits_fault_detect_upper_limit.setter
     def ai_input_limits_fault_detect_upper_limit(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12684, val)
+                self._handle, self._name, 0x318c, val)
 
     @ai_input_limits_fault_detect_upper_limit.deleter
     def ai_input_limits_fault_detect_upper_limit(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12684)
+                self._handle, self._name, 0x318c)
 
     @property
     def ai_input_src(self):
@@ -2410,18 +2410,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 8600)
+                self._handle, self._name, 0x2198)
         return val
 
     @ai_input_src.setter
     def ai_input_src(self, val):
         self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 8600, val)
+                self._handle, self._name, 0x2198, val)
 
     @ai_input_src.deleter
     def ai_input_src(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 8600)
+                self._handle, self._name, 0x2198)
 
     @property
     def ai_lead_wire_resistance(self):
@@ -2432,18 +2432,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6126)
+                self._handle, self._name, 0x17ee)
         return val
 
     @ai_lead_wire_resistance.setter
     def ai_lead_wire_resistance(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6126, val)
+                self._handle, self._name, 0x17ee, val)
 
     @ai_lead_wire_resistance.deleter
     def ai_lead_wire_resistance(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6126)
+                self._handle, self._name, 0x17ee)
 
     @property
     def ai_lossy_lsb_removal_compressed_samp_size(self):
@@ -2455,18 +2455,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 8921)
+                self._handle, self._name, 0x22d9)
         return val
 
     @ai_lossy_lsb_removal_compressed_samp_size.setter
     def ai_lossy_lsb_removal_compressed_samp_size(self, val):
         self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 8921, val)
+                self._handle, self._name, 0x22d9, val)
 
     @ai_lossy_lsb_removal_compressed_samp_size.deleter
     def ai_lossy_lsb_removal_compressed_samp_size(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 8921)
+                self._handle, self._name, 0x22d9)
 
     @property
     def ai_lowpass_cutoff_freq(self):
@@ -2477,18 +2477,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6147)
+                self._handle, self._name, 0x1803)
         return val
 
     @ai_lowpass_cutoff_freq.setter
     def ai_lowpass_cutoff_freq(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6147, val)
+                self._handle, self._name, 0x1803, val)
 
     @ai_lowpass_cutoff_freq.deleter
     def ai_lowpass_cutoff_freq(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6147)
+                self._handle, self._name, 0x1803)
 
     @property
     def ai_lowpass_enable(self):
@@ -2499,18 +2499,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 6146)
+                self._handle, self._name, 0x1802)
         return val
 
     @ai_lowpass_enable.setter
     def ai_lowpass_enable(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 6146, val)
+                self._handle, self._name, 0x1802, val)
 
     @ai_lowpass_enable.deleter
     def ai_lowpass_enable(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6146)
+                self._handle, self._name, 0x1802)
 
     @property
     def ai_lowpass_switch_cap_clk_src(self):
@@ -2524,19 +2524,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 6276)
+                self._handle, self._name, 0x1884)
         return SourceSelection(val)
 
     @ai_lowpass_switch_cap_clk_src.setter
     def ai_lowpass_switch_cap_clk_src(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 6276, val)
+                self._handle, self._name, 0x1884, val)
 
     @ai_lowpass_switch_cap_clk_src.deleter
     def ai_lowpass_switch_cap_clk_src(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6276)
+                self._handle, self._name, 0x1884)
 
     @property
     def ai_lowpass_switch_cap_ext_clk_div(self):
@@ -2552,18 +2552,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 6278)
+                self._handle, self._name, 0x1886)
         return val
 
     @ai_lowpass_switch_cap_ext_clk_div.setter
     def ai_lowpass_switch_cap_ext_clk_div(self, val):
         self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 6278, val)
+                self._handle, self._name, 0x1886, val)
 
     @ai_lowpass_switch_cap_ext_clk_div.deleter
     def ai_lowpass_switch_cap_ext_clk_div(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6278)
+                self._handle, self._name, 0x1886)
 
     @property
     def ai_lowpass_switch_cap_ext_clk_freq(self):
@@ -2581,18 +2581,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6277)
+                self._handle, self._name, 0x1885)
         return val
 
     @ai_lowpass_switch_cap_ext_clk_freq.setter
     def ai_lowpass_switch_cap_ext_clk_freq(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6277, val)
+                self._handle, self._name, 0x1885, val)
 
     @ai_lowpass_switch_cap_ext_clk_freq.deleter
     def ai_lowpass_switch_cap_ext_clk_freq(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6277)
+                self._handle, self._name, 0x1885)
 
     @property
     def ai_lowpass_switch_cap_out_clk_div(self):
@@ -2605,18 +2605,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 6279)
+                self._handle, self._name, 0x1887)
         return val
 
     @ai_lowpass_switch_cap_out_clk_div.setter
     def ai_lowpass_switch_cap_out_clk_div(self, val):
         self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 6279, val)
+                self._handle, self._name, 0x1887, val)
 
     @ai_lowpass_switch_cap_out_clk_div.deleter
     def ai_lowpass_switch_cap_out_clk_div(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6279)
+                self._handle, self._name, 0x1887)
 
     @property
     def ai_lvdt_sensitivity(self):
@@ -2628,18 +2628,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 2361)
+                self._handle, self._name, 0x939)
         return val
 
     @ai_lvdt_sensitivity.setter
     def ai_lvdt_sensitivity(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 2361, val)
+                self._handle, self._name, 0x939, val)
 
     @ai_lvdt_sensitivity.deleter
     def ai_lvdt_sensitivity(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 2361)
+                self._handle, self._name, 0x939)
 
     @property
     def ai_lvdt_sensitivity_units(self):
@@ -2650,19 +2650,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 8602)
+                self._handle, self._name, 0x219a)
         return LVDTSensitivityUnits(val)
 
     @ai_lvdt_sensitivity_units.setter
     def ai_lvdt_sensitivity_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 8602, val)
+                self._handle, self._name, 0x219a, val)
 
     @ai_lvdt_sensitivity_units.deleter
     def ai_lvdt_sensitivity_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 8602)
+                self._handle, self._name, 0x219a)
 
     @property
     def ai_lvdt_units(self):
@@ -2673,19 +2673,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 2320)
+                self._handle, self._name, 0x910)
         return LengthUnits(val)
 
     @ai_lvdt_units.setter
     def ai_lvdt_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 2320, val)
+                self._handle, self._name, 0x910, val)
 
     @ai_lvdt_units.deleter
     def ai_lvdt_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 2320)
+                self._handle, self._name, 0x910)
 
     @property
     def ai_max(self):
@@ -2698,18 +2698,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6109)
+                self._handle, self._name, 0x17dd)
         return val
 
     @ai_max.setter
     def ai_max(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6109, val)
+                self._handle, self._name, 0x17dd, val)
 
     @ai_max.deleter
     def ai_max(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6109)
+                self._handle, self._name, 0x17dd)
 
     @property
     def ai_meas_type(self):
@@ -2722,7 +2722,7 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 1685)
+                self._handle, self._name, 0x695)
         return UsageTypeAI(val)
 
     @property
@@ -2740,18 +2740,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 6284)
+                self._handle, self._name, 0x188c)
         return val
 
     @ai_mem_map_enable.setter
     def ai_mem_map_enable(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 6284, val)
+                self._handle, self._name, 0x188c, val)
 
     @ai_mem_map_enable.deleter
     def ai_mem_map_enable(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6284)
+                self._handle, self._name, 0x188c)
 
     @property
     def ai_microphone_sensitivity(self):
@@ -2763,18 +2763,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 5430)
+                self._handle, self._name, 0x1536)
         return val
 
     @ai_microphone_sensitivity.setter
     def ai_microphone_sensitivity(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 5430, val)
+                self._handle, self._name, 0x1536, val)
 
     @ai_microphone_sensitivity.deleter
     def ai_microphone_sensitivity(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 5430)
+                self._handle, self._name, 0x1536)
 
     @property
     def ai_min(self):
@@ -2787,18 +2787,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6110)
+                self._handle, self._name, 0x17de)
         return val
 
     @ai_min.setter
     def ai_min(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6110, val)
+                self._handle, self._name, 0x17de, val)
 
     @ai_min.deleter
     def ai_min(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6110)
+                self._handle, self._name, 0x17de)
 
     @property
     def ai_open_chan_detect_enable(self):
@@ -2808,18 +2808,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 12543)
+                self._handle, self._name, 0x30ff)
         return val
 
     @ai_open_chan_detect_enable.setter
     def ai_open_chan_detect_enable(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 12543, val)
+                self._handle, self._name, 0x30ff, val)
 
     @ai_open_chan_detect_enable.deleter
     def ai_open_chan_detect_enable(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12543)
+                self._handle, self._name, 0x30ff)
 
     @property
     def ai_open_thrmcpl_detect_enable(self):
@@ -2838,18 +2838,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 12146)
+                self._handle, self._name, 0x2f72)
         return val
 
     @ai_open_thrmcpl_detect_enable.setter
     def ai_open_thrmcpl_detect_enable(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 12146, val)
+                self._handle, self._name, 0x2f72, val)
 
     @ai_open_thrmcpl_detect_enable.deleter
     def ai_open_thrmcpl_detect_enable(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12146)
+                self._handle, self._name, 0x2f72)
 
     @property
     def ai_overcurrent_detect_enable(self):
@@ -2859,18 +2859,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 12692)
+                self._handle, self._name, 0x3194)
         return val
 
     @ai_overcurrent_detect_enable.setter
     def ai_overcurrent_detect_enable(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 12692, val)
+                self._handle, self._name, 0x3194, val)
 
     @ai_overcurrent_detect_enable.deleter
     def ai_overcurrent_detect_enable(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12692)
+                self._handle, self._name, 0x3194)
 
     @property
     def ai_power_supply_fault_detect_enable(self):
@@ -2880,18 +2880,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 12689)
+                self._handle, self._name, 0x3191)
         return val
 
     @ai_power_supply_fault_detect_enable.setter
     def ai_power_supply_fault_detect_enable(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 12689, val)
+                self._handle, self._name, 0x3191, val)
 
     @ai_power_supply_fault_detect_enable.deleter
     def ai_power_supply_fault_detect_enable(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12689)
+                self._handle, self._name, 0x3191)
 
     @property
     def ai_pressure_units(self):
@@ -2902,19 +2902,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12150)
+                self._handle, self._name, 0x2f76)
         return PressureUnits(val)
 
     @ai_pressure_units.setter
     def ai_pressure_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12150, val)
+                self._handle, self._name, 0x2f76, val)
 
     @ai_pressure_units.deleter
     def ai_pressure_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12150)
+                self._handle, self._name, 0x2f76)
 
     @property
     def ai_probe_atten(self):
@@ -2926,18 +2926,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 10888)
+                self._handle, self._name, 0x2a88)
         return val
 
     @ai_probe_atten.setter
     def ai_probe_atten(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 10888, val)
+                self._handle, self._name, 0x2a88, val)
 
     @ai_probe_atten.deleter
     def ai_probe_atten(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 10888)
+                self._handle, self._name, 0x2a88)
 
     @property
     def ai_raw_data_compression_type(self):
@@ -2949,19 +2949,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 8920)
+                self._handle, self._name, 0x22d8)
         return RawDataCompressionType(val)
 
     @ai_raw_data_compression_type.setter
     def ai_raw_data_compression_type(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 8920, val)
+                self._handle, self._name, 0x22d8, val)
 
     @ai_raw_data_compression_type.deleter
     def ai_raw_data_compression_type(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 8920)
+                self._handle, self._name, 0x22d8)
 
     @property
     def ai_raw_samp_justification(self):
@@ -2972,7 +2972,7 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 80)
+                self._handle, self._name, 0x50)
         return DataJustification(val)
 
     @property
@@ -2983,7 +2983,7 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 8922)
+                self._handle, self._name, 0x22da)
         return val
 
     @property
@@ -2995,18 +2995,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 12221)
+                self._handle, self._name, 0x2fbd)
         return val
 
     @ai_remove_filter_delay.setter
     def ai_remove_filter_delay(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 12221, val)
+                self._handle, self._name, 0x2fbd, val)
 
     @ai_remove_filter_delay.deleter
     def ai_remove_filter_delay(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12221)
+                self._handle, self._name, 0x2fbd)
 
     @property
     def ai_resistance_cfg(self):
@@ -3019,19 +3019,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 6273)
+                self._handle, self._name, 0x1881)
         return ResistanceConfiguration(val)
 
     @ai_resistance_cfg.setter
     def ai_resistance_cfg(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 6273, val)
+                self._handle, self._name, 0x1881, val)
 
     @ai_resistance_cfg.deleter
     def ai_resistance_cfg(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6273)
+                self._handle, self._name, 0x1881)
 
     @property
     def ai_resistance_units(self):
@@ -3042,19 +3042,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 2389)
+                self._handle, self._name, 0x955)
         return ResistanceUnits(val)
 
     @ai_resistance_units.setter
     def ai_resistance_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 2389, val)
+                self._handle, self._name, 0x955, val)
 
     @ai_resistance_units.deleter
     def ai_resistance_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 2389)
+                self._handle, self._name, 0x955)
 
     @property
     def ai_resolution(self):
@@ -3066,7 +3066,7 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 5989)
+                self._handle, self._name, 0x1765)
         return val
 
     @property
@@ -3078,7 +3078,7 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 5988)
+                self._handle, self._name, 0x1764)
         return ResolutionType(val)
 
     @property
@@ -3091,18 +3091,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6165)
+                self._handle, self._name, 0x1815)
         return val
 
     @ai_rng_high.setter
     def ai_rng_high(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6165, val)
+                self._handle, self._name, 0x1815, val)
 
     @ai_rng_high.deleter
     def ai_rng_high(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6165)
+                self._handle, self._name, 0x1815)
 
     @property
     def ai_rng_low(self):
@@ -3114,18 +3114,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6166)
+                self._handle, self._name, 0x1816)
         return val
 
     @ai_rng_low.setter
     def ai_rng_low(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6166, val)
+                self._handle, self._name, 0x1816, val)
 
     @ai_rng_low.deleter
     def ai_rng_low(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6166)
+                self._handle, self._name, 0x1816)
 
     @property
     def ai_rosette_strain_gage_gage_orientation(self):
@@ -3136,18 +3136,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12284)
+                self._handle, self._name, 0x2ffc)
         return val
 
     @ai_rosette_strain_gage_gage_orientation.setter
     def ai_rosette_strain_gage_gage_orientation(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12284, val)
+                self._handle, self._name, 0x2ffc, val)
 
     @ai_rosette_strain_gage_gage_orientation.deleter
     def ai_rosette_strain_gage_gage_orientation(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12284)
+                self._handle, self._name, 0x2ffc)
 
     @property
     def ai_rosette_strain_gage_rosette_meas_type(self):
@@ -3158,19 +3158,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12285)
+                self._handle, self._name, 0x2ffd)
         return StrainGageRosetteMeasurementType(val)
 
     @ai_rosette_strain_gage_rosette_meas_type.setter
     def ai_rosette_strain_gage_rosette_meas_type(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12285, val)
+                self._handle, self._name, 0x2ffd, val)
 
     @ai_rosette_strain_gage_rosette_meas_type.deleter
     def ai_rosette_strain_gage_rosette_meas_type(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12285)
+                self._handle, self._name, 0x2ffd)
 
     @property
     def ai_rosette_strain_gage_rosette_type(self):
@@ -3181,7 +3181,7 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12286)
+                self._handle, self._name, 0x2ffe)
         return StrainGageRosetteType(val)
 
     @property
@@ -3193,7 +3193,7 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 12283)
+                self._handle, self._name, 0x2ffb)
         return unflatten_channel_string(val)
 
     @property
@@ -3206,18 +3206,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 4112)
+                self._handle, self._name, 0x1010)
         return val
 
     @ai_rtd_a.setter
     def ai_rtd_a(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 4112, val)
+                self._handle, self._name, 0x1010, val)
 
     @ai_rtd_a.deleter
     def ai_rtd_a(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 4112)
+                self._handle, self._name, 0x1010)
 
     @property
     def ai_rtd_b(self):
@@ -3229,18 +3229,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 4113)
+                self._handle, self._name, 0x1011)
         return val
 
     @ai_rtd_b.setter
     def ai_rtd_b(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 4113, val)
+                self._handle, self._name, 0x1011, val)
 
     @ai_rtd_b.deleter
     def ai_rtd_b(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 4113)
+                self._handle, self._name, 0x1011)
 
     @property
     def ai_rtd_c(self):
@@ -3252,18 +3252,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 4115)
+                self._handle, self._name, 0x1013)
         return val
 
     @ai_rtd_c.setter
     def ai_rtd_c(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 4115, val)
+                self._handle, self._name, 0x1013, val)
 
     @ai_rtd_c.deleter
     def ai_rtd_c(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 4115)
+                self._handle, self._name, 0x1013)
 
     @property
     def ai_rtd_r0(self):
@@ -3275,18 +3275,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 4144)
+                self._handle, self._name, 0x1030)
         return val
 
     @ai_rtd_r0.setter
     def ai_rtd_r0(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 4144, val)
+                self._handle, self._name, 0x1030, val)
 
     @ai_rtd_r0.deleter
     def ai_rtd_r0(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 4144)
+                self._handle, self._name, 0x1030)
 
     @property
     def ai_rtd_type(self):
@@ -3297,19 +3297,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 4146)
+                self._handle, self._name, 0x1032)
         return RTDType(val)
 
     @ai_rtd_type.setter
     def ai_rtd_type(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 4146, val)
+                self._handle, self._name, 0x1032, val)
 
     @ai_rtd_type.deleter
     def ai_rtd_type(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 4146)
+                self._handle, self._name, 0x1032)
 
     @property
     def ai_rvdt_sensitivity(self):
@@ -3321,18 +3321,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 2307)
+                self._handle, self._name, 0x903)
         return val
 
     @ai_rvdt_sensitivity.setter
     def ai_rvdt_sensitivity(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 2307, val)
+                self._handle, self._name, 0x903, val)
 
     @ai_rvdt_sensitivity.deleter
     def ai_rvdt_sensitivity(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 2307)
+                self._handle, self._name, 0x903)
 
     @property
     def ai_rvdt_sensitivity_units(self):
@@ -3343,19 +3343,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 8603)
+                self._handle, self._name, 0x219b)
         return RVDTSensitivityUnits(val)
 
     @ai_rvdt_sensitivity_units.setter
     def ai_rvdt_sensitivity_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 8603, val)
+                self._handle, self._name, 0x219b, val)
 
     @ai_rvdt_sensitivity_units.deleter
     def ai_rvdt_sensitivity_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 8603)
+                self._handle, self._name, 0x219b)
 
     @property
     def ai_rvdt_units(self):
@@ -3367,19 +3367,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 2167)
+                self._handle, self._name, 0x877)
         return AngleUnits(val)
 
     @ai_rvdt_units.setter
     def ai_rvdt_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 2167, val)
+                self._handle, self._name, 0x877, val)
 
     @ai_rvdt_units.deleter
     def ai_rvdt_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 2167)
+                self._handle, self._name, 0x877)
 
     @property
     def ai_samp_and_hold_enable(self):
@@ -3393,18 +3393,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 6170)
+                self._handle, self._name, 0x181a)
         return val
 
     @ai_samp_and_hold_enable.setter
     def ai_samp_and_hold_enable(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 6170, val)
+                self._handle, self._name, 0x181a, val)
 
     @ai_samp_and_hold_enable.deleter
     def ai_samp_and_hold_enable(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6170)
+                self._handle, self._name, 0x181a)
 
     @property
     def ai_sensor_power_cfg(self):
@@ -3416,19 +3416,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12650)
+                self._handle, self._name, 0x316a)
         return SensorPowerCfg(val)
 
     @ai_sensor_power_cfg.setter
     def ai_sensor_power_cfg(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12650, val)
+                self._handle, self._name, 0x316a, val)
 
     @ai_sensor_power_cfg.deleter
     def ai_sensor_power_cfg(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12650)
+                self._handle, self._name, 0x316a)
 
     @property
     def ai_sensor_power_type(self):
@@ -3439,19 +3439,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12651)
+                self._handle, self._name, 0x316b)
         return SensorPowerType(val)
 
     @ai_sensor_power_type.setter
     def ai_sensor_power_type(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12651, val)
+                self._handle, self._name, 0x316b, val)
 
     @ai_sensor_power_type.deleter
     def ai_sensor_power_type(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12651)
+                self._handle, self._name, 0x316b)
 
     @property
     def ai_sensor_power_voltage(self):
@@ -3462,18 +3462,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12649)
+                self._handle, self._name, 0x3169)
         return val
 
     @ai_sensor_power_voltage.setter
     def ai_sensor_power_voltage(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12649, val)
+                self._handle, self._name, 0x3169, val)
 
     @ai_sensor_power_voltage.deleter
     def ai_sensor_power_voltage(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12649)
+                self._handle, self._name, 0x3169)
 
     @property
     def ai_sound_pressure_db_ref(self):
@@ -3488,18 +3488,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 10673)
+                self._handle, self._name, 0x29b1)
         return val
 
     @ai_sound_pressure_db_ref.setter
     def ai_sound_pressure_db_ref(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 10673, val)
+                self._handle, self._name, 0x29b1, val)
 
     @ai_sound_pressure_db_ref.deleter
     def ai_sound_pressure_db_ref(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 10673)
+                self._handle, self._name, 0x29b1)
 
     @property
     def ai_sound_pressure_max_sound_pressure_lvl(self):
@@ -3513,18 +3513,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 8762)
+                self._handle, self._name, 0x223a)
         return val
 
     @ai_sound_pressure_max_sound_pressure_lvl.setter
     def ai_sound_pressure_max_sound_pressure_lvl(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 8762, val)
+                self._handle, self._name, 0x223a, val)
 
     @ai_sound_pressure_max_sound_pressure_lvl.deleter
     def ai_sound_pressure_max_sound_pressure_lvl(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 8762)
+                self._handle, self._name, 0x223a)
 
     @property
     def ai_sound_pressure_units(self):
@@ -3536,19 +3536,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 5416)
+                self._handle, self._name, 0x1528)
         return SoundPressureUnits(val)
 
     @ai_sound_pressure_units.setter
     def ai_sound_pressure_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 5416, val)
+                self._handle, self._name, 0x1528, val)
 
     @ai_sound_pressure_units.deleter
     def ai_sound_pressure_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 5416)
+                self._handle, self._name, 0x1528)
 
     @property
     def ai_strain_force_read_from_chan(self):
@@ -3560,18 +3560,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 12282)
+                self._handle, self._name, 0x2ffa)
         return val
 
     @ai_strain_force_read_from_chan.setter
     def ai_strain_force_read_from_chan(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 12282, val)
+                self._handle, self._name, 0x2ffa, val)
 
     @ai_strain_force_read_from_chan.deleter
     def ai_strain_force_read_from_chan(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12282)
+                self._handle, self._name, 0x2ffa)
 
     @property
     def ai_strain_gage_cfg(self):
@@ -3582,19 +3582,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 2434)
+                self._handle, self._name, 0x982)
         return StrainGageBridgeType(val)
 
     @ai_strain_gage_cfg.setter
     def ai_strain_gage_cfg(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 2434, val)
+                self._handle, self._name, 0x982, val)
 
     @ai_strain_gage_cfg.deleter
     def ai_strain_gage_cfg(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 2434)
+                self._handle, self._name, 0x982)
 
     @property
     def ai_strain_gage_gage_factor(self):
@@ -3607,18 +3607,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 2452)
+                self._handle, self._name, 0x994)
         return val
 
     @ai_strain_gage_gage_factor.setter
     def ai_strain_gage_gage_factor(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 2452, val)
+                self._handle, self._name, 0x994, val)
 
     @ai_strain_gage_gage_factor.deleter
     def ai_strain_gage_gage_factor(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 2452)
+                self._handle, self._name, 0x994)
 
     @property
     def ai_strain_gage_poisson_ratio(self):
@@ -3629,18 +3629,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 2456)
+                self._handle, self._name, 0x998)
         return val
 
     @ai_strain_gage_poisson_ratio.setter
     def ai_strain_gage_poisson_ratio(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 2456, val)
+                self._handle, self._name, 0x998, val)
 
     @ai_strain_gage_poisson_ratio.deleter
     def ai_strain_gage_poisson_ratio(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 2456)
+                self._handle, self._name, 0x998)
 
     @property
     def ai_strain_units(self):
@@ -3651,19 +3651,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 2433)
+                self._handle, self._name, 0x981)
         return StrainUnits(val)
 
     @ai_strain_units.setter
     def ai_strain_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 2433, val)
+                self._handle, self._name, 0x981, val)
 
     @ai_strain_units.deleter
     def ai_strain_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 2433)
+                self._handle, self._name, 0x981)
 
     @property
     def ai_teds_is_teds(self):
@@ -3674,7 +3674,7 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 10627)
+                self._handle, self._name, 0x2983)
         return val
 
     @property
@@ -3686,7 +3686,7 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 8672)
+                self._handle, self._name, 0x21e0)
         return val
 
     @property
@@ -3698,19 +3698,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 4147)
+                self._handle, self._name, 0x1033)
         return TemperatureUnits(val)
 
     @ai_temp_units.setter
     def ai_temp_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 4147, val)
+                self._handle, self._name, 0x1033, val)
 
     @ai_temp_units.deleter
     def ai_temp_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 4147)
+                self._handle, self._name, 0x1033)
 
     @property
     def ai_term_cfg(self):
@@ -3721,19 +3721,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 4247)
+                self._handle, self._name, 0x1097)
         return TerminalConfiguration(val)
 
     @ai_term_cfg.setter
     def ai_term_cfg(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 4247, val)
+                self._handle, self._name, 0x1097, val)
 
     @ai_term_cfg.deleter
     def ai_term_cfg(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 4247)
+                self._handle, self._name, 0x1097)
 
     @property
     def ai_thrmcpl_cjc_chan(self):
@@ -3750,7 +3750,7 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 4148)
+                self._handle, self._name, 0x1034)
         return Channel._factory(self._handle, val, self._interpreter)
 
     @property
@@ -3762,7 +3762,7 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 4149)
+                self._handle, self._name, 0x1035)
         return CJCSource(val)
 
     @property
@@ -3776,18 +3776,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 4150)
+                self._handle, self._name, 0x1036)
         return val
 
     @ai_thrmcpl_cjc_val.setter
     def ai_thrmcpl_cjc_val(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 4150, val)
+                self._handle, self._name, 0x1036, val)
 
     @ai_thrmcpl_cjc_val.deleter
     def ai_thrmcpl_cjc_val(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 4150)
+                self._handle, self._name, 0x1036)
 
     @property
     def ai_thrmcpl_lead_offset_voltage(self):
@@ -3799,18 +3799,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12216)
+                self._handle, self._name, 0x2fb8)
         return val
 
     @ai_thrmcpl_lead_offset_voltage.setter
     def ai_thrmcpl_lead_offset_voltage(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12216, val)
+                self._handle, self._name, 0x2fb8, val)
 
     @ai_thrmcpl_lead_offset_voltage.deleter
     def ai_thrmcpl_lead_offset_voltage(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12216)
+                self._handle, self._name, 0x2fb8)
 
     @property
     def ai_thrmcpl_scale_type(self):
@@ -3821,19 +3821,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 10704)
+                self._handle, self._name, 0x29d0)
         return ScaleType(val)
 
     @ai_thrmcpl_scale_type.setter
     def ai_thrmcpl_scale_type(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 10704, val)
+                self._handle, self._name, 0x29d0, val)
 
     @ai_thrmcpl_scale_type.deleter
     def ai_thrmcpl_scale_type(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 10704)
+                self._handle, self._name, 0x29d0)
 
     @property
     def ai_thrmcpl_type(self):
@@ -3845,19 +3845,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 4176)
+                self._handle, self._name, 0x1050)
         return ThermocoupleType(val)
 
     @ai_thrmcpl_type.setter
     def ai_thrmcpl_type(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 4176, val)
+                self._handle, self._name, 0x1050, val)
 
     @ai_thrmcpl_type.deleter
     def ai_thrmcpl_type(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 4176)
+                self._handle, self._name, 0x1050)
 
     @property
     def ai_thrmstr_a(self):
@@ -3868,18 +3868,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6345)
+                self._handle, self._name, 0x18c9)
         return val
 
     @ai_thrmstr_a.setter
     def ai_thrmstr_a(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6345, val)
+                self._handle, self._name, 0x18c9, val)
 
     @ai_thrmstr_a.deleter
     def ai_thrmstr_a(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6345)
+                self._handle, self._name, 0x18c9)
 
     @property
     def ai_thrmstr_b(self):
@@ -3890,18 +3890,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6347)
+                self._handle, self._name, 0x18cb)
         return val
 
     @ai_thrmstr_b.setter
     def ai_thrmstr_b(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6347, val)
+                self._handle, self._name, 0x18cb, val)
 
     @ai_thrmstr_b.deleter
     def ai_thrmstr_b(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6347)
+                self._handle, self._name, 0x18cb)
 
     @property
     def ai_thrmstr_c(self):
@@ -3912,18 +3912,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 6346)
+                self._handle, self._name, 0x18ca)
         return val
 
     @ai_thrmstr_c.setter
     def ai_thrmstr_c(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 6346, val)
+                self._handle, self._name, 0x18ca, val)
 
     @ai_thrmstr_c.deleter
     def ai_thrmstr_c(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6346)
+                self._handle, self._name, 0x18ca)
 
     @property
     def ai_thrmstr_r1(self):
@@ -3935,18 +3935,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 4193)
+                self._handle, self._name, 0x1061)
         return val
 
     @ai_thrmstr_r1.setter
     def ai_thrmstr_r1(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 4193, val)
+                self._handle, self._name, 0x1061, val)
 
     @ai_thrmstr_r1.deleter
     def ai_thrmstr_r1(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 4193)
+                self._handle, self._name, 0x1061)
 
     @property
     def ai_torque_units(self):
@@ -3957,19 +3957,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12151)
+                self._handle, self._name, 0x2f77)
         return TorqueUnits(val)
 
     @ai_torque_units.setter
     def ai_torque_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12151, val)
+                self._handle, self._name, 0x2f77, val)
 
     @ai_torque_units.deleter
     def ai_torque_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12151)
+                self._handle, self._name, 0x2f77)
 
     @property
     def ai_usb_xfer_req_count(self):
@@ -3981,18 +3981,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 12288)
+                self._handle, self._name, 0x3000)
         return val
 
     @ai_usb_xfer_req_count.setter
     def ai_usb_xfer_req_count(self, val):
         self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 12288, val)
+                self._handle, self._name, 0x3000, val)
 
     @ai_usb_xfer_req_count.deleter
     def ai_usb_xfer_req_count(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12288)
+                self._handle, self._name, 0x3000)
 
     @property
     def ai_usb_xfer_req_size(self):
@@ -4004,18 +4004,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 10894)
+                self._handle, self._name, 0x2a8e)
         return val
 
     @ai_usb_xfer_req_size.setter
     def ai_usb_xfer_req_size(self, val):
         self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 10894, val)
+                self._handle, self._name, 0x2a8e, val)
 
     @ai_usb_xfer_req_size.deleter
     def ai_usb_xfer_req_size(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 10894)
+                self._handle, self._name, 0x2a8e)
 
     @property
     def ai_velocity_iepe_sensor_db_ref(self):
@@ -4027,18 +4027,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12277)
+                self._handle, self._name, 0x2ff5)
         return val
 
     @ai_velocity_iepe_sensor_db_ref.setter
     def ai_velocity_iepe_sensor_db_ref(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12277, val)
+                self._handle, self._name, 0x2ff5, val)
 
     @ai_velocity_iepe_sensor_db_ref.deleter
     def ai_velocity_iepe_sensor_db_ref(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12277)
+                self._handle, self._name, 0x2ff5)
 
     @property
     def ai_velocity_iepe_sensor_sensitivity(self):
@@ -4050,18 +4050,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12278)
+                self._handle, self._name, 0x2ff6)
         return val
 
     @ai_velocity_iepe_sensor_sensitivity.setter
     def ai_velocity_iepe_sensor_sensitivity(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12278, val)
+                self._handle, self._name, 0x2ff6, val)
 
     @ai_velocity_iepe_sensor_sensitivity.deleter
     def ai_velocity_iepe_sensor_sensitivity(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12278)
+                self._handle, self._name, 0x2ff6)
 
     @property
     def ai_velocity_iepe_sensor_sensitivity_units(self):
@@ -4073,19 +4073,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12279)
+                self._handle, self._name, 0x2ff7)
         return VelocityIEPESensorSensitivityUnits(val)
 
     @ai_velocity_iepe_sensor_sensitivity_units.setter
     def ai_velocity_iepe_sensor_sensitivity_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12279, val)
+                self._handle, self._name, 0x2ff7, val)
 
     @ai_velocity_iepe_sensor_sensitivity_units.deleter
     def ai_velocity_iepe_sensor_sensitivity_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12279)
+                self._handle, self._name, 0x2ff7)
 
     @property
     def ai_velocity_units(self):
@@ -4096,19 +4096,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12276)
+                self._handle, self._name, 0x2ff4)
         return VelocityUnits(val)
 
     @ai_velocity_units.setter
     def ai_velocity_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12276, val)
+                self._handle, self._name, 0x2ff4, val)
 
     @ai_velocity_units.deleter
     def ai_velocity_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12276)
+                self._handle, self._name, 0x2ff4)
 
     @property
     def ai_voltage_acrms_units(self):
@@ -4119,19 +4119,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 6114)
+                self._handle, self._name, 0x17e2)
         return VoltageUnits(val)
 
     @ai_voltage_acrms_units.setter
     def ai_voltage_acrms_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 6114, val)
+                self._handle, self._name, 0x17e2, val)
 
     @ai_voltage_acrms_units.deleter
     def ai_voltage_acrms_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 6114)
+                self._handle, self._name, 0x17e2)
 
     @property
     def ai_voltage_db_ref(self):
@@ -4143,18 +4143,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 10672)
+                self._handle, self._name, 0x29b0)
         return val
 
     @ai_voltage_db_ref.setter
     def ai_voltage_db_ref(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 10672, val)
+                self._handle, self._name, 0x29b0, val)
 
     @ai_voltage_db_ref.deleter
     def ai_voltage_db_ref(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 10672)
+                self._handle, self._name, 0x29b0)
 
     @property
     def ai_voltage_units(self):
@@ -4165,19 +4165,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 4244)
+                self._handle, self._name, 0x1094)
         return VoltageUnits(val)
 
     @ai_voltage_units.setter
     def ai_voltage_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 4244, val)
+                self._handle, self._name, 0x1094, val)
 
     @ai_voltage_units.deleter
     def ai_voltage_units(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 4244)
+                self._handle, self._name, 0x1094)
 
     @property
     def pwr_current_dev_scaling_coeff(self):
@@ -4190,7 +4190,7 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double_array(
-                self._handle, self._name, 12762)
+                self._handle, self._name, 0x31da)
         return val
 
     @property
@@ -4203,18 +4203,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12757)
+                self._handle, self._name, 0x31d5)
         return val
 
     @pwr_current_setpoint.setter
     def pwr_current_setpoint(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12757, val)
+                self._handle, self._name, 0x31d5, val)
 
     @pwr_current_setpoint.deleter
     def pwr_current_setpoint(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12757)
+                self._handle, self._name, 0x31d5)
 
     @property
     def pwr_idle_output_behavior(self):
@@ -4226,19 +4226,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12760)
+                self._handle, self._name, 0x31d8)
         return PowerIdleOutputBehavior(val)
 
     @pwr_idle_output_behavior.setter
     def pwr_idle_output_behavior(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12760, val)
+                self._handle, self._name, 0x31d8, val)
 
     @pwr_idle_output_behavior.deleter
     def pwr_idle_output_behavior(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12760)
+                self._handle, self._name, 0x31d8)
 
     @property
     def pwr_output_enable(self):
@@ -4252,18 +4252,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 12758)
+                self._handle, self._name, 0x31d6)
         return val
 
     @pwr_output_enable.setter
     def pwr_output_enable(self, val):
         self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 12758, val)
+                self._handle, self._name, 0x31d6, val)
 
     @pwr_output_enable.deleter
     def pwr_output_enable(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12758)
+                self._handle, self._name, 0x31d6)
 
     @property
     def pwr_output_state(self):
@@ -4275,7 +4275,7 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12759)
+                self._handle, self._name, 0x31d7)
         return PowerOutputState(val)
 
     @property
@@ -4290,19 +4290,19 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 12763)
+                self._handle, self._name, 0x31db)
         return Sense(val)
 
     @pwr_remote_sense.setter
     def pwr_remote_sense(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 12763, val)
+                self._handle, self._name, 0x31db, val)
 
     @pwr_remote_sense.deleter
     def pwr_remote_sense(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12763)
+                self._handle, self._name, 0x31db)
 
     @property
     def pwr_voltage_dev_scaling_coeff(self):
@@ -4315,7 +4315,7 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double_array(
-                self._handle, self._name, 12761)
+                self._handle, self._name, 0x31d9)
         return val
 
     @property
@@ -4328,18 +4328,18 @@ class AIChannel(Channel):
 
 
         val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 12756)
+                self._handle, self._name, 0x31d4)
         return val
 
     @pwr_voltage_setpoint.setter
     def pwr_voltage_setpoint(self, val):
         self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 12756, val)
+                self._handle, self._name, 0x31d4, val)
 
     @pwr_voltage_setpoint.deleter
     def pwr_voltage_setpoint(self):
         self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 12756)
+                self._handle, self._name, 0x31d4)
 
     @property
     @deprecation.deprecated(deprecated_in="0.7.0", details="Use ai_rtd_r0 instead.")

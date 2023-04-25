@@ -14,8 +14,9 @@
             function_call_args.append(handle_parameter.accessor)
         if attribute.python_class_name == "Watchdog":
             function_call_args.append("\"\"")
-        function_call_args.append(str(attribute.id))
+        function_call_args.append(hex(attribute.id))
+
     %>\
         self._interpreter.reset_${generic_attribute_func}(
-                ${', '.join(function_call_args) | wrap(initial_indent=12)})
+                ${', '.join(function_call_args) | wrap(12)})
 </%def>

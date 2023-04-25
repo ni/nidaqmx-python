@@ -31,19 +31,19 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 8757)
+                self._handle, 0x2235)
         return Coupling(val)
 
     @anlg_edge_coupling.setter
     def anlg_edge_coupling(self, val):
         val = val.value
         self._interpreter.set_trig_attribute_int32(
-                self._handle, 8757, val)
+                self._handle, 0x2235, val)
 
     @anlg_edge_coupling.deleter
     def anlg_edge_coupling(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 8757)
+                self._handle, 0x2235)
 
     @property
     def anlg_edge_dig_fltr_enable(self):
@@ -59,18 +59,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 12006)
+                self._handle, 0x2ee6)
         return val
 
     @anlg_edge_dig_fltr_enable.setter
     def anlg_edge_dig_fltr_enable(self, val):
         self._interpreter.set_trig_attribute_bool(
-                self._handle, 12006, val)
+                self._handle, 0x2ee6, val)
 
     @anlg_edge_dig_fltr_enable.deleter
     def anlg_edge_dig_fltr_enable(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12006)
+                self._handle, 0x2ee6)
 
     @property
     def anlg_edge_dig_fltr_min_pulse_width(self):
@@ -81,18 +81,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_double(
-                self._handle, 12007)
+                self._handle, 0x2ee7)
         return val
 
     @anlg_edge_dig_fltr_min_pulse_width.setter
     def anlg_edge_dig_fltr_min_pulse_width(self, val):
         self._interpreter.set_trig_attribute_double(
-                self._handle, 12007, val)
+                self._handle, 0x2ee7, val)
 
     @anlg_edge_dig_fltr_min_pulse_width.deleter
     def anlg_edge_dig_fltr_min_pulse_width(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12007)
+                self._handle, 0x2ee7)
 
     @property
     def anlg_edge_dig_fltr_timebase_rate(self):
@@ -104,18 +104,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_double(
-                self._handle, 12009)
+                self._handle, 0x2ee9)
         return val
 
     @anlg_edge_dig_fltr_timebase_rate.setter
     def anlg_edge_dig_fltr_timebase_rate(self, val):
         self._interpreter.set_trig_attribute_double(
-                self._handle, 12009, val)
+                self._handle, 0x2ee9, val)
 
     @anlg_edge_dig_fltr_timebase_rate.deleter
     def anlg_edge_dig_fltr_timebase_rate(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12009)
+                self._handle, 0x2ee9)
 
     @property
     def anlg_edge_dig_fltr_timebase_src(self):
@@ -126,18 +126,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_string(
-                self._handle, 12008)
+                self._handle, 0x2ee8)
         return val
 
     @anlg_edge_dig_fltr_timebase_src.setter
     def anlg_edge_dig_fltr_timebase_src(self, val):
         self._interpreter.set_trig_attribute_string(
-                self._handle, 12008, val)
+                self._handle, 0x2ee8, val)
 
     @anlg_edge_dig_fltr_timebase_src.deleter
     def anlg_edge_dig_fltr_timebase_src(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12008)
+                self._handle, 0x2ee8)
 
     @property
     def anlg_edge_dig_sync_enable(self):
@@ -149,18 +149,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 12010)
+                self._handle, 0x2eea)
         return val
 
     @anlg_edge_dig_sync_enable.setter
     def anlg_edge_dig_sync_enable(self, val):
         self._interpreter.set_trig_attribute_bool(
-                self._handle, 12010, val)
+                self._handle, 0x2eea, val)
 
     @anlg_edge_dig_sync_enable.deleter
     def anlg_edge_dig_sync_enable(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12010)
+                self._handle, 0x2eea)
 
     @property
     def anlg_edge_hyst(self):
@@ -178,18 +178,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_double(
-                self._handle, 5153)
+                self._handle, 0x1421)
         return val
 
     @anlg_edge_hyst.setter
     def anlg_edge_hyst(self, val):
         self._interpreter.set_trig_attribute_double(
-                self._handle, 5153, val)
+                self._handle, 0x1421, val)
 
     @anlg_edge_hyst.deleter
     def anlg_edge_hyst(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 5153)
+                self._handle, 0x1421)
 
     @property
     def anlg_edge_lvl(self):
@@ -202,18 +202,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_double(
-                self._handle, 5154)
+                self._handle, 0x1422)
         return val
 
     @anlg_edge_lvl.setter
     def anlg_edge_lvl(self, val):
         self._interpreter.set_trig_attribute_double(
-                self._handle, 5154, val)
+                self._handle, 0x1422, val)
 
     @anlg_edge_lvl.deleter
     def anlg_edge_lvl(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 5154)
+                self._handle, 0x1422)
 
     @property
     def anlg_edge_slope(self):
@@ -224,19 +224,19 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 5155)
+                self._handle, 0x1423)
         return Slope(val)
 
     @anlg_edge_slope.setter
     def anlg_edge_slope(self, val):
         val = val.value
         self._interpreter.set_trig_attribute_int32(
-                self._handle, 5155, val)
+                self._handle, 0x1423, val)
 
     @anlg_edge_slope.deleter
     def anlg_edge_slope(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 5155)
+                self._handle, 0x1423)
 
     @property
     def anlg_edge_src(self):
@@ -248,18 +248,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_string(
-                self._handle, 5156)
+                self._handle, 0x1424)
         return val
 
     @anlg_edge_src.setter
     def anlg_edge_src(self, val):
         self._interpreter.set_trig_attribute_string(
-                self._handle, 5156, val)
+                self._handle, 0x1424, val)
 
     @anlg_edge_src.deleter
     def anlg_edge_src(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 5156)
+                self._handle, 0x1424)
 
     @property
     def anlg_multi_edge_couplings(self):
@@ -275,19 +275,19 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_int32_array(
-                self._handle, 12586)
+                self._handle, 0x312a)
         return [Coupling(e) for e in val]
 
     @anlg_multi_edge_couplings.setter
     def anlg_multi_edge_couplings(self, val):
         val = numpy.int32([e.value for e in val])
         self._interpreter.set_trig_attribute_int32_array(
-                self._handle, 12586, val, len(val))
+                self._handle, 0x312a, val, len(val))
 
     @anlg_multi_edge_couplings.deleter
     def anlg_multi_edge_couplings(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12586)
+                self._handle, 0x312a)
 
     @property
     def anlg_multi_edge_hysts(self):
@@ -309,19 +309,19 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_double_array(
-                self._handle, 12585)
+                self._handle, 0x3129)
         return val
 
     @anlg_multi_edge_hysts.setter
     def anlg_multi_edge_hysts(self, val):
         val = numpy.float64(val)
         self._interpreter.set_trig_attribute_double_array(
-                self._handle, 12585, val, len(val))
+                self._handle, 0x3129, val, len(val))
 
     @anlg_multi_edge_hysts.deleter
     def anlg_multi_edge_hysts(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12585)
+                self._handle, 0x3129)
 
     @property
     def anlg_multi_edge_lvls(self):
@@ -335,19 +335,19 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_double_array(
-                self._handle, 12584)
+                self._handle, 0x3128)
         return val
 
     @anlg_multi_edge_lvls.setter
     def anlg_multi_edge_lvls(self, val):
         val = numpy.float64(val)
         self._interpreter.set_trig_attribute_double_array(
-                self._handle, 12584, val, len(val))
+                self._handle, 0x3128, val, len(val))
 
     @anlg_multi_edge_lvls.deleter
     def anlg_multi_edge_lvls(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12584)
+                self._handle, 0x3128)
 
     @property
     def anlg_multi_edge_slopes(self):
@@ -362,19 +362,19 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_int32_array(
-                self._handle, 12583)
+                self._handle, 0x3127)
         return [Slope(e) for e in val]
 
     @anlg_multi_edge_slopes.setter
     def anlg_multi_edge_slopes(self, val):
         val = numpy.int32([e.value for e in val])
         self._interpreter.set_trig_attribute_int32_array(
-                self._handle, 12583, val, len(val))
+                self._handle, 0x3127, val, len(val))
 
     @anlg_multi_edge_slopes.deleter
     def anlg_multi_edge_slopes(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12583)
+                self._handle, 0x3127)
 
     @property
     def anlg_multi_edge_srcs(self):
@@ -387,18 +387,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_string(
-                self._handle, 12582)
+                self._handle, 0x3126)
         return val
 
     @anlg_multi_edge_srcs.setter
     def anlg_multi_edge_srcs(self, val):
         self._interpreter.set_trig_attribute_string(
-                self._handle, 12582, val)
+                self._handle, 0x3126, val)
 
     @anlg_multi_edge_srcs.deleter
     def anlg_multi_edge_srcs(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12582)
+                self._handle, 0x3126)
 
     @property
     def anlg_win_btm(self):
@@ -409,18 +409,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_double(
-                self._handle, 5160)
+                self._handle, 0x1428)
         return val
 
     @anlg_win_btm.setter
     def anlg_win_btm(self, val):
         self._interpreter.set_trig_attribute_double(
-                self._handle, 5160, val)
+                self._handle, 0x1428, val)
 
     @anlg_win_btm.deleter
     def anlg_win_btm(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 5160)
+                self._handle, 0x1428)
 
     @property
     def anlg_win_coupling(self):
@@ -432,19 +432,19 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 6231)
+                self._handle, 0x1857)
         return Coupling(val)
 
     @anlg_win_coupling.setter
     def anlg_win_coupling(self, val):
         val = val.value
         self._interpreter.set_trig_attribute_int32(
-                self._handle, 6231, val)
+                self._handle, 0x1857, val)
 
     @anlg_win_coupling.deleter
     def anlg_win_coupling(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 6231)
+                self._handle, 0x1857)
 
     @property
     def anlg_win_dig_fltr_enable(self):
@@ -459,18 +459,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 12011)
+                self._handle, 0x2eeb)
         return val
 
     @anlg_win_dig_fltr_enable.setter
     def anlg_win_dig_fltr_enable(self, val):
         self._interpreter.set_trig_attribute_bool(
-                self._handle, 12011, val)
+                self._handle, 0x2eeb, val)
 
     @anlg_win_dig_fltr_enable.deleter
     def anlg_win_dig_fltr_enable(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12011)
+                self._handle, 0x2eeb)
 
     @property
     def anlg_win_dig_fltr_min_pulse_width(self):
@@ -481,18 +481,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_double(
-                self._handle, 12012)
+                self._handle, 0x2eec)
         return val
 
     @anlg_win_dig_fltr_min_pulse_width.setter
     def anlg_win_dig_fltr_min_pulse_width(self, val):
         self._interpreter.set_trig_attribute_double(
-                self._handle, 12012, val)
+                self._handle, 0x2eec, val)
 
     @anlg_win_dig_fltr_min_pulse_width.deleter
     def anlg_win_dig_fltr_min_pulse_width(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12012)
+                self._handle, 0x2eec)
 
     @property
     def anlg_win_dig_fltr_timebase_rate(self):
@@ -504,18 +504,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_double(
-                self._handle, 12014)
+                self._handle, 0x2eee)
         return val
 
     @anlg_win_dig_fltr_timebase_rate.setter
     def anlg_win_dig_fltr_timebase_rate(self, val):
         self._interpreter.set_trig_attribute_double(
-                self._handle, 12014, val)
+                self._handle, 0x2eee, val)
 
     @anlg_win_dig_fltr_timebase_rate.deleter
     def anlg_win_dig_fltr_timebase_rate(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12014)
+                self._handle, 0x2eee)
 
     @property
     def anlg_win_dig_fltr_timebase_src(self):
@@ -526,18 +526,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_string(
-                self._handle, 12013)
+                self._handle, 0x2eed)
         return val
 
     @anlg_win_dig_fltr_timebase_src.setter
     def anlg_win_dig_fltr_timebase_src(self, val):
         self._interpreter.set_trig_attribute_string(
-                self._handle, 12013, val)
+                self._handle, 0x2eed, val)
 
     @anlg_win_dig_fltr_timebase_src.deleter
     def anlg_win_dig_fltr_timebase_src(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12013)
+                self._handle, 0x2eed)
 
     @property
     def anlg_win_dig_sync_enable(self):
@@ -549,18 +549,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 12015)
+                self._handle, 0x2eef)
         return val
 
     @anlg_win_dig_sync_enable.setter
     def anlg_win_dig_sync_enable(self, val):
         self._interpreter.set_trig_attribute_bool(
-                self._handle, 12015, val)
+                self._handle, 0x2eef, val)
 
     @anlg_win_dig_sync_enable.deleter
     def anlg_win_dig_sync_enable(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12015)
+                self._handle, 0x2eef)
 
     @property
     def anlg_win_src(self):
@@ -572,18 +572,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_string(
-                self._handle, 5158)
+                self._handle, 0x1426)
         return val
 
     @anlg_win_src.setter
     def anlg_win_src(self, val):
         self._interpreter.set_trig_attribute_string(
-                self._handle, 5158, val)
+                self._handle, 0x1426, val)
 
     @anlg_win_src.deleter
     def anlg_win_src(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 5158)
+                self._handle, 0x1426)
 
     @property
     def anlg_win_top(self):
@@ -594,18 +594,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_double(
-                self._handle, 5161)
+                self._handle, 0x1429)
         return val
 
     @anlg_win_top.setter
     def anlg_win_top(self, val):
         self._interpreter.set_trig_attribute_double(
-                self._handle, 5161, val)
+                self._handle, 0x1429, val)
 
     @anlg_win_top.deleter
     def anlg_win_top(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 5161)
+                self._handle, 0x1429)
 
     @property
     def anlg_win_trig_when(self):
@@ -618,19 +618,19 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 5159)
+                self._handle, 0x1427)
         return WindowTriggerCondition1(val)
 
     @anlg_win_trig_when.setter
     def anlg_win_trig_when(self, val):
         val = val.value
         self._interpreter.set_trig_attribute_int32(
-                self._handle, 5159, val)
+                self._handle, 0x1427, val)
 
     @anlg_win_trig_when.deleter
     def anlg_win_trig_when(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 5159)
+                self._handle, 0x1427)
 
     @property
     def auto_trig_enable(self):
@@ -642,18 +642,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 11969)
+                self._handle, 0x2ec1)
         return val
 
     @auto_trig_enable.setter
     def auto_trig_enable(self, val):
         self._interpreter.set_trig_attribute_bool(
-                self._handle, 11969, val)
+                self._handle, 0x2ec1, val)
 
     @auto_trig_enable.deleter
     def auto_trig_enable(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 11969)
+                self._handle, 0x2ec1)
 
     @property
     def auto_triggered(self):
@@ -666,7 +666,7 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 11970)
+                self._handle, 0x2ec2)
         return val
 
     @property
@@ -679,18 +679,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_double(
-                self._handle, 5251)
+                self._handle, 0x1483)
         return val
 
     @delay.setter
     def delay(self, val):
         self._interpreter.set_trig_attribute_double(
-                self._handle, 5251, val)
+                self._handle, 0x1483, val)
 
     @delay.deleter
     def delay(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 5251)
+                self._handle, 0x1483)
 
     @property
     def dig_edge_dig_fltr_enable(self):
@@ -701,18 +701,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 11991)
+                self._handle, 0x2ed7)
         return val
 
     @dig_edge_dig_fltr_enable.setter
     def dig_edge_dig_fltr_enable(self, val):
         self._interpreter.set_trig_attribute_bool(
-                self._handle, 11991, val)
+                self._handle, 0x2ed7, val)
 
     @dig_edge_dig_fltr_enable.deleter
     def dig_edge_dig_fltr_enable(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 11991)
+                self._handle, 0x2ed7)
 
     @property
     def dig_edge_dig_fltr_min_pulse_width(self):
@@ -723,18 +723,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_double(
-                self._handle, 11992)
+                self._handle, 0x2ed8)
         return val
 
     @dig_edge_dig_fltr_min_pulse_width.setter
     def dig_edge_dig_fltr_min_pulse_width(self, val):
         self._interpreter.set_trig_attribute_double(
-                self._handle, 11992, val)
+                self._handle, 0x2ed8, val)
 
     @dig_edge_dig_fltr_min_pulse_width.deleter
     def dig_edge_dig_fltr_min_pulse_width(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 11992)
+                self._handle, 0x2ed8)
 
     @property
     def dig_edge_dig_fltr_timebase_rate(self):
@@ -746,18 +746,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_double(
-                self._handle, 11994)
+                self._handle, 0x2eda)
         return val
 
     @dig_edge_dig_fltr_timebase_rate.setter
     def dig_edge_dig_fltr_timebase_rate(self, val):
         self._interpreter.set_trig_attribute_double(
-                self._handle, 11994, val)
+                self._handle, 0x2eda, val)
 
     @dig_edge_dig_fltr_timebase_rate.deleter
     def dig_edge_dig_fltr_timebase_rate(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 11994)
+                self._handle, 0x2eda)
 
     @property
     def dig_edge_dig_fltr_timebase_src(self):
@@ -768,18 +768,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_string(
-                self._handle, 11993)
+                self._handle, 0x2ed9)
         return val
 
     @dig_edge_dig_fltr_timebase_src.setter
     def dig_edge_dig_fltr_timebase_src(self, val):
         self._interpreter.set_trig_attribute_string(
-                self._handle, 11993, val)
+                self._handle, 0x2ed9, val)
 
     @dig_edge_dig_fltr_timebase_src.deleter
     def dig_edge_dig_fltr_timebase_src(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 11993)
+                self._handle, 0x2ed9)
 
     @property
     def dig_edge_dig_sync_enable(self):
@@ -791,18 +791,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 11995)
+                self._handle, 0x2edb)
         return val
 
     @dig_edge_dig_sync_enable.setter
     def dig_edge_dig_sync_enable(self, val):
         self._interpreter.set_trig_attribute_bool(
-                self._handle, 11995, val)
+                self._handle, 0x2edb, val)
 
     @dig_edge_dig_sync_enable.deleter
     def dig_edge_dig_sync_enable(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 11995)
+                self._handle, 0x2edb)
 
     @property
     def dig_edge_edge(self):
@@ -813,19 +813,19 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 5168)
+                self._handle, 0x1430)
         return Edge(val)
 
     @dig_edge_edge.setter
     def dig_edge_edge(self, val):
         val = val.value
         self._interpreter.set_trig_attribute_int32(
-                self._handle, 5168, val)
+                self._handle, 0x1430, val)
 
     @dig_edge_edge.deleter
     def dig_edge_edge(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 5168)
+                self._handle, 0x1430)
 
     @property
     def dig_edge_src(self):
@@ -836,18 +836,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_string(
-                self._handle, 5172)
+                self._handle, 0x1434)
         return val
 
     @dig_edge_src.setter
     def dig_edge_src(self, val):
         self._interpreter.set_trig_attribute_string(
-                self._handle, 5172, val)
+                self._handle, 0x1434, val)
 
     @dig_edge_src.deleter
     def dig_edge_src(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 5172)
+                self._handle, 0x1434)
 
     @property
     def dig_pattern_pattern(self):
@@ -858,18 +858,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_string(
-                self._handle, 8583)
+                self._handle, 0x2187)
         return val
 
     @dig_pattern_pattern.setter
     def dig_pattern_pattern(self, val):
         self._interpreter.set_trig_attribute_string(
-                self._handle, 8583, val)
+                self._handle, 0x2187, val)
 
     @dig_pattern_pattern.deleter
     def dig_pattern_pattern(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 8583)
+                self._handle, 0x2187)
 
     @property
     def dig_pattern_src(self):
@@ -883,19 +883,19 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_string(
-                self._handle, 5175)
+                self._handle, 0x1437)
         return PhysicalChannel(val)
 
     @dig_pattern_src.setter
     def dig_pattern_src(self, val):
         val = val.name
         self._interpreter.set_trig_attribute_string(
-                self._handle, 5175, val)
+                self._handle, 0x1437, val)
 
     @dig_pattern_src.deleter
     def dig_pattern_src(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 5175)
+                self._handle, 0x1437)
 
     @property
     def dig_pattern_trig_when(self):
@@ -909,19 +909,19 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 5176)
+                self._handle, 0x1438)
         return DigitalPatternCondition(val)
 
     @dig_pattern_trig_when.setter
     def dig_pattern_trig_when(self, val):
         val = val.value
         self._interpreter.set_trig_attribute_int32(
-                self._handle, 5176, val)
+                self._handle, 0x1438, val)
 
     @dig_pattern_trig_when.deleter
     def dig_pattern_trig_when(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 5176)
+                self._handle, 0x1438)
 
     @property
     def max_num_trigs_to_detect(self):
@@ -941,18 +941,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_uint32(
-                self._handle, 12576)
+                self._handle, 0x3120)
         return val
 
     @max_num_trigs_to_detect.setter
     def max_num_trigs_to_detect(self, val):
         self._interpreter.set_trig_attribute_uint32(
-                self._handle, 12576, val)
+                self._handle, 0x3120, val)
 
     @max_num_trigs_to_detect.deleter
     def max_num_trigs_to_detect(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12576)
+                self._handle, 0x3120)
 
     @property
     def pretrig_samples(self):
@@ -966,18 +966,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_uint32(
-                self._handle, 5189)
+                self._handle, 0x1445)
         return val
 
     @pretrig_samples.setter
     def pretrig_samples(self, val):
         self._interpreter.set_trig_attribute_uint32(
-                self._handle, 5189, val)
+                self._handle, 0x1445, val)
 
     @pretrig_samples.deleter
     def pretrig_samples(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 5189)
+                self._handle, 0x1445)
 
     @property
     def retrigger_win(self):
@@ -992,18 +992,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_double(
-                self._handle, 12575)
+                self._handle, 0x311f)
         return val
 
     @retrigger_win.setter
     def retrigger_win(self, val):
         self._interpreter.set_trig_attribute_double(
-                self._handle, 12575, val)
+                self._handle, 0x311f, val)
 
     @retrigger_win.deleter
     def retrigger_win(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12575)
+                self._handle, 0x311f)
 
     @property
     def retriggerable(self):
@@ -1019,18 +1019,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 12573)
+                self._handle, 0x311d)
         return val
 
     @retriggerable.setter
     def retriggerable(self, val):
         self._interpreter.set_trig_attribute_bool(
-                self._handle, 12573, val)
+                self._handle, 0x311d, val)
 
     @retriggerable.deleter
     def retriggerable(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12573)
+                self._handle, 0x311d)
 
     @property
     def term(self):
@@ -1042,7 +1042,7 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_string(
-                self._handle, 12063)
+                self._handle, 0x2f1f)
         return val
 
     @property
@@ -1055,18 +1055,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 12590)
+                self._handle, 0x312e)
         return val
 
     @timestamp_enable.setter
     def timestamp_enable(self, val):
         self._interpreter.set_trig_attribute_bool(
-                self._handle, 12590, val)
+                self._handle, 0x312e, val)
 
     @timestamp_enable.deleter
     def timestamp_enable(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12590)
+                self._handle, 0x312e)
 
     @property
     def timestamp_timescale(self):
@@ -1077,19 +1077,19 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 12592)
+                self._handle, 0x3130)
         return Timescale(val)
 
     @timestamp_timescale.setter
     def timestamp_timescale(self, val):
         val = val.value
         self._interpreter.set_trig_attribute_int32(
-                self._handle, 12592, val)
+                self._handle, 0x3130, val)
 
     @timestamp_timescale.deleter
     def timestamp_timescale(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12592)
+                self._handle, 0x3130)
 
     @property
     def trig_type(self):
@@ -1101,19 +1101,19 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 5145)
+                self._handle, 0x1419)
         return TriggerType(val)
 
     @trig_type.setter
     def trig_type(self, val):
         val = val.value
         self._interpreter.set_trig_attribute_int32(
-                self._handle, 5145, val)
+                self._handle, 0x1419, val)
 
     @trig_type.deleter
     def trig_type(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 5145)
+                self._handle, 0x1419)
 
     @property
     def trig_win(self):
@@ -1130,18 +1130,18 @@ class ReferenceTrigger:
 
 
         val = self._interpreter.get_trig_attribute_double(
-                self._handle, 12574)
+                self._handle, 0x311e)
         return val
 
     @trig_win.setter
     def trig_win(self, val):
         self._interpreter.set_trig_attribute_double(
-                self._handle, 12574, val)
+                self._handle, 0x311e, val)
 
     @trig_win.deleter
     def trig_win(self):
         self._interpreter.reset_trig_attribute(
-                self._handle, 12574)
+                self._handle, 0x311e)
 
     def cfg_anlg_edge_ref_trig(
             self, trigger_source, pretrigger_samples,

@@ -19,11 +19,11 @@
         function_call_args.append(handle_parameter.accessor)
     if attribute.python_class_name == "Watchdog":
         function_call_args.append("\"\"")
-    function_call_args.append(str(attribute.id))
+    function_call_args.append(hex(attribute.id))
 %>
 \
         val = self._interpreter.get_${generic_attribute_func}(
-                ${', '.join(function_call_args) | wrap(16, 16)})
+                ${', '.join(function_call_args) | wrap(12)})
 \
 ## Script return call.
     %if attribute.bitfield_enum is not None:
