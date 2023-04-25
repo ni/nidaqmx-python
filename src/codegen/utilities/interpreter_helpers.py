@@ -105,7 +105,9 @@ def get_instantiation_lines_for_output(func):
     if func.is_init_method:
         instantiation_lines.append(f"task = lib_importer.task_handle(0)")
     for param in get_output_parameters(func):
-        if param.has_explicit_buffer_size:
+        if param.parameter_name == "task":
+            continue
+        elif param.has_explicit_buffer_size:
             if (
                 param.size.mechanism == "passed-in" or param.size.mechanism == "passed-in-by-ptr"
             ) and param.is_list:

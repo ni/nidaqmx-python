@@ -1760,7 +1760,6 @@ class LibraryInterpreter(BaseInterpreter):
 
     def create_task(self, session_name):
         task = lib_importer.task_handle(0)
-        task = ctypes.TaskHandle()
 
         cfunc = lib_importer.windll.DAQmxCreateTask
         if cfunc.argtypes is None:
@@ -2136,7 +2135,6 @@ class LibraryInterpreter(BaseInterpreter):
     def create_watchdog_timer_task_ex(
             self, device_name, session_name, timeout):
         task = lib_importer.task_handle(0)
-        task = ctypes.TaskHandle()
 
         cfunc = lib_importer.windll.DAQmxCreateWatchdogTimerTaskEx
         if cfunc.argtypes is None:
@@ -2600,7 +2598,6 @@ class LibraryInterpreter(BaseInterpreter):
 
     def load_task(self, session_name):
         task = lib_importer.task_handle(0)
-        task = ctypes.TaskHandle()
 
         cfunc = lib_importer.windll.DAQmxLoadTask
         if cfunc.argtypes is None:
