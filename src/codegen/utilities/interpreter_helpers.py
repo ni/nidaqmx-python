@@ -215,11 +215,16 @@ def get_output_params(func):
 def get_return_values(func):
     """Gets the values to add to return statement of the function."""
     return_values = []
+    is_read_write_function = is_custom_read_write_function(func)
+
     for param in func.output_parameters:
         if param.ctypes_data_type == "ctypes.c_char_p":
             return_values.append(f"{param.parameter_name}.value.decode('ascii')")
         elif param.is_list:
-            return_values.append(f"{param.parameter_name}.tolist()")
+            if is_read_write_function:
+                return_values.append(param.parameter_name)
+            else:
+                return_values.append(f"{param.parameter_name}.tolist()")
         elif param.type == "TaskHandle":
             return_values.append(param.parameter_name)
         else:

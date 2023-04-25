@@ -2627,7 +2627,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array.tolist(), samps_per_chan_read.value
+        return read_array, samps_per_chan_read.value
 
     def read_analog_scalar_f64(self, task, timeout):
         value = ctypes.c_double()
@@ -2665,7 +2665,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array.tolist(), samps_per_chan_read.value
+        return read_array, samps_per_chan_read.value
 
     def read_binary_i32(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
@@ -2686,7 +2686,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array.tolist(), samps_per_chan_read.value
+        return read_array, samps_per_chan_read.value
 
     def read_binary_u16(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
@@ -2707,7 +2707,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array.tolist(), samps_per_chan_read.value
+        return read_array, samps_per_chan_read.value
 
     def read_binary_u32(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
@@ -2728,7 +2728,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array.tolist(), samps_per_chan_read.value
+        return read_array, samps_per_chan_read.value
 
     def read_counter_f64(self, task, num_samps_per_chan, timeout, read_array):
         samps_per_chan_read = ctypes.c_int()
@@ -2748,7 +2748,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, read_array, read_array.size,
             ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array.tolist(), samps_per_chan_read.value
+        return read_array, samps_per_chan_read.value
 
     def read_counter_f64_ex(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
@@ -2769,7 +2769,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array.tolist(), samps_per_chan_read.value
+        return read_array, samps_per_chan_read.value
 
     def read_counter_scalar_f64(self, task, timeout):
         value = ctypes.c_double()
@@ -2822,7 +2822,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, read_array, read_array.size,
             ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array.tolist(), samps_per_chan_read.value
+        return read_array, samps_per_chan_read.value
 
     def read_counter_u32_ex(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
@@ -2843,7 +2843,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array.tolist(), samps_per_chan_read.value
+        return read_array, samps_per_chan_read.value
 
     def read_ctr_freq(
             self, task, num_samps_per_chan, timeout, interleaved,
@@ -2869,7 +2869,7 @@ class LibraryInterpreter(BaseInterpreter):
             read_array_duty_cycle.size, ctypes.byref(samps_per_chan_read),
             None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array_frequency.tolist(), read_array_duty_cycle.tolist(), samps_per_chan_read.value
+        return read_array_frequency, read_array_duty_cycle, samps_per_chan_read.value
 
     def read_ctr_freq_scalar(self, task, timeout):
         frequency = ctypes.c_double()
@@ -2914,7 +2914,7 @@ class LibraryInterpreter(BaseInterpreter):
             read_array_high_ticks, read_array_low_ticks,
             read_array_low_ticks.size, ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array_high_ticks.tolist(), read_array_low_ticks.tolist(), samps_per_chan_read.value
+        return read_array_high_ticks, read_array_low_ticks, samps_per_chan_read.value
 
     def read_ctr_ticks_scalar(self, task, timeout):
         high_ticks = ctypes.c_uint()
@@ -2959,7 +2959,7 @@ class LibraryInterpreter(BaseInterpreter):
             read_array_high_time, read_array_low_time,
             read_array_low_time.size, ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array_high_time.tolist(), read_array_low_time.tolist(), samps_per_chan_read.value
+        return read_array_high_time, read_array_low_time, samps_per_chan_read.value
 
     def read_ctr_time_scalar(self, task, timeout):
         high_time = ctypes.c_double()
@@ -3002,7 +3002,7 @@ class LibraryInterpreter(BaseInterpreter):
             read_array.size, ctypes.byref(samps_per_chan_read),
             ctypes.byref(num_bytes_per_samp), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array.tolist(), samps_per_chan_read.value, num_bytes_per_samp.value
+        return read_array, samps_per_chan_read.value, num_bytes_per_samp.value
 
     def read_digital_scalar_u32(self, task, timeout):
         value = ctypes.c_uint()
@@ -3040,7 +3040,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array.tolist(), samps_per_chan_read.value
+        return read_array, samps_per_chan_read.value
 
     def read_digital_u32(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
@@ -3061,7 +3061,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array.tolist(), samps_per_chan_read.value
+        return read_array, samps_per_chan_read.value
 
     def read_digital_u8(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
@@ -3082,7 +3082,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
-        return read_array.tolist(), samps_per_chan_read.value
+        return read_array, samps_per_chan_read.value
 
     def read_power_binary_i16(
             self, task, num_samps_per_chan, timeout, fill_mode,
