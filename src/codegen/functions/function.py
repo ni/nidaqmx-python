@@ -121,7 +121,7 @@ class Function:
     def is_python_codegen_method(self):
         """bool: Defines if the function is a python codegen function."""
         return self._is_python_codegen_method
-    
+
     @property
     def is_init_method(self):
         """bool: Defines if the function is a initialization function."""

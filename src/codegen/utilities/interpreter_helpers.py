@@ -111,6 +111,8 @@ def get_grpc_interpreter_call_params(func, params):
                 grpc_params.append(f"{param.parameter_name}_raw={param.parameter_name}")
             else:
                 grpc_params.append(f"{param.parameter_name}={param.parameter_name}")
+    if func.is_init_method:
+        grpc_params.append("initialization_behavior=self._grpc_options.initialization_behavior")
     grpc_params = sorted(list(set(grpc_params)))
     return ", ".join(grpc_params)
 

@@ -70,7 +70,12 @@ class GrpcStubInterpreter(BaseInterpreter):
                 ${get_grpc_interpreter_call_params(func, sorted_params) + ')' | wrap(16, 16)})
             %endif
         %else:
+        %if (func.is_init_method):
+            grpc_types.${snake_to_pascal(func.function_name)}Request(${get_grpc_interpreter_call_params(func, sorted_params)+ ')'},
+            metadata=metadata)
+        %else:
             grpc_types.${snake_to_pascal(func.function_name)}Request(${get_grpc_interpreter_call_params(func, sorted_params)+ ')'})
+        %endif
         %endif
         %if len(output_parameters)  > 0:
         return ${get_response_parameters(output_parameters)}

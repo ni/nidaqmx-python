@@ -1252,7 +1252,10 @@ class GrpcStubInterpreter(BaseInterpreter):
         )
         response = self._invoke(
             self._client.CreateTask,
-            grpc_types.CreateTaskRequest(session_name=session_name))
+            grpc_types.CreateTaskRequest(
+                initialization_behavior=self._grpc_options.initialization_behavior,
+                session_name=session_name),
+            metadata=metadata)
         return response.task
 
     def create_tedsai_accel_chan(
@@ -1530,6 +1533,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.CreateWatchdogTimerTask,
             grpc_types.CreateWatchdogTimerTaskRequest(
                 device_name=device_name, exp_states=exp_states,
+                initialization_behavior=self._grpc_options.initialization_behavior,
                 session_name=session_name, timeout=timeout),
             metadata=metadata)
         return response.task
@@ -1542,8 +1546,9 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.CreateWatchdogTimerTaskEx,
             grpc_types.CreateWatchdogTimerTaskExRequest(
-                device_name=device_name, session_name=session_name,
-                timeout=timeout),
+                device_name=device_name,
+                initialization_behavior=self._grpc_options.initialization_behavior,
+                session_name=session_name, timeout=timeout),
             metadata=metadata)
         return response.task
 
@@ -2264,7 +2269,10 @@ class GrpcStubInterpreter(BaseInterpreter):
         )
         response = self._invoke(
             self._client.LoadTask,
-            grpc_types.LoadTaskRequest(session_name=session_name))
+            grpc_types.LoadTaskRequest(
+                initialization_behavior=self._grpc_options.initialization_behavior,
+                session_name=session_name),
+            metadata=metadata)
         return response.task
 
     def read_analog_f64(
