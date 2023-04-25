@@ -19,6 +19,7 @@ class LibraryInterpreter(BaseInterpreter):
     This class is responsible for interpreting the Library's C API.
 
     """
+    __slots__ = ['_done_event_callbacks', '_every_n_samples_event_callbacks', '_signal_event_callbacks']
     
     def __init__(self):
         # These lists keep C callback objects in memory as ctypes doesn't.

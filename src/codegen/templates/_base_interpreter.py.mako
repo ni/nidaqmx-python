@@ -11,6 +11,7 @@ class BaseInterpreter(abc.ABC):
     """
     Contains signature of functions for all DAQmx APIs.
     """
+    __slots__ = []
 ################################################################################
 ## Script function signature.
 ################################################################################

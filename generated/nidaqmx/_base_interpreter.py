@@ -5,6 +5,7 @@ class BaseInterpreter(abc.ABC):
     """
     Contains signature of functions for all DAQmx APIs.
     """
+    __slots__ = []
 
     @abc.abstractmethod
     def add_cdaq_sync_connection(self, port_list):
