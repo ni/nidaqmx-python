@@ -144,6 +144,11 @@ def get_instantiation_lines(function_parameters):
 def get_arguments_type(functions_metadata):
     """Gets the 'type' of parameters."""
     argtypes = []
+    is_read_write_function = functions_metadata.python_codegen_method == "CustomCode_Read_Write"
+
+    if is_read_write_function:
+        argtypes.append("lib_importer.task_handle")
+
     if functions_metadata.handle_parameter is not None:
         if functions_metadata.handle_parameter.ctypes_data_type != "ctypes.c_char_p":
             argtypes.append(functions_metadata.handle_parameter.ctypes_data_type)
@@ -169,12 +174,10 @@ def get_arguments_type(functions_metadata):
             argtypes.append("ctypes.c_uint")
             size_param_info = param, (len(argtypes) - 1)
 
-    # lib_importer.task_handle is inserted at start index of list .
     # The argument type for 'reserved' parameter is inserted at
     # end of list for all read/write functions.
-    if functions_metadata.python_codegen_method == "CustomCode_Read_Write":
-        argtypes.insert(0, "lib_importer.task_handle")
-        argtypes.insert(len(argtypes), "ctypes.POINTER(c_bool32)")
+    if is_read_write_function:
+        argtypes.append("ctypes.POINTER(c_bool32)")
 
     return argtypes
 
