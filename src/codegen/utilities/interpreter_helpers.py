@@ -5,7 +5,6 @@ from copy import deepcopy
 from codegen.functions.function import Function
 from codegen.utilities.function_helpers import to_param_argtype
 from codegen.utilities.helpers import camel_to_snake_case
-from codegen.utilities.function_helpers import to_param_argtype
 
 # This custom regex list doesn't split the string before the number.
 INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES = [
@@ -91,8 +90,9 @@ def generate_interpreter_function_call_args(function_metadata):
                     function_call_args.append("temp_size")
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
-                
+
     return function_call_args
+
 
 def get_interpreter_parameter_signature(is_python_factory, params):
     """Gets parameter signature for function defintion."""
