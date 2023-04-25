@@ -137,16 +137,31 @@ def get_instantiation_lines_for_output(func):
 
 def get_interpreter_params(func):
     """Gets interpreter parameters for the function."""
-    return (p for p in func.base_parameters if p.direction == "in")
+    interpreter_parameters = []
+    for param in func.interpreter_parameters:
+        if param.direction == "in":
+            interpreter_parameters.append(param)
+        elif is_custom_read_write_function(func) and param.has_explicit_buffer_size:
+            if param.size.mechanism == "passed-in":
+                interpreter_parameters.append(param)
+    return interpreter_parameters
 
 
-def get_grpc_interpreter_call_params(func, params):
+def get_grpc_interpreter_call_params(func, params, is_custom_read_function):
     """Gets the interpreter parameters for grpc request."""
     compound_params = get_input_arguments_for_compound_params(func)
     grpc_params = []
+    has_read_array_parameter = False
     for param in params:
         if param.parameter_name not in compound_params:
-            if param.is_enum:
+            if is_custom_read_function and "read_array" in param.parameter_name:
+                if has_read_array_parameter:
+                    continue
+                grpc_params.append(
+                    f"{camel_to_snake_case(param.size.value)}={param.parameter_name}.size"
+                )
+                has_read_array_parameter = True
+            elif param.is_enum and not param.is_list:
                 grpc_params.append(f"{param.parameter_name}_raw={param.parameter_name}")
             else:
                 grpc_params.append(f"{param.parameter_name}={param.parameter_name}")
@@ -214,14 +229,15 @@ def is_custom_read_write_function(func):
     return func.python_codegen_method == "CustomCode_Read_Write"
 
 
-def is_custom_read_write_function(func):
-    """Returns True if the function is a read or write function."""
-    return func.python_codegen_method == "CustomCode_Read_Write"
+def is_custom_read_function(func):
+    """Returns True if the function is a read function."""
+    return func.python_codegen_method == "CustomCode_Read_Write" and "read_" in func.function_name
 
 
 def get_output_params(func) -> list:
     """Gets ouput parameters for the function."""
     return list(p for p in func.base_parameters if p.direction == "out")
+
 
 def get_return_values(func):
     """Gets the values to add to return statement of the function."""
@@ -299,3 +315,17 @@ def get_samps_per_chan_read_or_write_param(func_params):
         if param.parameter_name in ("samps_per_chan_written", "num_samps_per_chan_written"):
             return f"samps_per_chan_written={param.parameter_name}"
     return None
+
+
+def check_if_parameters_contain_read_array(params):
+    """Checks if the list of parameters contains read array parameter."""
+    return any(x for x in params if "read_array" in x.parameter_name)
+
+
+def get_read_array_parameters(params):
+    """Gets the list of array parameters."""
+    response = []
+    for param in params:
+        if param.direction == "out" and "read_array" in param.parameter_name:
+            response.append(camel_to_snake_case(param.parameter_name))
+    return response

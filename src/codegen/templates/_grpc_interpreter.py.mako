@@ -1,5 +1,5 @@
 <%
-    from codegen.utilities.interpreter_helpers import get_interpreter_functions, get_grpc_interpreter_call_params, get_interpreter_params, get_interpreter_parameter_signature, get_output_params, get_response_parameters, get_compound_parameter, create_compound_parameter_request, get_input_arguments_for_compound_params
+    from codegen.utilities.interpreter_helpers import get_interpreter_functions, get_grpc_interpreter_call_params, get_interpreter_params, get_interpreter_parameter_signature, get_output_params, get_response_parameters, get_compound_parameter, create_compound_parameter_request, get_input_arguments_for_compound_params, is_custom_read_function, check_if_parameters_contain_read_array, get_read_array_parameters
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
     from codegen.utilities.helpers import snake_to_pascal
@@ -42,6 +42,8 @@ class GrpcStubInterpreter(BaseInterpreter):
     parameter_signature = get_interpreter_parameter_signature(is_python_factory, sorted_params)
     output_parameters = get_output_params(func)
     compound_parameter = get_compound_parameter(sorted_params)
+    is_read_function = is_custom_read_function(func)
+    grpc_interpreter_params = get_grpc_interpreter_call_params(func, sorted_params, is_read_function)
     %>
     %if (len(func.function_name) + len(parameter_signature)) > 68:
     def ${func.function_name}(
@@ -56,11 +58,16 @@ class GrpcStubInterpreter(BaseInterpreter):
     %endif
         response = self._invoke(
             self._client.${snake_to_pascal(func.function_name)},
-        %if (len(func.function_name) + len(get_grpc_interpreter_call_params(func, sorted_params))) > 68:
+        %if (len(func.function_name) + len(grpc_interpreter_params)) > 68:
             grpc_types.${snake_to_pascal(func.function_name)}Request(
-                ${get_grpc_interpreter_call_params(func, sorted_params) + ')' | wrap(16, 16)})
+                ${grpc_interpreter_params + ')' | wrap(16, 16)})
         %else:
-            grpc_types.${snake_to_pascal(func.function_name)}Request(${get_grpc_interpreter_call_params(func, sorted_params)+ ')'})
+            grpc_types.${snake_to_pascal(func.function_name)}Request(${grpc_interpreter_params + ')'})
+        %endif
+        %if (is_read_function and check_if_parameters_contain_read_array(sorted_params)):
+        % for param in get_read_array_parameters(output_parameters):
+        ${param}[:]=response.${param}
+        % endfor
         %endif
         %if len(output_parameters)  > 0:
         return ${get_response_parameters(output_parameters)}
