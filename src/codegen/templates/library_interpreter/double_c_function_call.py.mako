@@ -1,6 +1,6 @@
 <%page args="function"/>\
 <%
-    from codegen.utilities.interpreter_helpers import generate_interpreter_function_call_args, get_output_param_with_ivi_dance_mechanism, get_output_parameters 
+    from codegen.utilities.interpreter_helpers import generate_interpreter_function_call_args, get_output_param_with_ivi_dance_mechanism, get_output_params 
     from codegen.utilities.function_helpers import get_arguments_type, instantiate_explicit_output_param
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
 %>\
