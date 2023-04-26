@@ -4,7 +4,7 @@ import ctypes
 import numpy
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
-from nidaqmx.scale import Scale
+from nidaqmx.scale import _ScaleAlternateConstructor
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
 from nidaqmx._task_modules.channels.channel import Channel
@@ -1165,7 +1165,7 @@ class CIChannel(Channel):
         """
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x189e)
-        return Scale(val)
+        return _ScaleAlternateConstructor(val, self._interpreter)
 
     @ci_custom_scale.setter
     def ci_custom_scale(self, val):

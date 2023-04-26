@@ -13,9 +13,13 @@
 <%
     mapped_func_type = get_mapped_attribute_function_type(attribute)
     generic_attribute_func = get_generic_attribute_function_name(attribute) + "_" + mapped_func_type
+    object_type = attribute.object_type
+    if attribute.has_alternate_constructor:
+        object_type = "_" + attribute.object_type + "AlternateConstructor"
     function_call_args = []
     for handle_parameter in attribute.handle_parameters:
         function_call_args.append(handle_parameter.accessor)
+    # For Watchdog related properties, empty string is passed for "lines" parameter 
     if attribute.python_class_name == "Watchdog":
         function_call_args.append("\"\"")
     function_call_args.append(hex(attribute.id))
@@ -40,9 +44,9 @@
             object_constructor_args.append("val")
         %>\
         %if attribute.object_has_factory:
-        return ${attribute.object_type}._factory(${', '.join(object_constructor_args)}, self._interpreter)
+        return ${object_type}._factory(${', '.join(object_constructor_args)}, self._interpreter)
         %else:
-        return ${attribute.object_type}(${', '.join(object_constructor_args)})
+        return ${object_type}(${', '.join(object_constructor_args)}, self._interpreter)
         %endif
     %elif attribute.is_object and attribute.is_list:
 <%
@@ -53,10 +57,10 @@
             object_constructor_args.append('v')
         %>\
         %if attribute.object_has_factory:
-        return [${attribute.object_type}._factory(${', '.join(object_constructor_args)}, self._interpreter)
+        return [${object_type}._factory(${', '.join(object_constructor_args)}, self._interpreter)
                 for v in unflatten_channel_string(val)]
         %else:
-        return [${attribute.object_type}(${', '.join(object_constructor_args)})
+        return [${object_type}(${', '.join(object_constructor_args)}, self._interpreter)
                 for v in unflatten_channel_string(val)]
         %endif
     %elif attribute.is_list and attribute.ctypes_data_type == 'ctypes.c_char_p':

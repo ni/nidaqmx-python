@@ -612,7 +612,7 @@ class Device:
         """
 
         val = self._interpreter.get_device_attribute_string(self._name, 0x29b6)
-        return [Device(v)
+        return [_DeviceAlternateConstructor(v, self._interpreter)
                 for v in unflatten_channel_string(val)]
 
     @property
@@ -749,7 +749,7 @@ class Device:
         """
 
         val = self._interpreter.get_device_attribute_string(self._name, 0x29b7)
-        return Device(val)
+        return _DeviceAlternateConstructor(val, self._interpreter)
 
     @property
     def compact_daq_slot_num(self):
@@ -769,7 +769,7 @@ class Device:
         """
 
         val = self._interpreter.get_device_attribute_string(self._name, 0x3161)
-        return Device(val)
+        return _DeviceAlternateConstructor(val, self._interpreter)
 
     @property
     def compact_rio_slot_num(self):
@@ -858,7 +858,7 @@ class Device:
         """
 
         val = self._interpreter.get_device_attribute_string(self._name, 0x3178)
-        return [Device(v)
+        return [_DeviceAlternateConstructor(v, self._interpreter)
                 for v in unflatten_channel_string(val)]
 
     @property
@@ -869,7 +869,7 @@ class Device:
         """
 
         val = self._interpreter.get_device_attribute_string(self._name, 0x3171)
-        return Device(val)
+        return _DeviceAlternateConstructor(val, self._interpreter)
 
     @property
     def hwteds_supported(self):
@@ -1219,7 +1219,7 @@ class _DeviceAlternateConstructor(Device):
 
     This is a private API used to instantiate a Device with an existing interpreter.
     """
-
+    __slots__ = []
     def __init__(self, name, interpreter):
         """
         Args:

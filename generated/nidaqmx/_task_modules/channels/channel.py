@@ -5,7 +5,7 @@ import numpy
 
 import nidaqmx
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
-from nidaqmx.system.physical_channel import PhysicalChannel
+from nidaqmx.system.physical_channel import _PhysicalChannelAlternateConstructor
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
 from nidaqmx.utils import flatten_channel_string, unflatten_channel_string
@@ -237,7 +237,7 @@ class Channel:
         """
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18f5)
-        return PhysicalChannel(val)
+        return _PhysicalChannelAlternateConstructor(val, self._interpreter)
 
     @physical_channel.setter
     def physical_channel(self, val):

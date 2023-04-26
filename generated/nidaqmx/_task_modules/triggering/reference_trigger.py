@@ -5,7 +5,7 @@ import numpy
 
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
-from nidaqmx.system.physical_channel import PhysicalChannel
+from nidaqmx.system.physical_channel import _PhysicalChannelAlternateConstructor
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
 from nidaqmx.constants import (
@@ -740,7 +740,7 @@ class ReferenceTrigger:
         """
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x1437)
-        return PhysicalChannel(val)
+        return _PhysicalChannelAlternateConstructor(val, self._interpreter)
 
     @dig_pattern_src.setter
     def dig_pattern_src(self, val):
