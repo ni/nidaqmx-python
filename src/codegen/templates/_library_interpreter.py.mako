@@ -64,7 +64,7 @@ class LibraryInterpreter(BaseInterpreter):
 %endif
 %endfor
 
-    ## Handwriting 'read_power_binary_i16' function as metdata is not available in daqmxAPSharp.json file.  
+    ## Handwriting 'read_power_binary_i16' function as metadata is not available in daqmxAPSharp.json file.  
     def read_power_binary_i16(
             self, task, num_samps_per_chan, timeout, fill_mode,
             read_voltage_array, read_current_array):
@@ -90,7 +90,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         return samps_per_chan_read.value
 
-    ## Handwriting 'read_power_f64' function as metdata is not available in daqmxAPSharp.json file. 
+    ## Handwriting 'read_power_f64' function as metadata is not available in daqmxAPSharp.json file. 
     def read_power_f64(
             self, task, num_samps_per_chan, timeout, fill_mode, 
             read_voltage_array, read_current_array):
