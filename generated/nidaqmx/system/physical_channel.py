@@ -4,6 +4,7 @@ import ctypes
 import numpy
 
 from nidaqmx import utils
+from nidaqmx._library_interpreter import LibraryInterpreter
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, enum_bitfield_to_list, ctypes_byte_str,
     c_bool32)
@@ -86,6 +87,8 @@ class PhysicalChannel:
 
     @ai_power_control_enable.setter
     def ai_power_control_enable(self, val):
+        if not isinstance(self._interpreter, LibraryInterpreter):
+            raise NotImplementedError
         cfunc = lib_importer.windll.DAQmxSetPhysicalChanAIPowerControlEnable
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -98,7 +101,17 @@ class PhysicalChannel:
 
     @ai_power_control_enable.deleter
     def ai_power_control_enable(self):
-        self._interpreter.reset_physical_chan_attribute(self._name, 0x316d)
+        if not isinstance(self._interpreter, LibraryInterpreter):
+            raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxResetPhysicalChanAIPowerControlEnable
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
+        error_code = cfunc(
+            self._name)
+        check_for_error(error_code)
 
     @property
     def ai_power_control_type(self):
@@ -112,6 +125,8 @@ class PhysicalChannel:
 
     @ai_power_control_type.setter
     def ai_power_control_type(self, val):
+        if not isinstance(self._interpreter, LibraryInterpreter):
+            raise NotImplementedError
         val = val.value
         cfunc = lib_importer.windll.DAQmxSetPhysicalChanAIPowerControlType
         if cfunc.argtypes is None:
@@ -125,7 +140,17 @@ class PhysicalChannel:
 
     @ai_power_control_type.deleter
     def ai_power_control_type(self):
-        self._interpreter.reset_physical_chan_attribute(self._name, 0x316e)
+        if not isinstance(self._interpreter, LibraryInterpreter):
+            raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxResetPhysicalChanAIPowerControlType
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
+        error_code = cfunc(
+            self._name)
+        check_for_error(error_code)
 
     @property
     def ai_power_control_voltage(self):
@@ -139,6 +164,8 @@ class PhysicalChannel:
 
     @ai_power_control_voltage.setter
     def ai_power_control_voltage(self, val):
+        if not isinstance(self._interpreter, LibraryInterpreter):
+            raise NotImplementedError
         cfunc = (lib_importer.windll.
                  DAQmxSetPhysicalChanAIPowerControlVoltage)
         if cfunc.argtypes is None:
@@ -152,7 +179,18 @@ class PhysicalChannel:
 
     @ai_power_control_voltage.deleter
     def ai_power_control_voltage(self):
-        self._interpreter.reset_physical_chan_attribute(self._name, 0x316c)
+        if not isinstance(self._interpreter, LibraryInterpreter):
+            raise NotImplementedError
+        cfunc = (lib_importer.windll.
+                 DAQmxResetPhysicalChanAIPowerControlVoltage)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
+        error_code = cfunc(
+            self._name)
+        check_for_error(error_code)
 
     @property
     def ai_sensor_power_open_chan(self):
@@ -232,6 +270,8 @@ class PhysicalChannel:
 
     @ao_manual_control_enable.setter
     def ao_manual_control_enable(self, val):
+        if not isinstance(self._interpreter, LibraryInterpreter):
+            raise NotImplementedError
         cfunc = (lib_importer.windll.
                  DAQmxSetPhysicalChanAOManualControlEnable)
         if cfunc.argtypes is None:
@@ -245,7 +285,18 @@ class PhysicalChannel:
 
     @ao_manual_control_enable.deleter
     def ao_manual_control_enable(self):
-        self._interpreter.reset_physical_chan_attribute(self._name, 0x2a1e)
+        if not isinstance(self._interpreter, LibraryInterpreter):
+            raise NotImplementedError
+        cfunc = (lib_importer.windll.
+                 DAQmxResetPhysicalChanAOManualControlEnable)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
+        error_code = cfunc(
+            self._name)
+        check_for_error(error_code)
 
     @property
     def ao_manual_control_freq(self):
@@ -290,6 +341,8 @@ class PhysicalChannel:
 
     @ao_power_amp_channel_enable.setter
     def ao_power_amp_channel_enable(self, val):
+        if not isinstance(self._interpreter, LibraryInterpreter):
+            raise NotImplementedError
         cfunc = lib_importer.windll.DAQmxSetAOPowerAmpChannelEnable
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -302,7 +355,17 @@ class PhysicalChannel:
 
     @ao_power_amp_channel_enable.deleter
     def ao_power_amp_channel_enable(self):
-        self._interpreter.reset_physical_chan_attribute(self._name, 0x3062)
+        if not isinstance(self._interpreter, LibraryInterpreter):
+            raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxResetAOPowerAmpChannelEnable
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
+        error_code = cfunc(
+            self._name)
+        check_for_error(error_code)
 
     @property
     def ao_power_amp_gain(self):
