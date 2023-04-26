@@ -101,6 +101,20 @@ def get_interpreter_params(func):
     return (p for p in func.base_parameters if p.direction == "in")
 
 
+def get_grpc_interpreter_call_params(func, params):
+    """Gets the interpreter parameters for grpc request."""
+    compound_params = get_input_arguments_for_compound_params(func)
+    grpc_params = []
+    for param in params:
+        if param.parameter_name not in compound_params:
+            if param.is_enum:
+                grpc_params.append(f"{param.parameter_name}_raw={param.parameter_name}")
+            else:
+                grpc_params.append(f"{param.parameter_name}={param.parameter_name}")
+    grpc_params = sorted(list(set(grpc_params)))
+    return ", ".join(grpc_params)
+
+
 def get_skippable_params_for_interpreter_func(func):
     """Gets parameter names that needs to be skipped for the function."""
     skippable_params = []
@@ -154,9 +168,9 @@ def has_parameter_with_ivi_dance_size_mechanism(func):
     return parameter_with_size_buffer is not None
 
 
-def get_output_params(func):
-    """Gets input parameters for the function."""
-    return (p for p in func.base_parameters if p.direction == "out")
+def get_output_params(func) -> list:
+    """Gets ouput parameters for the function."""
+    return list(p for p in func.base_parameters if p.direction == "out")
 
 
 def get_return_values(func):
@@ -187,3 +201,41 @@ def get_c_function_call_template(func):
 def get_callback_param_data_types(params):
     """Gets the data types for call back function parameters."""
     return [p["ctypes_data_type"] for p in params]
+
+
+def get_compound_parameter(params):
+    """Returns the compound parameter associated with the given function."""
+    return next((x for x in params if x.is_compound_type), None)
+
+
+def get_input_arguments_for_compound_params(func):
+    """Returns a list of input parameter for creating the compound parameter."""
+    compound_params = []
+    if any(x for x in func.base_parameters if x.is_compound_type):
+        for parameter in func.base_parameters:
+            if parameter.direction == "in" and parameter.repeating_argument:
+                compound_params.append(parameter.parameter_name)
+    return compound_params
+
+
+def create_compound_parameter_request(func):
+    """Gets the input parameters for createing the compound type parameter."""
+    parameters = []
+    compound_parameter_type = ""
+    for parameter in func.base_parameters:
+        if parameter.direction == "in" and parameter.repeated_var_args:
+            compound_parameter_type = parameter.grpc_type.replace("repeated ", "")
+            break
+
+    for parameter in get_input_arguments_for_compound_params(func):
+        parameters.append(f"{parameter}={parameter}[index]")
+    return f"grpc_types.{compound_parameter_type}(" + ", ".join(parameters) + ")"
+
+
+def get_response_parameters(output_parameters: list):
+    """Gets the list of parameters in grpc response."""
+    response_parameters = []
+    for parameter in output_parameters:
+        if not parameter.repeating_argument:
+            response_parameters.append(f"response.{parameter.parameter_name}")
+    return ", ".join(response_parameters)
