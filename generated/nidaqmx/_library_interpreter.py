@@ -2249,13 +2249,14 @@ class LibraryInterpreter(BaseInterpreter):
             argtypes.append(ctypes.c_int32)
             
         args.append(None)
+        argtypes.append(ctypes.c_void_p)
 
         cfunc = lib_importer.cdll.DAQmxGetAnalogPowerUpStates
         with cfunc.arglock:
             cfunc.argtypes = argtypes
             error_code = cfunc(*args)
         check_for_error(error_code)
-        return state.tolist()
+        return [state_element.value for state_element in state]
 
     def get_analog_power_up_states_with_output_type(
             self, channel_names, array_size):
@@ -2662,13 +2663,14 @@ class LibraryInterpreter(BaseInterpreter):
             argtypes.append(ctypes.POINTER(ctypes.c_int32))
             
         args.append(None)
+        argtypes.append(ctypes.c_void_p)
 
         cfunc = lib_importer.cdll.DAQmxGetDigitalPowerUpStates
         with cfunc.arglock:
             cfunc.argtypes = argtypes
             error_code = cfunc(*args)
         check_for_error(error_code)
-        return state.tolist()
+        return [state_element.value for state_element in state]
 
     def get_digital_pull_up_pull_down_states(self, device_name, channel_name):
         state = []
@@ -2687,13 +2689,14 @@ class LibraryInterpreter(BaseInterpreter):
             argtypes.append(ctypes.POINTER(ctypes.c_int32))
             
         args.append(None)
+        argtypes.append(ctypes.c_void_p)
 
         cfunc = lib_importer.cdll.DAQmxGetDigitalPullUpPullDownStates
         with cfunc.arglock:
             cfunc.argtypes = argtypes
             error_code = cfunc(*args)
         check_for_error(error_code)
-        return state.tolist()
+        return [state_element.value for state_element in state]
 
     def get_disconnected_cdaq_sync_ports(self):
         cfunc = lib_importer.windll.DAQmxGetDisconnectedCDAQSyncPorts
@@ -4570,6 +4573,7 @@ class LibraryInterpreter(BaseInterpreter):
             argtypes.append(ctypes.c_int32)
             
         args.append(None)
+        argtypes.append(ctypes.c_void_p)
 
         cfunc = lib_importer.cdll.DAQmxSetAnalogPowerUpStates
         with cfunc.arglock:
@@ -4735,6 +4739,7 @@ class LibraryInterpreter(BaseInterpreter):
             argtypes.append(ctypes.c_int32)
             
         args.append(None)
+        argtypes.append(ctypes.c_void_p)
 
         cfunc = lib_importer.cdll.DAQmxSetDigitalPowerUpStates
         with cfunc.arglock:
@@ -4756,6 +4761,7 @@ class LibraryInterpreter(BaseInterpreter):
             argtypes.append(ctypes.c_int32)
             
         args.append(None)
+        argtypes.append(ctypes.c_void_p)
 
         cfunc = lib_importer.cdll.DAQmxSetDigitalPullUpPullDownStates
         with cfunc.arglock:

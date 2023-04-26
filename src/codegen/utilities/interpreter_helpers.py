@@ -120,7 +120,7 @@ def get_instantiation_lines_for_output(func):
     for param in get_interpreter_output_params(func):
         if param.parameter_name == "task":
             continue
-        elif param.is_repeating_argument:
+        elif param.repeating_argument:
             instantiation_lines.append(f"{param.parameter_name} = []")
         elif param.has_explicit_buffer_size:
             if (
@@ -169,7 +169,7 @@ def get_argument_definition_lines_for_varargs(varargs_params):
 
 def get_varargs_parameters(func):
     """Gets variable arguments of a function."""
-    return [p for p in func.parameters if p.is_repeating_argument]
+    return [p for p in func.parameters if p.repeating_argument]
 
 
 def get_interpreter_params(func):
@@ -257,8 +257,8 @@ def get_return_values(func):
     """Gets the values to add to return statement of the function."""
     return_values = []
     for param in get_interpreter_output_params(func):
-        if param.is_repeating_argument:
-            return_values.append(f"{param.parameter_name}.tolist()")
+        if param.repeating_argument:
+            return_values.append(f"[{param.parameter_name}_element.value for {param.parameter_name}_element in {param.parameter_name}]")
         elif param.ctypes_data_type == "ctypes.c_char_p":
             return_values.append(f"{param.parameter_name}.value.decode('ascii')")
         elif param.is_list:

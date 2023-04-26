@@ -27,6 +27,7 @@
         %endfor
     %endif
         args.append(None)
+        argtypes.append(ctypes.c_void_p)
 
         cfunc = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
 \
