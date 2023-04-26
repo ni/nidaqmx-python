@@ -80,6 +80,9 @@ def generate_interpreter_function_call_args(function_metadata):
             elif param.direction == "out":
                 if param.size.mechanism == "ivi-dance":
                     size_values[param.size.value] = SizeParameter(param.parameter_name, "temp_size")
+                if is_custom_read_write_function(function_metadata) and param.size.mechanism == "passed-in":
+                    size_values[param.size.value] = SizeParameter(param.parameter_name, f"{param.parameter_name}.size")
+
 
     for param in function_metadata.interpreter_parameters:
         if param.direction == "in":
@@ -87,11 +90,6 @@ def generate_interpreter_function_call_args(function_metadata):
         elif param.direction == "out":
             if param.has_explicit_buffer_size:
                 function_call_args.append(param.parameter_name)
-                if (
-                    is_custom_read_write_function(function_metadata)
-                    and param.size.mechanism == "passed-in"
-                ):
-                    function_call_args.append(f"{param.parameter_name}.size")
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
         if param.has_explicit_buffer_size:
