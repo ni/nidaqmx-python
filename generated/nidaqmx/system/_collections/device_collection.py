@@ -93,29 +93,5 @@ class DeviceCollection(Sequence):
         List[str]: Indicates the names of all devices on this device
             collection.
         """
-        cfunc = lib_importer.windll.DAQmxGetSysDevNames
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes.c_char_p, ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_system_info_attribute_string(6459)
+        return unflatten_channel_string(val)

@@ -114,33 +114,8 @@ ${property_template.script_property(attribute)}\
         """
         str: Indicates the name of the task.
         """
-        cfunc = lib_importer.windll.DAQmxGetTaskName
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
+        val = self._interpreter.get_task_attribute_string(self._handle, 4726)
+        return val
 
     def _control_watchdog_task(self, action):
         """

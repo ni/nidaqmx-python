@@ -602,7 +602,7 @@ class _ScaleAlternateConstructor(Scale):
 
     This is a private API used to instantiate a Scale with an existing interpreter.
     """
-
+    __slots__ = []
     def __init__(self, name, interpreter):
         """
         Args:
