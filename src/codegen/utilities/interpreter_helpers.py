@@ -124,9 +124,8 @@ def get_instantiation_lines_for_output(func):
     instantiation_lines = []
     if func.is_init_method:
         instantiation_lines.append(f"task = lib_importer.task_handle(0)")
-        instantiation_lines.append("new_session_initialized = True")
-    for param in get_output_params(func):
-        if param.parameter_name == "task" or param.parameter_name == "new_session_initialized":
+    for param in get_interpreter_output_params(func):
+        if param.parameter_name == "task":
             continue
         elif param.has_explicit_buffer_size:
             if is_custom_read_write_function(func) and param.size.mechanism == "passed-in":
@@ -231,8 +230,13 @@ def is_custom_read_write_function(func):
     return func.python_codegen_method == "CustomCode_Read_Write"
 
 
+def get_interpreter_output_params(func):
+    """Gets the output parameters for the functions in interpreter."""
+    return [p for p in func.interpreter_parameters if p.direction == "out"]
+
+
 def get_output_params(func):
-    """Gets input parameters for the function."""
+    """Gets output parameters for the function."""
     return [p for p in func.base_parameters if p.direction == "out"]
 
 
@@ -241,7 +245,7 @@ def get_return_values(func):
     return_values = []
     is_read_write_function = is_custom_read_write_function(func)
 
-    for param in get_output_params(func):
+    for param in get_interpreter_output_params(func):
         if param.ctypes_data_type == "ctypes.c_char_p":
             return_values.append(f"{param.parameter_name}.value.decode('ascii')")
         elif param.is_list:
@@ -249,7 +253,7 @@ def get_return_values(func):
                 return_values.append(param.parameter_name)
             else:
                 return_values.append(f"{param.parameter_name}.tolist()")
-        elif param.type == "TaskHandle" or param.parameter_name == "new_session_initialized":
+        elif param.type == "TaskHandle":
             return_values.append(param.parameter_name)
         else:
             return_values.append(f"{param.parameter_name}.value")
