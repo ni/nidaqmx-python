@@ -82,18 +82,15 @@ class Triggers:
         """
 
 
-        val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 0x2f80)
+        val = self._interpreter.get_trig_attribute_int32(self._handle, 0x2f80)
         return SyncType(val)
 
     @sync_type.setter
     def sync_type(self, val):
         val = val.value
-        self._interpreter.set_trig_attribute_int32(
-                self._handle, 0x2f80, val)
+        self._interpreter.set_trig_attribute_int32(self._handle, 0x2f80, val)
 
     @sync_type.deleter
     def sync_type(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2f80)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2f80)
 

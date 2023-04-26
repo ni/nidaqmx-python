@@ -38,6 +38,5 @@
         if attribute.has_explicit_write_buffer_size:
             function_call_args.append('len(val)')
     %>\
-        self._interpreter.set_${generic_attribute_func}(
-                ${', '.join(function_call_args) | wrap(12)})
+        self._interpreter.set_${generic_attribute_func}(${', '.join(function_call_args) | wrap(12)})
 </%def>

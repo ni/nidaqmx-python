@@ -63,8 +63,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_string(
-                self._name, 0x2fd8)
+        val = self._interpreter.get_physical_chan_attribute_string(self._name, 0x2fd8)
         return unflatten_channel_string(val)
 
     @property
@@ -75,8 +74,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_int32_array(
-                self._name, 0x2fd7)
+        val = self._interpreter.get_physical_chan_attribute_int32_array(self._name, 0x2fd7)
         return [UsageTypeAI(e) for e in val]
 
     @property
@@ -86,8 +84,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_bool(
-                self._name, 0x316d)
+        val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x316d)
         return val
 
     @ai_power_control_enable.setter
@@ -104,8 +101,7 @@ class PhysicalChannel:
 
     @ai_power_control_enable.deleter
     def ai_power_control_enable(self):
-        self._interpreter.reset_physical_chan_attribute(
-                self._name, 0x316d)
+        self._interpreter.reset_physical_chan_attribute(self._name, 0x316d)
 
     @property
     def ai_power_control_type(self):
@@ -115,8 +111,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_int32(
-                self._name, 0x316e)
+        val = self._interpreter.get_physical_chan_attribute_int32(self._name, 0x316e)
         return SensorPowerType(val)
 
     @ai_power_control_type.setter
@@ -134,8 +129,7 @@ class PhysicalChannel:
 
     @ai_power_control_type.deleter
     def ai_power_control_type(self):
-        self._interpreter.reset_physical_chan_attribute(
-                self._name, 0x316e)
+        self._interpreter.reset_physical_chan_attribute(self._name, 0x316e)
 
     @property
     def ai_power_control_voltage(self):
@@ -145,8 +139,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_double(
-                self._name, 0x316c)
+        val = self._interpreter.get_physical_chan_attribute_double(self._name, 0x316c)
         return val
 
     @ai_power_control_voltage.setter
@@ -164,8 +157,7 @@ class PhysicalChannel:
 
     @ai_power_control_voltage.deleter
     def ai_power_control_voltage(self):
-        self._interpreter.reset_physical_chan_attribute(
-                self._name, 0x316c)
+        self._interpreter.reset_physical_chan_attribute(self._name, 0x316c)
 
     @property
     def ai_sensor_power_open_chan(self):
@@ -175,8 +167,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_bool(
-                self._name, 0x317c)
+        val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x317c)
         return val
 
     @property
@@ -187,8 +178,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_bool(
-                self._name, 0x317d)
+        val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x317d)
         return val
 
     @property
@@ -200,8 +190,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_int32_array(
-                self._name, 0x3179)
+        val = self._interpreter.get_physical_chan_attribute_int32_array(self._name, 0x3179)
         return [SensorPowerType(e) for e in val]
 
     @property
@@ -213,8 +202,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_double_array(
-                self._name, 0x317a)
+        val = self._interpreter.get_physical_chan_attribute_double_array(self._name, 0x317a)
         return val
 
     @property
@@ -226,8 +214,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_int32(
-                self._name, 0x2342)
+        val = self._interpreter.get_physical_chan_attribute_int32(self._name, 0x2342)
         return enum_bitfield_to_list(
             val, _TermCfg, TerminalConfiguration)
 
@@ -239,8 +226,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_double(
-                self._name, 0x2a1f)
+        val = self._interpreter.get_physical_chan_attribute_double(self._name, 0x2a1f)
         return val
 
     @property
@@ -253,8 +239,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_bool(
-                self._name, 0x2a1e)
+        val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x2a1e)
         return val
 
     @ao_manual_control_enable.setter
@@ -272,8 +257,7 @@ class PhysicalChannel:
 
     @ao_manual_control_enable.deleter
     def ao_manual_control_enable(self):
-        self._interpreter.reset_physical_chan_attribute(
-                self._name, 0x2a1e)
+        self._interpreter.reset_physical_chan_attribute(self._name, 0x2a1e)
 
     @property
     def ao_manual_control_freq(self):
@@ -283,8 +267,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_double(
-                self._name, 0x2a20)
+        val = self._interpreter.get_physical_chan_attribute_double(self._name, 0x2a20)
         return val
 
     @property
@@ -295,8 +278,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_bool(
-                self._name, 0x2ec3)
+        val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x2ec3)
         return val
 
     @property
@@ -307,8 +289,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_int32_array(
-                self._name, 0x2fd9)
+        val = self._interpreter.get_physical_chan_attribute_int32_array(self._name, 0x2fd9)
         return [UsageTypeAO(e) for e in val]
 
     @property
@@ -320,8 +301,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_bool(
-                self._name, 0x3062)
+        val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x3062)
         return val
 
     @ao_power_amp_channel_enable.setter
@@ -338,8 +318,7 @@ class PhysicalChannel:
 
     @ao_power_amp_channel_enable.deleter
     def ao_power_amp_channel_enable(self):
-        self._interpreter.reset_physical_chan_attribute(
-                self._name, 0x3062)
+        self._interpreter.reset_physical_chan_attribute(self._name, 0x3062)
 
     @property
     def ao_power_amp_gain(self):
@@ -348,8 +327,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_double(
-                self._name, 0x3065)
+        val = self._interpreter.get_physical_chan_attribute_double(self._name, 0x3065)
         return val
 
     @property
@@ -359,8 +337,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_double(
-                self._name, 0x3066)
+        val = self._interpreter.get_physical_chan_attribute_double(self._name, 0x3066)
         return val
 
     @property
@@ -371,8 +348,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_bool(
-                self._name, 0x3064)
+        val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x3064)
         return val
 
     @property
@@ -383,8 +359,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_double_array(
-                self._name, 0x3063)
+        val = self._interpreter.get_physical_chan_attribute_double_array(self._name, 0x3063)
         return val
 
     @property
@@ -396,8 +371,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_int32_array(
-                self._name, 0x304e)
+        val = self._interpreter.get_physical_chan_attribute_int32_array(self._name, 0x304e)
         return [AOPowerUpOutputBehavior(e) for e in val]
 
     @property
@@ -409,8 +383,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_int32(
-                self._name, 0x29a3)
+        val = self._interpreter.get_physical_chan_attribute_int32(self._name, 0x29a3)
         return enum_bitfield_to_list(
             val, _TermCfg, TerminalConfiguration)
 
@@ -422,8 +395,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_int32_array(
-                self._name, 0x2fda)
+        val = self._interpreter.get_physical_chan_attribute_int32_array(self._name, 0x2fda)
         return [UsageTypeCI(e) for e in val]
 
     @property
@@ -434,8 +406,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_int32_array(
-                self._name, 0x2fdb)
+        val = self._interpreter.get_physical_chan_attribute_int32_array(self._name, 0x2fdb)
         return [UsageTypeCO(e) for e in val]
 
     @property
@@ -446,8 +417,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_bool(
-                self._name, 0x29a6)
+        val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x29a6)
         return val
 
     @property
@@ -457,8 +427,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_uint32(
-                self._name, 0x29a4)
+        val = self._interpreter.get_physical_chan_attribute_uint32(self._name, 0x29a4)
         return val
 
     @property
@@ -469,8 +438,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_bool(
-                self._name, 0x29a5)
+        val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x29a5)
         return val
 
     @property
@@ -482,8 +450,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_int32_array(
-                self._name, 0x2fe0)
+        val = self._interpreter.get_physical_chan_attribute_int32_array(self._name, 0x2fe0)
         return [AcquisitionType(e) for e in val]
 
     @property
@@ -493,8 +460,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_uint32(
-                self._name, 0x29a7)
+        val = self._interpreter.get_physical_chan_attribute_uint32(self._name, 0x29a7)
         return val
 
     @property
@@ -505,8 +471,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_bool(
-                self._name, 0x29a8)
+        val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x29a8)
         return val
 
     @property
@@ -518,8 +483,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_int32_array(
-                self._name, 0x2fe1)
+        val = self._interpreter.get_physical_chan_attribute_int32_array(self._name, 0x2fe1)
         return [AcquisitionType(e) for e in val]
 
     @property
@@ -530,8 +494,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_bytes(
-                self._name, 0x21df)
+        val = self._interpreter.get_physical_chan_attribute_bytes(self._name, 0x21df)
         return val
 
     @property
@@ -541,8 +504,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_uint32(
-                self._name, 0x21da)
+        val = self._interpreter.get_physical_chan_attribute_uint32(self._name, 0x21da)
         return val
 
     @property
@@ -552,8 +514,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_uint32(
-                self._name, 0x21db)
+        val = self._interpreter.get_physical_chan_attribute_uint32(self._name, 0x21db)
         return val
 
     @property
@@ -563,8 +524,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_uint32(
-                self._name, 0x21dc)
+        val = self._interpreter.get_physical_chan_attribute_uint32(self._name, 0x21dc)
         return val
 
     @property
@@ -575,8 +535,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_uint32_array(
-                self._name, 0x228f)
+        val = self._interpreter.get_physical_chan_attribute_uint32_array(self._name, 0x228f)
         return val
 
     @property
@@ -586,8 +545,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_string(
-                self._name, 0x21de)
+        val = self._interpreter.get_physical_chan_attribute_string(self._name, 0x21de)
         return val
 
     @property
@@ -597,8 +555,7 @@ class PhysicalChannel:
         """
 
 
-        val = self._interpreter.get_physical_chan_attribute_uint32(
-                self._name, 0x21dd)
+        val = self._interpreter.get_physical_chan_attribute_uint32(self._name, 0x21dd)
         return val
 
     def clear_teds(self):

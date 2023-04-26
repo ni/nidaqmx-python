@@ -27,19 +27,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_double(
-                self._handle, 0x1757)
+        val = self._interpreter.get_exported_signal_attribute_double(self._handle, 0x1757)
         return val
 
     @adv_cmplt_event_delay.setter
     def adv_cmplt_event_delay(self, val):
-        self._interpreter.set_exported_signal_attribute_double(
-                self._handle, 0x1757, val)
+        self._interpreter.set_exported_signal_attribute_double(self._handle, 0x1757, val)
 
     @adv_cmplt_event_delay.deleter
     def adv_cmplt_event_delay(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1757)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1757)
 
     @property
     def adv_cmplt_event_output_term(self):
@@ -49,19 +46,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x1651)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1651)
         return val
 
     @adv_cmplt_event_output_term.setter
     def adv_cmplt_event_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x1651, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1651, val)
 
     @adv_cmplt_event_output_term.deleter
     def adv_cmplt_event_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1651)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1651)
 
     @property
     def adv_cmplt_event_pulse_polarity(self):
@@ -71,20 +65,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x1652)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1652)
         return Polarity(val)
 
     @adv_cmplt_event_pulse_polarity.setter
     def adv_cmplt_event_pulse_polarity(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x1652, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x1652, val)
 
     @adv_cmplt_event_pulse_polarity.deleter
     def adv_cmplt_event_pulse_polarity(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1652)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1652)
 
     @property
     def adv_cmplt_event_pulse_width(self):
@@ -94,19 +85,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_double(
-                self._handle, 0x1654)
+        val = self._interpreter.get_exported_signal_attribute_double(self._handle, 0x1654)
         return val
 
     @adv_cmplt_event_pulse_width.setter
     def adv_cmplt_event_pulse_width(self, val):
-        self._interpreter.set_exported_signal_attribute_double(
-                self._handle, 0x1654, val)
+        self._interpreter.set_exported_signal_attribute_double(self._handle, 0x1654, val)
 
     @adv_cmplt_event_pulse_width.deleter
     def adv_cmplt_event_pulse_width(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1654)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1654)
 
     @property
     def adv_trig_output_term(self):
@@ -116,19 +104,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x1645)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1645)
         return val
 
     @adv_trig_output_term.setter
     def adv_trig_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x1645, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1645, val)
 
     @adv_trig_output_term.deleter
     def adv_trig_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1645)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1645)
 
     @property
     def adv_trig_pulse_polarity(self):
@@ -138,8 +123,7 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x1646)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1646)
         return Polarity(val)
 
     @property
@@ -151,19 +135,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_double(
-                self._handle, 0x1648)
+        val = self._interpreter.get_exported_signal_attribute_double(self._handle, 0x1648)
         return val
 
     @adv_trig_pulse_width.setter
     def adv_trig_pulse_width(self, val):
-        self._interpreter.set_exported_signal_attribute_double(
-                self._handle, 0x1648, val)
+        self._interpreter.set_exported_signal_attribute_double(self._handle, 0x1648, val)
 
     @adv_trig_pulse_width.deleter
     def adv_trig_pulse_width(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1648)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1648)
 
     @property
     def adv_trig_pulse_width_units(self):
@@ -173,20 +154,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x1647)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1647)
         return DigitalWidthUnits(val)
 
     @adv_trig_pulse_width_units.setter
     def adv_trig_pulse_width_units(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x1647, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x1647, val)
 
     @adv_trig_pulse_width_units.deleter
     def adv_trig_pulse_width_units(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1647)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1647)
 
     @property
     def ai_conv_clk_output_term(self):
@@ -196,19 +174,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x1687)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1687)
         return val
 
     @ai_conv_clk_output_term.setter
     def ai_conv_clk_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x1687, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1687, val)
 
     @ai_conv_clk_output_term.deleter
     def ai_conv_clk_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1687)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1687)
 
     @property
     def ai_conv_clk_pulse_polarity(self):
@@ -220,8 +195,7 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x1688)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1688)
         return Polarity(val)
 
     @property
@@ -232,19 +206,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x18ed)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x18ed)
         return val
 
     @ai_hold_cmplt_event_output_term.setter
     def ai_hold_cmplt_event_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x18ed, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x18ed, val)
 
     @ai_hold_cmplt_event_output_term.deleter
     def ai_hold_cmplt_event_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x18ed)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x18ed)
 
     @property
     def ai_hold_cmplt_event_pulse_polarity(self):
@@ -254,20 +225,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x18ee)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x18ee)
         return Polarity(val)
 
     @ai_hold_cmplt_event_pulse_polarity.setter
     def ai_hold_cmplt_event_pulse_polarity(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x18ee, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x18ee, val)
 
     @ai_hold_cmplt_event_pulse_polarity.deleter
     def ai_hold_cmplt_event_pulse_polarity(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x18ee)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x18ee)
 
     @property
     def change_detect_event_output_term(self):
@@ -277,19 +245,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x2197)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x2197)
         return val
 
     @change_detect_event_output_term.setter
     def change_detect_event_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x2197, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x2197, val)
 
     @change_detect_event_output_term.deleter
     def change_detect_event_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x2197)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x2197)
 
     @property
     def change_detect_event_pulse_polarity(self):
@@ -299,20 +264,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x2303)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x2303)
         return Polarity(val)
 
     @change_detect_event_pulse_polarity.setter
     def change_detect_event_pulse_polarity(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x2303, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x2303, val)
 
     @change_detect_event_pulse_polarity.deleter
     def change_detect_event_pulse_polarity(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x2303)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x2303)
 
     @property
     def ctr_out_event_output_behavior(self):
@@ -323,20 +285,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x174f)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x174f)
         return ExportAction(val)
 
     @ctr_out_event_output_behavior.setter
     def ctr_out_event_output_behavior(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x174f, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x174f, val)
 
     @ctr_out_event_output_behavior.deleter
     def ctr_out_event_output_behavior(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x174f)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x174f)
 
     @property
     def ctr_out_event_output_term(self):
@@ -346,19 +305,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x1717)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1717)
         return val
 
     @ctr_out_event_output_term.setter
     def ctr_out_event_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x1717, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1717, val)
 
     @ctr_out_event_output_term.deleter
     def ctr_out_event_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1717)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1717)
 
     @property
     def ctr_out_event_pulse_polarity(self):
@@ -372,20 +328,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x1718)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1718)
         return Polarity(val)
 
     @ctr_out_event_pulse_polarity.setter
     def ctr_out_event_pulse_polarity(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x1718, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x1718, val)
 
     @ctr_out_event_pulse_polarity.deleter
     def ctr_out_event_pulse_polarity(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1718)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1718)
 
     @property
     def ctr_out_event_toggle_idle_state(self):
@@ -398,20 +351,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x186a)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x186a)
         return Level(val)
 
     @ctr_out_event_toggle_idle_state.setter
     def ctr_out_event_toggle_idle_state(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x186a, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x186a, val)
 
     @ctr_out_event_toggle_idle_state.deleter
     def ctr_out_event_toggle_idle_state(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x186a)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x186a)
 
     @property
     def data_active_event_lvl_active_lvl(self):
@@ -421,20 +371,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x1634)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1634)
         return Polarity(val)
 
     @data_active_event_lvl_active_lvl.setter
     def data_active_event_lvl_active_lvl(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x1634, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x1634, val)
 
     @data_active_event_lvl_active_lvl.deleter
     def data_active_event_lvl_active_lvl(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1634)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1634)
 
     @property
     def data_active_event_output_term(self):
@@ -444,19 +391,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x1633)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1633)
         return val
 
     @data_active_event_output_term.setter
     def data_active_event_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x1633, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1633, val)
 
     @data_active_event_output_term.deleter
     def data_active_event_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1633)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1633)
 
     @property
     def divided_samp_clk_timebase_output_term(self):
@@ -466,19 +410,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x21a1)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x21a1)
         return val
 
     @divided_samp_clk_timebase_output_term.setter
     def divided_samp_clk_timebase_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x21a1, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x21a1, val)
 
     @divided_samp_clk_timebase_output_term.deleter
     def divided_samp_clk_timebase_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x21a1)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x21a1)
 
     @property
     def exported_10_mhz_ref_clk_output_term(self):
@@ -487,19 +428,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x226e)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x226e)
         return val
 
     @exported_10_mhz_ref_clk_output_term.setter
     def exported_10_mhz_ref_clk_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x226e, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x226e, val)
 
     @exported_10_mhz_ref_clk_output_term.deleter
     def exported_10_mhz_ref_clk_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x226e)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x226e)
 
     @property
     def exported_20_mhz_timebase_output_term(self):
@@ -509,19 +447,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x1657)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1657)
         return val
 
     @exported_20_mhz_timebase_output_term.setter
     def exported_20_mhz_timebase_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x1657, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1657, val)
 
     @exported_20_mhz_timebase_output_term.deleter
     def exported_20_mhz_timebase_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1657)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1657)
 
     @property
     def hshk_event_delay(self):
@@ -532,19 +467,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_double(
-                self._handle, 0x22bc)
+        val = self._interpreter.get_exported_signal_attribute_double(self._handle, 0x22bc)
         return val
 
     @hshk_event_delay.setter
     def hshk_event_delay(self, val):
-        self._interpreter.set_exported_signal_attribute_double(
-                self._handle, 0x22bc, val)
+        self._interpreter.set_exported_signal_attribute_double(self._handle, 0x22bc, val)
 
     @hshk_event_delay.deleter
     def hshk_event_delay(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x22bc)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x22bc)
 
     @property
     def hshk_event_interlocked_assert_on_start(self):
@@ -555,19 +487,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_bool(
-                self._handle, 0x22be)
+        val = self._interpreter.get_exported_signal_attribute_bool(self._handle, 0x22be)
         return val
 
     @hshk_event_interlocked_assert_on_start.setter
     def hshk_event_interlocked_assert_on_start(self, val):
-        self._interpreter.set_exported_signal_attribute_bool(
-                self._handle, 0x22be, val)
+        self._interpreter.set_exported_signal_attribute_bool(self._handle, 0x22be, val)
 
     @hshk_event_interlocked_assert_on_start.deleter
     def hshk_event_interlocked_assert_on_start(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x22be)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x22be)
 
     @property
     def hshk_event_interlocked_asserted_lvl(self):
@@ -579,20 +508,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x22bd)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x22bd)
         return Level(val)
 
     @hshk_event_interlocked_asserted_lvl.setter
     def hshk_event_interlocked_asserted_lvl(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x22bd, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x22bd, val)
 
     @hshk_event_interlocked_asserted_lvl.deleter
     def hshk_event_interlocked_asserted_lvl(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x22bd)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x22bd)
 
     @property
     def hshk_event_interlocked_deassert_delay(self):
@@ -604,19 +530,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_double(
-                self._handle, 0x22bf)
+        val = self._interpreter.get_exported_signal_attribute_double(self._handle, 0x22bf)
         return val
 
     @hshk_event_interlocked_deassert_delay.setter
     def hshk_event_interlocked_deassert_delay(self, val):
-        self._interpreter.set_exported_signal_attribute_double(
-                self._handle, 0x22bf, val)
+        self._interpreter.set_exported_signal_attribute_double(self._handle, 0x22bf, val)
 
     @hshk_event_interlocked_deassert_delay.deleter
     def hshk_event_interlocked_deassert_delay(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x22bf)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x22bf)
 
     @property
     def hshk_event_output_behavior(self):
@@ -626,20 +549,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x22bb)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x22bb)
         return ExportAction(val)
 
     @hshk_event_output_behavior.setter
     def hshk_event_output_behavior(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x22bb, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x22bb, val)
 
     @hshk_event_output_behavior.deleter
     def hshk_event_output_behavior(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x22bb)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x22bb)
 
     @property
     def hshk_event_output_term(self):
@@ -649,19 +569,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x22ba)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x22ba)
         return val
 
     @hshk_event_output_term.setter
     def hshk_event_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x22ba, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x22ba, val)
 
     @hshk_event_output_term.deleter
     def hshk_event_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x22ba)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x22ba)
 
     @property
     def hshk_event_pulse_polarity(self):
@@ -672,20 +589,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x22c0)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x22c0)
         return Polarity(val)
 
     @hshk_event_pulse_polarity.setter
     def hshk_event_pulse_polarity(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x22c0, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x22c0, val)
 
     @hshk_event_pulse_polarity.deleter
     def hshk_event_pulse_polarity(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x22c0)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x22c0)
 
     @property
     def hshk_event_pulse_width(self):
@@ -696,19 +610,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_double(
-                self._handle, 0x22c1)
+        val = self._interpreter.get_exported_signal_attribute_double(self._handle, 0x22c1)
         return val
 
     @hshk_event_pulse_width.setter
     def hshk_event_pulse_width(self, val):
-        self._interpreter.set_exported_signal_attribute_double(
-                self._handle, 0x22c1, val)
+        self._interpreter.set_exported_signal_attribute_double(self._handle, 0x22c1, val)
 
     @hshk_event_pulse_width.deleter
     def hshk_event_pulse_width(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x22c1)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x22c1)
 
     @property
     def pause_trig_lvl_active_lvl(self):
@@ -718,20 +629,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x1616)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1616)
         return Polarity(val)
 
     @pause_trig_lvl_active_lvl.setter
     def pause_trig_lvl_active_lvl(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x1616, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x1616, val)
 
     @pause_trig_lvl_active_lvl.deleter
     def pause_trig_lvl_active_lvl(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1616)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1616)
 
     @property
     def pause_trig_output_term(self):
@@ -740,19 +648,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x1615)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1615)
         return val
 
     @pause_trig_output_term.setter
     def pause_trig_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x1615, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1615, val)
 
     @pause_trig_output_term.deleter
     def pause_trig_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1615)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1615)
 
     @property
     def rdy_for_start_event_lvl_active_lvl(self):
@@ -762,20 +667,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x1751)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1751)
         return Polarity(val)
 
     @rdy_for_start_event_lvl_active_lvl.setter
     def rdy_for_start_event_lvl_active_lvl(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x1751, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x1751, val)
 
     @rdy_for_start_event_lvl_active_lvl.deleter
     def rdy_for_start_event_lvl_active_lvl(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1751)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1751)
 
     @property
     def rdy_for_start_event_output_term(self):
@@ -785,19 +687,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x1609)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1609)
         return val
 
     @rdy_for_start_event_output_term.setter
     def rdy_for_start_event_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x1609, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1609, val)
 
     @rdy_for_start_event_output_term.deleter
     def rdy_for_start_event_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1609)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1609)
 
     @property
     def rdy_for_xfer_event_deassert_cond(self):
@@ -807,20 +706,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x2963)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x2963)
         return DeassertCondition(val)
 
     @rdy_for_xfer_event_deassert_cond.setter
     def rdy_for_xfer_event_deassert_cond(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x2963, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x2963, val)
 
     @rdy_for_xfer_event_deassert_cond.deleter
     def rdy_for_xfer_event_deassert_cond(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x2963)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x2963)
 
     @property
     def rdy_for_xfer_event_deassert_cond_custom_threshold(self):
@@ -834,19 +730,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_uint32(
-                self._handle, 0x2964)
+        val = self._interpreter.get_exported_signal_attribute_uint32(self._handle, 0x2964)
         return val
 
     @rdy_for_xfer_event_deassert_cond_custom_threshold.setter
     def rdy_for_xfer_event_deassert_cond_custom_threshold(self, val):
-        self._interpreter.set_exported_signal_attribute_uint32(
-                self._handle, 0x2964, val)
+        self._interpreter.set_exported_signal_attribute_uint32(self._handle, 0x2964, val)
 
     @rdy_for_xfer_event_deassert_cond_custom_threshold.deleter
     def rdy_for_xfer_event_deassert_cond_custom_threshold(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x2964)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x2964)
 
     @property
     def rdy_for_xfer_event_lvl_active_lvl(self):
@@ -856,20 +749,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x22b6)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x22b6)
         return Polarity(val)
 
     @rdy_for_xfer_event_lvl_active_lvl.setter
     def rdy_for_xfer_event_lvl_active_lvl(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x22b6, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x22b6, val)
 
     @rdy_for_xfer_event_lvl_active_lvl.deleter
     def rdy_for_xfer_event_lvl_active_lvl(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x22b6)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x22b6)
 
     @property
     def rdy_for_xfer_event_output_term(self):
@@ -879,19 +769,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x22b5)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x22b5)
         return val
 
     @rdy_for_xfer_event_output_term.setter
     def rdy_for_xfer_event_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x22b5, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x22b5, val)
 
     @rdy_for_xfer_event_output_term.deleter
     def rdy_for_xfer_event_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x22b5)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x22b5)
 
     @property
     def ref_trig_output_term(self):
@@ -901,19 +788,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x590)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x590)
         return val
 
     @ref_trig_output_term.setter
     def ref_trig_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x590, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x590, val)
 
     @ref_trig_output_term.deleter
     def ref_trig_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x590)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x590)
 
     @property
     def ref_trig_pulse_polarity(self):
@@ -923,20 +807,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x591)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x591)
         return Polarity(val)
 
     @ref_trig_pulse_polarity.setter
     def ref_trig_pulse_polarity(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x591, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x591, val)
 
     @ref_trig_pulse_polarity.deleter
     def ref_trig_pulse_polarity(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x591)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x591)
 
     @property
     def samp_clk_delay_offset(self):
@@ -948,19 +829,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_double(
-                self._handle, 0x21c4)
+        val = self._interpreter.get_exported_signal_attribute_double(self._handle, 0x21c4)
         return val
 
     @samp_clk_delay_offset.setter
     def samp_clk_delay_offset(self, val):
-        self._interpreter.set_exported_signal_attribute_double(
-                self._handle, 0x21c4, val)
+        self._interpreter.set_exported_signal_attribute_double(self._handle, 0x21c4, val)
 
     @samp_clk_delay_offset.deleter
     def samp_clk_delay_offset(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x21c4)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x21c4)
 
     @property
     def samp_clk_output_behavior(self):
@@ -972,20 +850,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x186b)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x186b)
         return ExportAction(val)
 
     @samp_clk_output_behavior.setter
     def samp_clk_output_behavior(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x186b, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x186b, val)
 
     @samp_clk_output_behavior.deleter
     def samp_clk_output_behavior(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x186b)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x186b)
 
     @property
     def samp_clk_output_term(self):
@@ -994,19 +869,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x1663)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1663)
         return val
 
     @samp_clk_output_term.setter
     def samp_clk_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x1663, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1663, val)
 
     @samp_clk_output_term.deleter
     def samp_clk_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1663)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1663)
 
     @property
     def samp_clk_pulse_polarity(self):
@@ -1017,20 +889,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x1664)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1664)
         return Polarity(val)
 
     @samp_clk_pulse_polarity.setter
     def samp_clk_pulse_polarity(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x1664, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x1664, val)
 
     @samp_clk_pulse_polarity.deleter
     def samp_clk_pulse_polarity(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x1664)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x1664)
 
     @property
     def samp_clk_timebase_output_term(self):
@@ -1040,19 +909,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x18f9)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x18f9)
         return val
 
     @samp_clk_timebase_output_term.setter
     def samp_clk_timebase_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x18f9, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x18f9, val)
 
     @samp_clk_timebase_output_term.deleter
     def samp_clk_timebase_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x18f9)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x18f9)
 
     @property
     def start_trig_output_term(self):
@@ -1061,19 +927,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x584)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x584)
         return val
 
     @start_trig_output_term.setter
     def start_trig_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x584, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x584, val)
 
     @start_trig_output_term.deleter
     def start_trig_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x584)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x584)
 
     @property
     def start_trig_pulse_polarity(self):
@@ -1083,20 +946,17 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_int32(
-                self._handle, 0x585)
+        val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x585)
         return Polarity(val)
 
     @start_trig_pulse_polarity.setter
     def start_trig_pulse_polarity(self, val):
         val = val.value
-        self._interpreter.set_exported_signal_attribute_int32(
-                self._handle, 0x585, val)
+        self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x585, val)
 
     @start_trig_pulse_polarity.deleter
     def start_trig_pulse_polarity(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x585)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x585)
 
     @property
     def sync_pulse_event_output_term(self):
@@ -1106,19 +966,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x223c)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x223c)
         return val
 
     @sync_pulse_event_output_term.setter
     def sync_pulse_event_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x223c, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x223c, val)
 
     @sync_pulse_event_output_term.deleter
     def sync_pulse_event_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x223c)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x223c)
 
     @property
     def watchdog_expired_event_output_term(self):
@@ -1128,19 +985,16 @@ class ExportSignals:
         """
 
 
-        val = self._interpreter.get_exported_signal_attribute_string(
-                self._handle, 0x21aa)
+        val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x21aa)
         return val
 
     @watchdog_expired_event_output_term.setter
     def watchdog_expired_event_output_term(self, val):
-        self._interpreter.set_exported_signal_attribute_string(
-                self._handle, 0x21aa, val)
+        self._interpreter.set_exported_signal_attribute_string(self._handle, 0x21aa, val)
 
     @watchdog_expired_event_output_term.deleter
     def watchdog_expired_event_output_term(self):
-        self._interpreter.reset_exported_signal_attribute(
-                self._handle, 0x21aa)
+        self._interpreter.reset_exported_signal_attribute(self._handle, 0x21aa)
 
     def export_signal(self, signal_id, output_terminal):
         """

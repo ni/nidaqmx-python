@@ -17,6 +17,5 @@
         function_call_args.append(hex(attribute.id))
 
     %>\
-        self._interpreter.reset_${generic_attribute_func}(
-                ${', '.join(function_call_args) | wrap(12)})
+        self._interpreter.reset_${generic_attribute_func}(${', '.join(function_call_args) | wrap(12)})
 </%def>

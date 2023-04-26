@@ -200,8 +200,7 @@ class Channel:
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x187f)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x187f)
         return ChannelType(val)
 
     @property
@@ -211,19 +210,16 @@ class Channel:
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x1926)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x1926)
         return val
 
     @description.setter
     def description(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x1926, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x1926, val)
 
     @description.deleter
     def description(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x1926)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x1926)
 
     @property
     def is_global(self):
@@ -232,8 +228,7 @@ class Channel:
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2304)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2304)
         return val
 
     @property
@@ -245,15 +240,13 @@ class Channel:
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x18f5)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18f5)
         return PhysicalChannel(val)
 
     @physical_channel.setter
     def physical_channel(self, val):
         val = val.name
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x18f5, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x18f5, val)
 
     @property
     def sync_unlock_behavior(self):
@@ -264,20 +257,17 @@ class Channel:
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x313c)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x313c)
         return SyncUnlockBehavior(val)
 
     @sync_unlock_behavior.setter
     def sync_unlock_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x313c, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x313c, val)
 
     @sync_unlock_behavior.deleter
     def sync_unlock_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x313c)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x313c)
 
     def save(self, save_as="", author="", overwrite_existing_channel=False,
              allow_interactive_editing=True, allow_interactive_deletion=True):

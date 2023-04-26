@@ -99,8 +99,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_bool(
-                self._handle, 0x3053)
+        val = self._interpreter.get_write_attribute_bool(self._handle, 0x3053)
         return val
 
     @property
@@ -112,8 +111,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_uint64(
-                self._handle, 0x1458)
+        val = self._interpreter.get_write_attribute_uint64(self._handle, 0x1458)
         return val
 
     @property
@@ -127,8 +125,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_string(
-                self._handle, 0x3054)
+        val = self._interpreter.get_write_attribute_string(self._handle, 0x3054)
         return unflatten_channel_string(val)
 
     @property
@@ -142,8 +139,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_uint32(
-                self._handle, 0x217f)
+        val = self._interpreter.get_write_attribute_uint32(self._handle, 0x217f)
         return val
 
     @property
@@ -157,8 +153,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_string(
-                self._handle, 0x30bc)
+        val = self._interpreter.get_write_attribute_string(self._handle, 0x30bc)
         return unflatten_channel_string(val)
 
     @property
@@ -173,8 +168,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_bool(
-                self._handle, 0x30bb)
+        val = self._interpreter.get_write_attribute_bool(self._handle, 0x30bb)
         return val
 
     @property
@@ -185,8 +179,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_uint32(
-                self._handle, 0x217e)
+        val = self._interpreter.get_write_attribute_uint32(self._handle, 0x217e)
         return val
 
     @property
@@ -198,19 +191,16 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_int32(
-                self._handle, 0x190d)
+        val = self._interpreter.get_write_attribute_int32(self._handle, 0x190d)
         return val
 
     @offset.setter
     def offset(self, val):
-        self._interpreter.set_write_attribute_int32(
-                self._handle, 0x190d, val)
+        self._interpreter.set_write_attribute_int32(self._handle, 0x190d, val)
 
     @offset.deleter
     def offset(self):
-        self._interpreter.reset_write_attribute(
-                self._handle, 0x190d)
+        self._interpreter.reset_write_attribute(self._handle, 0x190d)
 
     @property
     def open_current_loop_chans(self):
@@ -223,8 +213,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_string(
-                self._handle, 0x29eb)
+        val = self._interpreter.get_write_attribute_string(self._handle, 0x29eb)
         return unflatten_channel_string(val)
 
     @property
@@ -239,8 +228,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_bool(
-                self._handle, 0x29ea)
+        val = self._interpreter.get_write_attribute_bool(self._handle, 0x29ea)
         return val
 
     @property
@@ -255,19 +243,16 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_buffer_attribute_uint32(
-                self._handle, 0x186d)
+        val = self._interpreter.get_buffer_attribute_uint32(self._handle, 0x186d)
         return val
 
     @output_buf_size.setter
     def output_buf_size(self, val):
-        self._interpreter.set_buffer_attribute_uint32(
-                self._handle, 0x186d, val)
+        self._interpreter.set_buffer_attribute_uint32(self._handle, 0x186d, val)
 
     @output_buf_size.deleter
     def output_buf_size(self):
-        self._interpreter.reset_buffer_attribute(
-                self._handle, 0x186d)
+        self._interpreter.reset_buffer_attribute(self._handle, 0x186d)
 
     @property
     def output_onbrd_buf_size(self):
@@ -277,19 +262,16 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_buffer_attribute_uint32(
-                self._handle, 0x230b)
+        val = self._interpreter.get_buffer_attribute_uint32(self._handle, 0x230b)
         return val
 
     @output_onbrd_buf_size.setter
     def output_onbrd_buf_size(self, val):
-        self._interpreter.set_buffer_attribute_uint32(
-                self._handle, 0x230b, val)
+        self._interpreter.set_buffer_attribute_uint32(self._handle, 0x230b, val)
 
     @output_onbrd_buf_size.deleter
     def output_onbrd_buf_size(self):
-        self._interpreter.reset_buffer_attribute(
-                self._handle, 0x230b)
+        self._interpreter.reset_buffer_attribute(self._handle, 0x230b)
 
     @property
     def overcurrent_chans(self):
@@ -302,8 +284,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_string(
-                self._handle, 0x29e9)
+        val = self._interpreter.get_write_attribute_string(self._handle, 0x29e9)
         return unflatten_channel_string(val)
 
     @property
@@ -317,8 +298,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_bool(
-                self._handle, 0x29e8)
+        val = self._interpreter.get_write_attribute_bool(self._handle, 0x29e8)
         return val
 
     @property
@@ -331,8 +311,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_string(
-                self._handle, 0x3085)
+        val = self._interpreter.get_write_attribute_string(self._handle, 0x3085)
         return unflatten_channel_string(val)
 
     @property
@@ -346,8 +325,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_bool(
-                self._handle, 0x3084)
+        val = self._interpreter.get_write_attribute_bool(self._handle, 0x3084)
         return val
 
     @property
@@ -362,8 +340,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_string(
-                self._handle, 0x3083)
+        val = self._interpreter.get_write_attribute_string(self._handle, 0x3083)
         return unflatten_channel_string(val)
 
     @property
@@ -378,8 +355,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_bool(
-                self._handle, 0x2a84)
+        val = self._interpreter.get_write_attribute_bool(self._handle, 0x2a84)
         return val
 
     @property
@@ -392,8 +368,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_string(
-                self._handle, 0x29ed)
+        val = self._interpreter.get_write_attribute_string(self._handle, 0x29ed)
         return unflatten_channel_string(val)
 
     @property
@@ -408,8 +383,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_bool(
-                self._handle, 0x29ec)
+        val = self._interpreter.get_write_attribute_bool(self._handle, 0x29ec)
         return val
 
     @property
@@ -420,8 +394,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_uint32(
-                self._handle, 0x217d)
+        val = self._interpreter.get_write_attribute_uint32(self._handle, 0x217d)
         return val
 
     @property
@@ -432,20 +405,17 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_int32(
-                self._handle, 0x1453)
+        val = self._interpreter.get_write_attribute_int32(self._handle, 0x1453)
         return RegenerationMode(val)
 
     @regen_mode.setter
     def regen_mode(self, val):
         val = val.value
-        self._interpreter.set_write_attribute_int32(
-                self._handle, 0x1453, val)
+        self._interpreter.set_write_attribute_int32(self._handle, 0x1453, val)
 
     @regen_mode.deleter
     def regen_mode(self):
-        self._interpreter.reset_write_attribute(
-                self._handle, 0x1453)
+        self._interpreter.reset_write_attribute(self._handle, 0x1453)
 
     @property
     def relative_to(self):
@@ -457,20 +427,17 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_int32(
-                self._handle, 0x190c)
+        val = self._interpreter.get_write_attribute_int32(self._handle, 0x190c)
         return WriteRelativeTo(val)
 
     @relative_to.setter
     def relative_to(self, val):
         val = val.value
-        self._interpreter.set_write_attribute_int32(
-                self._handle, 0x190c, val)
+        self._interpreter.set_write_attribute_int32(self._handle, 0x190c, val)
 
     @relative_to.deleter
     def relative_to(self):
-        self._interpreter.reset_write_attribute(
-                self._handle, 0x190c)
+        self._interpreter.reset_write_attribute(self._handle, 0x190c)
 
     @property
     def sleep_time(self):
@@ -481,19 +448,16 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_double(
-                self._handle, 0x22b2)
+        val = self._interpreter.get_write_attribute_double(self._handle, 0x22b2)
         return val
 
     @sleep_time.setter
     def sleep_time(self, val):
-        self._interpreter.set_write_attribute_double(
-                self._handle, 0x22b2, val)
+        self._interpreter.set_write_attribute_double(self._handle, 0x22b2, val)
 
     @sleep_time.deleter
     def sleep_time(self):
-        self._interpreter.reset_write_attribute(
-                self._handle, 0x22b2)
+        self._interpreter.reset_write_attribute(self._handle, 0x22b2)
 
     @property
     def space_avail(self):
@@ -503,8 +467,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_uint32(
-                self._handle, 0x1460)
+        val = self._interpreter.get_write_attribute_uint32(self._handle, 0x1460)
         return val
 
     @property
@@ -515,8 +478,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_string(
-                self._handle, 0x3140)
+        val = self._interpreter.get_write_attribute_string(self._handle, 0x3140)
         return unflatten_channel_string(val)
 
     @property
@@ -528,8 +490,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_bool(
-                self._handle, 0x313f)
+        val = self._interpreter.get_write_attribute_bool(self._handle, 0x313f)
         return val
 
     @property
@@ -541,8 +502,7 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_uint64(
-                self._handle, 0x192b)
+        val = self._interpreter.get_write_attribute_uint64(self._handle, 0x192b)
         return val
 
     @property
@@ -553,20 +513,17 @@ class OutStream:
         """
 
 
-        val = self._interpreter.get_write_attribute_int32(
-                self._handle, 0x22b1)
+        val = self._interpreter.get_write_attribute_int32(self._handle, 0x22b1)
         return WaitMode(val)
 
     @wait_mode.setter
     def wait_mode(self, val):
         val = val.value
-        self._interpreter.set_write_attribute_int32(
-                self._handle, 0x22b1, val)
+        self._interpreter.set_write_attribute_int32(self._handle, 0x22b1, val)
 
     @wait_mode.deleter
     def wait_mode(self):
-        self._interpreter.reset_write_attribute(
-                self._handle, 0x22b1)
+        self._interpreter.reset_write_attribute(self._handle, 0x22b1)
 
     def write(self, numpy_array):
         """

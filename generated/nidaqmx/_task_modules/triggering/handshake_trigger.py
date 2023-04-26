@@ -27,20 +27,17 @@ class HandshakeTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 0x22b9)
+        val = self._interpreter.get_trig_attribute_int32(self._handle, 0x22b9)
         return Level(val)
 
     @interlocked_asserted_lvl.setter
     def interlocked_asserted_lvl(self, val):
         val = val.value
-        self._interpreter.set_trig_attribute_int32(
-                self._handle, 0x22b9, val)
+        self._interpreter.set_trig_attribute_int32(self._handle, 0x22b9, val)
 
     @interlocked_asserted_lvl.deleter
     def interlocked_asserted_lvl(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x22b9)
+        self._interpreter.reset_trig_attribute(self._handle, 0x22b9)
 
     @property
     def interlocked_src(self):
@@ -49,19 +46,16 @@ class HandshakeTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_string(
-                self._handle, 0x22b8)
+        val = self._interpreter.get_trig_attribute_string(self._handle, 0x22b8)
         return val
 
     @interlocked_src.setter
     def interlocked_src(self, val):
-        self._interpreter.set_trig_attribute_string(
-                self._handle, 0x22b8, val)
+        self._interpreter.set_trig_attribute_string(self._handle, 0x22b8, val)
 
     @interlocked_src.deleter
     def interlocked_src(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x22b8)
+        self._interpreter.reset_trig_attribute(self._handle, 0x22b8)
 
     @property
     def trig_type(self):
@@ -71,18 +65,15 @@ class HandshakeTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 0x22b7)
+        val = self._interpreter.get_trig_attribute_int32(self._handle, 0x22b7)
         return TriggerType(val)
 
     @trig_type.setter
     def trig_type(self, val):
         val = val.value
-        self._interpreter.set_trig_attribute_int32(
-                self._handle, 0x22b7, val)
+        self._interpreter.set_trig_attribute_int32(self._handle, 0x22b7, val)
 
     @trig_type.deleter
     def trig_type(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x22b7)
+        self._interpreter.reset_trig_attribute(self._handle, 0x22b7)
 

@@ -30,20 +30,17 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 0x2236)
+        val = self._interpreter.get_trig_attribute_int32(self._handle, 0x2236)
         return Coupling(val)
 
     @anlg_lvl_coupling.setter
     def anlg_lvl_coupling(self, val):
         val = val.value
-        self._interpreter.set_trig_attribute_int32(
-                self._handle, 0x2236, val)
+        self._interpreter.set_trig_attribute_int32(self._handle, 0x2236, val)
 
     @anlg_lvl_coupling.deleter
     def anlg_lvl_coupling(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2236)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2236)
 
     @property
     def anlg_lvl_dig_fltr_enable(self):
@@ -58,19 +55,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 0x2ef0)
+        val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2ef0)
         return val
 
     @anlg_lvl_dig_fltr_enable.setter
     def anlg_lvl_dig_fltr_enable(self, val):
-        self._interpreter.set_trig_attribute_bool(
-                self._handle, 0x2ef0, val)
+        self._interpreter.set_trig_attribute_bool(self._handle, 0x2ef0, val)
 
     @anlg_lvl_dig_fltr_enable.deleter
     def anlg_lvl_dig_fltr_enable(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2ef0)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2ef0)
 
     @property
     def anlg_lvl_dig_fltr_min_pulse_width(self):
@@ -80,19 +74,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_double(
-                self._handle, 0x2ef1)
+        val = self._interpreter.get_trig_attribute_double(self._handle, 0x2ef1)
         return val
 
     @anlg_lvl_dig_fltr_min_pulse_width.setter
     def anlg_lvl_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_trig_attribute_double(
-                self._handle, 0x2ef1, val)
+        self._interpreter.set_trig_attribute_double(self._handle, 0x2ef1, val)
 
     @anlg_lvl_dig_fltr_min_pulse_width.deleter
     def anlg_lvl_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2ef1)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2ef1)
 
     @property
     def anlg_lvl_dig_fltr_timebase_rate(self):
@@ -103,19 +94,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_double(
-                self._handle, 0x2ef3)
+        val = self._interpreter.get_trig_attribute_double(self._handle, 0x2ef3)
         return val
 
     @anlg_lvl_dig_fltr_timebase_rate.setter
     def anlg_lvl_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_trig_attribute_double(
-                self._handle, 0x2ef3, val)
+        self._interpreter.set_trig_attribute_double(self._handle, 0x2ef3, val)
 
     @anlg_lvl_dig_fltr_timebase_rate.deleter
     def anlg_lvl_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2ef3)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2ef3)
 
     @property
     def anlg_lvl_dig_fltr_timebase_src(self):
@@ -125,19 +113,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_string(
-                self._handle, 0x2ef2)
+        val = self._interpreter.get_trig_attribute_string(self._handle, 0x2ef2)
         return val
 
     @anlg_lvl_dig_fltr_timebase_src.setter
     def anlg_lvl_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_trig_attribute_string(
-                self._handle, 0x2ef2, val)
+        self._interpreter.set_trig_attribute_string(self._handle, 0x2ef2, val)
 
     @anlg_lvl_dig_fltr_timebase_src.deleter
     def anlg_lvl_dig_fltr_timebase_src(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2ef2)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2ef2)
 
     @property
     def anlg_lvl_dig_sync_enable(self):
@@ -148,19 +133,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 0x2ef4)
+        val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2ef4)
         return val
 
     @anlg_lvl_dig_sync_enable.setter
     def anlg_lvl_dig_sync_enable(self, val):
-        self._interpreter.set_trig_attribute_bool(
-                self._handle, 0x2ef4, val)
+        self._interpreter.set_trig_attribute_bool(self._handle, 0x2ef4, val)
 
     @anlg_lvl_dig_sync_enable.deleter
     def anlg_lvl_dig_sync_enable(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2ef4)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2ef4)
 
     @property
     def anlg_lvl_hyst(self):
@@ -177,19 +159,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_double(
-                self._handle, 0x1368)
+        val = self._interpreter.get_trig_attribute_double(self._handle, 0x1368)
         return val
 
     @anlg_lvl_hyst.setter
     def anlg_lvl_hyst(self, val):
-        self._interpreter.set_trig_attribute_double(
-                self._handle, 0x1368, val)
+        self._interpreter.set_trig_attribute_double(self._handle, 0x1368, val)
 
     @anlg_lvl_hyst.deleter
     def anlg_lvl_hyst(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x1368)
+        self._interpreter.reset_trig_attribute(self._handle, 0x1368)
 
     @property
     def anlg_lvl_lvl(self):
@@ -201,19 +180,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_double(
-                self._handle, 0x1369)
+        val = self._interpreter.get_trig_attribute_double(self._handle, 0x1369)
         return val
 
     @anlg_lvl_lvl.setter
     def anlg_lvl_lvl(self, val):
-        self._interpreter.set_trig_attribute_double(
-                self._handle, 0x1369, val)
+        self._interpreter.set_trig_attribute_double(self._handle, 0x1369, val)
 
     @anlg_lvl_lvl.deleter
     def anlg_lvl_lvl(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x1369)
+        self._interpreter.reset_trig_attribute(self._handle, 0x1369)
 
     @property
     def anlg_lvl_src(self):
@@ -224,19 +200,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_string(
-                self._handle, 0x1370)
+        val = self._interpreter.get_trig_attribute_string(self._handle, 0x1370)
         return val
 
     @anlg_lvl_src.setter
     def anlg_lvl_src(self, val):
-        self._interpreter.set_trig_attribute_string(
-                self._handle, 0x1370, val)
+        self._interpreter.set_trig_attribute_string(self._handle, 0x1370, val)
 
     @anlg_lvl_src.deleter
     def anlg_lvl_src(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x1370)
+        self._interpreter.reset_trig_attribute(self._handle, 0x1370)
 
     @property
     def anlg_lvl_when(self):
@@ -247,20 +220,17 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 0x1371)
+        val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1371)
         return ActiveLevel(val)
 
     @anlg_lvl_when.setter
     def anlg_lvl_when(self, val):
         val = val.value
-        self._interpreter.set_trig_attribute_int32(
-                self._handle, 0x1371, val)
+        self._interpreter.set_trig_attribute_int32(self._handle, 0x1371, val)
 
     @anlg_lvl_when.deleter
     def anlg_lvl_when(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x1371)
+        self._interpreter.reset_trig_attribute(self._handle, 0x1371)
 
     @property
     def anlg_win_btm(self):
@@ -270,19 +240,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_double(
-                self._handle, 0x1375)
+        val = self._interpreter.get_trig_attribute_double(self._handle, 0x1375)
         return val
 
     @anlg_win_btm.setter
     def anlg_win_btm(self, val):
-        self._interpreter.set_trig_attribute_double(
-                self._handle, 0x1375, val)
+        self._interpreter.set_trig_attribute_double(self._handle, 0x1375, val)
 
     @anlg_win_btm.deleter
     def anlg_win_btm(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x1375)
+        self._interpreter.reset_trig_attribute(self._handle, 0x1375)
 
     @property
     def anlg_win_coupling(self):
@@ -293,20 +260,17 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 0x2237)
+        val = self._interpreter.get_trig_attribute_int32(self._handle, 0x2237)
         return Coupling(val)
 
     @anlg_win_coupling.setter
     def anlg_win_coupling(self, val):
         val = val.value
-        self._interpreter.set_trig_attribute_int32(
-                self._handle, 0x2237, val)
+        self._interpreter.set_trig_attribute_int32(self._handle, 0x2237, val)
 
     @anlg_win_coupling.deleter
     def anlg_win_coupling(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2237)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2237)
 
     @property
     def anlg_win_dig_fltr_enable(self):
@@ -320,19 +284,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 0x2ef5)
+        val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2ef5)
         return val
 
     @anlg_win_dig_fltr_enable.setter
     def anlg_win_dig_fltr_enable(self, val):
-        self._interpreter.set_trig_attribute_bool(
-                self._handle, 0x2ef5, val)
+        self._interpreter.set_trig_attribute_bool(self._handle, 0x2ef5, val)
 
     @anlg_win_dig_fltr_enable.deleter
     def anlg_win_dig_fltr_enable(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2ef5)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2ef5)
 
     @property
     def anlg_win_dig_fltr_min_pulse_width(self):
@@ -342,19 +303,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_double(
-                self._handle, 0x2ef6)
+        val = self._interpreter.get_trig_attribute_double(self._handle, 0x2ef6)
         return val
 
     @anlg_win_dig_fltr_min_pulse_width.setter
     def anlg_win_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_trig_attribute_double(
-                self._handle, 0x2ef6, val)
+        self._interpreter.set_trig_attribute_double(self._handle, 0x2ef6, val)
 
     @anlg_win_dig_fltr_min_pulse_width.deleter
     def anlg_win_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2ef6)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2ef6)
 
     @property
     def anlg_win_dig_fltr_timebase_rate(self):
@@ -365,19 +323,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_double(
-                self._handle, 0x2ef8)
+        val = self._interpreter.get_trig_attribute_double(self._handle, 0x2ef8)
         return val
 
     @anlg_win_dig_fltr_timebase_rate.setter
     def anlg_win_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_trig_attribute_double(
-                self._handle, 0x2ef8, val)
+        self._interpreter.set_trig_attribute_double(self._handle, 0x2ef8, val)
 
     @anlg_win_dig_fltr_timebase_rate.deleter
     def anlg_win_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2ef8)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2ef8)
 
     @property
     def anlg_win_dig_fltr_timebase_src(self):
@@ -387,19 +342,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_string(
-                self._handle, 0x2ef7)
+        val = self._interpreter.get_trig_attribute_string(self._handle, 0x2ef7)
         return val
 
     @anlg_win_dig_fltr_timebase_src.setter
     def anlg_win_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_trig_attribute_string(
-                self._handle, 0x2ef7, val)
+        self._interpreter.set_trig_attribute_string(self._handle, 0x2ef7, val)
 
     @anlg_win_dig_fltr_timebase_src.deleter
     def anlg_win_dig_fltr_timebase_src(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2ef7)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2ef7)
 
     @property
     def anlg_win_dig_sync_enable(self):
@@ -410,19 +362,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 0x2ef9)
+        val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2ef9)
         return val
 
     @anlg_win_dig_sync_enable.setter
     def anlg_win_dig_sync_enable(self, val):
-        self._interpreter.set_trig_attribute_bool(
-                self._handle, 0x2ef9, val)
+        self._interpreter.set_trig_attribute_bool(self._handle, 0x2ef9, val)
 
     @anlg_win_dig_sync_enable.deleter
     def anlg_win_dig_sync_enable(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2ef9)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2ef9)
 
     @property
     def anlg_win_src(self):
@@ -433,19 +382,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_string(
-                self._handle, 0x1373)
+        val = self._interpreter.get_trig_attribute_string(self._handle, 0x1373)
         return val
 
     @anlg_win_src.setter
     def anlg_win_src(self, val):
-        self._interpreter.set_trig_attribute_string(
-                self._handle, 0x1373, val)
+        self._interpreter.set_trig_attribute_string(self._handle, 0x1373, val)
 
     @anlg_win_src.deleter
     def anlg_win_src(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x1373)
+        self._interpreter.reset_trig_attribute(self._handle, 0x1373)
 
     @property
     def anlg_win_top(self):
@@ -455,19 +401,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_double(
-                self._handle, 0x1376)
+        val = self._interpreter.get_trig_attribute_double(self._handle, 0x1376)
         return val
 
     @anlg_win_top.setter
     def anlg_win_top(self, val):
-        self._interpreter.set_trig_attribute_double(
-                self._handle, 0x1376, val)
+        self._interpreter.set_trig_attribute_double(self._handle, 0x1376, val)
 
     @anlg_win_top.deleter
     def anlg_win_top(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x1376)
+        self._interpreter.reset_trig_attribute(self._handle, 0x1376)
 
     @property
     def anlg_win_when(self):
@@ -479,20 +422,17 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 0x1374)
+        val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1374)
         return WindowTriggerCondition2(val)
 
     @anlg_win_when.setter
     def anlg_win_when(self, val):
         val = val.value
-        self._interpreter.set_trig_attribute_int32(
-                self._handle, 0x1374, val)
+        self._interpreter.set_trig_attribute_int32(self._handle, 0x1374, val)
 
     @anlg_win_when.deleter
     def anlg_win_when(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x1374)
+        self._interpreter.reset_trig_attribute(self._handle, 0x1374)
 
     @property
     def dig_lvl_dig_fltr_enable(self):
@@ -502,19 +442,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 0x2228)
+        val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2228)
         return val
 
     @dig_lvl_dig_fltr_enable.setter
     def dig_lvl_dig_fltr_enable(self, val):
-        self._interpreter.set_trig_attribute_bool(
-                self._handle, 0x2228, val)
+        self._interpreter.set_trig_attribute_bool(self._handle, 0x2228, val)
 
     @dig_lvl_dig_fltr_enable.deleter
     def dig_lvl_dig_fltr_enable(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2228)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2228)
 
     @property
     def dig_lvl_dig_fltr_min_pulse_width(self):
@@ -524,19 +461,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_double(
-                self._handle, 0x2229)
+        val = self._interpreter.get_trig_attribute_double(self._handle, 0x2229)
         return val
 
     @dig_lvl_dig_fltr_min_pulse_width.setter
     def dig_lvl_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_trig_attribute_double(
-                self._handle, 0x2229, val)
+        self._interpreter.set_trig_attribute_double(self._handle, 0x2229, val)
 
     @dig_lvl_dig_fltr_min_pulse_width.deleter
     def dig_lvl_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2229)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2229)
 
     @property
     def dig_lvl_dig_fltr_timebase_rate(self):
@@ -547,19 +481,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_double(
-                self._handle, 0x222b)
+        val = self._interpreter.get_trig_attribute_double(self._handle, 0x222b)
         return val
 
     @dig_lvl_dig_fltr_timebase_rate.setter
     def dig_lvl_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_trig_attribute_double(
-                self._handle, 0x222b, val)
+        self._interpreter.set_trig_attribute_double(self._handle, 0x222b, val)
 
     @dig_lvl_dig_fltr_timebase_rate.deleter
     def dig_lvl_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x222b)
+        self._interpreter.reset_trig_attribute(self._handle, 0x222b)
 
     @property
     def dig_lvl_dig_fltr_timebase_src(self):
@@ -569,19 +500,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_string(
-                self._handle, 0x222a)
+        val = self._interpreter.get_trig_attribute_string(self._handle, 0x222a)
         return val
 
     @dig_lvl_dig_fltr_timebase_src.setter
     def dig_lvl_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_trig_attribute_string(
-                self._handle, 0x222a, val)
+        self._interpreter.set_trig_attribute_string(self._handle, 0x222a, val)
 
     @dig_lvl_dig_fltr_timebase_src.deleter
     def dig_lvl_dig_fltr_timebase_src(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x222a)
+        self._interpreter.reset_trig_attribute(self._handle, 0x222a)
 
     @property
     def dig_lvl_dig_sync_enable(self):
@@ -592,19 +520,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 0x222c)
+        val = self._interpreter.get_trig_attribute_bool(self._handle, 0x222c)
         return val
 
     @dig_lvl_dig_sync_enable.setter
     def dig_lvl_dig_sync_enable(self, val):
-        self._interpreter.set_trig_attribute_bool(
-                self._handle, 0x222c, val)
+        self._interpreter.set_trig_attribute_bool(self._handle, 0x222c, val)
 
     @dig_lvl_dig_sync_enable.deleter
     def dig_lvl_dig_sync_enable(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x222c)
+        self._interpreter.reset_trig_attribute(self._handle, 0x222c)
 
     @property
     def dig_lvl_src(self):
@@ -614,19 +539,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_string(
-                self._handle, 0x1379)
+        val = self._interpreter.get_trig_attribute_string(self._handle, 0x1379)
         return val
 
     @dig_lvl_src.setter
     def dig_lvl_src(self, val):
-        self._interpreter.set_trig_attribute_string(
-                self._handle, 0x1379, val)
+        self._interpreter.set_trig_attribute_string(self._handle, 0x1379, val)
 
     @dig_lvl_src.deleter
     def dig_lvl_src(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x1379)
+        self._interpreter.reset_trig_attribute(self._handle, 0x1379)
 
     @property
     def dig_lvl_when(self):
@@ -636,20 +558,17 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 0x1380)
+        val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1380)
         return Level(val)
 
     @dig_lvl_when.setter
     def dig_lvl_when(self, val):
         val = val.value
-        self._interpreter.set_trig_attribute_int32(
-                self._handle, 0x1380, val)
+        self._interpreter.set_trig_attribute_int32(self._handle, 0x1380, val)
 
     @dig_lvl_when.deleter
     def dig_lvl_when(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x1380)
+        self._interpreter.reset_trig_attribute(self._handle, 0x1380)
 
     @property
     def dig_pattern_pattern(self):
@@ -659,19 +578,16 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_string(
-                self._handle, 0x2188)
+        val = self._interpreter.get_trig_attribute_string(self._handle, 0x2188)
         return val
 
     @dig_pattern_pattern.setter
     def dig_pattern_pattern(self, val):
-        self._interpreter.set_trig_attribute_string(
-                self._handle, 0x2188, val)
+        self._interpreter.set_trig_attribute_string(self._handle, 0x2188, val)
 
     @dig_pattern_pattern.deleter
     def dig_pattern_pattern(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2188)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2188)
 
     @property
     def dig_pattern_src(self):
@@ -684,20 +600,17 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_string(
-                self._handle, 0x216f)
+        val = self._interpreter.get_trig_attribute_string(self._handle, 0x216f)
         return PhysicalChannel(val)
 
     @dig_pattern_src.setter
     def dig_pattern_src(self, val):
         val = val.name
-        self._interpreter.set_trig_attribute_string(
-                self._handle, 0x216f, val)
+        self._interpreter.set_trig_attribute_string(self._handle, 0x216f, val)
 
     @dig_pattern_src.deleter
     def dig_pattern_src(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x216f)
+        self._interpreter.reset_trig_attribute(self._handle, 0x216f)
 
     @property
     def dig_pattern_when(self):
@@ -709,20 +622,17 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 0x2170)
+        val = self._interpreter.get_trig_attribute_int32(self._handle, 0x2170)
         return DigitalPatternCondition(val)
 
     @dig_pattern_when.setter
     def dig_pattern_when(self, val):
         val = val.value
-        self._interpreter.set_trig_attribute_int32(
-                self._handle, 0x2170, val)
+        self._interpreter.set_trig_attribute_int32(self._handle, 0x2170, val)
 
     @dig_pattern_when.deleter
     def dig_pattern_when(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2170)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2170)
 
     @property
     def term(self):
@@ -733,8 +643,7 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_string(
-                self._handle, 0x2f20)
+        val = self._interpreter.get_trig_attribute_string(self._handle, 0x2f20)
         return val
 
     @property
@@ -745,18 +654,15 @@ class PauseTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 0x1366)
+        val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1366)
         return TriggerType(val)
 
     @trig_type.setter
     def trig_type(self, val):
         val = val.value
-        self._interpreter.set_trig_attribute_int32(
-                self._handle, 0x1366, val)
+        self._interpreter.set_trig_attribute_int32(self._handle, 0x1366, val)
 
     @trig_type.deleter
     def trig_type(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x1366)
+        self._interpreter.reset_trig_attribute(self._handle, 0x1366)
 

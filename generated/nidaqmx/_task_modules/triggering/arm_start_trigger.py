@@ -28,19 +28,16 @@ class ArmStartTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 0x222d)
+        val = self._interpreter.get_trig_attribute_bool(self._handle, 0x222d)
         return val
 
     @dig_edge_dig_fltr_enable.setter
     def dig_edge_dig_fltr_enable(self, val):
-        self._interpreter.set_trig_attribute_bool(
-                self._handle, 0x222d, val)
+        self._interpreter.set_trig_attribute_bool(self._handle, 0x222d, val)
 
     @dig_edge_dig_fltr_enable.deleter
     def dig_edge_dig_fltr_enable(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x222d)
+        self._interpreter.reset_trig_attribute(self._handle, 0x222d)
 
     @property
     def dig_edge_dig_fltr_min_pulse_width(self):
@@ -50,19 +47,16 @@ class ArmStartTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_double(
-                self._handle, 0x222e)
+        val = self._interpreter.get_trig_attribute_double(self._handle, 0x222e)
         return val
 
     @dig_edge_dig_fltr_min_pulse_width.setter
     def dig_edge_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_trig_attribute_double(
-                self._handle, 0x222e, val)
+        self._interpreter.set_trig_attribute_double(self._handle, 0x222e, val)
 
     @dig_edge_dig_fltr_min_pulse_width.deleter
     def dig_edge_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x222e)
+        self._interpreter.reset_trig_attribute(self._handle, 0x222e)
 
     @property
     def dig_edge_dig_fltr_timebase_rate(self):
@@ -73,19 +67,16 @@ class ArmStartTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_double(
-                self._handle, 0x2230)
+        val = self._interpreter.get_trig_attribute_double(self._handle, 0x2230)
         return val
 
     @dig_edge_dig_fltr_timebase_rate.setter
     def dig_edge_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_trig_attribute_double(
-                self._handle, 0x2230, val)
+        self._interpreter.set_trig_attribute_double(self._handle, 0x2230, val)
 
     @dig_edge_dig_fltr_timebase_rate.deleter
     def dig_edge_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2230)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2230)
 
     @property
     def dig_edge_dig_fltr_timebase_src(self):
@@ -95,19 +86,16 @@ class ArmStartTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_string(
-                self._handle, 0x222f)
+        val = self._interpreter.get_trig_attribute_string(self._handle, 0x222f)
         return val
 
     @dig_edge_dig_fltr_timebase_src.setter
     def dig_edge_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_trig_attribute_string(
-                self._handle, 0x222f, val)
+        self._interpreter.set_trig_attribute_string(self._handle, 0x222f, val)
 
     @dig_edge_dig_fltr_timebase_src.deleter
     def dig_edge_dig_fltr_timebase_src(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x222f)
+        self._interpreter.reset_trig_attribute(self._handle, 0x222f)
 
     @property
     def dig_edge_dig_sync_enable(self):
@@ -118,19 +106,16 @@ class ArmStartTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 0x2231)
+        val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2231)
         return val
 
     @dig_edge_dig_sync_enable.setter
     def dig_edge_dig_sync_enable(self, val):
-        self._interpreter.set_trig_attribute_bool(
-                self._handle, 0x2231, val)
+        self._interpreter.set_trig_attribute_bool(self._handle, 0x2231, val)
 
     @dig_edge_dig_sync_enable.deleter
     def dig_edge_dig_sync_enable(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x2231)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2231)
 
     @property
     def dig_edge_edge(self):
@@ -140,20 +125,17 @@ class ArmStartTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 0x1415)
+        val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1415)
         return Edge(val)
 
     @dig_edge_edge.setter
     def dig_edge_edge(self, val):
         val = val.value
-        self._interpreter.set_trig_attribute_int32(
-                self._handle, 0x1415, val)
+        self._interpreter.set_trig_attribute_int32(self._handle, 0x1415, val)
 
     @dig_edge_edge.deleter
     def dig_edge_edge(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x1415)
+        self._interpreter.reset_trig_attribute(self._handle, 0x1415)
 
     @property
     def dig_edge_src(self):
@@ -163,19 +145,16 @@ class ArmStartTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_string(
-                self._handle, 0x1417)
+        val = self._interpreter.get_trig_attribute_string(self._handle, 0x1417)
         return val
 
     @dig_edge_src.setter
     def dig_edge_src(self, val):
-        self._interpreter.set_trig_attribute_string(
-                self._handle, 0x1417, val)
+        self._interpreter.set_trig_attribute_string(self._handle, 0x1417, val)
 
     @dig_edge_src.deleter
     def dig_edge_src(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x1417)
+        self._interpreter.reset_trig_attribute(self._handle, 0x1417)
 
     @property
     def term(self):
@@ -186,8 +165,7 @@ class ArmStartTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_string(
-                self._handle, 0x2f7f)
+        val = self._interpreter.get_trig_attribute_string(self._handle, 0x2f7f)
         return val
 
     @property
@@ -198,20 +176,17 @@ class ArmStartTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 0x3132)
+        val = self._interpreter.get_trig_attribute_int32(self._handle, 0x3132)
         return Timescale(val)
 
     @time_timescale.setter
     def time_timescale(self, val):
         val = val.value
-        self._interpreter.set_trig_attribute_int32(
-                self._handle, 0x3132, val)
+        self._interpreter.set_trig_attribute_int32(self._handle, 0x3132, val)
 
     @time_timescale.deleter
     def time_timescale(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x3132)
+        self._interpreter.reset_trig_attribute(self._handle, 0x3132)
 
     @property
     def timestamp_enable(self):
@@ -222,19 +197,16 @@ class ArmStartTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_bool(
-                self._handle, 0x3133)
+        val = self._interpreter.get_trig_attribute_bool(self._handle, 0x3133)
         return val
 
     @timestamp_enable.setter
     def timestamp_enable(self, val):
-        self._interpreter.set_trig_attribute_bool(
-                self._handle, 0x3133, val)
+        self._interpreter.set_trig_attribute_bool(self._handle, 0x3133, val)
 
     @timestamp_enable.deleter
     def timestamp_enable(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x3133)
+        self._interpreter.reset_trig_attribute(self._handle, 0x3133)
 
     @property
     def timestamp_timescale(self):
@@ -244,20 +216,17 @@ class ArmStartTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 0x3135)
+        val = self._interpreter.get_trig_attribute_int32(self._handle, 0x3135)
         return Timescale(val)
 
     @timestamp_timescale.setter
     def timestamp_timescale(self, val):
         val = val.value
-        self._interpreter.set_trig_attribute_int32(
-                self._handle, 0x3135, val)
+        self._interpreter.set_trig_attribute_int32(self._handle, 0x3135, val)
 
     @timestamp_timescale.deleter
     def timestamp_timescale(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x3135)
+        self._interpreter.reset_trig_attribute(self._handle, 0x3135)
 
     @property
     def trig_type(self):
@@ -270,18 +239,15 @@ class ArmStartTrigger:
         """
 
 
-        val = self._interpreter.get_trig_attribute_int32(
-                self._handle, 0x1414)
+        val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1414)
         return TriggerType(val)
 
     @trig_type.setter
     def trig_type(self, val):
         val = val.value
-        self._interpreter.set_trig_attribute_int32(
-                self._handle, 0x1414, val)
+        self._interpreter.set_trig_attribute_int32(self._handle, 0x1414, val)
 
     @trig_type.deleter
     def trig_type(self):
-        self._interpreter.reset_trig_attribute(
-                self._handle, 0x1414)
+        self._interpreter.reset_trig_attribute(self._handle, 0x1414)
 

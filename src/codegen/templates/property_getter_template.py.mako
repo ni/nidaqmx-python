@@ -22,8 +22,7 @@
     function_call_args.append(hex(attribute.id))
 %>
 \
-        val = self._interpreter.get_${generic_attribute_func}(
-                ${', '.join(function_call_args) | wrap(12)})
+        val = self._interpreter.get_${generic_attribute_func}(${', '.join(function_call_args) | wrap(12)})
 \
 ## Script return call.
     %if attribute.bitfield_enum is not None:

@@ -34,19 +34,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x881)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x881)
         return val
 
     @ci_ang_encoder_initial_angle.setter
     def ci_ang_encoder_initial_angle(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x881, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x881, val)
 
     @ci_ang_encoder_initial_angle.deleter
     def ci_ang_encoder_initial_angle(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x881)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x881)
 
     @property
     def ci_ang_encoder_pulses_per_rev(self):
@@ -58,19 +55,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 0x875)
+        val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x875)
         return val
 
     @ci_ang_encoder_pulses_per_rev.setter
     def ci_ang_encoder_pulses_per_rev(self, val):
-        self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 0x875, val)
+        self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x875, val)
 
     @ci_ang_encoder_pulses_per_rev.deleter
     def ci_ang_encoder_pulses_per_rev(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x875)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x875)
 
     @property
     def ci_ang_encoder_units(self):
@@ -81,20 +75,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x18a6)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18a6)
         return AngleUnits(val)
 
     @ci_ang_encoder_units.setter
     def ci_ang_encoder_units(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x18a6, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x18a6, val)
 
     @ci_ang_encoder_units.deleter
     def ci_ang_encoder_units(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x18a6)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18a6)
 
     @property
     def ci_count(self):
@@ -103,8 +94,7 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 0x148)
+        val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x148)
         return val
 
     @property
@@ -115,20 +105,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x697)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x697)
         return Edge(val)
 
     @ci_count_edges_active_edge.setter
     def ci_count_edges_active_edge(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x697, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x697, val)
 
     @ci_count_edges_active_edge.deleter
     def ci_count_edges_active_edge(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x697)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x697)
 
     @property
     def ci_count_edges_count_dir_dig_fltr_enable(self):
@@ -138,19 +125,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x21f1)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21f1)
         return val
 
     @ci_count_edges_count_dir_dig_fltr_enable.setter
     def ci_count_edges_count_dir_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x21f1, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x21f1, val)
 
     @ci_count_edges_count_dir_dig_fltr_enable.deleter
     def ci_count_edges_count_dir_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21f1)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21f1)
 
     @property
     def ci_count_edges_count_dir_dig_fltr_min_pulse_width(self):
@@ -160,19 +144,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x21f2)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21f2)
         return val
 
     @ci_count_edges_count_dir_dig_fltr_min_pulse_width.setter
     def ci_count_edges_count_dir_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x21f2, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x21f2, val)
 
     @ci_count_edges_count_dir_dig_fltr_min_pulse_width.deleter
     def ci_count_edges_count_dir_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21f2)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21f2)
 
     @property
     def ci_count_edges_count_dir_dig_fltr_timebase_rate(self):
@@ -183,19 +164,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x21f4)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21f4)
         return val
 
     @ci_count_edges_count_dir_dig_fltr_timebase_rate.setter
     def ci_count_edges_count_dir_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x21f4, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x21f4, val)
 
     @ci_count_edges_count_dir_dig_fltr_timebase_rate.deleter
     def ci_count_edges_count_dir_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21f4)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21f4)
 
     @property
     def ci_count_edges_count_dir_dig_fltr_timebase_src(self):
@@ -205,19 +183,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x21f3)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x21f3)
         return val
 
     @ci_count_edges_count_dir_dig_fltr_timebase_src.setter
     def ci_count_edges_count_dir_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x21f3, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x21f3, val)
 
     @ci_count_edges_count_dir_dig_fltr_timebase_src.deleter
     def ci_count_edges_count_dir_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21f3)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21f3)
 
     @property
     def ci_count_edges_count_dir_dig_sync_enable(self):
@@ -228,19 +203,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x21f5)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21f5)
         return val
 
     @ci_count_edges_count_dir_dig_sync_enable.setter
     def ci_count_edges_count_dir_dig_sync_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x21f5, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x21f5, val)
 
     @ci_count_edges_count_dir_dig_sync_enable.deleter
     def ci_count_edges_count_dir_dig_sync_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21f5)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21f5)
 
     @property
     def ci_count_edges_count_dir_hyst(self):
@@ -253,19 +225,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x31b2)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31b2)
         return val
 
     @ci_count_edges_count_dir_hyst.setter
     def ci_count_edges_count_dir_hyst(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x31b2, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31b2, val)
 
     @ci_count_edges_count_dir_hyst.deleter
     def ci_count_edges_count_dir_hyst(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x31b2)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31b2)
 
     @property
     def ci_count_edges_count_dir_logic_lvl_behavior(self):
@@ -275,20 +244,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x309e)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x309e)
         return LogicLvlBehavior(val)
 
     @ci_count_edges_count_dir_logic_lvl_behavior.setter
     def ci_count_edges_count_dir_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x309e, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x309e, val)
 
     @ci_count_edges_count_dir_logic_lvl_behavior.deleter
     def ci_count_edges_count_dir_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x309e)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x309e)
 
     @property
     def ci_count_edges_count_dir_term_cfg(self):
@@ -298,20 +264,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x309d)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x309d)
         return TerminalConfiguration(val)
 
     @ci_count_edges_count_dir_term_cfg.setter
     def ci_count_edges_count_dir_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x309d, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x309d, val)
 
     @ci_count_edges_count_dir_term_cfg.deleter
     def ci_count_edges_count_dir_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x309d)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x309d)
 
     @property
     def ci_count_edges_count_dir_thresh_voltage(self):
@@ -323,19 +286,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x31b1)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31b1)
         return val
 
     @ci_count_edges_count_dir_thresh_voltage.setter
     def ci_count_edges_count_dir_thresh_voltage(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x31b1, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31b1, val)
 
     @ci_count_edges_count_dir_thresh_voltage.deleter
     def ci_count_edges_count_dir_thresh_voltage(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x31b1)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31b1)
 
     @property
     def ci_count_edges_count_reset_active_edge(self):
@@ -345,20 +305,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x2fb2)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2fb2)
         return Edge(val)
 
     @ci_count_edges_count_reset_active_edge.setter
     def ci_count_edges_count_reset_active_edge(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x2fb2, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2fb2, val)
 
     @ci_count_edges_count_reset_active_edge.deleter
     def ci_count_edges_count_reset_active_edge(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2fb2)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2fb2)
 
     @property
     def ci_count_edges_count_reset_dig_fltr_enable(self):
@@ -368,19 +325,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2fb3)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2fb3)
         return val
 
     @ci_count_edges_count_reset_dig_fltr_enable.setter
     def ci_count_edges_count_reset_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2fb3, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2fb3, val)
 
     @ci_count_edges_count_reset_dig_fltr_enable.deleter
     def ci_count_edges_count_reset_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2fb3)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2fb3)
 
     @property
     def ci_count_edges_count_reset_dig_fltr_min_pulse_width(self):
@@ -389,19 +343,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2fb4)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2fb4)
         return val
 
     @ci_count_edges_count_reset_dig_fltr_min_pulse_width.setter
     def ci_count_edges_count_reset_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2fb4, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2fb4, val)
 
     @ci_count_edges_count_reset_dig_fltr_min_pulse_width.deleter
     def ci_count_edges_count_reset_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2fb4)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2fb4)
 
     @property
     def ci_count_edges_count_reset_dig_fltr_timebase_rate(self):
@@ -412,19 +363,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2fb6)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2fb6)
         return val
 
     @ci_count_edges_count_reset_dig_fltr_timebase_rate.setter
     def ci_count_edges_count_reset_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2fb6, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2fb6, val)
 
     @ci_count_edges_count_reset_dig_fltr_timebase_rate.deleter
     def ci_count_edges_count_reset_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2fb6)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2fb6)
 
     @property
     def ci_count_edges_count_reset_dig_fltr_timebase_src(self):
@@ -434,19 +382,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x2fb5)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2fb5)
         return val
 
     @ci_count_edges_count_reset_dig_fltr_timebase_src.setter
     def ci_count_edges_count_reset_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x2fb5, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x2fb5, val)
 
     @ci_count_edges_count_reset_dig_fltr_timebase_src.deleter
     def ci_count_edges_count_reset_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2fb5)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2fb5)
 
     @property
     def ci_count_edges_count_reset_dig_sync_enable(self):
@@ -457,19 +402,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2fb7)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2fb7)
         return val
 
     @ci_count_edges_count_reset_dig_sync_enable.setter
     def ci_count_edges_count_reset_dig_sync_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2fb7, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2fb7, val)
 
     @ci_count_edges_count_reset_dig_sync_enable.deleter
     def ci_count_edges_count_reset_dig_sync_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2fb7)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2fb7)
 
     @property
     def ci_count_edges_count_reset_enable(self):
@@ -479,19 +421,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2faf)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2faf)
         return val
 
     @ci_count_edges_count_reset_enable.setter
     def ci_count_edges_count_reset_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2faf, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2faf, val)
 
     @ci_count_edges_count_reset_enable.deleter
     def ci_count_edges_count_reset_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2faf)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2faf)
 
     @property
     def ci_count_edges_count_reset_hyst(self):
@@ -511,19 +450,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x31b4)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31b4)
         return val
 
     @ci_count_edges_count_reset_hyst.setter
     def ci_count_edges_count_reset_hyst(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x31b4, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31b4, val)
 
     @ci_count_edges_count_reset_hyst.deleter
     def ci_count_edges_count_reset_hyst(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x31b4)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31b4)
 
     @property
     def ci_count_edges_count_reset_logic_lvl_behavior(self):
@@ -533,20 +469,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30a0)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a0)
         return LogicLvlBehavior(val)
 
     @ci_count_edges_count_reset_logic_lvl_behavior.setter
     def ci_count_edges_count_reset_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30a0, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30a0, val)
 
     @ci_count_edges_count_reset_logic_lvl_behavior.deleter
     def ci_count_edges_count_reset_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30a0)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30a0)
 
     @property
     def ci_count_edges_count_reset_reset_cnt(self):
@@ -555,19 +488,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 0x2fb0)
+        val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x2fb0)
         return val
 
     @ci_count_edges_count_reset_reset_cnt.setter
     def ci_count_edges_count_reset_reset_cnt(self, val):
-        self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 0x2fb0, val)
+        self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x2fb0, val)
 
     @ci_count_edges_count_reset_reset_cnt.deleter
     def ci_count_edges_count_reset_reset_cnt(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2fb0)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2fb0)
 
     @property
     def ci_count_edges_count_reset_term(self):
@@ -577,19 +507,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x2fb1)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2fb1)
         return val
 
     @ci_count_edges_count_reset_term.setter
     def ci_count_edges_count_reset_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x2fb1, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x2fb1, val)
 
     @ci_count_edges_count_reset_term.deleter
     def ci_count_edges_count_reset_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2fb1)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2fb1)
 
     @property
     def ci_count_edges_count_reset_term_cfg(self):
@@ -599,20 +526,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x309f)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x309f)
         return TerminalConfiguration(val)
 
     @ci_count_edges_count_reset_term_cfg.setter
     def ci_count_edges_count_reset_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x309f, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x309f, val)
 
     @ci_count_edges_count_reset_term_cfg.deleter
     def ci_count_edges_count_reset_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x309f)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x309f)
 
     @property
     def ci_count_edges_count_reset_thresh_voltage(self):
@@ -622,19 +546,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x31b3)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31b3)
         return val
 
     @ci_count_edges_count_reset_thresh_voltage.setter
     def ci_count_edges_count_reset_thresh_voltage(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x31b3, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31b3, val)
 
     @ci_count_edges_count_reset_thresh_voltage.deleter
     def ci_count_edges_count_reset_thresh_voltage(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x31b3)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31b3)
 
     @property
     def ci_count_edges_dig_fltr_enable(self):
@@ -644,19 +565,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x21f6)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21f6)
         return val
 
     @ci_count_edges_dig_fltr_enable.setter
     def ci_count_edges_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x21f6, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x21f6, val)
 
     @ci_count_edges_dig_fltr_enable.deleter
     def ci_count_edges_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21f6)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21f6)
 
     @property
     def ci_count_edges_dig_fltr_min_pulse_width(self):
@@ -666,19 +584,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x21f7)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21f7)
         return val
 
     @ci_count_edges_dig_fltr_min_pulse_width.setter
     def ci_count_edges_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x21f7, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x21f7, val)
 
     @ci_count_edges_dig_fltr_min_pulse_width.deleter
     def ci_count_edges_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21f7)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21f7)
 
     @property
     def ci_count_edges_dig_fltr_timebase_rate(self):
@@ -689,19 +604,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x21f9)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21f9)
         return val
 
     @ci_count_edges_dig_fltr_timebase_rate.setter
     def ci_count_edges_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x21f9, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x21f9, val)
 
     @ci_count_edges_dig_fltr_timebase_rate.deleter
     def ci_count_edges_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21f9)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21f9)
 
     @property
     def ci_count_edges_dig_fltr_timebase_src(self):
@@ -711,19 +623,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x21f8)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x21f8)
         return val
 
     @ci_count_edges_dig_fltr_timebase_src.setter
     def ci_count_edges_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x21f8, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x21f8, val)
 
     @ci_count_edges_dig_fltr_timebase_src.deleter
     def ci_count_edges_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21f8)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21f8)
 
     @property
     def ci_count_edges_dig_sync_enable(self):
@@ -734,19 +643,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x21fa)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21fa)
         return val
 
     @ci_count_edges_dig_sync_enable.setter
     def ci_count_edges_dig_sync_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x21fa, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x21fa, val)
 
     @ci_count_edges_dig_sync_enable.deleter
     def ci_count_edges_dig_sync_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21fa)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21fa)
 
     @property
     def ci_count_edges_dir(self):
@@ -756,20 +662,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x696)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x696)
         return CountDirection(val)
 
     @ci_count_edges_dir.setter
     def ci_count_edges_dir(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x696, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x696, val)
 
     @ci_count_edges_dir.deleter
     def ci_count_edges_dir(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x696)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x696)
 
     @property
     def ci_count_edges_dir_term(self):
@@ -780,19 +683,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x21e1)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x21e1)
         return val
 
     @ci_count_edges_dir_term.setter
     def ci_count_edges_dir_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x21e1, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x21e1, val)
 
     @ci_count_edges_dir_term.deleter
     def ci_count_edges_dir_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21e1)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21e1)
 
     @property
     def ci_count_edges_gate_dig_fltr_enable(self):
@@ -802,19 +702,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x30f1)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x30f1)
         return val
 
     @ci_count_edges_gate_dig_fltr_enable.setter
     def ci_count_edges_gate_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x30f1, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x30f1, val)
 
     @ci_count_edges_gate_dig_fltr_enable.deleter
     def ci_count_edges_gate_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30f1)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30f1)
 
     @property
     def ci_count_edges_gate_dig_fltr_min_pulse_width(self):
@@ -824,19 +721,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x30f2)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30f2)
         return val
 
     @ci_count_edges_gate_dig_fltr_min_pulse_width.setter
     def ci_count_edges_gate_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x30f2, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x30f2, val)
 
     @ci_count_edges_gate_dig_fltr_min_pulse_width.deleter
     def ci_count_edges_gate_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30f2)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30f2)
 
     @property
     def ci_count_edges_gate_dig_fltr_timebase_rate(self):
@@ -847,19 +741,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x30f4)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30f4)
         return val
 
     @ci_count_edges_gate_dig_fltr_timebase_rate.setter
     def ci_count_edges_gate_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x30f4, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x30f4, val)
 
     @ci_count_edges_gate_dig_fltr_timebase_rate.deleter
     def ci_count_edges_gate_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30f4)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30f4)
 
     @property
     def ci_count_edges_gate_dig_fltr_timebase_src(self):
@@ -869,19 +760,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x30f3)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x30f3)
         return val
 
     @ci_count_edges_gate_dig_fltr_timebase_src.setter
     def ci_count_edges_gate_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x30f3, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x30f3, val)
 
     @ci_count_edges_gate_dig_fltr_timebase_src.deleter
     def ci_count_edges_gate_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30f3)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30f3)
 
     @property
     def ci_count_edges_gate_enable(self):
@@ -891,19 +779,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x30ed)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x30ed)
         return val
 
     @ci_count_edges_gate_enable.setter
     def ci_count_edges_gate_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x30ed, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x30ed, val)
 
     @ci_count_edges_gate_enable.deleter
     def ci_count_edges_gate_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30ed)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30ed)
 
     @property
     def ci_count_edges_gate_hyst(self):
@@ -919,19 +804,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x31b6)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31b6)
         return val
 
     @ci_count_edges_gate_hyst.setter
     def ci_count_edges_gate_hyst(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x31b6, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31b6, val)
 
     @ci_count_edges_gate_hyst.deleter
     def ci_count_edges_gate_hyst(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x31b6)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31b6)
 
     @property
     def ci_count_edges_gate_logic_lvl_behavior(self):
@@ -941,20 +823,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30f0)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30f0)
         return LogicLvlBehavior(val)
 
     @ci_count_edges_gate_logic_lvl_behavior.setter
     def ci_count_edges_gate_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30f0, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30f0, val)
 
     @ci_count_edges_gate_logic_lvl_behavior.deleter
     def ci_count_edges_gate_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30f0)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30f0)
 
     @property
     def ci_count_edges_gate_term(self):
@@ -963,19 +842,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x30ee)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x30ee)
         return val
 
     @ci_count_edges_gate_term.setter
     def ci_count_edges_gate_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x30ee, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x30ee, val)
 
     @ci_count_edges_gate_term.deleter
     def ci_count_edges_gate_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30ee)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30ee)
 
     @property
     def ci_count_edges_gate_term_cfg(self):
@@ -985,20 +861,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30ef)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30ef)
         return TerminalConfiguration(val)
 
     @ci_count_edges_gate_term_cfg.setter
     def ci_count_edges_gate_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30ef, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30ef, val)
 
     @ci_count_edges_gate_term_cfg.deleter
     def ci_count_edges_gate_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30ef)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30ef)
 
     @property
     def ci_count_edges_gate_thresh_voltage(self):
@@ -1008,19 +881,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x31b5)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31b5)
         return val
 
     @ci_count_edges_gate_thresh_voltage.setter
     def ci_count_edges_gate_thresh_voltage(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x31b5, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31b5, val)
 
     @ci_count_edges_gate_thresh_voltage.deleter
     def ci_count_edges_gate_thresh_voltage(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x31b5)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31b5)
 
     @property
     def ci_count_edges_gate_when(self):
@@ -1030,20 +900,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30f5)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30f5)
         return Level(val)
 
     @ci_count_edges_gate_when.setter
     def ci_count_edges_gate_when(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30f5, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30f5, val)
 
     @ci_count_edges_gate_when.deleter
     def ci_count_edges_gate_when(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30f5)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30f5)
 
     @property
     def ci_count_edges_hyst(self):
@@ -1061,19 +928,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x31b0)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31b0)
         return val
 
     @ci_count_edges_hyst.setter
     def ci_count_edges_hyst(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x31b0, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31b0, val)
 
     @ci_count_edges_hyst.deleter
     def ci_count_edges_hyst(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x31b0)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31b0)
 
     @property
     def ci_count_edges_initial_cnt(self):
@@ -1082,19 +946,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 0x698)
+        val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x698)
         return val
 
     @ci_count_edges_initial_cnt.setter
     def ci_count_edges_initial_cnt(self, val):
-        self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 0x698, val)
+        self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x698, val)
 
     @ci_count_edges_initial_cnt.deleter
     def ci_count_edges_initial_cnt(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x698)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x698)
 
     @property
     def ci_count_edges_logic_lvl_behavior(self):
@@ -1104,20 +965,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x309c)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x309c)
         return LogicLvlBehavior(val)
 
     @ci_count_edges_logic_lvl_behavior.setter
     def ci_count_edges_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x309c, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x309c, val)
 
     @ci_count_edges_logic_lvl_behavior.deleter
     def ci_count_edges_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x309c)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x309c)
 
     @property
     def ci_count_edges_term(self):
@@ -1126,19 +984,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x18c7)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18c7)
         return val
 
     @ci_count_edges_term.setter
     def ci_count_edges_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x18c7, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x18c7, val)
 
     @ci_count_edges_term.deleter
     def ci_count_edges_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x18c7)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18c7)
 
     @property
     def ci_count_edges_term_cfg(self):
@@ -1148,20 +1003,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x309b)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x309b)
         return TerminalConfiguration(val)
 
     @ci_count_edges_term_cfg.setter
     def ci_count_edges_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x309b, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x309b, val)
 
     @ci_count_edges_term_cfg.deleter
     def ci_count_edges_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x309b)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x309b)
 
     @property
     def ci_count_edges_thresh_voltage(self):
@@ -1174,19 +1026,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x31af)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31af)
         return val
 
     @ci_count_edges_thresh_voltage.setter
     def ci_count_edges_thresh_voltage(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x31af, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31af, val)
 
     @ci_count_edges_thresh_voltage.deleter
     def ci_count_edges_thresh_voltage(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x31af)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31af)
 
     @property
     def ci_ctr_timebase_active_edge(self):
@@ -1197,20 +1046,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x142)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x142)
         return Edge(val)
 
     @ci_ctr_timebase_active_edge.setter
     def ci_ctr_timebase_active_edge(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x142, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x142, val)
 
     @ci_ctr_timebase_active_edge.deleter
     def ci_ctr_timebase_active_edge(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x142)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x142)
 
     @property
     def ci_ctr_timebase_dig_fltr_enable(self):
@@ -1220,19 +1066,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2271)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2271)
         return val
 
     @ci_ctr_timebase_dig_fltr_enable.setter
     def ci_ctr_timebase_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2271, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2271, val)
 
     @ci_ctr_timebase_dig_fltr_enable.deleter
     def ci_ctr_timebase_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2271)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2271)
 
     @property
     def ci_ctr_timebase_dig_fltr_min_pulse_width(self):
@@ -1242,19 +1085,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2272)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2272)
         return val
 
     @ci_ctr_timebase_dig_fltr_min_pulse_width.setter
     def ci_ctr_timebase_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2272, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2272, val)
 
     @ci_ctr_timebase_dig_fltr_min_pulse_width.deleter
     def ci_ctr_timebase_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2272)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2272)
 
     @property
     def ci_ctr_timebase_dig_fltr_timebase_rate(self):
@@ -1265,19 +1105,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2274)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2274)
         return val
 
     @ci_ctr_timebase_dig_fltr_timebase_rate.setter
     def ci_ctr_timebase_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2274, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2274, val)
 
     @ci_ctr_timebase_dig_fltr_timebase_rate.deleter
     def ci_ctr_timebase_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2274)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2274)
 
     @property
     def ci_ctr_timebase_dig_fltr_timebase_src(self):
@@ -1287,19 +1124,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x2273)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2273)
         return val
 
     @ci_ctr_timebase_dig_fltr_timebase_src.setter
     def ci_ctr_timebase_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x2273, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x2273, val)
 
     @ci_ctr_timebase_dig_fltr_timebase_src.deleter
     def ci_ctr_timebase_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2273)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2273)
 
     @property
     def ci_ctr_timebase_dig_sync_enable(self):
@@ -1310,19 +1144,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2275)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2275)
         return val
 
     @ci_ctr_timebase_dig_sync_enable.setter
     def ci_ctr_timebase_dig_sync_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2275, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2275, val)
 
     @ci_ctr_timebase_dig_sync_enable.deleter
     def ci_ctr_timebase_dig_sync_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2275)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2275)
 
     @property
     def ci_ctr_timebase_master_timebase_div(self):
@@ -1333,19 +1164,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 0x18b3)
+        val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x18b3)
         return val
 
     @ci_ctr_timebase_master_timebase_div.setter
     def ci_ctr_timebase_master_timebase_div(self, val):
-        self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 0x18b3, val)
+        self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x18b3, val)
 
     @ci_ctr_timebase_master_timebase_div.deleter
     def ci_ctr_timebase_master_timebase_div(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x18b3)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18b3)
 
     @property
     def ci_ctr_timebase_rate(self):
@@ -1359,19 +1187,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x18b2)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x18b2)
         return val
 
     @ci_ctr_timebase_rate.setter
     def ci_ctr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x18b2, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x18b2, val)
 
     @ci_ctr_timebase_rate.deleter
     def ci_ctr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x18b2)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18b2)
 
     @property
     def ci_ctr_timebase_src(self):
@@ -1381,19 +1206,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x143)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x143)
         return val
 
     @ci_ctr_timebase_src.setter
     def ci_ctr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x143, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x143, val)
 
     @ci_ctr_timebase_src.deleter
     def ci_ctr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x143)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x143)
 
     @property
     def ci_custom_scale(self):
@@ -1403,20 +1225,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x189e)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x189e)
         return Scale(val)
 
     @ci_custom_scale.setter
     def ci_custom_scale(self, val):
         val = val.name
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x189e, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x189e, val)
 
     @ci_custom_scale.deleter
     def ci_custom_scale(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x189e)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x189e)
 
     @property
     def ci_data_xfer_mech(self):
@@ -1426,20 +1245,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x200)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x200)
         return DataTransferActiveTransferMode(val)
 
     @ci_data_xfer_mech.setter
     def ci_data_xfer_mech(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x200, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x200, val)
 
     @ci_data_xfer_mech.deleter
     def ci_data_xfer_mech(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x200)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x200)
 
     @property
     def ci_data_xfer_req_cond(self):
@@ -1450,20 +1266,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x2efb)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2efb)
         return InputDataTransferCondition(val)
 
     @ci_data_xfer_req_cond.setter
     def ci_data_xfer_req_cond(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x2efb, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2efb, val)
 
     @ci_data_xfer_req_cond.deleter
     def ci_data_xfer_req_cond(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2efb)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2efb)
 
     @property
     def ci_dup_count_prevention(self):
@@ -1475,19 +1288,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x21ac)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21ac)
         return val
 
     @ci_dup_count_prevention.setter
     def ci_dup_count_prevention(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x21ac, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x21ac, val)
 
     @ci_dup_count_prevention.deleter
     def ci_dup_count_prevention(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21ac)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21ac)
 
     @property
     def ci_duty_cycle_dig_fltr_enable(self):
@@ -1497,19 +1307,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x308e)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x308e)
         return val
 
     @ci_duty_cycle_dig_fltr_enable.setter
     def ci_duty_cycle_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x308e, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x308e, val)
 
     @ci_duty_cycle_dig_fltr_enable.deleter
     def ci_duty_cycle_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x308e)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x308e)
 
     @property
     def ci_duty_cycle_dig_fltr_min_pulse_width(self):
@@ -1519,19 +1326,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x308f)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x308f)
         return val
 
     @ci_duty_cycle_dig_fltr_min_pulse_width.setter
     def ci_duty_cycle_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x308f, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x308f, val)
 
     @ci_duty_cycle_dig_fltr_min_pulse_width.deleter
     def ci_duty_cycle_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x308f)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x308f)
 
     @property
     def ci_duty_cycle_dig_fltr_timebase_rate(self):
@@ -1542,19 +1346,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x3091)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x3091)
         return val
 
     @ci_duty_cycle_dig_fltr_timebase_rate.setter
     def ci_duty_cycle_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x3091, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x3091, val)
 
     @ci_duty_cycle_dig_fltr_timebase_rate.deleter
     def ci_duty_cycle_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x3091)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x3091)
 
     @property
     def ci_duty_cycle_dig_fltr_timebase_src(self):
@@ -1564,19 +1365,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x3090)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x3090)
         return val
 
     @ci_duty_cycle_dig_fltr_timebase_src.setter
     def ci_duty_cycle_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x3090, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x3090, val)
 
     @ci_duty_cycle_dig_fltr_timebase_src.deleter
     def ci_duty_cycle_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x3090)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x3090)
 
     @property
     def ci_duty_cycle_logic_lvl_behavior(self):
@@ -1586,20 +1384,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30a2)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a2)
         return LogicLvlBehavior(val)
 
     @ci_duty_cycle_logic_lvl_behavior.setter
     def ci_duty_cycle_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30a2, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30a2, val)
 
     @ci_duty_cycle_logic_lvl_behavior.deleter
     def ci_duty_cycle_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30a2)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30a2)
 
     @property
     def ci_duty_cycle_starting_edge(self):
@@ -1609,20 +1404,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x3092)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3092)
         return Edge(val)
 
     @ci_duty_cycle_starting_edge.setter
     def ci_duty_cycle_starting_edge(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x3092, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x3092, val)
 
     @ci_duty_cycle_starting_edge.deleter
     def ci_duty_cycle_starting_edge(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x3092)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x3092)
 
     @property
     def ci_duty_cycle_term(self):
@@ -1631,19 +1423,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x308d)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x308d)
         return val
 
     @ci_duty_cycle_term.setter
     def ci_duty_cycle_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x308d, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x308d, val)
 
     @ci_duty_cycle_term.deleter
     def ci_duty_cycle_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x308d)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x308d)
 
     @property
     def ci_duty_cycle_term_cfg(self):
@@ -1653,20 +1442,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30a1)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a1)
         return TerminalConfiguration(val)
 
     @ci_duty_cycle_term_cfg.setter
     def ci_duty_cycle_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30a1, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30a1, val)
 
     @ci_duty_cycle_term_cfg.deleter
     def ci_duty_cycle_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30a1)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30a1)
 
     @property
     def ci_encoder_a_input_dig_fltr_enable(self):
@@ -1676,19 +1462,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x21fb)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21fb)
         return val
 
     @ci_encoder_a_input_dig_fltr_enable.setter
     def ci_encoder_a_input_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x21fb, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x21fb, val)
 
     @ci_encoder_a_input_dig_fltr_enable.deleter
     def ci_encoder_a_input_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21fb)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21fb)
 
     @property
     def ci_encoder_a_input_dig_fltr_min_pulse_width(self):
@@ -1698,19 +1481,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x21fc)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21fc)
         return val
 
     @ci_encoder_a_input_dig_fltr_min_pulse_width.setter
     def ci_encoder_a_input_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x21fc, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x21fc, val)
 
     @ci_encoder_a_input_dig_fltr_min_pulse_width.deleter
     def ci_encoder_a_input_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21fc)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21fc)
 
     @property
     def ci_encoder_a_input_dig_fltr_timebase_rate(self):
@@ -1721,19 +1501,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x21fe)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21fe)
         return val
 
     @ci_encoder_a_input_dig_fltr_timebase_rate.setter
     def ci_encoder_a_input_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x21fe, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x21fe, val)
 
     @ci_encoder_a_input_dig_fltr_timebase_rate.deleter
     def ci_encoder_a_input_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21fe)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21fe)
 
     @property
     def ci_encoder_a_input_dig_fltr_timebase_src(self):
@@ -1743,19 +1520,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x21fd)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x21fd)
         return val
 
     @ci_encoder_a_input_dig_fltr_timebase_src.setter
     def ci_encoder_a_input_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x21fd, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x21fd, val)
 
     @ci_encoder_a_input_dig_fltr_timebase_src.deleter
     def ci_encoder_a_input_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21fd)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21fd)
 
     @property
     def ci_encoder_a_input_dig_sync_enable(self):
@@ -1766,19 +1540,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x21ff)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21ff)
         return val
 
     @ci_encoder_a_input_dig_sync_enable.setter
     def ci_encoder_a_input_dig_sync_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x21ff, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x21ff, val)
 
     @ci_encoder_a_input_dig_sync_enable.deleter
     def ci_encoder_a_input_dig_sync_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21ff)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21ff)
 
     @property
     def ci_encoder_a_input_logic_lvl_behavior(self):
@@ -1788,20 +1559,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30a4)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a4)
         return LogicLvlBehavior(val)
 
     @ci_encoder_a_input_logic_lvl_behavior.setter
     def ci_encoder_a_input_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30a4, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30a4, val)
 
     @ci_encoder_a_input_logic_lvl_behavior.deleter
     def ci_encoder_a_input_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30a4)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30a4)
 
     @property
     def ci_encoder_a_input_term(self):
@@ -1810,19 +1578,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x219d)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x219d)
         return val
 
     @ci_encoder_a_input_term.setter
     def ci_encoder_a_input_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x219d, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x219d, val)
 
     @ci_encoder_a_input_term.deleter
     def ci_encoder_a_input_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x219d)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x219d)
 
     @property
     def ci_encoder_a_input_term_cfg(self):
@@ -1832,20 +1597,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30a3)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a3)
         return TerminalConfiguration(val)
 
     @ci_encoder_a_input_term_cfg.setter
     def ci_encoder_a_input_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30a3, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30a3, val)
 
     @ci_encoder_a_input_term_cfg.deleter
     def ci_encoder_a_input_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30a3)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30a3)
 
     @property
     def ci_encoder_b_input_dig_fltr_enable(self):
@@ -1855,19 +1617,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2200)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2200)
         return val
 
     @ci_encoder_b_input_dig_fltr_enable.setter
     def ci_encoder_b_input_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2200, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2200, val)
 
     @ci_encoder_b_input_dig_fltr_enable.deleter
     def ci_encoder_b_input_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2200)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2200)
 
     @property
     def ci_encoder_b_input_dig_fltr_min_pulse_width(self):
@@ -1877,19 +1636,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2201)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2201)
         return val
 
     @ci_encoder_b_input_dig_fltr_min_pulse_width.setter
     def ci_encoder_b_input_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2201, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2201, val)
 
     @ci_encoder_b_input_dig_fltr_min_pulse_width.deleter
     def ci_encoder_b_input_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2201)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2201)
 
     @property
     def ci_encoder_b_input_dig_fltr_timebase_rate(self):
@@ -1900,19 +1656,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2203)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2203)
         return val
 
     @ci_encoder_b_input_dig_fltr_timebase_rate.setter
     def ci_encoder_b_input_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2203, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2203, val)
 
     @ci_encoder_b_input_dig_fltr_timebase_rate.deleter
     def ci_encoder_b_input_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2203)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2203)
 
     @property
     def ci_encoder_b_input_dig_fltr_timebase_src(self):
@@ -1922,19 +1675,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x2202)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2202)
         return val
 
     @ci_encoder_b_input_dig_fltr_timebase_src.setter
     def ci_encoder_b_input_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x2202, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x2202, val)
 
     @ci_encoder_b_input_dig_fltr_timebase_src.deleter
     def ci_encoder_b_input_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2202)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2202)
 
     @property
     def ci_encoder_b_input_dig_sync_enable(self):
@@ -1945,19 +1695,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2204)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2204)
         return val
 
     @ci_encoder_b_input_dig_sync_enable.setter
     def ci_encoder_b_input_dig_sync_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2204, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2204, val)
 
     @ci_encoder_b_input_dig_sync_enable.deleter
     def ci_encoder_b_input_dig_sync_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2204)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2204)
 
     @property
     def ci_encoder_b_input_logic_lvl_behavior(self):
@@ -1967,20 +1714,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30a6)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a6)
         return LogicLvlBehavior(val)
 
     @ci_encoder_b_input_logic_lvl_behavior.setter
     def ci_encoder_b_input_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30a6, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30a6, val)
 
     @ci_encoder_b_input_logic_lvl_behavior.deleter
     def ci_encoder_b_input_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30a6)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30a6)
 
     @property
     def ci_encoder_b_input_term(self):
@@ -1989,19 +1733,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x219e)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x219e)
         return val
 
     @ci_encoder_b_input_term.setter
     def ci_encoder_b_input_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x219e, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x219e, val)
 
     @ci_encoder_b_input_term.deleter
     def ci_encoder_b_input_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x219e)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x219e)
 
     @property
     def ci_encoder_b_input_term_cfg(self):
@@ -2011,20 +1752,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30a5)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a5)
         return TerminalConfiguration(val)
 
     @ci_encoder_b_input_term_cfg.setter
     def ci_encoder_b_input_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30a5, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30a5, val)
 
     @ci_encoder_b_input_term_cfg.deleter
     def ci_encoder_b_input_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30a5)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30a5)
 
     @property
     def ci_encoder_decoding_type(self):
@@ -2038,20 +1776,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x21e6)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x21e6)
         return EncoderType(val)
 
     @ci_encoder_decoding_type.setter
     def ci_encoder_decoding_type(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x21e6, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x21e6, val)
 
     @ci_encoder_decoding_type.deleter
     def ci_encoder_decoding_type(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21e6)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21e6)
 
     @property
     def ci_encoder_z_index_enable(self):
@@ -2060,19 +1795,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x890)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x890)
         return val
 
     @ci_encoder_z_index_enable.setter
     def ci_encoder_z_index_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x890, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x890, val)
 
     @ci_encoder_z_index_enable.deleter
     def ci_encoder_z_index_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x890)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x890)
 
     @property
     def ci_encoder_z_index_phase(self):
@@ -2086,20 +1818,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x889)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x889)
         return EncoderZIndexPhase(val)
 
     @ci_encoder_z_index_phase.setter
     def ci_encoder_z_index_phase(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x889, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x889, val)
 
     @ci_encoder_z_index_phase.deleter
     def ci_encoder_z_index_phase(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x889)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x889)
 
     @property
     def ci_encoder_z_index_val(self):
@@ -2111,19 +1840,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x888)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x888)
         return val
 
     @ci_encoder_z_index_val.setter
     def ci_encoder_z_index_val(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x888, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x888, val)
 
     @ci_encoder_z_index_val.deleter
     def ci_encoder_z_index_val(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x888)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x888)
 
     @property
     def ci_encoder_z_input_dig_fltr_enable(self):
@@ -2133,19 +1859,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2205)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2205)
         return val
 
     @ci_encoder_z_input_dig_fltr_enable.setter
     def ci_encoder_z_input_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2205, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2205, val)
 
     @ci_encoder_z_input_dig_fltr_enable.deleter
     def ci_encoder_z_input_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2205)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2205)
 
     @property
     def ci_encoder_z_input_dig_fltr_min_pulse_width(self):
@@ -2155,19 +1878,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2206)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2206)
         return val
 
     @ci_encoder_z_input_dig_fltr_min_pulse_width.setter
     def ci_encoder_z_input_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2206, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2206, val)
 
     @ci_encoder_z_input_dig_fltr_min_pulse_width.deleter
     def ci_encoder_z_input_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2206)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2206)
 
     @property
     def ci_encoder_z_input_dig_fltr_timebase_rate(self):
@@ -2178,19 +1898,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2208)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2208)
         return val
 
     @ci_encoder_z_input_dig_fltr_timebase_rate.setter
     def ci_encoder_z_input_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2208, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2208, val)
 
     @ci_encoder_z_input_dig_fltr_timebase_rate.deleter
     def ci_encoder_z_input_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2208)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2208)
 
     @property
     def ci_encoder_z_input_dig_fltr_timebase_src(self):
@@ -2200,19 +1917,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x2207)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2207)
         return val
 
     @ci_encoder_z_input_dig_fltr_timebase_src.setter
     def ci_encoder_z_input_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x2207, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x2207, val)
 
     @ci_encoder_z_input_dig_fltr_timebase_src.deleter
     def ci_encoder_z_input_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2207)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2207)
 
     @property
     def ci_encoder_z_input_dig_sync_enable(self):
@@ -2223,19 +1937,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2209)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2209)
         return val
 
     @ci_encoder_z_input_dig_sync_enable.setter
     def ci_encoder_z_input_dig_sync_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2209, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2209, val)
 
     @ci_encoder_z_input_dig_sync_enable.deleter
     def ci_encoder_z_input_dig_sync_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2209)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2209)
 
     @property
     def ci_encoder_z_input_logic_lvl_behavior(self):
@@ -2245,20 +1956,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30a8)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a8)
         return LogicLvlBehavior(val)
 
     @ci_encoder_z_input_logic_lvl_behavior.setter
     def ci_encoder_z_input_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30a8, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30a8, val)
 
     @ci_encoder_z_input_logic_lvl_behavior.deleter
     def ci_encoder_z_input_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30a8)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30a8)
 
     @property
     def ci_encoder_z_input_term(self):
@@ -2267,19 +1975,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x219f)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x219f)
         return val
 
     @ci_encoder_z_input_term.setter
     def ci_encoder_z_input_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x219f, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x219f, val)
 
     @ci_encoder_z_input_term.deleter
     def ci_encoder_z_input_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x219f)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x219f)
 
     @property
     def ci_encoder_z_input_term_cfg(self):
@@ -2289,20 +1994,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30a7)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a7)
         return TerminalConfiguration(val)
 
     @ci_encoder_z_input_term_cfg.setter
     def ci_encoder_z_input_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30a7, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30a7, val)
 
     @ci_encoder_z_input_term_cfg.deleter
     def ci_encoder_z_input_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30a7)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30a7)
 
     @property
     def ci_filter_delay(self):
@@ -2314,8 +2016,7 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x31bb)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31bb)
         return val
 
     @property
@@ -2326,20 +2027,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x31bc)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x31bc)
         return DigitalWidthUnits(val)
 
     @ci_filter_delay_units.setter
     def ci_filter_delay_units(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x31bc, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x31bc, val)
 
     @ci_filter_delay_units.deleter
     def ci_filter_delay_units(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x31bc)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31bc)
 
     @property
     def ci_filter_enable(self):
@@ -2348,19 +2046,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x31b7)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x31b7)
         return val
 
     @ci_filter_enable.setter
     def ci_filter_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x31b7, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x31b7, val)
 
     @ci_filter_enable.deleter
     def ci_filter_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x31b7)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31b7)
 
     @property
     def ci_filter_freq(self):
@@ -2370,19 +2065,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x31b8)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31b8)
         return val
 
     @ci_filter_freq.setter
     def ci_filter_freq(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x31b8, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31b8, val)
 
     @ci_filter_freq.deleter
     def ci_filter_freq(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x31b8)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31b8)
 
     @property
     def ci_filter_order(self):
@@ -2392,19 +2084,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 0x31ba)
+        val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x31ba)
         return val
 
     @ci_filter_order.setter
     def ci_filter_order(self, val):
-        self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 0x31ba, val)
+        self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x31ba, val)
 
     @ci_filter_order.deleter
     def ci_filter_order(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x31ba)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31ba)
 
     @property
     def ci_filter_response(self):
@@ -2415,20 +2104,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x31b9)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x31b9)
         return FilterResponse(val)
 
     @ci_filter_response.setter
     def ci_filter_response(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x31b9, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x31b9, val)
 
     @ci_filter_response.deleter
     def ci_filter_response(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x31b9)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31b9)
 
     @property
     def ci_freq_dig_fltr_enable(self):
@@ -2438,19 +2124,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x21e7)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21e7)
         return val
 
     @ci_freq_dig_fltr_enable.setter
     def ci_freq_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x21e7, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x21e7, val)
 
     @ci_freq_dig_fltr_enable.deleter
     def ci_freq_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21e7)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21e7)
 
     @property
     def ci_freq_dig_fltr_min_pulse_width(self):
@@ -2460,19 +2143,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x21e8)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21e8)
         return val
 
     @ci_freq_dig_fltr_min_pulse_width.setter
     def ci_freq_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x21e8, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x21e8, val)
 
     @ci_freq_dig_fltr_min_pulse_width.deleter
     def ci_freq_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21e8)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21e8)
 
     @property
     def ci_freq_dig_fltr_timebase_rate(self):
@@ -2483,19 +2163,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x21ea)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21ea)
         return val
 
     @ci_freq_dig_fltr_timebase_rate.setter
     def ci_freq_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x21ea, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x21ea, val)
 
     @ci_freq_dig_fltr_timebase_rate.deleter
     def ci_freq_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21ea)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21ea)
 
     @property
     def ci_freq_dig_fltr_timebase_src(self):
@@ -2505,19 +2182,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x21e9)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x21e9)
         return val
 
     @ci_freq_dig_fltr_timebase_src.setter
     def ci_freq_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x21e9, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x21e9, val)
 
     @ci_freq_dig_fltr_timebase_src.deleter
     def ci_freq_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21e9)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21e9)
 
     @property
     def ci_freq_dig_sync_enable(self):
@@ -2528,19 +2202,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x21eb)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21eb)
         return val
 
     @ci_freq_dig_sync_enable.setter
     def ci_freq_dig_sync_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x21eb, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x21eb, val)
 
     @ci_freq_dig_sync_enable.deleter
     def ci_freq_dig_sync_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21eb)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21eb)
 
     @property
     def ci_freq_div(self):
@@ -2554,19 +2225,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 0x147)
+        val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x147)
         return val
 
     @ci_freq_div.setter
     def ci_freq_div(self, val):
-        self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 0x147, val)
+        self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x147, val)
 
     @ci_freq_div.deleter
     def ci_freq_div(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x147)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x147)
 
     @property
     def ci_freq_enable_averaging(self):
@@ -2576,19 +2244,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2ed0)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2ed0)
         return val
 
     @ci_freq_enable_averaging.setter
     def ci_freq_enable_averaging(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2ed0, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2ed0, val)
 
     @ci_freq_enable_averaging.deleter
     def ci_freq_enable_averaging(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2ed0)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2ed0)
 
     @property
     def ci_freq_hyst(self):
@@ -2605,19 +2270,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x31ac)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31ac)
         return val
 
     @ci_freq_hyst.setter
     def ci_freq_hyst(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x31ac, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31ac, val)
 
     @ci_freq_hyst.deleter
     def ci_freq_hyst(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x31ac)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31ac)
 
     @property
     def ci_freq_logic_lvl_behavior(self):
@@ -2627,20 +2289,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x3098)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3098)
         return LogicLvlBehavior(val)
 
     @ci_freq_logic_lvl_behavior.setter
     def ci_freq_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x3098, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x3098, val)
 
     @ci_freq_logic_lvl_behavior.deleter
     def ci_freq_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x3098)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x3098)
 
     @property
     def ci_freq_meas_meth(self):
@@ -2650,20 +2309,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x144)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x144)
         return CounterFrequencyMethod(val)
 
     @ci_freq_meas_meth.setter
     def ci_freq_meas_meth(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x144, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x144, val)
 
     @ci_freq_meas_meth.deleter
     def ci_freq_meas_meth(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x144)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x144)
 
     @property
     def ci_freq_meas_time(self):
@@ -2679,19 +2335,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x145)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x145)
         return val
 
     @ci_freq_meas_time.setter
     def ci_freq_meas_time(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x145, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x145, val)
 
     @ci_freq_meas_time.deleter
     def ci_freq_meas_time(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x145)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x145)
 
     @property
     def ci_freq_starting_edge(self):
@@ -2701,20 +2354,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x799)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x799)
         return Edge(val)
 
     @ci_freq_starting_edge.setter
     def ci_freq_starting_edge(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x799, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x799, val)
 
     @ci_freq_starting_edge.deleter
     def ci_freq_starting_edge(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x799)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x799)
 
     @property
     def ci_freq_term(self):
@@ -2723,19 +2373,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x18a2)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18a2)
         return val
 
     @ci_freq_term.setter
     def ci_freq_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x18a2, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x18a2, val)
 
     @ci_freq_term.deleter
     def ci_freq_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x18a2)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18a2)
 
     @property
     def ci_freq_term_cfg(self):
@@ -2745,20 +2392,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x3097)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3097)
         return TerminalConfiguration(val)
 
     @ci_freq_term_cfg.setter
     def ci_freq_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x3097, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x3097, val)
 
     @ci_freq_term_cfg.deleter
     def ci_freq_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x3097)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x3097)
 
     @property
     def ci_freq_thresh_voltage(self):
@@ -2771,19 +2415,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x31ab)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31ab)
         return val
 
     @ci_freq_thresh_voltage.setter
     def ci_freq_thresh_voltage(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x31ab, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31ab, val)
 
     @ci_freq_thresh_voltage.deleter
     def ci_freq_thresh_voltage(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x31ab)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31ab)
 
     @property
     def ci_freq_units(self):
@@ -2793,20 +2434,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x18a1)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18a1)
         return FrequencyUnits(val)
 
     @ci_freq_units.setter
     def ci_freq_units(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x18a1, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x18a1, val)
 
     @ci_freq_units.deleter
     def ci_freq_units(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x18a1)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18a1)
 
     @property
     def ci_gps_sync_method(self):
@@ -2816,20 +2454,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x1092)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1092)
         return GpsSignalType(val)
 
     @ci_gps_sync_method.setter
     def ci_gps_sync_method(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x1092, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x1092, val)
 
     @ci_gps_sync_method.deleter
     def ci_gps_sync_method(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x1092)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x1092)
 
     @property
     def ci_gps_sync_src(self):
@@ -2839,19 +2474,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x1093)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x1093)
         return val
 
     @ci_gps_sync_src.setter
     def ci_gps_sync_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x1093, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x1093, val)
 
     @ci_gps_sync_src.deleter
     def ci_gps_sync_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x1093)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x1093)
 
     @property
     def ci_lin_encoder_dist_per_pulse(self):
@@ -2862,19 +2494,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x911)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x911)
         return val
 
     @ci_lin_encoder_dist_per_pulse.setter
     def ci_lin_encoder_dist_per_pulse(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x911, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x911, val)
 
     @ci_lin_encoder_dist_per_pulse.deleter
     def ci_lin_encoder_dist_per_pulse(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x911)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x911)
 
     @property
     def ci_lin_encoder_initial_pos(self):
@@ -2885,19 +2514,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x915)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x915)
         return val
 
     @ci_lin_encoder_initial_pos.setter
     def ci_lin_encoder_initial_pos(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x915, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x915, val)
 
     @ci_lin_encoder_initial_pos.deleter
     def ci_lin_encoder_initial_pos(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x915)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x915)
 
     @property
     def ci_lin_encoder_units(self):
@@ -2907,20 +2533,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x18a9)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18a9)
         return LengthUnits(val)
 
     @ci_lin_encoder_units.setter
     def ci_lin_encoder_units(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x18a9, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x18a9, val)
 
     @ci_lin_encoder_units.deleter
     def ci_lin_encoder_units(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x18a9)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18a9)
 
     @property
     def ci_max(self):
@@ -2933,19 +2556,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x189c)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x189c)
         return val
 
     @ci_max.setter
     def ci_max(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x189c, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x189c, val)
 
     @ci_max.deleter
     def ci_max(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x189c)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x189c)
 
     @property
     def ci_max_meas_period(self):
@@ -2960,19 +2580,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x3095)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x3095)
         return val
 
     @ci_max_meas_period.setter
     def ci_max_meas_period(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x3095, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x3095, val)
 
     @ci_max_meas_period.deleter
     def ci_max_meas_period(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x3095)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x3095)
 
     @property
     def ci_meas_type(self):
@@ -2982,8 +2599,7 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x18a0)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18a0)
         return UsageTypeCI(val)
 
     @property
@@ -3000,19 +2616,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2ed2)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2ed2)
         return val
 
     @ci_mem_map_enable.setter
     def ci_mem_map_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2ed2, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2ed2, val)
 
     @ci_mem_map_enable.deleter
     def ci_mem_map_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2ed2)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2ed2)
 
     @property
     def ci_min(self):
@@ -3025,19 +2638,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x189d)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x189d)
         return val
 
     @ci_min.setter
     def ci_min(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x189d, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x189d, val)
 
     @ci_min.deleter
     def ci_min(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x189d)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x189d)
 
     @property
     def ci_num_possibly_invalid_samps(self):
@@ -3047,8 +2657,7 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 0x193c)
+        val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x193c)
         return val
 
     @property
@@ -3059,8 +2668,7 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x149)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x149)
         return Level(val)
 
     @property
@@ -3071,19 +2679,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x21ec)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21ec)
         return val
 
     @ci_period_dig_fltr_enable.setter
     def ci_period_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x21ec, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x21ec, val)
 
     @ci_period_dig_fltr_enable.deleter
     def ci_period_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21ec)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21ec)
 
     @property
     def ci_period_dig_fltr_min_pulse_width(self):
@@ -3093,19 +2698,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x21ed)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21ed)
         return val
 
     @ci_period_dig_fltr_min_pulse_width.setter
     def ci_period_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x21ed, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x21ed, val)
 
     @ci_period_dig_fltr_min_pulse_width.deleter
     def ci_period_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21ed)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21ed)
 
     @property
     def ci_period_dig_fltr_timebase_rate(self):
@@ -3116,19 +2718,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x21ef)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21ef)
         return val
 
     @ci_period_dig_fltr_timebase_rate.setter
     def ci_period_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x21ef, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x21ef, val)
 
     @ci_period_dig_fltr_timebase_rate.deleter
     def ci_period_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21ef)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21ef)
 
     @property
     def ci_period_dig_fltr_timebase_src(self):
@@ -3138,19 +2737,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x21ee)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x21ee)
         return val
 
     @ci_period_dig_fltr_timebase_src.setter
     def ci_period_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x21ee, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x21ee, val)
 
     @ci_period_dig_fltr_timebase_src.deleter
     def ci_period_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21ee)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21ee)
 
     @property
     def ci_period_dig_sync_enable(self):
@@ -3161,19 +2757,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x21f0)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21f0)
         return val
 
     @ci_period_dig_sync_enable.setter
     def ci_period_dig_sync_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x21f0, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x21f0, val)
 
     @ci_period_dig_sync_enable.deleter
     def ci_period_dig_sync_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x21f0)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x21f0)
 
     @property
     def ci_period_div(self):
@@ -3187,19 +2780,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 0x192e)
+        val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x192e)
         return val
 
     @ci_period_div.setter
     def ci_period_div(self, val):
-        self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 0x192e, val)
+        self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x192e, val)
 
     @ci_period_div.deleter
     def ci_period_div(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x192e)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x192e)
 
     @property
     def ci_period_enable_averaging(self):
@@ -3209,19 +2799,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2ed1)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2ed1)
         return val
 
     @ci_period_enable_averaging.setter
     def ci_period_enable_averaging(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2ed1, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2ed1, val)
 
     @ci_period_enable_averaging.deleter
     def ci_period_enable_averaging(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2ed1)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2ed1)
 
     @property
     def ci_period_hyst(self):
@@ -3239,19 +2826,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x31ae)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31ae)
         return val
 
     @ci_period_hyst.setter
     def ci_period_hyst(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x31ae, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31ae, val)
 
     @ci_period_hyst.deleter
     def ci_period_hyst(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x31ae)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31ae)
 
     @property
     def ci_period_logic_lvl_behavior(self):
@@ -3261,20 +2845,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x309a)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x309a)
         return LogicLvlBehavior(val)
 
     @ci_period_logic_lvl_behavior.setter
     def ci_period_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x309a, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x309a, val)
 
     @ci_period_logic_lvl_behavior.deleter
     def ci_period_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x309a)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x309a)
 
     @property
     def ci_period_meas_meth(self):
@@ -3284,20 +2865,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x192c)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x192c)
         return CounterFrequencyMethod(val)
 
     @ci_period_meas_meth.setter
     def ci_period_meas_meth(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x192c, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x192c, val)
 
     @ci_period_meas_meth.deleter
     def ci_period_meas_meth(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x192c)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x192c)
 
     @property
     def ci_period_meas_time(self):
@@ -3313,19 +2891,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x192d)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x192d)
         return val
 
     @ci_period_meas_time.setter
     def ci_period_meas_time(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x192d, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x192d, val)
 
     @ci_period_meas_time.deleter
     def ci_period_meas_time(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x192d)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x192d)
 
     @property
     def ci_period_starting_edge(self):
@@ -3335,20 +2910,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x852)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x852)
         return Edge(val)
 
     @ci_period_starting_edge.setter
     def ci_period_starting_edge(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x852, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x852, val)
 
     @ci_period_starting_edge.deleter
     def ci_period_starting_edge(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x852)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x852)
 
     @property
     def ci_period_term(self):
@@ -3357,19 +2929,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x18a4)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18a4)
         return val
 
     @ci_period_term.setter
     def ci_period_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x18a4, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x18a4, val)
 
     @ci_period_term.deleter
     def ci_period_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x18a4)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18a4)
 
     @property
     def ci_period_term_cfg(self):
@@ -3379,20 +2948,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x3099)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3099)
         return TerminalConfiguration(val)
 
     @ci_period_term_cfg.setter
     def ci_period_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x3099, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x3099, val)
 
     @ci_period_term_cfg.deleter
     def ci_period_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x3099)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x3099)
 
     @property
     def ci_period_thresh_voltage(self):
@@ -3405,19 +2971,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x31ad)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31ad)
         return val
 
     @ci_period_thresh_voltage.setter
     def ci_period_thresh_voltage(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x31ad, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31ad, val)
 
     @ci_period_thresh_voltage.deleter
     def ci_period_thresh_voltage(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x31ad)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31ad)
 
     @property
     def ci_period_units(self):
@@ -3427,20 +2990,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x18a3)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18a3)
         return TimeUnits(val)
 
     @ci_period_units.setter
     def ci_period_units(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x18a3, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x18a3, val)
 
     @ci_period_units.deleter
     def ci_period_units(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x18a3)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18a3)
 
     @property
     def ci_prescaler(self):
@@ -3456,19 +3016,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 0x2239)
+        val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x2239)
         return val
 
     @ci_prescaler.setter
     def ci_prescaler(self, val):
-        self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 0x2239, val)
+        self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x2239, val)
 
     @ci_prescaler.deleter
     def ci_prescaler(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2239)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2239)
 
     @property
     def ci_pulse_freq_dig_fltr_enable(self):
@@ -3478,19 +3035,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2f06)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2f06)
         return val
 
     @ci_pulse_freq_dig_fltr_enable.setter
     def ci_pulse_freq_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2f06, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2f06, val)
 
     @ci_pulse_freq_dig_fltr_enable.deleter
     def ci_pulse_freq_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f06)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f06)
 
     @property
     def ci_pulse_freq_dig_fltr_min_pulse_width(self):
@@ -3500,19 +3054,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2f07)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f07)
         return val
 
     @ci_pulse_freq_dig_fltr_min_pulse_width.setter
     def ci_pulse_freq_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2f07, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2f07, val)
 
     @ci_pulse_freq_dig_fltr_min_pulse_width.deleter
     def ci_pulse_freq_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f07)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f07)
 
     @property
     def ci_pulse_freq_dig_fltr_timebase_rate(self):
@@ -3523,19 +3074,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2f09)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f09)
         return val
 
     @ci_pulse_freq_dig_fltr_timebase_rate.setter
     def ci_pulse_freq_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2f09, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2f09, val)
 
     @ci_pulse_freq_dig_fltr_timebase_rate.deleter
     def ci_pulse_freq_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f09)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f09)
 
     @property
     def ci_pulse_freq_dig_fltr_timebase_src(self):
@@ -3545,19 +3093,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x2f08)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2f08)
         return val
 
     @ci_pulse_freq_dig_fltr_timebase_src.setter
     def ci_pulse_freq_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x2f08, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x2f08, val)
 
     @ci_pulse_freq_dig_fltr_timebase_src.deleter
     def ci_pulse_freq_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f08)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f08)
 
     @property
     def ci_pulse_freq_dig_sync_enable(self):
@@ -3568,19 +3113,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2f0a)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2f0a)
         return val
 
     @ci_pulse_freq_dig_sync_enable.setter
     def ci_pulse_freq_dig_sync_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2f0a, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2f0a, val)
 
     @ci_pulse_freq_dig_sync_enable.deleter
     def ci_pulse_freq_dig_sync_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f0a)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f0a)
 
     @property
     def ci_pulse_freq_logic_lvl_behavior(self):
@@ -3590,20 +3132,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30b2)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30b2)
         return LogicLvlBehavior(val)
 
     @ci_pulse_freq_logic_lvl_behavior.setter
     def ci_pulse_freq_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30b2, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30b2, val)
 
     @ci_pulse_freq_logic_lvl_behavior.deleter
     def ci_pulse_freq_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30b2)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30b2)
 
     @property
     def ci_pulse_freq_starting_edge(self):
@@ -3613,20 +3152,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x2f05)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f05)
         return Edge(val)
 
     @ci_pulse_freq_starting_edge.setter
     def ci_pulse_freq_starting_edge(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x2f05, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2f05, val)
 
     @ci_pulse_freq_starting_edge.deleter
     def ci_pulse_freq_starting_edge(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f05)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f05)
 
     @property
     def ci_pulse_freq_term(self):
@@ -3635,19 +3171,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x2f04)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2f04)
         return val
 
     @ci_pulse_freq_term.setter
     def ci_pulse_freq_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x2f04, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x2f04, val)
 
     @ci_pulse_freq_term.deleter
     def ci_pulse_freq_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f04)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f04)
 
     @property
     def ci_pulse_freq_term_cfg(self):
@@ -3657,20 +3190,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30b1)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30b1)
         return TerminalConfiguration(val)
 
     @ci_pulse_freq_term_cfg.setter
     def ci_pulse_freq_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30b1, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30b1, val)
 
     @ci_pulse_freq_term_cfg.deleter
     def ci_pulse_freq_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30b1)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30b1)
 
     @property
     def ci_pulse_freq_units(self):
@@ -3680,20 +3210,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x2f0b)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f0b)
         return FrequencyUnits(val)
 
     @ci_pulse_freq_units.setter
     def ci_pulse_freq_units(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x2f0b, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2f0b, val)
 
     @ci_pulse_freq_units.deleter
     def ci_pulse_freq_units(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f0b)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f0b)
 
     @property
     def ci_pulse_ticks_dig_fltr_enable(self):
@@ -3703,19 +3230,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2f16)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2f16)
         return val
 
     @ci_pulse_ticks_dig_fltr_enable.setter
     def ci_pulse_ticks_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2f16, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2f16, val)
 
     @ci_pulse_ticks_dig_fltr_enable.deleter
     def ci_pulse_ticks_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f16)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f16)
 
     @property
     def ci_pulse_ticks_dig_fltr_min_pulse_width(self):
@@ -3725,19 +3249,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2f17)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f17)
         return val
 
     @ci_pulse_ticks_dig_fltr_min_pulse_width.setter
     def ci_pulse_ticks_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2f17, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2f17, val)
 
     @ci_pulse_ticks_dig_fltr_min_pulse_width.deleter
     def ci_pulse_ticks_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f17)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f17)
 
     @property
     def ci_pulse_ticks_dig_fltr_timebase_rate(self):
@@ -3748,19 +3269,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2f19)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f19)
         return val
 
     @ci_pulse_ticks_dig_fltr_timebase_rate.setter
     def ci_pulse_ticks_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2f19, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2f19, val)
 
     @ci_pulse_ticks_dig_fltr_timebase_rate.deleter
     def ci_pulse_ticks_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f19)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f19)
 
     @property
     def ci_pulse_ticks_dig_fltr_timebase_src(self):
@@ -3770,19 +3288,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x2f18)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2f18)
         return val
 
     @ci_pulse_ticks_dig_fltr_timebase_src.setter
     def ci_pulse_ticks_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x2f18, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x2f18, val)
 
     @ci_pulse_ticks_dig_fltr_timebase_src.deleter
     def ci_pulse_ticks_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f18)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f18)
 
     @property
     def ci_pulse_ticks_dig_sync_enable(self):
@@ -3793,19 +3308,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2f1a)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2f1a)
         return val
 
     @ci_pulse_ticks_dig_sync_enable.setter
     def ci_pulse_ticks_dig_sync_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2f1a, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2f1a, val)
 
     @ci_pulse_ticks_dig_sync_enable.deleter
     def ci_pulse_ticks_dig_sync_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f1a)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f1a)
 
     @property
     def ci_pulse_ticks_logic_lvl_behavior(self):
@@ -3815,20 +3327,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30b6)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30b6)
         return LogicLvlBehavior(val)
 
     @ci_pulse_ticks_logic_lvl_behavior.setter
     def ci_pulse_ticks_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30b6, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30b6, val)
 
     @ci_pulse_ticks_logic_lvl_behavior.deleter
     def ci_pulse_ticks_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30b6)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30b6)
 
     @property
     def ci_pulse_ticks_starting_edge(self):
@@ -3838,20 +3347,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x2f15)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f15)
         return Edge(val)
 
     @ci_pulse_ticks_starting_edge.setter
     def ci_pulse_ticks_starting_edge(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x2f15, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2f15, val)
 
     @ci_pulse_ticks_starting_edge.deleter
     def ci_pulse_ticks_starting_edge(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f15)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f15)
 
     @property
     def ci_pulse_ticks_term(self):
@@ -3860,19 +3366,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x2f14)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2f14)
         return val
 
     @ci_pulse_ticks_term.setter
     def ci_pulse_ticks_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x2f14, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x2f14, val)
 
     @ci_pulse_ticks_term.deleter
     def ci_pulse_ticks_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f14)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f14)
 
     @property
     def ci_pulse_ticks_term_cfg(self):
@@ -3882,20 +3385,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30b5)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30b5)
         return TerminalConfiguration(val)
 
     @ci_pulse_ticks_term_cfg.setter
     def ci_pulse_ticks_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30b5, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30b5, val)
 
     @ci_pulse_ticks_term_cfg.deleter
     def ci_pulse_ticks_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30b5)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30b5)
 
     @property
     def ci_pulse_time_dig_fltr_enable(self):
@@ -3905,19 +3405,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2f0e)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2f0e)
         return val
 
     @ci_pulse_time_dig_fltr_enable.setter
     def ci_pulse_time_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2f0e, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2f0e, val)
 
     @ci_pulse_time_dig_fltr_enable.deleter
     def ci_pulse_time_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f0e)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f0e)
 
     @property
     def ci_pulse_time_dig_fltr_min_pulse_width(self):
@@ -3927,19 +3424,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2f0f)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f0f)
         return val
 
     @ci_pulse_time_dig_fltr_min_pulse_width.setter
     def ci_pulse_time_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2f0f, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2f0f, val)
 
     @ci_pulse_time_dig_fltr_min_pulse_width.deleter
     def ci_pulse_time_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f0f)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f0f)
 
     @property
     def ci_pulse_time_dig_fltr_timebase_rate(self):
@@ -3950,19 +3444,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2f11)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f11)
         return val
 
     @ci_pulse_time_dig_fltr_timebase_rate.setter
     def ci_pulse_time_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2f11, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2f11, val)
 
     @ci_pulse_time_dig_fltr_timebase_rate.deleter
     def ci_pulse_time_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f11)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f11)
 
     @property
     def ci_pulse_time_dig_fltr_timebase_src(self):
@@ -3972,19 +3463,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x2f10)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2f10)
         return val
 
     @ci_pulse_time_dig_fltr_timebase_src.setter
     def ci_pulse_time_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x2f10, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x2f10, val)
 
     @ci_pulse_time_dig_fltr_timebase_src.deleter
     def ci_pulse_time_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f10)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f10)
 
     @property
     def ci_pulse_time_dig_sync_enable(self):
@@ -3995,19 +3483,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2f12)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2f12)
         return val
 
     @ci_pulse_time_dig_sync_enable.setter
     def ci_pulse_time_dig_sync_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2f12, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2f12, val)
 
     @ci_pulse_time_dig_sync_enable.deleter
     def ci_pulse_time_dig_sync_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f12)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f12)
 
     @property
     def ci_pulse_time_logic_lvl_behavior(self):
@@ -4017,20 +3502,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30b4)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30b4)
         return LogicLvlBehavior(val)
 
     @ci_pulse_time_logic_lvl_behavior.setter
     def ci_pulse_time_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30b4, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30b4, val)
 
     @ci_pulse_time_logic_lvl_behavior.deleter
     def ci_pulse_time_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30b4)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30b4)
 
     @property
     def ci_pulse_time_starting_edge(self):
@@ -4040,20 +3522,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x2f0d)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f0d)
         return Edge(val)
 
     @ci_pulse_time_starting_edge.setter
     def ci_pulse_time_starting_edge(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x2f0d, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2f0d, val)
 
     @ci_pulse_time_starting_edge.deleter
     def ci_pulse_time_starting_edge(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f0d)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f0d)
 
     @property
     def ci_pulse_time_term(self):
@@ -4062,19 +3541,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x2f0c)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2f0c)
         return val
 
     @ci_pulse_time_term.setter
     def ci_pulse_time_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x2f0c, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x2f0c, val)
 
     @ci_pulse_time_term.deleter
     def ci_pulse_time_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f0c)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f0c)
 
     @property
     def ci_pulse_time_term_cfg(self):
@@ -4084,20 +3560,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30b3)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30b3)
         return TerminalConfiguration(val)
 
     @ci_pulse_time_term_cfg.setter
     def ci_pulse_time_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30b3, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30b3, val)
 
     @ci_pulse_time_term_cfg.deleter
     def ci_pulse_time_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30b3)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30b3)
 
     @property
     def ci_pulse_time_units(self):
@@ -4108,20 +3581,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x2f13)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f13)
         return TimeUnits(val)
 
     @ci_pulse_time_units.setter
     def ci_pulse_time_units(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x2f13, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2f13, val)
 
     @ci_pulse_time_units.deleter
     def ci_pulse_time_units(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2f13)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f13)
 
     @property
     def ci_pulse_width_dig_fltr_enable(self):
@@ -4131,19 +3601,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x220a)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x220a)
         return val
 
     @ci_pulse_width_dig_fltr_enable.setter
     def ci_pulse_width_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x220a, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x220a, val)
 
     @ci_pulse_width_dig_fltr_enable.deleter
     def ci_pulse_width_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x220a)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x220a)
 
     @property
     def ci_pulse_width_dig_fltr_min_pulse_width(self):
@@ -4153,19 +3620,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x220b)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x220b)
         return val
 
     @ci_pulse_width_dig_fltr_min_pulse_width.setter
     def ci_pulse_width_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x220b, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x220b, val)
 
     @ci_pulse_width_dig_fltr_min_pulse_width.deleter
     def ci_pulse_width_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x220b)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x220b)
 
     @property
     def ci_pulse_width_dig_fltr_timebase_rate(self):
@@ -4176,19 +3640,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x220d)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x220d)
         return val
 
     @ci_pulse_width_dig_fltr_timebase_rate.setter
     def ci_pulse_width_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x220d, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x220d, val)
 
     @ci_pulse_width_dig_fltr_timebase_rate.deleter
     def ci_pulse_width_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x220d)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x220d)
 
     @property
     def ci_pulse_width_dig_fltr_timebase_src(self):
@@ -4198,19 +3659,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x220c)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x220c)
         return val
 
     @ci_pulse_width_dig_fltr_timebase_src.setter
     def ci_pulse_width_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x220c, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x220c, val)
 
     @ci_pulse_width_dig_fltr_timebase_src.deleter
     def ci_pulse_width_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x220c)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x220c)
 
     @property
     def ci_pulse_width_dig_sync_enable(self):
@@ -4221,19 +3679,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x220e)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x220e)
         return val
 
     @ci_pulse_width_dig_sync_enable.setter
     def ci_pulse_width_dig_sync_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x220e, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x220e, val)
 
     @ci_pulse_width_dig_sync_enable.deleter
     def ci_pulse_width_dig_sync_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x220e)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x220e)
 
     @property
     def ci_pulse_width_logic_lvl_behavior(self):
@@ -4243,20 +3698,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30aa)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30aa)
         return LogicLvlBehavior(val)
 
     @ci_pulse_width_logic_lvl_behavior.setter
     def ci_pulse_width_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30aa, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30aa, val)
 
     @ci_pulse_width_logic_lvl_behavior.deleter
     def ci_pulse_width_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30aa)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30aa)
 
     @property
     def ci_pulse_width_starting_edge(self):
@@ -4266,20 +3718,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x825)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x825)
         return Edge(val)
 
     @ci_pulse_width_starting_edge.setter
     def ci_pulse_width_starting_edge(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x825, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x825, val)
 
     @ci_pulse_width_starting_edge.deleter
     def ci_pulse_width_starting_edge(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x825)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x825)
 
     @property
     def ci_pulse_width_term(self):
@@ -4288,19 +3737,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x18aa)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18aa)
         return val
 
     @ci_pulse_width_term.setter
     def ci_pulse_width_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x18aa, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x18aa, val)
 
     @ci_pulse_width_term.deleter
     def ci_pulse_width_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x18aa)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18aa)
 
     @property
     def ci_pulse_width_term_cfg(self):
@@ -4310,20 +3756,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30a9)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a9)
         return TerminalConfiguration(val)
 
     @ci_pulse_width_term_cfg.setter
     def ci_pulse_width_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30a9, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30a9, val)
 
     @ci_pulse_width_term_cfg.deleter
     def ci_pulse_width_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30a9)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30a9)
 
     @property
     def ci_pulse_width_units(self):
@@ -4333,20 +3776,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x823)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x823)
         return TimeUnits(val)
 
     @ci_pulse_width_units.setter
     def ci_pulse_width_units(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x823, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x823, val)
 
     @ci_pulse_width_units.deleter
     def ci_pulse_width_units(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x823)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x823)
 
     @property
     def ci_samp_clk_overrun_behavior(self):
@@ -4357,20 +3797,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x3093)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3093)
         return SampClkOverrunBehavior(val)
 
     @ci_samp_clk_overrun_behavior.setter
     def ci_samp_clk_overrun_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x3093, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x3093, val)
 
     @ci_samp_clk_overrun_behavior.deleter
     def ci_samp_clk_overrun_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x3093)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x3093)
 
     @property
     def ci_samp_clk_overrun_sentinel_val(self):
@@ -4380,19 +3817,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x3094)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3094)
         return val
 
     @ci_samp_clk_overrun_sentinel_val.setter
     def ci_samp_clk_overrun_sentinel_val(self, val):
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x3094, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x3094, val)
 
     @ci_samp_clk_overrun_sentinel_val.deleter
     def ci_samp_clk_overrun_sentinel_val(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x3094)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x3094)
 
     @property
     def ci_semi_period_dig_fltr_enable(self):
@@ -4402,19 +3836,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2219)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2219)
         return val
 
     @ci_semi_period_dig_fltr_enable.setter
     def ci_semi_period_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2219, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2219, val)
 
     @ci_semi_period_dig_fltr_enable.deleter
     def ci_semi_period_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2219)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2219)
 
     @property
     def ci_semi_period_dig_fltr_min_pulse_width(self):
@@ -4424,19 +3855,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x221a)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x221a)
         return val
 
     @ci_semi_period_dig_fltr_min_pulse_width.setter
     def ci_semi_period_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x221a, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x221a, val)
 
     @ci_semi_period_dig_fltr_min_pulse_width.deleter
     def ci_semi_period_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x221a)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x221a)
 
     @property
     def ci_semi_period_dig_fltr_timebase_rate(self):
@@ -4447,19 +3875,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x221c)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x221c)
         return val
 
     @ci_semi_period_dig_fltr_timebase_rate.setter
     def ci_semi_period_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x221c, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x221c, val)
 
     @ci_semi_period_dig_fltr_timebase_rate.deleter
     def ci_semi_period_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x221c)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x221c)
 
     @property
     def ci_semi_period_dig_fltr_timebase_src(self):
@@ -4469,19 +3894,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x221b)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x221b)
         return val
 
     @ci_semi_period_dig_fltr_timebase_src.setter
     def ci_semi_period_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x221b, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x221b, val)
 
     @ci_semi_period_dig_fltr_timebase_src.deleter
     def ci_semi_period_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x221b)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x221b)
 
     @property
     def ci_semi_period_dig_sync_enable(self):
@@ -4492,19 +3914,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x221d)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x221d)
         return val
 
     @ci_semi_period_dig_sync_enable.setter
     def ci_semi_period_dig_sync_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x221d, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x221d, val)
 
     @ci_semi_period_dig_sync_enable.deleter
     def ci_semi_period_dig_sync_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x221d)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x221d)
 
     @property
     def ci_semi_period_logic_lvl_behavior(self):
@@ -4514,20 +3933,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30b0)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30b0)
         return LogicLvlBehavior(val)
 
     @ci_semi_period_logic_lvl_behavior.setter
     def ci_semi_period_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30b0, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30b0, val)
 
     @ci_semi_period_logic_lvl_behavior.deleter
     def ci_semi_period_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30b0)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30b0)
 
     @property
     def ci_semi_period_starting_edge(self):
@@ -4539,20 +3955,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x22fe)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x22fe)
         return Edge(val)
 
     @ci_semi_period_starting_edge.setter
     def ci_semi_period_starting_edge(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x22fe, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x22fe, val)
 
     @ci_semi_period_starting_edge.deleter
     def ci_semi_period_starting_edge(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x22fe)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x22fe)
 
     @property
     def ci_semi_period_term(self):
@@ -4561,19 +3974,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x18b0)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18b0)
         return val
 
     @ci_semi_period_term.setter
     def ci_semi_period_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x18b0, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x18b0, val)
 
     @ci_semi_period_term.deleter
     def ci_semi_period_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x18b0)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18b0)
 
     @property
     def ci_semi_period_term_cfg(self):
@@ -4583,20 +3993,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30af)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30af)
         return TerminalConfiguration(val)
 
     @ci_semi_period_term_cfg.setter
     def ci_semi_period_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30af, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30af, val)
 
     @ci_semi_period_term_cfg.deleter
     def ci_semi_period_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30af)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30af)
 
     @property
     def ci_semi_period_units(self):
@@ -4606,20 +4013,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x18af)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18af)
         return TimeUnits(val)
 
     @ci_semi_period_units.setter
     def ci_semi_period_units(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x18af, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x18af, val)
 
     @ci_semi_period_units.deleter
     def ci_semi_period_units(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x18af)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18af)
 
     @property
     def ci_tc_reached(self):
@@ -4629,8 +4033,7 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x150)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x150)
         return val
 
     @property
@@ -4642,19 +4045,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x30b7)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30b7)
         return val
 
     @ci_thresh_voltage.setter
     def ci_thresh_voltage(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x30b7, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x30b7, val)
 
     @ci_thresh_voltage.deleter
     def ci_thresh_voltage(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30b7)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30b7)
 
     @property
     def ci_timestamp_initial_seconds(self):
@@ -4665,19 +4065,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 0x22b4)
+        val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x22b4)
         return val
 
     @ci_timestamp_initial_seconds.setter
     def ci_timestamp_initial_seconds(self, val):
-        self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 0x22b4, val)
+        self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x22b4, val)
 
     @ci_timestamp_initial_seconds.deleter
     def ci_timestamp_initial_seconds(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x22b4)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x22b4)
 
     @property
     def ci_timestamp_units(self):
@@ -4687,20 +4084,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x22b3)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x22b3)
         return TimeUnits(val)
 
     @ci_timestamp_units.setter
     def ci_timestamp_units(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x22b3, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x22b3, val)
 
     @ci_timestamp_units.deleter
     def ci_timestamp_units(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x22b3)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x22b3)
 
     @property
     def ci_two_edge_sep_first_dig_fltr_enable(self):
@@ -4710,19 +4104,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x220f)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x220f)
         return val
 
     @ci_two_edge_sep_first_dig_fltr_enable.setter
     def ci_two_edge_sep_first_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x220f, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x220f, val)
 
     @ci_two_edge_sep_first_dig_fltr_enable.deleter
     def ci_two_edge_sep_first_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x220f)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x220f)
 
     @property
     def ci_two_edge_sep_first_dig_fltr_min_pulse_width(self):
@@ -4732,19 +4123,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2210)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2210)
         return val
 
     @ci_two_edge_sep_first_dig_fltr_min_pulse_width.setter
     def ci_two_edge_sep_first_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2210, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2210, val)
 
     @ci_two_edge_sep_first_dig_fltr_min_pulse_width.deleter
     def ci_two_edge_sep_first_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2210)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2210)
 
     @property
     def ci_two_edge_sep_first_dig_fltr_timebase_rate(self):
@@ -4755,19 +4143,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2212)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2212)
         return val
 
     @ci_two_edge_sep_first_dig_fltr_timebase_rate.setter
     def ci_two_edge_sep_first_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2212, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2212, val)
 
     @ci_two_edge_sep_first_dig_fltr_timebase_rate.deleter
     def ci_two_edge_sep_first_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2212)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2212)
 
     @property
     def ci_two_edge_sep_first_dig_fltr_timebase_src(self):
@@ -4777,19 +4162,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x2211)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2211)
         return val
 
     @ci_two_edge_sep_first_dig_fltr_timebase_src.setter
     def ci_two_edge_sep_first_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x2211, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x2211, val)
 
     @ci_two_edge_sep_first_dig_fltr_timebase_src.deleter
     def ci_two_edge_sep_first_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2211)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2211)
 
     @property
     def ci_two_edge_sep_first_dig_sync_enable(self):
@@ -4800,19 +4182,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2213)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2213)
         return val
 
     @ci_two_edge_sep_first_dig_sync_enable.setter
     def ci_two_edge_sep_first_dig_sync_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2213, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2213, val)
 
     @ci_two_edge_sep_first_dig_sync_enable.deleter
     def ci_two_edge_sep_first_dig_sync_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2213)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2213)
 
     @property
     def ci_two_edge_sep_first_edge(self):
@@ -4822,20 +4201,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x833)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x833)
         return Edge(val)
 
     @ci_two_edge_sep_first_edge.setter
     def ci_two_edge_sep_first_edge(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x833, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x833, val)
 
     @ci_two_edge_sep_first_edge.deleter
     def ci_two_edge_sep_first_edge(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x833)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x833)
 
     @property
     def ci_two_edge_sep_first_logic_lvl_behavior(self):
@@ -4845,20 +4221,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30ac)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30ac)
         return LogicLvlBehavior(val)
 
     @ci_two_edge_sep_first_logic_lvl_behavior.setter
     def ci_two_edge_sep_first_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30ac, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30ac, val)
 
     @ci_two_edge_sep_first_logic_lvl_behavior.deleter
     def ci_two_edge_sep_first_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30ac)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30ac)
 
     @property
     def ci_two_edge_sep_first_term(self):
@@ -4868,19 +4241,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x18ad)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18ad)
         return val
 
     @ci_two_edge_sep_first_term.setter
     def ci_two_edge_sep_first_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x18ad, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x18ad, val)
 
     @ci_two_edge_sep_first_term.deleter
     def ci_two_edge_sep_first_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x18ad)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18ad)
 
     @property
     def ci_two_edge_sep_first_term_cfg(self):
@@ -4890,20 +4260,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30ab)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30ab)
         return TerminalConfiguration(val)
 
     @ci_two_edge_sep_first_term_cfg.setter
     def ci_two_edge_sep_first_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30ab, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30ab, val)
 
     @ci_two_edge_sep_first_term_cfg.deleter
     def ci_two_edge_sep_first_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30ab)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30ab)
 
     @property
     def ci_two_edge_sep_second_dig_fltr_enable(self):
@@ -4913,19 +4280,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2214)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2214)
         return val
 
     @ci_two_edge_sep_second_dig_fltr_enable.setter
     def ci_two_edge_sep_second_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2214, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2214, val)
 
     @ci_two_edge_sep_second_dig_fltr_enable.deleter
     def ci_two_edge_sep_second_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2214)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2214)
 
     @property
     def ci_two_edge_sep_second_dig_fltr_min_pulse_width(self):
@@ -4935,19 +4299,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2215)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2215)
         return val
 
     @ci_two_edge_sep_second_dig_fltr_min_pulse_width.setter
     def ci_two_edge_sep_second_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2215, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2215, val)
 
     @ci_two_edge_sep_second_dig_fltr_min_pulse_width.deleter
     def ci_two_edge_sep_second_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2215)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2215)
 
     @property
     def ci_two_edge_sep_second_dig_fltr_timebase_rate(self):
@@ -4958,19 +4319,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x2217)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2217)
         return val
 
     @ci_two_edge_sep_second_dig_fltr_timebase_rate.setter
     def ci_two_edge_sep_second_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x2217, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2217, val)
 
     @ci_two_edge_sep_second_dig_fltr_timebase_rate.deleter
     def ci_two_edge_sep_second_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2217)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2217)
 
     @property
     def ci_two_edge_sep_second_dig_fltr_timebase_src(self):
@@ -4980,19 +4338,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x2216)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2216)
         return val
 
     @ci_two_edge_sep_second_dig_fltr_timebase_src.setter
     def ci_two_edge_sep_second_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x2216, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x2216, val)
 
     @ci_two_edge_sep_second_dig_fltr_timebase_src.deleter
     def ci_two_edge_sep_second_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2216)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2216)
 
     @property
     def ci_two_edge_sep_second_dig_sync_enable(self):
@@ -5003,19 +4358,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x2218)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2218)
         return val
 
     @ci_two_edge_sep_second_dig_sync_enable.setter
     def ci_two_edge_sep_second_dig_sync_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x2218, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2218, val)
 
     @ci_two_edge_sep_second_dig_sync_enable.deleter
     def ci_two_edge_sep_second_dig_sync_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2218)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2218)
 
     @property
     def ci_two_edge_sep_second_edge(self):
@@ -5025,20 +4377,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x834)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x834)
         return Edge(val)
 
     @ci_two_edge_sep_second_edge.setter
     def ci_two_edge_sep_second_edge(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x834, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x834, val)
 
     @ci_two_edge_sep_second_edge.deleter
     def ci_two_edge_sep_second_edge(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x834)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x834)
 
     @property
     def ci_two_edge_sep_second_logic_lvl_behavior(self):
@@ -5048,20 +4397,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30ae)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30ae)
         return LogicLvlBehavior(val)
 
     @ci_two_edge_sep_second_logic_lvl_behavior.setter
     def ci_two_edge_sep_second_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30ae, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30ae, val)
 
     @ci_two_edge_sep_second_logic_lvl_behavior.deleter
     def ci_two_edge_sep_second_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30ae)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30ae)
 
     @property
     def ci_two_edge_sep_second_term(self):
@@ -5071,19 +4417,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x18ae)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18ae)
         return val
 
     @ci_two_edge_sep_second_term.setter
     def ci_two_edge_sep_second_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x18ae, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x18ae, val)
 
     @ci_two_edge_sep_second_term.deleter
     def ci_two_edge_sep_second_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x18ae)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18ae)
 
     @property
     def ci_two_edge_sep_second_term_cfg(self):
@@ -5093,20 +4436,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30ad)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30ad)
         return TerminalConfiguration(val)
 
     @ci_two_edge_sep_second_term_cfg.setter
     def ci_two_edge_sep_second_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30ad, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30ad, val)
 
     @ci_two_edge_sep_second_term_cfg.deleter
     def ci_two_edge_sep_second_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30ad)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30ad)
 
     @property
     def ci_two_edge_sep_units(self):
@@ -5116,20 +4456,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x18ac)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18ac)
         return TimeUnits(val)
 
     @ci_two_edge_sep_units.setter
     def ci_two_edge_sep_units(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x18ac, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x18ac, val)
 
     @ci_two_edge_sep_units.deleter
     def ci_two_edge_sep_units(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x18ac)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18ac)
 
     @property
     def ci_usb_xfer_req_count(self):
@@ -5140,19 +4477,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 0x3004)
+        val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x3004)
         return val
 
     @ci_usb_xfer_req_count.setter
     def ci_usb_xfer_req_count(self, val):
-        self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 0x3004, val)
+        self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x3004, val)
 
     @ci_usb_xfer_req_count.deleter
     def ci_usb_xfer_req_count(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x3004)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x3004)
 
     @property
     def ci_usb_xfer_req_size(self):
@@ -5163,19 +4497,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 0x2a92)
+        val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x2a92)
         return val
 
     @ci_usb_xfer_req_size.setter
     def ci_usb_xfer_req_size(self, val):
-        self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 0x2a92, val)
+        self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x2a92, val)
 
     @ci_usb_xfer_req_size.deleter
     def ci_usb_xfer_req_size(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x2a92)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2a92)
 
     @property
     def ci_velocity_a_input_dig_fltr_enable(self):
@@ -5185,19 +4516,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x30e0)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x30e0)
         return val
 
     @ci_velocity_a_input_dig_fltr_enable.setter
     def ci_velocity_a_input_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x30e0, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x30e0, val)
 
     @ci_velocity_a_input_dig_fltr_enable.deleter
     def ci_velocity_a_input_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30e0)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30e0)
 
     @property
     def ci_velocity_a_input_dig_fltr_min_pulse_width(self):
@@ -5207,19 +4535,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x30e1)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30e1)
         return val
 
     @ci_velocity_a_input_dig_fltr_min_pulse_width.setter
     def ci_velocity_a_input_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x30e1, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x30e1, val)
 
     @ci_velocity_a_input_dig_fltr_min_pulse_width.deleter
     def ci_velocity_a_input_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30e1)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30e1)
 
     @property
     def ci_velocity_a_input_dig_fltr_timebase_rate(self):
@@ -5230,19 +4555,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x30e3)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30e3)
         return val
 
     @ci_velocity_a_input_dig_fltr_timebase_rate.setter
     def ci_velocity_a_input_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x30e3, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x30e3, val)
 
     @ci_velocity_a_input_dig_fltr_timebase_rate.deleter
     def ci_velocity_a_input_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30e3)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30e3)
 
     @property
     def ci_velocity_a_input_dig_fltr_timebase_src(self):
@@ -5252,19 +4574,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x30e2)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x30e2)
         return val
 
     @ci_velocity_a_input_dig_fltr_timebase_src.setter
     def ci_velocity_a_input_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x30e2, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x30e2, val)
 
     @ci_velocity_a_input_dig_fltr_timebase_src.deleter
     def ci_velocity_a_input_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30e2)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30e2)
 
     @property
     def ci_velocity_a_input_logic_lvl_behavior(self):
@@ -5274,20 +4593,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30df)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30df)
         return LogicLvlBehavior(val)
 
     @ci_velocity_a_input_logic_lvl_behavior.setter
     def ci_velocity_a_input_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30df, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30df, val)
 
     @ci_velocity_a_input_logic_lvl_behavior.deleter
     def ci_velocity_a_input_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30df)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30df)
 
     @property
     def ci_velocity_a_input_term(self):
@@ -5296,19 +4612,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x30dd)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x30dd)
         return val
 
     @ci_velocity_a_input_term.setter
     def ci_velocity_a_input_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x30dd, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x30dd, val)
 
     @ci_velocity_a_input_term.deleter
     def ci_velocity_a_input_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30dd)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30dd)
 
     @property
     def ci_velocity_a_input_term_cfg(self):
@@ -5318,20 +4631,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30de)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30de)
         return TerminalConfiguration(val)
 
     @ci_velocity_a_input_term_cfg.setter
     def ci_velocity_a_input_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30de, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30de, val)
 
     @ci_velocity_a_input_term_cfg.deleter
     def ci_velocity_a_input_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30de)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30de)
 
     @property
     def ci_velocity_ang_encoder_pulses_per_rev(self):
@@ -5343,19 +4653,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 0x30d9)
+        val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x30d9)
         return val
 
     @ci_velocity_ang_encoder_pulses_per_rev.setter
     def ci_velocity_ang_encoder_pulses_per_rev(self, val):
-        self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 0x30d9, val)
+        self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x30d9, val)
 
     @ci_velocity_ang_encoder_pulses_per_rev.deleter
     def ci_velocity_ang_encoder_pulses_per_rev(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30d9)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30d9)
 
     @property
     def ci_velocity_ang_encoder_units(self):
@@ -5366,20 +4673,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30d8)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30d8)
         return AngularVelocityUnits(val)
 
     @ci_velocity_ang_encoder_units.setter
     def ci_velocity_ang_encoder_units(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30d8, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30d8, val)
 
     @ci_velocity_ang_encoder_units.deleter
     def ci_velocity_ang_encoder_units(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30d8)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30d8)
 
     @property
     def ci_velocity_b_input_dig_fltr_enable(self):
@@ -5389,19 +4693,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_bool(
-                self._handle, self._name, 0x30e7)
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x30e7)
         return val
 
     @ci_velocity_b_input_dig_fltr_enable.setter
     def ci_velocity_b_input_dig_fltr_enable(self, val):
-        self._interpreter.set_chan_attribute_bool(
-                self._handle, self._name, 0x30e7, val)
+        self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x30e7, val)
 
     @ci_velocity_b_input_dig_fltr_enable.deleter
     def ci_velocity_b_input_dig_fltr_enable(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30e7)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30e7)
 
     @property
     def ci_velocity_b_input_dig_fltr_min_pulse_width(self):
@@ -5411,19 +4712,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x30e8)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30e8)
         return val
 
     @ci_velocity_b_input_dig_fltr_min_pulse_width.setter
     def ci_velocity_b_input_dig_fltr_min_pulse_width(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x30e8, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x30e8, val)
 
     @ci_velocity_b_input_dig_fltr_min_pulse_width.deleter
     def ci_velocity_b_input_dig_fltr_min_pulse_width(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30e8)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30e8)
 
     @property
     def ci_velocity_b_input_dig_fltr_timebase_rate(self):
@@ -5434,19 +4732,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x30ea)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30ea)
         return val
 
     @ci_velocity_b_input_dig_fltr_timebase_rate.setter
     def ci_velocity_b_input_dig_fltr_timebase_rate(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x30ea, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x30ea, val)
 
     @ci_velocity_b_input_dig_fltr_timebase_rate.deleter
     def ci_velocity_b_input_dig_fltr_timebase_rate(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30ea)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30ea)
 
     @property
     def ci_velocity_b_input_dig_fltr_timebase_src(self):
@@ -5456,19 +4751,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x30e9)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x30e9)
         return val
 
     @ci_velocity_b_input_dig_fltr_timebase_src.setter
     def ci_velocity_b_input_dig_fltr_timebase_src(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x30e9, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x30e9, val)
 
     @ci_velocity_b_input_dig_fltr_timebase_src.deleter
     def ci_velocity_b_input_dig_fltr_timebase_src(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30e9)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30e9)
 
     @property
     def ci_velocity_b_input_logic_lvl_behavior(self):
@@ -5478,20 +4770,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30e6)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30e6)
         return LogicLvlBehavior(val)
 
     @ci_velocity_b_input_logic_lvl_behavior.setter
     def ci_velocity_b_input_logic_lvl_behavior(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30e6, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30e6, val)
 
     @ci_velocity_b_input_logic_lvl_behavior.deleter
     def ci_velocity_b_input_logic_lvl_behavior(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30e6)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30e6)
 
     @property
     def ci_velocity_b_input_term(self):
@@ -5500,19 +4789,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_string(
-                self._handle, self._name, 0x30e4)
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x30e4)
         return val
 
     @ci_velocity_b_input_term.setter
     def ci_velocity_b_input_term(self, val):
-        self._interpreter.set_chan_attribute_string(
-                self._handle, self._name, 0x30e4, val)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x30e4, val)
 
     @ci_velocity_b_input_term.deleter
     def ci_velocity_b_input_term(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30e4)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30e4)
 
     @property
     def ci_velocity_b_input_term_cfg(self):
@@ -5522,20 +4808,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30e5)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30e5)
         return TerminalConfiguration(val)
 
     @ci_velocity_b_input_term_cfg.setter
     def ci_velocity_b_input_term_cfg(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30e5, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30e5, val)
 
     @ci_velocity_b_input_term_cfg.deleter
     def ci_velocity_b_input_term_cfg(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30e5)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30e5)
 
     @property
     def ci_velocity_div(self):
@@ -5544,19 +4827,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_uint32(
-                self._handle, self._name, 0x30ec)
+        val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x30ec)
         return val
 
     @ci_velocity_div.setter
     def ci_velocity_div(self, val):
-        self._interpreter.set_chan_attribute_uint32(
-                self._handle, self._name, 0x30ec, val)
+        self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x30ec, val)
 
     @ci_velocity_div.deleter
     def ci_velocity_div(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30ec)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30ec)
 
     @property
     def ci_velocity_encoder_decoding_type(self):
@@ -5569,20 +4849,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30dc)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30dc)
         return EncoderType(val)
 
     @ci_velocity_encoder_decoding_type.setter
     def ci_velocity_encoder_decoding_type(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30dc, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30dc, val)
 
     @ci_velocity_encoder_decoding_type.deleter
     def ci_velocity_encoder_decoding_type(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30dc)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30dc)
 
     @property
     def ci_velocity_lin_encoder_dist_per_pulse(self):
@@ -5593,19 +4870,16 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x30db)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30db)
         return val
 
     @ci_velocity_lin_encoder_dist_per_pulse.setter
     def ci_velocity_lin_encoder_dist_per_pulse(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x30db, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x30db, val)
 
     @ci_velocity_lin_encoder_dist_per_pulse.deleter
     def ci_velocity_lin_encoder_dist_per_pulse(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30db)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30db)
 
     @property
     def ci_velocity_lin_encoder_units(self):
@@ -5616,20 +4890,17 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_int32(
-                self._handle, self._name, 0x30da)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30da)
         return VelocityUnits(val)
 
     @ci_velocity_lin_encoder_units.setter
     def ci_velocity_lin_encoder_units(self, val):
         val = val.value
-        self._interpreter.set_chan_attribute_int32(
-                self._handle, self._name, 0x30da, val)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x30da, val)
 
     @ci_velocity_lin_encoder_units.deleter
     def ci_velocity_lin_encoder_units(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30da)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30da)
 
     @property
     def ci_velocity_meas_time(self):
@@ -5639,17 +4910,14 @@ class CIChannel(Channel):
         """
 
 
-        val = self._interpreter.get_chan_attribute_double(
-                self._handle, self._name, 0x30eb)
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30eb)
         return val
 
     @ci_velocity_meas_time.setter
     def ci_velocity_meas_time(self, val):
-        self._interpreter.set_chan_attribute_double(
-                self._handle, self._name, 0x30eb, val)
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x30eb, val)
 
     @ci_velocity_meas_time.deleter
     def ci_velocity_meas_time(self):
-        self._interpreter.reset_chan_attribute(
-                self._handle, self._name, 0x30eb)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x30eb)
 

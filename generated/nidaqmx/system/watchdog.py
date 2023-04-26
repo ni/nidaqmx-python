@@ -106,20 +106,17 @@ class WatchdogTask:
         """
 
 
-        val = self._interpreter.get_watchdog_attribute_int32(
-                self._handle, "", 0x21a5)
+        val = self._interpreter.get_watchdog_attribute_int32(self._handle, "", 0x21a5)
         return Edge(val)
 
     @expir_trig_dig_edge_edge.setter
     def expir_trig_dig_edge_edge(self, val):
         val = val.value
-        self._interpreter.set_watchdog_attribute_int32(
-                self._handle, "", 0x21a5, val)
+        self._interpreter.set_watchdog_attribute_int32(self._handle, "", 0x21a5, val)
 
     @expir_trig_dig_edge_edge.deleter
     def expir_trig_dig_edge_edge(self):
-        self._interpreter.reset_watchdog_attribute(
-                self._handle, "", 0x21a5)
+        self._interpreter.reset_watchdog_attribute(self._handle, "", 0x21a5)
 
     @property
     def expir_trig_dig_edge_src(self):
@@ -129,19 +126,16 @@ class WatchdogTask:
         """
 
 
-        val = self._interpreter.get_watchdog_attribute_string(
-                self._handle, "", 0x21a4)
+        val = self._interpreter.get_watchdog_attribute_string(self._handle, "", 0x21a4)
         return val
 
     @expir_trig_dig_edge_src.setter
     def expir_trig_dig_edge_src(self, val):
-        self._interpreter.set_watchdog_attribute_string(
-                self._handle, "", 0x21a4, val)
+        self._interpreter.set_watchdog_attribute_string(self._handle, "", 0x21a4, val)
 
     @expir_trig_dig_edge_src.deleter
     def expir_trig_dig_edge_src(self):
-        self._interpreter.reset_watchdog_attribute(
-                self._handle, "", 0x21a4)
+        self._interpreter.reset_watchdog_attribute(self._handle, "", 0x21a4)
 
     @property
     def expir_trig_trig_on_network_conn_loss(self):
@@ -153,19 +147,16 @@ class WatchdogTask:
         """
 
 
-        val = self._interpreter.get_watchdog_attribute_bool(
-                self._handle, "", 0x305d)
+        val = self._interpreter.get_watchdog_attribute_bool(self._handle, "", 0x305d)
         return val
 
     @expir_trig_trig_on_network_conn_loss.setter
     def expir_trig_trig_on_network_conn_loss(self, val):
-        self._interpreter.set_watchdog_attribute_bool(
-                self._handle, "", 0x305d, val)
+        self._interpreter.set_watchdog_attribute_bool(self._handle, "", 0x305d, val)
 
     @expir_trig_trig_on_network_conn_loss.deleter
     def expir_trig_trig_on_network_conn_loss(self):
-        self._interpreter.reset_watchdog_attribute(
-                self._handle, "", 0x305d)
+        self._interpreter.reset_watchdog_attribute(self._handle, "", 0x305d)
 
     @property
     def expir_trig_trig_type(self):
@@ -175,20 +166,17 @@ class WatchdogTask:
         """
 
 
-        val = self._interpreter.get_watchdog_attribute_int32(
-                self._handle, "", 0x21a3)
+        val = self._interpreter.get_watchdog_attribute_int32(self._handle, "", 0x21a3)
         return TriggerType(val)
 
     @expir_trig_trig_type.setter
     def expir_trig_trig_type(self, val):
         val = val.value
-        self._interpreter.set_watchdog_attribute_int32(
-                self._handle, "", 0x21a3, val)
+        self._interpreter.set_watchdog_attribute_int32(self._handle, "", 0x21a3, val)
 
     @expir_trig_trig_type.deleter
     def expir_trig_trig_type(self):
-        self._interpreter.reset_watchdog_attribute(
-                self._handle, "", 0x21a3)
+        self._interpreter.reset_watchdog_attribute(self._handle, "", 0x21a3)
 
     @property
     def expired(self):
@@ -198,8 +186,7 @@ class WatchdogTask:
         """
 
 
-        val = self._interpreter.get_watchdog_attribute_bool(
-                self._handle, "", 0x21a8)
+        val = self._interpreter.get_watchdog_attribute_bool(self._handle, "", 0x21a8)
         return val
 
     @property
@@ -212,19 +199,16 @@ class WatchdogTask:
         """
 
 
-        val = self._interpreter.get_watchdog_attribute_double(
-                self._handle, "", 0x21a9)
+        val = self._interpreter.get_watchdog_attribute_double(self._handle, "", 0x21a9)
         return val
 
     @timeout.setter
     def timeout(self, val):
-        self._interpreter.set_watchdog_attribute_double(
-                self._handle, "", 0x21a9, val)
+        self._interpreter.set_watchdog_attribute_double(self._handle, "", 0x21a9, val)
 
     @timeout.deleter
     def timeout(self):
-        self._interpreter.reset_watchdog_attribute(
-                self._handle, "", 0x21a9)
+        self._interpreter.reset_watchdog_attribute(self._handle, "", 0x21a9)
 
     @property
     def name(self):
