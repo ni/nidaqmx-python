@@ -233,7 +233,7 @@ def is_custom_read_write_function(func):
 
 def get_output_params(func):
     """Gets input parameters for the function."""
-    return (p for p in func.base_parameters if p.direction == "out")
+    return [p for p in func.base_parameters if p.direction == "out"]
 
 
 def get_return_values(func):
