@@ -26,7 +26,6 @@ class ExportSignals:
             sample clock.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_double(self._handle, 0x1757)
         return val
 
@@ -45,7 +44,6 @@ class ExportSignals:
             Complete Event.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1651)
         return val
 
@@ -63,7 +61,6 @@ class ExportSignals:
         :class:`nidaqmx.constants.Polarity`: Specifies the polarity of
             the exported Advance Complete Event.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1652)
         return Polarity(val)
@@ -84,7 +81,6 @@ class ExportSignals:
             Event pulse.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_double(self._handle, 0x1654)
         return val
 
@@ -102,7 +98,6 @@ class ExportSignals:
         str: Specifies the terminal to which to route the Advance
             Trigger.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1645)
         return val
@@ -122,7 +117,6 @@ class ExportSignals:
             the exported Advance Trigger.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1646)
         return Polarity(val)
 
@@ -133,7 +127,6 @@ class ExportSignals:
             Specify this value in the units you specify with
             **adv_trig_pulse_width_units**.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_double(self._handle, 0x1648)
         return val
@@ -153,7 +146,6 @@ class ExportSignals:
             units of **adv_trig_pulse_width**.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1647)
         return DigitalWidthUnits(val)
 
@@ -172,7 +164,6 @@ class ExportSignals:
         str: Specifies the terminal to which to route the AI Convert
             Clock.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1687)
         return val
@@ -194,7 +185,6 @@ class ExportSignals:
             Convert Clock.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1688)
         return Polarity(val)
 
@@ -204,7 +194,6 @@ class ExportSignals:
         str: Specifies the terminal to which to route the AI Hold
             Complete Event.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x18ed)
         return val
@@ -223,7 +212,6 @@ class ExportSignals:
         :class:`nidaqmx.constants.Polarity`: Specifies the polarity of
             an exported AI Hold Complete Event pulse.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x18ee)
         return Polarity(val)
@@ -244,7 +232,6 @@ class ExportSignals:
             Detection Event.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x2197)
         return val
 
@@ -262,7 +249,6 @@ class ExportSignals:
         :class:`nidaqmx.constants.Polarity`: Specifies the polarity of
             an exported Change Detection Event pulse.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x2303)
         return Polarity(val)
@@ -284,7 +270,6 @@ class ExportSignals:
             state to the other when the counter reaches terminal count.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x174f)
         return ExportAction(val)
 
@@ -303,7 +288,6 @@ class ExportSignals:
         str: Specifies the terminal to which to route the Counter Output
             Event.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1717)
         return val
@@ -327,7 +311,6 @@ class ExportSignals:
             **ExportActions2.TOGGLE**.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1718)
         return Polarity(val)
 
@@ -350,7 +333,6 @@ class ExportSignals:
             when NI-DAQmx commits the task.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x186a)
         return Level(val)
 
@@ -369,7 +351,6 @@ class ExportSignals:
         :class:`nidaqmx.constants.Polarity`: Specifies the polarity of
             the exported Data Active Event.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1634)
         return Polarity(val)
@@ -390,7 +371,6 @@ class ExportSignals:
             Event.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1633)
         return val
 
@@ -409,7 +389,6 @@ class ExportSignals:
             Clock Timebase.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x21a1)
         return val
 
@@ -426,7 +405,6 @@ class ExportSignals:
         """
         str: Specifies the terminal to which to route the 10MHz Clock.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x226e)
         return val
@@ -445,7 +423,6 @@ class ExportSignals:
         str: Specifies the terminal to which to route the 20MHz
             Timebase.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1657)
         return val
@@ -466,7 +443,6 @@ class ExportSignals:
             Event.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_double(self._handle, 0x22bc)
         return val
 
@@ -485,7 +461,6 @@ class ExportSignals:
             starts if **hshk_event_output_behavior** is
             **ExportActions5.INTERLOCKED**.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_bool(self._handle, 0x22be)
         return val
@@ -506,7 +481,6 @@ class ExportSignals:
             **hshk_event_output_behavior** is
             **ExportActions5.INTERLOCKED**.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x22bd)
         return Level(val)
@@ -529,7 +503,6 @@ class ExportSignals:
             **ExportActions5.INTERLOCKED**.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_double(self._handle, 0x22bf)
         return val
 
@@ -547,7 +520,6 @@ class ExportSignals:
         :class:`nidaqmx.constants.ExportAction`: Specifies the output
             behavior of the Handshake Event.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x22bb)
         return ExportAction(val)
@@ -568,7 +540,6 @@ class ExportSignals:
             Event.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x22ba)
         return val
 
@@ -587,7 +558,6 @@ class ExportSignals:
             the exported Handshake Event if
             **hshk_event_output_behavior** is **ExportActions5.PULSE**.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x22c0)
         return Polarity(val)
@@ -609,7 +579,6 @@ class ExportSignals:
             **ExportActions5.PULSE**.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_double(self._handle, 0x22c1)
         return val
 
@@ -627,7 +596,6 @@ class ExportSignals:
         :class:`nidaqmx.constants.Polarity`: Specifies the active level
             of the exported Pause Trigger.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1616)
         return Polarity(val)
@@ -647,7 +615,6 @@ class ExportSignals:
         str: Specifies the terminal to which to route the Pause Trigger.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1615)
         return val
 
@@ -665,7 +632,6 @@ class ExportSignals:
         :class:`nidaqmx.constants.Polarity`: Specifies the polarity of
             the exported Ready for Start Event.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1751)
         return Polarity(val)
@@ -686,7 +652,6 @@ class ExportSignals:
             Start Event.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1609)
         return val
 
@@ -704,7 +669,6 @@ class ExportSignals:
         :class:`nidaqmx.constants.DeassertCondition`: Specifies when the
             ready for transfer event deasserts.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x2963)
         return DeassertCondition(val)
@@ -729,7 +693,6 @@ class ExportSignals:
             a custom threshold.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_uint32(self._handle, 0x2964)
         return val
 
@@ -747,7 +710,6 @@ class ExportSignals:
         :class:`nidaqmx.constants.Polarity`: Specifies the active level
             of the exported Ready for Transfer Event.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x22b6)
         return Polarity(val)
@@ -768,7 +730,6 @@ class ExportSignals:
             Transfer Event.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x22b5)
         return val
 
@@ -787,7 +748,6 @@ class ExportSignals:
             Trigger.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x590)
         return val
 
@@ -805,7 +765,6 @@ class ExportSignals:
         :class:`nidaqmx.constants.Polarity`: Specifies the polarity of
             the exported Reference Trigger.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x591)
         return Polarity(val)
@@ -828,7 +787,6 @@ class ExportSignals:
             information about this value.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_double(self._handle, 0x21c4)
         return val
 
@@ -849,7 +807,6 @@ class ExportSignals:
             sample.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x186b)
         return ExportAction(val)
 
@@ -867,7 +824,6 @@ class ExportSignals:
         """
         str: Specifies the terminal to which to route the Sample Clock.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x1663)
         return val
@@ -888,7 +844,6 @@ class ExportSignals:
             **ExportActions3.PULSE**.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x1664)
         return Polarity(val)
 
@@ -908,7 +863,6 @@ class ExportSignals:
             Timebase.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x18f9)
         return val
 
@@ -925,7 +879,6 @@ class ExportSignals:
         """
         str: Specifies the terminal to which to route the Start Trigger.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x584)
         return val
@@ -944,7 +897,6 @@ class ExportSignals:
         :class:`nidaqmx.constants.Polarity`: Specifies the polarity of
             the exported Start Trigger.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_int32(self._handle, 0x585)
         return Polarity(val)
@@ -965,7 +917,6 @@ class ExportSignals:
             Synchronization Pulse Event.
         """
 
-
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x223c)
         return val
 
@@ -983,7 +934,6 @@ class ExportSignals:
         str: Specifies the terminal  to which to route the Watchdog
             Timer Expired Event.
         """
-
 
         val = self._interpreter.get_exported_signal_attribute_string(self._handle, 0x21aa)
         return val

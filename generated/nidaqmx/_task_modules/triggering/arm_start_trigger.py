@@ -27,7 +27,6 @@ class ArmStartTrigger:
             signal.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x222d)
         return val
 
@@ -45,7 +44,6 @@ class ArmStartTrigger:
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x222e)
         return val
@@ -66,7 +64,6 @@ class ArmStartTrigger:
             the filter.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2230)
         return val
 
@@ -84,7 +81,6 @@ class ArmStartTrigger:
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x222f)
         return val
@@ -105,7 +101,6 @@ class ArmStartTrigger:
             device.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2231)
         return val
 
@@ -123,7 +118,6 @@ class ArmStartTrigger:
         :class:`nidaqmx.constants.Edge`: Specifies on which edge of a
             digital signal to arm the task for a Start Trigger.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1415)
         return Edge(val)
@@ -144,7 +138,6 @@ class ArmStartTrigger:
             signal to use as the source of the Arm Start Trigger.
         """
 
-
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x1417)
         return val
 
@@ -164,7 +157,6 @@ class ArmStartTrigger:
             name of the trigger source terminal.
         """
 
-
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x2f7f)
         return val
 
@@ -174,7 +166,6 @@ class ArmStartTrigger:
         :class:`nidaqmx.constants.Timescale`: Specifies the timescale to
             be used for timestamps used in an arm start time trigger.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x3132)
         return Timescale(val)
@@ -196,7 +187,6 @@ class ArmStartTrigger:
             available, an error will be returned at run time.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x3133)
         return val
 
@@ -214,7 +204,6 @@ class ArmStartTrigger:
         :class:`nidaqmx.constants.Timescale`: Specifies the arm start
             trigger timestamp timescale.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x3135)
         return Timescale(val)
@@ -237,7 +226,6 @@ class ArmStartTrigger:
             a Start Trigger until the device receives the Arm Start
             Trigger.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1414)
         return TriggerType(val)

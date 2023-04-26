@@ -29,7 +29,6 @@ class PauseTrigger:
             rather than a virtual channel.
         """
 
-
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x2236)
         return Coupling(val)
 
@@ -54,7 +53,6 @@ class PauseTrigger:
             rapidly.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2ef0)
         return val
 
@@ -72,7 +70,6 @@ class PauseTrigger:
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2ef1)
         return val
@@ -93,7 +90,6 @@ class PauseTrigger:
             the filter.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2ef3)
         return val
 
@@ -111,7 +107,6 @@ class PauseTrigger:
         str: Specifies the terminal of the signal to use as the timebase
             of the digital filter.
         """
-
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x2ef2)
         return val
@@ -131,7 +126,6 @@ class PauseTrigger:
             transitions in the signal to the internal timebase of the
             device.
         """
-
 
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2ef4)
         return val
@@ -158,7 +152,6 @@ class PauseTrigger:
             hysteresis.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x1368)
         return val
 
@@ -179,7 +172,6 @@ class PauseTrigger:
             task pauses above or below this threshold.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x1369)
         return val
 
@@ -198,7 +190,6 @@ class PauseTrigger:
             there is an analog signal to use as the source of the
             trigger.
         """
-
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x1370)
         return val
@@ -219,7 +210,6 @@ class PauseTrigger:
             **anlg_lvl_lvl**.
         """
 
-
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1371)
         return ActiveLevel(val)
 
@@ -239,7 +229,6 @@ class PauseTrigger:
             value in the units of the measurement or generation.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x1375)
         return val
 
@@ -258,7 +247,6 @@ class PauseTrigger:
             the source signal of the terminal if the source is a
             terminal rather than a virtual channel.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x2237)
         return Coupling(val)
@@ -283,7 +271,6 @@ class PauseTrigger:
             that transition in and out of the window rapidly.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2ef5)
         return val
 
@@ -301,7 +288,6 @@ class PauseTrigger:
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2ef6)
         return val
@@ -322,7 +308,6 @@ class PauseTrigger:
             the filter.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2ef8)
         return val
 
@@ -340,7 +325,6 @@ class PauseTrigger:
         str: Specifies the terminal of the signal to use as the timebase
             of the digital filter.
         """
-
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x2ef7)
         return val
@@ -361,7 +345,6 @@ class PauseTrigger:
             device.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2ef9)
         return val
 
@@ -381,7 +364,6 @@ class PauseTrigger:
             trigger.
         """
 
-
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x1373)
         return val
 
@@ -399,7 +381,6 @@ class PauseTrigger:
         float: Specifies the upper limit of the window. Specify this
             value in the units of the measurement or generation.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x1376)
         return val
@@ -421,7 +402,6 @@ class PauseTrigger:
             **anlg_win_top**.
         """
 
-
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1374)
         return WindowTriggerCondition2(val)
 
@@ -441,7 +421,6 @@ class PauseTrigger:
             signal.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2228)
         return val
 
@@ -459,7 +438,6 @@ class PauseTrigger:
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2229)
         return val
@@ -480,7 +458,6 @@ class PauseTrigger:
             the filter.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x222b)
         return val
 
@@ -498,7 +475,6 @@ class PauseTrigger:
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x222a)
         return val
@@ -519,7 +495,6 @@ class PauseTrigger:
             device.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x222c)
         return val
 
@@ -537,7 +512,6 @@ class PauseTrigger:
         str: Specifies the name of a terminal where there is a digital
             signal to use as the source of the Pause Trigger.
         """
-
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x1379)
         return val
@@ -557,7 +531,6 @@ class PauseTrigger:
             pauses while the signal is high or low.
         """
 
-
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1380)
         return Level(val)
 
@@ -576,7 +549,6 @@ class PauseTrigger:
         str: Specifies the digital pattern that must be met for the
             Pause Trigger to occur.
         """
-
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x2188)
         return val
@@ -599,7 +571,6 @@ class PauseTrigger:
             port are in ascending order.
         """
 
-
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x216f)
         return PhysicalChannel(val)
 
@@ -621,7 +592,6 @@ class PauseTrigger:
             digital pattern specified with **dig_pattern_pattern**.
         """
 
-
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x2170)
         return DigitalPatternCondition(val)
 
@@ -642,7 +612,6 @@ class PauseTrigger:
             trigger source terminal.
         """
 
-
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x2f20)
         return val
 
@@ -652,7 +621,6 @@ class PauseTrigger:
         :class:`nidaqmx.constants.TriggerType`: Specifies the type of
             trigger to use to pause a task.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1366)
         return TriggerType(val)

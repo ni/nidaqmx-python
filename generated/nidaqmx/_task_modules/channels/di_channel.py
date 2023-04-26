@@ -29,7 +29,6 @@ class DIChannel(Channel):
             samples.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2966)
         return ActiveOrInactiveEdgeSelection(val)
 
@@ -48,7 +47,6 @@ class DIChannel(Channel):
         :class:`nidaqmx.constants.DataTransferActiveTransferMode`:
             Specifies the data transfer mode for the device.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2263)
         return DataTransferActiveTransferMode(val)
@@ -70,7 +68,6 @@ class DIChannel(Channel):
             memory of the device to the buffer.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2264)
         return InputDataTransferCondition(val)
 
@@ -91,7 +88,6 @@ class DIChannel(Channel):
             line basis. You do not have to enable the filter for all
             lines in a channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21d6)
         return val
@@ -117,7 +113,6 @@ class DIChannel(Channel):
             one line does not affect other lines.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2efe)
         return val
 
@@ -135,7 +130,6 @@ class DIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the filter
             recognizes as a valid high or low state transition.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21d7)
         return val
@@ -156,7 +150,6 @@ class DIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2ed5)
         return val
 
@@ -174,7 +167,6 @@ class DIChannel(Channel):
         str: Specifies the terminal of the signal to use as the timebase
             of the digital filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2ed4)
         return val
@@ -195,7 +187,6 @@ class DIChannel(Channel):
             device.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2ed6)
         return val
 
@@ -214,7 +205,6 @@ class DIChannel(Channel):
             you set this property to True, the lines are at high logic
             when off and at low logic when on.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x793)
         return val
@@ -237,7 +227,6 @@ class DIChannel(Channel):
             information on the logic high and logic low voltages for
             these logic families.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x296d)
         return LogicFamily(val)
@@ -264,7 +253,6 @@ class DIChannel(Channel):
             device and possibly result in a system crash.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x296a)
         return val
 
@@ -282,7 +270,6 @@ class DIChannel(Channel):
         int: Indicates the number of digital lines in the channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x2178)
         return val
 
@@ -296,7 +283,6 @@ class DIChannel(Channel):
             lines were previously tristated. Set this property to False
             to read lines in other tasks or to read output-only lines.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x1890)
         return val
@@ -317,7 +303,6 @@ class DIChannel(Channel):
             under different combinations of operating system and device.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x3002)
         return val
 
@@ -336,7 +321,6 @@ class DIChannel(Channel):
             bytes. Modify this value to affect performance under
             different combinations of operating system and device.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x2a90)
         return val

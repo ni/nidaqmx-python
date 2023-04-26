@@ -48,7 +48,6 @@ class AIChannel(Channel):
         float: Specifies the AC excitation frequency in Hertz.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x101)
         return val
 
@@ -70,7 +69,6 @@ class AIChannel(Channel):
             and to True for the slave channels.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x102)
         return val
 
@@ -90,7 +88,6 @@ class AIChannel(Channel):
             tie leads together to create a four- or five- wire sensor.
             Refer to the sensor documentation for more information.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18cd)
         return ACExcitWireMode(val)
@@ -114,7 +111,6 @@ class AIChannel(Channel):
             sensor documentation to determine this value.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x3115)
         return val
 
@@ -132,7 +128,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.AccelSensitivityUnits`: Specifies the
             units of AI.Accel.4WireDCVoltage.Sensitivity.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3116)
         return AccelSensitivityUnits(val)
@@ -155,7 +150,6 @@ class AIChannel(Channel):
             sensor documentation to determine this value.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x3113)
         return val
 
@@ -173,7 +167,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.AccelChargeSensitivityUnits`:
             Specifies the units of AI.Accel.Charge.Sensitivity.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3114)
         return AccelChargeSensitivityUnits(val)
@@ -195,7 +188,6 @@ class AIChannel(Channel):
             reference level is included in the waveform attributes.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x29b2)
         return val
 
@@ -216,7 +208,6 @@ class AIChannel(Channel):
             documentation to determine this value.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x692)
         return val
 
@@ -234,7 +225,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.AccelSensitivityUnits`: Specifies the
             units of **ai_accel_sensitivity**.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x219c)
         return AccelSensitivityUnits(val)
@@ -255,7 +245,6 @@ class AIChannel(Channel):
             use to return acceleration measurements from the channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x673)
         return AccelUnits(val)
 
@@ -274,7 +263,6 @@ class AIChannel(Channel):
         int: Specifies the timing mode of the ADC when
             **ai_adc_timing_mode** is **ADCTimingMode.CUSTOM**.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x2f6b)
         return val
@@ -301,7 +289,6 @@ class AIChannel(Channel):
             same task.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x29f9)
         return ADCTimingMode(val)
 
@@ -319,7 +306,6 @@ class AIChannel(Channel):
         """
         float: Specifies the amount of attenuation to use.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1801)
         return val
@@ -339,7 +325,6 @@ class AIChannel(Channel):
             measure ground. NI-DAQmx subtracts the measured ground
             voltage from every sample.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1760)
         return AutoZeroType(val)
@@ -361,7 +346,6 @@ class AIChannel(Channel):
             noise in your measurement.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x2fee)
         return val
 
@@ -379,7 +363,6 @@ class AIChannel(Channel):
         int: Specifies by how much to compensate for offset in the
             signal. This value can be between 0 and 127.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x17f1)
         return val
@@ -399,7 +382,6 @@ class AIChannel(Channel):
             signal. This value can be between 0 and 4095.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18f4)
         return val
 
@@ -417,7 +399,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.BridgeConfiguration`: Specifies the
             type of Wheatstone bridge connected to the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x87)
         return BridgeConfiguration(val)
@@ -439,7 +420,6 @@ class AIChannel(Channel):
             that the sensor data sheet or calibration certificate uses
             for electrical values.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f87)
         return BridgeElectricalUnits(val)
@@ -471,7 +451,6 @@ class AIChannel(Channel):
             other.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f86)
         return val
 
@@ -501,7 +480,6 @@ class AIChannel(Channel):
             property to its default value before setting the other.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x17ed)
         return val
 
@@ -519,7 +497,6 @@ class AIChannel(Channel):
         float: Specifies in ohms the resistance of the bridge while not
             under load.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x17ec)
         return val
@@ -540,7 +517,6 @@ class AIChannel(Channel):
             same unit that the sensor data sheet or calibration
             certificate uses for physical values.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f88)
         return BridgePhysicalUnits(val)
@@ -564,7 +540,6 @@ class AIChannel(Channel):
             the fourth term of the equation is 9x^3.
         """
 
-
         val = self._interpreter.get_chan_attribute_double_array(self._handle, self._name, 0x2f90)
         return val
 
@@ -587,7 +562,6 @@ class AIChannel(Channel):
             the fourth term of the equation is 9x^3.
         """
 
-
         val = self._interpreter.get_chan_attribute_double_array(self._handle, self._name, 0x2f91)
         return val
 
@@ -607,7 +581,6 @@ class AIChannel(Channel):
             to use when scaling electrical values from the sensor to
             physical units.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f89)
         return ScaleType(val)
@@ -629,7 +602,6 @@ class AIChannel(Channel):
             to enable.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x94)
         return val
 
@@ -649,7 +621,6 @@ class AIChannel(Channel):
             multiplies data read from the channel by the value of this
             property. This value should be close to 1.0.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x193f)
         return val
@@ -671,7 +642,6 @@ class AIChannel(Channel):
             specify with this property.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x21d5)
         return ShuntCalSelect(val)
 
@@ -691,7 +661,6 @@ class AIChannel(Channel):
             calibration A resistor.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f79)
         return val
 
@@ -709,7 +678,6 @@ class AIChannel(Channel):
         float: Specifies in ohms the desired value of the internal shunt
             calibration A resistor.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f78)
         return val
@@ -730,7 +698,6 @@ class AIChannel(Channel):
             is selected.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30ca)
         return BridgeShuntCalSource(val)
 
@@ -750,7 +717,6 @@ class AIChannel(Channel):
             calibration B resistor.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f7b)
         return val
 
@@ -768,7 +734,6 @@ class AIChannel(Channel):
         float: Specifies in ohms the desired value of the internal shunt
             calibration B resistor.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f7a)
         return val
@@ -789,7 +754,6 @@ class AIChannel(Channel):
             this value in the unit indicated by
             **ai_bridge_electrical_units**.
         """
-
 
         val = self._interpreter.get_chan_attribute_double_array(self._handle, self._name, 0x2f8e)
         return val
@@ -812,7 +776,6 @@ class AIChannel(Channel):
             **ai_bridge_physical_units**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double_array(self._handle, self._name, 0x2f8f)
         return val
 
@@ -834,7 +797,6 @@ class AIChannel(Channel):
             **ai_bridge_electrical_units**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f8a)
         return val
 
@@ -854,7 +816,6 @@ class AIChannel(Channel):
             this value in the unit indicated by
             **ai_bridge_physical_units**.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f8b)
         return val
@@ -876,7 +837,6 @@ class AIChannel(Channel):
             **ai_bridge_electrical_units**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f8c)
         return val
 
@@ -897,7 +857,6 @@ class AIChannel(Channel):
             **ai_bridge_physical_units**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f8d)
         return val
 
@@ -915,7 +874,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.BridgeUnits`: Specifies in which unit
             to return voltage ratios from the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f92)
         return BridgeUnits(val)
@@ -935,7 +893,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.ChargeUnits`: Specifies the units to
             use to return charge measurements from the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3112)
         return ChargeUnits(val)
@@ -957,7 +914,6 @@ class AIChannel(Channel):
             errors.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x3143)
         return val
 
@@ -975,7 +931,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.Coupling`: Specifies the coupling for
             the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x64)
         return Coupling(val)
@@ -995,7 +950,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.CurrentUnits`: Specifies the units to
             use to return current RMS measurements from the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x17e3)
         return CurrentUnits(val)
@@ -1017,7 +971,6 @@ class AIChannel(Channel):
             measurements.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x17f2)
         return CurrentShuntResistorLocation(val)
 
@@ -1037,7 +990,6 @@ class AIChannel(Channel):
             current measurements.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x17f3)
         return val
 
@@ -1055,7 +1007,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.CurrentUnits`: Specifies the units to
             use to return current measurements from the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x701)
         return CurrentUnits(val)
@@ -1075,7 +1026,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.system.scale.Scale`: Specifies the name of a
             custom scale for the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x17e0)
         return Scale(val)
@@ -1098,7 +1048,6 @@ class AIChannel(Channel):
             **InputDataTransferCondition.ONBOARD_MEMORY_CUSTOM_THRESHOLD**.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x230c)
         return val
 
@@ -1120,7 +1069,6 @@ class AIChannel(Channel):
             combinations of operating system, configuration, and device.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x3117)
         return val
 
@@ -1138,7 +1086,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.DataTransferActiveTransferMode`:
             Specifies the data transfer mode for the device.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1821)
         return DataTransferActiveTransferMode(val)
@@ -1160,7 +1107,6 @@ class AIChannel(Channel):
             memory of the device to the buffer.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x188b)
         return InputDataTransferCondition(val)
 
@@ -1181,7 +1127,6 @@ class AIChannel(Channel):
             the input range. This offset is in the native units of the
             device .
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2a89)
         return val
@@ -1206,7 +1151,6 @@ class AIChannel(Channel):
             contained by the channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_double_array(self._handle, self._name, 0x1930)
         return val
 
@@ -1216,7 +1160,6 @@ class AIChannel(Channel):
         float: Specifies the center frequency of the passband for the
             digital filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30c3)
         return val
@@ -1236,7 +1179,6 @@ class AIChannel(Channel):
             center frequency for the digital filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30c4)
         return val
 
@@ -1253,7 +1195,6 @@ class AIChannel(Channel):
         """
         List[float]: Specifies the digital filter coefficients.
         """
-
 
         val = self._interpreter.get_chan_attribute_double_array(self._handle, self._name, 0x30c7)
         return val
@@ -1274,7 +1215,6 @@ class AIChannel(Channel):
             disabled.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x30bd)
         return val
 
@@ -1292,7 +1232,6 @@ class AIChannel(Channel):
         float: Specifies the highpass cutoff frequency of the digital
             filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30c2)
         return val
@@ -1312,7 +1251,6 @@ class AIChannel(Channel):
             filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30c1)
         return val
 
@@ -1330,7 +1268,6 @@ class AIChannel(Channel):
         float: Specifies the center frequency of the stopband for the
             digital filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30c5)
         return val
@@ -1350,7 +1287,6 @@ class AIChannel(Channel):
             center frequency for the digital filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30c6)
         return val
 
@@ -1367,7 +1303,6 @@ class AIChannel(Channel):
         """
         int: Specifies the order of the digital filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x30c0)
         return val
@@ -1387,7 +1322,6 @@ class AIChannel(Channel):
             filter response.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30bf)
         return FilterResponse(val)
 
@@ -1406,7 +1340,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.FilterType`: Specifies the digital
             filter type.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30be)
         return FilterType(val)
@@ -1429,7 +1362,6 @@ class AIChannel(Channel):
             input signal and averaging the results.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x68)
         return val
 
@@ -1450,7 +1382,6 @@ class AIChannel(Channel):
             sensor documentation to determine this value.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2abe)
         return val
 
@@ -1468,7 +1399,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.EddyCurrentProxProbeSensitivityUnits`:
             Specifies the units of **ai_eddy_current_prox_sensitivity**.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2abf)
         return EddyCurrentProxProbeSensitivityUnits(val)
@@ -1489,7 +1419,6 @@ class AIChannel(Channel):
             use to return proximity measurements from the channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2ac0)
         return LengthUnits(val)
 
@@ -1509,7 +1438,6 @@ class AIChannel(Channel):
             Leave this property set to the default value for most
             applications.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2294)
         return val
@@ -1533,7 +1461,6 @@ class AIChannel(Channel):
             calibration, some devices set this property automatically.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1883)
         return val
 
@@ -1551,7 +1478,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.ExcitationDCorAC`: Specifies if the
             excitation supply is DC or AC.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x17fb)
         return ExcitationDCorAC(val)
@@ -1576,7 +1502,6 @@ class AIChannel(Channel):
             on after task uncommit.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30b8)
         return ExcitationIdleOutputBehavior(val)
 
@@ -1596,7 +1521,6 @@ class AIChannel(Channel):
             or remote sense to sense excitation.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30fd)
         return Sense(val)
 
@@ -1615,7 +1539,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.ExcitationSource`: Specifies the
             source of excitation.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x17f4)
         return ExcitationSource(val)
@@ -1638,7 +1561,6 @@ class AIChannel(Channel):
             True, set **ai_max** and **ai_min** to reflect the scaling.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x17fc)
         return val
 
@@ -1657,7 +1579,6 @@ class AIChannel(Channel):
             the upper half of the channels as it advances through the
             scan list.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2180)
         return val
@@ -1681,7 +1602,6 @@ class AIChannel(Channel):
             amperes.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x17f5)
         return val
 
@@ -1699,7 +1619,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.ExcitationVoltageOrCurrent`: Specifies
             if the channel uses current or voltage excitation.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x17f6)
         return ExcitationVoltageOrCurrent(val)
@@ -1723,7 +1642,6 @@ class AIChannel(Channel):
             time using **ai_filter_delay_adjustment**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2fed)
         return val
 
@@ -1736,7 +1654,6 @@ class AIChannel(Channel):
             **ai_filter_delay**. This delay adjustment is in the units
             you specify with **ai_filter_delay_units**.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x3074)
         return val
@@ -1757,7 +1674,6 @@ class AIChannel(Channel):
             **ai_filter_delay_adjustment**.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3071)
         return DigitalWidthUnits(val)
 
@@ -1775,7 +1691,6 @@ class AIChannel(Channel):
         """
         bool: Specifies the corresponding filter enable/disable state.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x3173)
         return val
@@ -1795,7 +1710,6 @@ class AIChannel(Channel):
             center) of the filter response.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x3174)
         return val
 
@@ -1813,7 +1727,6 @@ class AIChannel(Channel):
         int: Specifies the corresponding filter order and defines the
             slope of the filter response.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x3176)
         return val
@@ -1833,7 +1746,6 @@ class AIChannel(Channel):
             corresponding filter response and defines the shape of the
             filter response.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3175)
         return FilterResponse(val)
@@ -1855,7 +1767,6 @@ class AIChannel(Channel):
             indicated by **ai_force_iepe_sensor_sensitivity_units**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f81)
         return val
 
@@ -1874,7 +1785,6 @@ class AIChannel(Channel):
             Specifies the units for
             **ai_force_iepe_sensor_sensitivity**.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f82)
         return ForceIEPESensorSensitivityUnits(val)
@@ -1899,7 +1809,6 @@ class AIChannel(Channel):
             data with the other channels in the task.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x18f8)
         return val
 
@@ -1917,7 +1826,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.ForceUnits`: Specifies in which unit
             to return force or load measurements from the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f75)
         return ForceUnits(val)
@@ -1943,7 +1851,6 @@ class AIChannel(Channel):
             jitter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x814)
         return val
 
@@ -1965,7 +1872,6 @@ class AIChannel(Channel):
             voltage rises or falls.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x815)
         return val
 
@@ -1983,7 +1889,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.FrequencyUnits`: Specifies the units
             to use to return frequency measurements from the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x806)
         return FrequencyUnits(val)
@@ -2003,7 +1908,6 @@ class AIChannel(Channel):
         float: Specifies a gain factor to apply to the channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1818)
         return val
 
@@ -2022,7 +1926,6 @@ class AIChannel(Channel):
             impedance of the channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x62)
         return Impedance1(val)
 
@@ -2040,7 +1943,6 @@ class AIChannel(Channel):
         """
         bool: Specifies whether to enable input limits fault detection.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x318e)
         return val
@@ -2065,7 +1967,6 @@ class AIChannel(Channel):
             because it is in the range of -12 mA to -2 mA.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x318d)
         return val
 
@@ -2089,7 +1990,6 @@ class AIChannel(Channel):
             because it is in the range of -12 mA to -2 mA.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x318c)
         return val
 
@@ -2112,7 +2012,6 @@ class AIChannel(Channel):
             calibration signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2198)
         return val
 
@@ -2130,7 +2029,6 @@ class AIChannel(Channel):
         float: Specifies in ohms the resistance of the wires that lead
             to the sensor.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x17ee)
         return val
@@ -2151,7 +2049,6 @@ class AIChannel(Channel):
             **RawDataCompressionType.LOSSY_LSB_REMOVAL**.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x22d9)
         return val
 
@@ -2170,7 +2067,6 @@ class AIChannel(Channel):
             -3dB cutoff of the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1803)
         return val
 
@@ -2188,7 +2084,6 @@ class AIChannel(Channel):
         bool: Specifies whether to enable the lowpass filter of the
             channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x1802)
         return val
@@ -2210,7 +2105,6 @@ class AIChannel(Channel):
             resolution. Refer to the SCXI-1141/1142/1143 User Manual for
             more information.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1884)
         return SourceSelection(val)
@@ -2235,7 +2129,6 @@ class AIChannel(Channel):
             frequency, and n is the external clock divisor. Refer to the
             SCXI-1141/1142/1143 User Manual for more information.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x1886)
         return val
@@ -2262,7 +2155,6 @@ class AIChannel(Channel):
             User Manual for more information.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1885)
         return val
 
@@ -2283,7 +2175,6 @@ class AIChannel(Channel):
             more information.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x1887)
         return val
 
@@ -2303,7 +2194,6 @@ class AIChannel(Channel):
             Refer to the sensor documentation to determine this value.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x939)
         return val
 
@@ -2321,7 +2211,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.LVDTSensitivityUnits`: Specifies the
             units of **ai_lvdt_sensitivity**.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x219a)
         return LVDTSensitivityUnits(val)
@@ -2341,7 +2230,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.LengthUnits`: Specifies the units to
             use to return linear position measurements from the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x910)
         return LengthUnits(val)
@@ -2364,7 +2252,6 @@ class AIChannel(Channel):
             value that the device can measure with the current settings.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x17dd)
         return val
 
@@ -2385,7 +2272,6 @@ class AIChannel(Channel):
             to use.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x695)
         return UsageTypeAI(val)
 
@@ -2401,7 +2287,6 @@ class AIChannel(Channel):
             registers, it can adversely affect the operation of the
             device and possibly result in a system crash.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x188c)
         return val
@@ -2421,7 +2306,6 @@ class AIChannel(Channel):
             is in mV/Pa. Refer to the sensor documentation to determine
             this value.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1536)
         return val
@@ -2443,7 +2327,6 @@ class AIChannel(Channel):
             value that the device can measure with the current settings.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x17de)
         return val
 
@@ -2460,7 +2343,6 @@ class AIChannel(Channel):
         """
         bool: Specifies whether to enable open channel detection.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x30ff)
         return val
@@ -2488,7 +2370,6 @@ class AIChannel(Channel):
             were open.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2f72)
         return val
 
@@ -2505,7 +2386,6 @@ class AIChannel(Channel):
         """
         bool: Specifies whether to enable overcurrent detection.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x3194)
         return val
@@ -2524,7 +2404,6 @@ class AIChannel(Channel):
         bool: Specifies whether to enable power supply fault detection.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x3191)
         return val
 
@@ -2542,7 +2421,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.PressureUnits`: Specifies  in which
             unit to return pressure measurements from the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f76)
         return PressureUnits(val)
@@ -2564,7 +2442,6 @@ class AIChannel(Channel):
             ratio.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2a88)
         return val
 
@@ -2583,7 +2460,6 @@ class AIChannel(Channel):
             type of compression to apply to raw samples returned from
             the device.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x22d8)
         return RawDataCompressionType(val)
@@ -2604,7 +2480,6 @@ class AIChannel(Channel):
             justification of a raw sample from the device.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x50)
         return DataJustification(val)
 
@@ -2613,7 +2488,6 @@ class AIChannel(Channel):
         """
         int: Indicates in bits the size of a raw sample from the device.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x22da)
         return val
@@ -2624,7 +2498,6 @@ class AIChannel(Channel):
         bool: Specifies if filter delay removal is enabled on the
             device.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2fbd)
         return val
@@ -2646,7 +2519,6 @@ class AIChannel(Channel):
             temperature measurement using a thermistor or RTD.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1881)
         return ResistanceConfiguration(val)
 
@@ -2665,7 +2537,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.ResistanceUnits`: Specifies the units
             to use to return resistance measurements.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x955)
         return ResistanceUnits(val)
@@ -2687,7 +2558,6 @@ class AIChannel(Channel):
             specify with **ai_resolution_units**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1765)
         return val
 
@@ -2697,7 +2567,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.ResolutionType`: Indicates the units
             of **ai_resolution**.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1764)
         return ResolutionType(val)
@@ -2709,7 +2578,6 @@ class AIChannel(Channel):
             device. This value is in the native units of the device. On
             E Series devices, for example, the native units is volts.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1815)
         return val
@@ -2730,7 +2598,6 @@ class AIChannel(Channel):
             E Series devices, for example, the native units is volts.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1816)
         return val
 
@@ -2749,7 +2616,6 @@ class AIChannel(Channel):
             X axis.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2ffc)
         return val
 
@@ -2767,7 +2633,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.StrainGageRosetteMeasurementType`:
             Specifies the type of rosette measurement.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2ffd)
         return StrainGageRosetteMeasurementType(val)
@@ -2788,7 +2653,6 @@ class AIChannel(Channel):
             type of rosette gage.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2ffe)
         return StrainGageRosetteType(val)
 
@@ -2798,7 +2662,6 @@ class AIChannel(Channel):
         List[str]: Indicates the raw strain channels that comprise the
             strain rosette.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2ffb)
         return unflatten_channel_string(val)
@@ -2810,7 +2673,6 @@ class AIChannel(Channel):
             equation. NI-DAQmx requires this value when you use a custom
             RTD.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1010)
         return val
@@ -2831,7 +2693,6 @@ class AIChannel(Channel):
             RTD.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1011)
         return val
 
@@ -2850,7 +2711,6 @@ class AIChannel(Channel):
             equation. NI-DAQmx requires this value when you use a custom
             RTD.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1013)
         return val
@@ -2871,7 +2731,6 @@ class AIChannel(Channel):
             the sensor documentation to determine this value.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1030)
         return val
 
@@ -2889,7 +2748,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.RTDType`: Specifies the type of RTD
             connected to the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1032)
         return RTDType(val)
@@ -2911,7 +2769,6 @@ class AIChannel(Channel):
             Refer to the sensor documentation to determine this value.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x903)
         return val
 
@@ -2929,7 +2786,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.RVDTSensitivityUnits`: Specifies the
             units of **ai_rvdt_sensitivity**.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x219b)
         return RVDTSensitivityUnits(val)
@@ -2950,7 +2806,6 @@ class AIChannel(Channel):
             use to return angular position measurements from the
             channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x877)
         return AngleUnits(val)
@@ -2974,7 +2829,6 @@ class AIChannel(Channel):
             to perform an auto zero on the channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x181a)
         return val
 
@@ -2993,7 +2847,6 @@ class AIChannel(Channel):
             turn on the sensor's power supply or to leave the
             configuration unchanged.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x316a)
         return SensorPowerCfg(val)
@@ -3014,7 +2867,6 @@ class AIChannel(Channel):
             of power supplied to the sensor.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x316b)
         return SensorPowerType(val)
 
@@ -3033,7 +2885,6 @@ class AIChannel(Channel):
         float: Specifies the voltage level for the sensor's power
             supply.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x3169)
         return val
@@ -3057,7 +2908,6 @@ class AIChannel(Channel):
             level.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x29b1)
         return val
 
@@ -3079,7 +2929,6 @@ class AIChannel(Channel):
             **ai_min** for the channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x223a)
         return val
 
@@ -3098,7 +2947,6 @@ class AIChannel(Channel):
             units to use to return sound pressure measurements from the
             channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1528)
         return SoundPressureUnits(val)
@@ -3120,7 +2968,6 @@ class AIChannel(Channel):
             configuration.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2ffa)
         return val
 
@@ -3138,7 +2985,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.StrainGageBridgeType`: Specifies the
             bridge configuration of the strain gages.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x982)
         return StrainGageBridgeType(val)
@@ -3161,7 +3007,6 @@ class AIChannel(Channel):
             value.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x994)
         return val
 
@@ -3180,7 +3025,6 @@ class AIChannel(Channel):
             the material you are measuring.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x998)
         return val
 
@@ -3198,7 +3042,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.StrainUnits`: Specifies the units to
             use to return strain measurements from the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x981)
         return StrainUnits(val)
@@ -3219,7 +3062,6 @@ class AIChannel(Channel):
             TEDS bitstream from the corresponding physical channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2983)
         return val
 
@@ -3230,7 +3072,6 @@ class AIChannel(Channel):
             with the channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x21e0)
         return val
 
@@ -3240,7 +3081,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.TemperatureUnits`: Specifies the units
             to use to return temperature measurements from the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1033)
         return TemperatureUnits(val)
@@ -3260,7 +3100,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             terminal configuration for the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1097)
         return TerminalConfiguration(val)
@@ -3287,7 +3126,6 @@ class AIChannel(Channel):
             scale values to degrees Celsius.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x1034)
         return Channel._factory(self._handle, val, self._interpreter)
 
@@ -3297,7 +3135,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.CJCSource`: Indicates the source of
             cold-junction compensation.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1035)
         return CJCSource(val)
@@ -3310,7 +3147,6 @@ class AIChannel(Channel):
             **CJCSource1.CONSTANT_USER_VALUE**. Specify this value in
             the units of the measurement.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1036)
         return val
@@ -3331,7 +3167,6 @@ class AIChannel(Channel):
             open thermocouple detection is disabled.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2fb8)
         return val
 
@@ -3349,7 +3184,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.ScaleType`: Specifies the method or
             equation form that the thermocouple scale uses.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x29d0)
         return ScaleType(val)
@@ -3371,7 +3205,6 @@ class AIChannel(Channel):
             differ in composition and measurement range.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1050)
         return ThermocoupleType(val)
 
@@ -3391,7 +3224,6 @@ class AIChannel(Channel):
             thermistor equation.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x18c9)
         return val
 
@@ -3410,7 +3242,6 @@ class AIChannel(Channel):
             thermistor equation.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x18cb)
         return val
 
@@ -3428,7 +3259,6 @@ class AIChannel(Channel):
         float: Specifies the 'C' constant of the Steinhart-Hart
             thermistor equation.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x18ca)
         return val
@@ -3449,7 +3279,6 @@ class AIChannel(Channel):
             ignores this value for current excitation.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1061)
         return val
 
@@ -3467,7 +3296,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.TorqueUnits`: Specifies in which unit
             to return torque measurements from the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f77)
         return TorqueUnits(val)
@@ -3489,7 +3317,6 @@ class AIChannel(Channel):
             under different combinations of operating system and device.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x3000)
         return val
 
@@ -3508,7 +3335,6 @@ class AIChannel(Channel):
             bytes. Modify this value to affect performance under
             different combinations of operating system and device.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x2a8e)
         return val
@@ -3529,7 +3355,6 @@ class AIChannel(Channel):
             reference level is included in the waveform attributes.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2ff5)
         return val
 
@@ -3548,7 +3373,6 @@ class AIChannel(Channel):
             connected to the channel. Specify this value in the unit
             indicated by **ai_velocity_iepe_sensor_sensitivity_units**.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2ff6)
         return val
@@ -3569,7 +3393,6 @@ class AIChannel(Channel):
             **ai_velocity_iepe_sensor_sensitivity**.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2ff7)
         return VelocityIEPESensorSensitivityUnits(val)
 
@@ -3589,7 +3412,6 @@ class AIChannel(Channel):
             unit to return velocity measurements from the channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2ff4)
         return VelocityUnits(val)
 
@@ -3608,7 +3430,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.VoltageUnits`: Specifies the units to
             use to return voltage RMS measurements from the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x17e2)
         return VoltageUnits(val)
@@ -3630,7 +3451,6 @@ class AIChannel(Channel):
             reference level is included in the waveform attributes.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x29b0)
         return val
 
@@ -3648,7 +3468,6 @@ class AIChannel(Channel):
         :class:`nidaqmx.constants.VoltageUnits`: Specifies the units to
             use to return voltage measurements from the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1094)
         return VoltageUnits(val)
@@ -3671,7 +3490,6 @@ class AIChannel(Channel):
             during a task.
         """
 
-
         val = self._interpreter.get_chan_attribute_double_array(self._handle, self._name, 0x31da)
         return val
 
@@ -3682,7 +3500,6 @@ class AIChannel(Channel):
             draws current greater than the specified value, the device
             will operate in Constant Current mode.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31d5)
         return val
@@ -3702,7 +3519,6 @@ class AIChannel(Channel):
             whether to disable the output or maintain the existing value
             after the task is uncommitted.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x31d8)
         return PowerIdleOutputBehavior(val)
@@ -3726,7 +3542,6 @@ class AIChannel(Channel):
             until the task enters the Committed state.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x31d6)
         return val
 
@@ -3746,7 +3561,6 @@ class AIChannel(Channel):
             task.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x31d7)
         return PowerOutputState(val)
 
@@ -3759,7 +3573,6 @@ class AIChannel(Channel):
             Remote Sense attribute value. Reading this property will
             return the user-defined value.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x31db)
         return Sense(val)
@@ -3782,7 +3595,6 @@ class AIChannel(Channel):
             during a task.
         """
 
-
         val = self._interpreter.get_chan_attribute_double_array(self._handle, self._name, 0x31d9)
         return val
 
@@ -3793,7 +3605,6 @@ class AIChannel(Channel):
             set while a task is running. Can be read at any time during
             a task.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31d4)
         return val

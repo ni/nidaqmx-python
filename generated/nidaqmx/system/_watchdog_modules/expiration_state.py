@@ -39,7 +39,6 @@ class ExpirationState:
             watchdog task expires.
         """
 
-
         val = self._interpreter.get_watchdog_attribute_int32(self._handle, self._physical_channel, 0x305e)
         return WatchdogAOExpirState(val)
 
@@ -59,7 +58,6 @@ class ExpirationState:
             channels when the watchdog task expires.
         """
 
-
         val = self._interpreter.get_watchdog_attribute_double(self._handle, self._physical_channel, 0x305f)
         return val
 
@@ -78,7 +76,6 @@ class ExpirationState:
             state to set the counter output channel terminal when the
             watchdog task expires.
         """
-
 
         val = self._interpreter.get_watchdog_attribute_int32(self._handle, self._physical_channel, 0x3060)
         return WatchdogCOExpirState(val)
@@ -100,7 +97,6 @@ class ExpirationState:
             expires.  You cannot modify the expiration state of
             dedicated digital input physical channels.
         """
-
 
         val = self._interpreter.get_watchdog_attribute_int32(self._handle, self._physical_channel, 0x21a7)
         return Level(val)

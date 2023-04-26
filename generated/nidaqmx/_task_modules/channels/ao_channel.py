@@ -33,7 +33,6 @@ class AOChannel(Channel):
             Differential.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31cc)
         return val
 
@@ -53,7 +52,6 @@ class AOChannel(Channel):
             channel in the units you select.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1109)
         return CurrentUnits(val)
 
@@ -72,7 +70,6 @@ class AOChannel(Channel):
         :class:`nidaqmx.system.scale.Scale`: Specifies the name of a
             custom scale for the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x1188)
         return Scale(val)
@@ -94,7 +91,6 @@ class AOChannel(Channel):
             valid sources for this signal vary by device.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2254)
         return val
 
@@ -113,7 +109,6 @@ class AOChannel(Channel):
             of the DAC offset voltage. The value of this voltage source
             determines the full-scale value of the DAC.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2253)
         return SourceSelection(val)
@@ -135,7 +130,6 @@ class AOChannel(Channel):
             hand calibrated.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2255)
         return val
 
@@ -155,7 +149,6 @@ class AOChannel(Channel):
             and set **ao_dac_ref_src** to **SourceSelection.INTERNAL**
             before you can set **ao_dac_ref_conn_to_gnd** to True.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x1830)
         return val
@@ -181,7 +174,6 @@ class AOChannel(Channel):
             **ao_dac_ref_allow_conn_to_gnd** is True.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x130)
         return val
 
@@ -201,7 +193,6 @@ class AOChannel(Channel):
             valid sources for this signal vary by device.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2252)
         return val
 
@@ -220,7 +211,6 @@ class AOChannel(Channel):
             of the DAC reference voltage. The value of this voltage
             source determines the full-scale value of the DAC.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x132)
         return SourceSelection(val)
@@ -243,7 +233,6 @@ class AOChannel(Channel):
             but increased resolution.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1832)
         return val
 
@@ -262,7 +251,6 @@ class AOChannel(Channel):
             device. This value is in the native units of the device. On
             E Series devices, for example, the native units is volts.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x182e)
         return val
@@ -283,7 +271,6 @@ class AOChannel(Channel):
             E Series devices, for example, the native units is volts.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x182d)
         return val
 
@@ -301,7 +288,6 @@ class AOChannel(Channel):
         :class:`nidaqmx.constants.DataTransferActiveTransferMode`:
             Specifies the data transfer mode for the device.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x134)
         return DataTransferActiveTransferMode(val)
@@ -322,7 +308,6 @@ class AOChannel(Channel):
             Specifies under what condition to transfer data from the
             buffer to the onboard memory of the device.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x183c)
         return OutputDataTransferCondition(val)
@@ -349,7 +334,6 @@ class AOChannel(Channel):
             channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_double_array(self._handle, self._name, 0x1931)
         return val
 
@@ -360,7 +344,6 @@ class AOChannel(Channel):
             Disable the interpolation filter to improve DAC signal-to-
             noise ratio at the expense of degraded image rejection.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2241)
         return val
@@ -381,7 +364,6 @@ class AOChannel(Channel):
             the DAC. This value is in the units you specify with
             **ao_filter_delay_units**.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x3075)
         return val
@@ -405,7 +387,6 @@ class AOChannel(Channel):
             **ao_filter_delay_units**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x3072)
         return val
 
@@ -424,7 +405,6 @@ class AOChannel(Channel):
             units of **ao_filter_delay** and
             **ao_filter_delay_adjustment**.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3076)
         return DigitalWidthUnits(val)
@@ -445,7 +425,6 @@ class AOChannel(Channel):
             generate in volts. Zero and negative values are valid.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2a1a)
         return val
 
@@ -464,7 +443,6 @@ class AOChannel(Channel):
             **ao_func_gen_modulation_type** is **ModulationType.FM**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2a23)
         return val
 
@@ -482,7 +460,6 @@ class AOChannel(Channel):
         float: Specifies the frequency of the waveform to generate in
             hertz.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2a19)
         return val
@@ -504,7 +481,6 @@ class AOChannel(Channel):
             external terminal as the signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2a22)
         return ModulationType(val)
 
@@ -522,7 +498,6 @@ class AOChannel(Channel):
         """
         float: Specifies the voltage offset of the waveform to generate.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2a1b)
         return val
@@ -542,7 +517,6 @@ class AOChannel(Channel):
             generate.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2a1c)
         return val
 
@@ -561,7 +535,6 @@ class AOChannel(Channel):
             to generate.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31c4)
         return val
 
@@ -579,7 +552,6 @@ class AOChannel(Channel):
         :class:`nidaqmx.constants.FuncGenType`: Specifies the kind of
             the waveform to generate.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2a18)
         return FuncGenType(val)
@@ -600,7 +572,6 @@ class AOChannel(Channel):
             channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x118)
         return val
 
@@ -618,7 +589,6 @@ class AOChannel(Channel):
         :class:`nidaqmx.constants.AOIdleOutputBehavior`: Specifies the
             state of the channel when no generation is in progress.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2240)
         return AOIdleOutputBehavior(val)
@@ -638,7 +608,6 @@ class AOChannel(Channel):
         float: Specifies in ohms the load impedance connected to the
             analog output channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x121)
         return val
@@ -661,7 +630,6 @@ class AOChannel(Channel):
             to a smaller value if other task settings restrict the
             device from generating the desired maximum.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1186)
         return val
@@ -687,7 +655,6 @@ class AOChannel(Channel):
             device and possibly result in a system crash.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x188f)
         return val
 
@@ -710,7 +677,6 @@ class AOChannel(Channel):
             from generating the desired minimum.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1187)
         return val
 
@@ -728,7 +694,6 @@ class AOChannel(Channel):
         float: Specifies in ohms the impedance of the analog output
             stage of the device.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1490)
         return val
@@ -748,7 +713,6 @@ class AOChannel(Channel):
             channel generates voltage,  current, or a waveform.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1108)
         return UsageTypeAO(val)
 
@@ -764,7 +728,6 @@ class AOChannel(Channel):
             makes it easier to filter out the noise introduced from
             glitching during spectrum analysis.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x133)
         return val
@@ -785,7 +748,6 @@ class AOChannel(Channel):
             specify with **ao_resolution_units**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x182c)
         return val
 
@@ -795,7 +757,6 @@ class AOChannel(Channel):
         :class:`nidaqmx.constants.ResolutionType`: Specifies the units
             of **ao_resolution**.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x182b)
         return ResolutionType(val)
@@ -815,7 +776,6 @@ class AOChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             terminal configuration of the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x188e)
         return TerminalConfiguration(val)
@@ -837,7 +797,6 @@ class AOChannel(Channel):
             under different combinations of operating system and device.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x3001)
         return val
 
@@ -856,7 +815,6 @@ class AOChannel(Channel):
             bytes. Modify this value to affect performance under
             different combinations of operating system and device.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x2a8f)
         return val
@@ -878,7 +836,6 @@ class AOChannel(Channel):
             you start the task. Onboard memory includes data FIFOs.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x183a)
         return val
 
@@ -896,7 +853,6 @@ class AOChannel(Channel):
         float: Specifies the current limit, in amperes, for the voltage
             channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2a1d)
         return val
@@ -916,7 +872,6 @@ class AOChannel(Channel):
             to generate voltage on the channel. Write data to the
             channel in the units you select.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1184)
         return VoltageUnits(val)

@@ -28,7 +28,6 @@ class DOChannel(Channel):
             Specifies the data transfer mode for the device.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2266)
         return DataTransferActiveTransferMode(val)
 
@@ -48,7 +47,6 @@ class DOChannel(Channel):
             Specifies under what condition to transfer data from the
             buffer to the onboard memory of the device.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2267)
         return OutputDataTransferCondition(val)
@@ -70,7 +68,6 @@ class DOChannel(Channel):
             samples.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2969)
         return ActiveOrInactiveEdgeSelection(val)
 
@@ -91,7 +88,6 @@ class DOChannel(Channel):
             when off and at low logic when on.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x1133)
         return val
 
@@ -110,7 +106,6 @@ class DOChannel(Channel):
             lines in a digital output task when the task completes
             execution.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2968)
         return Level(val)
@@ -131,7 +126,6 @@ class DOChannel(Channel):
             lines in a digital output task when the task pauses.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2967)
         return Level(val)
 
@@ -150,7 +144,6 @@ class DOChannel(Channel):
         :class:`nidaqmx.constants.Level`: Specifies the state of the
             lines in a digital output task when the task starts.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2972)
         return Level(val)
@@ -174,7 +167,6 @@ class DOChannel(Channel):
             information on the logic high and logic low voltages for
             these logic families.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x296e)
         return LogicFamily(val)
@@ -201,7 +193,6 @@ class DOChannel(Channel):
             device and possibly result in a system crash.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x296b)
         return val
 
@@ -219,7 +210,6 @@ class DOChannel(Channel):
         int: Indicates the number of digital lines in the channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x2179)
         return val
 
@@ -229,7 +219,6 @@ class DOChannel(Channel):
         :class:`nidaqmx.constants.DigitalDriveType`: Specifies the drive
             type for digital output channels.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1137)
         return DigitalDriveType(val)
@@ -250,7 +239,6 @@ class DOChannel(Channel):
             they no longer exceed the current limit specified by
             **do_overcurrent_limit**.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2a86)
         return val
@@ -273,7 +261,6 @@ class DOChannel(Channel):
             additional thresholds, NI-DAQmx returns an error.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2a85)
         return val
 
@@ -292,7 +279,6 @@ class DOChannel(Channel):
             no longer exceeds the current limit and the reactivation of
             that channel, if **do_overcurrent_auto_reenable** is True.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2a87)
         return val
@@ -313,7 +299,6 @@ class DOChannel(Channel):
             setting to take effect.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x18f3)
         return val
 
@@ -332,7 +317,6 @@ class DOChannel(Channel):
             used to stream data. Modify this value to affect performance
             under different combinations of operating system and device.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x3003)
         return val
@@ -353,7 +337,6 @@ class DOChannel(Channel):
             different combinations of operating system and device.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x2a91)
         return val
 
@@ -373,7 +356,6 @@ class DOChannel(Channel):
             Generally, you cannot update onboard memory after you start
             the task. Onboard memory includes data FIFOs.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2265)
         return val

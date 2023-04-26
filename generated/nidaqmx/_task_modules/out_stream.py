@@ -98,7 +98,6 @@ class OutStream:
             Otherwise, you will receive an error.
         """
 
-
         val = self._interpreter.get_write_attribute_bool(self._handle, 0x3053)
         return val
 
@@ -109,7 +108,6 @@ class OutStream:
             generate. This value is identical for all channels in the
             task.
         """
-
 
         val = self._interpreter.get_write_attribute_uint64(self._handle, 0x1458)
         return val
@@ -124,7 +122,6 @@ class OutStream:
             an error.
         """
 
-
         val = self._interpreter.get_write_attribute_string(self._handle, 0x3054)
         return unflatten_channel_string(val)
 
@@ -138,7 +135,6 @@ class OutStream:
             DAQmx ignores the extra Boolean values.
         """
 
-
         val = self._interpreter.get_write_attribute_uint32(self._handle, 0x217f)
         return val
 
@@ -151,7 +147,6 @@ class OutStream:
             before you read this property. Otherwise, you will receive
             an error.
         """
-
 
         val = self._interpreter.get_write_attribute_string(self._handle, 0x30bc)
         return unflatten_channel_string(val)
@@ -167,7 +162,6 @@ class OutStream:
             an error.
         """
 
-
         val = self._interpreter.get_write_attribute_bool(self._handle, 0x30bb)
         return val
 
@@ -177,7 +171,6 @@ class OutStream:
         int: Indicates the number of channels that DAQmx Write writes to
             the task. This value is the number of channels in the task.
         """
-
 
         val = self._interpreter.get_write_attribute_uint32(self._handle, 0x217e)
         return val
@@ -189,7 +182,6 @@ class OutStream:
             operation begins. This offset is relative to the location
             you specify with **relative_to**.
         """
-
 
         val = self._interpreter.get_write_attribute_int32(self._handle, 0x190d)
         return val
@@ -212,7 +204,6 @@ class OutStream:
             error.
         """
 
-
         val = self._interpreter.get_write_attribute_string(self._handle, 0x29eb)
         return unflatten_channel_string(val)
 
@@ -227,7 +218,6 @@ class OutStream:
             error.
         """
 
-
         val = self._interpreter.get_write_attribute_bool(self._handle, 0x29ea)
         return val
 
@@ -241,7 +231,6 @@ class OutStream:
             overrides the automatic output buffer allocation that NI-
             DAQmx performs.
         """
-
 
         val = self._interpreter.get_buffer_attribute_uint32(self._handle, 0x186d)
         return val
@@ -260,7 +249,6 @@ class OutStream:
         int: Specifies in samples per channel the size of the onboard
             output buffer of the device.
         """
-
 
         val = self._interpreter.get_buffer_attribute_uint32(self._handle, 0x230b)
         return val
@@ -283,7 +271,6 @@ class OutStream:
             error.
         """
 
-
         val = self._interpreter.get_write_attribute_string(self._handle, 0x29e9)
         return unflatten_channel_string(val)
 
@@ -297,7 +284,6 @@ class OutStream:
             **overcurrent_chans**. Otherwise, you will receive an error.
         """
 
-
         val = self._interpreter.get_write_attribute_bool(self._handle, 0x29e8)
         return val
 
@@ -309,7 +295,6 @@ class OutStream:
             **overloaded_chans_exist** before you read this property.
             Otherwise, you will receive an error.
         """
-
 
         val = self._interpreter.get_write_attribute_string(self._handle, 0x3085)
         return unflatten_channel_string(val)
@@ -323,7 +308,6 @@ class OutStream:
             read this property before you read **overloaded_chans**.
             Otherwise, you will receive an error.
         """
-
 
         val = self._interpreter.get_write_attribute_bool(self._handle, 0x3084)
         return val
@@ -339,7 +323,6 @@ class OutStream:
             of the overtemperature.
         """
 
-
         val = self._interpreter.get_write_attribute_string(self._handle, 0x3083)
         return unflatten_channel_string(val)
 
@@ -354,7 +337,6 @@ class OutStream:
             error.
         """
 
-
         val = self._interpreter.get_write_attribute_bool(self._handle, 0x2a84)
         return val
 
@@ -366,7 +348,6 @@ class OutStream:
             **power_supply_fault_chans_exist** before you read this
             property. Otherwise, you will receive an error.
         """
-
 
         val = self._interpreter.get_write_attribute_string(self._handle, 0x29ed)
         return unflatten_channel_string(val)
@@ -382,7 +363,6 @@ class OutStream:
             error.
         """
 
-
         val = self._interpreter.get_write_attribute_bool(self._handle, 0x29ec)
         return val
 
@@ -393,7 +373,6 @@ class OutStream:
             write to the task.
         """
 
-
         val = self._interpreter.get_write_attribute_uint32(self._handle, 0x217d)
         return val
 
@@ -403,7 +382,6 @@ class OutStream:
         :class:`nidaqmx.constants.RegenerationMode`: Specifies whether
             to allow NI-DAQmx to generate the same data multiple times.
         """
-
 
         val = self._interpreter.get_write_attribute_int32(self._handle, 0x1453)
         return RegenerationMode(val)
@@ -426,7 +404,6 @@ class OutStream:
             offset relative to this point you select with this property.
         """
 
-
         val = self._interpreter.get_write_attribute_int32(self._handle, 0x190c)
         return WriteRelativeTo(val)
 
@@ -447,7 +424,6 @@ class OutStream:
             **WaitMode2.SLEEP**.
         """
 
-
         val = self._interpreter.get_write_attribute_double(self._handle, 0x22b2)
         return val
 
@@ -466,7 +442,6 @@ class OutStream:
             space in the buffer.
         """
 
-
         val = self._interpreter.get_write_attribute_uint32(self._handle, 0x1460)
         return val
 
@@ -476,7 +451,6 @@ class OutStream:
         List[str]: Indicates the channels from devices in an unlocked
             target.
         """
-
 
         val = self._interpreter.get_write_attribute_string(self._handle, 0x3140)
         return unflatten_channel_string(val)
@@ -489,7 +463,6 @@ class OutStream:
             acquisition or after acquisition.
         """
 
-
         val = self._interpreter.get_write_attribute_bool(self._handle, 0x313f)
         return val
 
@@ -501,7 +474,6 @@ class OutStream:
             channels in the task.
         """
 
-
         val = self._interpreter.get_write_attribute_uint64(self._handle, 0x192b)
         return val
 
@@ -511,7 +483,6 @@ class OutStream:
         :class:`nidaqmx.constants.WaitMode`: Specifies how DAQmx Write
             waits for space to become available in the buffer.
         """
-
 
         val = self._interpreter.get_write_attribute_int32(self._handle, 0x22b1)
         return WaitMode(val)

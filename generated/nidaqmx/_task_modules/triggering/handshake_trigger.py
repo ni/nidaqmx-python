@@ -26,7 +26,6 @@ class HandshakeTrigger:
             of the Handshake Trigger.
         """
 
-
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x22b9)
         return Level(val)
 
@@ -45,7 +44,6 @@ class HandshakeTrigger:
         str: Specifies the source terminal of the Handshake Trigger.
         """
 
-
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x22b8)
         return val
 
@@ -63,7 +61,6 @@ class HandshakeTrigger:
         :class:`nidaqmx.constants.TriggerType`: Specifies the type of
             Handshake Trigger to use.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x22b7)
         return TriggerType(val)

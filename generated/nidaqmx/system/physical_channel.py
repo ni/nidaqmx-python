@@ -62,7 +62,6 @@ class PhysicalChannel:
             connector or one of several calibration signals.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_string(self._name, 0x2fd8)
         return unflatten_channel_string(val)
 
@@ -73,7 +72,6 @@ class PhysicalChannel:
             measurement types supported by the channel.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_int32_array(self._name, 0x2fd7)
         return [UsageTypeAI(e) for e in val]
 
@@ -82,7 +80,6 @@ class PhysicalChannel:
         """
         bool: Specifies whether to turn on the sensor's power supply.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x316d)
         return val
@@ -109,7 +106,6 @@ class PhysicalChannel:
         :class:`nidaqmx.constants.SensorPowerType`: Specifies the type
             of power supplied to the sensor.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_int32(self._name, 0x316e)
         return SensorPowerType(val)
@@ -138,7 +134,6 @@ class PhysicalChannel:
             supply.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_double(self._name, 0x316c)
         return val
 
@@ -166,7 +161,6 @@ class PhysicalChannel:
             condition on the channel.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x317c)
         return val
 
@@ -176,7 +170,6 @@ class PhysicalChannel:
         bool: Indicates whether there is an overcurrent condition on the
             channel.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x317d)
         return val
@@ -189,7 +182,6 @@ class PhysicalChannel:
             channel.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_int32_array(self._name, 0x3179)
         return [SensorPowerType(e) for e in val]
 
@@ -200,7 +192,6 @@ class PhysicalChannel:
             supported by this channel. Each pair consists of the low
             value followed by the high value.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_double_array(self._name, 0x317a)
         return val
@@ -213,7 +204,6 @@ class PhysicalChannel:
             the channel.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_int32(self._name, 0x2342)
         return enum_bitfield_to_list(
             val, _TermCfg, TerminalConfiguration)
@@ -224,7 +214,6 @@ class PhysicalChannel:
         float: Indicates the current value of the front panel amplitude
             control for the physical channel in volts.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_double(self._name, 0x2a1f)
         return val
@@ -237,7 +226,6 @@ class PhysicalChannel:
             cannot simultaneously control a channel manually and with
             NI-DAQmx.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x2a1e)
         return val
@@ -266,7 +254,6 @@ class PhysicalChannel:
             control for the physical channel in hertz.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_double(self._name, 0x2a20)
         return val
 
@@ -276,7 +263,6 @@ class PhysicalChannel:
         bool: Indicates whether the physical channel is currently
             disabled due to a short detected on the channel.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x2ec3)
         return val
@@ -288,7 +274,6 @@ class PhysicalChannel:
             output types supported by the channel.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_int32_array(self._name, 0x2fd9)
         return [UsageTypeAO(e) for e in val]
 
@@ -299,7 +284,6 @@ class PhysicalChannel:
             amplification. This property can also be used to check if a
             channel is enabled.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x3062)
         return val
@@ -326,7 +310,6 @@ class PhysicalChannel:
         float: Indicates the calibrated gain of the channel.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_double(self._name, 0x3065)
         return val
 
@@ -335,7 +318,6 @@ class PhysicalChannel:
         """
         float: Indicates the calibrated offset of the channel in volts.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_double(self._name, 0x3066)
         return val
@@ -347,7 +329,6 @@ class PhysicalChannel:
             condition.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x3064)
         return val
 
@@ -357,7 +338,6 @@ class PhysicalChannel:
         List[float]: Indicates the coefficients of a polynomial equation
             used to scale from pre-amplified values.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_double_array(self._name, 0x3063)
         return val
@@ -370,7 +350,6 @@ class PhysicalChannel:
             channel.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_int32_array(self._name, 0x304e)
         return [AOPowerUpOutputBehavior(e) for e in val]
 
@@ -381,7 +360,6 @@ class PhysicalChannel:
             Indicates the list of terminal configurations supported by
             the channel.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_int32(self._name, 0x29a3)
         return enum_bitfield_to_list(
@@ -394,7 +372,6 @@ class PhysicalChannel:
             measurement types supported by the channel.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_int32_array(self._name, 0x2fda)
         return [UsageTypeCI(e) for e in val]
 
@@ -404,7 +381,6 @@ class PhysicalChannel:
         List[:class:`nidaqmx.constants.UsageTypeCO`]: Indicates the
             output types supported by the channel.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_int32_array(self._name, 0x2fdb)
         return [UsageTypeCO(e) for e in val]
@@ -416,7 +392,6 @@ class PhysicalChannel:
             for the digital input physical channel.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x29a6)
         return val
 
@@ -425,7 +400,6 @@ class PhysicalChannel:
         """
         int: Indicates in bits the width of digital input port.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_uint32(self._name, 0x29a4)
         return val
@@ -436,7 +410,6 @@ class PhysicalChannel:
         bool: Indicates if the sample clock timing type is supported for
             the digital input physical channel.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x29a5)
         return val
@@ -449,7 +422,6 @@ class PhysicalChannel:
             clocked digital input.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_int32_array(self._name, 0x2fe0)
         return [AcquisitionType(e) for e in val]
 
@@ -458,7 +430,6 @@ class PhysicalChannel:
         """
         int: Indicates in bits the width of digital output port.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_uint32(self._name, 0x29a7)
         return val
@@ -469,7 +440,6 @@ class PhysicalChannel:
         bool: Indicates if the sample clock timing type is supported for
             the digital output physical channel.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_bool(self._name, 0x29a8)
         return val
@@ -482,7 +452,6 @@ class PhysicalChannel:
             clocked digital output.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_int32_array(self._name, 0x2fe1)
         return [AcquisitionType(e) for e in val]
 
@@ -493,7 +462,6 @@ class PhysicalChannel:
             checksums.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_bytes(self._name, 0x21df)
         return val
 
@@ -502,7 +470,6 @@ class PhysicalChannel:
         """
         int: Indicates the manufacturer ID of the sensor.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_uint32(self._name, 0x21da)
         return val
@@ -513,7 +480,6 @@ class PhysicalChannel:
         int: Indicates the model number of the sensor.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_uint32(self._name, 0x21db)
         return val
 
@@ -522,7 +488,6 @@ class PhysicalChannel:
         """
         int: Indicates the serial number of the sensor.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_uint32(self._name, 0x21dc)
         return val
@@ -534,7 +499,6 @@ class PhysicalChannel:
             in **teds_bit_stream**.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_uint32_array(self._name, 0x228f)
         return val
 
@@ -544,7 +508,6 @@ class PhysicalChannel:
         str: Indicates the version letter of the sensor.
         """
 
-
         val = self._interpreter.get_physical_chan_attribute_string(self._name, 0x21de)
         return val
 
@@ -553,7 +516,6 @@ class PhysicalChannel:
         """
         int: Indicates the version number of the sensor.
         """
-
 
         val = self._interpreter.get_physical_chan_attribute_uint32(self._name, 0x21dd)
         return val

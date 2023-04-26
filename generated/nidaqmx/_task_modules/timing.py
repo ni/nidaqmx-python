@@ -29,7 +29,6 @@ class Timing:
             clock pulse an analog-to-digital conversion takes place.
         """
 
-
         val = self._interpreter.get_timing_attribute_int32(self._handle, 0x1853)
         return Edge(val)
 
@@ -49,7 +48,6 @@ class Timing:
             Convert Clock.
         """
 
-
         val = self._interpreter.get_timing_attribute_bool(self._handle, 0x2edc)
         return val
 
@@ -67,7 +65,6 @@ class Timing:
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_timing_attribute_double(self._handle, 0x2edd)
         return val
@@ -88,7 +85,6 @@ class Timing:
             the filter.
         """
 
-
         val = self._interpreter.get_timing_attribute_double(self._handle, 0x2edf)
         return val
 
@@ -106,7 +102,6 @@ class Timing:
         str: Specifies the terminal of the signal to use as the timebase
             of the digital filter.
         """
-
 
         val = self._interpreter.get_timing_attribute_string(self._handle, 0x2ede)
         return val
@@ -127,7 +122,6 @@ class Timing:
             device.
         """
 
-
         val = self._interpreter.get_timing_attribute_bool(self._handle, 0x2ee0)
         return val
 
@@ -146,7 +140,6 @@ class Timing:
             given the current devices and channel count.
         """
 
-
         val = self._interpreter.get_timing_attribute_double(self._handle, 0x22c9)
         return val
 
@@ -157,7 +150,6 @@ class Timing:
             to-digital converter. This clock is specific to the analog
             input section of multiplexed devices.
         """
-
 
         val = self._interpreter.get_timing_attribute_double(self._handle, 0x1848)
         return val
@@ -177,7 +169,6 @@ class Timing:
             Convert Clock.
         """
 
-
         val = self._interpreter.get_timing_attribute_string(self._handle, 0x1502)
         return val
 
@@ -195,7 +186,6 @@ class Timing:
         int: Specifies the number of AI Convert Clock Timebase pulses
             needed to produce a single AI Convert Clock pulse.
         """
-
 
         val = self._interpreter.get_timing_attribute_uint32(self._handle, 0x1335)
         return val
@@ -215,7 +205,6 @@ class Timing:
             the terminal  of the signal to use as the AI Convert Clock
             Timebase.
         """
-
 
         val = self._interpreter.get_timing_attribute_int32(self._handle, 0x1339)
         return MIOAIConvertTimebaseSource(val)
@@ -239,7 +228,6 @@ class Timing:
             that contains a list or range of digital lines or ports.
         """
 
-
         val = self._interpreter.get_timing_attribute_string(self._handle, 0x2196)
         return PhysicalChannel(val)
 
@@ -261,7 +249,6 @@ class Timing:
             virtual channels in the task. You also can specify a string
             that contains a list or range of digital lines or ports.
         """
-
 
         val = self._interpreter.get_timing_attribute_string(self._handle, 0x2195)
         return PhysicalChannel(val)
@@ -292,7 +279,6 @@ class Timing:
             output-only lines.
         """
 
-
         val = self._interpreter.get_timing_attribute_bool(self._handle, 0x2efa)
         return val
 
@@ -313,7 +299,6 @@ class Timing:
             **delay_from_samp_clk_delay_units**.
         """
 
-
         val = self._interpreter.get_timing_attribute_double(self._handle, 0x1317)
         return val
 
@@ -331,7 +316,6 @@ class Timing:
         :class:`nidaqmx.constants.DigitalWidthUnits`: Specifies the
             units of **delay_from_samp_clk_delay**.
         """
-
 
         val = self._interpreter.get_timing_attribute_int32(self._handle, 0x1304)
         return DigitalWidthUnits(val)
@@ -351,7 +335,6 @@ class Timing:
         bool: Specifies whether to enable the first sample timestamp.
         """
 
-
         val = self._interpreter.get_timing_attribute_bool(self._handle, 0x3139)
         return val
 
@@ -369,7 +352,6 @@ class Timing:
         :class:`nidaqmx.constants.Timescale`: Specifies the timescale to
             be used for the first sample timestamp.
         """
-
 
         val = self._interpreter.get_timing_attribute_int32(self._handle, 0x313b)
         return Timescale(val)
@@ -390,7 +372,6 @@ class Timing:
             cycle before starting a new handshake cycle.
         """
 
-
         val = self._interpreter.get_timing_attribute_double(self._handle, 0x22c2)
         return val
 
@@ -409,7 +390,6 @@ class Timing:
             which edge of the Handshake Trigger an input task latches
             the data from the peripheral device.
         """
-
 
         val = self._interpreter.get_timing_attribute_int32(self._handle, 0x22c4)
         return SampleInputDataWhen(val)
@@ -431,7 +411,6 @@ class Timing:
             the task starts.
         """
 
-
         val = self._interpreter.get_timing_attribute_int32(self._handle, 0x22c3)
         return HandshakeStartCondition(val)
 
@@ -452,7 +431,6 @@ class Timing:
             empty.
         """
 
-
         val = self._interpreter.get_timing_attribute_int32(self._handle, 0x2efd)
         return UnderflowBehavior(val)
 
@@ -470,7 +448,6 @@ class Timing:
         """
         float: Specifies the rate of the Master Timebase.
         """
-
 
         val = self._interpreter.get_timing_attribute_double(self._handle, 0x1495)
         return val
@@ -491,7 +468,6 @@ class Timing:
             the onboard 20MHz Timebase or the RTSI7 terminal.
         """
 
-
         val = self._interpreter.get_timing_attribute_string(self._handle, 0x1343)
         return val
 
@@ -508,7 +484,6 @@ class Timing:
         """
         float: Specifies the frequency of the Reference Clock.
         """
-
 
         val = self._interpreter.get_timing_attribute_double(self._handle, 0x1315)
         return val
@@ -527,7 +502,6 @@ class Timing:
         str: Specifies the terminal of the signal to use as the
             Reference Clock.
         """
-
 
         val = self._interpreter.get_timing_attribute_string(self._handle, 0x1316)
         return val
@@ -549,7 +523,6 @@ class Timing:
             a periodic clock.
         """
 
-
         val = self._interpreter.get_timing_attribute_int32(self._handle, 0x1301)
         return Edge(val)
 
@@ -569,7 +542,6 @@ class Timing:
             signal.
         """
 
-
         val = self._interpreter.get_timing_attribute_bool(self._handle, 0x221e)
         return val
 
@@ -587,7 +559,6 @@ class Timing:
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_timing_attribute_double(self._handle, 0x221f)
         return val
@@ -608,7 +579,6 @@ class Timing:
             the filter.
         """
 
-
         val = self._interpreter.get_timing_attribute_double(self._handle, 0x2221)
         return val
 
@@ -626,7 +596,6 @@ class Timing:
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_timing_attribute_string(self._handle, 0x2220)
         return val
@@ -646,7 +615,6 @@ class Timing:
             transitions in the signal to the internal timebase of the
             device.
         """
-
 
         val = self._interpreter.get_timing_attribute_bool(self._handle, 0x2222)
         return val
@@ -670,7 +638,6 @@ class Timing:
             sampling devices.
         """
 
-
         val = self._interpreter.get_timing_attribute_double(self._handle, 0x22c8)
         return val
 
@@ -681,7 +648,6 @@ class Timing:
             action to take if Sample Clock edges occur faster than the
             device can handle them.
         """
-
 
         val = self._interpreter.get_timing_attribute_int32(self._handle, 0x2efc)
         return OverflowBehavior(val)
@@ -703,7 +669,6 @@ class Timing:
             set this input to the maximum expected rate of that clock.
         """
 
-
         val = self._interpreter.get_timing_attribute_double(self._handle, 0x1344)
         return val
 
@@ -721,7 +686,6 @@ class Timing:
         str: Specifies the terminal of the signal to use as the Sample
             Clock.
         """
-
 
         val = self._interpreter.get_timing_attribute_string(self._handle, 0x1852)
         return val
@@ -743,7 +707,6 @@ class Timing:
             **samp_clk_src**.
         """
 
-
         val = self._interpreter.get_timing_attribute_string(self._handle, 0x2f1b)
         return val
 
@@ -755,7 +718,6 @@ class Timing:
             useful primarily when the signal you use as the Sample Clock
             Timebase is not a periodic clock.
         """
-
 
         val = self._interpreter.get_timing_attribute_int32(self._handle, 0x18ec)
         return Edge(val)
@@ -776,7 +738,6 @@ class Timing:
             to produce a single Sample Clock pulse.
         """
 
-
         val = self._interpreter.get_timing_attribute_uint32(self._handle, 0x18eb)
         return val
 
@@ -795,7 +756,6 @@ class Timing:
             needed to produce a single pulse of the Sample Clock
             Timebase.
         """
-
 
         val = self._interpreter.get_timing_attribute_uint32(self._handle, 0x1305)
         return val
@@ -818,7 +778,6 @@ class Timing:
             parameters.
         """
 
-
         val = self._interpreter.get_timing_attribute_double(self._handle, 0x1303)
         return val
 
@@ -836,7 +795,6 @@ class Timing:
         str: Specifies the terminal of the signal to use as the Sample
             Clock Timebase.
         """
-
 
         val = self._interpreter.get_timing_attribute_string(self._handle, 0x1308)
         return val
@@ -858,7 +816,6 @@ class Timing:
             with **samp_clk_timebase_src**.
         """
 
-
         val = self._interpreter.get_timing_attribute_string(self._handle, 0x2f1c)
         return val
 
@@ -869,7 +826,6 @@ class Timing:
             action to take when the onboard memory of the device becomes
             empty. In either case, the sample clock does not stop.
         """
-
 
         val = self._interpreter.get_timing_attribute_int32(self._handle, 0x2961)
         return UnderflowBehavior(val)
@@ -891,7 +847,6 @@ class Timing:
             waveform input for Output tasks.
         """
 
-
         val = self._interpreter.get_timing_attribute_bool(self._handle, 0x30fc)
         return val
 
@@ -910,7 +865,6 @@ class Timing:
             acquires or generates a finite number of samples or if it
             continuously acquires or generates samples.
         """
-
 
         val = self._interpreter.get_timing_attribute_int32(self._handle, 0x1300)
         return AcquisitionType(val)
@@ -934,7 +888,6 @@ class Timing:
             determine the buffer size.
         """
 
-
         val = self._interpreter.get_timing_attribute_uint64(self._handle, 0x1310)
         return val
 
@@ -951,7 +904,6 @@ class Timing:
         """
         int: Specifies which timing engine to use for the task.
         """
-
 
         val = self._interpreter.get_timing_attribute_uint32(self._handle, 0x2a26)
         return val
@@ -970,7 +922,6 @@ class Timing:
         :class:`nidaqmx.constants.SampleTimingType`: Specifies the type
             of sample timing to use for the task.
         """
-
 
         val = self._interpreter.get_timing_attribute_int32(self._handle, 0x1347)
         return SampleTimingType(val)
@@ -991,7 +942,6 @@ class Timing:
             simultaneously, rather than updating channels independently
             when you write a sample to that channel.
         """
-
 
         val = self._interpreter.get_timing_attribute_bool(self._handle, 0x21a0)
         return val
@@ -1014,7 +964,6 @@ class Timing:
             for information about how to calculate this value.
         """
 
-
         val = self._interpreter.get_timing_attribute_uint32(self._handle, 0x2f7e)
         return val
 
@@ -1033,7 +982,6 @@ class Timing:
             after the master device issues the synchronization pulse
             before the task starts.
         """
-
 
         val = self._interpreter.get_timing_attribute_double(self._handle, 0x223f)
         return val
@@ -1058,7 +1006,6 @@ class Timing:
             to the resulting value.
         """
 
-
         val = self._interpreter.get_timing_attribute_double(self._handle, 0x2f7d)
         return val
 
@@ -1081,7 +1028,6 @@ class Timing:
             **sync_pulse_reset_delay** to the resulting value.
         """
 
-
         val = self._interpreter.get_timing_attribute_double(self._handle, 0x2f7c)
         return val
 
@@ -1092,7 +1038,6 @@ class Timing:
             synchronization pulse. The synchronization pulse resets the
             clock dividers and the ADCs/DACs on the device.
         """
-
 
         val = self._interpreter.get_timing_attribute_string(self._handle, 0x223d)
         return val
@@ -1113,7 +1058,6 @@ class Timing:
             pulse.
         """
 
-
         val = self._interpreter.get_timing_attribute_double(self._handle, 0x223e)
         return val
 
@@ -1125,7 +1069,6 @@ class Timing:
             name of the source terminal.
         """
 
-
         val = self._interpreter.get_timing_attribute_string(self._handle, 0x2f85)
         return val
 
@@ -1135,7 +1078,6 @@ class Timing:
         :class:`nidaqmx.constants.Timescale`: Specifies the timescale to
             be used for timestamps for a sync pulse.
         """
-
 
         val = self._interpreter.get_timing_attribute_int32(self._handle, 0x3138)
         return Timescale(val)
@@ -1155,7 +1097,6 @@ class Timing:
         :class:`nidaqmx.constants.SyncPulseType`: Specifies the type of
             sync pulse used in the task.
         """
-
 
         val = self._interpreter.get_timing_attribute_int32(self._handle, 0x3136)
         return SyncPulseType(val)

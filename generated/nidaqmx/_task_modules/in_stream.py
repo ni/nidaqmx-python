@@ -78,7 +78,6 @@ class InStream:
             Otherwise, you will receive an error.
         """
 
-
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x2f70)
         return val
 
@@ -91,7 +90,6 @@ class InStream:
             acquisition task, it also stops the task after reading the
             last sample.
         """
-
 
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x1826)
         return val
@@ -114,7 +112,6 @@ class InStream:
             Otherwise, you will receive an error.
         """
 
-
         val = self._interpreter.get_read_attribute_string(self._handle, 0x31e0)
         return unflatten_channel_string(val)
 
@@ -129,7 +126,6 @@ class InStream:
             will receive an error.
         """
 
-
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x31df)
         return val
 
@@ -140,7 +136,6 @@ class InStream:
             channel. This value is the same for all channels in the
             task.
         """
-
 
         val = self._interpreter.get_read_attribute_uint32(self._handle, 0x1223)
         return val
@@ -153,7 +148,6 @@ class InStream:
             Some devices detect overflows differently than others.
         """
 
-
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x2194)
         return val
 
@@ -164,7 +158,6 @@ class InStream:
             Specifies a subset of channels in the task from which to
             read.
         """
-
 
         val = self._interpreter.get_read_attribute_string(self._handle, 0x1823)
         return Channel._factory(self._handle, val, self._interpreter)
@@ -188,7 +181,6 @@ class InStream:
             property. Otherwise, you will receive an error.
         """
 
-
         val = self._interpreter.get_read_attribute_string(self._handle, 0x2a99)
         return unflatten_channel_string(val)
 
@@ -206,7 +198,6 @@ class InStream:
             receive an error.
         """
 
-
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x2a98)
         return val
 
@@ -216,7 +207,6 @@ class InStream:
         int: Indicates in samples per channel the current position in
             the buffer.
         """
-
 
         val = self._interpreter.get_read_attribute_uint64(self._handle, 0x1221)
         return val
@@ -231,7 +221,6 @@ class InStream:
             an error.
         """
 
-
         val = self._interpreter.get_read_attribute_string(self._handle, 0x2f71)
         return unflatten_channel_string(val)
 
@@ -242,7 +231,6 @@ class InStream:
             returns in a sample for line-based reads. If a channel has
             fewer lines than this number, the extra booleans are False.
         """
-
 
         val = self._interpreter.get_read_attribute_uint32(self._handle, 0x217c)
         return val
@@ -257,7 +245,6 @@ class InStream:
             an error.
         """
 
-
         val = self._interpreter.get_read_attribute_string(self._handle, 0x3089)
         return unflatten_channel_string(val)
 
@@ -270,7 +257,6 @@ class InStream:
             in the task. You must read this property before you read
             **excit_fault_chans**. Otherwise, you will receive an error.
         """
-
 
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x3088)
         return val
@@ -285,7 +271,6 @@ class InStream:
             overrides the automatic input buffer allocation that NI-
             DAQmx performs.
         """
-
 
         val = self._interpreter.get_buffer_attribute_uint32(self._handle, 0x186c)
         return val
@@ -308,7 +293,6 @@ class InStream:
             property. Otherwise, you will receive an error.
         """
 
-
         val = self._interpreter.get_read_attribute_string(self._handle, 0x3190)
         return unflatten_channel_string(val)
 
@@ -328,7 +312,6 @@ class InStream:
             the range of -12 mA to -2 mA.
         """
 
-
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x318f)
         return val
 
@@ -338,7 +321,6 @@ class InStream:
         int: Indicates in samples per channel the size of the onboard
             input buffer of the device.
         """
-
 
         val = self._interpreter.get_buffer_attribute_uint32(self._handle, 0x230a)
         return val
@@ -354,7 +336,6 @@ class InStream:
             with "\\" or "/". Files created after specifying a new file
             path retain the same name and numbering sequence.
         """
-
 
         val = self._interpreter.get_read_attribute_string(self._handle, 0x2ec4)
         return val
@@ -378,7 +359,6 @@ class InStream:
             samples you configure the task to acquire.
         """
 
-
         val = self._interpreter.get_read_attribute_uint64(self._handle, 0x2fc6)
         return val
 
@@ -397,7 +377,6 @@ class InStream:
             written to disk.  The size must be evenly divisible by the
             volume sector size, in bytes.
         """
-
 
         val = self._interpreter.get_read_attribute_uint32(self._handle, 0x2fc3)
         return val
@@ -420,7 +399,6 @@ class InStream:
             If you want to read data while logging, specify Log and Read
             mode.
         """
-
 
         val = self._interpreter.get_read_attribute_int32(self._handle, 0x2ec5)
         return LoggingMode(val)
@@ -446,7 +424,6 @@ class InStream:
             to disk. A new TDMS group is written when logging is resumed
             from a paused state.
         """
-
 
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x2fe3)
         return val
@@ -474,7 +451,6 @@ class InStream:
             on the next file created.
         """
 
-
         val = self._interpreter.get_read_attribute_uint64(self._handle, 0x2fe4)
         return val
 
@@ -500,7 +476,6 @@ class InStream:
             Task #2.
         """
 
-
         val = self._interpreter.get_read_attribute_string(self._handle, 0x2ec6)
         return val
 
@@ -518,7 +493,6 @@ class InStream:
         :class:`nidaqmx.constants.LoggingOperation`: Specifies how to
             open the TDMS file.
         """
-
 
         val = self._interpreter.get_read_attribute_int32(self._handle, 0x2ec7)
         return LoggingOperation(val)
@@ -541,7 +515,6 @@ class InStream:
             **channels_to_read**.
         """
 
-
         val = self._interpreter.get_read_attribute_uint32(self._handle, 0x217b)
         return val
 
@@ -552,7 +525,6 @@ class InStream:
             begin a read operation. This offset is relative to the
             location you specify with **relative_to**.
         """
-
 
         val = self._interpreter.get_read_attribute_int32(self._handle, 0x190b)
         return val
@@ -573,7 +545,6 @@ class InStream:
             this property. Otherwise you will receive an error.
         """
 
-
         val = self._interpreter.get_read_attribute_string(self._handle, 0x3101)
         return unflatten_channel_string(val)
 
@@ -584,7 +555,6 @@ class InStream:
             channels. You must read **open_chans_exist** before you read
             this property. Otherwise you will receive an error.
         """
-
 
         val = self._interpreter.get_read_attribute_string(self._handle, 0x3102)
         return unflatten_channel_string(val)
@@ -600,7 +570,6 @@ class InStream:
             error.
         """
 
-
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x3100)
         return val
 
@@ -613,7 +582,6 @@ class InStream:
             you read this property. Otherwise, you will receive an
             error.
         """
-
 
         val = self._interpreter.get_read_attribute_string(self._handle, 0x2a0a)
         return unflatten_channel_string(val)
@@ -629,7 +597,6 @@ class InStream:
             error.
         """
 
-
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x2a09)
         return val
 
@@ -642,7 +609,6 @@ class InStream:
             before you read this property. Otherwise, you will receive
             an error.
         """
-
 
         val = self._interpreter.get_read_attribute_string(self._handle, 0x2a97)
         return unflatten_channel_string(val)
@@ -658,7 +624,6 @@ class InStream:
             error.
         """
 
-
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x2a96)
         return val
 
@@ -673,7 +638,6 @@ class InStream:
             overcurrent channels to recover.
         """
 
-
         val = self._interpreter.get_read_attribute_string(self._handle, 0x29e7)
         return unflatten_channel_string(val)
 
@@ -687,7 +651,6 @@ class InStream:
             **overcurrent_chans**. Otherwise, you will receive an error.
         """
 
-
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x29e6)
         return val
 
@@ -699,7 +662,6 @@ class InStream:
             **overloaded_chans_exist** before you read this property.
             Otherwise, you will receive an error.
         """
-
 
         val = self._interpreter.get_read_attribute_string(self._handle, 0x2175)
         return unflatten_channel_string(val)
@@ -714,7 +676,6 @@ class InStream:
             Otherwise, you will receive an error.
         """
 
-
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x2174)
         return val
 
@@ -726,7 +687,6 @@ class InStream:
             **overtemperature_chans_exist** before you read this
             property. Otherwise, you will receive an error.
         """
-
 
         val = self._interpreter.get_read_attribute_string(self._handle, 0x3082)
         return unflatten_channel_string(val)
@@ -742,7 +702,6 @@ class InStream:
             error.
         """
 
-
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x3081)
         return val
 
@@ -752,7 +711,6 @@ class InStream:
         :class:`nidaqmx.constants.OverwriteMode`: Specifies whether to
             overwrite samples in the buffer that you have not yet read.
         """
-
 
         val = self._interpreter.get_read_attribute_int32(self._handle, 0x1211)
         return OverwriteMode(val)
@@ -772,7 +730,6 @@ class InStream:
         List[str]: Indicates the channels that had their PLLs unlock.
         """
 
-
         val = self._interpreter.get_read_attribute_string(self._handle, 0x3119)
         return unflatten_channel_string(val)
 
@@ -785,7 +742,6 @@ class InStream:
             acquisition.
         """
 
-
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x3118)
         return val
 
@@ -797,7 +753,6 @@ class InStream:
             **power_supply_fault_chans_exist** before you read this
             property. Otherwise, you will receive an error.
         """
-
 
         val = self._interpreter.get_read_attribute_string(self._handle, 0x3193)
         return unflatten_channel_string(val)
@@ -813,7 +768,6 @@ class InStream:
             receive an error.
         """
 
-
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x3192)
         return val
 
@@ -822,7 +776,6 @@ class InStream:
         """
         int: Indicates in bytes the size of a raw sample from the task.
         """
-
 
         val = self._interpreter.get_read_attribute_uint32(self._handle, 0x217a)
         return val
@@ -838,7 +791,6 @@ class InStream:
             number of samples to read is -1, a read operation always
             reads all samples currently available in the buffer.
         """
-
 
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x1215)
         return val
@@ -865,7 +817,6 @@ class InStream:
             **ReadRelativeTo.FIRST_PRETRIGGER_SAMPLE**.
         """
 
-
         val = self._interpreter.get_read_attribute_int32(self._handle, 0x190a)
         return ReadRelativeTo(val)
 
@@ -888,7 +839,6 @@ class InStream:
             receive an error.
         """
 
-
         val = self._interpreter.get_read_attribute_string(self._handle, 0x31de)
         return unflatten_channel_string(val)
 
@@ -903,7 +853,6 @@ class InStream:
             property. Otherwise, you will receive an error.
         """
 
-
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x31dd)
         return val
 
@@ -916,7 +865,6 @@ class InStream:
             Exist property before you read this property. Otherwise, you
             will receive an error.
         """
-
 
         val = self._interpreter.get_read_attribute_string(self._handle, 0x31e7)
         return unflatten_channel_string(val)
@@ -933,7 +881,6 @@ class InStream:
             Channels property. Otherwise, you will receive an error.
         """
 
-
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x31e6)
         return val
 
@@ -944,7 +891,6 @@ class InStream:
             checking for available samples if **wait_mode** is
             **WaitMode.SLEEP**.
         """
-
 
         val = self._interpreter.get_read_attribute_double(self._handle, 0x22b0)
         return val
@@ -964,7 +910,6 @@ class InStream:
             target.
         """
 
-
         val = self._interpreter.get_read_attribute_string(self._handle, 0x313e)
         return unflatten_channel_string(val)
 
@@ -975,7 +920,6 @@ class InStream:
             grand master. Devices may report PLL Unlock either during
             acquisition or after acquisition.
         """
-
 
         val = self._interpreter.get_read_attribute_bool(self._handle, 0x313d)
         return val
@@ -990,7 +934,6 @@ class InStream:
             retriggered acquisitions.
         """
 
-
         val = self._interpreter.get_read_attribute_uint64(self._handle, 0x192a)
         return val
 
@@ -1000,7 +943,6 @@ class InStream:
         :class:`nidaqmx.constants.WaitMode`: Specifies how DAQmx Read
             waits for samples to become available.
         """
-
 
         val = self._interpreter.get_read_attribute_int32(self._handle, 0x2232)
         return WaitMode(val)

@@ -29,7 +29,6 @@ class COChannel(Channel):
             the time spent in the idle state for each successive pulse.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x295)
         return val
 
@@ -58,7 +57,6 @@ class COChannel(Channel):
             marginally reduces it.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x29f2)
         return ConstrainedGenMode(val)
 
@@ -77,7 +75,6 @@ class COChannel(Channel):
         int: Indicates the current value of the count register.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x293)
         return val
 
@@ -88,7 +85,6 @@ class COChannel(Channel):
             cycle is from rising edge to rising edge or from falling
             edge to falling edge.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x341)
         return Edge(val)
@@ -109,7 +105,6 @@ class COChannel(Channel):
             signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2276)
         return val
 
@@ -127,7 +122,6 @@ class COChannel(Channel):
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2277)
         return val
@@ -148,7 +142,6 @@ class COChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2279)
         return val
 
@@ -166,7 +159,6 @@ class COChannel(Channel):
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2278)
         return val
@@ -187,7 +179,6 @@ class COChannel(Channel):
             device.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x227a)
         return val
 
@@ -206,7 +197,6 @@ class COChannel(Channel):
             can divide the counter timebase in order to generate slower
             signals without causing the count register to roll over.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x18c3)
         return val
@@ -230,7 +220,6 @@ class COChannel(Channel):
             timebase.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x18c2)
         return val
 
@@ -252,7 +241,6 @@ class COChannel(Channel):
             widths that are not possible using the internal timebases.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x339)
         return val
 
@@ -272,7 +260,6 @@ class COChannel(Channel):
             buffered operations, use DMA or USB Bulk. For non-buffered
             operations, use Polled.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2ecc)
         return DataTransferActiveTransferMode(val)
@@ -294,7 +281,6 @@ class COChannel(Channel):
             buffer to the onboard memory of the device.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2ecd)
         return OutputDataTransferCondition(val)
 
@@ -313,7 +299,6 @@ class COChannel(Channel):
         bool: Specifies whether to apply the initial delay to
             retriggered pulse trains.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2ec9)
         return val
@@ -339,7 +324,6 @@ class COChannel(Channel):
             device and possibly result in a system crash.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2ed3)
         return val
 
@@ -358,7 +342,6 @@ class COChannel(Channel):
             the output terminal of the counter.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x294)
         return Level(val)
 
@@ -368,7 +351,6 @@ class COChannel(Channel):
         :class:`nidaqmx.constants.UsageTypeCO`: Indicates how to define
             pulses generated on the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18b5)
         return UsageTypeCO(val)
@@ -384,7 +366,6 @@ class COChannel(Channel):
             counter source terminal and when that signal has a higher
             frequency than the fastest onboard timebase.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x226d)
         return val
@@ -407,7 +388,6 @@ class COChannel(Channel):
             resets it to False.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x190e)
         return val
 
@@ -419,7 +399,6 @@ class COChannel(Channel):
             DAQmx uses this ratio and the pulse frequency to determine
             the width of the pulses and the delay between pulses.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1176)
         return val
@@ -440,7 +419,6 @@ class COChannel(Channel):
             **co_pulse_freq_units** or when you create the channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x1178)
         return val
 
@@ -458,7 +436,6 @@ class COChannel(Channel):
         float: Specifies in seconds the amount of time to wait before
             generating the first pulse.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x299)
         return val
@@ -478,7 +455,6 @@ class COChannel(Channel):
             in which to define pulse frequency.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18d5)
         return FrequencyUnits(val)
 
@@ -496,7 +472,6 @@ class COChannel(Channel):
         """
         int: Specifies the number of ticks the pulse is high.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x1169)
         return val
@@ -517,7 +492,6 @@ class COChannel(Channel):
             **co_pulse_time_units** or when you create the channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x18ba)
         return val
 
@@ -536,7 +510,6 @@ class COChannel(Channel):
             the output terminal.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1170)
         return Level(val)
 
@@ -554,7 +527,6 @@ class COChannel(Channel):
         """
         int: Specifies the number of ticks the pulse is low.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x1171)
         return val
@@ -575,7 +547,6 @@ class COChannel(Channel):
             **co_pulse_time_units** or when you create the channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x18bb)
         return val
 
@@ -592,7 +563,6 @@ class COChannel(Channel):
         """
         str: Specifies on which terminal to generate pulses.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18e1)
         return val
@@ -612,7 +582,6 @@ class COChannel(Channel):
             first pulse.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x298)
         return val
 
@@ -631,7 +600,6 @@ class COChannel(Channel):
             generating the first pulse.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x18bc)
         return val
 
@@ -649,7 +617,6 @@ class COChannel(Channel):
         :class:`nidaqmx.constants.TimeUnits`: Specifies the units in
             which to define high and low pulse time.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18d6)
         return TimeUnits(val)
@@ -670,7 +637,6 @@ class COChannel(Channel):
             pulse train values.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x22ff)
         return val
 
@@ -681,7 +647,6 @@ class COChannel(Channel):
             used to stream data. Modify this value to affect performance
             under different combinations of operating system and device.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x3005)
         return val
@@ -702,7 +667,6 @@ class COChannel(Channel):
             different combinations of operating system and device.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x2a93)
         return val
 
@@ -722,7 +686,6 @@ class COChannel(Channel):
             Generally, you cannot update onboard memory directly after
             you start the task. Onboard memory includes data FIFOs.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2ecb)
         return val

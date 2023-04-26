@@ -81,7 +81,6 @@ class Triggers:
             devices.
         """
 
-
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x2f80)
         return SyncType(val)
 

@@ -105,7 +105,6 @@ class WatchdogTask:
             digital signal to expire the watchdog task.
         """
 
-
         val = self._interpreter.get_watchdog_attribute_int32(self._handle, "", 0x21a5)
         return Edge(val)
 
@@ -124,7 +123,6 @@ class WatchdogTask:
         str: Specifies the name of a terminal where a digital signal
             exists to use as the source of the Expiration Trigger.
         """
-
 
         val = self._interpreter.get_watchdog_attribute_string(self._handle, "", 0x21a4)
         return val
@@ -146,7 +144,6 @@ class WatchdogTask:
             the loss of network connection.
         """
 
-
         val = self._interpreter.get_watchdog_attribute_bool(self._handle, "", 0x305d)
         return val
 
@@ -164,7 +161,6 @@ class WatchdogTask:
         :class:`nidaqmx.constants.TriggerType`: Specifies the type of
             trigger to use to expire a watchdog task.
         """
-
 
         val = self._interpreter.get_watchdog_attribute_int32(self._handle, "", 0x21a3)
         return TriggerType(val)
@@ -185,7 +181,6 @@ class WatchdogTask:
             property only while the task is running.
         """
 
-
         val = self._interpreter.get_watchdog_attribute_bool(self._handle, "", 0x21a8)
         return val
 
@@ -197,7 +192,6 @@ class WatchdogTask:
             timer never expires. Set this input to -1 if you use an
             Expiration Trigger to expire the watchdog task.
         """
-
 
         val = self._interpreter.get_watchdog_attribute_double(self._handle, "", 0x21a9)
         return val

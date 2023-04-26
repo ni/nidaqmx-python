@@ -199,7 +199,6 @@ class Channel:
             the virtual channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x187f)
         return ChannelType(val)
 
@@ -208,7 +207,6 @@ class Channel:
         """
         str: Specifies a user-defined description for the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x1926)
         return val
@@ -227,7 +225,6 @@ class Channel:
         bool: Indicates whether the channel is a global channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2304)
         return val
 
@@ -238,7 +235,6 @@ class Channel:
             Specifies the name of the physical channel upon which this
             virtual channel is based.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18f5)
         return PhysicalChannel(val)
@@ -255,7 +251,6 @@ class Channel:
             action to take if the target loses its synchronization to
             the grand master.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x313c)
         return SyncUnlockBehavior(val)

@@ -29,7 +29,6 @@ class StartTrigger:
             rather than a virtual channel.
         """
 
-
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x2233)
         return Coupling(val)
 
@@ -54,7 +53,6 @@ class StartTrigger:
             rapidly.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2ee1)
         return val
 
@@ -72,7 +70,6 @@ class StartTrigger:
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2ee2)
         return val
@@ -93,7 +90,6 @@ class StartTrigger:
             the filter.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2ee4)
         return val
 
@@ -111,7 +107,6 @@ class StartTrigger:
         str: Specifies the terminal of the signal to use as the timebase
             of the digital filter.
         """
-
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x2ee3)
         return val
@@ -131,7 +126,6 @@ class StartTrigger:
             transitions in the signal to the internal timebase of the
             device.
         """
-
 
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2ee5)
         return val
@@ -158,7 +152,6 @@ class StartTrigger:
             hysteresis.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x1395)
         return val
 
@@ -179,7 +172,6 @@ class StartTrigger:
             to trigger on this threshold.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x1396)
         return val
 
@@ -197,7 +189,6 @@ class StartTrigger:
         :class:`nidaqmx.constants.Slope`: Specifies on which slope of
             the trigger signal to start acquiring or generating samples.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1397)
         return Slope(val)
@@ -218,7 +209,6 @@ class StartTrigger:
             there is an analog signal to use as the source of the Start
             Trigger.
         """
-
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x1398)
         return val
@@ -242,7 +232,6 @@ class StartTrigger:
             each of the other Analog Multi Edge property lists, if they
             are not empty.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32_array(self._handle, 0x3125)
         return [Coupling(e) for e in val]
@@ -274,7 +263,6 @@ class StartTrigger:
             empty.
         """
 
-
         val = self._interpreter.get_trig_attribute_double_array(self._handle, 0x3124)
         return val
 
@@ -296,7 +284,6 @@ class StartTrigger:
             Start.AnlgMultiEdge.Srcs and an element in each of the other
             Analog Multi Edge property lists, if they are not empty.
         """
-
 
         val = self._interpreter.get_trig_attribute_double_array(self._handle, 0x3123)
         return val
@@ -321,7 +308,6 @@ class StartTrigger:
             empty.
         """
 
-
         val = self._interpreter.get_trig_attribute_int32_array(self._handle, 0x3122)
         return [Slope(e) for e in val]
 
@@ -343,7 +329,6 @@ class StartTrigger:
             property lists, if they are not empty.
         """
 
-
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x3121)
         return val
 
@@ -361,7 +346,6 @@ class StartTrigger:
         float: Specifies the lower limit of the window. Specify this
             value in the units of the measurement or generation.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x1402)
         return val
@@ -381,7 +365,6 @@ class StartTrigger:
             the source signal of the trigger if the source is a terminal
             rather than a virtual channel.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x2234)
         return Coupling(val)
@@ -406,7 +389,6 @@ class StartTrigger:
             that transition in and out of the window rapidly.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2eff)
         return val
 
@@ -424,7 +406,6 @@ class StartTrigger:
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2f00)
         return val
@@ -445,7 +426,6 @@ class StartTrigger:
             the filter.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2f02)
         return val
 
@@ -463,7 +443,6 @@ class StartTrigger:
         str: Specifies the terminal of the signal to use as the timebase
             of the digital filter.
         """
-
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x2f01)
         return val
@@ -484,7 +463,6 @@ class StartTrigger:
             device.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2f03)
         return val
 
@@ -504,7 +482,6 @@ class StartTrigger:
             Trigger.
         """
 
-
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x1400)
         return val
 
@@ -522,7 +499,6 @@ class StartTrigger:
         float: Specifies the upper limit of the window. Specify this
             value in the units of the measurement or generation.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x1403)
         return val
@@ -543,7 +519,6 @@ class StartTrigger:
             the signal enters or leaves the window you specify with
             **anlg_win_btm** and **anlg_win_top**.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1401)
         return WindowTriggerCondition1(val)
@@ -566,7 +541,6 @@ class StartTrigger:
             **delay_units**.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x1856)
         return val
 
@@ -584,7 +558,6 @@ class StartTrigger:
         :class:`nidaqmx.constants.DigitalWidthUnits`: Specifies the
             units of **delay**.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x18c8)
         return DigitalWidthUnits(val)
@@ -605,7 +578,6 @@ class StartTrigger:
             signal.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2223)
         return val
 
@@ -623,7 +595,6 @@ class StartTrigger:
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2224)
         return val
@@ -644,7 +615,6 @@ class StartTrigger:
             the filter.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2226)
         return val
 
@@ -662,7 +632,6 @@ class StartTrigger:
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x2225)
         return val
@@ -685,7 +654,6 @@ class StartTrigger:
             of the internal timebase.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2227)
         return val
 
@@ -703,7 +671,6 @@ class StartTrigger:
         :class:`nidaqmx.constants.Edge`: Specifies on which edge of a
             digital pulse to start acquiring or generating samples.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1404)
         return Edge(val)
@@ -724,7 +691,6 @@ class StartTrigger:
             signal to use as the source of the Start Trigger.
         """
 
-
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x1407)
         return val
 
@@ -742,7 +708,6 @@ class StartTrigger:
         str: Specifies the digital pattern that must be met for the
             Start Trigger to occur.
         """
-
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x2186)
         return val
@@ -765,7 +730,6 @@ class StartTrigger:
             physical channels within the port is in ascending order.
         """
 
-
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x1410)
         return PhysicalChannel(val)
 
@@ -786,7 +750,6 @@ class StartTrigger:
             specified with **dig_pattern_src** match or differ from the
             digital pattern specified with **dig_pattern_pattern**.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1411)
         return DigitalPatternCondition(val)
@@ -816,7 +779,6 @@ class StartTrigger:
             devices were unable to respond to the trigger.
         """
 
-
         val = self._interpreter.get_trig_attribute_uint32(self._handle, 0x311c)
         return val
 
@@ -841,7 +803,6 @@ class StartTrigger:
             Retrigger Window of -1 causes the window to be infinite.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x311b)
         return val
 
@@ -864,7 +825,6 @@ class StartTrigger:
             in the process of acquiring or generating signals.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x190f)
         return val
 
@@ -884,7 +844,6 @@ class StartTrigger:
             trigger source terminal.
         """
 
-
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x2f1e)
         return val
 
@@ -894,7 +853,6 @@ class StartTrigger:
         :class:`nidaqmx.constants.Timescale`: Specifies the timescale to
             be used for timestamps used in a time trigger.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x3036)
         return Timescale(val)
@@ -916,7 +874,6 @@ class StartTrigger:
             an error will be returned at run time.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x314a)
         return val
 
@@ -934,7 +891,6 @@ class StartTrigger:
         :class:`nidaqmx.constants.Timescale`: Specifies the start
             trigger timestamp timescale.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x312d)
         return Timescale(val)
@@ -954,7 +910,6 @@ class StartTrigger:
         :class:`nidaqmx.constants.TriggerType`: Specifies the type of
             trigger to use to start a task.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1393)
         return TriggerType(val)
@@ -982,7 +937,6 @@ class StartTrigger:
             missed triggers. Specifying a Trigger Window of -1 causes
             the window to be infinite.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x311a)
         return val

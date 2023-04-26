@@ -8,7 +8,6 @@
         """
         ${attribute.get_return_type() + ": " + attribute.python_description | docstring_wrap(initial_indent=8, subsequent_indent=12)}
         """
-
 \
 ## Script interpreter call.
 <%

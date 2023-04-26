@@ -145,7 +145,6 @@ class Device:
             no accessory connected.
         """
 
-
         val = self._interpreter.get_device_attribute_uint32_array(self._name, 0x2f6e)
         return val
 
@@ -159,7 +158,6 @@ class Device:
             accessory connected.
         """
 
-
         val = self._interpreter.get_device_attribute_string(self._name, 0x2f6d)
         return unflatten_channel_string(val)
 
@@ -171,7 +169,6 @@ class Device:
             For example, index 0 corresponds to connector 0. The list
             contains 0 for each connector with no accessory connected.
         """
-
 
         val = self._interpreter.get_device_attribute_uint32_array(self._name, 0x2f6f)
         return val
@@ -185,7 +182,6 @@ class Device:
             value followed by the high value.
         """
 
-
         val = self._interpreter.get_device_attribute_double_array(self._name, 0x2fd0)
         return val
 
@@ -197,7 +193,6 @@ class Device:
             by the high value.
         """
 
-
         val = self._interpreter.get_device_attribute_double_array(self._name, 0x3111)
         return val
 
@@ -207,7 +202,6 @@ class Device:
         List[:class:`nidaqmx.constants.Coupling`]: Indicates the
             coupling types supported by this device.
         """
-
 
         val = self._interpreter.get_device_attribute_int32(self._name, 0x2994)
         return enum_bitfield_to_list(
@@ -220,7 +214,6 @@ class Device:
             excitation values supported by this device.
         """
 
-
         val = self._interpreter.get_device_attribute_double_array(self._name, 0x29cb)
         return val
 
@@ -231,7 +224,6 @@ class Device:
             supported by this device. Each pair consists of the low
             value, followed by the high value.
         """
-
 
         val = self._interpreter.get_device_attribute_double_array(self._name, 0x2991)
         return val
@@ -245,7 +237,6 @@ class Device:
             AI.DigFltr.Lowpass.CutoffFreq.RangeVals to determine
             supported frequencies.
         """
-
 
         val = self._interpreter.get_device_attribute_double_array(self._name, 0x30c8)
         return val
@@ -261,7 +252,6 @@ class Device:
             supported frequencies.
         """
 
-
         val = self._interpreter.get_device_attribute_double_array(self._name, 0x30c9)
         return val
 
@@ -271,7 +261,6 @@ class Device:
         List[:class:`nidaqmx.constants.FilterType`]: Indicates the AI
             digital filter types supported by the device.
         """
-
 
         val = self._interpreter.get_device_attribute_int32_array(self._name, 0x3107)
         return [FilterType(e) for e in val]
@@ -284,7 +273,6 @@ class Device:
             value, followed by the high value.
         """
 
-
         val = self._interpreter.get_device_attribute_double_array(self._name, 0x2992)
         return val
 
@@ -294,7 +282,6 @@ class Device:
         List[float]: Indicates the input gain settings supported by this
             device.
         """
-
 
         val = self._interpreter.get_device_attribute_double_array(self._name, 0x2993)
         return val
@@ -308,7 +295,6 @@ class Device:
             **ai_lowpass_cutoff_freq_range_vals** to determine supported
             frequencies.
         """
-
 
         val = self._interpreter.get_device_attribute_double_array(self._name, 0x2995)
         return val
@@ -324,7 +310,6 @@ class Device:
             supported  frequencies.
         """
 
-
         val = self._interpreter.get_device_attribute_double_array(self._name, 0x29cf)
         return val
 
@@ -339,7 +324,6 @@ class Device:
             compensation and autozero channels).
         """
 
-
         val = self._interpreter.get_device_attribute_double(self._name, 0x298d)
         return val
 
@@ -349,7 +333,6 @@ class Device:
         float: Indicates the maximum rate for an analog input task if
             the task contains only a single channel from this device.
         """
-
 
         val = self._interpreter.get_device_attribute_double(self._name, 0x298c)
         return val
@@ -363,7 +346,6 @@ class Device:
             specific channels.
         """
 
-
         val = self._interpreter.get_device_attribute_int32_array(self._name, 0x2fd2)
         return [UsageTypeAI(e) for e in val]
 
@@ -375,7 +357,6 @@ class Device:
             attempt to sample at a slower rate.
         """
 
-
         val = self._interpreter.get_device_attribute_double(self._name, 0x298e)
         return val
 
@@ -386,7 +367,6 @@ class Device:
             supported by the device.
         """
 
-
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x3163)
         return val
 
@@ -396,7 +376,6 @@ class Device:
         int: Indicates the number of Analog Input synchronization pulse
             sources supported by the device.
         """
-
 
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x3164)
         return val
@@ -410,7 +389,6 @@ class Device:
             the low value followed by the high value.
         """
 
-
         val = self._interpreter.get_device_attribute_double_array(self._name, 0x2a15)
         return val
 
@@ -422,7 +400,6 @@ class Device:
             clocked analog input.
         """
 
-
         val = self._interpreter.get_device_attribute_int32_array(self._name, 0x2fdc)
         return [AcquisitionType(e) for e in val]
 
@@ -431,7 +408,6 @@ class Device:
         """
         bool: Indicates if the device supports simultaneous sampling.
         """
-
 
         val = self._interpreter.get_device_attribute_bool(self._name, 0x298f)
         return val
@@ -442,7 +418,6 @@ class Device:
         List[:class:`nidaqmx.constants.TriggerUsage`]: Indicates the
             triggers supported by this device for an analog input task.
         """
-
 
         val = self._interpreter.get_device_attribute_int32(self._name, 0x2986)
         return enum_bitfield_to_list(
@@ -458,7 +433,6 @@ class Device:
             excitation values.
         """
 
-
         val = self._interpreter.get_device_attribute_double_array(self._name, 0x29c9)
         return val
 
@@ -473,7 +447,6 @@ class Device:
             supported excitation values.
         """
 
-
         val = self._interpreter.get_device_attribute_double_array(self._name, 0x29ca)
         return val
 
@@ -485,7 +458,6 @@ class Device:
             followed by the high value.
         """
 
-
         val = self._interpreter.get_device_attribute_double_array(self._name, 0x2990)
         return val
 
@@ -494,7 +466,6 @@ class Device:
         """
         bool: Indicates if the device supports analog triggering.
         """
-
 
         val = self._interpreter.get_device_attribute_bool(self._name, 0x2984)
         return val
@@ -507,7 +478,6 @@ class Device:
             followed by the high value.
         """
 
-
         val = self._interpreter.get_device_attribute_double_array(self._name, 0x299c)
         return val
 
@@ -518,7 +488,6 @@ class Device:
             this device.
         """
 
-
         val = self._interpreter.get_device_attribute_double_array(self._name, 0x299d)
         return val
 
@@ -528,7 +497,6 @@ class Device:
         float: Indicates the maximum analog output rate of the device.
         """
 
-
         val = self._interpreter.get_device_attribute_double(self._name, 0x2997)
         return val
 
@@ -537,7 +505,6 @@ class Device:
         """
         float: Indicates the minimum analog output rate of the device.
         """
-
 
         val = self._interpreter.get_device_attribute_double(self._name, 0x2998)
         return val
@@ -549,7 +516,6 @@ class Device:
             supported by the device.
         """
 
-
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x3165)
         return val
 
@@ -559,7 +525,6 @@ class Device:
         int: Indicates the number of Analog Output synchronization pulse
             sources supported by the device.
         """
-
 
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x3166)
         return val
@@ -573,7 +538,6 @@ class Device:
             specific channels.
         """
 
-
         val = self._interpreter.get_device_attribute_int32_array(self._name, 0x2fd3)
         return [UsageTypeAO(e) for e in val]
 
@@ -583,7 +547,6 @@ class Device:
         bool: Indicates if the device supports the sample clock timing
             type for analog output tasks.
         """
-
 
         val = self._interpreter.get_device_attribute_bool(self._name, 0x2996)
         return val
@@ -596,7 +559,6 @@ class Device:
             clocked analog output.
         """
 
-
         val = self._interpreter.get_device_attribute_int32_array(self._name, 0x2fdd)
         return [AcquisitionType(e) for e in val]
 
@@ -606,7 +568,6 @@ class Device:
         List[:class:`nidaqmx.constants.TriggerUsage`]: Indicates the
             triggers supported by this device for analog output tasks.
         """
-
 
         val = self._interpreter.get_device_attribute_int32(self._name, 0x2987)
         return enum_bitfield_to_list(
@@ -620,7 +581,6 @@ class Device:
             followed by the high value.
         """
 
-
         val = self._interpreter.get_device_attribute_double_array(self._name, 0x299b)
         return val
 
@@ -630,7 +590,6 @@ class Device:
         :class:`nidaqmx.constants.BusType`: Indicates the bus type of
             the device.
         """
-
 
         val = self._interpreter.get_device_attribute_int32(self._name, 0x2326)
         return BusType(val)
@@ -642,7 +601,6 @@ class Device:
             value is zero if the carrier does not have a serial number.
         """
 
-
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x2a8a)
         return val
 
@@ -652,7 +610,6 @@ class Device:
         List[:class:`nidaqmx.system.device.Device`]: Indicates a list
             containing the names of the modules in the chassis.
         """
-
 
         val = self._interpreter.get_device_attribute_string(self._name, 0x29b6)
         return [Device(v)
@@ -664,7 +621,6 @@ class Device:
         int: Indicates in bits the size of the counters on the device.
         """
 
-
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x299f)
         return val
 
@@ -674,7 +630,6 @@ class Device:
         float: Indicates in hertz the maximum counter timebase
             frequency.
         """
-
 
         val = self._interpreter.get_device_attribute_double(self._name, 0x29a0)
         return val
@@ -688,7 +643,6 @@ class Device:
             specific channels.
         """
 
-
         val = self._interpreter.get_device_attribute_int32_array(self._name, 0x2fd4)
         return [UsageTypeCI(e) for e in val]
 
@@ -698,7 +652,6 @@ class Device:
         bool: Indicates if the device supports the sample clock timing
             type for counter input tasks.
         """
-
 
         val = self._interpreter.get_device_attribute_bool(self._name, 0x299e)
         return val
@@ -711,7 +664,6 @@ class Device:
             clocked counter input.
         """
 
-
         val = self._interpreter.get_device_attribute_int32_array(self._name, 0x2fde)
         return [AcquisitionType(e) for e in val]
 
@@ -721,7 +673,6 @@ class Device:
         List[:class:`nidaqmx.constants.TriggerUsage`]: Indicates the
             triggers supported by this device for counter input tasks.
         """
-
 
         val = self._interpreter.get_device_attribute_int32(self._name, 0x298a)
         return enum_bitfield_to_list(
@@ -733,7 +684,6 @@ class Device:
         int: Indicates in bits the size of the counters on the device.
         """
 
-
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x29a1)
         return val
 
@@ -743,7 +693,6 @@ class Device:
         float: Indicates in hertz the maximum counter timebase
             frequency.
         """
-
 
         val = self._interpreter.get_device_attribute_double(self._name, 0x29a2)
         return val
@@ -757,7 +706,6 @@ class Device:
             specific channels.
         """
 
-
         val = self._interpreter.get_device_attribute_int32_array(self._name, 0x2fd5)
         return [UsageTypeCO(e) for e in val]
 
@@ -767,7 +715,6 @@ class Device:
         bool: Indicates if the device supports Sample Clock timing for
             counter output tasks.
         """
-
 
         val = self._interpreter.get_device_attribute_bool(self._name, 0x2f5b)
         return val
@@ -780,7 +727,6 @@ class Device:
             clocked counter output.
         """
 
-
         val = self._interpreter.get_device_attribute_int32_array(self._name, 0x2fdf)
         return [AcquisitionType(e) for e in val]
 
@@ -790,7 +736,6 @@ class Device:
         List[:class:`nidaqmx.constants.TriggerUsage`]: Indicates the
             triggers supported by this device for counter output tasks.
         """
-
 
         val = self._interpreter.get_device_attribute_int32(self._name, 0x298b)
         return enum_bitfield_to_list(
@@ -803,7 +748,6 @@ class Device:
             CompactDAQ chassis that contains this module.
         """
 
-
         val = self._interpreter.get_device_attribute_string(self._name, 0x29b7)
         return Device(val)
 
@@ -813,7 +757,6 @@ class Device:
         int: Indicates the slot number in which this module is located
             in the CompactDAQ chassis.
         """
-
 
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x29b8)
         return val
@@ -825,7 +768,6 @@ class Device:
             CompactRIO chassis that contains this module.
         """
 
-
         val = self._interpreter.get_device_attribute_string(self._name, 0x3161)
         return Device(val)
 
@@ -836,7 +778,6 @@ class Device:
             this module is located.
         """
 
-
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x3162)
         return val
 
@@ -845,7 +786,6 @@ class Device:
         """
         float: Indicates the maximum digital input rate of the device.
         """
-
 
         val = self._interpreter.get_device_attribute_double(self._name, 0x2999)
         return val
@@ -857,7 +797,6 @@ class Device:
             supported by the device.
         """
 
-
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x3167)
         return val
 
@@ -867,7 +806,6 @@ class Device:
         List[:class:`nidaqmx.constants.TriggerUsage`]: Indicates the
             triggers supported by this device for digital input tasks.
         """
-
 
         val = self._interpreter.get_device_attribute_int32(self._name, 0x2988)
         return enum_bitfield_to_list(
@@ -879,7 +817,6 @@ class Device:
         bool: Indicates if the device supports digital triggering.
         """
 
-
         val = self._interpreter.get_device_attribute_bool(self._name, 0x2985)
         return val
 
@@ -888,7 +825,6 @@ class Device:
         """
         float: Indicates the maximum digital output rate of the device.
         """
-
 
         val = self._interpreter.get_device_attribute_double(self._name, 0x299a)
         return val
@@ -900,7 +836,6 @@ class Device:
             pulse sources supported by the device.
         """
 
-
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x3168)
         return val
 
@@ -910,7 +845,6 @@ class Device:
         List[:class:`nidaqmx.constants.TriggerUsage`]: Indicates the
             triggers supported by this device for digital output tasks.
         """
-
 
         val = self._interpreter.get_device_attribute_int32(self._name, 0x2989)
         return enum_bitfield_to_list(
@@ -923,7 +857,6 @@ class Device:
             containing the names of the banks in the FieldDAQ.
         """
 
-
         val = self._interpreter.get_device_attribute_string(self._name, 0x3178)
         return [Device(v)
                 for v in unflatten_channel_string(val)]
@@ -935,7 +868,6 @@ class Device:
             device which this bank is located in.
         """
 
-
         val = self._interpreter.get_device_attribute_string(self._name, 0x3171)
         return Device(val)
 
@@ -944,7 +876,6 @@ class Device:
         """
         bool: Indicates whether the device supports hardware TEDS.
         """
-
 
         val = self._interpreter.get_device_attribute_bool(self._name, 0x2fd6)
         return val
@@ -955,7 +886,6 @@ class Device:
         bool: Indicates if the device is a simulated device.
         """
 
-
         val = self._interpreter.get_device_attribute_bool(self._name, 0x22ca)
         return val
 
@@ -964,7 +894,6 @@ class Device:
         """
         int: Indicates the number of DMA channels on the device.
         """
-
 
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x233c)
         return val
@@ -976,7 +905,6 @@ class Device:
             device.
         """
 
-
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x3141)
         return val
 
@@ -987,7 +915,6 @@ class Device:
             device.
         """
 
-
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x3142)
         return val
 
@@ -997,7 +924,6 @@ class Device:
         int: Indicates the PCI bus number of the device.
         """
 
-
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x2327)
         return val
 
@@ -1006,7 +932,6 @@ class Device:
         """
         int: Indicates the PCI slot number of the device.
         """
-
 
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x2328)
         return val
@@ -1020,7 +945,6 @@ class Device:
             simulated devices.
         """
 
-
         val = self._interpreter.get_device_attribute_int32(self._name, 0x29a9)
         return ProductCategory(val)
 
@@ -1031,7 +955,6 @@ class Device:
             device.
         """
 
-
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x231d)
         return val
 
@@ -1040,7 +963,6 @@ class Device:
         """
         str: Indicates the product name of the device.
         """
-
 
         val = self._interpreter.get_device_attribute_string(self._name, 0x631)
         return val
@@ -1052,7 +974,6 @@ class Device:
             identified in MAX.
         """
 
-
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x2329)
         return val
 
@@ -1061,7 +982,6 @@ class Device:
         """
         int: Indicates the PXI slot number of the device.
         """
-
 
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x232a)
         return val
@@ -1072,7 +992,6 @@ class Device:
         int: Indicates the serial number of the device. This value is
             zero if the device does not have a serial number.
         """
-
 
         val = self._interpreter.get_device_attribute_uint32(self._name, 0x632)
         return val
@@ -1085,7 +1004,6 @@ class Device:
             Ethernet interface cannot acquire an address.
         """
 
-
         val = self._interpreter.get_device_attribute_string(self._name, 0x2a8c)
         return val
 
@@ -1094,7 +1012,6 @@ class Device:
         """
         str: Indicates the IPv4 hostname of the device.
         """
-
 
         val = self._interpreter.get_device_attribute_string(self._name, 0x2a8b)
         return val
@@ -1107,7 +1024,6 @@ class Device:
             the wireless interface cannot acquire an address.
         """
 
-
         val = self._interpreter.get_device_attribute_string(self._name, 0x2a8d)
         return val
 
@@ -1117,7 +1033,6 @@ class Device:
         List[str]: Indicates a list of all terminals on the device.
         """
 
-
         val = self._interpreter.get_device_attribute_string(self._name, 0x2a40)
         return unflatten_channel_string(val)
 
@@ -1126,7 +1041,6 @@ class Device:
         """
         bool: Indicates whether the device supports time triggering.
         """
-
 
         val = self._interpreter.get_device_attribute_bool(self._name, 0x301f)
         return val

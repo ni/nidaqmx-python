@@ -55,7 +55,6 @@ class Scale:
         str: Specifies a description for the scale.
         """
 
-
         val = self._interpreter.get_scale_attribute_string(self._name, 0x1226)
         return val
 
@@ -69,7 +68,6 @@ class Scale:
         float: Specifies the slope, m, in the equation y=mx+b.
         """
 
-
         val = self._interpreter.get_scale_attribute_double(self._name, 0x1227)
         return val
 
@@ -82,7 +80,6 @@ class Scale:
         """
         float: Specifies the y-intercept, b, in the equation y=mx+b.
         """
-
 
         val = self._interpreter.get_scale_attribute_double(self._name, 0x1228)
         return val
@@ -98,7 +95,6 @@ class Scale:
             values. NI-DAQmx maps this value to **map_scaled_max**.
         """
 
-
         val = self._interpreter.get_scale_attribute_double(self._name, 0x1231)
         return val
 
@@ -112,7 +108,6 @@ class Scale:
         float: Specifies the smallest value in the range of pre-scaled
             values. NI-DAQmx maps this value to **map_scaled_min**.
         """
-
 
         val = self._interpreter.get_scale_attribute_double(self._name, 0x1232)
         return val
@@ -131,7 +126,6 @@ class Scale:
             are larger than this value.
         """
 
-
         val = self._interpreter.get_scale_attribute_double(self._name, 0x1229)
         return val
 
@@ -149,7 +143,6 @@ class Scale:
             are smaller than this value.
         """
 
-
         val = self._interpreter.get_scale_attribute_double(self._name, 0x1230)
         return val
 
@@ -166,7 +159,6 @@ class Scale:
             For example, if index three of the list is 9, the fourth
             term of the equation is 9x^3.
         """
-
 
         val = self._interpreter.get_scale_attribute_double_array(self._name, 0x1234)
         return val
@@ -186,7 +178,6 @@ class Scale:
             term of the equation is 9y^3.
         """
 
-
         val = self._interpreter.get_scale_attribute_double_array(self._name, 0x1235)
         return val
 
@@ -201,7 +192,6 @@ class Scale:
         :class:`nidaqmx.constants.UnitsPreScaled`: Specifies the units
             of the values that you want to scale.
         """
-
 
         val = self._interpreter.get_scale_attribute_int32(self._name, 0x18f7)
         return UnitsPreScaled(val)
@@ -218,7 +208,6 @@ class Scale:
             equation form that the custom scale uses.
         """
 
-
         val = self._interpreter.get_scale_attribute_int32(self._name, 0x1929)
         return ScaleType(val)
 
@@ -228,7 +217,6 @@ class Scale:
         str: Specifies the units to use for scaled values. You can use
             an arbitrary string.
         """
-
 
         val = self._interpreter.get_scale_attribute_string(self._name, 0x191b)
         return val
@@ -244,7 +232,6 @@ class Scale:
             map directly to the values in **table_scaled_vals**.
         """
 
-
         val = self._interpreter.get_scale_attribute_double_array(self._name, 0x1237)
         return val
 
@@ -259,7 +246,6 @@ class Scale:
         List[float]: Specifies a list of scaled values. These values map
             directly to the values in **table_pre_scaled_vals**.
         """
-
 
         val = self._interpreter.get_scale_attribute_double_array(self._name, 0x1236)
         return val

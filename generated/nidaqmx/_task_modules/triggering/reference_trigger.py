@@ -29,7 +29,6 @@ class ReferenceTrigger:
             rather than a virtual channel.
         """
 
-
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x2235)
         return Coupling(val)
 
@@ -54,7 +53,6 @@ class ReferenceTrigger:
             rapidly.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2ee6)
         return val
 
@@ -72,7 +70,6 @@ class ReferenceTrigger:
         float: Specifies in seconds the minimum pulse width thefilter
             recognizes.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2ee7)
         return val
@@ -93,7 +90,6 @@ class ReferenceTrigger:
             the filter.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2ee9)
         return val
 
@@ -111,7 +107,6 @@ class ReferenceTrigger:
         str: Specifies the terminal of the signal to use as the timebase
             of the digital filter.
         """
-
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x2ee8)
         return val
@@ -131,7 +126,6 @@ class ReferenceTrigger:
             transitions in the signal to the internal timebase of the
             device.
         """
-
 
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2eea)
         return val
@@ -158,7 +152,6 @@ class ReferenceTrigger:
             hysteresis.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x1421)
         return val
 
@@ -179,7 +172,6 @@ class ReferenceTrigger:
             this threshold.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x1422)
         return val
 
@@ -197,7 +189,6 @@ class ReferenceTrigger:
         :class:`nidaqmx.constants.Slope`: Specifies on which slope of
             the source signal the Reference Trigger occurs.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1423)
         return Slope(val)
@@ -218,7 +209,6 @@ class ReferenceTrigger:
             there is an analog signal to use as the source of the
             Reference Trigger.
         """
-
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x1424)
         return val
@@ -242,7 +232,6 @@ class ReferenceTrigger:
             of the other Analog Multi Edge property lists, if they are
             not empty.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32_array(self._handle, 0x312a)
         return [Coupling(e) for e in val]
@@ -274,7 +263,6 @@ class ReferenceTrigger:
             empty.
         """
 
-
         val = self._interpreter.get_trig_attribute_double_array(self._handle, 0x3129)
         return val
 
@@ -296,7 +284,6 @@ class ReferenceTrigger:
             Ref.AnlgMultiEdge.Srcs and an element in each of the other
             Analog Multi Edge property lists, if they are not empty.
         """
-
 
         val = self._interpreter.get_trig_attribute_double_array(self._handle, 0x3128)
         return val
@@ -321,7 +308,6 @@ class ReferenceTrigger:
             empty.
         """
 
-
         val = self._interpreter.get_trig_attribute_int32_array(self._handle, 0x3127)
         return [Slope(e) for e in val]
 
@@ -343,7 +329,6 @@ class ReferenceTrigger:
             property lists, if they are not empty.
         """
 
-
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x3126)
         return val
 
@@ -361,7 +346,6 @@ class ReferenceTrigger:
         float: Specifies the lower limit of the window. Specify this
             value in the units of the measurement.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x1428)
         return val
@@ -381,7 +365,6 @@ class ReferenceTrigger:
             the source signal of the trigger if the source is a terminal
             rather than a virtual channel.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1857)
         return Coupling(val)
@@ -406,7 +389,6 @@ class ReferenceTrigger:
             that transition in and out of the window rapidly.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2eeb)
         return val
 
@@ -424,7 +406,6 @@ class ReferenceTrigger:
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2eec)
         return val
@@ -445,7 +426,6 @@ class ReferenceTrigger:
             the filter.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2eee)
         return val
 
@@ -463,7 +443,6 @@ class ReferenceTrigger:
         str: Specifies the terminal of the signal to use as the timebase
             of the digital filter.
         """
-
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x2eed)
         return val
@@ -484,7 +463,6 @@ class ReferenceTrigger:
             device.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2eef)
         return val
 
@@ -504,7 +482,6 @@ class ReferenceTrigger:
             Reference Trigger.
         """
 
-
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x1426)
         return val
 
@@ -522,7 +499,6 @@ class ReferenceTrigger:
         float: Specifies the upper limit of the window. Specify this
             value in the units of the measurement.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x1429)
         return val
@@ -544,7 +520,6 @@ class ReferenceTrigger:
             **anlg_win_btm** and **anlg_win_top** to specify the window.
         """
 
-
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1427)
         return WindowTriggerCondition1(val)
 
@@ -564,7 +539,6 @@ class ReferenceTrigger:
             when a hardware trigger is no longer active in order to
             prevent a timeout.
         """
-
 
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2ec1)
         return val
@@ -586,7 +560,6 @@ class ReferenceTrigger:
             is only applicable when **auto_trig_enable**  is True.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2ec2)
         return val
 
@@ -597,7 +570,6 @@ class ReferenceTrigger:
             receives the Reference Trigger before switching from
             pretrigger to posttrigger samples.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x1483)
         return val
@@ -617,7 +589,6 @@ class ReferenceTrigger:
             signal.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2ed7)
         return val
 
@@ -635,7 +606,6 @@ class ReferenceTrigger:
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2ed8)
         return val
@@ -656,7 +626,6 @@ class ReferenceTrigger:
             the filter.
         """
 
-
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x2eda)
         return val
 
@@ -674,7 +643,6 @@ class ReferenceTrigger:
         str: Specifies the terminal of the signal to use as the timebase
             of the digital filter.
         """
-
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x2ed9)
         return val
@@ -695,7 +663,6 @@ class ReferenceTrigger:
             device.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x2edb)
         return val
 
@@ -713,7 +680,6 @@ class ReferenceTrigger:
         :class:`nidaqmx.constants.Edge`: Specifies on what edge of a
             digital pulse the Reference Trigger occurs.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1430)
         return Edge(val)
@@ -734,7 +700,6 @@ class ReferenceTrigger:
             signal to use as the source of the Reference Trigger.
         """
 
-
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x1434)
         return val
 
@@ -752,7 +717,6 @@ class ReferenceTrigger:
         str: Specifies the digital pattern that must be met for the
             Reference Trigger to occur.
         """
-
 
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x2187)
         return val
@@ -775,7 +739,6 @@ class ReferenceTrigger:
             physical channels within the port is in ascending order.
         """
 
-
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x1437)
         return PhysicalChannel(val)
 
@@ -797,7 +760,6 @@ class ReferenceTrigger:
             from the digital pattern specified with
             **dig_pattern_pattern**.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1438)
         return DigitalPatternCondition(val)
@@ -827,7 +789,6 @@ class ReferenceTrigger:
             devices were unable to respond to the trigger.
         """
 
-
         val = self._interpreter.get_trig_attribute_uint32(self._handle, 0x3120)
         return val
 
@@ -848,7 +809,6 @@ class ReferenceTrigger:
             **samp_quant_samp_per_chan** minus the number of pretrigger
             samples per channel.
         """
-
 
         val = self._interpreter.get_trig_attribute_uint32(self._handle, 0x1445)
         return val
@@ -871,7 +831,6 @@ class ReferenceTrigger:
             samples that it already started. Specifying a Retrigger
             Window of -1 causes the window to be infinite.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x311f)
         return val
@@ -896,7 +855,6 @@ class ReferenceTrigger:
             trigger if it is in the process of acquiring signals.
         """
 
-
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x311d)
         return val
 
@@ -916,7 +874,6 @@ class ReferenceTrigger:
             name of the trigger source terminal.
         """
 
-
         val = self._interpreter.get_trig_attribute_string(self._handle, 0x2f1f)
         return val
 
@@ -927,7 +884,6 @@ class ReferenceTrigger:
             enabled. If the timestamp is enabled but no resources are
             available, an error will be returned at run time.
         """
-
 
         val = self._interpreter.get_trig_attribute_bool(self._handle, 0x312e)
         return val
@@ -946,7 +902,6 @@ class ReferenceTrigger:
         :class:`nidaqmx.constants.Timescale`: Specifies the reference
             trigger timestamp timescale.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x3130)
         return Timescale(val)
@@ -967,7 +922,6 @@ class ReferenceTrigger:
             trigger to use to mark a reference point for the
             measurement.
         """
-
 
         val = self._interpreter.get_trig_attribute_int32(self._handle, 0x1419)
         return TriggerType(val)
@@ -993,7 +947,6 @@ class ReferenceTrigger:
             Specifying a Trigger Window of -1 causes the window to be
             infinite.
         """
-
 
         val = self._interpreter.get_trig_attribute_double(self._handle, 0x311e)
         return val

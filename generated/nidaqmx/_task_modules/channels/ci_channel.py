@@ -33,7 +33,6 @@ class CIChannel(Channel):
             is in the units you specify with **ci_ang_encoder_units**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x881)
         return val
 
@@ -54,7 +53,6 @@ class CIChannel(Channel):
             signal A and signal B.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x875)
         return val
 
@@ -74,7 +72,6 @@ class CIChannel(Channel):
             channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18a6)
         return AngleUnits(val)
 
@@ -93,7 +90,6 @@ class CIChannel(Channel):
         int: Indicates the current value of the count register.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x148)
         return val
 
@@ -103,7 +99,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.Edge`: Specifies on which edges to
             increment or decrement the counter.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x697)
         return Edge(val)
@@ -124,7 +119,6 @@ class CIChannel(Channel):
             signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21f1)
         return val
 
@@ -142,7 +136,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21f2)
         return val
@@ -163,7 +156,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21f4)
         return val
 
@@ -181,7 +173,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x21f3)
         return val
@@ -201,7 +192,6 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21f5)
         return val
@@ -224,7 +214,6 @@ class CIChannel(Channel):
             hysteresis before a change in count direction occurs.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31b2)
         return val
 
@@ -242,7 +231,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
             level behavior on the count reset line.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x309e)
         return LogicLvlBehavior(val)
@@ -262,7 +250,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             input terminal configuration.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x309d)
         return TerminalConfiguration(val)
@@ -285,7 +272,6 @@ class CIChannel(Channel):
             threshold, the counter counts down.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31b1)
         return val
 
@@ -303,7 +289,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.Edge`: Specifies on which edge of the
             signal to reset the count.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2fb2)
         return Edge(val)
@@ -324,7 +309,6 @@ class CIChannel(Channel):
             signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2fb3)
         return val
 
@@ -341,7 +325,6 @@ class CIChannel(Channel):
         """
         float: Specifies the minimum pulse width the filter recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2fb4)
         return val
@@ -362,7 +345,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2fb6)
         return val
 
@@ -380,7 +362,6 @@ class CIChannel(Channel):
         str: Specifies the input of the signal to use as the timebase of
             the pulse width filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2fb5)
         return val
@@ -401,7 +382,6 @@ class CIChannel(Channel):
             device.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2fb7)
         return val
 
@@ -419,7 +399,6 @@ class CIChannel(Channel):
         bool: Specifies whether to reset the count on the active edge
             specified with **ci_count_edges_count_reset_term**.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2faf)
         return val
@@ -449,7 +428,6 @@ class CIChannel(Channel):
             **ci_count_edges_count_reset_thresh_voltage**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31b4)
         return val
 
@@ -467,7 +445,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
             level behavior on the count reset line.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a0)
         return LogicLvlBehavior(val)
@@ -487,7 +464,6 @@ class CIChannel(Channel):
         int: Specifies the value to reset the count to.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x2fb0)
         return val
 
@@ -506,7 +482,6 @@ class CIChannel(Channel):
             count.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2fb1)
         return val
 
@@ -524,7 +499,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             input terminal configuration.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x309f)
         return TerminalConfiguration(val)
@@ -545,7 +519,6 @@ class CIChannel(Channel):
             counter reset event.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31b3)
         return val
 
@@ -564,7 +537,6 @@ class CIChannel(Channel):
             signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21f6)
         return val
 
@@ -582,7 +554,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21f7)
         return val
@@ -603,7 +574,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21f9)
         return val
 
@@ -621,7 +591,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x21f8)
         return val
@@ -642,7 +611,6 @@ class CIChannel(Channel):
             device.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21fa)
         return val
 
@@ -660,7 +628,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.CountDirection`: Specifies whether to
             increment or decrement the counter on each edge.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x696)
         return CountDirection(val)
@@ -682,7 +649,6 @@ class CIChannel(Channel):
             **CountDirection1.EXTERNAL_SOURCE**.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x21e1)
         return val
 
@@ -701,7 +667,6 @@ class CIChannel(Channel):
             gate input signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x30f1)
         return val
 
@@ -719,7 +684,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the digital
             filter recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30f2)
         return val
@@ -740,7 +704,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30f4)
         return val
 
@@ -759,7 +722,6 @@ class CIChannel(Channel):
             timebase of the pulse width filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x30f3)
         return val
 
@@ -777,7 +739,6 @@ class CIChannel(Channel):
         bool: Specifies whether to enable the functionality to gate the
             counter input signal for a count edges measurement.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x30ed)
         return val
@@ -803,7 +764,6 @@ class CIChannel(Channel):
             hysteresis before the counter resumes counting.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31b6)
         return val
 
@@ -821,7 +781,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
             level behavior on the gate input line.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30f0)
         return LogicLvlBehavior(val)
@@ -841,7 +800,6 @@ class CIChannel(Channel):
         str: Specifies the gate terminal.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x30ee)
         return val
 
@@ -859,7 +817,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             gate terminal configuration.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30ef)
         return TerminalConfiguration(val)
@@ -880,7 +837,6 @@ class CIChannel(Channel):
             counter gate signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31b5)
         return val
 
@@ -898,7 +854,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.Level`: Specifies whether the counter
             gates input pulses while the signal is high or low.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30f5)
         return Level(val)
@@ -927,7 +882,6 @@ class CIChannel(Channel):
             **ci_count_edges_thresh_voltage**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31b0)
         return val
 
@@ -944,7 +898,6 @@ class CIChannel(Channel):
         """
         int: Specifies the starting value from which to count.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x698)
         return val
@@ -964,7 +917,6 @@ class CIChannel(Channel):
             level behavior on the input line.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x309c)
         return LogicLvlBehavior(val)
 
@@ -983,7 +935,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to measure.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18c7)
         return val
 
@@ -1001,7 +952,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             input terminal configuration.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x309b)
         return TerminalConfiguration(val)
@@ -1025,7 +975,6 @@ class CIChannel(Channel):
             rises or falls.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31af)
         return val
 
@@ -1044,7 +993,6 @@ class CIChannel(Channel):
             cycle is from rising edge to rising edge or from falling
             edge to falling edge.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x142)
         return Edge(val)
@@ -1065,7 +1013,6 @@ class CIChannel(Channel):
             signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2271)
         return val
 
@@ -1083,7 +1030,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2272)
         return val
@@ -1104,7 +1050,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2274)
         return val
 
@@ -1122,7 +1067,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2273)
         return val
@@ -1143,7 +1087,6 @@ class CIChannel(Channel):
             device.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2275)
         return val
 
@@ -1162,7 +1105,6 @@ class CIChannel(Channel):
             can divide the counter timebase in order to measure slower
             signals without causing the count register to roll over.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x18b3)
         return val
@@ -1186,7 +1128,6 @@ class CIChannel(Channel):
             terms of ticks of the timebase.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x18b2)
         return val
 
@@ -1205,7 +1146,6 @@ class CIChannel(Channel):
             counter.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x143)
         return val
 
@@ -1223,7 +1163,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.system.scale.Scale`: Specifies the name of a
             custom scale for the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x189e)
         return Scale(val)
@@ -1244,7 +1183,6 @@ class CIChannel(Channel):
             Specifies the data transfer mode for the channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x200)
         return DataTransferActiveTransferMode(val)
 
@@ -1264,7 +1202,6 @@ class CIChannel(Channel):
             under what condition to transfer data from the onboard
             memory of the device to the buffer.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2efb)
         return InputDataTransferCondition(val)
@@ -1287,7 +1224,6 @@ class CIChannel(Channel):
             prevention unless you explicitly enable it.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21ac)
         return val
 
@@ -1306,7 +1242,6 @@ class CIChannel(Channel):
             signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x308e)
         return val
 
@@ -1324,7 +1259,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the digital
             filter recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x308f)
         return val
@@ -1345,7 +1279,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x3091)
         return val
 
@@ -1364,7 +1297,6 @@ class CIChannel(Channel):
             timebase of the pulse width filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x3090)
         return val
 
@@ -1382,7 +1314,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
             level behavior on the input line.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a2)
         return LogicLvlBehavior(val)
@@ -1403,7 +1334,6 @@ class CIChannel(Channel):
             input signal to begin the duty cycle measurement.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3092)
         return Edge(val)
 
@@ -1422,7 +1352,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to measure.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x308d)
         return val
 
@@ -1440,7 +1369,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             input terminal configuration.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a1)
         return TerminalConfiguration(val)
@@ -1461,7 +1389,6 @@ class CIChannel(Channel):
             signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21fb)
         return val
 
@@ -1479,7 +1406,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21fc)
         return val
@@ -1500,7 +1426,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21fe)
         return val
 
@@ -1518,7 +1443,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x21fd)
         return val
@@ -1539,7 +1463,6 @@ class CIChannel(Channel):
             device.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21ff)
         return val
 
@@ -1557,7 +1480,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
             level behavior on the input line.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a4)
         return LogicLvlBehavior(val)
@@ -1577,7 +1499,6 @@ class CIChannel(Channel):
         str: Specifies the terminal to which signal A is connected.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x219d)
         return val
 
@@ -1595,7 +1516,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             input terminal configuration.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a3)
         return TerminalConfiguration(val)
@@ -1616,7 +1536,6 @@ class CIChannel(Channel):
             signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2200)
         return val
 
@@ -1634,7 +1553,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2201)
         return val
@@ -1655,7 +1573,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2203)
         return val
 
@@ -1673,7 +1590,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2202)
         return val
@@ -1694,7 +1610,6 @@ class CIChannel(Channel):
             device.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2204)
         return val
 
@@ -1712,7 +1627,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
             level behavior on the input line.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a6)
         return LogicLvlBehavior(val)
@@ -1732,7 +1646,6 @@ class CIChannel(Channel):
         str: Specifies the terminal to which signal B is connected.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x219e)
         return val
 
@@ -1750,7 +1663,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             input terminal configuration.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a5)
         return TerminalConfiguration(val)
@@ -1775,7 +1687,6 @@ class CIChannel(Channel):
             pulse encoders only.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x21e6)
         return EncoderType(val)
 
@@ -1793,7 +1704,6 @@ class CIChannel(Channel):
         """
         bool: Specifies whether to use Z indexing for the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x890)
         return val
@@ -1817,7 +1727,6 @@ class CIChannel(Channel):
             **EncoderZIndexPhase1.AHIGH_BHIGH**.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x889)
         return EncoderZIndexPhase(val)
 
@@ -1839,7 +1748,6 @@ class CIChannel(Channel):
             Specify this value in the units of the measurement.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x888)
         return val
 
@@ -1858,7 +1766,6 @@ class CIChannel(Channel):
             signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2205)
         return val
 
@@ -1876,7 +1783,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2206)
         return val
@@ -1897,7 +1803,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2208)
         return val
 
@@ -1915,7 +1820,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2207)
         return val
@@ -1936,7 +1840,6 @@ class CIChannel(Channel):
             device.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2209)
         return val
 
@@ -1954,7 +1857,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
             level behavior on the input line.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a8)
         return LogicLvlBehavior(val)
@@ -1974,7 +1876,6 @@ class CIChannel(Channel):
         str: Specifies the terminal to which signal Z is connected.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x219f)
         return val
 
@@ -1992,7 +1893,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             input terminal configuration.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a7)
         return TerminalConfiguration(val)
@@ -2015,7 +1915,6 @@ class CIChannel(Channel):
             **ci_filter_delay_units**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31bb)
         return val
 
@@ -2025,7 +1924,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.DigitalWidthUnits`: Specifies the
             units of **ci_filter_delay**.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x31bc)
         return DigitalWidthUnits(val)
@@ -2045,7 +1943,6 @@ class CIChannel(Channel):
         bool: Specifies the corresponding filter enable/disable state.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x31b7)
         return val
 
@@ -2064,7 +1961,6 @@ class CIChannel(Channel):
             center) of the filter response.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31b8)
         return val
 
@@ -2082,7 +1978,6 @@ class CIChannel(Channel):
         int: Specifies the corresponding filter order and defines the
             slope of the filter response.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x31ba)
         return val
@@ -2103,7 +1998,6 @@ class CIChannel(Channel):
             filter response.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x31b9)
         return FilterResponse(val)
 
@@ -2123,7 +2017,6 @@ class CIChannel(Channel):
             signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21e7)
         return val
 
@@ -2141,7 +2034,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21e8)
         return val
@@ -2162,7 +2054,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21ea)
         return val
 
@@ -2180,7 +2071,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x21e9)
         return val
@@ -2200,7 +2090,6 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21eb)
         return val
@@ -2224,7 +2113,6 @@ class CIChannel(Channel):
             roll over, which results in an incorrect measurement.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x147)
         return val
 
@@ -2242,7 +2130,6 @@ class CIChannel(Channel):
         bool: Specifies whether to enable averaging mode for Sample
             Clock-timed frequency measurements.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2ed0)
         return val
@@ -2269,7 +2156,6 @@ class CIChannel(Channel):
             **ci_freq_thresh_voltage**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31ac)
         return val
 
@@ -2287,7 +2173,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
             level behavior on the input line.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3098)
         return LogicLvlBehavior(val)
@@ -2307,7 +2192,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.CounterFrequencyMethod`: Specifies the
             method to use to measure the frequency of the signal.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x144)
         return CounterFrequencyMethod(val)
@@ -2334,7 +2218,6 @@ class CIChannel(Channel):
             measurement.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x145)
         return val
 
@@ -2352,7 +2235,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.Edge`: Specifies between which edges
             to measure the frequency of the signal.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x799)
         return Edge(val)
@@ -2372,7 +2254,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to measure.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18a2)
         return val
 
@@ -2390,7 +2271,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             input terminal configuration.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3097)
         return TerminalConfiguration(val)
@@ -2414,7 +2294,6 @@ class CIChannel(Channel):
             rises or falls.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31ab)
         return val
 
@@ -2432,7 +2311,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.FrequencyUnits`: Specifies the units
             to use to return frequency measurements.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18a1)
         return FrequencyUnits(val)
@@ -2453,7 +2331,6 @@ class CIChannel(Channel):
             to use to synchronize the counter to a GPS receiver.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x1092)
         return GpsSignalType(val)
 
@@ -2472,7 +2349,6 @@ class CIChannel(Channel):
         str: Specifies the terminal to which the GPS synchronization
             signal is connected.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x1093)
         return val
@@ -2493,7 +2369,6 @@ class CIChannel(Channel):
             the units you specify with **ci_lin_encoder_units**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x911)
         return val
 
@@ -2513,7 +2388,6 @@ class CIChannel(Channel):
             with **ci_lin_encoder_units**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x915)
         return val
 
@@ -2531,7 +2405,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.LengthUnits`: Specifies the units to
             use to return linear encoder measurements from the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18a9)
         return LengthUnits(val)
@@ -2554,7 +2427,6 @@ class CIChannel(Channel):
             value that the hardware can measure with the current
             settings.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x189c)
         return val
@@ -2579,7 +2451,6 @@ class CIChannel(Channel):
             NaN. Pulse width measurement will return zero.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x3095)
         return val
 
@@ -2598,7 +2469,6 @@ class CIChannel(Channel):
             measurement to take with the channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18a0)
         return UsageTypeCI(val)
 
@@ -2614,7 +2484,6 @@ class CIChannel(Channel):
             registers, it can adversely affect the operation of the
             device and possibly result in a system crash.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2ed2)
         return val
@@ -2637,7 +2506,6 @@ class CIChannel(Channel):
             settings.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x189d)
         return val
 
@@ -2656,7 +2524,6 @@ class CIChannel(Channel):
             overwritten before it could transfer them to the buffer.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x193c)
         return val
 
@@ -2667,7 +2534,6 @@ class CIChannel(Channel):
             the out terminal of the counter.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x149)
         return Level(val)
 
@@ -2677,7 +2543,6 @@ class CIChannel(Channel):
         bool: Specifies whether to apply the pulse width filter to the
             signal.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21ec)
         return val
@@ -2696,7 +2561,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21ed)
         return val
@@ -2717,7 +2581,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x21ef)
         return val
 
@@ -2735,7 +2598,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x21ee)
         return val
@@ -2755,7 +2617,6 @@ class CIChannel(Channel):
             transitions in the signal to the internal timebase of the
             device.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x21f0)
         return val
@@ -2779,7 +2640,6 @@ class CIChannel(Channel):
             roll over, which results in an incorrect measurement.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x192e)
         return val
 
@@ -2797,7 +2657,6 @@ class CIChannel(Channel):
         bool: Specifies whether to enable averaging mode for Sample
             Clock-timed period measurements.
         """
-
 
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2ed1)
         return val
@@ -2825,7 +2684,6 @@ class CIChannel(Channel):
             **ci_period_thresh_voltage**.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31ae)
         return val
 
@@ -2843,7 +2701,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
             level behavior on the input line.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x309a)
         return LogicLvlBehavior(val)
@@ -2863,7 +2720,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.CounterFrequencyMethod`: Specifies the
             method to use to measure the period of the signal.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x192c)
         return CounterFrequencyMethod(val)
@@ -2890,7 +2746,6 @@ class CIChannel(Channel):
             measurement.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x192d)
         return val
 
@@ -2908,7 +2763,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.Edge`: Specifies between which edges
             to measure the period of the signal.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x852)
         return Edge(val)
@@ -2928,7 +2782,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to measure.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18a4)
         return val
 
@@ -2946,7 +2799,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             input terminal configuration.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3099)
         return TerminalConfiguration(val)
@@ -2970,7 +2822,6 @@ class CIChannel(Channel):
             rises or falls.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31ad)
         return val
 
@@ -2988,7 +2839,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TimeUnits`: Specifies the unit to use
             to return period measurements.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18a3)
         return TimeUnits(val)
@@ -3015,7 +2865,6 @@ class CIChannel(Channel):
             **ci_dup_count_prevention** to True.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x2239)
         return val
 
@@ -3034,7 +2883,6 @@ class CIChannel(Channel):
             to measure.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2f06)
         return val
 
@@ -3052,7 +2900,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f07)
         return val
@@ -3073,7 +2920,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f09)
         return val
 
@@ -3091,7 +2937,6 @@ class CIChannel(Channel):
         str: Specifies the terminal of the signal to use as the timebase
             of the digital filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2f08)
         return val
@@ -3112,7 +2957,6 @@ class CIChannel(Channel):
             device.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2f0a)
         return val
 
@@ -3130,7 +2974,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
             level behavior on the count reset line.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30b2)
         return LogicLvlBehavior(val)
@@ -3151,7 +2994,6 @@ class CIChannel(Channel):
             input signal to begin pulse measurement.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f05)
         return Edge(val)
 
@@ -3170,7 +3012,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to measure.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2f04)
         return val
 
@@ -3188,7 +3029,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             input terminal configuration.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30b1)
         return TerminalConfiguration(val)
@@ -3209,7 +3049,6 @@ class CIChannel(Channel):
             to use to return pulse specifications in terms of frequency.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f0b)
         return FrequencyUnits(val)
 
@@ -3229,7 +3068,6 @@ class CIChannel(Channel):
             to measure.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2f16)
         return val
 
@@ -3247,7 +3085,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f17)
         return val
@@ -3268,7 +3105,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f19)
         return val
 
@@ -3286,7 +3122,6 @@ class CIChannel(Channel):
         str: Specifies the terminal of the signal to use as the timebase
             of the digital filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2f18)
         return val
@@ -3307,7 +3142,6 @@ class CIChannel(Channel):
             device.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2f1a)
         return val
 
@@ -3325,7 +3159,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
             level behavior on the count reset line.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30b6)
         return LogicLvlBehavior(val)
@@ -3346,7 +3179,6 @@ class CIChannel(Channel):
             input signal to begin pulse measurement.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f15)
         return Edge(val)
 
@@ -3365,7 +3197,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to measure.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2f14)
         return val
 
@@ -3383,7 +3214,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             input terminal configuration.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30b5)
         return TerminalConfiguration(val)
@@ -3404,7 +3234,6 @@ class CIChannel(Channel):
             to measure.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2f0e)
         return val
 
@@ -3422,7 +3251,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f0f)
         return val
@@ -3443,7 +3271,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2f11)
         return val
 
@@ -3461,7 +3288,6 @@ class CIChannel(Channel):
         str: Specifies the terminal of the signal to use as the timebase
             of the digital filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2f10)
         return val
@@ -3482,7 +3308,6 @@ class CIChannel(Channel):
             device.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2f12)
         return val
 
@@ -3500,7 +3325,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
             level behavior on the count reset line.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30b4)
         return LogicLvlBehavior(val)
@@ -3521,7 +3345,6 @@ class CIChannel(Channel):
             input signal to begin pulse measurement.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f0d)
         return Edge(val)
 
@@ -3540,7 +3363,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to measure.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2f0c)
         return val
 
@@ -3558,7 +3380,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             input terminal configuration.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30b3)
         return TerminalConfiguration(val)
@@ -3580,7 +3401,6 @@ class CIChannel(Channel):
             time.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x2f13)
         return TimeUnits(val)
 
@@ -3600,7 +3420,6 @@ class CIChannel(Channel):
             signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x220a)
         return val
 
@@ -3618,7 +3437,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x220b)
         return val
@@ -3639,7 +3457,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x220d)
         return val
 
@@ -3657,7 +3474,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x220c)
         return val
@@ -3678,7 +3494,6 @@ class CIChannel(Channel):
             device.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x220e)
         return val
 
@@ -3696,7 +3511,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
             level behavior on the input line.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30aa)
         return LogicLvlBehavior(val)
@@ -3717,7 +3531,6 @@ class CIChannel(Channel):
             input signal to begin each pulse width measurement.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x825)
         return Edge(val)
 
@@ -3735,7 +3548,6 @@ class CIChannel(Channel):
         """
         str: Specifies the input terminal of the signal to measure.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18aa)
         return val
@@ -3755,7 +3567,6 @@ class CIChannel(Channel):
             input terminal configuration.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30a9)
         return TerminalConfiguration(val)
 
@@ -3774,7 +3585,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TimeUnits`: Specifies the units to use
             to return pulse width measurements.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x823)
         return TimeUnits(val)
@@ -3796,7 +3606,6 @@ class CIChannel(Channel):
             detected during a sample clock.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3093)
         return SampClkOverrunBehavior(val)
 
@@ -3816,7 +3625,6 @@ class CIChannel(Channel):
             Sample Behavior is set to Sentinel Value.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x3094)
         return val
 
@@ -3835,7 +3643,6 @@ class CIChannel(Channel):
             signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2219)
         return val
 
@@ -3853,7 +3660,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x221a)
         return val
@@ -3874,7 +3680,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x221c)
         return val
 
@@ -3892,7 +3697,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x221b)
         return val
@@ -3913,7 +3717,6 @@ class CIChannel(Channel):
             device.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x221d)
         return val
 
@@ -3931,7 +3734,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.LogicLvlBehavior`: Specifies the logic
             level behavior on the count reset line.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30b0)
         return LogicLvlBehavior(val)
@@ -3954,7 +3756,6 @@ class CIChannel(Channel):
             starting on this edge.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x22fe)
         return Edge(val)
 
@@ -3973,7 +3774,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to measure.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18b0)
         return val
 
@@ -3991,7 +3791,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             input terminal configuration.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30af)
         return TerminalConfiguration(val)
@@ -4012,7 +3811,6 @@ class CIChannel(Channel):
             to return semi-period measurements.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18af)
         return TimeUnits(val)
 
@@ -4032,7 +3830,6 @@ class CIChannel(Channel):
             this property, NI-DAQmx resets it to False.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x150)
         return val
 
@@ -4043,7 +3840,6 @@ class CIChannel(Channel):
             and low input transitions. Some devices do not support this
             for differential channels.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30b7)
         return val
@@ -4064,7 +3860,6 @@ class CIChannel(Channel):
             **ci_gps_sync_method** is **GpsSignalType1.IRIGB**.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x22b4)
         return val
 
@@ -4082,7 +3877,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TimeUnits`: Specifies the units to use
             to return timestamp measurements.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x22b3)
         return TimeUnits(val)
@@ -4103,7 +3897,6 @@ class CIChannel(Channel):
             signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x220f)
         return val
 
@@ -4121,7 +3914,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2210)
         return val
@@ -4142,7 +3934,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2212)
         return val
 
@@ -4160,7 +3951,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2211)
         return val
@@ -4181,7 +3971,6 @@ class CIChannel(Channel):
             device.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2213)
         return val
 
@@ -4199,7 +3988,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.Edge`: Specifies on which edge of the
             first signal to start each measurement.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x833)
         return Edge(val)
@@ -4220,7 +4008,6 @@ class CIChannel(Channel):
             level behavior on the input line.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30ac)
         return LogicLvlBehavior(val)
 
@@ -4240,7 +4027,6 @@ class CIChannel(Channel):
             starts each measurement.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18ad)
         return val
 
@@ -4258,7 +4044,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             input terminal configuration.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30ab)
         return TerminalConfiguration(val)
@@ -4279,7 +4064,6 @@ class CIChannel(Channel):
             signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2214)
         return val
 
@@ -4297,7 +4081,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the filter
             recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2215)
         return val
@@ -4318,7 +4101,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x2217)
         return val
 
@@ -4336,7 +4118,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x2216)
         return val
@@ -4357,7 +4138,6 @@ class CIChannel(Channel):
             device.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2218)
         return val
 
@@ -4375,7 +4155,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.Edge`: Specifies on which edge of the
             second signal to stop each measurement.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x834)
         return Edge(val)
@@ -4396,7 +4175,6 @@ class CIChannel(Channel):
             level behavior on the count reset line.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30ae)
         return LogicLvlBehavior(val)
 
@@ -4416,7 +4194,6 @@ class CIChannel(Channel):
             stops each measurement.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18ae)
         return val
 
@@ -4434,7 +4211,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             input terminal configuration.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30ad)
         return TerminalConfiguration(val)
@@ -4454,7 +4230,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TimeUnits`: Specifies the units to use
             to return two-edge separation measurements from the channel.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x18ac)
         return TimeUnits(val)
@@ -4476,7 +4251,6 @@ class CIChannel(Channel):
             under different combinations of operating system and device.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x3004)
         return val
 
@@ -4496,7 +4270,6 @@ class CIChannel(Channel):
             different combinations of operating system and device.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x2a92)
         return val
 
@@ -4515,7 +4288,6 @@ class CIChannel(Channel):
             signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x30e0)
         return val
 
@@ -4533,7 +4305,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the digital
             filter recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30e1)
         return val
@@ -4554,7 +4325,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30e3)
         return val
 
@@ -4572,7 +4342,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x30e2)
         return val
@@ -4592,7 +4361,6 @@ class CIChannel(Channel):
             level behavior of the input terminal.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30df)
         return LogicLvlBehavior(val)
 
@@ -4611,7 +4379,6 @@ class CIChannel(Channel):
         str: Specifies the terminal to which signal A is connected.
         """
 
-
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x30dd)
         return val
 
@@ -4629,7 +4396,6 @@ class CIChannel(Channel):
         :class:`nidaqmx.constants.TerminalConfiguration`: Specifies the
             input terminal configuration.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30de)
         return TerminalConfiguration(val)
@@ -4652,7 +4418,6 @@ class CIChannel(Channel):
             signal A and signal B.
         """
 
-
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x30d9)
         return val
 
@@ -4671,7 +4436,6 @@ class CIChannel(Channel):
             units to use to return angular velocity counter
             measurements.
         """
-
 
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30d8)
         return AngularVelocityUnits(val)
@@ -4692,7 +4456,6 @@ class CIChannel(Channel):
             signal.
         """
 
-
         val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x30e7)
         return val
 
@@ -4710,7 +4473,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the minimum pulse width the digital
             filter recognizes.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30e8)
         return val
@@ -4731,7 +4493,6 @@ class CIChannel(Channel):
             the filter.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30ea)
         return val
 
@@ -4749,7 +4510,6 @@ class CIChannel(Channel):
         str: Specifies the input terminal of the signal to use as the
             timebase of the pulse width filter.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x30e9)
         return val
@@ -4769,7 +4529,6 @@ class CIChannel(Channel):
             level behavior of the input terminal.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30e6)
         return LogicLvlBehavior(val)
 
@@ -4787,7 +4546,6 @@ class CIChannel(Channel):
         """
         str: Specifies the terminal to which signal B is connected.
         """
-
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x30e4)
         return val
@@ -4807,7 +4565,6 @@ class CIChannel(Channel):
             input terminal configuration.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30e5)
         return TerminalConfiguration(val)
 
@@ -4825,7 +4582,6 @@ class CIChannel(Channel):
         """
         int: Specifies the value by which to divide the input signal.
         """
-
 
         val = self._interpreter.get_chan_attribute_uint32(self._handle, self._name, 0x30ec)
         return val
@@ -4848,7 +4604,6 @@ class CIChannel(Channel):
             encoders only.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30dc)
         return EncoderType(val)
 
@@ -4869,7 +4624,6 @@ class CIChannel(Channel):
             the units you specify in CI.Velocity.LinEncoder.DistUnits.
         """
 
-
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30db)
         return val
 
@@ -4889,7 +4643,6 @@ class CIChannel(Channel):
             channel.
         """
 
-
         val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x30da)
         return VelocityUnits(val)
 
@@ -4908,7 +4661,6 @@ class CIChannel(Channel):
         float: Specifies in seconds the length of time to measure the
             velocity of the signal.
         """
-
 
         val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x30eb)
         return val
