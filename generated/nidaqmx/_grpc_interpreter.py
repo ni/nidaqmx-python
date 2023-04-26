@@ -1231,7 +1231,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.CreateTask,
             grpc_types.CreateTaskRequest(session_name=session_name))
-        return response.task
+        return response.task, response.new_session_initialized
 
     def create_tedsai_accel_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -1503,6 +1503,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.CreateWatchdogTimerTaskRequest(
                 device_name=device_name, session_name=session_name,
                 timeout=timeout))
+        return response.task, response.new_session_initialized
 
     def create_watchdog_timer_task_ex(
             self, device_name, session_name, timeout):
@@ -1511,7 +1512,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.CreateWatchdogTimerTaskExRequest(
                 device_name=device_name, session_name=session_name,
                 timeout=timeout))
-        return response.task
+        return response.task, response.new_session_initialized
 
     def delete_network_device(self, device_name):
         response = self._invoke(
@@ -1537,6 +1538,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.DeviceSupportsCal,
             grpc_types.DeviceSupportsCalRequest(device_name=device_name))
+        return response.cal_supported
 
     def disable_ref_trig(self, task):
         response = self._invoke(
@@ -1566,18 +1568,20 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.GetAIChanCalCalDate,
             grpc_types.GetAIChanCalCalDateRequest(channel_name=channel_name, task=task))
+        return response.year, response.month, response.day, response.hour, response.minute
 
     def get_ai_chan_cal_exp_date(self, task, channel_name):
         response = self._invoke(
             self._client.GetAIChanCalExpDate,
             grpc_types.GetAIChanCalExpDateRequest(channel_name=channel_name, task=task))
+        return response.year, response.month, response.day, response.hour, response.minute
 
     def get_analog_power_up_states(
             self, device_name, channel_name, channel_type):
         response = self._invoke(
             self._client.GetAnalogPowerUpStates,
             grpc_types.GetAnalogPowerUpStatesRequest(device_name=device_name))
-        return 
+        return response.power_up_states
 
     def get_analog_power_up_states_with_output_type(
             self, channel_names, array_size):
@@ -1736,14 +1740,14 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetDigitalPowerUpStates,
             grpc_types.GetDigitalPowerUpStatesRequest(
                 channel_name=channel_name, device_name=device_name))
-        return 
+        return response.power_up_states
 
     def get_digital_pull_up_pull_down_states(self, device_name, channel_name):
         response = self._invoke(
             self._client.GetDigitalPullUpPullDownStates,
             grpc_types.GetDigitalPullUpPullDownStatesRequest(
                 channel_name=channel_name, device_name=device_name))
-        return 
+        return response.pull_up_pull_down_states
 
     def get_disconnected_cdaq_sync_ports(self):
         response = self._invoke(
@@ -1755,6 +1759,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.GetErrorString,
             grpc_types.GetErrorStringRequest(error_code=error_code))
+        return response.error_string
 
     def get_exported_signal_attribute_bool(self, task, attribute):
         response = self._invoke(
@@ -1995,6 +2000,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.GetSelfCalLastDateAndTime,
             grpc_types.GetSelfCalLastDateAndTimeRequest(device_name=device_name))
+        return response.year, response.month, response.day, response.hour, response.minute
 
     def get_system_info_attribute_string(self, attribute):
         response = self._invoke(
@@ -2220,7 +2226,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.LoadTask,
             grpc_types.LoadTaskRequest(session_name=session_name))
-        return response.task
+        return response.task, response.new_session_initialized
 
     def read_analog_f64(self, task, num_samps_per_chan, timeout, fill_mode):
         response = self._invoke(
@@ -2418,6 +2424,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 fill_mode_raw=fill_mode,
                 num_samps_per_chan=num_samps_per_chan, task=task,
                 timeout=timeout))
+        return response.read_array_voltage, response.read_array_current, response.samps_per_chan_read
 
     def read_power_f64(
             self, task, num_samps_per_chan, timeout, fill_mode,
@@ -2429,6 +2436,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 fill_mode_raw=fill_mode,
                 num_samps_per_chan=num_samps_per_chan, task=task,
                 timeout=timeout))
+        return response.read_array_voltage, response.read_array_current, response.samps_per_chan_read
 
     def read_power_scalar_f64(self, task, timeout):
         response = self._invoke(
@@ -3006,6 +3014,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.WaitForNextSampleClock,
             grpc_types.WaitForNextSampleClockRequest(task=task, timeout=timeout))
+        return response.is_late
 
     def wait_for_valid_timestamp(self, task, timestamp_event, timeout):
         response = self._invoke(
