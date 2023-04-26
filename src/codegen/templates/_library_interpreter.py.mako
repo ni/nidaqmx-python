@@ -27,7 +27,6 @@ class LibraryInterpreter(BaseInterpreter):
         self._done_event_callbacks = []
         self._every_n_samples_event_callbacks = []
         self._signal_event_callbacks = []
-        self._new_session_initialized = True
         
 % for func in functions:
 <%

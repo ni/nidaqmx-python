@@ -1256,7 +1256,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 initialization_behavior=self._grpc_options.initialization_behavior,
                 session_name=session_name),
             metadata=metadata)
-        return response.new_session_initialized, response.task
+        return response.task, response.new_session_initialized
 
     def create_tedsai_accel_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -1536,7 +1536,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 initialization_behavior=self._grpc_options.initialization_behavior,
                 session_name=session_name, timeout=timeout),
             metadata=metadata)
-        return response.new_session_initialized, response.task
+        return response.task, response.new_session_initialized
 
     def create_watchdog_timer_task_ex(
             self, device_name, session_name, timeout):
@@ -1550,7 +1550,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 initialization_behavior=self._grpc_options.initialization_behavior,
                 session_name=session_name, timeout=timeout),
             metadata=metadata)
-        return response.new_session_initialized, response.task
+        return response.task, response.new_session_initialized
 
     def delete_network_device(self, device_name):
         response = self._invoke(
@@ -2273,7 +2273,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 initialization_behavior=self._grpc_options.initialization_behavior,
                 session_name=session_name),
             metadata=metadata)
-        return response.new_session_initialized, response.task
+        return response.task, response.new_session_initialized
 
     def read_analog_f64(
             self, task, num_samps_per_chan, timeout, fill_mode,

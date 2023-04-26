@@ -78,6 +78,6 @@ class GrpcStubInterpreter(BaseInterpreter):
         %endif
         %endif
         %if len(output_parameters)  > 0:
-        return ${get_response_parameters(output_parameters, func.is_init_method)}
+        return ${get_response_parameters(func)}
         %endif
 % endfor

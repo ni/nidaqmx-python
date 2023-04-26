@@ -21,7 +21,6 @@ class LibraryInterpreter(BaseInterpreter):
         self._done_event_callbacks = []
         self._every_n_samples_event_callbacks = []
         self._signal_event_callbacks = []
-        self._new_session_initialized = True
         
 
     def add_cdaq_sync_connection(self, port_list):
@@ -1775,7 +1774,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             session_name, ctypes.byref(task))
         check_for_error(error_code)
-        return self._new_session_initialized, task
+        return task, True
 
     def create_tedsai_accel_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -2149,7 +2148,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             device_name, session_name, ctypes.byref(task), timeout)
         check_for_error(error_code)
-        return self._new_session_initialized, task
+        return task, True
 
     def delete_network_device(self, device_name):
         cfunc = lib_importer.windll.DAQmxDeleteNetworkDevice
@@ -3059,7 +3058,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             session_name, ctypes.byref(task))
         check_for_error(error_code)
-        return self._new_session_initialized, task
+        return task, True
 
     def read_analog_f64(
             self, task, num_samps_per_chan, timeout, fill_mode,

@@ -179,8 +179,6 @@ def get_return_values(func):
     """Gets the values to add to return statement of the function."""
     output_parameters = get_output_params(func)
     return_values = []
-    if func.is_init_method:
-        return_values.append("self._new_session_initialized")
     for param in output_parameters:
         if param.ctypes_data_type == "ctypes.c_char_p":
             return_values.append(f"{param.parameter_name}.value.decode('ascii')")
@@ -190,6 +188,8 @@ def get_return_values(func):
             return_values.append(param.parameter_name)
         else:
             return_values.append(f"{param.parameter_name}.value")
+    if func.is_init_method:
+        return_values.append("True")
     return return_values
 
 
@@ -236,12 +236,13 @@ def create_compound_parameter_request(func):
     return f"grpc_types.{compound_parameter_type}(" + ", ".join(parameters) + ")"
 
 
-def get_response_parameters(output_parameters: list, is_init_method=False):
+def get_response_parameters(func):
     """Gets the list of parameters in grpc response."""
     response_parameters = []
-    if is_init_method:
-        response_parameters.append("response.new_session_initialized")
+    output_parameters = get_output_params(func)
     for parameter in output_parameters:
         if not parameter.repeating_argument:
             response_parameters.append(f"response.{parameter.parameter_name}")
+    if func.is_init_method:
+        response_parameters.append("response.new_session_initialized")
     return ", ".join(response_parameters)
