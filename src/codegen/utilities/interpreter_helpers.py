@@ -144,7 +144,7 @@ def get_instantiation_lines_for_varargs(func):
     instantiation_lines = []
     if any(get_varargs_parameters(func)):
         for param in func.output_parameters:
-            instantiation_lines.append(f"{param.parameter_name}_element = {param.ctypes_data_type}")
+            instantiation_lines.append(f"{param.parameter_name}_element = {param.ctypes_data_type}()")
             instantiation_lines.append(
                 f"{param.parameter_name}.append({param.parameter_name}_element)"
             )

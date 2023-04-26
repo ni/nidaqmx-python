@@ -2236,7 +2236,7 @@ class LibraryInterpreter(BaseInterpreter):
         argtypes = [ctypes_byte_str]
 
         for index in range(len(channel_name)):
-            state_element = ctypes.c_double
+            state_element = ctypes.c_double()
             state.append(state_element)
 
             args.append(channel_name[index])
@@ -2653,7 +2653,7 @@ class LibraryInterpreter(BaseInterpreter):
         argtypes = [ctypes_byte_str]
 
         for index in range(len(channel_name)):
-            state_element = ctypes.c_int32
+            state_element = ctypes.c_int32()
             state.append(state_element)
 
             args.append(channel_name[index])
@@ -2679,7 +2679,7 @@ class LibraryInterpreter(BaseInterpreter):
         argtypes = [ctypes_byte_str]
 
         for index in range(len(channel_name)):
-            state_element = ctypes.c_int32
+            state_element = ctypes.c_int32()
             state.append(state_element)
 
             args.append(channel_name[index])
