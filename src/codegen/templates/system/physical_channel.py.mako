@@ -56,7 +56,7 @@ class PhysicalChannel:
         return not self.__eq__(other)
 
     def __repr__(self):
-        return f'PhysicalChannel(name={self._name})'
+        return f'_PhysicalChannelAlternateConstructor(name={self._name}, interpreter={self._interpreter})'
 
     @property
     def name(self):

@@ -29,6 +29,7 @@ from nidaqmx.constants import (
     SignalModifiers, WAIT_INFINITELY)
 from nidaqmx.types import (
     AOPowerUpState, CDAQSyncConnection, DOPowerUpState, DOResistorPowerUpState)
+from nidaqmx.system.device import _DeviceAlternateConstructor
 
 __all__ = ['System']
 
@@ -239,7 +240,7 @@ ${function_template.script_function(function_object)}
               Indicates the power up state set for the physical channel
               specified with the **physical_channel** output.
         """
-        device = Device(device_name)
+        device = _DeviceAlternateConstructor(device_name, self._interpreter)
         channel_names = []
 
         for do_line in device.do_lines:
@@ -309,7 +310,7 @@ ${function_template.script_function(function_object)}
         channel_names = []
         states = []
 
-        device = Device(device_name)
+        device = _DeviceAlternateConstructor(device_name, self._interpreter)
 
         for do_line in device.do_lines:
             channel_names.append(do_line.name)
@@ -412,7 +413,7 @@ ${function_template.script_function(function_object)}
         channel_names = []
         channel_types = []
 
-        device = Device(device_name)
+        device = _DeviceAlternateConstructor(device_name, self._interpreter)
         
         for ao_physical_chan in device.ao_physical_chans:
             channel_type = ctypes.c_int()
