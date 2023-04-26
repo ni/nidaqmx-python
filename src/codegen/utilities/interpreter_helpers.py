@@ -117,9 +117,8 @@ def get_instantiation_lines_for_output(func):
     instantiation_lines = []
     if func.is_init_method:
         instantiation_lines.append(f"task = lib_importer.task_handle(0)")
-        instantiation_lines.append("new_session_initialized = True")
-    for param in get_output_params(func):
-        if param.parameter_name == "task" or param.parameter_name == "new_session_initialized":
+    for param in get_interpreter_output_params(func):
+        if param.parameter_name == "task":
             continue
         elif param.is_repeating_argument:
             instantiation_lines.append(f"{param.parameter_name} = []")
@@ -244,22 +243,27 @@ def has_parameter_with_ivi_dance_size_mechanism(func):
     return parameter_with_size_buffer is not None
 
 
+def get_interpreter_output_params(func):
+    """Gets the output parameters for the functions in interpreter."""
+    return [p for p in func.interpreter_parameters if p.direction == "out"]
+
+
 def get_output_params(func):
-    """Gets input parameters for the function."""
+    """Gets output parameters for the function."""
     return [p for p in func.base_parameters if p.direction == "out"]
 
 
 def get_return_values(func):
     """Gets the values to add to return statement of the function."""
     return_values = []
-    for param in get_output_params(func):
+    for param in get_interpreter_output_params(func):
         if param.is_repeating_argument:
             return_values.append(f"{param.parameter_name}.tolist()")
         elif param.ctypes_data_type == "ctypes.c_char_p":
             return_values.append(f"{param.parameter_name}.value.decode('ascii')")
         elif param.is_list:
             return_values.append(f"{param.parameter_name}.tolist()")
-        elif param.type == "TaskHandle" or param.parameter_name == "new_session_initialized":
+        elif param.type == "TaskHandle":
             return_values.append(param.parameter_name)
         else:
             return_values.append(f"{param.parameter_name}.value")
