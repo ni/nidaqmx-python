@@ -8,11 +8,6 @@ from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx._task_modules.channels.channel import Channel
 from nidaqmx._task_modules.export_signals import ExportSignals
 from nidaqmx._task_modules.in_stream import InStream
-from nidaqmx._task_modules.read_functions import (
-    _read_analog_f_64, _read_power_f_64,
-    _read_digital_lines, _read_digital_u_32,
-    _read_ctr_freq,_read_ctr_time, _read_ctr_ticks,
-    _read_counter_u_32_ex, _read_counter_f_64_ex)
 from nidaqmx._task_modules.timing import Timing
 from nidaqmx._task_modules.triggers import Triggers
 from nidaqmx._task_modules.out_stream import OutStream
@@ -28,9 +23,6 @@ from nidaqmx._task_modules.di_channel_collection import (
     DIChannelCollection)
 from nidaqmx._task_modules.do_channel_collection import (
     DOChannelCollection)
-from nidaqmx._task_modules.write_functions import (
-    _write_analog_f_64, _write_digital_lines, _write_digital_u_32,
-    _write_ctr_freq, _write_ctr_time, _write_ctr_ticks)
 from nidaqmx.constants import (
     AcquisitionType, ChannelType, FillMode, UsageTypeAI, UsageTypeCI, EveryNSamplesEventType,
     READ_ALL_AVAILABLE, UsageTypeCO, _Save)
@@ -593,8 +585,8 @@ class Task:
                 currents = numpy.zeros(array_shape, dtype=numpy.float64)
 
                 samples_read = self._interpreter.read_power_f64(
-                    self._handle, voltages, currents,
-                    number_of_samples_per_channel, timeout, FillMode.GROUP_BY_CHANNEL.value)
+                    self._handle, number_of_samples_per_channel, timeout, 
+                    FillMode.GROUP_BY_CHANNEL.value, voltages, currents)
 
                 if number_of_channels > 1:
                     if number_of_samples_per_channel == 1:
