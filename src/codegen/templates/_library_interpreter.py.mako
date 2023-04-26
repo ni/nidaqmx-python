@@ -42,6 +42,9 @@ class LibraryInterpreter(BaseInterpreter):
     def ${func.function_name}(${parameter_signature}):
     %endif
 \
+%if func.is_init_method and func.is_python_codegen_method:
+        new_session_initialized = True
+%endif
 %if func.is_python_codegen_method:
 <%include file="${'/library_interpreter' + get_c_function_call_template(func)}" args="function=func" />
     %if len(list(return_values)) != 0:

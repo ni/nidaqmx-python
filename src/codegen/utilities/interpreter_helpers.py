@@ -189,7 +189,7 @@ def get_return_values(func):
         else:
             return_values.append(f"{param.parameter_name}.value")
     if func.is_init_method:
-        return_values.append("True")
+        return_values.append("new_session_initialized")
     return return_values
 
 

@@ -1764,6 +1764,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
 
     def create_task(self, session_name):
+        new_session_initialized = True
         cfunc = lib_importer.windll.DAQmxCreateTask
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -1774,7 +1775,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             session_name, ctypes.byref(task))
         check_for_error(error_code)
-        return task, True
+        return task, new_session_initialized
 
     def create_tedsai_accel_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -2137,6 +2138,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def create_watchdog_timer_task_ex(
             self, device_name, session_name, timeout):
+        new_session_initialized = True
         cfunc = lib_importer.windll.DAQmxCreateWatchdogTimerTaskEx
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -2148,7 +2150,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             device_name, session_name, ctypes.byref(task), timeout)
         check_for_error(error_code)
-        return task, True
+        return task, new_session_initialized
 
     def delete_network_device(self, device_name):
         cfunc = lib_importer.windll.DAQmxDeleteNetworkDevice
@@ -3048,6 +3050,7 @@ class LibraryInterpreter(BaseInterpreter):
         return is_task_done.value
 
     def load_task(self, session_name):
+        new_session_initialized = True
         cfunc = lib_importer.windll.DAQmxLoadTask
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3058,7 +3061,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             session_name, ctypes.byref(task))
         check_for_error(error_code)
-        return task, True
+        return task, new_session_initialized
 
     def read_analog_f64(
             self, task, num_samps_per_chan, timeout, fill_mode,
