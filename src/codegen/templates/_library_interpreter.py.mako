@@ -64,7 +64,7 @@ class LibraryInterpreter(BaseInterpreter):
 %endif
 %endfor
 
-    ## Handwriting 'read_power_binary_i16' function as metadata is not available in daqmxAPSharp.json file.  
+    ## The metadata for 'read_power_binary_i16' function is not available in daqmxAPSharp.json file.  
     def read_power_binary_i16(
             self, task, num_samps_per_chan, timeout, fill_mode,
             read_voltage_array, read_current_array):
@@ -90,7 +90,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         return samps_per_chan_read.value
 
-    ## Handwriting 'read_power_f64' function as metadata is not available in daqmxAPSharp.json file. 
+    ## The metadata for 'read_power_f64' function is not available in daqmxAPSharp.json file. 
     def read_power_f64(
             self, task, num_samps_per_chan, timeout, fill_mode, 
             read_voltage_array, read_current_array):
@@ -116,6 +116,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         return samps_per_chan_read.value
 
+    ## The datatype of 'read_array' is incorrect in daqmxAPSharp.json file.
     def read_raw(self, task, num_samps_per_chan, timeout, read_array):
         samples_read = ctypes.c_int()
         number_of_bytes_per_sample = ctypes.c_int()
@@ -138,6 +139,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         return samples_read.value, number_of_bytes_per_sample.value
 
+    ## The datatype of 'read_array' is incorrect in daqmxAPSharp.json file.
     def write_raw(
             self, task_handle, num_samps_per_chan, auto_start, timeout, numpy_array):
         samps_per_chan_written = ctypes.c_int()
