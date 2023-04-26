@@ -35,7 +35,9 @@ class Function:
             for parameter in function_metadata["parameters"]:
                 function_parameter = FunctionParameter(parameter)
                 self._base_parameters.append(function_parameter)
-                if parameter.get("use_in_python_api") is not False:
+                if parameter.get("use_in_python_api") is not False and not parameter.get(
+                    "proto_only", False
+                ):
                     if parameter["name"] != "task" and "python_data_type" in parameter:
                         self._parameters.append(function_parameter)
                         if parameter["direction"] == "out":
