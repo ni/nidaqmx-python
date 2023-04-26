@@ -2402,10 +2402,8 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         """
         self._verify_array(data, 1, True, False)
 
-        _, samps_per_chan_read = self._interpreter.read_digital_u8(
+        self._interpreter.read_digital_u8(
             self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
-        
-        return samps_per_chan_read
 
     def read_one_sample_port_uint16(self, data, timeout=10):
         """
@@ -2443,10 +2441,8 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         """
         self._verify_array(data, 1, True, False)
 
-        _, samps_per_chan_read = self._interpreter.read_digital_u16(
+        self._interpreter.read_digital_u16(
             self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
-        
-        return samps_per_chan_read
 
     def read_one_sample_port_uint32(self, data, timeout=10):
         """
@@ -2484,7 +2480,5 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         """
         self._verify_array(data, 1, True, False)
 
-        _, samps_per_chan_read = self._interpreter.read_digital_u32(
+        self._interpreter.read_digital_u32(
             self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
-        
-        return samps_per_chan_read
