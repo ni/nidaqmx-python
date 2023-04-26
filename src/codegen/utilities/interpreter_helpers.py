@@ -235,6 +235,7 @@ def get_output_params(func):
     """Gets input parameters for the function."""
     return (p for p in func.base_parameters if p.direction == "out")
 
+
 def get_return_values(func):
     """Gets the values to add to return statement of the function."""
     return_values = []
