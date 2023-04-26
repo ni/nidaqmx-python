@@ -7,7 +7,7 @@ from nidaqmx.errors import (
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system.physical_channel import PhysicalChannel
 from nidaqmx.utils import unflatten_channel_string, flatten_channel_string
-
+from nidaqmx.system.physical_channel import _PhysicalChannelAlternateConstructor
 
 class PhysicalChannelCollection(Sequence):
     """
@@ -61,11 +61,11 @@ class PhysicalChannelCollection(Sequence):
             Indicates the subset of physical channels indexed.
         """
         if isinstance(index, int):
-            return PhysicalChannel(self.channel_names[index])
+            return _PhysicalChannelAlternateConstructor(self.channel_names[index], self._interpreter)
         elif isinstance(index, slice):
-            return PhysicalChannel(self.channel_names[index])
+            return _PhysicalChannelAlternateConstructor(self.channel_names[index], self._interpreter)
         elif isinstance(index, str):
-            return PhysicalChannel(f'{self._name}/{index}')
+            return _PhysicalChannelAlternateConstructor(f'{self._name}/{index}, {self._interpreter}')
         else:
             raise DaqError(
                 'Invalid index type "{}" used to access collection.'
@@ -73,7 +73,7 @@ class PhysicalChannelCollection(Sequence):
 
     def __iter__(self):
         for channel_name in self.channel_names:
-            yield PhysicalChannel(channel_name)
+            yield _PhysicalChannelAlternateConstructor(channel_name, self._interpreter)
 
     def __len__(self):
         return len(self.channel_names)
@@ -86,7 +86,7 @@ class PhysicalChannelCollection(Sequence):
         channel_names.reverse()
 
         for channel_name in channel_names:
-            yield PhysicalChannel(channel_name)
+            yield _PhysicalChannelAlternateConstructor(channel_name, self._interpreter)
 
     @property
     def all(self):

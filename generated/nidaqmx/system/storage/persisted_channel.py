@@ -38,7 +38,7 @@ class PersistedChannel:
         return not self.__eq__(other)
 
     def __repr__(self):
-        return f'PersistedChannel(name={self._name})'
+        return f'_PersistedChannelAlternateConstructor(name={self._name}, interpreter={self._interpreter})'
 
     @property
     def author(self):

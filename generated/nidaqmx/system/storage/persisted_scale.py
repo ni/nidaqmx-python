@@ -5,6 +5,7 @@ from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx.scale import Scale
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
+from nidaqmx.scale import _ScaleAlternateConstructor
 
 __all__ = ['PersistedScale']
 
@@ -39,7 +40,7 @@ class PersistedScale:
         return not self.__eq__(other)
 
     def __repr__(self):
-        return f'PersistedScale(name={self._name})'
+        return f'_PersistedScaleAlternateConstructor(name={self._name}, interpreter={self._interpreter})'
 
     @property
     def author(self):
@@ -140,7 +141,7 @@ class PersistedScale:
         Returns:
             nidaqmx.scale.Scale: Indicates the loaded Scale object.
         """
-        return Scale(self._name)
+        return _ScaleAlternateConstructor(self._name, self._interpreter)
 
 
 class _PersistedScaleAlternateConstructor(PersistedScale):

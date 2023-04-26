@@ -7,6 +7,7 @@ from nidaqmx.errors import (
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system.device import Device
 from nidaqmx.utils import unflatten_channel_string
+from nidaqmx.system.device import _DeviceAlternateConstructor
 
 
 class DeviceCollection(Sequence):
@@ -57,14 +58,14 @@ class DeviceCollection(Sequence):
             Indicates the subset of devices indexed.
         """
         if isinstance(index, int):
-            return Device(self.device_names[index])
+            return _DeviceAlternateConstructor(self.device_names[index], self._interpreter)
         elif isinstance(index, slice):
-            return [Device(name) for name in self.device_names[index]]
+            return [_DeviceAlternateConstructor(name, self._interpreter) for name in self.device_names[index]]
         elif isinstance(index, str):
             device_names = unflatten_channel_string(index)
             if len(device_names) == 1:
-                return Device(device_names[0])
-            return [Device(name) for name in device_names]
+                return _DeviceAlternateConstructor(device_names[0], self._interpreter)
+            return [_DeviceAlternateConstructor(name, self._interpreter) for name in device_names]
         else:
             raise DaqError(
                 'Invalid index type "{}" used to access collection.'
@@ -72,7 +73,7 @@ class DeviceCollection(Sequence):
 
     def __iter__(self):
         for device_name in self.device_names:
-            yield Device(device_name)
+            yield _DeviceAlternateConstructor(device_name, self._interpreter)
 
     def __len__(self):
         return len(self.device_names)
@@ -85,7 +86,7 @@ class DeviceCollection(Sequence):
         device_names.reverse()
 
         for device_name in device_names:
-            yield Device(device_name)
+            yield _DeviceAlternateConstructor(device_name, self._interpreter)
 
     @property
     def device_names(self):

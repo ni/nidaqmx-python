@@ -1,13 +1,7 @@
+from nidaqmx.constants import FillMode
 import numpy
 from nidaqmx import utils
 from nidaqmx import DaqError
-from nidaqmx._task_modules.write_functions import (
-    _write_analog_f_64, _write_analog_scalar_f_64, _write_binary_i_16,
-    _write_binary_i_32, _write_binary_u_16, _write_binary_u_32,
-    _write_ctr_freq, _write_ctr_ticks, _write_ctr_time, _write_ctr_freq_scalar,
-    _write_ctr_ticks_scalar, _write_ctr_time_scalar, _write_digital_u_8,
-    _write_digital_u_16, _write_digital_u_32, _write_digital_lines,
-    _write_digital_scalar_u_32)
 from nidaqmx.error_codes import DAQmxErrors
 
 __all__ = ['AnalogSingleChannelWriter', 'AnalogMultiChannelWriter',
@@ -233,8 +227,8 @@ class AnalogSingleChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else False)
 
-        return _write_analog_f_64(
-            self._handle, data, data.shape[0], auto_start, timeout)
+        return self._interpreter.write_analog_f64(
+            self._handle, data.shape[0], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def write_one_sample(self, data, timeout=10):
         """
@@ -262,8 +256,8 @@ class AnalogSingleChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else True)
         
-        return _write_analog_scalar_f_64(
-            self._handle, data, auto_start, timeout)
+        return self._interpreter.write_analog_scalar_f64(
+            self._handle, auto_start, timeout, data)
 
 
 class AnalogMultiChannelWriter(ChannelWriterBase):
@@ -316,8 +310,8 @@ class AnalogMultiChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else False)
 
-        return _write_analog_f_64(
-            self._handle, data, data.shape[1], auto_start, timeout)
+        return self._interpreter.write_analog_f64(
+            self._handle, data.shape[1], auto_start, timeout,FillMode.GROUP_BY_CHANNEL.value, data)
 
     def write_one_sample(self, data, timeout=10):
         """
@@ -349,8 +343,8 @@ class AnalogMultiChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else True)
 
-        return _write_analog_f_64(
-            self._handle, data, 1, auto_start, timeout)
+        return self._interpreter.write_analog_f64(
+            self._handle, 1, auto_start, timeout,FillMode.GROUP_BY_CHANNEL.value, data)
 
 
 class AnalogUnscaledWriter(ChannelWriterBase):
@@ -401,8 +395,8 @@ class AnalogUnscaledWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else False)
 
-        return _write_binary_i_16(
-            self._handle, data, data.shape[1], auto_start, timeout)
+        return self._interpreter.write_binary_i16(
+            self._handle, data.shape[1], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def write_int32(self, data, timeout=10.0):
         """
@@ -446,8 +440,8 @@ class AnalogUnscaledWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else False)
 
-        return _write_binary_i_32(
-            self._handle, data, data.shape[1], auto_start, timeout)
+        return self._interpreter.write_binary_i32(
+            self._handle, data.shape[1], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def write_uint16(self, data, timeout=10.0):
         """
@@ -491,8 +485,8 @@ class AnalogUnscaledWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else False)
 
-        return _write_binary_u_16(
-            self._handle, data, data.shape[1], auto_start, timeout)
+        return self._interpreter.write_binary_u16(
+            self._handle, data.shape[1], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def write_uint32(self, data, timeout=10.0):
         """
@@ -536,8 +530,8 @@ class AnalogUnscaledWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else False)
 
-        return _write_binary_u_32(
-            self._handle, data, data.shape[1], auto_start, timeout)
+        return self._interpreter.write_binary_u32(
+            self._handle, data.shape[1], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
 
 class CounterWriter(ChannelWriterBase):
@@ -592,9 +586,9 @@ class CounterWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else False)
 
-        return _write_ctr_freq(
-            self._handle, frequencies, duty_cycles, frequencies.shape[0],
-            auto_start, timeout)
+        return self._interpreter.write_ctr_freq(
+            self._handle, frequencies.shape[0], auto_start, timeout, 
+            FillMode.GROUP_BY_CHANNEL.value, frequencies, duty_cycles)
 
     def write_many_sample_pulse_ticks(
             self, high_ticks, low_ticks, timeout=10.0):
@@ -643,9 +637,9 @@ class CounterWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else False)
 
-        return _write_ctr_ticks(
-            self._handle, high_ticks, low_ticks, high_ticks.shape[0],
-            auto_start, timeout)
+        return self._interpreter.write_ctr_ticks(
+            self._handle, high_ticks.shape[0], auto_start, timeout,
+            FillMode.GROUP_BY_CHANNEL.value, high_ticks, low_ticks)
 
     def write_many_sample_pulse_time(
             self, high_times, low_times, timeout=10.0):
@@ -694,9 +688,9 @@ class CounterWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else False)
 
-        return _write_ctr_time(
-            self._handle, high_times, low_times, high_times.shape[0],
-            auto_start, timeout)
+        return self._interpreter.write_ctr_time(
+            self._handle, high_times.shape[0], auto_start, timeout, 
+            FillMode.GROUP_BY_CHANNEL.value, high_times, low_times)
 
     def write_one_sample_pulse_frequency(
             self, frequency, duty_cycle, timeout=10):
@@ -729,8 +723,8 @@ class CounterWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else True)
         
-        return _write_ctr_freq_scalar(
-            self._handle, frequency, duty_cycle, auto_start, timeout)
+        return self._interpreter.write_ctr_freq_scalar(
+            self._handle, auto_start, timeout, frequency, duty_cycle)
 
     def write_one_sample_pulse_ticks(
             self, high_ticks, low_ticks, timeout=10):
@@ -758,8 +752,8 @@ class CounterWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else True)
         
-        return _write_ctr_ticks_scalar(
-            self._handle, high_ticks, low_ticks, auto_start, timeout)
+        return self._interpreter.write_ctr_ticks_scalar(
+            self._handle, auto_start, timeout, high_ticks, low_ticks)
 
     def write_one_sample_pulse_time(
             self, high_time, low_time, timeout=10):
@@ -787,8 +781,8 @@ class CounterWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else True)
         
-        return _write_ctr_time_scalar(
-            self._handle, high_time, low_time, auto_start, timeout)
+        return self._interpreter.write_ctr_time_scalar(
+            self._handle, auto_start, timeout, high_time, low_time)
 
 
 class DigitalSingleChannelWriter(ChannelWriterBase):
@@ -839,8 +833,8 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else False)
 
-        return _write_digital_u_8(
-            self._handle, data, data.shape[0], auto_start, timeout)
+        return self._interpreter.write_digital_u8(
+            self._handle, data.shape[0], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def write_many_sample_port_uint16(self, data, timeout=10.0):
         """
@@ -884,8 +878,8 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else False)
 
-        return _write_digital_u_16(
-            self._handle, data, data.shape[0], auto_start, timeout)
+        return self._interpreter.write_digital_u16(
+            self._handle, data.shape[0], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def write_many_sample_port_uint32(self, data, timeout=10.0):
         """
@@ -929,8 +923,8 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else False)
 
-        return _write_digital_u_32(
-            self._handle, data, data.shape[0], auto_start, timeout)
+        return self._interpreter.write_digital_u32(
+            self._handle, data.shape[0], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def write_one_sample_multi_line(self, data, timeout=10):
         """
@@ -959,8 +953,8 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else True)
 
-        return _write_digital_lines(
-            self._handle, data, 1, auto_start, timeout)
+        return self._interpreter.write_digital_lines(
+            self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def write_one_sample_one_line(self, data, timeout=10):
         """
@@ -988,8 +982,8 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         
         numpy_array = numpy.asarray([data], dtype=bool)
 
-        return _write_digital_lines(
-            self._handle, numpy_array, 1, auto_start, timeout)
+        return self._interpreter.write_digital_lines(
+            self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, numpy_array)
 
     def write_one_sample_port_byte(self, data, timeout=10):
         """
@@ -1018,8 +1012,8 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         
         numpy_array = numpy.asarray([data], dtype=numpy.uint8)
 
-        return _write_digital_u_8(
-            self._handle, numpy_array, 1, auto_start, timeout)
+        return self._interpreter.write_digital_u8(
+            self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, numpy_array)
 
     def write_one_sample_port_uint16(self, data, timeout=10):
         """
@@ -1048,8 +1042,8 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         
         numpy_array = numpy.asarray([data], dtype=numpy.uint16)
 
-        return _write_digital_u_16(
-            self._handle, numpy_array, 1, auto_start, timeout)
+        return self._interpreter.write_digital_u16(
+            self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, numpy_array)
 
     def write_one_sample_port_uint32(self, data, timeout=10):
         """
@@ -1076,8 +1070,8 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else True)
         
-        return _write_digital_scalar_u_32(
-            self._handle, data, auto_start, timeout)
+        return self._interpreter.write_digital_scalar_u32(
+            self._handle, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
 
 class DigitalMultiChannelWriter(ChannelWriterBase):
@@ -1132,8 +1126,8 @@ class DigitalMultiChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else False)
 
-        return _write_digital_u_8(
-            self._handle, data, data.shape[1], auto_start, timeout)
+        return self._interpreter.write_digital_u8(
+            self._handle, data.shape[1], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def write_many_sample_port_uint16(self, data, timeout=10.0):
         """
@@ -1181,8 +1175,8 @@ class DigitalMultiChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else False)
 
-        return _write_digital_u_16(
-            self._handle, data, data.shape[1], auto_start, timeout)
+        return self._interpreter.write_digital_u16(
+            self._handle, data.shape[1], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def write_many_sample_port_uint32(self, data, timeout=10.0):
         """
@@ -1230,8 +1224,8 @@ class DigitalMultiChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else False)
 
-        return _write_digital_u_32(
-            self._handle, data, data.shape[1], auto_start, timeout)
+        return self._interpreter.write_digital_u32(
+            self._handle, data.shape[1], auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def write_one_sample_multi_line(self, data, timeout=10):
         """
@@ -1264,8 +1258,8 @@ class DigitalMultiChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else True)
 
-        return _write_digital_lines(
-            self._handle, data, 1, auto_start, timeout)
+        return self._interpreter.write_digital_lines(
+            self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def write_one_sample_one_line(self, data, timeout=10):
         """
@@ -1298,8 +1292,8 @@ class DigitalMultiChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else True)
 
-        return _write_digital_lines(
-            self._handle, data, 1, auto_start, timeout)
+        return self._interpreter.write_digital_lines(
+            self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def write_one_sample_port_byte(self, data, timeout=10):
         """
@@ -1333,8 +1327,8 @@ class DigitalMultiChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else True)
 
-        return _write_digital_u_8(
-            self._handle, data, 1, auto_start, timeout)
+        return self._interpreter.write_digital_u8(
+            self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def write_one_sample_port_uint16(self, data, timeout=10):
         """
@@ -1368,8 +1362,8 @@ class DigitalMultiChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else True)
 
-        return _write_digital_u_16(
-            self._handle, data, 1, auto_start, timeout)
+        return self._interpreter.write_digital_u16(
+            self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def write_one_sample_port_uint32(self, data, timeout=10):
         """
@@ -1403,5 +1397,5 @@ class DigitalMultiChannelWriter(ChannelWriterBase):
         auto_start = (self._auto_start if self._auto_start is not 
                       AUTO_START_UNSET else True)
 
-        return _write_digital_u_32(
-            self._handle, data, 1, auto_start, timeout)
+        return self._interpreter.write_digital_u32(
+            self._handle, 1, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)

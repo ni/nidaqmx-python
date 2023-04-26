@@ -7,7 +7,7 @@ from nidaqmx.errors import (
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system.storage.persisted_scale import PersistedScale
 from nidaqmx.utils import unflatten_channel_string
-
+from nidaqmx.system.storage.persisted_scale import _PersistedScaleAlternateConstructor
 
 class PersistedScaleCollection(Sequence):
     """
@@ -57,15 +57,15 @@ class PersistedScaleCollection(Sequence):
             Indicates the subset of custom scales indexed.
         """
         if isinstance(index, int):
-            return PersistedScale(self.scale_names[index])
+            return _PersistedScaleAlternateConstructor(self.scale_names[index], self._interpreter)
         elif isinstance(index, slice):
-            return [PersistedScale(name) for name in
+            return [_PersistedScaleAlternateConstructor(name, self._interpreter) for name in
                     self.scale_names[index]]
         elif isinstance(index, str):
             names = unflatten_channel_string(index)
             if len(names) == 1:
-                return PersistedScale(names[0])
-            return [PersistedScale(name) for name in names]
+                return _PersistedScaleAlternateConstructor(names[0], self._interpreter)
+            return [_PersistedScaleAlternateConstructor(name, self._interpreter) for name in names]
         else:
             raise DaqError(
                 'Invalid index type "{}" used to access collection.'
@@ -73,7 +73,7 @@ class PersistedScaleCollection(Sequence):
 
     def __iter__(self):
         for scale_name in self.scale_names:
-            yield PersistedScale(scale_name)
+            yield _PersistedScaleAlternateConstructor(scale_name, self._interpreter)
 
     def __len__(self):
         return len(self.scale_names)
@@ -86,7 +86,7 @@ class PersistedScaleCollection(Sequence):
         scale_names.reverse()
 
         for scale_name in scale_names:
-            yield PersistedScale(scale_name)
+            yield _PersistedScaleAlternateConstructor(scale_name, self._interpreter)
 
     @property
     def scale_names(self):

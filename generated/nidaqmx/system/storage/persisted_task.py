@@ -39,7 +39,7 @@ class PersistedTask:
         return not self.__eq__(other)
 
     def __repr__(self):
-        return f'PersistedTask(name={self._name})'
+        return f'_PersistedTaskAlternateConstructor(name={self._name}, interpreter={self._interpreter})'
 
     @property
     def author(self):
@@ -142,18 +142,7 @@ class PersistedTask:
         Returns:
             nidaqmx.task.Task: Indicates the loaded Task object.
         """
-        task_handle = lib_importer.task_handle(0)
-
-        cfunc = lib_importer.windll.DAQmxLoadTask
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        ctypes.POINTER(lib_importer.task_handle)]
-
-        error_code = cfunc(self._name, ctypes.byref(task_handle))
-        check_for_error(error_code)
+        task_handle = self._interpreter.load_task(self._name)
 
         return task._TaskAlternateConstructor(task_handle, self._interpreter)
     
