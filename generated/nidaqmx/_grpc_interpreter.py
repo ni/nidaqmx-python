@@ -2459,11 +2459,12 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.ReadPowerBinaryI16,
             grpc_types.ReadPowerBinaryI16Request(
+                array_size_in_samps=read_array_voltage.size,
                 fill_mode_raw=fill_mode,
-                num_samps_per_chan=num_samps_per_chan,
-                read_array_current=read_array_current,
-                read_array_voltage=read_array_voltage, task=task,
+                num_samps_per_chan=num_samps_per_chan, task=task,
                 timeout=timeout))
+        read_array_voltage[:]=response.read_array_voltage
+        read_array_current[:]=response.read_array_current
         return response.read_array_voltage, response.read_array_current, response.samps_per_chan_read
 
     def read_power_f64(
@@ -2472,11 +2473,12 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.ReadPowerF64,
             grpc_types.ReadPowerF64Request(
+                array_size_in_samps=read_array_voltage.size,
                 fill_mode_raw=fill_mode,
-                num_samps_per_chan=num_samps_per_chan,
-                read_array_current=read_array_current,
-                read_array_voltage=read_array_voltage, task=task,
+                num_samps_per_chan=num_samps_per_chan, task=task,
                 timeout=timeout))
+        read_array_voltage[:]=response.read_array_voltage
+        read_array_current[:]=response.read_array_current
         return response.read_array_voltage, response.read_array_current, response.samps_per_chan_read
 
     def read_power_scalar_f64(self, task, timeout):
@@ -2489,8 +2491,10 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.ReadRaw,
             grpc_types.ReadRawRequest(
-                num_samps_per_chan=num_samps_per_chan, read_array=read_array,
-                task=task, timeout=timeout))
+                array_size_in_bytes=read_array.size,
+                num_samps_per_chan=num_samps_per_chan, task=task,
+                timeout=timeout))
+        read_array[:]=response.read_array
         return response.read_array, response.samps_read, response.num_bytes_per_samp
 
     def register_done_event(
