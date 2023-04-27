@@ -152,7 +152,7 @@ class Task:
         """
         List[str]: Indicates the names of all virtual channels in the task.
         """
-        val = self._interpreter.get_task_attribute_string(self._handle, 4723)
+        val = self._interpreter.get_task_attribute_string(self._handle, 0x1273)
         return unflatten_channel_string(val)
 
     @property
@@ -160,7 +160,7 @@ class Task:
         """
         int: Indicates the number of virtual channels in the task.
         """
-        val = self._interpreter.get_task_attribute_uint32(self._handle, 8577)
+        val = self._interpreter.get_task_attribute_uint32(self._handle, 0x2181)
         return val
 
     @property
@@ -169,7 +169,7 @@ class Task:
         List[:class:`nidaqmx.system.device.Device`]: Indicates a list 
             of Device objects representing all the devices in the task.
         """
-        val = self._interpreter.get_task_attribute_string(self._handle, 8974)
+        val = self._interpreter.get_task_attribute_string(self._handle, 0x230e)
         return [_DeviceAlternateConstructor(v, self._interpreter) for v in
                 unflatten_channel_string(val)]
 
@@ -178,7 +178,7 @@ class Task:
         """
         int: Indicates the number of devices in the task.
         """
-        val = self._interpreter.get_task_attribute_uint32(self._handle, 10682)
+        val = self._interpreter.get_task_attribute_uint32(self._handle, 0x29ba)
         return val
 
     @property

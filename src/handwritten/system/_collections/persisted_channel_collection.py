@@ -95,5 +95,5 @@ class PersistedChannelCollection(Sequence):
         List[str]: The names of all the global channels on this
             collection.
         """
-        val = self._interpreter.get_system_info_attribute_string(4709)
+        val = self._interpreter.get_system_info_attribute_string(0x1265)
         return unflatten_channel_string(val)

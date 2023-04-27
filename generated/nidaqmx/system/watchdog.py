@@ -209,7 +209,7 @@ class WatchdogTask:
         """
         str: Indicates the name of the task.
         """
-        val = self._interpreter.get_task_attribute_string(self._handle, 4726)
+        val = self._interpreter.get_task_attribute_string(self._handle, 0x1276)
         return val
 
     def _control_watchdog_task(self, action):

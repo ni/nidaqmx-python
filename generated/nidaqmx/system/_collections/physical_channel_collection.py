@@ -116,7 +116,7 @@ class AIPhysicalChannelCollection(PhysicalChannelCollection):
 
     @property
     def channel_names(self):
-        val = self._interpreter.get_device_attribute_string(self._name, 8990)
+        val = self._interpreter.get_device_attribute_string(self._name, 0x231e)
         return unflatten_channel_string(val)
 
 
@@ -130,7 +130,7 @@ class AOPhysicalChannelCollection(PhysicalChannelCollection):
 
     @property
     def channel_names(self):
-        val = self._interpreter.get_device_attribute_string(self._name, 8991)
+        val = self._interpreter.get_device_attribute_string(self._name, 0x231f)
         return unflatten_channel_string(val)
 
 
@@ -144,7 +144,7 @@ class CIPhysicalChannelCollection(PhysicalChannelCollection):
 
     @property
     def channel_names(self):
-        val = self._interpreter.get_device_attribute_string(self._name, 8996)
+        val = self._interpreter.get_device_attribute_string(self._name, 0x2324)
         return unflatten_channel_string(val)
 
 
@@ -158,7 +158,7 @@ class COPhysicalChannelCollection(PhysicalChannelCollection):
 
     @property
     def channel_names(self):
-        val = self._interpreter.get_device_attribute_string(self._name, 8997)
+        val = self._interpreter.get_device_attribute_string(self._name, 0x2325)
         return unflatten_channel_string(val)
 
 
@@ -171,7 +171,7 @@ class DILinesCollection(PhysicalChannelCollection):
 
     @property
     def channel_names(self):
-        val = self._interpreter.get_device_attribute_string(self._name, 8992)
+        val = self._interpreter.get_device_attribute_string(self._name, 0x2320)
         return unflatten_channel_string(val)
 
 
@@ -184,7 +184,7 @@ class DOLinesCollection(PhysicalChannelCollection):
 
     @property
     def channel_names(self):
-        val = self._interpreter.get_device_attribute_string(self._name, 8994)
+        val = self._interpreter.get_device_attribute_string(self._name, 0x2322)
         return unflatten_channel_string(val)
 
 
@@ -197,7 +197,7 @@ class DIPortsCollection(PhysicalChannelCollection):
 
     @property
     def channel_names(self):
-        val = self._interpreter.get_device_attribute_string(self._name, 8993)
+        val = self._interpreter.get_device_attribute_string(self._name, 0x2321)
         return unflatten_channel_string(val)
 
 
@@ -210,5 +210,5 @@ class DOPortsCollection(PhysicalChannelCollection):
 
     @property
     def channel_names(self):
-        val = self._interpreter.get_device_attribute_string(self._name, 8995)
+        val = self._interpreter.get_device_attribute_string(self._name, 0x2323)
         return unflatten_channel_string(val)

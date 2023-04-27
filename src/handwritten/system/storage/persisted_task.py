@@ -46,7 +46,7 @@ class PersistedTask:
         """
         str: Indicates the author of the task.
         """
-        val = self._interpreter.get_persisted_task_attribute_string(self._name, 8908)
+        val = self._interpreter.get_persisted_task_attribute_string(self._name, 0x22cc)
         return val
 
     @property
@@ -55,7 +55,7 @@ class PersistedTask:
         bool: Indicates whether the task can be edited in the DAQ
             Assistant.
         """
-        val = self._interpreter.get_persisted_task_attribute_bool(self._name, 8909)
+        val = self._interpreter.get_persisted_task_attribute_bool(self._name, 0x22cd)
         return val
 
     @property
@@ -63,7 +63,7 @@ class PersistedTask:
         """
         bool: Indicates whether the task can be deleted through MAX.
         """
-        val = self._interpreter.get_persisted_task_attribute_bool(self._name, 8910)
+        val = self._interpreter.get_persisted_task_attribute_bool(self._name, 0x22ce)
         return val
 
     def delete(self):

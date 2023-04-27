@@ -46,7 +46,7 @@ class PersistedScale:
         """
         str: Indicates the author of the custom scale.
         """
-        val = self._interpreter.get_persisted_scale_attribute_string(self._name, 8916)
+        val = self._interpreter.get_persisted_scale_attribute_string(self._name, 0x22d4)
         return val
 
     @property
@@ -55,7 +55,7 @@ class PersistedScale:
         bool: Indicates whether the custom scale can be edited in the
             DAQ Assistant.
         """
-        val = self._interpreter.get_persisted_scale_attribute_bool(self._name, 8917)
+        val = self._interpreter.get_persisted_scale_attribute_bool(self._name, 0x22d5)
         return val
 
     @property
@@ -64,7 +64,7 @@ class PersistedScale:
         bool: Indicates whether the custom scale can be deleted through
             MAX.
         """
-        val = self._interpreter.get_persisted_scale_attribute_bool(self._name, 8918)
+        val = self._interpreter.get_persisted_scale_attribute_bool(self._name, 0x22d6)
         return val
 
     def delete(self):

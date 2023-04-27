@@ -45,7 +45,7 @@ class PersistedChannel:
         """
         str: Indicates the author of the global channel.
         """
-        val = self._interpreter.get_persisted_chan_attribute_string(self._name, 8912)
+        val = self._interpreter.get_persisted_chan_attribute_string(self._name, 0x22d0)
         return val
 
     @property
@@ -54,7 +54,7 @@ class PersistedChannel:
         bool: Indicates whether the global channel can be edited in the
             DAQ Assistant.
         """
-        val = self._interpreter.get_persisted_chan_attribute_bool(self._name, 8913)
+        val = self._interpreter.get_persisted_chan_attribute_bool(self._name, 0x22d1)
         return val
 
     @property
@@ -63,7 +63,7 @@ class PersistedChannel:
         bool: Indicates whether the global channel can be deleted
             through MAX.
         """
-        val = self._interpreter.get_persisted_chan_attribute_bool(self._name, 8914)
+        val = self._interpreter.get_persisted_chan_attribute_bool(self._name, 0x22d2)
         return val
 
     def delete(self):

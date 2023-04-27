@@ -93,5 +93,5 @@ class PersistedTaskCollection(Sequence):
         """
         List[str]: Indicates the names of all the tasks on this collection.
         """
-        val = self._interpreter.get_system_info_attribute_string(4711)
+        val = self._interpreter.get_system_info_attribute_string(0x1267)
         return unflatten_channel_string(val)

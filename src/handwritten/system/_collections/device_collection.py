@@ -93,5 +93,5 @@ class DeviceCollection(Sequence):
         List[str]: Indicates the names of all devices on this device
             collection.
         """
-        val = self._interpreter.get_system_info_attribute_string(6459)
+        val = self._interpreter.get_system_info_attribute_string(0x193b)
         return unflatten_channel_string(val)

@@ -165,7 +165,7 @@ class Channel:
         str: Specifies the flattened names of all the virtual channels in
             the task.
         """
-        val = self._interpreter.get_task_attribute_string(self._handle, 4723)
+        val = self._interpreter.get_task_attribute_string(self._handle, 0x1273)
         return val
 
     @property

@@ -113,5 +113,5 @@ class ChannelCollection(Sequence):
         List[str]: Specifies the entire list of virtual channels on this
             channel collection.
         """
-        val = self._interpreter.get_task_attribute_string(self._handle, 4723)
+        val = self._interpreter.get_task_attribute_string(self._handle, 0x1273)
         return unflatten_channel_string(val)

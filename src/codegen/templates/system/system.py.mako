@@ -126,7 +126,7 @@ class System:
         int: Indicates the major portion of the installed version of NI-
             DAQmx, such as 7 for version 7.0.
         """
-        val = self._interpreter.get_system_info_attribute_uint32(4722)
+        val = self._interpreter.get_system_info_attribute_uint32(0x1272)
         return val
 
     @property
@@ -135,7 +135,7 @@ class System:
         int: Indicates the minor portion of the installed version of NI-
             DAQmx, such as 0 for version 7.0.
         """
-        val = self._interpreter.get_system_info_attribute_uint32(6435)
+        val = self._interpreter.get_system_info_attribute_uint32(0x1923)
         return val
 
     @property
@@ -144,7 +144,7 @@ class System:
         int: Indicates the update portion of the installed version of
             NI-DAQmx, such as 1 for version 9.0.1.
         """
-        val = self._interpreter.get_system_info_attribute_uint32(12066)
+        val = self._interpreter.get_system_info_attribute_uint32(0x2f22)
         return val
 
 <%namespace name="function_template" file="/function_template.py.mako"/>\

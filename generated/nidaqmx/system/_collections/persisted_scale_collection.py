@@ -94,5 +94,5 @@ class PersistedScaleCollection(Sequence):
         List[str]: Indicates the names of all the custom scales on this
             collection.
         """
-        val = self._interpreter.get_system_info_attribute_string(4710)
+        val = self._interpreter.get_system_info_attribute_string(0x1266)
         return unflatten_channel_string(val)
