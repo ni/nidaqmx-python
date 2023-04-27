@@ -4483,10 +4483,29 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
 
     def reset_buffer_attribute(self, task, attribute):
-        raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxResetBufferAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int32]
+
+        error_code = cfunc(
+            task, attribute)
+        check_for_error(error_code)
 
     def reset_chan_attribute(self, task, channel, attribute):
-        raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxResetChanAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int32]
+
+        error_code = cfunc(
+            task, channel, attribute)
+        check_for_error(error_code)
 
     def reset_device(self, device_name):
         cfunc = lib_importer.windll.DAQmxResetDevice
@@ -4501,28 +4520,102 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
 
     def reset_exported_signal_attribute(self, task, attribute):
-        raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxResetExportedSignalAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
+
+        error_code = cfunc(
+            task, attribute)
+        check_for_error(error_code)
 
     def reset_read_attribute(self, task, attribute):
-        raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxResetReadAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
+
+        error_code = cfunc(
+            task, attribute)
+        check_for_error(error_code)
 
     def reset_real_time_attribute(self, task, attribute):
-        raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxResetRealTimeAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int32]
+
+        error_code = cfunc(
+            task, attribute)
+        check_for_error(error_code)
 
     def reset_timing_attribute(self, task, attribute):
-        raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxResetTimingAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
+
+        error_code = cfunc(
+            task, attribute)
+        check_for_error(error_code)
 
     def reset_timing_attribute_ex(self, task, device_names, attribute):
-        raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxResetTimingAttributeEx
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
+
+        error_code = cfunc(
+            task, device_names, attribute)
+        check_for_error(error_code)
 
     def reset_trig_attribute(self, task, attribute):
-        raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxResetTrigAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
+
+        error_code = cfunc(
+            task, attribute)
+        check_for_error(error_code)
 
     def reset_watchdog_attribute(self, task, lines, attribute):
-        raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxResetWatchdogAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes.c_int]
+
+        error_code = cfunc(
+            task, lines, attribute)
+        check_for_error(error_code)
 
     def reset_write_attribute(self, task, attribute):
-        raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxResetWriteAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int]
+
+        error_code = cfunc(
+            task, attribute)
+        check_for_error(error_code)
 
     def save_global_chan(self, task, channel_name, save_as, author, options):
         raise NotImplementedError
