@@ -377,44 +377,6 @@ def get_response_parameters(output_parameters: list):
     return ", ".join(response_parameters)
 
 
-def get_compound_parameter(params):
-    """Returns the compound parameter associated with the given function."""
-    return next((x for x in params if x.is_compound_type), None)
-
-
-def get_input_arguments_for_compound_params(func):
-    """Returns a list of input parameter for creating the compound parameter."""
-    compound_params = []
-    if any(x for x in func.base_parameters if x.is_compound_type):
-        for parameter in func.base_parameters:
-            if parameter.direction == "in" and parameter.repeating_argument:
-                compound_params.append(parameter.parameter_name)
-    return compound_params
-
-
-def create_compound_parameter_request(func):
-    """Gets the input parameters for createing the compound type parameter."""
-    parameters = []
-    compound_parameter_type = ""
-    for parameter in func.base_parameters:
-        if parameter.direction == "in" and parameter.repeated_var_args:
-            compound_parameter_type = parameter.grpc_type.replace("repeated ", "")
-            break
-
-    for parameter in get_input_arguments_for_compound_params(func):
-        parameters.append(f"{parameter}={parameter}[index]")
-    return f"grpc_types.{compound_parameter_type}(" + ", ".join(parameters) + ")"
-
-
-def get_response_parameters(output_parameters: list):
-    """Gets the list of parameters in grpc response."""
-    response_parameters = []
-    for parameter in output_parameters:
-        if not parameter.repeating_argument:
-            response_parameters.append(f"response.{parameter.parameter_name}")
-    return ", ".join(response_parameters)
-
-
 def get_samps_per_chan_read_or_write_param(func_params):
     """Gets samps per read/ samps per write parameter."""
     for param in func_params:
