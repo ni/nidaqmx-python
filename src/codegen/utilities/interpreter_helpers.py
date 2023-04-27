@@ -330,6 +330,4 @@ def get_response_parameters(func):
     for parameter in output_parameters:
         if not parameter.repeating_argument:
             response_parameters.append(f"response.{parameter.parameter_name}")
-    if func.is_init_method:
-        response_parameters.append("response.new_session_initialized")
     return ", ".join(response_parameters)
