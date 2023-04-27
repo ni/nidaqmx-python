@@ -65,7 +65,7 @@ class PhysicalChannelCollection(Sequence):
         elif isinstance(index, slice):
             return _PhysicalChannelAlternateConstructor(self.channel_names[index], self._interpreter)
         elif isinstance(index, str):
-            return _PhysicalChannelAlternateConstructor(f'{self._name}/{index}, {self._interpreter}')
+            return PhysicalChannel(f'{self._name}/{index}')
         else:
             raise DaqError(
                 'Invalid index type "{}" used to access collection.'
