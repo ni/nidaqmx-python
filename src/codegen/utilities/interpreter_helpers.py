@@ -144,7 +144,9 @@ def get_instantiation_lines_for_varargs(func):
     instantiation_lines = []
     if any(get_varargs_parameters(func)):
         for param in func.output_parameters:
-            instantiation_lines.append(f"{param.parameter_name}_element = {param.ctypes_data_type}()")
+            instantiation_lines.append(
+                f"{param.parameter_name}_element = {param.ctypes_data_type}()"
+            )
             instantiation_lines.append(
                 f"{param.parameter_name}.append({param.parameter_name}_element)"
             )
@@ -258,7 +260,9 @@ def get_return_values(func):
     return_values = []
     for param in get_interpreter_output_params(func):
         if param.repeating_argument:
-            return_values.append(f"[{param.parameter_name}_element.value for {param.parameter_name}_element in {param.parameter_name}]")
+            return_values.append(
+                f"[{param.parameter_name}_element.value for {param.parameter_name}_element in {param.parameter_name}]"
+            )
         elif param.ctypes_data_type == "ctypes.c_char_p":
             return_values.append(f"{param.parameter_name}.value.decode('ascii')")
         elif param.is_list:
