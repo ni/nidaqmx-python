@@ -40,6 +40,11 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "WriteRaw",
 ]
 
+LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
+    "RegisterSignalEvent",
+    "RegisterEveryNSamplesEvent",
+    "RegisterDoneEvent",
+]
 
 def get_interpreter_functions(metadata):
     """Converts the scrapigen metadata into a list of functions."""
@@ -126,6 +131,8 @@ def get_instantiation_lines_for_output(func):
     for param in get_interpreter_output_params(func):
         if param.parameter_name == "task":
             continue
+        elif param.repeating_argument:
+            instantiation_lines.append(f"{param.parameter_name} = []")
         elif param.has_explicit_buffer_size:
             if is_custom_read_write_function(func) and param.size.mechanism == "passed-in":
                 continue
@@ -144,6 +151,39 @@ def get_instantiation_lines_for_output(func):
             instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
     return instantiation_lines
 
+def get_instantiation_lines_for_varargs(func):
+    """Gets instantiation lines for functions with variable arguments."""
+    instantiation_lines = []
+    if any(get_varargs_parameters(func)):
+        for param in func.output_parameters:
+            instantiation_lines.append(
+                f"{param.parameter_name}_element = {param.ctypes_data_type}()"
+            )
+            instantiation_lines.append(
+                f"{param.parameter_name}.append({param.parameter_name}_element)"
+            )
+    return instantiation_lines
+
+
+def get_argument_definition_lines_for_varargs(varargs_params):
+    """Gets the lines for defining the variable arguments for a function."""
+    argument_definition_lines = []
+    for param in varargs_params:
+        argtype = to_param_argtype(param)
+        if param.direction == "in":
+            argument_definition_lines.append(f"args.append({param.parameter_name}[index])")
+        else:
+            argument_definition_lines.append(
+                f"args.append(ctypes.byref({param.parameter_name}_element))"
+            )
+        argument_definition_lines.append(f"argtypes.append({argtype})")
+        argument_definition_lines.append("")
+    return argument_definition_lines
+
+
+def get_varargs_parameters(func):
+    """Gets variable arguments of a function."""
+    return [p for p in func.parameters if p.repeating_argument]
 
 def get_interpreter_params(func):
     """Gets interpreter parameters for the function."""
