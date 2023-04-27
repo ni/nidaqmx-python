@@ -63,14 +63,14 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.${snake_to_pascal(func.function_name)},
         %if (len(func.function_name) + len(get_grpc_interpreter_call_params(func, sorted_params))) > 68:
             grpc_types.${snake_to_pascal(func.function_name)}Request(
-            %if (func.is_init_method):
+            %if func.is_init_method:
                 ${get_grpc_interpreter_call_params(func, sorted_params) | wrap(16, 16)}),
             metadata=metadata)
             %else:
                 ${get_grpc_interpreter_call_params(func, sorted_params) + ')' | wrap(16, 16)})
             %endif
         %else:
-        %if (func.is_init_method):
+        %if func.is_init_method:
             grpc_types.${snake_to_pascal(func.function_name)}Request(${get_grpc_interpreter_call_params(func, sorted_params)+ ')'},
             metadata=metadata)
         %else:
