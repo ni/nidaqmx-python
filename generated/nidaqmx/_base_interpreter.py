@@ -31,8 +31,8 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def calculate_reverse_poly_coeff(
-            self, forward_coeffs, num_forward_coeffs_in, min_val_x, max_val_x,
-            num_points_to_compute, reverse_poly_order):
+            self, forward_coeffs, min_val_x, max_val_x, num_points_to_compute,
+            reverse_poly_order):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -144,18 +144,17 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def cfg_watchdog_ao_expir_states(
-            self, task, channel_names, expir_state_array, output_type_array,
-            array_size):
+            self, task, channel_names, expir_state_array, output_type_array):
         raise NotImplementedError
 
     @abc.abstractmethod
     def cfg_watchdog_co_expir_states(
-            self, task, channel_names, expir_state_array, array_size):
+            self, task, channel_names, expir_state_array):
         raise NotImplementedError
 
     @abc.abstractmethod
     def cfg_watchdog_do_expir_states(
-            self, task, channel_names, expir_state_array, array_size):
+            self, task, channel_names, expir_state_array):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -236,20 +235,20 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def create_ai_force_bridge_polynomial_chan(
-            self, task, physical_channel, num_forward_coeffs,
-            num_reverse_coeffs, name_to_assign_to_channel, min_val, max_val,
-            units, bridge_config, voltage_excit_source, voltage_excit_val,
-            nominal_bridge_resistance, forward_coeffs, reverse_coeffs,
-            electrical_units, physical_units, custom_scale_name):
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
+            max_val, units, bridge_config, voltage_excit_source,
+            voltage_excit_val, nominal_bridge_resistance, forward_coeffs,
+            reverse_coeffs, electrical_units, physical_units,
+            custom_scale_name):
         raise NotImplementedError
 
     @abc.abstractmethod
     def create_ai_force_bridge_table_chan(
-            self, task, physical_channel, num_electrical_vals,
-            num_physical_vals, name_to_assign_to_channel, min_val, max_val,
-            units, bridge_config, voltage_excit_source, voltage_excit_val,
-            nominal_bridge_resistance, electrical_vals, electrical_units,
-            physical_vals, physical_units, custom_scale_name):
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
+            max_val, units, bridge_config, voltage_excit_source,
+            voltage_excit_val, nominal_bridge_resistance, electrical_vals,
+            electrical_units, physical_vals, physical_units,
+            custom_scale_name):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -314,20 +313,20 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def create_ai_pressure_bridge_polynomial_chan(
-            self, task, physical_channel, num_forward_coeffs,
-            num_reverse_coeffs, name_to_assign_to_channel, min_val, max_val,
-            units, bridge_config, voltage_excit_source, voltage_excit_val,
-            nominal_bridge_resistance, forward_coeffs, reverse_coeffs,
-            electrical_units, physical_units, custom_scale_name):
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
+            max_val, units, bridge_config, voltage_excit_source,
+            voltage_excit_val, nominal_bridge_resistance, forward_coeffs,
+            reverse_coeffs, electrical_units, physical_units,
+            custom_scale_name):
         raise NotImplementedError
 
     @abc.abstractmethod
     def create_ai_pressure_bridge_table_chan(
-            self, task, physical_channel, num_electrical_vals,
-            num_physical_vals, name_to_assign_to_channel, min_val, max_val,
-            units, bridge_config, voltage_excit_source, voltage_excit_val,
-            nominal_bridge_resistance, electrical_vals, electrical_units,
-            physical_vals, physical_units, custom_scale_name):
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
+            max_val, units, bridge_config, voltage_excit_source,
+            voltage_excit_val, nominal_bridge_resistance, electrical_vals,
+            electrical_units, physical_vals, physical_units,
+            custom_scale_name):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -350,10 +349,10 @@ class BaseInterpreter(abc.ABC):
     @abc.abstractmethod
     def create_ai_rosette_strain_gage_chan(
             self, task, physical_channel, rosette_type, gage_orientation,
-            rosette_meas_types, num_rosette_meas_types,
-            name_to_assign_to_channel, min_val, max_val, strain_config,
-            voltage_excit_source, voltage_excit_val, gage_factor,
-            nominal_gage_resistance, poisson_ratio, lead_wire_resistance):
+            rosette_meas_types, name_to_assign_to_channel, min_val, max_val,
+            strain_config, voltage_excit_source, voltage_excit_val,
+            gage_factor, nominal_gage_resistance, poisson_ratio,
+            lead_wire_resistance):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -393,20 +392,20 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def create_ai_torque_bridge_polynomial_chan(
-            self, task, physical_channel, num_forward_coeffs,
-            num_reverse_coeffs, name_to_assign_to_channel, min_val, max_val,
-            units, bridge_config, voltage_excit_source, voltage_excit_val,
-            nominal_bridge_resistance, forward_coeffs, reverse_coeffs,
-            electrical_units, physical_units, custom_scale_name):
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
+            max_val, units, bridge_config, voltage_excit_source,
+            voltage_excit_val, nominal_bridge_resistance, forward_coeffs,
+            reverse_coeffs, electrical_units, physical_units,
+            custom_scale_name):
         raise NotImplementedError
 
     @abc.abstractmethod
     def create_ai_torque_bridge_table_chan(
-            self, task, physical_channel, num_electrical_vals,
-            num_physical_vals, name_to_assign_to_channel, min_val, max_val,
-            units, bridge_config, voltage_excit_source, voltage_excit_val,
-            nominal_bridge_resistance, electrical_vals, electrical_units,
-            physical_vals, physical_units, custom_scale_name):
+            self, task, physical_channel, name_to_assign_to_channel, min_val,
+            max_val, units, bridge_config, voltage_excit_source,
+            voltage_excit_val, nominal_bridge_resistance, electrical_vals,
+            electrical_units, physical_vals, physical_units,
+            custom_scale_name):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -605,14 +604,14 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def create_polynomial_scale(
-            self, name, forward_coeffs, num_forward_coeffs_in, reverse_coeffs,
-            num_reverse_coeffs_in, pre_scaled_units, scaled_units):
+            self, name, forward_coeffs, reverse_coeffs, pre_scaled_units,
+            scaled_units):
         raise NotImplementedError
 
     @abc.abstractmethod
     def create_table_scale(
-            self, name, prescaled_vals, num_prescaled_vals_in, scaled_vals,
-            num_scaled_vals_in, pre_scaled_units, scaled_units):
+            self, name, prescaled_vals, scaled_vals, pre_scaled_units,
+            scaled_units):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1203,9 +1202,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_analog_f64(
-            self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
+    def read_analog_f64(self, task, num_samps_per_chan, timeout, fill_mode):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1213,38 +1210,28 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_binary_i16(
-            self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
+    def read_binary_i16(self, task, num_samps_per_chan, timeout, fill_mode):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_binary_i32(
-            self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
+    def read_binary_i32(self, task, num_samps_per_chan, timeout, fill_mode):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_binary_u16(
-            self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
+    def read_binary_u16(self, task, num_samps_per_chan, timeout, fill_mode):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_binary_u32(
-            self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
+    def read_binary_u32(self, task, num_samps_per_chan, timeout, fill_mode):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_counter_f64(
-            self, task, num_samps_per_chan, timeout, array_size_in_samps):
+    def read_counter_f64(self, task, num_samps_per_chan, timeout):
         raise NotImplementedError
 
     @abc.abstractmethod
     def read_counter_f64_ex(
-            self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
+            self, task, num_samps_per_chan, timeout, fill_mode):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1256,20 +1243,16 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_counter_u32(
-            self, task, num_samps_per_chan, timeout, array_size_in_samps):
+    def read_counter_u32(self, task, num_samps_per_chan, timeout):
         raise NotImplementedError
 
     @abc.abstractmethod
     def read_counter_u32_ex(
-            self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
+            self, task, num_samps_per_chan, timeout, fill_mode):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_ctr_freq(
-            self, task, num_samps_per_chan, timeout, interleaved,
-            array_size_in_samps):
+    def read_ctr_freq(self, task, num_samps_per_chan, timeout, interleaved):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1277,9 +1260,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_ctr_ticks(
-            self, task, num_samps_per_chan, timeout, interleaved,
-            array_size_in_samps):
+    def read_ctr_ticks(self, task, num_samps_per_chan, timeout, interleaved):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1287,9 +1268,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_ctr_time(
-            self, task, num_samps_per_chan, timeout, interleaved,
-            array_size_in_samps):
+    def read_ctr_time(self, task, num_samps_per_chan, timeout, interleaved):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1297,9 +1276,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_digital_lines(
-            self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_bytes):
+    def read_digital_lines(self, task, num_samps_per_chan, timeout, fill_mode):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1307,21 +1284,15 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_digital_u16(
-            self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
+    def read_digital_u16(self, task, num_samps_per_chan, timeout, fill_mode):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_digital_u32(
-            self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
+    def read_digital_u32(self, task, num_samps_per_chan, timeout, fill_mode):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_digital_u8(
-            self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
+    def read_digital_u8(self, task, num_samps_per_chan, timeout, fill_mode):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1843,8 +1814,7 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def write_to_teds_from_array(
-            self, physical_channel, array_size, bit_stream,
-            basic_teds_options):
+            self, physical_channel, bit_stream, basic_teds_options):
         raise NotImplementedError
 
     @abc.abstractmethod
