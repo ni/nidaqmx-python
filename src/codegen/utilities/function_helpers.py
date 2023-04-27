@@ -34,6 +34,7 @@ EXCLUDED_FUNCTIONS = [
     "SetDigitalPullUpPullDownStates",
 ]
 
+
 def get_functions(metadata, class_name=""):
     """Converts the scrapigen metadata into a list of functions."""
     all_functions = deepcopy(metadata["functions"])

@@ -146,8 +146,3 @@ class Function:
     def is_init_method(self):
         """bool: Defines if the method is an init method."""
         return self._is_init_method
-
-    @property
-    def is_init_method(self):
-        """bool: Defines if the method is an init method."""
-        return self._is_init_method

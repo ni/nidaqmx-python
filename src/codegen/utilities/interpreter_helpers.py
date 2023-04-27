@@ -46,6 +46,7 @@ LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
     "RegisterDoneEvent",
 ]
 
+
 def get_interpreter_functions(metadata):
     """Converts the scrapigen metadata into a list of functions."""
     all_functions = deepcopy(metadata["functions"])
@@ -86,9 +87,13 @@ def generate_interpreter_function_call_args(function_metadata):
             elif param.direction == "out":
                 if param.size.mechanism == "ivi-dance":
                     size_values[param.size.value] = SizeParameter(param.parameter_name, "temp_size")
-                if is_custom_read_write_function(function_metadata) and param.size.mechanism == "passed-in":
-                    size_values[param.size.value] = SizeParameter(param.parameter_name, f"{param.parameter_name}.size")
-
+                if (
+                    is_custom_read_write_function(function_metadata)
+                    and param.size.mechanism == "passed-in"
+                ):
+                    size_values[param.size.value] = SizeParameter(
+                        param.parameter_name, f"{param.parameter_name}.size"
+                    )
 
     for param in function_metadata.interpreter_parameters:
         if param.direction == "in":
@@ -151,6 +156,7 @@ def get_instantiation_lines_for_output(func):
             instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
     return instantiation_lines
 
+
 def get_instantiation_lines_for_varargs(func):
     """Gets instantiation lines for functions with variable arguments."""
     instantiation_lines = []
@@ -185,6 +191,7 @@ def get_varargs_parameters(func):
     """Gets variable arguments of a function."""
     return [p for p in func.parameters if p.repeating_argument]
 
+
 def get_interpreter_params(func):
     """Gets interpreter parameters for the function."""
     interpreter_parameters = []
@@ -209,6 +216,7 @@ def get_grpc_interpreter_call_params(func, params):
                 grpc_params.append(f"{param.parameter_name}={param.parameter_name}")
     grpc_params = sorted(list(set(grpc_params)))
     return ", ".join(grpc_params)
+
 
 def get_skippable_params_for_interpreter_func(func):
     """Gets parameter names that needs to be skipped for the function."""
