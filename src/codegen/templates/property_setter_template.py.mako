@@ -1,6 +1,5 @@
 <%def name="script_property_setter(attribute)">\
 <%
-        from codegen.utilities.text_wrappers import wrap, docstring_wrap
         from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_mapped_attribute_function_type
     %>\
     @${attribute.name}.setter
@@ -38,5 +37,5 @@
         if attribute.has_explicit_write_buffer_size:
             function_call_args.append('len(val)')
     %>\
-        self._interpreter.set_${generic_attribute_func}(${', '.join(function_call_args) | wrap(12)})
+        self._interpreter.set_${generic_attribute_func}(${', '.join(function_call_args)})
 </%def>

@@ -37,6 +37,7 @@ class PauseTrigger:
         val = val.value
         self._interpreter.set_trig_attribute_int32(self._handle, 0x2236, val)
 
+
     @anlg_lvl_coupling.deleter
     def anlg_lvl_coupling(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x2236)
@@ -60,6 +61,7 @@ class PauseTrigger:
     def anlg_lvl_dig_fltr_enable(self, val):
         self._interpreter.set_trig_attribute_bool(self._handle, 0x2ef0, val)
 
+
     @anlg_lvl_dig_fltr_enable.deleter
     def anlg_lvl_dig_fltr_enable(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x2ef0)
@@ -77,6 +79,7 @@ class PauseTrigger:
     @anlg_lvl_dig_fltr_min_pulse_width.setter
     def anlg_lvl_dig_fltr_min_pulse_width(self, val):
         self._interpreter.set_trig_attribute_double(self._handle, 0x2ef1, val)
+
 
     @anlg_lvl_dig_fltr_min_pulse_width.deleter
     def anlg_lvl_dig_fltr_min_pulse_width(self):
@@ -97,6 +100,7 @@ class PauseTrigger:
     def anlg_lvl_dig_fltr_timebase_rate(self, val):
         self._interpreter.set_trig_attribute_double(self._handle, 0x2ef3, val)
 
+
     @anlg_lvl_dig_fltr_timebase_rate.deleter
     def anlg_lvl_dig_fltr_timebase_rate(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x2ef3)
@@ -114,6 +118,7 @@ class PauseTrigger:
     @anlg_lvl_dig_fltr_timebase_src.setter
     def anlg_lvl_dig_fltr_timebase_src(self, val):
         self._interpreter.set_trig_attribute_string(self._handle, 0x2ef2, val)
+
 
     @anlg_lvl_dig_fltr_timebase_src.deleter
     def anlg_lvl_dig_fltr_timebase_src(self):
@@ -133,6 +138,7 @@ class PauseTrigger:
     @anlg_lvl_dig_sync_enable.setter
     def anlg_lvl_dig_sync_enable(self, val):
         self._interpreter.set_trig_attribute_bool(self._handle, 0x2ef4, val)
+
 
     @anlg_lvl_dig_sync_enable.deleter
     def anlg_lvl_dig_sync_enable(self):
@@ -159,6 +165,7 @@ class PauseTrigger:
     def anlg_lvl_hyst(self, val):
         self._interpreter.set_trig_attribute_double(self._handle, 0x1368, val)
 
+
     @anlg_lvl_hyst.deleter
     def anlg_lvl_hyst(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x1368)
@@ -179,6 +186,7 @@ class PauseTrigger:
     def anlg_lvl_lvl(self, val):
         self._interpreter.set_trig_attribute_double(self._handle, 0x1369, val)
 
+
     @anlg_lvl_lvl.deleter
     def anlg_lvl_lvl(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x1369)
@@ -197,6 +205,7 @@ class PauseTrigger:
     @anlg_lvl_src.setter
     def anlg_lvl_src(self, val):
         self._interpreter.set_trig_attribute_string(self._handle, 0x1370, val)
+
 
     @anlg_lvl_src.deleter
     def anlg_lvl_src(self):
@@ -218,6 +227,7 @@ class PauseTrigger:
         val = val.value
         self._interpreter.set_trig_attribute_int32(self._handle, 0x1371, val)
 
+
     @anlg_lvl_when.deleter
     def anlg_lvl_when(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x1371)
@@ -235,6 +245,7 @@ class PauseTrigger:
     @anlg_win_btm.setter
     def anlg_win_btm(self, val):
         self._interpreter.set_trig_attribute_double(self._handle, 0x1375, val)
+
 
     @anlg_win_btm.deleter
     def anlg_win_btm(self):
@@ -255,6 +266,7 @@ class PauseTrigger:
     def anlg_win_coupling(self, val):
         val = val.value
         self._interpreter.set_trig_attribute_int32(self._handle, 0x2237, val)
+
 
     @anlg_win_coupling.deleter
     def anlg_win_coupling(self):
@@ -278,6 +290,7 @@ class PauseTrigger:
     def anlg_win_dig_fltr_enable(self, val):
         self._interpreter.set_trig_attribute_bool(self._handle, 0x2ef5, val)
 
+
     @anlg_win_dig_fltr_enable.deleter
     def anlg_win_dig_fltr_enable(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x2ef5)
@@ -295,6 +308,7 @@ class PauseTrigger:
     @anlg_win_dig_fltr_min_pulse_width.setter
     def anlg_win_dig_fltr_min_pulse_width(self, val):
         self._interpreter.set_trig_attribute_double(self._handle, 0x2ef6, val)
+
 
     @anlg_win_dig_fltr_min_pulse_width.deleter
     def anlg_win_dig_fltr_min_pulse_width(self):
@@ -315,6 +329,7 @@ class PauseTrigger:
     def anlg_win_dig_fltr_timebase_rate(self, val):
         self._interpreter.set_trig_attribute_double(self._handle, 0x2ef8, val)
 
+
     @anlg_win_dig_fltr_timebase_rate.deleter
     def anlg_win_dig_fltr_timebase_rate(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x2ef8)
@@ -332,6 +347,7 @@ class PauseTrigger:
     @anlg_win_dig_fltr_timebase_src.setter
     def anlg_win_dig_fltr_timebase_src(self, val):
         self._interpreter.set_trig_attribute_string(self._handle, 0x2ef7, val)
+
 
     @anlg_win_dig_fltr_timebase_src.deleter
     def anlg_win_dig_fltr_timebase_src(self):
@@ -352,6 +368,7 @@ class PauseTrigger:
     def anlg_win_dig_sync_enable(self, val):
         self._interpreter.set_trig_attribute_bool(self._handle, 0x2ef9, val)
 
+
     @anlg_win_dig_sync_enable.deleter
     def anlg_win_dig_sync_enable(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x2ef9)
@@ -371,6 +388,7 @@ class PauseTrigger:
     def anlg_win_src(self, val):
         self._interpreter.set_trig_attribute_string(self._handle, 0x1373, val)
 
+
     @anlg_win_src.deleter
     def anlg_win_src(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x1373)
@@ -388,6 +406,7 @@ class PauseTrigger:
     @anlg_win_top.setter
     def anlg_win_top(self, val):
         self._interpreter.set_trig_attribute_double(self._handle, 0x1376, val)
+
 
     @anlg_win_top.deleter
     def anlg_win_top(self):
@@ -410,6 +429,7 @@ class PauseTrigger:
         val = val.value
         self._interpreter.set_trig_attribute_int32(self._handle, 0x1374, val)
 
+
     @anlg_win_when.deleter
     def anlg_win_when(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x1374)
@@ -428,6 +448,7 @@ class PauseTrigger:
     def dig_lvl_dig_fltr_enable(self, val):
         self._interpreter.set_trig_attribute_bool(self._handle, 0x2228, val)
 
+
     @dig_lvl_dig_fltr_enable.deleter
     def dig_lvl_dig_fltr_enable(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x2228)
@@ -445,6 +466,7 @@ class PauseTrigger:
     @dig_lvl_dig_fltr_min_pulse_width.setter
     def dig_lvl_dig_fltr_min_pulse_width(self, val):
         self._interpreter.set_trig_attribute_double(self._handle, 0x2229, val)
+
 
     @dig_lvl_dig_fltr_min_pulse_width.deleter
     def dig_lvl_dig_fltr_min_pulse_width(self):
@@ -465,6 +487,7 @@ class PauseTrigger:
     def dig_lvl_dig_fltr_timebase_rate(self, val):
         self._interpreter.set_trig_attribute_double(self._handle, 0x222b, val)
 
+
     @dig_lvl_dig_fltr_timebase_rate.deleter
     def dig_lvl_dig_fltr_timebase_rate(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x222b)
@@ -482,6 +505,7 @@ class PauseTrigger:
     @dig_lvl_dig_fltr_timebase_src.setter
     def dig_lvl_dig_fltr_timebase_src(self, val):
         self._interpreter.set_trig_attribute_string(self._handle, 0x222a, val)
+
 
     @dig_lvl_dig_fltr_timebase_src.deleter
     def dig_lvl_dig_fltr_timebase_src(self):
@@ -502,6 +526,7 @@ class PauseTrigger:
     def dig_lvl_dig_sync_enable(self, val):
         self._interpreter.set_trig_attribute_bool(self._handle, 0x222c, val)
 
+
     @dig_lvl_dig_sync_enable.deleter
     def dig_lvl_dig_sync_enable(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x222c)
@@ -519,6 +544,7 @@ class PauseTrigger:
     @dig_lvl_src.setter
     def dig_lvl_src(self, val):
         self._interpreter.set_trig_attribute_string(self._handle, 0x1379, val)
+
 
     @dig_lvl_src.deleter
     def dig_lvl_src(self):
@@ -539,6 +565,7 @@ class PauseTrigger:
         val = val.value
         self._interpreter.set_trig_attribute_int32(self._handle, 0x1380, val)
 
+
     @dig_lvl_when.deleter
     def dig_lvl_when(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x1380)
@@ -556,6 +583,7 @@ class PauseTrigger:
     @dig_pattern_pattern.setter
     def dig_pattern_pattern(self, val):
         self._interpreter.set_trig_attribute_string(self._handle, 0x2188, val)
+
 
     @dig_pattern_pattern.deleter
     def dig_pattern_pattern(self):
@@ -579,6 +607,7 @@ class PauseTrigger:
         val = val.name
         self._interpreter.set_trig_attribute_string(self._handle, 0x216f, val)
 
+
     @dig_pattern_src.deleter
     def dig_pattern_src(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x216f)
@@ -599,6 +628,7 @@ class PauseTrigger:
     def dig_pattern_when(self, val):
         val = val.value
         self._interpreter.set_trig_attribute_int32(self._handle, 0x2170, val)
+
 
     @dig_pattern_when.deleter
     def dig_pattern_when(self):
@@ -629,6 +659,7 @@ class PauseTrigger:
     def trig_type(self, val):
         val = val.value
         self._interpreter.set_trig_attribute_int32(self._handle, 0x1366, val)
+
 
     @trig_type.deleter
     def trig_type(self):

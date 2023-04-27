@@ -1,6 +1,5 @@
 <%def name="script_property_deleter(attribute)">\
 <%
-        from codegen.utilities.text_wrappers import wrap
         from codegen.utilities.attribute_helpers import get_generic_attribute_function_name
     %>\
     @${attribute.name}.deleter
@@ -15,7 +14,6 @@
         if attribute.python_class_name == "Watchdog":
             function_call_args.append("\"\"")
         function_call_args.append(hex(attribute.id))
-
     %>\
-        self._interpreter.reset_${generic_attribute_func}(${', '.join(function_call_args) | wrap(12)})
+        self._interpreter.reset_${generic_attribute_func}(${', '.join(function_call_args)})
 </%def>

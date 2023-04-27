@@ -1,6 +1,6 @@
 <%def name="script_property_getter(attribute)">\
 <%
-        from codegen.utilities.text_wrappers import wrap, docstring_wrap
+        from codegen.utilities.text_wrappers import docstring_wrap
         from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_mapped_attribute_function_type
     %>\
     @property
@@ -25,7 +25,7 @@
     function_call_args.append(hex(attribute.id))
 %>
 \
-        val = self._interpreter.get_${generic_attribute_func}(${', '.join(function_call_args) | wrap(12)})
+        val = self._interpreter.get_${generic_attribute_func}(${', '.join(function_call_args)})
 \
 ## Script return call.
     %if attribute.bitfield_enum is not None:

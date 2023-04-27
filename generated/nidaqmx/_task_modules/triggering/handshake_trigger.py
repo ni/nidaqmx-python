@@ -34,6 +34,7 @@ class HandshakeTrigger:
         val = val.value
         self._interpreter.set_trig_attribute_int32(self._handle, 0x22b9, val)
 
+
     @interlocked_asserted_lvl.deleter
     def interlocked_asserted_lvl(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x22b9)
@@ -50,6 +51,7 @@ class HandshakeTrigger:
     @interlocked_src.setter
     def interlocked_src(self, val):
         self._interpreter.set_trig_attribute_string(self._handle, 0x22b8, val)
+
 
     @interlocked_src.deleter
     def interlocked_src(self):
@@ -69,6 +71,7 @@ class HandshakeTrigger:
     def trig_type(self, val):
         val = val.value
         self._interpreter.set_trig_attribute_int32(self._handle, 0x22b7, val)
+
 
     @trig_type.deleter
     def trig_type(self):
