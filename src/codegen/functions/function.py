@@ -38,7 +38,10 @@ class Function:
                 if parameter.get("use_in_python_api") is not False and not parameter.get(
                     "proto_only", False
                 ):
-                    if parameter["name"] != "task" and "python_data_type" in parameter:
+                    if (
+                        parameter["name"] != "task"
+                        and parameter.get("python_data_type") is not None
+                    ):
                         self._parameters.append(function_parameter)
                         if parameter["direction"] == "out":
                             self._output_parameters.append(self._parameters[-1])
@@ -138,6 +141,11 @@ class Function:
     def is_python_codegen_method(self):
         """bool: Defines if the function is a python codegen function."""
         return self._is_python_codegen_method
+
+    @property
+    def is_init_method(self):
+        """bool: Defines if the method is an init method."""
+        return self._is_init_method
 
     @property
     def is_init_method(self):

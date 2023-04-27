@@ -4,6 +4,7 @@ import re
 from copy import deepcopy
 
 from codegen.functions.function import Function
+from codegen.utilities.function_helpers import to_param_argtype
 from codegen.utilities.helpers import camel_to_snake_case
 
 # This custom regex list doesn't split the string before the number.
@@ -241,10 +242,13 @@ def get_output_params(func):
 def get_return_values(func):
     """Gets the values to add to return statement of the function."""
     return_values = []
-    is_read_write_function = is_custom_read_write_function(func)
-
     for param in get_interpreter_output_params(func):
-        if param.ctypes_data_type == "ctypes.c_char_p":
+        is_read_write_function = is_custom_read_write_function(func)
+        if param.repeating_argument:
+            return_values.append(
+                f"[{param.parameter_name}_element.value for {param.parameter_name}_element in {param.parameter_name}]"
+            )
+        elif param.ctypes_data_type == "ctypes.c_char_p":
             return_values.append(f"{param.parameter_name}.value.decode('ascii')")
         elif param.is_list:
             if is_read_write_function:
@@ -262,6 +266,8 @@ def get_c_function_call_template(func):
     """Gets the template to use for generating the logic of calling the c functions."""
     if func.stream_response:
         return "/event_function_call.py.mako"
+    elif any(get_varargs_parameters(func)):
+        return "/exec_cdecl_c_function_call.py.mako"
     elif has_parameter_with_ivi_dance_size_mechanism(func):
         return "/double_c_function_call.py.mako"
     return "/default_c_function_call.py.mako"
