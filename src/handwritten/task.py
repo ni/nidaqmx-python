@@ -79,7 +79,8 @@ class Task:
                 f'Unsupported session name: "{grpc_options.session_name}". If a session name is specified, it must match the task name.',
                 DAQmxErrors.UNKNOWN,
                 task_name=self.name)
-
+        
+        self._interpreter = utils._select_interpreter(grpc_options)
         self._handle = self._interpreter.create_task(new_task_name)
 
         self._initialize(self._handle, self._interpreter)
