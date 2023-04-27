@@ -1,20 +1,26 @@
 <%page args="function"/>\
 <%
-    from codegen.utilities.interpreter_helpers import generate_interpreter_function_call_args, get_output_param_with_ivi_dance_mechanism 
+    from codegen.utilities.interpreter_helpers import generate_interpreter_function_call_args, get_output_param_with_ivi_dance_mechanism, get_output_params 
     from codegen.utilities.function_helpers import get_arguments_type, instantiate_explicit_output_param
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
 %>\
         cfunc = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
 \
 ## Create argument ctypes types list.
+%if function.calling_convention == 'StdCall':
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         ${', '.join(get_arguments_type(function)) | wrap(24, 24)}]
+%else:
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ${', '.join(get_arguments_type(function)) | wrap(16, 16)}]
+%endif
 <%
     function_call_args = generate_interpreter_function_call_args(function)
-    explicit_output_param = get_output_param_with_ivi_dance_mechanism(function.output_parameters)
+    explicit_output_param = get_output_param_with_ivi_dance_mechanism(function)
 %>
         temp_size = 0
         while True:

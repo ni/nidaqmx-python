@@ -1311,23 +1311,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_power_binary_i16(
-            self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def read_power_f64(
-            self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def read_power_scalar_f64(self, task, timeout):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def read_raw(self, task, num_samps_per_chan, timeout, array_size_in_bytes):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1824,10 +1808,6 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def write_raw(self, task, num_samps, auto_start, timeout, write_array):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def write_to_teds_from_array(
             self, physical_channel, bit_stream, basic_teds_options):
         raise NotImplementedError
@@ -1835,4 +1815,24 @@ class BaseInterpreter(abc.ABC):
     @abc.abstractmethod
     def write_to_teds_from_file(
             self, physical_channel, file_path, basic_teds_options):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def read_power_binary_i16(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_voltage_array, 
+            read_current_array):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def read_power_f64(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_voltage_array, 
+            read_current_array):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def read_raw(self, task, num_samps_per_chan, timeout, read_array):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def write_raw(self, task, num_samps_per_chan, auto_start, timeout, numpy_array):
         raise NotImplementedError

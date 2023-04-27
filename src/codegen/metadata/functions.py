@@ -12277,7 +12277,6 @@ functions = {
             },
             {
                 'cppName': 'initializationBehavior',
-                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'nidevice_grpc.SessionInitializationBehavior',
                 'name': 'initializationBehavior',
@@ -12287,12 +12286,11 @@ functions = {
             },
             {
                 'cppName': 'newSessionInitialized',
-                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'out',
                 'grpc_type': 'bool',
                 'name': 'newSessionInitialized',
                 'proto_only': True,
-                'python_data_type': None,
+                'python_data_type': 'bool',
                 'type': 'bool'
             }
         ],
@@ -12348,6 +12346,7 @@ functions = {
                 'is_compound_type': True,
                 'max_length': 96,
                 'name': 'expStates',
+                'proto_only': True,
                 'repeated_var_args': True
             },
             {
@@ -12423,7 +12422,6 @@ functions = {
             },
             {
                 'cppName': 'initializationBehavior',
-                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'nidevice_grpc.SessionInitializationBehavior',
                 'name': 'initializationBehavior',
@@ -12433,12 +12431,11 @@ functions = {
             },
             {
                 'cppName': 'newSessionInitialized',
-                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'out',
                 'grpc_type': 'bool',
                 'name': 'newSessionInitialized',
                 'proto_only': True,
-                'python_data_type': None,
+                'python_data_type': 'bool',
                 'type': 'bool'
             }
         ],
@@ -12769,22 +12766,22 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'in',
                 'grpc_type': 'repeated AnalogPowerUpChannelAndType',
                 'is_compound_type': True,
                 'max_length': 96,
                 'name': 'channels',
-                'python_data_type': None,
+                'proto_only': True,
+                'python_data_type': 'object',
                 'repeated_var_args': True
             },
             {
-                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'out',
                 'grpc_type': 'repeated double',
                 'max_length': 96,
                 'name': 'powerUpStates',
-                'python_data_type': None,
+                'proto_only': True,
+                'python_data_type': 'object',
                 'repeated_var_args': True
             }
         ],
@@ -12960,7 +12957,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -13103,7 +13100,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -13371,7 +13368,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -13731,21 +13728,21 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'in',
                 'grpc_type': 'repeated string',
                 'max_length': 96,
                 'name': 'channelName',
-                'python_data_type': None,
+                'proto_only': True,
+                'python_data_type': 'object',
                 'repeated_var_args': True
             },
             {
-                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'out',
                 'grpc_type': 'repeated PowerUpStates',
                 'max_length': 96,
                 'name': 'powerUpStates',
-                'python_data_type': None,
+                'proto_only': True,
+                'python_data_type': 'object',
                 'repeated_var_args': True
             }
         ],
@@ -13783,21 +13780,21 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'in',
                 'grpc_type': 'repeated string',
                 'max_length': 96,
                 'name': 'channelName',
-                'python_data_type': None,
+                'proto_only': True,
+                'python_data_type': 'object',
                 'repeated_var_args': True
             },
             {
-                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'out',
                 'grpc_type': 'repeated ResistorState',
                 'max_length': 96,
                 'name': 'pullUpPullDownStates',
-                'python_data_type': None,
+                'proto_only': True,
+                'python_data_type': 'object',
                 'repeated_var_args': True
             }
         ],
@@ -13885,7 +13882,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -14268,7 +14265,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -14344,7 +14341,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -14415,7 +14412,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -14491,7 +14488,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -14530,7 +14527,7 @@ functions = {
                 'direction': 'out',
                 'is_list': True,
                 'name': 'value',
-                'python_data_type': None,
+                'python_data_type': 'object',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'size'
@@ -14865,7 +14862,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -15086,7 +15083,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -15496,7 +15493,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -15612,7 +15609,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -15689,7 +15686,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -15871,7 +15868,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'out',
                 'name': 'value',
-                'python_data_type': None,
+                'python_data_type': 'object',
                 'type': 'CVIAbsoluteTime'
             }
         ],
@@ -16071,7 +16068,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'out',
                 'name': 'value',
-                'python_data_type': None,
+                'python_data_type': 'object',
                 'type': 'CVIAbsoluteTime'
             }
         ],
@@ -16173,7 +16170,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -16421,7 +16418,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'out',
                 'name': 'value',
-                'python_data_type': None,
+                'python_data_type': 'object',
                 'type': 'CVIAbsoluteTime'
             }
         ],
@@ -16495,7 +16492,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -16667,7 +16664,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'out',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -16929,7 +16926,6 @@ functions = {
             },
             {
                 'cppName': 'initializationBehavior',
-                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'nidevice_grpc.SessionInitializationBehavior',
                 'name': 'initializationBehavior',
@@ -16939,12 +16935,11 @@ functions = {
             },
             {
                 'cppName': 'newSessionInitialized',
-                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'out',
                 'grpc_type': 'bool',
                 'name': 'newSessionInitialized',
                 'proto_only': True,
-                'python_data_type': None,
+                'python_data_type': 'bool',
                 'type': 'bool'
             }
         ],
@@ -19444,43 +19439,63 @@ functions = {
     },
     'ResetBufferAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'BufferAttribute',
                 'name': 'attribute',
+                'python_data_type': 'int',
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetChanAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
                 'name': 'channel',
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
                 'name': 'attribute',
+                'python_data_type': 'int',
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetDevice': {
@@ -19509,6 +19524,11 @@ functions = {
     },
     'ResetExportedSignalAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -19532,11 +19552,16 @@ functions = {
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetReadAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -19560,29 +19585,43 @@ functions = {
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetRealTimeAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'RealTimeAttribute',
                 'name': 'attribute',
+                'python_data_type': 'int',
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetTimingAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -19606,11 +19645,16 @@ functions = {
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetTimingAttributeEx': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -19644,11 +19688,16 @@ functions = {
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetTrigAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -19672,11 +19721,16 @@ functions = {
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetWatchdogAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -19710,11 +19764,16 @@ functions = {
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'ResetWriteAttribute': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -19738,7 +19797,7 @@ functions = {
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'SaveGlobalChan': {
@@ -19994,13 +20053,13 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'in',
                 'grpc_type': 'repeated AnalogPowerUpChannelsAndState',
                 'is_compound_type': True,
                 'max_length': 96,
                 'name': 'powerUpStates',
-                'python_data_type': None,
+                'proto_only': True,
+                'python_data_type': 'object',
                 'repeated_var_args': True
             }
         ],
@@ -20130,7 +20189,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -20262,7 +20321,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -20553,13 +20612,13 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'in',
                 'grpc_type': 'repeated DigitalPowerUpChannelsAndState',
                 'is_compound_type': True,
                 'max_length': 96,
                 'name': 'powerUpStates',
-                'python_data_type': None,
+                'proto_only': True,
+                'python_data_type': 'object',
                 'repeated_var_args': True
             }
         ],
@@ -20597,13 +20656,13 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'in',
                 'grpc_type': 'repeated DigitalPullUpPullDownChannelsAndState',
                 'is_compound_type': True,
                 'max_length': 96,
                 'name': 'pullUpPullDownStates',
-                'python_data_type': None,
+                'proto_only': True,
+                'python_data_type': 'object',
                 'repeated_var_args': True
             }
         ],
@@ -20636,7 +20695,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -20828,7 +20887,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -21038,7 +21097,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -21309,7 +21368,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -21386,7 +21445,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -21557,7 +21616,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'in',
                 'name': 'value',
-                'python_data_type': None,
+                'python_data_type': 'object',
                 'type': 'CVIAbsoluteTime'
             }
         ],
@@ -21746,7 +21805,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'in',
                 'name': 'value',
-                'python_data_type': None,
+                'python_data_type': 'object',
                 'type': 'CVIAbsoluteTime'
             }
         ],
@@ -21848,7 +21907,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -22085,7 +22144,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_void_p',
                 'direction': 'in',
                 'name': 'value',
-                'python_data_type': None,
+                'python_data_type': 'object',
                 'type': 'CVIAbsoluteTime'
             }
         ],
@@ -22159,7 +22218,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'name': 'value',
                 'python_data_type': 'bool',
@@ -22320,7 +22379,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_bool32',
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'name': 'value',
                 'python_data_type': 'bool',

@@ -1,8 +1,10 @@
 """This contains the helper methods used in interpreter generation."""
+import collections
 import re
 from copy import deepcopy
 
 from codegen.functions.function import Function
+from codegen.utilities.function_helpers import to_param_argtype
 from codegen.utilities.helpers import camel_to_snake_case
 
 # This custom regex list doesn't split the string before the number.
@@ -32,6 +34,16 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetFirstSampClkWhen",
     "SetStartTrigTrigWhen",
     "SetSyncPulseTimeWhen",
+    "ReadPowerBinaryI16",
+    "ReadPowerF64",
+    "ReadRaw",
+    "WriteRaw",
+]
+
+LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
+    "RegisterSignalEvent",
+    "RegisterEveryNSamplesEvent",
+    "RegisterDoneEvent",
 ]
 
 
@@ -61,35 +73,41 @@ def get_interpreter_functions(metadata):
 
 def generate_interpreter_function_call_args(function_metadata):
     """Gets function call arguments."""
+    # This implementation assumes that an array parameter is immediately followed
+    # by the array size when making the c function call.
     function_call_args = []
-    size_value = []
-    size_param_index = None
+    size_values = {}
+    SizeParameter = collections.namedtuple("SizeParameter", ["name", "size"])
     for param in function_metadata.interpreter_parameters:
-        ## Deleting repeated size parameters
         if param.has_explicit_buffer_size:
-            if size_value == param.size.value:
-                del function_call_args[size_param_index]
-
-        if param.direction == "in":
-            function_call_args.append(param.parameter_name)
-            if param.has_explicit_buffer_size:
-                function_call_args.append(f"len({param.parameter_name})")
-                size_value = param.size.value
-                size_param_index = len(function_call_args) - 1
-        else:
-            if param.has_explicit_buffer_size:
-                function_call_args.append(param.parameter_name)
+            if param.direction == "in":
+                size_values[param.size.value] = SizeParameter(
+                    param.parameter_name, f"len({param.parameter_name})"
+                )
+            elif param.direction == "out":
+                if param.size.mechanism == "ivi-dance":
+                    size_values[param.size.value] = SizeParameter(param.parameter_name, "temp_size")
                 if (
                     is_custom_read_write_function(function_metadata)
                     and param.size.mechanism == "passed-in"
                 ):
-                    function_call_args.append(f"{param.parameter_name}.size")
-                elif param.size.mechanism == "ivi-dance":
-                    function_call_args.append("temp_size")
-                size_value = param.size.value
-                size_param_index = len(function_call_args) - 1
+                    size_values[param.size.value] = SizeParameter(
+                        param.parameter_name, f"{param.parameter_name}.size"
+                    )
+
+    for param in function_metadata.interpreter_parameters:
+        if param.direction == "in":
+            function_call_args.append(param.parameter_name)
+        elif param.direction == "out":
+            if param.has_explicit_buffer_size:
+                function_call_args.append(param.parameter_name)
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
+        if param.has_explicit_buffer_size:
+            if param.size.value in size_values:
+                size_parameter = size_values[param.size.value]
+                if param.parameter_name == size_parameter.name:
+                    function_call_args.append(size_parameter.size)
 
     # C function call for reserved parameter for read/write function is passed as None.
     if function_metadata.python_codegen_method == "CustomCode_Read_Write":
@@ -115,8 +133,12 @@ def get_instantiation_lines_for_output(func):
     instantiation_lines = []
     if func.is_init_method:
         instantiation_lines.append(f"task = lib_importer.task_handle(0)")
-    for param in func.output_parameters:
-        if param.has_explicit_buffer_size:
+    for param in get_interpreter_output_params(func):
+        if param.parameter_name == "task":
+            continue
+        elif param.repeating_argument:
+            instantiation_lines.append(f"{param.parameter_name} = []")
+        elif param.has_explicit_buffer_size:
             if is_custom_read_write_function(func) and param.size.mechanism == "passed-in":
                 continue
             if (
@@ -133,6 +155,41 @@ def get_instantiation_lines_for_output(func):
         else:
             instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
     return instantiation_lines
+
+
+def get_instantiation_lines_for_varargs(func):
+    """Gets instantiation lines for functions with variable arguments."""
+    instantiation_lines = []
+    if any(get_varargs_parameters(func)):
+        for param in func.output_parameters:
+            instantiation_lines.append(
+                f"{param.parameter_name}_element = {param.ctypes_data_type}()"
+            )
+            instantiation_lines.append(
+                f"{param.parameter_name}.append({param.parameter_name}_element)"
+            )
+    return instantiation_lines
+
+
+def get_argument_definition_lines_for_varargs(varargs_params):
+    """Gets the lines for defining the variable arguments for a function."""
+    argument_definition_lines = []
+    for param in varargs_params:
+        argtype = to_param_argtype(param)
+        if param.direction == "in":
+            argument_definition_lines.append(f"args.append({param.parameter_name}[index])")
+        else:
+            argument_definition_lines.append(
+                f"args.append(ctypes.byref({param.parameter_name}_element))"
+            )
+        argument_definition_lines.append(f"argtypes.append({argtype})")
+        argument_definition_lines.append("")
+    return argument_definition_lines
+
+
+def get_varargs_parameters(func):
+    """Gets variable arguments of a function."""
+    return [p for p in func.parameters if p.repeating_argument]
 
 
 def get_interpreter_params(func):
@@ -187,15 +244,14 @@ def get_skippable_params_for_interpreter_func(func):
 def is_skippable_param(param: dict) -> bool:
     """Checks whether the parameter can be skipped or not while generating interpreter."""
     ignored_params = ["size", "reserved"]
-    if (not param.get("include_in_proto", True) and (param["name"] in ignored_params)) or param.get(
-        "proto_only"
-    ):
+    if not param.get("include_in_proto", True) and (param["name"] in ignored_params):
         return True
     return False
 
 
-def get_output_param_with_ivi_dance_mechanism(output_parameters):
+def get_output_param_with_ivi_dance_mechanism(func):
     """Gets the output parameters with explicit buffer size."""
+    output_parameters = get_output_params(func)
     explicit_output_params = [p for p in output_parameters if p.has_explicit_buffer_size]
     params_with_ivi_dance_mechanism = [
         p for p in explicit_output_params if p.size.mechanism == "ivi-dance"
@@ -220,7 +276,7 @@ def get_output_param_with_ivi_dance_mechanism(output_parameters):
 
 def has_parameter_with_ivi_dance_size_mechanism(func):
     """Returns true if the function has a parameter with ivi dance size mechanism."""
-    parameter_with_size_buffer = get_output_param_with_ivi_dance_mechanism(func.output_parameters)
+    parameter_with_size_buffer = get_output_param_with_ivi_dance_mechanism(func)
     return parameter_with_size_buffer is not None
 
 
@@ -229,24 +285,37 @@ def is_custom_read_write_function(func):
     return func.python_codegen_method == "CustomCode_Read_Write"
 
 
+def get_interpreter_output_params(func):
+    """Gets the output parameters for the functions in interpreter."""
+    return [p for p in func.interpreter_parameters if p.direction == "out"]
+
+
 def is_custom_read_function(func):
     """Returns True if the function is a read function."""
     return func.python_codegen_method == "CustomCode_Read_Write" and "read_" in func.function_name
 
 
 def get_output_params(func) -> list:
-    """Gets ouput parameters for the function."""
+    """Gets output parameters for the function."""
     return list(p for p in func.base_parameters if p.direction == "out")
 
 
 def get_return_values(func):
     """Gets the values to add to return statement of the function."""
     return_values = []
-    for param in func.output_parameters:
-        if param.ctypes_data_type == "ctypes.c_char_p":
+    for param in get_interpreter_output_params(func):
+        is_read_write_function = is_custom_read_write_function(func)
+        if param.repeating_argument:
+            return_values.append(
+                f"[{param.parameter_name}_element.value for {param.parameter_name}_element in {param.parameter_name}]"
+            )
+        elif param.ctypes_data_type == "ctypes.c_char_p":
             return_values.append(f"{param.parameter_name}.value.decode('ascii')")
         elif param.is_list:
-            return_values.append(f"{param.parameter_name}.tolist()")
+            if is_read_write_function:
+                return_values.append(param.parameter_name)
+            else:
+                return_values.append(f"{param.parameter_name}.tolist()")
         elif param.type == "TaskHandle":
             return_values.append(param.parameter_name)
         else:
@@ -258,6 +327,8 @@ def get_c_function_call_template(func):
     """Gets the template to use for generating the logic of calling the c functions."""
     if func.stream_response:
         return "/event_function_call.py.mako"
+    elif any(get_varargs_parameters(func)):
+        return "/exec_cdecl_c_function_call.py.mako"
     elif has_parameter_with_ivi_dance_size_mechanism(func):
         return "/double_c_function_call.py.mako"
     return "/default_c_function_call.py.mako"
@@ -266,6 +337,44 @@ def get_c_function_call_template(func):
 def get_callback_param_data_types(params):
     """Gets the data types for call back function parameters."""
     return [p["ctypes_data_type"] for p in params]
+
+
+def get_compound_parameter(params):
+    """Returns the compound parameter associated with the given function."""
+    return next((x for x in params if x.is_compound_type), None)
+
+
+def get_input_arguments_for_compound_params(func):
+    """Returns a list of input parameter for creating the compound parameter."""
+    compound_params = []
+    if any(x for x in func.base_parameters if x.is_compound_type):
+        for parameter in func.base_parameters:
+            if parameter.direction == "in" and parameter.repeating_argument:
+                compound_params.append(parameter.parameter_name)
+    return compound_params
+
+
+def create_compound_parameter_request(func):
+    """Gets the input parameters for createing the compound type parameter."""
+    parameters = []
+    compound_parameter_type = ""
+    for parameter in func.base_parameters:
+        if parameter.direction == "in" and parameter.repeated_var_args:
+            compound_parameter_type = parameter.grpc_type.replace("repeated ", "")
+            break
+
+    for parameter in get_input_arguments_for_compound_params(func):
+        parameters.append(f"{parameter}={parameter}[index]")
+    return f"grpc_types.{compound_parameter_type}(" + ", ".join(parameters) + ")"
+
+
+def get_response_parameters(output_parameters: list):
+    """Gets the list of parameters in grpc response."""
+    response_parameters = []
+    for parameter in output_parameters:
+        if not parameter.repeating_argument:
+            response_parameters.append(f"response.{parameter.parameter_name}")
+    return ", ".join(response_parameters)
 
 
 def get_compound_parameter(params):

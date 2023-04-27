@@ -47,7 +47,7 @@ class LibraryInterpreter(BaseInterpreter):
     instantiation_lines = get_instantiation_lines_for_output(func)
     %>\
 \
-%if func.is_python_codegen_method and func.calling_convention == "StdCall":
+%if func.is_python_codegen_method:
     %if len(instantiation_lines) > 0:
         %for instantiation_line in instantiation_lines:
         ${instantiation_line}
@@ -64,9 +64,10 @@ class LibraryInterpreter(BaseInterpreter):
 %endif
 %endfor
 
-    def read_power_i16(
-            task, read_voltage_array, read_current_array, num_samps_per_chan,
-            timeout, fill_mode):
+    ## The metadata for 'read_power_binary_i16' function is not available in daqmxAPISharp.json file.  
+    def read_power_binary_i16(
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            read_voltage_array, read_current_array):
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadPowerBinaryI16
@@ -89,9 +90,10 @@ class LibraryInterpreter(BaseInterpreter):
 
         return samps_per_chan_read.value
 
+    ## The metadata for 'read_power_f64' function is not available in daqmxAPISharp.json file. 
     def read_power_f64(
-            task, read_voltage_array, read_current_array, num_samps_per_chan,
-            timeout, fill_mode):
+            self, task, num_samps_per_chan, timeout, fill_mode, 
+            read_voltage_array, read_current_array):
         samps_per_chan_read = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxReadPowerF64
@@ -112,7 +114,10 @@ class LibraryInterpreter(BaseInterpreter):
             ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
-    def read_raw(task, read_array, num_samps_per_chan, timeout):
+        return samps_per_chan_read.value
+
+    ## The datatype of 'read_array' is incorrect in daqmxAPISharp.json file.
+    def read_raw(self, task, num_samps_per_chan, timeout, read_array):
         samples_read = ctypes.c_int()
         number_of_bytes_per_sample = ctypes.c_int()
 
@@ -134,8 +139,9 @@ class LibraryInterpreter(BaseInterpreter):
 
         return samples_read.value, number_of_bytes_per_sample.value
 
+    ## The datatype of 'write_array' is incorrect in daqmxAPISharp.json file.
     def write_raw(
-            task_handle, num_samps_per_chan, numpy_array, auto_start, timeout):
+            self, task_handle, num_samps_per_chan, auto_start, timeout, numpy_array):
         samps_per_chan_written = ctypes.c_int()
 
         cfunc = lib_importer.windll.DAQmxWriteRaw
