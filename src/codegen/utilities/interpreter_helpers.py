@@ -1,4 +1,5 @@
 """This contains the helper methods used in interpreter generation."""
+import collections
 import re
 from copy import deepcopy
 
@@ -61,26 +62,34 @@ def get_interpreter_functions(metadata):
 
 def generate_interpreter_function_call_args(function_metadata):
     """Gets function call arguments."""
+    # This implementation assumes that an array parameter is immediately followed
+    # by the array size when making the c function call.
     function_call_args = []
-    for param in function_metadata.base_parameters:
+    size_values = {}
+    SizeParameter = collections.namedtuple("SizeParameter", ["name", "size"])
+    for param in function_metadata.interpreter_parameters:
+        if param.has_explicit_buffer_size:
+            if param.direction == "in":
+                size_values[param.size.value] = SizeParameter(
+                    param.parameter_name, f"len({param.parameter_name})"
+                )
+            elif param.direction == "out":
+                if param.size.mechanism == "ivi-dance":
+                    size_values[param.size.value] = SizeParameter(param.parameter_name, "temp_size")
+
+    for param in function_metadata.interpreter_parameters:
         if param.direction == "in":
             function_call_args.append(param.parameter_name)
+        elif param.direction == "out":
             if param.has_explicit_buffer_size:
-                function_call_args.append(f"len({param.parameter_name})")
-        else:
-            if param.has_explicit_buffer_size:
-                if param.size.mechanism == "ivi-dance":
-                    function_call_args.append(param.parameter_name)
-                    function_call_args.append("temp_size")
-                elif (
-                    param.size.mechanism == "passed-in"
-                    or param.size.mechanism == "passed-in-by-ptr"
-                    or param.size.mechanism == "custom-code"
-                ):
-                    function_call_args.append(f"ctypes.byref({param.parameter_name})")
+                function_call_args.append(param.parameter_name)
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
-
+        if param.has_explicit_buffer_size:
+            if param.size.value in size_values:
+                size_parameter = size_values[param.size.value]
+                if param.parameter_name == size_parameter.name:
+                    function_call_args.append(size_parameter.size)
     return function_call_args
 
 
@@ -96,9 +105,34 @@ def get_interpreter_parameter_signature(is_python_factory, params):
     return ", ".join(params_with_defaults)
 
 
+def get_instantiation_lines_for_output(func):
+    """Gets the lines of code for instantiation of output values."""
+    instantiation_lines = []
+    if func.is_init_method:
+        instantiation_lines.append(f"task = lib_importer.task_handle(0)")
+    for param in get_interpreter_output_params(func):
+        if param.parameter_name == "task":
+            continue
+        elif param.has_explicit_buffer_size:
+            if (
+                param.size.mechanism == "passed-in" or param.size.mechanism == "passed-in-by-ptr"
+            ) and param.is_list:
+                instantiation_lines.append(
+                    f"{param.parameter_name} = numpy.zeros({param.size.value}, dtype={param.ctypes_data_type})"
+                )
+            elif param.size.mechanism == "custom-code":
+                instantiation_lines.append(f"size = {param.size.value}")
+                instantiation_lines.append(
+                    f"{param.parameter_name} = numpy.zeros(size, dtype={param.ctypes_data_type})"
+                )
+        else:
+            instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
+    return instantiation_lines
+
+
 def get_interpreter_params(func):
     """Gets interpreter parameters for the function."""
-    return (p for p in func.base_parameters if p.direction == "in")
+    return (p for p in func.interpreter_parameters if p.direction == "in")
 
 
 def get_grpc_interpreter_call_params(func, params):
@@ -131,15 +165,14 @@ def get_skippable_params_for_interpreter_func(func):
 def is_skippable_param(param: dict) -> bool:
     """Checks whether the parameter can be skipped or not while generating interpreter."""
     ignored_params = ["size", "reserved"]
-    if (not param.get("include_in_proto", True) and (param["name"] in ignored_params)) or param.get(
-        "proto_only"
-    ):
+    if not param.get("include_in_proto", True) and (param["name"] in ignored_params):
         return True
     return False
 
 
-def get_output_param_with_ivi_dance_mechanism(output_parameters):
+def get_output_param_with_ivi_dance_mechanism(func):
     """Gets the output parameters with explicit buffer size."""
+    output_parameters = get_output_params(func)
     explicit_output_params = [p for p in output_parameters if p.has_explicit_buffer_size]
     params_with_ivi_dance_mechanism = [
         p for p in explicit_output_params if p.size.mechanism == "ivi-dance"
@@ -164,20 +197,24 @@ def get_output_param_with_ivi_dance_mechanism(output_parameters):
 
 def has_parameter_with_ivi_dance_size_mechanism(func):
     """Returns true if the function has a parameter with ivi dance size mechanism."""
-    parameter_with_size_buffer = get_output_param_with_ivi_dance_mechanism(func.output_parameters)
+    parameter_with_size_buffer = get_output_param_with_ivi_dance_mechanism(func)
     return parameter_with_size_buffer is not None
 
 
-def get_output_params(func) -> list:
-    """Gets ouput parameters for the function."""
-    return list(p for p in func.base_parameters if p.direction == "out")
+def get_interpreter_output_params(func):
+    """Gets the output parameters for the functions in interpreter."""
+    return [p for p in func.interpreter_parameters if p.direction == "out"]
+
+
+def get_output_params(func):
+    """Gets output parameters for the function."""
+    return [p for p in func.base_parameters if p.direction == "out"]
 
 
 def get_return_values(func):
     """Gets the values to add to return statement of the function."""
-    output_parameters = get_output_params(func)
     return_values = []
-    for param in output_parameters:
+    for param in get_interpreter_output_params(func):
         if param.ctypes_data_type == "ctypes.c_char_p":
             return_values.append(f"{param.parameter_name}.value.decode('ascii')")
         elif param.is_list:

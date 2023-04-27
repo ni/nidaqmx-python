@@ -7,13 +7,11 @@
         cfunc = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
 \
 ## Create argument ctypes types list.
-    %if function.calling_convention == 'StdCall':
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         ${', '.join(get_arguments_type(function)) | wrap(24, 24)}]
-    %endif
 <%
     function_call_args = generate_interpreter_function_call_args(function)
 %>\
