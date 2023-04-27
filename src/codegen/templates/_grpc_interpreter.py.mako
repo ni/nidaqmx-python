@@ -29,12 +29,41 @@ class GrpcStubInterpreter(BaseInterpreter):
     def _invoke(self, func, request, metadata=None):
         try:
             response = func(request, metadata=metadata)
-            error_code = response.status
-            error_message = ''
-        #Todo: AB#2325876: The error handling logic will be updated.
         except grpc.RpcError as rpc_error:
-            raise rpc_error
+            error_code = -1
+            error_message = rpc_error.details()
+            samps_per_chan_read = None
+            samps_per_chan_written = None
+            for entry in rpc_error.trailing_metadata() or []:
+                if entry.key == 'ni-error':
+                    value = entry.value if isinstance(entry.value, str) else entry.value.decode('utf-8')
+                    try:
+                        error_code = int(value)
+                    except ValueError:
+                        error_message += f'\nError status: {value}'
+                if entry.key == "samps_per_chan_read":
+                    samps_per_chan_read = entry.value
+                if entry.key == "samps_per_chan_written":
+                    samps_per_chan_written = entry.value
+            grpc_error = rpc_error.code()
+            if grpc_error == grpc.StatusCode.UNAVAILABLE:
+                error_message = 'Failed to connect to server'
+            elif grpc_error == grpc.StatusCode.UNIMPLEMENTED:
+                error_message = (
+                    'This operation is not supported by the NI gRPC Device Server being used. Upgrade NI gRPC Device Server.'
+                )
+            self.raise_error(error_code, error_message, samps_per_chan_written, samps_per_chan_read)
         return response
+
+    def raise_error(self, error_code, error_message, samps_per_chan_written=None, samps_per_chan_read=None):
+        if error_code < 0:
+            if samps_per_chan_read is not None:
+                raise errors.DaqReadError(error_message, error_code, samps_per_chan_read) from None
+            elif samps_per_chan_written is not None:
+                raise errors.DaqWriteError(error_message, error_code, samps_per_chan_written) from None
+            else:
+                raise errors.DaqError(error_message, error_code) from None
+
 % for func in functions:
 <%
     params = get_interpreter_params(func)
