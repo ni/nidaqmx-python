@@ -239,7 +239,7 @@ class StartTrigger:
     @anlg_multi_edge_couplings.setter
     def anlg_multi_edge_couplings(self, val):
         val = numpy.int32([e.value for e in val])
-        self._interpreter.set_trig_attribute_int32_array(self._handle, 0x3125, val, len(val))
+        self._interpreter.set_trig_attribute_int32_array(self._handle, 0x3125, val)
 
     @anlg_multi_edge_couplings.deleter
     def anlg_multi_edge_couplings(self):
@@ -269,7 +269,7 @@ class StartTrigger:
     @anlg_multi_edge_hysts.setter
     def anlg_multi_edge_hysts(self, val):
         val = numpy.float64(val)
-        self._interpreter.set_trig_attribute_double_array(self._handle, 0x3124, val, len(val))
+        self._interpreter.set_trig_attribute_double_array(self._handle, 0x3124, val)
 
     @anlg_multi_edge_hysts.deleter
     def anlg_multi_edge_hysts(self):
@@ -291,7 +291,7 @@ class StartTrigger:
     @anlg_multi_edge_lvls.setter
     def anlg_multi_edge_lvls(self, val):
         val = numpy.float64(val)
-        self._interpreter.set_trig_attribute_double_array(self._handle, 0x3123, val, len(val))
+        self._interpreter.set_trig_attribute_double_array(self._handle, 0x3123, val)
 
     @anlg_multi_edge_lvls.deleter
     def anlg_multi_edge_lvls(self):
@@ -314,7 +314,7 @@ class StartTrigger:
     @anlg_multi_edge_slopes.setter
     def anlg_multi_edge_slopes(self, val):
         val = numpy.int32([e.value for e in val])
-        self._interpreter.set_trig_attribute_int32_array(self._handle, 0x3122, val, len(val))
+        self._interpreter.set_trig_attribute_int32_array(self._handle, 0x3122, val)
 
     @anlg_multi_edge_slopes.deleter
     def anlg_multi_edge_slopes(self):

@@ -166,7 +166,7 @@ class Scale:
     @poly_forward_coeff.setter
     def poly_forward_coeff(self, val):
         val = numpy.float64(val)
-        self._interpreter.set_scale_attribute_double_array(self._name, 0x1234, val, len(val))
+        self._interpreter.set_scale_attribute_double_array(self._name, 0x1234, val)
 
     @property
     def poly_reverse_coeff(self):
@@ -184,7 +184,7 @@ class Scale:
     @poly_reverse_coeff.setter
     def poly_reverse_coeff(self, val):
         val = numpy.float64(val)
-        self._interpreter.set_scale_attribute_double_array(self._name, 0x1235, val, len(val))
+        self._interpreter.set_scale_attribute_double_array(self._name, 0x1235, val)
 
     @property
     def pre_scaled_units(self):
@@ -238,7 +238,7 @@ class Scale:
     @table_pre_scaled_vals.setter
     def table_pre_scaled_vals(self, val):
         val = numpy.float64(val)
-        self._interpreter.set_scale_attribute_double_array(self._name, 0x1237, val, len(val))
+        self._interpreter.set_scale_attribute_double_array(self._name, 0x1237, val)
 
     @property
     def table_scaled_vals(self):
@@ -253,7 +253,7 @@ class Scale:
     @table_scaled_vals.setter
     def table_scaled_vals(self, val):
         val = numpy.float64(val)
-        self._interpreter.set_scale_attribute_double_array(self._name, 0x1236, val, len(val))
+        self._interpreter.set_scale_attribute_double_array(self._name, 0x1236, val)
 
     @staticmethod
     def calculate_reverse_poly_coeff(
