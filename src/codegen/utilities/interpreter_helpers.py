@@ -34,16 +34,13 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetFirstSampClkWhen",
     "SetStartTrigTrigWhen",
     "SetSyncPulseTimeWhen",
-    "ReadPowerBinaryI16",
-    "ReadPowerF64",
-    "ReadRaw",
-    "WriteRaw",
 ]
 
 LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
-    "RegisterSignalEvent",
-    "RegisterEveryNSamplesEvent",
-    "RegisterDoneEvent",
+    "read_power_binary_i16",
+    "read_power_f64",
+    "read_raw",
+    "write_raw",
 ]
 
 
