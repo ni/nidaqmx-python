@@ -190,6 +190,7 @@ class OutStream:
     def offset(self, val):
         self._interpreter.set_write_attribute_int32(self._handle, 0x190d, val)
 
+
     @offset.deleter
     def offset(self):
         self._interpreter.reset_write_attribute(self._handle, 0x190d)
@@ -239,6 +240,7 @@ class OutStream:
     def output_buf_size(self, val):
         self._interpreter.set_buffer_attribute_uint32(self._handle, 0x186d, val)
 
+
     @output_buf_size.deleter
     def output_buf_size(self):
         self._interpreter.reset_buffer_attribute(self._handle, 0x186d)
@@ -256,6 +258,7 @@ class OutStream:
     @output_onbrd_buf_size.setter
     def output_onbrd_buf_size(self, val):
         self._interpreter.set_buffer_attribute_uint32(self._handle, 0x230b, val)
+
 
     @output_onbrd_buf_size.deleter
     def output_onbrd_buf_size(self):
@@ -391,6 +394,7 @@ class OutStream:
         val = val.value
         self._interpreter.set_write_attribute_int32(self._handle, 0x1453, val)
 
+
     @regen_mode.deleter
     def regen_mode(self):
         self._interpreter.reset_write_attribute(self._handle, 0x1453)
@@ -412,6 +416,7 @@ class OutStream:
         val = val.value
         self._interpreter.set_write_attribute_int32(self._handle, 0x190c, val)
 
+
     @relative_to.deleter
     def relative_to(self):
         self._interpreter.reset_write_attribute(self._handle, 0x190c)
@@ -430,6 +435,7 @@ class OutStream:
     @sleep_time.setter
     def sleep_time(self, val):
         self._interpreter.set_write_attribute_double(self._handle, 0x22b2, val)
+
 
     @sleep_time.deleter
     def sleep_time(self):
@@ -491,6 +497,7 @@ class OutStream:
     def wait_mode(self, val):
         val = val.value
         self._interpreter.set_write_attribute_int32(self._handle, 0x22b1, val)
+
 
     @wait_mode.deleter
     def wait_mode(self):

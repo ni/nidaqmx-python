@@ -40,6 +40,7 @@ class AOChannel(Channel):
     def ao_common_mode_offset(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31cc, val)
 
+
     @ao_common_mode_offset.deleter
     def ao_common_mode_offset(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31cc)
@@ -60,6 +61,7 @@ class AOChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x1109, val)
 
+
     @ao_current_units.deleter
     def ao_current_units(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x1109)
@@ -79,6 +81,7 @@ class AOChannel(Channel):
         val = val.name
         self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x1188, val)
 
+
     @ao_custom_scale.deleter
     def ao_custom_scale(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x1188)
@@ -97,6 +100,7 @@ class AOChannel(Channel):
     @ao_dac_offset_ext_src.setter
     def ao_dac_offset_ext_src(self, val):
         self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x2254, val)
+
 
     @ao_dac_offset_ext_src.deleter
     def ao_dac_offset_ext_src(self):
@@ -118,6 +122,7 @@ class AOChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2253, val)
 
+
     @ao_dac_offset_src.deleter
     def ao_dac_offset_src(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2253)
@@ -136,6 +141,7 @@ class AOChannel(Channel):
     @ao_dac_offset_val.setter
     def ao_dac_offset_val(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2255, val)
+
 
     @ao_dac_offset_val.deleter
     def ao_dac_offset_val(self):
@@ -156,6 +162,7 @@ class AOChannel(Channel):
     @ao_dac_ref_allow_conn_to_gnd.setter
     def ao_dac_ref_allow_conn_to_gnd(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x1830, val)
+
 
     @ao_dac_ref_allow_conn_to_gnd.deleter
     def ao_dac_ref_allow_conn_to_gnd(self):
@@ -181,6 +188,7 @@ class AOChannel(Channel):
     def ao_dac_ref_conn_to_gnd(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x130, val)
 
+
     @ao_dac_ref_conn_to_gnd.deleter
     def ao_dac_ref_conn_to_gnd(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x130)
@@ -199,6 +207,7 @@ class AOChannel(Channel):
     @ao_dac_ref_ext_src.setter
     def ao_dac_ref_ext_src(self, val):
         self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x2252, val)
+
 
     @ao_dac_ref_ext_src.deleter
     def ao_dac_ref_ext_src(self):
@@ -220,6 +229,7 @@ class AOChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x132, val)
 
+
     @ao_dac_ref_src.deleter
     def ao_dac_ref_src(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x132)
@@ -240,6 +250,7 @@ class AOChannel(Channel):
     def ao_dac_ref_val(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x1832, val)
 
+
     @ao_dac_ref_val.deleter
     def ao_dac_ref_val(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x1832)
@@ -258,6 +269,7 @@ class AOChannel(Channel):
     @ao_dac_rng_high.setter
     def ao_dac_rng_high(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x182e, val)
+
 
     @ao_dac_rng_high.deleter
     def ao_dac_rng_high(self):
@@ -278,6 +290,7 @@ class AOChannel(Channel):
     def ao_dac_rng_low(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x182d, val)
 
+
     @ao_dac_rng_low.deleter
     def ao_dac_rng_low(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x182d)
@@ -296,6 +309,7 @@ class AOChannel(Channel):
     def ao_data_xfer_mech(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x134, val)
+
 
     @ao_data_xfer_mech.deleter
     def ao_data_xfer_mech(self):
@@ -316,6 +330,7 @@ class AOChannel(Channel):
     def ao_data_xfer_req_cond(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x183c, val)
+
 
     @ao_data_xfer_req_cond.deleter
     def ao_data_xfer_req_cond(self):
@@ -352,6 +367,7 @@ class AOChannel(Channel):
     def ao_enhanced_image_rejection_enable(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2241, val)
 
+
     @ao_enhanced_image_rejection_enable.deleter
     def ao_enhanced_image_rejection_enable(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2241)
@@ -371,6 +387,7 @@ class AOChannel(Channel):
     @ao_filter_delay.setter
     def ao_filter_delay(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x3075, val)
+
 
     @ao_filter_delay.deleter
     def ao_filter_delay(self):
@@ -394,6 +411,7 @@ class AOChannel(Channel):
     def ao_filter_delay_adjustment(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x3072, val)
 
+
     @ao_filter_delay_adjustment.deleter
     def ao_filter_delay_adjustment(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x3072)
@@ -414,6 +432,7 @@ class AOChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x3076, val)
 
+
     @ao_filter_delay_units.deleter
     def ao_filter_delay_units(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x3076)
@@ -431,6 +450,7 @@ class AOChannel(Channel):
     @ao_func_gen_amplitude.setter
     def ao_func_gen_amplitude(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2a1a, val)
+
 
     @ao_func_gen_amplitude.deleter
     def ao_func_gen_amplitude(self):
@@ -450,6 +470,7 @@ class AOChannel(Channel):
     def ao_func_gen_fm_deviation(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2a23, val)
 
+
     @ao_func_gen_fm_deviation.deleter
     def ao_func_gen_fm_deviation(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2a23)
@@ -467,6 +488,7 @@ class AOChannel(Channel):
     @ao_func_gen_freq.setter
     def ao_func_gen_freq(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2a19, val)
+
 
     @ao_func_gen_freq.deleter
     def ao_func_gen_freq(self):
@@ -489,6 +511,7 @@ class AOChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2a22, val)
 
+
     @ao_func_gen_modulation_type.deleter
     def ao_func_gen_modulation_type(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2a22)
@@ -505,6 +528,7 @@ class AOChannel(Channel):
     @ao_func_gen_offset.setter
     def ao_func_gen_offset(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2a1b, val)
+
 
     @ao_func_gen_offset.deleter
     def ao_func_gen_offset(self):
@@ -524,6 +548,7 @@ class AOChannel(Channel):
     def ao_func_gen_square_duty_cycle(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2a1c, val)
 
+
     @ao_func_gen_square_duty_cycle.deleter
     def ao_func_gen_square_duty_cycle(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2a1c)
@@ -541,6 +566,7 @@ class AOChannel(Channel):
     @ao_func_gen_start_phase.setter
     def ao_func_gen_start_phase(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31c4, val)
+
 
     @ao_func_gen_start_phase.deleter
     def ao_func_gen_start_phase(self):
@@ -561,6 +587,7 @@ class AOChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2a18, val)
 
+
     @ao_func_gen_type.deleter
     def ao_func_gen_type(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2a18)
@@ -578,6 +605,7 @@ class AOChannel(Channel):
     @ao_gain.setter
     def ao_gain(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x118, val)
+
 
     @ao_gain.deleter
     def ao_gain(self):
@@ -598,6 +626,7 @@ class AOChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2240, val)
 
+
     @ao_idle_output_behavior.deleter
     def ao_idle_output_behavior(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2240)
@@ -615,6 +644,7 @@ class AOChannel(Channel):
     @ao_load_impedance.setter
     def ao_load_impedance(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x121, val)
+
 
     @ao_load_impedance.deleter
     def ao_load_impedance(self):
@@ -637,6 +667,7 @@ class AOChannel(Channel):
     @ao_max.setter
     def ao_max(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x1186, val)
+
 
     @ao_max.deleter
     def ao_max(self):
@@ -662,6 +693,7 @@ class AOChannel(Channel):
     def ao_mem_map_enable(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x188f, val)
 
+
     @ao_mem_map_enable.deleter
     def ao_mem_map_enable(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x188f)
@@ -684,6 +716,7 @@ class AOChannel(Channel):
     def ao_min(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x1187, val)
 
+
     @ao_min.deleter
     def ao_min(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x1187)
@@ -701,6 +734,7 @@ class AOChannel(Channel):
     @ao_output_impedance.setter
     def ao_output_impedance(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x1490, val)
+
 
     @ao_output_impedance.deleter
     def ao_output_impedance(self):
@@ -736,6 +770,7 @@ class AOChannel(Channel):
     def ao_reglitch_enable(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x133, val)
 
+
     @ao_reglitch_enable.deleter
     def ao_reglitch_enable(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x133)
@@ -766,6 +801,7 @@ class AOChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x182b, val)
 
+
     @ao_resolution_units.deleter
     def ao_resolution_units(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x182b)
@@ -784,6 +820,7 @@ class AOChannel(Channel):
     def ao_term_cfg(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x188e, val)
+
 
     @ao_term_cfg.deleter
     def ao_term_cfg(self):
@@ -804,6 +841,7 @@ class AOChannel(Channel):
     def ao_usb_xfer_req_count(self, val):
         self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x3001, val)
 
+
     @ao_usb_xfer_req_count.deleter
     def ao_usb_xfer_req_count(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x3001)
@@ -822,6 +860,7 @@ class AOChannel(Channel):
     @ao_usb_xfer_req_size.setter
     def ao_usb_xfer_req_size(self, val):
         self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x2a8f, val)
+
 
     @ao_usb_xfer_req_size.deleter
     def ao_usb_xfer_req_size(self):
@@ -843,6 +882,7 @@ class AOChannel(Channel):
     def ao_use_only_on_brd_mem(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x183a, val)
 
+
     @ao_use_only_on_brd_mem.deleter
     def ao_use_only_on_brd_mem(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x183a)
@@ -860,6 +900,7 @@ class AOChannel(Channel):
     @ao_voltage_current_limit.setter
     def ao_voltage_current_limit(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2a1d, val)
+
 
     @ao_voltage_current_limit.deleter
     def ao_voltage_current_limit(self):
@@ -880,6 +921,7 @@ class AOChannel(Channel):
     def ao_voltage_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x1184, val)
+
 
     @ao_voltage_units.deleter
     def ao_voltage_units(self):

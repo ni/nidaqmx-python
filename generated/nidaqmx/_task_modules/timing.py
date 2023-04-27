@@ -37,6 +37,7 @@ class Timing:
         val = val.value
         self._interpreter.set_timing_attribute_int32(self._handle, 0x1853, val)
 
+
     @ai_conv_active_edge.deleter
     def ai_conv_active_edge(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x1853)
@@ -55,6 +56,7 @@ class Timing:
     def ai_conv_dig_fltr_enable(self, val):
         self._interpreter.set_timing_attribute_bool(self._handle, 0x2edc, val)
 
+
     @ai_conv_dig_fltr_enable.deleter
     def ai_conv_dig_fltr_enable(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x2edc)
@@ -72,6 +74,7 @@ class Timing:
     @ai_conv_dig_fltr_min_pulse_width.setter
     def ai_conv_dig_fltr_min_pulse_width(self, val):
         self._interpreter.set_timing_attribute_double(self._handle, 0x2edd, val)
+
 
     @ai_conv_dig_fltr_min_pulse_width.deleter
     def ai_conv_dig_fltr_min_pulse_width(self):
@@ -92,6 +95,7 @@ class Timing:
     def ai_conv_dig_fltr_timebase_rate(self, val):
         self._interpreter.set_timing_attribute_double(self._handle, 0x2edf, val)
 
+
     @ai_conv_dig_fltr_timebase_rate.deleter
     def ai_conv_dig_fltr_timebase_rate(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x2edf)
@@ -109,6 +113,7 @@ class Timing:
     @ai_conv_dig_fltr_timebase_src.setter
     def ai_conv_dig_fltr_timebase_src(self, val):
         self._interpreter.set_timing_attribute_string(self._handle, 0x2ede, val)
+
 
     @ai_conv_dig_fltr_timebase_src.deleter
     def ai_conv_dig_fltr_timebase_src(self):
@@ -128,6 +133,7 @@ class Timing:
     @ai_conv_dig_sync_enable.setter
     def ai_conv_dig_sync_enable(self, val):
         self._interpreter.set_timing_attribute_bool(self._handle, 0x2ee0, val)
+
 
     @ai_conv_dig_sync_enable.deleter
     def ai_conv_dig_sync_enable(self):
@@ -158,6 +164,7 @@ class Timing:
     def ai_conv_rate(self, val):
         self._interpreter.set_timing_attribute_double(self._handle, 0x1848, val)
 
+
     @ai_conv_rate.deleter
     def ai_conv_rate(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x1848)
@@ -176,6 +183,7 @@ class Timing:
     def ai_conv_src(self, val):
         self._interpreter.set_timing_attribute_string(self._handle, 0x1502, val)
 
+
     @ai_conv_src.deleter
     def ai_conv_src(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x1502)
@@ -193,6 +201,7 @@ class Timing:
     @ai_conv_timebase_div.setter
     def ai_conv_timebase_div(self, val):
         self._interpreter.set_timing_attribute_uint32(self._handle, 0x1335, val)
+
 
     @ai_conv_timebase_div.deleter
     def ai_conv_timebase_div(self):
@@ -213,6 +222,7 @@ class Timing:
     def ai_conv_timebase_src(self, val):
         val = val.value
         self._interpreter.set_timing_attribute_int32(self._handle, 0x1339, val)
+
 
     @ai_conv_timebase_src.deleter
     def ai_conv_timebase_src(self):
@@ -236,6 +246,7 @@ class Timing:
         val = val.name
         self._interpreter.set_timing_attribute_string(self._handle, 0x2196, val)
 
+
     @change_detect_di_falling_edge_physical_chans.deleter
     def change_detect_di_falling_edge_physical_chans(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x2196)
@@ -257,6 +268,7 @@ class Timing:
     def change_detect_di_rising_edge_physical_chans(self, val):
         val = val.name
         self._interpreter.set_timing_attribute_string(self._handle, 0x2195, val)
+
 
     @change_detect_di_rising_edge_physical_chans.deleter
     def change_detect_di_rising_edge_physical_chans(self):
@@ -286,6 +298,7 @@ class Timing:
     def change_detect_di_tristate(self, val):
         self._interpreter.set_timing_attribute_bool(self._handle, 0x2efa, val)
 
+
     @change_detect_di_tristate.deleter
     def change_detect_di_tristate(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x2efa)
@@ -306,6 +319,7 @@ class Timing:
     def delay_from_samp_clk_delay(self, val):
         self._interpreter.set_timing_attribute_double(self._handle, 0x1317, val)
 
+
     @delay_from_samp_clk_delay.deleter
     def delay_from_samp_clk_delay(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x1317)
@@ -325,6 +339,7 @@ class Timing:
         val = val.value
         self._interpreter.set_timing_attribute_int32(self._handle, 0x1304, val)
 
+
     @delay_from_samp_clk_delay_units.deleter
     def delay_from_samp_clk_delay_units(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x1304)
@@ -341,6 +356,7 @@ class Timing:
     @first_samp_timestamp_enable.setter
     def first_samp_timestamp_enable(self, val):
         self._interpreter.set_timing_attribute_bool(self._handle, 0x3139, val)
+
 
     @first_samp_timestamp_enable.deleter
     def first_samp_timestamp_enable(self):
@@ -361,6 +377,7 @@ class Timing:
         val = val.value
         self._interpreter.set_timing_attribute_int32(self._handle, 0x313b, val)
 
+
     @first_samp_timestamp_timescale.deleter
     def first_samp_timestamp_timescale(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x313b)
@@ -378,6 +395,7 @@ class Timing:
     @hshk_delay_after_xfer.setter
     def hshk_delay_after_xfer(self, val):
         self._interpreter.set_timing_attribute_double(self._handle, 0x22c2, val)
+
 
     @hshk_delay_after_xfer.deleter
     def hshk_delay_after_xfer(self):
@@ -399,6 +417,7 @@ class Timing:
         val = val.value
         self._interpreter.set_timing_attribute_int32(self._handle, 0x22c4, val)
 
+
     @hshk_sample_input_data_when.deleter
     def hshk_sample_input_data_when(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x22c4)
@@ -418,6 +437,7 @@ class Timing:
     def hshk_start_cond(self, val):
         val = val.value
         self._interpreter.set_timing_attribute_int32(self._handle, 0x22c3, val)
+
 
     @hshk_start_cond.deleter
     def hshk_start_cond(self):
@@ -439,6 +459,7 @@ class Timing:
         val = val.value
         self._interpreter.set_timing_attribute_int32(self._handle, 0x2efd, val)
 
+
     @implicit_underflow_behavior.deleter
     def implicit_underflow_behavior(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x2efd)
@@ -455,6 +476,7 @@ class Timing:
     @master_timebase_rate.setter
     def master_timebase_rate(self, val):
         self._interpreter.set_timing_attribute_double(self._handle, 0x1495, val)
+
 
     @master_timebase_rate.deleter
     def master_timebase_rate(self):
@@ -475,6 +497,7 @@ class Timing:
     def master_timebase_src(self, val):
         self._interpreter.set_timing_attribute_string(self._handle, 0x1343, val)
 
+
     @master_timebase_src.deleter
     def master_timebase_src(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x1343)
@@ -491,6 +514,7 @@ class Timing:
     @ref_clk_rate.setter
     def ref_clk_rate(self, val):
         self._interpreter.set_timing_attribute_double(self._handle, 0x1315, val)
+
 
     @ref_clk_rate.deleter
     def ref_clk_rate(self):
@@ -509,6 +533,7 @@ class Timing:
     @ref_clk_src.setter
     def ref_clk_src(self, val):
         self._interpreter.set_timing_attribute_string(self._handle, 0x1316, val)
+
 
     @ref_clk_src.deleter
     def ref_clk_src(self):
@@ -531,6 +556,7 @@ class Timing:
         val = val.value
         self._interpreter.set_timing_attribute_int32(self._handle, 0x1301, val)
 
+
     @samp_clk_active_edge.deleter
     def samp_clk_active_edge(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x1301)
@@ -549,6 +575,7 @@ class Timing:
     def samp_clk_dig_fltr_enable(self, val):
         self._interpreter.set_timing_attribute_bool(self._handle, 0x221e, val)
 
+
     @samp_clk_dig_fltr_enable.deleter
     def samp_clk_dig_fltr_enable(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x221e)
@@ -566,6 +593,7 @@ class Timing:
     @samp_clk_dig_fltr_min_pulse_width.setter
     def samp_clk_dig_fltr_min_pulse_width(self, val):
         self._interpreter.set_timing_attribute_double(self._handle, 0x221f, val)
+
 
     @samp_clk_dig_fltr_min_pulse_width.deleter
     def samp_clk_dig_fltr_min_pulse_width(self):
@@ -586,6 +614,7 @@ class Timing:
     def samp_clk_dig_fltr_timebase_rate(self, val):
         self._interpreter.set_timing_attribute_double(self._handle, 0x2221, val)
 
+
     @samp_clk_dig_fltr_timebase_rate.deleter
     def samp_clk_dig_fltr_timebase_rate(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x2221)
@@ -603,6 +632,7 @@ class Timing:
     @samp_clk_dig_fltr_timebase_src.setter
     def samp_clk_dig_fltr_timebase_src(self, val):
         self._interpreter.set_timing_attribute_string(self._handle, 0x2220, val)
+
 
     @samp_clk_dig_fltr_timebase_src.deleter
     def samp_clk_dig_fltr_timebase_src(self):
@@ -622,6 +652,7 @@ class Timing:
     @samp_clk_dig_sync_enable.setter
     def samp_clk_dig_sync_enable(self, val):
         self._interpreter.set_timing_attribute_bool(self._handle, 0x2222, val)
+
 
     @samp_clk_dig_sync_enable.deleter
     def samp_clk_dig_sync_enable(self):
@@ -657,6 +688,7 @@ class Timing:
         val = val.value
         self._interpreter.set_timing_attribute_int32(self._handle, 0x2efc, val)
 
+
     @samp_clk_overrun_behavior.deleter
     def samp_clk_overrun_behavior(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x2efc)
@@ -676,6 +708,7 @@ class Timing:
     def samp_clk_rate(self, val):
         self._interpreter.set_timing_attribute_double(self._handle, 0x1344, val)
 
+
     @samp_clk_rate.deleter
     def samp_clk_rate(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x1344)
@@ -693,6 +726,7 @@ class Timing:
     @samp_clk_src.setter
     def samp_clk_src(self, val):
         self._interpreter.set_timing_attribute_string(self._handle, 0x1852, val)
+
 
     @samp_clk_src.deleter
     def samp_clk_src(self):
@@ -727,6 +761,7 @@ class Timing:
         val = val.value
         self._interpreter.set_timing_attribute_int32(self._handle, 0x18ec, val)
 
+
     @samp_clk_timebase_active_edge.deleter
     def samp_clk_timebase_active_edge(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x18ec)
@@ -744,6 +779,7 @@ class Timing:
     @samp_clk_timebase_div.setter
     def samp_clk_timebase_div(self, val):
         self._interpreter.set_timing_attribute_uint32(self._handle, 0x18eb, val)
+
 
     @samp_clk_timebase_div.deleter
     def samp_clk_timebase_div(self):
@@ -763,6 +799,7 @@ class Timing:
     @samp_clk_timebase_master_timebase_div.setter
     def samp_clk_timebase_master_timebase_div(self, val):
         self._interpreter.set_timing_attribute_uint32(self._handle, 0x1305, val)
+
 
     @samp_clk_timebase_master_timebase_div.deleter
     def samp_clk_timebase_master_timebase_div(self):
@@ -785,6 +822,7 @@ class Timing:
     def samp_clk_timebase_rate(self, val):
         self._interpreter.set_timing_attribute_double(self._handle, 0x1303, val)
 
+
     @samp_clk_timebase_rate.deleter
     def samp_clk_timebase_rate(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x1303)
@@ -802,6 +840,7 @@ class Timing:
     @samp_clk_timebase_src.setter
     def samp_clk_timebase_src(self, val):
         self._interpreter.set_timing_attribute_string(self._handle, 0x1308, val)
+
 
     @samp_clk_timebase_src.deleter
     def samp_clk_timebase_src(self):
@@ -835,6 +874,7 @@ class Timing:
         val = val.value
         self._interpreter.set_timing_attribute_int32(self._handle, 0x2961, val)
 
+
     @samp_clk_underflow_behavior.deleter
     def samp_clk_underflow_behavior(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x2961)
@@ -853,6 +893,7 @@ class Timing:
     @samp_clk_write_wfm_use_initial_wfm_dt.setter
     def samp_clk_write_wfm_use_initial_wfm_dt(self, val):
         self._interpreter.set_timing_attribute_bool(self._handle, 0x30fc, val)
+
 
     @samp_clk_write_wfm_use_initial_wfm_dt.deleter
     def samp_clk_write_wfm_use_initial_wfm_dt(self):
@@ -873,6 +914,7 @@ class Timing:
     def samp_quant_samp_mode(self, val):
         val = val.value
         self._interpreter.set_timing_attribute_int32(self._handle, 0x1300, val)
+
 
     @samp_quant_samp_mode.deleter
     def samp_quant_samp_mode(self):
@@ -895,6 +937,7 @@ class Timing:
     def samp_quant_samp_per_chan(self, val):
         self._interpreter.set_timing_attribute_uint64(self._handle, 0x1310, val)
 
+
     @samp_quant_samp_per_chan.deleter
     def samp_quant_samp_per_chan(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x1310)
@@ -911,6 +954,7 @@ class Timing:
     @samp_timing_engine.setter
     def samp_timing_engine(self, val):
         self._interpreter.set_timing_attribute_uint32(self._handle, 0x2a26, val)
+
 
     @samp_timing_engine.deleter
     def samp_timing_engine(self):
@@ -931,6 +975,7 @@ class Timing:
         val = val.value
         self._interpreter.set_timing_attribute_int32(self._handle, 0x1347, val)
 
+
     @samp_timing_type.deleter
     def samp_timing_type(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x1347)
@@ -949,6 +994,7 @@ class Timing:
     @simultaneous_ao_enable.setter
     def simultaneous_ao_enable(self, val):
         self._interpreter.set_timing_attribute_bool(self._handle, 0x21a0, val)
+
 
     @simultaneous_ao_enable.deleter
     def simultaneous_ao_enable(self):
@@ -971,6 +1017,7 @@ class Timing:
     def sync_clk_interval(self, val):
         self._interpreter.set_timing_attribute_uint32(self._handle, 0x2f7e, val)
 
+
     @sync_clk_interval.deleter
     def sync_clk_interval(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x2f7e)
@@ -989,6 +1036,7 @@ class Timing:
     @sync_pulse_min_delay_to_start.setter
     def sync_pulse_min_delay_to_start(self, val):
         self._interpreter.set_timing_attribute_double(self._handle, 0x223f, val)
+
 
     @sync_pulse_min_delay_to_start.deleter
     def sync_pulse_min_delay_to_start(self):
@@ -1012,6 +1060,7 @@ class Timing:
     @sync_pulse_reset_delay.setter
     def sync_pulse_reset_delay(self, val):
         self._interpreter.set_timing_attribute_double(self._handle, 0x2f7d, val)
+
 
     @sync_pulse_reset_delay.deleter
     def sync_pulse_reset_delay(self):
@@ -1045,6 +1094,7 @@ class Timing:
     @sync_pulse_src.setter
     def sync_pulse_src(self, val):
         self._interpreter.set_timing_attribute_string(self._handle, 0x223d, val)
+
 
     @sync_pulse_src.deleter
     def sync_pulse_src(self):
@@ -1087,6 +1137,7 @@ class Timing:
         val = val.value
         self._interpreter.set_timing_attribute_int32(self._handle, 0x3138, val)
 
+
     @sync_pulse_time_timescale.deleter
     def sync_pulse_time_timescale(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x3138)
@@ -1105,6 +1156,7 @@ class Timing:
     def sync_pulse_type(self, val):
         val = val.value
         self._interpreter.set_timing_attribute_int32(self._handle, 0x3136, val)
+
 
     @sync_pulse_type.deleter
     def sync_pulse_type(self):

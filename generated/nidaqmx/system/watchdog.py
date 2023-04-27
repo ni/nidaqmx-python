@@ -113,6 +113,7 @@ class WatchdogTask:
         val = val.value
         self._interpreter.set_watchdog_attribute_int32(self._handle, "", 0x21a5, val)
 
+
     @expir_trig_dig_edge_edge.deleter
     def expir_trig_dig_edge_edge(self):
         self._interpreter.reset_watchdog_attribute(self._handle, "", 0x21a5)
@@ -130,6 +131,7 @@ class WatchdogTask:
     @expir_trig_dig_edge_src.setter
     def expir_trig_dig_edge_src(self, val):
         self._interpreter.set_watchdog_attribute_string(self._handle, "", 0x21a4, val)
+
 
     @expir_trig_dig_edge_src.deleter
     def expir_trig_dig_edge_src(self):
@@ -151,6 +153,7 @@ class WatchdogTask:
     def expir_trig_trig_on_network_conn_loss(self, val):
         self._interpreter.set_watchdog_attribute_bool(self._handle, "", 0x305d, val)
 
+
     @expir_trig_trig_on_network_conn_loss.deleter
     def expir_trig_trig_on_network_conn_loss(self):
         self._interpreter.reset_watchdog_attribute(self._handle, "", 0x305d)
@@ -169,6 +172,7 @@ class WatchdogTask:
     def expir_trig_trig_type(self, val):
         val = val.value
         self._interpreter.set_watchdog_attribute_int32(self._handle, "", 0x21a3, val)
+
 
     @expir_trig_trig_type.deleter
     def expir_trig_trig_type(self):
@@ -199,6 +203,7 @@ class WatchdogTask:
     @timeout.setter
     def timeout(self, val):
         self._interpreter.set_watchdog_attribute_double(self._handle, "", 0x21a9, val)
+
 
     @timeout.deleter
     def timeout(self):

@@ -89,6 +89,7 @@ class Triggers:
         val = val.value
         self._interpreter.set_trig_attribute_int32(self._handle, 0x2f80, val)
 
+
     @sync_type.deleter
     def sync_type(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x2f80)
