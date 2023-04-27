@@ -204,14 +204,15 @@ def get_interpreter_params(func):
     return interpreter_parameters
 
 
-def get_grpc_interpreter_call_params(func, params, is_custom_read_function):
+def get_grpc_interpreter_call_params(func, params):
     """Gets the interpreter parameters for grpc request."""
     compound_params = get_input_arguments_for_compound_params(func)
+    is_read_function = is_custom_read_function(func)
     grpc_params = []
     has_read_array_parameter = False
     for param in params:
         if param.parameter_name not in compound_params:
-            if is_custom_read_function and "read_array" in param.parameter_name:
+            if is_read_function and "read_array" in param.parameter_name:
                 if has_read_array_parameter:
                     continue
                 grpc_params.append(
@@ -295,9 +296,9 @@ def is_custom_read_function(func):
     return func.python_codegen_method == "CustomCode_Read_Write" and "read_" in func.function_name
 
 
-def get_output_params(func) -> list:
+def get_output_params(func):
     """Gets output parameters for the function."""
-    return list(p for p in func.base_parameters if p.direction == "out")
+    return [p for p in func.base_parameters if p.direction == "out"]
 
 
 def get_return_values(func):
@@ -393,10 +394,10 @@ def check_if_parameters_contain_read_array(params):
     return any(x for x in params if "read_array" in x.parameter_name)
 
 
-def get_read_array_parameters(params):
+def get_read_array_parameters(func):
     """Gets the list of array parameters."""
     response = []
-    for param in params:
+    for param in func.interpreter_parameters:
         if param.direction == "out" and "read_array" in param.parameter_name:
             response.append(camel_to_snake_case(param.parameter_name))
     return response
