@@ -1,8 +1,7 @@
 <%page args="function"/>\
 <%
     import re
-    from codegen.utilities.function_helpers import get_arguments_type
-    from codegen.utilities.interpreter_helpers import generate_interpreter_function_call_args, get_callback_param_data_types
+    from codegen.utilities.interpreter_helpers import generate_interpreter_function_call_args, get_callback_param_data_types, get_arguments_type
     from codegen.utilities.text_wrappers import wrap
 %>
 <% 

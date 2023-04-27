@@ -29,6 +29,8 @@ class Parameter:
         self._repeating_argument = parameter_metadata.get("repeating_argument", False)
         self._repeated_var_args = parameter_metadata.get("repeated_var_args", False)
         self._has_default = False
+        self._is_used_in_python_api = parameter_metadata.get("use_in_python_api", True)
+        self._is_proto_only = parameter_metadata.get("proto_only", False)
         if "python_default_value" in parameter_metadata:
             self._default = parameter_metadata.get("python_default_value")
             self._has_default = True
@@ -148,3 +150,13 @@ class Parameter:
     def grpc_type(self):
         """str: Returns the grpc type of the parameter."""
         return self._grpc_type
+
+    @property
+    def is_used_in_python_api(self):
+        """bool: Defines if the parameter is used in python APIs."""
+        return self._is_used_in_python_api
+
+    @property
+    def is_proto_only(self):
+        """bool: Defines if the parameter is proto only."""
+        return self._is_proto_only

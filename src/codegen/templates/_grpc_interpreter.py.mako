@@ -1,5 +1,5 @@
 <%
-    from codegen.utilities.interpreter_helpers import get_interpreter_functions, get_grpc_interpreter_call_params, get_interpreter_params, get_interpreter_parameter_signature, get_output_params, get_response_parameters, get_compound_parameter, create_compound_parameter_request, get_input_arguments_for_compound_params
+    from codegen.utilities.interpreter_helpers import get_interpreter_functions, get_grpc_interpreter_call_params, get_params_for_function_signature, get_interpreter_parameter_signature, get_output_params, get_response_parameters, get_compound_parameter, create_compound_parameter_request, get_input_arguments_for_compound_params
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
     from codegen.utilities.helpers import snake_to_pascal
@@ -37,7 +37,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         return response
 % for func in functions:
 <%
-    params = get_interpreter_params(func)
+    params = get_params_for_function_signature(func)
     sorted_params = order_function_parameters_by_optional(params)
     parameter_signature = get_interpreter_parameter_signature(is_python_factory, sorted_params)
     output_parameters = get_output_params(func)

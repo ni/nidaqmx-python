@@ -97,23 +97,22 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def cfg_anlg_multi_edge_ref_trig(
             self, task, trigger_sources, trigger_slope_array,
-            trigger_level_array, pretrigger_samples, array_size):
+            trigger_level_array, pretrigger_samples):
         response = self._invoke(
             self._client.CfgAnlgMultiEdgeRefTrig,
             grpc_types.CfgAnlgMultiEdgeRefTrigRequest(
-                array_size=array_size, pretrigger_samples=pretrigger_samples,
-                task=task, trigger_level_array=trigger_level_array,
+                pretrigger_samples=pretrigger_samples, task=task,
+                trigger_level_array=trigger_level_array,
                 trigger_slope_array=trigger_slope_array,
                 trigger_sources=trigger_sources))
 
     def cfg_anlg_multi_edge_start_trig(
             self, task, trigger_sources, trigger_slope_array,
-            trigger_level_array, array_size):
+            trigger_level_array):
         response = self._invoke(
             self._client.CfgAnlgMultiEdgeStartTrig,
             grpc_types.CfgAnlgMultiEdgeStartTrigRequest(
-                array_size=array_size, task=task,
-                trigger_level_array=trigger_level_array,
+                task=task, trigger_level_array=trigger_level_array,
                 trigger_slope_array=trigger_slope_array,
                 trigger_sources=trigger_sources))
 
@@ -2626,11 +2625,11 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.SetAnalogPowerUpStatesRequest(device_name=device_name))
 
     def set_analog_power_up_states_with_output_type(
-            self, channel_names, state_array, channel_type_array, array_size):
+            self, channel_names, state_array, channel_type_array):
         response = self._invoke(
             self._client.SetAnalogPowerUpStatesWithOutputType,
             grpc_types.SetAnalogPowerUpStatesWithOutputTypeRequest(
-                array_size=array_size, channel_names=channel_names,
+                channel_names=channel_names,
                 channel_type_array_raw=channel_type_array,
                 state_array=state_array))
 
@@ -2676,13 +2675,11 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.SetChanAttributeDoubleRequest(
                 attribute=attribute, channel=channel, task=task, value=value))
 
-    def set_chan_attribute_double_array(
-            self, task, channel, attribute, value, size):
+    def set_chan_attribute_double_array(self, task, channel, attribute, value):
         response = self._invoke(
             self._client.SetChanAttributeDoubleArray,
             grpc_types.SetChanAttributeDoubleArrayRequest(
-                attribute=attribute, channel=channel, size=size, task=task,
-                value=value))
+                attribute=attribute, channel=channel, task=task, value=value))
 
     def set_chan_attribute_int32(self, task, channel, attribute, value):
         response = self._invoke(
@@ -2804,13 +2801,11 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.SetScaleAttributeDoubleRequest(
                 attribute=attribute, scale_name=scale_name, value=value))
 
-    def set_scale_attribute_double_array(
-            self, scale_name, attribute, value, size):
+    def set_scale_attribute_double_array(self, scale_name, attribute, value):
         response = self._invoke(
             self._client.SetScaleAttributeDoubleArray,
             grpc_types.SetScaleAttributeDoubleArrayRequest(
-                attribute=attribute, scale_name=scale_name, size=size,
-                value=value))
+                attribute=attribute, scale_name=scale_name, value=value))
 
     def set_scale_attribute_int32(self, scale_name, attribute, value):
         response = self._invoke(
@@ -2917,22 +2912,22 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.SetTrigAttributeDouble,
             grpc_types.SetTrigAttributeDoubleRequest(attribute=attribute, task=task, value=value))
 
-    def set_trig_attribute_double_array(self, task, attribute, value, size):
+    def set_trig_attribute_double_array(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTrigAttributeDoubleArray,
             grpc_types.SetTrigAttributeDoubleArrayRequest(
-                attribute=attribute, size=size, task=task, value=value))
+                attribute=attribute, task=task, value=value))
 
     def set_trig_attribute_int32(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTrigAttributeInt32,
             grpc_types.SetTrigAttributeInt32Request(attribute=attribute, task=task, value=value))
 
-    def set_trig_attribute_int32_array(self, task, attribute, value, size):
+    def set_trig_attribute_int32_array(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTrigAttributeInt32Array,
             grpc_types.SetTrigAttributeInt32ArrayRequest(
-                attribute=attribute, size=size, task=task, value=value))
+                attribute=attribute, task=task, value=value))
 
     def set_trig_attribute_string(self, task, attribute, value):
         response = self._invoke(

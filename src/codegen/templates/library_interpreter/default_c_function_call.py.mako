@@ -1,7 +1,6 @@
 <%page args="function"/>\
 <%
-    from codegen.utilities.interpreter_helpers import generate_interpreter_function_call_args, get_samps_per_chan_read_or_write_param
-    from codegen.utilities.function_helpers import get_arguments_type
+    from codegen.utilities.interpreter_helpers import generate_interpreter_function_call_args, get_samps_per_chan_read_or_write_param, get_arguments_type
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
 %>\
         cfunc = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
