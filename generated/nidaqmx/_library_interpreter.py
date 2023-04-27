@@ -1759,6 +1759,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
 
     def create_task(self, session_name):
+        new_session_initialized = True
         task = lib_importer.task_handle(0)
 
         cfunc = lib_importer.windll.DAQmxCreateTask
@@ -2134,6 +2135,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def create_watchdog_timer_task_ex(
             self, device_name, session_name, timeout):
+        new_session_initialized = True
         task = lib_importer.task_handle(0)
 
         cfunc = lib_importer.windll.DAQmxCreateWatchdogTimerTaskEx
@@ -3886,6 +3888,7 @@ class LibraryInterpreter(BaseInterpreter):
         return is_task_done.value
 
     def load_task(self, session_name):
+        new_session_initialized = True
         task = lib_importer.task_handle(0)
 
         cfunc = lib_importer.windll.DAQmxLoadTask
