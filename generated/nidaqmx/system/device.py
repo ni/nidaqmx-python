@@ -1219,7 +1219,7 @@ class _DeviceAlternateConstructor(Device):
 
     This is a private API used to instantiate a Device with an existing interpreter.
     """
-    __slots__ = []
+
     def __init__(self, name, interpreter):
         """
         Args:
