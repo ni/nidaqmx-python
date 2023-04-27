@@ -2453,11 +2453,45 @@ class GrpcStubInterpreter(BaseInterpreter):
         read_array[:]=response.read_array
         return response.read_array, response.samps_per_chan_read
 
+    def read_power_binary_i16(
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            read_array_voltage, read_array_current):
+        response = self._invoke(
+            self._client.ReadPowerBinaryI16,
+            grpc_types.ReadPowerBinaryI16Request(
+                fill_mode_raw=fill_mode,
+                num_samps_per_chan=num_samps_per_chan,
+                read_array_current=read_array_current,
+                read_array_voltage=read_array_voltage, task=task,
+                timeout=timeout))
+        return response.read_array_voltage, response.read_array_current, response.samps_per_chan_read
+
+    def read_power_f64(
+            self, task, num_samps_per_chan, timeout, fill_mode,
+            read_array_voltage, read_array_current):
+        response = self._invoke(
+            self._client.ReadPowerF64,
+            grpc_types.ReadPowerF64Request(
+                fill_mode_raw=fill_mode,
+                num_samps_per_chan=num_samps_per_chan,
+                read_array_current=read_array_current,
+                read_array_voltage=read_array_voltage, task=task,
+                timeout=timeout))
+        return response.read_array_voltage, response.read_array_current, response.samps_per_chan_read
+
     def read_power_scalar_f64(self, task, timeout):
         response = self._invoke(
             self._client.ReadPowerScalarF64,
             grpc_types.ReadPowerScalarF64Request(task=task, timeout=timeout))
         return response.voltage, response.current
+
+    def read_raw(self, task, num_samps_per_chan, timeout, read_array):
+        response = self._invoke(
+            self._client.ReadRaw,
+            grpc_types.ReadRawRequest(
+                num_samps_per_chan=num_samps_per_chan, read_array=read_array,
+                task=task, timeout=timeout))
+        return response.read_array, response.samps_read, response.num_bytes_per_samp
 
     def register_done_event(
             self, task, options, callback_function, callback_data):
@@ -3205,6 +3239,14 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WriteDigitalU8Request(
                 auto_start=auto_start, data_layout_raw=data_layout,
                 num_samps_per_chan=num_samps_per_chan, task=task,
+                timeout=timeout, write_array=write_array))
+        return response.samps_per_chan_written
+
+    def write_raw(self, task, num_samps, auto_start, timeout, write_array):
+        response = self._invoke(
+            self._client.WriteRaw,
+            grpc_types.WriteRawRequest(
+                auto_start=auto_start, num_samps=num_samps, task=task,
                 timeout=timeout, write_array=write_array))
         return response.samps_per_chan_written
 

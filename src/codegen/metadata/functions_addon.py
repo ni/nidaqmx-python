@@ -122,4 +122,16 @@ functions_override_metadata = {
     'WriteDigitalU8': {
         'python_codegen_method': 'CustomCode_Read_Write',
     },
+    'ReadPowerBinaryI16':{
+        'python_codegen_method': 'CustomCode_Read_Write',
+    },
+    'ReadPowerF64':{
+        'python_codegen_method': 'CustomCode_Read_Write',
+    },
+    'ReadRaw':{
+        'python_codegen_method': 'CustomCode_Read_Write',
+    },
+    'WriteRaw':{
+        'python_codegen_method': 'CustomCode_Read_Write',
+    }
 }
