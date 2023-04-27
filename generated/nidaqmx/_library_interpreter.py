@@ -2236,7 +2236,7 @@ class LibraryInterpreter(BaseInterpreter):
         argtypes = [ctypes_byte_str]
 
         for index in range(len(channel_name)):
-            state_element = ctypes.c_double
+            state_element = ctypes.c_double()
             state.append(state_element)
 
             args.append(channel_name[index])
@@ -2249,13 +2249,14 @@ class LibraryInterpreter(BaseInterpreter):
             argtypes.append(ctypes.c_int32)
             
         args.append(None)
+        argtypes.append(ctypes.c_void_p)
 
         cfunc = lib_importer.cdll.DAQmxGetAnalogPowerUpStates
         with cfunc.arglock:
             cfunc.argtypes = argtypes
             error_code = cfunc(*args)
         check_for_error(error_code)
-        return state
+        return [state_element.value for state_element in state]
 
     def get_analog_power_up_states_with_output_type(
             self, channel_names, array_size):
@@ -2263,14 +2264,11 @@ class LibraryInterpreter(BaseInterpreter):
         channel_type_array = numpy.zeros(array_size, dtype=numpy.int32)
 
         cfunc = lib_importer.cdll.DAQmxGetAnalogPowerUpStatesWithOutputType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), wrapped_ndpointer(dtype=numpy.int32,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_uint32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
+                flags=('C','W')), wrapped_ndpointer(dtype=numpy.int32,
+                flags=('C','W')), ctypes.c_uint, ctypes.c_uint32]
 
         error_code = cfunc(
             channel_names, state_array, channel_type_array, array_size)
@@ -2305,12 +2303,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint32()
 
         cfunc = lib_importer.cdll.DAQmxGetBufferAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_uint32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_uint32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -2321,12 +2317,9 @@ class LibraryInterpreter(BaseInterpreter):
         value = c_bool32()
 
         cfunc = lib_importer.cdll.DAQmxGetCalInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32,
-                        ctypes.POINTER(c_bool32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             device_name, attribute, ctypes.byref(value))
@@ -2337,12 +2330,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_double()
 
         cfunc = lib_importer.cdll.DAQmxGetCalInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_double)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             device_name, attribute, ctypes.byref(value))
@@ -2351,12 +2342,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_cal_info_attribute_string(self, device_name, attribute):
         cfunc = lib_importer.cdll.DAQmxGetCalInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32, ctypes.c_char_p,
-                        ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32, ctypes.c_char_p,
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -2378,12 +2367,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint32()
 
         cfunc = lib_importer.cdll.DAQmxGetCalInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_uint32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_uint32)]
 
         error_code = cfunc(
             device_name, attribute, ctypes.byref(value))
@@ -2394,12 +2381,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = c_bool32()
 
         cfunc = lib_importer.cdll.DAQmxGetChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.POINTER(c_bool32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, channel, attribute, ctypes.byref(value))
@@ -2410,12 +2395,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_double()
 
         cfunc = lib_importer.cdll.DAQmxGetChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.POINTER(ctypes.c_double)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             task, channel, attribute, ctypes.byref(value))
@@ -2424,13 +2407,11 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_chan_attribute_double_array(self, task, channel, attribute):
         cfunc = lib_importer.cdll.DAQmxGetChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -2452,12 +2433,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_int32()
 
         cfunc = lib_importer.cdll.DAQmxGetChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.POINTER(ctypes.c_int32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_int32)]
 
         error_code = cfunc(
             task, channel, attribute, ctypes.byref(value))
@@ -2466,12 +2445,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_chan_attribute_string(self, task, channel, attribute):
         cfunc = lib_importer.cdll.DAQmxGetChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.c_char_p, ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -2493,12 +2470,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint32()
 
         cfunc = lib_importer.cdll.DAQmxGetChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.POINTER(ctypes.c_uint32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_uint32)]
 
         error_code = cfunc(
             task, channel, attribute, ctypes.byref(value))
@@ -2509,12 +2484,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = c_bool32()
 
         cfunc = lib_importer.cdll.DAQmxGetDeviceAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        ctypes.POINTER(c_bool32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             device_name, attribute, ctypes.byref(value))
@@ -2525,12 +2498,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_double()
 
         cfunc = lib_importer.cdll.DAQmxGetDeviceAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_double)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             device_name, attribute, ctypes.byref(value))
@@ -2539,13 +2510,11 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_device_attribute_double_array(self, device_name, attribute):
         cfunc = lib_importer.cdll.DAQmxGetDeviceAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -2567,12 +2536,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_int32()
 
         cfunc = lib_importer.cdll.DAQmxGetDeviceAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_int32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_int32)]
 
         error_code = cfunc(
             device_name, attribute, ctypes.byref(value))
@@ -2581,13 +2548,11 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_device_attribute_int32_array(self, device_name, attribute):
         cfunc = lib_importer.cdll.DAQmxGetDeviceAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
-                        ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -2607,12 +2572,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_device_attribute_string(self, device_name, attribute):
         cfunc = lib_importer.cdll.DAQmxGetDeviceAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        ctypes.c_char_p, ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -2634,12 +2597,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint32()
 
         cfunc = lib_importer.cdll.DAQmxGetDeviceAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_uint32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_uint32)]
 
         error_code = cfunc(
             device_name, attribute, ctypes.byref(value))
@@ -2648,13 +2609,11 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_device_attribute_uint32_array(self, device_name, attribute):
         cfunc = lib_importer.cdll.DAQmxGetDeviceAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        wrapped_ndpointer(dtype=numpy.uint32,
-                        flags=('C','W')), ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                wrapped_ndpointer(dtype=numpy.uint32, flags=('C','W')),
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -2694,7 +2653,7 @@ class LibraryInterpreter(BaseInterpreter):
         argtypes = [ctypes_byte_str]
 
         for index in range(len(channel_name)):
-            state_element = ctypes.c_int32
+            state_element = ctypes.c_int32()
             state.append(state_element)
 
             args.append(channel_name[index])
@@ -2704,13 +2663,14 @@ class LibraryInterpreter(BaseInterpreter):
             argtypes.append(ctypes.POINTER(ctypes.c_int32))
             
         args.append(None)
+        argtypes.append(ctypes.c_void_p)
 
         cfunc = lib_importer.cdll.DAQmxGetDigitalPowerUpStates
         with cfunc.arglock:
             cfunc.argtypes = argtypes
             error_code = cfunc(*args)
         check_for_error(error_code)
-        return state
+        return [state_element.value for state_element in state]
 
     def get_digital_pull_up_pull_down_states(self, device_name, channel_name):
         state = []
@@ -2719,7 +2679,7 @@ class LibraryInterpreter(BaseInterpreter):
         argtypes = [ctypes_byte_str]
 
         for index in range(len(channel_name)):
-            state_element = ctypes.c_int32
+            state_element = ctypes.c_int32()
             state.append(state_element)
 
             args.append(channel_name[index])
@@ -2729,13 +2689,14 @@ class LibraryInterpreter(BaseInterpreter):
             argtypes.append(ctypes.POINTER(ctypes.c_int32))
             
         args.append(None)
+        argtypes.append(ctypes.c_void_p)
 
         cfunc = lib_importer.cdll.DAQmxGetDigitalPullUpPullDownStates
         with cfunc.arglock:
             cfunc.argtypes = argtypes
             error_code = cfunc(*args)
         check_for_error(error_code)
-        return state
+        return [state_element.value for state_element in state]
 
     def get_disconnected_cdaq_sync_ports(self):
         cfunc = lib_importer.windll.DAQmxGetDisconnectedCDAQSyncPorts
@@ -2768,12 +2729,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = c_bool32()
 
         cfunc = lib_importer.cdll.DAQmxGetExportedSignalAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(c_bool32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -2784,12 +2743,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_double()
 
         cfunc = lib_importer.cdll.DAQmxGetExportedSignalAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_double)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -2800,12 +2757,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_int32()
 
         cfunc = lib_importer.cdll.DAQmxGetExportedSignalAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_int32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_int32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -2814,12 +2769,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_exported_signal_attribute_string(self, task, attribute):
         cfunc = lib_importer.cdll.DAQmxGetExportedSignalAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_char_p, ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_char_p,
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -2841,12 +2794,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint32()
 
         cfunc = lib_importer.cdll.DAQmxGetExportedSignalAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_uint32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_uint32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -2866,12 +2817,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = c_bool32()
 
         cfunc = lib_importer.cdll.DAQmxGetPersistedChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        ctypes.POINTER(c_bool32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             channel, attribute, ctypes.byref(value))
@@ -2880,12 +2829,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_persisted_chan_attribute_string(self, channel, attribute):
         cfunc = lib_importer.cdll.DAQmxGetPersistedChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        ctypes.c_char_p, ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -2907,12 +2854,9 @@ class LibraryInterpreter(BaseInterpreter):
         value = c_bool32()
 
         cfunc = lib_importer.cdll.DAQmxGetPersistedScaleAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32,
-                        ctypes.POINTER(c_bool32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             scale_name, attribute, ctypes.byref(value))
@@ -2921,12 +2865,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_persisted_scale_attribute_string(self, scale_name, attribute):
         cfunc = lib_importer.cdll.DAQmxGetPersistedScaleAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32, ctypes.c_char_p,
-                        ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32, ctypes.c_char_p,
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -2948,12 +2890,9 @@ class LibraryInterpreter(BaseInterpreter):
         value = c_bool32()
 
         cfunc = lib_importer.cdll.DAQmxGetPersistedTaskAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32,
-                        ctypes.POINTER(c_bool32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task_name, attribute, ctypes.byref(value))
@@ -2962,12 +2901,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_persisted_task_attribute_string(self, task_name, attribute):
         cfunc = lib_importer.cdll.DAQmxGetPersistedTaskAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32, ctypes.c_char_p,
-                        ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32, ctypes.c_char_p,
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -2989,12 +2926,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = c_bool32()
 
         cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        ctypes.POINTER(c_bool32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             physical_channel, attribute, ctypes.byref(value))
@@ -3003,13 +2938,11 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_physical_chan_attribute_bytes(self, physical_channel, attribute):
         cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        wrapped_ndpointer(dtype=numpy.generic,
-                        flags=('C','W')), ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                wrapped_ndpointer(dtype=numpy.generic, flags=('C','W')),
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -3031,12 +2964,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_double()
 
         cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_double)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             physical_channel, attribute, ctypes.byref(value))
@@ -3046,13 +2977,11 @@ class LibraryInterpreter(BaseInterpreter):
     def get_physical_chan_attribute_double_array(
             self, physical_channel, attribute):
         cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -3074,12 +3003,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_int32()
 
         cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_int32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_int32)]
 
         error_code = cfunc(
             physical_channel, attribute, ctypes.byref(value))
@@ -3089,13 +3016,11 @@ class LibraryInterpreter(BaseInterpreter):
     def get_physical_chan_attribute_int32_array(
             self, physical_channel, attribute):
         cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
-                        ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -3115,12 +3040,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_physical_chan_attribute_string(self, physical_channel, attribute):
         cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        ctypes.c_char_p, ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -3142,12 +3065,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint32()
 
         cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_uint32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_uint32)]
 
         error_code = cfunc(
             physical_channel, attribute, ctypes.byref(value))
@@ -3157,13 +3078,11 @@ class LibraryInterpreter(BaseInterpreter):
     def get_physical_chan_attribute_uint32_array(
             self, physical_channel, attribute):
         cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                        wrapped_ndpointer(dtype=numpy.uint32,
-                        flags=('C','W')), ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
+                wrapped_ndpointer(dtype=numpy.uint32, flags=('C','W')),
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -3185,12 +3104,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = c_bool32()
 
         cfunc = lib_importer.cdll.DAQmxGetReadAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(c_bool32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3201,12 +3118,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_double()
 
         cfunc = lib_importer.cdll.DAQmxGetReadAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_double)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3217,12 +3132,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_int32()
 
         cfunc = lib_importer.cdll.DAQmxGetReadAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_int32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_int32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3231,12 +3144,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_read_attribute_string(self, task, attribute):
         cfunc = lib_importer.cdll.DAQmxGetReadAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_char_p, ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_char_p,
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -3258,12 +3169,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint32()
 
         cfunc = lib_importer.cdll.DAQmxGetReadAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_uint32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_uint32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3274,12 +3183,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint64()
 
         cfunc = lib_importer.cdll.DAQmxGetReadAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_uint64)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_uint64)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3290,12 +3197,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = c_bool32()
 
         cfunc = lib_importer.cdll.DAQmxGetRealTimeAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(c_bool32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3306,12 +3211,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_int32()
 
         cfunc = lib_importer.cdll.DAQmxGetRealTimeAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_int32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_int32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3322,12 +3225,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint32()
 
         cfunc = lib_importer.cdll.DAQmxGetRealTimeAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_uint32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_uint32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3338,12 +3239,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_double()
 
         cfunc = lib_importer.cdll.DAQmxGetScaleAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_double)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             scale_name, attribute, ctypes.byref(value))
@@ -3352,13 +3251,11 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_scale_attribute_double_array(self, scale_name, attribute):
         cfunc = lib_importer.cdll.DAQmxGetScaleAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32,
+                wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -3380,12 +3277,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_int32()
 
         cfunc = lib_importer.cdll.DAQmxGetScaleAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_int32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_int32)]
 
         error_code = cfunc(
             scale_name, attribute, ctypes.byref(value))
@@ -3394,12 +3289,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_scale_attribute_string(self, scale_name, attribute):
         cfunc = lib_importer.cdll.DAQmxGetScaleAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32, ctypes.c_char_p,
-                        ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32, ctypes.c_char_p,
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -3422,11 +3315,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_system_info_attribute_string(self, attribute):
         cfunc = lib_importer.cdll.DAQmxGetSystemInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes.c_int32, ctypes.c_char_p, ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes.c_int32, ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -3448,11 +3339,9 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint32()
 
         cfunc = lib_importer.cdll.DAQmxGetSystemInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes.c_int32, ctypes.POINTER(ctypes.c_uint32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes.c_int32, ctypes.POINTER(ctypes.c_uint32)]
 
         error_code = cfunc(
             attribute, ctypes.byref(value))
@@ -3463,12 +3352,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = c_bool32()
 
         cfunc = lib_importer.cdll.DAQmxGetTaskAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(c_bool32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3477,12 +3364,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_task_attribute_string(self, task, attribute):
         cfunc = lib_importer.cdll.DAQmxGetTaskAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_char_p, ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_char_p,
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -3504,12 +3389,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint32()
 
         cfunc = lib_importer.cdll.DAQmxGetTaskAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_uint32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_uint32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3520,12 +3403,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = c_bool32()
 
         cfunc = lib_importer.cdll.DAQmxGetTimingAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(c_bool32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3536,12 +3417,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_double()
 
         cfunc = lib_importer.cdll.DAQmxGetTimingAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_double)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3552,12 +3431,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = c_bool32()
 
         cfunc = lib_importer.cdll.DAQmxGetTimingAttributeEx
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.POINTER(c_bool32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.byref(value))
@@ -3568,12 +3445,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_double()
 
         cfunc = lib_importer.cdll.DAQmxGetTimingAttributeEx
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.POINTER(ctypes.c_double)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.byref(value))
@@ -3584,12 +3459,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_int32()
 
         cfunc = lib_importer.cdll.DAQmxGetTimingAttributeEx
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.POINTER(ctypes.c_int32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_int32)]
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.byref(value))
@@ -3598,12 +3471,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_timing_attribute_ex_string(self, task, device_names, attribute):
         cfunc = lib_importer.cdll.DAQmxGetTimingAttributeEx
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.c_char_p, ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -3625,12 +3496,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint32()
 
         cfunc = lib_importer.cdll.DAQmxGetTimingAttributeEx
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.POINTER(ctypes.c_uint32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_uint32)]
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.byref(value))
@@ -3641,12 +3510,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint64()
 
         cfunc = lib_importer.cdll.DAQmxGetTimingAttributeEx
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.POINTER(ctypes.c_uint64)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_uint64)]
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.byref(value))
@@ -3657,12 +3524,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_int32()
 
         cfunc = lib_importer.cdll.DAQmxGetTimingAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_int32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_int32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3671,12 +3536,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_timing_attribute_string(self, task, attribute):
         cfunc = lib_importer.cdll.DAQmxGetTimingAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_char_p, ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_char_p,
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -3698,12 +3561,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint32()
 
         cfunc = lib_importer.cdll.DAQmxGetTimingAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_uint32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_uint32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3714,12 +3575,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint64()
 
         cfunc = lib_importer.cdll.DAQmxGetTimingAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_uint64)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_uint64)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3730,12 +3589,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = c_bool32()
 
         cfunc = lib_importer.cdll.DAQmxGetTrigAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(c_bool32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3746,12 +3603,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_double()
 
         cfunc = lib_importer.cdll.DAQmxGetTrigAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_double)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3760,13 +3615,11 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_trig_attribute_double_array(self, task, attribute):
         cfunc = lib_importer.cdll.DAQmxGetTrigAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -3788,12 +3641,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_int32()
 
         cfunc = lib_importer.cdll.DAQmxGetTrigAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_int32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_int32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3802,13 +3653,11 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_trig_attribute_int32_array(self, task, attribute):
         cfunc = lib_importer.cdll.DAQmxGetTrigAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
-                        ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -3828,12 +3677,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_trig_attribute_string(self, task, attribute):
         cfunc = lib_importer.cdll.DAQmxGetTrigAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_char_p, ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_char_p,
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -3855,12 +3702,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint32()
 
         cfunc = lib_importer.cdll.DAQmxGetTrigAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_uint32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_uint32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3871,12 +3716,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = c_bool32()
 
         cfunc = lib_importer.cdll.DAQmxGetWatchdogAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.POINTER(c_bool32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, lines, attribute, ctypes.byref(value))
@@ -3887,12 +3730,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_double()
 
         cfunc = lib_importer.cdll.DAQmxGetWatchdogAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.POINTER(ctypes.c_double)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             task, lines, attribute, ctypes.byref(value))
@@ -3903,12 +3744,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_int32()
 
         cfunc = lib_importer.cdll.DAQmxGetWatchdogAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.POINTER(ctypes.c_int32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_int32)]
 
         error_code = cfunc(
             task, lines, attribute, ctypes.byref(value))
@@ -3917,12 +3756,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_watchdog_attribute_string(self, task, lines, attribute):
         cfunc = lib_importer.cdll.DAQmxGetWatchdogAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.c_char_p, ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.c_char_p, ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -3944,12 +3781,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = c_bool32()
 
         cfunc = lib_importer.cdll.DAQmxGetWriteAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(c_bool32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3960,12 +3795,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_double()
 
         cfunc = lib_importer.cdll.DAQmxGetWriteAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_double)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_double)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3976,12 +3809,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_int32()
 
         cfunc = lib_importer.cdll.DAQmxGetWriteAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_int32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_int32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3990,12 +3821,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def get_write_attribute_string(self, task, attribute):
         cfunc = lib_importer.cdll.DAQmxGetWriteAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_char_p, ctypes.c_uint]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_char_p,
+                ctypes.c_uint]
 
         temp_size = 0
         while True:
@@ -4017,12 +3846,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint32()
 
         cfunc = lib_importer.cdll.DAQmxGetWriteAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_uint32)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_uint32)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -4033,12 +3860,10 @@ class LibraryInterpreter(BaseInterpreter):
         value = ctypes.c_uint64()
 
         cfunc = lib_importer.cdll.DAQmxGetWriteAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.POINTER(ctypes.c_uint64)]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                ctypes.POINTER(ctypes.c_uint64)]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -4841,6 +4666,7 @@ class LibraryInterpreter(BaseInterpreter):
             argtypes.append(ctypes.c_int32)
             
         args.append(None)
+        argtypes.append(ctypes.c_void_p)
 
         cfunc = lib_importer.cdll.DAQmxSetAnalogPowerUpStates
         with cfunc.arglock:
@@ -4851,14 +4677,11 @@ class LibraryInterpreter(BaseInterpreter):
     def set_analog_power_up_states_with_output_type(
             self, channel_names, state_array, channel_type_array, array_size):
         cfunc = lib_importer.cdll.DAQmxSetAnalogPowerUpStatesWithOutputType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), wrapped_ndpointer(dtype=numpy.int32,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_uint32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
+                flags=('C','W')), wrapped_ndpointer(dtype=numpy.int32,
+                flags=('C','W')), ctypes.c_uint, ctypes.c_uint32]
 
         error_code = cfunc(
             channel_names, state_array, channel_type_array,
@@ -4867,12 +4690,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_buffer_attribute_uint32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetBufferAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_uint32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_uint32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -4880,11 +4700,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_cal_info_attribute_bool(self, device_name, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetCalInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32, c_bool32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32, c_bool32]
 
         error_code = cfunc(
             device_name, attribute, value)
@@ -4892,11 +4710,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_cal_info_attribute_double(self, device_name, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetCalInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32, ctypes.c_double]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32, ctypes.c_double]
 
         error_code = cfunc(
             device_name, attribute, value)
@@ -4904,11 +4720,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_cal_info_attribute_string(self, device_name, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetCalInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32, ctypes_byte_str]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32, ctypes_byte_str]
 
         error_code = cfunc(
             device_name, attribute, value)
@@ -4916,11 +4730,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_cal_info_attribute_uint32(self, device_name, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetCalInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32, ctypes.c_uint32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32, ctypes.c_uint32]
 
         error_code = cfunc(
             device_name, attribute, value)
@@ -4928,12 +4740,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_chan_attribute_bool(self, task, channel, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, c_bool32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                c_bool32]
 
         error_code = cfunc(
             task, channel, attribute, value)
@@ -4941,12 +4751,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_chan_attribute_double(self, task, channel, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.c_double]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.c_double]
 
         error_code = cfunc(
             task, channel, attribute, value)
@@ -4955,13 +4763,11 @@ class LibraryInterpreter(BaseInterpreter):
     def set_chan_attribute_double_array(
             self, task, channel, attribute, value, size):
         cfunc = lib_importer.cdll.DAQmxSetChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_uint32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
+                ctypes.c_uint, ctypes.c_uint32]
 
         error_code = cfunc(
             task, channel, attribute, value, len(value), size)
@@ -4969,12 +4775,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_chan_attribute_int32(self, task, channel, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.c_int32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.c_int32]
 
         error_code = cfunc(
             task, channel, attribute, value)
@@ -4982,12 +4786,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_chan_attribute_string(self, task, channel, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes_byte_str]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes_byte_str]
 
         error_code = cfunc(
             task, channel, attribute, value)
@@ -4995,12 +4797,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_chan_attribute_uint32(self, task, channel, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetChanAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.c_uint32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.c_uint32]
 
         error_code = cfunc(
             task, channel, attribute, value)
@@ -5032,6 +4832,7 @@ class LibraryInterpreter(BaseInterpreter):
             argtypes.append(ctypes.c_int32)
             
         args.append(None)
+        argtypes.append(ctypes.c_void_p)
 
         cfunc = lib_importer.cdll.DAQmxSetDigitalPowerUpStates
         with cfunc.arglock:
@@ -5053,6 +4854,7 @@ class LibraryInterpreter(BaseInterpreter):
             argtypes.append(ctypes.c_int32)
             
         args.append(None)
+        argtypes.append(ctypes.c_void_p)
 
         cfunc = lib_importer.cdll.DAQmxSetDigitalPullUpPullDownStates
         with cfunc.arglock:
@@ -5062,11 +4864,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_exported_signal_attribute_bool(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetExportedSignalAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32, c_bool32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, c_bool32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5074,12 +4874,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_exported_signal_attribute_double(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetExportedSignalAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_double]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_double]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5087,12 +4884,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_exported_signal_attribute_int32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetExportedSignalAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_int32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5100,12 +4894,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_exported_signal_attribute_string(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetExportedSignalAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes_byte_str]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes_byte_str]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5113,12 +4904,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_exported_signal_attribute_uint32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetExportedSignalAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_uint32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_uint32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5126,11 +4914,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_read_attribute_bool(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetReadAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32, c_bool32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, c_bool32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5138,12 +4924,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_read_attribute_double(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetReadAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_double]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_double]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5151,12 +4934,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_read_attribute_int32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetReadAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_int32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5164,12 +4944,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_read_attribute_string(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetReadAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes_byte_str]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes_byte_str]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5177,12 +4954,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_read_attribute_uint32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetReadAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_uint32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_uint32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5190,12 +4964,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_read_attribute_uint64(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetReadAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_uint64]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_uint64]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5203,11 +4974,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_real_time_attribute_bool(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetRealTimeAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32, c_bool32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, c_bool32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5215,12 +4984,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_real_time_attribute_int32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetRealTimeAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_int32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5228,12 +4994,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_real_time_attribute_uint32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetRealTimeAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_uint32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_uint32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5241,11 +5004,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_scale_attribute_double(self, scale_name, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetScaleAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32, ctypes.c_double]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32, ctypes.c_double]
 
         error_code = cfunc(
             scale_name, attribute, value)
@@ -5254,13 +5015,11 @@ class LibraryInterpreter(BaseInterpreter):
     def set_scale_attribute_double_array(
             self, scale_name, attribute, value, size):
         cfunc = lib_importer.cdll.DAQmxSetScaleAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_uint32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32,
+                wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
+                ctypes.c_uint, ctypes.c_uint32]
 
         error_code = cfunc(
             scale_name, attribute, value, len(value), size)
@@ -5268,11 +5027,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_scale_attribute_int32(self, scale_name, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetScaleAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32, ctypes.c_int32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32, ctypes.c_int32]
 
         error_code = cfunc(
             scale_name, attribute, value)
@@ -5280,11 +5037,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_scale_attribute_string(self, scale_name, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetScaleAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32, ctypes_byte_str]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                ctypes_byte_str, ctypes.c_int32, ctypes_byte_str]
 
         error_code = cfunc(
             scale_name, attribute, value)
@@ -5292,11 +5047,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_timing_attribute_bool(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32, c_bool32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, c_bool32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5304,12 +5057,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_timing_attribute_double(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_double]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_double]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5318,12 +5068,10 @@ class LibraryInterpreter(BaseInterpreter):
     def set_timing_attribute_ex_bool(
             self, task, device_names, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttributeEx
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, c_bool32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                c_bool32]
 
         error_code = cfunc(
             task, device_names, attribute, value)
@@ -5332,12 +5080,10 @@ class LibraryInterpreter(BaseInterpreter):
     def set_timing_attribute_ex_double(
             self, task, device_names, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttributeEx
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.c_double]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.c_double]
 
         error_code = cfunc(
             task, device_names, attribute, value)
@@ -5346,12 +5092,10 @@ class LibraryInterpreter(BaseInterpreter):
     def set_timing_attribute_ex_int32(
             self, task, device_names, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttributeEx
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.c_int32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.c_int32]
 
         error_code = cfunc(
             task, device_names, attribute, value)
@@ -5360,12 +5104,10 @@ class LibraryInterpreter(BaseInterpreter):
     def set_timing_attribute_ex_string(
             self, task, device_names, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttributeEx
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes_byte_str]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes_byte_str]
 
         error_code = cfunc(
             task, device_names, attribute, value)
@@ -5374,12 +5116,10 @@ class LibraryInterpreter(BaseInterpreter):
     def set_timing_attribute_ex_uint32(
             self, task, device_names, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttributeEx
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.c_uint32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.c_uint32]
 
         error_code = cfunc(
             task, device_names, attribute, value)
@@ -5388,12 +5128,10 @@ class LibraryInterpreter(BaseInterpreter):
     def set_timing_attribute_ex_uint64(
             self, task, device_names, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttributeEx
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.c_uint64]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.c_uint64]
 
         error_code = cfunc(
             task, device_names, attribute, value)
@@ -5401,12 +5139,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_timing_attribute_int32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_int32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5414,12 +5149,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_timing_attribute_string(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes_byte_str]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes_byte_str]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5427,12 +5159,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_timing_attribute_uint32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_uint32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_uint32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5440,12 +5169,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_timing_attribute_uint64(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_uint64]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_uint64]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5453,11 +5179,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_trig_attribute_bool(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32, c_bool32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, c_bool32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5465,12 +5189,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_trig_attribute_double(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_double]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_double]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5478,13 +5199,11 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_trig_attribute_double_array(self, task, attribute, value, size):
         cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_uint32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
+                ctypes.c_uint, ctypes.c_uint32]
 
         error_code = cfunc(
             task, attribute, value, len(value), size)
@@ -5492,12 +5211,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_trig_attribute_int32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_int32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5505,13 +5221,11 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_trig_attribute_int32_array(self, task, attribute, value, size):
         cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
-                        ctypes.c_uint, ctypes.c_uint32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32,
+                wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
+                ctypes.c_uint, ctypes.c_uint32]
 
         error_code = cfunc(
             task, attribute, value, len(value), size)
@@ -5519,12 +5233,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_trig_attribute_string(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes_byte_str]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes_byte_str]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5532,12 +5243,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_trig_attribute_uint32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_uint32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_uint32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5545,12 +5253,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_watchdog_attribute_bool(self, task, lines, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWatchdogAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, c_bool32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                c_bool32]
 
         error_code = cfunc(
             task, lines, attribute, value)
@@ -5558,12 +5264,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_watchdog_attribute_double(self, task, lines, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWatchdogAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.c_double]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.c_double]
 
         error_code = cfunc(
             task, lines, attribute, value)
@@ -5571,12 +5275,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_watchdog_attribute_int32(self, task, lines, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWatchdogAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes.c_int32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes.c_int32]
 
         error_code = cfunc(
             task, lines, attribute, value)
@@ -5584,12 +5286,10 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_watchdog_attribute_string(self, task, lines, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWatchdogAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32, ctypes_byte_str]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
+                ctypes_byte_str]
 
         error_code = cfunc(
             task, lines, attribute, value)
@@ -5597,11 +5297,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_write_attribute_bool(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32, c_bool32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, c_bool32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5609,12 +5307,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_write_attribute_double(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_double]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_double]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5622,12 +5317,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_write_attribute_int32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_int32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5635,12 +5327,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_write_attribute_string(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes_byte_str]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes_byte_str]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5648,12 +5337,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_write_attribute_uint32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_uint32]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_uint32]
 
         error_code = cfunc(
             task, attribute, value)
@@ -5661,12 +5347,9 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_write_attribute_uint64(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_uint64]
+        with cfunc.arglock:
+            cfunc.argtypes = [
+                lib_importer.task_handle, ctypes.c_int32, ctypes.c_uint64]
 
         error_code = cfunc(
             task, attribute, value)
