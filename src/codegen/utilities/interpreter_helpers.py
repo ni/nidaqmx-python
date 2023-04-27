@@ -4,6 +4,7 @@ import re
 from copy import deepcopy
 
 from codegen.functions.function import Function
+from codegen.utilities.function_helpers import to_param_argtype
 from codegen.utilities.helpers import camel_to_snake_case
 
 # This custom regex list doesn't split the string before the number.
@@ -33,6 +34,12 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetFirstSampClkWhen",
     "SetStartTrigTrigWhen",
     "SetSyncPulseTimeWhen",
+]
+
+LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
+    "RegisterSignalEvent",
+    "RegisterEveryNSamplesEvent",
+    "RegisterDoneEvent",
 ]
 
 
@@ -113,6 +120,8 @@ def get_instantiation_lines_for_output(func):
     for param in get_interpreter_output_params(func):
         if param.parameter_name == "task":
             continue
+        elif param.repeating_argument:
+            instantiation_lines.append(f"{param.parameter_name} = []")
         elif param.has_explicit_buffer_size:
             if (
                 param.size.mechanism == "passed-in" or param.size.mechanism == "passed-in-by-ptr"
@@ -128,6 +137,41 @@ def get_instantiation_lines_for_output(func):
         else:
             instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
     return instantiation_lines
+
+
+def get_instantiation_lines_for_varargs(func):
+    """Gets instantiation lines for functions with variable arguments."""
+    instantiation_lines = []
+    if any(get_varargs_parameters(func)):
+        for param in func.output_parameters:
+            instantiation_lines.append(
+                f"{param.parameter_name}_element = {param.ctypes_data_type}()"
+            )
+            instantiation_lines.append(
+                f"{param.parameter_name}.append({param.parameter_name}_element)"
+            )
+    return instantiation_lines
+
+
+def get_argument_definition_lines_for_varargs(varargs_params):
+    """Gets the lines for defining the variable arguments for a function."""
+    argument_definition_lines = []
+    for param in varargs_params:
+        argtype = to_param_argtype(param)
+        if param.direction == "in":
+            argument_definition_lines.append(f"args.append({param.parameter_name}[index])")
+        else:
+            argument_definition_lines.append(
+                f"args.append(ctypes.byref({param.parameter_name}_element))"
+            )
+        argument_definition_lines.append(f"argtypes.append({argtype})")
+        argument_definition_lines.append("")
+    return argument_definition_lines
+
+
+def get_varargs_parameters(func):
+    """Gets variable arguments of a function."""
+    return [p for p in func.parameters if p.repeating_argument]
 
 
 def get_interpreter_params(func):
@@ -215,7 +259,11 @@ def get_return_values(func):
     """Gets the values to add to return statement of the function."""
     return_values = []
     for param in get_interpreter_output_params(func):
-        if param.ctypes_data_type == "ctypes.c_char_p":
+        if param.repeating_argument:
+            return_values.append(
+                f"[{param.parameter_name}_element.value for {param.parameter_name}_element in {param.parameter_name}]"
+            )
+        elif param.ctypes_data_type == "ctypes.c_char_p":
             return_values.append(f"{param.parameter_name}.value.decode('ascii')")
         elif param.is_list:
             return_values.append(f"{param.parameter_name}.tolist()")
@@ -230,6 +278,8 @@ def get_c_function_call_template(func):
     """Gets the template to use for generating the logic of calling the c functions."""
     if func.stream_response:
         return "/event_function_call.py.mako"
+    elif any(get_varargs_parameters(func)):
+        return "/exec_cdecl_c_function_call.py.mako"
     elif has_parameter_with_ivi_dance_size_mechanism(func):
         return "/double_c_function_call.py.mako"
     return "/default_c_function_call.py.mako"
