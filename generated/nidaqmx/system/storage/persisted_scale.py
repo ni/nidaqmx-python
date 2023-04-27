@@ -40,7 +40,7 @@ class PersistedScale:
         return not self.__eq__(other)
 
     def __repr__(self):
-        return f'_PersistedScaleAlternateConstructor(name={self._name}, interpreter={self._interpreter})'
+        return f'PersistedScale(name={self._name})'
 
     @property
     def author(self):
