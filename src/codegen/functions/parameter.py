@@ -25,7 +25,9 @@ class Parameter:
             parameter_metadata.get("has_explicit_buffer_size", False) or self.size is not None
         )
         self._optional = parameter_metadata.get("is_optional_in_python", False)
-        self._is_repeating_argument = parameter_metadata.get("repeating_argument", False)
+        self._is_compound_type = parameter_metadata.get("is_compound_type", False)
+        self._repeating_argument = parameter_metadata.get("repeating_argument", False)
+        self._repeated_var_args = parameter_metadata.get("repeated_var_args", False)
         self._has_default = False
         if "python_default_value" in parameter_metadata:
             self._default = parameter_metadata.get("python_default_value")
@@ -38,6 +40,8 @@ class Parameter:
             self._is_enum = True
         if "callback_params" in parameter_metadata:
             self._callback_params = parameter_metadata.get("callback_params")
+        if "grpc_type" in parameter_metadata:
+            self._grpc_type = parameter_metadata.get("grpc_type")
 
     @property
     def direction(self):
@@ -126,6 +130,21 @@ class Parameter:
         return self._callback_params
 
     @property
-    def is_repeating_argument(self):
+    def is_compound_type(self):
+        """bool: Defines if the parameter is of compound type."""
+        return self._is_compound_type
+
+    @property
+    def repeating_argument(self):
         """bool: Defines if the parameter is a repeating type."""
-        return self._is_repeating_argument
+        return self._repeating_argument
+
+    @property
+    def repeated_var_args(self):
+        """bool: Defines if the parameter is a repeated argument."""
+        return self._repeated_var_args
+
+    @property
+    def grpc_type(self):
+        """str: Returns the grpc type of the parameter."""
+        return self._grpc_type
