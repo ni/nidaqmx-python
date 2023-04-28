@@ -142,9 +142,9 @@ class PersistedTask:
         Returns:
             nidaqmx.task.Task: Indicates the loaded Task object.
         """
-        task_handle = self._interpreter.load_task(self._name)
+        task_handle, is_new_session_initialized = self._interpreter.load_task(self._name)
 
-        return task._TaskAlternateConstructor(task_handle, self._interpreter)
+        return task._TaskAlternateConstructor(task_handle, self._interpreter, is_new_session_initialized)
     
 
 class _PersistedTaskAlternateConstructor(PersistedTask):

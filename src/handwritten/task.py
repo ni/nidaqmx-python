@@ -71,6 +71,7 @@ class Task:
                 results in an error.
         """
         self._handle = lib_importer.task_handle(0)
+        self._is_new_session_initialized = False
 
         if grpc_options and not (
             grpc_options.session_name == "" or grpc_options.session_name == new_task_name
@@ -81,7 +82,7 @@ class Task:
                 task_name=self.name)
         
         self._interpreter = utils._select_interpreter(grpc_options)
-        self._handle = self._interpreter.create_task(new_task_name)
+        self._handle, self._is_new_session_initialized = self._interpreter.create_task(new_task_name)
 
         self._initialize(self._handle, self._interpreter)
 
@@ -101,7 +102,8 @@ class Task:
         return False
 
     def __exit__(self, type, value, traceback):
-        self.close()
+        if self._is_new_session_initialized:
+            self.close()
 
     def __hash__(self):
         return hash(self._handle)
@@ -436,7 +438,7 @@ class Task:
         within the loop after you are finished with the task to avoid
         allocating unnecessary memory.
         """
-        if self._handle is None:
+        if self._handle is None or not self._is_new_session_initialized:
             warnings.warn(
                 'Attempted to close NI-DAQmx task of name "{}" but task was '
                 'already closed.'.format(self._saved_name), DaqResourceWarning)
@@ -445,6 +447,7 @@ class Task:
         self._interpreter.clear_task(self._handle)
 
         self._handle = None
+        self._is_new_session_initialized = False
 
     def control(self, action):
         """
@@ -1220,16 +1223,18 @@ class _TaskAlternateConstructor(Task):
     # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
     __slots__ = []
 
-    def __init__(self, task_handle, interpreter):
+    def __init__(self, task_handle, interpreter, is_new_session_initialized=False):
         """
         Args:
             task_handle: Specifies the task handle from which to create a
                 Task object.
             interpreter: Specifies the interpreter instance.
+            is_new_session_initialized: Specifies if new session is initialized or not.
             
         """
         self._handle = task_handle
         self._interpreter = interpreter
+        self._is_new_session_initialized = is_new_session_initialized
 
         self._initialize(self._handle, self._interpreter)
 

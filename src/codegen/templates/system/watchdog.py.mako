@@ -64,8 +64,9 @@ class WatchdogTask:
 
 
         self._handle = lib_importer.task_handle(0)
+        self._is_new_session_initialized = False
 
-        self._handle = self._interpreter.create_watchdog_timer_task_ex(device_name, task_name, timeout)
+        self._handle, self._is_new_session_initialized = self._interpreter.create_watchdog_timer_task_ex(device_name, task_name, timeout)
 
         # Saved name is used in self.close() to throw graceful error on
         # double closes.
@@ -83,7 +84,8 @@ class WatchdogTask:
         return self
 
     def __exit__(self, type, value, traceback):
-        self.close()
+        if self._is_new_session_initialized:
+            self.close()
 
     @property
     def expiration_states(self):
@@ -270,7 +272,7 @@ ${property_template.script_property(attribute)}\
         within the loop after you are finished with the task to avoid
         allocating unnecessary memory.
         """
-        if self._handle is None:
+        if self._handle is None or not self._is_new_session_initialized:
             warnings.warn(
                 'Attempted to close NI-DAQmx task of name "{}" but task was '
                 'already closed.'.format(self._saved_name), DaqResourceWarning)
@@ -279,6 +281,7 @@ ${property_template.script_property(attribute)}\
         self._interpreter.clear_task(self._handle)
 
         self._handle = None
+        self._is_new_session_initialized = False
 
     def control(self, action):
         """
