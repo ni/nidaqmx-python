@@ -125,14 +125,7 @@ class PersistedScale:
         This function does not remove the custom scale from virtual
         channels that use it.
         """
-        cfunc = lib_importer.windll.DAQmxDeleteSavedScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [ctypes_byte_str]
-
-        error_code = cfunc(self._name)
-        check_for_error(error_code)
+        self._interpreter.delete_saved_scale(self._name)
 
     def load(self):
         """
