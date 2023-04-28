@@ -438,7 +438,7 @@ class Task:
         within the loop after you are finished with the task to avoid
         allocating unnecessary memory.
         """
-        if self._handle:
+        if self._handle is None:
             warnings.warn(
                 'Attempted to close NI-DAQmx task of name "{}" but task was '
                 'already closed.'.format(self._saved_name), DaqResourceWarning)
