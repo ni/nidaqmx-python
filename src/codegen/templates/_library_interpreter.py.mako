@@ -47,6 +47,9 @@ class LibraryInterpreter(BaseInterpreter):
     instantiation_lines = get_instantiation_lines_for_output(func)
     %>\
 \
+%if func.is_init_method and func.is_python_codegen_method:
+        new_session_initialized = True
+%endif
 %if func.is_python_codegen_method:
     %if len(instantiation_lines) > 0:
         %for instantiation_line in instantiation_lines:
