@@ -1,5 +1,3 @@
-"""Tests for validating write properties."""
-
 import pytest
 
 import nidaqmx
@@ -18,19 +16,16 @@ def ao_task(any_x_series_device):
 
 
 def test__ao_task__get_int32_property__returns_default_value(ao_task: Task):
-    """Test to validate getter for int32 property."""
     assert ao_task.out_stream.offset == 0
 
 
 def test__ao_task__set_int32_property__returns_assigned_value(ao_task: Task):
-    """Test to validate setter for int32 property."""
     ao_task.out_stream.offset = 1
 
     assert ao_task.out_stream.offset == 1
 
 
 def test__ao_task__reset_int32_property__returns_default_value(ao_task: Task):
-    """Test to validate reset for int32 property."""
     ao_task.out_stream.offset = 2
 
     del ao_task.out_stream.offset
@@ -39,19 +34,16 @@ def test__ao_task__reset_int32_property__returns_default_value(ao_task: Task):
 
 
 def test__ao_task__get_enum_property__returns_default_value(ao_task: Task):
-    """Test to validate getter for enum property."""
     assert ao_task.out_stream.relative_to == WriteRelativeTo.CURRENT_WRITE_POSITION
 
 
 def test__ao_task__set_enum_property__returns_assigned_value(ao_task: Task):
-    """Test to validate setter for enum property."""
     ao_task.out_stream.relative_to = WriteRelativeTo.FIRST_SAMPLE
 
     assert ao_task.out_stream.relative_to == WriteRelativeTo.FIRST_SAMPLE
 
 
 def test__ao_task__reset_enum_property__returns_default_value(ao_task: Task):
-    """Test to validate reset for enum property."""
     ao_task.out_stream.relative_to = WriteRelativeTo.FIRST_SAMPLE
 
     del ao_task.out_stream.relative_to
@@ -60,19 +52,16 @@ def test__ao_task__reset_enum_property__returns_default_value(ao_task: Task):
 
 
 def test__ao_task__get_float_property__returns_default_value(ao_task: Task):
-    """Test to validate getter for float property."""
     assert ao_task.out_stream.sleep_time == 0.001
 
 
 def test__ao_task__set_float_property__returns_assigned_value(ao_task: Task):
-    """Test to validate setter for float property."""
     ao_task.out_stream.sleep_time = 1
 
     assert ao_task.out_stream.sleep_time == 1
 
 
 def test__ao_task__reset_float_property__returns_default_value(ao_task: Task):
-    """Test to validate reset for float property."""
     ao_task.out_stream.sleep_time = 3
 
     del ao_task.out_stream.sleep_time
@@ -81,12 +70,10 @@ def test__ao_task__reset_float_property__returns_default_value(ao_task: Task):
 
 
 def test__ao_task__get_uint32_property__returns_default_value(ao_task: Task):
-    """Test to validate getter for uInt32 property."""
     assert ao_task.out_stream.num_chans == 1
 
 
 def test__ao_task__get_uint64_property__returns_default_value(ao_task: Task):
-    """Test to validate getter for uInt64 property."""
     ao_task.start()
 
     assert ao_task.out_stream.curr_write_pos == 0
@@ -94,7 +81,6 @@ def test__ao_task__get_uint64_property__returns_default_value(ao_task: Task):
 
 @pytest.mark.parametrize("device_by_name", ["aoTester"], indirect=True)
 def test__ao_current_task__get_bool_property__returns_default_value(device_by_name):
-    """Test to validate getter for bool property."""
     with nidaqmx.Task() as ao_current_task:
         ao_current_task.ao_channels.add_ao_current_chan(device_by_name.ao_physical_chans[0].name)
         ao_current_task.start()
@@ -104,7 +90,6 @@ def test__ao_current_task__get_bool_property__returns_default_value(device_by_na
 
 @pytest.mark.parametrize("device_by_name", ["aoTester"], indirect=True)
 def test__ao_current_task__get_string_list_property__returns_default_value(device_by_name):
-    """Test to validate getter for string property."""
     with nidaqmx.Task() as ao_current_task:
         ao_current_task.ao_channels.add_ao_current_chan(device_by_name.ao_physical_chans[0].name)
         ao_current_task.start()
@@ -115,7 +100,6 @@ def test__ao_current_task__get_string_list_property__returns_default_value(devic
 
 @pytest.mark.parametrize("device_by_name", ["aoTester"], indirect=True)
 def test__ao_current_task__read_property__out_of_order__throws_daqerror(device_by_name):
-    """Test to validate error scenario for string property."""
     with nidaqmx.Task() as ao_current_task:
         ao_current_task.ao_channels.add_ao_current_chan(device_by_name.ao_physical_chans[0].name)
         ao_current_task.start()
