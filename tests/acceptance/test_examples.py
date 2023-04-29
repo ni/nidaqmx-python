@@ -15,7 +15,7 @@ EXAMPLE_PATHS = [p for p in EXAMPLES_DIRECTORY.glob("**/*.py") if p.name != "__i
 
 
 @pytest.mark.parametrize("example_path", EXAMPLE_PATHS)
-def test__shipping_example__run__no_errors(example_path: Path):
+def test___shipping_example___run___no_errors(example_path: Path):
     local_system = nidaqmx.system.System.local()
     example_source = example_path.read_text()
     for device_name in _find_device_names(example_source):
