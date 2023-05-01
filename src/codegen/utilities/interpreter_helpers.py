@@ -216,7 +216,7 @@ def get_grpc_interpreter_call_params(func, params):
                     f"{camel_to_snake_case(param.size.value)}={param.parameter_name}.size"
                 )
                 has_read_array_parameter = True
-            elif param.is_enum and not param.is_list:
+            elif param.is_grpc_enum or (param.is_enum and not param.is_list):
                 grpc_params.append(f"{param.parameter_name}_raw={param.parameter_name}")
             else:
                 grpc_params.append(f"{param.parameter_name}={param.parameter_name}")
@@ -371,7 +371,10 @@ def get_response_parameters(output_parameters: list):
     response_parameters = []
     for parameter in output_parameters:
         if not parameter.repeating_argument:
-            response_parameters.append(f"response.{parameter.parameter_name}")
+            if parameter.is_grpc_enum:
+                response_parameters.append(f"response.{parameter.parameter_name}_raw")
+            else:
+                response_parameters.append(f"response.{parameter.parameter_name}")
     return ", ".join(response_parameters)
 
 

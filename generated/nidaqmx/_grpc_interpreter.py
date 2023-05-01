@@ -1600,133 +1600,133 @@ class GrpcStubInterpreter(BaseInterpreter):
     def get_buffer_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetBufferAttributeUInt32,
-            grpc_types.GetBufferAttributeUInt32Request(attribute=attribute, task=task))
+            grpc_types.GetBufferAttributeUInt32Request(attribute_raw=attribute, task=task))
         return response.value
 
     def get_cal_info_attribute_bool(self, device_name, attribute):
         response = self._invoke(
             self._client.GetCalInfoAttributeBool,
             grpc_types.GetCalInfoAttributeBoolRequest(
-                attribute=attribute, device_name=device_name))
+                attribute_raw=attribute, device_name=device_name))
         return response.value
 
     def get_cal_info_attribute_double(self, device_name, attribute):
         response = self._invoke(
             self._client.GetCalInfoAttributeDouble,
             grpc_types.GetCalInfoAttributeDoubleRequest(
-                attribute=attribute, device_name=device_name))
+                attribute_raw=attribute, device_name=device_name))
         return response.value
 
     def get_cal_info_attribute_string(self, device_name, attribute):
         response = self._invoke(
             self._client.GetCalInfoAttributeString,
             grpc_types.GetCalInfoAttributeStringRequest(
-                attribute=attribute, device_name=device_name))
+                attribute_raw=attribute, device_name=device_name))
         return response.value
 
     def get_cal_info_attribute_uint32(self, device_name, attribute):
         response = self._invoke(
             self._client.GetCalInfoAttributeUInt32,
             grpc_types.GetCalInfoAttributeUInt32Request(
-                attribute=attribute, device_name=device_name))
+                attribute_raw=attribute, device_name=device_name))
         return response.value
 
     def get_chan_attribute_bool(self, task, channel, attribute):
         response = self._invoke(
             self._client.GetChanAttributeBool,
             grpc_types.GetChanAttributeBoolRequest(
-                attribute=attribute, channel=channel, task=task))
+                attribute_raw=attribute, channel=channel, task=task))
         return response.value
 
     def get_chan_attribute_double(self, task, channel, attribute):
         response = self._invoke(
             self._client.GetChanAttributeDouble,
             grpc_types.GetChanAttributeDoubleRequest(
-                attribute=attribute, channel=channel, task=task))
+                attribute_raw=attribute, channel=channel, task=task))
         return response.value
 
     def get_chan_attribute_double_array(self, task, channel, attribute):
         response = self._invoke(
             self._client.GetChanAttributeDoubleArray,
             grpc_types.GetChanAttributeDoubleArrayRequest(
-                attribute=attribute, channel=channel, task=task))
+                attribute_raw=attribute, channel=channel, task=task))
         return response.value
 
     def get_chan_attribute_int32(self, task, channel, attribute):
         response = self._invoke(
             self._client.GetChanAttributeInt32,
             grpc_types.GetChanAttributeInt32Request(
-                attribute=attribute, channel=channel, task=task))
-        return response.value
+                attribute_raw=attribute, channel=channel, task=task))
+        return response.value_raw
 
     def get_chan_attribute_string(self, task, channel, attribute):
         response = self._invoke(
             self._client.GetChanAttributeString,
             grpc_types.GetChanAttributeStringRequest(
-                attribute=attribute, channel=channel, task=task))
+                attribute_raw=attribute, channel=channel, task=task))
         return response.value
 
     def get_chan_attribute_uint32(self, task, channel, attribute):
         response = self._invoke(
             self._client.GetChanAttributeUInt32,
             grpc_types.GetChanAttributeUInt32Request(
-                attribute=attribute, channel=channel, task=task))
+                attribute_raw=attribute, channel=channel, task=task))
         return response.value
 
     def get_device_attribute_bool(self, device_name, attribute):
         response = self._invoke(
             self._client.GetDeviceAttributeBool,
             grpc_types.GetDeviceAttributeBoolRequest(
-                attribute=attribute, device_name=device_name))
+                attribute_raw=attribute, device_name=device_name))
         return response.value
 
     def get_device_attribute_double(self, device_name, attribute):
         response = self._invoke(
             self._client.GetDeviceAttributeDouble,
             grpc_types.GetDeviceAttributeDoubleRequest(
-                attribute=attribute, device_name=device_name))
+                attribute_raw=attribute, device_name=device_name))
         return response.value
 
     def get_device_attribute_double_array(self, device_name, attribute):
         response = self._invoke(
             self._client.GetDeviceAttributeDoubleArray,
             grpc_types.GetDeviceAttributeDoubleArrayRequest(
-                attribute=attribute, device_name=device_name))
+                attribute_raw=attribute, device_name=device_name))
         return response.value
 
     def get_device_attribute_int32(self, device_name, attribute):
         response = self._invoke(
             self._client.GetDeviceAttributeInt32,
             grpc_types.GetDeviceAttributeInt32Request(
-                attribute=attribute, device_name=device_name))
-        return response.value
+                attribute_raw=attribute, device_name=device_name))
+        return response.value_raw
 
     def get_device_attribute_int32_array(self, device_name, attribute):
         response = self._invoke(
             self._client.GetDeviceAttributeInt32Array,
             grpc_types.GetDeviceAttributeInt32ArrayRequest(
-                attribute=attribute, device_name=device_name))
-        return response.value
+                attribute_raw=attribute, device_name=device_name))
+        return response.value_raw
 
     def get_device_attribute_string(self, device_name, attribute):
         response = self._invoke(
             self._client.GetDeviceAttributeString,
             grpc_types.GetDeviceAttributeStringRequest(
-                attribute=attribute, device_name=device_name))
+                attribute_raw=attribute, device_name=device_name))
         return response.value
 
     def get_device_attribute_uint32(self, device_name, attribute):
         response = self._invoke(
             self._client.GetDeviceAttributeUInt32,
             grpc_types.GetDeviceAttributeUInt32Request(
-                attribute=attribute, device_name=device_name))
+                attribute_raw=attribute, device_name=device_name))
         return response.value
 
     def get_device_attribute_uint32_array(self, device_name, attribute):
         response = self._invoke(
             self._client.GetDeviceAttributeUInt32Array,
             grpc_types.GetDeviceAttributeUInt32ArrayRequest(
-                attribute=attribute, device_name=device_name))
+                attribute_raw=attribute, device_name=device_name))
         return response.value
 
     def get_digital_logic_family_power_up_state(self, device_name):
@@ -1764,31 +1764,35 @@ class GrpcStubInterpreter(BaseInterpreter):
     def get_exported_signal_attribute_bool(self, task, attribute):
         response = self._invoke(
             self._client.GetExportedSignalAttributeBool,
-            grpc_types.GetExportedSignalAttributeBoolRequest(attribute=attribute, task=task))
+            grpc_types.GetExportedSignalAttributeBoolRequest(attribute_raw=attribute, task=task))
         return response.value
 
     def get_exported_signal_attribute_double(self, task, attribute):
         response = self._invoke(
             self._client.GetExportedSignalAttributeDouble,
-            grpc_types.GetExportedSignalAttributeDoubleRequest(attribute=attribute, task=task))
+            grpc_types.GetExportedSignalAttributeDoubleRequest(
+                attribute_raw=attribute, task=task))
         return response.value
 
     def get_exported_signal_attribute_int32(self, task, attribute):
         response = self._invoke(
             self._client.GetExportedSignalAttributeInt32,
-            grpc_types.GetExportedSignalAttributeInt32Request(attribute=attribute, task=task))
-        return response.value
+            grpc_types.GetExportedSignalAttributeInt32Request(
+                attribute_raw=attribute, task=task))
+        return response.value_raw
 
     def get_exported_signal_attribute_string(self, task, attribute):
         response = self._invoke(
             self._client.GetExportedSignalAttributeString,
-            grpc_types.GetExportedSignalAttributeStringRequest(attribute=attribute, task=task))
+            grpc_types.GetExportedSignalAttributeStringRequest(
+                attribute_raw=attribute, task=task))
         return response.value
 
     def get_exported_signal_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetExportedSignalAttributeUInt32,
-            grpc_types.GetExportedSignalAttributeUInt32Request(attribute=attribute, task=task))
+            grpc_types.GetExportedSignalAttributeUInt32Request(
+                attribute_raw=attribute, task=task))
         return response.value
 
     def get_nth_task_channel(self, task, index):
@@ -1813,63 +1817,63 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.GetPersistedChanAttributeBool,
             grpc_types.GetPersistedChanAttributeBoolRequest(
-                attribute=attribute, channel=channel))
+                attribute_raw=attribute, channel=channel))
         return response.value
 
     def get_persisted_chan_attribute_string(self, channel, attribute):
         response = self._invoke(
             self._client.GetPersistedChanAttributeString,
             grpc_types.GetPersistedChanAttributeStringRequest(
-                attribute=attribute, channel=channel))
+                attribute_raw=attribute, channel=channel))
         return response.value
 
     def get_persisted_scale_attribute_bool(self, scale_name, attribute):
         response = self._invoke(
             self._client.GetPersistedScaleAttributeBool,
             grpc_types.GetPersistedScaleAttributeBoolRequest(
-                attribute=attribute, scale_name=scale_name))
+                attribute_raw=attribute, scale_name=scale_name))
         return response.value
 
     def get_persisted_scale_attribute_string(self, scale_name, attribute):
         response = self._invoke(
             self._client.GetPersistedScaleAttributeString,
             grpc_types.GetPersistedScaleAttributeStringRequest(
-                attribute=attribute, scale_name=scale_name))
+                attribute_raw=attribute, scale_name=scale_name))
         return response.value
 
     def get_persisted_task_attribute_bool(self, task_name, attribute):
         response = self._invoke(
             self._client.GetPersistedTaskAttributeBool,
             grpc_types.GetPersistedTaskAttributeBoolRequest(
-                attribute=attribute, task_name=task_name))
+                attribute_raw=attribute, task_name=task_name))
         return response.value
 
     def get_persisted_task_attribute_string(self, task_name, attribute):
         response = self._invoke(
             self._client.GetPersistedTaskAttributeString,
             grpc_types.GetPersistedTaskAttributeStringRequest(
-                attribute=attribute, task_name=task_name))
+                attribute_raw=attribute, task_name=task_name))
         return response.value
 
     def get_physical_chan_attribute_bool(self, physical_channel, attribute):
         response = self._invoke(
             self._client.GetPhysicalChanAttributeBool,
             grpc_types.GetPhysicalChanAttributeBoolRequest(
-                attribute=attribute, physical_channel=physical_channel))
+                attribute_raw=attribute, physical_channel=physical_channel))
         return response.value
 
     def get_physical_chan_attribute_bytes(self, physical_channel, attribute):
         response = self._invoke(
             self._client.GetPhysicalChanAttributeBytes,
             grpc_types.GetPhysicalChanAttributeBytesRequest(
-                attribute=attribute, physical_channel=physical_channel))
+                attribute_raw=attribute, physical_channel=physical_channel))
         return response.value
 
     def get_physical_chan_attribute_double(self, physical_channel, attribute):
         response = self._invoke(
             self._client.GetPhysicalChanAttributeDouble,
             grpc_types.GetPhysicalChanAttributeDoubleRequest(
-                attribute=attribute, physical_channel=physical_channel))
+                attribute_raw=attribute, physical_channel=physical_channel))
         return response.value
 
     def get_physical_chan_attribute_double_array(
@@ -1877,36 +1881,36 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.GetPhysicalChanAttributeDoubleArray,
             grpc_types.GetPhysicalChanAttributeDoubleArrayRequest(
-                attribute=attribute, physical_channel=physical_channel))
+                attribute_raw=attribute, physical_channel=physical_channel))
         return response.value
 
     def get_physical_chan_attribute_int32(self, physical_channel, attribute):
         response = self._invoke(
             self._client.GetPhysicalChanAttributeInt32,
             grpc_types.GetPhysicalChanAttributeInt32Request(
-                attribute=attribute, physical_channel=physical_channel))
-        return response.value
+                attribute_raw=attribute, physical_channel=physical_channel))
+        return response.value_raw
 
     def get_physical_chan_attribute_int32_array(
             self, physical_channel, attribute):
         response = self._invoke(
             self._client.GetPhysicalChanAttributeInt32Array,
             grpc_types.GetPhysicalChanAttributeInt32ArrayRequest(
-                attribute=attribute, physical_channel=physical_channel))
-        return response.value
+                attribute_raw=attribute, physical_channel=physical_channel))
+        return response.value_raw
 
     def get_physical_chan_attribute_string(self, physical_channel, attribute):
         response = self._invoke(
             self._client.GetPhysicalChanAttributeString,
             grpc_types.GetPhysicalChanAttributeStringRequest(
-                attribute=attribute, physical_channel=physical_channel))
+                attribute_raw=attribute, physical_channel=physical_channel))
         return response.value
 
     def get_physical_chan_attribute_uint32(self, physical_channel, attribute):
         response = self._invoke(
             self._client.GetPhysicalChanAttributeUInt32,
             grpc_types.GetPhysicalChanAttributeUInt32Request(
-                attribute=attribute, physical_channel=physical_channel))
+                attribute_raw=attribute, physical_channel=physical_channel))
         return response.value
 
     def get_physical_chan_attribute_uint32_array(
@@ -1914,86 +1918,89 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.GetPhysicalChanAttributeUInt32Array,
             grpc_types.GetPhysicalChanAttributeUInt32ArrayRequest(
-                attribute=attribute, physical_channel=physical_channel))
+                attribute_raw=attribute, physical_channel=physical_channel))
         return response.value
 
     def get_read_attribute_bool(self, task, attribute):
         response = self._invoke(
             self._client.GetReadAttributeBool,
-            grpc_types.GetReadAttributeBoolRequest(attribute=attribute, task=task))
+            grpc_types.GetReadAttributeBoolRequest(attribute_raw=attribute, task=task))
         return response.value
 
     def get_read_attribute_double(self, task, attribute):
         response = self._invoke(
             self._client.GetReadAttributeDouble,
-            grpc_types.GetReadAttributeDoubleRequest(attribute=attribute, task=task))
+            grpc_types.GetReadAttributeDoubleRequest(attribute_raw=attribute, task=task))
         return response.value
 
     def get_read_attribute_int32(self, task, attribute):
         response = self._invoke(
             self._client.GetReadAttributeInt32,
-            grpc_types.GetReadAttributeInt32Request(attribute=attribute, task=task))
-        return response.value
+            grpc_types.GetReadAttributeInt32Request(attribute_raw=attribute, task=task))
+        return response.value_raw
 
     def get_read_attribute_string(self, task, attribute):
         response = self._invoke(
             self._client.GetReadAttributeString,
-            grpc_types.GetReadAttributeStringRequest(attribute=attribute, task=task))
+            grpc_types.GetReadAttributeStringRequest(attribute_raw=attribute, task=task))
         return response.value
 
     def get_read_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetReadAttributeUInt32,
-            grpc_types.GetReadAttributeUInt32Request(attribute=attribute, task=task))
+            grpc_types.GetReadAttributeUInt32Request(attribute_raw=attribute, task=task))
         return response.value
 
     def get_read_attribute_uint64(self, task, attribute):
         response = self._invoke(
             self._client.GetReadAttributeUInt64,
-            grpc_types.GetReadAttributeUInt64Request(attribute=attribute, task=task))
+            grpc_types.GetReadAttributeUInt64Request(attribute_raw=attribute, task=task))
         return response.value
 
     def get_real_time_attribute_bool(self, task, attribute):
         response = self._invoke(
             self._client.GetRealTimeAttributeBool,
-            grpc_types.GetRealTimeAttributeBoolRequest(attribute=attribute, task=task))
+            grpc_types.GetRealTimeAttributeBoolRequest(attribute_raw=attribute, task=task))
         return response.value
 
     def get_real_time_attribute_int32(self, task, attribute):
         response = self._invoke(
             self._client.GetRealTimeAttributeInt32,
-            grpc_types.GetRealTimeAttributeInt32Request(attribute=attribute, task=task))
-        return response.value
+            grpc_types.GetRealTimeAttributeInt32Request(attribute_raw=attribute, task=task))
+        return response.value_raw
 
     def get_real_time_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetRealTimeAttributeUInt32,
-            grpc_types.GetRealTimeAttributeUInt32Request(attribute=attribute, task=task))
+            grpc_types.GetRealTimeAttributeUInt32Request(attribute_raw=attribute, task=task))
         return response.value
 
     def get_scale_attribute_double(self, scale_name, attribute):
         response = self._invoke(
             self._client.GetScaleAttributeDouble,
-            grpc_types.GetScaleAttributeDoubleRequest(attribute=attribute, scale_name=scale_name))
+            grpc_types.GetScaleAttributeDoubleRequest(
+                attribute_raw=attribute, scale_name=scale_name))
         return response.value
 
     def get_scale_attribute_double_array(self, scale_name, attribute):
         response = self._invoke(
             self._client.GetScaleAttributeDoubleArray,
             grpc_types.GetScaleAttributeDoubleArrayRequest(
-                attribute=attribute, scale_name=scale_name))
+                attribute_raw=attribute, scale_name=scale_name))
         return response.value
 
     def get_scale_attribute_int32(self, scale_name, attribute):
         response = self._invoke(
             self._client.GetScaleAttributeInt32,
-            grpc_types.GetScaleAttributeInt32Request(attribute=attribute, scale_name=scale_name))
-        return response.value
+            grpc_types.GetScaleAttributeInt32Request(
+                attribute_raw=attribute, scale_name=scale_name))
+        return response.value_raw
 
     def get_scale_attribute_string(self, scale_name, attribute):
         response = self._invoke(
             self._client.GetScaleAttributeString,
-            grpc_types.GetScaleAttributeStringRequest(attribute=attribute, scale_name=scale_name))
+            grpc_types.GetScaleAttributeStringRequest(
+                attribute_raw=attribute, scale_name=scale_name))
         return response.value
 
     def get_self_cal_last_date_and_time(self, device_name):
@@ -2005,215 +2012,215 @@ class GrpcStubInterpreter(BaseInterpreter):
     def get_system_info_attribute_string(self, attribute):
         response = self._invoke(
             self._client.GetSystemInfoAttributeString,
-            grpc_types.GetSystemInfoAttributeStringRequest(attribute=attribute))
+            grpc_types.GetSystemInfoAttributeStringRequest(attribute_raw=attribute))
         return response.value
 
     def get_system_info_attribute_uint32(self, attribute):
         response = self._invoke(
             self._client.GetSystemInfoAttributeUInt32,
-            grpc_types.GetSystemInfoAttributeUInt32Request(attribute=attribute))
+            grpc_types.GetSystemInfoAttributeUInt32Request(attribute_raw=attribute))
         return response.value
 
     def get_task_attribute_bool(self, task, attribute):
         response = self._invoke(
             self._client.GetTaskAttributeBool,
-            grpc_types.GetTaskAttributeBoolRequest(attribute=attribute, task=task))
+            grpc_types.GetTaskAttributeBoolRequest(attribute_raw=attribute, task=task))
         return response.value
 
     def get_task_attribute_string(self, task, attribute):
         response = self._invoke(
             self._client.GetTaskAttributeString,
-            grpc_types.GetTaskAttributeStringRequest(attribute=attribute, task=task))
+            grpc_types.GetTaskAttributeStringRequest(attribute_raw=attribute, task=task))
         return response.value
 
     def get_task_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetTaskAttributeUInt32,
-            grpc_types.GetTaskAttributeUInt32Request(attribute=attribute, task=task))
+            grpc_types.GetTaskAttributeUInt32Request(attribute_raw=attribute, task=task))
         return response.value
 
     def get_timing_attribute_bool(self, task, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeBool,
-            grpc_types.GetTimingAttributeBoolRequest(attribute=attribute, task=task))
+            grpc_types.GetTimingAttributeBoolRequest(attribute_raw=attribute, task=task))
         return response.value
 
     def get_timing_attribute_double(self, task, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeDouble,
-            grpc_types.GetTimingAttributeDoubleRequest(attribute=attribute, task=task))
+            grpc_types.GetTimingAttributeDoubleRequest(attribute_raw=attribute, task=task))
         return response.value
 
     def get_timing_attribute_ex_bool(self, task, device_names, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeExBool,
             grpc_types.GetTimingAttributeExBoolRequest(
-                attribute=attribute, device_names=device_names, task=task))
+                attribute_raw=attribute, device_names=device_names, task=task))
         return response.value
 
     def get_timing_attribute_ex_double(self, task, device_names, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeExDouble,
             grpc_types.GetTimingAttributeExDoubleRequest(
-                attribute=attribute, device_names=device_names, task=task))
+                attribute_raw=attribute, device_names=device_names, task=task))
         return response.value
 
     def get_timing_attribute_ex_int32(self, task, device_names, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeExInt32,
             grpc_types.GetTimingAttributeExInt32Request(
-                attribute=attribute, device_names=device_names, task=task))
-        return response.value
+                attribute_raw=attribute, device_names=device_names, task=task))
+        return response.value_raw
 
     def get_timing_attribute_ex_string(self, task, device_names, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeExString,
             grpc_types.GetTimingAttributeExStringRequest(
-                attribute=attribute, device_names=device_names, task=task))
+                attribute_raw=attribute, device_names=device_names, task=task))
         return response.value
 
     def get_timing_attribute_ex_uint32(self, task, device_names, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeExUInt32,
             grpc_types.GetTimingAttributeExUInt32Request(
-                attribute=attribute, device_names=device_names, task=task))
+                attribute_raw=attribute, device_names=device_names, task=task))
         return response.value
 
     def get_timing_attribute_ex_uint64(self, task, device_names, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeExUInt64,
             grpc_types.GetTimingAttributeExUInt64Request(
-                attribute=attribute, device_names=device_names, task=task))
+                attribute_raw=attribute, device_names=device_names, task=task))
         return response.value
 
     def get_timing_attribute_int32(self, task, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeInt32,
-            grpc_types.GetTimingAttributeInt32Request(attribute=attribute, task=task))
-        return response.value
+            grpc_types.GetTimingAttributeInt32Request(attribute_raw=attribute, task=task))
+        return response.value_raw
 
     def get_timing_attribute_string(self, task, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeString,
-            grpc_types.GetTimingAttributeStringRequest(attribute=attribute, task=task))
+            grpc_types.GetTimingAttributeStringRequest(attribute_raw=attribute, task=task))
         return response.value
 
     def get_timing_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeUInt32,
-            grpc_types.GetTimingAttributeUInt32Request(attribute=attribute, task=task))
+            grpc_types.GetTimingAttributeUInt32Request(attribute_raw=attribute, task=task))
         return response.value
 
     def get_timing_attribute_uint64(self, task, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeUInt64,
-            grpc_types.GetTimingAttributeUInt64Request(attribute=attribute, task=task))
+            grpc_types.GetTimingAttributeUInt64Request(attribute_raw=attribute, task=task))
         return response.value
 
     def get_trig_attribute_bool(self, task, attribute):
         response = self._invoke(
             self._client.GetTrigAttributeBool,
-            grpc_types.GetTrigAttributeBoolRequest(attribute=attribute, task=task))
+            grpc_types.GetTrigAttributeBoolRequest(attribute_raw=attribute, task=task))
         return response.value
 
     def get_trig_attribute_double(self, task, attribute):
         response = self._invoke(
             self._client.GetTrigAttributeDouble,
-            grpc_types.GetTrigAttributeDoubleRequest(attribute=attribute, task=task))
+            grpc_types.GetTrigAttributeDoubleRequest(attribute_raw=attribute, task=task))
         return response.value
 
     def get_trig_attribute_double_array(self, task, attribute):
         response = self._invoke(
             self._client.GetTrigAttributeDoubleArray,
-            grpc_types.GetTrigAttributeDoubleArrayRequest(attribute=attribute, task=task))
+            grpc_types.GetTrigAttributeDoubleArrayRequest(attribute_raw=attribute, task=task))
         return response.value
 
     def get_trig_attribute_int32(self, task, attribute):
         response = self._invoke(
             self._client.GetTrigAttributeInt32,
-            grpc_types.GetTrigAttributeInt32Request(attribute=attribute, task=task))
-        return response.value
+            grpc_types.GetTrigAttributeInt32Request(attribute_raw=attribute, task=task))
+        return response.value_raw
 
     def get_trig_attribute_int32_array(self, task, attribute):
         response = self._invoke(
             self._client.GetTrigAttributeInt32Array,
-            grpc_types.GetTrigAttributeInt32ArrayRequest(attribute=attribute, task=task))
-        return response.value
+            grpc_types.GetTrigAttributeInt32ArrayRequest(attribute_raw=attribute, task=task))
+        return response.value_raw
 
     def get_trig_attribute_string(self, task, attribute):
         response = self._invoke(
             self._client.GetTrigAttributeString,
-            grpc_types.GetTrigAttributeStringRequest(attribute=attribute, task=task))
+            grpc_types.GetTrigAttributeStringRequest(attribute_raw=attribute, task=task))
         return response.value
 
     def get_trig_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetTrigAttributeUInt32,
-            grpc_types.GetTrigAttributeUInt32Request(attribute=attribute, task=task))
+            grpc_types.GetTrigAttributeUInt32Request(attribute_raw=attribute, task=task))
         return response.value
 
     def get_watchdog_attribute_bool(self, task, lines, attribute):
         response = self._invoke(
             self._client.GetWatchdogAttributeBool,
             grpc_types.GetWatchdogAttributeBoolRequest(
-                attribute=attribute, lines=lines, task=task))
+                attribute_raw=attribute, lines=lines, task=task))
         return response.value
 
     def get_watchdog_attribute_double(self, task, lines, attribute):
         response = self._invoke(
             self._client.GetWatchdogAttributeDouble,
             grpc_types.GetWatchdogAttributeDoubleRequest(
-                attribute=attribute, lines=lines, task=task))
+                attribute_raw=attribute, lines=lines, task=task))
         return response.value
 
     def get_watchdog_attribute_int32(self, task, lines, attribute):
         response = self._invoke(
             self._client.GetWatchdogAttributeInt32,
             grpc_types.GetWatchdogAttributeInt32Request(
-                attribute=attribute, lines=lines, task=task))
-        return response.value
+                attribute_raw=attribute, lines=lines, task=task))
+        return response.value_raw
 
     def get_watchdog_attribute_string(self, task, lines, attribute):
         response = self._invoke(
             self._client.GetWatchdogAttributeString,
             grpc_types.GetWatchdogAttributeStringRequest(
-                attribute=attribute, lines=lines, task=task))
+                attribute_raw=attribute, lines=lines, task=task))
         return response.value
 
     def get_write_attribute_bool(self, task, attribute):
         response = self._invoke(
             self._client.GetWriteAttributeBool,
-            grpc_types.GetWriteAttributeBoolRequest(attribute=attribute, task=task))
+            grpc_types.GetWriteAttributeBoolRequest(attribute_raw=attribute, task=task))
         return response.value
 
     def get_write_attribute_double(self, task, attribute):
         response = self._invoke(
             self._client.GetWriteAttributeDouble,
-            grpc_types.GetWriteAttributeDoubleRequest(attribute=attribute, task=task))
+            grpc_types.GetWriteAttributeDoubleRequest(attribute_raw=attribute, task=task))
         return response.value
 
     def get_write_attribute_int32(self, task, attribute):
         response = self._invoke(
             self._client.GetWriteAttributeInt32,
-            grpc_types.GetWriteAttributeInt32Request(attribute=attribute, task=task))
-        return response.value
+            grpc_types.GetWriteAttributeInt32Request(attribute_raw=attribute, task=task))
+        return response.value_raw
 
     def get_write_attribute_string(self, task, attribute):
         response = self._invoke(
             self._client.GetWriteAttributeString,
-            grpc_types.GetWriteAttributeStringRequest(attribute=attribute, task=task))
+            grpc_types.GetWriteAttributeStringRequest(attribute_raw=attribute, task=task))
         return response.value
 
     def get_write_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetWriteAttributeUInt32,
-            grpc_types.GetWriteAttributeUInt32Request(attribute=attribute, task=task))
+            grpc_types.GetWriteAttributeUInt32Request(attribute_raw=attribute, task=task))
         return response.value
 
     def get_write_attribute_uint64(self, task, attribute):
         response = self._invoke(
             self._client.GetWriteAttributeUInt64,
-            grpc_types.GetWriteAttributeUInt64Request(attribute=attribute, task=task))
+            grpc_types.GetWriteAttributeUInt64Request(attribute_raw=attribute, task=task))
         return response.value
 
     def is_task_done(self, task):
@@ -2541,12 +2548,13 @@ class GrpcStubInterpreter(BaseInterpreter):
     def reset_buffer_attribute(self, task, attribute):
         response = self._invoke(
             self._client.ResetBufferAttribute,
-            grpc_types.ResetBufferAttributeRequest(attribute=attribute, task=task))
+            grpc_types.ResetBufferAttributeRequest(attribute_raw=attribute, task=task))
 
     def reset_chan_attribute(self, task, channel, attribute):
         response = self._invoke(
             self._client.ResetChanAttribute,
-            grpc_types.ResetChanAttributeRequest(attribute=attribute, channel=channel, task=task))
+            grpc_types.ResetChanAttributeRequest(
+                attribute_raw=attribute, channel=channel, task=task))
 
     def reset_device(self, device_name):
         response = self._invoke(
@@ -2556,43 +2564,44 @@ class GrpcStubInterpreter(BaseInterpreter):
     def reset_exported_signal_attribute(self, task, attribute):
         response = self._invoke(
             self._client.ResetExportedSignalAttribute,
-            grpc_types.ResetExportedSignalAttributeRequest(attribute=attribute, task=task))
+            grpc_types.ResetExportedSignalAttributeRequest(attribute_raw=attribute, task=task))
 
     def reset_read_attribute(self, task, attribute):
         response = self._invoke(
             self._client.ResetReadAttribute,
-            grpc_types.ResetReadAttributeRequest(attribute=attribute, task=task))
+            grpc_types.ResetReadAttributeRequest(attribute_raw=attribute, task=task))
 
     def reset_real_time_attribute(self, task, attribute):
         response = self._invoke(
             self._client.ResetRealTimeAttribute,
-            grpc_types.ResetRealTimeAttributeRequest(attribute=attribute, task=task))
+            grpc_types.ResetRealTimeAttributeRequest(attribute_raw=attribute, task=task))
 
     def reset_timing_attribute(self, task, attribute):
         response = self._invoke(
             self._client.ResetTimingAttribute,
-            grpc_types.ResetTimingAttributeRequest(attribute=attribute, task=task))
+            grpc_types.ResetTimingAttributeRequest(attribute_raw=attribute, task=task))
 
     def reset_timing_attribute_ex(self, task, device_names, attribute):
         response = self._invoke(
             self._client.ResetTimingAttributeEx,
             grpc_types.ResetTimingAttributeExRequest(
-                attribute=attribute, device_names=device_names, task=task))
+                attribute_raw=attribute, device_names=device_names, task=task))
 
     def reset_trig_attribute(self, task, attribute):
         response = self._invoke(
             self._client.ResetTrigAttribute,
-            grpc_types.ResetTrigAttributeRequest(attribute=attribute, task=task))
+            grpc_types.ResetTrigAttributeRequest(attribute_raw=attribute, task=task))
 
     def reset_watchdog_attribute(self, task, lines, attribute):
         response = self._invoke(
             self._client.ResetWatchdogAttribute,
-            grpc_types.ResetWatchdogAttributeRequest(attribute=attribute, lines=lines, task=task))
+            grpc_types.ResetWatchdogAttributeRequest(
+                attribute_raw=attribute, lines=lines, task=task))
 
     def reset_write_attribute(self, task, attribute):
         response = self._invoke(
             self._client.ResetWriteAttribute,
-            grpc_types.ResetWriteAttributeRequest(attribute=attribute, task=task))
+            grpc_types.ResetWriteAttributeRequest(attribute_raw=attribute, task=task))
 
     def save_global_chan(self, task, channel_name, save_as, author, options):
         response = self._invoke(
@@ -2660,69 +2669,74 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.SetBufferAttributeUInt32,
             grpc_types.SetBufferAttributeUInt32Request(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value=value))
 
     def set_cal_info_attribute_bool(self, device_name, attribute, value):
         response = self._invoke(
             self._client.SetCalInfoAttributeBool,
             grpc_types.SetCalInfoAttributeBoolRequest(
-                attribute=attribute, device_name=device_name, value=value))
+                attribute_raw=attribute, device_name=device_name, value=value))
 
     def set_cal_info_attribute_double(self, device_name, attribute, value):
         response = self._invoke(
             self._client.SetCalInfoAttributeDouble,
             grpc_types.SetCalInfoAttributeDoubleRequest(
-                attribute=attribute, device_name=device_name, value=value))
+                attribute_raw=attribute, device_name=device_name, value=value))
 
     def set_cal_info_attribute_string(self, device_name, attribute, value):
         response = self._invoke(
             self._client.SetCalInfoAttributeString,
             grpc_types.SetCalInfoAttributeStringRequest(
-                attribute=attribute, device_name=device_name, value=value))
+                attribute_raw=attribute, device_name=device_name, value=value))
 
     def set_cal_info_attribute_uint32(self, device_name, attribute, value):
         response = self._invoke(
             self._client.SetCalInfoAttributeUInt32,
             grpc_types.SetCalInfoAttributeUInt32Request(
-                attribute=attribute, device_name=device_name, value=value))
+                attribute_raw=attribute, device_name=device_name, value=value))
 
     def set_chan_attribute_bool(self, task, channel, attribute, value):
         response = self._invoke(
             self._client.SetChanAttributeBool,
             grpc_types.SetChanAttributeBoolRequest(
-                attribute=attribute, channel=channel, task=task, value=value))
+                attribute_raw=attribute, channel=channel, task=task,
+                value=value))
 
     def set_chan_attribute_double(self, task, channel, attribute, value):
         response = self._invoke(
             self._client.SetChanAttributeDouble,
             grpc_types.SetChanAttributeDoubleRequest(
-                attribute=attribute, channel=channel, task=task, value=value))
+                attribute_raw=attribute, channel=channel, task=task,
+                value=value))
 
     def set_chan_attribute_double_array(
             self, task, channel, attribute, value, size):
         response = self._invoke(
             self._client.SetChanAttributeDoubleArray,
             grpc_types.SetChanAttributeDoubleArrayRequest(
-                attribute=attribute, channel=channel, size=size, task=task,
-                value=value))
+                attribute_raw=attribute, channel=channel, size=size,
+                task=task, value=value))
 
     def set_chan_attribute_int32(self, task, channel, attribute, value):
         response = self._invoke(
             self._client.SetChanAttributeInt32,
             grpc_types.SetChanAttributeInt32Request(
-                attribute=attribute, channel=channel, task=task, value=value))
+                attribute_raw=attribute, channel=channel, task=task,
+                value_raw=value))
 
     def set_chan_attribute_string(self, task, channel, attribute, value):
         response = self._invoke(
             self._client.SetChanAttributeString,
             grpc_types.SetChanAttributeStringRequest(
-                attribute=attribute, channel=channel, task=task, value=value))
+                attribute_raw=attribute, channel=channel, task=task,
+                value=value))
 
     def set_chan_attribute_uint32(self, task, channel, attribute, value):
         response = self._invoke(
             self._client.SetChanAttributeUInt32,
             grpc_types.SetChanAttributeUInt32Request(
-                attribute=attribute, channel=channel, task=task, value=value))
+                attribute_raw=attribute, channel=channel, task=task,
+                value=value))
 
     def set_digital_logic_family_power_up_state(
             self, device_name, logic_family):
@@ -2746,123 +2760,131 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.SetExportedSignalAttributeBool,
             grpc_types.SetExportedSignalAttributeBoolRequest(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value=value))
 
     def set_exported_signal_attribute_double(self, task, attribute, value):
         response = self._invoke(
             self._client.SetExportedSignalAttributeDouble,
             grpc_types.SetExportedSignalAttributeDoubleRequest(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value=value))
 
     def set_exported_signal_attribute_int32(self, task, attribute, value):
         response = self._invoke(
             self._client.SetExportedSignalAttributeInt32,
             grpc_types.SetExportedSignalAttributeInt32Request(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value_raw=value))
 
     def set_exported_signal_attribute_string(self, task, attribute, value):
         response = self._invoke(
             self._client.SetExportedSignalAttributeString,
             grpc_types.SetExportedSignalAttributeStringRequest(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value=value))
 
     def set_exported_signal_attribute_uint32(self, task, attribute, value):
         response = self._invoke(
             self._client.SetExportedSignalAttributeUInt32,
             grpc_types.SetExportedSignalAttributeUInt32Request(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value=value))
 
     def set_read_attribute_bool(self, task, attribute, value):
         response = self._invoke(
             self._client.SetReadAttributeBool,
-            grpc_types.SetReadAttributeBoolRequest(attribute=attribute, task=task, value=value))
+            grpc_types.SetReadAttributeBoolRequest(
+                attribute_raw=attribute, task=task, value=value))
 
     def set_read_attribute_double(self, task, attribute, value):
         response = self._invoke(
             self._client.SetReadAttributeDouble,
-            grpc_types.SetReadAttributeDoubleRequest(attribute=attribute, task=task, value=value))
+            grpc_types.SetReadAttributeDoubleRequest(
+                attribute_raw=attribute, task=task, value=value))
 
     def set_read_attribute_int32(self, task, attribute, value):
         response = self._invoke(
             self._client.SetReadAttributeInt32,
-            grpc_types.SetReadAttributeInt32Request(attribute=attribute, task=task, value=value))
+            grpc_types.SetReadAttributeInt32Request(
+                attribute_raw=attribute, task=task, value_raw=value))
 
     def set_read_attribute_string(self, task, attribute, value):
         response = self._invoke(
             self._client.SetReadAttributeString,
-            grpc_types.SetReadAttributeStringRequest(attribute=attribute, task=task, value=value))
+            grpc_types.SetReadAttributeStringRequest(
+                attribute_raw=attribute, task=task, value=value))
 
     def set_read_attribute_uint32(self, task, attribute, value):
         response = self._invoke(
             self._client.SetReadAttributeUInt32,
-            grpc_types.SetReadAttributeUInt32Request(attribute=attribute, task=task, value=value))
+            grpc_types.SetReadAttributeUInt32Request(
+                attribute_raw=attribute, task=task, value=value))
 
     def set_read_attribute_uint64(self, task, attribute, value):
         response = self._invoke(
             self._client.SetReadAttributeUInt64,
-            grpc_types.SetReadAttributeUInt64Request(attribute=attribute, task=task, value=value))
+            grpc_types.SetReadAttributeUInt64Request(
+                attribute_raw=attribute, task=task, value=value))
 
     def set_real_time_attribute_bool(self, task, attribute, value):
         response = self._invoke(
             self._client.SetRealTimeAttributeBool,
             grpc_types.SetRealTimeAttributeBoolRequest(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value=value))
 
     def set_real_time_attribute_int32(self, task, attribute, value):
         response = self._invoke(
             self._client.SetRealTimeAttributeInt32,
             grpc_types.SetRealTimeAttributeInt32Request(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value_raw=value))
 
     def set_real_time_attribute_uint32(self, task, attribute, value):
         response = self._invoke(
             self._client.SetRealTimeAttributeUInt32,
             grpc_types.SetRealTimeAttributeUInt32Request(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value=value))
 
     def set_scale_attribute_double(self, scale_name, attribute, value):
         response = self._invoke(
             self._client.SetScaleAttributeDouble,
             grpc_types.SetScaleAttributeDoubleRequest(
-                attribute=attribute, scale_name=scale_name, value=value))
+                attribute_raw=attribute, scale_name=scale_name, value=value))
 
     def set_scale_attribute_double_array(
             self, scale_name, attribute, value, size):
         response = self._invoke(
             self._client.SetScaleAttributeDoubleArray,
             grpc_types.SetScaleAttributeDoubleArrayRequest(
-                attribute=attribute, scale_name=scale_name, size=size,
+                attribute_raw=attribute, scale_name=scale_name, size=size,
                 value=value))
 
     def set_scale_attribute_int32(self, scale_name, attribute, value):
         response = self._invoke(
             self._client.SetScaleAttributeInt32,
             grpc_types.SetScaleAttributeInt32Request(
-                attribute=attribute, scale_name=scale_name, value=value))
+                attribute_raw=attribute, scale_name=scale_name,
+                value_raw=value))
 
     def set_scale_attribute_string(self, scale_name, attribute, value):
         response = self._invoke(
             self._client.SetScaleAttributeString,
             grpc_types.SetScaleAttributeStringRequest(
-                attribute=attribute, scale_name=scale_name, value=value))
+                attribute_raw=attribute, scale_name=scale_name, value=value))
 
     def set_timing_attribute_bool(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTimingAttributeBool,
-            grpc_types.SetTimingAttributeBoolRequest(attribute=attribute, task=task, value=value))
+            grpc_types.SetTimingAttributeBoolRequest(
+                attribute_raw=attribute, task=task, value=value))
 
     def set_timing_attribute_double(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTimingAttributeDouble,
             grpc_types.SetTimingAttributeDoubleRequest(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value=value))
 
     def set_timing_attribute_ex_bool(
             self, task, device_names, attribute, value):
         response = self._invoke(
             self._client.SetTimingAttributeExBool,
             grpc_types.SetTimingAttributeExBoolRequest(
-                attribute=attribute, device_names=device_names, task=task,
+                attribute_raw=attribute, device_names=device_names, task=task,
                 value=value))
 
     def set_timing_attribute_ex_double(
@@ -2870,7 +2892,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.SetTimingAttributeExDouble,
             grpc_types.SetTimingAttributeExDoubleRequest(
-                attribute=attribute, device_names=device_names, task=task,
+                attribute_raw=attribute, device_names=device_names, task=task,
                 value=value))
 
     def set_timing_attribute_ex_int32(
@@ -2878,15 +2900,15 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.SetTimingAttributeExInt32,
             grpc_types.SetTimingAttributeExInt32Request(
-                attribute=attribute, device_names=device_names, task=task,
-                value=value))
+                attribute_raw=attribute, device_names=device_names, task=task,
+                value_raw=value))
 
     def set_timing_attribute_ex_string(
             self, task, device_names, attribute, value):
         response = self._invoke(
             self._client.SetTimingAttributeExString,
             grpc_types.SetTimingAttributeExStringRequest(
-                attribute=attribute, device_names=device_names, task=task,
+                attribute_raw=attribute, device_names=device_names, task=task,
                 value=value))
 
     def set_timing_attribute_ex_uint32(
@@ -2894,7 +2916,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.SetTimingAttributeExUInt32,
             grpc_types.SetTimingAttributeExUInt32Request(
-                attribute=attribute, device_names=device_names, task=task,
+                attribute_raw=attribute, device_names=device_names, task=task,
                 value=value))
 
     def set_timing_attribute_ex_uint64(
@@ -2902,127 +2924,135 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.SetTimingAttributeExUInt64,
             grpc_types.SetTimingAttributeExUInt64Request(
-                attribute=attribute, device_names=device_names, task=task,
+                attribute_raw=attribute, device_names=device_names, task=task,
                 value=value))
 
     def set_timing_attribute_int32(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTimingAttributeInt32,
             grpc_types.SetTimingAttributeInt32Request(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value_raw=value))
 
     def set_timing_attribute_string(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTimingAttributeString,
             grpc_types.SetTimingAttributeStringRequest(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value=value))
 
     def set_timing_attribute_uint32(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTimingAttributeUInt32,
             grpc_types.SetTimingAttributeUInt32Request(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value=value))
 
     def set_timing_attribute_uint64(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTimingAttributeUInt64,
             grpc_types.SetTimingAttributeUInt64Request(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value=value))
 
     def set_trig_attribute_bool(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTrigAttributeBool,
-            grpc_types.SetTrigAttributeBoolRequest(attribute=attribute, task=task, value=value))
+            grpc_types.SetTrigAttributeBoolRequest(
+                attribute_raw=attribute, task=task, value=value))
 
     def set_trig_attribute_double(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTrigAttributeDouble,
-            grpc_types.SetTrigAttributeDoubleRequest(attribute=attribute, task=task, value=value))
+            grpc_types.SetTrigAttributeDoubleRequest(
+                attribute_raw=attribute, task=task, value=value))
 
     def set_trig_attribute_double_array(self, task, attribute, value, size):
         response = self._invoke(
             self._client.SetTrigAttributeDoubleArray,
             grpc_types.SetTrigAttributeDoubleArrayRequest(
-                attribute=attribute, size=size, task=task, value=value))
+                attribute_raw=attribute, size=size, task=task, value=value))
 
     def set_trig_attribute_int32(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTrigAttributeInt32,
-            grpc_types.SetTrigAttributeInt32Request(attribute=attribute, task=task, value=value))
+            grpc_types.SetTrigAttributeInt32Request(
+                attribute_raw=attribute, task=task, value_raw=value))
 
     def set_trig_attribute_int32_array(self, task, attribute, value, size):
         response = self._invoke(
             self._client.SetTrigAttributeInt32Array,
             grpc_types.SetTrigAttributeInt32ArrayRequest(
-                attribute=attribute, size=size, task=task, value=value))
+                attribute_raw=attribute, size=size, task=task, value=value))
 
     def set_trig_attribute_string(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTrigAttributeString,
-            grpc_types.SetTrigAttributeStringRequest(attribute=attribute, task=task, value=value))
+            grpc_types.SetTrigAttributeStringRequest(
+                attribute_raw=attribute, task=task, value=value))
 
     def set_trig_attribute_uint32(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTrigAttributeUInt32,
-            grpc_types.SetTrigAttributeUInt32Request(attribute=attribute, task=task, value=value))
+            grpc_types.SetTrigAttributeUInt32Request(
+                attribute_raw=attribute, task=task, value=value))
 
     def set_watchdog_attribute_bool(self, task, lines, attribute, value):
         response = self._invoke(
             self._client.SetWatchdogAttributeBool,
             grpc_types.SetWatchdogAttributeBoolRequest(
-                attribute=attribute, lines=lines, task=task, value=value))
+                attribute_raw=attribute, lines=lines, task=task, value=value))
 
     def set_watchdog_attribute_double(self, task, lines, attribute, value):
         response = self._invoke(
             self._client.SetWatchdogAttributeDouble,
             grpc_types.SetWatchdogAttributeDoubleRequest(
-                attribute=attribute, lines=lines, task=task, value=value))
+                attribute_raw=attribute, lines=lines, task=task, value=value))
 
     def set_watchdog_attribute_int32(self, task, lines, attribute, value):
         response = self._invoke(
             self._client.SetWatchdogAttributeInt32,
             grpc_types.SetWatchdogAttributeInt32Request(
-                attribute=attribute, lines=lines, task=task, value=value))
+                attribute_raw=attribute, lines=lines, task=task,
+                value_raw=value))
 
     def set_watchdog_attribute_string(self, task, lines, attribute, value):
         response = self._invoke(
             self._client.SetWatchdogAttributeString,
             grpc_types.SetWatchdogAttributeStringRequest(
-                attribute=attribute, lines=lines, task=task, value=value))
+                attribute_raw=attribute, lines=lines, task=task, value=value))
 
     def set_write_attribute_bool(self, task, attribute, value):
         response = self._invoke(
             self._client.SetWriteAttributeBool,
-            grpc_types.SetWriteAttributeBoolRequest(attribute=attribute, task=task, value=value))
+            grpc_types.SetWriteAttributeBoolRequest(
+                attribute_raw=attribute, task=task, value=value))
 
     def set_write_attribute_double(self, task, attribute, value):
         response = self._invoke(
             self._client.SetWriteAttributeDouble,
             grpc_types.SetWriteAttributeDoubleRequest(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value=value))
 
     def set_write_attribute_int32(self, task, attribute, value):
         response = self._invoke(
             self._client.SetWriteAttributeInt32,
-            grpc_types.SetWriteAttributeInt32Request(attribute=attribute, task=task, value=value))
+            grpc_types.SetWriteAttributeInt32Request(
+                attribute_raw=attribute, task=task, value_raw=value))
 
     def set_write_attribute_string(self, task, attribute, value):
         response = self._invoke(
             self._client.SetWriteAttributeString,
             grpc_types.SetWriteAttributeStringRequest(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value=value))
 
     def set_write_attribute_uint32(self, task, attribute, value):
         response = self._invoke(
             self._client.SetWriteAttributeUInt32,
             grpc_types.SetWriteAttributeUInt32Request(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value=value))
 
     def set_write_attribute_uint64(self, task, attribute, value):
         response = self._invoke(
             self._client.SetWriteAttributeUInt64,
             grpc_types.SetWriteAttributeUInt64Request(
-                attribute=attribute, task=task, value=value))
+                attribute_raw=attribute, task=task, value=value))
 
     def start_new_file(self, task, file_path):
         response = self._invoke(
