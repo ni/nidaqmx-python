@@ -112,11 +112,13 @@ def get_argument_types(functions_metadata):
                 if param.direction == "in":
                     argtypes.append(functions_metadata.handle_parameter.ctypes_data_type)
                 else:
-                    argtypes.append(f"ctypes.POINTER({functions_metadata.handle_parameter.ctypes_data_type})")
+                    argtypes.append(
+                        f"ctypes.POINTER({functions_metadata.handle_parameter.ctypes_data_type})"
+                    )
             else:
                 argtypes.append("ctypes_byte_str")
         elif param.parameter_name in size_params:
-            if(param.direction == "in"):
+            if param.direction == "in":
                 argtypes.append("ctypes.c_uint")
             else:
                 argtypes.append("ctypes.POINTER(ctypes.c_uint)")
