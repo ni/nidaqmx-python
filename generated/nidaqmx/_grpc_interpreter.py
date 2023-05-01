@@ -1227,9 +1227,15 @@ class GrpcStubInterpreter(BaseInterpreter):
                 scaled_vals=scaled_vals))
 
     def create_task(self, session_name):
+        metadata = (
+            ('ni-api-key', self._grpc_options.api_key),
+        )
         response = self._invoke(
             self._client.CreateTask,
-            grpc_types.CreateTaskRequest(session_name=session_name))
+            grpc_types.CreateTaskRequest(
+                initialization_behavior=self._grpc_options.initialization_behavior,
+                session_name=session_name),
+            metadata=metadata)
         return response.task, response.new_session_initialized
 
     def create_tedsai_accel_chan(
@@ -1497,20 +1503,30 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def create_watchdog_timer_task(
             self, device_name, session_name, timeout, lines, exp_state):
+        metadata = (
+            ('ni-api-key', self._grpc_options.api_key),
+        )
         response = self._invoke(
             self._client.CreateWatchdogTimerTask,
             grpc_types.CreateWatchdogTimerTaskRequest(
-                device_name=device_name, session_name=session_name,
-                timeout=timeout))
+                device_name=device_name,
+                initialization_behavior=self._grpc_options.initialization_behavior,
+                session_name=session_name, timeout=timeout),
+            metadata=metadata)
         return response.task, response.new_session_initialized
 
     def create_watchdog_timer_task_ex(
             self, device_name, session_name, timeout):
+        metadata = (
+            ('ni-api-key', self._grpc_options.api_key),
+        )
         response = self._invoke(
             self._client.CreateWatchdogTimerTaskEx,
             grpc_types.CreateWatchdogTimerTaskExRequest(
-                device_name=device_name, session_name=session_name,
-                timeout=timeout))
+                device_name=device_name,
+                initialization_behavior=self._grpc_options.initialization_behavior,
+                session_name=session_name, timeout=timeout),
+            metadata=metadata)
         return response.task, response.new_session_initialized
 
     def delete_network_device(self, device_name):
@@ -2222,9 +2238,15 @@ class GrpcStubInterpreter(BaseInterpreter):
         return response.is_task_done
 
     def load_task(self, session_name):
+        metadata = (
+            ('ni-api-key', self._grpc_options.api_key),
+        )
         response = self._invoke(
             self._client.LoadTask,
-            grpc_types.LoadTaskRequest(session_name=session_name))
+            grpc_types.LoadTaskRequest(
+                initialization_behavior=self._grpc_options.initialization_behavior,
+                session_name=session_name),
+            metadata=metadata)
         return response.task, response.new_session_initialized
 
     def read_analog_f64(

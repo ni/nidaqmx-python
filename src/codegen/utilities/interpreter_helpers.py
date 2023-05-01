@@ -97,6 +97,7 @@ def generate_interpreter_function_call_args(function_metadata):
                 function_call_args.append(param.parameter_name)
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
+
     return function_call_args
 
 
@@ -222,6 +223,8 @@ def get_grpc_interpreter_call_params(func, params):
                 grpc_params.append(f"{param.parameter_name}_raw={param.parameter_name}")
             else:
                 grpc_params.append(f"{param.parameter_name}={param.parameter_name}")
+    if func.is_init_method:
+        grpc_params.append("initialization_behavior=self._grpc_options.initialization_behavior")
     grpc_params = sorted(list(set(grpc_params)))
     return ", ".join(grpc_params)
 
@@ -292,6 +295,8 @@ def get_return_values(func):
             return_values.append(param.parameter_name)
         else:
             return_values.append(f"{param.parameter_name}.value")
+    if func.is_init_method:
+        return_values.append("new_session_initialized")
     return return_values
 
 
@@ -340,9 +345,10 @@ def create_compound_parameter_request(func):
     return f"grpc_types.{compound_parameter_type}(" + ", ".join(parameters) + ")"
 
 
-def get_response_parameters(output_parameters: list):
+def get_response_parameters(func):
     """Gets the list of parameters in grpc response."""
     response_parameters = []
+    output_parameters = get_output_params(func)
     for parameter in output_parameters:
         if not parameter.repeating_argument:
             response_parameters.append(f"response.{parameter.parameter_name}")

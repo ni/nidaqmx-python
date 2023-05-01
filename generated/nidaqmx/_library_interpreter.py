@@ -1759,6 +1759,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
 
     def create_task(self, session_name):
+        new_session_initialized = True
         task = lib_importer.task_handle(0)
 
         cfunc = lib_importer.windll.DAQmxCreateTask
@@ -1771,7 +1772,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             session_name, ctypes.byref(task))
         check_for_error(error_code)
-        return task
+        return task, new_session_initialized
 
     def create_tedsai_accel_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -2134,6 +2135,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def create_watchdog_timer_task_ex(
             self, device_name, session_name, timeout):
+        new_session_initialized = True
         task = lib_importer.task_handle(0)
 
         cfunc = lib_importer.windll.DAQmxCreateWatchdogTimerTaskEx
@@ -2147,7 +2149,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             device_name, session_name, ctypes.byref(task), timeout)
         check_for_error(error_code)
-        return task
+        return task, new_session_initialized
 
     def delete_network_device(self, device_name):
         cfunc = lib_importer.windll.DAQmxDeleteNetworkDevice
@@ -2162,13 +2164,40 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
 
     def delete_saved_global_chan(self, channel_name):
-        raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxDeleteSavedGlobalChan
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
+
+        error_code = cfunc(
+            channel_name)
+        check_for_error(error_code)
 
     def delete_saved_scale(self, scale_name):
-        raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxDeleteSavedScale
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
+
+        error_code = cfunc(
+            scale_name)
+        check_for_error(error_code)
 
     def delete_saved_task(self, task_name):
-        raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxDeleteSavedTask
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
+
+        error_code = cfunc(
+            task_name)
+        check_for_error(error_code)
 
     def device_supports_cal(self, device_name):
         raise NotImplementedError
@@ -3883,6 +3912,7 @@ class LibraryInterpreter(BaseInterpreter):
         return is_task_done.value
 
     def load_task(self, session_name):
+        new_session_initialized = True
         task = lib_importer.task_handle(0)
 
         cfunc = lib_importer.windll.DAQmxLoadTask
@@ -3895,7 +3925,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             session_name, ctypes.byref(task))
         check_for_error(error_code)
-        return task
+        return task, new_session_initialized
 
     def read_analog_f64(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
@@ -4625,13 +4655,43 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
 
     def save_global_chan(self, task, channel_name, save_as, author, options):
-        raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxSaveGlobalChan
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes_byte_str, ctypes.c_uint32]
+
+        error_code = cfunc(
+            task, channel_name, save_as, author, options)
+        check_for_error(error_code)
 
     def save_scale(self, scale_name, save_as, author, options):
-        raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxSaveScale
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_uint32]
+
+        error_code = cfunc(
+            scale_name, save_as, author, options)
+        check_for_error(error_code)
 
     def save_task(self, task, save_as, author, options):
-        raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxSaveTask
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_uint32]
+
+        error_code = cfunc(
+            task, save_as, author, options)
+        check_for_error(error_code)
 
     def self_cal(self, device_name):
         raise NotImplementedError
