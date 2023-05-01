@@ -1767,7 +1767,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, lib_importer.task_handle]
+                        ctypes_byte_str,
+                        ctypes.POINTER(lib_importer.task_handle)]
 
         error_code = cfunc(
             session_name, ctypes.byref(task))
@@ -2144,7 +2145,8 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         ctypes_byte_str, ctypes_byte_str,
-                        lib_importer.task_handle, ctypes.c_double]
+                        ctypes.POINTER(lib_importer.task_handle),
+                        ctypes.c_double]
 
         error_code = cfunc(
             device_name, session_name, ctypes.byref(task), timeout)
@@ -2287,22 +2289,23 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return [state_element.value for state_element in state]
 
-    def get_analog_power_up_states_with_output_type(
-            self, channel_names, array_size):
+    def get_analog_power_up_states_with_output_type(self, channel_names):
         state_array = numpy.zeros(array_size, dtype=numpy.float64)
         channel_type_array = numpy.zeros(array_size, dtype=numpy.int32)
+        array_size = ctypes.c_uint32()
 
         cfunc = lib_importer.cdll.DAQmxGetAnalogPowerUpStatesWithOutputType
         with cfunc.arglock:
             cfunc.argtypes = [
                 ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
                 flags=('C','W')), wrapped_ndpointer(dtype=numpy.int32,
-                flags=('C','W')), ctypes.c_uint]
+                flags=('C','W')), ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
-            channel_names, state_array, channel_type_array, array_size)
+            channel_names, state_array, channel_type_array,
+            ctypes.byref(array_size))
         check_for_error(error_code)
-        return state_array.tolist(), channel_type_array.tolist()
+        return state_array.tolist(), channel_type_array.tolist(), array_size.value
 
     def get_auto_configured_cdaq_sync_connections(self):
         cfunc = lib_importer.windll.DAQmxGetAutoConfiguredCDAQSyncConnections
@@ -3920,7 +3923,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str, lib_importer.task_handle]
+                        ctypes_byte_str,
+                        ctypes.POINTER(lib_importer.task_handle)]
 
         error_code = cfunc(
             session_name, ctypes.byref(task))

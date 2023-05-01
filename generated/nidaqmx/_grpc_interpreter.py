@@ -1598,13 +1598,12 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.GetAnalogPowerUpStatesRequest(device_name=device_name))
         return response.power_up_states
 
-    def get_analog_power_up_states_with_output_type(
-            self, channel_names, array_size):
+    def get_analog_power_up_states_with_output_type(self, channel_names):
         response = self._invoke(
             self._client.GetAnalogPowerUpStatesWithOutputType,
             grpc_types.GetAnalogPowerUpStatesWithOutputTypeRequest(
-                array_size=array_size, channel_names=channel_names))
-        return response.state_array, response.channel_type_array
+                channel_names=channel_names))
+        return response.state_array, response.channel_type_array, response.array_size
 
     def get_auto_configured_cdaq_sync_connections(self):
         response = self._invoke(

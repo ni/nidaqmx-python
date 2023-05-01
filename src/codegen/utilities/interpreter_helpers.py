@@ -101,7 +101,7 @@ def generate_interpreter_function_call_args(function_metadata):
     return function_call_args
 
 
-def get_arguments_type(functions_metadata):
+def get_argument_types(functions_metadata):
     """Gets the 'type' of parameters."""
     argtypes = []
     interpreter_parameters = get_interpreter_parameters(functions_metadata)
@@ -109,11 +109,17 @@ def get_arguments_type(functions_metadata):
     for param in interpreter_parameters:
         if _is_handle_parameter(functions_metadata, param):
             if functions_metadata.handle_parameter.ctypes_data_type != "ctypes.c_char_p":
-                argtypes.append(functions_metadata.handle_parameter.ctypes_data_type)
+                if param.direction == "in":
+                    argtypes.append(functions_metadata.handle_parameter.ctypes_data_type)
+                else:
+                    argtypes.append(f"ctypes.POINTER({functions_metadata.handle_parameter.ctypes_data_type})")
             else:
                 argtypes.append("ctypes_byte_str")
         elif param.parameter_name in size_params:
-            argtypes.append("ctypes.c_uint")
+            if(param.direction == "in"):
+                argtypes.append("ctypes.c_uint")
+            else:
+                argtypes.append("ctypes.POINTER(ctypes.c_uint)")
         else:
             argtypes.append(to_param_argtype(param))
     return argtypes

@@ -12837,7 +12837,7 @@ functions = {
             },
             {
                 'ctypes_data_type': 'ctypes.c_uint32',
-                'direction': 'in',
+                'direction': 'out',
                 'name': 'arraySize',
                 'python_data_type': 'int',
                 'type': 'uInt32'
