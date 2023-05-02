@@ -2301,7 +2301,7 @@ class InStream:
 
         numpy_array = numpy.zeros(number_of_samples, dtype=dtype)
 
-        samples_read, number_of_bytes_per_sample = self._interpreter.read_raw(
+        _, samples_read, _ = self._interpreter.read_raw(
             self._handle, numpy_array, num_samps_per_chan,
             self.timeout)
 
@@ -2414,7 +2414,7 @@ class InStream:
             numpy_array.nbytes, (
                 number_of_channels * channels_to_read.ai_raw_samp_size / 8))
 
-        samples_read, _ = self._interpreter.read_raw(
+        _, samples_read, _ = self._interpreter.read_raw(
             self._handle, number_of_samples_per_channel,
             self.timeout, numpy_array)
 

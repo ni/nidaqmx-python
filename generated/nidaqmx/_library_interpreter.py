@@ -5916,7 +5916,7 @@ class LibraryInterpreter(BaseInterpreter):
             ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
-        return samps_per_chan_read.value
+        return read_voltage_array, read_current_array, samps_per_chan_read.value
 
     def read_power_f64(
             self, task, num_samps_per_chan, timeout, fill_mode, 
@@ -5941,7 +5941,7 @@ class LibraryInterpreter(BaseInterpreter):
             ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
-        return samps_per_chan_read.value
+        return read_voltage_array, read_current_array, samps_per_chan_read.value
 
     def read_raw(self, task, num_samps_per_chan, timeout, read_array):
         samples_read = ctypes.c_int()
@@ -5963,7 +5963,7 @@ class LibraryInterpreter(BaseInterpreter):
             ctypes.byref(number_of_bytes_per_sample), None)
         check_for_error(error_code, samps_per_chan_read=samples_read.value)
 
-        return samples_read.value, number_of_bytes_per_sample.value
+        return read_array, samples_read.value, number_of_bytes_per_sample.value
 
     def write_raw(
             self, task_handle, num_samps_per_chan, auto_start, timeout, numpy_array):

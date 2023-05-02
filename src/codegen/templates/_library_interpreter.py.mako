@@ -95,7 +95,7 @@ class LibraryInterpreter(BaseInterpreter):
             ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
-        return samps_per_chan_read.value
+        return read_voltage_array, read_current_array, samps_per_chan_read.value
 
     ## The metadata for 'read_power_f64' function is not available in daqmxAPISharp.json file. 
     def read_power_f64(
@@ -121,7 +121,7 @@ class LibraryInterpreter(BaseInterpreter):
             ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
-        return samps_per_chan_read.value
+        return read_voltage_array, read_current_array, samps_per_chan_read.value
 
     ## The datatype of 'read_array' is incorrect in daqmxAPISharp.json file.
     def read_raw(self, task, num_samps_per_chan, timeout, read_array):
@@ -144,7 +144,7 @@ class LibraryInterpreter(BaseInterpreter):
             ctypes.byref(number_of_bytes_per_sample), None)
         check_for_error(error_code, samps_per_chan_read=samples_read.value)
 
-        return samples_read.value, number_of_bytes_per_sample.value
+        return read_array, samples_read.value, number_of_bytes_per_sample.value
 
     ## The datatype of 'write_array' is incorrect in daqmxAPISharp.json file.
     def write_raw(

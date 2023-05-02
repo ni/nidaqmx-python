@@ -584,7 +584,7 @@ class Task:
                 voltages = numpy.zeros(array_shape, dtype=numpy.float64)
                 currents = numpy.zeros(array_shape, dtype=numpy.float64)
 
-                samples_read = self._interpreter.read_power_f64(
+                _, _, samples_read = self._interpreter.read_power_f64(
                     self._handle, number_of_samples_per_channel, timeout, 
                     FillMode.GROUP_BY_CHANNEL.value, voltages, currents)
 

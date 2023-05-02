@@ -791,7 +791,7 @@ class PowerSingleChannelReader(ChannelReaderBase):
         self._verify_array(voltage_data, number_of_samples_per_channel, False, True)
         self._verify_array(current_data, number_of_samples_per_channel, False, True)
 
-        samps_per_chan_read = self._interpreter.read_power_f64(
+        _, _, samps_per_chan_read = self._interpreter.read_power_f64(
             self._handle, number_of_samples_per_channel, timeout, 
             FillMode.GROUP_BY_CHANNEL.value, voltage_data, current_data)
         
@@ -928,7 +928,7 @@ class PowerMultiChannelReader(ChannelReaderBase):
         self._verify_array(voltage_data, number_of_samples_per_channel, True, True)
         self._verify_array(current_data, number_of_samples_per_channel, True, True)
 
-        samps_per_chan_read = self._interpreter.read_power_f64(
+        _, _, samps_per_chan_read = self._interpreter.read_power_f64(
             self._handle, number_of_samples_per_channel, timeout, 
             FillMode.GROUP_BY_CHANNEL.value, voltage_data, current_data)
         
@@ -1083,7 +1083,7 @@ class PowerBinaryReader(ChannelReaderBase):
         self._verify_array(voltage_data, number_of_samples_per_channel, True, True)
         self._verify_array(current_data, number_of_samples_per_channel, True, True)
 
-        samps_per_chan_read = self._interpreter.read_power_binary_i16(
+        _, _, samps_per_chan_read = self._interpreter.read_power_binary_i16(
             self._handle, number_of_samples_per_channel, timeout, 
             FillMode.GROUP_BY_CHANNEL.value, voltage_data, current_data)
         
