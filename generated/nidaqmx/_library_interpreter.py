@@ -4429,7 +4429,8 @@ class LibraryInterpreter(BaseInterpreter):
             self, task, options, callback_function, callback_data):
 
         DAQmxDoneEventCallbackPtr = ctypes.CFUNCTYPE(
-            lib_importer.task_handle, ctypes.c_int)        
+            ctypes.c_int32, lib_importer.task_handle, ctypes.c_int,
+            ctypes.c_void_p)        
         
         cfunc = lib_importer.windll.DAQmxRegisterDoneEvent
         
@@ -4457,7 +4458,8 @@ class LibraryInterpreter(BaseInterpreter):
             callback_function, callback_data):
 
         DAQmxEveryNSamplesEventCallbackPtr = ctypes.CFUNCTYPE(
-            lib_importer.task_handle, ctypes.c_int, ctypes.c_uint)        
+            ctypes.c_int32, lib_importer.task_handle, ctypes.c_int,
+            ctypes.c_uint, ctypes.c_void_p)        
         
         cfunc = lib_importer.windll.DAQmxRegisterEveryNSamplesEvent
         
@@ -4486,7 +4488,8 @@ class LibraryInterpreter(BaseInterpreter):
             self, task, signal_id, options, callback_function, callback_data):
 
         DAQmxSignalEventCallbackPtr = ctypes.CFUNCTYPE(
-            lib_importer.task_handle, ctypes.c_int)        
+            ctypes.c_int32, lib_importer.task_handle, ctypes.c_int,
+            ctypes.c_void_p)        
         
         cfunc = lib_importer.windll.DAQmxRegisterSignalEvent
         
