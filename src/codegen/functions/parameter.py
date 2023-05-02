@@ -163,6 +163,6 @@ class Parameter:
         return self._is_proto_only
 
     @property
-    def pointer(self):
+    def is_pointer(self):
         """bool: Defines if the parameter is a pointer or not."""
         return self._pointer

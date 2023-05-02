@@ -90,7 +90,7 @@ def generate_interpreter_function_call_args(function_metadata):
             function_call_args.append(size_values[param.parameter_name])
         elif param.parameter_name == "reserved":
             function_call_args.append("None")
-        elif param.direction == "out" or param.pointer:
+        elif param.direction == "out" or param.is_pointer:
             if param.has_explicit_buffer_size:
                 function_call_args.append(param.parameter_name)
             else:
@@ -118,7 +118,7 @@ def get_argument_types(functions_metadata):
             else:
                 argtypes.append("ctypes_byte_str")
         elif param.parameter_name in size_params:
-            if param.direction == "out" or param.pointer:
+            if param.direction == "out" or param.is_pointer:
                 argtypes.append("ctypes.POINTER(ctypes.c_uint)")
             else:
                 argtypes.append("ctypes.c_uint")
