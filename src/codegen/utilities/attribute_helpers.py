@@ -282,6 +282,7 @@ def get_deprecated_attributes(attributes):
 
 
 def get_generic_attribute_function_name(attribute):
+    """Gets the attribute independent interpreter function name."""
     metadata = scrapigen_metadata.attributes
     for group_name, attributes in metadata.items():
         for id, attribute_data in attributes.items():
@@ -293,7 +294,8 @@ def get_generic_attribute_function_name(attribute):
                 return mapped_attribute_group + "_attribute"
 
 
-def get_mapped_attribute_function_type(attribute):
+def get_generic_attribute_function_type(attribute):
+    """Gets the attribute independent interpreter function type."""
     mapped_attribute_type = GENERIC_ATTRIBUTE_TYPE_MAP.get(
         attribute.type,
         camel_to_snake_case(attribute.type, INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES),
