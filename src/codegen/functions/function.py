@@ -60,6 +60,8 @@ class Function:
         elif "c_function_name" in function_metadata:
             self._c_function_name = function_metadata["c_function_name"]
 
+        self._python_codegen_method = function_metadata.get("python_codegen_method", None)
+
     @property
     def function_name(self):
         """str: The name of the function."""
@@ -129,6 +131,11 @@ class Function:
     def stream_response(self):
         """bool: Defines if the function uses server streaming to send multiple responses."""
         return self._stream_response
+
+    @property
+    def python_codegen_method(self):
+        """str: The python codegen method of the function."""
+        return self._python_codegen_method
 
     @property
     def is_python_codegen_method(self):
