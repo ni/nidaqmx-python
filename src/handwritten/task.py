@@ -1,4 +1,3 @@
-import collections
 import ctypes
 import numpy
 import warnings
@@ -628,16 +627,9 @@ class Task:
                 read_chan_type == ChannelType.DIGITAL_OUTPUT):
             if self.in_stream.di_num_booleans_per_chan == 1:
                 data = numpy.zeros(array_shape, dtype=bool)
-                _, samps_per_chan_read, num_bytes_per_samp = self._interpreter.read_digital_lines(
+                _, samples_read, _ = self._interpreter.read_digital_lines(
                     self._handle, number_of_samples_per_channel, timeout, 
                     FillMode.GROUP_BY_CHANNEL.value, data)
-
-                ReadDigitalLinesReturnData = (
-                        collections.namedtuple(
-                            'ReadDigitalLinesReturnData',
-                            ['samps_per_chan_read', 'num_bytes_per_samp']))
-
-                samples_read = ReadDigitalLinesReturnData(samps_per_chan_read, num_bytes_per_samp).samps_per_chan_read
             else:
                 data = numpy.zeros(array_shape, dtype=numpy.uint32)
                 _, samples_read = self._interpreter.read_digital_u32(
