@@ -2970,12 +2970,12 @@ class LibraryInterpreter(BaseInterpreter):
         with cfunc.arglock:
             cfunc.argtypes = [
                 ctypes_byte_str, ctypes_byte_str, ctypes.c_int32,
-                wrapped_ndpointer(dtype=numpy.generic, flags=('C','W')),
+                wrapped_ndpointer(dtype=numpy.uint8, flags=('C','W')),
                 ctypes.c_uint]
 
         temp_size = 0
         while True:
-            value = numpy.zeros(temp_size, dtype=numpy.generic)
+            value = numpy.zeros(temp_size, dtype=numpy.uint8)
             size_or_code = cfunc(
                 physical_channel, attribute, value, temp_size)
             if is_array_buffer_too_small(size_or_code):
