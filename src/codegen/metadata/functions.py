@@ -12471,12 +12471,15 @@ functions = {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
                 'name': 'channelName',
+                'python_data_type': 'str',
                 'type': 'const char[]'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_class_name': 'PersistedChannel',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Deletes the specified global channel from MAX. This function does not remove the global channel from tasks that use it.',
         'returns': 'int32'
     },
@@ -12484,12 +12487,15 @@ functions = {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
                 'name': 'scaleName',
+                'python_data_type': 'str',
                 'type': 'const char[]'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_class_name': 'PersistedScale',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Deletes the specified custom scale from MAX. This function does not remove the custom scale from virtual channels that use it.',
         'returns': 'int32'
     },
@@ -12497,12 +12503,15 @@ functions = {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
                 'name': 'taskName',
+                'python_data_type': 'str',
                 'type': 'const char[]'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_class_name': 'PersistedTask',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Deletes the specified task from MAX. This function does not clear the copy of the task stored in memory. Use the DAQmx Clear Task function to clear that copy of the task.',
         'returns': 'int32'
     },
@@ -14523,11 +14532,11 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'numpy.generic',
+                'ctypes_data_type': 'numpy.uint8',
                 'direction': 'out',
                 'is_list': True,
                 'name': 'value',
-                'python_data_type': 'object',
+                'python_data_type': 'int',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'size'
@@ -19802,35 +19811,51 @@ functions = {
     },
     'SaveGlobalChan': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
                 'name': 'channelName',
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
                 'name': 'saveAs',
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
                 'name': 'author',
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
                 'enum': 'SaveOptions',
                 'name': 'options',
+                'python_data_type': 'SaveOptions',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_class_name': 'Channel',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Saves the specified local or global channel to MAX as a global channel. You must specify both the local or global channel to save and a task that contains that channel.',
         'returns': 'int32'
     },
@@ -19838,57 +19863,80 @@ functions = {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
                 'name': 'scaleName',
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
                 'name': 'saveAs',
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
                 'name': 'author',
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
                 'enum': 'SaveOptions',
                 'name': 'options',
+                'python_data_type': 'SaveOptions',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_class_name': 'Scale',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Saves the specified custom scale to MAX.',
         'returns': 'int32'
     },
     'SaveTask': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
                 'name': 'saveAs',
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
                 'name': 'author',
+                'python_data_type': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
                 'enum': 'SaveOptions',
                 'name': 'options',
+                'python_data_type': 'SaveOptions',
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Saves the specified task and any  local channels it contains to MAX. This function does not save global channels. Use the DAQmx Save Global Channel function to save global channels.',
         'returns': 'int32'
     },
