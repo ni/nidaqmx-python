@@ -14527,7 +14527,7 @@ functions = {
                 'direction': 'out',
                 'is_list': True,
                 'name': 'value',
-                'python_data_type': 'object',
+                'python_data_type': 'int',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'size'
