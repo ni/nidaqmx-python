@@ -1205,7 +1205,7 @@ class _TaskAlternateConstructor(Task):
     # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
     __slots__ = []
 
-    def __init__(self, task_handle, interpreter, close_on_exit=False):
+    def __init__(self, task_handle, interpreter, close_on_exit):
         """
         Args:
             task_handle: Specifies the task handle from which to create a
