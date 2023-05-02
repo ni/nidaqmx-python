@@ -69,7 +69,7 @@ class Task:
                 attempts to create multiple tasks with the same name, which
                 results in an error.
         """
-        self._handle = lib_importer.task_handle(0)
+        self._handle = None
         self._close_on_exit = False
 
         if grpc_options and not (
