@@ -1,4 +1,3 @@
-import collections
 import numpy
 from nidaqmx import DaqError
 
@@ -792,7 +791,7 @@ class PowerSingleChannelReader(ChannelReaderBase):
         self._verify_array(voltage_data, number_of_samples_per_channel, False, True)
         self._verify_array(current_data, number_of_samples_per_channel, False, True)
 
-        samps_per_chan_read = self._interpreter.read_power_f64(
+        _, _, samps_per_chan_read = self._interpreter.read_power_f64(
             self._handle, number_of_samples_per_channel, timeout, 
             FillMode.GROUP_BY_CHANNEL.value, voltage_data, current_data)
         
@@ -929,7 +928,7 @@ class PowerMultiChannelReader(ChannelReaderBase):
         self._verify_array(voltage_data, number_of_samples_per_channel, True, True)
         self._verify_array(current_data, number_of_samples_per_channel, True, True)
 
-        samps_per_chan_read = self._interpreter.read_power_f64(
+        _, _, samps_per_chan_read = self._interpreter.read_power_f64(
             self._handle, number_of_samples_per_channel, timeout, 
             FillMode.GROUP_BY_CHANNEL.value, voltage_data, current_data)
         
@@ -1084,7 +1083,7 @@ class PowerBinaryReader(ChannelReaderBase):
         self._verify_array(voltage_data, number_of_samples_per_channel, True, True)
         self._verify_array(current_data, number_of_samples_per_channel, True, True)
 
-        samps_per_chan_read = self._interpreter.read_power_binary_i16(
+        _, _, samps_per_chan_read = self._interpreter.read_power_binary_i16(
             self._handle, number_of_samples_per_channel, timeout, 
             FillMode.GROUP_BY_CHANNEL.value, voltage_data, current_data)
         
@@ -1868,15 +1867,7 @@ class DigitalSingleChannelReader(ChannelReaderBase):
         self._verify_array_digital_lines(data, False, True)
 
         _, samps_per_chan_read, num_bytes_per_samp = self._interpreter.read_digital_lines(
-            self._handle, data, 1, timeout, FillMode.GROUP_BY_CHANNEL.value)
-        
-        ReadDigitalLinesReturnData = (
-        collections.namedtuple(
-            'ReadDigitalLinesReturnData',
-            ['samps_per_chan_read', 'num_bytes_per_samp']))
-
-        ReadDigitalLinesData = ReadDigitalLinesReturnData(
-        samps_per_chan_read, num_bytes_per_samp)    
+            self._handle, data, 1, timeout, FillMode.GROUP_BY_CHANNEL.value)    
 
     def read_one_sample_one_line(self, timeout=10):
         """
@@ -1902,14 +1893,6 @@ class DigitalSingleChannelReader(ChannelReaderBase):
         data = numpy.zeros(1, dtype=bool)
         _, samps_per_chan_read, num_bytes_per_samp= self._interpreter.read_digital_lines(
             self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
-
-        ReadDigitalLinesReturnData = (
-        collections.namedtuple(
-            'ReadDigitalLinesReturnData',
-            ['samps_per_chan_read', 'num_bytes_per_samp']))
-
-        ReadDigitalLinesData = ReadDigitalLinesReturnData(
-        samps_per_chan_read, num_bytes_per_samp)
 
         return bool(data[0])
 
@@ -2313,14 +2296,6 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         _, samps_per_chan_read, num_bytes_per_samp= self._interpreter.read_digital_lines(
             self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
-        ReadDigitalLinesReturnData = (
-        collections.namedtuple(
-            'ReadDigitalLinesReturnData',
-            ['samps_per_chan_read', 'num_bytes_per_samp']))
-
-        ReadDigitalLinesData = ReadDigitalLinesReturnData(
-        samps_per_chan_read, num_bytes_per_samp)
-
     def read_one_sample_one_line(self, data, timeout=10):
         """
         Reads a single boolean sample from one or more digital input
@@ -2357,14 +2332,6 @@ class DigitalMultiChannelReader(ChannelReaderBase):
 
         _, samps_per_chan_read, num_bytes_per_samp= self._interpreter.read_digital_lines(
             self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
-
-        ReadDigitalLinesReturnData = (
-        collections.namedtuple(
-            'ReadDigitalLinesReturnData',
-            ['samps_per_chan_read', 'num_bytes_per_samp']))
-
-        ReadDigitalLinesData = ReadDigitalLinesReturnData(
-        samps_per_chan_read, num_bytes_per_samp)
 
     def read_one_sample_port_byte(self, data, timeout=10):
         """

@@ -883,17 +883,7 @@ class Scale:
         if allow_interactive_deletion:
             options |= _Save.ALLOW_INTERACTIVE_DELETION.value
 
-        cfunc = lib_importer.windll.DAQmxSaveScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes_byte_str,
-                        ctypes.c_uint]
-
-        error_code = cfunc(
-            self._name, save_as, author, options)
-        check_for_error(error_code)
+        self._interpreter.save_scale(self._name, save_as, author, options)
 
 
 class _ScaleAlternateConstructor(Scale):
