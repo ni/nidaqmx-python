@@ -14533,11 +14533,11 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'numpy.generic',
+                'ctypes_data_type': 'numpy.uint8',
                 'direction': 'out',
                 'is_list': True,
                 'name': 'value',
-                'python_data_type': 'object',
+                'python_data_type': 'int',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'size'
