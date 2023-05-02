@@ -90,13 +90,13 @@ def generate_interpreter_function_call_args(function_metadata):
             function_call_args.append(size_values[param.parameter_name])
         elif param.parameter_name == "reserved":
             function_call_args.append("None")
-        elif param.direction == "in":
-            function_call_args.append(param.parameter_name)
-        elif param.direction == "out":
+        elif param.direction == "out" or param.pointer:
             if param.has_explicit_buffer_size:
                 function_call_args.append(param.parameter_name)
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
+        elif param.direction == "in":
+            function_call_args.append(param.parameter_name)
 
     return function_call_args
 
@@ -118,10 +118,10 @@ def get_argument_types(functions_metadata):
             else:
                 argtypes.append("ctypes_byte_str")
         elif param.parameter_name in size_params:
-            if param.direction == "in":
-                argtypes.append("ctypes.c_uint")
-            else:
+            if param.direction == "out" or param.pointer:
                 argtypes.append("ctypes.POINTER(ctypes.c_uint)")
+            else:
+                argtypes.append("ctypes.c_uint")
         else:
             argtypes.append(to_param_argtype(param))
     return argtypes
