@@ -1,7 +1,7 @@
 """This contains the helper methods used in attribute generation."""
 
-from codegen.properties.attribute import Attribute
 import codegen.metadata as scrapigen_metadata
+from codegen.properties.attribute import Attribute
 from codegen.utilities.helpers import camel_to_snake_case
 from codegen.utilities.interpreter_helpers import INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES
 
