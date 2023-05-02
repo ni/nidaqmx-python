@@ -220,7 +220,6 @@ def get_grpc_interpreter_call_params(func, params):
                 grpc_params.append(f"{param.parameter_name}_raw={param.parameter_name}")
             else:
                 grpc_params.append(f"{param.parameter_name}={param.parameter_name}")
-    grpc_params = sorted(list(set(grpc_params)))
     return ", ".join(grpc_params)
 
 
@@ -366,12 +365,14 @@ def create_compound_parameter_request(func):
     return f"grpc_types.{compound_parameter_type}(" + ", ".join(parameters) + ")"
 
 
-def get_response_parameters(output_parameters: list):
+def get_response_parameters(output_parameters: list, is_read_method):
     """Gets the list of parameters in grpc response."""
     response_parameters = []
     for parameter in output_parameters:
         if not parameter.repeating_argument:
-            if parameter.is_grpc_enum:
+            if is_read_method and "read_array" in parameter.parameter_name:
+                response_parameters.append(f"{parameter.parameter_name}")
+            elif parameter.is_grpc_enum:
                 response_parameters.append(f"response.{parameter.parameter_name}_raw")
             else:
                 response_parameters.append(f"response.{parameter.parameter_name}")
