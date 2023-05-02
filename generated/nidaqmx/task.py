@@ -1211,7 +1211,7 @@ class _TaskAlternateConstructor(Task):
             task_handle: Specifies the task handle from which to create a
                 Task object.
             interpreter: Specifies the interpreter instance.
-            close_on_exit: Specifies whether to close task on exit.
+            close_on_exit: Specifies whether the task's context manager closes the task.
             
         """
         self._handle = task_handle
