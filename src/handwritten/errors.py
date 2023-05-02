@@ -205,3 +205,25 @@ def is_string_buffer_too_small(error_code):
 
 def is_array_buffer_too_small(error_code):
     return error_code == DAQmxErrors.WRITE_BUFFER_TOO_SMALL
+
+
+class RpcError(Error):
+    '''An error specific to sessions to the NI gRPC Device Server'''
+
+    def __init__(self, rpc_code, description):
+        self.rpc_code = rpc_code
+        self.description = description
+        try:
+            import grpc
+            rpc_error = str(grpc.StatusCode(self.rpc_code))
+        except Exception:
+            rpc_error = str(self.rpc_code)
+        super(RpcError, self).__init__(rpc_error + ": " + self.description)
+
+
+class DriverWarning(Warning):
+    '''A warning originating from the NI-DAQmx driver'''
+
+    def __init__(self, code, description):
+        assert (code > 0), "Should not create Warning if code is not positive."
+        super(DriverWarning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
