@@ -253,15 +253,20 @@ def test_assets_directory() -> pathlib.Path:
     return pathlib.Path(__file__).parent / "test_assets"
 
 
+@pytest.fixture(scope="module")
+def grpc_channel():
+    """Gets the gRPC channel."""
+    with grpc.insecure_channel("localhost:31763") as channel:
+        yield channel
+
+
 @pytest.fixture(scope="session")
 def grpc_init_kwargs(grpc_channel):
     """Gets the keyword arguments required for creating the gRPC interpreter."""
-    channel = grpc.insecure_channel(f"localhost:31763")
     grpc_options = GrpcSessionOptions(
-        grpc_channel=channel,
+        grpc_channel=grpc_channel,
         session_name="",
     )
-    grpc_options = GrpcSessionOptions(channel, "")
     return {"grpc_options": grpc_options}
 
 
@@ -271,9 +276,7 @@ def library_init_kwargs():
     return {}
 
 
-@pytest.fixture(
-    params=("library_init_kwargs", "grpc_init_kwargs"), scope="session"
-)
+@pytest.fixture(params=("library_init_kwargs", "grpc_init_kwargs"), scope="session")
 def init_kwargs(request):
     """Gets the keyword arguments to create a nidaqmx session."""
     return request.getfixturevalue(request.param)
