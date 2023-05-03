@@ -35,7 +35,9 @@ jobs:
       - name: Check for files dirtied by codegen
         run: git diff --exit-code
       - name: Run tests
-        run: python -m tox -c tox.ini
+        run: |
+          cd generated/nidaqmx
+          tox
       - name: Run linters
         run: |
           poetry run ni-python-styleguide lint
