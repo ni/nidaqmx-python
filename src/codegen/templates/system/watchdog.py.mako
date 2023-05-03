@@ -34,7 +34,7 @@ class WatchdogTask:
     """
     Represents the watchdog configurations for a DAQmx task.
     """
-    def __init__(self, device_name, task_name='', timeout=10, grpc_options=None):
+    def __init__(self, device_name, new_task_name='', timeout=10, grpc_options=None):
         """
         Creates and configures a task that controls the watchdog timer of a
         device. The timer activates when you start the task.
@@ -46,7 +46,7 @@ class WatchdogTask:
         Args:
             device_name (str): Specifies is the name as configured in MAX of
                 the device to which this operation applies.
-            task_name (str): Specifies the name to assign to the task. If you
+            new_task_name (str): Specifies the name to assign to the task. If you
                 use this constructor in a loop and specify a name for the task,
                 you must use the DAQmx Clear Task method within the loop after
                 you are finished with the task. Otherwise, NI-DAQmx attempts to
@@ -60,12 +60,13 @@ class WatchdogTask:
                 with the digital physical channel expiration states input.
             grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
         """
+        # Initialize the fields that __del__ accesses so it doesn't crash when __init__ raises an exception.
+        self._handle = None
+        self._saved_name = new_task_name
+
         self._interpreter = utils._select_interpreter(grpc_options)
 
-        self._handle = None
-        self._close_on_exit = False
-
-        self._handle, self._close_on_exit = self._interpreter.create_watchdog_timer_task_ex(device_name, task_name, timeout)
+        self._handle, self._close_on_exit = self._interpreter.create_watchdog_timer_task_ex(device_name, new_task_name, timeout)
 
         # Saved name is used in self.close() to throw graceful error on
         # double closes.
@@ -77,7 +78,7 @@ class WatchdogTask:
             warnings.warn(
                 'Task of name "{}" was not explicitly closed before it was '
                 'destructed. Resources on the task device may still be '
-                'reserved.'.format(self.name), DaqResourceWarning)
+                'reserved.'.format(self._saved_name), DaqResourceWarning)
 
     def __enter__(self):
         return self
@@ -280,7 +281,6 @@ ${property_template.script_property(attribute)}\
         self._interpreter.clear_task(self._handle)
 
         self._handle = None
-        self._close_on_exit = False
 
     def control(self, action):
         """

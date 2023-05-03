@@ -69,8 +69,9 @@ class Task:
                 attempts to create multiple tasks with the same name, which
                 results in an error.
         """
+        # Initialize the fields that __del__ accesses so it doesn't crash when __init__ raises an exception.
         self._handle = None
-        self._close_on_exit = False
+        self._saved_name = new_task_name
 
         if grpc_options and not (
             grpc_options.session_name == "" or grpc_options.session_name == new_task_name
@@ -446,7 +447,6 @@ class Task:
         self._interpreter.clear_task(self._handle)
 
         self._handle = None
-        self._close_on_exit = False
 
     def control(self, action):
         """
