@@ -261,7 +261,7 @@ class Attribute:
         This is used to provide the type of the attribute when making c function calls in python.
         """
         return self._ctypes_data_type
-    
+
     @property
     def has_alternate_constructor(self):
         """bool: Specifies if an alternate constructor is present for the attribute."""
