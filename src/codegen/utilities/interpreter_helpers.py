@@ -365,8 +365,10 @@ def create_compound_parameter_request(func):
     return f"grpc_types.{compound_parameter_type}(" + ", ".join(parameters) + ")"
 
 
-def get_response_parameters(output_parameters: list, is_read_method):
+def get_response_parameters(func):
     """Gets the list of parameters in grpc response."""
+    output_parameters = get_output_params(func)
+    is_read_method = check_if_parameters_contain_read_array(func.interpreter_parameters)
     response_parameters = []
     for parameter in output_parameters:
         if not parameter.repeating_argument:
