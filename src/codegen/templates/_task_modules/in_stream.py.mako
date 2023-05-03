@@ -11,7 +11,6 @@ import numpy
 import deprecation
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
-from nidaqmx._task_modules.read_functions import _read_raw
 from nidaqmx.errors import check_for_error, is_string_buffer_too_small
 from nidaqmx._task_modules.channels.channel import Channel
 from nidaqmx.utils import unflatten_channel_string
@@ -118,18 +117,9 @@ ${property_template.script_property(attribute)}\
             operation (Optional[nidaqmx.constants.LoggingOperation]):
                 Specifies how to open the TDMS file.
         """
-        cfunc = lib_importer.windll.DAQmxConfigureLogging
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int, ctypes_byte_str, ctypes.c_int]
 
-        error_code = cfunc(
-            self._handle, file_path, logging_mode.value, group_name,
-            operation.value)
-        check_for_error(error_code)
+        self._interpreter.configure_logging(
+            self._handle, file_path, logging_mode.value, group_name, operation.value)
 
     def read(self, number_of_samples_per_channel=READ_ALL_AVAILABLE):
         """
@@ -213,7 +203,7 @@ ${property_template.script_property(attribute)}\
 
         numpy_array = numpy.zeros(number_of_samples, dtype=dtype)
 
-        samples_read, number_of_bytes_per_sample = _read_raw(
+        samples_read, number_of_bytes_per_sample = self._interpreter.read_raw(
             self._handle, numpy_array, num_samps_per_chan,
             self.timeout)
 
@@ -326,9 +316,9 @@ ${property_template.script_property(attribute)}\
             numpy_array.nbytes, (
                 number_of_channels * channels_to_read.ai_raw_samp_size / 8))
 
-        samples_read, _ = _read_raw(
-            self._handle, numpy_array, number_of_samples_per_channel,
-            self.timeout)
+        samples_read, _ = self._interpreter.read_raw(
+            self._handle, number_of_samples_per_channel,
+            self.timeout, numpy_array)
 
         return samples_read
 
@@ -340,16 +330,8 @@ ${property_template.script_property(attribute)}\
             file_path (str): Specifies the path to the TDMS file to
                 which you want to log data.
         """
-        cfunc = lib_importer.windll.DAQmxStartNewFile
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
 
-        error_code = cfunc(
-            self._handle, file_path)
-        check_for_error(error_code)
+        self._interpreter.start_new_file(self._handle, file_path)
 
 <%namespace name="deprecated_template" file="/property_deprecated_template.py.mako"/>\
 ${deprecated_template.script_deprecated_property(attributes)}\

@@ -227,14 +227,14 @@ def generate_function_call_args(function_metadata):
     if function_metadata.handle_parameter is not None:
         function_call_args.append(function_metadata.handle_parameter.accessor)
 
-    for param in function_metadata.parameters:
+    sorted_params = order_function_parameters_by_optional(function_metadata.parameters)
+
+    for param in sorted_params:
         if param.direction == "in":
             if param.is_enum and not param.is_list:
                 function_call_args.append(f"{param.parameter_name}.value")
             else:
                 function_call_args.append(param.parameter_name)
-                if param.has_explicit_buffer_size:
-                    function_call_args.append(f"len({param.parameter_name})")
         else:
             if param.has_explicit_buffer_size:
                 function_call_args.append(param.parameter_name)

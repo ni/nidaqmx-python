@@ -149,6 +149,8 @@ class _PersistedScaleAlternateConstructor(PersistedScale):
 
     This is a private API used to instantiate a PersistedScale with an existing interpreter.
     """
+    # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
+    __slots__ = []
 
     def __init__(self, name, interpreter):
         """
