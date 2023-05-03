@@ -2,6 +2,16 @@
 from codegen.properties.parameter import Parameter
 from codegen.utilities.enum_helpers import merge_enums
 
+ALTERNATE_CONSTRUCTOR_CLASSES = [
+    "Task",
+    "PhysicalChannel",
+    "Device",
+    "PersistedChannel",
+    "PersistedTask",
+    "PersistedScale",
+    "Scale",
+]
+
 
 class Attribute:
     """Structure for storing attribute metadata from scrapigen."""
@@ -60,6 +70,7 @@ class Attribute:
             self._python_data_type = self._enum
             self._is_enum = True
         self._object_type = attribute_metadata.get("python_object_type")
+        self._has_alternate_constructor = self._object_type in ALTERNATE_CONSTRUCTOR_CLASSES
 
     @property
     def id(self):
@@ -250,6 +261,11 @@ class Attribute:
         This is used to provide the type of the attribute when making c function calls in python.
         """
         return self._ctypes_data_type
+
+    @property
+    def has_alternate_constructor(self):
+        """bool: Specifies if an alternate constructor is present for the attribute."""
+        return self._has_alternate_constructor
 
     def get_lib_importer_type(self):
         """Returns the type of c function call."""

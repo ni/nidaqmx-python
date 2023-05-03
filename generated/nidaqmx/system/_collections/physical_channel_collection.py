@@ -5,9 +5,8 @@ from nidaqmx._lib import lib_importer, ctypes_byte_str
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, DaqError)
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.system.physical_channel import PhysicalChannel
+from nidaqmx.system.physical_channel import PhysicalChannel, _PhysicalChannelAlternateConstructor
 from nidaqmx.utils import unflatten_channel_string, flatten_channel_string
-
 
 class PhysicalChannelCollection(Sequence):
     """
@@ -61,9 +60,9 @@ class PhysicalChannelCollection(Sequence):
             Indicates the subset of physical channels indexed.
         """
         if isinstance(index, int):
-            return PhysicalChannel(self.channel_names[index])
+            return _PhysicalChannelAlternateConstructor(self.channel_names[index], self._interpreter)
         elif isinstance(index, slice):
-            return PhysicalChannel(self.channel_names[index])
+            return _PhysicalChannelAlternateConstructor(self.channel_names[index], self._interpreter)
         elif isinstance(index, str):
             return PhysicalChannel(f'{self._name}/{index}')
         else:
@@ -73,7 +72,7 @@ class PhysicalChannelCollection(Sequence):
 
     def __iter__(self):
         for channel_name in self.channel_names:
-            yield PhysicalChannel(channel_name)
+            yield _PhysicalChannelAlternateConstructor(channel_name, self._interpreter)
 
     def __len__(self):
         return len(self.channel_names)
@@ -86,7 +85,7 @@ class PhysicalChannelCollection(Sequence):
         channel_names.reverse()
 
         for channel_name in channel_names:
-            yield PhysicalChannel(channel_name)
+            yield _PhysicalChannelAlternateConstructor(channel_name, self._interpreter)
 
     @property
     def all(self):
@@ -116,32 +115,8 @@ class AIPhysicalChannelCollection(PhysicalChannelCollection):
 
     @property
     def channel_names(self):
-        cfunc = lib_importer.windll.DAQmxGetDevAIPhysicalChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_device_attribute_string(self._name, 0x231e)
+        return unflatten_channel_string(val)
 
 
 class AOPhysicalChannelCollection(PhysicalChannelCollection):
@@ -154,32 +129,8 @@ class AOPhysicalChannelCollection(PhysicalChannelCollection):
 
     @property
     def channel_names(self):
-        cfunc = lib_importer.windll.DAQmxGetDevAOPhysicalChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_device_attribute_string(self._name, 0x231f)
+        return unflatten_channel_string(val)
 
 
 class CIPhysicalChannelCollection(PhysicalChannelCollection):
@@ -192,32 +143,8 @@ class CIPhysicalChannelCollection(PhysicalChannelCollection):
 
     @property
     def channel_names(self):
-        cfunc = lib_importer.windll.DAQmxGetDevCIPhysicalChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_device_attribute_string(self._name, 0x2324)
+        return unflatten_channel_string(val)
 
 
 class COPhysicalChannelCollection(PhysicalChannelCollection):
@@ -230,32 +157,8 @@ class COPhysicalChannelCollection(PhysicalChannelCollection):
 
     @property
     def channel_names(self):
-        cfunc = lib_importer.windll.DAQmxGetDevCOPhysicalChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_device_attribute_string(self._name, 0x2325)
+        return unflatten_channel_string(val)
 
 
 class DILinesCollection(PhysicalChannelCollection):
@@ -267,32 +170,8 @@ class DILinesCollection(PhysicalChannelCollection):
 
     @property
     def channel_names(self):
-        cfunc = lib_importer.windll.DAQmxGetDevDILines
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_device_attribute_string(self._name, 0x2320)
+        return unflatten_channel_string(val)
 
 
 class DOLinesCollection(PhysicalChannelCollection):
@@ -304,32 +183,8 @@ class DOLinesCollection(PhysicalChannelCollection):
 
     @property
     def channel_names(self):
-        cfunc = lib_importer.windll.DAQmxGetDevDOLines
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_device_attribute_string(self._name, 0x2322)
+        return unflatten_channel_string(val)
 
 
 class DIPortsCollection(PhysicalChannelCollection):
@@ -341,32 +196,8 @@ class DIPortsCollection(PhysicalChannelCollection):
 
     @property
     def channel_names(self):
-        cfunc = lib_importer.windll.DAQmxGetDevDIPorts
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_device_attribute_string(self._name, 0x2321)
+        return unflatten_channel_string(val)
 
 
 class DOPortsCollection(PhysicalChannelCollection):
@@ -378,29 +209,5 @@ class DOPortsCollection(PhysicalChannelCollection):
 
     @property
     def channel_names(self):
-        cfunc = lib_importer.windll.DAQmxGetDevDOPorts
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_device_attribute_string(self._name, 0x2323)
+        return unflatten_channel_string(val)

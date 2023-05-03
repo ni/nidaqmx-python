@@ -54,111 +54,39 @@ class Scale:
         """
         str: Specifies a description for the scale.
         """
-        cfunc = lib_importer.windll.DAQmxGetScaleDescr
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
+        val = self._interpreter.get_scale_attribute_string(self._name, 0x1226)
+        return val
 
     @description.setter
     def description(self, val):
-        cfunc = lib_importer.windll.DAQmxSetScaleDescr
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._name, val)
-        check_for_error(error_code)
+        self._interpreter.set_scale_attribute_string(self._name, 0x1226, val)
 
     @property
     def lin_slope(self):
         """
         float: Specifies the slope, m, in the equation y=mx+b.
         """
-        val = ctypes.c_double()
 
-        cfunc = lib_importer.windll.DAQmxGetScaleLinSlope
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_scale_attribute_double(self._name, 0x1227)
+        return val
 
     @lin_slope.setter
     def lin_slope(self, val):
-        cfunc = lib_importer.windll.DAQmxSetScaleLinSlope
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_double]
-
-        error_code = cfunc(
-            self._name, val)
-        check_for_error(error_code)
+        self._interpreter.set_scale_attribute_double(self._name, 0x1227, val)
 
     @property
     def lin_y_intercept(self):
         """
         float: Specifies the y-intercept, b, in the equation y=mx+b.
         """
-        val = ctypes.c_double()
 
-        cfunc = lib_importer.windll.DAQmxGetScaleLinYIntercept
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_scale_attribute_double(self._name, 0x1228)
+        return val
 
     @lin_y_intercept.setter
     def lin_y_intercept(self, val):
-        cfunc = lib_importer.windll.DAQmxSetScaleLinYIntercept
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_double]
-
-        error_code = cfunc(
-            self._name, val)
-        check_for_error(error_code)
+        self._interpreter.set_scale_attribute_double(self._name, 0x1228, val)
 
     @property
     def map_pre_scaled_max(self):
@@ -166,33 +94,13 @@ class Scale:
         float: Specifies the largest value in the range of pre-scaled
             values. NI-DAQmx maps this value to **map_scaled_max**.
         """
-        val = ctypes.c_double()
 
-        cfunc = lib_importer.windll.DAQmxGetScaleMapPreScaledMax
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_scale_attribute_double(self._name, 0x1231)
+        return val
 
     @map_pre_scaled_max.setter
     def map_pre_scaled_max(self, val):
-        cfunc = lib_importer.windll.DAQmxSetScaleMapPreScaledMax
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_double]
-
-        error_code = cfunc(
-            self._name, val)
-        check_for_error(error_code)
+        self._interpreter.set_scale_attribute_double(self._name, 0x1231, val)
 
     @property
     def map_pre_scaled_min(self):
@@ -200,33 +108,13 @@ class Scale:
         float: Specifies the smallest value in the range of pre-scaled
             values. NI-DAQmx maps this value to **map_scaled_min**.
         """
-        val = ctypes.c_double()
 
-        cfunc = lib_importer.windll.DAQmxGetScaleMapPreScaledMin
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_scale_attribute_double(self._name, 0x1232)
+        return val
 
     @map_pre_scaled_min.setter
     def map_pre_scaled_min(self, val):
-        cfunc = lib_importer.windll.DAQmxSetScaleMapPreScaledMin
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_double]
-
-        error_code = cfunc(
-            self._name, val)
-        check_for_error(error_code)
+        self._interpreter.set_scale_attribute_double(self._name, 0x1232, val)
 
     @property
     def map_scaled_max(self):
@@ -237,33 +125,13 @@ class Scale:
             match this value. Writes generate errors for samples that
             are larger than this value.
         """
-        val = ctypes.c_double()
 
-        cfunc = lib_importer.windll.DAQmxGetScaleMapScaledMax
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_scale_attribute_double(self._name, 0x1229)
+        return val
 
     @map_scaled_max.setter
     def map_scaled_max(self, val):
-        cfunc = lib_importer.windll.DAQmxSetScaleMapScaledMax
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_double]
-
-        error_code = cfunc(
-            self._name, val)
-        check_for_error(error_code)
+        self._interpreter.set_scale_attribute_double(self._name, 0x1229, val)
 
     @property
     def map_scaled_min(self):
@@ -274,33 +142,13 @@ class Scale:
             match this value. Writes generate errors for samples that
             are smaller than this value.
         """
-        val = ctypes.c_double()
 
-        cfunc = lib_importer.windll.DAQmxGetScaleMapScaledMin
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_scale_attribute_double(self._name, 0x1230)
+        return val
 
     @map_scaled_min.setter
     def map_scaled_min(self, val):
-        cfunc = lib_importer.windll.DAQmxSetScaleMapScaledMin
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_double]
-
-        error_code = cfunc(
-            self._name, val)
-        check_for_error(error_code)
+        self._interpreter.set_scale_attribute_double(self._name, 0x1230, val)
 
     @property
     def poly_forward_coeff(self):
@@ -311,50 +159,14 @@ class Scale:
             For example, if index three of the list is 9, the fourth
             term of the equation is 9x^3.
         """
-        cfunc = lib_importer.windll.DAQmxGetScalePolyForwardCoeff
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = numpy.zeros(temp_size, dtype=numpy.float64)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_array_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.tolist()
+        val = self._interpreter.get_scale_attribute_double_array(self._name, 0x1234)
+        return val
 
     @poly_forward_coeff.setter
     def poly_forward_coeff(self, val):
         val = numpy.float64(val)
-        cfunc = lib_importer.windll.DAQmxSetScalePolyForwardCoeff
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint]
-
-        error_code = cfunc(
-            self._name, val, len(val))
-        check_for_error(error_code)
+        self._interpreter.set_scale_attribute_double_array(self._name, 0x1234, val)
 
     @property
     def poly_reverse_coeff(self):
@@ -365,50 +177,14 @@ class Scale:
             For example, if index three of the list is 9, the fourth
             term of the equation is 9y^3.
         """
-        cfunc = lib_importer.windll.DAQmxGetScalePolyReverseCoeff
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = numpy.zeros(temp_size, dtype=numpy.float64)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_array_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.tolist()
+        val = self._interpreter.get_scale_attribute_double_array(self._name, 0x1235)
+        return val
 
     @poly_reverse_coeff.setter
     def poly_reverse_coeff(self, val):
         val = numpy.float64(val)
-        cfunc = lib_importer.windll.DAQmxSetScalePolyReverseCoeff
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint]
-
-        error_code = cfunc(
-            self._name, val, len(val))
-        check_for_error(error_code)
+        self._interpreter.set_scale_attribute_double_array(self._name, 0x1235, val)
 
     @property
     def pre_scaled_units(self):
@@ -416,34 +192,14 @@ class Scale:
         :class:`nidaqmx.constants.UnitsPreScaled`: Specifies the units
             of the values that you want to scale.
         """
-        val = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxGetScalePreScaledUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return UnitsPreScaled(val.value)
+        val = self._interpreter.get_scale_attribute_int32(self._name, 0x18f7)
+        return UnitsPreScaled(val)
 
     @pre_scaled_units.setter
     def pre_scaled_units(self, val):
         val = val.value
-        cfunc = lib_importer.windll.DAQmxSetScalePreScaledUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int]
-
-        error_code = cfunc(
-            self._name, val)
-        check_for_error(error_code)
+        self._interpreter.set_scale_attribute_int32(self._name, 0x18f7, val)
 
     @property
     def scale_type(self):
@@ -451,20 +207,9 @@ class Scale:
         :class:`nidaqmx.constants.ScaleType`: Indicates the method or
             equation form that the custom scale uses.
         """
-        val = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxGetScaleType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return ScaleType(val.value)
+        val = self._interpreter.get_scale_attribute_int32(self._name, 0x1929)
+        return ScaleType(val)
 
     @property
     def scaled_units(self):
@@ -472,45 +217,13 @@ class Scale:
         str: Specifies the units to use for scaled values. You can use
             an arbitrary string.
         """
-        cfunc = lib_importer.windll.DAQmxGetScaleScaledUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
+        val = self._interpreter.get_scale_attribute_string(self._name, 0x191b)
+        return val
 
     @scaled_units.setter
     def scaled_units(self, val):
-        cfunc = lib_importer.windll.DAQmxSetScaleScaledUnits
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._name, val)
-        check_for_error(error_code)
+        self._interpreter.set_scale_attribute_string(self._name, 0x191b, val)
 
     @property
     def table_pre_scaled_vals(self):
@@ -518,50 +231,14 @@ class Scale:
         List[float]: Specifies a list of pre-scaled values. These values
             map directly to the values in **table_scaled_vals**.
         """
-        cfunc = lib_importer.windll.DAQmxGetScaleTablePreScaledVals
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = numpy.zeros(temp_size, dtype=numpy.float64)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_array_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.tolist()
+        val = self._interpreter.get_scale_attribute_double_array(self._name, 0x1237)
+        return val
 
     @table_pre_scaled_vals.setter
     def table_pre_scaled_vals(self, val):
         val = numpy.float64(val)
-        cfunc = lib_importer.windll.DAQmxSetScaleTablePreScaledVals
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint]
-
-        error_code = cfunc(
-            self._name, val, len(val))
-        check_for_error(error_code)
+        self._interpreter.set_scale_attribute_double_array(self._name, 0x1237, val)
 
     @property
     def table_scaled_vals(self):
@@ -569,55 +246,19 @@ class Scale:
         List[float]: Specifies a list of scaled values. These values map
             directly to the values in **table_pre_scaled_vals**.
         """
-        cfunc = lib_importer.windll.DAQmxGetScaleTableScaledVals
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = numpy.zeros(temp_size, dtype=numpy.float64)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_array_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.tolist()
+        val = self._interpreter.get_scale_attribute_double_array(self._name, 0x1236)
+        return val
 
     @table_scaled_vals.setter
     def table_scaled_vals(self, val):
         val = numpy.float64(val)
-        cfunc = lib_importer.windll.DAQmxSetScaleTableScaledVals
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint]
-
-        error_code = cfunc(
-            self._name, val, len(val))
-        check_for_error(error_code)
+        self._interpreter.set_scale_attribute_double_array(self._name, 0x1236, val)
 
     @staticmethod
     def calculate_reverse_poly_coeff(
             forward_coeffs, min_val_x=-5.0, max_val_x=5.0,
-            num_points_to_compute=1000, reverse_poly_order=-1):
+            num_points_to_compute=1000, reverse_poly_order=-1, *, grpc_options=None):
         """
         Computes a set of coefficients for a polynomial that
         approximates the inverse of the polynomial with the coefficients
@@ -649,6 +290,8 @@ class Scale:
                 3 indicates a 3rd order polynomial. A value of -1
                 indicates a reverse polynomial of the same order as the
                 forward polynomial.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
+                gRPC session options.
         Returns:
             List[float]: 
             
@@ -659,36 +302,17 @@ class Scale:
         """
         forward_coeffs = numpy.float64(forward_coeffs)
 
-        if reverse_poly_order == -1:
-            size = len(forward_coeffs)
-        else:
-            size = reverse_poly_order + 1
+        interpreter = utils._select_interpreter(grpc_options)
 
-        reverse_coeffs = numpy.zeros(size, dtype=numpy.float64)
+        reverse_coeffs = interpreter.calculate_reverse_poly_coeff(
+            forward_coeffs, min_val_x, max_val_x, num_points_to_compute, reverse_poly_order)
 
-        cfunc = lib_importer.windll.DAQmxCalculateReversePolyCoeff
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        numpy.ctypeslib.ndpointer(
-                            dtype=numpy.float64, flags=('C', 'W')),
-                        ctypes.c_uint, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int,
-                        numpy.ctypeslib.ndpointer(
-                            dtype=numpy.float64, flags=('C', 'W'))]
-
-        error_code = cfunc(
-            forward_coeffs, len(forward_coeffs), min_val_x, max_val_x,
-            num_points_to_compute, reverse_poly_order, reverse_coeffs)
-        check_for_error(error_code)
-
-        return reverse_coeffs.tolist()
+        return reverse_coeffs
 
     @staticmethod
     def create_lin_scale(
             scale_name, slope, y_intercept=0.0,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None):
         """
         Creates a custom scale that uses the equation y=mx+b, where x is
         a pre-scaled value, and y is a scaled value. The equation is
@@ -705,32 +329,24 @@ class Scale:
             scaled_units (Optional[str]): Is the units to use for the
                 scaled value. You can use an arbitrary string. NI-DAQmx
                 uses the units to label a graph or chart.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
+                gRPC session options.
         Returns:
             nidaqmx.scale.Scale:
             
             Indicates an object that represents the created custom scale.
         """
-        scale = Scale(scale_name)
+        scale = Scale(scale_name, grpc_options=grpc_options)
 
-        cfunc = lib_importer.windll.DAQmxCreateLinScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes_byte_str]
-
-        error_code = cfunc(
-            scale_name, slope, y_intercept, pre_scaled_units.value,
-            scaled_units)
-        check_for_error(error_code)
+        scale._interpreter.create_lin_scale(
+            scale_name, slope, y_intercept, pre_scaled_units.value, scaled_units)
 
         return scale
 
     @staticmethod
     def create_map_scale(
             scale_name, prescaled_min, prescaled_max, scaled_min, scaled_max,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None):
         """
         Creates a custom scale that scales values proportionally from a
         range of pre-scaled values to a range of scaled values.
@@ -758,33 +374,25 @@ class Scale:
             scaled_units (Optional[str]): Is the units to use for the
                 scaled value. You can use an arbitrary string. NI-DAQmx
                 uses the units to label a graph or chart.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
+                gRPC session options.
         Returns:
             nidaqmx.scale.Scale: 
             
             Indicates an object that represents the created custom scale.
         """
-        scale = Scale(scale_name)
+        scale = Scale(scale_name, grpc_options=grpc_options)
 
-        cfunc = lib_importer.windll.DAQmxCreateMapScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
-                        ctypes_byte_str]
-
-        error_code = cfunc(
-            scale_name, prescaled_min, prescaled_max, scaled_min, scaled_max,
+        scale._interpreter.create_map_scale(
+            scale_name, prescaled_min, prescaled_max, scaled_min, scaled_max, 
             pre_scaled_units.value, scaled_units)
-        check_for_error(error_code)
 
         return scale
 
     @staticmethod
     def create_polynomial_scale(
             scale_name, forward_coeffs, reverse_coeffs,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None):
         """
         Creates a custom scale that uses an nth order polynomial
         equation. NI-DAQmx requires both a polynomial to convert pre-
@@ -808,13 +416,13 @@ class Scale:
             scaled_units (Optional[str]): Is the units to use for the
                 scaled value. You can use an arbitrary string. NI-DAQmx
                 uses the units to label a graph or chart.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
+                gRPC session options.
         Returns:
             nidaqmx.scale.Scale: 
             
             Indicates an object that represents the created custom scale.
         """
-        scale = Scale(scale_name)
-
         if forward_coeffs is None:
             forward_coeffs = []
 
@@ -824,30 +432,17 @@ class Scale:
         forward_coeffs = numpy.float64(forward_coeffs)
         reverse_coeffs = numpy.float64(reverse_coeffs)
 
-        cfunc = lib_importer.windll.DAQmxCreatePolynomialScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                                          flags=('C', 'W')),
-                        ctypes.c_uint,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                                          flags=('C', 'W')),
-                        ctypes.c_uint, ctypes.c_int, ctypes_byte_str]
+        scale = Scale(scale_name, grpc_options=grpc_options)
 
-        error_code = cfunc(
-            scale_name, forward_coeffs, len(forward_coeffs), reverse_coeffs,
-            len(reverse_coeffs), pre_scaled_units.value, scaled_units)
-        check_for_error(error_code)
+        scale._interpreter.create_polynomial_scale(
+            scale_name, forward_coeffs, reverse_coeffs, pre_scaled_units.value, scaled_units)
 
         return scale
 
     @staticmethod
     def create_table_scale(
             scale_name, prescaled_vals, scaled_vals,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None):
         """
         Creates a custom scale that maps an list of pre-scaled values to
         an list of corresponding scaled values. NI-DAQmx applies linear
@@ -868,13 +463,13 @@ class Scale:
             scaled_units (Optional[str]): Is the units to use for the
                 scaled value. You can use an arbitrary string. NI-DAQmx
                 uses the units to label a graph or chart.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
+                gRPC session options.
         Returns:
             nidaqmx.scale.Scale: 
             
             Indicates an object that represents the created custom scale.
         """
-        scale = Scale(scale_name)
-
         if prescaled_vals is None:
             prescaled_vals = []
 
@@ -883,24 +478,11 @@ class Scale:
 
         prescaled_vals = numpy.float64(prescaled_vals)
         scaled_vals = numpy.float64(scaled_vals)
+        
+        scale = Scale(scale_name, grpc_options=grpc_options)
 
-        cfunc = lib_importer.windll.DAQmxCreateTableScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                                          flags=('C', 'W')),
-                        ctypes.c_uint,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                                          flags=('C', 'W')),
-                        ctypes.c_uint, ctypes.c_int, ctypes_byte_str]
-
-        error_code = cfunc(
-            scale_name, prescaled_vals, len(prescaled_vals), scaled_vals,
-            len(scaled_vals), pre_scaled_units.value, scaled_units)
-        check_for_error(error_code)
+        scale._interpreter.create_table_scale(
+            scale_name, prescaled_vals, scaled_vals, pre_scaled_units.value, scaled_units)
 
         return scale
 
@@ -942,17 +524,7 @@ class Scale:
         if allow_interactive_deletion:
             options |= _Save.ALLOW_INTERACTIVE_DELETION.value
 
-        cfunc = lib_importer.windll.DAQmxSaveScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes_byte_str,
-                        ctypes.c_uint]
-
-        error_code = cfunc(
-            self._name, save_as, author, options)
-        check_for_error(error_code)
+        self._interpreter.save_scale(self._name, save_as, author, options)
 
 
 class _ScaleAlternateConstructor(Scale):
@@ -961,6 +533,8 @@ class _ScaleAlternateConstructor(Scale):
 
     This is a private API used to instantiate a Scale with an existing interpreter.
     """
+    # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
+    __slots__ = []
 
     def __init__(self, name, interpreter):
         """

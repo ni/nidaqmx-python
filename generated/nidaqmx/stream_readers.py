@@ -1,20 +1,9 @@
 import numpy
 from nidaqmx import DaqError
-from nidaqmx import utils
 
-from nidaqmx.constants import READ_ALL_AVAILABLE
-from nidaqmx._task_modules.read_functions import (
-    _read_analog_f_64, _read_analog_scalar_f_64,
-    _read_power_f_64, _read_power_scalar_f_64, _read_power_i_16,
-    _read_binary_i_16, _read_binary_i_32,
-    _read_binary_u_16, _read_binary_u_32,
-    _read_digital_lines, _read_digital_u_8, _read_digital_u_16,
-    _read_digital_scalar_u_32, _read_digital_u_32, _read_counter_scalar_f_64,
-    _read_counter_scalar_u_32, _read_counter_f_64_ex, _read_counter_u_32_ex,
-    _read_ctr_freq_scalar, _read_ctr_ticks_scalar, _read_ctr_time_scalar,
-    _read_ctr_freq, _read_ctr_ticks, _read_ctr_time)
+from nidaqmx.constants import FillMode, READ_ALL_AVAILABLE
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.types import PowerMeasurement
+from nidaqmx.types import PowerMeasurement, CtrFreq, CtrTick, CtrTime
 
 __all__ = ['AnalogSingleChannelReader', 'AnalogMultiChannelReader',
            'AnalogUnscaledReader', 'CounterReader',
@@ -218,9 +207,11 @@ class AnalogSingleChannelReader(ChannelReaderBase):
 
         self._verify_array(data, number_of_samples_per_channel, False, True)
 
-        return _read_analog_f_64(
-            self._handle, data, number_of_samples_per_channel,
-            timeout)
+        _, samps_per_chan_read = self._interpreter.read_analog_f64(
+            self._handle, number_of_samples_per_channel,
+            timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+        
+        return samps_per_chan_read
 
     def read_one_sample(self, timeout=10):
         """
@@ -242,7 +233,7 @@ class AnalogSingleChannelReader(ChannelReaderBase):
 
             Indicates a single floating-point sample from the task.
         """
-        return _read_analog_scalar_f_64(self._handle, timeout)
+        return self._interpreter.read_analog_scalar_f64(self._handle, timeout)
 
 
 class AnalogMultiChannelReader(ChannelReaderBase):
@@ -330,9 +321,11 @@ class AnalogMultiChannelReader(ChannelReaderBase):
 
         self._verify_array(data, number_of_samples_per_channel, True, True)
 
-        return _read_analog_f_64(
-            self._handle, data, number_of_samples_per_channel,
-            timeout)
+        _, samps_per_chan_read = self._interpreter.read_analog_f64(
+            self._handle, number_of_samples_per_channel,
+            timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+        
+        return samps_per_chan_read
 
     def read_one_sample(self, data, timeout=10):
         """
@@ -368,7 +361,7 @@ class AnalogMultiChannelReader(ChannelReaderBase):
         """
         self._verify_array(data, 1, True, False)
 
-        _read_analog_f_64(self._handle, data, 1, timeout)
+        self._interpreter.read_analog_f64(self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
 
 class AnalogUnscaledReader(ChannelReaderBase):
@@ -456,9 +449,11 @@ class AnalogUnscaledReader(ChannelReaderBase):
 
         self._verify_array(data, number_of_samples_per_channel, True, True)
 
-        return _read_binary_i_16(
-            self._handle, data, number_of_samples_per_channel,
-            timeout)
+        _, samps_per_chan_read = self._interpreter.read_binary_i16(
+            self._handle, number_of_samples_per_channel,
+            timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+        
+        return samps_per_chan_read
 
     def read_int32(
             self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
@@ -539,9 +534,11 @@ class AnalogUnscaledReader(ChannelReaderBase):
 
         self._verify_array(data, number_of_samples_per_channel, True, True)
 
-        return _read_binary_i_32(
-            self._handle, data, number_of_samples_per_channel,
-            timeout)
+        _, samps_per_chan_read = self._interpreter.read_binary_i32(
+            self._handle, number_of_samples_per_channel,
+            timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+        
+        return samps_per_chan_read
 
     def read_uint16(
             self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
@@ -622,9 +619,11 @@ class AnalogUnscaledReader(ChannelReaderBase):
 
         self._verify_array(data, number_of_samples_per_channel, True, True)
 
-        return _read_binary_u_16(
-            self._handle, data, number_of_samples_per_channel,
-            timeout)
+        _, samps_per_chan_read = self._interpreter.read_binary_u16(
+            self._handle, number_of_samples_per_channel,
+            timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+        
+        return samps_per_chan_read
 
     def read_uint32(
             self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
@@ -705,9 +704,11 @@ class AnalogUnscaledReader(ChannelReaderBase):
 
         self._verify_array(data, number_of_samples_per_channel, True, True)
 
-        return _read_binary_u_32(
-            self._handle, data, number_of_samples_per_channel,
-            timeout)
+        _, samps_per_chan_read =  self._interpreter.read_binary_u32(
+            self._handle, number_of_samples_per_channel,
+            timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+        
+        return samps_per_chan_read
 
 
 class PowerSingleChannelReader(ChannelReaderBase):
@@ -790,9 +791,11 @@ class PowerSingleChannelReader(ChannelReaderBase):
         self._verify_array(voltage_data, number_of_samples_per_channel, False, True)
         self._verify_array(current_data, number_of_samples_per_channel, False, True)
 
-        return _read_power_f_64(
-            self._handle, voltage_data, current_data, number_of_samples_per_channel,
-            timeout)
+        _, _, samps_per_chan_read = self._interpreter.read_power_f64(
+            self._handle, number_of_samples_per_channel, timeout, 
+            FillMode.GROUP_BY_CHANNEL.value, voltage_data, current_data)
+        
+        return samps_per_chan_read
 
     def read_one_sample(self, timeout=10):
         """
@@ -814,7 +817,7 @@ class PowerSingleChannelReader(ChannelReaderBase):
 
             Indicates a single floating-point power sample from the task.
         """
-        voltage, current = _read_power_scalar_f_64(self._handle, timeout)
+        voltage, current = self._interpreter.read_power_scalar_f64(self._handle, timeout)
         return PowerMeasurement(voltage=voltage, current=current)
 
 
@@ -925,9 +928,11 @@ class PowerMultiChannelReader(ChannelReaderBase):
         self._verify_array(voltage_data, number_of_samples_per_channel, True, True)
         self._verify_array(current_data, number_of_samples_per_channel, True, True)
 
-        return _read_power_f_64(
-            self._handle, voltage_data, current_data, number_of_samples_per_channel,
-            timeout)
+        _, _, samps_per_chan_read = self._interpreter.read_power_f64(
+            self._handle, number_of_samples_per_channel, timeout, 
+            FillMode.GROUP_BY_CHANNEL.value, voltage_data, current_data)
+        
+        return samps_per_chan_read
 
     def read_one_sample(self, voltage_data, current_data, timeout=10):
         """
@@ -972,8 +977,9 @@ class PowerMultiChannelReader(ChannelReaderBase):
         self._verify_array(voltage_data, 1, True, False)
         self._verify_array(current_data, 1, True, False)
 
-        _read_power_f_64(
-            self._handle, voltage_data, current_data, 1, timeout)
+        self._interpreter.read_power_f64(
+            self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, 
+            voltage_data, current_data)
 
 
 class PowerBinaryReader(ChannelReaderBase):
@@ -1077,9 +1083,11 @@ class PowerBinaryReader(ChannelReaderBase):
         self._verify_array(voltage_data, number_of_samples_per_channel, True, True)
         self._verify_array(current_data, number_of_samples_per_channel, True, True)
 
-        return _read_power_i_16(
-            self._handle, voltage_data, current_data, number_of_samples_per_channel,
-            timeout)
+        _, _, samps_per_chan_read = self._interpreter.read_power_binary_i16(
+            self._handle, number_of_samples_per_channel, timeout, 
+            FillMode.GROUP_BY_CHANNEL.value, voltage_data, current_data)
+        
+        return samps_per_chan_read
 
 
 class CounterReader(ChannelReaderBase):
@@ -1153,9 +1161,11 @@ class CounterReader(ChannelReaderBase):
 
         self._verify_array(data, number_of_samples_per_channel, False, True)
 
-        return _read_counter_f_64_ex(
-            self._handle, data, number_of_samples_per_channel,
-            timeout)
+        _, samps_per_chan_read = self._interpreter.read_counter_f64_ex(
+            self._handle,number_of_samples_per_channel, timeout, 
+            FillMode.GROUP_BY_CHANNEL.value, data)
+        
+        return samps_per_chan_read
 
     def read_many_sample_pulse_frequency(
             self, frequencies, duty_cycles,
@@ -1234,9 +1244,11 @@ class CounterReader(ChannelReaderBase):
         self._verify_array(
             duty_cycles, number_of_samples_per_channel, False, True)
 
-        return _read_ctr_freq(
-            self._handle, frequencies, duty_cycles,
-            number_of_samples_per_channel, timeout)
+        _, _, samps_per_chan_read = self._interpreter.read_ctr_freq(
+            self._handle, number_of_samples_per_channel, timeout, 
+            FillMode.GROUP_BY_CHANNEL.value, frequencies, duty_cycles)
+        
+        return samps_per_chan_read
 
     def read_many_sample_pulse_ticks(
             self, high_ticks, low_ticks,
@@ -1315,9 +1327,11 @@ class CounterReader(ChannelReaderBase):
         self._verify_array(
             low_ticks, number_of_samples_per_channel, False, True)
 
-        return _read_ctr_ticks(
-            self._handle, high_ticks, low_ticks,
-            number_of_samples_per_channel, timeout)
+        _, _, samps_per_chan_read = self._interpreter.read_ctr_ticks(
+            self._handle, number_of_samples_per_channel, timeout, 
+            FillMode.GROUP_BY_CHANNEL.value, high_ticks, low_ticks)
+        
+        return samps_per_chan_read
 
     def read_many_sample_pulse_time(
             self, high_times, low_times,
@@ -1396,9 +1410,11 @@ class CounterReader(ChannelReaderBase):
         self._verify_array(
             low_times, number_of_samples_per_channel, False, True)
 
-        return _read_ctr_time(
-            self._handle, high_times, low_times,
-            number_of_samples_per_channel, timeout)
+        _, _, samps_per_chan_read = self._interpreter.read_ctr_time(
+            self._handle, number_of_samples_per_channel, timeout, 
+            FillMode.GROUP_BY_CHANNEL.value, high_times, low_times)
+        
+        return samps_per_chan_read
 
     def read_many_sample_uint32(
             self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
@@ -1466,9 +1482,11 @@ class CounterReader(ChannelReaderBase):
 
         self._verify_array(data, number_of_samples_per_channel, False, True)
 
-        return _read_counter_u_32_ex(
-            self._handle, data, number_of_samples_per_channel,
-            timeout)
+        _, samps_per_chan_read = self._interpreter.read_counter_u32_ex(
+            self._handle, number_of_samples_per_channel, timeout, 
+            FillMode.GROUP_BY_CHANNEL.value, data)
+        
+        return samps_per_chan_read
 
     def read_one_sample_double(self, timeout=10):
         """
@@ -1489,7 +1507,7 @@ class CounterReader(ChannelReaderBase):
             float: Indicates a single floating-point sample from the
                 task.
         """
-        return _read_counter_scalar_f_64(self._handle, timeout)
+        return self._interpreter.read_counter_scalar_f64(self._handle, timeout)
 
     def read_one_sample_pulse_frequency(self, timeout=10):
         """
@@ -1511,7 +1529,9 @@ class CounterReader(ChannelReaderBase):
 
             Indicates a pulse sample in terms of frequency from the task.
         """
-        return _read_ctr_freq_scalar(self._handle, timeout)
+        freq, duty_cycle = self._interpreter.read_ctr_freq_scalar(self._handle, timeout)
+
+        return CtrFreq(freq, duty_cycle)
 
     def read_one_sample_pulse_ticks(self, timeout=10):
         """
@@ -1533,7 +1553,9 @@ class CounterReader(ChannelReaderBase):
 
             Indicates a pulse sample in terms of ticks from the task.
         """
-        return _read_ctr_ticks_scalar(self._handle, timeout)
+        high_ticks, low_ticks = self._interpreter.read_ctr_ticks_scalar(self._handle, timeout)
+
+        return CtrTick(high_ticks, low_ticks)
 
     def read_one_sample_pulse_time(self, timeout=10):
         """
@@ -1555,7 +1577,9 @@ class CounterReader(ChannelReaderBase):
 
             Indicates a pulse sample in terms of time from the task.
         """
-        return _read_ctr_time_scalar(self._handle, timeout)
+        high_time, low_time = self._interpreter.read_ctr_time_scalar(self._handle, timeout)
+
+        return CtrTime(high_time, low_time)
 
     def read_one_sample_uint32(self, timeout=10):
         """
@@ -1578,7 +1602,7 @@ class CounterReader(ChannelReaderBase):
             Indicates a single 32-bit unsigned integer sample from the
             task.
         """
-        return _read_counter_scalar_u_32(self._handle, timeout)
+        return self._interpreter.read_counter_scalar_u32(self._handle, timeout)
 
 
 class DigitalSingleChannelReader(ChannelReaderBase):
@@ -1654,8 +1678,11 @@ class DigitalSingleChannelReader(ChannelReaderBase):
 
         self._verify_array(data, number_of_samples_per_channel, False, True)
 
-        return _read_digital_u_8(
-            self._handle, data, number_of_samples_per_channel, timeout)
+        _, samps_per_chan_read = self._interpreter.read_digital_u8(
+            self._handle, number_of_samples_per_channel, timeout, 
+            FillMode.GROUP_BY_CHANNEL.value, data)
+        
+        return samps_per_chan_read
 
     def read_many_sample_port_uint16(
             self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
@@ -1725,8 +1752,11 @@ class DigitalSingleChannelReader(ChannelReaderBase):
 
         self._verify_array(data, number_of_samples_per_channel, False, True)
 
-        return _read_digital_u_16(
-            self._handle, data, number_of_samples_per_channel, timeout)
+        _, samps_per_chan_read = self._interpreter.read_digital_u16(
+            self._handle, number_of_samples_per_channel, timeout, 
+            FillMode.GROUP_BY_CHANNEL.value, data)
+        
+        return samps_per_chan_read
 
     def read_many_sample_port_uint32(
             self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
@@ -1796,8 +1826,11 @@ class DigitalSingleChannelReader(ChannelReaderBase):
 
         self._verify_array(data, number_of_samples_per_channel, False, True)
 
-        return _read_digital_u_32(
-            self._handle, data, number_of_samples_per_channel, timeout)
+        _, samps_per_chan_read = self._interpreter.read_digital_u32(
+            self._handle, number_of_samples_per_channel, timeout, 
+            FillMode.GROUP_BY_CHANNEL.value, data)
+        
+        return samps_per_chan_read
 
     def read_one_sample_multi_line(self, data, timeout=10):
         """
@@ -1833,7 +1866,8 @@ class DigitalSingleChannelReader(ChannelReaderBase):
         """
         self._verify_array_digital_lines(data, False, True)
 
-        _read_digital_lines(self._handle, data, 1, timeout)
+        _, samps_per_chan_read, num_bytes_per_samp = self._interpreter.read_digital_lines(
+            self._handle, data, 1, timeout, FillMode.GROUP_BY_CHANNEL.value)    
 
     def read_one_sample_one_line(self, timeout=10):
         """
@@ -1857,7 +1891,8 @@ class DigitalSingleChannelReader(ChannelReaderBase):
             Indicates a single boolean sample from the task.
         """
         data = numpy.zeros(1, dtype=bool)
-        _read_digital_lines(self._handle, data, 1, timeout)
+        _, samps_per_chan_read, num_bytes_per_samp= self._interpreter.read_digital_lines(
+            self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
         return bool(data[0])
 
@@ -1885,7 +1920,8 @@ class DigitalSingleChannelReader(ChannelReaderBase):
             task.
         """
         data = numpy.zeros(1, dtype=numpy.uint8)
-        _read_digital_u_8(self._handle, data, 1, timeout)
+        _, samps_per_chan_read = self._interpreter.read_digital_u8(
+            self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
         return int(data[0])
 
@@ -1913,7 +1949,8 @@ class DigitalSingleChannelReader(ChannelReaderBase):
             task.
         """
         data = numpy.zeros(1, dtype=numpy.uint16)
-        _read_digital_u_16(self._handle, data, 1, timeout)
+        _, samps_per_read_chan = self._interpreter.read_digital_u16(
+            self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
         return int(data[0])
 
@@ -1940,7 +1977,7 @@ class DigitalSingleChannelReader(ChannelReaderBase):
             Indicates a single 32-bit unsigned integer sample from the
             task.
         """
-        return _read_digital_scalar_u_32(self._handle, timeout)
+        return self._interpreter.read_digital_scalar_u32(self._handle, timeout)
 
 
 class DigitalMultiChannelReader(ChannelReaderBase):
@@ -2030,8 +2067,11 @@ class DigitalMultiChannelReader(ChannelReaderBase):
 
         self._verify_array(data, number_of_samples_per_channel, True, True)
 
-        return _read_digital_u_8(
-            self._handle, data, number_of_samples_per_channel, timeout)
+        _, samps_per_chan_read = self._interpreter.read_digital_u8(
+            self._handle, number_of_samples_per_channel, timeout, 
+            FillMode.GROUP_BY_CHANNEL.value, data)
+        
+        return samps_per_chan_read
 
     def read_many_sample_port_uint16(
             self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
@@ -2114,8 +2154,10 @@ class DigitalMultiChannelReader(ChannelReaderBase):
 
         self._verify_array(data, number_of_samples_per_channel, True, True)
 
-        return _read_digital_u_16(
-            self._handle, data, number_of_samples_per_channel, timeout)
+        _, samps_per_chan_read = self._interpreter.read_digital_u16(
+            self._handle, number_of_samples_per_channel, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+        
+        return samps_per_chan_read
 
     def read_many_sample_port_uint32(
             self, data, number_of_samples_per_channel=READ_ALL_AVAILABLE,
@@ -2198,8 +2240,10 @@ class DigitalMultiChannelReader(ChannelReaderBase):
 
         self._verify_array(data, number_of_samples_per_channel, True, True)
 
-        return _read_digital_u_32(
-            self._handle, data, number_of_samples_per_channel, timeout)
+        _, samps_per_chan_read = self._interpreter.read_digital_u32(
+            self._handle, number_of_samples_per_channel, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+        
+        return samps_per_chan_read
 
     def read_one_sample_multi_line(self, data, timeout=10):
         """
@@ -2249,7 +2293,8 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         """
         self._verify_array_digital_lines(data, True, True)
 
-        _read_digital_lines(self._handle, data, 1, timeout)
+        _, samps_per_chan_read, num_bytes_per_samp= self._interpreter.read_digital_lines(
+            self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def read_one_sample_one_line(self, data, timeout=10):
         """
@@ -2285,7 +2330,8 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         """
         self._verify_array_digital_lines(data, True, False)
 
-        _read_digital_lines(self._handle, data, 1, timeout)
+        _, samps_per_chan_read, num_bytes_per_samp= self._interpreter.read_digital_lines(
+            self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def read_one_sample_port_byte(self, data, timeout=10):
         """
@@ -2323,7 +2369,8 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         """
         self._verify_array(data, 1, True, False)
 
-        _read_digital_u_8(self._handle, data, 1, timeout)
+        self._interpreter.read_digital_u8(
+            self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def read_one_sample_port_uint16(self, data, timeout=10):
         """
@@ -2361,7 +2408,8 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         """
         self._verify_array(data, 1, True, False)
 
-        _read_digital_u_16(self._handle, data, 1, timeout)
+        self._interpreter.read_digital_u16(
+            self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
     def read_one_sample_port_uint32(self, data, timeout=10):
         """
@@ -2399,4 +2447,5 @@ class DigitalMultiChannelReader(ChannelReaderBase):
         """
         self._verify_array(data, 1, True, False)
 
-        _read_digital_u_32(self._handle, data, 1, timeout)
+        self._interpreter.read_digital_u32(
+            self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)

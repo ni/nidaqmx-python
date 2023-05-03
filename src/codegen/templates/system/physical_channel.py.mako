@@ -15,6 +15,7 @@ import ctypes
 import numpy
 
 from nidaqmx import utils
+from nidaqmx._library_interpreter import LibraryInterpreter
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, enum_bitfield_to_list, ctypes_byte_str,
     c_bool32)
@@ -82,6 +83,8 @@ class _PhysicalChannelAlternateConstructor(PhysicalChannel):
 
     This is a private API used to instantiate a PhysicalChannel with an existing interpreter.     
     """
+    # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
+    __slots__ = []
 
     def __init__(self, name, interpreter):
         """

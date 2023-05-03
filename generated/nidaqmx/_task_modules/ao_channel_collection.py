@@ -80,19 +80,10 @@ class AOChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAOCurrentChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ao_current_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -127,19 +118,10 @@ class AOChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAOFuncGenChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_double]
 
-        error_code = cfunc(
+        self._interpreter.create_ao_func_gen_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             type.value, freq, amplitude, offset)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -176,19 +158,10 @@ class AOChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAOVoltageChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ao_voltage_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
