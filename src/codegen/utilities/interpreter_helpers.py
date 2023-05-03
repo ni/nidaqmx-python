@@ -326,15 +326,13 @@ def get_callback_param_data_types(func_params):
     """Gets the data types for call back function parameters."""
     callback_func_param = next(p for p in func_params if p.parameter_name == "callback_function")
     callback_data_param = next(p for p in func_params if p.parameter_name == "callback_data")
-    callback_param_types = []
-    # callback_param_types = [result_type, [**ctypes_data_type** of callback_params],
+    # callback_param_types: [result_type, [**ctypes_data_type** of callback_params],
     # **ctypes_data_type** of callback_data_param]
-    callback_param_types.append("ctypes.c_int32")
-    callback_param_types.extend(
-        [p["ctypes_data_type"] for p in callback_func_param.callback_params]
+    return (
+        ["ctypes.c_int32"]
+        + [p["ctypes_data_type"] for p in callback_func_param.callback_params]
+        + [callback_data_param.ctypes_data_type]
     )
-    callback_param_types.append(callback_data_param.ctypes_data_type)
-    return callback_param_types
 
 
 def get_compound_parameter(params):
