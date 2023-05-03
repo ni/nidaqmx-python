@@ -2,7 +2,7 @@ import ctypes
 
 from nidaqmx import utils
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
-from nidaqmx.scale import Scale
+from nidaqmx.scale import Scale, _ScaleAlternateConstructor
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
 
@@ -124,14 +124,7 @@ class PersistedScale:
         This function does not remove the custom scale from virtual
         channels that use it.
         """
-        cfunc = lib_importer.windll.DAQmxDeleteSavedScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [ctypes_byte_str]
-
-        error_code = cfunc(self._name)
-        check_for_error(error_code)
+        self._interpreter.delete_saved_scale(self._name)
 
     def load(self):
         """
@@ -140,7 +133,7 @@ class PersistedScale:
         Returns:
             nidaqmx.scale.Scale: Indicates the loaded Scale object.
         """
-        return Scale(self._name)
+        return _ScaleAlternateConstructor(self._name, self._interpreter)
 
 
 class _PersistedScaleAlternateConstructor(PersistedScale):

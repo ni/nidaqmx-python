@@ -3945,7 +3945,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')), ctypes.c_uint,
-                        ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
@@ -3962,7 +3962,8 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes.c_double,
-                        ctypes.POINTER(ctypes.c_double), c_bool32]
+                        ctypes.POINTER(ctypes.c_double),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, timeout, ctypes.byref(value), None)
@@ -3981,7 +3982,8 @@ class LibraryInterpreter(BaseInterpreter):
                         lib_importer.task_handle, ctypes.c_int,
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.int16, flags=('C','W')),
-                        ctypes.c_uint, ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.c_uint, ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
@@ -4001,7 +4003,8 @@ class LibraryInterpreter(BaseInterpreter):
                         lib_importer.task_handle, ctypes.c_int,
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
-                        ctypes.c_uint, ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.c_uint, ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
@@ -4022,7 +4025,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.uint16,
                         flags=('C','W')), ctypes.c_uint,
-                        ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
@@ -4043,7 +4046,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.uint32,
                         flags=('C','W')), ctypes.c_uint,
-                        ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
@@ -4063,7 +4066,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_double,
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')), ctypes.c_uint,
-                        ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, read_array, read_array.size,
@@ -4084,7 +4087,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')), ctypes.c_uint,
-                        ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
@@ -4101,7 +4104,8 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes.c_double,
-                        ctypes.POINTER(ctypes.c_double), c_bool32]
+                        ctypes.POINTER(ctypes.c_double),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, timeout, ctypes.byref(value), None)
@@ -4117,7 +4121,8 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes.c_double,
-                        ctypes.POINTER(ctypes.c_uint), c_bool32]
+                        ctypes.POINTER(ctypes.c_uint),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, timeout, ctypes.byref(value), None)
@@ -4135,7 +4140,7 @@ class LibraryInterpreter(BaseInterpreter):
                         lib_importer.task_handle, ctypes.c_int,
                         ctypes.c_double, wrapped_ndpointer(dtype=numpy.uint32,
                         flags=('C','W')), ctypes.c_uint,
-                        ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, read_array, read_array.size,
@@ -4156,7 +4161,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.uint32,
                         flags=('C','W')), ctypes.c_uint,
-                        ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
@@ -4180,7 +4185,7 @@ class LibraryInterpreter(BaseInterpreter):
                         flags=('C','W')),
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')), ctypes.c_uint,
-                        ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
@@ -4201,7 +4206,8 @@ class LibraryInterpreter(BaseInterpreter):
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes.c_double,
                         ctypes.POINTER(ctypes.c_double),
-                        ctypes.POINTER(ctypes.c_double), c_bool32]
+                        ctypes.POINTER(ctypes.c_double),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, timeout, ctypes.byref(frequency), ctypes.byref(duty_cycle),
@@ -4225,7 +4231,7 @@ class LibraryInterpreter(BaseInterpreter):
                         flags=('C','W')),
                         wrapped_ndpointer(dtype=numpy.uint32,
                         flags=('C','W')), ctypes.c_uint,
-                        ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
@@ -4245,7 +4251,8 @@ class LibraryInterpreter(BaseInterpreter):
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes.c_double,
                         ctypes.POINTER(ctypes.c_uint),
-                        ctypes.POINTER(ctypes.c_uint), c_bool32]
+                        ctypes.POINTER(ctypes.c_uint),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, timeout, ctypes.byref(high_ticks), ctypes.byref(low_ticks),
@@ -4269,7 +4276,7 @@ class LibraryInterpreter(BaseInterpreter):
                         flags=('C','W')),
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')), ctypes.c_uint,
-                        ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, interleaved,
@@ -4289,7 +4296,8 @@ class LibraryInterpreter(BaseInterpreter):
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes.c_double,
                         ctypes.POINTER(ctypes.c_double),
-                        ctypes.POINTER(ctypes.c_double), c_bool32]
+                        ctypes.POINTER(ctypes.c_double),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, timeout, ctypes.byref(high_time), ctypes.byref(low_time),
@@ -4311,7 +4319,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.uint8, flags=('C','W')),
                         ctypes.c_uint, ctypes.POINTER(ctypes.c_int),
-                        ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
@@ -4329,7 +4337,8 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes.c_double,
-                        ctypes.POINTER(ctypes.c_uint), c_bool32]
+                        ctypes.POINTER(ctypes.c_uint),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, timeout, ctypes.byref(value), None)
@@ -4349,7 +4358,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.uint16,
                         flags=('C','W')), ctypes.c_uint,
-                        ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
@@ -4370,7 +4379,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.uint32,
                         flags=('C','W')), ctypes.c_uint,
-                        ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
@@ -4390,7 +4399,8 @@ class LibraryInterpreter(BaseInterpreter):
                         lib_importer.task_handle, ctypes.c_int,
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.uint8, flags=('C','W')),
-                        ctypes.c_uint, ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.c_uint, ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
@@ -4409,7 +4419,8 @@ class LibraryInterpreter(BaseInterpreter):
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes.c_double,
                         ctypes.POINTER(ctypes.c_double),
-                        ctypes.POINTER(ctypes.c_double), c_bool32]
+                        ctypes.POINTER(ctypes.c_double),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, timeout, ctypes.byref(voltage), ctypes.byref(current), None)
@@ -4431,17 +4442,16 @@ class LibraryInterpreter(BaseInterpreter):
                 self._done_event_callbacks.append(callback_method_ptr)
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_uint,
-                    DAQmxDoneEventCallbackPtr, ctypes.c_void_p]
+                    DAQmxDoneEventCallbackPtr, ctypes.POINTER(ctypes.c_void_p)]
             else:
                 del self._done_event_callbacks[:]
                 callback_method_ptr = None
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_uint, ctypes.c_void_p,
-                    ctypes.c_void_p]
+                    ctypes.POINTER(ctypes.c_void_p)]
         
             error_code = cfunc(
-                task, options, callback_method_ptr,
-                ctypes.byref(callback_data))
+                task, options, callback_method_ptr, callback_data)
         check_for_error(error_code)
 
 
@@ -4462,17 +4472,18 @@ class LibraryInterpreter(BaseInterpreter):
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
                     ctypes.c_uint, DAQmxEveryNSamplesEventCallbackPtr,
-                    ctypes.c_void_p]
+                    ctypes.POINTER(ctypes.c_void_p)]
             else:
                 del self._every_n_samples_event_callbacks[:]
                 callback_method_ptr = None
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-                    ctypes.c_uint, ctypes.c_void_p, ctypes.c_void_p]
+                    ctypes.c_uint, ctypes.c_void_p,
+                    ctypes.POINTER(ctypes.c_void_p)]
         
             error_code = cfunc(
                 task, every_n_samples_event_type, n_samples, options,
-                callback_method_ptr, ctypes.byref(callback_data))
+                callback_method_ptr, callback_data)
         check_for_error(error_code)
 
 
@@ -4491,17 +4502,17 @@ class LibraryInterpreter(BaseInterpreter):
                 self._signal_event_callbacks.append(callback_method_ptr)
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-                    DAQmxSignalEventCallbackPtr, ctypes.c_void_p]
+                    DAQmxSignalEventCallbackPtr,
+                    ctypes.POINTER(ctypes.c_void_p)]
             else:
                 del self._signal_event_callbacks[:]
                 callback_method_ptr = None
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-                    ctypes.c_void_p, ctypes.c_void_p]
+                    ctypes.c_void_p, ctypes.POINTER(ctypes.c_void_p)]
         
             error_code = cfunc(
-                task, signal_id, options, callback_method_ptr,
-                ctypes.byref(callback_data))
+                task, signal_id, options, callback_method_ptr, callback_data)
         check_for_error(error_code)
 
 
@@ -5534,7 +5545,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')), ctypes.POINTER(ctypes.c_int),
-                        c_bool32]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5549,7 +5560,7 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, c_bool32, ctypes.c_double,
-                        ctypes.c_double, c_bool32]
+                        ctypes.c_double, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, auto_start, timeout, value, None)
@@ -5568,7 +5579,7 @@ class LibraryInterpreter(BaseInterpreter):
                         lib_importer.task_handle, ctypes.c_int, c_bool32,
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.int16, flags=('C','W')),
-                        ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5589,7 +5600,7 @@ class LibraryInterpreter(BaseInterpreter):
                         lib_importer.task_handle, ctypes.c_int, c_bool32,
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
-                        ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5611,7 +5622,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.uint16,
                         flags=('C','W')), ctypes.POINTER(ctypes.c_int),
-                        c_bool32]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5633,7 +5644,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.uint32,
                         flags=('C','W')), ctypes.POINTER(ctypes.c_int),
-                        c_bool32]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5657,7 +5668,7 @@ class LibraryInterpreter(BaseInterpreter):
                         flags=('C','W')),
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')), ctypes.POINTER(ctypes.c_int),
-                        c_bool32]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5674,7 +5685,8 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, c_bool32, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_double, c_bool32]
+                        ctypes.c_double, ctypes.c_double,
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, auto_start, timeout, frequency, duty_cycle, None)
@@ -5696,7 +5708,7 @@ class LibraryInterpreter(BaseInterpreter):
                         flags=('C','W')),
                         wrapped_ndpointer(dtype=numpy.uint32,
                         flags=('C','W')), ctypes.POINTER(ctypes.c_int),
-                        c_bool32]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5713,7 +5725,7 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, c_bool32, ctypes.c_double,
-                        ctypes.c_uint, ctypes.c_uint, c_bool32]
+                        ctypes.c_uint, ctypes.c_uint, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, auto_start, timeout, high_ticks, low_ticks, None)
@@ -5735,7 +5747,7 @@ class LibraryInterpreter(BaseInterpreter):
                         flags=('C','W')),
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')), ctypes.POINTER(ctypes.c_int),
-                        c_bool32]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5752,7 +5764,8 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, c_bool32, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_double, c_bool32]
+                        ctypes.c_double, ctypes.c_double,
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, auto_start, timeout, high_time, low_time, None)
@@ -5771,7 +5784,7 @@ class LibraryInterpreter(BaseInterpreter):
                         lib_importer.task_handle, ctypes.c_int, c_bool32,
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.uint8, flags=('C','W')),
-                        ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5786,7 +5799,7 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, c_bool32, ctypes.c_double,
-                        ctypes.c_uint, c_bool32]
+                        ctypes.c_uint, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, auto_start, timeout, value, None)
@@ -5806,7 +5819,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.uint16,
                         flags=('C','W')), ctypes.POINTER(ctypes.c_int),
-                        c_bool32]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5828,7 +5841,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.uint32,
                         flags=('C','W')), ctypes.POINTER(ctypes.c_int),
-                        c_bool32]
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5849,7 +5862,7 @@ class LibraryInterpreter(BaseInterpreter):
                         lib_importer.task_handle, ctypes.c_int, c_bool32,
                         ctypes.c_double, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.uint8, flags=('C','W')),
-                        ctypes.POINTER(ctypes.c_int), c_bool32]
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5907,7 +5920,7 @@ class LibraryInterpreter(BaseInterpreter):
             ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
-        return samps_per_chan_read.value
+        return read_voltage_array, read_current_array, samps_per_chan_read.value
 
     def read_power_f64(
             self, task, num_samps_per_chan, timeout, fill_mode, 
@@ -5932,7 +5945,7 @@ class LibraryInterpreter(BaseInterpreter):
             ctypes.byref(samps_per_chan_read), None)
         check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
-        return samps_per_chan_read.value
+        return read_voltage_array, read_current_array, samps_per_chan_read.value
 
     def read_raw(self, task, num_samps_per_chan, timeout, read_array):
         samples_read = ctypes.c_int()
@@ -5954,7 +5967,7 @@ class LibraryInterpreter(BaseInterpreter):
             ctypes.byref(number_of_bytes_per_sample), None)
         check_for_error(error_code, samps_per_chan_read=samples_read.value)
 
-        return samples_read.value, number_of_bytes_per_sample.value
+        return read_array, samples_read.value, number_of_bytes_per_sample.value
 
     def write_raw(
             self, task_handle, num_samps_per_chan, auto_start, timeout, numpy_array):
