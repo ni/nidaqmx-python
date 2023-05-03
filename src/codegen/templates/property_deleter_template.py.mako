@@ -1,30 +1,20 @@
 <%def name="script_property_deleter(attribute)">\
 <%
-        from codegen.utilities.text_wrappers import wrap
+        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name
     %>\
     @${attribute.name}.deleter
     def ${attribute.name}(self):
-    ## When the length of the function name is too long, it will be wrapped to the next line
-    %if len(attribute.c_function_name) < 33:
-        cfunc = lib_importer.${attribute.get_lib_importer_type()}.DAQmxReset${attribute.c_function_name}
-    %else:
-        cfunc = (lib_importer.${attribute.get_lib_importer_type()}.
-                 DAQmxReset${attribute.c_function_name})
-    %endif
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ${', '.join(attribute.get_handle_parameter_arguments()) | wrap(initial_indent=24)}]
-
 \
-## Script function call.
+## Script interpreter call.
 <%
+        generic_attribute_func = get_generic_attribute_function_name(attribute)
         function_call_args = []
         for handle_parameter in attribute.handle_parameters:
             function_call_args.append(handle_parameter.accessor)
+        if attribute.python_class_name == "Watchdog":
+            function_call_args.append("\"\"")
+        function_call_args.append(hex(attribute.id))
+
     %>\
-        error_code = cfunc(
-            ${', '.join(function_call_args) | wrap(initial_indent=12)})
-        check_for_error(error_code)
+        self._interpreter.reset_${generic_attribute_func}(${', '.join(function_call_args)})
 </%def>
