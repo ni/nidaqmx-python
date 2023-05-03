@@ -191,7 +191,6 @@ class Channel:
     def description(self, val):
         self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x1926, val)
 
-
     @description.deleter
     def description(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x1926)
@@ -221,7 +220,6 @@ class Channel:
         val = val.name
         self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x18f5, val)
 
-
     @property
     def sync_unlock_behavior(self):
         """
@@ -237,7 +235,6 @@ class Channel:
     def sync_unlock_behavior(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x313c, val)
-
 
     @sync_unlock_behavior.deleter
     def sync_unlock_behavior(self):
@@ -278,14 +275,4 @@ class Channel:
         if allow_interactive_deletion:
             options |= _Save.ALLOW_INTERACTIVE_DELETION.value
 
-        cfunc = lib_importer.windll.DAQmxSaveGlobalChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_uint]
-
-        error_code = cfunc(
-            self._handle, self._name, save_as, author, options)
-        check_for_error(error_code)
+        self._interpreter.save_global_chan(self._handle, self._name, save_as, author, options)

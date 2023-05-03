@@ -73,14 +73,7 @@ class PersistedTask:
         This function does not clear the copy of the task stored in memory.
         Use the DAQmx Clear Task function to clear that copy of the task.
         """
-        cfunc = lib_importer.windll.DAQmxDeleteSavedTask
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [ctypes_byte_str]
-
-        error_code = cfunc(self._name)
-        check_for_error(error_code)
+        self._interpreter.delete_saved_task(self._name)
 
     def load(self):
         """
@@ -92,18 +85,7 @@ class PersistedTask:
         Returns:
             nidaqmx.task.Task: Indicates the loaded Task object.
         """
-        task_handle = lib_importer.task_handle(0)
-
-        cfunc = lib_importer.windll.DAQmxLoadTask
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        ctypes.POINTER(lib_importer.task_handle)]
-
-        error_code = cfunc(self._name, ctypes.byref(task_handle))
-        check_for_error(error_code)
+        task_handle = self._interpreter.load_task(self._name)
 
         return task._TaskAlternateConstructor(task_handle, self._interpreter)
     
@@ -114,6 +96,7 @@ class _PersistedTaskAlternateConstructor(PersistedTask):
 
     This is a private API used to instantiate a PersistedTask with an existing interpreter.
     """
+    # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
     __slots__ = []
 
     def __init__(self, name, interpreter):

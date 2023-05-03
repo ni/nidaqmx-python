@@ -122,23 +122,12 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIAccel4WireDCVoltageChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double, c_bool32,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_accel4_wire_dc_voltage_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, min_val, max_val, units.value, sensitivity,
             sensitivity_units.value, voltage_excit_source.value,
             voltage_excit_val, use_excit_for_scaling, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -194,23 +183,12 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIAccelChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_accel_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, min_val, max_val, units.value, sensitivity,
             sensitivity_units.value, current_excit_source.value,
             current_excit_val, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -260,21 +238,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIAccelChargeChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_int, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_accel_charge_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, min_val, max_val, units.value, sensitivity,
             sensitivity_units.value, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -328,22 +296,12 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIBridgeChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_bridge_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, bridge_config.value,
             voltage_excit_source.value, voltage_excit_val,
             nominal_bridge_resistance, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -385,20 +343,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIChargeChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_charge_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, min_val, max_val, units.value,
             custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -450,22 +399,12 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAICurrentChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_current_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, min_val, max_val, units.value,
             shunt_resistor_loc.value, ext_shunt_resistor_val,
             custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -518,22 +457,12 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAICurrentRMSChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_current_rms_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, min_val, max_val, units.value,
             shunt_resistor_loc.value, ext_shunt_resistor_val,
             custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -617,29 +546,13 @@ class AIChannelCollection(ChannelCollection):
         forward_coeffs = numpy.float64(forward_coeffs)
         reverse_coeffs = numpy.float64(reverse_coeffs)
 
-        cfunc = lib_importer.windll.DAQmxCreateAIForceBridgePolynomialChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
-                        ctypes.c_int, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_force_bridge_polynomial_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, bridge_config.value,
             voltage_excit_source.value, voltage_excit_val,
-            nominal_bridge_resistance, forward_coeffs, len(forward_coeffs),
-            reverse_coeffs, len(reverse_coeffs), electrical_units.value,
-            physical_units.value, custom_scale_name)
-        check_for_error(error_code)
+            nominal_bridge_resistance, forward_coeffs, reverse_coeffs,
+            electrical_units.value, physical_units.value, custom_scale_name)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -723,29 +636,14 @@ class AIChannelCollection(ChannelCollection):
         electrical_vals = numpy.float64(electrical_vals)
         physical_vals = numpy.float64(physical_vals)
 
-        cfunc = lib_importer.windll.DAQmxCreateAIForceBridgeTableChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_force_bridge_table_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, bridge_config.value,
             voltage_excit_source.value, voltage_excit_val,
-            nominal_bridge_resistance, electrical_vals, len(electrical_vals),
-            electrical_units.value, physical_vals, len(physical_vals),
-            physical_units.value, custom_scale_name)
-        check_for_error(error_code)
+            nominal_bridge_resistance, electrical_vals,
+            electrical_units.value, physical_vals, physical_units.value,
+            custom_scale_name)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -823,26 +721,14 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIForceBridgeTwoPointLinChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_force_bridge_two_point_lin_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, bridge_config.value,
             voltage_excit_source.value, voltage_excit_val,
             nominal_bridge_resistance, first_electrical_val,
             second_electrical_val, electrical_units.value, first_physical_val,
             second_physical_val, physical_units.value, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -898,23 +784,12 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIForceIEPEChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_force_iepe_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, min_val, max_val, units.value, sensitivity,
             sensitivity_units.value, current_excit_source.value,
             current_excit_val, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -965,21 +840,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIFreqVoltageChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_freq_voltage_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, threshold_level, hysteresis,
             custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -1031,22 +896,12 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIMicrophoneChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_microphone_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, units.value, mic_sensitivity,
             max_snd_press_level, current_excit_source.value,
             current_excit_val, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -1092,21 +947,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIPosEddyCurrProxProbeChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_int,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_pos_eddy_curr_prox_probe_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, sensitivity,
             sensitivity_units.value, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -1169,24 +1014,13 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIPosLVDTChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_int,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_pos_lvdt_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, sensitivity,
             sensitivity_units.value, voltage_excit_source.value,
             voltage_excit_val, voltage_excit_freq, ac_excit_wire_mode.value,
             custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -1249,24 +1083,13 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIPosRVDTChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_int,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_pos_rvdt_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, sensitivity,
             sensitivity_units.value, voltage_excit_source.value,
             voltage_excit_val, voltage_excit_freq, ac_excit_wire_mode.value,
             custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -1297,19 +1120,10 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIPowerChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        c_bool32]
 
-        error_code = cfunc(
-            self._handle, physical_channel, name_to_assign_to_channel,
-            voltage_setpoint, current_setpoint, output_enable)
-        check_for_error(error_code)
+        self._interpreter.create_ai_power_chan(
+            self._handle, physical_channel, voltage_setpoint,
+            current_setpoint, output_enable, name_to_assign_to_channel)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -1395,29 +1209,13 @@ class AIChannelCollection(ChannelCollection):
         forward_coeffs = numpy.float64(forward_coeffs)
         reverse_coeffs = numpy.float64(reverse_coeffs)
 
-        cfunc = lib_importer.windll.DAQmxCreateAIPressureBridgePolynomialChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
-                        ctypes.c_int, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_pressure_bridge_polynomial_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, bridge_config.value,
             voltage_excit_source.value, voltage_excit_val,
-            nominal_bridge_resistance, forward_coeffs, len(forward_coeffs),
-            reverse_coeffs, len(reverse_coeffs), electrical_units.value,
-            physical_units.value, custom_scale_name)
-        check_for_error(error_code)
+            nominal_bridge_resistance, forward_coeffs, reverse_coeffs,
+            electrical_units.value, physical_units.value, custom_scale_name)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -1503,29 +1301,14 @@ class AIChannelCollection(ChannelCollection):
         electrical_vals = numpy.float64(electrical_vals)
         physical_vals = numpy.float64(physical_vals)
 
-        cfunc = lib_importer.windll.DAQmxCreateAIPressureBridgeTableChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_pressure_bridge_table_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, bridge_config.value,
             voltage_excit_source.value, voltage_excit_val,
-            nominal_bridge_resistance, electrical_vals, len(electrical_vals),
-            electrical_units.value, physical_vals, len(physical_vals),
-            physical_units.value, custom_scale_name)
-        check_for_error(error_code)
+            nominal_bridge_resistance, electrical_vals,
+            electrical_units.value, physical_vals, physical_units.value,
+            custom_scale_name)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -1605,26 +1388,14 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIPressureBridgeTwoPointLinChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_pressure_bridge_two_point_lin_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, bridge_config.value,
             voltage_excit_source.value, voltage_excit_val,
             nominal_bridge_resistance, first_electrical_val,
             second_electrical_val, electrical_units.value, first_physical_val,
             second_physical_val, physical_units.value, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -1672,21 +1443,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIResistanceChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_resistance_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, resistance_config.value,
             current_excit_source.value, current_excit_val, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -1752,26 +1513,13 @@ class AIChannelCollection(ChannelCollection):
 
         rosette_meas_types = numpy.int32(rosette_meas_types)
 
-        cfunc = lib_importer.windll.DAQmxCreateAIRosetteStrainGageChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_double,
-                        wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
-                        ctypes.c_uint, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_double]
 
-        error_code = cfunc(
-            self._handle, physical_channel, name_to_assign_to_channel,
-            min_val, max_val, rosette_type.value, gage_orientation,
-            rosette_meas_types, len(rosette_meas_types), strain_config.value,
-            voltage_excit_source.value, voltage_excit_val, gage_factor,
-            nominal_gage_resistance, poisson_ratio, lead_wire_resistance)
-        check_for_error(error_code)
+        self._interpreter.create_ai_rosette_strain_gage_chan(
+            self._handle, physical_channel, rosette_type.value,
+            gage_orientation, rosette_meas_types, name_to_assign_to_channel,
+            min_val, max_val, strain_config.value, voltage_excit_source.value,
+            voltage_excit_val, gage_factor, nominal_gage_resistance,
+            poisson_ratio, lead_wire_resistance)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -1821,22 +1569,12 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIRTDChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_double]
 
-        error_code = cfunc(
+        self._interpreter.create_airtd_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, rtd_type.value,
             resistance_config.value, current_excit_source.value,
             current_excit_val, r_0)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -1898,25 +1636,13 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIStrainGageChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_strain_gage_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, strain_config.value,
             voltage_excit_source.value, voltage_excit_val, gage_factor,
             initial_bridge_voltage, nominal_gage_resistance, poisson_ratio,
             lead_wire_resistance, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -1946,18 +1672,10 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAITempBuiltInSensorChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_temp_built_in_sensor_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             units.value)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -2005,21 +1723,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIThrmcplChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_thrmcpl_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, thermocouple_type.value,
             cjc_source.value, cjc_val, cjc_channel)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -2074,22 +1782,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIThrmstrChanIex
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_double]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_thrmstr_chan_iex(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, resistance_config.value,
             current_excit_source.value, current_excit_val, a, b, c)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -2147,22 +1844,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIThrmstrChanVex
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_double]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_thrmstr_chan_vex(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, resistance_config.value,
             voltage_excit_source.value, voltage_excit_val, a, b, c, r_1)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -2247,29 +1933,13 @@ class AIChannelCollection(ChannelCollection):
         forward_coeffs = numpy.float64(forward_coeffs)
         reverse_coeffs = numpy.float64(reverse_coeffs)
 
-        cfunc = lib_importer.windll.DAQmxCreateAITorqueBridgePolynomialChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
-                        ctypes.c_int, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_torque_bridge_polynomial_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, bridge_config.value,
             voltage_excit_source.value, voltage_excit_val,
-            nominal_bridge_resistance, forward_coeffs, len(forward_coeffs),
-            reverse_coeffs, len(reverse_coeffs), electrical_units.value,
-            physical_units.value, custom_scale_name)
-        check_for_error(error_code)
+            nominal_bridge_resistance, forward_coeffs, reverse_coeffs,
+            electrical_units.value, physical_units.value, custom_scale_name)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -2354,29 +2024,14 @@ class AIChannelCollection(ChannelCollection):
         electrical_vals = numpy.float64(electrical_vals)
         physical_vals = numpy.float64(physical_vals)
 
-        cfunc = lib_importer.windll.DAQmxCreateAITorqueBridgeTableChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_torque_bridge_table_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, bridge_config.value,
             voltage_excit_source.value, voltage_excit_val,
-            nominal_bridge_resistance, electrical_vals, len(electrical_vals),
-            electrical_units.value, physical_vals, len(physical_vals),
-            physical_units.value, custom_scale_name)
-        check_for_error(error_code)
+            nominal_bridge_resistance, electrical_vals,
+            electrical_units.value, physical_vals, physical_units.value,
+            custom_scale_name)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -2455,26 +2110,14 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAITorqueBridgeTwoPointLinChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_torque_bridge_two_point_lin_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, bridge_config.value,
             voltage_excit_source.value, voltage_excit_val,
             nominal_bridge_resistance, first_electrical_val,
             second_electrical_val, electrical_units.value, first_physical_val,
             second_physical_val, physical_units.value, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -2531,23 +2174,12 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIVelocityIEPEChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_velocity_iepe_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, min_val, max_val, units.value, sensitivity,
             sensitivity_units.value, current_excit_source.value,
             current_excit_val, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -2590,20 +2222,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIVoltageChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_voltage_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, min_val, max_val, units.value,
             custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -2663,23 +2286,12 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIVoltageChanWithExcit
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_int, ctypes.c_double, c_bool32,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_voltage_chan_with_excit(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, min_val, max_val, units.value,
             bridge_config.value, voltage_excit_source.value,
             voltage_excit_val, use_excit_for_scaling, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -2720,20 +2332,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateAIVoltageRMSChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_ai_voltage_rms_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, min_val, max_val, units.value,
             custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -2783,21 +2386,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAIAccelChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsai_accel_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, min_val, max_val, units.value,
             current_excit_source.value, current_excit_val, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -2845,21 +2438,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAIBridgeChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsai_bridge_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, voltage_excit_source.value,
             voltage_excit_val, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -2912,22 +2495,12 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAICurrentChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsai_current_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, min_val, max_val, units.value,
             shunt_resistor_loc.value, ext_shunt_resistor_val,
             custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -2975,21 +2548,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAIForceBridgeChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsai_force_bridge_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, voltage_excit_source.value,
             voltage_excit_val, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -3039,21 +2602,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAIForceIEPEChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsai_force_iepe_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, min_val, max_val, units.value,
             current_excit_source.value, current_excit_val, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -3105,21 +2658,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAIMicrophoneChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsai_microphone_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, units.value, max_snd_press_level,
             current_excit_source.value, current_excit_val, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -3176,22 +2719,12 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAIPosLVDTChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsai_pos_lvdt_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, voltage_excit_source.value,
             voltage_excit_val, voltage_excit_freq, ac_excit_wire_mode.value,
             custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -3248,22 +2781,12 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAIPosRVDTChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsai_pos_rvdt_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, voltage_excit_source.value,
             voltage_excit_val, voltage_excit_freq, ac_excit_wire_mode.value,
             custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -3312,21 +2835,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAIPressureBridgeChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsai_pressure_bridge_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, voltage_excit_source.value,
             voltage_excit_val, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -3374,21 +2887,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAIResistanceChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsai_resistance_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, resistance_config.value,
             current_excit_source.value, current_excit_val, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -3433,21 +2936,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAIRTDChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsairtd_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, resistance_config.value,
             current_excit_source.value, current_excit_val)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -3498,22 +2991,12 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAIStrainGageChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_double, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsai_strain_gage_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, voltage_excit_source.value,
             voltage_excit_val, initial_bridge_voltage, lead_wire_resistance,
             custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -3557,21 +3040,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAIThrmcplChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsai_thrmcpl_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, cjc_source.value, cjc_val,
             cjc_channel)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -3617,21 +3090,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAIThrmstrChanIex
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsai_thrmstr_chan_iex(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, resistance_config.value,
             current_excit_source.value, current_excit_val)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -3680,21 +3143,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAIThrmstrChanVex
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsai_thrmstr_chan_vex(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, resistance_config.value,
             voltage_excit_source.value, voltage_excit_val, r_1)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -3742,21 +3195,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAITorqueBridgeChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsai_torque_bridge_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             min_val, max_val, units.value, voltage_excit_source.value,
             voltage_excit_val, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -3800,20 +3243,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAIVoltageChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsai_voltage_chan(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, min_val, max_val, units.value,
             custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 
@@ -3864,21 +3298,11 @@ class AIChannelCollection(ChannelCollection):
             
             Indicates the newly created channel object.
         """
-        cfunc = lib_importer.windll.DAQmxCreateTEDSAIVoltageChanWithExcit
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.create_tedsai_voltage_chan_with_excit(
             self._handle, physical_channel, name_to_assign_to_channel,
             terminal_config.value, min_val, max_val, units.value,
             voltage_excit_source.value, voltage_excit_val, custom_scale_name)
-        check_for_error(error_code)
 
         return self._create_chan(physical_channel, name_to_assign_to_channel)
 

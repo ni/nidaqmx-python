@@ -1,7 +1,7 @@
 <%def name="script_property_getter(attribute)">\
 <%
         from codegen.utilities.text_wrappers import docstring_wrap
-        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_mapped_attribute_function_type
+        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type
     %>\
     @property
     def ${attribute.name}(self):
@@ -11,7 +11,7 @@
 \
 ## Script interpreter call.
 <%
-    mapped_func_type = get_mapped_attribute_function_type(attribute)
+    mapped_func_type = get_generic_attribute_function_type(attribute)
     generic_attribute_func = get_generic_attribute_function_name(attribute) + "_" + mapped_func_type
     object_type = attribute.object_type
     if attribute.has_alternate_constructor:

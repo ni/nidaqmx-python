@@ -16,7 +16,6 @@ ${property_legacy_setter_template.script_property_setter(attribute)}
     %elif attribute.access == "read-write":
 ${property_getter_template.script_property_getter(attribute)}
 ${property_setter_template.script_property_setter(attribute)}
-
     %endif
 \
     %if attribute.resettable and attribute.python_class_name == "PhysicalChannel":

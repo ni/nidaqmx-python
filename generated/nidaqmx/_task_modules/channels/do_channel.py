@@ -36,7 +36,6 @@ class DOChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2266, val)
 
-
     @do_data_xfer_mech.deleter
     def do_data_xfer_mech(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2266)
@@ -56,7 +55,6 @@ class DOChannel(Channel):
     def do_data_xfer_req_cond(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2267, val)
-
 
     @do_data_xfer_req_cond.deleter
     def do_data_xfer_req_cond(self):
@@ -78,7 +76,6 @@ class DOChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2969, val)
 
-
     @do_generate_on.deleter
     def do_generate_on(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2969)
@@ -97,7 +94,6 @@ class DOChannel(Channel):
     @do_invert_lines.setter
     def do_invert_lines(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x1133, val)
-
 
     @do_invert_lines.deleter
     def do_invert_lines(self):
@@ -119,7 +115,6 @@ class DOChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2968, val)
 
-
     @do_line_states_done_state.deleter
     def do_line_states_done_state(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2968)
@@ -139,7 +134,6 @@ class DOChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2967, val)
 
-
     @do_line_states_paused_state.deleter
     def do_line_states_paused_state(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2967)
@@ -158,7 +152,6 @@ class DOChannel(Channel):
     def do_line_states_start_state(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2972, val)
-
 
     @do_line_states_start_state.deleter
     def do_line_states_start_state(self):
@@ -183,7 +176,6 @@ class DOChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x296e, val)
 
-
     @do_logic_family.deleter
     def do_logic_family(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x296e)
@@ -207,7 +199,6 @@ class DOChannel(Channel):
     @do_mem_map_enable.setter
     def do_mem_map_enable(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x296b, val)
-
 
     @do_mem_map_enable.deleter
     def do_mem_map_enable(self):
@@ -237,7 +228,6 @@ class DOChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x1137, val)
 
-
     @do_output_drive_type.deleter
     def do_output_drive_type(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x1137)
@@ -256,7 +246,6 @@ class DOChannel(Channel):
     @do_overcurrent_auto_reenable.setter
     def do_overcurrent_auto_reenable(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2a86, val)
-
 
     @do_overcurrent_auto_reenable.deleter
     def do_overcurrent_auto_reenable(self):
@@ -279,7 +268,6 @@ class DOChannel(Channel):
     def do_overcurrent_limit(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2a85, val)
 
-
     @do_overcurrent_limit.deleter
     def do_overcurrent_limit(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2a85)
@@ -298,7 +286,6 @@ class DOChannel(Channel):
     @do_overcurrent_reenable_period.setter
     def do_overcurrent_reenable_period(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2a87, val)
-
 
     @do_overcurrent_reenable_period.deleter
     def do_overcurrent_reenable_period(self):
@@ -319,7 +306,6 @@ class DOChannel(Channel):
     def do_tristate(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x18f3, val)
 
-
     @do_tristate.deleter
     def do_tristate(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18f3)
@@ -338,7 +324,6 @@ class DOChannel(Channel):
     @do_usb_xfer_req_count.setter
     def do_usb_xfer_req_count(self, val):
         self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x3003, val)
-
 
     @do_usb_xfer_req_count.deleter
     def do_usb_xfer_req_count(self):
@@ -359,7 +344,6 @@ class DOChannel(Channel):
     def do_usb_xfer_req_size(self, val):
         self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x2a91, val)
 
-
     @do_usb_xfer_req_size.deleter
     def do_usb_xfer_req_size(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2a91)
@@ -379,7 +363,6 @@ class DOChannel(Channel):
     @do_use_only_on_brd_mem.setter
     def do_use_only_on_brd_mem(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2265, val)
-
 
     @do_use_only_on_brd_mem.deleter
     def do_use_only_on_brd_mem(self):

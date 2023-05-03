@@ -12,6 +12,7 @@ ALTERNATE_CONSTRUCTOR_CLASSES = [
     "Scale",
 ]
 
+
 class Attribute:
     """Structure for storing attribute metadata from scrapigen."""
 
@@ -261,6 +262,11 @@ class Attribute:
         """
         return self._ctypes_data_type
     
+    @property
+    def has_alternate_constructor(self):
+        """bool: Specifies if an alternate constructor is present for the attribute."""
+        return self._has_alternate_constructor
+
     @property
     def has_alternate_constructor(self):
         """bool: Specifies if an alternate constructor is present for the attribute."""
