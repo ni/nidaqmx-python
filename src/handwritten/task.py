@@ -80,7 +80,7 @@ class Task:
                 task_name=self.name)
         
         self._interpreter = utils._select_interpreter(grpc_options)
-        self._handle = self._interpreter.create_task(new_task_name)
+        self._handle, _ = self._interpreter.create_task(new_task_name)
 
         self._initialize(self._handle, self._interpreter)
 
