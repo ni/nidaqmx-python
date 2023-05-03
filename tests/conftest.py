@@ -6,7 +6,6 @@ import pytest
 
 import nidaqmx.system
 from nidaqmx.constants import ProductCategory, UsageTypeAI
-from nidaqmx._lib import DaqNotFoundError
 
 
 class Error(Exception):
@@ -32,35 +31,28 @@ class DeviceType(Enum):
 def _x_series_device(device_type):
     system = nidaqmx.system.System.local()
 
-    try:
-        for device in system.devices:
-            device_type_match = (
-                device_type == DeviceType.ANY
-                or (device_type == DeviceType.REAL and not device.is_simulated)
-                or (device_type == DeviceType.SIMULATED and device.is_simulated)
-                )
-            if (
-                device_type_match
-                and device.product_category == ProductCategory.X_SERIES_DAQ
-                and len(device.ao_physical_chans) >= 2
-                and len(device.ai_physical_chans) >= 4
-                and len(device.do_lines) >= 8
-                and len(device.di_lines) == len(device.do_lines)
-                and len(device.ci_physical_chans) >= 4
-            ):
-                return device
+    for device in system.devices:
+        device_type_match = (
+            device_type == DeviceType.ANY
+            or (device_type == DeviceType.REAL and not device.is_simulated)
+            or (device_type == DeviceType.SIMULATED and device.is_simulated)
+        )
+        if (
+            device_type_match
+            and device.product_category == ProductCategory.X_SERIES_DAQ
+            and len(device.ao_physical_chans) >= 2
+            and len(device.ai_physical_chans) >= 4
+            and len(device.do_lines) >= 8
+            and len(device.di_lines) == len(device.do_lines)
+            and len(device.ci_physical_chans) >= 4
+        ):
+            return device
 
-        pytest.skip(
-            "Could not detect a device that meets the requirements to be an X Series fixture of type "
-            f"{device_type}. Cannot proceed to run tests. Import the NI MAX configuration file located "
-            "at nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
-        )
-    except DaqNotFoundError:
-        pytest.skip(
-            "Could not detect a device that meets the requirements to be an X Series fixture of type "
-            f"{device_type}. Cannot proceed to run tests. Import the NI MAX configuration file located "
-            "at nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
-        )
+    pytest.skip(
+        "Could not detect a device that meets the requirements to be an X Series fixture of type "
+        f"{device_type}. Cannot proceed to run tests. Import the NI MAX configuration file located "
+        "at nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
+    )
     return None
 
 

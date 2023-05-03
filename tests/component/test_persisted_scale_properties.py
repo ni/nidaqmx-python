@@ -4,19 +4,13 @@ import pytest
 from nidaqmx import DaqError
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system.storage import PersistedScale
-from nidaqmx._lib import DaqNotFoundError
 
 
 def test__constructed_persisted_scale__get_property__returns_persisted_value():
     """Test construction."""
-    try:
-        persisted_scale = PersistedScale("double_gain_scale")
+    persisted_scale = PersistedScale("double_gain_scale")
 
-        assert persisted_scale.author == "Test Author"
-    except DaqNotFoundError:
-            pytest.skip(
-            "Could not detect a device that meets the requirements to be a scale."
-        )
+    assert persisted_scale.author == "Test Author"
 
 
 def test__nonexistent_persisted_scale__get_property__raises_custom_scale_does_not_exist():
