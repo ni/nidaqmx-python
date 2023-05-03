@@ -36,6 +36,7 @@ jobs:
         run: git diff --exit-code
       - name: Run tests
         run: |
+          pip install tox
           cd generated/nidaqmx
           tox
       - name: Run linters
