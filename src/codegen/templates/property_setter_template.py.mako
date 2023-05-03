@@ -29,7 +29,6 @@
                 argtypes.append('ctypes_byte_str')
             else:
                 argtypes.append(handle_parameter.ctypes_data_type)
-
         if (attribute.is_list and attribute.ctypes_data_type != 'ctypes.c_char_p' and
                 attribute.bitfield_enum is None):
             argtypes.append("wrapped_ndpointer(dtype={}, flags=('C','W'))"
@@ -38,7 +37,6 @@
             argtypes.append('ctypes_byte_str')
         else:
             argtypes.append(attribute.ctypes_data_type)
-
         if attribute.has_explicit_write_buffer_size:
             argtypes.append('ctypes.c_uint')
     %>\
@@ -54,16 +52,13 @@
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         ${', '.join(argtypes) | wrap(initial_indent=24)}]
-
 \
 ## Script function call.
 <%
         function_call_args = []
         for handle_parameter in attribute.handle_parameters:
             function_call_args.append(handle_parameter.accessor)
-
         function_call_args.append('val')
-
         if attribute.has_explicit_write_buffer_size:
             function_call_args.append('len(val)')
     %>\

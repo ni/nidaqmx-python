@@ -62,7 +62,6 @@ class WatchdogTask:
         """
         self._interpreter = utils._select_interpreter(grpc_options)
 
-
         self._handle = None
         self._close_on_exit = False
 

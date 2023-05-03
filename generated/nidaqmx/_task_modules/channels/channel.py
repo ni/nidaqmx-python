@@ -5,7 +5,7 @@ import numpy
 
 import nidaqmx
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
-from nidaqmx.system.physical_channel import PhysicalChannel
+from nidaqmx.system.physical_channel import _PhysicalChannelAlternateConstructor
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
 from nidaqmx.utils import flatten_channel_string, unflatten_channel_string
@@ -198,102 +198,35 @@ class Channel:
         :class:`nidaqmx.constants.ChannelType`: Indicates the type of
             the virtual channel.
         """
-        val = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxGetChanType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return ChannelType(val.value)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x187f)
+        return ChannelType(val)
 
     @property
     def description(self):
         """
         str: Specifies a user-defined description for the channel.
         """
-        cfunc = lib_importer.windll.DAQmxGetChanDescr
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_char_p, ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x1926)
+        return val
 
     @description.setter
     def description(self, val):
-        cfunc = lib_importer.windll.DAQmxSetChanDescr
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x1926, val)
 
     @description.deleter
     def description(self):
-        cfunc = lib_importer.windll.DAQmxResetChanDescr
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x1926)
 
     @property
     def is_global(self):
         """
         bool: Indicates whether the channel is a global channel.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetChanIsGlobal
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_chan_attribute_bool(self._handle, self._name, 0x2304)
+        return val
 
     @property
     def physical_channel(self):
@@ -302,48 +235,14 @@ class Channel:
             Specifies the name of the physical channel upon which this
             virtual channel is based.
         """
-        cfunc = lib_importer.windll.DAQmxGetPhysicalChanName
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_char_p, ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return PhysicalChannel(val.value.decode('ascii'))
+        val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x18f5)
+        return _PhysicalChannelAlternateConstructor(val, self._interpreter)
 
     @physical_channel.setter
     def physical_channel(self, val):
         val = val.name
-        cfunc = lib_importer.windll.DAQmxSetPhysicalChanName
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
+        self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x18f5, val)
 
     @property
     def sync_unlock_behavior(self):
@@ -352,49 +251,18 @@ class Channel:
             action to take if the target loses its synchronization to
             the grand master.
         """
-        val = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxGetChanSyncUnlockBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return SyncUnlockBehavior(val.value)
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x313c)
+        return SyncUnlockBehavior(val)
 
     @sync_unlock_behavior.setter
     def sync_unlock_behavior(self, val):
         val = val.value
-        cfunc = lib_importer.windll.DAQmxSetChanSyncUnlockBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, self._name, val)
-        check_for_error(error_code)
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x313c, val)
 
     @sync_unlock_behavior.deleter
     def sync_unlock_behavior(self):
-        cfunc = lib_importer.windll.DAQmxResetChanSyncUnlockBehavior
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, self._name)
-        check_for_error(error_code)
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x313c)
 
     def save(self, save_as="", author="", overwrite_existing_channel=False,
              allow_interactive_editing=True, allow_interactive_deletion=True):
