@@ -15,6 +15,7 @@ import ctypes
 import numpy
 
 from nidaqmx import utils
+from nidaqmx._library_interpreter import LibraryInterpreter
 from nidaqmx._lib import (
     lib_importer, wrapped_ndpointer, enum_bitfield_to_list, ctypes_byte_str,
     c_bool32)
