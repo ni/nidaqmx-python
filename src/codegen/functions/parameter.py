@@ -44,6 +44,7 @@ class Parameter:
             self._callback_params = parameter_metadata.get("callback_params")
         if "grpc_type" in parameter_metadata:
             self._grpc_type = parameter_metadata.get("grpc_type")
+        self._pointer = parameter_metadata.get("pointer", False)
 
     @property
     def direction(self):
@@ -160,3 +161,8 @@ class Parameter:
     def is_proto_only(self):
         """bool: Defines if the parameter is proto only."""
         return self._is_proto_only
+
+    @property
+    def is_pointer(self):
+        """bool: Defines if the parameter is a pointer or not."""
+        return self._pointer

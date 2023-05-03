@@ -1,7 +1,7 @@
 <%page args="function"/>\
 <%
     import re
-    from codegen.utilities.interpreter_helpers import generate_interpreter_function_call_args, get_callback_param_data_types, get_arguments_type
+    from codegen.utilities.interpreter_helpers import generate_interpreter_function_call_args, get_callback_param_data_types, get_argument_types
     from codegen.utilities.text_wrappers import wrap
 %>
 <% 
@@ -19,7 +19,7 @@ function_callback = f'{re.sub("register", "", function.function_name)}_callbacks
 %endfor
         cfunc = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
         <%
-            arguments_type = get_arguments_type(function)
+            arguments_type = get_argument_types(function)
         %>
         with cfunc.arglock:
             if callback_function is not None:

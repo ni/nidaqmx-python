@@ -92,17 +92,18 @@ def generate_interpreter_function_call_args(function_metadata):
             function_call_args.append("None")
         elif function_metadata.stream_response and param.parameter_name == "callback_function":
             function_call_args.append("callback_method_ptr")
-        elif param.direction == "in":
-            function_call_args.append(param.parameter_name)
-        elif param.direction == "out":
+        elif param.direction == "out" or param.is_pointer:
             if param.has_explicit_buffer_size:
                 function_call_args.append(param.parameter_name)
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
+        elif param.direction == "in":
+            function_call_args.append(param.parameter_name)
+
     return function_call_args
 
 
-def get_arguments_type(functions_metadata):
+def get_argument_types(functions_metadata):
     """Gets the 'type' of parameters."""
     argtypes = []
     interpreter_parameters = get_interpreter_parameters(functions_metadata)
@@ -110,11 +111,19 @@ def get_arguments_type(functions_metadata):
     for param in interpreter_parameters:
         if _is_handle_parameter(functions_metadata, param):
             if functions_metadata.handle_parameter.ctypes_data_type != "ctypes.c_char_p":
-                argtypes.append(functions_metadata.handle_parameter.ctypes_data_type)
+                if param.direction == "in":
+                    argtypes.append(functions_metadata.handle_parameter.ctypes_data_type)
+                else:
+                    argtypes.append(
+                        f"ctypes.POINTER({functions_metadata.handle_parameter.ctypes_data_type})"
+                    )
             else:
                 argtypes.append("ctypes_byte_str")
         elif param.parameter_name in size_params:
-            argtypes.append("ctypes.c_uint")
+            if param.direction == "out" or param.is_pointer:
+                argtypes.append("ctypes.POINTER(ctypes.c_uint)")
+            else:
+                argtypes.append("ctypes.c_uint")
         else:
             argtypes.append(to_param_argtype(param))
     return argtypes
@@ -224,6 +233,8 @@ def get_grpc_interpreter_call_params(func, params):
                 grpc_params.append(f"{param.parameter_name}_raw={param.parameter_name}")
             else:
                 grpc_params.append(f"{param.parameter_name}={param.parameter_name}")
+    if func.is_init_method:
+        grpc_params.append("initialization_behavior=self._grpc_options.initialization_behavior")
     grpc_params = sorted(list(set(grpc_params)))
     return ", ".join(grpc_params)
 
@@ -294,6 +305,8 @@ def get_return_values(func):
             return_values.append(param.parameter_name)
         else:
             return_values.append(f"{param.parameter_name}.value")
+    if func.is_init_method:
+        return_values.append("new_session_initialized")
     return return_values
 
 
@@ -342,9 +355,10 @@ def create_compound_parameter_request(func):
     return f"grpc_types.{compound_parameter_type}(" + ", ".join(parameters) + ")"
 
 
-def get_response_parameters(output_parameters: list):
+def get_response_parameters(func):
     """Gets the list of parameters in grpc response."""
     response_parameters = []
+    output_parameters = get_output_params(func)
     for parameter in output_parameters:
         if not parameter.repeating_argument:
             response_parameters.append(f"response.{parameter.parameter_name}")
