@@ -267,11 +267,6 @@ class Attribute:
         """bool: Specifies if an alternate constructor is present for the attribute."""
         return self._has_alternate_constructor
 
-    @property
-    def has_alternate_constructor(self):
-        """bool: Specifies if an alternate constructor is present for the attribute."""
-        return self._has_alternate_constructor
-
     def get_lib_importer_type(self):
         """Returns the type of c function call."""
         return "windll" if self.calling_convention == "StdCall" else "cdll"
