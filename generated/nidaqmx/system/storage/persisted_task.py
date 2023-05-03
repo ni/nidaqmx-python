@@ -124,7 +124,6 @@ class PersistedTask:
         Use the DAQmx Clear Task function to clear that copy of the task.
         """
         self._interpreter.delete_saved_task(self._name)
-        self._interpreter.delete_saved_task(self._name)
 
     def load(self):
         """
