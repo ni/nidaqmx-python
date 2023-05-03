@@ -13,9 +13,10 @@ class TestResourceWarnings:
 
     def test_task_double_close(self):
         """Test to validate double closure of tasks."""
-        with pytest.warns(DaqResourceWarning):
-            with nidaqmx.Task() as task:
-                task.close()
+        with nidaqmx.Task() as task:
+            task.close()
+            assert not task._handle
+            assert not task._close_on_exit
 
     def test_unclosed_task(self):
         """Test to validate unclosed tasks."""
