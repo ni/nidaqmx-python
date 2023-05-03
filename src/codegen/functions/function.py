@@ -27,29 +27,24 @@ class Function:
 
         self._output_parameters = []
         self._parameters = None
-        self._interpreter_parameters = None
         if "parameters" in function_metadata:
             self._parameters = []
             self._base_parameters = []
-            self._interpreter_parameters = []
             for parameter in function_metadata["parameters"]:
                 function_parameter = FunctionParameter(parameter)
                 self._base_parameters.append(function_parameter)
-                if parameter.get("use_in_python_api") is not False and not parameter.get(
-                    "proto_only", False
+                if (
+                    function_parameter.is_used_in_python_api
+                    and not function_parameter.is_proto_only
                 ):
                     if (
-                        parameter["name"] != "task"
-                        and parameter.get("python_data_type") is not None
+                        function_parameter.parameter_name != "task"
+                        and function_parameter.python_data_type is not None
                     ):
                         self._parameters.append(function_parameter)
                         if parameter["direction"] == "out":
                             self._output_parameters.append(self._parameters[-1])
-                    self._interpreter_parameters.append(function_parameter)
 
-                elif self._handle_parameter is not None:
-                    if parameter["name"] == self._handle_parameter.cvi_name:
-                        self._interpreter_parameters.append(function_parameter)
         self._adaptor_parameter = None
         if "adaptor_parameter" in function_metadata:
             self._adaptor_parameter = AdaptorParameter(function_metadata["adaptor_parameter"])
@@ -106,11 +101,6 @@ class Function:
     def parameters(self):
         """List of parameters: The list of parameters in the function."""
         return self._parameters
-
-    @property
-    def interpreter_parameters(self):
-        """List of parameters used in interpreter functions."""
-        return self._interpreter_parameters
 
     @property
     def output_parameters(self):
