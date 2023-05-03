@@ -62,13 +62,13 @@ def ci_count_edges_chan(any_x_series_device):
         yield ci_channel
 
 
-def test__channel__get_boolean_property__returns_default_value(
+def test___channel___get_boolean_property___returns_default_value(
     ai_voltage_chan_with_excit: AIChannel,
 ):
     assert not ai_voltage_chan_with_excit.ai_excit_use_for_scaling
 
 
-def test__channel__set_boolean_property__returns_assigned_value(
+def test___channel___set_boolean_property___returns_assigned_value(
     ai_voltage_chan_with_excit: AIChannel,
 ):
     ai_voltage_chan_with_excit.ai_excit_use_for_scaling = True
@@ -76,7 +76,7 @@ def test__channel__set_boolean_property__returns_assigned_value(
     assert ai_voltage_chan_with_excit.ai_excit_use_for_scaling
 
 
-def test__channel__reset_boolean_property__returns_default_value(
+def test___channel___reset_boolean_property___returns_default_value(
     ai_voltage_chan_with_excit: AIChannel,
 ):
     ai_voltage_chan_with_excit.ai_excit_use_for_scaling = True
@@ -86,17 +86,17 @@ def test__channel__reset_boolean_property__returns_default_value(
     assert not ai_voltage_chan_with_excit.ai_excit_use_for_scaling
 
 
-def test__channel__get_enum_property__returns_default_value(ai_power_chan: AIChannel):
+def test___channel___get_enum_property___returns_default_value(ai_power_chan: AIChannel):
     assert ai_power_chan.pwr_idle_output_behavior == PowerIdleOutputBehavior.MAINTAIN_EXISTING_VALUE
 
 
-def test__channel__set_enum_property__returns_assigned_value(ai_power_chan: AIChannel):
+def test___channel___set_enum_property___returns_assigned_value(ai_power_chan: AIChannel):
     ai_power_chan.pwr_idle_output_behavior = PowerIdleOutputBehavior.OUTPUT_DISABLED
 
     assert ai_power_chan.pwr_idle_output_behavior == PowerIdleOutputBehavior.OUTPUT_DISABLED
 
 
-def test__channel__reset_enum_property__returns_default_value(ai_power_chan: AIChannel):
+def test___channel___reset_enum_property___returns_default_value(ai_power_chan: AIChannel):
     ai_power_chan.pwr_idle_output_behavior = PowerIdleOutputBehavior.OUTPUT_DISABLED
 
     del ai_power_chan.pwr_idle_output_behavior
@@ -104,18 +104,18 @@ def test__channel__reset_enum_property__returns_default_value(ai_power_chan: AIC
     assert ai_power_chan.pwr_idle_output_behavior == PowerIdleOutputBehavior.MAINTAIN_EXISTING_VALUE
 
 
-def test__channel__get_float_property__returns_default_value(ai_rtd_chan: AIChannel):
+def test___channel___get_float_property___returns_default_value(ai_rtd_chan: AIChannel):
     assert ai_rtd_chan.ai_rtd_a == 0.00381
 
 
-def test__channel__set_float_property__returns_assigned_value(ai_rtd_chan: AIChannel):
+def test___channel___set_float_property___returns_assigned_value(ai_rtd_chan: AIChannel):
     value_to_set = 0.058388
     ai_rtd_chan.ai_rtd_a = value_to_set
 
     assert ai_rtd_chan.ai_rtd_a == value_to_set
 
 
-def test__channel__reset_float_property__returns_default_value(ai_rtd_chan: AIChannel):
+def test___channel___reset_float_property___returns_default_value(ai_rtd_chan: AIChannel):
     ai_rtd_chan.ai_rtd_a = 0.058388
 
     del ai_rtd_chan.ai_rtd_a
@@ -123,18 +123,18 @@ def test__channel__reset_float_property__returns_default_value(ai_rtd_chan: AICh
     assert ai_rtd_chan.ai_rtd_a == 0.00381
 
 
-def test__channel__get_string_property__returns_default_value(ci_pulse_width_chan: CIChannel):
+def test___channel___get_string_property___returns_default_value(ci_pulse_width_chan: CIChannel):
     assert ci_pulse_width_chan.ci_ctr_timebase_dig_fltr_timebase_src == "100MHzTimebase"
 
 
-def test__channel__set_string_property__returns_assigned_value(ci_pulse_width_chan: CIChannel):
+def test___channel___set_string_property___returns_assigned_value(ci_pulse_width_chan: CIChannel):
     value_to_set = "20MHzTimebase"
     ci_pulse_width_chan.ci_ctr_timebase_dig_fltr_timebase_src = value_to_set
 
     assert ci_pulse_width_chan.ci_ctr_timebase_dig_fltr_timebase_src == value_to_set
 
 
-def test__channel__reset_string_property__returns_default_value(ci_pulse_width_chan: CIChannel):
+def test___channel___reset_string_property___returns_default_value(ci_pulse_width_chan: CIChannel):
     ci_pulse_width_chan.ci_ctr_timebase_dig_fltr_timebase_src = "20MHzTimebase"
 
     del ci_pulse_width_chan.ci_ctr_timebase_dig_fltr_timebase_src
@@ -142,13 +142,13 @@ def test__channel__reset_string_property__returns_default_value(ci_pulse_width_c
     assert ci_pulse_width_chan.ci_ctr_timebase_dig_fltr_timebase_src == "100MHzTimebase"
 
 
-def test__channel__get_uint32_property__returns_default_value(
+def test___channel___get_uint32_property___returns_default_value(
     ai_voltage_chan_with_excit: AIChannel,
 ):
     assert ai_voltage_chan_with_excit.ai_lossy_lsb_removal_compressed_samp_size == 16
 
 
-def test__channel__set_uint32_property__returns_assigned_value(
+def test___channel___set_uint32_property___returns_assigned_value(
     ai_voltage_chan_with_excit: AIChannel,
 ):
     value_to_set = 15
@@ -157,7 +157,7 @@ def test__channel__set_uint32_property__returns_assigned_value(
     assert ai_voltage_chan_with_excit.ai_lossy_lsb_removal_compressed_samp_size == value_to_set
 
 
-def test__channel__reset_uint32_property__returns_default_value(
+def test___channel___reset_uint32_property___returns_default_value(
     ai_voltage_chan_with_excit: AIChannel,
 ):
     ai_voltage_chan_with_excit.ai_lossy_lsb_removal_compressed_samp_size = 15
@@ -167,16 +167,16 @@ def test__channel__reset_uint32_property__returns_default_value(
     assert ai_voltage_chan_with_excit.ai_lossy_lsb_removal_compressed_samp_size == 16
 
 
-def test__channel__get_deprecated_properties__reports_warnings(ai_rtd_chan: AIChannel):
+def test___channel___get_deprecated_properties___reports_warnings(ai_rtd_chan: AIChannel):
     with pytest.deprecated_call():
         assert ai_rtd_chan.ai_rtd_r0 == ai_rtd_chan.ai_rtd_r_0
 
 
-def test__channel__set_deprecated_properties__reports_warnings(ai_rtd_chan: AIChannel):
+def test___channel___set_deprecated_properties___reports_warnings(ai_rtd_chan: AIChannel):
     with pytest.deprecated_call():
         ai_rtd_chan.ai_rtd_r_0 = 1000.0
 
 
-def test__channel__reset_deprecated_properties__reports_warnings(ai_rtd_chan: AIChannel):
+def test___channel___reset_deprecated_properties___reports_warnings(ai_rtd_chan: AIChannel):
     with pytest.deprecated_call():
         del ai_rtd_chan.ai_rtd_r_0
