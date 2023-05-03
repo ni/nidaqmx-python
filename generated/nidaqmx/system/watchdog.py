@@ -54,12 +54,13 @@ class WatchdogTask:
                 with the digital physical channel expiration states input.
             grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
         """
+        # Initialize the fields that __del__ accesses so it doesn't crash when __init__ raises an exception.
+        self._handle = None
+        self._saved_name = task_name
+
         self._interpreter = utils._select_interpreter(grpc_options)
 
-
-        self._handle = lib_importer.task_handle(0)
-
-        self._handle, _ = self._interpreter.create_watchdog_timer_task_ex(device_name, task_name, timeout)
+        self._handle, self._close_on_exit = self._interpreter.create_watchdog_timer_task_ex(device_name, task_name, timeout)
 
         # Saved name is used in self.close() to throw graceful error on
         # double closes.
@@ -71,13 +72,14 @@ class WatchdogTask:
             warnings.warn(
                 'Task of name "{}" was not explicitly closed before it was '
                 'destructed. Resources on the task device may still be '
-                'reserved.'.format(self.name), DaqResourceWarning)
+                'reserved.'.format(self._saved_name), DaqResourceWarning)
 
     def __enter__(self):
         return self
 
     def __exit__(self, type, value, traceback):
-        self.close()
+        if self._close_on_exit:
+            self.close()
 
     @property
     def expiration_states(self):

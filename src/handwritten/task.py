@@ -69,7 +69,9 @@ class Task:
                 attempts to create multiple tasks with the same name, which
                 results in an error.
         """
-        self._handle = lib_importer.task_handle(0)
+        # Initialize the fields that __del__ accesses so it doesn't crash when __init__ raises an exception.
+        self._handle = None
+        self._saved_name = new_task_name
 
         if grpc_options and not (
             grpc_options.session_name == "" or grpc_options.session_name == new_task_name
@@ -80,7 +82,7 @@ class Task:
                 task_name=self.name)
         
         self._interpreter = utils._select_interpreter(grpc_options)
-        self._handle, _ = self._interpreter.create_task(new_task_name)
+        self._handle, self._close_on_exit = self._interpreter.create_task(new_task_name)
 
         self._initialize(self._handle, self._interpreter)
 
@@ -100,7 +102,8 @@ class Task:
         return False
 
     def __exit__(self, type, value, traceback):
-        self.close()
+        if self._close_on_exit:
+            self.close()
 
     def __hash__(self):
         return hash(self._handle)
@@ -1103,16 +1106,18 @@ class _TaskAlternateConstructor(Task):
     # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
     __slots__ = []
 
-    def __init__(self, task_handle, interpreter):
+    def __init__(self, task_handle, interpreter, close_on_exit):
         """
         Args:
             task_handle: Specifies the task handle from which to create a
                 Task object.
             interpreter: Specifies the interpreter instance.
+            close_on_exit: Specifies whether the task's context manager closes the task.
             
         """
         self._handle = task_handle
         self._interpreter = interpreter
+        self._close_on_exit = close_on_exit
 
         self._initialize(self._handle, self._interpreter)
 
