@@ -1,4 +1,3 @@
-"""Tests for validating watchdog properties."""
 import pytest
 
 import nidaqmx
@@ -9,7 +8,6 @@ from nidaqmx.system.watchdog import DOExpirationState
 
 
 def test__watchdog_task__get_expired__returns_false(any_x_series_device):
-    """Test to validate getter for boolean property."""
     with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
         task.start()
 
@@ -18,7 +16,6 @@ def test__watchdog_task__get_expired__returns_false(any_x_series_device):
 
 @pytest.mark.parametrize("device_by_name", ["cdaqChassisTester"], indirect=True)
 def test__watchdog_task__set_boolean_property__returns_assigned_value(device_by_name):
-    """Test to validate setter for boolean property."""
     with nidaqmx.system.WatchdogTask(device_by_name.name, timeout=0.5) as task:
         task.expir_trig_trig_on_network_conn_loss = True
 
@@ -27,7 +24,6 @@ def test__watchdog_task__set_boolean_property__returns_assigned_value(device_by_
 
 @pytest.mark.parametrize("device_by_name", ["cdaqChassisTester"], indirect=True)
 def test__watchdog_task__reset_boolean_property__returns_default_value(device_by_name):
-    """Test to validate reset for boolean property."""
     with nidaqmx.system.WatchdogTask(device_by_name.name, timeout=0.5) as task:
         task.expir_trig_trig_on_network_conn_loss = True
 
@@ -39,7 +35,6 @@ def test__watchdog_task__reset_boolean_property__returns_default_value(device_by
 def test__watchdog_task__task_not_running_get_expired_property___throws_daqerror(
     any_x_series_device,
 ):
-    """Test to validate error case for boolean property."""
     with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
         with pytest.raises(DaqError) as exc_info:
             _ = task.expired
@@ -51,7 +46,6 @@ def test__watchdog_task__task_not_running_get_expired_property___throws_daqerror
 
 
 def test__watchdog_task__get_enum_property__returns_value(any_x_series_device):
-    """Test to validate getter for enum property."""
     do_line = any_x_series_device.do_lines[0]
     with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
         expir_states = [
@@ -63,7 +57,6 @@ def test__watchdog_task__get_enum_property__returns_value(any_x_series_device):
 
 
 def test__watchdog_task__set_enum_property__returns_assigned_value(any_x_series_device):
-    """Test to validate setter for enum property."""
     do_line = any_x_series_device.do_lines[0]
     with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
         expir_states = [
@@ -77,7 +70,6 @@ def test__watchdog_task__set_enum_property__returns_assigned_value(any_x_series_
 
 
 def test__watchdog_task__reset_enum_property__returns_default_value(any_x_series_device):
-    """Test to validate reset for enum property."""
     do_line = any_x_series_device.do_lines[0]
     with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
         expir_states = [
@@ -92,7 +84,6 @@ def test__watchdog_task__reset_enum_property__returns_default_value(any_x_series
 
 
 def test__watchdog_task__get_float64_property__returns_value(any_x_series_device):
-    """Test to validate getter for float property."""
     do_line = any_x_series_device.do_lines[0]
     with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
         expir_states = [
@@ -104,7 +95,6 @@ def test__watchdog_task__get_float64_property__returns_value(any_x_series_device
 
 
 def test__watchdog_task__set_float64_property__returns_assigned_value(any_x_series_device):
-    """Test to validate setter for float property."""
     do_line = any_x_series_device.do_lines[0]
     with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
         expir_states = [
@@ -118,7 +108,6 @@ def test__watchdog_task__set_float64_property__returns_assigned_value(any_x_seri
 
 
 def test__watchdog_task__reset_float64_property__returns_default_value(any_x_series_device):
-    """Test to validate reset for float property."""
     do_line = any_x_series_device.do_lines[0]
     with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
         expir_states = [
@@ -132,7 +121,6 @@ def test__watchdog_task__reset_float64_property__returns_default_value(any_x_ser
 
 
 def test__watchdog_task__get_string_property__returns_value(any_x_series_device):
-    """Test to validate getter for string property."""
     do_line = any_x_series_device.do_lines[0]
     with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
         expir_states = [
@@ -144,7 +132,6 @@ def test__watchdog_task__get_string_property__returns_value(any_x_series_device)
 
 
 def test__watchdog_task__set_string_property__returns_assigned_value(any_x_series_device):
-    """Test to validate setter for string property."""
     do_line = any_x_series_device.do_lines[0]
     with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
         expir_states = [
@@ -158,7 +145,6 @@ def test__watchdog_task__set_string_property__returns_assigned_value(any_x_serie
 
 
 def test__watchdog_task__reset_string_property__returns_default_value(any_x_series_device):
-    """Test to validate reset for string property."""
     do_line = any_x_series_device.do_lines[0]
     with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
         expir_states = [
@@ -173,7 +159,6 @@ def test__watchdog_task__reset_string_property__returns_default_value(any_x_seri
 
 
 def test__watchdog_task__get_deprecated_properties__reports_warnings(any_x_series_device):
-    """Test to validate deprecated properties."""
     do_line = any_x_series_device.do_lines[0]
     with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
         expir_states = [
@@ -189,7 +174,6 @@ def test__watchdog_task__get_deprecated_properties__reports_warnings(any_x_serie
 
 
 def test__watchdog_task__set_deprecated_properties__reports_warnings(any_x_series_device):
-    """Test to validate deprecated properties."""
     do_line = any_x_series_device.do_lines[0]
     with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
         expir_states = [
@@ -202,7 +186,6 @@ def test__watchdog_task__set_deprecated_properties__reports_warnings(any_x_serie
 
 
 def test__watchdog_task__reset_deprecated_properties__reports_warnings(any_x_series_device):
-    """Test to validate deprecated properties."""
     do_line = any_x_series_device.do_lines[0]
     with nidaqmx.system.WatchdogTask(any_x_series_device.name, timeout=0.5) as task:
         expir_states = [
