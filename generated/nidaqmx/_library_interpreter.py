@@ -4438,7 +4438,8 @@ class LibraryInterpreter(BaseInterpreter):
                     ctypes.c_void_p]
         
             error_code = cfunc(
-                task, options, callback_function, ctypes.byref(callback_data))
+                task, options, callback_method_ptr,
+                ctypes.byref(callback_data))
         check_for_error(error_code)
 
 
@@ -4468,7 +4469,7 @@ class LibraryInterpreter(BaseInterpreter):
         
             error_code = cfunc(
                 task, every_n_samples_event_type, n_samples, options,
-                callback_function, ctypes.byref(callback_data))
+                callback_method_ptr, ctypes.byref(callback_data))
         check_for_error(error_code)
 
 
@@ -4495,7 +4496,7 @@ class LibraryInterpreter(BaseInterpreter):
                     ctypes.c_void_p, ctypes.c_void_p]
         
             error_code = cfunc(
-                task, signal_id, options, callback_function,
+                task, signal_id, options, callback_method_ptr,
                 ctypes.byref(callback_data))
         check_for_error(error_code)
 

@@ -90,6 +90,8 @@ def generate_interpreter_function_call_args(function_metadata):
             function_call_args.append(size_values[param.parameter_name])
         elif param.parameter_name == "reserved":
             function_call_args.append("None")
+        elif function_metadata.stream_response and param.parameter_name == "callback_function":
+            function_call_args.append("callback_method_ptr")
         elif param.direction == "out" or param.is_pointer:
             if param.has_explicit_buffer_size:
                 function_call_args.append(param.parameter_name)
