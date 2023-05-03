@@ -526,16 +526,9 @@ class PhysicalChannel:
         This function temporarily overrides any TEDS configuration for
         the physical channel that you performed in MAX.
         """
-        cfunc = lib_importer.windll.DAQmxClearTEDS
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.clear_teds(
             self._name)
-        check_for_error(error_code)
 
     def configure_teds(self, file_path=""):
         """
@@ -553,16 +546,9 @@ class PhysicalChannel:
                 this function attempts to find a TEDS sensor connected
                 to the physical channel.
         """
-        cfunc = lib_importer.windll.DAQmxConfigureTEDS
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.configure_teds(
             self._name, file_path)
-        check_for_error(error_code)
 
     def write_to_teds_from_array(
             self, bit_stream=None,
@@ -584,17 +570,9 @@ class PhysicalChannel:
 
         bit_stream = numpy.uint8(bit_stream)
 
-        cfunc = lib_importer.windll.DAQmxWriteToTEDSFromArray
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, wrapped_ndpointer(dtype=numpy.uint8,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int]
 
-        error_code = cfunc(
-            self._name, bit_stream, len(bit_stream), basic_teds_options.value)
-        check_for_error(error_code)
+        self._interpreter.write_to_teds_from_array(
+            self._name, bit_stream, basic_teds_options.value)
 
     def write_to_teds_from_file(
             self, file_path="",
@@ -609,16 +587,9 @@ class PhysicalChannel:
                 Specifies how to handle basic TEDS data in the
                 bitstream.
         """
-        cfunc = lib_importer.windll.DAQmxWriteToTEDSFromFile
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int]
 
-        error_code = cfunc(
+        self._interpreter.write_to_teds_from_file(
             self._name, file_path, basic_teds_options.value)
-        check_for_error(error_code)
 
 
 
@@ -628,6 +599,8 @@ class _PhysicalChannelAlternateConstructor(PhysicalChannel):
 
     This is a private API used to instantiate a PhysicalChannel with an existing interpreter.     
     """
+    # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
+    __slots__ = []
 
     def __init__(self, name, interpreter):
         """

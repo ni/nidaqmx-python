@@ -962,15 +962,7 @@ class ExportSignals:
                 installed devices. You can also specify a string
                 containing a comma-delimited list of terminal names.
         """
-        cfunc = lib_importer.windll.DAQmxExportSignal
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.export_signal(
             self._handle, signal_id.value, output_terminal)
-        check_for_error(error_code)
 

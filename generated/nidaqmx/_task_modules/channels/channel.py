@@ -299,14 +299,4 @@ class Channel:
         if allow_interactive_deletion:
             options |= _Save.ALLOW_INTERACTIVE_DELETION.value
 
-        cfunc = lib_importer.windll.DAQmxSaveGlobalChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_uint]
-
-        error_code = cfunc(
-            self._handle, self._name, save_as, author, options)
-        check_for_error(error_code)
+        self._interpreter.save_global_chan(self._handle, self._name, save_as, author, options)

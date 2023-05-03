@@ -123,14 +123,7 @@ class PersistedChannel:
         This function does not remove the global channel from tasks that
         use it.
         """
-        cfunc = lib_importer.windll.DAQmxDeleteSavedGlobalChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [ctypes_byte_str]
-
-        error_code = cfunc(self._name)
-        check_for_error(error_code)
+        self._interpreter.delete_saved_global_chan(self._name)
 
 
 class _PersistedChannelAlternateConstructor(PersistedChannel):
@@ -139,6 +132,8 @@ class _PersistedChannelAlternateConstructor(PersistedChannel):
 
     This is a private API used to instantiate a PersistedChannel with an existing interpreter.
     """
+    # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
+    __slots__ = []
 
     def __init__(self, name, interpreter):
         """

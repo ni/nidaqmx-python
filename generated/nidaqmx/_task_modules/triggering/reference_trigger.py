@@ -988,18 +988,10 @@ class ReferenceTrigger:
                 measurement or generation. Use **trigger_slope** to
                 specify on which slope to trigger at this threshold.
         """
-        cfunc = lib_importer.windll.DAQmxCfgAnlgEdgeRefTrig
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_uint]
 
-        error_code = cfunc(
-            self._handle, trigger_source, trigger_slope.value, trigger_level,
-            pretrigger_samples)
-        check_for_error(error_code)
+        self._interpreter.cfg_anlg_edge_ref_trig(
+            self._handle, trigger_source, pretrigger_samples,
+            trigger_slope.value, trigger_level)
 
     def cfg_anlg_window_ref_trig(
             self, trigger_source, window_top, window_bottom,
@@ -1035,19 +1027,10 @@ class ReferenceTrigger:
                 Use **window_bottom** and **window_top** to specify the
                 limits of the window.
         """
-        cfunc = lib_importer.windll.DAQmxCfgAnlgWindowRefTrig
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_uint]
 
-        error_code = cfunc(
-            self._handle, trigger_source, trigger_when.value, window_top,
-            window_bottom, pretrigger_samples)
-        check_for_error(error_code)
+        self._interpreter.cfg_anlg_window_ref_trig(
+            self._handle, trigger_source, window_top, window_bottom,
+            pretrigger_samples, trigger_when.value)
 
     def cfg_dig_edge_ref_trig(
             self, trigger_source, pretrigger_samples,
@@ -1074,18 +1057,10 @@ class ReferenceTrigger:
                 on which edge of the digital signal the Reference
                 Trigger occurs.
         """
-        cfunc = lib_importer.windll.DAQmxCfgDigEdgeRefTrig
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int, ctypes.c_uint]
 
-        error_code = cfunc(
-            self._handle, trigger_source, trigger_edge.value,
-            pretrigger_samples)
-        check_for_error(error_code)
+        self._interpreter.cfg_dig_edge_ref_trig(
+            self._handle, trigger_source, pretrigger_samples,
+            trigger_edge.value)
 
     def cfg_dig_pattern_ref_trig(
             self, trigger_source, trigger_pattern, pretrigger_samples,
@@ -1114,31 +1089,16 @@ class ReferenceTrigger:
             trigger_when (Optional[nidaqmx.constants.DigitalPatternCondition]): 
                 Specifies the condition under which the trigger occurs.
         """
-        cfunc = lib_importer.windll.DAQmxCfgDigPatternRefTrig
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_uint]
 
-        error_code = cfunc(
-            self._handle, trigger_source, trigger_pattern, trigger_when.value,
-            pretrigger_samples)
-        check_for_error(error_code)
+        self._interpreter.cfg_dig_pattern_ref_trig(
+            self._handle, trigger_source, trigger_pattern, pretrigger_samples,
+            trigger_when.value)
 
     def disable_ref_trig(self):
         """
         Disables reference triggering for the measurement.
         """
-        cfunc = lib_importer.windll.DAQmxDisableRefTrig
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
 
-        error_code = cfunc(
+        self._interpreter.disable_ref_trig(
             self._handle)
-        check_for_error(error_code)
 

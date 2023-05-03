@@ -10,7 +10,6 @@ import ctypes
 import numpy
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
-from nidaqmx._task_modules.write_functions import _write_raw
 from nidaqmx.errors import check_for_error, is_string_buffer_too_small
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
@@ -168,6 +167,6 @@ ${property_template.script_property(attribute)}\
             numpy_array.nbytes, (
                 number_of_channels * channels_to_write.ao_resolution / 8))
 
-        return _write_raw(
-            self._handle, number_of_samples_per_channel, self.auto_start,
-            self.timeout, numpy_array)
+        return self._interpreter.write_raw(
+            self._handle, number_of_samples_per_channel, 
+            self.auto_start, self.timeout, numpy_array)

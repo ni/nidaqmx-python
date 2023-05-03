@@ -258,7 +258,7 @@ class Scale:
     @staticmethod
     def calculate_reverse_poly_coeff(
             forward_coeffs, min_val_x=-5.0, max_val_x=5.0,
-            num_points_to_compute=1000, reverse_poly_order=-1):
+            num_points_to_compute=1000, reverse_poly_order=-1, *, grpc_options=None):
         """
         Computes a set of coefficients for a polynomial that
         approximates the inverse of the polynomial with the coefficients
@@ -290,6 +290,8 @@ class Scale:
                 3 indicates a 3rd order polynomial. A value of -1
                 indicates a reverse polynomial of the same order as the
                 forward polynomial.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
+                gRPC session options.
         Returns:
             List[float]: 
             
@@ -300,36 +302,17 @@ class Scale:
         """
         forward_coeffs = numpy.float64(forward_coeffs)
 
-        if reverse_poly_order == -1:
-            size = len(forward_coeffs)
-        else:
-            size = reverse_poly_order + 1
+        interpreter = utils._select_interpreter(grpc_options)
 
-        reverse_coeffs = numpy.zeros(size, dtype=numpy.float64)
+        reverse_coeffs = interpreter.calculate_reverse_poly_coeff(
+            forward_coeffs, min_val_x, max_val_x, num_points_to_compute, reverse_poly_order)
 
-        cfunc = lib_importer.windll.DAQmxCalculateReversePolyCoeff
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        numpy.ctypeslib.ndpointer(
-                            dtype=numpy.float64, flags=('C', 'W')),
-                        ctypes.c_uint, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int,
-                        numpy.ctypeslib.ndpointer(
-                            dtype=numpy.float64, flags=('C', 'W'))]
-
-        error_code = cfunc(
-            forward_coeffs, len(forward_coeffs), min_val_x, max_val_x,
-            num_points_to_compute, reverse_poly_order, reverse_coeffs)
-        check_for_error(error_code)
-
-        return reverse_coeffs.tolist()
+        return reverse_coeffs
 
     @staticmethod
     def create_lin_scale(
             scale_name, slope, y_intercept=0.0,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None):
         """
         Creates a custom scale that uses the equation y=mx+b, where x is
         a pre-scaled value, and y is a scaled value. The equation is
@@ -346,32 +329,24 @@ class Scale:
             scaled_units (Optional[str]): Is the units to use for the
                 scaled value. You can use an arbitrary string. NI-DAQmx
                 uses the units to label a graph or chart.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
+                gRPC session options.
         Returns:
             nidaqmx.scale.Scale:
             
             Indicates an object that represents the created custom scale.
         """
-        scale = Scale(scale_name)
+        scale = Scale(scale_name, grpc_options=grpc_options)
 
-        cfunc = lib_importer.windll.DAQmxCreateLinScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes_byte_str]
-
-        error_code = cfunc(
-            scale_name, slope, y_intercept, pre_scaled_units.value,
-            scaled_units)
-        check_for_error(error_code)
+        scale._interpreter.create_lin_scale(
+            scale_name, slope, y_intercept, pre_scaled_units.value, scaled_units)
 
         return scale
 
     @staticmethod
     def create_map_scale(
             scale_name, prescaled_min, prescaled_max, scaled_min, scaled_max,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None):
         """
         Creates a custom scale that scales values proportionally from a
         range of pre-scaled values to a range of scaled values.
@@ -399,33 +374,25 @@ class Scale:
             scaled_units (Optional[str]): Is the units to use for the
                 scaled value. You can use an arbitrary string. NI-DAQmx
                 uses the units to label a graph or chart.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
+                gRPC session options.
         Returns:
             nidaqmx.scale.Scale: 
             
             Indicates an object that represents the created custom scale.
         """
-        scale = Scale(scale_name)
+        scale = Scale(scale_name, grpc_options=grpc_options)
 
-        cfunc = lib_importer.windll.DAQmxCreateMapScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
-                        ctypes_byte_str]
-
-        error_code = cfunc(
-            scale_name, prescaled_min, prescaled_max, scaled_min, scaled_max,
+        scale._interpreter.create_map_scale(
+            scale_name, prescaled_min, prescaled_max, scaled_min, scaled_max, 
             pre_scaled_units.value, scaled_units)
-        check_for_error(error_code)
 
         return scale
 
     @staticmethod
     def create_polynomial_scale(
             scale_name, forward_coeffs, reverse_coeffs,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None):
         """
         Creates a custom scale that uses an nth order polynomial
         equation. NI-DAQmx requires both a polynomial to convert pre-
@@ -449,13 +416,13 @@ class Scale:
             scaled_units (Optional[str]): Is the units to use for the
                 scaled value. You can use an arbitrary string. NI-DAQmx
                 uses the units to label a graph or chart.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
+                gRPC session options.
         Returns:
             nidaqmx.scale.Scale: 
             
             Indicates an object that represents the created custom scale.
         """
-        scale = Scale(scale_name)
-
         if forward_coeffs is None:
             forward_coeffs = []
 
@@ -465,30 +432,17 @@ class Scale:
         forward_coeffs = numpy.float64(forward_coeffs)
         reverse_coeffs = numpy.float64(reverse_coeffs)
 
-        cfunc = lib_importer.windll.DAQmxCreatePolynomialScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                                          flags=('C', 'W')),
-                        ctypes.c_uint,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                                          flags=('C', 'W')),
-                        ctypes.c_uint, ctypes.c_int, ctypes_byte_str]
+        scale = Scale(scale_name, grpc_options=grpc_options)
 
-        error_code = cfunc(
-            scale_name, forward_coeffs, len(forward_coeffs), reverse_coeffs,
-            len(reverse_coeffs), pre_scaled_units.value, scaled_units)
-        check_for_error(error_code)
+        scale._interpreter.create_polynomial_scale(
+            scale_name, forward_coeffs, reverse_coeffs, pre_scaled_units.value, scaled_units)
 
         return scale
 
     @staticmethod
     def create_table_scale(
             scale_name, prescaled_vals, scaled_vals,
-            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None):
+            pre_scaled_units=UnitsPreScaled.VOLTS, scaled_units=None, *, grpc_options=None):
         """
         Creates a custom scale that maps an list of pre-scaled values to
         an list of corresponding scaled values. NI-DAQmx applies linear
@@ -509,13 +463,13 @@ class Scale:
             scaled_units (Optional[str]): Is the units to use for the
                 scaled value. You can use an arbitrary string. NI-DAQmx
                 uses the units to label a graph or chart.
+            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
+                gRPC session options.
         Returns:
             nidaqmx.scale.Scale: 
             
             Indicates an object that represents the created custom scale.
         """
-        scale = Scale(scale_name)
-
         if prescaled_vals is None:
             prescaled_vals = []
 
@@ -524,24 +478,11 @@ class Scale:
 
         prescaled_vals = numpy.float64(prescaled_vals)
         scaled_vals = numpy.float64(scaled_vals)
+        
+        scale = Scale(scale_name, grpc_options=grpc_options)
 
-        cfunc = lib_importer.windll.DAQmxCreateTableScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                                          flags=('C', 'W')),
-                        ctypes.c_uint,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                                          flags=('C', 'W')),
-                        ctypes.c_uint, ctypes.c_int, ctypes_byte_str]
-
-        error_code = cfunc(
-            scale_name, prescaled_vals, len(prescaled_vals), scaled_vals,
-            len(scaled_vals), pre_scaled_units.value, scaled_units)
-        check_for_error(error_code)
+        scale._interpreter.create_table_scale(
+            scale_name, prescaled_vals, scaled_vals, pre_scaled_units.value, scaled_units)
 
         return scale
 
@@ -583,17 +524,7 @@ class Scale:
         if allow_interactive_deletion:
             options |= _Save.ALLOW_INTERACTIVE_DELETION.value
 
-        cfunc = lib_importer.windll.DAQmxSaveScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str, ctypes_byte_str,
-                        ctypes.c_uint]
-
-        error_code = cfunc(
-            self._name, save_as, author, options)
-        check_for_error(error_code)
+        self._interpreter.save_scale(self._name, save_as, author, options)
 
 
 class _ScaleAlternateConstructor(Scale):
@@ -602,6 +533,8 @@ class _ScaleAlternateConstructor(Scale):
 
     This is a private API used to instantiate a Scale with an existing interpreter.
     """
+    # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
+    __slots__ = []
 
     def __init__(self, name, interpreter):
         """
