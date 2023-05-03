@@ -188,7 +188,9 @@ def to_param_argtype(parameter):
     if parameter.is_list:
         return f"wrapped_ndpointer(dtype={parameter.ctypes_data_type}, flags=('C','W'))"
     else:
-        if parameter.direction == "in":
+        if parameter.ctypes_data_type == "ctypes.TaskHandle":
+            return "lib_importer.task_handle"
+        elif parameter.direction == "in":
             # If is string input parameter, use separate custom
             # argtype to convert from unicode to bytes.
             if parameter.ctypes_data_type == "ctypes.c_char_p":
