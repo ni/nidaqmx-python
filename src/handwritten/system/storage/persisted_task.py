@@ -135,6 +135,7 @@ class PersistedTask:
         Returns:
             nidaqmx.task.Task: Indicates the loaded Task object.
         """
+        task_handle = None
         task_handle, close_on_exit = self._interpreter.load_task(self._name)
 
         return task._TaskAlternateConstructor(task_handle, self._interpreter, close_on_exit)
