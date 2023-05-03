@@ -253,8 +253,8 @@ def test_assets_directory() -> pathlib.Path:
     return pathlib.Path(__file__).parent / "test_assets"
 
 
-@pytest.fixture(scope="package")
-def grpc_session_creation_kwargs():
+@pytest.fixture(scope="session")
+def grpc_init_kwargs(grpc_channel):
     """Gets the keyword arguments required for creating the gRPC interpreter."""
     channel = grpc.insecure_channel(f"localhost:31763")
     grpc_options = GrpcSessionOptions(
@@ -265,22 +265,22 @@ def grpc_session_creation_kwargs():
     return {"grpc_options": grpc_options}
 
 
-@pytest.fixture(scope="package")
-def library_session_creation_kwargs():
+@pytest.fixture(scope="session")
+def library_init_kwargs():
     """Gets the keyword arguments required for creating the library interpreter."""
     return {}
 
 
 @pytest.fixture(
-    params=("library_session_creation_kwargs", "grpc_session_creation_kwargs"), scope="module"
+    params=("library_init_kwargs", "grpc_init_kwargs"), scope="session"
 )
-def session_creation_kwargs(request):
+def init_kwargs(request):
     """Gets the keyword arguments to create a nidaqmx session."""
     return request.getfixturevalue(request.param)
 
 
 @pytest.fixture(scope="function")
-def task(request, session_creation_kwargs):
+def task(request, init_kwargs):
     """Gets a task instance."""
     # set default values used for the initialization of the task.
     init_args = {
@@ -292,4 +292,5 @@ def task(request, session_creation_kwargs):
         if marker.name in init_args:  # only look at markers with valid argument names
             init_args[marker.name] = marker.args[0]  # assume single parameter in marker
 
-    yield nidaqmx.Task(**init_args, **session_creation_kwargs)
+    with nidaqmx.Task(**init_args, **init_kwargs) as task:
+        yield task
