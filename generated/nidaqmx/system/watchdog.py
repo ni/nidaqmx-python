@@ -57,7 +57,7 @@ class WatchdogTask:
         self._interpreter = utils._select_interpreter(grpc_options)
 
 
-        self._handle = lib_importer.task_handle(0)
+        self._handle = None
         self._close_on_exit = False
 
         self._handle, self._close_on_exit = self._interpreter.create_watchdog_timer_task_ex(device_name, task_name, timeout)
