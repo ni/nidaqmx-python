@@ -46,7 +46,9 @@ def test___persisted_scale___get_string_property___returns_persisted_value(persi
 
 
 @pytest.mark.parametrize("persisted_scale", ["double_gain_scale"], indirect=True)
-def test___persisted_scale___load_and_get_float64_property___returns_persisted_value(persisted_scale):
+def test___persisted_scale___load_and_get_float64_property___returns_persisted_value(
+    persisted_scale,
+):
     assert persisted_scale.load().lin_slope == 2.0
 
 
