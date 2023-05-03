@@ -6,6 +6,7 @@ import pytest
 
 import nidaqmx.system
 from nidaqmx.constants import ProductCategory, UsageTypeAI
+from nidaqmx._lib import DaqNotFoundError
 
 
 class Error(Exception):
@@ -54,7 +55,7 @@ def _x_series_device(device_type):
             f"{device_type}. Cannot proceed to run tests. Import the NI MAX configuration file located "
             "at nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
         )
-    except:
+    except DaqNotFoundError:
         pytest.skip(
             "Could not detect a device that meets the requirements to be an X Series fixture of type "
             f"{device_type}. Cannot proceed to run tests. Import the NI MAX configuration file located "
