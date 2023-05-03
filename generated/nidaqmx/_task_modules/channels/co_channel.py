@@ -36,7 +36,6 @@ class COChannel(Channel):
     def co_auto_incr_cnt(self, val):
         self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x295, val)
 
-
     @co_auto_incr_cnt.deleter
     def co_auto_incr_cnt(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x295)
@@ -65,7 +64,6 @@ class COChannel(Channel):
     def co_constrained_gen_mode(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x29f2, val)
-
 
     @co_constrained_gen_mode.deleter
     def co_constrained_gen_mode(self):
@@ -96,7 +94,6 @@ class COChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x341, val)
 
-
     @co_ctr_timebase_active_edge.deleter
     def co_ctr_timebase_active_edge(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x341)
@@ -115,7 +112,6 @@ class COChannel(Channel):
     def co_ctr_timebase_dig_fltr_enable(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2276, val)
 
-
     @co_ctr_timebase_dig_fltr_enable.deleter
     def co_ctr_timebase_dig_fltr_enable(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2276)
@@ -133,7 +129,6 @@ class COChannel(Channel):
     @co_ctr_timebase_dig_fltr_min_pulse_width.setter
     def co_ctr_timebase_dig_fltr_min_pulse_width(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2277, val)
-
 
     @co_ctr_timebase_dig_fltr_min_pulse_width.deleter
     def co_ctr_timebase_dig_fltr_min_pulse_width(self):
@@ -154,7 +149,6 @@ class COChannel(Channel):
     def co_ctr_timebase_dig_fltr_timebase_rate(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2279, val)
 
-
     @co_ctr_timebase_dig_fltr_timebase_rate.deleter
     def co_ctr_timebase_dig_fltr_timebase_rate(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2279)
@@ -172,7 +166,6 @@ class COChannel(Channel):
     @co_ctr_timebase_dig_fltr_timebase_src.setter
     def co_ctr_timebase_dig_fltr_timebase_src(self, val):
         self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x2278, val)
-
 
     @co_ctr_timebase_dig_fltr_timebase_src.deleter
     def co_ctr_timebase_dig_fltr_timebase_src(self):
@@ -193,7 +186,6 @@ class COChannel(Channel):
     def co_ctr_timebase_dig_sync_enable(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x227a, val)
 
-
     @co_ctr_timebase_dig_sync_enable.deleter
     def co_ctr_timebase_dig_sync_enable(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x227a)
@@ -212,7 +204,6 @@ class COChannel(Channel):
     @co_ctr_timebase_master_timebase_div.setter
     def co_ctr_timebase_master_timebase_div(self, val):
         self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x18c3, val)
-
 
     @co_ctr_timebase_master_timebase_div.deleter
     def co_ctr_timebase_master_timebase_div(self):
@@ -236,7 +227,6 @@ class COChannel(Channel):
     def co_ctr_timebase_rate(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x18c2, val)
 
-
     @co_ctr_timebase_rate.deleter
     def co_ctr_timebase_rate(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18c2)
@@ -257,7 +247,6 @@ class COChannel(Channel):
     @co_ctr_timebase_src.setter
     def co_ctr_timebase_src(self, val):
         self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x339, val)
-
 
     @co_ctr_timebase_src.deleter
     def co_ctr_timebase_src(self):
@@ -280,7 +269,6 @@ class COChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2ecc, val)
 
-
     @co_data_xfer_mech.deleter
     def co_data_xfer_mech(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2ecc)
@@ -301,7 +289,6 @@ class COChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2ecd, val)
 
-
     @co_data_xfer_req_cond.deleter
     def co_data_xfer_req_cond(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2ecd)
@@ -319,7 +306,6 @@ class COChannel(Channel):
     @co_enable_initial_delay_on_retrigger.setter
     def co_enable_initial_delay_on_retrigger(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2ec9, val)
-
 
     @co_enable_initial_delay_on_retrigger.deleter
     def co_enable_initial_delay_on_retrigger(self):
@@ -344,7 +330,6 @@ class COChannel(Channel):
     @co_mem_map_enable.setter
     def co_mem_map_enable(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2ed3, val)
-
 
     @co_mem_map_enable.deleter
     def co_mem_map_enable(self):
@@ -389,7 +374,6 @@ class COChannel(Channel):
     def co_prescaler(self, val):
         self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x226d, val)
 
-
     @co_prescaler.deleter
     def co_prescaler(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x226d)
@@ -423,7 +407,6 @@ class COChannel(Channel):
     def co_pulse_duty_cyc(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x1176, val)
 
-
     @co_pulse_duty_cyc.deleter
     def co_pulse_duty_cyc(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x1176)
@@ -443,7 +426,6 @@ class COChannel(Channel):
     def co_pulse_freq(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x1178, val)
 
-
     @co_pulse_freq.deleter
     def co_pulse_freq(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x1178)
@@ -461,7 +443,6 @@ class COChannel(Channel):
     @co_pulse_freq_initial_delay.setter
     def co_pulse_freq_initial_delay(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x299, val)
-
 
     @co_pulse_freq_initial_delay.deleter
     def co_pulse_freq_initial_delay(self):
@@ -482,7 +463,6 @@ class COChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x18d5, val)
 
-
     @co_pulse_freq_units.deleter
     def co_pulse_freq_units(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18d5)
@@ -499,7 +479,6 @@ class COChannel(Channel):
     @co_pulse_high_ticks.setter
     def co_pulse_high_ticks(self, val):
         self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x1169, val)
-
 
     @co_pulse_high_ticks.deleter
     def co_pulse_high_ticks(self):
@@ -520,7 +499,6 @@ class COChannel(Channel):
     def co_pulse_high_time(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x18ba, val)
 
-
     @co_pulse_high_time.deleter
     def co_pulse_high_time(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18ba)
@@ -540,7 +518,6 @@ class COChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x1170, val)
 
-
     @co_pulse_idle_state.deleter
     def co_pulse_idle_state(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x1170)
@@ -557,7 +534,6 @@ class COChannel(Channel):
     @co_pulse_low_ticks.setter
     def co_pulse_low_ticks(self, val):
         self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x1171, val)
-
 
     @co_pulse_low_ticks.deleter
     def co_pulse_low_ticks(self):
@@ -578,7 +554,6 @@ class COChannel(Channel):
     def co_pulse_low_time(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x18bb, val)
 
-
     @co_pulse_low_time.deleter
     def co_pulse_low_time(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x18bb)
@@ -595,7 +570,6 @@ class COChannel(Channel):
     @co_pulse_term.setter
     def co_pulse_term(self, val):
         self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x18e1, val)
-
 
     @co_pulse_term.deleter
     def co_pulse_term(self):
@@ -615,7 +589,6 @@ class COChannel(Channel):
     def co_pulse_ticks_initial_delay(self, val):
         self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x298, val)
 
-
     @co_pulse_ticks_initial_delay.deleter
     def co_pulse_ticks_initial_delay(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x298)
@@ -633,7 +606,6 @@ class COChannel(Channel):
     @co_pulse_time_initial_delay.setter
     def co_pulse_time_initial_delay(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x18bc, val)
-
 
     @co_pulse_time_initial_delay.deleter
     def co_pulse_time_initial_delay(self):
@@ -653,7 +625,6 @@ class COChannel(Channel):
     def co_pulse_time_units(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x18d6, val)
-
 
     @co_pulse_time_units.deleter
     def co_pulse_time_units(self):
@@ -684,7 +655,6 @@ class COChannel(Channel):
     def co_usb_xfer_req_count(self, val):
         self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x3005, val)
 
-
     @co_usb_xfer_req_count.deleter
     def co_usb_xfer_req_count(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x3005)
@@ -703,7 +673,6 @@ class COChannel(Channel):
     @co_usb_xfer_req_size.setter
     def co_usb_xfer_req_size(self, val):
         self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x2a93, val)
-
 
     @co_usb_xfer_req_size.deleter
     def co_usb_xfer_req_size(self):
@@ -724,7 +693,6 @@ class COChannel(Channel):
     @co_use_only_on_brd_mem.setter
     def co_use_only_on_brd_mem(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2ecb, val)
-
 
     @co_use_only_on_brd_mem.deleter
     def co_use_only_on_brd_mem(self):

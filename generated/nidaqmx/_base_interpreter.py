@@ -5,6 +5,7 @@ class BaseInterpreter(abc.ABC):
     """
     Contains signature of functions for all DAQmx APIs.
     """
+    __slots__ = []
 
     @abc.abstractmethod
     def add_cdaq_sync_connection(self, port_list):
@@ -49,13 +50,13 @@ class BaseInterpreter(abc.ABC):
     @abc.abstractmethod
     def cfg_anlg_multi_edge_ref_trig(
             self, task, trigger_sources, trigger_slope_array,
-            trigger_level_array, pretrigger_samples, array_size):
+            trigger_level_array, pretrigger_samples):
         raise NotImplementedError
 
     @abc.abstractmethod
     def cfg_anlg_multi_edge_start_trig(
             self, task, trigger_sources, trigger_slope_array,
-            trigger_level_array, array_size):
+            trigger_level_array):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1202,7 +1203,8 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_analog_f64(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_analog_f64(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1210,28 +1212,32 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_binary_i16(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_binary_i16(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_binary_i32(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_binary_i32(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_binary_u16(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_binary_u16(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_binary_u32(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_binary_u32(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_counter_f64(self, task, num_samps_per_chan, timeout):
+    def read_counter_f64(self, task, num_samps_per_chan, timeout, read_array):
         raise NotImplementedError
 
     @abc.abstractmethod
     def read_counter_f64_ex(
-            self, task, num_samps_per_chan, timeout, fill_mode):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1243,16 +1249,18 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_counter_u32(self, task, num_samps_per_chan, timeout):
+    def read_counter_u32(self, task, num_samps_per_chan, timeout, read_array):
         raise NotImplementedError
 
     @abc.abstractmethod
     def read_counter_u32_ex(
-            self, task, num_samps_per_chan, timeout, fill_mode):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_ctr_freq(self, task, num_samps_per_chan, timeout, interleaved):
+    def read_ctr_freq(
+            self, task, num_samps_per_chan, timeout, interleaved,
+            read_array_frequency, read_array_duty_cycle):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1260,7 +1268,9 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_ctr_ticks(self, task, num_samps_per_chan, timeout, interleaved):
+    def read_ctr_ticks(
+            self, task, num_samps_per_chan, timeout, interleaved,
+            read_array_high_ticks, read_array_low_ticks):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1268,7 +1278,9 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_ctr_time(self, task, num_samps_per_chan, timeout, interleaved):
+    def read_ctr_time(
+            self, task, num_samps_per_chan, timeout, interleaved,
+            read_array_high_time, read_array_low_time):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1276,7 +1288,8 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_digital_lines(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_digital_lines(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1284,27 +1297,30 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_digital_u16(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_digital_u16(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_digital_u32(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_digital_u32(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_digital_u8(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_digital_u8(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         raise NotImplementedError
 
     @abc.abstractmethod
     def read_power_binary_i16(
             self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
+            read_array_voltage, read_array_current):
         raise NotImplementedError
 
     @abc.abstractmethod
     def read_power_f64(
             self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
+            read_array_voltage, read_array_current):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1312,7 +1328,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def read_raw(self, task, num_samps_per_chan, timeout, array_size_in_bytes):
+    def read_raw(self, task, num_samps_per_chan, timeout, read_array):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1420,7 +1436,7 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def set_analog_power_up_states_with_output_type(
-            self, channel_names, state_array, channel_type_array, array_size):
+            self, channel_names, state_array, channel_type_array):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1452,8 +1468,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def set_chan_attribute_double_array(
-            self, task, channel, attribute, value, size):
+    def set_chan_attribute_double_array(self, task, channel, attribute, value):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1543,8 +1558,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def set_scale_attribute_double_array(
-            self, scale_name, attribute, value, size):
+    def set_scale_attribute_double_array(self, scale_name, attribute, value):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1618,7 +1632,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def set_trig_attribute_double_array(self, task, attribute, value, size):
+    def set_trig_attribute_double_array(self, task, attribute, value):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1626,7 +1640,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def set_trig_attribute_int32_array(self, task, attribute, value, size):
+    def set_trig_attribute_int32_array(self, task, attribute, value):
         raise NotImplementedError
 
     @abc.abstractmethod

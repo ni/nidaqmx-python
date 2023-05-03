@@ -47,7 +47,6 @@ class ExpirationState:
         val = val.value
         self._interpreter.set_watchdog_attribute_int32(self._handle, self._physical_channel, 0x305e, val)
 
-
     @ao_output_type.deleter
     def ao_output_type(self):
         self._interpreter.reset_watchdog_attribute(self._handle, self._physical_channel, 0x305e)
@@ -65,7 +64,6 @@ class ExpirationState:
     @ao_state.setter
     def ao_state(self, val):
         self._interpreter.set_watchdog_attribute_double(self._handle, self._physical_channel, 0x305f, val)
-
 
     @ao_state.deleter
     def ao_state(self):
@@ -87,7 +85,6 @@ class ExpirationState:
         val = val.value
         self._interpreter.set_watchdog_attribute_int32(self._handle, self._physical_channel, 0x3060, val)
 
-
     @co_state.deleter
     def co_state(self):
         self._interpreter.reset_watchdog_attribute(self._handle, self._physical_channel, 0x3060)
@@ -108,7 +105,6 @@ class ExpirationState:
     def do_state(self, val):
         val = val.value
         self._interpreter.set_watchdog_attribute_int32(self._handle, self._physical_channel, 0x21a7, val)
-
 
     @do_state.deleter
     def do_state(self):

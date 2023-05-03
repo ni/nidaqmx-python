@@ -37,7 +37,6 @@ class DIChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2966, val)
 
-
     @di_acquire_on.deleter
     def di_acquire_on(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2966)
@@ -56,7 +55,6 @@ class DIChannel(Channel):
     def di_data_xfer_mech(self, val):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2263, val)
-
 
     @di_data_xfer_mech.deleter
     def di_data_xfer_mech(self):
@@ -78,7 +76,6 @@ class DIChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x2264, val)
 
-
     @di_data_xfer_req_cond.deleter
     def di_data_xfer_req_cond(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2264)
@@ -98,7 +95,6 @@ class DIChannel(Channel):
     @di_dig_fltr_enable.setter
     def di_dig_fltr_enable(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x21d6, val)
-
 
     @di_dig_fltr_enable.deleter
     def di_dig_fltr_enable(self):
@@ -124,7 +120,6 @@ class DIChannel(Channel):
     def di_dig_fltr_enable_bus_mode(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2efe, val)
 
-
     @di_dig_fltr_enable_bus_mode.deleter
     def di_dig_fltr_enable_bus_mode(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2efe)
@@ -142,7 +137,6 @@ class DIChannel(Channel):
     @di_dig_fltr_min_pulse_width.setter
     def di_dig_fltr_min_pulse_width(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x21d7, val)
-
 
     @di_dig_fltr_min_pulse_width.deleter
     def di_dig_fltr_min_pulse_width(self):
@@ -163,7 +157,6 @@ class DIChannel(Channel):
     def di_dig_fltr_timebase_rate(self, val):
         self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x2ed5, val)
 
-
     @di_dig_fltr_timebase_rate.deleter
     def di_dig_fltr_timebase_rate(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2ed5)
@@ -181,7 +174,6 @@ class DIChannel(Channel):
     @di_dig_fltr_timebase_src.setter
     def di_dig_fltr_timebase_src(self, val):
         self._interpreter.set_chan_attribute_string(self._handle, self._name, 0x2ed4, val)
-
 
     @di_dig_fltr_timebase_src.deleter
     def di_dig_fltr_timebase_src(self):
@@ -202,7 +194,6 @@ class DIChannel(Channel):
     def di_dig_sync_enable(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x2ed6, val)
 
-
     @di_dig_sync_enable.deleter
     def di_dig_sync_enable(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2ed6)
@@ -221,7 +212,6 @@ class DIChannel(Channel):
     @di_invert_lines.setter
     def di_invert_lines(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x793, val)
-
 
     @di_invert_lines.deleter
     def di_invert_lines(self):
@@ -246,7 +236,6 @@ class DIChannel(Channel):
         val = val.value
         self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x296d, val)
 
-
     @di_logic_family.deleter
     def di_logic_family(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x296d)
@@ -270,7 +259,6 @@ class DIChannel(Channel):
     @di_mem_map_enable.setter
     def di_mem_map_enable(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x296a, val)
-
 
     @di_mem_map_enable.deleter
     def di_mem_map_enable(self):
@@ -303,7 +291,6 @@ class DIChannel(Channel):
     def di_tristate(self, val):
         self._interpreter.set_chan_attribute_bool(self._handle, self._name, 0x1890, val)
 
-
     @di_tristate.deleter
     def di_tristate(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x1890)
@@ -323,7 +310,6 @@ class DIChannel(Channel):
     def di_usb_xfer_req_count(self, val):
         self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x3002, val)
 
-
     @di_usb_xfer_req_count.deleter
     def di_usb_xfer_req_count(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x3002)
@@ -342,7 +328,6 @@ class DIChannel(Channel):
     @di_usb_xfer_req_size.setter
     def di_usb_xfer_req_size(self, val):
         self._interpreter.set_chan_attribute_uint32(self._handle, self._name, 0x2a90, val)
-
 
     @di_usb_xfer_req_size.deleter
     def di_usb_xfer_req_size(self):

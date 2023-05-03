@@ -33,7 +33,6 @@ class ExportSignals:
     def adv_cmplt_event_delay(self, val):
         self._interpreter.set_exported_signal_attribute_double(self._handle, 0x1757, val)
 
-
     @adv_cmplt_event_delay.deleter
     def adv_cmplt_event_delay(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x1757)
@@ -51,7 +50,6 @@ class ExportSignals:
     @adv_cmplt_event_output_term.setter
     def adv_cmplt_event_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1651, val)
-
 
     @adv_cmplt_event_output_term.deleter
     def adv_cmplt_event_output_term(self):
@@ -72,7 +70,6 @@ class ExportSignals:
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x1652, val)
 
-
     @adv_cmplt_event_pulse_polarity.deleter
     def adv_cmplt_event_pulse_polarity(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x1652)
@@ -91,7 +88,6 @@ class ExportSignals:
     def adv_cmplt_event_pulse_width(self, val):
         self._interpreter.set_exported_signal_attribute_double(self._handle, 0x1654, val)
 
-
     @adv_cmplt_event_pulse_width.deleter
     def adv_cmplt_event_pulse_width(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x1654)
@@ -109,7 +105,6 @@ class ExportSignals:
     @adv_trig_output_term.setter
     def adv_trig_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1645, val)
-
 
     @adv_trig_output_term.deleter
     def adv_trig_output_term(self):
@@ -140,7 +135,6 @@ class ExportSignals:
     def adv_trig_pulse_width(self, val):
         self._interpreter.set_exported_signal_attribute_double(self._handle, 0x1648, val)
 
-
     @adv_trig_pulse_width.deleter
     def adv_trig_pulse_width(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x1648)
@@ -160,7 +154,6 @@ class ExportSignals:
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x1647, val)
 
-
     @adv_trig_pulse_width_units.deleter
     def adv_trig_pulse_width_units(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x1647)
@@ -178,7 +171,6 @@ class ExportSignals:
     @ai_conv_clk_output_term.setter
     def ai_conv_clk_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1687, val)
-
 
     @ai_conv_clk_output_term.deleter
     def ai_conv_clk_output_term(self):
@@ -210,7 +202,6 @@ class ExportSignals:
     def ai_hold_cmplt_event_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x18ed, val)
 
-
     @ai_hold_cmplt_event_output_term.deleter
     def ai_hold_cmplt_event_output_term(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x18ed)
@@ -230,7 +221,6 @@ class ExportSignals:
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x18ee, val)
 
-
     @ai_hold_cmplt_event_pulse_polarity.deleter
     def ai_hold_cmplt_event_pulse_polarity(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x18ee)
@@ -248,7 +238,6 @@ class ExportSignals:
     @change_detect_event_output_term.setter
     def change_detect_event_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x2197, val)
-
 
     @change_detect_event_output_term.deleter
     def change_detect_event_output_term(self):
@@ -268,7 +257,6 @@ class ExportSignals:
     def change_detect_event_pulse_polarity(self, val):
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x2303, val)
-
 
     @change_detect_event_pulse_polarity.deleter
     def change_detect_event_pulse_polarity(self):
@@ -290,7 +278,6 @@ class ExportSignals:
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x174f, val)
 
-
     @ctr_out_event_output_behavior.deleter
     def ctr_out_event_output_behavior(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x174f)
@@ -308,7 +295,6 @@ class ExportSignals:
     @ctr_out_event_output_term.setter
     def ctr_out_event_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1717, val)
-
 
     @ctr_out_event_output_term.deleter
     def ctr_out_event_output_term(self):
@@ -333,7 +319,6 @@ class ExportSignals:
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x1718, val)
 
-
     @ctr_out_event_pulse_polarity.deleter
     def ctr_out_event_pulse_polarity(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x1718)
@@ -356,7 +341,6 @@ class ExportSignals:
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x186a, val)
 
-
     @ctr_out_event_toggle_idle_state.deleter
     def ctr_out_event_toggle_idle_state(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x186a)
@@ -376,7 +360,6 @@ class ExportSignals:
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x1634, val)
 
-
     @data_active_event_lvl_active_lvl.deleter
     def data_active_event_lvl_active_lvl(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x1634)
@@ -394,7 +377,6 @@ class ExportSignals:
     @data_active_event_output_term.setter
     def data_active_event_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1633, val)
-
 
     @data_active_event_output_term.deleter
     def data_active_event_output_term(self):
@@ -414,7 +396,6 @@ class ExportSignals:
     def divided_samp_clk_timebase_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x21a1, val)
 
-
     @divided_samp_clk_timebase_output_term.deleter
     def divided_samp_clk_timebase_output_term(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x21a1)
@@ -431,7 +412,6 @@ class ExportSignals:
     @exported_10_mhz_ref_clk_output_term.setter
     def exported_10_mhz_ref_clk_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x226e, val)
-
 
     @exported_10_mhz_ref_clk_output_term.deleter
     def exported_10_mhz_ref_clk_output_term(self):
@@ -450,7 +430,6 @@ class ExportSignals:
     @exported_20_mhz_timebase_output_term.setter
     def exported_20_mhz_timebase_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1657, val)
-
 
     @exported_20_mhz_timebase_output_term.deleter
     def exported_20_mhz_timebase_output_term(self):
@@ -471,7 +450,6 @@ class ExportSignals:
     def hshk_event_delay(self, val):
         self._interpreter.set_exported_signal_attribute_double(self._handle, 0x22bc, val)
 
-
     @hshk_event_delay.deleter
     def hshk_event_delay(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x22bc)
@@ -490,7 +468,6 @@ class ExportSignals:
     @hshk_event_interlocked_assert_on_start.setter
     def hshk_event_interlocked_assert_on_start(self, val):
         self._interpreter.set_exported_signal_attribute_bool(self._handle, 0x22be, val)
-
 
     @hshk_event_interlocked_assert_on_start.deleter
     def hshk_event_interlocked_assert_on_start(self):
@@ -513,7 +490,6 @@ class ExportSignals:
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x22bd, val)
 
-
     @hshk_event_interlocked_asserted_lvl.deleter
     def hshk_event_interlocked_asserted_lvl(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x22bd)
@@ -534,7 +510,6 @@ class ExportSignals:
     def hshk_event_interlocked_deassert_delay(self, val):
         self._interpreter.set_exported_signal_attribute_double(self._handle, 0x22bf, val)
 
-
     @hshk_event_interlocked_deassert_delay.deleter
     def hshk_event_interlocked_deassert_delay(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x22bf)
@@ -554,7 +529,6 @@ class ExportSignals:
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x22bb, val)
 
-
     @hshk_event_output_behavior.deleter
     def hshk_event_output_behavior(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x22bb)
@@ -572,7 +546,6 @@ class ExportSignals:
     @hshk_event_output_term.setter
     def hshk_event_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x22ba, val)
-
 
     @hshk_event_output_term.deleter
     def hshk_event_output_term(self):
@@ -594,7 +567,6 @@ class ExportSignals:
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x22c0, val)
 
-
     @hshk_event_pulse_polarity.deleter
     def hshk_event_pulse_polarity(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x22c0)
@@ -613,7 +585,6 @@ class ExportSignals:
     @hshk_event_pulse_width.setter
     def hshk_event_pulse_width(self, val):
         self._interpreter.set_exported_signal_attribute_double(self._handle, 0x22c1, val)
-
 
     @hshk_event_pulse_width.deleter
     def hshk_event_pulse_width(self):
@@ -634,7 +605,6 @@ class ExportSignals:
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x1616, val)
 
-
     @pause_trig_lvl_active_lvl.deleter
     def pause_trig_lvl_active_lvl(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x1616)
@@ -651,7 +621,6 @@ class ExportSignals:
     @pause_trig_output_term.setter
     def pause_trig_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1615, val)
-
 
     @pause_trig_output_term.deleter
     def pause_trig_output_term(self):
@@ -672,7 +641,6 @@ class ExportSignals:
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x1751, val)
 
-
     @rdy_for_start_event_lvl_active_lvl.deleter
     def rdy_for_start_event_lvl_active_lvl(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x1751)
@@ -690,7 +658,6 @@ class ExportSignals:
     @rdy_for_start_event_output_term.setter
     def rdy_for_start_event_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1609, val)
-
 
     @rdy_for_start_event_output_term.deleter
     def rdy_for_start_event_output_term(self):
@@ -710,7 +677,6 @@ class ExportSignals:
     def rdy_for_xfer_event_deassert_cond(self, val):
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x2963, val)
-
 
     @rdy_for_xfer_event_deassert_cond.deleter
     def rdy_for_xfer_event_deassert_cond(self):
@@ -734,7 +700,6 @@ class ExportSignals:
     def rdy_for_xfer_event_deassert_cond_custom_threshold(self, val):
         self._interpreter.set_exported_signal_attribute_uint32(self._handle, 0x2964, val)
 
-
     @rdy_for_xfer_event_deassert_cond_custom_threshold.deleter
     def rdy_for_xfer_event_deassert_cond_custom_threshold(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x2964)
@@ -754,7 +719,6 @@ class ExportSignals:
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x22b6, val)
 
-
     @rdy_for_xfer_event_lvl_active_lvl.deleter
     def rdy_for_xfer_event_lvl_active_lvl(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x22b6)
@@ -773,7 +737,6 @@ class ExportSignals:
     def rdy_for_xfer_event_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x22b5, val)
 
-
     @rdy_for_xfer_event_output_term.deleter
     def rdy_for_xfer_event_output_term(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x22b5)
@@ -791,7 +754,6 @@ class ExportSignals:
     @ref_trig_output_term.setter
     def ref_trig_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x590, val)
-
 
     @ref_trig_output_term.deleter
     def ref_trig_output_term(self):
@@ -812,7 +774,6 @@ class ExportSignals:
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x591, val)
 
-
     @ref_trig_pulse_polarity.deleter
     def ref_trig_pulse_polarity(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x591)
@@ -832,7 +793,6 @@ class ExportSignals:
     @samp_clk_delay_offset.setter
     def samp_clk_delay_offset(self, val):
         self._interpreter.set_exported_signal_attribute_double(self._handle, 0x21c4, val)
-
 
     @samp_clk_delay_offset.deleter
     def samp_clk_delay_offset(self):
@@ -855,7 +815,6 @@ class ExportSignals:
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x186b, val)
 
-
     @samp_clk_output_behavior.deleter
     def samp_clk_output_behavior(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x186b)
@@ -872,7 +831,6 @@ class ExportSignals:
     @samp_clk_output_term.setter
     def samp_clk_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x1663, val)
-
 
     @samp_clk_output_term.deleter
     def samp_clk_output_term(self):
@@ -894,7 +852,6 @@ class ExportSignals:
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x1664, val)
 
-
     @samp_clk_pulse_polarity.deleter
     def samp_clk_pulse_polarity(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x1664)
@@ -913,7 +870,6 @@ class ExportSignals:
     def samp_clk_timebase_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x18f9, val)
 
-
     @samp_clk_timebase_output_term.deleter
     def samp_clk_timebase_output_term(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x18f9)
@@ -930,7 +886,6 @@ class ExportSignals:
     @start_trig_output_term.setter
     def start_trig_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x584, val)
-
 
     @start_trig_output_term.deleter
     def start_trig_output_term(self):
@@ -951,7 +906,6 @@ class ExportSignals:
         val = val.value
         self._interpreter.set_exported_signal_attribute_int32(self._handle, 0x585, val)
 
-
     @start_trig_pulse_polarity.deleter
     def start_trig_pulse_polarity(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x585)
@@ -970,7 +924,6 @@ class ExportSignals:
     def sync_pulse_event_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x223c, val)
 
-
     @sync_pulse_event_output_term.deleter
     def sync_pulse_event_output_term(self):
         self._interpreter.reset_exported_signal_attribute(self._handle, 0x223c)
@@ -988,7 +941,6 @@ class ExportSignals:
     @watchdog_expired_event_output_term.setter
     def watchdog_expired_event_output_term(self, val):
         self._interpreter.set_exported_signal_attribute_string(self._handle, 0x21aa, val)
-
 
     @watchdog_expired_event_output_term.deleter
     def watchdog_expired_event_output_term(self):
@@ -1010,15 +962,7 @@ class ExportSignals:
                 installed devices. You can also specify a string
                 containing a comma-delimited list of terminal names.
         """
-        cfunc = lib_importer.windll.DAQmxExportSignal
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes_byte_str]
 
-        error_code = cfunc(
+        self._interpreter.export_signal(
             self._handle, signal_id.value, output_terminal)
-        check_for_error(error_code)
 

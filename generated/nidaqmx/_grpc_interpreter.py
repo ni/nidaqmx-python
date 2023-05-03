@@ -97,23 +97,22 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def cfg_anlg_multi_edge_ref_trig(
             self, task, trigger_sources, trigger_slope_array,
-            trigger_level_array, pretrigger_samples, array_size):
+            trigger_level_array, pretrigger_samples):
         response = self._invoke(
             self._client.CfgAnlgMultiEdgeRefTrig,
             grpc_types.CfgAnlgMultiEdgeRefTrigRequest(
-                array_size=array_size, pretrigger_samples=pretrigger_samples,
-                task=task, trigger_level_array=trigger_level_array,
+                pretrigger_samples=pretrigger_samples, task=task,
+                trigger_level_array=trigger_level_array,
                 trigger_slope_array=trigger_slope_array,
                 trigger_sources=trigger_sources))
 
     def cfg_anlg_multi_edge_start_trig(
             self, task, trigger_sources, trigger_slope_array,
-            trigger_level_array, array_size):
+            trigger_level_array):
         response = self._invoke(
             self._client.CfgAnlgMultiEdgeStartTrig,
             grpc_types.CfgAnlgMultiEdgeStartTrigRequest(
-                array_size=array_size, task=task,
-                trigger_level_array=trigger_level_array,
+                task=task, trigger_level_array=trigger_level_array,
                 trigger_slope_array=trigger_slope_array,
                 trigger_sources=trigger_sources))
 
@@ -1228,9 +1227,15 @@ class GrpcStubInterpreter(BaseInterpreter):
                 scaled_vals=scaled_vals))
 
     def create_task(self, session_name):
+        metadata = (
+            ('ni-api-key', self._grpc_options.api_key),
+        )
         response = self._invoke(
             self._client.CreateTask,
-            grpc_types.CreateTaskRequest(session_name=session_name))
+            grpc_types.CreateTaskRequest(
+                initialization_behavior=self._grpc_options.initialization_behavior,
+                session_name=session_name),
+            metadata=metadata)
         return response.task, response.new_session_initialized
 
     def create_tedsai_accel_chan(
@@ -1498,20 +1503,30 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def create_watchdog_timer_task(
             self, device_name, session_name, timeout, lines, exp_state):
+        metadata = (
+            ('ni-api-key', self._grpc_options.api_key),
+        )
         response = self._invoke(
             self._client.CreateWatchdogTimerTask,
             grpc_types.CreateWatchdogTimerTaskRequest(
-                device_name=device_name, session_name=session_name,
-                timeout=timeout))
+                device_name=device_name,
+                initialization_behavior=self._grpc_options.initialization_behavior,
+                session_name=session_name, timeout=timeout),
+            metadata=metadata)
         return response.task, response.new_session_initialized
 
     def create_watchdog_timer_task_ex(
             self, device_name, session_name, timeout):
+        metadata = (
+            ('ni-api-key', self._grpc_options.api_key),
+        )
         response = self._invoke(
             self._client.CreateWatchdogTimerTaskEx,
             grpc_types.CreateWatchdogTimerTaskExRequest(
-                device_name=device_name, session_name=session_name,
-                timeout=timeout))
+                device_name=device_name,
+                initialization_behavior=self._grpc_options.initialization_behavior,
+                session_name=session_name, timeout=timeout),
+            metadata=metadata)
         return response.task, response.new_session_initialized
 
     def delete_network_device(self, device_name):
@@ -2223,18 +2238,25 @@ class GrpcStubInterpreter(BaseInterpreter):
         return response.is_task_done
 
     def load_task(self, session_name):
+        metadata = (
+            ('ni-api-key', self._grpc_options.api_key),
+        )
         response = self._invoke(
             self._client.LoadTask,
-            grpc_types.LoadTaskRequest(session_name=session_name))
+            grpc_types.LoadTaskRequest(
+                initialization_behavior=self._grpc_options.initialization_behavior,
+                session_name=session_name),
+            metadata=metadata)
         return response.task, response.new_session_initialized
 
-    def read_analog_f64(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_analog_f64(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadAnalogF64,
             grpc_types.ReadAnalogF64Request(
                 fill_mode_raw=fill_mode,
-                num_samps_per_chan=num_samps_per_chan, task=task,
-                timeout=timeout))
+                num_samps_per_chan=num_samps_per_chan, read_array=read_array,
+                task=task, timeout=timeout))
         return response.read_array, response.samps_per_chan_read
 
     def read_analog_scalar_f64(self, task, timeout):
@@ -2243,58 +2265,62 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.ReadAnalogScalarF64Request(task=task, timeout=timeout))
         return response.value
 
-    def read_binary_i16(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_binary_i16(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadBinaryI16,
             grpc_types.ReadBinaryI16Request(
                 fill_mode_raw=fill_mode,
-                num_samps_per_chan=num_samps_per_chan, task=task,
-                timeout=timeout))
+                num_samps_per_chan=num_samps_per_chan, read_array=read_array,
+                task=task, timeout=timeout))
         return response.read_array, response.samps_per_chan_read
 
-    def read_binary_i32(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_binary_i32(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadBinaryI32,
             grpc_types.ReadBinaryI32Request(
                 fill_mode_raw=fill_mode,
-                num_samps_per_chan=num_samps_per_chan, task=task,
-                timeout=timeout))
+                num_samps_per_chan=num_samps_per_chan, read_array=read_array,
+                task=task, timeout=timeout))
         return response.read_array, response.samps_per_chan_read
 
-    def read_binary_u16(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_binary_u16(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadBinaryU16,
             grpc_types.ReadBinaryU16Request(
                 fill_mode_raw=fill_mode,
-                num_samps_per_chan=num_samps_per_chan, task=task,
-                timeout=timeout))
+                num_samps_per_chan=num_samps_per_chan, read_array=read_array,
+                task=task, timeout=timeout))
         return response.read_array, response.samps_per_chan_read
 
-    def read_binary_u32(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_binary_u32(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadBinaryU32,
             grpc_types.ReadBinaryU32Request(
                 fill_mode_raw=fill_mode,
-                num_samps_per_chan=num_samps_per_chan, task=task,
-                timeout=timeout))
+                num_samps_per_chan=num_samps_per_chan, read_array=read_array,
+                task=task, timeout=timeout))
         return response.read_array, response.samps_per_chan_read
 
-    def read_counter_f64(self, task, num_samps_per_chan, timeout):
+    def read_counter_f64(self, task, num_samps_per_chan, timeout, read_array):
         response = self._invoke(
             self._client.ReadCounterF64,
             grpc_types.ReadCounterF64Request(
-                num_samps_per_chan=num_samps_per_chan, task=task,
-                timeout=timeout))
+                num_samps_per_chan=num_samps_per_chan, read_array=read_array,
+                task=task, timeout=timeout))
         return response.read_array, response.samps_per_chan_read
 
     def read_counter_f64_ex(
-            self, task, num_samps_per_chan, timeout, fill_mode):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadCounterF64Ex,
             grpc_types.ReadCounterF64ExRequest(
                 fill_mode_raw=fill_mode,
-                num_samps_per_chan=num_samps_per_chan, task=task,
-                timeout=timeout))
+                num_samps_per_chan=num_samps_per_chan, read_array=read_array,
+                task=task, timeout=timeout))
         return response.read_array, response.samps_per_chan_read
 
     def read_counter_scalar_f64(self, task, timeout):
@@ -2309,30 +2335,34 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.ReadCounterScalarU32Request(task=task, timeout=timeout))
         return response.value
 
-    def read_counter_u32(self, task, num_samps_per_chan, timeout):
+    def read_counter_u32(self, task, num_samps_per_chan, timeout, read_array):
         response = self._invoke(
             self._client.ReadCounterU32,
             grpc_types.ReadCounterU32Request(
-                num_samps_per_chan=num_samps_per_chan, task=task,
-                timeout=timeout))
+                num_samps_per_chan=num_samps_per_chan, read_array=read_array,
+                task=task, timeout=timeout))
         return response.read_array, response.samps_per_chan_read
 
     def read_counter_u32_ex(
-            self, task, num_samps_per_chan, timeout, fill_mode):
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadCounterU32Ex,
             grpc_types.ReadCounterU32ExRequest(
                 fill_mode_raw=fill_mode,
-                num_samps_per_chan=num_samps_per_chan, task=task,
-                timeout=timeout))
+                num_samps_per_chan=num_samps_per_chan, read_array=read_array,
+                task=task, timeout=timeout))
         return response.read_array, response.samps_per_chan_read
 
-    def read_ctr_freq(self, task, num_samps_per_chan, timeout, interleaved):
+    def read_ctr_freq(
+            self, task, num_samps_per_chan, timeout, interleaved,
+            read_array_frequency, read_array_duty_cycle):
         response = self._invoke(
             self._client.ReadCtrFreq,
             grpc_types.ReadCtrFreqRequest(
                 interleaved_raw=interleaved,
-                num_samps_per_chan=num_samps_per_chan, task=task,
+                num_samps_per_chan=num_samps_per_chan,
+                read_array_duty_cycle=read_array_duty_cycle,
+                read_array_frequency=read_array_frequency, task=task,
                 timeout=timeout))
         return response.read_array_frequency, response.read_array_duty_cycle, response.samps_per_chan_read
 
@@ -2342,12 +2372,16 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.ReadCtrFreqScalarRequest(task=task, timeout=timeout))
         return response.frequency, response.duty_cycle
 
-    def read_ctr_ticks(self, task, num_samps_per_chan, timeout, interleaved):
+    def read_ctr_ticks(
+            self, task, num_samps_per_chan, timeout, interleaved,
+            read_array_high_ticks, read_array_low_ticks):
         response = self._invoke(
             self._client.ReadCtrTicks,
             grpc_types.ReadCtrTicksRequest(
                 interleaved_raw=interleaved,
-                num_samps_per_chan=num_samps_per_chan, task=task,
+                num_samps_per_chan=num_samps_per_chan,
+                read_array_high_ticks=read_array_high_ticks,
+                read_array_low_ticks=read_array_low_ticks, task=task,
                 timeout=timeout))
         return response.read_array_high_ticks, response.read_array_low_ticks, response.samps_per_chan_read
 
@@ -2357,12 +2391,16 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.ReadCtrTicksScalarRequest(task=task, timeout=timeout))
         return response.high_ticks, response.low_ticks
 
-    def read_ctr_time(self, task, num_samps_per_chan, timeout, interleaved):
+    def read_ctr_time(
+            self, task, num_samps_per_chan, timeout, interleaved,
+            read_array_high_time, read_array_low_time):
         response = self._invoke(
             self._client.ReadCtrTime,
             grpc_types.ReadCtrTimeRequest(
                 interleaved_raw=interleaved,
-                num_samps_per_chan=num_samps_per_chan, task=task,
+                num_samps_per_chan=num_samps_per_chan,
+                read_array_high_time=read_array_high_time,
+                read_array_low_time=read_array_low_time, task=task,
                 timeout=timeout))
         return response.read_array_high_time, response.read_array_low_time, response.samps_per_chan_read
 
@@ -2372,13 +2410,14 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.ReadCtrTimeScalarRequest(task=task, timeout=timeout))
         return response.high_time, response.low_time
 
-    def read_digital_lines(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_digital_lines(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadDigitalLines,
             grpc_types.ReadDigitalLinesRequest(
                 fill_mode_raw=fill_mode,
-                num_samps_per_chan=num_samps_per_chan, task=task,
-                timeout=timeout))
+                num_samps_per_chan=num_samps_per_chan, read_array=read_array,
+                task=task, timeout=timeout))
         return response.read_array, response.samps_per_chan_read, response.num_bytes_per_samp
 
     def read_digital_scalar_u32(self, task, timeout):
@@ -2387,54 +2426,59 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.ReadDigitalScalarU32Request(task=task, timeout=timeout))
         return response.value
 
-    def read_digital_u16(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_digital_u16(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadDigitalU16,
             grpc_types.ReadDigitalU16Request(
                 fill_mode_raw=fill_mode,
-                num_samps_per_chan=num_samps_per_chan, task=task,
-                timeout=timeout))
+                num_samps_per_chan=num_samps_per_chan, read_array=read_array,
+                task=task, timeout=timeout))
         return response.read_array, response.samps_per_chan_read
 
-    def read_digital_u32(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_digital_u32(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadDigitalU32,
             grpc_types.ReadDigitalU32Request(
                 fill_mode_raw=fill_mode,
-                num_samps_per_chan=num_samps_per_chan, task=task,
-                timeout=timeout))
+                num_samps_per_chan=num_samps_per_chan, read_array=read_array,
+                task=task, timeout=timeout))
         return response.read_array, response.samps_per_chan_read
 
-    def read_digital_u8(self, task, num_samps_per_chan, timeout, fill_mode):
+    def read_digital_u8(
+            self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         response = self._invoke(
             self._client.ReadDigitalU8,
             grpc_types.ReadDigitalU8Request(
                 fill_mode_raw=fill_mode,
-                num_samps_per_chan=num_samps_per_chan, task=task,
-                timeout=timeout))
+                num_samps_per_chan=num_samps_per_chan, read_array=read_array,
+                task=task, timeout=timeout))
         return response.read_array, response.samps_per_chan_read
 
     def read_power_binary_i16(
             self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
+            read_array_voltage, read_array_current):
         response = self._invoke(
             self._client.ReadPowerBinaryI16,
             grpc_types.ReadPowerBinaryI16Request(
-                array_size_in_samps=array_size_in_samps,
                 fill_mode_raw=fill_mode,
-                num_samps_per_chan=num_samps_per_chan, task=task,
+                num_samps_per_chan=num_samps_per_chan,
+                read_array_current=read_array_current,
+                read_array_voltage=read_array_voltage, task=task,
                 timeout=timeout))
         return response.read_array_voltage, response.read_array_current, response.samps_per_chan_read
 
     def read_power_f64(
             self, task, num_samps_per_chan, timeout, fill_mode,
-            array_size_in_samps):
+            read_array_voltage, read_array_current):
         response = self._invoke(
             self._client.ReadPowerF64,
             grpc_types.ReadPowerF64Request(
-                array_size_in_samps=array_size_in_samps,
                 fill_mode_raw=fill_mode,
-                num_samps_per_chan=num_samps_per_chan, task=task,
+                num_samps_per_chan=num_samps_per_chan,
+                read_array_current=read_array_current,
+                read_array_voltage=read_array_voltage, task=task,
                 timeout=timeout))
         return response.read_array_voltage, response.read_array_current, response.samps_per_chan_read
 
@@ -2444,13 +2488,12 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.ReadPowerScalarF64Request(task=task, timeout=timeout))
         return response.voltage, response.current
 
-    def read_raw(self, task, num_samps_per_chan, timeout, array_size_in_bytes):
+    def read_raw(self, task, num_samps_per_chan, timeout, read_array):
         response = self._invoke(
             self._client.ReadRaw,
             grpc_types.ReadRawRequest(
-                array_size_in_bytes=array_size_in_bytes,
-                num_samps_per_chan=num_samps_per_chan, task=task,
-                timeout=timeout))
+                num_samps_per_chan=num_samps_per_chan, read_array=read_array,
+                task=task, timeout=timeout))
         return response.read_array, response.samps_read, response.num_bytes_per_samp
 
     def register_done_event(
@@ -2604,11 +2647,11 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.SetAnalogPowerUpStatesRequest(device_name=device_name))
 
     def set_analog_power_up_states_with_output_type(
-            self, channel_names, state_array, channel_type_array, array_size):
+            self, channel_names, state_array, channel_type_array):
         response = self._invoke(
             self._client.SetAnalogPowerUpStatesWithOutputType,
             grpc_types.SetAnalogPowerUpStatesWithOutputTypeRequest(
-                array_size=array_size, channel_names=channel_names,
+                channel_names=channel_names,
                 channel_type_array_raw=channel_type_array,
                 state_array=state_array))
 
@@ -2654,13 +2697,11 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.SetChanAttributeDoubleRequest(
                 attribute=attribute, channel=channel, task=task, value=value))
 
-    def set_chan_attribute_double_array(
-            self, task, channel, attribute, value, size):
+    def set_chan_attribute_double_array(self, task, channel, attribute, value):
         response = self._invoke(
             self._client.SetChanAttributeDoubleArray,
             grpc_types.SetChanAttributeDoubleArrayRequest(
-                attribute=attribute, channel=channel, size=size, task=task,
-                value=value))
+                attribute=attribute, channel=channel, task=task, value=value))
 
     def set_chan_attribute_int32(self, task, channel, attribute, value):
         response = self._invoke(
@@ -2782,13 +2823,11 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.SetScaleAttributeDoubleRequest(
                 attribute=attribute, scale_name=scale_name, value=value))
 
-    def set_scale_attribute_double_array(
-            self, scale_name, attribute, value, size):
+    def set_scale_attribute_double_array(self, scale_name, attribute, value):
         response = self._invoke(
             self._client.SetScaleAttributeDoubleArray,
             grpc_types.SetScaleAttributeDoubleArrayRequest(
-                attribute=attribute, scale_name=scale_name, size=size,
-                value=value))
+                attribute=attribute, scale_name=scale_name, value=value))
 
     def set_scale_attribute_int32(self, scale_name, attribute, value):
         response = self._invoke(
@@ -2895,22 +2934,22 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.SetTrigAttributeDouble,
             grpc_types.SetTrigAttributeDoubleRequest(attribute=attribute, task=task, value=value))
 
-    def set_trig_attribute_double_array(self, task, attribute, value, size):
+    def set_trig_attribute_double_array(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTrigAttributeDoubleArray,
             grpc_types.SetTrigAttributeDoubleArrayRequest(
-                attribute=attribute, size=size, task=task, value=value))
+                attribute=attribute, task=task, value=value))
 
     def set_trig_attribute_int32(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTrigAttributeInt32,
             grpc_types.SetTrigAttributeInt32Request(attribute=attribute, task=task, value=value))
 
-    def set_trig_attribute_int32_array(self, task, attribute, value, size):
+    def set_trig_attribute_int32_array(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTrigAttributeInt32Array,
             grpc_types.SetTrigAttributeInt32ArrayRequest(
-                attribute=attribute, size=size, task=task, value=value))
+                attribute=attribute, task=task, value=value))
 
     def set_trig_attribute_string(self, task, attribute, value):
         response = self._invoke(

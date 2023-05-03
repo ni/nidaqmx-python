@@ -5,7 +5,6 @@ import numpy
 import deprecation
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
-from nidaqmx._task_modules.read_functions import _read_raw
 from nidaqmx.errors import check_for_error, is_string_buffer_too_small
 from nidaqmx._task_modules.channels.channel import Channel
 from nidaqmx.utils import unflatten_channel_string
@@ -98,7 +97,6 @@ class InStream:
     def auto_start(self, val):
         self._interpreter.set_read_attribute_bool(self._handle, 0x1826, val)
 
-
     @auto_start.deleter
     def auto_start(self):
         self._interpreter.reset_read_attribute(self._handle, 0x1826)
@@ -167,7 +165,6 @@ class InStream:
     def channels_to_read(self, val):
         val = val.name
         self._interpreter.set_read_attribute_string(self._handle, 0x1823, val)
-
 
     @channels_to_read.deleter
     def channels_to_read(self):
@@ -281,7 +278,6 @@ class InStream:
     def input_buf_size(self, val):
         self._interpreter.set_buffer_attribute_uint32(self._handle, 0x186c, val)
 
-
     @input_buf_size.deleter
     def input_buf_size(self):
         self._interpreter.reset_buffer_attribute(self._handle, 0x186c)
@@ -347,7 +343,6 @@ class InStream:
     def logging_file_path(self, val):
         self._interpreter.set_read_attribute_string(self._handle, 0x2ec4, val)
 
-
     @logging_file_path.deleter
     def logging_file_path(self):
         self._interpreter.reset_read_attribute(self._handle, 0x2ec4)
@@ -370,7 +365,6 @@ class InStream:
     def logging_file_preallocation_size(self, val):
         self._interpreter.set_read_attribute_uint64(self._handle, 0x2fc6, val)
 
-
     @logging_file_preallocation_size.deleter
     def logging_file_preallocation_size(self):
         self._interpreter.reset_read_attribute(self._handle, 0x2fc6)
@@ -389,7 +383,6 @@ class InStream:
     @logging_file_write_size.setter
     def logging_file_write_size(self, val):
         self._interpreter.set_read_attribute_uint32(self._handle, 0x2fc3, val)
-
 
     @logging_file_write_size.deleter
     def logging_file_write_size(self):
@@ -414,7 +407,6 @@ class InStream:
         val = val.value
         self._interpreter.set_read_attribute_int32(self._handle, 0x2ec5, val)
 
-
     @logging_mode.deleter
     def logging_mode(self):
         self._interpreter.reset_read_attribute(self._handle, 0x2ec5)
@@ -438,7 +430,6 @@ class InStream:
     @logging_pause.setter
     def logging_pause(self, val):
         self._interpreter.set_read_attribute_bool(self._handle, 0x2fe3, val)
-
 
     @logging_pause.deleter
     def logging_pause(self):
@@ -466,7 +457,6 @@ class InStream:
     def logging_samps_per_file(self, val):
         self._interpreter.set_read_attribute_uint64(self._handle, 0x2fe4, val)
 
-
     @logging_samps_per_file.deleter
     def logging_samps_per_file(self):
         self._interpreter.reset_read_attribute(self._handle, 0x2fe4)
@@ -492,7 +482,6 @@ class InStream:
     def logging_tdms_group_name(self, val):
         self._interpreter.set_read_attribute_string(self._handle, 0x2ec6, val)
 
-
     @logging_tdms_group_name.deleter
     def logging_tdms_group_name(self):
         self._interpreter.reset_read_attribute(self._handle, 0x2ec6)
@@ -511,7 +500,6 @@ class InStream:
     def logging_tdms_operation(self, val):
         val = val.value
         self._interpreter.set_read_attribute_int32(self._handle, 0x2ec7, val)
-
 
     @logging_tdms_operation.deleter
     def logging_tdms_operation(self):
@@ -543,7 +531,6 @@ class InStream:
     @offset.setter
     def offset(self, val):
         self._interpreter.set_read_attribute_int32(self._handle, 0x190b, val)
-
 
     @offset.deleter
     def offset(self):
@@ -732,7 +719,6 @@ class InStream:
         val = val.value
         self._interpreter.set_read_attribute_int32(self._handle, 0x1211, val)
 
-
     @overwrite.deleter
     def overwrite(self):
         self._interpreter.reset_read_attribute(self._handle, 0x1211)
@@ -812,7 +798,6 @@ class InStream:
     def read_all_avail_samp(self, val):
         self._interpreter.set_read_attribute_bool(self._handle, 0x1215, val)
 
-
     @read_all_avail_samp.deleter
     def read_all_avail_samp(self):
         self._interpreter.reset_read_attribute(self._handle, 0x1215)
@@ -838,7 +823,6 @@ class InStream:
     def relative_to(self, val):
         val = val.value
         self._interpreter.set_read_attribute_int32(self._handle, 0x190a, val)
-
 
     @relative_to.deleter
     def relative_to(self):
@@ -914,7 +898,6 @@ class InStream:
     def sleep_time(self, val):
         self._interpreter.set_read_attribute_double(self._handle, 0x22b0, val)
 
-
     @sleep_time.deleter
     def sleep_time(self):
         self._interpreter.reset_read_attribute(self._handle, 0x22b0)
@@ -968,7 +951,6 @@ class InStream:
         val = val.value
         self._interpreter.set_read_attribute_int32(self._handle, 0x2232, val)
 
-
     @wait_mode.deleter
     def wait_mode(self):
         self._interpreter.reset_read_attribute(self._handle, 0x2232)
@@ -1014,18 +996,9 @@ class InStream:
             operation (Optional[nidaqmx.constants.LoggingOperation]):
                 Specifies how to open the TDMS file.
         """
-        cfunc = lib_importer.windll.DAQmxConfigureLogging
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int, ctypes_byte_str, ctypes.c_int]
 
-        error_code = cfunc(
-            self._handle, file_path, logging_mode.value, group_name,
-            operation.value)
-        check_for_error(error_code)
+        self._interpreter.configure_logging(
+            self._handle, file_path, logging_mode.value, group_name, operation.value)
 
     def read(self, number_of_samples_per_channel=READ_ALL_AVAILABLE):
         """
@@ -1109,7 +1082,7 @@ class InStream:
 
         numpy_array = numpy.zeros(number_of_samples, dtype=dtype)
 
-        samples_read, number_of_bytes_per_sample = _read_raw(
+        _, samples_read, _ = self._interpreter.read_raw(
             self._handle, numpy_array, num_samps_per_chan,
             self.timeout)
 
@@ -1222,9 +1195,9 @@ class InStream:
             numpy_array.nbytes, (
                 number_of_channels * channels_to_read.ai_raw_samp_size / 8))
 
-        samples_read, _ = _read_raw(
-            self._handle, numpy_array, number_of_samples_per_channel,
-            self.timeout)
+        _, samples_read, _ = self._interpreter.read_raw(
+            self._handle, number_of_samples_per_channel,
+            self.timeout, numpy_array)
 
         return samples_read
 
@@ -1236,16 +1209,8 @@ class InStream:
             file_path (str): Specifies the path to the TDMS file to
                 which you want to log data.
         """
-        cfunc = lib_importer.windll.DAQmxStartNewFile
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
 
-        error_code = cfunc(
-            self._handle, file_path)
-        check_for_error(error_code)
+        self._interpreter.start_new_file(self._handle, file_path)
 
     @property
     @deprecation.deprecated(deprecated_in="0.7.0", details="Use overwrite instead.")
