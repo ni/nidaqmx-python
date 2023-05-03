@@ -77,7 +77,7 @@ class Task:
                 attempts to create multiple tasks with the same name, which
                 results in an error.
         """
-        self._handle = None
+        self._handle = lib_importer.task_handle(0)
 
         if grpc_options and not (
             grpc_options.session_name == "" or grpc_options.session_name == new_task_name
