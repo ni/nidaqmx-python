@@ -1,6 +1,6 @@
 <%
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
-    from codegen.utilities.interpreter_helpers import get_interpreter_functions,get_interpreter_parameter_signature,get_c_function_call_template, get_return_values, get_interpreter_params, get_instantiation_lines_for_output, LIBRARY_INTERPRETER_IGNORED_FUNCTIONS
+    from codegen.utilities.interpreter_helpers import get_interpreter_functions,get_interpreter_parameter_signature,get_c_function_call_template, get_return_values, get_params_for_function_signature, get_instantiation_lines_for_output, LIBRARY_INTERPRETER_IGNORED_FUNCTIONS
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
     functions = get_interpreter_functions(data)
 %>\
@@ -34,7 +34,7 @@ class LibraryInterpreter(BaseInterpreter):
     if func.function_name in LIBRARY_INTERPRETER_IGNORED_FUNCTIONS:
         continue
     endif
-    params = get_interpreter_params(func)
+    params = get_params_for_function_signature(func)
     sorted_params = order_function_parameters_by_optional(params)
     parameter_signature = get_interpreter_parameter_signature(is_python_factory, sorted_params)
     return_values = get_return_values(func)
