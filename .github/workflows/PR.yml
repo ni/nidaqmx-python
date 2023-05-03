@@ -39,3 +39,5 @@ jobs:
         run: git diff --exit-code
       - name: Run tests
         run: poetry run pytest
+      - name: Run tests using tox
+        run: python -m tox -c tox.ini
