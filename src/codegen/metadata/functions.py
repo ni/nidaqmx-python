@@ -18564,7 +18564,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'numpy.uint8',
+                'ctypes_data_type': 'numpy.bool',
                 'direction': 'out',
                 'has_explicit_buffer_size': True,
                 'is_list': True,
@@ -24148,7 +24148,7 @@ functions = {
                 'type': 'int32'
             },
             {
-                'ctypes_data_type': 'numpy.uint8',
+                'ctypes_data_type': 'numpy.bool',
                 'direction': 'in',
                 'is_list': True,
                 'is_optional_in_python': False,
