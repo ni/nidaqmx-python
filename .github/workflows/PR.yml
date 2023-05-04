@@ -37,3 +37,5 @@ jobs:
           poetry run python src/codegen --dest generated/nidaqmx
       - name: Check for files dirtied by codegen
         run: git diff --exit-code
+      - name: Run unit tests
+        run: poetry run pytest tests/unit
