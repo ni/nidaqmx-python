@@ -20,6 +20,7 @@ class Parameter:
         self._description = parameter_metadata.get("python_description")
         self._python_type_annotation = parameter_metadata.get("python_type_annotation")
         self._is_list = parameter_metadata.get("is_list", False)
+        self._is_grpc_enum = parameter_metadata.get("is_grpc_enum", False)
         self._size = parameter_metadata.get("size")
         self._has_explicit_buffer_size = (
             parameter_metadata.get("has_explicit_buffer_size", False) or self.size is not None
@@ -77,8 +78,13 @@ class Parameter:
         return self._enum
 
     @property
+    def is_grpc_enum(self):
+        """bool: Defines if the parameter is grpc enum or not."""
+        return self._is_grpc_enum
+
+    @property
     def is_enum(self):
-        """bool: Defines if the parameter is boolean or not."""
+        """bool: Defines if the parameter is enum or not."""
         return self._is_enum
 
     @property
