@@ -210,7 +210,7 @@ def get_varargs_parameters(func):
     return [p for p in func.parameters if p.repeating_argument]
 
 
-def get_params_for_function_signature(func, is_grpc_interpreter = False):
+def get_params_for_function_signature(func, is_grpc_interpreter=False):
     """Gets interpreter parameters for the function signature."""
     interpreter_parameters = []
     function_parameters = get_interpreter_parameters(func, is_grpc_interpreter)
@@ -407,7 +407,7 @@ def get_samps_per_chan_read_or_write_param(func_params):
     return None
 
 
-def get_interpreter_parameters(func, is_grpc_interpreter = False):
+def get_interpreter_parameters(func, is_grpc_interpreter=False):
     """Gets the parameters used in the interpreter functions."""
     size_params = _get_size_params(func.base_parameters)
     interpreter_parameters = []
@@ -436,6 +436,7 @@ def _is_handle_parameter(func, param):
         parameter_name = "task_handle" if param.parameter_name == "task" else param.parameter_name
         return parameter_name == camel_to_snake_case(func.handle_parameter.cvi_name)
     return False
+
 
 def check_if_parameters_contain_read_array(params):
     """Checks if the list of parameters contains read array parameter."""
