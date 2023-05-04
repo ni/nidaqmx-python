@@ -71,6 +71,7 @@ class Task:
         """
         # Initialize the fields that __del__ accesses so it doesn't crash when __init__ raises an exception.
         self._handle = None
+        self._close_on_exit = False
         self._saved_name = new_task_name
 
         if grpc_options and not (
@@ -79,7 +80,7 @@ class Task:
             raise DaqError(
                 f'Unsupported session name: "{grpc_options.session_name}". If a session name is specified, it must match the task name.',
                 DAQmxErrors.UNKNOWN,
-                task_name=self.name)
+                task_name=new_task_name)
         
         self._interpreter = utils._select_interpreter(grpc_options)
         self._handle, self._close_on_exit = self._interpreter.create_task(new_task_name)
@@ -87,7 +88,7 @@ class Task:
         self._initialize(self._handle, self._interpreter)
 
     def __del__(self):
-        if self._handle:
+        if self._handle is not None and self._close_on_exit:
             warnings.warn(
                 'Task of name "{}" was not explicitly closed before it was '
                 'destructed. Resources on the task device may still be '
@@ -112,7 +113,7 @@ class Task:
         return not self.__eq__(other)
 
     def __repr__(self):
-        return f'Task(name={self.name})'
+        return f'Task(name={self._saved_name})'
 
     @property
     def name(self):
