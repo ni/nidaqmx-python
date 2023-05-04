@@ -288,6 +288,11 @@ def is_custom_read_write_function(func):
     return func.python_codegen_method == "CustomCode_Read_Write"
 
 
+def is_custom_read_function(func):
+    """Returns True if the function is a read function."""
+    return func.python_codegen_method == "CustomCode_Read_Write" and "read_" in func.function_name
+
+
 def get_interpreter_output_params(func):
     """Gets the output parameters for the functions in interpreter."""
     return [p for p in get_interpreter_parameters(func) if p.direction == "out"]
