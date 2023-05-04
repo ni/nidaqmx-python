@@ -1,3 +1,4 @@
+import gc
 from unittest.mock import Mock
 
 import pytest
@@ -111,7 +112,7 @@ def test___call_alternate_constructor___create_task_not_called(
 
 @pytest.mark.parametrize("close_on_exit", [False, True])
 def test___varying_close_on_exit___close___clear_task_called(
-    interpreter: Mock, task: Task, close_on_exit: bool
+    interpreter: Mock, close_on_exit: bool
 ):
     expect_create_task(interpreter, "MyTaskHandle", close_on_exit)
     expect_get_task_name(interpreter, "MyTask")
@@ -123,7 +124,7 @@ def test___varying_close_on_exit___close___clear_task_called(
     interpreter.clear_task.assert_called_with(task_handle)
 
 
-def test___close_on_exit___context_manager___clear_task_called(interpreter: Mock, task: Task):
+def test___close_on_exit___context_manager___clear_task_called(interpreter: Mock):
     expect_create_task(interpreter, "MyTaskHandle", new_session_initialized=True)
     expect_get_task_name(interpreter, "MyTask")
     task = Task("MyTask")
@@ -135,9 +136,7 @@ def test___close_on_exit___context_manager___clear_task_called(interpreter: Mock
     interpreter.clear_task.assert_called_with(task_handle)
 
 
-def test___no_close_on_exit___context_manager___clear_task_not_called(
-    interpreter: Mock, task: Task
-):
+def test___no_close_on_exit___context_manager___clear_task_not_called(interpreter: Mock):
     expect_create_task(interpreter, "MyTaskHandle", new_session_initialized=False)
     expect_get_task_name(interpreter, "MyTask")
     task = Task("MyTask")
@@ -146,3 +145,13 @@ def test___no_close_on_exit___context_manager___clear_task_not_called(
         interpreter.clear_task.assert_not_called()
 
     interpreter.clear_task.assert_not_called()
+
+
+def test___close_on_exit___leak_task___raises_resource_warning(interpreter: Mock):
+    expect_create_task(interpreter, "MyTaskHandle", new_session_initialized=True)
+    expect_get_task_name(interpreter, "MyTask")
+    task = Task("MyTask")
+
+    with pytest.warns(ResourceWarning):
+        del task
+        gc.collect()
