@@ -38,4 +38,4 @@ jobs:
       - name: Check for files dirtied by codegen
         run: git diff --exit-code
       - name: Run unit tests
-        run: poetry run pytest tests/unit
+        run: poetry run pytest -v --cov=generated/nidaqmx tests/unit
