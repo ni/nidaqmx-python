@@ -45,32 +45,8 @@ class PersistedChannel:
         """
         str: Indicates the author of the global channel.
         """
-        cfunc = lib_importer.windll.DAQmxGetPersistedChanAuthor
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
+        val = self._interpreter.get_persisted_chan_attribute_string(self._name, 0x22d0)
+        return val
 
     @property
     def allow_interactive_editing(self):
@@ -78,21 +54,8 @@ class PersistedChannel:
         bool: Indicates whether the global channel can be edited in the
             DAQ Assistant.
         """
-        val = c_bool32()
-
-        cfunc = (lib_importer.windll.
-                 DAQmxGetPersistedChanAllowInteractiveEditing)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_persisted_chan_attribute_bool(self._name, 0x22d1)
+        return val
 
     @property
     def allow_interactive_deletion(self):
@@ -100,21 +63,8 @@ class PersistedChannel:
         bool: Indicates whether the global channel can be deleted
             through MAX.
         """
-        val = c_bool32()
-
-        cfunc = (lib_importer.windll.
-                 DAQmxGetPersistedChanAllowInteractiveDeletion)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_persisted_chan_attribute_bool(self._name, 0x22d2)
+        return val
 
     def delete(self):
         """
@@ -123,14 +73,7 @@ class PersistedChannel:
         This function does not remove the global channel from tasks that
         use it.
         """
-        cfunc = lib_importer.windll.DAQmxDeleteSavedGlobalChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [ctypes_byte_str]
-
-        error_code = cfunc(self._name)
-        check_for_error(error_code)
+        self._interpreter.delete_saved_global_chan(self._name)
 
 
 class _PersistedChannelAlternateConstructor(PersistedChannel):
@@ -139,6 +82,8 @@ class _PersistedChannelAlternateConstructor(PersistedChannel):
 
     This is a private API used to instantiate a PersistedChannel with an existing interpreter.
     """
+    # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
+    __slots__ = []
 
     def __init__(self, name, interpreter):
         """

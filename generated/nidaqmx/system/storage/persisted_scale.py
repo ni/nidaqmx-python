@@ -2,7 +2,7 @@ import ctypes
 
 from nidaqmx import utils
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
-from nidaqmx.scale import Scale
+from nidaqmx.scale import Scale, _ScaleAlternateConstructor
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
 
@@ -46,32 +46,8 @@ class PersistedScale:
         """
         str: Indicates the author of the custom scale.
         """
-        cfunc = lib_importer.windll.DAQmxGetPersistedScaleAuthor
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_char_p, ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._name, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
+        val = self._interpreter.get_persisted_scale_attribute_string(self._name, 0x22d4)
+        return val
 
     @property
     def allow_interactive_editing(self):
@@ -79,21 +55,8 @@ class PersistedScale:
         bool: Indicates whether the custom scale can be edited in the
             DAQ Assistant.
         """
-        val = c_bool32()
-
-        cfunc = (lib_importer.windll.
-                 DAQmxGetPersistedScaleAllowInteractiveEditing)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_persisted_scale_attribute_bool(self._name, 0x22d5)
+        return val
 
     @property
     def allow_interactive_deletion(self):
@@ -101,21 +64,8 @@ class PersistedScale:
         bool: Indicates whether the custom scale can be deleted through
             MAX.
         """
-        val = c_bool32()
-
-        cfunc = (lib_importer.windll.
-                 DAQmxGetPersistedScaleAllowInteractiveDeletion)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._name, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_persisted_scale_attribute_bool(self._name, 0x22d6)
+        return val
 
     def delete(self):
         """
@@ -124,14 +74,7 @@ class PersistedScale:
         This function does not remove the custom scale from virtual
         channels that use it.
         """
-        cfunc = lib_importer.windll.DAQmxDeleteSavedScale
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [ctypes_byte_str]
-
-        error_code = cfunc(self._name)
-        check_for_error(error_code)
+        self._interpreter.delete_saved_scale(self._name)
 
     def load(self):
         """
@@ -140,7 +83,7 @@ class PersistedScale:
         Returns:
             nidaqmx.scale.Scale: Indicates the loaded Scale object.
         """
-        return Scale(self._name)
+        return _ScaleAlternateConstructor(self._name, self._interpreter)
 
 
 class _PersistedScaleAlternateConstructor(PersistedScale):
@@ -149,6 +92,8 @@ class _PersistedScaleAlternateConstructor(PersistedScale):
 
     This is a private API used to instantiate a PersistedScale with an existing interpreter.
     """
+    # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
+    __slots__ = []
 
     def __init__(self, name, interpreter):
         """

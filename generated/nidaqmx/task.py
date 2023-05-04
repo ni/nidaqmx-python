@@ -7,11 +7,6 @@ from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx._task_modules.channels.channel import Channel
 from nidaqmx._task_modules.export_signals import ExportSignals
 from nidaqmx._task_modules.in_stream import InStream
-from nidaqmx._task_modules.read_functions import (
-    _read_analog_f_64, _read_power_f_64,
-    _read_digital_lines, _read_digital_u_32,
-    _read_ctr_freq,_read_ctr_time, _read_ctr_ticks,
-    _read_counter_u_32_ex, _read_counter_f_64_ex)
 from nidaqmx._task_modules.timing import Timing
 from nidaqmx._task_modules.triggers import Triggers
 from nidaqmx._task_modules.out_stream import OutStream
@@ -27,16 +22,13 @@ from nidaqmx._task_modules.di_channel_collection import (
     DIChannelCollection)
 from nidaqmx._task_modules.do_channel_collection import (
     DOChannelCollection)
-from nidaqmx._task_modules.write_functions import (
-    _write_analog_f_64, _write_digital_lines, _write_digital_u_32,
-    _write_ctr_freq, _write_ctr_time, _write_ctr_ticks)
 from nidaqmx.constants import (
-    AcquisitionType, ChannelType, UsageTypeAI, UsageTypeCI, EveryNSamplesEventType,
+    AcquisitionType, ChannelType, FillMode, UsageTypeAI, UsageTypeCI, EveryNSamplesEventType,
     READ_ALL_AVAILABLE, UsageTypeCO, _Save)
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, DaqError, DaqResourceWarning)
-from nidaqmx.system.device import Device
+from nidaqmx.system.device import _DeviceAlternateConstructor, Device
 from nidaqmx.types import CtrFreq, CtrTick, CtrTime, PowerMeasurement
 from nidaqmx.utils import unflatten_channel_string, flatten_channel_string
 
@@ -77,7 +69,9 @@ class Task:
                 attempts to create multiple tasks with the same name, which
                 results in an error.
         """
-        self._handle = lib_importer.task_handle(0)
+        # Initialize the fields that __del__ accesses so it doesn't crash when __init__ raises an exception.
+        self._handle = None
+        self._saved_name = new_task_name
 
         if grpc_options and not (
             grpc_options.session_name == "" or grpc_options.session_name == new_task_name
@@ -86,19 +80,9 @@ class Task:
                 f'Unsupported session name: "{grpc_options.session_name}". If a session name is specified, it must match the task name.',
                 DAQmxErrors.UNKNOWN,
                 task_name=self.name)
-    
+        
         self._interpreter = utils._select_interpreter(grpc_options)
-        cfunc = lib_importer.windll.DAQmxCreateTask
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        ctypes.POINTER(lib_importer.task_handle)]
-
-        error_code = cfunc(
-            new_task_name, ctypes.byref(self._handle))
-        check_for_error(error_code)
+        self._handle, self._close_on_exit = self._interpreter.create_task(new_task_name)
 
         self._initialize(self._handle, self._interpreter)
 
@@ -118,7 +102,8 @@ class Task:
         return False
 
     def __exit__(self, type, value, traceback):
-        self.close()
+        if self._close_on_exit:
+            self.close()
 
     def __hash__(self):
         return hash(self._handle)
@@ -134,33 +119,8 @@ class Task:
         """
         str: Indicates the name of the task.
         """
-        cfunc = lib_importer.windll.DAQmxGetTaskName
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
+        val = self._interpreter.get_task_attribute_string(self._handle, 0x1276)
+        return val
 
     @property
     def channels(self):
@@ -177,53 +137,16 @@ class Task:
         """
         List[str]: Indicates the names of all virtual channels in the task.
         """
-        cfunc = lib_importer.windll.DAQmxGetTaskChannels
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_task_attribute_string(self._handle, 0x1273)
+        return unflatten_channel_string(val)
 
     @property
     def number_of_channels(self):
         """
         int: Indicates the number of virtual channels in the task.
         """
-        val = ctypes.c_uint()
-
-        cfunc = lib_importer.windll.DAQmxGetTaskNumChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_uint)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_task_attribute_uint32(self._handle, 0x2181)
+        return val
 
     @property
     def devices(self):
@@ -231,54 +154,17 @@ class Task:
         List[:class:`nidaqmx.system.device.Device`]: Indicates a list 
             of Device objects representing all the devices in the task.
         """
-        cfunc = lib_importer.windll.DAQmxGetTaskDevices
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return [Device(v) for v in
-                unflatten_channel_string(val.value.decode('ascii'))]
+        val = self._interpreter.get_task_attribute_string(self._handle, 0x230e)
+        return [_DeviceAlternateConstructor(v, self._interpreter) for v in
+                unflatten_channel_string(val)]
 
     @property
     def number_of_devices(self):
         """
         int: Indicates the number of devices in the task.
         """
-        val = ctypes.c_uint()
-
-        cfunc = lib_importer.windll.DAQmxGetTaskNumDevices
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_uint)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_task_attribute_uint32(self._handle, 0x29ba)
+        return val
 
     @property
     def ai_channels(self):
@@ -437,18 +323,9 @@ class Task:
                 If you pass an invalid channel, NI-DAQmx returns an error.
                 This value is ignored if it is empty.
         """
-        cfunc = lib_importer.windll.DAQmxAddGlobalChansToTask
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
         channels = flatten_channel_string([g._name for g in global_channels])
 
-        error_code = cfunc(
-            self._handle, channels)
-        check_for_error(error_code)
+        self._interpreter.add_global_chans_to_task(self._handle, channels)
 
     def close(self):
         """
@@ -467,17 +344,8 @@ class Task:
                 'Attempted to close NI-DAQmx task of name "{}" but task was '
                 'already closed.'.format(self._saved_name), DaqResourceWarning)
             return
-
-        cfunc = lib_importer.windll.DAQmxClearTask
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        
+        self._interpreter.clear_task(self._handle)
 
         self._handle = None
 
@@ -489,16 +357,7 @@ class Task:
             action (nidaqmx.constants.TaskMode): Specifies how to alter
                 the task state.
         """
-        cfunc = lib_importer.windll.DAQmxTaskControl
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, action.value)
-        check_for_error(error_code)
+        self._interpreter.task_control(self._handle, action.value)
 
     def is_task_done(self):
         """
@@ -511,20 +370,9 @@ class Task:
 
             Indicates if the measurement or generation completed.
         """
-        is_task_done = c_bool32()
+        is_task_done = self._interpreter.is_task_done(self._handle)
 
-        cfunc = lib_importer.windll.DAQmxIsTaskDone
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(is_task_done))
-        check_for_error(error_code)
-
-        return is_task_done.value
+        return is_task_done
 
     def read(self, number_of_samples_per_channel=NUM_SAMPLES_UNSET,
              timeout=10.0):
@@ -640,9 +488,9 @@ class Task:
                 voltages = numpy.zeros(array_shape, dtype=numpy.float64)
                 currents = numpy.zeros(array_shape, dtype=numpy.float64)
 
-                samples_read = _read_power_f_64(
-                    self._handle, voltages, currents,
-                    number_of_samples_per_channel, timeout)
+                _, _, samples_read = self._interpreter.read_power_f64(
+                    self._handle, number_of_samples_per_channel, timeout, 
+                    FillMode.GROUP_BY_CHANNEL.value, voltages, currents)
 
                 if number_of_channels > 1:
                     if number_of_samples_per_channel == 1:
@@ -674,21 +522,23 @@ class Task:
                         return data[:samples_read]
             else:
                 data = numpy.zeros(array_shape, dtype=numpy.float64)
-                samples_read = _read_analog_f_64(
-                    self._handle, data, number_of_samples_per_channel, timeout)
+                _, samples_read = self._interpreter.read_analog_f64(
+                    self._handle, number_of_samples_per_channel, timeout, 
+                    FillMode.GROUP_BY_CHANNEL.value, data)
 
         # Digital Input or Digital Output
         elif (read_chan_type == ChannelType.DIGITAL_INPUT or
                 read_chan_type == ChannelType.DIGITAL_OUTPUT):
             if self.in_stream.di_num_booleans_per_chan == 1:
                 data = numpy.zeros(array_shape, dtype=bool)
-                samples_read = _read_digital_lines(
-                    self._handle, data, number_of_samples_per_channel, timeout
-                    ).samps_per_chan_read
+                _, samples_read, _ = self._interpreter.read_digital_lines(
+                    self._handle, number_of_samples_per_channel, timeout, 
+                    FillMode.GROUP_BY_CHANNEL.value, data)
             else:
                 data = numpy.zeros(array_shape, dtype=numpy.uint32)
-                samples_read = _read_digital_u_32(
-                    self._handle, data, number_of_samples_per_channel, timeout)
+                _, samples_read = self._interpreter.read_digital_u32(
+                    self._handle, number_of_samples_per_channel, timeout,
+                    FillMode.GROUP_BY_CHANNEL.value, data)
 
         # Counter Input
         elif read_chan_type == ChannelType.COUNTER_INPUT:
@@ -698,9 +548,9 @@ class Task:
                 frequencies = numpy.zeros(array_shape, dtype=numpy.float64)
                 duty_cycles = numpy.zeros(array_shape, dtype=numpy.float64)
 
-                samples_read = _read_ctr_freq(
-                    self._handle, frequencies, duty_cycles,
-                    number_of_samples_per_channel, timeout)
+                _, _, samples_read = self._interpreter.read_ctr_freq(
+                    self._handle, number_of_samples_per_channel, timeout, 
+                    FillMode.GROUP_BY_CHANNEL.value, frequencies, duty_cycles)
 
                 data = []
                 for f, d in zip(frequencies, duty_cycles):
@@ -710,9 +560,9 @@ class Task:
                 high_times = numpy.zeros(array_shape, dtype=numpy.float64)
                 low_times = numpy.zeros(array_shape, dtype=numpy.float64)
 
-                samples_read = _read_ctr_time(
-                    self._handle, high_times, low_times,
-                    number_of_samples_per_channel, timeout)
+                _, _, samples_read = self._interpreter.read_ctr_time(
+                    self._handle, number_of_samples_per_channel, timeout, 
+                    FillMode.GROUP_BY_CHANNEL.value, high_times, low_times)
                 data = []
                 for h, l in zip(high_times, low_times):
                     data.append(CtrTime(high_time=h, low_time=l))
@@ -721,9 +571,9 @@ class Task:
                 high_ticks = numpy.zeros(array_shape, dtype=numpy.uint32)
                 low_ticks = numpy.zeros(array_shape, dtype=numpy.uint32)
 
-                samples_read = _read_ctr_ticks(
-                    self._handle, high_ticks, low_ticks,
-                    number_of_samples_per_channel, timeout)
+                _, _ , samples_read = self._interpreter.read_ctr_ticks(
+                    self._handle, number_of_samples_per_channel, timeout, 
+                    FillMode.GROUP_BY_CHANNEL.value, high_ticks, low_ticks)
                 data = []
                 for h, l in zip(high_ticks, low_ticks):
                     data.append(CtrTick(high_tick=h, low_tick=l))
@@ -731,14 +581,16 @@ class Task:
             elif meas_type == UsageTypeCI.COUNT_EDGES:
                 data = numpy.zeros(array_shape, dtype=numpy.uint32)
 
-                samples_read = _read_counter_u_32_ex(
-                    self._handle, data, number_of_samples_per_channel, timeout)
+                _, samples_read = self._interpreter.read_counter_u32_ex(
+                    self._handle, number_of_samples_per_channel, timeout, 
+                    FillMode.GROUP_BY_CHANNEL.value, data)
 
             else:
                 data = numpy.zeros(array_shape, dtype=numpy.float64)
 
-                samples_read = _read_counter_f_64_ex(
-                    self._handle, data, number_of_samples_per_channel, timeout)
+                _, samples_read = self._interpreter.read_counter_f64_ex(
+                    self._handle, number_of_samples_per_channel, timeout, 
+                    FillMode.GROUP_BY_CHANNEL.value, data)
         else:
             raise DaqError(
                 'Read failed, because there are no channels in this task from '
@@ -798,29 +650,7 @@ class Task:
                 Passing None for this parameter unregisters the event callback
                 function.
         """
-        DAQmxDoneEventCallbackPtr = ctypes.CFUNCTYPE(
-            ctypes.c_int32, lib_importer.task_handle, ctypes.c_int32,
-            ctypes.c_void_p)
-
-        cfunc = lib_importer.windll.DAQmxRegisterDoneEvent
-
-        with cfunc.arglock:
-            if callback_method is not None:
-                callback_method_ptr = DAQmxDoneEventCallbackPtr(callback_method)
-                self._done_event_callbacks.append(callback_method_ptr)
-                cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_uint,
-                    DAQmxDoneEventCallbackPtr, ctypes.c_void_p]
-            else:
-                del self._done_event_callbacks[:]
-                callback_method_ptr = None
-                cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_uint, ctypes.c_void_p,
-                    ctypes.c_void_p]
-
-            error_code = cfunc(
-                self._handle, 0, callback_method_ptr, None)
-        check_for_error(error_code)
+        self._interpreter.register_done_event(self._handle, 0, callback_method, None)
 
     def register_every_n_samples_acquired_into_buffer_event(
             self, sample_interval, callback_method):
@@ -856,33 +686,8 @@ class Task:
                 Passing None for this parameter unregisters the event callback
                 function.
         """
-        DAQmxEveryNSamplesEventCallbackPtr = ctypes.CFUNCTYPE(
-            ctypes.c_int32, lib_importer.task_handle, ctypes.c_int32,
-            ctypes.c_uint32, ctypes.c_void_p)
-
-        cfunc = lib_importer.windll.DAQmxRegisterEveryNSamplesEvent
-
-        with cfunc.arglock:
-            if callback_method is not None:
-                callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr(
-                    callback_method)
-                self._every_n_acquired_event_callbacks.append(
-                    callback_method_ptr)
-                cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-                    ctypes.c_uint, DAQmxEveryNSamplesEventCallbackPtr,
-                    ctypes.c_void_p]
-            else:
-                del self._every_n_acquired_event_callbacks[:]
-                callback_method_ptr = None
-                cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-                    ctypes.c_uint, ctypes.c_void_p, ctypes.c_void_p]
-
-            error_code = cfunc(
-                self._handle, EveryNSamplesEventType.ACQUIRED_INTO_BUFFER.value,
-                sample_interval, 0, callback_method_ptr, None)
-        check_for_error(error_code)
+        self._interpreter.register_every_n_samples_event(self._handle, EveryNSamplesEventType.ACQUIRED_INTO_BUFFER.value,
+                sample_interval, 0, callback_method, None)
 
     def register_every_n_samples_transferred_from_buffer_event(
             self, sample_interval, callback_method):
@@ -918,34 +723,8 @@ class Task:
                 Passing None for this parameter unregisters the event callback
                 function.
         """
-        DAQmxEveryNSamplesEventCallbackPtr = ctypes.CFUNCTYPE(
-            ctypes.c_int32, lib_importer.task_handle, ctypes.c_int32,
-            ctypes.c_uint32, ctypes.c_void_p)
-
-        cfunc = lib_importer.windll.DAQmxRegisterEveryNSamplesEvent
-
-        with cfunc.arglock:
-            if callback_method is not None:
-                callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr(
-                    callback_method)
-                self._every_n_transferred_event_callbacks.append(
-                    callback_method_ptr)
-                cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-                    ctypes.c_uint, DAQmxEveryNSamplesEventCallbackPtr,
-                    ctypes.c_void_p]
-            else:
-                del self._every_n_transferred_event_callbacks[:]
-                callback_method_ptr = None
-                cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-                    ctypes.c_uint, ctypes.c_void_p, ctypes.c_void_p]
-
-            error_code = cfunc(
-                self._handle,
-                EveryNSamplesEventType.TRANSFERRED_FROM_BUFFER.value,
-                sample_interval, 0, callback_method_ptr, None)
-        check_for_error(error_code)
+        self._interpreter.register_every_n_samples_event(self._handle, EveryNSamplesEventType.TRANSFERRED_FROM_BUFFER.value,
+                sample_interval, 0, callback_method, None)
 
     def register_signal_event(self, signal_type, callback_method):
         """
@@ -976,30 +755,7 @@ class Task:
                 Passing None for this parameter unregisters the event callback
                 function.
         """
-        DAQmxSignalEventCallbackPtr = ctypes.CFUNCTYPE(
-            ctypes.c_int32, lib_importer.task_handle, ctypes.c_int32,
-            ctypes.c_void_p)
-
-        cfunc = lib_importer.windll.DAQmxRegisterSignalEvent
-
-        with cfunc.arglock:
-            if callback_method is not None:
-                callback_method_ptr = DAQmxSignalEventCallbackPtr(
-                    callback_method)
-                self._signal_event_callbacks.append(callback_method_ptr)
-                cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-                    DAQmxSignalEventCallbackPtr, ctypes.c_void_p]
-            else:
-                del self._signal_event_callbacks[:]
-                callback_method_ptr = None
-                cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-                    ctypes.c_void_p, ctypes.c_void_p]
-
-            error_code = cfunc(
-                self._handle, signal_type.value, 0, callback_method_ptr, None)
-        check_for_error(error_code)
+        self._interpreter.register_signal_event(self._handle, signal_type.value, 0, callback_method, None)
 
     def save(self, save_as="", author="", overwrite_existing_task=False,
              allow_interactive_editing=True, allow_interactive_deletion=True):
@@ -1038,17 +794,7 @@ class Task:
         if allow_interactive_deletion:
             options |= _Save.ALLOW_INTERACTIVE_DELETION.value
 
-        cfunc = lib_importer.windll.DAQmxSaveTask
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_uint]
-
-        error_code = cfunc(
-            self._handle, save_as, author, options)
-        check_for_error(error_code)
+        self._interpreter.save_task(self._handle, save_as, author, options)
 
     def start(self):
         """
@@ -1067,14 +813,7 @@ class Task:
         repeatedly. Starting and stopping a task repeatedly reduces the
         performance of the application.
         """
-        cfunc = lib_importer.windll.DAQmxStartTask
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [lib_importer.task_handle]
-
-        error_code = cfunc(self._handle)
-        check_for_error(error_code)
+        self._interpreter.start_task(self._handle)
 
     def stop(self):
         """
@@ -1088,14 +827,7 @@ class Task:
         repeatedly. Starting and stopping a task repeatedly reduces the
         performance of the application.
         """
-        cfunc = lib_importer.windll.DAQmxStopTask
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [lib_importer.task_handle]
-
-        error_code = cfunc(self._handle)
-        check_for_error(error_code)
+        self._interpreter.stop_task(self._handle)
 
     def wait_until_done(self, timeout=10.0):
         """
@@ -1113,14 +845,7 @@ class Task:
                 set timeout (sec) to 0, the method checks once and returns
                 an error if the measurement or generation is not done.
         """
-        cfunc = lib_importer.windll.DAQmxWaitUntilTaskDone
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [lib_importer.task_handle, ctypes.c_double]
-
-        error_code = cfunc(self._handle, timeout)
-        check_for_error(error_code)
+        self._interpreter.wait_until_task_done(self._handle, timeout)
 
     def _raise_invalid_num_lines_error(
             self, num_lines_expected, num_lines_in_data):
@@ -1281,9 +1006,9 @@ class Task:
         # Analog Input
         if write_chan_type == ChannelType.ANALOG_OUTPUT:
             data = numpy.asarray(data, dtype=numpy.float64)
-            return _write_analog_f_64(
-                self._handle, data, number_of_samples_per_channel, auto_start,
-                timeout)
+            return self._interpreter.write_analog_f64(
+                self._handle, number_of_samples_per_channel, auto_start,
+                timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
         # Digital Input
         elif write_chan_type == ChannelType.DIGITAL_OUTPUT:
@@ -1298,9 +1023,9 @@ class Task:
                         DAQmxErrors.UNKNOWN, task_name=self.name)
 
                 data = numpy.asarray(data, dtype=bool)
-                return _write_digital_lines(
-                    self._handle, data, number_of_samples_per_channel,
-                    auto_start, timeout)
+                return self._interpreter.write_digital_lines(
+                    self._handle, number_of_samples_per_channel,
+                    auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
             else:
                 if (not isinstance(element, int) and
                         not isinstance(element, numpy.uint32)):
@@ -1312,9 +1037,9 @@ class Task:
                         DAQmxErrors.UNKNOWN, task_name=self.name)
 
                 data = numpy.asarray(data, dtype=numpy.uint32)
-                return _write_digital_u_32(
-                    self._handle, data, number_of_samples_per_channel,
-                    auto_start, timeout)
+                return self._interpreter.write_digital_u32(
+                    self._handle, number_of_samples_per_channel,
+                    auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
         # Counter Input
         elif write_chan_type == ChannelType.COUNTER_OUTPUT:
@@ -1333,9 +1058,9 @@ class Task:
                 frequencies = numpy.asarray(frequencies, dtype=numpy.float64)
                 duty_cycles = numpy.asarray(duty_cycles, dtype=numpy.float64)
 
-                return _write_ctr_freq(
-                    self._handle, frequencies, duty_cycles,
-                    number_of_samples_per_channel, auto_start, timeout)
+                return self._interpreter.write_ctr_freq(
+                    self._handle, number_of_samples_per_channel, auto_start, timeout, 
+                    FillMode.GROUP_BY_CHANNEL.value, frequencies, duty_cycles)
 
             elif output_type == UsageTypeCO.PULSE_TIME:
                 high_times = []
@@ -1347,9 +1072,9 @@ class Task:
                 high_times = numpy.asarray(high_times, dtype=numpy.float64)
                 low_times = numpy.asarray(low_times, dtype=numpy.float64)
 
-                return _write_ctr_time(
-                    self._handle, high_times, low_times,
-                    number_of_samples_per_channel, auto_start, timeout)
+                return self._interpreter.write_ctr_time(
+                    self._handle, number_of_samples_per_channel, auto_start, timeout,
+                    FillMode.GROUP_BY_CHANNEL.value, high_times, low_times)
 
             elif output_type == UsageTypeCO.PULSE_TICKS:
                 high_ticks = []
@@ -1361,9 +1086,9 @@ class Task:
                 high_ticks = numpy.asarray(high_ticks, dtype=numpy.uint32)
                 low_ticks = numpy.asarray(low_ticks, dtype=numpy.uint32)
 
-                return _write_ctr_ticks(
-                    self._handle, high_ticks, low_ticks,
-                    number_of_samples_per_channel, auto_start, timeout)
+                return self._interpreter.write_ctr_ticks(
+                    self._handle, number_of_samples_per_channel, auto_start, timeout, 
+                    FillMode.GROUP_BY_CHANNEL.value, high_ticks, low_ticks)
         else:
             raise DaqError(
                 'Write failed, because there are no output channels in this '
@@ -1378,17 +1103,21 @@ class _TaskAlternateConstructor(Task):
 
     This is a private API used to instantiate a Task with an existing task handle and interpreter.
     """
+    # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
+    __slots__ = []
 
-    def __init__(self, task_handle, interpreter):
+    def __init__(self, task_handle, interpreter, close_on_exit):
         """
         Args:
             task_handle: Specifies the task handle from which to create a
                 Task object.
             interpreter: Specifies the interpreter instance.
+            close_on_exit: Specifies whether the task's context manager closes the task.
             
         """
         self._handle = task_handle
         self._interpreter = interpreter
+        self._close_on_exit = close_on_exit
 
         self._initialize(self._handle, self._interpreter)
 

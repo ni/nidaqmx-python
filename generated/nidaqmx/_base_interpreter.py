@@ -5,6 +5,7 @@ class BaseInterpreter(abc.ABC):
     """
     Contains signature of functions for all DAQmx APIs.
     """
+    __slots__ = []
 
     @abc.abstractmethod
     def add_cdaq_sync_connection(self, port_list):
@@ -49,13 +50,13 @@ class BaseInterpreter(abc.ABC):
     @abc.abstractmethod
     def cfg_anlg_multi_edge_ref_trig(
             self, task, trigger_sources, trigger_slope_array,
-            trigger_level_array, pretrigger_samples, array_size):
+            trigger_level_array, pretrigger_samples):
         raise NotImplementedError
 
     @abc.abstractmethod
     def cfg_anlg_multi_edge_start_trig(
             self, task, trigger_sources, trigger_slope_array,
-            trigger_level_array, array_size):
+            trigger_level_array):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1435,7 +1436,7 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def set_analog_power_up_states_with_output_type(
-            self, channel_names, state_array, channel_type_array, array_size):
+            self, channel_names, state_array, channel_type_array):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1467,8 +1468,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def set_chan_attribute_double_array(
-            self, task, channel, attribute, value, size):
+    def set_chan_attribute_double_array(self, task, channel, attribute, value):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1558,8 +1558,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def set_scale_attribute_double_array(
-            self, scale_name, attribute, value, size):
+    def set_scale_attribute_double_array(self, scale_name, attribute, value):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1633,7 +1632,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def set_trig_attribute_double_array(self, task, attribute, value, size):
+    def set_trig_attribute_double_array(self, task, attribute, value):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1641,7 +1640,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def set_trig_attribute_int32_array(self, task, attribute, value, size):
+    def set_trig_attribute_int32_array(self, task, attribute, value):
         raise NotImplementedError
 
     @abc.abstractmethod

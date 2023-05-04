@@ -60,22 +60,13 @@ class WatchdogTask:
                 with the digital physical channel expiration states input.
             grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
         """
+        # Initialize the fields that __del__ accesses so it doesn't crash when __init__ raises an exception.
+        self._handle = None
+        self._saved_name = task_name
+
         self._interpreter = utils._select_interpreter(grpc_options)
 
-        self._handle = lib_importer.task_handle(0)
-
-        cfunc = lib_importer.windll.DAQmxCreateWatchdogTimerTaskEx
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes_byte_str,
-                        ctypes.POINTER(lib_importer.task_handle),
-                        ctypes.c_double]
-
-        error_code = cfunc(
-            device_name, task_name, ctypes.byref(self._handle), timeout)
-        check_for_error(error_code)
+        self._handle, self._close_on_exit = self._interpreter.create_watchdog_timer_task_ex(device_name, task_name, timeout)
 
         # Saved name is used in self.close() to throw graceful error on
         # double closes.
@@ -87,13 +78,14 @@ class WatchdogTask:
             warnings.warn(
                 'Task of name "{}" was not explicitly closed before it was '
                 'destructed. Resources on the task device may still be '
-                'reserved.'.format(self.name), DaqResourceWarning)
+                'reserved.'.format(self._saved_name), DaqResourceWarning)
 
     def __enter__(self):
         return self
 
     def __exit__(self, type, value, traceback):
-        self.close()
+        if self._close_on_exit:
+            self.close()
 
     @property
     def expiration_states(self):
@@ -114,33 +106,8 @@ ${property_template.script_property(attribute)}\
         """
         str: Indicates the name of the task.
         """
-        cfunc = lib_importer.windll.DAQmxGetTaskName
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
+        val = self._interpreter.get_task_attribute_string(self._handle, 0x1276)
+        return val
 
     def _control_watchdog_task(self, action):
         """
@@ -153,16 +120,7 @@ ${property_template.script_property(attribute)}\
             action (nidaqmx.constants.WDTTaskAction): Specifies how to
                 control the watchdog timer task.
         """
-        cfunc = lib_importer.windll.DAQmxControlWatchdogTask
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, action.value)
-        check_for_error(error_code)
+        self._interpreter.control_watchdog_task(self._handle, action.value)
 
     def cfg_watchdog_ao_expir_states(self, expiration_states):
         """
@@ -198,20 +156,7 @@ ${property_template.script_property(attribute)}\
         output_type = numpy.int32(
             [e.output_type.value for e in expiration_states])
 
-        cfunc = lib_importer.windll.DAQmxCfgWatchdogAOExpirStates
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
-                        wrapped_ndpointer(dtype=numpy.int32, flags=('C', 'W')),
-                        ctypes.c_uint]
-
-        error_code = cfunc(
-            self._handle, channel_names, expir_state, output_type,
-            len(expiration_states))
-        check_for_error(error_code)
+        self._interpreter.cfg_watchdog_ao_expir_states(self._handle, channel_names, expir_state, output_type)
 
         return [ExpirationState(self._handle, e.physical_channel, self._interpreter)
                 for e in expiration_states]
@@ -243,18 +188,7 @@ ${property_template.script_property(attribute)}\
         expir_state = numpy.int32(
             [e.expiration_state.value for e in expiration_states])
 
-        cfunc = lib_importer.windll.DAQmxCfgWatchdogCOExpirStates
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.int32, flags=('C', 'W')),
-                        ctypes.c_uint]
-
-        error_code = cfunc(
-            self._handle, channel_names, expir_state, len(expiration_states))
-        check_for_error(error_code)
+        self._interpreter.cfg_watchdog_co_expir_states(self._handle, channel_names, expir_state)
 
         return [ExpirationState(self._handle, e.physical_channel, self._interpreter)
                 for e in expiration_states]
@@ -286,18 +220,7 @@ ${property_template.script_property(attribute)}\
         expir_state = numpy.int32(
             [e.expiration_state.value for e in expiration_states])
 
-        cfunc = lib_importer.windll.DAQmxCfgWatchdogDOExpirStates
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.int32, flags=('C', 'W')),
-                        ctypes.c_uint]
-
-        error_code = cfunc(
-            self._handle, channel_names, expir_state, len(expiration_states))
-        check_for_error(error_code)
+        self._interpreter.cfg_watchdog_do_expir_states(self._handle, channel_names, expir_state)
 
         return [ExpirationState(self._handle, e.physical_channel, self._interpreter)
                 for e in expiration_states]
@@ -330,15 +253,7 @@ ${property_template.script_property(attribute)}\
                 'already closed.'.format(self._saved_name), DaqResourceWarning)
             return
 
-        cfunc = lib_importer.windll.DAQmxClearTask
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(self._handle)
-        check_for_error(error_code)
+        self._interpreter.clear_task(self._handle)
 
         self._handle = None
 
@@ -350,16 +265,7 @@ ${property_template.script_property(attribute)}\
             action (nidaqmx.constants.TaskMode): Specifies how to alter
                 the task state.
         """
-        cfunc = lib_importer.windll.DAQmxTaskControl
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, action.value)
-        check_for_error(error_code)
+        self._interpreter.task_control(self._handle, action.value)
 
     def reset_timer(self):
         """
@@ -378,28 +284,14 @@ ${property_template.script_property(attribute)}\
         or generation. Using this method is required for some applications and
         is optional for others.
         """
-        cfunc = lib_importer.windll.DAQmxStartTask
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [lib_importer.task_handle]
-
-        error_code = cfunc(self._handle)
-        check_for_error(error_code)
+        self._interpreter.start_task(self._handle)
 
     def stop(self):
         """
         Stops the task and returns it to the state the task was in before the
         DAQmx Start Task method ran.
         """
-        cfunc = lib_importer.windll.DAQmxStopTask
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [lib_importer.task_handle]
-
-        error_code = cfunc(self._handle)
-        check_for_error(error_code)
+        self._interpreter.stop_task(self._handle)
 
 <%namespace name="deprecated_template" file="/property_deprecated_template.py.mako"/>\
 ${deprecated_template.script_deprecated_property(attributes)}\
