@@ -12932,6 +12932,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'BufferAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -12962,6 +12963,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'CalibrationInfoAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -12992,6 +12994,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'CalibrationInfoAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13022,6 +13025,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'CalibrationInfoAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13063,6 +13067,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'CalibrationInfoAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13105,6 +13110,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13147,6 +13153,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13189,6 +13196,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13243,6 +13251,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13250,6 +13259,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13285,6 +13295,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13338,6 +13349,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13373,6 +13385,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'DeviceAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13408,6 +13421,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'DeviceAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13443,6 +13457,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'DeviceAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13490,6 +13505,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'DeviceAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13497,6 +13513,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13525,6 +13542,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'DeviceAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13532,6 +13550,7 @@ functions = {
             {
                 'ctypes_data_type': 'numpy.int32',
                 'direction': 'out',
+                'is_grpc_enum': True,
                 'is_list': True,
                 'name': 'value',
                 'python_data_type': 'int',
@@ -13572,6 +13591,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'DeviceAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13618,6 +13638,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'DeviceAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13653,6 +13674,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'DeviceAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13887,6 +13909,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13922,6 +13945,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13957,6 +13981,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13964,6 +13989,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -13992,6 +14018,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14038,6 +14065,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14270,6 +14298,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PersistedChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14305,6 +14334,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PersistedChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14346,6 +14376,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PersistedScaleAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14376,6 +14407,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PersistedScaleAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14417,6 +14449,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PersistedTaskAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14447,6 +14480,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PersistedTaskAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14493,6 +14527,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14528,6 +14563,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14575,6 +14611,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14610,6 +14647,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14657,6 +14695,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14664,6 +14703,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14692,6 +14732,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14699,6 +14740,7 @@ functions = {
             {
                 'ctypes_data_type': 'numpy.int32',
                 'direction': 'out',
+                'is_grpc_enum': True,
                 'is_list': True,
                 'name': 'value',
                 'python_data_type': 'int',
@@ -14739,6 +14781,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14785,6 +14828,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14820,6 +14864,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'PhysicalChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14867,6 +14912,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14902,6 +14948,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14937,6 +14984,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14944,6 +14992,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -14972,6 +15021,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15018,6 +15068,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15053,6 +15104,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15088,6 +15140,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'RealTimeAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15123,6 +15176,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'RealTimeAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15130,6 +15184,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15158,6 +15213,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'RealTimeAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15205,6 +15261,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ScaleAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15235,6 +15292,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ScaleAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15277,6 +15335,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ScaleAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15284,6 +15343,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15307,6 +15367,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ScaleAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15429,6 +15490,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'SystemAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15463,6 +15525,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'SystemAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15498,6 +15561,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TaskAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15533,6 +15597,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TaskAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15579,6 +15644,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TaskAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15614,6 +15680,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15649,6 +15716,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15691,6 +15759,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15733,6 +15802,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15775,6 +15845,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15782,6 +15853,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15817,6 +15889,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15870,6 +15943,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15912,6 +15986,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15954,6 +16029,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15989,6 +16065,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -15996,6 +16073,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16024,6 +16102,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16070,6 +16149,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16105,6 +16185,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16140,6 +16221,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16175,6 +16257,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16210,6 +16293,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16245,6 +16329,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16292,6 +16377,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16299,6 +16385,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16327,6 +16414,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16334,6 +16422,7 @@ functions = {
             {
                 'ctypes_data_type': 'numpy.int32',
                 'direction': 'out',
+                'is_grpc_enum': True,
                 'is_list': True,
                 'name': 'value',
                 'python_data_type': 'int',
@@ -16374,6 +16463,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16420,6 +16510,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16455,6 +16546,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16497,6 +16589,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16539,6 +16632,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16581,6 +16675,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16588,6 +16683,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16623,6 +16719,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16669,6 +16766,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16704,6 +16802,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16739,6 +16838,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16746,6 +16846,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'out',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16774,6 +16875,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16820,6 +16922,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -16855,6 +16958,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -19466,6 +19570,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'BufferAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -19500,6 +19605,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -19554,6 +19660,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_grpc_enum': True,
                 'is_optional_in_python': False,
                 'name': 'attribute',
                 'python_data_type': 'int',
@@ -19587,6 +19694,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_grpc_enum': True,
                 'is_optional_in_python': False,
                 'name': 'attribute',
                 'python_data_type': 'int',
@@ -19617,6 +19725,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'RealTimeAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -19647,6 +19756,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'is_optional_in_python': False,
                 'name': 'attribute',
                 'python_data_type': 'int',
@@ -19690,6 +19800,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'is_optional_in_python': False,
                 'name': 'attribute',
                 'python_data_type': 'int',
@@ -19723,6 +19834,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_grpc_enum': True,
                 'is_optional_in_python': False,
                 'name': 'attribute',
                 'python_data_type': 'int',
@@ -19766,6 +19878,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_grpc_enum': True,
                 'is_optional_in_python': False,
                 'name': 'attribute',
                 'python_data_type': 'int',
@@ -19799,6 +19912,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_grpc_enum': True,
                 'is_optional_in_python': False,
                 'name': 'attribute',
                 'python_data_type': 'int',
@@ -20203,6 +20317,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'BufferAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20233,6 +20348,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'CalibrationInfoAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20263,6 +20379,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'CalibrationInfoAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20293,6 +20410,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'CalibrationInfoAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20323,6 +20441,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'CalibrationInfoAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20365,6 +20484,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20407,6 +20527,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20449,6 +20570,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20503,6 +20625,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20510,6 +20633,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20545,6 +20669,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20587,6 +20712,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ChannelAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20739,6 +20865,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20774,6 +20901,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20809,6 +20937,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20816,6 +20945,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20844,6 +20974,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20879,6 +21010,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ExportSignalAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20931,6 +21063,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -20966,6 +21099,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21001,6 +21135,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21008,6 +21143,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21036,6 +21172,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21071,6 +21208,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21106,6 +21244,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ReadAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21141,6 +21280,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'RealTimeAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21176,6 +21316,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'RealTimeAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21183,6 +21324,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21211,6 +21353,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'RealTimeAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21241,6 +21384,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ScaleAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21271,6 +21415,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ScaleAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21313,6 +21458,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ScaleAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21320,6 +21466,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21343,6 +21490,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'ScaleAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21412,6 +21560,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21447,6 +21596,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21489,6 +21639,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21531,6 +21682,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21573,6 +21725,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21580,6 +21733,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21615,6 +21769,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21657,6 +21812,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21699,6 +21855,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21741,6 +21898,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21776,6 +21934,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21783,6 +21942,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21811,6 +21971,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21846,6 +22007,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21881,6 +22043,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21916,6 +22079,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TimingAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21951,6 +22115,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -21986,6 +22151,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22021,6 +22187,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22068,6 +22235,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22075,6 +22243,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22103,6 +22272,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22150,6 +22320,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22185,6 +22356,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22220,6 +22392,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'TriggerAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22262,6 +22435,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22304,6 +22478,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22346,6 +22521,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22353,6 +22529,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22388,6 +22565,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WatchdogAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22423,6 +22601,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22458,6 +22637,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22493,6 +22673,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22500,6 +22681,7 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
+                'is_grpc_enum': True,
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22528,6 +22710,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22563,6 +22746,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'
@@ -22598,6 +22782,7 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_int32',
                 'direction': 'in',
                 'grpc_type': 'WriteAttribute',
+                'is_grpc_enum': True,
                 'name': 'attribute',
                 'python_data_type': 'int',
                 'type': 'int32'

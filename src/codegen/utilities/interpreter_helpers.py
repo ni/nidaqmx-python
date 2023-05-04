@@ -243,7 +243,7 @@ def get_grpc_interpreter_call_params(func, params):
                     f"{camel_to_snake_case(param.size.value)}={param.parameter_name}.size"
                 )
                 has_read_array_parameter = True
-            elif param.is_enum and not param.is_list:
+            elif param.is_grpc_enum or (param.is_enum and not param.is_list):
                 grpc_params.append(f"{param.parameter_name}_raw={param.parameter_name}")
             else:
                 grpc_params.append(f"{param.parameter_name}={param.parameter_name}")
@@ -288,14 +288,14 @@ def is_custom_read_write_function(func):
     return func.python_codegen_method == "CustomCode_Read_Write"
 
 
-def get_interpreter_output_params(func):
-    """Gets the output parameters for the functions in interpreter."""
-    return [p for p in get_interpreter_parameters(func) if p.direction == "out"]
-
-
 def is_custom_read_function(func):
     """Returns True if the function is a read function."""
     return func.python_codegen_method == "CustomCode_Read_Write" and "read_" in func.function_name
+
+
+def get_interpreter_output_params(func):
+    """Gets the output parameters for the functions in interpreter."""
+    return [p for p in get_interpreter_parameters(func) if p.direction == "out"]
 
 
 def get_output_params(func):
@@ -391,6 +391,8 @@ def get_response_parameters(func):
         if not parameter.repeating_argument:
             if is_read_method and "read_array" in parameter.parameter_name:
                 response_parameters.append(f"{parameter.parameter_name}")
+            elif parameter.is_grpc_enum:
+                response_parameters.append(f"response.{parameter.parameter_name}_raw")
             else:
                 response_parameters.append(f"response.{parameter.parameter_name}")
     return ", ".join(response_parameters)
