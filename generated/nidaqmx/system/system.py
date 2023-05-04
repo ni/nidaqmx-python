@@ -276,7 +276,7 @@ class System:
         for d, p in zip(device.do_lines, states):
             power_up_states.append(
                 DOPowerUpState(physical_channel=d.name,
-                               power_up_state=PowerUpStates(p.value)))
+                               power_up_state=PowerUpStates(p)))
 
         return power_up_states
 
@@ -346,7 +346,7 @@ class System:
             power_up_states.append(
                 DOResistorPowerUpState(
                     physical_channel=d.name,
-                    power_up_state=ResistorState(p.value)))
+                    power_up_state=ResistorState(p)))
 
         return power_up_states
 
@@ -451,7 +451,7 @@ class System:
             power_up_states.append(
                 AOPowerUpState(
                     physical_channel=a.name,
-                    power_up_state=p.value,
+                    power_up_state=p,
                     channel_type=AOPowerUpOutputBehavior(c.value)))
 
         return power_up_states
