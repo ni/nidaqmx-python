@@ -1,4 +1,3 @@
-"Contains a collection of pytest tests that validates the persisted scale properties."
 import pytest
 
 from nidaqmx import DaqError
@@ -6,15 +5,13 @@ from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system.storage import PersistedScale
 
 
-def test__constructed_persisted_scale__get_property__returns_persisted_value():
-    """Test construction."""
+def test___constructed_persisted_scale___get_property___returns_persisted_value():
     persisted_scale = PersistedScale("double_gain_scale")
 
     assert persisted_scale.author == "Test Author"
 
 
-def test__nonexistent_persisted_scale__get_property__raises_custom_scale_does_not_exist():
-    """Test construction."""
+def test___nonexistent_persisted_scale___get_property___raises_custom_scale_does_not_exist():
     persisted_scale = PersistedScale("NonexistentScale")
 
     with pytest.raises(DaqError) as exc_info:
@@ -23,8 +20,7 @@ def test__nonexistent_persisted_scale__get_property__raises_custom_scale_does_no
     assert exc_info.value.error_code == DAQmxErrors.CUSTOM_SCALE_DOES_NOT_EXIST
 
 
-def test__persisted_scales_with_same_name__compare__equal():
-    """Test comparison."""
+def test___persisted_scales_with_same_name___compare___equal():
     persisted_scale1 = PersistedScale("Scale1")
     persisted_scale2 = PersistedScale("Scale1")
 
@@ -32,8 +28,7 @@ def test__persisted_scales_with_same_name__compare__equal():
     assert persisted_scale1 == persisted_scale2
 
 
-def test__persisted_scales_with_different_names__compare__not_equal():
-    """Test comparison."""
+def test___persisted_scales_with_different_names___compare___not_equal():
     persisted_scale1 = PersistedScale("Scale1")
     persisted_scale2 = PersistedScale("Scale2")
 
@@ -41,34 +36,31 @@ def test__persisted_scales_with_different_names__compare__not_equal():
 
 
 @pytest.mark.parametrize("persisted_scale", ["double_gain_scale"], indirect=True)
-def test__persisted_scale__get_bool_property__returns_persisted_value(persisted_scale):
-    """Test for validating bool attributes in persisted scale."""
+def test___persisted_scale___get_bool_property___returns_persisted_value(persisted_scale):
     assert persisted_scale.allow_interactive_editing
 
 
 @pytest.mark.parametrize("persisted_scale", ["double_gain_scale"], indirect=True)
-def test__persisted_scale__get_string_property__returns_persisted_value(persisted_scale):
-    """Test for validating string attributes in persisted scale."""
+def test___persisted_scale___get_string_property___returns_persisted_value(persisted_scale):
     assert persisted_scale.author == "Test Author"
 
 
 @pytest.mark.parametrize("persisted_scale", ["double_gain_scale"], indirect=True)
-def test__persisted_scale__load_and_get_float64_property__returns_persisted_value(persisted_scale):
-    """Test for validating getter for float property."""
+def test___persisted_scale___load_and_get_float64_property___returns_persisted_value(
+    persisted_scale,
+):
     assert persisted_scale.load().lin_slope == 2.0
 
 
 @pytest.mark.parametrize("persisted_scale", ["polynomial_scale"], indirect=True)
-def test__persisted_scale__load_and_get_float64_list_property__returns_persisted_value(
+def test___persisted_scale___load_and_get_float64_list_property___returns_persisted_value(
     persisted_scale,
 ):
-    """Test for validating getter for float list property."""
     assert persisted_scale.load().poly_forward_coeff == [0.0, 1.0]
 
 
 @pytest.mark.parametrize("persisted_scale", ["double_gain_scale"], indirect=True)
-def test__persisted_scale__load_and_get_string_property__returns_persisted_value(
+def test___persisted_scale___load_and_get_string_property___returns_persisted_value(
     persisted_scale,
 ):
-    """Test for validating getter for string property."""
     assert persisted_scale.load().description == "Twice the gain"

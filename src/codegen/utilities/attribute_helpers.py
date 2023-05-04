@@ -1,6 +1,9 @@
 """This contains the helper methods used in attribute generation."""
 
+import codegen.metadata as scrapigen_metadata
 from codegen.properties.attribute import Attribute
+from codegen.utilities.helpers import camel_to_snake_case
+from codegen.utilities.interpreter_helpers import INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES
 
 EXCLUDED_ATTRIBUTES = [
     "AI_CHAN_CAL_HAS_VALID_CAL_INFO",
@@ -215,6 +218,28 @@ ATTR_NAME_CHANGE_IN_DESCRIPTION = {
 }
 
 
+GENERIC_ATTRIBUTE_TYPE_MAP = {
+    "bool32": "bool",
+    "char[]": "string",
+    "float64": "double",
+    "uInt32": "uint32",
+    "uInt64": "uint64",
+    "float64[]": "double_array",
+    "int32[]": "int32_array",
+    "uInt8[]": "bytes",
+    "uInt32[]": "uint32_array",
+}
+
+GENERIC_ATTRIBUTE_GROUP_NAME_MAP = {
+    "CalibrationInfo": "cal_info",
+    "Channel": "chan",
+    "ExportSignal": "exported_signal",
+    "System": "system_info",
+    "Trigger": "trig",
+    "PhysicalChannel": "physical_chan",
+}
+
+
 def get_attributes(metadata, class_name):
     """Converts the scrapigen metadata into a list of attributes."""
     attributes_metadata = []
@@ -254,3 +279,27 @@ def get_deprecated_attributes(attributes):
             deprecated_attributes[old_name]["access"] = matching_attribute.access
             deprecated_attributes[old_name]["resettable"] = matching_attribute.resettable
     return deprecated_attributes
+
+
+def get_generic_attribute_function_name(attribute):
+    """Gets the attribute independent interpreter function name."""
+    metadata = scrapigen_metadata.attributes
+    for group_name, attributes in metadata.items():
+        for id, attribute_data in attributes.items():
+            if attribute_data["c_function_name"] == attribute.c_function_name:
+                mapped_attribute_group = GENERIC_ATTRIBUTE_GROUP_NAME_MAP.get(
+                    group_name,
+                    camel_to_snake_case(group_name, INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES),
+                )
+                return mapped_attribute_group + "_attribute"
+
+
+def get_generic_attribute_function_type(attribute):
+    """Gets the attribute independent interpreter function type."""
+    mapped_attribute_type = GENERIC_ATTRIBUTE_TYPE_MAP.get(
+        attribute.type,
+        camel_to_snake_case(attribute.type, INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES),
+    )
+    if attribute.bitfield_enum:
+        return mapped_attribute_type.strip("_array")
+    return mapped_attribute_type

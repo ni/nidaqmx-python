@@ -4,7 +4,7 @@ import ctypes
 import numpy
 
 from nidaqmx._lib import lib_importer, wrapped_ndpointer, ctypes_byte_str
-from nidaqmx.system.physical_channel import PhysicalChannel
+from nidaqmx.system.physical_channel import _PhysicalChannelAlternateConstructor
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
 from nidaqmx._task_modules.triggering.arm_start_trigger import ArmStartTrigger
@@ -80,45 +80,16 @@ class Triggers:
             set this property to **SyncType.SLAVE** on the other
             devices.
         """
-        val = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxGetTriggerSyncType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return SyncType(val.value)
+        val = self._interpreter.get_trig_attribute_int32(self._handle, 0x2f80)
+        return SyncType(val)
 
     @sync_type.setter
     def sync_type(self, val):
         val = val.value
-        cfunc = lib_importer.windll.DAQmxSetTriggerSyncType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_trig_attribute_int32(self._handle, 0x2f80, val)
 
     @sync_type.deleter
     def sync_type(self):
-        cfunc = lib_importer.windll.DAQmxResetTriggerSyncType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_trig_attribute(self._handle, 0x2f80)
 

@@ -1,11 +1,9 @@
-"""Test for validating different scale related operations."""
 import pytest
 
 import nidaqmx
 
 
-def test__polynomial__calculate_reverse_poly_coeff__returns_reverse_coeff():
-    """Test the working of the calculate_reverse_coeff function."""
+def test___polynomial___calculate_reverse_poly_coeff___returns_reverse_coeff():
     # The given values represents the polynomial y = 2x + 1
     forward_coeff = [1.0, 2.0]
     min_val_x = -10.0
