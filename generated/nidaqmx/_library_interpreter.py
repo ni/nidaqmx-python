@@ -117,9 +117,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                        ctypes.c_uint, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W'))]
 
@@ -387,9 +387,9 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), wrapped_ndpointer(dtype=numpy.int32,
-                        flags=('C','W')), ctypes.c_uint]
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                        wrapped_ndpointer(dtype=numpy.int32, flags=('C')),
+                        ctypes.c_uint]
 
         error_code = cfunc(
             task, channel_names, expir_state_array, output_type_array,
@@ -404,7 +404,7 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
+                        wrapped_ndpointer(dtype=numpy.int32, flags=('C')),
                         ctypes.c_uint]
 
         error_code = cfunc(
@@ -419,7 +419,7 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
+                        wrapped_ndpointer(dtype=numpy.int32, flags=('C')),
                         ctypes.c_uint]
 
         error_code = cfunc(
@@ -659,10 +659,9 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes_byte_str, ctypes.c_double, ctypes.c_double,
                         ctypes.c_int, ctypes.c_int, ctypes.c_int,
                         ctypes.c_double, ctypes.c_double,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                        ctypes.c_uint, wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C')), ctypes.c_uint, ctypes.c_int,
                         ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
@@ -688,11 +687,10 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes_byte_str, ctypes.c_double, ctypes.c_double,
                         ctypes.c_int, ctypes.c_int, ctypes.c_int,
                         ctypes.c_double, ctypes.c_double,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
-                        ctypes_byte_str]
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                        ctypes.c_uint, ctypes.c_int,
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                        ctypes.c_uint, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -888,10 +886,9 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes_byte_str, ctypes.c_double, ctypes.c_double,
                         ctypes.c_int, ctypes.c_int, ctypes.c_int,
                         ctypes.c_double, ctypes.c_double,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                        ctypes.c_uint, wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C')), ctypes.c_uint, ctypes.c_int,
                         ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
@@ -917,11 +914,10 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes_byte_str, ctypes.c_double, ctypes.c_double,
                         ctypes.c_int, ctypes.c_int, ctypes.c_int,
                         ctypes.c_double, ctypes.c_double,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
-                        ctypes_byte_str]
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                        ctypes.c_uint, ctypes.c_int,
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                        ctypes.c_uint, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -993,7 +989,7 @@ class LibraryInterpreter(BaseInterpreter):
                         lib_importer.task_handle, ctypes_byte_str,
                         ctypes_byte_str, ctypes.c_double, ctypes.c_double,
                         ctypes.c_int, ctypes.c_double,
-                        wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
+                        wrapped_ndpointer(dtype=numpy.int32, flags=('C')),
                         ctypes.c_uint, ctypes.c_int, ctypes.c_int,
                         ctypes.c_double, ctypes.c_double, ctypes.c_double,
                         ctypes.c_double, ctypes.c_double]
@@ -1123,10 +1119,9 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes_byte_str, ctypes.c_double, ctypes.c_double,
                         ctypes.c_int, ctypes.c_int, ctypes.c_int,
                         ctypes.c_double, ctypes.c_double,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                        ctypes.c_uint, wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C')), ctypes.c_uint, ctypes.c_int,
                         ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
@@ -1152,11 +1147,10 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes_byte_str, ctypes.c_double, ctypes.c_double,
                         ctypes.c_int, ctypes.c_int, ctypes.c_int,
                         ctypes.c_double, ctypes.c_double,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
-                        ctypes_byte_str]
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                        ctypes.c_uint, ctypes.c_int,
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                        ctypes.c_uint, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1728,10 +1722,9 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                        ctypes.c_uint, wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C')), ctypes.c_uint, ctypes.c_int,
                         ctypes_byte_str]
 
         error_code = cfunc(
@@ -1748,10 +1741,9 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int,
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                        ctypes.c_uint, wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C')), ctypes.c_uint, ctypes.c_int,
                         ctypes_byte_str]
 
         error_code = cfunc(
@@ -4768,8 +4760,8 @@ class LibraryInterpreter(BaseInterpreter):
         with cfunc.arglock:
             cfunc.argtypes = [
                 ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-                flags=('C','W')), wrapped_ndpointer(dtype=numpy.int32,
-                flags=('C','W')), ctypes.c_uint]
+                flags=('C')), wrapped_ndpointer(dtype=numpy.int32,
+                flags=('C')), ctypes.c_uint]
 
         error_code = cfunc(
             channel_names, state_array, channel_type_array,
@@ -4853,7 +4845,7 @@ class LibraryInterpreter(BaseInterpreter):
         with cfunc.arglock:
             cfunc.argtypes = [
                 lib_importer.task_handle, ctypes_byte_str, ctypes.c_int32,
-                wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
+                wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
                 ctypes.c_uint]
 
         error_code = cfunc(
@@ -5104,7 +5096,7 @@ class LibraryInterpreter(BaseInterpreter):
         with cfunc.arglock:
             cfunc.argtypes = [
                 ctypes_byte_str, ctypes.c_int32,
-                wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
+                wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
                 ctypes.c_uint]
 
         error_code = cfunc(
@@ -5288,7 +5280,7 @@ class LibraryInterpreter(BaseInterpreter):
         with cfunc.arglock:
             cfunc.argtypes = [
                 lib_importer.task_handle, ctypes.c_int32,
-                wrapped_ndpointer(dtype=numpy.float64, flags=('C','W')),
+                wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
                 ctypes.c_uint]
 
         error_code = cfunc(
@@ -5310,7 +5302,7 @@ class LibraryInterpreter(BaseInterpreter):
         with cfunc.arglock:
             cfunc.argtypes = [
                 lib_importer.task_handle, ctypes.c_int32,
-                wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
+                wrapped_ndpointer(dtype=numpy.int32, flags=('C')),
                 ctypes.c_uint]
 
         error_code = cfunc(
@@ -5867,7 +5859,7 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         ctypes_byte_str, wrapped_ndpointer(dtype=numpy.uint8,
-                        flags=('C','W')), ctypes.c_uint, ctypes.c_int]
+                        flags=('C')), ctypes.c_uint, ctypes.c_int]
 
         error_code = cfunc(
             physical_channel, bit_stream, len(bit_stream), basic_teds_options)

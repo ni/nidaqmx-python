@@ -186,8 +186,9 @@ def get_arguments_type(functions_metadata):
     return argtypes
 
 
-def to_param_argtype(parameter, flags="'C','W'"):
+def to_param_argtype(parameter):
     """Formats argument types."""
+    flags = "'C','W'" if parameter.direction == "out" else "'C'"
     if parameter.is_list:
         if parameter.ctypes_data_type == "numpy.bool":
             return f"wrapped_ndpointer(dtype=bool, flags=({flags}))"

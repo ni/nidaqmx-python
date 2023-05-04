@@ -130,10 +130,7 @@ def get_argument_types(functions_metadata):
             if param.is_pointer:
                 argtypes.append(f"ctypes.POINTER({to_param_argtype(param)})")
             else:
-                if is_custom_write_function(functions_metadata):
-                    argtypes.append(to_param_argtype(param, "'C'"))
-                else:
-                    argtypes.append(to_param_argtype(param))
+                argtypes.append(to_param_argtype(param))
     return argtypes
 
 
