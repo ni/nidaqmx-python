@@ -37,13 +37,13 @@ class GrpcStubInterpreter(BaseInterpreter):
         return response
 % for func in functions:
 <%
-    params = get_params_for_function_signature(func)
+    params = get_params_for_function_signature(func, True)
     sorted_params = order_function_parameters_by_optional(params)
     parameter_signature = get_interpreter_parameter_signature(is_python_factory, sorted_params)
     output_parameters = get_output_params(func)
-    compound_parameter = get_compound_parameter(sorted_params)
+    compound_parameter = get_compound_parameter(func.base_parameters)
     grpc_interpreter_params = get_grpc_interpreter_call_params(func, sorted_params)
-    is_read_method = check_if_parameters_contain_read_array(sorted_params)
+    is_read_method = check_if_parameters_contain_read_array(func.base_parameters)
     %>
     %if (len(func.function_name) + len(parameter_signature)) > 68:
     def ${func.function_name}(
@@ -78,11 +78,11 @@ class GrpcStubInterpreter(BaseInterpreter):
         %else:
             grpc_types.${snake_to_pascal(func.function_name)}Request(${grpc_interpreter_params + ')'})
         %endif
+        %endif
         %if is_read_method:
         % for param in get_read_array_parameters(func):
         ${param}[:] = response.${param}
         % endfor
-        %endif
         %endif
         %if len(output_parameters)  > 0:
         return ${get_response_parameters(func)}

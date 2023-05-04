@@ -210,10 +210,10 @@ def get_varargs_parameters(func):
     return [p for p in func.parameters if p.repeating_argument]
 
 
-def get_params_for_function_signature(func):
+def get_params_for_function_signature(func, is_grpc_interpreter = False):
     """Gets interpreter parameters for the function signature."""
     interpreter_parameters = []
-    function_parameters = get_interpreter_parameters(func)
+    function_parameters = get_interpreter_parameters(func, is_grpc_interpreter)
     size_params = _get_size_params(function_parameters)
     for param in function_parameters:
         if (
@@ -384,7 +384,7 @@ def create_compound_parameter_request(func):
 def get_response_parameters(func):
     """Gets the list of parameters in grpc response."""
     output_parameters = get_output_params(func)
-    is_read_method = check_if_parameters_contain_read_array(func.interpreter_parameters)
+    is_read_method = check_if_parameters_contain_read_array(func.base_parameters)
     response_parameters = []
     output_parameters = get_output_params(func)
     for parameter in output_parameters:
@@ -407,7 +407,7 @@ def get_samps_per_chan_read_or_write_param(func_params):
     return None
 
 
-def get_interpreter_parameters(func):
+def get_interpreter_parameters(func, is_grpc_interpreter = False):
     """Gets the parameters used in the interpreter functions."""
     size_params = _get_size_params(func.base_parameters)
     interpreter_parameters = []
@@ -416,6 +416,7 @@ def get_interpreter_parameters(func):
             (parameter.is_used_in_python_api and not parameter.is_proto_only)
             or parameter.parameter_name in size_params
             or _is_handle_parameter(func, parameter)
+            or (is_grpc_interpreter and parameter.is_compound_type)
         ):
             interpreter_parameters.append(parameter)
     return interpreter_parameters
@@ -444,7 +445,7 @@ def check_if_parameters_contain_read_array(params):
 def get_read_array_parameters(func):
     """Gets the list of array parameters."""
     response = []
-    for param in func.interpreter_parameters:
+    for param in func.base_parameters:
         if param.direction == "out" and "read_array" in param.parameter_name:
             response.append(camel_to_snake_case(param.parameter_name))
     return response
