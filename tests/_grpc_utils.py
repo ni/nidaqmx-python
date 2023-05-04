@@ -5,7 +5,6 @@ import subprocess
 import threading
 
 import pytest
-import winreg
 
 
 class GrpcServerProcess:
@@ -43,6 +42,8 @@ class GrpcServerProcess:
     def _get_grpc_server_exe(self):
         if os.name != "nt":
             pytest.skip("Only supported on Windows")
+        import winreg
+
         try:
             reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
             read64key = winreg.KEY_READ | winreg.KEY_WOW64_64KEY

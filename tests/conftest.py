@@ -8,7 +8,7 @@ import pytest
 import nidaqmx.system
 from nidaqmx.constants import ProductCategory, UsageTypeAI
 from nidaqmx.grpc_session_options import GrpcSessionOptions
-from tests.test_helpers import GrpcServerProcess
+from tests._grpc_utils import GrpcServerProcess
 
 
 class Error(Exception):
@@ -255,10 +255,16 @@ def test_assets_directory() -> pathlib.Path:
 
 
 @pytest.fixture(scope="session")
-def grpc_channel():
-    """Gets the gRPC channel."""
+def grpc_server_process():
+    """Gets the grpc server process."""
     with GrpcServerProcess() as proc:
-        channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
+        yield proc
+
+
+@pytest.fixture(scope="session")
+def grpc_channel(grpc_server_process):
+    """Gets the gRPC channel."""
+    with grpc.insecure_channel(f"localhost:{grpc_server_process.server_port}") as channel:
         yield channel
 
 
