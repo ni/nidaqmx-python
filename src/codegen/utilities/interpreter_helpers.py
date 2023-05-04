@@ -46,6 +46,7 @@ INCLUDE_SIZE_PARAMETER_IN_SIGNATURE_FUNCTIONS = [
     "get_analog_power_up_states_with_output_type",
 ]
 
+CTYPE_CHANGE_FUNCTIONS = ["read_digital_lines", "write_digital_lines"]
 
 def get_interpreter_functions(metadata):
     """Converts the scrapigen metadata into a list of functions."""
@@ -130,7 +131,14 @@ def get_argument_types(functions_metadata):
             if param.is_pointer:
                 argtypes.append(f"ctypes.POINTER({to_param_argtype(param)})")
             else:
-                argtypes.append(to_param_argtype(param))
+                # This is special case. The ctype of these parameters is passed as bool in c call.
+                if (
+                    functions_metadata.function_name in CTYPE_CHANGE_FUNCTIONS
+                    and param.parameter_name in ("read_array", "write_array")
+                ):
+                    argtypes.append("wrapped_ndpointer(dtype=bool, flags=('C'))")
+                else:
+                    argtypes.append(to_param_argtype(param))
     return argtypes
 
 
