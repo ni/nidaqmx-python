@@ -1,6 +1,7 @@
 import re
 
 from nidaqmx.errors import DaqError
+from nidaqmx._grpc_interpreter import GrpcStubInterpreter
 from nidaqmx._library_interpreter import LibraryInterpreter
 
 # Method logic adapted from
@@ -212,6 +213,6 @@ def _select_interpreter(grpc_options = None, interpreter = None):
         return interpreter
     else:
         if grpc_options:
-            return None
+            return GrpcStubInterpreter(grpc_options)
         else:
             return LibraryInterpreter()
