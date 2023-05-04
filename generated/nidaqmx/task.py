@@ -79,7 +79,7 @@ class Task:
             raise DaqError(
                 f'Unsupported session name: "{grpc_options.session_name}". If a session name is specified, it must match the task name.',
                 DAQmxErrors.UNKNOWN,
-                task_name=self.name)
+                task_name=new_task_name)
         
         self._interpreter = utils._select_interpreter(grpc_options)
         self._handle, self._close_on_exit = self._interpreter.create_task(new_task_name)
@@ -112,7 +112,7 @@ class Task:
         return not self.__eq__(other)
 
     def __repr__(self):
-        return f'Task(name={self.name})'
+        return f'Task(name={self._saved_name})'
 
     @property
     def name(self):
