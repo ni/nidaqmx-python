@@ -204,8 +204,8 @@ ${property_template.script_property(attribute)}\
         numpy_array = numpy.zeros(number_of_samples, dtype=dtype)
 
         _, samples_read, _ = self._interpreter.read_raw(
-            self._handle, numpy_array, num_samps_per_chan,
-            self.timeout)
+            self._handle, num_samps_per_chan,
+            self.timeout, numpy_array)
 
         if samples_read != number_of_samples:
             return numpy_array[:samples_read]
