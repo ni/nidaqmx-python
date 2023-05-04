@@ -71,6 +71,7 @@ class Task:
         """
         # Initialize the fields that __del__ accesses so it doesn't crash when __init__ raises an exception.
         self._handle = None
+        self._close_on_exit = False
         self._saved_name = new_task_name
 
         if grpc_options and not (
@@ -87,7 +88,7 @@ class Task:
         self._initialize(self._handle, self._interpreter)
 
     def __del__(self):
-        if self._handle:
+        if self._handle is not None and self._close_on_exit:
             warnings.warn(
                 'Task of name "{}" was not explicitly closed before it was '
                 'destructed. Resources on the task device may still be '
