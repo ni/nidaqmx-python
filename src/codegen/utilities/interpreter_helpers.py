@@ -48,6 +48,7 @@ INCLUDE_SIZE_PARAMETER_IN_SIGNATURE_FUNCTIONS = [
 
 CTYPE_CHANGE_FUNCTIONS = ["read_digital_lines", "write_digital_lines"]
 
+
 def get_interpreter_functions(metadata):
     """Converts the scrapigen metadata into a list of functions."""
     all_functions = deepcopy(metadata["functions"])
