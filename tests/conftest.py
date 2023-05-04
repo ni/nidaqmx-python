@@ -253,7 +253,7 @@ def test_assets_directory() -> pathlib.Path:
     return pathlib.Path(__file__).parent / "test_assets"
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def grpc_channel():
     """Gets the gRPC channel."""
     with grpc.insecure_channel("localhost:31763") as channel:
