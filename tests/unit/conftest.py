@@ -1,6 +1,6 @@
 """Fixtures used in the DAQmx unit tests."""
-from unittest.mock import Mock
 from typing import Generator
+from unittest.mock import Mock
 
 import pytest
 from pytest_mock import MockerFixture
@@ -22,7 +22,7 @@ def interpreter(mocker: MockerFixture) -> Mock:
 @pytest.fixture
 def task(interpreter: Mock) -> Generator[Task, None, None]:
     """Create a DAQmx task.
-    
+
     This fixture owns the task. Do not use it for test cases that destroy the task, or else you
     may get double-close warnings.
     """
