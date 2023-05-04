@@ -210,10 +210,10 @@ def get_varargs_parameters(func):
     return [p for p in func.parameters if p.repeating_argument]
 
 
-def get_params_for_function_signature(func):
+def get_params_for_function_signature(func, is_grpc_interpreter=False):
     """Gets interpreter parameters for the function signature."""
     interpreter_parameters = []
-    function_parameters = get_interpreter_parameters(func)
+    function_parameters = get_interpreter_parameters(func, is_grpc_interpreter)
     size_params = _get_size_params(function_parameters)
     for param in function_parameters:
         if (
@@ -231,16 +231,24 @@ def get_params_for_function_signature(func):
 def get_grpc_interpreter_call_params(func, params):
     """Gets the interpreter parameters for grpc request."""
     compound_params = get_input_arguments_for_compound_params(func)
+    is_read_function = is_custom_read_function(func)
     grpc_params = []
+    has_read_array_parameter = False
     for param in params:
         if param.parameter_name not in compound_params:
-            if param.is_enum:
+            if is_read_function and "read_array" in param.parameter_name:
+                if has_read_array_parameter:
+                    continue
+                grpc_params.append(
+                    f"{camel_to_snake_case(param.size.value)}={param.parameter_name}.size"
+                )
+                has_read_array_parameter = True
+            elif param.is_enum and not param.is_list:
                 grpc_params.append(f"{param.parameter_name}_raw={param.parameter_name}")
             else:
                 grpc_params.append(f"{param.parameter_name}={param.parameter_name}")
     if func.is_init_method:
         grpc_params.append("initialization_behavior=self._grpc_options.initialization_behavior")
-    grpc_params = sorted(list(set(grpc_params)))
     return ", ".join(grpc_params)
 
 
@@ -283,6 +291,11 @@ def is_custom_read_write_function(func):
 def get_interpreter_output_params(func):
     """Gets the output parameters for the functions in interpreter."""
     return [p for p in get_interpreter_parameters(func) if p.direction == "out"]
+
+
+def is_custom_read_function(func):
+    """Returns True if the function is a read function."""
+    return func.python_codegen_method == "CustomCode_Read_Write" and "read_" in func.function_name
 
 
 def get_output_params(func):
@@ -370,11 +383,16 @@ def create_compound_parameter_request(func):
 
 def get_response_parameters(func):
     """Gets the list of parameters in grpc response."""
+    output_parameters = get_output_params(func)
+    is_read_method = check_if_parameters_contain_read_array(func.base_parameters)
     response_parameters = []
     output_parameters = get_output_params(func)
     for parameter in output_parameters:
         if not parameter.repeating_argument:
-            response_parameters.append(f"response.{parameter.parameter_name}")
+            if is_read_method and "read_array" in parameter.parameter_name:
+                response_parameters.append(f"{parameter.parameter_name}")
+            else:
+                response_parameters.append(f"response.{parameter.parameter_name}")
     return ", ".join(response_parameters)
 
 
@@ -389,7 +407,7 @@ def get_samps_per_chan_read_or_write_param(func_params):
     return None
 
 
-def get_interpreter_parameters(func):
+def get_interpreter_parameters(func, is_grpc_interpreter=False):
     """Gets the parameters used in the interpreter functions."""
     size_params = _get_size_params(func.base_parameters)
     interpreter_parameters = []
@@ -398,6 +416,7 @@ def get_interpreter_parameters(func):
             (parameter.is_used_in_python_api and not parameter.is_proto_only)
             or parameter.parameter_name in size_params
             or _is_handle_parameter(func, parameter)
+            or (is_grpc_interpreter and parameter.is_compound_type)
         ):
             interpreter_parameters.append(parameter)
     return interpreter_parameters
@@ -417,3 +436,17 @@ def _is_handle_parameter(func, param):
         parameter_name = "task_handle" if param.parameter_name == "task" else param.parameter_name
         return parameter_name == camel_to_snake_case(func.handle_parameter.cvi_name)
     return False
+
+
+def check_if_parameters_contain_read_array(params):
+    """Checks if the list of parameters contains read array parameter."""
+    return any(x for x in params if "read_array" in x.parameter_name)
+
+
+def get_read_array_parameters(func):
+    """Gets the list of array parameters."""
+    response = []
+    for param in func.base_parameters:
+        if param.direction == "out" and "read_array" in param.parameter_name:
+            response.append(camel_to_snake_case(param.parameter_name))
+    return response
