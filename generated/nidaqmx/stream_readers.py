@@ -1867,7 +1867,7 @@ class DigitalSingleChannelReader(ChannelReaderBase):
         self._verify_array_digital_lines(data, False, True)
 
         _, samps_per_chan_read, num_bytes_per_samp = self._interpreter.read_digital_lines(
-            self._handle, data, 1, timeout, FillMode.GROUP_BY_CHANNEL.value)    
+            self._handle, 1, timeout, FillMode.GROUP_BY_CHANNEL.value, data)    
 
     def read_one_sample_one_line(self, timeout=10):
         """
