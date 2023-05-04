@@ -77,6 +77,9 @@ extend_exclude = "docs,generated,src/codegen/metadata,src/codegen/templates"
 [tool.ni-python-styleguide]
 extend_exclude = "docs,generated,src/codegen/metadata,src/codegen/templates,src/handwritten"
 
+[tool.pytest.ini_options]
+filterwarnings = ["always::ResourceWarning"]
+
 [build-system]
 requires = ["poetry>=1.2"]
 build-backend = "poetry.masonry.api"
