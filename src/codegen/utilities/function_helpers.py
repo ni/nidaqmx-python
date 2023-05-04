@@ -145,7 +145,10 @@ def get_instantiation_lines(function_parameters):
 def get_arguments_type(functions_metadata):
     """Gets the 'type' of parameters."""
     argtypes = []
-    is_read_write_function = functions_metadata.python_codegen_method == "CustomCode_Read_Write"
+    is_read_write_function = functions_metadata.python_codegen_method in (
+        "CustomCode_Read",
+        "CustomCode_Write",
+    )
 
     if is_read_write_function:
         argtypes.append("lib_importer.task_handle")
@@ -183,10 +186,12 @@ def get_arguments_type(functions_metadata):
     return argtypes
 
 
-def to_param_argtype(parameter):
+def to_param_argtype(parameter, flags="'C','W'"):
     """Formats argument types."""
     if parameter.is_list:
-        return f"wrapped_ndpointer(dtype={parameter.ctypes_data_type}, flags=('C','W'))"
+        if parameter.ctypes_data_type == "numpy.bool":
+            return f"wrapped_ndpointer(dtype=bool, flags=({flags}))"
+        return f"wrapped_ndpointer(dtype={parameter.ctypes_data_type}, flags=({flags}))"
     else:
         if parameter.ctypes_data_type == "ctypes.TaskHandle":
             return "lib_importer.task_handle"
