@@ -11,7 +11,7 @@ import numpy
 
 import nidaqmx
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
-from nidaqmx.system.physical_channel import PhysicalChannel
+from nidaqmx.system.physical_channel import _PhysicalChannelAlternateConstructor
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
 from nidaqmx.utils import flatten_channel_string, unflatten_channel_string
@@ -171,32 +171,8 @@ class Channel:
         str: Specifies the flattened names of all the virtual channels in
             the task.
         """
-        cfunc = lib_importer.windll.DAQmxGetTaskChannels
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p, ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
+        val = self._interpreter.get_task_attribute_string(self._handle, 0x1273)
+        return val
 
 <%namespace name="property_template" file="/property_template.py.mako"/>\
 %for attribute in attributes:
@@ -238,14 +214,4 @@ ${property_template.script_property(attribute)}\
         if allow_interactive_deletion:
             options |= _Save.ALLOW_INTERACTIVE_DELETION.value
 
-        cfunc = lib_importer.windll.DAQmxSaveGlobalChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_uint]
-
-        error_code = cfunc(
-            self._handle, self._name, save_as, author, options)
-        check_for_error(error_code)
+        self._interpreter.save_global_chan(self._handle, self._name, save_as, author, options)

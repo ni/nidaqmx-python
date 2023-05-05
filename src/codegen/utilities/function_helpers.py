@@ -145,6 +145,14 @@ def get_instantiation_lines(function_parameters):
 def get_arguments_type(functions_metadata):
     """Gets the 'type' of parameters."""
     argtypes = []
+    is_read_write_function = functions_metadata.python_codegen_method in (
+        "CustomCode_Read",
+        "CustomCode_Write",
+    )
+
+    if is_read_write_function:
+        argtypes.append("lib_importer.task_handle")
+
     if functions_metadata.handle_parameter is not None:
         if functions_metadata.handle_parameter.ctypes_data_type != "ctypes.c_char_p":
             argtypes.append(functions_metadata.handle_parameter.ctypes_data_type)
@@ -160,6 +168,8 @@ def get_arguments_type(functions_metadata):
             # parameter is used by another parameter in the same function. In such cases the
             # size parameter argument definition should always come after the last parameter
             # that is using the size argument.
+            if param.size.mechanism == "custom-code":
+                continue
             if len(size_param_info) != 0:
                 size_param, parameter_index = size_param_info
                 if size_param.size == param.size:
@@ -167,15 +177,26 @@ def get_arguments_type(functions_metadata):
                     size_param_info = tuple()
             argtypes.append("ctypes.c_uint")
             size_param_info = param, (len(argtypes) - 1)
+
+    # The argument type for 'reserved' parameter is inserted at
+    # end of list for all read/write functions.
+    if is_read_write_function:
+        argtypes.append("ctypes.POINTER(c_bool32)")
+
     return argtypes
 
 
 def to_param_argtype(parameter):
     """Formats argument types."""
+    flags = "'C','W'" if parameter.direction == "out" else "'C'"
     if parameter.is_list:
-        return f"wrapped_ndpointer(dtype={parameter.ctypes_data_type}, flags=('C','W'))"
+        if parameter.ctypes_data_type == "numpy.bool":
+            return f"wrapped_ndpointer(dtype=bool, flags=({flags}))"
+        return f"wrapped_ndpointer(dtype={parameter.ctypes_data_type}, flags=({flags}))"
     else:
-        if parameter.direction == "in":
+        if parameter.ctypes_data_type == "ctypes.TaskHandle":
+            return "lib_importer.task_handle"
+        elif parameter.direction == "in":
             # If is string input parameter, use separate custom
             # argtype to convert from unicode to bytes.
             if parameter.ctypes_data_type == "ctypes.c_char_p":
@@ -212,14 +233,14 @@ def generate_function_call_args(function_metadata):
     if function_metadata.handle_parameter is not None:
         function_call_args.append(function_metadata.handle_parameter.accessor)
 
-    for param in function_metadata.parameters:
+    sorted_params = order_function_parameters_by_optional(function_metadata.parameters)
+
+    for param in sorted_params:
         if param.direction == "in":
             if param.is_enum and not param.is_list:
                 function_call_args.append(f"{param.parameter_name}.value")
             else:
                 function_call_args.append(param.parameter_name)
-                if param.has_explicit_buffer_size:
-                    function_call_args.append(f"len({param.parameter_name})")
         else:
             if param.has_explicit_buffer_size:
                 function_call_args.append(param.parameter_name)

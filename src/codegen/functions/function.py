@@ -19,6 +19,7 @@ class Function:
         self._stream_response = function_metadata.get("stream_response", False)
         self._handle_parameter = None
         self._is_python_codegen_method = function_metadata.get("python_codegen_method") != "no"
+        self._is_init_method = function_metadata.get("init_method", False)
         if "handle_parameter" in function_metadata:
             self._handle_parameter = Parameter(
                 "handle_parameter", function_metadata["handle_parameter"]
@@ -30,16 +31,19 @@ class Function:
             self._parameters = []
             self._base_parameters = []
             for parameter in function_metadata["parameters"]:
-                self._base_parameters.append(FunctionParameter(parameter))
+                function_parameter = FunctionParameter(parameter)
+                self._base_parameters.append(function_parameter)
                 if (
-                    parameter["name"] != "task"
-                    and "python_data_type" in parameter
-                    and parameter.get("use_in_python_api") is not False
+                    function_parameter.is_used_in_python_api
+                    and not function_parameter.is_proto_only
                 ):
-                    self._parameters.append(FunctionParameter(parameter))
-
-                    if parameter["direction"] == "out":
-                        self._output_parameters.append(self._parameters[-1])
+                    if (
+                        function_parameter.parameter_name != "task"
+                        and function_parameter.python_data_type is not None
+                    ):
+                        self._parameters.append(function_parameter)
+                        if parameter["direction"] == "out":
+                            self._output_parameters.append(self._parameters[-1])
 
         self._adaptor_parameter = None
         if "adaptor_parameter" in function_metadata:
@@ -50,6 +54,8 @@ class Function:
             self._c_function_name = function_metadata["cname"][5:]
         elif "c_function_name" in function_metadata:
             self._c_function_name = function_metadata["c_function_name"]
+
+        self._python_codegen_method = function_metadata.get("python_codegen_method", None)
 
     @property
     def function_name(self):
@@ -117,6 +123,16 @@ class Function:
         return self._stream_response
 
     @property
+    def python_codegen_method(self):
+        """str: The python codegen method of the function."""
+        return self._python_codegen_method
+
+    @property
     def is_python_codegen_method(self):
         """bool: Defines if the function is a python codegen function."""
         return self._is_python_codegen_method
+
+    @property
+    def is_init_method(self):
+        """bool: Defines if the method is an init method."""
+        return self._is_init_method

@@ -29,6 +29,7 @@ from nidaqmx.constants import (
     SignalModifiers, WAIT_INFINITELY)
 from nidaqmx.types import (
     AOPowerUpState, CDAQSyncConnection, DOPowerUpState, DOResistorPowerUpState)
+from nidaqmx.system.device import _DeviceAlternateConstructor
 
 __all__ = ['System']
 
@@ -126,20 +127,8 @@ class System:
         int: Indicates the major portion of the installed version of NI-
             DAQmx, such as 7 for version 7.0.
         """
-        val = ctypes.c_uint()
-
-        cfunc = lib_importer.windll.DAQmxGetSysNIDAQMajorVersion
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes.POINTER(ctypes.c_uint)]
-
-        error_code = cfunc(
-            ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_system_info_attribute_uint32(0x1272)
+        return val
 
     @property
     def _minor_version(self):
@@ -147,20 +136,8 @@ class System:
         int: Indicates the minor portion of the installed version of NI-
             DAQmx, such as 0 for version 7.0.
         """
-        val = ctypes.c_uint()
-
-        cfunc = lib_importer.windll.DAQmxGetSysNIDAQMinorVersion
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes.POINTER(ctypes.c_uint)]
-
-        error_code = cfunc(
-            ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_system_info_attribute_uint32(0x1923)
+        return val
 
     @property
     def _update_version(self):
@@ -168,20 +145,8 @@ class System:
         int: Indicates the update portion of the installed version of
             NI-DAQmx, such as 1 for version 9.0.1.
         """
-        val = ctypes.c_uint()
-
-        cfunc = lib_importer.windll.DAQmxGetSysNIDAQUpdateVersion
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes.POINTER(ctypes.c_uint)]
-
-        error_code = cfunc(
-            ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_system_info_attribute_uint32(0x2f22)
+        return val
 
 <%namespace name="function_template" file="/function_template.py.mako"/>\
 %for function_object in functions:
@@ -210,23 +175,14 @@ ${function_template.script_function(function_object)}
                   Specifies the power up state to set for the physical
                   channel specified with the **physical_channel** input.
         """
-        args = [device_name]
-        argtypes = [ctypes_byte_str]
+        channel_names = []
+        states = []
 
         for p in power_up_states:
-            args.append(p.physical_channel)
-            argtypes.append(ctypes_byte_str)
+            channel_names.append(p.physical_channel)
+            states.append(p.power_up_state.value)
 
-            args.append(p.power_up_state.value)
-            argtypes.append(ctypes.c_int)
-
-        args.append(None)
-
-        cfunc = lib_importer.cdll.DAQmxSetDigitalPowerUpStates
-        with cfunc.arglock:
-            cfunc.argtypes = argtypes
-            error_code = cfunc(*args)
-        check_for_error(error_code)
+        self._interpreter.set_digital_power_up_states(device_name, channel_names, states)
 
     def get_digital_power_up_states(self, device_name):
         """
@@ -248,35 +204,19 @@ ${function_template.script_function(function_object)}
               Indicates the power up state set for the physical channel
               specified with the **physical_channel** output.
         """
-        states = []
-
-        device = Device(device_name)
-        args = [device_name]
-        argtypes = [ctypes_byte_str]
+        device = _DeviceAlternateConstructor(device_name, self._interpreter)
+        channel_names = []
 
         for do_line in device.do_lines:
-            state = ctypes.c_int()
-            states.append(state)
+            channel_names.append(do_line.name)
 
-            args.append(do_line.name)
-            argtypes.append(ctypes_byte_str)
-
-            args.append(ctypes.byref(state))
-            argtypes.append(ctypes.POINTER(ctypes.c_int))
-
-        args.append(None)
-
-        cfunc = lib_importer.cdll.DAQmxGetDigitalPowerUpStates
-        with cfunc.arglock:
-            cfunc.argtypes = argtypes
-            error_code = cfunc(*args)
-        check_for_error(error_code)
+        states = self._interpreter.get_digital_power_up_states(device_name, channel_names)
 
         power_up_states = []
         for d, p in zip(device.do_lines, states):
             power_up_states.append(
                 DOPowerUpState(physical_channel=d.name,
-                               power_up_state=PowerUpStates(p.value)))
+                               power_up_state=PowerUpStates(p)))
 
         return power_up_states
 
@@ -301,23 +241,14 @@ ${function_template.script_function(function_object)}
                   Specifies the power up state to set for the physical
                   channel specified with the **physical_channel** input.
         """
-        args = [device_name]
-        argtypes = [ctypes_byte_str]
+        channel_names = []
+        states = []
 
         for p in power_up_states:
-            args.append(p.physical_channel)
-            argtypes.append(ctypes_byte_str)
+            channel_names.append(p.physical_channel)
+            states.append(p.power_up_state.value)
 
-            args.append(p.power_up_state.value)
-            argtypes.append(ctypes.c_int)
-
-        args.append(None)
-
-        cfunc = lib_importer.cdll.DAQmxSetDigitalPullUpPullDownStates
-        with cfunc.arglock:
-            cfunc.argtypes = argtypes
-            error_code = cfunc(*args)
-        check_for_error(error_code)
+        self._interpreter.set_digital_pull_up_pull_down_states(device_name, channel_names, states)
 
     def get_digital_pull_up_pull_down_states(self, device_name):
         """
@@ -340,36 +271,22 @@ ${function_template.script_function(function_object)}
               Indicates the power up state set for the physical channel
               specified with the **physical_channel** output.
         """
+        channel_names = []
         states = []
 
-        device = Device(device_name)
-        args = [device_name]
-        argtypes = [ctypes_byte_str]
+        device = _DeviceAlternateConstructor(device_name, self._interpreter)
 
         for do_line in device.do_lines:
-            state = ctypes.c_int()
-            states.append(state)
-
-            args.append(do_line.name)
-            argtypes.append(ctypes_byte_str)
-
-            args.append(ctypes.byref(state))
-            argtypes.append(ctypes.POINTER(ctypes.c_int))
-
-        args.append(None)
-
-        cfunc = lib_importer.cdll.DAQmxGetDigitalPullUpPullDownStates
-        with cfunc.arglock:
-            cfunc.argtypes = argtypes
-            error_code = cfunc(*args)
-        check_for_error(error_code)
+            channel_names.append(do_line.name)
+        
+        states =  self._interpreter.get_digital_pull_up_pull_down_states(device_name, channel_names)
 
         power_up_states = []
         for d, p in zip(device.do_lines, states):
             power_up_states.append(
                 DOResistorPowerUpState(
                     physical_channel=d.name,
-                    power_up_state=ResistorState(p.value)))
+                    power_up_state=ResistorState(p)))
 
         return power_up_states
 
@@ -394,26 +311,16 @@ ${function_template.script_function(function_object)}
                   Specifies the output type for the physical channel
                   specified with the **physical_channel** input.
         """
-        args = [device_name]
-        argtypes = [ctypes_byte_str]
+        channel_names = []
+        states = []
+        channel_types = []
 
         for p in power_up_states:
-            args.append(p.physical_channel)
-            argtypes.append(ctypes_byte_str)
+            channel_names.append(p.physical_channel)
+            states.append(p.power_up_state)
+            channel_types.append(p.channel_type.value)
 
-            args.append(p.power_up_state)
-            argtypes.append(ctypes.c_double)
-
-            args.append(p.channel_type.value)
-            argtypes.append(ctypes.c_int)
-
-        args.append(None)
-
-        cfunc = lib_importer.cdll.DAQmxSetAnalogPowerUpStates
-        with cfunc.arglock:
-            cfunc.argtypes = argtypes
-            error_code = cfunc(*args)
-        check_for_error(error_code)
+        self._interpreter.set_analog_power_up_states(device_name, channel_names, states, channel_types)
 
     def set_analog_power_up_states_with_output_type(
             self, power_up_states):
@@ -442,20 +349,7 @@ ${function_template.script_function(function_object)}
         channel_type = numpy.int32(
             [p.channel_type.value for p in power_up_states])
 
-        cfunc = lib_importer.cdll.DAQmxSetAnalogPowerUpStatesWithOutputType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                                          flags=('C','W')),
-                        wrapped_ndpointer(dtype=numpy.int32,
-                                          flags=('C','W'))]
-
-        error_code = cfunc(
-            physical_channel, state, channel_type, len(power_up_states))
-        check_for_error(error_code)
+        self._interpreter.set_analog_power_up_states_with_output_type(physical_channel, state, channel_type, len(power_up_states))
 
     def get_analog_power_up_states(self, device_name):
         """
@@ -480,43 +374,24 @@ ${function_template.script_function(function_object)}
               Specifies the output type for the physical channel
               specified with the **physical_channel** input.
         """
-        states = []
+        channel_names = []
         channel_types = []
 
-        device = Device(device_name)
-        args = [device_name]
-        argtypes = [ctypes_byte_str]
-
+        device = _DeviceAlternateConstructor(device_name, self._interpreter)
+        
         for ao_physical_chan in device.ao_physical_chans:
-            state = ctypes.c_double()
-            states.append(state)
-
             channel_type = ctypes.c_int()
             channel_types.append(channel_type)
+            channel_names.append(ao_physical_chan.name)
 
-            args.append(ao_physical_chan.name)
-            argtypes.append(ctypes_byte_str)
-
-            args.append(ctypes.byref(state))
-            argtypes.append(ctypes.POINTER(ctypes.c_double))
-
-            args.append(ctypes.byref(channel_type))
-            argtypes.append(ctypes.POINTER(ctypes.c_int))
-
-        args.append(None)
-
-        cfunc = lib_importer.cdll.DAQmxGetAnalogPowerUpStates
-        with cfunc.arglock:
-            cfunc.argtypes = argtypes
-            error_code = cfunc(*args)
-        check_for_error(error_code)
+        states = self._interpreter.get_analog_power_up_states(device_name, channel_names, channel_types)
 
         power_up_states = []
         for a, p, c in zip(device.ao_physical_chans, states, channel_types):
             power_up_states.append(
                 AOPowerUpState(
                     physical_channel=a.name,
-                    power_up_state=p.value,
+                    power_up_state=p,
                     channel_type=AOPowerUpOutputBehavior(c.value)))
 
         return power_up_states
@@ -544,26 +419,8 @@ ${function_template.script_function(function_object)}
               Specifies the output type for the physical channel
               specified with the **physical_channel** input.
         """
-        size = len(physical_channels)
-        states = numpy.zeros(size, dtype=numpy.float64)
-        channel_types = numpy.zeros(size, dtype=numpy.int32)
-
-        cfunc = lib_importer.cdll.DAQmxGetAnalogPowerUpStatesWithOutputType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str,
-                        wrapped_ndpointer(dtype=numpy.float64,
-                                          flags=('C','W')),
-                        wrapped_ndpointer(dtype=numpy.int32,
-                                          flags=('C','W'))]
-
-        error_code = cfunc(
-            flatten_channel_string(physical_channels), states, channel_types,
-            size)
-
-        check_for_error(error_code)
+        states, channel_types = self._interpreter.get_analog_power_up_states_with_output_type(
+            flatten_channel_string(physical_channels), len(physical_channels))
 
         power_up_states = []
         for p, s, c in zip(physical_channels, states, channel_types):
@@ -590,16 +447,7 @@ ${function_template.script_function(function_object)}
                 device documentation for information on the logic high
                 and logic low voltages for these logic families.
         """
-        cfunc = lib_importer.windll.DAQmxSetDigitalLogicFamilyPowerUpState
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int]
-
-        error_code = cfunc(
-            device_name, logic_family.value)
-        check_for_error(error_code)
+        self._interpreter.set_digital_logic_family_power_up_state(device_name, logic_family.value)
 
     def get_digital_logic_family_power_up_state(self, device_name):
         """
@@ -617,20 +465,9 @@ ${function_template.script_function(function_object)}
             documentation for information on the logic high and logic low
             voltages for these logic families.
         """
-        logic_family = ctypes.c_int()
+        logic_family = self._interpreter.get_digital_logic_family_power_up_state(device_name)
 
-        cfunc = lib_importer.windll.DAQmxGetDigitalLogicFamilyPowerUpState
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            device_name, ctypes.byref(logic_family))
-        check_for_error(error_code)
-
-        return LogicFamily(logic_family.value)
+        return LogicFamily(logic_family)
 
     # endregion
 
@@ -658,47 +495,11 @@ ${function_template.script_function(function_object)}
 
             Returns the configured port-to-port connections.
         """
-        cfunc = lib_importer.windll.DAQmxAutoConfigureCDAQSyncConnections
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_double]
+        self._interpreter.auto_configure_cdaq_sync_connections(chassis_devices_ports, timeout)
 
-        error_code = cfunc(
-            chassis_devices_ports, timeout)
-        check_for_error(error_code)
+        port_list = self._interpreter.get_auto_configured_cdaq_sync_connections()
 
-        cfunc = lib_importer.windll.DAQmxGetAutoConfiguredCDAQSyncConnections
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes.c_char_p, ctypes.POINTER(ctypes.c_uint)]
-
-        port_list_size = ctypes.c_uint()
-
-        while True:
-            size_or_code = cfunc(
-                None, ctypes.byref(port_list_size))
-
-            if size_or_code < 0:
-                break
-
-            port_list = ctypes.create_string_buffer(size_or_code)
-
-            size_or_code = cfunc(
-                port_list, ctypes.byref(port_list_size))
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                continue
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        ports = unflatten_channel_string(port_list.value.decode('ascii'))
+        ports = unflatten_channel_string(port_list)
         output_ports = ports[::2]
         input_ports = ports[1::2]
 
@@ -732,51 +533,12 @@ ${function_template.script_function(function_object)}
 
             Returns the port-to-port connections that failed verification.
         """
-        disconnected_ports_exist = c_bool32()
+        disconnected_ports_exist = self._interpreter.are_configured_cdaq_sync_ports_disconnected(
+            chassis_devices_ports, timeout)
 
-        cfunc = lib_importer.windll.DAQmxAreConfiguredCDAQSyncPortsDisconnected
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_double,
-                        ctypes.POINTER(c_bool32)]
+        port_list = self._interpreter.get_disconnected_cdaq_sync_ports()
 
-        error_code = cfunc(
-            chassis_devices_ports, timeout,
-            ctypes.byref(disconnected_ports_exist))
-        check_for_error(error_code)
-
-        cfunc = lib_importer.windll.DAQmxGetDisconnectedCDAQSyncPorts
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes.c_char_p, ctypes.POINTER(ctypes.c_uint)]
-
-        port_list_size = ctypes.c_uint()
-
-        while True:
-            size_or_code = cfunc(
-                None, ctypes.byref(port_list_size))
-
-            if size_or_code < 0:
-                break
-
-            port_list = ctypes.create_string_buffer(size_or_code)
-
-            size_or_code = cfunc(
-                port_list, ctypes.byref(port_list_size))
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                continue
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        ports = unflatten_channel_string(port_list.value.decode('ascii'))
+        ports = unflatten_channel_string(port_list)
         output_ports = ports[::2]
         input_ports = ports[1::2]
 
@@ -800,14 +562,7 @@ ${function_template.script_function(function_object)}
         port_list = flatten_channel_string(
             [ports_to_connect.output_port, ports_to_connect.input_port])
 
-        cfunc = lib_importer.windll.DAQmxAddCDAQSyncConnection
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [ctypes_byte_str]
-
-        error_code = cfunc(port_list)
-        check_for_error(error_code)
+        self._interpreter.add_cdaq_sync_connection(port_list)
 
     def remove_cdaq_sync_connection(self, ports_to_disconnect):
         """
@@ -821,13 +576,6 @@ ${function_template.script_function(function_object)}
         port_list = flatten_channel_string(
             [ports_to_disconnect.output_port, ports_to_disconnect.input_port])
 
-        cfunc = lib_importer.windll.DAQmxRemoveCDAQSyncConnection
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [ctypes_byte_str]
-
-        error_code = cfunc(port_list)
-        check_for_error(error_code)
+        self._interpreter.remove_cdaq_sync_connection(port_list)
 
     # endregion

@@ -5,9 +5,8 @@ from nidaqmx._lib import lib_importer, ctypes_byte_str
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, DaqError)
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.system.storage.persisted_scale import PersistedScale
+from nidaqmx.system.storage.persisted_scale import PersistedScale, _PersistedScaleAlternateConstructor
 from nidaqmx.utils import unflatten_channel_string
-
 
 class PersistedScaleCollection(Sequence):
     """
@@ -57,15 +56,15 @@ class PersistedScaleCollection(Sequence):
             Indicates the subset of custom scales indexed.
         """
         if isinstance(index, int):
-            return PersistedScale(self.scale_names[index])
+            return _PersistedScaleAlternateConstructor(self.scale_names[index], self._interpreter)
         elif isinstance(index, slice):
-            return [PersistedScale(name) for name in
+            return [_PersistedScaleAlternateConstructor(name, self._interpreter) for name in
                     self.scale_names[index]]
         elif isinstance(index, str):
             names = unflatten_channel_string(index)
             if len(names) == 1:
-                return PersistedScale(names[0])
-            return [PersistedScale(name) for name in names]
+                return _PersistedScaleAlternateConstructor(names[0], self._interpreter)
+            return [_PersistedScaleAlternateConstructor(name, self._interpreter) for name in names]
         else:
             raise DaqError(
                 'Invalid index type "{}" used to access collection.'
@@ -73,7 +72,7 @@ class PersistedScaleCollection(Sequence):
 
     def __iter__(self):
         for scale_name in self.scale_names:
-            yield PersistedScale(scale_name)
+            yield _PersistedScaleAlternateConstructor(scale_name, self._interpreter)
 
     def __len__(self):
         return len(self.scale_names)
@@ -86,7 +85,7 @@ class PersistedScaleCollection(Sequence):
         scale_names.reverse()
 
         for scale_name in scale_names:
-            yield PersistedScale(scale_name)
+            yield _PersistedScaleAlternateConstructor(scale_name, self._interpreter)
 
     @property
     def scale_names(self):
@@ -94,29 +93,5 @@ class PersistedScaleCollection(Sequence):
         List[str]: Indicates the names of all the custom scales on this
             collection.
         """
-        cfunc = lib_importer.windll.DAQmxGetSysScales
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes.c_char_p, ctypes.c_uint]
-
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_system_info_attribute_string(0x1266)
+        return unflatten_channel_string(val)

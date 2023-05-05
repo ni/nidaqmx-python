@@ -5,7 +5,6 @@ import numpy
 import deprecation
 
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
-from nidaqmx._task_modules.read_functions import _read_raw
 from nidaqmx.errors import check_for_error, is_string_buffer_too_small
 from nidaqmx._task_modules.channels.channel import Channel
 from nidaqmx.utils import unflatten_channel_string
@@ -77,21 +76,9 @@ class InStream:
             you read **devs_with_inserted_or_removed_accessories**.
             Otherwise, you will receive an error.
         """
-        val = c_bool32()
 
-        cfunc = (lib_importer.windll.
-                 DAQmxGetReadAccessoryInsertionOrRemovalDetected)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x2f70)
+        return val
 
     @property
     def auto_start(self):
@@ -102,46 +89,17 @@ class InStream:
             acquisition task, it also stops the task after reading the
             last sample.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetReadAutoStart
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x1826)
+        return val
 
     @auto_start.setter
     def auto_start(self, val):
-        cfunc = lib_importer.windll.DAQmxSetReadAutoStart
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, c_bool32]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_read_attribute_bool(self._handle, 0x1826, val)
 
     @auto_start.deleter
     def auto_start(self):
-        cfunc = lib_importer.windll.DAQmxResetReadAutoStart
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(self._handle, 0x1826)
 
     @property
     def aux_power_error_chans(self):
@@ -152,33 +110,9 @@ class InStream:
             Channels Exist property before you read this property.
             Otherwise, you will receive an error.
         """
-        cfunc = lib_importer.windll.DAQmxGetAuxPowerErrorChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x31e0)
+        return unflatten_channel_string(val)
 
     @property
     def aux_power_error_chans_exist(self):
@@ -190,20 +124,9 @@ class InStream:
             read the Aux Power Error Channels property. Otherwise, you
             will receive an error.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetAuxPowerErrorChansExist
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x31df)
+        return val
 
     @property
     def avail_samp_per_chan(self):
@@ -212,21 +135,9 @@ class InStream:
             channel. This value is the same for all channels in the
             task.
         """
-        val = ctypes.c_uint()
 
-        cfunc = lib_importer.windll.DAQmxGetReadAvailSampPerChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_uint)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_uint32(self._handle, 0x1223)
+        return val
 
     @property
     def change_detect_overflowed(self):
@@ -235,20 +146,9 @@ class InStream:
             events occurred faster than the device could handle them.
             Some devices detect overflows differently than others.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetReadChangeDetectHasOverflowed
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x2194)
+        return val
 
     @property
     def channels_to_read(self):
@@ -257,60 +157,18 @@ class InStream:
             Specifies a subset of channels in the task from which to
             read.
         """
-        cfunc = lib_importer.windll.DAQmxGetReadChannelsToRead
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return Channel._factory(self._handle, val.value.decode('ascii'), self._interpreter)
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x1823)
+        return Channel._factory(self._handle, val, self._interpreter)
 
     @channels_to_read.setter
     def channels_to_read(self, val):
         val = val.name
-        cfunc = lib_importer.windll.DAQmxSetReadChannelsToRead
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_read_attribute_string(self._handle, 0x1823, val)
 
     @channels_to_read.deleter
     def channels_to_read(self):
-        cfunc = lib_importer.windll.DAQmxResetReadChannelsToRead
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(self._handle, 0x1823)
 
     @property
     def common_mode_range_error_chans(self):
@@ -321,33 +179,9 @@ class InStream:
             **common_mode_range_error_chans_exist** before you read this
             property. Otherwise, you will receive an error.
         """
-        cfunc = lib_importer.windll.DAQmxGetReadCommonModeRangeErrorChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x2a99)
+        return unflatten_channel_string(val)
 
     @property
     def common_mode_range_error_chans_exist(self):
@@ -362,21 +196,9 @@ class InStream:
             **common_mode_range_error_chans**. Otherwise, you will
             receive an error.
         """
-        val = c_bool32()
 
-        cfunc = (lib_importer.windll.
-                 DAQmxGetReadCommonModeRangeErrorChansExist)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x2a98)
+        return val
 
     @property
     def curr_read_pos(self):
@@ -384,21 +206,9 @@ class InStream:
         int: Indicates in samples per channel the current position in
             the buffer.
         """
-        val = ctypes.c_ulonglong()
 
-        cfunc = lib_importer.windll.DAQmxGetReadCurrReadPos
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_ulonglong)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_uint64(self._handle, 0x1221)
+        return val
 
     @property
     def devs_with_inserted_or_removed_accessories(self):
@@ -409,34 +219,9 @@ class InStream:
             before you read this property. Otherwise, you will receive
             an error.
         """
-        cfunc = (lib_importer.windll.
-                 DAQmxGetReadDevsWithInsertedOrRemovedAccessories)
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x2f71)
+        return unflatten_channel_string(val)
 
     @property
     def di_num_booleans_per_chan(self):
@@ -445,21 +230,9 @@ class InStream:
             returns in a sample for line-based reads. If a channel has
             fewer lines than this number, the extra booleans are False.
         """
-        val = ctypes.c_uint()
 
-        cfunc = lib_importer.windll.DAQmxGetReadDigitalLinesBytesPerChan
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_uint)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_uint32(self._handle, 0x217c)
+        return val
 
     @property
     def excit_fault_chans(self):
@@ -470,33 +243,9 @@ class InStream:
             before you read this property. Otherwise, you will receive
             an error.
         """
-        cfunc = lib_importer.windll.DAQmxGetReadExcitFaultChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x3089)
+        return unflatten_channel_string(val)
 
     @property
     def excit_fault_chans_exist(self):
@@ -507,20 +256,9 @@ class InStream:
             in the task. You must read this property before you read
             **excit_fault_chans**. Otherwise, you will receive an error.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetReadExcitFaultChansExist
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x3088)
+        return val
 
     @property
     def input_buf_size(self):
@@ -532,47 +270,17 @@ class InStream:
             overrides the automatic input buffer allocation that NI-
             DAQmx performs.
         """
-        val = ctypes.c_uint()
 
-        cfunc = lib_importer.windll.DAQmxGetBufInputBufSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_uint)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_buffer_attribute_uint32(self._handle, 0x186c)
+        return val
 
     @input_buf_size.setter
     def input_buf_size(self, val):
-        cfunc = lib_importer.windll.DAQmxSetBufInputBufSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_uint]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_buffer_attribute_uint32(self._handle, 0x186c, val)
 
     @input_buf_size.deleter
     def input_buf_size(self):
-        cfunc = lib_importer.windll.DAQmxResetBufInputBufSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_buffer_attribute(self._handle, 0x186c)
 
     @property
     def input_limits_fault_chans(self):
@@ -583,33 +291,9 @@ class InStream:
             **input_limits_fault_chans_exist** before you read this
             property. Otherwise, you will receive an error.
         """
-        cfunc = lib_importer.windll.DAQmxGetReadInputLimitsFaultChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x3190)
+        return unflatten_channel_string(val)
 
     @property
     def input_limits_fault_chans_exist(self):
@@ -626,20 +310,9 @@ class InStream:
             fault at 15 mA and -15 mA, but not at -6 mA because it is in
             the range of -12 mA to -2 mA.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetReadInputLimitsFaultChansExist
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x318f)
+        return val
 
     @property
     def input_onbrd_buf_size(self):
@@ -647,21 +320,9 @@ class InStream:
         int: Indicates in samples per channel the size of the onboard
             input buffer of the device.
         """
-        val = ctypes.c_uint()
 
-        cfunc = lib_importer.windll.DAQmxGetBufInputOnbrdBufSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_uint)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_buffer_attribute_uint32(self._handle, 0x230a)
+        return val
 
     @property
     def logging_file_path(self):
@@ -674,59 +335,17 @@ class InStream:
             with "\\" or "/". Files created after specifying a new file
             path retain the same name and numbering sequence.
         """
-        cfunc = lib_importer.windll.DAQmxGetLoggingFilePath
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x2ec4)
+        return val
 
     @logging_file_path.setter
     def logging_file_path(self, val):
-        cfunc = lib_importer.windll.DAQmxSetLoggingFilePath
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_read_attribute_string(self._handle, 0x2ec4, val)
 
     @logging_file_path.deleter
     def logging_file_path(self):
-        cfunc = lib_importer.windll.DAQmxResetLoggingFilePath
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(self._handle, 0x2ec4)
 
     @property
     def logging_file_preallocation_size(self):
@@ -738,47 +357,17 @@ class InStream:
             behavior is to pre-allocate the file based on the number of
             samples you configure the task to acquire.
         """
-        val = ctypes.c_ulonglong()
 
-        cfunc = lib_importer.windll.DAQmxGetLoggingFilePreallocationSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_ulonglong)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_uint64(self._handle, 0x2fc6)
+        return val
 
     @logging_file_preallocation_size.setter
     def logging_file_preallocation_size(self, val):
-        cfunc = lib_importer.windll.DAQmxSetLoggingFilePreallocationSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_ulonglong]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_read_attribute_uint64(self._handle, 0x2fc6, val)
 
     @logging_file_preallocation_size.deleter
     def logging_file_preallocation_size(self):
-        cfunc = lib_importer.windll.DAQmxResetLoggingFilePreallocationSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(self._handle, 0x2fc6)
 
     @property
     def logging_file_write_size(self):
@@ -787,47 +376,17 @@ class InStream:
             written to disk.  The size must be evenly divisible by the
             volume sector size, in bytes.
         """
-        val = ctypes.c_uint()
 
-        cfunc = lib_importer.windll.DAQmxGetLoggingFileWriteSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_uint)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_uint32(self._handle, 0x2fc3)
+        return val
 
     @logging_file_write_size.setter
     def logging_file_write_size(self, val):
-        cfunc = lib_importer.windll.DAQmxSetLoggingFileWriteSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_uint]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_read_attribute_uint32(self._handle, 0x2fc3, val)
 
     @logging_file_write_size.deleter
     def logging_file_write_size(self):
-        cfunc = lib_importer.windll.DAQmxResetLoggingFileWriteSize
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(self._handle, 0x2fc3)
 
     @property
     def logging_mode(self):
@@ -839,47 +398,18 @@ class InStream:
             If you want to read data while logging, specify Log and Read
             mode.
         """
-        val = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxGetLoggingMode
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return LoggingMode(val.value)
+        val = self._interpreter.get_read_attribute_int32(self._handle, 0x2ec5)
+        return LoggingMode(val)
 
     @logging_mode.setter
     def logging_mode(self, val):
         val = val.value
-        cfunc = lib_importer.windll.DAQmxSetLoggingMode
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_read_attribute_int32(self._handle, 0x2ec5, val)
 
     @logging_mode.deleter
     def logging_mode(self):
-        cfunc = lib_importer.windll.DAQmxResetLoggingMode
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(self._handle, 0x2ec5)
 
     @property
     def logging_pause(self):
@@ -893,46 +423,17 @@ class InStream:
             to disk. A new TDMS group is written when logging is resumed
             from a paused state.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetLoggingPause
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x2fe3)
+        return val
 
     @logging_pause.setter
     def logging_pause(self, val):
-        cfunc = lib_importer.windll.DAQmxSetLoggingPause
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, c_bool32]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_read_attribute_bool(self._handle, 0x2fe3, val)
 
     @logging_pause.deleter
     def logging_pause(self):
-        cfunc = lib_importer.windll.DAQmxResetLoggingPause
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(self._handle, 0x2fe3)
 
     @property
     def logging_samps_per_file(self):
@@ -948,47 +449,17 @@ class InStream:
             while this attribute is set, the new file path takes effect
             on the next file created.
         """
-        val = ctypes.c_ulonglong()
 
-        cfunc = lib_importer.windll.DAQmxGetLoggingSampsPerFile
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_ulonglong)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_uint64(self._handle, 0x2fe4)
+        return val
 
     @logging_samps_per_file.setter
     def logging_samps_per_file(self, val):
-        cfunc = lib_importer.windll.DAQmxSetLoggingSampsPerFile
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_ulonglong]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_read_attribute_uint64(self._handle, 0x2fe4, val)
 
     @logging_samps_per_file.deleter
     def logging_samps_per_file(self):
-        cfunc = lib_importer.windll.DAQmxResetLoggingSampsPerFile
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(self._handle, 0x2fe4)
 
     @property
     def logging_tdms_group_name(self):
@@ -1003,59 +474,17 @@ class InStream:
             DAQmx assigns the group name Voltage Task #1, then Voltage
             Task #2.
         """
-        cfunc = lib_importer.windll.DAQmxGetLoggingTDMSGroupName
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return val.value.decode('ascii')
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x2ec6)
+        return val
 
     @logging_tdms_group_name.setter
     def logging_tdms_group_name(self, val):
-        cfunc = lib_importer.windll.DAQmxSetLoggingTDMSGroupName
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_read_attribute_string(self._handle, 0x2ec6, val)
 
     @logging_tdms_group_name.deleter
     def logging_tdms_group_name(self):
-        cfunc = lib_importer.windll.DAQmxResetLoggingTDMSGroupName
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(self._handle, 0x2ec6)
 
     @property
     def logging_tdms_operation(self):
@@ -1063,47 +492,18 @@ class InStream:
         :class:`nidaqmx.constants.LoggingOperation`: Specifies how to
             open the TDMS file.
         """
-        val = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxGetLoggingTDMSOperation
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return LoggingOperation(val.value)
+        val = self._interpreter.get_read_attribute_int32(self._handle, 0x2ec7)
+        return LoggingOperation(val)
 
     @logging_tdms_operation.setter
     def logging_tdms_operation(self, val):
         val = val.value
-        cfunc = lib_importer.windll.DAQmxSetLoggingTDMSOperation
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_read_attribute_int32(self._handle, 0x2ec7, val)
 
     @logging_tdms_operation.deleter
     def logging_tdms_operation(self):
-        cfunc = lib_importer.windll.DAQmxResetLoggingTDMSOperation
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(self._handle, 0x2ec7)
 
     @property
     def num_chans(self):
@@ -1113,21 +513,9 @@ class InStream:
             or the number of channels you specify with
             **channels_to_read**.
         """
-        val = ctypes.c_uint()
 
-        cfunc = lib_importer.windll.DAQmxGetReadNumChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_uint)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_uint32(self._handle, 0x217b)
+        return val
 
     @property
     def offset(self):
@@ -1136,46 +524,17 @@ class InStream:
             begin a read operation. This offset is relative to the
             location you specify with **relative_to**.
         """
-        val = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxGetReadOffset
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_int32(self._handle, 0x190b)
+        return val
 
     @offset.setter
     def offset(self, val):
-        cfunc = lib_importer.windll.DAQmxSetReadOffset
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_read_attribute_int32(self._handle, 0x190b, val)
 
     @offset.deleter
     def offset(self):
-        cfunc = lib_importer.windll.DAQmxResetReadOffset
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(self._handle, 0x190b)
 
     @property
     def open_chans(self):
@@ -1184,33 +543,9 @@ class InStream:
             channels. You must read **open_chans_exist** before you read
             this property. Otherwise you will receive an error.
         """
-        cfunc = lib_importer.windll.DAQmxGetReadOpenChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x3101)
+        return unflatten_channel_string(val)
 
     @property
     def open_chans_details(self):
@@ -1219,33 +554,9 @@ class InStream:
             channels. You must read **open_chans_exist** before you read
             this property. Otherwise you will receive an error.
         """
-        cfunc = lib_importer.windll.DAQmxGetReadOpenChansDetails
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x3102)
+        return unflatten_channel_string(val)
 
     @property
     def open_chans_exist(self):
@@ -1257,20 +568,9 @@ class InStream:
             you read **open_chans**. Otherwise, you will receive an
             error.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetReadOpenChansExist
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x3100)
+        return val
 
     @property
     def open_current_loop_chans(self):
@@ -1281,33 +581,9 @@ class InStream:
             you read this property. Otherwise, you will receive an
             error.
         """
-        cfunc = lib_importer.windll.DAQmxGetReadOpenCurrentLoopChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x2a0a)
+        return unflatten_channel_string(val)
 
     @property
     def open_current_loop_chans_exist(self):
@@ -1319,20 +595,9 @@ class InStream:
             **open_current_loop_chans**. Otherwise, you will receive an
             error.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetReadOpenCurrentLoopChansExist
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x2a09)
+        return val
 
     @property
     def open_thrmcpl_chans(self):
@@ -1343,33 +608,9 @@ class InStream:
             before you read this property. Otherwise, you will receive
             an error.
         """
-        cfunc = lib_importer.windll.DAQmxGetReadOpenThrmcplChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x2a97)
+        return unflatten_channel_string(val)
 
     @property
     def open_thrmcpl_chans_exist(self):
@@ -1381,20 +622,9 @@ class InStream:
             read **open_thrmcpl_chans**. Otherwise, you will receive an
             error.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetReadOpenThrmcplChansExist
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x2a96)
+        return val
 
     @property
     def overcurrent_chans(self):
@@ -1406,33 +636,9 @@ class InStream:
             error. On some devices, you must restart the task for all
             overcurrent channels to recover.
         """
-        cfunc = lib_importer.windll.DAQmxGetReadOvercurrentChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x29e7)
+        return unflatten_channel_string(val)
 
     @property
     def overcurrent_chans_exist(self):
@@ -1443,20 +649,9 @@ class InStream:
             the task. You must read this property before you read
             **overcurrent_chans**. Otherwise, you will receive an error.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetReadOvercurrentChansExist
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x29e6)
+        return val
 
     @property
     def overloaded_chans(self):
@@ -1466,33 +661,9 @@ class InStream:
             **overloaded_chans_exist** before you read this property.
             Otherwise, you will receive an error.
         """
-        cfunc = lib_importer.windll.DAQmxGetReadOverloadedChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x2175)
+        return unflatten_channel_string(val)
 
     @property
     def overloaded_chans_exist(self):
@@ -1503,20 +674,9 @@ class InStream:
             read this property before you read **overloaded_chans**.
             Otherwise, you will receive an error.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetReadOverloadedChansExist
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x2174)
+        return val
 
     @property
     def overtemperature_chans(self):
@@ -1526,33 +686,9 @@ class InStream:
             **overtemperature_chans_exist** before you read this
             property. Otherwise, you will receive an error.
         """
-        cfunc = lib_importer.windll.DAQmxGetReadOvertemperatureChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x3082)
+        return unflatten_channel_string(val)
 
     @property
     def overtemperature_chans_exist(self):
@@ -1564,20 +700,9 @@ class InStream:
             **overtemperature_chans**. Otherwise, you will receive an
             error.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetReadOvertemperatureChansExist
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x3081)
+        return val
 
     @property
     def overwrite(self):
@@ -1585,80 +710,27 @@ class InStream:
         :class:`nidaqmx.constants.OverwriteMode`: Specifies whether to
             overwrite samples in the buffer that you have not yet read.
         """
-        val = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxGetReadOverWrite
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return OverwriteMode(val.value)
+        val = self._interpreter.get_read_attribute_int32(self._handle, 0x1211)
+        return OverwriteMode(val)
 
     @overwrite.setter
     def overwrite(self, val):
         val = val.value
-        cfunc = lib_importer.windll.DAQmxSetReadOverWrite
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_read_attribute_int32(self._handle, 0x1211, val)
 
     @overwrite.deleter
     def overwrite(self):
-        cfunc = lib_importer.windll.DAQmxResetReadOverWrite
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(self._handle, 0x1211)
 
     @property
     def pll_unlocked_chans(self):
         """
         List[str]: Indicates the channels that had their PLLs unlock.
         """
-        cfunc = lib_importer.windll.DAQmxGetReadPLLUnlockedChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x3119)
+        return unflatten_channel_string(val)
 
     @property
     def pll_unlocked_chans_exist(self):
@@ -1668,20 +740,9 @@ class InStream:
             may report PLL Unlock either during acquisition or after
             acquisition.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetReadPLLUnlockedChansExist
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x3118)
+        return val
 
     @property
     def power_supply_fault_chans(self):
@@ -1691,33 +752,9 @@ class InStream:
             **power_supply_fault_chans_exist** before you read this
             property. Otherwise, you will receive an error.
         """
-        cfunc = lib_importer.windll.DAQmxGetReadPowerSupplyFaultChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x3193)
+        return unflatten_channel_string(val)
 
     @property
     def power_supply_fault_chans_exist(self):
@@ -1729,41 +766,18 @@ class InStream:
             you read **power_supply_fault_chans**. Otherwise, you will
             receive an error.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetReadPowerSupplyFaultChansExist
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x3192)
+        return val
 
     @property
     def raw_data_width(self):
         """
         int: Indicates in bytes the size of a raw sample from the task.
         """
-        val = ctypes.c_uint()
 
-        cfunc = lib_importer.windll.DAQmxGetReadRawDataWidth
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_uint)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_uint32(self._handle, 0x217a)
+        return val
 
     @property
     def read_all_avail_samp(self):
@@ -1776,46 +790,17 @@ class InStream:
             number of samples to read is -1, a read operation always
             reads all samples currently available in the buffer.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetReadReadAllAvailSamp
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x1215)
+        return val
 
     @read_all_avail_samp.setter
     def read_all_avail_samp(self, val):
-        cfunc = lib_importer.windll.DAQmxSetReadReadAllAvailSamp
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, c_bool32]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_read_attribute_bool(self._handle, 0x1215, val)
 
     @read_all_avail_samp.deleter
     def read_all_avail_samp(self):
-        cfunc = lib_importer.windll.DAQmxResetReadReadAllAvailSamp
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(self._handle, 0x1215)
 
     @property
     def relative_to(self):
@@ -1830,47 +815,18 @@ class InStream:
             a Reference Trigger, the default value is
             **ReadRelativeTo.FIRST_PRETRIGGER_SAMPLE**.
         """
-        val = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxGetReadRelativeTo
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return ReadRelativeTo(val.value)
+        val = self._interpreter.get_read_attribute_int32(self._handle, 0x190a)
+        return ReadRelativeTo(val)
 
     @relative_to.setter
     def relative_to(self, val):
         val = val.value
-        cfunc = lib_importer.windll.DAQmxSetReadRelativeTo
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_read_attribute_int32(self._handle, 0x190a, val)
 
     @relative_to.deleter
     def relative_to(self):
-        cfunc = lib_importer.windll.DAQmxResetReadRelativeTo
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(self._handle, 0x190a)
 
     @property
     def remote_sense_error_chans(self):
@@ -1881,33 +837,9 @@ class InStream:
             Exist before you read this property. Otherwise, you will
             receive an error.
         """
-        cfunc = lib_importer.windll.DAQmxGetRemoteSenseErrorChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x31de)
+        return unflatten_channel_string(val)
 
     @property
     def remote_sense_error_chans_exist(self):
@@ -1919,20 +851,9 @@ class InStream:
             property before you read the Remote Sense Error Channels
             property. Otherwise, you will receive an error.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetRemoteSenseErrorChansExist
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x31dd)
+        return val
 
     @property
     def reverse_voltage_error_chans(self):
@@ -1943,33 +864,9 @@ class InStream:
             Exist property before you read this property. Otherwise, you
             will receive an error.
         """
-        cfunc = lib_importer.windll.DAQmxGetReverseVoltageErrorChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x31e7)
+        return unflatten_channel_string(val)
 
     @property
     def reverse_voltage_error_chans_exist(self):
@@ -1982,20 +879,9 @@ class InStream:
             this property before you read the Reverse Voltage Error
             Channels property. Otherwise, you will receive an error.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetReverseVoltageErrorChansExist
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x31e6)
+        return val
 
     @property
     def sleep_time(self):
@@ -2004,47 +890,17 @@ class InStream:
             checking for available samples if **wait_mode** is
             **WaitMode.SLEEP**.
         """
-        val = ctypes.c_double()
 
-        cfunc = lib_importer.windll.DAQmxGetReadSleepTime
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_double)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_double(self._handle, 0x22b0)
+        return val
 
     @sleep_time.setter
     def sleep_time(self, val):
-        cfunc = lib_importer.windll.DAQmxSetReadSleepTime
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_double]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_read_attribute_double(self._handle, 0x22b0, val)
 
     @sleep_time.deleter
     def sleep_time(self):
-        cfunc = lib_importer.windll.DAQmxResetReadSleepTime
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(self._handle, 0x22b0)
 
     @property
     def sync_unlocked_chans(self):
@@ -2052,33 +908,9 @@ class InStream:
         List[str]: Indicates the channels from devices in an unlocked
             target.
         """
-        cfunc = lib_importer.windll.DAQmxGetReadSyncUnlockedChans
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_char_p,
-                        ctypes.c_uint]
 
-        temp_size = 0
-        while True:
-            val = ctypes.create_string_buffer(temp_size)
-
-            size_or_code = cfunc(
-                self._handle, val, temp_size)
-
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-
-        check_for_error(size_or_code)
-
-        return unflatten_channel_string(val.value.decode('ascii'))
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x313e)
+        return unflatten_channel_string(val)
 
     @property
     def sync_unlocked_chans_exist(self):
@@ -2087,20 +919,9 @@ class InStream:
             grand master. Devices may report PLL Unlock either during
             acquisition or after acquisition.
         """
-        val = c_bool32()
 
-        cfunc = lib_importer.windll.DAQmxGetReadSyncUnlockedChansExist
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_bool(self._handle, 0x313d)
+        return val
 
     @property
     def total_samp_per_chan_acquired(self):
@@ -2111,21 +932,9 @@ class InStream:
             this value is the cumulative number of samples across all
             retriggered acquisitions.
         """
-        val = ctypes.c_ulonglong()
 
-        cfunc = lib_importer.windll.DAQmxGetReadTotalSampPerChanAcquired
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle,
-                        ctypes.POINTER(ctypes.c_ulonglong)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return val.value
+        val = self._interpreter.get_read_attribute_uint64(self._handle, 0x192a)
+        return val
 
     @property
     def wait_mode(self):
@@ -2133,47 +942,18 @@ class InStream:
         :class:`nidaqmx.constants.WaitMode`: Specifies how DAQmx Read
             waits for samples to become available.
         """
-        val = ctypes.c_int()
 
-        cfunc = lib_importer.windll.DAQmxGetReadWaitMode
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            self._handle, ctypes.byref(val))
-        check_for_error(error_code)
-
-        return WaitMode(val.value)
+        val = self._interpreter.get_read_attribute_int32(self._handle, 0x2232)
+        return WaitMode(val)
 
     @wait_mode.setter
     def wait_mode(self, val):
         val = val.value
-        cfunc = lib_importer.windll.DAQmxSetReadWaitMode
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
-
-        error_code = cfunc(
-            self._handle, val)
-        check_for_error(error_code)
+        self._interpreter.set_read_attribute_int32(self._handle, 0x2232, val)
 
     @wait_mode.deleter
     def wait_mode(self):
-        cfunc = lib_importer.windll.DAQmxResetReadWaitMode
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle]
-
-        error_code = cfunc(
-            self._handle)
-        check_for_error(error_code)
+        self._interpreter.reset_read_attribute(self._handle, 0x2232)
 
     def _calculate_num_samps_per_chan(self, num_samps_per_chan):
         if num_samps_per_chan == -1:
@@ -2216,18 +996,9 @@ class InStream:
             operation (Optional[nidaqmx.constants.LoggingOperation]):
                 Specifies how to open the TDMS file.
         """
-        cfunc = lib_importer.windll.DAQmxConfigureLogging
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int, ctypes_byte_str, ctypes.c_int]
 
-        error_code = cfunc(
-            self._handle, file_path, logging_mode.value, group_name,
-            operation.value)
-        check_for_error(error_code)
+        self._interpreter.configure_logging(
+            self._handle, file_path, logging_mode.value, group_name, operation.value)
 
     def read(self, number_of_samples_per_channel=READ_ALL_AVAILABLE):
         """
@@ -2311,9 +1082,9 @@ class InStream:
 
         numpy_array = numpy.zeros(number_of_samples, dtype=dtype)
 
-        samples_read, number_of_bytes_per_sample = _read_raw(
-            self._handle, numpy_array, num_samps_per_chan,
-            self.timeout)
+        _, samples_read, _ = self._interpreter.read_raw(
+            self._handle, num_samps_per_chan,
+            self.timeout, numpy_array)
 
         if samples_read != number_of_samples:
             return numpy_array[:samples_read]
@@ -2424,9 +1195,9 @@ class InStream:
             numpy_array.nbytes, (
                 number_of_channels * channels_to_read.ai_raw_samp_size / 8))
 
-        samples_read, _ = _read_raw(
-            self._handle, numpy_array, number_of_samples_per_channel,
-            self.timeout)
+        _, samples_read, _ = self._interpreter.read_raw(
+            self._handle, number_of_samples_per_channel,
+            self.timeout, numpy_array)
 
         return samples_read
 
@@ -2438,16 +1209,8 @@ class InStream:
             file_path (str): Specifies the path to the TDMS file to
                 which you want to log data.
         """
-        cfunc = lib_importer.windll.DAQmxStartNewFile
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
 
-        error_code = cfunc(
-            self._handle, file_path)
-        check_for_error(error_code)
+        self._interpreter.start_new_file(self._handle, file_path)
 
     @property
     @deprecation.deprecated(deprecated_in="0.7.0", details="Use overwrite instead.")

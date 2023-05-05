@@ -2,10 +2,13 @@
 import pathlib
 from enum import Enum
 
+import grpc
 import pytest
 
 import nidaqmx.system
 from nidaqmx.constants import ProductCategory, UsageTypeAI
+from nidaqmx.grpc_session_options import GrpcSessionOptions
+from tests._grpc_utils import GrpcServerProcess
 
 
 class Error(Exception):
@@ -249,3 +252,56 @@ def persisted_channel(request):
 def test_assets_directory() -> pathlib.Path:
     """Gets path to test_assets directory."""
     return pathlib.Path(__file__).parent / "test_assets"
+
+
+@pytest.fixture(scope="session")
+def grpc_server_process():
+    """Gets the grpc server process."""
+    with GrpcServerProcess() as proc:
+        yield proc
+
+
+@pytest.fixture(scope="session")
+def grpc_channel(grpc_server_process):
+    """Gets the gRPC channel."""
+    with grpc.insecure_channel(f"localhost:{grpc_server_process.server_port}") as channel:
+        yield channel
+
+
+@pytest.fixture(scope="session")
+def grpc_init_kwargs(grpc_channel):
+    """Gets the keyword arguments required for creating the gRPC interpreter."""
+    grpc_options = GrpcSessionOptions(
+        grpc_channel=grpc_channel,
+        session_name="",
+    )
+    return {"grpc_options": grpc_options}
+
+
+@pytest.fixture(scope="session")
+def library_init_kwargs():
+    """Gets the keyword arguments required for creating the library interpreter."""
+    return {}
+
+
+@pytest.fixture(params=("library_init_kwargs", "grpc_init_kwargs"), scope="session")
+def init_kwargs(request):
+    """Gets the keyword arguments to create a nidaqmx session."""
+    return request.getfixturevalue(request.param)
+
+
+@pytest.fixture(scope="function")
+def task(request, init_kwargs):
+    """Gets a task instance."""
+    # set default values used for the initialization of the task.
+    init_args = {
+        "new_task_name": "",
+    }
+
+    # iterate through markers and update arguments
+    for marker in request.node.iter_markers():
+        if marker.name in init_args:  # only look at markers with valid argument names
+            init_args[marker.name] = marker.args[0]  # assume single parameter in marker
+
+    with nidaqmx.Task(**init_args, **init_kwargs) as task:
+        yield task

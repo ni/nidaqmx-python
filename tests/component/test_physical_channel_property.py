@@ -1,4 +1,3 @@
-"Contains a collection of pytest tests that validates the physical channel properties."
 import numpy
 import pytest
 
@@ -8,15 +7,13 @@ from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system import PhysicalChannel
 
 
-def test__constructed_physical_channel__get_property__returns_value():
-    """Test construction."""
+def test___constructed_physical_channel___get_property___returns_value():
     phys_chan = PhysicalChannel("bridgeTester/ai2")
 
     assert UsageTypeAI.BRIDGE in phys_chan.ai_meas_types
 
 
-def test__nonexistent_physical_channel__get_property__raises_physical_chan_does_not_exist():
-    """Test construction."""
+def test___nonexistent_physical_channel___get_property___raises_physical_chan_does_not_exist():
     phys_chan = PhysicalChannel("bridgeTester/ai1234")
 
     with pytest.raises(DaqError) as exc_info:
@@ -25,8 +22,7 @@ def test__nonexistent_physical_channel__get_property__raises_physical_chan_does_
     assert exc_info.value.error_code == DAQmxErrors.PHYSICAL_CHAN_DOES_NOT_EXIST
 
 
-def test__physical_channels_with_same_name__compare__are_equal():
-    """Test comparison."""
+def test___physical_channels_with_same_name___compare___are_equal():
     phys_chan1 = PhysicalChannel("bridgeTester/ai2")
     phys_chan2 = PhysicalChannel("bridgeTester/ai2")
 
@@ -34,8 +30,7 @@ def test__physical_channels_with_same_name__compare__are_equal():
     assert phys_chan1 == phys_chan2
 
 
-def test__physical_channels_with_different_names__compare__are_not_equal():
-    """Test comparison."""
+def test___physical_channels_with_different_names___compare___are_not_equal():
     phys_chan1 = PhysicalChannel("bridgeTester/ai2")
     phys_chan2 = PhysicalChannel("bridgeTester/ai3")
     phys_chan3 = PhysicalChannel("tsVoltageTester1/ai2")
@@ -44,17 +39,15 @@ def test__physical_channels_with_different_names__compare__are_not_equal():
     assert phys_chan1 != phys_chan3
 
 
-def test__physical_channel__get_bool_property__returns_value(any_x_series_device):
-    """Test for validating boolean attributes in physical channel."""
+def test___physical_channel___get_bool_property___returns_value(any_x_series_device):
     phys_chans = any_x_series_device.di_lines
 
     assert phys_chans[0].di_change_detect_supported
 
 
-def test__physical_channel_with_teds__get_bit_stream__returns_configured_value(
+def test___physical_channel_with_teds___get_bit_stream___returns_configured_value(
     any_x_series_device, teds_file_path
 ):
-    """Test for validating byte attributes in physical channel."""
     phys_chans = any_x_series_device.ai_physical_chans
     expected_value = numpy.array(VALUES_IN_TED, dtype=numpy.uint8)
 
@@ -63,8 +56,7 @@ def test__physical_channel_with_teds__get_bit_stream__returns_configured_value(
     assert (phys_chans["ai0"].teds_bit_stream == expected_value).all()
 
 
-def test__physical_channel__get_int32_array_property__returns_default_value(any_x_series_device):
-    """Test for validating int32 array attributes in physical channel."""
+def test___physical_channel___get_int32_array_property___returns_default_value(any_x_series_device):
     phys_chans = any_x_series_device.ai_physical_chans
     ai_channel = phys_chans["ai0"]
     expected_configs = [
@@ -76,30 +68,27 @@ def test__physical_channel__get_int32_array_property__returns_default_value(any_
     assert ai_channel.ai_term_cfgs == expected_configs
 
 
-def test__physical_channel_with_teds__get_string_property__returns_configured_value(
+def test___physical_channel_with_teds___get_string_property___returns_configured_value(
     any_x_series_device, teds_file_path
 ):
-    """Test for validating string attributes in physical channel."""
     phys_chans = any_x_series_device.ai_physical_chans
     phys_chans["ai0"].configure_teds(teds_file_path)
 
     assert phys_chans["ai0"].teds_version_letter == "A"
 
 
-def test__physical_channel_with_teds__get_uint32_array_property__returns_configured_value(
+def test___physical_channel_with_teds___get_uint32_array_property___returns_configured_value(
     any_x_series_device, teds_file_path
 ):
-    """Test for validating uint32 array attributes in physical channel."""
     phys_chans = any_x_series_device.ai_physical_chans
     phys_chans["ai0"].configure_teds(teds_file_path)
 
     assert phys_chans["ai0"].teds_template_ids == [30]
 
 
-def test__physical_channel_with_teds__get_uint32_property__returns_configured_value(
+def test___physical_channel_with_teds___get_uint32_property___returns_configured_value(
     any_x_series_device, teds_file_path
 ):
-    """Test for validating uint32 attributes in physical channel."""
     phys_chans = any_x_series_device.ai_physical_chans
     phys_chans["ai0"].configure_teds(teds_file_path)
 
