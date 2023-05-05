@@ -12,7 +12,6 @@ import ctypes
 import numpy
 
 from nidaqmx import utils
-from nidaqmx.system.device import Device
 from nidaqmx.system._collections.device_collection import DeviceCollection
 from nidaqmx.system._collections.persisted_channel_collection import (
     PersistedChannelCollection)

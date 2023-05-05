@@ -1,7 +1,6 @@
 from nidaqmx.errors import DaqError, DaqReadError, DaqWriteError, DaqWarning, DaqResourceWarning
 from nidaqmx.scale import Scale
 from nidaqmx.task import Task
-from nidaqmx._task_modules.read_functions import CtrFreq, CtrTick, CtrTime
 
 try:
     from importlib.metadata import version

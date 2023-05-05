@@ -1,6 +1,6 @@
-from nidaqmx.constants import FillMode
 import numpy
-from nidaqmx import utils
+
+from nidaqmx.constants import FillMode
 from nidaqmx import DaqError
 from nidaqmx.error_codes import DAQmxErrors
 
