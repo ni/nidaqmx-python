@@ -5,7 +5,10 @@ import numpy
 
 from nidaqmx import utils
 from nidaqmx._library_interpreter import LibraryInterpreter
-from nidaqmx._lib import enum_bitfield_to_list
+from nidaqmx._lib import (
+    lib_importer, enum_bitfield_to_list, ctypes_byte_str,
+    c_bool32)
+from nidaqmx.errors import check_for_error
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     AOPowerUpOutputBehavior, AcquisitionType, SensorPowerType,
