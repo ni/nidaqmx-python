@@ -3,7 +3,6 @@ import random
 
 import pytest
 
-import nidaqmx
 from nidaqmx.utils import flatten_channel_string
 from tests.helpers import generate_random_seed
 
@@ -82,35 +81,32 @@ class TestContainerOperations:
         assert ai_channel_1 != ai_channel_2
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_hash_operations(self, any_x_series_device, seed):
+    def test_hash_operations(self, generate_task, any_x_series_device, seed):
         """Test for hash operation."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        # Reset the pseudorandom number generator with seed.
-        random.seed(seed)
-
         ai_phys_chans = random.sample(any_x_series_device.ai_physical_chans, 3)
+        task_1 = generate_task()
+        task_2 = generate_task()
+        ai_channel_1 = task_1.ai_channels.add_ai_voltage_chan(
+            ai_phys_chans[0].name,
+            name_to_assign_to_channel="VoltageChannel",
+            max_val=5,
+            min_val=-5,
+        )
+        ai_channel_2 = task_1.ai_channels.add_ai_voltage_chan(
+            ai_phys_chans[1].name, max_val=5, min_val=-5
+        )
 
-        with nidaqmx.Task() as task_1, nidaqmx.Task() as task_2:
-            ai_channel_1 = task_1.ai_channels.add_ai_voltage_chan(
-                ai_phys_chans[0].name,
-                name_to_assign_to_channel="VoltageChannel",
-                max_val=5,
-                min_val=-5,
-            )
-            ai_channel_2 = task_1.ai_channels.add_ai_voltage_chan(
-                ai_phys_chans[1].name, max_val=5, min_val=-5
-            )
+        ai_channel_3 = task_2.ai_channels.add_ai_voltage_chan(
+            ai_phys_chans[2].name,
+            name_to_assign_to_channel="VoltageChannel",
+            max_val=5,
+            min_val=-5,
+        )
 
-            ai_channel_3 = task_2.ai_channels.add_ai_voltage_chan(
-                ai_phys_chans[2].name,
-                name_to_assign_to_channel="VoltageChannel",
-                max_val=5,
-                min_val=-5,
-            )
-
-            assert hash(ai_channel_1) == hash(task_1.ai_channels[0])
-            assert hash(ai_channel_1) != hash(ai_channel_2)
-            assert hash(task_1.ai_channels) != hash(task_2.ai_channels)
-            assert hash(ai_channel_1) != hash(ai_channel_3)
+        assert hash(ai_channel_1) == hash(task_1.ai_channels[0])
+        assert hash(ai_channel_1) != hash(ai_channel_2)
+        assert hash(task_1.ai_channels) != hash(task_2.ai_channels)
+        assert hash(ai_channel_1) != hash(ai_channel_3)

@@ -3,7 +3,6 @@ import random
 
 import pytest
 
-import nidaqmx
 from nidaqmx.constants import Signal
 from tests.helpers import generate_random_seed
 from tests.legacy.test_read_write import TestDAQmxIOBase

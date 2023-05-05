@@ -283,17 +283,35 @@ def init_kwargs(request):
 
 
 @pytest.fixture(scope="function")
-def task(request, init_kwargs):
+def task(request, generate_task):
     """Gets a task instance."""
-    # set default values used for the initialization of the task.
-    init_args = {
-        "new_task_name": "",
-    }
+    new_task_name = _get_value_from_pytest_markers("new_task_name", request)
+    new_task_name = "" if new_task_name is None else new_task_name
+    return generate_task(task_name=new_task_name)
 
-    # iterate through markers and update arguments
+
+@pytest.fixture(scope="function")
+def generate_task(init_kwargs):
+    """Gets a factory function which can be used to generate new tasks."""
+    tasks_created = []
+
+    def _create_task(task_name=""):
+        task = nidaqmx.Task(new_task_name=task_name, **init_kwargs)
+        tasks_created.append(task)
+        return task
+
+    yield _create_task
+
+    # destroying the tasks created.
+    for task in tasks_created:
+        del task
+
+
+def _get_value_from_pytest_markers(marker_name, request):
+    """Gets the value of a pytest marker based on the marker name."""
+    marker_value = None
     for marker in request.node.iter_markers():
-        if marker.name in init_args:  # only look at markers with valid argument names
-            init_args[marker.name] = marker.args[0]  # assume single parameter in marker
+        if marker.name == marker_name:  # only look at markers with valid argument name
+            marker = marker.args[0]  # assume single parameter in marker
 
-    with nidaqmx.Task(**init_args, **init_kwargs) as task:
-        yield task
+    return marker_value
