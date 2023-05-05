@@ -285,12 +285,17 @@ def has_parameter_with_ivi_dance_size_mechanism(func):
 
 def is_custom_read_write_function(func):
     """Returns True if the function is a read or write function."""
-    return func.python_codegen_method == "CustomCode_Read_Write"
+    return func.python_codegen_method in ("CustomCode_Read", "CustomCode_Write")
 
 
 def is_custom_read_function(func):
     """Returns True if the function is a read function."""
-    return func.python_codegen_method == "CustomCode_Read_Write" and "read_" in func.function_name
+    return func.python_codegen_method == "CustomCode_Read"
+
+
+def is_custom_write_function(func):
+    """Returns True if the function is a write function."""
+    return func.python_codegen_method == "CustomCode_Write"
 
 
 def get_interpreter_output_params(func):
