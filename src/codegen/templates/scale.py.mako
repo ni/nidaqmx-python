@@ -10,9 +10,6 @@ import ctypes
 import numpy
 
 from nidaqmx import utils
-from nidaqmx._lib import lib_importer, wrapped_ndpointer, ctypes_byte_str
-from nidaqmx.errors import (
-    check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
 from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})
 

@@ -9,7 +9,6 @@
 import ctypes
 import deprecation
 
-from nidaqmx._lib import lib_importer, ctypes_byte_str
 from nidaqmx.errors import (
     check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
 from nidaqmx.constants import (

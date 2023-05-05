@@ -3,11 +3,7 @@
 import ctypes
 import numpy
 
-from nidaqmx._lib import (
-    lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
 from nidaqmx.system.physical_channel import _PhysicalChannelAlternateConstructor
-from nidaqmx.errors import (
-    check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
 from nidaqmx.constants import (
     ActiveLevel, Coupling, DigitalPatternCondition, Level, TriggerType,
     WindowTriggerCondition2)

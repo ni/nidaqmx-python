@@ -3,8 +3,6 @@
 import ctypes
 import numpy
 
-from nidaqmx._lib import lib_importer, ctypes_byte_str
-from nidaqmx.errors import check_for_error
 from nidaqmx._task_modules.channels.di_channel import DIChannel
 from nidaqmx._task_modules.channel_collection import ChannelCollection
 from nidaqmx.utils import unflatten_channel_string

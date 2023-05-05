@@ -7,11 +7,6 @@ import numpy
 import warnings
 
 from nidaqmx import utils
-from nidaqmx._lib import (
-    lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
-from nidaqmx.errors import (
-    check_for_error, is_string_buffer_too_small, is_array_buffer_too_small,
-    DaqResourceWarning)
 from nidaqmx.system._watchdog_modules.expiration_state import ExpirationState
 from nidaqmx.system._watchdog_modules.expiration_states_collection import (
     ExpirationStatesCollection)

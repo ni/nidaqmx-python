@@ -5,11 +5,7 @@ import numpy
 import deprecation
 
 from nidaqmx import utils
-from nidaqmx._lib import (
-    lib_importer, wrapped_ndpointer, enum_bitfield_to_list, ctypes_byte_str,
-    c_bool32)
-from nidaqmx.errors import (
-    check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
+from nidaqmx._lib import enum_bitfield_to_list
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.system._collections.physical_channel_collection import (
     AIPhysicalChannelCollection, AOPhysicalChannelCollection,

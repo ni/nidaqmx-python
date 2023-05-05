@@ -1,9 +1,7 @@
-import ctypes
 import numpy
 import warnings
 from nidaqmx import utils
 
-from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
 from nidaqmx._task_modules.channels.channel import Channel
 from nidaqmx._task_modules.export_signals import ExportSignals
 from nidaqmx._task_modules.in_stream import InStream
@@ -27,8 +25,8 @@ from nidaqmx.constants import (
     READ_ALL_AVAILABLE, UsageTypeCO, _Save)
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import (
-    check_for_error, is_string_buffer_too_small, DaqError, DaqResourceWarning)
-from nidaqmx.system.device import _DeviceAlternateConstructor, Device
+    DaqError, DaqResourceWarning)
+from nidaqmx.system.device import _DeviceAlternateConstructor
 from nidaqmx.types import CtrFreq, CtrTick, CtrTime, PowerMeasurement
 from nidaqmx.utils import unflatten_channel_string, flatten_channel_string
 
