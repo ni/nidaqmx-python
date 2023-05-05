@@ -285,35 +285,34 @@ class TestDigitalReadWrite(TestDAQmxIOBase):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_bool_1_chan_1_samp(self, real_x_series_device, seed):
+    def test_bool_1_chan_1_samp(self, task, real_x_series_device, seed):
         """Test to validate reading and writing boolean data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         do_line = random.choice(real_x_series_device.do_lines).name
 
-        with nidaqmx.Task() as task:
-            task.do_channels.add_do_chan(do_line, line_grouping=LineGrouping.CHAN_PER_LINE)
+        task.do_channels.add_do_chan(do_line, line_grouping=LineGrouping.CHAN_PER_LINE)
 
-            # Generate random values to test.
-            values_to_test = [bool(random.getrandbits(1)) for _ in range(10)]
+        # Generate random values to test.
+        values_to_test = [bool(random.getrandbits(1)) for _ in range(10)]
 
-            values_read = []
-            for value_to_test in values_to_test:
-                task.write(value_to_test)
-                time.sleep(0.001)
-                values_read.append(task.read())
+        values_read = []
+        for value_to_test in values_to_test:
+            task.write(value_to_test)
+            time.sleep(0.001)
+            values_read.append(task.read())
 
-            assert values_read == values_to_test
+        assert values_read == values_to_test
 
-            # Verify setting number_of_samples_per_channel (even to 1)
-            # returns a list.
-            value_read = task.read(number_of_samples_per_channel=1)
-            assert isinstance(value_read, list)
-            assert len(value_read) == 1
+        # Verify setting number_of_samples_per_channel (even to 1)
+        # returns a list.
+        value_read = task.read(number_of_samples_per_channel=1)
+        assert isinstance(value_read, list)
+        assert len(value_read) == 1
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_bool_n_chan_1_samp(self, real_x_series_device, seed):
+    def test_bool_n_chan_1_samp(self, task, real_x_series_device, seed):
         """Test to validate reading and writing boolean data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -321,59 +320,55 @@ class TestDigitalReadWrite(TestDAQmxIOBase):
         number_of_channels = random.randint(2, len(real_x_series_device.do_lines))
         do_lines = random.sample(real_x_series_device.do_lines, number_of_channels)
 
-        with nidaqmx.Task() as task:
-            task.do_channels.add_do_chan(
-                flatten_channel_string([d.name for d in do_lines]),
-                line_grouping=LineGrouping.CHAN_PER_LINE,
-            )
+        task.do_channels.add_do_chan(
+            flatten_channel_string([d.name for d in do_lines]),
+            line_grouping=LineGrouping.CHAN_PER_LINE,
+        )
 
-            # Generate random values to test.
-            values_to_test = [bool(random.getrandbits(1)) for _ in range(number_of_channels)]
+        # Generate random values to test.
+        values_to_test = [bool(random.getrandbits(1)) for _ in range(number_of_channels)]
 
-            task.write(values_to_test)
-            time.sleep(0.001)
-            values_read = task.read()
+        task.write(values_to_test)
+        time.sleep(0.001)
+        values_read = task.read()
 
-            assert values_read == values_to_test
+        assert values_read == values_to_test
 
-            # Verify setting number_of_samples_per_channel (even to 1)
-            # returns a list of lists.
-            value_read = task.read(number_of_samples_per_channel=1)
-            assert isinstance(value_read, list)
-            assert isinstance(value_read[0], list)
+        # Verify setting number_of_samples_per_channel (even to 1)
+        # returns a list of lists.
+        value_read = task.read(number_of_samples_per_channel=1)
+        assert isinstance(value_read, list)
+        assert isinstance(value_read[0], list)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_uint_1_chan_1_samp(self, real_x_series_device, seed):
+    def test_uint_1_chan_1_samp(self, task, real_x_series_device, seed):
         """Test to validate reading and writing uint data ."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         do_port = random.choice(real_x_series_device.do_ports)
 
-        with nidaqmx.Task() as task:
-            task.do_channels.add_do_chan(
-                do_port.name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
-            )
+        task.do_channels.add_do_chan(do_port.name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES)
 
-            # Generate random values to test.
-            values_to_test = [int(random.getrandbits(do_port.do_port_width)) for _ in range(10)]
+        # Generate random values to test.
+        values_to_test = [int(random.getrandbits(do_port.do_port_width)) for _ in range(10)]
 
-            values_read = []
-            for value_to_test in values_to_test:
-                task.write(value_to_test)
-                time.sleep(0.001)
-                values_read.append(task.read())
+        values_read = []
+        for value_to_test in values_to_test:
+            task.write(value_to_test)
+            time.sleep(0.001)
+            values_read.append(task.read())
 
-            assert values_read == values_to_test
+        assert values_read == values_to_test
 
-            # Verify setting number_of_samples_per_channel (even to 1)
-            # returns a list.
-            value_read = task.read(number_of_samples_per_channel=1)
-            assert isinstance(value_read, list)
-            assert len(value_read) == 1
+        # Verify setting number_of_samples_per_channel (even to 1)
+        # returns a list.
+        value_read = task.read(number_of_samples_per_channel=1)
+        assert isinstance(value_read, list)
+        assert len(value_read) == 1
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_uint_multi_port(self, real_x_series_device, seed):
+    def test_uint_multi_port(self, task, real_x_series_device, seed):
         """Test to validate reading and writing uint data ."""
         if len([d.do_port_width <= 16 for d in real_x_series_device.do_ports]) < 2:
             pytest.skip("task.read() accepts max of 32 bits for digital uint reads.")
@@ -387,22 +382,21 @@ class TestDigitalReadWrite(TestDAQmxIOBase):
 
         total_port_width = sum([d.do_port_width for d in do_ports])
 
-        with nidaqmx.Task() as task:
-            task.do_channels.add_do_chan(
-                flatten_channel_string([d.name for d in do_ports]),
-                line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
-            )
+        task.do_channels.add_do_chan(
+            flatten_channel_string([d.name for d in do_ports]),
+            line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+        )
 
-            # Generate random values to test.
-            values_to_test = [int(random.getrandbits(total_port_width)) for _ in range(10)]
+        # Generate random values to test.
+        values_to_test = [int(random.getrandbits(total_port_width)) for _ in range(10)]
 
-            values_read = []
-            for value_to_test in values_to_test:
-                task.write(value_to_test)
-                time.sleep(0.001)
-                values_read.append(task.read())
+        values_read = []
+        for value_to_test in values_to_test:
+            task.write(value_to_test)
+            time.sleep(0.001)
+            values_read.append(task.read())
 
-            assert values_read == values_to_test
+        assert values_read == values_to_test
 
 
 class TestCounterReadWrite(TestDAQmxIOBase):

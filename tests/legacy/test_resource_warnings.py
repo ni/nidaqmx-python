@@ -17,9 +17,8 @@ class TestResourceWarnings:
             with nidaqmx.Task() as task:
                 task.close()
 
-    def test_unclosed_task(self):
+    def test_unclosed_task(self, task):
         """Test to validate unclosed tasks."""
-        task = nidaqmx.Task()
         # Since __del__ is not guaranteed to be called, for the purposes of
         # consistent test results call __del__ manually.
         with pytest.warns(DaqResourceWarning):

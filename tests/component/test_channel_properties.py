@@ -7,59 +7,54 @@ from nidaqmx.constants import ExcitationSource, PowerIdleOutputBehavior, RTDType
 
 
 @pytest.fixture(scope="function")
-def ai_voltage_chan_with_excit(any_x_series_device):
+def ai_voltage_chan_with_excit(task, any_x_series_device):
     """Creates AI Channel object to measure voltage."""
-    with nidaqmx.Task() as task:
-        ai_channel = task.ai_channels.add_ai_voltage_chan_with_excit(
-            any_x_series_device.ai_physical_chans[0].name,
-            voltage_excit_source=ExcitationSource.EXTERNAL,
-            voltage_excit_val=0.1,
-        )
-        yield ai_channel
+    ai_channel = task.ai_channels.add_ai_voltage_chan_with_excit(
+        any_x_series_device.ai_physical_chans[0].name,
+        voltage_excit_source=ExcitationSource.EXTERNAL,
+        voltage_excit_val=0.1,
+    )
+    yield ai_channel
 
 
 @pytest.fixture(scope="function")
-def ai_power_chan(sim_ts_power_device):
+def ai_power_chan(task, sim_ts_power_device):
     """Creates AI Channel object to measure power."""
-    with nidaqmx.Task() as task:
-        ai_pwr_channel = task.ai_channels.add_ai_power_chan(
-            f"{sim_ts_power_device.name}/power",
-            voltage_setpoint=6.0,
-            current_setpoint=3.0,
-            output_enable=True,
-        )
-        yield ai_pwr_channel
+    ai_pwr_channel = task.ai_channels.add_ai_power_chan(
+        f"{sim_ts_power_device.name}/power",
+        voltage_setpoint=6.0,
+        current_setpoint=3.0,
+        output_enable=True,
+    )
+    yield ai_pwr_channel
 
 
 @pytest.fixture(scope="function")
-def ai_rtd_chan(any_x_series_device):
+def ai_rtd_chan(task, any_x_series_device):
     """Creates AI Channel object that use an RTD to measure temperature."""
-    with nidaqmx.Task() as task:
-        ai_channel = task.ai_channels.add_ai_rtd_chan(
-            any_x_series_device.ai_physical_chans[0].name,
-            rtd_type=RTDType.PT_3750,
-        )
-        yield ai_channel
+    ai_channel = task.ai_channels.add_ai_rtd_chan(
+        any_x_series_device.ai_physical_chans[0].name,
+        rtd_type=RTDType.PT_3750,
+    )
+    yield ai_channel
 
 
 @pytest.fixture(scope="function")
-def ci_pulse_width_chan(any_x_series_device):
+def ci_pulse_width_chan(task, any_x_series_device):
     """Creates CI Channel object to measure the width of a digital pulse."""
-    with nidaqmx.Task() as task:
-        ci_channel = task.ci_channels.add_ci_pulse_width_chan(
-            any_x_series_device.ci_physical_chans[0].name,
-        )
-        yield ci_channel
+    ci_channel = task.ci_channels.add_ci_pulse_width_chan(
+        any_x_series_device.ci_physical_chans[0].name,
+    )
+    yield ci_channel
 
 
 @pytest.fixture(scope="function")
-def ci_count_edges_chan(any_x_series_device):
+def ci_count_edges_chan(task, any_x_series_device):
     """Creates CI Channel object to count edges."""
-    with nidaqmx.Task() as task:
-        ci_channel = task.ci_channels.add_ci_count_edges_chan(
-            any_x_series_device.ci_physical_chans[0].name,
-        )
-        yield ci_channel
+    ci_channel = task.ci_channels.add_ci_count_edges_chan(
+        any_x_series_device.ci_physical_chans[0].name,
+    )
+    yield ci_channel
 
 
 def test___channel___get_boolean_property___returns_default_value(
