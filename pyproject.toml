@@ -56,6 +56,7 @@ grpc = ["grpcio", "protobuf"]
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.2"
 pytest-cov = ">=4.0"
+pytest-mock = ">=3.0"
 pykka = "^3.0"
 tox = "^3.24"
 ni-python-styleguide = ">=0.4.1"
@@ -75,6 +76,9 @@ extend_exclude = "docs,generated,src/codegen/metadata,src/codegen/templates"
 
 [tool.ni-python-styleguide]
 extend_exclude = "docs,generated,src/codegen/metadata,src/codegen/templates,src/handwritten"
+
+[tool.pytest.ini_options]
+filterwarnings = ["always::ResourceWarning"]
 
 [build-system]
 requires = ["poetry>=1.2"]

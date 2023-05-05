@@ -1071,7 +1071,7 @@ class DigitalSingleChannelWriter(ChannelWriterBase):
                       AUTO_START_UNSET else True)
         
         return self._interpreter.write_digital_scalar_u32(
-            self._handle, auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
+            self._handle, auto_start, timeout, data)
 
 
 class DigitalMultiChannelWriter(ChannelWriterBase):

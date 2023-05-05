@@ -51,6 +51,7 @@ class WatchdogTask:
         """
         # Initialize the fields that __del__ accesses so it doesn't crash when __init__ raises an exception.
         self._handle = None
+        self._close_on_exit = False
         self._saved_name = task_name
 
         self._interpreter = utils._select_interpreter(grpc_options)
@@ -63,7 +64,7 @@ class WatchdogTask:
         self._expiration_states = ExpirationStatesCollection(self._handle, self._interpreter)
 
     def __del__(self):
-        if self._handle is not None:
+        if self._handle is not None and self._close_on_exit:
             warnings.warn(
                 'Task of name "{}" was not explicitly closed before it was '
                 'destructed. Resources on the task device may still be '
