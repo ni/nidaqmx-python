@@ -1,7 +1,6 @@
 from collections.abc import Sequence
 
-from nidaqmx.errors import (
-    DaqError)
+from nidaqmx.errors import DaqError
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system.storage.persisted_channel import PersistedChannel, _PersistedChannelAlternateConstructor
 from nidaqmx.utils import unflatten_channel_string

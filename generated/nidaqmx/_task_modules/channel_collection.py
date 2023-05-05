@@ -1,8 +1,7 @@
 from collections.abc import Sequence
 
 from nidaqmx._task_modules.channels.channel import Channel
-from nidaqmx.errors import (
-    DaqError)
+from nidaqmx.errors import DaqError
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.utils import unflatten_channel_string, flatten_channel_string
 
