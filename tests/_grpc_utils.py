@@ -33,11 +33,13 @@ class GrpcServerProcess:
 
     def __enter__(self):
         """Returns the GrpcServerProcess instance."""
+        self._proc.__enter__()
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         """Closes the GrpcServerProcess instance."""
         self._proc.kill()
+        self._proc.__exit__(exc_type, exc_val, exc_tb)
 
     def _get_grpc_server_exe(self):
         if os.name != "nt":
