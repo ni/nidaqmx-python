@@ -29,6 +29,7 @@ class GrpcServerProcess:
             self._stdout_thread.start()
         except Exception:
             self._proc.kill()
+            # Use communicate() to close the stdout pipe and wait for the server process to exit.
             _, _ = self._proc.communicate()
             raise
 
