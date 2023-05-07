@@ -17,10 +17,9 @@ import numpy
 from nidaqmx import utils
 from nidaqmx._library_interpreter import LibraryInterpreter
 from nidaqmx._lib import (
-    lib_importer, wrapped_ndpointer, enum_bitfield_to_list, ctypes_byte_str,
+    lib_importer, enum_bitfield_to_list, ctypes_byte_str,
     c_bool32)
-from nidaqmx.errors import (
-    check_for_error, is_string_buffer_too_small, is_array_buffer_too_small)
+from nidaqmx.errors import check_for_error
 from nidaqmx.utils import unflatten_channel_string
 %if enums_used:
 from nidaqmx.constants import (
