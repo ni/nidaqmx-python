@@ -19,7 +19,6 @@ def test___ai_task___set_valid_value_to_unsupported_property___unsupported_error
     task,
     any_x_series_device,
 ):
-    """Test for validating unsupported attribute in buffer."""
     task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
     task.timing.samp_timing_type = SampleTimingType.SAMPLE_CLOCK
 

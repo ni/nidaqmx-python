@@ -115,7 +115,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
         counters = random.sample(self._get_device_counters(real_x_series_device), 2)
 
         write_task = generate_task()
-        read_task = write_task()
+        read_task = generate_task()
         write_task.co_channels.add_co_pulse_chan_freq(counters[0], freq=frequency)
         write_task.timing.cfg_implicit_timing(sample_mode=AcquisitionType.CONTINUOUS)
         actual_frequency = write_task.co_channels.all.co_pulse_freq

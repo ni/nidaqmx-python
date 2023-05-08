@@ -1,4 +1,5 @@
 """Fixtures used in the DAQmx tests."""
+import contextlib
 import pathlib
 from enum import Enum
 
@@ -284,34 +285,38 @@ def init_kwargs(request):
 
 @pytest.fixture(scope="function")
 def task(request, generate_task):
-    """Gets a task instance."""
-    new_task_name = _get_value_from_pytest_markers("new_task_name", request)
+    """Gets a task instance.
+
+    The closure of task objects will be done by this fixture once the test is complete.
+    This fixture owns the task. Do not use it for test cases that destroy the task, or else you
+    may get double-close warnings.
+    """
+    new_task_name = _get_marker_value(request, "new_task_name", "")
     new_task_name = "" if new_task_name is None else new_task_name
     return generate_task(task_name=new_task_name)
 
 
 @pytest.fixture(scope="function")
 def generate_task(init_kwargs):
-    """Gets a factory function which can be used to generate new tasks."""
-    tasks_created = []
+    """Gets a factory function which can be used to generate new tasks.
 
-    def _create_task(task_name=""):
-        task = nidaqmx.Task(new_task_name=task_name, **init_kwargs)
-        tasks_created.append(task)
-        return task
+    The closure of task objects will be done by this fixture once the test is complete.
+    This fixture owns the task. Do not use it for test cases that destroy the task, or else you
+    may get double-close warnings.
+    """
+    with contextlib.ExitStack() as stack:
 
-    yield _create_task
+        def _create_task(task_name=""):
+            return stack.enter_context(nidaqmx.Task(new_task_name=task_name, **init_kwargs))
 
-    # destroying the tasks created.
-    for task in tasks_created:
-        del task
+        yield _create_task
 
 
-def _get_value_from_pytest_markers(marker_name, request):
+def _get_marker_value(request, marker_name, default=None):
     """Gets the value of a pytest marker based on the marker name."""
-    marker_value = None
+    marker_value = default
     for marker in request.node.iter_markers():
         if marker.name == marker_name:  # only look at markers with valid argument name
-            marker = marker.args[0]  # assume single parameter in marker
+            marker_value = marker.args[0]  # assume single parameter in marker
 
     return marker_value
