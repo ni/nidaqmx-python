@@ -218,12 +218,4 @@ class RpcError(Error):
             rpc_error = str(grpc.StatusCode(self.rpc_code))
         except Exception:
             rpc_error = str(self.rpc_code)
-        super(RpcError, self).__init__(rpc_error + ": " + self.description)
-
-
-class DriverWarning(Warning):
-    '''A warning originating from the NI-DAQmx driver'''
-
-    def __init__(self, code, description):
-        assert (code > 0), "Should not create Warning if code is not positive."
-        super(DriverWarning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
+        super().__init__(rpc_error + ": " + self.description)
