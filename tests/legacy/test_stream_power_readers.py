@@ -224,9 +224,7 @@ class TestPowerBinaryReader(TestDAQmxIOBase):
     @pytest.mark.parametrize(
         "seed,output_enable", [(generate_random_seed(), True), (generate_random_seed(), False)]
     )
-    def test_power_1_chan_n_samp_binary(
-        self, task, sim_ts_power_device, seed, output_enable
-    ):
+    def test_power_1_chan_n_samp_binary(self, task, sim_ts_power_device, seed, output_enable):
         """Test to validate power binary read operation with sample binary data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
