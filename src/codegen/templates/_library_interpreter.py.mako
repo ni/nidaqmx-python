@@ -8,11 +8,11 @@
 
 import ctypes
 import warnings
-from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 import numpy
 
 from nidaqmx._base_interpreter import BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer
+from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqReadError, DaqWarning, DaqWriteError
 
 class LibraryInterpreter(BaseInterpreter):
@@ -175,8 +175,6 @@ class LibraryInterpreter(BaseInterpreter):
 def check_for_error(error_code, samps_per_chan_written=None, samps_per_chan_read=None):
     if not error_code:
         return
-
-    from nidaqmx._lib import lib_importer
 
     if error_code < 0:
         error_buffer = ctypes.create_string_buffer(2048)
