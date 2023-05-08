@@ -109,21 +109,9 @@ class Channel:
 
             Indicates an object that represents the specified channel.
         """
-        chan_type = ctypes.c_int()
+        chan_type = interpreter.get_chan_attribute_int32(task_handle, virtual_or_physical_name, 0x187f)
 
-        cfunc = lib_importer.windll.DAQmxGetChanType
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.POINTER(ctypes.c_int)]
-
-        error_code = cfunc(
-            task_handle, virtual_or_physical_name, ctypes.byref(chan_type))
-        check_for_error(error_code)
-
-        channel_type = ChannelType(chan_type.value)
+        channel_type = ChannelType(chan_type)
 
         if channel_type == ChannelType.ANALOG_INPUT:
             return nidaqmx._task_modules.channels.AIChannel(
