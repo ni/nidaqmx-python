@@ -3,7 +3,7 @@
 import deprecation
 
 from nidaqmx import utils
-from nidaqmx._lib import enum_bitfield_to_list
+from nidaqmx._bitfield_utils import enum_bitfield_to_list
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.system._collections.physical_channel_collection import (
     AIPhysicalChannelCollection, AOPhysicalChannelCollection,
