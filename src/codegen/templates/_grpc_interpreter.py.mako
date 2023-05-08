@@ -82,7 +82,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         %endif
         %if is_read_method:
         % for param in get_read_array_parameters(func):
-        ${param}[:] = response.${param}
+        ${param}[:] = numpy.reshape(response.${param}, ${param}.shape)
         % endfor
         %endif
         %if len(output_parameters)  > 0:
