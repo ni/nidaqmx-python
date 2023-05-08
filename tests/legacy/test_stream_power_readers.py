@@ -25,7 +25,7 @@ class TestPowerSingleChannelReader(TestDAQmxIOBase):
     @pytest.mark.parametrize(
         "seed,output_enable", [(generate_random_seed(), True), (generate_random_seed(), False)]
     )
-    def test_power_1_chan_1_samp(self, generate_task, sim_ts_power_device, seed, output_enable):
+    def test_power_1_chan_1_samp(self, task, sim_ts_power_device, seed, output_enable):
         """Test to validate power read operation with sample data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -33,17 +33,16 @@ class TestPowerSingleChannelReader(TestDAQmxIOBase):
         voltage_setpoint = 0.0
         current_setpoint = 0.03
 
-        read_task = generate_task()
-        read_task.ai_channels.add_ai_power_chan(
+        task.ai_channels.add_ai_power_chan(
             f"{sim_ts_power_device.name}/power",
             voltage_setpoint,
             current_setpoint,
             output_enable,
         )
 
-        reader = PowerSingleChannelReader(read_task.in_stream)
+        reader = PowerSingleChannelReader(task.in_stream)
 
-        read_task.start()
+        task.start()
         value_read = reader.read_one_sample()
 
         if output_enable:
@@ -56,7 +55,7 @@ class TestPowerSingleChannelReader(TestDAQmxIOBase):
     @pytest.mark.parametrize(
         "seed,output_enable", [(generate_random_seed(), True), (generate_random_seed(), False)]
     )
-    def test_power_1_chan_n_samp(self, generate_task, sim_ts_power_device, seed, output_enable):
+    def test_power_1_chan_n_samp(self, task, sim_ts_power_device, seed, output_enable):
         """Test to validate power read operation with sample data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -69,17 +68,16 @@ class TestPowerSingleChannelReader(TestDAQmxIOBase):
         voltage_data = numpy.full(number_of_samples_per_channel, -1.0, dtype=numpy.float64)
         current_data = numpy.full(number_of_samples_per_channel, -1.0, dtype=numpy.float64)
 
-        read_task = generate_task()
-        read_task.ai_channels.add_ai_power_chan(
+        task.ai_channels.add_ai_power_chan(
             f"{sim_ts_power_device.name}/power",
             voltage_setpoint,
             current_setpoint,
             output_enable,
         )
 
-        reader = PowerSingleChannelReader(read_task.in_stream)
+        reader = PowerSingleChannelReader(task.in_stream)
 
-        read_task.start()
+        task.start()
         reader.read_many_sample(
             voltage_data,
             current_data,
@@ -120,7 +118,7 @@ class TestPowerMultiChannelReader(TestDAQmxIOBase):
             (generate_random_seed(), [False, False]),
         ],
     )
-    def test_power_n_chan_1_samp(self, generate_task, sim_ts_power_devices, seed, output_enables):
+    def test_power_n_chan_1_samp(self, task, sim_ts_power_devices, seed, output_enables):
         """Test to validate multi channel power read operation with sample data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -132,15 +130,14 @@ class TestPowerMultiChannelReader(TestDAQmxIOBase):
         voltage_data = numpy.full(len(sim_ts_power_devices), -1.0, dtype=numpy.float64)
         current_data = numpy.full(len(sim_ts_power_devices), -1.0, dtype=numpy.float64)
 
-        read_task = generate_task()
         for device, output_enable in zip(sim_ts_power_devices, output_enables):
-            read_task.ai_channels.add_ai_power_chan(
+            task.ai_channels.add_ai_power_chan(
                 f"{device.name}/power", voltage_setpoint, current_setpoint, output_enable
             )
 
-        reader = PowerMultiChannelReader(read_task.in_stream)
+        reader = PowerMultiChannelReader(task.in_stream)
 
-        read_task.start()
+        task.start()
         reader.read_one_sample(voltage_data, current_data)
 
         for chan_index, output_enable in enumerate(output_enables):
@@ -164,7 +161,7 @@ class TestPowerMultiChannelReader(TestDAQmxIOBase):
             (generate_random_seed(), [False, False]),
         ],
     )
-    def test_power_n_chan_n_samp(self, generate_task, sim_ts_power_devices, seed, output_enables):
+    def test_power_n_chan_n_samp(self, task, sim_ts_power_devices, seed, output_enables):
         """Test to validate multi channel power read operation with sample data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -181,15 +178,14 @@ class TestPowerMultiChannelReader(TestDAQmxIOBase):
             (len(sim_ts_power_devices), number_of_samples_per_channel), -1.0, dtype=numpy.float64
         )
 
-        read_task = generate_task()
         for device, output_enable in zip(sim_ts_power_devices, output_enables):
-            read_task.ai_channels.add_ai_power_chan(
+            task.ai_channels.add_ai_power_chan(
                 f"{device.name}/power", voltage_setpoint, current_setpoint, output_enable
             )
 
-        reader = PowerMultiChannelReader(read_task.in_stream)
+        reader = PowerMultiChannelReader(task.in_stream)
 
-        read_task.start()
+        task.start()
         reader.read_many_sample(
             voltage_data,
             current_data,
@@ -229,7 +225,7 @@ class TestPowerBinaryReader(TestDAQmxIOBase):
         "seed,output_enable", [(generate_random_seed(), True), (generate_random_seed(), False)]
     )
     def test_power_1_chan_n_samp_binary(
-        self, generate_task, sim_ts_power_device, seed, output_enable
+        self, task, sim_ts_power_device, seed, output_enable
     ):
         """Test to validate power binary read operation with sample binary data."""
         # Reset the pseudorandom number generator with seed.
@@ -243,17 +239,16 @@ class TestPowerBinaryReader(TestDAQmxIOBase):
         voltage_data = numpy.full((1, number_of_samples_per_channel), -32768, dtype=numpy.int16)
         current_data = numpy.full((1, number_of_samples_per_channel), -32768, dtype=numpy.int16)
 
-        read_task = generate_task()
-        read_task.ai_channels.add_ai_power_chan(
+        task.ai_channels.add_ai_power_chan(
             f"{sim_ts_power_device.name}/power",
             voltage_setpoint,
             current_setpoint,
             output_enable,
         )
 
-        reader = PowerBinaryReader(read_task.in_stream)
+        reader = PowerBinaryReader(task.in_stream)
 
-        read_task.start()
+        task.start()
         reader.read_many_sample(
             voltage_data,
             current_data,
@@ -281,7 +276,7 @@ class TestPowerBinaryReader(TestDAQmxIOBase):
         ],
     )
     def test_power_n_chan_many_sample_binary(
-        self, generate_task, sim_ts_power_devices, seed, output_enables
+        self, task, sim_ts_power_devices, seed, output_enables
     ):
         """Test to validate power binary read operation with sample binary data."""
         # Reset the pseudorandom number generator with seed.
@@ -299,15 +294,14 @@ class TestPowerBinaryReader(TestDAQmxIOBase):
             (len(sim_ts_power_devices), number_of_samples_per_channel), -32768, dtype=numpy.int16
         )
 
-        read_task = generate_task()
         for device, output_enable in zip(sim_ts_power_devices, output_enables):
-            read_task.ai_channels.add_ai_power_chan(
+            task.ai_channels.add_ai_power_chan(
                 f"{device.name}/power", voltage_setpoint, current_setpoint, output_enable
             )
 
-        reader = PowerBinaryReader(read_task.in_stream)
+        reader = PowerBinaryReader(task.in_stream)
 
-        read_task.start()
+        task.start()
         reader.read_many_sample(
             voltage_data,
             current_data,

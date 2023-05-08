@@ -145,7 +145,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
         counters = random.sample(self._get_device_counters(real_x_series_device), 3)
 
         write_task = generate_task()
-        read_task = write_task()
+        read_task = generate_task()
         write_task.co_channels.add_co_pulse_chan_freq(counters[1], freq=frequency)
         write_task.timing.cfg_implicit_timing(samps_per_chan=number_of_samples + 1)
 
@@ -183,7 +183,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
         counters = random.sample(self._get_device_counters(real_x_series_device), 2)
 
         write_task = generate_task()
-        read_task = write_task()
+        read_task = generate_task()
         write_task.co_channels.add_co_pulse_chan_freq(
             counters[0], freq=frequency, duty_cycle=duty_cycle
         )
@@ -215,7 +215,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
         counters = random.sample(self._get_device_counters(real_x_series_device), 2)
 
         write_task = generate_task()
-        read_task = write_task()
+        read_task = generate_task()
         write_task.co_channels.add_co_pulse_chan_freq(counters[0], idle_state=Level.HIGH)
         write_task.timing.cfg_implicit_timing(samps_per_chan=number_of_samples + 1)
         write_task.control(TaskMode.TASK_COMMIT)
@@ -268,7 +268,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
         counters = random.sample(self._get_device_counters(real_x_series_device), 2)
 
         write_task = generate_task()
-        read_task = write_task()
+        read_task = generate_task()
         write_task.co_channels.add_co_pulse_chan_time(
             counters[0], high_time=high_time, low_time=low_time
         )
@@ -299,7 +299,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
         counters = random.sample(self._get_device_counters(real_x_series_device), 2)
 
         write_task = generate_task()
-        read_task = write_task()
+        read_task = generate_task()
         write_task.co_channels.add_co_pulse_chan_time(counters[0], idle_state=Level.HIGH)
         write_task.timing.cfg_implicit_timing(samps_per_chan=number_of_samples + 1)
         write_task.control(TaskMode.TASK_COMMIT)
@@ -353,7 +353,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
         counters = random.sample(self._get_device_counters(real_x_series_device), 2)
 
         write_task = generate_task()
-        read_task = write_task()
+        read_task = generate_task()
         write_task.co_channels.add_co_pulse_chan_ticks(
             counters[0],
             f"/{real_x_series_device.name}/100kHzTimebase",
@@ -393,7 +393,7 @@ class TestCounterReaderWriter(TestDAQmxIOBase):
         counters = random.sample(self._get_device_counters(real_x_series_device), 2)
 
         write_task = generate_task()
-        read_task = write_task()
+        read_task = generate_task()
         write_task.co_channels.add_co_pulse_chan_ticks(
             counters[0],
             f"/{real_x_series_device.name}/100kHzTimebase",
