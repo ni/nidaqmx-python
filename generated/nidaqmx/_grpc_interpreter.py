@@ -74,7 +74,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 max_val_x=max_val_x,
                 num_points_to_compute=num_points_to_compute,
                 reverse_poly_order=reverse_poly_order))
-        return response.reverse_coeffs
+        return list(response.reverse_coeffs)
 
     def cfg_anlg_edge_ref_trig(
             self, task, trigger_source, pretrigger_samples, trigger_slope,
@@ -1609,7 +1609,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetAnalogPowerUpStatesWithOutputType,
             grpc_types.GetAnalogPowerUpStatesWithOutputTypeRequest(
                 channel_names=channel_names, array_size=array_size))
-        return response.state_array, response.channel_type_array
+        return list(response.state_array), list(response.channel_type_array)
 
     def get_auto_configured_cdaq_sync_connections(self):
         response = self._invoke(
@@ -1670,7 +1670,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetChanAttributeDoubleArray,
             grpc_types.GetChanAttributeDoubleArrayRequest(
                 task=task, channel=channel, attribute_raw=attribute))
-        return response.value
+        return list(response.value)
 
     def get_chan_attribute_int32(self, task, channel, attribute):
         response = self._invoke(
@@ -1712,7 +1712,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetDeviceAttributeDoubleArray,
             grpc_types.GetDeviceAttributeDoubleArrayRequest(
                 device_name=device_name, attribute_raw=attribute))
-        return response.value
+        return list(response.value)
 
     def get_device_attribute_int32(self, device_name, attribute):
         response = self._invoke(
@@ -1747,7 +1747,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetDeviceAttributeUInt32Array,
             grpc_types.GetDeviceAttributeUInt32ArrayRequest(
                 device_name=device_name, attribute_raw=attribute))
-        return response.value
+        return list(response.value)
 
     def get_digital_logic_family_power_up_state(self, device_name):
         response = self._invoke(
@@ -1887,7 +1887,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPhysicalChanAttributeBytes,
             grpc_types.GetPhysicalChanAttributeBytesRequest(
                 physical_channel=physical_channel, attribute_raw=attribute))
-        return response.value
+        return list(response.value)
 
     def get_physical_chan_attribute_double(self, physical_channel, attribute):
         response = self._invoke(
@@ -1902,7 +1902,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPhysicalChanAttributeDoubleArray,
             grpc_types.GetPhysicalChanAttributeDoubleArrayRequest(
                 physical_channel=physical_channel, attribute_raw=attribute))
-        return response.value
+        return list(response.value)
 
     def get_physical_chan_attribute_int32(self, physical_channel, attribute):
         response = self._invoke(
@@ -1939,7 +1939,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPhysicalChanAttributeUInt32Array,
             grpc_types.GetPhysicalChanAttributeUInt32ArrayRequest(
                 physical_channel=physical_channel, attribute_raw=attribute))
-        return response.value
+        return list(response.value)
 
     def get_read_attribute_bool(self, task, attribute):
         response = self._invoke(
@@ -2007,7 +2007,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetScaleAttributeDoubleArray,
             grpc_types.GetScaleAttributeDoubleArrayRequest(
                 scale_name=scale_name, attribute_raw=attribute))
-        return response.value
+        return list(response.value)
 
     def get_scale_attribute_int32(self, scale_name, attribute):
         response = self._invoke(
@@ -2153,7 +2153,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.GetTrigAttributeDoubleArray,
             grpc_types.GetTrigAttributeDoubleArrayRequest(task=task, attribute_raw=attribute))
-        return response.value
+        return list(response.value)
 
     def get_trig_attribute_int32(self, task, attribute):
         response = self._invoke(
