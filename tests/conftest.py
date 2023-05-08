@@ -292,7 +292,6 @@ def task(request, generate_task):
     may get double-close warnings.
     """
     new_task_name = _get_marker_value(request, "new_task_name", "")
-    new_task_name = "" if new_task_name is None else new_task_name
     return generate_task(task_name=new_task_name)
 
 
