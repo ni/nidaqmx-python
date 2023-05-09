@@ -1,4 +1,5 @@
 """Fixtures used in the DAQmx tests."""
+import contextlib
 import pathlib
 from enum import Enum
 
@@ -31,8 +32,11 @@ class DeviceType(Enum):
     SIMULATED = 1
 
 
-def _x_series_device(device_type):
-    system = nidaqmx.system.System.local()
+def _x_series_device(device_type, grpc_options = None):
+    if grpc_options is None:
+        system = nidaqmx.system.System.local()
+    else:
+        system = nidaqmx.system.System.remote(grpc_options= grpc_options)
 
     for device in system.devices:
         device_type_match = (
@@ -200,52 +204,73 @@ def device_by_name(request):
     return None
 
 
-@pytest.fixture(scope="module")
-def persisted_task(request):
+@pytest.fixture(scope="function")
+def persisted_task(request, generate_persisted_task):
     """Gets the persisted task based on the task name."""
-    system = nidaqmx.system.System.local()
-    task_name = request.param
+    task_name = _get_marker_value(request, "task_name", "")
+    return generate_persisted_task(task_name)
 
-    if task_name in system.tasks.task_names:
+@pytest.fixture(scope="function")
+def generate_persisted_task(init_kwargs):
+    """Gets a factory function which can be used to generate new persisted task objects."""
+
+    def _get_persisted_task(task_name=""):
+        system = nidaqmx.system.System(**init_kwargs)
         return system.tasks[task_name]
 
-    pytest.skip(
-        "Could not detect a persisted task that has the given name."
-        "Cannot proceed to run tests. Import the NI MAX configuration file located at "
-        "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required tasks."
-    )
-    return None
+    yield _get_persisted_task
 
 
-@pytest.fixture(scope="module")
-def persisted_scale(request):
+@pytest.fixture(scope="function")
+def persisted_scale(request, generate_persisted_scale):
     """Gets the persisted scale based on the scale name."""
-    system = nidaqmx.system.System.local()
-    if request.param in system.scales:
-        return system.scales[request.param]
-    pytest.skip(
-        "Could not detect a persisted scale with the requested scale name.  Cannot proceed "
-        "to run tests. Import the NI MAX configuration file located at "
-        "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required scales."
-    )
-    return None
+    scale_name = _get_marker_value(request, "scale_name", "")
+    return generate_persisted_scale(scale_name)
 
 
-@pytest.fixture(scope="module")
-def persisted_channel(request):
+@pytest.fixture(scope="function")
+def generate_persisted_scale(init_kwargs):
+    """Gets a factory function which can be used to generate new persisted scale objects."""
+
+    def _get_persisted_scale(scale_name=""):
+        system = nidaqmx.system.System(**init_kwargs)
+        return system.scales[scale_name]
+
+    yield _get_persisted_scale
+
+
+@pytest.fixture(scope="function")
+def persisted_channel(request, generate_persisted_channel):
     """Gets the persisted channel based on the channel name."""
-    system = nidaqmx.system.System.local()
-    channel_name = request.param
+    channel_name = _get_marker_value(request, "channel_name", "")
+    return generate_persisted_channel(channel_name)
 
-    if channel_name in system.global_channels.global_channel_names:
+
+@pytest.fixture(scope="function")
+def generate_persisted_channel(init_kwargs):
+    """Gets a factory function which can be used to generate new persisted channel objects."""
+
+    def _get_persisted_channel(channel_name=""):
+        system = nidaqmx.system.System(**init_kwargs)
         return system.global_channels[channel_name]
 
-    pytest.skip(
-        "Could not detect a global channel that has the given name."
-        "Cannot proceed to run tests. Import the NI MAX configuration file located at "
-        "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required channels."
-    )
-    return None
+    yield _get_persisted_channel
+
+@pytest.fixture(scope="function")
+def physical_channel(request, generate_physical_channel):
+    """Gets the persisted channel based on the channel name."""
+    channel_name = _get_marker_value(request, "channel_name", "")
+    return generate_physical_channel(channel_name)
+
+
+@pytest.fixture(scope="function")
+def generate_physical_channel(init_kwargs):
+    """Gets a factory function which can be used to generate new persisted channel objects."""
+
+    def _get_physical_channel(channel_name=""):
+        return nidaqmx.system.PhysicalChannel(channel_name, **init_kwargs)
+
+    yield _get_physical_channel
 
 
 @pytest.fixture(scope="module")
@@ -305,3 +330,48 @@ def task(request, init_kwargs):
 
     with nidaqmx.Task(**init_args, **init_kwargs) as task:
         yield task
+
+@pytest.fixture(scope="function")
+def watch_dog_task(request, init_kwargs, any_x_series_device) -> nidaqmx.system.WatchdogTask:
+    """Gets a task instance."""
+    # set default values used for the initialization of the task.
+    init_args = {
+        "device_name": any_x_series_device.name,
+        "timeout": 0.5,
+    }
+
+    # iterate through markers and update arguments
+    for marker in request.node.iter_markers():
+        if marker.name in init_args:  # only look at markers with valid argument names
+            init_args[marker.name] = marker.args[0]  # assume single parameter in marker
+
+    with nidaqmx.system.WatchdogTask(**init_args, **init_kwargs) as task:
+        yield task
+
+@pytest.fixture(scope="function")
+def device(request, generate_device):
+    """Gets a device instance."""
+    device_name = _get_marker_value(request, "device_name", "")
+    return generate_device(device_name = device_name)
+
+@pytest.fixture(scope="function")
+def generate_device(init_kwargs):
+    """Gets a factory function which can be used to generate new device objects."""
+
+    def _create_device(device_name=""):
+        return nidaqmx.system.Device(name= device_name, **init_kwargs)
+
+    yield _create_device
+
+@pytest.fixture(scope="function")
+def any_x_series_via_grpc(init_kwargs):
+    """Gets the device object for any xseries based on the grpc otions."""
+    return _x_series_device(DeviceType.ANY, **init_kwargs)
+
+def _get_marker_value(request, marker_name, default=None):
+    """Gets the value of a pytest marker based on the marker name."""
+    marker_value = default
+    for marker in request.node.iter_markers():
+        if marker.name == marker_name:  # only look at markers with valid argument name
+            marker_value = marker.args[0]  # assume single parameter in marker
+    return marker_value
