@@ -2,6 +2,7 @@
 from codegen.functions.adaptor_parameter import AdaptorParameter
 from codegen.functions.parameter import Parameter as FunctionParameter
 from codegen.properties.parameter import Parameter
+from codegen.utilities.helpers import get_attribute_function_type
 
 
 class Function:
@@ -56,6 +57,8 @@ class Function:
             self._c_function_name = function_metadata["c_function_name"]
 
         self._python_codegen_method = function_metadata.get("python_codegen_method", None)
+
+        self._attribute_function_type = get_attribute_function_type(self._function_name)
 
     @property
     def function_name(self):
@@ -136,3 +139,8 @@ class Function:
     def is_init_method(self):
         """bool: Defines if the method is an init method."""
         return self._is_init_method
+
+    @property
+    def attribute_function_type(self):
+        """bool: Defines type of attribute function."""
+        return self._attribute_function_type
