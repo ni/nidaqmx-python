@@ -12,10 +12,6 @@ import ctypes
 import numpy
 
 from nidaqmx import utils
-from nidaqmx._lib import (
-    lib_importer, wrapped_ndpointer, ctypes_byte_str, c_bool32)
-from nidaqmx.errors import check_for_error, is_string_buffer_too_small
-from nidaqmx.system.device import Device
 from nidaqmx.system._collections.device_collection import DeviceCollection
 from nidaqmx.system._collections.persisted_channel_collection import (
     PersistedChannelCollection)

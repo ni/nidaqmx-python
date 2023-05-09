@@ -14,7 +14,7 @@
 # class TestInvalidReads(TestReadWriteBase):
 
 # @pytest.mark.parametrize('seed', [generate_random_seed()])
-# def test_one_chan_read_for_n_chan_task(self, any_x_series_device, seed):
+# def test_one_chan_read_for_n_chan_task(self, task, any_x_series_device, seed):
 #     # Reset the pseudorandom number generator with seed.
 #     random.seed(seed)
 #
@@ -24,31 +24,29 @@
 #     ai_channels = random.sample(
 #         any_x_series_device.ai_physical_chans, number_of_channels)
 #
-#     with nidaqmx.Task() as task:
-#         task.ai_channels.add_ai_voltage_chan(
-#             flatten_channel_string([c.name for c in ai_channels]),
-#             max_val=10, min_val=-10)
+#     task.ai_channels.add_ai_voltage_chan(
+#         flatten_channel_string([c.name for c in ai_channels]),
+#         max_val=10, min_val=-10)
 #
-#         with pytest.raises(DaqError) as e:
-#             task.read_one_chan()
-#         assert e.value.error_code == -200523
+#     with pytest.raises(DaqError) as e:
+#         task.read_one_chan()
+#     assert e.value.error_code == -200523
 
 # @pytest.mark.parametrize('seed', [generate_random_seed()])
-# def test_numpy_read_for_counter_pulse_task(self, any_x_series_device, seed):
+# def test_numpy_read_for_counter_pulse_task(self, task, any_x_series_device, seed):
 #     # Reset the pseudorandom number generator with seed.
 #     random.seed(seed)
 #
 #     counter = random.choice(self._get_device_counters(any_x_series_device))
 #
-#     with nidaqmx.Task() as task:
-#         task.ci_channels.add_ci_pulse_chan_freq(counter)
+#     task.ci_channels.add_ci_pulse_chan_freq(counter)
 #
-#         with pytest.raises(DaqError) as e:
-#             task.read_numpy()
-#         assert e.value.error_code == -1
+#     with pytest.raises(DaqError) as e:
+#         task.read_numpy()
+#     assert e.value.error_code == -1
 #
 # @pytest.mark.parametrize('seed', [generate_random_seed()])
-# def test_numpy_read_incorrectly_shaped_data(self, any_x_series_device, seed):
+# def test_numpy_read_incorrectly_shaped_data(self, task, any_x_series_device, seed):
 #     # Reset the pseudorandom number generator with seed.
 #     random.seed(seed)
 #
@@ -59,23 +57,22 @@
 #         any_x_series_device.ai_physical_chans, number_of_channels)
 #     number_of_samples = random.randint(50, 100)
 #
-#     with nidaqmx.Task() as task:
-#         task.ai_channels.add_ai_voltage_chan(
-#             flatten_channel_string([c.name for c in channels_to_test]),
-#             max_val=10, min_val=-10)
-#         task.timing.cfg_samp_clk_timing(
-#             1000, samps_per_chan=number_of_samples)
+#     task.ai_channels.add_ai_voltage_chan(
+#         flatten_channel_string([c.name for c in channels_to_test]),
+#         max_val=10, min_val=-10)
+#     task.timing.cfg_samp_clk_timing(
+#         1000, samps_per_chan=number_of_samples)
 #
-#         # Allocate numpy array but swap the rows and columns so the numpy
-#         # array is shaped incorrectly, but the amount of samples is still
-#         # the same.
-#         numpy_array = numpy.zeros(
-#             (number_of_samples, number_of_channels), dtype=numpy.float64)
+#     # Allocate numpy array but swap the rows and columns so the numpy
+#     # array is shaped incorrectly, but the amount of samples is still
+#     # the same.
+#     numpy_array = numpy.zeros(
+#         (number_of_samples, number_of_channels), dtype=numpy.float64)
 #
-#         with pytest.raises(DaqError) as e:
-#             task.read_numpy(
-#                 numpy_array=numpy_array,
-#                 number_of_samples_per_channel=number_of_samples,
-#                 timeout=2)
+#     with pytest.raises(DaqError) as e:
+#         task.read_numpy(
+#             numpy_array=numpy_array,
+#             number_of_samples_per_channel=number_of_samples,
+#             timeout=2)
 #
-#         assert e.value.error_code == -1
+#     assert e.value.error_code == -1

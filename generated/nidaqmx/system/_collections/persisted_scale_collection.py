@@ -1,9 +1,6 @@
-import ctypes
 from collections.abc import Sequence
 
-from nidaqmx._lib import lib_importer, ctypes_byte_str
-from nidaqmx.errors import (
-    check_for_error, is_string_buffer_too_small, DaqError)
+from nidaqmx.errors import DaqError
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system.storage.persisted_scale import PersistedScale, _PersistedScaleAlternateConstructor
 from nidaqmx.utils import unflatten_channel_string

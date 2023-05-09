@@ -1,4 +1,5 @@
 """Fixtures used in the DAQmx tests."""
+import contextlib
 import pathlib
 from enum import Enum
 
@@ -8,6 +9,7 @@ import pytest
 import nidaqmx.system
 from nidaqmx.constants import ProductCategory, UsageTypeAI
 from nidaqmx.grpc_session_options import GrpcSessionOptions
+from tests._grpc_utils import GrpcServerProcess
 
 
 class Error(Exception):
@@ -254,9 +256,16 @@ def test_assets_directory() -> pathlib.Path:
 
 
 @pytest.fixture(scope="session")
-def grpc_channel():
+def grpc_server_process():
+    """Gets the grpc server process."""
+    with GrpcServerProcess() as proc:
+        yield proc
+
+
+@pytest.fixture(scope="session")
+def grpc_channel(grpc_server_process):
     """Gets the gRPC channel."""
-    with grpc.insecure_channel("localhost:31763") as channel:
+    with grpc.insecure_channel(f"localhost:{grpc_server_process.server_port}") as channel:
         yield channel
 
 
@@ -283,17 +292,38 @@ def init_kwargs(request):
 
 
 @pytest.fixture(scope="function")
-def task(request, init_kwargs):
-    """Gets a task instance."""
-    # set default values used for the initialization of the task.
-    init_args = {
-        "new_task_name": "",
-    }
+def task(request, generate_task):
+    """Gets a task instance.
 
-    # iterate through markers and update arguments
+    The closure of task objects will be done by this fixture once the test is complete.
+    This fixture owns the task. Do not use it for test cases that destroy the task, or else you
+    may get double-close warnings.
+    """
+    new_task_name = _get_marker_value(request, "new_task_name", "")
+    return generate_task(task_name=new_task_name)
+
+
+@pytest.fixture(scope="function")
+def generate_task(init_kwargs):
+    """Gets a factory function which can be used to generate new tasks.
+
+    The closure of task objects will be done by this fixture once the test is complete.
+    This fixture owns the task. Do not use it for test cases that destroy the task, or else you
+    may get double-close warnings.
+    """
+    with contextlib.ExitStack() as stack:
+
+        def _create_task(task_name=""):
+            return stack.enter_context(nidaqmx.Task(new_task_name=task_name, **init_kwargs))
+
+        yield _create_task
+
+
+def _get_marker_value(request, marker_name, default=None):
+    """Gets the value of a pytest marker based on the marker name."""
+    marker_value = default
     for marker in request.node.iter_markers():
-        if marker.name in init_args:  # only look at markers with valid argument names
-            init_args[marker.name] = marker.args[0]  # assume single parameter in marker
+        if marker.name == marker_name:  # only look at markers with valid argument name
+            marker_value = marker.args[0]  # assume single parameter in marker
 
-    with nidaqmx.Task(**init_args, **init_kwargs) as task:
-        yield task
+    return marker_value
