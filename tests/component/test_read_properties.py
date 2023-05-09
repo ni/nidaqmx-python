@@ -1,17 +1,14 @@
 import pytest
 
-import nidaqmx
-import nidaqmx.system
 from nidaqmx.constants import OverwriteMode, ReadRelativeTo
 from nidaqmx.task import Task
 
 
 @pytest.fixture()
-def ai_task(any_x_series_device):
+def ai_task(task, any_x_series_device):
     """Gets AI voltage task."""
-    with nidaqmx.Task() as task:
-        task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
-        yield task
+    task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
+    yield task
 
 
 def test___ai_task___get_int32_property___returns_default_value(ai_task: Task):

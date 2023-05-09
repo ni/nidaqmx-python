@@ -398,6 +398,8 @@ def get_response_parameters(func):
                 response_parameters.append(f"{parameter.parameter_name}")
             elif parameter.is_grpc_enum:
                 response_parameters.append(f"response.{parameter.parameter_name}_raw")
+            elif parameter.is_list:
+                response_parameters.append(f"list(response.{parameter.parameter_name})")
             else:
                 response_parameters.append(f"response.{parameter.parameter_name}")
     return ", ".join(response_parameters)

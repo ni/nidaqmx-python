@@ -316,20 +316,41 @@ def init_kwargs(request):
 
 
 @pytest.fixture(scope="function")
-def task(request, init_kwargs):
-    """Gets a task instance."""
-    # set default values used for the initialization of the task.
-    init_args = {
-        "new_task_name": "",
-    }
+def task(request, generate_task):
+    """Gets a task instance.
 
-    # iterate through markers and update arguments
+    The closure of task objects will be done by this fixture once the test is complete.
+    This fixture owns the task. Do not use it for test cases that destroy the task, or else you
+    may get double-close warnings.
+    """
+    new_task_name = _get_marker_value(request, "new_task_name", "")
+    return generate_task(task_name=new_task_name)
+
+
+@pytest.fixture(scope="function")
+def generate_task(init_kwargs):
+    """Gets a factory function which can be used to generate new tasks.
+
+    The closure of task objects will be done by this fixture once the test is complete.
+    This fixture owns the task. Do not use it for test cases that destroy the task, or else you
+    may get double-close warnings.
+    """
+    with contextlib.ExitStack() as stack:
+
+        def _create_task(task_name=""):
+            return stack.enter_context(nidaqmx.Task(new_task_name=task_name, **init_kwargs))
+
+        yield _create_task
+
+
+def _get_marker_value(request, marker_name, default=None):
+    """Gets the value of a pytest marker based on the marker name."""
+    marker_value = default
     for marker in request.node.iter_markers():
-        if marker.name in init_args:  # only look at markers with valid argument names
-            init_args[marker.name] = marker.args[0]  # assume single parameter in marker
+        if marker.name == marker_name:  # only look at markers with valid argument name
+            marker_value = marker.args[0]  # assume single parameter in marker
 
-    with nidaqmx.Task(**init_args, **init_kwargs) as task:
-        yield task
+    return marker_value
 
 @pytest.fixture(scope="function")
 def watch_dog_task(request, init_kwargs, any_x_series_device) -> nidaqmx.system.WatchdogTask:
@@ -367,11 +388,3 @@ def generate_device(init_kwargs):
 def any_x_series_via_grpc(init_kwargs):
     """Gets the device object for any xseries based on the grpc otions."""
     return _x_series_device(DeviceType.ANY, **init_kwargs)
-
-def _get_marker_value(request, marker_name, default=None):
-    """Gets the value of a pytest marker based on the marker name."""
-    marker_value = default
-    for marker in request.node.iter_markers():
-        if marker.name == marker_name:  # only look at markers with valid argument name
-            marker_value = marker.args[0]  # assume single parameter in marker
-    return marker_value

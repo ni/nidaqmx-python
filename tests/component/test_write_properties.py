@@ -1,18 +1,15 @@
 import pytest
 
-import nidaqmx
-import nidaqmx.system
 from nidaqmx.constants import WriteRelativeTo
 from nidaqmx.errors import DaqError, DAQmxErrors
 from nidaqmx.task import Task
 
 
 @pytest.fixture()
-def ao_task(any_x_series_device):
+def ao_task(task, any_x_series_device):
     """Gets AO voltage task."""
-    with nidaqmx.Task() as task:
-        task.ao_channels.add_ao_voltage_chan(any_x_series_device.ao_physical_chans[0].name)
-        yield task
+    task.ao_channels.add_ao_voltage_chan(any_x_series_device.ao_physical_chans[0].name)
+    yield task
 
 
 def test___ao_task___get_int32_property___returns_default_value(ao_task: Task):
@@ -80,31 +77,28 @@ def test___ao_task___get_uint64_property___returns_default_value(ao_task: Task):
 
 
 @pytest.mark.parametrize("device_by_name", ["aoTester"], indirect=True)
-def test___ao_current_task___get_bool_property___returns_default_value(device_by_name):
-    with nidaqmx.Task() as ao_current_task:
-        ao_current_task.ao_channels.add_ao_current_chan(device_by_name.ao_physical_chans[0].name)
-        ao_current_task.start()
+def test___ao_current_task___get_bool_property___returns_default_value(task, device_by_name):
+    task.ao_channels.add_ao_current_chan(device_by_name.ao_physical_chans[0].name)
+    task.start()
 
-        assert not ao_current_task.out_stream.open_current_loop_chans_exist
-
-
-@pytest.mark.parametrize("device_by_name", ["aoTester"], indirect=True)
-def test___ao_current_task___get_string_list_property___returns_default_value(device_by_name):
-    with nidaqmx.Task() as ao_current_task:
-        ao_current_task.ao_channels.add_ao_current_chan(device_by_name.ao_physical_chans[0].name)
-        ao_current_task.start()
-        _ = ao_current_task.out_stream.open_current_loop_chans_exist
-
-        assert ao_current_task.out_stream.open_current_loop_chans == []
+    assert not task.out_stream.open_current_loop_chans_exist
 
 
 @pytest.mark.parametrize("device_by_name", ["aoTester"], indirect=True)
-def test___ao_current_task__read_property___out_of_order___throws_daqerror(device_by_name):
-    with nidaqmx.Task() as ao_current_task:
-        ao_current_task.ao_channels.add_ao_current_chan(device_by_name.ao_physical_chans[0].name)
-        ao_current_task.start()
+def test___ao_current_task___get_string_list_property___returns_default_value(task, device_by_name):
+    task.ao_channels.add_ao_current_chan(device_by_name.ao_physical_chans[0].name)
+    task.start()
+    _ = task.out_stream.open_current_loop_chans_exist
 
-        with pytest.raises(DaqError) as exc_info:
-            _ = ao_current_task.out_stream.open_current_loop_chans
+    assert task.out_stream.open_current_loop_chans == []
 
-        assert exc_info.value.error_type == DAQmxErrors.TWO_PART_ATTRIBUTE_CALLED_OUT_OF_ORDER
+
+@pytest.mark.parametrize("device_by_name", ["aoTester"], indirect=True)
+def test___ao_current_task__read_property___out_of_order___throws_daqerror(task, device_by_name):
+    task.ao_channels.add_ao_current_chan(device_by_name.ao_physical_chans[0].name)
+    task.start()
+
+    with pytest.raises(DaqError) as exc_info:
+        _ = task.out_stream.open_current_loop_chans
+
+    assert exc_info.value.error_type == DAQmxErrors.TWO_PART_ATTRIBUTE_CALLED_OUT_OF_ORDER
