@@ -1,13 +1,13 @@
 <%page args="function"/>\
 <%
-    from codegen.utilities.interpreter_helpers import get_argument_types, generate_interpreter_function_call_args, get_output_param_with_ivi_dance_mechanism, get_output_params 
+    from codegen.utilities.interpreter_helpers import get_argument_types, generate_interpreter_function_call_args, get_output_param_with_ivi_dance_mechanism, get_output_params, is_attribute_function 
     from codegen.utilities.function_helpers import instantiate_explicit_output_param
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
 %>\
         cfunc = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
 \
 ## Create argument ctypes types list.
-%if function.calling_convention == 'StdCall':
+%if function.calling_convention == 'StdCall' or is_attribute_function(function):
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:

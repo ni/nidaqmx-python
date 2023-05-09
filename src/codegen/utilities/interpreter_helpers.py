@@ -112,9 +112,7 @@ def generate_interpreter_function_call_args(function_metadata):
                 param.parameter_name == "value"
                 and function_metadata.attribute_function_type == AttributeFunctionType.SET
             ):
-                function_call_args.append(
-                    type_cast_attribute_set_function_parameter(param)
-                )
+                function_call_args.append(type_cast_attribute_set_function_parameter(param))
             else:
                 function_call_args.append(param.parameter_name)
 
@@ -498,3 +496,10 @@ def is_numpy_array_datatype(param):
     if param.ctypes_data_type.startswith("numpy."):
         return True
     return False
+
+
+def is_attribute_function(func):
+    """Returns True if function is a get/set/reset function."""
+    if func.attribute_function_type == AttributeFunctionType.NONE:
+        return False
+    return True
