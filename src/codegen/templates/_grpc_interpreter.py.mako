@@ -158,4 +158,12 @@ def _assign_numpy_array(numpy_array, grpc_array):
     if numpy_array.size <= grpc_array_size:
         numpy_array.flat[:grpc_array_size] = grpc_array
     else:
-        raise errors.DaqError(error_codes.DAQmxErrors.READ_BUFFER_TOO_SMALL)
+        raise errors.DaqError(
+            'Read cannot be performed because the NumPy array passed into '
+            'this function is too small. You must pass in a NumPy array of the '
+            'correct size based on the number of channels in the task and the '
+            'number of samples per channel requested.\n\n'
+            'NumPy array size: {numpy_array.size}\n'
+            'Required size: {grpc_array_size}'
+            .format(numpy_array.size, grpc_array_size),
+            error_codes.DAQmxErrors.READ_BUFFER_TOO_SMALL)
