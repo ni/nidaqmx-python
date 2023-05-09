@@ -3,7 +3,6 @@ import random
 
 import pytest
 
-import nidaqmx
 from nidaqmx.constants import TEDSUnits, TerminalConfiguration
 from tests.helpers import generate_random_seed
 
@@ -15,7 +14,9 @@ class TestTEDS:
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_create_teds_ai_voltage_chan(self, any_x_series_device, seed, test_assets_directory):
+    def test_create_teds_ai_voltage_chan(
+        self, task, any_x_series_device, seed, test_assets_directory
+    ):
         """Test to validate TEDS functionality."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -33,17 +34,16 @@ class TestTEDS:
         assert ai_phys_chan.teds_version_num == 1
         assert ai_phys_chan.teds_template_ids == [30]
 
-        with nidaqmx.Task() as task:
-            ai_channel = task.ai_channels.add_teds_ai_voltage_chan(
-                ai_phys_chan.name,
-                name_to_assign_to_channel="TEDSVoltageChannel",
-                terminal_config=TerminalConfiguration.DEFAULT,
-                min_val=-300.0,
-                max_val=100.0,
-                units=TEDSUnits.FROM_TEDS,
-            )
+        ai_channel = task.ai_channels.add_teds_ai_voltage_chan(
+            ai_phys_chan.name,
+            name_to_assign_to_channel="TEDSVoltageChannel",
+            terminal_config=TerminalConfiguration.DEFAULT,
+            min_val=-300.0,
+            max_val=100.0,
+            units=TEDSUnits.FROM_TEDS,
+        )
 
-            assert ai_channel.ai_teds_is_teds
-            assert ai_channel.ai_teds_units == "Kelvin"
-            assert ai_channel.ai_min == -300.0
-            assert ai_channel.ai_max == 100.0
+        assert ai_channel.ai_teds_is_teds
+        assert ai_channel.ai_teds_units == "Kelvin"
+        assert ai_channel.ai_min == -300.0
+        assert ai_channel.ai_max == 100.0
