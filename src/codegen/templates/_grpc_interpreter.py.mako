@@ -13,6 +13,7 @@ import typing
 import warnings
 
 from . import errors as errors
+from . import error_codes
 from nidaqmx._base_interpreter import BaseInterpreter
 from nidaqmx._stubs import nidaqmx_pb2 as grpc_types
 from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
@@ -138,10 +139,23 @@ class GrpcStubInterpreter(BaseInterpreter):
         %endif
         %if is_read_method:
         % for param in get_read_array_parameters(func):
-        nidaqmx.utils.assign_numpy_array(${param}, response.${param})
+        _assign_numpy_array(${param}, response.${param})
         % endfor
         %endif
         %if len(output_parameters)  > 0:
         return ${get_response_parameters(func)}
         %endif
 % endfor
+
+def _assign_numpy_array(numpy_array, grpc_array):
+    """ Assigns the grpc array to the numpy array, while still maintaining the 
+    original shape of the numpy array. 
+    
+    The numpy array assignment is skipped when the length of the grpc array 
+    is greater than the numpy array as this might result in data loss.
+    """
+    grpc_array_size = len(grpc_array)
+    if numpy_array.size <= grpc_array_size:
+        numpy_array.flat[:grpc_array_size] = grpc_array
+    else:
+        raise errors.DaqError(error_codes.DAQmxErrors.READ_BUFFER_TOO_SMALL)

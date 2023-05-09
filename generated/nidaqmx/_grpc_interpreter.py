@@ -6,6 +6,7 @@ import typing
 import warnings
 
 from . import errors as errors
+from . import error_codes
 from nidaqmx._base_interpreter import BaseInterpreter
 from nidaqmx._stubs import nidaqmx_pb2 as grpc_types
 from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
@@ -2325,7 +2326,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-        nidaqmx.utils.assign_numpy_array(read_array, response.read_array)
+        _assign_numpy_array(read_array, response.read_array)
         return read_array, response.samps_per_chan_read
 
     def read_analog_scalar_f64(self, task, timeout):
@@ -2342,7 +2343,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-        nidaqmx.utils.assign_numpy_array(read_array, response.read_array)
+        _assign_numpy_array(read_array, response.read_array)
         return read_array, response.samps_per_chan_read
 
     def read_binary_i32(
@@ -2353,7 +2354,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-        nidaqmx.utils.assign_numpy_array(read_array, response.read_array)
+        _assign_numpy_array(read_array, response.read_array)
         return read_array, response.samps_per_chan_read
 
     def read_binary_u16(
@@ -2364,7 +2365,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-        nidaqmx.utils.assign_numpy_array(read_array, response.read_array)
+        _assign_numpy_array(read_array, response.read_array)
         return read_array, response.samps_per_chan_read
 
     def read_binary_u32(
@@ -2375,7 +2376,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-        nidaqmx.utils.assign_numpy_array(read_array, response.read_array)
+        _assign_numpy_array(read_array, response.read_array)
         return read_array, response.samps_per_chan_read
 
     def read_counter_f64(self, task, num_samps_per_chan, timeout, read_array):
@@ -2384,7 +2385,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.ReadCounterF64Request(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, array_size_in_samps=read_array.size))
-        nidaqmx.utils.assign_numpy_array(read_array, response.read_array)
+        _assign_numpy_array(read_array, response.read_array)
         return read_array, response.samps_per_chan_read
 
     def read_counter_f64_ex(
@@ -2395,7 +2396,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-        nidaqmx.utils.assign_numpy_array(read_array, response.read_array)
+        _assign_numpy_array(read_array, response.read_array)
         return read_array, response.samps_per_chan_read
 
     def read_counter_scalar_f64(self, task, timeout):
@@ -2416,7 +2417,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.ReadCounterU32Request(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, array_size_in_samps=read_array.size))
-        nidaqmx.utils.assign_numpy_array(read_array, response.read_array)
+        _assign_numpy_array(read_array, response.read_array)
         return read_array, response.samps_per_chan_read
 
     def read_counter_u32_ex(
@@ -2427,7 +2428,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-        nidaqmx.utils.assign_numpy_array(read_array, response.read_array)
+        _assign_numpy_array(read_array, response.read_array)
         return read_array, response.samps_per_chan_read
 
     def read_ctr_freq(
@@ -2439,8 +2440,8 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, interleaved_raw=interleaved,
                 array_size_in_samps=read_array_frequency.size))
-        nidaqmx.utils.assign_numpy_array(read_array_frequency, response.read_array_frequency)
-        nidaqmx.utils.assign_numpy_array(read_array_duty_cycle, response.read_array_duty_cycle)
+        _assign_numpy_array(read_array_frequency, response.read_array_frequency)
+        _assign_numpy_array(read_array_duty_cycle, response.read_array_duty_cycle)
         return read_array_frequency, read_array_duty_cycle, response.samps_per_chan_read
 
     def read_ctr_freq_scalar(self, task, timeout):
@@ -2458,8 +2459,8 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, interleaved_raw=interleaved,
                 array_size_in_samps=read_array_high_ticks.size))
-        nidaqmx.utils.assign_numpy_array(read_array_high_ticks, response.read_array_high_ticks)
-        nidaqmx.utils.assign_numpy_array(read_array_low_ticks, response.read_array_low_ticks)
+        _assign_numpy_array(read_array_high_ticks, response.read_array_high_ticks)
+        _assign_numpy_array(read_array_low_ticks, response.read_array_low_ticks)
         return read_array_high_ticks, read_array_low_ticks, response.samps_per_chan_read
 
     def read_ctr_ticks_scalar(self, task, timeout):
@@ -2477,8 +2478,8 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, interleaved_raw=interleaved,
                 array_size_in_samps=read_array_high_time.size))
-        nidaqmx.utils.assign_numpy_array(read_array_high_time, response.read_array_high_time)
-        nidaqmx.utils.assign_numpy_array(read_array_low_time, response.read_array_low_time)
+        _assign_numpy_array(read_array_high_time, response.read_array_high_time)
+        _assign_numpy_array(read_array_low_time, response.read_array_low_time)
         return read_array_high_time, read_array_low_time, response.samps_per_chan_read
 
     def read_ctr_time_scalar(self, task, timeout):
@@ -2495,7 +2496,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_bytes=read_array.size))
-        nidaqmx.utils.assign_numpy_array(read_array, response.read_array)
+        _assign_numpy_array(read_array, response.read_array)
         return read_array, response.samps_per_chan_read, response.num_bytes_per_samp
 
     def read_digital_scalar_u32(self, task, timeout):
@@ -2512,7 +2513,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-        nidaqmx.utils.assign_numpy_array(read_array, response.read_array)
+        _assign_numpy_array(read_array, response.read_array)
         return read_array, response.samps_per_chan_read
 
     def read_digital_u32(
@@ -2523,7 +2524,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-        nidaqmx.utils.assign_numpy_array(read_array, response.read_array)
+        _assign_numpy_array(read_array, response.read_array)
         return read_array, response.samps_per_chan_read
 
     def read_digital_u8(
@@ -2534,7 +2535,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
-        nidaqmx.utils.assign_numpy_array(read_array, response.read_array)
+        _assign_numpy_array(read_array, response.read_array)
         return read_array, response.samps_per_chan_read
 
     def read_power_binary_i16(
@@ -2546,8 +2547,8 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array_voltage.size))
-        nidaqmx.utils.assign_numpy_array(read_array_voltage, response.read_array_voltage)
-        nidaqmx.utils.assign_numpy_array(read_array_current, response.read_array_current)
+        _assign_numpy_array(read_array_voltage, response.read_array_voltage)
+        _assign_numpy_array(read_array_current, response.read_array_current)
         return read_array_voltage, read_array_current, response.samps_per_chan_read
 
     def read_power_f64(
@@ -2559,8 +2560,8 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array_voltage.size))
-        nidaqmx.utils.assign_numpy_array(read_array_voltage, response.read_array_voltage)
-        nidaqmx.utils.assign_numpy_array(read_array_current, response.read_array_current)
+        _assign_numpy_array(read_array_voltage, response.read_array_voltage)
+        _assign_numpy_array(read_array_current, response.read_array_current)
         return read_array_voltage, read_array_current, response.samps_per_chan_read
 
     def read_power_scalar_f64(self, task, timeout):
@@ -2575,7 +2576,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.ReadRawRequest(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, array_size_in_bytes=read_array.size))
-        nidaqmx.utils.assign_numpy_array(read_array, response.read_array)
+        _assign_numpy_array(read_array, response.read_array)
         return read_array, response.samps_read, response.num_bytes_per_samp
 
     def register_done_event(
@@ -3383,3 +3384,16 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WriteToTEDSFromFileRequest(
                 physical_channel=physical_channel, file_path=file_path,
                 basic_teds_options_raw=basic_teds_options))
+
+def _assign_numpy_array(numpy_array, grpc_array):
+    """ Assigns the grpc array to the numpy array, while still maintaining the 
+    original shape of the numpy array. 
+    
+    The numpy array assignment is skipped when the length of the grpc array 
+    is greater than the numpy array as this might result in data loss.
+    """
+    grpc_array_size = len(grpc_array)
+    if numpy_array.size <= grpc_array_size:
+        numpy_array.flat[:grpc_array_size] = grpc_array
+    else:
+        raise errors.DaqError(error_codes.DAQmxErrors.READ_BUFFER_TOO_SMALL)
