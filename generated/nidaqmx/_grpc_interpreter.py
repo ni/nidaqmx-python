@@ -834,7 +834,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 min_val=min_val, max_val=max_val, units_raw=units,
                 resistance_config_raw=resistance_config,
                 voltage_excit_source_raw=voltage_excit_source,
-                voltage_excit_val=voltage_excit_val, a=a, b=b, c=c, r_1=r_1))
+                voltage_excit_val=voltage_excit_val, a=a, b=b, c=c, r1=r_1))
 
     def create_ai_torque_bridge_polynomial_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -976,7 +976,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 rtd_type_raw=rtd_type,
                 resistance_config_raw=resistance_config,
                 current_excit_source_raw=current_excit_source,
-                current_excit_val=current_excit_val, r_0=r_0))
+                current_excit_val=current_excit_val, r0=r_0))
 
     def create_ao_current_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1498,7 +1498,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 min_val=min_val, max_val=max_val, units_raw=units,
                 resistance_config_raw=resistance_config,
                 voltage_excit_source_raw=voltage_excit_source,
-                voltage_excit_val=voltage_excit_val, r_1=r_1))
+                voltage_excit_val=voltage_excit_val, r1=r_1))
 
     def create_tedsai_torque_bridge_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,

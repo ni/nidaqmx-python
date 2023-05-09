@@ -46,6 +46,11 @@ INCLUDE_SIZE_PARAMETER_IN_SIGNATURE_FUNCTIONS = [
     "get_analog_power_up_states_with_output_type",
 ]
 
+MODIFIED_INTERPRETER_PARAMS = {
+    "r_0":"r0",
+    "r_1":"r1",
+}
+
 
 def get_interpreter_functions(metadata):
     """Converts the scrapigen metadata into a list of functions."""
@@ -236,7 +241,10 @@ def get_grpc_interpreter_call_params(func, params):
     has_read_array_parameter = False
     for param in params:
         if param.parameter_name not in compound_params:
-            if is_read_function and "read_array" in param.parameter_name:
+            name = param.parameter_name
+            if param.parameter_name in MODIFIED_INTERPRETER_PARAMS:
+                name = MODIFIED_INTERPRETER_PARAMS.get(param.parameter_name)
+            if is_read_function and "read_array" in name:
                 if has_read_array_parameter:
                     continue
                 grpc_params.append(
@@ -244,9 +252,9 @@ def get_grpc_interpreter_call_params(func, params):
                 )
                 has_read_array_parameter = True
             elif param.is_grpc_enum or (param.is_enum and not param.is_list):
-                grpc_params.append(f"{param.parameter_name}_raw={param.parameter_name}")
+                grpc_params.append(f"{name}_raw={param.parameter_name}")
             else:
-                grpc_params.append(f"{param.parameter_name}={param.parameter_name}")
+                grpc_params.append(f"{name}={param.parameter_name}")
     if func.is_init_method:
         grpc_params.append("initialization_behavior=self._grpc_options.initialization_behavior")
     return ", ".join(grpc_params)
@@ -394,14 +402,17 @@ def get_response_parameters(func):
     output_parameters = get_output_params(func)
     for parameter in output_parameters:
         if not parameter.repeating_argument:
+            name = parameter.parameter_name
+            if parameter.parameter_name in MODIFIED_INTERPRETER_PARAMS:
+                name = MODIFIED_INTERPRETER_PARAMS.get(parameter.parameter_name)
             if is_read_method and "read_array" in parameter.parameter_name:
-                response_parameters.append(f"{parameter.parameter_name}")
+                response_parameters.append(f"{name}")
             elif parameter.is_grpc_enum:
-                response_parameters.append(f"response.{parameter.parameter_name}_raw")
+                response_parameters.append(f"response.{name}_raw")
             elif parameter.is_list:
-                response_parameters.append(f"list(response.{parameter.parameter_name})")
+                response_parameters.append(f"list(response.{name})")
             else:
-                response_parameters.append(f"response.{parameter.parameter_name}")
+                response_parameters.append(f"response.{name}")
     return ", ".join(response_parameters)
 
 
