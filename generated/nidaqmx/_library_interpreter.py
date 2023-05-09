@@ -2366,8 +2366,6 @@ class LibraryInterpreter(BaseInterpreter):
         return value.value
 
     def get_cal_info_attribute_string(self, device_name, attribute):
-        value = ctypes.c_char_p
-
         cfunc = lib_importer.cdll.DAQmxGetCalInfoAttribute
         with cfunc.arglock:
             cfunc.argtypes = [
@@ -2465,8 +2463,6 @@ class LibraryInterpreter(BaseInterpreter):
         return value.value
 
     def get_chan_attribute_string(self, task, channel, attribute):
-        value = ctypes.c_char_p
-
         cfunc = lib_importer.cdll.DAQmxGetChanAttribute
         with cfunc.arglock:
             cfunc.argtypes = [
@@ -2587,8 +2583,6 @@ class LibraryInterpreter(BaseInterpreter):
         return value.tolist()
 
     def get_device_attribute_string(self, device_name, attribute):
-        value = ctypes.c_char_p
-
         cfunc = lib_importer.cdll.DAQmxGetDeviceAttribute
         with cfunc.arglock:
             cfunc.argtypes = [
@@ -2780,8 +2774,6 @@ class LibraryInterpreter(BaseInterpreter):
         return value.value
 
     def get_exported_signal_attribute_string(self, task, attribute):
-        value = ctypes.c_char_p
-
         cfunc = lib_importer.cdll.DAQmxGetExportedSignalAttribute
         with cfunc.arglock:
             cfunc.argtypes = [
@@ -2839,8 +2831,6 @@ class LibraryInterpreter(BaseInterpreter):
         return value.value
 
     def get_persisted_chan_attribute_string(self, channel, attribute):
-        value = ctypes.c_char_p
-
         cfunc = lib_importer.cdll.DAQmxGetPersistedChanAttribute
         with cfunc.arglock:
             cfunc.argtypes = [
@@ -2876,8 +2866,6 @@ class LibraryInterpreter(BaseInterpreter):
         return value.value
 
     def get_persisted_scale_attribute_string(self, scale_name, attribute):
-        value = ctypes.c_char_p
-
         cfunc = lib_importer.cdll.DAQmxGetPersistedScaleAttribute
         with cfunc.arglock:
             cfunc.argtypes = [
@@ -2913,8 +2901,6 @@ class LibraryInterpreter(BaseInterpreter):
         return value.value
 
     def get_persisted_task_attribute_string(self, task_name, attribute):
-        value = ctypes.c_char_p
-
         cfunc = lib_importer.cdll.DAQmxGetPersistedTaskAttribute
         with cfunc.arglock:
             cfunc.argtypes = [
@@ -3047,8 +3033,6 @@ class LibraryInterpreter(BaseInterpreter):
         return value.tolist()
 
     def get_physical_chan_attribute_string(self, physical_channel, attribute):
-        value = ctypes.c_char_p
-
         cfunc = lib_importer.cdll.DAQmxGetPhysicalChanAttribute
         with cfunc.arglock:
             cfunc.argtypes = [
@@ -3147,8 +3131,6 @@ class LibraryInterpreter(BaseInterpreter):
         return value.value
 
     def get_read_attribute_string(self, task, attribute):
-        value = ctypes.c_char_p
-
         cfunc = lib_importer.cdll.DAQmxGetReadAttribute
         with cfunc.arglock:
             cfunc.argtypes = [
@@ -3285,8 +3267,6 @@ class LibraryInterpreter(BaseInterpreter):
         return value.value
 
     def get_scale_attribute_string(self, scale_name, attribute):
-        value = ctypes.c_char_p
-
         cfunc = lib_importer.cdll.DAQmxGetScaleAttribute
         with cfunc.arglock:
             cfunc.argtypes = [
@@ -3312,8 +3292,6 @@ class LibraryInterpreter(BaseInterpreter):
         raise NotImplementedError
 
     def get_system_info_attribute_string(self, attribute):
-        value = ctypes.c_char_p
-
         cfunc = lib_importer.cdll.DAQmxGetSystemInfoAttribute
         with cfunc.arglock:
             cfunc.argtypes = [
@@ -3362,8 +3340,6 @@ class LibraryInterpreter(BaseInterpreter):
         return value.value
 
     def get_task_attribute_string(self, task, attribute):
-        value = ctypes.c_char_p
-
         cfunc = lib_importer.cdll.DAQmxGetTaskAttribute
         with cfunc.arglock:
             cfunc.argtypes = [
@@ -3464,8 +3440,6 @@ class LibraryInterpreter(BaseInterpreter):
         return value.value
 
     def get_timing_attribute_ex_string(self, task, device_names, attribute):
-        value = ctypes.c_char_p
-
         cfunc = lib_importer.cdll.DAQmxGetTimingAttributeEx
         with cfunc.arglock:
             cfunc.argtypes = [
@@ -3527,8 +3501,6 @@ class LibraryInterpreter(BaseInterpreter):
         return value.value
 
     def get_timing_attribute_string(self, task, attribute):
-        value = ctypes.c_char_p
-
         cfunc = lib_importer.cdll.DAQmxGetTimingAttribute
         with cfunc.arglock:
             cfunc.argtypes = [
@@ -3662,8 +3634,6 @@ class LibraryInterpreter(BaseInterpreter):
         return value.tolist()
 
     def get_trig_attribute_string(self, task, attribute):
-        value = ctypes.c_char_p
-
         cfunc = lib_importer.cdll.DAQmxGetTrigAttribute
         with cfunc.arglock:
             cfunc.argtypes = [
@@ -3738,8 +3708,6 @@ class LibraryInterpreter(BaseInterpreter):
         return value.value
 
     def get_watchdog_attribute_string(self, task, lines, attribute):
-        value = ctypes.c_char_p
-
         cfunc = lib_importer.cdll.DAQmxGetWatchdogAttribute
         with cfunc.arglock:
             cfunc.argtypes = [
@@ -3801,8 +3769,6 @@ class LibraryInterpreter(BaseInterpreter):
         return value.value
 
     def get_write_attribute_string(self, task, attribute):
-        value = ctypes.c_char_p
-
         cfunc = lib_importer.cdll.DAQmxGetWriteAttribute
         with cfunc.arglock:
             cfunc.argtypes = [

@@ -195,11 +195,6 @@ def get_instantiation_lines_for_output(func):
                 instantiation_lines.append(
                     f"{param.parameter_name} = numpy.zeros(size, dtype={param.ctypes_data_type})"
                 )
-            elif (
-                func.attribute_function_type == AttributeFunctionType.GET
-                and not is_numpy_array_datatype(param.ctypes_data_type)
-            ):
-                instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}")
         else:
             instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
     return instantiation_lines
