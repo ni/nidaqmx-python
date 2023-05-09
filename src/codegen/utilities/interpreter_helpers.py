@@ -97,7 +97,7 @@ def generate_interpreter_function_call_args(function_metadata):
         ):
             if param.has_explicit_buffer_size:
                 if (
-                    is_numpy_array_datatype(param.ctypes_data_type)
+                    is_numpy_array_datatype(param)
                     and function_metadata.attribute_function_type == AttributeFunctionType.GET
                 ):
                     function_call_args.append(
@@ -113,9 +113,7 @@ def generate_interpreter_function_call_args(function_metadata):
                 and function_metadata.attribute_function_type == AttributeFunctionType.SET
             ):
                 function_call_args.append(
-                    type_cast_attribute_set_function_parameter(
-                        param.ctypes_data_type, param.parameter_name
-                    )
+                    type_cast_attribute_set_function_parameter(param)
                 )
             else:
                 function_call_args.append(param.parameter_name)
@@ -486,17 +484,17 @@ def get_read_array_parameters(func):
     return response
 
 
-def type_cast_attribute_set_function_parameter(ctype: str, parameter_name: str):
+def type_cast_attribute_set_function_parameter(param):
     """Type casting of attribute set parameter during c call."""
-    if ctype == "ctypes.c_char_p":
-        return f"{parameter_name}.encode('ascii')"
-    if is_numpy_array_datatype(ctype):
-        return f"{parameter_name}.ctypes.data_as(ctypes.c_void_p)"
-    return f"{ctype}({parameter_name})"
+    if param.ctypes_data_type == "ctypes.c_char_p":
+        return f"{param.parameter_name}.encode('ascii')"
+    if is_numpy_array_datatype(param):
+        return f"{param.parameter_name}.ctypes.data_as(ctypes.c_void_p)"
+    return f"{param.ctypes_data_type}({param.parameter_name})"
 
 
-def is_numpy_array_datatype(ctypes_data_type: str):
+def is_numpy_array_datatype(param):
     """Checks if datatype is a numpy array or not."""
-    if ctypes_data_type.startswith("numpy."):
+    if param.ctypes_data_type.startswith("numpy."):
         return True
     return False
