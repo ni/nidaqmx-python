@@ -125,7 +125,7 @@ def get_argument_types(functions_metadata):
     interpreter_parameters = get_interpreter_parameters(functions_metadata)
     size_params = _get_size_params(interpreter_parameters)
     for param in interpreter_parameters:
-        # Skipping the c argument these parameters in attribute functions
+        # Skipping the c arguments of these parameters in attribute functions
         # to remove the variadic arguments.
         if (
             param.parameter_name in ("value", "size")
