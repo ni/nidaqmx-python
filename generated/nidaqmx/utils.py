@@ -207,6 +207,17 @@ def unflatten_channel_string(channel_names):
 
     return channel_list_to_return
 
+def assign_numpy_array(numpy_array, grpc_array):
+    """ Assigns the grpc array to the numpy array, while still maintaining the 
+    original shape of the numpy array. 
+    
+    The numpy array assignment is skipped when the length of the grpc array 
+    is greater than the numpy array as this might result in data loss.
+    """
+    grpc_array_length = len(grpc_array)
+    numpy_array_length = len(numpy_array)
+    if numpy_array_length <= grpc_array_length:
+        numpy_array.flat[:grpc_array_length] = grpc_array
 
 def _select_interpreter(grpc_options = None, interpreter = None):
     if interpreter:
