@@ -1,4 +1,5 @@
 """Helpers class to generate helper functions for the metadata."""
+from enum import Enum
 import re
 from collections import namedtuple
 
@@ -91,3 +92,21 @@ def _modify_function_name(snake_string):
         else:
             substituted_name.append(name)
     return "_".join(substituted_name)
+
+class AttributeFunctionType(Enum):
+    GET = 0
+    SET = 1
+    RESET = 2
+    NONE = 3    
+
+def get_attribute_function_type(function_name: str):
+    """Sets attribute function type as get/set/reset or not a attribute function."""
+    if "attribute" in function_name:
+        if function_name.startswith("get"):
+            return AttributeFunctionType.GET
+        elif function_name.startswith("set"):
+            return AttributeFunctionType.SET    
+        elif function_name.startswith("reset"):
+            return AttributeFunctionType.RESET
+        
+    return AttributeFunctionType.NONE
