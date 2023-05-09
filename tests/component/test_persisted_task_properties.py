@@ -2,16 +2,19 @@ import pytest
 
 from nidaqmx import DaqError
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.system.storage import PersistedTask
 
 
-def test___constructed_persisted_task___get_property___returns_persisted_value(generate_persisted_task):
+def test___constructed_persisted_task___get_property___returns_persisted_value(
+    generate_persisted_task,
+):
     persisted_task = generate_persisted_task("VoltageTesterTask")
 
     assert persisted_task.author == "Test Author"
 
 
-def test___nonexistent_persisted_task___get_property___raises_task_not_in_data_neighborhood(generate_persisted_task):
+def test___nonexistent_persisted_task___get_property___raises_task_not_in_data_neighborhood(
+    generate_persisted_task,
+):
     persisted_task = generate_persisted_task("NonexistentTask")
 
     with pytest.raises(DaqError) as exc_info:

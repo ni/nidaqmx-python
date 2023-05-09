@@ -50,7 +50,11 @@ def test___linear_scale___get_poly_scale_property___throws_daqerror(init_kwargs)
 
 def test___scale___get_enum_property___returns_assigned_value(init_kwargs):
     scale = Scale.create_lin_scale(
-        "custom_linear_scale", 1, y_intercept=1, pre_scaled_units=UnitsPreScaled.VOLTS, **init_kwargs
+        "custom_linear_scale",
+        1,
+        y_intercept=1,
+        pre_scaled_units=UnitsPreScaled.VOLTS,
+        **init_kwargs
     )
 
     assert scale.pre_scaled_units == UnitsPreScaled.VOLTS
@@ -58,7 +62,11 @@ def test___scale___get_enum_property___returns_assigned_value(init_kwargs):
 
 def test___scale___set_enum_property___returns_assigned_value(init_kwargs):
     scale = Scale.create_lin_scale(
-        "custom_linear_scale", 1, y_intercept=1, pre_scaled_units=UnitsPreScaled.VOLTS, **init_kwargs
+        "custom_linear_scale",
+        1,
+        y_intercept=1,
+        pre_scaled_units=UnitsPreScaled.VOLTS,
+        **init_kwargs
     )
 
     scale.pre_scaled_units = UnitsPreScaled.AMPS

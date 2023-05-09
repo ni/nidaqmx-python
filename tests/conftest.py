@@ -32,11 +32,11 @@ class DeviceType(Enum):
     SIMULATED = 1
 
 
-def _x_series_device(device_type, grpc_options = None):
+def _x_series_device(device_type, grpc_options=None):
     if grpc_options is None:
         system = nidaqmx.system.System.local()
     else:
-        system = nidaqmx.system.System.remote(grpc_options= grpc_options)
+        system = nidaqmx.system.System.remote(grpc_options=grpc_options)
 
     for device in system.devices:
         device_type_match = (
@@ -210,6 +210,7 @@ def persisted_task(request, generate_persisted_task):
     task_name = _get_marker_value(request, "task_name", "")
     return generate_persisted_task(task_name)
 
+
 @pytest.fixture(scope="function")
 def generate_persisted_task(init_kwargs):
     """Gets a factory function which can be used to generate new persisted task objects."""
@@ -255,6 +256,7 @@ def generate_persisted_channel(init_kwargs):
         return system.global_channels[channel_name]
 
     yield _get_persisted_channel
+
 
 @pytest.fixture(scope="function")
 def physical_channel(request, generate_physical_channel):
@@ -360,25 +362,29 @@ def watch_dog_task(request, init_kwargs, any_x_series_device) -> nidaqmx.system.
     with nidaqmx.system.WatchdogTask(**init_args, **init_kwargs) as task:
         yield task
 
+
 @pytest.fixture(scope="function")
 def device(request, generate_device):
     """Gets a device instance."""
     device_name = _get_marker_value(request, "device_name", "")
-    return generate_device(device_name = device_name)
+    return generate_device(device_name=device_name)
+
 
 @pytest.fixture(scope="function")
 def generate_device(init_kwargs):
     """Gets a factory function which can be used to generate new device objects."""
 
     def _create_device(device_name=""):
-        return nidaqmx.system.Device(name= device_name, **init_kwargs)
+        return nidaqmx.system.Device(name=device_name, **init_kwargs)
 
     yield _create_device
+
 
 @pytest.fixture(scope="function")
 def any_x_series_via_grpc(init_kwargs):
     """Gets the device object for any xseries based on the grpc otions."""
     return _x_series_device(DeviceType.ANY, **init_kwargs)
+
 
 def _get_marker_value(request, marker_name, default=None):
     """Gets the value of a pytest marker based on the marker name."""

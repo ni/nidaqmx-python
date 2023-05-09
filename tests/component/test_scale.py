@@ -12,7 +12,12 @@ def test___polynomial___calculate_reverse_poly_coeff___returns_reverse_coeff(ini
     reverse_polynomial_order = 1
 
     reverse_coeff = nidaqmx.Scale.calculate_reverse_poly_coeff(
-        forward_coeff, min_val_x, max_val_x, num_of_points_to_compute, reverse_polynomial_order,**init_kwargs
+        forward_coeff,
+        min_val_x,
+        max_val_x,
+        num_of_points_to_compute,
+        reverse_polynomial_order,
+        **init_kwargs
     )
 
     # The expected inverted polynomial is 0.5y - 0.5 = x

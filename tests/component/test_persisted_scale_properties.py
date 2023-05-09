@@ -2,16 +2,19 @@ import pytest
 
 from nidaqmx import DaqError
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.system.storage import PersistedScale
 
 
-def test___constructed_persisted_scale___get_property___returns_persisted_value(generate_persisted_scale):
+def test___constructed_persisted_scale___get_property___returns_persisted_value(
+    generate_persisted_scale,
+):
     persisted_scale = generate_persisted_scale("double_gain_scale")
 
     assert persisted_scale.author == "Test Author"
 
 
-def test___nonexistent_persisted_scale___get_property___raises_custom_scale_does_not_exist(generate_persisted_scale):
+def test___nonexistent_persisted_scale___get_property___raises_custom_scale_does_not_exist(
+    generate_persisted_scale,
+):
     persisted_scale = generate_persisted_scale("NonexistentScale")
 
     with pytest.raises(DaqError) as exc_info:

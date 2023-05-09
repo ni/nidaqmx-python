@@ -1,7 +1,5 @@
 import pytest
 
-import nidaqmx
-import nidaqmx.system
 from nidaqmx.constants import Edge, Level
 from nidaqmx.errors import DaqError, DAQmxErrors
 from nidaqmx.system.watchdog import DOExpirationState
@@ -22,7 +20,6 @@ def test___watchdog_task___set_boolean_property___returns_assigned_value(watch_d
 
 @pytest.mark.device_name("cdaqChassisTester")
 def test___watchdog_task___reset_boolean_property___returns_default_value(watch_dog_task):
-    
     watch_dog_task.expir_trig_trig_on_network_conn_loss = True
 
     del watch_dog_task.expir_trig_trig_on_network_conn_loss
@@ -30,9 +27,7 @@ def test___watchdog_task___reset_boolean_property___returns_default_value(watch_
     assert not watch_dog_task.expir_trig_trig_on_network_conn_loss
 
 
-def test___watchdog_task___task_not_running_get_expired_property____throws_daqerror(
-    watch_dog_task
-):
+def test___watchdog_task___task_not_running_get_expired_property____throws_daqerror(watch_dog_task):
     with pytest.raises(DaqError) as exc_info:
         _ = watch_dog_task.expired
 
@@ -52,7 +47,9 @@ def test___watchdog_task___get_enum_property___returns_value(any_x_series_device
     assert watch_dog_task.expir_trig_dig_edge_edge == Edge.RISING
 
 
-def test___watchdog_task___set_enum_property___returns_assigned_value(any_x_series_device, watch_dog_task):
+def test___watchdog_task___set_enum_property___returns_assigned_value(
+    any_x_series_device, watch_dog_task
+):
     do_line = any_x_series_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
@@ -64,7 +61,9 @@ def test___watchdog_task___set_enum_property___returns_assigned_value(any_x_seri
     assert watch_dog_task.expir_trig_dig_edge_edge == Edge.FALLING
 
 
-def test___watchdog_task___reset_enum_property___returns_default_value(any_x_series_device, watch_dog_task):
+def test___watchdog_task___reset_enum_property___returns_default_value(
+    any_x_series_device, watch_dog_task
+):
     do_line = any_x_series_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
@@ -77,7 +76,9 @@ def test___watchdog_task___reset_enum_property___returns_default_value(any_x_ser
     assert watch_dog_task.expir_trig_dig_edge_edge == Edge.RISING
 
 
-def test___watchdog_task___get_float64_property___returns_value(any_x_series_device, watch_dog_task):
+def test___watchdog_task___get_float64_property___returns_value(
+    any_x_series_device, watch_dog_task
+):
     do_line = any_x_series_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
@@ -87,11 +88,13 @@ def test___watchdog_task___get_float64_property___returns_value(any_x_series_dev
     assert watch_dog_task.timeout == 0.5
 
 
-def test___watchdog_task___set_float64_property___returns_assigned_value(any_x_series_device, watch_dog_task):
+def test___watchdog_task___set_float64_property___returns_assigned_value(
+    any_x_series_device, watch_dog_task
+):
     do_line = any_x_series_device.do_lines[0]
     expir_states = [
-            DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
-        ]
+        DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
+    ]
     watch_dog_task.cfg_watchdog_do_expir_states(expir_states)
 
     watch_dog_task.timeout = 2
@@ -99,7 +102,9 @@ def test___watchdog_task___set_float64_property___returns_assigned_value(any_x_s
     assert watch_dog_task.timeout == 2
 
 
-def test___watchdog_task___reset_float64_property___returns_default_value(any_x_series_device, watch_dog_task):
+def test___watchdog_task___reset_float64_property___returns_default_value(
+    any_x_series_device, watch_dog_task
+):
     do_line = any_x_series_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
@@ -121,7 +126,9 @@ def test___watchdog_task___get_string_property___returns_value(any_x_series_devi
     assert watch_dog_task.expir_trig_dig_edge_src == ""
 
 
-def test___watchdog_task___set_string_property___returns_assigned_value(any_x_series_device, watch_dog_task):
+def test___watchdog_task___set_string_property___returns_assigned_value(
+    any_x_series_device, watch_dog_task
+):
     do_line = any_x_series_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
@@ -133,7 +140,9 @@ def test___watchdog_task___set_string_property___returns_assigned_value(any_x_se
     assert watch_dog_task.expir_trig_dig_edge_src == "PFI0"
 
 
-def test___watchdog_task___reset_string_property___returns_default_value(any_x_series_device, watch_dog_task):
+def test___watchdog_task___reset_string_property___returns_default_value(
+    any_x_series_device, watch_dog_task
+):
     do_line = any_x_series_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
@@ -146,7 +155,9 @@ def test___watchdog_task___reset_string_property___returns_default_value(any_x_s
     assert watch_dog_task.expir_trig_dig_edge_src == ""
 
 
-def test___watchdog_task___get_deprecated_properties___reports_warnings(any_x_series_device, watch_dog_task):
+def test___watchdog_task___get_deprecated_properties___reports_warnings(
+    any_x_series_device, watch_dog_task
+):
     do_line = any_x_series_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
@@ -160,7 +171,9 @@ def test___watchdog_task___get_deprecated_properties___reports_warnings(any_x_se
         )
 
 
-def test___watchdog_task___set_deprecated_properties___reports_warnings(any_x_series_device, watch_dog_task):
+def test___watchdog_task___set_deprecated_properties___reports_warnings(
+    any_x_series_device, watch_dog_task
+):
     do_line = any_x_series_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
@@ -171,7 +184,9 @@ def test___watchdog_task___set_deprecated_properties___reports_warnings(any_x_se
         watch_dog_task.expiration_states[do_line.name].expir_states_do_state = Level.HIGH
 
 
-def test___watchdog_task___reset_deprecated_properties___reports_warnings(any_x_series_device, watch_dog_task):
+def test___watchdog_task___reset_deprecated_properties___reports_warnings(
+    any_x_series_device, watch_dog_task
+):
     do_line = any_x_series_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
