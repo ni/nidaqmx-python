@@ -343,15 +343,6 @@ def generate_task(init_kwargs):
         yield _create_task
 
 
-def _get_marker_value(request, marker_name, default=None):
-    """Gets the value of a pytest marker based on the marker name."""
-    marker_value = default
-    for marker in request.node.iter_markers():
-        if marker.name == marker_name:  # only look at markers with valid argument name
-            marker_value = marker.args[0]  # assume single parameter in marker
-
-    return marker_value
-
 @pytest.fixture(scope="function")
 def watch_dog_task(request, init_kwargs, any_x_series_device) -> nidaqmx.system.WatchdogTask:
     """Gets a task instance."""
@@ -388,3 +379,12 @@ def generate_device(init_kwargs):
 def any_x_series_via_grpc(init_kwargs):
     """Gets the device object for any xseries based on the grpc otions."""
     return _x_series_device(DeviceType.ANY, **init_kwargs)
+
+def _get_marker_value(request, marker_name, default=None):
+    """Gets the value of a pytest marker based on the marker name."""
+    marker_value = default
+    for marker in request.node.iter_markers():
+        if marker.name == marker_name:  # only look at markers with valid argument name
+            marker_value = marker.args[0]  # assume single parameter in marker
+
+    return marker_value

@@ -81,6 +81,7 @@ extend_exclude = "docs,generated,src/codegen/metadata,src/codegen/templates,src/
 addopts = "--doctest-modules --strict-markers"
 filterwarnings = ["always::ImportWarning", "always::ResourceWarning"]
 testpaths = ["tests"]
+markers = ["device_name", "channel_name", "task_name", "scale_name"]
 
 [build-system]
 requires = ["poetry>=1.2"]
