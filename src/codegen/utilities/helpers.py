@@ -1,7 +1,7 @@
 """Helpers class to generate helper functions for the metadata."""
-from enum import Enum
 import re
 from collections import namedtuple
+from enum import Enum
 
 # Pre-compile regexes to speed up matches
 CAMEL_TO_SNAKE_CASE_REGEXES = [
@@ -93,11 +93,15 @@ def _modify_function_name(snake_string):
             substituted_name.append(name)
     return "_".join(substituted_name)
 
+
 class AttributeFunctionType(Enum):
+    """Enum specifies whether the function is get/set/reset/not an attribute function."""
+
     GET = 0
     SET = 1
     RESET = 2
-    NONE = 3    
+    NONE = 3
+
 
 def get_attribute_function_type(function_name: str):
     """Sets attribute function type as get/set/reset or not a attribute function."""
@@ -105,8 +109,8 @@ def get_attribute_function_type(function_name: str):
         if function_name.startswith("get"):
             return AttributeFunctionType.GET
         elif function_name.startswith("set"):
-            return AttributeFunctionType.SET    
+            return AttributeFunctionType.SET
         elif function_name.startswith("reset"):
             return AttributeFunctionType.RESET
-        
+
     return AttributeFunctionType.NONE

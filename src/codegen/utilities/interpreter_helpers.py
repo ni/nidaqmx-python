@@ -96,15 +96,27 @@ def generate_interpreter_function_call_args(function_metadata):
             param.is_pointer and param.parameter_name != "callback_data"
         ):
             if param.has_explicit_buffer_size:
-                if is_numpy_array_datatype(param.ctypes_data_type) and function_metadata.attribute_function_type == AttributeFunctionType.GET:
-                    function_call_args.append(f"{param.parameter_name}.ctypes.data_as(ctypes.c_void_p)")
+                if (
+                    is_numpy_array_datatype(param.ctypes_data_type)
+                    and function_metadata.attribute_function_type == AttributeFunctionType.GET
+                ):
+                    function_call_args.append(
+                        f"{param.parameter_name}.ctypes.data_as(ctypes.c_void_p)"
+                    )
                 else:
                     function_call_args.append(param.parameter_name)
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
         elif param.direction == "in":
-            if param.parameter_name == "value" and function_metadata.attribute_function_type == AttributeFunctionType.SET:
-                function_call_args.append(type_cast_attribute_set_function_parameter(param.ctypes_data_type, param.parameter_name))
+            if (
+                param.parameter_name == "value"
+                and function_metadata.attribute_function_type == AttributeFunctionType.SET
+            ):
+                function_call_args.append(
+                    type_cast_attribute_set_function_parameter(
+                        param.ctypes_data_type, param.parameter_name
+                    )
+                )
             else:
                 function_call_args.append(param.parameter_name)
 
@@ -117,8 +129,12 @@ def get_argument_types(functions_metadata):
     interpreter_parameters = get_interpreter_parameters(functions_metadata)
     size_params = _get_size_params(interpreter_parameters)
     for param in interpreter_parameters:
-        # Skipping the c argument these parameters in attribute functions to remove the variadic arguments.
-        if param.parameter_name in ("value", "size") and functions_metadata.attribute_function_type != AttributeFunctionType.NONE:
+        # Skipping the c argument these parameters in attribute functions
+        # to remove the variadic arguments.
+        if (
+            param.parameter_name in ("value", "size")
+            and functions_metadata.attribute_function_type != AttributeFunctionType.NONE
+        ):
             continue
         if _is_handle_parameter(functions_metadata, param):
             if functions_metadata.handle_parameter.ctypes_data_type != "ctypes.c_char_p":
@@ -179,7 +195,10 @@ def get_instantiation_lines_for_output(func):
                 instantiation_lines.append(
                     f"{param.parameter_name} = numpy.zeros(size, dtype={param.ctypes_data_type})"
                 )
-            elif func.attribute_function_type == AttributeFunctionType.GET and not is_numpy_array_datatype(param.ctypes_data_type):
+            elif (
+                func.attribute_function_type == AttributeFunctionType.GET
+                and not is_numpy_array_datatype(param.ctypes_data_type)
+            ):
                 instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}")
         else:
             instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
@@ -471,6 +490,7 @@ def get_read_array_parameters(func):
             response.append(camel_to_snake_case(param.parameter_name))
     return response
 
+
 def type_cast_attribute_set_function_parameter(ctype: str, parameter_name: str):
     """Type casting of attribute set parameter during c call."""
     if ctype == "ctypes.c_char_p":
@@ -478,6 +498,7 @@ def type_cast_attribute_set_function_parameter(ctype: str, parameter_name: str):
     if is_numpy_array_datatype(ctype):
         return f"{parameter_name}.ctypes.data_as(ctypes.c_void_p)"
     return f"{ctype}({parameter_name})"
+
 
 def is_numpy_array_datatype(ctypes_data_type: str):
     """Checks if datatype is a numpy array or not."""
