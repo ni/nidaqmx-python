@@ -174,3 +174,17 @@ def is_string_buffer_too_small(error_code):
 def is_array_buffer_too_small(error_code):
     import nidaqmx._library_interpreter
     return nidaqmx._library_interpreter.is_array_buffer_too_small(error_code)
+
+
+class RpcError(Error):
+    '''An error specific to sessions to the NI gRPC Device Server'''
+
+    def __init__(self, rpc_code, description):
+        self.rpc_code = rpc_code
+        self.description = description
+        try:
+            import grpc
+            rpc_error = str(grpc.StatusCode(self.rpc_code))
+        except Exception:
+            rpc_error = str(self.rpc_code)
+        super().__init__(rpc_error + ": " + self.description)
