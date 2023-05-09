@@ -81,6 +81,7 @@ class TestContainerOperations:
         assert ai_channel_1 != ai_channel_2
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
+    @pytest.mark.library_only
     def test_hash_operations(self, generate_task, any_x_series_device, seed):
         """Test for hash operation."""
         # Reset the pseudorandom number generator with seed.
