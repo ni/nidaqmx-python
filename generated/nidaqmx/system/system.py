@@ -402,12 +402,12 @@ class System:
         """
         physical_channel = flatten_channel_string(
             [p.physical_channel for p in power_up_states])
-        state = numpy.float64(
-            [p.power_up_state for p in power_up_states])
-        channel_type = numpy.int32(
-            [p.channel_type.value for p in power_up_states])
+        state = numpy.array(
+            [p.power_up_state for p in power_up_states], dtype=numpy.float64)
+        channel_type = numpy.array(
+            [p.channel_type.value for p in power_up_states], dtype=numpy.int32)
 
-        self._interpreter.set_analog_power_up_states_with_output_type(physical_channel, state, channel_type, len(power_up_states))
+        self._interpreter.set_analog_power_up_states_with_output_type(physical_channel, state, channel_type)
 
     def get_analog_power_up_states(self, device_name):
         """
