@@ -150,20 +150,7 @@ class GrpcStubInterpreter(BaseInterpreter):
 def _assign_numpy_array(numpy_array, grpc_array):
     """ Assigns the grpc array to the numpy array, while still maintaining the 
     original shape of the numpy array. 
-    
-    The numpy array assignment is skipped when the length of the grpc array 
-    is greater than the numpy array as this might result in data loss.
     """
     grpc_array_size = len(grpc_array)
-    if numpy_array.size <= grpc_array_size:
-        numpy_array.flat[:grpc_array_size] = grpc_array
-    else:
-        raise errors.DaqError(
-            'Read cannot be performed because the NumPy array passed into '
-            'this function is too small. You must pass in a NumPy array of the '
-            'correct size based on the number of channels in the task and the '
-            'number of samples per channel requested.\n\n'
-            'NumPy array size: {numpy_array.size}\n'
-            'Required size: {grpc_array_size}'
-            .format(numpy_array.size, grpc_array_size),
-            error_codes.DAQmxErrors.READ_BUFFER_TOO_SMALL)
+    assert numpy_array.size >= grpc_array_size
+    numpy_array.flat[:grpc_array_size] = grpc_array
