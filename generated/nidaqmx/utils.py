@@ -1,6 +1,10 @@
 import re
+from dataclasses import dataclass
+from typing import List, Optional
 
 from nidaqmx.errors import DaqError
+from nidaqmx.grpc_session_options import GrpcSessionOptions
+from nidaqmx._base_interpreter import BaseInterpreter
 from nidaqmx._grpc_interpreter import GrpcStubInterpreter
 from nidaqmx._library_interpreter import LibraryInterpreter
 
@@ -16,7 +20,16 @@ _invalid_range_syntax_message = (
     "objects.")
 
 
-def flatten_channel_string(channel_names):
+@dataclass
+class _ChannelInfo:
+    base_name: str = ""
+    start_index: int = -1
+    start_index_str: str = ""
+    end_index: int = -1
+    end_index_str: str = ""
+
+
+def flatten_channel_string(channel_names: List[str]) -> str:
     """
     Converts a list of channel names to a comma-delimited list of names.
 
@@ -46,11 +59,7 @@ def flatten_channel_string(channel_names):
 
     # Go through the channel names and flatten them.
     flattened_channel_list = []
-    previous = {
-        'base_name': '',
-        'start_index': -1,
-        'end_index': -1
-        }
+    previous = _ChannelInfo()
     for channel_name in unflattened_channel_names:
         m = re.search('(.*[^0-9])?([0-9]+)$', channel_name)
         if not m:
@@ -58,13 +67,7 @@ def flatten_channel_string(channel_names):
             # channel name as-is.
             flattened_channel_list.append(
                 _channel_info_to_flattened_name(previous))
-            previous = {
-                'base_name': channel_name,
-                'start_index': -1,
-                'start_index_str': "",
-                'end_index': -1,
-                'end_index_str': "",
-                }
+            previous = _ChannelInfo(base_name=channel_name)
         else:
             # If the channel name ends in a valid number, we may need to flatten
             # this channel with subsequent channels in the x:y format.
@@ -72,29 +75,30 @@ def flatten_channel_string(channel_names):
             current_index_str = m.group(2)
             current_index = int(current_index_str)
 
-            if current_base_name == previous['base_name'] and (
-                (current_index == previous['end_index'] + 1 and
-                 previous['end_index'] >= previous['start_index']) or
-                (current_index == previous['end_index'] - 1 and
-                 previous['end_index'] <= previous['start_index'])):
+
+            if current_base_name == previous.base_name and (
+                (current_index == previous.end_index + 1 and
+                 previous.end_index >= previous.start_index) or
+                (current_index == previous.end_index - 1 and
+                 previous.end_index <= previous.start_index)):
                 # If the current channel name has the same base name as the
                 # previous and it's end index differs by 1, change the end
                 # index value. It gets flattened later.
-                previous['end_index'] = current_index
-                previous['end_index_str'] = current_index_str
+                previous.end_index = current_index
+                previous.end_index_str = current_index_str
             else:
                 # If the current channel name has the same base name as the
                 # previous or it's end index differs by more than 1, it doesn't
                 # get flattened with the previous channel.
                 flattened_channel_list.append(
                     _channel_info_to_flattened_name(previous))
-                previous = {
-                    'base_name': current_base_name,
-                    'start_index': current_index,
-                    'start_index_str': current_index_str,
-                    'end_index': current_index,
-                    'end_index_str': current_index_str,
-                    }
+                previous = _ChannelInfo(
+                    base_name=current_base_name,
+                    start_index=current_index,
+                    start_index_str=current_index_str,
+                    end_index=current_index,
+                    end_index_str=current_index_str,
+                )
 
     # Convert the final channel dictionary to a flattened string
     flattened_channel_list.append(
@@ -105,22 +109,19 @@ def flatten_channel_string(channel_names):
     return ','.join([_f for _f in flattened_channel_list if _f]).strip()
 
     
-def _channel_info_to_flattened_name(channel_info):
+def _channel_info_to_flattened_name(channel_info: _ChannelInfo) -> str:
     """
     Simple method to generate a flattened channel name.
     """
-    if channel_info['start_index'] == -1:
-        return channel_info['base_name']
-    elif channel_info['start_index'] == channel_info['end_index']:
-        return '{}{}'.format(channel_info['base_name'],
-                               channel_info['start_index_str'])
+    if channel_info.start_index == -1:
+        return channel_info.base_name
+    elif channel_info.start_index == channel_info.end_index:
+        return f'{channel_info.base_name}{channel_info.start_index_str}'
     else:
-        return '{}{}:{}'.format(channel_info['base_name'],
-                                   channel_info['start_index_str'],
-                                   channel_info['end_index_str'])
+        return f'{channel_info.base_name}{channel_info.start_index_str}:{channel_info.end_index_str}'
 
                                    
-def unflatten_channel_string(channel_names):
+def unflatten_channel_string(channel_names: str) -> List[str]:
     """
     Converts a comma-delimited list of channel names to a list of names.
 
@@ -208,7 +209,10 @@ def unflatten_channel_string(channel_names):
     return channel_list_to_return
 
 
-def _select_interpreter(grpc_options = None, interpreter = None):
+def _select_interpreter(
+    grpc_options: Optional[GrpcSessionOptions] = None, 
+    interpreter: Optional[BaseInterpreter] = None
+) -> BaseInterpreter:
     if interpreter:
         return interpreter
     else:
