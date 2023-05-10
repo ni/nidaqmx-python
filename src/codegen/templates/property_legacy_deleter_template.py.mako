@@ -4,6 +4,8 @@
     %>\
     @${attribute.name}.deleter
     def ${attribute.name}(self):
+        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
     ## When the length of the function name is too long, it will be wrapped to the next line
