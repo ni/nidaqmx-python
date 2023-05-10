@@ -1,9 +1,9 @@
-from typing import List
+from typing import Any, List, Tuple, Union
 
 import numpy
 import warnings
-from nidaqmx import utils
 
+from nidaqmx import utils
 from nidaqmx._task_modules.channels.channel import Channel
 from nidaqmx._task_modules.export_signals import ExportSignals
 from nidaqmx._task_modules.in_stream import InStream
@@ -465,6 +465,9 @@ class Task:
 
         number_of_samples_per_channel = self._calculate_num_samps_per_chan(
             number_of_samples_per_channel)
+
+        array_shape: Union[int, Tuple[int, ...]]
+        data: Any
 
         # Determine the array shape and size to create
         if number_of_channels > 1:
@@ -1056,12 +1059,12 @@ class Task:
                     frequencies.append(sample.freq)
                     duty_cycles.append(sample.duty_cycle)
 
-                frequencies = numpy.asarray(frequencies, dtype=numpy.float64)
-                duty_cycles = numpy.asarray(duty_cycles, dtype=numpy.float64)
+                frequency_array = numpy.asarray(frequencies, dtype=numpy.float64)
+                duty_cycle_array = numpy.asarray(duty_cycles, dtype=numpy.float64)
 
                 return self._interpreter.write_ctr_freq(
                     self._handle, number_of_samples_per_channel, auto_start, timeout, 
-                    FillMode.GROUP_BY_CHANNEL.value, frequencies, duty_cycles)
+                    FillMode.GROUP_BY_CHANNEL.value, frequency_array, duty_cycle_array)
 
             elif output_type == UsageTypeCO.PULSE_TIME:
                 high_times = []
@@ -1070,12 +1073,12 @@ class Task:
                     high_times.append(sample.high_time)
                     low_times.append(sample.low_time)
 
-                high_times = numpy.asarray(high_times, dtype=numpy.float64)
-                low_times = numpy.asarray(low_times, dtype=numpy.float64)
+                high_time_array = numpy.asarray(high_times, dtype=numpy.float64)
+                low_time_array = numpy.asarray(low_times, dtype=numpy.float64)
 
                 return self._interpreter.write_ctr_time(
                     self._handle, number_of_samples_per_channel, auto_start, timeout,
-                    FillMode.GROUP_BY_CHANNEL.value, high_times, low_times)
+                    FillMode.GROUP_BY_CHANNEL.value, high_time_array, low_time_array)
 
             elif output_type == UsageTypeCO.PULSE_TICKS:
                 high_ticks = []
@@ -1084,12 +1087,12 @@ class Task:
                     high_ticks.append(sample.high_tick)
                     low_ticks.append(sample.low_tick)
 
-                high_ticks = numpy.asarray(high_ticks, dtype=numpy.uint32)
-                low_ticks = numpy.asarray(low_ticks, dtype=numpy.uint32)
+                high_ticks_array = numpy.asarray(high_ticks, dtype=numpy.uint32)
+                low_ticks_array = numpy.asarray(low_ticks, dtype=numpy.uint32)
 
                 return self._interpreter.write_ctr_ticks(
                     self._handle, number_of_samples_per_channel, auto_start, timeout, 
-                    FillMode.GROUP_BY_CHANNEL.value, high_ticks, low_ticks)
+                    FillMode.GROUP_BY_CHANNEL.value, high_ticks_array, low_ticks_array)
         else:
             raise DaqError(
                 'Write failed, because there are no output channels in this '
