@@ -93,4 +93,4 @@ class _PersistedChannelAlternateConstructor(PersistedChannel):
 
         # Use meta-programming to change the type of this object to PersistedChannel,
         # so the user isn't confused when doing introspection.
-        self.__class__ = PersistedChannel
+        self.__class__ = PersistedChannel  # type: ignore
