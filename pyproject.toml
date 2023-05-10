@@ -85,7 +85,8 @@ markers = [
   # Defines custom markers used by nidaqmx tests. Prevents PytestUnknownMarkWarning.
   "library_only: tests only the library interpreter implementation.",
   "grpc_only: tests only the grpc interpreter implementation.",
-  "new_task_name: name of the new task to be created."
+  "new_task_name: name of the new task to be created.",
+  "device_name: name of the device used for testing.",
 ]
 
 [build-system]

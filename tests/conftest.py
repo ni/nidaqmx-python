@@ -54,13 +54,14 @@ def pytest_generate_tests(metafunc):
                 "init_kwargs", ["library_init_kwargs", "grpc_init_kwargs"], indirect=True
             )
 
-
-def _x_series_device(device_type, grpc_options=None):
-    if grpc_options is None:
-        system = nidaqmx.system.System.local()
+@pytest.fixture(scope="module")
+def system(init_kwargs):
+    if "grpc_options" in init_kwargs:
+        return nidaqmx.system.System.remote(**init_kwargs)
     else:
-        system = nidaqmx.system.System.remote(grpc_options=grpc_options)
+        return nidaqmx.system.System.local(**init_kwargs)
 
+def _x_series_device(device_type, system):
     for device in system.devices:
         device_type_match = (
             device_type == DeviceType.ANY
@@ -87,21 +88,21 @@ def _x_series_device(device_type, grpc_options=None):
 
 
 @pytest.fixture(scope="module")
-def any_x_series_device():
+def any_x_series_device(system):
     """Gets any x series device information."""
-    return _x_series_device(DeviceType.ANY)
+    return _x_series_device(DeviceType.ANY, system)
 
 
 @pytest.fixture(scope="module")
-def real_x_series_device():
+def real_x_series_device(system):
     """Gets the real x series device information."""
-    return _x_series_device(DeviceType.REAL)
+    return _x_series_device(DeviceType.REAL, system)
 
 
 @pytest.fixture(scope="module")
-def sim_x_series_device():
+def sim_x_series_device(system):
     """Gets simulated x series device information."""
-    return _x_series_device(DeviceType.SIMULATED)
+    return _x_series_device(DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="module")
@@ -227,77 +228,6 @@ def device_by_name(request):
     return None
 
 
-@pytest.fixture(scope="function")
-def persisted_task(request, generate_persisted_task):
-    """Gets the persisted task based on the task name."""
-    task_name = _get_marker_value(request, "task_name", "")
-    return generate_persisted_task(task_name)
-
-
-@pytest.fixture(scope="function")
-def generate_persisted_task(init_kwargs):
-    """Gets a factory function which can be used to generate new persisted task objects."""
-
-    def _get_persisted_task(task_name=""):
-        system = nidaqmx.system.System(**init_kwargs)
-        return system.tasks[task_name]
-
-    yield _get_persisted_task
-
-
-@pytest.fixture(scope="function")
-def persisted_scale(request, generate_persisted_scale):
-    """Gets the persisted scale based on the scale name."""
-    scale_name = _get_marker_value(request, "scale_name", "")
-    return generate_persisted_scale(scale_name)
-
-
-@pytest.fixture(scope="function")
-def generate_persisted_scale(init_kwargs):
-    """Gets a factory function which can be used to generate new persisted scale objects."""
-
-    def _get_persisted_scale(scale_name=""):
-        system = nidaqmx.system.System(**init_kwargs)
-        return system.scales[scale_name]
-
-    yield _get_persisted_scale
-
-
-@pytest.fixture(scope="function")
-def persisted_channel(request, generate_persisted_channel):
-    """Gets the persisted channel based on the channel name."""
-    channel_name = _get_marker_value(request, "channel_name", "")
-    return generate_persisted_channel(channel_name)
-
-
-@pytest.fixture(scope="function")
-def generate_persisted_channel(init_kwargs):
-    """Gets a factory function which can be used to generate new persisted channel objects."""
-
-    def _get_persisted_channel(channel_name=""):
-        system = nidaqmx.system.System(**init_kwargs)
-        return system.global_channels[channel_name]
-
-    yield _get_persisted_channel
-
-
-@pytest.fixture(scope="function")
-def physical_channel(request, generate_physical_channel):
-    """Gets the persisted channel based on the channel name."""
-    channel_name = _get_marker_value(request, "channel_name", "")
-    return generate_physical_channel(channel_name)
-
-
-@pytest.fixture(scope="function")
-def generate_physical_channel(init_kwargs):
-    """Gets a factory function which can be used to generate new persisted channel objects."""
-
-    def _get_physical_channel(channel_name=""):
-        return nidaqmx.system.PhysicalChannel(channel_name, **init_kwargs)
-
-    yield _get_physical_channel
-
-
 @pytest.fixture(scope="module")
 def test_assets_directory() -> pathlib.Path:
     """Gets path to test_assets directory."""
@@ -369,7 +299,7 @@ def generate_task(init_kwargs):
 
 
 @pytest.fixture(scope="function")
-def watch_dog_task(request, init_kwargs, any_x_series_device) -> nidaqmx.system.WatchdogTask:
+def watchdog_task(request, init_kwargs, any_x_series_device) -> nidaqmx.system.WatchdogTask:
     """Gets a task instance."""
     # set default values used for the initialization of the task.
     init_args = {
@@ -384,29 +314,6 @@ def watch_dog_task(request, init_kwargs, any_x_series_device) -> nidaqmx.system.
 
     with nidaqmx.system.WatchdogTask(**init_args, **init_kwargs) as task:
         yield task
-
-
-@pytest.fixture(scope="function")
-def device(request, generate_device):
-    """Gets a device instance."""
-    device_name = _get_marker_value(request, "device_name", "")
-    return generate_device(device_name=device_name)
-
-
-@pytest.fixture(scope="function")
-def generate_device(init_kwargs):
-    """Gets a factory function which can be used to generate new device objects."""
-
-    def _create_device(device_name=""):
-        return nidaqmx.system.Device(name=device_name, **init_kwargs)
-
-    yield _create_device
-
-
-@pytest.fixture(scope="function")
-def any_x_series_via_grpc(init_kwargs):
-    """Gets the device object for any xseries based on the grpc otions."""
-    return _x_series_device(DeviceType.ANY, **init_kwargs)
 
 
 def _get_marker_value(request, marker_name, default=None):
