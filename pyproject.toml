@@ -52,23 +52,23 @@ protobuf = { version = "^4.21", optional = true }
 docs = ["sphinx", "sphinx_rtd_theme"]
 grpc = ["grpcio", "protobuf"]
 
-# Test
-[tool.poetry.group.dev.dependencies]
-pytest = ">=7.2"
-pytest-cov = ">=4.0"
-pytest-mock = ">=3.0"
-pykka = "^3.0"
-tox = "^3.24"
-ni-python-styleguide = ">=0.4.1"
-sphinx_rtd_theme = "1.0"
-mypy = ">=1.0"
-types-protobuf = "^4.21"
-
 [tool.poetry.group.codegen.dependencies]
 click = "^8.1"
 Mako = "^1.2"
 grpcio-tools = "1.49.1"
 mypy-protobuf = ">=3.4"
+
+[tool.poetry.group.lint.dependencies]
+ni-python-styleguide = ">=0.4.1"
+mypy = ">=1.0"
+types-protobuf = "^4.21"
+
+[tool.poetry.group.test.dependencies]
+pytest = ">=7.2"
+pytest-cov = ">=4.0"
+pytest-mock = ">=3.0"
+pykka = "^3.0"
+tox = "^3.24"
 
 [tool.black]
 line-length = 100
