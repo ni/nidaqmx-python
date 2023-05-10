@@ -3,8 +3,8 @@
     from codegen.utilities.interpreter_helpers import get_argument_types, generate_interpreter_function_call_args, get_instantiation_lines_for_varargs, get_varargs_parameters, get_argument_definition_lines_for_varargs
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
 %>\
-        args = [device_name]
-        argtypes = [ctypes_byte_str]
+        args: List[Any] = [device_name]
+        argtypes: List[Any] = [ctypes_byte_str]
 <%
     varargs_parameters = get_varargs_parameters(function)
     

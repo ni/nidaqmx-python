@@ -2,6 +2,8 @@
 
 import ctypes
 import warnings
+from typing import Any, List
+
 import numpy
 
 from nidaqmx._base_interpreter import BaseInterpreter
@@ -2258,8 +2260,8 @@ class LibraryInterpreter(BaseInterpreter):
             self, device_name, channel_name, channel_type):
         state = []
 
-        args = [device_name]
-        argtypes = [ctypes_byte_str]
+        args: List[Any] = [device_name]
+        argtypes: List[Any] = [ctypes_byte_str]
 
         for index in range(len(channel_name)):
             state_element = ctypes.c_double()
@@ -2675,8 +2677,8 @@ class LibraryInterpreter(BaseInterpreter):
     def get_digital_power_up_states(self, device_name, channel_name):
         state = []
 
-        args = [device_name]
-        argtypes = [ctypes_byte_str]
+        args: List[Any] = [device_name]
+        argtypes: List[Any] = [ctypes_byte_str]
 
         for index in range(len(channel_name)):
             state_element = ctypes.c_int32()
@@ -2701,8 +2703,8 @@ class LibraryInterpreter(BaseInterpreter):
     def get_digital_pull_up_pull_down_states(self, device_name, channel_name):
         state = []
 
-        args = [device_name]
-        argtypes = [ctypes_byte_str]
+        args: List[Any] = [device_name]
+        argtypes: List[Any] = [ctypes_byte_str]
 
         for index in range(len(channel_name)):
             state_element = ctypes.c_int32()
@@ -4733,8 +4735,8 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_analog_power_up_states(
             self, device_name, channel_names, state, channel_type):
-        args = [device_name]
-        argtypes = [ctypes_byte_str]
+        args: List[Any] = [device_name]
+        argtypes: List[Any] = [ctypes_byte_str]
 
         for index in range(len(channel_names)):
 
@@ -4901,8 +4903,8 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
 
     def set_digital_power_up_states(self, device_name, channel_names, state):
-        args = [device_name]
-        argtypes = [ctypes_byte_str]
+        args: List[Any] = [device_name]
+        argtypes: List[Any] = [ctypes_byte_str]
 
         for index in range(len(channel_names)):
 
@@ -4923,8 +4925,8 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_digital_pull_up_pull_down_states(
             self, device_name, channel_names, state):
-        args = [device_name]
-        argtypes = [ctypes_byte_str]
+        args: List[Any] = [device_name]
+        argtypes: List[Any] = [ctypes_byte_str]
 
         for index in range(len(channel_names)):
 

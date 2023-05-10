@@ -8,6 +8,8 @@
 
 import ctypes
 import warnings
+from typing import Any, List
+
 import numpy
 
 from nidaqmx._base_interpreter import BaseInterpreter
