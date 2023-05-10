@@ -82,8 +82,8 @@ addopts = "--doctest-modules --strict-markers"
 filterwarnings = ["always::ImportWarning", "always::ResourceWarning"]
 testpaths = ["tests"]
 markers = [
-  # Defines custom markers used by nidcpower system tests. Prevents PytestUnknownMarkWarning.
-  "library_only: tests only the libaray interpreter implementation.",
+  # Defines custom markers used by nidaqmx tests. Prevents PytestUnknownMarkWarning.
+  "library_only: tests only the library interpreter implementation.",
   "grpc_only: tests only the grpc interpreter implementation.",
   "new_task_name: name of the new task to be created."
 ]
