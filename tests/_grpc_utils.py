@@ -24,11 +24,13 @@ class GrpcServerProcess:
             self.server_port = int(first_line.replace(b"Server listening on port ", b"").strip())
 
             self._stdout_thread = threading.Thread(
-                target=self._discard_output, args=(self._proc.stdout,), daemon=True
+                target=self._proc.communicate, args=(), daemon=True
             )
             self._stdout_thread.start()
         except Exception:
             self._proc.kill()
+            # Use communicate() to close the stdout pipe and wait for the server process to exit.
+            _, _ = self._proc.communicate()
             raise
 
     def __enter__(self):
@@ -38,6 +40,7 @@ class GrpcServerProcess:
     def __exit__(self, exc_type, exc_val, exc_tb):
         """Closes the GrpcServerProcess instance."""
         self._proc.kill()
+        self._stdout_thread.join()
 
     def _get_grpc_server_exe(self):
         if os.name != "nt":
@@ -59,9 +62,3 @@ class GrpcServerProcess:
         if not server_exe.exists():
             pytest.skip("NI gRPC Device Server not installed")
         return server_exe
-
-    def _discard_output(self, stdout):
-        while True:
-            data = stdout.read(8196)
-            if not data:
-                return
