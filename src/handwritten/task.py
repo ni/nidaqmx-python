@@ -1,3 +1,5 @@
+from typing import List
+
 import numpy
 import warnings
 from nidaqmx import utils
@@ -1103,7 +1105,7 @@ class _TaskAlternateConstructor(Task):
     This is a private API used to instantiate a Task with an existing task handle and interpreter.
     """
     # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
-    __slots__ = []
+    __slots__: List[str] = []
 
     def __init__(self, task_handle, interpreter, close_on_exit):
         """
