@@ -2290,11 +2290,14 @@ class LibraryInterpreter(BaseInterpreter):
         channel_type_array = numpy.zeros(array_size, dtype=numpy.int32)
 
         cfunc = lib_importer.cdll.DAQmxGetAnalogPowerUpStatesWithOutputType
-        with cfunc.arglock:
-            cfunc.argtypes = [
-                ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-                flags=('C','W')), wrapped_ndpointer(dtype=numpy.int32,
-                flags=('C','W')), ctypes.POINTER(ctypes.c_uint)]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C','W')), wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.POINTER(ctypes.c_uint)]
 
         error_code = cfunc(
             channel_names, state_array, channel_type_array,
@@ -4869,11 +4872,14 @@ class LibraryInterpreter(BaseInterpreter):
     def set_analog_power_up_states_with_output_type(
             self, channel_names, state_array, channel_type_array):
         cfunc = lib_importer.cdll.DAQmxSetAnalogPowerUpStatesWithOutputType
-        with cfunc.arglock:
-            cfunc.argtypes = [
-                ctypes_byte_str, wrapped_ndpointer(dtype=numpy.float64,
-                flags=('C')), wrapped_ndpointer(dtype=numpy.int32,
-                flags=('C')), ctypes.c_uint]
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                        wrapped_ndpointer(dtype=numpy.int32, flags=('C')),
+                        ctypes.c_uint]
 
         error_code = cfunc(
             channel_names, state_array, channel_type_array,

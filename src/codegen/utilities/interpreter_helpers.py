@@ -496,10 +496,3 @@ def is_numpy_array_datatype(param):
     if param.ctypes_data_type.startswith("numpy."):
         return True
     return False
-
-
-def is_attribute_function(func):
-    """Returns True if function is a get/set/reset function."""
-    if func.attribute_function_type == AttributeFunctionType.NONE:
-        return False
-    return True
