@@ -4,6 +4,7 @@ import numpy
 import warnings
 
 from nidaqmx import utils
+from nidaqmx.errors import DaqResourceWarning
 from nidaqmx.system._watchdog_modules.expiration_state import ExpirationState
 from nidaqmx.system._watchdog_modules.expiration_states_collection import (
     ExpirationStatesCollection)
