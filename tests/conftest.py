@@ -32,6 +32,29 @@ class DeviceType(Enum):
     SIMULATED = 1
 
 
+def pytest_generate_tests(metafunc):
+    """Parametrizes the "init_kwargs" fixture by examining the the markers set for a test.
+
+    This is used to decide if tests for gRPC or Library interpreters should be run.
+    This is done based on the custom markers @pytest.mark.grpc_only and @pytest.mark.library_only.
+    """
+    if "init_kwargs" in metafunc.fixturenames:
+        # fixtures can't be parametrized more than once. this approach prevents exclusive
+        # markers from being set on the same test
+
+        grpc_only = metafunc.definition.get_closest_marker("grpc_only")
+        library_only = metafunc.definition.get_closest_marker("library_only")
+
+        if grpc_only:
+            metafunc.parametrize("init_kwargs", ["grpc_init_kwargs"], indirect=True)
+        if library_only:
+            metafunc.parametrize("init_kwargs", ["library_init_kwargs"], indirect=True)
+        if not library_only and not grpc_only:
+            metafunc.parametrize(
+                "init_kwargs", ["library_init_kwargs", "grpc_init_kwargs"], indirect=True
+            )
+
+
 def _x_series_device(device_type, grpc_options=None):
     if grpc_options is None:
         system = nidaqmx.system.System.local()
@@ -311,7 +334,7 @@ def library_init_kwargs():
     return {}
 
 
-@pytest.fixture(params=("library_init_kwargs", "grpc_init_kwargs"), scope="session")
+@pytest.fixture(scope="session")
 def init_kwargs(request):
     """Gets the keyword arguments to create a nidaqmx session."""
     return request.getfixturevalue(request.param)
