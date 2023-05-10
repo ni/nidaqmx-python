@@ -5,8 +5,7 @@ from typing import List, Optional
 from nidaqmx.errors import DaqError
 from nidaqmx.grpc_session_options import GrpcSessionOptions
 from nidaqmx._base_interpreter import BaseInterpreter
-from nidaqmx._grpc_interpreter import GrpcStubInterpreter
-from nidaqmx._library_interpreter import LibraryInterpreter
+
 
 # Method logic adapted from
 # //Measurements/Infrastructure/dmxf/trunk/2.5/source/nimuck/parseUtilities.cpp
@@ -217,6 +216,8 @@ def _select_interpreter(
         return interpreter
     else:
         if grpc_options:
+            from nidaqmx._grpc_interpreter import GrpcStubInterpreter
             return GrpcStubInterpreter(grpc_options)
         else:
+            from nidaqmx._library_interpreter import LibraryInterpreter
             return LibraryInterpreter()
