@@ -101,6 +101,7 @@ class Channel:
 
         channel_type = ChannelType(chan_type)
 
+        import nidaqmx._task_modules.channels
         if channel_type == ChannelType.ANALOG_INPUT:
             return nidaqmx._task_modules.channels.AIChannel(
                 task_handle, virtual_or_physical_name, interpreter)
