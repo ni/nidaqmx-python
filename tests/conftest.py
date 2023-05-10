@@ -54,12 +54,15 @@ def pytest_generate_tests(metafunc):
                 "init_kwargs", ["library_init_kwargs", "grpc_init_kwargs"], indirect=True
             )
 
+
 @pytest.fixture(scope="module")
 def system(init_kwargs):
+    """Gets system instance based on the grpc options."""
     if "grpc_options" in init_kwargs:
         return nidaqmx.system.System.remote(**init_kwargs)
     else:
         return nidaqmx.system.System.local(**init_kwargs)
+
 
 def _x_series_device(device_type, system):
     for device in system.devices:

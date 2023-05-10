@@ -76,9 +76,7 @@ def test___watchdog_task___reset_enum_property___returns_default_value(
     assert watchdog_task.expir_trig_dig_edge_edge == Edge.RISING
 
 
-def test___watchdog_task___get_float64_property___returns_value(
-    any_x_series_device, watchdog_task
-):
+def test___watchdog_task___get_float64_property___returns_value(any_x_series_device, watchdog_task):
     do_line = any_x_series_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)

@@ -7,7 +7,7 @@ from nidaqmx.error_codes import DAQmxErrors
 def test___constructed_persisted_task___get_property___returns_persisted_value(
     system,
 ):
-    persisted_task = _persisted_task(system,"VoltageTesterTask")
+    persisted_task = _persisted_task(system, "VoltageTesterTask")
 
     assert persisted_task.author == "Test Author"
 
