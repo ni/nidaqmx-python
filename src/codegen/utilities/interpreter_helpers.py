@@ -4,7 +4,7 @@ from copy import deepcopy
 
 from codegen.functions.function import Function
 from codegen.utilities.function_helpers import to_param_argtype
-from codegen.utilities.helpers import camel_to_snake_case
+from codegen.utilities.helpers import AttributeFunctionType, camel_to_snake_case
 
 # This custom regex list doesn't split the string before the number.
 INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES = [
@@ -96,11 +96,25 @@ def generate_interpreter_function_call_args(function_metadata):
             param.is_pointer and param.parameter_name != "callback_data"
         ):
             if param.has_explicit_buffer_size:
-                function_call_args.append(param.parameter_name)
+                if (
+                    is_numpy_array_datatype(param)
+                    and function_metadata.attribute_function_type == AttributeFunctionType.GET
+                ):
+                    function_call_args.append(
+                        f"{param.parameter_name}.ctypes.data_as(ctypes.c_void_p)"
+                    )
+                else:
+                    function_call_args.append(param.parameter_name)
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
         elif param.direction == "in":
-            function_call_args.append(param.parameter_name)
+            if (
+                param.parameter_name == "value"
+                and function_metadata.attribute_function_type == AttributeFunctionType.SET
+            ):
+                function_call_args.append(type_cast_attribute_set_function_parameter(param))
+            else:
+                function_call_args.append(param.parameter_name)
 
     return function_call_args
 
@@ -111,6 +125,13 @@ def get_argument_types(functions_metadata):
     interpreter_parameters = get_interpreter_parameters(functions_metadata)
     size_params = _get_size_params(interpreter_parameters)
     for param in interpreter_parameters:
+        # Skipping the c arguments of these parameters in attribute functions
+        # to remove the variadic arguments.
+        if (
+            param.parameter_name in ("value", "size")
+            and functions_metadata.attribute_function_type != AttributeFunctionType.NONE
+        ):
+            continue
         if _is_handle_parameter(functions_metadata, param):
             if functions_metadata.handle_parameter.ctypes_data_type != "ctypes.c_char_p":
                 if param.direction == "in":
@@ -459,3 +480,19 @@ def get_read_array_parameters(func):
         if param.direction == "out" and "read_array" in param.parameter_name:
             response.append(camel_to_snake_case(param.parameter_name))
     return response
+
+
+def type_cast_attribute_set_function_parameter(param):
+    """Type casting of attribute set parameter during c call."""
+    if param.ctypes_data_type == "ctypes.c_char_p":
+        return f"{param.parameter_name}.encode('ascii')"
+    if is_numpy_array_datatype(param):
+        return f"{param.parameter_name}.ctypes.data_as(ctypes.c_void_p)"
+    return f"{param.ctypes_data_type}({param.parameter_name})"
+
+
+def is_numpy_array_datatype(param):
+    """Checks if datatype is a numpy array or not."""
+    if param.ctypes_data_type.startswith("numpy."):
+        return True
+    return False
