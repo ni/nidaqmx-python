@@ -160,13 +160,13 @@ class TestPropertyListDataTypes:
         assert isinstance(terminals[0], UsageTypeAI)
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    @pytest.mark.parametrize("device_by_name", ["bridgeTester"], indirect=True)
-    def test_list_of_floats_property(self, task, device_by_name, seed):
+    @pytest.mark.device_name("bridgeTester")
+    def test_list_of_floats_property(self, task, device, seed):
         """Test for validating list of float property."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        ai_channel = task.ai_channels.add_ai_bridge_chan(device_by_name.ai_physical_chans[0].name)
+        ai_channel = task.ai_channels.add_ai_bridge_chan(device.ai_physical_chans[0].name)
 
         # Test default property value.
         assert isinstance(ai_channel.ai_bridge_poly_forward_coeff, list)

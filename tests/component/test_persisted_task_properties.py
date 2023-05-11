@@ -38,14 +38,14 @@ def test___persisted_tasks_with_different_names___compare___not_equal(system):
     assert persisted_task1 != persisted_task2
 
 
-def test___persisted_task___get_bool_property___returns_persisted_value(system):
-    persisted_task1 = _persisted_task(system, "VoltageTesterTask")
-    assert persisted_task1.allow_interactive_editing
+@pytest.mark.task_name("VoltageTesterTask")
+def test___persisted_task___get_bool_property___returns_persisted_value(persisted_task):
+    assert persisted_task.allow_interactive_editing
 
 
-def test___persisted_scale___get_string_property___returns_persisted_value(system):
-    persisted_task1 = _persisted_task(system, "VoltageTesterTask")
-    assert persisted_task1.author == "Test Author"
+@pytest.mark.task_name("VoltageTesterTask")
+def test___persisted_scale___get_string_property___returns_persisted_value(persisted_task):
+    assert persisted_task.author == "Test Author"
 
 
 def _persisted_task(system, task_name):

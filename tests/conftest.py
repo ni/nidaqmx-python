@@ -109,10 +109,8 @@ def sim_x_series_device(system):
 
 
 @pytest.fixture(scope="module")
-def sim_ts_chassis():
+def sim_ts_chassis(system):
     """Gets simulated TestScale chassis information."""
-    system = nidaqmx.system.System.local()
-
     # Prefer tsChassisTester if available so that multi-module tests will use
     # modules from the same chassis.
     if "tsChassisTester" in system.devices:
@@ -191,10 +189,8 @@ def sim_ts_power_devices(sim_ts_chassis):
 
 
 @pytest.fixture(scope="module")
-def multi_threading_test_devices():
+def multi_threading_test_devices(system):
     """Gets multi threading test devices information."""
-    system = nidaqmx.system.System.local()
-
     devices = []
     for device in system.devices:
         if (
@@ -215,12 +211,11 @@ def multi_threading_test_devices():
 
 
 @pytest.fixture(scope="module")
-def device_by_name(request):
+def device(request, system):
     """Gets the device information based on the device name."""
-    system = nidaqmx.system.System.local()
-
+    device_name = _get_marker_value(request, "device_name")
     for device in system.devices:
-        if device.name == request.param:
+        if device.name == device_name:
             return device
 
     pytest.skip(
@@ -299,6 +294,52 @@ def generate_task(init_kwargs):
             return stack.enter_context(nidaqmx.Task(new_task_name=task_name, **init_kwargs))
 
         yield _create_task
+
+
+@pytest.fixture(scope="module")
+def persisted_task(request, system):
+    """Gets the persisted task based on the task name."""
+    task_name = _get_marker_value(request, "task_name")
+
+    if task_name in system.tasks.task_names:
+        return system.tasks[task_name]
+
+    pytest.skip(
+        "Could not detect a persisted task that has the given name."
+        "Cannot proceed to run tests. Import the NI MAX configuration file located at "
+        "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required tasks."
+    )
+    return None
+
+
+@pytest.fixture(scope="module")
+def persisted_scale(request, system):
+    """Gets the persisted scale based on the scale name."""
+    scale_name = _get_marker_value(request, "scale_name")
+    if scale_name in system.scales:
+        return system.scales[scale_name]
+    pytest.skip(
+        "Could not detect a persisted scale with the requested scale name.  Cannot proceed "
+        "to run tests. Import the NI MAX configuration file located at "
+        "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required scales."
+    )
+    return None
+
+
+@pytest.fixture(scope="module")
+def persisted_channel(request, system):
+    """Gets the persisted channel based on the channel name."""
+    channel_name = _get_marker_value(request, "channel_name")
+
+    if channel_name in system.global_channels.global_channel_names:
+        return system.global_channels[channel_name]
+
+    pytest.skip(
+        "Could not detect a global channel that has the given name."
+        "Cannot proceed to run tests. Import the NI MAX configuration file located at "
+        "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required channels."
+    )
+    return None
 
 
 @pytest.fixture(scope="function")

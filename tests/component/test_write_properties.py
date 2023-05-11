@@ -76,26 +76,26 @@ def test___ao_task___get_uint64_property___returns_default_value(ao_task: Task):
     assert ao_task.out_stream.curr_write_pos == 0
 
 
-@pytest.mark.parametrize("device_by_name", ["aoTester"], indirect=True)
-def test___ao_current_task___get_bool_property___returns_default_value(task, device_by_name):
-    task.ao_channels.add_ao_current_chan(device_by_name.ao_physical_chans[0].name)
+@pytest.mark.device_name("aoTester")
+def test___ao_current_task___get_bool_property___returns_default_value(task, device):
+    task.ao_channels.add_ao_current_chan(device.ao_physical_chans[0].name)
     task.start()
 
     assert not task.out_stream.open_current_loop_chans_exist
 
 
-@pytest.mark.parametrize("device_by_name", ["aoTester"], indirect=True)
-def test___ao_current_task___get_string_list_property___returns_default_value(task, device_by_name):
-    task.ao_channels.add_ao_current_chan(device_by_name.ao_physical_chans[0].name)
+@pytest.mark.device_name("aoTester")
+def test___ao_current_task___get_string_list_property___returns_default_value(task, device):
+    task.ao_channels.add_ao_current_chan(device.ao_physical_chans[0].name)
     task.start()
     _ = task.out_stream.open_current_loop_chans_exist
 
     assert task.out_stream.open_current_loop_chans == []
 
 
-@pytest.mark.parametrize("device_by_name", ["aoTester"], indirect=True)
-def test___ao_current_task__read_property___out_of_order___throws_daqerror(task, device_by_name):
-    task.ao_channels.add_ao_current_chan(device_by_name.ao_physical_chans[0].name)
+@pytest.mark.device_name("aoTester")
+def test___ao_current_task__read_property___out_of_order___throws_daqerror(task, device):
+    task.ao_channels.add_ao_current_chan(device.ao_physical_chans[0].name)
     task.start()
 
     with pytest.raises(DaqError) as exc_info:

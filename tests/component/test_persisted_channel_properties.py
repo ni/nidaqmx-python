@@ -40,12 +40,14 @@ def test___persisted_channels_with_different_names___compare___not_equal(
     assert persisted_channel1 != persisted_channel2
 
 
-def test___persisted_channel___get_bool_property___returns_persisted_value(system):
-    assert _persisted_channel(system, "VoltageTesterChannel").allow_interactive_editing
+@pytest.mark.channel_name("VoltageTesterChannel")
+def test___persisted_channel___get_bool_property___returns_persisted_value(persisted_channel):
+    assert persisted_channel.allow_interactive_editing
 
 
-def test___persisted_channel___get_string_property___returns_persisted_value(system):
-    assert _persisted_channel(system, "VoltageTesterChannel").author == "Test Author"
+@pytest.mark.channel_name("VoltageTesterChannel")
+def test___persisted_channel___get_string_property___returns_persisted_value(persisted_channel):
+    assert persisted_channel.author == "Test Author"
 
 
 def _persisted_channel(system, channel_name):
