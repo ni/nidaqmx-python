@@ -9,7 +9,6 @@ import pytest
 
 import nidaqmx.system
 from nidaqmx.constants import ProductCategory, UsageTypeAI
-from nidaqmx.grpc_session_options import GrpcSessionOptions
 
 try:
     import grpc
@@ -304,7 +303,7 @@ def grpc_channel(grpc_server_process: GrpcServerProcess) -> grpc.Channel:
 @pytest.fixture(scope="session")
 def grpc_init_kwargs(grpc_channel: grpc.Channel) -> dict:
     """Gets the keyword arguments required for creating the gRPC interpreter."""
-    grpc_options = GrpcSessionOptions(
+    grpc_options = nidaqmx.GrpcSessionOptions(
         grpc_channel=grpc_channel,
         session_name="",
     )
