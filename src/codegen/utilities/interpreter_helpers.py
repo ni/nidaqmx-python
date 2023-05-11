@@ -47,8 +47,8 @@ INCLUDE_SIZE_PARAMETER_IN_SIGNATURE_FUNCTIONS = [
 ]
 
 MODIFIED_INTERPRETER_PARAMS = {
-    "r_0":"r0",
-    "r_1":"r1",
+    "r_0": "r0",
+    "r_1": "r1",
 }
 
 
