@@ -372,9 +372,11 @@ def get_c_function_call_template(func):
         return "/double_c_function_call.py.mako"
     return "/default_c_function_call.py.mako"
 
+
 def get_grpc_function_call_template(func):
     """Gets the template to use for generating the logic of calling the grpc functions."""
     return "/default_grpc_function_call.py.mako"
+
 
 def get_callback_param_data_types(func_params):
     """Gets the data types for call back function parameters."""
