@@ -37,6 +37,7 @@ class Function:
                 if (
                     function_parameter.is_used_in_python_api
                     and not function_parameter.is_proto_only
+                    and not function_parameter.repeated_var_args
                 ):
                     if (
                         function_parameter.parameter_name != "task"
