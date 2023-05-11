@@ -343,21 +343,33 @@ def persisted_channel(request, system):
 
 
 @pytest.fixture(scope="function")
-def watchdog_task(request, init_kwargs, any_x_series_device) -> nidaqmx.system.WatchdogTask:
-    """Gets a task instance."""
+def watchdog_task(
+    request, any_x_series_device, generate_watchdog_task
+) -> nidaqmx.system.WatchdogTask:
+    """Gets a watchdog task instance."""
     # set default values used for the initialization of the task.
-    init_args = {
-        "device_name": any_x_series_device.name,
-        "timeout": 0.5,
-    }
+    device_name = _get_marker_value(request, "device_name", any_x_series_device.name)
+    timeout = _get_marker_value(request, "time_out", 0.5)
 
-    # iterate through markers and update arguments
-    for marker in request.node.iter_markers():
-        if marker.name in init_args:  # only look at markers with valid argument names
-            init_args[marker.name] = marker.args[0]  # assume single parameter in marker
+    return generate_watchdog_task(device_name=device_name, timeout=timeout)
 
-    with nidaqmx.system.WatchdogTask(**init_args, **init_kwargs) as task:
-        yield task
+
+@pytest.fixture(scope="function")
+def generate_watchdog_task(init_kwargs):
+    """Gets a factory function which can be used to generate new watchdog tasks.
+
+    The closure of task objects will be done by this fixture once the test is complete.
+    This fixture owns the task. Do not use it for test cases that destroy the task, or else you
+    may get double-close warnings.
+    """
+    with contextlib.ExitStack() as stack:
+
+        def _create_task(device_name="", task_name="", timeout=0):
+            return stack.enter_context(
+                nidaqmx.system.WatchdogTask(device_name, task_name, timeout, **init_kwargs)
+            )
+
+        yield _create_task
 
 
 def _get_marker_value(request, marker_name, default=None):
