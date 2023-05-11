@@ -17,7 +17,8 @@ class PersistedChannel:
         """
         Args:
             name (str): Specifies the name of the global channel.
-            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
+            grpc_options (Optional[:class:`~nidaqmx.GrpcSessionOptions`]): Specifies
+                the gRPC session options.
         """
         self._name = name
         self._interpreter = utils._select_interpreter(grpc_options)
@@ -86,7 +87,7 @@ class _PersistedChannelAlternateConstructor(PersistedChannel):
         Args:
             name: Specifies the name of the PersistedChannel.
             interpreter: Specifies the interpreter instance.
-            
+
         """
         self._name = name
         self._interpreter = interpreter

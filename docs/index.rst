@@ -8,12 +8,15 @@ NI-DAQmx Python Documentation
 
 .. include:: ../README.rst
 
+.. py:module:: nidaqmx
+
 .. toctree::
    :maxdepth: 3
    :caption: API Reference:
 
    constants
    errors
+   grpc_session_options
    scale
    stream_readers
    stream_writers

@@ -35,7 +35,8 @@ class PhysicalChannel:
         """
         Args:
             name (str): Specifies the name of the physical channel.
-            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
+            grpc_options (Optional[:class:`~nidaqmx.GrpcSessionOptions`]): Specifies
+                the gRPC session options.
         """
         self._name = name
         self._interpreter = utils._select_interpreter(grpc_options)
@@ -76,7 +77,7 @@ class _PhysicalChannelAlternateConstructor(PhysicalChannel):
     """
     Provide an alternate constructor for the PhysicalChannel object.
 
-    This is a private API used to instantiate a PhysicalChannel with an existing interpreter.     
+    This is a private API used to instantiate a PhysicalChannel with an existing interpreter.
     """
     # Setting __slots__ avoids TypeError: __class__ assignment: 'Base' object layout differs from 'Derived'.
     __slots__ = []
@@ -86,7 +87,7 @@ class _PhysicalChannelAlternateConstructor(PhysicalChannel):
         Args:
             name: Specifies the name of the Physical Channel.
             interpreter: Specifies the interpreter instance.
-            
+
         """
         self._name = name
         self._interpreter = interpreter
