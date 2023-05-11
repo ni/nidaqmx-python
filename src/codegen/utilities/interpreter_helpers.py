@@ -453,8 +453,13 @@ def get_interpreter_parameters(func, is_grpc_interpreter=False):
     size_params = _get_size_params(func.base_parameters)
     interpreter_parameters = []
     for parameter in func.base_parameters:
+        # Repeated variable argument parameters are not used as interpreter parameter in nidaqmx-python
         if (
-            (parameter.is_used_in_python_api and not parameter.is_proto_only)
+            (
+                parameter.is_used_in_python_api
+                and not parameter.is_proto_only
+                and not parameter.repeated_var_args
+            )
             or parameter.parameter_name in size_params
             or _is_handle_parameter(func, parameter)
             or (is_grpc_interpreter and parameter.is_compound_type)
