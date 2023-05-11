@@ -1,15 +1,22 @@
 """Fixtures used in the DAQmx tests."""
+from __future__ import annotations
+
 import contextlib
 import pathlib
 from enum import Enum
 
-import grpc
 import pytest
 
 import nidaqmx.system
 from nidaqmx.constants import ProductCategory, UsageTypeAI
 from nidaqmx.grpc_session_options import GrpcSessionOptions
-from tests._grpc_utils import GrpcServerProcess
+
+try:
+    import grpc
+
+    from tests._grpc_utils import GrpcServerProcess
+except ImportError:
+    grpc = None
 
 
 class Error(Exception):
@@ -279,21 +286,23 @@ def test_assets_directory() -> pathlib.Path:
 
 
 @pytest.fixture(scope="session")
-def grpc_server_process():
+def grpc_server_process() -> GrpcServerProcess:
     """Gets the grpc server process."""
+    if grpc is None:
+        pytest.skip("The grpc module is not available.")
     with GrpcServerProcess() as proc:
         yield proc
 
 
 @pytest.fixture(scope="session")
-def grpc_channel(grpc_server_process):
+def grpc_channel(grpc_server_process: GrpcServerProcess) -> grpc.Channel:
     """Gets the gRPC channel."""
     with grpc.insecure_channel(f"localhost:{grpc_server_process.server_port}") as channel:
         yield channel
 
 
 @pytest.fixture(scope="session")
-def grpc_init_kwargs(grpc_channel):
+def grpc_init_kwargs(grpc_channel: grpc.Channel) -> dict:
     """Gets the keyword arguments required for creating the gRPC interpreter."""
     grpc_options = GrpcSessionOptions(
         grpc_channel=grpc_channel,

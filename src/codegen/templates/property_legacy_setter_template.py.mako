@@ -5,6 +5,8 @@
     @${attribute.name}.setter
     def ${attribute.name}(self, val):
 \
+        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
     %if attribute.bitfield_enum is not None:

@@ -4,9 +4,6 @@ import ctypes
 import numpy
 
 from nidaqmx import utils
-from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
-from nidaqmx._lib import (
-    lib_importer, ctypes_byte_str, c_bool32)
 from nidaqmx._bitfield_utils import enum_bitfield_to_list
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
@@ -85,6 +82,8 @@ class PhysicalChannel:
 
     @ai_power_control_enable.setter
     def ai_power_control_enable(self, val):
+        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
         cfunc = lib_importer.windll.DAQmxSetPhysicalChanAIPowerControlEnable
@@ -99,6 +98,8 @@ class PhysicalChannel:
 
     @ai_power_control_enable.deleter
     def ai_power_control_enable(self):
+        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
         cfunc = lib_importer.windll.DAQmxResetPhysicalChanAIPowerControlEnable
@@ -123,6 +124,8 @@ class PhysicalChannel:
 
     @ai_power_control_type.setter
     def ai_power_control_type(self, val):
+        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
         val = val.value
@@ -138,6 +141,8 @@ class PhysicalChannel:
 
     @ai_power_control_type.deleter
     def ai_power_control_type(self):
+        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
         cfunc = lib_importer.windll.DAQmxResetPhysicalChanAIPowerControlType
@@ -162,6 +167,8 @@ class PhysicalChannel:
 
     @ai_power_control_voltage.setter
     def ai_power_control_voltage(self, val):
+        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
         cfunc = (lib_importer.windll.
@@ -177,6 +184,8 @@ class PhysicalChannel:
 
     @ai_power_control_voltage.deleter
     def ai_power_control_voltage(self):
+        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
         cfunc = (lib_importer.windll.
@@ -268,6 +277,8 @@ class PhysicalChannel:
 
     @ao_manual_control_enable.setter
     def ao_manual_control_enable(self, val):
+        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
         cfunc = (lib_importer.windll.
@@ -283,6 +294,8 @@ class PhysicalChannel:
 
     @ao_manual_control_enable.deleter
     def ao_manual_control_enable(self):
+        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
         cfunc = (lib_importer.windll.
@@ -339,6 +352,8 @@ class PhysicalChannel:
 
     @ao_power_amp_channel_enable.setter
     def ao_power_amp_channel_enable(self, val):
+        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
         cfunc = lib_importer.windll.DAQmxSetAOPowerAmpChannelEnable
@@ -353,6 +368,8 @@ class PhysicalChannel:
 
     @ao_power_amp_channel_enable.deleter
     def ao_power_amp_channel_enable(self):
+        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
         cfunc = lib_importer.windll.DAQmxResetAOPowerAmpChannelEnable

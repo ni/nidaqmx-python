@@ -39,3 +39,5 @@ jobs:
         run: git diff --exit-code
       - name: Run unit tests
         run: poetry run pytest -v --cov=generated/nidaqmx tests/unit
+      - name: Generate docs
+        run: poetry run tox -e docs

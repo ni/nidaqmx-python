@@ -1,5 +1,10 @@
 from enum import IntEnum
 
+try:
+    from grpc import Channel as _GrpcChannel
+except ImportError:
+    from typing import Any as _GrpcChannel
+
 
 # This constant specifies the gRPC package and service used by this API.
 # Customers can pass this value to the MeasurementLink discovery service to resolve the server instance that provides this interface.
@@ -36,13 +41,13 @@ class SessionInitializationBehavior(IntEnum):
     '''
 
 
-class GrpcSessionOptions(object):
+class GrpcSessionOptions:
     '''Collection of options that specifies session behaviors related to gRPC.'''
 
     def __init__(
         self,
-        grpc_channel,
-        session_name,
+        grpc_channel: _GrpcChannel,
+        session_name: str,
         *,
         api_key=MEASUREMENTLINK_23Q1_NIDAQMX_PYTHON_API_KEY,
         initialization_behavior=SessionInitializationBehavior.AUTO
