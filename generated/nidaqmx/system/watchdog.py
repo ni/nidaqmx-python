@@ -78,9 +78,8 @@ class WatchdogTask:
     @property
     def expiration_states(self):
         """
-        nidaqmx.system._watchdog_modules.expiration_states_collection.
-                ExpirationStatesCollection:
-            Gets the collection of expiration states for this watchdog task.
+        :class:`nidaqmx.system._watchdog_modules.expiration_states_collection.ExpirationStatesCollection`: Gets
+            the collection of expiration states for this watchdog task.
         """
         return self._expiration_states
 
