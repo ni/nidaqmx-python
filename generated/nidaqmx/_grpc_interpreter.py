@@ -102,6 +102,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.AddNetworkDeviceRequest(
                 ip_address=ip_address, device_name=device_name,
                 attempt_reservation=attempt_reservation, timeout=timeout))
+
         return response.device_name_out
 
     def are_configured_cdaq_sync_ports_disconnected(
@@ -110,6 +111,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.AreConfiguredCDAQSyncPortsDisconnected,
             grpc_types.AreConfiguredCDAQSyncPortsDisconnectedRequest(
                 chassis_devices_ports=chassis_devices_ports, timeout=timeout))
+
         return response.disconnected_ports_exist
 
     def auto_configure_cdaq_sync_connections(
@@ -129,6 +131,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 max_val_x=max_val_x,
                 num_points_to_compute=num_points_to_compute,
                 reverse_poly_order=reverse_poly_order))
+
         return list(response.reverse_coeffs)
 
     def cfg_anlg_edge_ref_trig(
@@ -1293,6 +1296,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 session_name=session_name,
                 initialization_behavior=self._grpc_options.initialization_behavior),
             metadata=metadata)
+
         return response.task, response.new_session_initialized
 
     def create_tedsai_accel_chan(
@@ -1570,6 +1574,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 timeout=timeout, exp_states=exp_states,
                 initialization_behavior=self._grpc_options.initialization_behavior),
             metadata=metadata)
+
         return response.task, response.new_session_initialized
 
     def create_watchdog_timer_task_ex(
@@ -1584,6 +1589,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 timeout=timeout,
                 initialization_behavior=self._grpc_options.initialization_behavior),
             metadata=metadata)
+
         return response.task, response.new_session_initialized
 
     def delete_network_device(self, device_name):
@@ -1610,6 +1616,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.DeviceSupportsCal,
             grpc_types.DeviceSupportsCalRequest(device_name=device_name))
+
         return response.cal_supported
 
     def disable_ref_trig(self, task):
@@ -1640,12 +1647,14 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.GetAIChanCalCalDate,
             grpc_types.GetAIChanCalCalDateRequest(task=task, channel_name=channel_name))
+
         return response.year, response.month, response.day, response.hour, response.minute
 
     def get_ai_chan_cal_exp_date(self, task, channel_name):
         response = self._invoke(
             self._client.GetAIChanCalExpDate,
             grpc_types.GetAIChanCalExpDateRequest(task=task, channel_name=channel_name))
+
         return response.year, response.month, response.day, response.hour, response.minute
 
     def get_analog_power_up_states(
@@ -1656,6 +1665,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.GetAnalogPowerUpStates,
             grpc_types.GetAnalogPowerUpStatesRequest(device_name=device_name, channels=channels))
+
         return response.power_up_states
 
     def get_analog_power_up_states_with_output_type(
@@ -1664,18 +1674,21 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetAnalogPowerUpStatesWithOutputType,
             grpc_types.GetAnalogPowerUpStatesWithOutputTypeRequest(
                 channel_names=channel_names, array_size=array_size))
+
         return list(response.state_array), list(response.channel_type_array)
 
     def get_auto_configured_cdaq_sync_connections(self):
         response = self._invoke(
             self._client.GetAutoConfiguredCDAQSyncConnections,
             grpc_types.GetAutoConfiguredCDAQSyncConnectionsRequest())
+
         return response.port_list
 
     def get_buffer_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetBufferAttributeUInt32,
             grpc_types.GetBufferAttributeUInt32Request(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_cal_info_attribute_bool(self, device_name, attribute):
@@ -1683,6 +1696,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetCalInfoAttributeBool,
             grpc_types.GetCalInfoAttributeBoolRequest(
                 device_name=device_name, attribute_raw=attribute))
+
         return response.value
 
     def get_cal_info_attribute_double(self, device_name, attribute):
@@ -1690,6 +1704,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetCalInfoAttributeDouble,
             grpc_types.GetCalInfoAttributeDoubleRequest(
                 device_name=device_name, attribute_raw=attribute))
+
         return response.value
 
     def get_cal_info_attribute_string(self, device_name, attribute):
@@ -1697,6 +1712,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetCalInfoAttributeString,
             grpc_types.GetCalInfoAttributeStringRequest(
                 device_name=device_name, attribute_raw=attribute))
+
         return response.value
 
     def get_cal_info_attribute_uint32(self, device_name, attribute):
@@ -1704,6 +1720,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetCalInfoAttributeUInt32,
             grpc_types.GetCalInfoAttributeUInt32Request(
                 device_name=device_name, attribute_raw=attribute))
+
         return response.value
 
     def get_chan_attribute_bool(self, task, channel, attribute):
@@ -1711,6 +1728,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetChanAttributeBool,
             grpc_types.GetChanAttributeBoolRequest(
                 task=task, channel=channel, attribute_raw=attribute))
+
         return response.value
 
     def get_chan_attribute_double(self, task, channel, attribute):
@@ -1718,6 +1736,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetChanAttributeDouble,
             grpc_types.GetChanAttributeDoubleRequest(
                 task=task, channel=channel, attribute_raw=attribute))
+
         return response.value
 
     def get_chan_attribute_double_array(self, task, channel, attribute):
@@ -1725,6 +1744,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetChanAttributeDoubleArray,
             grpc_types.GetChanAttributeDoubleArrayRequest(
                 task=task, channel=channel, attribute_raw=attribute))
+
         return list(response.value)
 
     def get_chan_attribute_int32(self, task, channel, attribute):
@@ -1732,6 +1752,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetChanAttributeInt32,
             grpc_types.GetChanAttributeInt32Request(
                 task=task, channel=channel, attribute_raw=attribute))
+
         return response.value_raw
 
     def get_chan_attribute_string(self, task, channel, attribute):
@@ -1739,6 +1760,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetChanAttributeString,
             grpc_types.GetChanAttributeStringRequest(
                 task=task, channel=channel, attribute_raw=attribute))
+
         return response.value
 
     def get_chan_attribute_uint32(self, task, channel, attribute):
@@ -1746,6 +1768,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetChanAttributeUInt32,
             grpc_types.GetChanAttributeUInt32Request(
                 task=task, channel=channel, attribute_raw=attribute))
+
         return response.value
 
     def get_device_attribute_bool(self, device_name, attribute):
@@ -1753,6 +1776,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetDeviceAttributeBool,
             grpc_types.GetDeviceAttributeBoolRequest(
                 device_name=device_name, attribute_raw=attribute))
+
         return response.value
 
     def get_device_attribute_double(self, device_name, attribute):
@@ -1760,6 +1784,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetDeviceAttributeDouble,
             grpc_types.GetDeviceAttributeDoubleRequest(
                 device_name=device_name, attribute_raw=attribute))
+
         return response.value
 
     def get_device_attribute_double_array(self, device_name, attribute):
@@ -1767,6 +1792,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetDeviceAttributeDoubleArray,
             grpc_types.GetDeviceAttributeDoubleArrayRequest(
                 device_name=device_name, attribute_raw=attribute))
+
         return list(response.value)
 
     def get_device_attribute_int32(self, device_name, attribute):
@@ -1774,6 +1800,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetDeviceAttributeInt32,
             grpc_types.GetDeviceAttributeInt32Request(
                 device_name=device_name, attribute_raw=attribute))
+
         return response.value_raw
 
     def get_device_attribute_int32_array(self, device_name, attribute):
@@ -1781,6 +1808,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetDeviceAttributeInt32Array,
             grpc_types.GetDeviceAttributeInt32ArrayRequest(
                 device_name=device_name, attribute_raw=attribute))
+
         return response.value_raw
 
     def get_device_attribute_string(self, device_name, attribute):
@@ -1788,6 +1816,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetDeviceAttributeString,
             grpc_types.GetDeviceAttributeStringRequest(
                 device_name=device_name, attribute_raw=attribute))
+
         return response.value
 
     def get_device_attribute_uint32(self, device_name, attribute):
@@ -1795,6 +1824,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetDeviceAttributeUInt32,
             grpc_types.GetDeviceAttributeUInt32Request(
                 device_name=device_name, attribute_raw=attribute))
+
         return response.value
 
     def get_device_attribute_uint32_array(self, device_name, attribute):
@@ -1802,12 +1832,14 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetDeviceAttributeUInt32Array,
             grpc_types.GetDeviceAttributeUInt32ArrayRequest(
                 device_name=device_name, attribute_raw=attribute))
+
         return list(response.value)
 
     def get_digital_logic_family_power_up_state(self, device_name):
         response = self._invoke(
             self._client.GetDigitalLogicFamilyPowerUpState,
             grpc_types.GetDigitalLogicFamilyPowerUpStateRequest(device_name=device_name))
+
         return response.logic_family
 
     def get_digital_power_up_states(self, device_name, channel_name):
@@ -1815,6 +1847,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetDigitalPowerUpStates,
             grpc_types.GetDigitalPowerUpStatesRequest(
                 device_name=device_name, channel_name=channel_name))
+
         return response.power_up_states
 
     def get_digital_pull_up_pull_down_states(self, device_name, channel_name):
@@ -1822,24 +1855,28 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetDigitalPullUpPullDownStates,
             grpc_types.GetDigitalPullUpPullDownStatesRequest(
                 device_name=device_name, channel_name=channel_name))
+
         return response.pull_up_pull_down_states
 
     def get_disconnected_cdaq_sync_ports(self):
         response = self._invoke(
             self._client.GetDisconnectedCDAQSyncPorts,
             grpc_types.GetDisconnectedCDAQSyncPortsRequest())
+
         return response.port_list
 
     def get_error_string(self, error_code):
         response = self._invoke(
             self._client.GetErrorString,
             grpc_types.GetErrorStringRequest(error_code=error_code))
+
         return response.error_string
 
     def get_exported_signal_attribute_bool(self, task, attribute):
         response = self._invoke(
             self._client.GetExportedSignalAttributeBool,
             grpc_types.GetExportedSignalAttributeBoolRequest(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_exported_signal_attribute_double(self, task, attribute):
@@ -1847,6 +1884,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetExportedSignalAttributeDouble,
             grpc_types.GetExportedSignalAttributeDoubleRequest(
                 task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_exported_signal_attribute_int32(self, task, attribute):
@@ -1854,6 +1892,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetExportedSignalAttributeInt32,
             grpc_types.GetExportedSignalAttributeInt32Request(
                 task=task, attribute_raw=attribute))
+
         return response.value_raw
 
     def get_exported_signal_attribute_string(self, task, attribute):
@@ -1861,6 +1900,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetExportedSignalAttributeString,
             grpc_types.GetExportedSignalAttributeStringRequest(
                 task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_exported_signal_attribute_uint32(self, task, attribute):
@@ -1868,24 +1908,28 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetExportedSignalAttributeUInt32,
             grpc_types.GetExportedSignalAttributeUInt32Request(
                 task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_nth_task_channel(self, task, index):
         response = self._invoke(
             self._client.GetNthTaskChannel,
             grpc_types.GetNthTaskChannelRequest(task=task, index=index))
+
         return response.buffer
 
     def get_nth_task_device(self, task, index):
         response = self._invoke(
             self._client.GetNthTaskDevice,
             grpc_types.GetNthTaskDeviceRequest(task=task, index=index))
+
         return response.buffer
 
     def get_nth_task_read_channel(self, task, index):
         response = self._invoke(
             self._client.GetNthTaskReadChannel,
             grpc_types.GetNthTaskReadChannelRequest(task=task, index=index))
+
         return response.buffer
 
     def get_persisted_chan_attribute_bool(self, channel, attribute):
@@ -1893,6 +1937,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPersistedChanAttributeBool,
             grpc_types.GetPersistedChanAttributeBoolRequest(
                 channel=channel, attribute_raw=attribute))
+
         return response.value
 
     def get_persisted_chan_attribute_string(self, channel, attribute):
@@ -1900,6 +1945,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPersistedChanAttributeString,
             grpc_types.GetPersistedChanAttributeStringRequest(
                 channel=channel, attribute_raw=attribute))
+
         return response.value
 
     def get_persisted_scale_attribute_bool(self, scale_name, attribute):
@@ -1907,6 +1953,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPersistedScaleAttributeBool,
             grpc_types.GetPersistedScaleAttributeBoolRequest(
                 scale_name=scale_name, attribute_raw=attribute))
+
         return response.value
 
     def get_persisted_scale_attribute_string(self, scale_name, attribute):
@@ -1914,6 +1961,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPersistedScaleAttributeString,
             grpc_types.GetPersistedScaleAttributeStringRequest(
                 scale_name=scale_name, attribute_raw=attribute))
+
         return response.value
 
     def get_persisted_task_attribute_bool(self, task_name, attribute):
@@ -1921,6 +1969,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPersistedTaskAttributeBool,
             grpc_types.GetPersistedTaskAttributeBoolRequest(
                 task_name=task_name, attribute_raw=attribute))
+
         return response.value
 
     def get_persisted_task_attribute_string(self, task_name, attribute):
@@ -1928,6 +1977,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPersistedTaskAttributeString,
             grpc_types.GetPersistedTaskAttributeStringRequest(
                 task_name=task_name, attribute_raw=attribute))
+
         return response.value
 
     def get_physical_chan_attribute_bool(self, physical_channel, attribute):
@@ -1935,6 +1985,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPhysicalChanAttributeBool,
             grpc_types.GetPhysicalChanAttributeBoolRequest(
                 physical_channel=physical_channel, attribute_raw=attribute))
+
         return response.value
 
     def get_physical_chan_attribute_bytes(self, physical_channel, attribute):
@@ -1942,6 +1993,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPhysicalChanAttributeBytes,
             grpc_types.GetPhysicalChanAttributeBytesRequest(
                 physical_channel=physical_channel, attribute_raw=attribute))
+
         return list(response.value)
 
     def get_physical_chan_attribute_double(self, physical_channel, attribute):
@@ -1949,6 +2001,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPhysicalChanAttributeDouble,
             grpc_types.GetPhysicalChanAttributeDoubleRequest(
                 physical_channel=physical_channel, attribute_raw=attribute))
+
         return response.value
 
     def get_physical_chan_attribute_double_array(
@@ -1957,6 +2010,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPhysicalChanAttributeDoubleArray,
             grpc_types.GetPhysicalChanAttributeDoubleArrayRequest(
                 physical_channel=physical_channel, attribute_raw=attribute))
+
         return list(response.value)
 
     def get_physical_chan_attribute_int32(self, physical_channel, attribute):
@@ -1964,6 +2018,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPhysicalChanAttributeInt32,
             grpc_types.GetPhysicalChanAttributeInt32Request(
                 physical_channel=physical_channel, attribute_raw=attribute))
+
         return response.value_raw
 
     def get_physical_chan_attribute_int32_array(
@@ -1972,6 +2027,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPhysicalChanAttributeInt32Array,
             grpc_types.GetPhysicalChanAttributeInt32ArrayRequest(
                 physical_channel=physical_channel, attribute_raw=attribute))
+
         return response.value_raw
 
     def get_physical_chan_attribute_string(self, physical_channel, attribute):
@@ -1979,6 +2035,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPhysicalChanAttributeString,
             grpc_types.GetPhysicalChanAttributeStringRequest(
                 physical_channel=physical_channel, attribute_raw=attribute))
+
         return response.value
 
     def get_physical_chan_attribute_uint32(self, physical_channel, attribute):
@@ -1986,6 +2043,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPhysicalChanAttributeUInt32,
             grpc_types.GetPhysicalChanAttributeUInt32Request(
                 physical_channel=physical_channel, attribute_raw=attribute))
+
         return response.value
 
     def get_physical_chan_attribute_uint32_array(
@@ -1994,60 +2052,70 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetPhysicalChanAttributeUInt32Array,
             grpc_types.GetPhysicalChanAttributeUInt32ArrayRequest(
                 physical_channel=physical_channel, attribute_raw=attribute))
+
         return list(response.value)
 
     def get_read_attribute_bool(self, task, attribute):
         response = self._invoke(
             self._client.GetReadAttributeBool,
             grpc_types.GetReadAttributeBoolRequest(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_read_attribute_double(self, task, attribute):
         response = self._invoke(
             self._client.GetReadAttributeDouble,
             grpc_types.GetReadAttributeDoubleRequest(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_read_attribute_int32(self, task, attribute):
         response = self._invoke(
             self._client.GetReadAttributeInt32,
             grpc_types.GetReadAttributeInt32Request(task=task, attribute_raw=attribute))
+
         return response.value_raw
 
     def get_read_attribute_string(self, task, attribute):
         response = self._invoke(
             self._client.GetReadAttributeString,
             grpc_types.GetReadAttributeStringRequest(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_read_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetReadAttributeUInt32,
             grpc_types.GetReadAttributeUInt32Request(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_read_attribute_uint64(self, task, attribute):
         response = self._invoke(
             self._client.GetReadAttributeUInt64,
             grpc_types.GetReadAttributeUInt64Request(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_real_time_attribute_bool(self, task, attribute):
         response = self._invoke(
             self._client.GetRealTimeAttributeBool,
             grpc_types.GetRealTimeAttributeBoolRequest(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_real_time_attribute_int32(self, task, attribute):
         response = self._invoke(
             self._client.GetRealTimeAttributeInt32,
             grpc_types.GetRealTimeAttributeInt32Request(task=task, attribute_raw=attribute))
+
         return response.value_raw
 
     def get_real_time_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetRealTimeAttributeUInt32,
             grpc_types.GetRealTimeAttributeUInt32Request(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_scale_attribute_double(self, scale_name, attribute):
@@ -2055,6 +2123,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetScaleAttributeDouble,
             grpc_types.GetScaleAttributeDoubleRequest(
                 scale_name=scale_name, attribute_raw=attribute))
+
         return response.value
 
     def get_scale_attribute_double_array(self, scale_name, attribute):
@@ -2062,6 +2131,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetScaleAttributeDoubleArray,
             grpc_types.GetScaleAttributeDoubleArrayRequest(
                 scale_name=scale_name, attribute_raw=attribute))
+
         return list(response.value)
 
     def get_scale_attribute_int32(self, scale_name, attribute):
@@ -2069,6 +2139,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetScaleAttributeInt32,
             grpc_types.GetScaleAttributeInt32Request(
                 scale_name=scale_name, attribute_raw=attribute))
+
         return response.value_raw
 
     def get_scale_attribute_string(self, scale_name, attribute):
@@ -2076,54 +2147,63 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetScaleAttributeString,
             grpc_types.GetScaleAttributeStringRequest(
                 scale_name=scale_name, attribute_raw=attribute))
+
         return response.value
 
     def get_self_cal_last_date_and_time(self, device_name):
         response = self._invoke(
             self._client.GetSelfCalLastDateAndTime,
             grpc_types.GetSelfCalLastDateAndTimeRequest(device_name=device_name))
+
         return response.year, response.month, response.day, response.hour, response.minute
 
     def get_system_info_attribute_string(self, attribute):
         response = self._invoke(
             self._client.GetSystemInfoAttributeString,
             grpc_types.GetSystemInfoAttributeStringRequest(attribute_raw=attribute))
+
         return response.value
 
     def get_system_info_attribute_uint32(self, attribute):
         response = self._invoke(
             self._client.GetSystemInfoAttributeUInt32,
             grpc_types.GetSystemInfoAttributeUInt32Request(attribute_raw=attribute))
+
         return response.value
 
     def get_task_attribute_bool(self, task, attribute):
         response = self._invoke(
             self._client.GetTaskAttributeBool,
             grpc_types.GetTaskAttributeBoolRequest(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_task_attribute_string(self, task, attribute):
         response = self._invoke(
             self._client.GetTaskAttributeString,
             grpc_types.GetTaskAttributeStringRequest(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_task_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetTaskAttributeUInt32,
             grpc_types.GetTaskAttributeUInt32Request(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_timing_attribute_bool(self, task, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeBool,
             grpc_types.GetTimingAttributeBoolRequest(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_timing_attribute_double(self, task, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeDouble,
             grpc_types.GetTimingAttributeDoubleRequest(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_timing_attribute_ex_bool(self, task, device_names, attribute):
@@ -2131,6 +2211,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetTimingAttributeExBool,
             grpc_types.GetTimingAttributeExBoolRequest(
                 task=task, device_names=device_names, attribute_raw=attribute))
+
         return response.value
 
     def get_timing_attribute_ex_double(self, task, device_names, attribute):
@@ -2138,6 +2219,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetTimingAttributeExDouble,
             grpc_types.GetTimingAttributeExDoubleRequest(
                 task=task, device_names=device_names, attribute_raw=attribute))
+
         return response.value
 
     def get_timing_attribute_ex_int32(self, task, device_names, attribute):
@@ -2145,6 +2227,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetTimingAttributeExInt32,
             grpc_types.GetTimingAttributeExInt32Request(
                 task=task, device_names=device_names, attribute_raw=attribute))
+
         return response.value_raw
 
     def get_timing_attribute_ex_string(self, task, device_names, attribute):
@@ -2152,6 +2235,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetTimingAttributeExString,
             grpc_types.GetTimingAttributeExStringRequest(
                 task=task, device_names=device_names, attribute_raw=attribute))
+
         return response.value
 
     def get_timing_attribute_ex_uint32(self, task, device_names, attribute):
@@ -2159,6 +2243,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetTimingAttributeExUInt32,
             grpc_types.GetTimingAttributeExUInt32Request(
                 task=task, device_names=device_names, attribute_raw=attribute))
+
         return response.value
 
     def get_timing_attribute_ex_uint64(self, task, device_names, attribute):
@@ -2166,72 +2251,84 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetTimingAttributeExUInt64,
             grpc_types.GetTimingAttributeExUInt64Request(
                 task=task, device_names=device_names, attribute_raw=attribute))
+
         return response.value
 
     def get_timing_attribute_int32(self, task, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeInt32,
             grpc_types.GetTimingAttributeInt32Request(task=task, attribute_raw=attribute))
+
         return response.value_raw
 
     def get_timing_attribute_string(self, task, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeString,
             grpc_types.GetTimingAttributeStringRequest(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_timing_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeUInt32,
             grpc_types.GetTimingAttributeUInt32Request(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_timing_attribute_uint64(self, task, attribute):
         response = self._invoke(
             self._client.GetTimingAttributeUInt64,
             grpc_types.GetTimingAttributeUInt64Request(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_trig_attribute_bool(self, task, attribute):
         response = self._invoke(
             self._client.GetTrigAttributeBool,
             grpc_types.GetTrigAttributeBoolRequest(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_trig_attribute_double(self, task, attribute):
         response = self._invoke(
             self._client.GetTrigAttributeDouble,
             grpc_types.GetTrigAttributeDoubleRequest(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_trig_attribute_double_array(self, task, attribute):
         response = self._invoke(
             self._client.GetTrigAttributeDoubleArray,
             grpc_types.GetTrigAttributeDoubleArrayRequest(task=task, attribute_raw=attribute))
+
         return list(response.value)
 
     def get_trig_attribute_int32(self, task, attribute):
         response = self._invoke(
             self._client.GetTrigAttributeInt32,
             grpc_types.GetTrigAttributeInt32Request(task=task, attribute_raw=attribute))
+
         return response.value_raw
 
     def get_trig_attribute_int32_array(self, task, attribute):
         response = self._invoke(
             self._client.GetTrigAttributeInt32Array,
             grpc_types.GetTrigAttributeInt32ArrayRequest(task=task, attribute_raw=attribute))
+
         return response.value_raw
 
     def get_trig_attribute_string(self, task, attribute):
         response = self._invoke(
             self._client.GetTrigAttributeString,
             grpc_types.GetTrigAttributeStringRequest(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_trig_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetTrigAttributeUInt32,
             grpc_types.GetTrigAttributeUInt32Request(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_watchdog_attribute_bool(self, task, lines, attribute):
@@ -2239,6 +2336,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetWatchdogAttributeBool,
             grpc_types.GetWatchdogAttributeBoolRequest(
                 task=task, lines=lines, attribute_raw=attribute))
+
         return response.value
 
     def get_watchdog_attribute_double(self, task, lines, attribute):
@@ -2246,6 +2344,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetWatchdogAttributeDouble,
             grpc_types.GetWatchdogAttributeDoubleRequest(
                 task=task, lines=lines, attribute_raw=attribute))
+
         return response.value
 
     def get_watchdog_attribute_int32(self, task, lines, attribute):
@@ -2253,6 +2352,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetWatchdogAttributeInt32,
             grpc_types.GetWatchdogAttributeInt32Request(
                 task=task, lines=lines, attribute_raw=attribute))
+
         return response.value_raw
 
     def get_watchdog_attribute_string(self, task, lines, attribute):
@@ -2260,48 +2360,56 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.GetWatchdogAttributeString,
             grpc_types.GetWatchdogAttributeStringRequest(
                 task=task, lines=lines, attribute_raw=attribute))
+
         return response.value
 
     def get_write_attribute_bool(self, task, attribute):
         response = self._invoke(
             self._client.GetWriteAttributeBool,
             grpc_types.GetWriteAttributeBoolRequest(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_write_attribute_double(self, task, attribute):
         response = self._invoke(
             self._client.GetWriteAttributeDouble,
             grpc_types.GetWriteAttributeDoubleRequest(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_write_attribute_int32(self, task, attribute):
         response = self._invoke(
             self._client.GetWriteAttributeInt32,
             grpc_types.GetWriteAttributeInt32Request(task=task, attribute_raw=attribute))
+
         return response.value_raw
 
     def get_write_attribute_string(self, task, attribute):
         response = self._invoke(
             self._client.GetWriteAttributeString,
             grpc_types.GetWriteAttributeStringRequest(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_write_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetWriteAttributeUInt32,
             grpc_types.GetWriteAttributeUInt32Request(task=task, attribute_raw=attribute))
+
         return response.value
 
     def get_write_attribute_uint64(self, task, attribute):
         response = self._invoke(
             self._client.GetWriteAttributeUInt64,
             grpc_types.GetWriteAttributeUInt64Request(task=task, attribute_raw=attribute))
+
         return response.value
 
     def is_task_done(self, task):
         response = self._invoke(
             self._client.IsTaskDone,
             grpc_types.IsTaskDoneRequest(task=task))
+
         return response.is_task_done
 
     def load_task(self, session_name):
@@ -2314,6 +2422,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 session_name=session_name,
                 initialization_behavior=self._grpc_options.initialization_behavior),
             metadata=metadata)
+
         return response.task, response.new_session_initialized
 
     def read_analog_f64(
@@ -2325,12 +2434,14 @@ class GrpcStubInterpreter(BaseInterpreter):
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
         _assign_numpy_array(read_array, response.read_array)
+
         return read_array, response.samps_per_chan_read
 
     def read_analog_scalar_f64(self, task, timeout):
         response = self._invoke(
             self._client.ReadAnalogScalarF64,
             grpc_types.ReadAnalogScalarF64Request(task=task, timeout=timeout))
+
         return response.value
 
     def read_binary_i16(
@@ -2342,6 +2453,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
         _assign_numpy_array(read_array, response.read_array)
+
         return read_array, response.samps_per_chan_read
 
     def read_binary_i32(
@@ -2353,6 +2465,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
         _assign_numpy_array(read_array, response.read_array)
+
         return read_array, response.samps_per_chan_read
 
     def read_binary_u16(
@@ -2364,6 +2477,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
         _assign_numpy_array(read_array, response.read_array)
+
         return read_array, response.samps_per_chan_read
 
     def read_binary_u32(
@@ -2375,6 +2489,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
         _assign_numpy_array(read_array, response.read_array)
+
         return read_array, response.samps_per_chan_read
 
     def read_counter_f64(self, task, num_samps_per_chan, timeout, read_array):
@@ -2384,6 +2499,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, array_size_in_samps=read_array.size))
         _assign_numpy_array(read_array, response.read_array)
+
         return read_array, response.samps_per_chan_read
 
     def read_counter_f64_ex(
@@ -2395,18 +2511,21 @@ class GrpcStubInterpreter(BaseInterpreter):
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
         _assign_numpy_array(read_array, response.read_array)
+
         return read_array, response.samps_per_chan_read
 
     def read_counter_scalar_f64(self, task, timeout):
         response = self._invoke(
             self._client.ReadCounterScalarF64,
             grpc_types.ReadCounterScalarF64Request(task=task, timeout=timeout))
+
         return response.value
 
     def read_counter_scalar_u32(self, task, timeout):
         response = self._invoke(
             self._client.ReadCounterScalarU32,
             grpc_types.ReadCounterScalarU32Request(task=task, timeout=timeout))
+
         return response.value
 
     def read_counter_u32(self, task, num_samps_per_chan, timeout, read_array):
@@ -2416,6 +2535,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, array_size_in_samps=read_array.size))
         _assign_numpy_array(read_array, response.read_array)
+
         return read_array, response.samps_per_chan_read
 
     def read_counter_u32_ex(
@@ -2427,6 +2547,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
         _assign_numpy_array(read_array, response.read_array)
+
         return read_array, response.samps_per_chan_read
 
     def read_ctr_freq(
@@ -2440,12 +2561,14 @@ class GrpcStubInterpreter(BaseInterpreter):
                 array_size_in_samps=read_array_frequency.size))
         _assign_numpy_array(read_array_frequency, response.read_array_frequency)
         _assign_numpy_array(read_array_duty_cycle, response.read_array_duty_cycle)
+
         return read_array_frequency, read_array_duty_cycle, response.samps_per_chan_read
 
     def read_ctr_freq_scalar(self, task, timeout):
         response = self._invoke(
             self._client.ReadCtrFreqScalar,
             grpc_types.ReadCtrFreqScalarRequest(task=task, timeout=timeout))
+
         return response.frequency, response.duty_cycle
 
     def read_ctr_ticks(
@@ -2459,12 +2582,14 @@ class GrpcStubInterpreter(BaseInterpreter):
                 array_size_in_samps=read_array_high_ticks.size))
         _assign_numpy_array(read_array_high_ticks, response.read_array_high_ticks)
         _assign_numpy_array(read_array_low_ticks, response.read_array_low_ticks)
+
         return read_array_high_ticks, read_array_low_ticks, response.samps_per_chan_read
 
     def read_ctr_ticks_scalar(self, task, timeout):
         response = self._invoke(
             self._client.ReadCtrTicksScalar,
             grpc_types.ReadCtrTicksScalarRequest(task=task, timeout=timeout))
+
         return response.high_ticks, response.low_ticks
 
     def read_ctr_time(
@@ -2478,12 +2603,14 @@ class GrpcStubInterpreter(BaseInterpreter):
                 array_size_in_samps=read_array_high_time.size))
         _assign_numpy_array(read_array_high_time, response.read_array_high_time)
         _assign_numpy_array(read_array_low_time, response.read_array_low_time)
+
         return read_array_high_time, read_array_low_time, response.samps_per_chan_read
 
     def read_ctr_time_scalar(self, task, timeout):
         response = self._invoke(
             self._client.ReadCtrTimeScalar,
             grpc_types.ReadCtrTimeScalarRequest(task=task, timeout=timeout))
+
         return response.high_time, response.low_time
 
     def read_digital_lines(
@@ -2495,12 +2622,14 @@ class GrpcStubInterpreter(BaseInterpreter):
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_bytes=read_array.size))
         _assign_numpy_array(read_array, response.read_array)
+
         return read_array, response.samps_per_chan_read, response.num_bytes_per_samp
 
     def read_digital_scalar_u32(self, task, timeout):
         response = self._invoke(
             self._client.ReadDigitalScalarU32,
             grpc_types.ReadDigitalScalarU32Request(task=task, timeout=timeout))
+
         return response.value
 
     def read_digital_u16(
@@ -2512,6 +2641,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
         _assign_numpy_array(read_array, response.read_array)
+
         return read_array, response.samps_per_chan_read
 
     def read_digital_u32(
@@ -2523,6 +2653,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
         _assign_numpy_array(read_array, response.read_array)
+
         return read_array, response.samps_per_chan_read
 
     def read_digital_u8(
@@ -2534,6 +2665,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 timeout=timeout, fill_mode_raw=fill_mode,
                 array_size_in_samps=read_array.size))
         _assign_numpy_array(read_array, response.read_array)
+
         return read_array, response.samps_per_chan_read
 
     def read_power_binary_i16(
@@ -2547,6 +2679,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 array_size_in_samps=read_array_voltage.size))
         _assign_numpy_array(read_array_voltage, response.read_array_voltage)
         _assign_numpy_array(read_array_current, response.read_array_current)
+
         return read_array_voltage, read_array_current, response.samps_per_chan_read
 
     def read_power_f64(
@@ -2560,12 +2693,14 @@ class GrpcStubInterpreter(BaseInterpreter):
                 array_size_in_samps=read_array_voltage.size))
         _assign_numpy_array(read_array_voltage, response.read_array_voltage)
         _assign_numpy_array(read_array_current, response.read_array_current)
+
         return read_array_voltage, read_array_current, response.samps_per_chan_read
 
     def read_power_scalar_f64(self, task, timeout):
         response = self._invoke(
             self._client.ReadPowerScalarF64,
             grpc_types.ReadPowerScalarF64Request(task=task, timeout=timeout))
+
         return response.voltage, response.current
 
     def read_raw(self, task, num_samps_per_chan, timeout, read_array):
@@ -2575,6 +2710,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, array_size_in_bytes=read_array.size))
         _assign_numpy_array(read_array, response.read_array)
+
         return read_array, response.samps_read, response.num_bytes_per_samp
 
     def register_done_event(
@@ -3171,6 +3307,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.WaitForNextSampleClock,
             grpc_types.WaitForNextSampleClockRequest(task=task, timeout=timeout))
+
         return response.is_late
 
     def wait_for_valid_timestamp(self, task, timestamp_event, timeout):
@@ -3179,6 +3316,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WaitForValidTimestampRequest(
                 task=task, timestamp_event_raw=timestamp_event,
                 timeout=timeout))
+
         return response.timestamp
 
     def wait_until_task_done(self, task, time_to_wait):
@@ -3195,6 +3333,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
                 data_layout_raw=data_layout, write_array=write_array))
+
         return response.samps_per_chan_written
 
     def write_analog_scalar_f64(self, task, auto_start, timeout, value):
@@ -3213,6 +3352,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
                 data_layout_raw=data_layout, write_array=write_array))
+
         return response.samps_per_chan_written
 
     def write_binary_i32(
@@ -3224,6 +3364,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
                 data_layout_raw=data_layout, write_array=write_array))
+
         return response.samps_per_chan_written
 
     def write_binary_u16(
@@ -3235,6 +3376,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
                 data_layout_raw=data_layout, write_array=write_array))
+
         return response.samps_per_chan_written
 
     def write_binary_u32(
@@ -3246,6 +3388,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
                 data_layout_raw=data_layout, write_array=write_array))
+
         return response.samps_per_chan_written
 
     def write_ctr_freq(
@@ -3258,6 +3401,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 auto_start=auto_start, timeout=timeout,
                 data_layout_raw=data_layout, frequency=frequency,
                 duty_cycle=duty_cycle))
+
         return response.num_samps_per_chan_written
 
     def write_ctr_freq_scalar(
@@ -3278,6 +3422,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 auto_start=auto_start, timeout=timeout,
                 data_layout_raw=data_layout, high_ticks=high_ticks,
                 low_ticks=low_ticks))
+
         return response.num_samps_per_chan_written
 
     def write_ctr_ticks_scalar(
@@ -3298,6 +3443,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 auto_start=auto_start, timeout=timeout,
                 data_layout_raw=data_layout, high_time=high_time,
                 low_time=low_time))
+
         return response.num_samps_per_chan_written
 
     def write_ctr_time_scalar(
@@ -3317,6 +3463,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
                 data_layout_raw=data_layout, write_array=write_array))
+
         return response.samps_per_chan_written
 
     def write_digital_scalar_u32(self, task, auto_start, timeout, value):
@@ -3335,6 +3482,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
                 data_layout_raw=data_layout, write_array=write_array))
+
         return response.samps_per_chan_written
 
     def write_digital_u32(
@@ -3346,6 +3494,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
                 data_layout_raw=data_layout, write_array=write_array))
+
         return response.samps_per_chan_written
 
     def write_digital_u8(
@@ -3357,6 +3506,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
                 data_layout_raw=data_layout, write_array=write_array))
+
         return response.samps_per_chan_written
 
     def write_raw(self, task, num_samps, auto_start, timeout, write_array):
@@ -3365,6 +3515,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WriteRawRequest(
                 task=task, num_samps=num_samps, auto_start=auto_start,
                 timeout=timeout, write_array=write_array))
+
         return response.samps_per_chan_written
 
     def write_to_teds_from_array(
@@ -3382,6 +3533,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WriteToTEDSFromFileRequest(
                 physical_channel=physical_channel, file_path=file_path,
                 basic_teds_options_raw=basic_teds_options))
+
 
 def _assign_numpy_array(numpy_array, grpc_array):
     """ Assigns the grpc array to the numpy array, while still maintaining the 
