@@ -258,6 +258,7 @@ def get_grpc_interpreter_call_params(func, params):
     """Gets the interpreter parameters for grpc request."""
     compound_params = get_input_arguments_for_compound_params(func)
     is_read_function = is_custom_read_function(func)
+    is_write_function = is_custom_write_function(func)
     grpc_params = []
     has_read_array_parameter = False
     for param in params:
@@ -275,7 +276,10 @@ def get_grpc_interpreter_call_params(func, params):
             elif param.is_grpc_enum or (param.is_enum and not param.is_list):
                 grpc_params.append(f"{name}_raw={param.parameter_name}")
             else:
-                grpc_params.append(f"{name}={param.parameter_name}")
+                if is_write_function and is_write_bytes_param(param):
+                    grpc_params.append(f"{name}=bytes({param.parameter_name})")
+                else:
+                    grpc_params.append(f"{name}={param.parameter_name}")
     if func.is_init_method:
         grpc_params.append("initialization_behavior=self._grpc_options.initialization_behavior")
     return ", ".join(grpc_params)
@@ -513,3 +517,15 @@ def is_numpy_array_datatype(param):
     if param.ctypes_data_type.startswith("numpy."):
         return True
     return False
+
+
+def is_write_bytes_param(param):
+    """Returns true if parameter writes bytes."""
+    if param.is_list and param.ctypes_data_type in ("numpy.bool", "numpy.uint8"):
+        return True
+    # This is a special case for 'WriteRaw' function.
+    # since its metadata is incorrect in daqmxAPISharp.json file.
+    elif param.parameter_name == "write_array" and param.ctypes_data_type == "numpy.generic":
+        return True
+    else:
+        return False
