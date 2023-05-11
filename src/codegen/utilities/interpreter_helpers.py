@@ -473,6 +473,7 @@ def get_interpreter_parameters(func, is_grpc_interpreter=False):
             or _is_handle_parameter(func, parameter)
             or (is_grpc_interpreter and parameter.is_compound_type)
             or (
+                # This logic includes the repeated parameter which can be used for gRPC calls.
                 is_grpc_interpreter
                 and parameter.parameter_name in repeated_params
                 and parameter.include_in_proto
@@ -483,6 +484,11 @@ def get_interpreter_parameters(func, is_grpc_interpreter=False):
 
 
 def _get_repeated_params(params):
+    """Gets the names of the parameters which has another parameter with a similar name in the same function
+    
+    In these scenarios, usually one parameter contains the data for the c function calls 
+    and the other parameter contains the data required for the grpc calls and proto definitions.
+    """
     parameter_names = [param.parameter_name for param in params]
     return [param_name for param_name in parameter_names if parameter_names.count(param_name) > 1]
 
