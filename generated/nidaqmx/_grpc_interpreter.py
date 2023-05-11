@@ -2,6 +2,7 @@
 
 import grpc
 import numpy
+import threading
 import typing
 import warnings
 
@@ -15,12 +16,27 @@ from nidaqmx._stubs import session_pb2 as session_grpc_types
 
 class GrpcStubInterpreter(BaseInterpreter):
     '''Interpreter for interacting with a gRPC Stub class'''
-    __slots__ = ['_grpc_options', '_client']
+    __slots__ = [
+        '_grpc_options',
+        '_client',
+        '_register_done_event_stream',
+        '_register_done_event_thread',
+        '_register_every_n_samples_event_stream',
+        '_register_every_n_samples_event_thread',
+        '_register_signal_event_stream',
+        '_register_signal_event_thread'
+    ]
 
 
     def __init__(self, grpc_options):
         self._grpc_options = grpc_options
         self._client = nidaqmx_grpc.NiDAQmxStub(grpc_options.grpc_channel)
+        self._register_done_event_stream = None
+        self._register_done_event_thread = None
+        self._register_every_n_samples_event_stream = None
+        self._register_every_n_samples_event_thread = None
+        self._register_signal_event_stream = None
+        self._register_signal_event_thread = None
 
     def _invoke(self, func, request, metadata=None):
         try:
@@ -2604,25 +2620,105 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def register_done_event(
             self, task, options, callback_function, callback_data):
-        response = self._invoke(
-            self._client.RegisterDoneEvent,
-            grpc_types.RegisterDoneEventRequest(task=task))
+        assert options ==0
+        if callback_function is not None:
+            self._register_done_event_stream = self._invoke(
+                self._client.RegisterDoneEvent,
+                grpc_types.RegisterDoneEventRequest(task=task))
+
+            def event_thread():
+                try:
+                    for response in self._register_done_event_stream:
+                        callback_function(task, response.status, callback_data)
+                except grpc.RpcError as e:
+                    if e.code() == grpc.StatusCode.CANCELLED:
+                        return
+                    raise
+                except errors.RpcError as e:
+                    if e.rpc_code == grpc.StatusCode.CANCELLED:
+                        return
+                    raise
+                except Exception:
+                    raise errors.DaqError(
+                        message= f"An unexpected exception occured when executing the callback function.\n {e}",
+                        error_code = -1
+                    )
+            self._register_done_event_thread = threading.Thread(target=event_thread)
+            self._register_done_event_thread.start()
+        else:
+            if self._register_done_event_thread is not None:
+                self._register_done_event_stream.cancel()
+                self._register_done_event_thread.join()
 
     def register_every_n_samples_event(
             self, task, every_n_samples_event_type, n_samples, options,
             callback_function, callback_data):
-        response = self._invoke(
-            self._client.RegisterEveryNSamplesEvent,
-            grpc_types.RegisterEveryNSamplesEventRequest(
-                task=task,
-                every_n_samples_event_type_raw=every_n_samples_event_type,
-                n_samples=n_samples))
+        assert options ==0
+        if callback_function is not None:
+            self._register_every_n_samples_event_stream = self._invoke(
+                self._client.RegisterEveryNSamplesEvent,
+                grpc_types.RegisterEveryNSamplesEventRequest(
+                    task=task,
+                    every_n_samples_event_type_raw=every_n_samples_event_type,
+                    n_samples=n_samples))
+
+            def event_thread():
+                try:
+                    for response in self._register_every_n_samples_event_stream:
+                        callback_function(task,
+                                    response.every_n_samples_event_type_raw,
+                                    response.n_samples, callback_data)
+                except grpc.RpcError as e:
+                    if e.code() == grpc.StatusCode.CANCELLED:
+                        return
+                    raise
+                except errors.RpcError as e:
+                    if e.rpc_code == grpc.StatusCode.CANCELLED:
+                        return
+                    raise
+                except Exception:
+                    raise errors.DaqError(
+                        message= f"An unexpected exception occured when executing the callback function.\n {e}",
+                        error_code = -1
+                    )
+            self._register_every_n_samples_event_thread = threading.Thread(target=event_thread)
+            self._register_every_n_samples_event_thread.start()
+        else:
+            if self._register_every_n_samples_event_thread is not None:
+                self._register_every_n_samples_event_stream.cancel()
+                self._register_every_n_samples_event_thread.join()
 
     def register_signal_event(
             self, task, signal_id, options, callback_function, callback_data):
-        response = self._invoke(
-            self._client.RegisterSignalEvent,
-            grpc_types.RegisterSignalEventRequest(task=task, signal_id_raw=signal_id))
+        assert options ==0
+        if callback_function is not None:
+            self._register_signal_event_stream = self._invoke(
+                self._client.RegisterSignalEvent,
+                grpc_types.RegisterSignalEventRequest(task=task, signal_id_raw=signal_id))
+
+            def event_thread():
+                try:
+                    for response in self._register_signal_event_stream:
+                        callback_function(task, response.signal_id, callback_data)
+                except grpc.RpcError as e:
+                    if e.code() == grpc.StatusCode.CANCELLED:
+                        return
+                    raise
+                except errors.RpcError as e:
+                    if e.rpc_code == grpc.StatusCode.CANCELLED:
+                        return
+                    raise
+                except Exception:
+                    raise errors.DaqError(
+                        message= f"An unexpected exception occured when executing the callback function.\n {e}",
+                        error_code = -1
+                    )
+            self._register_signal_event_thread = threading.Thread(target=event_thread)
+            self._register_signal_event_thread.start()
+        else:
+            if self._register_signal_event_thread is not None:
+                self._register_signal_event_stream.cancel()
+                self._register_signal_event_thread.join()
 
     def remove_cdaq_sync_connection(self, port_list):
         response = self._invoke(

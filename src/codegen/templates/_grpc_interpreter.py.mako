@@ -8,6 +8,7 @@
 
 import grpc
 import numpy
+import threading
 import typing
 import warnings
 
@@ -21,12 +22,27 @@ from nidaqmx._stubs import session_pb2 as session_grpc_types
 
 class GrpcStubInterpreter(BaseInterpreter):
     '''Interpreter for interacting with a gRPC Stub class'''
-    __slots__ = ['_grpc_options', '_client']
+    __slots__ = [
+        '_grpc_options',
+        '_client',
+        '_register_done_event_stream',
+        '_register_done_event_thread',
+        '_register_every_n_samples_event_stream',
+        '_register_every_n_samples_event_thread',
+        '_register_signal_event_stream',
+        '_register_signal_event_thread'
+    ]
 
 
     def __init__(self, grpc_options):
         self._grpc_options = grpc_options
         self._client = nidaqmx_grpc.NiDAQmxStub(grpc_options.grpc_channel)
+        self._register_done_event_stream = None
+        self._register_done_event_thread = None
+        self._register_every_n_samples_event_stream = None
+        self._register_every_n_samples_event_thread = None
+        self._register_signal_event_stream = None
+        self._register_signal_event_thread = None
 
     def _invoke(self, func, request, metadata=None):
         try:
