@@ -1,3 +1,4 @@
+import contextlib
 import numpy
 import warnings
 from nidaqmx import utils
@@ -276,13 +277,10 @@ class Task:
         self._triggers = Triggers(task_handle, interpreter)
         self._out_stream = OutStream(self, interpreter)
 
-        # These lists keep C callback objects in memory as ctypes doesn't.
-        # Program will crash if callback is made after object is garbage
-        # collected.
-        self._done_event_callbacks = []
-        self._every_n_transferred_event_callbacks = []
-        self._every_n_acquired_event_callbacks = []
-        self._signal_event_callbacks = []
+        self._done_event_stack = None
+        self._every_n_transferred_event_stack = None
+        self._every_n_acquired_event_stack = None
+        self._signal_event_stack = None
 
     def _calculate_num_samps_per_chan(self, num_samps_per_chan):
         """
@@ -649,7 +647,20 @@ class Task:
                 Passing None for this parameter unregisters the event callback
                 function.
         """
-        self._interpreter.register_done_event(self._handle, 0, callback_method, None)
+        if callback_method is not None:
+            # Pass the user a Task object instead of a task handle
+            def callback_thunk(task_handle, status, callback_data):
+                return callback_method(self, status, callback_data)
+
+            if self._done_event_stack is None:
+                self._done_event_stack = contextlib.ExitStack()
+            self._done_event_stack.enter_context(
+                self._interpreter.register_done_event(self._handle, 0, callback_thunk, None)
+            )
+        else:
+            if self._done_event_stack is not None:
+                self._done_event_stack.close()
+                self._done_event_stack = None
 
     def register_every_n_samples_acquired_into_buffer_event(
             self, sample_interval, callback_method):
@@ -685,8 +696,21 @@ class Task:
                 Passing None for this parameter unregisters the event callback
                 function.
         """
-        self._interpreter.register_every_n_samples_event(self._handle, EveryNSamplesEventType.ACQUIRED_INTO_BUFFER.value,
-                sample_interval, 0, callback_method, None)
+        if callback_method is not None:
+            # Pass the user a Task object instead of a task handle
+            def callback_thunk(task_handle, every_n_samples_event_type, number_of_samples, callback_data):
+                return callback_method(self, every_n_samples_event_type, number_of_samples, callback_data)
+
+            if self._every_n_acquired_event_stack is None:
+                self._every_n_acquired_event_stack = contextlib.ExitStack()
+            self._every_n_acquired_event_stack.enter_context(
+                self._interpreter.register_every_n_samples_event(self._handle, EveryNSamplesEventType.ACQUIRED_INTO_BUFFER.value,
+                    sample_interval, 0, callback_thunk, None)
+            )
+        else:
+            if self._every_n_acquired_event_stack is not None:
+                self._every_n_acquired_event_stack.close()
+                self._every_n_acquired_event_stack = None
 
     def register_every_n_samples_transferred_from_buffer_event(
             self, sample_interval, callback_method):
