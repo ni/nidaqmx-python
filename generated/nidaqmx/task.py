@@ -708,7 +708,11 @@ class Task:
         if callback_method is not None:
             # Pass the user a Task object instead of a task handle
             def call_every_n_samples_event_callback(task_handle, every_n_samples_event_type, number_of_samples, callback_data):
-                return callback_method(self, every_n_samples_event_type, number_of_samples, callback_data)
+                return callback_method(
+                    self,
+                    EveryNSamplesEventType(every_n_samples_event_type),
+                    number_of_samples,
+                    callback_data)
 
             if self._every_n_acquired_event_stack is None:
                 self._every_n_acquired_event_stack = contextlib.ExitStack()
