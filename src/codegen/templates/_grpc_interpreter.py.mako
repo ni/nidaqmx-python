@@ -108,8 +108,8 @@ class GrpcStubInterpreter(BaseInterpreter):
 <%include file="${'/grpc_interpreter' + get_grpc_function_call_template(func)}" args="function=func" />\
     %if len(output_parameters)  > 0:
         return ${get_response_parameters(func)}
-
     %endif
+
 % endfor
 
 def _assign_numpy_array(numpy_array, grpc_array):
