@@ -36,38 +36,42 @@ class GrpcStubInterpreter(BaseInterpreter):
         try:
             response = func(request, metadata=metadata)
         except grpc.RpcError as rpc_error:
-            error_message = rpc_error.details()
-            error_code = None
-            samps_per_chan_read = None
-            samps_per_chan_written = None
-            for entry in rpc_error.trailing_metadata() or []:
-                if entry.key == 'ni-error':
-                    try:
-                        error_code = int(typing.cast(str, entry.value))
-                    except ValueError:
-                        error_message += f'\nError status: {entry.value}'
-                elif entry.key == "ni-samps-per-chan-read":
-                    try:
-                        samps_per_chan_read = int(typing.cast(str, entry.value))
-                    except ValueError:
-                        error_message += f'\nSamples per channel read: {entry.value}'
-                elif entry.key == "ni-samps-per-chan-written":
-                    try:
-                        samps_per_chan_written = int(typing.cast(str, entry.value))
-                    except ValueError:
-                        error_message += f'\nSamples per channel written: {entry.value}'
-            grpc_error = rpc_error.code()
-            if grpc_error == grpc.StatusCode.UNAVAILABLE:
-                error_message = 'Failed to connect to server'
-            elif grpc_error == grpc.StatusCode.UNIMPLEMENTED:
-                error_message = (
-                    'This operation is not supported by the NI gRPC Device Server being used. Upgrade NI gRPC Device Server.'
-                )
-            if error_code is None:
-                raise errors.RpcError(grpc_error, error_message) from None
-            else:
-                self._raise_error(error_code, error_message, samps_per_chan_written, samps_per_chan_read)
+            self._handle_rpc_error(rpc_error)
+
         return response
+
+    def _handle_rpc_error(self, rpc_error):
+        error_message = rpc_error.details()
+        error_code = None
+        samps_per_chan_read = None
+        samps_per_chan_written = None
+        for entry in rpc_error.trailing_metadata() or []:
+            if entry.key == 'ni-error':
+                try:
+                    error_code = int(typing.cast(str, entry.value))
+                except ValueError:
+                    error_message += f'\nError status: {entry.value}'
+            elif entry.key == "ni-samps-per-chan-read":
+                try:
+                    samps_per_chan_read = int(typing.cast(str, entry.value))
+                except ValueError:
+                    error_message += f'\nSamples per channel read: {entry.value}'
+            elif entry.key == "ni-samps-per-chan-written":
+                try:
+                    samps_per_chan_written = int(typing.cast(str, entry.value))
+                except ValueError:
+                    error_message += f'\nSamples per channel written: {entry.value}'
+        grpc_error = rpc_error.code()
+        if grpc_error == grpc.StatusCode.UNAVAILABLE:
+            error_message = 'Failed to connect to server'
+        elif grpc_error == grpc.StatusCode.UNIMPLEMENTED:
+            error_message = (
+                'This operation is not supported by the NI gRPC Device Server being used. Upgrade NI gRPC Device Server.'
+            )
+        if error_code is None:
+            raise errors.RpcError(grpc_error, error_message) from None
+        else:
+            self._raise_error(error_code, error_message, samps_per_chan_written, samps_per_chan_read)
 
     def _raise_error(self, error_code, error_message, samps_per_chan_written=None, samps_per_chan_read=None):
         if error_code < 0:
@@ -2597,9 +2601,15 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def _register_done_event(
             self, task, options, callback_function, callback_data):
-        response_stream = self._invoke(
-            self._client.RegisterDoneEvent,
-            grpc_types.RegisterDoneEventRequest(task=task))
+        try:
+            response_stream = self._client.RegisterDoneEvent(
+                grpc_types.RegisterDoneEventRequest(task=task))
+
+            # Wait for initial metadata to ensure the registration is complete.
+            _ = response_stream.initial_metadata()
+        except grpc.RpcError as rpc_error:
+            self._handle_rpc_error(rpc_error)
+
 
         def done_event_thread():
             try:
@@ -2630,12 +2640,17 @@ class GrpcStubInterpreter(BaseInterpreter):
     def _register_every_n_samples_event(
             self, task, every_n_samples_event_type, n_samples, options,
             callback_function, callback_data):
-        response_stream = self._invoke(
-            self._client.RegisterEveryNSamplesEvent,
-            grpc_types.RegisterEveryNSamplesEventRequest(
-                task=task,
-                every_n_samples_event_type_raw=every_n_samples_event_type,
-                n_samples=n_samples))
+        try:
+            response_stream = self._client.RegisterEveryNSamplesEvent(
+                grpc_types.RegisterEveryNSamplesEventRequest(
+                    task=task,
+                    every_n_samples_event_type_raw=every_n_samples_event_type,
+                    n_samples=n_samples))
+
+            # Wait for initial metadata to ensure the registration is complete.
+            _ = response_stream.initial_metadata()
+        except grpc.RpcError as rpc_error:
+            self._handle_rpc_error(rpc_error)
 
         def every_n_samples_event_thread():
             try:
