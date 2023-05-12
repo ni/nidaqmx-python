@@ -17,6 +17,11 @@
 %>\
         assert options ==0
         if callback_function is not None:
+            if self.${event_name}_stream is not None:
+                raise errors.DaqError(
+                    error_code = -1,
+                    message = "Could not register the given callback function, a callback function already exists."
+                )
             self.${event_name}_stream = self._invoke(
                 self._client.${snake_to_pascal(function.function_name)},
             %if (len(function.function_name) + len(grpc_interpreter_params)) > 68:
@@ -42,13 +47,14 @@
                         return
                     raise
                 except Exception:
-                    raise errors.DaqError(
-                        message= f"An unexpected exception occured when executing the callback function.\n {e}",
-                        error_code = -1
-                    )
+                    _logger.error(f"An unexpected exception occured when executing the callback function.\n {e}")
+                    self.${event_name}_stream.cancel()
+                    self.${event_name}_stream = None
             self.${event_name}_thread = threading.Thread(target=event_thread)
             self.${event_name}_thread.start()
         else:
             if self.${event_name}_thread is not None:
                 self.${event_name}_stream.cancel()
                 self.${event_name}_thread.join()
+                self.${event_name}_stream = None
+                self.${event_name}_thread = None

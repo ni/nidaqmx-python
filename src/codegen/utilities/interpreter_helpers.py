@@ -406,7 +406,6 @@ def get_callback_function_call_args(func_params):
     return callback_func_args
 
 
-
 def get_callback_param_data_types(func_params):
     """Gets the data types for call back function parameters."""
     callback_func_param = next(p for p in func_params if p.parameter_name == "callback_function")
