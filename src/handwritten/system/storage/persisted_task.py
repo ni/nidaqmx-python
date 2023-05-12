@@ -18,7 +18,8 @@ class PersistedTask:
         """
         Args:
             name (str): Specifies the name of the saved task.
-            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
+            grpc_options (Optional[:class:`~nidaqmx.GrpcSessionOptions`]): Specifies
+                the gRPC session options.
         """
         self._name = name
         self._interpreter = utils._select_interpreter(grpc_options)
@@ -84,7 +85,7 @@ class PersistedTask:
         task_handle, close_on_exit = self._interpreter.load_task(self._name)
 
         return task._TaskAlternateConstructor(task_handle, self._interpreter, close_on_exit)
-    
+
 
 class _PersistedTaskAlternateConstructor(PersistedTask):
     """
@@ -100,7 +101,7 @@ class _PersistedTaskAlternateConstructor(PersistedTask):
         Args:
             name: Specifies the name of the PersistedTask.
             interpreter: Specifies the interpreter instance.
-            
+
         """
         self._name = name
         self._interpreter = interpreter

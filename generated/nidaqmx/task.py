@@ -66,6 +66,9 @@ class Task:
                 after you are finished with the task. Otherwise, NI-DAQmx
                 attempts to create multiple tasks with the same name, which
                 results in an error.
+
+            grpc_options (Optional[:class:`~nidaqmx.GrpcSessionOptions`]): Specifies
+                the gRPC session options.
         """
         # Initialize the fields that __del__ accesses so it doesn't crash when __init__ raises an exception.
         self._handle = None
@@ -79,7 +82,7 @@ class Task:
                 f'Unsupported session name: "{grpc_options.session_name}". If a session name is specified, it must match the task name.',
                 DAQmxErrors.UNKNOWN,
                 task_name=new_task_name)
-        
+
         self._interpreter = utils._select_interpreter(grpc_options)
         self._handle, self._close_on_exit = self._interpreter.create_task(new_task_name)
 
@@ -124,8 +127,8 @@ class Task:
     @property
     def channels(self):
         """
-        :class:`nidaqmx._task_modules.channels.channel.Channel`: Specifies 
-            a channel object that represents the entire list of virtual 
+        :class:`nidaqmx._task_modules.channels.channel.Channel`: Specifies
+            a channel object that represents the entire list of virtual
             channels in this task.
         """
         return Channel._factory(
@@ -150,7 +153,7 @@ class Task:
     @property
     def devices(self):
         """
-        List[:class:`nidaqmx.system.device.Device`]: Indicates a list 
+        List[:class:`nidaqmx.system.device.Device`]: Indicates a list
             of Device objects representing all the devices in the task.
         """
         val = self._interpreter.get_task_attribute_string(self._handle, 0x230e)
@@ -176,7 +179,7 @@ class Task:
     @property
     def ao_channels(self):
         """
-        :class:`nidaqmx._task_modules.ao_channel_collection.AOChannelCollection`: 
+        :class:`nidaqmx._task_modules.ao_channel_collection.AOChannelCollection`:
             Gets the collection of analog output channels for this task.
         """
         return self._ao_channels
@@ -184,7 +187,7 @@ class Task:
     @property
     def ci_channels(self):
         """
-        :class:`nidaqmx._task_modules.ci_channel_collection.CIChannelCollection`: 
+        :class:`nidaqmx._task_modules.ci_channel_collection.CIChannelCollection`:
             Gets the collection of counter input channels for this task.
         """
         return self._ci_channels
@@ -192,7 +195,7 @@ class Task:
     @property
     def co_channels(self):
         """
-        :class:`nidaqmx._task_modules.co_channel_collection.COChannelCollection`: 
+        :class:`nidaqmx._task_modules.co_channel_collection.COChannelCollection`:
             Gets the collection of counter output channels for this task.
         """
         return self._co_channels
@@ -200,7 +203,7 @@ class Task:
     @property
     def di_channels(self):
         """
-        :class:`nidaqmx._task_modules.di_channel_collection.DIChannelCollection`: 
+        :class:`nidaqmx._task_modules.di_channel_collection.DIChannelCollection`:
             Gets the collection of digital input channels for this task.
         """
         return self._di_channels
@@ -208,7 +211,7 @@ class Task:
     @property
     def do_channels(self):
         """
-        :class:`nidaqmx._task_modules.do_channel_collection.DOChannelCollection`: 
+        :class:`nidaqmx._task_modules.do_channel_collection.DOChannelCollection`:
             Gets the collection of digital output channels for this task.
         """
         return self._do_channels
@@ -216,7 +219,7 @@ class Task:
     @property
     def export_signals(self):
         """
-        :class:`nidaqmx._task_modules.export_signals.ExportSignals`: Gets the 
+        :class:`nidaqmx._task_modules.export_signals.ExportSignals`: Gets the
             exported signal configurations for the task.
         """
         return self._export_signals
@@ -224,7 +227,7 @@ class Task:
     @property
     def in_stream(self):
         """
-        :class:`nidaqmx._task_modules.in_stream.InStream`: Gets the read 
+        :class:`nidaqmx._task_modules.in_stream.InStream`: Gets the read
             configurations for the task.
         """
         return self._in_stream
@@ -240,7 +243,7 @@ class Task:
     @property
     def timing(self):
         """
-        :class:`nidaqmx._task_modules.timing.Timing`: Gets the timing 
+        :class:`nidaqmx._task_modules.timing.Timing`: Gets the timing
             configurations for the task.
         """
         return self._timing
@@ -343,7 +346,7 @@ class Task:
                 'Attempted to close NI-DAQmx task of name "{}" but task was '
                 'already closed.'.format(self._saved_name), DaqResourceWarning)
             return
-        
+
         self._interpreter.clear_task(self._handle)
 
         self._handle = None
@@ -488,7 +491,7 @@ class Task:
                 currents = numpy.zeros(array_shape, dtype=numpy.float64)
 
                 _, _, samples_read = self._interpreter.read_power_f64(
-                    self._handle, number_of_samples_per_channel, timeout, 
+                    self._handle, number_of_samples_per_channel, timeout,
                     FillMode.GROUP_BY_CHANNEL.value, voltages, currents)
 
                 if number_of_channels > 1:
@@ -522,7 +525,7 @@ class Task:
             else:
                 data = numpy.zeros(array_shape, dtype=numpy.float64)
                 _, samples_read = self._interpreter.read_analog_f64(
-                    self._handle, number_of_samples_per_channel, timeout, 
+                    self._handle, number_of_samples_per_channel, timeout,
                     FillMode.GROUP_BY_CHANNEL.value, data)
 
         # Digital Input or Digital Output
@@ -531,7 +534,7 @@ class Task:
             if self.in_stream.di_num_booleans_per_chan == 1:
                 data = numpy.zeros(array_shape, dtype=bool)
                 _, samples_read, _ = self._interpreter.read_digital_lines(
-                    self._handle, number_of_samples_per_channel, timeout, 
+                    self._handle, number_of_samples_per_channel, timeout,
                     FillMode.GROUP_BY_CHANNEL.value, data)
             else:
                 data = numpy.zeros(array_shape, dtype=numpy.uint32)
@@ -548,7 +551,7 @@ class Task:
                 duty_cycles = numpy.zeros(array_shape, dtype=numpy.float64)
 
                 _, _, samples_read = self._interpreter.read_ctr_freq(
-                    self._handle, number_of_samples_per_channel, timeout, 
+                    self._handle, number_of_samples_per_channel, timeout,
                     FillMode.GROUP_BY_CHANNEL.value, frequencies, duty_cycles)
 
                 data = []
@@ -560,7 +563,7 @@ class Task:
                 low_times = numpy.zeros(array_shape, dtype=numpy.float64)
 
                 _, _, samples_read = self._interpreter.read_ctr_time(
-                    self._handle, number_of_samples_per_channel, timeout, 
+                    self._handle, number_of_samples_per_channel, timeout,
                     FillMode.GROUP_BY_CHANNEL.value, high_times, low_times)
                 data = []
                 for h, l in zip(high_times, low_times):
@@ -571,7 +574,7 @@ class Task:
                 low_ticks = numpy.zeros(array_shape, dtype=numpy.uint32)
 
                 _, _ , samples_read = self._interpreter.read_ctr_ticks(
-                    self._handle, number_of_samples_per_channel, timeout, 
+                    self._handle, number_of_samples_per_channel, timeout,
                     FillMode.GROUP_BY_CHANNEL.value, high_ticks, low_ticks)
                 data = []
                 for h, l in zip(high_ticks, low_ticks):
@@ -581,14 +584,14 @@ class Task:
                 data = numpy.zeros(array_shape, dtype=numpy.uint32)
 
                 _, samples_read = self._interpreter.read_counter_u32_ex(
-                    self._handle, number_of_samples_per_channel, timeout, 
+                    self._handle, number_of_samples_per_channel, timeout,
                     FillMode.GROUP_BY_CHANNEL.value, data)
 
             else:
                 data = numpy.zeros(array_shape, dtype=numpy.float64)
 
                 _, samples_read = self._interpreter.read_counter_f64_ex(
-                    self._handle, number_of_samples_per_channel, timeout, 
+                    self._handle, number_of_samples_per_channel, timeout,
                     FillMode.GROUP_BY_CHANNEL.value, data)
         else:
             raise DaqError(
@@ -881,7 +884,7 @@ class Task:
 
         This write method is dynamic, and is capable of accepting the
         samples to write in the various forms for most operations:
-        
+
         - Scalar: Single sample for 1 channel.
         - List/1D numpy.ndarray: Multiple samples for 1 channel or 1
           sample for multiple channels.
@@ -893,11 +896,11 @@ class Task:
 
         For counter output pulse operations, this write method only
         accepts samples in these forms:
-        
-        - Scalar CtrFreq, CtrTime, CtrTick (from nidaqmx.types): 
+
+        - Scalar CtrFreq, CtrTime, CtrTick (from nidaqmx.types):
           Single sample for 1 channel.
         - List of CtrFreq, CtrTime, CtrTick (from nidaqmx.types):
-          Multiple samples for 1 channel or 1 sample for multiple 
+          Multiple samples for 1 channel or 1 sample for multiple
           channels.
 
         If the task uses on-demand timing, this method returns only
@@ -1058,7 +1061,7 @@ class Task:
                 duty_cycles = numpy.asarray(duty_cycles, dtype=numpy.float64)
 
                 return self._interpreter.write_ctr_freq(
-                    self._handle, number_of_samples_per_channel, auto_start, timeout, 
+                    self._handle, number_of_samples_per_channel, auto_start, timeout,
                     FillMode.GROUP_BY_CHANNEL.value, frequencies, duty_cycles)
 
             elif output_type == UsageTypeCO.PULSE_TIME:
@@ -1086,7 +1089,7 @@ class Task:
                 low_ticks = numpy.asarray(low_ticks, dtype=numpy.uint32)
 
                 return self._interpreter.write_ctr_ticks(
-                    self._handle, number_of_samples_per_channel, auto_start, timeout, 
+                    self._handle, number_of_samples_per_channel, auto_start, timeout,
                     FillMode.GROUP_BY_CHANNEL.value, high_ticks, low_ticks)
         else:
             raise DaqError(
@@ -1112,7 +1115,7 @@ class _TaskAlternateConstructor(Task):
                 Task object.
             interpreter: Specifies the interpreter instance.
             close_on_exit: Specifies whether the task's context manager closes the task.
-            
+
         """
         self._handle = task_handle
         self._interpreter = interpreter

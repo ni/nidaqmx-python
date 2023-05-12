@@ -45,7 +45,8 @@ class WatchdogTask:
                 Trigger to expire the watchdog task. If this time elapses, the
                 device sets the physical channels to the states you specify
                 with the digital physical channel expiration states input.
-            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
+            grpc_options (Optional[:class:`~nidaqmx.GrpcSessionOptions`]): Specifies
+                the gRPC session options.
         """
         # Initialize the fields that __del__ accesses so it doesn't crash when __init__ raises an exception.
         self._handle = None
