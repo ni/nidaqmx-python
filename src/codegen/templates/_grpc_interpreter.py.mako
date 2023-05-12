@@ -93,7 +93,7 @@ class GrpcStubInterpreter(BaseInterpreter):
 
 % for func in functions:
 <%
-    params = get_params_for_function_signature(func, True)
+    params = get_params_for_function_signature(func)
     sorted_params = order_function_parameters_by_optional(params)
     parameter_signature = get_interpreter_parameter_signature(is_python_factory, sorted_params)
     output_parameters = get_output_params(func)
