@@ -23,7 +23,7 @@ from nidaqmx._task_modules.do_channel_collection import (
     DOChannelCollection)
 from nidaqmx.constants import (
     AcquisitionType, ChannelType, FillMode, UsageTypeAI, UsageTypeCI, EveryNSamplesEventType,
-    READ_ALL_AVAILABLE, UsageTypeCO, _Save)
+    READ_ALL_AVAILABLE, TaskMode, UsageTypeCO, _Save)
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import (
     DaqError, DaqResourceWarning)
@@ -342,14 +342,22 @@ class Task:
                 'already closed.'.format(self._saved_name), DaqResourceWarning)
             return
 
-        self._interpreter.clear_task(self._handle)
+        if self._done_event_stack is not None or self._every_n_acquired_event_stack is not None:
+            # Abort the task so it stops calling event callbacks.
+            self.control(TaskMode.TASK_ABORT)
 
-        # clear_task unregisters any events, but we still need to clean up the
-        # event handlers.
-        if self._done_event_stack is not None:
-            self._done_event_stack.close()
-        if self._every_n_acquired_event_stack is not None:
-            self._every_n_acquired_event_stack.close()
+            # Clean up event handlers. For LibraryInterpreter, this destroys the ctypes callback
+            # pointer. For GrpcStubInterpreter, this cancels the response stream and joins the
+            # event thread, which ensures that the thread doesn't call event callbacks.
+            if self._every_n_acquired_event_stack is not None:
+                self._every_n_acquired_event_stack.close()
+                self._every_n_acquired_event_stack = None
+
+            if self._done_event_stack is not None:
+                self._done_event_stack.close()
+                self._done_event_stack = None
+
+        self._interpreter.clear_task(self._handle)
 
         self._handle = None
 
