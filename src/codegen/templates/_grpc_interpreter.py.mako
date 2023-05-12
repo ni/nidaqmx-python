@@ -149,11 +149,13 @@ class GrpcStubInterpreter(BaseInterpreter):
 def _assign_numpy_array(numpy_array, grpc_array):
     """ 
     Assigns the grpc array to the numpy array, while still maintaining the 
-    original shape of the numpy array.
-    Checks if grpc_array is an instance of bytes, then converts grpc_array to a 1D array. 
+    original shape of the numpy array and if grpc_array is an instance of 
+    bytes, it is converted to a 1D array.
+
     """
     grpc_array_size = len(grpc_array)
     assert numpy_array.size >= grpc_array_size
     if isinstance(grpc_array, bytes):
-        grpc_array = numpy.frombuffer(grpc_array, dtype=numpy.uint8)
-    numpy_array.flat[:grpc_array_size] = grpc_array
+        numpy_array.flat[:grpc_array_size] = numpy.frombuffer(grpc_array, dtype=numpy.uint8)
+    else:
+        numpy_array.flat[:grpc_array_size] = grpc_array
