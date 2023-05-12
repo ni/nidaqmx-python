@@ -10,6 +10,22 @@ from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpoin
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqReadError, DaqWarning, DaqWriteError
 
+
+class EventContextManager(contextlib.AbstractContextManager):
+    """Manages the lifetime of a ctypes callback method pointer."""
+
+    def __init__(self, callback_method_ptr):
+        self._callback_method_ptr = callback_method_ptr
+
+    def __enter__(self):
+        pass
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+
+    def close(self):
+        self._callback_method_ptr = None
+
 class LibraryInterpreter(BaseInterpreter):
     """
     Library C<->Python interpreter.
@@ -4530,9 +4546,18 @@ class LibraryInterpreter(BaseInterpreter):
         return voltage.value, current.value
 
 
-    @contextlib.contextmanager
     def register_done_event(
             self, task, options, callback_function, callback_data):
+        callback_method_ptr = self._register_done_event(task, options, callback_function, callback_data)
+        if callback_function is not None:
+            return EventContextManager(callback_method_ptr)
+        else:
+            return None
+
+
+    def _register_done_event(
+            self, task, options, callback_function, callback_data):
+
         DAQmxDoneEventCallbackPtr = ctypes.CFUNCTYPE(
             ctypes.c_int32, lib_importer.task_handle, ctypes.c_int,
             ctypes.c_void_p)
@@ -4546,23 +4571,31 @@ class LibraryInterpreter(BaseInterpreter):
                         lib_importer.task_handle, ctypes.c_uint,
                         DAQmxDoneEventCallbackPtr, ctypes.POINTER(ctypes.c_void_p)]
 
-        callback_method_ptr = DAQmxDoneEventCallbackPtr(callback_function)
+        if callback_function is None:
+            callback_method_ptr = DAQmxDoneEventCallbackPtr()
+        else:
+            callback_method_ptr = DAQmxDoneEventCallbackPtr(callback_function)
 
-        error_code = cfunc(
-            task, options, callback_method_ptr, callback_data)
+        error_code = cfunc(task, options, callback_method_ptr, callback_data)
         check_for_error(error_code)
 
-        yield callback_function
-
-        error_code = cfunc(
-            task, options, DAQmxDoneEventCallbackPtr(), None)
-        check_for_error(error_code)
+        return callback_method_ptr
 
 
-    @contextlib.contextmanager
     def register_every_n_samples_event(
             self, task, every_n_samples_event_type, n_samples, options,
             callback_function, callback_data):
+        callback_method_ptr = self._register_every_n_samples_event(task, every_n_samples_event_type, n_samples, options, callback_function, callback_data)
+        if callback_function is not None:
+            return EventContextManager(callback_method_ptr)
+        else:
+            return None
+
+
+    def _register_every_n_samples_event(
+            self, task, every_n_samples_event_type, n_samples, options,
+            callback_function, callback_data):
+
         DAQmxEveryNSamplesEventCallbackPtr = ctypes.CFUNCTYPE(
             ctypes.c_int32, lib_importer.task_handle, ctypes.c_int,
             ctypes.c_uint, ctypes.c_void_p)
@@ -4577,19 +4610,17 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_uint, DAQmxEveryNSamplesEventCallbackPtr,
                         ctypes.POINTER(ctypes.c_void_p)]
 
-        callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr(callback_function)
+        if callback_function is None:
+            callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr()
+        else:
+            callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr(callback_function)
 
         error_code = cfunc(
             task, every_n_samples_event_type, n_samples, options,
             callback_method_ptr, callback_data)
         check_for_error(error_code)
 
-        yield callback_function
-
-        error_code = cfunc(
-            task, every_n_samples_event_type, n_samples, options,
-            DAQmxEveryNSamplesEventCallbackPtr(), None)
-        check_for_error(error_code)
+        return callback_method_ptr
 
 
     def register_signal_event(

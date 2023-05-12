@@ -341,8 +341,15 @@ class Task:
                 'Attempted to close NI-DAQmx task of name "{}" but task was '
                 'already closed.'.format(self._saved_name), DaqResourceWarning)
             return
-        
+
         self._interpreter.clear_task(self._handle)
+
+        # clear_task unregisters any events, but we still need to clean up the
+        # event handlers.
+        if self._done_event_stack is not None:
+            self._done_event_stack.close()
+        if self._every_n_acquired_event_stack is not None:
+            self._every_n_acquired_event_stack.close()
 
         self._handle = None
 
@@ -649,15 +656,17 @@ class Task:
         """
         if callback_method is not None:
             # Pass the user a Task object instead of a task handle
-            def callback_thunk(task_handle, status, callback_data):
+            def call_done_event_callback(task_handle, status, callback_data):
                 return callback_method(self, status, callback_data)
 
             if self._done_event_stack is None:
                 self._done_event_stack = contextlib.ExitStack()
             self._done_event_stack.enter_context(
-                self._interpreter.register_done_event(self._handle, 0, callback_thunk, None)
+                self._interpreter.register_done_event(self._handle, 0, call_done_event_callback, None)
             )
         else:
+            self._interpreter.register_done_event(self._handle, 0, None, None)
+
             if self._done_event_stack is not None:
                 self._done_event_stack.close()
                 self._done_event_stack = None
@@ -698,16 +707,19 @@ class Task:
         """
         if callback_method is not None:
             # Pass the user a Task object instead of a task handle
-            def callback_thunk(task_handle, every_n_samples_event_type, number_of_samples, callback_data):
+            def call_every_n_samples_event_callback(task_handle, every_n_samples_event_type, number_of_samples, callback_data):
                 return callback_method(self, every_n_samples_event_type, number_of_samples, callback_data)
 
             if self._every_n_acquired_event_stack is None:
                 self._every_n_acquired_event_stack = contextlib.ExitStack()
             self._every_n_acquired_event_stack.enter_context(
                 self._interpreter.register_every_n_samples_event(self._handle, EveryNSamplesEventType.ACQUIRED_INTO_BUFFER.value,
-                    sample_interval, 0, callback_thunk, None)
+                    sample_interval, 0, call_every_n_samples_event_callback, None)
             )
         else:
+            self._interpreter.register_every_n_samples_event(self._handle, EveryNSamplesEventType.ACQUIRED_INTO_BUFFER.value,
+                sample_interval, 0, None, None)
+
             if self._every_n_acquired_event_stack is not None:
                 self._every_n_acquired_event_stack.close()
                 self._every_n_acquired_event_stack = None
