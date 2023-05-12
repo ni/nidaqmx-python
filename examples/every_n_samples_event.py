@@ -7,7 +7,8 @@ from nidaqmx.constants import AcquisitionType
 
 pp = pprint.PrettyPrinter(indent=4)
 
-USE_GRPC = True
+USE_GRPC = False
+USE_NEW_SIGNATURE = False
 
 init_kwargs = {}
 if USE_GRPC:
@@ -24,13 +25,22 @@ with nidaqmx.Task(**init_kwargs) as task:
 
     def callback(task_handle, every_n_samples_event_type, number_of_samples, callback_data):
         """Callback function for reading singals."""
-        print("Every N Samples callback invoked.")
+        print("Every N Samples callback invoked (old signature).")
 
         samples.extend(task.read(number_of_samples_per_channel=1000))
 
         return 0
 
-    task.register_every_n_samples_acquired_into_buffer_event(1000, callback)
+    def new_callback(task, every_n_samples_event_type, number_of_samples):
+        """Callback function for reading singals."""
+        print("Every N Samples callback invoked (new signature).")
+
+        samples.extend(task.read(number_of_samples_per_channel=1000))
+
+    if USE_NEW_SIGNATURE:
+        task.register_every_n_samples_acquired_into_buffer_event(1000, new_callback, use_new_signature=True)
+    else:
+        task.register_every_n_samples_acquired_into_buffer_event(1000, callback)
 
     task.start()
 

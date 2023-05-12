@@ -640,7 +640,7 @@ class Task:
 
         return data.tolist()
 
-    def register_done_event(self, callback_method):
+    def register_done_event(self, callback_method, use_new_signature=False):
         """
         Registers a callback function to receive an event when a task stops due
         to an error or when a finite acquisition task or finite generation task
@@ -668,12 +668,18 @@ class Task:
                 function.
         """
         if callback_method is not None:
-            # Pass the user a Task object instead of a task handle
-            def call_done_event_callback(task_handle, status, callback_data):
-                return callback_method(self, status, callback_data)
+            if use_new_signature:
+                # New signature: callback(task, status) -> None
+                def call_done_event_callback(task_handle, status, callback_data):
+                    callback_method(self, status)
+                    return 0
+
+                interpreter_callback_method = call_done_event_callback
+            else:
+                interpreter_callback_method = callback_method
 
             self._done_event_handlers.append(
-                self._interpreter.register_done_event(self._handle, 0, call_done_event_callback, None)
+                self._interpreter.register_done_event(self._handle, 0, interpreter_callback_method, None)
             )
         else:
             self._interpreter.register_done_event(self._handle, 0, None, None)
@@ -687,7 +693,7 @@ class Task:
             self._done_event_handlers.clear()
 
     def register_every_n_samples_acquired_into_buffer_event(
-            self, sample_interval, callback_method):
+            self, sample_interval, callback_method, use_new_signature=False):
         """
         Registers a callback function to receive an event when the specified
         number of samples is written from the device to the buffer. This
@@ -721,17 +727,19 @@ class Task:
                 function.
         """
         if callback_method is not None:
-            # Pass the user a Task object instead of a task handle
-            def call_every_n_samples_event_callback(task_handle, every_n_samples_event_type, number_of_samples, callback_data):
-                return callback_method(
-                    self,
-                    EveryNSamplesEventType(every_n_samples_event_type),
-                    number_of_samples,
-                    callback_data)
+            if use_new_signature:
+                # New signature: callback(task, every_n_samples_event_type, number_of_samples) -> None
+                def call_every_n_samples_event_callback(task_handle, every_n_samples_event_type, number_of_samples, callback_data):
+                    callback_method(self, EveryNSamplesEventType(every_n_samples_event_type), number_of_samples)
+                    return 0
+
+                interpreter_callback_method = call_every_n_samples_event_callback
+            else:
+                interpreter_callback_method = callback_method
 
             self._every_n_acquired_event_handlers.append(
                 self._interpreter.register_every_n_samples_event(self._handle, EveryNSamplesEventType.ACQUIRED_INTO_BUFFER.value,
-                    sample_interval, 0, call_every_n_samples_event_callback, None)
+                    sample_interval, 0, interpreter_callback_method, None)
             )
         else:
             self._interpreter.register_every_n_samples_event(self._handle, EveryNSamplesEventType.ACQUIRED_INTO_BUFFER.value,
