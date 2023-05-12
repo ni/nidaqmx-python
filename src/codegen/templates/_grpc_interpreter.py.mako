@@ -105,7 +105,7 @@ class GrpcStubInterpreter(BaseInterpreter):
     def ${func.function_name}(${parameter_signature}):
     %endif
 \
-<%include file="${'/grpc_interpreter' + get_grpc_function_call_template(func)}" args="function=func" />
+<%include file="${'/grpc_interpreter' + get_grpc_function_call_template(func)}" args="function=func" />\
     %if len(output_parameters)  > 0:
         return ${get_response_parameters(func)}
 
