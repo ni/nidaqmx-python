@@ -3383,7 +3383,6 @@ class GrpcStubInterpreter(BaseInterpreter):
                 physical_channel=physical_channel, file_path=file_path,
                 basic_teds_options_raw=basic_teds_options))
 
-
 def _assign_numpy_array(numpy_array, grpc_array):
     """ Assigns the grpc array to the numpy array, while still maintaining the 
     original shape of the numpy array. 

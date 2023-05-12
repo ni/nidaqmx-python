@@ -111,7 +111,6 @@ class GrpcStubInterpreter(BaseInterpreter):
     %endif
 
 % endfor
-
 def _assign_numpy_array(numpy_array, grpc_array):
     """ Assigns the grpc array to the numpy array, while still maintaining the 
     original shape of the numpy array. 
