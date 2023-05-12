@@ -210,7 +210,7 @@ def multi_threading_test_devices(system):
     return None
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def device(request, system):
     """Gets the device information based on the device name."""
     device_name = _get_marker_value(request, "device_name")
@@ -296,7 +296,7 @@ def generate_task(init_kwargs):
         yield _create_task
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def persisted_task(request, system):
     """Gets the persisted task based on the task name."""
     task_name = _get_marker_value(request, "task_name")
@@ -312,7 +312,7 @@ def persisted_task(request, system):
     return None
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def persisted_scale(request, system):
     """Gets the persisted scale based on the scale name."""
     scale_name = _get_marker_value(request, "scale_name")
@@ -326,7 +326,7 @@ def persisted_scale(request, system):
     return None
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def persisted_channel(request, system):
     """Gets the persisted channel based on the channel name."""
     channel_name = _get_marker_value(request, "channel_name")
@@ -349,9 +349,9 @@ def watchdog_task(
     """Gets a watchdog task instance."""
     # set default values used for the initialization of the task.
     device_name = _get_marker_value(request, "device_name", any_x_series_device.name)
-    timeout = _get_marker_value(request, "time_out", 0.5)
+    time_out = _get_marker_value(request, "time_out", 0.5)
 
-    return generate_watchdog_task(device_name=device_name, timeout=timeout)
+    return generate_watchdog_task(device_name=device_name, time_out=time_out)
 
 
 @pytest.fixture(scope="function")
@@ -364,9 +364,9 @@ def generate_watchdog_task(init_kwargs):
     """
     with contextlib.ExitStack() as stack:
 
-        def _create_task(device_name="", task_name="", timeout=0):
+        def _create_task(device_name, task_name="", time_out=0.5):
             return stack.enter_context(
-                nidaqmx.system.WatchdogTask(device_name, task_name, timeout, **init_kwargs)
+                nidaqmx.system.WatchdogTask(device_name, task_name, time_out, **init_kwargs)
             )
 
         yield _create_task

@@ -89,7 +89,8 @@ markers = [
   "device_name: name of the device used for testing.",
   "task_name: the existing task name to be used for testing.",
   "channel_name: the existing channel name to be used for testing.",
-  "scale_name: the existing scale name to be used for testing."
+  "scale_name: the existing scale name to be used for testing.",
+  "time_out: the timeout in seconds."
 ]
 
 [build-system]

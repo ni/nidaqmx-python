@@ -2,20 +2,19 @@ import pytest
 
 from nidaqmx import DaqError
 from nidaqmx.error_codes import DAQmxErrors
+from nidaqmx.system.storage import PersistedScale
 
 
-def test___constructed_persisted_scale___get_property___returns_persisted_value(
-    system,
-):
-    persisted_scale = _persisted_scale(system, "double_gain_scale")
+def test___constructed_persisted_scale___get_property___returns_persisted_value(init_kwargs):
+    persisted_scale = PersistedScale("double_gain_scale", **init_kwargs)
 
     assert persisted_scale.author == "Test Author"
 
 
 def test___nonexistent_persisted_scale___get_property___raises_custom_scale_does_not_exist(
-    system,
+    init_kwargs,
 ):
-    persisted_scale = _persisted_scale(system, "NonexistentScale")
+    persisted_scale = PersistedScale("NonexistentScale", **init_kwargs)
 
     with pytest.raises(DaqError) as exc_info:
         _ = persisted_scale.author
@@ -23,17 +22,17 @@ def test___nonexistent_persisted_scale___get_property___raises_custom_scale_does
     assert exc_info.value.error_code == DAQmxErrors.CUSTOM_SCALE_DOES_NOT_EXIST
 
 
-def test___persisted_scales_with_same_name___compare___equal(system):
-    persisted_scale1 = _persisted_scale(system, "Scale1")
-    persisted_scale2 = _persisted_scale(system, "Scale1")
+def test___persisted_scales_with_same_name___compare___equal(init_kwargs):
+    persisted_scale1 = PersistedScale("Scale1", **init_kwargs)
+    persisted_scale2 = PersistedScale("Scale1", **init_kwargs)
 
     assert persisted_scale1 is not persisted_scale2
     assert persisted_scale1 == persisted_scale2
 
 
-def test___persisted_scales_with_different_names___compare___not_equal(system):
-    persisted_scale1 = _persisted_scale(system, "Scale1")
-    persisted_scale2 = _persisted_scale(system, "Scale2")
+def test___persisted_scales_with_different_names___compare___not_equal(init_kwargs):
+    persisted_scale1 = PersistedScale("Scale1", **init_kwargs)
+    persisted_scale2 = PersistedScale("Scale2", **init_kwargs)
 
     assert persisted_scale1 != persisted_scale2
 
@@ -67,7 +66,3 @@ def test___persisted_scale___load_and_get_string_property___returns_persisted_va
     persisted_scale,
 ):
     assert persisted_scale.load().description == "Twice the gain"
-
-
-def _persisted_scale(system, scale_name):
-    return system.scales[scale_name]
