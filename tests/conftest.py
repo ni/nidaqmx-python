@@ -349,9 +349,9 @@ def watchdog_task(
     """Gets a watchdog task instance."""
     # set default values used for the initialization of the task.
     device_name = _get_marker_value(request, "device_name", any_x_series_device.name)
-    time_out = _get_marker_value(request, "time_out", 0.5)
+    timeout = _get_marker_value(request, "timeout", 0.5)
 
-    return generate_watchdog_task(device_name=device_name, time_out=time_out)
+    return generate_watchdog_task(device_name=device_name, timeout=timeout)
 
 
 @pytest.fixture(scope="function")
@@ -364,9 +364,9 @@ def generate_watchdog_task(init_kwargs):
     """
     with contextlib.ExitStack() as stack:
 
-        def _create_task(device_name, task_name="", time_out=0.5):
+        def _create_task(device_name, task_name="", timeout=0.5):
             return stack.enter_context(
-                nidaqmx.system.WatchdogTask(device_name, task_name, time_out, **init_kwargs)
+                nidaqmx.system.WatchdogTask(device_name, task_name, timeout, **init_kwargs)
             )
 
         yield _create_task
