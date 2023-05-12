@@ -2,13 +2,21 @@
 import pprint
 import threading
 
+import grpc
 import nidaqmx
 from nidaqmx.constants import AcquisitionType
 
 pp = pprint.PrettyPrinter(indent=4)
 
+USE_GRPC = True
 
-with nidaqmx.Task() as task:
+init_kwargs = {}
+if USE_GRPC:
+    grpc_channel = grpc.insecure_channel("localhost:31763")
+    grpc_options = nidaqmx.GrpcSessionOptions(grpc_channel, "")
+    init_kwargs["grpc_options"] = grpc_options
+
+with nidaqmx.Task(**init_kwargs) as task:
     task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
 
     samps_per_read = 1000
