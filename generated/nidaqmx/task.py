@@ -1,4 +1,3 @@
-import contextlib
 import numpy
 import warnings
 from nidaqmx import utils
@@ -277,10 +276,10 @@ class Task:
         self._triggers = Triggers(task_handle, interpreter)
         self._out_stream = OutStream(self, interpreter)
 
-        self._done_event_stack = None
-        self._every_n_transferred_event_stack = None
-        self._every_n_acquired_event_stack = None
-        self._signal_event_stack = None
+        self._done_event_handlers = []
+        self._every_n_transferred_event_handlers = []
+        self._every_n_acquired_event_handlers = []
+        self._signal_event_handlers = []
 
     def _calculate_num_samps_per_chan(self, num_samps_per_chan):
         """
@@ -342,22 +341,28 @@ class Task:
                 'already closed.'.format(self._saved_name), DaqResourceWarning)
             return
 
-        if self._done_event_stack is not None or self._every_n_acquired_event_stack is not None:
-            # Abort the task so it stops calling event callbacks.
-            self.control(TaskMode.TASK_ABORT)
+        event_handlers = (
+            self._done_event_handlers + self._every_n_acquired_event_handlers
+            + self._every_n_transferred_event_handlers + self._signal_event_handlers
+        )
+        # If events are registered, abort the task so it stops calling event callbacks. TODO: Is this necessary/effective?
+        #if event_handlers:
+        #    self.control(TaskMode.TASK_ABORT)
 
-            # Clean up event handlers. For LibraryInterpreter, this destroys the ctypes callback
-            # pointer. For GrpcStubInterpreter, this cancels the response stream and joins the
-            # event thread, which ensures that the thread doesn't call event callbacks.
-            if self._every_n_acquired_event_stack is not None:
-                self._every_n_acquired_event_stack.close()
-                self._every_n_acquired_event_stack = None
-
-            if self._done_event_stack is not None:
-                self._done_event_stack.close()
-                self._done_event_stack = None
+        # Cancel event handlers. For GrpcStubInterpreter, this cancels the gRPC response
+        # stream, which tells the event thread to exit.
+        for event_handler in event_handlers:
+            event_handler.cancel()
 
         self._interpreter.clear_task(self._handle)
+
+        for event_handler in event_handlers:
+            event_handler.close()
+
+        self._done_event_handlers.clear()
+        self._every_n_acquired_event_handlers.clear()
+        self._every_n_transferred_event_handlers.clear()
+        self._signal_event_handlers.clear()
 
         self._handle = None
 
@@ -667,17 +672,19 @@ class Task:
             def call_done_event_callback(task_handle, status, callback_data):
                 return callback_method(self, status, callback_data)
 
-            if self._done_event_stack is None:
-                self._done_event_stack = contextlib.ExitStack()
-            self._done_event_stack.enter_context(
+            self._done_event_handlers.append(
                 self._interpreter.register_done_event(self._handle, 0, call_done_event_callback, None)
             )
         else:
             self._interpreter.register_done_event(self._handle, 0, None, None)
 
-            if self._done_event_stack is not None:
-                self._done_event_stack.close()
-                self._done_event_stack = None
+            for event_handler in self._done_event_handlers:
+                event_handler.cancel()
+
+            for event_handler in self._done_event_handlers:
+                event_handler.close()
+
+            self._done_event_handlers.clear()
 
     def register_every_n_samples_acquired_into_buffer_event(
             self, sample_interval, callback_method):
@@ -722,9 +729,7 @@ class Task:
                     number_of_samples,
                     callback_data)
 
-            if self._every_n_acquired_event_stack is None:
-                self._every_n_acquired_event_stack = contextlib.ExitStack()
-            self._every_n_acquired_event_stack.enter_context(
+            self._every_n_acquired_event_handlers.append(
                 self._interpreter.register_every_n_samples_event(self._handle, EveryNSamplesEventType.ACQUIRED_INTO_BUFFER.value,
                     sample_interval, 0, call_every_n_samples_event_callback, None)
             )
@@ -732,9 +737,13 @@ class Task:
             self._interpreter.register_every_n_samples_event(self._handle, EveryNSamplesEventType.ACQUIRED_INTO_BUFFER.value,
                 sample_interval, 0, None, None)
 
-            if self._every_n_acquired_event_stack is not None:
-                self._every_n_acquired_event_stack.close()
-                self._every_n_acquired_event_stack = None
+            for event_handler in self._every_n_acquired_event_handlers:
+                event_handler.cancel()
+
+            for event_handler in self._every_n_acquired_event_handlers:
+                event_handler.close()
+
+            self._every_n_acquired_event_handlers.clear()
 
     def register_every_n_samples_transferred_from_buffer_event(
             self, sample_interval, callback_method):
