@@ -4,7 +4,7 @@
     from codegen.utilities.interpreter_helpers import get_callback_function_call_args, get_grpc_interpreter_call_params, get_params_for_function_signature, get_output_params, get_compound_parameter, create_compound_parameter_request, get_input_arguments_for_compound_params, check_if_parameters_contain_read_array, get_read_array_parameters
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
     from codegen.utilities.text_wrappers import wrap
-    from codegen.utilities.helpers import snake_to_pascal
+    from codegen.utilities.helpers import snake_to_pascal, strip_string_prefix
 %>\
 <% 
     params = get_params_for_function_signature(function, True)
@@ -13,10 +13,11 @@
     compound_parameter = get_compound_parameter(function.base_parameters)
     grpc_interpreter_params = get_grpc_interpreter_call_params(function, sorted_params)
     is_read_method = check_if_parameters_contain_read_array(function.base_parameters)
+    event_name = strip_string_prefix(function.function_name, "register")
 %>\
         assert options ==0
         if callback_function is not None:
-            self._${function.function_name}_stream = self._invoke(
+            self.${event_name}_stream = self._invoke(
                 self._client.${snake_to_pascal(function.function_name)},
             %if (len(function.function_name) + len(grpc_interpreter_params)) > 68:
                 grpc_types.${snake_to_pascal(function.function_name)}Request(
@@ -27,7 +28,7 @@
 
             def event_thread():
                 try:
-                    for response in self._${function.function_name}_stream:
+                    for response in self.${event_name}_stream:
 <%
     function_call_args = get_callback_function_call_args(function.base_parameters)
 %>\
@@ -45,9 +46,9 @@
                         message= f"An unexpected exception occured when executing the callback function.\n {e}",
                         error_code = -1
                     )
-            self._${function.function_name}_thread = threading.Thread(target=event_thread)
-            self._${function.function_name}_thread.start()
+            self.${event_name}_thread = threading.Thread(target=event_thread)
+            self.${event_name}_thread.start()
         else:
-            if self._${function.function_name}_thread is not None:
-                self._${function.function_name}_stream.cancel()
-                self._${function.function_name}_thread.join()
+            if self.${event_name}_thread is not None:
+                self.${event_name}_stream.cancel()
+                self.${event_name}_thread.join()

@@ -76,6 +76,13 @@ def snake_to_pascal(snake_string):
     result = "".join(snake_string)
     return _insert_special_case_pascal_tokens(result)
 
+def strip_string_prefix(input, prefix):
+    """Returns the input string with the prefix string removed.
+    
+    If the given prefix string is not present in the input string,
+    then the input string is directly returned.
+    """
+    return input[ len(prefix):] if input.startswith(prefix) else input
 
 def _insert_special_case_pascal_tokens(normal_pascal_string: str) -> str:
     for pascal_token, special_case_override in SPECIAL_CASE_PASCAL_TOKENS:
