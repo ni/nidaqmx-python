@@ -17,7 +17,6 @@ from nidaqmx._base_interpreter import BaseInterpreter
 from nidaqmx._stubs import nidaqmx_pb2 as grpc_types
 from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
 from nidaqmx._stubs import session_pb2 as session_grpc_types
-from nidaqmx.error_codes import DAQmxErrors
 
 
 
@@ -167,6 +166,6 @@ def _assign_numpy_array(numpy_array, grpc_array):
         numpy_array.flat[:grpc_array_size] = grpc_array
 
 def _validate_array_dtype(numpy_array, expected_numpy_array_dtype):
-    """Raises Typerror if array type doesn't match with expected numpy.dtype"""
+    """Raises TypeError if array type doesn't match with expected numpy.dtype"""
     if expected_numpy_array_dtype != numpy.generic and numpy_array.dtype != expected_numpy_array_dtype:
-        raise errors.DaqError(f"TypeError: array must have data type {expected_numpy_array_dtype}", DAQmxErrors.UNKNOWN)
+        raise TypeError(f"array must have data type {expected_numpy_array_dtype}")
