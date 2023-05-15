@@ -258,6 +258,7 @@ def get_grpc_interpreter_call_params(func, params):
     """Gets the interpreter parameters for grpc request."""
     compound_params = get_input_arguments_for_compound_params(func)
     is_read_function = is_custom_read_function(func)
+    is_write_function = is_custom_write_function(func)
     grpc_params = []
     has_read_array_parameter = False
     for param in params:
@@ -275,7 +276,10 @@ def get_grpc_interpreter_call_params(func, params):
             elif param.is_grpc_enum or (param.is_enum and not param.is_list):
                 grpc_params.append(f"{name}_raw={param.parameter_name}")
             else:
-                grpc_params.append(f"{name}={param.parameter_name}")
+                if is_write_function and is_write_bytes_param(param):
+                    grpc_params.append(f"{name}=bytes({param.parameter_name})")
+                else:
+                    grpc_params.append(f"{name}={param.parameter_name}")
     if func.is_init_method:
         grpc_params.append("initialization_behavior=self._grpc_options.initialization_behavior")
     return ", ".join(grpc_params)
@@ -515,6 +519,38 @@ def type_cast_attribute_set_function_parameter(param):
 
 def is_numpy_array_datatype(param):
     """Checks if datatype is a numpy array or not."""
-    if param.ctypes_data_type.startswith("numpy."):
+    if param.ctypes_data_type and param.ctypes_data_type.startswith("numpy."):
         return True
     return False
+
+
+def is_write_bytes_param(param):
+    """Returns true if parameter writes bytes."""
+    if param.is_list and param.ctypes_data_type in ("numpy.bool", "numpy.uint8"):
+        return True
+    # This is a special case for 'WriteRaw' function.
+    # since its metadata is incorrect in daqmxAPISharp.json file.
+    elif param.parameter_name == "write_array" and param.ctypes_data_type == "numpy.generic":
+        return True
+    else:
+        return False
+
+
+def get_numpy_array_params(func):
+    """Returns a dictionary of numpy data type parameters."""
+    numpy_params = {}
+    for param in func.base_parameters:
+        if is_numpy_array_datatype(param):
+            if param.ctypes_data_type == "numpy.bool":
+                numpy_params[param.parameter_name] = "bool"
+            else:
+                numpy_params[param.parameter_name] = param.ctypes_data_type
+
+        # This is a special case for these functions.
+        # since its metadata is incorrect in daqmxAPISharp.json file.
+        if func.function_name == "read_power_f64" and "read_array" in param.parameter_name:
+            numpy_params[param.parameter_name] = "numpy.float64"
+        if func.function_name == "read_power_binary_i16" and "read_array" in param.parameter_name:
+            numpy_params[param.parameter_name] = "numpy.int16"
+
+    return numpy_params
