@@ -24,7 +24,7 @@ def ao_multi_channel_task(
     return task
 
 
-def test___analog_single_channel_writer___write_many_sample___writes_samples(
+def test___analog_single_channel_writer___write_many_sample___returns_samples_written(
     ao_single_channel_task: nidaqmx.Task,
 ):
     writer = AnalogSingleChannelWriter(ao_single_channel_task.in_stream, auto_start=True)
@@ -52,7 +52,7 @@ def test___analog_single_channel_writer___write_many_sample_with_wrong_dtype___r
 @pytest.mark.xfail(
     reason="AB#2393319: GrpcStubInterpreter writes empty array with AnalogMultiChannelWriter"
 )
-def test___analog_multi_channel_writer___write_many_sample___writes_samples(
+def test___analog_multi_channel_writer___write_many_sample___returns_samples_written(
     ao_multi_channel_task: nidaqmx.Task,
 ):
     writer = AnalogMultiChannelWriter(ao_multi_channel_task.in_stream, auto_start=True)
