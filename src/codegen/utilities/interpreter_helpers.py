@@ -278,8 +278,11 @@ def get_grpc_interpreter_call_params(func, params):
             elif param.is_grpc_enum or (param.is_enum and not param.is_list):
                 grpc_params.append(f"{name}_raw={param.parameter_name}")
             else:
-                if is_write_function and is_write_bytes_param(param):
-                    grpc_params.append(f"{name}=bytes({param.parameter_name})")
+                if is_write_function:
+                    if is_write_bytes_param(param):
+                        grpc_params.append(f"{name}=bytes({param.parameter_name})")
+                    else:
+                        grpc_params.append(get_write_array_param(param))
                 else:
                     grpc_params.append(f"{name}={param.parameter_name}")
     if func.is_init_method:
@@ -556,3 +559,10 @@ def get_numpy_array_params(func):
             numpy_params[param.parameter_name] = "numpy.int16"
 
     return numpy_params
+
+
+def get_write_array_param(param):
+    """Assigns the write array to a flat of write_array not of type bytes."""
+    if is_numpy_array_datatype(param):
+            return f"{param.parameter_name}={param.parameter_name}.flat"        
+    return f"{param.parameter_name}={param.parameter_name}"

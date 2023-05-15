@@ -3212,7 +3212,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WriteAnalogF64Request(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
-                data_layout_raw=data_layout, write_array=write_array))
+                data_layout_raw=data_layout, write_array=write_array.flat))
         return response.samps_per_chan_written
 
     def write_analog_scalar_f64(self, task, auto_start, timeout, value):
@@ -3231,7 +3231,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WriteBinaryI16Request(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
-                data_layout_raw=data_layout, write_array=write_array))
+                data_layout_raw=data_layout, write_array=write_array.flat))
         return response.samps_per_chan_written
 
     def write_binary_i32(
@@ -3243,7 +3243,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WriteBinaryI32Request(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
-                data_layout_raw=data_layout, write_array=write_array))
+                data_layout_raw=data_layout, write_array=write_array.flat))
         return response.samps_per_chan_written
 
     def write_binary_u16(
@@ -3255,7 +3255,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WriteBinaryU16Request(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
-                data_layout_raw=data_layout, write_array=write_array))
+                data_layout_raw=data_layout, write_array=write_array.flat))
         return response.samps_per_chan_written
 
     def write_binary_u32(
@@ -3267,7 +3267,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WriteBinaryU32Request(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
-                data_layout_raw=data_layout, write_array=write_array))
+                data_layout_raw=data_layout, write_array=write_array.flat))
         return response.samps_per_chan_written
 
     def write_ctr_freq(
@@ -3280,8 +3280,8 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WriteCtrFreqRequest(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
-                data_layout_raw=data_layout, frequency=frequency,
-                duty_cycle=duty_cycle))
+                data_layout_raw=data_layout, frequency=frequency.flat,
+                duty_cycle=duty_cycle.flat))
         return response.num_samps_per_chan_written
 
     def write_ctr_freq_scalar(
@@ -3302,8 +3302,8 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WriteCtrTicksRequest(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
-                data_layout_raw=data_layout, high_ticks=high_ticks,
-                low_ticks=low_ticks))
+                data_layout_raw=data_layout, high_ticks=high_ticks.flat,
+                low_ticks=low_ticks.flat))
         return response.num_samps_per_chan_written
 
     def write_ctr_ticks_scalar(
@@ -3324,8 +3324,8 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WriteCtrTimeRequest(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
-                data_layout_raw=data_layout, high_time=high_time,
-                low_time=low_time))
+                data_layout_raw=data_layout, high_time=high_time.flat,
+                low_time=low_time.flat))
         return response.num_samps_per_chan_written
 
     def write_ctr_time_scalar(
@@ -3364,7 +3364,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WriteDigitalU16Request(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
-                data_layout_raw=data_layout, write_array=write_array))
+                data_layout_raw=data_layout, write_array=write_array.flat))
         return response.samps_per_chan_written
 
     def write_digital_u32(
@@ -3376,7 +3376,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WriteDigitalU32Request(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
-                data_layout_raw=data_layout, write_array=write_array))
+                data_layout_raw=data_layout, write_array=write_array.flat))
         return response.samps_per_chan_written
 
     def write_digital_u8(
