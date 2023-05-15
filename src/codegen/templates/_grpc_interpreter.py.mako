@@ -1,5 +1,5 @@
 <%
-    from codegen.utilities.interpreter_helpers import get_interpreter_functions, get_params_for_function_signature, get_interpreter_parameter_signature, get_output_params, get_response_parameters, get_grpc_function_call_template, get_numpy_array_params, is_custom_read_write_function
+    from codegen.utilities.interpreter_helpers import get_interpreter_functions, get_params_for_function_signature, get_interpreter_parameter_signature, get_output_params, get_response_parameters, get_grpc_function_call_template
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
     functions = get_interpreter_functions(data)

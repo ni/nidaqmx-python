@@ -1,6 +1,6 @@
 <%page args="function"/>\
 <%
-    from codegen.utilities.interpreter_helpers import get_grpc_interpreter_call_params, get_params_for_function_signature, get_output_params, get_compound_parameter, create_compound_parameter_request, get_input_arguments_for_compound_params, check_if_parameters_contain_read_array, get_read_array_parameters
+    from codegen.utilities.interpreter_helpers import get_grpc_interpreter_call_params, get_params_for_function_signature, get_output_params, get_compound_parameter, create_compound_parameter_request, get_input_arguments_for_compound_params, check_if_parameters_contain_read_array, get_read_array_parameters, is_custom_read_write_function, get_numpy_array_params
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
     from codegen.utilities.text_wrappers import wrap
     from codegen.utilities.helpers import snake_to_pascal
@@ -23,6 +23,11 @@
             ('ni-api-key', self._grpc_options.api_key),
         )
     %endif
+        %if is_custom_read_write_function(function):
+        %for parameter_name, parameter_dtype in get_numpy_array_params(function).items():
+        _validate_array_dtype(${parameter_name}, ${parameter_dtype})
+        %endfor
+        %endif
         response = self._invoke(
             self._client.${snake_to_pascal(function.function_name)},
         %if (len(function.function_name) + len(grpc_interpreter_params)) > 68:
