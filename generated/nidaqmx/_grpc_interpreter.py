@@ -2606,10 +2606,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self, task, options, callback_function, callback_data):
         response = self._invoke(
             self._client.RegisterDoneEvent,
-            grpc_types.RegisterDoneEventRequest(
-                task=task, options=options,
-                callback_function=callback_function,
-                callback_data=callback_data))
+            grpc_types.RegisterDoneEventRequest(task=task))
 
     def register_every_n_samples_event(
             self, task, every_n_samples_event_type, n_samples, options,
@@ -2619,18 +2616,13 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.RegisterEveryNSamplesEventRequest(
                 task=task,
                 every_n_samples_event_type_raw=every_n_samples_event_type,
-                n_samples=n_samples, options=options,
-                callback_function=callback_function,
-                callback_data=callback_data))
+                n_samples=n_samples))
 
     def register_signal_event(
             self, task, signal_id, options, callback_function, callback_data):
         response = self._invoke(
             self._client.RegisterSignalEvent,
-            grpc_types.RegisterSignalEventRequest(
-                task=task, signal_id_raw=signal_id, options=options,
-                callback_function=callback_function,
-                callback_data=callback_data))
+            grpc_types.RegisterSignalEventRequest(task=task, signal_id_raw=signal_id))
 
     def remove_cdaq_sync_connection(self, port_list):
         response = self._invoke(

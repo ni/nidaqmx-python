@@ -32,6 +32,7 @@ class Parameter:
         self._has_default = False
         self._is_used_in_python_api = parameter_metadata.get("use_in_python_api", True)
         self._is_proto_only = parameter_metadata.get("proto_only", False)
+        self._include_in_proto = parameter_metadata.get("include_in_proto", True)
         if "python_default_value" in parameter_metadata:
             self._default = parameter_metadata.get("python_default_value")
             self._has_default = True
@@ -172,3 +173,8 @@ class Parameter:
     def is_pointer(self):
         """bool: Defines if the parameter is a pointer or not."""
         return self._pointer
+
+    @property
+    def include_in_proto(self):
+        """bool: Defines if the parameter is included in the proto definition."""
+        return self._include_in_proto

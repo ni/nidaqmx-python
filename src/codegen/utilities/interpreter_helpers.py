@@ -262,6 +262,8 @@ def get_grpc_interpreter_call_params(func, params):
     grpc_params = []
     has_read_array_parameter = False
     for param in params:
+        if not param.include_in_proto:
+            continue
         if param.parameter_name not in compound_params:
             name = param.parameter_name
             if param.parameter_name in MODIFIED_INTERPRETER_PARAMS:
@@ -468,7 +470,7 @@ def get_interpreter_parameters(func, is_grpc_interpreter=False):
             (
                 parameter.is_used_in_python_api
                 and not parameter.is_proto_only
-                and not parameter.repeated_var_args
+                and (not parameter.repeated_var_args or is_grpc_interpreter)
             )
             or parameter.parameter_name in size_params
             or _is_handle_parameter(func, parameter)
