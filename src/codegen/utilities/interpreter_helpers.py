@@ -535,7 +535,7 @@ def is_write_bytes_param(param):
     else:
         return False
 
-    
+
 def get_numpy_array_params(func):
     """Returns a dictionary of numpy data type parameters."""
     numpy_params = {}
