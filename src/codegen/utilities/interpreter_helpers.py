@@ -264,8 +264,6 @@ def get_grpc_interpreter_call_params(func, params):
     for param in params:
         if not param.include_in_proto:
             continue
-        if not param.include_in_proto:
-            continue
         if param.parameter_name not in compound_params:
             name = param.parameter_name
             if param.parameter_name in MODIFIED_INTERPRETER_PARAMS:
