@@ -1,5 +1,5 @@
 <%
-    from codegen.utilities.interpreter_helpers import get_interpreter_functions, get_grpc_interpreter_call_params, get_params_for_function_signature, get_interpreter_parameter_signature, get_output_params, get_response_parameters, get_compound_parameter, create_compound_parameter_request, get_input_arguments_for_compound_params, check_if_parameters_contain_read_array, get_read_array_parameters
+    from codegen.utilities.interpreter_helpers import get_interpreter_functions, get_grpc_interpreter_call_params, get_params_for_function_signature, get_interpreter_parameter_signature, get_output_params, get_response_parameters, get_compound_parameter, create_compound_parameter_request, get_input_arguments_for_compound_params, check_if_parameters_contain_read_array, get_read_array_parameters, get_numpy_array_params, is_custom_read_write_function
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
     from codegen.utilities.helpers import snake_to_pascal
@@ -118,6 +118,11 @@ class GrpcStubInterpreter(BaseInterpreter):
             ('ni-api-key', self._grpc_options.api_key),
         )
     %endif
+    %if is_custom_read_write_function(func):
+    %for parameter_name, parameter_dtype in get_numpy_array_params(func).items():
+        _validate_array_dtype(${parameter_name}, ${parameter_dtype})
+    %endfor
+    %endif
         response = self._invoke(
             self._client.${snake_to_pascal(func.function_name)},
         %if (len(func.function_name) + len(grpc_interpreter_params)) > 68:
@@ -159,3 +164,8 @@ def _assign_numpy_array(numpy_array, grpc_array):
         numpy_array.flat[:grpc_array_size] = numpy.frombuffer(grpc_array, dtype=numpy.uint8)
     else:
         numpy_array.flat[:grpc_array_size] = grpc_array
+
+def _validate_array_dtype(numpy_array, expected_numpy_array_dtype):
+    """Raises TypeError if array type doesn't match with expected numpy.dtype"""
+    if expected_numpy_array_dtype != numpy.generic and numpy_array.dtype != expected_numpy_array_dtype:
+        raise TypeError(f"array must have data type {expected_numpy_array_dtype}")

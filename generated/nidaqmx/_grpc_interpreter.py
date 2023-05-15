@@ -2319,6 +2319,7 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def read_analog_f64(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+        _validate_array_dtype(read_array, numpy.float64)
         response = self._invoke(
             self._client.ReadAnalogF64,
             grpc_types.ReadAnalogF64Request(
@@ -2336,6 +2337,7 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def read_binary_i16(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+        _validate_array_dtype(read_array, numpy.int16)
         response = self._invoke(
             self._client.ReadBinaryI16,
             grpc_types.ReadBinaryI16Request(
@@ -2347,6 +2349,7 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def read_binary_i32(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+        _validate_array_dtype(read_array, numpy.int32)
         response = self._invoke(
             self._client.ReadBinaryI32,
             grpc_types.ReadBinaryI32Request(
@@ -2358,6 +2361,7 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def read_binary_u16(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+        _validate_array_dtype(read_array, numpy.uint16)
         response = self._invoke(
             self._client.ReadBinaryU16,
             grpc_types.ReadBinaryU16Request(
@@ -2369,6 +2373,7 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def read_binary_u32(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+        _validate_array_dtype(read_array, numpy.uint32)
         response = self._invoke(
             self._client.ReadBinaryU32,
             grpc_types.ReadBinaryU32Request(
@@ -2379,6 +2384,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         return read_array, response.samps_per_chan_read
 
     def read_counter_f64(self, task, num_samps_per_chan, timeout, read_array):
+        _validate_array_dtype(read_array, numpy.float64)
         response = self._invoke(
             self._client.ReadCounterF64,
             grpc_types.ReadCounterF64Request(
@@ -2389,6 +2395,7 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def read_counter_f64_ex(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+        _validate_array_dtype(read_array, numpy.float64)
         response = self._invoke(
             self._client.ReadCounterF64Ex,
             grpc_types.ReadCounterF64ExRequest(
@@ -2411,6 +2418,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         return response.value
 
     def read_counter_u32(self, task, num_samps_per_chan, timeout, read_array):
+        _validate_array_dtype(read_array, numpy.uint32)
         response = self._invoke(
             self._client.ReadCounterU32,
             grpc_types.ReadCounterU32Request(
@@ -2421,6 +2429,7 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def read_counter_u32_ex(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+        _validate_array_dtype(read_array, numpy.uint32)
         response = self._invoke(
             self._client.ReadCounterU32Ex,
             grpc_types.ReadCounterU32ExRequest(
@@ -2433,6 +2442,8 @@ class GrpcStubInterpreter(BaseInterpreter):
     def read_ctr_freq(
             self, task, num_samps_per_chan, timeout, interleaved,
             read_array_frequency, read_array_duty_cycle):
+        _validate_array_dtype(read_array_frequency, numpy.float64)
+        _validate_array_dtype(read_array_duty_cycle, numpy.float64)
         response = self._invoke(
             self._client.ReadCtrFreq,
             grpc_types.ReadCtrFreqRequest(
@@ -2452,6 +2463,8 @@ class GrpcStubInterpreter(BaseInterpreter):
     def read_ctr_ticks(
             self, task, num_samps_per_chan, timeout, interleaved,
             read_array_high_ticks, read_array_low_ticks):
+        _validate_array_dtype(read_array_high_ticks, numpy.uint32)
+        _validate_array_dtype(read_array_low_ticks, numpy.uint32)
         response = self._invoke(
             self._client.ReadCtrTicks,
             grpc_types.ReadCtrTicksRequest(
@@ -2471,6 +2484,8 @@ class GrpcStubInterpreter(BaseInterpreter):
     def read_ctr_time(
             self, task, num_samps_per_chan, timeout, interleaved,
             read_array_high_time, read_array_low_time):
+        _validate_array_dtype(read_array_high_time, numpy.float64)
+        _validate_array_dtype(read_array_low_time, numpy.float64)
         response = self._invoke(
             self._client.ReadCtrTime,
             grpc_types.ReadCtrTimeRequest(
@@ -2489,6 +2504,7 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def read_digital_lines(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+        _validate_array_dtype(read_array, bool)
         response = self._invoke(
             self._client.ReadDigitalLines,
             grpc_types.ReadDigitalLinesRequest(
@@ -2506,6 +2522,7 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def read_digital_u16(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+        _validate_array_dtype(read_array, numpy.uint16)
         response = self._invoke(
             self._client.ReadDigitalU16,
             grpc_types.ReadDigitalU16Request(
@@ -2517,6 +2534,7 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def read_digital_u32(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+        _validate_array_dtype(read_array, numpy.uint32)
         response = self._invoke(
             self._client.ReadDigitalU32,
             grpc_types.ReadDigitalU32Request(
@@ -2528,6 +2546,7 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def read_digital_u8(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
+        _validate_array_dtype(read_array, numpy.uint8)
         response = self._invoke(
             self._client.ReadDigitalU8,
             grpc_types.ReadDigitalU8Request(
@@ -2540,6 +2559,8 @@ class GrpcStubInterpreter(BaseInterpreter):
     def read_power_binary_i16(
             self, task, num_samps_per_chan, timeout, fill_mode,
             read_array_voltage, read_array_current):
+        _validate_array_dtype(read_array_voltage, numpy.int16)
+        _validate_array_dtype(read_array_current, numpy.int16)
         response = self._invoke(
             self._client.ReadPowerBinaryI16,
             grpc_types.ReadPowerBinaryI16Request(
@@ -2553,6 +2574,8 @@ class GrpcStubInterpreter(BaseInterpreter):
     def read_power_f64(
             self, task, num_samps_per_chan, timeout, fill_mode,
             read_array_voltage, read_array_current):
+        _validate_array_dtype(read_array_voltage, numpy.float64)
+        _validate_array_dtype(read_array_current, numpy.float64)
         response = self._invoke(
             self._client.ReadPowerF64,
             grpc_types.ReadPowerF64Request(
@@ -2570,6 +2593,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         return response.voltage, response.current
 
     def read_raw(self, task, num_samps_per_chan, timeout, read_array):
+        _validate_array_dtype(read_array, numpy.generic)
         response = self._invoke(
             self._client.ReadRaw,
             grpc_types.ReadRawRequest(
@@ -3190,6 +3214,7 @@ class GrpcStubInterpreter(BaseInterpreter):
     def write_analog_f64(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        _validate_array_dtype(write_array, numpy.float64)
         response = self._invoke(
             self._client.WriteAnalogF64,
             grpc_types.WriteAnalogF64Request(
@@ -3208,6 +3233,7 @@ class GrpcStubInterpreter(BaseInterpreter):
     def write_binary_i16(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        _validate_array_dtype(write_array, numpy.int16)
         response = self._invoke(
             self._client.WriteBinaryI16,
             grpc_types.WriteBinaryI16Request(
@@ -3219,6 +3245,7 @@ class GrpcStubInterpreter(BaseInterpreter):
     def write_binary_i32(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        _validate_array_dtype(write_array, numpy.int32)
         response = self._invoke(
             self._client.WriteBinaryI32,
             grpc_types.WriteBinaryI32Request(
@@ -3230,6 +3257,7 @@ class GrpcStubInterpreter(BaseInterpreter):
     def write_binary_u16(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        _validate_array_dtype(write_array, numpy.uint16)
         response = self._invoke(
             self._client.WriteBinaryU16,
             grpc_types.WriteBinaryU16Request(
@@ -3241,6 +3269,7 @@ class GrpcStubInterpreter(BaseInterpreter):
     def write_binary_u32(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        _validate_array_dtype(write_array, numpy.uint32)
         response = self._invoke(
             self._client.WriteBinaryU32,
             grpc_types.WriteBinaryU32Request(
@@ -3252,6 +3281,8 @@ class GrpcStubInterpreter(BaseInterpreter):
     def write_ctr_freq(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             frequency, duty_cycle):
+        _validate_array_dtype(frequency, numpy.float64)
+        _validate_array_dtype(duty_cycle, numpy.float64)
         response = self._invoke(
             self._client.WriteCtrFreq,
             grpc_types.WriteCtrFreqRequest(
@@ -3272,6 +3303,8 @@ class GrpcStubInterpreter(BaseInterpreter):
     def write_ctr_ticks(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             high_ticks, low_ticks):
+        _validate_array_dtype(high_ticks, numpy.uint32)
+        _validate_array_dtype(low_ticks, numpy.uint32)
         response = self._invoke(
             self._client.WriteCtrTicks,
             grpc_types.WriteCtrTicksRequest(
@@ -3292,6 +3325,8 @@ class GrpcStubInterpreter(BaseInterpreter):
     def write_ctr_time(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             high_time, low_time):
+        _validate_array_dtype(high_time, numpy.float64)
+        _validate_array_dtype(low_time, numpy.float64)
         response = self._invoke(
             self._client.WriteCtrTime,
             grpc_types.WriteCtrTimeRequest(
@@ -3312,6 +3347,7 @@ class GrpcStubInterpreter(BaseInterpreter):
     def write_digital_lines(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        _validate_array_dtype(write_array, bool)
         response = self._invoke(
             self._client.WriteDigitalLines,
             grpc_types.WriteDigitalLinesRequest(
@@ -3330,6 +3366,7 @@ class GrpcStubInterpreter(BaseInterpreter):
     def write_digital_u16(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        _validate_array_dtype(write_array, numpy.uint16)
         response = self._invoke(
             self._client.WriteDigitalU16,
             grpc_types.WriteDigitalU16Request(
@@ -3341,6 +3378,7 @@ class GrpcStubInterpreter(BaseInterpreter):
     def write_digital_u32(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        _validate_array_dtype(write_array, numpy.uint32)
         response = self._invoke(
             self._client.WriteDigitalU32,
             grpc_types.WriteDigitalU32Request(
@@ -3352,6 +3390,7 @@ class GrpcStubInterpreter(BaseInterpreter):
     def write_digital_u8(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        _validate_array_dtype(write_array, numpy.uint8)
         response = self._invoke(
             self._client.WriteDigitalU8,
             grpc_types.WriteDigitalU8Request(
@@ -3361,6 +3400,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         return response.samps_per_chan_written
 
     def write_raw(self, task, num_samps, auto_start, timeout, write_array):
+        _validate_array_dtype(write_array, numpy.generic)
         response = self._invoke(
             self._client.WriteRaw,
             grpc_types.WriteRawRequest(
@@ -3397,3 +3437,8 @@ def _assign_numpy_array(numpy_array, grpc_array):
         numpy_array.flat[:grpc_array_size] = numpy.frombuffer(grpc_array, dtype=numpy.uint8)
     else:
         numpy_array.flat[:grpc_array_size] = grpc_array
+
+def _validate_array_dtype(numpy_array, expected_numpy_array_dtype):
+    """Raises TypeError if array type doesn't match with expected numpy.dtype"""
+    if expected_numpy_array_dtype != numpy.generic and numpy_array.dtype != expected_numpy_array_dtype:
+        raise TypeError(f"array must have data type {expected_numpy_array_dtype}")
