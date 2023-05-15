@@ -15,7 +15,7 @@
     is_read_method = check_if_parameters_contain_read_array(function.base_parameters)
     event_name = strip_string_prefix(function.function_name, "register")
 %>\
-        assert options ==0
+        assert options == 0
         if callback_function is not None:
             if self.${event_name}_stream is not None:
                 raise errors.DaqError(
@@ -38,16 +38,12 @@
     function_call_args = get_callback_function_call_args(function.base_parameters)
 %>\
                         callback_function(${', '.join(function_call_args) | wrap(36, 36)})
-                except grpc.RpcError as e:
-                    if e.code() == grpc.StatusCode.CANCELLED:
-                        return
-                    raise
-                except errors.RpcError as e:
-                    if e.rpc_code == grpc.StatusCode.CANCELLED:
-                        return
-                    raise
-                except Exception:
-                    _logger.error(f"An unexpected exception occured when executing the callback function.\n {e}")
+                except Exception as ex:
+                    if (isinstance(ex, grpc.RpcError) or isinstance(ex, errors.RpcError)):
+                        if ex.code() == grpc.StatusCode.CANCELLED:
+                            return
+                        raise
+                    _logger.exception("An unexpected exception occurred when executing the ${event_name} callback function.")
                     self.${event_name}_stream.cancel()
                     self.${event_name}_stream = None
             self.${event_name}_thread = threading.Thread(target=event_thread)

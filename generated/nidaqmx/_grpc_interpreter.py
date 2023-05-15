@@ -2621,7 +2621,7 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def register_done_event(
             self, task, options, callback_function, callback_data):
-        assert options ==0
+        assert options == 0
         if callback_function is not None:
             if self._done_event_stream is not None:
                 raise errors.DaqError(
@@ -2636,16 +2636,12 @@ class GrpcStubInterpreter(BaseInterpreter):
                 try:
                     for response in self._done_event_stream:
                         callback_function(task, response.status, callback_data)
-                except grpc.RpcError as e:
-                    if e.code() == grpc.StatusCode.CANCELLED:
-                        return
-                    raise
-                except errors.RpcError as e:
-                    if e.rpc_code == grpc.StatusCode.CANCELLED:
-                        return
-                    raise
-                except Exception:
-                    _logger.error(f"An unexpected exception occured when executing the callback function.\n {e}")
+                except Exception as ex:
+                    if (isinstance(ex, grpc.RpcError) or isinstance(ex, errors.RpcError)):
+                        if ex.code() == grpc.StatusCode.CANCELLED:
+                            return
+                        raise
+                    _logger.exception("An unexpected exception occurred when executing the _done_event callback function.")
                     self._done_event_stream.cancel()
                     self._done_event_stream = None
             self._done_event_thread = threading.Thread(target=event_thread)
@@ -2660,7 +2656,7 @@ class GrpcStubInterpreter(BaseInterpreter):
     def register_every_n_samples_event(
             self, task, every_n_samples_event_type, n_samples, options,
             callback_function, callback_data):
-        assert options ==0
+        assert options == 0
         if callback_function is not None:
             if self._every_n_samples_event_stream is not None:
                 raise errors.DaqError(
@@ -2680,16 +2676,12 @@ class GrpcStubInterpreter(BaseInterpreter):
                         callback_function(task,
                                     response.every_n_samples_event_type_raw,
                                     response.n_samples, callback_data)
-                except grpc.RpcError as e:
-                    if e.code() == grpc.StatusCode.CANCELLED:
-                        return
-                    raise
-                except errors.RpcError as e:
-                    if e.rpc_code == grpc.StatusCode.CANCELLED:
-                        return
-                    raise
-                except Exception:
-                    _logger.error(f"An unexpected exception occured when executing the callback function.\n {e}")
+                except Exception as ex:
+                    if (isinstance(ex, grpc.RpcError) or isinstance(ex, errors.RpcError)):
+                        if ex.code() == grpc.StatusCode.CANCELLED:
+                            return
+                        raise
+                    _logger.exception("An unexpected exception occurred when executing the _every_n_samples_event callback function.")
                     self._every_n_samples_event_stream.cancel()
                     self._every_n_samples_event_stream = None
             self._every_n_samples_event_thread = threading.Thread(target=event_thread)
@@ -2703,7 +2695,7 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def register_signal_event(
             self, task, signal_id, options, callback_function, callback_data):
-        assert options ==0
+        assert options == 0
         if callback_function is not None:
             if self._signal_event_stream is not None:
                 raise errors.DaqError(
@@ -2718,16 +2710,12 @@ class GrpcStubInterpreter(BaseInterpreter):
                 try:
                     for response in self._signal_event_stream:
                         callback_function(task, response.signal_id, callback_data)
-                except grpc.RpcError as e:
-                    if e.code() == grpc.StatusCode.CANCELLED:
-                        return
-                    raise
-                except errors.RpcError as e:
-                    if e.rpc_code == grpc.StatusCode.CANCELLED:
-                        return
-                    raise
-                except Exception:
-                    _logger.error(f"An unexpected exception occured when executing the callback function.\n {e}")
+                except Exception as ex:
+                    if (isinstance(ex, grpc.RpcError) or isinstance(ex, errors.RpcError)):
+                        if ex.code() == grpc.StatusCode.CANCELLED:
+                            return
+                        raise
+                    _logger.exception("An unexpected exception occurred when executing the _signal_event callback function.")
                     self._signal_event_stream.cancel()
                     self._signal_event_stream = None
             self._signal_event_thread = threading.Thread(target=event_thread)
