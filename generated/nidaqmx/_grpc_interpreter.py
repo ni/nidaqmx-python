@@ -3345,7 +3345,8 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WriteDigitalLinesRequest(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
-                data_layout_raw=data_layout, write_array=bytes(write_array)))
+                data_layout_raw=data_layout,
+                write_array=write_array.tobytes()))
         return response.samps_per_chan_written
 
     def write_digital_scalar_u32(self, task, auto_start, timeout, value):
@@ -3388,7 +3389,8 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WriteDigitalU8Request(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 auto_start=auto_start, timeout=timeout,
-                data_layout_raw=data_layout, write_array=bytes(write_array)))
+                data_layout_raw=data_layout,
+                write_array=write_array.tobytes()))
         return response.samps_per_chan_written
 
     def write_raw(self, task, num_samps, auto_start, timeout, write_array):
@@ -3397,7 +3399,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.WriteRaw,
             grpc_types.WriteRawRequest(
                 task=task, num_samps=num_samps, auto_start=auto_start,
-                timeout=timeout, write_array=bytes(write_array)))
+                timeout=timeout, write_array=write_array.tobytes()))
         return response.samps_per_chan_written
 
     def write_to_teds_from_array(

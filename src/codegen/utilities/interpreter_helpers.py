@@ -280,7 +280,7 @@ def get_grpc_interpreter_call_params(func, params):
             else:
                 if is_write_function:
                     if is_write_bytes_param(param):
-                        grpc_params.append(f"{name}=bytes({param.parameter_name})")
+                        grpc_params.append(f"{name}={param.parameter_name}.tobytes()")
                     else:
                         grpc_params.append(get_write_array_param(param))
                 else:
