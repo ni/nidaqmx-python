@@ -19,7 +19,8 @@ class Scale:
         """
         Args:
             name (str): Specifies the name of the scale to create.
-            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
+            grpc_options (Optional[:class:`~nidaqmx.GrpcSessionOptions`]): Specifies
+                the gRPC session options.
         """
         self._name = name
         self._interpreter = utils._select_interpreter(grpc_options)
@@ -286,14 +287,14 @@ class Scale:
                 3 indicates a 3rd order polynomial. A value of -1
                 indicates a reverse polynomial of the same order as the
                 forward polynomial.
-            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
-                gRPC session options.
+            grpc_options (Optional[:class:`~nidaqmx.GrpcSessionOptions`]): Specifies
+                the gRPC session options.
         Returns:
-            List[float]: 
-            
-            Specifies the list of coefficients for the reverse 
-            polynomial. Each element of the list corresponds to a term 
-            of the equation. For example, if index three of the list is 
+            List[float]:
+
+            Specifies the list of coefficients for the reverse
+            polynomial. Each element of the list corresponds to a term
+            of the equation. For example, if index three of the list is
             9, the fourth term of the equation is 9y^3.
         """
         forward_coeffs = numpy.float64(forward_coeffs)
@@ -325,11 +326,11 @@ class Scale:
             scaled_units (Optional[str]): Is the units to use for the
                 scaled value. You can use an arbitrary string. NI-DAQmx
                 uses the units to label a graph or chart.
-            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
-                gRPC session options.
+            grpc_options (Optional[:class:`~nidaqmx.GrpcSessionOptions`]): Specifies
+                the gRPC session options.
         Returns:
             nidaqmx.scale.Scale:
-            
+
             Indicates an object that represents the created custom scale.
         """
         scale = Scale(scale_name, grpc_options=grpc_options)
@@ -370,17 +371,17 @@ class Scale:
             scaled_units (Optional[str]): Is the units to use for the
                 scaled value. You can use an arbitrary string. NI-DAQmx
                 uses the units to label a graph or chart.
-            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
-                gRPC session options.
+            grpc_options (Optional[:class:`~nidaqmx.GrpcSessionOptions`]): Specifies
+                the gRPC session options.
         Returns:
-            nidaqmx.scale.Scale: 
-            
+            nidaqmx.scale.Scale:
+
             Indicates an object that represents the created custom scale.
         """
         scale = Scale(scale_name, grpc_options=grpc_options)
 
         scale._interpreter.create_map_scale(
-            scale_name, prescaled_min, prescaled_max, scaled_min, scaled_max, 
+            scale_name, prescaled_min, prescaled_max, scaled_min, scaled_max,
             pre_scaled_units.value, scaled_units)
 
         return scale
@@ -412,11 +413,11 @@ class Scale:
             scaled_units (Optional[str]): Is the units to use for the
                 scaled value. You can use an arbitrary string. NI-DAQmx
                 uses the units to label a graph or chart.
-            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
-                gRPC session options.
+            grpc_options (Optional[:class:`~nidaqmx.GrpcSessionOptions`]): Specifies
+                the gRPC session options.
         Returns:
-            nidaqmx.scale.Scale: 
-            
+            nidaqmx.scale.Scale:
+
             Indicates an object that represents the created custom scale.
         """
         if forward_coeffs is None:
@@ -459,11 +460,11 @@ class Scale:
             scaled_units (Optional[str]): Is the units to use for the
                 scaled value. You can use an arbitrary string. NI-DAQmx
                 uses the units to label a graph or chart.
-            grpc_options (Optional[GrpcSessionOptions]): Specifies the 
-                gRPC session options.
+            grpc_options (Optional[:class:`~nidaqmx.GrpcSessionOptions`]): Specifies
+                the gRPC session options.
         Returns:
-            nidaqmx.scale.Scale: 
-            
+            nidaqmx.scale.Scale:
+
             Indicates an object that represents the created custom scale.
         """
         if prescaled_vals is None:
@@ -474,7 +475,7 @@ class Scale:
 
         prescaled_vals = numpy.float64(prescaled_vals)
         scaled_vals = numpy.float64(scaled_vals)
-        
+
         scale = Scale(scale_name, grpc_options=grpc_options)
 
         scale._interpreter.create_table_scale(
@@ -537,7 +538,7 @@ class _ScaleAlternateConstructor(Scale):
         Args:
             name: Specifies the name of the Scale.
             interpreter: Specifies the interpreter instance.
-            
+
         """
         self._name = name
         self._interpreter = interpreter
