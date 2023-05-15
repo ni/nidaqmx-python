@@ -562,7 +562,7 @@ def get_numpy_array_params(func):
 
 
 def get_write_array_param(param):
-    """Assigns the write array to a flat of write_array."""
+    """Assigns the numpy array to a flattened numpy array."""
     if is_numpy_array_datatype(param):
         return f"{param.parameter_name}={param.parameter_name}.flat"
     return f"{param.parameter_name}={param.parameter_name}"
