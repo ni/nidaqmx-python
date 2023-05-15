@@ -36,7 +36,8 @@ class System:
     def __init__(self, grpc_options=None):
         """
         Args:
-            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
+            grpc_options (Optional[:class:`~nidaqmx.GrpcSessionOptions`]): Specifies
+                the gRPC session options.
         """
         self._interpreter = utils._select_interpreter(grpc_options)
 
@@ -53,7 +54,8 @@ class System:
         nidaqmx.system.system.System: Represents the remote DAQmx system.
 
         Args:
-            grpc_options: Specifies the gRPC session options.
+            grpc_options (:class:`~nidaqmx.GrpcSessionOptions`): Specifies
+                the gRPC session options.
         """
         return System(grpc_options)
 
@@ -334,7 +336,7 @@ class System:
 
         for do_line in device.do_lines:
             channel_names.append(do_line.name)
-        
+
         states =  self._interpreter.get_digital_pull_up_pull_down_states(device_name, channel_names)
 
         power_up_states = []
@@ -434,7 +436,7 @@ class System:
         channel_types = []
 
         device = _DeviceAlternateConstructor(device_name, self._interpreter)
-        
+
         for ao_physical_chan in device.ao_physical_chans:
             channel_type = ctypes.c_int()
             channel_types.append(channel_type)

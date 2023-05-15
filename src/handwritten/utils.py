@@ -1,8 +1,10 @@
 import re
+from typing import Optional
 
 from nidaqmx.errors import DaqError
-from nidaqmx._grpc_interpreter import GrpcStubInterpreter
-from nidaqmx._library_interpreter import LibraryInterpreter
+from nidaqmx.grpc_session_options import GrpcSessionOptions
+from nidaqmx._base_interpreter import BaseInterpreter
+
 
 # Method logic adapted from
 # //Measurements/Infrastructure/dmxf/trunk/2.5/source/nimuck/parseUtilities.cpp
@@ -208,11 +210,16 @@ def unflatten_channel_string(channel_names):
     return channel_list_to_return
 
 
-def _select_interpreter(grpc_options = None, interpreter = None):
+def _select_interpreter(
+    grpc_options: Optional[GrpcSessionOptions] = None,
+    interpreter: Optional[BaseInterpreter] = None
+) -> BaseInterpreter:
     if interpreter:
         return interpreter
     else:
         if grpc_options:
+            from nidaqmx._grpc_interpreter import GrpcStubInterpreter
             return GrpcStubInterpreter(grpc_options)
         else:
+            from nidaqmx._library_interpreter import LibraryInterpreter
             return LibraryInterpreter()

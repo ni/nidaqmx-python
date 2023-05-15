@@ -18,7 +18,8 @@ class PersistedScale:
         """
         Args:
             name (str): Specifies the name of the saved scale.
-            grpc_options (Optional[GrpcSessionOptions]): Specifies the gRPC session options.
+            grpc_options (Optional[:class:`~nidaqmx.GrpcSessionOptions`]): Specifies
+                the gRPC session options.
         """
         self._name = name
         self._interpreter = utils._select_interpreter(grpc_options)
@@ -96,7 +97,7 @@ class _PersistedScaleAlternateConstructor(PersistedScale):
         Args:
             name: Specifies the name of the PersistedScale.
             interpreter: Specifies the interpreter instance.
-            
+
         """
         self._name = name
         self._interpreter = interpreter
