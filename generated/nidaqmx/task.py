@@ -1007,8 +1007,6 @@ class Task:
 
         # Analog Input
         if write_chan_type == ChannelType.ANALOG_OUTPUT:
-            if number_of_samples_per_channel == 1  and number_of_channels == 1:
-                data = [data]
             data = numpy.asarray(data, dtype=numpy.float64)
             return self._interpreter.write_analog_f64(
                 self._handle, number_of_samples_per_channel, auto_start,
@@ -1039,9 +1037,6 @@ class Task:
                         'multiple digital lines per channel in a task.\n\n'
                         'Requested sample type: {}'.format(type(element)),
                         DAQmxErrors.UNKNOWN, task_name=self.name)
-                
-                if number_of_samples_per_channel == 1  and number_of_channels == 1:
-                    data = [data]
 
                 data = numpy.asarray(data, dtype=numpy.uint32)
                 return self._interpreter.write_digital_u32(
