@@ -107,7 +107,27 @@ class GrpcStubInterpreter(BaseInterpreter):
         except ValueError:
             error_message = f'\nError status: {value}'
         return error_code, error_message
+    
+    def _unregister_done_event_callbacks(self):
+        if self._done_event_thread is not None:
+            self._done_event_stream.cancel()
+            self._done_event_thread.join()
+            self._done_event_stream = None
+            self._done_event_thread = None
 
+    def _unregister_every_n_samples_event_callbacks(self):
+        if self._every_n_samples_event_thread is not None:
+            self._every_n_samples_event_stream.cancel()
+            self._every_n_samples_event_thread.join()
+            self._every_n_samples_event_stream = None
+            self._every_n_samples_event_thread = None
+
+    def _unregister_signal_event_callbacks(self):
+        if self._signal_event_thread is not None:
+            self._signal_event_stream.cancel()
+            self._signal_event_thread.join()
+            self._signal_event_stream = None
+            self._signal_event_thread = None
 
 % for func in functions:
 <%

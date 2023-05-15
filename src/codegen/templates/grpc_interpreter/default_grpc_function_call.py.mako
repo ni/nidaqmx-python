@@ -51,3 +51,8 @@
         _assign_numpy_array(${param}, response.${param})
         % endfor
         %endif
+        %if function.function_name == 'clear_task':
+        self._unregister_done_event_callbacks()
+        self._unregister_every_n_samples_event_callbacks()
+        self._unregister_siganl_event_callbacks()
+        %endif

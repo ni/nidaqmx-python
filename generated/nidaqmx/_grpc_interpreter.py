@@ -101,7 +101,27 @@ class GrpcStubInterpreter(BaseInterpreter):
         except ValueError:
             error_message = f'\nError status: {value}'
         return error_code, error_message
+    
+    def _unregister_done_event_callbacks(self):
+        if self._done_event_thread is not None:
+            self._done_event_stream.cancel()
+            self._done_event_thread.join()
+            self._done_event_stream = None
+            self._done_event_thread = None
 
+    def _unregister_every_n_samples_event_callbacks(self):
+        if self._every_n_samples_event_thread is not None:
+            self._every_n_samples_event_stream.cancel()
+            self._every_n_samples_event_thread.join()
+            self._every_n_samples_event_stream = None
+            self._every_n_samples_event_thread = None
+
+    def _unregister_signal_event_callbacks(self):
+        if self._signal_event_thread is not None:
+            self._signal_event_stream.cancel()
+            self._signal_event_thread.join()
+            self._signal_event_stream = None
+            self._signal_event_thread = None
 
     def add_cdaq_sync_connection(self, port_list):
         response = self._invoke(
@@ -360,6 +380,9 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.ClearTask,
             grpc_types.ClearTaskRequest(task=task))
+        self._unregister_done_event_callbacks()
+        self._unregister_every_n_samples_event_callbacks()
+        self._unregister_siganl_event_callbacks()
 
     def clear_teds(self, physical_channel):
         response = self._invoke(
@@ -2647,11 +2670,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._done_event_thread = threading.Thread(target=event_thread)
             self._done_event_thread.start()
         else:
-            if self._done_event_thread is not None:
-                self._done_event_stream.cancel()
-                self._done_event_thread.join()
-                self._done_event_stream = None
-                self._done_event_thread = None
+            self._unregister__done_event_callbacks()
 
     def register_every_n_samples_event(
             self, task, every_n_samples_event_type, n_samples, options,
@@ -2687,11 +2706,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._every_n_samples_event_thread = threading.Thread(target=event_thread)
             self._every_n_samples_event_thread.start()
         else:
-            if self._every_n_samples_event_thread is not None:
-                self._every_n_samples_event_stream.cancel()
-                self._every_n_samples_event_thread.join()
-                self._every_n_samples_event_stream = None
-                self._every_n_samples_event_thread = None
+            self._unregister__every_n_samples_event_callbacks()
 
     def register_signal_event(
             self, task, signal_id, options, callback_function, callback_data):
@@ -2721,11 +2736,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._signal_event_thread = threading.Thread(target=event_thread)
             self._signal_event_thread.start()
         else:
-            if self._signal_event_thread is not None:
-                self._signal_event_stream.cancel()
-                self._signal_event_thread.join()
-                self._signal_event_stream = None
-                self._signal_event_thread = None
+            self._unregister__signal_event_callbacks()
 
     def remove_cdaq_sync_connection(self, port_list):
         response = self._invoke(

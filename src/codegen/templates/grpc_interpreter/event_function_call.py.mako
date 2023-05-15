@@ -49,8 +49,4 @@
             self.${event_name}_thread = threading.Thread(target=event_thread)
             self.${event_name}_thread.start()
         else:
-            if self.${event_name}_thread is not None:
-                self.${event_name}_stream.cancel()
-                self.${event_name}_thread.join()
-                self.${event_name}_stream = None
-                self.${event_name}_thread = None
+            self._unregister_${event_name}_callbacks()
