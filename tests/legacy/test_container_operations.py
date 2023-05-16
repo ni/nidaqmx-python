@@ -83,7 +83,6 @@ class TestContainerOperations:
     @pytest.mark.parametrize("seed", [generate_random_seed()])
     def test_hash_operations(self, generate_task, any_x_series_device, seed):
         """Test for hash operation."""
-
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
