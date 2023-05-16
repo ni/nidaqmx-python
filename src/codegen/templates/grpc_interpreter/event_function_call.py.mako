@@ -13,16 +13,16 @@
     compound_parameter = get_compound_parameter(function.base_parameters)
     grpc_interpreter_params = get_grpc_interpreter_call_params(function, sorted_params)
     is_read_method = check_if_parameters_contain_read_array(function.base_parameters)
-    event_name = strip_string_prefix(function.function_name, "register")
+    event_name = strip_string_prefix(function.function_name, "register_")
 %>\
         assert options == 0
         if callback_function is not None:
-            if self.${event_name}_stream is not None:
+            if self._${event_name}_stream is not None:
                 raise errors.DaqError(
                     error_code = -1,
                     message = "Could not register the given callback function, a callback function already exists."
                 )
-            self.${event_name}_stream = self._invoke(
+            self._${event_name}_stream = self._invoke(
                 self._client.${snake_to_pascal(function.function_name)},
             %if (len(function.function_name) + len(grpc_interpreter_params)) > 68:
                 grpc_types.${snake_to_pascal(function.function_name)}Request(
@@ -33,20 +33,21 @@
 
             def event_thread():
                 try:
-                    for response in self.${event_name}_stream:
+                    for response in self._${event_name}_stream:
 <%
     function_call_args = get_callback_function_call_args(function.base_parameters)
 %>\
-                        callback_function(${', '.join(function_call_args) | wrap(36, 36)})
+                        callback_function(${', '.join(function_call_args) | wrap(28)})
                 except Exception as ex:
                     if (isinstance(ex, grpc.RpcError) or isinstance(ex, errors.RpcError)):
                         if ex.code() == grpc.StatusCode.CANCELLED:
                             return
                         raise
                     _logger.exception("An unexpected exception occurred when executing the ${event_name} callback function.")
-                    self.${event_name}_stream.cancel()
-                    self.${event_name}_stream = None
-            self.${event_name}_thread = threading.Thread(target=event_thread)
-            self.${event_name}_thread.start()
+                    self._${event_name}_stream.cancel()
+                    self._${event_name}_stream = None
+
+            self._${event_name}_thread = threading.Thread(target=event_thread)
+            self._${event_name}_thread.start()
         else:
             self._unregister_${event_name}_callbacks()
