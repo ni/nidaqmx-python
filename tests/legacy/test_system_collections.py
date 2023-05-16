@@ -16,10 +16,8 @@ class TestSystemCollections:
     These validate the system collections functionality in the NI-DAQmx Python API.
     """
 
-    def test_devices_collection_property(self):
+    def test_devices_collection_property(self, system):
         """Test to validate device collection property."""
-        system = nidaqmx.system.System.local()
-
         devices = system.devices
         assert isinstance(devices, DeviceCollection)
         assert isinstance(devices, collections.abc.Sequence)
@@ -27,10 +25,8 @@ class TestSystemCollections:
         assert isinstance(devices[0], nidaqmx.system.Device)
         assert isinstance(devices[0].is_simulated, bool)
 
-    def test_persisted_scale_collection_property(self):
+    def test_persisted_scale_collection_property(self, system):
         """Test to validate persisted scale property."""
-        system = nidaqmx.system.System.local()
-
         scales = system.scales
         assert isinstance(scales, PersistedScaleCollection)
         assert isinstance(scales, collections.abc.Sequence)
@@ -41,10 +37,8 @@ class TestSystemCollections:
             # Test specific property on object.
             assert isinstance(scales[0].author, str)
 
-    def test_persisted_task_collection_property(self):
+    def test_persisted_task_collection_property(self, system):
         """Test to validate persisted task collection property."""
-        system = nidaqmx.system.System.local()
-
         tasks = system.tasks
         assert isinstance(tasks, PersistedTaskCollection)
         assert isinstance(tasks, collections.abc.Sequence)
@@ -55,10 +49,8 @@ class TestSystemCollections:
             # Test specific property on object.
             assert isinstance(tasks[0].author, str)
 
-    def test_persisted_channel_collection_property(self):
+    def test_persisted_channel_collection_property(self, system):
         """Test to validate persisted channel collection property."""
-        system = nidaqmx.system.System.local()
-
         global_channels = system.global_channels
         assert isinstance(global_channels, PersistedChannelCollection)
         assert isinstance(global_channels, collections.abc.Sequence)
