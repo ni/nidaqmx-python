@@ -1,0 +1,90 @@
+import threading
+import time
+from typing import Generic, List, NamedTuple, TypeVar, Union
+
+
+class DoneEvent(NamedTuple):
+    """Represents a Done event."""
+
+    status: int
+
+
+class EveryNSamplesEvent(NamedTuple):
+    """Represents an Every N Samples event."""
+
+    event_type: int
+    number_of_samples: int
+
+
+class SignalEvent(NamedTuple):
+    """Represents a Signal event."""
+
+    signal_type: int
+
+
+TEvent = TypeVar("TEvent", bound=Union[DoneEvent, EveryNSamplesEvent, SignalEvent])
+
+
+class BaseEventObserver(Generic[TEvent]):
+    """Base class for event observers."""
+
+    def __init__(self):
+        """Initializes the BaseEventObserver."""
+        self._lock = threading.Lock()
+        self._event_semaphore = threading.Semaphore(value=0)
+        self._events: List[TEvent] = []
+
+    @property
+    def events(self) -> List[TEvent]:
+        """Returns the list of observed events."""
+        with self._lock:
+            return self._events[:]
+
+    def wait_for_events(self, count=1, timeout=10.0) -> None:
+        """Waits for the specified number of events."""
+        timeout_time = time.monotonic() + timeout
+        for _ in range(count):
+            remaining_time = max(0.0, timeout_time - time.monotonic())
+            if not self._event_semaphore.acquire(timeout=remaining_time):
+                raise TimeoutError("Event observer did not observe the expected number of events.")
+
+
+class DoneEventObserver(BaseEventObserver[DoneEvent]):
+    """An observer for Done events."""
+
+    def handle_done_event(self, task_handle: object, status: int, callback_data: object) -> int:
+        """Handles a Done event."""
+        with self._lock:
+            self._events.append(DoneEvent(status))
+            self._event_semaphore.release()
+        return 0
+
+
+class EveryNSamplesEventObserver(BaseEventObserver[EveryNSamplesEvent]):
+    """An observer for Every N Samples events."""
+
+    def handle_every_n_samples_event(
+        self,
+        task_handle: object,
+        every_n_samples_event_type: int,
+        number_of_samples: int,
+        callback_data: object,
+    ) -> int:
+        """Handles an Every N Samples event."""
+        with self._lock:
+            self._events.append(EveryNSamplesEvent(every_n_samples_event_type, number_of_samples))
+            self._event_semaphore.release()
+        return 0
+
+
+class SignalEventObserver(BaseEventObserver[SignalEvent]):
+    """An observer for Signal events."""
+
+    def handle_signal_event(
+        self, task_handle: object, signal_type: int, callback_data: object
+    ) -> int:
+        """Handles a Signal event."""
+        with self._lock:
+            self._events.append(SignalEvent(signal_type))
+            self._event_semaphore.release()
+        return 0
