@@ -477,7 +477,6 @@ class Task:
         else:
             array_shape = number_of_samples_per_channel
 
-        # Analog Input
         if read_chan_type == ChannelType.ANALOG_INPUT:
             has_power_chan = False
             for chan in channels_to_read:
@@ -528,7 +527,6 @@ class Task:
                     self._handle, number_of_samples_per_channel, timeout,
                     FillMode.GROUP_BY_CHANNEL.value, data)
 
-        # Digital Input or Digital Output
         elif (read_chan_type == ChannelType.DIGITAL_INPUT or
                 read_chan_type == ChannelType.DIGITAL_OUTPUT):
             if self.in_stream.di_num_booleans_per_chan == 1:
@@ -542,7 +540,6 @@ class Task:
                     self._handle, number_of_samples_per_channel, timeout,
                     FillMode.GROUP_BY_CHANNEL.value, data)
 
-        # Counter Input
         elif read_chan_type == ChannelType.COUNTER_INPUT:
             meas_type = channels_to_read.ci_meas_type
 
@@ -1005,14 +1002,12 @@ class Task:
             else:
                 auto_start = True
 
-        # Analog Input
         if write_chan_type == ChannelType.ANALOG_OUTPUT:
             data = numpy.asarray(data, dtype=numpy.float64)
             return self._interpreter.write_analog_f64(
                 self._handle, number_of_samples_per_channel, auto_start,
                 timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
-        # Digital Input
         elif write_chan_type == ChannelType.DIGITAL_OUTPUT:
             if self.out_stream.do_num_booleans_per_chan == 1:
                 if (not isinstance(element, bool) and
@@ -1043,7 +1038,6 @@ class Task:
                     self._handle, number_of_samples_per_channel,
                     auto_start, timeout, FillMode.GROUP_BY_CHANNEL.value, data)
 
-        # Counter Input
         elif write_chan_type == ChannelType.COUNTER_OUTPUT:
             output_type = channels_to_write.co_output_type
 
