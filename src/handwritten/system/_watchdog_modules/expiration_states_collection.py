@@ -18,7 +18,7 @@ class ExpirationStatesCollection:
         return False
 
     def __hash__(self):
-        return hash(self._handle.value)
+        return self._interpreter.hash_task_handle(self._handle)
 
     def __ne__(self, other):
         return not self.__eq__(other)

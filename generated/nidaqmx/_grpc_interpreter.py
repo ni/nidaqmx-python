@@ -3418,6 +3418,15 @@ class GrpcStubInterpreter(BaseInterpreter):
                 physical_channel=physical_channel, file_path=file_path,
                 basic_teds_options_raw=basic_teds_options))
 
+
+    def hash_task_sequence(self, task_sequence):
+        if isinstance(task_sequence, tuple):
+            task_sequence = list(task_sequence)
+            task_sequence[0] = task_sequence[0].name
+            task_sequence = tuple(task_sequence)
+            return hash(task_sequence)
+        return hash(task_sequence.name)
+
 def _assign_numpy_array(numpy_array, grpc_array):
     """ 
     Assigns grpc array to numpy array maintaining the original shape.

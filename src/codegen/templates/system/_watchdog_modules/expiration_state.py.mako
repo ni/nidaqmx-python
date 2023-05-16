@@ -28,7 +28,7 @@ class ExpirationState:
         return False
 
     def __hash__(self):
-        return hash((self._handle.value, self._physical_channel))
+        return self._interpreter.hash_task_sequence((self._handle, self._physical_channel))
 
     def __ne__(self, other):
         return not self.__eq__(other)
