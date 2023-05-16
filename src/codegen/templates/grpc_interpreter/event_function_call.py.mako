@@ -39,10 +39,8 @@
 %>\
                         callback_function(${', '.join(function_call_args) | wrap(28)})
                 except Exception as ex:
-                    if (isinstance(ex, grpc.RpcError) or isinstance(ex, errors.RpcError)):
-                        if ex.code() == grpc.StatusCode.CANCELLED:
-                            return
-                        raise
+                    if _is_cancelled(ex):
+                        return
                     _logger.exception("An unexpected exception occurred when executing the ${event_name} callback function.")
                     self._${event_name}_stream.cancel()
                     self._${event_name}_stream = None

@@ -2660,10 +2660,8 @@ class GrpcStubInterpreter(BaseInterpreter):
                     for response in self._done_event_stream:
                         callback_function(task, response.status, callback_data)
                 except Exception as ex:
-                    if (isinstance(ex, grpc.RpcError) or isinstance(ex, errors.RpcError)):
-                        if ex.code() == grpc.StatusCode.CANCELLED:
-                            return
-                        raise
+                    if _is_cancelled(ex):
+                        return
                     _logger.exception("An unexpected exception occurred when executing the done_event callback function.")
                     self._done_event_stream.cancel()
                     self._done_event_stream = None
@@ -2696,10 +2694,8 @@ class GrpcStubInterpreter(BaseInterpreter):
                         callback_function(task, response.every_n_samples_event_type_raw,
                             response.n_samples, callback_data)
                 except Exception as ex:
-                    if (isinstance(ex, grpc.RpcError) or isinstance(ex, errors.RpcError)):
-                        if ex.code() == grpc.StatusCode.CANCELLED:
-                            return
-                        raise
+                    if _is_cancelled(ex):
+                        return
                     _logger.exception("An unexpected exception occurred when executing the every_n_samples_event callback function.")
                     self._every_n_samples_event_stream.cancel()
                     self._every_n_samples_event_stream = None
@@ -2727,10 +2723,8 @@ class GrpcStubInterpreter(BaseInterpreter):
                     for response in self._signal_event_stream:
                         callback_function(task, response.signal_id, callback_data)
                 except Exception as ex:
-                    if (isinstance(ex, grpc.RpcError) or isinstance(ex, errors.RpcError)):
-                        if ex.code() == grpc.StatusCode.CANCELLED:
-                            return
-                        raise
+                    if _is_cancelled(ex):
+                        return
                     _logger.exception("An unexpected exception occurred when executing the signal_event callback function.")
                     self._signal_event_stream.cancel()
                     self._signal_event_stream = None
@@ -3550,3 +3544,14 @@ def _validate_array_dtype(numpy_array, expected_numpy_array_dtype):
     """Raises TypeError if array type doesn't match with expected numpy.dtype"""
     if expected_numpy_array_dtype != numpy.generic and numpy_array.dtype != expected_numpy_array_dtype:
         raise TypeError(f"array must have data type {expected_numpy_array_dtype}")
+
+def _is_cancelled(ex: Exception):
+    """Returns True if the given exception is a cancelled RPC exception."""
+    if(isinstance(ex, grpc.RpcError)):
+        if ex.code() == grpc.StatusCode.CANCELLED:
+            return True
+    elif (isinstance(ex, errors.RpcError)):
+        if ex.rpc_code == grpc.StatusCode.CANCELLED:
+            return True
+    
+    return False

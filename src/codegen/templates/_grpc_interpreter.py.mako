@@ -167,3 +167,14 @@ def _validate_array_dtype(numpy_array, expected_numpy_array_dtype):
     """Raises TypeError if array type doesn't match with expected numpy.dtype"""
     if expected_numpy_array_dtype != numpy.generic and numpy_array.dtype != expected_numpy_array_dtype:
         raise TypeError(f"array must have data type {expected_numpy_array_dtype}")
+
+def _is_cancelled(ex: Exception):
+    """Returns True if the given exception is a cancelled RPC exception."""
+    if(isinstance(ex, grpc.RpcError)):
+        if ex.code() == grpc.StatusCode.CANCELLED:
+            return True
+    elif (isinstance(ex, errors.RpcError)):
+        if ex.rpc_code == grpc.StatusCode.CANCELLED:
+            return True
+    
+    return False
