@@ -2658,7 +2658,8 @@ class GrpcStubInterpreter(BaseInterpreter):
             def event_thread():
                 try:
                     for response in self._done_event_stream:
-                        callback_function(task, response.status, callback_data)
+                        callback_function(
+                            task, response.status, callback_data)
                 except Exception as ex:
                     if _is_cancelled(ex):
                         return
@@ -2691,7 +2692,8 @@ class GrpcStubInterpreter(BaseInterpreter):
             def event_thread():
                 try:
                     for response in self._every_n_samples_event_stream:
-                        callback_function(task, response.every_n_samples_event_type_raw,
+                        callback_function(
+                            task, response.every_n_samples_event_type_raw,
                             response.n_samples, callback_data)
                 except Exception as ex:
                     if _is_cancelled(ex):
@@ -2721,7 +2723,8 @@ class GrpcStubInterpreter(BaseInterpreter):
             def event_thread():
                 try:
                     for response in self._signal_event_stream:
-                        callback_function(task, response.signal_id, callback_data)
+                        callback_function(
+                            task, response.signal_id, callback_data)
                 except Exception as ex:
                     if _is_cancelled(ex):
                         return

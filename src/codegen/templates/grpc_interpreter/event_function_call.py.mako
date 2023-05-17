@@ -37,7 +37,8 @@
 <%
     function_call_args = get_callback_function_call_args(function.base_parameters)
 %>\
-                        callback_function(${', '.join(function_call_args) | wrap(28)})
+                        callback_function(
+                            ${', '.join(function_call_args) | wrap(28)})
                 except Exception as ex:
                     if _is_cancelled(ex):
                         return
