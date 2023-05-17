@@ -384,7 +384,27 @@ def get_c_function_call_template(func):
 
 def get_grpc_function_call_template(func):
     """Gets the template to use for generating the logic of calling the grpc functions."""
-    return "/default_grpc_function_call.py.mako"
+    if func.stream_response:
+        return "/event_function_call.py.mako"
+    else:
+        return "/default_grpc_function_call.py.mako"
+
+
+def get_callback_function_call_args(func_params):
+    """Gets the parameters used in the callback function call."""
+    callback_func_param = next(p for p in func_params if p.parameter_name == "callback_function")
+    callback_func_args = []
+    for param in callback_func_param.callback_params:
+        name = camel_to_snake_case(param["name"])
+        if name == "task":
+            callback_func_args.append(f"{name}")
+        elif "enum" in param:
+            callback_func_args.append(f"response.{name}_raw")
+        else:
+            callback_func_args.append(f"response.{name}")
+
+    callback_func_args.append("callback_data")
+    return callback_func_args
 
 
 def get_callback_param_data_types(func_params):
