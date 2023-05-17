@@ -204,8 +204,8 @@ ${property_template.script_property(attribute)}\
             self._handle, num_samps_per_chan,
             self.timeout, numpy_array)
 
-        if samples_read != number_of_samples:
-            return numpy_array[:samples_read]
+        if number_of_channels * samples_read != number_of_samples:
+            return numpy_array[:number_of_channels * samples_read]
         return numpy_array
 
     def readall(self):
