@@ -30,9 +30,9 @@ def test___analog_single_channel_reader___read_many_sample___returns_valid_sampl
     ai_single_channel_task: nidaqmx.Task,
 ):
     reader = AnalogSingleChannelReader(ai_single_channel_task.in_stream)
-
     samples_to_read = 10
     data = numpy.full(samples_to_read, math.inf, dtype=numpy.float64)
+
     samples_read = reader.read_many_sample(data, samples_to_read)
 
     assert samples_read == samples_to_read
@@ -43,9 +43,9 @@ def test___analog_single_channel_reader___read_many_sample_with_wrong_dtype___ra
     ai_single_channel_task: nidaqmx.Task,
 ):
     reader = AnalogSingleChannelReader(ai_single_channel_task.in_stream)
-
     samples_to_read = 10
     data = numpy.full(samples_to_read, math.inf, dtype=numpy.float32)
+
     with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
         _ = reader.read_many_sample(data, samples_to_read)
 
@@ -58,8 +58,8 @@ def test___analog_multi_channel_reader___read_many_sample___returns_valid_sample
     reader = AnalogMultiChannelReader(ai_multi_channel_task.in_stream)
     num_channels = ai_multi_channel_task.number_of_channels
     samples_to_read = 10
-
     data = numpy.full((num_channels, samples_to_read), math.inf, dtype=numpy.float64)
+
     samples_read = reader.read_many_sample(data, samples_to_read)
 
     assert samples_read == samples_to_read
@@ -72,8 +72,8 @@ def test___analog_multi_channel_reader___read_many_sample_with_wrong_dtype___rai
     reader = AnalogMultiChannelReader(ai_multi_channel_task.in_stream)
     num_channels = ai_multi_channel_task.number_of_channels
     samples_to_read = 10
-
     data = numpy.full((num_channels, samples_to_read), math.inf, dtype=numpy.float32)
+
     with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
         _ = reader.read_many_sample(data, samples_to_read)
 

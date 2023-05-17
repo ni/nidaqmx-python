@@ -28,9 +28,9 @@ def test___analog_single_channel_writer___write_many_sample___returns_samples_wr
     ao_single_channel_task: nidaqmx.Task,
 ):
     writer = AnalogSingleChannelWriter(ao_single_channel_task.in_stream, auto_start=True)
-
     samples_to_write = 10
     data = numpy.full(samples_to_write, 1.234, dtype=numpy.float64)
+
     samples_written = writer.write_many_sample(data)
 
     assert samples_written == samples_to_write
@@ -40,9 +40,9 @@ def test___analog_single_channel_writer___write_many_sample_with_wrong_dtype___r
     ao_single_channel_task: nidaqmx.Task,
 ):
     writer = AnalogSingleChannelWriter(ao_single_channel_task.in_stream, auto_start=True)
-
     samples_to_write = 10
     data = numpy.full(samples_to_write, 1.234, dtype=numpy.float32)
+
     with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
         _ = writer.write_many_sample(data)
 
@@ -55,8 +55,8 @@ def test___analog_multi_channel_writer___write_many_sample___returns_samples_wri
     writer = AnalogMultiChannelWriter(ao_multi_channel_task.in_stream, auto_start=True)
     num_channels = ao_multi_channel_task.number_of_channels
     samples_to_write = 10
-
     data = numpy.full((num_channels, samples_to_write), 1.234, dtype=numpy.float64)
+
     samples_written = writer.write_many_sample(data)
 
     assert samples_written == samples_to_write
@@ -68,8 +68,8 @@ def test___analog_multi_channel_writer___write_many_sample_with_wrong_dtype___ra
     writer = AnalogMultiChannelWriter(ao_multi_channel_task.in_stream, auto_start=True)
     num_channels = ao_multi_channel_task.number_of_channels
     samples_to_write = 10
-
     data = numpy.full((num_channels, samples_to_write), 1.234, dtype=numpy.float32)
+
     with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
         _ = writer.write_many_sample(data)
 
