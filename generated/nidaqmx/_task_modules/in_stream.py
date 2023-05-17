@@ -1190,7 +1190,7 @@ class InStream:
 
         number_of_samples_per_channel, _ = divmod(
             numpy_array.nbytes, (
-                number_of_channels * channels_to_read.ai_raw_samp_size / 8))
+                number_of_channels * channels_to_read.ai_raw_samp_size // 8))
 
         _, samples_read, _ = self._interpreter.read_raw(
             self._handle, number_of_samples_per_channel,
