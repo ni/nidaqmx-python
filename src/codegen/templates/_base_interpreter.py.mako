@@ -34,5 +34,5 @@ class BaseInterpreter(abc.ABC):
 % endfor
     
     @abc.abstractmethod
-    def hash_task_sequence(self, task_handle):
+    def hash_task_handle(self, task_handle):
         raise NotImplementedError

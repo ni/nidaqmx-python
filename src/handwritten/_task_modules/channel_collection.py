@@ -74,7 +74,7 @@ class ChannelCollection(Sequence):
                 'Index used: {}'.format(index), DAQmxErrors.UNKNOWN)
 
     def __hash__(self):
-        return self._interpreter.hash_task_sequence(self._handle)
+        return self._interpreter.hash_task_handle(self._handle)
 
     def __iter__(self):
         for channel_name in self.channel_names:

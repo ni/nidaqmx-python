@@ -1837,5 +1837,5 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
     
     @abc.abstractmethod
-    def hash_task_sequence(self, task_handle):
+    def hash_task_handle(self, task_handle):
         raise NotImplementedError
