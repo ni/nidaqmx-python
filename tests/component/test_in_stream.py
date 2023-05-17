@@ -1,7 +1,10 @@
+import time
+
 import numpy
 import pytest
 
 import nidaqmx
+from nidaqmx.constants import AcquisitionType
 
 # With a simulated X Series, setting ai_max/min to +/-2.5 V coerces the hardware range
 # to +/-5 V and generates a noisy sine wave with range +/-2.5 V (raw: about +/-16383).
@@ -50,6 +53,40 @@ def test___ai_task___read___returns_valid_samples_shape_and_dtype(
     data = ai_sine_task.in_stream.read(samples_to_read)
 
     assert data.shape == (ai_sine_task.number_of_channels * samples_to_read,)
+    assert data.dtype == numpy.int16
+    assert (SINE_RAW_MIN <= data).all() and (data <= SINE_RAW_MAX).all()
+
+
+def test___ai_finite_task___readall___returns_valid_samples_shape_and_dtype(
+    ai_sine_task: nidaqmx.Task,
+) -> None:
+    ai_sine_task.timing.cfg_samp_clk_timing(
+        rate=1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=100
+    )
+
+    data = ai_sine_task.in_stream.readall()
+
+    assert data.shape == (ai_sine_task.number_of_channels * 100,)
+    assert data.dtype == numpy.int16
+    assert (SINE_RAW_MIN <= data).all() and (data <= SINE_RAW_MAX).all()
+
+
+def test___ai_continuous_task___readall___returns_valid_samples_shape_and_dtype(
+    ai_sine_task: nidaqmx.Task,
+) -> None:
+    ai_sine_task.timing.cfg_samp_clk_timing(
+        rate=1000.0, sample_mode=AcquisitionType.CONTINUOUS, samps_per_chan=1000
+    )
+    ai_sine_task.start()
+    # Wait until there are some samples to read.
+    min_samples_per_channel = 100
+    while ai_sine_task.in_stream.avail_samp_per_chan < min_samples_per_channel:
+        time.sleep(10e-3)
+
+    data = ai_sine_task.in_stream.readall()
+
+    assert data.shape[0] >= ai_sine_task.number_of_channels * min_samples_per_channel
+    assert data.shape[0] % ai_sine_task.number_of_channels == 0
     assert data.dtype == numpy.int16
     assert (SINE_RAW_MIN <= data).all() and (data <= SINE_RAW_MAX).all()
 
