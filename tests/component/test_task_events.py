@@ -1,7 +1,7 @@
 import pytest
 
 import nidaqmx
-from nidaqmx.constants import EveryNSamplesEventType, Signal
+from nidaqmx.constants import AcquisitionType, EveryNSamplesEventType, Signal
 from nidaqmx.error_codes import DAQmxErrors
 from tests._event_utils import (
     DoneEventObserver,
@@ -35,7 +35,9 @@ def test___done_event_registered___run_finite_acquisition___callback_invoked_onc
 ) -> None:
     event_observer = DoneEventObserver()
     ai_task.register_done_event(event_observer.handle_done_event)
-    ai_task.timing.cfg_samp_clk_timing(rate=10000.0, samps_per_chan=1000)
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
 
     ai_task.start()
 
@@ -53,7 +55,9 @@ def test___every_n_samples_event_registered___run_finite_acquisition___callback_
     ai_task.register_every_n_samples_acquired_into_buffer_event(
         100, event_observer.handle_every_n_samples_event
     )
-    ai_task.timing.cfg_samp_clk_timing(rate=10000.0, samps_per_chan=1000)
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
 
     ai_task.start()
 
@@ -74,7 +78,9 @@ def test___signal_event_registered___run_finite_acquisition___callback_invoked_n
     ai_task = ai_task_with_real_device
     event_observer = SignalEventObserver()
     ai_task.register_signal_event(Signal.SAMPLE_COMPLETE, event_observer.handle_signal_event)
-    ai_task.timing.cfg_samp_clk_timing(rate=10.0, samps_per_chan=10)
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=10
+    )
 
     ai_task.start()
 
@@ -91,7 +97,9 @@ def test___done_event_unregistered___run_finite_acquisition___callback_not_invok
     event_observer = DoneEventObserver()
     ai_task.register_done_event(event_observer.handle_done_event)
     ai_task.register_done_event(None)
-    ai_task.timing.cfg_samp_clk_timing(rate=10000.0, samps_per_chan=1000)
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
 
     ai_task.start()
     ai_task.wait_until_done()
@@ -109,7 +117,9 @@ def test___every_n_samples_event_unregistered___run_finite_acquisition___callbac
         100, event_observer.handle_every_n_samples_event
     )
     ai_task.register_every_n_samples_acquired_into_buffer_event(100, None)
-    ai_task.timing.cfg_samp_clk_timing(rate=10000.0, samps_per_chan=1000)
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
 
     ai_task.start()
     ai_task.wait_until_done()
@@ -126,7 +136,9 @@ def test___signal_event_unregistered___run_finite_acquisition___callback_not_inv
     event_observer = SignalEventObserver()
     ai_task.register_signal_event(Signal.SAMPLE_COMPLETE, event_observer.handle_signal_event)
     ai_task.register_signal_event(Signal.SAMPLE_COMPLETE, None)
-    ai_task.timing.cfg_samp_clk_timing(rate=10.0, samps_per_chan=10)
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=10
+    )
 
     ai_task.start()
     ai_task.wait_until_done()
@@ -145,7 +157,9 @@ def test___done_and_every_n_samples_events_registered___run_finite_acquisition__
     ai_task.register_every_n_samples_acquired_into_buffer_event(
         100, every_n_samples_event_observer.handle_every_n_samples_event
     )
-    ai_task.timing.cfg_samp_clk_timing(rate=10000.0, samps_per_chan=1000)
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
 
     ai_task.start()
 
@@ -166,7 +180,9 @@ def test___done_and_every_n_samples_events_registered___run_multiple_finite_acqu
     ai_task.register_every_n_samples_acquired_into_buffer_event(
         100, every_n_samples_event_observer.handle_every_n_samples_event
     )
-    ai_task.timing.cfg_samp_clk_timing(rate=10000.0, samps_per_chan=1000)
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
 
     for _ in range(num_acquisitions):
         ai_task.start()
@@ -190,7 +206,9 @@ def test___ai_task____run_multiple_finite_acquisitions_with_varying_every_n_samp
     every_n_samples_event_observers = [
         EveryNSamplesEventObserver() for _ in range(num_acquisitions)
     ]
-    ai_task.timing.cfg_samp_clk_timing(rate=10000.0, samps_per_chan=1000)
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
     ai_task.register_done_event(done_event_observer.handle_done_event)
 
     for i in range(3):
@@ -210,13 +228,17 @@ def test___ai_task____run_multiple_finite_acquisitions_with_varying_every_n_samp
     ] == every_n_samples_event_counts
 
 
-@pytest.mark.xfail(reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller")
+@pytest.mark.xfail(
+    reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller"
+)
 def test___done_event_registered___register_done_event___already_registered_error_raised(
     ai_task: nidaqmx.Task,
 ) -> None:
     event_observer = DoneEventObserver()
     ai_task.register_done_event(event_observer.handle_done_event)
-    ai_task.timing.cfg_samp_clk_timing(rate=10000.0, samps_per_chan=1000)
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
 
     with pytest.raises(nidaqmx.DaqError) as exc_info:
         ai_task.register_done_event(event_observer.handle_done_event)
@@ -224,7 +246,9 @@ def test___done_event_registered___register_done_event___already_registered_erro
     assert exc_info.value.error_code == DAQmxErrors.DONE_EVENT_ALREADY_REGISTERED
 
 
-@pytest.mark.xfail(reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller")
+@pytest.mark.xfail(
+    reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller"
+)
 def test___every_n_samples_acquired_into_buffer_event_registered___register_every_n_samples_acquired_into_buffer_event___already_registered_error_raised(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -232,7 +256,9 @@ def test___every_n_samples_acquired_into_buffer_event_registered___register_ever
     ai_task.register_every_n_samples_acquired_into_buffer_event(
         100, event_observer.handle_every_n_samples_event
     )
-    ai_task.timing.cfg_samp_clk_timing(rate=10000.0, samps_per_chan=1000)
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
 
     with pytest.raises(nidaqmx.DaqError) as exc_info:
         ai_task.register_every_n_samples_acquired_into_buffer_event(
@@ -245,7 +271,9 @@ def test___every_n_samples_acquired_into_buffer_event_registered___register_ever
     )
 
 
-@pytest.mark.xfail(reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller")
+@pytest.mark.xfail(
+    reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller"
+)
 def test___every_n_samples_transferred_from_buffer_event_registered___register_every_n_samples_transferred_from_buffer_event___already_registered_error_raised(
     ao_task: nidaqmx.Task,
 ) -> None:
@@ -253,7 +281,9 @@ def test___every_n_samples_transferred_from_buffer_event_registered___register_e
     ao_task.register_every_n_samples_transferred_from_buffer_event(
         100, event_observer.handle_every_n_samples_event
     )
-    ao_task.timing.cfg_samp_clk_timing(rate=10000.0, samps_per_chan=1000)
+    ao_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
 
     with pytest.raises(nidaqmx.DaqError) as exc_info:
         ao_task.register_every_n_samples_transferred_from_buffer_event(
@@ -266,13 +296,17 @@ def test___every_n_samples_transferred_from_buffer_event_registered___register_e
     )
 
 
-@pytest.mark.xfail(reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller")
+@pytest.mark.xfail(
+    reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller"
+)
 def test___signal_event_registered___register_signal_event___already_registered_error_raised(
     ai_task: nidaqmx.Task,
 ) -> None:
     event_observer = SignalEventObserver()
     ai_task.register_signal_event(Signal.SAMPLE_COMPLETE, event_observer.handle_signal_event)
-    ai_task.timing.cfg_samp_clk_timing(rate=10000.0, samps_per_chan=1000)
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
 
     with pytest.raises(nidaqmx.DaqError) as exc_info:
         ai_task.register_signal_event(Signal.SAMPLE_COMPLETE, event_observer.handle_signal_event)
@@ -280,12 +314,16 @@ def test___signal_event_registered___register_signal_event___already_registered_
     assert exc_info.value.error_code == DAQmxErrors.SIGNAL_EVENT_ALREADY_REGISTERED
 
 
-@pytest.mark.xfail(reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller")
+@pytest.mark.xfail(
+    reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller"
+)
 def test___ai_task___register_wrong_every_n_samples_event___not_supported_by_device_error_raised(
     ai_task: nidaqmx.Task,
 ) -> None:
     event_observer = EveryNSamplesEventObserver()
-    ai_task.timing.cfg_samp_clk_timing(rate=10000.0, samps_per_chan=1000)
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
 
     with pytest.raises(nidaqmx.DaqError) as exc_info:
         ai_task.register_every_n_samples_transferred_from_buffer_event(
@@ -298,12 +336,16 @@ def test___ai_task___register_wrong_every_n_samples_event___not_supported_by_dev
     )
 
 
-@pytest.mark.xfail(reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller")
+@pytest.mark.xfail(
+    reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller"
+)
 def test___ao_task___register_wrong_every_n_samples_event___not_supported_by_device_error_raised(
     ao_task: nidaqmx.Task,
 ) -> None:
     event_observer = EveryNSamplesEventObserver()
-    ao_task.timing.cfg_samp_clk_timing(rate=10000.0, samps_per_chan=1000)
+    ao_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
 
     with pytest.raises(nidaqmx.DaqError) as exc_info:
         ao_task.register_every_n_samples_acquired_into_buffer_event(
