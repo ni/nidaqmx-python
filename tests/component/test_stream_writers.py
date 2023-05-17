@@ -49,9 +49,6 @@ def test___analog_single_channel_writer___write_many_sample_with_wrong_dtype___r
     assert "float64" in exc_info.value.args[0]
 
 
-@pytest.mark.xfail(
-    reason="AB#2393319: GrpcStubInterpreter writes empty array with AnalogMultiChannelWriter"
-)
 def test___analog_multi_channel_writer___write_many_sample___returns_samples_written(
     ao_multi_channel_task: nidaqmx.Task,
 ):
@@ -65,9 +62,6 @@ def test___analog_multi_channel_writer___write_many_sample___returns_samples_wri
     assert samples_written == samples_to_write
 
 
-@pytest.mark.xfail(
-    reason="AB#2393319: GrpcStubInterpreter writes empty array with AnalogMultiChannelWriter"
-)
 def test___analog_multi_channel_writer___write_many_sample_with_wrong_dtype___raises_error_with_correct_dtype(
     ao_multi_channel_task: nidaqmx.Task,
 ):
