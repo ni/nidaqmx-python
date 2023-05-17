@@ -271,9 +271,14 @@ def get_grpc_interpreter_call_params(func, params):
             if is_read_function and "read_array" in name:
                 if has_read_array_parameter:
                     continue
-                grpc_params.append(
-                    f"{camel_to_snake_case(param.size.value)}={param.parameter_name}.size"
-                )
+                if is_read_bytes_param(param):
+                    grpc_params.append(
+                        f"{camel_to_snake_case(param.size.value)}={param.parameter_name}.nbytes"
+                    )
+                else:
+                    grpc_params.append(
+                        f"{camel_to_snake_case(param.size.value)}={param.parameter_name}.size"
+                    )
                 has_read_array_parameter = True
             elif param.is_grpc_enum or (param.is_enum and not param.is_list):
                 grpc_params.append(f"{name}_raw={param.parameter_name}")
@@ -547,6 +552,18 @@ def is_numpy_array_datatype(param):
     if param.ctypes_data_type and param.ctypes_data_type.startswith("numpy."):
         return True
     return False
+
+
+def is_read_bytes_param(param):
+    """Returns true if parameter reads bytes."""
+    if param.is_list and param.ctypes_data_type in ("numpy.bool", "numpy.uint8"):
+        return True
+    # This is a special case for 'ReadRaw' function.
+    # since its metadata is incorrect in daqmxAPISharp.json file.
+    elif param.parameter_name == "read_array" and param.ctypes_data_type == "numpy.generic":
+        return True
+    else:
+        return False
 
 
 def is_write_bytes_param(param):

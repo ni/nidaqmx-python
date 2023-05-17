@@ -157,10 +157,11 @@ def _assign_numpy_array(numpy_array, grpc_array):
     the numpy array is assigned to a 1D array of the grpc arrray.
     """
     grpc_array_size = len(grpc_array)
-    assert numpy_array.size >= grpc_array_size
     if isinstance(grpc_array, bytes):
-        numpy_array.flat[:grpc_array_size] = numpy.frombuffer(grpc_array, dtype=numpy.uint8)
+        assert numpy_array.nbytes >= grpc_array_size
+        numpy_array.flat[:grpc_array_size] = numpy.frombuffer(grpc_array, dtype=numpy_array.dtype)
     else:
+        assert numpy_array.size >= grpc_array_size
         numpy_array.flat[:grpc_array_size] = grpc_array
 
 def _validate_array_dtype(numpy_array, expected_numpy_array_dtype):

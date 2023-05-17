@@ -2550,7 +2550,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.ReadDigitalLinesRequest(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
-                array_size_in_bytes=read_array.size))
+                array_size_in_bytes=read_array.nbytes))
         _assign_numpy_array(read_array, response.read_array)
         return read_array, response.samps_per_chan_read, response.num_bytes_per_samp
 
@@ -2592,7 +2592,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.ReadDigitalU8Request(
                 task=task, num_samps_per_chan=num_samps_per_chan,
                 timeout=timeout, fill_mode_raw=fill_mode,
-                array_size_in_samps=read_array.size))
+                array_size_in_samps=read_array.nbytes))
         _assign_numpy_array(read_array, response.read_array)
         return read_array, response.samps_per_chan_read
 
@@ -2638,7 +2638,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.ReadRaw,
             grpc_types.ReadRawRequest(
                 task=task, num_samps_per_chan=num_samps_per_chan,
-                timeout=timeout, array_size_in_bytes=read_array.size))
+                timeout=timeout, array_size_in_bytes=read_array.nbytes))
         _assign_numpy_array(read_array, response.read_array)
         return read_array, response.samps_read, response.num_bytes_per_samp
 
@@ -3539,10 +3539,11 @@ def _assign_numpy_array(numpy_array, grpc_array):
     the numpy array is assigned to a 1D array of the grpc arrray.
     """
     grpc_array_size = len(grpc_array)
-    assert numpy_array.size >= grpc_array_size
     if isinstance(grpc_array, bytes):
-        numpy_array.flat[:grpc_array_size] = numpy.frombuffer(grpc_array, dtype=numpy.uint8)
+        assert numpy_array.nbytes >= grpc_array_size
+        numpy_array.flat[:grpc_array_size] = numpy.frombuffer(grpc_array, dtype=numpy_array.dtype)
     else:
+        assert numpy_array.size >= grpc_array_size
         numpy_array.flat[:grpc_array_size] = grpc_array
 
 def _validate_array_dtype(numpy_array, expected_numpy_array_dtype):
