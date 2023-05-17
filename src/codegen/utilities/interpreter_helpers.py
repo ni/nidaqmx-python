@@ -271,9 +271,14 @@ def get_grpc_interpreter_call_params(func, params):
             if is_read_function and "read_array" in name:
                 if has_read_array_parameter:
                     continue
-                grpc_params.append(
-                    f"{camel_to_snake_case(param.size.value)}={param.parameter_name}.size"
-                )
+                if is_read_bytes_param(param):
+                    grpc_params.append(
+                        f"{camel_to_snake_case(param.size.value)}={param.parameter_name}.nbytes"
+                    )
+                else:
+                    grpc_params.append(
+                        f"{camel_to_snake_case(param.size.value)}={param.parameter_name}.size"
+                    )
                 has_read_array_parameter = True
             elif param.is_grpc_enum or (param.is_enum and not param.is_list):
                 grpc_params.append(f"{name}_raw={param.parameter_name}")
@@ -384,7 +389,27 @@ def get_c_function_call_template(func):
 
 def get_grpc_function_call_template(func):
     """Gets the template to use for generating the logic of calling the grpc functions."""
-    return "/default_grpc_function_call.py.mako"
+    if func.stream_response:
+        return "/event_function_call.py.mako"
+    else:
+        return "/default_grpc_function_call.py.mako"
+
+
+def get_callback_function_call_args(func_params):
+    """Gets the parameters used in the callback function call."""
+    callback_func_param = next(p for p in func_params if p.parameter_name == "callback_function")
+    callback_func_args = []
+    for param in callback_func_param.callback_params:
+        name = camel_to_snake_case(param["name"])
+        if name == "task":
+            callback_func_args.append(f"{name}")
+        elif "enum" in param:
+            callback_func_args.append(f"response.{name}_raw")
+        else:
+            callback_func_args.append(f"response.{name}")
+
+    callback_func_args.append("callback_data")
+    return callback_func_args
 
 
 def get_callback_param_data_types(func_params):
@@ -527,6 +552,18 @@ def is_numpy_array_datatype(param):
     if param.ctypes_data_type and param.ctypes_data_type.startswith("numpy."):
         return True
     return False
+
+
+def is_read_bytes_param(param):
+    """Returns true if parameter reads bytes."""
+    if param.is_list and param.ctypes_data_type in ("numpy.bool", "numpy.uint8"):
+        return True
+    # This is a special case for 'ReadRaw' function.
+    # since its metadata is incorrect in daqmxAPISharp.json file.
+    elif param.parameter_name == "read_array" and param.ctypes_data_type == "numpy.generic":
+        return True
+    else:
+        return False
 
 
 def is_write_bytes_param(param):
