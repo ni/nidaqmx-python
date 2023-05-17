@@ -121,14 +121,14 @@ def test___ai_task___reset_bool_property___returns_default_value(ai_task: Task):
 
 
 @pytest.mark.xfail(
-        reason= "#AB2393811: A NULL pointer is passed in the grpc device."
+        reason= "#AB2393811: When using gRPC interpreter, a NULL pointer is passed in the grpc device."
 )
 def test___ai_task___get_string_property___returns_default_value(ai_task: Task):
     assert ai_task.in_stream.logging_file_path == ""
 
 
 @pytest.mark.xfail(
-        reason= "#AB2393811: A NULL pointer is passed in the grpc device."
+        reason= "#AB2393811: When using gRPC interpreter, a NULL pointer is passed in the grpc device."
 )
 def test___ai_task___set_string_property___returns_assigned_value(ai_task: Task):
     ai_task.in_stream.logging_file_path = "TestData.tdms"
@@ -137,7 +137,7 @@ def test___ai_task___set_string_property___returns_assigned_value(ai_task: Task)
 
 
 @pytest.mark.xfail(
-        reason= "#AB2393811: A NULL pointer is passed in the grpc device."
+        reason= "#AB2393811: When using gRPC interpreter, a NULL pointer is passed in the grpc device."
 )
 def test___ai_task___reset_string_property___returns_default_value(ai_task: Task):
     ai_task.in_stream.logging_file_path = "TestData.tdms"
