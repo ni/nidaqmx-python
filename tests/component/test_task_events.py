@@ -255,6 +255,42 @@ def test___signal_event_registered___register_signal_event___already_registered_
 
 
 @pytest.mark.library_only
+def test___ai_task___register_wrong_every_n_samples_event___not_supported_by_device_error_raised(
+    ai_task: nidaqmx.Task,
+) -> None:
+    event_observer = EveryNSamplesEventObserver()
+    ai_task.timing.cfg_samp_clk_timing(rate=10000.0, samps_per_chan=1000)
+
+    with pytest.raises(nidaqmx.DaqError) as exc_info:
+        ai_task.register_every_n_samples_transferred_from_buffer_event(
+            100, event_observer.handle_every_n_samples_event
+        )
+
+    assert (
+        exc_info.value.error_code
+        == DAQmxErrors.EVERY_N_SAMPS_TRANSFERRED_FROM_BUFFER_EVENT_NOT_SUPPORTED_BY_DEVICE
+    )
+
+
+@pytest.mark.library_only
+def test___ao_task___register_wrong_every_n_samples_event___not_supported_by_device_error_raised(
+    ao_task: nidaqmx.Task,
+) -> None:
+    event_observer = EveryNSamplesEventObserver()
+    ao_task.timing.cfg_samp_clk_timing(rate=10000.0, samps_per_chan=1000)
+
+    with pytest.raises(nidaqmx.DaqError) as exc_info:
+        ao_task.register_every_n_samples_acquired_into_buffer_event(
+            100, event_observer.handle_every_n_samples_event
+        )
+
+    assert (
+        exc_info.value.error_code
+        == DAQmxErrors.EVERY_N_SAMPLES_ACQ_INTO_BUFFER_EVENT_NOT_SUPPORTED_BY_DEVICE
+    )
+
+
+@pytest.mark.library_only
 def test___task___register_unregister_done_event___callback_not_invoked(
     ai_task: nidaqmx.Task,
 ) -> None:
