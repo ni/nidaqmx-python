@@ -30,7 +30,6 @@ def ao_task(task: nidaqmx.Task, any_x_series_device: nidaqmx.system.Device) -> n
     return task
 
 
-@pytest.mark.library_only
 def test___done_event_registered___run_finite_acquisition___callback_invoked_once_with_success_status(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -47,7 +46,6 @@ def test___done_event_registered___run_finite_acquisition___callback_invoked_onc
     assert all(e.status == 0 for e in event_observer.events)
 
 
-@pytest.mark.library_only
 def test___every_n_samples_event_registered___run_finite_acquisition___callback_invoked_n_times_with_type_and_num_samples(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -70,7 +68,6 @@ def test___every_n_samples_event_registered___run_finite_acquisition___callback_
     assert all(e.number_of_samples == 100 for e in event_observer.events)
 
 
-@pytest.mark.library_only
 def test___signal_event_registered___run_finite_acquisition___callback_invoked_n_times_with_type(
     ai_task_with_real_device: nidaqmx.Task,
 ) -> None:
@@ -88,7 +85,6 @@ def test___signal_event_registered___run_finite_acquisition___callback_invoked_n
     assert all(e.signal_type == Signal.SAMPLE_COMPLETE.value for e in event_observer.events)
 
 
-@pytest.mark.library_only
 def test___done_event_unregistered___run_finite_acquisition___callback_not_invoked(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -105,7 +101,6 @@ def test___done_event_unregistered___run_finite_acquisition___callback_not_invok
     assert len(event_observer.events) == 0
 
 
-@pytest.mark.library_only
 def test___every_n_samples_event_unregistered___run_finite_acquisition___callback_not_invoked(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -124,7 +119,6 @@ def test___every_n_samples_event_unregistered___run_finite_acquisition___callbac
     assert len(event_observer.events) == 0
 
 
-@pytest.mark.library_only
 def test___signal_event_unregistered___run_finite_acquisition___callback_not_invoked(
     ai_task_with_real_device: nidaqmx.Task,
 ) -> None:
@@ -142,7 +136,6 @@ def test___signal_event_unregistered___run_finite_acquisition___callback_not_inv
     assert len(event_observer.events) == 0
 
 
-@pytest.mark.library_only
 def test___done_and_every_n_samples_events_registered___run_finite_acquisition___callbacks_invoked(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -162,7 +155,6 @@ def test___done_and_every_n_samples_events_registered___run_finite_acquisition__
     assert len(every_n_samples_event_observer.events) == 10
 
 
-@pytest.mark.library_only
 def test___done_and_every_n_samples_events_registered___run_multiple_finite_acquisitions___callbacks_invoked(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -186,8 +178,9 @@ def test___done_and_every_n_samples_events_registered___run_multiple_finite_acqu
     assert len(every_n_samples_event_observer.events) == num_acquisitions * every_n_event_count
 
 
-@pytest.mark.library_only
-def test___ai_task____run_multiple_finite_acquisitions_with_varying_every_n_interval___callbacks_invoked(
+@pytest.mark.xfail(reason="AB#2395984: GrpcStubInterpreter does not unregister events with DAQmx")
+@pytest.mark.library_only  # Test hangs with gRPC
+def test___ai_task____run_multiple_finite_acquisitions_with_varying_every_n_samples_event_interval___callbacks_invoked(
     ai_task: nidaqmx.Task,
 ) -> None:
     num_acquisitions = 3
@@ -217,7 +210,7 @@ def test___ai_task____run_multiple_finite_acquisitions_with_varying_every_n_inte
     ] == every_n_samples_event_counts
 
 
-@pytest.mark.library_only
+@pytest.mark.xfail(reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller")
 def test___done_event_registered___register_done_event___already_registered_error_raised(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -231,7 +224,7 @@ def test___done_event_registered___register_done_event___already_registered_erro
     assert exc_info.value.error_code == DAQmxErrors.DONE_EVENT_ALREADY_REGISTERED
 
 
-@pytest.mark.library_only
+@pytest.mark.xfail(reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller")
 def test___every_n_samples_acquired_into_buffer_event_registered___register_every_n_samples_acquired_into_buffer_event___already_registered_error_raised(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -252,7 +245,7 @@ def test___every_n_samples_acquired_into_buffer_event_registered___register_ever
     )
 
 
-@pytest.mark.library_only
+@pytest.mark.xfail(reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller")
 def test___every_n_samples_transferred_from_buffer_event_registered___register_every_n_samples_transferred_from_buffer_event___already_registered_error_raised(
     ao_task: nidaqmx.Task,
 ) -> None:
@@ -273,7 +266,7 @@ def test___every_n_samples_transferred_from_buffer_event_registered___register_e
     )
 
 
-@pytest.mark.library_only
+@pytest.mark.xfail(reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller")
 def test___signal_event_registered___register_signal_event___already_registered_error_raised(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -287,7 +280,7 @@ def test___signal_event_registered___register_signal_event___already_registered_
     assert exc_info.value.error_code == DAQmxErrors.SIGNAL_EVENT_ALREADY_REGISTERED
 
 
-@pytest.mark.library_only
+@pytest.mark.xfail(reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller")
 def test___ai_task___register_wrong_every_n_samples_event___not_supported_by_device_error_raised(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -305,7 +298,7 @@ def test___ai_task___register_wrong_every_n_samples_event___not_supported_by_dev
     )
 
 
-@pytest.mark.library_only
+@pytest.mark.xfail(reason="AB#2395958: GrpcStubInterpreter does not report event registration errors to caller")
 def test___ao_task___register_wrong_every_n_samples_event___not_supported_by_device_error_raised(
     ao_task: nidaqmx.Task,
 ) -> None:
@@ -323,7 +316,7 @@ def test___ao_task___register_wrong_every_n_samples_event___not_supported_by_dev
     )
 
 
-@pytest.mark.library_only
+@pytest.mark.xfail(reason="AB#2395984: GrpcStubInterpreter does not unregister events with DAQmx")
 def test___task___register_unregister_done_event___callback_not_invoked(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -336,7 +329,7 @@ def test___task___register_unregister_done_event___callback_not_invoked(
     assert len(event_observer.events) == 0
 
 
-@pytest.mark.library_only
+@pytest.mark.xfail(reason="AB#2395984: GrpcStubInterpreter does not unregister events with DAQmx")
 def test___task___register_unregister_every_n_samples_acquired_into_buffer_event___callback_not_invoked(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -351,7 +344,7 @@ def test___task___register_unregister_every_n_samples_acquired_into_buffer_event
     assert len(event_observer.events) == 0
 
 
-@pytest.mark.library_only
+@pytest.mark.xfail(reason="AB#2395984: GrpcStubInterpreter does not unregister events with DAQmx")
 def test___task___register_unregister_every_n_samples_transferred_from_buffer_event___callback_not_invoked(
     ao_task: nidaqmx.Task,
 ) -> None:
@@ -366,7 +359,7 @@ def test___task___register_unregister_every_n_samples_transferred_from_buffer_ev
     assert len(event_observer.events) == 0
 
 
-@pytest.mark.library_only
+@pytest.mark.xfail(reason="AB#2395984: GrpcStubInterpreter does not unregister events with DAQmx")
 def test___task___register_unregister_signal_event___callback_not_invoked(
     ai_task: nidaqmx.Task,
 ) -> None:
