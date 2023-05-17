@@ -84,6 +84,9 @@ def test___ao_current_task___get_bool_property___returns_default_value(task, dev
     assert not task.out_stream.open_current_loop_chans_exist
 
 
+@pytest.mark.xfail(
+        reason= "#AB2393824: Calling IVI Dance twice returns an error in the grpc device."
+)
 @pytest.mark.device_name("aoTester")
 def test___ao_current_task___get_string_list_property___returns_default_value(task, device):
     task.ao_channels.add_ao_current_chan(device.ao_physical_chans[0].name)
