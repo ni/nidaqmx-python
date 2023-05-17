@@ -71,6 +71,9 @@ def test___device___list_of_float_property___returns_value(device):
     assert ai_bridge_ranges == [-0.025, 0.025, -0.1, 0.1]
 
 
+@pytest.mark.xfail(
+    reason="#2395661: The attributes are present under the wrong type in NIDAQmx proto file, hence it fails in grpc."
+)
 @pytest.mark.device_name("bridgeTester")
 def test___device___list_of_enum_property___returns_value(device):
     ai_trigger_usage = device.ai_trig_usage
