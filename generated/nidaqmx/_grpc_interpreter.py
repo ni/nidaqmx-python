@@ -382,7 +382,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.ClearTaskRequest(task=task))
         self._unregister_done_event_callbacks()
         self._unregister_every_n_samples_event_callbacks()
-        self._unregister_siganl_event_callbacks()
+        self._unregister_signal_event_callbacks()
 
     def clear_teds(self, physical_channel):
         response = self._invoke(
@@ -3545,13 +3545,9 @@ def _validate_array_dtype(numpy_array, expected_numpy_array_dtype):
     if expected_numpy_array_dtype != numpy.generic and numpy_array.dtype != expected_numpy_array_dtype:
         raise TypeError(f"array must have data type {expected_numpy_array_dtype}")
 
-def _is_cancelled(ex: Exception):
+def _is_cancelled(ex: Exception) -> bool:
     """Returns True if the given exception is a cancelled RPC exception."""
-    if(isinstance(ex, grpc.RpcError)):
-        if ex.code() == grpc.StatusCode.CANCELLED:
-            return True
-    elif (isinstance(ex, errors.RpcError)):
-        if ex.rpc_code == grpc.StatusCode.CANCELLED:
-            return True
-    
-    return False
+    return (
+        (isinstance(ex, grpc.RpcError) and ex.code() == grpc.StatusCode.CANCELLED)
+        or (isinstance(ex, errors.RpcError) and ex.rpc_code == grpc.StatusCode.CANCELLED)
+    )
