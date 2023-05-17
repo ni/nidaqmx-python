@@ -166,7 +166,9 @@ def test___done_and_every_n_samples_events_registered___run_finite_acquisition__
 def test___done_and_every_n_samples_events_registered___run_multiple_finite_acquisitions___callbacks_invoked(
     ai_task: nidaqmx.Task,
 ) -> None:
+    num_acquisitions = 3
     done_event_observer = DoneEventObserver()
+    every_n_event_count = 10
     every_n_samples_event_observer = EveryNSamplesEventObserver()
     ai_task.register_done_event(done_event_observer.handle_done_event)
     ai_task.register_every_n_samples_acquired_into_buffer_event(
@@ -174,14 +176,45 @@ def test___done_and_every_n_samples_events_registered___run_multiple_finite_acqu
     )
     ai_task.timing.cfg_samp_clk_timing(rate=10000.0, samps_per_chan=1000)
 
-    for _ in range(3):
+    for _ in range(num_acquisitions):
         ai_task.start()
         done_event_observer.wait_for_events()
-        every_n_samples_event_observer.wait_for_events(10)
+        every_n_samples_event_observer.wait_for_events(every_n_event_count)
         ai_task.stop()
 
-    assert len(done_event_observer.events) == 3
-    assert len(every_n_samples_event_observer.events) == 30
+    assert len(done_event_observer.events) == num_acquisitions
+    assert len(every_n_samples_event_observer.events) == num_acquisitions * every_n_event_count
+
+
+@pytest.mark.library_only
+def test___ai_task____run_multiple_finite_acquisitions_with_varying_every_n_interval___callbacks_invoked(
+    ai_task: nidaqmx.Task,
+) -> None:
+    num_acquisitions = 3
+    done_event_observer = DoneEventObserver()
+    every_n_samples_event_counts = [10, 5, 4]
+    every_n_samples_event_intervals = [100, 200, 250]
+    every_n_samples_event_observers = [
+        EveryNSamplesEventObserver() for _ in range(num_acquisitions)
+    ]
+    ai_task.timing.cfg_samp_clk_timing(rate=10000.0, samps_per_chan=1000)
+    ai_task.register_done_event(done_event_observer.handle_done_event)
+
+    for i in range(3):
+        ai_task.register_every_n_samples_acquired_into_buffer_event(
+            every_n_samples_event_intervals[i],
+            every_n_samples_event_observers[i].handle_every_n_samples_event,
+        )
+        ai_task.start()
+        done_event_observer.wait_for_events()
+        every_n_samples_event_observers[i].wait_for_events(every_n_samples_event_counts[i])
+        ai_task.stop()
+        ai_task.register_every_n_samples_acquired_into_buffer_event(100, None)
+
+    assert len(done_event_observer.events) == num_acquisitions
+    assert [
+        len(observer.events) for observer in every_n_samples_event_observers
+    ] == every_n_samples_event_counts
 
 
 @pytest.mark.library_only
