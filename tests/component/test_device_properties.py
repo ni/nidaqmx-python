@@ -71,7 +71,7 @@ def test___device___list_of_float_property___returns_value(device):
     assert ai_bridge_ranges == [-0.025, 0.025, -0.1, 0.1]
 
 
-@pytest.mark.xfail(
+@pytest.mark.grpc_xfail(
     reason="AB#2395661: Attributes with bitfield enum are listed under the wrong type in DAQmx proto file."
 )
 @pytest.mark.device_name("bridgeTester")
