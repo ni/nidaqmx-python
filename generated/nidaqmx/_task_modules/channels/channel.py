@@ -56,7 +56,7 @@ class Channel:
         return False
 
     def __hash__(self):
-        return hash((self._handle.value, frozenset(self.channel_names)))
+        return self._interpreter.hash_task_handle(self._handle) ^ hash(frozenset(self.channel_names))
 
     def __iadd__(self, other):
         return self.__add__(other)

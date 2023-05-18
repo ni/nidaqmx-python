@@ -38,7 +38,7 @@ class InStream:
         return False
 
     def __hash__(self):
-        return hash((self._handle.value, self._timeout))
+        return self._interpreter.hash_task_handle(self._handle) ^ hash(self._timeout)
 
     def __ne__(self, other):
         return not self.__eq__(other)
