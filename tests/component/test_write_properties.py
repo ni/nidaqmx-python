@@ -84,7 +84,7 @@ def test___ao_current_task___get_bool_property___returns_default_value(task, dev
     assert not task.out_stream.open_current_loop_chans_exist
 
 
-@pytest.mark.xfail(
+@pytest.mark.grpc_xfail(
     reason="AB#2393824: DAQmx read/write status properties return errors when called from C, Python, or grpc-device."
 )
 @pytest.mark.device_name("aoTester")
