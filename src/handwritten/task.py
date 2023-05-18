@@ -74,6 +74,7 @@ class Task:
         self._handle = None
         self._close_on_exit = False
         self._saved_name = new_task_name
+        self._grpc_options = grpc_options
 
         if grpc_options and not (
             grpc_options.session_name == "" or grpc_options.session_name == new_task_name
@@ -89,7 +90,7 @@ class Task:
         self._initialize(self._handle, self._interpreter)
 
     def __del__(self):
-        if self._handle is not None and self._close_on_exit:
+        if self._handle is not None and self._close_on_exit and self._grpc_options is None:
             warnings.warn(
                 'Task of name "{}" was not explicitly closed before it was '
                 'destructed. Resources on the task device may still be '
