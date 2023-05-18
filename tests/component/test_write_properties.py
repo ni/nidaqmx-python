@@ -85,7 +85,7 @@ def test___ao_current_task___get_bool_property___returns_default_value(task, dev
 
 
 @pytest.mark.xfail(
-    reason="#AB2393824: When using grpc interpreter, calling IVI Dance twice returns an error in the grpc device."
+    reason="AB#2393824: DAQmx read/write status properties return errors when called from C, Python, or grpc-device."
 )
 @pytest.mark.device_name("aoTester")
 def test___ao_current_task___get_string_list_property___returns_default_value(task, device):
