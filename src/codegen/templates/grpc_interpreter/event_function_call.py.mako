@@ -17,12 +17,7 @@
 %>\
         assert options == 0
         if callback_function is not None:
-            if self._${event_name}_stream is not None:
-                raise errors.DaqError(
-                    error_code = -1,
-                    message = "Could not register the given callback function, a callback function already exists."
-                )
-            self._${event_name}_stream = self._invoke(
+            event_stream = self._invoke(
                 self._client.${snake_to_pascal(function.function_name)},
             %if (len(function.function_name) + len(grpc_interpreter_params)) > 68:
                 grpc_types.${snake_to_pascal(function.function_name)}Request(
@@ -30,6 +25,8 @@
             %else:
                 grpc_types.${snake_to_pascal(function.function_name)}Request(${grpc_interpreter_params + ')'})
             %endif
+
+            self._check_for_event_registration_error(event_stream)
 
             def event_thread():
                 try:
@@ -46,6 +43,13 @@
                     self._${event_name}_stream.cancel()
                     self._${event_name}_stream = None
 
+            if self._${event_name}_stream is not None:
+                raise errors.DaqError(
+                    error_code = -1,
+                    message = "Could not register the given callback function, a callback function already exists."
+                )
+
+            self._${event_name}_stream = event_stream
             self._${event_name}_thread = threading.Thread(target=event_thread)
             self._${event_name}_thread.start()
         else:
