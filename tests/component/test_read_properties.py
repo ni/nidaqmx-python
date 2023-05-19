@@ -120,16 +120,25 @@ def test___ai_task___reset_bool_property___returns_default_value(ai_task: Task):
     assert not ai_task.in_stream.logging_pause
 
 
+@pytest.mark.grpc_xfail(
+    reason="AB#2393811: DAQmxGetLoggingFilePath returns kErrorNULLPtr (-200604) when called from grpc-device."
+)
 def test___ai_task___get_string_property___returns_default_value(ai_task: Task):
     assert ai_task.in_stream.logging_file_path == ""
 
 
+@pytest.mark.grpc_xfail(
+    reason="AB#2393811: DAQmxGetLoggingFilePath returns kErrorNULLPtr (-200604) when called from grpc-device."
+)
 def test___ai_task___set_string_property___returns_assigned_value(ai_task: Task):
     ai_task.in_stream.logging_file_path = "TestData.tdms"
 
     assert ai_task.in_stream.logging_file_path == "TestData.tdms"
 
 
+@pytest.mark.grpc_xfail(
+    reason="AB#2393811: DAQmxGetLoggingFilePath returns kErrorNULLPtr (-200604) when called from grpc-device."
+)
 def test___ai_task___reset_string_property___returns_default_value(ai_task: Task):
     ai_task.in_stream.logging_file_path = "TestData.tdms"
 

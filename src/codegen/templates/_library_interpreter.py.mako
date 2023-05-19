@@ -170,6 +170,9 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
         return samps_per_chan_written.value
+    
+    def hash_task_handle(self, task_handle):
+        return hash(task_handle.value)
 
 
 def check_for_error(error_code, samps_per_chan_written=None, samps_per_chan_read=None):

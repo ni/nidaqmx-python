@@ -4,6 +4,7 @@ from __future__ import annotations
 import contextlib
 import pathlib
 from enum import Enum
+from typing import List
 
 import pytest
 
@@ -38,7 +39,7 @@ class DeviceType(Enum):
     SIMULATED = 1
 
 
-def pytest_generate_tests(metafunc):
+def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
     """Parametrizes the "init_kwargs" fixture by examining the the markers set for a test.
 
     This is used to decide if tests for gRPC or Library interpreters should be run.
@@ -50,15 +51,29 @@ def pytest_generate_tests(metafunc):
 
         grpc_only = metafunc.definition.get_closest_marker("grpc_only")
         library_only = metafunc.definition.get_closest_marker("library_only")
+        params: List[pytest.ParameterSet] = []
 
-        if grpc_only:
-            metafunc.parametrize("init_kwargs", ["grpc_init_kwargs"], indirect=True)
-        if library_only:
-            metafunc.parametrize("init_kwargs", ["library_init_kwargs"], indirect=True)
-        if not library_only and not grpc_only:
-            metafunc.parametrize(
-                "init_kwargs", ["library_init_kwargs", "grpc_init_kwargs"], indirect=True
-            )
+        if not grpc_only:
+            library_marks: List[pytest.MarkDecorator] = []
+            library_skip = metafunc.definition.get_closest_marker("library_skip")
+            if library_skip:
+                library_marks.append(pytest.mark.skip(*library_skip.args, **library_skip.kwargs))
+            library_xfail = metafunc.definition.get_closest_marker("library_xfail")
+            if library_xfail:
+                library_marks.append(pytest.mark.xfail(*library_xfail.args, **library_xfail.kwargs))
+            params.append(pytest.param("library_init_kwargs", marks=library_marks))
+
+        if not library_only:
+            grpc_marks: List[pytest.MarkDecorator] = []
+            grpc_skip = metafunc.definition.get_closest_marker("grpc_skip")
+            if grpc_skip:
+                grpc_marks.append(pytest.mark.skip(*grpc_skip.args, **grpc_skip.kwargs))
+            grpc_xfail = metafunc.definition.get_closest_marker("grpc_xfail")
+            if grpc_xfail:
+                grpc_marks.append(pytest.mark.xfail(*grpc_xfail.args, **grpc_xfail.kwargs))
+            params.append(pytest.param("grpc_init_kwargs", marks=grpc_marks))
+
+        metafunc.parametrize("init_kwargs", params, indirect=True)
 
 
 @pytest.fixture(scope="module")

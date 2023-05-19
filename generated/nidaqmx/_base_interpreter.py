@@ -1835,3 +1835,7 @@ class BaseInterpreter(abc.ABC):
     def write_to_teds_from_file(
             self, physical_channel, file_path, basic_teds_options):
         raise NotImplementedError
+    
+    @abc.abstractmethod
+    def hash_task_handle(self, task_handle):
+        raise NotImplementedError
