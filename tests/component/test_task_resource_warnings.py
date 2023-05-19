@@ -7,7 +7,7 @@ from nidaqmx.errors import DaqResourceWarning
 
 
 @pytest.mark.library_only
-def test__unclosed_task__delete_task__resource_warning_raised(task):
+def test__unclosed_task__leak_task__resource_warning_raised(task):
     """Test to validate unclosed tasks."""
     interpreter = task._interpreter
     task_handle = task._handle
