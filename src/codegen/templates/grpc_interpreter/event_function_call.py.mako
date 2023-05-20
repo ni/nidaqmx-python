@@ -5,8 +5,7 @@
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
     from codegen.utilities.text_wrappers import wrap
     from codegen.utilities.helpers import snake_to_pascal, strip_string_prefix
-%>\
-<% 
+
     params = get_params_for_function_signature(function, True)
     sorted_params = order_function_parameters_by_optional(params)
     output_parameters = get_output_params(function)
@@ -20,12 +19,12 @@
         if callback_function is not None:
             event_stream = self._invoke(
                 self._client.${snake_to_pascal(function.function_name)},
-            %if (len(function.function_name) + len(grpc_interpreter_params)) > 68:
+%if (len(function.function_name) + len(grpc_interpreter_params)) > 68:
                 grpc_types.${snake_to_pascal(function.function_name)}Request(
                     ${grpc_interpreter_params + ')' | wrap(20, 20)})
-            %else:
+%else:
                 grpc_types.${snake_to_pascal(function.function_name)}Request(${grpc_interpreter_params + ')'})
-            %endif
+%endif
 
             self._check_for_event_registration_error(event_stream)
 

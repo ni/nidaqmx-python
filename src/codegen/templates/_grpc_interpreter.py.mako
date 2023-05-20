@@ -137,13 +137,13 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._${event_name}_thread = None
 
 %endfor
-% for func in functions:
+%for func in functions:
 <%
     params = get_params_for_function_signature(func)
     sorted_params = order_function_parameters_by_optional(params)
     parameter_signature = get_interpreter_parameter_signature(is_python_factory, sorted_params)
     output_parameters = get_output_params(func)
-    %>\
+%>\
     %if (len(func.function_name) + len(parameter_signature)) > 68:
     def ${func.function_name}(
             ${parameter_signature + '):' | wrap(12, 12)}
@@ -156,8 +156,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         return ${get_response_parameters(func)}
     %endif
 
-% endfor
-
+%endfor
     def hash_task_handle(self, task_handle):
         return hash(task_handle.name)
 
