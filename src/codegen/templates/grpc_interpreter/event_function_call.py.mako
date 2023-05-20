@@ -14,6 +14,7 @@
     grpc_interpreter_params = get_grpc_interpreter_call_params(function, sorted_params)
     is_read_method = check_if_parameters_contain_read_array(function.base_parameters)
     event_name = strip_string_prefix(function.function_name, "register_")
+    function_call_args = get_callback_function_call_args(function)
 %>\
         assert options == 0
         if callback_function is not None:
@@ -31,9 +32,6 @@
             def event_thread():
                 try:
                     for response in self._${event_name}_stream:
-<%
-    function_call_args = get_callback_function_call_args(function.base_parameters)
-%>\
                         callback_function(
                             ${', '.join(function_call_args) | wrap(28)})
                 except Exception as ex:

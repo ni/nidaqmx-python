@@ -15,8 +15,12 @@ class LibraryInterpreter(BaseInterpreter):
     This class is responsible for interpreting the Library's C API.
 
     """
-    __slots__ = ['_done_event_callbacks', '_every_n_samples_event_callbacks', '_signal_event_callbacks']
-    
+    __slots__ = [
+        '_done_event_callbacks',
+        '_every_n_samples_event_callbacks',
+        '_signal_event_callbacks',
+    ]
+
     def __init__(self):
         # These lists keep C callback objects in memory as ctypes doesn't.
         # Program will crash if callback is made after object is garbage
@@ -24,7 +28,6 @@ class LibraryInterpreter(BaseInterpreter):
         self._done_event_callbacks = []
         self._every_n_samples_event_callbacks = []
         self._signal_event_callbacks = []
-        
 
     def add_cdaq_sync_connection(self, port_list):
         cfunc = lib_importer.windll.DAQmxAddCDAQSyncConnection
@@ -4536,13 +4539,12 @@ class LibraryInterpreter(BaseInterpreter):
 
     def register_done_event(
             self, task, options, callback_function, callback_data):
-
         DAQmxDoneEventCallbackPtr = ctypes.CFUNCTYPE(
             ctypes.c_int32, lib_importer.task_handle, ctypes.c_int,
-            ctypes.c_void_p)        
-        
+            ctypes.c_void_p)
+
         cfunc = lib_importer.windll.DAQmxRegisterDoneEvent
-        
+
         with cfunc.arglock:
             if callback_function is not None:
                 callback_method_ptr = DAQmxDoneEventCallbackPtr(callback_function)
@@ -4556,7 +4558,7 @@ class LibraryInterpreter(BaseInterpreter):
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_uint, ctypes.c_void_p,
                     ctypes.POINTER(ctypes.c_void_p)]
-        
+
             error_code = cfunc(
                 task, options, callback_method_ptr, callback_data)
         check_for_error(error_code)
@@ -4565,13 +4567,12 @@ class LibraryInterpreter(BaseInterpreter):
     def register_every_n_samples_event(
             self, task, every_n_samples_event_type, n_samples, options,
             callback_function, callback_data):
-
         DAQmxEveryNSamplesEventCallbackPtr = ctypes.CFUNCTYPE(
             ctypes.c_int32, lib_importer.task_handle, ctypes.c_int,
-            ctypes.c_uint, ctypes.c_void_p)        
-        
+            ctypes.c_uint, ctypes.c_void_p)
+
         cfunc = lib_importer.windll.DAQmxRegisterEveryNSamplesEvent
-        
+
         with cfunc.arglock:
             if callback_function is not None:
                 callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr(callback_function)
@@ -4587,7 +4588,7 @@ class LibraryInterpreter(BaseInterpreter):
                     lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
                     ctypes.c_uint, ctypes.c_void_p,
                     ctypes.POINTER(ctypes.c_void_p)]
-        
+
             error_code = cfunc(
                 task, every_n_samples_event_type, n_samples, options,
                 callback_method_ptr, callback_data)
@@ -4596,13 +4597,12 @@ class LibraryInterpreter(BaseInterpreter):
 
     def register_signal_event(
             self, task, signal_id, options, callback_function, callback_data):
-
         DAQmxSignalEventCallbackPtr = ctypes.CFUNCTYPE(
             ctypes.c_int32, lib_importer.task_handle, ctypes.c_int,
-            ctypes.c_void_p)        
-        
+            ctypes.c_void_p)
+
         cfunc = lib_importer.windll.DAQmxRegisterSignalEvent
-        
+
         with cfunc.arglock:
             if callback_function is not None:
                 callback_method_ptr = DAQmxSignalEventCallbackPtr(callback_function)
@@ -4617,7 +4617,7 @@ class LibraryInterpreter(BaseInterpreter):
                 cfunc.argtypes = [
                     lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
                     ctypes.c_void_p, ctypes.POINTER(ctypes.c_void_p)]
-        
+
             error_code = cfunc(
                 task, signal_id, options, callback_method_ptr, callback_data)
         check_for_error(error_code)
@@ -6133,7 +6133,7 @@ class LibraryInterpreter(BaseInterpreter):
         return read_voltage_array, read_current_array, samps_per_chan_read.value
 
     def read_power_f64(
-            self, task, num_samps_per_chan, timeout, fill_mode, 
+            self, task, num_samps_per_chan, timeout, fill_mode,
             read_voltage_array, read_current_array):
         samps_per_chan_read = ctypes.c_int()
 
@@ -6200,7 +6200,7 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
         return samps_per_chan_written.value
-    
+
     def hash_task_handle(self, task_handle):
         return hash(task_handle.value)
 

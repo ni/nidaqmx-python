@@ -25,7 +25,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         '_every_n_samples_event_stream',
         '_every_n_samples_event_thread',
         '_signal_event_stream',
-        '_signal_event_thread'
+        '_signal_event_thread',
     ]
 
 
