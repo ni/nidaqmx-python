@@ -17128,6 +17128,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -17272,6 +17273,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -17365,6 +17367,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -17459,6 +17462,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -17552,6 +17556,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -17634,6 +17639,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -17727,6 +17733,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -17909,6 +17916,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18002,6 +18010,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18107,6 +18116,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18270,6 +18280,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18435,6 +18446,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18586,6 +18598,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18740,6 +18753,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18833,6 +18847,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18926,6 +18941,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18997,6 +19013,7 @@ functions = {
             {
                 'direction': 'out',
                 'name': 'sampsPerChanRead',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -19061,6 +19078,7 @@ functions = {
             {
                 'direction': 'out',
                 'name': 'sampsPerChanRead',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -19197,6 +19215,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -23125,6 +23144,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -23278,6 +23298,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -23370,6 +23391,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -23463,6 +23485,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -23555,6 +23578,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -23656,6 +23680,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -23825,6 +23850,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -23996,6 +24022,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -24156,6 +24183,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -24309,6 +24337,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -24401,6 +24430,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -24493,6 +24523,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -24572,6 +24603,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
