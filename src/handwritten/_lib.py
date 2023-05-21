@@ -100,26 +100,16 @@ class DaqFunctionImporter:
                 'version of NI-DAQmx.'.format(function))
 
 
-# NIDAQmx.h defines CalHandle as a typedef for uInt32.
-CalHandle = ctypes.c_uint32
-
-
-# NIDAQmx.h defines TaskHandle as a typedef for void*.
-#
-# From NI-DAQmx versions 7.0 to 8.8, TaskHandle was defined as uInt32. In NI-DAQmx 8.9, it was
-# changed to void* in order to support 64-bit platforms. This change did not break binary
-# compatibility because uInt32 and void* are the same size for 32-bit applications.
-TaskHandle = ctypes.c_void_p
-
-
 class DaqLibImporter:
     """
-    Encapsulates NI-DAQmx library importing logic.
+    Encapsulates NI-DAQmx library importing and handle type parsing logic.
     """
 
     def __init__(self):
         self._windll = None
         self._cdll = None
+        self._cal_handle = None
+        self._task_handle = None
 
     @property
     def windll(self):
@@ -133,9 +123,21 @@ class DaqLibImporter:
             self._import_lib()
         return self._cdll
 
+    @property
+    def task_handle(self):
+        if self._task_handle is None:
+            self._parse_typedefs()
+        return self._task_handle
+
+    @property
+    def cal_handle(self):
+        if self._cal_handle is None:
+            self._parse_typedefs()
+        return self._cal_handle
+
     def _import_lib(self):
         """
-        Determines the location of the NI-DAQmx CAI DLL and loads it.
+        Determines the location of and loads the NI-DAQmx CAI DLL.
         """
         self._windll = None
         self._cdll = None
@@ -169,6 +171,26 @@ class DaqLibImporter:
 
         self._windll = DaqFunctionImporter(windll)
         self._cdll = DaqFunctionImporter(cdll)
+
+    @staticmethod
+    def _get_task_handle_type(driver_version):
+        """
+        Determines the ctypes data types of the Task handle based on the version of
+        the NI-DAQmx driver installed. DAQmx 8.9 added 64-bit support, and the
+        handle was changed to an opaque pointer.
+        """
+        return ctypes.c_void_p if driver_version >= (8,9,0) else ctypes.c_uint
+
+    def _parse_typedefs(self):
+        """
+        Determines the ctypes data types of the Task and Cal handles 
+        based on the version of the NI-DAQmx driver installed.
+        """
+        from nidaqmx.system.system import System
+        system = System.local()
+
+        self._task_handle = DaqLibImporter._get_task_handle_type(system.driver_version)
+        self._cal_handle = ctypes.c_uint
 
 
 lib_importer = DaqLibImporter()
