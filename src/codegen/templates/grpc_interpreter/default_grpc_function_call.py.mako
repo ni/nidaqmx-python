@@ -4,6 +4,7 @@
         check_if_parameters_contain_read_array,
         create_compound_parameter_request,
         get_compound_parameter,
+        get_event_name,
         get_grpc_interpreter_call_params,
         get_input_arguments_for_compound_params,
         get_numpy_array_params,
@@ -11,6 +12,7 @@
         get_params_for_function_signature,
         get_read_array_parameters,
         is_custom_read_write_function,
+        is_event_unregister_function,
     )
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
     from codegen.utilities.text_wrappers import wrap
@@ -65,4 +67,7 @@
         self._unregister_done_event_callbacks()
         self._unregister_every_n_samples_event_callbacks()
         self._unregister_signal_event_callbacks()
+%endif
+%if is_event_unregister_function(function):
+        self._unregister_${get_event_name(function)}_callbacks()
 %endif

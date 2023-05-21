@@ -3317,6 +3317,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.UnregisterDoneEvent,
             grpc_types.UnregisterDoneEventRequest(task=task))
+        self._unregister_done_event_callbacks()
 
     def unregister_every_n_samples_event(
             self, task, every_n_samples_event_type):
@@ -3325,11 +3326,13 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.UnregisterEveryNSamplesEventRequest(
                 task=task,
                 every_n_samples_event_type_raw=every_n_samples_event_type))
+        self._unregister_every_n_samples_event_callbacks()
 
     def unregister_signal_event(self, task, signal_id):
         response = self._invoke(
             self._client.UnregisterSignalEvent,
             grpc_types.UnregisterSignalEventRequest(task=task, signal_id_raw=signal_id))
+        self._unregister_signal_event_callbacks()
 
     def unreserve_network_device(self, device_name):
         response = self._invoke(
