@@ -11,7 +11,7 @@ import warnings
 import numpy
 
 from nidaqmx._base_interpreter import BaseInterpreter
-from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer, TaskHandle
+from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqReadError, DaqWarning, DaqWriteError
 
@@ -84,7 +84,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        lib_importer.task_handle, ctypes.c_int, ctypes.c_double,
                         c_bool32,
                         wrapped_ndpointer(dtype=numpy.int16, flags=('C', 'W')),
                         wrapped_ndpointer(dtype=numpy.int16, flags=('C', 'W')),
@@ -110,7 +110,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        lib_importer.task_handle, ctypes.c_int, ctypes.c_double,
                         c_bool32,
                         wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
                         wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
@@ -135,7 +135,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        lib_importer.task_handle, ctypes.c_int, ctypes.c_double,
                         wrapped_ndpointer(dtype=read_array.dtype, flags=('C', 'W')),
                         ctypes.c_uint, ctypes.POINTER(ctypes.c_int),
                         ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
@@ -158,7 +158,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        TaskHandle, ctypes.c_int, c_bool32,
+                        lib_importer.task_handle, ctypes.c_int, c_bool32,
                         ctypes.c_double,
                         wrapped_ndpointer(dtype=numpy_array.dtype,
                                         flags=('C')),

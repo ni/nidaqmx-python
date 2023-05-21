@@ -151,7 +151,7 @@ def get_arguments_type(functions_metadata):
     )
 
     if is_read_write_function:
-        argtypes.append("TaskHandle")
+        argtypes.append("lib_importer.task_handle")
 
     if functions_metadata.handle_parameter is not None:
         if functions_metadata.handle_parameter.ctypes_data_type != "ctypes.c_char_p":
@@ -195,7 +195,7 @@ def to_param_argtype(parameter):
         return f"wrapped_ndpointer(dtype={parameter.ctypes_data_type}, flags=({flags}))"
     else:
         if parameter.ctypes_data_type == "ctypes.TaskHandle":
-            return "TaskHandle"
+            return "lib_importer.task_handle"
         elif parameter.direction == "in":
             # If is string input parameter, use separate custom
             # argtype to convert from unicode to bytes.
