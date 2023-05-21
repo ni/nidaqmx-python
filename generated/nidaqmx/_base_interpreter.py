@@ -1712,6 +1712,19 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def unregister_done_event(self, task):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def unregister_every_n_samples_event(
+            self, task, every_n_samples_event_type):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def unregister_signal_event(self, task, signal_id):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def unreserve_network_device(self, device_name):
         raise NotImplementedError
 

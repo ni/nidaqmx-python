@@ -6,15 +6,20 @@
         create_compound_parameter_request,
         get_callback_function_call_args,
         get_compound_parameter,
+        get_event_name,
         get_grpc_interpreter_call_params,
         get_input_arguments_for_compound_params,
         get_output_params,
         get_params_for_function_signature,
         get_read_array_parameters,
+        is_event_function,
     )
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
     from codegen.utilities.text_wrappers import wrap
-    from codegen.utilities.helpers import snake_to_pascal, strip_string_prefix
+    from codegen.utilities.helpers import snake_to_pascal
+
+    assert is_event_function(function)
+    assert function.stream_response
 
     params = get_params_for_function_signature(function, True)
     sorted_params = order_function_parameters_by_optional(params)
@@ -22,7 +27,7 @@
     compound_parameter = get_compound_parameter(function.base_parameters)
     grpc_interpreter_params = get_grpc_interpreter_call_params(function, sorted_params)
     is_read_method = check_if_parameters_contain_read_array(function.base_parameters)
-    event_name = strip_string_prefix(function.function_name, "register_")
+    event_name = get_event_name(function)
     function_call_args = get_callback_function_call_args(function)
 %>\
         assert options == 0
