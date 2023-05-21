@@ -5,7 +5,7 @@ import warnings
 import numpy
 
 from nidaqmx._base_interpreter import BaseInterpreter
-from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer
+from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer, TaskHandle
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqReadError, DaqWarning, DaqWriteError
 
@@ -44,7 +44,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str]
 
         error_code = cfunc(
             task, channel_names)
@@ -139,8 +139,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_uint]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_uint]
 
         error_code = cfunc(
             task, trigger_source, trigger_slope, trigger_level,
@@ -154,8 +154,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int, ctypes.c_double]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int,
+                        ctypes.c_double]
 
         error_code = cfunc(
             task, trigger_source, trigger_slope, trigger_level)
@@ -179,9 +179,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_uint]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_uint]
 
         error_code = cfunc(
             task, trigger_source, trigger_when, window_top, window_bottom,
@@ -196,8 +195,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_double]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double]
 
         error_code = cfunc(
             task, trigger_source, trigger_when, window_top, window_bottom)
@@ -212,9 +211,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_ulonglong, ctypes.c_double, ctypes_byte_str,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int]
+                        TaskHandle, ctypes.c_int, ctypes.c_ulonglong,
+                        ctypes.c_double, ctypes_byte_str, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int]
 
         error_code = cfunc(
             task, sample_mode, samps_per_chan, sample_clk_rate,
@@ -231,9 +230,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_ulonglong, ctypes.c_double, ctypes_byte_str,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int]
+                        TaskHandle, ctypes.c_int, ctypes.c_ulonglong,
+                        ctypes.c_double, ctypes_byte_str, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int]
 
         error_code = cfunc(
             task, sample_mode, samps_per_chan, sample_clk_rate,
@@ -249,8 +248,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_ulonglong]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_ulonglong]
 
         error_code = cfunc(
             task, rising_edge_chan, falling_edge_chan, sample_mode,
@@ -264,8 +263,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int, ctypes.c_uint]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int,
+                        ctypes.c_uint]
 
         error_code = cfunc(
             task, trigger_source, trigger_edge, pretrigger_samples)
@@ -277,8 +276,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int]
 
         error_code = cfunc(
             task, trigger_source, trigger_edge)
@@ -292,8 +290,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_uint]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_uint]
 
         error_code = cfunc(
             task, trigger_source, trigger_pattern, trigger_when,
@@ -307,8 +305,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             task, trigger_source, trigger_pattern, trigger_when)
@@ -320,8 +318,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_ulonglong]
+                        TaskHandle, ctypes.c_int, ctypes.c_ulonglong]
 
         error_code = cfunc(
             task, sample_mode, samps_per_chan)
@@ -333,8 +330,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_ulonglong]
+                        TaskHandle, ctypes.c_int, ctypes.c_ulonglong]
 
         error_code = cfunc(
             task, sample_mode, samps_per_chan)
@@ -354,9 +350,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_ulonglong]
+                        TaskHandle, ctypes_byte_str, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_ulonglong]
 
         error_code = cfunc(
             task, source, rate, active_edge, sample_mode, samps_per_chan)
@@ -370,9 +365,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_ulonglong]
+                        TaskHandle, ctypes_byte_str, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_ulonglong]
 
         error_code = cfunc(
             task, source, rate, active_edge, sample_mode, samps_per_chan)
@@ -388,7 +382,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
+                        TaskHandle, ctypes_byte_str,
                         wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
                         wrapped_ndpointer(dtype=numpy.int32, flags=('C')),
                         ctypes.c_uint]
@@ -405,7 +399,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
+                        TaskHandle, ctypes_byte_str,
                         wrapped_ndpointer(dtype=numpy.int32, flags=('C')),
                         ctypes.c_uint]
 
@@ -420,7 +414,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
+                        TaskHandle, ctypes_byte_str,
                         wrapped_ndpointer(dtype=numpy.int32, flags=('C')),
                         ctypes.c_uint]
 
@@ -434,7 +428,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle]
+                        TaskHandle]
 
         error_code = cfunc(
             task)
@@ -459,8 +453,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int, ctypes_byte_str, ctypes.c_int]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int,
+                        ctypes_byte_str, ctypes.c_int]
 
         error_code = cfunc(
             task, file_path, logging_mode, group_name, operation)
@@ -497,7 +491,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
+                        TaskHandle, ctypes.c_int]
 
         error_code = cfunc(
             task, action)
@@ -513,10 +507,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double, c_bool32,
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, c_bool32,
                         ctypes_byte_str]
 
         error_code = cfunc(
@@ -536,11 +530,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -558,10 +551,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_int, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_int,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -578,10 +571,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -597,9 +590,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -615,10 +608,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -635,10 +628,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -657,10 +650,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double,
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double,
                         wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
                         ctypes.c_uint, wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C')), ctypes.c_uint, ctypes.c_int,
@@ -685,10 +678,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double,
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double,
                         wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
                         ctypes.c_uint, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
@@ -714,12 +707,12 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
                         ctypes.c_double, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -740,11 +733,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -761,10 +753,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
-                        ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -780,10 +771,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -800,10 +791,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_int,
-                        ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -820,11 +810,11 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_int,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -843,11 +833,11 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_int,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -864,9 +854,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        c_bool32]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, c_bool32]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -884,10 +873,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double,
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double,
                         wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
                         ctypes.c_uint, wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C')), ctypes.c_uint, ctypes.c_int,
@@ -912,10 +901,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double,
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double,
                         wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
                         ctypes.c_uint, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
@@ -941,12 +930,12 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
                         ctypes.c_double, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -966,10 +955,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -988,13 +977,12 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_double,
-                        wrapped_ndpointer(dtype=numpy.int32, flags=('C')),
-                        ctypes.c_uint, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_double]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_double, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C')), ctypes.c_uint, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_double]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1015,12 +1003,11 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
                         ctypes.c_double, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
-                        ctypes_byte_str]
+                        ctypes.c_double, ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1037,8 +1024,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, units)
@@ -1053,10 +1040,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1073,11 +1060,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_double]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_double]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1094,11 +1080,11 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
                         ctypes.c_double, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_double]
+                        ctypes.c_double]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1117,10 +1103,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double,
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double,
                         wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
                         ctypes.c_uint, wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C')), ctypes.c_uint, ctypes.c_int,
@@ -1145,10 +1131,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double,
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double,
                         wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
                         ctypes.c_uint, ctypes.c_int,
                         wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
@@ -1174,12 +1160,12 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
                         ctypes.c_double, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1200,11 +1186,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -1221,9 +1206,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -1240,11 +1225,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_int, ctypes.c_double, c_bool32,
-                        ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_double, c_bool32, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -1261,9 +1245,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -1279,10 +1263,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
                         ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_int, ctypes.c_double, ctypes.c_double]
+                        ctypes.c_double, ctypes.c_double]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1298,9 +1282,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1315,9 +1299,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_double]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_double]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, type, freq,
@@ -1332,9 +1316,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1350,10 +1334,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, c_bool32,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_uint, ctypes.c_double, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, c_bool32, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_uint, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, decoding_type,
@@ -1369,10 +1353,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_uint,
-                        ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_uint, ctypes_byte_str]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val,
@@ -1387,9 +1370,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_uint,
-                        ctypes.c_int]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_uint, ctypes.c_int]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, edge, initial_count,
@@ -1404,9 +1386,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_freq, max_freq,
@@ -1421,10 +1403,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_uint, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_uint, ctypes_byte_str]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val, units,
@@ -1440,10 +1422,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, c_bool32,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, c_bool32, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, decoding_type,
@@ -1459,10 +1441,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val,
@@ -1477,10 +1458,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_uint, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_uint, ctypes_byte_str]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val, units,
@@ -1495,9 +1476,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val, units)
@@ -1511,9 +1491,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_double,
-                        ctypes.c_double]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_double, ctypes.c_double]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, source_terminal,
@@ -1528,9 +1507,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val, units)
@@ -1544,9 +1522,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val, units,
@@ -1561,9 +1539,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val, units,
@@ -1578,10 +1556,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val, units,
@@ -1596,9 +1573,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_int,
-                        ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, units, sync_method,
@@ -1613,9 +1589,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_double]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_double]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, units, idle_state,
@@ -1630,9 +1606,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_int,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, source_terminal,
@@ -1647,9 +1623,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double, ctypes.c_double]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_double]
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, units, idle_state,
@@ -1663,8 +1639,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             task, lines, name_to_assign_to_lines, line_grouping)
@@ -1677,8 +1653,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int]
 
         error_code = cfunc(
             task, lines, name_to_assign_to_lines, line_grouping)
@@ -1755,15 +1731,14 @@ class LibraryInterpreter(BaseInterpreter):
 
     def create_task(self, session_name):
         new_session_initialized = True
-        task = lib_importer.task_handle(0)
+        task = TaskHandle(0)
 
         cfunc = lib_importer.windll.DAQmxCreateTask
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str,
-                        ctypes.POINTER(lib_importer.task_handle)]
+                        ctypes_byte_str, ctypes.POINTER(TaskHandle)]
 
         error_code = cfunc(
             session_name, ctypes.byref(task))
@@ -1779,10 +1754,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -1799,10 +1774,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1819,10 +1793,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -1839,10 +1813,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1859,10 +1832,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -1879,10 +1852,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -1899,10 +1871,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1919,10 +1891,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1939,10 +1911,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1959,10 +1930,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1979,10 +1950,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_double, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1998,10 +1969,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -2017,10 +1987,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -2037,10 +2006,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_double]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_double]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -2057,10 +2026,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
-                        ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -2076,9 +2044,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -2094,10 +2062,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_int, ctypes.c_double,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_int, ctypes.c_double, ctypes.c_double,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double,
+                        ctypes_byte_str]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
@@ -2114,10 +2082,9 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_double, ctypes.c_double,
-                        ctypes.c_int, ctypes.c_int, ctypes.c_int,
-                        ctypes.c_double]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_double, ctypes.c_double, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_int, ctypes.c_double]
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
@@ -2132,7 +2099,7 @@ class LibraryInterpreter(BaseInterpreter):
     def create_watchdog_timer_task_ex(
             self, device_name, session_name, timeout):
         new_session_initialized = True
-        task = lib_importer.task_handle(0)
+        task = TaskHandle(0)
 
         cfunc = lib_importer.windll.DAQmxCreateWatchdogTimerTaskEx
         if cfunc.argtypes is None:
@@ -2140,8 +2107,7 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         ctypes_byte_str, ctypes_byte_str,
-                        ctypes.POINTER(lib_importer.task_handle),
-                        ctypes.c_double]
+                        ctypes.POINTER(TaskHandle), ctypes.c_double]
 
         error_code = cfunc(
             device_name, session_name, ctypes.byref(task), timeout)
@@ -2205,7 +2171,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle]
+                        TaskHandle]
 
         error_code = cfunc(
             task)
@@ -2217,7 +2183,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle]
+                        TaskHandle]
 
         error_code = cfunc(
             task)
@@ -2241,8 +2207,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes_byte_str]
+                        TaskHandle, ctypes.c_int, ctypes_byte_str]
 
         error_code = cfunc(
             task, signal_id, output_terminal)
@@ -2337,7 +2302,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -2421,8 +2386,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, channel, attribute, ctypes.byref(value))
@@ -2437,8 +2401,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, channel, attribute, ctypes.byref(value))
@@ -2451,8 +2414,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         temp_size = 0
         while True:
@@ -2479,8 +2441,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, channel, attribute, ctypes.byref(value))
@@ -2493,8 +2454,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         temp_size = 0
         while True:
@@ -2520,8 +2480,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, channel, attribute, ctypes.byref(value))
@@ -2789,7 +2748,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -2804,7 +2763,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -2819,7 +2778,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -2832,7 +2791,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         temp_size = 0
         while True:
@@ -2858,7 +2817,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3186,7 +3145,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3201,7 +3160,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3216,7 +3175,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3229,7 +3188,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         temp_size = 0
         while True:
@@ -3255,7 +3214,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3270,7 +3229,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3285,7 +3244,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3300,7 +3259,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3315,7 +3274,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3451,7 +3410,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3464,7 +3423,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         temp_size = 0
         while True:
@@ -3490,7 +3449,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3505,7 +3464,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3520,7 +3479,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3535,8 +3494,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.byref(value))
@@ -3551,8 +3509,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.byref(value))
@@ -3567,8 +3524,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.byref(value))
@@ -3581,8 +3537,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         temp_size = 0
         while True:
@@ -3608,8 +3563,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.byref(value))
@@ -3624,8 +3578,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.byref(value))
@@ -3640,7 +3593,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3653,7 +3606,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         temp_size = 0
         while True:
@@ -3679,7 +3632,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3694,7 +3647,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3709,7 +3662,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3724,7 +3677,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3737,7 +3690,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         temp_size = 0
         while True:
@@ -3764,7 +3717,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3777,7 +3730,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         temp_size = 0
         while True:
@@ -3802,7 +3755,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         temp_size = 0
         while True:
@@ -3828,7 +3781,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3843,8 +3796,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, lines, attribute, ctypes.byref(value))
@@ -3859,8 +3811,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, lines, attribute, ctypes.byref(value))
@@ -3875,8 +3826,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, lines, attribute, ctypes.byref(value))
@@ -3889,8 +3839,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         temp_size = 0
         while True:
@@ -3916,7 +3865,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3931,7 +3880,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3946,7 +3895,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -3959,7 +3908,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         temp_size = 0
         while True:
@@ -3985,7 +3934,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -4000,7 +3949,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
@@ -4015,7 +3964,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.POINTER(c_bool32)]
+                        TaskHandle, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, ctypes.byref(is_task_done))
@@ -4024,15 +3973,14 @@ class LibraryInterpreter(BaseInterpreter):
 
     def load_task(self, session_name):
         new_session_initialized = True
-        task = lib_importer.task_handle(0)
+        task = TaskHandle(0)
 
         cfunc = lib_importer.windll.DAQmxLoadTask
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ctypes_byte_str,
-                        ctypes.POINTER(lib_importer.task_handle)]
+                        ctypes_byte_str, ctypes.POINTER(TaskHandle)]
 
         error_code = cfunc(
             session_name, ctypes.byref(task))
@@ -4048,9 +3996,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.float64,
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')), ctypes.c_uint,
                         ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
@@ -4068,7 +4015,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_double,
+                        TaskHandle, ctypes.c_double,
                         ctypes.POINTER(ctypes.c_double),
                         ctypes.POINTER(c_bool32)]
 
@@ -4086,11 +4033,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.int16, flags=('C','W')),
-                        ctypes.c_uint, ctypes.POINTER(ctypes.c_int),
-                        ctypes.POINTER(c_bool32)]
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.int16,
+                        flags=('C','W')), ctypes.c_uint,
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
@@ -4107,11 +4053,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.int32, flags=('C','W')),
-                        ctypes.c_uint, ctypes.POINTER(ctypes.c_int),
-                        ctypes.POINTER(c_bool32)]
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C','W')), ctypes.c_uint,
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
@@ -4128,9 +4073,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.uint16,
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.uint16,
                         flags=('C','W')), ctypes.c_uint,
                         ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
@@ -4149,9 +4093,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.uint32,
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.uint32,
                         flags=('C','W')), ctypes.c_uint,
                         ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
@@ -4169,8 +4112,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_double,
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')), ctypes.c_uint,
                         ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
@@ -4190,9 +4132,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.float64,
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')), ctypes.c_uint,
                         ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
@@ -4210,7 +4151,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_double,
+                        TaskHandle, ctypes.c_double,
                         ctypes.POINTER(ctypes.c_double),
                         ctypes.POINTER(c_bool32)]
 
@@ -4227,7 +4168,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_double,
+                        TaskHandle, ctypes.c_double,
                         ctypes.POINTER(ctypes.c_uint),
                         ctypes.POINTER(c_bool32)]
 
@@ -4244,8 +4185,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_double, wrapped_ndpointer(dtype=numpy.uint32,
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        wrapped_ndpointer(dtype=numpy.uint32,
                         flags=('C','W')), ctypes.c_uint,
                         ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
@@ -4264,9 +4205,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.uint32,
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.uint32,
                         flags=('C','W')), ctypes.c_uint,
                         ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
@@ -4286,9 +4226,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.float64,
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')),
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')), ctypes.c_uint,
@@ -4311,7 +4250,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_double,
+                        TaskHandle, ctypes.c_double,
                         ctypes.POINTER(ctypes.c_double),
                         ctypes.POINTER(ctypes.c_double),
                         ctypes.POINTER(c_bool32)]
@@ -4332,9 +4271,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.uint32,
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.uint32,
                         flags=('C','W')),
                         wrapped_ndpointer(dtype=numpy.uint32,
                         flags=('C','W')), ctypes.c_uint,
@@ -4356,7 +4294,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_double,
+                        TaskHandle, ctypes.c_double,
                         ctypes.POINTER(ctypes.c_uint),
                         ctypes.POINTER(ctypes.c_uint),
                         ctypes.POINTER(c_bool32)]
@@ -4377,9 +4315,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.float64,
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')),
                         wrapped_ndpointer(dtype=numpy.float64,
                         flags=('C','W')), ctypes.c_uint,
@@ -4401,7 +4338,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_double,
+                        TaskHandle, ctypes.c_double,
                         ctypes.POINTER(ctypes.c_double),
                         ctypes.POINTER(ctypes.c_double),
                         ctypes.POINTER(c_bool32)]
@@ -4422,10 +4359,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=bool, flags=('C','W')),
-                        ctypes.c_uint, ctypes.POINTER(ctypes.c_int),
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=bool,
+                        flags=('C','W')), ctypes.c_uint,
+                        ctypes.POINTER(ctypes.c_int),
                         ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
@@ -4443,7 +4380,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_double,
+                        TaskHandle, ctypes.c_double,
                         ctypes.POINTER(ctypes.c_uint),
                         ctypes.POINTER(c_bool32)]
 
@@ -4461,9 +4398,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.uint16,
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.uint16,
                         flags=('C','W')), ctypes.c_uint,
                         ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
@@ -4482,9 +4418,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.uint32,
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.uint32,
                         flags=('C','W')), ctypes.c_uint,
                         ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
@@ -4503,11 +4438,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.uint8, flags=('C','W')),
-                        ctypes.c_uint, ctypes.POINTER(ctypes.c_int),
-                        ctypes.POINTER(c_bool32)]
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.uint8,
+                        flags=('C','W')), ctypes.c_uint,
+                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
@@ -4524,7 +4458,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_double,
+                        TaskHandle, ctypes.c_double,
                         ctypes.POINTER(ctypes.c_double),
                         ctypes.POINTER(ctypes.c_double),
                         ctypes.POINTER(c_bool32)]
@@ -4538,8 +4472,7 @@ class LibraryInterpreter(BaseInterpreter):
             self, task, options, callback_function, callback_data):
 
         DAQmxDoneEventCallbackPtr = ctypes.CFUNCTYPE(
-            ctypes.c_int32, lib_importer.task_handle, ctypes.c_int,
-            ctypes.c_void_p)        
+            ctypes.c_int32, TaskHandle, ctypes.c_int, ctypes.c_void_p)        
         
         cfunc = lib_importer.windll.DAQmxRegisterDoneEvent
         
@@ -4548,13 +4481,13 @@ class LibraryInterpreter(BaseInterpreter):
                 callback_method_ptr = DAQmxDoneEventCallbackPtr(callback_function)
                 self._done_event_callbacks.append(callback_method_ptr)
                 cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_uint,
-                    DAQmxDoneEventCallbackPtr, ctypes.POINTER(ctypes.c_void_p)]
+                    TaskHandle, ctypes.c_uint, DAQmxDoneEventCallbackPtr,
+                    ctypes.POINTER(ctypes.c_void_p)]
             else:
                 del self._done_event_callbacks[:]
                 callback_method_ptr = None
                 cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_uint, ctypes.c_void_p,
+                    TaskHandle, ctypes.c_uint, ctypes.c_void_p,
                     ctypes.POINTER(ctypes.c_void_p)]
         
             error_code = cfunc(
@@ -4567,8 +4500,8 @@ class LibraryInterpreter(BaseInterpreter):
             callback_function, callback_data):
 
         DAQmxEveryNSamplesEventCallbackPtr = ctypes.CFUNCTYPE(
-            ctypes.c_int32, lib_importer.task_handle, ctypes.c_int,
-            ctypes.c_uint, ctypes.c_void_p)        
+            ctypes.c_int32, TaskHandle, ctypes.c_int, ctypes.c_uint,
+            ctypes.c_void_p)        
         
         cfunc = lib_importer.windll.DAQmxRegisterEveryNSamplesEvent
         
@@ -4577,16 +4510,15 @@ class LibraryInterpreter(BaseInterpreter):
                 callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr(callback_function)
                 self._every_n_samples_event_callbacks.append(callback_method_ptr)
                 cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-                    ctypes.c_uint, DAQmxEveryNSamplesEventCallbackPtr,
+                    TaskHandle, ctypes.c_int, ctypes.c_uint, ctypes.c_uint,
+                    DAQmxEveryNSamplesEventCallbackPtr,
                     ctypes.POINTER(ctypes.c_void_p)]
             else:
                 del self._every_n_samples_event_callbacks[:]
                 callback_method_ptr = None
                 cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-                    ctypes.c_uint, ctypes.c_void_p,
-                    ctypes.POINTER(ctypes.c_void_p)]
+                    TaskHandle, ctypes.c_int, ctypes.c_uint, ctypes.c_uint,
+                    ctypes.c_void_p, ctypes.POINTER(ctypes.c_void_p)]
         
             error_code = cfunc(
                 task, every_n_samples_event_type, n_samples, options,
@@ -4598,8 +4530,7 @@ class LibraryInterpreter(BaseInterpreter):
             self, task, signal_id, options, callback_function, callback_data):
 
         DAQmxSignalEventCallbackPtr = ctypes.CFUNCTYPE(
-            ctypes.c_int32, lib_importer.task_handle, ctypes.c_int,
-            ctypes.c_void_p)        
+            ctypes.c_int32, TaskHandle, ctypes.c_int, ctypes.c_void_p)        
         
         cfunc = lib_importer.windll.DAQmxRegisterSignalEvent
         
@@ -4608,15 +4539,15 @@ class LibraryInterpreter(BaseInterpreter):
                 callback_method_ptr = DAQmxSignalEventCallbackPtr(callback_function)
                 self._signal_event_callbacks.append(callback_method_ptr)
                 cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
+                    TaskHandle, ctypes.c_int, ctypes.c_uint,
                     DAQmxSignalEventCallbackPtr,
                     ctypes.POINTER(ctypes.c_void_p)]
             else:
                 del self._signal_event_callbacks[:]
                 callback_method_ptr = None
                 cfunc.argtypes = [
-                    lib_importer.task_handle, ctypes.c_int, ctypes.c_uint,
-                    ctypes.c_void_p, ctypes.POINTER(ctypes.c_void_p)]
+                    TaskHandle, ctypes.c_int, ctypes.c_uint, ctypes.c_void_p,
+                    ctypes.POINTER(ctypes.c_void_p)]
         
             error_code = cfunc(
                 task, signal_id, options, callback_method_ptr, callback_data)
@@ -4653,7 +4584,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute)
@@ -4665,8 +4596,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, channel, attribute)
@@ -4690,7 +4620,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
+                        TaskHandle, ctypes.c_int]
 
         error_code = cfunc(
             task, attribute)
@@ -4702,7 +4632,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
+                        TaskHandle, ctypes.c_int]
 
         error_code = cfunc(
             task, attribute)
@@ -4714,7 +4644,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute)
@@ -4726,7 +4656,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
+                        TaskHandle, ctypes.c_int]
 
         error_code = cfunc(
             task, attribute)
@@ -4738,8 +4668,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int]
 
         error_code = cfunc(
             task, device_names, attribute)
@@ -4751,7 +4680,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
+                        TaskHandle, ctypes.c_int]
 
         error_code = cfunc(
             task, attribute)
@@ -4763,8 +4692,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int]
 
         error_code = cfunc(
             task, lines, attribute)
@@ -4776,7 +4704,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
+                        TaskHandle, ctypes.c_int]
 
         error_code = cfunc(
             task, attribute)
@@ -4788,8 +4716,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes_byte_str, ctypes.c_uint32]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes_byte_str, ctypes.c_uint32]
 
         error_code = cfunc(
             task, channel_name, save_as, author, options)
@@ -4814,8 +4742,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes_byte_str, ctypes.c_uint32]
+                        TaskHandle, ctypes_byte_str, ctypes_byte_str,
+                        ctypes.c_uint32]
 
         error_code = cfunc(
             task, save_as, author, options)
@@ -4892,7 +4820,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint32(value))
@@ -4952,8 +4880,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, channel, attribute, c_bool32(value))
@@ -4965,8 +4892,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, channel, attribute, ctypes.c_double(value))
@@ -4978,8 +4904,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, channel, attribute, value.ctypes.data_as(ctypes.c_void_p),
@@ -4992,8 +4917,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, channel, attribute, ctypes.c_int32(value))
@@ -5005,8 +4929,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, channel, attribute, value.encode('ascii'))
@@ -5018,8 +4941,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, channel, attribute, ctypes.c_uint32(value))
@@ -5087,7 +5009,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, c_bool32(value))
@@ -5099,7 +5021,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_double(value))
@@ -5111,7 +5033,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_int32(value))
@@ -5123,7 +5045,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, value.encode('ascii'))
@@ -5135,7 +5057,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint32(value))
@@ -5147,7 +5069,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, c_bool32(value))
@@ -5159,7 +5081,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_double(value))
@@ -5171,7 +5093,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_int32(value))
@@ -5183,7 +5105,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, value.encode('ascii'))
@@ -5195,7 +5117,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint32(value))
@@ -5207,7 +5129,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint64(value))
@@ -5219,7 +5141,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, c_bool32(value))
@@ -5231,7 +5153,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_int32(value))
@@ -5243,7 +5165,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint32(value))
@@ -5304,7 +5226,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, c_bool32(value))
@@ -5316,7 +5238,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_double(value))
@@ -5329,8 +5251,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, device_names, attribute, c_bool32(value))
@@ -5343,8 +5264,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.c_double(value))
@@ -5357,8 +5277,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.c_int32(value))
@@ -5371,8 +5290,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, device_names, attribute, value.encode('ascii'))
@@ -5385,8 +5303,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.c_uint32(value))
@@ -5399,8 +5316,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.c_uint64(value))
@@ -5412,7 +5328,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_int32(value))
@@ -5424,7 +5340,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, value.encode('ascii'))
@@ -5436,7 +5352,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint32(value))
@@ -5448,7 +5364,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint64(value))
@@ -5460,7 +5376,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, c_bool32(value))
@@ -5472,7 +5388,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_double(value))
@@ -5484,7 +5400,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, value.ctypes.data_as(ctypes.c_void_p), len(value))
@@ -5496,7 +5412,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_int32(value))
@@ -5508,7 +5424,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, value.ctypes.data_as(ctypes.c_void_p), len(value))
@@ -5520,7 +5436,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, value.encode('ascii'))
@@ -5532,7 +5448,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint32(value))
@@ -5544,8 +5460,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, lines, attribute, c_bool32(value))
@@ -5557,8 +5472,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, lines, attribute, ctypes.c_double(value))
@@ -5570,8 +5484,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, lines, attribute, ctypes.c_int32(value))
@@ -5583,8 +5496,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_int32]
+                        TaskHandle, ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
             task, lines, attribute, value.encode('ascii'))
@@ -5596,7 +5508,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, c_bool32(value))
@@ -5608,7 +5520,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_double(value))
@@ -5620,7 +5532,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_int32(value))
@@ -5632,7 +5544,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, value.encode('ascii'))
@@ -5644,7 +5556,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint32(value))
@@ -5656,7 +5568,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
+                        TaskHandle, ctypes.c_int32]
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint64(value))
@@ -5668,7 +5580,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str]
+                        TaskHandle, ctypes_byte_str]
 
         error_code = cfunc(
             task, file_path)
@@ -5680,7 +5592,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle]
+                        TaskHandle]
 
         error_code = cfunc(
             task)
@@ -5692,7 +5604,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle]
+                        TaskHandle]
 
         error_code = cfunc(
             task)
@@ -5704,7 +5616,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int]
+                        TaskHandle, ctypes.c_int]
 
         error_code = cfunc(
             task, action)
@@ -5746,7 +5658,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_double]
+                        TaskHandle, ctypes.c_double]
 
         error_code = cfunc(
             task, time_to_wait)
@@ -5762,10 +5674,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int, c_bool32,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
-                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
+                        TaskHandle, ctypes.c_int, c_bool32, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C')), ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5779,7 +5691,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, c_bool32, ctypes.c_double,
+                        TaskHandle, c_bool32, ctypes.c_double,
                         ctypes.c_double, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
@@ -5796,10 +5708,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int, c_bool32,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.int16, flags=('C')),
-                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
+                        TaskHandle, ctypes.c_int, c_bool32, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.int16,
+                        flags=('C')), ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5817,10 +5729,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int, c_bool32,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.int32, flags=('C')),
-                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
+                        TaskHandle, ctypes.c_int, c_bool32, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.int32,
+                        flags=('C')), ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5838,10 +5750,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int, c_bool32,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.uint16, flags=('C')),
-                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
+                        TaskHandle, ctypes.c_int, c_bool32, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.uint16,
+                        flags=('C')), ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5859,10 +5771,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int, c_bool32,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.uint32, flags=('C')),
-                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
+                        TaskHandle, ctypes.c_int, c_bool32, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.uint32,
+                        flags=('C')), ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5880,11 +5792,11 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int, c_bool32,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
-                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
-                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
+                        TaskHandle, ctypes.c_int, c_bool32, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C')), wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C')), ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5900,7 +5812,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, c_bool32, ctypes.c_double,
+                        TaskHandle, c_bool32, ctypes.c_double,
                         ctypes.c_double, ctypes.c_double,
                         ctypes.POINTER(c_bool32)]
 
@@ -5918,11 +5830,11 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int, c_bool32,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.uint32, flags=('C')),
-                        wrapped_ndpointer(dtype=numpy.uint32, flags=('C')),
-                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
+                        TaskHandle, ctypes.c_int, c_bool32, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.uint32,
+                        flags=('C')), wrapped_ndpointer(dtype=numpy.uint32,
+                        flags=('C')), ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5938,8 +5850,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, c_bool32, ctypes.c_double,
-                        ctypes.c_uint, ctypes.c_uint, ctypes.POINTER(c_bool32)]
+                        TaskHandle, c_bool32, ctypes.c_double, ctypes.c_uint,
+                        ctypes.c_uint, ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, auto_start, timeout, high_ticks, low_ticks, None)
@@ -5955,11 +5867,11 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int, c_bool32,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
-                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
-                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
+                        TaskHandle, ctypes.c_int, c_bool32, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C')), wrapped_ndpointer(dtype=numpy.float64,
+                        flags=('C')), ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5975,7 +5887,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, c_bool32, ctypes.c_double,
+                        TaskHandle, c_bool32, ctypes.c_double,
                         ctypes.c_double, ctypes.c_double,
                         ctypes.POINTER(c_bool32)]
 
@@ -5993,10 +5905,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int, c_bool32,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=bool, flags=('C')),
-                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
+                        TaskHandle, ctypes.c_int, c_bool32, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=bool,
+                        flags=('C')), ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -6010,8 +5922,8 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, c_bool32, ctypes.c_double,
-                        ctypes.c_uint, ctypes.POINTER(c_bool32)]
+                        TaskHandle, c_bool32, ctypes.c_double, ctypes.c_uint,
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, auto_start, timeout, value, None)
@@ -6027,10 +5939,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int, c_bool32,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.uint16, flags=('C')),
-                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
+                        TaskHandle, ctypes.c_int, c_bool32, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.uint16,
+                        flags=('C')), ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -6048,10 +5960,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int, c_bool32,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.uint32, flags=('C')),
-                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
+                        TaskHandle, ctypes.c_int, c_bool32, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.uint32,
+                        flags=('C')), ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -6069,10 +5981,10 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int, c_bool32,
-                        ctypes.c_double, ctypes.c_int,
-                        wrapped_ndpointer(dtype=numpy.uint8, flags=('C')),
-                        ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
+                        TaskHandle, ctypes.c_int, c_bool32, ctypes.c_double,
+                        ctypes.c_int, wrapped_ndpointer(dtype=numpy.uint8,
+                        flags=('C')), ctypes.POINTER(ctypes.c_int),
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -6117,7 +6029,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int, ctypes.c_double,
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
                         c_bool32,
                         wrapped_ndpointer(dtype=numpy.int16, flags=('C', 'W')),
                         wrapped_ndpointer(dtype=numpy.int16, flags=('C', 'W')),
@@ -6142,7 +6054,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int, ctypes.c_double,
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
                         c_bool32,
                         wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
                         wrapped_ndpointer(dtype=numpy.float64, flags=('C', 'W')),
@@ -6166,7 +6078,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int, ctypes.c_double,
+                        TaskHandle, ctypes.c_int, ctypes.c_double,
                         wrapped_ndpointer(dtype=read_array.dtype, flags=('C', 'W')),
                         ctypes.c_uint, ctypes.POINTER(ctypes.c_int),
                         ctypes.POINTER(ctypes.c_int), ctypes.POINTER(c_bool32)]
@@ -6188,7 +6100,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int, c_bool32,
+                        TaskHandle, ctypes.c_int, c_bool32,
                         ctypes.c_double,
                         wrapped_ndpointer(dtype=numpy_array.dtype,
                                         flags=('C')),

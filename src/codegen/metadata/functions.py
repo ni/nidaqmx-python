@@ -21,7 +21,7 @@ functions = {
     'AddGlobalChansToTask': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -289,7 +289,7 @@ functions = {
     'CfgAnlgEdgeRefTrig': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -355,7 +355,7 @@ functions = {
     'CfgAnlgEdgeStartTrig': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -497,7 +497,7 @@ functions = {
     'CfgAnlgWindowRefTrig': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -572,7 +572,7 @@ functions = {
     'CfgAnlgWindowStartTrig': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -638,7 +638,7 @@ functions = {
     'CfgBurstHandshakingTimingExportClock': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -740,7 +740,7 @@ functions = {
     'CfgBurstHandshakingTimingImportClock': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -842,7 +842,7 @@ functions = {
     'CfgChangeDetectionTiming': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -910,7 +910,7 @@ functions = {
     'CfgDigEdgeRefTrig': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -965,7 +965,7 @@ functions = {
     'CfgDigEdgeStartTrig': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -1010,7 +1010,7 @@ functions = {
     'CfgDigPatternRefTrig': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -1075,7 +1075,7 @@ functions = {
     'CfgDigPatternStartTrig': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -1130,7 +1130,7 @@ functions = {
     'CfgHandshakingTiming': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -1176,7 +1176,7 @@ functions = {
     'CfgImplicitTiming': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -1256,7 +1256,7 @@ functions = {
     'CfgPipelinedSampClkTiming': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -1335,7 +1335,7 @@ functions = {
     'CfgSampClkTiming': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -1454,7 +1454,7 @@ functions = {
     'CfgWatchdogAOExpirStates': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -1515,7 +1515,7 @@ functions = {
     'CfgWatchdogCOExpirStates': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -1572,7 +1572,7 @@ functions = {
     'CfgWatchdogDOExpirStates': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -1653,7 +1653,7 @@ functions = {
     'ClearTask': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -1677,7 +1677,7 @@ functions = {
     'ConfigureLogging': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -1821,7 +1821,7 @@ functions = {
     'ControlWatchdogTask': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -1862,7 +1862,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -2026,7 +2026,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -2179,7 +2179,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -2309,7 +2309,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -2450,7 +2450,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -2557,7 +2557,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -2687,7 +2687,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -2817,7 +2817,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -3028,7 +3028,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -3239,7 +3239,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -3448,7 +3448,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -3601,7 +3601,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -3718,7 +3718,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -3848,7 +3848,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -3966,7 +3966,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -4130,7 +4130,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -4294,7 +4294,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -4374,7 +4374,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -4585,7 +4585,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -4796,7 +4796,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -5005,7 +5005,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -5147,7 +5147,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -5277,7 +5277,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -5471,7 +5471,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -5656,7 +5656,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -5718,7 +5718,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -5848,7 +5848,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -6000,7 +6000,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -6163,7 +6163,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -6374,7 +6374,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -6585,7 +6585,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -6794,7 +6794,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -6947,7 +6947,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -7054,7 +7054,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -7207,7 +7207,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -7314,7 +7314,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -7409,7 +7409,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -7504,7 +7504,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -7599,7 +7599,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -7740,7 +7740,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -7858,7 +7858,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -7943,7 +7943,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -8038,7 +8038,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -8179,7 +8179,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -8264,7 +8264,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -8405,7 +8405,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -8523,7 +8523,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -8664,7 +8664,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -8748,7 +8748,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -8831,7 +8831,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -8915,7 +8915,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -9022,7 +9022,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -9117,7 +9117,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -9236,7 +9236,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -9343,7 +9343,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -9448,7 +9448,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -9555,7 +9555,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -9617,7 +9617,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -9910,7 +9910,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -10040,7 +10040,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -10158,7 +10158,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -10288,7 +10288,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -10406,7 +10406,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -10536,7 +10536,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -10655,7 +10655,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -10796,7 +10796,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -10937,7 +10937,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -11055,7 +11055,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -11174,7 +11174,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -11304,7 +11304,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -11444,7 +11444,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -11562,7 +11562,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -11681,7 +11681,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -11811,7 +11811,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -11929,7 +11929,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -12036,7 +12036,7 @@ functions = {
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -12246,7 +12246,7 @@ functions = {
     'CreateTask': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -12372,7 +12372,7 @@ functions = {
     'CreateWatchdogTimerTaskEx': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -12534,7 +12534,7 @@ functions = {
     'DisableRefTrig': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -12557,7 +12557,7 @@ functions = {
     'DisableStartTrig': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -12608,7 +12608,7 @@ functions = {
     'ExportSignal': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -12913,7 +12913,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetBufferAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -13084,7 +13084,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -13127,7 +13127,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -13170,7 +13170,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -13225,7 +13225,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -13269,7 +13269,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -13323,7 +13323,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetChanAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -13886,7 +13886,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -13922,7 +13922,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -13958,7 +13958,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -13995,7 +13995,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -14042,7 +14042,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetExportedSignalAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -14889,7 +14889,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -14925,7 +14925,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -14961,7 +14961,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -14998,7 +14998,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -15045,7 +15045,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -15081,7 +15081,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetReadAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -15117,7 +15117,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetRealTimeAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -15153,7 +15153,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetRealTimeAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -15190,7 +15190,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetRealTimeAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -15538,7 +15538,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTaskAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -15574,7 +15574,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTaskAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -15621,7 +15621,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTaskAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -15657,7 +15657,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -15693,7 +15693,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -15729,7 +15729,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -15772,7 +15772,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -15815,7 +15815,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -15859,7 +15859,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -15913,7 +15913,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -15956,7 +15956,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -15999,7 +15999,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttributeEx',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16042,7 +16042,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16079,7 +16079,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16126,7 +16126,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16162,7 +16162,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16198,7 +16198,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTimingAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16234,7 +16234,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16270,7 +16270,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16306,7 +16306,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16354,7 +16354,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16391,7 +16391,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16440,7 +16440,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16487,7 +16487,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16523,7 +16523,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetTrigAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16559,7 +16559,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWatchdogAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16602,7 +16602,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWatchdogAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16645,7 +16645,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWatchdogAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16689,7 +16689,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWatchdogAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16743,7 +16743,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16779,7 +16779,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16815,7 +16815,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16852,7 +16852,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16899,7 +16899,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16935,7 +16935,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetWriteAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -16970,7 +16970,7 @@ functions = {
     'IsTaskDone': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -17004,7 +17004,7 @@ functions = {
     'LoadTask': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -17128,6 +17128,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -17272,6 +17273,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -17365,6 +17367,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -17459,6 +17462,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -17552,6 +17556,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -17634,6 +17639,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -17727,6 +17733,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -17909,6 +17916,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18002,6 +18010,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18107,6 +18116,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18270,6 +18280,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18435,6 +18446,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18586,6 +18598,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18740,6 +18753,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18833,6 +18847,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18926,6 +18941,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -18997,6 +19013,7 @@ functions = {
             {
                 'direction': 'out',
                 'name': 'sampsPerChanRead',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -19061,6 +19078,7 @@ functions = {
             {
                 'direction': 'out',
                 'name': 'sampsPerChanRead',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -19197,6 +19215,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
@@ -19229,7 +19248,7 @@ functions = {
     'RegisterDoneEvent': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -19259,7 +19278,7 @@ functions = {
             {
                 'callback_params': [
                     {
-                        'ctypes_data_type': 'lib_importer.task_handle',
+                        'ctypes_data_type': 'TaskHandle',
                         'direction': 'out',
                         'include_in_proto': False,
                         'name': 'task',
@@ -19304,7 +19323,7 @@ functions = {
     'RegisterEveryNSamplesEvent': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -19355,7 +19374,7 @@ functions = {
             {
                 'callback_params': [
                     {
-                        'ctypes_data_type': 'lib_importer.task_handle',
+                        'ctypes_data_type': 'TaskHandle',
                         'direction': 'out',
                         'include_in_proto': False,
                         'name': 'task',
@@ -19407,7 +19426,7 @@ functions = {
     'RegisterSignalEvent': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -19448,7 +19467,7 @@ functions = {
             {
                 'callback_params': [
                     {
-                        'ctypes_data_type': 'lib_importer.task_handle',
+                        'ctypes_data_type': 'TaskHandle',
                         'direction': 'out',
                         'include_in_proto': False,
                         'name': 'task',
@@ -19547,7 +19566,7 @@ functions = {
     'ResetBufferAttribute': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -19575,7 +19594,7 @@ functions = {
     'ResetChanAttribute': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -19634,7 +19653,7 @@ functions = {
     'ResetExportedSignalAttribute': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -19668,7 +19687,7 @@ functions = {
     'ResetReadAttribute': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -19702,7 +19721,7 @@ functions = {
     'ResetRealTimeAttribute': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -19730,7 +19749,7 @@ functions = {
     'ResetTimingAttribute': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -19764,7 +19783,7 @@ functions = {
     'ResetTimingAttributeEx': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -19808,7 +19827,7 @@ functions = {
     'ResetTrigAttribute': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -19842,7 +19861,7 @@ functions = {
     'ResetWatchdogAttribute': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -19886,7 +19905,7 @@ functions = {
     'ResetWriteAttribute': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -19920,7 +19939,7 @@ functions = {
     'SaveGlobalChan': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -20008,7 +20027,7 @@ functions = {
     'SaveTask': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -20293,7 +20312,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetBufferAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -20453,7 +20472,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -20496,7 +20515,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -20539,7 +20558,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -20594,7 +20613,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -20638,7 +20657,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -20681,7 +20700,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetChanAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -20839,7 +20858,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -20875,7 +20894,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -20911,7 +20930,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -20948,7 +20967,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -20984,7 +21003,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetExportedSignalAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21037,7 +21056,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21073,7 +21092,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21109,7 +21128,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21146,7 +21165,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21182,7 +21201,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21218,7 +21237,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetReadAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21254,7 +21273,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetRealTimeAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21290,7 +21309,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetRealTimeAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21327,7 +21346,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetRealTimeAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21534,7 +21553,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21570,7 +21589,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21606,7 +21625,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21649,7 +21668,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21692,7 +21711,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21736,7 +21755,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21779,7 +21798,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21822,7 +21841,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21865,7 +21884,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttributeEx',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21908,7 +21927,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21945,7 +21964,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -21981,7 +22000,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22017,7 +22036,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22053,7 +22072,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTimingAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22089,7 +22108,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22125,7 +22144,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22161,7 +22180,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22209,7 +22228,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22246,7 +22265,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22294,7 +22313,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22330,7 +22349,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22366,7 +22385,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetTrigAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22402,7 +22421,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWatchdogAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22445,7 +22464,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWatchdogAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22488,7 +22507,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWatchdogAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22532,7 +22551,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWatchdogAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22575,7 +22594,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22611,7 +22630,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22647,7 +22666,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22684,7 +22703,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22720,7 +22739,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22756,7 +22775,7 @@ functions = {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetWriteAttribute',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22791,7 +22810,7 @@ functions = {
     'StartNewFile': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22825,7 +22844,7 @@ functions = {
     'StartTask': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22849,7 +22868,7 @@ functions = {
     'StopTask': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -22873,7 +22892,7 @@ functions = {
     'TaskControl': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -23022,7 +23041,7 @@ functions = {
     'WaitUntilTaskDone': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
-            'ctypes_data_type': 'lib_importer.task_handle',
+            'ctypes_data_type': 'TaskHandle',
             'cvi_name': 'taskHandle',
             'python_accessor': 'self._handle'
         },
@@ -23125,6 +23144,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -23278,6 +23298,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -23370,6 +23391,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -23463,6 +23485,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -23555,6 +23578,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -23656,6 +23680,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -23825,6 +23850,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -23996,6 +24022,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -24156,6 +24183,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -24309,6 +24337,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -24401,6 +24430,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -24493,6 +24523,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
@@ -24572,6 +24603,7 @@ functions = {
                 'python_data_type': 'int',
                 'python_description': '',
                 'python_type_annotation': 'int',
+                'return_on_error_key': 'ni-samps-per-chan-written',
                 'type': 'int32'
             },
             {
