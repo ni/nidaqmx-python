@@ -20,7 +20,7 @@
         error_code = cfunc(
             ${', '.join(function_call_args) | wrap(12, 12)})
 %if samps_per_chan_param is None:
-        check_for_error(error_code)\
+        check_for_error(error_code)
 %else:
-        check_for_error(error_code, ${samps_per_chan_param}.value)\
+        check_for_error(error_code, ${samps_per_chan_param}.value)
 %endif

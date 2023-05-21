@@ -81,7 +81,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     %endif
 \
-<%include file="${'/library_interpreter' + get_c_function_call_template(func)}" args="function=func" />
+<%include file="${'/library_interpreter' + get_c_function_call_template(func)}" args="function=func" />\
     %if len(list(return_values)) != 0:
         return ${', '.join(return_values)}
     %endif

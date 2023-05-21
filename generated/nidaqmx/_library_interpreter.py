@@ -4563,7 +4563,6 @@ class LibraryInterpreter(BaseInterpreter):
                 task, options, callback_method_ptr, callback_data)
         check_for_error(error_code)
 
-
     def register_every_n_samples_event(
             self, task, every_n_samples_event_type, n_samples, options,
             callback_function, callback_data):
@@ -4594,7 +4593,6 @@ class LibraryInterpreter(BaseInterpreter):
                 callback_method_ptr, callback_data)
         check_for_error(error_code)
 
-
     def register_signal_event(
             self, task, signal_id, options, callback_function, callback_data):
         DAQmxSignalEventCallbackPtr = ctypes.CFUNCTYPE(
@@ -4621,7 +4619,6 @@ class LibraryInterpreter(BaseInterpreter):
             error_code = cfunc(
                 task, signal_id, options, callback_method_ptr, callback_data)
         check_for_error(error_code)
-
 
     def remove_cdaq_sync_connection(self, port_list):
         cfunc = lib_importer.windll.DAQmxRemoveCDAQSyncConnection
