@@ -20,24 +20,19 @@
             ${', '.join(callback_param_types) | wrap(12)})
 
         cfunc = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ${', '.join(argument_types) | wrap(24)}]
 
-        with cfunc.arglock:
-            if callback_function is not None:
-                callback_method_ptr = ${callback_func_param.type}(callback_function)
-                self._${event_name}_callbacks.append(callback_method_ptr)
-                cfunc.argtypes = [
-                    ${', '.join(argument_types) | wrap(20)}]
-            else:
-                del self._${event_name}_callbacks[:]
-                callback_method_ptr = None
-<%
-for arg_type in argument_types:
-    if arg_type == callback_func_param.type:
-        argument_types = list(map(lambda x:x.replace(arg_type, "ctypes.c_void_p"), argument_types))
-%>\
-                cfunc.argtypes = [
-                    ${', '.join(argument_types) | wrap(20)}]
+        if callback_function is not None:
+            callback_method_ptr = ${callback_func_param.type}(callback_function)
+            self._${event_name}_callbacks.append(callback_method_ptr)
+        else:
+            del self._${event_name}_callbacks[:]
+            callback_method_ptr = ${callback_func_param.type}()
 
-            error_code = cfunc(
-                ${', '.join(function_call_args) | wrap(16)})
+        error_code = cfunc(
+            ${', '.join(function_call_args) | wrap(12)})
         check_for_error(error_code)
