@@ -1,7 +1,12 @@
 <%page args="function"/>\
 <%
     import re
-    from codegen.utilities.interpreter_helpers import generate_interpreter_function_call_args, get_callback_func_param, get_callback_param_data_types, get_argument_types
+    from codegen.utilities.interpreter_helpers import (
+        generate_interpreter_function_call_args,
+        get_argument_types,
+        get_callback_func_param,
+        get_callback_param_data_types,
+    )
     from codegen.utilities.text_wrappers import wrap
     from codegen.utilities.helpers import strip_string_prefix
 

@@ -1,5 +1,12 @@
 <%
-    from codegen.utilities.interpreter_helpers import get_interpreter_functions, get_params_for_function_signature, get_interpreter_parameter_signature, get_output_params, get_response_parameters, get_grpc_function_call_template
+    from codegen.utilities.interpreter_helpers import (
+        get_grpc_function_call_template,
+        get_interpreter_functions,
+        get_interpreter_parameter_signature,
+        get_output_params,
+        get_params_for_function_signature,
+        get_response_parameters,
+    )
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
     from codegen.utilities.helpers import strip_string_prefix
@@ -161,7 +168,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         return hash(task_handle.name)
 
 def _assign_numpy_array(numpy_array, grpc_array):
-    """ 
+    """
     Assigns grpc array to numpy array maintaining the original shape.
 
     Checks for the instance of grpc_array with bytes, if validated to True,

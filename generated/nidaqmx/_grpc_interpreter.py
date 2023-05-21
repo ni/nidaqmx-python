@@ -3566,7 +3566,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         return hash(task_handle.name)
 
 def _assign_numpy_array(numpy_array, grpc_array):
-    """ 
+    """
     Assigns grpc array to numpy array maintaining the original shape.
 
     Checks for the instance of grpc_array with bytes, if validated to True,

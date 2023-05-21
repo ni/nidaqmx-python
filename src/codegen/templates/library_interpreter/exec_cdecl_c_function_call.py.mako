@@ -1,6 +1,12 @@
 <%page args="function"/>\
 <%
-    from codegen.utilities.interpreter_helpers import get_argument_types, generate_interpreter_function_call_args, get_instantiation_lines_for_varargs, get_varargs_parameters, get_argument_definition_lines_for_varargs
+    from codegen.utilities.interpreter_helpers import (
+        generate_interpreter_function_call_args,
+        get_argument_definition_lines_for_varargs,
+        get_argument_types,
+        get_instantiation_lines_for_varargs,
+        get_varargs_parameters,
+    )
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
 
     varargs_parameters = get_varargs_parameters(function)

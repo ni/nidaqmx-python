@@ -1,6 +1,10 @@
 <%page args="function"/>\
 <%
-    from codegen.utilities.interpreter_helpers import generate_interpreter_function_call_args, get_samps_per_chan_read_or_write_param, get_argument_types
+    from codegen.utilities.interpreter_helpers import (
+        generate_interpreter_function_call_args,
+        get_argument_types,
+        get_samps_per_chan_read_or_write_param,
+    )
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
 
     function_call_args = generate_interpreter_function_call_args(function)
