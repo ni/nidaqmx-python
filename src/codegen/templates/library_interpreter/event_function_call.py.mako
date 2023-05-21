@@ -30,9 +30,11 @@
             callback_method_ptr = ${callback_func_param.type}(callback_function)
             self._${event_name}_callbacks.append(callback_method_ptr)
         else:
-            del self._${event_name}_callbacks[:]
             callback_method_ptr = ${callback_func_param.type}()
 
         error_code = cfunc(
             ${', '.join(function_call_args) | wrap(12)})
         check_for_error(error_code)
+
+        if callback_function is None:
+            del self._${event_name}_callbacks[:]

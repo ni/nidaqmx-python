@@ -4556,12 +4556,14 @@ class LibraryInterpreter(BaseInterpreter):
             callback_method_ptr = DAQmxDoneEventCallbackPtr(callback_function)
             self._done_event_callbacks.append(callback_method_ptr)
         else:
-            del self._done_event_callbacks[:]
             callback_method_ptr = DAQmxDoneEventCallbackPtr()
 
         error_code = cfunc(
             task, options, callback_method_ptr, callback_data)
         check_for_error(error_code)
+
+        if callback_function is None:
+            del self._done_event_callbacks[:]
 
     def register_every_n_samples_event(
             self, task, every_n_samples_event_type, n_samples, options,
@@ -4583,13 +4585,15 @@ class LibraryInterpreter(BaseInterpreter):
             callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr(callback_function)
             self._every_n_samples_event_callbacks.append(callback_method_ptr)
         else:
-            del self._every_n_samples_event_callbacks[:]
             callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr()
 
         error_code = cfunc(
             task, every_n_samples_event_type, n_samples, options,
             callback_method_ptr, callback_data)
         check_for_error(error_code)
+
+        if callback_function is None:
+            del self._every_n_samples_event_callbacks[:]
 
     def register_signal_event(
             self, task, signal_id, options, callback_function, callback_data):
@@ -4610,12 +4614,14 @@ class LibraryInterpreter(BaseInterpreter):
             callback_method_ptr = DAQmxSignalEventCallbackPtr(callback_function)
             self._signal_event_callbacks.append(callback_method_ptr)
         else:
-            del self._signal_event_callbacks[:]
             callback_method_ptr = DAQmxSignalEventCallbackPtr()
 
         error_code = cfunc(
             task, signal_id, options, callback_method_ptr, callback_data)
         check_for_error(error_code)
+
+        if callback_function is None:
+            del self._signal_event_callbacks[:]
 
     def remove_cdaq_sync_connection(self, port_list):
         cfunc = lib_importer.windll.DAQmxRemoveCDAQSyncConnection
