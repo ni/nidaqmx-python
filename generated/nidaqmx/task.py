@@ -650,7 +650,10 @@ class Task:
                 Passing None for this parameter unregisters the event callback
                 function.
         """
-        self._interpreter.register_done_event(self._handle, 0, callback_method, None)
+        if callback_method is not None:
+            self._interpreter.register_done_event(self._handle, 0, callback_method, None)
+        else:
+            self._interpreter.unregister_done_event(self._handle)
 
     def register_every_n_samples_acquired_into_buffer_event(
             self, sample_interval, callback_method):
@@ -686,8 +689,13 @@ class Task:
                 Passing None for this parameter unregisters the event callback
                 function.
         """
-        self._interpreter.register_every_n_samples_event(self._handle, EveryNSamplesEventType.ACQUIRED_INTO_BUFFER.value,
+        if callback_method is not None:
+            self._interpreter.register_every_n_samples_event(
+                self._handle, EveryNSamplesEventType.ACQUIRED_INTO_BUFFER.value,
                 sample_interval, 0, callback_method, None)
+        else:
+            self._interpreter.unregister_every_n_samples_event(
+                self._handle, EveryNSamplesEventType.ACQUIRED_INTO_BUFFER.value)
 
     def register_every_n_samples_transferred_from_buffer_event(
             self, sample_interval, callback_method):
@@ -723,8 +731,13 @@ class Task:
                 Passing None for this parameter unregisters the event callback
                 function.
         """
-        self._interpreter.register_every_n_samples_event(self._handle, EveryNSamplesEventType.TRANSFERRED_FROM_BUFFER.value,
+        if callback_method is not None:
+            self._interpreter.register_every_n_samples_event(
+                self._handle, EveryNSamplesEventType.TRANSFERRED_FROM_BUFFER.value,
                 sample_interval, 0, callback_method, None)
+        else:
+            self._interpreter.unregister_every_n_samples_event(
+                self._handle, EveryNSamplesEventType.TRANSFERRED_FROM_BUFFER.value)
 
     def register_signal_event(self, signal_type, callback_method):
         """
@@ -755,7 +768,11 @@ class Task:
                 Passing None for this parameter unregisters the event callback
                 function.
         """
-        self._interpreter.register_signal_event(self._handle, signal_type.value, 0, callback_method, None)
+        if callback_method is not None:
+            self._interpreter.register_signal_event(
+                self._handle, signal_type.value, 0, callback_method, None)
+        else:
+            self._interpreter.unregister_signal_event(self._handle, signal_type.value)
 
     def save(self, save_as="", author="", overwrite_existing_task=False,
              allow_interactive_editing=True, allow_interactive_deletion=True):
