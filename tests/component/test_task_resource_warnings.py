@@ -7,35 +7,23 @@ from nidaqmx.errors import DaqResourceWarning
 
 
 @pytest.mark.library_only
-def test__unclosed_task__leak_task__resource_warning_raised(task):
-    """Test to validate unclosed tasks."""
-    interpreter = task._interpreter
-    task_handle = task._handle
-
+def test___unclosed_task___leak_task___resource_warning_raised(task):
     # Since __del__ is not guaranteed to be called, for the purposes of
     # consistent test results call __del__ manually.
     with pytest.warns(DaqResourceWarning):
         task.__del__()
 
-    interpreter.clear_task(task_handle)
-
 
 @pytest.mark.grpc_only
-def test__grpc_task__leak_task__resource_warning_not_raised(task):
-    """Test to validate grpc leak tasks."""
-    interpreter = task._interpreter
-    task_handle = task._handle
+def test___grpc_task___leak_task___resource_warning_not_raised(task):
 
     with warnings.catch_warnings(record=True) as warnings_raised:
         task.__del__()
 
     assert len(warnings_raised) == 0
-    
-    interpreter.clear_task(task_handle)
 
 
-def test__closed_task__del_task__resource_warning_not_raised(init_kwargs):
-    """Test to validate __del__ of closed tasks."""
+def test___closed_task___del_task___resource_warning_not_raised(init_kwargs):
     task = nidaqmx.Task(**init_kwargs)
     task.close()
 

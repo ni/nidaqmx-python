@@ -165,12 +165,10 @@ def test___close_on_exit_with_grpc_options___leak_task___resource_warning_not_ra
     expect_create_task(interpreter, "GrpcTaskHandle")
     expect_get_task_name(interpreter, "GrpcTask")
     grpc_options = create_grpc_options(mocker)
-
     task = Task("GrpcTask", grpc_options=grpc_options)
-
+    
     with warnings.catch_warnings(record=True) as warnings_raised:
         task.__del__()
     
     assert len(warnings_raised) == 0
-
     task.close()
