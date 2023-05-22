@@ -176,7 +176,7 @@ def get_instantiation_lines_for_output(func):
     """Gets the lines of code for instantiation of output values."""
     instantiation_lines = []
     if func.is_init_method:
-        instantiation_lines.append(f"task = TaskHandle(0)")
+        instantiation_lines.append(f"task = lib_importer.task_handle(0)")
     for param in get_interpreter_output_params(func):
         if param.parameter_name == "task":
             continue
