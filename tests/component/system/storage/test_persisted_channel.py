@@ -14,3 +14,18 @@ def test___persisted_channels_with_different_names___compare___not_equal(init_kw
     persisted_channel2 = PersistedChannel("Channel2", **init_kwargs)
 
     assert persisted_channel1 != persisted_channel2
+
+
+def test___persisted_channels_with_same_name___hash___equal(init_kwargs):
+    persisted_channel1 = PersistedChannel("Channel1", **init_kwargs)
+    persisted_channel2 = PersistedChannel("Channel1", **init_kwargs)
+
+    assert persisted_channel1 is not persisted_channel2
+    assert hash(persisted_channel1) == hash(persisted_channel2)
+
+
+def test___persisted_channels_with_different_names___hash___not_equal(init_kwargs):
+    persisted_channel1 = PersistedChannel("Channel1", **init_kwargs)
+    persisted_channel2 = PersistedChannel("Channel2", **init_kwargs)
+
+    assert hash(persisted_channel1) != hash(persisted_channel2)
