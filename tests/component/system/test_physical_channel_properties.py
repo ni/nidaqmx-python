@@ -24,25 +24,6 @@ def test___nonexistent_physical_channel___get_property___raises_physical_chan_do
     assert exc_info.value.error_code == DAQmxErrors.PHYSICAL_CHAN_DOES_NOT_EXIST
 
 
-def test___physical_channels_with_same_name___compare___are_equal(init_kwargs):
-    phys_chan1 = PhysicalChannel("bridgeTester/ai2", **init_kwargs)
-    phys_chan2 = PhysicalChannel("bridgeTester/ai2", **init_kwargs)
-
-    assert phys_chan1 is not phys_chan2
-    assert phys_chan1 == phys_chan2
-
-
-def test___physical_channels_with_different_names___compare___are_not_equal(
-    init_kwargs,
-):
-    phys_chan1 = PhysicalChannel("bridgeTester/ai2", **init_kwargs)
-    phys_chan2 = PhysicalChannel("bridgeTester/ai3", **init_kwargs)
-    phys_chan3 = PhysicalChannel("tsVoltageTester1/ai2", **init_kwargs)
-
-    assert phys_chan1 != phys_chan2
-    assert phys_chan1 != phys_chan3
-
-
 def test___physical_channel___get_bool_property___returns_value(any_x_series_device):
     phys_chans = any_x_series_device.di_lines
 

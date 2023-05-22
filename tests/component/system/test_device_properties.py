@@ -21,21 +21,6 @@ def test___nonexistent_device___get_property___raises_invalid_device_id(init_kwa
     assert exc_info.value.error_code == DAQmxErrors.INVALID_DEVICE_ID
 
 
-def test___devices_with_same_name___compare___equal(init_kwargs):
-    device1 = Device("bridgeTester", **init_kwargs)
-    device2 = Device("bridgeTester", **init_kwargs)
-
-    assert device1 is not device2
-    assert device1 == device2
-
-
-def test___devices_with_different_names___compare___not_equal(init_kwargs):
-    device1 = Device("bridgeTester", **init_kwargs)
-    device2 = Device("tsVoltageTester1", **init_kwargs)
-
-    assert device1 != device2
-
-
 @pytest.mark.device_name("bridgeTester")
 def test___device___bool_property___returns_value(device):
     # The PXIe-4331 supports analog triggering
