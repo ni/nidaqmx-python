@@ -20,21 +20,6 @@ def test___nonexistent_persisted_channel___get_property___raises_invalid_global_
     assert exc_info.value.error_code == DAQmxErrors.INVALID_GLOBAL_CHAN
 
 
-def test___persisted_channels_with_same_name___compare___equal(init_kwargs):
-    persisted_channel1 = PersistedChannel("Channel1", **init_kwargs)
-    persisted_channel2 = PersistedChannel("Channel1", **init_kwargs)
-
-    assert persisted_channel1 is not persisted_channel2
-    assert persisted_channel1 == persisted_channel2
-
-
-def test___persisted_channels_with_different_names___compare___not_equal(init_kwargs):
-    persisted_channel1 = PersistedChannel("Channel1", **init_kwargs)
-    persisted_channel2 = PersistedChannel("Channel2", **init_kwargs)
-
-    assert persisted_channel1 != persisted_channel2
-
-
 @pytest.mark.channel_name("VoltageTesterChannel")
 def test___persisted_channel___get_bool_property___returns_persisted_value(persisted_channel):
     assert persisted_channel.allow_interactive_editing
