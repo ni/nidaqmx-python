@@ -1,1 +1,1 @@
-"""NI-DAQmx tests."""
+"""Tests for the nidaqmx package."""
