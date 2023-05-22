@@ -43,38 +43,41 @@ class GrpcStubInterpreter(BaseInterpreter):
         try:
             response = func(request, metadata=metadata)
         except grpc.RpcError as rpc_error:
-            error_message = rpc_error.details()
-            error_code = None
-            samps_per_chan_read = None
-            samps_per_chan_written = None
-            for entry in rpc_error.trailing_metadata() or []:
-                if entry.key == 'ni-error':
-                    try:
-                        error_code = int(typing.cast(str, entry.value))
-                    except ValueError:
-                        error_message += f'\nError status: {entry.value}'
-                elif entry.key == "ni-samps-per-chan-read":
-                    try:
-                        samps_per_chan_read = int(typing.cast(str, entry.value))
-                    except ValueError:
-                        error_message += f'\nSamples per channel read: {entry.value}'
-                elif entry.key == "ni-samps-per-chan-written":
-                    try:
-                        samps_per_chan_written = int(typing.cast(str, entry.value))
-                    except ValueError:
-                        error_message += f'\nSamples per channel written: {entry.value}'
-            grpc_error = rpc_error.code()
-            if grpc_error == grpc.StatusCode.UNAVAILABLE:
-                error_message = 'Failed to connect to server'
-            elif grpc_error == grpc.StatusCode.UNIMPLEMENTED:
-                error_message = (
-                    'This operation is not supported by the NI gRPC Device Server being used. Upgrade NI gRPC Device Server.'
-                )
-            if error_code is None:
-                raise errors.RpcError(grpc_error, error_message) from None
-            else:
-                self._raise_error(error_code, error_message, samps_per_chan_written, samps_per_chan_read)
+            self._handle_rpc_error(rpc_error)
         return response
+
+    def _handle_rpc_error(self, rpc_error):
+        error_message = rpc_error.details()
+        error_code = None
+        samps_per_chan_read = None
+        samps_per_chan_written = None
+        for entry in rpc_error.trailing_metadata() or []:
+            if entry.key == 'ni-error':
+                try:
+                    error_code = int(typing.cast(str, entry.value))
+                except ValueError:
+                    error_message += f'\nError status: {entry.value}'
+            elif entry.key == "ni-samps-per-chan-read":
+                try:
+                    samps_per_chan_read = int(typing.cast(str, entry.value))
+                except ValueError:
+                    error_message += f'\nSamples per channel read: {entry.value}'
+            elif entry.key == "ni-samps-per-chan-written":
+                try:
+                    samps_per_chan_written = int(typing.cast(str, entry.value))
+                except ValueError:
+                    error_message += f'\nSamples per channel written: {entry.value}'
+        grpc_error = rpc_error.code()
+        if grpc_error == grpc.StatusCode.UNAVAILABLE:
+            error_message = 'Failed to connect to server'
+        elif grpc_error == grpc.StatusCode.UNIMPLEMENTED:
+            error_message = (
+                'This operation is not supported by the NI gRPC Device Server being used. Upgrade NI gRPC Device Server.'
+            )
+        if error_code is None:
+            raise errors.RpcError(grpc_error, error_message) from None
+        else:
+            self._raise_error(error_code, error_message, samps_per_chan_written, samps_per_chan_read)
 
     def _raise_error(self, error_code, error_message, samps_per_chan_written=None, samps_per_chan_read=None):
         if error_code < 0:
@@ -101,7 +104,23 @@ class GrpcStubInterpreter(BaseInterpreter):
         except ValueError:
             error_message = f'\nError status: {value}'
         return error_code, error_message
-    
+
+    def _check_for_event_registration_error(self, event_stream):
+        try:
+            # Wait for initial metadata to ensure that the server has received the event
+            # registration request and called the event registration function. Otherwise,
+            # there is no guarantee that the event registration function is called before
+            # the application sends the next RPC request (e.g. start_task).
+            _ = event_stream.initial_metadata()
+
+            # When the event registration function returns an error, the server should close
+            # the event stream with an error before sending initial metadata. This behavior
+            # requires NI gRPC Device Server version 2.2 or later.
+            if event_stream.done() and event_stream.exception() is not None:
+                raise event_stream.exception()
+        except grpc.RpcError as rpc_error:
+            self._handle_rpc_error(rpc_error)
+
     def _unregister_done_event_callbacks(self):
         if self._done_event_thread is not None:
             self._done_event_stream.cancel()
@@ -2646,14 +2665,11 @@ class GrpcStubInterpreter(BaseInterpreter):
             self, task, options, callback_function, callback_data):
         assert options == 0
         if callback_function is not None:
-            if self._done_event_stream is not None:
-                raise errors.DaqError(
-                    error_code = -1,
-                    message = "Could not register the given callback function, a callback function already exists."
-                )
-            self._done_event_stream = self._invoke(
+            event_stream = self._invoke(
                 self._client.RegisterDoneEvent,
                 grpc_types.RegisterDoneEventRequest(task=task))
+
+            self._check_for_event_registration_error(event_stream)
 
             def event_thread():
                 try:
@@ -2667,6 +2683,13 @@ class GrpcStubInterpreter(BaseInterpreter):
                     self._done_event_stream.cancel()
                     self._done_event_stream = None
 
+            if self._done_event_stream is not None:
+                raise errors.DaqError(
+                    error_code = -1,
+                    message = "Could not register the given callback function, a callback function already exists."
+                )
+
+            self._done_event_stream = event_stream
             self._done_event_thread = threading.Thread(target=event_thread)
             self._done_event_thread.start()
         else:
@@ -2677,17 +2700,14 @@ class GrpcStubInterpreter(BaseInterpreter):
             callback_function, callback_data):
         assert options == 0
         if callback_function is not None:
-            if self._every_n_samples_event_stream is not None:
-                raise errors.DaqError(
-                    error_code = -1,
-                    message = "Could not register the given callback function, a callback function already exists."
-                )
-            self._every_n_samples_event_stream = self._invoke(
+            event_stream = self._invoke(
                 self._client.RegisterEveryNSamplesEvent,
                 grpc_types.RegisterEveryNSamplesEventRequest(
                     task=task,
                     every_n_samples_event_type_raw=every_n_samples_event_type,
                     n_samples=n_samples))
+
+            self._check_for_event_registration_error(event_stream)
 
             def event_thread():
                 try:
@@ -2702,6 +2722,13 @@ class GrpcStubInterpreter(BaseInterpreter):
                     self._every_n_samples_event_stream.cancel()
                     self._every_n_samples_event_stream = None
 
+            if self._every_n_samples_event_stream is not None:
+                raise errors.DaqError(
+                    error_code = -1,
+                    message = "Could not register the given callback function, a callback function already exists."
+                )
+
+            self._every_n_samples_event_stream = event_stream
             self._every_n_samples_event_thread = threading.Thread(target=event_thread)
             self._every_n_samples_event_thread.start()
         else:
@@ -2711,14 +2738,11 @@ class GrpcStubInterpreter(BaseInterpreter):
             self, task, signal_id, options, callback_function, callback_data):
         assert options == 0
         if callback_function is not None:
-            if self._signal_event_stream is not None:
-                raise errors.DaqError(
-                    error_code = -1,
-                    message = "Could not register the given callback function, a callback function already exists."
-                )
-            self._signal_event_stream = self._invoke(
+            event_stream = self._invoke(
                 self._client.RegisterSignalEvent,
                 grpc_types.RegisterSignalEventRequest(task=task, signal_id_raw=signal_id))
+
+            self._check_for_event_registration_error(event_stream)
 
             def event_thread():
                 try:
@@ -2732,6 +2756,13 @@ class GrpcStubInterpreter(BaseInterpreter):
                     self._signal_event_stream.cancel()
                     self._signal_event_stream = None
 
+            if self._signal_event_stream is not None:
+                raise errors.DaqError(
+                    error_code = -1,
+                    message = "Could not register the given callback function, a callback function already exists."
+                )
+
+            self._signal_event_stream = event_stream
             self._signal_event_thread = threading.Thread(target=event_thread)
             self._signal_event_thread.start()
         else:
