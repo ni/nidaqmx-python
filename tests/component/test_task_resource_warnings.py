@@ -1,8 +1,8 @@
 import warnings
-import nidaqmx
 
 import pytest
 
+import nidaqmx
 from nidaqmx.errors import DaqResourceWarning
 
 
@@ -16,7 +16,6 @@ def test___unclosed_task___leak_task___resource_warning_raised(task):
 
 @pytest.mark.grpc_only
 def test___grpc_task___leak_task___resource_warning_not_raised(task):
-
     with warnings.catch_warnings(record=True) as warnings_raised:
         task.__del__()
 
