@@ -194,9 +194,7 @@ def test___done_and_every_n_samples_events_registered___run_multiple_finite_acqu
     assert len(every_n_samples_event_observer.events) == num_acquisitions * every_n_event_count
 
 
-@pytest.mark.grpc_xfail(
-    reason="AB#2395984: GrpcStubInterpreter does not unregister events with DAQmx", run=False
-)
+@pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.2 or later", run=False)
 def test___ai_task____run_multiple_finite_acquisitions_with_varying_every_n_samples_event_interval___callbacks_invoked(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -347,9 +345,7 @@ def test___ao_task___register_wrong_every_n_samples_event___not_supported_by_dev
     )
 
 
-@pytest.mark.grpc_xfail(
-    reason="AB#2395984: GrpcStubInterpreter does not unregister events with DAQmx"
-)
+@pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.2 or later")
 def test___task___register_unregister_done_event___callback_not_invoked(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -362,9 +358,7 @@ def test___task___register_unregister_done_event___callback_not_invoked(
     assert len(event_observer.events) == 0
 
 
-@pytest.mark.grpc_xfail(
-    reason="AB#2395984: GrpcStubInterpreter does not unregister events with DAQmx"
-)
+@pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.2 or later")
 def test___task___register_unregister_every_n_samples_acquired_into_buffer_event___callback_not_invoked(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -379,9 +373,7 @@ def test___task___register_unregister_every_n_samples_acquired_into_buffer_event
     assert len(event_observer.events) == 0
 
 
-@pytest.mark.grpc_xfail(
-    reason="AB#2395984: GrpcStubInterpreter does not unregister events with DAQmx"
-)
+@pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.2 or later")
 def test___task___register_unregister_every_n_samples_transferred_from_buffer_event___callback_not_invoked(
     ao_task: nidaqmx.Task,
 ) -> None:
@@ -396,9 +388,7 @@ def test___task___register_unregister_every_n_samples_transferred_from_buffer_ev
     assert len(event_observer.events) == 0
 
 
-@pytest.mark.grpc_xfail(
-    reason="AB#2395984: GrpcStubInterpreter does not unregister events with DAQmx"
-)
+@pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.2 or later")
 def test___task___register_unregister_signal_event___callback_not_invoked(
     ai_task: nidaqmx.Task,
 ) -> None:
