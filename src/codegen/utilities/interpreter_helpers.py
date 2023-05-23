@@ -395,9 +395,19 @@ def get_grpc_function_call_template(func):
         return "/default_grpc_function_call.py.mako"
 
 
-def get_callback_function_call_args(func_params):
+def get_callback_func_param(func):
+    """Gets the callback_function parameter."""
+    return next(p for p in func.base_parameters if p.parameter_name == "callback_function")
+
+
+def get_callback_data_param(func):
+    """Gets the callback_data parameter."""
+    return next(p for p in func.base_parameters if p.parameter_name == "callback_data")
+
+
+def get_callback_function_call_args(func):
     """Gets the parameters used in the callback function call."""
-    callback_func_param = next(p for p in func_params if p.parameter_name == "callback_function")
+    callback_func_param = get_callback_func_param(func)
     callback_func_args = []
     for param in callback_func_param.callback_params:
         name = camel_to_snake_case(param["name"])
@@ -412,10 +422,10 @@ def get_callback_function_call_args(func_params):
     return callback_func_args
 
 
-def get_callback_param_data_types(func_params):
+def get_callback_param_data_types(func):
     """Gets the data types for call back function parameters."""
-    callback_func_param = next(p for p in func_params if p.parameter_name == "callback_function")
-    callback_data_param = next(p for p in func_params if p.parameter_name == "callback_data")
+    callback_func_param = get_callback_func_param(func)
+    callback_data_param = get_callback_data_param(func)
     # callback_param_types: [result_type, [**ctypes_data_type** of callback_params],
     # **ctypes_data_type** of callback_data_param]
     return (

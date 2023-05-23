@@ -6,6 +6,7 @@ import shutil
 from pathlib import Path, PureWindowsPath
 
 import codegen.metadata as scrapigen_metadata
+from mako.exceptions import text_error_template
 from mako.lookup import TemplateLookup
 from mako.template import Template
 
@@ -30,7 +31,14 @@ def _generate_file(metadata, template_file_name, output_path):
     template = _get_template(template_file_name)
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, "w+", newline="") as f:
-        f.write(template.render(data=metadata))
+        try:
+            output_text = template.render(data=metadata)
+        except Exception:
+            _logger.error(text_error_template().render())
+            raise RuntimeError(
+                f'An error occurred while rendering template "{template_file_name}"'
+            ) from None
+        f.write(output_text)
 
 
 def _copy_handwritten_files(dest):

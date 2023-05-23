@@ -25,7 +25,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         '_every_n_samples_event_stream',
         '_every_n_samples_event_thread',
         '_signal_event_stream',
-        '_signal_event_thread'
+        '_signal_event_thread',
     ]
 
 
@@ -3562,12 +3562,11 @@ class GrpcStubInterpreter(BaseInterpreter):
                 physical_channel=physical_channel, file_path=file_path,
                 basic_teds_options_raw=basic_teds_options))
 
-
     def hash_task_handle(self, task_handle):
         return hash(task_handle.name)
 
 def _assign_numpy_array(numpy_array, grpc_array):
-    """ 
+    """
     Assigns grpc array to numpy array maintaining the original shape.
 
     Checks for the instance of grpc_array with bytes, if validated to True,
