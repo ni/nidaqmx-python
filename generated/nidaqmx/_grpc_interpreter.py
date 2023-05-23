@@ -95,16 +95,6 @@ class GrpcStubInterpreter(BaseInterpreter):
                     error_message = 'Failed to retrieve error description.'
             warnings.warn(errors.DaqWarning(error_message, error_code))
 
-    def _get_integer_value_from_grpc_string(self, entry_value):
-        value = entry_value if isinstance(entry_value, str) else entry_value.decode('utf-8')
-        error_code = None
-        error_message = None
-        try:
-            error_code = int(value)
-        except ValueError:
-            error_message = f'\nError status: {value}'
-        return error_code, error_message
-
     def _check_for_event_registration_error(self, event_stream):
         try:
             # Wait for initial metadata to ensure that the server has received the event
