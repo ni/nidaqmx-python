@@ -3,8 +3,9 @@ from __future__ import annotations
 
 import contextlib
 import pathlib
+from concurrent.futures import ThreadPoolExecutor
 from enum import Enum
-from typing import List
+from typing import Generator, List
 
 import pytest
 
@@ -403,3 +404,10 @@ def _get_marker_value(request, marker_name, default=None):
             marker_value = marker.args[0]  # assume single parameter in marker
 
     return marker_value
+
+
+@pytest.fixture(scope="function")
+def thread_pool_executor() -> Generator[ThreadPoolExecutor, None, None]:
+    """Creates a thread pool executor."""
+    with ThreadPoolExecutor() as executor:
+        yield executor
