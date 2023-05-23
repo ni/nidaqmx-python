@@ -1,3 +1,10 @@
+import grpc
+import pytest
+
+from nidaqmx import DaqError, SessionInitializationBehavior
+from nidaqmx.constants import READ_ALL_AVAILABLE
+from nidaqmx.error_codes import DAQmxErrors
+from nidaqmx.errors import RpcError
 from nidaqmx.system.storage import PersistedTask
 
 
@@ -29,3 +36,58 @@ def test___persisted_tasks_with_different_names___hash___not_equal(init_kwargs):
     persisted_task2 = PersistedTask("Task2", **init_kwargs)
 
     assert hash(persisted_task1) != hash(persisted_task2)
+
+
+@pytest.mark.task_name("VoltageTesterTask")
+def test___persisted_task___load_and_read___returns_persisted_sample_count(
+    persisted_task: PersistedTask,
+):
+    with persisted_task.load() as task:
+        samples = task.read(READ_ALL_AVAILABLE)
+
+    assert len(samples) == 100
+    assert all(-10.0 <= s <= 10.0 for s in samples)
+
+
+@pytest.mark.task_name("VoltageTesterTask")
+@pytest.mark.library_only
+def test___persisted_task___load_twice___raises_duplicate_task(persisted_task: PersistedTask):
+    with persisted_task.load():
+        with pytest.raises(DaqError) as exc_info:
+            with persisted_task.load():
+                pass
+
+    assert exc_info.value.error_code == DAQmxErrors.DUPLICATE_TASK
+
+
+@pytest.mark.task_name("VoltageTesterTask")
+@pytest.mark.grpc_only
+@pytest.mark.grpc_session_initialization_behavior(SessionInitializationBehavior.AUTO)
+def test___grpc_session_initializaton_behavior_auto___load_twice___returns_multiple_task_proxies(
+    persisted_task: PersistedTask,
+):
+    with persisted_task.load() as task1:
+        with persisted_task.load() as task2:
+            same_object = task1 is task2
+            task1_name = task1.name
+            task2_name = task2.name
+
+    assert not same_object
+    assert task1_name == task2_name
+
+
+@pytest.mark.task_name("VoltageTesterTask")
+@pytest.mark.grpc_only
+@pytest.mark.grpc_session_initialization_behavior(
+    SessionInitializationBehavior.INITIALIZE_SERVER_SESSION
+)
+def test___grpc_session_initialization_behavior_initialize_server_session___load_twice___raises_duplicate_task(
+    persisted_task: PersistedTask,
+):
+    with persisted_task.load():
+        with pytest.raises(RpcError) as exc_info:
+            with persisted_task.load():
+                pass
+
+    assert exc_info.value.rpc_code == grpc.StatusCode.ALREADY_EXISTS
+    assert "VoltageTesterTask" in exc_info.value.args[0]
