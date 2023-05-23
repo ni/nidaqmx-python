@@ -76,7 +76,7 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
         metafunc.parametrize("init_kwargs", params, indirect=True)
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def system(init_kwargs):
     """Gets system instance based on the grpc options."""
     if "grpc_options" in init_kwargs:
@@ -111,25 +111,25 @@ def _x_series_device(device_type, system):
     return None
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def any_x_series_device(system):
     """Gets any x series device information."""
     return _x_series_device(DeviceType.ANY, system)
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def real_x_series_device(system):
     """Gets the real x series device information."""
     return _x_series_device(DeviceType.REAL, system)
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def sim_x_series_device(system):
     """Gets simulated x series device information."""
     return _x_series_device(DeviceType.SIMULATED, system)
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def sim_ts_chassis(system):
     """Gets simulated TestScale chassis information."""
     # Prefer tsChassisTester if available so that multi-module tests will use
@@ -149,7 +149,7 @@ def sim_ts_chassis(system):
     return None
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def sim_ts_power_device(sim_ts_chassis):
     """Gets simulated power device information."""
     for device in sim_ts_chassis.chassis_module_devices:
@@ -168,7 +168,7 @@ def sim_ts_power_device(sim_ts_chassis):
     return None
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def sim_ts_voltage_device(sim_ts_chassis):
     """Gets simulated voltage device information."""
     for device in sim_ts_chassis.chassis_module_devices:
@@ -187,7 +187,7 @@ def sim_ts_voltage_device(sim_ts_chassis):
     return None
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def sim_ts_power_devices(sim_ts_chassis):
     """Gets simulated power devices information."""
     devices = []
@@ -209,7 +209,7 @@ def sim_ts_power_devices(sim_ts_chassis):
     return None
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def multi_threading_test_devices(system):
     """Gets multi threading test devices information."""
     devices = []
@@ -247,7 +247,7 @@ def device(request, system):
     return None
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def test_assets_directory() -> pathlib.Path:
     """Gets path to test_assets directory."""
     return pathlib.Path(__file__).parent / "test_assets"
@@ -269,23 +269,28 @@ def grpc_channel(grpc_server_process: GrpcServerProcess) -> grpc.Channel:
         yield channel
 
 
-@pytest.fixture(scope="session")
-def grpc_init_kwargs(grpc_channel: grpc.Channel) -> dict:
+@pytest.fixture(scope="function")
+def grpc_init_kwargs(request: pytest.FixtureRequest, grpc_channel: grpc.Channel) -> dict:
     """Gets the keyword arguments required for creating the gRPC interpreter."""
+    session_name = _get_marker_value(request, "grpc_session_name", "")
+    initialization_behavior = _get_marker_value(
+        request, "grpc_session_initialization_behavior", nidaqmx.SessionInitializationBehavior.AUTO
+    )
     grpc_options = nidaqmx.GrpcSessionOptions(
         grpc_channel=grpc_channel,
-        session_name="",
+        session_name=session_name,
+        initialization_behavior=initialization_behavior,
     )
     return {"grpc_options": grpc_options}
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def library_init_kwargs():
     """Gets the keyword arguments required for creating the library interpreter."""
     return {}
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def init_kwargs(request):
     """Gets the keyword arguments to create a nidaqmx session."""
     return request.getfixturevalue(request.param)
