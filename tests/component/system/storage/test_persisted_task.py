@@ -84,6 +84,7 @@ def test___grpc_session_initialization_behavior_initialize_server_session___load
     persisted_task: PersistedTask,
 ):
     import grpc
+
     with persisted_task.load():
         with pytest.raises(RpcError) as exc_info:
             with persisted_task.load():
