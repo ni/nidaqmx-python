@@ -57,11 +57,6 @@ def wrapped_ndpointer(*args, **kwargs):
 
     Taken from http://stackoverflow.com/questions/32120178
     """
-    if sys.version_info < (3,):
-        if 'flags' in kwargs:
-            kwargs['flags'] = tuple(
-                f.encode('ascii') for f in kwargs['flags'])
-
     base = ndpointer(*args, **kwargs)
 
     def from_param(cls, obj):
