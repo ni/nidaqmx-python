@@ -57,7 +57,8 @@ def test___device___list_of_float_property___returns_value(device):
 
 
 @pytest.mark.grpc_xfail(
-    reason="AB#2395661: Attributes with bitfield enum are listed under the wrong type in DAQmx proto file."
+    reason="AB#2395661: Attributes with bitfield enum are listed under the wrong type in DAQmx proto file.",
+    raises=DaqError,
 )
 @pytest.mark.device_name("bridgeTester")
 def test___device___list_of_enum_property___returns_value(device):
