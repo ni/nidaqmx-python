@@ -413,6 +413,11 @@ def _get_marker_value(request, marker_name, default=None):
 
 @pytest.fixture(scope="function")
 def thread_pool_executor() -> Generator[ThreadPoolExecutor, None, None]:
-    """Creates a thread pool executor."""
+    """Creates a thread pool executor.
+
+    When the test completes, this fixture shuts down the thread pool executor. If any futures are
+    still running at this time, shutting down the thread pool executor will wait for them to
+    complete.
+    """
     with ThreadPoolExecutor() as executor:
         yield executor
