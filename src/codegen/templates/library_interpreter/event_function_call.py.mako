@@ -40,4 +40,4 @@ for arg_type in argument_types:
 
             error_code = cfunc(
                 ${', '.join(function_call_args) | wrap(16)})
-        check_for_error(error_code)
+        self.check_for_error(error_code)

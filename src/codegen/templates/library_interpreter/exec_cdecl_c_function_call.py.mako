@@ -34,4 +34,4 @@
         with cfunc.arglock:
             cfunc.argtypes = argtypes
             error_code = cfunc(*args)
-        check_for_error(error_code)
+        self.check_for_error(error_code)

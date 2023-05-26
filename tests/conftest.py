@@ -10,11 +10,13 @@ from typing import Generator, List
 import pytest
 
 import nidaqmx.system
+from nidaqmx._base_interpreter import BaseInterpreter
 from nidaqmx.constants import ProductCategory, UsageTypeAI
 
 try:
     import grpc
 
+    from nidaqmx._grpc_interpreter import GrpcStubInterpreter
     from tests._grpc_utils import GrpcServerProcess
 except ImportError:
     grpc = None
@@ -264,9 +266,19 @@ def grpc_server_process() -> GrpcServerProcess:
 
 
 @pytest.fixture(scope="session")
-def grpc_channel(grpc_server_process: GrpcServerProcess) -> grpc.Channel:
+def grpc_channel(grpc_server_process: GrpcServerProcess) -> Generator[grpc.Channel, None, None]:
     """Gets the gRPC channel."""
     with grpc.insecure_channel(f"localhost:{grpc_server_process.server_port}") as channel:
+        yield channel
+
+
+@pytest.fixture(scope="session")
+def grpc_channel_with_errors(
+    grpc_server_process: GrpcServerProcess,
+) -> Generator[grpc.Channel, None, None]:
+    """Gets a gRPC channel that returns errors for all RPCs."""
+    options = [("grpc.max_send_message_length", 1)]
+    with grpc.insecure_channel(f"localhost:{grpc_server_process.server_port}", options) as channel:
         yield channel
 
 
@@ -421,3 +433,16 @@ def thread_pool_executor() -> Generator[ThreadPoolExecutor, None, None]:
     """
     with ThreadPoolExecutor() as executor:
         yield executor
+
+
+@pytest.fixture
+def interpreter(system: nidaqmx.system.System) -> BaseInterpreter:
+    """Gets an interpreter."""
+    return system._interpreter
+
+
+@pytest.fixture
+def grpc_interpreter_with_errors(grpc_channel_with_errors: grpc.Channel) -> GrpcStubInterpreter:
+    """Gets a GrpcStubInterpreter that returns errors for all RPCs."""
+    grpc_options = nidaqmx.GrpcSessionOptions(grpc_channel_with_errors, "")
+    return GrpcStubInterpreter(grpc_options)

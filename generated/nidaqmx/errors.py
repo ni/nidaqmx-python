@@ -160,8 +160,8 @@ warnings.filterwarnings("always", category=DaqResourceWarning)
 
 @deprecation.deprecated(deprecated_in="0.8.0", details="This function will be removed in a future update.")
 def check_for_error(error_code, samps_per_chan_written=None, samps_per_chan_read=None):
-    import nidaqmx._library_interpreter
-    return nidaqmx._library_interpreter.check_for_error(error_code, samps_per_chan_written, samps_per_chan_read)
+    from nidaqmx._library_interpreter import LibraryInterpreter
+    return LibraryInterpreter().check_for_error(error_code, samps_per_chan_written, samps_per_chan_read)
 
 
 @deprecation.deprecated(deprecated_in="0.8.0", details="This function will be removed in a future update.")
