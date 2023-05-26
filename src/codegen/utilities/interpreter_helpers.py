@@ -73,6 +73,10 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "WaitForValidTimestamp",
 ]
 
+GRPC_INTERPRETER_IGNORED_FUNCTIONS = [
+    "get_error_string",
+]
+
 LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
     "get_error_string",
     "read_power_binary_i16",

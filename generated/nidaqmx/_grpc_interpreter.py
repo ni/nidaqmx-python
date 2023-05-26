@@ -15,6 +15,11 @@ from nidaqmx._stubs import session_pb2 as session_grpc_types
 
 _logger = logging.getLogger(__name__)
 
+_UNABLE_TO_LOCATE_ERROR_RESOURCES_ERROR_MESSAGE = (
+    "Error code could not be found. Reinstalling the driver might fix the issue. "
+    "Otherwise, contact National Instruments technical support."
+)
+
 class GrpcStubInterpreter(BaseInterpreter):
     '''Interpreter for interacting with a gRPC Stub class'''
     __slots__ = [
@@ -89,10 +94,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 raise errors.DaqError(error_message, error_code) from None
         elif error_code > 0:
             if not error_message:
-                try:
-                    error_message = self.get_error_string(error_code)
-                except errors.Error:
-                    error_message = 'Failed to retrieve error description.'
+                error_message = self.get_error_string(error_code)
             warnings.warn(errors.DaqWarning(error_message, error_code))
 
     def _check_for_event_registration_error(self, event_stream):
@@ -1802,12 +1804,6 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.GetDisconnectedCDAQSyncPortsRequest())
         return response.port_list
 
-    def get_error_string(self, error_code):
-        response = self._invoke(
-            self._client.GetErrorString,
-            grpc_types.GetErrorStringRequest(error_code=error_code))
-        return response.error_string
-
     def get_exported_signal_attribute_bool(self, task, attribute):
         response = self._invoke(
             self._client.GetExportedSignalAttributeBool,
@@ -3352,6 +3348,19 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def hash_task_handle(self, task_handle):
         return hash(task_handle.name)
+
+    def get_error_string(self, error_code):
+        try:
+            # Do not use self._invoke() because it may call back into self.get_error_string().
+            response = self._client.GetErrorString(
+                grpc_types.GetErrorStringRequest(error_code=error_code))
+            if not response.error_string:
+                return _UNABLE_TO_LOCATE_ERROR_RESOURCES_ERROR_MESSAGE
+            return response.error_string
+        except grpc.RpcError:
+            _logger.exception('Failed to get error string for error code %d.', error_code)
+            return 'Failed to retrieve error description.'
+
 
 def _assign_numpy_array(numpy_array, grpc_array):
     """
