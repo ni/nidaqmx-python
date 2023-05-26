@@ -1,6 +1,4 @@
 """Tests for validating power up states functions."""
-import nidaqmx
-import nidaqmx.system
 from nidaqmx.constants import PowerUpStates
 from nidaqmx.system.system import DOPowerUpState
 

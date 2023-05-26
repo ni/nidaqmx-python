@@ -4,8 +4,6 @@ import time
 
 import pytest
 
-import nidaqmx
-import nidaqmx.system
 from nidaqmx.constants import Level
 from nidaqmx.system.watchdog import DOExpirationState
 from tests.helpers import generate_random_seed
