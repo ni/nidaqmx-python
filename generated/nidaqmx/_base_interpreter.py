@@ -120,14 +120,6 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def cfg_input_buffer(self, task, num_samps_per_chan):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def cfg_output_buffer(self, task, num_samps_per_chan):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def cfg_pipelined_samp_clk_timing(
             self, task, rate, source, active_edge, sample_mode,
             samps_per_chan):
@@ -137,10 +129,6 @@ class BaseInterpreter(abc.ABC):
     def cfg_samp_clk_timing(
             self, task, rate, source, active_edge, sample_mode,
             samps_per_chan):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def cfg_time_start_trig(self, task, when, timescale):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -744,11 +732,6 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def create_watchdog_timer_task(
-            self, device_name, session_name, timeout, lines, exp_state):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def create_watchdog_timer_task_ex(
             self, device_name, session_name, timeout):
         raise NotImplementedError
@@ -770,10 +753,6 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def device_supports_cal(self, device_name):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def disable_ref_trig(self, task):
         raise NotImplementedError
 
@@ -787,14 +766,6 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def export_signal(self, task, signal_id, output_terminal):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_ai_chan_cal_cal_date(self, task, channel_name):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_ai_chan_cal_exp_date(self, task, channel_name):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -813,22 +784,6 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def get_buffer_attribute_uint32(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_cal_info_attribute_bool(self, device_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_cal_info_attribute_double(self, device_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_cal_info_attribute_string(self, device_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_cal_info_attribute_uint32(self, device_name, attribute):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -928,18 +883,6 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_nth_task_channel(self, task, index):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_nth_task_device(self, task, index):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_nth_task_read_channel(self, task, index):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def get_persisted_chan_attribute_bool(self, channel, attribute):
         raise NotImplementedError
 
@@ -1027,18 +970,6 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_real_time_attribute_bool(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_real_time_attribute_int32(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_real_time_attribute_uint32(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def get_scale_attribute_double(self, scale_name, attribute):
         raise NotImplementedError
 
@@ -1052,10 +983,6 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def get_scale_attribute_string(self, scale_name, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_self_cal_last_date_and_time(self, device_name):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1376,10 +1303,6 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def reset_real_time_attribute(self, task, attribute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def reset_timing_attribute(self, task, attribute):
         raise NotImplementedError
 
@@ -1412,21 +1335,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def self_cal(self, device_name):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def self_test_device(self, device_name):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_ai_chan_cal_cal_date(
-            self, task, channel_name, year, month, day, hour, minute):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_ai_chan_cal_exp_date(
-            self, task, channel_name, year, month, day, hour, minute):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1441,22 +1350,6 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def set_buffer_attribute_uint32(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_cal_info_attribute_bool(self, device_name, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_cal_info_attribute_double(self, device_name, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_cal_info_attribute_string(self, device_name, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_cal_info_attribute_uint32(self, device_name, attribute, value):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1539,18 +1432,6 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def set_read_attribute_uint64(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_real_time_attribute_bool(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_real_time_attribute_int32(self, task, attribute, value):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def set_real_time_attribute_uint32(self, task, attribute, value):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1726,14 +1607,6 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def unreserve_network_device(self, device_name):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def wait_for_next_sample_clock(self, task, timeout):
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def wait_for_valid_timestamp(self, task, timestamp_event, timeout):
         raise NotImplementedError
 
     @abc.abstractmethod

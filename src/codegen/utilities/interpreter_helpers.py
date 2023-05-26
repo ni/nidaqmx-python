@@ -19,27 +19,70 @@ INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES = [
 
 INTERPRETER_IGNORED_FUNCTIONS = [
     "GetExtendedErrorInfo",
+    # nidaqmx-python uses Get/SetBufferAttribute.
+    "CfgInputBuffer",
+    "CfgOutputBuffer",
+    # nidaqmx-python uses GetTaskAttributeString and splits the comma-delimited string.
+    "GetNthTaskChannel",
+    "GetNthTaskDevice",
+    "GetNthTaskReadChannel",
+    # nidaqmx-python uses CreateWatchdogTimerTaskEx.
+    "CreateWatchdogTimerTask",
+    # AI channel calibration
+    "GetAIChanCalCalDate",
+    "GetAIChanCalExpDate",
+    "SetAIChanCalCalDate",
+    "SetAIChanCalExpDate",
+    # Calibration
+    "DeviceSupportsCal",
+    "GetCalInfoAttributeBool",
+    "GetCalInfoAttributeDouble",
+    "GetCalInfoAttributeString",
+    "GetCalInfoAttributeUInt32",
+    "GetSelfCalLastDateAndTime",
+    "SelfCal",
+    "SetCalInfoAttributeBool",
+    "SetCalInfoAttributeDouble",
+    "SetCalInfoAttributeString",
+    "SetCalInfoAttributeUInt32",
+    # Real-time
+    "GetRealTimeAttributeBool",
+    "GetRealTimeAttributeInt32",
+    "GetRealTimeAttributeUInt32",
+    "ResetRealTimeAttribute",
+    "SetRealTimeAttributeBool",
+    "SetRealTimeAttributeInt32",
+    "SetRealTimeAttributeUInt32",
+    "WaitForNextSampleClock",
+    # Time triggers
+    "CfgTimeStartTrig",
     "GetArmStartTrigTimestampVal",
+    "GetArmStartTrigTrigWhen",
+    "GetFirstSampClkWhen",
     "GetFirstSampTimestampVal",
     "GetRefTrigTimestampVal",
     "GetStartTrigTimestampVal",
+    "GetStartTrigTrigWhen",
+    "GetSyncPulseTimeWhen",
     "GetTimingAttributeExTimestamp",
     "GetTimingAttributeTimestamp",
     "GetTrigAttributeTimestamp",
-    "SetTimingAttributeExTimestamp",
-    "SetTimingAttributeTimestamp",
-    "SetTrigAttributeTimestamp",
-    "GetArmStartTrigTrigWhen",
-    "GetFirstSampClkWhen",
-    "GetStartTrigTrigWhen",
-    "GetSyncPulseTimeWhen",
     "SetArmStartTrigTrigWhen",
     "SetFirstSampClkWhen",
     "SetStartTrigTrigWhen",
     "SetSyncPulseTimeWhen",
+    "SetTimingAttributeExTimestamp",
+    "SetTimingAttributeTimestamp",
+    "SetTrigAttributeTimestamp",
+    "WaitForValidTimestamp",
+]
+
+GRPC_INTERPRETER_IGNORED_FUNCTIONS = [
+    "get_error_string",
 ]
 
 LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
+    "get_error_string",
     "read_power_binary_i16",
     "read_power_f64",
     "read_raw",

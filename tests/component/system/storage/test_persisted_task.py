@@ -1,4 +1,3 @@
-import grpc
 import pytest
 
 from nidaqmx import DaqError, SessionInitializationBehavior
@@ -84,6 +83,8 @@ def test___grpc_session_initializaton_behavior_auto___load_twice___returns_multi
 def test___grpc_session_initialization_behavior_initialize_server_session___load_twice___raises_duplicate_task(
     persisted_task: PersistedTask,
 ):
+    import grpc
+
     with persisted_task.load():
         with pytest.raises(RpcError) as exc_info:
             with persisted_task.load():

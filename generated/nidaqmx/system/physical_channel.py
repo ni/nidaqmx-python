@@ -83,7 +83,7 @@ class PhysicalChannel:
 
     @ai_power_control_enable.setter
     def ai_power_control_enable(self, val):
-        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._library_interpreter import LibraryInterpreter
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
@@ -95,11 +95,11 @@ class PhysicalChannel:
                         ctypes_byte_str, c_bool32]
         error_code = cfunc(
             self._name, val)
-        check_for_error(error_code)
+        self._interpreter.check_for_error(error_code)
 
     @ai_power_control_enable.deleter
     def ai_power_control_enable(self):
-        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._library_interpreter import LibraryInterpreter
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
@@ -111,7 +111,7 @@ class PhysicalChannel:
                         ctypes_byte_str]
         error_code = cfunc(
             self._name)
-        check_for_error(error_code)
+        self._interpreter.check_for_error(error_code)
 
     @property
     def ai_power_control_type(self):
@@ -125,7 +125,7 @@ class PhysicalChannel:
 
     @ai_power_control_type.setter
     def ai_power_control_type(self, val):
-        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._library_interpreter import LibraryInterpreter
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
@@ -138,11 +138,11 @@ class PhysicalChannel:
                         ctypes_byte_str, ctypes.c_int]
         error_code = cfunc(
             self._name, val)
-        check_for_error(error_code)
+        self._interpreter.check_for_error(error_code)
 
     @ai_power_control_type.deleter
     def ai_power_control_type(self):
-        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._library_interpreter import LibraryInterpreter
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
@@ -154,7 +154,7 @@ class PhysicalChannel:
                         ctypes_byte_str]
         error_code = cfunc(
             self._name)
-        check_for_error(error_code)
+        self._interpreter.check_for_error(error_code)
 
     @property
     def ai_power_control_voltage(self):
@@ -168,7 +168,7 @@ class PhysicalChannel:
 
     @ai_power_control_voltage.setter
     def ai_power_control_voltage(self, val):
-        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._library_interpreter import LibraryInterpreter
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
@@ -181,11 +181,11 @@ class PhysicalChannel:
                         ctypes_byte_str, ctypes.c_double]
         error_code = cfunc(
             self._name, val)
-        check_for_error(error_code)
+        self._interpreter.check_for_error(error_code)
 
     @ai_power_control_voltage.deleter
     def ai_power_control_voltage(self):
-        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._library_interpreter import LibraryInterpreter
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
@@ -198,7 +198,7 @@ class PhysicalChannel:
                         ctypes_byte_str]
         error_code = cfunc(
             self._name)
-        check_for_error(error_code)
+        self._interpreter.check_for_error(error_code)
 
     @property
     def ai_sensor_power_open_chan(self):
@@ -278,7 +278,7 @@ class PhysicalChannel:
 
     @ao_manual_control_enable.setter
     def ao_manual_control_enable(self, val):
-        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._library_interpreter import LibraryInterpreter
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
@@ -291,11 +291,11 @@ class PhysicalChannel:
                         ctypes_byte_str, c_bool32]
         error_code = cfunc(
             self._name, val)
-        check_for_error(error_code)
+        self._interpreter.check_for_error(error_code)
 
     @ao_manual_control_enable.deleter
     def ao_manual_control_enable(self):
-        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._library_interpreter import LibraryInterpreter
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
@@ -308,7 +308,7 @@ class PhysicalChannel:
                         ctypes_byte_str]
         error_code = cfunc(
             self._name)
-        check_for_error(error_code)
+        self._interpreter.check_for_error(error_code)
 
     @property
     def ao_manual_control_freq(self):
@@ -353,7 +353,7 @@ class PhysicalChannel:
 
     @ao_power_amp_channel_enable.setter
     def ao_power_amp_channel_enable(self, val):
-        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._library_interpreter import LibraryInterpreter
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
@@ -365,11 +365,11 @@ class PhysicalChannel:
                         ctypes_byte_str, c_bool32]
         error_code = cfunc(
             self._name, val)
-        check_for_error(error_code)
+        self._interpreter.check_for_error(error_code)
 
     @ao_power_amp_channel_enable.deleter
     def ao_power_amp_channel_enable(self):
-        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._library_interpreter import LibraryInterpreter
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
@@ -381,7 +381,7 @@ class PhysicalChannel:
                         ctypes_byte_str]
         error_code = cfunc(
             self._name)
-        check_for_error(error_code)
+        self._interpreter.check_for_error(error_code)
 
     @property
     def ao_power_amp_gain(self):

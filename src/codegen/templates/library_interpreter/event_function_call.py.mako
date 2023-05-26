@@ -48,7 +48,7 @@
 
         error_code = cfunc(
             ${', '.join(function_call_args) | wrap(12)})
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
 %if is_event_register_function(function):
         if callback_function is None:

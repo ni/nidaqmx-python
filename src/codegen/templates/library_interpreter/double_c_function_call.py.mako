@@ -36,4 +36,4 @@
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)

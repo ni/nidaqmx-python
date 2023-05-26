@@ -8,6 +8,7 @@
         get_params_for_function_signature,
         get_response_parameters,
         is_event_register_function,
+        GRPC_INTERPRETER_IGNORED_FUNCTIONS,
     )
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
@@ -31,6 +32,11 @@ from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
 from nidaqmx._stubs import session_pb2 as session_grpc_types
 
 _logger = logging.getLogger(__name__)
+
+_UNABLE_TO_LOCATE_ERROR_RESOURCES_ERROR_MESSAGE = (
+    "Error code could not be found. Reinstalling the driver might fix the issue. "
+    "Otherwise, contact National Instruments technical support."
+)
 
 class GrpcStubInterpreter(BaseInterpreter):
     '''Interpreter for interacting with a gRPC Stub class'''
@@ -102,10 +108,7 @@ class GrpcStubInterpreter(BaseInterpreter):
                 raise errors.DaqError(error_message, error_code) from None
         elif error_code > 0:
             if not error_message:
-                try:
-                    error_message = self.get_error_string(error_code)
-                except errors.Error:
-                    error_message = 'Failed to retrieve error description.'
+                error_message = self.get_error_string(error_code)
             warnings.warn(errors.DaqWarning(error_message, error_code))
 
     def _check_for_event_registration_error(self, event_stream):
@@ -135,6 +138,8 @@ class GrpcStubInterpreter(BaseInterpreter):
 %endfor
 %for func in functions:
 <%
+    if func.function_name in GRPC_INTERPRETER_IGNORED_FUNCTIONS:
+        continue
     params = get_params_for_function_signature(func)
     sorted_params = order_function_parameters_by_optional(params)
     parameter_signature = get_interpreter_parameter_signature(is_python_factory, sorted_params)
@@ -155,6 +160,20 @@ class GrpcStubInterpreter(BaseInterpreter):
 %endfor
     def hash_task_handle(self, task_handle):
         return hash(task_handle.name)
+
+    ## get_error_string has special error handling.
+    def get_error_string(self, error_code):
+        try:
+            # Do not use self._invoke() because it may call back into self.get_error_string().
+            response = self._client.GetErrorString(
+                grpc_types.GetErrorStringRequest(error_code=error_code))
+            if not response.error_string:
+                return _UNABLE_TO_LOCATE_ERROR_RESOURCES_ERROR_MESSAGE
+            return response.error_string
+        except grpc.RpcError:
+            _logger.exception('Failed to get error string for error code %d.', error_code)
+            return 'Failed to retrieve error description.'
+
 
 def _assign_numpy_array(numpy_array, grpc_array):
     """
