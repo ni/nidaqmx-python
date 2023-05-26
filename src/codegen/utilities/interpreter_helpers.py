@@ -74,6 +74,7 @@ INTERPRETER_IGNORED_FUNCTIONS = [
 ]
 
 LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
+    "get_error_string",
     "read_power_binary_i16",
     "read_power_f64",
     "read_raw",

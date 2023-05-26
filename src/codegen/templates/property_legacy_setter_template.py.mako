@@ -5,7 +5,7 @@
     @${attribute.name}.setter
     def ${attribute.name}(self, val):
 \
-        from nidaqmx._library_interpreter import LibraryInterpreter, check_for_error
+        from nidaqmx._library_interpreter import LibraryInterpreter
         from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
         if not isinstance(self._interpreter, LibraryInterpreter):
             raise NotImplementedError
@@ -68,5 +68,5 @@
     %>\
         error_code = cfunc(
             ${', '.join(function_call_args) | wrap(initial_indent=12)})
-        check_for_error(error_code)
+        self._interpreter.check_for_error(error_code)
 </%def>

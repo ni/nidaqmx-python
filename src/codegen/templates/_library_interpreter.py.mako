@@ -90,6 +90,38 @@ class LibraryInterpreter(BaseInterpreter):
 %endif
 
 %endfor
+    ## get_error_string has special error handling.
+    def get_error_string(self, error_code):
+        error_buffer = ctypes.create_string_buffer(2048)
+
+        cfunc = lib_importer.windll.DAQmxGetErrorString
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [ctypes.c_int, ctypes.c_char_p,
+                                      ctypes.c_uint]
+
+        error_code = cfunc(error_code, error_buffer, 2048)
+        if error_code < 0:
+            return 'Failed to retrieve error description.'
+        return error_buffer.value.decode('utf-8')
+
+    ## get_extended_error_info has special error handling and it is library-only because it uses
+    ## thread-local storage.
+    def get_extended_error_info(self):
+        error_buffer = ctypes.create_string_buffer(2048)
+
+        cfunc = lib_importer.windll.DAQmxGetExtendedErrorInfo
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [ctypes.c_char_p, ctypes.c_uint]
+
+        error_code = cfunc(error_buffer, 2048)
+        if error_code < 0:
+            return 'Failed to retrieve error description.'
+        return error_buffer.value.decode('utf-8')
+
     ## The metadata for 'read_power_binary_i16' function is not available in daqmxAPISharp.json file.
     def read_power_binary_i16(
             self, task, num_samps_per_chan, timeout, fill_mode,
@@ -112,7 +144,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, fill_mode,
             read_voltage_array, read_current_array, read_voltage_array.size,
             ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
         return read_voltage_array, read_current_array, samps_per_chan_read.value
 
@@ -138,7 +170,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, fill_mode,
             read_voltage_array, read_current_array, read_voltage_array.size,
             ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
         return read_voltage_array, read_current_array, samps_per_chan_read.value
 
@@ -161,7 +193,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, read_array,
             read_array.nbytes, ctypes.byref(samples_read),
             ctypes.byref(number_of_bytes_per_sample), None)
-        check_for_error(error_code, samps_per_chan_read=samples_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samples_read.value)
 
         return read_array, samples_read.value, number_of_bytes_per_sample.value
 
@@ -184,48 +216,31 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task_handle, num_samps_per_chan, auto_start, timeout, numpy_array,
             ctypes.byref(samps_per_chan_written), None)
-        check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
+        self.check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
         return samps_per_chan_written.value
 
     def hash_task_handle(self, task_handle):
         return hash(task_handle.value)
 
+    def check_for_error(self, error_code, samps_per_chan_written=None, samps_per_chan_read=None):
+        if not error_code:
+            return
 
-def check_for_error(error_code, samps_per_chan_written=None, samps_per_chan_read=None):
-    if not error_code:
-        return
+        if error_code < 0:
+            extended_error_info = self.get_extended_error_info()
 
-    if error_code < 0:
-        error_buffer = ctypes.create_string_buffer(2048)
+            if samps_per_chan_read is not None:
+                raise DaqReadError(extended_error_info, error_code, samps_per_chan_read)
+            elif samps_per_chan_written is not None:
+                raise DaqWriteError(extended_error_info, error_code, samps_per_chan_written)
+            else:
+                raise DaqError(extended_error_info, error_code)
 
-        cfunc = lib_importer.windll.DAQmxGetExtendedErrorInfo
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [ctypes.c_char_p, ctypes.c_uint]
-        cfunc(error_buffer, 2048)
+        elif error_code > 0:
+            error_string = self.get_error_string(error_code)
 
-        if samps_per_chan_read is not None:
-            raise DaqReadError(error_buffer.value.decode("utf-8"), error_code, samps_per_chan_read)
-        elif samps_per_chan_written is not None:
-            raise DaqWriteError(error_buffer.value.decode("utf-8"), error_code, samps_per_chan_written)
-        else:
-            raise DaqError(error_buffer.value.decode("utf-8"), error_code)
-
-    elif error_code > 0:
-        error_buffer = ctypes.create_string_buffer(2048)
-
-        cfunc = lib_importer.windll.DAQmxGetErrorString
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [ctypes.c_int, ctypes.c_char_p,
-                                      ctypes.c_uint]
-        cfunc(error_code, error_buffer, 2048)
-
-        warnings.warn(DaqWarning(
-            error_buffer.value.decode("utf-8"), error_code))
+            warnings.warn(DaqWarning(error_string, error_code))
 
 
 def is_string_buffer_too_small(error_code):

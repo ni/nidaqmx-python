@@ -39,7 +39,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             port_list)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def add_global_chans_to_task(self, task, channel_names):
         cfunc = lib_importer.windll.DAQmxAddGlobalChansToTask
@@ -51,7 +51,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, channel_names)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def add_network_device(
             self, ip_address, device_name, attempt_reservation, timeout):
@@ -77,7 +77,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return device_name_out.value.decode('ascii')
 
     def are_configured_cdaq_sync_ports_disconnected(
@@ -95,7 +95,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             chassis_devices_ports, timeout,
             ctypes.byref(disconnected_ports_exist))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return disconnected_ports_exist.value
 
     def auto_configure_cdaq_sync_connections(
@@ -109,7 +109,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             chassis_devices_ports, timeout)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def calculate_reverse_poly_coeff(
             self, forward_coeffs, min_val_x, max_val_x, num_points_to_compute,
@@ -131,7 +131,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             forward_coeffs, len(forward_coeffs), min_val_x, max_val_x,
             num_points_to_compute, reverse_poly_order, reverse_coeffs)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return reverse_coeffs.tolist()
 
     def cfg_anlg_edge_ref_trig(
@@ -148,7 +148,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, trigger_source, trigger_slope, trigger_level,
             pretrigger_samples)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def cfg_anlg_edge_start_trig(
             self, task, trigger_source, trigger_slope, trigger_level):
@@ -162,7 +162,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, trigger_source, trigger_slope, trigger_level)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def cfg_anlg_multi_edge_ref_trig(
             self, task, trigger_sources, trigger_slope_array,
@@ -189,7 +189,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, trigger_source, trigger_when, window_top, window_bottom,
             pretrigger_samples)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def cfg_anlg_window_start_trig(
             self, task, window_top, window_bottom, trigger_source,
@@ -204,7 +204,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, trigger_source, trigger_when, window_top, window_bottom)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def cfg_burst_handshaking_timing_export_clock(
             self, task, sample_clk_rate, sample_clk_outp_term, sample_mode,
@@ -223,7 +223,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, sample_mode, samps_per_chan, sample_clk_rate,
             sample_clk_outp_term, sample_clk_pulse_polarity, pause_when,
             ready_event_active_level)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def cfg_burst_handshaking_timing_import_clock(
             self, task, sample_clk_rate, sample_clk_src, sample_mode,
@@ -242,7 +242,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, sample_mode, samps_per_chan, sample_clk_rate,
             sample_clk_src, sample_clk_active_edge, pause_when,
             ready_event_active_level)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def cfg_change_detection_timing(
             self, task, rising_edge_chan, falling_edge_chan, sample_mode,
@@ -258,7 +258,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, rising_edge_chan, falling_edge_chan, sample_mode,
             samps_per_chan)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def cfg_dig_edge_ref_trig(
             self, task, trigger_source, pretrigger_samples, trigger_edge):
@@ -272,7 +272,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, trigger_source, trigger_edge, pretrigger_samples)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def cfg_dig_edge_start_trig(self, task, trigger_source, trigger_edge):
         cfunc = lib_importer.windll.DAQmxCfgDigEdgeStartTrig
@@ -285,7 +285,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, trigger_source, trigger_edge)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def cfg_dig_pattern_ref_trig(
             self, task, trigger_source, trigger_pattern, pretrigger_samples,
@@ -301,7 +301,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, trigger_source, trigger_pattern, trigger_when,
             pretrigger_samples)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def cfg_dig_pattern_start_trig(
             self, task, trigger_source, trigger_pattern, trigger_when):
@@ -315,7 +315,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, trigger_source, trigger_pattern, trigger_when)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def cfg_handshaking_timing(self, task, sample_mode, samps_per_chan):
         cfunc = lib_importer.windll.DAQmxCfgHandshakingTiming
@@ -328,7 +328,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, sample_mode, samps_per_chan)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def cfg_implicit_timing(self, task, sample_mode, samps_per_chan):
         cfunc = lib_importer.windll.DAQmxCfgImplicitTiming
@@ -341,7 +341,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, sample_mode, samps_per_chan)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def cfg_pipelined_samp_clk_timing(
             self, task, rate, source, active_edge, sample_mode,
@@ -357,7 +357,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, source, rate, active_edge, sample_mode, samps_per_chan)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def cfg_samp_clk_timing(
             self, task, rate, source, active_edge, sample_mode,
@@ -373,7 +373,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, source, rate, active_edge, sample_mode, samps_per_chan)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def cfg_watchdog_ao_expir_states(
             self, task, channel_names, expir_state_array, output_type_array):
@@ -390,7 +390,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, channel_names, expir_state_array, output_type_array,
             len(output_type_array))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def cfg_watchdog_co_expir_states(
             self, task, channel_names, expir_state_array):
@@ -405,7 +405,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, channel_names, expir_state_array, len(expir_state_array))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def cfg_watchdog_do_expir_states(
             self, task, channel_names, expir_state_array):
@@ -420,7 +420,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, channel_names, expir_state_array, len(expir_state_array))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def clear_task(self, task):
         cfunc = lib_importer.windll.DAQmxClearTask
@@ -432,7 +432,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def clear_teds(self, physical_channel):
         cfunc = lib_importer.windll.DAQmxClearTEDS
@@ -444,7 +444,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             physical_channel)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def configure_logging(
             self, task, file_path, logging_mode, group_name, operation):
@@ -458,7 +458,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, file_path, logging_mode, group_name, operation)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def configure_teds(self, physical_channel, file_path):
         cfunc = lib_importer.windll.DAQmxConfigureTEDS
@@ -470,7 +470,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             physical_channel, file_path)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def connect_terms(
             self, source_terminal, destination_terminal, signal_modifiers):
@@ -483,7 +483,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             source_terminal, destination_terminal, signal_modifiers)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def control_watchdog_task(self, task, action):
         cfunc = lib_importer.windll.DAQmxControlWatchdogTask
@@ -495,7 +495,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, action)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_accel4_wire_dc_voltage_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -518,7 +518,7 @@ class LibraryInterpreter(BaseInterpreter):
             terminal_config, min_val, max_val, units, sensitivity,
             sensitivity_units, voltage_excit_source, voltage_excit_val,
             use_excit_for_scaling, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_accel_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -541,7 +541,7 @@ class LibraryInterpreter(BaseInterpreter):
             terminal_config, min_val, max_val, units, sensitivity,
             sensitivity_units, current_excit_source, current_excit_val,
             custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_accel_charge_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -561,7 +561,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, sensitivity,
             sensitivity_units, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_bridge_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -581,7 +581,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, bridge_config, voltage_excit_source,
             voltage_excit_val, nominal_bridge_resistance, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_charge_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -598,7 +598,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_current_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -618,7 +618,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, shunt_resistor_loc,
             ext_shunt_resistor_val, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_current_rms_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -638,7 +638,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, shunt_resistor_loc,
             ext_shunt_resistor_val, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_force_bridge_polynomial_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -666,7 +666,7 @@ class LibraryInterpreter(BaseInterpreter):
             voltage_excit_val, nominal_bridge_resistance, forward_coeffs,
             len(forward_coeffs), reverse_coeffs, len(reverse_coeffs),
             electrical_units, physical_units, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_force_bridge_table_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -694,7 +694,7 @@ class LibraryInterpreter(BaseInterpreter):
             voltage_excit_val, nominal_bridge_resistance, electrical_vals,
             len(electrical_vals), electrical_units, physical_vals,
             len(physical_vals), physical_units, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_force_bridge_two_point_lin_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -722,7 +722,7 @@ class LibraryInterpreter(BaseInterpreter):
             first_electrical_val, second_electrical_val, electrical_units,
             first_physical_val, second_physical_val, physical_units,
             custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_force_iepe_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -745,7 +745,7 @@ class LibraryInterpreter(BaseInterpreter):
             terminal_config, min_val, max_val, units, sensitivity,
             sensitivity_units, current_excit_source, current_excit_val,
             custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_freq_voltage_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -763,7 +763,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, threshold_level, hysteresis, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_microphone_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -783,7 +783,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel,
             terminal_config, units, mic_sensitivity, max_snd_press_level,
             current_excit_source, current_excit_val, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_pos_eddy_curr_prox_probe_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -802,7 +802,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, sensitivity, sensitivity_units, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_pos_lvdt_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -825,7 +825,7 @@ class LibraryInterpreter(BaseInterpreter):
             max_val, units, sensitivity, sensitivity_units,
             voltage_excit_source, voltage_excit_val, voltage_excit_freq,
             ac_excit_wire_mode, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_pos_rvdt_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -848,7 +848,7 @@ class LibraryInterpreter(BaseInterpreter):
             max_val, units, sensitivity, sensitivity_units,
             voltage_excit_source, voltage_excit_val, voltage_excit_freq,
             ac_excit_wire_mode, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_power_chan(
             self, task, physical_channel, voltage_setpoint, current_setpoint,
@@ -865,7 +865,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
             voltage_setpoint, current_setpoint, output_enable)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_pressure_bridge_polynomial_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -893,7 +893,7 @@ class LibraryInterpreter(BaseInterpreter):
             voltage_excit_val, nominal_bridge_resistance, forward_coeffs,
             len(forward_coeffs), reverse_coeffs, len(reverse_coeffs),
             electrical_units, physical_units, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_pressure_bridge_table_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -921,7 +921,7 @@ class LibraryInterpreter(BaseInterpreter):
             voltage_excit_val, nominal_bridge_resistance, electrical_vals,
             len(electrical_vals), electrical_units, physical_vals,
             len(physical_vals), physical_units, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_pressure_bridge_two_point_lin_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -949,7 +949,7 @@ class LibraryInterpreter(BaseInterpreter):
             first_electrical_val, second_electrical_val, electrical_units,
             first_physical_val, second_physical_val, physical_units,
             custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_resistance_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -969,7 +969,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, resistance_config, current_excit_source,
             current_excit_val, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_rosette_strain_gage_chan(
             self, task, physical_channel, rosette_type, gage_orientation,
@@ -996,7 +996,7 @@ class LibraryInterpreter(BaseInterpreter):
             len(rosette_meas_types), strain_config, voltage_excit_source,
             voltage_excit_val, gage_factor, nominal_gage_resistance,
             poisson_ratio, lead_wire_resistance)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_strain_gage_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1022,7 +1022,7 @@ class LibraryInterpreter(BaseInterpreter):
             voltage_excit_val, gage_factor, initial_bridge_voltage,
             nominal_gage_resistance, poisson_ratio, lead_wire_resistance,
             custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_temp_built_in_sensor_chan(
             self, task, physical_channel, name_to_assign_to_channel, units):
@@ -1036,7 +1036,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, units)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_thrmcpl_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1056,7 +1056,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, thermocouple_type, cjc_source, cjc_val,
             cjc_channel)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_thrmstr_chan_iex(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1077,7 +1077,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, resistance_config, current_excit_source,
             current_excit_val, a, b, c)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_thrmstr_chan_vex(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1098,7 +1098,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, resistance_config, voltage_excit_source,
             voltage_excit_val, a, b, c, r_1)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_torque_bridge_polynomial_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1126,7 +1126,7 @@ class LibraryInterpreter(BaseInterpreter):
             voltage_excit_val, nominal_bridge_resistance, forward_coeffs,
             len(forward_coeffs), reverse_coeffs, len(reverse_coeffs),
             electrical_units, physical_units, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_torque_bridge_table_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1154,7 +1154,7 @@ class LibraryInterpreter(BaseInterpreter):
             voltage_excit_val, nominal_bridge_resistance, electrical_vals,
             len(electrical_vals), electrical_units, physical_vals,
             len(physical_vals), physical_units, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_torque_bridge_two_point_lin_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1182,7 +1182,7 @@ class LibraryInterpreter(BaseInterpreter):
             first_electrical_val, second_electrical_val, electrical_units,
             first_physical_val, second_physical_val, physical_units,
             custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_velocity_iepe_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -1205,7 +1205,7 @@ class LibraryInterpreter(BaseInterpreter):
             terminal_config, min_val, max_val, units, sensitivity,
             sensitivity_units, current_excit_source, current_excit_val,
             custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_voltage_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -1222,7 +1222,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_voltage_chan_with_excit(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -1245,7 +1245,7 @@ class LibraryInterpreter(BaseInterpreter):
             terminal_config, min_val, max_val, units, bridge_config,
             voltage_excit_source, voltage_excit_val, use_excit_for_scaling,
             custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ai_voltage_rms_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -1262,7 +1262,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_airtd_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1282,7 +1282,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, rtd_type, resistance_config, current_excit_source,
             current_excit_val, r_0)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ao_current_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1299,7 +1299,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ao_func_gen_chan(
             self, task, physical_channel, name_to_assign_to_channel, type,
@@ -1316,7 +1316,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, type, freq,
             amplitude, offset)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ao_voltage_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1333,7 +1333,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ci_ang_encoder_chan(
             self, task, counter, name_to_assign_to_channel, decoding_type,
@@ -1353,7 +1353,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, counter, name_to_assign_to_channel, decoding_type,
             zidx_enable, zidx_val, zidx_phase, units, pulses_per_rev,
             initial_angle, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ci_ang_velocity_chan(
             self, task, counter, name_to_assign_to_channel, min_val, max_val,
@@ -1371,7 +1371,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val,
             decoding_type, units, pulses_per_rev, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ci_count_edges_chan(
             self, task, counter, name_to_assign_to_channel, edge,
@@ -1388,7 +1388,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, edge, initial_count,
             count_direction)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ci_duty_cycle_chan(
             self, task, counter, name_to_assign_to_channel, min_freq,
@@ -1405,7 +1405,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_freq, max_freq,
             edge, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ci_freq_chan(
             self, task, counter, name_to_assign_to_channel, min_val, max_val,
@@ -1423,7 +1423,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val, units,
             edge, meas_method, meas_time, divisor, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ci_lin_encoder_chan(
             self, task, counter, name_to_assign_to_channel, decoding_type,
@@ -1443,7 +1443,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, counter, name_to_assign_to_channel, decoding_type,
             zidx_enable, zidx_val, zidx_phase, units, dist_per_pulse,
             initial_pos, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ci_lin_velocity_chan(
             self, task, counter, name_to_assign_to_channel, min_val, max_val,
@@ -1461,7 +1461,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val,
             decoding_type, units, dist_per_pulse, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ci_period_chan(
             self, task, counter, name_to_assign_to_channel, min_val, max_val,
@@ -1479,7 +1479,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val, units,
             edge, meas_method, meas_time, divisor, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ci_pulse_chan_freq(
             self, task, counter, name_to_assign_to_channel, min_val, max_val,
@@ -1495,7 +1495,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val, units)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ci_pulse_chan_ticks(
             self, task, counter, name_to_assign_to_channel, source_terminal,
@@ -1512,7 +1512,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, source_terminal,
             min_val, max_val)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ci_pulse_chan_time(
             self, task, counter, name_to_assign_to_channel, min_val, max_val,
@@ -1528,7 +1528,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val, units)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ci_pulse_width_chan(
             self, task, counter, name_to_assign_to_channel, min_val, max_val,
@@ -1545,7 +1545,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val, units,
             starting_edge, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ci_semi_period_chan(
             self, task, counter, name_to_assign_to_channel, min_val, max_val,
@@ -1562,7 +1562,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val, units,
             custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_ci_two_edge_sep_chan(
             self, task, counter, name_to_assign_to_channel, min_val, max_val,
@@ -1580,7 +1580,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, min_val, max_val, units,
             first_edge, second_edge, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_cigps_timestamp_chan(
             self, task, counter, name_to_assign_to_channel, units,
@@ -1597,7 +1597,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, units, sync_method,
             custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_co_pulse_chan_freq(
             self, task, counter, name_to_assign_to_channel, units, idle_state,
@@ -1614,7 +1614,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, units, idle_state,
             initial_delay, freq, duty_cycle)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_co_pulse_chan_ticks(
             self, task, counter, source_terminal, name_to_assign_to_channel,
@@ -1631,7 +1631,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, source_terminal,
             idle_state, initial_delay, low_ticks, high_ticks)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_co_pulse_chan_time(
             self, task, counter, name_to_assign_to_channel, units, idle_state,
@@ -1648,7 +1648,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, counter, name_to_assign_to_channel, units, idle_state,
             initial_delay, low_time, high_time)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_di_chan(
             self, task, lines, name_to_assign_to_lines, line_grouping):
@@ -1662,7 +1662,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, lines, name_to_assign_to_lines, line_grouping)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_do_chan(
             self, task, lines, name_to_assign_to_lines, line_grouping):
@@ -1676,7 +1676,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, lines, name_to_assign_to_lines, line_grouping)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_lin_scale(
             self, name, slope, y_intercept, pre_scaled_units, scaled_units):
@@ -1690,7 +1690,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             name, slope, y_intercept, pre_scaled_units, scaled_units)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_map_scale(
             self, name, prescaled_min, prescaled_max, scaled_min, scaled_max,
@@ -1707,7 +1707,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             name, prescaled_min, prescaled_max, scaled_min, scaled_max,
             pre_scaled_units, scaled_units)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_polynomial_scale(
             self, name, forward_coeffs, reverse_coeffs, pre_scaled_units,
@@ -1726,7 +1726,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             name, forward_coeffs, len(forward_coeffs), reverse_coeffs,
             len(reverse_coeffs), pre_scaled_units, scaled_units)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_table_scale(
             self, name, prescaled_vals, scaled_vals, pre_scaled_units,
@@ -1745,7 +1745,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             name, prescaled_vals, len(prescaled_vals), scaled_vals,
             len(scaled_vals), pre_scaled_units, scaled_units)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_task(self, session_name):
         new_session_initialized = True
@@ -1761,7 +1761,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             session_name, ctypes.byref(task))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return task, new_session_initialized
 
     def create_tedsai_accel_chan(
@@ -1782,7 +1782,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, current_excit_source,
             current_excit_val, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_tedsai_bridge_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1802,7 +1802,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, voltage_excit_source, voltage_excit_val,
             custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_tedsai_current_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -1822,7 +1822,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, shunt_resistor_loc,
             ext_shunt_resistor_val, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_tedsai_force_bridge_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1842,7 +1842,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, voltage_excit_source, voltage_excit_val,
             custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_tedsai_force_iepe_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -1862,7 +1862,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, current_excit_source,
             current_excit_val, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_tedsai_microphone_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -1882,7 +1882,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel,
             terminal_config, units, max_snd_press_level, current_excit_source,
             current_excit_val, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_tedsai_pos_lvdt_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1902,7 +1902,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, voltage_excit_source, voltage_excit_val,
             voltage_excit_freq, ac_excit_wire_mode, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_tedsai_pos_rvdt_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1922,7 +1922,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, voltage_excit_source, voltage_excit_val,
             voltage_excit_freq, ac_excit_wire_mode, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_tedsai_pressure_bridge_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1942,7 +1942,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, voltage_excit_source, voltage_excit_val,
             custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_tedsai_resistance_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1962,7 +1962,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, resistance_config, current_excit_source,
             current_excit_val, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_tedsai_strain_gage_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -1982,7 +1982,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, voltage_excit_source, voltage_excit_val,
             initial_bridge_voltage, lead_wire_resistance, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_tedsai_thrmcpl_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -2000,7 +2000,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, cjc_source, cjc_val, cjc_channel)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_tedsai_thrmstr_chan_iex(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -2020,7 +2020,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, resistance_config, current_excit_source,
             current_excit_val)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_tedsai_thrmstr_chan_vex(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -2040,7 +2040,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, resistance_config, voltage_excit_source,
             voltage_excit_val, r_1)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_tedsai_torque_bridge_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -2060,7 +2060,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, voltage_excit_source, voltage_excit_val,
             custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_tedsai_voltage_chan(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -2077,7 +2077,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_tedsai_voltage_chan_with_excit(
             self, task, physical_channel, name_to_assign_to_channel,
@@ -2097,7 +2097,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel,
             terminal_config, min_val, max_val, units, voltage_excit_source,
             voltage_excit_val, custom_scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_tedsairtd_chan(
             self, task, physical_channel, name_to_assign_to_channel, min_val,
@@ -2117,7 +2117,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, physical_channel, name_to_assign_to_channel, min_val,
             max_val, units, resistance_config, current_excit_source,
             current_excit_val)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def create_watchdog_timer_task_ex(
             self, device_name, session_name, timeout):
@@ -2135,7 +2135,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             device_name, session_name, ctypes.byref(task), timeout)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return task, new_session_initialized
 
     def delete_network_device(self, device_name):
@@ -2148,7 +2148,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             device_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def delete_saved_global_chan(self, channel_name):
         cfunc = lib_importer.windll.DAQmxDeleteSavedGlobalChan
@@ -2160,7 +2160,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             channel_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def delete_saved_scale(self, scale_name):
         cfunc = lib_importer.windll.DAQmxDeleteSavedScale
@@ -2172,7 +2172,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             scale_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def delete_saved_task(self, task_name):
         cfunc = lib_importer.windll.DAQmxDeleteSavedTask
@@ -2184,7 +2184,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def disable_ref_trig(self, task):
         cfunc = lib_importer.windll.DAQmxDisableRefTrig
@@ -2196,7 +2196,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def disable_start_trig(self, task):
         cfunc = lib_importer.windll.DAQmxDisableStartTrig
@@ -2208,7 +2208,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def disconnect_terms(self, source_terminal, destination_terminal):
         cfunc = lib_importer.windll.DAQmxDisconnectTerms
@@ -2220,7 +2220,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             source_terminal, destination_terminal)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def export_signal(self, task, signal_id, output_terminal):
         cfunc = lib_importer.windll.DAQmxExportSignal
@@ -2233,7 +2233,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, signal_id, output_terminal)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def get_analog_power_up_states(
             self, device_name, channel_name, channel_type):
@@ -2262,7 +2262,7 @@ class LibraryInterpreter(BaseInterpreter):
         with cfunc.arglock:
             cfunc.argtypes = argtypes
             error_code = cfunc(*args)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return [state_element.value for state_element in state]
 
     def get_analog_power_up_states_with_output_type(
@@ -2283,7 +2283,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             channel_names, state_array, channel_type_array,
             ctypes.byref(array_size))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return state_array.tolist(), channel_type_array.tolist()
 
     def get_auto_configured_cdaq_sync_connections(self):
@@ -2307,7 +2307,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return port_list.value.decode('ascii')
 
     def get_buffer_attribute_uint32(self, task, attribute):
@@ -2322,7 +2322,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_chan_attribute_bool(self, task, channel, attribute):
@@ -2338,7 +2338,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, channel, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_chan_attribute_double(self, task, channel, attribute):
@@ -2354,7 +2354,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, channel, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_chan_attribute_double_array(self, task, channel, attribute):
@@ -2380,7 +2380,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.tolist()
 
     def get_chan_attribute_int32(self, task, channel, attribute):
@@ -2396,7 +2396,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, channel, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_chan_attribute_string(self, task, channel, attribute):
@@ -2421,7 +2421,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.value.decode('ascii')
 
     def get_chan_attribute_uint32(self, task, channel, attribute):
@@ -2437,7 +2437,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, channel, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_device_attribute_bool(self, device_name, attribute):
@@ -2452,7 +2452,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             device_name, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_device_attribute_double(self, device_name, attribute):
@@ -2467,7 +2467,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             device_name, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_device_attribute_double_array(self, device_name, attribute):
@@ -2492,7 +2492,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.tolist()
 
     def get_device_attribute_int32(self, device_name, attribute):
@@ -2507,7 +2507,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             device_name, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_device_attribute_int32_array(self, device_name, attribute):
@@ -2532,7 +2532,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.tolist()
 
     def get_device_attribute_string(self, device_name, attribute):
@@ -2556,7 +2556,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.value.decode('ascii')
 
     def get_device_attribute_uint32(self, device_name, attribute):
@@ -2571,7 +2571,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             device_name, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_device_attribute_uint32_array(self, device_name, attribute):
@@ -2596,7 +2596,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.tolist()
 
     def get_digital_logic_family_power_up_state(self, device_name):
@@ -2611,7 +2611,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             device_name, ctypes.byref(logic_family))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return logic_family.value
 
     def get_digital_power_up_states(self, device_name, channel_name):
@@ -2637,7 +2637,7 @@ class LibraryInterpreter(BaseInterpreter):
         with cfunc.arglock:
             cfunc.argtypes = argtypes
             error_code = cfunc(*args)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return [state_element.value for state_element in state]
 
     def get_digital_pull_up_pull_down_states(self, device_name, channel_name):
@@ -2663,7 +2663,7 @@ class LibraryInterpreter(BaseInterpreter):
         with cfunc.arglock:
             cfunc.argtypes = argtypes
             error_code = cfunc(*args)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return [state_element.value for state_element in state]
 
     def get_disconnected_cdaq_sync_ports(self):
@@ -2687,11 +2687,8 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return port_list.value.decode('ascii')
-
-    def get_error_string(self, error_code):
-        raise NotImplementedError
 
     def get_exported_signal_attribute_bool(self, task, attribute):
         value = c_bool32()
@@ -2705,7 +2702,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_exported_signal_attribute_double(self, task, attribute):
@@ -2720,7 +2717,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_exported_signal_attribute_int32(self, task, attribute):
@@ -2735,7 +2732,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_exported_signal_attribute_string(self, task, attribute):
@@ -2759,7 +2756,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.value.decode('ascii')
 
     def get_exported_signal_attribute_uint32(self, task, attribute):
@@ -2774,7 +2771,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_persisted_chan_attribute_bool(self, channel, attribute):
@@ -2789,7 +2786,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             channel, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_persisted_chan_attribute_string(self, channel, attribute):
@@ -2813,7 +2810,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.value.decode('ascii')
 
     def get_persisted_scale_attribute_bool(self, scale_name, attribute):
@@ -2828,7 +2825,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             scale_name, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_persisted_scale_attribute_string(self, scale_name, attribute):
@@ -2852,7 +2849,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.value.decode('ascii')
 
     def get_persisted_task_attribute_bool(self, task_name, attribute):
@@ -2867,7 +2864,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task_name, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_persisted_task_attribute_string(self, task_name, attribute):
@@ -2891,7 +2888,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.value.decode('ascii')
 
     def get_physical_chan_attribute_bool(self, physical_channel, attribute):
@@ -2906,7 +2903,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             physical_channel, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_physical_chan_attribute_bytes(self, physical_channel, attribute):
@@ -2931,7 +2928,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.tolist()
 
     def get_physical_chan_attribute_double(self, physical_channel, attribute):
@@ -2946,7 +2943,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             physical_channel, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_physical_chan_attribute_double_array(
@@ -2972,7 +2969,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.tolist()
 
     def get_physical_chan_attribute_int32(self, physical_channel, attribute):
@@ -2987,7 +2984,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             physical_channel, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_physical_chan_attribute_int32_array(
@@ -3013,7 +3010,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.tolist()
 
     def get_physical_chan_attribute_string(self, physical_channel, attribute):
@@ -3037,7 +3034,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.value.decode('ascii')
 
     def get_physical_chan_attribute_uint32(self, physical_channel, attribute):
@@ -3052,7 +3049,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             physical_channel, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_physical_chan_attribute_uint32_array(
@@ -3078,7 +3075,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.tolist()
 
     def get_read_attribute_bool(self, task, attribute):
@@ -3093,7 +3090,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_read_attribute_double(self, task, attribute):
@@ -3108,7 +3105,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_read_attribute_int32(self, task, attribute):
@@ -3123,7 +3120,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_read_attribute_string(self, task, attribute):
@@ -3147,7 +3144,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.value.decode('ascii')
 
     def get_read_attribute_uint32(self, task, attribute):
@@ -3162,7 +3159,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_read_attribute_uint64(self, task, attribute):
@@ -3177,7 +3174,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_scale_attribute_double(self, scale_name, attribute):
@@ -3192,7 +3189,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             scale_name, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_scale_attribute_double_array(self, scale_name, attribute):
@@ -3217,7 +3214,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.tolist()
 
     def get_scale_attribute_int32(self, scale_name, attribute):
@@ -3232,7 +3229,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             scale_name, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_scale_attribute_string(self, scale_name, attribute):
@@ -3256,7 +3253,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.value.decode('ascii')
 
     def get_system_info_attribute_string(self, attribute):
@@ -3280,7 +3277,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.value.decode('ascii')
 
     def get_system_info_attribute_uint32(self, attribute):
@@ -3295,7 +3292,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_task_attribute_bool(self, task, attribute):
@@ -3310,7 +3307,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_task_attribute_string(self, task, attribute):
@@ -3334,7 +3331,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.value.decode('ascii')
 
     def get_task_attribute_uint32(self, task, attribute):
@@ -3349,7 +3346,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_timing_attribute_bool(self, task, attribute):
@@ -3364,7 +3361,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_timing_attribute_double(self, task, attribute):
@@ -3379,7 +3376,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_timing_attribute_ex_bool(self, task, device_names, attribute):
@@ -3395,7 +3392,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_timing_attribute_ex_double(self, task, device_names, attribute):
@@ -3411,7 +3408,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_timing_attribute_ex_int32(self, task, device_names, attribute):
@@ -3427,7 +3424,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_timing_attribute_ex_string(self, task, device_names, attribute):
@@ -3452,7 +3449,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.value.decode('ascii')
 
     def get_timing_attribute_ex_uint32(self, task, device_names, attribute):
@@ -3468,7 +3465,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_timing_attribute_ex_uint64(self, task, device_names, attribute):
@@ -3484,7 +3481,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_timing_attribute_int32(self, task, attribute):
@@ -3499,7 +3496,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_timing_attribute_string(self, task, attribute):
@@ -3523,7 +3520,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.value.decode('ascii')
 
     def get_timing_attribute_uint32(self, task, attribute):
@@ -3538,7 +3535,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_timing_attribute_uint64(self, task, attribute):
@@ -3553,7 +3550,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_trig_attribute_bool(self, task, attribute):
@@ -3568,7 +3565,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_trig_attribute_double(self, task, attribute):
@@ -3583,7 +3580,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_trig_attribute_double_array(self, task, attribute):
@@ -3608,7 +3605,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.tolist()
 
     def get_trig_attribute_int32(self, task, attribute):
@@ -3623,7 +3620,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_trig_attribute_int32_array(self, task, attribute):
@@ -3648,7 +3645,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.tolist()
 
     def get_trig_attribute_string(self, task, attribute):
@@ -3672,7 +3669,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.value.decode('ascii')
 
     def get_trig_attribute_uint32(self, task, attribute):
@@ -3687,7 +3684,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_watchdog_attribute_bool(self, task, lines, attribute):
@@ -3703,7 +3700,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, lines, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_watchdog_attribute_double(self, task, lines, attribute):
@@ -3719,7 +3716,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, lines, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_watchdog_attribute_int32(self, task, lines, attribute):
@@ -3735,7 +3732,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, lines, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_watchdog_attribute_string(self, task, lines, attribute):
@@ -3760,7 +3757,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.value.decode('ascii')
 
     def get_write_attribute_bool(self, task, attribute):
@@ -3775,7 +3772,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_write_attribute_double(self, task, attribute):
@@ -3790,7 +3787,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_write_attribute_int32(self, task, attribute):
@@ -3805,7 +3802,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_write_attribute_string(self, task, attribute):
@@ -3829,7 +3826,7 @@ class LibraryInterpreter(BaseInterpreter):
                 temp_size = size_or_code
             else:
                 break
-        check_for_error(size_or_code)
+        self.check_for_error(size_or_code)
         return value.value.decode('ascii')
 
     def get_write_attribute_uint32(self, task, attribute):
@@ -3844,7 +3841,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def get_write_attribute_uint64(self, task, attribute):
@@ -3859,7 +3856,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def is_task_done(self, task):
@@ -3874,7 +3871,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, ctypes.byref(is_task_done))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return is_task_done.value
 
     def load_task(self, session_name):
@@ -3891,7 +3888,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             session_name, ctypes.byref(task))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return task, new_session_initialized
 
     def read_analog_f64(
@@ -3912,7 +3909,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
         return read_array, samps_per_chan_read.value
 
     def read_analog_scalar_f64(self, task, timeout):
@@ -3929,7 +3926,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, timeout, ctypes.byref(value), None)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def read_binary_i16(
@@ -3950,7 +3947,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
         return read_array, samps_per_chan_read.value
 
     def read_binary_i32(
@@ -3971,7 +3968,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
         return read_array, samps_per_chan_read.value
 
     def read_binary_u16(
@@ -3992,7 +3989,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
         return read_array, samps_per_chan_read.value
 
     def read_binary_u32(
@@ -4013,7 +4010,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
         return read_array, samps_per_chan_read.value
 
     def read_counter_f64(self, task, num_samps_per_chan, timeout, read_array):
@@ -4033,7 +4030,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, timeout, read_array, read_array.size,
             ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
         return read_array, samps_per_chan_read.value
 
     def read_counter_f64_ex(
@@ -4054,7 +4051,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
         return read_array, samps_per_chan_read.value
 
     def read_counter_scalar_f64(self, task, timeout):
@@ -4071,7 +4068,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, timeout, ctypes.byref(value), None)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def read_counter_scalar_u32(self, task, timeout):
@@ -4088,7 +4085,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, timeout, ctypes.byref(value), None)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def read_counter_u32(self, task, num_samps_per_chan, timeout, read_array):
@@ -4107,7 +4104,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, timeout, read_array, read_array.size,
             ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
         return read_array, samps_per_chan_read.value
 
     def read_counter_u32_ex(
@@ -4128,7 +4125,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
         return read_array, samps_per_chan_read.value
 
     def read_ctr_freq(
@@ -4154,7 +4151,7 @@ class LibraryInterpreter(BaseInterpreter):
             read_array_frequency, read_array_duty_cycle,
             read_array_duty_cycle.size, ctypes.byref(samps_per_chan_read),
             None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
         return read_array_frequency, read_array_duty_cycle, samps_per_chan_read.value
 
     def read_ctr_freq_scalar(self, task, timeout):
@@ -4174,7 +4171,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, timeout, ctypes.byref(frequency), ctypes.byref(duty_cycle),
             None)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return frequency.value, duty_cycle.value
 
     def read_ctr_ticks(
@@ -4199,7 +4196,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, interleaved,
             read_array_high_ticks, read_array_low_ticks,
             read_array_low_ticks.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
         return read_array_high_ticks, read_array_low_ticks, samps_per_chan_read.value
 
     def read_ctr_ticks_scalar(self, task, timeout):
@@ -4219,7 +4216,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, timeout, ctypes.byref(high_ticks), ctypes.byref(low_ticks),
             None)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return high_ticks.value, low_ticks.value
 
     def read_ctr_time(
@@ -4244,7 +4241,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, interleaved,
             read_array_high_time, read_array_low_time,
             read_array_low_time.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
         return read_array_high_time, read_array_low_time, samps_per_chan_read.value
 
     def read_ctr_time_scalar(self, task, timeout):
@@ -4264,7 +4261,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, timeout, ctypes.byref(high_time), ctypes.byref(low_time),
             None)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return high_time.value, low_time.value
 
     def read_digital_lines(
@@ -4287,7 +4284,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read),
             ctypes.byref(num_bytes_per_samp), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
         return read_array, samps_per_chan_read.value, num_bytes_per_samp.value
 
     def read_digital_scalar_u32(self, task, timeout):
@@ -4304,7 +4301,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, timeout, ctypes.byref(value), None)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return value.value
 
     def read_digital_u16(
@@ -4325,7 +4322,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
         return read_array, samps_per_chan_read.value
 
     def read_digital_u32(
@@ -4346,7 +4343,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
         return read_array, samps_per_chan_read.value
 
     def read_digital_u8(
@@ -4367,7 +4364,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, timeout, fill_mode, read_array,
             read_array.size, ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
         return read_array, samps_per_chan_read.value
 
     def read_power_scalar_f64(self, task, timeout):
@@ -4386,7 +4383,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, timeout, ctypes.byref(voltage), ctypes.byref(current), None)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
         return voltage.value, current.value
 
     def register_done_event(
@@ -4413,7 +4410,7 @@ class LibraryInterpreter(BaseInterpreter):
 
             error_code = cfunc(
                 task, options, callback_method_ptr, callback_data)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def register_every_n_samples_event(
             self, task, every_n_samples_event_type, n_samples, options,
@@ -4443,7 +4440,7 @@ class LibraryInterpreter(BaseInterpreter):
             error_code = cfunc(
                 task, every_n_samples_event_type, n_samples, options,
                 callback_method_ptr, callback_data)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def register_signal_event(
             self, task, signal_id, options, callback_function, callback_data):
@@ -4470,7 +4467,7 @@ class LibraryInterpreter(BaseInterpreter):
 
             error_code = cfunc(
                 task, signal_id, options, callback_method_ptr, callback_data)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def remove_cdaq_sync_connection(self, port_list):
         cfunc = lib_importer.windll.DAQmxRemoveCDAQSyncConnection
@@ -4482,7 +4479,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             port_list)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def reserve_network_device(self, device_name, override_reservation):
         cfunc = lib_importer.windll.DAQmxReserveNetworkDevice
@@ -4494,7 +4491,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             device_name, override_reservation)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def reset_buffer_attribute(self, task, attribute):
         cfunc = lib_importer.windll.DAQmxResetBufferAttribute
@@ -4506,7 +4503,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def reset_chan_attribute(self, task, channel, attribute):
         cfunc = lib_importer.windll.DAQmxResetChanAttribute
@@ -4519,7 +4516,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, channel, attribute)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def reset_device(self, device_name):
         cfunc = lib_importer.windll.DAQmxResetDevice
@@ -4531,7 +4528,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             device_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def reset_exported_signal_attribute(self, task, attribute):
         cfunc = lib_importer.windll.DAQmxResetExportedSignalAttribute
@@ -4543,7 +4540,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def reset_read_attribute(self, task, attribute):
         cfunc = lib_importer.windll.DAQmxResetReadAttribute
@@ -4555,7 +4552,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def reset_timing_attribute(self, task, attribute):
         cfunc = lib_importer.windll.DAQmxResetTimingAttribute
@@ -4567,7 +4564,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def reset_timing_attribute_ex(self, task, device_names, attribute):
         cfunc = lib_importer.windll.DAQmxResetTimingAttributeEx
@@ -4580,7 +4577,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, device_names, attribute)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def reset_trig_attribute(self, task, attribute):
         cfunc = lib_importer.windll.DAQmxResetTrigAttribute
@@ -4592,7 +4589,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def reset_watchdog_attribute(self, task, lines, attribute):
         cfunc = lib_importer.windll.DAQmxResetWatchdogAttribute
@@ -4605,7 +4602,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, lines, attribute)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def reset_write_attribute(self, task, attribute):
         cfunc = lib_importer.windll.DAQmxResetWriteAttribute
@@ -4617,7 +4614,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def save_global_chan(self, task, channel_name, save_as, author, options):
         cfunc = lib_importer.windll.DAQmxSaveGlobalChan
@@ -4630,7 +4627,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, channel_name, save_as, author, options)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def save_scale(self, scale_name, save_as, author, options):
         cfunc = lib_importer.windll.DAQmxSaveScale
@@ -4643,7 +4640,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             scale_name, save_as, author, options)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def save_task(self, task, save_as, author, options):
         cfunc = lib_importer.windll.DAQmxSaveTask
@@ -4656,7 +4653,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, save_as, author, options)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def self_test_device(self, device_name):
         cfunc = lib_importer.windll.DAQmxSelfTestDevice
@@ -4668,7 +4665,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             device_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_analog_power_up_states(
             self, device_name, channel_names, state, channel_type):
@@ -4693,7 +4690,7 @@ class LibraryInterpreter(BaseInterpreter):
         with cfunc.arglock:
             cfunc.argtypes = argtypes
             error_code = cfunc(*args)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_analog_power_up_states_with_output_type(
             self, channel_names, state_array, channel_type_array):
@@ -4710,7 +4707,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             channel_names, state_array, channel_type_array,
             len(channel_type_array))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_buffer_attribute_uint32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetBufferAttribute
@@ -4722,7 +4719,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_chan_attribute_bool(self, task, channel, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetChanAttribute
@@ -4735,7 +4732,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, channel, attribute, c_bool32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_chan_attribute_double(self, task, channel, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetChanAttribute
@@ -4748,7 +4745,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, channel, attribute, ctypes.c_double(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_chan_attribute_double_array(self, task, channel, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetChanAttribute
@@ -4762,7 +4759,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, channel, attribute, value.ctypes.data_as(ctypes.c_void_p),
             len(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_chan_attribute_int32(self, task, channel, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetChanAttribute
@@ -4775,7 +4772,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, channel, attribute, ctypes.c_int32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_chan_attribute_string(self, task, channel, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetChanAttribute
@@ -4788,7 +4785,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, channel, attribute, value.encode('ascii'))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_chan_attribute_uint32(self, task, channel, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetChanAttribute
@@ -4801,7 +4798,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, channel, attribute, ctypes.c_uint32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_digital_logic_family_power_up_state(
             self, device_name, logic_family):
@@ -4814,7 +4811,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             device_name, logic_family)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_digital_power_up_states(self, device_name, channel_names, state):
         args = [device_name]
@@ -4835,7 +4832,7 @@ class LibraryInterpreter(BaseInterpreter):
         with cfunc.arglock:
             cfunc.argtypes = argtypes
             error_code = cfunc(*args)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_digital_pull_up_pull_down_states(
             self, device_name, channel_names, state):
@@ -4857,7 +4854,7 @@ class LibraryInterpreter(BaseInterpreter):
         with cfunc.arglock:
             cfunc.argtypes = argtypes
             error_code = cfunc(*args)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_exported_signal_attribute_bool(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetExportedSignalAttribute
@@ -4869,7 +4866,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, c_bool32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_exported_signal_attribute_double(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetExportedSignalAttribute
@@ -4881,7 +4878,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_double(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_exported_signal_attribute_int32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetExportedSignalAttribute
@@ -4893,7 +4890,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_int32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_exported_signal_attribute_string(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetExportedSignalAttribute
@@ -4905,7 +4902,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, value.encode('ascii'))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_exported_signal_attribute_uint32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetExportedSignalAttribute
@@ -4917,7 +4914,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_read_attribute_bool(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetReadAttribute
@@ -4929,7 +4926,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, c_bool32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_read_attribute_double(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetReadAttribute
@@ -4941,7 +4938,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_double(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_read_attribute_int32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetReadAttribute
@@ -4953,7 +4950,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_int32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_read_attribute_string(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetReadAttribute
@@ -4965,7 +4962,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, value.encode('ascii'))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_read_attribute_uint32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetReadAttribute
@@ -4977,7 +4974,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_read_attribute_uint64(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetReadAttribute
@@ -4989,7 +4986,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint64(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_scale_attribute_double(self, scale_name, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetScaleAttribute
@@ -5001,7 +4998,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             scale_name, attribute, ctypes.c_double(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_scale_attribute_double_array(self, scale_name, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetScaleAttribute
@@ -5014,7 +5011,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             scale_name, attribute, value.ctypes.data_as(ctypes.c_void_p),
             len(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_scale_attribute_int32(self, scale_name, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetScaleAttribute
@@ -5026,7 +5023,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             scale_name, attribute, ctypes.c_int32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_scale_attribute_string(self, scale_name, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetScaleAttribute
@@ -5038,7 +5035,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             scale_name, attribute, value.encode('ascii'))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_timing_attribute_bool(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
@@ -5050,7 +5047,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, c_bool32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_timing_attribute_double(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
@@ -5062,7 +5059,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_double(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_timing_attribute_ex_bool(
             self, task, device_names, attribute, value):
@@ -5076,7 +5073,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, device_names, attribute, c_bool32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_timing_attribute_ex_double(
             self, task, device_names, attribute, value):
@@ -5090,7 +5087,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.c_double(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_timing_attribute_ex_int32(
             self, task, device_names, attribute, value):
@@ -5104,7 +5101,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.c_int32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_timing_attribute_ex_string(
             self, task, device_names, attribute, value):
@@ -5118,7 +5115,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, device_names, attribute, value.encode('ascii'))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_timing_attribute_ex_uint32(
             self, task, device_names, attribute, value):
@@ -5132,7 +5129,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.c_uint32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_timing_attribute_ex_uint64(
             self, task, device_names, attribute, value):
@@ -5146,7 +5143,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, device_names, attribute, ctypes.c_uint64(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_timing_attribute_int32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
@@ -5158,7 +5155,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_int32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_timing_attribute_string(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
@@ -5170,7 +5167,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, value.encode('ascii'))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_timing_attribute_uint32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
@@ -5182,7 +5179,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_timing_attribute_uint64(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTimingAttribute
@@ -5194,7 +5191,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint64(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_trig_attribute_bool(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
@@ -5206,7 +5203,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, c_bool32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_trig_attribute_double(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
@@ -5218,7 +5215,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_double(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_trig_attribute_double_array(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
@@ -5230,7 +5227,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, value.ctypes.data_as(ctypes.c_void_p), len(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_trig_attribute_int32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
@@ -5242,7 +5239,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_int32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_trig_attribute_int32_array(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
@@ -5254,7 +5251,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, value.ctypes.data_as(ctypes.c_void_p), len(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_trig_attribute_string(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
@@ -5266,7 +5263,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, value.encode('ascii'))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_trig_attribute_uint32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
@@ -5278,7 +5275,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_watchdog_attribute_bool(self, task, lines, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWatchdogAttribute
@@ -5291,7 +5288,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, lines, attribute, c_bool32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_watchdog_attribute_double(self, task, lines, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWatchdogAttribute
@@ -5304,7 +5301,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, lines, attribute, ctypes.c_double(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_watchdog_attribute_int32(self, task, lines, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWatchdogAttribute
@@ -5317,7 +5314,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, lines, attribute, ctypes.c_int32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_watchdog_attribute_string(self, task, lines, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWatchdogAttribute
@@ -5330,7 +5327,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, lines, attribute, value.encode('ascii'))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_write_attribute_bool(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
@@ -5342,7 +5339,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, c_bool32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_write_attribute_double(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
@@ -5354,7 +5351,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_double(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_write_attribute_int32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
@@ -5366,7 +5363,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_int32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_write_attribute_string(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
@@ -5378,7 +5375,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, value.encode('ascii'))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_write_attribute_uint32(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
@@ -5390,7 +5387,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint32(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def set_write_attribute_uint64(self, task, attribute, value):
         cfunc = lib_importer.cdll.DAQmxSetWriteAttribute
@@ -5402,7 +5399,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint64(value))
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def start_new_file(self, task, file_path):
         cfunc = lib_importer.windll.DAQmxStartNewFile
@@ -5414,7 +5411,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, file_path)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def start_task(self, task):
         cfunc = lib_importer.windll.DAQmxStartTask
@@ -5426,7 +5423,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def stop_task(self, task):
         cfunc = lib_importer.windll.DAQmxStopTask
@@ -5438,7 +5435,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def task_control(self, task, action):
         cfunc = lib_importer.windll.DAQmxTaskControl
@@ -5450,7 +5447,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, action)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def tristate_output_term(self, output_terminal):
         cfunc = lib_importer.windll.DAQmxTristateOutputTerm
@@ -5462,7 +5459,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             output_terminal)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def unreserve_network_device(self, device_name):
         cfunc = lib_importer.windll.DAQmxUnreserveNetworkDevice
@@ -5474,7 +5471,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             device_name)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def wait_until_task_done(self, task, time_to_wait):
         cfunc = lib_importer.windll.DAQmxWaitUntilTaskDone
@@ -5486,7 +5483,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, time_to_wait)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def write_analog_f64(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5506,7 +5503,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written), None)
-        check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
+        self.check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
         return samps_per_chan_written.value
 
     def write_analog_scalar_f64(self, task, auto_start, timeout, value):
@@ -5520,7 +5517,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, auto_start, timeout, value, None)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def write_binary_i16(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5540,7 +5537,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written), None)
-        check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
+        self.check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
         return samps_per_chan_written.value
 
     def write_binary_i32(
@@ -5561,7 +5558,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written), None)
-        check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
+        self.check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
         return samps_per_chan_written.value
 
     def write_binary_u16(
@@ -5582,7 +5579,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written), None)
-        check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
+        self.check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
         return samps_per_chan_written.value
 
     def write_binary_u32(
@@ -5603,7 +5600,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written), None)
-        check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
+        self.check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
         return samps_per_chan_written.value
 
     def write_ctr_freq(
@@ -5626,7 +5623,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             frequency, duty_cycle, ctypes.byref(num_samps_per_chan_written),
             None)
-        check_for_error(error_code, samps_per_chan_written=num_samps_per_chan_written.value)
+        self.check_for_error(error_code, samps_per_chan_written=num_samps_per_chan_written.value)
         return num_samps_per_chan_written.value
 
     def write_ctr_freq_scalar(
@@ -5642,7 +5639,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, auto_start, timeout, frequency, duty_cycle, None)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def write_ctr_ticks(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5664,7 +5661,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             high_ticks, low_ticks, ctypes.byref(num_samps_per_chan_written),
             None)
-        check_for_error(error_code, samps_per_chan_written=num_samps_per_chan_written.value)
+        self.check_for_error(error_code, samps_per_chan_written=num_samps_per_chan_written.value)
         return num_samps_per_chan_written.value
 
     def write_ctr_ticks_scalar(
@@ -5679,7 +5676,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, auto_start, timeout, high_ticks, low_ticks, None)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def write_ctr_time(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5701,7 +5698,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             high_time, low_time, ctypes.byref(num_samps_per_chan_written),
             None)
-        check_for_error(error_code, samps_per_chan_written=num_samps_per_chan_written.value)
+        self.check_for_error(error_code, samps_per_chan_written=num_samps_per_chan_written.value)
         return num_samps_per_chan_written.value
 
     def write_ctr_time_scalar(
@@ -5717,7 +5714,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, auto_start, timeout, high_time, low_time, None)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def write_digital_lines(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5737,7 +5734,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written), None)
-        check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
+        self.check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
         return samps_per_chan_written.value
 
     def write_digital_scalar_u32(self, task, auto_start, timeout, value):
@@ -5751,7 +5748,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, auto_start, timeout, value, None)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def write_digital_u16(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
@@ -5771,7 +5768,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written), None)
-        check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
+        self.check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
         return samps_per_chan_written.value
 
     def write_digital_u32(
@@ -5792,7 +5789,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written), None)
-        check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
+        self.check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
         return samps_per_chan_written.value
 
     def write_digital_u8(
@@ -5813,7 +5810,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array, ctypes.byref(samps_per_chan_written), None)
-        check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
+        self.check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
         return samps_per_chan_written.value
 
     def write_to_teds_from_array(
@@ -5828,7 +5825,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             physical_channel, bit_stream, len(bit_stream), basic_teds_options)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
 
     def write_to_teds_from_file(
             self, physical_channel, file_path, basic_teds_options):
@@ -5841,7 +5838,36 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             physical_channel, file_path, basic_teds_options)
-        check_for_error(error_code)
+        self.check_for_error(error_code)
+
+    def get_error_string(self, error_code):
+        error_buffer = ctypes.create_string_buffer(2048)
+
+        cfunc = lib_importer.windll.DAQmxGetErrorString
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [ctypes.c_int, ctypes.c_char_p,
+                                      ctypes.c_uint]
+
+        error_code = cfunc(error_code, error_buffer, 2048)
+        if error_code < 0:
+            return 'Failed to retrieve error description.'
+        return error_buffer.value.decode('utf-8')
+
+    def get_extended_error_info(self):
+        error_buffer = ctypes.create_string_buffer(2048)
+
+        cfunc = lib_importer.windll.DAQmxGetExtendedErrorInfo
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [ctypes.c_char_p, ctypes.c_uint]
+
+        error_code = cfunc(error_buffer, 2048)
+        if error_code < 0:
+            return 'Failed to retrieve error description.'
+        return error_buffer.value.decode('utf-8')
 
     def read_power_binary_i16(
             self, task, num_samps_per_chan, timeout, fill_mode,
@@ -5864,7 +5890,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, fill_mode,
             read_voltage_array, read_current_array, read_voltage_array.size,
             ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
         return read_voltage_array, read_current_array, samps_per_chan_read.value
 
@@ -5889,7 +5915,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, fill_mode,
             read_voltage_array, read_current_array, read_voltage_array.size,
             ctypes.byref(samps_per_chan_read), None)
-        check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samps_per_chan_read.value)
 
         return read_voltage_array, read_current_array, samps_per_chan_read.value
 
@@ -5911,7 +5937,7 @@ class LibraryInterpreter(BaseInterpreter):
             task, num_samps_per_chan, timeout, read_array,
             read_array.nbytes, ctypes.byref(samples_read),
             ctypes.byref(number_of_bytes_per_sample), None)
-        check_for_error(error_code, samps_per_chan_read=samples_read.value)
+        self.check_for_error(error_code, samps_per_chan_read=samples_read.value)
 
         return read_array, samples_read.value, number_of_bytes_per_sample.value
 
@@ -5933,48 +5959,31 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task_handle, num_samps_per_chan, auto_start, timeout, numpy_array,
             ctypes.byref(samps_per_chan_written), None)
-        check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
+        self.check_for_error(error_code, samps_per_chan_written=samps_per_chan_written.value)
 
         return samps_per_chan_written.value
 
     def hash_task_handle(self, task_handle):
         return hash(task_handle.value)
 
+    def check_for_error(self, error_code, samps_per_chan_written=None, samps_per_chan_read=None):
+        if not error_code:
+            return
 
-def check_for_error(error_code, samps_per_chan_written=None, samps_per_chan_read=None):
-    if not error_code:
-        return
+        if error_code < 0:
+            extended_error_info = self.get_extended_error_info()
 
-    if error_code < 0:
-        error_buffer = ctypes.create_string_buffer(2048)
+            if samps_per_chan_read is not None:
+                raise DaqReadError(extended_error_info, error_code, samps_per_chan_read)
+            elif samps_per_chan_written is not None:
+                raise DaqWriteError(extended_error_info, error_code, samps_per_chan_written)
+            else:
+                raise DaqError(extended_error_info, error_code)
 
-        cfunc = lib_importer.windll.DAQmxGetExtendedErrorInfo
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [ctypes.c_char_p, ctypes.c_uint]
-        cfunc(error_buffer, 2048)
+        elif error_code > 0:
+            error_string = self.get_error_string(error_code)
 
-        if samps_per_chan_read is not None:
-            raise DaqReadError(error_buffer.value.decode("utf-8"), error_code, samps_per_chan_read)
-        elif samps_per_chan_written is not None:
-            raise DaqWriteError(error_buffer.value.decode("utf-8"), error_code, samps_per_chan_written)
-        else:
-            raise DaqError(error_buffer.value.decode("utf-8"), error_code)
-
-    elif error_code > 0:
-        error_buffer = ctypes.create_string_buffer(2048)
-
-        cfunc = lib_importer.windll.DAQmxGetErrorString
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [ctypes.c_int, ctypes.c_char_p,
-                                      ctypes.c_uint]
-        cfunc(error_code, error_buffer, 2048)
-
-        warnings.warn(DaqWarning(
-            error_buffer.value.decode("utf-8"), error_code))
+            warnings.warn(DaqWarning(error_string, error_code))
 
 
 def is_string_buffer_too_small(error_code):
