@@ -3541,7 +3541,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.WriteToTEDSFromArray,
             grpc_types.WriteToTEDSFromArrayRequest(
-                physical_channel=physical_channel, bit_stream=bit_stream.tobytes(),
+                physical_channel=physical_channel, bit_stream=bit_stream,
                 basic_teds_options_raw=basic_teds_options))
 
     def write_to_teds_from_file(
