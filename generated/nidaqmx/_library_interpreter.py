@@ -343,12 +343,6 @@ class LibraryInterpreter(BaseInterpreter):
             task, sample_mode, samps_per_chan)
         check_for_error(error_code)
 
-    def cfg_input_buffer(self, task, num_samps_per_chan):
-        raise NotImplementedError
-
-    def cfg_output_buffer(self, task, num_samps_per_chan):
-        raise NotImplementedError
-
     def cfg_pipelined_samp_clk_timing(
             self, task, rate, source, active_edge, sample_mode,
             samps_per_chan):
@@ -380,9 +374,6 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, source, rate, active_edge, sample_mode, samps_per_chan)
         check_for_error(error_code)
-
-    def cfg_time_start_trig(self, task, when, timescale):
-        raise NotImplementedError
 
     def cfg_watchdog_ao_expir_states(
             self, task, channel_names, expir_state_array, output_type_array):
@@ -2128,10 +2119,6 @@ class LibraryInterpreter(BaseInterpreter):
             current_excit_val)
         check_for_error(error_code)
 
-    def create_watchdog_timer_task(
-            self, device_name, session_name, timeout, lines, exp_state):
-        raise NotImplementedError
-
     def create_watchdog_timer_task_ex(
             self, device_name, session_name, timeout):
         new_session_initialized = True
@@ -2199,9 +2186,6 @@ class LibraryInterpreter(BaseInterpreter):
             task_name)
         check_for_error(error_code)
 
-    def device_supports_cal(self, device_name):
-        raise NotImplementedError
-
     def disable_ref_trig(self, task):
         cfunc = lib_importer.windll.DAQmxDisableRefTrig
         if cfunc.argtypes is None:
@@ -2250,12 +2234,6 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, signal_id, output_terminal)
         check_for_error(error_code)
-
-    def get_ai_chan_cal_cal_date(self, task, channel_name):
-        raise NotImplementedError
-
-    def get_ai_chan_cal_exp_date(self, task, channel_name):
-        raise NotImplementedError
 
     def get_analog_power_up_states(
             self, device_name, channel_name, channel_type):
@@ -2344,75 +2322,6 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
-        return value.value
-
-    def get_cal_info_attribute_bool(self, device_name, attribute):
-        value = c_bool32()
-
-        cfunc = lib_importer.cdll.DAQmxGetCalInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32]
-
-        error_code = cfunc(
-            device_name, attribute, ctypes.byref(value))
-        check_for_error(error_code)
-        return value.value
-
-    def get_cal_info_attribute_double(self, device_name, attribute):
-        value = ctypes.c_double()
-
-        cfunc = lib_importer.cdll.DAQmxGetCalInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32]
-
-        error_code = cfunc(
-            device_name, attribute, ctypes.byref(value))
-        check_for_error(error_code)
-        return value.value
-
-    def get_cal_info_attribute_string(self, device_name, attribute):
-        cfunc = lib_importer.cdll.DAQmxGetCalInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32]
-
-        temp_size = 0
-        while True:
-            value = ctypes.create_string_buffer(temp_size)
-            size_or_code = cfunc(
-                device_name, attribute, value, temp_size)
-            if is_string_buffer_too_small(size_or_code):
-                # Buffer size must have changed between calls; check again.
-                temp_size = 0
-            elif size_or_code > 0 and temp_size == 0:
-                # Buffer size obtained, use to retrieve data.
-                temp_size = size_or_code
-            else:
-                break
-        check_for_error(size_or_code)
-        return value.value.decode('ascii')
-
-    def get_cal_info_attribute_uint32(self, device_name, attribute):
-        value = ctypes.c_uint32()
-
-        cfunc = lib_importer.cdll.DAQmxGetCalInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32]
-
-        error_code = cfunc(
-            device_name, attribute, ctypes.byref(value))
         check_for_error(error_code)
         return value.value
 
@@ -2868,15 +2777,6 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return value.value
 
-    def get_nth_task_channel(self, task, index):
-        raise NotImplementedError
-
-    def get_nth_task_device(self, task, index):
-        raise NotImplementedError
-
-    def get_nth_task_read_channel(self, task, index):
-        raise NotImplementedError
-
     def get_persisted_chan_attribute_bool(self, channel, attribute):
         value = c_bool32()
 
@@ -3280,51 +3180,6 @@ class LibraryInterpreter(BaseInterpreter):
         check_for_error(error_code)
         return value.value
 
-    def get_real_time_attribute_bool(self, task, attribute):
-        value = c_bool32()
-
-        cfunc = lib_importer.cdll.DAQmxGetRealTimeAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
-
-        error_code = cfunc(
-            task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
-        return value.value
-
-    def get_real_time_attribute_int32(self, task, attribute):
-        value = ctypes.c_int32()
-
-        cfunc = lib_importer.cdll.DAQmxGetRealTimeAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
-
-        error_code = cfunc(
-            task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
-        return value.value
-
-    def get_real_time_attribute_uint32(self, task, attribute):
-        value = ctypes.c_uint32()
-
-        cfunc = lib_importer.cdll.DAQmxGetRealTimeAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
-
-        error_code = cfunc(
-            task, attribute, ctypes.byref(value))
-        check_for_error(error_code)
-        return value.value
-
     def get_scale_attribute_double(self, scale_name, attribute):
         value = ctypes.c_double()
 
@@ -3403,9 +3258,6 @@ class LibraryInterpreter(BaseInterpreter):
                 break
         check_for_error(size_or_code)
         return value.value.decode('ascii')
-
-    def get_self_cal_last_date_and_time(self, device_name):
-        raise NotImplementedError
 
     def get_system_info_attribute_string(self, attribute):
         cfunc = lib_importer.cdll.DAQmxGetSystemInfoAttribute
@@ -4705,18 +4557,6 @@ class LibraryInterpreter(BaseInterpreter):
             task, attribute)
         check_for_error(error_code)
 
-    def reset_real_time_attribute(self, task, attribute):
-        cfunc = lib_importer.windll.DAQmxResetRealTimeAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
-
-        error_code = cfunc(
-            task, attribute)
-        check_for_error(error_code)
-
     def reset_timing_attribute(self, task, attribute):
         cfunc = lib_importer.windll.DAQmxResetTimingAttribute
         if cfunc.argtypes is None:
@@ -4818,9 +4658,6 @@ class LibraryInterpreter(BaseInterpreter):
             task, save_as, author, options)
         check_for_error(error_code)
 
-    def self_cal(self, device_name):
-        raise NotImplementedError
-
     def self_test_device(self, device_name):
         cfunc = lib_importer.windll.DAQmxSelfTestDevice
         if cfunc.argtypes is None:
@@ -4832,14 +4669,6 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             device_name)
         check_for_error(error_code)
-
-    def set_ai_chan_cal_cal_date(
-            self, task, channel_name, year, month, day, hour, minute):
-        raise NotImplementedError
-
-    def set_ai_chan_cal_exp_date(
-            self, task, channel_name, year, month, day, hour, minute):
-        raise NotImplementedError
 
     def set_analog_power_up_states(
             self, device_name, channel_names, state, channel_type):
@@ -4893,54 +4722,6 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint32(value))
-        check_for_error(error_code)
-
-    def set_cal_info_attribute_bool(self, device_name, attribute, value):
-        cfunc = lib_importer.cdll.DAQmxSetCalInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32]
-
-        error_code = cfunc(
-            device_name, attribute, c_bool32(value))
-        check_for_error(error_code)
-
-    def set_cal_info_attribute_double(self, device_name, attribute, value):
-        cfunc = lib_importer.cdll.DAQmxSetCalInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32]
-
-        error_code = cfunc(
-            device_name, attribute, ctypes.c_double(value))
-        check_for_error(error_code)
-
-    def set_cal_info_attribute_string(self, device_name, attribute, value):
-        cfunc = lib_importer.cdll.DAQmxSetCalInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32]
-
-        error_code = cfunc(
-            device_name, attribute, value.encode('ascii'))
-        check_for_error(error_code)
-
-    def set_cal_info_attribute_uint32(self, device_name, attribute, value):
-        cfunc = lib_importer.cdll.DAQmxSetCalInfoAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        ctypes_byte_str, ctypes.c_int32]
-
-        error_code = cfunc(
-            device_name, attribute, ctypes.c_uint32(value))
         check_for_error(error_code)
 
     def set_chan_attribute_bool(self, task, channel, attribute, value):
@@ -5208,42 +4989,6 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint64(value))
-        check_for_error(error_code)
-
-    def set_real_time_attribute_bool(self, task, attribute, value):
-        cfunc = lib_importer.cdll.DAQmxSetRealTimeAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
-
-        error_code = cfunc(
-            task, attribute, c_bool32(value))
-        check_for_error(error_code)
-
-    def set_real_time_attribute_int32(self, task, attribute, value):
-        cfunc = lib_importer.cdll.DAQmxSetRealTimeAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
-
-        error_code = cfunc(
-            task, attribute, ctypes.c_int32(value))
-        check_for_error(error_code)
-
-    def set_real_time_attribute_uint32(self, task, attribute, value):
-        cfunc = lib_importer.cdll.DAQmxSetRealTimeAttribute
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.c_int32]
-
-        error_code = cfunc(
-            task, attribute, ctypes.c_uint32(value))
         check_for_error(error_code)
 
     def set_scale_attribute_double(self, scale_name, attribute, value):
@@ -5730,12 +5475,6 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             device_name)
         check_for_error(error_code)
-
-    def wait_for_next_sample_clock(self, task, timeout):
-        raise NotImplementedError
-
-    def wait_for_valid_timestamp(self, task, timestamp_event, timeout):
-        raise NotImplementedError
 
     def wait_until_task_done(self, task, time_to_wait):
         cfunc = lib_importer.windll.DAQmxWaitUntilTaskDone
