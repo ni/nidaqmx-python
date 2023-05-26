@@ -15,13 +15,12 @@ EXAMPLE_PATHS = [p for p in EXAMPLES_DIRECTORY.glob("**/*.py") if p.name != "__i
 
 
 @pytest.mark.parametrize("example_path", EXAMPLE_PATHS)
-def test___shipping_example___run___no_errors(example_path: Path):
-    local_system = nidaqmx.system.System.local()
+def test___shipping_example___run___no_errors(example_path: Path, system):
     example_source = example_path.read_text()
     for device_name in _find_device_names(example_source):
-        if device_name not in local_system.devices:
+        if device_name not in system.devices:
             pytest.skip(f"Cannot find device {device_name}.")
-        device = local_system.devices[device_name]
+        device = system.devices[device_name]
         for physical_channel_name in _find_physical_channel_names(example_source, device_name):
             if not _has_physical_channel(device, physical_channel_name):
                 pytest.skip(

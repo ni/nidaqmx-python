@@ -11,13 +11,11 @@ class TestPowerUpStates:
     This validate the power up states functions in the Python NI-DAQmx API.
     """
 
-    def test_digital_power_up_states(self, real_x_series_device):
+    def test_digital_power_up_states(self, real_x_series_device, system):
         """Test for validating digital power up states."""
         # The power up state for digital lines for an X Series device has to
         # be set for the whole port.
         do_port = real_x_series_device.do_ports[0].name
-
-        system = nidaqmx.system.System.local()
 
         # Set power up state for whole port.
         state_to_set = DOPowerUpState(physical_channel=do_port, power_up_state=PowerUpStates.LOW)
