@@ -43,7 +43,7 @@ class TestMultiThreadedReads:
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_multi_threaded_analog_read(self, multi_threading_test_devices, seed):
+    def test_multi_threaded_analog_read(self, multi_threading_test_devices, seed, init_kwargs):
         """Test for validating multi-thread read operation."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -63,7 +63,7 @@ class TestMultiThreadedReads:
             for channel_to_test in channels_to_test:
                 task = None
                 try:
-                    task = nidaqmx.Task()
+                    task = nidaqmx.Task(**init_kwargs)
                     task.ai_channels.add_ai_voltage_chan(
                         channel_to_test.name, max_val=10, min_val=-10
                     )
