@@ -15,7 +15,9 @@ EXAMPLE_PATHS = [p for p in EXAMPLES_DIRECTORY.glob("**/*.py") if p.name != "__i
 
 
 @pytest.mark.parametrize("example_path", EXAMPLE_PATHS)
+@pytest.mark.library_only
 def test___shipping_example___run___no_errors(example_path: Path, system):
+    # This test runs the example programs, which do not support gRPC. Hence this test is marked library_only
     example_source = example_path.read_text()
     for device_name in _find_device_names(example_source):
         if device_name not in system.devices:
