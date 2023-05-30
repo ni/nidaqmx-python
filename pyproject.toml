@@ -83,11 +83,11 @@ filterwarnings = ["always::ImportWarning", "always::ResourceWarning"]
 testpaths = ["tests"]
 markers = [
   # Defines custom markers used by nidaqmx tests. Prevents PytestUnknownMarkWarning.
-  "library_only: run the test with only the library interpreter implementation.",
-  "library_skip(reason=None): skip the given test function with the library interpreter implementation.",
+  "library_only(reason=...): run the test with only the library interpreter implementation.",
+  "library_skip(reason=...): skip the given test function with the library interpreter implementation.",
   "library_xfail(condition, ..., *, reason=..., run=True, raises=None, strict=xfail_strict): mark the test function as an expected failure with the library interpreter implementation.",
-  "grpc_only: run the test with only the gRPC interpreter implementation.",
-  "grpc_skip(reason=None): skip the given test function with the gRPC interpreter implementation.",
+  "grpc_only(reason=...): run the test with only the gRPC interpreter implementation.",
+  "grpc_skip(reason=...): skip the given test function with the gRPC interpreter implementation.",
   "grpc_xfail(condition, ..., *, reason=..., run=True, raises=None, strict=xfail_strict): mark the test function as an expected failure with the gRPC interpreter implementation.",
   "new_task_name: name of the new task to be created.",
   "device_name: name of the device used for testing.",

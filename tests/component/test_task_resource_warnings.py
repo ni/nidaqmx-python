@@ -6,7 +6,7 @@ import nidaqmx
 from nidaqmx.errors import DaqResourceWarning
 
 
-@pytest.mark.library_only
+@pytest.mark.library_only(reason="gRPC task allows detaching from task on server")
 def test___unclosed_task___leak_task___resource_warning_raised(task):
     # Since __del__ is not guaranteed to be called, for the purposes of
     # consistent test results call __del__ manually.
@@ -14,7 +14,7 @@ def test___unclosed_task___leak_task___resource_warning_raised(task):
         task.__del__()
 
 
-@pytest.mark.grpc_only
+@pytest.mark.grpc_only(reason="gRPC task allows detaching from task on server")
 def test___grpc_task___leak_task___resource_warning_not_raised(task):
     with warnings.catch_warnings(record=True) as warnings_raised:
         task.__del__()
