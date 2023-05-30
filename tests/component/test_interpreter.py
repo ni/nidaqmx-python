@@ -20,7 +20,7 @@ def test___unknown_error_code___get_error_string___returns_unable_to_locate_erro
     assert error_message.startswith("Error code could not be found.")
 
 
-@pytest.mark.grpc_only
+@pytest.mark.grpc_only(reason="Tests gRPC-specific error case")
 def test___grpc_interpreter_with_errors___get_error_string___returns_failed_to_retrieve_error_description(
     grpc_interpreter_with_errors: BaseInterpreter,
 ) -> None:

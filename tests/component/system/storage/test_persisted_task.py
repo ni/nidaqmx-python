@@ -49,7 +49,7 @@ def test___persisted_task___load_and_read___returns_persisted_sample_count(
 
 
 @pytest.mark.task_name("VoltageTesterTask")
-@pytest.mark.library_only
+@pytest.mark.library_only(reason="Default gRPC initialization behavior is auto (create or attach)")
 def test___persisted_task___load_twice___raises_duplicate_task(persisted_task: PersistedTask):
     with persisted_task.load():
         with pytest.raises(DaqError) as exc_info:
@@ -60,7 +60,7 @@ def test___persisted_task___load_twice___raises_duplicate_task(persisted_task: P
 
 
 @pytest.mark.task_name("VoltageTesterTask")
-@pytest.mark.grpc_only
+@pytest.mark.grpc_only(reason="Default gRPC initialization behavior is auto (create or attach)")
 @pytest.mark.grpc_session_initialization_behavior(SessionInitializationBehavior.AUTO)
 def test___grpc_session_initializaton_behavior_auto___load_twice___returns_multiple_task_proxies(
     persisted_task: PersistedTask,
@@ -76,7 +76,7 @@ def test___grpc_session_initializaton_behavior_auto___load_twice___returns_multi
 
 
 @pytest.mark.task_name("VoltageTesterTask")
-@pytest.mark.grpc_only
+@pytest.mark.grpc_only(reason="Default gRPC initialization behavior is auto (create or attach)")
 @pytest.mark.grpc_session_initialization_behavior(
     SessionInitializationBehavior.INITIALIZE_SERVER_SESSION
 )
