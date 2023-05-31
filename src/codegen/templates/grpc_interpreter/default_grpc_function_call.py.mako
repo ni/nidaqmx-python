@@ -58,7 +58,8 @@
 %endif
 %if is_read_method:
     %for param in get_read_array_parameters(function):
-        _assign_numpy_array(${param}, response.${param})
+        _assign_numpy_array(${param}, response.${param}, response.samps_per_chan_read)
+        self._check_for_error_from_response(response.status, response.samps_per_chan_read)
     %endfor
 %endif
 %if function.function_name == 'clear_task':

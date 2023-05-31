@@ -99,6 +99,14 @@ class GrpcStubInterpreter(BaseInterpreter):
         else:
             self._raise_error(error_code, error_message, samps_per_chan_written, samps_per_chan_read)
 
+    def _check_for_error_from_response(self, error_code, samps_per_chan_read):
+        if error_code != 0:
+            response = self._invoke(
+            self._client.GetErrorString,
+            grpc_types.GetErrorStringRequest(
+                error_code= error_code))
+            self._raise_error(error_code, response.error_string, samps_per_chan_read = samps_per_chan_read)
+
     def _raise_error(self, error_code, error_message, samps_per_chan_written=None, samps_per_chan_read=None):
         if error_code < 0:
             if samps_per_chan_read is not None:
@@ -176,7 +184,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             return 'Failed to retrieve error description.'
 
 
-def _assign_numpy_array(numpy_array, grpc_array):
+def _assign_numpy_array(numpy_array, grpc_array, samples_read):
     """
     Assigns grpc array to numpy array maintaining the original shape.
 
@@ -184,6 +192,7 @@ def _assign_numpy_array(numpy_array, grpc_array):
     the numpy array is assigned to a 1D array of the grpc arrray.
     """
     grpc_array_size = len(grpc_array)
+    grpc_array[samples_read:] = numpy_array[samples_read:]
     if isinstance(grpc_array, bytes):
         assert numpy_array.nbytes >= grpc_array_size
         numpy_array.flat[:grpc_array_size] = numpy.frombuffer(grpc_array, dtype=numpy_array.dtype)
