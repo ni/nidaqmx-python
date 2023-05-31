@@ -382,6 +382,9 @@ service NiDAQmx {
   rpc StopTask(StopTaskRequest) returns (StopTaskResponse);
   rpc TaskControl(TaskControlRequest) returns (TaskControlResponse);
   rpc TristateOutputTerm(TristateOutputTermRequest) returns (TristateOutputTermResponse);
+  rpc UnregisterDoneEvent(UnregisterDoneEventRequest) returns (UnregisterDoneEventResponse);
+  rpc UnregisterEveryNSamplesEvent(UnregisterEveryNSamplesEventRequest) returns (UnregisterEveryNSamplesEventResponse);
+  rpc UnregisterSignalEvent(UnregisterSignalEventRequest) returns (UnregisterSignalEventResponse);
   rpc UnreserveNetworkDevice(UnreserveNetworkDeviceRequest) returns (UnreserveNetworkDeviceResponse);
   rpc WaitForNextSampleClock(WaitForNextSampleClockRequest) returns (WaitForNextSampleClockResponse);
   rpc WaitForValidTimestamp(WaitForValidTimestampRequest) returns (WaitForValidTimestampResponse);
@@ -9925,6 +9928,38 @@ message TristateOutputTermRequest {
 }
 
 message TristateOutputTermResponse {
+  int32 status = 1;
+}
+
+message UnregisterDoneEventRequest {
+  nidevice_grpc.Session task = 1;
+}
+
+message UnregisterDoneEventResponse {
+  int32 status = 1;
+}
+
+message UnregisterEveryNSamplesEventRequest {
+  nidevice_grpc.Session task = 1;
+  oneof every_n_samples_event_type_enum {
+    EveryNSamplesEventType every_n_samples_event_type = 2;
+    int32 every_n_samples_event_type_raw = 3;
+  }
+}
+
+message UnregisterEveryNSamplesEventResponse {
+  int32 status = 1;
+}
+
+message UnregisterSignalEventRequest {
+  nidevice_grpc.Session task = 1;
+  oneof signal_id_enum {
+    Signal2 signal_id = 2;
+    int32 signal_id_raw = 3;
+  }
+}
+
+message UnregisterSignalEventResponse {
   int32 status = 1;
 }
 

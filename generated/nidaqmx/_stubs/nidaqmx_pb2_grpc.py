@@ -1839,6 +1839,21 @@ class NiDAQmxStub(object):
                 request_serializer=nidaqmx__pb2.TristateOutputTermRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.TristateOutputTermResponse.FromString,
                 )
+        self.UnregisterDoneEvent = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/UnregisterDoneEvent',
+                request_serializer=nidaqmx__pb2.UnregisterDoneEventRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.UnregisterDoneEventResponse.FromString,
+                )
+        self.UnregisterEveryNSamplesEvent = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/UnregisterEveryNSamplesEvent',
+                request_serializer=nidaqmx__pb2.UnregisterEveryNSamplesEventRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.UnregisterEveryNSamplesEventResponse.FromString,
+                )
+        self.UnregisterSignalEvent = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/UnregisterSignalEvent',
+                request_serializer=nidaqmx__pb2.UnregisterSignalEventRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.UnregisterSignalEventResponse.FromString,
+                )
         self.UnreserveNetworkDevice = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/UnreserveNetworkDevice',
                 request_serializer=nidaqmx__pb2.UnreserveNetworkDeviceRequest.SerializeToString,
@@ -4154,6 +4169,24 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def UnregisterDoneEvent(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UnregisterEveryNSamplesEvent(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UnregisterSignalEvent(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def UnreserveNetworkDevice(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -6125,6 +6158,21 @@ def add_NiDAQmxServicer_to_server(servicer, server):
                     servicer.TristateOutputTerm,
                     request_deserializer=nidaqmx__pb2.TristateOutputTermRequest.FromString,
                     response_serializer=nidaqmx__pb2.TristateOutputTermResponse.SerializeToString,
+            ),
+            'UnregisterDoneEvent': grpc.unary_unary_rpc_method_handler(
+                    servicer.UnregisterDoneEvent,
+                    request_deserializer=nidaqmx__pb2.UnregisterDoneEventRequest.FromString,
+                    response_serializer=nidaqmx__pb2.UnregisterDoneEventResponse.SerializeToString,
+            ),
+            'UnregisterEveryNSamplesEvent': grpc.unary_unary_rpc_method_handler(
+                    servicer.UnregisterEveryNSamplesEvent,
+                    request_deserializer=nidaqmx__pb2.UnregisterEveryNSamplesEventRequest.FromString,
+                    response_serializer=nidaqmx__pb2.UnregisterEveryNSamplesEventResponse.SerializeToString,
+            ),
+            'UnregisterSignalEvent': grpc.unary_unary_rpc_method_handler(
+                    servicer.UnregisterSignalEvent,
+                    request_deserializer=nidaqmx__pb2.UnregisterSignalEventRequest.FromString,
+                    response_serializer=nidaqmx__pb2.UnregisterSignalEventResponse.SerializeToString,
             ),
             'UnreserveNetworkDevice': grpc.unary_unary_rpc_method_handler(
                     servicer.UnreserveNetworkDevice,
@@ -12458,6 +12506,57 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/TristateOutputTerm',
             nidaqmx__pb2.TristateOutputTermRequest.SerializeToString,
             nidaqmx__pb2.TristateOutputTermResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def UnregisterDoneEvent(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/UnregisterDoneEvent',
+            nidaqmx__pb2.UnregisterDoneEventRequest.SerializeToString,
+            nidaqmx__pb2.UnregisterDoneEventResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def UnregisterEveryNSamplesEvent(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/UnregisterEveryNSamplesEvent',
+            nidaqmx__pb2.UnregisterEveryNSamplesEventRequest.SerializeToString,
+            nidaqmx__pb2.UnregisterEveryNSamplesEventResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def UnregisterSignalEvent(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/UnregisterSignalEvent',
+            nidaqmx__pb2.UnregisterSignalEventRequest.SerializeToString,
+            nidaqmx__pb2.UnregisterSignalEventResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

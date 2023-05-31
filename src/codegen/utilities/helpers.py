@@ -77,7 +77,8 @@ def snake_to_pascal(snake_string):
     return _insert_special_case_pascal_tokens(result)
 
 
-def strip_string_prefix(input, prefix):
+# TODO: Replace with str.removeprefix() when dropping Python 3.8.
+def removeprefix(input, prefix):
     """Returns the input string with the prefix string removed.
 
     If the given prefix string is not present in the input string,

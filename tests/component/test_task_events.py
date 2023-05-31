@@ -3,6 +3,7 @@ import pytest
 import nidaqmx
 from nidaqmx.constants import AcquisitionType, EveryNSamplesEventType, Signal
 from nidaqmx.error_codes import DAQmxErrors
+from nidaqmx.errors import RpcError
 from tests._event_utils import (
     DoneEventObserver,
     EveryNSamplesEventObserver,
@@ -91,6 +92,9 @@ def test___signal_event_registered___run_finite_acquisition___callback_invoked_n
     assert all(e.signal_type == Signal.SAMPLE_COMPLETE.value for e in event_observer.events)
 
 
+@pytest.mark.grpc_xfail(
+    reason="Requires NI gRPC Device Server version 2.2 or later", raises=RpcError
+)
 def test___done_event_unregistered___run_finite_acquisition___callback_not_invoked(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -109,6 +113,9 @@ def test___done_event_unregistered___run_finite_acquisition___callback_not_invok
     assert len(event_observer.events) == 0
 
 
+@pytest.mark.grpc_xfail(
+    reason="Requires NI gRPC Device Server version 2.2 or later", raises=RpcError
+)
 def test___every_n_samples_event_unregistered___run_finite_acquisition___callback_not_invoked(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -129,6 +136,9 @@ def test___every_n_samples_event_unregistered___run_finite_acquisition___callbac
     assert len(event_observer.events) == 0
 
 
+@pytest.mark.grpc_xfail(
+    reason="Requires NI gRPC Device Server version 2.2 or later", raises=RpcError
+)
 def test___signal_event_unregistered___run_finite_acquisition___callback_not_invoked(
     ai_task_with_real_device: nidaqmx.Task,
 ) -> None:
@@ -195,7 +205,7 @@ def test___done_and_every_n_samples_events_registered___run_multiple_finite_acqu
 
 
 @pytest.mark.grpc_xfail(
-    reason="AB#2395984: GrpcStubInterpreter does not unregister events with DAQmx", run=False
+    reason="Requires NI gRPC Device Server version 2.2 or later", raises=RpcError
 )
 def test___ai_task____run_multiple_finite_acquisitions_with_varying_every_n_samples_event_interval___callbacks_invoked(
     ai_task: nidaqmx.Task,
@@ -229,7 +239,9 @@ def test___ai_task____run_multiple_finite_acquisitions_with_varying_every_n_samp
     ] == every_n_samples_event_counts
 
 
-@pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.2 or later")
+@pytest.mark.grpc_xfail(
+    reason="Requires NI gRPC Device Server version 2.2 or later", raises=AssertionError
+)
 def test___done_event_registered___register_done_event___already_registered_error_raised(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -245,7 +257,9 @@ def test___done_event_registered___register_done_event___already_registered_erro
     assert exc_info.value.error_code == DAQmxErrors.DONE_EVENT_ALREADY_REGISTERED
 
 
-@pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.2 or later")
+@pytest.mark.grpc_xfail(
+    reason="Requires NI gRPC Device Server version 2.2 or later", raises=AssertionError
+)
 def test___every_n_samples_acquired_into_buffer_event_registered___register_every_n_samples_acquired_into_buffer_event___already_registered_error_raised(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -268,7 +282,9 @@ def test___every_n_samples_acquired_into_buffer_event_registered___register_ever
     )
 
 
-@pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.2 or later")
+@pytest.mark.grpc_xfail(
+    reason="Requires NI gRPC Device Server version 2.2 or later", raises=AssertionError
+)
 def test___every_n_samples_transferred_from_buffer_event_registered___register_every_n_samples_transferred_from_buffer_event___already_registered_error_raised(
     ao_task: nidaqmx.Task,
 ) -> None:
@@ -347,9 +363,7 @@ def test___ao_task___register_wrong_every_n_samples_event___not_supported_by_dev
     )
 
 
-@pytest.mark.grpc_xfail(
-    reason="AB#2395984: GrpcStubInterpreter does not unregister events with DAQmx"
-)
+@pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.2 or later")
 def test___task___register_unregister_done_event___callback_not_invoked(
     ai_task: nidaqmx.Task,
 ) -> None:
@@ -363,7 +377,7 @@ def test___task___register_unregister_done_event___callback_not_invoked(
 
 
 @pytest.mark.grpc_xfail(
-    reason="AB#2395984: GrpcStubInterpreter does not unregister events with DAQmx"
+    reason="Requires NI gRPC Device Server version 2.2 or later", raises=RpcError
 )
 def test___task___register_unregister_every_n_samples_acquired_into_buffer_event___callback_not_invoked(
     ai_task: nidaqmx.Task,
@@ -380,7 +394,7 @@ def test___task___register_unregister_every_n_samples_acquired_into_buffer_event
 
 
 @pytest.mark.grpc_xfail(
-    reason="AB#2395984: GrpcStubInterpreter does not unregister events with DAQmx"
+    reason="Requires NI gRPC Device Server version 2.2 or later", raises=RpcError
 )
 def test___task___register_unregister_every_n_samples_transferred_from_buffer_event___callback_not_invoked(
     ao_task: nidaqmx.Task,
@@ -397,7 +411,7 @@ def test___task___register_unregister_every_n_samples_transferred_from_buffer_ev
 
 
 @pytest.mark.grpc_xfail(
-    reason="AB#2395984: GrpcStubInterpreter does not unregister events with DAQmx"
+    reason="Requires NI gRPC Device Server version 2.2 or later", raises=RpcError
 )
 def test___task___register_unregister_signal_event___callback_not_invoked(
     ai_task: nidaqmx.Task,
