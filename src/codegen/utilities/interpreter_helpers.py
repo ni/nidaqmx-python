@@ -328,11 +328,10 @@ def get_grpc_interpreter_call_params(func, params):
             else:
                 if is_write_bytes_param(param):
                     grpc_params.append(f"{name}={param.parameter_name}.tobytes()")
+                elif is_write_function:
+                    grpc_params.append(get_write_array_param(param))
                 else:
-                    if is_write_function:
-                        grpc_params.append(get_write_array_param(param))
-                    else:
-                        grpc_params.append(f"{name}={param.parameter_name}")
+                    grpc_params.append(f"{name}={param.parameter_name}")
 
     if func.is_init_method:
         grpc_params.append("initialization_behavior=self._grpc_options.initialization_behavior")
