@@ -241,6 +241,12 @@ def get_instantiation_lines_for_output(func):
                 )
         else:
             instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
+    for param in get_interpreter_in_out_params(func):
+        if param.parameter_name == "reserved" or param.parameter_name == "callback_data":
+            continue
+        instantiation_lines.append(
+            f"{param.parameter_name} = {param.ctypes_data_type}({param.parameter_name})"
+        )
     return instantiation_lines
 
 
@@ -392,6 +398,10 @@ def get_interpreter_output_params(func):
 def get_output_params(func):
     """Gets output parameters for the function."""
     return [p for p in func.base_parameters if p.direction == "out"]
+
+
+def get_interpreter_in_out_params(func):
+    return [p for p in get_interpreter_parameters(func) if p.direction == "in" and p.is_pointer]
 
 
 def get_return_values(func):
