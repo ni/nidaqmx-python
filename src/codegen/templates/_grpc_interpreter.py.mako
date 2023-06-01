@@ -188,8 +188,15 @@ def _assign_numpy_array(numpy_array, grpc_array, samples_read):
     Checks for the instance of grpc_array with bytes, if validated to True,
     the numpy array is assigned to a 1D array of the grpc arrray.
     """
-    grpc_array_size = len(grpc_array)
-    grpc_array[samples_read:] = numpy_array[samples_read:]
+    if numpy_array.ndim>1:
+        (number_of_channels,number_of_samples_per_channel) = numpy_array.shape
+        for row in range(0, number_of_channels - 1):
+            for column in range(0, number_of_samples_per_channel -1):
+                if samples_read<=column:
+                    grpc_array[row,column]=numpy_array[row,column]
+    else:
+        grpc_array_size = len(grpc_array)
+        grpc_array[samples_read:] = numpy_array[samples_read:]
     if isinstance(grpc_array, bytes):
         assert numpy_array.nbytes >= grpc_array_size
         numpy_array.flat[:grpc_array_size] = numpy.frombuffer(grpc_array, dtype=numpy_array.dtype)
