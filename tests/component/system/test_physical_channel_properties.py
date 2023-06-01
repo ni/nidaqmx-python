@@ -82,12 +82,6 @@ def test___physical_channel_with_teds___get_uint32_property___returns_configured
     assert phys_chans["ai0"].teds_mfg_id == 17
 
 
-@pytest.fixture
-def teds_file_path(test_assets_directory):
-    """Returns the ted file path."""
-    return str(test_assets_directory / "teds" / "Voltage.ted")
-
-
 VALUES_IN_TED = [
     17,
     64,
