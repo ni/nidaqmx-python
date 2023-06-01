@@ -99,13 +99,10 @@ class GrpcStubInterpreter(BaseInterpreter):
         else:
             self._raise_error(error_code, error_message, samps_per_chan_written, samps_per_chan_read)
 
-    def _check_for_error_from_response(self, error_code, samps_per_chan_read):
+    def _check_for_error_from_response(self, error_code, samps_per_chan_written=None, samps_per_chan_read=None):
         if error_code != 0:
-            response = self._invoke(
-            self._client.GetErrorString,
-            grpc_types.GetErrorStringRequest(
-                error_code= error_code))
-            self._raise_error(error_code, response.error_string, samps_per_chan_read = samps_per_chan_read)
+            error_message = self.get_error_string(error_code)
+            self._raise_error(error_code, error_message, samps_per_chan_written = samps_per_chan_written, samps_per_chan_read = samps_per_chan_read)
 
     def _raise_error(self, error_code, error_message, samps_per_chan_written=None, samps_per_chan_read=None):
         if error_code < 0:
