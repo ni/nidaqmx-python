@@ -44,51 +44,51 @@ def test___physical_channels_with_different_names___hash___not_equal(
     assert hash(phys_chan1) != hash(phys_chan3)
 
 
-def test__physical_channel__write_to_teds_from_array_with_invalid_stream__throws_data_error(
+def test___invalid_bitstream___write_to_teds_from_array___throws_data_error(
     any_x_series_device,
 ):
     phys_chan = any_x_series_device.ai_physical_chans["ai0"]
 
-    with pytest.raises(nidaqmx.DaqError) as exception:
+    with pytest.raises(nidaqmx.DaqError) as exc_info:
         phys_chan.write_to_teds_from_array([1, 2, 3, 4])
 
-    assert exception.value.error_code == DAQmxErrors.TEDS_SENSOR_DATA_ERROR
+    assert exc_info.value.error_code == DAQmxErrors.TEDS_SENSOR_DATA_ERROR
 
 
-def test__physical_channel__write_to_teds_from_array_with_valid_stream__throws_config_or_detection_error(
+def test___valid_bitstream___write_to_teds_from_array___throws_config_or_detection_error(
     any_x_series_device,
 ):
     phys_chan = any_x_series_device.ai_physical_chans["ai0"]
 
-    with pytest.raises(nidaqmx.DaqError) as exception:
+    with pytest.raises(nidaqmx.DaqError) as exc_info:
         phys_chan.write_to_teds_from_array(VALUES_IN_TED)
 
-    assert exception.value.error_code in [
+    assert exc_info.value.error_code in [
         DAQmxErrors.CANT_CONFIGURE_TEDS_FOR_CHAN,
         DAQmxErrors.TEDS_SENSOR_NOT_DETECTED,
     ]
 
 
-def test__physical_channel__write_to_teds_from_file_with_invalid_file_path__throws_data_error(
+def test___invalid_file_path___write_to_teds_from_file___throws_data_error(
     any_x_series_device,
 ):
     phys_chan = any_x_series_device.ai_physical_chans["ai0"]
 
-    with pytest.raises(nidaqmx.DaqError) as exception:
+    with pytest.raises(nidaqmx.DaqError) as exc_info:
         phys_chan.write_to_teds_from_file()
 
-    assert exception.value.error_code == DAQmxErrors.TEDS_SENSOR_DATA_ERROR
+    assert exc_info.value.error_code == DAQmxErrors.TEDS_SENSOR_DATA_ERROR
 
 
-def test__physical_channel__write_to_teds_from_file_with_valid_stream__throws_config_or_detection_error(
+def test___valid_file_path___write_to_teds_from_array___throws_config_or_detection_error(
     any_x_series_device, teds_file_path
 ):
     phys_chan = any_x_series_device.ai_physical_chans["ai0"]
 
-    with pytest.raises(nidaqmx.DaqError) as exception:
-        phys_chan.write_to_teds_from_file(teds_file_path)
+    with pytest.raises(nidaqmx.DaqError) as exc_info:
+        phys_chan.write_to_teds_from_file(str(teds_file_path))
 
-    assert exception.value.error_code in [
+    assert exc_info.value.error_code in [
         DAQmxErrors.CANT_CONFIGURE_TEDS_FOR_CHAN,
         DAQmxErrors.TEDS_SENSOR_NOT_DETECTED,
     ]

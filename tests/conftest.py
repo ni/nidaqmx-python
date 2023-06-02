@@ -450,5 +450,5 @@ def grpc_interpreter_with_errors(grpc_channel_with_errors: grpc.Channel) -> Grpc
 
 @pytest.fixture
 def teds_file_path(test_assets_directory):
-    """Returns the ted file path."""
-    return str(test_assets_directory / "teds" / "Voltage.ted")
+    """Returns a TEDS file path."""
+    return pathlib.Path(test_assets_directory, "teds", "Voltage.ted")

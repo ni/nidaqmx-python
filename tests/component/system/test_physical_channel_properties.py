@@ -36,7 +36,7 @@ def test___physical_channel_with_teds___get_bit_stream___returns_configured_valu
     phys_chans = any_x_series_device.ai_physical_chans
     expected_value = numpy.array(VALUES_IN_TED, dtype=numpy.uint8)
 
-    phys_chans["ai0"].configure_teds(teds_file_path)
+    phys_chans["ai0"].configure_teds(str(teds_file_path))
 
     assert (phys_chans["ai0"].teds_bit_stream == expected_value).all()
 
@@ -59,7 +59,7 @@ def test___physical_channel_with_teds___get_string_property___returns_configured
     any_x_series_device, teds_file_path
 ):
     phys_chans = any_x_series_device.ai_physical_chans
-    phys_chans["ai0"].configure_teds(teds_file_path)
+    phys_chans["ai0"].configure_teds(str(teds_file_path))
 
     assert phys_chans["ai0"].teds_version_letter == "A"
 
@@ -68,7 +68,7 @@ def test___physical_channel_with_teds___get_uint32_array_property___returns_conf
     any_x_series_device, teds_file_path
 ):
     phys_chans = any_x_series_device.ai_physical_chans
-    phys_chans["ai0"].configure_teds(teds_file_path)
+    phys_chans["ai0"].configure_teds(str(teds_file_path))
 
     assert phys_chans["ai0"].teds_template_ids == [30]
 
@@ -77,7 +77,7 @@ def test___physical_channel_with_teds___get_uint32_property___returns_configured
     any_x_series_device, teds_file_path
 ):
     phys_chans = any_x_series_device.ai_physical_chans
-    phys_chans["ai0"].configure_teds(teds_file_path)
+    phys_chans["ai0"].configure_teds(str(teds_file_path))
 
     assert phys_chans["ai0"].teds_mfg_id == 17
 
