@@ -1,8 +1,15 @@
 import pytest
 
+from nidaqmx import Task
 from nidaqmx._task_modules.channels.ai_channel import AIChannel
 from nidaqmx._task_modules.channels.ci_channel import CIChannel
-from nidaqmx.constants import ExcitationSource, PowerIdleOutputBehavior, RTDType
+from nidaqmx.constants import (
+    ExcitationSource,
+    PowerIdleOutputBehavior,
+    RTDType,
+    VoltageUnits,
+)
+from nidaqmx.scale import Scale
 
 
 @pytest.fixture(scope="function")
@@ -12,6 +19,17 @@ def ai_voltage_chan_with_excit(task, any_x_series_device):
         any_x_series_device.ai_physical_chans[0].name,
         voltage_excit_source=ExcitationSource.EXTERNAL,
         voltage_excit_val=0.1,
+    )
+    yield ai_channel
+
+
+@pytest.fixture(scope="function")
+def ai_voltage_chan_with_scale(task, any_x_series_device):
+    """Creates AI Channel object to measure voltage with a custom scale."""
+    ai_channel = task.ai_channels.add_ai_voltage_chan(
+        any_x_series_device.ai_physical_chans[0].name,
+        units=VoltageUnits.FROM_CUSTOM_SCALE,
+        custom_scale_name="double_gain_scale",
     )
     yield ai_channel
 
@@ -174,3 +192,53 @@ def test___channel___set_deprecated_properties___reports_warnings(ai_rtd_chan: A
 def test___channel___reset_deprecated_properties___reports_warnings(ai_rtd_chan: AIChannel):
     with pytest.deprecated_call():
         del ai_rtd_chan.ai_rtd_r_0
+
+
+def test___channel_with_scale___get_scale_property___returns_scale(
+    ai_voltage_chan_with_scale: AIChannel,
+):
+    scale = ai_voltage_chan_with_scale.ai_custom_scale
+
+    assert scale.name == "double_gain_scale"
+
+
+def test___channel_with_scale___get_scale_property___shared_interpreter(
+    ai_voltage_chan_with_scale: AIChannel,
+):
+    scale = ai_voltage_chan_with_scale.ai_custom_scale
+
+    assert scale._interpreter is ai_voltage_chan_with_scale._interpreter
+
+
+@pytest.mark.scale_name("polynomial_scale")
+def test___channel_with_scale___set_scale_property___returns_assigned_scale(
+    ai_voltage_chan_with_scale: AIChannel, persisted_scale: Scale
+):
+    ai_voltage_chan_with_scale.ai_custom_scale = persisted_scale.load()
+
+    assert ai_voltage_chan_with_scale.ai_custom_scale.name == "polynomial_scale"
+
+
+def test___channel_with_scale___reset_scale_property___returns_empty_scale(
+    ai_voltage_chan_with_scale: AIChannel,
+):
+    del ai_voltage_chan_with_scale.ai_custom_scale
+    ai_voltage_chan_with_scale.ai_voltage_units = VoltageUnits.VOLTS
+
+    assert ai_voltage_chan_with_scale.ai_custom_scale.name == ""
+
+
+def test___channel___get_physical_channel_property___returns_physical_channel(
+    ai_rtd_chan: AIChannel, task: Task
+):
+    physical_channel = ai_rtd_chan.physical_channel
+
+    assert physical_channel.name == f"{task.devices[0].name}/ai0"
+
+
+def test___channel___get_physical_channel_property___shared_interpreter(
+    ai_rtd_chan: AIChannel, task: Task
+):
+    physical_channel = ai_rtd_chan.physical_channel
+
+    assert physical_channel._interpreter is task._interpreter
