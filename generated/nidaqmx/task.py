@@ -73,7 +73,7 @@ class Task:
         # Initialize the fields that __del__ accesses so it doesn't crash when __init__ raises an exception.
         self._handle = None
         self._close_on_exit = False
-        self._saved_name = new_task_name
+        self._saved_name = new_task_name  # _initialize sets this to the name assigned by DAQmx.
         self._grpc_options = grpc_options
 
         if grpc_options and not (
@@ -1129,10 +1129,13 @@ class _TaskAlternateConstructor(Task):
             close_on_exit: Specifies whether the task's context manager closes the task.
 
         """
+        # Initialize the fields that __del__ accesses so it doesn't crash when _initialize raises an exception.
         self._handle = task_handle
-        self._interpreter = interpreter
         self._close_on_exit = close_on_exit
+        self._saved_name = ""  # _initialize sets this to the name assigned by DAQmx.
+        self._grpc_options = getattr(interpreter, "_grpc_options", None)
 
+        self._interpreter = interpreter
         self._initialize(self._handle, self._interpreter)
 
         # Use meta-programming to change the type of this object to Task,

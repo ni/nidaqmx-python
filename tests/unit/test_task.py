@@ -171,3 +171,27 @@ def test___close_on_exit_with_grpc_options___leak_task___resource_warning_not_ra
 
     assert len(warnings_raised) == 0
     task.close()
+
+
+def test___close_on_exit_with_alternate_constructor___leak_task___raises_resource_warning(
+    interpreter: Mock,
+):
+    task = _TaskAlternateConstructor("MyTaskHandle", interpreter, close_on_exit=True)
+
+    with pytest.warns(ResourceWarning):
+        task.__del__()
+
+    task.close()
+
+
+def test___close_on_exit_with_alternate_constructor_and_grpc_options___leak_task___resource_warning_not_raised(
+    interpreter: Mock, mocker: MockerFixture
+):
+    interpreter._grpc_options = create_grpc_options(mocker)
+    task = _TaskAlternateConstructor("MyTaskHandle", interpreter, close_on_exit=True)
+
+    with warnings.catch_warnings(record=True) as warnings_raised:
+        task.__del__()
+
+    assert len(warnings_raised) == 0
+    task.close()
