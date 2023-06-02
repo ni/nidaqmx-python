@@ -41,6 +41,7 @@ def test___physical_channel_with_teds___get_bit_stream___returns_configured_valu
     assert (phys_chans["ai0"].teds_bit_stream == expected_value).all()
 
 
+@pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.2 or later")
 def test___physical_channel___get_int32_array_property___returns_default_value(
     any_x_series_device,
 ):
