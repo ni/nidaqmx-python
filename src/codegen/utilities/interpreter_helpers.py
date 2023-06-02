@@ -401,7 +401,7 @@ def get_output_params(func):
 
 
 def get_interpreter_in_out_params(func):
-    """Gets the input parameters that are also pointers for the function"""
+    """Gets the input parameters that are also pointers for the function."""
     return [p for p in get_interpreter_parameters(func) if p.direction == "in" and p.is_pointer]
 
 

@@ -419,6 +419,9 @@ ${function_template.script_function(function_object)}
         """
         states, channel_types = self._interpreter.get_analog_power_up_states_with_output_type(
             flatten_channel_string(physical_channels), len(physical_channels))
+        
+        assert len(states) == len(physical_channels)
+        assert len(channel_types) == len(physical_channels)
 
         power_up_states = []
         for p, s, c in zip(physical_channels, states, channel_types):
