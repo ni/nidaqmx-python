@@ -3,7 +3,6 @@ import pytest
 import nidaqmx
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system import PhysicalChannel
-
 from tests.component.system.test_physical_channel_properties import VALUES_IN_TED
 
 
