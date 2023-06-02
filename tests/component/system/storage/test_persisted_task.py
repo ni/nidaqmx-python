@@ -92,3 +92,13 @@ def test___grpc_session_initialization_behavior_initialize_server_session___load
 
     assert exc_info.value.rpc_code == grpc.StatusCode.ALREADY_EXISTS
     assert "VoltageTesterTask" in exc_info.value.args[0]
+
+
+@pytest.mark.task_name("VoltageTesterTask")
+def test___persisted_task___load___shared_interpreter(
+    persisted_task: PersistedTask,
+):
+    with persisted_task.load() as task:
+        task_interpreter = task._interpreter
+
+    assert task_interpreter is persisted_task._interpreter
