@@ -39,6 +39,13 @@ class PersistedScale:
         return f'PersistedScale(name={self._name})'
 
     @property
+    def name(self):
+        """
+        str: Indicates the name of the custom scale.
+        """
+        return self._name
+
+    @property
     def author(self):
         """
         str: Indicates the author of the custom scale.
