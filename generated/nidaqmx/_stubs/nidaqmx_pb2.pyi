@@ -26643,6 +26643,116 @@ class TristateOutputTermResponse(google.protobuf.message.Message):
 global___TristateOutputTermResponse = TristateOutputTermResponse
 
 @typing_extensions.final
+class UnregisterDoneEventRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_FIELD_NUMBER: builtins.int
+    @property
+    def task(self) -> session_pb2.Session: ...
+    def __init__(
+        self,
+        *,
+        task: session_pb2.Session | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["task", b"task"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["task", b"task"]) -> None: ...
+
+global___UnregisterDoneEventRequest = UnregisterDoneEventRequest
+
+@typing_extensions.final
+class UnregisterDoneEventResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    status: builtins.int
+    def __init__(
+        self,
+        *,
+        status: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status"]) -> None: ...
+
+global___UnregisterDoneEventResponse = UnregisterDoneEventResponse
+
+@typing_extensions.final
+class UnregisterEveryNSamplesEventRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_FIELD_NUMBER: builtins.int
+    EVERY_N_SAMPLES_EVENT_TYPE_FIELD_NUMBER: builtins.int
+    EVERY_N_SAMPLES_EVENT_TYPE_RAW_FIELD_NUMBER: builtins.int
+    @property
+    def task(self) -> session_pb2.Session: ...
+    every_n_samples_event_type: global___EveryNSamplesEventType.ValueType
+    every_n_samples_event_type_raw: builtins.int
+    def __init__(
+        self,
+        *,
+        task: session_pb2.Session | None = ...,
+        every_n_samples_event_type: global___EveryNSamplesEventType.ValueType = ...,
+        every_n_samples_event_type_raw: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["every_n_samples_event_type", b"every_n_samples_event_type", "every_n_samples_event_type_enum", b"every_n_samples_event_type_enum", "every_n_samples_event_type_raw", b"every_n_samples_event_type_raw", "task", b"task"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["every_n_samples_event_type", b"every_n_samples_event_type", "every_n_samples_event_type_enum", b"every_n_samples_event_type_enum", "every_n_samples_event_type_raw", b"every_n_samples_event_type_raw", "task", b"task"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["every_n_samples_event_type_enum", b"every_n_samples_event_type_enum"]) -> typing_extensions.Literal["every_n_samples_event_type", "every_n_samples_event_type_raw"] | None: ...
+
+global___UnregisterEveryNSamplesEventRequest = UnregisterEveryNSamplesEventRequest
+
+@typing_extensions.final
+class UnregisterEveryNSamplesEventResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    status: builtins.int
+    def __init__(
+        self,
+        *,
+        status: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status"]) -> None: ...
+
+global___UnregisterEveryNSamplesEventResponse = UnregisterEveryNSamplesEventResponse
+
+@typing_extensions.final
+class UnregisterSignalEventRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_FIELD_NUMBER: builtins.int
+    SIGNAL_ID_FIELD_NUMBER: builtins.int
+    SIGNAL_ID_RAW_FIELD_NUMBER: builtins.int
+    @property
+    def task(self) -> session_pb2.Session: ...
+    signal_id: global___Signal2.ValueType
+    signal_id_raw: builtins.int
+    def __init__(
+        self,
+        *,
+        task: session_pb2.Session | None = ...,
+        signal_id: global___Signal2.ValueType = ...,
+        signal_id_raw: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["signal_id", b"signal_id", "signal_id_enum", b"signal_id_enum", "signal_id_raw", b"signal_id_raw", "task", b"task"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["signal_id", b"signal_id", "signal_id_enum", b"signal_id_enum", "signal_id_raw", b"signal_id_raw", "task", b"task"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["signal_id_enum", b"signal_id_enum"]) -> typing_extensions.Literal["signal_id", "signal_id_raw"] | None: ...
+
+global___UnregisterSignalEventRequest = UnregisterSignalEventRequest
+
+@typing_extensions.final
+class UnregisterSignalEventResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    status: builtins.int
+    def __init__(
+        self,
+        *,
+        status: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status"]) -> None: ...
+
+global___UnregisterSignalEventResponse = UnregisterSignalEventResponse
+
+@typing_extensions.final
 class UnreserveNetworkDeviceRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
