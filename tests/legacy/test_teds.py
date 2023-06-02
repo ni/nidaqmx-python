@@ -14,9 +14,7 @@ class TestTEDS:
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_create_teds_ai_voltage_chan(
-        self, task, any_x_series_device, seed, teds_file_path
-    ):
+    def test_create_teds_ai_voltage_chan(self, task, any_x_series_device, seed, teds_file_path):
         """Test to validate TEDS functionality."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
