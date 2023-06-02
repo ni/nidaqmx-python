@@ -27,7 +27,7 @@ def test___physical_channels___getitem_int___forward_order(
 
 
 @pytest.mark.parametrize("collection_name", COLLECTION_NAMES)
-def test___physical_channels___getitem_int___interpreter_shared(
+def test___physical_channels___getitem_int___shared_interpreter(
     collection_name: str, any_x_series_device: Device
 ):
     physical_channels = getattr(any_x_series_device, collection_name)
@@ -51,7 +51,7 @@ def test___physical_channels___getitem_slice___forward_order(
 
 @pytest.mark.xfail(reason="https://github.com/ni/nidaqmx-python/issues/392")
 @pytest.mark.parametrize("collection_name", COLLECTION_NAMES)
-def test___physical_channels___getitem_slice___interpreter_shared(
+def test___physical_channels___getitem_slice___shared_interpreter(
     collection_name: str, any_x_series_device: Device
 ):
     physical_channels = getattr(any_x_series_device, collection_name)
@@ -62,7 +62,7 @@ def test___physical_channels___getitem_slice___interpreter_shared(
 
 
 @pytest.mark.parametrize("collection_name", COLLECTION_NAMES)
-def test___physical_channels___getitem_str___interpreter_shared(
+def test___physical_channels___getitem_str___shared_interpreter(
     collection_name: str, any_x_series_device: Device
 ):
     physical_channels = getattr(any_x_series_device, collection_name)
@@ -77,7 +77,7 @@ def test___physical_channels___getitem_str___interpreter_shared(
 
 
 @pytest.mark.parametrize("collection_name", COLLECTION_NAMES)
-def test___physical_channels___getitem_str_list___interpreter_shared(
+def test___physical_channels___getitem_str_list___shared_interpreter(
     collection_name: str, any_x_series_device: Device
 ):
     physical_channels = getattr(any_x_series_device, collection_name)
@@ -103,7 +103,7 @@ def test___physical_channels___iter___forward_order(
 
 
 @pytest.mark.parametrize("collection_name", COLLECTION_NAMES)
-def test___physical_channels___iter___interpreter_shared(
+def test___physical_channels___iter___shared_interpreter(
     collection_name: str, any_x_series_device: Device
 ):
     physical_channels = getattr(any_x_series_device, collection_name)
@@ -125,7 +125,7 @@ def test___physical_channels___reversed___reverse_order(
 
 
 @pytest.mark.parametrize("collection_name", COLLECTION_NAMES)
-def test___physical_channels___reversed___interpreter_shared(
+def test___physical_channels___reversed___shared_interpreter(
     collection_name: str, any_x_series_device: Device
 ):
     physical_channels = getattr(any_x_series_device, collection_name)
@@ -147,7 +147,7 @@ def test___physical_channels___all___forward_order(
 
 
 @pytest.mark.parametrize("collection_name", COLLECTION_NAMES)
-def test___physical_channels___all___interpreter_shared(
+def test___physical_channels___all___shared_interpreter(
     collection_name: str, any_x_series_device: Device
 ):
     physical_channels = getattr(any_x_series_device, collection_name)
