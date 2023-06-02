@@ -61,7 +61,7 @@ class PhysicalChannelCollection(Sequence):
         elif isinstance(index, slice):
             return _PhysicalChannelAlternateConstructor(self.channel_names[index], self._interpreter)
         elif isinstance(index, str):
-            return PhysicalChannel(f'{self._name}/{index}')
+            return _PhysicalChannelAlternateConstructor(f'{self._name}/{index}', self._interpreter)
         else:
             raise DaqError(
                 'Invalid index type "{}" used to access collection.'
@@ -91,7 +91,7 @@ class PhysicalChannelCollection(Sequence):
             physical channel object that represents the entire list of
             physical channels on this channel collection.
         """
-        return PhysicalChannel(flatten_channel_string(self.channel_names))
+        return _PhysicalChannelAlternateConstructor(flatten_channel_string(self.channel_names), self._interpreter)
 
     @property
     def channel_names(self):
