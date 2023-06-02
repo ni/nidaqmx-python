@@ -173,10 +173,6 @@ def _release_n(semaphore: Semaphore, n: int) -> None:
         semaphore.release(n)
 
 
-@pytest.mark.grpc_xfail(
-    reason="Could not register the given callback function, a callback function already exists.",
-    raises=DaqError,
-)
 def test___shared_interpreter___run_multiple_acquisitions_with_events___callbacks_invoked(
     init_kwargs,
     multi_threading_test_devices: Sequence[Device],
@@ -205,11 +201,6 @@ def test___shared_interpreter___run_multiple_acquisitions_with_events___callback
         assert all(status == 0 for status in done_statuses)
 
 
-@pytest.mark.grpc_xfail(
-    reason="Could not register the given callback function, a callback function already exists.",
-    raises=DaqError,
-)
-@pytest.mark.library_xfail(reason="Crashes Python interpreter", run=False)
 def test___shared_interpreter___unregister_events_during_other_acquisitions_with_events___callbacks_invoked(
     init_kwargs,
     multi_threading_test_devices: Sequence[Device],
