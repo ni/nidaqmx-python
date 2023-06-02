@@ -1,7 +1,8 @@
 import numpy
+import threading
 import warnings
-from nidaqmx import utils
 
+from nidaqmx import utils
 from nidaqmx._task_modules.channels.channel import Channel
 from nidaqmx._task_modules.export_signals import ExportSignals
 from nidaqmx._task_modules.in_stream import InStream
@@ -76,6 +77,11 @@ class Task:
         self._saved_name = new_task_name  # _initialize sets this to the name assigned by DAQmx.
         self._grpc_options = grpc_options
 
+        self._done_event_handler = None
+        self._every_n_acquired_event_handler = None
+        self._every_n_transferred_event_handler = None
+        self._signal_event_handler = None
+
         if grpc_options and not (
             grpc_options.session_name == "" or grpc_options.session_name == new_task_name
         ):
@@ -94,7 +100,23 @@ class Task:
             warnings.warn(
                 'Task of name "{}" was not explicitly closed before it was '
                 'destructed. Resources on the task device may still be '
-                'reserved.'.format(self._saved_name), DaqResourceWarning)
+                'reserved.'.format(self._saved_name),
+                DaqResourceWarning
+            )
+        elif (
+            self._grpc_options is not None
+            and (
+                self._done_event_handler is not None
+                or self._every_n_acquired_event_handler is not None
+                or self._every_n_transferred_event_handler is not None
+                or self._signal_event_handler is not None
+            )
+        ):
+            warnings.warn(
+                'Task of name "{}" was not explicitly closed before it was '
+                'destructed. Event handlers may still be active.'.format(self._saved_name),
+                DaqResourceWarning
+            )
 
     def __enter__(self):
         return self
@@ -280,13 +302,7 @@ class Task:
         self._triggers = Triggers(task_handle, interpreter)
         self._out_stream = OutStream(self, interpreter)
 
-        # These lists keep C callback objects in memory as ctypes doesn't.
-        # Program will crash if callback is made after object is garbage
-        # collected.
-        self._done_event_callbacks = []
-        self._every_n_transferred_event_callbacks = []
-        self._every_n_acquired_event_callbacks = []
-        self._signal_event_callbacks = []
+        self._event_handler_lock = threading.Lock()
 
     def _calculate_num_samps_per_chan(self, num_samps_per_chan):
         """
@@ -349,8 +365,35 @@ class Task:
             return
 
         self._interpreter.clear_task(self._handle)
-
         self._handle = None
+
+        self._close_event_handlers()
+
+    def _close_event_handlers(self):
+        with self._event_handler_lock:
+            event_handlers = [
+                self._done_event_handler,
+                self._every_n_acquired_event_handler,
+                self._every_n_transferred_event_handler,
+                self._signal_event_handler,
+            ]
+
+            self._done_event_handler = None
+            self._every_n_acquired_event_handler = None
+            self._every_n_transferred_event_handler = None
+            self._signal_event_handler = None
+
+        first_exception = None
+        for event_handler in filter(None, event_handlers):
+            try:
+                event_handler.close()
+            except Exception as ex:
+                if first_exception is None:
+                    first_exception = ex
+                pass
+
+        if first_exception is not None:
+            raise first_exception
 
     def control(self, action):
         """
@@ -651,9 +694,19 @@ class Task:
                 function.
         """
         if callback_method is not None:
-            self._interpreter.register_done_event(self._handle, 0, callback_method, None)
+            # If the event is already registered, the interpreter should raise DaqError with code
+            # DAQmxErrors.DONE_EVENT_ALREADY_REGISTERED.
+            event_handler = self._interpreter.register_done_event(self._handle, 0, callback_method, None)
+            with self._event_handler_lock:
+                assert self._done_event_handler is None, "Event already registered."
+                self._done_event_handler = event_handler
         else:
             self._interpreter.unregister_done_event(self._handle)
+            with self._event_handler_lock:
+                event_handler = self._done_event_handler
+                self._done_event_handler = None
+            if event_handler is not None:
+                event_handler.close()  # may raise an exception
 
     def register_every_n_samples_acquired_into_buffer_event(
             self, sample_interval, callback_method):
@@ -690,12 +743,22 @@ class Task:
                 function.
         """
         if callback_method is not None:
-            self._interpreter.register_every_n_samples_event(
+            # If the event is already registered, the interpreter should raise DaqError with code
+            # DAQmxErrors.EVERY_N_SAMPS_ACQ_INTO_BUFFER_EVENT_ALREADY_REGISTERED.
+            event_handler = self._interpreter.register_every_n_samples_event(
                 self._handle, EveryNSamplesEventType.ACQUIRED_INTO_BUFFER.value,
                 sample_interval, 0, callback_method, None)
+            with self._event_handler_lock:
+                assert self._every_n_acquired_event_handler is None, "Event already registered."
+                self._every_n_acquired_event_handler = event_handler
         else:
             self._interpreter.unregister_every_n_samples_event(
                 self._handle, EveryNSamplesEventType.ACQUIRED_INTO_BUFFER.value)
+            with self._event_handler_lock:
+                event_handler = self._every_n_acquired_event_handler
+                self._every_n_acquired_event_handler = None
+            if event_handler is not None:
+                event_handler.close()  # may raise an exception
 
     def register_every_n_samples_transferred_from_buffer_event(
             self, sample_interval, callback_method):
@@ -732,12 +795,22 @@ class Task:
                 function.
         """
         if callback_method is not None:
-            self._interpreter.register_every_n_samples_event(
+            # If the event is already registered, the interpreter should raise DaqError with code
+            # DAQmxErrors.EVERY_N_SAMPS_TRANSFERRED_FROM_BUFFER_EVENT_ALREADY_REGISTERED.
+            event_handler = self._interpreter.register_every_n_samples_event(
                 self._handle, EveryNSamplesEventType.TRANSFERRED_FROM_BUFFER.value,
                 sample_interval, 0, callback_method, None)
+            with self._event_handler_lock:
+                assert self._every_n_transferred_event_handler is None, "Event already registered."
+                self._every_n_transferred_event_handler = event_handler
         else:
             self._interpreter.unregister_every_n_samples_event(
                 self._handle, EveryNSamplesEventType.TRANSFERRED_FROM_BUFFER.value)
+            with self._event_handler_lock:
+                event_handler = self._every_n_transferred_event_handler
+                self._every_n_transferred_event_handler = None
+            if event_handler is not None:
+                event_handler.close()  # may raise an exception
 
     def register_signal_event(self, signal_type, callback_method):
         """
@@ -769,10 +842,20 @@ class Task:
                 function.
         """
         if callback_method is not None:
-            self._interpreter.register_signal_event(
+            # If the event is already registered, the interpreter should raise DaqError with code
+            # DAQmxErrors.SIGNAL_EVENT_ALREADY_REGISTERED.
+            event_handler = self._interpreter.register_signal_event(
                 self._handle, signal_type.value, 0, callback_method, None)
+            with self._event_handler_lock:
+                assert self._signal_event_handler is None, "Event already registered."
+                self._signal_event_handler = event_handler
         else:
             self._interpreter.unregister_signal_event(self._handle, signal_type.value)
+            with self._event_handler_lock:
+                event_handler = self._signal_event_handler
+                self._signal_event_handler = None
+            if event_handler is not None:
+                event_handler.close()  # may raise an exception
 
     def save(self, save_as="", author="", overwrite_existing_task=False,
              allow_interactive_editing=True, allow_interactive_deletion=True):
@@ -1134,6 +1217,11 @@ class _TaskAlternateConstructor(Task):
         self._close_on_exit = close_on_exit
         self._saved_name = ""  # _initialize sets this to the name assigned by DAQmx.
         self._grpc_options = getattr(interpreter, "_grpc_options", None)
+
+        self._done_event_handler = None
+        self._every_n_acquired_event_handler = None
+        self._every_n_transferred_event_handler = None
+        self._signal_event_handler = None
 
         self._interpreter = interpreter
         self._initialize(self._handle, self._interpreter)
