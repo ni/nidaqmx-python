@@ -60,6 +60,7 @@ def fix_import_paths(
     print("Fixing import paths")
     grpc_codegened_file_paths = list(stubs_path.rglob("*pb2*py"))
     imports_to_fix = [path.stem for path in grpc_codegened_file_paths if path.parent == stubs_path]
+    grpc_codegened_file_paths.extend(stubs_path.rglob("*pb2*pyi"))
     for path in grpc_codegened_file_paths:
         print(f"Processing {path}")
         data = path.read_bytes()
