@@ -1,9 +1,9 @@
+from __future__ import annotations
 from enum import IntEnum
+from typing import TYPE_CHECKING
 
-try:
-    from grpc import Channel as _GrpcChannel
-except ImportError:
-    from typing import Any as _GrpcChannel
+if TYPE_CHECKING:
+    import grpc
 
 
 # This constant specifies the gRPC package and service used by this API.
@@ -46,7 +46,7 @@ class GrpcSessionOptions:
 
     def __init__(
         self,
-        grpc_channel: _GrpcChannel,
+        grpc_channel: grpc.Channel,
         session_name: str,
         *,
         api_key=MEASUREMENTLINK_23Q1_NIDAQMX_PYTHON_API_KEY,
