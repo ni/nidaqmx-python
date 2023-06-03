@@ -5483,7 +5483,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(ctypes.c_void_p)]
 
         options = 0
-        callback_method_ptr = DAQmxDoneEventCallbackPtr()
+        callback_method_ptr = DAQmxDoneEventCallbackPtr()  # type: ignore  # typeshed is missing no-argument constructor overload
         callback_data = None
 
         error_code = cfunc(
@@ -5507,7 +5507,7 @@ class LibraryInterpreter(BaseInterpreter):
 
         n_samples = 0
         options = 0
-        callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr()
+        callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr()  # type: ignore  # typeshed is missing no-argument constructor overload
         callback_data = None
 
         error_code = cfunc(
@@ -5530,7 +5530,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.POINTER(ctypes.c_void_p)]
 
         options = 0
-        callback_method_ptr = DAQmxSignalEventCallbackPtr()
+        callback_method_ptr = DAQmxSignalEventCallbackPtr()  # type: ignore  # typeshed is missing no-argument constructor overload
         callback_data = None
 
         error_code = cfunc(
