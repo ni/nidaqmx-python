@@ -46,13 +46,14 @@ class CtypesByteString:
     Custom argtype that automatically converts unicode strings to ASCII
     strings in Python 3.
     """
-    def from_param(self, param):
+    @classmethod
+    def from_param(cls, param):
         if isinstance(param, str):
             param = param.encode('ascii')
         return ctypes.c_char_p(param)
 
 
-ctypes_byte_str = CtypesByteString()
+ctypes_byte_str = CtypesByteString
 
 
 def wrapped_ndpointer(*args, **kwargs):

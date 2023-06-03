@@ -22,6 +22,7 @@ import warnings
 from typing import Optional
 
 import numpy
+from typing import List
 
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer

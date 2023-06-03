@@ -6,6 +6,7 @@ import warnings
 from typing import Optional
 
 import numpy
+from typing import List
 
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer
@@ -2254,7 +2255,7 @@ class LibraryInterpreter(BaseInterpreter):
         state = []
 
         args = [device_name]
-        argtypes = [ctypes_byte_str]
+        argtypes: List[type] = [ctypes_byte_str]
 
         for index in range(len(channel_name)):
             state_element = ctypes.c_double()
@@ -2633,7 +2634,7 @@ class LibraryInterpreter(BaseInterpreter):
         state = []
 
         args = [device_name]
-        argtypes = [ctypes_byte_str]
+        argtypes: List[type] = [ctypes_byte_str]
 
         for index in range(len(channel_name)):
             state_element = ctypes.c_int32()
@@ -2659,7 +2660,7 @@ class LibraryInterpreter(BaseInterpreter):
         state = []
 
         args = [device_name]
-        argtypes = [ctypes_byte_str]
+        argtypes: List[type] = [ctypes_byte_str]
 
         for index in range(len(channel_name)):
             state_element = ctypes.c_int32()
@@ -4676,7 +4677,7 @@ class LibraryInterpreter(BaseInterpreter):
     def set_analog_power_up_states(
             self, device_name, channel_names, state, channel_type):
         args = [device_name]
-        argtypes = [ctypes_byte_str]
+        argtypes: List[type] = [ctypes_byte_str]
 
         for index in range(len(channel_names)):
 
@@ -4821,7 +4822,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def set_digital_power_up_states(self, device_name, channel_names, state):
         args = [device_name]
-        argtypes = [ctypes_byte_str]
+        argtypes: List[type] = [ctypes_byte_str]
 
         for index in range(len(channel_names)):
 
@@ -4843,7 +4844,7 @@ class LibraryInterpreter(BaseInterpreter):
     def set_digital_pull_up_pull_down_states(
             self, device_name, channel_names, state):
         args = [device_name]
-        argtypes = [ctypes_byte_str]
+        argtypes: List[type] = [ctypes_byte_str]
 
         for index in range(len(channel_names)):
 
