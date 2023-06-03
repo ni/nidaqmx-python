@@ -5,7 +5,7 @@ from typing import Optional
 
 class BaseEventHandler(abc.ABC):
     """Interpreter-specific object that is returned from register_*_event()."""
-    __slots__ = []
+    __slots__ = ()
 
     @abc.abstractmethod
     def close(self) -> None:
@@ -21,7 +21,7 @@ class BaseInterpreter(abc.ABC):
     """
     Contains signature of functions for all DAQmx APIs.
     """
-    __slots__ = []
+    __slots__ = ()
 
     @abc.abstractmethod
     def add_cdaq_sync_connection(self, port_list):

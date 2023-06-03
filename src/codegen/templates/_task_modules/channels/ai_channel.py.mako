@@ -20,7 +20,7 @@ class AIChannel(Channel):
     """
     Represents one or more analog input virtual channels and their properties.
     """
-    __slots__ = []
+    __slots__ = ()
 
     def __repr__(self):
         return f'AIChannel(name={self._name})'

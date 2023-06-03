@@ -15,7 +15,7 @@ class DIChannel(Channel):
     """
     Represents one or more digital input virtual channels and their properties.
     """
-    __slots__ = []
+    __slots__ = ()
 
     def __repr__(self):
         return f'DIChannel(name={self._name})'

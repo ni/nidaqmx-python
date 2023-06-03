@@ -15,7 +15,7 @@ class COChannel(Channel):
     """
     Represents one or more counter output virtual channels and their properties.
     """
-    __slots__ = []
+    __slots__ = ()
 
     def __repr__(self):
         return f'COChannel(name={self._name})'
