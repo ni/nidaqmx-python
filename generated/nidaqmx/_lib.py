@@ -4,6 +4,7 @@ from numpy.ctypeslib import ndpointer
 import platform
 import sys
 import threading
+from typing import cast
 
 from nidaqmx.errors import Error
 
@@ -25,13 +26,17 @@ class c_bool32(ctypes.c_uint):
     Specifies a custom ctypes data type to represent 32-bit booleans.
     """
 
+    # typeshed specifies that _SimpleCData[_T].value is an instance variable with type _T, so
+    # accessing it with the descriptor protocol via its class results in "error: Access to generic
+    # instance variables via class is ambiguous".
+
     def _getter(self):
-        return bool(ctypes.c_uint.value.__get__(self))
+        return bool(ctypes.c_uint.value.__get__(self))  # type: ignore
 
     def _setter(self, val):
-        ctypes.c_uint.value.__set__(self, int(val))
+        ctypes.c_uint.value.__set__(self, int(val))  # type: ignore
 
-    value = property(_getter, _setter)
+    value: bool = cast(bool, property(_getter, _setter))
 
     del _getter, _setter
 
