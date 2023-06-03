@@ -14,7 +14,6 @@ import pytest
 from nidaqmx import Task
 from nidaqmx._task_modules.channels import AIChannel
 from nidaqmx.constants import AcquisitionType
-from nidaqmx.errors import DaqError
 from nidaqmx.system import Device, System
 from tests.helpers import generate_random_seed
 
