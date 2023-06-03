@@ -54,7 +54,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     """
     # Do not add per-task state to the interpreter class.
-    __slots__ = []
+    __slots__ = ()
 
     def __init__(self):
         pass

@@ -16,7 +16,7 @@ class CIChannel(Channel):
     """
     Represents one or more counter input virtual channels and their properties.
     """
-    __slots__ = []
+    __slots__ = ()
 
     def __repr__(self):
         return f'CIChannel(name={self._name})'

@@ -16,7 +16,7 @@ class AOChannel(Channel):
     """
     Represents one or more analog output virtual channels and their properties.
     """
-    __slots__ = []
+    __slots__ = ()
 
     def __repr__(self):
         return f'AOChannel(name={self._name})'

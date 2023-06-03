@@ -10,7 +10,7 @@ class DOChannel(Channel):
     """
     Represents one or more digital output virtual channels and their properties.
     """
-    __slots__ = []
+    __slots__ = ()
 
     def __repr__(self):
         return f'DOChannel(name={self._name})'
