@@ -14,7 +14,7 @@ import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
 import google.protobuf.timestamp_pb2
-import session_pb2
+from nidaqmx._stubs import session_pb2
 import sys
 import typing
 
