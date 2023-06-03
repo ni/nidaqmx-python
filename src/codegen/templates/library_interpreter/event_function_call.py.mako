@@ -39,7 +39,7 @@
         n_samples = 0
     %endif
         options = 0
-        callback_method_ptr = ${callback_func_param.type}()
+        callback_method_ptr = ${callback_func_param.type}()  # type: ignore  # typeshed is missing no-argument constructor overload
         callback_data = None
 %endif
 
