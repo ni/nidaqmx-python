@@ -1,3 +1,6 @@
+import traceback
+from nidaqmx.task import _TaskEventType
+
 import pytest
 
 import nidaqmx
@@ -423,3 +426,32 @@ def test___task___register_unregister_signal_event___callback_not_invoked(
         ai_task.register_signal_event(Signal.SAMPLE_COMPLETE, None)
 
     assert len(event_observer.events) == 0
+
+
+@pytest.mark.grpc_only(reason="Tests gRPC-specific error case")
+@pytest.mark.temporary_grpc_channel
+def test___events_registered_and_grpc_channel_closed___close_task___events_cleaned_up_and_clear_task_error_raised(
+    ai_task: nidaqmx.Task, grpc_channel
+):
+    done_event_observer = DoneEventObserver()
+    every_n_samples_event_observer = EveryNSamplesEventObserver()
+    ai_task.register_done_event(done_event_observer.handle_done_event)
+    ai_task.register_every_n_samples_acquired_into_buffer_event(
+        100, every_n_samples_event_observer.handle_every_n_samples_event
+    )
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
+    done_event_handler = ai_task._event_handlers[_TaskEventType.DONE]
+    every_n_samples_event_handler = ai_task._event_handlers[_TaskEventType.EVERY_N_SAMPLES_ACQUIRED_INTO_BUFFER]
+    ai_task._close_on_exit = False  # avoid double-close warning
+    grpc_channel.close()
+
+    with pytest.raises(ValueError, match="closed channel") as exc_info:
+        ai_task.close()
+
+    assert "in clear_task\n" in "".join(traceback.format_tb(exc_info.value.__traceback__))
+    assert ai_task._handle is None
+    assert len(ai_task._event_handlers) == 0
+    assert not done_event_handler._thread.is_alive()
+    assert not every_n_samples_event_handler._thread.is_alive()
