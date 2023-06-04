@@ -62,6 +62,7 @@ mypy-protobuf = ">=3.4"
 ni-python-styleguide = ">=0.4.1"
 mypy = ">=1.0"
 types-protobuf = "^4.21"
+grpc-stubs = "^1.53"
 
 [tool.poetry.group.test.dependencies]
 pytest = ">=7.2"
@@ -103,3 +104,20 @@ markers = [
 [build-system]
 requires = ["poetry>=1.2"]
 build-backend = "poetry.masonry.api"
+
+[tool.mypy]
+check_untyped_defs = true
+plugins = "numpy.typing.mypy_plugin"
+exclude = [
+  # https://github.com/grpc/grpc/issues/27682 - module 'grpc' has no attribute 'experimental'
+  "nidaqmx/_stubs/.*_grpc.py$"
+]
+
+[[tool.mypy.overrides]]
+module = [
+  "deprecation",
+  "grpc.experimental.*",
+  "importlib_metadata",
+  "mako.*"
+]
+ignore_missing_imports = true
