@@ -2689,6 +2689,13 @@ class _DeviceInt32AttributeEnumTypeWrapper(google.protobuf.internal.enum_type_wr
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     DEVICE_INT32_ATTRIBUTE_UNSPECIFIED: _DeviceInt32Attribute.ValueType  # 0
     DEVICE_ATTRIBUTE_BUS_TYPE: _DeviceInt32Attribute.ValueType  # 8998
+    DEVICE_ATTRIBUTE_AI_TRIG_USAGE: _DeviceInt32Attribute.ValueType  # 10630
+    DEVICE_ATTRIBUTE_AO_TRIG_USAGE: _DeviceInt32Attribute.ValueType  # 10631
+    DEVICE_ATTRIBUTE_DI_TRIG_USAGE: _DeviceInt32Attribute.ValueType  # 10632
+    DEVICE_ATTRIBUTE_DO_TRIG_USAGE: _DeviceInt32Attribute.ValueType  # 10633
+    DEVICE_ATTRIBUTE_CI_TRIG_USAGE: _DeviceInt32Attribute.ValueType  # 10634
+    DEVICE_ATTRIBUTE_CO_TRIG_USAGE: _DeviceInt32Attribute.ValueType  # 10635
+    DEVICE_ATTRIBUTE_AI_COUPLINGS: _DeviceInt32Attribute.ValueType  # 10644
     DEVICE_ATTRIBUTE_PRODUCT_CATEGORY: _DeviceInt32Attribute.ValueType  # 10665
     DEVICE_ATTRIBUTE_CI_CURRENT_UTC_OFFSET: _DeviceInt32Attribute.ValueType  # 12320
     DEVICE_ATTRIBUTE_NAV_MODE: _DeviceInt32Attribute.ValueType  # 12325
@@ -2700,6 +2707,13 @@ class DeviceInt32Attribute(_DeviceInt32Attribute, metaclass=_DeviceInt32Attribut
 
 DEVICE_INT32_ATTRIBUTE_UNSPECIFIED: DeviceInt32Attribute.ValueType  # 0
 DEVICE_ATTRIBUTE_BUS_TYPE: DeviceInt32Attribute.ValueType  # 8998
+DEVICE_ATTRIBUTE_AI_TRIG_USAGE: DeviceInt32Attribute.ValueType  # 10630
+DEVICE_ATTRIBUTE_AO_TRIG_USAGE: DeviceInt32Attribute.ValueType  # 10631
+DEVICE_ATTRIBUTE_DI_TRIG_USAGE: DeviceInt32Attribute.ValueType  # 10632
+DEVICE_ATTRIBUTE_DO_TRIG_USAGE: DeviceInt32Attribute.ValueType  # 10633
+DEVICE_ATTRIBUTE_CI_TRIG_USAGE: DeviceInt32Attribute.ValueType  # 10634
+DEVICE_ATTRIBUTE_CO_TRIG_USAGE: DeviceInt32Attribute.ValueType  # 10635
+DEVICE_ATTRIBUTE_AI_COUPLINGS: DeviceInt32Attribute.ValueType  # 10644
 DEVICE_ATTRIBUTE_PRODUCT_CATEGORY: DeviceInt32Attribute.ValueType  # 10665
 DEVICE_ATTRIBUTE_CI_CURRENT_UTC_OFFSET: DeviceInt32Attribute.ValueType  # 12320
 DEVICE_ATTRIBUTE_NAV_MODE: DeviceInt32Attribute.ValueType  # 12325
@@ -2707,55 +2721,6 @@ DEVICE_ATTRIBUTE_NAV_ALT_REF: DeviceInt32Attribute.ValueType  # 12329
 DEVICE_ATTRIBUTE_NAV_ANT_STATUS: DeviceInt32Attribute.ValueType  # 12334
 DEVICE_ATTRIBUTE_NAV_CURRENT_UTC_OFFSET: DeviceInt32Attribute.ValueType  # 12336
 global___DeviceInt32Attribute = DeviceInt32Attribute
-
-class _DeviceInt32ArrayAttribute:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
-
-class _DeviceInt32ArrayAttributeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_DeviceInt32ArrayAttribute.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    DEVICE_INT32_ARRAY_ATTRIBUTE_UNSPECIFIED: _DeviceInt32ArrayAttribute.ValueType  # 0
-    DEVICE_ATTRIBUTE_AI_TRIG_USAGE: _DeviceInt32ArrayAttribute.ValueType  # 10630
-    DEVICE_ATTRIBUTE_AO_TRIG_USAGE: _DeviceInt32ArrayAttribute.ValueType  # 10631
-    DEVICE_ATTRIBUTE_DI_TRIG_USAGE: _DeviceInt32ArrayAttribute.ValueType  # 10632
-    DEVICE_ATTRIBUTE_DO_TRIG_USAGE: _DeviceInt32ArrayAttribute.ValueType  # 10633
-    DEVICE_ATTRIBUTE_CI_TRIG_USAGE: _DeviceInt32ArrayAttribute.ValueType  # 10634
-    DEVICE_ATTRIBUTE_CO_TRIG_USAGE: _DeviceInt32ArrayAttribute.ValueType  # 10635
-    DEVICE_ATTRIBUTE_AI_COUPLINGS: _DeviceInt32ArrayAttribute.ValueType  # 10644
-    DEVICE_ATTRIBUTE_AI_SUPPORTED_MEAS_TYPES: _DeviceInt32ArrayAttribute.ValueType  # 12242
-    DEVICE_ATTRIBUTE_AO_SUPPORTED_OUTPUT_TYPES: _DeviceInt32ArrayAttribute.ValueType  # 12243
-    DEVICE_ATTRIBUTE_CI_SUPPORTED_MEAS_TYPES: _DeviceInt32ArrayAttribute.ValueType  # 12244
-    DEVICE_ATTRIBUTE_CO_SUPPORTED_OUTPUT_TYPES: _DeviceInt32ArrayAttribute.ValueType  # 12245
-    DEVICE_ATTRIBUTE_AI_SAMP_MODES: _DeviceInt32ArrayAttribute.ValueType  # 12252
-    DEVICE_ATTRIBUTE_AO_SAMP_MODES: _DeviceInt32ArrayAttribute.ValueType  # 12253
-    DEVICE_ATTRIBUTE_CI_SAMP_MODES: _DeviceInt32ArrayAttribute.ValueType  # 12254
-    DEVICE_ATTRIBUTE_CO_SAMP_MODES: _DeviceInt32ArrayAttribute.ValueType  # 12255
-    DEVICE_ATTRIBUTE_NAV_SUPPORTED_MEAS_TYPES: _DeviceInt32ArrayAttribute.ValueType  # 12323
-    DEVICE_ATTRIBUTE_NAV_TRIG_USAGE: _DeviceInt32ArrayAttribute.ValueType  # 12324
-    DEVICE_ATTRIBUTE_AI_DIG_FLTR_TYPES: _DeviceInt32ArrayAttribute.ValueType  # 12551
-
-class DeviceInt32ArrayAttribute(_DeviceInt32ArrayAttribute, metaclass=_DeviceInt32ArrayAttributeEnumTypeWrapper): ...
-
-DEVICE_INT32_ARRAY_ATTRIBUTE_UNSPECIFIED: DeviceInt32ArrayAttribute.ValueType  # 0
-DEVICE_ATTRIBUTE_AI_TRIG_USAGE: DeviceInt32ArrayAttribute.ValueType  # 10630
-DEVICE_ATTRIBUTE_AO_TRIG_USAGE: DeviceInt32ArrayAttribute.ValueType  # 10631
-DEVICE_ATTRIBUTE_DI_TRIG_USAGE: DeviceInt32ArrayAttribute.ValueType  # 10632
-DEVICE_ATTRIBUTE_DO_TRIG_USAGE: DeviceInt32ArrayAttribute.ValueType  # 10633
-DEVICE_ATTRIBUTE_CI_TRIG_USAGE: DeviceInt32ArrayAttribute.ValueType  # 10634
-DEVICE_ATTRIBUTE_CO_TRIG_USAGE: DeviceInt32ArrayAttribute.ValueType  # 10635
-DEVICE_ATTRIBUTE_AI_COUPLINGS: DeviceInt32ArrayAttribute.ValueType  # 10644
-DEVICE_ATTRIBUTE_AI_SUPPORTED_MEAS_TYPES: DeviceInt32ArrayAttribute.ValueType  # 12242
-DEVICE_ATTRIBUTE_AO_SUPPORTED_OUTPUT_TYPES: DeviceInt32ArrayAttribute.ValueType  # 12243
-DEVICE_ATTRIBUTE_CI_SUPPORTED_MEAS_TYPES: DeviceInt32ArrayAttribute.ValueType  # 12244
-DEVICE_ATTRIBUTE_CO_SUPPORTED_OUTPUT_TYPES: DeviceInt32ArrayAttribute.ValueType  # 12245
-DEVICE_ATTRIBUTE_AI_SAMP_MODES: DeviceInt32ArrayAttribute.ValueType  # 12252
-DEVICE_ATTRIBUTE_AO_SAMP_MODES: DeviceInt32ArrayAttribute.ValueType  # 12253
-DEVICE_ATTRIBUTE_CI_SAMP_MODES: DeviceInt32ArrayAttribute.ValueType  # 12254
-DEVICE_ATTRIBUTE_CO_SAMP_MODES: DeviceInt32ArrayAttribute.ValueType  # 12255
-DEVICE_ATTRIBUTE_NAV_SUPPORTED_MEAS_TYPES: DeviceInt32ArrayAttribute.ValueType  # 12323
-DEVICE_ATTRIBUTE_NAV_TRIG_USAGE: DeviceInt32ArrayAttribute.ValueType  # 12324
-DEVICE_ATTRIBUTE_AI_DIG_FLTR_TYPES: DeviceInt32ArrayAttribute.ValueType  # 12551
-global___DeviceInt32ArrayAttribute = DeviceInt32ArrayAttribute
 
 class _DeviceDoubleAttribute:
     ValueType = typing.NewType("ValueType", builtins.int)
@@ -2865,6 +2830,41 @@ DEVICE_UINT32_ARRAY_ATTRIBUTE_UNSPECIFIED: DeviceUInt32ArrayAttribute.ValueType 
 DEVICE_ATTRIBUTE_ACCESSORY_PRODUCT_NUMS: DeviceUInt32ArrayAttribute.ValueType  # 12142
 DEVICE_ATTRIBUTE_ACCESSORY_SERIAL_NUMS: DeviceUInt32ArrayAttribute.ValueType  # 12143
 global___DeviceUInt32ArrayAttribute = DeviceUInt32ArrayAttribute
+
+class _DeviceInt32ArrayAttribute:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _DeviceInt32ArrayAttributeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_DeviceInt32ArrayAttribute.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    DEVICE_INT32_ARRAY_ATTRIBUTE_UNSPECIFIED: _DeviceInt32ArrayAttribute.ValueType  # 0
+    DEVICE_ATTRIBUTE_AI_SUPPORTED_MEAS_TYPES: _DeviceInt32ArrayAttribute.ValueType  # 12242
+    DEVICE_ATTRIBUTE_AO_SUPPORTED_OUTPUT_TYPES: _DeviceInt32ArrayAttribute.ValueType  # 12243
+    DEVICE_ATTRIBUTE_CI_SUPPORTED_MEAS_TYPES: _DeviceInt32ArrayAttribute.ValueType  # 12244
+    DEVICE_ATTRIBUTE_CO_SUPPORTED_OUTPUT_TYPES: _DeviceInt32ArrayAttribute.ValueType  # 12245
+    DEVICE_ATTRIBUTE_AI_SAMP_MODES: _DeviceInt32ArrayAttribute.ValueType  # 12252
+    DEVICE_ATTRIBUTE_AO_SAMP_MODES: _DeviceInt32ArrayAttribute.ValueType  # 12253
+    DEVICE_ATTRIBUTE_CI_SAMP_MODES: _DeviceInt32ArrayAttribute.ValueType  # 12254
+    DEVICE_ATTRIBUTE_CO_SAMP_MODES: _DeviceInt32ArrayAttribute.ValueType  # 12255
+    DEVICE_ATTRIBUTE_NAV_SUPPORTED_MEAS_TYPES: _DeviceInt32ArrayAttribute.ValueType  # 12323
+    DEVICE_ATTRIBUTE_NAV_TRIG_USAGE: _DeviceInt32ArrayAttribute.ValueType  # 12324
+    DEVICE_ATTRIBUTE_AI_DIG_FLTR_TYPES: _DeviceInt32ArrayAttribute.ValueType  # 12551
+
+class DeviceInt32ArrayAttribute(_DeviceInt32ArrayAttribute, metaclass=_DeviceInt32ArrayAttributeEnumTypeWrapper): ...
+
+DEVICE_INT32_ARRAY_ATTRIBUTE_UNSPECIFIED: DeviceInt32ArrayAttribute.ValueType  # 0
+DEVICE_ATTRIBUTE_AI_SUPPORTED_MEAS_TYPES: DeviceInt32ArrayAttribute.ValueType  # 12242
+DEVICE_ATTRIBUTE_AO_SUPPORTED_OUTPUT_TYPES: DeviceInt32ArrayAttribute.ValueType  # 12243
+DEVICE_ATTRIBUTE_CI_SUPPORTED_MEAS_TYPES: DeviceInt32ArrayAttribute.ValueType  # 12244
+DEVICE_ATTRIBUTE_CO_SUPPORTED_OUTPUT_TYPES: DeviceInt32ArrayAttribute.ValueType  # 12245
+DEVICE_ATTRIBUTE_AI_SAMP_MODES: DeviceInt32ArrayAttribute.ValueType  # 12252
+DEVICE_ATTRIBUTE_AO_SAMP_MODES: DeviceInt32ArrayAttribute.ValueType  # 12253
+DEVICE_ATTRIBUTE_CI_SAMP_MODES: DeviceInt32ArrayAttribute.ValueType  # 12254
+DEVICE_ATTRIBUTE_CO_SAMP_MODES: DeviceInt32ArrayAttribute.ValueType  # 12255
+DEVICE_ATTRIBUTE_NAV_SUPPORTED_MEAS_TYPES: DeviceInt32ArrayAttribute.ValueType  # 12323
+DEVICE_ATTRIBUTE_NAV_TRIG_USAGE: DeviceInt32ArrayAttribute.ValueType  # 12324
+DEVICE_ATTRIBUTE_AI_DIG_FLTR_TYPES: DeviceInt32ArrayAttribute.ValueType  # 12551
+global___DeviceInt32ArrayAttribute = DeviceInt32ArrayAttribute
 
 class _ExportSignalDoubleAttribute:
     ValueType = typing.NewType("ValueType", builtins.int)
@@ -3398,40 +3398,24 @@ PHYSICALCHANNEL_UINT32_ARRAY_ATTRIBUTE_UNSPECIFIED: PhysicalChannelUInt32ArrayAt
 PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_TEDS_TEMPLATE_I_DS: PhysicalChannelUInt32ArrayAttribute.ValueType  # 8847
 global___PhysicalChannelUInt32ArrayAttribute = PhysicalChannelUInt32ArrayAttribute
 
-class _PhysicalChannelInt32ArrayAttribute:
+class _PhysicalChannelInt32Attribute:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _PhysicalChannelInt32ArrayAttributeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PhysicalChannelInt32ArrayAttribute.ValueType], builtins.type):
+class _PhysicalChannelInt32AttributeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PhysicalChannelInt32Attribute.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    PHYSICALCHANNEL_INT32_ARRAY_ATTRIBUTE_UNSPECIFIED: _PhysicalChannelInt32ArrayAttribute.ValueType  # 0
-    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_TERM_CFGS: _PhysicalChannelInt32ArrayAttribute.ValueType  # 9026
-    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AO_TERM_CFGS: _PhysicalChannelInt32ArrayAttribute.ValueType  # 10659
-    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_SUPPORTED_MEAS_TYPES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12247
-    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AO_SUPPORTED_OUTPUT_TYPES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12249
-    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_CI_SUPPORTED_MEAS_TYPES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12250
-    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_CO_SUPPORTED_OUTPUT_TYPES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12251
-    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_DI_SAMP_MODES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12256
-    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_DO_SAMP_MODES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12257
-    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_NAV_SUPPORTED_MEAS_TYPES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12343
-    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AO_SUPPORTED_POWER_UP_OUTPUT_TYPES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12366
-    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_SENSOR_POWER_TYPES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12665
+    PHYSICALCHANNEL_INT32_ATTRIBUTE_UNSPECIFIED: _PhysicalChannelInt32Attribute.ValueType  # 0
+    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_TERM_CFGS: _PhysicalChannelInt32Attribute.ValueType  # 9026
+    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AO_TERM_CFGS: _PhysicalChannelInt32Attribute.ValueType  # 10659
+    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_POWER_CONTROL_TYPE: _PhysicalChannelInt32Attribute.ValueType  # 12654
 
-class PhysicalChannelInt32ArrayAttribute(_PhysicalChannelInt32ArrayAttribute, metaclass=_PhysicalChannelInt32ArrayAttributeEnumTypeWrapper): ...
+class PhysicalChannelInt32Attribute(_PhysicalChannelInt32Attribute, metaclass=_PhysicalChannelInt32AttributeEnumTypeWrapper): ...
 
-PHYSICALCHANNEL_INT32_ARRAY_ATTRIBUTE_UNSPECIFIED: PhysicalChannelInt32ArrayAttribute.ValueType  # 0
-PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_TERM_CFGS: PhysicalChannelInt32ArrayAttribute.ValueType  # 9026
-PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AO_TERM_CFGS: PhysicalChannelInt32ArrayAttribute.ValueType  # 10659
-PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_SUPPORTED_MEAS_TYPES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12247
-PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AO_SUPPORTED_OUTPUT_TYPES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12249
-PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_CI_SUPPORTED_MEAS_TYPES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12250
-PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_CO_SUPPORTED_OUTPUT_TYPES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12251
-PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_DI_SAMP_MODES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12256
-PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_DO_SAMP_MODES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12257
-PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_NAV_SUPPORTED_MEAS_TYPES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12343
-PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AO_SUPPORTED_POWER_UP_OUTPUT_TYPES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12366
-PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_SENSOR_POWER_TYPES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12665
-global___PhysicalChannelInt32ArrayAttribute = PhysicalChannelInt32ArrayAttribute
+PHYSICALCHANNEL_INT32_ATTRIBUTE_UNSPECIFIED: PhysicalChannelInt32Attribute.ValueType  # 0
+PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_TERM_CFGS: PhysicalChannelInt32Attribute.ValueType  # 9026
+PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AO_TERM_CFGS: PhysicalChannelInt32Attribute.ValueType  # 10659
+PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_POWER_CONTROL_TYPE: PhysicalChannelInt32Attribute.ValueType  # 12654
+global___PhysicalChannelInt32Attribute = PhysicalChannelInt32Attribute
 
 class _PhysicalChannelBoolAttribute:
     ValueType = typing.NewType("ValueType", builtins.int)
@@ -3512,6 +3496,37 @@ PHYSICALCHANNEL_ATTRIBUTE_AO_POWER_AMP_OFFSET: PhysicalChannelDoubleAttribute.Va
 PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_POWER_CONTROL_VOLTAGE: PhysicalChannelDoubleAttribute.ValueType  # 12652
 global___PhysicalChannelDoubleAttribute = PhysicalChannelDoubleAttribute
 
+class _PhysicalChannelInt32ArrayAttribute:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _PhysicalChannelInt32ArrayAttributeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PhysicalChannelInt32ArrayAttribute.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    PHYSICALCHANNEL_INT32_ARRAY_ATTRIBUTE_UNSPECIFIED: _PhysicalChannelInt32ArrayAttribute.ValueType  # 0
+    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_SUPPORTED_MEAS_TYPES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12247
+    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AO_SUPPORTED_OUTPUT_TYPES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12249
+    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_CI_SUPPORTED_MEAS_TYPES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12250
+    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_CO_SUPPORTED_OUTPUT_TYPES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12251
+    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_DI_SAMP_MODES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12256
+    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_DO_SAMP_MODES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12257
+    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_NAV_SUPPORTED_MEAS_TYPES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12343
+    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AO_SUPPORTED_POWER_UP_OUTPUT_TYPES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12366
+    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_SENSOR_POWER_TYPES: _PhysicalChannelInt32ArrayAttribute.ValueType  # 12665
+
+class PhysicalChannelInt32ArrayAttribute(_PhysicalChannelInt32ArrayAttribute, metaclass=_PhysicalChannelInt32ArrayAttributeEnumTypeWrapper): ...
+
+PHYSICALCHANNEL_INT32_ARRAY_ATTRIBUTE_UNSPECIFIED: PhysicalChannelInt32ArrayAttribute.ValueType  # 0
+PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_SUPPORTED_MEAS_TYPES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12247
+PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AO_SUPPORTED_OUTPUT_TYPES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12249
+PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_CI_SUPPORTED_MEAS_TYPES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12250
+PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_CO_SUPPORTED_OUTPUT_TYPES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12251
+PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_DI_SAMP_MODES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12256
+PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_DO_SAMP_MODES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12257
+PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_NAV_SUPPORTED_MEAS_TYPES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12343
+PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AO_SUPPORTED_POWER_UP_OUTPUT_TYPES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12366
+PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_SENSOR_POWER_TYPES: PhysicalChannelInt32ArrayAttribute.ValueType  # 12665
+global___PhysicalChannelInt32ArrayAttribute = PhysicalChannelInt32ArrayAttribute
+
 class _PhysicalChannelDoubleArrayAttribute:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -3528,21 +3543,6 @@ PHYSICALCHANNEL_DOUBLE_ARRAY_ATTRIBUTE_UNSPECIFIED: PhysicalChannelDoubleArrayAt
 PHYSICALCHANNEL_ATTRIBUTE_AO_POWER_AMP_SCALING_COEFF: PhysicalChannelDoubleArrayAttribute.ValueType  # 12387
 PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_SENSOR_POWER_VOLTAGE_RANGE_VALS: PhysicalChannelDoubleArrayAttribute.ValueType  # 12666
 global___PhysicalChannelDoubleArrayAttribute = PhysicalChannelDoubleArrayAttribute
-
-class _PhysicalChannelInt32Attribute:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
-
-class _PhysicalChannelInt32AttributeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PhysicalChannelInt32Attribute.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    PHYSICALCHANNEL_INT32_ATTRIBUTE_UNSPECIFIED: _PhysicalChannelInt32Attribute.ValueType  # 0
-    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_POWER_CONTROL_TYPE: _PhysicalChannelInt32Attribute.ValueType  # 12654
-
-class PhysicalChannelInt32Attribute(_PhysicalChannelInt32Attribute, metaclass=_PhysicalChannelInt32AttributeEnumTypeWrapper): ...
-
-PHYSICALCHANNEL_INT32_ATTRIBUTE_UNSPECIFIED: PhysicalChannelInt32Attribute.ValueType  # 0
-PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_POWER_CONTROL_TYPE: PhysicalChannelInt32Attribute.ValueType  # 12654
-global___PhysicalChannelInt32Attribute = PhysicalChannelInt32Attribute
 
 class _ReadInt32Attribute:
     ValueType = typing.NewType("ValueType", builtins.int)
@@ -7832,9 +7832,12 @@ class _DeviceInt32AttributeValuesEnumTypeWrapper(google.protobuf.internal.enum_t
     DEVICE_INT32_CO_OUTPUT_TYPE_PULSE_TIME: _DeviceInt32AttributeValues.ValueType  # 10269
     DEVICE_INT32_CO_OUTPUT_TYPE_PULSE_FREQ: _DeviceInt32AttributeValues.ValueType  # 10119
     DEVICE_INT32_CO_OUTPUT_TYPE_PULSE_TICKS: _DeviceInt32AttributeValues.ValueType  # 10268
-    DEVICE_INT32_COUPLING1_AC: _DeviceInt32AttributeValues.ValueType  # 10045
-    DEVICE_INT32_COUPLING1_DC: _DeviceInt32AttributeValues.ValueType  # 10050
-    DEVICE_INT32_COUPLING1_GND: _DeviceInt32AttributeValues.ValueType  # 10066
+    DEVICE_INT32_COUPLING_TYPES_AC: _DeviceInt32AttributeValues.ValueType  # 1
+    DEVICE_INT32_COUPLING_TYPES_DC: _DeviceInt32AttributeValues.ValueType  # 2
+    DEVICE_INT32_COUPLING_TYPES_GROUND: _DeviceInt32AttributeValues.ValueType  # 4
+    DEVICE_INT32_COUPLING_TYPES_HF_REJECT: _DeviceInt32AttributeValues.ValueType  # 8
+    DEVICE_INT32_COUPLING_TYPES_LF_REJECT: _DeviceInt32AttributeValues.ValueType  # 16
+    DEVICE_INT32_COUPLING_TYPES_NOISE_REJECT: _DeviceInt32AttributeValues.ValueType  # 32
     DEVICE_INT32_FILTER_TYPE2_LOWPASS: _DeviceInt32AttributeValues.ValueType  # 16071
     DEVICE_INT32_FILTER_TYPE2_HIGHPASS: _DeviceInt32AttributeValues.ValueType  # 16072
     DEVICE_INT32_FILTER_TYPE2_BANDPASS: _DeviceInt32AttributeValues.ValueType  # 16073
@@ -7881,6 +7884,12 @@ class _DeviceInt32AttributeValuesEnumTypeWrapper(google.protobuf.internal.enum_t
     DEVICE_INT32_TRIGGER_USAGE_START: _DeviceInt32AttributeValues.ValueType  # 12491
     DEVICE_INT32_TRIGGER_USAGE_HANDSHAKE: _DeviceInt32AttributeValues.ValueType  # 10389
     DEVICE_INT32_TRIGGER_USAGE_ARM_START: _DeviceInt32AttributeValues.ValueType  # 14641
+    DEVICE_INT32_TRIGGER_USAGE_TYPES_ADVANCE: _DeviceInt32AttributeValues.ValueType  # 1
+    DEVICE_INT32_TRIGGER_USAGE_TYPES_PAUSE: _DeviceInt32AttributeValues.ValueType  # 2
+    DEVICE_INT32_TRIGGER_USAGE_TYPES_REFERENCE: _DeviceInt32AttributeValues.ValueType  # 4
+    DEVICE_INT32_TRIGGER_USAGE_TYPES_START: _DeviceInt32AttributeValues.ValueType  # 8
+    DEVICE_INT32_TRIGGER_USAGE_TYPES_HANDSHAKE: _DeviceInt32AttributeValues.ValueType  # 16
+    DEVICE_INT32_TRIGGER_USAGE_TYPES_ARM_START: _DeviceInt32AttributeValues.ValueType  # 32
 
 class DeviceInt32AttributeValues(_DeviceInt32AttributeValues, metaclass=_DeviceInt32AttributeValuesEnumTypeWrapper): ...
 
@@ -7957,9 +7966,12 @@ DEVICE_INT32_CI_MEASUREMENT_TYPE_GPS_TIMESTAMP: DeviceInt32AttributeValues.Value
 DEVICE_INT32_CO_OUTPUT_TYPE_PULSE_TIME: DeviceInt32AttributeValues.ValueType  # 10269
 DEVICE_INT32_CO_OUTPUT_TYPE_PULSE_FREQ: DeviceInt32AttributeValues.ValueType  # 10119
 DEVICE_INT32_CO_OUTPUT_TYPE_PULSE_TICKS: DeviceInt32AttributeValues.ValueType  # 10268
-DEVICE_INT32_COUPLING1_AC: DeviceInt32AttributeValues.ValueType  # 10045
-DEVICE_INT32_COUPLING1_DC: DeviceInt32AttributeValues.ValueType  # 10050
-DEVICE_INT32_COUPLING1_GND: DeviceInt32AttributeValues.ValueType  # 10066
+DEVICE_INT32_COUPLING_TYPES_AC: DeviceInt32AttributeValues.ValueType  # 1
+DEVICE_INT32_COUPLING_TYPES_DC: DeviceInt32AttributeValues.ValueType  # 2
+DEVICE_INT32_COUPLING_TYPES_GROUND: DeviceInt32AttributeValues.ValueType  # 4
+DEVICE_INT32_COUPLING_TYPES_HF_REJECT: DeviceInt32AttributeValues.ValueType  # 8
+DEVICE_INT32_COUPLING_TYPES_LF_REJECT: DeviceInt32AttributeValues.ValueType  # 16
+DEVICE_INT32_COUPLING_TYPES_NOISE_REJECT: DeviceInt32AttributeValues.ValueType  # 32
 DEVICE_INT32_FILTER_TYPE2_LOWPASS: DeviceInt32AttributeValues.ValueType  # 16071
 DEVICE_INT32_FILTER_TYPE2_HIGHPASS: DeviceInt32AttributeValues.ValueType  # 16072
 DEVICE_INT32_FILTER_TYPE2_BANDPASS: DeviceInt32AttributeValues.ValueType  # 16073
@@ -8006,6 +8018,12 @@ DEVICE_INT32_TRIGGER_USAGE_REFERENCE: DeviceInt32AttributeValues.ValueType  # 12
 DEVICE_INT32_TRIGGER_USAGE_START: DeviceInt32AttributeValues.ValueType  # 12491
 DEVICE_INT32_TRIGGER_USAGE_HANDSHAKE: DeviceInt32AttributeValues.ValueType  # 10389
 DEVICE_INT32_TRIGGER_USAGE_ARM_START: DeviceInt32AttributeValues.ValueType  # 14641
+DEVICE_INT32_TRIGGER_USAGE_TYPES_ADVANCE: DeviceInt32AttributeValues.ValueType  # 1
+DEVICE_INT32_TRIGGER_USAGE_TYPES_PAUSE: DeviceInt32AttributeValues.ValueType  # 2
+DEVICE_INT32_TRIGGER_USAGE_TYPES_REFERENCE: DeviceInt32AttributeValues.ValueType  # 4
+DEVICE_INT32_TRIGGER_USAGE_TYPES_START: DeviceInt32AttributeValues.ValueType  # 8
+DEVICE_INT32_TRIGGER_USAGE_TYPES_HANDSHAKE: DeviceInt32AttributeValues.ValueType  # 16
+DEVICE_INT32_TRIGGER_USAGE_TYPES_ARM_START: DeviceInt32AttributeValues.ValueType  # 32
 global___DeviceInt32AttributeValues = DeviceInt32AttributeValues
 
 class _ExportSignalInt32AttributeValues:
@@ -8124,10 +8142,6 @@ class _PhysicalChannelInt32AttributeValuesEnumTypeWrapper(google.protobuf.intern
     PHYSICALCHANNEL_INT32_CO_OUTPUT_TYPE_PULSE_TIME: _PhysicalChannelInt32AttributeValues.ValueType  # 10269
     PHYSICALCHANNEL_INT32_CO_OUTPUT_TYPE_PULSE_FREQ: _PhysicalChannelInt32AttributeValues.ValueType  # 10119
     PHYSICALCHANNEL_INT32_CO_OUTPUT_TYPE_PULSE_TICKS: _PhysicalChannelInt32AttributeValues.ValueType  # 10268
-    PHYSICALCHANNEL_INT32_INPUT_TERM_CFG_RSE: _PhysicalChannelInt32AttributeValues.ValueType  # 10083
-    PHYSICALCHANNEL_INT32_INPUT_TERM_CFG_NRSE: _PhysicalChannelInt32AttributeValues.ValueType  # 10078
-    PHYSICALCHANNEL_INT32_INPUT_TERM_CFG_DIFF: _PhysicalChannelInt32AttributeValues.ValueType  # 10106
-    PHYSICALCHANNEL_INT32_INPUT_TERM_CFG_PSEUDO_DIFF: _PhysicalChannelInt32AttributeValues.ValueType  # 12529
     PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_ALTITUDE: _PhysicalChannelInt32AttributeValues.ValueType  # 15997
     PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_LONGITUDE: _PhysicalChannelInt32AttributeValues.ValueType  # 15998
     PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_LATITUDE: _PhysicalChannelInt32AttributeValues.ValueType  # 15999
@@ -8135,12 +8149,13 @@ class _PhysicalChannelInt32AttributeValuesEnumTypeWrapper(google.protobuf.intern
     PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_TRACK: _PhysicalChannelInt32AttributeValues.ValueType  # 16001
     PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_TIMESTAMP: _PhysicalChannelInt32AttributeValues.ValueType  # 15986
     PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_VERT_VELOCITY: _PhysicalChannelInt32AttributeValues.ValueType  # 16003
-    PHYSICALCHANNEL_INT32_OUTPUT_TERM_CFG_RSE: _PhysicalChannelInt32AttributeValues.ValueType  # 10083
-    PHYSICALCHANNEL_INT32_OUTPUT_TERM_CFG_DIFF: _PhysicalChannelInt32AttributeValues.ValueType  # 10106
-    PHYSICALCHANNEL_INT32_OUTPUT_TERM_CFG_PSEUDO_DIFF: _PhysicalChannelInt32AttributeValues.ValueType  # 12529
     PHYSICALCHANNEL_INT32_SENSOR_POWER_TYPE_DC: _PhysicalChannelInt32AttributeValues.ValueType  # 10050
     PHYSICALCHANNEL_INT32_SENSOR_POWER_TYPE_AC: _PhysicalChannelInt32AttributeValues.ValueType  # 10045
     PHYSICALCHANNEL_INT32_SENSOR_POWER_TYPE_BIPOLAR_DC: _PhysicalChannelInt32AttributeValues.ValueType  # 16147
+    PHYSICALCHANNEL_INT32_TERM_CFG_RSE: _PhysicalChannelInt32AttributeValues.ValueType  # 1
+    PHYSICALCHANNEL_INT32_TERM_CFG_NRSE: _PhysicalChannelInt32AttributeValues.ValueType  # 2
+    PHYSICALCHANNEL_INT32_TERM_CFG_DIFF: _PhysicalChannelInt32AttributeValues.ValueType  # 4
+    PHYSICALCHANNEL_INT32_TERM_CFG_PSEUDO_DIFF: _PhysicalChannelInt32AttributeValues.ValueType  # 8
 
 class PhysicalChannelInt32AttributeValues(_PhysicalChannelInt32AttributeValues, metaclass=_PhysicalChannelInt32AttributeValuesEnumTypeWrapper): ...
 
@@ -8201,10 +8216,6 @@ PHYSICALCHANNEL_INT32_CI_MEASUREMENT_TYPE_GPS_TIMESTAMP: PhysicalChannelInt32Att
 PHYSICALCHANNEL_INT32_CO_OUTPUT_TYPE_PULSE_TIME: PhysicalChannelInt32AttributeValues.ValueType  # 10269
 PHYSICALCHANNEL_INT32_CO_OUTPUT_TYPE_PULSE_FREQ: PhysicalChannelInt32AttributeValues.ValueType  # 10119
 PHYSICALCHANNEL_INT32_CO_OUTPUT_TYPE_PULSE_TICKS: PhysicalChannelInt32AttributeValues.ValueType  # 10268
-PHYSICALCHANNEL_INT32_INPUT_TERM_CFG_RSE: PhysicalChannelInt32AttributeValues.ValueType  # 10083
-PHYSICALCHANNEL_INT32_INPUT_TERM_CFG_NRSE: PhysicalChannelInt32AttributeValues.ValueType  # 10078
-PHYSICALCHANNEL_INT32_INPUT_TERM_CFG_DIFF: PhysicalChannelInt32AttributeValues.ValueType  # 10106
-PHYSICALCHANNEL_INT32_INPUT_TERM_CFG_PSEUDO_DIFF: PhysicalChannelInt32AttributeValues.ValueType  # 12529
 PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_ALTITUDE: PhysicalChannelInt32AttributeValues.ValueType  # 15997
 PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_LONGITUDE: PhysicalChannelInt32AttributeValues.ValueType  # 15998
 PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_LATITUDE: PhysicalChannelInt32AttributeValues.ValueType  # 15999
@@ -8212,12 +8223,13 @@ PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_SPEED_OVER_GROUND: PhysicalChannelInt
 PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_TRACK: PhysicalChannelInt32AttributeValues.ValueType  # 16001
 PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_TIMESTAMP: PhysicalChannelInt32AttributeValues.ValueType  # 15986
 PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_VERT_VELOCITY: PhysicalChannelInt32AttributeValues.ValueType  # 16003
-PHYSICALCHANNEL_INT32_OUTPUT_TERM_CFG_RSE: PhysicalChannelInt32AttributeValues.ValueType  # 10083
-PHYSICALCHANNEL_INT32_OUTPUT_TERM_CFG_DIFF: PhysicalChannelInt32AttributeValues.ValueType  # 10106
-PHYSICALCHANNEL_INT32_OUTPUT_TERM_CFG_PSEUDO_DIFF: PhysicalChannelInt32AttributeValues.ValueType  # 12529
 PHYSICALCHANNEL_INT32_SENSOR_POWER_TYPE_DC: PhysicalChannelInt32AttributeValues.ValueType  # 10050
 PHYSICALCHANNEL_INT32_SENSOR_POWER_TYPE_AC: PhysicalChannelInt32AttributeValues.ValueType  # 10045
 PHYSICALCHANNEL_INT32_SENSOR_POWER_TYPE_BIPOLAR_DC: PhysicalChannelInt32AttributeValues.ValueType  # 16147
+PHYSICALCHANNEL_INT32_TERM_CFG_RSE: PhysicalChannelInt32AttributeValues.ValueType  # 1
+PHYSICALCHANNEL_INT32_TERM_CFG_NRSE: PhysicalChannelInt32AttributeValues.ValueType  # 2
+PHYSICALCHANNEL_INT32_TERM_CFG_DIFF: PhysicalChannelInt32AttributeValues.ValueType  # 4
+PHYSICALCHANNEL_INT32_TERM_CFG_PSEUDO_DIFF: PhysicalChannelInt32AttributeValues.ValueType  # 8
 global___PhysicalChannelInt32AttributeValues = PhysicalChannelInt32AttributeValues
 
 class _ReadInt32AttributeValues:
