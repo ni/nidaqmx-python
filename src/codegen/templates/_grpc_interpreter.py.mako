@@ -65,7 +65,7 @@ class GrpcEventHandler(BaseEventHandler, Generic[TEventResponse]):
         self._interpreter = interpreter
         self._event_stream = event_stream
         self._event_callback = event_callback
-        self._event_stream_exception = None
+        self._event_stream_exception: Optional[Exception] = None
         self._thread = threading.Thread(target=self._thread_main, name=f"nidaqmx {event_name} thread")
 
         self._thread.start()
