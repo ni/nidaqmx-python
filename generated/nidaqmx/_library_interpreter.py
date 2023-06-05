@@ -3,9 +3,11 @@
 import ctypes
 import logging
 import warnings
+from typing import Optional
+
 import numpy
 
-from nidaqmx._base_interpreter import BaseInterpreter
+from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqReadError, DaqWarning, DaqWriteError
@@ -14,25 +16,32 @@ from nidaqmx.errors import DaqError, DaqReadError, DaqWarning, DaqWriteError
 _logger = logging.getLogger(__name__)
 
 
+class LibraryEventHandler(BaseEventHandler):
+    """Manage the lifetime of a ctypes callback method pointer.
+
+    If DAQmx invokes a callback method pointer that has been garbage collected, the Python
+    interpreter will crash.
+    """
+    __slots__ = ["_callback_method_ptr"]
+
+    def __init__(self, callback_method_ptr: object) -> None:
+        self._callback_method_ptr = callback_method_ptr
+
+    def close(self) -> None:
+        self._callback_method_ptr = None
+
+
 class LibraryInterpreter(BaseInterpreter):
     """
     Library C<->Python interpreter.
     This class is responsible for interpreting the Library's C API.
 
     """
-    __slots__ = [
-        '_done_event_callbacks',
-        '_every_n_samples_event_callbacks',
-        '_signal_event_callbacks',
-    ]
+    # Do not add per-task state to the interpreter class.
+    __slots__ = []
 
     def __init__(self):
-        # These lists keep C callback objects in memory as ctypes doesn't.
-        # Program will crash if callback is made after object is garbage
-        # collected.
-        self._done_event_callbacks = []
-        self._every_n_samples_event_callbacks = []
-        self._signal_event_callbacks = []
+        pass
 
     def add_cdaq_sync_connection(self, port_list):
         cfunc = lib_importer.windll.DAQmxAddCDAQSyncConnection
@@ -4407,18 +4416,14 @@ class LibraryInterpreter(BaseInterpreter):
                         DAQmxDoneEventCallbackPtr,
                         ctypes.POINTER(ctypes.c_void_p)]
 
-        if callback_function is not None:
-            callback_method_ptr = DAQmxDoneEventCallbackPtr(callback_function)
-            self._done_event_callbacks.append(callback_method_ptr)
-        else:
-            callback_method_ptr = DAQmxDoneEventCallbackPtr()
+        assert callback_function is not None
+        callback_method_ptr = DAQmxDoneEventCallbackPtr(callback_function)
 
         error_code = cfunc(
             task, options, callback_method_ptr, callback_data)
         self.check_for_error(error_code)
 
-        if callback_function is None:
-            del self._done_event_callbacks[:]
+        return LibraryEventHandler(callback_method_ptr)
 
     def register_every_n_samples_event(
             self, task, every_n_samples_event_type, n_samples, options,
@@ -4436,19 +4441,15 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_uint, DAQmxEveryNSamplesEventCallbackPtr,
                         ctypes.POINTER(ctypes.c_void_p)]
 
-        if callback_function is not None:
-            callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr(callback_function)
-            self._every_n_samples_event_callbacks.append(callback_method_ptr)
-        else:
-            callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr()
+        assert callback_function is not None
+        callback_method_ptr = DAQmxEveryNSamplesEventCallbackPtr(callback_function)
 
         error_code = cfunc(
             task, every_n_samples_event_type, n_samples, options,
             callback_method_ptr, callback_data)
         self.check_for_error(error_code)
 
-        if callback_function is None:
-            del self._every_n_samples_event_callbacks[:]
+        return LibraryEventHandler(callback_method_ptr)
 
     def register_signal_event(
             self, task, signal_id, options, callback_function, callback_data):
@@ -4465,18 +4466,14 @@ class LibraryInterpreter(BaseInterpreter):
                         DAQmxSignalEventCallbackPtr,
                         ctypes.POINTER(ctypes.c_void_p)]
 
-        if callback_function is not None:
-            callback_method_ptr = DAQmxSignalEventCallbackPtr(callback_function)
-            self._signal_event_callbacks.append(callback_method_ptr)
-        else:
-            callback_method_ptr = DAQmxSignalEventCallbackPtr()
+        assert callback_function is not None
+        callback_method_ptr = DAQmxSignalEventCallbackPtr(callback_function)
 
         error_code = cfunc(
             task, signal_id, options, callback_method_ptr, callback_data)
         self.check_for_error(error_code)
 
-        if callback_function is None:
-            del self._signal_event_callbacks[:]
+        return LibraryEventHandler(callback_method_ptr)
 
     def remove_cdaq_sync_connection(self, port_list):
         cfunc = lib_importer.windll.DAQmxRemoveCDAQSyncConnection
@@ -5492,8 +5489,6 @@ class LibraryInterpreter(BaseInterpreter):
             task, options, callback_method_ptr, callback_data)
         self.check_for_error(error_code)
 
-        del self._done_event_callbacks[:]
-
     def unregister_every_n_samples_event(
             self, task, every_n_samples_event_type):
         DAQmxEveryNSamplesEventCallbackPtr = ctypes.CFUNCTYPE(
@@ -5519,8 +5514,6 @@ class LibraryInterpreter(BaseInterpreter):
             callback_method_ptr, callback_data)
         self.check_for_error(error_code)
 
-        del self._every_n_samples_event_callbacks[:]
-
     def unregister_signal_event(self, task, signal_id):
         DAQmxSignalEventCallbackPtr = ctypes.CFUNCTYPE(
             ctypes.c_int32, lib_importer.task_handle, ctypes.c_int,
@@ -5542,8 +5535,6 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, signal_id, options, callback_method_ptr, callback_data)
         self.check_for_error(error_code)
-
-        del self._signal_event_callbacks[:]
 
     def unreserve_network_device(self, device_name):
         cfunc = lib_importer.windll.DAQmxUnreserveNetworkDevice

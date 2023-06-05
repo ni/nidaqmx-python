@@ -28,41 +28,36 @@
     grpc_interpreter_params = get_grpc_interpreter_call_params(function, sorted_params)
     is_read_method = check_if_parameters_contain_read_array(function.base_parameters)
     event_name = get_event_name(function)
+    event_display_name = event_name.replace("_", " ")
     function_call_args = get_callback_function_call_args(function)
 %>\
         assert options == 0
-        if callback_function is not None:
-            event_stream = self._invoke(
-                self._client.${snake_to_pascal(function.function_name)},
+        assert callback_function is not None
+
+        event_stream = self._invoke(
+            self._client.${snake_to_pascal(function.function_name)},
 %if (len(function.function_name) + len(grpc_interpreter_params)) > 68:
-                grpc_types.${snake_to_pascal(function.function_name)}Request(
-                    ${grpc_interpreter_params + ')' | wrap(20, 20)})
+            grpc_types.${snake_to_pascal(function.function_name)}Request(
+                ${grpc_interpreter_params + ')' | wrap(16)})
 %else:
-                grpc_types.${snake_to_pascal(function.function_name)}Request(${grpc_interpreter_params + ')'})
+            grpc_types.${snake_to_pascal(function.function_name)}Request(${grpc_interpreter_params + ')'})
 %endif
 
-            self._check_for_event_registration_error(event_stream)
+        self._check_for_event_registration_error(event_stream)
 
-            def event_thread():
-                try:
-                    for response in self._${event_name}_stream:
-                        callback_function(
-                            ${', '.join(function_call_args) | wrap(28)})
-                except Exception as ex:
-                    if _is_cancelled(ex):
-                        return
-                    _logger.exception("An unexpected exception occurred when executing the ${event_name} callback function.")
-                    self._${event_name}_stream.cancel()
-                    self._${event_name}_stream = None
-
-            if self._${event_name}_stream is not None:
-                raise errors.DaqError(
-                    error_code = -1,
-                    message = "Could not register the given callback function, a callback function already exists."
+        def invoke_callback(response):
+            try:
+                callback_function(
+                    ${', '.join(function_call_args) | wrap(20)})
+            except Exception:
+                _logger.exception(
+                    "Ignoring unhandled exception raised by event callback function: %r",
+                    callback_function,
                 )
 
-            self._${event_name}_stream = event_stream
-            self._${event_name}_thread = threading.Thread(target=event_thread)
-            self._${event_name}_thread.start()
-        else:
-            self._unregister_${event_name}_callbacks()
+        return GrpcEventHandler(
+            "${event_display_name}",
+            self,
+            event_stream,
+            invoke_callback,
+        )

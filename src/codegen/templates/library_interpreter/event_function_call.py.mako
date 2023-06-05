@@ -32,11 +32,8 @@
                         ${', '.join(argument_types) | wrap(24)}]
 
 %if is_event_register_function(function):
-        if callback_function is not None:
-            callback_method_ptr = ${callback_func_param.type}(callback_function)
-            self._${event_name}_callbacks.append(callback_method_ptr)
-        else:
-            callback_method_ptr = ${callback_func_param.type}()
+        assert callback_function is not None
+        callback_method_ptr = ${callback_func_param.type}(callback_function)
 %elif is_event_unregister_function(function):
     %if "every_n_samples" in function.function_name:
         n_samples = 0
@@ -49,10 +46,7 @@
         error_code = cfunc(
             ${', '.join(function_call_args) | wrap(12)})
         self.check_for_error(error_code)
-
 %if is_event_register_function(function):
-        if callback_function is None:
-            del self._${event_name}_callbacks[:]
-%elif is_event_unregister_function(function):
-        del self._${event_name}_callbacks[:]
+
+        return LibraryEventHandler(callback_method_ptr)
 %endif
