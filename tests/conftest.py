@@ -446,3 +446,9 @@ def grpc_interpreter_with_errors(grpc_channel_with_errors: grpc.Channel) -> Grpc
     """Gets a GrpcStubInterpreter that returns errors for all RPCs."""
     grpc_options = nidaqmx.GrpcSessionOptions(grpc_channel_with_errors, "")
     return GrpcStubInterpreter(grpc_options)
+
+
+@pytest.fixture
+def teds_file_path(test_assets_directory):
+    """Returns a TEDS file path."""
+    return pathlib.Path(test_assets_directory, "teds", "Voltage.ted")
