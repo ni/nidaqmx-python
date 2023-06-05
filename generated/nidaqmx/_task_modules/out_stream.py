@@ -30,7 +30,7 @@ class OutStream:
         return False
 
     def __hash__(self):
-        return self._interpreter.hash_task_handle(self._handle) ^ hash(self._auto_start, self._timeout)
+        return self._interpreter.hash_task_handle(self._handle) ^ hash((self._auto_start, self._timeout))
 
     def __ne__(self, other):
         return not self.__eq__(other)
