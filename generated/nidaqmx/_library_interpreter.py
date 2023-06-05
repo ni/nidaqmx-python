@@ -2274,6 +2274,7 @@ class LibraryInterpreter(BaseInterpreter):
             self, channel_names, array_size):
         state_array = numpy.zeros(array_size, dtype=numpy.float64)
         channel_type_array = numpy.zeros(array_size, dtype=numpy.int32)
+        array_size = ctypes.c_uint32(array_size)
 
         cfunc = lib_importer.cdll.DAQmxGetAnalogPowerUpStatesWithOutputType
         if cfunc.argtypes is None:

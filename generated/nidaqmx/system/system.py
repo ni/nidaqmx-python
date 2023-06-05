@@ -14,7 +14,7 @@ from nidaqmx.system._collections.persisted_task_collection import (
     PersistedTaskCollection)
 from nidaqmx.utils import flatten_channel_string, unflatten_channel_string
 from nidaqmx.constants import (
-    AOPowerUpOutputBehavior, LogicFamily, PowerUpStates, ResistorState,
+    AOPowerUpOutputBehavior, LogicFamily, PowerUpChannelType, PowerUpStates, ResistorState,
     SignalModifiers, WAIT_INFINITELY)
 from nidaqmx.types import (
     AOPowerUpState, CDAQSyncConnection, DOPowerUpState, DOResistorPowerUpState)
@@ -479,6 +479,9 @@ class System:
         """
         states, channel_types = self._interpreter.get_analog_power_up_states_with_output_type(
             flatten_channel_string(physical_channels), len(physical_channels))
+        
+        assert len(states) == len(physical_channels)
+        assert len(channel_types) == len(physical_channels)
 
         power_up_states = []
         for p, s, c in zip(physical_channels, states, channel_types):
@@ -486,7 +489,7 @@ class System:
                 AOPowerUpState(
                     physical_channel=p,
                     power_up_state=float(s),
-                    channel_type=AOPowerUpOutputBehavior(c.value)))
+                    channel_type=PowerUpChannelType(c)))
 
         return power_up_states
 
