@@ -96,7 +96,8 @@ markers = [
   "scale_name: the existing scale name to be used for testing.",
   "timeout: the timeout in seconds.",
   "grpc_session_name: specifies GrpcSessionOptions.session_name.",
-  "grpc_session_initialization_behavior: specifies GrpcSessionOptions.initialization_behavior."
+  "grpc_session_initialization_behavior: specifies GrpcSessionOptions.initialization_behavior.",
+  "temporary_grpc_channel(options=...): specifies that the test uses a separate gRPC channel.",
 ]
 
 [build-system]

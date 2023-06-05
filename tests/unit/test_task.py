@@ -152,7 +152,7 @@ def test___close_on_exit___leak_task___raises_resource_warning(interpreter: Mock
     expect_get_task_name(interpreter, "MyTask")
     task = Task("MyTask")
 
-    with pytest.warns(ResourceWarning):
+    with pytest.warns(ResourceWarning, match="Resources on the task device may still be reserved."):
         task.__del__()
 
     task.close()
@@ -178,7 +178,7 @@ def test___close_on_exit_with_alternate_constructor___leak_task___raises_resourc
 ):
     task = _TaskAlternateConstructor("MyTaskHandle", interpreter, close_on_exit=True)
 
-    with pytest.warns(ResourceWarning):
+    with pytest.warns(ResourceWarning, match="Resources on the task device may still be reserved."):
         task.__del__()
 
     task.close()

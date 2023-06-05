@@ -21,11 +21,10 @@ def test___unknown_error_code___get_error_string___returns_unable_to_locate_erro
 
 
 @pytest.mark.grpc_only(reason="Tests gRPC-specific error case")
-def test___grpc_interpreter_with_errors___get_error_string___returns_failed_to_retrieve_error_description(
-    grpc_interpreter_with_errors: BaseInterpreter,
+@pytest.mark.temporary_grpc_channel(options=[("grpc.max_send_message_length", 1)])
+def test___grpc_channel_with_errors___get_error_string___returns_failed_to_retrieve_error_description(
+    interpreter: BaseInterpreter,
 ) -> None:
-    error_message = grpc_interpreter_with_errors.get_error_string(
-        DAQmxErrors.INVALID_ATTRIBUTE_VALUE
-    )
+    error_message = interpreter.get_error_string(DAQmxErrors.INVALID_ATTRIBUTE_VALUE)
 
     assert error_message.startswith("Failed to retrieve error description.")
