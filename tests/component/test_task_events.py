@@ -1,5 +1,8 @@
+import functools
+import time
 import traceback
-from nidaqmx.task import _TaskEventType
+from logging import LogRecord
+from typing import List
 
 import pytest
 
@@ -7,6 +10,7 @@ import nidaqmx
 from nidaqmx.constants import AcquisitionType, EveryNSamplesEventType, Signal
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import RpcError
+from nidaqmx.task import _TaskEventType
 from tests._event_utils import (
     DoneEventObserver,
     EveryNSamplesEventObserver,
@@ -187,7 +191,7 @@ def test___done_and_every_n_samples_events_registered___run_multiple_finite_acqu
 ) -> None:
     num_acquisitions = 3
     done_event_observer = DoneEventObserver()
-    every_n_event_count = 10
+    every_n_samples_event_count = 10
     every_n_samples_event_observer = EveryNSamplesEventObserver()
     ai_task.register_done_event(done_event_observer.handle_done_event)
     ai_task.register_every_n_samples_acquired_into_buffer_event(
@@ -200,11 +204,13 @@ def test___done_and_every_n_samples_events_registered___run_multiple_finite_acqu
     for _ in range(num_acquisitions):
         ai_task.start()
         done_event_observer.wait_for_events()
-        every_n_samples_event_observer.wait_for_events(every_n_event_count)
+        every_n_samples_event_observer.wait_for_events(every_n_samples_event_count)
         ai_task.stop()
 
     assert len(done_event_observer.events) == num_acquisitions
-    assert len(every_n_samples_event_observer.events) == num_acquisitions * every_n_event_count
+    assert (
+        len(every_n_samples_event_observer.events) == num_acquisitions * every_n_samples_event_count
+    )
 
 
 @pytest.mark.grpc_xfail(
@@ -443,7 +449,9 @@ def test___events_registered_and_grpc_channel_closed___close_task___events_clean
         rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
     )
     done_event_handler = ai_task._event_handlers[_TaskEventType.DONE]
-    every_n_samples_event_handler = ai_task._event_handlers[_TaskEventType.EVERY_N_SAMPLES_ACQUIRED_INTO_BUFFER]
+    every_n_samples_event_handler = ai_task._event_handlers[
+        _TaskEventType.EVERY_N_SAMPLES_ACQUIRED_INTO_BUFFER
+    ]
     ai_task._close_on_exit = False  # avoid double-close warning
     grpc_channel.close()
 
@@ -455,3 +463,95 @@ def test___events_registered_and_grpc_channel_closed___close_task___events_clean
     assert len(ai_task._event_handlers) == 0
     assert not done_event_handler._thread.is_alive()
     assert not every_n_samples_event_handler._thread.is_alive()
+
+
+# ctypes reports exceptions in callback functions by invoking sys.unraisablehook.
+@pytest.mark.filterwarnings("ignore::pytest.PytestUnraisableExceptionWarning")
+def test___event_callback_that_raises_exceptions___run_finite_acquisition___exceptions_ignored(
+    ai_task: nidaqmx.Task,
+) -> None:
+    done_event_observer = DoneEventObserver(
+        side_effect=functools.partial(_raise_exception, RuntimeError("done event error"))
+    )
+    every_n_samples_event_count = 10
+    every_n_samples_event_observer = EveryNSamplesEventObserver(
+        side_effect=functools.partial(_raise_exception, RuntimeError("every n samples event error"))
+    )
+    ai_task.register_done_event(done_event_observer.handle_done_event)
+    ai_task.register_every_n_samples_acquired_into_buffer_event(
+        100, every_n_samples_event_observer.handle_every_n_samples_event
+    )
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
+
+    ai_task.start()
+    done_event_observer.wait_for_events()
+    every_n_samples_event_observer.wait_for_events(every_n_samples_event_count)
+    ai_task.stop()
+
+    assert len(done_event_observer.events) == 1
+    assert len(every_n_samples_event_observer.events) == every_n_samples_event_count
+
+
+@pytest.mark.grpc_only(reason="This tests gRPC-specific behavior")
+def test___event_callback_that_raises_exceptions___run_finite_acquisition___exceptions_logged(
+    ai_task: nidaqmx.Task,
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    done_event_exception = RuntimeError("done event error")
+    done_event_observer = DoneEventObserver(
+        side_effect=functools.partial(_raise_exception, done_event_exception)
+    )
+    every_n_samples_event_count = 10
+    every_n_samples_event_exception = RuntimeError("every n samples event error")
+    every_n_samples_event_observer = EveryNSamplesEventObserver(
+        side_effect=functools.partial(_raise_exception, every_n_samples_event_exception)
+    )
+    ai_task.register_done_event(done_event_observer.handle_done_event)
+    ai_task.register_every_n_samples_acquired_into_buffer_event(
+        100, every_n_samples_event_observer.handle_every_n_samples_event
+    )
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
+
+    ai_task.start()
+    done_event_observer.wait_for_events()
+    every_n_samples_event_observer.wait_for_events(every_n_samples_event_count)
+    ai_task.stop()
+
+    done_event_records = _wait_for_log_records(caplog, "handle_done_event", 1)
+    every_n_samples_event_records = _wait_for_log_records(
+        caplog, "handle_every_n_samples_event", every_n_samples_event_count
+    )
+    assert all(
+        _exception_matches(record.exc_info[1], done_event_exception)
+        for record in done_event_records
+    )
+    assert all(
+        _exception_matches(record.exc_info[1], every_n_samples_event_exception)
+        for record in every_n_samples_event_records
+    )
+
+
+def _exception_matches(e1: Exception, e2: Exception) -> bool:
+    return type(e1) == type(e2) and e1.args == e2.args
+
+
+def _raise_exception(exception: Exception) -> None:
+    raise exception
+
+
+def _wait_for_log_records(
+    caplog: pytest.LogCaptureFixture, message_substring: str, expected_count: int, timeout=10.0
+) -> List[LogRecord]:
+    start_time = time.time()
+    while time.time() - start_time < timeout:
+        matching_records = [
+            record for record in caplog.records if message_substring in record.message
+        ]
+        if len(matching_records) >= expected_count:
+            return matching_records
+        time.sleep(10e-3)
+    raise TimeoutError(f"Expected {expected_count} records, got {len(matching_records)}.")

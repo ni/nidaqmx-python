@@ -1,6 +1,6 @@
 import threading
 import time
-from typing import Generic, List, NamedTuple, TypeVar, Union
+from typing import Callable, Generic, List, NamedTuple, Optional, TypeVar, Union
 
 
 class DoneEvent(NamedTuple):
@@ -28,11 +28,12 @@ TEvent = TypeVar("TEvent", bound=Union[DoneEvent, EveryNSamplesEvent, SignalEven
 class BaseEventObserver(Generic[TEvent]):
     """Base class for event observers."""
 
-    def __init__(self):
+    def __init__(self, side_effect: Optional[Callable[[], None]] = None):
         """Initializes the BaseEventObserver."""
         self._lock = threading.Lock()
         self._event_semaphore = threading.Semaphore(value=0)
         self._events: List[TEvent] = []
+        self._side_effect = side_effect
 
     @property
     def events(self) -> List[TEvent]:
@@ -57,6 +58,8 @@ class DoneEventObserver(BaseEventObserver[DoneEvent]):
         with self._lock:
             self._events.append(DoneEvent(status))
             self._event_semaphore.release()
+            if self._side_effect is not None:
+                self._side_effect()
         return 0
 
 
@@ -74,6 +77,8 @@ class EveryNSamplesEventObserver(BaseEventObserver[EveryNSamplesEvent]):
         with self._lock:
             self._events.append(EveryNSamplesEvent(every_n_samples_event_type, number_of_samples))
             self._event_semaphore.release()
+            if self._side_effect is not None:
+                self._side_effect()
         return 0
 
 
@@ -87,4 +92,6 @@ class SignalEventObserver(BaseEventObserver[SignalEvent]):
         with self._lock:
             self._events.append(SignalEvent(signal_type))
             self._event_semaphore.release()
+            if self._side_effect is not None:
+                self._side_effect()
         return 0
