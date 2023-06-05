@@ -364,10 +364,20 @@ class Task:
                 'already closed.'.format(self._saved_name), DaqResourceWarning)
             return
 
-        self._interpreter.clear_task(self._handle)
+        first_exception = None
+        try:
+            self._interpreter.clear_task(self._handle)
+        except Exception as ex:
+            first_exception = first_exception or ex
         self._handle = None
 
-        self._close_event_handlers()
+        try:
+            self._close_event_handlers()
+        except Exception as ex:
+            first_exception = first_exception or ex
+
+        if first_exception is not None:
+            raise first_exception
 
     def _close_event_handlers(self):
         with self._event_handler_lock:
@@ -388,9 +398,7 @@ class Task:
             try:
                 event_handler.close()
             except Exception as ex:
-                if first_exception is None:
-                    first_exception = ex
-                pass
+                first_exception = first_exception or ex
 
         if first_exception is not None:
             raise first_exception
