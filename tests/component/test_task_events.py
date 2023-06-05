@@ -1,4 +1,3 @@
-import functools
 import time
 import traceback
 from logging import LogRecord
@@ -470,12 +469,12 @@ def test___events_registered_and_grpc_channel_closed___close_task___events_clean
 def test___event_callback_that_raises_exceptions___run_finite_acquisition___exceptions_ignored(
     ai_task: nidaqmx.Task,
 ) -> None:
-    done_event_observer = DoneEventObserver(
-        side_effect=functools.partial(_raise_exception, RuntimeError("done event error"))
-    )
+    done_event_exception = RuntimeError("done event error")
+    done_event_observer = DoneEventObserver(side_effect=done_event_exception)
     every_n_samples_event_count = 10
+    every_n_samples_event_exception = RuntimeError("every n samples event error")
     every_n_samples_event_observer = EveryNSamplesEventObserver(
-        side_effect=functools.partial(_raise_exception, RuntimeError("every n samples event error"))
+        side_effect=every_n_samples_event_exception
     )
     ai_task.register_done_event(done_event_observer.handle_done_event)
     ai_task.register_every_n_samples_acquired_into_buffer_event(
@@ -500,13 +499,11 @@ def test___event_callback_that_raises_exceptions___run_finite_acquisition___exce
     caplog: pytest.LogCaptureFixture,
 ) -> None:
     done_event_exception = RuntimeError("done event error")
-    done_event_observer = DoneEventObserver(
-        side_effect=functools.partial(_raise_exception, done_event_exception)
-    )
+    done_event_observer = DoneEventObserver(side_effect=done_event_exception)
     every_n_samples_event_count = 10
     every_n_samples_event_exception = RuntimeError("every n samples event error")
     every_n_samples_event_observer = EveryNSamplesEventObserver(
-        side_effect=functools.partial(_raise_exception, every_n_samples_event_exception)
+        side_effect=every_n_samples_event_exception
     )
     ai_task.register_done_event(done_event_observer.handle_done_event)
     ai_task.register_every_n_samples_acquired_into_buffer_event(
@@ -537,10 +534,6 @@ def test___event_callback_that_raises_exceptions___run_finite_acquisition___exce
 
 def _exception_matches(e1: Exception, e2: Exception) -> bool:
     return type(e1) == type(e2) and e1.args == e2.args
-
-
-def _raise_exception(exception: Exception) -> None:
-    raise exception
 
 
 def _wait_for_log_records(
