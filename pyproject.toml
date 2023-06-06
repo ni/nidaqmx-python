@@ -68,8 +68,12 @@ grpc-stubs = "^1.53"
 pytest = ">=7.2"
 pytest-cov = ">=4.0"
 pytest-mock = ">=3.0"
-pykka = "^3.0"
-tox = "^3.24"
+pykka = ">=3.0"
+tox = [
+  # tox 4.0 requires importlib_metadata >= 5.1 but we use importlib_metadata < 5.0 for Python 3.7
+  {version="^3.24", python="<3.8"},
+  {version=">=3.24", python="^3.8"},
+]
 
 [tool.black]
 line-length = 100
