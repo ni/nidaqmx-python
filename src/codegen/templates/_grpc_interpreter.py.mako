@@ -188,21 +188,29 @@ def _assign_numpy_array(numpy_array, grpc_array, samples_read):
     Checks for the instance of grpc_array with bytes, if validated to True,
     the numpy array is assigned to a 1D array of the grpc arrray.
     """
-    if numpy_array.ndim>1:
-        (number_of_channels,number_of_samples_per_channel) = numpy_array.shape
-        for row in range(0, number_of_channels - 1):
-            for column in range(0, number_of_samples_per_channel -1):
-                if samples_read<=column:
-                    grpc_array[row,column]=numpy_array[row,column]
-    else:
-        grpc_array_size = len(grpc_array)
-        grpc_array[samples_read:] = numpy_array[samples_read:]
+    grpc_array_size = len(grpc_array)
     if isinstance(grpc_array, bytes):
         assert numpy_array.nbytes >= grpc_array_size
-        numpy_array.flat[:grpc_array_size] = numpy.frombuffer(grpc_array, dtype=numpy_array.dtype)
+        if numpy_array.ndim>1:
+            (number_of_channels, number_of_samples_per_channel) = numpy_array.shape
+            read_array = numpy.frombuffer(grpc_array, dtype=numpy_array.dtype).reshape((number_of_channels, samples_read))
+            for row in range(0, number_of_channels):
+                for column in range(0, number_of_samples_per_channel):
+                    if column < samples_read:
+                        numpy_array[row, column] = read_array[row, column]
+        else:
+            numpy_array.flat[:grpc_array_size] = numpy.frombuffer(grpc_array, dtype=numpy_array.dtype)
     else:
         assert numpy_array.size >= grpc_array_size
-        numpy_array.flat[:grpc_array_size] = grpc_array
+        if numpy_array.ndim>1:
+            (number_of_channels, number_of_samples_per_channel) = numpy_array.shape
+            read_array = numpy.array(grpc_array).reshape((number_of_channels, samples_read))
+            for row in range(0, number_of_channels):
+                for column in range(0, number_of_samples_per_channel):
+                    if column < samples_read:
+                        numpy_array[row, column] = read_array[row, column]
+        else:
+            numpy_array[0:samples_read] = grpc_array[0:samples_read]
 
 def _validate_array_dtype(numpy_array, expected_numpy_array_dtype):
     """Raises TypeError if array type doesn't match with expected numpy.dtype"""

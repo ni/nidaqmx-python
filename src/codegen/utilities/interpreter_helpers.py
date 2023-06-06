@@ -94,6 +94,12 @@ MODIFIED_INTERPRETER_PARAMS = {
     "r_1": "r1",
 }
 
+READ_SAMPLES_PARAMETER_NAMES = [
+    "samps_read",
+    "samps_per_chan_read",
+    "num_samps_per_chan",
+]
+
 
 def get_interpreter_functions(metadata):
     """Converts the scrapigen metadata into a list of functions."""
@@ -537,6 +543,15 @@ def get_samps_per_chan_read_or_write_param(func_params):
 
         if param.parameter_name in ("samps_per_chan_written", "num_samps_per_chan_written"):
             return f"samps_per_chan_written={param.parameter_name}"
+    return None
+
+
+def get_samps_per_chan_read_param(func):
+    """Gets samps per read parameter."""
+    output_parameters = get_output_params(func)
+    for param in output_parameters:
+        if param.parameter_name in READ_SAMPLES_PARAMETER_NAMES:
+            return camel_to_snake_case(param.parameter_name)
     return None
 
 
