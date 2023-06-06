@@ -145,7 +145,10 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def _check_for_error_from_response(self, error_code, samps_per_chan_written=None, samps_per_chan_read=None):
         if error_code != 0:
-            error_message = self.get_error_string(error_code)
+            if error_code in ERROR_MESSAGES:
+                error_message = ERROR_MESSAGES.get(error_code)
+            else:
+                error_message = self.get_error_string(error_code)
             self._raise_error(error_code, error_message, samps_per_chan_written = samps_per_chan_written, samps_per_chan_read = samps_per_chan_read)
 
     def _raise_error(self, error_code, error_message, samps_per_chan_written=None, samps_per_chan_read=None):
@@ -258,3 +261,11 @@ def _is_cancelled(ex: Exception) -> bool:
         (isinstance(ex, grpc.RpcError) and ex.code() == grpc.StatusCode.CANCELLED)
         or (isinstance(ex, errors.RpcError) and ex.rpc_code == grpc.StatusCode.CANCELLED)
     )
+
+ERROR_MESSAGES = {
+    -200284: """Some or all of the samples requested have not yet been acquired.\n
+    To wait for the samples to become available use a longer read timeout or read later in your program.
+    To make the samples available sooner, increase the sample rate. If your task uses a start trigger,
+    make sure that your start trigger is configured correctly. It is also possible that you configured
+    the task for external timing, and no clock was supplied. If this is the case, supply an external clock."""
+}
