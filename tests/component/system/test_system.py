@@ -55,6 +55,7 @@ def test_invalid_power_up_states___set_analog_power_up_states_with_output_type__
 
     assert exc_info.value.error_code == DAQmxErrors.INVALID_ATTRIBUTE_VALUE
 
+
 def test_valid_power_up_states___set_analog_power_up_states___sets_power_up_states_without_errors(
     system,
 ):
