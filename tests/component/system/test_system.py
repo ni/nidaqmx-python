@@ -31,22 +31,23 @@ def test_valid_power_up_states___set_analog_power_up_states_with_output_type___s
         for channel_name in channel_names
     ]
 
-    result = system.set_analog_power_up_states_with_output_type(power_up_states)
-
-    assert result == None
+    system.set_analog_power_up_states_with_output_type(power_up_states)
 
 
 def test_invalid_power_up_states___set_analog_power_up_states_with_output_type___throws_invalid_attribute_value_error(
     system,
 ):
-    channel_names = ["aoTester/ao0", "aoTester/ao1"]
     power_up_states = [
         AOPowerUpState(
-            physical_channel=channel_name,
+            physical_channel="aoTester/ao0",
+            power_up_state=1,
+            channel_type=PowerUpChannelType.CHANNEL_VOLTAGE,
+        ),
+        AOPowerUpState(
+            physical_channel="aoTester/ao1",
             power_up_state=20,
             channel_type=PowerUpChannelType.CHANNEL_VOLTAGE,
-        )
-        for channel_name in channel_names
+        ),
     ]
 
     with pytest.raises(nidaqmx.DaqError) as exc_info:
