@@ -4,7 +4,7 @@ import nidaqmx
 from nidaqmx.error_codes import DAQmxErrors
 
 
-@pytest.mark.library_only
+@pytest.mark.library_only(reason="Default gRPC initialization behavior is auto (create or attach)")
 def test___task___create_task_with_same_name___raises_duplicate_task(init_kwargs):
     task1 = nidaqmx.Task("MyTask1", **init_kwargs)
 

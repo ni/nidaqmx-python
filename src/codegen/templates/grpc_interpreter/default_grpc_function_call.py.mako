@@ -4,6 +4,7 @@
         check_if_parameters_contain_read_array,
         create_compound_parameter_request,
         get_compound_parameter,
+        get_event_name,
         get_grpc_interpreter_call_params,
         get_input_arguments_for_compound_params,
         get_numpy_array_params,
@@ -11,6 +12,7 @@
         get_params_for_function_signature,
         get_read_array_parameters,
         is_custom_read_write_function,
+        is_event_unregister_function,
         get_samps_per_chan_read_param,
     )
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
@@ -65,9 +67,4 @@
         _assign_numpy_array(${param}, response.${param}, response.${samps_per_chan_param})
     %endfor
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.${samps_per_chan_param})
-%endif
-%if function.function_name == 'clear_task':
-        self._unregister_done_event_callbacks()
-        self._unregister_every_n_samples_event_callbacks()
-        self._unregister_signal_event_callbacks()
 %endif

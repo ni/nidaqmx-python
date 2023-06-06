@@ -39,6 +39,13 @@ class PersistedTask:
         return f'PersistedTask(name={self._name})'
 
     @property
+    def name(self):
+        """
+        str: Indicates the name of the task.
+        """
+        return self._name
+
+    @property
     def author(self):
         """
         str: Indicates the author of the task.

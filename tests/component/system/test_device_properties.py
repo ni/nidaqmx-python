@@ -57,7 +57,7 @@ def test___device___list_of_float_property___returns_value(device):
 
 
 @pytest.mark.grpc_xfail(
-    reason="AB#2395661: Attributes with bitfield enum are listed under the wrong type in DAQmx proto file.",
+    reason="Requires NI gRPC Device Server version 2.2 or later",
     raises=DaqError,
 )
 @pytest.mark.device_name("bridgeTester")
@@ -84,3 +84,31 @@ def test___device___get_deprecated_properties___reports_warnings(device):
         assert device.serial_num == device.dev_serial_num
     with pytest.deprecated_call():
         assert device.hwteds_supported == device.tedshwteds_supported
+
+
+@pytest.mark.device_name("tsChassisTester")
+def test___chassis___get_modules___returns_modules(device: Device):
+    modules = device.chassis_module_devices
+
+    assert [mod.name for mod in modules] == ["tsPowerTester1", "tsPowerTester2", "tsVoltageTester1"]
+
+
+@pytest.mark.device_name("tsChassisTester")
+def test___chassis___get_modules___shared_interpreter(device: Device):
+    modules = device.chassis_module_devices
+
+    assert all(mod._interpreter is device._interpreter for mod in modules)
+
+
+@pytest.mark.device_name("tsVoltageTester1")
+def test___module___get_chassis___returns_chassis(device: Device):
+    chassis = device.compact_daq_chassis_device
+
+    assert chassis.name == "tsChassisTester"
+
+
+@pytest.mark.device_name("tsVoltageTester1")
+def test___module___get_chassis___shared_interpreter(device: Device):
+    chassis = device.compact_daq_chassis_device
+
+    assert chassis._interpreter is device._interpreter

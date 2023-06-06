@@ -4,7 +4,11 @@ from copy import deepcopy
 
 from codegen.functions.function import Function
 from codegen.utilities.function_helpers import to_param_argtype
-from codegen.utilities.helpers import AttributeFunctionType, camel_to_snake_case
+from codegen.utilities.helpers import (
+    AttributeFunctionType,
+    camel_to_snake_case,
+    removeprefix,
+)
 
 # This custom regex list doesn't split the string before the number.
 INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES = [
@@ -94,12 +98,18 @@ MODIFIED_INTERPRETER_PARAMS = {
     "r_1": "r1",
 }
 
+EVENT_UNREGISTER_IGNORED_PARAMS = [
+    "callback_data",
+    "callback_function",
+    "n_samples",
+    "options",
+]
+
 READ_SAMPLES_PARAMETER_NAMES = [
     "samps_read",
     "samps_per_chan_read",
     "num_samps_per_chan",
 ]
-
 
 def get_interpreter_functions(metadata):
     """Converts the scrapigen metadata into a list of functions."""
@@ -144,7 +154,7 @@ def generate_interpreter_function_call_args(function_metadata):
             function_call_args.append(size_values[param.parameter_name])
         elif param.parameter_name == "reserved":
             function_call_args.append("None")
-        elif function_metadata.stream_response and param.parameter_name == "callback_function":
+        elif is_event_function(function_metadata) and param.parameter_name == "callback_function":
             function_call_args.append("callback_method_ptr")
         elif param.direction == "out" or (
             param.is_pointer and param.parameter_name != "callback_data"
@@ -247,6 +257,12 @@ def get_instantiation_lines_for_output(func):
                 )
         else:
             instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
+    for param in get_interpreter_in_out_params(func):
+        if param.parameter_name == "reserved" or param.parameter_name == "callback_data":
+            continue
+        instantiation_lines.append(
+            f"{param.parameter_name} = {param.ctypes_data_type}({param.parameter_name})"
+        )
     return instantiation_lines
 
 
@@ -295,6 +311,11 @@ def get_params_for_function_signature(func, is_grpc_interpreter=False):
             param.parameter_name in size_params or param.parameter_name == "reserved"
         ) and func.function_name not in INCLUDE_SIZE_PARAMETER_IN_SIGNATURE_FUNCTIONS:
             continue
+        if (
+            is_event_unregister_function(func)
+            and param.parameter_name in EVENT_UNREGISTER_IGNORED_PARAMS
+        ):
+            continue
         if param.direction == "in":
             interpreter_parameters.append(param)
         elif is_custom_read_write_function(func) and param.has_explicit_buffer_size:
@@ -332,13 +353,13 @@ def get_grpc_interpreter_call_params(func, params):
             elif param.is_grpc_enum or (param.is_enum and not param.is_list):
                 grpc_params.append(f"{name}_raw={param.parameter_name}")
             else:
-                if is_write_function:
-                    if is_write_bytes_param(param):
-                        grpc_params.append(f"{name}={param.parameter_name}.tobytes()")
-                    else:
-                        grpc_params.append(get_write_array_param(param))
+                if is_write_bytes_param(param):
+                    grpc_params.append(f"{name}={param.parameter_name}.tobytes()")
+                elif is_write_function:
+                    grpc_params.append(get_write_array_param(param))
                 else:
                     grpc_params.append(f"{name}={param.parameter_name}")
+
     if func.is_init_method:
         grpc_params.append("initialization_behavior=self._grpc_options.initialization_behavior")
     return ", ".join(grpc_params)
@@ -400,6 +421,11 @@ def get_output_params(func):
     return [p for p in func.base_parameters if p.direction == "out"]
 
 
+def get_interpreter_in_out_params(func):
+    """Gets the input parameters that are also pointers for the function."""
+    return [p for p in get_interpreter_parameters(func) if p.direction == "in" and p.is_pointer]
+
+
 def get_return_values(func):
     """Gets the values to add to return statement of the function."""
     return_values = []
@@ -427,7 +453,7 @@ def get_return_values(func):
 
 def get_c_function_call_template(func):
     """Gets the template to use for generating the logic of calling the c functions."""
-    if func.stream_response:
+    if is_event_function(func):
         return "/event_function_call.py.mako"
     elif any(get_varargs_parameters(func)):
         return "/exec_cdecl_c_function_call.py.mako"
@@ -482,6 +508,31 @@ def get_callback_param_data_types(func):
         + [p["ctypes_data_type"] for p in callback_func_param.callback_params]
         + [callback_data_param.ctypes_data_type]
     )
+
+
+def is_event_function(func):
+    """Returns True if this is an event register/unregister function, False otherwise."""
+    return is_event_register_function(func) or is_event_unregister_function(func)
+
+
+def is_event_register_function(func):
+    """Returns True if this is an event register function, False otherwise."""
+    return func.function_name.startswith("register_")
+
+
+def is_event_unregister_function(func):
+    """Returns True if this is an event unregister function, False otherwise."""
+    return func.function_name.startswith("unregister_")
+
+
+def get_event_name(func):
+    """Gets the event name for an event register/unregister function."""
+    if is_event_register_function(func):
+        return removeprefix(func.function_name, "register_")
+    elif is_event_unregister_function(func):
+        return removeprefix(func.function_name, "unregister_")
+    else:
+        raise ValueError(f"{func.function_name} is not an event function.")
 
 
 def get_compound_parameter(params):

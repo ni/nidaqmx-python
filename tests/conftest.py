@@ -16,7 +16,6 @@ from nidaqmx.constants import ProductCategory, UsageTypeAI
 try:
     import grpc
 
-    from nidaqmx._grpc_interpreter import GrpcStubInterpreter
     from tests._grpc_utils import GrpcServerProcess
 except ImportError:
     grpc = None
@@ -257,7 +256,7 @@ def test_assets_directory() -> pathlib.Path:
 
 
 @pytest.fixture(scope="session")
-def grpc_server_process() -> GrpcServerProcess:
+def grpc_server_process() -> Generator[GrpcServerProcess, None, None]:
     """Gets the grpc server process."""
     if grpc is None:
         pytest.skip("The grpc module is not available.")
@@ -265,19 +264,31 @@ def grpc_server_process() -> GrpcServerProcess:
         yield proc
 
 
+@pytest.fixture(scope="function")
+def grpc_channel(request: pytest.FixtureRequest) -> grpc.Channel:
+    """Gets a gRPC channel."""
+    if request.node.get_closest_marker("temporary_grpc_channel") is not None:
+        return request.getfixturevalue("temporary_grpc_channel")
+    else:
+        return request.getfixturevalue("shared_grpc_channel")
+
+
 @pytest.fixture(scope="session")
-def grpc_channel(grpc_server_process: GrpcServerProcess) -> Generator[grpc.Channel, None, None]:
-    """Gets the gRPC channel."""
+def shared_grpc_channel(
+    grpc_server_process: GrpcServerProcess,
+) -> Generator[grpc.Channel, None, None]:
+    """Gets the shared gRPC channel."""
     with grpc.insecure_channel(f"localhost:{grpc_server_process.server_port}") as channel:
         yield channel
 
 
-@pytest.fixture(scope="session")
-def grpc_channel_with_errors(
-    grpc_server_process: GrpcServerProcess,
+@pytest.fixture(scope="function")
+def temporary_grpc_channel(
+    request: pytest.FixtureRequest, grpc_server_process: GrpcServerProcess
 ) -> Generator[grpc.Channel, None, None]:
-    """Gets a gRPC channel that returns errors for all RPCs."""
-    options = [("grpc.max_send_message_length", 1)]
+    """Gets a temporary gRPC channel (not shared with other tests)."""
+    marker = request.node.get_closest_marker("temporary_grpc_channel")
+    options = marker.kwargs.get("options", None)
     with grpc.insecure_channel(f"localhost:{grpc_server_process.server_port}", options) as channel:
         yield channel
 
@@ -442,7 +453,6 @@ def interpreter(system: nidaqmx.system.System) -> BaseInterpreter:
 
 
 @pytest.fixture
-def grpc_interpreter_with_errors(grpc_channel_with_errors: grpc.Channel) -> GrpcStubInterpreter:
-    """Gets a GrpcStubInterpreter that returns errors for all RPCs."""
-    grpc_options = nidaqmx.GrpcSessionOptions(grpc_channel_with_errors, "")
-    return GrpcStubInterpreter(grpc_options)
+def teds_file_path(test_assets_directory):
+    """Returns a TEDS file path."""
+    return pathlib.Path(test_assets_directory, "teds", "Voltage.ted")

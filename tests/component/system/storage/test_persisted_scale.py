@@ -1,3 +1,5 @@
+import pytest
+
 from nidaqmx.system.storage import PersistedScale
 
 
@@ -29,3 +31,10 @@ def test___persisted_scales_with_different_names___hash___not_equal(init_kwargs)
     persisted_scale2 = PersistedScale("Scale2", **init_kwargs)
 
     assert hash(persisted_scale1) != hash(persisted_scale2)
+
+
+@pytest.mark.scale_name("double_gain_scale")
+def test___persisted_scale___load___shared_interpreter(persisted_scale: PersistedScale):
+    scale = persisted_scale.load()
+
+    assert scale._interpreter is persisted_scale._interpreter
