@@ -407,7 +407,7 @@ class System:
         channel_type = numpy.int32(
             [p.channel_type.value for p in power_up_states])
 
-        self._interpreter.set_analog_power_up_states_with_output_type(physical_channel, state, channel_type, len(power_up_states))
+        self._interpreter.set_analog_power_up_states_with_output_type(physical_channel, state, channel_type)
 
     def get_analog_power_up_states(self, device_name):
         """
