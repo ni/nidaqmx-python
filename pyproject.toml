@@ -110,7 +110,7 @@ check_untyped_defs = true
 plugins = "numpy.typing.mypy_plugin"
 exclude = [
   # https://github.com/grpc/grpc/issues/27682 - module 'grpc' has no attribute 'experimental'
-  "nidaqmx/_stubs/.*_grpc.py$"
+  "nidaqmx/_stubs/.*_grpc\\.py$"
 ]
 
 [[tool.mypy.overrides]]
