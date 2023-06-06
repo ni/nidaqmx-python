@@ -111,6 +111,7 @@ READ_SAMPLES_PARAMETER_NAMES = [
     "num_samps_per_chan",
 ]
 
+
 def get_interpreter_functions(metadata):
     """Converts the scrapigen metadata into a list of functions."""
     all_functions = deepcopy(metadata["functions"])
