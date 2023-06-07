@@ -54,3 +54,43 @@ def test_invalid_power_up_states___set_analog_power_up_states_with_output_type__
         system.set_analog_power_up_states_with_output_type(power_up_states)
 
     assert exc_info.value.error_code == DAQmxErrors.INVALID_ATTRIBUTE_VALUE
+
+
+def test_valid_power_up_states___set_analog_power_up_states___sets_power_up_states_without_errors(
+    system,
+):
+    device_name = "aoTester"
+    channel_names = ["aoTester/ao0", "aoTester/ao1"]
+    power_up_states = [
+        AOPowerUpState(
+            physical_channel=channel_name,
+            power_up_state=-1.0,
+            channel_type=PowerUpChannelType.CHANNEL_VOLTAGE,
+        )
+        for channel_name in channel_names
+    ]
+
+    system.set_analog_power_up_states(device_name, power_up_states)
+
+
+def test_invalid_power_up_states___set_analog_power_up_states___throws_invalid_attribute_value_error(
+    system,
+):
+    device_name = "aoTester"
+    power_up_states = [
+        AOPowerUpState(
+            physical_channel="aoTester/ao0",
+            power_up_state=1,
+            channel_type=PowerUpChannelType.CHANNEL_VOLTAGE,
+        ),
+        AOPowerUpState(
+            physical_channel="aoTester/ao1",
+            power_up_state=20,
+            channel_type=PowerUpChannelType.CHANNEL_VOLTAGE,
+        ),
+    ]
+
+    with pytest.raises(nidaqmx.DaqError) as exc_info:
+        system.set_analog_power_up_states(device_name, power_up_states)
+
+    assert exc_info.value.error_code == DAQmxErrors.INVALID_ATTRIBUTE_VALUE
