@@ -128,3 +128,17 @@ def test__grpc_byte_array_with_all_samples__update_inuput_array__all_samples_upd
     _assign_numpy_array(input_array, response.read_array, number_of_samples_read)
 
     assert all(element == read_value for element in input_array)
+
+def test__grpc_byte_array_with_partial_samples__update_inuput_array__only_partial_data_updated():
+    number_of_samples_in_input = 100
+    number_of_samples_read = 25
+    initial_value = -1
+    read_value = 100
+    input_array = numpy.full(number_of_samples_in_input, initial_value, dtype=numpy.float64)
+    output_array = numpy.full(number_of_samples_in_input, read_value, dtype=numpy.float64).tobytes()
+    response = nidaqmx_pb2.ReadRawResponse(read_array=output_array)
+
+    _assign_numpy_array(input_array, response.read_array, number_of_samples_read)
+
+    assert numpy.count_nonzero(input_array == read_value) == 25
+    assert numpy.count_nonzero(input_array == initial_value) == 75

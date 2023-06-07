@@ -3438,7 +3438,7 @@ def _assign_numpy_array(numpy_array, grpc_array, samples_read):
     grpc_array_size = len(grpc_array)
     if isinstance(grpc_array, bytes):
         assert numpy_array.nbytes >= grpc_array_size
-        if numpy_array.ndim>1:
+        if numpy_array.ndim > 1:
             (number_of_channels, number_of_samples_per_channel) = numpy_array.shape
             read_array = numpy.frombuffer(grpc_array, dtype=numpy_array.dtype).reshape((number_of_channels, samples_read))
             for row in range(0, number_of_channels):
@@ -3446,10 +3446,10 @@ def _assign_numpy_array(numpy_array, grpc_array, samples_read):
                     if column < samples_read:
                         numpy_array[row, column] = read_array[row, column]
         else:
-            numpy_array.flat[:grpc_array_size] = numpy.frombuffer(grpc_array, dtype=numpy_array.dtype)
+            numpy_array.flat[0:samples_read] = numpy.frombuffer(grpc_array, dtype=numpy_array.dtype)
     else:
         assert numpy_array.size >= grpc_array_size
-        if numpy_array.ndim>1:
+        if numpy_array.ndim > 1:
             (number_of_channels, number_of_samples_per_channel) = numpy_array.shape
             read_array = numpy.array(grpc_array).reshape((number_of_channels, samples_read))
             for row in range(0, number_of_channels):
