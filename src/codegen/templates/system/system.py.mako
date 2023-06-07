@@ -374,18 +374,9 @@ ${function_template.script_function(function_object)}
         """
         device = _DeviceAlternateConstructor(device_name, self._interpreter)
         channel_names = device.ao_physical_chans.channel_names
-
-        states, channel_types = self._interpreter.get_analog_power_up_states_with_output_type(flatten_channel_string(channel_names), len(channel_names))
-
-        power_up_states = []
-        for a, p, c in zip(device.ao_physical_chans, states, channel_types):
-            power_up_states.append(
-                AOPowerUpState(
-                    physical_channel=a.name,
-                    power_up_state=p,
-                    channel_type=PowerUpChannelType(c)))
-
-        return power_up_states
+        
+        # Here get_analog_power_up_states is not called, since it is deprecated and passes channel_type in wrong direction
+        return self.get_analog_power_up_states_with_output_type(channel_names)
 
     def get_analog_power_up_states_with_output_type(self, physical_channels):
         """
