@@ -129,6 +129,7 @@ def test__grpc_byte_array_with_all_samples__update_inuput_array__all_samples_upd
 
     assert all(element == read_value for element in input_array)
 
+
 def test__grpc_byte_array_with_partial_samples__update_inuput_array__only_partial_data_updated():
     number_of_samples_in_input = 100
     number_of_samples_read = 25
