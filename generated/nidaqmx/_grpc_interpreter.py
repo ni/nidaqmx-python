@@ -1669,16 +1669,6 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, signal_id_raw=signal_id,
                 output_terminal=output_terminal))
 
-    def get_analog_power_up_states(
-            self, device_name, channel_name, channel_type):
-        channels = []
-        for index in range(len(channel_name)):
-            channels.append(grpc_types.AnalogPowerUpChannelAndType(channel_name=channel_name[index], channel_type=channel_type[index]))
-        response = self._invoke(
-            self._client.GetAnalogPowerUpStates,
-            grpc_types.GetAnalogPowerUpStatesRequest(device_name=device_name, channels=channels))
-        return response.power_up_states
-
     def get_analog_power_up_states_with_output_type(
             self, channel_names, array_size):
         response = self._invoke(

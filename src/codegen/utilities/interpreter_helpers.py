@@ -75,6 +75,8 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetTimingAttributeTimestamp",
     "SetTrigAttributeTimestamp",
     "WaitForValidTimestamp",
+    # Deprecated, not working
+    "GetAnalogPowerUpStates",
 ]
 
 GRPC_INTERPRETER_IGNORED_FUNCTIONS = [
