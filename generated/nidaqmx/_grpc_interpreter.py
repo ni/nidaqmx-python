@@ -3429,7 +3429,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             return 'Failed to retrieve error description.'
 
 
-def _assign_numpy_array(numpy_array, grpc_array, samples_read, num_samps_per_chan):
+def _assign_numpy_array(numpy_array, grpc_array, samps_per_chan_read, num_samps_per_chan):
     """
     Assigns grpc array to numpy array maintaining the original shape.
 
@@ -3441,28 +3441,22 @@ def _assign_numpy_array(numpy_array, grpc_array, samples_read, num_samps_per_cha
         assert numpy_array.nbytes >= grpc_array_size
         if numpy_array.ndim > 1:
             (number_of_channels, number_of_samples_per_channel) = numpy_array.shape
-            read_array = numpy.frombuffer(grpc_array, dtype=numpy_array.dtype).reshape((number_of_channels, samples_read))
-            for row in range(0, number_of_channels):
-                for column in range(0, number_of_samples_per_channel):
-                    if column < samples_read:
-                        numpy_array[row, column] = read_array[row, column]
-        elif num_samps_per_chan==1 and numpy_array.size<=samples_read:
+            read_array = numpy.frombuffer(grpc_array, dtype=numpy_array.dtype).reshape((number_of_channels, samps_per_chan_read))
+            numpy_array[:, :samps_per_chan_read] = read_array
+        elif num_samps_per_chan==1 and numpy_array.size<=samps_per_chan_read:
             numpy_array.flat[0:numpy_array.size] = numpy.frombuffer(grpc_array, dtype=numpy_array.dtype)
         else:
-            numpy_array.flat[0:samples_read] = numpy.frombuffer(grpc_array, dtype=numpy_array.dtype)
+            numpy_array.flat[0:samps_per_chan_read] = numpy.frombuffer(grpc_array, dtype=numpy_array.dtype)
     else:
         assert numpy_array.size >= grpc_array_size
         if numpy_array.ndim > 1:
             (number_of_channels, number_of_samples_per_channel) = numpy_array.shape
-            read_array = numpy.array(grpc_array).reshape((number_of_channels, samples_read))
-            for row in range(0, number_of_channels):
-                for column in range(0, number_of_samples_per_channel):
-                    if column < samples_read:
-                        numpy_array[row, column] = read_array[row, column]
-        elif num_samps_per_chan==1 and numpy_array.size<=samples_read:
+            read_array = numpy.array(grpc_array).reshape((number_of_channels, samps_per_chan_read))
+            numpy_array[:, :samps_per_chan_read].flat[:grpc_array_size] = grpc_array
+        elif num_samps_per_chan==1 and numpy_array.size<=samps_per_chan_read:
             numpy_array.flat[0:numpy_array.size] = grpc_array[0:numpy_array.size]
         else:
-            numpy_array[0:samples_read] = grpc_array[0:samples_read]
+            numpy_array[0:samps_per_chan_read] = grpc_array[0:samps_per_chan_read]
 
 def _validate_array_dtype(numpy_array, expected_numpy_array_dtype):
     """Raises TypeError if array type doesn't match with expected numpy.dtype"""
