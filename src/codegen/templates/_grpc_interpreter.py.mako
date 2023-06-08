@@ -146,6 +146,7 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def _check_for_error_from_response(self, error_code, samps_per_chan_written=None, samps_per_chan_read=None):
         if error_code != 0:
+            # This is an optimization for the partial read operation.
             error_message=_ERROR_MESSAGES.get(error_code, None)
             if not error_message:
                 error_message=self.get_error_string(error_code)
