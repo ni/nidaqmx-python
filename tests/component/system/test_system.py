@@ -58,7 +58,7 @@ def test_invalid_power_up_states___set_analog_power_up_states_with_output_type__
 
 def test___get_analog_power_up_states___returns_power_up_states(system):
     device_name = "aoTester"
-    
+
     with pytest.deprecated_call():
         power_up_states = system.get_analog_power_up_states(device_name)
 
