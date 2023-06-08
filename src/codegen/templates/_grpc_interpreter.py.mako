@@ -32,6 +32,7 @@ from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._stubs import nidaqmx_pb2 as grpc_types
 from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
 from nidaqmx._stubs import session_pb2 as session_grpc_types
+from nidaqmx.error_codes import DAQmxErrors
 
 _logger = logging.getLogger(__name__)
 
@@ -145,10 +146,9 @@ class GrpcStubInterpreter(BaseInterpreter):
 
     def _check_for_error_from_response(self, error_code, samps_per_chan_written=None, samps_per_chan_read=None):
         if error_code != 0:
-            if error_code in ERROR_MESSAGES:
-                error_message = ERROR_MESSAGES.get(error_code)
-            else:
-                error_message = self.get_error_string(error_code)
+            error_message=_ERROR_MESSAGES.get(error_code, None)
+            if not error_message:
+                error_message=self.get_error_string(error_code)
             self._raise_error(error_code, error_message, samps_per_chan_written = samps_per_chan_written, samps_per_chan_read = samps_per_chan_read)
 
     def _raise_error(self, error_code, error_message, samps_per_chan_written=None, samps_per_chan_read=None):
@@ -219,7 +219,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             return 'Failed to retrieve error description.'
 
 
-def _assign_numpy_array(numpy_array, grpc_array, samples_read):
+def _assign_numpy_array(numpy_array, grpc_array, samples_read, num_samps_per_chan):
     """
     Assigns grpc array to numpy array maintaining the original shape.
 
@@ -236,6 +236,8 @@ def _assign_numpy_array(numpy_array, grpc_array, samples_read):
                 for column in range(0, number_of_samples_per_channel):
                     if column < samples_read:
                         numpy_array[row, column] = read_array[row, column]
+        elif num_samps_per_chan==1 and numpy_array.size<=samples_read:
+            numpy_array.flat[0:numpy_array.size] = numpy.frombuffer(grpc_array, dtype=numpy_array.dtype)
         else:
             numpy_array.flat[0:samples_read] = numpy.frombuffer(grpc_array, dtype=numpy_array.dtype)
     else:
@@ -247,6 +249,8 @@ def _assign_numpy_array(numpy_array, grpc_array, samples_read):
                 for column in range(0, number_of_samples_per_channel):
                     if column < samples_read:
                         numpy_array[row, column] = read_array[row, column]
+        elif num_samps_per_chan==1 and numpy_array.size<=samples_read:
+            numpy_array.flat[0:numpy_array.size] = grpc_array[0:numpy_array.size]
         else:
             numpy_array[0:samples_read] = grpc_array[0:samples_read]
 
@@ -262,10 +266,6 @@ def _is_cancelled(ex: Exception) -> bool:
         or (isinstance(ex, errors.RpcError) and ex.rpc_code == grpc.StatusCode.CANCELLED)
     )
 
-ERROR_MESSAGES = {
-    -200284: """Some or all of the samples requested have not yet been acquired.\n
-    To wait for the samples to become available use a longer read timeout or read later in your program.
-    To make the samples available sooner, increase the sample rate. If your task uses a start trigger,
-    make sure that your start trigger is configured correctly. It is also possible that you configured
-    the task for external timing, and no clock was supplied. If this is the case, supply an external clock."""
+_ERROR_MESSAGES = {
+    DAQmxErrors.SAMPLES_NOT_YET_AVAILABLE: 'Some or all of the samples requested have not yet been acquired.\nTo wait for the samples to become available use a longer read timeout or read later in your program. To make the samples available sooner, increase the sample rate. If your task uses a start trigger,  make sure that your start trigger is configured correctly. It is also possible that you configured the task for external timing, and no clock was supplied. If this is the case, supply an external clock.'
 }

@@ -64,7 +64,7 @@
         samps_per_chan_param = get_samps_per_chan_read_param(function)
     %>
     %for param in get_read_array_parameters(function):
-        _assign_numpy_array(${param}, response.${param}, response.${samps_per_chan_param})
+        _assign_numpy_array(${param}, response.${param}, response.${samps_per_chan_param}, num_samps_per_chan)
     %endfor
         self._check_for_error_from_response(response.status, samps_per_chan_read=response.${samps_per_chan_param})
 %endif
