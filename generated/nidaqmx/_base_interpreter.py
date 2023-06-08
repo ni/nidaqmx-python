@@ -785,11 +785,6 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_analog_power_up_states(
-            self, device_name, channel_name, channel_type):
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def get_analog_power_up_states_with_output_type(
             self, channel_names, array_size):
         raise NotImplementedError

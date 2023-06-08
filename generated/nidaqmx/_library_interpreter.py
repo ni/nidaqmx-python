@@ -2250,36 +2250,6 @@ class LibraryInterpreter(BaseInterpreter):
             task, signal_id, output_terminal)
         self.check_for_error(error_code)
 
-    def get_analog_power_up_states(
-            self, device_name, channel_name, channel_type):
-        state = []
-
-        args = [device_name]
-        argtypes: List[type] = [ctypes_byte_str]
-
-        for index in range(len(channel_name)):
-            state_element = ctypes.c_double()
-            state.append(state_element)
-
-            args.append(channel_name[index])
-            argtypes.append(ctypes_byte_str)
-            
-            args.append(ctypes.byref(state_element))
-            argtypes.append(ctypes.POINTER(ctypes.c_double))
-            
-            args.append(channel_type[index])
-            argtypes.append(ctypes.c_int32)
-            
-        args.append(None)
-        argtypes.append(ctypes.c_void_p)
-
-        cfunc = lib_importer.cdll.DAQmxGetAnalogPowerUpStates
-        with cfunc.arglock:
-            cfunc.argtypes = argtypes
-            error_code = cfunc(*args)
-        self.check_for_error(error_code)
-        return [state_element.value for state_element in state]
-
     def get_analog_power_up_states_with_output_type(
             self, channel_names, array_size):
         state_array = numpy.zeros(array_size, dtype=numpy.float64)

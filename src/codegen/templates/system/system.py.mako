@@ -372,27 +372,11 @@ ${function_template.script_function(function_object)}
               Specifies the output type for the physical channel
               specified with the **physical_channel** input.
         """
-        channel_names = []
-        channel_types = []
-
         device = _DeviceAlternateConstructor(device_name, self._interpreter)
-
-        for ao_physical_chan in device.ao_physical_chans:
-            channel_type = ctypes.c_int()
-            channel_types.append(channel_type)
-            channel_names.append(ao_physical_chan.name)
-
-        states = self._interpreter.get_analog_power_up_states(device_name, channel_names, channel_types)
-
-        power_up_states = []
-        for a, p, c in zip(device.ao_physical_chans, states, channel_types):
-            power_up_states.append(
-                AOPowerUpState(
-                    physical_channel=a.name,
-                    power_up_state=p,
-                    channel_type=AOPowerUpOutputBehavior(c.value)))
-
-        return power_up_states
+        channel_names = device.ao_physical_chans.channel_names
+        
+        # Here get_analog_power_up_states is not called, since it is deprecated and passes channel_type in wrong direction
+        return self.get_analog_power_up_states_with_output_type(channel_names)
 
     def get_analog_power_up_states_with_output_type(self, physical_channels):
         """

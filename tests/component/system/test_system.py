@@ -56,6 +56,19 @@ def test_invalid_power_up_states___set_analog_power_up_states_with_output_type__
     assert exc_info.value.error_code == DAQmxErrors.INVALID_ATTRIBUTE_VALUE
 
 
+def test___get_analog_power_up_states___returns_power_up_states(system):
+    device_name = "aoTester"
+
+    power_up_states = system.get_analog_power_up_states(device_name)
+
+    channel_names = system.devices[device_name].ao_physical_chans.channel_names
+    assert len(power_up_states) == len(channel_names)
+    for i in range(len(channel_names)):
+        assert power_up_states[i].physical_channel == channel_names[i]
+        assert power_up_states[i].power_up_state == 0.0
+        assert power_up_states[i].channel_type == PowerUpChannelType.CHANNEL_HIGH_IMPEDANCE
+
+
 def test_valid_power_up_states___set_analog_power_up_states___sets_power_up_states_without_errors(
     system,
 ):
