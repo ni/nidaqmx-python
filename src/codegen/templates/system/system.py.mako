@@ -289,7 +289,7 @@ ${function_template.script_function(function_object)}
 
         return power_up_states
 
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use set_analog_power_up_states_with_output_type instead.")
+    @deprecation.deprecated(deprecated_in="0.8.0", details="Use set_analog_power_up_states_with_output_type instead.")
     def set_analog_power_up_states(self, device_name, power_up_states):
         """
         Updates power up states for analog physical channels.
@@ -351,7 +351,7 @@ ${function_template.script_function(function_object)}
 
         self._interpreter.set_analog_power_up_states_with_output_type(physical_channel, state, channel_type)
 
-    @deprecation.deprecated(deprecated_in="0.7.0", details="Use get_analog_power_up_states_with_output_type instead.")
+    @deprecation.deprecated(deprecated_in="0.8.0", details="Use get_analog_power_up_states_with_output_type instead.")
     def get_analog_power_up_states(self, device_name):
         """
         Gets the power up states for analog physical channels.
