@@ -200,6 +200,7 @@ def test___shared_interpreter___run_multiple_acquisitions_with_events___callback
         assert all(status == 0 for status in done_statuses)
 
 
+@pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.2 or later")
 def test___shared_interpreter___unregister_events_during_other_acquisitions_with_events___callbacks_invoked(
     init_kwargs,
     multi_threading_test_devices: Sequence[Device],
