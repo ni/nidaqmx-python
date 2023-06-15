@@ -130,7 +130,9 @@ class TestReadExceptions:
         number_of_samples_expected = clocks_to_give - samples_to_read
         assert timeout_exception.value.samps_per_chan_read == number_of_samples_expected
 
-    @pytest.mark.grpc_xfail(reason="AB#2420742: gRPC interpreter doesn't retain the initial array values when converting flattened array into numpy array.")
+    @pytest.mark.grpc_xfail(
+        reason="AB#2420742: gRPC interpreter doesn't retain the initial array values when converting flattened array into numpy array."
+    )
     def test_timeout_stream(self, generate_task, real_x_series_device):
         """Test for validating read timeout."""
         # USB streaming is very tricky.
