@@ -603,7 +603,7 @@ def get_samps_per_chan_read_param(func):
     output_parameters = get_output_params(func)
     for param in output_parameters:
         if param.parameter_name in READ_SAMPLES_PARAMETER_NAMES:
-            return camel_to_snake_case(param.parameter_name)
+            return param.parameter_name
     return None
 
 
