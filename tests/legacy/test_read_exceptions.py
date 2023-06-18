@@ -15,6 +15,7 @@ class TestReadExceptions:
     loopback routes on the device.
     """
 
+    @pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.2 or later")
     def test_timeout(self, generate_task, real_x_series_device):
         """Test for validating read timeout."""
         # USB streaming is very tricky.
@@ -71,6 +72,7 @@ class TestReadExceptions:
         number_of_samples_expected = clocks_to_give - samples_to_read
         assert timeout_exception.value.samps_per_chan_read == number_of_samples_expected
 
+    @pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.2 or later")
     def test_timeout_raw(self, generate_task, real_x_series_device):
         """Test for validating read timeout."""
         # USB streaming is very tricky.
