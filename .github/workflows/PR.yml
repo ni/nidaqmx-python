@@ -79,3 +79,29 @@ jobs:
           poetry install
       - name: Generate docs
         run: poetry run tox -e docs
+
+  run-system-tests-python-32bit:
+    runs-on:
+      - self-hosted
+      - windows
+      - x64
+      - rdss-nidaqmxbot-win-10-py32
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: poetry install
+      - name: Run system tests
+        run: poetry run tox
+
+  run-system-tests-python-64bit:
+    runs-on:
+      - self-hosted
+      - windows
+      - x64
+      - rdss-nidaqmxbot-win-10-py64
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: poetry install
+      - name: Run system tests
+        run: poetry run tox
