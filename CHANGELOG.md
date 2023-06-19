@@ -1,5 +1,6 @@
 # Changelog
 
+* [0.7.2](#072)
 * [0.7.1](#071)
 * [0.7.0](#070)
 * [0.6.5](#065)
@@ -18,6 +19,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.7.2
+
+* ### Merged Pull Requests
+    * [Query: Closed PRs with the label: interpreter_implementation](https://github.com/ni/nidaqmx-python/issues?q=label%3Ainterpreter_implementation+is%3Aclosed)
+    * [Query: Closed PRs with the label: library_interpreter](https://github.com/ni/nidaqmx-python/issues?q=label%3Alibrary_interpreter+is%3Aclosed)
+    * [Query: Closed PRs with the label: grpc_interpreter](https://github.com/ni/nidaqmx-python/issues?q=label%3Alibrary_interpreter+is%3Aclosed)
+    * [Query: Closed PRs with the label: test_improvements to increase the test coverage](https://github.com/ni/nidaqmx-python/issues?q=label%3Atest_improvements+is%3Aclosed)
+    * [Query: Closed PRs with the label: interpreter_fixes to fix all the issues in the interpreters](https://github.com/ni/nidaqmx-python/issues?q=label%3Ainterpreter_fixes+is%3Aclosed)
+    * [Query: Closed PRs with the label: interpreter_testcase_update to make the existing test cases run with both the interpreter](https://github.com/ni/nidaqmx-python/issues?q=label%3Ainterpreter_testcase_updates+is%3Aclosed)
+    * [Query: Closed PRs with the label: event_handling that takes care of the event handling in the interpreters](https://github.com/ni/nidaqmx-python/issues?q=label%3Aevent_handling+is%3Aclosed)
+* ### Resolved Issues
+    * ...
+* ### Major Changes
+    * Introduced library and gRPC intepreters to communicate with the device, either directly or through gRPC respectively.
+    * The `library_interpreter` will contain all the c level implementation of various functions that can be used to directly communicate with the instrument
+    * For the implemenation of `grpc_interpreter` the following changes have been made:
+        * Added a stub generator which will generate the stubs based on the proto files present in `src/codegen/protos`
+        and the files will be generate into `generator/nidaqmx/_stubs`.
+        * Updated the existing generator to generate the `grpc_interpreter` based on the metadata provided.
+        * Created `grpc_session_options` which defines the necessary information that is required to communicate via gRPC.
+    * Updated task, system and scale objects to taken in `grpc_session_options` as an optional parameter and based on this  information, the interpreter to be used will be decided.
+    * Updated the existing tests to run using both `library_interpreter` and `grpc_interpreter`.
+    * Added multiple new test cases to improve the test coverage.
 ## 0.7.1
 
 * ### Merged Pull Requests
