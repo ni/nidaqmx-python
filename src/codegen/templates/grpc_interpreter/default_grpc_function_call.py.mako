@@ -13,6 +13,7 @@
         get_read_array_parameters,
         is_custom_read_write_function,
         is_event_unregister_function,
+        get_samps_per_chan_read_param,
     )
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
     from codegen.utilities.text_wrappers import wrap
@@ -59,7 +60,11 @@
     %endif
 %endif
 %if is_read_method:
+    <%
+        samps_per_chan_param = get_samps_per_chan_read_param(function)
+    %>
     %for param in get_read_array_parameters(function):
         _assign_numpy_array(${param}, response.${param})
     %endfor
+        self._check_for_error_from_response(response.status, samps_per_chan_read=response.${samps_per_chan_param})
 %endif

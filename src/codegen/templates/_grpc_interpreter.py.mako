@@ -32,6 +32,7 @@ from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._stubs import nidaqmx_pb2 as grpc_types
 from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
 from nidaqmx._stubs import session_pb2 as session_grpc_types
+from nidaqmx.error_codes import DAQmxErrors
 
 _logger = logging.getLogger(__name__)
 
@@ -143,6 +144,14 @@ class GrpcStubInterpreter(BaseInterpreter):
         else:
             self._raise_error(error_code, error_message, samps_per_chan_written, samps_per_chan_read)
 
+    def _check_for_error_from_response(self, error_code, samps_per_chan_written=None, samps_per_chan_read=None):
+        if error_code != 0:
+            # This is an optimization for the partial read operation.
+            error_message = _ERROR_MESSAGES.get(error_code, None)
+            if not error_message:
+                error_message = self.get_error_string(error_code)
+            self._raise_error(error_code, error_message, samps_per_chan_written=samps_per_chan_written, samps_per_chan_read=samps_per_chan_read)
+
     def _raise_error(self, error_code, error_message, samps_per_chan_written=None, samps_per_chan_read=None):
         if error_code < 0:
             if samps_per_chan_read is not None:
@@ -237,3 +246,7 @@ def _is_cancelled(ex: Exception) -> bool:
         (isinstance(ex, grpc.RpcError) and ex.code() == grpc.StatusCode.CANCELLED)
         or (isinstance(ex, errors.RpcError) and ex.rpc_code == grpc.StatusCode.CANCELLED)
     )
+
+_ERROR_MESSAGES = {
+    DAQmxErrors.SAMPLES_NOT_YET_AVAILABLE: 'Some or all of the samples requested have not yet been acquired.\nTo wait for the samples to become available use a longer read timeout or read later in your program. To make the samples available sooner, increase the sample rate. If your task uses a start trigger,  make sure that your start trigger is configured correctly. It is also possible that you configured the task for external timing, and no clock was supplied. If this is the case, supply an external clock.'
+}
