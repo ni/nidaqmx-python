@@ -6,10 +6,12 @@ from nidaqmx.error_codes import DAQmxErrors
 
 def get_error_messages():
     try:
-        from nidaqmx._grpc_interpreter import _ERROR_MESSAGE
+        from nidaqmx._grpc_interpreter import _ERROR_MESSAGES
+
+        error_messages = _ERROR_MESSAGES
     except ImportError:
-        _ = {}
-    return _ERROR_MESSAGE
+        error_messages = {}
+    return error_messages
 
 
 def test___known_error_code___get_error_string___returns_known_error_message(
