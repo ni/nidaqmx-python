@@ -79,3 +79,6 @@ jobs:
           poetry install
       - name: Generate docs
         run: poetry run tox -e docs
+  run_system_tests:
+    - uses: ./.github/workflows/run_system_tests.yml
+    - needs: [build, run-unit-tests]
