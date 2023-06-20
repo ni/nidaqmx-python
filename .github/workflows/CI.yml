@@ -1,0 +1,16 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - 'releases/**'
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+  run_unit_tests:
+    uses: ./.github/workflows/run_unit_tests.yml
+    needs: [build]
+  generate_docs:
+    uses: ./.github/workflows/generate_docs.yml
+    needs: [build]

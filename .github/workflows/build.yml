@@ -1,0 +1,33 @@
+name: build
+
+on:
+  workflow_call:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: 
+      - ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          # The codegen scripts require Python 3.8 or later.
+          python-version: "3.8"
+      - uses: Gr1N/setup-poetry@v8
+        with:
+          poetry-version: "1.4.0"
+      - run: poetry --version
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          poetry install
+      - name: Run linters
+        run: |
+          poetry run ni-python-styleguide lint
+      - name: Generate ni-daqmx files
+        run: |
+          rm -fr generated/nidaqmx
+          poetry run python src/codegen --dest generated/nidaqmx
+      - name: Check for files dirtied by codegen
+        run: git diff --exit-code
