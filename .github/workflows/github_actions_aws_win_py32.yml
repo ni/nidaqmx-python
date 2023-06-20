@@ -9,7 +9,7 @@ jobs:
     runs-on:
       - self-hosted
       - windows
-      - x86
+      - x64
       - rdss-nidaqmxbot-win-10-py32
     timeout-minutes: 80
     steps:
