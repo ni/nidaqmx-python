@@ -4,7 +4,7 @@ on:
   workflow_call:
   workflow_dispatch:
 
-jobs:   
+jobs:
   run_system_tests:
     name: Run system tests
     runs-on:
@@ -14,10 +14,10 @@ jobs:
     strategy:
       matrix:
         configuration: [win-10-py32, win-10-py64]
-      steps:
-        - name: checkout repository
-          uses: actions/checkout@v3
-        - name: Install dependencies
-          run: poetry install
-        - name: Run system tests
-          run: poetry run tox
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: poetry install
+      - name: Run system tests
+        run: poetry run tox
