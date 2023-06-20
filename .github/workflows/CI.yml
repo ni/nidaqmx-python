@@ -5,6 +5,8 @@ on:
     branches:
       - master
       - 'releases/**'
+  workflow_call:
+  workflow_dispatch:
 jobs:
   build:
     uses: ./.github/workflows/build.yml
