@@ -1,22 +1,26 @@
-name: generate_docs
+name: Generate docs
 
 on:
   workflow_call:
   workflow_dispatch:
 jobs:
   generate_docs:
+    name: Generate docs
     runs-on:
       - ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out repo
+        uses: actions/checkout@v3
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.9"
-      - uses: Gr1N/setup-poetry@v8
+      - name: Set up Poetry
+        uses: Gr1N/setup-poetry@v8
         with:
           poetry-version: "1.4.0"
-      - run: poetry --version
+      - name: Check Poetry version
+        run: poetry --version
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
