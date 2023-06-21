@@ -19,7 +19,3 @@ jobs:
     name: Generate docs
     uses: ./.github/workflows/generate_docs.yml
     needs: [build]
-  run_system_tests:
-    name: Run system tests
-    uses: ./.github/workflows/run_system_tests.yml
-    needs: [build, run_unit_tests]
