@@ -3,15 +3,10 @@ import pytest
 from nidaqmx._base_interpreter import BaseInterpreter
 from nidaqmx.error_codes import DAQmxErrors
 
-
-def get_error_messages():
-    try:
-        from nidaqmx._grpc_interpreter import _ERROR_MESSAGES
-
-        error_messages = _ERROR_MESSAGES
-    except ImportError:
-        error_messages = {}
-    return error_messages
+try:
+    from nidaqmx._grpc_interpreter import _ERROR_MESSAGES
+except ImportError:
+    _ERROR_MESSAGES = {}
 
 
 def test___known_error_code___get_error_string___returns_known_error_message(
@@ -40,12 +35,11 @@ def test___grpc_channel_with_errors___get_error_string___returns_failed_to_retri
     assert error_message.startswith("Failed to retrieve error description.")
 
 
-@pytest.mark.parametrize("error_code", list(get_error_messages()))
+@pytest.mark.parametrize("error_code", list(_ERROR_MESSAGES))
 def test___known_error_codes___get_error_string_with_error_code___returns_matching_error_message(
     grpc_init_kwargs, error_code: int
 ):
     from nidaqmx._grpc_interpreter import GrpcStubInterpreter
-    from nidaqmx._grpc_interpreter import _ERROR_MESSAGES
 
     interpreter = GrpcStubInterpreter(**grpc_init_kwargs)
     expected_error_message = _ERROR_MESSAGES[error_code]
