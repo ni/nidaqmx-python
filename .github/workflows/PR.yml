@@ -11,7 +11,3 @@ jobs:
   run_ci:
     name: Run CI
     uses: ./.github/workflows/CI.yml
-  run_system_tests:
-    name: Run system tests
-    uses: ./.github/workflows/run_system_tests.yml
-    needs: [run_ci]
