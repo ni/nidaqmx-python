@@ -1,7 +1,6 @@
 # Changelog
-
-* [0.7.2](#072)
-* [0.7.1](#071)
+* [0.8.1](#081)
+* [0.8.0](#080)
 * [0.7.0](#070)
 * [0.6.5](#065)
 * [0.6.4](#064)
@@ -19,7 +18,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## 0.7.2
+## 0.8.1
+
+* ### Merged Pull Requests
+    * ...
+* ### Resolved Issues
+    * ...
+* ### Major Changes
+    * The signature of the collection classes' __init__ methods have been changed and any code that constructs these objects directly should be updated to get them from the appropriate object (e.g. System.devices, Task.channels)
+
+## 0.8.0
 
 * ### Merged Pull Requests
     * [Query: Closed PRs with the label: interpreter_implementation](https://github.com/ni/nidaqmx-python/issues?q=label%3Ainterpreter_implementation+is%3Aclosed)
@@ -32,24 +40,18 @@ All notable changes to this project will be documented in this file.
 * ### Resolved Issues
     * ...
 * ### Major Changes
-    * Introduced library and gRPC intepreters to communicate with the device, either directly or through gRPC respectively.
-    * The `library_interpreter` will contain all the c level implementation of various functions that can be used to directly communicate with the instrument
-    * For the implemenation of `grpc_interpreter` the following changes have been made:
-        * Added a stub generator which will generate the stubs based on the proto files present in `src/codegen/protos`
+    * Added support to communicate with the DAQmx devices through gRPC.
+    * For communicating with the device through gRPC, the following changes have been made:
+        * Added a stub generator which will generate the gRPC stub files based on the proto files present in `src/codegen/protos`
         and the files will be generate into `generator/nidaqmx/_stubs`.
-        * Updated the existing generator to generate the `grpc_interpreter` based on the metadata provided.
+        * Updated the existing generator to generate the `grpc_interpreter` based on the metadata provided, this will implement all the necessary methods using the gRPC stubs.
         * Created `grpc_session_options` which defines the necessary information that is required to communicate via gRPC.
-    * Updated task, system and scale objects to taken in `grpc_session_options` as an optional parameter and based on this  information, the interpreter to be used will be decided.
-    * Updated the existing tests to run using both `library_interpreter` and `grpc_interpreter`.
+    * Updated task, system and scale objects to taken in `grpc_session_options` as an optional parameter and based on this information, the interpreter to be used will be decided.
+    * Updated the existing tests to run with and without gRPC support.
     * Added multiple new test cases to improve the test coverage.
-## 0.7.1
-
-* ### Merged Pull Requests
-    * ...
-* ### Resolved Issues
-    * ...
-* ### Major Changes
-    * The signature of the collection classes' __init__ methods have been changed and any code that constructs these objects directly should be updated to get them from the appropriate object (e.g. System.devices, Task.channels)
+    * Currently, the behavior of all the operations will be similar when communicating with and without gRPC with the following exceptions:
+        * When reading values from a `read_stream`, the initial values sent by the user will not retained in the read array. Based on the number of samples read, the unread samples will be set to default value of the datatype specified.
+    * In order to make the behavior of each opration similar when communicating with the device with or without gRPC, the grpc device server has been updated with the appropriate changes. In order for these fixes to work, gRPC device version of 2.2 or higher has to be used.
 
 ## 0.7.0
 
