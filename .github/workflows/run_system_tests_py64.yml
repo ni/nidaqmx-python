@@ -3,17 +3,11 @@ name: run_system_tests
 on:
   workflow_call:
   workflow_dispatch:
-
 jobs:
   run_system_tests:
-    inputs:
-      configuration:
-        description: "configuration"
-        required: true
-        default: ""
     runs-on:
       - self-hosted
-      - rdss-nidaqmxbot-${{ inputs.configuration }}
+      - rdss-nidaqmxbot-win-10-py64
     timeout-minutes: 80
     steps:
       - name: checkout repository

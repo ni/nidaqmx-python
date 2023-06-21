@@ -1,0 +1,18 @@
+name: run_system_tests
+
+on:
+  workflow_call:
+  workflow_dispatch:
+jobs:
+  run_system_tests:
+    runs-on:
+      - self-hosted
+      - rdss-nidaqmxbot-win-10-py32
+    timeout-minutes: 80
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: poetry install
+      - name: Run system tests
+        run: poetry run tox
