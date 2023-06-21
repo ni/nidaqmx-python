@@ -1,4 +1,4 @@
-name: run_system_tests
+name: Run system tests
 
 on:
   workflow_call:
