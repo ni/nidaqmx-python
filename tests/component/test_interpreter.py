@@ -1,10 +1,10 @@
 import pytest
 
 from nidaqmx._base_interpreter import BaseInterpreter
-from nidaqmx._grpc_interpreter import GrpcStubInterpreter
 from nidaqmx.error_codes import DAQmxErrors
 
 try:
+    from nidaqmx._grpc_interpreter import GrpcStubInterpreter
     from nidaqmx._grpc_interpreter import _ERROR_MESSAGES
 except ImportError:
     _ERROR_MESSAGES = {}
