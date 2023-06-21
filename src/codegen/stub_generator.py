@@ -45,6 +45,7 @@ def generate_python_files(
         f"--python_out={str(stubs_path)}",
         f"--mypy_out={str(stubs_path)}",
         f"--grpc_python_out={str(stubs_path)}",
+        f"--mypy_grpc_out={str(stubs_path)}",
     ]
     arguments += [str(path.relative_to(proto_path)).replace("\\", "/") for path in proto_files]
 
