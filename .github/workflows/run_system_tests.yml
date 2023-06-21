@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 jobs:
   run_system_tests:
-  name: Run system tests
+    name: Run system tests
     runs-on:
       - self-hosted
       - rdss-nidaqmxbot-${{ matrix.configuration }}
