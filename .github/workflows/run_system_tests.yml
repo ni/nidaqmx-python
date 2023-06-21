@@ -7,10 +7,7 @@ jobs:
   run_system_tests:
     runs-on:
       - self-hosted
-      - rdss-nidaqmxbot-${{ matrix.configuration }}
-    strategy:
-      matrix:
-        configuration: ["win-10-py32", "win-10-py64"]
+      - rdss-nidaqmxbot-win-10-py32
     timeout-minutes: 80
     steps:
       - name: checkout repository
