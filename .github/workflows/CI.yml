@@ -9,13 +9,17 @@ on:
   workflow_dispatch:
 jobs:
   build:
+    name: Build
     uses: ./.github/workflows/build.yml
   run_unit_tests:
+    name: Run unit tests
     uses: ./.github/workflows/run_unit_tests.yml
     needs: [build]
   generate_docs:
+    name: Generate docs
     uses: ./.github/workflows/generate_docs.yml
     needs: [build]
   run_system_tests:
+    name: Run system tests
     uses: ./.github/workflows/run_system_tests.yml
     needs: [build, run_unit_tests]
