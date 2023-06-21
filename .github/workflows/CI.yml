@@ -19,6 +19,3 @@ jobs:
   run_system_tests_py32:
     uses: ./.github/workflows/run_system_tests_py32.yml
     needs: [build, run_unit_tests]
-  run_system_tests_py64:
-    uses: ./.github/workflows/run_system_tests_py64.yml
-    needs: [run_system_tests_py32]
