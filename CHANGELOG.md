@@ -39,7 +39,7 @@ All notable changes to this project will be documented in this file.
     * [Query: Closed PRs with the label: event_handling that takes care of the event handling in the interpreters](https://github.com/ni/nidaqmx-python/issues?q=label%3Aevent_handling+is%3Aclosed)
 
 * ### Major Changes
-    * Added support for communicating with DAQmx devices through gRPC using [NI gRPC Device Server](https://github.com/ni/grpc-device).
+    * Added support for communicating with DAQmx devices through gRPC using [NI gRPC Device Server](https://github.com/ni/grpc-device). This enables the users to use DAQmx session drivers with measurement link session manager.
     * For communicating with the device through gRPC, the following changes have been made:
         * Added a stub generator which will generate the gRPC stub files based on the proto files present in `src/codegen/protos`. The files will be generated into `generator/nidaqmx/_stubs`.
         * The initialization methods for `Task`, `Scale`, and other classes now accept a keyword-only `grpc_options` parameter. Pass a `GrpcSessionsOptions` object to enable gRPC support.
