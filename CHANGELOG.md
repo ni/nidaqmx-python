@@ -37,21 +37,26 @@ All notable changes to this project will be documented in this file.
     * [Query: Closed PRs with the label: interpreter_fixes to fix all the issues in the interpreters](https://github.com/ni/nidaqmx-python/issues?q=label%3Ainterpreter_fixes+is%3Aclosed)
     * [Query: Closed PRs with the label: interpreter_testcase_update to make the existing test cases run with both the interpreter](https://github.com/ni/nidaqmx-python/issues?q=label%3Ainterpreter_testcase_updates+is%3Aclosed)
     * [Query: Closed PRs with the label: event_handling that takes care of the event handling in the interpreters](https://github.com/ni/nidaqmx-python/issues?q=label%3Aevent_handling+is%3Aclosed)
-* ### Resolved Issues
-    * ...
+
 * ### Major Changes
-    * Added support to communicate with the DAQmx devices through gRPC.
+    * Added support for communicating with DAQmx devices through gRPC using [NI gRPC Device Server](https://github.com/ni/grpc-device).
     * For communicating with the device through gRPC, the following changes have been made:
-        * Added a stub generator which will generate the gRPC stub files based on the proto files present in `src/codegen/protos`
-        and the files will be generate into `generator/nidaqmx/_stubs`.
-        * Updated the existing generator to generate the `grpc_interpreter` based on the metadata provided, this will implement all the necessary methods using the gRPC stubs.
-        * Created `grpc_session_options` which defines the necessary information that is required to communicate via gRPC.
-    * Updated task, system and scale objects to taken in `grpc_session_options` as an optional parameter and based on this information, the interpreter to be used will be decided.
+        * Added a stub generator which will generate the gRPC stub files based on the proto files present in `src/codegen/protos`. The files will be generated into `generator/nidaqmx/_stubs`.
+        * The initialization methods for `Task`, `Scale`, and other classes now accept a keyword-only `grpc_options` parameter. Pass a `GrpcSessionsOptions` object to enable gRPC support.
+        * The `System` class now has a `remote()` method which accepts a `GrpcSessionOptions` object.
+        * The internals of the `nidaqmx` package have been refactored to support this change:
+            * Access to the DAQmx driver is now handled by the internal `BaseInterpreter` abstract base class. There are separate implementations of this abstract base class for `ctypes` vs. gRPC.
+            * The internal `nidaqmx._task_modules.read_functions` and `nidaqmx._task_modules.write_functions` modules have been removed. If your application uses these modules, you must update it to use public APIs such as `task.read()`/`task.write()`, `task.in_stream.read()`/`task.out_stream.write()`, or `nidaqmx.stream_readers`/`nidaqmx.stream_writers`.
+        * The following functions have been deprecated as they have been either migrated to a different module or the support has been terminated. These functions are still usable, but will emit a `DeprecationWarning` on usage:
+            * `check_for_error`, `is_string_buffer_too_small`, `is_array_buffer_too_small` in `errors.py`
+            * `set_analog_power_up_states` and `get_analog_power_up_states` in `system.py`.
     * Updated the existing tests to run with and without gRPC support.
-    * Added multiple new test cases to improve the test coverage.
-    * Currently, the behavior of all the operations will be similar when communicating with and without gRPC with the following exceptions:
-        * When reading values from a `read_stream`, the initial values sent by the user will not retained in the read array. Based on the number of samples read, the unread samples will be set to default value of the datatype specified.
-    * In order to make the behavior of each opration similar when communicating with the device with or without gRPC, the grpc device server has been updated with the appropriate changes. In order for these fixes to work, gRPC device version of 2.2 or higher has to be used.
+    * Added multiple test cases to improve the overall test coverage.
+    * [NI gRPC Device Server](https://github.com/ni/grpc-device) version 2.2 or later is required. Older versions of NI gRPC Device Server are unsupported because they are missing the bug fixes needed to support nidaqmx-python.
+
+* ### Known Issues
+   * When reading an array of values from any `ReadStream`, the initial array values sent by the user will not be retained. Based on the number of samples read, the unread samples will be set to the default value of the datatype specified.
+   * When comparing multiple DAQmx objects (like task, device,etc..) which are created using gRPC with one another, the comparison will be improper. 
 
 ## 0.7.0
 
