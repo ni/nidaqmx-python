@@ -23,7 +23,7 @@ All notable changes to this project will be documented in this file.
     * [Full changelog: 0.7.0...0.8.0](https://github.com/ni/nidaqmx-python/compare/0.7.0...0.8.0)
     * [Query: Closed PRs with the label: interpreter_implementation](https://github.com/ni/nidaqmx-python/pulls?q=label%3Ainterpreter_implementation+is%3Aclosed)
     * [Query: Closed PRs with the label: library_interpreter](https://github.com/ni/nidaqmx-python/pulls?q=label%3Alibrary_interpreter+is%3Aclosed)
-    * [Query: Closed PRs with the label: grpc_interpreter](https://github.com/ni/nidaqmx-python/pulls?q=label%3Alibrary_interpreter+is%3Aclosed)
+    * [Query: Closed PRs with the label: grpc_interpreter](https://github.com/ni/nidaqmx-python/pulls?q=label%3Agrpc_interpreter+is%3Aclosed)
     * [Query: Closed PRs with the label: test_improvements](https://github.com/ni/nidaqmx-python/pulls?q=label%3Atest_improvements+is%3Aclosed)
     * [Query: Closed PRs with the label: interpreter_fixes](https://github.com/ni/nidaqmx-python/pulls?q=label%3Ainterpreter_fixes+is%3Aclosed)
     * [Query: Closed PRs with the label: interpreter_testcase_update](https://github.com/ni/nidaqmx-python/pulls?q=label%3Ainterpreter_testcase_updates+is%3Aclosed)
