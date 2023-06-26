@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         configuration: ["win-10-py32", "win-10-py64"]
-    timeout-minutes: 80
+    timeout-minutes: 90
     steps:
       - name: Check out repo
         uses: actions/checkout@v3
