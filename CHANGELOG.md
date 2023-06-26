@@ -33,13 +33,13 @@ All notable changes to this project will be documented in this file.
     * Added support for communicating with DAQmx devices through gRPC using [NI gRPC Device Server](https://github.com/ni/grpc-device). This enables using DAQmx with the MeasurementLink session management service.
         * The initialization methods for `Task`, `Scale`, and other classes now accept a keyword-only `grpc_options` parameter. Pass a `GrpcSessionsOptions` object to enable gRPC support.
         * The `System` class now has a `remote()` method which accepts a `GrpcSessionOptions` object.
-        * The signature of the collection classes' __init__ methods have been changed and any code that constructs these objects directly should be updated to get them from the appropriate object (e.g. System.devices, Task.channels)
         * [NI gRPC Device Server](https://github.com/ni/grpc-device) version 2.2 or later is required. Older versions of NI gRPC Device Server are unsupported because they are missing bug fixes needed to support nidaqmx-python.
     * The following functions now emit `DeprecationWarning` when called:
         * `nidaqmx.errors` module: `check_for_error`, `is_string_buffer_too_small`, and `is_array_buffer_too_small` are `ctypes`-specific helper functions, so they have been moved to an internal module.
         * `System` class: `set_analog_power_up_states` does not support `PowerUpStates.TRISTATE` and `get_analog_power_up_states` has design issues that make the previous implementation unworkable, so they have been deprecated in favor of `set_analog_power_up_states_with_output_type` and `get_analog_power_up_states_with_output_type`.
     * The internals of the `nidaqmx` package have been refactored to support gRPC:
         * Access to the DAQmx driver is now handled by the internal `BaseInterpreter` abstract base class. There are separate implementations of this abstract base class for `ctypes` vs. gRPC.
+        * Internal initialization methods now accept an `interpreter` parameter. Methods that take an `interpreter` are not part of the public API.
         * Added a stub generator which will generate the gRPC stub files based on the proto files present in `src/codegen/protos`. The files will be generated into `generator/nidaqmx/_stubs`.
         * The internal `nidaqmx._task_modules.read_functions` and `nidaqmx._task_modules.write_functions` modules have been removed. If your application uses these modules, you must update it to use public APIs such as `task.read()`/`task.write()`, `task.in_stream.read()`/`task.out_stream.write()`, or `nidaqmx.stream_readers`/`nidaqmx.stream_writers`.
         * Updated the existing tests to run with and without gRPC support.
