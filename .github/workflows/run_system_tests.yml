@@ -1,0 +1,24 @@
+name: Run system tests
+
+on:
+  workflow_call:
+  workflow_dispatch:
+jobs:
+  run_system_tests:
+    name: Run system tests
+    runs-on:
+      - self-hosted
+      - windows
+      - x64
+      - rdss-nidaqmxbot-${{ matrix.configuration }}
+    strategy:
+      matrix:
+        configuration: ["win-10-py32", "win-10-py64"]
+    timeout-minutes: 90
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: poetry install
+      - name: Run system tests
+        run: poetry run tox
