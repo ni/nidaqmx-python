@@ -1,0 +1,23 @@
+name: Report test results
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  report_test_results:
+    name: Report test results
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download test results
+        uses: actions/download-artifact@v3
+        with:
+          name: test_results
+          path: test_results
+      - name: List downloaded files
+        run: ls -lR
+      - name: Report test summary
+        uses: test-summary/action@v2
+        with:
+          paths: "test_results/*.xml"
+          show: "fail, skip"

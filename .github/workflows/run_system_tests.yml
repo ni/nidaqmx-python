@@ -22,8 +22,15 @@ jobs:
         run: poetry install
       - name: Run system tests
         run: poetry run tox
-      - name: Report test summary
-        uses: test-summary/action@v2
+      - name: Rename test results
+        run: |
+          for result in test_results/*.xml; do
+            mv $result ${result%.xml}_${{ matrix.configuration }}.xml
+          done
+        if: always()
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
         with:
-          paths: "pytests-py*.xml"
+          name: test_results
+          path: test_results/*.xml
         if: always()

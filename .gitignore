@@ -3,7 +3,7 @@ __pycache__/
 
 # Unit tests
 .tox/
-pytests-py*.xml
+test_results/
 
 # Coverage output
 .coverage

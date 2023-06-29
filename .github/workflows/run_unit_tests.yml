@@ -30,9 +30,10 @@ jobs:
           python -m pip install --upgrade pip
           poetry install
       - name: Run unit tests
-        run: poetry run pytest -v --cov=generated/nidaqmx --junitxml=pytests-py${{ matrix.python-version }}.xml tests/unit
-      - name: Report test summary
-        uses: test-summary/action@v2
+        run: poetry run pytest -v --cov=generated/nidaqmx --junitxml=test_results/unit_${{ matrix.os }}_py${{ matrix.python-version }}.xml tests/unit
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
         with:
-          paths: "pytests-py*.xml"
+          name: test_results
+          path: test_results/*.xml
         if: always()
