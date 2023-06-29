@@ -18,7 +18,6 @@
 All notable changes to this project will be documented in this file.
 
 ## 0.8.0
-.
 
 * ### Merged Pull Requests
     * [Full changelog: 0.7.0...0.8.0](https://github.com/ni/nidaqmx-python/compare/0.7.0...0.8.0)
