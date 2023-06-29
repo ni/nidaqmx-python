@@ -8,6 +8,8 @@ jobs:
     name: Run system tests
     runs-on:
       - self-hosted
+      - windows
+      - x64
       - rdss-nidaqmxbot-${{ matrix.configuration }}
     strategy:
       matrix:
