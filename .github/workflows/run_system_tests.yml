@@ -27,6 +27,7 @@ jobs:
           for result in test_results/*.xml; do
             mv $result ${result%.xml}_${{ matrix.configuration }}.xml
           done
+        shell: bash
         if: always()
       - name: Upload test results
         uses: actions/upload-artifact@v3
