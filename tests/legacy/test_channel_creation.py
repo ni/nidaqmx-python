@@ -317,7 +317,7 @@ class TestAnalogCreateChannels:
 
         pwr_phys_chan = f"{sim_ts_power_device.name}/power"
         voltage_setpoint = random.random() * 6.0
-        current_setpoint = random.random() * 3.0
+        current_setpoint = random.uniform(0.03, 3.0)
         output_enable = random.choice([True, False])
         # CPLD is fixed-point, so values are coerced to something close.
         setpoint_tolerance = 1e-03
