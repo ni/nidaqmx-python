@@ -22,3 +22,8 @@ jobs:
         run: poetry install
       - name: Run system tests
         run: poetry run tox
+      - name: Report test summary
+        uses: test-summary/action@v2
+        with:
+          paths: "pytests-py*.xml"
+        if: always()

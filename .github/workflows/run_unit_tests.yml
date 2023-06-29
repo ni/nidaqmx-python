@@ -30,4 +30,9 @@ jobs:
           python -m pip install --upgrade pip
           poetry install
       - name: Run unit tests
-        run: poetry run pytest -v --cov=generated/nidaqmx tests/unit
+        run: poetry run pytest -v --cov=generated/nidaqmx --junitxml=pytests-py${{ matrix.python-version }}.xml tests/unit
+      - name: Report test summary
+        uses: test-summary/action@v2
+        with:
+          paths: "pytests-py*.xml"
+        if: always()
