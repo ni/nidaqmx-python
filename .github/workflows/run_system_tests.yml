@@ -25,7 +25,7 @@ jobs:
       - name: Rename test results
         run: |
           for result in test_results/*.xml; do
-            mv $result ${result%.xml}_${{ matrix.configuration }}.xml
+            mv $result ${result%.xml}-${{ matrix.configuration }}.xml
           done
         shell: bash
         if: always()
