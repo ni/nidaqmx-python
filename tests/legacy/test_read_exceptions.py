@@ -219,7 +219,7 @@ class TestReadExceptions:
         number_of_samples_read = timeout_exception.value.samps_per_chan_read
         assert number_of_samples_read == number_of_samples_expected
 
-        # DAQmx overwrites first channel array slices with other channel data as mentioned in #2420742
+        # DAQmx overwrites first channel array slices with other channel data as in AB#2420742
         # Hence resize of the data is needed to extract each data correctly
         resized_data = numpy.resize(data, (number_of_channels, number_of_samples_read))
         for i in range(number_of_channels):
