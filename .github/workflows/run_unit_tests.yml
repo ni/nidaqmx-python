@@ -12,6 +12,9 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+      # Fail-fast skews the pass/fail ratio and seems to make pytest produce
+      # incomplete JUnit XML results.
+      fail-fast: false
     steps:
       - name: Check out repo
         uses: actions/checkout@v3
@@ -30,4 +33,10 @@ jobs:
           python -m pip install --upgrade pip
           poetry install
       - name: Run unit tests
-        run: poetry run pytest -v --cov=generated/nidaqmx tests/unit
+        run: poetry run pytest -v --cov=generated/nidaqmx --junitxml=test_results/unit-${{ matrix.os }}-py${{ matrix.python-version }}.xml tests/unit
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test_results
+          path: test_results/*.xml
+        if: always()

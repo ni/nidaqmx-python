@@ -14,6 +14,9 @@ jobs:
     strategy:
       matrix:
         configuration: ["win-10-py32", "win-10-py64"]
+      # Fail-fast skews the pass/fail ratio and seems to make pytest produce
+      # incomplete JUnit XML results.
+      fail-fast: false
     timeout-minutes: 90
     steps:
       - name: Check out repo
@@ -22,3 +25,19 @@ jobs:
         run: poetry install
       - name: Run system tests
         run: poetry run tox
+      - name: Rename test results
+        # TODO: Add Git Bash to the path on self-hosted Windows runners
+        run: Get-ChildItem test_results/*.xml | Rename-Item -NewName { $_.Name -replace '.xml','-${{ matrix.configuration }}.xml' }
+        if: always() && runner.os == 'Windows'
+      - name: Rename test results
+        run: |
+          for result in test_results/*.xml; do
+            mv $result ${result%.xml}-${{ matrix.configuration }}.xml
+          done
+        if: always() && runner.os != 'Windows'
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test_results
+          path: test_results/*.xml
+        if: always()
