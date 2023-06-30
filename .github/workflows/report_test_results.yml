@@ -4,11 +4,17 @@ on:
   workflow_call:
   workflow_dispatch:
 
+permissions:
+  checks: write
+  pull-requests: write
+
 jobs:
   report_test_results:
     name: Report test results
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
       - name: Download test results
         uses: actions/download-artifact@v3
         with:
@@ -16,8 +22,7 @@ jobs:
           path: test_results
       - name: List downloaded files
         run: ls -lR
-      - name: Report test summary
-        uses: test-summary/action@v2
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action@v2
         with:
-          paths: "test_results/*.xml"
-          show: "fail, skip"
+          files: "test_results/*.xml"
