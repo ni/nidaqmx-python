@@ -14,6 +14,9 @@ jobs:
     strategy:
       matrix:
         configuration: ["win-10-py32", "win-10-py64"]
+      # Fail-fast skews the pass/fail ratio and seems to make pytest produce
+      # incomplete JUnit XML results.
+      fail-fast: false
     timeout-minutes: 90
     steps:
       - name: Check out repo
