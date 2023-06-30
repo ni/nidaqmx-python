@@ -137,9 +137,6 @@ class TestReadExceptions:
         number_of_samples_expected = clocks_to_give - samples_to_read
         assert timeout_exception.value.samps_per_chan_read == number_of_samples_expected
 
-    @pytest.mark.grpc_xfail(
-        reason="AB#2420742: gRPC interpreter doesn't retain the initial array values when converting flattened array into numpy array."
-    )
     def test_timeout_stream(self, generate_task, real_x_series_device):
         """Test for validating read timeout."""
         # USB streaming is very tricky.
@@ -149,14 +146,20 @@ class TestReadExceptions:
         ):
             pytest.skip("Requires a plugin device.")
 
+        number_of_channels = 4
         samples_to_read = 75
         clocks_to_give = 100
         sample_rate = 1000
-        # Choose a sentinel value that can't be returned by the read.
-        sentinel_value = -100.0
 
+        write_task = generate_task()
         read_task = generate_task()
         sample_clk_task = generate_task()
+
+        write_task.ao_channels.add_ao_voltage_chan(
+            f"{real_x_series_device.name}/ao0:{number_of_channels - 1}"
+        )
+        write_task.write([float(i + 1) for i in range(number_of_channels)], auto_start=True)
+
         # Use a counter output pulse train task as the sample clock source
         # for both the AI and AO tasks.
         sample_clk_task.co_channels.add_co_pulse_chan_freq(
@@ -170,13 +173,17 @@ class TestReadExceptions:
         samp_clk_terminal = f"/{real_x_series_device.name}/Ctr0InternalOutput"
 
         read_task.ai_channels.add_ai_voltage_chan(
-            real_x_series_device.ai_physical_chans[0].name, max_val=10, min_val=-10
+            ",".join(
+                f"{real_x_series_device.name}/_ao{i}_vs_aognd" for i in range(number_of_channels)
+            ),
+            max_val=10,
+            min_val=-10,
         )
         read_task.timing.cfg_samp_clk_timing(
-            sample_rate, source=samp_clk_terminal, sample_mode=AcquisitionType.CONTINUOUS
+            sample_rate, source=samp_clk_terminal, sample_mode=AcquisitionType.FINITE
         )
 
-        reader = nidaqmx.stream_readers.AnalogSingleChannelReader(read_task.in_stream)
+        reader = nidaqmx.stream_readers.AnalogMultiChannelReader(read_task.in_stream)
 
         # Start the read task before the clock.
         read_task.start()
@@ -190,16 +197,17 @@ class TestReadExceptions:
         read_task.in_stream.timeout = 2
 
         # Do a partial read which should succeed.
-        data = numpy.full(samples_to_read, sentinel_value, dtype=numpy.float64)
+        data = numpy.zeros((number_of_channels, samples_to_read), dtype=numpy.float64)
         num_values_read = reader.read_many_sample(
             data, number_of_samples_per_channel=samples_to_read, timeout=2.0
         )
+
         assert num_values_read == samples_to_read
         # All the data should have been overwritten.
-        assert not any(element == sentinel_value for element in data)
+        assert not any(element == 0 for element in data.reshape(data.size))
 
         # Now read more data than is available.
-        data = numpy.full(samples_to_read, sentinel_value, dtype=numpy.float64)
+        data = numpy.zeros((number_of_channels, samples_to_read), dtype=numpy.float64)
         with pytest.raises(nidaqmx.DaqReadError) as timeout_exception:
             num_values_read = reader.read_many_sample(
                 data, number_of_samples_per_channel=samples_to_read, timeout=2.0
@@ -208,8 +216,11 @@ class TestReadExceptions:
         assert timeout_exception.value.error_code == DAQmxErrors.SAMPLES_NOT_YET_AVAILABLE
         # We should have read a partial dataset.
         number_of_samples_expected = clocks_to_give - samples_to_read
-        assert timeout_exception.value.samps_per_chan_read == number_of_samples_expected
-        # The data that was succesfully read should have been overwritten.
-        assert not any(element == sentinel_value for element in data[:number_of_samples_expected])
-        # The data that wasn't read should have been unmodified.
-        assert all(element == sentinel_value for element in data[number_of_samples_expected:])
+        number_of_samples_read = timeout_exception.value.samps_per_chan_read
+        assert number_of_samples_read == number_of_samples_expected
+
+        # DAQmx overwrites first channel array slices with other channel data as mentioned in #2420742
+        # Hence resize of the data is needed to extract each data correctly
+        resized_data = numpy.resize(data, (number_of_channels, number_of_samples_read))
+        for i in range(number_of_channels):
+            assert all(i + 1 == round(element) for element in resized_data[i])
