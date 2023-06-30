@@ -26,12 +26,15 @@ jobs:
       - name: Run system tests
         run: poetry run tox
       - name: Rename test results
+        # TODO: Add Git Bash to the path on self-hosted Windows runners
+        run: Get-ChildItem test_results/*.xml | Rename-Item -NewName { $_.Name -replace '.xml','-${{ matrix.configuration }}.xml' }
+        if: always() && runner.os == 'Windows'
+      - name: Rename test results
         run: |
           for result in test_results/*.xml; do
             mv $result ${result%.xml}-${{ matrix.configuration }}.xml
           done
-        shell: bash
-        if: always()
+        if: always() && runner.os != 'Windows'
       - name: Upload test results
         uses: actions/upload-artifact@v3
         with:
