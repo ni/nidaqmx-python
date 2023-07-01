@@ -5,7 +5,7 @@ from enum import Enum
 # Constants
 AUTO = -1
 CFG_DEFAULT = -1
-DEFAULT = -1
+DEFAULT = -2
 READ_ALL_AVAILABLE = -1
 WAIT_INFINITELY = -1.0
 
