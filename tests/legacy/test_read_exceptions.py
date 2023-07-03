@@ -147,8 +147,10 @@ class TestReadExceptions:
             pytest.skip("Requires a plugin device.")
 
         if real_x_series_device.ai_simultaneous_sampling_supported:
-            pytest.skip("Requires device that do not have simultaneous sampling, since AO loopback have to be programmed differently.")
-        
+            pytest.skip(
+                "Requires device that do not have simultaneous sampling, since AO loopback have to be programmed differently."
+            )
+
         number_of_channels = len(real_x_series_device.ao_physical_chans)
 
         if not number_of_channels:
@@ -215,7 +217,7 @@ class TestReadExceptions:
         assert not any(element == 0 for element in data.reshape(data.size))
 
         for i in range(number_of_channels):
-            assert all(element == pytest.approx(data_to_write[i], abs=1e-2)  for element in data[i])
+            assert all(element == pytest.approx(data_to_write[i], abs=1e-2) for element in data[i])
 
         # Now read more data than is available.
         data = numpy.zeros((number_of_channels, samples_to_read), dtype=numpy.float64)
@@ -234,5 +236,6 @@ class TestReadExceptions:
         # Hence resize of the data is needed to extract each data correctly
         resized_data = numpy.resize(data, (number_of_channels, number_of_samples_read))
         for i in range(number_of_channels):
-            assert all(element == pytest.approx(data_to_write[i], abs=1e-2) for element in resized_data[i])
-
+            assert all(
+                element == pytest.approx(data_to_write[i], abs=1e-2) for element in resized_data[i]
+            )
