@@ -146,10 +146,18 @@ class TestReadExceptions:
         ):
             pytest.skip("Requires a plugin device.")
 
-        number_of_channels = 4
+        if real_x_series_device.ai_simultaneous_sampling_supported:
+            pytest.skip("Requires device that do not have simultaneous sampling, since AO loopback have to be programmed differently.")
+        
+        number_of_channels = len(real_x_series_device.ao_physical_chans)
+
+        if not number_of_channels:
+            pytest.skip("Requires AO channels in the device")
+
         samples_to_read = 75
         clocks_to_give = 100
         sample_rate = 1000
+        data_to_write = [float(i + 1) for i in range(number_of_channels)]
 
         write_task = generate_task()
         read_task = generate_task()
@@ -158,7 +166,7 @@ class TestReadExceptions:
         write_task.ao_channels.add_ao_voltage_chan(
             f"{real_x_series_device.name}/ao0:{number_of_channels - 1}"
         )
-        write_task.write([float(i + 1) for i in range(number_of_channels)], auto_start=True)
+        write_task.write(data_to_write, auto_start=True)
 
         # Use a counter output pulse train task as the sample clock source
         # for both the AI and AO tasks.
@@ -206,6 +214,9 @@ class TestReadExceptions:
         # All the data should have been overwritten.
         assert not any(element == 0 for element in data.reshape(data.size))
 
+        for i in range(number_of_channels):
+            assert all(element == pytest.approx(data_to_write[i], abs=1e-2)  for element in data[i])
+
         # Now read more data than is available.
         data = numpy.zeros((number_of_channels, samples_to_read), dtype=numpy.float64)
         with pytest.raises(nidaqmx.DaqReadError) as timeout_exception:
@@ -223,4 +234,5 @@ class TestReadExceptions:
         # Hence resize of the data is needed to extract each data correctly
         resized_data = numpy.resize(data, (number_of_channels, number_of_samples_read))
         for i in range(number_of_channels):
-            assert all(i + 1 == round(element) for element in resized_data[i])
+            assert all(element == pytest.approx(data_to_write[i], abs=1e-2) for element in resized_data[i])
+
