@@ -10,11 +10,30 @@ from nidaqmx.errors import Error
 
 
 class DaqNotFoundError(Error):
-    pass
+    def __init__(self):
+        super().__init__(
+            "Could not find an installation of NI-DAQmx. Please ensure that "
+            "NI-DAQmx is installed on this machine or contact National "
+            "Instruments for support."
+        )
+
+
+class DaqNotSupportedError(Error):
+    def __init__(self):
+        super().__init__(
+            "NI-DAQmx Python is not supported on this platform: "
+            f"{sys.platform}. Please direct any questions or feedback to "
+            "National Instruments."
+        )
 
 
 class DaqFunctionNotSupportedError(Error):
-    pass
+    def __init__(self, function_name):
+        super().__init__(
+            f'The NI-DAQmx function "{function_name}" is not supported in this '
+            "version of NI-DAQmx. Visit ni.com/downloads to upgrade your "
+            "version of NI-DAQmx."
+        )
 
 
 class InvalidHandleError(Error):
@@ -95,10 +114,7 @@ class DaqFunctionImporter:
                         cfunc.arglock = threading.Lock()
             return cfunc
         except AttributeError:
-            raise DaqFunctionNotSupportedError(
-                'The NI-DAQmx function "{}" is not supported in this '
-                'version of NI-DAQmx. Visit ni.com/downloads to upgrade your '
-                'version of NI-DAQmx.'.format(function))
+            raise DaqFunctionNotSupportedError(function)
 
 
 class DaqLibImporter:
@@ -146,29 +162,25 @@ class DaqLibImporter:
         windll = None
         cdll = None
 
-        if sys.platform.startswith('win') or sys.platform.startswith('cli'):
-            if 'iron' in platform.python_implementation().lower():
-                windll = ctypes.windll.nicaiu
-                cdll = ctypes.cdll.nicaiu
-            else:
-                windll = ctypes.windll.LoadLibrary('nicaiu')
-                cdll = ctypes.cdll.LoadLibrary('nicaiu')
-
+        if sys.platform.startswith('win'):
+            try:
+                if 'iron' in platform.python_implementation().lower():
+                    windll = ctypes.windll.nicaiu
+                    cdll = ctypes.cdll.nicaiu
+                else:
+                    windll = ctypes.windll.LoadLibrary('nicaiu')
+                    cdll = ctypes.cdll.LoadLibrary('nicaiu')
+            except (OSError, WindowsError):
+                raise DaqNotFoundError()
         elif sys.platform.startswith('linux'):
             # On linux you can use the command find_library('nidaqmx')
             if find_library('nidaqmx') is not None:
                 cdll = ctypes.cdll.LoadLibrary(find_library('nidaqmx'))
                 windll = cdll
             else:
-                raise DaqNotFoundError(
-                    'Could not find an installation of NI-DAQmx. Please '
-                    'ensure that NI-DAQmx is installed on this machine or '
-                    'contact National Instruments for support.')
+                raise DaqNotFoundError()
         else:
-            raise DaqNotFoundError(
-                'NI-DAQmx Python is not supported on this platform: {}. '
-                'Please direct any questions or feedback to National '
-                'Instruments.'.format(sys.platform))
+            raise DaqNotSupportedError()
 
         self._windll = DaqFunctionImporter(windll)
         self._cdll = DaqFunctionImporter(cdll)
@@ -184,7 +196,7 @@ class DaqLibImporter:
 
     def _parse_typedefs(self):
         """
-        Determines the ctypes data types of the Task and Cal handles 
+        Determines the ctypes data types of the Task and Cal handles
         based on the version of the NI-DAQmx driver installed.
         """
         from nidaqmx.system.system import System
