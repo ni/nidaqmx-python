@@ -170,8 +170,8 @@ class DaqLibImporter:
                 else:
                     windll = ctypes.windll.LoadLibrary('nicaiu')
                     cdll = ctypes.cdll.LoadLibrary('nicaiu')
-            except (OSError, WindowsError):
-                raise DaqNotFoundError()
+            except (OSError, WindowsError) as e:
+                raise DaqNotFoundError() from e
         elif sys.platform.startswith('linux'):
             # On linux you can use the command find_library('nidaqmx')
             if find_library('nidaqmx') is not None:
