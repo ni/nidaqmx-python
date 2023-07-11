@@ -1,3 +1,5 @@
+import sys
+
 import pytest
 
 import nidaqmx
@@ -56,6 +58,9 @@ def test_invalid_power_up_states___set_analog_power_up_states_with_output_type__
     assert exc_info.value.error_code == DAQmxErrors.INVALID_ATTRIBUTE_VALUE
 
 
+@pytest.mark.skipif(
+    not sys.platform.startswith("win"), reason="DAQmxGetAnalogPowerUpStates is Windows-only"
+)
 def test___get_analog_power_up_states___returns_power_up_states(system):
     device_name = "aoTester"
 
@@ -70,6 +75,9 @@ def test___get_analog_power_up_states___returns_power_up_states(system):
         assert power_up_states[i].channel_type == PowerUpChannelType.CHANNEL_HIGH_IMPEDANCE
 
 
+@pytest.mark.skipif(
+    not sys.platform.startswith("win"), reason="DAQmxSetAnalogPowerUpStates is Windows-only"
+)
 def test_valid_power_up_states___set_analog_power_up_states___sets_power_up_states_without_errors(
     system,
 ):
@@ -88,6 +96,9 @@ def test_valid_power_up_states___set_analog_power_up_states___sets_power_up_stat
         system.set_analog_power_up_states(device_name, power_up_states)
 
 
+@pytest.mark.skipif(
+    not sys.platform.startswith("win"), reason="DAQmxSetAnalogPowerUpStates is Windows-only"
+)
 def test_invalid_power_up_states___set_analog_power_up_states___throws_invalid_attribute_value_error(
     system,
 ):
