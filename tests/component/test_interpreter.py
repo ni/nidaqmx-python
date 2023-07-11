@@ -37,12 +37,12 @@ def test___grpc_channel_with_errors___get_error_string___returns_failed_to_retri
 
 
 @pytest.mark.parametrize("error_code", list(_ERROR_MESSAGES))
-def test___known_error_codes___get_error_string_with_error_code___returns_matching_error_message(
+def test___grpc_interpreter_with_known_error_message___get_error_string___returns_matching_error_message(
     grpc_init_kwargs, error_code: int
-):
+) -> None:
     interpreter = GrpcStubInterpreter(**grpc_init_kwargs)
     expected_error_message = _ERROR_MESSAGES[error_code]
 
-    actual_error_message = interpreter.get_error_string(error_code=error_code)
+    actual_error_message = interpreter.get_error_string(error_code)
 
     assert expected_error_message == actual_error_message
