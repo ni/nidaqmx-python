@@ -93,8 +93,10 @@ has been configured to automatically update when the tagged GitHub release has b
 can be verified once that has been completed.
 5. Publish **nidaqmx** to pypi by running:
    ```sh
-   $ poetry publish
+   $ poetry publish --build -u __token__ -p <pypi-token>
    ```
+   * **Note:** It is easy to accidentally copy a non-dispalyable character in your PyPI token. It can be useful to
+   bounce it into an editor that strips that.
 6. Create a release on GitHub, attaching the source at the latest commit as follows:
    * **Tag:** Create a new tag matching the version being released.
    * **Release Title:** The version being released.
@@ -102,8 +104,10 @@ can be verified once that has been completed.
 7. Create a PR to update the version of **nidaqmx**
    * Update `pyproject.toml` version by running:
       ```sh
-      $ poetry version [patch|minor|major]
+      $ poetry version [patch|minor|major|<semver>]
       ```
+      * **Note:** For `<semver>` we prefer to use `0.0.0-devX` style versions rather than the alpha
+      versions you get from use a poetry version bump rule, like `prepatch`.
    * If updating a minor or major version, update `version` and `release` in `docs/conf.py`.
    * Add a section to `CHANGELOG.md` for the new version with empty subsections.
 
