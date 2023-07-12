@@ -95,7 +95,7 @@ can be verified once that has been completed.
    ```sh
    $ poetry publish --build -u __token__ -p <pypi-token>
    ```
-   * **Note:** It is easy to accidentally copy a non-dispalyable character in your PyPI token. It can be useful to
+   * **Note:** It is easy to accidentally copy a non-displayable character in your PyPI token. It can be useful to
    bounce it into an editor that strips that.
 6. Create a release on GitHub, attaching the source at the latest commit as follows:
    * **Tag:** Create a new tag matching the version being released.
