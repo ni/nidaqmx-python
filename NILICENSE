@@ -1,0 +1,17 @@
+Passing a GrpcSessionOptions instance as a parameter to the following methods is
+subject to the NI General Purpose EULA, available at ni.com:
+* nidaqmx.scale.Scale.__init__
+* nidaqmx.scale.create_lin_scale
+* nidaqmx.scale.create_map_scale
+* nidaqmx.scale.create_polynomial_scale
+* nidaqmx.scale.create_table_scale
+* nidaqmx.system.device.Device.__init__
+* nidaqmx.system.device.add_network_device
+* nidaqmx.system.persisted_channel.PersistedChannel.__init__
+* nidaqmx.system.persisted_channel.PersistedScale.__init__
+* nidaqmx.system.persisted_channel.PersistedTask.__init__
+* nidaqmx.system.physical_channel.PhysicalChannel.__init__
+* nidaqmx.system.watchdog.WatchdogTask.__init__
+* nidaqmx.task.Task.__init__
+
+https://www.ni.com/en-us/about-ni/legal/software-license-agreement.html
