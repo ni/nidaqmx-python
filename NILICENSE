@@ -8,8 +8,8 @@ subject to the NI General Purpose EULA, available at ni.com:
 * nidaqmx.system.device.Device.__init__
 * nidaqmx.system.device.add_network_device
 * nidaqmx.system.persisted_channel.PersistedChannel.__init__
-* nidaqmx.system.persisted_channel.PersistedScale.__init__
-* nidaqmx.system.persisted_channel.PersistedTask.__init__
+* nidaqmx.system.persisted_scale.PersistedScale.__init__
+* nidaqmx.system.persisted_task.PersistedTask.__init__
 * nidaqmx.system.physical_channel.PhysicalChannel.__init__
 * nidaqmx.system.watchdog.WatchdogTask.__init__
 * nidaqmx.task.Task.__init__
