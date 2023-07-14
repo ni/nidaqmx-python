@@ -1,6 +1,7 @@
 Passing a GrpcSessionOptions instance as a parameter to the following methods is
 subject to the NI General Purpose EULA, available at ni.com:
 * nidaqmx.scale.Scale.__init__
+* nidaqmx.scale.calculate_reverse_poly_coeff
 * nidaqmx.scale.create_lin_scale
 * nidaqmx.scale.create_map_scale
 * nidaqmx.scale.create_polynomial_scale
