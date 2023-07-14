@@ -11,6 +11,8 @@ subject to the NI General Purpose EULA, available at ni.com:
 * nidaqmx.system.persisted_scale.PersistedScale.__init__
 * nidaqmx.system.persisted_task.PersistedTask.__init__
 * nidaqmx.system.physical_channel.PhysicalChannel.__init__
+* nidaqmx.system.system.System.__init__
+* nidaqmx.system.system.System.remote
 * nidaqmx.system.watchdog.WatchdogTask.__init__
 * nidaqmx.task.Task.__init__
 
