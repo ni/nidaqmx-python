@@ -188,3 +188,8 @@ License
 `LICENSE <https://github.com/ni/nidaqmx-python/blob/master/LICENSE>`_).
 Other incorporated projects may be licensed under different licenses. All
 licenses allow for non-commercial and commercial use.
+
+**gRPC Features**
+For driver APIs that support it, passing a GrpcSessionOptions instance as a
+parameter is subject to the NI General Purpose EULA
+(`see NILICENSE <https://github.com/ni/nidaqmx-python/blob/master/NILICENSE>`_).
