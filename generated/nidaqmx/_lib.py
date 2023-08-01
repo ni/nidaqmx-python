@@ -6,38 +6,17 @@ import sys
 import threading
 from typing import cast
 
-from nidaqmx.errors import Error
+from nidaqmx.errors import DaqNotFoundError, DaqNotSupportedError, DaqFunctionNotSupportedError
 
 
-class DaqNotFoundError(Error):
-    def __init__(self):
-        super().__init__(
-            "Could not find an installation of NI-DAQmx. Please ensure that "
-            "NI-DAQmx is installed on this machine or contact National "
-            "Instruments for support."
-        )
+DAQ_NOT_FOUND_MESSAGE = "Could not find an installation of NI-DAQmx. Please ensure that NI-DAQmx " \
+                        "is installed on this machine or contact National Instruments for support."
 
+DAQ_NOT_SUPPORTED_MESSAGE = "NI-DAQmx Python is not supported on this platform: {0}. Please " \
+                            "direct any questions or feedback to National Instruments."
 
-class DaqNotSupportedError(Error):
-    def __init__(self):
-        super().__init__(
-            "NI-DAQmx Python is not supported on this platform: "
-            f"{sys.platform}. Please direct any questions or feedback to "
-            "National Instruments."
-        )
-
-
-class DaqFunctionNotSupportedError(Error):
-    def __init__(self, function_name):
-        super().__init__(
-            f'The NI-DAQmx function "{function_name}" is not supported in this '
-            "version of NI-DAQmx. Visit ni.com/downloads to upgrade your "
-            "version of NI-DAQmx."
-        )
-
-
-class InvalidHandleError(Error):
-    pass
+FUNCTION_NOT_SUPPORTED_MESSAGE = "The NI-DAQmx function \"{0}\" is not supported in this version " \
+                                 "of NI-DAQmx. Visit ni.com/downloads to upgrade."
 
 
 class c_bool32(ctypes.c_uint):
@@ -114,7 +93,7 @@ class DaqFunctionImporter:
                         cfunc.arglock = threading.Lock()
             return cfunc
         except AttributeError:
-            raise DaqFunctionNotSupportedError(function)
+            raise DaqFunctionNotSupportedError(FUNCTION_NOT_SUPPORTED_MESSAGE.format(function))
 
 
 class DaqLibImporter:
@@ -162,7 +141,7 @@ class DaqLibImporter:
         windll = None
         cdll = None
 
-        if sys.platform.startswith('win'):
+        if sys.platform.startswith('win') or sys.platform.startswith('cli'):
             try:
                 if 'iron' in platform.python_implementation().lower():
                     windll = ctypes.windll.nicaiu
@@ -171,16 +150,16 @@ class DaqLibImporter:
                     windll = ctypes.windll.LoadLibrary('nicaiu')
                     cdll = ctypes.cdll.LoadLibrary('nicaiu')
             except (OSError, WindowsError) as e:
-                raise DaqNotFoundError() from e
+                raise DaqNotFoundError(DAQ_NOT_FOUND_MESSAGE) from e
         elif sys.platform.startswith('linux'):
             # On linux you can use the command find_library('nidaqmx')
             if find_library('nidaqmx') is not None:
                 cdll = ctypes.cdll.LoadLibrary(find_library('nidaqmx'))
                 windll = cdll
             else:
-                raise DaqNotFoundError()
+                raise DaqNotFoundError(DAQ_NOT_FOUND_MESSAGE)
         else:
-            raise DaqNotSupportedError()
+            raise DaqNotSupportedError(DAQ_NOT_SUPPORTED_MESSAGE.format(sys.platform))
 
         self._windll = DaqFunctionImporter(windll)
         self._cdll = DaqFunctionImporter(cdll)
