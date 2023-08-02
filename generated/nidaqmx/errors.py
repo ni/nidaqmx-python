@@ -13,6 +13,28 @@ class Error(Exception):
     pass
 
 
+class DaqNotFoundError(Error):
+    """
+    Error raised when NI-DAQmx driver is not installed.
+    """
+    pass
+
+
+class DaqNotSupportedError(Error):
+    """
+    Error raised when DAQmx is not supported on this platform.
+    """
+    pass
+
+
+class DaqFunctionNotSupportedError(Error):
+    """
+    Error raised when a specific function isn't supported by the installed
+    version of the NI-DAQmx driver.
+    """
+    pass
+
+
 class DaqError(Error):
     """
     Error raised by any DAQmx method.
