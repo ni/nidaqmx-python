@@ -9,14 +9,14 @@ from typing import cast
 from nidaqmx.errors import DaqNotFoundError, DaqNotSupportedError, DaqFunctionNotSupportedError
 
 
-DAQ_NOT_FOUND_MESSAGE = "Could not find an installation of NI-DAQmx. Please ensure that NI-DAQmx " \
-                        "is installed on this machine or contact National Instruments for support."
+_DAQ_NOT_FOUND_MESSAGE = "Could not find an installation of NI-DAQmx. Please ensure that NI-DAQmx " \
+                         "is installed on this machine or contact National Instruments for support."
 
-DAQ_NOT_SUPPORTED_MESSAGE = "NI-DAQmx Python is not supported on this platform: {0}. Please " \
-                            "direct any questions or feedback to National Instruments."
+_DAQ_NOT_SUPPORTED_MESSAGE = "NI-DAQmx Python is not supported on this platform: {0}. Please " \
+                             "direct any questions or feedback to National Instruments."
 
-FUNCTION_NOT_SUPPORTED_MESSAGE = "The NI-DAQmx function \"{0}\" is not supported in this version " \
-                                 "of NI-DAQmx. Visit ni.com/downloads to upgrade."
+_FUNCTION_NOT_SUPPORTED_MESSAGE = "The NI-DAQmx function \"{0}\" is not supported in this version " \
+                                  "of NI-DAQmx. Visit ni.com/downloads to upgrade."
 
 
 class c_bool32(ctypes.c_uint):
@@ -93,7 +93,7 @@ class DaqFunctionImporter:
                         cfunc.arglock = threading.Lock()
             return cfunc
         except AttributeError:
-            raise DaqFunctionNotSupportedError(FUNCTION_NOT_SUPPORTED_MESSAGE.format(function))
+            raise DaqFunctionNotSupportedError(_FUNCTION_NOT_SUPPORTED_MESSAGE.format(function))
 
 
 class DaqLibImporter:
@@ -150,16 +150,16 @@ class DaqLibImporter:
                     windll = ctypes.windll.LoadLibrary('nicaiu')
                     cdll = ctypes.cdll.LoadLibrary('nicaiu')
             except (OSError, WindowsError) as e:
-                raise DaqNotFoundError(DAQ_NOT_FOUND_MESSAGE) from e
+                raise DaqNotFoundError(_DAQ_NOT_FOUND_MESSAGE) from e
         elif sys.platform.startswith('linux'):
             # On linux you can use the command find_library('nidaqmx')
             if find_library('nidaqmx') is not None:
                 cdll = ctypes.cdll.LoadLibrary(find_library('nidaqmx'))
                 windll = cdll
             else:
-                raise DaqNotFoundError(DAQ_NOT_FOUND_MESSAGE)
+                raise DaqNotFoundError(_DAQ_NOT_FOUND_MESSAGE)
         else:
-            raise DaqNotSupportedError(DAQ_NOT_SUPPORTED_MESSAGE.format(sys.platform))
+            raise DaqNotSupportedError(_DAQ_NOT_SUPPORTED_MESSAGE.format(sys.platform))
 
         self._windll = DaqFunctionImporter(windll)
         self._cdll = DaqFunctionImporter(cdll)

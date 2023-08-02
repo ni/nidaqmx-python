@@ -23,8 +23,10 @@ All notable changes to this project will be documented in this file.
 * ### Merged Pull Requests
     * ...
 * ### Major Changes
-    * Promoted `DaqNotFoundError`, `DaqNotSupportedError`, and `DaqFunctionNotSupportedError` to `nidaqmx.errors`.
-    * Consistently return `DaqNotFoundError` on all platforms when the NI-DAQmx driver is not installed.
+    * `nidaqmx.errors.DaqNotFoundError`, `nidaqmx.errors.DaqNotSupportedError`, and
+    `nidaqmx.errors.DaqFunctionNotSupportedError` are now public exceptions.
+    * Consistently return `nidaqmx.errors.DaqNotFoundError` on all platforms when the NI-DAQmx
+    driver is not installed.
 * ### Known Issues
     * ...
 
