@@ -14,6 +14,7 @@ class AbsoluteTime(ctypes.Structure):
     _pack_ = 4
     _fields_ = [("lsb", ctypes.c_uint64), ("msb", ctypes.c_int64)]
 
+    # 66 years, 17 leap days = 24107 days = 2082844800 seconds
     _BIAS_FROM_1970_EPOCH = 2082844800
     _NUM_SUBSECONDS = 2**64
     _US_PER_S = 10**6
