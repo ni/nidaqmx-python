@@ -6,7 +6,11 @@ from datetime import timedelta, timezone
 import pytest
 from hightime import datetime as ht_datetime
 
-from nidaqmx._grpc_time import Timestamp as GrpcTimestamp
+try:
+    from nidaqmx._grpc_time import Timestamp as GrpcTimestamp
+except ImportError:
+    GrpcTimestamp = None
+
 from nidaqmx._lib_time import AbsoluteTime as LibTimestamp
 
 # Jan 1, 2002 = 98 years + 25 leapdays = 35795 days = 3092688000 seconds
