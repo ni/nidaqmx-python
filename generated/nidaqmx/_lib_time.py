@@ -48,7 +48,7 @@ class AbsoluteTime(ctypes.Structure):
 
         return AbsoluteTime(lsb=lsb, msb=timestamp_1904_epoch)
 
-    def to_datetime(self, tzinfo=timezone.utc):
+    def to_datetime(self, tzinfo=None):
         # First, calculate whole seconds by converting from the 1904 to 1970 epoch.
         timestamp_1904_epoch = self.msb
         was_positive = timestamp_1904_epoch > 0
@@ -61,9 +61,9 @@ class AbsoluteTime(ctypes.Structure):
 
         # Finally, convert the subseconds to micro, femto, and yoctoseconds.
         total_yoctoseconds = int(round(AbsoluteTime._YS_PER_S * self.lsb / AbsoluteTime._NUM_SUBSECONDS))
-        microsecond, total_yoctoseconds = divmod(total_yoctoseconds, AbsoluteTime._YS_PER_US)
-        femtosecond, total_yoctoseconds = divmod(total_yoctoseconds, AbsoluteTime._YS_PER_FS)
-        yoctosecond = total_yoctoseconds
+        microsecond, remainder_yoctoseconds = divmod(total_yoctoseconds, AbsoluteTime._YS_PER_US)
+        femtosecond, remainder_yoctoseconds = divmod(remainder_yoctoseconds, AbsoluteTime._YS_PER_FS)
+        yoctosecond = remainder_yoctoseconds
 
         # Start with UTC
         dt = ht_datetime.fromtimestamp(timestamp_1970_epoch, timezone.utc)
