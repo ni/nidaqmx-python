@@ -3,11 +3,12 @@ from hightime import datetime as ht_datetime
 
 from google.protobuf.internal.well_known_types import Timestamp as std_Timestanp
 
+
 class Timestamp(std_Timestanp):
     _NS_PER_US = 1000
-    _YS_PER_US = 10 ** 18
-    _YS_PER_NS = 10 ** 15
-    _YS_PER_FS = 10 ** 9
+    _YS_PER_US = 10**18
+    _YS_PER_NS = 10**15
+    _YS_PER_FS = 10**9
 
     def FromDatetime(self, dt):
         utc_dt = dt.astimezone(tz=timezone.utc)
@@ -24,7 +25,6 @@ class Timestamp(std_Timestanp):
         else:
             self.nanos = utc_dt.microsecond * Timestamp._NS_PER_US
 
-
     def ToDatetime(self, tzinfo=None):
         # Convert the subseconds to micro and nanoseconds.
         total_yoctoseconds = int(round(Timestamp._YS_PER_NS * self.nanos))
@@ -38,7 +38,3 @@ class Timestamp(std_Timestanp):
         dt = dt.replace(microsecond=microsecond, femtosecond=femtosecond, yoctosecond=yoctosecond)
         # Then convert to requested timezone
         return dt.astimezone(tz=tzinfo)
-
-
-        
-

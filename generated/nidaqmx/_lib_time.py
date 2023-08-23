@@ -3,6 +3,7 @@ import functools
 from datetime import timezone
 from hightime import datetime as ht_datetime
 
+
 @functools.total_ordering
 class AbsoluteTime(ctypes.Structure):
     # Please visit ni.com/info and enter the Info Code NI_BTF for detailed information.
@@ -14,14 +15,14 @@ class AbsoluteTime(ctypes.Structure):
     _fields_ = [("lsb", ctypes.c_uint64), ("msb", ctypes.c_int64)]
 
     _BIAS_FROM_1970_EPOCH = 2082844800
-    _NUM_SUBSECONDS = 2 ** 64
-    _US_PER_S = 10 ** 6
-    _YS_PER_S = 10 ** 24
-    _YS_PER_US = 10 ** 18
-    _YS_PER_FS = 10 ** 9
+    _NUM_SUBSECONDS = 2**64
+    _US_PER_S = 10**6
+    _YS_PER_S = 10**24
+    _YS_PER_US = 10**18
+    _YS_PER_FS = 10**9
 
-    MAX_FS = 10 ** 9
-    MAX_YS = 10 ** 9
+    MAX_FS = 10**9
+    MAX_YS = 10**9
 
     @classmethod
     def from_datetime(cls, dt):
@@ -42,9 +43,13 @@ class AbsoluteTime(ctypes.Structure):
             total_yoctoseconds = dt.yoctosecond
             total_yoctoseconds += dt.femtosecond * AbsoluteTime._YS_PER_FS
             total_yoctoseconds += dt.microsecond * AbsoluteTime._YS_PER_US
-            lsb = int(round(AbsoluteTime._NUM_SUBSECONDS * total_yoctoseconds / AbsoluteTime._YS_PER_S))
+            lsb = int(
+                round(AbsoluteTime._NUM_SUBSECONDS * total_yoctoseconds / AbsoluteTime._YS_PER_S)
+            )
         else:
-            lsb = int(round(AbsoluteTime._NUM_SUBSECONDS * utc_dt.microsecond / AbsoluteTime._US_PER_S))
+            lsb = int(
+                round(AbsoluteTime._NUM_SUBSECONDS * utc_dt.microsecond / AbsoluteTime._US_PER_S)
+            )
 
         return AbsoluteTime(lsb=lsb, msb=timestamp_1904_epoch)
 
@@ -60,9 +65,13 @@ class AbsoluteTime(ctypes.Structure):
             raise OverflowError(f"Can't represent {str(self)} in datetime (1970 epoch)")
 
         # Finally, convert the subseconds to micro, femto, and yoctoseconds.
-        total_yoctoseconds = int(round(AbsoluteTime._YS_PER_S * self.lsb / AbsoluteTime._NUM_SUBSECONDS))
+        total_yoctoseconds = int(
+            round(AbsoluteTime._YS_PER_S * self.lsb / AbsoluteTime._NUM_SUBSECONDS)
+        )
         microsecond, remainder_yoctoseconds = divmod(total_yoctoseconds, AbsoluteTime._YS_PER_US)
-        femtosecond, remainder_yoctoseconds = divmod(remainder_yoctoseconds, AbsoluteTime._YS_PER_FS)
+        femtosecond, remainder_yoctoseconds = divmod(
+            remainder_yoctoseconds, AbsoluteTime._YS_PER_FS
+        )
         yoctosecond = remainder_yoctoseconds
 
         # Start with UTC

@@ -1,14 +1,13 @@
-from copy import copy
-import pytest
 import random
-
+from copy import copy
 from datetime import datetime as std_datetime
 from datetime import timedelta, timezone
 
+import pytest
 from hightime import datetime as ht_datetime
 
-from nidaqmx._lib_time import AbsoluteTime as LibTimestamp
 from nidaqmx._grpc_time import Timestamp as GrpcTimestamp
+from nidaqmx._lib_time import AbsoluteTime as LibTimestamp
 
 # Jan 1, 2002 = 98 years + 25 leapdays = 35795 days = 3092688000 seconds
 JAN_01_2022_TIMESTAMP_1904_EPOCH = 0xB856AC80
@@ -26,7 +25,7 @@ def test___libtimestamp___ordering___succeeds():
         LibTimestamp(msb=2, lsb=0),
         LibTimestamp(msb=2, lsb=1),
         LibTimestamp(msb=2, lsb=2),
-        LibTimestamp(msb=3, lsb=0)
+        LibTimestamp(msb=3, lsb=0),
     ]
 
     shuffled = copy(ordered)
@@ -34,12 +33,7 @@ def test___libtimestamp___ordering___succeeds():
     assert sorted(shuffled) == ordered
 
 
-@pytest.mark.parametrize(
-    "from_dt", [
-        (JAN_01_2022_DATETIME),
-        (JAN_01_2022_HIGHTIME)
-    ]
-)
+@pytest.mark.parametrize("from_dt", [(JAN_01_2022_DATETIME), (JAN_01_2022_HIGHTIME)])
 def test___libtimestamp___convert_from_utc___succeeds(from_dt):
     ts = LibTimestamp.from_datetime(from_dt)
     assert ts == JAN_01_2022_LIB
@@ -51,7 +45,8 @@ def test___libtimestamp___convert_to_utc___succeeds():
 
 
 @pytest.mark.parametrize(
-    "datetime_cls, tzinfo, expected_offset", [
+    "datetime_cls, tzinfo, expected_offset",
+    [
         (std_datetime, timezone(timedelta(minutes=30)), -1800),
         (std_datetime, timezone(timedelta(minutes=-30)), 1800),
         (std_datetime, timezone(timedelta(hours=1)), -3600),
@@ -60,7 +55,7 @@ def test___libtimestamp___convert_to_utc___succeeds():
         (ht_datetime, timezone(timedelta(minutes=-30)), 1800),
         (ht_datetime, timezone(timedelta(hours=1)), -3600),
         (ht_datetime, timezone(timedelta(hours=-1)), 3600),
-    ]
+    ],
 )
 def test___libtimestamp___convert_to_and_from_tz___succeeds(datetime_cls, tzinfo, expected_offset):
     from_dt = datetime_cls(2002, 1, 1, tzinfo=tzinfo)
@@ -75,7 +70,8 @@ def test___libtimestamp___convert_to_and_from_tz___succeeds(datetime_cls, tzinfo
 
 
 @pytest.mark.parametrize(
-    "from_dt, microsecond, subseconds", [
+    "from_dt, microsecond, subseconds",
+    [
         (JAN_01_2022_DATETIME, 0, 0),
         (JAN_01_2022_DATETIME, 1, 0x10C6F7A0B5EE),
         (JAN_01_2022_DATETIME, 250000, 0x4000000000000000),
@@ -88,9 +84,11 @@ def test___libtimestamp___convert_to_and_from_tz___succeeds(datetime_cls, tzinfo
         (JAN_01_2022_HIGHTIME, 500000, 0x8000000000000000),
         (JAN_01_2022_HIGHTIME, 750000, 0xC000000000000000),
         (JAN_01_2022_HIGHTIME, 999999, 0xFFFFEF39085F4800),
-    ]
+    ],
 )
-def test___libtimestamp___convert_microseconds_to_and_from_subseconds___succeeds(from_dt, microsecond, subseconds):
+def test___libtimestamp___convert_microseconds_to_and_from_subseconds___succeeds(
+    from_dt, microsecond, subseconds
+):
     precise_dt = from_dt.replace(microsecond=microsecond)
     ts = LibTimestamp.from_datetime(precise_dt)
 
@@ -111,12 +109,15 @@ def test___libtimestamp___convert_microseconds_to_and_from_subseconds___succeeds
 
 
 @pytest.mark.parametrize(
-    "from_dt, femtosecond, subseconds", [
+    "from_dt, femtosecond, subseconds",
+    [
         (JAN_01_2022_HIGHTIME, 0, 0),
         (JAN_01_2022_HIGHTIME, 1, 0x480F),
-    ]
+    ],
 )
-def test___libtimestamp___convert_femtoseconds_to_and_from_subseconds___succeeds(from_dt, femtosecond, subseconds):
+def test___libtimestamp___convert_femtoseconds_to_and_from_subseconds___succeeds(
+    from_dt, femtosecond, subseconds
+):
     precise_dt = from_dt.replace(femtosecond=femtosecond)
     ts = LibTimestamp.from_datetime(precise_dt)
 
@@ -135,14 +136,17 @@ def test___libtimestamp___convert_femtoseconds_to_and_from_subseconds___succeeds
 
 
 @pytest.mark.parametrize(
-    "from_dt, yoctosecond, subseconds, yoctosecond_round_trip", [
+    "from_dt, yoctosecond, subseconds, yoctosecond_round_trip",
+    [
         (JAN_01_2022_HIGHTIME, 0, 0, 0),
         # Yoctoseconds is quite a bit more precise than NI-BTF
         (JAN_01_2022_HIGHTIME, 54210, 1, 54210),
         (JAN_01_2022_HIGHTIME, 54211, 1, 54210),
-    ]
+    ],
 )
-def test___libtimestamp___convert_yoctoseconds_to_and_from_subseconds___succeeds(from_dt, yoctosecond, subseconds, yoctosecond_round_trip):
+def test___libtimestamp___convert_yoctoseconds_to_and_from_subseconds___succeeds(
+    from_dt, yoctosecond, subseconds, yoctosecond_round_trip
+):
     precise_dt = from_dt.replace(yoctosecond=yoctosecond)
     ts = LibTimestamp.from_datetime(precise_dt)
 
@@ -160,14 +164,7 @@ def test___libtimestamp___convert_yoctoseconds_to_and_from_subseconds___succeeds
 # Big Bang and until about year 292 billion. Oh well.
 
 
-
-
-@pytest.mark.parametrize(
-    "from_dt", [
-        (JAN_01_2022_DATETIME),
-        (JAN_01_2022_HIGHTIME)
-    ]
-)
+@pytest.mark.parametrize("from_dt", [(JAN_01_2022_DATETIME), (JAN_01_2022_HIGHTIME)])
 def test___grpctimestamp___convert_from_utc___succeeds(from_dt):
     ts = GrpcTimestamp()
     ts.FromDatetime(from_dt)
@@ -183,7 +180,8 @@ def test___grpctimestamp___convert_to_utc___succeeds():
 
 
 @pytest.mark.parametrize(
-    "datetime_cls, tzinfo, expected_offset", [
+    "datetime_cls, tzinfo, expected_offset",
+    [
         (std_datetime, timezone(timedelta(minutes=30)), -1800),
         (std_datetime, timezone(timedelta(minutes=-30)), 1800),
         (std_datetime, timezone(timedelta(hours=1)), -3600),
@@ -192,7 +190,7 @@ def test___grpctimestamp___convert_to_utc___succeeds():
         (ht_datetime, timezone(timedelta(minutes=-30)), 1800),
         (ht_datetime, timezone(timedelta(hours=1)), -3600),
         (ht_datetime, timezone(timedelta(hours=-1)), 3600),
-    ]
+    ],
 )
 def test___grpctimestamp___convert_to_and_from_tz___succeeds(datetime_cls, tzinfo, expected_offset):
     from_dt = datetime_cls(2002, 1, 1, tzinfo=tzinfo)
@@ -208,7 +206,8 @@ def test___grpctimestamp___convert_to_and_from_tz___succeeds(datetime_cls, tzinf
 
 
 @pytest.mark.parametrize(
-    "from_dt, microsecond, nanoseconds", [
+    "from_dt, microsecond, nanoseconds",
+    [
         (JAN_01_2022_DATETIME, 0, 0),
         (JAN_01_2022_DATETIME, 1, 1000),
         (JAN_01_2022_DATETIME, 250000, 250000000),
@@ -221,9 +220,11 @@ def test___grpctimestamp___convert_to_and_from_tz___succeeds(datetime_cls, tzinf
         (JAN_01_2022_HIGHTIME, 500000, 500000000),
         (JAN_01_2022_HIGHTIME, 750000, 750000000),
         (JAN_01_2022_HIGHTIME, 999999, 999999000),
-    ]
+    ],
 )
-def test___grpctimestamp___convert_microseconds_to_and_from_nanoseconds___succeeds(from_dt, microsecond, nanoseconds):
+def test___grpctimestamp___convert_microseconds_to_and_from_nanoseconds___succeeds(
+    from_dt, microsecond, nanoseconds
+):
     precise_dt = from_dt.replace(microsecond=microsecond)
     ts = GrpcTimestamp()
     ts.FromDatetime(precise_dt)
@@ -238,7 +239,8 @@ def test___grpctimestamp___convert_microseconds_to_and_from_nanoseconds___succee
 
 
 @pytest.mark.parametrize(
-    "from_dt, femtosecond, nanoseconds", [
+    "from_dt, femtosecond, nanoseconds",
+    [
         (JAN_01_2022_HIGHTIME, 0, 0),
         (JAN_01_2022_HIGHTIME, 1, 0),
         # If femtoseconds get high enough, then it should round up
@@ -251,9 +253,11 @@ def test___grpctimestamp___convert_microseconds_to_and_from_nanoseconds___succee
         (JAN_01_2022_HIGHTIME, 1999999, 2),
         (JAN_01_2022_HIGHTIME, 2000000, 2),
         (JAN_01_2022_HIGHTIME, 2000001, 2),
-    ]
+    ],
 )
-def test___grpctimestamp___convert_femtoseconds_to_and_from_nanoseconds___succeeds(from_dt, femtosecond, nanoseconds):
+def test___grpctimestamp___convert_femtoseconds_to_and_from_nanoseconds___succeeds(
+    from_dt, femtosecond, nanoseconds
+):
     precise_dt = from_dt.replace(femtosecond=femtosecond)
     ts = LibTimestamp.from_datetime(precise_dt)
     ts = GrpcTimestamp()
@@ -266,4 +270,4 @@ def test___grpctimestamp___convert_femtoseconds_to_and_from_nanoseconds___succee
     # now convert back
     to_dt = ts.ToDatetime(tzinfo=timezone.utc)
     # we lost femtosecond precision coercing to nanoseconds.
-    assert to_dt.femtosecond == nanoseconds * (10 ** 6)
+    assert to_dt.femtosecond == nanoseconds * (10**6)
