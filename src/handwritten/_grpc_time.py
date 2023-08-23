@@ -1,10 +1,10 @@
 from datetime import timezone
 from hightime import datetime as ht_datetime
 
-from google.protobuf.internal.well_known_types import Timestamp as std_Timestanp
+from google.protobuf.internal.well_known_types import Timestamp as grpc_Timestanp
 
 
-class Timestamp(std_Timestanp):
+class Timestamp(grpc_Timestanp):
     _NS_PER_US = 1000
     _YS_PER_US = 10**18
     _YS_PER_NS = 10**15
