@@ -2,7 +2,6 @@ from nidaqmx.errors import DaqError, DaqReadError, DaqWriteError, DaqWarning, Da
 from nidaqmx.grpc_session_options import *
 from nidaqmx.scale import Scale
 from nidaqmx.task import Task
-from nidaqmx.time import AbsoluteTime
 from nidaqmx.types import CtrFreq, CtrTick, CtrTime
 
 try:
