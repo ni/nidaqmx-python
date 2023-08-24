@@ -17,7 +17,7 @@ from tests.unit._time_utils import (
 JAN_01_2022_LIB = LibTimestamp(lsb=0, msb=JAN_01_2022_TIMESTAMP_1904_EPOCH)
 
 
-def test___lib_timestamps___sort___is_ordered():
+def test___timestamps___sort___is_ordered():
     ordered = [
         LibTimestamp(msb=1, lsb=0),
         LibTimestamp(msb=2, lsb=0),
