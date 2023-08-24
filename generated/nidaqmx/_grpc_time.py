@@ -4,8 +4,8 @@ from hightime import datetime as ht_datetime
 from google.protobuf.internal.well_known_types import Timestamp as GrpcTimestamp
 
 
-_NS_PER_S = 10 ** 9
-_NS_PER_US = 10 ** 3
+_NS_PER_S = 10**9
+_NS_PER_US = 10**3
 
 _YS_PER_US = 10**18
 _YS_PER_NS = 10**15
@@ -28,6 +28,7 @@ def convert_time_to_timestamp(dt, ts):
         nanos = utc_dt.microsecond * _NS_PER_US
 
     ts.FromNanoseconds(seconds * _NS_PER_S + nanos)
+
 
 def convert_timestamp_to_time(ts, tzinfo=None):
     total_nanos = ts.ToNanoseconds()

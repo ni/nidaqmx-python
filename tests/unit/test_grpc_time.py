@@ -1,23 +1,16 @@
-import random
-from copy import copy
 from datetime import datetime as std_datetime
 from datetime import timedelta, timezone
 
 import pytest
+from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
 from hightime import datetime as ht_datetime
 
-try:
-    import nidaqmx._grpc_time as grpc_time
-    from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
-except ImportError:
-    grpc_time = none
-    GrpcTimestamp = None
-
-# TODO: single-source
-# Jan 1, 2002 = 32 years + 8 leapdays = 11688 days = 1009843200 seconds
-JAN_01_2022_TIMESTAMP_1970_EPOCH = 0x3C30FC00
-JAN_01_2022_DATETIME = std_datetime(2002, 1, 1, tzinfo=timezone.utc)
-JAN_01_2022_HIGHTIME = ht_datetime(2002, 1, 1, tzinfo=timezone.utc)
+import nidaqmx._grpc_time as grpc_time
+from tests.unit._time_utils import (
+    JAN_01_2022_TIMESTAMP_1970_EPOCH,
+    JAN_01_2022_DATETIME,
+    JAN_01_2022_HIGHTIME,
+)
 
 
 @pytest.mark.parametrize("from_dt", [(JAN_01_2022_DATETIME), (JAN_01_2022_HIGHTIME)])
@@ -46,9 +39,11 @@ def test___utc_datetime___convert_to_timestamp___is_reversible(from_dt):
         (ht_datetime, timezone(timedelta(hours=-1)), 3600),
     ],
 )
-def test___tz_datetime___convert_to_timestamp___is_reversible(datetime_cls, tzinfo, expected_offset):
+def test___tz_datetime___convert_to_timestamp___is_reversible(
+    datetime_cls, tzinfo, expected_offset
+):
     from_dt = datetime_cls(2002, 1, 1, tzinfo=tzinfo)
-    
+
     to_ts = GrpcTimestamp()
     grpc_time.convert_time_to_timestamp(from_dt, to_ts)
     roundtrip_dt = grpc_time.convert_timestamp_to_time(to_ts, tzinfo=tzinfo)
@@ -79,7 +74,7 @@ def test___datetime_with_microseconds___convert_to_timestamp___is_reversible(
     base_dt, microsecond, nanoseconds
 ):
     from_dt = base_dt.replace(microsecond=microsecond)
-    
+
     to_ts = GrpcTimestamp()
     grpc_time.convert_time_to_timestamp(from_dt, to_ts)
     roundtrip_dt = grpc_time.convert_timestamp_to_time(to_ts, tzinfo=timezone.utc)
@@ -110,7 +105,7 @@ def test___datetime_with_femtoseconds___convert_to_timestamp___is_reversible(
     base_dt, femtosecond, nanoseconds
 ):
     from_dt = base_dt.replace(femtosecond=femtosecond)
-    
+
     to_ts = GrpcTimestamp()
     grpc_time.convert_time_to_timestamp(from_dt, to_ts)
     roundtrip_dt = grpc_time.convert_timestamp_to_time(to_ts, tzinfo=timezone.utc)

@@ -7,13 +7,14 @@ import pytest
 from hightime import datetime as ht_datetime
 
 from nidaqmx._lib_time import AbsoluteTime as LibTimestamp
+from tests.unit._time_utils import (
+    JAN_01_2022_TIMESTAMP_1904_EPOCH,
+    JAN_01_2022_DATETIME,
+    JAN_01_2022_HIGHTIME,
+)
 
-# TODO: single-source
-# Jan 1, 2002 = 98 years + 25 leapdays = 35795 days = 3092688000 seconds
-JAN_01_2022_TIMESTAMP_1904_EPOCH = 0xB856AC80
+
 JAN_01_2022_LIB = LibTimestamp(lsb=0, msb=JAN_01_2022_TIMESTAMP_1904_EPOCH)
-JAN_01_2022_DATETIME = std_datetime(2002, 1, 1, tzinfo=timezone.utc)
-JAN_01_2022_HIGHTIME = ht_datetime(2002, 1, 1, tzinfo=timezone.utc)
 
 
 def test___lib_timestamps___sort___is_ordered():
@@ -52,7 +53,9 @@ def test___utc_datetime___convert_to_timestamp___is_reversible(from_dt):
         (ht_datetime, timezone(timedelta(hours=-1)), 3600),
     ],
 )
-def test___tz_datetime___convert_to_timestamp___is_reversible(datetime_cls, tzinfo, expected_offset):
+def test___tz_datetime___convert_to_timestamp___is_reversible(
+    datetime_cls, tzinfo, expected_offset
+):
     from_dt = datetime_cls(2002, 1, 1, tzinfo=tzinfo)
 
     to_ts = LibTimestamp.from_datetime(from_dt)
