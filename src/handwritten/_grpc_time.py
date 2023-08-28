@@ -1,6 +1,7 @@
 from datetime import timezone
 from datetime import datetime as std_datetime
 from hightime import datetime as ht_datetime
+from typing import Union
 
 from google.protobuf.internal.well_known_types import Timestamp as GrpcTimestamp
 
@@ -13,7 +14,7 @@ _YS_PER_NS = 10**15
 _YS_PER_FS = 10**9
 
 
-def convert_time_to_timestamp(dt: std_datetime | ht_datetime, ts: GrpcTimestamp) -> None:
+def convert_time_to_timestamp(dt: Union[std_datetime, ht_datetime], ts: GrpcTimestamp) -> None:
     utc_dt = dt.astimezone(tz=timezone.utc)
     seconds = int(utc_dt.timestamp())
 

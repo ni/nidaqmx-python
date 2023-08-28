@@ -3,6 +3,7 @@ import functools
 from datetime import timezone
 from datetime import datetime as std_datetime
 from hightime import datetime as ht_datetime
+from typing import Union
 
 
 @functools.total_ordering
@@ -27,7 +28,7 @@ class AbsoluteTime(ctypes.Structure):
     MAX_YS = 10**9
 
     @classmethod
-    def from_datetime(cls, dt: std_datetime | ht_datetime) -> "AbsoluteTime":
+    def from_datetime(cls, dt: Union[std_datetime, ht_datetime]) -> "AbsoluteTime":
         utc_dt = dt.astimezone(tz=timezone.utc)
 
         # First, calculate whole seconds by converting from the 1970 to 1904 epoch.
