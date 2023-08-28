@@ -1,6 +1,7 @@
 import ctypes
 import functools
 from datetime import timezone
+from datetime import datetime as std_datetime
 from hightime import datetime as ht_datetime
 
 
@@ -26,7 +27,7 @@ class AbsoluteTime(ctypes.Structure):
     MAX_YS = 10**9
 
     @classmethod
-    def from_datetime(cls, dt):
+    def from_datetime(cls, dt: std_datetime | ht_datetime) -> "AbsoluteTime":
         utc_dt = dt.astimezone(tz=timezone.utc)
 
         # First, calculate whole seconds by converting from the 1970 to 1904 epoch.
@@ -54,7 +55,7 @@ class AbsoluteTime(ctypes.Structure):
 
         return AbsoluteTime(lsb=lsb, msb=timestamp_1904_epoch)
 
-    def to_datetime(self, tzinfo=None):
+    def to_datetime(self, tzinfo: timezone = None):
         # First, calculate whole seconds by converting from the 1904 to 1970 epoch.
         timestamp_1904_epoch = self.msb
         was_positive = timestamp_1904_epoch > 0
@@ -82,13 +83,13 @@ class AbsoluteTime(ctypes.Structure):
         # Then convert to requested timezone
         return dt.astimezone(tz=tzinfo)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"AbsoluteTime(lsb=0x{self.lsb:x}, msb=0x{self.msb:x})"
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return self.msb == other.msb and self.lsb == other.lsb
 
-    def __lt__(self, other):
+    def __lt__(self, other) -> bool:
         if self.msb == other.msb:
             return self.lsb < other.lsb
         else:

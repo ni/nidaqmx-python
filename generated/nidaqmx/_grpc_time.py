@@ -1,4 +1,5 @@
 from datetime import timezone
+from datetime import datetime as std_datetime
 from hightime import datetime as ht_datetime
 
 from google.protobuf.internal.well_known_types import Timestamp as GrpcTimestamp
@@ -12,7 +13,7 @@ _YS_PER_NS = 10**15
 _YS_PER_FS = 10**9
 
 
-def convert_time_to_timestamp(dt, ts):
+def convert_time_to_timestamp(dt: std_datetime | ht_datetime, ts: GrpcTimestamp) -> None:
     utc_dt = dt.astimezone(tz=timezone.utc)
     seconds = int(utc_dt.timestamp())
 
@@ -30,7 +31,7 @@ def convert_time_to_timestamp(dt, ts):
     ts.FromNanoseconds(seconds * _NS_PER_S + nanos)
 
 
-def convert_timestamp_to_time(ts, tzinfo=None):
+def convert_timestamp_to_time(ts: GrpcTimestamp, tzinfo: timezone = None) -> ht_datetime:
     total_nanos = ts.ToNanoseconds()
     seconds, nanos = divmod(total_nanos, _NS_PER_S)
 
