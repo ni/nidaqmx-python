@@ -3,7 +3,7 @@ from datetime import datetime as std_datetime
 from hightime import datetime as ht_datetime
 from typing import Union
 
-from google.protobuf.internal.well_known_types import Timestamp as GrpcTimestamp
+from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
 
 
 _NS_PER_S = 10**9

@@ -2,16 +2,22 @@ from datetime import datetime as std_datetime
 from datetime import timedelta, timezone
 
 import pytest
-from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
 from hightime import datetime as ht_datetime
 
-import nidaqmx._grpc_time as grpc_time
-import nidaqmx._stubs.nidaqmx_pb2 as nidaqmx_pb2
 from tests.unit._time_utils import (
     JAN_01_2002_TIMESTAMP_1970_EPOCH,
     JAN_01_2002_DATETIME,
     JAN_01_2002_HIGHTIME,
 )
+
+try:
+    from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
+    import nidaqmx._grpc_time as grpc_time
+    import nidaqmx._stubs.nidaqmx_pb2 as nidaqmx_pb2
+except ImportError:
+    GrpcTimestamp = None
+    grpc_time = None
+    nidaqmx_pb2 = None
 
 
 @pytest.mark.parametrize("from_dt", [(JAN_01_2002_DATETIME), (JAN_01_2002_HIGHTIME)])
