@@ -5,7 +5,7 @@ import functools
 from datetime import timezone
 from datetime import datetime as std_datetime
 from hightime import datetime as ht_datetime
-from typing import Union
+from typing import Optional, Union
 
 
 @functools.total_ordering
@@ -58,7 +58,7 @@ class AbsoluteTime(ctypes.Structure):
 
         return AbsoluteTime(lsb=lsb, msb=timestamp_1904_epoch)
 
-    def to_datetime(self, tzinfo: timezone = None) -> ht_datetime:
+    def to_datetime(self, tzinfo: Optional[timezone] = None) -> ht_datetime:
         # First, calculate whole seconds by converting from the 1904 to 1970 epoch.
         timestamp_1904_epoch = self.msb
         was_positive = timestamp_1904_epoch > 0

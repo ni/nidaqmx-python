@@ -1,7 +1,7 @@
 from datetime import timezone
 from datetime import datetime as std_datetime
 from hightime import datetime as ht_datetime
-from typing import Union
+from typing import Optional, Union
 
 from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
 
@@ -32,7 +32,7 @@ def convert_time_to_timestamp(dt: Union[std_datetime, ht_datetime], ts: GrpcTime
     ts.FromNanoseconds(seconds * _NS_PER_S + nanos)
 
 
-def convert_timestamp_to_time(ts: GrpcTimestamp, tzinfo: timezone = None) -> ht_datetime:
+def convert_timestamp_to_time(ts: GrpcTimestamp, tzinfo: Optional[timezone] = None) -> ht_datetime:
     total_nanos = ts.ToNanoseconds()
     seconds, nanos = divmod(total_nanos, _NS_PER_S)
 
