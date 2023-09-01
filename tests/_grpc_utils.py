@@ -21,7 +21,7 @@ class GrpcServerProcess:
             self.server_port = None
             while self.server_port is None and self._proc.poll() is None:
                 line = self._proc.stdout.readline()
-                match = re.search(br"Server listening on port (\d+)", line)
+                match = re.search(rb"Server listening on port (\d+)", line)
                 if match:
                     self.server_port = int(match.group(1))
 
