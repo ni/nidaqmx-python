@@ -1,6 +1,7 @@
 """Helper functions to be used in nidaqmx tests."""
 import os
 import pathlib
+import re
 import subprocess
 import threading
 
@@ -15,13 +16,17 @@ class GrpcServerProcess:
         server_exe = self._get_grpc_server_exe()
         self._proc = subprocess.Popen([str(server_exe)], stdout=subprocess.PIPE)
 
-        # Read/parse first line of output; discard the rest
+        # Read/parse output until we find the port number or the process exits; discard the rest.
         try:
-            first_line = self._proc.stdout.readline()
-            assert first_line.startswith(
-                b"Server listening on port "
-            ), f"Unrecognized output: {first_line}"
-            self.server_port = int(first_line.replace(b"Server listening on port ", b"").strip())
+            self.server_port = None
+            while self.server_port is None and self._proc.poll() is None:
+                line = self._proc.stdout.readline()
+                match = re.search(rb"Server listening on port (\d+)", line)
+                if match:
+                    self.server_port = int(match.group(1))
+
+            if self._proc.poll() is not None:
+                raise RuntimeError(f"Server exited with return code {self._proc.returncode}")
 
             self._stdout_thread = threading.Thread(
                 target=self._proc.communicate, args=(), daemon=True
