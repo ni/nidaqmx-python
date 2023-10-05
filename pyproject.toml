@@ -22,6 +22,7 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Topic :: System :: Hardware :: Hardware Drivers"
@@ -31,7 +32,10 @@ packages = [{ include = "nidaqmx", from = "generated" }]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-numpy = ">=1.22"
+numpy = [
+  {version = ">=1.22", python = ">=3.8,<3.12"},
+  {version = ">=1.26", python = ">=3.12,<3.13"},
+]
 deprecation = ">=2.1"
 # Documentation, must be in main dependencies (but optional) list for
 # readthedocs integration.
@@ -49,7 +53,10 @@ grpc = ["grpcio", "protobuf"]
 [tool.poetry.group.codegen.dependencies]
 click = "^8.1"
 Mako = "^1.2"
-grpcio-tools = "1.49.1"
+grpcio-tools = [
+  {version = "1.49.1", python = ">=3.8,<3.12"},
+  {version = "1.59.0", python = "^3.12"},
+]
 mypy-protobuf = ">=3.4"
 
 [tool.poetry.group.lint.dependencies]

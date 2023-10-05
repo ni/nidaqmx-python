@@ -27,7 +27,7 @@ All notable changes to this project will be documented in this file.
     `nidaqmx.errors.DaqFunctionNotSupportedError` are now public exceptions.
     * Consistently return `nidaqmx.errors.DaqNotFoundError` on all platforms when the NI-DAQmx
     driver is not installed.
-    * Updated supported Python versions to 3.8, 3.9, 3.10, and 3.11
+    * Updated supported Python versions to 3.8, 3.9, 3.10, 3.11, and 3.12
 * ### Known Issues
     * ...
 
