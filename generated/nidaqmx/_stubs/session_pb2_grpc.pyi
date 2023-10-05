@@ -3,11 +3,22 @@
 isort:skip_file
 """
 import abc
+import collections.abc
 import grpc
+import grpc.aio
 from nidaqmx._stubs import session_pb2
+import typing
+
+_T = typing.TypeVar('_T')
+
+class _MaybeAsyncIterator(collections.abc.AsyncIterator[_T], collections.abc.Iterator[_T], metaclass=abc.ABCMeta):
+    ...
+
+class _ServicerContext(grpc.ServicerContext, grpc.aio.ServicerContext):  # type: ignore
+    ...
 
 class SessionUtilitiesStub:
-    def __init__(self, channel: grpc.Channel) -> None: ...
+    def __init__(self, channel: typing.Union[grpc.Channel, grpc.aio.Channel]) -> None: ...
     EnumerateDevices: grpc.UnaryUnaryMultiCallable[
         session_pb2.EnumerateDevicesRequest,
         session_pb2.EnumerateDevicesResponse,
@@ -36,27 +47,56 @@ class SessionUtilitiesStub:
     ]
     """Resets the server to a default state with no open sessions"""
 
+class SessionUtilitiesAsyncStub:
+    EnumerateDevices: grpc.aio.UnaryUnaryMultiCallable[
+        session_pb2.EnumerateDevicesRequest,
+        session_pb2.EnumerateDevicesResponse,
+    ]
+    """Provides a list of devices or chassis connected to server under localhost"""
+    Reserve: grpc.aio.UnaryUnaryMultiCallable[
+        session_pb2.ReserveRequest,
+        session_pb2.ReserveResponse,
+    ]
+    """Reserve a set of client defined resources for exclusive use"""
+    IsReservedByClient: grpc.aio.UnaryUnaryMultiCallable[
+        session_pb2.IsReservedByClientRequest,
+        session_pb2.IsReservedByClientResponse,
+    ]
+    """Determines if a set of client defined resources is currently reserved by a
+    specific client
+    """
+    Unreserve: grpc.aio.UnaryUnaryMultiCallable[
+        session_pb2.UnreserveRequest,
+        session_pb2.UnreserveResponse,
+    ]
+    """Unreserves a previously reserved resource"""
+    ResetServer: grpc.aio.UnaryUnaryMultiCallable[
+        session_pb2.ResetServerRequest,
+        session_pb2.ResetServerResponse,
+    ]
+    """Resets the server to a default state with no open sessions"""
+
 class SessionUtilitiesServicer(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def EnumerateDevices(
         self,
         request: session_pb2.EnumerateDevicesRequest,
-        context: grpc.ServicerContext,
-    ) -> session_pb2.EnumerateDevicesResponse:
+        context: _ServicerContext,
+    ) -> typing.Union[session_pb2.EnumerateDevicesResponse, collections.abc.Awaitable[session_pb2.EnumerateDevicesResponse]]:
         """Provides a list of devices or chassis connected to server under localhost"""
     @abc.abstractmethod
     def Reserve(
         self,
         request: session_pb2.ReserveRequest,
-        context: grpc.ServicerContext,
-    ) -> session_pb2.ReserveResponse:
+        context: _ServicerContext,
+    ) -> typing.Union[session_pb2.ReserveResponse, collections.abc.Awaitable[session_pb2.ReserveResponse]]:
         """Reserve a set of client defined resources for exclusive use"""
     @abc.abstractmethod
     def IsReservedByClient(
         self,
         request: session_pb2.IsReservedByClientRequest,
-        context: grpc.ServicerContext,
-    ) -> session_pb2.IsReservedByClientResponse:
+        context: _ServicerContext,
+    ) -> typing.Union[session_pb2.IsReservedByClientResponse, collections.abc.Awaitable[session_pb2.IsReservedByClientResponse]]:
         """Determines if a set of client defined resources is currently reserved by a
         specific client
         """
@@ -64,15 +104,15 @@ class SessionUtilitiesServicer(metaclass=abc.ABCMeta):
     def Unreserve(
         self,
         request: session_pb2.UnreserveRequest,
-        context: grpc.ServicerContext,
-    ) -> session_pb2.UnreserveResponse:
+        context: _ServicerContext,
+    ) -> typing.Union[session_pb2.UnreserveResponse, collections.abc.Awaitable[session_pb2.UnreserveResponse]]:
         """Unreserves a previously reserved resource"""
     @abc.abstractmethod
     def ResetServer(
         self,
         request: session_pb2.ResetServerRequest,
-        context: grpc.ServicerContext,
-    ) -> session_pb2.ResetServerResponse:
+        context: _ServicerContext,
+    ) -> typing.Union[session_pb2.ResetServerResponse, collections.abc.Awaitable[session_pb2.ResetServerResponse]]:
         """Resets the server to a default state with no open sessions"""
 
-def add_SessionUtilitiesServicer_to_server(servicer: SessionUtilitiesServicer, server: grpc.Server) -> None: ...
+def add_SessionUtilitiesServicer_to_server(servicer: SessionUtilitiesServicer, server: typing.Union[grpc.Server, grpc.aio.Server]) -> None: ...

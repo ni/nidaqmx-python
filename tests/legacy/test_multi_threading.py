@@ -94,7 +94,7 @@ class TestMultiThreadedReads:
             for actor_proxy in actor_proxies:
                 read_futures.append(actor_proxy.read(samples_per_read, number_of_reads, timeout=2))
 
-            pykka.get_all(read_futures, (number_of_samples / sample_rate) + 10)
+            pykka.get_all(read_futures, timeout=(number_of_samples / sample_rate) + 10)
 
         finally:
             for task in tasks:

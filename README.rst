@@ -27,7 +27,7 @@ driver is supported. Refer to
 for which versions of the driver support your hardware on a given operating
 system.
 
-**nidaqmx** supports CPython 3.7+ and PyPy3.
+**nidaqmx** supports CPython 3.8+ and PyPy3.
 
 Installation
 ============
