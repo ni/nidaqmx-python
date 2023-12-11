@@ -1069,18 +1069,6 @@ class Device:
         self._interpreter.reset_device(
             self._name)
 
-    def self_cal(self):
-        """
-        Measures the onboard reference voltage of the device and adjusts
-        the self-calibration constants to account for any errors caused
-        by short-term fluctuations in the operating environment. When
-        you self-calibrate a device, no external signal connections are
-        necessary.
-        """
-
-        self._interpreter.self_cal(
-            self._name)
-
     def self_test_device(self):
         """
         Performs a brief test of device resources. If a failure occurs,
