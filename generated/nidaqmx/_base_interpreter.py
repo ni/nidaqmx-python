@@ -1346,6 +1346,10 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def self_cal(self, device_name):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def self_test_device(self, device_name):
         raise NotImplementedError
 

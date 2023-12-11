@@ -4632,6 +4632,18 @@ class LibraryInterpreter(BaseInterpreter):
             task, save_as, author, options)
         self.check_for_error(error_code)
 
+    def self_cal(self, device_name):
+        cfunc = lib_importer.windll.DAQmxSelfCal
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
+
+        error_code = cfunc(
+            device_name)
+        self.check_for_error(error_code)
+
     def self_test_device(self, device_name):
         cfunc = lib_importer.windll.DAQmxSelfTestDevice
         if cfunc.argtypes is None:
