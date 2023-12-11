@@ -20069,26 +20069,14 @@ functions = {
     },
     'SelfCal': {
         'calling_convention': 'StdCall',
-        'handle_parameter': {
-            'ctypes_data_type': 'ctypes.c_char_p',
-            'cvi_name': 'deviceName',
-            'python_accessor': 'self._name'
-        },
         'parameters': [
             {
-                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
-                'is_optional_in_python': False,
                 'name': 'deviceName',
-                'python_data_type': 'str',
-                'python_description': '',
-                'python_type_annotation': 'str',
-                'type': 'const char[]',
-                'use_in_python_api': False
+                'type': 'const char[]'
             }
         ],
-        'python_class_name': 'Device',
-        'python_description': 'Measures the onboard reference voltage of the device and adjusts the self-calibration constants to account for any errors caused by short-term fluctuations in the operating environment. When you self-calibrate a device, no external signal connections are necessary.',
+        'python_codegen_method': 'no',
         'returns': 'int32'
     },
     'SelfTestDevice': {
