@@ -29,3 +29,6 @@ def test___devices_with_different_names___hash___not_equal(init_kwargs):
     device2 = Device("tsVoltageTester1", **init_kwargs)
 
     assert hash(device1) != hash(device2)
+
+def test___self_cal___no_errors(any_x_series_device: Device) -> None:
+    any_x_series_device.self_cal()
