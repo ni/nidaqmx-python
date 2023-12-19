@@ -2758,6 +2758,11 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, save_as=save_as, author=author,
                 options_raw=options))
 
+    def self_cal(self, device_name):
+        response = self._invoke(
+            self._client.SelfCal,
+            grpc_types.SelfCalRequest(device_name=device_name))
+
     def self_test_device(self, device_name):
         response = self._invoke(
             self._client.SelfTestDevice,

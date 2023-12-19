@@ -40,7 +40,6 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "GetCalInfoAttributeString",
     "GetCalInfoAttributeUInt32",
     "GetSelfCalLastDateAndTime",
-    "SelfCal",
     "SetCalInfoAttributeBool",
     "SetCalInfoAttributeDouble",
     "SetCalInfoAttributeString",

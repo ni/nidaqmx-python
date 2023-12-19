@@ -21,7 +21,7 @@ All notable changes to this project will be documented in this file.
 ## 0.9.0
 
 * ### Merged Pull Requests
-    * ...
+    *  [460: enabled support for DAQmxSelfCal](https://github.com/ni/nidaqmx-python/pull/460)
 * ### Major Changes
     * `nidaqmx.errors.DaqNotFoundError`, `nidaqmx.errors.DaqNotSupportedError`, and
     `nidaqmx.errors.DaqFunctionNotSupportedError` are now public exceptions.
