@@ -1141,6 +1141,11 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def perform_bridge_offset_nulling_cal_ex(
+            self, task, channel, skip_unsupported_channels):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def perform_bridge_shunt_cal_ex(
             self, task, channel, shunt_resistor_value,
             shunt_resistor_location, shunt_resistor_select,
@@ -1153,6 +1158,11 @@ class BaseInterpreter(abc.ABC):
             self, task, channel, shunt_resistor_value,
             shunt_resistor_location, shunt_resistor_select,
             shunt_resistor_source, skip_unsupported_channels):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def perform_thrmcpl_lead_offset_nulling_cal(
+            self, task, channel, skip_unsupported_channels):
         raise NotImplementedError
 
     @abc.abstractmethod

@@ -2260,6 +2260,14 @@ class GrpcStubInterpreter(BaseInterpreter):
             metadata=metadata)
         return response.task, response.new_session_initialized
 
+    def perform_bridge_offset_nulling_cal_ex(
+            self, task, channel, skip_unsupported_channels):
+        response = self._invoke(
+            self._client.PerformBridgeOffsetNullingCalEx,
+            grpc_types.PerformBridgeOffsetNullingCalExRequest(
+                task=task, channel=channel,
+                skip_unsupported_channels=skip_unsupported_channels))
+
     def perform_bridge_shunt_cal_ex(
             self, task, channel, shunt_resistor_value,
             shunt_resistor_location, shunt_resistor_select,
@@ -2288,6 +2296,14 @@ class GrpcStubInterpreter(BaseInterpreter):
                 shunt_resistor_location_raw=shunt_resistor_location,
                 shunt_resistor_select_raw=shunt_resistor_select,
                 shunt_resistor_source_raw=shunt_resistor_source,
+                skip_unsupported_channels=skip_unsupported_channels))
+
+    def perform_thrmcpl_lead_offset_nulling_cal(
+            self, task, channel, skip_unsupported_channels):
+        response = self._invoke(
+            self._client.PerformThrmcplLeadOffsetNullingCal,
+            grpc_types.PerformThrmcplLeadOffsetNullingCalRequest(
+                task=task, channel=channel,
                 skip_unsupported_channels=skip_unsupported_channels))
 
     def read_analog_f64(

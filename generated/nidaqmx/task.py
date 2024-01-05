@@ -402,6 +402,16 @@ class Task:
 
         return is_task_done
 
+    def perform_bridge_offset_nulling_cal(self, channel="", skip_unsupported_channels=False):
+        """
+        Performs a bridge offset nulling calibration on the channels in the task.
+        If the task measures both bridge-based sensors and non-bridge-based sensors,
+        use the channels input to specify the names of the channels that measure 
+        bridge-based sensors.
+        """
+
+        self._interpreter.perform_bridge_offset_nulling_cal_ex(
+            self._handle, channel, skip_unsupported_channels)
 
     def perform_strain_shunt_cal(
             self, channel="", shunt_resistor_value=100000,
@@ -468,6 +478,17 @@ class Task:
             shunt_resistor_location.value, shunt_resistor_select.value,
             shunt_resistor_source.value, bridge_resistance,
             skip_unsupported_channels)     
+
+    def perform_thrmcpl_lead_offset_nulling_cal(self, channel="", skip_unsupported_channels=False):
+        """
+        Performs thermocouple lead offset nulling calibration on the channels in 
+        the task to compensate for offsets introduced by open thermocouple detection.
+        Keep the measured temperature as constant as possible while performing this 
+        adjustment.
+        """
+
+        self._interpreter.perform_thrmcpl_lead_offset_nulling_cal(
+            self._handle, channel, skip_unsupported_channels)
 
     def read(self, number_of_samples_per_channel=NUM_SAMPLES_UNSET,
              timeout=10.0):

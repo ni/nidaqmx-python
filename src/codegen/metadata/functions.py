@@ -17094,6 +17094,44 @@ functions = {
         'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
+    'PerformBridgeOffsetNullingCalEx': {
+        'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
+        'parameters': [
+            {
+                'ctypes_data_type': 'ctypes.TaskHandle',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'type': 'TaskHandle'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'channel',
+                'python_data_type': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint32',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'skipUnsupportedChannels',
+                'python_data_type': 'int',
+                'type': 'uInt32'
+            },
+        ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
+        'python_description': 'Performs a bridge offset nulling calibration on the channels in the task. If the task measures both bridge-based sensors and non-bridge-based sensors, use the channels input to specify the names of the channels that measure bridge-based sensors.',
+        'returns': 'int32'
+    },
     'PerformBridgeShuntCalEx': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -17274,6 +17312,44 @@ functions = {
         ],
         'python_class_name': 'Task',
         'python_codegen_method': 'CustomCode',
+        'returns': 'int32'
+    },
+    'PerformThrmcplLeadOffsetNullingCal': {
+        'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
+        'parameters': [
+            {
+                'ctypes_data_type': 'ctypes.TaskHandle',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'type': 'TaskHandle'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'channel',
+                'python_data_type': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint32',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'skipUnsupportedChannels',
+                'python_data_type': 'int',
+                'type': 'uInt32'
+            },
+        ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
+        'python_description': 'Performs thermocouple lead offset nulling calibration on the channels in the task to compensate for offsets introduced by open thermocouple detection. Keep the measured temperature as constant as possible while performing this adjustment.',
         'returns': 'int32'
     },
     'ReadAnalogF64': {
