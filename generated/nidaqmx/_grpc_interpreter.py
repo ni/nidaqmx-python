@@ -1662,6 +1662,12 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.DeleteSavedTask,
             grpc_types.DeleteSavedTaskRequest(task_name=task_name))
 
+    def device_supports_cal(self, device_name):
+        response = self._invoke(
+            self._client.DeviceSupportsCal,
+            grpc_types.DeviceSupportsCalRequest(device_name=device_name))
+        return response.cal_supported
+
     def disable_ref_trig(self, task):
         response = self._invoke(
             self._client.DisableRefTrig,
@@ -1704,6 +1710,34 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.GetBufferAttributeUInt32,
             grpc_types.GetBufferAttributeUInt32Request(task=task, attribute_raw=attribute))
+        return response.value
+
+    def get_cal_info_attribute_bool(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetCalInfoAttributeBool,
+            grpc_types.GetCalInfoAttributeBoolRequest(
+                device_name=device_name, attribute_raw=attribute))
+        return response.value
+
+    def get_cal_info_attribute_double(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetCalInfoAttributeDouble,
+            grpc_types.GetCalInfoAttributeDoubleRequest(
+                device_name=device_name, attribute_raw=attribute))
+        return response.value
+
+    def get_cal_info_attribute_string(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetCalInfoAttributeString,
+            grpc_types.GetCalInfoAttributeStringRequest(
+                device_name=device_name, attribute_raw=attribute))
+        return response.value
+
+    def get_cal_info_attribute_uint32(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetCalInfoAttributeUInt32,
+            grpc_types.GetCalInfoAttributeUInt32Request(
+                device_name=device_name, attribute_raw=attribute))
         return response.value
 
     def get_chan_attribute_bool(self, task, channel, attribute):
@@ -1863,6 +1897,12 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.GetExportedSignalAttributeUInt32Request(
                 task=task, attribute_raw=attribute))
         return response.value
+
+    def get_ext_cal_last_date_and_time(self, device_name):
+        response = self._invoke(
+            self._client.GetExtCalLastDateAndTime,
+            grpc_types.GetExtCalLastDateAndTimeRequest(device_name=device_name))
+        return response.year, response.month, response.day, response.hour, response.minute
 
     def get_persisted_chan_attribute_bool(self, channel, attribute):
         response = self._invoke(
@@ -2035,6 +2075,12 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.GetScaleAttributeStringRequest(
                 scale_name=scale_name, attribute_raw=attribute))
         return response.value
+
+    def get_self_cal_last_date_and_time(self, device_name):
+        response = self._invoke(
+            self._client.GetSelfCalLastDateAndTime,
+            grpc_types.GetSelfCalLastDateAndTimeRequest(device_name=device_name))
+        return response.year, response.month, response.day, response.hour, response.minute
 
     def get_system_info_attribute_string(self, attribute):
         response = self._invoke(
@@ -2797,6 +2843,11 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.ResetWriteAttribute,
             grpc_types.ResetWriteAttributeRequest(task=task, attribute_raw=attribute))
 
+    def restore_last_ext_cal_const(self, device_name):
+        response = self._invoke(
+            self._client.RestoreLastExtCalConst,
+            grpc_types.RestoreLastExtCalConstRequest(device_name=device_name))
+
     def save_global_chan(self, task, channel_name, save_as, author, options):
         response = self._invoke(
             self._client.SaveGlobalChan,
@@ -2851,6 +2902,30 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.SetBufferAttributeUInt32,
             grpc_types.SetBufferAttributeUInt32Request(
                 task=task, attribute_raw=attribute, value=value))
+
+    def set_cal_info_attribute_bool(self, device_name, attribute, value):
+        response = self._invoke(
+            self._client.SetCalInfoAttributeBool,
+            grpc_types.SetCalInfoAttributeBoolRequest(
+                device_name=device_name, attribute_raw=attribute, value=value))
+
+    def set_cal_info_attribute_double(self, device_name, attribute, value):
+        response = self._invoke(
+            self._client.SetCalInfoAttributeDouble,
+            grpc_types.SetCalInfoAttributeDoubleRequest(
+                device_name=device_name, attribute_raw=attribute, value=value))
+
+    def set_cal_info_attribute_string(self, device_name, attribute, value):
+        response = self._invoke(
+            self._client.SetCalInfoAttributeString,
+            grpc_types.SetCalInfoAttributeStringRequest(
+                device_name=device_name, attribute_raw=attribute, value=value))
+
+    def set_cal_info_attribute_uint32(self, device_name, attribute, value):
+        response = self._invoke(
+            self._client.SetCalInfoAttributeUInt32,
+            grpc_types.SetCalInfoAttributeUInt32Request(
+                device_name=device_name, attribute_raw=attribute, value=value))
 
     def set_chan_attribute_bool(self, task, channel, attribute, value):
         response = self._invoke(

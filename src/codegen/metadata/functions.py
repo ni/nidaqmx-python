@@ -12521,6 +12521,11 @@ functions = {
     },
     'DeviceSupportsCal': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -12543,7 +12548,8 @@ functions = {
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_class_name': 'Device',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'DisableRefTrig': {
@@ -14089,6 +14095,79 @@ functions = {
         'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
+    'GetExtCalLastDateAndTime': {
+        'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
+        'parameters': [
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'deviceName',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint',
+                'direction': 'out',
+                'is_optional_in_python': False,
+                'name': 'year',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
+                'type': 'uInt32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint',
+                'direction': 'out',
+                'is_optional_in_python': False,
+                'name': 'month',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
+                'type': 'uInt32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint',
+                'direction': 'out',
+                'is_optional_in_python': False,
+                'name': 'day',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
+                'type': 'uInt32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint',
+                'direction': 'out',
+                'is_optional_in_python': False,
+                'name': 'hour',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
+                'type': 'uInt32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint',
+                'direction': 'out',
+                'is_optional_in_python': False,
+                'name': 'minute',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
+                'type': 'uInt32'
+            }
+        ],
+        'python_class_name': 'Device',
+        'python_codegen_method': 'CustomCode',
+        'returns': 'int32'
+    },
     'GetExtendedErrorInfo': {
         'calling_convention': 'StdCall',
         'codegen_method': 'private',
@@ -15404,6 +15483,11 @@ functions = {
     },
     'GetSelfCalLastDateAndTime': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -15466,7 +15550,8 @@ functions = {
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_class_name': 'Device',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetStartTrigTimestampVal': {
@@ -20266,6 +20351,28 @@ functions = {
             }
         ],
         'python_codegen_method': 'CustomCode',
+        'returns': 'int32'
+    },
+    'RestoreLastExtCalConst': {
+        'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
+        'parameters': [
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'deviceName',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
+                'type': 'const char[]'
+            }
+        ],
+        'python_class_name': 'Device',
         'returns': 'int32'
     },
     'SaveGlobalChan': {

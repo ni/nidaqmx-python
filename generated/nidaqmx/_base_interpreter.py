@@ -773,6 +773,10 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def device_supports_cal(self, device_name):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def disable_ref_trig(self, task):
         raise NotImplementedError
 
@@ -799,6 +803,22 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def get_buffer_attribute_uint32(self, task, attribute):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_cal_info_attribute_bool(self, device_name, attribute):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_cal_info_attribute_double(self, device_name, attribute):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_cal_info_attribute_string(self, device_name, attribute):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_cal_info_attribute_uint32(self, device_name, attribute):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -895,6 +915,10 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def get_exported_signal_attribute_uint32(self, task, attribute):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_ext_cal_last_date_and_time(self, device_name):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -998,6 +1022,10 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def get_scale_attribute_string(self, scale_name, attribute):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_self_cal_last_date_and_time(self, device_name):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1367,6 +1395,10 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def restore_last_ext_cal_const(self, device_name):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def save_global_chan(self, task, channel_name, save_as, author, options):
         raise NotImplementedError
 
@@ -1398,6 +1430,22 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def set_buffer_attribute_uint32(self, task, attribute, value):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def set_cal_info_attribute_bool(self, device_name, attribute, value):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def set_cal_info_attribute_double(self, device_name, attribute, value):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def set_cal_info_attribute_string(self, device_name, attribute, value):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def set_cal_info_attribute_uint32(self, device_name, attribute, value):
         raise NotImplementedError
 
     @abc.abstractmethod
