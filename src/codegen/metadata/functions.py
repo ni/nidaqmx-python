@@ -17094,6 +17094,276 @@ functions = {
         'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
+    'PerformBridgeShuntCal': {
+        'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
+        'parameters': [
+            {
+                'ctypes_data_type': 'ctypes.TaskHandle',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'task', 
+                'python_data_type': 'TaskHandle',
+                'type': 'TaskHandle'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'channel',
+                'python_data_type': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_double',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'shuntResistorValue',
+                'python_data_type': 'float',
+                'python_default_value': '100000.0',
+                'type': 'float64'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_long',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'shuntResistorLocation',
+                'python_data_type': 'int',
+                'type': 'int32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_double',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'bridgeResistance',
+                'python_data_type': 'float',
+                'python_default_value': '120.0',
+                'type': 'float64'
+            },
+            {
+                'ctypes_data_type': 'c_bool32',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'skipUnsupportedChannels',
+                'python_data_type': 'bool',
+                'type': 'bool32'
+            },
+        ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
+        'python_description': 'Performs shunt calibration for the specified channels using a bridge sensor.',
+        'returns': 'int32'
+    },
+    'PerformBridgeShuntCalEx': {
+        'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
+        'parameters': [
+            {
+                'ctypes_data_type': 'ctypes.TaskHandle',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'task', 
+                'python_data_type': 'TaskHandle',
+                'type': 'TaskHandle'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'channel',
+                'python_data_type': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_double',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'shuntResistorValue',
+                'python_data_type': 'float',
+                'python_default_value': '100000.0',
+                'type': 'float64'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_long',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'shuntResistorLocation',
+                'python_data_type': 'int',
+                'type': 'int32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_long',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'shuntResistorSelect',
+                'python_data_type': 'int',
+                'type': 'int32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_long',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'shuntResistorSource',
+                'python_data_type': 'int',
+                'type': 'int32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_double',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'bridgeResistance',
+                'python_data_type': 'float',
+                'python_default_value': '120.0',
+                'type': 'float64'
+            },
+            {
+                'ctypes_data_type': 'c_bool32',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'skipUnsupportedChannels',
+                'python_data_type': 'bool',
+                'type': 'bool32'
+            },
+        ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
+        'python_description': 'Performs shunt calibration for the specified channels using a bridge sensor.',
+        'returns': 'int32'
+    },
+    'PerformStrainShuntCal': {
+        'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
+        'parameters': [
+            {
+                'ctypes_data_type': 'ctypes.TaskHandle',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'task', 
+                'python_data_type': 'TaskHandle',
+                'type': 'TaskHandle'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'channel',
+                'python_data_type': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_double',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'shuntResistorValue',
+                'python_data_type': 'float',
+                'python_default_value': '100000.0',
+                'type': 'float64'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_long',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'shuntResistorLocation',
+                'python_data_type': 'int',
+                'type': 'int32'
+            },
+            {
+                'ctypes_data_type': 'c_bool32',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'skipUnsupportedChannels',
+                'python_data_type': 'bool',
+                'type': 'bool32'
+            },
+        ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
+        'python_description': 'Performs shunt calibration for the specified channels using a strain gage sensor.',
+        'returns': 'int32'
+    },
+    'PerformStrainShuntCalEx': {
+        'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
+        'parameters': [
+            {
+                'ctypes_data_type': 'ctypes.TaskHandle',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'task', 
+                'python_data_type': 'TaskHandle',
+                'type': 'TaskHandle'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'channel',
+                'python_data_type': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_double',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'shuntResistorValue',
+                'python_data_type': 'float',
+                'python_default_value': '100000.0',
+                'type': 'float64'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_long',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'shuntResistorLocation',
+                'python_data_type': 'int',
+                'type': 'int32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_long',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'shuntResistorSelect',
+                'python_data_type': 'int',
+                'type': 'int32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_long',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'shuntResistorSource',
+                'python_data_type': 'int',
+                'type': 'int32'
+            },
+            {
+                'ctypes_data_type': 'c_bool32',
+                'direction': 'in',
+                'is_optional_in_python': True,
+                'name': 'skipUnsupportedChannels',
+                'python_data_type': 'bool',
+                'type': 'bool32'
+            },
+        ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
+        'python_description': 'Performs shunt calibration for the specified channels using a strain gage sensor.',
+        'returns': 'int32'
+    },
     'ReadAnalogF64': {
         'calling_convention': 'StdCall',
         'parameters': [

@@ -1141,6 +1141,34 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def perform_bridge_shunt_cal(
+            self, task, channel, shunt_resistor_value,
+            shunt_resistor_location, bridge_resistance,
+            skip_unsupported_channels):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def perform_bridge_shunt_cal_ex(
+            self, task, channel, shunt_resistor_value,
+            shunt_resistor_location, shunt_resistor_select,
+            shunt_resistor_source, bridge_resistance,
+            skip_unsupported_channels):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def perform_strain_shunt_cal(
+            self, task, channel, shunt_resistor_value,
+            shunt_resistor_location, skip_unsupported_channels):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def perform_strain_shunt_cal_ex(
+            self, task, channel, shunt_resistor_value,
+            shunt_resistor_location, shunt_resistor_select,
+            shunt_resistor_source, skip_unsupported_channels):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def read_analog_f64(
             self, task, num_samps_per_chan, timeout, fill_mode, read_array):
         raise NotImplementedError
