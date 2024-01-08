@@ -44,32 +44,6 @@ def test___tasks_with_different_names___hash___not_equal(generate_task):
 
 @pytest.mark.device_name("bridgeTester")
 @pytest.mark.parametrize(
-    "shunt_resistor_value, shunt_resistor_location, bridge_resistance, skip_unsupported_channels",
-    [
-        (100000, 12465, 0.2, True),
-        (100000, 12465, 0.2, False),
-        (100000, 12467, 0.2, True),
-        (100000, 12467, 0.2, False),
-    ],
-)
-def test___perform_bridge_shunt_cal___no_errors(
-    ai_bridge_task: nidaqmx.Task,
-    shunt_resistor_value,
-    shunt_resistor_location,
-    bridge_resistance,
-    skip_unsupported_channels,
-) -> None:
-    ai_bridge_task.perform_bridge_shunt_cal(
-        ai_bridge_task.channels.name,
-        shunt_resistor_value,
-        shunt_resistor_location,
-        bridge_resistance,
-        skip_unsupported_channels,
-    )
-
-
-@pytest.mark.device_name("bridgeTester")
-@pytest.mark.parametrize(
     "shunt_resistor_value, shunt_resistor_location, shunt_resistor_select, shunt_resistor_source, bridge_resistance, skip_unsupported_channels",
     [
         (100000, 12465, 0, 0, 0.2, True),
@@ -78,7 +52,7 @@ def test___perform_bridge_shunt_cal___no_errors(
         (100000, 12467, 0, 0, 0.2, False),
     ],
 )
-def test___perform_bridge_shunt_cal_ex___no_errors(
+def test___perform_bridge_shunt_cal___no_errors(
     ai_bridge_task: nidaqmx.Task,
     shunt_resistor_value,
     shunt_resistor_location,
@@ -87,37 +61,13 @@ def test___perform_bridge_shunt_cal_ex___no_errors(
     bridge_resistance,
     skip_unsupported_channels,
 ) -> None:
-    ai_bridge_task.perform_bridge_shunt_cal_ex(
+    ai_bridge_task.perform_bridge_shunt_cal(
         ai_bridge_task.channels.name,
         shunt_resistor_value,
         shunt_resistor_location,
         shunt_resistor_select,
         shunt_resistor_source,
         bridge_resistance,
-        skip_unsupported_channels,
-    )
-
-
-@pytest.mark.device_name("bridgeTester")
-@pytest.mark.parametrize(
-    "shunt_resistor_value, shunt_resistor_location, skip_unsupported_channels",
-    [
-        (100000, 12465, True),
-        (100000, 12465, False),
-        (100000, 12467, True),
-        (100000, 12467, False),
-    ],
-)
-def test___perform_strain_shunt_cal___no_errors(
-    ai_strain_gage_task: nidaqmx.Task,
-    shunt_resistor_value,
-    shunt_resistor_location,
-    skip_unsupported_channels,
-) -> None:
-    ai_strain_gage_task.perform_strain_shunt_cal(
-        ai_strain_gage_task.channels.name,
-        shunt_resistor_value,
-        shunt_resistor_location,
         skip_unsupported_channels,
     )
 
@@ -132,7 +82,7 @@ def test___perform_strain_shunt_cal___no_errors(
         (100000, 12467, 0, 0, False),
     ],
 )
-def test___perform_strain_shunt_cal_ex___no_errors(
+def test___perform_strain_shunt_cal___no_errors(
     ai_strain_gage_task: nidaqmx.Task,
     shunt_resistor_value,
     shunt_resistor_location,
@@ -140,7 +90,7 @@ def test___perform_strain_shunt_cal_ex___no_errors(
     shunt_resistor_source,
     skip_unsupported_channels,
 ) -> None:
-    ai_strain_gage_task.perform_strain_shunt_cal_ex(
+    ai_strain_gage_task.perform_strain_shunt_cal(
         ai_strain_gage_task.channels.name,
         shunt_resistor_value,
         shunt_resistor_location,
