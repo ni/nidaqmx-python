@@ -2260,19 +2260,6 @@ class GrpcStubInterpreter(BaseInterpreter):
             metadata=metadata)
         return response.task, response.new_session_initialized
 
-    def perform_bridge_shunt_cal(
-            self, task, channel, shunt_resistor_value,
-            shunt_resistor_location, bridge_resistance,
-            skip_unsupported_channels):
-        response = self._invoke(
-            self._client.PerformBridgeShuntCal,
-            grpc_types.PerformBridgeShuntCalRequest(
-                task=task, channel=channel,
-                shunt_resistor_value=shunt_resistor_value,
-                shunt_resistor_location=shunt_resistor_location,
-                bridge_resistance=bridge_resistance,
-                skip_unsupported_channels=skip_unsupported_channels))
-
     def perform_bridge_shunt_cal_ex(
             self, task, channel, shunt_resistor_value,
             shunt_resistor_location, shunt_resistor_select,
@@ -2287,17 +2274,6 @@ class GrpcStubInterpreter(BaseInterpreter):
                 shunt_resistor_select_raw=shunt_resistor_select,
                 shunt_resistor_source_raw=shunt_resistor_source,
                 bridge_resistance=bridge_resistance,
-                skip_unsupported_channels=skip_unsupported_channels))
-
-    def perform_strain_shunt_cal(
-            self, task, channel, shunt_resistor_value,
-            shunt_resistor_location, skip_unsupported_channels):
-        response = self._invoke(
-            self._client.PerformStrainShuntCal,
-            grpc_types.PerformStrainShuntCalRequest(
-                task=task, channel=channel,
-                shunt_resistor_value=shunt_resistor_value,
-                shunt_resistor_location=shunt_resistor_location,
                 skip_unsupported_channels=skip_unsupported_channels))
 
     def perform_strain_shunt_cal_ex(

@@ -3877,24 +3877,6 @@ class LibraryInterpreter(BaseInterpreter):
         self.check_for_error(error_code)
         return task, new_session_initialized
 
-    def perform_bridge_shunt_cal(
-            self, task, channel, shunt_resistor_value,
-            shunt_resistor_location, bridge_resistance,
-            skip_unsupported_channels):
-        cfunc = lib_importer.windll.DAQmxPerformBridgeShuntCal
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
-                        c_bool32]
-
-        error_code = cfunc(
-            task, channel, shunt_resistor_value, shunt_resistor_location,
-            bridge_resistance, skip_unsupported_channels)
-        self.check_for_error(error_code)
-
     def perform_bridge_shunt_cal_ex(
             self, task, channel, shunt_resistor_value,
             shunt_resistor_location, shunt_resistor_select,
@@ -3912,22 +3894,6 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, channel, shunt_resistor_value, shunt_resistor_location,
             shunt_resistor_select, shunt_resistor_source, bridge_resistance,
-            skip_unsupported_channels)
-        self.check_for_error(error_code)
-
-    def perform_strain_shunt_cal(
-            self, task, channel, shunt_resistor_value,
-            shunt_resistor_location, skip_unsupported_channels):
-        cfunc = lib_importer.windll.DAQmxPerformStrainShuntCal
-        if cfunc.argtypes is None:
-            with cfunc.arglock:
-                if cfunc.argtypes is None:
-                    cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double, ctypes.c_int, c_bool32]
-
-        error_code = cfunc(
-            task, channel, shunt_resistor_value, shunt_resistor_location,
             skip_unsupported_channels)
         self.check_for_error(error_code)
 
