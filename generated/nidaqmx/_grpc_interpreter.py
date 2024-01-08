@@ -2283,9 +2283,9 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.PerformBridgeShuntCalExRequest(
                 task=task, channel=channel,
                 shunt_resistor_value=shunt_resistor_value,
-                shunt_resistor_location=shunt_resistor_location,
-                shunt_resistor_select=shunt_resistor_select,
-                shunt_resistor_source=shunt_resistor_source,
+                shunt_resistor_location_raw=shunt_resistor_location,
+                shunt_resistor_select_raw=shunt_resistor_select,
+                shunt_resistor_source_raw=shunt_resistor_source,
                 bridge_resistance=bridge_resistance,
                 skip_unsupported_channels=skip_unsupported_channels))
 
@@ -2309,9 +2309,9 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.PerformStrainShuntCalExRequest(
                 task=task, channel=channel,
                 shunt_resistor_value=shunt_resistor_value,
-                shunt_resistor_location=shunt_resistor_location,
-                shunt_resistor_select=shunt_resistor_select,
-                shunt_resistor_source=shunt_resistor_source,
+                shunt_resistor_location_raw=shunt_resistor_location,
+                shunt_resistor_select_raw=shunt_resistor_select,
+                shunt_resistor_source_raw=shunt_resistor_source,
                 skip_unsupported_channels=skip_unsupported_channels))
 
     def read_analog_f64(

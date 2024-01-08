@@ -17134,6 +17134,72 @@ enums = {
             }
         ]
     },
+    'ShuntCalSelect0': {
+        'python_name': 'ShuntCalSelect',
+        'values': [
+            {
+                'name': 'A',
+                'value': 12513
+            },
+            {
+                'name': 'B',
+                'value': 12514
+            }
+        ]
+    },
+    'ShuntCalSource': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Default'
+                },
+                'name': 'DEFAULT',
+                'value': -1
+            },
+            {
+                'documentation': {
+                    'description': 'Built-In'
+                },
+                'name': 'BUILT_IN',
+                'value': 10200
+            },
+            {
+                'documentation': {
+                    'description': 'User Provided'
+                },
+                'name': 'USER_PROVIDED',
+                'value': 10167
+            }
+        ]
+    },
+    'ShuntElementLocation': {
+        'values': [
+            {
+                'name': 'R1',
+                'python_name': 'R_1',
+                'value': 12465
+            },
+            {
+                'name': 'R2',
+                'python_name': 'R_2',
+                'value': 12466
+            },
+            {
+                'name': 'R3',
+                'python_name': 'R_3',
+                'value': 12467
+            },
+            {
+                'name': 'R4',
+                'python_name': 'R_4',
+                'value': 14813
+            },
+            {
+                'name': 'NONE',
+                'value': 10230
+            }
+        ]
+    },
     'Signal': {
         'values': [
             {

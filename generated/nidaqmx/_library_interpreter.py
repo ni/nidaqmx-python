@@ -3887,7 +3887,7 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double, ctypes.c_long, ctypes.c_double,
+                        ctypes.c_double, ctypes.c_int, ctypes.c_double,
                         c_bool32]
 
         error_code = cfunc(
@@ -3906,8 +3906,8 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double, ctypes.c_long, ctypes.c_long,
-                        ctypes.c_long, ctypes.c_double, c_bool32]
+                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_int, ctypes.c_double, c_bool32]
 
         error_code = cfunc(
             task, channel, shunt_resistor_value, shunt_resistor_location,
@@ -3924,7 +3924,7 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double, ctypes.c_long, c_bool32]
+                        ctypes.c_double, ctypes.c_int, c_bool32]
 
         error_code = cfunc(
             task, channel, shunt_resistor_value, shunt_resistor_location,
@@ -3941,8 +3941,8 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes_byte_str,
-                        ctypes.c_double, ctypes.c_long, ctypes.c_long,
-                        ctypes.c_long, c_bool32]
+                        ctypes.c_double, ctypes.c_int, ctypes.c_int,
+                        ctypes.c_int, c_bool32]
 
         error_code = cfunc(
             task, channel, shunt_resistor_value, shunt_resistor_location,
