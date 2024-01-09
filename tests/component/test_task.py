@@ -52,7 +52,7 @@ def test___tasks_with_different_names___hash___not_equal(generate_task):
 
 @pytest.mark.device_name("bridgeTester")
 @pytest.mark.parametrize("skip_unsupported_channels", [True, False])
-def test___perform_bridge_offset_nulling_cal_ex___no_errors(
+def test___perform_bridge_offset_nulling_cal___no_errors(
     ai_bridge_task: nidaqmx.Task, skip_unsupported_channels
 ) -> None:
     ai_bridge_task.perform_bridge_offset_nulling_cal_ex(
