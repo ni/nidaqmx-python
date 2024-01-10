@@ -6411,6 +6411,67 @@ SAVE_OPTIONS_ALLOW_INTERACTIVE_EDITING: SaveOptions.ValueType  # 2
 SAVE_OPTIONS_ALLOW_INTERACTIVE_DELETION: SaveOptions.ValueType  # 4
 global___SaveOptions = SaveOptions
 
+class _ShuntCalSelect:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _ShuntCalSelectEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ShuntCalSelect.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    SHUNT_CAL_SELECT_UNSPECIFIED: _ShuntCalSelect.ValueType  # 0
+    SHUNT_CAL_SELECT_A: _ShuntCalSelect.ValueType  # 12513
+    SHUNT_CAL_SELECT_B: _ShuntCalSelect.ValueType  # 12514
+    SHUNT_CAL_SELECT_A_AND_B: _ShuntCalSelect.ValueType  # 12515
+
+class ShuntCalSelect(_ShuntCalSelect, metaclass=_ShuntCalSelectEnumTypeWrapper): ...
+
+SHUNT_CAL_SELECT_UNSPECIFIED: ShuntCalSelect.ValueType  # 0
+SHUNT_CAL_SELECT_A: ShuntCalSelect.ValueType  # 12513
+SHUNT_CAL_SELECT_B: ShuntCalSelect.ValueType  # 12514
+SHUNT_CAL_SELECT_A_AND_B: ShuntCalSelect.ValueType  # 12515
+global___ShuntCalSelect = ShuntCalSelect
+
+class _ShuntCalSource:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _ShuntCalSourceEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ShuntCalSource.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    SHUNT_CAL_SOURCE_UNSPECIFIED: _ShuntCalSource.ValueType  # 0
+    SHUNT_CAL_SOURCE_DEFAULT: _ShuntCalSource.ValueType  # -1
+    SHUNT_CAL_SOURCE_BUILT_IN: _ShuntCalSource.ValueType  # 10200
+    SHUNT_CAL_SOURCE_USER_PROVIDED: _ShuntCalSource.ValueType  # 10167
+
+class ShuntCalSource(_ShuntCalSource, metaclass=_ShuntCalSourceEnumTypeWrapper): ...
+
+SHUNT_CAL_SOURCE_UNSPECIFIED: ShuntCalSource.ValueType  # 0
+SHUNT_CAL_SOURCE_DEFAULT: ShuntCalSource.ValueType  # -1
+SHUNT_CAL_SOURCE_BUILT_IN: ShuntCalSource.ValueType  # 10200
+SHUNT_CAL_SOURCE_USER_PROVIDED: ShuntCalSource.ValueType  # 10167
+global___ShuntCalSource = ShuntCalSource
+
+class _ShuntElementLocation:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _ShuntElementLocationEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ShuntElementLocation.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    SHUNT_ELEMENT_LOCATION_UNSPECIFIED: _ShuntElementLocation.ValueType  # 0
+    SHUNT_ELEMENT_LOCATION_R1: _ShuntElementLocation.ValueType  # 12465
+    SHUNT_ELEMENT_LOCATION_R2: _ShuntElementLocation.ValueType  # 12466
+    SHUNT_ELEMENT_LOCATION_R3: _ShuntElementLocation.ValueType  # 12467
+    SHUNT_ELEMENT_LOCATION_R4: _ShuntElementLocation.ValueType  # 14813
+    SHUNT_ELEMENT_LOCATION_NONE: _ShuntElementLocation.ValueType  # 10230
+
+class ShuntElementLocation(_ShuntElementLocation, metaclass=_ShuntElementLocationEnumTypeWrapper): ...
+
+SHUNT_ELEMENT_LOCATION_UNSPECIFIED: ShuntElementLocation.ValueType  # 0
+SHUNT_ELEMENT_LOCATION_R1: ShuntElementLocation.ValueType  # 12465
+SHUNT_ELEMENT_LOCATION_R2: ShuntElementLocation.ValueType  # 12466
+SHUNT_ELEMENT_LOCATION_R3: ShuntElementLocation.ValueType  # 12467
+SHUNT_ELEMENT_LOCATION_R4: ShuntElementLocation.ValueType  # 14813
+SHUNT_ELEMENT_LOCATION_NONE: ShuntElementLocation.ValueType  # 10230
+global___ShuntElementLocation = ShuntElementLocation
+
 class _Signal:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -7301,7 +7362,7 @@ class _ChannelInt32AttributeValuesEnumTypeWrapper(google.protobuf.internal.enum_
     CHANNEL_INT32_SENSOR_POWER_TYPE_BIPOLAR_DC: _ChannelInt32AttributeValues.ValueType  # 16147
     CHANNEL_INT32_SHUNT_CAL_SELECT_A: _ChannelInt32AttributeValues.ValueType  # 12513
     CHANNEL_INT32_SHUNT_CAL_SELECT_B: _ChannelInt32AttributeValues.ValueType  # 12514
-    CHANNEL_INT32_SHUNT_CAL_SELECT_AAND_B: _ChannelInt32AttributeValues.ValueType  # 12515
+    CHANNEL_INT32_SHUNT_CAL_SELECT_A_AND_B: _ChannelInt32AttributeValues.ValueType  # 12515
     CHANNEL_INT32_SOUND_PRESSURE_UNITS1_PASCALS: _ChannelInt32AttributeValues.ValueType  # 10081
     CHANNEL_INT32_SOUND_PRESSURE_UNITS1_FROM_CUSTOM_SCALE: _ChannelInt32AttributeValues.ValueType  # 10065
     CHANNEL_INT32_SOURCE_SELECTION_INTERNAL: _ChannelInt32AttributeValues.ValueType  # 10200
@@ -7682,7 +7743,7 @@ CHANNEL_INT32_SENSOR_POWER_TYPE_AC: ChannelInt32AttributeValues.ValueType  # 100
 CHANNEL_INT32_SENSOR_POWER_TYPE_BIPOLAR_DC: ChannelInt32AttributeValues.ValueType  # 16147
 CHANNEL_INT32_SHUNT_CAL_SELECT_A: ChannelInt32AttributeValues.ValueType  # 12513
 CHANNEL_INT32_SHUNT_CAL_SELECT_B: ChannelInt32AttributeValues.ValueType  # 12514
-CHANNEL_INT32_SHUNT_CAL_SELECT_AAND_B: ChannelInt32AttributeValues.ValueType  # 12515
+CHANNEL_INT32_SHUNT_CAL_SELECT_A_AND_B: ChannelInt32AttributeValues.ValueType  # 12515
 CHANNEL_INT32_SOUND_PRESSURE_UNITS1_PASCALS: ChannelInt32AttributeValues.ValueType  # 10081
 CHANNEL_INT32_SOUND_PRESSURE_UNITS1_FROM_CUSTOM_SCALE: ChannelInt32AttributeValues.ValueType  # 10065
 CHANNEL_INT32_SOURCE_SELECTION_INTERNAL: ChannelInt32AttributeValues.ValueType  # 10200
@@ -21202,6 +21263,139 @@ class LoadTaskResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["new_session_initialized", b"new_session_initialized", "status", b"status", "task", b"task"]) -> None: ...
 
 global___LoadTaskResponse = LoadTaskResponse
+
+@typing_extensions.final
+class PerformBridgeShuntCalExRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_FIELD_NUMBER: builtins.int
+    CHANNEL_FIELD_NUMBER: builtins.int
+    SHUNT_RESISTOR_VALUE_FIELD_NUMBER: builtins.int
+    SHUNT_RESISTOR_LOCATION_FIELD_NUMBER: builtins.int
+    SHUNT_RESISTOR_LOCATION_RAW_FIELD_NUMBER: builtins.int
+    SHUNT_RESISTOR_SELECT_FIELD_NUMBER: builtins.int
+    SHUNT_RESISTOR_SELECT_RAW_FIELD_NUMBER: builtins.int
+    SHUNT_RESISTOR_SOURCE_FIELD_NUMBER: builtins.int
+    SHUNT_RESISTOR_SOURCE_RAW_FIELD_NUMBER: builtins.int
+    BRIDGE_RESISTANCE_FIELD_NUMBER: builtins.int
+    SKIP_UNSUPPORTED_CHANNELS_FIELD_NUMBER: builtins.int
+    @property
+    def task(self) -> session_pb2.Session: ...
+    channel: builtins.str
+    shunt_resistor_value: builtins.float
+    shunt_resistor_location: global___ShuntElementLocation.ValueType
+    shunt_resistor_location_raw: builtins.int
+    shunt_resistor_select: global___ShuntCalSelect.ValueType
+    shunt_resistor_select_raw: builtins.int
+    shunt_resistor_source: global___ShuntCalSource.ValueType
+    shunt_resistor_source_raw: builtins.int
+    bridge_resistance: builtins.float
+    skip_unsupported_channels: builtins.bool
+    def __init__(
+        self,
+        *,
+        task: session_pb2.Session | None = ...,
+        channel: builtins.str = ...,
+        shunt_resistor_value: builtins.float = ...,
+        shunt_resistor_location: global___ShuntElementLocation.ValueType = ...,
+        shunt_resistor_location_raw: builtins.int = ...,
+        shunt_resistor_select: global___ShuntCalSelect.ValueType = ...,
+        shunt_resistor_select_raw: builtins.int = ...,
+        shunt_resistor_source: global___ShuntCalSource.ValueType = ...,
+        shunt_resistor_source_raw: builtins.int = ...,
+        bridge_resistance: builtins.float = ...,
+        skip_unsupported_channels: builtins.bool = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["shunt_resistor_location", b"shunt_resistor_location", "shunt_resistor_location_enum", b"shunt_resistor_location_enum", "shunt_resistor_location_raw", b"shunt_resistor_location_raw", "shunt_resistor_select", b"shunt_resistor_select", "shunt_resistor_select_enum", b"shunt_resistor_select_enum", "shunt_resistor_select_raw", b"shunt_resistor_select_raw", "shunt_resistor_source", b"shunt_resistor_source", "shunt_resistor_source_enum", b"shunt_resistor_source_enum", "shunt_resistor_source_raw", b"shunt_resistor_source_raw", "task", b"task"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bridge_resistance", b"bridge_resistance", "channel", b"channel", "shunt_resistor_location", b"shunt_resistor_location", "shunt_resistor_location_enum", b"shunt_resistor_location_enum", "shunt_resistor_location_raw", b"shunt_resistor_location_raw", "shunt_resistor_select", b"shunt_resistor_select", "shunt_resistor_select_enum", b"shunt_resistor_select_enum", "shunt_resistor_select_raw", b"shunt_resistor_select_raw", "shunt_resistor_source", b"shunt_resistor_source", "shunt_resistor_source_enum", b"shunt_resistor_source_enum", "shunt_resistor_source_raw", b"shunt_resistor_source_raw", "shunt_resistor_value", b"shunt_resistor_value", "skip_unsupported_channels", b"skip_unsupported_channels", "task", b"task"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["shunt_resistor_location_enum", b"shunt_resistor_location_enum"]) -> typing_extensions.Literal["shunt_resistor_location", "shunt_resistor_location_raw"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["shunt_resistor_select_enum", b"shunt_resistor_select_enum"]) -> typing_extensions.Literal["shunt_resistor_select", "shunt_resistor_select_raw"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["shunt_resistor_source_enum", b"shunt_resistor_source_enum"]) -> typing_extensions.Literal["shunt_resistor_source", "shunt_resistor_source_raw"] | None: ...
+
+global___PerformBridgeShuntCalExRequest = PerformBridgeShuntCalExRequest
+
+@typing_extensions.final
+class PerformBridgeShuntCalExResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    status: builtins.int
+    def __init__(
+        self,
+        *,
+        status: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status"]) -> None: ...
+
+global___PerformBridgeShuntCalExResponse = PerformBridgeShuntCalExResponse
+
+@typing_extensions.final
+class PerformStrainShuntCalExRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_FIELD_NUMBER: builtins.int
+    CHANNEL_FIELD_NUMBER: builtins.int
+    SHUNT_RESISTOR_VALUE_FIELD_NUMBER: builtins.int
+    SHUNT_RESISTOR_LOCATION_FIELD_NUMBER: builtins.int
+    SHUNT_RESISTOR_LOCATION_RAW_FIELD_NUMBER: builtins.int
+    SHUNT_RESISTOR_SELECT_FIELD_NUMBER: builtins.int
+    SHUNT_RESISTOR_SELECT_RAW_FIELD_NUMBER: builtins.int
+    SHUNT_RESISTOR_SOURCE_FIELD_NUMBER: builtins.int
+    SHUNT_RESISTOR_SOURCE_RAW_FIELD_NUMBER: builtins.int
+    SKIP_UNSUPPORTED_CHANNELS_FIELD_NUMBER: builtins.int
+    @property
+    def task(self) -> session_pb2.Session: ...
+    channel: builtins.str
+    shunt_resistor_value: builtins.float
+    shunt_resistor_location: global___ShuntElementLocation.ValueType
+    shunt_resistor_location_raw: builtins.int
+    shunt_resistor_select: global___ShuntCalSelect.ValueType
+    shunt_resistor_select_raw: builtins.int
+    shunt_resistor_source: global___ShuntCalSource.ValueType
+    shunt_resistor_source_raw: builtins.int
+    skip_unsupported_channels: builtins.bool
+    def __init__(
+        self,
+        *,
+        task: session_pb2.Session | None = ...,
+        channel: builtins.str = ...,
+        shunt_resistor_value: builtins.float = ...,
+        shunt_resistor_location: global___ShuntElementLocation.ValueType = ...,
+        shunt_resistor_location_raw: builtins.int = ...,
+        shunt_resistor_select: global___ShuntCalSelect.ValueType = ...,
+        shunt_resistor_select_raw: builtins.int = ...,
+        shunt_resistor_source: global___ShuntCalSource.ValueType = ...,
+        shunt_resistor_source_raw: builtins.int = ...,
+        skip_unsupported_channels: builtins.bool = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["shunt_resistor_location", b"shunt_resistor_location", "shunt_resistor_location_enum", b"shunt_resistor_location_enum", "shunt_resistor_location_raw", b"shunt_resistor_location_raw", "shunt_resistor_select", b"shunt_resistor_select", "shunt_resistor_select_enum", b"shunt_resistor_select_enum", "shunt_resistor_select_raw", b"shunt_resistor_select_raw", "shunt_resistor_source", b"shunt_resistor_source", "shunt_resistor_source_enum", b"shunt_resistor_source_enum", "shunt_resistor_source_raw", b"shunt_resistor_source_raw", "task", b"task"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["channel", b"channel", "shunt_resistor_location", b"shunt_resistor_location", "shunt_resistor_location_enum", b"shunt_resistor_location_enum", "shunt_resistor_location_raw", b"shunt_resistor_location_raw", "shunt_resistor_select", b"shunt_resistor_select", "shunt_resistor_select_enum", b"shunt_resistor_select_enum", "shunt_resistor_select_raw", b"shunt_resistor_select_raw", "shunt_resistor_source", b"shunt_resistor_source", "shunt_resistor_source_enum", b"shunt_resistor_source_enum", "shunt_resistor_source_raw", b"shunt_resistor_source_raw", "shunt_resistor_value", b"shunt_resistor_value", "skip_unsupported_channels", b"skip_unsupported_channels", "task", b"task"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["shunt_resistor_location_enum", b"shunt_resistor_location_enum"]) -> typing_extensions.Literal["shunt_resistor_location", "shunt_resistor_location_raw"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["shunt_resistor_select_enum", b"shunt_resistor_select_enum"]) -> typing_extensions.Literal["shunt_resistor_select", "shunt_resistor_select_raw"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["shunt_resistor_source_enum", b"shunt_resistor_source_enum"]) -> typing_extensions.Literal["shunt_resistor_source", "shunt_resistor_source_raw"] | None: ...
+
+global___PerformStrainShuntCalExRequest = PerformStrainShuntCalExRequest
+
+@typing_extensions.final
+class PerformStrainShuntCalExResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    status: builtins.int
+    def __init__(
+        self,
+        *,
+        status: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status"]) -> None: ...
+
+global___PerformStrainShuntCalExResponse = PerformStrainShuntCalExResponse
 
 @typing_extensions.final
 class ReadAnalogF64Request(google.protobuf.message.Message):

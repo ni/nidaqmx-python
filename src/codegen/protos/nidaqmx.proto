@@ -257,6 +257,8 @@ service NiDAQmx {
   rpc GetWriteAttributeUInt64(GetWriteAttributeUInt64Request) returns (GetWriteAttributeUInt64Response);
   rpc IsTaskDone(IsTaskDoneRequest) returns (IsTaskDoneResponse);
   rpc LoadTask(LoadTaskRequest) returns (LoadTaskResponse);
+  rpc PerformBridgeShuntCalEx(PerformBridgeShuntCalExRequest) returns (PerformBridgeShuntCalExResponse);
+  rpc PerformStrainShuntCalEx(PerformStrainShuntCalExRequest) returns (PerformStrainShuntCalExResponse);
   rpc ReadAnalogF64(ReadAnalogF64Request) returns (ReadAnalogF64Response);
   rpc ReadAnalogScalarF64(ReadAnalogScalarF64Request) returns (ReadAnalogScalarF64Response);
   rpc ReadBinaryI16(ReadBinaryI16Request) returns (ReadBinaryI16Response);
@@ -3234,6 +3236,29 @@ enum SaveOptions {
   SAVE_OPTIONS_ALLOW_INTERACTIVE_DELETION = 4;
 }
 
+enum ShuntCalSelect {
+  SHUNT_CAL_SELECT_UNSPECIFIED = 0;
+  SHUNT_CAL_SELECT_A = 12513;
+  SHUNT_CAL_SELECT_B = 12514;
+  SHUNT_CAL_SELECT_A_AND_B = 12515;
+}
+
+enum ShuntCalSource {
+  SHUNT_CAL_SOURCE_UNSPECIFIED = 0;
+  SHUNT_CAL_SOURCE_DEFAULT = -1;
+  SHUNT_CAL_SOURCE_BUILT_IN = 10200;
+  SHUNT_CAL_SOURCE_USER_PROVIDED = 10167;
+}
+
+enum ShuntElementLocation {
+  SHUNT_ELEMENT_LOCATION_UNSPECIFIED = 0;
+  SHUNT_ELEMENT_LOCATION_R1 = 12465;
+  SHUNT_ELEMENT_LOCATION_R2 = 12466;
+  SHUNT_ELEMENT_LOCATION_R3 = 12467;
+  SHUNT_ELEMENT_LOCATION_R4 = 14813;
+  SHUNT_ELEMENT_LOCATION_NONE = 10230;
+}
+
 enum Signal {
   SIGNAL_UNSPECIFIED = 0;
   SIGNAL_AI_CONVERT_CLOCK = 12484;
@@ -3770,7 +3795,7 @@ enum ChannelInt32AttributeValues {
   CHANNEL_INT32_SENSOR_POWER_TYPE_BIPOLAR_DC = 16147;
   CHANNEL_INT32_SHUNT_CAL_SELECT_A = 12513;
   CHANNEL_INT32_SHUNT_CAL_SELECT_B = 12514;
-  CHANNEL_INT32_SHUNT_CAL_SELECT_AAND_B = 12515;
+  CHANNEL_INT32_SHUNT_CAL_SELECT_A_AND_B = 12515;
   CHANNEL_INT32_SOUND_PRESSURE_UNITS1_PASCALS = 10081;
   CHANNEL_INT32_SOUND_PRESSURE_UNITS1_FROM_CUSTOM_SCALE = 10065;
   CHANNEL_INT32_SOURCE_SELECTION_INTERNAL = 10200;
@@ -8291,6 +8316,53 @@ message LoadTaskResponse {
   int32 status = 1;
   nidevice_grpc.Session task = 2;
   bool new_session_initialized = 3;
+}
+
+message PerformBridgeShuntCalExRequest {
+  nidevice_grpc.Session task = 1;
+  string channel = 2;
+  double shunt_resistor_value = 3;
+  oneof shunt_resistor_location_enum {
+    ShuntElementLocation shunt_resistor_location = 4;
+    int32 shunt_resistor_location_raw = 5;
+  }
+  oneof shunt_resistor_select_enum {
+    ShuntCalSelect shunt_resistor_select = 6;
+    int32 shunt_resistor_select_raw = 7;
+  }
+  oneof shunt_resistor_source_enum {
+    ShuntCalSource shunt_resistor_source = 8;
+    int32 shunt_resistor_source_raw = 9;
+  }
+  double bridge_resistance = 10;
+  bool skip_unsupported_channels = 11;
+}
+
+message PerformBridgeShuntCalExResponse {
+  int32 status = 1;
+}
+
+message PerformStrainShuntCalExRequest {
+  nidevice_grpc.Session task = 1;
+  string channel = 2;
+  double shunt_resistor_value = 3;
+  oneof shunt_resistor_location_enum {
+    ShuntElementLocation shunt_resistor_location = 4;
+    int32 shunt_resistor_location_raw = 5;
+  }
+  oneof shunt_resistor_select_enum {
+    ShuntCalSelect shunt_resistor_select = 6;
+    int32 shunt_resistor_select_raw = 7;
+  }
+  oneof shunt_resistor_source_enum {
+    ShuntCalSource shunt_resistor_source = 8;
+    int32 shunt_resistor_source_raw = 9;
+  }
+  bool skip_unsupported_channels = 10;
+}
+
+message PerformStrainShuntCalExResponse {
+  int32 status = 1;
 }
 
 message ReadAnalogF64Request {

@@ -984,6 +984,14 @@ class NiDAQmxStub:
         nidaqmx_pb2.LoadTaskRequest,
         nidaqmx_pb2.LoadTaskResponse,
     ]
+    PerformBridgeShuntCalEx: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.PerformBridgeShuntCalExRequest,
+        nidaqmx_pb2.PerformBridgeShuntCalExResponse,
+    ]
+    PerformStrainShuntCalEx: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.PerformStrainShuntCalExRequest,
+        nidaqmx_pb2.PerformStrainShuntCalExResponse,
+    ]
     ReadAnalogF64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadAnalogF64Request,
         nidaqmx_pb2.ReadAnalogF64Response,
@@ -2553,6 +2561,14 @@ class NiDAQmxAsyncStub:
     LoadTask: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.LoadTaskRequest,
         nidaqmx_pb2.LoadTaskResponse,
+    ]
+    PerformBridgeShuntCalEx: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.PerformBridgeShuntCalExRequest,
+        nidaqmx_pb2.PerformBridgeShuntCalExResponse,
+    ]
+    PerformStrainShuntCalEx: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.PerformStrainShuntCalExRequest,
+        nidaqmx_pb2.PerformStrainShuntCalExResponse,
     ]
     ReadAnalogF64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadAnalogF64Request,
@@ -4604,6 +4620,18 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
         request: nidaqmx_pb2.LoadTaskRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.LoadTaskResponse, collections.abc.Awaitable[nidaqmx_pb2.LoadTaskResponse]]: ...
+    @abc.abstractmethod
+    def PerformBridgeShuntCalEx(
+        self,
+        request: nidaqmx_pb2.PerformBridgeShuntCalExRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.PerformBridgeShuntCalExResponse, collections.abc.Awaitable[nidaqmx_pb2.PerformBridgeShuntCalExResponse]]: ...
+    @abc.abstractmethod
+    def PerformStrainShuntCalEx(
+        self,
+        request: nidaqmx_pb2.PerformStrainShuntCalExRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.PerformStrainShuntCalExResponse, collections.abc.Awaitable[nidaqmx_pb2.PerformStrainShuntCalExResponse]]: ...
     @abc.abstractmethod
     def ReadAnalogF64(
         self,
