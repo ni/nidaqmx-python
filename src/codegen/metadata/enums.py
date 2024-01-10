@@ -17129,21 +17129,8 @@ enums = {
                 'documentation': {
                     'description': 'Switches A and B.'
                 },
-                'name': 'AAND_B',
+                'name': 'A_AND_B',
                 'value': 12515
-            }
-        ]
-    },
-    'ShuntCalSelect0': {
-        'python_name': 'ShuntCalSelect',
-        'values': [
-            {
-                'name': 'A',
-                'value': 12513
-            },
-            {
-                'name': 'B',
-                'value': 12514
             }
         ]
     },
@@ -17176,22 +17163,18 @@ enums = {
         'values': [
             {
                 'name': 'R1',
-                'python_name': 'R_1',
                 'value': 12465
             },
             {
                 'name': 'R2',
-                'python_name': 'R_2',
                 'value': 12466
             },
             {
                 'name': 'R3',
-                'python_name': 'R_3',
                 'value': 12467
             },
             {
                 'name': 'R4',
-                'python_name': 'R_4',
                 'value': 14813
             },
             {

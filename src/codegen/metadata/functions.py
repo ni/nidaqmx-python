@@ -17146,12 +17146,12 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
-                'enum': 'ShuntCalSelect0',
+                'enum': 'ShuntCalSelect',
                 'is_optional_in_python': False,
                 'name': 'shuntResistorSelect',
-                'python_data_type': 'ShuntResistorSelect',
+                'python_data_type': 'ShuntCalSelect',
                 'python_description': '',
-                'python_type_annotation': 'nidaqmx.constants.ShuntResistorSelect',
+                'python_type_annotation': 'nidaqmx.constants.ShuntCalSelect',
                 'type': 'int32'
             },
             {
@@ -17160,9 +17160,9 @@ functions = {
                 'enum': 'ShuntCalSource',
                 'is_optional_in_python': False,
                 'name': 'shuntResistorSource',
-                'python_data_type': 'BridgeShuntCalSource',
+                'python_data_type': 'ShuntCalSource',
                 'python_description': '',
-                'python_type_annotation': 'nidaqmx.constants.BridgeShuntCalSource',
+                'python_type_annotation': 'nidaqmx.constants.ShuntCalSource',
                 'type': 'int32'
             },
             {
@@ -17242,12 +17242,12 @@ functions = {
             {
                 'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
-                'enum': 'ShuntCalSelect0',
+                'enum': 'ShuntCalSelect',
                 'is_optional_in_python': False,
                 'name': 'shuntResistorSelect',
-                'python_data_type': 'ShuntResistorSelect',
+                'python_data_type': 'ShuntCalSelect',
                 'python_description': '',
-                'python_type_annotation': 'nidaqmx.constants.ShuntResistorSelect',
+                'python_type_annotation': 'nidaqmx.constants.ShuntCalSelect',
                 'type': 'int32'
             },
             {
@@ -17256,9 +17256,9 @@ functions = {
                 'enum': 'ShuntCalSource',
                 'is_optional_in_python': False,
                 'name': 'shuntResistorSource',
-                'python_data_type': 'BridgeShuntCalSource',
+                'python_data_type': 'ShuntCalSource',
                 'python_description': '',
-                'python_type_annotation': 'nidaqmx.constants.BridgeShuntCalSource',
+                'python_type_annotation': 'nidaqmx.constants.ShuntCalSource',
                 'type': 'int32'
             },
             {

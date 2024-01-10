@@ -25,7 +25,7 @@ from nidaqmx._task_modules.do_channel_collection import (
     DOChannelCollection)
 from nidaqmx.constants import (
     AcquisitionType, ChannelType, FillMode, UsageTypeAI, UsageTypeCI, EveryNSamplesEventType,
-    READ_ALL_AVAILABLE, UsageTypeCO, _Save)
+    READ_ALL_AVAILABLE, UsageTypeCO, _Save, ShuntCalSelect, ShuntCalSource, ShuntElementLocation)
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import (
     DaqError, DaqResourceWarning)
@@ -405,11 +405,11 @@ class Task:
 
     def perform_strain_shunt_cal(
             self, channel="", shunt_resistor_value=10000,
-            shunt_resistor_location=0, shunt_resistor_select=0,
-            shunt_resistor_source=0, skip_unsupported_channels=False):
+            shunt_resistor_location=ShuntElementLocation.R1, shunt_resistor_select=ShuntCalSelect.A,
+            shunt_resistor_source=ShuntCalSource.BUILT_IN, skip_unsupported_channels=False):
         """
         Performs shunt calibration for the specified channels of the task. 
-        The instances of this polymorphic VI correspond to the type of bridge 
+        The instances of this method correspond to the type of bridge 
         sensor. Refer to the calibration procedure for your module for detailed
         calibration instructions.
 
@@ -417,22 +417,19 @@ class Task:
         gage sensor.
 
         Args:
-            task/channel in: specifies name of the task or a list of virtual 
-                channels to which the operation applies. If you provide a
-                list of virtual channels, NI-DAQmx creates a task automatically. 
-            channels: specifies a subset of virtual channels in the task that you 
+            channel: Specifies a subset of virtual channels in the task that you 
                 want to calibrate. Use this input if you do not want to calibrate
                 all the channels in the task or if some channels in the task measure
-                non-bridge-based sensors. If the input is empty, this VI attempts to 
-                calibrate all virtual channels in the task.
-            shunt resistor value: specifies the shunt resistance in ohms.
-            shunt resistor location: specifies the location of the shunt resistor.
-            shunt resistor select: specifies which shunt calibration switch to enable.
-            shunt resistor source: specifies which shunt to use.
-            skip unsupported channels: specifies whether or not to skip channels that 
-                do not support calibration. If skip unsupported channels is TRUE, this
-                VI calibrates only supported channels. If FALSE, this VI calibrates the 
-                channels specified by channels. The default is FALSE.
+                non-bridge-based sensors. If the input is empty, this method attempts 
+                to calibrate all virtual channels in the task.
+            shunt_resistor_value: Specifies the shunt resistance in ohms.
+            shunt_resistor_location: Specifies the location of the shunt resistor.
+            shunt_resistor_select: Specifies which shunt calibration switch to enable.
+            shunt_resistor_source: Specifies which shunt to use.
+            skip_unsupported_channels: Specifies whether or not to skip channels that 
+                do not support calibration. If skip_unsupported_channels is True, this
+                method calibrates only supported channels. If False, this method calibrates 
+                the channels specified by channels. The default is False.
         """
         self._interpreter.perform_strain_shunt_cal_ex(
             self._handle, channel, shunt_resistor_value,
@@ -441,37 +438,34 @@ class Task:
 
     def perform_bridge_shunt_cal(
             self, channel="", shunt_resistor_value=100000,
-            shunt_resistor_location=0, shunt_resistor_select=0,
-            shunt_resistor_source=0, bridge_resistance=120,
+            shunt_resistor_location=ShuntElementLocation.R1, shunt_resistor_select=ShuntCalSelect.A,
+            shunt_resistor_source=ShuntCalSource.BUILT_IN, bridge_resistance=120,
             skip_unsupported_channels=False):
         """
         Performs shunt calibration for the specified channels of the task. 
-        The instances of this polymorphic VI correspond to the type of bridge 
+        The instances of this method correspond to the type of bridge 
         sensor. Refer to the calibration procedure for your module for detailed
         calibration instructions.
 
         Performs shunt calibration for the specified channels using a bridge sensor.
 
         Args:
-            task/channel in: specifies name of the task or a list of virtual 
-                channels to which the operation applies. If you provide a
-                list of virtual channels, NI-DAQmx creates a task automatically. 
-            channels: specifies a subset of virtual channels in the task that you 
+            channel: Specifies a subset of virtual channels in the task that you 
                 want to calibrate. Use this input if you do not want to calibrate
                 all the channels in the task or if some channels in the task measure
-                non-bridge-based sensors. If the input is empty, this VI attempts to 
-                calibrate all virtual channels in the task.
-            shunt resistor value: specifies the shunt resistance in ohms.
-            shunt resistor location: specifies the location of the shunt resistor.
-            shunt resistor select: specifies which shunt calibration switch to enable.
-            shunt resistor source: specifies which shunt to use.
-            bridge resistance: specifies the bridge resistance in ohms. A value of -1
+                non-bridge-based sensors. If the input is empty, this method attempts 
+                to calibrate all virtual channels in the task.
+            shunt_resistor_value: Specifies the shunt resistance in ohms.
+            shunt_resistor_location: Specifies the location of the shunt resistor.
+            shunt_resistor_select: Specifies which shunt calibration switch to enable.
+            shunt_resistor_source: Specifies which shunt to use.
+            bridge_resistance: Specifies the bridge resistance in ohms. A value of -1
                 means to use the nominal bridge resistance specified when you created
                 the virtual channel.
-            skip unsupported channels: specifies whether or not to skip channels that 
-                do not support calibration. If skip unsupported channels is TRUE, this
-                VI calibrates only supported channels. If FALSE, this VI calibrates the 
-                channels specified by channels. The default is FALSE.
+            skip_unsupported_channels: Specifies whether or not to skip channels that 
+                do not support calibration. If skip_unsupported_channels is True, this
+                method calibrates only supported channels. If False, this method calibrates 
+                the channels specified by channels. The default is False.
         """
         self._interpreter.perform_bridge_shunt_cal_ex(
             self._handle, channel, shunt_resistor_value,
