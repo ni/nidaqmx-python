@@ -404,17 +404,15 @@ class Task:
 
 
     def perform_strain_shunt_cal(
-            self, channel="", shunt_resistor_value=10000,
-            shunt_resistor_location=ShuntElementLocation.R1, shunt_resistor_select=ShuntCalSelect.A,
-            shunt_resistor_source=ShuntCalSource.BUILT_IN, skip_unsupported_channels=False):
+            self, channel="", shunt_resistor_value=100000,
+            shunt_resistor_location=ShuntElementLocation.R3, shunt_resistor_select=ShuntCalSelect.A,
+            shunt_resistor_source=ShuntCalSource.DEFAULT, skip_unsupported_channels=False):
         """
-        Performs shunt calibration for the specified channels of the task. 
-        The instances of this method correspond to the type of bridge 
-        sensor. Refer to the calibration procedure for your module for detailed
-        calibration instructions.
-
-        Performs shunt calibration for the specified channels using a strain
+        Perform shunt calibration for the specified channels using a strain
         gage sensor.
+
+        Refer to the calibration procedure for your module for detailed
+        calibration instructions.
 
         Args:
             channel: Specifies a subset of virtual channels in the task that you 
@@ -433,21 +431,19 @@ class Task:
         """
         self._interpreter.perform_strain_shunt_cal_ex(
             self._handle, channel, shunt_resistor_value,
-            shunt_resistor_location, shunt_resistor_select,
-            shunt_resistor_source, skip_unsupported_channels)
+            shunt_resistor_location.value, shunt_resistor_select.value,
+            shunt_resistor_source.value, skip_unsupported_channels)
 
     def perform_bridge_shunt_cal(
             self, channel="", shunt_resistor_value=100000,
-            shunt_resistor_location=ShuntElementLocation.R1, shunt_resistor_select=ShuntCalSelect.A,
-            shunt_resistor_source=ShuntCalSource.BUILT_IN, bridge_resistance=120,
+            shunt_resistor_location=ShuntElementLocation.R3, shunt_resistor_select=ShuntCalSelect.A,
+            shunt_resistor_source=ShuntCalSource.DEFAULT, bridge_resistance=120,
             skip_unsupported_channels=False):
         """
-        Performs shunt calibration for the specified channels of the task. 
-        The instances of this method correspond to the type of bridge 
-        sensor. Refer to the calibration procedure for your module for detailed
-        calibration instructions.
+        Perform shunt calibration for the specified channels using a bridge sensor.
 
-        Performs shunt calibration for the specified channels using a bridge sensor.
+        Refer to the calibration procedure for your module for detailed
+        calibration instructions.
 
         Args:
             channel: Specifies a subset of virtual channels in the task that you 
@@ -469,8 +465,8 @@ class Task:
         """
         self._interpreter.perform_bridge_shunt_cal_ex(
             self._handle, channel, shunt_resistor_value,
-            shunt_resistor_location, shunt_resistor_select,
-            shunt_resistor_source, bridge_resistance,
+            shunt_resistor_location.value, shunt_resistor_select.value,
+            shunt_resistor_source.value, bridge_resistance,
             skip_unsupported_channels)     
 
     def read(self, number_of_samples_per_channel=NUM_SAMPLES_UNSET,

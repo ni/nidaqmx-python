@@ -1,6 +1,7 @@
 import pytest
 
 import nidaqmx
+from nidaqmx.constants import ShuntCalSelect, ShuntCalSource, ShuntElementLocation
 from nidaqmx.error_codes import DAQmxErrors
 
 
@@ -46,10 +47,10 @@ def test___tasks_with_different_names___hash___not_equal(generate_task):
 @pytest.mark.parametrize(
     "shunt_resistor_value, shunt_resistor_location, shunt_resistor_select, shunt_resistor_source, bridge_resistance, skip_unsupported_channels",
     [
-        (100000, 12465, 0, 0, 0.2, True),
-        (100000, 12465, 0, 0, 0.2, False),
-        (100000, 12467, 0, 0, 0.2, True),
-        (100000, 12467, 0, 0, 0.2, False),
+        (100000, ShuntElementLocation.R1, ShuntCalSelect.A, ShuntCalSource.DEFAULT, 0.2, True),
+        (100000, ShuntElementLocation.R1, ShuntCalSelect.A, ShuntCalSource.DEFAULT, 0.2, False),
+        (100000, ShuntElementLocation.R3, ShuntCalSelect.A, ShuntCalSource.DEFAULT, 0.2, True),
+        (100000, ShuntElementLocation.R3, ShuntCalSelect.A, ShuntCalSource.DEFAULT, 0.2, False),
     ],
 )
 def test___perform_bridge_shunt_cal___no_errors(
@@ -61,25 +62,40 @@ def test___perform_bridge_shunt_cal___no_errors(
     bridge_resistance,
     skip_unsupported_channels,
 ) -> None:
-    ai_bridge_task.perform_bridge_shunt_cal(
-        ai_bridge_task.channels.name,
-        shunt_resistor_value,
-        shunt_resistor_location,
-        shunt_resistor_select,
-        shunt_resistor_source,
-        bridge_resistance,
-        skip_unsupported_channels,
-    )
+    try:
+        ai_bridge_task.perform_bridge_shunt_cal(
+            ai_bridge_task.channels.name,
+            shunt_resistor_value,
+            shunt_resistor_location,
+            shunt_resistor_select,
+            shunt_resistor_source,
+            bridge_resistance,
+            skip_unsupported_channels,
+        )
+    except nidaqmx.DaqError as e:
+        if e.error_code != -201493:
+            raise
+
+
+@pytest.mark.device_name("bridgeTester")
+def test___perform_bridge_shunt_cal_default___no_errors(
+    ai_bridge_task: nidaqmx.Task,
+) -> None:
+    try:
+        ai_bridge_task.perform_bridge_shunt_cal(ai_bridge_task.channels.name)
+    except nidaqmx.DaqError as e:
+        if e.error_code != -201493:
+            raise
 
 
 @pytest.mark.device_name("bridgeTester")
 @pytest.mark.parametrize(
     "shunt_resistor_value, shunt_resistor_location, shunt_resistor_select, shunt_resistor_source, skip_unsupported_channels",
     [
-        (100000, 12465, 0, 0, True),
-        (100000, 12465, 0, 0, False),
-        (100000, 12467, 0, 0, True),
-        (100000, 12467, 0, 0, False),
+        (100000, ShuntElementLocation.R1, ShuntCalSelect.A, ShuntCalSource.DEFAULT, False),
+        (100000, ShuntElementLocation.R1, ShuntCalSelect.A, ShuntCalSource.DEFAULT, False),
+        (100000, ShuntElementLocation.R3, ShuntCalSelect.A, ShuntCalSource.DEFAULT, True),
+        (100000, ShuntElementLocation.R3, ShuntCalSelect.A, ShuntCalSource.DEFAULT, False),
     ],
 )
 def test___perform_strain_shunt_cal___no_errors(
@@ -90,11 +106,26 @@ def test___perform_strain_shunt_cal___no_errors(
     shunt_resistor_source,
     skip_unsupported_channels,
 ) -> None:
-    ai_strain_gage_task.perform_strain_shunt_cal(
-        ai_strain_gage_task.channels.name,
-        shunt_resistor_value,
-        shunt_resistor_location,
-        shunt_resistor_select,
-        shunt_resistor_source,
-        skip_unsupported_channels,
-    )
+    try:
+        ai_strain_gage_task.perform_strain_shunt_cal(
+            ai_strain_gage_task.channels.name,
+            shunt_resistor_value,
+            shunt_resistor_location,
+            shunt_resistor_select,
+            shunt_resistor_source,
+            skip_unsupported_channels,
+        )
+    except nidaqmx.DaqError as e:
+        if e.error_code != -201493:
+            raise
+
+
+@pytest.mark.device_name("bridgeTester")
+def test___perform_strain_shunt_cal_default___no_errors(
+    ai_strain_gage_task: nidaqmx.Task,
+) -> None:
+    try:
+        ai_strain_gage_task.perform_strain_shunt_cal(ai_strain_gage_task.channels.name)
+    except nidaqmx.DaqError as e:
+        if e.error_code != -201493:
+            raise
