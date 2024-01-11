@@ -3,6 +3,7 @@ import pytest
 import nidaqmx
 from nidaqmx.constants import ShuntCalSelect, ShuntCalSource, ShuntElementLocation
 from nidaqmx.error_codes import DAQmxErrors
+from nidaqmx.errors import RpcError
 
 
 @pytest.fixture
