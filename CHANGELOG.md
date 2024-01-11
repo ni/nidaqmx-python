@@ -20,11 +20,10 @@
 All notable changes to this project will be documented in this file.
 
 ## 0.9.1
-
 * ### Merged Pull Requests
     *  ...
 * ### Major Changes
-    * ...
+    * Fix naming issues. `AAND_B` is now `A_AND_B`,  `R_1` is now `R1`,  `R_2` is now `R2`,  `R_3` is now `R3` and  `R_4` is now `R4`.
 * ### Known Issues
     * ...
 
