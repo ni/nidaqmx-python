@@ -50,14 +50,27 @@ def test___tasks_with_different_names___hash___not_equal(generate_task):
     assert hash(task1) != hash(task2)
 
 
+@pytest.mark.grpc_xfail(
+    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
+)
 @pytest.mark.device_name("bridgeTester")
 @pytest.mark.parametrize("skip_unsupported_channels", [True, False])
-def test___perform_bridge_offset_nulling_cal___no_errors(
+def test___arguments_specified___perform_bridge_offset_nulling_cal___no_errors(
     ai_bridge_task: nidaqmx.Task, skip_unsupported_channels
 ) -> None:
-    ai_bridge_task.perform_bridge_offset_nulling_cal_ex(
+    ai_bridge_task.perform_bridge_offset_nulling_cal(
         ai_bridge_task.channels.name, skip_unsupported_channels
     )
+
+
+@pytest.mark.grpc_xfail(
+    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
+)
+@pytest.mark.device_name("bridgeTester")
+def test___default_arguments___perform_bridge_offset_nulling_cal___no_errors(
+    ai_bridge_task: nidaqmx.Task,
+) -> None:
+    ai_bridge_task.perform_bridge_offset_nulling_cal()
 
 
 @pytest.mark.device_name("bridgeTester")
@@ -160,11 +173,24 @@ def test___perform_strain_shunt_cal_default___no_errors(
             raise
 
 
+@pytest.mark.grpc_xfail(
+    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
+)
 @pytest.mark.device_name("cDAQ1Mod2")
 @pytest.mark.parametrize("skip_unsupported_channels", [True, False])
-def test___perform_thrmcpl_lead_offset_nulling_cal___no_errors(
+def test___arguments_specified___perform_thrmcpl_lead_offset_nulling_cal___no_errors(
     ai_thermocouple_task: nidaqmx.Task, skip_unsupported_channels
 ) -> None:
     ai_thermocouple_task.perform_thrmcpl_lead_offset_nulling_cal(
         ai_thermocouple_task.channels.name, skip_unsupported_channels
     )
+
+
+@pytest.mark.grpc_xfail(
+    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
+)
+@pytest.mark.device_name("cDAQ1Mod2")
+def test___default_arguments___perform_thrmcpl_lead_offset_nulling_cal___no_errors(
+    ai_thermocouple_task: nidaqmx.Task,
+) -> None:
+    ai_thermocouple_task.perform_thrmcpl_lead_offset_nulling_cal()
