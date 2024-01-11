@@ -45,6 +45,9 @@ def test___tasks_with_different_names___hash___not_equal(generate_task):
 
 
 @pytest.mark.device_name("bridgeTester")
+@pytest.mark.grpc_xfail(
+    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
+)
 @pytest.mark.parametrize(
     "shunt_resistor_value, shunt_resistor_location, shunt_resistor_select, shunt_resistor_source, bridge_resistance, skip_unsupported_channels",
     [
@@ -54,7 +57,6 @@ def test___tasks_with_different_names___hash___not_equal(generate_task):
         (100000, ShuntElementLocation.R3, ShuntCalSelect.A, ShuntCalSource.DEFAULT, 0.2, False),
     ],
 )
-@pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError)
 def test___perform_bridge_shunt_cal___no_errors(
     ai_bridge_task: nidaqmx.Task,
     shunt_resistor_value,
@@ -80,7 +82,9 @@ def test___perform_bridge_shunt_cal___no_errors(
 
 
 @pytest.mark.device_name("bridgeTester")
-@pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError)
+@pytest.mark.grpc_xfail(
+    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
+)
 def test___perform_bridge_shunt_cal_default___no_errors(
     ai_bridge_task: nidaqmx.Task,
 ) -> None:
@@ -92,6 +96,9 @@ def test___perform_bridge_shunt_cal_default___no_errors(
 
 
 @pytest.mark.device_name("bridgeTester")
+@pytest.mark.grpc_xfail(
+    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
+)
 @pytest.mark.parametrize(
     "shunt_resistor_value, shunt_resistor_location, shunt_resistor_select, shunt_resistor_source, skip_unsupported_channels",
     [
@@ -101,7 +108,6 @@ def test___perform_bridge_shunt_cal_default___no_errors(
         (100000, ShuntElementLocation.R3, ShuntCalSelect.A, ShuntCalSource.DEFAULT, False),
     ],
 )
-@pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError)
 def test___perform_strain_shunt_cal___no_errors(
     ai_strain_gage_task: nidaqmx.Task,
     shunt_resistor_value,
@@ -125,7 +131,9 @@ def test___perform_strain_shunt_cal___no_errors(
 
 
 @pytest.mark.device_name("bridgeTester")
-@pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError)
+@pytest.mark.grpc_xfail(
+    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
+)
 def test___perform_strain_shunt_cal_default___no_errors(
     ai_strain_gage_task: nidaqmx.Task,
 ) -> None:
