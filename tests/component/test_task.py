@@ -68,7 +68,7 @@ def test___arguments_specified___perform_bridge_offset_nulling_cal___no_errors(
 )
 @pytest.mark.device_name("bridgeTester")
 def test___default_arguments___perform_bridge_offset_nulling_cal___no_errors(
-    ai_bridge_task: nidaqmx.Task
+    ai_bridge_task: nidaqmx.Task,
 ) -> None:
     ai_bridge_task.perform_bridge_offset_nulling_cal()
 
@@ -191,6 +191,6 @@ def test___arguments_specified___perform_thrmcpl_lead_offset_nulling_cal___no_er
 )
 @pytest.mark.device_name("cDAQ1Mod2")
 def test___default_arguments___perform_thrmcpl_lead_offset_nulling_cal___no_errors(
-    ai_thermocouple_task: nidaqmx.Task
+    ai_thermocouple_task: nidaqmx.Task,
 ) -> None:
     ai_thermocouple_task.perform_thrmcpl_lead_offset_nulling_cal()
