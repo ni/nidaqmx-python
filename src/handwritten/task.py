@@ -412,14 +412,14 @@ class Task:
 
         Args:
             channel: is a subset of virtual channels in the task that you want to calibrate.
-            Use this input if you do not want to calibrate all the channels in the task or
-            if some channels in the task have open thermocouple detection disabled.
-            If the input is empty, this VI attempts to calibrate all virtual channels in the task.
+                Use this input if you do not want to calibrate all the channels in the task or
+                if some channels in the task have open thermocouple detection disabled.
+                If the input is empty, this VI attempts to calibrate all virtual channels in the task.
 
             skip_unsupported_channels: specifies whether or not to skip channels that do not 
-            support calibration.
-            If skip unsupported channels is TRUE, this VI calibrates only supported channels.
-            If FALSE, this VI calibrates the channels specified by channels. The default is FALSE.
+                support calibration.
+                If skip unsupported channels is TRUE, this VI calibrates only supported channels.
+                If FALSE, this VI calibrates the channels specified by channels. The default is FALSE.
         """
 
         self._interpreter.perform_bridge_offset_nulling_cal_ex(
@@ -501,14 +501,14 @@ class Task:
 
         Args:
             channel: is a subset of virtual channels in the task that you want to calibrate.
-            Use this input if you do not want to calibrate all the channels in the task or
-            if some channels in the task have open thermocouple detection disabled.
-            If the input is empty, this VI attempts to calibrate all virtual channels in the task.
+                Use this input if you do not want to calibrate all the channels in the task or
+                if some channels in the task have open thermocouple detection disabled.
+                If the input is empty, this VI attempts to calibrate all virtual channels in the task.
 
             skip_unsupported_channels: specifies whether or not to skip channels that do not 
-            support calibration.
-            If skip unsupported channels is TRUE, this VI calibrates only supported channels.
-            If FALSE, this VI calibrates the channels specified by channels. The default is FALSE.
+                support calibration.
+                If skip unsupported channels is TRUE, this VI calibrates only supported channels.
+                If FALSE, this VI calibrates the channels specified by channels. The default is FALSE.
         """
 
         self._interpreter.perform_thrmcpl_lead_offset_nulling_cal(
