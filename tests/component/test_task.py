@@ -77,7 +77,7 @@ def test___perform_bridge_shunt_cal___no_errors(
             skip_unsupported_channels,
         )
     except nidaqmx.DaqError as e:
-        if e.error_code != -201493:
+        if e.error_code != DAQmxErrors.SHUNT_CAL_FAILED_OUT_OF_RANGE:
             raise
 
 
@@ -91,7 +91,7 @@ def test___perform_bridge_shunt_cal_default___no_errors(
     try:
         ai_bridge_task.perform_bridge_shunt_cal(ai_bridge_task.channels.name)
     except nidaqmx.DaqError as e:
-        if e.error_code != -201493:
+        if e.error_code != DAQmxErrors.SHUNT_CAL_FAILED_OUT_OF_RANGE:
             raise
 
 
@@ -126,7 +126,7 @@ def test___perform_strain_shunt_cal___no_errors(
             skip_unsupported_channels,
         )
     except nidaqmx.DaqError as e:
-        if e.error_code != -201493:
+        if e.error_code != DAQmxErrors.SHUNT_CAL_FAILED_OUT_OF_RANGE:
             raise
 
 
@@ -140,5 +140,5 @@ def test___perform_strain_shunt_cal_default___no_errors(
     try:
         ai_strain_gage_task.perform_strain_shunt_cal(ai_strain_gage_task.channels.name)
     except nidaqmx.DaqError as e:
-        if e.error_code != -201493:
+        if e.error_code != DAQmxErrors.SHUNT_CAL_FAILED_OUT_OF_RANGE:
             raise
