@@ -257,8 +257,10 @@ service NiDAQmx {
   rpc GetWriteAttributeUInt64(GetWriteAttributeUInt64Request) returns (GetWriteAttributeUInt64Response);
   rpc IsTaskDone(IsTaskDoneRequest) returns (IsTaskDoneResponse);
   rpc LoadTask(LoadTaskRequest) returns (LoadTaskResponse);
+  rpc PerformBridgeOffsetNullingCalEx(PerformBridgeOffsetNullingCalExRequest) returns (PerformBridgeOffsetNullingCalExResponse);
   rpc PerformBridgeShuntCalEx(PerformBridgeShuntCalExRequest) returns (PerformBridgeShuntCalExResponse);
   rpc PerformStrainShuntCalEx(PerformStrainShuntCalExRequest) returns (PerformStrainShuntCalExResponse);
+  rpc PerformThrmcplLeadOffsetNullingCal(PerformThrmcplLeadOffsetNullingCalRequest) returns (PerformThrmcplLeadOffsetNullingCalResponse);
   rpc ReadAnalogF64(ReadAnalogF64Request) returns (ReadAnalogF64Response);
   rpc ReadAnalogScalarF64(ReadAnalogScalarF64Request) returns (ReadAnalogScalarF64Response);
   rpc ReadBinaryI16(ReadBinaryI16Request) returns (ReadBinaryI16Response);
@@ -8318,6 +8320,16 @@ message LoadTaskResponse {
   bool new_session_initialized = 3;
 }
 
+message PerformBridgeOffsetNullingCalExRequest {
+  nidevice_grpc.Session task = 1;
+  string channel = 2;
+  bool skip_unsupported_channels = 3;
+}
+
+message PerformBridgeOffsetNullingCalExResponse {
+  int32 status = 1;
+}
+
 message PerformBridgeShuntCalExRequest {
   nidevice_grpc.Session task = 1;
   string channel = 2;
@@ -8362,6 +8374,16 @@ message PerformStrainShuntCalExRequest {
 }
 
 message PerformStrainShuntCalExResponse {
+  int32 status = 1;
+}
+
+message PerformThrmcplLeadOffsetNullingCalRequest {
+  nidevice_grpc.Session task = 1;
+  string channel = 2;
+  bool skip_unsupported_channels = 3;
+}
+
+message PerformThrmcplLeadOffsetNullingCalResponse {
   int32 status = 1;
 }
 

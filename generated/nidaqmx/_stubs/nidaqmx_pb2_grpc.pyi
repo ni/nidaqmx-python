@@ -984,6 +984,10 @@ class NiDAQmxStub:
         nidaqmx_pb2.LoadTaskRequest,
         nidaqmx_pb2.LoadTaskResponse,
     ]
+    PerformBridgeOffsetNullingCalEx: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.PerformBridgeOffsetNullingCalExRequest,
+        nidaqmx_pb2.PerformBridgeOffsetNullingCalExResponse,
+    ]
     PerformBridgeShuntCalEx: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.PerformBridgeShuntCalExRequest,
         nidaqmx_pb2.PerformBridgeShuntCalExResponse,
@@ -991,6 +995,10 @@ class NiDAQmxStub:
     PerformStrainShuntCalEx: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.PerformStrainShuntCalExRequest,
         nidaqmx_pb2.PerformStrainShuntCalExResponse,
+    ]
+    PerformThrmcplLeadOffsetNullingCal: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.PerformThrmcplLeadOffsetNullingCalRequest,
+        nidaqmx_pb2.PerformThrmcplLeadOffsetNullingCalResponse,
     ]
     ReadAnalogF64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadAnalogF64Request,
@@ -2562,6 +2570,10 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.LoadTaskRequest,
         nidaqmx_pb2.LoadTaskResponse,
     ]
+    PerformBridgeOffsetNullingCalEx: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.PerformBridgeOffsetNullingCalExRequest,
+        nidaqmx_pb2.PerformBridgeOffsetNullingCalExResponse,
+    ]
     PerformBridgeShuntCalEx: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.PerformBridgeShuntCalExRequest,
         nidaqmx_pb2.PerformBridgeShuntCalExResponse,
@@ -2569,6 +2581,10 @@ class NiDAQmxAsyncStub:
     PerformStrainShuntCalEx: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.PerformStrainShuntCalExRequest,
         nidaqmx_pb2.PerformStrainShuntCalExResponse,
+    ]
+    PerformThrmcplLeadOffsetNullingCal: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.PerformThrmcplLeadOffsetNullingCalRequest,
+        nidaqmx_pb2.PerformThrmcplLeadOffsetNullingCalResponse,
     ]
     ReadAnalogF64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadAnalogF64Request,
@@ -4621,6 +4637,12 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.LoadTaskResponse, collections.abc.Awaitable[nidaqmx_pb2.LoadTaskResponse]]: ...
     @abc.abstractmethod
+    def PerformBridgeOffsetNullingCalEx(
+        self,
+        request: nidaqmx_pb2.PerformBridgeOffsetNullingCalExRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.PerformBridgeOffsetNullingCalExResponse, collections.abc.Awaitable[nidaqmx_pb2.PerformBridgeOffsetNullingCalExResponse]]: ...
+    @abc.abstractmethod
     def PerformBridgeShuntCalEx(
         self,
         request: nidaqmx_pb2.PerformBridgeShuntCalExRequest,
@@ -4632,6 +4654,12 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
         request: nidaqmx_pb2.PerformStrainShuntCalExRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.PerformStrainShuntCalExResponse, collections.abc.Awaitable[nidaqmx_pb2.PerformStrainShuntCalExResponse]]: ...
+    @abc.abstractmethod
+    def PerformThrmcplLeadOffsetNullingCal(
+        self,
+        request: nidaqmx_pb2.PerformThrmcplLeadOffsetNullingCalRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.PerformThrmcplLeadOffsetNullingCalResponse, collections.abc.Awaitable[nidaqmx_pb2.PerformThrmcplLeadOffsetNullingCalResponse]]: ...
     @abc.abstractmethod
     def ReadAnalogF64(
         self,

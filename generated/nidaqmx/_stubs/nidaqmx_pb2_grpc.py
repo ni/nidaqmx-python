@@ -1214,6 +1214,11 @@ class NiDAQmxStub(object):
                 request_serializer=nidaqmx__pb2.LoadTaskRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.LoadTaskResponse.FromString,
                 )
+        self.PerformBridgeOffsetNullingCalEx = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/PerformBridgeOffsetNullingCalEx',
+                request_serializer=nidaqmx__pb2.PerformBridgeOffsetNullingCalExRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.PerformBridgeOffsetNullingCalExResponse.FromString,
+                )
         self.PerformBridgeShuntCalEx = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/PerformBridgeShuntCalEx',
                 request_serializer=nidaqmx__pb2.PerformBridgeShuntCalExRequest.SerializeToString,
@@ -1223,6 +1228,11 @@ class NiDAQmxStub(object):
                 '/nidaqmx_grpc.NiDAQmx/PerformStrainShuntCalEx',
                 request_serializer=nidaqmx__pb2.PerformStrainShuntCalExRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.PerformStrainShuntCalExResponse.FromString,
+                )
+        self.PerformThrmcplLeadOffsetNullingCal = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/PerformThrmcplLeadOffsetNullingCal',
+                request_serializer=nidaqmx__pb2.PerformThrmcplLeadOffsetNullingCalRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.PerformThrmcplLeadOffsetNullingCalResponse.FromString,
                 )
         self.ReadAnalogF64 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadAnalogF64',
@@ -3429,6 +3439,12 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PerformBridgeOffsetNullingCalEx(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def PerformBridgeShuntCalEx(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -3436,6 +3452,12 @@ class NiDAQmxServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PerformStrainShuntCalEx(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PerformThrmcplLeadOffsetNullingCal(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -5556,6 +5578,11 @@ def add_NiDAQmxServicer_to_server(servicer, server):
                     request_deserializer=nidaqmx__pb2.LoadTaskRequest.FromString,
                     response_serializer=nidaqmx__pb2.LoadTaskResponse.SerializeToString,
             ),
+            'PerformBridgeOffsetNullingCalEx': grpc.unary_unary_rpc_method_handler(
+                    servicer.PerformBridgeOffsetNullingCalEx,
+                    request_deserializer=nidaqmx__pb2.PerformBridgeOffsetNullingCalExRequest.FromString,
+                    response_serializer=nidaqmx__pb2.PerformBridgeOffsetNullingCalExResponse.SerializeToString,
+            ),
             'PerformBridgeShuntCalEx': grpc.unary_unary_rpc_method_handler(
                     servicer.PerformBridgeShuntCalEx,
                     request_deserializer=nidaqmx__pb2.PerformBridgeShuntCalExRequest.FromString,
@@ -5565,6 +5592,11 @@ def add_NiDAQmxServicer_to_server(servicer, server):
                     servicer.PerformStrainShuntCalEx,
                     request_deserializer=nidaqmx__pb2.PerformStrainShuntCalExRequest.FromString,
                     response_serializer=nidaqmx__pb2.PerformStrainShuntCalExResponse.SerializeToString,
+            ),
+            'PerformThrmcplLeadOffsetNullingCal': grpc.unary_unary_rpc_method_handler(
+                    servicer.PerformThrmcplLeadOffsetNullingCal,
+                    request_deserializer=nidaqmx__pb2.PerformThrmcplLeadOffsetNullingCalRequest.FromString,
+                    response_serializer=nidaqmx__pb2.PerformThrmcplLeadOffsetNullingCalResponse.SerializeToString,
             ),
             'ReadAnalogF64': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadAnalogF64,
@@ -10417,6 +10449,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def PerformBridgeOffsetNullingCalEx(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/PerformBridgeOffsetNullingCalEx',
+            nidaqmx__pb2.PerformBridgeOffsetNullingCalExRequest.SerializeToString,
+            nidaqmx__pb2.PerformBridgeOffsetNullingCalExResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def PerformBridgeShuntCalEx(request,
             target,
             options=(),
@@ -10447,6 +10496,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/PerformStrainShuntCalEx',
             nidaqmx__pb2.PerformStrainShuntCalExRequest.SerializeToString,
             nidaqmx__pb2.PerformStrainShuntCalExResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PerformThrmcplLeadOffsetNullingCal(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/PerformThrmcplLeadOffsetNullingCal',
+            nidaqmx__pb2.PerformThrmcplLeadOffsetNullingCalRequest.SerializeToString,
+            nidaqmx__pb2.PerformThrmcplLeadOffsetNullingCalResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

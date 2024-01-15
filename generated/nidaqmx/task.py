@@ -402,6 +402,28 @@ class Task:
 
         return is_task_done
 
+    def perform_bridge_offset_nulling_cal(self, channel="", skip_unsupported_channels=False):
+        """
+        Perform a bridge offset nulling calibration on the channels in the task.
+
+        If the task measures both bridge-based sensors and non-bridge-based sensors,
+        use the channels input to specify the names of the channels that measure
+        bridge-based sensors.
+
+        Args:
+            channel: is a subset of virtual channels in the task that you want to calibrate.
+                Use this input if you do not want to calibrate all the channels in the task or
+                if some channels in the task have open thermocouple detection disabled.
+                If the input is empty, this VI attempts to calibrate all virtual channels in the task.
+
+            skip_unsupported_channels: specifies whether or not to skip channels that do not 
+                support calibration.
+                If skip unsupported channels is TRUE, this VI calibrates only supported channels.
+                If FALSE, this VI calibrates the channels specified by channels. The default is FALSE.
+        """
+
+        self._interpreter.perform_bridge_offset_nulling_cal_ex(
+            self._handle, channel, skip_unsupported_channels)
 
     def perform_strain_shunt_cal(
             self, channel="", shunt_resistor_value=100000,
@@ -467,7 +489,30 @@ class Task:
             self._handle, channel, shunt_resistor_value,
             shunt_resistor_location.value, shunt_resistor_select.value,
             shunt_resistor_source.value, bridge_resistance,
-            skip_unsupported_channels)     
+            skip_unsupported_channels) 
+
+    def perform_thrmcpl_lead_offset_nulling_cal(self, channel="", skip_unsupported_channels=False):
+        """
+        Perform thermocouple lead offset nulling calibration on the channels in the task.
+
+        This is to compensate for offsets introduced by open thermocouple detection.
+        Keep the measured temperature as constant as possible while performing this 
+        adjustment.
+
+        Args:
+            channel: is a subset of virtual channels in the task that you want to calibrate.
+                Use this input if you do not want to calibrate all the channels in the task or
+                if some channels in the task have open thermocouple detection disabled.
+                If the input is empty, this VI attempts to calibrate all virtual channels in the task.
+
+            skip_unsupported_channels: specifies whether or not to skip channels that do not 
+                support calibration.
+                If skip unsupported channels is TRUE, this VI calibrates only supported channels.
+                If FALSE, this VI calibrates the channels specified by channels. The default is FALSE.
+        """
+
+        self._interpreter.perform_thrmcpl_lead_offset_nulling_cal(
+            self._handle, channel, skip_unsupported_channels)
 
     def read(self, number_of_samples_per_channel=NUM_SAMPLES_UNSET,
              timeout=10.0):
