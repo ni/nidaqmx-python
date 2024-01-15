@@ -8330,6 +8330,53 @@ message PerformBridgeOffsetNullingCalExResponse {
   int32 status = 1;
 }
 
+message PerformBridgeShuntCalExRequest {
+  nidevice_grpc.Session task = 1;
+  string channel = 2;
+  double shunt_resistor_value = 3;
+  oneof shunt_resistor_location_enum {
+    ShuntElementLocation shunt_resistor_location = 4;
+    int32 shunt_resistor_location_raw = 5;
+  }
+  oneof shunt_resistor_select_enum {
+    ShuntCalSelect shunt_resistor_select = 6;
+    int32 shunt_resistor_select_raw = 7;
+  }
+  oneof shunt_resistor_source_enum {
+    ShuntCalSource shunt_resistor_source = 8;
+    int32 shunt_resistor_source_raw = 9;
+  }
+  double bridge_resistance = 10;
+  bool skip_unsupported_channels = 11;
+}
+
+message PerformBridgeShuntCalExResponse {
+  int32 status = 1;
+}
+
+message PerformStrainShuntCalExRequest {
+  nidevice_grpc.Session task = 1;
+  string channel = 2;
+  double shunt_resistor_value = 3;
+  oneof shunt_resistor_location_enum {
+    ShuntElementLocation shunt_resistor_location = 4;
+    int32 shunt_resistor_location_raw = 5;
+  }
+  oneof shunt_resistor_select_enum {
+    ShuntCalSelect shunt_resistor_select = 6;
+    int32 shunt_resistor_select_raw = 7;
+  }
+  oneof shunt_resistor_source_enum {
+    ShuntCalSource shunt_resistor_source = 8;
+    int32 shunt_resistor_source_raw = 9;
+  }
+  bool skip_unsupported_channels = 10;
+}
+
+message PerformStrainShuntCalExResponse {
+  int32 status = 1;
+}
+
 message PerformThrmcplLeadOffsetNullingCalRequest {
   nidevice_grpc.Session task = 1;
   string channel = 2;
