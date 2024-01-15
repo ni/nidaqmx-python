@@ -489,7 +489,7 @@ class Task:
             self._handle, channel, shunt_resistor_value,
             shunt_resistor_location.value, shunt_resistor_select.value,
             shunt_resistor_source.value, bridge_resistance,
-            skip_unsupported_channels)     
+            skip_unsupported_channels) 
 
     def perform_thrmcpl_lead_offset_nulling_cal(self, channel="", skip_unsupported_channels=False):
         """
