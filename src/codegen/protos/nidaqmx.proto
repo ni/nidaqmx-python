@@ -8320,6 +8320,26 @@ message LoadTaskResponse {
   bool new_session_initialized = 3;
 }
 
+message PerformBridgeOffsetNullingCalExRequest {
+  nidevice_grpc.Session task = 1;
+  string channel = 2;
+  bool skip_unsupported_channels = 3;
+}
+
+message PerformBridgeOffsetNullingCalExResponse {
+  int32 status = 1;
+}
+
+message PerformThrmcplLeadOffsetNullingCalRequest {
+  nidevice_grpc.Session task = 1;
+  string channel = 2;
+  bool skip_unsupported_channels = 3;
+}
+
+message PerformThrmcplLeadOffsetNullingCalResponse {
+  int32 status = 1;
+}
+
 message ReadAnalogF64Request {
   nidevice_grpc.Session task = 1;
   int32 num_samps_per_chan = 2;

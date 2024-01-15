@@ -21265,6 +21265,44 @@ class LoadTaskResponse(google.protobuf.message.Message):
 global___LoadTaskResponse = LoadTaskResponse
 
 @typing_extensions.final
+class PerformBridgeOffsetNullingCalExRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_FIELD_NUMBER: builtins.int
+    CHANNEL_FIELD_NUMBER: builtins.int
+    SKIP_UNSUPPORTED_CHANNELS_FIELD_NUMBER: builtins.int
+    @property
+    def task(self) -> session_pb2.Session: ...
+    channel: builtins.str
+    skip_unsupported_channels: builtins.bool
+    def __init__(
+        self,
+        *,
+        task: session_pb2.Session | None = ...,
+        channel: builtins.str = ...,
+        skip_unsupported_channels: builtins.bool = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["task", b"task"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["channel", b"channel", "skip_unsupported_channels", b"skip_unsupported_channels", "task", b"task"]) -> None: ...
+
+global___PerformBridgeOffsetNullingCalExRequest = PerformBridgeOffsetNullingCalExRequest
+
+@typing_extensions.final
+class PerformBridgeOffsetNullingCalExResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    status: builtins.int
+    def __init__(
+        self,
+        *,
+        status: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status"]) -> None: ...
+
+global___PerformBridgeOffsetNullingCalExResponse = PerformBridgeOffsetNullingCalExResponse
+
+@typing_extensions.final
 class PerformBridgeShuntCalExRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -21396,6 +21434,44 @@ class PerformStrainShuntCalExResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["status", b"status"]) -> None: ...
 
 global___PerformStrainShuntCalExResponse = PerformStrainShuntCalExResponse
+
+@typing_extensions.final
+class PerformThrmcplLeadOffsetNullingCalRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_FIELD_NUMBER: builtins.int
+    CHANNEL_FIELD_NUMBER: builtins.int
+    SKIP_UNSUPPORTED_CHANNELS_FIELD_NUMBER: builtins.int
+    @property
+    def task(self) -> session_pb2.Session: ...
+    channel: builtins.str
+    skip_unsupported_channels: builtins.bool
+    def __init__(
+        self,
+        *,
+        task: session_pb2.Session | None = ...,
+        channel: builtins.str = ...,
+        skip_unsupported_channels: builtins.bool = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["task", b"task"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["channel", b"channel", "skip_unsupported_channels", b"skip_unsupported_channels", "task", b"task"]) -> None: ...
+
+global___PerformThrmcplLeadOffsetNullingCalRequest = PerformThrmcplLeadOffsetNullingCalRequest
+
+@typing_extensions.final
+class PerformThrmcplLeadOffsetNullingCalResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    status: builtins.int
+    def __init__(
+        self,
+        *,
+        status: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status"]) -> None: ...
+
+global___PerformThrmcplLeadOffsetNullingCalResponse = PerformThrmcplLeadOffsetNullingCalResponse
 
 @typing_extensions.final
 class ReadAnalogF64Request(google.protobuf.message.Message):
