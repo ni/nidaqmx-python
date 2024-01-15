@@ -20,11 +20,12 @@
 All notable changes to this project will be documented in this file.
 
 ## 0.9.1
-
 * ### Merged Pull Requests
     *  ...
 * ### Major Changes
-    * ...
+    * Add support for strain calibration (offset nulling and shunt calibration)
+    * Fix naming issues:
+        * Rename `ShuntCalSelect.AAND_B` to `A_AND_B`.
 * ### Known Issues
     * ...
 

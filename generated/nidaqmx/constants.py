@@ -624,7 +624,21 @@ class SensorPowerType(Enum):
 class ShuntCalSelect(Enum):
     A = 12513  #: Switch A.
     B = 12514  #: Switch B.
-    AAND_B = 12515  #: Switches A and B.
+    A_AND_B = 12515  #: Switches A and B.
+
+
+class ShuntCalSource(Enum):
+    DEFAULT = -1  #: Default
+    BUILT_IN = 10200  #: Built-In
+    USER_PROVIDED = 10167  #: User Provided
+
+
+class ShuntElementLocation(Enum):
+    R1 = 12465
+    R2 = 12466
+    R3 = 12467
+    R4 = 14813
+    NONE = 10230
 
 
 class Signal(Enum):

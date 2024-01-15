@@ -25,7 +25,7 @@ from nidaqmx._task_modules.do_channel_collection import (
     DOChannelCollection)
 from nidaqmx.constants import (
     AcquisitionType, ChannelType, FillMode, UsageTypeAI, UsageTypeCI, EveryNSamplesEventType,
-    READ_ALL_AVAILABLE, UsageTypeCO, _Save)
+    READ_ALL_AVAILABLE, UsageTypeCO, _Save, ShuntCalSelect, ShuntCalSource, ShuntElementLocation)
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import (
     DaqError, DaqResourceWarning)
@@ -401,6 +401,73 @@ class Task:
         is_task_done = self._interpreter.is_task_done(self._handle)
 
         return is_task_done
+
+
+    def perform_strain_shunt_cal(
+            self, channel="", shunt_resistor_value=100000,
+            shunt_resistor_location=ShuntElementLocation.R3, shunt_resistor_select=ShuntCalSelect.A,
+            shunt_resistor_source=ShuntCalSource.DEFAULT, skip_unsupported_channels=False):
+        """
+        Perform shunt calibration for the specified channels using a strain
+        gage sensor.
+
+        Refer to the calibration procedure for your module for detailed
+        calibration instructions.
+
+        Args:
+            channel: Specifies a subset of virtual channels in the task that you 
+                want to calibrate. Use this input if you do not want to calibrate
+                all the channels in the task or if some channels in the task measure
+                non-bridge-based sensors. If the input is empty, this method attempts 
+                to calibrate all virtual channels in the task.
+            shunt_resistor_value: Specifies the shunt resistance in ohms.
+            shunt_resistor_location: Specifies the location of the shunt resistor.
+            shunt_resistor_select: Specifies which shunt calibration switch to enable.
+            shunt_resistor_source: Specifies which shunt to use.
+            skip_unsupported_channels: Specifies whether or not to skip channels that 
+                do not support calibration. If skip_unsupported_channels is True, this
+                method calibrates only supported channels. If False, this method calibrates 
+                the channels specified by channels. The default is False.
+        """
+        self._interpreter.perform_strain_shunt_cal_ex(
+            self._handle, channel, shunt_resistor_value,
+            shunt_resistor_location.value, shunt_resistor_select.value,
+            shunt_resistor_source.value, skip_unsupported_channels)
+
+    def perform_bridge_shunt_cal(
+            self, channel="", shunt_resistor_value=100000,
+            shunt_resistor_location=ShuntElementLocation.R3, shunt_resistor_select=ShuntCalSelect.A,
+            shunt_resistor_source=ShuntCalSource.DEFAULT, bridge_resistance=120,
+            skip_unsupported_channels=False):
+        """
+        Perform shunt calibration for the specified channels using a bridge sensor.
+
+        Refer to the calibration procedure for your module for detailed
+        calibration instructions.
+
+        Args:
+            channel: Specifies a subset of virtual channels in the task that you 
+                want to calibrate. Use this input if you do not want to calibrate
+                all the channels in the task or if some channels in the task measure
+                non-bridge-based sensors. If the input is empty, this method attempts 
+                to calibrate all virtual channels in the task.
+            shunt_resistor_value: Specifies the shunt resistance in ohms.
+            shunt_resistor_location: Specifies the location of the shunt resistor.
+            shunt_resistor_select: Specifies which shunt calibration switch to enable.
+            shunt_resistor_source: Specifies which shunt to use.
+            bridge_resistance: Specifies the bridge resistance in ohms. A value of -1
+                means to use the nominal bridge resistance specified when you created
+                the virtual channel.
+            skip_unsupported_channels: Specifies whether or not to skip channels that 
+                do not support calibration. If skip_unsupported_channels is True, this
+                method calibrates only supported channels. If False, this method calibrates 
+                the channels specified by channels. The default is False.
+        """
+        self._interpreter.perform_bridge_shunt_cal_ex(
+            self._handle, channel, shunt_resistor_value,
+            shunt_resistor_location.value, shunt_resistor_select.value,
+            shunt_resistor_source.value, bridge_resistance,
+            skip_unsupported_channels)     
 
     def read(self, number_of_samples_per_channel=NUM_SAMPLES_UNSET,
              timeout=10.0):

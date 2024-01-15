@@ -1214,6 +1214,16 @@ class NiDAQmxStub(object):
                 request_serializer=nidaqmx__pb2.LoadTaskRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.LoadTaskResponse.FromString,
                 )
+        self.PerformBridgeShuntCalEx = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/PerformBridgeShuntCalEx',
+                request_serializer=nidaqmx__pb2.PerformBridgeShuntCalExRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.PerformBridgeShuntCalExResponse.FromString,
+                )
+        self.PerformStrainShuntCalEx = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/PerformStrainShuntCalEx',
+                request_serializer=nidaqmx__pb2.PerformStrainShuntCalExRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.PerformStrainShuntCalExResponse.FromString,
+                )
         self.ReadAnalogF64 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadAnalogF64',
                 request_serializer=nidaqmx__pb2.ReadAnalogF64Request.SerializeToString,
@@ -3419,6 +3429,18 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PerformBridgeShuntCalEx(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PerformStrainShuntCalEx(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ReadAnalogF64(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -5533,6 +5555,16 @@ def add_NiDAQmxServicer_to_server(servicer, server):
                     servicer.LoadTask,
                     request_deserializer=nidaqmx__pb2.LoadTaskRequest.FromString,
                     response_serializer=nidaqmx__pb2.LoadTaskResponse.SerializeToString,
+            ),
+            'PerformBridgeShuntCalEx': grpc.unary_unary_rpc_method_handler(
+                    servicer.PerformBridgeShuntCalEx,
+                    request_deserializer=nidaqmx__pb2.PerformBridgeShuntCalExRequest.FromString,
+                    response_serializer=nidaqmx__pb2.PerformBridgeShuntCalExResponse.SerializeToString,
+            ),
+            'PerformStrainShuntCalEx': grpc.unary_unary_rpc_method_handler(
+                    servicer.PerformStrainShuntCalEx,
+                    request_deserializer=nidaqmx__pb2.PerformStrainShuntCalExRequest.FromString,
+                    response_serializer=nidaqmx__pb2.PerformStrainShuntCalExResponse.SerializeToString,
             ),
             'ReadAnalogF64': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadAnalogF64,
@@ -10381,6 +10413,40 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/LoadTask',
             nidaqmx__pb2.LoadTaskRequest.SerializeToString,
             nidaqmx__pb2.LoadTaskResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PerformBridgeShuntCalEx(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/PerformBridgeShuntCalEx',
+            nidaqmx__pb2.PerformBridgeShuntCalExRequest.SerializeToString,
+            nidaqmx__pb2.PerformBridgeShuntCalExResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PerformStrainShuntCalEx(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/PerformStrainShuntCalEx',
+            nidaqmx__pb2.PerformStrainShuntCalExRequest.SerializeToString,
+            nidaqmx__pb2.PerformStrainShuntCalExResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

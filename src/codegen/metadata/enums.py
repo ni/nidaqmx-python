@@ -17129,8 +17129,57 @@ enums = {
                 'documentation': {
                     'description': 'Switches A and B.'
                 },
-                'name': 'AAND_B',
+                'name': 'A_AND_B',
                 'value': 12515
+            }
+        ]
+    },
+    'ShuntCalSource': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Default'
+                },
+                'name': 'DEFAULT',
+                'value': -1
+            },
+            {
+                'documentation': {
+                    'description': 'Built-In'
+                },
+                'name': 'BUILT_IN',
+                'value': 10200
+            },
+            {
+                'documentation': {
+                    'description': 'User Provided'
+                },
+                'name': 'USER_PROVIDED',
+                'value': 10167
+            }
+        ]
+    },
+    'ShuntElementLocation': {
+        'values': [
+            {
+                'name': 'R1',
+                'value': 12465
+            },
+            {
+                'name': 'R2',
+                'value': 12466
+            },
+            {
+                'name': 'R3',
+                'value': 12467
+            },
+            {
+                'name': 'R4',
+                'value': 14813
+            },
+            {
+                'name': 'NONE',
+                'value': 10230
             }
         ]
     },

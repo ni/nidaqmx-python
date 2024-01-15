@@ -17094,6 +17094,188 @@ functions = {
         'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
+    'PerformBridgeShuntCalEx': {
+        'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
+        'parameters': [
+            {
+                'ctypes_data_type': 'ctypes.TaskHandle',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
+                'type': 'TaskHandle'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'channel',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_double',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'shuntResistorValue',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
+                'type': 'float64'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_int',
+                'direction': 'in',
+                'enum': 'ShuntElementLocation',
+                'is_optional_in_python': False,
+                'name': 'shuntResistorLocation',
+                'python_data_type': 'ShuntElementLocation',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.ShuntElementLocation',
+                'type': 'int32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_int',
+                'direction': 'in',
+                'enum': 'ShuntCalSelect',
+                'is_optional_in_python': False,
+                'name': 'shuntResistorSelect',
+                'python_data_type': 'ShuntCalSelect',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.ShuntCalSelect',
+                'type': 'int32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_int',
+                'direction': 'in',
+                'enum': 'ShuntCalSource',
+                'is_optional_in_python': False,
+                'name': 'shuntResistorSource',
+                'python_data_type': 'ShuntCalSource',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.ShuntCalSource',
+                'type': 'int32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_double',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'bridgeResistance',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
+                'type': 'float64'
+            },
+            {
+                'ctypes_data_type': 'c_bool32',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'skipUnsupportedChannels',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
+                'type': 'bool32'
+            }
+        ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
+        'returns': 'int32'
+    },
+    'PerformStrainShuntCalEx': {
+        'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
+        'parameters': [
+            {
+                'ctypes_data_type': 'ctypes.TaskHandle',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
+                'type': 'TaskHandle'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'channel',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_double',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'shuntResistorValue',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
+                'type': 'float64'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_int',
+                'direction': 'in',
+                'enum': 'ShuntElementLocation',
+                'is_optional_in_python': False,
+                'name': 'shuntResistorLocation',
+                'python_data_type': 'ShuntElementLocation',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.ShuntElementLocation',
+                'type': 'int32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_int',
+                'direction': 'in',
+                'enum': 'ShuntCalSelect',
+                'is_optional_in_python': False,
+                'name': 'shuntResistorSelect',
+                'python_data_type': 'ShuntCalSelect',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.ShuntCalSelect',
+                'type': 'int32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_int',
+                'direction': 'in',
+                'enum': 'ShuntCalSource',
+                'is_optional_in_python': False,
+                'name': 'shuntResistorSource',
+                'python_data_type': 'ShuntCalSource',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.ShuntCalSource',
+                'type': 'int32'
+            },
+            {
+                'ctypes_data_type': 'c_bool32',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'skipUnsupportedChannels',
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
+                'type': 'bool32'
+            }
+        ],
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
+        'returns': 'int32'
+    },
     'ReadAnalogF64': {
         'calling_convention': 'StdCall',
         'parameters': [
