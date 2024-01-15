@@ -257,8 +257,10 @@ service NiDAQmx {
   rpc GetWriteAttributeUInt64(GetWriteAttributeUInt64Request) returns (GetWriteAttributeUInt64Response);
   rpc IsTaskDone(IsTaskDoneRequest) returns (IsTaskDoneResponse);
   rpc LoadTask(LoadTaskRequest) returns (LoadTaskResponse);
+  rpc PerformBridgeOffsetNullingCalEx(PerformBridgeOffsetNullingCalExRequest) returns (PerformBridgeOffsetNullingCalExResponse);
   rpc PerformBridgeShuntCalEx(PerformBridgeShuntCalExRequest) returns (PerformBridgeShuntCalExResponse);
   rpc PerformStrainShuntCalEx(PerformStrainShuntCalExRequest) returns (PerformStrainShuntCalExResponse);
+  rpc PerformThrmcplLeadOffsetNullingCal(PerformThrmcplLeadOffsetNullingCalRequest) returns (PerformThrmcplLeadOffsetNullingCalResponse);
   rpc ReadAnalogF64(ReadAnalogF64Request) returns (ReadAnalogF64Response);
   rpc ReadAnalogScalarF64(ReadAnalogScalarF64Request) returns (ReadAnalogScalarF64Response);
   rpc ReadBinaryI16(ReadBinaryI16Request) returns (ReadBinaryI16Response);
@@ -8316,53 +8318,6 @@ message LoadTaskResponse {
   int32 status = 1;
   nidevice_grpc.Session task = 2;
   bool new_session_initialized = 3;
-}
-
-message PerformBridgeShuntCalExRequest {
-  nidevice_grpc.Session task = 1;
-  string channel = 2;
-  double shunt_resistor_value = 3;
-  oneof shunt_resistor_location_enum {
-    ShuntElementLocation shunt_resistor_location = 4;
-    int32 shunt_resistor_location_raw = 5;
-  }
-  oneof shunt_resistor_select_enum {
-    ShuntCalSelect shunt_resistor_select = 6;
-    int32 shunt_resistor_select_raw = 7;
-  }
-  oneof shunt_resistor_source_enum {
-    ShuntCalSource shunt_resistor_source = 8;
-    int32 shunt_resistor_source_raw = 9;
-  }
-  double bridge_resistance = 10;
-  bool skip_unsupported_channels = 11;
-}
-
-message PerformBridgeShuntCalExResponse {
-  int32 status = 1;
-}
-
-message PerformStrainShuntCalExRequest {
-  nidevice_grpc.Session task = 1;
-  string channel = 2;
-  double shunt_resistor_value = 3;
-  oneof shunt_resistor_location_enum {
-    ShuntElementLocation shunt_resistor_location = 4;
-    int32 shunt_resistor_location_raw = 5;
-  }
-  oneof shunt_resistor_select_enum {
-    ShuntCalSelect shunt_resistor_select = 6;
-    int32 shunt_resistor_select_raw = 7;
-  }
-  oneof shunt_resistor_source_enum {
-    ShuntCalSource shunt_resistor_source = 8;
-    int32 shunt_resistor_source_raw = 9;
-  }
-  bool skip_unsupported_channels = 10;
-}
-
-message PerformStrainShuntCalExResponse {
-  int32 status = 1;
 }
 
 message ReadAnalogF64Request {
