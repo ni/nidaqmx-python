@@ -760,6 +760,46 @@ class Task:
 
         return data.tolist()
 
+    def add_arguments_if_necessary(self, callback_function, expected_number_of_arguments):
+        if (callback_function.__code__.co_argcount < expected_number_of_arguments):
+            print("Not enough arguments! Adding arguments")
+            if ("every_n_samples_event_type" in parameters):
+                result = self.n_samples_event_wrapper(parameters, callback_function)
+            elif ("signal_type" in parameters):
+                result = self.register_signal_event_wrapper(parameters, callback_function)
+            elif ("status" in parameters):
+                result = self.register_done_event_wrapper(parameters, callback_function)
+        else:
+            result = callback_function
+        return result
+
+    def n_samples_event_wrapper(self, parameters, callback_function):
+        if ("task_handle" and "callback_data" not in parameters):
+            result = lambda task_handle, every_n_samples_event_type, number_of_samples, callback_data: callback_function(every_n_samples_event_type, number_of_samples)
+        elif ("task_handle" not in parameters):
+            result = lambda task_handle, every_n_samples_event_type, number_of_samples, callback_data: callback_function(every_n_samples_event_type, number_of_samples, callback_data)
+        elif ("callback_data" not in parameters):
+            result = lambda task_handle, every_n_samples_event_type, number_of_samples, callback_data: callback_function(task_handle, every_n_samples_event_type, number_of_samples)
+        return result
+
+    def register_signal_event_wrapper(self, parameters, callback_function):
+        if ("task_handle" and "callback_data" not in parameters):
+            result = lambda task_handle, signal_type, callback_data: callback_function(signal_type)
+        elif ("task_handle" not in parameters):
+            result = lambda task_handle, signal_type, callback_data: callback_function(signal_type, callback_data)
+        elif ("callback_data" not in parameters):
+            result = lambda task_handle, signal_type, callback_data: callback_function(task_handle, signal_type)
+        return result
+
+    def register_done_event_wrapper(self, parameters, callback_function):
+        if ("task_handle" and "callback_data" not in parameters):
+            result = lambda task_handle, status, callback_data: callback_function(status)
+        elif ("task_handle" not in parameters):
+            result = lambda task_handle, status, callback_data: callback_function(status, callback_data)
+        elif ("callback_data" not in parameters):
+            result = lambda task_handle, status, callback_data: callback_function(task_handle, status)
+        return result
+
     def register_done_event(self, callback_method):
         """
         Registers a callback function to receive an event when a task stops due
@@ -788,6 +828,7 @@ class Task:
                 function.
         """
         if callback_method is not None:
+            callback_method = self.add_arguments_if_necessary(callback_method, 3)
             # If the event is already registered, the interpreter should raise DaqError with code
             # DAQmxErrors.DONE_EVENT_ALREADY_REGISTERED.
             event_handler = self._interpreter.register_done_event(self._handle, 0, callback_method, None)
@@ -836,6 +877,7 @@ class Task:
                 function.
         """
         if callback_method is not None:
+            callback_method = self.add_arguments_if_necessary(callback_method, 4)
             # If the event is already registered, the interpreter should raise DaqError with code
             # DAQmxErrors.EVERY_N_SAMPS_ACQ_INTO_BUFFER_EVENT_ALREADY_REGISTERED.
             event_handler = self._interpreter.register_every_n_samples_event(
@@ -887,6 +929,7 @@ class Task:
                 function.
         """
         if callback_method is not None:
+            callback_method = self.add_arguments_if_necessary(callback_method, 4)
             # If the event is already registered, the interpreter should raise DaqError with code
             # DAQmxErrors.EVERY_N_SAMPS_TRANSFERRED_FROM_BUFFER_EVENT_ALREADY_REGISTERED.
             event_handler = self._interpreter.register_every_n_samples_event(
@@ -933,6 +976,7 @@ class Task:
                 function.
         """
         if callback_method is not None:
+            callback_method = self.add_arguments_if_necessary(callback_method, 3)
             # If the event is already registered, the interpreter should raise DaqError with code
             # DAQmxErrors.SIGNAL_EVENT_ALREADY_REGISTERED.
             event_handler = self._interpreter.register_signal_event(
