@@ -390,6 +390,18 @@ class LibraryInterpreter(BaseInterpreter):
             task, source, rate, active_edge, sample_mode, samps_per_chan)
         self.check_for_error(error_code)
 
+    def cfg_time_start_trig(self, task, when, timescale):
+        cfunc = lib_importer.windll.DAQmxCfgTimeStartTrig
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, DateTime, ctypes.c_int]
+
+        error_code = cfunc(
+            task, when, timescale)
+        self.check_for_error(error_code)
+
     def cfg_watchdog_ao_expir_states(
             self, task, channel_names, expir_state_array, output_type_array):
         cfunc = lib_importer.windll.DAQmxCfgWatchdogAOExpirStates

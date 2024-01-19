@@ -54,7 +54,6 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetRealTimeAttributeUInt32",
     "WaitForNextSampleClock",
     # Time triggers
-    "CfgTimeStartTrig",
     "GetArmStartTrigTimestampVal",
     "GetArmStartTrigTrigWhen",
     "GetFirstSampClkWhen",
