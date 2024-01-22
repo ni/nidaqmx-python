@@ -141,6 +141,52 @@ class Device:
 
     # endregion
 
+    # region Calibration Info property
+
+    @property
+    def ext_cal_last_date_and_time(self):
+        """
+        Indicates the last date and time that the device underwent an
+        external calibration.
+        """
+
+        last_date_and_time = self._interpreter.get_ext_cal_last_date_and_time(self._name)
+
+        return datetime(
+            year=last_date_and_time[0],
+            month=last_date_and_time[1],
+            day=last_date_and_time[2],
+            hour=last_date_and_time[3],
+            minute=last_date_and_time[4]
+        )
+
+    @property
+    def self_cal_last_date_and_time(self):
+        """
+        Indicates the last date and time that the device underwent a
+        self-calibration.
+        """
+
+        last_date_and_time = self._interpreter.get_self_cal_last_date_and_time(self._name)
+
+        return datetime(
+            year=last_date_and_time[0],
+            month=last_date_and_time[1],
+            day=last_date_and_time[2],
+            hour=last_date_and_time[3],
+            minute=last_date_and_time[4]
+        )
+
+    @property
+    def device_supports_cal(self):
+        """
+        Indicates if the device supports calibration.
+        """
+
+        return self._interpreter.device_supports_cal(self._name)
+
+    # endregion
+
 <%namespace name="property_template" file="/property_template.py.mako"/>\
 %for attribute in attributes:
 ${property_template.script_property(attribute)}\
@@ -223,28 +269,6 @@ ${function_template.script_function(function_object)}
         self._interpreter.unreserve_network_device(self._name)
 
     # endregion
-
-    def get_ext_cal_last_date_and_time(device_name):
-        last_date_and_time = self._interpreter.get_ext_cal_last_date_and_time(device_name)
-
-        return datetime(
-            year = last_date_and_time[0],
-            month = last_date_and_time[1],
-            day = last_date_and_time[2],
-            hour = last_date_and_time[3],
-            minute = last_date_and_time[4]
-        )
-
-    def get_self_cal_last_date_and_time(device_name):
-        last_date_and_time = self._interpreter.get_self_cal_last_date_and_time(device_name)
-
-        return datetime(
-            year = last_date_and_time[0],
-            month = last_date_and_time[1],
-            day = last_date_and_time[2],
-            hour = last_date_and_time[3],
-            minute = last_date_and_time[4]
-        )
 
 class _DeviceAlternateConstructor(Device):
     """

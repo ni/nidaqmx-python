@@ -20369,10 +20369,12 @@ functions = {
                 'python_data_type': 'str',
                 'python_description': '',
                 'python_type_annotation': 'str',
-                'type': 'const char[]'
+                'type': 'const char[]',
+                'use_in_python_api': False
             }
         ],
         'python_class_name': 'Device',
+        'python_description': 'This function nullifies any self-calibration you perform on the device. If you have never performed a self-calibration on the device, this function has no effect.',
         'returns': 'int32'
     },
     'SaveGlobalChan': {

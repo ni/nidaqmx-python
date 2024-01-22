@@ -132,6 +132,52 @@ class Device:
 
     # endregion
 
+    # region Calibration Info property
+
+    @property
+    def ext_cal_last_date_and_time(self):
+        """
+        Indicates the last date and time that the device underwent an
+        external calibration.
+        """
+
+        last_date_and_time = self._interpreter.get_ext_cal_last_date_and_time(self._name)
+
+        return datetime(
+            year=last_date_and_time[0],
+            month=last_date_and_time[1],
+            day=last_date_and_time[2],
+            hour=last_date_and_time[3],
+            minute=last_date_and_time[4]
+        )
+
+    @property
+    def self_cal_last_date_and_time(self):
+        """
+        Indicates the last date and time that the device underwent a
+        self-calibration.
+        """
+
+        last_date_and_time = self._interpreter.get_self_cal_last_date_and_time(self._name)
+
+        return datetime(
+            year=last_date_and_time[0],
+            month=last_date_and_time[1],
+            day=last_date_and_time[2],
+            hour=last_date_and_time[3],
+            minute=last_date_and_time[4]
+        )
+
+    @property
+    def device_supports_cal(self):
+        """
+        Indicates if the device supports calibration.
+        """
+
+        return self._interpreter.device_supports_cal(self._name)
+
+    # endregion
+
     @property
     def accessory_product_nums(self):
         """
@@ -1071,16 +1117,15 @@ class Device:
         self._interpreter.reset_device(
             self._name)
 
-    def restore_last_ext_cal_const(self, device_name):
+    def restore_last_ext_cal_const(self):
         """
-        
-
-        Args:
-            device_name (str): 
+        This function nullifies any self-calibration you perform on the
+        device. If you have never performed a self-calibration on the
+        device, this function has no effect.
         """
 
         self._interpreter.restore_last_ext_cal_const(
-            self._name, device_name)
+            self._name)
 
     def self_cal(self):
         """
@@ -1173,28 +1218,6 @@ class Device:
         self._interpreter.unreserve_network_device(self._name)
 
     # endregion
-
-    def get_ext_cal_last_date_and_time(device_name):
-        last_date_and_time = self._interpreter.get_ext_cal_last_date_and_time(device_name)
-
-        return datetime(
-            year = last_date_and_time[0],
-            month = last_date_and_time[1],
-            day = last_date_and_time[2],
-            hour = last_date_and_time[3],
-            minute = last_date_and_time[4]
-        )
-
-    def get_self_cal_last_date_and_time(device_name):
-        last_date_and_time = self._interpreter.get_self_cal_last_date_and_time(device_name)
-
-        return datetime(
-            year = last_date_and_time[0],
-            month = last_date_and_time[1],
-            day = last_date_and_time[2],
-            hour = last_date_and_time[3],
-            minute = last_date_and_time[4]
-        )
 
 class _DeviceAlternateConstructor(Device):
     """
