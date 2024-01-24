@@ -133,13 +133,13 @@ def test___device_supports_cal___no_errors(any_x_series_device: Device) -> None:
 
 
 def test___cal_acc_connection_count___no_errors(any_x_series_device: Device) -> None:
-    TEST_VALUE = 99
+    test_value = 99
 
     try:
         current_acc_connection_count = any_x_series_device.cal_acc_connection_count
 
-        any_x_series_device.cal_acc_connection_count = TEST_VALUE
-        assert TEST_VALUE == any_x_series_device.cal_acc_connection_count
+        any_x_series_device.cal_acc_connection_count = test_value
+        assert test_value == any_x_series_device.cal_acc_connection_count
 
         any_x_series_device.cal_acc_connection_count = current_acc_connection_count
 
@@ -167,13 +167,13 @@ def test___cal_recommended_acc_connection_count_limit___no_errors(any_x_series_d
 
 
 def test___cal_user_defined_info___no_errors(any_x_series_device: Device) -> None:
-    TEST_VALUE = "my test value"
+    test_value = "my test value"
     user_defined_info = any_x_series_device.cal_user_defined_info
     info_max_size = any_x_series_device.cal_user_defined_info_max_size
 
-    any_x_series_device.cal_user_defined_info = TEST_VALUE
+    any_x_series_device.cal_user_defined_info = test_value
     value = any_x_series_device.cal_user_defined_info
     assert info_max_size == len(value)
-    assert value in TEST_VALUE
+    assert value in test_value
 
     any_x_series_device.cal_user_defined_info = user_defined_info
