@@ -1413,6 +1413,11 @@ functions = {
     },
     'CfgTimeStartTrig': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -1447,7 +1452,7 @@ functions = {
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_class_name': 'StartTrigger',
         'python_description': 'New Start Trigger',
         'returns': 'int32'
     },

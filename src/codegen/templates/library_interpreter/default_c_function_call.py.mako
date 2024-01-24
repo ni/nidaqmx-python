@@ -14,11 +14,22 @@
     samps_per_chan_param = get_samps_per_chan_read_or_write_param(function.base_parameters)
 %>\
         cfunc = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
+<%
+    argtypes = get_argument_types(function)
+%>\
+%if 'DateTime' in argtypes:
+    <%
+        index = argtypes.index('DateTime')
+        name = function_call_args[index]
+        argtypes[index] = 'ctypes.CVIAbsoluteTime'
+    %>\
+    ${name} = LibTimestamp.from_datetime(${name})
+%endif
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ${', '.join(get_argument_types(function)) | wrap(24, 24)}]
+                        ${', '.join(argtypes) | wrap(24, 24)}]
 
         error_code = cfunc(
             ${', '.join(function_call_args) | wrap(12, 12)})

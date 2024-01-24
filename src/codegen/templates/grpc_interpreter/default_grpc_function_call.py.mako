@@ -41,6 +41,11 @@
         _validate_array_dtype(${parameter_name}, ${parameter_dtype})
     %endfor
 %endif
+%for param in params:
+    %if "CVIAbsoluteTime" == param._type:
+        ${param._parameters_name} = convert_time_to_timestamp(${param._parameters_name})
+    %endif
+%endfor
         response = self._invoke(
             self._client.${snake_to_pascal(function.function_name)},
 %if (len(function.function_name) + len(grpc_interpreter_params)) > 68:

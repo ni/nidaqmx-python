@@ -12,6 +12,7 @@ from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqReadError, DaqWarning, DaqWriteError
+from nidaqmx._lib_time import AbsoluteTime as LibTimestamp
 
 
 _logger = logging.getLogger(__name__)
@@ -388,6 +389,20 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, source, rate, active_edge, sample_mode, samps_per_chan)
+        self.check_for_error(error_code)
+
+    def cfg_time_start_trig(self, task, when, timescale):
+        cfunc = lib_importer.windll.DAQmxCfgTimeStartTrig
+        when = LibTimestamp.from_datetime(when)
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.CVIAbsoluteTime,
+                        ctypes.c_int]
+
+        error_code = cfunc(
+            task, when, timescale)
         self.check_for_error(error_code)
 
     def cfg_watchdog_ao_expir_states(
