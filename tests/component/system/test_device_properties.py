@@ -117,19 +117,19 @@ def test___module___get_chassis___shared_interpreter(device: Device):
 def test___ext_cal_last_date_and_time___no_errors(any_x_series_device: Device) -> None:
     last_date_and_time = any_x_series_device.ext_cal_last_date_and_time
 
-    assert last_date_and_time != None
+    assert last_date_and_time is not None
 
 
 def test___self_cal_last_date_and_time___no_errors(any_x_series_device: Device) -> None:
     last_date_and_time = any_x_series_device.self_cal_last_date_and_time
 
-    assert last_date_and_time != None
+    assert last_date_and_time is not None
 
 
 def test___device_supports_cal___no_errors(any_x_series_device: Device) -> None:
     is_cal_supported = any_x_series_device.device_supports_cal
 
-    assert is_cal_supported == True
+    assert is_cal_supported is True
 
 
 def test___cal_acc_connection_count___no_errors(any_x_series_device: Device) -> None:
@@ -154,7 +154,9 @@ def test___cal_dev_temp___no_errors(any_x_series_device: Device) -> None:
     assert 0.0 != temperature
 
 
-def test___cal_recommended_acc_connection_count_limit___no_errors(any_x_series_device: Device) -> None:
+def test___cal_recommended_acc_connection_count_limit___no_errors(
+    any_x_series_device: Device,
+) -> None:
     try:
         acc_connection_count_limit = any_x_series_device.cal_recommended_acc_connection_count_limit
         print(f"current_acc_connection_count_limit: {acc_connection_count_limit}")
