@@ -112,3 +112,68 @@ def test___module___get_chassis___shared_interpreter(device: Device):
     chassis = device.compact_daq_chassis_device
 
     assert chassis._interpreter is device._interpreter
+
+
+def test___ext_cal_last_date_and_time___no_errors(any_x_series_device: Device) -> None:
+    last_date_and_time = any_x_series_device.ext_cal_last_date_and_time
+
+    assert last_date_and_time != None
+
+
+def test___self_cal_last_date_and_time___no_errors(any_x_series_device: Device) -> None:
+    last_date_and_time = any_x_series_device.self_cal_last_date_and_time
+
+    assert last_date_and_time != None
+
+
+def test___device_supports_cal___no_errors(any_x_series_device: Device) -> None:
+    is_cal_supported = any_x_series_device.device_supports_cal
+
+    assert is_cal_supported == True
+
+
+def test___cal_acc_connection_count___no_errors(any_x_series_device: Device) -> None:
+    TEST_VALUE = 99
+
+    try:
+        current_acc_connection_count = any_x_series_device.cal_acc_connection_count
+
+        any_x_series_device.cal_acc_connection_count = TEST_VALUE
+        assert TEST_VALUE == any_x_series_device.cal_acc_connection_count
+
+        any_x_series_device.cal_acc_connection_count = current_acc_connection_count
+
+    except DaqError as e:
+        if e.error_code != DAQmxErrors.ATTR_NOT_SUPPORTED:
+            raise
+
+
+def test___cal_dev_temp___no_errors(any_x_series_device: Device) -> None:
+    temperature = any_x_series_device.cal_dev_temp
+
+    assert 0.0 != temperature
+
+
+def test___cal_recommended_acc_connection_count_limit___no_errors(any_x_series_device: Device) -> None:
+    try:
+        acc_connection_count_limit = any_x_series_device.cal_recommended_acc_connection_count_limit
+        print(f"current_acc_connection_count_limit: {acc_connection_count_limit}")
+
+        assert 0.0 != acc_connection_count_limit
+
+    except DaqError as e:
+        if e.error_code != DAQmxErrors.ATTR_NOT_SUPPORTED:
+            raise
+
+
+def test___cal_user_defined_info___no_errors(any_x_series_device: Device) -> None:
+    TEST_VALUE = "my test value"
+    user_defined_info = any_x_series_device.cal_user_defined_info
+    info_max_size = any_x_series_device.cal_user_defined_info_max_size
+
+    any_x_series_device.cal_user_defined_info = TEST_VALUE
+    value = any_x_series_device.cal_user_defined_info
+    assert info_max_size == len(value)
+    assert value in TEST_VALUE
+
+    any_x_series_device.cal_user_defined_info = user_defined_info

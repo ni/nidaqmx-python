@@ -645,12 +645,12 @@ class Device:
             for tracking accessory life and usage.
         """
 
-        val = self._interpreter.get_cal_info_attribute_uint32(0x2feb)
+        val = self._interpreter.get_cal_info_attribute_uint32(self._name, 0x2feb)
         return val
 
     @cal_acc_connection_count.setter
     def cal_acc_connection_count(self, val):
-        self._interpreter.set_cal_info_attribute_uint32(0x2feb, val)
+        self._interpreter.set_cal_info_attribute_uint32(self._name, 0x2feb, val)
 
     @property
     def cal_dev_temp(self):
@@ -659,7 +659,7 @@ class Device:
             the device.
         """
 
-        val = self._interpreter.get_cal_info_attribute_double(0x223b)
+        val = self._interpreter.get_cal_info_attribute_double(self._name, 0x223b)
         return val
 
     @property
@@ -670,7 +670,7 @@ class Device:
             limit, the accessory could require maintenance.
         """
 
-        val = self._interpreter.get_cal_info_attribute_uint32(0x2fec)
+        val = self._interpreter.get_cal_info_attribute_uint32(self._name, 0x2fec)
         return val
 
     @property
@@ -681,12 +681,12 @@ class Device:
             no more than **cal_user_defined_info_max_size**.
         """
 
-        val = self._interpreter.get_cal_info_attribute_string(0x1861)
+        val = self._interpreter.get_cal_info_attribute_string(self._name, 0x1861)
         return val
 
     @cal_user_defined_info.setter
     def cal_user_defined_info(self, val):
-        self._interpreter.set_cal_info_attribute_string(0x1861, val)
+        self._interpreter.set_cal_info_attribute_string(self._name, 0x1861, val)
 
     @property
     def cal_user_defined_info_max_size(self):
@@ -695,7 +695,7 @@ class Device:
             **cal_user_defined_info**.
         """
 
-        val = self._interpreter.get_cal_info_attribute_uint32(0x191c)
+        val = self._interpreter.get_cal_info_attribute_uint32(self._name, 0x191c)
         return val
 
     @property
@@ -963,7 +963,7 @@ class Device:
             determine if you should perform another calibration.
         """
 
-        val = self._interpreter.get_cal_info_attribute_double(0x1867)
+        val = self._interpreter.get_cal_info_attribute_double(self._name, 0x1867)
         return val
 
     @property
@@ -973,7 +973,7 @@ class Device:
             interval between each external calibration of the device.
         """
 
-        val = self._interpreter.get_cal_info_attribute_uint32(0x1868)
+        val = self._interpreter.get_cal_info_attribute_uint32(self._name, 0x1868)
         return val
 
     @property
@@ -1121,7 +1121,7 @@ class Device:
             determine if you should perform another calibration.
         """
 
-        val = self._interpreter.get_cal_info_attribute_double(0x1864)
+        val = self._interpreter.get_cal_info_attribute_double(self._name, 0x1864)
         return val
 
     @property
@@ -1130,7 +1130,7 @@ class Device:
         bool: Indicates whether the device supports self-calibration.
         """
 
-        val = self._interpreter.get_cal_info_attribute_bool(0x1860)
+        val = self._interpreter.get_cal_info_attribute_bool(self._name, 0x1860)
         return val
 
     @property

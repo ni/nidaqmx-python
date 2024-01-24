@@ -35,5 +35,9 @@ def test___self_test_device___no_errors(sim_6363_device: Device) -> None:
     sim_6363_device.self_test_device()
 
 
+def test___restore_last_ext_cal_const___no_errors(sim_6363_device: Device) -> None:
+    sim_6363_device.restore_last_ext_cal_const()
+
+
 def test___self_cal___no_errors(sim_6363_device: Device) -> None:
     sim_6363_device.self_cal()
