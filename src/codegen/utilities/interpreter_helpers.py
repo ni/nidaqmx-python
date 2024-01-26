@@ -159,7 +159,9 @@ def generate_interpreter_function_call_args(function_metadata):
         elif is_event_function(function_metadata) and param.parameter_name == "callback_function":
             function_call_args.append("callback_method_ptr")
         elif param.type == "CVIAbsoluteTime":
-            dateTime_args.append(f"{param.parameter_name} = AbsoluteTime.from_datetime({param.parameter_name})")
+            dateTime_args.append(
+                f"{param.parameter_name} = AbsoluteTime.from_datetime({param.parameter_name})"
+            )
             function_call_args.append(param.parameter_name)
         elif param.direction == "out" or (
             param.is_pointer and param.parameter_name != "callback_data"
