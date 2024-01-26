@@ -28,7 +28,7 @@ from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqReadError, DaqWarning, DaqWriteError
-from nidaqmx._lib_time import AbsoluteTime as LibTimestamp
+from nidaqmx._lib_time import AbsoluteTime
 
 
 _logger = logging.getLogger(__name__)

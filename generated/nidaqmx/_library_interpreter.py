@@ -12,7 +12,7 @@ from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqReadError, DaqWarning, DaqWriteError
-from nidaqmx._lib_time import AbsoluteTime as LibTimestamp
+from nidaqmx._lib_time import AbsoluteTime
 
 
 _logger = logging.getLogger(__name__)
@@ -393,7 +393,7 @@ class LibraryInterpreter(BaseInterpreter):
 
     def cfg_time_start_trig(self, task, when, timescale):
         cfunc = lib_importer.windll.DAQmxCfgTimeStartTrig
-        when = LibTimestamp.from_datetime(when)
+        when = AbsoluteTime.from_datetime(when)
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:

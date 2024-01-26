@@ -19,7 +19,7 @@
     callback_func_param = get_callback_func_param(function)
     callback_param_types = get_callback_param_data_types(function)
     event_name = get_event_name(function)
-    function_call_args = generate_interpreter_function_call_args(function)
+    function_call_args, dateTime_args = generate_interpreter_function_call_args(function)
 %>\
         ${callback_func_param.type} = ctypes.CFUNCTYPE(
             ${', '.join(callback_param_types) | wrap(12)})

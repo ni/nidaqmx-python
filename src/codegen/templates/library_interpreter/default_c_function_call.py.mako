@@ -7,7 +7,7 @@
     )
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
 
-    function_call_args = generate_interpreter_function_call_args(function)
+    function_call_args, dateTime_args = generate_interpreter_function_call_args(function)
 
     # samps_per_chan_param includes the keyword argument (samps_per_chan_read=
     # or samps_per_chan_written=)
@@ -17,13 +17,8 @@
 <%
     argtypes = get_argument_types(function)
 %>\
-%if 'DateTime' in argtypes:
-    <%
-        index = argtypes.index('DateTime')
-        name = function_call_args[index]
-        argtypes[index] = 'ctypes.CVIAbsoluteTime'
-    %>\
-    ${name} = LibTimestamp.from_datetime(${name})
+%if dateTime_args:
+        ${'\n\t\t'.join(dateTime_args)}
 %endif
         if cfunc.argtypes is None:
             with cfunc.arglock:

@@ -9,7 +9,7 @@
     from codegen.utilities.function_helpers import instantiate_explicit_output_param
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
 
-    function_call_args = generate_interpreter_function_call_args(function)
+    function_call_args, dateTime_args = generate_interpreter_function_call_args(function)
     explicit_output_param = get_output_param_with_ivi_dance_mechanism(function)
 %>\
         cfunc = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}

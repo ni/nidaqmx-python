@@ -53,6 +53,7 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetRealTimeAttributeInt32",
     "SetRealTimeAttributeUInt32",
     "WaitForNextSampleClock",
+    # Time triggers
     "GetArmStartTrigTimestampVal",
     "GetArmStartTrigTrigWhen",
     "GetFirstSampClkWhen",
@@ -133,6 +134,7 @@ def get_interpreter_functions(metadata):
 def generate_interpreter_function_call_args(function_metadata):
     """Gets function call arguments."""
     function_call_args = []
+    dateTime_args = []
     size_values = {}
     interpreter_parameters = get_interpreter_parameters(function_metadata)
     for param in interpreter_parameters:
@@ -156,6 +158,9 @@ def generate_interpreter_function_call_args(function_metadata):
             function_call_args.append("None")
         elif is_event_function(function_metadata) and param.parameter_name == "callback_function":
             function_call_args.append("callback_method_ptr")
+        elif param.type == "CVIAbsoluteTime":
+            dateTime_args.append(f"{param.parameter_name} = AbsoluteTime.from_datetime({param.parameter_name})")
+            function_call_args.append(param.parameter_name)
         elif param.direction == "out" or (
             param.is_pointer and param.parameter_name != "callback_data"
         ):
@@ -180,7 +185,7 @@ def generate_interpreter_function_call_args(function_metadata):
             else:
                 function_call_args.append(param.parameter_name)
 
-    return function_call_args
+    return function_call_args, dateTime_args
 
 
 def get_argument_types(functions_metadata):
@@ -352,6 +357,8 @@ def get_grpc_interpreter_call_params(func, params):
                 has_read_array_parameter = True
             elif param.is_grpc_enum or (param.is_enum and not param.is_list):
                 grpc_params.append(f"{name}_raw={param.parameter_name}")
+            elif param.type == "CVIAbsoluteTime":
+                grpc_params.append(f"{name}=convert_time_to_timestamp({param.parameter_name})")
             else:
                 if is_write_bytes_param(param):
                     grpc_params.append(f"{name}={param.parameter_name}.tobytes()")

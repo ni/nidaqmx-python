@@ -380,10 +380,11 @@ class GrpcStubInterpreter(BaseInterpreter):
                 samps_per_chan=samps_per_chan))
 
     def cfg_time_start_trig(self, task, when, timescale):
-        when = convert_time_to_timestamp(when)
         response = self._invoke(
             self._client.CfgTimeStartTrig,
-            grpc_types.CfgTimeStartTrigRequest(task=task, when=when, timescale_raw=timescale))
+            grpc_types.CfgTimeStartTrigRequest(
+                task=task, when=convert_time_to_timestamp(when),
+                timescale_raw=timescale))
 
     def cfg_watchdog_ao_expir_states(
             self, task, channel_names, expir_state_array, output_type_array):
