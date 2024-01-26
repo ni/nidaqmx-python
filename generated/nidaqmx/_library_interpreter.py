@@ -398,7 +398,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, ctypes.CVIAbsoluteTime,
+                        lib_importer.task_handle, _lib_time.AbsoluteTime,
                         ctypes.c_int]
 
         error_code = cfunc(
