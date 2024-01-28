@@ -1042,8 +1042,7 @@ class StartTrigger:
         New Start Trigger
 
         Args:
-            when (nidaqmx.constants.DateTime): Specifies when to
-                trigger.
+            when (datetime): Specifies when to trigger.
             timescale (Optional[nidaqmx.constants.Timescale]): Specifies
                 the start trigger timestamp time scale.
         """

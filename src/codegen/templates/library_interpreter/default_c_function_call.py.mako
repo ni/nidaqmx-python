@@ -7,24 +7,18 @@
     )
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
 
-    function_call_args, dateTime_args = generate_interpreter_function_call_args(function)
+    function_call_args = generate_interpreter_function_call_args(function)
 
     # samps_per_chan_param includes the keyword argument (samps_per_chan_read=
     # or samps_per_chan_written=)
     samps_per_chan_param = get_samps_per_chan_read_or_write_param(function.base_parameters)
 %>\
         cfunc = lib_importer.${'windll' if function.calling_convention == 'StdCall' else 'cdll'}.DAQmx${function.c_function_name}
-<%
-    argtypes = get_argument_types(function)
-%>\
-%if dateTime_args:
-        ${'\n\t\t'.join(dateTime_args)}
-%endif
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        ${', '.join(argtypes) | wrap(24, 24)}]
+                        ${', '.join(get_argument_types(function)) | wrap(24, 24)}]
 
         error_code = cfunc(
             ${', '.join(function_call_args) | wrap(12, 12)})

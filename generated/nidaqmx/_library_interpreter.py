@@ -393,7 +393,6 @@ class LibraryInterpreter(BaseInterpreter):
 
     def cfg_time_start_trig(self, task, when, timescale):
         cfunc = lib_importer.windll.DAQmxCfgTimeStartTrig
-        when = AbsoluteTime.from_datetime(when)
         if cfunc.argtypes is None:
             with cfunc.arglock:
                 if cfunc.argtypes is None:
@@ -402,7 +401,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_int]
 
         error_code = cfunc(
-            task, when, timescale)
+            task, AbsoluteTime.from_datetime(when), timescale)
         self.check_for_error(error_code)
 
     def cfg_watchdog_ao_expir_states(

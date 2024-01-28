@@ -1434,9 +1434,9 @@ functions = {
                 'direction': 'in',
                 'is_optional_in_python': False,
                 'name': 'when',
-                'python_data_type': 'DateTime',
+                'python_data_type': 'datetime',
                 'python_description': 'Specifies when to trigger.',
-                'python_type_annotation': 'nidaqmx.constants.DateTime',
+                'python_type_annotation': 'datetime',
                 'type': 'CVIAbsoluteTime'
             },
             {
