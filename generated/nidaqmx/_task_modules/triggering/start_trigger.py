@@ -6,6 +6,7 @@ from nidaqmx.system.physical_channel import _PhysicalChannelAlternateConstructor
 from nidaqmx.constants import (
     Coupling, DigitalPatternCondition, DigitalWidthUnits, Edge, Slope,
     Timescale, TriggerType, WindowTriggerCondition1)
+from datetime import datetime
 
 
 class StartTrigger:

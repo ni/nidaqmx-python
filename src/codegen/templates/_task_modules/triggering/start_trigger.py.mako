@@ -18,6 +18,7 @@ from nidaqmx.system.physical_channel import _PhysicalChannelAlternateConstructor
 from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})
 %endif
+from datetime import datetime
 
 
 class StartTrigger:
