@@ -6,6 +6,7 @@ from nidaqmx.system.physical_channel import _PhysicalChannelAlternateConstructor
 from nidaqmx.constants import (
     Coupling, DigitalPatternCondition, DigitalWidthUnits, Edge, Slope,
     Timescale, TriggerType, WindowTriggerCondition1)
+from datetime import datetime
 
 
 class StartTrigger:
@@ -1036,6 +1037,19 @@ class StartTrigger:
 
         self._interpreter.cfg_dig_pattern_start_trig(
             self._handle, trigger_source, trigger_pattern, trigger_when.value)
+
+    def cfg_time_start_trig(self, when, timescale=Timescale.USE_HOST):
+        """
+        New Start Trigger
+
+        Args:
+            when (datetime): Specifies when to trigger.
+            timescale (Optional[nidaqmx.constants.Timescale]): Specifies
+                the start trigger timestamp time scale.
+        """
+
+        self._interpreter.cfg_time_start_trig(
+            self._handle, when, timescale.value)
 
     def disable_start_trig(self):
         """

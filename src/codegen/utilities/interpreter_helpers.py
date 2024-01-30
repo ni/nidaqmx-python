@@ -54,7 +54,6 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetRealTimeAttributeUInt32",
     "WaitForNextSampleClock",
     # Time triggers
-    "CfgTimeStartTrig",
     "GetArmStartTrigTimestampVal",
     "GetArmStartTrigTrigWhen",
     "GetFirstSampClkWhen",
@@ -179,6 +178,8 @@ def generate_interpreter_function_call_args(function_metadata):
                 and function_metadata.attribute_function_type == AttributeFunctionType.SET
             ):
                 function_call_args.append(type_cast_attribute_set_function_parameter(param))
+            elif param.type == "CVIAbsoluteTime":
+                function_call_args.append(f"AbsoluteTime.from_datetime({param.parameter_name})")
             else:
                 function_call_args.append(param.parameter_name)
 
@@ -354,6 +355,8 @@ def get_grpc_interpreter_call_params(func, params):
                 has_read_array_parameter = True
             elif param.is_grpc_enum or (param.is_enum and not param.is_list):
                 grpc_params.append(f"{name}_raw={param.parameter_name}")
+            elif param.type == "CVIAbsoluteTime":
+                grpc_params.append(f"{name}=convert_time_to_timestamp({param.parameter_name})")
             else:
                 if is_write_bytes_param(param):
                     grpc_params.append(f"{name}={param.parameter_name}.tobytes()")

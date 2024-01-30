@@ -1413,6 +1413,11 @@ functions = {
     },
     'CfgTimeStartTrig': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -1429,9 +1434,9 @@ functions = {
                 'direction': 'in',
                 'is_optional_in_python': False,
                 'name': 'when',
-                'python_data_type': 'DateTime',
+                'python_data_type': 'datetime',
                 'python_description': 'Specifies when to trigger.',
-                'python_type_annotation': 'nidaqmx.constants.DateTime',
+                'python_type_annotation': 'datetime',
                 'type': 'CVIAbsoluteTime'
             },
             {
@@ -1447,7 +1452,7 @@ functions = {
                 'type': 'int32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_class_name': 'StartTrigger',
         'python_description': 'New Start Trigger',
         'returns': 'int32'
     },

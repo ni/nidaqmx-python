@@ -17,6 +17,7 @@ from nidaqmx._stubs import nidaqmx_pb2 as grpc_types
 from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
 from nidaqmx._stubs import session_pb2 as session_grpc_types
 from nidaqmx.error_codes import DAQmxErrors
+from nidaqmx._grpc_time import convert_time_to_timestamp
 
 _logger = logging.getLogger(__name__)
 
@@ -377,6 +378,13 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, rate=rate, source=source,
                 active_edge_raw=active_edge, sample_mode_raw=sample_mode,
                 samps_per_chan=samps_per_chan))
+
+    def cfg_time_start_trig(self, task, when, timescale):
+        response = self._invoke(
+            self._client.CfgTimeStartTrig,
+            grpc_types.CfgTimeStartTrigRequest(
+                task=task, when=convert_time_to_timestamp(when),
+                timescale_raw=timescale))
 
     def cfg_watchdog_ao_expir_states(
             self, task, channel_names, expir_state_array, output_type_array):
