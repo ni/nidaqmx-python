@@ -5636,6 +5636,23 @@ class LibraryInterpreter(BaseInterpreter):
             device_name)
         self.check_for_error(error_code)
 
+    def wait_for_valid_timestamp(self, task, timestamp_event, timeout):
+        timestamp = _lib_time.AbsoluteTime()
+
+        cfunc = lib_importer.windll.DAQmxWaitForValidTimestamp
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int32,
+                        ctypes.c_double,
+                        ctypes.POINTER(_lib_time.AbsoluteTime)]
+
+        error_code = cfunc(
+            task, timestamp_event, timeout, ctypes.byref(timestamp))
+        self.check_for_error(error_code)
+        return timestamp.value
+
     def wait_until_task_done(self, task, time_to_wait):
         cfunc = lib_importer.windll.DAQmxWaitUntilTaskDone
         if cfunc.argtypes is None:

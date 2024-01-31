@@ -70,7 +70,7 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "SetSyncPulseTimeWhen",
     "SetTimingAttributeExTimestamp",
     "SetTimingAttributeTimestamp",
-    "WaitForValidTimestamp",
+    "SetTrigAttributeTimestamp",
     # Deprecated, not working
     "GetAnalogPowerUpStates",
 ]

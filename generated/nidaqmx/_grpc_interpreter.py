@@ -3254,6 +3254,14 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.UnreserveNetworkDevice,
             grpc_types.UnreserveNetworkDeviceRequest(device_name=device_name))
 
+    def wait_for_valid_timestamp(self, task, timestamp_event, timeout):
+        response = self._invoke(
+            self._client.WaitForValidTimestamp,
+            grpc_types.WaitForValidTimestampRequest(
+                task=task, timestamp_event_raw=timestamp_event,
+                timeout=timeout))
+        return response.timestamp
+
     def wait_until_task_done(self, task, time_to_wait):
         response = self._invoke(
             self._client.WaitUntilTaskDone,

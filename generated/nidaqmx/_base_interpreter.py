@@ -1662,6 +1662,10 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def wait_for_valid_timestamp(self, task, timestamp_event, timeout):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def wait_until_task_done(self, task, time_to_wait):
         raise NotImplementedError
 

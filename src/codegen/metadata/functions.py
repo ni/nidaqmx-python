@@ -23606,6 +23606,11 @@ functions = {
     },
     'WaitForValidTimestamp': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -23644,13 +23649,14 @@ functions = {
                 'direction': 'out',
                 'is_optional_in_python': False,
                 'name': 'timestamp',
-                'python_data_type': 'DateTime',
+                'python_data_type': 'datetime',
                 'python_description': 'Specifies the timestamp type to wait on.',
-                'python_type_annotation': 'nidaqmx.constants.DateTime',
+                'python_type_annotation': 'datetime',
                 'type': 'CVIAbsoluteTime'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'DAQmx Wait for Valid Timestamp',
         'returns': 'int32'
     },
