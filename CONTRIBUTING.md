@@ -41,8 +41,8 @@ requirements:
    - Currently the minimum supported NI-DAQmx version to run all tests is 21.3.
 - Machine has a supported version of CPython or PyPy installed.
 - Machine has [poetry](https://python-poetry.org/) installed.
-- Machine has an X Series DAQ device connected to it (we ran the tests 
-  using a PCIe-6363 or a USB-6351).
+- (recommended) Machine has an X Series DAQ device (e.g. PCIe-6363 or USB-6351) connected to it.
+  - You can still run the tests without a physical X Series DAQ device, but some tests will be skipped.
 
 Before running the regression tests, import the appropriate NI MAX configuration files:
 - ``tests\max_config\nidaqmxMaxConfig.ini``: Contains custom scales, global channels, simulated devices, 
