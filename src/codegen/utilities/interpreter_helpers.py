@@ -257,7 +257,7 @@ def get_instantiation_lines_for_output(func):
                     f"{param.parameter_name} = numpy.zeros(size, dtype={param.ctypes_data_type})"
                 )
         elif param.type == "CVIAbsoluteTime":
-            instantiation_lines.append(f"{param.parameter_name} = _lib_time.AbsoluteTime()")
+            instantiation_lines.append(f"{param.parameter_name} = AbsoluteTime()")
         else:
             instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
     for param in get_interpreter_in_out_params(func):

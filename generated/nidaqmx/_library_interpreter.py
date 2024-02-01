@@ -397,8 +397,7 @@ class LibraryInterpreter(BaseInterpreter):
             with cfunc.arglock:
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
-                        lib_importer.task_handle, _lib_time.AbsoluteTime,
-                        ctypes.c_int]
+                        lib_importer.task_handle, AbsoluteTime, ctypes.c_int]
 
         error_code = cfunc(
             task, AbsoluteTime.from_datetime(when), timescale)
@@ -3673,7 +3672,7 @@ class LibraryInterpreter(BaseInterpreter):
         return value.value.decode('ascii')
 
     def get_trig_attribute_timestamp(self, task, attribute):
-        value = _lib_time.AbsoluteTime()
+        value = AbsoluteTime()
 
         cfunc = lib_importer.cdll.DAQmxGetTrigAttribute
         if cfunc.argtypes is None:
