@@ -28949,7 +28949,7 @@ attributes = {
             'is_python_object': False,
             'name': 'START_TRIG_TRIG_WHEN',
             'python_class_name': 'TimeStartTrigger',
-            'python_data_type': 'unknown',
+            'python_data_type': 'datetime',
             'python_description': 'Specifies when to trigger the start trigger.',
             'resettable': True,
             'type': 'CVIAbsoluteTime'

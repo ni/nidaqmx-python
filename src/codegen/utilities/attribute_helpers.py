@@ -3,7 +3,9 @@
 import codegen.metadata as scrapigen_metadata
 from codegen.properties.attribute import Attribute
 from codegen.utilities.helpers import camel_to_snake_case
-from codegen.utilities.interpreter_helpers import INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES
+from codegen.utilities.interpreter_helpers import (
+    INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES,
+)
 
 EXCLUDED_ATTRIBUTES = [
     "AI_CHAN_CAL_HAS_VALID_CAL_INFO",
@@ -228,6 +230,7 @@ GENERIC_ATTRIBUTE_TYPE_MAP = {
     "int32[]": "int32_array",
     "uInt8[]": "bytes",
     "uInt32[]": "uint32_array",
+    "CVIAbsoluteTime": "timestamp",
 }
 
 GENERIC_ATTRIBUTE_GROUP_NAME_MAP = {
@@ -240,14 +243,17 @@ GENERIC_ATTRIBUTE_GROUP_NAME_MAP = {
 }
 
 
-def get_attributes(metadata, class_name):
+def get_attributes(metadata, class_name, additional_class_name=""):
     """Converts the scrapigen metadata into a list of attributes."""
     attributes_metadata = []
     for group_name, attributes in metadata["attributes"].items():
         for id, attribute_data in attributes.items():
             if (
                 "python_class_name" in attribute_data
-                and attribute_data["python_class_name"] == class_name
+                and (
+                    attribute_data["python_class_name"] == class_name
+                    or attribute_data["python_class_name"] == additional_class_name
+                )
                 and not attribute_data["name"] in EXCLUDED_ATTRIBUTES
             ):
                 attributes_metadata.append(Attribute(id, attribute_data))

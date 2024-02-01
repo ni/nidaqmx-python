@@ -1093,6 +1093,10 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def get_trig_attribute_timestamp(self, task, attribute):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def get_trig_attribute_uint32(self, task, attribute):
         raise NotImplementedError
 
@@ -1570,6 +1574,10 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def set_trig_attribute_string(self, task, attribute, value):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def set_trig_attribute_timestamp(self, task, attribute, value):
         raise NotImplementedError
 
     @abc.abstractmethod

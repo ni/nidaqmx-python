@@ -64,14 +64,12 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "GetSyncPulseTimeWhen",
     "GetTimingAttributeExTimestamp",
     "GetTimingAttributeTimestamp",
-    "GetTrigAttributeTimestamp",
     "SetArmStartTrigTrigWhen",
     "SetFirstSampClkWhen",
     "SetStartTrigTrigWhen",
     "SetSyncPulseTimeWhen",
     "SetTimingAttributeExTimestamp",
     "SetTimingAttributeTimestamp",
-    "SetTrigAttributeTimestamp",
     "WaitForValidTimestamp",
     # Deprecated, not working
     "GetAnalogPowerUpStates",
@@ -173,13 +171,13 @@ def generate_interpreter_function_call_args(function_metadata):
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
         elif param.direction == "in":
-            if (
+            if param.type == "CVIAbsoluteTime":
+                function_call_args.append(f"AbsoluteTime.from_datetime({param.parameter_name})")
+            elif (
                 param.parameter_name == "value"
                 and function_metadata.attribute_function_type == AttributeFunctionType.SET
             ):
                 function_call_args.append(type_cast_attribute_set_function_parameter(param))
-            elif param.type == "CVIAbsoluteTime":
-                function_call_args.append(f"AbsoluteTime.from_datetime({param.parameter_name})")
             else:
                 function_call_args.append(param.parameter_name)
 
@@ -258,6 +256,8 @@ def get_instantiation_lines_for_output(func):
                 instantiation_lines.append(
                     f"{param.parameter_name} = numpy.zeros(size, dtype={param.ctypes_data_type})"
                 )
+        elif param.type == "CVIAbsoluteTime":
+            instantiation_lines.append(f"{param.parameter_name} = _lib_time.AbsoluteTime()")
         else:
             instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
     for param in get_interpreter_in_out_params(func):
@@ -447,7 +447,7 @@ def get_return_values(func):
                 return_values.append(param.parameter_name)
             else:
                 return_values.append(f"{param.parameter_name}.tolist()")
-        elif param.type == "TaskHandle":
+        elif param.type == "TaskHandle" or param.type == "CVIAbsoluteTime":
             return_values.append(param.parameter_name)
         else:
             return_values.append(f"{param.parameter_name}.value")
@@ -586,6 +586,8 @@ def get_response_parameters(func):
                 response_parameters.append(f"response.{name}_raw")
             elif parameter.is_list:
                 response_parameters.append(f"list(response.{name})")
+            elif parameter.type == "CVIAbsoluteTime":
+                response_parameters.append(f"convert_timestamp_to_time(response.{name})")
             else:
                 response_parameters.append(f"response.{name}")
     return ", ".join(response_parameters)

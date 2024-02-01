@@ -3672,6 +3672,21 @@ class LibraryInterpreter(BaseInterpreter):
         self.check_for_error(size_or_code)
         return value.value.decode('ascii')
 
+    def get_trig_attribute_timestamp(self, task, attribute):
+        value = _lib_time.AbsoluteTime()
+
+        cfunc = lib_importer.cdll.DAQmxGetTrigAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int32]
+
+        error_code = cfunc(
+            task, attribute, ctypes.byref(value))
+        self.check_for_error(error_code)
+        return value
+
     def get_trig_attribute_uint32(self, task, attribute):
         value = ctypes.c_uint32()
 
@@ -5331,6 +5346,18 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, value.encode('ascii'))
+        self.check_for_error(error_code)
+
+    def set_trig_attribute_timestamp(self, task, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetTrigAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes.c_int32]
+
+        error_code = cfunc(
+            task, attribute, AbsoluteTime.from_datetime(value))
         self.check_for_error(error_code)
 
     def set_trig_attribute_uint32(self, task, attribute, value):
