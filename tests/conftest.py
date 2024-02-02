@@ -113,22 +113,46 @@ def _x_series_device(device_type, system):
     return None
 
 
+def _device_by_product_type(product_type, device_type, system):
+    for device in system.devices:
+        device_type_match = (
+            device_type == DeviceType.ANY
+            or (device_type == DeviceType.REAL and not device.is_simulated)
+            or (device_type == DeviceType.SIMULATED and device.is_simulated)
+        )
+        if device_type_match and device.product_type == product_type:
+            return device
+
+    pytest.skip(
+        f"Could not detect a {product_type} device that meets the requirements to be of type "
+        f"{device_type}. Cannot proceed to run tests. Import the NI MAX configuration file located "
+        "at nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
+    )
+    return None
+
+
 @pytest.fixture(scope="function")
 def any_x_series_device(system):
-    """Gets any x series device information."""
+    """Gets any X Series device information."""
     return _x_series_device(DeviceType.ANY, system)
 
 
 @pytest.fixture(scope="function")
 def real_x_series_device(system):
-    """Gets the real x series device information."""
+    """Gets real X Series device information."""
     return _x_series_device(DeviceType.REAL, system)
 
 
 @pytest.fixture(scope="function")
 def sim_x_series_device(system):
-    """Gets simulated x series device information."""
+    """Gets simulated X Series device information."""
     return _x_series_device(DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_6363_device(system):
+    """Gets a simulated 6363."""
+    return _device_by_product_type("PCIe-6363", DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")
@@ -209,6 +233,42 @@ def sim_ts_power_devices(sim_ts_chassis):
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
     return None
+
+
+@pytest.fixture(scope="function")
+def sim_charge_device(system):
+    """Gets a simulated 4480."""
+    return _device_by_product_type("PXIe-4480", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_dsa_device(system):
+    """Gets a simulated 4466."""
+    return _device_by_product_type("PXIe-4466", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_dmm_device(system):
+    """Gets a simulated myDAQ."""
+    return _device_by_product_type("NI myDAQ", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_bridge_device(system):
+    """Gets a simulated 4431."""
+    return _device_by_product_type("PXIe-4331", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_position_device(system):
+    """Gets a simulated 4340."""
+    return _device_by_product_type("PXIe-4340", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_temperature_device(system):
+    """Gets a simulated 4353."""
+    return _device_by_product_type("PXIe-4353", DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")
