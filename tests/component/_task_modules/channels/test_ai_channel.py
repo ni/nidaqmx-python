@@ -1,5 +1,7 @@
 import pytest
 
+from nidaqmx import Task
+from nidaqmx._task_modules.channels import AIChannel
 from nidaqmx.constants import (
     AccelChargeSensitivityUnits,
     AccelSensitivityUnits,
@@ -26,6 +28,7 @@ from nidaqmx.constants import (
     UsageTypeAI,
     VoltageUnits,
 )
+from nidaqmx.system import Device
 
 
 # Note: Tests for other channel types will be less complete given that the underlying Python
@@ -43,9 +46,9 @@ from nidaqmx.constants import (
     "units, custom_scale_name",
     [(VoltageUnits.VOLTS, ""), (VoltageUnits.FROM_CUSTOM_SCALE, "no_scaling_scale")],
 )
-def test___ai_channel_collection___add_ai_voltage_chan___sets_channel_attributes(
-    task,
-    sim_6363_device,
+def test___task__add_ai_voltage_chan___sets_channel_attributes(
+    task: Task,
+    sim_6363_device: Device,
     desired_term_config,
     expected_term_cfg,
     min_val,
@@ -53,7 +56,7 @@ def test___ai_channel_collection___add_ai_voltage_chan___sets_channel_attributes
     units,
     custom_scale_name,
 ):
-    chan = task.ai_channels.add_ai_voltage_chan(
+    chan: AIChannel = task.ai_channels.add_ai_voltage_chan(
         sim_6363_device.ai_physical_chans[0].name,
         terminal_config=desired_term_config,
         min_val=min_val,
@@ -77,15 +80,16 @@ def test___ai_channel_collection___add_ai_voltage_chan___sets_channel_attributes
         (AccelUnits.METERS_PER_SECOND_SQUARED, 0.5, AccelSensitivityUnits.VOLTS_PER_G),
     ],
 )
-def test___ai_channel_collection___add_ai_accel_4_wire_dc_voltage_chan___sets_channel_attributes(
-    task, sim_charge_device, units, sensitivity, sensitivity_units
+def test___task__add_ai_accel_4_wire_dc_voltage_chan___sets_channel_attributes(
+    task: Task, sim_charge_device: Device, units, sensitivity, sensitivity_units
 ):
-    chan = task.ai_channels.add_ai_accel_4_wire_dc_voltage_chan(
+    chan: AIChannel = task.ai_channels.add_ai_accel_4_wire_dc_voltage_chan(
         sim_charge_device.ai_physical_chans[0].name,
         units=units,
         sensitivity=sensitivity,
         sensitivity_units=sensitivity_units,
     )
+
     assert chan.ai_meas_type == UsageTypeAI.ACCELERATION_4_WIRE_DC_VOLTAGE
     assert chan.ai_accel_units == units
     assert chan.ai_accel_4_wire_dc_voltage_sensitivity == sensitivity
@@ -99,10 +103,10 @@ def test___ai_channel_collection___add_ai_accel_4_wire_dc_voltage_chan___sets_ch
         (AccelUnits.METERS_PER_SECOND_SQUARED, 0.5, AccelSensitivityUnits.VOLTS_PER_G),
     ],
 )
-def test___ai_channel_collection___add_ai_accel_chan___sets_channel_attributes(
-    task, sim_dsa_device, units, sensitivity, sensitivity_units
+def test___task__add_ai_accel_chan___sets_channel_attributes(
+    task: Task, sim_dsa_device: Device, units, sensitivity, sensitivity_units
 ):
-    chan = task.ai_channels.add_ai_accel_chan(
+    chan: AIChannel = task.ai_channels.add_ai_accel_chan(
         sim_dsa_device.ai_physical_chans[0].name,
         units=units,
         sensitivity=sensitivity,
@@ -126,10 +130,10 @@ def test___ai_channel_collection___add_ai_accel_chan___sets_channel_attributes(
         ),
     ],
 )
-def test___ai_channel_collection___add_ai_accel_charge_chan___sets_channel_attributes(
-    task, sim_charge_device, units, sensitivity, sensitivity_units
+def test___task__add_ai_accel_charge_chan___sets_channel_attributes(
+    task: Task, sim_charge_device: Device, units, sensitivity, sensitivity_units
 ):
-    chan = task.ai_channels.add_ai_accel_charge_chan(
+    chan: AIChannel = task.ai_channels.add_ai_accel_charge_chan(
         sim_charge_device.ai_physical_chans[0].name,
         units=units,
         sensitivity=sensitivity,
@@ -149,10 +153,10 @@ def test___ai_channel_collection___add_ai_accel_charge_chan___sets_channel_attri
         (BridgeUnits.MILLIVOLTS_PER_VOLT, BridgeConfiguration.QUARTER_BRIDGE, 120.0),
     ],
 )
-def test___ai_channel_collection___add_ai_bridge_chan___sets_channel_attributes(
-    task, sim_bridge_device, units, bridge_config, nominal_bridge_resistance
+def test___task__add_ai_bridge_chan___sets_channel_attributes(
+    task: Task, sim_bridge_device: Device, units, bridge_config, nominal_bridge_resistance
 ):
-    chan = task.ai_channels.add_ai_bridge_chan(
+    chan: AIChannel = task.ai_channels.add_ai_bridge_chan(
         sim_bridge_device.ai_physical_chans[0].name,
         units=units,
         bridge_config=bridge_config,
@@ -166,10 +170,10 @@ def test___ai_channel_collection___add_ai_bridge_chan___sets_channel_attributes(
 
 
 @pytest.mark.parametrize("units", [ChargeUnits.COULOMBS, ChargeUnits.PICO_COULOMBS])
-def test___ai_channel_collection___add_ai_charge_chan___sets_channel_attributes(
-    task, sim_charge_device, units
+def test___task__add_ai_charge_chan___sets_channel_attributes(
+    task: Task, sim_charge_device: Device, units
 ):
-    chan = task.ai_channels.add_ai_charge_chan(
+    chan: AIChannel = task.ai_channels.add_ai_charge_chan(
         sim_charge_device.ai_physical_chans[0].name, units=units
     )
 
@@ -188,10 +192,14 @@ def test___ai_channel_collection___add_ai_charge_chan___sets_channel_attributes(
         (CurrentShuntResistorLocation.EXTERNAL, CurrentShuntResistorLocation.EXTERNAL, 99.0),
     ],
 )
-def test___ai_channel_collection___add_ai_current_chan___sets_channel_attributes(
-    task, sim_6363_device, shunt_resistor_loc, expected_shunt_resistor_loc, ext_shunt_resistor_val
+def test___task__add_ai_current_chan___sets_channel_attributes(
+    task: Task,
+    sim_6363_device: Device,
+    shunt_resistor_loc,
+    expected_shunt_resistor_loc,
+    ext_shunt_resistor_val,
 ):
-    chan = task.ai_channels.add_ai_current_chan(
+    chan: AIChannel = task.ai_channels.add_ai_current_chan(
         sim_6363_device.ai_physical_chans[0].name,
         shunt_resistor_loc=shunt_resistor_loc,
         ext_shunt_resistor_val=ext_shunt_resistor_val,
@@ -209,16 +217,17 @@ def test___ai_channel_collection___add_ai_current_chan___sets_channel_attributes
         (CurrentShuntResistorLocation.INTERNAL, CurrentShuntResistorLocation.INTERNAL),
     ],
 )
-def test___ai_channel_collection___add_ai_current_rms_chan___sets_channel_attributes(
-    task, sim_dmm_device, shunt_resistor_loc, expected_shunt_resistor_loc
+def test___task__add_ai_current_rms_chan___sets_channel_attributes(
+    task: Task, sim_dmm_device: Device, shunt_resistor_loc, expected_shunt_resistor_loc
 ):
-    chan = task.ai_channels.add_ai_current_rms_chan(
+    chan: AIChannel = task.ai_channels.add_ai_current_rms_chan(
         f"{sim_dmm_device.name}/dmm",
         # dmm is unipolar, defaults don't work
         min_val=0.0,
         max_val=1.0,
         shunt_resistor_loc=shunt_resistor_loc,
     )
+
     assert chan.ai_meas_type == UsageTypeAI.CURRENT_ACRMS
     assert chan.ai_current_shunt_loc == expected_shunt_resistor_loc
 
@@ -230,21 +239,22 @@ def test___ai_channel_collection___add_ai_current_rms_chan___sets_channel_attrib
         (BridgeConfiguration.QUARTER_BRIDGE, 120.0, [1.0, 2.0], [-0.5, 0.5]),
     ],
 )
-def test___ai_channel_collection___add_ai_force_bridge_polynomial_chan___sets_channel_attributes(
-    task,
-    sim_bridge_device,
+def test___task__add_ai_force_bridge_polynomial_chan___sets_channel_attributes(
+    task: Task,
+    sim_bridge_device: Device,
     bridge_config,
     nominal_bridge_resistance,
     forward_coeffs,
     reverse_coeffs,
 ):
-    chan = task.ai_channels.add_ai_force_bridge_polynomial_chan(
+    chan: AIChannel = task.ai_channels.add_ai_force_bridge_polynomial_chan(
         sim_bridge_device.ai_physical_chans[0].name,
         bridge_config=bridge_config,
         nominal_bridge_resistance=nominal_bridge_resistance,
         forward_coeffs=forward_coeffs,
         reverse_coeffs=reverse_coeffs,
     )
+
     assert chan.ai_meas_type == UsageTypeAI.FORCE_BRIDGE
     assert chan.ai_bridge_cfg == bridge_config
     assert chan.ai_bridge_nom_resistance == nominal_bridge_resistance
@@ -259,21 +269,22 @@ def test___ai_channel_collection___add_ai_force_bridge_polynomial_chan___sets_ch
         (BridgeConfiguration.QUARTER_BRIDGE, 120.0, [-2.0, 0.0, 2.0], [-200.0, 0.0, 200.0]),
     ],
 )
-def test___ai_channel_collection___add_ai_force_bridge_table_chan___sets_channel_attributes(
-    task,
-    sim_bridge_device,
+def test___task__add_ai_force_bridge_table_chan___sets_channel_attributes(
+    task: Task,
+    sim_bridge_device: Device,
     bridge_config,
     nominal_bridge_resistance,
     electrical_vals,
     physical_vals,
 ):
-    chan = task.ai_channels.add_ai_force_bridge_table_chan(
+    chan: AIChannel = task.ai_channels.add_ai_force_bridge_table_chan(
         sim_bridge_device.ai_physical_chans[0].name,
         bridge_config=bridge_config,
         nominal_bridge_resistance=nominal_bridge_resistance,
         electrical_vals=electrical_vals,
         physical_vals=physical_vals,
     )
+
     assert chan.ai_meas_type == UsageTypeAI.FORCE_BRIDGE
     assert chan.ai_bridge_cfg == bridge_config
     assert chan.ai_bridge_nom_resistance == nominal_bridge_resistance
@@ -288,9 +299,9 @@ def test___ai_channel_collection___add_ai_force_bridge_table_chan___sets_channel
         (BridgeConfiguration.QUARTER_BRIDGE, 120.0, 0.0, 4.0, 0.0, 200.0),
     ],
 )
-def test___ai_channel_collection___add_ai_force_bridge_two_point_lin_chan___sets_channel_attributes(
-    task,
-    sim_bridge_device,
+def test___task__add_ai_force_bridge_two_point_lin_chan___sets_channel_attributes(
+    task: Task,
+    sim_bridge_device: Device,
     bridge_config,
     nominal_bridge_resistance,
     first_electrical_val,
@@ -298,7 +309,7 @@ def test___ai_channel_collection___add_ai_force_bridge_two_point_lin_chan___sets
     first_physical_val,
     second_physical_val,
 ):
-    chan = task.ai_channels.add_ai_force_bridge_two_point_lin_chan(
+    chan: AIChannel = task.ai_channels.add_ai_force_bridge_two_point_lin_chan(
         sim_bridge_device.ai_physical_chans[0].name,
         bridge_config=bridge_config,
         nominal_bridge_resistance=nominal_bridge_resistance,
@@ -307,6 +318,7 @@ def test___ai_channel_collection___add_ai_force_bridge_two_point_lin_chan___sets
         first_physical_val=first_physical_val,
         second_physical_val=second_physical_val,
     )
+
     assert chan.ai_meas_type == UsageTypeAI.FORCE_BRIDGE
     assert chan.ai_bridge_cfg == bridge_config
     assert chan.ai_bridge_nom_resistance == nominal_bridge_resistance
@@ -323,15 +335,16 @@ def test___ai_channel_collection___add_ai_force_bridge_two_point_lin_chan___sets
         (ForceUnits.POUNDS, 1.25, ForceIEPESensorSensitivityUnits.MILLIVOLTS_PER_POUND),
     ],
 )
-def test___ai_channel_collection___add_ai_force_iepe_chan___sets_channel_attributes(
-    task, sim_dsa_device, units, sensitivity, sensitivity_units
+def test___task__add_ai_force_iepe_chan___sets_channel_attributes(
+    task: Task, sim_dsa_device: Device, units, sensitivity, sensitivity_units
 ):
-    chan = task.ai_channels.add_ai_force_iepe_chan(
+    chan: AIChannel = task.ai_channels.add_ai_force_iepe_chan(
         sim_dsa_device.ai_physical_chans[0].name,
         units=units,
         sensitivity=sensitivity,
         sensitivity_units=sensitivity_units,
     )
+
     assert chan.ai_meas_type == UsageTypeAI.FORCE_IEPE_SENSOR
     assert chan.ai_force_units == units
     assert chan.ai_force_iepe_sensor_sensitivity == sensitivity
@@ -348,10 +361,10 @@ def test___ai_channel_collection___add_ai_force_iepe_chan___sets_channel_attribu
         (10.0, 100.0),
     ],
 )
-def test___ai_channel_collection___add_ai_microphone_chan___sets_channel_attributes(
-    task, sim_dsa_device, mic_sensitivity, max_snd_press_level
+def test___task__add_ai_microphone_chan___sets_channel_attributes(
+    task: Task, sim_dsa_device: Device, mic_sensitivity, max_snd_press_level
 ):
-    chan = task.ai_channels.add_ai_microphone_chan(
+    chan: AIChannel = task.ai_channels.add_ai_microphone_chan(
         sim_dsa_device.ai_physical_chans[0].name,
         mic_sensitivity=mic_sensitivity,
         max_snd_press_level=max_snd_press_level,
@@ -369,14 +382,15 @@ def test___ai_channel_collection___add_ai_microphone_chan___sets_channel_attribu
         (EddyCurrentProxProbeSensitivityUnits.VOLTS_PER_MIL, 0.2),
     ],
 )
-def test___ai_channel_collection___add_ai_pos_eddy_curr_prox_probe_chan___sets_channel_attributes(
-    task, sim_dsa_device, sensitivity_units, sensitivity
+def test___task__add_ai_pos_eddy_curr_prox_probe_chan___sets_channel_attributes(
+    task: Task, sim_dsa_device: Device, sensitivity_units, sensitivity
 ):
-    chan = task.ai_channels.add_ai_pos_eddy_curr_prox_probe_chan(
+    chan: AIChannel = task.ai_channels.add_ai_pos_eddy_curr_prox_probe_chan(
         sim_dsa_device.ai_physical_chans[0].name,
         sensitivity_units=sensitivity_units,
         sensitivity=sensitivity,
     )
+
     assert chan.ai_meas_type == UsageTypeAI.POSITION_EDDY_CURRENT_PROX_PROBE
     assert chan.ai_eddy_current_prox_sensitivity_units == sensitivity_units
     assert chan.ai_eddy_current_prox_sensitivity == sensitivity
@@ -393,16 +407,16 @@ def test___ai_channel_collection___add_ai_pos_eddy_curr_prox_probe_chan___sets_c
     "ac_excit_wire_mode, voltage_excit_val, voltage_excit_freq",
     [(ACExcitWireMode.FOUR_WIRE, 1.0, 2500.0), (ACExcitWireMode.FIVE_WIRE, 1.5, 2000.0)],
 )
-def test___ai_channel_collection___add_ai_pos_lvdt_chan___sets_channel_attributes(
-    task,
-    sim_position_device,
+def test___task__add_ai_pos_lvdt_chan___sets_channel_attributes(
+    task: Task,
+    sim_position_device: Device,
     sensitivity_units,
     sensitivity,
     ac_excit_wire_mode,
     voltage_excit_val,
     voltage_excit_freq,
 ):
-    chan = task.ai_channels.add_ai_pos_lvdt_chan(
+    chan: AIChannel = task.ai_channels.add_ai_pos_lvdt_chan(
         sim_position_device.ai_physical_chans[0].name,
         sensitivity_units=sensitivity_units,
         sensitivity=sensitivity,
@@ -420,10 +434,11 @@ def test___ai_channel_collection___add_ai_pos_lvdt_chan___sets_channel_attribute
 
 
 # Nothing novel here vs. lvdt channels.
-def test___ai_channel_collection___add_ai_pos_rvdt_chan___sets_channel_attributes(
-    task, sim_position_device
-):
-    chan = task.ai_channels.add_ai_pos_rvdt_chan(sim_position_device.ai_physical_chans[0].name)
+def test___task__add_ai_pos_rvdt_chan___sets_channel_attributes(task: Task, sim_position_device):
+    chan: AIChannel = task.ai_channels.add_ai_pos_rvdt_chan(
+        sim_position_device.ai_physical_chans[0].name
+    )
+
     assert chan.ai_meas_type == UsageTypeAI.POSITION_ANGULAR_RVDT
 
 
@@ -434,15 +449,16 @@ def test___ai_channel_collection___add_ai_pos_rvdt_chan___sets_channel_attribute
         (2.5, 1.0, True),
     ],
 )
-def test___ai_channel_collection___add_ai_power_chan___sets_channel_attributes(
-    task, sim_ts_power_device, voltage_setpoint, current_setpoint, output_enable
+def test___task__add_ai_power_chan___sets_channel_attributes(
+    task: Task, sim_ts_power_device: Device, voltage_setpoint, current_setpoint, output_enable
 ):
-    chan = task.ai_channels.add_ai_power_chan(
+    chan: AIChannel = task.ai_channels.add_ai_power_chan(
         f"{sim_ts_power_device.name}/power",
         voltage_setpoint=voltage_setpoint,
         current_setpoint=current_setpoint,
         output_enable=output_enable,
     )
+
     assert chan.ai_meas_type == UsageTypeAI.POWER
     assert chan.pwr_voltage_setpoint == voltage_setpoint
     assert chan.pwr_current_setpoint == current_setpoint
@@ -450,38 +466,41 @@ def test___ai_channel_collection___add_ai_power_chan___sets_channel_attributes(
 
 
 # Nothing novel here vs. other bridge-based channels.
-def test___ai_channel_collection___add_ai_pressure_bridge_polynomial_chan___sets_channel_attributes(
-    task, sim_bridge_device
+def test___task__add_ai_pressure_bridge_polynomial_chan___sets_channel_attributes(
+    task: Task, sim_bridge_device
 ):
     # #482: Default argument values for bridge create channel functions are unusable
-    chan = task.ai_channels.add_ai_pressure_bridge_polynomial_chan(
+    chan: AIChannel = task.ai_channels.add_ai_pressure_bridge_polynomial_chan(
         sim_bridge_device.ai_physical_chans[0].name,
         forward_coeffs=[0.0, 1.0],
         reverse_coeffs=[0.0, 1.0],
     )
+
     assert chan.ai_meas_type == UsageTypeAI.PRESSURE_BRIDGE
 
 
 # Nothing novel here vs. other bridge-based channels.
-def test___ai_channel_collection___add_ai_pressure_bridge_table_chan___sets_channel_attributes(
-    task, sim_bridge_device
+def test___task__add_ai_pressure_bridge_table_chan___sets_channel_attributes(
+    task: Task, sim_bridge_device
 ):
     # #482: Default argument values for bridge create channel functions are unusable
-    chan = task.ai_channels.add_ai_pressure_bridge_table_chan(
+    chan: AIChannel = task.ai_channels.add_ai_pressure_bridge_table_chan(
         sim_bridge_device.ai_physical_chans[0].name,
         electrical_vals=[-1.0, 0.0, 1.0],
         physical_vals=[-100.0, 0.0, 100.0],
     )
+
     assert chan.ai_meas_type == UsageTypeAI.PRESSURE_BRIDGE
 
 
 # Nothing novel here vs. other bridge-based channels.
-def test___ai_channel_collection___add_ai_pressure_bridge_two_point_lin_chan___sets_channel_attributes(
-    task, sim_bridge_device
+def test___task__add_ai_pressure_bridge_two_point_lin_chan___sets_channel_attributes(
+    task: Task, sim_bridge_device
 ):
-    chan = task.ai_channels.add_ai_pressure_bridge_two_point_lin_chan(
+    chan: AIChannel = task.ai_channels.add_ai_pressure_bridge_two_point_lin_chan(
         sim_bridge_device.ai_physical_chans[0].name
     )
+
     assert chan.ai_meas_type == UsageTypeAI.PRESSURE_BRIDGE
 
 
@@ -492,19 +511,20 @@ def test___ai_channel_collection___add_ai_pressure_bridge_two_point_lin_chan___s
         (ResistanceConfiguration.THREE_WIRE),
     ],
 )
-def test___ai_channel_collection___add_ai_resistance_chan___sets_channel_attributes(
-    task, sim_6363_device, resistance_config
+def test___task__add_ai_resistance_chan___sets_channel_attributes(
+    task: Task, sim_6363_device: Device, resistance_config
 ):
-    chan = task.ai_channels.add_ai_resistance_chan(
+    chan: AIChannel = task.ai_channels.add_ai_resistance_chan(
         sim_6363_device.ai_physical_chans[0].name, resistance_config=resistance_config
     )
+
     assert chan.ai_meas_type == UsageTypeAI.RESISTANCE
     assert chan.ai_resistance_cfg == resistance_config
 
 
 # Rosette is very complicated, so I'm not parametrizing this test.
-def test___ai_channel_collection___add_ai_rosette_strain_gage_chan___sets_channel_attributes(
-    task, sim_bridge_device
+def test___task__add_ai_rosette_strain_gage_chan___sets_channel_attributes(
+    task: Task, sim_bridge_device
 ):
     # #483: add_ai_rosette_strain_gage_chan parameter rosette_meas_types has the wrong type
     task.ai_channels.add_ai_rosette_strain_gage_chan(
@@ -513,7 +533,7 @@ def test___ai_channel_collection___add_ai_rosette_strain_gage_chan___sets_channe
         0.0,
         [StrainGageRosetteMeasurementType.PRINCIPAL_STRAIN_1.value],
     )
-    chan = task.ai_channels["rosette0_principalStrain1"]
+    chan: AIChannel = task.ai_channels["rosette0_principalStrain1"]
     assert chan.ai_meas_type == UsageTypeAI.ROSETTE_STRAIN_GAGE
 
 
@@ -524,14 +544,15 @@ def test___ai_channel_collection___add_ai_rosette_strain_gage_chan___sets_channe
         (RTDType.PT_3851, ResistanceConfiguration.THREE_WIRE),
     ],
 )
-def test___ai_channel_collection___add_ai_rtd_chan___sets_channel_attributes(
-    task, sim_6363_device, rtd_type, resistance_config
+def test___task__add_ai_rtd_chan___sets_channel_attributes(
+    task: Task, sim_6363_device: Device, rtd_type, resistance_config
 ):
-    chan = task.ai_channels.add_ai_rtd_chan(
+    chan: AIChannel = task.ai_channels.add_ai_rtd_chan(
         sim_6363_device.ai_physical_chans[0].name,
         rtd_type=rtd_type,
         resistance_config=resistance_config,
     )
+
     assert chan.ai_meas_type == UsageTypeAI.TEMPERATURE_RTD
     assert chan.ai_rtd_type == rtd_type
     assert chan.ai_resistance_cfg == resistance_config
@@ -544,27 +565,29 @@ def test___ai_channel_collection___add_ai_rtd_chan___sets_channel_attributes(
         (StrainGageBridgeType.QUARTER_BRIDGE_I, 1.1, 120.0),
     ],
 )
-def test___ai_channel_collection___add_ai_strain_gage_chan___sets_channel_attributes(
-    task, sim_bridge_device, strain_config, gage_factor, nominal_gage_resistance
+def test___task__add_ai_strain_gage_chan___sets_channel_attributes(
+    task: Task, sim_bridge_device: Device, strain_config, gage_factor, nominal_gage_resistance
 ):
-    chan = task.ai_channels.add_ai_strain_gage_chan(
+    chan: AIChannel = task.ai_channels.add_ai_strain_gage_chan(
         sim_bridge_device.ai_physical_chans[0].name,
         strain_config=strain_config,
         gage_factor=gage_factor,
         nominal_gage_resistance=nominal_gage_resistance,
     )
+
     assert chan.ai_meas_type == UsageTypeAI.STRAIN_STRAIN_GAGE
     assert chan.ai_strain_gage_cfg == strain_config
     assert chan.ai_strain_gage_gage_factor == gage_factor
     assert chan.ai_bridge_nom_resistance == nominal_gage_resistance
 
 
-def test___ai_channel_collection___add_ai_temp_built_in_sensor_chan___sets_channel_attributes(
-    task, sim_6363_device
+def test___task__add_ai_temp_built_in_sensor_chan___sets_channel_attributes(
+    task: Task, sim_6363_device
 ):
-    chan = task.ai_channels.add_ai_temp_built_in_sensor_chan(
+    chan: AIChannel = task.ai_channels.add_ai_temp_built_in_sensor_chan(
         f"{sim_6363_device.name}/_boardTempSensor_vs_aignd"
     )
+
     assert chan.ai_meas_type == UsageTypeAI.TEMPERATURE_BUILT_IN_SENSOR
 
 
@@ -575,15 +598,16 @@ def test___ai_channel_collection___add_ai_temp_built_in_sensor_chan___sets_chann
         (ThermocoupleType.K, CJCSource.BUILT_IN, 0.0),
     ],
 )
-def test___ai_channel_collection___add_ai_thrmcpl_chan___sets_channel_attributes(
-    task, sim_temperature_device, thermocouple_type, cjc_source, cjc_val
+def test___task__add_ai_thrmcpl_chan___sets_channel_attributes(
+    task: Task, sim_temperature_device: Device, thermocouple_type, cjc_source, cjc_val
 ):
-    chan = task.ai_channels.add_ai_thrmcpl_chan(
+    chan: AIChannel = task.ai_channels.add_ai_thrmcpl_chan(
         sim_temperature_device.ai_physical_chans[0].name,
         thermocouple_type=thermocouple_type,
         cjc_source=cjc_source,
         cjc_val=cjc_val,
     )
+
     assert chan.ai_meas_type == UsageTypeAI.TEMPERATURE_THERMOCOUPLE
     assert chan.ai_thrmcpl_type == thermocouple_type
     assert chan.ai_thrmcpl_cjc_src == cjc_source
@@ -597,16 +621,17 @@ def test___ai_channel_collection___add_ai_thrmcpl_chan___sets_channel_attributes
         (ResistanceConfiguration.FOUR_WIRE, 0.2, 0.3, 0.4),
     ],
 )
-def test___ai_channel_collection___add_ai_thrmstr_chan_iex___sets_channel_attributes(
-    task, sim_6363_device, resistance_config, a, b, c
+def test___task__add_ai_thrmstr_chan_iex___sets_channel_attributes(
+    task: Task, sim_6363_device: Device, resistance_config, a, b, c
 ):
-    chan = task.ai_channels.add_ai_thrmstr_chan_iex(
+    chan: AIChannel = task.ai_channels.add_ai_thrmstr_chan_iex(
         sim_6363_device.ai_physical_chans[0].name,
         resistance_config=resistance_config,
         a=a,
         b=b,
         c=c,
     )
+
     assert chan.ai_meas_type == UsageTypeAI.TEMPERATURE_THERMISTOR
     assert chan.ai_resistance_cfg == resistance_config
     assert chan.ai_thrmstr_a == a
@@ -621,100 +646,105 @@ def test___ai_channel_collection___add_ai_thrmstr_chan_iex___sets_channel_attrib
         (TemperatureUnits.DEG_F, ResistanceConfiguration.FOUR_WIRE),
     ],
 )
-def test___ai_channel_collection___add_ai_thrmstr_chan_vex___sets_channel_attributes(
-    task, sim_6363_device, units, resistance_config
+def test___task__add_ai_thrmstr_chan_vex___sets_channel_attributes(
+    task: Task, sim_6363_device: Device, units, resistance_config
 ):
-    chan = task.ai_channels.add_ai_thrmstr_chan_vex(
+    chan: AIChannel = task.ai_channels.add_ai_thrmstr_chan_vex(
         sim_6363_device.ai_physical_chans[0].name, units=units, resistance_config=resistance_config
     )
+
     assert chan.ai_meas_type == UsageTypeAI.TEMPERATURE_THERMISTOR
     assert chan.ai_temp_units == units
     assert chan.ai_resistance_cfg == resistance_config
 
 
 # Nothing novel here vs. other bridge-based channels.
-def test___ai_channel_collection___add_ai_torque_bridge_polynomial_chan___sets_channel_attributes(
-    task, sim_bridge_device
+def test___task__add_ai_torque_bridge_polynomial_chan___sets_channel_attributes(
+    task: Task, sim_bridge_device
 ):
     # #482: Default argument values for bridge create channel functions are unusable
-    chan = task.ai_channels.add_ai_torque_bridge_polynomial_chan(
+    chan: AIChannel = task.ai_channels.add_ai_torque_bridge_polynomial_chan(
         sim_bridge_device.ai_physical_chans[0].name,
         forward_coeffs=[0.0, 1.0],
         reverse_coeffs=[0.0, 1.0],
     )
+
     assert chan.ai_meas_type == UsageTypeAI.TORQUE_BRIDGE
 
 
 # Nothing novel here vs. other bridge-based channels.
-def test___ai_channel_collection___add_ai_torque_bridge_table_chan___sets_channel_attributes(
-    task, sim_bridge_device
+def test___task__add_ai_torque_bridge_table_chan___sets_channel_attributes(
+    task: Task, sim_bridge_device
 ):
     # #482: Default argument values for bridge create channel functions are unusable
-    chan = task.ai_channels.add_ai_torque_bridge_table_chan(
+    chan: AIChannel = task.ai_channels.add_ai_torque_bridge_table_chan(
         sim_bridge_device.ai_physical_chans[0].name,
         electrical_vals=[-1.0, 0.0, 1.0],
         physical_vals=[-100.0, 0.0, 100.0],
     )
+
     assert chan.ai_meas_type == UsageTypeAI.TORQUE_BRIDGE
 
 
 # Nothing novel here vs. other bridge-based channels.
-def test___ai_channel_collection___add_ai_torque_bridge_two_point_lin_chan___sets_channel_attributes(
-    task, sim_bridge_device
+def test___task__add_ai_torque_bridge_two_point_lin_chan___sets_channel_attributes(
+    task: Task, sim_bridge_device
 ):
-    chan = task.ai_channels.add_ai_torque_bridge_two_point_lin_chan(
+    chan: AIChannel = task.ai_channels.add_ai_torque_bridge_two_point_lin_chan(
         sim_bridge_device.ai_physical_chans[0].name
     )
+
     assert chan.ai_meas_type == UsageTypeAI.TORQUE_BRIDGE
 
 
 # Nothing novel here vs. other iepe channels.
-def test___ai_channel_collection___add_ai_velocity_iepe_chan___sets_channel_attributes(
-    task, sim_dsa_device
-):
-    chan = task.ai_channels.add_ai_velocity_iepe_chan(sim_dsa_device.ai_physical_chans[0].name)
+def test___task__add_ai_velocity_iepe_chan___sets_channel_attributes(task: Task, sim_dsa_device):
+    chan: AIChannel = task.ai_channels.add_ai_velocity_iepe_chan(
+        sim_dsa_device.ai_physical_chans[0].name
+    )
+
     assert chan.ai_meas_type == UsageTypeAI.VELOCITY_IEPE_SENSOR
 
 
 @pytest.mark.parametrize(
-    "min_val, max_val, bridge_config, voltage_exict_source, voltage_excit_val, use_excit_for_scaling",
+    "min_val, max_val, bridge_config, voltage_excit_source, voltage_excit_val, use_excit_for_scaling",
     [
         (-10.0, 10.0, BridgeConfiguration.FULL_BRIDGE, ExcitationSource.EXTERNAL, 5.0, False),
         (-2.0, 2.0, BridgeConfiguration.HALF_BRIDGE, ExcitationSource.EXTERNAL, 5.0, True),
     ],
 )
-def test___ai_channel_collection___add_ai_voltage_chan_with_excit___sets_channel_attributes(
-    task,
-    sim_6363_device,
+def test___task__add_ai_voltage_chan_with_excit___sets_channel_attributes(
+    task: Task,
+    sim_6363_device: Device,
     min_val,
     max_val,
     bridge_config,
-    voltage_exict_source,
+    voltage_excit_source,
     voltage_excit_val,
     use_excit_for_scaling,
 ):
-    chan = task.ai_channels.add_ai_voltage_chan_with_excit(
+    chan: AIChannel = task.ai_channels.add_ai_voltage_chan_with_excit(
         sim_6363_device.ai_physical_chans[0].name,
         min_val=min_val,
         max_val=max_val,
         bridge_config=bridge_config,
-        voltage_excit_source=voltage_exict_source,
+        voltage_excit_source=voltage_excit_source,
         voltage_excit_val=voltage_excit_val,
         use_excit_for_scaling=use_excit_for_scaling,
     )
+
     assert chan.ai_meas_type == UsageTypeAI.VOLTAGE_CUSTOM_WITH_EXCITATION
     assert chan.ai_min == min_val
     assert chan.ai_max == max_val
     assert chan.ai_bridge_cfg == bridge_config
-    assert chan.ai_excit_src == voltage_exict_source
+    assert chan.ai_excit_src == voltage_excit_source
     assert chan.ai_excit_val == voltage_excit_val
     assert chan.ai_excit_use_for_scaling == use_excit_for_scaling
 
 
-def test___ai_channel_collection___add_ai_voltage_rms_chan___sets_channel_attributes(
-    task, sim_dmm_device
-):
-    chan = task.ai_channels.add_ai_voltage_rms_chan(
+def test___task__add_ai_voltage_rms_chan___sets_channel_attributes(task: Task, sim_dmm_device):
+    chan: AIChannel = task.ai_channels.add_ai_voltage_rms_chan(
         f"{sim_dmm_device.name}/dmm", min_val=0.0, max_val=1.0
     )
+
     assert chan.ai_meas_type == UsageTypeAI.VOLTAGE_ACRMS
