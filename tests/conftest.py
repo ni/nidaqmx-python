@@ -120,10 +120,7 @@ def _device_by_name(product_type, device_type, system):
             or (device_type == DeviceType.REAL and not device.is_simulated)
             or (device_type == DeviceType.SIMULATED and device.is_simulated)
         )
-        if (
-            device_type_match
-            and device.product_type == product_type
-        ):
+        if device_type_match and device.product_type == product_type:
             return device
 
     pytest.skip(
@@ -136,20 +133,26 @@ def _device_by_name(product_type, device_type, system):
 
 @pytest.fixture(scope="function")
 def any_x_series_device(system):
-    """Gets any x series device information."""
+    """Gets any X Series device information."""
     return _x_series_device(DeviceType.ANY, system)
 
 
 @pytest.fixture(scope="function")
 def real_x_series_device(system):
-    """Gets the real x series device information."""
+    """Gets real X Series device information."""
     return _x_series_device(DeviceType.REAL, system)
 
 
 @pytest.fixture(scope="function")
 def sim_x_series_device(system):
-    """Gets simulated x series device information."""
+    """Gets simulated X Series device information."""
     return _x_series_device(DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_6363_device(system):
+    """Gets a simulated 6363."""
+    return _device_by_name("PCIe-6363", DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")
@@ -260,6 +263,12 @@ def sim_bridge_device(system):
 def sim_position_device(system):
     """Gets a simulated 4340."""
     return _device_by_name("PXIe-4340", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_temperature_device(system):
+    """Gets a simulated 4353."""
+    return _device_by_name("PXIe-4353", DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")
