@@ -513,6 +513,20 @@ def interpreter(system: nidaqmx.system.System) -> BaseInterpreter:
 
 
 @pytest.fixture
-def teds_file_path(test_assets_directory):
+def teds_assets_directory(test_assets_directory):
+    """Returns the path to TEDS assets."""
+    return pathlib.Path(test_assets_directory, "teds")
+
+
+@pytest.fixture
+def voltage_teds_file_path(teds_assets_directory):
     """Returns a TEDS file path."""
-    return pathlib.Path(test_assets_directory, "teds", "Voltage.ted")
+    return pathlib.Path(teds_assets_directory, "Voltage.ted")
+
+
+@pytest.fixture
+def sim_6363_chan_with_voltage_teds(sim_6363_device, voltage_teds_file_path):
+    phys_chan = sim_6363_device.ai_physical_chans["ai0"]
+    phys_chan.configure_teds(str(voltage_teds_file_path))
+    yield phys_chan
+    phys_chan.clear_teds()
