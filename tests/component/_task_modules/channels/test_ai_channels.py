@@ -1,7 +1,5 @@
 import pytest
 
-from nidaqmx import Task
-from nidaqmx._task_modules.channels.ai_channel import AIChannel
 from nidaqmx.constants import (
     AccelChargeSensitivityUnits,
     AccelSensitivityUnits,
