@@ -57,19 +57,19 @@ def test___physical_channel___get_int32_array_property___returns_default_value(
 
 
 def test___physical_channel_with_teds___get_string_property___returns_configured_value(
-    sim_6363_chan_with_voltage_teds
+    sim_6363_chan_with_voltage_teds,
 ):
     assert sim_6363_chan_with_voltage_teds.teds_version_letter == "A"
 
 
 def test___physical_channel_with_teds___get_uint32_array_property___returns_configured_value(
-    sim_6363_chan_with_voltage_teds
+    sim_6363_chan_with_voltage_teds,
 ):
     assert sim_6363_chan_with_voltage_teds.teds_template_ids == [30]
 
 
 def test___physical_channel_with_teds___get_uint32_property___returns_configured_value(
-    sim_6363_chan_with_voltage_teds
+    sim_6363_chan_with_voltage_teds,
 ):
     assert sim_6363_chan_with_voltage_teds.teds_mfg_id == 17
 
