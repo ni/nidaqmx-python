@@ -14,14 +14,16 @@ class TestTEDS:
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_create_teds_ai_voltage_chan(self, task, any_x_series_device, seed, teds_file_path):
+    def test_create_teds_ai_voltage_chan(
+        self, task, any_x_series_device, seed, voltage_teds_file_path
+    ):
         """Test to validate TEDS functionality."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         ai_phys_chan = random.choice(any_x_series_device.ai_physical_chans)
 
-        ai_phys_chan.configure_teds(str(teds_file_path))
+        ai_phys_chan.configure_teds(str(voltage_teds_file_path))
 
         assert ai_phys_chan.teds_mfg_id == 17
         assert ai_phys_chan.teds_model_num == 1

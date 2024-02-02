@@ -526,6 +526,7 @@ def voltage_teds_file_path(teds_assets_directory):
 
 @pytest.fixture
 def sim_6363_chan_with_voltage_teds(sim_6363_device, voltage_teds_file_path):
+    """Yields a physical channel with TEDS configured and then clears it after the test is done."""
     phys_chan = sim_6363_device.ai_physical_chans["ai0"]
     phys_chan.configure_teds(str(voltage_teds_file_path))
     yield phys_chan
