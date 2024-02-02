@@ -243,17 +243,14 @@ GENERIC_ATTRIBUTE_GROUP_NAME_MAP = {
 }
 
 
-def get_attributes(metadata, class_name, additional_class_name=""):
+def get_attributes(metadata, class_name):
     """Converts the scrapigen metadata into a list of attributes."""
     attributes_metadata = []
     for group_name, attributes in metadata["attributes"].items():
         for id, attribute_data in attributes.items():
             if (
                 "python_class_name" in attribute_data
-                and (
-                    attribute_data["python_class_name"] == class_name
-                    or attribute_data["python_class_name"] == additional_class_name
-                )
+                and attribute_data["python_class_name"] == class_name
                 and not attribute_data["name"] in EXCLUDED_ATTRIBUTES
             ):
                 attributes_metadata.append(Attribute(id, attribute_data))
