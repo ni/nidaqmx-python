@@ -17,7 +17,7 @@ from nidaqmx._stubs import nidaqmx_pb2 as grpc_types
 from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
 from nidaqmx._stubs import session_pb2 as session_grpc_types
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx._grpc_time import convert_time_to_timestamp
+from nidaqmx._grpc_time import convert_time_to_timestamp, convert_timestamp_to_time
 
 _logger = logging.getLogger(__name__)
 
@@ -2180,6 +2180,12 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.GetTrigAttributeStringRequest(task=task, attribute_raw=attribute))
         return response.value
 
+    def get_trig_attribute_timestamp(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTrigAttributeTimestamp,
+            grpc_types.GetTrigAttributeTimestampRequest(task=task, attribute_raw=attribute))
+        return convert_timestamp_to_time(response.value)
+
     def get_trig_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetTrigAttributeUInt32,
@@ -3125,6 +3131,13 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.SetTrigAttributeString,
             grpc_types.SetTrigAttributeStringRequest(
                 task=task, attribute_raw=attribute, value=value))
+
+    def set_trig_attribute_timestamp(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetTrigAttributeTimestamp,
+            grpc_types.SetTrigAttributeTimestampRequest(
+                task=task, attribute_raw=attribute,
+                value=convert_time_to_timestamp(value)))
 
     def set_trig_attribute_uint32(self, task, attribute, value):
         response = self._invoke(

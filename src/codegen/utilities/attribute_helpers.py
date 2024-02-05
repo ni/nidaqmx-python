@@ -3,7 +3,9 @@
 import codegen.metadata as scrapigen_metadata
 from codegen.properties.attribute import Attribute
 from codegen.utilities.helpers import camel_to_snake_case
-from codegen.utilities.interpreter_helpers import INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES
+from codegen.utilities.interpreter_helpers import (
+    INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES,
+)
 
 EXCLUDED_ATTRIBUTES = [
     "AI_CHAN_CAL_HAS_VALID_CAL_INFO",
@@ -228,6 +230,7 @@ GENERIC_ATTRIBUTE_TYPE_MAP = {
     "int32[]": "int32_array",
     "uInt8[]": "bytes",
     "uInt32[]": "uint32_array",
+    "CVIAbsoluteTime": "timestamp",
 }
 
 GENERIC_ATTRIBUTE_GROUP_NAME_MAP = {
