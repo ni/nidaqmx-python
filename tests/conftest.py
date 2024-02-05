@@ -114,6 +114,7 @@ def _x_series_device(
     )
     return None
 
+
 def _field_daq_device(device_type, system):
     for device in system.devices:
         device_type_match = (
@@ -160,6 +161,7 @@ def _device_by_product_type(
 def any_x_series_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets any X Series device information."""
     return _x_series_device(DeviceType.ANY, system)
+
 
 @pytest.fixture(scope="function")
 def any_field_daq_device(system):

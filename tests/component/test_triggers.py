@@ -1,10 +1,11 @@
-import pytest
+from datetime import timedelta
 
+import pytest
+from hightime import datetime as ht_datetime
+
+from nidaqmx._lib_time import AbsoluteTime
 from nidaqmx.constants import Timescale
 from nidaqmx.task import Task
-from datetime import timedelta
-from nidaqmx._lib_time import AbsoluteTime
-from hightime import datetime as ht_datetime
 
 
 @pytest.fixture()
