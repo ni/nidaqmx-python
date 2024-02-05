@@ -3,9 +3,9 @@
     from codegen.utilities.function_helpers import get_functions, get_enums_used as functions_enums
     from codegen.utilities.attribute_helpers import get_attributes,  get_enums_used as attribute_enums
     from codegen.utilities.helpers import get_enums_to_import
-    start_trigger_attributes = get_attributes(data, "StartTrigger")
+    attributes = get_attributes(data, "StartTrigger")
     functions = get_functions(data,"StartTrigger")
-    attr_enums = attribute_enums(start_trigger_attributes)
+    attr_enums = attribute_enums(attributes)
     fuct_enums = functions_enums(functions)
     enums_used = get_enums_to_import(attr_enums, fuct_enums)
 %>\
