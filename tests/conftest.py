@@ -114,6 +114,27 @@ def _x_series_device(
     )
     return None
 
+def _field_daq_device(device_type, system):
+    for device in system.devices:
+        device_type_match = (
+            device_type == DeviceType.ANY
+            or (device_type == DeviceType.REAL and not device.is_simulated)
+            or (device_type == DeviceType.SIMULATED and device.is_simulated)
+        )
+        if (
+            device_type_match
+            and device.product_category == ProductCategory.FIELD_DAQ
+            and len(device.ai_physical_chans) >= 1
+        ):
+            return device
+
+    pytest.skip(
+        "Could not detect a device that meets the requirements to be an Field DAQ fixture of type "
+        f"{device_type}. Cannot proceed to run tests. Import the NI MAX configuration file located "
+        "at nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
+    )
+    return None
+
 
 def _device_by_product_type(
     product_type, device_type: DeviceType, system: nidaqmx.system.System
@@ -139,6 +160,11 @@ def _device_by_product_type(
 def any_x_series_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets any X Series device information."""
     return _x_series_device(DeviceType.ANY, system)
+
+@pytest.fixture(scope="function")
+def any_field_daq_device(system):
+    """Gets any field daq device information."""
+    return _field_daq_device(DeviceType.ANY, system)
 
 
 @pytest.fixture(scope="function")
