@@ -12969,6 +12969,11 @@ functions = {
     'GetCalInfoAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -13000,6 +13005,11 @@ functions = {
     'GetCalInfoAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -13031,6 +13041,11 @@ functions = {
     'GetCalInfoAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -13073,6 +13088,11 @@ functions = {
     'GetCalInfoAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -20800,6 +20820,11 @@ functions = {
     'SetCalInfoAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -20831,6 +20856,11 @@ functions = {
     'SetCalInfoAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -20862,6 +20892,11 @@ functions = {
     'SetCalInfoAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -20893,6 +20928,11 @@ functions = {
     'SetCalInfoAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',

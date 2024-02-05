@@ -1,5 +1,6 @@
 import pytest
 
+from datetime import datetime
 from nidaqmx import DaqError
 from nidaqmx.constants import BusType, TriggerUsage
 from nidaqmx.error_codes import DAQmxErrors
@@ -114,68 +115,93 @@ def test___module___get_chassis___shared_interpreter(device: Device):
     assert chassis._interpreter is device._interpreter
 
 
-def test___ext_cal_last_date_and_time___no_errors(any_x_series_device: Device) -> None:
-    last_date_and_time = any_x_series_device.ext_cal_last_date_and_time
+def test___ext_cal_last_date_and_time___no_errors(real_x_series_device: Device) -> None:
+    last_date_and_time = real_x_series_device.ext_cal_last_date_and_time
 
-    assert last_date_and_time is not None
+    assert type(last_date_and_time) == datetime
+    assert last_date_and_time.year > 2009
+    assert last_date_and_time.month >= 1
+    assert last_date_and_time.day > 0
+    assert last_date_and_time.hour >= 0
+    assert last_date_and_time.minute >= 0
 
 
-def test___self_cal_last_date_and_time___no_errors(any_x_series_device: Device) -> None:
-    last_date_and_time = any_x_series_device.self_cal_last_date_and_time
+def test___self_cal_last_date_and_time___no_errors(real_x_series_device: Device) -> None:
+    last_date_and_time = real_x_series_device.self_cal_last_date_and_time
 
-    assert last_date_and_time is not None
+    assert type(last_date_and_time) == datetime
+    assert last_date_and_time.year > 2009
+    assert last_date_and_time.month >= 1
+    assert last_date_and_time.day > 0
+    assert last_date_and_time.hour >= 0
+    assert last_date_and_time.minute >= 0
 
 
-def test___device_supports_cal___no_errors(any_x_series_device: Device) -> None:
-    is_cal_supported = any_x_series_device.device_supports_cal
+def test___device_supports_cal___no_errors(real_x_series_device: Device) -> None:
+    is_cal_supported = real_x_series_device.device_supports_cal
 
     assert is_cal_supported is True
 
 
-def test___cal_acc_connection_count___no_errors(any_x_series_device: Device) -> None:
-    test_value = 99
+def test___cal_acc_connection_count__raises_attr_not_supported(any_x_series_device: Device) -> None:
+    with pytest.raises(DaqError) as exc_info:
+        _ = any_x_series_device.cal_acc_connection_count
 
-    try:
-        current_acc_connection_count = any_x_series_device.cal_acc_connection_count
-
-        any_x_series_device.cal_acc_connection_count = test_value
-        assert test_value == any_x_series_device.cal_acc_connection_count
-
-        any_x_series_device.cal_acc_connection_count = current_acc_connection_count
-
-    except DaqError as e:
-        if e.error_code != DAQmxErrors.ATTR_NOT_SUPPORTED:
-            raise
+    assert exc_info.value.error_code == DAQmxErrors.ATTR_NOT_SUPPORTED
 
 
-def test___cal_dev_temp___no_errors(any_x_series_device: Device) -> None:
-    temperature = any_x_series_device.cal_dev_temp
-
-    assert 0.0 != temperature
-
-
-def test___cal_recommended_acc_connection_count_limit___no_errors(
+def test___cal_recommended_acc_connection_count_limit___raises_attr_not_supported(
     any_x_series_device: Device,
 ) -> None:
-    try:
-        acc_connection_count_limit = any_x_series_device.cal_recommended_acc_connection_count_limit
-        print(f"current_acc_connection_count_limit: {acc_connection_count_limit}")
+    with pytest.raises(DaqError) as exc_info:
+        _ = any_x_series_device.cal_recommended_acc_connection_count_limit
 
-        assert 0.0 != acc_connection_count_limit
-
-    except DaqError as e:
-        if e.error_code != DAQmxErrors.ATTR_NOT_SUPPORTED:
-            raise
+    assert exc_info.value.error_code == DAQmxErrors.ATTR_NOT_SUPPORTED
 
 
-def test___cal_user_defined_info___no_errors(any_x_series_device: Device) -> None:
-    test_value = "my test value"
-    user_defined_info = any_x_series_device.cal_user_defined_info
-    info_max_size = any_x_series_device.cal_user_defined_info_max_size
+@pytest.fixture()
+def get_cal_user_defined_info(real_x_series_device: Device):
+    user_defined_info = real_x_series_device.cal_user_defined_info
 
-    any_x_series_device.cal_user_defined_info = test_value
-    value = any_x_series_device.cal_user_defined_info
+def test___set_cal_user_defined_info___no_errors(real_x_series_device: Device) -> None:
+    user_defined_info = real_x_series_device.cal_user_defined_info
+    info_max_size = real_x_series_device.cal_user_defined_info_max_size
+
+    test_value = "my test value"[:info_max_size]
+    real_x_series_device.cal_user_defined_info = test_value
+    value = real_x_series_device.cal_user_defined_info
+
     assert info_max_size == len(value)
     assert value in test_value
 
-    any_x_series_device.cal_user_defined_info = user_defined_info
+    real_x_series_device.cal_user_defined_info = user_defined_info
+
+
+def test___cal_dev_temp___no_errors(sim_x_series_device: Device) -> None:
+    temperature = sim_x_series_device.cal_dev_temp
+
+    assert 0.0 == temperature
+
+
+def test___ext_cal_last_temp___no_errors(sim_x_series_device: Device) -> None:
+    temperature = sim_x_series_device.ext_cal_last_temp
+
+    assert 0.0 == temperature
+
+
+def test___ext_cal_recommended_interval___no_errors(sim_x_series_device: Device) -> None:
+    interval = sim_x_series_device.ext_cal_recommended_interval
+
+    assert 24 == interval
+
+
+def test___self_cal_last_temp___no_errors(sim_x_series_device: Device) -> None:
+    temperature = sim_x_series_device.self_cal_last_temp
+
+    assert 0.0 == temperature
+
+
+def test___self_cal_supported___no_errors(any_x_series_device: Device) -> None:
+    is_cal_supported = any_x_series_device.self_cal_supported
+
+    assert is_cal_supported is True

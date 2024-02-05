@@ -136,7 +136,7 @@ class Device:
     @property
     def ext_cal_last_date_and_time(self):
         """
-        Indicates the last date and time that the device underwent an
+        datetime: Indicates the last date and time that the device underwent an
         external calibration.
         """
 
@@ -153,7 +153,7 @@ class Device:
     @property
     def self_cal_last_date_and_time(self):
         """
-        Indicates the last date and time that the device underwent a
+        datetime: Indicates the last date and time that the device underwent a
         self-calibration.
         """
 
