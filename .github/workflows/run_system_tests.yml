@@ -21,7 +21,7 @@ jobs:
     steps:
       - name: Check out repo
         uses: actions/checkout@v3
-      - name: Import DAQmx Config
+      - name: Import DAQmx config
         run: C:\nidaqmxconfig\targets\win64U\x64\msvc-14.0\release\nidaqmxconfig.exe --eraseconfig --import tests\max_config\nidaqmxMaxConfig.ini
       - name: Install dependencies
         run: poetry install
