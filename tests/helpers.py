@@ -25,4 +25,3 @@ def chan_with_teds(phys_chan: PhysicalChannel, teds_file_path: pathlib.Path):
         yield phys_chan
     finally:
         phys_chan.clear_teds()
-        pass
