@@ -1102,27 +1102,29 @@ def test___task__add_ai_velocity_iepe_chan___sets_channel_attributes(task: Task,
 
 
 @pytest.mark.parametrize(
-    "min_val, max_val, bridge_config, use_excit_for_scaling",
+    "min_val, max_val, bridge_config, voltage_excit_source, voltage_excit_val, use_excit_for_scaling",
     [
-        (-10.0, 10.0, BridgeConfiguration.FULL_BRIDGE, False),
-        (-2.0, 2.0, BridgeConfiguration.HALF_BRIDGE, True),
+        (-10.0, 10.0, BridgeConfiguration.FULL_BRIDGE, ExcitationSource.EXTERNAL, 5.0, False),
+        (-2.0, 2.0, BridgeConfiguration.HALF_BRIDGE, ExcitationSource.EXTERNAL, 5.0, True),
     ],
 )
 def test___task__add_ai_voltage_chan_with_excit___sets_channel_attributes(
     task: Task,
-    sim_bridge_device: Device,
+    sim_6363_device: Device,
     min_val,
     max_val,
     bridge_config,
+    voltage_excit_source,
+    voltage_excit_val,
     use_excit_for_scaling,
 ):
     chan: AIChannel = task.ai_channels.add_ai_voltage_chan_with_excit(
-        sim_bridge_device.ai_physical_chans[0].name,
+        sim_6363_device.ai_physical_chans[0].name,
         min_val=min_val,
         max_val=max_val,
         bridge_config=bridge_config,
-        voltage_excit_source=ExcitationSource.INTERNAL,
-        voltage_excit_val=5.0,
+        voltage_excit_source=voltage_excit_source,
+        voltage_excit_val=voltage_excit_val,
         use_excit_for_scaling=use_excit_for_scaling,
     )
 
@@ -1130,8 +1132,8 @@ def test___task__add_ai_voltage_chan_with_excit___sets_channel_attributes(
     assert chan.ai_min == min_val
     assert chan.ai_max == max_val
     assert chan.ai_bridge_cfg == bridge_config
-    assert chan.ai_excit_src == ExcitationSource.INTERNAL
-    assert chan.ai_excit_val == 5.0
+    assert chan.ai_excit_src == voltage_excit_source
+    assert chan.ai_excit_val == voltage_excit_val
     assert chan.ai_excit_use_for_scaling == use_excit_for_scaling
 
 
