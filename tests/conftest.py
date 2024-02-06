@@ -533,6 +533,14 @@ def accelerometer_teds_file_path(teds_assets_directory):
 @pytest.fixture
 def bridge_teds_file_path(teds_assets_directory):
     """Returns a TEDS file path."""
+    # Our normal bridge sensor TEDS file is incompatible with most devices. It
+    # has a 1ohm bridge resistance.
+    return pathlib.Path(teds_assets_directory, "forcebridge.ted")
+
+
+@pytest.fixture
+def force_bridge_teds_file_path(teds_assets_directory):
+    """Returns a TEDS file path."""
     return pathlib.Path(teds_assets_directory, "forcebridge.ted")
 
 
@@ -540,3 +548,75 @@ def bridge_teds_file_path(teds_assets_directory):
 def current_teds_file_path(teds_assets_directory):
     """Returns a TEDS file path."""
     return pathlib.Path(teds_assets_directory, "Current.ted")
+
+
+@pytest.fixture
+def force_iepe_teds_file_path(teds_assets_directory):
+    """Returns a TEDS file path."""
+    return pathlib.Path(teds_assets_directory, "ForceSensor.ted")
+
+
+@pytest.fixture
+def microphone_teds_file_path(teds_assets_directory):
+    """Returns a TEDS file path."""
+    return pathlib.Path(teds_assets_directory, "Microphone.ted")
+
+
+@pytest.fixture
+def lvdt_teds_file_path(teds_assets_directory):
+    """Returns a TEDS file path."""
+    return pathlib.Path(teds_assets_directory, "LVDT.ted")
+
+
+@pytest.fixture
+def rvdt_teds_file_path(teds_assets_directory):
+    """Returns a TEDS file path."""
+    return pathlib.Path(teds_assets_directory, "RVDT.ted")
+
+
+@pytest.fixture
+def pressure_bridge_teds_file_path(teds_assets_directory):
+    """Returns a TEDS file path."""
+    return pathlib.Path(teds_assets_directory, "pressurebridge.ted")
+
+
+@pytest.fixture
+def torque_bridge_teds_file_path(teds_assets_directory):
+    """Returns a TEDS file path."""
+    return pathlib.Path(teds_assets_directory, "torquebridge.ted")
+
+
+@pytest.fixture
+def resistance_teds_file_path(teds_assets_directory):
+    """Returns a TEDS file path."""
+    return pathlib.Path(teds_assets_directory, "Resistance.ted")
+
+
+@pytest.fixture
+def rtd_teds_file_path(teds_assets_directory):
+    """Returns a TEDS file path."""
+    return pathlib.Path(teds_assets_directory, "TempRTD.ted")
+
+
+@pytest.fixture
+def strain_gage_teds_file_path(teds_assets_directory):
+    """Returns a TEDS file path."""
+    return pathlib.Path(teds_assets_directory, "StrainGage.ted")
+
+
+@pytest.fixture
+def thermocouple_teds_file_path(teds_assets_directory):
+    """Returns a TEDS file path."""
+    return pathlib.Path(teds_assets_directory, "TempTC.ted")
+
+
+@pytest.fixture
+def thermistor_iex_teds_file_path(teds_assets_directory):
+    """Returns a TEDS file path."""
+    return pathlib.Path(teds_assets_directory, "ThermistorIex.ted")
+
+
+@pytest.fixture
+def thermistor_vex_teds_file_path(teds_assets_directory):
+    """Returns a TEDS file path."""
+    return pathlib.Path(teds_assets_directory, "ThermistorVex.ted")
