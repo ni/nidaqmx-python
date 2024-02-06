@@ -17,9 +17,9 @@ def ai_voltage_task(task, any_x_series_device):
 
 
 @pytest.fixture()
-def ai_voltage_field_daq_task(task, any_field_daq_device):
+def ai_voltage_field_daq_task(task, sim_field_daq_device):
     """Gets AI voltage task."""
-    task.ai_channels.add_ai_voltage_chan(any_field_daq_device.ai_physical_chans[0].name)
+    task.ai_channels.add_ai_voltage_chan(sim_field_daq_device.ai_physical_chans[0].name)
     yield task
 
 
@@ -115,7 +115,9 @@ def test___ai_voltage_field_daq_task___get_timestamp_property___returns_default_
     ai_voltage_field_daq_task: Task,
 ):
     ai_voltage_field_daq_task.timing.cfg_samp_clk_timing(1000)
+
     when_value = ai_voltage_field_daq_task.triggers.start_trigger.trig_when
+
     assert when_value.lsb == 0
     assert when_value.msb == 0
 
@@ -124,11 +126,11 @@ def test___ai_voltage_field_daq_task___set_timestamp_property___returns_assigned
     ai_voltage_field_daq_task: Task,
 ):
     value_to_test = JAN_01_2002_HIGHTIME
-
     ai_voltage_field_daq_task.timing.cfg_samp_clk_timing(1000)
-    ai_voltage_field_daq_task.triggers.start_trigger.trig_when = value_to_test
-    when_value = ai_voltage_field_daq_task.triggers.start_trigger.trig_when
 
+    ai_voltage_field_daq_task.triggers.start_trigger.trig_when = value_to_test
+
+    when_value = ai_voltage_field_daq_task.triggers.start_trigger.trig_when
     when_value_dt = when_value.to_datetime(timezone.utc)
     assert when_value_dt.year == 2002
     assert when_value_dt.month == 1
@@ -145,7 +147,7 @@ def test___ai_voltage_field_daq_task___reset_timestamp_property___returns_defaul
     ai_voltage_field_daq_task.triggers.start_trigger.trig_when = JAN_01_2002_HIGHTIME
 
     del ai_voltage_field_daq_task.triggers.start_trigger.trig_when
-    when_value = ai_voltage_field_daq_task.triggers.start_trigger.trig_when
 
+    when_value = ai_voltage_field_daq_task.triggers.start_trigger.trig_when
     assert when_value.lsb == 0
     assert when_value.msb == 0
