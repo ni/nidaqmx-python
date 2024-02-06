@@ -4,7 +4,7 @@ import random
 import pytest
 
 from nidaqmx.constants import TEDSUnits, TerminalConfiguration
-from tests.helpers import chan_with_teds, generate_random_seed
+from tests.helpers import configure_teds, generate_random_seed
 
 
 class TestTEDS:
@@ -19,7 +19,7 @@ class TestTEDS:
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        with chan_with_teds(
+        with configure_teds(
             random.choice(sim_6363_device.ai_physical_chans), voltage_teds_file_path
         ) as ai_phys_chan:
             assert ai_phys_chan.teds_mfg_id == 17

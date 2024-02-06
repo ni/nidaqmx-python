@@ -513,110 +513,110 @@ def interpreter(system: nidaqmx.system.System) -> BaseInterpreter:
 
 
 @pytest.fixture
-def teds_assets_directory(test_assets_directory):
+def teds_assets_directory(test_assets_directory) -> pathlib.Path:
     """Returns the path to TEDS assets."""
-    return pathlib.Path(test_assets_directory, "teds")
+    return pathlib.Path(test_assets_directory) / "teds"
 
 
 @pytest.fixture
-def voltage_teds_file_path(teds_assets_directory):
+def voltage_teds_file_path(teds_assets_directory) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return pathlib.Path(teds_assets_directory, "Voltage.ted")
+    return pathlib.Path(teds_assets_directory) / "Voltage.ted"
 
 
 @pytest.fixture
-def accelerometer_teds_file_path(teds_assets_directory):
+def accelerometer_teds_file_path(teds_assets_directory) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return pathlib.Path(teds_assets_directory, "Accelerometer.ted")
+    return pathlib.Path(teds_assets_directory) / "Accelerometer.ted"
 
 
 @pytest.fixture
-def bridge_teds_file_path(teds_assets_directory):
+def bridge_teds_file_path(teds_assets_directory) -> pathlib.Path:
     """Returns a TEDS file path."""
     # Our normal bridge sensor TEDS file is incompatible with most devices. It
     # has a 1ohm bridge resistance.
-    return pathlib.Path(teds_assets_directory, "forcebridge.ted")
+    return pathlib.Path(teds_assets_directory) / "forcebridge.ted"
 
 
 @pytest.fixture
-def force_bridge_teds_file_path(teds_assets_directory):
+def force_bridge_teds_file_path(teds_assets_directory) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return pathlib.Path(teds_assets_directory, "forcebridge.ted")
+    return pathlib.Path(teds_assets_directory) / "forcebridge.ted"
 
 
 @pytest.fixture
-def current_teds_file_path(teds_assets_directory):
+def current_teds_file_path(teds_assets_directory) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return pathlib.Path(teds_assets_directory, "Current.ted")
+    return pathlib.Path(teds_assets_directory) / "Current.ted"
 
 
 @pytest.fixture
-def force_iepe_teds_file_path(teds_assets_directory):
+def force_iepe_teds_file_path(teds_assets_directory) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return pathlib.Path(teds_assets_directory, "ForceSensor.ted")
+    return pathlib.Path(teds_assets_directory) / "ForceSensor.ted"
 
 
 @pytest.fixture
-def microphone_teds_file_path(teds_assets_directory):
+def microphone_teds_file_path(teds_assets_directory) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return pathlib.Path(teds_assets_directory, "Microphone.ted")
+    return pathlib.Path(teds_assets_directory) / "Microphone.ted"
 
 
 @pytest.fixture
-def lvdt_teds_file_path(teds_assets_directory):
+def lvdt_teds_file_path(teds_assets_directory) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return pathlib.Path(teds_assets_directory, "LVDT.ted")
+    return pathlib.Path(teds_assets_directory) / "LVDT.ted"
 
 
 @pytest.fixture
-def rvdt_teds_file_path(teds_assets_directory):
+def rvdt_teds_file_path(teds_assets_directory) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return pathlib.Path(teds_assets_directory, "RVDT.ted")
+    return pathlib.Path(teds_assets_directory) / "RVDT.ted"
 
 
 @pytest.fixture
-def pressure_bridge_teds_file_path(teds_assets_directory):
+def pressure_bridge_teds_file_path(teds_assets_directory) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return pathlib.Path(teds_assets_directory, "pressurebridge.ted")
+    return pathlib.Path(teds_assets_directory) / "pressurebridge.ted"
 
 
 @pytest.fixture
-def torque_bridge_teds_file_path(teds_assets_directory):
+def torque_bridge_teds_file_path(teds_assets_directory) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return pathlib.Path(teds_assets_directory, "torquebridge.ted")
+    return pathlib.Path(teds_assets_directory) / "torquebridge.ted"
 
 
 @pytest.fixture
-def resistance_teds_file_path(teds_assets_directory):
+def resistance_teds_file_path(teds_assets_directory) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return pathlib.Path(teds_assets_directory, "Resistance.ted")
+    return pathlib.Path(teds_assets_directory) / "Resistance.ted"
 
 
 @pytest.fixture
-def rtd_teds_file_path(teds_assets_directory):
+def rtd_teds_file_path(teds_assets_directory) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return pathlib.Path(teds_assets_directory, "TempRTD.ted")
+    return pathlib.Path(teds_assets_directory) / "TempRTD.ted"
 
 
 @pytest.fixture
-def strain_gage_teds_file_path(teds_assets_directory):
+def strain_gage_teds_file_path(teds_assets_directory) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return pathlib.Path(teds_assets_directory, "StrainGage.ted")
+    return pathlib.Path(teds_assets_directory) / "StrainGage.ted"
 
 
 @pytest.fixture
-def thermocouple_teds_file_path(teds_assets_directory):
+def thermocouple_teds_file_path(teds_assets_directory) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return pathlib.Path(teds_assets_directory, "TempTC.ted")
+    return pathlib.Path(teds_assets_directory) / "TempTC.ted"
 
 
 @pytest.fixture
-def thermistor_iex_teds_file_path(teds_assets_directory):
+def thermistor_iex_teds_file_path(teds_assets_directory) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return pathlib.Path(teds_assets_directory, "ThermistorIex.ted")
+    return pathlib.Path(teds_assets_directory) / "ThermistorIex.ted"
 
 
 @pytest.fixture
-def thermistor_vex_teds_file_path(teds_assets_directory):
+def thermistor_vex_teds_file_path(teds_assets_directory) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return pathlib.Path(teds_assets_directory, "ThermistorVex.ted")
+    return pathlib.Path(teds_assets_directory) / "ThermistorVex.ted"
