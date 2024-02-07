@@ -272,6 +272,12 @@ def sim_temperature_device(system):
 
 
 @pytest.fixture(scope="function")
+def sim_velocity_device(system):
+    """Gets a simulated 9361."""
+    return _device_by_product_type("NI 9361", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
 def multi_threading_test_devices(system):
     """Gets multi threading test devices information."""
     devices = []
