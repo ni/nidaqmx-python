@@ -3,7 +3,6 @@ from datetime import timedelta
 import pytest
 from hightime import datetime as ht_datetime
 
-from nidaqmx._lib_time import AbsoluteTime
 from nidaqmx.constants import Timescale
 from nidaqmx.task import Task
 
@@ -25,14 +24,13 @@ def test___default_arguments___cfg_time_start_trig___no_errors(
 
     when_value = ai_voltage_field_daq_task.triggers.start_trigger.trig_when
     timescale_value = ai_voltage_field_daq_task.triggers.start_trigger.timestamp_timescale
-    when_value_dt = when_value.to_datetime()
     assert timescale_value == Timescale.USE_HOST
-    assert when_value_dt.year == trigger_time.year
-    assert when_value_dt.month == trigger_time.month
-    assert when_value_dt.day == trigger_time.day
-    assert when_value_dt.hour == trigger_time.hour
-    assert when_value_dt.minute == trigger_time.minute
-    assert when_value_dt.second == trigger_time.second
+    assert when_value.year == trigger_time.year
+    assert when_value.month == trigger_time.month
+    assert when_value.day == trigger_time.day
+    assert when_value.hour == trigger_time.hour
+    assert when_value.minute == trigger_time.minute
+    assert when_value.second == trigger_time.second
 
 
 def test___arguments_provided___cfg_time_start_trig___no_errors(
@@ -45,11 +43,10 @@ def test___arguments_provided___cfg_time_start_trig___no_errors(
     ai_voltage_field_daq_task.triggers.start_trigger.cfg_time_start_trig(trigger_time, timescale)
 
     when_value = ai_voltage_field_daq_task.triggers.start_trigger.trig_when
-    when_value_dt = when_value.to_datetime()
-    assert when_value_dt.year == trigger_time.year
-    assert when_value_dt.month == trigger_time.month
-    assert when_value_dt.day == trigger_time.day
-    assert when_value_dt.hour == trigger_time.hour
-    assert when_value_dt.minute == trigger_time.minute
-    assert when_value_dt.second == trigger_time.second
+    assert when_value.year == trigger_time.year
+    assert when_value.month == trigger_time.month
+    assert when_value.day == trigger_time.day
+    assert when_value.hour == trigger_time.hour
+    assert when_value.minute == trigger_time.minute
+    assert when_value.second == trigger_time.second
     assert ai_voltage_field_daq_task.triggers.start_trigger.timestamp_timescale == timescale

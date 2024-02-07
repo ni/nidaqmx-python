@@ -3684,7 +3684,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
         self.check_for_error(error_code)
-        return value
+        return value.to_datetime()
 
     def get_trig_attribute_uint32(self, task, attribute):
         value = ctypes.c_uint32()

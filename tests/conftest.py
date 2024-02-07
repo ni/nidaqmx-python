@@ -121,6 +121,7 @@ def _device_by_product_type(product_type, device_type, system):
             device_type == DeviceType.ANY
             or (device_type == DeviceType.REAL and not device.is_simulated)
             or (device_type == DeviceType.SIMULATED and device.is_simulated)
+            and len(device.ai_physical_chans) >= 1
         )
         if device_type_match and device.product_type == product_type:
             return device
@@ -160,7 +161,7 @@ def sim_6363_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
 @pytest.fixture(scope="function")
 def sim_field_daq_device(system):
     """Gets simulated Field DAQ device information."""
-    return _device_by_product_type("NI FD-11601", DeviceType.SIMULATED, system)
+    return _device_by_product_type("FD-11601", DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")

@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import ctypes
 import functools
-from datetime import timezone
+import hightime
+from datetime import timezone, timedelta
 from datetime import datetime as std_datetime
 from hightime import datetime as ht_datetime
 from typing import Optional, Union
@@ -80,11 +81,17 @@ class AbsoluteTime(ctypes.Structure):
         yoctosecond = remainder_yoctoseconds
 
         # Start with UTC
-        dt = ht_datetime.fromtimestamp(timestamp_1970_epoch, timezone.utc)
+        if timestamp_1904_epoch == 0:
+            dt = ht_datetime(1970, 1, 1) + hightime.timedelta(seconds=-2082844800)
+        else:
+            dt = ht_datetime.fromtimestamp(timestamp_1970_epoch, timezone.utc)
         # Add in precision
         dt = dt.replace(microsecond=microsecond, femtosecond=femtosecond, yoctosecond=yoctosecond)
         # Then convert to requested timezone
-        return dt.astimezone(tz=tzinfo)
+        if timestamp_1904_epoch == 0:
+            return dt
+        else:
+            return dt.astimezone(tz=tzinfo)
 
     def __str__(self) -> str:
         return f"AbsoluteTime(lsb=0x{self.lsb:x}, msb=0x{self.msb:x})"
