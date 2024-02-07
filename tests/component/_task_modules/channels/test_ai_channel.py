@@ -623,7 +623,9 @@ def test___task___add_teds_ai_pos_lvdt_chan___sets_channel_attributes(
     sim_position_device: Device,
     lvdt_teds_file_path,
 ):
-    # Our LVDT/RVDT TEDS files are invalid, but we can validate we got deep into the driver.
+    # A bug in the driver prevents us from testing the full functionality of this method.
+    # AB#2647979: Devices that don't support Voltage, Custom Voltage with Excitation, Resistance, or
+    # RTD inadvertently don't support TEDS (e.g. PXIe-4340)
     with pytest.raises(DaqError) as exc_info:
         task.ai_channels.add_teds_ai_pos_lvdt_chan(
             sim_position_device.ai_physical_chans[0].name,
@@ -646,7 +648,9 @@ def test___task___add_teds_ai_pos_rvdt_chan___sets_channel_attributes(
     sim_position_device: Device,
     rvdt_teds_file_path,
 ):
-    # Our LVDT/RVDT TEDS files are invalid, but we can validate we got deep into the driver.
+    # A bug in the driver prevents us from testing the full functionality of this method.
+    # AB#2647979: Devices that don't support Voltage, Custom Voltage with Excitation, Resistance, or
+    # RTD inadvertently don't support TEDS (e.g. PXIe-4340)
     with pytest.raises(DaqError) as exc_info:
         task.ai_channels.add_teds_ai_pos_rvdt_chan(
             sim_position_device.ai_physical_chans[0].name,
