@@ -82,7 +82,7 @@ class AbsoluteTime(ctypes.Structure):
 
         # Start with UTC
         if timestamp_1904_epoch == 0:
-            dt = ht_datetime(1970, 1, 1) + hightime.timedelta(seconds=-2082844800)
+            dt = ht_datetime(1970, 1, 1) + hightime.timedelta(seconds= - AbsoluteTime._BIAS_FROM_1970_EPOCH)
         else:
             dt = ht_datetime.fromtimestamp(timestamp_1970_epoch, timezone.utc)
         # Add in precision
