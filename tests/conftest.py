@@ -79,7 +79,7 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
 
 
 @pytest.fixture(scope="function")
-def system(init_kwargs):
+def system(init_kwargs) -> nidaqmx.system.System:
     """Gets system instance based on the grpc options."""
     if "grpc_options" in init_kwargs:
         return nidaqmx.system.System.remote(**init_kwargs)
@@ -87,7 +87,9 @@ def system(init_kwargs):
         return nidaqmx.system.System.local(**init_kwargs)
 
 
-def _x_series_device(device_type, system):
+def _x_series_device(
+    device_type: DeviceType, system: nidaqmx.system.System
+) -> nidaqmx.system.Device:
     for device in system.devices:
         device_type_match = (
             device_type == DeviceType.ANY
@@ -113,7 +115,9 @@ def _x_series_device(device_type, system):
     return None
 
 
-def _device_by_product_type(product_type, device_type, system):
+def _device_by_product_type(
+    product_type, device_type: DeviceType, system: nidaqmx.system.System
+) -> nidaqmx.system.Device:
     for device in system.devices:
         device_type_match = (
             device_type == DeviceType.ANY
@@ -132,31 +136,31 @@ def _device_by_product_type(product_type, device_type, system):
 
 
 @pytest.fixture(scope="function")
-def any_x_series_device(system):
+def any_x_series_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets any X Series device information."""
     return _x_series_device(DeviceType.ANY, system)
 
 
 @pytest.fixture(scope="function")
-def real_x_series_device(system):
+def real_x_series_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets real X Series device information."""
     return _x_series_device(DeviceType.REAL, system)
 
 
 @pytest.fixture(scope="function")
-def sim_x_series_device(system):
+def sim_x_series_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets simulated X Series device information."""
     return _x_series_device(DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")
-def sim_6363_device(system):
+def sim_6363_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets a simulated 6363."""
     return _device_by_product_type("PCIe-6363", DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")
-def sim_ts_chassis(system):
+def sim_ts_chassis(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets simulated TestScale chassis information."""
     # Prefer tsChassisTester if available so that multi-module tests will use
     # modules from the same chassis.
@@ -176,7 +180,7 @@ def sim_ts_chassis(system):
 
 
 @pytest.fixture(scope="function")
-def sim_ts_power_device(sim_ts_chassis):
+def sim_ts_power_device(sim_ts_chassis: nidaqmx.system.Device) -> nidaqmx.system.Device:
     """Gets simulated power device information."""
     for device in sim_ts_chassis.chassis_module_devices:
         if (
@@ -195,7 +199,7 @@ def sim_ts_power_device(sim_ts_chassis):
 
 
 @pytest.fixture(scope="function")
-def sim_ts_voltage_device(sim_ts_chassis):
+def sim_ts_voltage_device(sim_ts_chassis: nidaqmx.system.Device) -> nidaqmx.system.Device:
     """Gets simulated voltage device information."""
     for device in sim_ts_chassis.chassis_module_devices:
         if (
@@ -214,7 +218,7 @@ def sim_ts_voltage_device(sim_ts_chassis):
 
 
 @pytest.fixture(scope="function")
-def sim_ts_power_devices(sim_ts_chassis):
+def sim_ts_power_devices(sim_ts_chassis: nidaqmx.system.Device) -> nidaqmx.system.Device:
     """Gets simulated power devices information."""
     devices = []
     for device in sim_ts_chassis.chassis_module_devices:
@@ -236,49 +240,49 @@ def sim_ts_power_devices(sim_ts_chassis):
 
 
 @pytest.fixture(scope="function")
-def sim_charge_device(system):
+def sim_charge_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets a simulated 4480."""
     return _device_by_product_type("PXIe-4480", DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")
-def sim_dsa_device(system):
+def sim_dsa_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets a simulated 4466."""
     return _device_by_product_type("PXIe-4466", DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")
-def sim_dmm_device(system):
+def sim_dmm_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets a simulated myDAQ."""
     return _device_by_product_type("NI myDAQ", DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")
-def sim_bridge_device(system):
+def sim_bridge_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets a simulated 4431."""
     return _device_by_product_type("PXIe-4331", DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")
-def sim_position_device(system):
+def sim_position_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets a simulated 4340."""
     return _device_by_product_type("PXIe-4340", DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")
-def sim_temperature_device(system):
+def sim_temperature_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets a simulated 4353."""
     return _device_by_product_type("PXIe-4353", DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")
-def sim_velocity_device(system):
+def sim_velocity_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets a simulated 9361."""
     return _device_by_product_type("NI 9361", DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")
-def multi_threading_test_devices(system):
+def multi_threading_test_devices(system: nidaqmx.system.System) -> [nidaqmx.system.Device]:
     """Gets multi threading test devices information."""
     devices = []
     for device in system.devices:
@@ -300,7 +304,7 @@ def multi_threading_test_devices(system):
 
 
 @pytest.fixture(scope="function")
-def device(request, system):
+def device(request, system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets the device information based on the device name."""
     device_name = _get_marker_value(request, "device_name")
     for device in system.devices:
@@ -415,7 +419,7 @@ def generate_task(init_kwargs):
 
 
 @pytest.fixture(scope="function")
-def persisted_task(request, system):
+def persisted_task(request, system: nidaqmx.system.System):
     """Gets the persisted task based on the task name."""
     task_name = _get_marker_value(request, "task_name")
 
@@ -431,7 +435,7 @@ def persisted_task(request, system):
 
 
 @pytest.fixture(scope="function")
-def persisted_scale(request, system):
+def persisted_scale(request, system: nidaqmx.system.System):
     """Gets the persisted scale based on the scale name."""
     scale_name = _get_marker_value(request, "scale_name")
     if scale_name in system.scales:
@@ -445,7 +449,7 @@ def persisted_scale(request, system):
 
 
 @pytest.fixture(scope="function")
-def persisted_channel(request, system):
+def persisted_channel(request, system: nidaqmx.system.System):
     """Gets the persisted channel based on the channel name."""
     channel_name = _get_marker_value(request, "channel_name")
 
@@ -513,7 +517,7 @@ def thread_pool_executor() -> Generator[ThreadPoolExecutor, None, None]:
 
 
 @pytest.fixture
-def interpreter(system: nidaqmx.system.System) -> BaseInterpreter:
+def interpreter(system: nidaqmx.system.system) -> BaseInterpreter:
     """Gets an interpreter."""
     return system._interpreter
 
