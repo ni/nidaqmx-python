@@ -203,8 +203,6 @@ def to_param_argtype(parameter):
             # argtype to convert from unicode to bytes.
             if parameter.ctypes_data_type == "ctypes.c_char_p":
                 return "ctypes_byte_str"
-            elif parameter.python_data_type == "datetime":
-                return "_lib_time.AbsoluteTime"
             elif parameter.python_data_type == "timestampEvent":
                 return "ctypes.c_int32"
             else:
@@ -212,8 +210,6 @@ def to_param_argtype(parameter):
         else:
             if parameter.ctypes_data_type == "ctypes.c_char_p":
                 return parameter.ctypes_data_type
-            elif parameter.python_data_type == "datetime":
-                return "ctypes.POINTER(_lib_time.AbsoluteTime)"
             else:
                 return f"ctypes.POINTER({parameter.ctypes_data_type})"
 
