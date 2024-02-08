@@ -57,7 +57,7 @@ def test___ai_task___read___returns_valid_samples_shape_and_dtype(
     assert (SINE_RAW_MIN <= data).all() and (data <= SINE_RAW_MAX).all()
 
 
-def test___ai_finite_task___readall___returns_valid_samples_shape_and_dtype(
+def test___ai_finite_task___read_all___returns_valid_samples_shape_and_dtype(
     ai_sine_task: nidaqmx.Task,
 ) -> None:
     ai_sine_task.timing.cfg_samp_clk_timing(
