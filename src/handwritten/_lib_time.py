@@ -81,17 +81,11 @@ class AbsoluteTime(ctypes.Structure):
         yoctosecond = remainder_yoctoseconds
 
         # Start with UTC
-        if timestamp_1904_epoch == 0:
-            dt = ht_datetime(1970, 1, 1) + hightime.timedelta(seconds= - AbsoluteTime._BIAS_FROM_1970_EPOCH)
-        else:
-            dt = ht_datetime.fromtimestamp(timestamp_1970_epoch, timezone.utc)
+        dt = ht_datetime.fromtimestamp(timestamp_1970_epoch, timezone.utc)
         # Add in precision
         dt = dt.replace(microsecond=microsecond, femtosecond=femtosecond, yoctosecond=yoctosecond)
         # Then convert to requested timezone
-        if timestamp_1904_epoch == 0:
-            return dt
-        else:
-            return dt.astimezone(tz=tzinfo)
+        return dt.astimezone(tz=tzinfo)
 
     def __str__(self) -> str:
         return f"AbsoluteTime(lsb=0x{self.lsb:x}, msb=0x{self.msb:x})"
