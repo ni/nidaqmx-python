@@ -2,8 +2,7 @@ from __future__ import annotations
 
 import ctypes
 import functools
-import hightime
-from datetime import timezone, timedelta
+from datetime import timezone
 from datetime import datetime as std_datetime
 from hightime import datetime as ht_datetime
 from typing import Optional, Union
