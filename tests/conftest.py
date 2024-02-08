@@ -517,7 +517,7 @@ def thread_pool_executor() -> Generator[ThreadPoolExecutor, None, None]:
 
 
 @pytest.fixture
-def interpreter(system: nidaqmx.system.system) -> BaseInterpreter:
+def interpreter(system: nidaqmx.system.System) -> BaseInterpreter:
     """Gets an interpreter."""
     return system._interpreter
 

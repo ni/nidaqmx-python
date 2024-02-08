@@ -20,7 +20,7 @@ def test___task___add_co_pulse_chan_freq___sets_channel_attributes(
     initial_delay: float,
     freq: float,
     duty_cycle: float,
-):
+) -> None:
     chan: COChannel = task.co_channels.add_co_pulse_chan_freq(
         sim_6363_device.ci_physical_chans[0].name,
         idle_state=idle_state,
@@ -51,7 +51,7 @@ def test___task___add_co_pulse_chan_ticks___sets_channel_attributes(
     initial_delay: float,
     low_ticks: int,
     high_ticks: int,
-):
+) -> None:
     chan: COChannel = task.co_channels.add_co_pulse_chan_ticks(
         sim_6363_device.ci_physical_chans[0].name,
         source_terminal=source_terminal,
@@ -84,7 +84,7 @@ def test___task___add_co_pulse_chan_time___sets_channel_attributes(
     initial_delay: float,
     low_time: float,
     high_time: float,
-):
+) -> None:
     chan: COChannel = task.co_channels.add_co_pulse_chan_time(
         sim_6363_device.ci_physical_chans[0].name,
         idle_state=idle_state,

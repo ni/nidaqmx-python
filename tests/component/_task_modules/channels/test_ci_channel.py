@@ -62,7 +62,7 @@ def test___task___add_ci_ang_encoder_chan___sets_channel_attributes(
     pulses_per_rev: int,
     initial_angle: float,
     custom_scale_name: str,
-):
+) -> None:
     chan: CIChannel = task.ci_channels.add_ci_ang_encoder_chan(
         sim_6363_device.ci_physical_chans[0].name,
         decoding_type=decoding_type,
@@ -99,7 +99,7 @@ def test___task___add_ci_ang_velocity_chan___sets_channel_attributes(
     sim_velocity_device: Device,
     decoding_type: EncoderType,
     pulses_per_rev: int,
-):
+) -> None:
     chan: CIChannel = task.ci_channels.add_ci_ang_velocity_chan(
         sim_velocity_device.ci_physical_chans[0].name,
         decoding_type=decoding_type,
@@ -124,7 +124,7 @@ def test___task___add_ci_count_edges_chan___sets_channel_attributes(
     edge: Edge,
     initial_count: int,
     count_direction: CountDirection,
-):
+) -> None:
     chan: CIChannel = task.ci_channels.add_ci_count_edges_chan(
         sim_6363_device.ci_physical_chans[0].name,
         edge=edge,
@@ -146,7 +146,7 @@ def test___task___add_ci_duty_cycle_chan___sets_channel_attributes(
     task: Task,
     sim_velocity_device: Device,
     edge: Edge,
-):
+) -> None:
     chan: CIChannel = task.ci_channels.add_ci_duty_cycle_chan(
         sim_velocity_device.ci_physical_chans[0].name,
         edge=edge,
@@ -171,7 +171,7 @@ def test___task___add_ci_freq_chan___sets_channel_attributes(
     meas_method: CounterFrequencyMethod,
     meas_time: float,
     divisor: int,
-):
+) -> None:
     chan: CIChannel = task.ci_channels.add_ci_freq_chan(
         sim_6363_device.ci_physical_chans[0].name,
         edge=edge,
@@ -218,7 +218,7 @@ def test___task___add_ci_lin_encoder_chan___sets_channel_attributes(
     decoding_type: EncoderType,
     dist_per_pulse: float,
     initial_pos: float,
-):
+) -> None:
     chan: CIChannel = task.ci_channels.add_ci_lin_encoder_chan(
         sim_6363_device.ci_physical_chans[0].name,
         decoding_type=decoding_type,
@@ -245,7 +245,7 @@ def test___task___add_ci_lin_velocity_chan___sets_channel_attributes(
     sim_velocity_device: Device,
     decoding_type: EncoderType,
     dist_per_pulse: float,
-):
+) -> None:
     chan: CIChannel = task.ci_channels.add_ci_lin_velocity_chan(
         sim_velocity_device.ci_physical_chans[0].name,
         decoding_type=decoding_type,
@@ -272,7 +272,7 @@ def test___task___add_ci_period_chan___sets_channel_attributes(
     meas_method: CounterFrequencyMethod,
     meas_time: float,
     divisor: int,
-):
+) -> None:
     chan: CIChannel = task.ci_channels.add_ci_period_chan(
         sim_6363_device.ci_physical_chans[0].name,
         edge=edge,
@@ -300,7 +300,7 @@ def test___task___add_ci_pulse_chan_ticks___sets_channel_attributes(
     task: Task,
     sim_6363_device: Device,
     source_terminal: str,
-):
+) -> None:
     chan: CIChannel = task.ci_channels.add_ci_pulse_chan_ticks(
         sim_6363_device.ci_physical_chans[0].name,
         source_terminal=source_terminal,
@@ -315,7 +315,7 @@ def test___task___add_ci_pulse_chan_ticks___sets_channel_attributes(
 def test___task___add_ci_pulse_chan_time___sets_channel_attributes(
     task: Task,
     sim_6363_device: Device,
-):
+) -> None:
     chan: CIChannel = task.ci_channels.add_ci_pulse_chan_time(
         sim_6363_device.ci_physical_chans[0].name,
     )
@@ -327,7 +327,7 @@ def test___task___add_ci_pulse_chan_time___sets_channel_attributes(
 def test___task___add_ci_pulse_chan_freq___sets_channel_attributes(
     task: Task,
     sim_6363_device: Device,
-):
+) -> None:
     chan: CIChannel = task.ci_channels.add_ci_pulse_chan_freq(
         sim_6363_device.ci_physical_chans[0].name,
     )
@@ -343,7 +343,7 @@ def test___task___add_ci_pulse_width_chan___sets_channel_attributes(
     task: Task,
     sim_6363_device: Device,
     starting_edge: Edge,
-):
+) -> None:
     chan: CIChannel = task.ci_channels.add_ci_pulse_width_chan(
         sim_6363_device.ci_physical_chans[0].name,
         starting_edge=starting_edge,
@@ -356,7 +356,7 @@ def test___task___add_ci_pulse_width_chan___sets_channel_attributes(
 def test___task___add_ci_semi_period_chan___sets_channel_attributes(
     task: Task,
     sim_6363_device: Device,
-):
+) -> None:
     chan: CIChannel = task.ci_channels.add_ci_semi_period_chan(
         sim_6363_device.ci_physical_chans[0].name,
     )
@@ -373,7 +373,7 @@ def test___task___add_ci_two_edge_sep_chan___sets_channel_attributes(
     sim_6363_device: Device,
     first_edge: Edge,
     second_edge: Edge,
-):
+) -> None:
     chan: CIChannel = task.ci_channels.add_ci_two_edge_sep_chan(
         sim_6363_device.ci_physical_chans[0].name,
         first_edge=first_edge,
