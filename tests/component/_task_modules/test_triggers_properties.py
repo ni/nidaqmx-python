@@ -127,7 +127,6 @@ def test___ai_voltage_field_daq_task___get_timestamp_property___throws_os_error(
     # timestamp 1904-01-01 is out of range of supported timestamp values
     with pytest.raises(OSError) as os_error:
         ai_voltage_field_daq_task.triggers.start_trigger.trig_when
-
     assert os_error.value.errno == 22
 
 
