@@ -38,7 +38,8 @@ def test___arguments_provided___cfg_time_start_trig___no_errors(
 ):
     ai_voltage_field_daq_task.timing.cfg_samp_clk_timing(1000)
     trigger_time = ht_datetime.now() + timedelta(seconds=10)
-    timescale = Timescale.USE_IO_DEVICE
+    # simulated devices don't support setting timescale to USE_IO_DEVICE
+    timescale = Timescale.USE_HOST
 
     ai_voltage_field_daq_task.triggers.start_trigger.cfg_time_start_trig(trigger_time, timescale)
 

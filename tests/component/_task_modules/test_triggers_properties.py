@@ -119,19 +119,16 @@ def test___ai_task___reset_uint32_property___returns_default_value(ai_voltage_ta
     assert ai_voltage_task.triggers.reference_trigger.pretrig_samples == 2
 
 
-def test___ai_voltage_field_daq_task___get_timestamp_property___returns_default_value(
+def test___ai_voltage_field_daq_task___get_timestamp_property___throws_os_error(
     ai_voltage_field_daq_task: Task,
 ):
     ai_voltage_field_daq_task.timing.cfg_samp_clk_timing(1000)
 
-    when_value = ai_voltage_field_daq_task.triggers.start_trigger.trig_when
+    #timestamp 1904-01-01 is out of range of supported timestamp values
+    with pytest.raises(OSError) as os_error:
+        ai_voltage_field_daq_task.triggers.start_trigger.trig_when
 
-    assert when_value.year == 1904
-    assert when_value.month == 1
-    assert when_value.day == 1
-    assert when_value.hour == 0
-    assert when_value.minute == 0
-    assert when_value.second == 0
+    assert os_error.value.errno == 22
 
 
 def test___ai_voltage_field_daq_task___set_timestamp_property___returns_assigned_value(
@@ -152,7 +149,7 @@ def test___ai_voltage_field_daq_task___set_timestamp_property___returns_assigned
     assert when_value.second == localized_value_to_test.second
 
 
-def test___ai_voltage_field_daq_task___reset_timestamp_property___returns_default_value(
+def test___ai_voltage_field_daq_task___reset_timestamp_property___throws_os_error(
     ai_voltage_field_daq_task: Task,
 ):
     ai_voltage_field_daq_task.timing.cfg_samp_clk_timing(1000)
@@ -160,10 +157,7 @@ def test___ai_voltage_field_daq_task___reset_timestamp_property___returns_defaul
 
     del ai_voltage_field_daq_task.triggers.start_trigger.trig_when
 
-    when_value = ai_voltage_field_daq_task.triggers.start_trigger.trig_when
-    assert when_value.year == 1904
-    assert when_value.month == 1
-    assert when_value.day == 1
-    assert when_value.hour == 0
-    assert when_value.minute == 0
-    assert when_value.second == 0
+    #timestamp 1904-01-01 is out of range of supported timestamp values
+    with pytest.raises(OSError) as os_error:
+        ai_voltage_field_daq_task.triggers.start_trigger.trig_when
+    assert os_error.value.errno == 22
