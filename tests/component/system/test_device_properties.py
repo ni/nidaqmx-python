@@ -1,10 +1,11 @@
 from datetime import datetime
+
+import pytest
+
 from nidaqmx import DaqError
 from nidaqmx.constants import BusType, TriggerUsage
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system import Device
-
-import pytest
 
 
 def test___constructed_device___get_property___returns_value(init_kwargs):
@@ -160,17 +161,18 @@ def test___cal_recommended_acc_connection_count_limit___raises_attr_not_supporte
 
 
 def test___cal_user_defined_info___no_errors(real_x_series_device: Device) -> None:
-    user_defined_info = real_x_series_device.cal_user_defined_info
-    info_max_size = real_x_series_device.cal_user_defined_info_max_size
+    try:
+        user_defined_info = real_x_series_device.cal_user_defined_info
+        info_max_size = real_x_series_device.cal_user_defined_info_max_size
 
-    test_value = "my test value"[:info_max_size]
-    real_x_series_device.cal_user_defined_info = test_value
-    value = real_x_series_device.cal_user_defined_info
+        test_value = "my test value"[:info_max_size]
+        real_x_series_device.cal_user_defined_info = test_value
+        value = real_x_series_device.cal_user_defined_info
 
-    assert info_max_size == len(value)
-    assert value in test_value
-
-    real_x_series_device.cal_user_defined_info = user_defined_info
+        assert info_max_size == len(value)
+        assert value in test_value
+    finally:
+        real_x_series_device.cal_user_defined_info = user_defined_info
 
 
 def test___cal_dev_temp___no_errors(sim_x_series_device: Device) -> None:
