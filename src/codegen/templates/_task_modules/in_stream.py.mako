@@ -207,6 +207,10 @@ ${property_template.script_property(attribute)}\
         if number_of_channels * samples_read != number_of_samples:
             return numpy_array[:number_of_channels * samples_read]
         return numpy_array
+    
+    @deprecation.deprecated(deprecated_in="1.2.0", details="Use read_all instead.")
+    def readall(self):
+        return self.read_all()
 
     def read_all(self):
         """
@@ -257,6 +261,10 @@ ${property_template.script_property(attribute)}\
             type to create and return based on your device specifications.
         """
         return self.read(number_of_samples_per_channel=READ_ALL_AVAILABLE)
+
+    @deprecation.deprecated(deprecated_in="1.2.0", details="Use read_into instead.")
+    def readinto(self, numpy_array):
+        return self.read_into(numpy_array)
 
     def read_into(self, numpy_array):
         """
