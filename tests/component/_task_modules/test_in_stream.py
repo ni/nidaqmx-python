@@ -56,6 +56,7 @@ def test___ai_task___read___returns_valid_samples_shape_and_dtype(
     assert data.dtype == numpy.int16
     assert (SINE_RAW_MIN <= data).all() and (data <= SINE_RAW_MAX).all()
 
+
 def test___ai_finite_task___readall___returns_valid_samples_shape_and_dtype(
     ai_sine_task: nidaqmx.Task,
 ) -> None:
@@ -69,6 +70,7 @@ def test___ai_finite_task___readall___returns_valid_samples_shape_and_dtype(
     assert data.shape == (ai_sine_task.number_of_channels * 100,)
     assert data.dtype == numpy.int16
     assert (SINE_RAW_MIN <= data).all() and (data <= SINE_RAW_MAX).all()
+
 
 def test___ai_continuous_task___readall___returns_valid_samples_shape_and_dtype(
     ai_sine_task: nidaqmx.Task,
@@ -113,7 +115,7 @@ def test___odd_sized_array___readinto___returns_whole_samples_and_clears_padding
     _create_ai_sine_channels(task, sim_x_series_device, number_of_channels=2)
     # Initialize the array to full-scale readings to ensure it is overwritten.
     data = numpy.full(19, FULLSCALE_RAW_MIN, dtype=numpy.int16)
-    
+
     with pytest.deprecated_call():
         samples_read = task.in_stream.readinto(data)
 
