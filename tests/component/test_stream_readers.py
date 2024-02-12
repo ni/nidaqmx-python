@@ -6,6 +6,7 @@ import numpy
 import pytest
 
 import nidaqmx
+from nidaqmx.constants import LineGrouping
 from nidaqmx.stream_readers import (
     AnalogMultiChannelReader,
     AnalogSingleChannelReader,
@@ -14,6 +15,7 @@ from nidaqmx.stream_readers import (
     PowerMultiChannelReader,
     PowerSingleChannelReader,
 )
+from nidaqmx.utils import flatten_channel_string
 
 
 # Simulated DAQ voltage data is a noisy sinewave within the range of the minimum and maximum values
@@ -545,3 +547,170 @@ def test___power_binary_reader___read_many_sample_with_wrong_dtype___raises_erro
         )
 
     assert "int16" in exc_info.value.args[0]
+
+
+@pytest.fixture
+def di_single_line_task(task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device) -> nidaqmx.Task:
+    task.di_channels.add_di_chan(
+        sim_6363_device.di_lines[0].name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
+    )
+    return task
+
+
+@pytest.fixture
+def di_single_channel_multi_line_task(
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    task.di_channels.add_di_chan(
+        flatten_channel_string(sim_6363_device.di_lines[:2].name),
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    return task
+
+
+@pytest.fixture
+def di_single_channel_port_byte_task(
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    # 6363 port 0 has 32 lines, port 1/2 have 8 lines
+    task.di_channels.add_di_chan(
+        sim_6363_device.di_ports[1].name,
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    return task
+
+
+@pytest.fixture
+def di_single_channel_port_uint16_task(
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    # 6363 port 0 has 32 lines, port 1/2 have 8 lines
+    task.di_channels.add_di_chan(
+        flatten_channel_string(sim_6363_device.di_ports[1:].name),
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    return task
+
+
+@pytest.fixture
+def di_single_channel_port_uint32_task(
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    # 6363 port 0 has 32 lines, port 1/2 have 8 lines
+    task.di_channels.add_di_chan(
+        sim_6363_device.di_ports[0].name,
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    return task
+
+
+def _get_expected_digital_data(num_lines: int, sample_number: int) -> int:
+    # Simulated digital signals "count" from 0 in binary within each group of 8 lines.
+    result = sample_number
+    for _ in range(num_lines // 8):
+        result = (result << 8) | sample_number
+
+    line_mask = (2**num_lines) - 1
+    return result & line_mask
+
+
+def _bool_array_to_int(bool_array: numpy.ndarray) -> int:
+    result = 0
+    # Simulated data is little-endian
+    for bit in reversed(bool_array):
+        result = (result << 1) | bit
+    return result
+
+
+def test___digital_single_channel_reader___read_one_sample_one_line___returns_valid_samples(
+    di_single_line_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalSingleChannelReader(di_single_line_task.in_stream)
+    num_lines = di_single_line_task.channels.di_num_lines
+
+    for sample_number in range(4):
+        data = reader.read_one_sample_one_line()
+        assert data == _get_expected_digital_data(num_lines, sample_number) & 0x1
+
+
+def test___digital_single_channel_reader___read_one_sample_multi_line___returns_valid_samples(
+    di_single_channel_multi_line_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalSingleChannelReader(
+        di_single_channel_multi_line_task.in_stream
+    )
+    num_lines = di_single_channel_multi_line_task.channels.di_num_lines
+    data = numpy.full(num_lines, False, dtype=numpy.bool_)
+
+    for sample_number in range(4):
+        reader.read_one_sample_multi_line(data)
+        assert _bool_array_to_int(data) == _get_expected_digital_data(num_lines, sample_number)
+
+
+def test___digital_single_channel_reader___read_one_sample_multi_line_with_wrong_dtype___raises_error_with_correct_dtype(
+    di_single_channel_multi_line_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalSingleChannelReader(
+        di_single_channel_multi_line_task.in_stream
+    )
+    num_lines = di_single_channel_multi_line_task.channels.di_num_lines
+    data = numpy.full(num_lines, math.inf, dtype=numpy.float64)
+
+    with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
+        reader.read_one_sample_multi_line(data)
+
+    assert "bool" in exc_info.value.args[0]
+
+
+def test___digital_single_channel_reader___read_one_sample_port_byte___returns_valid_samples(
+    di_single_channel_port_byte_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalSingleChannelReader(
+        di_single_channel_port_byte_task.in_stream
+    )
+    num_lines = di_single_channel_port_byte_task.channels.di_num_lines
+
+    for sample_number in range(4):
+        data = reader.read_one_sample_port_byte()
+        assert data == _get_expected_digital_data(num_lines, sample_number)
+
+
+def test___digital_single_channel_reader___read_one_sample_port_uint16___returns_valid_samples(
+    di_single_channel_port_uint16_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalSingleChannelReader(
+        di_single_channel_port_uint16_task.in_stream
+    )
+    num_lines = di_single_channel_port_uint16_task.channels.di_num_lines
+
+    for sample_number in range(4):
+        data = reader.read_one_sample_port_uint16()
+        assert data == _get_expected_digital_data(num_lines, sample_number)
+
+
+def test___digital_single_channel_reader___read_one_sample_port_uint32___returns_valid_samples(
+    di_single_channel_port_uint32_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalSingleChannelReader(
+        di_single_channel_port_uint32_task.in_stream
+    )
+    num_lines = di_single_channel_port_uint32_task.channels.di_num_lines
+
+    for sample_number in range(4):
+        data = reader.read_one_sample_port_uint32()
+        assert data == _get_expected_digital_data(num_lines, sample_number)
+
+
+# DigitalSingleChannelReader::read_many_sample_port_byte
+# DigitalSingleChannelReader::read_many_sample_port_uint16
+# DigitalSingleChannelReader::read_many_sample_port_uint32
+
+
+# DigitalMultiChannelReader::read_one_sample_one_line
+# DigitalMultiChannelReader::read_one_sample_multi_line
+# DigitalMultiChannelReader::read_one_sample_port_byte
+# DigitalMultiChannelReader::read_one_sample_port_uint16
+# DigitalMultiChannelReader::read_one_sample_port_uint32
+# DigitalMultiChannelReader::read_many_sample_port_byte
+# DigitalMultiChannelReader::read_many_sample_port_uint16
+# DigitalMultiChannelReader::read_many_sample_port_uint32
