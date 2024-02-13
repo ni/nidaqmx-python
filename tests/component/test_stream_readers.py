@@ -1,6 +1,6 @@
 import ctypes
 import math
-from typing import List
+from typing import List, Union
 
 import numpy
 import pytest
@@ -14,9 +14,6 @@ from nidaqmx.stream_readers import (
     PowerMultiChannelReader,
     PowerSingleChannelReader,
 )
-
-VOLTAGE_EPSILON = 1e-3
-VOLTAGE_BINARY_EPSILON = 4
 
 
 # Simulated DAQ voltage data is a noisy sinewave within the range of the minimum and maximum values
@@ -36,12 +33,8 @@ def _get_voltage_code_offset_for_chan(chan_index: int) -> int:
     return _volts_to_codes(voltage_limits)
 
 
-def _validate_multi_channel_voltage_code_data(data: numpy.ndarray) -> None:
-    expected_vals = [
-        _get_voltage_code_offset_for_chan(chan_index) for chan_index in range(data.shape[0])
-    ]
-    assert numpy.min(data, axis=1) == pytest.approx(expected_vals, abs=VOLTAGE_BINARY_EPSILON)
-    assert numpy.max(data, axis=1) == pytest.approx(expected_vals, abs=VOLTAGE_BINARY_EPSILON)
+VOLTAGE_EPSILON = 1e-3
+VOLTAGE_CODE_EPSILON = round(_volts_to_codes(VOLTAGE_EPSILON))
 
 
 @pytest.fixture
@@ -98,8 +91,7 @@ def test___analog_single_channel_reader___read_many_sample___returns_valid_sampl
 
     assert samples_read == samples_to_read
     expected = _get_voltage_offset_for_chan(0)
-    assert numpy.min(data) == pytest.approx(expected, abs=VOLTAGE_EPSILON)
-    assert numpy.max(data) == pytest.approx(expected, abs=VOLTAGE_EPSILON)
+    assert data == pytest.approx(expected, abs=VOLTAGE_EPSILON)
 
 
 def test___analog_single_channel_reader___read_many_sample_with_wrong_dtype___raises_error_with_correct_dtype(
@@ -152,11 +144,8 @@ def test___analog_multi_channel_reader___read_many_sample___returns_valid_sample
     samples_read = reader.read_many_sample(data, samples_to_read)
 
     assert samples_read == samples_to_read
-    expected_vals = [
-        _get_voltage_offset_for_chan(chan_index) for chan_index in range(data.shape[0])
-    ]
-    assert numpy.min(data, axis=1) == pytest.approx(expected_vals, abs=VOLTAGE_EPSILON)
-    assert numpy.max(data, axis=1) == pytest.approx(expected_vals, abs=VOLTAGE_EPSILON)
+    expected_vals = [_get_voltage_offset_for_chan(chan_index) for chan_index in range(num_channels)]
+    assert data == pytest.approx(expected_vals, abs=VOLTAGE_EPSILON)
 
 
 def test___analog_multi_channel_reader___read_many_sample_with_wrong_dtype___raises_error_with_correct_dtype(
@@ -186,7 +175,10 @@ def test___analog_unscaled_reader___read_int16___returns_valid_samples(
     samples_read = reader.read_int16(data, number_of_samples_per_channel=samples_to_read)
 
     assert samples_read == samples_to_read
-    _validate_multi_channel_voltage_code_data(data)
+    expected_vals = [
+        _get_voltage_code_offset_for_chan(chan_index) for chan_index in range(num_channels)
+    ]
+    assert data == pytest.approx(expected_vals, abs=VOLTAGE_CODE_EPSILON)
 
 
 def test___analog_unscaled_reader___read_int16___raises_error_with_correct_dtype(
@@ -216,7 +208,10 @@ def test___analog_unscaled_reader___read_uint16___returns_valid_samples(
     samples_read = reader.read_uint16(data, number_of_samples_per_channel=samples_to_read)
 
     assert samples_read == samples_to_read
-    _validate_multi_channel_voltage_code_data(data)
+    expected_vals = [
+        _get_voltage_code_offset_for_chan(chan_index) for chan_index in range(num_channels)
+    ]
+    assert data == pytest.approx(expected_vals, abs=VOLTAGE_CODE_EPSILON)
 
 
 def test___analog_unscaled_reader___read_uint16___raises_error_with_correct_dtype(
@@ -246,7 +241,10 @@ def test___analog_unscaled_reader___read_int32___returns_valid_samples(
     samples_read = reader.read_int32(data, number_of_samples_per_channel=samples_to_read)
 
     assert samples_read == samples_to_read
-    _validate_multi_channel_voltage_code_data(data)
+    expected_vals = [
+        _get_voltage_code_offset_for_chan(chan_index) for chan_index in range(num_channels)
+    ]
+    assert data == pytest.approx(expected_vals, abs=VOLTAGE_CODE_EPSILON)
 
 
 def test___analog_unscaled_reader___read_int32___raises_error_with_correct_dtype(
@@ -276,7 +274,10 @@ def test___analog_unscaled_reader___read_uint32___returns_valid_samples(
     samples_read = reader.read_uint32(data, number_of_samples_per_channel=samples_to_read)
 
     assert samples_read == samples_to_read
-    _validate_multi_channel_voltage_code_data(data)
+    expected_vals = [
+        _get_voltage_code_offset_for_chan(chan_index) for chan_index in range(num_channels)
+    ]
+    assert data == pytest.approx(expected_vals, abs=VOLTAGE_CODE_EPSILON)
 
 
 def test___analog_unscaled_reader___read_uint32___raises_error_with_correct_dtype(
@@ -374,21 +375,26 @@ def test___power_single_channel_reader___read_many_sample___returns_valid_sample
     assert current_data == pytest.approx(_get_current_setpoint_for_chan(0), abs=POWER_EPSILON)
 
 
+@pytest.mark.parametrize(
+    "voltage_dtype, current_dtype",
+    [
+        (numpy.float32, numpy.float64),
+        (numpy.float64, numpy.float32),
+        (numpy.float32, numpy.float32),
+    ],
+)
 def test___power_single_channel_reader___read_many_sample_with_wrong_dtype___raises_error_with_correct_dtype(
     pwr_single_channel_task: nidaqmx.Task,
+    voltage_dtype: numpy.generic,
+    current_dtype: numpy.generic,
 ) -> None:
     reader = PowerSingleChannelReader(pwr_single_channel_task.in_stream)
     samples_to_read = 10
-    invalid_data = numpy.full(samples_to_read, math.inf, dtype=numpy.float32)
-    valid_data = numpy.full(samples_to_read, math.inf, dtype=numpy.float64)
+    voltage_data = numpy.full(samples_to_read, math.inf, dtype=voltage_dtype)
+    current_data = numpy.full(samples_to_read, math.inf, dtype=current_dtype)
 
     with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
-        _ = reader.read_many_sample(valid_data, invalid_data, samples_to_read)
-
-    assert "float64" in exc_info.value.args[0]
-
-    with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
-        _ = reader.read_many_sample(invalid_data, valid_data, samples_to_read)
+        _ = reader.read_many_sample(voltage_data, current_data, samples_to_read)
 
     assert "float64" in exc_info.value.args[0]
 
@@ -413,21 +419,24 @@ def test___power_multi_channel_reader___read_one_sample___returns_valid_samples(
     )
 
 
+@pytest.mark.parametrize(
+    "voltage_dtype, current_dtype",
+    [
+        (numpy.float32, numpy.float64),
+        (numpy.float64, numpy.float32),
+        (numpy.float32, numpy.float32),
+    ],
+)
 def test___power_multi_channel_reader___read_one_sample_with_wrong_dtype___raises_error_with_correct_dtype(
-    pwr_multi_channel_task: nidaqmx.Task,
+    pwr_multi_channel_task: nidaqmx.Task, voltage_dtype: numpy.generic, current_dtype: numpy.generic
 ) -> None:
     reader = PowerMultiChannelReader(pwr_multi_channel_task.in_stream)
     num_channels = pwr_multi_channel_task.number_of_channels
-    invalid_data = numpy.full(num_channels, math.inf, dtype=numpy.float32)
-    valid_data = numpy.full(num_channels, math.inf, dtype=numpy.float64)
+    voltage_data = numpy.full(num_channels, math.inf, dtype=voltage_dtype)
+    current_data = numpy.full(num_channels, math.inf, dtype=current_dtype)
 
     with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
-        reader.read_one_sample(valid_data, invalid_data)
-
-    assert "float64" in exc_info.value.args[0]
-
-    with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
-        reader.read_one_sample(invalid_data, valid_data)
+        reader.read_one_sample(voltage_data, current_data)
 
     assert "float64" in exc_info.value.args[0]
 
@@ -452,39 +461,30 @@ def test___power_multi_channel_reader___read_many_sample___returns_valid_samples
     expected_current_vals = [
         _get_current_setpoint_for_chan(chan_index) for chan_index in range(num_channels)
     ]
-    assert numpy.min(voltage_data, axis=1) == pytest.approx(
-        expected_voltage_vals, abs=POWER_EPSILON
-    )
-    assert numpy.max(voltage_data, axis=1) == pytest.approx(
-        expected_voltage_vals, abs=POWER_EPSILON
-    )
-    assert numpy.min(current_data, axis=1) == pytest.approx(
-        expected_current_vals, abs=POWER_EPSILON
-    )
-    assert numpy.max(current_data, axis=1) == pytest.approx(
-        expected_current_vals, abs=POWER_EPSILON
-    )
+    assert voltage_data == pytest.approx(expected_voltage_vals, abs=POWER_EPSILON)
+    assert current_data == pytest.approx(expected_current_vals, abs=POWER_EPSILON)
 
 
+@pytest.mark.parametrize(
+    "voltage_dtype, current_dtype",
+    [
+        (numpy.float32, numpy.float64),
+        (numpy.float64, numpy.float32),
+        (numpy.float32, numpy.float32),
+    ],
+)
 def test___power_multi_channel_reader___read_many_sample_with_wrong_dtype___raises_error_with_correct_dtype(
-    pwr_multi_channel_task: nidaqmx.Task,
+    pwr_multi_channel_task: nidaqmx.Task, voltage_dtype: numpy.generic, current_dtype: numpy.generic
 ) -> None:
     reader = PowerMultiChannelReader(pwr_multi_channel_task.in_stream)
     num_channels = pwr_multi_channel_task.number_of_channels
     samples_to_read = 10
-    invalid_data = numpy.full((num_channels, samples_to_read), math.inf, dtype=numpy.float32)
-    valid_data = numpy.full((num_channels, samples_to_read), math.inf, dtype=numpy.float64)
+    voltage_data = numpy.full((num_channels, samples_to_read), math.inf, dtype=voltage_dtype)
+    current_data = numpy.full((num_channels, samples_to_read), math.inf, dtype=current_dtype)
 
     with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
         _ = reader.read_many_sample(
-            valid_data, invalid_data, number_of_samples_per_channel=samples_to_read
-        )
-
-    assert "float64" in exc_info.value.args[0]
-
-    with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
-        _ = reader.read_many_sample(
-            invalid_data, valid_data, number_of_samples_per_channel=samples_to_read
+            voltage_data, current_data, number_of_samples_per_channel=samples_to_read
         )
 
     assert "float64" in exc_info.value.args[0]
@@ -514,41 +514,34 @@ def test___power_binary_reader___read_many_sample___returns_valid_samples(
     expected_current_vals = [
         _get_current_code_setpoint_for_chan(chan_index) for chan_index in range(num_channels)
     ]
-    assert numpy.min(voltage_data, axis=1) == pytest.approx(
-        expected_voltage_vals, abs=POWER_BINARY_EPSILON
-    )
-    assert numpy.max(voltage_data, axis=1) == pytest.approx(
-        expected_voltage_vals, abs=POWER_BINARY_EPSILON
-    )
-    assert numpy.min(current_data, axis=1) == pytest.approx(
-        expected_current_vals, abs=POWER_BINARY_EPSILON
-    )
-    assert numpy.max(current_data, axis=1) == pytest.approx(
-        expected_current_vals, abs=POWER_BINARY_EPSILON
-    )
+    assert voltage_data == pytest.approx(expected_voltage_vals, abs=POWER_BINARY_EPSILON)
+    assert current_data == pytest.approx(expected_current_vals, abs=POWER_BINARY_EPSILON)
 
 
+@pytest.mark.parametrize(
+    "voltage_dtype, voltage_default, current_dtype, current_default",
+    [
+        (numpy.float64, math.inf, numpy.int16, numpy.iinfo(numpy.int16).min),
+        (numpy.int16, numpy.iinfo(numpy.int16).min, numpy.float64, math.inf),
+        (numpy.float64, math.inf, numpy.float64, math.inf),
+    ],
+)
 def test___power_binary_reader___read_many_sample_with_wrong_dtype___raises_error_with_correct_dtype(
     pwr_multi_channel_task: nidaqmx.Task,
+    voltage_dtype: numpy.generic,
+    voltage_default: Union[float, int],
+    current_dtype: numpy.generic,
+    current_default: Union[float, int],
 ) -> None:
     reader = PowerBinaryReader(pwr_multi_channel_task.in_stream)
     num_channels = pwr_multi_channel_task.number_of_channels
     samples_to_read = 10
-    invalid_data = numpy.full((num_channels, samples_to_read), math.inf, dtype=numpy.float64)
-    valid_data = numpy.full(
-        (num_channels, samples_to_read), numpy.iinfo(numpy.int16).min, dtype=numpy.int16
-    )
+    voltage_data = numpy.full((num_channels, samples_to_read), voltage_default, dtype=voltage_dtype)
+    current_data = numpy.full((num_channels, samples_to_read), current_default, dtype=current_dtype)
 
     with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
         _ = reader.read_many_sample(
-            valid_data, invalid_data, number_of_samples_per_channel=samples_to_read
-        )
-
-    assert "int16" in exc_info.value.args[0]
-
-    with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
-        _ = reader.read_many_sample(
-            invalid_data, valid_data, number_of_samples_per_channel=samples_to_read
+            voltage_data, current_data, number_of_samples_per_channel=samples_to_read
         )
 
     assert "int16" in exc_info.value.args[0]
