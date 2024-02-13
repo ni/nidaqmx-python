@@ -218,7 +218,7 @@ def sim_ts_voltage_device(sim_ts_chassis: nidaqmx.system.Device) -> nidaqmx.syst
 
 
 @pytest.fixture(scope="function")
-def sim_ts_power_devices(sim_ts_chassis: nidaqmx.system.Device) -> nidaqmx.system.Device:
+def sim_ts_power_devices(sim_ts_chassis: nidaqmx.system.Device) -> List[nidaqmx.system.Device]:
     """Gets simulated power devices information."""
     devices = []
     for device in sim_ts_chassis.chassis_module_devices:
@@ -236,7 +236,7 @@ def sim_ts_power_devices(sim_ts_chassis: nidaqmx.system.Device) -> nidaqmx.syste
         "device. Cannot proceed to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
-    return None
+    return []
 
 
 @pytest.fixture(scope="function")
