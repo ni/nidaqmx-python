@@ -562,8 +562,19 @@ def di_single_channel_multi_line_task(
     task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> nidaqmx.Task:
     task.di_channels.add_di_chan(
-        flatten_channel_string(sim_6363_device.di_lines[:2].name),
+        flatten_channel_string(sim_6363_device.di_lines[:4].name),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    return task
+
+
+@pytest.fixture
+def di_multi_channel_multi_line_task(
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    task.di_channels.add_di_chan(
+        flatten_channel_string(sim_6363_device.di_lines[:4].name),
+        line_grouping=LineGrouping.CHAN_PER_LINE,
     )
     return task
 
@@ -572,7 +583,7 @@ def di_single_channel_multi_line_task(
 def di_single_channel_port_byte_task(
     task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> nidaqmx.Task:
-    # 6363 port 0 has 32 lines, port 1/2 have 8 lines
+    # 6363 port 1/2 have 8 lines each
     task.di_channels.add_di_chan(
         sim_6363_device.di_ports[1].name,
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
@@ -581,10 +592,22 @@ def di_single_channel_port_byte_task(
 
 
 @pytest.fixture
+def di_multi_channel_port_byte_task(
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    # 6363 port 1/2 have 8 lines each, but we need to skip port 0, which has 32 lines
+    task.di_channels.add_di_chan(
+        flatten_channel_string(sim_6363_device.di_lines[32:40].name),
+        line_grouping=LineGrouping.CHAN_PER_LINE,
+    )
+    return task
+
+
+@pytest.fixture
 def di_single_channel_port_uint16_task(
     task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> nidaqmx.Task:
-    # 6363 port 0 has 32 lines, port 1/2 have 8 lines
+    # 6363 port 1/2 have 8 lines each, combine to 16
     task.di_channels.add_di_chan(
         flatten_channel_string(sim_6363_device.di_ports[1:].name),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
@@ -593,10 +616,26 @@ def di_single_channel_port_uint16_task(
 
 
 @pytest.fixture
+def di_multi_channel_port_uint16_task(
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    # 6363 doesn't have a 16-line port. We could merge two 8-line ports together, but the data
+    # returned is based on the size of the port. For example, line 9 in the task would be line 0 of
+    # the second 8-bit port. Instead of the data being 0x00F0, it would be 0xF000 (little-endian).
+    # Anyways, its harder to reason about, so we'll only use 8 lines. DAQ will happily extend the
+    # data to the larger type.
+    task.di_channels.add_di_chan(
+        flatten_channel_string(sim_6363_device.di_lines[32:40].name),
+        line_grouping=LineGrouping.CHAN_PER_LINE,
+    )
+    return task
+
+
+@pytest.fixture
 def di_single_channel_port_uint32_task(
     task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> nidaqmx.Task:
-    # 6363 port 0 has 32 lines, port 1/2 have 8 lines
+    # 6363 port 0 has 32 lines
     task.di_channels.add_di_chan(
         sim_6363_device.di_ports[0].name,
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
@@ -604,7 +643,19 @@ def di_single_channel_port_uint32_task(
     return task
 
 
-def _get_expected_digital_data(num_lines: int, sample_number: int) -> int:
+@pytest.fixture
+def di_multi_channel_port_uint32_task(
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    # 6363 port 0 has 32 lines
+    task.di_channels.add_di_chan(
+        flatten_channel_string(sim_6363_device.di_lines[:32].name),
+        line_grouping=LineGrouping.CHAN_PER_LINE,
+    )
+    return task
+
+
+def _get_expected_digital_data_for_sample(num_lines: int, sample_number: int) -> int:
     # Simulated digital signals "count" from 0 in binary within each group of 8 lines.
     result = sample_number
     for _ in range(num_lines // 8):
@@ -612,6 +663,29 @@ def _get_expected_digital_data(num_lines: int, sample_number: int) -> int:
 
     line_mask = (2**num_lines) - 1
     return result & line_mask
+
+
+def _get_expected_digital_data(num_lines: int, num_samples: int) -> List[int]:
+    return [
+        _get_expected_digital_data_for_sample(num_lines, sample_number)
+        for sample_number in range(num_samples)
+    ]
+
+
+def _get_expected_digital_port_data_for_sample(num_lines: int, sample_number: int) -> List[int]:
+    expected_data = _get_expected_digital_data_for_sample(num_lines, sample_number)
+    # port data is strange, you get full port data masked for only the line in the channel
+    return [expected_data & (1 << line) for line in range(num_lines)]
+
+
+def _get_expected_digital_port_data(num_lines: int, num_samples: int) -> List[List[int]]:
+    result = []
+    # again, port data is strange. it is line-major with the same odd masking/port format as above
+    for line in range(num_lines):
+        result.append(
+            [datum & (1 << line) for datum in _get_expected_digital_data(num_lines, num_samples)]
+        )
+    return result
 
 
 def _bool_array_to_int(bool_array: numpy.ndarray) -> int:
@@ -627,10 +701,38 @@ def test___digital_single_channel_reader___read_one_sample_one_line___returns_va
 ) -> None:
     reader = nidaqmx.stream_readers.DigitalSingleChannelReader(di_single_line_task.in_stream)
     num_lines = di_single_line_task.channels.di_num_lines
+    samples_to_read = 10
+    data = [reader.read_one_sample_one_line() for _ in range(samples_to_read)]
 
-    for sample_number in range(4):
-        data = reader.read_one_sample_one_line()
-        assert data == _get_expected_digital_data(num_lines, sample_number) & 0x1
+    assert data == _get_expected_digital_data(num_lines, samples_to_read)
+
+
+def test___digital_multi_channel_reader___read_one_sample_one_line___returns_valid_samples(
+    di_single_line_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalMultiChannelReader(di_single_line_task.in_stream)
+    num_lines = di_single_line_task.channels.di_num_lines
+    samples_to_read = 10
+    data = numpy.full(num_lines, False, dtype=numpy.bool_)
+
+    for sample_number in range(samples_to_read):
+        reader.read_one_sample_one_line(data)
+        assert _bool_array_to_int(data) == _get_expected_digital_data_for_sample(
+            num_lines, sample_number
+        )
+
+
+def test___digital_multi_channel_reader___read_one_sample_one_line_with_wrong_dtype___raises_error_with_correct_dtype(
+    di_single_line_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalMultiChannelReader(di_single_line_task.in_stream)
+    num_lines = di_single_line_task.channels.di_num_lines
+    data = numpy.full(num_lines, math.inf, dtype=numpy.float64)
+
+    with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
+        reader.read_one_sample_one_line(data)
+
+    assert "bool" in exc_info.value.args[0]
 
 
 def test___digital_single_channel_reader___read_one_sample_multi_line___returns_valid_samples(
@@ -640,11 +742,14 @@ def test___digital_single_channel_reader___read_one_sample_multi_line___returns_
         di_single_channel_multi_line_task.in_stream
     )
     num_lines = di_single_channel_multi_line_task.channels.di_num_lines
+    samples_to_read = 10
     data = numpy.full(num_lines, False, dtype=numpy.bool_)
 
-    for sample_number in range(4):
+    for sample_number in range(samples_to_read):
         reader.read_one_sample_multi_line(data)
-        assert _bool_array_to_int(data) == _get_expected_digital_data(num_lines, sample_number)
+        assert _bool_array_to_int(data) == _get_expected_digital_data_for_sample(
+            num_lines, sample_number
+        )
 
 
 def test___digital_single_channel_reader___read_one_sample_multi_line_with_wrong_dtype___raises_error_with_correct_dtype(
@@ -669,10 +774,10 @@ def test___digital_single_channel_reader___read_one_sample_port_byte___returns_v
         di_single_channel_port_byte_task.in_stream
     )
     num_lines = di_single_channel_port_byte_task.channels.di_num_lines
+    samples_to_read = 10
+    data = [reader.read_one_sample_port_byte() for _ in range(samples_to_read)]
 
-    for sample_number in range(4):
-        data = reader.read_one_sample_port_byte()
-        assert data == _get_expected_digital_data(num_lines, sample_number)
+    assert data == _get_expected_digital_data(num_lines, samples_to_read)
 
 
 def test___digital_single_channel_reader___read_one_sample_port_uint16___returns_valid_samples(
@@ -682,10 +787,10 @@ def test___digital_single_channel_reader___read_one_sample_port_uint16___returns
         di_single_channel_port_uint16_task.in_stream
     )
     num_lines = di_single_channel_port_uint16_task.channels.di_num_lines
+    samples_to_read = 10
+    data = [reader.read_one_sample_port_uint16() for _ in range(samples_to_read)]
 
-    for sample_number in range(4):
-        data = reader.read_one_sample_port_uint16()
-        assert data == _get_expected_digital_data(num_lines, sample_number)
+    assert data == _get_expected_digital_data(num_lines, samples_to_read)
 
 
 def test___digital_single_channel_reader___read_one_sample_port_uint32___returns_valid_samples(
@@ -695,22 +800,338 @@ def test___digital_single_channel_reader___read_one_sample_port_uint32___returns
         di_single_channel_port_uint32_task.in_stream
     )
     num_lines = di_single_channel_port_uint32_task.channels.di_num_lines
+    samples_to_read = 10
+    data = [reader.read_one_sample_port_uint32() for _ in range(samples_to_read)]
 
-    for sample_number in range(4):
-        data = reader.read_one_sample_port_uint32()
-        assert data == _get_expected_digital_data(num_lines, sample_number)
-
-
-# DigitalSingleChannelReader::read_many_sample_port_byte
-# DigitalSingleChannelReader::read_many_sample_port_uint16
-# DigitalSingleChannelReader::read_many_sample_port_uint32
+    assert data == _get_expected_digital_data(num_lines, samples_to_read)
 
 
-# DigitalMultiChannelReader::read_one_sample_one_line
-# DigitalMultiChannelReader::read_one_sample_multi_line
-# DigitalMultiChannelReader::read_one_sample_port_byte
-# DigitalMultiChannelReader::read_one_sample_port_uint16
-# DigitalMultiChannelReader::read_one_sample_port_uint32
-# DigitalMultiChannelReader::read_many_sample_port_byte
-# DigitalMultiChannelReader::read_many_sample_port_uint16
-# DigitalMultiChannelReader::read_many_sample_port_uint32
+def test___digital_single_channel_reader___read_many_sample_port_byte___returns_valid_samples(
+    di_single_channel_port_byte_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalSingleChannelReader(
+        di_single_channel_port_byte_task.in_stream
+    )
+    num_lines = di_single_channel_port_byte_task.channels.di_num_lines
+    samples_to_read = 10
+    data = numpy.full(samples_to_read, numpy.iinfo(numpy.uint8).min, dtype=numpy.uint8)
+
+    samples_read = reader.read_many_sample_port_byte(
+        data, number_of_samples_per_channel=samples_to_read
+    )
+
+    assert samples_read == samples_to_read
+    assert data.tolist() == _get_expected_digital_data(num_lines, samples_to_read)
+
+
+def test___digital_single_channel_reader___read_many_sample_port_byte_with_wrong_dtype___raises_error_with_correct_dtype(
+    di_single_channel_port_byte_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalSingleChannelReader(
+        di_single_channel_port_byte_task.in_stream
+    )
+    samples_to_read = 10
+    data = numpy.full(samples_to_read, numpy.iinfo(numpy.uint16).min, dtype=numpy.uint16)
+
+    with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
+        _ = reader.read_many_sample_port_byte(data, number_of_samples_per_channel=samples_to_read)
+
+    assert "uint8" in exc_info.value.args[0]
+
+
+def test___digital_single_channel_reader___read_many_sample_port_uint16___returns_valid_samples(
+    di_single_channel_port_uint16_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalSingleChannelReader(
+        di_single_channel_port_uint16_task.in_stream
+    )
+    num_lines = di_single_channel_port_uint16_task.channels.di_num_lines
+    samples_to_read = 10
+    data = numpy.full(samples_to_read, numpy.iinfo(numpy.uint16).min, dtype=numpy.uint16)
+
+    samples_read = reader.read_many_sample_port_uint16(
+        data, number_of_samples_per_channel=samples_to_read
+    )
+
+    assert samples_read == samples_to_read
+    assert data.tolist() == _get_expected_digital_data(num_lines, samples_to_read)
+
+
+def test___digital_single_channel_reader___read_many_sample_port_uint16_with_wrong_dtype___raises_error_with_correct_dtype(
+    di_single_channel_port_uint16_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalSingleChannelReader(
+        di_single_channel_port_uint16_task.in_stream
+    )
+    samples_to_read = 10
+    data = numpy.full(samples_to_read, numpy.iinfo(numpy.uint32).min, dtype=numpy.uint32)
+
+    with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
+        _ = reader.read_many_sample_port_uint16(data, number_of_samples_per_channel=samples_to_read)
+
+    assert "uint16" in exc_info.value.args[0]
+
+
+def test___digital_single_channel_reader___read_many_sample_port_uint32___returns_valid_samples(
+    di_single_channel_port_uint32_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalSingleChannelReader(
+        di_single_channel_port_uint32_task.in_stream
+    )
+    num_lines = di_single_channel_port_uint32_task.channels.di_num_lines
+    samples_to_read = 10
+    data = numpy.full(samples_to_read, numpy.iinfo(numpy.uint32).min, dtype=numpy.uint32)
+
+    samples_read = reader.read_many_sample_port_uint32(
+        data, number_of_samples_per_channel=samples_to_read
+    )
+
+    assert samples_read == samples_to_read
+    assert data.tolist() == _get_expected_digital_data(num_lines, samples_to_read)
+
+
+def test___digital_single_channel_reader___read_many_sample_port_uint32_with_wrong_dtype___raises_error_with_correct_dtype(
+    di_single_channel_port_uint32_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalSingleChannelReader(
+        di_single_channel_port_uint32_task.in_stream
+    )
+    samples_to_read = 10
+    data = numpy.full(samples_to_read, numpy.iinfo(numpy.uint8).min, dtype=numpy.uint8)
+
+    with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
+        _ = reader.read_many_sample_port_uint32(data, number_of_samples_per_channel=samples_to_read)
+
+    assert "uint32" in exc_info.value.args[0]
+
+
+def test___digital_multi_channel_reader___read_one_sample_multi_line___returns_valid_samples(
+    di_multi_channel_multi_line_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalMultiChannelReader(
+        di_multi_channel_multi_line_task.in_stream
+    )
+    num_lines = di_multi_channel_multi_line_task.number_of_channels
+    samples_to_read = 10
+    data = numpy.full((num_lines, 1), False, dtype=numpy.bool_)
+
+    for sample_number in range(samples_to_read):
+        reader.read_one_sample_multi_line(data)
+        assert _bool_array_to_int(data) == _get_expected_digital_data_for_sample(
+            num_lines, sample_number
+        )
+
+
+def test___digital_multi_channel_reader___read_one_sample_multi_line_with_wrong_dtype___raises_error_with_correct_dtype(
+    di_multi_channel_multi_line_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalMultiChannelReader(
+        di_multi_channel_multi_line_task.in_stream
+    )
+    num_lines = di_multi_channel_multi_line_task.number_of_channels
+    data = numpy.full((num_lines, 1), math.inf, dtype=numpy.float64)
+
+    with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
+        reader.read_one_sample_multi_line(data)
+
+    assert "bool" in exc_info.value.args[0]
+
+
+def test___digital_multi_channel_reader___read_one_sample_port_byte___returns_valid_samples(
+    di_multi_channel_port_byte_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalMultiChannelReader(
+        di_multi_channel_port_byte_task.in_stream
+    )
+    num_lines = di_multi_channel_port_byte_task.number_of_channels
+    samples_to_read = 10
+    data = numpy.full(num_lines, numpy.iinfo(numpy.uint8).min, dtype=numpy.uint8)
+
+    for sample_number in range(samples_to_read):
+        reader.read_one_sample_port_byte(data)
+        assert data.tolist() == _get_expected_digital_port_data_for_sample(num_lines, sample_number)
+
+
+def test___digital_multi_channel_reader___read_one_sample_port_byte_with_wrong_dtype___raises_error_with_correct_dtype(
+    di_multi_channel_port_byte_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalMultiChannelReader(
+        di_multi_channel_port_byte_task.in_stream
+    )
+    num_lines = di_multi_channel_port_byte_task.number_of_channels
+    data = numpy.full(num_lines, numpy.iinfo(numpy.uint16).min, dtype=numpy.uint16)
+
+    with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
+        reader.read_one_sample_port_byte(data)
+
+    assert "uint8" in exc_info.value.args[0]
+
+
+def test___digital_multi_channel_reader___read_many_sample_port_byte___returns_valid_samples(
+    di_multi_channel_port_byte_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalMultiChannelReader(
+        di_multi_channel_port_byte_task.in_stream
+    )
+    num_lines = di_multi_channel_port_byte_task.number_of_channels
+    samples_to_read = 10
+    data = numpy.full((num_lines, samples_to_read), numpy.iinfo(numpy.uint8).min, dtype=numpy.uint8)
+
+    samples_read = reader.read_many_sample_port_byte(
+        data, number_of_samples_per_channel=samples_to_read
+    )
+
+    assert samples_read == samples_to_read
+    assert data.tolist() == _get_expected_digital_port_data(num_lines, samples_to_read)
+
+
+def test___digital_multi_channel_reader___read_many_sample_port_byte_with_wrong_dtype___raises_error_with_correct_dtype(
+    di_multi_channel_port_byte_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalMultiChannelReader(
+        di_multi_channel_port_byte_task.in_stream
+    )
+    num_lines = di_multi_channel_port_byte_task.number_of_channels
+    samples_to_read = 10
+    data = numpy.full(
+        (num_lines, samples_to_read), numpy.iinfo(numpy.uint16).min, dtype=numpy.uint16
+    )
+
+    with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
+        _ = reader.read_many_sample_port_byte(data, number_of_samples_per_channel=samples_to_read)
+
+    assert "uint8" in exc_info.value.args[0]
+
+
+def test___digital_multi_channel_reader___read_one_sample_port_uint16___returns_valid_samples(
+    di_multi_channel_port_uint16_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalMultiChannelReader(
+        di_multi_channel_port_uint16_task.in_stream
+    )
+    num_lines = di_multi_channel_port_uint16_task.number_of_channels
+    samples_to_read = 10
+    data = numpy.full(num_lines, numpy.iinfo(numpy.uint16).min, dtype=numpy.uint16)
+
+    for sample_number in range(samples_to_read):
+        reader.read_one_sample_port_uint16(data)
+        assert data.tolist() == _get_expected_digital_port_data_for_sample(num_lines, sample_number)
+
+
+def test___digital_multi_channel_reader___read_one_sample_port_uint16_with_wrong_dtype___raises_error_with_correct_dtype(
+    di_multi_channel_port_uint16_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalMultiChannelReader(
+        di_multi_channel_port_uint16_task.in_stream
+    )
+    num_lines = di_multi_channel_port_uint16_task.number_of_channels
+    data = numpy.full(num_lines, numpy.iinfo(numpy.uint32).min, dtype=numpy.uint32)
+
+    with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
+        reader.read_one_sample_port_uint16(data)
+
+    assert "uint16" in exc_info.value.args[0]
+
+
+def test___digital_multi_channel_reader___read_many_sample_port_uint16___returns_valid_samples(
+    di_multi_channel_port_uint16_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalMultiChannelReader(
+        di_multi_channel_port_uint16_task.in_stream
+    )
+    num_lines = di_multi_channel_port_uint16_task.number_of_channels
+    samples_to_read = 10
+    data = numpy.full(
+        (num_lines, samples_to_read), numpy.iinfo(numpy.uint16).min, dtype=numpy.uint16
+    )
+
+    samples_read = reader.read_many_sample_port_uint16(
+        data, number_of_samples_per_channel=samples_to_read
+    )
+
+    assert samples_read == samples_to_read
+    assert data.tolist() == _get_expected_digital_port_data(num_lines, samples_to_read)
+
+
+def test___digital_multi_channel_reader___read_many_sample_port_uint16_with_wrong_dtype___raises_error_with_correct_dtype(
+    di_multi_channel_port_uint16_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalMultiChannelReader(
+        di_multi_channel_port_uint16_task.in_stream
+    )
+    num_lines = di_multi_channel_port_uint16_task.number_of_channels
+    samples_to_read = 10
+    data = numpy.full(
+        (num_lines, samples_to_read), numpy.iinfo(numpy.uint32).min, dtype=numpy.uint32
+    )
+
+    with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
+        _ = reader.read_many_sample_port_uint16(data, number_of_samples_per_channel=samples_to_read)
+
+    assert "uint16" in exc_info.value.args[0]
+
+
+def test___digital_multi_channel_reader___read_one_sample_port_uint32___returns_valid_samples(
+    di_multi_channel_port_uint32_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalMultiChannelReader(
+        di_multi_channel_port_uint32_task.in_stream
+    )
+    num_lines = di_multi_channel_port_uint32_task.number_of_channels
+    samples_to_read = 10
+    data = numpy.full(num_lines, numpy.iinfo(numpy.uint32).min, dtype=numpy.uint32)
+
+    for sample_number in range(samples_to_read):
+        reader.read_one_sample_port_uint32(data)
+        assert data.tolist() == _get_expected_digital_port_data_for_sample(num_lines, sample_number)
+
+
+def test___digital_multi_channel_reader___read_one_sample_port_uint32_with_wrong_dtype___raises_error_with_correct_dtype(
+    di_multi_channel_port_uint32_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalMultiChannelReader(
+        di_multi_channel_port_uint32_task.in_stream
+    )
+    num_lines = di_multi_channel_port_uint32_task.number_of_channels
+    data = numpy.full(num_lines, numpy.iinfo(numpy.uint8).min, dtype=numpy.uint8)
+
+    with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
+        reader.read_one_sample_port_uint32(data)
+
+    assert "uint32" in exc_info.value.args[0]
+
+
+def test___digital_multi_channel_reader___read_many_sample_port_uint32___returns_valid_samples(
+    di_multi_channel_port_uint32_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalMultiChannelReader(
+        di_multi_channel_port_uint32_task.in_stream
+    )
+    num_lines = di_multi_channel_port_uint32_task.number_of_channels
+    samples_to_read = 10
+    data = numpy.full(
+        (num_lines, samples_to_read), numpy.iinfo(numpy.uint32).min, dtype=numpy.uint32
+    )
+
+    samples_read = reader.read_many_sample_port_uint32(
+        data, number_of_samples_per_channel=samples_to_read
+    )
+
+    assert samples_read == samples_to_read
+    assert data.tolist() == _get_expected_digital_port_data(num_lines, samples_to_read)
+
+
+def test___digital_multi_channel_reader___read_many_sample_port_uint32_with_wrong_dtype___raises_error_with_correct_dtype(
+    di_multi_channel_port_uint32_task: nidaqmx.Task,
+) -> None:
+    reader = nidaqmx.stream_readers.DigitalMultiChannelReader(
+        di_multi_channel_port_uint32_task.in_stream
+    )
+    num_lines = di_multi_channel_port_uint32_task.number_of_channels
+    samples_to_read = 10
+    data = numpy.full((num_lines, samples_to_read), numpy.iinfo(numpy.uint8).min, dtype=numpy.uint8)
+
+    with pytest.raises((ctypes.ArgumentError, TypeError)) as exc_info:
+        _ = reader.read_many_sample_port_uint32(data, number_of_samples_per_channel=samples_to_read)
+
+    assert "uint32" in exc_info.value.args[0]
