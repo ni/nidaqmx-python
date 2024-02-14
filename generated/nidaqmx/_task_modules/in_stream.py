@@ -1141,7 +1141,7 @@ class InStream:
         """
         return self.read(number_of_samples_per_channel=READ_ALL_AVAILABLE)
 
-    @deprecation.deprecated(deprecated_in="1.2.0", removed_in="1.2.0", details="Use read_into instead.")
+    @deprecation.deprecated(deprecated_in="1.0.0", removed_in="1.2.0", details="Use read_into instead.")
     def readinto(self, numpy_array):
         return self.read_into(numpy_array)
 
