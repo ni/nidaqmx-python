@@ -1086,8 +1086,12 @@ class InStream:
         if number_of_channels * samples_read != number_of_samples:
             return numpy_array[:number_of_channels * samples_read]
         return numpy_array
-
+    
+    @deprecation.deprecated(deprecated_in="1.0.0", removed_in="1.2.0", details="Use read_all instead.")
     def readall(self):
+        return self.read_all()
+
+    def read_all(self):
         """
         Reads all available raw samples from the task or virtual channels
         you specify.
@@ -1137,7 +1141,11 @@ class InStream:
         """
         return self.read(number_of_samples_per_channel=READ_ALL_AVAILABLE)
 
+    @deprecation.deprecated(deprecated_in="1.0.0", removed_in="1.2.0", details="Use read_into instead.")
     def readinto(self, numpy_array):
+        return self.read_into(numpy_array)
+
+    def read_into(self, numpy_array):
         """
         Reads raw samples from the task or virtual channels you specify
         into numpy_array.
