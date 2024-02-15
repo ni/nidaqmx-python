@@ -115,7 +115,9 @@ def _x_series_device(
     return None
 
 
-def _device_by_product_type(product_type, device_type, system):
+def _device_by_product_type(
+    product_type, device_type: DeviceType, system: nidaqmx.system.System
+) -> nidaqmx.system.Device:
     for device in system.devices:
         device_type_match = (
             device_type == DeviceType.ANY
@@ -141,7 +143,7 @@ def any_x_series_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
 
 
 @pytest.fixture(scope="function")
-def real_x_series_device(system):
+def real_x_series_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets real X Series device information."""
     return _x_series_device(DeviceType.REAL, system)
 
@@ -165,7 +167,7 @@ def sim_field_daq_device(system):
 
 
 @pytest.fixture(scope="function")
-def sim_ts_chassis(system):
+def sim_ts_chassis(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets simulated TestScale chassis information."""
     # Prefer tsChassisTester if available so that multi-module tests will use
     # modules from the same chassis.
