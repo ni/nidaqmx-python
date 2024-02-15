@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import ctypes
 import functools
-from datetime import timezone
+from datetime import timezone, timedelta
 from datetime import datetime as std_datetime
 from hightime import datetime as ht_datetime
 from typing import Optional, Union
@@ -58,6 +58,12 @@ class AbsoluteTime(ctypes.Structure):
 
         return AbsoluteTime(lsb=lsb, msb=timestamp_1904_epoch)
 
+    def convert_to_local_timezone(self, expected_time_utc):
+        current_time_utc = ht_datetime.now(timezone.utc)
+        local_timezone_offset = current_time_utc.astimezone().utcoffset()
+        local_expected_time = expected_time_utc + local_timezone_offset
+        return local_expected_time
+
     def to_datetime(self, tzinfo: Optional[timezone] = None) -> ht_datetime:
         # First, calculate whole seconds by converting from the 1904 to 1970 epoch.
         timestamp_1904_epoch = self.msb
@@ -79,12 +85,18 @@ class AbsoluteTime(ctypes.Structure):
         )
         yoctosecond = remainder_yoctoseconds
 
-        # Start with UTC
-        dt = ht_datetime.fromtimestamp(timestamp_1970_epoch, timezone.utc)
+        if not is_positive:
+            datetime_1904 = ht_datetime(1904, 1, 1)
+            dt = datetime_1904 + timedelta(seconds=self.msb)
+        else:
+            dt = ht_datetime.fromtimestamp(timestamp_1970_epoch, timezone.utc)
         # Add in precision
         dt = dt.replace(microsecond=microsecond, femtosecond=femtosecond, yoctosecond=yoctosecond)
         # Then convert to requested timezone
-        return dt.astimezone(tz=tzinfo)
+        if not is_positive:
+            return self.convert_to_local_timezone(dt)
+        else:
+            return dt.astimezone(tz=tzinfo)
 
     def __str__(self) -> str:
         return f"AbsoluteTime(lsb=0x{self.lsb:x}, msb=0x{self.msb:x})"

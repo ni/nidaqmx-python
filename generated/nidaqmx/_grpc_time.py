@@ -14,7 +14,7 @@ _YS_PER_NS = 10**15
 _YS_PER_FS = 10**9
 
 
-def convert_time_to_timestamp(dt: Union[std_datetime, ht_datetime], ts: GrpcTimestamp) -> None:
+def convert_time_to_timestamp(dt: Union[std_datetime, ht_datetime], ts: Optional[GrpcTimestamp] = GrpcTimestamp()) -> GrpcTimestamp:
     utc_dt = dt.astimezone(tz=timezone.utc)
     seconds = int(utc_dt.timestamp())
 
@@ -30,6 +30,7 @@ def convert_time_to_timestamp(dt: Union[std_datetime, ht_datetime], ts: GrpcTime
         nanos = utc_dt.microsecond * _NS_PER_US
 
     ts.FromNanoseconds(seconds * _NS_PER_S + nanos)
+    return ts
 
 
 def convert_timestamp_to_time(ts: GrpcTimestamp, tzinfo: Optional[timezone] = None) -> ht_datetime:

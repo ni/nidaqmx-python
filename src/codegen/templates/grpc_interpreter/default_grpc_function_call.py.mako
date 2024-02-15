@@ -41,9 +41,6 @@
         _validate_array_dtype(${parameter_name}, ${parameter_dtype})
     %endfor
 %endif
-%if "convert_time_to_timestamp" in grpc_interpreter_params:
-        ts = GrpcTimestamp()
-%endif
         response = self._invoke(
             self._client.${snake_to_pascal(function.function_name)},
 %if (len(function.function_name) + len(grpc_interpreter_params)) > 68:

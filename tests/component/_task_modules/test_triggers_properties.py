@@ -7,7 +7,7 @@ from nidaqmx.constants import TaskMode, TriggerType
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import DaqError
 from nidaqmx.task import Task
-from tests.unit._time_utils import JAN_01_2002_HIGHTIME
+from tests.unit._time_utils import JAN_01_2002_HIGHTIME, JAN_01_1904_HIGHTIME
 
 
 @pytest.fixture()
@@ -119,15 +119,20 @@ def test___ai_task___reset_uint32_property___returns_default_value(ai_voltage_ta
     assert ai_voltage_task.triggers.reference_trigger.pretrig_samples == 2
 
 
-def test___ai_voltage_field_daq_task___get_timestamp_property___throws_os_error(
+def test___ai_voltage_field_daq_task___get_timestamp_property___returns_default_value(
     ai_voltage_field_daq_task: Task,
 ):
     ai_voltage_field_daq_task.timing.cfg_samp_clk_timing(1000)
 
-    # timestamp 1904-01-01 is out of range of supported timestamp values
-    with pytest.raises(OSError) as os_error:
-        ai_voltage_field_daq_task.triggers.start_trigger.trig_when
-    assert os_error.value.errno == 22
+    when_value = ai_voltage_field_daq_task.triggers.start_trigger.trig_when
+
+    localized_default_value = convert_to_local_timezone(JAN_01_1904_HIGHTIME)
+    assert when_value.year == localized_default_value.year
+    assert when_value.month == localized_default_value.month
+    assert when_value.day == localized_default_value.day
+    assert when_value.hour == localized_default_value.hour
+    assert when_value.minute == localized_default_value.minute
+    assert when_value.second == localized_default_value.second
 
 
 def test___ai_voltage_field_daq_task___set_timestamp_property___returns_assigned_value(
@@ -148,7 +153,7 @@ def test___ai_voltage_field_daq_task___set_timestamp_property___returns_assigned
     assert when_value.second == localized_value_to_test.second
 
 
-def test___ai_voltage_field_daq_task___reset_timestamp_property___throws_os_error(
+def test___ai_voltage_field_daq_task___reset_timestamp_property___returns_default_value(
     ai_voltage_field_daq_task: Task,
 ):
     ai_voltage_field_daq_task.timing.cfg_samp_clk_timing(1000)
@@ -156,7 +161,11 @@ def test___ai_voltage_field_daq_task___reset_timestamp_property___throws_os_erro
 
     del ai_voltage_field_daq_task.triggers.start_trigger.trig_when
 
-    # timestamp 1904-01-01 is out of range of supported timestamp values
-    with pytest.raises(OSError) as os_error:
-        ai_voltage_field_daq_task.triggers.start_trigger.trig_when
-    assert os_error.value.errno == 22
+    when_value = ai_voltage_field_daq_task.triggers.start_trigger.trig_when
+    localized_default_value = convert_to_local_timezone(JAN_01_1904_HIGHTIME)
+    assert when_value.year == localized_default_value.year
+    assert when_value.month == localized_default_value.month
+    assert when_value.day == localized_default_value.day
+    assert when_value.hour == localized_default_value.hour
+    assert when_value.minute == localized_default_value.minute
+    assert when_value.second == localized_default_value.second

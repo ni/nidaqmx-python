@@ -356,7 +356,7 @@ def get_grpc_interpreter_call_params(func, params):
             elif param.is_grpc_enum or (param.is_enum and not param.is_list):
                 grpc_params.append(f"{name}_raw={param.parameter_name}")
             elif param.type == "CVIAbsoluteTime":
-                grpc_params.append(f"{name}=convert_time_to_timestamp({param.parameter_name},ts)")
+                grpc_params.append(f"{name}=convert_time_to_timestamp({param.parameter_name})")
             else:
                 if is_write_bytes_param(param):
                     grpc_params.append(f"{name}={param.parameter_name}.tobytes()")

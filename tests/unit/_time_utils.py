@@ -10,3 +10,5 @@ JAN_01_2002_TIMESTAMP_1904_EPOCH = 0xB856AC80
 
 JAN_01_2002_DATETIME = std_datetime(2002, 1, 1, tzinfo=timezone.utc)
 JAN_01_2002_HIGHTIME = ht_datetime(2002, 1, 1, tzinfo=timezone.utc)
+JAN_01_1904_DATETIME = std_datetime(1904, 1, 1, tzinfo=timezone.utc)
+JAN_01_1904_HIGHTIME = ht_datetime(1904, 1, 1, tzinfo=timezone.utc)
