@@ -174,8 +174,8 @@ class DaqWarning(Warning):
         """
         return self._error_type
 
-
-DaqResourceWarning = ResourceWarning
+class DaqResourceWarning(ResourceWarning):
+    pass
 
 warnings.filterwarnings("always", category=DaqWarning)
 warnings.filterwarnings("always", category=DaqResourceWarning)
