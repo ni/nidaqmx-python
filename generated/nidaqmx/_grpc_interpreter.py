@@ -3260,7 +3260,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.WaitForValidTimestampRequest(
                 task=task, timestamp_event_raw=timestamp_event,
                 timeout=timeout))
-        return response.timestamp
+        return convert_timestamp_to_time(response.timestamp)
 
     def wait_until_task_done(self, task, time_to_wait):
         response = self._invoke(
