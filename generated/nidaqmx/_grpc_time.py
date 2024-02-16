@@ -1,4 +1,4 @@
-from datetime import timezone
+from datetime import timezone, timedelta
 from datetime import datetime as std_datetime
 from hightime import datetime as ht_datetime
 from typing import Optional, Union
@@ -43,7 +43,7 @@ def convert_to_local_timezone(expected_time_utc):
 
 
 def negative_timestamp_to_1904_epoch(negative_timestamp):
-    epoch_1904 = datetime(1904, 1, 1)
+    epoch_1904 = ht_datetime(1904, 1, 1)
     delta = timedelta(seconds=abs(negative_timestamp))
     datetime_1904 = epoch_1904 - delta
     return datetime_1904
