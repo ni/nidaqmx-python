@@ -3684,7 +3684,7 @@ class LibraryInterpreter(BaseInterpreter):
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
         self.check_for_error(error_code)
-        return value
+        return value.to_datetime()
 
     def get_trig_attribute_uint32(self, task, attribute):
         value = ctypes.c_uint32()
@@ -5637,7 +5637,7 @@ class LibraryInterpreter(BaseInterpreter):
         self.check_for_error(error_code)
 
     def wait_for_valid_timestamp(self, task, timestamp_event, timeout):
-        timestamp = _lib_time.AbsoluteTime()
+        timestamp = AbsoluteTime()
 
         cfunc = lib_importer.windll.DAQmxWaitForValidTimestamp
         if cfunc.argtypes is None:
@@ -5645,13 +5645,12 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes.c_int32,
-                        ctypes.c_double,
-                        ctypes.POINTER(_lib_time.AbsoluteTime)]
+                        ctypes.c_double, ctypes.POINTER(AbsoluteTime)]
 
         error_code = cfunc(
             task, timestamp_event, timeout, ctypes.byref(timestamp))
         self.check_for_error(error_code)
-        return timestamp.value
+        return timestamp.to_datetime()
 
     def wait_until_task_done(self, task, time_to_wait):
         cfunc = lib_importer.windll.DAQmxWaitUntilTaskDone

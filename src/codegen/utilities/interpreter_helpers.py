@@ -446,8 +446,10 @@ def get_return_values(func):
                 return_values.append(param.parameter_name)
             else:
                 return_values.append(f"{param.parameter_name}.tolist()")
-        elif param.type == "TaskHandle" or param.type == "CVIAbsoluteTime":
+        elif param.type == "TaskHandle":
             return_values.append(param.parameter_name)
+        elif param.type == "CVIAbsoluteTime":
+            return_values.append(f"{param.parameter_name}.to_datetime()")
         else:
             return_values.append(f"{param.parameter_name}.value")
     if func.is_init_method:
