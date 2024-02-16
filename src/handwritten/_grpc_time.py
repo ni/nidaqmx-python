@@ -60,7 +60,7 @@ def convert_timestamp_to_time(ts: GrpcTimestamp, tzinfo: Optional[timezone] = No
     yoctosecond = remainder_yoctoseconds
 
     if seconds < 0:
-        dt = negative_timestamp_to_1904_epoch(negative_timestamp)
+        dt = negative_timestamp_to_1904_epoch(seconds)
     else:
         dt = ht_datetime.fromtimestamp(seconds, timezone.utc)
 
