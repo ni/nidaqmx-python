@@ -5,6 +5,8 @@ from typing import Optional, Union
 
 from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
 
+# 66 years, 17 leap days = 24107 days = 2082844800 seconds
+_BIAS_FROM_1970_EPOCH = 2082844800
 
 _NS_PER_S = 10**9
 _NS_PER_US = 10**3
@@ -44,8 +46,8 @@ def convert_to_local_timezone(expected_time_utc):
 
 def negative_timestamp_to_1904_epoch(negative_timestamp):
     epoch_1904 = ht_datetime(1904, 1, 1)
-    delta = timedelta(seconds=abs(negative_timestamp))
-    datetime_1904 = epoch_1904 - delta
+    seconds_from_1904 = timedelta(seconds = _BIAS_FROM_1970_EPOCH - abs(negative_timestamp))
+    datetime_1904 = epoch_1904 + seconds_from_1904
     return datetime_1904
 
 
