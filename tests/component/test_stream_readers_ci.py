@@ -9,7 +9,6 @@ import pytest
 import nidaqmx
 from nidaqmx.stream_readers import CounterReader
 
-
 SIGNAL_TO_MEASURE = "100kHzTimebase"
 EXPECTED_FREQUENCY = 100000.0
 EXPECTED_FREQUENCY_TOLERANCE = 1e-6
@@ -285,7 +284,9 @@ def test___counter_reader___read_many_sample_pulse_time___returns_valid_samples(
     ],
 )
 def test___counter_reader___read_many_sample_pulse_time_with_wrong_dtype___raises_error_with_correct_dtype(
-    ci_pulse_time_task: nidaqmx.Task, high_time_dtype: numpy.typing.DTypeLike, low_time_dtype: numpy.typing.DTypeLike
+    ci_pulse_time_task: nidaqmx.Task,
+    high_time_dtype: numpy.typing.DTypeLike,
+    low_time_dtype: numpy.typing.DTypeLike,
 ) -> None:
     reader = CounterReader(ci_pulse_time_task.in_stream)
     samples_to_read = 10
