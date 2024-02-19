@@ -453,9 +453,7 @@ def persisted_channel(request, system: nidaqmx.system.System):
 
 
 @pytest.fixture(scope="function")
-def watchdog_task(
-    request, sim_6363_device, generate_watchdog_task
-) -> nidaqmx.system.WatchdogTask:
+def watchdog_task(request, sim_6363_device, generate_watchdog_task) -> nidaqmx.system.WatchdogTask:
     """Gets a watchdog task instance."""
     # set default values used for the initialization of the task.
     device_name = _get_marker_value(request, "device_name", sim_6363_device.name)

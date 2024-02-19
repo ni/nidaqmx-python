@@ -98,9 +98,7 @@ class TestPropertyBasicDataTypes:
 
     def test_string_property(self, task, sim_6363_device):
         """Test for validating string property."""
-        ai_channel = task.ai_channels.add_ai_voltage_chan(
-            sim_6363_device.ai_physical_chans[0].name
-        )
+        ai_channel = task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
 
         # Test property default value.
         assert ai_channel.description == ""

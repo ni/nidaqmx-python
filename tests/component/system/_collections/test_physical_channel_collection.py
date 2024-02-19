@@ -92,9 +92,7 @@ def test___physical_channels___getitem_str_list___shared_interpreter(
 
 
 @pytest.mark.parametrize("collection_name", COLLECTION_NAMES)
-def test___physical_channels___iter___forward_order(
-    collection_name: str, sim_6363_device: Device
-):
+def test___physical_channels___iter___forward_order(collection_name: str, sim_6363_device: Device):
     physical_channels = getattr(sim_6363_device, collection_name)
 
     channels = iter(physical_channels)
@@ -136,9 +134,7 @@ def test___physical_channels___reversed___shared_interpreter(
 
 
 @pytest.mark.parametrize("collection_name", COLLECTION_NAMES)
-def test___physical_channels___all___forward_order(
-    collection_name: str, sim_6363_device: Device
-):
+def test___physical_channels___all___forward_order(collection_name: str, sim_6363_device: Device):
     physical_channels = getattr(sim_6363_device, collection_name)
 
     channel = physical_channels.all

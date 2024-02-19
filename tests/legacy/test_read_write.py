@@ -760,9 +760,7 @@ class TestPowerRead(TestDAQmxIOBase):
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        task.ai_channels.add_ai_voltage_chan(
-            f"{sim_6363_device.name}/ai0", max_val=10, min_val=-10
-        )
+        task.ai_channels.add_ai_voltage_chan(f"{sim_6363_device.name}/ai0", max_val=10, min_val=-10)
         task.ai_channels.add_ai_current_chan(
             f"{sim_6363_device.name}/ai1", max_val=0.01, min_val=-0.01
         )
