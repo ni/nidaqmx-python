@@ -13,10 +13,10 @@ from nidaqmx.scale import Scale
 
 
 @pytest.fixture(scope="function")
-def ai_voltage_chan_with_excit(task, any_x_series_device):
+def ai_voltage_chan_with_excit(task, sim_6363_device):
     """Creates AI Channel object to measure voltage."""
     ai_channel = task.ai_channels.add_ai_voltage_chan_with_excit(
-        any_x_series_device.ai_physical_chans[0].name,
+        sim_6363_device.ai_physical_chans[0].name,
         voltage_excit_source=ExcitationSource.EXTERNAL,
         voltage_excit_val=0.1,
     )
@@ -24,10 +24,10 @@ def ai_voltage_chan_with_excit(task, any_x_series_device):
 
 
 @pytest.fixture(scope="function")
-def ai_voltage_chan_with_scale(task, any_x_series_device):
+def ai_voltage_chan_with_scale(task, sim_6363_device):
     """Creates AI Channel object to measure voltage with a custom scale."""
     ai_channel = task.ai_channels.add_ai_voltage_chan(
-        any_x_series_device.ai_physical_chans[0].name,
+        sim_6363_device.ai_physical_chans[0].name,
         units=VoltageUnits.FROM_CUSTOM_SCALE,
         custom_scale_name="double_gain_scale",
     )
@@ -47,29 +47,29 @@ def ai_power_chan(task, sim_ts_power_device):
 
 
 @pytest.fixture(scope="function")
-def ai_rtd_chan(task, any_x_series_device):
+def ai_rtd_chan(task, sim_6363_device):
     """Creates AI Channel object that use an RTD to measure temperature."""
     ai_channel = task.ai_channels.add_ai_rtd_chan(
-        any_x_series_device.ai_physical_chans[0].name,
+        sim_6363_device.ai_physical_chans[0].name,
         rtd_type=RTDType.PT_3750,
     )
     yield ai_channel
 
 
 @pytest.fixture(scope="function")
-def ci_pulse_width_chan(task, any_x_series_device):
+def ci_pulse_width_chan(task, sim_6363_device):
     """Creates CI Channel object to measure the width of a digital pulse."""
     ci_channel = task.ci_channels.add_ci_pulse_width_chan(
-        any_x_series_device.ci_physical_chans[0].name,
+        sim_6363_device.ci_physical_chans[0].name,
     )
     yield ci_channel
 
 
 @pytest.fixture(scope="function")
-def ci_count_edges_chan(task, any_x_series_device):
+def ci_count_edges_chan(task, sim_6363_device):
     """Creates CI Channel object to count edges."""
     ci_channel = task.ci_channels.add_ci_count_edges_chan(
-        any_x_series_device.ci_physical_chans[0].name,
+        sim_6363_device.ci_physical_chans[0].name,
     )
     yield ci_channel
 

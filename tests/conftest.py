@@ -136,21 +136,9 @@ def _device_by_product_type(
 
 
 @pytest.fixture(scope="function")
-def any_x_series_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
-    """Gets any X Series device information."""
-    return _x_series_device(DeviceType.ANY, system)
-
-
-@pytest.fixture(scope="function")
 def real_x_series_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets real X Series device information."""
     return _x_series_device(DeviceType.REAL, system)
-
-
-@pytest.fixture(scope="function")
-def sim_x_series_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
-    """Gets simulated X Series device information."""
-    return _x_series_device(DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")
@@ -465,12 +453,10 @@ def persisted_channel(request, system: nidaqmx.system.System):
 
 
 @pytest.fixture(scope="function")
-def watchdog_task(
-    request, any_x_series_device, generate_watchdog_task
-) -> nidaqmx.system.WatchdogTask:
+def watchdog_task(request, sim_6363_device, generate_watchdog_task) -> nidaqmx.system.WatchdogTask:
     """Gets a watchdog task instance."""
     # set default values used for the initialization of the task.
-    device_name = _get_marker_value(request, "device_name", any_x_series_device.name)
+    device_name = _get_marker_value(request, "device_name", sim_6363_device.name)
     timeout = _get_marker_value(request, "timeout", 0.5)
 
     return generate_watchdog_task(device_name=device_name, timeout=timeout)

@@ -61,9 +61,9 @@ class TestSystemCollections:
             # Test specific property on object.
             assert isinstance(global_channels[0].author, str)
 
-    def test_physical_channel_collection_property(self, any_x_series_device):
+    def test_physical_channel_collection_property(self, sim_6363_device):
         """Test to validate physical channel collection property."""
-        phys_chans = any_x_series_device.ai_physical_chans
+        phys_chans = sim_6363_device.ai_physical_chans
 
         assert isinstance(phys_chans, PhysicalChannelCollection)
         assert isinstance(phys_chans, collections.abc.Sequence)

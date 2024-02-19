@@ -6,10 +6,10 @@ import nidaqmx
 
 @pytest.fixture(params=[1, 2])
 def ao_task(
-    task: nidaqmx.Task, any_x_series_device: nidaqmx.system.Device, request: pytest.FixtureRequest
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device, request: pytest.FixtureRequest
 ) -> nidaqmx.Task:
     """Returns an analog output task with a varying number of channels."""
-    _create_ao_channels(task, any_x_series_device, number_of_channels=request.param)
+    _create_ao_channels(task, sim_6363_device, number_of_channels=request.param)
     return task
 
 
@@ -37,9 +37,9 @@ def test___valid_array___write___returns_samples_written(
 
 
 def test___odd_sized_array___write___returns_whole_samples(
-    task: nidaqmx.Task, any_x_series_device: nidaqmx.system.Device
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> None:
-    _create_ao_channels(task, any_x_series_device, number_of_channels=2)
+    _create_ao_channels(task, sim_6363_device, number_of_channels=2)
     task.out_stream.auto_start = True
     data = numpy.full(19, 0x1234, dtype=numpy.int16)
 

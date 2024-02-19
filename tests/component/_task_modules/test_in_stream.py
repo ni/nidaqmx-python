@@ -19,10 +19,10 @@ FULLSCALE_RAW_MIN = -36768
 
 @pytest.fixture(params=[1, 2, 3])
 def ai_sine_task(
-    task: nidaqmx.Task, sim_x_series_device: nidaqmx.system.Device, request: pytest.FixtureRequest
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device, request: pytest.FixtureRequest
 ) -> nidaqmx.Task:
     """Returns an analog input task with varying number of channels and a simulated sine wave."""
-    _create_ai_sine_channels(task, sim_x_series_device, number_of_channels=request.param)
+    _create_ai_sine_channels(task, sim_6363_device, number_of_channels=request.param)
     return task
 
 
@@ -110,9 +110,9 @@ def test___valid_array___readinto___returns_valid_samples(
 
 
 def test___odd_sized_array___readinto___returns_whole_samples_and_clears_padding(
-    task: nidaqmx.Task, sim_x_series_device: nidaqmx.system.Device
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> None:
-    _create_ai_sine_channels(task, sim_x_series_device, number_of_channels=2)
+    _create_ai_sine_channels(task, sim_6363_device, number_of_channels=2)
     # Initialize the array to full-scale readings to ensure it is overwritten.
     data = numpy.full(19, FULLSCALE_RAW_MIN, dtype=numpy.int16)
 
@@ -174,9 +174,9 @@ def test___valid_array___read_into___returns_valid_samples(
 
 
 def test___odd_sized_array___read_into___returns_whole_samples_and_clears_padding(
-    task: nidaqmx.Task, sim_x_series_device: nidaqmx.system.Device
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> None:
-    _create_ai_sine_channels(task, sim_x_series_device, number_of_channels=2)
+    _create_ai_sine_channels(task, sim_6363_device, number_of_channels=2)
     # Initialize the array to full-scale readings to ensure it is overwritten.
     data = numpy.full(19, FULLSCALE_RAW_MIN, dtype=numpy.int16)
 

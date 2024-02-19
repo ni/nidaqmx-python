@@ -18,8 +18,8 @@ from tests._event_utils import (
 
 
 @pytest.fixture
-def ai_task(task: nidaqmx.Task, any_x_series_device: nidaqmx.system.Device) -> nidaqmx.Task:
-    task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
+def ai_task(task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device) -> nidaqmx.Task:
+    task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
     return task
 
 
@@ -32,8 +32,8 @@ def ai_task_with_real_device(
 
 
 @pytest.fixture
-def ao_task(task: nidaqmx.Task, any_x_series_device: nidaqmx.system.Device) -> nidaqmx.Task:
-    task.ao_channels.add_ao_voltage_chan(any_x_series_device.ao_physical_chans[0].name)
+def ao_task(task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device) -> nidaqmx.Task:
+    task.ao_channels.add_ao_voltage_chan(sim_6363_device.ao_physical_chans[0].name)
     return task
 
 

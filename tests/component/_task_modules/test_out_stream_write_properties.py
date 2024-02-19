@@ -6,9 +6,9 @@ from nidaqmx.task import Task
 
 
 @pytest.fixture()
-def ao_task(task, any_x_series_device):
+def ao_task(task, sim_6363_device):
     """Gets AO voltage task."""
-    task.ao_channels.add_ao_voltage_chan(any_x_series_device.ao_physical_chans[0].name)
+    task.ao_channels.add_ao_voltage_chan(sim_6363_device.ao_physical_chans[0].name)
     yield task
 
 
