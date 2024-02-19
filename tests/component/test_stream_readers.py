@@ -1,6 +1,6 @@
 import ctypes
 import math
-from typing import Callable, List, Union
+from typing import Callable, List, TypeVar, Union
 
 import numpy
 import numpy.typing
@@ -716,9 +716,12 @@ def _bool_array_to_int(bool_array: numpy.typing.NDArray[numpy.bool_]) -> int:
     return result
 
 
+_DType = TypeVar("_DType", bound=numpy.typing.DTypeLike)
+
+
 def _read_and_copy(
-    read_func: Callable[[numpy.typing.NDArray], None], array: numpy.typing.NDArray
-) -> numpy.ndarray:
+    read_func: Callable[[numpy.typing.NDArray[_DType]], None], array: numpy.typing.NDArray[_DType]
+) -> numpy.ndarray[_DType]:
     read_func(array)
     return array.copy()
 
