@@ -1,6 +1,7 @@
-from datetime import timezone, timedelta
+from datetime import timezone
 from datetime import datetime as std_datetime
 from hightime import datetime as ht_datetime
+from hightime import timedelta as ht_timedelta
 from typing import Optional, Union
 
 from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
@@ -37,40 +38,38 @@ def convert_time_to_timestamp(dt: Union[std_datetime, ht_datetime], ts: Optional
     return ts
 
 
-def convert_to_local_timezone(expected_time_utc):
+def convert_to_desired_timezone(expected_time_utc, tzinfo):
     current_time_utc = ht_datetime.now(timezone.utc)
-    local_timezone_offset = current_time_utc.astimezone().utcoffset()
-    local_expected_time = expected_time_utc + local_timezone_offset
-    return local_expected_time
+    desired_timezone_offset = current_time_utc.astimezone(tz=tzinfo).utcoffset()
+    desired_expected_time = expected_time_utc + desired_timezone_offset
+    new_datetime = ht_datetime(
+            desired_expected_time.year,
+            desired_expected_time.month,
+            desired_expected_time.day,
+            desired_expected_time.hour,
+            desired_expected_time.minute,
+            desired_expected_time.second,
+            desired_expected_time.microsecond,
+            desired_expected_time.femtosecond,
+            desired_expected_time.yoctosecond,
+            tzinfo = tzinfo)
+    return new_datetime
 
 
-def negative_timestamp_to_1904_epoch(negative_timestamp):
+def timestamp_to_1904_epoch(timestamp, yoctoseconds):
     epoch_1904 = ht_datetime(1904, 1, 1)
-    seconds_from_1904 = timedelta(seconds = _BIAS_FROM_1970_EPOCH - abs(negative_timestamp))
-    datetime_1904 = epoch_1904 + seconds_from_1904
+    if timestamp < 0:
+        seconds_from_1904 = ht_timedelta(seconds = _BIAS_FROM_1970_EPOCH - abs(timestamp))
+    else:
+        seconds_from_1904 = ht_timedelta(seconds = _BIAS_FROM_1970_EPOCH + abs(timestamp))
+    datetime_1904 = epoch_1904 + seconds_from_1904 + ht_timedelta(yoctoseconds=yoctoseconds)
     return datetime_1904
 
 
 def convert_timestamp_to_time(ts: GrpcTimestamp, tzinfo: Optional[timezone] = None) -> ht_datetime:
     total_nanos = ts.ToNanoseconds()
     seconds, nanos = divmod(total_nanos, _NS_PER_S)
-
-    # Convert the nanoseconds to micro, femto, and yoctorseconds.
+    # Convert the nanoseconds to yoctoseconds.
     total_yoctoseconds = int(round(_YS_PER_NS * nanos))
-    microsecond, remainder_yoctoseconds = divmod(total_yoctoseconds, _YS_PER_US)
-    femtosecond, remainder_yoctoseconds = divmod(remainder_yoctoseconds, _YS_PER_FS)
-    yoctosecond = remainder_yoctoseconds
-
-    if seconds < 0:
-        dt = negative_timestamp_to_1904_epoch(seconds)
-    else:
-        dt = ht_datetime.fromtimestamp(seconds, timezone.utc)
-
-    # Add in precision
-    dt = dt.replace(microsecond=microsecond, femtosecond=femtosecond, yoctosecond=yoctosecond)
-
-    # Then convert to requested timezone
-    if seconds < 0:
-        return convert_to_local_timezone(dt)
-    else:
-        return dt.astimezone(tz=tzinfo)
+    dt = timestamp_to_1904_epoch(seconds, total_yoctoseconds)
+    return convert_to_desired_timezone(dt, tzinfo)
