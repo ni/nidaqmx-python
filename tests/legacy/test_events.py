@@ -19,7 +19,7 @@ class TestEvents:
         reason="Requires NI gRPC Device Server version 2.2 or later", raises=RpcError
     )
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_every_n_samples_event(self, task, any_x_series_device, seed):
+    def test_every_n_samples_event(self, task, sim_6363_device, seed):
         """Test for validating every n samples event."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
@@ -27,7 +27,7 @@ class TestEvents:
         samples_chunk = 100
         sample_rate = 5000
 
-        task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
+        task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
 
         samples_multiple = random.randint(2, 5)
         num_samples = samples_chunk * samples_multiple

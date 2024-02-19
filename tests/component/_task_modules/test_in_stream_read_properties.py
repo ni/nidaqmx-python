@@ -6,9 +6,9 @@ from nidaqmx.task import Task
 
 
 @pytest.fixture()
-def ai_task(task, any_x_series_device):
+def ai_task(task, sim_6363_device):
     """Gets AI voltage task."""
-    task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
+    task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
     yield task
 
 

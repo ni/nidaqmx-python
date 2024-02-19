@@ -37,8 +37,8 @@ def test___watchdog_task___task_not_running_get_expired_property____throws_daqer
     )
 
 
-def test___watchdog_task___get_enum_property___returns_value(any_x_series_device, watchdog_task):
-    do_line = any_x_series_device.do_lines[0]
+def test___watchdog_task___get_enum_property___returns_value(sim_6363_device, watchdog_task):
+    do_line = sim_6363_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
     ]
@@ -48,9 +48,9 @@ def test___watchdog_task___get_enum_property___returns_value(any_x_series_device
 
 
 def test___watchdog_task___set_enum_property___returns_assigned_value(
-    any_x_series_device, watchdog_task
+    sim_6363_device, watchdog_task
 ):
-    do_line = any_x_series_device.do_lines[0]
+    do_line = sim_6363_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
     ]
@@ -62,9 +62,9 @@ def test___watchdog_task___set_enum_property___returns_assigned_value(
 
 
 def test___watchdog_task___reset_enum_property___returns_default_value(
-    any_x_series_device, watchdog_task
+    sim_6363_device, watchdog_task
 ):
-    do_line = any_x_series_device.do_lines[0]
+    do_line = sim_6363_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
     ]
@@ -76,8 +76,8 @@ def test___watchdog_task___reset_enum_property___returns_default_value(
     assert watchdog_task.expir_trig_dig_edge_edge == Edge.RISING
 
 
-def test___watchdog_task___get_float64_property___returns_value(any_x_series_device, watchdog_task):
-    do_line = any_x_series_device.do_lines[0]
+def test___watchdog_task___get_float64_property___returns_value(sim_6363_device, watchdog_task):
+    do_line = sim_6363_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
     ]
@@ -87,9 +87,9 @@ def test___watchdog_task___get_float64_property___returns_value(any_x_series_dev
 
 
 def test___watchdog_task___set_float64_property___returns_assigned_value(
-    any_x_series_device, watchdog_task
+    sim_6363_device, watchdog_task
 ):
-    do_line = any_x_series_device.do_lines[0]
+    do_line = sim_6363_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
     ]
@@ -101,9 +101,9 @@ def test___watchdog_task___set_float64_property___returns_assigned_value(
 
 
 def test___watchdog_task___reset_float64_property___returns_default_value(
-    any_x_series_device, watchdog_task
+    sim_6363_device, watchdog_task
 ):
-    do_line = any_x_series_device.do_lines[0]
+    do_line = sim_6363_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
     ]
@@ -114,8 +114,8 @@ def test___watchdog_task___reset_float64_property___returns_default_value(
     assert watchdog_task.timeout == 10
 
 
-def test___watchdog_task___get_string_property___returns_value(any_x_series_device, watchdog_task):
-    do_line = any_x_series_device.do_lines[0]
+def test___watchdog_task___get_string_property___returns_value(sim_6363_device, watchdog_task):
+    do_line = sim_6363_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
     ]
@@ -125,9 +125,9 @@ def test___watchdog_task___get_string_property___returns_value(any_x_series_devi
 
 
 def test___watchdog_task___set_string_property___returns_assigned_value(
-    any_x_series_device, watchdog_task
+    sim_6363_device, watchdog_task
 ):
-    do_line = any_x_series_device.do_lines[0]
+    do_line = sim_6363_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
     ]
@@ -139,9 +139,9 @@ def test___watchdog_task___set_string_property___returns_assigned_value(
 
 
 def test___watchdog_task___reset_string_property___returns_default_value(
-    any_x_series_device, watchdog_task
+    sim_6363_device, watchdog_task
 ):
-    do_line = any_x_series_device.do_lines[0]
+    do_line = sim_6363_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
     ]
@@ -154,9 +154,9 @@ def test___watchdog_task___reset_string_property___returns_default_value(
 
 
 def test___watchdog_task___get_deprecated_properties___reports_warnings(
-    any_x_series_device, watchdog_task
+    sim_6363_device, watchdog_task
 ):
-    do_line = any_x_series_device.do_lines[0]
+    do_line = sim_6363_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
     ]
@@ -170,9 +170,9 @@ def test___watchdog_task___get_deprecated_properties___reports_warnings(
 
 
 def test___watchdog_task___set_deprecated_properties___reports_warnings(
-    any_x_series_device, watchdog_task
+    sim_6363_device, watchdog_task
 ):
-    do_line = any_x_series_device.do_lines[0]
+    do_line = sim_6363_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
     ]
@@ -183,9 +183,9 @@ def test___watchdog_task___set_deprecated_properties___reports_warnings(
 
 
 def test___watchdog_task___reset_deprecated_properties___reports_warnings(
-    any_x_series_device, watchdog_task
+    sim_6363_device, watchdog_task
 ):
-    do_line = any_x_series_device.do_lines[0]
+    do_line = sim_6363_device.do_lines[0]
     expir_states = [
         DOExpirationState(physical_channel=do_line.name, expiration_state=Level.TRISTATE)
     ]

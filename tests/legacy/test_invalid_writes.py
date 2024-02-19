@@ -16,14 +16,14 @@ class TestInvalidWrites:
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_insufficient_write_data(self, task, any_x_series_device, seed):
+    def test_insufficient_write_data(self, task, sim_6363_device, seed):
         """Test for validating write functionality with insufficient data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         # Randomly select physical channels to test.
-        number_of_channels = random.randint(2, len(any_x_series_device.ao_physical_chans))
-        channels_to_test = random.sample(any_x_series_device.ao_physical_chans, number_of_channels)
+        number_of_channels = random.randint(2, len(sim_6363_device.ao_physical_chans))
+        channels_to_test = random.sample(sim_6363_device.ao_physical_chans, number_of_channels)
 
         task.ao_channels.add_ao_voltage_chan(
             flatten_channel_string([c.name for c in channels_to_test]), max_val=10, min_val=-10
@@ -41,14 +41,14 @@ class TestInvalidWrites:
         assert e.value.error_code == -200524
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_insufficient_numpy_write_data(self, task, any_x_series_device, seed):
+    def test_insufficient_numpy_write_data(self, task, sim_6363_device, seed):
         """Test for validating write functionality with insufficient data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         # Randomly select physical channels to test.
-        number_of_channels = random.randint(2, len(any_x_series_device.ao_physical_chans))
-        channels_to_test = random.sample(any_x_series_device.ao_physical_chans, number_of_channels)
+        number_of_channels = random.randint(2, len(sim_6363_device.ao_physical_chans))
+        channels_to_test = random.sample(sim_6363_device.ao_physical_chans, number_of_channels)
 
         task.ao_channels.add_ao_voltage_chan(
             flatten_channel_string([c.name for c in channels_to_test]), max_val=10, min_val=-10
@@ -62,14 +62,14 @@ class TestInvalidWrites:
         assert e.value.error_code == -200524
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_extraneous_write_data(self, task, any_x_series_device, seed):
+    def test_extraneous_write_data(self, task, sim_6363_device, seed):
         """Test for validating write functionality with extraneous data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         # Randomly select physical channels to test.
-        number_of_channels = random.randint(1, len(any_x_series_device.ao_physical_chans))
-        channels_to_test = random.sample(any_x_series_device.ao_physical_chans, number_of_channels)
+        number_of_channels = random.randint(1, len(sim_6363_device.ao_physical_chans))
+        channels_to_test = random.sample(sim_6363_device.ao_physical_chans, number_of_channels)
 
         task.ao_channels.add_ao_voltage_chan(
             flatten_channel_string([c.name for c in channels_to_test]), max_val=10, min_val=-10
@@ -87,14 +87,14 @@ class TestInvalidWrites:
         assert e.value.error_code == -200524
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_extraneous_numpy_write_data(self, task, any_x_series_device, seed):
+    def test_extraneous_numpy_write_data(self, task, sim_6363_device, seed):
         """Test for validating write functionality with extraneous data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         # Randomly select physical channels to test.
-        number_of_channels = random.randint(1, len(any_x_series_device.ao_physical_chans))
-        channels_to_test = random.sample(any_x_series_device.ao_physical_chans, number_of_channels)
+        number_of_channels = random.randint(1, len(sim_6363_device.ao_physical_chans))
+        channels_to_test = random.sample(sim_6363_device.ao_physical_chans, number_of_channels)
 
         task.ao_channels.add_ao_voltage_chan(
             flatten_channel_string([c.name for c in channels_to_test]), max_val=10, min_val=-10
@@ -114,14 +114,14 @@ class TestInvalidWrites:
         assert e.value.error_code == -200524
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_numpy_write_incorrectly_shaped_data(self, task, any_x_series_device, seed):
+    def test_numpy_write_incorrectly_shaped_data(self, task, sim_6363_device, seed):
         """Test for validating write functionality with incorrectly shaped data."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
         # Randomly select physical channels to test.
-        number_of_channels = random.randint(2, len(any_x_series_device.ao_physical_chans))
-        channels_to_test = random.sample(any_x_series_device.ao_physical_chans, number_of_channels)
+        number_of_channels = random.randint(2, len(sim_6363_device.ao_physical_chans))
+        channels_to_test = random.sample(sim_6363_device.ao_physical_chans, number_of_channels)
         number_of_samples = random.randint(50, 100)
 
         task.ao_channels.add_ao_voltage_chan(

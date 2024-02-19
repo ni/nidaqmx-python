@@ -16,12 +16,12 @@ class TestTriggers(TestDAQmxIOBase):
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_arm_start_trigger(self, task, any_x_series_device, seed):
+    def test_arm_start_trigger(self, task, sim_6363_device, seed):
         """Test to validate start trigger functionality."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        counter = random.choice(self._get_device_counters(any_x_series_device))
+        counter = random.choice(self._get_device_counters(sim_6363_device))
 
         task.co_channels.add_co_pulse_chan_freq(counter)
         task.triggers.arm_start_trigger.trig_type = TriggerType.DIGITAL_EDGE
@@ -31,12 +31,12 @@ class TestTriggers(TestDAQmxIOBase):
         assert task.triggers.arm_start_trigger.trig_type == TriggerType.NONE
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_handshake_trigger(self, task, any_x_series_device, seed):
+    def test_handshake_trigger(self, task, sim_6363_device, seed):
         """Test to validate trigger handshake."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        counter = random.choice(self._get_device_counters(any_x_series_device))
+        counter = random.choice(self._get_device_counters(sim_6363_device))
 
         task.co_channels.add_co_pulse_chan_freq(counter)
 
@@ -45,12 +45,12 @@ class TestTriggers(TestDAQmxIOBase):
         assert e.value.error_code == -200452
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_pause_trigger(self, task, any_x_series_device, seed):
+    def test_pause_trigger(self, task, sim_6363_device, seed):
         """Test to validate pause trigger."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        counter = random.choice(self._get_device_counters(any_x_series_device))
+        counter = random.choice(self._get_device_counters(sim_6363_device))
 
         task.co_channels.add_co_pulse_chan_freq(counter)
         task.timing.cfg_implicit_timing(sample_mode=AcquisitionType.CONTINUOUS)
@@ -62,12 +62,12 @@ class TestTriggers(TestDAQmxIOBase):
         assert task.triggers.pause_trigger.trig_type == TriggerType.NONE
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_reference_trigger(self, task, any_x_series_device, seed):
+    def test_reference_trigger(self, task, sim_6363_device, seed):
         """Test to validate reference trigger."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        counter = random.choice(self._get_device_counters(any_x_series_device))
+        counter = random.choice(self._get_device_counters(sim_6363_device))
 
         task.co_channels.add_co_pulse_chan_freq(counter)
 
@@ -76,13 +76,13 @@ class TestTriggers(TestDAQmxIOBase):
         assert e.value.error_code == -200452
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_start_trigger(self, task, any_x_series_device, seed):
+    def test_start_trigger(self, task, sim_6363_device, seed):
         """Test to validate start trigger functionality."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        counter = random.choice(self._get_device_counters(any_x_series_device))
-        pfi_line = random.choice(self._get_device_pfi_lines(any_x_series_device))
+        counter = random.choice(self._get_device_counters(sim_6363_device))
+        pfi_line = random.choice(self._get_device_pfi_lines(sim_6363_device))
 
         task.co_channels.add_co_pulse_chan_freq(counter)
         task.triggers.start_trigger.cfg_dig_edge_start_trig(pfi_line, trigger_edge=Edge.FALLING)

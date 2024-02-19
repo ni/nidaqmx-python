@@ -14,13 +14,13 @@ class TestPropertyBasicDataTypes:
     This validates the property getter,setter and deleter methods for different basic data types.
     """
 
-    def test_boolean_property(self, task, any_x_series_device):
+    def test_boolean_property(self, task, sim_6363_device):
         """Test for validating boolean property."""
-        task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
+        task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
 
         task.timing.cfg_samp_clk_timing(1000)
         task.triggers.start_trigger.cfg_dig_edge_start_trig(
-            f"/{any_x_series_device.name}/Ctr0InternalOutput"
+            f"/{sim_6363_device.name}/Ctr0InternalOutput"
         )
 
         # Test property initial value.
@@ -34,9 +34,9 @@ class TestPropertyBasicDataTypes:
         del task.triggers.start_trigger.retriggerable
         assert not task.triggers.start_trigger.retriggerable
 
-    def test_enum_property(self, task, any_x_series_device):
+    def test_enum_property(self, task, sim_6363_device):
         """Test for validating enum property."""
-        task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
+        task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
 
         task.timing.cfg_samp_clk_timing(1000, sample_mode=AcquisitionType.CONTINUOUS)
 
@@ -51,10 +51,10 @@ class TestPropertyBasicDataTypes:
         del task.timing.samp_quant_samp_mode
         assert task.timing.samp_quant_samp_mode == AcquisitionType.CONTINUOUS
 
-    def test_float_property(self, task, any_x_series_device):
+    def test_float_property(self, task, sim_6363_device):
         """Test for validating float property."""
         ai_channel = task.ai_channels.add_ai_voltage_chan(
-            any_x_series_device.ai_physical_chans[0].name, max_val=5
+            sim_6363_device.ai_physical_chans[0].name, max_val=5
         )
 
         # Test property default value.
@@ -73,12 +73,12 @@ class TestPropertyBasicDataTypes:
         assert e.value.error_code == -200695
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_int_property(self, task, any_x_series_device, seed):
+    def test_int_property(self, task, sim_6363_device, seed):
         """Test for validating integer property."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        task.ci_channels.add_ci_count_edges_chan(any_x_series_device.ci_physical_chans[0].name)
+        task.ci_channels.add_ci_count_edges_chan(sim_6363_device.ci_physical_chans[0].name)
 
         # Test property default value.
         assert task.in_stream.offset == 0
@@ -96,10 +96,10 @@ class TestPropertyBasicDataTypes:
         del task.in_stream.offset
         assert task.in_stream.offset == 0
 
-    def test_string_property(self, task, any_x_series_device):
+    def test_string_property(self, task, sim_6363_device):
         """Test for validating string property."""
         ai_channel = task.ai_channels.add_ai_voltage_chan(
-            any_x_series_device.ai_physical_chans[0].name
+            sim_6363_device.ai_physical_chans[0].name
         )
 
         # Test property default value.
@@ -115,12 +115,12 @@ class TestPropertyBasicDataTypes:
         assert ai_channel.description == ""
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_uint_property(self, task, any_x_series_device, seed):
+    def test_uint_property(self, task, sim_6363_device, seed):
         """Test for validating uint property."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
+        task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
 
         task.timing.cfg_samp_clk_timing(1000)
 
@@ -145,16 +145,16 @@ class TestPropertyListDataTypes:
     list data types.
     """
 
-    def test_list_of_strings_property(self, any_x_series_device):
+    def test_list_of_strings_property(self, sim_6363_device):
         """Test for validating list of strings property."""
-        terminals = any_x_series_device.terminals
+        terminals = sim_6363_device.terminals
 
         assert isinstance(terminals, list)
         assert isinstance(terminals[0], str)
 
-    def test_list_of_enums_property(self, any_x_series_device):
+    def test_list_of_enums_property(self, sim_6363_device):
         """Test for validating list of enums property."""
-        terminals = any_x_series_device.ai_meas_types
+        terminals = sim_6363_device.ai_meas_types
 
         assert isinstance(terminals, list)
         assert isinstance(terminals[0], UsageTypeAI)
