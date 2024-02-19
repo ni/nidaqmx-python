@@ -285,7 +285,7 @@ def test___counter_reader___read_many_sample_pulse_time___returns_valid_samples(
     ],
 )
 def test___counter_reader___read_many_sample_pulse_time_with_wrong_dtype___raises_error_with_correct_dtype(
-    ci_pulse_time_task: nidaqmx.Task, high_time_dtype: numpy.generic, low_time_dtype: numpy.generic
+    ci_pulse_time_task: nidaqmx.Task, high_time_dtype: numpy.typing.DTypeLike, low_time_dtype: numpy.typing.DTypeLike
 ) -> None:
     reader = CounterReader(ci_pulse_time_task.in_stream)
     samples_to_read = 10
@@ -339,9 +339,9 @@ def test___counter_reader___read_many_sample_pulse_ticks___returns_valid_samples
 )
 def test___counter_reader___read_many_sample_pulse_ticks_with_wrong_dtype___raises_error_with_correct_dtype(
     ci_pulse_ticks_task: nidaqmx.Task,
-    high_ticks_dtype: numpy.generic,
+    high_ticks_dtype: numpy.typing.DTypeLike,
     high_ticks_default: Union[float, int],
-    low_ticks_dtype: numpy.generic,
+    low_ticks_dtype: numpy.typing.DTypeLike,
     low_ticks_default: Union[float, int],
 ) -> None:
     reader = CounterReader(ci_pulse_ticks_task.in_stream)

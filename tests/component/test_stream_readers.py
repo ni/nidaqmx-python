@@ -390,8 +390,8 @@ def test___power_single_channel_reader___read_many_sample___returns_valid_sample
 )
 def test___power_single_channel_reader___read_many_sample_with_wrong_dtype___raises_error_with_correct_dtype(
     pwr_single_channel_task: nidaqmx.Task,
-    voltage_dtype: numpy.generic,
-    current_dtype: numpy.generic,
+    voltage_dtype: numpy.typing.DTypeLike,
+    current_dtype: numpy.typing.DTypeLike,
 ) -> None:
     reader = PowerSingleChannelReader(pwr_single_channel_task.in_stream)
     samples_to_read = 10
@@ -433,7 +433,9 @@ def test___power_multi_channel_reader___read_one_sample___returns_valid_samples(
     ],
 )
 def test___power_multi_channel_reader___read_one_sample_with_wrong_dtype___raises_error_with_correct_dtype(
-    pwr_multi_channel_task: nidaqmx.Task, voltage_dtype: numpy.generic, current_dtype: numpy.generic
+    pwr_multi_channel_task: nidaqmx.Task,
+    voltage_dtype: numpy.typing.DTypeLike,
+    current_dtype: numpy.typing.DTypeLike,
 ) -> None:
     reader = PowerMultiChannelReader(pwr_multi_channel_task.in_stream)
     num_channels = pwr_multi_channel_task.number_of_channels
@@ -479,7 +481,9 @@ def test___power_multi_channel_reader___read_many_sample___returns_valid_samples
     ],
 )
 def test___power_multi_channel_reader___read_many_sample_with_wrong_dtype___raises_error_with_correct_dtype(
-    pwr_multi_channel_task: nidaqmx.Task, voltage_dtype: numpy.generic, current_dtype: numpy.generic
+    pwr_multi_channel_task: nidaqmx.Task,
+    voltage_dtype: numpy.typing.DTypeLike,
+    current_dtype: numpy.typing.DTypeLike,
 ) -> None:
     reader = PowerMultiChannelReader(pwr_multi_channel_task.in_stream)
     num_channels = pwr_multi_channel_task.number_of_channels
@@ -533,9 +537,9 @@ def test___power_binary_reader___read_many_sample___returns_valid_samples(
 )
 def test___power_binary_reader___read_many_sample_with_wrong_dtype___raises_error_with_correct_dtype(
     pwr_multi_channel_task: nidaqmx.Task,
-    voltage_dtype: numpy.generic,
+    voltage_dtype: numpy.typing.DTypeLike,
     voltage_default: Union[float, int],
-    current_dtype: numpy.generic,
+    current_dtype: numpy.typing.DTypeLike,
     current_default: Union[float, int],
 ) -> None:
     reader = PowerBinaryReader(pwr_multi_channel_task.in_stream)
