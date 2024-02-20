@@ -30,35 +30,6 @@ class AbsoluteTime(ctypes.Structure):
     MAX_FS = 10**9
     MAX_YS = 10**9
 
-    @classmethod
-    def from_datetime(cls, dt: Union[std_datetime, ht_datetime]) -> AbsoluteTime:
-        utc_dt = dt.astimezone(tz=timezone.utc)
-
-        # First, calculate whole seconds by converting from the 1970 to 1904 epoch.
-        timestamp_1970_epoch = utc_dt.timestamp()
-        was_negative = timestamp_1970_epoch < 0
-        timestamp_1904_epoch = int(timestamp_1970_epoch + AbsoluteTime._BIAS_FROM_1970_EPOCH)
-
-        # Our bias is positive, so our sign should only change if we were previously negative.
-        is_negative = timestamp_1904_epoch < 0
-        if is_negative != was_negative and not was_negative:
-            raise OverflowError(f"Can't represent {dt.isoformat()} in AbsoluteTime (1904 epoch)")
-
-        # Finally, convert the subseconds.
-        if isinstance(dt, ht_datetime):
-            total_yoctoseconds = dt.yoctosecond
-            total_yoctoseconds += dt.femtosecond * AbsoluteTime._YS_PER_FS
-            total_yoctoseconds += dt.microsecond * AbsoluteTime._YS_PER_US
-            lsb = int(
-                round(AbsoluteTime._NUM_SUBSECONDS * total_yoctoseconds / AbsoluteTime._YS_PER_S)
-            )
-        else:
-            lsb = int(
-                round(AbsoluteTime._NUM_SUBSECONDS * utc_dt.microsecond / AbsoluteTime._US_PER_S)
-            )
-
-        return AbsoluteTime(lsb=lsb, msb=timestamp_1904_epoch)
-
     def convert_to_desired_timezone(self, expected_time_utc, tzinfo):
         current_time_utc = ht_datetime.now(timezone.utc)
         desired_timezone_offset = current_time_utc.astimezone(tz=tzinfo).utcoffset()
@@ -75,6 +46,30 @@ class AbsoluteTime(ctypes.Structure):
             desired_expected_time.yoctosecond,
             tzinfo = tzinfo)
         return new_datetime
+
+    @classmethod
+    def from_datetime(cls, dt: Union[std_datetime, ht_datetime]) -> AbsoluteTime:
+        epoch_1904 = ht_datetime(1904, 1, 1, tzinfo=timezone.utc)
+        seconds_since_1904 = int(abs(dt - epoch_1904) / ht_timedelta(seconds=1))
+
+        # Convert the subseconds.
+        if isinstance(dt, ht_datetime):
+            total_yoctoseconds = dt.yoctosecond
+            total_yoctoseconds += dt.femtosecond * AbsoluteTime._YS_PER_FS
+            total_yoctoseconds += dt.microsecond * AbsoluteTime._YS_PER_US
+            lsb = int(
+                round(AbsoluteTime._NUM_SUBSECONDS * total_yoctoseconds / AbsoluteTime._YS_PER_S)
+            )
+        else:
+            lsb = int(
+                round(AbsoluteTime._NUM_SUBSECONDS * dt.microsecond / AbsoluteTime._US_PER_S)
+            )
+
+        # Consider if the date is before or after 1904
+        if dt < epoch_1904:
+            return AbsoluteTime(lsb=lsb, msb=-seconds_since_1904)
+        else:
+            return AbsoluteTime(lsb=lsb, msb=seconds_since_1904)
 
     def to_datetime(self, tzinfo: Optional[timezone] = None) -> ht_datetime:
         total_yoctoseconds = int(
