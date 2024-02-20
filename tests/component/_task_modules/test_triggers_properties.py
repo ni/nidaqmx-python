@@ -7,7 +7,7 @@ from nidaqmx.constants import TaskMode, TriggerType
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import DaqError
 from nidaqmx.task import Task
-from tests.unit._time_utils import JAN_01_2002_HIGHTIME, JAN_01_1904_HIGHTIME
+from tests.unit._time_utils import JAN_01_1904_HIGHTIME, JAN_01_2002_HIGHTIME
 
 
 @pytest.fixture()
@@ -119,9 +119,7 @@ def test___ai_task___reset_uint32_property___returns_default_value(ai_voltage_ta
     assert ai_voltage_task.triggers.reference_trigger.pretrig_samples == 2
 
 
-@pytest.mark.xfail(
-    reason="Timestamp conversion doesn't work on dates before 1970", raises=OSError
-)
+@pytest.mark.xfail(reason="Timestamp conversion doesn't work on dates before 1970", raises=OSError)
 def test___ai_voltage_field_daq_task___get_timestamp_property___returns_default_value(
     ai_voltage_field_daq_task: Task,
 ):
@@ -156,9 +154,7 @@ def test___ai_voltage_field_daq_task___set_timestamp_property___returns_assigned
     assert when_value.second == localized_value_to_test.second
 
 
-@pytest.mark.xfail(
-    reason="Timestamp conversion doesn't work on dates before 1970", raises=OSError
-)
+@pytest.mark.xfail(reason="Timestamp conversion doesn't work on dates before 1970", raises=OSError)
 def test___ai_voltage_field_daq_task___reset_timestamp_property___returns_default_value(
     ai_voltage_field_daq_task: Task,
 ):
