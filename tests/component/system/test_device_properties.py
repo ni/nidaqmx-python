@@ -144,7 +144,9 @@ def test___device_supports_cal___no_errors(real_x_series_device: Device) -> None
     assert is_cal_supported is True
 
 
-def test___cal_acc_connection_count__raises_attr_not_supported(real_x_series_device: Device) -> None:
+def test___cal_acc_connection_count__raises_attr_not_supported(
+    real_x_series_device: Device,
+) -> None:
     with pytest.raises(DaqError) as exc_info:
         _ = real_x_series_device.cal_acc_connection_count
 
