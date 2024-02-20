@@ -7,7 +7,7 @@ import nidaqmx
 try:
     import grpc
 except ImportError:
-    grpc = None
+    grpc = None  # type: ignore
 
 
 def create_grpc_options(mocker: MockerFixture, session_name="") -> nidaqmx.GrpcSessionOptions:
