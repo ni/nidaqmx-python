@@ -30,7 +30,7 @@ def _validate_count_edges_data(data: numpy.typing.NDArray[numpy.uint32]) -> None
         assert datum >= last
 
 
-def _validate_frequency_data(data: numpy.typing.NDArray[numpy.uint32]) -> None:
+def _validate_frequency_data(data: numpy.typing.NDArray[numpy.float64]) -> None:
     assert data == pytest.approx(EXPECTED_FREQUENCY, abs=EXPECTED_FREQUENCY_TOLERANCE)
 
 
