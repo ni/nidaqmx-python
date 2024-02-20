@@ -144,18 +144,18 @@ def test___device_supports_cal___no_errors(real_x_series_device: Device) -> None
     assert is_cal_supported is True
 
 
-def test___cal_acc_connection_count__raises_attr_not_supported(any_x_series_device: Device) -> None:
+def test___cal_acc_connection_count__raises_attr_not_supported(real_x_series_device: Device) -> None:
     with pytest.raises(DaqError) as exc_info:
-        _ = any_x_series_device.cal_acc_connection_count
+        _ = real_x_series_device.cal_acc_connection_count
 
     assert exc_info.value.error_code == DAQmxErrors.ATTR_NOT_SUPPORTED
 
 
 def test___cal_recommended_acc_connection_count_limit___raises_attr_not_supported(
-    any_x_series_device: Device,
+    real_x_series_device: Device,
 ) -> None:
     with pytest.raises(DaqError) as exc_info:
-        _ = any_x_series_device.cal_recommended_acc_connection_count_limit
+        _ = real_x_series_device.cal_recommended_acc_connection_count_limit
 
     assert exc_info.value.error_code == DAQmxErrors.ATTR_NOT_SUPPORTED
 
@@ -175,31 +175,31 @@ def test___cal_user_defined_info___no_errors(real_x_series_device: Device) -> No
         real_x_series_device.cal_user_defined_info = user_defined_info
 
 
-def test___cal_dev_temp___no_errors(sim_x_series_device: Device) -> None:
-    temperature = sim_x_series_device.cal_dev_temp
+def test___cal_dev_temp___no_errors(sim_6363_device: Device) -> None:
+    temperature = sim_6363_device.cal_dev_temp
 
     assert 0.0 == temperature
 
 
-def test___ext_cal_last_temp___no_errors(sim_x_series_device: Device) -> None:
-    temperature = sim_x_series_device.ext_cal_last_temp
+def test___ext_cal_last_temp___no_errors(sim_6363_device: Device) -> None:
+    temperature = sim_6363_device.ext_cal_last_temp
 
     assert 0.0 == temperature
 
 
-def test___ext_cal_recommended_interval___no_errors(sim_x_series_device: Device) -> None:
-    interval = sim_x_series_device.ext_cal_recommended_interval
+def test___ext_cal_recommended_interval___no_errors(sim_6363_device: Device) -> None:
+    interval = sim_6363_device.ext_cal_recommended_interval
 
     assert 24 == interval
 
 
-def test___self_cal_last_temp___no_errors(sim_x_series_device: Device) -> None:
-    temperature = sim_x_series_device.self_cal_last_temp
+def test___self_cal_last_temp___no_errors(sim_6363_device: Device) -> None:
+    temperature = sim_6363_device.self_cal_last_temp
 
     assert 0.0 == temperature
 
 
-def test___self_cal_supported___no_errors(any_x_series_device: Device) -> None:
-    is_cal_supported = any_x_series_device.self_cal_supported
+def test___self_cal_supported___no_errors(real_x_series_device: Device) -> None:
+    is_cal_supported = real_x_series_device.self_cal_supported
 
     assert is_cal_supported is True
