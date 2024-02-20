@@ -523,17 +523,22 @@ def test___event_callback_that_raises_exceptions___run_finite_acquisition___exce
         caplog, "handle_every_n_samples_event", every_n_samples_event_count
     )
     assert all(
-        _exception_matches(record.exc_info[1], done_event_exception)
+        _exception_matches(_get_exception(record), done_event_exception)
         for record in done_event_records
     )
     assert all(
-        _exception_matches(record.exc_info[1], every_n_samples_event_exception)
+        _exception_matches(_get_exception(record), every_n_samples_event_exception)
         for record in every_n_samples_event_records
     )
 
 
-def _exception_matches(e1: Exception, e2: Exception) -> bool:
+def _exception_matches(e1: BaseException, e2: BaseException) -> bool:
     return type(e1) == type(e2) and e1.args == e2.args
+
+
+def _get_exception(record: LogRecord) -> BaseException:
+    assert record.exc_info and record.exc_info[1]
+    return record.exc_info[1]
 
 
 def _wait_for_log_records(
