@@ -123,6 +123,7 @@ def _device_by_product_type(
             device_type == DeviceType.ANY
             or (device_type == DeviceType.REAL and not device.is_simulated)
             or (device_type == DeviceType.SIMULATED and device.is_simulated)
+            and len(device.ai_physical_chans) >= 1
         )
         if device_type_match and device.product_type == product_type:
             return device
@@ -145,6 +146,12 @@ def real_x_series_device(system: nidaqmx.system.System) -> nidaqmx.system.Device
 def sim_6363_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets a simulated 6363."""
     return _device_by_product_type("PCIe-6363", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_field_daq_device(system):
+    """Gets simulated Field DAQ device information."""
+    return _device_by_product_type("FD-11601", DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")

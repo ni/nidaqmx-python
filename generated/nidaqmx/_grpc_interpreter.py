@@ -8,6 +8,7 @@ import warnings
 from typing import Callable, Generic, Optional, TypeVar
 
 import google.protobuf.message
+from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
 import grpc
 import numpy
 

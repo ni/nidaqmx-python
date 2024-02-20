@@ -1,9 +1,13 @@
+from datetime import timezone
+
 import pytest
+from hightime import datetime as ht_datetime
 
 from nidaqmx.constants import TaskMode, TriggerType
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import DaqError
 from nidaqmx.task import Task
+from tests.unit._time_utils import JAN_01_1904_HIGHTIME, JAN_01_2002_HIGHTIME
 
 
 @pytest.fixture()
@@ -11,6 +15,20 @@ def ai_voltage_task(task, sim_6363_device):
     """Gets AI voltage task."""
     task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
     yield task
+
+
+@pytest.fixture()
+def ai_voltage_field_daq_task(task, sim_field_daq_device):
+    """Gets AI voltage task."""
+    task.ai_channels.add_ai_voltage_chan(sim_field_daq_device.ai_physical_chans[0].name)
+    yield task
+
+
+def convert_to_local_timezone(expected_time_utc):
+    current_time_utc = ht_datetime.now(timezone.utc)
+    local_timezone_offset = current_time_utc.astimezone().utcoffset()
+    local_expected_time = expected_time_utc + local_timezone_offset
+    return local_expected_time
 
 
 def test___ai_task___get_float_property___returns_default_value(ai_voltage_task: Task):
@@ -99,3 +117,57 @@ def test___ai_task___reset_uint32_property___returns_default_value(ai_voltage_ta
     del ai_voltage_task.triggers.reference_trigger.pretrig_samples
 
     assert ai_voltage_task.triggers.reference_trigger.pretrig_samples == 2
+
+
+@pytest.mark.xfail(reason="Timestamp conversion doesn't work on dates before 1970", raises=OSError)
+def test___ai_voltage_field_daq_task___get_timestamp_property___returns_default_value(
+    ai_voltage_field_daq_task: Task,
+):
+    ai_voltage_field_daq_task.timing.cfg_samp_clk_timing(1000)
+
+    when_value = ai_voltage_field_daq_task.triggers.start_trigger.trig_when
+
+    localized_default_value = convert_to_local_timezone(JAN_01_1904_HIGHTIME)
+    assert when_value.year == localized_default_value.year
+    assert when_value.month == localized_default_value.month
+    assert when_value.day == localized_default_value.day
+    assert when_value.hour == localized_default_value.hour
+    assert when_value.minute == localized_default_value.minute
+    assert when_value.second == localized_default_value.second
+
+
+def test___ai_voltage_field_daq_task___set_timestamp_property___returns_assigned_value(
+    ai_voltage_field_daq_task: Task,
+):
+    value_to_test = JAN_01_2002_HIGHTIME
+    ai_voltage_field_daq_task.timing.cfg_samp_clk_timing(1000)
+
+    ai_voltage_field_daq_task.triggers.start_trigger.trig_when = value_to_test
+
+    when_value = ai_voltage_field_daq_task.triggers.start_trigger.trig_when
+    localized_value_to_test = convert_to_local_timezone(value_to_test)
+    assert when_value.year == localized_value_to_test.year
+    assert when_value.month == localized_value_to_test.month
+    assert when_value.day == localized_value_to_test.day
+    assert when_value.hour == localized_value_to_test.hour
+    assert when_value.minute == localized_value_to_test.minute
+    assert when_value.second == localized_value_to_test.second
+
+
+@pytest.mark.xfail(reason="Timestamp conversion doesn't work on dates before 1970", raises=OSError)
+def test___ai_voltage_field_daq_task___reset_timestamp_property___returns_default_value(
+    ai_voltage_field_daq_task: Task,
+):
+    ai_voltage_field_daq_task.timing.cfg_samp_clk_timing(1000)
+    ai_voltage_field_daq_task.triggers.start_trigger.trig_when = JAN_01_2002_HIGHTIME
+
+    del ai_voltage_field_daq_task.triggers.start_trigger.trig_when
+
+    when_value = ai_voltage_field_daq_task.triggers.start_trigger.trig_when
+    localized_default_value = convert_to_local_timezone(JAN_01_1904_HIGHTIME)
+    assert when_value.year == localized_default_value.year
+    assert when_value.month == localized_default_value.month
+    assert when_value.day == localized_default_value.day
+    assert when_value.hour == localized_default_value.hour
+    assert when_value.minute == localized_default_value.minute
+    assert when_value.second == localized_default_value.second
