@@ -5,7 +5,6 @@ import functools
 from datetime import timezone
 from datetime import datetime as std_datetime
 from hightime import datetime as ht_datetime
-from hightime import timedelta as ht_timedelta
 from typing import Optional, Union
 
 
@@ -59,30 +58,33 @@ class AbsoluteTime(ctypes.Structure):
 
         return AbsoluteTime(lsb=lsb, msb=timestamp_1904_epoch)
 
-    def convert_to_desired_timezone(self, expected_time_utc, tzinfo):
-        current_time_utc = ht_datetime.now(timezone.utc)
-        desired_timezone_offset = current_time_utc.astimezone(tz=tzinfo).utcoffset()
-        desired_expected_time = expected_time_utc + desired_timezone_offset
-        new_datetime = ht_datetime(
-            desired_expected_time.year,
-            desired_expected_time.month,
-            desired_expected_time.day,
-            desired_expected_time.hour,
-            desired_expected_time.minute,
-            desired_expected_time.second,
-            desired_expected_time.microsecond,
-            desired_expected_time.femtosecond,
-            desired_expected_time.yoctosecond,
-            tzinfo = tzinfo)
-        return new_datetime
-
     def to_datetime(self, tzinfo: Optional[timezone] = None) -> ht_datetime:
+        # First, calculate whole seconds by converting from the 1904 to 1970 epoch.
+        timestamp_1904_epoch = self.msb
+        was_positive = timestamp_1904_epoch > 0
+        timestamp_1970_epoch = int(timestamp_1904_epoch - AbsoluteTime._BIAS_FROM_1970_EPOCH)
+
+        # Our bias is negative, so our sign should only change if we were previously positive.
+        is_positive = timestamp_1970_epoch > 0
+        if is_positive != was_positive and not was_positive:
+            raise OverflowError(f"Can't represent {str(self)} in datetime (1970 epoch)")
+
+        # Finally, convert the subseconds to micro, femto, and yoctoseconds.
         total_yoctoseconds = int(
             round(AbsoluteTime._YS_PER_S * self.lsb / AbsoluteTime._NUM_SUBSECONDS)
         )
-        datetime_1904 = ht_datetime(1904, 1, 1, tzinfo=timezone.utc)
-        dt = datetime_1904 + ht_timedelta(seconds=self.msb) + ht_timedelta(yoctoseconds=total_yoctoseconds)
-        return self.convert_to_desired_timezone(dt,tzinfo)
+        microsecond, remainder_yoctoseconds = divmod(total_yoctoseconds, AbsoluteTime._YS_PER_US)
+        femtosecond, remainder_yoctoseconds = divmod(
+            remainder_yoctoseconds, AbsoluteTime._YS_PER_FS
+        )
+        yoctosecond = remainder_yoctoseconds
+
+        # Start with UTC
+        dt = ht_datetime.fromtimestamp(timestamp_1970_epoch, timezone.utc)
+        # Add in precision
+        dt = dt.replace(microsecond=microsecond, femtosecond=femtosecond, yoctosecond=yoctosecond)
+        # Then convert to requested timezone
+        return dt.astimezone(tz=tzinfo)
 
     def __str__(self) -> str:
         return f"AbsoluteTime(lsb=0x{self.lsb:x}, msb=0x{self.msb:x})"
