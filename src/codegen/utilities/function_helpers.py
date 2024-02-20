@@ -197,12 +197,17 @@ def to_param_argtype(parameter):
         if parameter.ctypes_data_type == "ctypes.TaskHandle":
             return "lib_importer.task_handle"
         elif parameter.python_data_type == "datetime":
-            return "AbsoluteTime"
+            if parameter.direction == "in":
+                return "AbsoluteTime"
+            else:
+                return f"ctypes.POINTER(AbsoluteTime)"
         elif parameter.direction == "in":
             # If is string input parameter, use separate custom
             # argtype to convert from unicode to bytes.
             if parameter.ctypes_data_type == "ctypes.c_char_p":
                 return "ctypes_byte_str"
+            elif parameter.python_data_type == "timestampEvent":
+                return "ctypes.c_int32"
             else:
                 return parameter.ctypes_data_type or parameter.python_data_type
         else:
