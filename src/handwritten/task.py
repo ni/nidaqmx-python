@@ -1023,7 +1023,7 @@ class Task:
         """
         Wait until the specified timestamp has a value.
 
-        Use this VI to ensure the timestamp has a valid value to prevent an error when querying a timestamp value.
+        Use this method to ensure the timestamp has a valid value to prevent an error when querying a timestamp value.
 
         Args:
             timestamp_event(nidaqmx.constants.TimestampEvent): Specifies the timestamp type to wait on. 
