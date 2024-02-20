@@ -5,7 +5,7 @@ import contextlib
 import pathlib
 from concurrent.futures import ThreadPoolExecutor
 from enum import Enum
-from typing import Generator, List
+from typing import Generator, List, TYPE_CHECKING
 
 import pytest
 
@@ -18,7 +18,11 @@ try:
 
     from tests._grpc_utils import GrpcServerProcess
 except ImportError:
-    grpc = None
+    grpc = None  # type: ignore
+
+if TYPE_CHECKING:
+    # Not public yet: https://github.com/pytest-dev/pytest/issues/7469
+    import _pytest.mark.structures
 
 
 class Error(Exception):
@@ -53,7 +57,7 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
 
         grpc_only = metafunc.definition.get_closest_marker("grpc_only")
         library_only = metafunc.definition.get_closest_marker("library_only")
-        params: List[pytest.ParameterSet] = []
+        params: List[_pytest.mark.structures.ParameterSet] = []
 
         if not grpc_only:
             library_marks: List[pytest.MarkDecorator] = []
@@ -277,7 +281,7 @@ def sim_velocity_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
 
 
 @pytest.fixture(scope="function")
-def multi_threading_test_devices(system: nidaqmx.system.System) -> [nidaqmx.system.Device]:
+def multi_threading_test_devices(system: nidaqmx.system.System) -> List[nidaqmx.system.Device]:
     """Gets multi threading test devices information."""
     devices = []
     for device in system.devices:
