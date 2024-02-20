@@ -1023,19 +1023,17 @@ class Task:
         """
         Wait until the specified timestamp has a value.
 
-        Use this VI to ensure the timestamp has a valid value to prevent an error when querying a timestamp value.
+        Use this method to ensure the timestamp has a valid value to prevent an error when querying a timestamp value.
 
         Args:
             timestamp_event(nidaqmx.constants.TimestampEvent): Specifies the timestamp type to wait on. 
-            timeout (Optional[float]): Specifies the maximum amount of time in
-                seconds to wait for the measurement or generation to complete.
+            timeout (float): Specifies the maximum amount of time in
+                seconds to wait for a valid timestamp.
                 This method returns an error if the time elapses. The
                 default is 10. If you set timeout (sec) to
-                nidaqmx.WAIT_INFINITELY, the method waits indefinitely. If you
-                set timeout (sec) to 0, the method checks once and returns
-                an error if the measurement or generation is not done.
+                nidaqmx.WAIT_INFINITELY, the method waits indefinitely.
         """
-        self._interpreter.wait_for_valid_timestamp(self._handle, timestamp_event, timeout)
+        self._interpreter.wait_for_valid_timestamp(self._handle, timestamp_event.value, timeout)
 
     def wait_until_done(self, timeout=10.0):
         """

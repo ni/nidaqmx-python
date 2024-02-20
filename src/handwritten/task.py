@@ -1027,13 +1027,13 @@ class Task:
 
         Args:
             timestamp_event(nidaqmx.constants.TimestampEvent): Specifies the timestamp type to wait on. 
-            timeout (Optional[float]): Specifies the maximum amount of time in
+            timeout (float): Specifies the maximum amount of time in
                 seconds to wait for a valid timestamp.
                 This method returns an error if the time elapses. The
                 default is 10. If you set timeout (sec) to
                 nidaqmx.WAIT_INFINITELY, the method waits indefinitely.
         """
-        self._interpreter.wait_for_valid_timestamp(self._handle, timestamp_event, timeout)
+        self._interpreter.wait_for_valid_timestamp(self._handle, timestamp_event.value, timeout)
 
     def wait_until_done(self, timeout=10.0):
         """
