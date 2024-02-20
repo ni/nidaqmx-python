@@ -116,7 +116,6 @@ def _x_series_device(
         f"{device_type}. Cannot proceed to run tests. Import the NI MAX configuration file located "
         "at nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
-    return None
 
 
 def _device_by_product_type(
@@ -137,7 +136,6 @@ def _device_by_product_type(
         f"{device_type}. Cannot proceed to run tests. Import the NI MAX configuration file located "
         "at nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
-    return None
 
 
 @pytest.fixture(scope="function")
@@ -175,7 +173,6 @@ def sim_ts_chassis(system: nidaqmx.system.System) -> nidaqmx.system.Device:
         "Cannot proceed to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
-    return None
 
 
 @pytest.fixture(scope="function")
@@ -194,7 +191,6 @@ def sim_ts_power_device(sim_ts_chassis: nidaqmx.system.Device) -> nidaqmx.system
         "Cannot proceed to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
-    return None
 
 
 @pytest.fixture(scope="function")
@@ -213,7 +209,6 @@ def sim_ts_voltage_device(sim_ts_chassis: nidaqmx.system.Device) -> nidaqmx.syst
         "Cannot proceed to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
-    return None
 
 
 @pytest.fixture(scope="function")
@@ -235,7 +230,6 @@ def sim_ts_power_devices(sim_ts_chassis: nidaqmx.system.Device) -> List[nidaqmx.
         "device. Cannot proceed to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
-    return []
 
 
 @pytest.fixture(scope="function")
@@ -299,7 +293,6 @@ def multi_threading_test_devices(system: nidaqmx.system.System) -> List[nidaqmx.
         "to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
-    return None
 
 
 @pytest.fixture(scope="function")
@@ -315,7 +308,6 @@ def device(request, system: nidaqmx.system.System) -> nidaqmx.system.Device:
         "Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
-    return None
 
 
 @pytest.fixture(scope="session")
@@ -430,7 +422,6 @@ def persisted_task(request, system: nidaqmx.system.System):
         "Cannot proceed to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required tasks."
     )
-    return None
 
 
 @pytest.fixture(scope="function")
@@ -444,7 +435,6 @@ def persisted_scale(request, system: nidaqmx.system.System):
         "to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required scales."
     )
-    return None
 
 
 @pytest.fixture(scope="function")
@@ -460,7 +450,6 @@ def persisted_channel(request, system: nidaqmx.system.System):
         "Cannot proceed to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required channels."
     )
-    return None
 
 
 @pytest.fixture(scope="function")
