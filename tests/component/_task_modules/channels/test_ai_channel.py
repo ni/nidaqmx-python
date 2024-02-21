@@ -739,14 +739,13 @@ def test___task___add_ai_pressure_bridge_polynomial_chan___sets_channel_attribut
     task: Task,
     sim_bridge_device: Device,
 ) -> None:
-    # #482: Default argument values for bridge create channel functions are unusable
     chan: AIChannel = task.ai_channels.add_ai_pressure_bridge_polynomial_chan(
         sim_bridge_device.ai_physical_chans[0].name,
-        forward_coeffs=[0.0, 1.0],
-        reverse_coeffs=[0.0, 1.0],
     )
 
     assert chan.ai_meas_type == UsageTypeAI.PRESSURE_BRIDGE
+    assert chan.ai_bridge_poly_forward_coeff == [0.0, 50]
+    assert chan.ai_bridge_poly_reverse_coeff == [0.0, 0.02]
 
 
 # Nothing novel here vs. other bridge-based channels.
@@ -754,14 +753,14 @@ def test___task___add_ai_pressure_bridge_table_chan___sets_channel_attributes(
     task: Task,
     sim_bridge_device: Device,
 ) -> None:
-    # #482: Default argument values for bridge create channel functions are unusable
     chan: AIChannel = task.ai_channels.add_ai_pressure_bridge_table_chan(
         sim_bridge_device.ai_physical_chans[0].name,
-        electrical_vals=[-1.0, 0.0, 1.0],
-        physical_vals=[-100.0, 0.0, 100.0],
     )
 
     assert chan.ai_meas_type == UsageTypeAI.PRESSURE_BRIDGE
+    assert chan.ai_bridge_table_electrical_vals == [-2.0, 0.0, 2.0]
+    assert chan.ai_bridge_table_physical_vals == [-100.0, 0.0, 100.0]
+    
 
 
 # Nothing novel here vs. other bridge-based channels.
@@ -1144,14 +1143,13 @@ def test___task___add_ai_torque_bridge_polynomial_chan___sets_channel_attributes
     task: Task,
     sim_bridge_device: Device,
 ) -> None:
-    # #482: Default argument values for bridge create channel functions are unusable
     chan: AIChannel = task.ai_channels.add_ai_torque_bridge_polynomial_chan(
         sim_bridge_device.ai_physical_chans[0].name,
-        forward_coeffs=[0.0, 1.0],
-        reverse_coeffs=[0.0, 1.0],
     )
 
     assert chan.ai_meas_type == UsageTypeAI.TORQUE_BRIDGE
+    assert chan.ai_bridge_poly_forward_coeff == [0.0, 50]
+    assert chan.ai_bridge_poly_reverse_coeff == [0.0, 0.02]
 
 
 # Nothing novel here vs. other bridge-based channels.
@@ -1159,14 +1157,13 @@ def test___task___add_ai_torque_bridge_table_chan___sets_channel_attributes(
     task: Task,
     sim_bridge_device: Device,
 ) -> None:
-    # #482: Default argument values for bridge create channel functions are unusable
     chan: AIChannel = task.ai_channels.add_ai_torque_bridge_table_chan(
         sim_bridge_device.ai_physical_chans[0].name,
-        electrical_vals=[-1.0, 0.0, 1.0],
-        physical_vals=[-100.0, 0.0, 100.0],
     )
 
     assert chan.ai_meas_type == UsageTypeAI.TORQUE_BRIDGE
+    assert chan.ai_bridge_table_electrical_vals == [-2.0, 0.0, 2.0]
+    assert chan.ai_bridge_table_physical_vals == [-100.0, 0.0, 100.0]
 
 
 # Nothing novel here vs. other bridge-based channels.
