@@ -2,6 +2,7 @@
 
 import deprecation
 
+from datetime import datetime
 from nidaqmx import utils
 from nidaqmx._bitfield_utils import enum_bitfield_to_list
 from nidaqmx.utils import unflatten_channel_string
@@ -127,6 +128,52 @@ class Device:
             ports available on the device.
         """
         return DOPortsCollection(self._name, self._interpreter)
+
+    # endregion
+
+    # region Calibration Info property
+
+    @property
+    def ext_cal_last_date_and_time(self):
+        """
+        datetime: Indicates the last date and time that the device underwent an
+        external calibration.
+        """
+
+        last_date_and_time = self._interpreter.get_ext_cal_last_date_and_time(self._name)
+
+        return datetime(
+            year=last_date_and_time[0],
+            month=last_date_and_time[1],
+            day=last_date_and_time[2],
+            hour=last_date_and_time[3],
+            minute=last_date_and_time[4]
+        )
+
+    @property
+    def self_cal_last_date_and_time(self):
+        """
+        datetime: Indicates the last date and time that the device underwent a
+        self-calibration.
+        """
+
+        last_date_and_time = self._interpreter.get_self_cal_last_date_and_time(self._name)
+
+        return datetime(
+            year=last_date_and_time[0],
+            month=last_date_and_time[1],
+            day=last_date_and_time[2],
+            hour=last_date_and_time[3],
+            minute=last_date_and_time[4]
+        )
+
+    @property
+    def device_supports_cal(self):
+        """
+        Indicates if the device supports calibration.
+        """
+
+        return self._interpreter.device_supports_cal(self._name)
 
     # endregion
 
@@ -590,6 +637,68 @@ class Device:
         return BusType(val)
 
     @property
+    def cal_acc_connection_count(self):
+        """
+        int: Specifies the number of times a particular connection that
+            results in tangible wear and tear of onboard components has
+            been made on the accessory. This connection count is useful
+            for tracking accessory life and usage.
+        """
+
+        val = self._interpreter.get_cal_info_attribute_uint32(self._name, 0x2feb)
+        return val
+
+    @cal_acc_connection_count.setter
+    def cal_acc_connection_count(self, val):
+        self._interpreter.set_cal_info_attribute_uint32(self._name, 0x2feb, val)
+
+    @property
+    def cal_dev_temp(self):
+        """
+        float: Indicates in degrees Celsius the current temperature of
+            the device.
+        """
+
+        val = self._interpreter.get_cal_info_attribute_double(self._name, 0x223b)
+        return val
+
+    @property
+    def cal_recommended_acc_connection_count_limit(self):
+        """
+        int: Indicates the recommended connection count limit for an
+            accessory. If the accessory connection count exceeds this
+            limit, the accessory could require maintenance.
+        """
+
+        val = self._interpreter.get_cal_info_attribute_uint32(self._name, 0x2fec)
+        return val
+
+    @property
+    def cal_user_defined_info(self):
+        """
+        str: Specifies a string that contains arbitrary, user-defined
+            information. This number of characters in this string can be
+            no more than **cal_user_defined_info_max_size**.
+        """
+
+        val = self._interpreter.get_cal_info_attribute_string(self._name, 0x1861)
+        return val
+
+    @cal_user_defined_info.setter
+    def cal_user_defined_info(self, val):
+        self._interpreter.set_cal_info_attribute_string(self._name, 0x1861, val)
+
+    @property
+    def cal_user_defined_info_max_size(self):
+        """
+        int: Indicates the maximum length in characters of
+            **cal_user_defined_info**.
+        """
+
+        val = self._interpreter.get_cal_info_attribute_uint32(self._name, 0x191c)
+        return val
+
+    @property
     def carrier_serial_num(self):
         """
         int: Indicates the serial number of the device carrier. This
@@ -846,6 +955,28 @@ class Device:
             val, _TriggerUsageTypes, TriggerUsage)
 
     @property
+    def ext_cal_last_temp(self):
+        """
+        float: Indicates in degrees Celsius the temperature of the
+            device at the time of the last external calibration. Compare
+            this temperature to the current onboard temperature to
+            determine if you should perform another calibration.
+        """
+
+        val = self._interpreter.get_cal_info_attribute_double(self._name, 0x1867)
+        return val
+
+    @property
+    def ext_cal_recommended_interval(self):
+        """
+        int: Indicates in months the National Instruments recommended
+            interval between each external calibration of the device.
+        """
+
+        val = self._interpreter.get_cal_info_attribute_uint32(self._name, 0x1868)
+        return val
+
+    @property
     def field_daq_bank_devices(self):
         """
         List[:class:`nidaqmx.system.device.Device`]: Indicates a list
@@ -982,6 +1113,27 @@ class Device:
         return val
 
     @property
+    def self_cal_last_temp(self):
+        """
+        float: Indicates in degrees Celsius the temperature of the
+            device at the time of the last self-calibration. Compare
+            this temperature to the current onboard temperature to
+            determine if you should perform another calibration.
+        """
+
+        val = self._interpreter.get_cal_info_attribute_double(self._name, 0x1864)
+        return val
+
+    @property
+    def self_cal_supported(self):
+        """
+        bool: Indicates whether the device supports self-calibration.
+        """
+
+        val = self._interpreter.get_cal_info_attribute_bool(self._name, 0x1860)
+        return val
+
+    @property
     def serial_num(self):
         """
         int: Indicates the serial number of the device. This value is
@@ -1067,6 +1219,16 @@ class Device:
         """
 
         self._interpreter.reset_device(
+            self._name)
+
+    def restore_last_ext_cal_const(self):
+        """
+        This function nullifies any self-calibration you perform on the
+        device. If you have never performed a self-calibration on the
+        device, this function has no effect.
+        """
+
+        self._interpreter.restore_last_ext_cal_const(
             self._name)
 
     def self_cal(self):
@@ -1160,7 +1322,6 @@ class Device:
         self._interpreter.unreserve_network_device(self._name)
 
     # endregion
-
 
 class _DeviceAlternateConstructor(Device):
     """

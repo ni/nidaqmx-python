@@ -2214,6 +2214,21 @@ class LibraryInterpreter(BaseInterpreter):
             task_name)
         self.check_for_error(error_code)
 
+    def device_supports_cal(self, device_name):
+        cal_supported = c_bool32()
+
+        cfunc = lib_importer.windll.DAQmxDeviceSupportsCal
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(c_bool32)]
+
+        error_code = cfunc(
+            device_name, ctypes.byref(cal_supported))
+        self.check_for_error(error_code)
+        return cal_supported.value
+
     def disable_ref_trig(self, task):
         cfunc = lib_importer.windll.DAQmxDisableRefTrig
         if cfunc.argtypes is None:
@@ -2321,6 +2336,75 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.byref(value))
+        self.check_for_error(error_code)
+        return value.value
+
+    def get_cal_info_attribute_bool(self, device_name, attribute):
+        value = c_bool32()
+
+        cfunc = lib_importer.cdll.DAQmxGetCalInfoAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_int32]
+
+        error_code = cfunc(
+            device_name, attribute, ctypes.byref(value))
+        self.check_for_error(error_code)
+        return value.value
+
+    def get_cal_info_attribute_double(self, device_name, attribute):
+        value = ctypes.c_double()
+
+        cfunc = lib_importer.cdll.DAQmxGetCalInfoAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_int32]
+
+        error_code = cfunc(
+            device_name, attribute, ctypes.byref(value))
+        self.check_for_error(error_code)
+        return value.value
+
+    def get_cal_info_attribute_string(self, device_name, attribute):
+        cfunc = lib_importer.cdll.DAQmxGetCalInfoAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_int32]
+
+        temp_size = 0
+        while True:
+            value = ctypes.create_string_buffer(temp_size)
+            size_or_code = cfunc(
+                device_name, attribute, value, temp_size)
+            if is_string_buffer_too_small(size_or_code):
+                # Buffer size must have changed between calls; check again.
+                temp_size = 0
+            elif size_or_code > 0 and temp_size == 0:
+                # Buffer size obtained, use to retrieve data.
+                temp_size = size_or_code
+            else:
+                break
+        self.check_for_error(size_or_code)
+        return value.value.decode('ascii')
+
+    def get_cal_info_attribute_uint32(self, device_name, attribute):
+        value = ctypes.c_uint32()
+
+        cfunc = lib_importer.cdll.DAQmxGetCalInfoAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_int32]
+
+        error_code = cfunc(
+            device_name, attribute, ctypes.byref(value))
         self.check_for_error(error_code)
         return value.value
 
@@ -2772,6 +2856,30 @@ class LibraryInterpreter(BaseInterpreter):
             task, attribute, ctypes.byref(value))
         self.check_for_error(error_code)
         return value.value
+
+    def get_ext_cal_last_date_and_time(self, device_name):
+        year = ctypes.c_uint()
+        month = ctypes.c_uint()
+        day = ctypes.c_uint()
+        hour = ctypes.c_uint()
+        minute = ctypes.c_uint()
+
+        cfunc = lib_importer.windll.DAQmxGetExtCalLastDateAndTime
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint),
+                        ctypes.POINTER(ctypes.c_uint),
+                        ctypes.POINTER(ctypes.c_uint),
+                        ctypes.POINTER(ctypes.c_uint),
+                        ctypes.POINTER(ctypes.c_uint)]
+
+        error_code = cfunc(
+            device_name, ctypes.byref(year), ctypes.byref(month),
+            ctypes.byref(day), ctypes.byref(hour), ctypes.byref(minute))
+        self.check_for_error(error_code)
+        return year.value, month.value, day.value, hour.value, minute.value
 
     def get_persisted_chan_attribute_bool(self, channel, attribute):
         value = c_bool32()
@@ -3254,6 +3362,30 @@ class LibraryInterpreter(BaseInterpreter):
                 break
         self.check_for_error(size_or_code)
         return value.value.decode('ascii')
+
+    def get_self_cal_last_date_and_time(self, device_name):
+        year = ctypes.c_uint()
+        month = ctypes.c_uint()
+        day = ctypes.c_uint()
+        hour = ctypes.c_uint()
+        minute = ctypes.c_uint()
+
+        cfunc = lib_importer.windll.DAQmxGetSelfCalLastDateAndTime
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.POINTER(ctypes.c_uint),
+                        ctypes.POINTER(ctypes.c_uint),
+                        ctypes.POINTER(ctypes.c_uint),
+                        ctypes.POINTER(ctypes.c_uint),
+                        ctypes.POINTER(ctypes.c_uint)]
+
+        error_code = cfunc(
+            device_name, ctypes.byref(year), ctypes.byref(month),
+            ctypes.byref(day), ctypes.byref(hour), ctypes.byref(minute))
+        self.check_for_error(error_code)
+        return year.value, month.value, day.value, hour.value, minute.value
 
     def get_system_info_attribute_string(self, attribute):
         cfunc = lib_importer.cdll.DAQmxGetSystemInfoAttribute
@@ -4686,6 +4818,18 @@ class LibraryInterpreter(BaseInterpreter):
             task, attribute)
         self.check_for_error(error_code)
 
+    def restore_last_ext_cal_const(self, device_name):
+        cfunc = lib_importer.windll.DAQmxRestoreLastExtCalConst
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
+
+        error_code = cfunc(
+            device_name)
+        self.check_for_error(error_code)
+
     def save_global_chan(self, task, channel_name, save_as, author, options):
         cfunc = lib_importer.windll.DAQmxSaveGlobalChan
         if cfunc.argtypes is None:
@@ -4801,6 +4945,54 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint32(value))
+        self.check_for_error(error_code)
+
+    def set_cal_info_attribute_bool(self, device_name, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetCalInfoAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_int32]
+
+        error_code = cfunc(
+            device_name, attribute, c_bool32(value))
+        self.check_for_error(error_code)
+
+    def set_cal_info_attribute_double(self, device_name, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetCalInfoAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_int32]
+
+        error_code = cfunc(
+            device_name, attribute, ctypes.c_double(value))
+        self.check_for_error(error_code)
+
+    def set_cal_info_attribute_string(self, device_name, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetCalInfoAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_int32]
+
+        error_code = cfunc(
+            device_name, attribute, value.encode('ascii'))
+        self.check_for_error(error_code)
+
+    def set_cal_info_attribute_uint32(self, device_name, attribute, value):
+        cfunc = lib_importer.cdll.DAQmxSetCalInfoAttribute
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_int32]
+
+        error_code = cfunc(
+            device_name, attribute, ctypes.c_uint32(value))
         self.check_for_error(error_code)
 
     def set_chan_attribute_bool(self, task, channel, attribute, value):

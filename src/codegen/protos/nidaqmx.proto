@@ -180,6 +180,7 @@ service NiDAQmx {
   rpc GetExportedSignalAttributeInt32(GetExportedSignalAttributeInt32Request) returns (GetExportedSignalAttributeInt32Response);
   rpc GetExportedSignalAttributeString(GetExportedSignalAttributeStringRequest) returns (GetExportedSignalAttributeStringResponse);
   rpc GetExportedSignalAttributeUInt32(GetExportedSignalAttributeUInt32Request) returns (GetExportedSignalAttributeUInt32Response);
+  rpc GetExtCalLastDateAndTime(GetExtCalLastDateAndTimeRequest) returns (GetExtCalLastDateAndTimeResponse);
   rpc GetFirstSampClkWhen(GetFirstSampClkWhenRequest) returns (GetFirstSampClkWhenResponse);
   rpc GetFirstSampTimestampVal(GetFirstSampTimestampValRequest) returns (GetFirstSampTimestampValResponse);
   rpc GetNthTaskChannel(GetNthTaskChannelRequest) returns (GetNthTaskChannelResponse);
@@ -304,6 +305,7 @@ service NiDAQmx {
   rpc ResetTrigAttribute(ResetTrigAttributeRequest) returns (ResetTrigAttributeResponse);
   rpc ResetWatchdogAttribute(ResetWatchdogAttributeRequest) returns (ResetWatchdogAttributeResponse);
   rpc ResetWriteAttribute(ResetWriteAttributeRequest) returns (ResetWriteAttributeResponse);
+  rpc RestoreLastExtCalConst(RestoreLastExtCalConstRequest) returns (RestoreLastExtCalConstResponse);
   rpc SaveGlobalChan(SaveGlobalChanRequest) returns (SaveGlobalChanResponse);
   rpc SaveScale(SaveScaleRequest) returns (SaveScaleResponse);
   rpc SaveTask(SaveTaskRequest) returns (SaveTaskResponse);
@@ -7338,6 +7340,19 @@ message GetExportedSignalAttributeUInt32Response {
   uint32 value = 2;
 }
 
+message GetExtCalLastDateAndTimeRequest {
+  string device_name = 1;
+}
+
+message GetExtCalLastDateAndTimeResponse {
+  int32 status = 1;
+  uint32 year = 2;
+  uint32 month = 3;
+  uint32 day = 4;
+  uint32 hour = 5;
+  uint32 minute = 6;
+}
+
 message GetFirstSampClkWhenRequest {
   nidevice_grpc.Session task = 1;
 }
@@ -8971,6 +8986,14 @@ message ResetWriteAttributeRequest {
 }
 
 message ResetWriteAttributeResponse {
+  int32 status = 1;
+}
+
+message RestoreLastExtCalConstRequest {
+  string device_name = 1;
+}
+
+message RestoreLastExtCalConstResponse {
   int32 status = 1;
 }
 
