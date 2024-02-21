@@ -198,10 +198,7 @@ def test___datetime_before_1970_with_microseconds___convert_to_timestamp___is_re
     grpc_time.convert_time_to_timestamp(from_dt, to_ts)
     roundtrip_dt = grpc_time.convert_timestamp_to_time(to_ts, tzinfo=timezone.utc)
 
-    if microsecond:
-        assert to_ts.seconds == JAN_01_1850_TIMESTAMP_1970_EPOCH + 1
-    else:
-        assert to_ts.seconds == JAN_01_1850_TIMESTAMP_1970_EPOCH
+    assert to_ts.seconds == JAN_01_1850_TIMESTAMP_1970_EPOCH
     assert to_ts.nanos == nanoseconds
     assert roundtrip_dt.microsecond == microsecond
 
@@ -242,7 +239,7 @@ def test___datetime_after_1970_with_femtoseconds___convert_to_timestamp___is_rev
     [
         (JAN_01_1850_HIGHTIME, 0, 0),
         (JAN_01_1850_HIGHTIME, 1, 0),
-        # If femtoseconds get high enough, then it should round up
+        # # If femtoseconds get high enough, then it should round up
         (JAN_01_1850_HIGHTIME, 500000, 1),
         (JAN_01_1850_HIGHTIME, 999999, 1),
         # And of course, whole nanos

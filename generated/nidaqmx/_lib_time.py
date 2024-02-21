@@ -30,7 +30,9 @@ class AbsoluteTime(ctypes.Structure):
     MAX_FS = 10**9
     MAX_YS = 10**9
 
-    def convert_to_desired_timezone(self, expected_time_utc, tzinfo):
+    _EPOCH_1904 = ht_datetime(1904, 1, 1, tzinfo=timezone.utc)
+
+    def _convert_to_desired_timezone(self, expected_time_utc: Union[std_datetime, ht_datetime], tzinfo: Optional[timezone] = None):
         current_time_utc = ht_datetime.now(timezone.utc)
         desired_timezone_offset = current_time_utc.astimezone(tz=tzinfo).utcoffset()
         desired_expected_time = expected_time_utc + desired_timezone_offset
@@ -49,8 +51,7 @@ class AbsoluteTime(ctypes.Structure):
 
     @classmethod
     def from_datetime(cls, dt: Union[std_datetime, ht_datetime]) -> AbsoluteTime:
-        epoch_1904 = ht_datetime(1904, 1, 1, tzinfo=timezone.utc)
-        seconds_since_1904 = int(abs(dt - epoch_1904) / ht_timedelta(seconds=1))
+        seconds_since_1904 = int(abs(dt - AbsoluteTime._EPOCH_1904) / ht_timedelta(seconds=1))
 
         # Convert the subseconds.
         if isinstance(dt, ht_datetime):
@@ -66,7 +67,7 @@ class AbsoluteTime(ctypes.Structure):
             )
 
         # Consider if the date is before or after 1904
-        if dt < epoch_1904:
+        if dt < AbsoluteTime._EPOCH_1904:
             return AbsoluteTime(lsb=lsb, msb=-seconds_since_1904)
         else:
             return AbsoluteTime(lsb=lsb, msb=seconds_since_1904)
@@ -75,9 +76,8 @@ class AbsoluteTime(ctypes.Structure):
         total_yoctoseconds = int(
             round(AbsoluteTime._YS_PER_S * self.lsb / AbsoluteTime._NUM_SUBSECONDS)
         )
-        datetime_1904 = ht_datetime(1904, 1, 1, tzinfo=timezone.utc)
-        dt = datetime_1904 + ht_timedelta(seconds=self.msb) + ht_timedelta(yoctoseconds=total_yoctoseconds)
-        return self.convert_to_desired_timezone(dt,tzinfo)
+        dt = AbsoluteTime._EPOCH_1904 + ht_timedelta(seconds=self.msb) + ht_timedelta(yoctoseconds=total_yoctoseconds)
+        return self._convert_to_desired_timezone(dt,tzinfo)
 
     def __str__(self) -> str:
         return f"AbsoluteTime(lsb=0x{self.lsb:x}, msb=0x{self.msb:x})"

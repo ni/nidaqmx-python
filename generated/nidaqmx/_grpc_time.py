@@ -16,7 +16,9 @@ _YS_PER_US = 10**18
 _YS_PER_NS = 10**15
 _YS_PER_FS = 10**9
 
-def convert_to_desired_timezone(expected_time_utc, tzinfo):
+_EPOCH_1970 = ht_datetime(1970, 1, 1, tzinfo=timezone.utc)
+
+def _convert_to_desired_timezone(expected_time_utc: Union[std_datetime, ht_datetime], tzinfo: Optional[timezone] = None):
     current_time_utc = ht_datetime.now(timezone.utc)
     desired_timezone_offset = current_time_utc.astimezone(tz=tzinfo).utcoffset()
     desired_expected_time = expected_time_utc + desired_timezone_offset
@@ -35,11 +37,10 @@ def convert_to_desired_timezone(expected_time_utc, tzinfo):
 
 
 def convert_time_to_timestamp(dt: Union[std_datetime, ht_datetime], ts: Optional[GrpcTimestamp] = None) -> GrpcTimestamp:
-    epoch_1970 = ht_datetime(1970, 1, 1, tzinfo=timezone.utc)
-    if dt < epoch_1970:
-        seconds_since_1970 = -int(abs(dt - epoch_1970).total_seconds())
-    else:
-        seconds_since_1970 = int(abs(dt - epoch_1970).total_seconds())
+    seconds_since_1970 = int((dt - _EPOCH_1970) / ht_timedelta(seconds=1))
+    # We need to add one more negative second if applicable to compensate for a non-zero microsecond.
+    if dt.microsecond and (dt < _EPOCH_1970):
+        seconds_since_1970 -=1
     if ts is None:
         ts = GrpcTimestamp()
 
@@ -57,16 +58,10 @@ def convert_time_to_timestamp(dt: Union[std_datetime, ht_datetime], ts: Optional
     ts.FromNanoseconds(seconds_since_1970 * _NS_PER_S + nanos)
     return ts
 
-
-def timestamp_to_1970_epoch(timestamp, yoctoseconds):
-    epoch_1970 = ht_datetime(1970, 1, 1)
-    datetime_1970 = epoch_1970 + ht_timedelta(seconds = timestamp) + ht_timedelta(yoctoseconds=yoctoseconds)
-    return datetime_1970
-
 def convert_timestamp_to_time(ts: GrpcTimestamp, tzinfo: Optional[timezone] = None) -> ht_datetime:
     total_nanos = ts.ToNanoseconds()
     seconds, nanos = divmod(total_nanos, _NS_PER_S)
     # Convert the nanoseconds to yoctoseconds.
     total_yoctoseconds = int(round(_YS_PER_NS * nanos))
-    dt = timestamp_to_1970_epoch(seconds, total_yoctoseconds)
-    return convert_to_desired_timezone(dt, tzinfo)
+    dt = _EPOCH_1970 + ht_timedelta(seconds = seconds) + ht_timedelta(yoctoseconds=total_yoctoseconds)
+    return _convert_to_desired_timezone(dt, tzinfo)
