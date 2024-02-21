@@ -34,6 +34,14 @@ EXCLUDED_FUNCTIONS = [
     "SetDigitalPullUpPullDownStates",
 ]
 
+FUNCTIONS_WITH_LIST_DEFAULT = [ 
+    "add_ai_force_bridge_polynomial_chan",
+    "add_ai_force_bridge_table_chan",
+    "add_ai_pressure_bridge_polynomial_chan",
+    "add_ai_pressure_bridge_table_chan",
+    "add_ai_torque_bridge_polynomial_chan",
+    "add_ai_torque_bridge_table_chan",
+]
 
 def get_functions(metadata, class_name=""):
     """Converts the scrapigen metadata into a list of functions."""
@@ -75,6 +83,22 @@ def get_enums_used(functions):
 
     return sorted(used_enums)
 
+def get_list_default_value(func, param):
+    if func.function_name in FUNCTIONS_WITH_LIST_DEFAULT:
+        if param.parameter_name == "forward_coeffs":
+            return "[0.0, 1.0]"
+        elif param.parameter_name == "reverse_coeffs":
+            return "[0.0, 0.02]"
+        elif param.parameter_name == "electrical_vals":
+            return "[-2.0, 0.0, 2.0]"
+        elif param.parameter_name == "physical_vals":
+            return "[-100.0, 0.0, 100.0]"
+        else:
+            raise RuntimeError(
+                f'Unable to find parameter name while getting list default value for "{func.function_name}"'
+            )
+    else:
+        return "[]"
 
 def order_function_parameters_by_optional(function_parameters):
     """Sorts optional parameters and non optional parameters for function defintion."""
