@@ -534,7 +534,7 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         if forward_coeffs is None:
-            forward_coeffs = [0.0, 1.0]
+            forward_coeffs = [0.0, 50]
 
         if reverse_coeffs is None:
             reverse_coeffs = [0.0, 0.02]
@@ -1197,7 +1197,7 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         if forward_coeffs is None:
-            forward_coeffs = [0.0, 1.0]
+            forward_coeffs = [0.0, 50]
 
         if reverse_coeffs is None:
             reverse_coeffs = [0.0, 0.02]
@@ -1921,7 +1921,7 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         if forward_coeffs is None:
-            forward_coeffs = [0.0, 1.0]
+            forward_coeffs = [0.0, 50]
 
         if reverse_coeffs is None:
             reverse_coeffs = [0.0, 0.02]
