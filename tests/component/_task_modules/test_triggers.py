@@ -1,12 +1,12 @@
 from datetime import timezone
 
-import nidaqmx
 import pytest
 from hightime import datetime as ht_datetime, timedelta as ht_timedelta
 
-from nidaqmx.constants import Timescale, TimestampEvent, TriggerType, Edge
-from nidaqmx.task import Task
+import nidaqmx
+from nidaqmx.constants import Edge, Timescale, TimestampEvent, TriggerType
 from nidaqmx.error_codes import DAQmxErrors
+from nidaqmx.task import Task
 
 
 @pytest.fixture()
@@ -17,9 +17,7 @@ def ai_voltage_task(task, sim_time_aware_9215_device):
 
 
 @pytest.fixture()
-def ci_count_edges_task(
-    task
-) -> nidaqmx.Task:
+def ci_count_edges_task(task) -> nidaqmx.Task:
     chan = task.ci_channels.add_ci_count_edges_chan(
         "cdaqChassisTester/_ctr0",
     )
@@ -109,6 +107,9 @@ def test___first_sample_trigger___wait_for_valid_timestamp___no_errors(
     ai_voltage_task.start()
 
     ai_voltage_task.wait_for_valid_timestamp(TimestampEvent.FIRST_SAMPLE)
+
+    assert ai_voltage_field_daq_task.timing.first_samp_timestamp_enable == True
+    assert ai_voltage_field_daq_task.timing.first_samp_timestamp_timescale == Timescale.USE_HOST
 
 
 def test___timestamp_not_enabled___wait_for_valid_timestamp___throw_error(
