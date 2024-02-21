@@ -5464,6 +5464,7 @@ functions = {
             }
         ],
         'python_class_name': 'AIChannelCollection',
+        'python_codegen_method': 'CustomCode',
         'python_description': 'Creates channels to measure two-dimensional strain using a rosette strain gage.',
         'returns': 'int32'
     },
