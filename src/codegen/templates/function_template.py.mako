@@ -2,7 +2,7 @@
 <%
     from codegen.utilities.interpreter_helpers import INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES
     from codegen.utilities.helpers import camel_to_snake_case
-    from codegen.utilities.function_helpers import order_function_parameters_by_optional,get_parameters_docstring_lines_length,get_parameter_signature,get_instantiation_lines,generate_function_call_args
+    from codegen.utilities.function_helpers import order_function_parameters_by_optional,get_parameters_docstring_lines_length,get_parameter_signature,get_instantiation_lines,generate_function_call_args, get_list_default_value
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
     %>\
 ################################################################################
@@ -56,7 +56,7 @@
     %for input_param in func.parameters:
         %if input_param.is_list:
         if ${input_param.parameter_name} is None:
-            ${input_param.parameter_name} = []
+            ${input_param.parameter_name} = ${get_list_default_value(func, input_param)}
 
         %endif
     %endfor
