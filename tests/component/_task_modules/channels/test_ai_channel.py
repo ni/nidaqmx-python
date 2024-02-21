@@ -760,7 +760,6 @@ def test___task___add_ai_pressure_bridge_table_chan___sets_channel_attributes(
     assert chan.ai_meas_type == UsageTypeAI.PRESSURE_BRIDGE
     assert chan.ai_bridge_table_electrical_vals == [-2.0, 0.0, 2.0]
     assert chan.ai_bridge_table_physical_vals == [-100.0, 0.0, 100.0]
-    
 
 
 # Nothing novel here vs. other bridge-based channels.
