@@ -1,8 +1,7 @@
 from datetime import timezone
 
 import pytest
-from hightime import datetime as ht_datetime
-from hightime import timedelta as ht_timedelta
+from hightime import datetime as ht_datetime, timedelta as ht_timedelta
 
 from nidaqmx.constants import Timescale
 from nidaqmx.task import Task
@@ -19,8 +18,8 @@ def test___default_arguments___cfg_time_start_trig___no_errors(
     ai_voltage_task: Task,
 ):
     ai_voltage_task.timing.cfg_samp_clk_timing(1000)
-    utc_dt = ht_datetime.now(timezone.utc) # UTC time
-    dt_now = utc_dt.astimezone() # local time
+    utc_dt = ht_datetime.now(timezone.utc)  # UTC time
+    dt_now = utc_dt.astimezone()  # local time
     trigger_time = dt_now + ht_timedelta(seconds=10)
 
     ai_voltage_task.triggers.start_trigger.cfg_time_start_trig(trigger_time)
@@ -40,8 +39,8 @@ def test___arguments_provided___cfg_time_start_trig___no_errors(
     ai_voltage_task: Task,
 ):
     ai_voltage_task.timing.cfg_samp_clk_timing(1000)
-    utc_dt = ht_datetime.now(timezone.utc) # UTC time
-    dt_now = utc_dt.astimezone() # local time
+    utc_dt = ht_datetime.now(timezone.utc)  # UTC time
+    dt_now = utc_dt.astimezone()  # local time
     trigger_time = dt_now + ht_timedelta(seconds=10)
     # simulated devices don't support setting timescale to USE_IO_DEVICE
     timescale = Timescale.USE_HOST
