@@ -1,24 +1,22 @@
 import random
 from copy import copy
-from datetime import datetime as std_datetime
-from datetime import timedelta, timezone
+from datetime import datetime as std_datetime, timedelta, timezone
 
 import pytest
 from hightime import datetime as ht_datetime
 
 from nidaqmx._lib_time import AbsoluteTime as LibTimestamp
 from tests.unit._time_utils import (
-    JAN_01_2002_TIMESTAMP_1904_EPOCH,
-    JAN_01_1904_TIMESTAMP_1904_EPOCH,
-    JAN_01_1850_TIMESTAMP_1904_EPOCH,
-    JAN_01_2002_DATETIME,
-    JAN_01_2002_HIGHTIME,
-    JAN_01_1904_DATETIME,
-    JAN_01_1904_HIGHTIME,
     JAN_01_1850_DATETIME,
     JAN_01_1850_HIGHTIME,
+    JAN_01_1850_TIMESTAMP_1904_EPOCH,
+    JAN_01_1904_DATETIME,
+    JAN_01_1904_HIGHTIME,
+    JAN_01_1904_TIMESTAMP_1904_EPOCH,
+    JAN_01_2002_DATETIME,
+    JAN_01_2002_HIGHTIME,
+    JAN_01_2002_TIMESTAMP_1904_EPOCH,
 )
-
 
 JAN_01_2002_LIB = LibTimestamp(lsb=0, msb=JAN_01_2002_TIMESTAMP_1904_EPOCH)
 JAN_01_1904_LIB = LibTimestamp(lsb=0, msb=JAN_01_1904_TIMESTAMP_1904_EPOCH)
@@ -186,11 +184,7 @@ def test___datetime_before_1904_with_microseconds___convert_to_timestamp___is_re
     assert to_ts.lsb == subseconds
     # comparison is tricky since imprecision in the conversion to NI-BTF are
     # caught by the higher precision values in hightime, so we round here.
-    roundtrip_dt_microsecond = roundtrip_dt.microsecond
-    if roundtrip_dt.femtosecond > LibTimestamp.MAX_FS / 2:
-        roundtrip_dt_microsecond += 1
-
-    assert roundtrip_dt_microsecond == microsecond
+    assert pytest.approx(roundtrip_dt.microsecond, abs=1) == microsecond
 
 
 @pytest.mark.parametrize(

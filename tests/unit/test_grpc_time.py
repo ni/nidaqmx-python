@@ -239,7 +239,7 @@ def test___datetime_after_1970_with_femtoseconds___convert_to_timestamp___is_rev
     [
         (JAN_01_1850_HIGHTIME, 0, 0),
         (JAN_01_1850_HIGHTIME, 1, 0),
-        # # If femtoseconds get high enough, then it should round up
+        # If femtoseconds get high enough, then it should round up
         (JAN_01_1850_HIGHTIME, 500000, 1),
         (JAN_01_1850_HIGHTIME, 999999, 1),
         # And of course, whole nanos

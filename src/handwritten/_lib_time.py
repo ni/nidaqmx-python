@@ -51,7 +51,7 @@ class AbsoluteTime(ctypes.Structure):
 
     @classmethod
     def from_datetime(cls, dt: Union[std_datetime, ht_datetime]) -> AbsoluteTime:
-        seconds_since_1904 = int(abs(dt - AbsoluteTime._EPOCH_1904) / ht_timedelta(seconds=1))
+        seconds_since_1904 = int((dt - AbsoluteTime._EPOCH_1904) / ht_timedelta(seconds=1))
 
         # Convert the subseconds.
         if isinstance(dt, ht_datetime):
@@ -66,11 +66,7 @@ class AbsoluteTime(ctypes.Structure):
                 round(AbsoluteTime._NUM_SUBSECONDS * dt.microsecond / AbsoluteTime._US_PER_S)
             )
 
-        # Consider if the date is before or after 1904
-        if dt < AbsoluteTime._EPOCH_1904:
-            return AbsoluteTime(lsb=lsb, msb=-seconds_since_1904)
-        else:
-            return AbsoluteTime(lsb=lsb, msb=seconds_since_1904)
+        return AbsoluteTime(lsb=lsb, msb=seconds_since_1904)
 
     def to_datetime(self, tzinfo: Optional[timezone] = None) -> ht_datetime:
         total_yoctoseconds = int(
