@@ -86,9 +86,10 @@ def get_enums_used(functions):
 
 
 def get_list_default_value(func, param):
+    """Gets the default value for list parameters."""
     if func.function_name in FUNCTIONS_WITH_LIST_DEFAULT:
         if param.parameter_name == "forward_coeffs":
-            return "[0.0, 1.0]"
+            return "[0.0, 50]"
         elif param.parameter_name == "reverse_coeffs":
             return "[0.0, 0.02]"
         elif param.parameter_name == "electrical_vals":
