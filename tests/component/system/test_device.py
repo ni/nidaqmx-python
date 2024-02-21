@@ -1,3 +1,6 @@
+import pytest
+
+from nidaqmx.errors import RpcError
 from nidaqmx.system import Device
 
 
@@ -33,6 +36,13 @@ def test___devices_with_different_names___hash___not_equal(init_kwargs):
 
 def test___self_test_device___no_errors(sim_6363_device: Device) -> None:
     sim_6363_device.self_test_device()
+
+
+@pytest.mark.grpc_xfail(
+    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
+)
+def test___restore_last_ext_cal_const___no_errors(sim_6363_device: Device) -> None:
+    sim_6363_device.restore_last_ext_cal_const()
 
 
 def test___self_cal___no_errors(sim_6363_device: Device) -> None:

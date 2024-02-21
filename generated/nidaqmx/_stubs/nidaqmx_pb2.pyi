@@ -18025,6 +18025,51 @@ class GetExportedSignalAttributeUInt32Response(google.protobuf.message.Message):
 global___GetExportedSignalAttributeUInt32Response = GetExportedSignalAttributeUInt32Response
 
 @typing_extensions.final
+class GetExtCalLastDateAndTimeRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DEVICE_NAME_FIELD_NUMBER: builtins.int
+    device_name: builtins.str
+    def __init__(
+        self,
+        *,
+        device_name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_name", b"device_name"]) -> None: ...
+
+global___GetExtCalLastDateAndTimeRequest = GetExtCalLastDateAndTimeRequest
+
+@typing_extensions.final
+class GetExtCalLastDateAndTimeResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    YEAR_FIELD_NUMBER: builtins.int
+    MONTH_FIELD_NUMBER: builtins.int
+    DAY_FIELD_NUMBER: builtins.int
+    HOUR_FIELD_NUMBER: builtins.int
+    MINUTE_FIELD_NUMBER: builtins.int
+    status: builtins.int
+    year: builtins.int
+    month: builtins.int
+    day: builtins.int
+    hour: builtins.int
+    minute: builtins.int
+    def __init__(
+        self,
+        *,
+        status: builtins.int = ...,
+        year: builtins.int = ...,
+        month: builtins.int = ...,
+        day: builtins.int = ...,
+        hour: builtins.int = ...,
+        minute: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["day", b"day", "hour", b"hour", "minute", b"minute", "month", b"month", "status", b"status", "year", b"year"]) -> None: ...
+
+global___GetExtCalLastDateAndTimeResponse = GetExtCalLastDateAndTimeResponse
+
+@typing_extensions.final
 class GetFirstSampClkWhenRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -23452,6 +23497,36 @@ class ResetWriteAttributeResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["status", b"status"]) -> None: ...
 
 global___ResetWriteAttributeResponse = ResetWriteAttributeResponse
+
+@typing_extensions.final
+class RestoreLastExtCalConstRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DEVICE_NAME_FIELD_NUMBER: builtins.int
+    device_name: builtins.str
+    def __init__(
+        self,
+        *,
+        device_name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_name", b"device_name"]) -> None: ...
+
+global___RestoreLastExtCalConstRequest = RestoreLastExtCalConstRequest
+
+@typing_extensions.final
+class RestoreLastExtCalConstResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    status: builtins.int
+    def __init__(
+        self,
+        *,
+        status: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status"]) -> None: ...
+
+global___RestoreLastExtCalConstResponse = RestoreLastExtCalConstResponse
 
 @typing_extensions.final
 class SaveGlobalChanRequest(google.protobuf.message.Message):

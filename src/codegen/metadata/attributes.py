@@ -99,6 +99,13 @@ attributes = {
             'c_function_name': 'SelfCalSupported',
             'calling_convention': 'StdCall',
             'ctypes_data_type': 'c_bool32',
+            'handle_parameters': {
+                'deviceHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'deviceName'
+                }
+            },
             'has_explicit_read_buffer_size': False,
             'has_explicit_write_buffer_size': False,
             'is_list': False,
@@ -115,6 +122,13 @@ attributes = {
             'c_function_name': 'CalUserDefinedInfo',
             'calling_convention': 'StdCall',
             'ctypes_data_type': 'ctypes.c_char_p',
+            'handle_parameters': {
+                'deviceHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'deviceName'
+                }
+            },
             'has_explicit_read_buffer_size': True,
             'has_explicit_write_buffer_size': False,
             'is_list': False,
@@ -131,6 +145,13 @@ attributes = {
             'c_function_name': 'SelfCalLastTemp',
             'calling_convention': 'StdCall',
             'ctypes_data_type': 'ctypes.c_double',
+            'handle_parameters': {
+                'deviceHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'deviceName'
+                }
+            },
             'has_explicit_read_buffer_size': False,
             'has_explicit_write_buffer_size': False,
             'is_list': False,
@@ -147,6 +168,13 @@ attributes = {
             'c_function_name': 'ExtCalLastTemp',
             'calling_convention': 'StdCall',
             'ctypes_data_type': 'ctypes.c_double',
+            'handle_parameters': {
+                'deviceHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'deviceName'
+                }
+            },
             'has_explicit_read_buffer_size': False,
             'has_explicit_write_buffer_size': False,
             'is_list': False,
@@ -163,6 +191,13 @@ attributes = {
             'c_function_name': 'ExtCalRecommendedInterval',
             'calling_convention': 'StdCall',
             'ctypes_data_type': 'ctypes.c_uint',
+            'handle_parameters': {
+                'deviceHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'deviceName'
+                }
+            },
             'has_explicit_read_buffer_size': False,
             'has_explicit_write_buffer_size': False,
             'is_list': False,
@@ -179,6 +214,13 @@ attributes = {
             'c_function_name': 'CalUserDefinedInfoMaxSize',
             'calling_convention': 'StdCall',
             'ctypes_data_type': 'ctypes.c_uint',
+            'handle_parameters': {
+                'deviceHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'deviceName'
+                }
+            },
             'has_explicit_read_buffer_size': False,
             'has_explicit_write_buffer_size': False,
             'is_list': False,
@@ -195,6 +237,13 @@ attributes = {
             'c_function_name': 'CalDevTemp',
             'calling_convention': 'StdCall',
             'ctypes_data_type': 'ctypes.c_double',
+            'handle_parameters': {
+                'deviceHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'deviceName'
+                }
+            },
             'has_explicit_read_buffer_size': False,
             'has_explicit_write_buffer_size': False,
             'is_list': False,
@@ -211,6 +260,13 @@ attributes = {
             'c_function_name': 'CalAccConnectionCount',
             'calling_convention': 'StdCall',
             'ctypes_data_type': 'ctypes.c_uint',
+            'handle_parameters': {
+                'deviceHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'deviceName'
+                }
+            },
             'has_explicit_read_buffer_size': False,
             'has_explicit_write_buffer_size': False,
             'is_list': False,
@@ -227,6 +283,13 @@ attributes = {
             'c_function_name': 'CalRecommendedAccConnectionCountLimit',
             'calling_convention': 'StdCall',
             'ctypes_data_type': 'ctypes.c_uint',
+            'handle_parameters': {
+                'deviceHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'deviceName'
+                }
+            },
             'has_explicit_read_buffer_size': False,
             'has_explicit_write_buffer_size': False,
             'is_list': False,

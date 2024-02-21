@@ -33,17 +33,6 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "GetAIChanCalExpDate",
     "SetAIChanCalCalDate",
     "SetAIChanCalExpDate",
-    # Calibration
-    "DeviceSupportsCal",
-    "GetCalInfoAttributeBool",
-    "GetCalInfoAttributeDouble",
-    "GetCalInfoAttributeString",
-    "GetCalInfoAttributeUInt32",
-    "GetSelfCalLastDateAndTime",
-    "SetCalInfoAttributeBool",
-    "SetCalInfoAttributeDouble",
-    "SetCalInfoAttributeString",
-    "SetCalInfoAttributeUInt32",
     # Real-time
     "GetRealTimeAttributeBool",
     "GetRealTimeAttributeInt32",

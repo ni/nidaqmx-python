@@ -12521,6 +12521,11 @@ functions = {
     },
     'DeviceSupportsCal': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -12543,7 +12548,8 @@ functions = {
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_class_name': 'Device',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'DisableRefTrig': {
@@ -12963,6 +12969,11 @@ functions = {
     'GetCalInfoAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -12994,6 +13005,11 @@ functions = {
     'GetCalInfoAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -13025,6 +13041,11 @@ functions = {
     'GetCalInfoAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -13067,6 +13088,11 @@ functions = {
     'GetCalInfoAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -14086,6 +14112,79 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'CustomCode',
+        'returns': 'int32'
+    },
+    'GetExtCalLastDateAndTime': {
+        'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
+        'parameters': [
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'deviceName',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint',
+                'direction': 'out',
+                'is_optional_in_python': False,
+                'name': 'year',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
+                'type': 'uInt32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint',
+                'direction': 'out',
+                'is_optional_in_python': False,
+                'name': 'month',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
+                'type': 'uInt32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint',
+                'direction': 'out',
+                'is_optional_in_python': False,
+                'name': 'day',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
+                'type': 'uInt32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint',
+                'direction': 'out',
+                'is_optional_in_python': False,
+                'name': 'hour',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
+                'type': 'uInt32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint',
+                'direction': 'out',
+                'is_optional_in_python': False,
+                'name': 'minute',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
+                'type': 'uInt32'
+            }
+        ],
+        'python_class_name': 'Device',
         'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
@@ -15404,6 +15503,11 @@ functions = {
     },
     'GetSelfCalLastDateAndTime': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -15466,7 +15570,8 @@ functions = {
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_class_name': 'Device',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetStartTrigTimestampVal': {
@@ -20268,6 +20373,30 @@ functions = {
         'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
+    'RestoreLastExtCalConst': {
+        'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
+        'parameters': [
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'deviceName',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
+                'type': 'const char[]',
+                'use_in_python_api': False
+            }
+        ],
+        'python_class_name': 'Device',
+        'python_description': 'This function nullifies any self-calibration you perform on the device. If you have never performed a self-calibration on the device, this function has no effect.',
+        'returns': 'int32'
+    },
     'SaveGlobalChan': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -20691,6 +20820,11 @@ functions = {
     'SetCalInfoAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -20722,6 +20856,11 @@ functions = {
     'SetCalInfoAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -20753,6 +20892,11 @@ functions = {
     'SetCalInfoAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -20784,6 +20928,11 @@ functions = {
     'SetCalInfoAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
