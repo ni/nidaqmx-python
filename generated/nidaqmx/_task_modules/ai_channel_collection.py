@@ -534,10 +534,10 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         if forward_coeffs is None:
-            forward_coeffs = []
+            forward_coeffs = [0.0, 1.0]
 
         if reverse_coeffs is None:
-            reverse_coeffs = []
+            reverse_coeffs = [0.0, 0.02]
 
         forward_coeffs = numpy.float64(forward_coeffs)
         reverse_coeffs = numpy.float64(reverse_coeffs)
@@ -624,10 +624,10 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         if electrical_vals is None:
-            electrical_vals = []
+            electrical_vals = [-2.0, 0.0, 2.0]
 
         if physical_vals is None:
-            physical_vals = []
+            physical_vals = [-100.0, 0.0, 100.0]
 
         electrical_vals = numpy.float64(electrical_vals)
         physical_vals = numpy.float64(physical_vals)
@@ -1197,10 +1197,10 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         if forward_coeffs is None:
-            forward_coeffs = []
+            forward_coeffs = [0.0, 1.0]
 
         if reverse_coeffs is None:
-            reverse_coeffs = []
+            reverse_coeffs = [0.0, 0.02]
 
         forward_coeffs = numpy.float64(forward_coeffs)
         reverse_coeffs = numpy.float64(reverse_coeffs)
@@ -1289,10 +1289,10 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         if electrical_vals is None:
-            electrical_vals = []
+            electrical_vals = [-2.0, 0.0, 2.0]
 
         if physical_vals is None:
-            physical_vals = []
+            physical_vals = [-100.0, 0.0, 100.0]
 
         electrical_vals = numpy.float64(electrical_vals)
         physical_vals = numpy.float64(physical_vals)
@@ -1921,10 +1921,10 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         if forward_coeffs is None:
-            forward_coeffs = []
+            forward_coeffs = [0.0, 1.0]
 
         if reverse_coeffs is None:
-            reverse_coeffs = []
+            reverse_coeffs = [0.0, 0.02]
 
         forward_coeffs = numpy.float64(forward_coeffs)
         reverse_coeffs = numpy.float64(reverse_coeffs)
@@ -2012,10 +2012,10 @@ class AIChannelCollection(ChannelCollection):
             Indicates the newly created channel object.
         """
         if electrical_vals is None:
-            electrical_vals = []
+            electrical_vals = [-2.0, 0.0, 2.0]
 
         if physical_vals is None:
-            physical_vals = []
+            physical_vals = [-100.0, 0.0, 100.0]
 
         electrical_vals = numpy.float64(electrical_vals)
         physical_vals = numpy.float64(physical_vals)
