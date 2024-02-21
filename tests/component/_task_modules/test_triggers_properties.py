@@ -18,9 +18,9 @@ def ai_voltage_task(task, sim_6363_device):
 
 
 @pytest.fixture()
-def ai_voltage_field_daq_task(task, sim_field_daq_device):
+def ai_voltage_field_daq_task(task, sim_time_aware_9215_device):
     """Gets AI voltage task."""
-    task.ai_channels.add_ai_voltage_chan(sim_field_daq_device.ai_physical_chans[0].name)
+    task.ai_channels.add_ai_voltage_chan(sim_time_aware_9215_device.ai_physical_chans[0].name)
     yield task
 
 

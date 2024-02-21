@@ -116,14 +116,13 @@ def _x_series_device(
 
 
 def _device_by_product_type(
-    product_type, device_type: DeviceType, system: nidaqmx.system.System
+    product_type: str, device_type: DeviceType, system: nidaqmx.system.System
 ) -> nidaqmx.system.Device:
     for device in system.devices:
         device_type_match = (
             device_type == DeviceType.ANY
             or (device_type == DeviceType.REAL and not device.is_simulated)
             or (device_type == DeviceType.SIMULATED and device.is_simulated)
-            and len(device.ai_physical_chans) >= 1
         )
         if device_type_match and device.product_type == product_type:
             return device
@@ -133,7 +132,20 @@ def _device_by_product_type(
         f"{device_type}. Cannot proceed to run tests. Import the NI MAX configuration file located "
         "at nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
-    return None
+
+
+def _cdaq_module_by_product_type(
+    product_type: str, cdaq_chassis: nidaqmx.system.Device
+) -> nidaqmx.system.Device:
+    for module in cdaq_chassis.chassis_module_devices:
+        if module.product_type == product_type:
+            return module
+
+    pytest.skip(
+        f"Could not detect a {product_type} device within {cdaq_chassis.name}. "
+        "Cannot proceed to run tests. Import the NI MAX configuration file located at "
+        "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
+    )
 
 
 @pytest.fixture(scope="function")
@@ -144,14 +156,20 @@ def real_x_series_device(system: nidaqmx.system.System) -> nidaqmx.system.Device
 
 @pytest.fixture(scope="function")
 def sim_6363_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
-    """Gets a simulated 6363."""
+    """Gets simulated 6363 device information."""
     return _device_by_product_type("PCIe-6363", DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")
-def sim_field_daq_device(system):
-    """Gets simulated Field DAQ device information."""
-    return _device_by_product_type("FD-11601", DeviceType.SIMULATED, system)
+def sim_9185_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
+    """Gets simulated 9185 device information."""
+    return _device_by_product_type("cDAQ-9185", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_time_aware_9215_device(sim_9185_device: nidaqmx.system.Device) -> nidaqmx.system.Device:
+    """Gets device information for a simulated 9215 device within a 9185."""
+    return _cdaq_module_by_product_type("NI 9215", sim_9185_device)
 
 
 @pytest.fixture(scope="function")
