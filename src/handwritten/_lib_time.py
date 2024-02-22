@@ -51,7 +51,7 @@ class AbsoluteTime(ctypes.Structure):
 
     @classmethod
     def from_datetime(cls, dt: Union[std_datetime, ht_datetime]) -> AbsoluteTime:
-        seconds_since_1904 = int((dt - AbsoluteTime._EPOCH_1904) / ht_timedelta(seconds=1))
+        seconds_since_1904 = int((dt - AbsoluteTime._EPOCH_1904).total_seconds())
 
         # Convert the subseconds.
         if isinstance(dt, ht_datetime):

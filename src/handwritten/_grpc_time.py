@@ -37,7 +37,7 @@ def _convert_to_desired_timezone(expected_time_utc: Union[std_datetime, ht_datet
 
 
 def convert_time_to_timestamp(dt: Union[std_datetime, ht_datetime], ts: Optional[GrpcTimestamp] = None) -> GrpcTimestamp:
-    seconds_since_1970 = int((dt - _EPOCH_1970) / ht_timedelta(seconds=1))
+    seconds_since_1970 = int((dt - _EPOCH_1970).total_seconds())
     # We need to add one more negative second if applicable to compensate for a non-zero microsecond.
     if dt.microsecond and (dt < _EPOCH_1970):
         seconds_since_1970 -=1
