@@ -55,7 +55,9 @@ class TestInvalidWrites:
         )
 
         number_of_samples = random.randint(1, number_of_channels - 1)
-        values_to_test = numpy.float64([random.uniform(-10, 10) for _ in range(number_of_samples)])
+        values_to_test = numpy.array(
+            [random.uniform(-10, 10) for _ in range(number_of_samples)], dtype=numpy.float64
+        )
 
         with pytest.raises(DaqError) as e:
             task.write(values_to_test, auto_start=True)
@@ -106,7 +108,7 @@ class TestInvalidWrites:
             [random.uniform(-10, 10) for _ in range(10)] for _ in range(number_of_data_rows)
         ]
 
-        numpy_data = numpy.float64(values_to_test)
+        numpy_data = numpy.array(values_to_test, dtype=numpy.float64)
 
         with pytest.raises(DaqError) as e:
             task.write(numpy_data, auto_start=True)
@@ -132,11 +134,12 @@ class TestInvalidWrites:
         # Generate write data but swap the rows and columns so the numpy
         # array is shaped incorrectly, but the amount of samples is still
         # the same.
-        values_to_test = numpy.float64(
+        values_to_test = numpy.array(
             [
                 [random.uniform(-10, 10) for _ in range(number_of_channels)]
                 for _ in range(number_of_samples)
-            ]
+            ],
+            dtype=numpy.float64,
         )
 
         with pytest.raises(DaqError) as e:

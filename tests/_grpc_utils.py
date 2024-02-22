@@ -1,8 +1,9 @@
 """Helper functions to be used in nidaqmx tests."""
-import os
+
 import pathlib
 import re
 import subprocess
+import sys
 import threading
 
 import pytest
@@ -15,6 +16,7 @@ class GrpcServerProcess:
         """Creates a GrpcServerProcess instance."""
         server_exe = self._get_grpc_server_exe()
         self._proc = subprocess.Popen([str(server_exe)], stdout=subprocess.PIPE)
+        assert self._proc.stdout is not None
 
         # Read/parse output until we find the port number or the process exits; discard the rest.
         try:
@@ -48,22 +50,23 @@ class GrpcServerProcess:
         self._stdout_thread.join()
 
     def _get_grpc_server_exe(self):
-        if os.name != "nt":
-            pytest.skip("Only supported on Windows")
-        import winreg
+        if sys.platform == "win32":
+            import winreg
 
-        try:
-            reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
-            read64key = winreg.KEY_READ | winreg.KEY_WOW64_64KEY
-            with winreg.OpenKey(
-                reg, r"SOFTWARE\National Instruments\Common\Installer", access=read64key
-            ) as key:
-                shared_dir, _ = winreg.QueryValueEx(key, "NISHAREDDIR64")
-        except OSError:
-            pytest.skip("NI gRPC Device Server not installed")
-        server_exe = (
-            pathlib.Path(shared_dir) / "NI gRPC Device Server" / "ni_grpc_device_server.exe"
-        )
-        if not server_exe.exists():
-            pytest.skip("NI gRPC Device Server not installed")
-        return server_exe
+            try:
+                reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
+                read64key = winreg.KEY_READ | winreg.KEY_WOW64_64KEY
+                with winreg.OpenKey(
+                    reg, r"SOFTWARE\National Instruments\Common\Installer", access=read64key
+                ) as key:
+                    shared_dir, _ = winreg.QueryValueEx(key, "NISHAREDDIR64")
+            except OSError:
+                pytest.skip("NI gRPC Device Server not installed")
+            server_exe = (
+                pathlib.Path(shared_dir) / "NI gRPC Device Server" / "ni_grpc_device_server.exe"
+            )
+            if not server_exe.exists():
+                pytest.skip("NI gRPC Device Server not installed")
+            return server_exe
+        else:
+            pytest.skip("Only supported on Windows")

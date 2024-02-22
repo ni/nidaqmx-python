@@ -108,13 +108,21 @@ build-backend = "poetry.masonry.api"
 
 [tool.mypy]
 check_untyped_defs = true
+namespace_packages = true
 plugins = "numpy.typing.mypy_plugin"
+warn_redundant_casts = true
+warn_unreachable = true
+warn_unused_configs = true
 
 [[tool.mypy.overrides]]
 module = [
-  "deprecation",
+  # https://github.com/briancurtin/deprecation/issues/56 - Add type information (PEP 561)
+  "deprecation.*",
   "grpc.experimental.*",
+  # https://github.com/ni/hightime/issues/4 - Add type annotations
+  "hightime.*",
   "importlib_metadata",
-  "mako.*"
+  "mako.*",
+  "nidaqmx.*",
 ]
 ignore_missing_imports = true

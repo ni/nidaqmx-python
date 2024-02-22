@@ -179,12 +179,12 @@ def _bool_array_to_int(bool_array: numpy.typing.NDArray[numpy.bool_]) -> int:
     return result
 
 
-_DType = TypeVar("_DType", bound=numpy.typing.DTypeLike)
+_D = TypeVar("_D", bound=numpy.generic, covariant=True)
 
 
 def _read_and_copy(
-    read_func: Callable[[numpy.typing.NDArray[_DType]], None], array: numpy.typing.NDArray[_DType]
-) -> numpy.typing.NDArray[_DType]:
+    read_func: Callable[[numpy.typing.NDArray[_D]], None], array: numpy.typing.NDArray[_D]
+) -> numpy.typing.NDArray[_D]:
     read_func(array)
     return array.copy()
 
