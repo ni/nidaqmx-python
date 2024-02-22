@@ -19,9 +19,7 @@ def ai_voltage_task(task, sim_time_aware_9215_device):
 @pytest.fixture()
 def ci_count_edges_task(task, sim_9185_device) -> nidaqmx.Task:
     device_name = sim_9185_device.name
-    chan = task.ci_channels.add_ci_count_edges_chan(
-        device_name + "/_ctr0"
-    )
+    chan = task.ci_channels.add_ci_count_edges_chan(device_name + "/_ctr0")
     chan.ci_count_edges_term = "/" + device_name + "/te0/SampleClock"
     chan.ci_count_edges_active_edge = Edge.RISING
     return task
