@@ -73,14 +73,14 @@ def ai_single_channel_loopback_task(
 
 @pytest.fixture
 def ao_multi_channel_task(
-    generate_task: nidaqmx.Task, real_x_series_device: nidaqmx.system.Device
+    generate_task: nidaqmx.Task, real_x_series_multiplexed_device: nidaqmx.system.Device
 ) -> nidaqmx.Task:
     task = generate_task()
     num_chans = 2
     for chan_index in range(num_chans):
         offset = _get_expected_voltage_for_chan(chan_index)
         chan = task.ao_channels.add_ao_voltage_chan(
-            real_x_series_device.ao_physical_chans[chan_index].name,
+            real_x_series_multiplexed_device.ao_physical_chans[chan_index].name,
             min_val=0.0,
             max_val=offset + VOLTAGE_EPSILON,
         )
@@ -97,16 +97,15 @@ def ao_multi_channel_task(
     return task
 
 
-# todo: this only works for multiplexed
 @pytest.fixture
 def ai_multi_channel_loopback_task(
-    generate_task: nidaqmx.Task, real_x_series_device: nidaqmx.system.Device
+    generate_task: nidaqmx.Task, real_x_series_multiplexed_device: nidaqmx.system.Device
 ) -> nidaqmx.Task:
     task = generate_task()
     num_chans = 2
     for chan_index in range(num_chans):
         task.ai_channels.add_ai_voltage_chan(
-            f"{real_x_series_device.name}/_ao{chan_index}_vs_aognd",
+            f"{real_x_series_multiplexed_device.name}/_ao{chan_index}_vs_aognd",
             min_val=-10,
             max_val=10,
         )

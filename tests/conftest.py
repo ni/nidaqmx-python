@@ -46,6 +46,14 @@ class DeviceType(Enum):
     SIMULATED = 1
 
 
+class SamplingType(Enum):
+    """Sampling Type."""
+
+    ANY = -1
+    MULTIPLEXED = 0
+    SIMULTANEOUS = 1
+
+
 def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
     """Parametrizes the "init_kwargs" fixture by examining the the markers set for a test.
 
@@ -93,13 +101,26 @@ def system(init_kwargs) -> nidaqmx.system.System:
 
 
 def _x_series_device(
-    device_type: DeviceType, system: nidaqmx.system.System
+    device_type: DeviceType,
+    system: nidaqmx.system.System,
+    sampling_type: SamplingType = SamplingType.ANY,
 ) -> nidaqmx.system.Device:
     for device in system.devices:
         device_type_match = (
             device_type == DeviceType.ANY
             or (device_type == DeviceType.REAL and not device.is_simulated)
             or (device_type == DeviceType.SIMULATED and device.is_simulated)
+        )
+        device_type_match = device_type_match and (
+            sampling_type == SamplingType.ANY
+            or (
+                sampling_type == SamplingType.MULTIPLEXED
+                and not device.ai_simultaneous_sampling_supported
+            )
+            or (
+                sampling_type == SamplingType.SIMULTANEOUS
+                and device.ai_simultaneous_sampling_supported
+            )
         )
         if (
             device_type_match
@@ -114,8 +135,9 @@ def _x_series_device(
 
     pytest.skip(
         "Could not detect a device that meets the requirements to be an X Series fixture of type "
-        f"{device_type}. Cannot proceed to run tests. Import the NI MAX configuration file located "
-        "at nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
+        f"{device_type} with {sampling_type} sampling. Cannot proceed to run tests. Import the NI "
+        "MAX configuration file located at nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to "
+        "create these devices."
     )
 
 
@@ -156,6 +178,12 @@ def _cdaq_module_by_product_type(
 def real_x_series_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets real X Series device information."""
     return _x_series_device(DeviceType.REAL, system)
+
+
+@pytest.fixture(scope="function")
+def real_x_series_multiplexed_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
+    """Gets device information for a real X Series device with multiplexed sampling."""
+    return _x_series_device(DeviceType.REAL, system, sampling_type=SamplingType.MULTIPLEXED)
 
 
 @pytest.fixture(scope="function")
