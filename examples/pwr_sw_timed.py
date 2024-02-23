@@ -1,4 +1,5 @@
 """Examples for sw timed power operation."""
+
 import pprint
 import time
 

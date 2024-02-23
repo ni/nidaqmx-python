@@ -1,4 +1,5 @@
 """Tests for validating power read operation."""
+
 import math
 import random
 

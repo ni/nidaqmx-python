@@ -1,4 +1,5 @@
 """Tests for validating counter read and write operation."""
+
 import random
 
 import numpy

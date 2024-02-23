@@ -1,4 +1,5 @@
 """Tests for validating the NI-DAQmx events."""
+
 import random
 import time
 

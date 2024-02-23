@@ -1,4 +1,5 @@
 """Tests for validating properties for different basic data types."""
+
 import random
 
 import pytest

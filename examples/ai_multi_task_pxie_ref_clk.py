@@ -1,4 +1,5 @@
 """Example of AI multitask operation."""
+
 import pprint
 
 import nidaqmx

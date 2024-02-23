@@ -1,14 +1,15 @@
 """Tests for validating the bitfield enums."""
+
 from functools import partial
 
 from nidaqmx._bitfield_utils import enum_bitfield_to_list, enum_list_to_bitfield
 from nidaqmx.constants import (
-    _CouplingTypes,
     Coupling,
-    _TermCfg,
     TerminalConfiguration,
-    _TriggerUsageTypes,
     TriggerUsage,
+    _CouplingTypes,
+    _TermCfg,
+    _TriggerUsageTypes,
 )
 
 

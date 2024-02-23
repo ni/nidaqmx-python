@@ -1,4 +1,5 @@
 """This contains the helper methods used in functions generation."""
+
 from copy import deepcopy
 
 from codegen.functions.function import Function

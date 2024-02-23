@@ -1,7 +1,7 @@
 """Example for writing digital signal."""
+
 import nidaqmx
 from nidaqmx.constants import LineGrouping
-
 
 with nidaqmx.Task() as task:
     task.do_channels.add_do_chan(

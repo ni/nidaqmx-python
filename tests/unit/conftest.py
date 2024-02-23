@@ -1,4 +1,5 @@
 """Fixtures used in the DAQmx unit tests."""
+
 from typing import Generator
 from unittest.mock import Mock
 

@@ -1,4 +1,5 @@
 """Tests for validating trigger functionality."""
+
 import random
 
 import pytest

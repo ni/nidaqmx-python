@@ -1,4 +1,5 @@
 """Tests for validating export signals functionality."""
+
 import random
 
 import pytest

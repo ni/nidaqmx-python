@@ -1,4 +1,5 @@
 """Tests for creating channels."""
+
 import random
 
 import numpy
@@ -6,18 +7,18 @@ import pytest
 
 from nidaqmx import constants
 from nidaqmx.constants import (
+    BridgeConfiguration,
+    CurrentShuntResistorLocation,
+    CurrentUnits,
+    ExcitationSource,
+    ResistanceConfiguration,
+    ResistanceUnits,
+    RTDType,
+    StrainGageBridgeType,
+    StrainUnits,
+    TemperatureUnits,
     TerminalConfiguration,
     VoltageUnits,
-    CurrentUnits,
-    CurrentShuntResistorLocation,
-    TemperatureUnits,
-    RTDType,
-    ResistanceConfiguration,
-    ExcitationSource,
-    ResistanceUnits,
-    StrainUnits,
-    StrainGageBridgeType,
-    BridgeConfiguration,
 )
 from tests.helpers import generate_random_seed
 
