@@ -1,4 +1,5 @@
 """Tests for validating the channel objects."""
+
 import numpy
 
 from nidaqmx.constants import TaskMode

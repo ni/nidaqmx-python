@@ -1,4 +1,5 @@
 """Examples for hw timed power stream operation."""
+
 import pprint
 
 import numpy

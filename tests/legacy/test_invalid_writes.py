@@ -1,4 +1,5 @@
 """Tests for validating invalid write functionality."""
+
 import random
 
 import numpy

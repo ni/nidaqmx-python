@@ -1,4 +1,5 @@
 """Tests for validating TEDS functionality."""
+
 import random
 
 import pytest

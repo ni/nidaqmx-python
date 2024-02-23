@@ -1,4 +1,5 @@
 """Structure for storing attribute metadata from scrapigen."""
+
 from codegen.properties.parameter import Parameter
 from codegen.utilities.enum_helpers import merge_enums
 

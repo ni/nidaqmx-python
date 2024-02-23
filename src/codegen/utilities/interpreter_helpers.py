@@ -1,4 +1,5 @@
 """This contains the helper methods used in interpreter generation."""
+
 import re
 from copy import deepcopy
 

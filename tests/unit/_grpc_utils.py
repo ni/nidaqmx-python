@@ -1,4 +1,5 @@
 """gRPC helper functions."""
+
 import pytest
 from pytest_mock import MockerFixture
 

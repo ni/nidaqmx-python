@@ -1,11 +1,12 @@
 """Fixtures used in the DAQmx tests."""
+
 from __future__ import annotations
 
 import contextlib
 import pathlib
 from concurrent.futures import ThreadPoolExecutor
 from enum import Enum
-from typing import Generator, List, TYPE_CHECKING
+from typing import TYPE_CHECKING, Generator, List
 
 import pytest
 

@@ -1,4 +1,5 @@
 """Tests for validating watchdog functionality."""
+
 import random
 import time
 

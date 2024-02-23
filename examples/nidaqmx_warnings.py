@@ -1,4 +1,5 @@
 """Example for catching warnings in DAQmx."""
+
 import warnings
 
 import nidaqmx

@@ -1,13 +1,22 @@
 """Tests for validating systems collections."""
+
 import collections.abc
 
 import nidaqmx
 import nidaqmx.system
 from nidaqmx.system._collections.device_collection import DeviceCollection
-from nidaqmx.system._collections.persisted_channel_collection import PersistedChannelCollection
-from nidaqmx.system._collections.persisted_scale_collection import PersistedScaleCollection
-from nidaqmx.system._collections.persisted_task_collection import PersistedTaskCollection
-from nidaqmx.system._collections.physical_channel_collection import PhysicalChannelCollection
+from nidaqmx.system._collections.persisted_channel_collection import (
+    PersistedChannelCollection,
+)
+from nidaqmx.system._collections.persisted_scale_collection import (
+    PersistedScaleCollection,
+)
+from nidaqmx.system._collections.persisted_task_collection import (
+    PersistedTaskCollection,
+)
+from nidaqmx.system._collections.physical_channel_collection import (
+    PhysicalChannelCollection,
+)
 
 
 class TestSystemCollections:
