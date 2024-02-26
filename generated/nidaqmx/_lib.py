@@ -46,13 +46,13 @@ class c_bool32(ctypes.c_uint):
 
 class CtypesByteString:
     """
-    Custom argtype that automatically converts unicode strings to ASCII
+    Custom argtype that automatically converts unicode strings to UTF-8
     strings in Python 3.
     """
     @classmethod
     def from_param(cls, param):
         if isinstance(param, str):
-            param = param.encode('ascii')
+            param = param.encode('utf-8')
         return ctypes.c_char_p(param)
 
 
