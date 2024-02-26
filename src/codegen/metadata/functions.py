@@ -5369,9 +5369,9 @@ functions = {
                 'is_list': True,
                 'is_optional_in_python': False,
                 'name': 'rosetteMeasTypes',
-                'python_data_type': 'int',
+                'python_data_type': 'StrainGageRosetteMeasurementType',
                 'python_description': 'Specifies information about the rosette configuration and measurements.',
-                'python_type_annotation': 'List[int]',
+                'python_type_annotation': 'List[nidaqmx.constants.StrainGageRosetteMeasurementType]',
                 'size': {
                     'mechanism': 'len',
                     'value': 'numRosetteMeasTypes'

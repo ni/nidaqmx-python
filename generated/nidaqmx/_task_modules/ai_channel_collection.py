@@ -14,10 +14,11 @@ from nidaqmx.constants import (
     ForceIEPESensorSensitivityUnits, ForceUnits, FrequencyUnits,
     LVDTSensitivityUnits, LengthUnits, PressureUnits, RTDType,
     RVDTSensitivityUnits, ResistanceConfiguration, ResistanceUnits,
-    SoundPressureUnits, StrainGageBridgeType, StrainGageRosetteType,
-    StrainUnits, TEDSUnits, TemperatureUnits, TerminalConfiguration,
-    ThermocoupleType, TorqueUnits, VelocityIEPESensorSensitivityUnits,
-    VelocityUnits, VoltageUnits, int)
+    SoundPressureUnits, StrainGageBridgeType,
+    StrainGageRosetteMeasurementType, StrainGageRosetteType, StrainUnits,
+    TEDSUnits, TemperatureUnits, TerminalConfiguration, ThermocoupleType,
+    TorqueUnits, VelocityIEPESensorSensitivityUnits, VelocityUnits,
+    VoltageUnits)
 
 
 class AIChannelCollection(ChannelCollection):
@@ -1470,8 +1471,9 @@ class AIChannelCollection(ChannelCollection):
                 and measurements.
             gage_orientation (float): Specifies information about the
                 rosette configuration and measurements.
-            rosette_meas_types (List[int]): Specifies information about
-                the rosette configuration and measurements.
+            rosette_meas_types (List[nidaqmx.constants.StrainGageRosetteMeasurementType]): 
+                Specifies information about the rosette configuration
+                and measurements.
             name_to_assign_to_channel (Optional[str]): Specifies a name
                 to assign to the virtual channel this function creates.
                 If you do not specify a value for this input, NI-DAQmx
