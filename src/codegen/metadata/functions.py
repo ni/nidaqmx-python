@@ -5364,6 +5364,7 @@ functions = {
             {
                 'ctypes_data_type': 'numpy.int32',
                 'direction': 'in',
+                'enum': 'StrainGageRosetteMeasurementType',
                 'has_explicit_buffer_size': True,
                 'is_list': True,
                 'is_optional_in_python': False,
@@ -5464,7 +5465,6 @@ functions = {
             }
         ],
         'python_class_name': 'AIChannelCollection',
-        'python_codegen_method': 'CustomCode',
         'python_description': 'Creates channels to measure two-dimensional strain using a rosette strain gage.',
         'returns': 'int32'
     },
