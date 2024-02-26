@@ -1509,7 +1509,7 @@ class AIChannelCollection(ChannelCollection):
         if rosette_meas_types is None:
             rosette_meas_types = []
 
-        rosette_meas_types = numpy.array(rosette_meas_types, dtype=numpy.int32)
+        rosette_meas_types = numpy.int32([p.value for p in rosette_meas_types])
 
 
         self._interpreter.create_ai_rosette_strain_gage_chan(

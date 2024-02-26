@@ -138,7 +138,7 @@ def get_instantiation_lines(function_parameters):
             if param.is_list:
                 if param.is_enum:
                     instantiation_lines.append(
-                        "{0} = numpy.array({0}, dtype={1})".format(
+                        "{0} = {1}([p.value for p in {0}])".format(
                             param.parameter_name, param.ctypes_data_type
                         )
                     )
