@@ -18,8 +18,8 @@ def _convert_to_desired_timezone(expected_time_utc: Union[std_datetime, ht_datet
     if tzinfo is None:
         tzinfo = get_localzone()
 
-    # use pytz.tzinfo.BaseTzInfo here to account for daylight savings
-    if hasattr(tzinfo, "zone") or isinstance(tzinfo, ZoneInfo):
+    # use ZoneInfo here to account for daylight savings
+    if isinstance(tzinfo, ZoneInfo):
         localized_time = expected_time_utc.replace(tzinfo=tzinfo)
         desired_expected_time = tzinfo.fromutc(localized_time)
         return(desired_expected_time)
