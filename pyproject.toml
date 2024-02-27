@@ -45,6 +45,7 @@ sphinx_rtd_theme = {version=">=1.0", optional=true}
 grpcio = {version=">=1.49.0,<2.0", optional = true}
 protobuf = { version = "^4.21", optional = true }
 hightime = "^0.2.1"
+tzlocal = "^5.2"
 
 [tool.poetry.extras]
 docs = ["sphinx", "sphinx_rtd_theme"]
