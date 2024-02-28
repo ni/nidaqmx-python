@@ -6,6 +6,7 @@ import os
 import subprocess
 import winreg
 import ctypes
+import sys
 
 # <TODO> repelace the URL with a static URL
 _META_DATA_URL = "http://localhost:8000/ni-daqmx-update-metadata.json"
@@ -133,7 +134,7 @@ def install_daqmx_software():
     If NI-DAQmx driver is already installed it will prompt for an upgrade if applicable.
     Download and launch NI-DAQmx Driver installation in an interactive mode.
     """
-    current_os = _get_platform_str()
+
     if sys.platform.startswith("win"):
         if _is_admin():
             daqmx_latest_url, daqmx_latest_version = _get_url_and_version_for_windows_installer(
