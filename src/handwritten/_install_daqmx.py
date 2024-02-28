@@ -84,6 +84,7 @@ def _get_url_and_version_for_windows_installer(metadata_url):
     """
     Parse the JSON data and retrieve the download link and version information.
     """
+    print("Log1")
     try:
         with urllib.request.urlopen(metadata_url) as url:
             data = json.load(url)
@@ -98,13 +99,6 @@ def _get_url_and_version_for_windows_installer(metadata_url):
     except Exception as e:
         print(f"Unable to get download url: {e}")
     return None, None
-
-
-def _get_platform_str():
-    """
-    Get the platform name on which the Python script is being executed
-    """
-    return platform.system().lower()
 
 
 def _install_daqmx(download_url, temp_file):
@@ -140,18 +134,19 @@ def install_daqmx_software():
     Download and launch NI-DAQmx Driver installation in an interactive mode.
     """
     current_os = _get_platform_str()
-    if current_os == "windows":
+    if sys.platform.startswith("win"):
         if _is_admin():
             daqmx_latest_url, daqmx_latest_version = _get_url_and_version_for_windows_installer(
-                META_DATA_URL
+                _META_DATA_URL
             )
-            if daqmx_latest_version == None:
+            if daqmx_latest_version == None or daqmx_latest_url == None:
                 return -1
             daqmx_installed_version = _check_daqmx_is_installed()
             download_url, temp_file = daqmx_latest_url, _get_temp_file_name()
-            if temp_file or download_url == None:
+            print(download_url)
+            print(temp_file)
+            if temp_file == None:
                return -1
-
             if not daqmx_installed_version:
                 print(f"Installing NI-DAQmx version {daqmx_latest_version}")
                 _install_daqmx(download_url, temp_file)
