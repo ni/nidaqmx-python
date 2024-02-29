@@ -20,9 +20,9 @@ except ImportError:
     pass
 
 if sys.version_info >= (3, 9):
-    import zoneinfo
+    from zoneinfo import ZoneInfo
 else:
-    import backports.zoneinfo as zoneinfo
+    from backports.zoneinfo import ZoneInfo
 
 
 @pytest.mark.parametrize("from_dt", [(JAN_01_2002_DATETIME), (JAN_01_2002_HIGHTIME)])
@@ -125,7 +125,7 @@ def test___grpc_response_before_1970___convert_to_timestamp___succeeds(response_
 )
 def test___utc_datetime___convert_to_timestamp_with_dst___is_reversible(date):
     # we use a location that has daylight savings date change on the dates above
-    target_timezone = zoneinfo.ZoneInfo("America/Los_Angeles")  # Pacific Time
+    target_timezone = ZoneInfo("America/Los_Angeles")  # Pacific Time
     astimezone_date = date.astimezone(target_timezone)
 
     to_ts = grpc_time.convert_time_to_timestamp(date)
