@@ -165,8 +165,8 @@ class DaqLibImporter:
                     windll = ctypes.windll.nicaiu
                     cdll = ctypes.cdll.nicaiu
                 else:
-                    windll = ctypes.windll.LoadLibrary('nicaiu')
-                    cdll = ctypes.cdll.LoadLibrary('nicaiu')
+                    windll = ctypes.windll.LoadLibrary('nicai_utf8')
+                    cdll = ctypes.cdll.LoadLibrary('nicai_utf8')
             except (OSError, WindowsError) as e:
                 raise DaqNotFoundError(_DAQ_NOT_FOUND_MESSAGE) from e
         elif sys.platform.startswith('linux'):
