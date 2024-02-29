@@ -22,7 +22,7 @@ from tests.unit._time_utils import (
 if sys.version_info >= (3, 9):
     from zoneinfo import ZoneInfo
 else:
-    from backports.zoneinfo import zoneinfo as ZoneInfo
+    from backports.zoneinfo import zoneinfo
 
 JAN_01_2002_LIB = LibTimestamp(lsb=0, msb=JAN_01_2002_TIMESTAMP_1904_EPOCH)
 JAN_01_1904_LIB = LibTimestamp(lsb=0, msb=JAN_01_1904_TIMESTAMP_1904_EPOCH)
@@ -102,7 +102,10 @@ def test___utc_datetime_before_1904___convert_to_timestamp___is_reversible(from_
 )
 def test___utc_datetime___convert_to_timestamp_with_dst___is_reversible(date):
     # we use a location that has daylight savings date change on the dates above
-    target_timezone = ZoneInfo("America/Los_Angeles")  # Pacific Time
+    if sys.version_info >= (3, 9):
+        target_timezone = ZoneInfo("America/Los_Angeles")  # Pacific Time
+    else:
+        target_timezone = zoneinfo("America/Los_Angeles")  # Pacific Time
     astimezone_date = date.astimezone(target_timezone)
 
     to_ts = LibTimestamp.from_datetime(date)
