@@ -22,7 +22,7 @@ except ImportError:
 if sys.version_info >= (3, 9):
     from zoneinfo import ZoneInfo
 else:
-    from backports.zoneinfo import ZoneInfo
+    from backports.zoneinfo import zoneinfo as ZoneInfo
 
 
 @pytest.mark.parametrize("from_dt", [(JAN_01_2002_DATETIME), (JAN_01_2002_HIGHTIME)])
