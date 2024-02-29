@@ -6,6 +6,7 @@ from numpy.ctypeslib import ndpointer
 import platform
 import sys
 import threading
+import locale
 from typing import cast, TYPE_CHECKING
 
 from nidaqmx.errors import DaqNotFoundError, DaqNotSupportedError, DaqFunctionNotSupportedError
@@ -52,7 +53,7 @@ class CtypesByteString:
     @classmethod
     def from_param(cls, param):
         if isinstance(param, str):
-            param = param.encode('utf-8')
+            param = param.encode(lib_importer.encoding)
         return ctypes.c_char_p(param)
 
 
@@ -88,6 +89,10 @@ class DaqFunctionImporter:
     def __init__(self, library):
         self._library = library
         self._lib_lock = threading.Lock()
+
+    @property
+    def library(self):
+        return str(self._library).split(' ')[1].strip("',")
 
     def __getattr__(self, function):
         try:
@@ -148,6 +153,13 @@ class DaqLibImporter:
     @property
     def cal_handle(self) -> type:
         return CalHandle
+    
+    @property
+    def encoding(self):
+        if lib_importer.windll.library == 'nicai_utf8' and self._cdll.library == 'nicai_utf8':
+            return 'utf-8'
+        else:
+            return locale.getlocale()[1]
 
     def _import_lib(self):
         """
@@ -162,8 +174,8 @@ class DaqLibImporter:
         if sys.platform.startswith('win') or sys.platform.startswith('cli'):
             try:
                 if 'iron' in platform.python_implementation().lower():
-                    windll = ctypes.windll.nicaiu
-                    cdll = ctypes.cdll.nicaiu
+                    windll = ctypes.windll.nicai_utf8
+                    cdll = ctypes.cdll.nicai_utf8
                 else:
                     windll = ctypes.windll.LoadLibrary('nicai_utf8')
                     cdll = ctypes.cdll.LoadLibrary('nicai_utf8')

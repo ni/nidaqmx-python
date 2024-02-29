@@ -430,7 +430,7 @@ def get_return_values(func):
                 f"[{param.parameter_name}_element.value for {param.parameter_name}_element in {param.parameter_name}]"
             )
         elif param.ctypes_data_type == "ctypes.c_char_p":
-            return_values.append(f"{param.parameter_name}.value.decode('utf-8')")
+            return_values.append(f"{param.parameter_name}.value.decode(lib_importer.encoding)")
         elif param.is_list:
             if is_read_write_function:
                 return_values.append(param.parameter_name)
@@ -658,7 +658,7 @@ def get_read_array_parameters(func):
 def type_cast_attribute_set_function_parameter(param):
     """Type casting of attribute set parameter during c call."""
     if param.ctypes_data_type == "ctypes.c_char_p":
-        return f"{param.parameter_name}.encode('utf-8')"
+        return f"{param.parameter_name}.encode(lib_importer.encoding)"
     if is_numpy_array_datatype(param):
         return f"{param.parameter_name}.ctypes.data_as(ctypes.c_void_p)"
     return f"{param.ctypes_data_type}({param.parameter_name})"
