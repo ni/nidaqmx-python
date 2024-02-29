@@ -1,7 +1,6 @@
 from datetime import datetime as std_datetime, timedelta, timezone
 
 import pytest
-from backports.zoneinfo import ZoneInfo
 from hightime import datetime as ht_datetime
 
 from tests.unit._time_utils import (
@@ -18,6 +17,11 @@ try:
     import nidaqmx._stubs.nidaqmx_pb2 as nidaqmx_pb2
 except ImportError:
     pass
+
+try:
+    import zoneinfo
+except ImportError:
+    from backports import zoneinfo
 
 
 @pytest.mark.parametrize("from_dt", [(JAN_01_2002_DATETIME), (JAN_01_2002_HIGHTIME)])
@@ -120,7 +124,7 @@ def test___grpc_response_before_1970___convert_to_timestamp___succeeds(response_
 )
 def test___utc_datetime___convert_to_timestamp_with_dst___is_reversible(date):
     # we use a location that has daylight savings date change on the dates above
-    target_timezone = ZoneInfo("America/Los_Angeles")  # Pacific Time
+    target_timezone = zoneinfo.ZoneInfo("America/Los_Angeles")  # Pacific Time
     astimezone_date = date.astimezone(target_timezone)
 
     to_ts = grpc_time.convert_time_to_timestamp(date)

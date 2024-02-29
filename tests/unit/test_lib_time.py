@@ -3,7 +3,6 @@ from copy import copy
 from datetime import datetime as std_datetime, timedelta, timezone
 
 import pytest
-from backports.zoneinfo import ZoneInfo
 from hightime import datetime as ht_datetime
 
 from nidaqmx._lib_time import AbsoluteTime as LibTimestamp
@@ -18,6 +17,11 @@ from tests.unit._time_utils import (
     JAN_01_2002_HIGHTIME,
     JAN_01_2002_TIMESTAMP_1904_EPOCH,
 )
+
+try:
+    import zoneinfo
+except ImportError:
+    from backports import zoneinfo
 
 JAN_01_2002_LIB = LibTimestamp(lsb=0, msb=JAN_01_2002_TIMESTAMP_1904_EPOCH)
 JAN_01_1904_LIB = LibTimestamp(lsb=0, msb=JAN_01_1904_TIMESTAMP_1904_EPOCH)
@@ -97,7 +101,7 @@ def test___utc_datetime_before_1904___convert_to_timestamp___is_reversible(from_
 )
 def test___utc_datetime___convert_to_timestamp_with_dst___is_reversible(date):
     # we use a location that has daylight savings date change on the dates above
-    target_timezone = ZoneInfo("America/Los_Angeles")  # Pacific Time
+    target_timezone = zoneinfo.ZoneInfo("America/Los_Angeles")  # Pacific Time
     astimezone_date = date.astimezone(target_timezone)
 
     to_ts = LibTimestamp.from_datetime(date)

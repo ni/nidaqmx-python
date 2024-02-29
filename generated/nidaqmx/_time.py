@@ -6,7 +6,10 @@ from datetime import tzinfo as dt_tzinfo
 from datetime import datetime as std_datetime
 from hightime import datetime as ht_datetime
 from typing import Optional, Union
-from backports.zoneinfo import ZoneInfo
+try:
+    import zoneinfo
+except ImportError:
+    from backports import zoneinfo
 
 # theoretically the same as astimezone(), but with support for dates before 1970
 def _convert_to_desired_timezone(expected_time_utc: Union[std_datetime, ht_datetime], tzinfo: Optional[dt_tzinfo] = None) -> Union[std_datetime, ht_datetime]:
@@ -19,7 +22,7 @@ def _convert_to_desired_timezone(expected_time_utc: Union[std_datetime, ht_datet
         tzinfo = get_localzone()
 
     # use ZoneInfo here to account for daylight savings
-    if isinstance(tzinfo, ZoneInfo):
+    if isinstance(tzinfo, zoneinfo.ZoneInfo):
         localized_time = expected_time_utc.replace(tzinfo=tzinfo)
         desired_expected_time = tzinfo.fromutc(localized_time)
         return(desired_expected_time)
