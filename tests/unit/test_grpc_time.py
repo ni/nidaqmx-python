@@ -1,3 +1,4 @@
+import sys
 from datetime import datetime as std_datetime, timedelta, timezone
 
 import pytest
@@ -18,9 +19,9 @@ try:
 except ImportError:
     pass
 
-try:
+if sys.version_info >= (3, 9):
     import zoneinfo
-except ImportError:
+else:
     import backports.zoneinfo as zoneinfo
 
 

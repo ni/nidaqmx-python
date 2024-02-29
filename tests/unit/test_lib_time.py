@@ -1,4 +1,5 @@
 import random
+import sys
 from copy import copy
 from datetime import datetime as std_datetime, timedelta, timezone
 
@@ -18,9 +19,9 @@ from tests.unit._time_utils import (
     JAN_01_2002_TIMESTAMP_1904_EPOCH,
 )
 
-try:
+if sys.version_info >= (3, 9):
     import zoneinfo
-except ImportError:
+else:
     import backports.zoneinfo as zoneinfo
 
 JAN_01_2002_LIB = LibTimestamp(lsb=0, msb=JAN_01_2002_TIMESTAMP_1904_EPOCH)
