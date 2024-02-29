@@ -21,7 +21,7 @@ except ImportError:
 try:
     import zoneinfo
 except ImportError:
-    from backports import zoneinfo
+    import backports.zoneinfo as zoneinfo
 
 
 @pytest.mark.parametrize("from_dt", [(JAN_01_2002_DATETIME), (JAN_01_2002_HIGHTIME)])

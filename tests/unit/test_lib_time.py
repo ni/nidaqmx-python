@@ -21,7 +21,7 @@ from tests.unit._time_utils import (
 try:
     import zoneinfo
 except ImportError:
-    from backports import zoneinfo
+    import backports.zoneinfo as zoneinfo
 
 JAN_01_2002_LIB = LibTimestamp(lsb=0, msb=JAN_01_2002_TIMESTAMP_1904_EPOCH)
 JAN_01_1904_LIB = LibTimestamp(lsb=0, msb=JAN_01_1904_TIMESTAMP_1904_EPOCH)
