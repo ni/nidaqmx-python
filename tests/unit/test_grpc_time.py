@@ -22,7 +22,7 @@ except ImportError:
 if sys.version_info >= (3, 9):
     from zoneinfo import ZoneInfo
 else:
-    from backports.zoneinfo import zoneinfo
+    from backports.zoneinfo import ZoneInfo
 
 
 @pytest.mark.parametrize("from_dt", [(JAN_01_2002_DATETIME), (JAN_01_2002_HIGHTIME)])
@@ -128,7 +128,7 @@ def test___utc_datetime___convert_to_timestamp_with_dst___is_reversible(date):
     if sys.version_info >= (3, 9):
         target_timezone = ZoneInfo("America/Los_Angeles")  # Pacific Time
     else:
-        target_timezone = zoneinfo("America/Los_Angeles")  # Pacific Time
+        target_timezone = ZoneInfo("America/Los_Angeles")  # Pacific Time
     astimezone_date = date.astimezone(target_timezone)
 
     to_ts = grpc_time.convert_time_to_timestamp(date)
