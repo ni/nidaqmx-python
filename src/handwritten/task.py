@@ -1,6 +1,7 @@
 import threading
 import warnings
 from enum import Enum
+from typing import List, Tuple, Union
 
 import numpy
 
@@ -608,59 +609,21 @@ class Task:
         # Determine the array shape and size to create
         if number_of_channels > 1:
             if not num_samples_not_set:
-                array_shape = (number_of_channels,
-                               number_of_samples_per_channel)
+                array_shape: Tuple[int, ...] = (
+                    number_of_channels, number_of_samples_per_channel
+                )
             else:
-                array_shape = number_of_channels
+                array_shape = (number_of_channels,)
         else:
-            array_shape = number_of_samples_per_channel
+            array_shape = (number_of_samples_per_channel,)
 
         if read_chan_type == ChannelType.ANALOG_INPUT:
-            has_power_chan = False
-            for chan in channels_to_read:
-                meas_type = chan.ai_meas_type
-                has_power_chan = meas_type == UsageTypeAI.POWER
-                if has_power_chan:
-                    break
-
-            if has_power_chan:
-                voltages = numpy.zeros(array_shape, dtype=numpy.float64)
-                currents = numpy.zeros(array_shape, dtype=numpy.float64)
-
-                _, _, samples_read = self._interpreter.read_power_f64(
-                    self._handle, number_of_samples_per_channel, timeout,
-                    FillMode.GROUP_BY_CHANNEL.value, voltages, currents)
-
-                if number_of_channels > 1:
-                    if number_of_samples_per_channel == 1:
-                        # n channel, 1 sample
-                        data = []
-                        for v, i in zip(voltages, currents):
-                            data.append(PowerMeasurement(voltage=v, current=i))
-                        return data
-                    else:
-                        # n channel, n samples
-                        data = []
-                        for channel_index in range(number_of_channels):
-                            channel_data = []
-                            channel_voltages = voltages[channel_index]
-                            channel_currents = currents[channel_index]
-                            for v, i in zip(channel_voltages, channel_currents):
-                                channel_data.append(PowerMeasurement(voltage=v, current=i))
-                            data.append(channel_data)
-                        return data
-                else:
-                    if number_of_samples_per_channel == 1:
-                        # 1 channel, 1 sample
-                        return PowerMeasurement(voltage=voltages[0], current=currents[0])
-                    else:
-                        # 1 channel, n samples
-                        data = []
-                        for v, i in zip(voltages, currents):
-                            data.append(PowerMeasurement(voltage=v, current=i))
-                        return data[:samples_read]
+            if any(chan.ai_meas_type == UsageTypeAI.POWER for chan in channels_to_read):
+                return self._read_power(
+                    array_shape, number_of_channels, number_of_samples_per_channel, timeout
+                )
             else:
-                data = numpy.zeros(array_shape, dtype=numpy.float64)
+                data: numpy.typing.NDArray = numpy.zeros(array_shape, dtype=numpy.float64)
                 _, samples_read = self._interpreter.read_analog_f64(
                     self._handle, number_of_samples_per_channel, timeout,
                     FillMode.GROUP_BY_CHANNEL.value, data)
@@ -681,46 +644,15 @@ class Task:
         elif read_chan_type == ChannelType.COUNTER_INPUT:
             meas_type = channels_to_read.ci_meas_type
 
-            if meas_type == UsageTypeCI.PULSE_FREQ:
-                frequencies = numpy.zeros(array_shape, dtype=numpy.float64)
-                duty_cycles = numpy.zeros(array_shape, dtype=numpy.float64)
-
-                _, _, samples_read = self._interpreter.read_ctr_freq(
-                    self._handle, number_of_samples_per_channel, timeout,
-                    FillMode.GROUP_BY_CHANNEL.value, frequencies, duty_cycles)
-
-                data = []
-                for f, d in zip(frequencies, duty_cycles):
-                    data.append(CtrFreq(freq=f, duty_cycle=d))
-
-            elif meas_type == UsageTypeCI.PULSE_TIME:
-                high_times = numpy.zeros(array_shape, dtype=numpy.float64)
-                low_times = numpy.zeros(array_shape, dtype=numpy.float64)
-
-                _, _, samples_read = self._interpreter.read_ctr_time(
-                    self._handle, number_of_samples_per_channel, timeout,
-                    FillMode.GROUP_BY_CHANNEL.value, high_times, low_times)
-                data = []
-                for h, l in zip(high_times, low_times):
-                    data.append(CtrTime(high_time=h, low_time=l))
-
-            elif meas_type == UsageTypeCI.PULSE_TICKS:
-                high_ticks = numpy.zeros(array_shape, dtype=numpy.uint32)
-                low_ticks = numpy.zeros(array_shape, dtype=numpy.uint32)
-
-                _, _ , samples_read = self._interpreter.read_ctr_ticks(
-                    self._handle, number_of_samples_per_channel, timeout,
-                    FillMode.GROUP_BY_CHANNEL.value, high_ticks, low_ticks)
-                data = []
-                for h, l in zip(high_ticks, low_ticks):
-                    data.append(CtrTick(high_tick=h, low_tick=l))
-
-            elif meas_type == UsageTypeCI.COUNT_EDGES:
-                data = numpy.zeros(array_shape, dtype=numpy.uint32)
-
-                _, samples_read = self._interpreter.read_counter_u32_ex(
-                    self._handle, number_of_samples_per_channel, timeout,
-                    FillMode.GROUP_BY_CHANNEL.value, data)
+            if meas_type in [UsageTypeCI.PULSE_FREQ, UsageTypeCI.PULSE_TIME, UsageTypeCI.PULSE_TICKS]:
+                return self._read_ctr_pulse(
+                    array_shape,
+                    meas_type,
+                    number_of_channels,
+                    number_of_samples_per_channel,
+                    num_samples_not_set,
+                    timeout
+                )
 
             else:
                 data = numpy.zeros(array_shape, dtype=numpy.float64)
@@ -735,21 +667,7 @@ class Task:
                 DAQmxErrors.READ_NO_INPUT_CHANS_IN_TASK,
                 task_name=self.name)
 
-        if (read_chan_type == ChannelType.COUNTER_INPUT and
-                (meas_type == UsageTypeCI.PULSE_FREQ or
-                 meas_type == UsageTypeCI.PULSE_TICKS or
-                 meas_type == UsageTypeCI.PULSE_TIME)):
-
-            if num_samples_not_set and array_shape == 1:
-                return data[0]
-
-            # Counter pulse measurements should not have N channel versions.
-            if samples_read != number_of_samples_per_channel:
-                return data[:samples_read]
-
-            return data
-
-        if num_samples_not_set and array_shape == 1:
+        if num_samples_not_set and array_shape == (1,):
             return data.tolist()[0]
 
         if samples_read != number_of_samples_per_channel:
@@ -759,6 +677,102 @@ class Task:
                 return data[:samples_read].tolist()
 
         return data.tolist()
+    
+    def _read_ctr_pulse(
+        self,
+        array_shape: Tuple[int, ...],
+        meas_type: UsageTypeCI,
+        number_of_channels: int,
+        number_of_samples_per_channel: int,
+        num_samples_not_set: bool,
+        timeout: float,
+    ) -> Union[CtrFreq, CtrTick, CtrTime, List[CtrFreq], List[CtrTick], List[CtrTime]]:
+        if meas_type == UsageTypeCI.PULSE_FREQ:
+            frequencies = numpy.zeros(array_shape, dtype=numpy.float64)
+            duty_cycles = numpy.zeros(array_shape, dtype=numpy.float64)
+
+            _, _, samples_read = self._interpreter.read_ctr_freq(
+                self._handle, number_of_samples_per_channel, timeout,
+                FillMode.GROUP_BY_CHANNEL.value, frequencies, duty_cycles)
+
+            data: Union[List[CtrFreq], List[CtrTick], List[CtrTime]] = [
+                CtrFreq(freq=f, duty_cycle=d) for f, d in zip(frequencies, duty_cycles)
+            ]
+
+        elif meas_type == UsageTypeCI.PULSE_TIME:
+            high_times = numpy.zeros(array_shape, dtype=numpy.float64)
+            low_times = numpy.zeros(array_shape, dtype=numpy.float64)
+
+            _, _, samples_read = self._interpreter.read_ctr_time(
+                self._handle, number_of_samples_per_channel, timeout,
+                FillMode.GROUP_BY_CHANNEL.value, high_times, low_times)
+            data = [CtrTime(high_time=h, low_time=l) for h, l in zip(high_times, low_times)]
+
+        elif meas_type == UsageTypeCI.PULSE_TICKS:
+            high_ticks = numpy.zeros(array_shape, dtype=numpy.uint32)
+            low_ticks = numpy.zeros(array_shape, dtype=numpy.uint32)
+
+            _, _ , samples_read = self._interpreter.read_ctr_ticks(
+                self._handle, number_of_samples_per_channel, timeout,
+                FillMode.GROUP_BY_CHANNEL.value, high_ticks, low_ticks)
+            data = [CtrTick(high_tick=h, low_tick=l) for h, l in zip(high_ticks, low_ticks)]
+
+        else:
+            assert False, f"{meas_type} is not a counter pulse measurement type."
+        
+        if num_samples_not_set and array_shape == (1,):
+            return data[0]
+
+        # Counter pulse measurements should not have N channel versions.
+        #
+        # https://github.com/ni/nidaqmx-python/issues/498 - Missing support for
+        # multi-channel counter reads in stream_readers and task
+        if samples_read != number_of_samples_per_channel:
+            assert number_of_channels == 1
+            return data[:samples_read]
+
+        return data
+
+    def _read_power(
+        self,
+        array_shape: Tuple[int, ...],
+        number_of_channels: int,
+        number_of_samples_per_channel: int,
+        timeout: float,
+    ) -> Union[PowerMeasurement, List[PowerMeasurement], List[List[PowerMeasurement]]]:
+        voltages = numpy.zeros(array_shape, dtype=numpy.float64)
+        currents = numpy.zeros(array_shape, dtype=numpy.float64)
+
+        _, _, samples_read = self._interpreter.read_power_f64(
+            self._handle, number_of_samples_per_channel, timeout,
+            FillMode.GROUP_BY_CHANNEL.value, voltages, currents)
+
+        if number_of_channels > 1:
+            if number_of_samples_per_channel == 1:
+                # n channel, 1 sample
+                return [
+                    PowerMeasurement(voltage=v, current=i)
+                    for v, i in zip(voltages, currents)
+                ]
+            else:
+                # n channel, n samples
+                return [
+                    [
+                        PowerMeasurement(voltage=v, current=i)
+                        for v, i in zip(voltages[channel_index], currents[channel_index])
+                    ]
+                    for channel_index in range(number_of_channels)
+                ]
+        else:
+            if number_of_samples_per_channel == 1:
+                # 1 channel, 1 sample
+                return PowerMeasurement(voltage=voltages[0], current=currents[0])
+            else:
+                # 1 channel, n samples
+                return [
+                    PowerMeasurement(voltage=v, current=i)
+                    for v, i in zip(voltages, currents)
+                ][:samples_read]
 
     def register_done_event(self, callback_method):
         """
@@ -1252,53 +1266,53 @@ class Task:
                 data = [data]
 
             if output_type == UsageTypeCO.PULSE_FREQUENCY:
-                frequencies = []
-                duty_cycles = []
-                for sample in data:
-                    frequencies.append(sample.freq)
-                    duty_cycles.append(sample.duty_cycle)
+                if not all(isinstance(sample, CtrFreq) for sample in data):
+                    raise TypeError(f"Output type {output_type} requires samples of type CtrFreq.")
 
-                frequencies = numpy.asarray(frequencies, dtype=numpy.float64)
-                duty_cycles = numpy.asarray(duty_cycles, dtype=numpy.float64)
+                frequencies = numpy.array([sample.freq for sample in data], dtype=numpy.float64)
+                duty_cycles = numpy.array([sample.duty_cycle for sample in data], dtype=numpy.float64)
 
                 return self._interpreter.write_ctr_freq(
                     self._handle, number_of_samples_per_channel, auto_start, timeout,
                     FillMode.GROUP_BY_CHANNEL.value, frequencies, duty_cycles)
 
             elif output_type == UsageTypeCO.PULSE_TIME:
-                high_times = []
-                low_times = []
-                for sample in data:
-                    high_times.append(sample.high_time)
-                    low_times.append(sample.low_time)
+                if not all(isinstance(sample, CtrTime) for sample in data):
+                    raise TypeError(f"Output type {output_type} requires samples of type CtrTime.")
 
-                high_times = numpy.asarray(high_times, dtype=numpy.float64)
-                low_times = numpy.asarray(low_times, dtype=numpy.float64)
+                high_times = numpy.array([sample.high_time for sample in data], dtype=numpy.float64)
+                low_times = numpy.array([sample.low_time for sample in data], dtype=numpy.float64)
 
                 return self._interpreter.write_ctr_time(
                     self._handle, number_of_samples_per_channel, auto_start, timeout,
                     FillMode.GROUP_BY_CHANNEL.value, high_times, low_times)
 
             elif output_type == UsageTypeCO.PULSE_TICKS:
-                high_ticks = []
-                low_ticks = []
-                for sample in data:
-                    high_ticks.append(sample.high_tick)
-                    low_ticks.append(sample.low_tick)
+                if not all(isinstance(sample, CtrTick) for sample in data):
+                    raise TypeError(f"Output type {output_type} requires samples of type CtrTick.")
 
-                high_ticks = numpy.asarray(high_ticks, dtype=numpy.uint32)
-                low_ticks = numpy.asarray(low_ticks, dtype=numpy.uint32)
+                high_ticks = numpy.array([sample.high_tick for sample in data], dtype=numpy.uint32)
+                low_ticks = numpy.array([sample.low_tick for sample in data], dtype=numpy.uint32)
 
                 return self._interpreter.write_ctr_ticks(
                     self._handle, number_of_samples_per_channel, auto_start, timeout,
                     FillMode.GROUP_BY_CHANNEL.value, high_ticks, low_ticks)
+            
+            else:
+                raise DaqError(
+                    "Write failed, because the output type is not supported.\n\n"
+                    f"Output type: {output_type}",
+                    DAQmxErrors.UNKNOWN,
+                    task_name=self.name,
+                )
+
         else:
             raise DaqError(
                 'Write failed, because there are no output channels in this '
                 'task to which data can be written.',
                 DAQmxErrors.WRITE_NO_OUTPUT_CHANS_IN_TASK,
                 task_name=self.name)
-
+        
 
 class _TaskAlternateConstructor(Task):
     """
