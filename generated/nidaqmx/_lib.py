@@ -205,9 +205,9 @@ class DaqLibImporter:
                     except (OSError, WindowsError) as e:
                         raise DaqNotFoundError(_DAQ_NOT_FOUND_MESSAGE) from e       
         elif sys.platform.startswith('linux'):
-            # On linux you can use the command find_library('nidaqmx')
-            if find_library('nidaqmx') is not None:
-                cdll = ctypes.cdll.LoadLibrary(find_library('nidaqmx'))
+            library_path = find_library('nidaqmx')
+            if library_path is not None:
+                cdll = ctypes.cdll.LoadLibrary(library_path)
                 windll = cdll
                 encoding = locale.getlocale()[1]
             else:
