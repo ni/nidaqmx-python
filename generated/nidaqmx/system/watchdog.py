@@ -240,10 +240,10 @@ class WatchdogTask:
         """
         channel_names = flatten_channel_string(
             [e.physical_channel for e in expiration_states])
-        expir_state = numpy.float64(
-            [e.expiration_state for e in expiration_states])
-        output_type = numpy.int32(
-            [e.output_type.value for e in expiration_states])
+        expir_state = numpy.array(
+            [e.expiration_state for e in expiration_states], dtype=numpy.float64)
+        output_type = numpy.array(
+            [e.output_type.value for e in expiration_states], dtype=numpy.int32)
 
         self._interpreter.cfg_watchdog_ao_expir_states(self._handle, channel_names, expir_state, output_type)
 
@@ -274,8 +274,8 @@ class WatchdogTask:
         """
         channel_names = flatten_channel_string(
             [e.physical_channel for e in expiration_states])
-        expir_state = numpy.int32(
-            [e.expiration_state.value for e in expiration_states])
+        expir_state = numpy.array(
+            [e.expiration_state.value for e in expiration_states], dtype=numpy.int32)
 
         self._interpreter.cfg_watchdog_co_expir_states(self._handle, channel_names, expir_state)
 
@@ -306,8 +306,8 @@ class WatchdogTask:
         """
         channel_names = flatten_channel_string(
             [e.physical_channel for e in expiration_states])
-        expir_state = numpy.int32(
-            [e.expiration_state.value for e in expiration_states])
+        expir_state = numpy.array(
+            [e.expiration_state.value for e in expiration_states], dtype=numpy.int32)
 
         self._interpreter.cfg_watchdog_do_expir_states(self._handle, channel_names, expir_state)
 

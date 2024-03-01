@@ -11,7 +11,7 @@
     %elif attribute.is_enum and not attribute.is_list:
         val = val.value
     %elif attribute.is_enum and attribute.is_list:
-        val = ${attribute.ctypes_data_type}([e.value for e in val])
+        val = numpy.array([e.value for e in val], dtype=${attribute.ctypes_data_type})
     %elif attribute.is_object and not attribute.is_list:
         val = val.name
     %elif attribute.is_object and attribute.is_list:
@@ -19,7 +19,7 @@
     %elif attribute.is_list and attribute.ctypes_data_type == 'ctypes.c_char_p':
         val = flatten_channel_string(val)
     %elif attribute.is_list:
-        val = ${attribute.ctypes_data_type}(val)
+        val = numpy.array(val, dtype=${attribute.ctypes_data_type})
     %endif
 \
 ## Script interpreter call.
