@@ -540,7 +540,7 @@ class AIChannel(Channel):
 
     @ai_bridge_poly_forward_coeff.setter
     def ai_bridge_poly_forward_coeff(self, val):
-        val = numpy.float64(val)
+        val = numpy.array(val, dtype=numpy.float64)
         self._interpreter.set_chan_attribute_double_array(self._handle, self._name, 0x2f90, val)
 
     @ai_bridge_poly_forward_coeff.deleter
@@ -562,7 +562,7 @@ class AIChannel(Channel):
 
     @ai_bridge_poly_reverse_coeff.setter
     def ai_bridge_poly_reverse_coeff(self, val):
-        val = numpy.float64(val)
+        val = numpy.array(val, dtype=numpy.float64)
         self._interpreter.set_chan_attribute_double_array(self._handle, self._name, 0x2f91, val)
 
     @ai_bridge_poly_reverse_coeff.deleter
@@ -755,7 +755,7 @@ class AIChannel(Channel):
 
     @ai_bridge_table_electrical_vals.setter
     def ai_bridge_table_electrical_vals(self, val):
-        val = numpy.float64(val)
+        val = numpy.array(val, dtype=numpy.float64)
         self._interpreter.set_chan_attribute_double_array(self._handle, self._name, 0x2f8e, val)
 
     @ai_bridge_table_electrical_vals.deleter
@@ -776,7 +776,7 @@ class AIChannel(Channel):
 
     @ai_bridge_table_physical_vals.setter
     def ai_bridge_table_physical_vals(self, val):
-        val = numpy.float64(val)
+        val = numpy.array(val, dtype=numpy.float64)
         self._interpreter.set_chan_attribute_double_array(self._handle, self._name, 0x2f8f, val)
 
     @ai_bridge_table_physical_vals.deleter
@@ -1196,7 +1196,7 @@ class AIChannel(Channel):
 
     @ai_dig_fltr_coeff.setter
     def ai_dig_fltr_coeff(self, val):
-        val = numpy.float64(val)
+        val = numpy.array(val, dtype=numpy.float64)
         self._interpreter.set_chan_attribute_double_array(self._handle, self._name, 0x30c7, val)
 
     @ai_dig_fltr_coeff.deleter

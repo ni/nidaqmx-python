@@ -162,7 +162,7 @@ class Scale:
 
     @poly_forward_coeff.setter
     def poly_forward_coeff(self, val):
-        val = numpy.float64(val)
+        val = numpy.array(val, dtype=numpy.float64)
         self._interpreter.set_scale_attribute_double_array(self._name, 0x1234, val)
 
     @property
@@ -180,7 +180,7 @@ class Scale:
 
     @poly_reverse_coeff.setter
     def poly_reverse_coeff(self, val):
-        val = numpy.float64(val)
+        val = numpy.array(val, dtype=numpy.float64)
         self._interpreter.set_scale_attribute_double_array(self._name, 0x1235, val)
 
     @property
@@ -234,7 +234,7 @@ class Scale:
 
     @table_pre_scaled_vals.setter
     def table_pre_scaled_vals(self, val):
-        val = numpy.float64(val)
+        val = numpy.array(val, dtype=numpy.float64)
         self._interpreter.set_scale_attribute_double_array(self._name, 0x1237, val)
 
     @property
@@ -249,7 +249,7 @@ class Scale:
 
     @table_scaled_vals.setter
     def table_scaled_vals(self, val):
-        val = numpy.float64(val)
+        val = numpy.array(val, dtype=numpy.float64)
         self._interpreter.set_scale_attribute_double_array(self._name, 0x1236, val)
 
     @staticmethod
@@ -297,7 +297,7 @@ class Scale:
             of the equation. For example, if index three of the list is
             9, the fourth term of the equation is 9y^3.
         """
-        forward_coeffs = numpy.float64(forward_coeffs)
+        forward_coeffs = numpy.array(forward_coeffs, dtype=numpy.float64)
 
         interpreter = utils._select_interpreter(grpc_options)
 
@@ -426,8 +426,8 @@ class Scale:
         if reverse_coeffs is None:
             reverse_coeffs = []
 
-        forward_coeffs = numpy.float64(forward_coeffs)
-        reverse_coeffs = numpy.float64(reverse_coeffs)
+        forward_coeffs = numpy.array(forward_coeffs, dtype=numpy.float64)
+        reverse_coeffs = numpy.array(reverse_coeffs, dtype=numpy.float64)
 
         scale = Scale(scale_name, grpc_options=grpc_options)
 
@@ -473,8 +473,8 @@ class Scale:
         if scaled_vals is None:
             scaled_vals = []
 
-        prescaled_vals = numpy.float64(prescaled_vals)
-        scaled_vals = numpy.float64(scaled_vals)
+        prescaled_vals = numpy.array(prescaled_vals, dtype=numpy.float64)
+        scaled_vals = numpy.array(scaled_vals, dtype=numpy.float64)
 
         scale = Scale(scale_name, grpc_options=grpc_options)
 
