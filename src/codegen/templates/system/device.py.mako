@@ -290,4 +290,4 @@ class _DeviceAlternateConstructor(Device):
 
         # Use meta-programming to change the type of this object to Device,
         # so the user isn't confused when doing introspection.
-        self.__class__ = Device
+        self.__class__ = Device  # type: ignore[assignment]

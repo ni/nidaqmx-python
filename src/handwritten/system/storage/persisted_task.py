@@ -115,4 +115,4 @@ class _PersistedTaskAlternateConstructor(PersistedTask):
 
         # Use meta-programming to change the type of this object to Scale,
         # so the user isn't confused when doing introspection.
-        self.__class__ = PersistedTask
+        self.__class__ = PersistedTask  # type: ignore[assignment]
