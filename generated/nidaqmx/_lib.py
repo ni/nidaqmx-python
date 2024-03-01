@@ -163,7 +163,7 @@ class DaqLibImporter:
         """
         self._windll = None
         self._cdll = None
-        self.encoding = None
+        self._encoding = None
 
         windll = None
         cdll = None
