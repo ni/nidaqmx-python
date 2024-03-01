@@ -107,8 +107,8 @@ def test___first_sample_trigger___wait_for_valid_timestamp___no_errors(
 
     ai_voltage_task.wait_for_valid_timestamp(TimestampEvent.FIRST_SAMPLE)
 
-    assert ai_voltage_field_daq_task.timing.first_samp_timestamp_enable
-    assert ai_voltage_field_daq_task.timing.first_samp_timestamp_timescale == Timescale.USE_HOST
+    assert ai_voltage_task.timing.first_samp_timestamp_enable
+    assert ai_voltage_task.timing.first_samp_timestamp_timescale == Timescale.USE_HOST
 
 
 def test___timestamp_not_enabled___wait_for_valid_timestamp___throw_error(
