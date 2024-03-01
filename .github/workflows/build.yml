@@ -29,8 +29,9 @@ jobs:
       - name: Run linters
         run: |
           poetry run ni-python-styleguide lint
-      - name: Run mypy on tests
+      - name: Run mypy
         run: |
+          poetry run mypy generated/nidaqmx
           poetry run mypy tests
       - name: Generate ni-daqmx files
         run: |
