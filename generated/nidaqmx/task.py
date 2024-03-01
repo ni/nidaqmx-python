@@ -1330,7 +1330,7 @@ class _TaskAlternateConstructor(Task):
 
         # Use meta-programming to change the type of this object to Task,
         # so the user isn't confused when doing introspection.
-        self.__class__ = Task
+        self.__class__ = Task  # type: ignore[assignment]
 
 
 class _TaskEventType(Enum):

@@ -94,4 +94,4 @@ class _PhysicalChannelAlternateConstructor(PhysicalChannel):
 
         # Use meta-programming to change the type of this object to PhysicalChannel,
         # so the user isn't confused when doing introspection.
-        self.__class__ = PhysicalChannel
+        self.__class__ = PhysicalChannel  # type: ignore[assignment]
