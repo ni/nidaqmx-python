@@ -118,6 +118,8 @@ warn_unused_configs = true
 
 [[tool.mypy.overrides]]
 module = [
+  # https://github.com/HBNetwork/python-decouple/issues/122 - Add support for type stubs
+  "decouple.*",
   # https://github.com/briancurtin/deprecation/issues/56 - Add type information (PEP 561)
   "deprecation.*",
   "grpc.experimental.*",
