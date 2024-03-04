@@ -1,8 +1,8 @@
 import pytest
 
-import nidaqmx
 from nidaqmx._lib import lib_importer
 from nidaqmx.error_codes import DAQmxErrors
+from nidaqmx.errors import DaqError
 from nidaqmx.system import Device
 from nidaqmx.task import Task
 
@@ -28,12 +28,16 @@ def test___reset_device_with_nonexistent_device_name_supports_expected_encodings
 ):
     if lib_importer.encoding not in supported_encodings:
         pytest.skip("requires compatible encoding")
-    with pytest.raises(nidaqmx.DaqError) as exc_info:
+    with pytest.raises(DaqError) as exc_info:
         Device(device_name, **init_kwargs).reset_device()
 
     assert exc_info.value.error_code == DAQmxErrors.INVALID_DEVICE_ID
 
 
+@pytest.mark.grpc_xfail(
+    reason="AB#2393811: DAQmxGetLoggingFilePath returns kErrorNULLPtr (-200604) when called from grpc-device.",
+    raises=DaqError,
+)
 @pytest.mark.parametrize(
     "file_path, supported_encodings",
     [
