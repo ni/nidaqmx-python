@@ -1,5 +1,6 @@
 import pytest
 
+import nidaqmx
 from nidaqmx._lib import lib_importer
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system import Device
@@ -27,7 +28,7 @@ def test___reset_device_with_nonexistent_device_name_supports_expected_encodings
 ):
     if lib_importer.encoding not in supported_encodings:
         pytest.skip("requires compatible encoding")
-    with pytest.raises(Exception) as exc_info:
+    with pytest.raises(nidaqmx.DaqError) as exc_info:
         Device(device_name, **init_kwargs).reset_device()
 
     assert exc_info.value.error_code == DAQmxErrors.INVALID_DEVICE_ID
