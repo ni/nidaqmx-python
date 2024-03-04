@@ -171,10 +171,16 @@ class DaqLibImporter:
         encoding = None
 
         if sys.platform.startswith('win'):
+
+            def _load_lib(libname: str):
+                windll = ctypes.windll.LoadLibrary(libname)
+                cdll = ctypes.cdll.LoadLibrary(libname)
+                return windll, cdll  
+            
             # Feature Toggle to load nicaiu.dll or nicai_utf8.dll
             # The Feature Toggle can be set in the .env file
-            nidaqmx_c_library = config('NIDAQMX_C_LIBRARY', cast=str, default=None) 
-
+            nidaqmx_c_library = config('NIDAQMX_C_LIBRARY', default=None) 
+  
             if nidaqmx_c_library is not None:
                 try: 
                     if nidaqmx_c_library=="nicaiu":
@@ -198,12 +204,6 @@ class DaqLibImporter:
                         encoding = locale.getlocale()[1]
                     except (OSError, WindowsError) as e:
                         raise DaqNotFoundError(_DAQ_NOT_FOUND_MESSAGE) from e       
-
-            def _load_lib(libname: str):
-                windll = ctypes.windll.LoadLibrary(libname)
-                cdll = ctypes.cdll.LoadLibrary(libname)
-                return windll, cdll  
-            
         elif sys.platform.startswith('linux'):
             # On linux you can use the command find_library('nidaqmx')
             if find_library('nidaqmx') is not None:
