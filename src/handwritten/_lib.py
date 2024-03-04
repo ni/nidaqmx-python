@@ -190,7 +190,7 @@ class DaqLibImporter:
                         windll, cdll = _load_lib("nicai_utf8")
                         encoding = 'utf-8'  
                     else:
-                       raise ValueError(f"Unsupported NIDAQMX_C_LIBRARY value: {nidaqmx_c_library}")
+                        raise ValueError(f"Unsupported NIDAQMX_C_LIBRARY value: {nidaqmx_c_library}")
                 except (OSError, WindowsError) as e:
                     raise DaqNotFoundError(_DAQ_NOT_FOUND_MESSAGE) from e         
             else:
