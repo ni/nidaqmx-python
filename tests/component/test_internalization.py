@@ -2,8 +2,8 @@ import pytest
 
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system import Device
-from nidaqmx.task import Task
 from nidaqmx._lib import lib_importer
+from nidaqmx.task import Task
 
 
 @pytest.fixture()
@@ -43,7 +43,9 @@ def test___reset_device_with_nonexistent_device_name_supports_expected_encodings
         ("测试数据.tdms", ["utf-8", "gbk"]),
     ],
 )
-def test___logging_file_path_supports_expected_encodings___returns_assigned_value(ai_task: Task, file_path, supported_encodings):
+def test___logging_file_path_supports_expected_encodings___returns_assigned_value(
+    ai_task: Task, file_path, supported_encodings
+):
     if lib_importer.encoding not in supported_encodings:
         pytest.skip("requires compatible encoding")
     ai_task.in_stream.logging_file_path = file_path
