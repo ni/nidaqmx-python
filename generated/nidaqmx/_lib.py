@@ -6,6 +6,8 @@ from numpy.ctypeslib import ndpointer
 import platform
 import sys
 import threading
+import locale
+from decouple import config
 from typing import cast, TYPE_CHECKING
 
 from nidaqmx.errors import DaqNotFoundError, DaqNotSupportedError, DaqFunctionNotSupportedError
@@ -46,13 +48,13 @@ class c_bool32(ctypes.c_uint):
 
 class CtypesByteString:
     """
-    Custom argtype that automatically converts unicode strings to ASCII
-    strings in Python 3.
+    Custom argtype that automatically converts unicode strings to encoding 
+    used by the DAQmx C API DLL in Python 3.
     """
     @classmethod
     def from_param(cls, param):
         if isinstance(param, str):
-            param = param.encode('ascii')
+            param = param.encode(lib_importer.encoding)
         return ctypes.c_char_p(param)
 
 
@@ -128,6 +130,7 @@ class DaqLibImporter:
         self._cdll = None
         self._cal_handle = None
         self._task_handle = None
+        self._encoding = None
 
     @property
     def windll(self):
@@ -148,32 +151,65 @@ class DaqLibImporter:
     @property
     def cal_handle(self) -> type:
         return CalHandle
-
+    
+    @property
+    def encoding(self):
+        if self._encoding is None:
+            self._import_lib()
+        return self._encoding
+        
     def _import_lib(self):
         """
         Determines the location of and loads the NI-DAQmx CAI DLL.
         """
         self._windll = None
         self._cdll = None
+        self._encoding = None
 
         windll = None
         cdll = None
+        encoding = None
 
-        if sys.platform.startswith('win') or sys.platform.startswith('cli'):
-            try:
-                if 'iron' in platform.python_implementation().lower():
-                    windll = ctypes.windll.nicaiu
-                    cdll = ctypes.cdll.nicaiu
-                else:
-                    windll = ctypes.windll.LoadLibrary('nicaiu')
-                    cdll = ctypes.cdll.LoadLibrary('nicaiu')
-            except (OSError, WindowsError) as e:
-                raise DaqNotFoundError(_DAQ_NOT_FOUND_MESSAGE) from e
+        if sys.platform.startswith('win'):
+
+            def _load_lib(libname: str):
+                windll = ctypes.windll.LoadLibrary(libname)
+                cdll = ctypes.cdll.LoadLibrary(libname)
+                return windll, cdll  
+            
+            # Feature Toggle to load nicaiu.dll or nicai_utf8.dll
+            # The Feature Toggle can be set in the .env file
+            nidaqmx_c_library = config('NIDAQMX_C_LIBRARY', default=None) 
+  
+            if nidaqmx_c_library is not None:
+                try: 
+                    if nidaqmx_c_library=="nicaiu":
+                        windll, cdll = _load_lib("nicaiu")
+                        encoding = locale.getlocale()[1]
+                    elif nidaqmx_c_library=="nicai_utf8":
+                        windll, cdll = _load_lib("nicai_utf8")
+                        encoding = 'utf-8'  
+                    else:
+                        raise ValueError(f"Unsupported NIDAQMX_C_LIBRARY value: {nidaqmx_c_library}")
+                except (OSError, WindowsError) as e:
+                    raise DaqNotFoundError(_DAQ_NOT_FOUND_MESSAGE) from e         
+            else:
+                try:
+                    windll, cdll = _load_lib("nicai_utf8")
+                    encoding = 'utf-8'  
+                except (OSError, WindowsError):
+                    # Fallback to nicaiu.dll if nicai_utf8.dll cannot be loaded
+                    try:
+                        windll, cdll = _load_lib("nicaiu")
+                        encoding = locale.getlocale()[1]
+                    except (OSError, WindowsError) as e:
+                        raise DaqNotFoundError(_DAQ_NOT_FOUND_MESSAGE) from e       
         elif sys.platform.startswith('linux'):
             # On linux you can use the command find_library('nidaqmx')
             if find_library('nidaqmx') is not None:
                 cdll = ctypes.cdll.LoadLibrary(find_library('nidaqmx'))
                 windll = cdll
+                encoding = locale.getlocale()[1]
             else:
                 raise DaqNotFoundError(_DAQ_NOT_FOUND_MESSAGE)
         else:
@@ -181,6 +217,7 @@ class DaqLibImporter:
 
         self._windll = DaqFunctionImporter(windll)
         self._cdll = DaqFunctionImporter(cdll)
+        self._encoding = encoding
 
 
 lib_importer = DaqLibImporter()

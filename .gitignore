@@ -10,6 +10,7 @@ test_results/
 htmlcov/
 
 # Environments
+.env
 .venv
 
 # Built artifacts

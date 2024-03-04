@@ -94,7 +94,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return device_name_out.value.decode('ascii')
+        return device_name_out.value.decode(lib_importer.encoding)
 
     def are_configured_cdaq_sync_ports_disconnected(
             self, chassis_devices_ports, timeout):
@@ -2322,7 +2322,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return port_list.value.decode('ascii')
+        return port_list.value.decode(lib_importer.encoding)
 
     def get_buffer_attribute_uint32(self, task, attribute):
         value = ctypes.c_uint32()
@@ -2391,7 +2391,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return value.value.decode('ascii')
+        return value.value.decode(lib_importer.encoding)
 
     def get_cal_info_attribute_uint32(self, device_name, attribute):
         value = ctypes.c_uint32()
@@ -2505,7 +2505,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return value.value.decode('ascii')
+        return value.value.decode(lib_importer.encoding)
 
     def get_chan_attribute_uint32(self, task, channel, attribute):
         value = ctypes.c_uint32()
@@ -2640,7 +2640,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return value.value.decode('ascii')
+        return value.value.decode(lib_importer.encoding)
 
     def get_device_attribute_uint32(self, device_name, attribute):
         value = ctypes.c_uint32()
@@ -2771,7 +2771,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return port_list.value.decode('ascii')
+        return port_list.value.decode(lib_importer.encoding)
 
     def get_exported_signal_attribute_bool(self, task, attribute):
         value = c_bool32()
@@ -2840,7 +2840,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return value.value.decode('ascii')
+        return value.value.decode(lib_importer.encoding)
 
     def get_exported_signal_attribute_uint32(self, task, attribute):
         value = ctypes.c_uint32()
@@ -2918,7 +2918,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return value.value.decode('ascii')
+        return value.value.decode(lib_importer.encoding)
 
     def get_persisted_scale_attribute_bool(self, scale_name, attribute):
         value = c_bool32()
@@ -2957,7 +2957,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return value.value.decode('ascii')
+        return value.value.decode(lib_importer.encoding)
 
     def get_persisted_task_attribute_bool(self, task_name, attribute):
         value = c_bool32()
@@ -2996,7 +2996,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return value.value.decode('ascii')
+        return value.value.decode(lib_importer.encoding)
 
     def get_physical_chan_attribute_bool(self, physical_channel, attribute):
         value = c_bool32()
@@ -3142,7 +3142,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return value.value.decode('ascii')
+        return value.value.decode(lib_importer.encoding)
 
     def get_physical_chan_attribute_uint32(self, physical_channel, attribute):
         value = ctypes.c_uint32()
@@ -3252,7 +3252,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return value.value.decode('ascii')
+        return value.value.decode(lib_importer.encoding)
 
     def get_read_attribute_uint32(self, task, attribute):
         value = ctypes.c_uint32()
@@ -3361,7 +3361,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return value.value.decode('ascii')
+        return value.value.decode(lib_importer.encoding)
 
     def get_self_cal_last_date_and_time(self, device_name):
         year = ctypes.c_uint()
@@ -3409,7 +3409,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return value.value.decode('ascii')
+        return value.value.decode(lib_importer.encoding)
 
     def get_system_info_attribute_uint32(self, attribute):
         value = ctypes.c_uint32()
@@ -3463,7 +3463,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return value.value.decode('ascii')
+        return value.value.decode(lib_importer.encoding)
 
     def get_task_attribute_uint32(self, task, attribute):
         value = ctypes.c_uint32()
@@ -3581,7 +3581,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return value.value.decode('ascii')
+        return value.value.decode(lib_importer.encoding)
 
     def get_timing_attribute_ex_uint32(self, task, device_names, attribute):
         value = ctypes.c_uint32()
@@ -3652,7 +3652,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return value.value.decode('ascii')
+        return value.value.decode(lib_importer.encoding)
 
     def get_timing_attribute_uint32(self, task, attribute):
         value = ctypes.c_uint32()
@@ -3801,7 +3801,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return value.value.decode('ascii')
+        return value.value.decode(lib_importer.encoding)
 
     def get_trig_attribute_timestamp(self, task, attribute):
         value = AbsoluteTime()
@@ -3904,7 +3904,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return value.value.decode('ascii')
+        return value.value.decode(lib_importer.encoding)
 
     def get_write_attribute_bool(self, task, attribute):
         value = c_bool32()
@@ -3973,7 +3973,7 @@ class LibraryInterpreter(BaseInterpreter):
             else:
                 break
         self.check_for_error(size_or_code)
-        return value.value.decode('ascii')
+        return value.value.decode(lib_importer.encoding)
 
     def get_write_attribute_uint32(self, task, attribute):
         value = ctypes.c_uint32()
@@ -4980,7 +4980,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
-            device_name, attribute, value.encode('ascii'))
+            device_name, attribute, value.encode(lib_importer.encoding))
         self.check_for_error(error_code)
 
     def set_cal_info_attribute_uint32(self, device_name, attribute, value):
@@ -5058,7 +5058,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_int32]
 
         error_code = cfunc(
-            task, channel, attribute, value.encode('ascii'))
+            task, channel, attribute, value.encode(lib_importer.encoding))
         self.check_for_error(error_code)
 
     def set_chan_attribute_uint32(self, task, channel, attribute, value):
@@ -5175,7 +5175,7 @@ class LibraryInterpreter(BaseInterpreter):
                         lib_importer.task_handle, ctypes.c_int32]
 
         error_code = cfunc(
-            task, attribute, value.encode('ascii'))
+            task, attribute, value.encode(lib_importer.encoding))
         self.check_for_error(error_code)
 
     def set_exported_signal_attribute_uint32(self, task, attribute, value):
@@ -5235,7 +5235,7 @@ class LibraryInterpreter(BaseInterpreter):
                         lib_importer.task_handle, ctypes.c_int32]
 
         error_code = cfunc(
-            task, attribute, value.encode('ascii'))
+            task, attribute, value.encode(lib_importer.encoding))
         self.check_for_error(error_code)
 
     def set_read_attribute_uint32(self, task, attribute, value):
@@ -5308,7 +5308,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes_byte_str, ctypes.c_int32]
 
         error_code = cfunc(
-            scale_name, attribute, value.encode('ascii'))
+            scale_name, attribute, value.encode(lib_importer.encoding))
         self.check_for_error(error_code)
 
     def set_timing_attribute_bool(self, task, attribute, value):
@@ -5388,7 +5388,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_int32]
 
         error_code = cfunc(
-            task, device_names, attribute, value.encode('ascii'))
+            task, device_names, attribute, value.encode(lib_importer.encoding))
         self.check_for_error(error_code)
 
     def set_timing_attribute_ex_uint32(
@@ -5440,7 +5440,7 @@ class LibraryInterpreter(BaseInterpreter):
                         lib_importer.task_handle, ctypes.c_int32]
 
         error_code = cfunc(
-            task, attribute, value.encode('ascii'))
+            task, attribute, value.encode(lib_importer.encoding))
         self.check_for_error(error_code)
 
     def set_timing_attribute_uint32(self, task, attribute, value):
@@ -5536,7 +5536,7 @@ class LibraryInterpreter(BaseInterpreter):
                         lib_importer.task_handle, ctypes.c_int32]
 
         error_code = cfunc(
-            task, attribute, value.encode('ascii'))
+            task, attribute, value.encode(lib_importer.encoding))
         self.check_for_error(error_code)
 
     def set_trig_attribute_timestamp(self, task, attribute, value):
@@ -5612,7 +5612,7 @@ class LibraryInterpreter(BaseInterpreter):
                         ctypes.c_int32]
 
         error_code = cfunc(
-            task, lines, attribute, value.encode('ascii'))
+            task, lines, attribute, value.encode(lib_importer.encoding))
         self.check_for_error(error_code)
 
     def set_write_attribute_bool(self, task, attribute, value):
@@ -5660,7 +5660,7 @@ class LibraryInterpreter(BaseInterpreter):
                         lib_importer.task_handle, ctypes.c_int32]
 
         error_code = cfunc(
-            task, attribute, value.encode('ascii'))
+            task, attribute, value.encode(lib_importer.encoding))
         self.check_for_error(error_code)
 
     def set_write_attribute_uint32(self, task, attribute, value):
@@ -6225,7 +6225,7 @@ class LibraryInterpreter(BaseInterpreter):
         if query_error_code < 0:
             _logger.error('Failed to get error string for error code %d. DAQmxGetErrorString returned error code %d.', error_code, query_error_code)
             return 'Failed to retrieve error description.'
-        return error_buffer.value.decode('utf-8')
+        return error_buffer.value.decode(lib_importer.encoding)
 
     def get_extended_error_info(self):
         error_buffer = ctypes.create_string_buffer(2048)
@@ -6240,7 +6240,7 @@ class LibraryInterpreter(BaseInterpreter):
         if query_error_code < 0:
             _logger.error('Failed to get extended error info. DAQmxGetExtendedErrorInfo returned error code %d.', query_error_code)
             return 'Failed to retrieve error description.'
-        return error_buffer.value.decode('utf-8')
+        return error_buffer.value.decode(lib_importer.encoding)
 
     def read_power_binary_i16(
             self, task, num_samps_per_chan, timeout, fill_mode,

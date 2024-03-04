@@ -117,7 +117,7 @@ class LibraryInterpreter(BaseInterpreter):
         if query_error_code < 0:
             _logger.error('Failed to get error string for error code %d. DAQmxGetErrorString returned error code %d.', error_code, query_error_code)
             return 'Failed to retrieve error description.'
-        return error_buffer.value.decode('utf-8')
+        return error_buffer.value.decode(lib_importer.encoding)
 
     ## get_extended_error_info has special error handling and it is library-only because it uses
     ## thread-local storage.
@@ -134,7 +134,7 @@ class LibraryInterpreter(BaseInterpreter):
         if query_error_code < 0:
             _logger.error('Failed to get extended error info. DAQmxGetExtendedErrorInfo returned error code %d.', query_error_code)
             return 'Failed to retrieve error description.'
-        return error_buffer.value.decode('utf-8')
+        return error_buffer.value.decode(lib_importer.encoding)
 
     ## The metadata for 'read_power_binary_i16' function is not available in daqmxAPISharp.json file.
     def read_power_binary_i16(
