@@ -6225,7 +6225,7 @@ class LibraryInterpreter(BaseInterpreter):
         if query_error_code < 0:
             _logger.error('Failed to get error string for error code %d. DAQmxGetErrorString returned error code %d.', error_code, query_error_code)
             return 'Failed to retrieve error description.'
-        return error_buffer.value.decode('utf-8')
+        return error_buffer.value.decode(lib_importer.encoding)
 
     def get_extended_error_info(self):
         error_buffer = ctypes.create_string_buffer(2048)
@@ -6240,7 +6240,7 @@ class LibraryInterpreter(BaseInterpreter):
         if query_error_code < 0:
             _logger.error('Failed to get extended error info. DAQmxGetExtendedErrorInfo returned error code %d.', query_error_code)
             return 'Failed to retrieve error description.'
-        return error_buffer.value.decode('utf-8')
+        return error_buffer.value.decode(lib_importer.encoding)
 
     def read_power_binary_i16(
             self, task, num_samps_per_chan, timeout, fill_mode,
