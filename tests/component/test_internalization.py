@@ -1,8 +1,8 @@
 import pytest
 
+from nidaqmx._lib import lib_importer
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system import Device
-from nidaqmx._lib import lib_importer
 from nidaqmx.task import Task
 
 
