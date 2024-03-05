@@ -1,3 +1,5 @@
+from typing import Any, Dict, List
+
 import pytest
 
 from nidaqmx._lib import lib_importer
@@ -23,14 +25,15 @@ def ai_task(task, sim_6363_device):
         ("设备", ["utf-8", "gbk"]),
     ],
 )
-def test___reset_device_with_nonexistent_device_name_supports_expected_encodings___returns_error(
-    init_kwargs, device_name, supported_encodings
+def test___supported_encoding___reset_nonexistent_device___returns_error_with_device_name(
+    init_kwargs: Dict[str, Any], device_name: str, supported_encodings: List[str]
 ):
     if lib_importer.encoding not in supported_encodings:
         pytest.skip("requires compatible encoding")
     with pytest.raises(DaqError) as exc_info:
         Device(device_name, **init_kwargs).reset_device()
 
+    assert f"Device Specified: {device_name}\n" in exc_info.value.args[0]
     assert exc_info.value.error_code == DAQmxErrors.INVALID_DEVICE_ID
 
 
@@ -49,7 +52,7 @@ def test___reset_device_with_nonexistent_device_name_supports_expected_encodings
     ],
 )
 def test___logging_file_path_supports_expected_encodings___returns_assigned_value(
-    ai_task: Task, file_path, supported_encodings
+    ai_task: Task, file_path: str, supported_encodings: List[str]
 ):
     if lib_importer.encoding not in supported_encodings:
         pytest.skip("requires compatible encoding")
