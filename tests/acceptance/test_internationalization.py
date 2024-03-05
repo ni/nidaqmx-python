@@ -37,6 +37,7 @@ def test___supported_encoding___reset_nonexistent_device___returns_error_with_de
     assert f"Device Specified: {device_name}\n" in exc_info.value.args[0]
     assert exc_info.value.error_code == DAQmxErrors.INVALID_DEVICE_ID
 
+
 @pytest.mark.grpc_xfail(
     reason="AB#2393811: DAQmxGetLoggingFilePath returns kErrorNULLPtr (-200604) when called from grpc-device.",
     raises=DaqError,
