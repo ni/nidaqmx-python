@@ -51,7 +51,7 @@ def test___supported_encoding___reset_nonexistent_device___returns_error_with_de
         ("测试数据.tdms", ["utf-8", "gbk"]),
     ],
 )
-def test___logging_file_path_supports_expected_encodings___returns_assigned_value(
+def test___supported_encoding___logging_file_path___returns_assigned_value(
     ai_task: Task, file_path: str, supported_encodings: List[str]
 ):
     if lib_importer.encoding not in supported_encodings:
