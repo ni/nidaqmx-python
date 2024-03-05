@@ -15,6 +15,7 @@ def ai_task(task, sim_6363_device):
     return task
 
 
+@pytest.mark.library_only(reason="gRPC server limited to MBCS encoding")
 @pytest.mark.parametrize(
     "device_name, supported_encodings",
     [
@@ -36,11 +37,11 @@ def test___supported_encoding___reset_nonexistent_device___returns_error_with_de
     assert f"Device Specified: {device_name}\n" in exc_info.value.args[0]
     assert exc_info.value.error_code == DAQmxErrors.INVALID_DEVICE_ID
 
-
 @pytest.mark.grpc_xfail(
     reason="AB#2393811: DAQmxGetLoggingFilePath returns kErrorNULLPtr (-200604) when called from grpc-device.",
     raises=DaqError,
 )
+@pytest.mark.library_only(reason="gRPC server limited to MBCS encoding")
 @pytest.mark.parametrize(
     "file_path, supported_encodings",
     [
