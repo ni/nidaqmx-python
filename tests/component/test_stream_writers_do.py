@@ -12,10 +12,8 @@ from nidaqmx.utils import flatten_channel_string
 
 
 def _start_do_task(task: nidaqmx.Task, is_port: bool = False, num_chans: int = 1) -> None:
-    # we'll be doing simple on-demand, so start the task...
+    # We'll be doing on-demand, so start the task and drive all lines low
     task.start()
-
-    # ... and set the output to a known initial value
     if is_port:
         if num_chans == 8:
             task.write(0)
@@ -115,10 +113,9 @@ def do_multi_channel_port_task(
 
 
 def _start_di_task(task: nidaqmx.Task) -> None:
-    # don't reserve the lines, so we can loop them back
+    # Don't reserve the lines, so we can read what DO is writing.
     for chan in task.di_channels:
         chan.di_tristate = False
-    # we'll be doing simple on-demand, so start the task now
     task.start()
 
 
