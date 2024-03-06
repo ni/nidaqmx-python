@@ -1,5 +1,5 @@
 import locale
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Optional, Union
 
 import pytest
 
@@ -16,7 +16,7 @@ def ai_task(task, sim_6363_device):
     return task
 
 
-def _get_encoding(obj: Union[Task, Dict[str, Any]]) -> str:
+def _get_encoding(obj: Union[Task, Dict[str, Any]]) -> Optional[str]:
     if getattr(obj, "_grpc_options", None) or (isinstance(obj, dict) and "grpc_options" in obj):
         # gRPC server limited to MBCS encoding
         return locale.getlocale()[1]
