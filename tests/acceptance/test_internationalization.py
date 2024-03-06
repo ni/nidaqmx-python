@@ -1,4 +1,5 @@
-from typing import Any, Dict, List
+import locale
+from typing import Any, Dict, List, Union
 
 import pytest
 
@@ -15,7 +16,14 @@ def ai_task(task, sim_6363_device):
     return task
 
 
-@pytest.mark.library_only(reason="gRPC server limited to MBCS encoding")
+def _get_encoding(obj: Union[Task, Dict[str, Any]]) -> str:
+    if getattr(obj, "_grpc_options", None) or (isinstance(obj, dict) and "grpc_options" in obj):
+        # gRPC server limited to MBCS encoding
+        return locale.getlocale()[1]
+    else:
+        return lib_importer.encoding
+
+
 @pytest.mark.parametrize(
     "device_name, supported_encodings",
     [
@@ -29,7 +37,7 @@ def ai_task(task, sim_6363_device):
 def test___supported_encoding___reset_nonexistent_device___returns_error_with_device_name(
     init_kwargs: Dict[str, Any], device_name: str, supported_encodings: List[str]
 ):
-    if lib_importer.encoding not in supported_encodings:
+    if _get_encoding(init_kwargs) not in supported_encodings:
         pytest.skip("requires compatible encoding")
     with pytest.raises(DaqError) as exc_info:
         Device(device_name, **init_kwargs).reset_device()
@@ -42,11 +50,10 @@ def test___supported_encoding___reset_nonexistent_device___returns_error_with_de
     reason="AB#2393811: DAQmxGetLoggingFilePath returns kErrorNULLPtr (-200604) when called from grpc-device.",
     raises=DaqError,
 )
-@pytest.mark.library_only(reason="gRPC server limited to MBCS encoding")
 @pytest.mark.parametrize(
     "file_path, supported_encodings",
     [
-        ("Testdaten.tdms", ["1252", "iso-8859-1", "utf-8"]),
+        ("Zu prüfende Daten.tdms", ["1252", "iso-8859-1", "utf-8"]),
         ("Données de test.tdms", ["1252", "iso-8859-1", "utf-8"]),
         ("テストデータ.tdms", ["932", "shift-jis", "utf-8"]),
         ("테스트 데이터.tdms", ["utf-8", "euc-kr"]),
@@ -56,7 +63,7 @@ def test___supported_encoding___reset_nonexistent_device___returns_error_with_de
 def test___supported_encoding___logging_file_path___returns_assigned_value(
     ai_task: Task, file_path: str, supported_encodings: List[str]
 ):
-    if lib_importer.encoding not in supported_encodings:
+    if _get_encoding(ai_task) not in supported_encodings:
         pytest.skip("requires compatible encoding")
     ai_task.in_stream.logging_file_path = file_path
 
