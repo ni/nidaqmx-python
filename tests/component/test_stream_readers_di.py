@@ -28,7 +28,7 @@ def di_single_channel_multi_line_task(
     task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> nidaqmx.Task:
     task.di_channels.add_di_chan(
-        flatten_channel_string(sim_6363_device.di_lines[:8].name),
+        flatten_channel_string(sim_6363_device.di_lines.channel_names[:8]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     return task
@@ -39,7 +39,7 @@ def di_multi_channel_multi_line_task(
     task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> nidaqmx.Task:
     task.di_channels.add_di_chan(
-        flatten_channel_string(sim_6363_device.di_lines[:8].name),
+        flatten_channel_string(sim_6363_device.di_lines.channel_names[:8]),
         line_grouping=LineGrouping.CHAN_PER_LINE,
     )
     return task

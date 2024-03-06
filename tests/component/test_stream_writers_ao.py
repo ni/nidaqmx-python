@@ -95,7 +95,7 @@ def ao_multi_channel_task(
     task.start()
 
     # set the output to a known initial value
-    task.write([0.0 for _ in range(num_chans)])
+    task.write([0.0] * num_chans)
 
     return task
 
@@ -201,7 +201,7 @@ def test___analog_multi_channel_writer___write_many_sample___updates_output(
     data = numpy.ascontiguousarray(
         numpy.transpose(
             numpy.linspace(
-                [0.0 for _ in range(num_channels)],
+                [0.0] * num_channels,
                 expected,
                 num=samples_to_write,
                 dtype=numpy.float64,
@@ -241,7 +241,7 @@ def test___analog_unscaled_writer___write_int16___updates_output(
     data = numpy.ascontiguousarray(
         numpy.transpose(
             numpy.linspace(
-                [0 for _ in range(num_channels)],
+                [0] * num_channels,
                 [_volts_to_codes(v) for v in expected],
                 num=samples_to_write,
                 dtype=numpy.int16,
@@ -283,7 +283,7 @@ def test___analog_unscaled_writer___write_int32___updates_output(
     data = numpy.ascontiguousarray(
         numpy.transpose(
             numpy.linspace(
-                [0 for _ in range(num_channels)],
+                [0] * num_channels,
                 [_volts_to_codes(v) for v in expected],
                 num=samples_to_write,
                 dtype=numpy.int32,
@@ -325,7 +325,7 @@ def test___analog_unscaled_writer___write_uint16___updates_output(
     data = numpy.ascontiguousarray(
         numpy.transpose(
             numpy.linspace(
-                [0 for _ in range(num_channels)],
+                [0] * num_channels,
                 [_volts_to_codes(v) for v in expected],
                 num=samples_to_write,
                 dtype=numpy.uint16,
@@ -367,7 +367,7 @@ def test___analog_unscaled_writer___write_uint32___updates_output(
     data = numpy.ascontiguousarray(
         numpy.transpose(
             numpy.linspace(
-                [0 for _ in range(num_channels)],
+                [0] * num_channels,
                 [_volts_to_codes(v) for v in expected],
                 num=samples_to_write,
                 dtype=numpy.uint32,

@@ -18,12 +18,12 @@ def _start_do_task(task: nidaqmx.Task, is_port: bool = False, num_chans: int = 1
         if num_chans == 8:
             task.write(0)
         else:
-            task.write([0 for _ in range(num_chans)])
+            task.write([0] * num_chans)
     else:
         if num_chans == 1:
             task.write(False)
         else:
-            task.write([False for _ in range(num_chans)])
+            task.write([False] * num_chans)
 
 
 @pytest.fixture
@@ -44,7 +44,7 @@ def do_single_channel_multi_line_task(
 ) -> nidaqmx.Task:
     task = generate_task()
     chan = task.do_channels.add_do_chan(
-        flatten_channel_string(real_x_series_device.do_lines[:8].name),
+        flatten_channel_string(real_x_series_device.do_lines.channel_names[:8]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     _start_do_task(task, num_chans=chan.do_num_lines)
@@ -57,7 +57,7 @@ def do_multi_channel_multi_line_task(
 ) -> nidaqmx.Task:
     task = generate_task()
     task.do_channels.add_do_chan(
-        flatten_channel_string(real_x_series_device.do_lines[:8].name),
+        flatten_channel_string(real_x_series_device.do_lines.channel_names[:8]),
         line_grouping=LineGrouping.CHAN_PER_LINE,
     )
     _start_do_task(task, num_chans=task.number_of_channels)
@@ -114,8 +114,7 @@ def do_multi_channel_port_task(
 
 def _start_di_task(task: nidaqmx.Task) -> None:
     # Don't reserve the lines, so we can read what DO is writing.
-    for chan in task.di_channels:
-        chan.di_tristate = False
+    task.di_channels.all.di_tristate = False
     task.start()
 
 
@@ -138,7 +137,7 @@ def di_multi_line_loopback_task(
 ) -> nidaqmx.Task:
     task = generate_task()
     task.di_channels.add_di_chan(
-        flatten_channel_string(real_x_series_device.di_lines[:8].name),
+        flatten_channel_string(real_x_series_device.di_lines.channel_names[:8]),
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     _start_di_task(task)
