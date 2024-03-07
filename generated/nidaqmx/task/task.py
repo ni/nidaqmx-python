@@ -244,9 +244,9 @@ class Task:
         return self._export_signals
 
     @property
-    def in_stream(self):
+    def in_stream(self) -> InStream: 
         """
-        :class:`nidaqmx._task_modules.in_stream.InStream`: Gets the read
+        :class:`nidaqmx.task._in_stream.InStream`: Gets the read
             configurations for the task.
         """
         return self._in_stream
