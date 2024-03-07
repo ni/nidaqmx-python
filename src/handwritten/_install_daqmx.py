@@ -1,60 +1,77 @@
 import urllib.request
 import json
 import tempfile
-import platform
 import os
 import subprocess
 import winreg
-import ctypes
 import sys
+import logging
+import click
+from typing import List, Tuple
+
+if sys.platform.startswith("win"):
+   import winreg
+
 
 # <TODO> repelace the URL with a static URL
 _META_DATA_URL = "http://localhost:8000/ni-daqmx-update-metadata.json"
 
 
-def _is_admin():
+
+def parse_version(version: str) -> Tuple[int, ...]:
     """
-    Verify whether the user has Administrator privileges.
+    Split the version string into a tuple of integers representing major, minor, and update parts.
+
+    Args:
+        version (str): The version string in the format "major.minor.update".
+
+    Returns:
+        tuple: A tuple of integers representing the major, minor, and update parts of the version.
     """
     try:
-        return ctypes.windll.shell32.IsUserAnAdmin()
-    except Exception as e:
-        print(f"Error checking admin privileges: {e}")
-        return False
+        return tuple(int(part) for part in version.split("."))
+    except ValueError:
+        raise ValueError("Invalid version format")
 
-
-def _parse_version(version):
-    """
-    Split the version string into an array of integers.
-    """
-    return [int(part) for part in version.split(".")]
-
-
-def _compare_version(installed_ver, source_ver):
+def _compare_version(installed_version: str, source_version: str) -> int:
     """
     Compare two versions which are in the format: major.minor.update
+
+    Args:
+        installed_version (str): The installed version to compare.
+        source_version (str): The version to compare against.
+
+    Returns:
+        int: 0 if versions are equal, -1 if installed_version is less than source_version,
+             1 if installed_version is greater than source_version.
     """
-    iver_parts = _parse_version(installed_ver)
-    sver_parts = _parse_version(source_ver)
+    try:
+        installed_parts: Tuple[int, ...] = parse_version(installed_version)
+        source_parts: Tuple[int, ...] = parse_version(source_version)
 
-    for iver_num, sver_num in zip(iver_parts + [0], sver_parts + [0]):
-        if iver_num < sver_num:
+        if installed_parts == source_parts:
+            return 0
+        elif installed_parts < source_parts:
             return -1
-        elif iver_num > sver_num:
+        else:
             return 1
+    except ValueError:
+        raise ValueError("Invalid version format")
 
-    return 0
 
 
-def _check_daqmx_is_installed():
+def _check_daqmx_is_installed() -> str:
     """
     Check for existing installation of DAQmx by checking for Version information.
     Version information is read from the registry key.
+    
+    Returns:
+        str: The version of the installed NI-DAQmx if found, else an empty string.
     """
     try:
         with winreg.OpenKeyEx(
             winreg.HKEY_LOCAL_MACHINE,
-            r"SOFTWARE\National Instruments\NI-DAQmx\CurrentVersion",
+            r"SOFTWARE\National Instruments\NI-DAQmx\CurrentVersion1",
             0,
             winreg.KEY_READ | winreg.KEY_WOW64_32KEY,
         ) as daqmx_reg_key:
@@ -63,10 +80,15 @@ def _check_daqmx_is_installed():
 
         if product_name == "NI-DAQmx":
             return product_version
-    except Exception as e:
-        print(f"Info: No existing NI-DAQmx installation found")
-
-    return False
+    except FileNotFoundError:
+        print("Info: No existing NI-DAQmx installation found")
+        return None
+    except PermissionError:
+        print("Error: Access denied to registry key")
+        raise
+    except OSError as e:
+        print("Error:", e)
+        raise
 
 
 def _get_temp_file_name():
@@ -85,7 +107,6 @@ def _get_url_and_version_for_windows_installer(metadata_url):
     """
     Parse the JSON data and retrieve the download link and version information.
     """
-    print("Log1")
     try:
         with urllib.request.urlopen(metadata_url) as url:
             data = json.load(url)
@@ -102,13 +123,14 @@ def _get_url_and_version_for_windows_installer(metadata_url):
     return None, None
 
 
-def _install_daqmx(download_url, temp_file):
+def _install_daqmx_driver(download_url, temp_file):
     """
     Download and launch NI-DAQmx Driver installation in an interactive mode
     """
     try:
         urllib.request.urlretrieve(download_url, temp_file)
-        subprocess.Popen([temp_file], shell=True)
+        result = subprocess.run([temp_file], shell=True, check=True)
+        print(result)
     except Exception as e:
         print(f"Error installing NI-DAQmx: {e}")
 
@@ -126,60 +148,55 @@ def _ask_user_confirmation(question):
         else:
             print("Please enter 'yes' or 'no'.")
 
-
-def install_daqmx_software():
+def installdriver():
     """
     Get the platform name on which the Python script is being executed.
     Check for the existing installaion of NI-DAQmx Driver.
     If NI-DAQmx driver is already installed it will prompt for an upgrade if applicable.
     Download and launch NI-DAQmx Driver installation in an interactive mode.
     """
-
     if sys.platform.startswith("win"):
-        if _is_admin():
-            daqmx_latest_url, daqmx_latest_version = _get_url_and_version_for_windows_installer(
-                _META_DATA_URL
-            )
-            if daqmx_latest_version == None or daqmx_latest_url == None:
-                return -1
-            daqmx_installed_version = _check_daqmx_is_installed()
-            download_url, temp_file = daqmx_latest_url, _get_temp_file_name()
-            print(download_url)
-            print(temp_file)
-            if temp_file == None:
-               return -1
-            if not daqmx_installed_version:
-                print(f"Installing NI-DAQmx version {daqmx_latest_version}")
-                _install_daqmx(download_url, temp_file)
 
-            elif _compare_version(daqmx_latest_version, daqmx_installed_version) > 0:
-                if download_url and temp_file:
-                    user_question = (
-                        "Installed NI-DAQmx version is "
-                        + daqmx_installed_version
-                        + ". Latest version available is "
-                        + daqmx_latest_version
-                        + ". Do you want to upgrade?"
-                    )
-                    user_confirmation = _ask_user_confirmation(user_question)
-                    if user_confirmation:
-                        print(f"Installing NI-DAQmx version {daqmx_latest_version}")
-                        _install_daqmx(download_url, temp_file)
-                    else:
-                        print(f"Skipping Upgrade.")
-
-                else:
-                    print("Installation aborted due to missing download URL")
-            else:
-                print(
-                    f"Installed NI-DAQmx version {daqmx_installed_version} is up-to-date. Skipping installation."
+        daqmx_latest_url, daqmx_latest_version = _get_url_and_version_for_windows_installer(
+            _META_DATA_URL
+        )
+        if daqmx_latest_version == None or daqmx_latest_url == None:
+            return -1
+        daqmx_installed_version = _check_daqmx_is_installed()
+        download_url, temp_file = daqmx_latest_url, _get_temp_file_name()
+        if temp_file == None:
+           return -1
+        if not daqmx_installed_version:
+            print(f"Installing NI-DAQmx version {daqmx_latest_version}")
+            _install_daqmx_driver(download_url, temp_file)
+        
+        elif _compare_version(daqmx_latest_version, daqmx_installed_version) > 0:
+            if download_url and temp_file:
+                user_question = (
+                    "Installed NI-DAQmx version is "
+                    + daqmx_installed_version
+                    + ". Latest version available is "
+                    + daqmx_latest_version
+                    + ". Do you want to upgrade?"
                 )
+                user_confirmation = _ask_user_confirmation(user_question)
+                if user_confirmation:
+                    print(f"Installing NI-DAQmx version {daqmx_latest_version}")
+                    _install_daqmx_driver(download_url, temp_file)
+                else:
+                    print(f"Skipping Upgrade.")
+        
+            else:
+                print("Installation aborted due to missing download URL")
         else:
-            print("Administrator privileges required. Installation aborted.")
-            return
+            print(
+                f"Installed NI-DAQmx version {daqmx_installed_version} is up-to-date. Skipping installation."
+            )
+        
     else:
         print("Unsupported OS detected.")
 
 
+
 if __name__ == "__main__":
-    install_daqmx_software()
+    installdriver()
