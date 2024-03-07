@@ -121,6 +121,10 @@ script_info = {
             "templateFile": "system\\device.py.mako",
         },
         {
+            "relativeOutputPath": "task\\task.py",
+            "templateFile": "task\\task.py.mako",
+        },
+        {
             "relativeOutputPath": "system\\physical_channel.py",
             "templateFile": "system\\physical_channel.py.mako",
         },
