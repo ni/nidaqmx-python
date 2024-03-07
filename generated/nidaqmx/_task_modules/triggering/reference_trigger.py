@@ -988,6 +988,51 @@ class ReferenceTrigger:
             self._handle, trigger_source, pretrigger_samples,
             trigger_slope.value, trigger_level)
 
+    def cfg_anlg_multi_edge_ref_trig(
+            self, trigger_sources, pretrigger_samples,
+            trigger_slope_array=None, trigger_level_array=None):
+        """
+        Configures the task to stop the acquisition when the device
+        acquires all pretrigger samples; any of the configured analog
+        signals cross the respective levels you specified; and the
+        device acquires all post-trigger samples. When you use a
+        Reference Trigger, the default for the read RelativeTo property
+        is First Pretrigger Sample with a read Offset of 0. Multi-edge
+        triggering treats the specified triggers as if a logical OR is
+        applied.
+
+        Args:
+            trigger_sources (str): Is the name of a virtual channel or
+                terminal where there is an analog signal to use as the
+                source of the trigger.
+            pretrigger_samples (int): Specifies the minimum number of
+                samples to acquire per channel before recognizing the
+                Reference Trigger. The number of post-trigger samples
+                per channel is equal to **number of samples per
+                channel** in the DAQmx Timing VI minus **pretrigger
+                samples per channel**.
+            trigger_slope_array (Optional[List[nidaqmx.constants.Slope]]): 
+                Specifies on which slope of the signal the Reference
+                Trigger occurs.
+            trigger_level_array (Optional[List[float]]): Specifies at
+                what threshold to trigger. Specify this value in the
+                units of the measurement or generation. Use **slope** to
+                specify on which slope to trigger at this threshold.
+        """
+        if trigger_slope_array is None:
+            trigger_slope_array = []
+
+        if trigger_level_array is None:
+            trigger_level_array = []
+
+        trigger_slope_array = numpy.int32([p.value for p in trigger_slope_array])
+        trigger_level_array = numpy.float64(trigger_level_array)
+
+
+        self._interpreter.cfg_anlg_multi_edge_ref_trig(
+            self._handle, trigger_sources, pretrigger_samples,
+            trigger_slope_array, trigger_level_array)
+
     def cfg_anlg_window_ref_trig(
             self, trigger_source, window_top, window_bottom,
             pretrigger_samples,

@@ -232,15 +232,15 @@ class GrpcStubInterpreter(BaseInterpreter):
                 trigger_slope_raw=trigger_slope, trigger_level=trigger_level))
 
     def cfg_anlg_multi_edge_ref_trig(
-            self, task, trigger_sources, trigger_slope_array,
-            trigger_level_array, pretrigger_samples):
+            self, task, trigger_sources, pretrigger_samples,
+            trigger_slope_array, trigger_level_array):
         response = self._invoke(
             self._client.CfgAnlgMultiEdgeRefTrig,
             grpc_types.CfgAnlgMultiEdgeRefTrigRequest(
                 task=task, trigger_sources=trigger_sources,
+                pretrigger_samples=pretrigger_samples,
                 trigger_slope_array=trigger_slope_array,
-                trigger_level_array=trigger_level_array,
-                pretrigger_samples=pretrigger_samples))
+                trigger_level_array=trigger_level_array))
 
     def cfg_anlg_multi_edge_start_trig(
             self, task, trigger_sources, trigger_slope_array,

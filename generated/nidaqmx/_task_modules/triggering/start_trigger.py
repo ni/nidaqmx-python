@@ -987,6 +987,43 @@ class StartTrigger:
         self._interpreter.cfg_anlg_edge_start_trig(
             self._handle, trigger_source, trigger_slope.value, trigger_level)
 
+    def cfg_anlg_multi_edge_start_trig(
+            self, trigger_sources, trigger_slope_array,
+            trigger_level_array=None):
+        """
+        Configures the task to start acquiring or generating samples
+        when any of the configured analog signals cross the respective
+        levels you specified. Multi-edge triggering treats the
+        configured triggers as if a logical OR is applied.
+
+        Args:
+            trigger_sources (str): Is the name of a virtual channel or
+                terminal where there is an analog signal to use as the
+                source of the trigger.
+            trigger_slope_array (List[nidaqmx.constants.Slope]): 
+                Specifies on which slope of the signal to start
+                acquiring or generating samples when the signal crosses
+                **level**.
+            trigger_level_array (Optional[List[float]]): Specifies at
+                what threshold to start acquiring or generating samples.
+                Specify this value in the units of the measurement or
+                generation. Use **slope** to specify on which slope to
+                trigger at this threshold.
+        """
+        if trigger_slope_array is None:
+            trigger_slope_array = []
+
+        if trigger_level_array is None:
+            trigger_level_array = []
+
+        trigger_slope_array = numpy.int32([p.value for p in trigger_slope_array])
+        trigger_level_array = numpy.float64(trigger_level_array)
+
+
+        self._interpreter.cfg_anlg_multi_edge_start_trig(
+            self._handle, trigger_sources, trigger_slope_array,
+            trigger_level_array)
+
     def cfg_anlg_window_start_trig(
             self, window_top, window_bottom, trigger_source="",
             trigger_when=WindowTriggerCondition1.ENTERING_WINDOW):
