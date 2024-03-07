@@ -17,7 +17,7 @@ import numpy
 from nidaqmx import utils
 from nidaqmx._task_modules.channels.channel import Channel
 from nidaqmx._task_modules.export_signals import ExportSignals
-from nidaqmx._task_modules.in_stream import InStream
+from nidaqmx.task._in_stream import InStream
 from nidaqmx._task_modules.timing import Timing
 from nidaqmx._task_modules.triggers import Triggers
 from nidaqmx._task_modules.out_stream import OutStream
