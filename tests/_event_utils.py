@@ -69,6 +69,17 @@ class DoneEventObserver(BaseEventObserver[DoneEvent]):
             self._invoke_side_effect()
         return 0
 
+class DoneEventBasicParametersObserver(BaseEventObserver[DoneEvent]):
+    """An observer for Done events with only basic parameters in callback function."""
+
+    def handle_done_event(self, status: int) -> int:
+        """Handles a Done event."""
+        with self._lock:
+            self._events.append(DoneEvent(status))
+            self._event_semaphore.release()
+            self._invoke_side_effect()
+        return 0
+
 
 class EveryNSamplesEventObserver(BaseEventObserver[EveryNSamplesEvent]):
     """An observer for Every N Samples events."""
@@ -87,12 +98,39 @@ class EveryNSamplesEventObserver(BaseEventObserver[EveryNSamplesEvent]):
             self._invoke_side_effect()
         return 0
 
+class EveryNSamplesEventBasicParametersObserver(BaseEventObserver[EveryNSamplesEvent]):
+    """An observer for Every N Samples events with only basic parameters in callback function."""
+
+    def handle_every_n_samples_event(
+        self,
+        every_n_samples_event_type: int,
+        number_of_samples: int,
+    ) -> int:
+        """Handles an Every N Samples event."""
+        with self._lock:
+            self._events.append(EveryNSamplesEvent(every_n_samples_event_type, number_of_samples))
+            self._event_semaphore.release()
+            self._invoke_side_effect()
+        return 0
 
 class SignalEventObserver(BaseEventObserver[SignalEvent]):
     """An observer for Signal events."""
 
     def handle_signal_event(
         self, task_handle: object, signal_type: int, callback_data: object
+    ) -> int:
+        """Handles a Signal event."""
+        with self._lock:
+            self._events.append(SignalEvent(signal_type))
+            self._event_semaphore.release()
+            self._invoke_side_effect()
+        return 0
+
+class SignalEventBasicParametersObserver(BaseEventObserver[SignalEvent]):
+    """An observer for Signal events with only basic parameters in callback function."""
+
+    def handle_signal_event(
+        self, signal_type: int
     ) -> int:
         """Handles a Signal event."""
         with self._lock:

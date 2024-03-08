@@ -12,8 +12,11 @@ from nidaqmx.errors import RpcError
 from nidaqmx.task import _TaskEventType
 from tests._event_utils import (
     DoneEventObserver,
+    DoneEventBasicParametersObserver,
     EveryNSamplesEventObserver,
+    EveryNSamplesEventBasicParametersObserver,
     SignalEventObserver,
+    SignalEventBasicParametersObserver,
 )
 
 
@@ -55,10 +58,51 @@ def test___done_event_registered___run_finite_acquisition___callback_invoked_onc
     assert all(e.status == 0 for e in event_observer.events)
 
 
+def test___done_event_registered___run_finite_acquisition___callback_invoked_with_basic_parameters_once_with_success_status(
+    ai_task: nidaqmx.Task,
+) -> None:
+    event_observer = DoneEventBasicParametersObserver()
+    ai_task.register_done_event(event_observer.handle_done_event)
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
+
+    ai_task.start()
+
+    event_observer.wait_for_events()
+    with pytest.raises(TimeoutError):
+        event_observer.wait_for_events(timeout=100e-3)
+    assert len(event_observer.events) == 1
+    assert all(e.status == 0 for e in event_observer.events)
+
+
 def test___every_n_samples_event_registered___run_finite_acquisition___callback_invoked_n_times_with_type_and_num_samples(
     ai_task: nidaqmx.Task,
 ) -> None:
     event_observer = EveryNSamplesEventObserver()
+    ai_task.register_every_n_samples_acquired_into_buffer_event(
+        100, event_observer.handle_every_n_samples_event
+    )
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
+
+    ai_task.start()
+
+    event_observer.wait_for_events(10)
+    with pytest.raises(TimeoutError):
+        event_observer.wait_for_events(timeout=100e-3)
+    assert len(event_observer.events) == 10
+    assert all(
+        e.event_type == EveryNSamplesEventType.ACQUIRED_INTO_BUFFER.value
+        for e in event_observer.events
+    )
+    assert all(e.number_of_samples == 100 for e in event_observer.events)
+
+def test___every_n_samples_event_registered___run_finite_acquisition___callback_invoked_with_basic_parameters_n_times_with_type_and_num_samples(
+    ai_task: nidaqmx.Task,
+) -> None:
+    event_observer = EveryNSamplesEventBasicParametersObserver()
     ai_task.register_every_n_samples_acquired_into_buffer_event(
         100, event_observer.handle_every_n_samples_event
     )
@@ -84,6 +128,25 @@ def test___signal_event_registered___run_finite_acquisition___callback_invoked_n
 ) -> None:
     ai_task = ai_task_with_real_device
     event_observer = SignalEventObserver()
+    ai_task.register_signal_event(Signal.SAMPLE_COMPLETE, event_observer.handle_signal_event)
+    ai_task.timing.cfg_samp_clk_timing(
+        rate=10.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=10
+    )
+
+    ai_task.start()
+
+    event_observer.wait_for_events(10)
+    with pytest.raises(TimeoutError):
+        event_observer.wait_for_events(timeout=100e-3)
+    assert len(event_observer.events) == 10
+    assert all(e.signal_type == Signal.SAMPLE_COMPLETE.value for e in event_observer.events)
+
+
+def test___signal_event_registered___run_finite_acquisition___callback_invoked_with_basic_parameters_n_times_with_type(
+    ai_task_with_real_device: nidaqmx.Task,
+) -> None:
+    ai_task = ai_task_with_real_device
+    event_observer = SignalEventBasicParametersObserver()
     ai_task.register_signal_event(Signal.SAMPLE_COMPLETE, event_observer.handle_signal_event)
     ai_task.timing.cfg_samp_clk_timing(
         rate=10.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=10
