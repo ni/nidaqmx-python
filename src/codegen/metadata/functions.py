@@ -1453,7 +1453,7 @@ functions = {
             }
         ],
         'python_class_name': 'StartTrigger',
-        'python_description': 'New Start Trigger',
+        'python_description': 'Configures the task to start acquiring or generating samples at a specified time.',
         'returns': 'int32'
     },
     'CfgWatchdogAOExpirStates': {
@@ -18754,23 +18754,17 @@ functions = {
                 'type': 'float64'
             },
             {
-                'ctypes_data_type': 'ctypes.c_uint',
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
-                'is_optional_in_python': False,
                 'name': 'highTicks',
                 'python_data_type': 'int',
-                'python_description': '',
-                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_uint',
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
-                'is_optional_in_python': False,
                 'name': 'lowTicks',
                 'python_data_type': 'int',
-                'python_description': '',
-                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
@@ -23807,7 +23801,7 @@ functions = {
         ],
         'python_class_name': 'Task',
         'python_codegen_method': 'CustomCode',
-        'python_description': 'DAQmx Wait for Valid Timestamp',
+        'python_description': 'Wait until the specified timestamp has a value. Use this function to ensure the timestamp has a valid value to prevent an error when querying a timestamp value.',
         'returns': 'int32'
     },
     'WaitUntilTaskDone': {
@@ -24676,23 +24670,17 @@ functions = {
                 'type': 'float64'
             },
             {
-                'ctypes_data_type': 'ctypes.c_uint',
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
-                'is_optional_in_python': False,
                 'name': 'highTicks',
                 'python_data_type': 'int',
-                'python_description': '',
-                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_uint',
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
-                'is_optional_in_python': False,
                 'name': 'lowTicks',
                 'python_data_type': 'int',
-                'python_description': '',
-                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
