@@ -81,7 +81,7 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
             min_val (Optional[float]): Specifies in **units** the
@@ -95,9 +95,9 @@ class AIChannelCollection(ChannelCollection):
                 sensor. This value is in the units you specify with the
                 **sensitivity_units** input. Refer to the sensor
                 documentation to determine this value.
-            sensitivity_units (Optional[nidaqmx.constants.AccelSensitivityUnits]):
+            sensitivity_units (Optional[nidaqmx.constants.AccelSensitivityUnits]): 
                 Specifies the units of the **sensitivity** input.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             voltage_excit_val (Optional[float]): Specifies in volts the
                 amount of excitation supplied to the sensor. Refer to
@@ -116,7 +116,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -149,7 +149,7 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
             min_val (Optional[float]): Specifies in **units** the
@@ -163,9 +163,9 @@ class AIChannelCollection(ChannelCollection):
                 sensor. This value is in the units you specify with the
                 **sensitivity_units** input. Refer to the sensor
                 documentation to determine this value.
-            sensitivity_units (Optional[nidaqmx.constants.AccelSensitivityUnits]):
+            sensitivity_units (Optional[nidaqmx.constants.AccelSensitivityUnits]): 
                 Specifies the units of the **sensitivity** input.
-            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             current_excit_val (Optional[float]): Specifies in amperes
                 the amount of excitation to supply to the sensor. Refer
@@ -177,7 +177,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -209,7 +209,7 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
             min_val (Optional[float]): Specifies in **units** the
@@ -223,7 +223,7 @@ class AIChannelCollection(ChannelCollection):
                 sensor. This value is in the units you specify with the
                 **sensitivity_units** input. Refer to the sensor
                 documentation to determine this value.
-            sensitivity_units (Optional[nidaqmx.constants.AccelChargeSensitivityUnits]):
+            sensitivity_units (Optional[nidaqmx.constants.AccelChargeSensitivityUnits]): 
                 Specifies the units of the **sensitivity** input.
             custom_scale_name (Optional[str]): Specifies the name of a
                 custom scale for the channel. If you want the channel to
@@ -232,7 +232,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -272,10 +272,10 @@ class AIChannelCollection(ChannelCollection):
                 maximum value you expect to measure.
             units (Optional[nidaqmx.constants.BridgeUnits]): Specifies
                 in which unit to return voltage ratios from the channel.
-            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]):
+            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]): 
                 Specifies information about the bridge configuration and
                 measurement.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies information about the bridge configuration and
                 measurement.
             voltage_excit_val (Optional[float]): Specifies information
@@ -290,7 +290,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -320,7 +320,7 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
             min_val (Optional[float]): Specifies in **units** the
@@ -337,7 +337,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -367,7 +367,7 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
             min_val (Optional[float]): Specifies in **units** the
@@ -376,7 +376,7 @@ class AIChannelCollection(ChannelCollection):
                 maximum value you expect to measure.
             units (Optional[nidaqmx.constants.CurrentUnits]): Specifies
                 the units to use to return current measurements.
-            shunt_resistor_loc (Optional[nidaqmx.constants.CurrentShuntResistorLocation]):
+            shunt_resistor_loc (Optional[nidaqmx.constants.CurrentShuntResistorLocation]): 
                 Specifies the location of the shunt resistor. For
                 devices with built-in shunt resistors, specify the
                 location as **INTERNAL**. For devices that do not have
@@ -393,7 +393,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -425,7 +425,7 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
             min_val (Optional[float]): Specifies in **units** the
@@ -434,7 +434,7 @@ class AIChannelCollection(ChannelCollection):
                 maximum value you expect to measure.
             units (Optional[nidaqmx.constants.CurrentUnits]): Specifies
                 the units to use to return current measurements.
-            shunt_resistor_loc (Optional[nidaqmx.constants.CurrentShuntResistorLocation]):
+            shunt_resistor_loc (Optional[nidaqmx.constants.CurrentShuntResistorLocation]): 
                 Specifies the location of the shunt resistor. For
                 devices with built-in shunt resistors, specify the
                 location as **INTERNAL**. For devices that do not have
@@ -451,7 +451,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -501,10 +501,10 @@ class AIChannelCollection(ChannelCollection):
             units (Optional[nidaqmx.constants.ForceUnits]): Specifies in
                 which unit to return force measurements from the
                 channel.
-            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]):
+            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]): 
                 Specifies information about the bridge configuration and
                 measurement.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies information about the bridge configuration and
                 measurement.
             voltage_excit_val (Optional[float]): Specifies information
@@ -518,10 +518,10 @@ class AIChannelCollection(ChannelCollection):
             reverse_coeffs (Optional[List[float]]): Specifies how to
                 scale electrical values from the sensor to physical
                 units.
-            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]):
+            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
-            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]):
+            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
             custom_scale_name (Optional[str]): Specifies the name of a
@@ -531,7 +531,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
         if forward_coeffs is None:
@@ -540,8 +540,8 @@ class AIChannelCollection(ChannelCollection):
         if reverse_coeffs is None:
             reverse_coeffs = [0.0, 0.02]
 
-        forward_coeffs = numpy.float64(forward_coeffs)
-        reverse_coeffs = numpy.float64(reverse_coeffs)
+        forward_coeffs = numpy.array(forward_coeffs, dtype=numpy.float64)
+        reverse_coeffs = numpy.array(reverse_coeffs, dtype=numpy.float64)
 
 
         self._interpreter.create_ai_force_bridge_polynomial_chan(
@@ -591,10 +591,10 @@ class AIChannelCollection(ChannelCollection):
             units (Optional[nidaqmx.constants.ForceUnits]): Specifies in
                 which unit to return force measurements from the
                 channel.
-            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]):
+            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]): 
                 Specifies information about the bridge configuration and
                 measurement.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies information about the bridge configuration and
                 measurement.
             voltage_excit_val (Optional[float]): Specifies information
@@ -605,13 +605,13 @@ class AIChannelCollection(ChannelCollection):
             electrical_vals (Optional[List[float]]): Specifies how to
                 scale electrical values from the sensor to physical
                 units.
-            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]):
+            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
             physical_vals (Optional[List[float]]): Specifies how to
                 scale electrical values from the sensor to physical
                 units.
-            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]):
+            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
             custom_scale_name (Optional[str]): Specifies the name of a
@@ -621,7 +621,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
         if electrical_vals is None:
@@ -630,8 +630,8 @@ class AIChannelCollection(ChannelCollection):
         if physical_vals is None:
             physical_vals = [-100.0, 0.0, 100.0]
 
-        electrical_vals = numpy.float64(electrical_vals)
-        physical_vals = numpy.float64(physical_vals)
+        electrical_vals = numpy.array(electrical_vals, dtype=numpy.float64)
+        physical_vals = numpy.array(physical_vals, dtype=numpy.float64)
 
 
         self._interpreter.create_ai_force_bridge_table_chan(
@@ -680,10 +680,10 @@ class AIChannelCollection(ChannelCollection):
             units (Optional[nidaqmx.constants.ForceUnits]): Specifies in
                 which unit to return force measurements from the
                 channel.
-            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]):
+            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]): 
                 Specifies information about the bridge configuration and
                 measurement.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies information about the bridge configuration and
                 measurement.
             voltage_excit_val (Optional[float]): Specifies information
@@ -697,7 +697,7 @@ class AIChannelCollection(ChannelCollection):
             second_electrical_val (Optional[float]): Specifies how to
                 scale electrical values from the sensor to physical
                 units.
-            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]):
+            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
             first_physical_val (Optional[float]): Specifies how to scale
@@ -705,7 +705,7 @@ class AIChannelCollection(ChannelCollection):
             second_physical_val (Optional[float]): Specifies how to
                 scale electrical values from the sensor to physical
                 units.
-            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]):
+            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
             custom_scale_name (Optional[str]): Specifies the name of a
@@ -715,7 +715,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -750,7 +750,7 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
             min_val (Optional[float]): Specifies in **units** the
@@ -764,9 +764,9 @@ class AIChannelCollection(ChannelCollection):
                 sensor. This value is in the units you specify with the
                 **sensitivity_units** input. Refer to the sensor
                 documentation to determine this value.
-            sensitivity_units (Optional[nidaqmx.constants.ForceIEPESensorSensitivityUnits]):
+            sensitivity_units (Optional[nidaqmx.constants.ForceIEPESensorSensitivityUnits]): 
                 Specifies the units of the **sensitivity** input.
-            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             current_excit_val (Optional[float]): Specifies in amperes
                 the amount of excitation to supply to the sensor. Refer
@@ -778,7 +778,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -812,7 +812,7 @@ class AIChannelCollection(ChannelCollection):
                 minimum value you expect to measure.
             max_val (Optional[float]): Specifies in **units** the
                 maximum value you expect to measure.
-            units (Optional[nidaqmx.constants.FrequencyUnits]):
+            units (Optional[nidaqmx.constants.FrequencyUnits]): 
                 Specifies the units to use to return frequency
                 measurements.
             threshold_level (Optional[float]): Specifies in volts the
@@ -834,7 +834,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -866,10 +866,10 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
-            units (Optional[nidaqmx.constants.SoundPressureUnits]):
+            units (Optional[nidaqmx.constants.SoundPressureUnits]): 
                 Specifies the units to use to return sound pressure
                 measurements.
             mic_sensitivity (Optional[float]): Is the sensitivity of the
@@ -878,7 +878,7 @@ class AIChannelCollection(ChannelCollection):
                 instantaneous sound pressure level you expect to
                 measure. This value is in decibels, referenced to 20
                 micropascals.
-            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             current_excit_val (Optional[float]): Specifies in amperes
                 the amount of excitation to supply to the sensor. Refer
@@ -890,7 +890,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -932,7 +932,7 @@ class AIChannelCollection(ChannelCollection):
                 sensor. This value is in the units you specify with the
                 **sensitivity_units** input. Refer to the sensor
                 documentation to determine this value.
-            sensitivity_units (Optional[nidaqmx.constants.EddyCurrentProxProbeSensitivityUnits]):
+            sensitivity_units (Optional[nidaqmx.constants.EddyCurrentProxProbeSensitivityUnits]): 
                 Specifies the units of the **sensitivity** input.
             custom_scale_name (Optional[str]): Specifies the name of a
                 custom scale for the channel. If you want the channel to
@@ -941,7 +941,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -985,9 +985,9 @@ class AIChannelCollection(ChannelCollection):
                 sensor. This value is in the units you specify with the
                 **sensitivity_units** input. Refer to the sensor
                 documentation to determine this value.
-            sensitivity_units (Optional[nidaqmx.constants.LVDTSensitivityUnits]):
+            sensitivity_units (Optional[nidaqmx.constants.LVDTSensitivityUnits]): 
                 Specifies the units of the **sensitivity** input.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             voltage_excit_val (Optional[float]): Specifies in volts the
                 amount of excitation supplied to the sensor. Refer to
@@ -996,7 +996,7 @@ class AIChannelCollection(ChannelCollection):
             voltage_excit_freq (Optional[float]): Specifies in hertz the
                 excitation frequency that the sensor requires. Refer to
                 the sensor documentation to determine this value.
-            ac_excit_wire_mode (Optional[nidaqmx.constants.ACExcitWireMode]):
+            ac_excit_wire_mode (Optional[nidaqmx.constants.ACExcitWireMode]): 
                 Is the number of leads on the sensor. Some sensors
                 require you to tie leads together to create a four- or
                 five- wire sensor. Refer to the sensor documentation for
@@ -1008,7 +1008,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -1054,9 +1054,9 @@ class AIChannelCollection(ChannelCollection):
                 sensor. This value is in the units you specify with the
                 **sensitivity_units** input. Refer to the sensor
                 documentation to determine this value.
-            sensitivity_units (Optional[nidaqmx.constants.RVDTSensitivityUnits]):
+            sensitivity_units (Optional[nidaqmx.constants.RVDTSensitivityUnits]): 
                 Specifies the units of the **sensitivity** input.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             voltage_excit_val (Optional[float]): Specifies in volts the
                 amount of excitation supplied to the sensor. Refer to
@@ -1065,7 +1065,7 @@ class AIChannelCollection(ChannelCollection):
             voltage_excit_freq (Optional[float]): Specifies in hertz the
                 excitation frequency that the sensor requires. Refer to
                 the sensor documentation to determine this value.
-            ac_excit_wire_mode (Optional[nidaqmx.constants.ACExcitWireMode]):
+            ac_excit_wire_mode (Optional[nidaqmx.constants.ACExcitWireMode]): 
                 Is the number of leads on the sensor. Some sensors
                 require you to tie leads together to create a four- or
                 five- wire sensor. Refer to the sensor documentation for
@@ -1077,7 +1077,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -1114,7 +1114,7 @@ class AIChannelCollection(ChannelCollection):
                 name.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -1164,10 +1164,10 @@ class AIChannelCollection(ChannelCollection):
             units (Optional[nidaqmx.constants.PressureUnits]): Specifies
                 in which unit to return pressure measurements from the
                 channel.
-            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]):
+            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]): 
                 Specifies information about the bridge configuration and
                 measurement.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies information about the bridge configuration and
                 measurement.
             voltage_excit_val (Optional[float]): Specifies information
@@ -1181,10 +1181,10 @@ class AIChannelCollection(ChannelCollection):
             reverse_coeffs (Optional[List[float]]): Specifies how to
                 scale electrical values from the sensor to physical
                 units.
-            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]):
+            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
-            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]):
+            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
             custom_scale_name (Optional[str]): Specifies the name of a
@@ -1194,7 +1194,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
         if forward_coeffs is None:
@@ -1203,8 +1203,8 @@ class AIChannelCollection(ChannelCollection):
         if reverse_coeffs is None:
             reverse_coeffs = [0.0, 0.02]
 
-        forward_coeffs = numpy.float64(forward_coeffs)
-        reverse_coeffs = numpy.float64(reverse_coeffs)
+        forward_coeffs = numpy.array(forward_coeffs, dtype=numpy.float64)
+        reverse_coeffs = numpy.array(reverse_coeffs, dtype=numpy.float64)
 
 
         self._interpreter.create_ai_pressure_bridge_polynomial_chan(
@@ -1256,10 +1256,10 @@ class AIChannelCollection(ChannelCollection):
             units (Optional[nidaqmx.constants.PressureUnits]): Specifies
                 in which unit to return pressure measurements from the
                 channel.
-            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]):
+            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]): 
                 Specifies information about the bridge configuration and
                 measurement.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies information about the bridge configuration and
                 measurement.
             voltage_excit_val (Optional[float]): Specifies information
@@ -1270,13 +1270,13 @@ class AIChannelCollection(ChannelCollection):
             electrical_vals (Optional[List[float]]): Specifies how to
                 scale electrical values from the sensor to physical
                 units.
-            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]):
+            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
             physical_vals (Optional[List[float]]): Specifies how to
                 scale electrical values from the sensor to physical
                 units.
-            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]):
+            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
             custom_scale_name (Optional[str]): Specifies the name of a
@@ -1286,7 +1286,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
         if electrical_vals is None:
@@ -1295,8 +1295,8 @@ class AIChannelCollection(ChannelCollection):
         if physical_vals is None:
             physical_vals = [-100.0, 0.0, 100.0]
 
-        electrical_vals = numpy.float64(electrical_vals)
-        physical_vals = numpy.float64(physical_vals)
+        electrical_vals = numpy.array(electrical_vals, dtype=numpy.float64)
+        physical_vals = numpy.array(physical_vals, dtype=numpy.float64)
 
 
         self._interpreter.create_ai_pressure_bridge_table_chan(
@@ -1347,10 +1347,10 @@ class AIChannelCollection(ChannelCollection):
             units (Optional[nidaqmx.constants.PressureUnits]): Specifies
                 in which unit to return pressure measurements from the
                 channel.
-            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]):
+            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]): 
                 Specifies information about the bridge configuration and
                 measurement.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies information about the bridge configuration and
                 measurement.
             voltage_excit_val (Optional[float]): Specifies information
@@ -1364,7 +1364,7 @@ class AIChannelCollection(ChannelCollection):
             second_electrical_val (Optional[float]): Specifies how to
                 scale electrical values from the sensor to physical
                 units.
-            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]):
+            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
             first_physical_val (Optional[float]): Specifies how to scale
@@ -1372,7 +1372,7 @@ class AIChannelCollection(ChannelCollection):
             second_physical_val (Optional[float]): Specifies how to
                 scale electrical values from the sensor to physical
                 units.
-            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]):
+            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
             custom_scale_name (Optional[str]): Specifies the name of a
@@ -1382,7 +1382,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -1419,13 +1419,13 @@ class AIChannelCollection(ChannelCollection):
                 minimum value you expect to measure.
             max_val (Optional[float]): Specifies in **units** the
                 maximum value you expect to measure.
-            units (Optional[nidaqmx.constants.ResistanceUnits]):
+            units (Optional[nidaqmx.constants.ResistanceUnits]): 
                 Specifies the units to use to return resistance
                 measurements.
-            resistance_config (Optional[nidaqmx.constants.ResistanceConfiguration]):
+            resistance_config (Optional[nidaqmx.constants.ResistanceConfiguration]): 
                 Specifies the number of wires to use for resistive
                 measurements.
-            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             current_excit_val (Optional[float]): Specifies in amperes
                 the amount of excitation to supply to the sensor. Refer
@@ -1437,7 +1437,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -1466,12 +1466,12 @@ class AIChannelCollection(ChannelCollection):
                 channels to use to create the strain gage virtual
                 channels necessary to calculate the **rosette
                 measurements** channels.
-            rosette_type (nidaqmx.constants.StrainGageRosetteType):
+            rosette_type (nidaqmx.constants.StrainGageRosetteType): 
                 Specifies information about the rosette configuration
                 and measurements.
             gage_orientation (float): Specifies information about the
                 rosette configuration and measurements.
-            rosette_meas_types (List[nidaqmx.constants.StrainGageRosetteMeasurementType]):
+            rosette_meas_types (List[nidaqmx.constants.StrainGageRosetteMeasurementType]): 
                 Specifies information about the rosette configuration
                 and measurements.
             name_to_assign_to_channel (Optional[str]): Specifies a name
@@ -1484,10 +1484,10 @@ class AIChannelCollection(ChannelCollection):
             max_val (Optional[float]): Specifies the maximum strain you
                 expect to measure. This value applies to each strain
                 gage in the rosette.
-            strain_config (Optional[nidaqmx.constants.StrainGageBridgeType]):
+            strain_config (Optional[nidaqmx.constants.StrainGageBridgeType]): 
                 Specifies information about the bridge configuration and
                 measurement.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies information about the bridge configuration and
                 measurement.
             voltage_excit_val (Optional[float]): Specifies information
@@ -1503,15 +1503,13 @@ class AIChannelCollection(ChannelCollection):
                 measurement.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
         if rosette_meas_types is None:
             rosette_meas_types = []
 
-        temp_vals = [p.value for p in rosette_meas_types]
-
-        rosette_meas_types = numpy.int32(temp_vals)
+        rosette_meas_types = numpy.array([p.value for p in rosette_meas_types], dtype=numpy.int32)
 
 
         self._interpreter.create_ai_rosette_strain_gage_chan(
@@ -1547,15 +1545,15 @@ class AIChannelCollection(ChannelCollection):
                 minimum value you expect to measure.
             max_val (Optional[float]): Specifies in **units** the
                 maximum value you expect to measure.
-            units (Optional[nidaqmx.constants.TemperatureUnits]):
+            units (Optional[nidaqmx.constants.TemperatureUnits]): 
                 Specifies the units to use to return temperature
                 measurements.
             rtd_type (Optional[nidaqmx.constants.RTDType]): Specifies
                 the type of RTD connected to the channel.
-            resistance_config (Optional[nidaqmx.constants.ResistanceConfiguration]):
+            resistance_config (Optional[nidaqmx.constants.ResistanceConfiguration]): 
                 Specifies the number of wires to use for resistive
                 measurements.
-            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             current_excit_val (Optional[float]): Specifies in amperes
                 the amount of excitation to supply to the sensor. Refer
@@ -1566,7 +1564,7 @@ class AIChannelCollection(ChannelCollection):
                 to determine this value.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -1606,10 +1604,10 @@ class AIChannelCollection(ChannelCollection):
                 maximum value you expect to measure.
             units (Optional[nidaqmx.constants.StrainUnits]): Specifies
                 the units to use to return strain measurements.
-            strain_config (Optional[nidaqmx.constants.StrainGageBridgeType]):
+            strain_config (Optional[nidaqmx.constants.StrainGageBridgeType]): 
                 Specifies information about the bridge configuration and
                 measurement.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies information about the bridge configuration and
                 measurement.
             voltage_excit_val (Optional[float]): Specifies information
@@ -1633,7 +1631,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -1664,12 +1662,12 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            units (Optional[nidaqmx.constants.TemperatureUnits]):
+            units (Optional[nidaqmx.constants.TemperatureUnits]): 
                 Specifies the units to use to return temperature
                 measurements.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -1703,14 +1701,14 @@ class AIChannelCollection(ChannelCollection):
                 minimum value you expect to measure.
             max_val (Optional[float]): Specifies in **units** the
                 maximum value you expect to measure.
-            units (Optional[nidaqmx.constants.TemperatureUnits]):
+            units (Optional[nidaqmx.constants.TemperatureUnits]): 
                 Specifies the units to use to return temperature
                 measurements.
-            thermocouple_type (Optional[nidaqmx.constants.ThermocoupleType]):
+            thermocouple_type (Optional[nidaqmx.constants.ThermocoupleType]): 
                 Specifies the type of thermocouple connected to the
                 channel. Thermocouple types differ in composition and
                 measurement range.
-            cjc_source (Optional[nidaqmx.constants.CJCSource]):
+            cjc_source (Optional[nidaqmx.constants.CJCSource]): 
                 Specifies the source of cold-junction compensation.
             cjc_val (Optional[float]): Specifies in **units** the
                 temperature of the cold junction if you set
@@ -1720,7 +1718,7 @@ class AIChannelCollection(ChannelCollection):
                 junction if you set **cjc_source** to **CHANNEL**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -1757,13 +1755,13 @@ class AIChannelCollection(ChannelCollection):
                 minimum value you expect to measure.
             max_val (Optional[float]): Specifies in **units** the
                 maximum value you expect to measure.
-            units (Optional[nidaqmx.constants.TemperatureUnits]):
+            units (Optional[nidaqmx.constants.TemperatureUnits]): 
                 Specifies the units to use to return temperature
                 measurements.
-            resistance_config (Optional[nidaqmx.constants.ResistanceConfiguration]):
+            resistance_config (Optional[nidaqmx.constants.ResistanceConfiguration]): 
                 Specifies the number of wires to use for resistive
                 measurements.
-            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             current_excit_val (Optional[float]): Specifies in amperes
                 the amount of excitation to supply to the sensor. Refer
@@ -1779,7 +1777,7 @@ class AIChannelCollection(ChannelCollection):
                 documentation to determine values for these constants.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -1816,13 +1814,13 @@ class AIChannelCollection(ChannelCollection):
                 minimum value you expect to measure.
             max_val (Optional[float]): Specifies in **units** the
                 maximum value you expect to measure.
-            units (Optional[nidaqmx.constants.TemperatureUnits]):
+            units (Optional[nidaqmx.constants.TemperatureUnits]): 
                 Specifies the units to use to return temperature
                 measurements.
-            resistance_config (Optional[nidaqmx.constants.ResistanceConfiguration]):
+            resistance_config (Optional[nidaqmx.constants.ResistanceConfiguration]): 
                 Specifies the number of wires to use for resistive
                 measurements.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             voltage_excit_val (Optional[float]): Specifies in volts the
                 amount of excitation supplied to the sensor. Refer to
@@ -1841,7 +1839,7 @@ class AIChannelCollection(ChannelCollection):
                 reference resistor.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -1891,10 +1889,10 @@ class AIChannelCollection(ChannelCollection):
             units (Optional[nidaqmx.constants.TorqueUnits]): Specifies
                 in which unit to return torque measurements from the
                 channel.
-            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]):
+            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]): 
                 Specifies information about the bridge configuration and
                 measurement.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies information about the bridge configuration and
                 measurement.
             voltage_excit_val (Optional[float]): Specifies information
@@ -1908,10 +1906,10 @@ class AIChannelCollection(ChannelCollection):
             reverse_coeffs (Optional[List[float]]): Specifies how to
                 scale electrical values from the sensor to physical
                 units.
-            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]):
+            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
-            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]):
+            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
             custom_scale_name (Optional[str]): Specifies the name of a
@@ -1921,7 +1919,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
         if forward_coeffs is None:
@@ -1930,8 +1928,8 @@ class AIChannelCollection(ChannelCollection):
         if reverse_coeffs is None:
             reverse_coeffs = [0.0, 0.02]
 
-        forward_coeffs = numpy.float64(forward_coeffs)
-        reverse_coeffs = numpy.float64(reverse_coeffs)
+        forward_coeffs = numpy.array(forward_coeffs, dtype=numpy.float64)
+        reverse_coeffs = numpy.array(reverse_coeffs, dtype=numpy.float64)
 
 
         self._interpreter.create_ai_torque_bridge_polynomial_chan(
@@ -1982,10 +1980,10 @@ class AIChannelCollection(ChannelCollection):
             units (Optional[nidaqmx.constants.TorqueUnits]): Specifies
                 in which unit to return torque measurements from the
                 channel.
-            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]):
+            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]): 
                 Specifies information about the bridge configuration and
                 measurement.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies information about the bridge configuration and
                 measurement.
             voltage_excit_val (Optional[float]): Specifies information
@@ -1996,13 +1994,13 @@ class AIChannelCollection(ChannelCollection):
             electrical_vals (Optional[List[float]]): Specifies how to
                 scale electrical values from the sensor to physical
                 units.
-            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]):
+            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
             physical_vals (Optional[List[float]]): Specifies how to
                 scale electrical values from the sensor to physical
                 units.
-            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]):
+            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
             custom_scale_name (Optional[str]): Specifies the name of a
@@ -2012,7 +2010,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
         if electrical_vals is None:
@@ -2021,8 +2019,8 @@ class AIChannelCollection(ChannelCollection):
         if physical_vals is None:
             physical_vals = [-100.0, 0.0, 100.0]
 
-        electrical_vals = numpy.float64(electrical_vals)
-        physical_vals = numpy.float64(physical_vals)
+        electrical_vals = numpy.array(electrical_vals, dtype=numpy.float64)
+        physical_vals = numpy.array(physical_vals, dtype=numpy.float64)
 
 
         self._interpreter.create_ai_torque_bridge_table_chan(
@@ -2072,10 +2070,10 @@ class AIChannelCollection(ChannelCollection):
             units (Optional[nidaqmx.constants.TorqueUnits]): Specifies
                 in which unit to return torque measurements from the
                 channel.
-            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]):
+            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]): 
                 Specifies information about the bridge configuration and
                 measurement.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies information about the bridge configuration and
                 measurement.
             voltage_excit_val (Optional[float]): Specifies information
@@ -2089,7 +2087,7 @@ class AIChannelCollection(ChannelCollection):
             second_electrical_val (Optional[float]): Specifies how to
                 scale electrical values from the sensor to physical
                 units.
-            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]):
+            electrical_units (Optional[nidaqmx.constants.BridgeElectricalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
             first_physical_val (Optional[float]): Specifies how to scale
@@ -2097,7 +2095,7 @@ class AIChannelCollection(ChannelCollection):
             second_physical_val (Optional[float]): Specifies how to
                 scale electrical values from the sensor to physical
                 units.
-            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]):
+            physical_units (Optional[nidaqmx.constants.BridgePhysicalUnits]): 
                 Specifies how to scale electrical values from the sensor
                 to physical units.
             custom_scale_name (Optional[str]): Specifies the name of a
@@ -2107,7 +2105,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -2143,7 +2141,7 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
             min_val (Optional[float]): Specifies in **units** the
@@ -2157,9 +2155,9 @@ class AIChannelCollection(ChannelCollection):
                 sensor. This value is in the units you specify with the
                 **sensitivity_units** input. Refer to the sensor
                 documentation to determine this value.
-            sensitivity_units (Optional[nidaqmx.constants.VelocityIEPESensorSensitivityUnits]):
+            sensitivity_units (Optional[nidaqmx.constants.VelocityIEPESensorSensitivityUnits]): 
                 Specifies the units of the **sensitivity** input.
-            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             current_excit_val (Optional[float]): Specifies in amperes
                 the amount of excitation to supply to the sensor. Refer
@@ -2171,7 +2169,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -2203,7 +2201,7 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
             min_val (Optional[float]): Specifies in **units** the
@@ -2219,7 +2217,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -2253,7 +2251,7 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
             min_val (Optional[float]): Specifies in **units** the
@@ -2262,9 +2260,9 @@ class AIChannelCollection(ChannelCollection):
                 maximum value you expect to measure.
             units (Optional[nidaqmx.constants.VoltageUnits]): Specifies
                 the units to use to return voltage measurements.
-            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]):
+            bridge_config (Optional[nidaqmx.constants.BridgeConfiguration]): 
                 Specifies what type of Wheatstone bridge the sensor is.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             voltage_excit_val (Optional[float]): Specifies in volts the
                 amount of excitation supplied to the sensor. Refer to
@@ -2283,7 +2281,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -2313,7 +2311,7 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
             min_val (Optional[float]): Specifies in **units** the
@@ -2329,7 +2327,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -2361,7 +2359,7 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
             min_val (Optional[float]): Specifies in **units** the
@@ -2371,7 +2369,7 @@ class AIChannelCollection(ChannelCollection):
             units (Optional[nidaqmx.constants.AccelUnits]): Specifies
                 the units to use to return acceleration measurements
                 from the channel.
-            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             current_excit_val (Optional[float]): Specifies in amperes
                 the amount of excitation to supply to the sensor. Refer
@@ -2383,7 +2381,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -2422,7 +2420,7 @@ class AIChannelCollection(ChannelCollection):
                 maximum value you expect to measure.
             units (Optional[nidaqmx.constants.TEDSUnits]): Specifies in
                 which unit to return measurements from the channel.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             voltage_excit_val (Optional[float]): Specifies in volts the
                 amount of excitation supplied to the sensor. Refer to
@@ -2435,7 +2433,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -2466,7 +2464,7 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
             min_val (Optional[float]): Specifies in **units** the
@@ -2475,7 +2473,7 @@ class AIChannelCollection(ChannelCollection):
                 maximum value you expect to measure.
             units (Optional[nidaqmx.constants.TEDSUnits]): Specifies the
                 units to use to return measurements.
-            shunt_resistor_loc (Optional[nidaqmx.constants.CurrentShuntResistorLocation]):
+            shunt_resistor_loc (Optional[nidaqmx.constants.CurrentShuntResistorLocation]): 
                 Specifies the location of the shunt resistor. For
                 devices with built-in shunt resistors, specify the
                 location as **INTERNAL**. For devices that do not have
@@ -2492,7 +2490,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -2532,7 +2530,7 @@ class AIChannelCollection(ChannelCollection):
             units (Optional[nidaqmx.constants.ForceUnits]): Specifies in
                 which unit to return force measurements from the
                 channel.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             voltage_excit_val (Optional[float]): Specifies in volts the
                 amount of excitation supplied to the sensor. Refer to
@@ -2545,7 +2543,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -2577,7 +2575,7 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
             min_val (Optional[float]): Specifies in **units** the
@@ -2587,7 +2585,7 @@ class AIChannelCollection(ChannelCollection):
             units (Optional[nidaqmx.constants.ForceUnits]): Specifies in
                 which unit to return force measurements from the
                 channel.
-            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             current_excit_val (Optional[float]): Specifies in amperes
                 the amount of excitation to supply to the sensor. Refer
@@ -2599,7 +2597,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -2633,17 +2631,17 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
-            units (Optional[nidaqmx.constants.SoundPressureUnits]):
+            units (Optional[nidaqmx.constants.SoundPressureUnits]): 
                 Specifies the units to use to return sound pressure
                 measurements.
             max_snd_press_level (Optional[float]): Is the maximum
                 instantaneous sound pressure level you expect to
                 measure. This value is in decibels, referenced to 20
                 micropascals.
-            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             current_excit_val (Optional[float]): Specifies in amperes
                 the amount of excitation to supply to the sensor. Refer
@@ -2655,7 +2653,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -2695,7 +2693,7 @@ class AIChannelCollection(ChannelCollection):
             units (Optional[nidaqmx.constants.LengthUnits]): Specifies
                 the units to use to return linear position measurements
                 from the channel.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             voltage_excit_val (Optional[float]): Specifies in volts the
                 amount of excitation supplied to the sensor. Refer to
@@ -2704,7 +2702,7 @@ class AIChannelCollection(ChannelCollection):
             voltage_excit_freq (Optional[float]): Specifies in hertz the
                 excitation frequency that the sensor requires. Refer to
                 the sensor documentation to determine this value.
-            ac_excit_wire_mode (Optional[nidaqmx.constants.ACExcitWireMode]):
+            ac_excit_wire_mode (Optional[nidaqmx.constants.ACExcitWireMode]): 
                 Is the number of leads on the sensor. Some sensors
                 require you to tie leads together to create a four- or
                 five- wire sensor. Refer to the sensor documentation for
@@ -2716,7 +2714,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -2757,7 +2755,7 @@ class AIChannelCollection(ChannelCollection):
             units (Optional[nidaqmx.constants.AngleUnits]): Specifies
                 the units to use to return angular position measurements
                 from the channel.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             voltage_excit_val (Optional[float]): Specifies in volts the
                 amount of excitation supplied to the sensor. Refer to
@@ -2766,7 +2764,7 @@ class AIChannelCollection(ChannelCollection):
             voltage_excit_freq (Optional[float]): Specifies in hertz the
                 excitation frequency that the sensor requires. Refer to
                 the sensor documentation to determine this value.
-            ac_excit_wire_mode (Optional[nidaqmx.constants.ACExcitWireMode]):
+            ac_excit_wire_mode (Optional[nidaqmx.constants.ACExcitWireMode]): 
                 Is the number of leads on the sensor. Some sensors
                 require you to tie leads together to create a four- or
                 five- wire sensor. Refer to the sensor documentation for
@@ -2778,7 +2776,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -2819,7 +2817,7 @@ class AIChannelCollection(ChannelCollection):
             units (Optional[nidaqmx.constants.PressureUnits]): Specifies
                 in which unit to return pressure measurements from the
                 channel.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             voltage_excit_val (Optional[float]): Specifies in volts the
                 amount of excitation supplied to the sensor. Refer to
@@ -2832,7 +2830,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -2869,10 +2867,10 @@ class AIChannelCollection(ChannelCollection):
                 maximum value you expect to measure.
             units (Optional[nidaqmx.constants.TEDSUnits]): Specifies the
                 units to use to return measurements.
-            resistance_config (Optional[nidaqmx.constants.ResistanceConfiguration]):
+            resistance_config (Optional[nidaqmx.constants.ResistanceConfiguration]): 
                 Specifies the number of wires to use for resistive
                 measurements.
-            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             current_excit_val (Optional[float]): Specifies in amperes
                 the amount of excitation to supply to the sensor. Refer
@@ -2884,7 +2882,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -2920,20 +2918,20 @@ class AIChannelCollection(ChannelCollection):
                 minimum value you expect to measure.
             max_val (Optional[float]): Specifies in **units** the
                 maximum value you expect to measure.
-            units (Optional[nidaqmx.constants.TemperatureUnits]):
+            units (Optional[nidaqmx.constants.TemperatureUnits]): 
                 Specifies the units to use to return temperature
                 measurements.
-            resistance_config (Optional[nidaqmx.constants.ResistanceConfiguration]):
+            resistance_config (Optional[nidaqmx.constants.ResistanceConfiguration]): 
                 Specifies the number of wires to use for resistive
                 measurements.
-            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             current_excit_val (Optional[float]): Specifies in amperes
                 the amount of excitation to supply to the sensor. Refer
                 to the sensor documentation to determine this value.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -2970,7 +2968,7 @@ class AIChannelCollection(ChannelCollection):
                 maximum value you expect to measure.
             units (Optional[nidaqmx.constants.StrainUnits]): Specifies
                 the units to use to return strain measurements.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies information about the bridge configuration and
                 measurement.
             voltage_excit_val (Optional[float]): Specifies information
@@ -2988,7 +2986,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -3024,10 +3022,10 @@ class AIChannelCollection(ChannelCollection):
                 minimum value you expect to measure.
             max_val (Optional[float]): Specifies in **units** the
                 maximum value you expect to measure.
-            units (Optional[nidaqmx.constants.TemperatureUnits]):
+            units (Optional[nidaqmx.constants.TemperatureUnits]): 
                 Specifies the units to use to return temperature
                 measurements.
-            cjc_source (Optional[nidaqmx.constants.CJCSource]):
+            cjc_source (Optional[nidaqmx.constants.CJCSource]): 
                 Specifies the source of cold-junction compensation.
             cjc_val (Optional[float]): Specifies in **units** the
                 temperature of the cold junction if you set
@@ -3037,7 +3035,7 @@ class AIChannelCollection(ChannelCollection):
                 junction if you set **cjc_source** to **CHANNEL**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -3074,20 +3072,20 @@ class AIChannelCollection(ChannelCollection):
                 minimum value you expect to measure.
             max_val (Optional[float]): Specifies in **units** the
                 maximum value you expect to measure.
-            units (Optional[nidaqmx.constants.TemperatureUnits]):
+            units (Optional[nidaqmx.constants.TemperatureUnits]): 
                 Specifies the units to use to return temperature
                 measurements.
-            resistance_config (Optional[nidaqmx.constants.ResistanceConfiguration]):
+            resistance_config (Optional[nidaqmx.constants.ResistanceConfiguration]): 
                 Specifies the number of wires to use for resistive
                 measurements.
-            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            current_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             current_excit_val (Optional[float]): Specifies in amperes
                 the amount of excitation to supply to the sensor. Refer
                 to the sensor documentation to determine this value.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -3124,13 +3122,13 @@ class AIChannelCollection(ChannelCollection):
                 minimum value you expect to measure.
             max_val (Optional[float]): Specifies in **units** the
                 maximum value you expect to measure.
-            units (Optional[nidaqmx.constants.TemperatureUnits]):
+            units (Optional[nidaqmx.constants.TemperatureUnits]): 
                 Specifies the units to use to return temperature
                 measurements.
-            resistance_config (Optional[nidaqmx.constants.ResistanceConfiguration]):
+            resistance_config (Optional[nidaqmx.constants.ResistanceConfiguration]): 
                 Specifies the number of wires to use for resistive
                 measurements.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             voltage_excit_val (Optional[float]): Specifies in volts the
                 amount of excitation supplied to the sensor. Refer to
@@ -3140,7 +3138,7 @@ class AIChannelCollection(ChannelCollection):
                 reference resistor.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -3179,7 +3177,7 @@ class AIChannelCollection(ChannelCollection):
             units (Optional[nidaqmx.constants.TorqueUnits]): Specifies
                 in which unit to return torque measurements from the
                 channel.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             voltage_excit_val (Optional[float]): Specifies in volts the
                 amount of excitation supplied to the sensor. Refer to
@@ -3192,7 +3190,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -3224,7 +3222,7 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
             min_val (Optional[float]): Specifies in **units** the
@@ -3240,7 +3238,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
@@ -3273,7 +3271,7 @@ class AIChannelCollection(ChannelCollection):
                 If you do not specify a value for this input, NI-DAQmx
                 uses the physical channel name as the virtual channel
                 name.
-            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]):
+            terminal_config (Optional[nidaqmx.constants.TerminalConfiguration]): 
                 Specifies the input terminal configuration for the
                 channel.
             min_val (Optional[float]): Specifies in **units** the
@@ -3282,7 +3280,7 @@ class AIChannelCollection(ChannelCollection):
                 maximum value you expect to measure.
             units (Optional[nidaqmx.constants.TEDSUnits]): Specifies the
                 units to use to return measurements.
-            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]):
+            voltage_excit_source (Optional[nidaqmx.constants.ExcitationSource]): 
                 Specifies the source of excitation.
             voltage_excit_val (Optional[float]): Specifies in volts the
                 amount of excitation supplied to the sensor. Refer to
@@ -3295,7 +3293,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx._task_modules.channels.ai_channel.AIChannel:
-
+            
             Indicates the newly created channel object.
         """
 
