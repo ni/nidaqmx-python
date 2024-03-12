@@ -1016,8 +1016,8 @@ class StartTrigger:
         if trigger_level_array is None:
             trigger_level_array = []
 
-        trigger_slope_array = numpy.int32([p.value for p in trigger_slope_array])
-        trigger_level_array = numpy.float64(trigger_level_array)
+        trigger_slope_array = numpy.array([p.value for p in trigger_slope_array], dtype=numpy.int32)
+        trigger_level_array = numpy.array(trigger_level_array, dtype=numpy.float64)
 
 
         self._interpreter.cfg_anlg_multi_edge_start_trig(
