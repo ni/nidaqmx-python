@@ -647,7 +647,7 @@ class PhysicalChannel:
         if bit_stream is None:
             bit_stream = []
 
-        bit_stream = numpy.uint8(bit_stream)
+        bit_stream = numpy.array(bit_stream, dtype=numpy.uint8)
 
 
         self._interpreter.write_to_teds_from_array(

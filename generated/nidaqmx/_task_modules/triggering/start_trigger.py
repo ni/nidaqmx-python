@@ -1057,7 +1057,8 @@ class StartTrigger:
 
     def cfg_time_start_trig(self, when, timescale=Timescale.USE_HOST):
         """
-        New Start Trigger
+        Configures the task to start acquiring or generating samples at
+        a specified time.
 
         Args:
             when (datetime): Specifies when to trigger.

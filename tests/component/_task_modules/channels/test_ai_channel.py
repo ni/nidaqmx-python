@@ -844,12 +844,11 @@ def test___task___add_ai_rosette_strain_gage_chan___sets_channel_attributes(
     task: Task,
     sim_bridge_device: Device,
 ) -> None:
-    # #483: add_ai_rosette_strain_gage_chan parameter rosette_meas_types has the wrong type
     task.ai_channels.add_ai_rosette_strain_gage_chan(
         ",".join(sim_bridge_device.ai_physical_chans.channel_names[0:2]),
         StrainGageRosetteType.TEE,
         0.0,
-        [StrainGageRosetteMeasurementType.PRINCIPAL_STRAIN_1.value],
+        [StrainGageRosetteMeasurementType.PRINCIPAL_STRAIN_1],
     )
     chan: AIChannel = task.ai_channels["rosette0_principalStrain1"]
     assert chan.ai_meas_type == UsageTypeAI.ROSETTE_STRAIN_GAGE

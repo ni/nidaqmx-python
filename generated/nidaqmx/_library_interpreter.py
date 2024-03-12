@@ -4411,8 +4411,8 @@ class LibraryInterpreter(BaseInterpreter):
         return read_array_high_ticks, read_array_low_ticks, samps_per_chan_read.value
 
     def read_ctr_ticks_scalar(self, task, timeout):
-        high_ticks = ctypes.c_uint()
-        low_ticks = ctypes.c_uint()
+        high_ticks = ctypes.c_uint32()
+        low_ticks = ctypes.c_uint32()
 
         cfunc = lib_importer.windll.DAQmxReadCtrTicksScalar
         if cfunc.argtypes is None:
@@ -4420,8 +4420,8 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes.c_double,
-                        ctypes.POINTER(ctypes.c_uint),
-                        ctypes.POINTER(ctypes.c_uint),
+                        ctypes.POINTER(ctypes.c_uint32),
+                        ctypes.POINTER(ctypes.c_uint32),
                         ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
@@ -6043,7 +6043,8 @@ class LibraryInterpreter(BaseInterpreter):
                 if cfunc.argtypes is None:
                     cfunc.argtypes = [
                         lib_importer.task_handle, c_bool32, ctypes.c_double,
-                        ctypes.c_uint, ctypes.c_uint, ctypes.POINTER(c_bool32)]
+                        ctypes.c_uint32, ctypes.c_uint32,
+                        ctypes.POINTER(c_bool32)]
 
         error_code = cfunc(
             task, auto_start, timeout, high_ticks, low_ticks, None)

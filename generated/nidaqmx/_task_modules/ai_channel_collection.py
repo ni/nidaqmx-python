@@ -14,10 +14,11 @@ from nidaqmx.constants import (
     ForceIEPESensorSensitivityUnits, ForceUnits, FrequencyUnits,
     LVDTSensitivityUnits, LengthUnits, PressureUnits, RTDType,
     RVDTSensitivityUnits, ResistanceConfiguration, ResistanceUnits,
-    SoundPressureUnits, StrainGageBridgeType, StrainGageRosetteType,
-    StrainUnits, TEDSUnits, TemperatureUnits, TerminalConfiguration,
-    ThermocoupleType, TorqueUnits, VelocityIEPESensorSensitivityUnits,
-    VelocityUnits, VoltageUnits)
+    SoundPressureUnits, StrainGageBridgeType,
+    StrainGageRosetteMeasurementType, StrainGageRosetteType, StrainUnits,
+    TEDSUnits, TemperatureUnits, TerminalConfiguration, ThermocoupleType,
+    TorqueUnits, VelocityIEPESensorSensitivityUnits, VelocityUnits,
+    VoltageUnits)
 
 
 class AIChannelCollection(ChannelCollection):
@@ -40,8 +41,8 @@ class AIChannelCollection(ChannelCollection):
             name_to_assign_to_channel (Optional[str]): Specifies a name to
                 assign to the virtual channel this method creates.
         Returns:
-            nidaqmx._task_modules.channels.ai_channel.AIChannel: 
-            
+            nidaqmx._task_modules.channels.ai_channel.AIChannel:
+
             Specifies the newly created AIChannel object.
         """
         if name_to_assign_to_channel:
@@ -539,8 +540,8 @@ class AIChannelCollection(ChannelCollection):
         if reverse_coeffs is None:
             reverse_coeffs = [0.0, 0.02]
 
-        forward_coeffs = numpy.float64(forward_coeffs)
-        reverse_coeffs = numpy.float64(reverse_coeffs)
+        forward_coeffs = numpy.array(forward_coeffs, dtype=numpy.float64)
+        reverse_coeffs = numpy.array(reverse_coeffs, dtype=numpy.float64)
 
 
         self._interpreter.create_ai_force_bridge_polynomial_chan(
@@ -629,8 +630,8 @@ class AIChannelCollection(ChannelCollection):
         if physical_vals is None:
             physical_vals = [-100.0, 0.0, 100.0]
 
-        electrical_vals = numpy.float64(electrical_vals)
-        physical_vals = numpy.float64(physical_vals)
+        electrical_vals = numpy.array(electrical_vals, dtype=numpy.float64)
+        physical_vals = numpy.array(physical_vals, dtype=numpy.float64)
 
 
         self._interpreter.create_ai_force_bridge_table_chan(
@@ -1202,8 +1203,8 @@ class AIChannelCollection(ChannelCollection):
         if reverse_coeffs is None:
             reverse_coeffs = [0.0, 0.02]
 
-        forward_coeffs = numpy.float64(forward_coeffs)
-        reverse_coeffs = numpy.float64(reverse_coeffs)
+        forward_coeffs = numpy.array(forward_coeffs, dtype=numpy.float64)
+        reverse_coeffs = numpy.array(reverse_coeffs, dtype=numpy.float64)
 
 
         self._interpreter.create_ai_pressure_bridge_polynomial_chan(
@@ -1294,8 +1295,8 @@ class AIChannelCollection(ChannelCollection):
         if physical_vals is None:
             physical_vals = [-100.0, 0.0, 100.0]
 
-        electrical_vals = numpy.float64(electrical_vals)
-        physical_vals = numpy.float64(physical_vals)
+        electrical_vals = numpy.array(electrical_vals, dtype=numpy.float64)
+        physical_vals = numpy.array(physical_vals, dtype=numpy.float64)
 
 
         self._interpreter.create_ai_pressure_bridge_table_chan(
@@ -1470,8 +1471,9 @@ class AIChannelCollection(ChannelCollection):
                 and measurements.
             gage_orientation (float): Specifies information about the
                 rosette configuration and measurements.
-            rosette_meas_types (List[int]): Specifies information about
-                the rosette configuration and measurements.
+            rosette_meas_types (List[nidaqmx.constants.StrainGageRosetteMeasurementType]): 
+                Specifies information about the rosette configuration
+                and measurements.
             name_to_assign_to_channel (Optional[str]): Specifies a name
                 to assign to the virtual channel this function creates.
                 If you do not specify a value for this input, NI-DAQmx
@@ -1507,7 +1509,7 @@ class AIChannelCollection(ChannelCollection):
         if rosette_meas_types is None:
             rosette_meas_types = []
 
-        rosette_meas_types = numpy.int32(rosette_meas_types)
+        rosette_meas_types = numpy.array([p.value for p in rosette_meas_types], dtype=numpy.int32)
 
 
         self._interpreter.create_ai_rosette_strain_gage_chan(
@@ -1926,8 +1928,8 @@ class AIChannelCollection(ChannelCollection):
         if reverse_coeffs is None:
             reverse_coeffs = [0.0, 0.02]
 
-        forward_coeffs = numpy.float64(forward_coeffs)
-        reverse_coeffs = numpy.float64(reverse_coeffs)
+        forward_coeffs = numpy.array(forward_coeffs, dtype=numpy.float64)
+        reverse_coeffs = numpy.array(reverse_coeffs, dtype=numpy.float64)
 
 
         self._interpreter.create_ai_torque_bridge_polynomial_chan(
@@ -2017,8 +2019,8 @@ class AIChannelCollection(ChannelCollection):
         if physical_vals is None:
             physical_vals = [-100.0, 0.0, 100.0]
 
-        electrical_vals = numpy.float64(electrical_vals)
-        physical_vals = numpy.float64(physical_vals)
+        electrical_vals = numpy.array(electrical_vals, dtype=numpy.float64)
+        physical_vals = numpy.array(physical_vals, dtype=numpy.float64)
 
 
         self._interpreter.create_ai_torque_bridge_table_chan(

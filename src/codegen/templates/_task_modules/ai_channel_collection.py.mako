@@ -37,8 +37,8 @@ class AIChannelCollection(ChannelCollection):
             name_to_assign_to_channel (Optional[str]): Specifies a name to
                 assign to the virtual channel this method creates.
         Returns:
-            nidaqmx._task_modules.channels.ai_channel.AIChannel: 
-            
+            nidaqmx._task_modules.channels.ai_channel.AIChannel:
+
             Specifies the newly created AIChannel object.
         """
         if name_to_assign_to_channel:

@@ -148,7 +148,6 @@ def test___counter_writer___write_many_sample_pulse_frequency_with_wrong_dtype__
     freq_dtype: numpy.typing.DTypeLike,
     duty_cycle_dtype: numpy.typing.DTypeLike,
 ) -> None:
-
     writer = CounterWriter(co_freq_task.out_stream)
     samples_to_write = 10
     frequencies = numpy.full(samples_to_write, math.inf, dtype=freq_dtype)
@@ -209,7 +208,6 @@ def test___counter_writer___write_many_sample_pulse_time_with_wrong_dtype___rais
     high_time_dtype: numpy.typing.DTypeLike,
     low_time_dtype: numpy.typing.DTypeLike,
 ) -> None:
-
     writer = CounterWriter(co_time_task.out_stream)
     samples_to_write = 10
     high_times = numpy.full(samples_to_write, math.inf, dtype=high_time_dtype)
@@ -270,7 +268,6 @@ def test___counter_writer___write_many_sample_pulse_ticks_with_wrong_dtype___rai
     high_ticks_dtype: numpy.typing.DTypeLike,
     low_ticks_dtype: numpy.typing.DTypeLike,
 ) -> None:
-
     writer = CounterWriter(co_ticks_task.out_stream)
     samples_to_write = 10
     high_ticks = numpy.full(samples_to_write, 0, dtype=high_ticks_dtype)
