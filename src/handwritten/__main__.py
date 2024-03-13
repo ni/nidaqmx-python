@@ -16,7 +16,6 @@ from typing import Optional
     count=True,
     help="Enable verbose logging. Repeat to increase verbosity."
 )
-
 def main(verbosity: int) -> None:
     _configure_logging(verbosity)
 
