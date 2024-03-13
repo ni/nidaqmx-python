@@ -73,7 +73,7 @@ pykka = ">=3.0"
 tox = ">=3.24"
 
 [tool.poetry.scripts]
-installdriver = 'nidaqmx._install_daqmx:installdriver'
+nidaqmx = 'nidaqmx.__main__:main'
 
 [tool.black]
 line-length = 100

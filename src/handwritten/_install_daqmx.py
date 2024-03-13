@@ -8,16 +8,14 @@ import sys
 import logging
 import click
 import errno
+import pathlib
 from typing import List, Tuple, Optional
+
+MODULE_DIR = pathlib.Path(__file__).parent
+METADATA_FILE = MODULE_DIR / "metadata.json"
 
 if sys.platform.startswith("win"):
    import winreg
-
-
-# <TODO> repelace the URL with a static URL
-_META_DATA_URL = "http://localhost:8000/ni-daqmx-update-metadata.json"
-
-
 
 def parse_version(version: str) -> Tuple[int, ...]:
     """
@@ -32,7 +30,9 @@ def parse_version(version: str) -> Tuple[int, ...]:
     try:
         return tuple(int(part) for part in version.split("."))
     except ValueError:
-        raise ValueError("Invalid version format")
+        raise click.ClickException(
+            f'Invalid Version Format found'
+        ) from e
 
 def _compare_version(installed_version: str, source_version: str) -> int:
     """
@@ -57,7 +57,9 @@ def _compare_version(installed_version: str, source_version: str) -> int:
         else:
             return 1
     except ValueError:
-        raise ValueError("Invalid version format")
+        raise click.ClickException(
+            f'Invalid Version Format found'
+        ) from e
 
 
 
@@ -72,7 +74,7 @@ def _check_daqmx_is_installed() -> str:
     try:
         with winreg.OpenKeyEx(
             winreg.HKEY_LOCAL_MACHINE,
-            r"SOFTWARE\National Instruments\NI-DAQmx\CurrentVersion1",
+            r"SOFTWARE\National Instruments\NI-DAQmx\CurrentVersion",
             0,
             winreg.KEY_READ | winreg.KEY_WOW64_32KEY,
         ) as daqmx_reg_key:
@@ -82,14 +84,19 @@ def _check_daqmx_is_installed() -> str:
         if product_name == "NI-DAQmx":
             return product_version
     except FileNotFoundError:
-        print("Info: No existing NI-DAQmx installation found")
+        logging.info("No existing NI-DAQmx installation found.")
         return None
     except PermissionError:
-        print("Error: Access denied to registry key")
-        raise
+        logging.debug("Permission denied while trying to read the registry key")
+        raise click.ClickException(
+            f'Permission denied while trying to read the registry key.'
+        ) from e
+
     except OSError as e:
-        print("Error:", e)
-        raise
+        logging.debug("An OS error occurred while trying to read the registry key")
+        raise click.ClickException(
+            f'An OS error occurred while trying to read the registry key.'
+        ) from e
 
 
 def _get_temp_file_name() -> Optional[str]:
@@ -101,17 +108,20 @@ def _get_temp_file_name() -> Optional[str]:
         os.close(fd)
         return temp_file_name
     except Exception as e:
-        print(f"error: Unable to create temporary file: {e}")
-        raise
+        logging.debug("Unable to create temporary file %s.", temp_file_name)
+        raise click.ClickException(
+            f'An error occurred while trying to to create temporary file.'
+        ) from e
 
 
-def _fetch_driver_details(metadata_url: str) -> Tuple[Optional[str], Optional[str]]:
+def _fetch_driver_details() -> Tuple[Optional[str], Optional[str]]:
     """
     Parse the JSON data and retrieve the download link and version information.
     """
     try:
-        with urllib.request.urlopen(metadata_url) as url:
-            data = json.load(url)
+        with open(METADATA_FILE, "r") as json_file:
+            logging.debug("Opening the metadatafile %s.", METADATA_FILE)
+            data = json.load(json_file)
             windows_os_meta = data.get("Windows", [])
 
         for metadata in windows_os_meta:
@@ -121,8 +131,10 @@ def _fetch_driver_details(metadata_url: str) -> Tuple[Optional[str], Optional[st
                 return location, version
 
     except Exception as e:
-        print(f"Unable to get download url: {e}")
-    raise
+        logging.debug("An error occurred while trying to fetch driver details %s.", e)
+        raise click.ClickException(
+            f'An error occurred while trying to fetch driver details.'
+        ) from e
 
 
 def _install_daqmx_driver(download_url: str, temp_file: str) -> None:
@@ -133,7 +145,9 @@ def _install_daqmx_driver(download_url: str, temp_file: str) -> None:
         urllib.request.urlretrieve(download_url, temp_file)
         result = subprocess.run([temp_file], shell=True, check=True)
     except Exception as e:
-        print(f"Error installing NI-DAQmx: {e}")
+        raise click.ClickException(
+            f'Error occured while installing NI-DAQmx driver'
+        ) from e
 
 
 def _ask_user_confirmation(question: str) -> bool:
@@ -148,6 +162,8 @@ def _ask_user_confirmation(question: str) -> bool:
             return False
         else:
             print("Please enter 'yes' or 'no'.")
+
+
 def _cleanup_tempfile(temp_file: str) -> None:
     """
     Cleanup temporary files that we created
@@ -171,13 +187,11 @@ def installdriver():
     if sys.platform.startswith("win"):
 
         try:
-            daqmx_latest_url, daqmx_latest_version = _fetch_driver_details(
-                _META_DATA_URL
-            )
+            daqmx_latest_url, daqmx_latest_version = _fetch_driver_details()
             daqmx_installed_version = _check_daqmx_is_installed()
             download_url, temp_file = daqmx_latest_url, _get_temp_file_name()
             if not daqmx_installed_version:
-                print(f"Installing NI-DAQmx version {daqmx_latest_version}")
+                logging.info("Installing NI-DAQmx version {daqmx_latest_version}")
                 _install_daqmx_driver(download_url, temp_file)
             
             elif _compare_version(daqmx_latest_version, daqmx_installed_version) > 0:
@@ -191,23 +205,14 @@ def installdriver():
                     )
                     user_confirmation = _ask_user_confirmation(user_question)
                     if user_confirmation:
-                        print(f"Installing NI-DAQmx version {daqmx_latest_version}")
+                        logging.info("Installing NI-DAQmx version {daqmx_latest_version}")
                         _install_daqmx_driver(download_url, temp_file)
                     else:
-                        print(f"Skipping Upgrade.")
+                        logging.info("Skipping upgrading the driver software")
             
-                else:
-                    print("Installation aborted due to missing download URL")
             else:
-                print(
-                    f"Installed NI-DAQmx version {daqmx_installed_version} is up-to-date. Skipping installation."
-                )
+                logging.info("Installed NI-DAQmx version {daqmx_installed_version} is up-to-date. Skipping installation.")
         finally:
             _cleanup_tempfile(temp_file)
     else:
-        print("Unsupported OS detected.")
-
-
-
-if __name__ == "__main__":
-    installdriver()
+        logging.info("Installdriver subcommand is supported only on Windows")
