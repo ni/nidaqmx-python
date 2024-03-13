@@ -8,7 +8,7 @@
         get_response_parameters,
         is_event_register_function,
         GRPC_INTERPRETER_IGNORED_FUNCTIONS,
-        INCLUDE_STRING_BUFFER_SIZE_FUNCTIONS,
+        INCLUDE_SIZE_HINT_FUNCTIONS,
     )
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
@@ -191,8 +191,8 @@ class GrpcStubInterpreter(BaseInterpreter):
     params = get_params_for_function_signature(func)
     sorted_params = order_function_parameters_by_optional(params)
     parameter_signature = get_interpreter_parameter_signature(is_python_factory, sorted_params)
-    if func.function_name in INCLUDE_STRING_BUFFER_SIZE_FUNCTIONS:
-        parameter_signature = ", ".join([parameter_signature, "temp_size=0"])
+    if func.function_name in INCLUDE_SIZE_HINT_FUNCTIONS:
+        parameter_signature = ", ".join([parameter_signature, "size_hint=0"])
     output_parameters = get_output_params(func)
 %>\
     %if (len(func.function_name) + len(parameter_signature)) > 68:

@@ -76,9 +76,9 @@ class InStream:
 ${property_template.script_property(attribute)}\
 %endfor
 \
-    def get_channels_buffer_size (self):
-        channels_to_read = self.channels_to_read
-        total_size = sum(len(name) for name in channels_to_read.channel_names) + 1
+    def get_channels_buffer_size(self):
+        channel_names = self._task.channel_names
+        total_size = sum(len(name) for name in channel_names) + 1
         return total_size
         
     def _calculate_num_samps_per_chan(self, num_samps_per_chan):

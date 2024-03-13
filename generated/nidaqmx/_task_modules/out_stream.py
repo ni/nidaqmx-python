@@ -3,7 +3,6 @@
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     RegenerationMode, ResolutionType, WaitMode, WriteRelativeTo)
-from nidaqmx._task_modules.in_stream import InStream
 
 class OutStream:
     """
@@ -572,8 +571,7 @@ class OutStream:
             self._handle, number_of_samples_per_channel,
             self.auto_start, self.timeout, numpy_array)
 
-    def get_channels_buffer_size (self):
-        in_stream = InStream(self._task, self._interpreter) 
-        channels_to_read = in_stream.channels_to_read
-        total_size = sum(len(name) for name in channels_to_read.channel_names) + 1
+    def get_channels_buffer_size(self):
+        channel_names = self._task.channel_names
+        total_size = sum(len(name) for name in channel_names) + 1
         return total_size
