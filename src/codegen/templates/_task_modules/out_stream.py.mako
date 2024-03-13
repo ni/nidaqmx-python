@@ -165,3 +165,9 @@ ${property_template.script_property(attribute)}\
         return self._interpreter.write_raw(
             self._handle, number_of_samples_per_channel,
             self.auto_start, self.timeout, numpy_array)
+
+    def get_channels_buffer_size (self):
+        in_stream = InStream(self._task, self._interpreter) 
+        channels_to_read = in_stream.channels_to_read
+        total_size = sum(len(name) for name in channels_to_read.channel_names) + 1
+        return total_size

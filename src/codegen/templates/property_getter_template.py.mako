@@ -31,7 +31,7 @@
 <%
         function_call_args.append("buffer_size")
 %>\
-        buffer_size = ${'self' if attribute.python_class_name ==  "InStream" else 'InStream'}.get_channels_buffer_size()
+        buffer_size = self.get_channels_buffer_size()
 \
         %endif
     %endif
