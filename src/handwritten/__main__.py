@@ -33,4 +33,3 @@ def _configure_logging(verbosity: int) -> None:
     else:
         level = logging.WARNING
     logging.basicConfig(format="%(asctime)s %(levelname)s: %(message)s", level=level)
-
