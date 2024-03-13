@@ -9,7 +9,7 @@
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})
-
+from nidaqmx._task_modules.in_stream import InStream
 
 class OutStream:
     """

@@ -997,7 +997,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_read_attribute_string(self, task, attribute):
+    def get_read_attribute_string(self, task, attribute, temp_size=0):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1157,7 +1157,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_write_attribute_string(self, task, attribute):
+    def get_write_attribute_string(self, task, attribute, temp_size=0):
         raise NotImplementedError
 
     @abc.abstractmethod

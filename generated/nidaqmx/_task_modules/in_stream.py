@@ -111,7 +111,8 @@ class InStream:
             Otherwise, you will receive an error.
         """
 
-        val = self._interpreter.get_read_attribute_string(self._handle, 0x31e0)
+        buffer_size = self.get_channels_buffer_size()
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x31e0, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -180,7 +181,8 @@ class InStream:
             property. Otherwise, you will receive an error.
         """
 
-        val = self._interpreter.get_read_attribute_string(self._handle, 0x2a99)
+        buffer_size = self.get_channels_buffer_size()
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x2a99, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -220,7 +222,8 @@ class InStream:
             an error.
         """
 
-        val = self._interpreter.get_read_attribute_string(self._handle, 0x2f71)
+        buffer_size = self.get_channels_buffer_size()
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x2f71, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -244,7 +247,8 @@ class InStream:
             an error.
         """
 
-        val = self._interpreter.get_read_attribute_string(self._handle, 0x3089)
+        buffer_size = self.get_channels_buffer_size()
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x3089, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -292,7 +296,8 @@ class InStream:
             property. Otherwise, you will receive an error.
         """
 
-        val = self._interpreter.get_read_attribute_string(self._handle, 0x3190)
+        buffer_size = self.get_channels_buffer_size()
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x3190, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -544,7 +549,8 @@ class InStream:
             this property. Otherwise you will receive an error.
         """
 
-        val = self._interpreter.get_read_attribute_string(self._handle, 0x3101)
+        buffer_size = self.get_channels_buffer_size()
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x3101, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -555,7 +561,8 @@ class InStream:
             this property. Otherwise you will receive an error.
         """
 
-        val = self._interpreter.get_read_attribute_string(self._handle, 0x3102)
+        buffer_size = self.get_channels_buffer_size()
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x3102, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -582,7 +589,8 @@ class InStream:
             error.
         """
 
-        val = self._interpreter.get_read_attribute_string(self._handle, 0x2a0a)
+        buffer_size = self.get_channels_buffer_size()
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x2a0a, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -609,7 +617,8 @@ class InStream:
             an error.
         """
 
-        val = self._interpreter.get_read_attribute_string(self._handle, 0x2a97)
+        buffer_size = self.get_channels_buffer_size()
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x2a97, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -637,7 +646,8 @@ class InStream:
             overcurrent channels to recover.
         """
 
-        val = self._interpreter.get_read_attribute_string(self._handle, 0x29e7)
+        buffer_size = self.get_channels_buffer_size()
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x29e7, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -662,7 +672,8 @@ class InStream:
             Otherwise, you will receive an error.
         """
 
-        val = self._interpreter.get_read_attribute_string(self._handle, 0x2175)
+        buffer_size = self.get_channels_buffer_size()
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x2175, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -687,7 +698,8 @@ class InStream:
             property. Otherwise, you will receive an error.
         """
 
-        val = self._interpreter.get_read_attribute_string(self._handle, 0x3082)
+        buffer_size = self.get_channels_buffer_size()
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x3082, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -729,7 +741,8 @@ class InStream:
         List[str]: Indicates the channels that had their PLLs unlock.
         """
 
-        val = self._interpreter.get_read_attribute_string(self._handle, 0x3119)
+        buffer_size = self.get_channels_buffer_size()
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x3119, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -753,7 +766,8 @@ class InStream:
             property. Otherwise, you will receive an error.
         """
 
-        val = self._interpreter.get_read_attribute_string(self._handle, 0x3193)
+        buffer_size = self.get_channels_buffer_size()
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x3193, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -838,7 +852,8 @@ class InStream:
             receive an error.
         """
 
-        val = self._interpreter.get_read_attribute_string(self._handle, 0x31de)
+        buffer_size = self.get_channels_buffer_size()
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x31de, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -865,7 +880,8 @@ class InStream:
             will receive an error.
         """
 
-        val = self._interpreter.get_read_attribute_string(self._handle, 0x31e7)
+        buffer_size = self.get_channels_buffer_size()
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x31e7, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -909,7 +925,8 @@ class InStream:
             target.
         """
 
-        val = self._interpreter.get_read_attribute_string(self._handle, 0x313e)
+        buffer_size = self.get_channels_buffer_size()
+        val = self._interpreter.get_read_attribute_string(self._handle, 0x313e, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -955,6 +972,11 @@ class InStream:
     def wait_mode(self):
         self._interpreter.reset_read_attribute(self._handle, 0x2232)
 
+    def get_channels_buffer_size (self):
+        channels_to_read = self.channels_to_read
+        total_size = sum(len(name) for name in channels_to_read.channel_names) + 1
+        return total_size
+        
     def _calculate_num_samps_per_chan(self, num_samps_per_chan):
         if num_samps_per_chan == -1:
             acq_type = self._task.timing.samp_quant_samp_mode

@@ -3230,7 +3230,7 @@ class LibraryInterpreter(BaseInterpreter):
         self.check_for_error(error_code)
         return value.value
 
-    def get_read_attribute_string(self, task, attribute):
+    def get_read_attribute_string(self, task, attribute, temp_size=0):
         cfunc = lib_importer.cdll.DAQmxGetReadAttribute
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3238,7 +3238,6 @@ class LibraryInterpreter(BaseInterpreter):
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes.c_int32]
 
-        temp_size = 0
         while True:
             value = ctypes.create_string_buffer(temp_size)
             size_or_code = cfunc(
@@ -3951,7 +3950,7 @@ class LibraryInterpreter(BaseInterpreter):
         self.check_for_error(error_code)
         return value.value
 
-    def get_write_attribute_string(self, task, attribute):
+    def get_write_attribute_string(self, task, attribute, temp_size=0):
         cfunc = lib_importer.cdll.DAQmxGetWriteAttribute
         if cfunc.argtypes is None:
             with cfunc.arglock:
@@ -3959,7 +3958,6 @@ class LibraryInterpreter(BaseInterpreter):
                     cfunc.argtypes = [
                         lib_importer.task_handle, ctypes.c_int32]
 
-        temp_size = 0
         while True:
             value = ctypes.create_string_buffer(temp_size)
             size_or_code = cfunc(

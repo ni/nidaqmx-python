@@ -3,7 +3,7 @@
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     RegenerationMode, ResolutionType, WaitMode, WriteRelativeTo)
-
+from nidaqmx._task_modules.in_stream import InStream
 
 class OutStream:
     """
@@ -116,7 +116,8 @@ class OutStream:
             an error.
         """
 
-        val = self._interpreter.get_write_attribute_string(self._handle, 0x3054)
+        buffer_size = InStream.get_channels_buffer_size()
+        val = self._interpreter.get_write_attribute_string(self._handle, 0x3054, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -142,7 +143,8 @@ class OutStream:
             an error.
         """
 
-        val = self._interpreter.get_write_attribute_string(self._handle, 0x30bc)
+        buffer_size = InStream.get_channels_buffer_size()
+        val = self._interpreter.get_write_attribute_string(self._handle, 0x30bc, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -198,7 +200,8 @@ class OutStream:
             error.
         """
 
-        val = self._interpreter.get_write_attribute_string(self._handle, 0x29eb)
+        buffer_size = InStream.get_channels_buffer_size()
+        val = self._interpreter.get_write_attribute_string(self._handle, 0x29eb, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -265,7 +268,8 @@ class OutStream:
             error.
         """
 
-        val = self._interpreter.get_write_attribute_string(self._handle, 0x29e9)
+        buffer_size = InStream.get_channels_buffer_size()
+        val = self._interpreter.get_write_attribute_string(self._handle, 0x29e9, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -290,7 +294,8 @@ class OutStream:
             Otherwise, you will receive an error.
         """
 
-        val = self._interpreter.get_write_attribute_string(self._handle, 0x3085)
+        buffer_size = InStream.get_channels_buffer_size()
+        val = self._interpreter.get_write_attribute_string(self._handle, 0x3085, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -317,7 +322,8 @@ class OutStream:
             of the overtemperature.
         """
 
-        val = self._interpreter.get_write_attribute_string(self._handle, 0x3083)
+        buffer_size = InStream.get_channels_buffer_size()
+        val = self._interpreter.get_write_attribute_string(self._handle, 0x3083, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -343,7 +349,8 @@ class OutStream:
             property. Otherwise, you will receive an error.
         """
 
-        val = self._interpreter.get_write_attribute_string(self._handle, 0x29ed)
+        buffer_size = InStream.get_channels_buffer_size()
+        val = self._interpreter.get_write_attribute_string(self._handle, 0x29ed, buffer_size)
         return unflatten_channel_string(val)
 
     @property
@@ -446,7 +453,8 @@ class OutStream:
             target.
         """
 
-        val = self._interpreter.get_write_attribute_string(self._handle, 0x3140)
+        buffer_size = InStream.get_channels_buffer_size()
+        val = self._interpreter.get_write_attribute_string(self._handle, 0x3140, buffer_size)
         return unflatten_channel_string(val)
 
     @property
