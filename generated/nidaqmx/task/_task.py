@@ -4,11 +4,10 @@ from enum import Enum
 from typing import List, Tuple, Union
 
 import numpy
-
 from nidaqmx import utils
 from nidaqmx._task_modules.channels.channel import Channel
 from nidaqmx._task_modules.export_signals import ExportSignals
-from nidaqmx._task_modules.in_stream import InStream
+from nidaqmx.task._in_stream import InStream
 from nidaqmx._task_modules.timing import Timing
 from nidaqmx._task_modules.triggers import Triggers
 from nidaqmx._task_modules.out_stream import OutStream
@@ -242,9 +241,9 @@ class Task:
         return self._export_signals
 
     @property
-    def in_stream(self):
+    def in_stream(self) -> InStream: 
         """
-        :class:`nidaqmx._task_modules.in_stream.InStream`: Gets the read
+        :class:`nidaqmx.task.InStream`: Gets the read
             configurations for the task.
         """
         return self._in_stream
