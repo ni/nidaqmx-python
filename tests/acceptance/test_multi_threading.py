@@ -12,10 +12,10 @@ from typing import Any, Callable, List, Sequence, Tuple
 import pytest
 
 from nidaqmx import Task
-from nidaqmx.task.channels import AIChannel
 from nidaqmx.constants import AcquisitionType
 from nidaqmx.errors import RpcError
 from nidaqmx.system import Device, System
+from nidaqmx.task.channels import AIChannel
 from tests.helpers import generate_random_seed
 
 RUN_TIME = 1.0

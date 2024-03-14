@@ -1,9 +1,9 @@
 import pytest
 
 from nidaqmx import Task
-from nidaqmx.task.channels import DIChannel
-from nidaqmx.constants import LineGrouping, ChannelType
+from nidaqmx.constants import ChannelType, LineGrouping
 from nidaqmx.system import Device
+from nidaqmx.task.channels import DIChannel
 from nidaqmx.utils import flatten_channel_string
 
 

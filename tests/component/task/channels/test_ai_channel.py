@@ -4,7 +4,6 @@ from typing import List
 import pytest
 
 from nidaqmx import Task
-from nidaqmx.task.channels import AIChannel
 from nidaqmx.constants import (
     AccelChargeSensitivityUnits,
     AccelSensitivityUnits,
@@ -35,6 +34,7 @@ from nidaqmx.constants import (
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import DaqError
 from nidaqmx.system import Device
+from nidaqmx.task.channels import AIChannel
 from tests.helpers import configure_teds
 
 

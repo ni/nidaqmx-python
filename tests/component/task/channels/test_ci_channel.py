@@ -1,7 +1,6 @@
 import pytest
 
 from nidaqmx import Task
-from nidaqmx.task.channels import CIChannel
 from nidaqmx.constants import (
     AngleUnits,
     CountDirection,
@@ -12,6 +11,7 @@ from nidaqmx.constants import (
     UsageTypeCI,
 )
 from nidaqmx.system import Device
+from nidaqmx.task.channels import CIChannel
 
 
 # Note: Tests for other channel types will be less complete given that the underlying Python
