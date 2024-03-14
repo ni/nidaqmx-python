@@ -10,7 +10,6 @@ from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})
 
-
 class OutStream:
     """
     Exposes an output data stream on a DAQmx task.
@@ -165,3 +164,8 @@ ${property_template.script_property(attribute)}\
         return self._interpreter.write_raw(
             self._handle, number_of_samples_per_channel,
             self.auto_start, self.timeout, numpy_array)
+
+    def get_channels_buffer_size(self):
+        channel_names = self._task.channel_names
+        total_size = sum(len(name) + 2 for name in channel_names) + 1
+        return total_size

@@ -24,6 +24,18 @@
         function_call_args.append("\"\"")
     function_call_args.append(hex(attribute.id))
 %>
+## For read/write string attributes in InStream and OutStream, buffer_size is passed as an argument.
+%if attribute.access == "read" or attribute.access == "write":
+    %if attribute.ctypes_data_type == 'ctypes.c_char_p': 
+        %if attribute.python_class_name in ["InStream", "OutStream"]:
+<%
+        function_call_args.append("buffer_size")
+%>\
+        buffer_size = self.get_channels_buffer_size()
+\
+        %endif
+    %endif
+%endif
 \
         val = self._interpreter.get_${generic_attribute_func}(${', '.join(function_call_args)})
 \

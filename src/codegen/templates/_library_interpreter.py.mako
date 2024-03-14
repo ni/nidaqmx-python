@@ -9,6 +9,7 @@
         get_return_values,
         is_event_register_function,
         LIBRARY_INTERPRETER_IGNORED_FUNCTIONS,
+        INCLUDE_SIZE_HINT_FUNCTIONS,
     )
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
 
@@ -68,6 +69,8 @@ class LibraryInterpreter(BaseInterpreter):
     params = get_params_for_function_signature(func)
     sorted_params = order_function_parameters_by_optional(params)
     parameter_signature = get_interpreter_parameter_signature(is_python_factory, sorted_params)
+    if func.function_name in INCLUDE_SIZE_HINT_FUNCTIONS:
+        parameter_signature = ", ".join([parameter_signature, "size_hint=0"])
     return_values = get_return_values(func)
 %>\
     %if (len(func.function_name) + len(parameter_signature)) > 68:

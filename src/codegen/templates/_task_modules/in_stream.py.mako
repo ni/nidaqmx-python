@@ -76,6 +76,11 @@ class InStream:
 ${property_template.script_property(attribute)}\
 %endfor
 \
+    def get_channels_buffer_size(self):
+        channel_names = self._task.channel_names
+        total_size = sum(len(name) + 2 for name in channel_names) + 1
+        return total_size
+        
     def _calculate_num_samps_per_chan(self, num_samps_per_chan):
         if num_samps_per_chan == -1:
             acq_type = self._task.timing.samp_quant_samp_mode

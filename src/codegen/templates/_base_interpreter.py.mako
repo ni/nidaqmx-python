@@ -3,6 +3,7 @@
         get_interpreter_functions,
         get_interpreter_parameter_signature,
         get_params_for_function_signature,
+        INCLUDE_SIZE_HINT_FUNCTIONS
     )
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
@@ -38,6 +39,8 @@ class BaseInterpreter(abc.ABC):
     params = get_params_for_function_signature(func)
     sorted_params = order_function_parameters_by_optional(params)
     parameter_signature = get_interpreter_parameter_signature(is_python_factory, sorted_params)
+    if func.function_name in INCLUDE_SIZE_HINT_FUNCTIONS:
+        parameter_signature = ", ".join([parameter_signature, "size_hint=0"])
 %>\
     @abc.abstractmethod
 %if (len(func.function_name) + len(parameter_signature)) > 68:

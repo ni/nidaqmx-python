@@ -80,6 +80,11 @@ INCLUDE_SIZE_PARAMETER_IN_SIGNATURE_FUNCTIONS = [
     "get_analog_power_up_states_with_output_type",
 ]
 
+INCLUDE_SIZE_HINT_FUNCTIONS = [
+    "get_read_attribute_string",
+    "get_write_attribute_string",
+]
+
 MODIFIED_INTERPRETER_PARAMS = {
     "r_0": "r0",
     "r_1": "r1",

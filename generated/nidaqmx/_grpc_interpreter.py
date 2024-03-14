@@ -2031,7 +2031,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.GetReadAttributeInt32Request(task=task, attribute_raw=attribute))
         return response.value_raw
 
-    def get_read_attribute_string(self, task, attribute):
+    def get_read_attribute_string(self, task, attribute, size_hint=0):
         response = self._invoke(
             self._client.GetReadAttributeString,
             grpc_types.GetReadAttributeStringRequest(task=task, attribute_raw=attribute))
@@ -2285,7 +2285,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.GetWriteAttributeInt32Request(task=task, attribute_raw=attribute))
         return response.value_raw
 
-    def get_write_attribute_string(self, task, attribute):
+    def get_write_attribute_string(self, task, attribute, size_hint=0):
         response = self._invoke(
             self._client.GetWriteAttributeString,
             grpc_types.GetWriteAttributeStringRequest(task=task, attribute_raw=attribute))
