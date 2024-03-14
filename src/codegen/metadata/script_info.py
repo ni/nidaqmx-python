@@ -25,8 +25,8 @@ script_info = {
             "templateFile": "task\\_in_stream.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\out_stream.py",
-            "templateFile": "_task_modules\\out_stream.py.mako",
+            "relativeOutputPath": "task\\_out_stream.py",
+            "templateFile": "task\\_out_stream.py.mako",
         },
         {
             "relativeOutputPath": "system\\_watchdog_modules\\expiration_state.py",
@@ -81,16 +81,16 @@ script_info = {
             "templateFile": "_task_modules\\do_channel_collection.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\timing.py",
-            "templateFile": "_task_modules\\timing.py.mako",
+            "relativeOutputPath": "task\\_timing.py",
+            "templateFile": "task\\_timing.py.mako",
         },  
         {
             "relativeOutputPath": "scale.py", 
             "templateFile": "scale.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\export_signals.py",
-            "templateFile": "_task_modules\\export_signals.py.mako",
+            "relativeOutputPath": "task\\_export_signals.py",
+            "templateFile": "task\\_export_signals.py.mako",
         },
         {
             "relativeOutputPath": "_task_modules\\triggering\\arm_start_trigger.py",

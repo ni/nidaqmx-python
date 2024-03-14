@@ -9,7 +9,4 @@ nidaqmx.task
    
    channel
    channel_collection
-   export_signals
-   out_stream
-   timing
    triggers
