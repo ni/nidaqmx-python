@@ -8,4 +8,4 @@ from nidaqmx.task.collections._di_channel_collection import DIChannelCollection
 from nidaqmx.task.collections._do_channel_collection import DOChannelCollection
 
 
-__all__ = [ChannelCollection, AIChannelCollection, AOChannelCollection, CIChannelCollection, COChannelCollection, DIChannelCollection, DOChannelCollection]
+__all__ = ['ChannelCollection', 'AIChannelCollection', 'AOChannelCollection', 'CIChannelCollection', 'COChannelCollection', 'DIChannelCollection', 'DOChannelCollection',]
