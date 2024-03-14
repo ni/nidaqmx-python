@@ -1,6 +1,6 @@
-nidaqmx.task.reference_trigger
-==============================
+nidaqmx.task.triggering.ReferenceTrigger
+========================================
 
-.. automodule:: nidaqmx._task_modules.triggering.reference_trigger
+.. autoclass:: nidaqmx.task.triggering.ReferenceTrigger
     :members:
     :show-inheritance:

@@ -1,6 +1,6 @@
-nidaqmx.task.pause_trigger
-==========================
+nidaqmx.task.triggering.PauseTrigger
+====================================
 
-.. automodule:: nidaqmx._task_modules.triggering.pause_trigger
+.. autoclass:: nidaqmx.task.triggering.PauseTrigger
     :members:
     :show-inheritance:

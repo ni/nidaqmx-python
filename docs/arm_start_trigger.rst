@@ -1,6 +1,6 @@
-nidaqmx.task.arm_start_trigger
-==============================
+nidaqmx.task.triggering.ArmStartTrigger
+=======================================
 
-.. automodule:: nidaqmx._task_modules.triggering.arm_start_trigger
+.. autoclass:: nidaqmx.task.triggering.ArmStartTrigger
     :members:
     :show-inheritance:

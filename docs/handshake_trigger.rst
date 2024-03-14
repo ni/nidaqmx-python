@@ -1,6 +1,6 @@
-nidaqmx.task.handshake_trigger
-==============================
+nidaqmx.task.triggering.HandshakeTrigger
+========================================
 
-.. automodule:: nidaqmx._task_modules.triggering.handshake_trigger
+.. autoclass:: nidaqmx.task.triggering.HandshakeTrigger
     :members:
     :show-inheritance:
