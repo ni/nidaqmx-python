@@ -167,5 +167,5 @@ ${property_template.script_property(attribute)}\
 
     def get_channels_buffer_size(self):
         channel_names = self._task.channel_names
-        total_size = sum(len(name) for name in channel_names) + 1
+        total_size = sum(len(name) + 2 for name in channel_names) + 1
         return total_size
