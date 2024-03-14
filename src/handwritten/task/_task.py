@@ -11,17 +11,17 @@ from nidaqmx.task._in_stream import InStream
 from nidaqmx.task._timing import Timing
 from nidaqmx._task_modules.triggers import Triggers
 from nidaqmx.task._out_stream import OutStream
-from nidaqmx._task_modules.ai_channel_collection import (
+from nidaqmx.task.collections._ai_channel_collection import (
     AIChannelCollection)
-from nidaqmx._task_modules.ao_channel_collection import (
+from nidaqmx.task.collections._ao_channel_collection import (
     AOChannelCollection)
-from nidaqmx._task_modules.ci_channel_collection import (
+from nidaqmx.task.collections._ci_channel_collection import (
     CIChannelCollection)
-from nidaqmx._task_modules.co_channel_collection import (
+from nidaqmx.task.collections._co_channel_collection import (
     COChannelCollection)
-from nidaqmx._task_modules.di_channel_collection import (
+from nidaqmx.task.collections._di_channel_collection import (
     DIChannelCollection)
-from nidaqmx._task_modules.do_channel_collection import (
+from nidaqmx.task.collections._do_channel_collection import (
     DOChannelCollection)
 from nidaqmx.constants import (
     AcquisitionType, ChannelType, FillMode, UsageTypeAI, UsageTypeCI, EveryNSamplesEventType,
@@ -187,7 +187,7 @@ class Task:
     @property
     def ai_channels(self):
         """
-        :class:`nidaqmx._task_modules.ai_channel_collection.AIChannelCollection`:
+        :class:`nidaqmx.task.collections.AIChannelCollection`:
             Gets the collection of analog input channels for this task.
         """
         return self._ai_channels
@@ -195,7 +195,7 @@ class Task:
     @property
     def ao_channels(self):
         """
-        :class:`nidaqmx._task_modules.ao_channel_collection.AOChannelCollection`:
+        :class:`nidaqmx.task.collections.AOChannelCollection`:
             Gets the collection of analog output channels for this task.
         """
         return self._ao_channels
@@ -203,7 +203,7 @@ class Task:
     @property
     def ci_channels(self):
         """
-        :class:`nidaqmx._task_modules.ci_channel_collection.CIChannelCollection`:
+        :class:`nidaqmx.task.collections.CIChannelCollection`:
             Gets the collection of counter input channels for this task.
         """
         return self._ci_channels
@@ -211,7 +211,7 @@ class Task:
     @property
     def co_channels(self):
         """
-        :class:`nidaqmx._task_modules.co_channel_collection.COChannelCollection`:
+        :class:`nidaqmx.task.collections.COChannelCollection`:
             Gets the collection of counter output channels for this task.
         """
         return self._co_channels
@@ -219,7 +219,7 @@ class Task:
     @property
     def di_channels(self):
         """
-        :class:`nidaqmx._task_modules.di_channel_collection.DIChannelCollection`:
+        :class:`nidaqmx.task.collections.DIChannelCollection`:
             Gets the collection of digital input channels for this task.
         """
         return self._di_channels
@@ -227,7 +227,7 @@ class Task:
     @property
     def do_channels(self):
         """
-        :class:`nidaqmx._task_modules.do_channel_collection.DOChannelCollection`:
+        :class:`nidaqmx.task.collections.DOChannelCollection`:
             Gets the collection of digital output channels for this task.
         """
         return self._do_channels
@@ -235,7 +235,7 @@ class Task:
     @property
     def export_signals(self) -> ExportSignals:
         """
-        :class:`nidaqmx._task_modules.export_signals.ExportSignals`: Gets the
+        :class:`nidaqmx.task.ExportSignals`: Gets the
             exported signal configurations for the task.
         """
         return self._export_signals
@@ -251,7 +251,7 @@ class Task:
     @property
     def out_stream(self) -> OutStream:
         """
-        :class:`nidaqmx._task_modules.out_stream.OutStream`: Gets the
+        :class:`nidaqmx.task.OutStream`: Gets the
             write configurations for the task.
         """
         return self._out_stream
@@ -259,7 +259,7 @@ class Task:
     @property
     def timing(self) -> Timing:
         """
-        :class:`nidaqmx._task_modules.timing.Timing`: Gets the timing
+        :class:`nidaqmx.task.Timing`: Gets the timing
             configurations for the task.
         """
         return self._timing
