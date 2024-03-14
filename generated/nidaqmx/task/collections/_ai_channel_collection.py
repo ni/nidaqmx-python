@@ -2,7 +2,7 @@
 
 import numpy
 
-from nidaqmx._task_modules.channels.ai_channel import AIChannel
+from nidaqmx.task.channels._ai_channel import AIChannel
 from nidaqmx.task.collections._channel_collection import ChannelCollection
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
@@ -41,7 +41,7 @@ class AIChannelCollection(ChannelCollection):
             name_to_assign_to_channel (Optional[str]): Specifies a name to
                 assign to the virtual channel this method creates.
         Returns:
-            nidaqmx._task_modules.channels.ai_channel.AIChannel:
+            nidaqmx.task.channels.AIChannel:
 
             Specifies the newly created AIChannel object.
         """
