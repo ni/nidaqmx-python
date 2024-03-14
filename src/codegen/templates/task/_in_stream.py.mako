@@ -12,7 +12,7 @@ import numpy
 import numpy.typing
 import deprecation
 
-from nidaqmx._task_modules.channels.channel import Channel
+from nidaqmx.task.channels import Channel
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})

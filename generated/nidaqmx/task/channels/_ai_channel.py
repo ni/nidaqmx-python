@@ -4,7 +4,7 @@ import numpy
 import deprecation
 
 from nidaqmx.scale import _ScaleAlternateConstructor
-from nidaqmx._task_modules.channels.channel import Channel
+from nidaqmx.task.channels._channel import Channel
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     ACExcitWireMode, ADCTimingMode, AccelChargeSensitivityUnits,
