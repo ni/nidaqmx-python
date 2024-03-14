@@ -1,7 +1,6 @@
 import pytest
 
 from nidaqmx import Task
-from nidaqmx.task.channels import AIChannel, CIChannel
 from nidaqmx.constants import (
     ExcitationSource,
     PowerIdleOutputBehavior,
@@ -9,6 +8,7 @@ from nidaqmx.constants import (
     VoltageUnits,
 )
 from nidaqmx.scale import Scale
+from nidaqmx.task.channels import AIChannel, CIChannel
 
 
 @pytest.fixture(scope="function")
