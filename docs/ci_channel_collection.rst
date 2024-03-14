@@ -1,7 +1,7 @@
-nidaqmx.task.ci_channel_collection
-==================================
+nidaqmx.task.collections.CIChannelCollection
+===============================================
 
-.. automodule:: nidaqmx._task_modules.ci_channel_collection
+.. autoclass:: nidaqmx.task.collections.CIChannelCollection
     :members:
     :inherited-members:
     :show-inheritance:

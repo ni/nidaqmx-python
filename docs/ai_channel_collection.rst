@@ -1,7 +1,7 @@
-nidaqmx.task.ai_channel_collection
-==================================
+nidaqmx.task.collections.AIChannelCollection
+===============================================
 
-.. automodule:: nidaqmx._task_modules.ai_channel_collection
+.. autoclass:: nidaqmx.task.collections.AIChannelCollection
     :members:
     :inherited-members:
     :show-inheritance:
