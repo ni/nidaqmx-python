@@ -78,7 +78,7 @@ class COChannelCollection(ChannelCollection):
                 interval between pulses.
         Returns:
             nidaqmx.task.channels.COChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -124,7 +124,7 @@ class COChannelCollection(ChannelCollection):
                 is high.
         Returns:
             nidaqmx.task.channels.COChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -167,7 +167,7 @@ class COChannelCollection(ChannelCollection):
                 is high.
         Returns:
             nidaqmx.task.channels.COChannel:
-            
+
             Indicates the newly created channel object.
         """
 

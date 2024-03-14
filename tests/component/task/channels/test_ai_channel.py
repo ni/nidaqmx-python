@@ -1276,3 +1276,20 @@ def test___task___add_ai_voltage_rms_chan___sets_channel_attributes(
     )
 
     assert chan.ai_meas_type == UsageTypeAI.VOLTAGE_ACRMS
+
+
+def test___task___add_teds_ai_voltage_chan_with_excit___raises_teds_sensor_not_detected(
+    task: Task,
+    sim_bridge_device: Device,
+) -> None:
+    with pytest.raises(DaqError) as exc_info:
+        with configure_teds(sim_bridge_device.ai_physical_chans[0]) as phys_chan:
+            _ = task.ai_channels.add_teds_ai_voltage_chan_with_excit(
+                phys_chan.name,
+                min_val=-1.25,
+                max_val=1.25,
+                voltage_excit_source=ExcitationSource.INTERNAL,
+                voltage_excit_val=5.0,
+            )
+
+    assert exc_info.value.error_code == DAQmxErrors.TEDS_SENSOR_NOT_DETECTED

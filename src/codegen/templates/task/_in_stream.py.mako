@@ -11,6 +11,7 @@ from typing import Type
 import numpy
 import numpy.typing
 import deprecation
+import pathlib
 
 from nidaqmx.task.channels import Channel
 from nidaqmx.utils import unflatten_channel_string
@@ -80,7 +81,7 @@ ${property_template.script_property(attribute)}\
         channel_names = self._task.channel_names
         total_size = sum(len(name) + 2 for name in channel_names) + 1
         return total_size
-        
+
     def _calculate_num_samps_per_chan(self, num_samps_per_chan):
         if num_samps_per_chan == -1:
             acq_type = self._task.timing.samp_quant_samp_mode
@@ -94,13 +95,13 @@ ${property_template.script_property(attribute)}\
             return num_samps_per_chan
 
     def configure_logging(
-            self, file_path, logging_mode=LoggingMode.LOG_AND_READ,
+            self, file_path: pathlib.PurePath, logging_mode=LoggingMode.LOG_AND_READ,
             group_name="", operation=LoggingOperation.OPEN_OR_CREATE):
         """
         Configures TDMS file logging for the task.
 
         Args:
-            file_path (str): Specifies the path to the TDMS file to
+            file_path (pathlib.PurePath): Specifies the path to the TDMS file to
                 which you want to log data.
             logging_mode (Optional[nidaqmx.constants.LoggingMode]):
                 Specifies whether to enable logging and whether to allow
@@ -215,7 +216,7 @@ ${property_template.script_property(attribute)}\
         if number_of_channels * samples_read != number_of_samples:
             return numpy_array[:number_of_channels * samples_read]
         return numpy_array
-    
+
     @deprecation.deprecated(deprecated_in="1.0.0", removed_in="1.2.0", details="Use read_all instead.")
     def readall(self):
         return self.read_all()
@@ -335,12 +336,12 @@ ${property_template.script_property(attribute)}\
 
         return samples_read
 
-    def start_new_file(self, file_path):
+    def start_new_file(self, file_path: pathlib.PurePath):
         """
         Starts a new TDMS file the next time data is written to disk.
 
         Args:
-            file_path (str): Specifies the path to the TDMS file to
+            file_path (pathlib.PurePath): Specifies the path to the TDMS file to
                 which you want to log data.
         """
 

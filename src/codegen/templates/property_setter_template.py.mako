@@ -1,9 +1,13 @@
 <%def name="script_property_setter(attribute)">\
 <%
-        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type
+        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type, ATTRIBUTES_WITH_FILE_PATH_PARAMETER
     %>\
     @${attribute.name}.setter
+    %if attribute.name in ATTRIBUTES_WITH_FILE_PATH_PARAMETER:
+    def ${attribute.name}(self, val: pathlib.PurePath):
+    %else:
     def ${attribute.name}(self, val):
+    %endif
 \
     %if attribute.bitfield_enum is not None:
         val = enum_list_to_bitfield(

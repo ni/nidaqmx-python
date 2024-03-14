@@ -20,10 +20,10 @@ def generate_random_seed():
 
 @contextlib.contextmanager
 def configure_teds(
-    phys_chan: PhysicalChannel, teds_file_path: pathlib.Path
+    phys_chan: PhysicalChannel, teds_file_path: pathlib.Path=pathlib.Path("")
 ) -> Generator[PhysicalChannel, None, None]:
     """Yields a physical channel with TEDS configured and then clears it after the test is done."""
-    phys_chan.configure_teds(str(teds_file_path))
+    phys_chan.configure_teds(teds_file_path)
     try:
         yield phys_chan
     finally:
