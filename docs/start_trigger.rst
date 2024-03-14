@@ -1,6 +1,6 @@
-nidaqmx.task.start_trigger
-==========================
+nidaqmx.task.triggering.StartTrigger
+====================================
 
-.. automodule:: nidaqmx._task_modules.triggering.start_trigger
+.. autoclass:: nidaqmx.task.triggering.StartTrigger
     :members:
     :show-inheritance:

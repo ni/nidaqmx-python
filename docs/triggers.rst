@@ -1,7 +1,7 @@
-nidaqmx.task.triggers
-=====================
+nidaqmx.task.triggering
+=======================
 
-.. automodule:: nidaqmx._task_modules.triggers
+.. autoclass:: nidaqmx.task.triggering.Triggers
     :members:
     :show-inheritance:
 
