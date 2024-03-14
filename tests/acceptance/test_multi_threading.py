@@ -12,7 +12,7 @@ from typing import Any, Callable, List, Sequence, Tuple
 import pytest
 
 from nidaqmx import Task
-from nidaqmx._task_modules.channels import AIChannel
+from nidaqmx.task.channels import AIChannel
 from nidaqmx.constants import AcquisitionType
 from nidaqmx.errors import RpcError
 from nidaqmx.system import Device, System

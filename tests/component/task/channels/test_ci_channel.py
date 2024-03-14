@@ -1,7 +1,7 @@
 import pytest
 
 from nidaqmx import Task
-from nidaqmx._task_modules.channels import CIChannel
+from nidaqmx.task.channels import CIChannel
 from nidaqmx.constants import (
     AngleUnits,
     CountDirection,

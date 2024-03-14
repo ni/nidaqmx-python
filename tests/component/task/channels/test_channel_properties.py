@@ -1,8 +1,7 @@
 import pytest
 
 from nidaqmx import Task
-from nidaqmx._task_modules.channels.ai_channel import AIChannel
-from nidaqmx._task_modules.channels.ci_channel import CIChannel
+from nidaqmx.task.channels import AIChannel, CIChannel
 from nidaqmx.constants import (
     ExcitationSource,
     PowerIdleOutputBehavior,
