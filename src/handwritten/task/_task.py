@@ -6,11 +6,11 @@ from typing import List, Tuple, Union
 import numpy
 from nidaqmx import utils
 from nidaqmx._task_modules.channels.channel import Channel
-from nidaqmx._task_modules.export_signals import ExportSignals
+from nidaqmx.task._export_signals import ExportSignals
 from nidaqmx.task._in_stream import InStream
-from nidaqmx._task_modules.timing import Timing
+from nidaqmx.task._timing import Timing
 from nidaqmx._task_modules.triggers import Triggers
-from nidaqmx._task_modules.out_stream import OutStream
+from nidaqmx.task._out_stream import OutStream
 from nidaqmx._task_modules.ai_channel_collection import (
     AIChannelCollection)
 from nidaqmx._task_modules.ao_channel_collection import (
