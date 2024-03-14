@@ -1,7 +1,7 @@
-nidaqmx.task.do_channel
-=======================
+nidaqmx.task.channels.DOChannel
+===============================
 
-.. automodule:: nidaqmx._task_modules.channels.do_channel
+.. autoclass:: nidaqmx.task.channels.DOChannel
     :members:
     :inherited-members:
     :show-inheritance:

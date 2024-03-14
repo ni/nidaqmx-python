@@ -1,7 +1,7 @@
-nidaqmx.task.ao_channel
-=======================
+nidaqmx.task.channels.AOChannel
+===============================
 
-.. automodule:: nidaqmx._task_modules.channels.ao_channel
+.. autoclass:: nidaqmx.task.channels.AOChannel
     :members:
     :inherited-members:
     :show-inheritance:

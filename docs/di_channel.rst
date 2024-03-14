@@ -1,7 +1,7 @@
-nidaqmx.task.di_channel
-=======================
+nidaqmx.task.channels.DIChannel
+===============================
 
-.. automodule:: nidaqmx._task_modules.channels.di_channel
+.. autoclass:: nidaqmx.task.channels.DIChannel
     :members:
     :inherited-members:
     :show-inheritance:

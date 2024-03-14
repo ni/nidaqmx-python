@@ -1,7 +1,7 @@
-nidaqmx.task.channel
-====================
+nidaqmx.task.channels
+=====================
 
-.. automodule:: nidaqmx._task_modules.channels.channel
+.. autoclass:: nidaqmx.task.channels.Channel
     :members:
     :show-inheritance:
 

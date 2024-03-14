@@ -1,7 +1,7 @@
-nidaqmx.task.co_channel
-=======================
+nidaqmx.task.channels.COChannel
+===============================
 
-.. automodule:: nidaqmx._task_modules.channels.co_channel
+.. autoclass:: nidaqmx.task.channels.COChannel
     :members:
     :inherited-members:
     :show-inheritance:
