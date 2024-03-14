@@ -57,28 +57,28 @@ script_info = {
             "templateFile": "_task_modules\\channels\\do_channel.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\ai_channel_collection.py",
-            "templateFile": "_task_modules\\ai_channel_collection.py.mako",
+            "relativeOutputPath": "task\\collections\\_ai_channel_collection.py",
+            "templateFile": "task\\collections\\_ai_channel_collection.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\ao_channel_collection.py",
-            "templateFile": "_task_modules\\ao_channel_collection.py.mako",
+            "relativeOutputPath": "task\\collections\\_ao_channel_collection.py",
+            "templateFile": "task\\collections\\_ao_channel_collection.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\ci_channel_collection.py",
-            "templateFile": "_task_modules\\ci_channel_collection.py.mako",
+            "relativeOutputPath": "task\\collections\\_ci_channel_collection.py",
+            "templateFile": "task\\collections\\_ci_channel_collection.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\co_channel_collection.py",
-            "templateFile": "_task_modules\\co_channel_collection.py.mako",
+            "relativeOutputPath": "task\\collections\\_co_channel_collection.py",
+            "templateFile": "task\\collections\\_co_channel_collection.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\di_channel_collection.py",
-            "templateFile": "_task_modules\\di_channel_collection.py.mako",
+            "relativeOutputPath": "task\\collections\\_di_channel_collection.py",
+            "templateFile": "task\\collections\\_di_channel_collection.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\do_channel_collection.py",
-            "templateFile": "_task_modules\\do_channel_collection.py.mako",
+            "relativeOutputPath": "task\\collections\\_do_channel_collection.py",
+            "templateFile": "task\\collections\\_do_channel_collection.py.mako",
         },
         {
             "relativeOutputPath": "task\\_timing.py",
