@@ -161,11 +161,39 @@ def test___start_trigger___cfg_anlg_multi_edge_start_trig___no_errors(
 
     sim_9775_ai_voltage_multi_edge_task.timing.cfg_samp_clk_timing(1000)
     sim_9775_ai_voltage_multi_edge_task.triggers.start_trigger.cfg_anlg_multi_edge_start_trig(
-        # trigger_sources=trigger_sources, <-- ctypes.ArgumentError:
-        #                                       argument 2: <class 'TypeError'>:
-        #                                       bytes or integer address expected
-        #                                       instead of list instance
         trigger_sources=flatten_trigger_sources,
+        trigger_slope_array=trigger_slope_array,
+        trigger_level_array=trigger_level_array,
+    )
+
+    sim_9775_ai_voltage_multi_edge_task.start()
+    sim_9775_ai_voltage_multi_edge_task.read()
+
+
+def test___reference_trigger___cfg_anlg_edge_ref_trig___no_errors(
+    sim_6363_ai_voltage_task: Task,
+):
+    sim_6363_ai_voltage_task.timing.cfg_samp_clk_timing(1000)
+    sim_6363_ai_voltage_task.triggers.reference_trigger.cfg_anlg_edge_ref_trig(
+        trigger_source="APFI0", pretrigger_samples=10, trigger_slope=Slope.RISING, trigger_level=2.0
+    )
+
+    sim_6363_ai_voltage_task.start()
+    sim_6363_ai_voltage_task.read()
+
+
+def test___reference_trigger___cfg_anlg_multi_edge_ref_trig___no_errors(
+    sim_9775_ai_voltage_multi_edge_task: Task,
+):
+    trigger_sources = ["cdaqTesterMod3/ai0", "cdaqTesterMod3/ai1"]
+    trigger_slope_array = [Slope.RISING, Slope.RISING]
+    trigger_level_array = [2.0, 3.0]
+    flatten_trigger_sources = flatten_channel_string([s for s in trigger_sources])
+
+    sim_9775_ai_voltage_multi_edge_task.timing.cfg_samp_clk_timing(1000)
+    sim_9775_ai_voltage_multi_edge_task.triggers.reference_trigger.cfg_anlg_multi_edge_ref_trig(
+        trigger_sources=flatten_trigger_sources,
+        pretrigger_samples=10,
         trigger_slope_array=trigger_slope_array,
         trigger_level_array=trigger_level_array,
     )

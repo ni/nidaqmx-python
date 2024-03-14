@@ -20457,7 +20457,7 @@ functions = {
             }
         ],
         'python_class_name': 'Device',
-        'python_description': 'This function nullifies any self-calibration you perform on the device. If you have never performed a self-calibration on the device, this function has no effect.',
+        'python_description': 'Sets the self-calibration constants of the device to the external calibration constants. NI sets the external calibration constants at the factory, and those constants remain in effect until you perform a new external calibration on the device.',
         'returns': 'int32'
     },
     'SaveGlobalChan': {

@@ -1223,9 +1223,10 @@ class Device:
 
     def restore_last_ext_cal_const(self):
         """
-        This function nullifies any self-calibration you perform on the
-        device. If you have never performed a self-calibration on the
-        device, this function has no effect.
+        Sets the self-calibration constants of the device to the
+        external calibration constants. NI sets the external calibration
+        constants at the factory, and those constants remain in effect
+        until you perform a new external calibration on the device.
         """
 
         self._interpreter.restore_last_ext_cal_const(
