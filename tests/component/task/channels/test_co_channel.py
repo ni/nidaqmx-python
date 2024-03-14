@@ -1,7 +1,7 @@
 import pytest
 
 from nidaqmx import Task
-from nidaqmx._task_modules.channels import COChannel
+from nidaqmx.task.channels import COChannel
 from nidaqmx.constants import Level, UsageTypeCO
 from nidaqmx.system import Device
 
