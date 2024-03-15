@@ -235,35 +235,31 @@ class Task:
     @property
     def export_signals(self) -> ExportSignals:
         """
-        :class:`nidaqmx._task_modules.export_signals.ExportSignals`: Gets the
-            exported signal configurations for the task.
+        Gets the exported signal configurations for the task.
         """
         return self._export_signals
 
     @property
     def in_stream(self) -> InStream: 
         """
-        :class:`nidaqmx.task.InStream`: Gets the read
-            configurations for the task.
+        Gets the read configurations for the task.
         """
         return self._in_stream
 
     @property
     def out_stream(self) -> OutStream:
         """
-        :class:`nidaqmx._task_modules.out_stream.OutStream`: Gets the
-            write configurations for the task.
+        Gets the write configurations for the task.
         """
         return self._out_stream
 
     @property
     def timing(self) -> Timing:
         """
-        :class:`nidaqmx._task_modules.timing.Timing`: Gets the timing
-            configurations for the task.
+        Gets the timing configurations for the task.
         """
         return self._timing
-
+    
     @property
     def triggers(self):
         """
