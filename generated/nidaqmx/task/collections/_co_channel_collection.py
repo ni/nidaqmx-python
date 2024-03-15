@@ -77,7 +77,7 @@ class COChannelCollection(ChannelCollection):
                 combined with frequency to determine pulse width and the
                 interval between pulses.
         Returns:
-            nidaqmx._task_modules.channels.co_channel.COChannel:
+            nidaqmx.task.channels.COChannel:
             
             Indicates the newly created channel object.
         """
@@ -123,7 +123,7 @@ class COChannelCollection(ChannelCollection):
             high_ticks (Optional[int]): Is the number of ticks the pulse
                 is high.
         Returns:
-            nidaqmx._task_modules.channels.co_channel.COChannel:
+            nidaqmx.task.channels.COChannel:
             
             Indicates the newly created channel object.
         """
@@ -166,7 +166,7 @@ class COChannelCollection(ChannelCollection):
             high_time (Optional[float]): Is the amount of time the pulse
                 is high.
         Returns:
-            nidaqmx._task_modules.channels.co_channel.COChannel:
+            nidaqmx.task.channels.COChannel:
             
             Indicates the newly created channel object.
         """

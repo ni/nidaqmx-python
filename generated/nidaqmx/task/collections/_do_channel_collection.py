@@ -81,7 +81,7 @@ class DOChannelCollection(ChannelCollection):
                 ports with the **lines** input, you must set this input
                 to **one channel for all lines**.
         Returns:
-            nidaqmx._task_modules.channels.do_channel.DOChannel:
+            nidaqmx.task.channels.DOChannel:
             
             Indicates the newly created channel object.
         """

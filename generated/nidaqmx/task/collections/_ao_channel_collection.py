@@ -72,7 +72,7 @@ class AOChannelCollection(ChannelCollection):
                 to this input and set **units** to
                 **FROM_CUSTOM_SCALE**.
         Returns:
-            nidaqmx._task_modules.channels.ao_channel.AOChannel:
+            nidaqmx.task.channels.AOChannel:
             
             Indicates the newly created channel object.
         """
@@ -110,7 +110,7 @@ class AOChannelCollection(ChannelCollection):
             offset (Optional[float]): Is the voltage offset of the
                 waveform to generate.
         Returns:
-            nidaqmx._task_modules.channels.ao_channel.AOChannel:
+            nidaqmx.task.channels.AOChannel:
             
             Indicates the newly created channel object.
         """
@@ -150,7 +150,7 @@ class AOChannelCollection(ChannelCollection):
                 to this input and set **units** to
                 **FROM_CUSTOM_SCALE**.
         Returns:
-            nidaqmx._task_modules.channels.ao_channel.AOChannel:
+            nidaqmx.task.channels.AOChannel:
             
             Indicates the newly created channel object.
         """

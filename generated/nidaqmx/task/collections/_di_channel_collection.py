@@ -81,7 +81,7 @@ class DIChannelCollection(ChannelCollection):
                 ports with the **lines** input, you must set this input
                 to **one channel for all lines**.
         Returns:
-            nidaqmx._task_modules.channels.di_channel.DIChannel:
+            nidaqmx.task.channels.DIChannel:
             
             Indicates the newly created channel object.
         """

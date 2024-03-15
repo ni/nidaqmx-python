@@ -154,9 +154,8 @@ class InStream:
     @property
     def channels_to_read(self):
         """
-        :class:`nidaqmx._task_modules.channels.channel.Channel`:
-            Specifies a subset of channels in the task from which to
-            read.
+        :class:`nidaqmx.task.channels.Channel`: Specifies a subset of
+            channels in the task from which to read.
         """
 
         val = self._interpreter.get_read_attribute_string(self._handle, 0x1823)

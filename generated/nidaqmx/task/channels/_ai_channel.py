@@ -3111,14 +3111,13 @@ class AIChannel(Channel):
     @property
     def ai_thrmcpl_cjc_chan(self):
         """
-        :class:`nidaqmx._task_modules.channels.channel.Channel`:
-            Indicates the channel that acquires the temperature of the
-            cold junction if **ai_thrmcpl_cjc_src** is
-            **CJCSource1.SCANNABLE_CHANNEL**. If the channel is a
-            temperature channel, NI-DAQmx acquires the temperature in
-            the correct units. Other channel types, such as a resistance
-            channel with a custom sensor, must use a custom scale to
-            scale values to degrees Celsius.
+        :class:`nidaqmx.task.channels.Channel`: Indicates the channel
+            that acquires the temperature of the cold junction if
+            **ai_thrmcpl_cjc_src** is **CJCSource1.SCANNABLE_CHANNEL**.
+            If the channel is a temperature channel, NI-DAQmx acquires
+            the temperature in the correct units. Other channel types,
+            such as a resistance channel with a custom sensor, must use
+            a custom scale to scale values to degrees Celsius.
         """
 
         val = self._interpreter.get_chan_attribute_string(self._handle, self._name, 0x1034)

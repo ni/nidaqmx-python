@@ -2300,7 +2300,7 @@ attributes = {
                 }
             },
             'python_object_has_factory': True,
-            'python_object_module_location': 'nidaqmx._task_modules.channels.channel',
+            'python_object_module_location': 'nidaqmx.task.channels',
             'python_object_type': 'Channel',
             'resettable': False,
             'type': 'char[]'
@@ -21443,7 +21443,7 @@ attributes = {
             'python_data_type': 'Channel',
             'python_description': 'Specifies the saved global channel to which subsequent properties apply.',
             'python_object_has_factory': True,
-            'python_object_module_location': 'nidaqmx._task_modules.channels.channel',
+            'python_object_module_location': 'nidaqmx.task.channels',
             'python_object_type': 'Channel',
             'resettable': False,
             'type': 'char[]'
@@ -22696,7 +22696,7 @@ attributes = {
                 }
             },
             'python_object_has_factory': True,
-            'python_object_module_location': 'nidaqmx._task_modules.channels.channel',
+            'python_object_module_location': 'nidaqmx.task.channels',
             'python_object_type': 'Channel',
             'resettable': True,
             'type': 'char[]'
@@ -24332,7 +24332,7 @@ attributes = {
             'python_data_type': 'Channel',
             'python_description': 'Indicates a list that contains the names of all global channels saved on the system.',
             'python_object_has_factory': True,
-            'python_object_module_location': 'nidaqmx._task_modules.channels.channel',
+            'python_object_module_location': 'nidaqmx.task.channels',
             'python_object_type': 'Channel',
             'resettable': False,
             'type': 'char[]'
@@ -24464,7 +24464,7 @@ attributes = {
             'python_data_type': 'Channel',
             'python_description': 'Indicates the names of all virtual channels in the task.',
             'python_object_has_factory': True,
-            'python_object_module_location': 'nidaqmx._task_modules.channels.channel',
+            'python_object_module_location': 'nidaqmx.task.channels',
             'python_object_type': 'Channel',
             'resettable': False,
             'type': 'char[]'
