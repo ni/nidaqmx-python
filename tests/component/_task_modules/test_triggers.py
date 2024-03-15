@@ -1,4 +1,5 @@
 from datetime import timezone
+from typing import List
 
 import pytest
 from hightime import datetime as ht_datetime, timedelta as ht_timedelta
@@ -11,14 +12,14 @@ from nidaqmx.utils import flatten_channel_string
 
 
 @pytest.fixture()
-def ai_voltage_task(task, sim_time_aware_9215_device):
+def ai_voltage_task(task, sim_time_aware_9215_device) -> Task:
     """Gets AI voltage task."""
     task.ai_channels.add_ai_voltage_chan(sim_time_aware_9215_device.ai_physical_chans[0].name)
-    yield task
+    return task
 
 
 @pytest.fixture()
-def ci_count_edges_task(task, sim_9185_device) -> nidaqmx.Task:
+def ci_count_edges_task(task, sim_9185_device) -> Task:
     chan = task.ci_channels.add_ci_count_edges_chan(f"{sim_9185_device.name}/_ctr0")
     chan.ci_count_edges_term = f"/{sim_9185_device.name}/te0/SampleClock"
     chan.ci_count_edges_active_edge = Edge.RISING
@@ -26,18 +27,18 @@ def ci_count_edges_task(task, sim_9185_device) -> nidaqmx.Task:
 
 
 @pytest.fixture()
-def sim_6363_ai_voltage_task(task, sim_6363_device):
+def sim_6363_ai_voltage_task(task, sim_6363_device) -> Task:
     """Gets AI voltage task."""
     task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
-    yield task
+    return task
 
 
 @pytest.fixture()
-def sim_9775_ai_voltage_multi_edge_task(task, sim_9775_device):
+def sim_9775_ai_voltage_multi_edge_task(task, sim_9775_device) -> Task:
     """Gets AI voltage multi edge task."""
     task.ai_channels.add_ai_voltage_chan(sim_9775_device.ai_physical_chans[0].name)
     task.ai_channels.add_ai_voltage_chan(sim_9775_device.ai_physical_chans[1].name)
-    yield task
+    return task
 
 
 def test___default_arguments___cfg_time_start_trig___no_errors(
@@ -139,64 +140,154 @@ def test___timestamp_not_enabled___wait_for_valid_timestamp___throw_error(
     assert exc_info.value.error_code == DAQmxErrors.TIMESTAMP_NOT_ENABLED
 
 
+@pytest.mark.parametrize(
+    "trig_src, trig_slope, trig_level",
+    [
+        ("APFI0", Slope.RISING, 2.0),
+        ("APFI0", Slope.FALLING, 3.0),
+        ("APFI1", Slope.FALLING, -2.0),
+        ("APFI1", Slope.RISING, -3.0),
+    ],
+)
 def test___start_trigger___cfg_anlg_edge_start_trig___no_errors(
     sim_6363_ai_voltage_task: Task,
+    trig_src: str,
+    trig_slope: Slope,
+    trig_level: float,
 ):
+    device_name = sim_6363_ai_voltage_task.devices[0].name
     sim_6363_ai_voltage_task.timing.cfg_samp_clk_timing(1000)
     sim_6363_ai_voltage_task.triggers.start_trigger.cfg_anlg_edge_start_trig(
-        trigger_source="APFI0", trigger_slope=Slope.RISING, trigger_level=2.0
+        trigger_source=trig_src, trigger_slope=trig_slope, trigger_level=trig_level
     )
 
     sim_6363_ai_voltage_task.start()
-    sim_6363_ai_voltage_task.read()
+
+    assert (
+        sim_6363_ai_voltage_task.triggers.start_trigger.anlg_edge_src
+        == f"/{device_name}/{trig_src}"
+    )
+    assert sim_6363_ai_voltage_task.triggers.start_trigger.anlg_edge_slope == trig_slope
+    assert round(sim_6363_ai_voltage_task.triggers.start_trigger.anlg_edge_lvl, 1) == trig_level
 
 
+@pytest.mark.parametrize(
+    "trig_slopes, trig_levels",
+    [
+        ([Slope.RISING, Slope.RISING], [2.0, 2.0]),
+        ([Slope.FALLING, Slope.FALLING], [3.0, 3.0]),
+        ([Slope.FALLING, Slope.FALLING], [-2.0, -2.0]),
+        ([Slope.RISING, Slope.RISING], [-3.0, -3.0]),
+    ],
+)
 def test___start_trigger___cfg_anlg_multi_edge_start_trig___no_errors(
     sim_9775_ai_voltage_multi_edge_task: Task,
+    trig_slopes: List[Slope],
+    trig_levels: List[float],
 ):
     trigger_sources = ["cdaqTesterMod3/ai0", "cdaqTesterMod3/ai1"]
-    trigger_slope_array = [Slope.RISING, Slope.RISING]
-    trigger_level_array = [2.0, 3.0]
     flatten_trigger_sources = flatten_channel_string([s for s in trigger_sources])
 
     sim_9775_ai_voltage_multi_edge_task.timing.cfg_samp_clk_timing(1000)
     sim_9775_ai_voltage_multi_edge_task.triggers.start_trigger.cfg_anlg_multi_edge_start_trig(
         trigger_sources=flatten_trigger_sources,
-        trigger_slope_array=trigger_slope_array,
-        trigger_level_array=trigger_level_array,
+        trigger_slope_array=trig_slopes,
+        trigger_level_array=trig_levels,
     )
 
     sim_9775_ai_voltage_multi_edge_task.start()
-    sim_9775_ai_voltage_multi_edge_task.read()
+
+    assert (
+        sim_9775_ai_voltage_multi_edge_task.triggers.start_trigger.anlg_multi_edge_srcs
+        == flatten_trigger_sources
+    )
+    assert (
+        sim_9775_ai_voltage_multi_edge_task.triggers.start_trigger.anlg_multi_edge_slopes
+        == trig_slopes
+    )
+    assert [
+        round(v, 1)
+        for v in sim_9775_ai_voltage_multi_edge_task.triggers.start_trigger.anlg_multi_edge_lvls
+    ] == trig_levels
 
 
+@pytest.mark.parametrize(
+    "trig_src, pretrig_samples, trig_slope, trig_level",
+    [
+        ("APFI0", 10, Slope.RISING, 2.0),
+        ("APFI0", 20, Slope.FALLING, 3.0),
+        ("APFI1", 30, Slope.FALLING, -2.0),
+        ("APFI1", 40, Slope.RISING, -3.0),
+    ],
+)
 def test___reference_trigger___cfg_anlg_edge_ref_trig___no_errors(
     sim_6363_ai_voltage_task: Task,
+    trig_src: str,
+    pretrig_samples: int,
+    trig_slope: Slope,
+    trig_level: float,
 ):
+    device_name = sim_6363_ai_voltage_task.devices[0].name
     sim_6363_ai_voltage_task.timing.cfg_samp_clk_timing(1000)
     sim_6363_ai_voltage_task.triggers.reference_trigger.cfg_anlg_edge_ref_trig(
-        trigger_source="APFI0", pretrigger_samples=10, trigger_slope=Slope.RISING, trigger_level=2.0
+        trigger_source=trig_src,
+        pretrigger_samples=pretrig_samples,
+        trigger_slope=trig_slope,
+        trigger_level=trig_level,
     )
 
     sim_6363_ai_voltage_task.start()
-    sim_6363_ai_voltage_task.read()
+
+    assert (
+        sim_6363_ai_voltage_task.triggers.reference_trigger.anlg_edge_src
+        == f"/{device_name}/{trig_src}"
+    )
+    assert sim_6363_ai_voltage_task.triggers.reference_trigger.pretrig_samples == pretrig_samples
+    assert sim_6363_ai_voltage_task.triggers.reference_trigger.anlg_edge_slope == trig_slope
+    assert round(sim_6363_ai_voltage_task.triggers.reference_trigger.anlg_edge_lvl, 1) == trig_level
 
 
+@pytest.mark.parametrize(
+    "pretrig_samples, trig_slopes, trig_levels",
+    [
+        (10, [Slope.RISING, Slope.RISING], [2.0, 2.0]),
+        (20, [Slope.FALLING, Slope.FALLING], [3.0, 3.0]),
+        (30, [Slope.FALLING, Slope.FALLING], [-2.0, -2.0]),
+        (40, [Slope.RISING, Slope.RISING], [-3.0, -3.0]),
+    ],
+)
 def test___reference_trigger___cfg_anlg_multi_edge_ref_trig___no_errors(
     sim_9775_ai_voltage_multi_edge_task: Task,
+    pretrig_samples: int,
+    trig_slopes: List[Slope],
+    trig_levels: List[float],
 ):
     trigger_sources = ["cdaqTesterMod3/ai0", "cdaqTesterMod3/ai1"]
-    trigger_slope_array = [Slope.RISING, Slope.RISING]
-    trigger_level_array = [2.0, 3.0]
     flatten_trigger_sources = flatten_channel_string([s for s in trigger_sources])
 
     sim_9775_ai_voltage_multi_edge_task.timing.cfg_samp_clk_timing(1000)
     sim_9775_ai_voltage_multi_edge_task.triggers.reference_trigger.cfg_anlg_multi_edge_ref_trig(
         trigger_sources=flatten_trigger_sources,
-        pretrigger_samples=10,
-        trigger_slope_array=trigger_slope_array,
-        trigger_level_array=trigger_level_array,
+        pretrigger_samples=pretrig_samples,
+        trigger_slope_array=trig_slopes,
+        trigger_level_array=trig_levels,
     )
 
     sim_9775_ai_voltage_multi_edge_task.start()
-    sim_9775_ai_voltage_multi_edge_task.read()
+
+    assert (
+        sim_9775_ai_voltage_multi_edge_task.triggers.reference_trigger.anlg_multi_edge_srcs
+        == flatten_trigger_sources
+    )
+    assert (
+        sim_9775_ai_voltage_multi_edge_task.triggers.reference_trigger.pretrig_samples
+        == pretrig_samples
+    )
+    assert (
+        sim_9775_ai_voltage_multi_edge_task.triggers.reference_trigger.anlg_multi_edge_slopes
+        == trig_slopes
+    )
+    assert [
+        round(v, 1)
+        for v in sim_9775_ai_voltage_multi_edge_task.triggers.reference_trigger.anlg_multi_edge_lvls
+    ] == trig_levels
