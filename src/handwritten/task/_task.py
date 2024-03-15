@@ -187,48 +187,42 @@ class Task:
     @property
     def ai_channels(self) -> AIChannelCollection:
         """
-        :class:`nidaqmx.task.collections.AIChannelCollection`:
-            Gets the collection of analog input channels for this task.
+        Gets the collection of analog input channels for this task.
         """
         return self._ai_channels
 
     @property
     def ao_channels(self) -> AOChannelCollection:
         """
-        :class:`nidaqmx.task.collections.AOChannelCollection`:
-            Gets the collection of analog output channels for this task.
+        Gets the collection of analog output channels for this task.
         """
         return self._ao_channels
 
     @property
     def ci_channels(self) -> CIChannelCollection:
         """
-        :class:`nidaqmx.task.collections.CIChannelCollection`:
-            Gets the collection of counter input channels for this task.
+        Gets the collection of counter input channels for this task.
         """
         return self._ci_channels
 
     @property
     def co_channels(self) -> COChannelCollection:
         """
-        :class:`nidaqmx.task.collections.COChannelCollection`:
-            Gets the collection of counter output channels for this task.
+        Gets the collection of counter output channels for this task.
         """
         return self._co_channels
 
     @property
     def di_channels(self) -> DIChannelCollection:
         """
-        :class:`nidaqmx.task.collections.DIChannelCollection`:
-            Gets the collection of digital input channels for this task.
+        Gets the collection of digital input channels for this task.
         """
         return self._di_channels
 
     @property
     def do_channels(self) -> DOChannelCollection:
         """
-        :class:`nidaqmx.task.collections.DOChannelCollection`:
-            Gets the collection of digital output channels for this task.
+        Gets the collection of digital output channels for this task.
         """
         return self._do_channels
 
