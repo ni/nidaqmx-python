@@ -38,42 +38,37 @@ class Triggers:
         self._start_trigger = StartTrigger(self._handle, self._interpreter)
 
     @property
-    def arm_start_trigger(self):
+    def arm_start_trigger(self) -> ArmStartTrigger:
         """
-        :class:`nidaqmx.task.triggering.ArmStartTrigger`:
-            Gets the arm start trigger configurations for the task.
+        Gets the arm start trigger configurations for the task.
         """
         return self._arm_start_trigger
 
     @property
-    def handshake_trigger(self):
+    def handshake_trigger(self) -> HandshakeTrigger:
         """
-        :class:`nidaqmx.task.triggering.HandshakeTrigger`:
-            Gets the handshake trigger configurations for the task.
+        Gets the handshake trigger configurations for the task.
         """
         return self._handshake_trigger
 
     @property
-    def pause_trigger(self):
+    def pause_trigger(self) -> PauseTrigger:
         """
-        :class:`nidaqmx.task.triggering.PauseTrigger`:
-            Gets the pause trigger configurations for the task.
+        Gets the pause trigger configurations for the task.
         """
         return self._pause_trigger
 
     @property
-    def reference_trigger(self):
+    def reference_trigger(self) -> ReferenceTrigger:
         """
-        :class:`nidaqmx.task.triggering.ReferenceTrigger`:
-            Gets the reference trigger configurations for the task.
+        Gets the reference trigger configurations for the task.
         """
         return self._reference_trigger
 
     @property
-    def start_trigger(self):
+    def start_trigger(self) -> StartTrigger:
         """
-        :class:`nidaqmx.task.triggering.StartTrigger`:
-            Gets the start trigger configurations for the task.
+        Gets the start trigger configurations for the task.
         """
         return self._start_trigger
 

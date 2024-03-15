@@ -255,10 +255,9 @@ class Task:
         return self._timing
     
     @property
-    def triggers(self):
+    def triggers(self) -> Triggers:
         """
-        :class:`nidaqmx.task.triggering.Triggers`: Gets the trigger
-            configurations for the task.
+        Gets the trigger configurations for the task.
         """
         return self._triggers
 
