@@ -204,27 +204,30 @@ def test___physical_channels___getitem_mixed_str_list___name(
 
 
 @pytest.mark.parametrize("collection_name", COLLECTION_NAMES)
-def test___physical_channels___getitem_invalid_channel_str___raises_error(
+def test___physical_channels___getitem_qualified_internal_channel_list___name(
     collection_name: str, sim_6363_device: Device
 ):
     physical_channels = getattr(sim_6363_device, collection_name)
+    internal_channel_names = [f"{sim_6363_device.name}/_ao{x}_vs_aognd" for x in range(4)]
 
-    with pytest.raises(KeyError) as exc_info:
-        physical_channels["foo"]
+    channels = physical_channels[",".join(internal_channel_names)]
 
-    assert "foo" in exc_info.value.args[0]
+    assert all(chan.name == name for chan, name in zip(channels, internal_channel_names))
 
 
 @pytest.mark.parametrize("collection_name", COLLECTION_NAMES)
-def test___physical_channels___getitem_invalid_channel_str_list___raises_error(
+def test___physical_channels___getitem_unqualified_internal_channel_list___name(
     collection_name: str, sim_6363_device: Device
 ):
     physical_channels = getattr(sim_6363_device, collection_name)
+    internal_channel_names = ["_ao{x}_vs_aognd" for x in range(4)]
 
-    with pytest.raises(KeyError) as exc_info:
-        physical_channels[f"{physical_channels.channel_names[0]},foo"]
+    channels = physical_channels[",".join(internal_channel_names)]
 
-    assert "foo" in exc_info.value.args[0]
+    assert all(
+        chan.name == f"{sim_6363_device.name}/{name}"
+        for chan, name in zip(channels, internal_channel_names)
+    )
 
 
 @pytest.mark.parametrize("collection_name", COLLECTION_NAMES)

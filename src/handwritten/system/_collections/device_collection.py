@@ -59,12 +59,6 @@ class DeviceCollection(Sequence):
             return [_DeviceAlternateConstructor(name, self._interpreter) for name in self.device_names[index]]
         elif isinstance(index, str):
             device_names = unflatten_channel_string(index)
-            all_devices = self.device_names
-            # Validate the device names we were provided
-            for device in device_names:
-                if device not in all_devices:
-                    raise KeyError(f'"{device}" is not a valid device name.')
-
             if len(device_names) == 1:
                 return _DeviceAlternateConstructor(device_names[0], self._interpreter)
             return [_DeviceAlternateConstructor(name, self._interpreter) for name in device_names]

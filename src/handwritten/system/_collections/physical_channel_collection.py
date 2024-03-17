@@ -62,19 +62,14 @@ class PhysicalChannelCollection(Sequence):
             return [_PhysicalChannelAlternateConstructor(channel, self._interpreter) for channel in self.channel_names[index]]
         elif isinstance(index, str):
             requested_channels = unflatten_channel_string(index)
-            all_channels = self.channel_names
-            # Validate the channel names we were provided
+            # Ensure the channel names are fully qualified. If the channel is invalid, the user will get errors from the
+            # channel objects on use.
             channels_to_use = []
             for channel in requested_channels:
-                if channel in all_channels:
+                if channel.startswith(self._name):
                     channels_to_use.append(channel)
                 else:
-                    # The channel may have been unqualified, so we'll try to qualify it
-                    qualified_channel = f'{self._name}/{channel}'
-                    if qualified_channel in all_channels:
-                        channels_to_use.append(qualified_channel)
-                    else:
-                        raise KeyError(f'"{channel}" is not a valid channel name.')
+                    channels_to_use.append(f'{self._name}/{channel}')
 
             if len(channels_to_use) == 1:
                 return _PhysicalChannelAlternateConstructor(channels_to_use[0], self._interpreter)
