@@ -6,11 +6,11 @@ from typing import List, Tuple, Union
 import numpy
 from nidaqmx import utils
 from nidaqmx._task_modules.channels.channel import Channel
-from nidaqmx._task_modules.export_signals import ExportSignals
+from nidaqmx.task._export_signals import ExportSignals
 from nidaqmx.task._in_stream import InStream
-from nidaqmx._task_modules.timing import Timing
+from nidaqmx.task._timing import Timing
 from nidaqmx._task_modules.triggers import Triggers
-from nidaqmx._task_modules.out_stream import OutStream
+from nidaqmx.task._out_stream import OutStream
 from nidaqmx._task_modules.ai_channel_collection import (
     AIChannelCollection)
 from nidaqmx._task_modules.ao_channel_collection import (
@@ -233,37 +233,33 @@ class Task:
         return self._do_channels
 
     @property
-    def export_signals(self):
+    def export_signals(self) -> ExportSignals:
         """
-        :class:`nidaqmx._task_modules.export_signals.ExportSignals`: Gets the
-            exported signal configurations for the task.
+        Gets the exported signal configurations for the task.
         """
         return self._export_signals
 
     @property
     def in_stream(self) -> InStream: 
         """
-        :class:`nidaqmx.task.InStream`: Gets the read
-            configurations for the task.
+        Gets the read configurations for the task.
         """
         return self._in_stream
 
     @property
-    def out_stream(self):
+    def out_stream(self) -> OutStream:
         """
-        :class:`nidaqmx._task_modules.out_stream.OutStream`: Gets the
-            write configurations for the task.
+        Gets the write configurations for the task.
         """
         return self._out_stream
 
     @property
-    def timing(self):
+    def timing(self) -> Timing:
         """
-        :class:`nidaqmx._task_modules.timing.Timing`: Gets the timing
-            configurations for the task.
+        Gets the timing configurations for the task.
         """
         return self._timing
-
+    
     @property
     def triggers(self):
         """
