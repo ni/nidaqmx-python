@@ -65,8 +65,8 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def cfg_anlg_multi_edge_ref_trig(
-            self, task, trigger_sources, trigger_slope_array,
-            trigger_level_array, pretrigger_samples):
+            self, task, trigger_sources, pretrigger_samples,
+            trigger_slope_array, trigger_level_array):
         raise NotImplementedError
 
     @abc.abstractmethod
