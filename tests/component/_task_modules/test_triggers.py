@@ -156,19 +156,20 @@ def test___start_trigger___cfg_anlg_edge_start_trig___no_errors(
     trig_level: float,
 ):
     device_name = sim_6363_ai_voltage_task.devices[0].name
+
     sim_6363_ai_voltage_task.timing.cfg_samp_clk_timing(1000)
     sim_6363_ai_voltage_task.triggers.start_trigger.cfg_anlg_edge_start_trig(
         trigger_source=trig_src, trigger_slope=trig_slope, trigger_level=trig_level
     )
-
-    sim_6363_ai_voltage_task.start()
 
     assert (
         sim_6363_ai_voltage_task.triggers.start_trigger.anlg_edge_src
         == f"/{device_name}/{trig_src}"
     )
     assert sim_6363_ai_voltage_task.triggers.start_trigger.anlg_edge_slope == trig_slope
-    assert round(sim_6363_ai_voltage_task.triggers.start_trigger.anlg_edge_lvl, 1) == trig_level
+    assert sim_6363_ai_voltage_task.triggers.start_trigger.anlg_edge_lvl == pytest.approx(
+        trig_level, abs=0.001
+    )
 
 
 @pytest.mark.parametrize(
@@ -195,8 +196,6 @@ def test___start_trigger___cfg_anlg_multi_edge_start_trig___no_errors(
         trigger_level_array=trig_levels,
     )
 
-    sim_9775_ai_voltage_multi_edge_task.start()
-
     assert (
         sim_9775_ai_voltage_multi_edge_task.triggers.start_trigger.anlg_multi_edge_srcs
         == flatten_trigger_sources
@@ -205,10 +204,10 @@ def test___start_trigger___cfg_anlg_multi_edge_start_trig___no_errors(
         sim_9775_ai_voltage_multi_edge_task.triggers.start_trigger.anlg_multi_edge_slopes
         == trig_slopes
     )
-    assert [
-        round(v, 1)
-        for v in sim_9775_ai_voltage_multi_edge_task.triggers.start_trigger.anlg_multi_edge_lvls
-    ] == trig_levels
+    assert (
+        sim_9775_ai_voltage_multi_edge_task.triggers.start_trigger.anlg_multi_edge_lvls
+        == pytest.approx(trig_levels, abs=0.001)
+    )
 
 
 @pytest.mark.parametrize(
@@ -228,6 +227,7 @@ def test___reference_trigger___cfg_anlg_edge_ref_trig___no_errors(
     trig_level: float,
 ):
     device_name = sim_6363_ai_voltage_task.devices[0].name
+
     sim_6363_ai_voltage_task.timing.cfg_samp_clk_timing(1000)
     sim_6363_ai_voltage_task.triggers.reference_trigger.cfg_anlg_edge_ref_trig(
         trigger_source=trig_src,
@@ -236,15 +236,15 @@ def test___reference_trigger___cfg_anlg_edge_ref_trig___no_errors(
         trigger_level=trig_level,
     )
 
-    sim_6363_ai_voltage_task.start()
-
     assert (
         sim_6363_ai_voltage_task.triggers.reference_trigger.anlg_edge_src
         == f"/{device_name}/{trig_src}"
     )
     assert sim_6363_ai_voltage_task.triggers.reference_trigger.pretrig_samples == pretrig_samples
     assert sim_6363_ai_voltage_task.triggers.reference_trigger.anlg_edge_slope == trig_slope
-    assert round(sim_6363_ai_voltage_task.triggers.reference_trigger.anlg_edge_lvl, 1) == trig_level
+    assert sim_6363_ai_voltage_task.triggers.reference_trigger.anlg_edge_lvl == pytest.approx(
+        trig_level, abs=0.001
+    )
 
 
 @pytest.mark.parametrize(
@@ -273,8 +273,6 @@ def test___reference_trigger___cfg_anlg_multi_edge_ref_trig___no_errors(
         trigger_level_array=trig_levels,
     )
 
-    sim_9775_ai_voltage_multi_edge_task.start()
-
     assert (
         sim_9775_ai_voltage_multi_edge_task.triggers.reference_trigger.anlg_multi_edge_srcs
         == flatten_trigger_sources
@@ -287,7 +285,7 @@ def test___reference_trigger___cfg_anlg_multi_edge_ref_trig___no_errors(
         sim_9775_ai_voltage_multi_edge_task.triggers.reference_trigger.anlg_multi_edge_slopes
         == trig_slopes
     )
-    assert [
-        round(v, 1)
-        for v in sim_9775_ai_voltage_multi_edge_task.triggers.reference_trigger.anlg_multi_edge_lvls
-    ] == trig_levels
+    assert (
+        sim_9775_ai_voltage_multi_edge_task.triggers.reference_trigger.anlg_multi_edge_lvls
+        == pytest.approx(trig_levels, abs=0.001)
+    )
