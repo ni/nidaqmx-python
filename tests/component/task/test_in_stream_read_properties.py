@@ -1,7 +1,5 @@
 import pathlib
 
-from typing import Union
-
 import pytest
 
 from nidaqmx.constants import OverwriteMode, ReadRelativeTo
