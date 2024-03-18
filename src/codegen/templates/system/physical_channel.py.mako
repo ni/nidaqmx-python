@@ -23,6 +23,8 @@ from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})
 %endif
 
+from typing import Optional, Union
+
 __all__ = ['PhysicalChannel']
 
 

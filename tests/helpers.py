@@ -2,7 +2,7 @@
 
 import contextlib
 import pathlib
-from typing import Generator
+from typing import Generator, Optional, Union
 
 from nidaqmx.system.physical_channel import PhysicalChannel
 
@@ -20,7 +20,7 @@ def generate_random_seed():
 
 @contextlib.contextmanager
 def configure_teds(
-    phys_chan: PhysicalChannel, teds_file_path: pathlib.Path=pathlib.Path("")
+    phys_chan: PhysicalChannel, teds_file_path: Optional[Union[str, pathlib.PurePath]] = None
 ) -> Generator[PhysicalChannel, None, None]:
     """Yields a physical channel with TEDS configured and then clears it after the test is done."""
     phys_chan.configure_teds(teds_file_path)

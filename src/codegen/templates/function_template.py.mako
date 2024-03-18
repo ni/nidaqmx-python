@@ -62,8 +62,8 @@
             ${input_param.parameter_name} = ${get_list_default_value(func, input_param)}
 
         %elif is_path_type(input_param):
-        if not ${input_param.parameter_name}.name:
-            ${input_param.parameter_name} = "" # type: ignore
+        if ${input_param.parameter_name} is None:
+            ${input_param.parameter_name} = ""
 
         %endif
     %endfor

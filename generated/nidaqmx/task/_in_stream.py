@@ -13,6 +13,7 @@ from nidaqmx.constants import (
     AcquisitionType, LoggingMode, LoggingOperation, OverwriteMode,
     READ_ALL_AVAILABLE, ReadRelativeTo, WaitMode)
 
+from typing import Union
 
 class InStream:
     """
@@ -330,10 +331,10 @@ class InStream:
         return val
 
     @property
-    def logging_file_path(self) -> pathlib.PurePath:
+    def logging_file_path(self) -> pathlib.Path:
         """
-        pathlib.PurePath: Specifies the path to the TDMS file to which
-            you want to log data.  If the file path is changed while the
+        pathlib.Path: Specifies the path to the TDMS file to which you
+            want to log data.  If the file path is changed while the
             task is running, this takes effect on the next sample
             interval (if Logging.SampsPerFile has been set) or when
             DAQmx Start New File is called. New file paths can be
@@ -343,11 +344,11 @@ class InStream:
         """
 
         val = self._interpreter.get_read_attribute_string(self._handle, 0x2ec4)
-        return val
+        return pathlib.Path(val)
 
     @logging_file_path.setter
-    def logging_file_path(self, val: pathlib.PurePath):
-        self._interpreter.set_read_attribute_string(self._handle, 0x2ec4, val)
+    def logging_file_path(self, val: Union[str, pathlib.PurePath]):
+        self._interpreter.set_read_attribute_string(self._handle, 0x2ec4, str(val))
 
     @logging_file_path.deleter
     def logging_file_path(self):
@@ -991,13 +992,13 @@ class InStream:
             return num_samps_per_chan
 
     def configure_logging(
-            self, file_path: pathlib.PurePath, logging_mode=LoggingMode.LOG_AND_READ,
+            self, file_path: Union[str, pathlib.PurePath], logging_mode=LoggingMode.LOG_AND_READ,
             group_name="", operation=LoggingOperation.OPEN_OR_CREATE):
         """
         Configures TDMS file logging for the task.
 
         Args:
-            file_path (pathlib.PurePath): Specifies the path to the TDMS file to
+            file_path (Union[str, pathlib.PurePath]): Specifies the path to the TDMS file to
                 which you want to log data.
             logging_mode (Optional[nidaqmx.constants.LoggingMode]):
                 Specifies whether to enable logging and whether to allow
@@ -1021,7 +1022,7 @@ class InStream:
         """
 
         self._interpreter.configure_logging(
-            self._handle, file_path, logging_mode.value, group_name, operation.value)
+            self._handle, str(file_path), logging_mode.value, group_name, operation.value)
 
     def read(self, number_of_samples_per_channel=READ_ALL_AVAILABLE):
         """
@@ -1232,16 +1233,16 @@ class InStream:
 
         return samples_read
 
-    def start_new_file(self, file_path: pathlib.PurePath):
+    def start_new_file(self, file_path: Union[str, pathlib.PurePath]):
         """
         Starts a new TDMS file the next time data is written to disk.
 
         Args:
-            file_path (pathlib.PurePath): Specifies the path to the TDMS file to
+            file_path (Union[str, pathlib.PurePath]): Specifies the path to the TDMS file to
                 which you want to log data.
         """
 
-        self._interpreter.start_new_file(self._handle, file_path)
+        self._interpreter.start_new_file(self._handle, str(file_path))
 
     @property
     @deprecation.deprecated(deprecated_in="0.7.0", details="Use overwrite instead.")

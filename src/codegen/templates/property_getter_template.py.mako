@@ -5,9 +5,9 @@
     %>\
     %if attribute.name in ATTRIBUTES_RETURN_FILE_PATH_TYPE:
     @property
-    def ${attribute.name}(self) -> pathlib.PurePath:
+    def ${attribute.name}(self) -> pathlib.Path:
         """
-        ${"pathlib.PurePath: " + attribute.python_description | docstring_wrap(initial_indent=8, subsequent_indent=12)}
+        ${"pathlib.Path: " + attribute.python_description | docstring_wrap(initial_indent=8, subsequent_indent=12)}
         """
     %else:
     @property
@@ -68,6 +68,8 @@
         %else:
         return ${object_type}(${', '.join(object_constructor_args)}, self._interpreter)
         %endif
+    %elif attribute.name in ATTRIBUTES_RETURN_FILE_PATH_TYPE:
+        return pathlib.Path(val)
     %elif attribute.is_object and attribute.is_list:
 <%
             object_constructor_args = []

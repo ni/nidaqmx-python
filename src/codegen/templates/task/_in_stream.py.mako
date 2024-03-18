@@ -18,6 +18,7 @@ from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})
 
+from typing import Union
 
 class InStream:
     """
@@ -95,13 +96,13 @@ ${property_template.script_property(attribute)}\
             return num_samps_per_chan
 
     def configure_logging(
-            self, file_path: pathlib.PurePath, logging_mode=LoggingMode.LOG_AND_READ,
+            self, file_path: Union[str, pathlib.PurePath], logging_mode=LoggingMode.LOG_AND_READ,
             group_name="", operation=LoggingOperation.OPEN_OR_CREATE):
         """
         Configures TDMS file logging for the task.
 
         Args:
-            file_path (pathlib.PurePath): Specifies the path to the TDMS file to
+            file_path (Union[str, pathlib.PurePath]): Specifies the path to the TDMS file to
                 which you want to log data.
             logging_mode (Optional[nidaqmx.constants.LoggingMode]):
                 Specifies whether to enable logging and whether to allow
@@ -125,7 +126,7 @@ ${property_template.script_property(attribute)}\
         """
 
         self._interpreter.configure_logging(
-            self._handle, file_path, logging_mode.value, group_name, operation.value)
+            self._handle, str(file_path), logging_mode.value, group_name, operation.value)
 
     def read(self, number_of_samples_per_channel=READ_ALL_AVAILABLE):
         """
@@ -336,16 +337,16 @@ ${property_template.script_property(attribute)}\
 
         return samples_read
 
-    def start_new_file(self, file_path: pathlib.PurePath):
+    def start_new_file(self, file_path: Union[str, pathlib.PurePath]):
         """
         Starts a new TDMS file the next time data is written to disk.
 
         Args:
-            file_path (pathlib.PurePath): Specifies the path to the TDMS file to
+            file_path (Union[str, pathlib.PurePath]): Specifies the path to the TDMS file to
                 which you want to log data.
         """
 
-        self._interpreter.start_new_file(self._handle, file_path)
+        self._interpreter.start_new_file(self._handle, str(file_path))
 
 <%namespace name="deprecated_template" file="/property_deprecated_template.py.mako"/>\
 ${deprecated_template.script_deprecated_property(attributes)}\

@@ -4,7 +4,7 @@
     %>\
     @${attribute.name}.setter
     %if attribute.name in ATTRIBUTES_WITH_FILE_PATH_PARAMETER:
-    def ${attribute.name}(self, val: pathlib.PurePath):
+    def ${attribute.name}(self, val: Union[str, pathlib.PurePath]):
     %else:
     def ${attribute.name}(self, val):
     %endif
@@ -36,7 +36,10 @@
         if attribute.python_class_name == "Watchdog":
             function_call_args.append("\"\"")
         function_call_args.append(hex(attribute.id))
-        function_call_args.append('val')
+        if attribute.name in ATTRIBUTES_WITH_FILE_PATH_PARAMETER:
+            function_call_args.append('str(val)')
+        else:
+            function_call_args.append('val')
     %>\
         self._interpreter.set_${generic_attribute_func}(${', '.join(function_call_args)})
 </%def>

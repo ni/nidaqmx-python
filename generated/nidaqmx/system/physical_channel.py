@@ -12,6 +12,8 @@ from nidaqmx.constants import (
     TerminalConfiguration, UsageTypeAI, UsageTypeAO, UsageTypeCI, UsageTypeCO,
     WriteBasicTEDSOptions, _TermCfg)
 
+from typing import Optional, Union
+
 __all__ = ['PhysicalChannel']
 
 
@@ -610,7 +612,8 @@ class PhysicalChannel:
         self._interpreter.clear_teds(
             self._name)
 
-    def configure_teds(self, file_path: pathlib.PurePath=pathlib.PurePath("")):
+    def configure_teds(
+            self, file_path: Optional[Union[str, pathlib.PurePath]]=None):
         """
         Associates TEDS information with the physical channel you
         specify. If you do not specify the filename of a data sheet in
@@ -620,14 +623,14 @@ class PhysicalChannel:
         channel that you performed in MAX.
 
         Args:
-            file_path (Optional[pathlib.PurePath]): Is the path to a
-                Virtual TEDS data sheet that you want to associate with
-                the physical channel. If you do not specify anything for
-                this input, this function attempts to find a TEDS sensor
-                connected to the physical channel.
+            file_path (Optional[Union[str, pathlib.PurePath]]): Is the
+                path to a Virtual TEDS data sheet that you want to
+                associate with the physical channel. If you do not
+                specify anything for this input, this function attempts
+                to find a TEDS sensor connected to the physical channel.
         """
-        if not file_path.name:
-            file_path = "" # type: ignore
+        if file_path is None:
+            file_path = ""
 
 
         self._interpreter.configure_teds(
@@ -658,21 +661,21 @@ class PhysicalChannel:
             self._name, bit_stream, basic_teds_options.value)
 
     def write_to_teds_from_file(
-            self, file_path: pathlib.PurePath=pathlib.PurePath(""),
+            self, file_path: Optional[Union[str, pathlib.PurePath]]=None,
             basic_teds_options=WriteBasicTEDSOptions.DO_NOT_WRITE):
         """
         Writes data from a virtual TEDS file to the TEDS sensor.
 
         Args:
-            file_path (Optional[pathlib.PurePath]): Specifies the
-                filename of a virtual TEDS file that contains the
-                bitstream to write.
+            file_path (Optional[Union[str, pathlib.PurePath]]): 
+                Specifies the filename of a virtual TEDS file that
+                contains the bitstream to write.
             basic_teds_options (Optional[nidaqmx.constants.WriteBasicTEDSOptions]): 
                 Specifies how to handle basic TEDS data in the
                 bitstream.
         """
-        if not file_path.name:
-            file_path = "" # type: ignore
+        if file_path is None:
+            file_path = ""
 
 
         self._interpreter.write_to_teds_from_file(

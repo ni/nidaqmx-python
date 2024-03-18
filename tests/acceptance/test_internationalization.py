@@ -1,4 +1,5 @@
 import locale
+import pathlib
 from typing import Any, Dict, List, Optional, Union
 
 import pytest
@@ -67,4 +68,4 @@ def test___supported_encoding___logging_file_path___returns_assigned_value(
         pytest.skip("requires compatible encoding")
     ai_task.in_stream.logging_file_path = file_path
 
-    assert ai_task.in_stream.logging_file_path == file_path
+    assert ai_task.in_stream.logging_file_path == pathlib.Path(file_path)
