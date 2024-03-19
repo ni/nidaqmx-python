@@ -13,12 +13,12 @@ script_info = {
             "templateFile": "_grpc_interpreter.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\channels\\channel.py",
-            "templateFile": "_task_modules\\channels\\channel.py.mako",
+            "relativeOutputPath": "task\\channels\\_channel.py",
+            "templateFile": "task\\channels\\_channel.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\channels\\ai_channel.py",
-            "templateFile": "_task_modules\\channels\\ai_channel.py.mako",
+            "relativeOutputPath": "task\\channels\\_ai_channel.py",
+            "templateFile": "task\\channels\\_ai_channel.py.mako",
         },
         {
             "relativeOutputPath": "task\\_in_stream.py",
@@ -37,24 +37,24 @@ script_info = {
             "templateFile": "system\\watchdog.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\channels\\ao_channel.py",
-            "templateFile": "_task_modules\\channels\\ao_channel.py.mako",
+            "relativeOutputPath": "task\\channels\\_ao_channel.py",
+            "templateFile": "task\\channels\\_ao_channel.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\channels\\ci_channel.py",
-            "templateFile": "_task_modules\\channels\\ci_channel.py.mako",
+            "relativeOutputPath": "task\\channels\\_ci_channel.py",
+            "templateFile": "task\\channels\\_ci_channel.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\channels\\co_channel.py",
-            "templateFile": "_task_modules\\channels\\co_channel.py.mako",
+            "relativeOutputPath": "task\\channels\\_co_channel.py",
+            "templateFile": "task\\channels\\_co_channel.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\channels\\di_channel.py",
-            "templateFile": "_task_modules\\channels\\di_channel.py.mako",
+            "relativeOutputPath": "task\\channels\\_di_channel.py",
+            "templateFile": "task\\channels\\_di_channel.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\channels\\do_channel.py", 
-            "templateFile": "_task_modules\\channels\\do_channel.py.mako",
+            "relativeOutputPath": "task\\channels\\_do_channel.py", 
+            "templateFile": "task\\channels\\_do_channel.py.mako",
         },
         {
             "relativeOutputPath": "task\\collections\\_ai_channel_collection.py",

@@ -5,7 +5,7 @@ from typing import List, Tuple, Union
 
 import numpy
 from nidaqmx import utils
-from nidaqmx._task_modules.channels.channel import Channel
+from nidaqmx.task.channels._channel import Channel
 from nidaqmx.task._export_signals import ExportSignals
 from nidaqmx.task._in_stream import InStream
 from nidaqmx.task._timing import Timing
@@ -143,7 +143,7 @@ class Task:
     @property
     def channels(self):
         """
-        :class:`nidaqmx._task_modules.channels.channel.Channel`: Specifies
+        :class:`nidaqmx.task.channels.Channel`: Specifies
             a channel object that represents the entire list of virtual
             channels in this task.
         """
