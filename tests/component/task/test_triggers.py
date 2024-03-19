@@ -51,7 +51,7 @@ def test___default_arguments___cfg_time_start_trig___no_errors(
 
     ai_voltage_task.triggers.start_trigger.cfg_time_start_trig(trigger_time)
 
-    when_value = ai_voltage_task.triggers.start_trigger.trig_when
+    when_value = ai_voltage_task.triggers.start_trigger.time_when
     timescale_value = ai_voltage_task.triggers.start_trigger.timestamp_timescale
     assert timescale_value == Timescale.USE_HOST
     assert when_value.year == trigger_time.year
@@ -74,7 +74,7 @@ def test___arguments_provided___cfg_time_start_trig___no_errors(
 
     ai_voltage_task.triggers.start_trigger.cfg_time_start_trig(trigger_time, timescale)
 
-    when_value = ai_voltage_task.triggers.start_trigger.trig_when
+    when_value = ai_voltage_task.triggers.start_trigger.time_when
     assert when_value.year == trigger_time.year
     assert when_value.month == trigger_time.month
     assert when_value.day == trigger_time.day

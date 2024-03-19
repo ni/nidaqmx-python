@@ -29014,7 +29014,7 @@ attributes = {
             'python_class_name': 'StartTrigger',
             'python_data_type': 'datetime',
             'python_description': 'Specifies when to trigger the start trigger.',
-            'python_name': 'trig_when',
+            'python_name': 'time_when',
             'resettable': True,
             'type': 'CVIAbsoluteTime'
         },
@@ -29548,7 +29548,7 @@ attributes = {
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'datetime',
             'python_description': 'Specifies when to trigger the arm start trigger.',
-            'python_name': 'trig_when',
+            'python_name': 'time_when',
             'resettable': True,
             'type': 'CVIAbsoluteTime'
         },
