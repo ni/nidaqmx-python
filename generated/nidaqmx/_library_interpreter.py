@@ -181,14 +181,40 @@ class LibraryInterpreter(BaseInterpreter):
         self.check_for_error(error_code)
 
     def cfg_anlg_multi_edge_ref_trig(
-            self, task, trigger_sources, trigger_slope_array,
-            trigger_level_array, pretrigger_samples):
-        raise NotImplementedError
+            self, task, trigger_sources, pretrigger_samples,
+            trigger_slope_array, trigger_level_array):
+        cfunc = lib_importer.windll.DAQmxCfgAnlgMultiEdgeRefTrig
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.int32, flags=('C')),
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                        ctypes.c_uint32, ctypes.c_uint]
+
+        error_code = cfunc(
+            task, trigger_sources, trigger_slope_array, trigger_level_array,
+            pretrigger_samples, len(trigger_level_array))
+        self.check_for_error(error_code)
 
     def cfg_anlg_multi_edge_start_trig(
             self, task, trigger_sources, trigger_slope_array,
             trigger_level_array):
-        raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxCfgAnlgMultiEdgeStartTrig
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        lib_importer.task_handle, ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.int32, flags=('C')),
+                        wrapped_ndpointer(dtype=numpy.float64, flags=('C')),
+                        ctypes.c_uint]
+
+        error_code = cfunc(
+            task, trigger_sources, trigger_slope_array, trigger_level_array,
+            len(trigger_level_array))
+        self.check_for_error(error_code)
 
     def cfg_anlg_window_ref_trig(
             self, task, trigger_source, window_top, window_bottom,
