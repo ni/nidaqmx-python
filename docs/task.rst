@@ -8,5 +8,5 @@ nidaqmx.task
 .. toctree::
    
    channel
-   channel_collection
+   task_collections
    triggers

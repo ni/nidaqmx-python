@@ -3,7 +3,7 @@
 import numpy
 
 from nidaqmx._task_modules.channels.ai_channel import AIChannel
-from nidaqmx._task_modules.channel_collection import ChannelCollection
+from nidaqmx.task.collections._channel_collection import ChannelCollection
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     ACExcitWireMode, AccelChargeSensitivityUnits, AccelSensitivityUnits,
