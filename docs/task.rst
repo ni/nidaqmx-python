@@ -9,4 +9,4 @@ nidaqmx.task
    
    task_channels
    task_collections
-   triggers
+   task_triggering
