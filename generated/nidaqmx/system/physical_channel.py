@@ -623,11 +623,11 @@ class PhysicalChannel:
         channel that you performed in MAX.
 
         Args:
-            file_path (Optional[Union[str, pathlib.PurePath]]): Is the
-                path to a Virtual TEDS data sheet that you want to
-                associate with the physical channel. If you do not
-                specify anything for this input, this function attempts
-                to find a TEDS sensor connected to the physical channel.
+            file_path: Is the path to a Virtual TEDS data sheet that
+                you want to associate with the physical channel. If you
+                do not specify anything for this input, this function
+                attempts to find a TEDS sensor connected to the physical
+                channel.
         """
         if file_path is None:
             file_path = ""
@@ -667,9 +667,8 @@ class PhysicalChannel:
         Writes data from a virtual TEDS file to the TEDS sensor.
 
         Args:
-            file_path (Optional[Union[str, pathlib.PurePath]]): 
-                Specifies the filename of a virtual TEDS file that
-                contains the bitstream to write.
+            file_path: Specifies the filename of a virtual TEDS file
+                that contains the bitstream to write.
             basic_teds_options (Optional[nidaqmx.constants.WriteBasicTEDSOptions]): 
                 Specifies how to handle basic TEDS data in the
                 bitstream.

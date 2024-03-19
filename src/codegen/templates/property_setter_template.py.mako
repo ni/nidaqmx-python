@@ -1,9 +1,9 @@
 <%def name="script_property_setter(attribute)">\
 <%
-        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type, ATTRIBUTES_WITH_FILE_PATH_PARAMETER
+        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type, ATTRIBUTE_WITH_FILE_PATH_TYPE
     %>\
     @${attribute.name}.setter
-    %if attribute.name in ATTRIBUTES_WITH_FILE_PATH_PARAMETER:
+    %if attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
     def ${attribute.name}(self, val: Union[str, pathlib.PurePath]):
     %else:
     def ${attribute.name}(self, val):
@@ -24,6 +24,8 @@
         val = flatten_channel_string(val)
     %elif attribute.is_list:
         val = numpy.array(val, dtype=${attribute.ctypes_data_type})
+    %elif attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
+        val = str(val)
     %endif
 \
 ## Script interpreter call.
@@ -36,10 +38,7 @@
         if attribute.python_class_name == "Watchdog":
             function_call_args.append("\"\"")
         function_call_args.append(hex(attribute.id))
-        if attribute.name in ATTRIBUTES_WITH_FILE_PATH_PARAMETER:
-            function_call_args.append('str(val)')
-        else:
-            function_call_args.append('val')
+        function_call_args.append('val')
     %>\
         self._interpreter.set_${generic_attribute_func}(${', '.join(function_call_args)})
 </%def>

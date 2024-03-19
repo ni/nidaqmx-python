@@ -233,9 +233,7 @@ GENERIC_ATTRIBUTE_GROUP_NAME_MAP = {
     "PhysicalChannel": "physical_chan",
 }
 
-ATTRIBUTES_RETURN_FILE_PATH_TYPE = ("logging_file_path",)
-
-ATTRIBUTES_WITH_FILE_PATH_PARAMETER = ("logging_file_path",)
+ATTRIBUTE_WITH_FILE_PATH_TYPE = ("logging_file_path",)
 
 
 def get_attributes(metadata, class_name):

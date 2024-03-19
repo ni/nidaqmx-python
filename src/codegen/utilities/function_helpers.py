@@ -123,10 +123,14 @@ def get_parameters_docstring_lines_length(input_param):
     # The textwrap module leaves a minimum of 1 word on the first line. We need to
     # work around this if "param name" + "param data type docstring" is too long.
 
+    python_type_annotation = input_param.python_type_annotation
+    if is_path_type(input_param):
+        # file path parameter has type hints,
+        # does not need to specify type in docstring
+        python_type_annotation = ""
+
     # Script docstring on first line after param name and type if the following is True.
-    initial_len = (
-        17 + len(input_param.parameter_name) + len(get_python_type_annotation(input_param))
-    )
+    initial_len = 17 + len(input_param.parameter_name) + len(python_type_annotation)
 
     # If length of whitespace + length of param name + length of data type docstring +
     # length of first word in docstring > docstring max line width.
@@ -314,14 +318,6 @@ def get_list_default_value(func, param):
             )
     else:
         return "[]"
-
-
-def get_python_type_annotation(input_param):
-    """Gets python type annotation."""
-    if is_path_type(input_param):
-        return input_param.python_type_annotation.replace("str", "Union[str, pathlib.PurePath]")
-    else:
-        return input_param.python_type_annotation
 
 
 def is_path_type(input_param):

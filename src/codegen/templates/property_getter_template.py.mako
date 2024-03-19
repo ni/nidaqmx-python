@@ -1,9 +1,9 @@
 <%def name="script_property_getter(attribute)">\
 <%
         from codegen.utilities.text_wrappers import docstring_wrap
-        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type, ATTRIBUTES_RETURN_FILE_PATH_TYPE
+        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type, ATTRIBUTE_WITH_FILE_PATH_TYPE
     %>\
-    %if attribute.name in ATTRIBUTES_RETURN_FILE_PATH_TYPE:
+    %if attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
     @property
     def ${attribute.name}(self) -> pathlib.Path:
         """
@@ -68,7 +68,7 @@
         %else:
         return ${object_type}(${', '.join(object_constructor_args)}, self._interpreter)
         %endif
-    %elif attribute.name in ATTRIBUTES_RETURN_FILE_PATH_TYPE:
+    %elif attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
         return pathlib.Path(val)
     %elif attribute.is_object and attribute.is_list:
 <%

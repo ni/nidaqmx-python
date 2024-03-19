@@ -3,8 +3,8 @@
     from codegen.utilities.interpreter_helpers import INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES
     from codegen.utilities.helpers import camel_to_snake_case
     from codegen.utilities.function_helpers import (
-        order_function_parameters_by_optional,get_parameters_docstring_lines_length,get_parameter_signature,get_instantiation_lines,
-        generate_function_call_args, get_list_default_value,get_python_type_annotation,is_path_type)
+        order_function_parameters_by_optional,get_parameters_docstring_lines_length,get_parameter_signature,
+        get_instantiation_lines,generate_function_call_args, get_list_default_value,is_path_type)
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
     %>\
 ################################################################################
@@ -35,8 +35,13 @@
         Args:
         %for input_param in sorted_params:
 <%          initial_len, first_line = get_parameters_docstring_lines_length(input_param)%>\
-            ${input_param.parameter_name} (${get_python_type_annotation(input_param)}): ${
+            %if is_path_type(input_param):
+            ${input_param.parameter_name}: ${
                 input_param.description if first_line else '' | docstring_wrap(initial_len, 16)}
+            %else:
+            ${input_param.parameter_name} (${input_param.python_type_annotation}): ${
+                input_param.description if first_line else '' | docstring_wrap(initial_len, 16)}
+            %endif
             %if not first_line:
                 ${input_param.description | docstring_wrap(16, 16)}
             %endif
