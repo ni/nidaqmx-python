@@ -863,6 +863,23 @@ class StartTrigger:
         self._interpreter.reset_trig_attribute(self._handle, 0x3036)
 
     @property
+    def time_when(self):
+        """
+        datetime: Specifies when to trigger the start trigger.
+        """
+
+        val = self._interpreter.get_trig_attribute_timestamp(self._handle, 0x304d)
+        return val
+
+    @time_when.setter
+    def time_when(self, val):
+        self._interpreter.set_trig_attribute_timestamp(self._handle, 0x304d, val)
+
+    @time_when.deleter
+    def time_when(self):
+        self._interpreter.reset_trig_attribute(self._handle, 0x304d)
+
+    @property
     def timestamp_enable(self):
         """
         bool: Specifies whether the start trigger timestamp is enabled.
@@ -918,23 +935,6 @@ class StartTrigger:
     @trig_type.deleter
     def trig_type(self):
         self._interpreter.reset_trig_attribute(self._handle, 0x1393)
-
-    @property
-    def trig_when(self):
-        """
-        datetime: Specifies when to trigger the start trigger.
-        """
-
-        val = self._interpreter.get_trig_attribute_timestamp(self._handle, 0x304d)
-        return val
-
-    @trig_when.setter
-    def trig_when(self, val):
-        self._interpreter.set_trig_attribute_timestamp(self._handle, 0x304d, val)
-
-    @trig_when.deleter
-    def trig_when(self):
-        self._interpreter.reset_trig_attribute(self._handle, 0x304d)
 
     @property
     def trig_win(self):

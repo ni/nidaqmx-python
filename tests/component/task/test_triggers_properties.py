@@ -115,7 +115,7 @@ def test___ai_voltage_time_aware_task___get_timestamp_property___returns_default
 ):
     ai_voltage_time_aware_task.timing.cfg_samp_clk_timing(1000)
 
-    when_value = ai_voltage_time_aware_task.triggers.start_trigger.trig_when
+    when_value = ai_voltage_time_aware_task.triggers.start_trigger.time_when
 
     localized_default_value = _convert_to_desired_timezone(JAN_01_1904_HIGHTIME)
     assert when_value.year == localized_default_value.year
@@ -132,9 +132,9 @@ def test___ai_voltage_time_aware_task___set_timestamp_property___returns_assigne
     value_to_test = JAN_01_2002_HIGHTIME
     ai_voltage_time_aware_task.timing.cfg_samp_clk_timing(1000)
 
-    ai_voltage_time_aware_task.triggers.start_trigger.trig_when = value_to_test
+    ai_voltage_time_aware_task.triggers.start_trigger.time_when = value_to_test
 
-    when_value = ai_voltage_time_aware_task.triggers.start_trigger.trig_when
+    when_value = ai_voltage_time_aware_task.triggers.start_trigger.time_when
     localized_value_to_test = _convert_to_desired_timezone(value_to_test)
     assert when_value.year == localized_value_to_test.year
     assert when_value.month == localized_value_to_test.month
@@ -148,11 +148,11 @@ def test___ai_voltage_time_aware_task___reset_timestamp_property___returns_defau
     ai_voltage_time_aware_task: Task,
 ):
     ai_voltage_time_aware_task.timing.cfg_samp_clk_timing(1000)
-    ai_voltage_time_aware_task.triggers.start_trigger.trig_when = JAN_01_2002_HIGHTIME
+    ai_voltage_time_aware_task.triggers.start_trigger.time_when = JAN_01_2002_HIGHTIME
 
-    del ai_voltage_time_aware_task.triggers.start_trigger.trig_when
+    del ai_voltage_time_aware_task.triggers.start_trigger.time_when
 
-    when_value = ai_voltage_time_aware_task.triggers.start_trigger.trig_when
+    when_value = ai_voltage_time_aware_task.triggers.start_trigger.time_when
     localized_default_value = _convert_to_desired_timezone(JAN_01_1904_HIGHTIME)
     assert when_value.year == localized_default_value.year
     assert when_value.month == localized_default_value.month
