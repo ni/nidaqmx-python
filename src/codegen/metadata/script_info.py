@@ -93,24 +93,24 @@ script_info = {
             "templateFile": "task\\_export_signals.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\triggering\\arm_start_trigger.py",
-            "templateFile": "_task_modules\\triggering\\arm_start_trigger.py.mako",
+            "relativeOutputPath": "task\\triggering\\_arm_start_trigger.py",
+            "templateFile": "task\\triggering\\_arm_start_trigger.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\triggering\\handshake_trigger.py",
-            "templateFile": "_task_modules\\triggering\\handshake_trigger.py.mako",
+            "relativeOutputPath": "task\\triggering\\_handshake_trigger.py",
+            "templateFile": "task\\triggering\\_handshake_trigger.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\triggering\\pause_trigger.py",
-            "templateFile": "_task_modules\\triggering\\pause_trigger.py.mako",
+            "relativeOutputPath": "task\\triggering\\_pause_trigger.py",
+            "templateFile": "task\\triggering\\_pause_trigger.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\triggering\\reference_trigger.py",
-            "templateFile": "_task_modules\\triggering\\reference_trigger.py.mako",
+            "relativeOutputPath": "task\\triggering\\_reference_trigger.py",
+            "templateFile": "task\\triggering\\_reference_trigger.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\triggering\\start_trigger.py",
-            "templateFile": "_task_modules\\triggering\\start_trigger.py.mako",
+            "relativeOutputPath": "task\\triggering\\_start_trigger.py",
+            "templateFile": "task\\triggering\\_start_trigger.py.mako",
         },
         {
             "relativeOutputPath": "system\\system.py",
@@ -125,8 +125,8 @@ script_info = {
             "templateFile": "system\\physical_channel.py.mako",
         },
         {
-            "relativeOutputPath": "_task_modules\\triggers.py",
-            "templateFile": "_task_modules\\triggers.py.mako",
+            "relativeOutputPath": "task\\triggering\\_triggers.py",
+            "templateFile": "task\\triggering\\_triggers.py.mako",
         },
     ]
 }

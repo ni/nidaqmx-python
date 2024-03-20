@@ -9,7 +9,7 @@ from nidaqmx.task.channels._channel import Channel
 from nidaqmx.task._export_signals import ExportSignals
 from nidaqmx.task._in_stream import InStream
 from nidaqmx.task._timing import Timing
-from nidaqmx._task_modules.triggers import Triggers
+from nidaqmx.task.triggering._triggers import Triggers
 from nidaqmx.task._out_stream import OutStream
 from nidaqmx.task.collections._ai_channel_collection import (
     AIChannelCollection)
@@ -255,10 +255,9 @@ class Task:
         return self._timing
     
     @property
-    def triggers(self):
+    def triggers(self) -> Triggers:
         """
-        :class:`nidaqmx._task_modules.triggers.Triggers`: Gets the trigger
-            configurations for the task.
+        Gets the trigger configurations for the task.
         """
         return self._triggers
 
