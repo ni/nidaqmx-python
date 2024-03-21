@@ -44,4 +44,3 @@ def test___add_global_channels___returns_channels(task: Task):
     task.add_global_channels([persisted_channel, persisted_channel2])
 
     assert task.channel_names == [persisted_channel.name, persisted_channel2.name]
-

@@ -52,7 +52,7 @@ def test___save_persisted_channel___no_error(ai_task, init_kwargs):
     try:
         _ = persisted_channel.author
         persisted_channel.delete()
-    except:
+    except Exception:
         pass
     # Now we need to create a channel associated with a task, then we can save it
     channel = ai_task.ai_channels[0]
