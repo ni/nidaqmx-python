@@ -36,11 +36,3 @@ def test___get_devices___shared_interpreter(ai_task: Task):
     devices = ai_task.devices
 
     assert all(dev._interpreter is ai_task._interpreter for dev in devices)
-
-
-def test___add_global_channels___returns_channels(task: Task):
-    persisted_channel = PersistedChannel("VoltageTesterChannel")
-    persisted_channel2 = PersistedChannel("VoltageTesterChannel2")
-    task.add_global_channels([persisted_channel, persisted_channel2])
-
-    assert task.channel_names == [persisted_channel.name, persisted_channel2.name]

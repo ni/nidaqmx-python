@@ -205,8 +205,18 @@ def test___default_arguments___perform_thrmcpl_lead_offset_nulling_cal___no_erro
     ai_thermocouple_task.perform_thrmcpl_lead_offset_nulling_cal()
 
 
-def test___is_task_done___task_is_done___returns_true(ai_on_demand_task: nidaqmx.Task):
+def test___on_demand_task_is_done___is_task_done___returns_true(ai_on_demand_task: nidaqmx.Task):
     assert ai_on_demand_task.is_task_done()
     ai_on_demand_task.start()
     ai_on_demand_task.wait_until_done()
+    
     assert ai_on_demand_task.is_task_done()
+
+
+def test___task___add_global_channels___adds_to_channel_names(task: Task):
+    persisted_channel = PersistedChannel("VoltageTesterChannel")
+    persisted_channel2 = PersistedChannel("VoltageTesterChannel2")
+    
+    task.add_global_channels([persisted_channel, persisted_channel2])
+
+    assert task.channel_names == [persisted_channel.name, persisted_channel2.name]

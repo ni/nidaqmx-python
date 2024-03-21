@@ -43,7 +43,7 @@ def test___persisted_channels_with_different_names___hash___not_equal(init_kwarg
     assert hash(persisted_channel1) != hash(persisted_channel2)
 
 
-def test___save_persisted_channel___no_error(ai_task, init_kwargs):
+def test___save_persisted_channel___no_error(ai_task: nidaqmx.Task, init_kwargs: dict) -> None:
     persisted_channel_name = "PersistedChannelSaveTest"
     persisted_channel_author = "test___save_persisted_channel___no_error"
     # We first need to check if the channel exists and delete it if it does
@@ -56,6 +56,7 @@ def test___save_persisted_channel___no_error(ai_task, init_kwargs):
         pass
     # Now we need to create a channel associated with a task, then we can save it
     channel = ai_task.ai_channels[0]
+
     channel.save(save_as=persisted_channel_name, author=persisted_channel_author)
 
     persisted_channel = PersistedChannel(persisted_channel_name, **init_kwargs)
