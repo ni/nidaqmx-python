@@ -27,7 +27,7 @@ def ai_thermocouple_task(task: nidaqmx.Task, device) -> nidaqmx.Task:
 
 
 @pytest.fixture
-def ai_task(task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device) -> nidaqmx.Task:
+def ai_on_demand_task(task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device) -> nidaqmx.Task:
     """Gets an AI task."""
     task.ai_channels.add_ai_voltage_chan(
         f"{sim_6363_device.name}/ai0:3", name_to_assign_to_channel="MyChannel"
@@ -205,8 +205,8 @@ def test___default_arguments___perform_thrmcpl_lead_offset_nulling_cal___no_erro
     ai_thermocouple_task.perform_thrmcpl_lead_offset_nulling_cal()
 
 
-def test___is_task_done___task_is_done___returns_true(ai_task: nidaqmx.Task):
-    assert ai_task.is_task_done()
-    ai_task.start()
-    ai_task.wait_until_done()
-    assert ai_task.is_task_done()
+def test___is_task_done___task_is_done___returns_true(ai_on_demand_task: nidaqmx.Task):
+    assert ai_on_demand_task.is_task_done()
+    ai_on_demand_task.start()
+    ai_on_demand_task.wait_until_done()
+    assert ai_on_demand_task.is_task_done()
