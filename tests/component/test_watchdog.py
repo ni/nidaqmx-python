@@ -1,5 +1,3 @@
-import pytest
-
 from nidaqmx import Task
 from nidaqmx.constants import WatchdogAOExpirState, WatchdogCOExpirState
 from nidaqmx.system import Device
