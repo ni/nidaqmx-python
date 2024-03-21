@@ -205,6 +205,18 @@ def sim_time_aware_9215_device(sim_9185_device: nidaqmx.system.Device) -> nidaqm
 
 
 @pytest.fixture(scope="function")
+def sim_9263_device(sim_9185_device: nidaqmx.system.Device) -> nidaqmx.system.Device:
+    """Gets device information for a simulated 9263 device within a 9185."""
+    return _cdaq_module_by_product_type("NI 9263", sim_9185_device)
+
+
+@pytest.fixture(scope="function")
+def sim_9401_device(sim_9185_device: nidaqmx.system.Device) -> nidaqmx.system.Device:
+    """Gets device information for a simulated 9401 device within a 9185."""
+    return _cdaq_module_by_product_type("NI 9401", sim_9185_device)
+
+
+@pytest.fixture(scope="function")
 def sim_ts_chassis(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets simulated TestScale chassis information."""
     # Prefer tsChassisTester if available so that multi-module tests will use
