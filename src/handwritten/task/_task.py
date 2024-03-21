@@ -5,23 +5,23 @@ from typing import List, Tuple, Union
 
 import numpy
 from nidaqmx import utils
-from nidaqmx._task_modules.channels.channel import Channel
-from nidaqmx._task_modules.export_signals import ExportSignals
+from nidaqmx.task.channels._channel import Channel
+from nidaqmx.task._export_signals import ExportSignals
 from nidaqmx.task._in_stream import InStream
-from nidaqmx._task_modules.timing import Timing
-from nidaqmx._task_modules.triggers import Triggers
-from nidaqmx._task_modules.out_stream import OutStream
-from nidaqmx._task_modules.ai_channel_collection import (
+from nidaqmx.task._timing import Timing
+from nidaqmx.task.triggering._triggers import Triggers
+from nidaqmx.task._out_stream import OutStream
+from nidaqmx.task.collections._ai_channel_collection import (
     AIChannelCollection)
-from nidaqmx._task_modules.ao_channel_collection import (
+from nidaqmx.task.collections._ao_channel_collection import (
     AOChannelCollection)
-from nidaqmx._task_modules.ci_channel_collection import (
+from nidaqmx.task.collections._ci_channel_collection import (
     CIChannelCollection)
-from nidaqmx._task_modules.co_channel_collection import (
+from nidaqmx.task.collections._co_channel_collection import (
     COChannelCollection)
-from nidaqmx._task_modules.di_channel_collection import (
+from nidaqmx.task.collections._di_channel_collection import (
     DIChannelCollection)
-from nidaqmx._task_modules.do_channel_collection import (
+from nidaqmx.task.collections._do_channel_collection import (
     DOChannelCollection)
 from nidaqmx.constants import (
     AcquisitionType, ChannelType, FillMode, UsageTypeAI, UsageTypeCI, EveryNSamplesEventType,
@@ -143,7 +143,7 @@ class Task:
     @property
     def channels(self):
         """
-        :class:`nidaqmx._task_modules.channels.channel.Channel`: Specifies
+        :class:`nidaqmx.task.channels.Channel`: Specifies
             a channel object that represents the entire list of virtual
             channels in this task.
         """
@@ -185,90 +185,79 @@ class Task:
         return val
 
     @property
-    def ai_channels(self):
+    def ai_channels(self) -> AIChannelCollection:
         """
-        :class:`nidaqmx._task_modules.ai_channel_collection.AIChannelCollection`:
-            Gets the collection of analog input channels for this task.
+        Gets the collection of analog input channels for this task.
         """
         return self._ai_channels
 
     @property
-    def ao_channels(self):
+    def ao_channels(self) -> AOChannelCollection:
         """
-        :class:`nidaqmx._task_modules.ao_channel_collection.AOChannelCollection`:
-            Gets the collection of analog output channels for this task.
+        Gets the collection of analog output channels for this task.
         """
         return self._ao_channels
 
     @property
-    def ci_channels(self):
+    def ci_channels(self) -> CIChannelCollection:
         """
-        :class:`nidaqmx._task_modules.ci_channel_collection.CIChannelCollection`:
-            Gets the collection of counter input channels for this task.
+        Gets the collection of counter input channels for this task.
         """
         return self._ci_channels
 
     @property
-    def co_channels(self):
+    def co_channels(self) -> COChannelCollection:
         """
-        :class:`nidaqmx._task_modules.co_channel_collection.COChannelCollection`:
-            Gets the collection of counter output channels for this task.
+        Gets the collection of counter output channels for this task.
         """
         return self._co_channels
 
     @property
-    def di_channels(self):
+    def di_channels(self) -> DIChannelCollection:
         """
-        :class:`nidaqmx._task_modules.di_channel_collection.DIChannelCollection`:
-            Gets the collection of digital input channels for this task.
+        Gets the collection of digital input channels for this task.
         """
         return self._di_channels
 
     @property
-    def do_channels(self):
+    def do_channels(self) -> DOChannelCollection:
         """
-        :class:`nidaqmx._task_modules.do_channel_collection.DOChannelCollection`:
-            Gets the collection of digital output channels for this task.
+        Gets the collection of digital output channels for this task.
         """
         return self._do_channels
 
     @property
-    def export_signals(self):
+    def export_signals(self) -> ExportSignals:
         """
-        :class:`nidaqmx._task_modules.export_signals.ExportSignals`: Gets the
-            exported signal configurations for the task.
+        Gets the exported signal configurations for the task.
         """
         return self._export_signals
 
     @property
     def in_stream(self) -> InStream: 
         """
-        :class:`nidaqmx.task.InStream`: Gets the read
-            configurations for the task.
+        Gets the read configurations for the task.
         """
         return self._in_stream
 
     @property
-    def out_stream(self):
+    def out_stream(self) -> OutStream:
         """
-        :class:`nidaqmx._task_modules.out_stream.OutStream`: Gets the
-            write configurations for the task.
+        Gets the write configurations for the task.
         """
         return self._out_stream
 
     @property
-    def timing(self):
+    def timing(self) -> Timing:
         """
-        :class:`nidaqmx._task_modules.timing.Timing`: Gets the timing
-            configurations for the task.
+        Gets the timing configurations for the task.
         """
         return self._timing
-
+    
     @property
-    def triggers(self):
+    def triggers(self) -> Triggers:
         """
-        :class:`nidaqmx._task_modules.triggers.Triggers`: Gets the trigger
-            configurations for the task.
+        Gets the trigger configurations for the task.
         """
         return self._triggers
 
