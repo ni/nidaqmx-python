@@ -26,6 +26,15 @@ def ai_thermocouple_task(task: nidaqmx.Task, device) -> nidaqmx.Task:
     return task
 
 
+@pytest.fixture
+def ai_task(task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device) -> nidaqmx.Task:
+    """Gets an AI task."""
+    task.ai_channels.add_ai_voltage_chan(
+        f"{sim_6363_device.name}/ai0:3", name_to_assign_to_channel="MyChannel"
+    )
+    return task
+
+
 @pytest.mark.library_only(reason="Default gRPC initialization behavior is auto (create or attach)")
 def test___task___create_task_with_same_name___raises_duplicate_task(init_kwargs):
     task1 = nidaqmx.Task("MyTask1", **init_kwargs)
@@ -194,3 +203,10 @@ def test___default_arguments___perform_thrmcpl_lead_offset_nulling_cal___no_erro
     ai_thermocouple_task: nidaqmx.Task,
 ) -> None:
     ai_thermocouple_task.perform_thrmcpl_lead_offset_nulling_cal()
+
+
+def test___is_task_done___task_is_done___returns_true(ai_task: nidaqmx.Task):
+    assert ai_task.is_task_done()
+    ai_task.start()
+    ai_task.wait_until_done()
+    assert ai_task.is_task_done()
