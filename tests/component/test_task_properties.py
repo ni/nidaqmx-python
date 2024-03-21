@@ -2,7 +2,6 @@ import pytest
 
 from nidaqmx import Task
 from nidaqmx.system import Device
-from nidaqmx.system.storage import PersistedChannel
 
 
 @pytest.fixture

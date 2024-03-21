@@ -4,6 +4,7 @@ import nidaqmx
 from nidaqmx.constants import ShuntCalSelect, ShuntCalSource, ShuntElementLocation
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import RpcError
+from nidaqmx.system.storage import PersistedChannel
 
 
 @pytest.fixture
@@ -209,14 +210,14 @@ def test___on_demand_task_is_done___is_task_done___returns_true(ai_on_demand_tas
     assert ai_on_demand_task.is_task_done()
     ai_on_demand_task.start()
     ai_on_demand_task.wait_until_done()
-    
+
     assert ai_on_demand_task.is_task_done()
 
 
-def test___task___add_global_channels___adds_to_channel_names(task: Task):
+def test___task___add_global_channels___adds_to_channel_names(task: nidaqmx.Task):
     persisted_channel = PersistedChannel("VoltageTesterChannel")
     persisted_channel2 = PersistedChannel("VoltageTesterChannel2")
-    
+
     task.add_global_channels([persisted_channel, persisted_channel2])
 
     assert task.channel_names == [persisted_channel.name, persisted_channel2.name]

@@ -24,7 +24,7 @@ def test___cfg_watchdog_ao_expir_states___sets_expir_state_properties(
     ]
 
     watchdog_task.cfg_watchdog_ao_expir_states(expir_states)
-    
+
     watchdog_task.start()
     assert not watchdog_task.expired
     assert watchdog_task.timeout == 0.8
@@ -53,7 +53,7 @@ def test___cfg_watchdog_co_expir_states___sets_expir_state_properties(
     ]
 
     watchdog_task.cfg_watchdog_co_expir_states(expir_states)
-    
+
     watchdog_task.start()
     assert not watchdog_task.expired
     assert watchdog_task.timeout == 0.8
