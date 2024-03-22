@@ -141,10 +141,11 @@ class Task:
         return val
 
     @property
-    def channels(self) -> Channel:
+    def channels(self):
         """
-        Specifies a channel object that represents the entire list of
-        virtual channels in this task.
+        :class:`nidaqmx.task.channels.Channel`: Specifies
+            a channel object that represents the entire list of virtual
+            channels in this task.
         """
         return Channel._factory(
             self._handle, flatten_channel_string(self.channel_names), self._interpreter)
