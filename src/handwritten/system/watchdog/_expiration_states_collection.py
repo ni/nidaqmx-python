@@ -1,5 +1,5 @@
 from nidaqmx.errors import DaqError
-from nidaqmx.system._watchdog_modules.expiration_state import ExpirationState
+from nidaqmx.system.watchdog._expiration_state import ExpirationState
 
 
 class ExpirationStatesCollection:

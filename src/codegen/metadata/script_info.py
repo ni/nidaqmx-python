@@ -29,8 +29,8 @@ script_info = {
             "templateFile": "task\\_out_stream.py.mako",
         },
         {
-            "relativeOutputPath": "system\\_watchdog_modules\\expiration_state.py",
-            "templateFile": "system\\_watchdog_modules\\expiration_state.py.mako",
+            "relativeOutputPath": "system\\watchdog\\_expiration_state.py",
+            "templateFile": "system\\watchdog\\_expiration_state.py.mako",
         },
         {
             "relativeOutputPath": "system\\watchdog.py",
