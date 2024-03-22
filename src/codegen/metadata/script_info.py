@@ -29,12 +29,12 @@ script_info = {
             "templateFile": "task\\_out_stream.py.mako",
         },
         {
-            "relativeOutputPath": "system\\_watchdog_modules\\expiration_state.py",
-            "templateFile": "system\\_watchdog_modules\\expiration_state.py.mako",
+            "relativeOutputPath": "system\\watchdog\\_expiration_state.py",
+            "templateFile": "system\\watchdog\\_expiration_state.py.mako",
         },
         {
-            "relativeOutputPath": "system\\watchdog.py",
-            "templateFile": "system\\watchdog.py.mako",
+            "relativeOutputPath": "system\\watchdog\\_watchdog.py",
+            "templateFile": "system\\watchdog\\_watchdog.py.mako",
         },
         {
             "relativeOutputPath": "task\\channels\\_ao_channel.py",

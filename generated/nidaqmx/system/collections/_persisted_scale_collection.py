@@ -48,7 +48,7 @@ class PersistedScaleCollection(Sequence):
                 - slice: Range of the indexes/positions of custom scales
                     in the collection.
         Returns:
-            List[nidaqmx.system.storage.persisted_scale.PersistedScale]:
+            List[nidaqmx.system.storage.PersistedScale]:
             
             Indicates the subset of custom scales indexed.
         """

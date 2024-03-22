@@ -48,7 +48,7 @@ class PersistedTaskCollection(Sequence):
                 - slice: Range of the indexes/positions of saved tasks
                     in the collection.
         Returns:
-            List[nidaqmx.system.storage.persisted_task.PersistedTask]:
+            List[nidaqmx.system.storage.PersistedTask]:
             
             Indicates the subset of saved tasks indexed.
         """

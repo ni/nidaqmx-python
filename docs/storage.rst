@@ -1,8 +1,7 @@
 nidaqmx.system.storage
 ======================
 
-.. toctree::
-   
-   persisted_channel
-   persisted_scale
-   persisted_task
+.. automodule:: nidaqmx.system.storage
+    :members:
+    :show-inheritance:
+    :member-order: bysource

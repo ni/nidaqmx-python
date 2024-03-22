@@ -1,5 +1,5 @@
 from nidaqmx.errors import DaqError
-from nidaqmx.system._watchdog_modules.expiration_state import ExpirationState
+from nidaqmx.system.watchdog._expiration_state import ExpirationState
 
 
 class ExpirationStatesCollection:
@@ -31,7 +31,7 @@ class ExpirationStatesCollection:
             index (str): Name of the physical channel of which the
                 expiration state to retrieve.
         Returns:
-            nidaqmx.system._watchdog_modules.expiration_state.ExpirationState:
+            nidaqmx.system.watchdog.ExpirationState:
             
             The object representing the indexed expiration state.
         """

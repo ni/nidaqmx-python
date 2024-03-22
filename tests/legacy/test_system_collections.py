@@ -4,17 +4,11 @@ import collections.abc
 
 import nidaqmx
 import nidaqmx.system
-from nidaqmx.system._collections.device_collection import DeviceCollection
-from nidaqmx.system._collections.persisted_channel_collection import (
+from nidaqmx.system.collections import (
+    DeviceCollection,
     PersistedChannelCollection,
-)
-from nidaqmx.system._collections.persisted_scale_collection import (
     PersistedScaleCollection,
-)
-from nidaqmx.system._collections.persisted_task_collection import (
     PersistedTaskCollection,
-)
-from nidaqmx.system._collections.physical_channel_collection import (
     PhysicalChannelCollection,
 )
 

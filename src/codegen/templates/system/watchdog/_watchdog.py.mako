@@ -11,8 +11,8 @@ import warnings
 
 from nidaqmx import utils
 from nidaqmx.errors import DaqResourceWarning
-from nidaqmx.system._watchdog_modules.expiration_state import ExpirationState
-from nidaqmx.system._watchdog_modules.expiration_states_collection import (
+from nidaqmx.system.watchdog._expiration_state import ExpirationState
+from nidaqmx.system.watchdog._expiration_states_collection import (
     ExpirationStatesCollection)
 from nidaqmx.utils import flatten_channel_string
 from nidaqmx.constants import (
@@ -85,7 +85,7 @@ class WatchdogTask:
     @property
     def expiration_states(self):
         """
-        :class:`nidaqmx.system._watchdog_modules.expiration_states_collection.ExpirationStatesCollection`: Gets
+        :class:`nidaqmx.system.watchdog.ExpirationStatesCollection`: Gets
             the collection of expiration states for this watchdog task.
         """
         return self._expiration_states
@@ -138,7 +138,7 @@ ${property_template.script_property(attribute)}\
                 output_type (nidaqmx.constants.WatchdogAOExpirState):
                     Specifies the output type of the physical channel.
         Returns:
-            List[nidaqmx.system._watchdog_modules.expiration_state.ExpirationState]:
+            List[nidaqmx.system.watchdog.ExpirationState]:
 
             Indicates the list of objects representing the configured
             expiration states.
@@ -172,7 +172,7 @@ ${property_template.script_property(attribute)}\
                 expiration_state (nidaqmx.constants.WatchdogCOExpirState):
                     Specifies the value to set the channel to upon expiration.
         Returns:
-            List[nidaqmx.system._watchdog_modules.expiration_state.ExpirationState]:
+            List[nidaqmx.system.watchdog.ExpirationState]:
 
             Indicates the list of objects representing the configured
             expiration states.
@@ -204,7 +204,7 @@ ${property_template.script_property(attribute)}\
                 expiration_state (nidaqmx.constants.Level): Specifies the
                     value to set the channel to upon expiration.
         Returns:
-            List[nidaqmx.system._watchdog_modules.expiration_state.ExpirationState]:
+            List[nidaqmx.system.watchdog.ExpirationState]:
 
             Indicates the list of objects representing the configured
             expiration states.
