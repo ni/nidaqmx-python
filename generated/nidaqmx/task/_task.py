@@ -317,7 +317,7 @@ class Task:
         Adds global virtual channels from MAX to the given task.
 
         Args:
-            global_channels (List[nidaqmx.system.storage.persisted_channel.PersistedChannel]):
+            global_channels (List[nidaqmx.system.storage.PersistedChannel]):
                 Specifies the channels to add to the task.
 
                 These channels must be valid channels available from MAX.

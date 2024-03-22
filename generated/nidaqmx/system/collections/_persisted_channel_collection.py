@@ -49,7 +49,7 @@ class PersistedChannelCollection(Sequence):
                 - slice: Range of the indexes/positions of global
                     channels in the collection.
         Returns:
-            List[nidaqmx.system.storage.persisted_channel.PersistedChannel]:
+            List[nidaqmx.system.storage.PersistedChannel]:
             
             Indicates the of global channels indexed.
         """
