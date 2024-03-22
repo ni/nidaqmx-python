@@ -5,7 +5,7 @@
     %>\
     %if attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
     @property
-    def ${attribute.name}(self) -> pathlib.Path:
+    def ${attribute.name}(self) -> Union[pathlib.Path, None]:
         """
         ${"pathlib.Path: " + attribute.python_description | docstring_wrap(initial_indent=8, subsequent_indent=12)}
         """
@@ -69,7 +69,7 @@
         return ${object_type}(${', '.join(object_constructor_args)}, self._interpreter)
         %endif
     %elif attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
-        return pathlib.Path(val)
+        return pathlib.Path(val) if val else None
     %elif attribute.is_object and attribute.is_list:
 <%
             object_constructor_args = []

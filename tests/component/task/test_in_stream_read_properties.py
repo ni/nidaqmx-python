@@ -128,7 +128,7 @@ def test___ai_task___reset_bool_property___returns_default_value(ai_task: Task):
     raises=DaqError,
 )
 def test___ai_task___get_string_property___returns_default_value(ai_task: Task):
-    assert ai_task.in_stream.logging_file_path == pathlib.Path()
+    assert ai_task.in_stream.logging_file_path is None
 
 
 @pytest.mark.grpc_xfail(
@@ -150,7 +150,7 @@ def test___ai_task___reset_string_property___returns_default_value(ai_task: Task
 
     del ai_task.in_stream.logging_file_path
 
-    assert ai_task.in_stream.logging_file_path == pathlib.Path()
+    assert ai_task.in_stream.logging_file_path is None
 
 
 def test___ai_task___get_deprecated_properties___reports_warnings(ai_task: Task):

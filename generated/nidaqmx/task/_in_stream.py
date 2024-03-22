@@ -330,7 +330,7 @@ class InStream:
         return val
 
     @property
-    def logging_file_path(self) -> pathlib.Path:
+    def logging_file_path(self) -> Union[pathlib.Path, None]:
         """
         pathlib.Path: Specifies the path to the TDMS file to which you
             want to log data.  If the file path is changed while the
@@ -343,7 +343,7 @@ class InStream:
         """
 
         val = self._interpreter.get_read_attribute_string(self._handle, 0x2ec4)
-        return pathlib.Path(val)
+        return pathlib.Path(val) if val else None
 
     @logging_file_path.setter
     def logging_file_path(self, val: Union[str, pathlib.PurePath]):
