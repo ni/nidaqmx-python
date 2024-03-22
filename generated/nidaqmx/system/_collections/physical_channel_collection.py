@@ -66,7 +66,7 @@ class PhysicalChannelCollection(Sequence):
             # channel objects on use.
             channels_to_use = []
             for channel in requested_channels:
-                if channel.startswith(self._name):
+                if channel.startswith(f"{self._name}/"):
                     channels_to_use.append(channel)
                 else:
                     channels_to_use.append(f'{self._name}/{channel}')
