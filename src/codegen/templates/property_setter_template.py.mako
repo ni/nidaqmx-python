@@ -4,7 +4,7 @@
     %>\
     @${attribute.name}.setter
     %if attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
-    def ${attribute.name}(self, val: Union[str, pathlib.PurePath]):
+    def ${attribute.name}(self, val: Optional[Union[str, pathlib.PurePath]]):
     %else:
     def ${attribute.name}(self, val):
     %endif
@@ -25,6 +25,8 @@
     %elif attribute.is_list:
         val = numpy.array(val, dtype=${attribute.ctypes_data_type})
     %elif attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
+        if val is None:
+            val = ""
         val = str(val)
     %endif
 \

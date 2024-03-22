@@ -5,7 +5,7 @@
     %>\
     %if attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
     @property
-    def ${attribute.name}(self) -> Union[pathlib.Path, None]:
+    def ${attribute.name}(self) -> Optional[pathlib.Path]:
         """
         ${"pathlib.Path: " + attribute.python_description | docstring_wrap(initial_indent=8, subsequent_indent=12)}
         """

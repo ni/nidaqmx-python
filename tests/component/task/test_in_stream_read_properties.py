@@ -145,6 +145,16 @@ def test___ai_task___set_string_property___returns_assigned_value(ai_task: Task)
     reason="AB#2393811: DAQmxGetLoggingFilePath returns kErrorNULLPtr (-200604) when called from grpc-device.",
     raises=DaqError,
 )
+def test___ai_task___set_string_property_None___returns_default_value(ai_task: Task):
+    ai_task.in_stream.logging_file_path = None
+
+    assert ai_task.in_stream.logging_file_path is None
+
+
+@pytest.mark.grpc_xfail(
+    reason="AB#2393811: DAQmxGetLoggingFilePath returns kErrorNULLPtr (-200604) when called from grpc-device.",
+    raises=DaqError,
+)
 def test___ai_task___reset_string_property___returns_default_value(ai_task: Task):
     ai_task.in_stream.logging_file_path = "TestData.tdms"
 
