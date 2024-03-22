@@ -6,12 +6,12 @@ import deprecation
 import numpy
 
 from nidaqmx import utils
-from nidaqmx.system._collections.device_collection import DeviceCollection
-from nidaqmx.system._collections.persisted_channel_collection import (
+from nidaqmx.system.collections._device_collection import DeviceCollection
+from nidaqmx.system.collections._persisted_channel_collection import (
     PersistedChannelCollection)
-from nidaqmx.system._collections.persisted_scale_collection import (
+from nidaqmx.system.collections._persisted_scale_collection import (
     PersistedScaleCollection)
-from nidaqmx.system._collections.persisted_task_collection import (
+from nidaqmx.system.collections._persisted_task_collection import (
     PersistedTaskCollection)
 from nidaqmx.utils import flatten_channel_string, unflatten_channel_string
 from nidaqmx.constants import (
@@ -63,7 +63,7 @@ class System:
     @property
     def devices(self):
         """
-        nidaqmx.system._collections.DeviceCollection: Indicates the
+        nidaqmx.system.collections.DeviceCollection: Indicates the
             collection of devices for this DAQmx system.
         """
         return DeviceCollection(self._interpreter)
@@ -92,7 +92,7 @@ class System:
     @property
     def global_channels(self):
         """
-        nidaqmx.system._collections.PersistedChannelCollection: Indicates
+        nidaqmx.system.collections.PersistedChannelCollection: Indicates
             the collection of global channels for this DAQmx system.
         """
         return PersistedChannelCollection(self._interpreter)
@@ -100,7 +100,7 @@ class System:
     @property
     def scales(self):
         """
-        nidaqmx.system._collections.PersistedScaleCollection: Indicates
+        nidaqmx.system.collections.PersistedScaleCollection: Indicates
             the collection of custom scales for this DAQmx system.
         """
         return PersistedScaleCollection(self._interpreter)
@@ -108,7 +108,7 @@ class System:
     @property
     def tasks(self):
         """
-        nidaqmx.system._collections.PersistedTaskCollection: Indicates
+        nidaqmx.system.collections.PersistedTaskCollection: Indicates
             the collection of saved tasks for this DAQmx system.
         """
         return PersistedTaskCollection(self._interpreter)

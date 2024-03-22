@@ -15,7 +15,7 @@ from datetime import datetime
 from nidaqmx import utils
 from nidaqmx._bitfield_utils import enum_bitfield_to_list
 from nidaqmx.utils import unflatten_channel_string
-from nidaqmx.system._collections.physical_channel_collection import (
+from nidaqmx.system.collections._physical_channel_collection import (
     AIPhysicalChannelCollection, AOPhysicalChannelCollection,
     CIPhysicalChannelCollection, COPhysicalChannelCollection,
     DILinesCollection, DIPortsCollection, DOLinesCollection, DOPortsCollection)
@@ -69,7 +69,7 @@ class Device:
     @property
     def ai_physical_chans(self):
         """
-        List[nidaqmx.system._collections.PhysicalChannelCollection]:
+        List[nidaqmx.system.collections.PhysicalChannelCollection]:
             Indicates a collection that contains all the analog input
             physical channels available on the device.
         """
@@ -78,7 +78,7 @@ class Device:
     @property
     def ao_physical_chans(self):
         """
-        List[nidaqmx.system._collections.PhysicalChannelCollection]:
+        List[nidaqmx.system.collections.PhysicalChannelCollection]:
             Indicates a collection that contains all the analog output
             physical channels available on the device.
         """
@@ -87,7 +87,7 @@ class Device:
     @property
     def ci_physical_chans(self):
         """
-        List[nidaqmx.system._collections.PhysicalChannelCollection]:
+        List[nidaqmx.system.collections.PhysicalChannelCollection]:
             Indicates a collection that contains all the counter input
             physical channels available on the device.
         """
@@ -96,7 +96,7 @@ class Device:
     @property
     def co_physical_chans(self):
         """
-        List[nidaqmx.system._collections.PhysicalChannelCollection]:
+        List[nidaqmx.system.collections.PhysicalChannelCollection]:
             Indicates a collection that contains all the counter output
             physical channels available on the device.
         """
@@ -105,7 +105,7 @@ class Device:
     @property
     def di_lines(self):
         """
-        List[nidaqmx.system._collections.PhysicalChannelCollection]:
+        List[nidaqmx.system.collections.PhysicalChannelCollection]:
             Indicates a collection that contains all the digital input
             lines available on the device.
         """
@@ -114,7 +114,7 @@ class Device:
     @property
     def di_ports(self):
         """
-        List[nidaqmx.system._collections.PhysicalChannelCollection]:
+        List[nidaqmx.system.collections.PhysicalChannelCollection]:
             Indicates a collection that contains all the digital input
             ports available on the device.
         """
@@ -123,7 +123,7 @@ class Device:
     @property
     def do_lines(self):
         """
-        List[nidaqmx.system._collections.PhysicalChannelCollection]:
+        List[nidaqmx.system.collections.PhysicalChannelCollection]:
             Indicates a collection that contains all the digital output
             lines available on the device.
         """
@@ -132,7 +132,7 @@ class Device:
     @property
     def do_ports(self):
         """
-        List[nidaqmx.system._collections.PhysicalChannelCollection]:
+        List[nidaqmx.system.collections.PhysicalChannelCollection]:
             Indicates a collection that contains all the digital output
             ports available on the device.
         """
