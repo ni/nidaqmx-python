@@ -107,7 +107,7 @@ class CIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.CIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -167,7 +167,7 @@ class CIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.CIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -211,7 +211,7 @@ class CIChannelCollection(ChannelCollection):
                 on each edge.
         Returns:
             nidaqmx.task.channels.CIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -258,7 +258,7 @@ class CIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.CIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -323,7 +323,7 @@ class CIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.CIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -371,7 +371,7 @@ class CIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.CIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -442,7 +442,7 @@ class CIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.CIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -502,7 +502,7 @@ class CIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.CIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -567,7 +567,7 @@ class CIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.CIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -611,7 +611,7 @@ class CIChannelCollection(ChannelCollection):
                 specifications in terms of frequency.
         Returns:
             nidaqmx.task.channels.CIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -659,7 +659,7 @@ class CIChannelCollection(ChannelCollection):
                 maximum value you expect to measure.
         Returns:
             nidaqmx.task.channels.CIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -702,7 +702,7 @@ class CIChannelCollection(ChannelCollection):
                 high time and low time.
         Returns:
             nidaqmx.task.channels.CIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -752,7 +752,7 @@ class CIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.CIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -798,7 +798,7 @@ class CIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.CIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -853,7 +853,7 @@ class CIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.CIChannel:
-            
+
             Indicates the newly created channel object.
         """
 

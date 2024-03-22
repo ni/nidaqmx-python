@@ -233,6 +233,8 @@ GENERIC_ATTRIBUTE_GROUP_NAME_MAP = {
     "PhysicalChannel": "physical_chan",
 }
 
+ATTRIBUTE_WITH_FILE_PATH_TYPE = ("logging_file_path",)
+
 
 def get_attributes(metadata, class_name):
     """Converts the scrapigen metadata into a list of attributes."""

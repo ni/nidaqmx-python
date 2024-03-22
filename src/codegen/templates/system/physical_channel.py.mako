@@ -13,6 +13,7 @@
 
 import ctypes
 import numpy
+import pathlib
 
 from nidaqmx import utils
 from nidaqmx._bitfield_utils import enum_bitfield_to_list
@@ -21,6 +22,8 @@ from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})
 %endif
+
+from typing import Optional, Union
 
 __all__ = ['PhysicalChannel']
 

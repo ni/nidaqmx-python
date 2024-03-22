@@ -86,7 +86,7 @@ def test___valid_file_path___write_to_teds_from_array___throws_config_or_detecti
     phys_chan = sim_6363_device.ai_physical_chans["ai0"]
 
     with pytest.raises(nidaqmx.DaqError) as exc_info:
-        phys_chan.write_to_teds_from_file(str(voltage_teds_file_path))
+        phys_chan.write_to_teds_from_file(voltage_teds_file_path)
 
     assert exc_info.value.error_code in [
         DAQmxErrors.CANT_CONFIGURE_TEDS_FOR_CHAN,

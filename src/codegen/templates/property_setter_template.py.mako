@@ -1,9 +1,13 @@
 <%def name="script_property_setter(attribute)">\
 <%
-        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type
+        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type, ATTRIBUTE_WITH_FILE_PATH_TYPE
     %>\
     @${attribute.name}.setter
+    %if attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
+    def ${attribute.name}(self, val: Optional[Union[str, pathlib.PurePath]]):
+    %else:
     def ${attribute.name}(self, val):
+    %endif
 \
     %if attribute.bitfield_enum is not None:
         val = enum_list_to_bitfield(
@@ -20,6 +24,10 @@
         val = flatten_channel_string(val)
     %elif attribute.is_list:
         val = numpy.array(val, dtype=${attribute.ctypes_data_type})
+    %elif attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
+        if val is None:
+            val = ""
+        val = str(val)
     %endif
 \
 ## Script interpreter call.

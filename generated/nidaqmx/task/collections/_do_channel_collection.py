@@ -82,7 +82,7 @@ class DOChannelCollection(ChannelCollection):
                 to **one channel for all lines**.
         Returns:
             nidaqmx.task.channels.DOChannel:
-            
+
             Indicates the newly created channel object.
         """
 

@@ -105,10 +105,15 @@ def get_parameter_signature(is_python_factory, sorted_params):
     if not is_python_factory:
         params_with_defaults.append("self")
     for param in sorted_params:
+        param_type = ""
+        param_default = param.default
+        if is_path_type(param):
+            param_type = ": Optional[Union[str, pathlib.PurePath]]"
+            param_default = "None"
         if param._optional:
-            params_with_defaults.append(f"{param.parameter_name}={param.default}")
+            params_with_defaults.append(f"{param.parameter_name}{param_type}={param_default}")
         else:
-            params_with_defaults.append(param.parameter_name)
+            params_with_defaults.append(f"{param.parameter_name}{param_type}")
 
     return ", ".join(params_with_defaults)
 
@@ -118,8 +123,14 @@ def get_parameters_docstring_lines_length(input_param):
     # The textwrap module leaves a minimum of 1 word on the first line. We need to
     # work around this if "param name" + "param data type docstring" is too long.
 
+    python_type_annotation = input_param.python_type_annotation
+    if is_path_type(input_param):
+        # file path parameter has type hints,
+        # does not need to specify type in docstring
+        python_type_annotation = ""
+
     # Script docstring on first line after param name and type if the following is True.
-    initial_len = 17 + len(input_param.parameter_name) + len(input_param.python_type_annotation)
+    initial_len = 17 + len(input_param.parameter_name) + len(python_type_annotation)
 
     # If length of whitespace + length of param name + length of data type docstring +
     # length of first word in docstring > docstring max line width.
@@ -263,6 +274,8 @@ def generate_function_call_args(function_metadata):
         if param.direction == "in":
             if param.is_enum and not param.is_list:
                 function_call_args.append(f"{param.parameter_name}.value")
+            elif is_path_type(param):
+                function_call_args.append(f"str({param.parameter_name})")
             else:
                 function_call_args.append(param.parameter_name)
         else:
@@ -305,3 +318,8 @@ def get_list_default_value(func, param):
             )
     else:
         return "[]"
+
+
+def is_path_type(input_param):
+    """Check is the parameter a file path."""
+    return "file_path" in input_param.parameter_name and input_param.python_data_type == "str"

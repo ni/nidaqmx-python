@@ -82,7 +82,7 @@ class DIChannelCollection(ChannelCollection):
                 to **one channel for all lines**.
         Returns:
             nidaqmx.task.channels.DIChannel:
-            
+
             Indicates the newly created channel object.
         """
 

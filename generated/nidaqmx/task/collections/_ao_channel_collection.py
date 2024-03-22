@@ -73,7 +73,7 @@ class AOChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AOChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -111,7 +111,7 @@ class AOChannelCollection(ChannelCollection):
                 waveform to generate.
         Returns:
             nidaqmx.task.channels.AOChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -151,7 +151,7 @@ class AOChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AOChannel:
-            
+
             Indicates the newly created channel object.
         """
 

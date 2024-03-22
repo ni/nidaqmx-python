@@ -116,7 +116,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -177,7 +177,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -232,7 +232,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -290,7 +290,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -337,7 +337,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -393,7 +393,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -451,7 +451,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -531,7 +531,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
         if forward_coeffs is None:
@@ -621,7 +621,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
         if electrical_vals is None:
@@ -715,7 +715,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -778,7 +778,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -834,7 +834,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -890,7 +890,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -941,7 +941,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -1008,7 +1008,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -1077,7 +1077,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -1114,7 +1114,7 @@ class AIChannelCollection(ChannelCollection):
                 name.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -1194,7 +1194,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
         if forward_coeffs is None:
@@ -1286,7 +1286,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
         if electrical_vals is None:
@@ -1382,7 +1382,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -1437,7 +1437,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -1503,7 +1503,7 @@ class AIChannelCollection(ChannelCollection):
                 measurement.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
         if rosette_meas_types is None:
@@ -1564,7 +1564,7 @@ class AIChannelCollection(ChannelCollection):
                 to determine this value.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -1631,7 +1631,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -1667,7 +1667,7 @@ class AIChannelCollection(ChannelCollection):
                 measurements.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -1718,7 +1718,7 @@ class AIChannelCollection(ChannelCollection):
                 junction if you set **cjc_source** to **CHANNEL**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -1777,7 +1777,7 @@ class AIChannelCollection(ChannelCollection):
                 documentation to determine values for these constants.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -1839,7 +1839,7 @@ class AIChannelCollection(ChannelCollection):
                 reference resistor.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -1919,7 +1919,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
         if forward_coeffs is None:
@@ -2010,7 +2010,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
         if electrical_vals is None:
@@ -2105,7 +2105,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -2169,7 +2169,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -2217,7 +2217,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -2281,7 +2281,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -2327,7 +2327,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -2381,7 +2381,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -2433,7 +2433,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -2490,7 +2490,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -2543,7 +2543,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -2597,7 +2597,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -2653,7 +2653,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -2714,7 +2714,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -2776,7 +2776,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -2830,7 +2830,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -2882,7 +2882,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -2931,7 +2931,7 @@ class AIChannelCollection(ChannelCollection):
                 to the sensor documentation to determine this value.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -2986,7 +2986,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -3035,7 +3035,7 @@ class AIChannelCollection(ChannelCollection):
                 junction if you set **cjc_source** to **CHANNEL**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -3085,7 +3085,7 @@ class AIChannelCollection(ChannelCollection):
                 to the sensor documentation to determine this value.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -3138,7 +3138,7 @@ class AIChannelCollection(ChannelCollection):
                 reference resistor.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -3190,7 +3190,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -3238,7 +3238,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
@@ -3293,7 +3293,7 @@ class AIChannelCollection(ChannelCollection):
                 **FROM_CUSTOM_SCALE**.
         Returns:
             nidaqmx.task.channels.AIChannel:
-            
+
             Indicates the newly created channel object.
         """
 
