@@ -35,7 +35,7 @@ def test___watchdog_task___cfg_watchdog_ao_expir_states___no_error(
     )
 
 
-def test___call_cfg_watchdog_co_expir_states___no_error(
+def test___watchdog_task___cfg_watchdog_co_expir_states___no_error(
     generate_watchdog_task: Task, sim_9189_device: Device, sim_9401_device: Device
 ):
     watchdog_task = generate_watchdog_task(f"{sim_9189_device.name}", timeout=0.8)
