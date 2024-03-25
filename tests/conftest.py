@@ -216,6 +216,7 @@ def sim_9401_device(sim_9189_device: nidaqmx.system.Device) -> nidaqmx.system.De
     return _cdaq_module_by_product_type("NI 9401", sim_9189_device)
 
 
+@pytest.fixture(scope="function")
 def sim_9775_device(sim_9189_device: nidaqmx.system.Device) -> nidaqmx.system.Device:
     """Gets device information for a simulated 9775 device within a 9185."""
     return _cdaq_module_by_product_type("NI 9775", sim_9189_device)
