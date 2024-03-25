@@ -4,7 +4,7 @@ from nidaqmx.system import Device
 from nidaqmx.system.watchdog import AOExpirationState, COExpirationState
 
 
-def test___call_cfg_watchdog_ao_expir_states___no_error(
+def test___watchdog_task___cfg_watchdog_ao_expir_states___no_error(
     generate_watchdog_task: Task, sim_9189_device: Device, sim_9263_device: Device
 ):
     watchdog_task = generate_watchdog_task(f"{sim_9189_device.name}", timeout=0.8)
