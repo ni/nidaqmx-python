@@ -65,7 +65,6 @@ class DaqError(Error):
 
         super().__init__(message)
 
-
     @property
     def error_code(self):
         """
