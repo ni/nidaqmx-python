@@ -53,15 +53,18 @@ class DaqError(Error):
             self._error_type = DAQmxErrors.UNKNOWN
 
         # If message is empty, we try to put at least some information in it
-        if not message and self._error_type != DAQmxErrors.UNKNOWN:
-            message = f'Explanation could not be found for the requested status code.\n\nVerify that the requested status code is correct.\n\nError {self._error_type.name}'
+        if not message:
+            message = f'Explanation could not be found for the requested status code.\n\nVerify that the requested status code is correct.\n\nStatus Code: {self._error_code}'
 
         if task_name:
             message = f'{message}\n\nTask Name: {task_name}'
             
-        message = f'{message}\n\nStatus Code: {self._error_code}'
+        # We do not know where the error description came from, so we add the status code if it is not already in the message
+        if str(self._error_code) not in message:
+            message = f'{message}\n\nStatus Code: {self._error_code}'
 
         super().__init__(message)
+
 
     @property
     def error_code(self):
