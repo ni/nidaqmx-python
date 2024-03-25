@@ -20,6 +20,7 @@ def test___watchdog_task___cfg_watchdog_ao_expir_states___no_error(
             output_type=WatchdogAOExpirState.VOLTAGE,
         ),
     ]
+
     watchdog_task.cfg_watchdog_ao_expir_states(expir_states)
     watchdog_task.start()
 
