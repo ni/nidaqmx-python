@@ -44,7 +44,7 @@ def _parse_version(version: str) -> Tuple[int, ...]:
         logging.debug(traceback.format_exc())
         raise click.ClickException(f'Invalid version format found') from e
 
-def _is_latest_version_greater(latest_version : str, installed_version: str) -> int:
+def _is_latest_version_greater(latest_version : str, installed_version: str) -> bool:
     """
     Compare two versions which are in the format: major.minor.update
 
