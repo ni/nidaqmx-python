@@ -49,6 +49,7 @@ def test___watchdog_task___cfg_watchdog_co_expir_states___no_error(
             expiration_state=WatchdogCOExpirState.LOW,
         ),
     ]
+
     watchdog_task.cfg_watchdog_co_expir_states(expir_states)
     watchdog_task.start()
 
