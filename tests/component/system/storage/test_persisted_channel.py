@@ -43,7 +43,7 @@ def test___persisted_channels_with_different_names___hash___not_equal(init_kwarg
     assert hash(persisted_channel1) != hash(persisted_channel2)
 
 
-def test___save_persisted_channel___no_error(ai_task: nidaqmx.Task, init_kwargs: dict) -> None:
+def test___save_persisted_channel___saves_persisted_channel_with_author(ai_task: nidaqmx.Task, init_kwargs: dict) -> None:
     persisted_channel_name = "PersistedChannelSaveTest"
     persisted_channel_author = "test___save_persisted_channel___no_error"
     # We first need to check if the channel exists and delete it if it does
