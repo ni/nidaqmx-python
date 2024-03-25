@@ -96,8 +96,6 @@ def _get_daqmx_installed_version() -> str:
     Returns:
         str: The version of the installed NI-DAQmx if found, else an empty string.
 
-    >>> _get_daqmx_installed_version()  # doctest: +SKIP
-    ''
     """
     try:
         logging.debug("Reading the registry entries to get installed DAQmx version")
