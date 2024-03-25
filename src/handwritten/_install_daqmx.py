@@ -127,7 +127,7 @@ def _get_daqmx_installed_version() -> str:
 
 # Creating a temp file that we then close and yield - this is used to allow subprocesses to access
 @contextlib.contextmanager
-def multi_access_temp_file(*, suffix=".exe", delete=True):
+def multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> Generator[str, None, None]:
     try:
         temp_file = tempfile.NamedTemporaryFile(suffix=suffix, delete=False, mode="w")
         temp_file.close()
