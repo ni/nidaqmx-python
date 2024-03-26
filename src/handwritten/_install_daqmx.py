@@ -13,10 +13,10 @@ from typing import List, Tuple, Optional
 import urllib.request
 
 if sys.platform.startswith("win"):
-   import winreg
+    import winreg
 
 MODULE_DIR = pathlib.Path(__file__).parent
-METADATA_FILE = MODULE_DIR / "metadata.json"
+METADATA_FILE = MODULE_DIR / "_installer_metadata.json"
 
 def _parse_version(version: str) -> Tuple[int, ...]:
     """
@@ -55,7 +55,6 @@ def _is_latest_version_greater(latest_version : str, installed_version: str) -> 
     Returns:
         int: False if versions are equal and installed_version is greater than latest_version
         - True if installed_version is less than latest_version,
-             .
 
     >>> _is_latest_version_greater("23.8.0", "23.8.0")
     Latest Version already installed
@@ -91,11 +90,14 @@ def _is_latest_version_greater(latest_version : str, installed_version: str) -> 
 def _get_daqmx_installed_version() -> str:
     """
     Check for existing installation of DAQmx by checking for Version information.
-    Version information is read from the registry key.
-    
+
     Returns:
         str: The version of the installed NI-DAQmx if found, else an empty string.
+<<<<<<< Updated upstream
 
+=======
+    ''
+>>>>>>> Stashed changes
     """
     try:
         logging.debug("Reading the registry entries to get installed DAQmx version")
@@ -250,29 +252,6 @@ def _ask_user_confirmation(user_message: str) -> bool:
         else:
             print("Please enter 'yes' or 'no'.")
 
-
-def _create_user_question(latest_version: str, installed_version: str ) -> str:
-    """
-    Create a user question string for upgrading NI-DAQmx.
-    Args:
-        installed_version (str): The installed version of NI-DAQmx.
-        latest_version (str): The latest version of NI-DAQmx available.
-
-    Returns:
-        str: A string representing the user question.
-
-    >>> _create_user_question("24.0.0", "23.8.0")
-    'Installed NI-DAQmx version is 23.8.0. Latest version available is 24.0.0. Do you want to upgrade?'
-    """
-    user_question = (
-                      "Installed NI-DAQmx version is "
-                        + installed_version
-                        + ". Latest version available is "
-                        + latest_version
-                        + ". Do you want to upgrade?"
-                    )
-    return user_question
-
 def _confirm_and_upgrade_daqmx_driver(latest_version: str, installed_version: str, download_url: str) -> None:
     """
     Confirm with the user and upgrade the NI-DAQmx driver if necessary.
@@ -303,7 +282,7 @@ def _install_daqmx_windows_driver() -> None:
         download_url, latest_version = _get_driver_details() 
         if installed_version:
             _confirm_and_upgrade_daqmx_driver(latest_version, installed_version, download_url)
-        else:      
+        else:
             _install_daqmx_driver(download_url)
     except Exception as e:
         logging.info("Error: %s", e)
@@ -323,7 +302,7 @@ def installdriver() -> None:
             logging.info("Windows platform detected")
             _install_daqmx_windows_driver()
         else:
-            print(f"installdriver command is supported only on Windows")
+            raise click.ClickException(f'Error installdriver command is supported only on Windows OS.')
     except Exception as e:
         logging.info("Error: %s", e)
         logging.debug(traceback.format_exc())
