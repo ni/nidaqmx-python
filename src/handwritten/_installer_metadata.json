@@ -6,7 +6,10 @@
                 "Location": "https://download.ni.com/support/nipkg/products/ni-d/ni-daqmx/23.8/online/ni-daqmx_23.8_online.exe",
                 "supportedOS": [
                     "Windows 11",
-                    "Windows Server 2022 64-bit"
+                    "Windows Server 2022 64-bit",
+                    "Windows 10 64-bit",
+                    "Windows Server 2016 64-bit",
+                    "Windows Server 2019 64-bit"
                 ]
 
         }
