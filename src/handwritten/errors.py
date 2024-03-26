@@ -45,17 +45,25 @@ class DaqError(Error):
             message (string): Specifies the error message.
             error_code (int): Specifies the NI-DAQmx error code.
         """
-        if task_name:
-            message = f'{message}\n\nTask Name: {task_name}'
-
-        super().__init__(message)
-
         self._error_code = int(error_code)
 
         try:
             self._error_type = DAQmxErrors(self._error_code)
         except ValueError:
             self._error_type = DAQmxErrors.UNKNOWN
+
+        # If message is empty, we try to put at least some information in it
+        if not message:
+            message = f'Description could not be found for the status code.\n\nStatus Code: {self._error_code}'
+
+        if task_name:
+            message = f'{message}\n\nTask Name: {task_name}'
+            
+        # We do not know where the error description came from, so we add the status code if it is not already in the message
+        if str(self._error_code) not in message:
+            message = f'{message}\n\nStatus Code: {self._error_code}'
+
+        super().__init__(message)
 
     @property
     def error_code(self):
@@ -84,18 +92,9 @@ class DaqReadError(DaqError):
             message (string): Specifies the error message.
             error_code (int): Specifies the NI-DAQmx error code.
         """
-        if task_name:
-            message = f'{message}\n\nTask Name: {task_name}'
-
         super().__init__(message, error_code, task_name)
 
-        self._error_code = int(error_code)
         self._samps_per_chan_read = samps_per_chan_read
-
-        try:
-            self._error_type = DAQmxErrors(self._error_code)
-        except ValueError:
-            self._error_type = DAQmxErrors.UNKNOWN
 
     @property
     def samps_per_chan_read(self):
@@ -117,18 +116,9 @@ class DaqWriteError(DaqError):
             error_code (int): Specifies the NI-DAQmx error code.
             samps_per_chan_written (int): Specifies the number of samples written.
         """
-        if task_name:
-            message = f'{message}\n\nTask Name: {task_name}'
-
         super().__init__(message, error_code, task_name)
 
-        self._error_code = int(error_code)
         self._samps_per_chan_written = samps_per_chan_written
-
-        try:
-            self._error_type = DAQmxErrors(self._error_code)
-        except ValueError:
-            self._error_type = DAQmxErrors.UNKNOWN
 
     @property
     def samps_per_chan_written(self):
