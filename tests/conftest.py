@@ -193,21 +193,33 @@ def sim_6363_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
 
 
 @pytest.fixture(scope="function")
-def sim_9185_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
+def sim_9189_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets simulated 9185 device information."""
-    return _device_by_product_type("cDAQ-9185", DeviceType.SIMULATED, system)
+    return _device_by_product_type("cDAQ-9189", DeviceType.SIMULATED, system)
 
 
 @pytest.fixture(scope="function")
-def sim_time_aware_9215_device(sim_9185_device: nidaqmx.system.Device) -> nidaqmx.system.Device:
+def sim_time_aware_9215_device(sim_9189_device: nidaqmx.system.Device) -> nidaqmx.system.Device:
     """Gets device information for a simulated 9215 device within a 9185."""
-    return _cdaq_module_by_product_type("NI 9215", sim_9185_device)
+    return _cdaq_module_by_product_type("NI 9215", sim_9189_device)
 
 
 @pytest.fixture(scope="function")
-def sim_9775_device(sim_9185_device: nidaqmx.system.Device) -> nidaqmx.system.Device:
+def sim_9263_device(sim_9189_device: nidaqmx.system.Device) -> nidaqmx.system.Device:
+    """Gets device information for a simulated 9263 device within a 9185."""
+    return _cdaq_module_by_product_type("NI 9263", sim_9189_device)
+
+
+@pytest.fixture(scope="function")
+def sim_9401_device(sim_9189_device: nidaqmx.system.Device) -> nidaqmx.system.Device:
+    """Gets device information for a simulated 9401 device within a 9185."""
+    return _cdaq_module_by_product_type("NI 9401", sim_9189_device)
+
+
+@pytest.fixture(scope="function")
+def sim_9775_device(sim_9189_device: nidaqmx.system.Device) -> nidaqmx.system.Device:
     """Gets device information for a simulated 9775 device within a 9185."""
-    return _cdaq_module_by_product_type("NI 9775", sim_9185_device)
+    return _cdaq_module_by_product_type("NI 9775", sim_9189_device)
 
 
 @pytest.fixture(scope="function")

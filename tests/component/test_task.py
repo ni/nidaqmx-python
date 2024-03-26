@@ -4,6 +4,7 @@ import nidaqmx
 from nidaqmx.constants import ShuntCalSelect, ShuntCalSource, ShuntElementLocation
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import RpcError
+from nidaqmx.system.storage import PersistedChannel
 
 
 @pytest.fixture
@@ -23,6 +24,15 @@ def ai_strain_gage_task(task: nidaqmx.Task, device) -> nidaqmx.Task:
 @pytest.fixture
 def ai_thermocouple_task(task: nidaqmx.Task, device) -> nidaqmx.Task:
     task.ai_channels.add_ai_thrmcpl_chan(device.ai_physical_chans[0].name)
+    return task
+
+
+@pytest.fixture
+def ai_on_demand_task(task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device) -> nidaqmx.Task:
+    """Gets an AI task."""
+    task.ai_channels.add_ai_voltage_chan(
+        f"{sim_6363_device.name}/ai0:3", name_to_assign_to_channel="MyChannel"
+    )
     return task
 
 
@@ -194,3 +204,20 @@ def test___default_arguments___perform_thrmcpl_lead_offset_nulling_cal___no_erro
     ai_thermocouple_task: nidaqmx.Task,
 ) -> None:
     ai_thermocouple_task.perform_thrmcpl_lead_offset_nulling_cal()
+
+
+def test___on_demand_task_is_done___is_task_done___returns_true(ai_on_demand_task: nidaqmx.Task):
+    assert ai_on_demand_task.is_task_done()
+    ai_on_demand_task.start()
+    ai_on_demand_task.wait_until_done()
+
+    assert ai_on_demand_task.is_task_done()
+
+
+def test___task___add_global_channels___adds_to_channel_names(task: nidaqmx.Task):
+    persisted_channel = PersistedChannel("VoltageTesterChannel")
+    persisted_channel2 = PersistedChannel("VoltageTesterChannel2")
+
+    task.add_global_channels([persisted_channel, persisted_channel2])
+
+    assert task.channel_names == [persisted_channel.name, persisted_channel2.name]
