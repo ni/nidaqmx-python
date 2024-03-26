@@ -20,7 +20,7 @@ METADATA_FILE = MODULE_DIR / "_installer_metadata.json"
 
 def _parse_version(version: str) -> Tuple[int, ...]:
     """
-    Split the version string into a tuple of integers representing major, minor, and update parts.
+    Split the version string into a tuple of integers.
 
     Args:
         version (str): The version string in the format "major.minor.update".
@@ -93,11 +93,6 @@ def _get_daqmx_installed_version() -> str:
 
     Returns:
         str: The version of the installed NI-DAQmx if found, else an empty string.
-<<<<<<< Updated upstream
-
-=======
-    ''
->>>>>>> Stashed changes
     """
     try:
         logging.debug("Reading the registry entries to get installed DAQmx version")
@@ -129,11 +124,25 @@ def _get_daqmx_installed_version() -> str:
 
 # Creating a temp file that we then close and yield - this is used to allow subprocesses to access
 @contextlib.contextmanager
-def multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> Generator[str, None, None]:
+def multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> str:
+    """
+    Context manager for creating a temporary file.
+
+    Args:
+        suffix (str): The suffix for the temporary file.
+        delete (bool): Whether to delete the temporary file after use.
+
+    Yields:
+        str: The path of the created temporary file.
+
+    Raises:
+        click.ClickException: If an error occurs while creating the temporary file.
+
+    """
     try:
         temp_file = tempfile.NamedTemporaryFile(suffix=suffix, delete=False, mode="w")
         temp_file.close()
-        logging.debug("Creating temp file: %s", temp_file.name)
+        logging.debug("Created temp file: %s", temp_file.name)
     except Exception as e:
         logging.info("Error: %s", e)
         logging.debug(traceback.format_exc())
@@ -143,8 +152,14 @@ def multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> Gene
         yield temp_file.name
     finally:
         if delete:
-            logging.debug("Deleting temp file: %s", temp_file.name)
-            os.unlink(temp_file.name)
+            try:
+                os.unlink(temp_file.name)
+                logging.debug("Deleting temp file: %s", temp_file.name)
+            except ValueError  as e:
+                logging.info("Error: %s", e)
+                logging.debug(traceback.format_exc())
+                raise click.ClickException(f'Invalid version format found') from e
+
 
 def _load_data(json_data: str) -> Tuple[Optional[str], Optional[str]]:
     """
@@ -302,7 +317,7 @@ def installdriver() -> None:
             logging.info("Windows platform detected")
             _install_daqmx_windows_driver()
         else:
-            raise click.ClickException(f'Error installdriver command is supported only on Windows OS.')
+            raise click.ClickException(f'installdriver command is supported only on Windows.')
     except Exception as e:
         logging.info("Error: %s", e)
         logging.debug(traceback.format_exc())
