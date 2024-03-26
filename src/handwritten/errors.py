@@ -54,7 +54,7 @@ class DaqError(Error):
 
         # If message is empty, we try to put at least some information in it
         if not message:
-            message = f'Explanation could not be found for the requested status code.\n\nVerify that the requested status code is correct.\n\nStatus Code: {self._error_code}'
+            message = f'Description could not be found for the status code.\n\nStatus Code: {self._error_code}'
 
         if task_name:
             message = f'{message}\n\nTask Name: {task_name}'
