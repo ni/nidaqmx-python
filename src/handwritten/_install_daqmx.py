@@ -73,12 +73,12 @@ def _get_daqmx_installed_version() -> Optional[str]:
     except PermissionError as e:
         _logger.info("Failed to read the registry key.", exc_info=True)
         raise click.ClickException(
-            f"Permission denied while trying to read the registry key:{str(e)}"
+            f"Permission denied while trying to read the registry key"
         ) from e
     except OSError as e:
         _logger.info("Failed to read the registry key.", exc_info=True)
         raise click.ClickException(
-            f"An OS error occurred while trying to read the registry key:{str(e)}"
+            f"An OS error occurred while trying to read the registry key"
         ) from e
 
 
@@ -209,25 +209,19 @@ def _confirm_and_upgrade_daqmx_driver(
     Confirm with the user and upgrade the NI-DAQmx driver if necessary.
 
     """
-    try:
-        _logger.debug("Entering _confirm_and_upgrade_daqmx_driver")
-        latest_parts: Tuple[int, ...] = _parse_version(latest_version)
-        installed_parts: Tuple[int, ...] = _parse_version(installed_version)
-        if installed_parts >= latest_parts:
-            print(
-                f"Installed NI-DAQmx version ({installed_version}) is up to date."
-            )
-            return
-        is_upgrade = _ask_user_confirmation(
-            f"Installed NI-DAQmx version is {installed_version}. Latest version available is {latest_version}. Do you want to upgrade?"
-            )
-        if is_upgrade:
-            _install_daqmx_driver(download_url)
-    except Exception as e:
-        _logger.info("Failed to upgrade NI-DAQmx driver.", exc_info=True)
-        raise click.ClickException(
-            f"An error occurred during upgrading the MI-DAQmx driver software for Windows:{str(e)}"
-        ) from e
+    _logger.debug("Entering _confirm_and_upgrade_daqmx_driver")
+    latest_parts: Tuple[int, ...] = _parse_version(latest_version)
+    installed_parts: Tuple[int, ...] = _parse_version(installed_version)
+    if installed_parts >= latest_parts:
+        print(
+            f"Installed NI-DAQmx version ({installed_version}) is up to date."
+        )
+        return
+    is_upgrade = _ask_user_confirmation(
+        f"Installed NI-DAQmx version is {installed_version}. Latest version available is {latest_version}. Do you want to upgrade?"
+        )
+    if is_upgrade:
+        _install_daqmx_driver(download_url)
 
 
 def _install_daqmx_windows_driver() -> None:
@@ -235,18 +229,12 @@ def _install_daqmx_windows_driver() -> None:
     Install the NI-DAQmx driver on Windows.
 
     """
-    try:
-        installed_version = _get_daqmx_installed_version()
-        download_url, latest_version = _get_driver_details()
-        if installed_version:
-            _confirm_and_upgrade_daqmx_driver(latest_version, installed_version, download_url)
-        else:
-            _install_daqmx_driver(download_url)
-    except Exception as e:
-        _logger.info("Failed to install NI-DAQmx driver.", exc_info=True)
-        raise click.ClickException(
-            f"An error occurred during the installation of the driver for windows:{str(e)}"
-        ) from e
+    installed_version = _get_daqmx_installed_version()
+    download_url, latest_version = _get_driver_details()
+    if installed_version:
+        _confirm_and_upgrade_daqmx_driver(latest_version, installed_version, download_url)
+    else:
+        _install_daqmx_driver(download_url)
 
 
 def installdriver() -> None:
