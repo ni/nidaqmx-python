@@ -1,6 +1,6 @@
-import click
 import contextlib
 import errno
+import importlib.resources as pkg_resources
 import json
 import logging
 import os
@@ -9,14 +9,20 @@ import subprocess
 import sys
 import tempfile
 import traceback
-from typing import List, Tuple, Optional
 import urllib.request
+from typing import List, Optional, Tuple
+
+import click
 
 if sys.platform.startswith("win"):
     import winreg
 
+_logger = logging.getLogger(__name__)
+
 MODULE_DIR = pathlib.Path(__file__).parent
 METADATA_FILE = MODULE_DIR / "_installer_metadata.json"
+
+
 
 def _parse_version(version: str) -> Tuple[int, ...]:
     """
@@ -39,12 +45,12 @@ def _parse_version(version: str) -> Tuple[int, ...]:
     """
     try:
         return tuple(int(part) for part in version.split("."))
-    except ValueError  as e:
-        logging.info("Error: %s", e)
-        logging.debug(traceback.format_exc())
-        raise click.ClickException(f'Invalid version format found') from e
+    except ValueError as e:
+        _logger.info("Failed to parse version.", exc_info=True)
+        raise click.ClickException(f"Invalid version format found") from e
 
-def _is_latest_version_greater(latest_version : str, installed_version: str) -> bool:
+
+def _is_latest_version_greater(latest_version: str, installed_version: str) -> bool:
     """
     Compare two versions which are in the format: major.minor.update
 
@@ -57,10 +63,10 @@ def _is_latest_version_greater(latest_version : str, installed_version: str) -> 
         - True if installed_version is less than latest_version,
 
     >>> _is_latest_version_greater("23.8.0", "23.8.0")
-    Latest Version already installed
+    Installed NI-DAQmx version (23.8.0) is equivalent or newer than the known version to install, (23, 8, 0).
     False
     >>> _is_latest_version_greater("23.8.1", "24.0.0")
-    Latest Version already installed
+    Installed NI-DAQmx version (24.0.0) is equivalent or newer than the known version to install, (23, 8, 1).
     False
     >>> _is_latest_version_greater("23.8.1", "23.8.0")
     True
@@ -72,30 +78,30 @@ def _is_latest_version_greater(latest_version : str, installed_version: str) -> 
     click.exceptions.ClickException: Invalid version format found
     """
     try:
-        logging.debug("Entering _compare_version")
         latest_parts: Tuple[int, ...] = _parse_version(latest_version)
         installed_parts: Tuple[int, ...] = _parse_version(installed_version)
 
         if latest_parts > installed_parts:
             return True
         else:
-            print(f"Installed NI-DAQmx version ({installed_version}) is equivalent or newer than the known version to install, {latest_parts}.")
+            print(
+                f"Installed NI-DAQmx version ({installed_version}) is equivalent or newer than the known version to install, {latest_parts}."
+            )
             return False
-    except ValueError  as e:
-        logging.info("Error: %s", e)
-        logging.debug(traceback.format_exc())
-        raise click.ClickException(f'Invalid version format found') from e
+    except ValueError as e:
+        _logger.info("Failed to parse version.", exc_info=True)
+        raise click.ClickException(f"Invalid version format found") from e
 
 
-def _get_daqmx_installed_version() -> str:
+def _get_daqmx_installed_version() -> Optional[str]:
     """
-    Check for existing installation of DAQmx by checking for Version information.
+    Check for existing installation of NI-DAQmx by checking for version information.
 
     Returns:
         str: The version of the installed NI-DAQmx if found, else an empty string.
     """
     try:
-        logging.debug("Reading the registry entries to get installed DAQmx version")
+        _logger.debug("Reading the registry entries to get installed DAQmx version")
         with winreg.OpenKeyEx(
             winreg.HKEY_LOCAL_MACHINE,
             r"SOFTWARE\National Instruments\NI-DAQmx\CurrentVersion",
@@ -106,20 +112,25 @@ def _get_daqmx_installed_version() -> str:
             product_version = winreg.QueryValueEx(daqmx_reg_key, "Version")[0]
 
         if product_name == "NI-DAQmx":
-            logging.debug("Found registry entries for Product Name: %s and version %s", product_name , product_version )
+            _logger.info(
+                "Found registry entries for Product Name: %s and version %s",
+                product_name,
+                product_version,
+            )
             return product_version
     except FileNotFoundError:
-        logging.info("No existing NI-DAQmx installation found.")
-        logging.debug(traceback.format_exc())
+        _logger.info("No existing NI-DAQmx installation found.", exc_info=False)
         return None
     except PermissionError as e:
-        logging.info("Error: %s", e)
-        logging.debug(traceback.format_exc())
-        raise click.ClickException(f'Permission denied while trying to read the registry key.') from e
+        _logger.info("Failed to read the registry key.", exc_info=True)
+        raise click.ClickException(
+            f"Permission denied while trying to read the registry key."
+        ) from e
     except OSError as e:
-        logging.info("Error: %s", e)
-        logging.debug(traceback.format_exc())
-        raise click.ClickException(f'An OS error occurred while trying to read the registry key.') from e
+        _logger.info("Failed to read the registry key.", exc_info=True)
+        raise click.ClickException(
+            f"An OS error occurred while trying to read the registry key."
+        ) from e
 
 
 # Creating a temp file that we then close and yield - this is used to allow subprocesses to access
@@ -142,11 +153,12 @@ def multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> str:
     try:
         temp_file = tempfile.NamedTemporaryFile(suffix=suffix, delete=False, mode="w")
         temp_file.close()
-        logging.debug("Created temp file: %s", temp_file.name)
+        _logger.debug("Created temp file: %s", temp_file.name)
     except Exception as e:
-        logging.info("Error: %s", e)
-        logging.debug(traceback.format_exc())
-        raise click.ClickException(f'An error occurred while trying to to create temporary file.') from e
+        _logger.info("Failed to create temporary file.", exc_info=True)
+        raise click.ClickException(
+            f"An error occurred while trying to to create temporary file."
+        ) from e
 
     try:
         yield temp_file.name
@@ -154,11 +166,10 @@ def multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> str:
         if delete:
             try:
                 os.unlink(temp_file.name)
-                logging.debug("Deleting temp file: %s", temp_file.name)
-            except ValueError  as e:
-                logging.info("Error: %s", e)
-                logging.debug(traceback.format_exc())
-                raise click.ClickException(f'Invalid version format found') from e
+                _logger.debug("Deleting temp file: %s", temp_file.name)
+            except ValueError as e:
+                _logger.info("Failed to delete temporary file.", exc_info=True)
+                raise click.ClickException(f"Failed to delete temporary file") from e
 
 
 def _load_data(json_data: str) -> Tuple[Optional[str], Optional[str]]:
@@ -177,28 +188,27 @@ def _load_data(json_data: str) -> Tuple[Optional[str], Optional[str]]:
     >>> _load_data('{"Windows": [{"Location": "path/to/driver"}]}')
     Traceback (most recent call last):
     ...
-    click.exceptions.ClickException: An error occurred while trying to fetch driver details.
+    click.exceptions.ClickException: Unable to fetch driver details.
 
     >>> _load_data('{"Linux": [{"Location": "path/to/driver", "Version": "1.0"}]}')
     Traceback (most recent call last):
     ...
-    click.exceptions.ClickException: An error occurred while trying to fetch driver details.
+    click.exceptions.ClickException: Unable to fetch driver details.
 
     """
     try:
         metadata = json.loads(json_data).get("Windows", [])
     except json.JSONDecodeError as e:
-        logging.info("Error: %s", e)
-        logging.debug(traceback.format_exc())
-        raise click.ClickException(f' Error occured while parsing the json data.') from e
+        _logger.info("Failed to parse the json data.", exc_info=True)
+        raise click.ClickException(f"Failed to parse the json data.") from e
 
     for metadata_entry in metadata:
         location: Optional[str] = metadata_entry.get("Location")
         version: Optional[str] = metadata_entry.get("Version")
-        logging.debug("From metadata file found location %s and version %s.", location, version)
+        _logger.debug("From metadata file found location %s and version %s.", location, version)
         if location and version:
             return location, version
-    raise click.ClickException(f'An error occurred while trying to fetch driver details.')
+    raise click.ClickException(f"Unable to fetch driver details.")
 
 
 def _get_driver_details() -> Tuple[Optional[str], Optional[str]]:
@@ -211,14 +221,15 @@ def _get_driver_details() -> Tuple[Optional[str], Optional[str]]:
     """
     try:
         with open(METADATA_FILE, "r") as json_file:
-            logging.debug("Opening the metadatafile %s.", METADATA_FILE)
+            _logger.debug("Opening the metadatafile %s.", METADATA_FILE)
             location, version = _load_data(json_file.read())
         return location, version
 
     except Exception as e:
-        logging.info("Error: %s", e)
-        logging.debug(traceback.format_exc())
-        raise click.ClickException(f'An error occurred while trying to fetch driver details.') from e
+        _logger.info("Failed to parse version.", exc_info=True)
+        raise click.ClickException(
+            f"An error occurred while trying to fetch driver details."
+        ) from e
 
 
 def _install_daqmx_driver(download_url: str) -> None:
@@ -228,28 +239,26 @@ def _install_daqmx_driver(download_url: str) -> None:
     temp_file = None
     try:
         with multi_access_temp_file() as temp_file:
-            logging.info("Downloading Driver to %s", temp_file)
+            _logger.info("Downloading Driver to %s", temp_file)
             urllib.request.urlretrieve(download_url, temp_file)
-            logging.info("Installing NI-DAQmx")
+            _logger.info("Installing NI-DAQmx")
             subprocess.run([temp_file], shell=True, check=True)
     except subprocess.CalledProcessError as e:
-        logging.info("Error: %s", e)
-        logging.debug(traceback.format_exc())
-        raise click.ClickException(f'Error occurred while installing NI-DAQmx driver. Command returned non-zero exit status.') from e
+        _logger.info("Failed to installed NI-DAQmx driver.", exc_info=True)
+        raise click.ClickException(
+            f"Error occurred while installing NI-DAQmx driver. Command returned non-zero exit status."
+        ) from e
     except urllib.error.URLError as e:
-        logging.info("Error: %s", e)
-        logging.debug(traceback.format_exc())
-        raise click.ClickException(f'Error occurred while downloading NI-DAQmx driver') from e
+        _logger.info("Failed to download NI-DAQmx driver.", exc_info=True)
+        raise click.ClickException(f"Failed to download NI-DAQmx driver") from e
     except Exception as e:
-        logging.info("Error: %s", e)
-        logging.debug(traceback.format_exc())
-        raise click.ClickException(f'Error occurred while installing NI-DAQmx driver') from e
+        _logger.info("Failed to download NI-DAQmx driver.", exc_info=True)
+        raise click.ClickException(f"Failed to install NI-DAQmx driver") from e
 
 
 def _ask_user_confirmation(user_message: str) -> bool:
     """
     Prompt for user confirmation
-    This should be prompt or a default value and press enter? What should be user experience 
 
     Args:
         user_message (str): The message to display to the user.
@@ -267,7 +276,10 @@ def _ask_user_confirmation(user_message: str) -> bool:
         else:
             print("Please enter 'yes' or 'no'.")
 
-def _confirm_and_upgrade_daqmx_driver(latest_version: str, installed_version: str, download_url: str) -> None:
+
+def _confirm_and_upgrade_daqmx_driver(
+    latest_version: str, installed_version: str, download_url: str
+) -> None:
     """
     Confirm with the user and upgrade the NI-DAQmx driver if necessary.
 
@@ -277,16 +289,20 @@ def _confirm_and_upgrade_daqmx_driver(latest_version: str, installed_version: st
         download_url (str): The URL to download the latest version of NI-DAQmx.
     """
     try:
-        logging.debug("Entering _confirm_and_upgrade_daqmx_driver")
-        is_upgrade_case =  _is_latest_version_greater(latest_version, installed_version)
+        _logger.debug("Entering _confirm_and_upgrade_daqmx_driver")
+        is_upgrade_case = _is_latest_version_greater(latest_version, installed_version)
         if is_upgrade_case:
-            is_upgrade = _ask_user_confirmation(f"Installed NI-DAQmx version is {installed_version}. Latest version available is {latest_version}. Do you want to upgrade?")
+            is_upgrade = _ask_user_confirmation(
+                f"Installed NI-DAQmx version is {installed_version}. Latest version available is {latest_version}. Do you want to upgrade?"
+            )
             if is_upgrade:
                 _install_daqmx_driver(download_url)
     except Exception as e:
-        logging.info("Error: %s", e)
-        logging.debug(traceback.format_exc())
-        raise click.ClickException(f'Error occurred during upgrading the driver software for Windows') from e
+        _logger.info("Failed to upgrade NI-DAQmx driver.", exc_info=True)
+        raise click.ClickException(
+            f"An error occurred during upgrading the driver software for Windows"
+        ) from e
+
 
 def _install_daqmx_windows_driver() -> None:
     """
@@ -294,31 +310,30 @@ def _install_daqmx_windows_driver() -> None:
     """
     try:
         installed_version = _get_daqmx_installed_version()
-        download_url, latest_version = _get_driver_details() 
+        download_url, latest_version = _get_driver_details()
         if installed_version:
             _confirm_and_upgrade_daqmx_driver(latest_version, installed_version, download_url)
         else:
             _install_daqmx_driver(download_url)
     except Exception as e:
-        logging.info("Error: %s", e)
-        logging.debug(traceback.format_exc())
-        raise click.ClickException(f'Error occurred during installdriver for Windows') from e
+        _logger.info("Failed to install NI-DAQmx driver.", exc_info=True)
+        raise click.ClickException(
+            f"An error occurred during the installation of the driver for windows"
+        ) from e
 
 
 def installdriver() -> None:
     """
-    Get the platform name on which the Python script is being executed.
-    Check for the existing installation of NI-DAQmx Driver.
-    If NI-DAQmx driver is already installed it will prompt for an upgrade if applicable.
     Download and launch NI-DAQmx Driver installation in an interactive mode.
     """
     try:
         if sys.platform.startswith("win"):
-            logging.info("Windows platform detected")
+            _logger.info("Windows platform detected")
             _install_daqmx_windows_driver()
         else:
-            raise click.ClickException(f'installdriver command is supported only on Windows.')
+            raise click.ClickException(f"installdriver command is supported only on Windows.")
     except Exception as e:
-        logging.info("Error: %s", e)
-        logging.debug(traceback.format_exc())
-        raise click.ClickException(f'Error occurred during installdriver') from e
+        _logger.info("Failed to download NI-DAQmx driver.", exc_info=True)
+        raise click.ClickException(
+            f"An error occurred during the installation of the driver"
+        ) from e
