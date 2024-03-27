@@ -10,7 +10,7 @@ import sys
 import tempfile
 import traceback
 import urllib.request
-from typing import List, Optional, Tuple
+from typing import Generator, List, Optional, Tuple
 import importlib.resources as pkg_resources
 
 import click
@@ -28,12 +28,6 @@ def _parse_version(version: str) -> Tuple[int, ...]:
     """
     Split the version string into a tuple of integers.
 
-    Args:
-        version (str): The version string in the format "major.minor.update".
-
-    Returns:
-        tuple: A tuple of integers representing the major, minor, and update parts of the version.
-
     >>> _parse_version("23.8.0")
     (23, 8, 0)
     >>> _parse_version("24.0.0")
@@ -50,55 +44,10 @@ def _parse_version(version: str) -> Tuple[int, ...]:
         raise click.ClickException(f"Invalid version format found") from e
 
 
-def _is_latest_version_greater(latest_version: str, installed_version: str) -> bool:
-    """
-    Compare two versions which are in the format: major.minor.update
-
-    Args:
-        installed_version (str): The installed version to compare.
-        latest_version (str): The version to compare against.
-
-    Returns:
-        int: False if versions are equal and installed_version is greater than latest_version
-        - True if installed_version is less than latest_version,
-
-    >>> _is_latest_version_greater("23.8.0", "23.8.0")
-    Installed NI-DAQmx version (23.8.0) is equivalent or newer than the known version to install, (23.8.0).
-    False
-    >>> _is_latest_version_greater("23.8.1", "24.0.0")
-    Installed NI-DAQmx version (24.0.0) is equivalent or newer than the known version to install, (23.8.1).
-    False
-    >>> _is_latest_version_greater("23.8.1", "23.8.0")
-    True
-    >>> _is_latest_version_greater("24.0.0", "23.8.5")
-    True
-    >>> _is_latest_version_greater("invalid_version", "1.2.0")
-    Traceback (most recent call last):
-    ...
-    click.exceptions.ClickException: Invalid version format found
-    """
-    try:
-        latest_parts: Tuple[int, ...] = _parse_version(latest_version)
-        installed_parts: Tuple[int, ...] = _parse_version(installed_version)
-
-        if latest_parts > installed_parts:
-            return True
-        else:
-            print(
-                f"Installed NI-DAQmx version ({installed_version}) is equivalent or newer than the known version to install, ({latest_version})."
-            )
-            return False
-    except ValueError as e:
-        _logger.info("Failed to parse version.", exc_info=True)
-        raise click.ClickException(f"Invalid version format found") from e
-
-
 def _get_daqmx_installed_version() -> Optional[str]:
     """
     Check for existing installation of NI-DAQmx.
 
-    Returns:
-        str: The version of the installed NI-DAQmx if found, else an empty string.
     """
     try:
         _logger.debug("Reading the registry entries to get installed DAQmx version")
@@ -135,19 +84,9 @@ def _get_daqmx_installed_version() -> Optional[str]:
 
 # Creating a temp file that we then close and yield - this is used to allow subprocesses to access
 @contextlib.contextmanager
-def multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> str:
+def _multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> Generator[str, None, None]:
     """
     Context manager for creating a temporary file.
-
-    Args:
-        suffix (str): The suffix for the temporary file.
-        delete (bool): Whether to delete the temporary file after use.
-
-    Yields:
-        str: The path of the created temporary file.
-
-    Raises:
-        click.ClickException: If an error occurs while creating the temporary file.
 
     """
     try:
@@ -175,12 +114,6 @@ def multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> str:
 def _load_data(json_data: str) -> Tuple[Optional[str], Optional[str]]:
     """
     Load data from JSON string and extract Windows metadata.
-
-    Args:
-        json_data (str): JSON string containing metadata.
-
-    Returns:
-        tuple: A tuple containing location and version information if found, else (None, None).
 
     >>> _load_data('{"Windows": [{"Location": "path/to/driver", "Version": "1.0"}]}')
     ('path/to/driver', '1.0')
@@ -215,9 +148,6 @@ def _get_driver_details() -> Tuple[Optional[str], Optional[str]]:
     """
     Parse the JSON data and retrieve the download link and version information.
 
-    Returns:
-        tuple: A tuple containing download location and version information if found, else (None, None).
-
     """
     try:
         with pkg_resources.open_text(__package__, METADATA_FILE) as json_file:
@@ -235,10 +165,11 @@ def _get_driver_details() -> Tuple[Optional[str], Optional[str]]:
 def _install_daqmx_driver(download_url: str) -> None:
     """
     Download and launch NI-DAQmx Driver installation in an interactive mode
+
     """
     temp_file = None
     try:
-        with multi_access_temp_file() as temp_file:
+        with _multi_access_temp_file() as temp_file:
             _logger.info("Downloading Driver to %s", temp_file)
             urllib.request.urlretrieve(download_url, temp_file)
             _logger.info("Installing NI-DAQmx")
@@ -260,12 +191,6 @@ def _ask_user_confirmation(user_message: str) -> bool:
     """
     Prompt for user confirmation
 
-    Args:
-        user_message (str): The message to display to the user.
-
-    Returns:
-        bool: True if the user confirms, False otherwise.
-
     """
     while True:
         response = input(user_message + " (yes/no): ").strip().lower()
@@ -283,30 +208,32 @@ def _confirm_and_upgrade_daqmx_driver(
     """
     Confirm with the user and upgrade the NI-DAQmx driver if necessary.
 
-    Args:
-        installed_version (str): The installed version of NI-DAQmx.
-        latest_version (str): The latest version of NI-DAQmx available.
-        download_url (str): The URL to download the latest version of NI-DAQmx.
     """
     try:
         _logger.debug("Entering _confirm_and_upgrade_daqmx_driver")
-        is_upgrade_case = _is_latest_version_greater(latest_version, installed_version)
-        if is_upgrade_case:
-            is_upgrade = _ask_user_confirmation(
-                f"Installed NI-DAQmx version is {installed_version}. Latest version available is {latest_version}. Do you want to upgrade?"
+        latest_parts: Tuple[int, ...] = _parse_version(latest_version)
+        installed_parts: Tuple[int, ...] = _parse_version(installed_version)
+        if installed_parts >= latest_parts:
+            print(
+                f"Installed NI-DAQmx version ({installed_version}) is equivalent or newer than the known version to install, ({latest_version})."
             )
-            if is_upgrade:
-                _install_daqmx_driver(download_url)
+            return
+        is_upgrade = _ask_user_confirmation(
+            f"Installed NI-DAQmx version is {installed_version}. Latest version available is {latest_version}. Do you want to upgrade?"
+            )
+        if is_upgrade:
+            _install_daqmx_driver(download_url)
     except Exception as e:
         _logger.info("Failed to upgrade NI-DAQmx driver.", exc_info=True)
         raise click.ClickException(
-            f"An error occurred during upgrading the driver software for Windows"
+            f"An error occurred during upgrading the MI-DAQmx driver software for Windows"
         ) from e
 
 
 def _install_daqmx_windows_driver() -> None:
     """
     Install the NI-DAQmx driver on Windows.
+
     """
     try:
         installed_version = _get_daqmx_installed_version()
@@ -325,6 +252,7 @@ def _install_daqmx_windows_driver() -> None:
 def installdriver() -> None:
     """
     Download and launch NI-DAQmx Driver installation in an interactive mode.
+
     """
     try:
         if sys.platform.startswith("win"):
