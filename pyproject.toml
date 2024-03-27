@@ -86,7 +86,7 @@ extend_exclude = ".tox,docs,generated,src/codegen/metadata,src/codegen/templates
 [tool.pytest.ini_options]
 addopts = "--doctest-modules --strict-markers"
 filterwarnings = ["always::ImportWarning", "always::ResourceWarning"]
-testpaths = ["tests" , "generated/nidaqmx"]
+testpaths = ["tests"]
 markers = [
   # Defines custom markers used by nidaqmx tests. Prevents PytestUnknownMarkWarning.
   "library_only(reason=...): run the test with only the library interpreter implementation.",
