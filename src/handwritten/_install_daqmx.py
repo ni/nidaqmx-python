@@ -11,6 +11,7 @@ import tempfile
 import traceback
 import urllib.request
 from typing import List, Optional, Tuple
+import importlib.resources as pkg_resources
 
 import click
 
@@ -19,8 +20,7 @@ if sys.platform.startswith("win"):
 
 _logger = logging.getLogger(__name__)
 
-MODULE_DIR = pathlib.Path(__file__).parent
-METADATA_FILE = MODULE_DIR / "_installer_metadata.json"
+METADATA_FILE = "_installer_metadata.json"
 
 
 
@@ -63,10 +63,10 @@ def _is_latest_version_greater(latest_version: str, installed_version: str) -> b
         - True if installed_version is less than latest_version,
 
     >>> _is_latest_version_greater("23.8.0", "23.8.0")
-    Installed NI-DAQmx version (23.8.0) is equivalent or newer than the known version to install, (23, 8, 0).
+    Installed NI-DAQmx version (23.8.0) is equivalent or newer than the known version to install, (23.8.0).
     False
     >>> _is_latest_version_greater("23.8.1", "24.0.0")
-    Installed NI-DAQmx version (24.0.0) is equivalent or newer than the known version to install, (23, 8, 1).
+    Installed NI-DAQmx version (24.0.0) is equivalent or newer than the known version to install, (23.8.1).
     False
     >>> _is_latest_version_greater("23.8.1", "23.8.0")
     True
@@ -220,7 +220,7 @@ def _get_driver_details() -> Tuple[Optional[str], Optional[str]]:
 
     """
     try:
-        with open(METADATA_FILE, "r") as json_file:
+        with pkg_resources.open_text(__package__, METADATA_FILE) as json_file:
             _logger.debug("Opening the metadatafile %s.", METADATA_FILE)
             location, version = _load_data(json_file.read())
         return location, version
