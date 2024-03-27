@@ -226,7 +226,7 @@ def _confirm_and_upgrade_daqmx_driver(
     except Exception as e:
         _logger.info("Failed to upgrade NI-DAQmx driver.", exc_info=True)
         raise click.ClickException(
-            f"An error occurred during upgrading the MI-DAQmx driver software for Windows"
+            f"An error occurred during upgrading the NI-DAQmx driver software for Windows"
         ) from e
 
 
