@@ -85,7 +85,7 @@ def _is_latest_version_greater(latest_version: str, installed_version: str) -> b
             return True
         else:
             print(
-                f"Installed NI-DAQmx version ({installed_version}) is equivalent or newer than the known version to install, {latest_parts}."
+                f"Installed NI-DAQmx version ({installed_version}) is equivalent or newer than the known version to install, ({latest_version})."
             )
             return False
     except ValueError as e:
