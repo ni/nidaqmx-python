@@ -95,7 +95,7 @@ def _is_latest_version_greater(latest_version: str, installed_version: str) -> b
 
 def _get_daqmx_installed_version() -> Optional[str]:
     """
-    Check for existing installation of NI-DAQmx by checking for version information.
+    Check for existing installation of NI-DAQmx.
 
     Returns:
         str: The version of the installed NI-DAQmx if found, else an empty string.
