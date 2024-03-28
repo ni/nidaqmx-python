@@ -1,4 +1,5 @@
 """Helpers class to generate helper functions for the metadata."""
+
 import re
 from collections import namedtuple
 from enum import Enum

@@ -59,9 +59,21 @@ class PhysicalChannelCollection(Sequence):
         if isinstance(index, int):
             return _PhysicalChannelAlternateConstructor(self.channel_names[index], self._interpreter)
         elif isinstance(index, slice):
-            return _PhysicalChannelAlternateConstructor(self.channel_names[index], self._interpreter)
+            return [_PhysicalChannelAlternateConstructor(channel, self._interpreter) for channel in self.channel_names[index]]
         elif isinstance(index, str):
-            return _PhysicalChannelAlternateConstructor(f'{self._name}/{index}', self._interpreter)
+            requested_channels = unflatten_channel_string(index)
+            # Ensure the channel names are fully qualified. If the channel is invalid, the user will get errors from the
+            # channel objects on use.
+            channels_to_use = []
+            for channel in requested_channels:
+                if channel.startswith(f"{self._name}/"):
+                    channels_to_use.append(channel)
+                else:
+                    channels_to_use.append(f'{self._name}/{channel}')
+
+            if len(channels_to_use) == 1:
+                return _PhysicalChannelAlternateConstructor(channels_to_use[0], self._interpreter)
+            return [_PhysicalChannelAlternateConstructor(channel, self._interpreter) for channel in channels_to_use]
         else:
             raise DaqError(
                 'Invalid index type "{}" used to access collection.'
@@ -96,7 +108,7 @@ class PhysicalChannelCollection(Sequence):
     @property
     def channel_names(self):
         """
-        List[str]: Specifies the entire list of physical channels on this
+        List[str]: Specifies the entire list of physical channels in this
             collection.
         """
         raise NotImplementedError()

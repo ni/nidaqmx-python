@@ -676,6 +676,10 @@ class NiDAQmxStub:
         nidaqmx_pb2.GetExportedSignalAttributeUInt32Request,
         nidaqmx_pb2.GetExportedSignalAttributeUInt32Response,
     ]
+    GetExtCalLastDateAndTime: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.GetExtCalLastDateAndTimeRequest,
+        nidaqmx_pb2.GetExtCalLastDateAndTimeResponse,
+    ]
     GetFirstSampClkWhen: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetFirstSampClkWhenRequest,
         nidaqmx_pb2.GetFirstSampClkWhenResponse,
@@ -1171,6 +1175,10 @@ class NiDAQmxStub:
     ResetWriteAttribute: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetWriteAttributeRequest,
         nidaqmx_pb2.ResetWriteAttributeResponse,
+    ]
+    RestoreLastExtCalConst: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.RestoreLastExtCalConstRequest,
+        nidaqmx_pb2.RestoreLastExtCalConstResponse,
     ]
     SaveGlobalChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SaveGlobalChanRequest,
@@ -2262,6 +2270,10 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.GetExportedSignalAttributeUInt32Request,
         nidaqmx_pb2.GetExportedSignalAttributeUInt32Response,
     ]
+    GetExtCalLastDateAndTime: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.GetExtCalLastDateAndTimeRequest,
+        nidaqmx_pb2.GetExtCalLastDateAndTimeResponse,
+    ]
     GetFirstSampClkWhen: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetFirstSampClkWhenRequest,
         nidaqmx_pb2.GetFirstSampClkWhenResponse,
@@ -2757,6 +2769,10 @@ class NiDAQmxAsyncStub:
     ResetWriteAttribute: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetWriteAttributeRequest,
         nidaqmx_pb2.ResetWriteAttributeResponse,
+    ]
+    RestoreLastExtCalConst: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.RestoreLastExtCalConstRequest,
+        nidaqmx_pb2.RestoreLastExtCalConstResponse,
     ]
     SaveGlobalChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SaveGlobalChanRequest,
@@ -4175,6 +4191,12 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetExportedSignalAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetExportedSignalAttributeUInt32Response]]: ...
     @abc.abstractmethod
+    def GetExtCalLastDateAndTime(
+        self,
+        request: nidaqmx_pb2.GetExtCalLastDateAndTimeRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.GetExtCalLastDateAndTimeResponse, collections.abc.Awaitable[nidaqmx_pb2.GetExtCalLastDateAndTimeResponse]]: ...
+    @abc.abstractmethod
     def GetFirstSampClkWhen(
         self,
         request: nidaqmx_pb2.GetFirstSampClkWhenRequest,
@@ -4918,6 +4940,12 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
         request: nidaqmx_pb2.ResetWriteAttributeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ResetWriteAttributeResponse, collections.abc.Awaitable[nidaqmx_pb2.ResetWriteAttributeResponse]]: ...
+    @abc.abstractmethod
+    def RestoreLastExtCalConst(
+        self,
+        request: nidaqmx_pb2.RestoreLastExtCalConstRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.RestoreLastExtCalConstResponse, collections.abc.Awaitable[nidaqmx_pb2.RestoreLastExtCalConstResponse]]: ...
     @abc.abstractmethod
     def SaveGlobalChan(
         self,

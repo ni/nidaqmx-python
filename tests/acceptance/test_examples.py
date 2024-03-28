@@ -33,7 +33,7 @@ def test___shipping_example___run___no_errors(example_path: Path, system):
         pytest.skip("Example waits for keyboard input.")
     if example_path.name == "nidaqmx_warnings.py":
         # Ignore warnings from this example.
-        context_manager = warnings.catch_warnings(record=True)
+        context_manager: contextlib.AbstractContextManager = warnings.catch_warnings(record=True)
     else:
         context_manager = contextlib.nullcontext()
 

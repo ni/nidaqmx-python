@@ -25,10 +25,14 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          poetry install
+          poetry install --all-extras
       - name: Run linters
         run: |
           poetry run ni-python-styleguide lint
+      - name: Run mypy
+        run: |
+          poetry run mypy generated/nidaqmx
+          poetry run mypy tests
       - name: Generate ni-daqmx files
         run: |
           rm -fr generated/nidaqmx

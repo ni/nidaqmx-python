@@ -1,4 +1,5 @@
 ﻿"""Example of CI edge count operation."""
+
 import pprint
 
 import nidaqmx

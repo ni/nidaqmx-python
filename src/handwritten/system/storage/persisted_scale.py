@@ -111,4 +111,4 @@ class _PersistedScaleAlternateConstructor(PersistedScale):
 
         # Use meta-programming to change the type of this object to PersistedScale,
         # so the user isn't confused when doing introspection.
-        self.__class__ = PersistedScale
+        self.__class__ = PersistedScale  # type: ignore[assignment]

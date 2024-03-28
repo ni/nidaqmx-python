@@ -1,4 +1,5 @@
 """Helper functions for generating constants.py."""
+
 import html
 from copy import deepcopy
 

@@ -1,4 +1,5 @@
 """Example of AI raw operation."""
+
 import pprint
 
 import nidaqmx

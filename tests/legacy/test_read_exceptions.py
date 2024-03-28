@@ -1,4 +1,5 @@
 """Tests for validating read error behavior."""
+
 import numpy
 import pytest
 

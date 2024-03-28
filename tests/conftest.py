@@ -1,11 +1,12 @@
 """Fixtures used in the DAQmx tests."""
+
 from __future__ import annotations
 
 import contextlib
 import pathlib
 from concurrent.futures import ThreadPoolExecutor
 from enum import Enum
-from typing import Generator, List
+from typing import TYPE_CHECKING, Generator, List
 
 import pytest
 
@@ -18,7 +19,11 @@ try:
 
     from tests._grpc_utils import GrpcServerProcess
 except ImportError:
-    grpc = None
+    grpc = None  # type: ignore
+
+if TYPE_CHECKING:
+    # Not public yet: https://github.com/pytest-dev/pytest/issues/7469
+    import _pytest.mark.structures
 
 
 class Error(Exception):
@@ -41,6 +46,14 @@ class DeviceType(Enum):
     SIMULATED = 1
 
 
+class SamplingType(Enum):
+    """Sampling Type."""
+
+    ANY = -1
+    MULTIPLEXED = 0
+    SIMULTANEOUS = 1
+
+
 def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
     """Parametrizes the "init_kwargs" fixture by examining the the markers set for a test.
 
@@ -53,7 +66,7 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
 
         grpc_only = metafunc.definition.get_closest_marker("grpc_only")
         library_only = metafunc.definition.get_closest_marker("library_only")
-        params: List[pytest.ParameterSet] = []
+        params: List[_pytest.mark.structures.ParameterSet] = []
 
         if not grpc_only:
             library_marks: List[pytest.MarkDecorator] = []
@@ -79,7 +92,7 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
 
 
 @pytest.fixture(scope="function")
-def system(init_kwargs):
+def system(init_kwargs) -> nidaqmx.system.System:
     """Gets system instance based on the grpc options."""
     if "grpc_options" in init_kwargs:
         return nidaqmx.system.System.remote(**init_kwargs)
@@ -87,12 +100,27 @@ def system(init_kwargs):
         return nidaqmx.system.System.local(**init_kwargs)
 
 
-def _x_series_device(device_type, system):
+def _x_series_device(
+    device_type: DeviceType,
+    system: nidaqmx.system.System,
+    sampling_type: SamplingType = SamplingType.ANY,
+) -> nidaqmx.system.Device:
     for device in system.devices:
         device_type_match = (
             device_type == DeviceType.ANY
             or (device_type == DeviceType.REAL and not device.is_simulated)
             or (device_type == DeviceType.SIMULATED and device.is_simulated)
+        )
+        device_type_match = device_type_match and (
+            sampling_type == SamplingType.ANY
+            or (
+                sampling_type == SamplingType.MULTIPLEXED
+                and not device.ai_simultaneous_sampling_supported
+            )
+            or (
+                sampling_type == SamplingType.SIMULTANEOUS
+                and device.ai_simultaneous_sampling_supported
+            )
         )
         if (
             device_type_match
@@ -107,32 +135,95 @@ def _x_series_device(device_type, system):
 
     pytest.skip(
         "Could not detect a device that meets the requirements to be an X Series fixture of type "
+        f"{device_type} with {sampling_type} sampling. Cannot proceed to run tests. Import the NI "
+        "MAX configuration file located at nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to "
+        "create these devices."
+    )
+
+
+def _device_by_product_type(
+    product_type: str, device_type: DeviceType, system: nidaqmx.system.System
+) -> nidaqmx.system.Device:
+    for device in system.devices:
+        device_type_match = (
+            device_type == DeviceType.ANY
+            or (device_type == DeviceType.REAL and not device.is_simulated)
+            or (device_type == DeviceType.SIMULATED and device.is_simulated)
+        )
+        if device_type_match and device.product_type == product_type:
+            return device
+
+    pytest.skip(
+        f"Could not detect a {product_type} device that meets the requirements to be of type "
         f"{device_type}. Cannot proceed to run tests. Import the NI MAX configuration file located "
         "at nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
-    return None
+
+
+def _cdaq_module_by_product_type(
+    product_type: str, cdaq_chassis: nidaqmx.system.Device
+) -> nidaqmx.system.Device:
+    for module in cdaq_chassis.chassis_module_devices:
+        if module.product_type == product_type:
+            return module
+
+    pytest.skip(
+        f"Could not detect a {product_type} device within {cdaq_chassis.name}. "
+        "Cannot proceed to run tests. Import the NI MAX configuration file located at "
+        "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
+    )
 
 
 @pytest.fixture(scope="function")
-def any_x_series_device(system):
-    """Gets any x series device information."""
-    return _x_series_device(DeviceType.ANY, system)
-
-
-@pytest.fixture(scope="function")
-def real_x_series_device(system):
-    """Gets the real x series device information."""
+def real_x_series_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
+    """Gets real X Series device information."""
     return _x_series_device(DeviceType.REAL, system)
 
 
 @pytest.fixture(scope="function")
-def sim_x_series_device(system):
-    """Gets simulated x series device information."""
-    return _x_series_device(DeviceType.SIMULATED, system)
+def real_x_series_multiplexed_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
+    """Gets device information for a real X Series device with multiplexed sampling."""
+    return _x_series_device(DeviceType.REAL, system, sampling_type=SamplingType.MULTIPLEXED)
 
 
 @pytest.fixture(scope="function")
-def sim_ts_chassis(system):
+def sim_6363_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
+    """Gets simulated 6363 device information."""
+    return _device_by_product_type("PCIe-6363", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_9189_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
+    """Gets simulated 9185 device information."""
+    return _device_by_product_type("cDAQ-9189", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_time_aware_9215_device(sim_9189_device: nidaqmx.system.Device) -> nidaqmx.system.Device:
+    """Gets device information for a simulated 9215 device within a 9185."""
+    return _cdaq_module_by_product_type("NI 9215", sim_9189_device)
+
+
+@pytest.fixture(scope="function")
+def sim_9263_device(sim_9189_device: nidaqmx.system.Device) -> nidaqmx.system.Device:
+    """Gets device information for a simulated 9263 device within a 9185."""
+    return _cdaq_module_by_product_type("NI 9263", sim_9189_device)
+
+
+@pytest.fixture(scope="function")
+def sim_9401_device(sim_9189_device: nidaqmx.system.Device) -> nidaqmx.system.Device:
+    """Gets device information for a simulated 9401 device within a 9185."""
+    return _cdaq_module_by_product_type("NI 9401", sim_9189_device)
+
+
+@pytest.fixture(scope="function")
+def sim_9775_device(sim_9189_device: nidaqmx.system.Device) -> nidaqmx.system.Device:
+    """Gets device information for a simulated 9775 device within a 9185."""
+    return _cdaq_module_by_product_type("NI 9775", sim_9189_device)
+
+
+@pytest.fixture(scope="function")
+def sim_ts_chassis(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets simulated TestScale chassis information."""
     # Prefer tsChassisTester if available so that multi-module tests will use
     # modules from the same chassis.
@@ -148,11 +239,10 @@ def sim_ts_chassis(system):
         "Cannot proceed to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
-    return None
 
 
 @pytest.fixture(scope="function")
-def sim_ts_power_device(sim_ts_chassis):
+def sim_ts_power_device(sim_ts_chassis: nidaqmx.system.Device) -> nidaqmx.system.Device:
     """Gets simulated power device information."""
     for device in sim_ts_chassis.chassis_module_devices:
         if (
@@ -167,11 +257,10 @@ def sim_ts_power_device(sim_ts_chassis):
         "Cannot proceed to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
-    return None
 
 
 @pytest.fixture(scope="function")
-def sim_ts_voltage_device(sim_ts_chassis):
+def sim_ts_voltage_device(sim_ts_chassis: nidaqmx.system.Device) -> nidaqmx.system.Device:
     """Gets simulated voltage device information."""
     for device in sim_ts_chassis.chassis_module_devices:
         if (
@@ -186,11 +275,10 @@ def sim_ts_voltage_device(sim_ts_chassis):
         "Cannot proceed to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
-    return None
 
 
 @pytest.fixture(scope="function")
-def sim_ts_power_devices(sim_ts_chassis):
+def sim_ts_power_devices(sim_ts_chassis: nidaqmx.system.Device) -> List[nidaqmx.system.Device]:
     """Gets simulated power devices information."""
     devices = []
     for device in sim_ts_chassis.chassis_module_devices:
@@ -208,11 +296,52 @@ def sim_ts_power_devices(sim_ts_chassis):
         "device. Cannot proceed to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
-    return None
 
 
 @pytest.fixture(scope="function")
-def multi_threading_test_devices(system):
+def sim_charge_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
+    """Gets a simulated 4480."""
+    return _device_by_product_type("PXIe-4480", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_dsa_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
+    """Gets a simulated 4466."""
+    return _device_by_product_type("PXIe-4466", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_dmm_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
+    """Gets a simulated myDAQ."""
+    return _device_by_product_type("NI myDAQ", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_bridge_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
+    """Gets a simulated 4431."""
+    return _device_by_product_type("PXIe-4331", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_position_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
+    """Gets a simulated 4340."""
+    return _device_by_product_type("PXIe-4340", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_temperature_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
+    """Gets a simulated 4353."""
+    return _device_by_product_type("PXIe-4353", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def sim_velocity_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
+    """Gets a simulated 9361."""
+    return _device_by_product_type("NI 9361", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
+def multi_threading_test_devices(system: nidaqmx.system.System) -> List[nidaqmx.system.Device]:
     """Gets multi threading test devices information."""
     devices = []
     for device in system.devices:
@@ -230,11 +359,10 @@ def multi_threading_test_devices(system):
         "to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
-    return None
 
 
 @pytest.fixture(scope="function")
-def device(request, system):
+def device(request, system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets the device information based on the device name."""
     device_name = _get_marker_value(request, "device_name")
     for device in system.devices:
@@ -246,7 +374,6 @@ def device(request, system):
         "Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create these devices."
     )
-    return None
 
 
 @pytest.fixture(scope="session")
@@ -349,7 +476,7 @@ def generate_task(init_kwargs):
 
 
 @pytest.fixture(scope="function")
-def persisted_task(request, system):
+def persisted_task(request, system: nidaqmx.system.System):
     """Gets the persisted task based on the task name."""
     task_name = _get_marker_value(request, "task_name")
 
@@ -361,11 +488,10 @@ def persisted_task(request, system):
         "Cannot proceed to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required tasks."
     )
-    return None
 
 
 @pytest.fixture(scope="function")
-def persisted_scale(request, system):
+def persisted_scale(request, system: nidaqmx.system.System):
     """Gets the persisted scale based on the scale name."""
     scale_name = _get_marker_value(request, "scale_name")
     if scale_name in system.scales:
@@ -375,11 +501,10 @@ def persisted_scale(request, system):
         "to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required scales."
     )
-    return None
 
 
 @pytest.fixture(scope="function")
-def persisted_channel(request, system):
+def persisted_channel(request, system: nidaqmx.system.System):
     """Gets the persisted channel based on the channel name."""
     channel_name = _get_marker_value(request, "channel_name")
 
@@ -391,16 +516,13 @@ def persisted_channel(request, system):
         "Cannot proceed to run tests. Import the NI MAX configuration file located at "
         "nidaqmx\\tests\\max_config\\nidaqmxMaxConfig.ini to create the required channels."
     )
-    return None
 
 
 @pytest.fixture(scope="function")
-def watchdog_task(
-    request, any_x_series_device, generate_watchdog_task
-) -> nidaqmx.system.WatchdogTask:
+def watchdog_task(request, sim_6363_device, generate_watchdog_task) -> nidaqmx.system.WatchdogTask:
     """Gets a watchdog task instance."""
     # set default values used for the initialization of the task.
-    device_name = _get_marker_value(request, "device_name", any_x_series_device.name)
+    device_name = _get_marker_value(request, "device_name", sim_6363_device.name)
     timeout = _get_marker_value(request, "timeout", 0.5)
 
     return generate_watchdog_task(device_name=device_name, timeout=timeout)
@@ -453,6 +575,110 @@ def interpreter(system: nidaqmx.system.System) -> BaseInterpreter:
 
 
 @pytest.fixture
-def teds_file_path(test_assets_directory):
+def teds_assets_directory(test_assets_directory: pathlib.Path) -> pathlib.Path:
+    """Returns the path to TEDS assets."""
+    return test_assets_directory / "teds"
+
+
+@pytest.fixture
+def voltage_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
     """Returns a TEDS file path."""
-    return pathlib.Path(test_assets_directory, "teds", "Voltage.ted")
+    return teds_assets_directory / "Voltage.ted"
+
+
+@pytest.fixture
+def accelerometer_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
+    """Returns a TEDS file path."""
+    return teds_assets_directory / "Accelerometer.ted"
+
+
+@pytest.fixture
+def bridge_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
+    """Returns a TEDS file path."""
+    # Our normal bridge sensor TEDS file is incompatible with most devices. It
+    # has a 1ohm bridge resistance.
+    return teds_assets_directory / "forcebridge.ted"
+
+
+@pytest.fixture
+def force_bridge_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
+    """Returns a TEDS file path."""
+    return teds_assets_directory / "forcebridge.ted"
+
+
+@pytest.fixture
+def current_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
+    """Returns a TEDS file path."""
+    return teds_assets_directory / "Current.ted"
+
+
+@pytest.fixture
+def force_iepe_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
+    """Returns a TEDS file path."""
+    return teds_assets_directory / "ForceSensor.ted"
+
+
+@pytest.fixture
+def microphone_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
+    """Returns a TEDS file path."""
+    return teds_assets_directory / "Microphone.ted"
+
+
+@pytest.fixture
+def lvdt_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
+    """Returns a TEDS file path."""
+    return teds_assets_directory / "LVDT.ted"
+
+
+@pytest.fixture
+def rvdt_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
+    """Returns a TEDS file path."""
+    return teds_assets_directory / "RVDT.ted"
+
+
+@pytest.fixture
+def pressure_bridge_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
+    """Returns a TEDS file path."""
+    return teds_assets_directory / "pressurebridge.ted"
+
+
+@pytest.fixture
+def torque_bridge_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
+    """Returns a TEDS file path."""
+    return teds_assets_directory / "torquebridge.ted"
+
+
+@pytest.fixture
+def resistance_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
+    """Returns a TEDS file path."""
+    return teds_assets_directory / "Resistance.ted"
+
+
+@pytest.fixture
+def rtd_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
+    """Returns a TEDS file path."""
+    return teds_assets_directory / "TempRTD.ted"
+
+
+@pytest.fixture
+def strain_gage_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
+    """Returns a TEDS file path."""
+    return teds_assets_directory / "StrainGage.ted"
+
+
+@pytest.fixture
+def thermocouple_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
+    """Returns a TEDS file path."""
+    return teds_assets_directory / "TempTC.ted"
+
+
+@pytest.fixture
+def thermistor_iex_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
+    """Returns a TEDS file path."""
+    return teds_assets_directory / "ThermistorIex.ted"
+
+
+@pytest.fixture
+def thermistor_vex_teds_file_path(teds_assets_directory: pathlib.Path) -> pathlib.Path:
+    """Returns a TEDS file path."""
+    return teds_assets_directory / "ThermistorVex.ted"

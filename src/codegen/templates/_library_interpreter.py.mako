@@ -9,6 +9,7 @@
         get_return_values,
         is_event_register_function,
         LIBRARY_INTERPRETER_IGNORED_FUNCTIONS,
+        INCLUDE_SIZE_HINT_FUNCTIONS,
     )
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
 
@@ -28,6 +29,7 @@ from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
 from nidaqmx.errors import DaqError, DaqReadError, DaqWarning, DaqWriteError
+from nidaqmx._lib_time import AbsoluteTime
 
 
 _logger = logging.getLogger(__name__)
@@ -67,6 +69,8 @@ class LibraryInterpreter(BaseInterpreter):
     params = get_params_for_function_signature(func)
     sorted_params = order_function_parameters_by_optional(params)
     parameter_signature = get_interpreter_parameter_signature(is_python_factory, sorted_params)
+    if func.function_name in INCLUDE_SIZE_HINT_FUNCTIONS:
+        parameter_signature = ", ".join([parameter_signature, "size_hint=0"])
     return_values = get_return_values(func)
 %>\
     %if (len(func.function_name) + len(parameter_signature)) > 68:
@@ -116,7 +120,7 @@ class LibraryInterpreter(BaseInterpreter):
         if query_error_code < 0:
             _logger.error('Failed to get error string for error code %d. DAQmxGetErrorString returned error code %d.', error_code, query_error_code)
             return 'Failed to retrieve error description.'
-        return error_buffer.value.decode('utf-8')
+        return error_buffer.value.decode(lib_importer.encoding)
 
     ## get_extended_error_info has special error handling and it is library-only because it uses
     ## thread-local storage.
@@ -133,7 +137,7 @@ class LibraryInterpreter(BaseInterpreter):
         if query_error_code < 0:
             _logger.error('Failed to get extended error info. DAQmxGetExtendedErrorInfo returned error code %d.', query_error_code)
             return 'Failed to retrieve error description.'
-        return error_buffer.value.decode('utf-8')
+        return error_buffer.value.decode(lib_importer.encoding)
 
     ## The metadata for 'read_power_binary_i16' function is not available in daqmxAPISharp.json file.
     def read_power_binary_i16(

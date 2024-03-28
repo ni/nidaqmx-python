@@ -65,8 +65,8 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def cfg_anlg_multi_edge_ref_trig(
-            self, task, trigger_sources, trigger_slope_array,
-            trigger_level_array, pretrigger_samples):
+            self, task, trigger_sources, pretrigger_samples,
+            trigger_slope_array, trigger_level_array):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -145,6 +145,10 @@ class BaseInterpreter(abc.ABC):
     def cfg_samp_clk_timing(
             self, task, rate, source, active_edge, sample_mode,
             samps_per_chan):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def cfg_time_start_trig(self, task, when, timescale):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -769,6 +773,10 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def device_supports_cal(self, device_name):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def disable_ref_trig(self, task):
         raise NotImplementedError
 
@@ -795,6 +803,22 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def get_buffer_attribute_uint32(self, task, attribute):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_cal_info_attribute_bool(self, device_name, attribute):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_cal_info_attribute_double(self, device_name, attribute):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_cal_info_attribute_string(self, device_name, attribute):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_cal_info_attribute_uint32(self, device_name, attribute):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -894,6 +918,10 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def get_ext_cal_last_date_and_time(self, device_name):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def get_persisted_chan_attribute_bool(self, channel, attribute):
         raise NotImplementedError
 
@@ -969,7 +997,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_read_attribute_string(self, task, attribute):
+    def get_read_attribute_string(self, task, attribute, size_hint=0):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -994,6 +1022,10 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def get_scale_attribute_string(self, scale_name, attribute):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_self_cal_last_date_and_time(self, device_name):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1089,6 +1121,10 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def get_trig_attribute_timestamp(self, task, attribute):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def get_trig_attribute_uint32(self, task, attribute):
         raise NotImplementedError
 
@@ -1121,7 +1157,7 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_write_attribute_string(self, task, attribute):
+    def get_write_attribute_string(self, task, attribute, size_hint=0):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1359,6 +1395,10 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def restore_last_ext_cal_const(self, device_name):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def save_global_chan(self, task, channel_name, save_as, author, options):
         raise NotImplementedError
 
@@ -1390,6 +1430,22 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def set_buffer_attribute_uint32(self, task, attribute, value):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def set_cal_info_attribute_bool(self, device_name, attribute, value):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def set_cal_info_attribute_double(self, device_name, attribute, value):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def set_cal_info_attribute_string(self, device_name, attribute, value):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def set_cal_info_attribute_uint32(self, device_name, attribute, value):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -1569,6 +1625,10 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def set_trig_attribute_timestamp(self, task, attribute, value):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def set_trig_attribute_uint32(self, task, attribute, value):
         raise NotImplementedError
 
@@ -1647,6 +1707,10 @@ class BaseInterpreter(abc.ABC):
 
     @abc.abstractmethod
     def unreserve_network_device(self, device_name):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def wait_for_valid_timestamp(self, task, timestamp_event, timeout):
         raise NotImplementedError
 
     @abc.abstractmethod

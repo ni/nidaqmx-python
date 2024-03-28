@@ -1,13 +1,21 @@
 <%def name="script_property_getter(attribute)">\
 <%
         from codegen.utilities.text_wrappers import docstring_wrap
-        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type
+        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type, ATTRIBUTE_WITH_FILE_PATH_TYPE
     %>\
+    %if attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
+    @property
+    def ${attribute.name}(self) -> Optional[pathlib.Path]:
+        """
+        ${"pathlib.Path: " + attribute.python_description | docstring_wrap(initial_indent=8, subsequent_indent=12)}
+        """
+    %else:
     @property
     def ${attribute.name}(self):
         """
         ${attribute.get_return_type() + ": " + attribute.python_description | docstring_wrap(initial_indent=8, subsequent_indent=12)}
         """
+    %endif
 \
 ## Script interpreter call.
 <%
@@ -19,11 +27,23 @@
     function_call_args = []
     for handle_parameter in attribute.handle_parameters:
         function_call_args.append(handle_parameter.accessor)
-    # For Watchdog related properties, empty string is passed for "lines" parameter 
+    # For Watchdog related properties, empty string is passed for "lines" parameter
     if attribute.python_class_name == "Watchdog":
         function_call_args.append("\"\"")
     function_call_args.append(hex(attribute.id))
 %>
+## For read/write string attributes in InStream and OutStream, buffer_size is passed as an argument.
+%if attribute.access == "read" or attribute.access == "write":
+    %if attribute.ctypes_data_type == 'ctypes.c_char_p':
+        %if attribute.python_class_name in ["InStream", "OutStream"]:
+<%
+        function_call_args.append("buffer_size")
+%>\
+        buffer_size = self.get_channels_buffer_size()
+\
+        %endif
+    %endif
+%endif
 \
         val = self._interpreter.get_${generic_attribute_func}(${', '.join(function_call_args)})
 \
@@ -48,6 +68,8 @@
         %else:
         return ${object_type}(${', '.join(object_constructor_args)}, self._interpreter)
         %endif
+    %elif attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
+        return pathlib.Path(val) if val else None
     %elif attribute.is_object and attribute.is_list:
 <%
             object_constructor_args = []

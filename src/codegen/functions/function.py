@@ -1,4 +1,5 @@
 """Structure for storing function metadata from scrapigen."""
+
 from codegen.functions.adaptor_parameter import AdaptorParameter
 from codegen.functions.parameter import Parameter as FunctionParameter
 from codegen.properties.parameter import Parameter

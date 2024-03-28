@@ -1,4 +1,5 @@
 ﻿"""Example of AI voltage sw operation."""
+
 import pprint
 
 import nidaqmx

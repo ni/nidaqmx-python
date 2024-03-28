@@ -1,10 +1,10 @@
 """Example of CO pulse time operation."""
+
 import time
 
 import nidaqmx
 from nidaqmx.constants import AcquisitionType
 from nidaqmx.types import CtrTime
-
 
 with nidaqmx.Task() as task:
     task.co_channels.add_co_pulse_chan_time("Dev1/ctr1", low_time=0.01, high_time=0.01)

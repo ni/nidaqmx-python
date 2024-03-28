@@ -1,4 +1,5 @@
 """Tests for validating invalid read functionality."""
+
 # import numpy
 # import pytest
 # import random
@@ -6,7 +7,7 @@
 # import nidaqmx
 # from nidaqmx.errors import DaqError
 # from nidaqmx.utils import flatten_channel_string
-# from .fixtures import any_x_series_device
+# from .fixtures import sim_6363_device
 # from tests.helpers import generate_random_seed
 # from tests.legacy.test_read_write import TestDAQmxIOBase
 
@@ -14,15 +15,15 @@
 # class TestInvalidReads(TestReadWriteBase):
 
 # @pytest.mark.parametrize('seed', [generate_random_seed()])
-# def test_one_chan_read_for_n_chan_task(self, task, any_x_series_device, seed):
+# def test_one_chan_read_for_n_chan_task(self, task, sim_6363_device, seed):
 #     # Reset the pseudorandom number generator with seed.
 #     random.seed(seed)
 #
 #     number_of_channels = random.randint(
-#         2, len(any_x_series_device.ai_physical_chans))
+#         2, len(sim_6363_device.ai_physical_chans))
 #
 #     ai_channels = random.sample(
-#         any_x_series_device.ai_physical_chans, number_of_channels)
+#         sim_6363_device.ai_physical_chans, number_of_channels)
 #
 #     task.ai_channels.add_ai_voltage_chan(
 #         flatten_channel_string([c.name for c in ai_channels]),
@@ -33,11 +34,11 @@
 #     assert e.value.error_code == -200523
 
 # @pytest.mark.parametrize('seed', [generate_random_seed()])
-# def test_numpy_read_for_counter_pulse_task(self, task, any_x_series_device, seed):
+# def test_numpy_read_for_counter_pulse_task(self, task, sim_6363_device, seed):
 #     # Reset the pseudorandom number generator with seed.
 #     random.seed(seed)
 #
-#     counter = random.choice(self._get_device_counters(any_x_series_device))
+#     counter = random.choice(self._get_device_counters(sim_6363_device))
 #
 #     task.ci_channels.add_ci_pulse_chan_freq(counter)
 #
@@ -46,15 +47,15 @@
 #     assert e.value.error_code == -1
 #
 # @pytest.mark.parametrize('seed', [generate_random_seed()])
-# def test_numpy_read_incorrectly_shaped_data(self, task, any_x_series_device, seed):
+# def test_numpy_read_incorrectly_shaped_data(self, task, sim_6363_device, seed):
 #     # Reset the pseudorandom number generator with seed.
 #     random.seed(seed)
 #
 #     # Randomly select physical channels to test.
 #     number_of_channels = random.randint(
-#         2, len(any_x_series_device.ai_physical_chans))
+#         2, len(sim_6363_device.ai_physical_chans))
 #     channels_to_test = random.sample(
-#         any_x_series_device.ai_physical_chans, number_of_channels)
+#         sim_6363_device.ai_physical_chans, number_of_channels)
 #     number_of_samples = random.randint(50, 100)
 #
 #     task.ai_channels.add_ai_voltage_chan(

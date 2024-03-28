@@ -1,6 +1,6 @@
 """Example of AO voltage sw operation."""
-import nidaqmx
 
+import nidaqmx
 
 with nidaqmx.Task() as task:
     task.ao_channels.add_ao_voltage_chan("Dev1/ao0")
