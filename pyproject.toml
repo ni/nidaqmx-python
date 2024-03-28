@@ -40,12 +40,13 @@ deprecation = ">=2.1"
 # Documentation, must be in main dependencies (but optional) list for
 # readthedocs integration.
 # See https://github.com/readthedocs/readthedocs.org/issues/4912.
-Sphinx = {version="^4.3", optional=true}
-sphinx_rtd_theme = {version="^1.0", optional=true}
+Sphinx = {version=">=5.0", optional=true}
+sphinx_rtd_theme = {version=">=1.0", optional=true}
 grpcio = {version=">=1.49.0,<2.0", optional = true}
 protobuf = { version = "^4.21", optional = true }
 hightime = "^0.2.1"
-click = ">=8.0.0"
+tzlocal = "^5.0"
+python-decouple = ">=3.8"
 
 [tool.poetry.extras]
 docs = ["sphinx", "sphinx_rtd_theme"]
@@ -72,9 +73,6 @@ pytest-cov = ">=4.0"
 pytest-mock = ">=3.0"
 pykka = ">=3.0"
 tox = ">=3.24"
-
-[tool.poetry.scripts]
-nidaqmx = 'nidaqmx.__main__:main'
 
 [tool.black]
 line-length = 100
@@ -112,13 +110,23 @@ build-backend = "poetry.masonry.api"
 
 [tool.mypy]
 check_untyped_defs = true
+namespace_packages = true
 plugins = "numpy.typing.mypy_plugin"
+warn_redundant_casts = true
+warn_unreachable = true
+warn_unused_configs = true
 
 [[tool.mypy.overrides]]
 module = [
-  "deprecation",
+  # https://github.com/HBNetwork/python-decouple/issues/122 - Add support for type stubs
+  "decouple.*",
+  # https://github.com/briancurtin/deprecation/issues/56 - Add type information (PEP 561)
+  "deprecation.*",
   "grpc.experimental.*",
+  # https://github.com/ni/hightime/issues/4 - Add type annotations
+  "hightime.*",
   "importlib_metadata",
-  "mako.*"
+  "mako.*",
+  "nidaqmx.*",
 ]
 ignore_missing_imports = true
