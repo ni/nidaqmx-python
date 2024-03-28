@@ -1,4 +1,5 @@
 """Tests for validating analog read and write operation."""
+
 import random
 import time
 

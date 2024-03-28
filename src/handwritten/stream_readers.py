@@ -1,3 +1,4 @@
+from typing import Optional, Tuple
 import numpy
 from nidaqmx import DaqError
 
@@ -68,7 +69,7 @@ class ChannelReaderBase:
         channels_to_read = self._in_stream.channels_to_read
         number_of_channels = len(channels_to_read.channel_names)
 
-        array_shape = None
+        array_shape: Optional[Tuple[int, ...]] = None
         if is_many_chan:
             if is_many_samp:
                 array_shape = (number_of_channels,
@@ -113,7 +114,7 @@ class ChannelReaderBase:
         number_of_channels = len(channels_to_read.channel_names)
         number_of_lines = self._in_stream.di_num_booleans_per_chan
 
-        array_shape = None
+        array_shape: Optional[Tuple[int, ...]] = None
         if is_many_chan:
             if is_many_line:
                 array_shape = (number_of_channels, number_of_lines)

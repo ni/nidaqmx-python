@@ -1,4 +1,5 @@
 ﻿"""Example for reading digital signal."""
+
 import pprint
 
 import nidaqmx

@@ -1,4 +1,5 @@
 """Example for reading singals for every n samples."""
+
 import pprint
 
 import nidaqmx

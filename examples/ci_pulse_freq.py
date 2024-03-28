@@ -1,4 +1,5 @@
 """Example of CI pulse frequency operation."""
+
 import pprint
 
 import nidaqmx

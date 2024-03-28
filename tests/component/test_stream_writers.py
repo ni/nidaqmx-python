@@ -9,18 +9,18 @@ from nidaqmx.stream_writers import AnalogMultiChannelWriter, AnalogSingleChannel
 
 @pytest.fixture
 def ao_single_channel_task(
-    task: nidaqmx.Task, any_x_series_device: nidaqmx.system.Device
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> nidaqmx.Task:
-    task.ao_channels.add_ao_voltage_chan(any_x_series_device.ao_physical_chans[0].name)
+    task.ao_channels.add_ao_voltage_chan(sim_6363_device.ao_physical_chans[0].name)
     return task
 
 
 @pytest.fixture
 def ao_multi_channel_task(
-    task: nidaqmx.Task, any_x_series_device: nidaqmx.system.Device
+    task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device
 ) -> nidaqmx.Task:
-    task.ao_channels.add_ao_voltage_chan(any_x_series_device.ao_physical_chans[0].name)
-    task.ao_channels.add_ao_voltage_chan(any_x_series_device.ao_physical_chans[1].name)
+    task.ao_channels.add_ao_voltage_chan(sim_6363_device.ao_physical_chans[0].name)
+    task.ao_channels.add_ao_voltage_chan(sim_6363_device.ao_physical_chans[1].name)
     return task
 
 

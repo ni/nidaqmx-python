@@ -829,6 +829,11 @@ class NiDAQmxStub(object):
                 request_serializer=nidaqmx__pb2.GetExportedSignalAttributeUInt32Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.GetExportedSignalAttributeUInt32Response.FromString,
                 )
+        self.GetExtCalLastDateAndTime = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/GetExtCalLastDateAndTime',
+                request_serializer=nidaqmx__pb2.GetExtCalLastDateAndTimeRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.GetExtCalLastDateAndTimeResponse.FromString,
+                )
         self.GetFirstSampClkWhen = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/GetFirstSampClkWhen',
                 request_serializer=nidaqmx__pb2.GetFirstSampClkWhenRequest.SerializeToString,
@@ -1448,6 +1453,11 @@ class NiDAQmxStub(object):
                 '/nidaqmx_grpc.NiDAQmx/ResetWriteAttribute',
                 request_serializer=nidaqmx__pb2.ResetWriteAttributeRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ResetWriteAttributeResponse.FromString,
+                )
+        self.RestoreLastExtCalConst = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/RestoreLastExtCalConst',
+                request_serializer=nidaqmx__pb2.RestoreLastExtCalConstRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.RestoreLastExtCalConstResponse.FromString,
                 )
         self.SaveGlobalChan = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/SaveGlobalChan',
@@ -2977,6 +2987,12 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetExtCalLastDateAndTime(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def GetFirstSampClkWhen(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -3716,6 +3732,12 @@ class NiDAQmxServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ResetWriteAttribute(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RestoreLastExtCalConst(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -5193,6 +5215,11 @@ def add_NiDAQmxServicer_to_server(servicer, server):
                     request_deserializer=nidaqmx__pb2.GetExportedSignalAttributeUInt32Request.FromString,
                     response_serializer=nidaqmx__pb2.GetExportedSignalAttributeUInt32Response.SerializeToString,
             ),
+            'GetExtCalLastDateAndTime': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetExtCalLastDateAndTime,
+                    request_deserializer=nidaqmx__pb2.GetExtCalLastDateAndTimeRequest.FromString,
+                    response_serializer=nidaqmx__pb2.GetExtCalLastDateAndTimeResponse.SerializeToString,
+            ),
             'GetFirstSampClkWhen': grpc.unary_unary_rpc_method_handler(
                     servicer.GetFirstSampClkWhen,
                     request_deserializer=nidaqmx__pb2.GetFirstSampClkWhenRequest.FromString,
@@ -5812,6 +5839,11 @@ def add_NiDAQmxServicer_to_server(servicer, server):
                     servicer.ResetWriteAttribute,
                     request_deserializer=nidaqmx__pb2.ResetWriteAttributeRequest.FromString,
                     response_serializer=nidaqmx__pb2.ResetWriteAttributeResponse.SerializeToString,
+            ),
+            'RestoreLastExtCalConst': grpc.unary_unary_rpc_method_handler(
+                    servicer.RestoreLastExtCalConst,
+                    request_deserializer=nidaqmx__pb2.RestoreLastExtCalConstRequest.FromString,
+                    response_serializer=nidaqmx__pb2.RestoreLastExtCalConstResponse.SerializeToString,
             ),
             'SaveGlobalChan': grpc.unary_unary_rpc_method_handler(
                     servicer.SaveGlobalChan,
@@ -9140,6 +9172,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def GetExtCalLastDateAndTime(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/GetExtCalLastDateAndTime',
+            nidaqmx__pb2.GetExtCalLastDateAndTimeRequest.SerializeToString,
+            nidaqmx__pb2.GetExtCalLastDateAndTimeResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def GetFirstSampClkWhen(request,
             target,
             options=(),
@@ -11244,6 +11293,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/ResetWriteAttribute',
             nidaqmx__pb2.ResetWriteAttributeRequest.SerializeToString,
             nidaqmx__pb2.ResetWriteAttributeResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def RestoreLastExtCalConst(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/RestoreLastExtCalConst',
+            nidaqmx__pb2.RestoreLastExtCalConstRequest.SerializeToString,
+            nidaqmx__pb2.RestoreLastExtCalConstResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

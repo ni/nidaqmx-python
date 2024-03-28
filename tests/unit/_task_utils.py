@@ -1,4 +1,5 @@
 """Task helper functions."""
+
 from typing import Dict, Sequence
 from unittest.mock import Mock
 

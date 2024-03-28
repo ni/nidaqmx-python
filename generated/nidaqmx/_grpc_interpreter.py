@@ -8,6 +8,7 @@ import warnings
 from typing import Callable, Generic, Optional, TypeVar
 
 import google.protobuf.message
+from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
 import grpc
 import numpy
 
@@ -17,6 +18,7 @@ from nidaqmx._stubs import nidaqmx_pb2 as grpc_types
 from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
 from nidaqmx._stubs import session_pb2 as session_grpc_types
 from nidaqmx.error_codes import DAQmxErrors
+from nidaqmx._grpc_time import convert_time_to_timestamp, convert_timestamp_to_time
 
 _logger = logging.getLogger(__name__)
 
@@ -230,15 +232,15 @@ class GrpcStubInterpreter(BaseInterpreter):
                 trigger_slope_raw=trigger_slope, trigger_level=trigger_level))
 
     def cfg_anlg_multi_edge_ref_trig(
-            self, task, trigger_sources, trigger_slope_array,
-            trigger_level_array, pretrigger_samples):
+            self, task, trigger_sources, pretrigger_samples,
+            trigger_slope_array, trigger_level_array):
         response = self._invoke(
             self._client.CfgAnlgMultiEdgeRefTrig,
             grpc_types.CfgAnlgMultiEdgeRefTrigRequest(
                 task=task, trigger_sources=trigger_sources,
+                pretrigger_samples=pretrigger_samples,
                 trigger_slope_array=trigger_slope_array,
-                trigger_level_array=trigger_level_array,
-                pretrigger_samples=pretrigger_samples))
+                trigger_level_array=trigger_level_array))
 
     def cfg_anlg_multi_edge_start_trig(
             self, task, trigger_sources, trigger_slope_array,
@@ -377,6 +379,13 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, rate=rate, source=source,
                 active_edge_raw=active_edge, sample_mode_raw=sample_mode,
                 samps_per_chan=samps_per_chan))
+
+    def cfg_time_start_trig(self, task, when, timescale):
+        response = self._invoke(
+            self._client.CfgTimeStartTrig,
+            grpc_types.CfgTimeStartTrigRequest(
+                task=task, when=convert_time_to_timestamp(when),
+                timescale_raw=timescale))
 
     def cfg_watchdog_ao_expir_states(
             self, task, channel_names, expir_state_array, output_type_array):
@@ -1654,6 +1663,12 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.DeleteSavedTask,
             grpc_types.DeleteSavedTaskRequest(task_name=task_name))
 
+    def device_supports_cal(self, device_name):
+        response = self._invoke(
+            self._client.DeviceSupportsCal,
+            grpc_types.DeviceSupportsCalRequest(device_name=device_name))
+        return response.cal_supported
+
     def disable_ref_trig(self, task):
         response = self._invoke(
             self._client.DisableRefTrig,
@@ -1696,6 +1711,34 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.GetBufferAttributeUInt32,
             grpc_types.GetBufferAttributeUInt32Request(task=task, attribute_raw=attribute))
+        return response.value
+
+    def get_cal_info_attribute_bool(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetCalInfoAttributeBool,
+            grpc_types.GetCalInfoAttributeBoolRequest(
+                device_name=device_name, attribute_raw=attribute))
+        return response.value
+
+    def get_cal_info_attribute_double(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetCalInfoAttributeDouble,
+            grpc_types.GetCalInfoAttributeDoubleRequest(
+                device_name=device_name, attribute_raw=attribute))
+        return response.value
+
+    def get_cal_info_attribute_string(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetCalInfoAttributeString,
+            grpc_types.GetCalInfoAttributeStringRequest(
+                device_name=device_name, attribute_raw=attribute))
+        return response.value
+
+    def get_cal_info_attribute_uint32(self, device_name, attribute):
+        response = self._invoke(
+            self._client.GetCalInfoAttributeUInt32,
+            grpc_types.GetCalInfoAttributeUInt32Request(
+                device_name=device_name, attribute_raw=attribute))
         return response.value
 
     def get_chan_attribute_bool(self, task, channel, attribute):
@@ -1856,6 +1899,12 @@ class GrpcStubInterpreter(BaseInterpreter):
                 task=task, attribute_raw=attribute))
         return response.value
 
+    def get_ext_cal_last_date_and_time(self, device_name):
+        response = self._invoke(
+            self._client.GetExtCalLastDateAndTime,
+            grpc_types.GetExtCalLastDateAndTimeRequest(device_name=device_name))
+        return response.year, response.month, response.day, response.hour, response.minute
+
     def get_persisted_chan_attribute_bool(self, channel, attribute):
         response = self._invoke(
             self._client.GetPersistedChanAttributeBool,
@@ -1982,7 +2031,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.GetReadAttributeInt32Request(task=task, attribute_raw=attribute))
         return response.value_raw
 
-    def get_read_attribute_string(self, task, attribute):
+    def get_read_attribute_string(self, task, attribute, size_hint=0):
         response = self._invoke(
             self._client.GetReadAttributeString,
             grpc_types.GetReadAttributeStringRequest(task=task, attribute_raw=attribute))
@@ -2027,6 +2076,12 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.GetScaleAttributeStringRequest(
                 scale_name=scale_name, attribute_raw=attribute))
         return response.value
+
+    def get_self_cal_last_date_and_time(self, device_name):
+        response = self._invoke(
+            self._client.GetSelfCalLastDateAndTime,
+            grpc_types.GetSelfCalLastDateAndTimeRequest(device_name=device_name))
+        return response.year, response.month, response.day, response.hour, response.minute
 
     def get_system_info_attribute_string(self, attribute):
         response = self._invoke(
@@ -2172,6 +2227,12 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.GetTrigAttributeStringRequest(task=task, attribute_raw=attribute))
         return response.value
 
+    def get_trig_attribute_timestamp(self, task, attribute):
+        response = self._invoke(
+            self._client.GetTrigAttributeTimestamp,
+            grpc_types.GetTrigAttributeTimestampRequest(task=task, attribute_raw=attribute))
+        return convert_timestamp_to_time(response.value)
+
     def get_trig_attribute_uint32(self, task, attribute):
         response = self._invoke(
             self._client.GetTrigAttributeUInt32,
@@ -2224,7 +2285,7 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.GetWriteAttributeInt32Request(task=task, attribute_raw=attribute))
         return response.value_raw
 
-    def get_write_attribute_string(self, task, attribute):
+    def get_write_attribute_string(self, task, attribute, size_hint=0):
         response = self._invoke(
             self._client.GetWriteAttributeString,
             grpc_types.GetWriteAttributeStringRequest(task=task, attribute_raw=attribute))
@@ -2783,6 +2844,11 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.ResetWriteAttribute,
             grpc_types.ResetWriteAttributeRequest(task=task, attribute_raw=attribute))
 
+    def restore_last_ext_cal_const(self, device_name):
+        response = self._invoke(
+            self._client.RestoreLastExtCalConst,
+            grpc_types.RestoreLastExtCalConstRequest(device_name=device_name))
+
     def save_global_chan(self, task, channel_name, save_as, author, options):
         response = self._invoke(
             self._client.SaveGlobalChan,
@@ -2837,6 +2903,30 @@ class GrpcStubInterpreter(BaseInterpreter):
             self._client.SetBufferAttributeUInt32,
             grpc_types.SetBufferAttributeUInt32Request(
                 task=task, attribute_raw=attribute, value=value))
+
+    def set_cal_info_attribute_bool(self, device_name, attribute, value):
+        response = self._invoke(
+            self._client.SetCalInfoAttributeBool,
+            grpc_types.SetCalInfoAttributeBoolRequest(
+                device_name=device_name, attribute_raw=attribute, value=value))
+
+    def set_cal_info_attribute_double(self, device_name, attribute, value):
+        response = self._invoke(
+            self._client.SetCalInfoAttributeDouble,
+            grpc_types.SetCalInfoAttributeDoubleRequest(
+                device_name=device_name, attribute_raw=attribute, value=value))
+
+    def set_cal_info_attribute_string(self, device_name, attribute, value):
+        response = self._invoke(
+            self._client.SetCalInfoAttributeString,
+            grpc_types.SetCalInfoAttributeStringRequest(
+                device_name=device_name, attribute_raw=attribute, value=value))
+
+    def set_cal_info_attribute_uint32(self, device_name, attribute, value):
+        response = self._invoke(
+            self._client.SetCalInfoAttributeUInt32,
+            grpc_types.SetCalInfoAttributeUInt32Request(
+                device_name=device_name, attribute_raw=attribute, value=value))
 
     def set_chan_attribute_bool(self, task, channel, attribute, value):
         response = self._invoke(
@@ -3118,6 +3208,13 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.SetTrigAttributeStringRequest(
                 task=task, attribute_raw=attribute, value=value))
 
+    def set_trig_attribute_timestamp(self, task, attribute, value):
+        response = self._invoke(
+            self._client.SetTrigAttributeTimestamp,
+            grpc_types.SetTrigAttributeTimestampRequest(
+                task=task, attribute_raw=attribute,
+                value=convert_time_to_timestamp(value)))
+
     def set_trig_attribute_uint32(self, task, attribute, value):
         response = self._invoke(
             self._client.SetTrigAttributeUInt32,
@@ -3232,6 +3329,14 @@ class GrpcStubInterpreter(BaseInterpreter):
         response = self._invoke(
             self._client.UnreserveNetworkDevice,
             grpc_types.UnreserveNetworkDeviceRequest(device_name=device_name))
+
+    def wait_for_valid_timestamp(self, task, timestamp_event, timeout):
+        response = self._invoke(
+            self._client.WaitForValidTimestamp,
+            grpc_types.WaitForValidTimestampRequest(
+                task=task, timestamp_event_raw=timestamp_event,
+                timeout=timeout))
+        return convert_timestamp_to_time(response.timestamp)
 
     def wait_until_task_done(self, task, time_to_wait):
         response = self._invoke(

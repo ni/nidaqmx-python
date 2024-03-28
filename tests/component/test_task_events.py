@@ -18,8 +18,8 @@ from tests._event_utils import (
 
 
 @pytest.fixture
-def ai_task(task: nidaqmx.Task, any_x_series_device: nidaqmx.system.Device) -> nidaqmx.Task:
-    task.ai_channels.add_ai_voltage_chan(any_x_series_device.ai_physical_chans[0].name)
+def ai_task(task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device) -> nidaqmx.Task:
+    task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
     return task
 
 
@@ -32,8 +32,8 @@ def ai_task_with_real_device(
 
 
 @pytest.fixture
-def ao_task(task: nidaqmx.Task, any_x_series_device: nidaqmx.system.Device) -> nidaqmx.Task:
-    task.ao_channels.add_ao_voltage_chan(any_x_series_device.ao_physical_chans[0].name)
+def ao_task(task: nidaqmx.Task, sim_6363_device: nidaqmx.system.Device) -> nidaqmx.Task:
+    task.ao_channels.add_ao_voltage_chan(sim_6363_device.ao_physical_chans[0].name)
     return task
 
 
@@ -523,17 +523,22 @@ def test___event_callback_that_raises_exceptions___run_finite_acquisition___exce
         caplog, "handle_every_n_samples_event", every_n_samples_event_count
     )
     assert all(
-        _exception_matches(record.exc_info[1], done_event_exception)
+        _exception_matches(_get_exception(record), done_event_exception)
         for record in done_event_records
     )
     assert all(
-        _exception_matches(record.exc_info[1], every_n_samples_event_exception)
+        _exception_matches(_get_exception(record), every_n_samples_event_exception)
         for record in every_n_samples_event_records
     )
 
 
-def _exception_matches(e1: Exception, e2: Exception) -> bool:
+def _exception_matches(e1: BaseException, e2: BaseException) -> bool:
     return type(e1) == type(e2) and e1.args == e2.args
+
+
+def _get_exception(record: LogRecord) -> BaseException:
+    assert record.exc_info and record.exc_info[1]
+    return record.exc_info[1]
 
 
 def _wait_for_log_records(

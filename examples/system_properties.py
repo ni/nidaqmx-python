@@ -1,4 +1,5 @@
 """Examples for using system properties in DAQmx."""
+
 import nidaqmx
 
 local_system = nidaqmx.system.System.local()

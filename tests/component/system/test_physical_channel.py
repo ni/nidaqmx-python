@@ -45,9 +45,9 @@ def test___physical_channels_with_different_names___hash___not_equal(
 
 
 def test___invalid_bitstream___write_to_teds_from_array___throws_data_error(
-    any_x_series_device,
+    sim_6363_device,
 ):
-    phys_chan = any_x_series_device.ai_physical_chans["ai0"]
+    phys_chan = sim_6363_device.ai_physical_chans["ai0"]
 
     with pytest.raises(nidaqmx.DaqError) as exc_info:
         phys_chan.write_to_teds_from_array([1, 2, 3, 4])
@@ -56,9 +56,9 @@ def test___invalid_bitstream___write_to_teds_from_array___throws_data_error(
 
 
 def test___valid_bitstream___write_to_teds_from_array___throws_config_or_detection_error(
-    any_x_series_device,
+    sim_6363_device,
 ):
-    phys_chan = any_x_series_device.ai_physical_chans["ai0"]
+    phys_chan = sim_6363_device.ai_physical_chans["ai0"]
 
     with pytest.raises(nidaqmx.DaqError) as exc_info:
         phys_chan.write_to_teds_from_array(VALUES_IN_TED)
@@ -70,9 +70,9 @@ def test___valid_bitstream___write_to_teds_from_array___throws_config_or_detecti
 
 
 def test___invalid_file_path___write_to_teds_from_file___throws_data_error(
-    any_x_series_device,
+    sim_6363_device,
 ):
-    phys_chan = any_x_series_device.ai_physical_chans["ai0"]
+    phys_chan = sim_6363_device.ai_physical_chans["ai0"]
 
     with pytest.raises(nidaqmx.DaqError) as exc_info:
         phys_chan.write_to_teds_from_file()
@@ -81,12 +81,12 @@ def test___invalid_file_path___write_to_teds_from_file___throws_data_error(
 
 
 def test___valid_file_path___write_to_teds_from_array___throws_config_or_detection_error(
-    any_x_series_device, teds_file_path
+    sim_6363_device, voltage_teds_file_path
 ):
-    phys_chan = any_x_series_device.ai_physical_chans["ai0"]
+    phys_chan = sim_6363_device.ai_physical_chans["ai0"]
 
     with pytest.raises(nidaqmx.DaqError) as exc_info:
-        phys_chan.write_to_teds_from_file(str(teds_file_path))
+        phys_chan.write_to_teds_from_file(voltage_teds_file_path)
 
     assert exc_info.value.error_code in [
         DAQmxErrors.CANT_CONFIGURE_TEDS_FOR_CHAN,

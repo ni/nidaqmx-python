@@ -1,5 +1,6 @@
 import re
-from typing import Optional
+from dataclasses import dataclass
+from typing import List, Optional
 
 from nidaqmx.errors import DaqError
 from nidaqmx.grpc_session_options import GrpcSessionOptions
@@ -18,7 +19,25 @@ _invalid_range_syntax_message = (
     "objects.")
 
 
-def flatten_channel_string(channel_names):
+@dataclass
+class _ChannelInfo:
+    base_name: str = ""
+    start_index: int = -1
+    start_index_str: str = ""
+    end_index: int = -1
+    end_index_str: str = ""
+
+    def to_flattened_name(self) -> str:
+        """Convert the channel info to a flattened channel name."""
+        if self.start_index == -1:
+            return self.base_name
+        elif self.start_index == self.end_index:
+            return f"{self.base_name}{self.start_index_str}"
+        else:
+            return f"{self.base_name}{self.start_index_str}:{self.end_index_str}"
+
+
+def flatten_channel_string(channel_names: List[str]) -> str:
     """
     Converts a list of channel names to a comma-delimited list of names.
 
@@ -34,13 +53,9 @@ def flatten_channel_string(channel_names):
     where this approximation is a problem, we can revisit this in the future.
 
     Args:
-        channel_names (List[str]): The list of physical or virtual channel
-            names.
+        channel_names: The list of physical or virtual channel names.
     Returns:
-        str:
-        
-        The resulting comma-delimited list of physical or virtual channel
-        names.
+        The resulting comma-delimited list of physical or virtual channel names.
     """
     unflattened_channel_names = []
     for channel_name in channel_names:
@@ -48,25 +63,14 @@ def flatten_channel_string(channel_names):
 
     # Go through the channel names and flatten them.
     flattened_channel_list = []
-    previous = {
-        'base_name': '',
-        'start_index': -1,
-        'end_index': -1
-        }
+    previous = _ChannelInfo()
     for channel_name in unflattened_channel_names:
         m = re.search('(.*[^0-9])?([0-9]+)$', channel_name)
         if not m:
             # If the channel name doesn't end in a valid number, just use the
             # channel name as-is.
-            flattened_channel_list.append(
-                _channel_info_to_flattened_name(previous))
-            previous = {
-                'base_name': channel_name,
-                'start_index': -1,
-                'start_index_str': "",
-                'end_index': -1,
-                'end_index_str': "",
-                }
+            flattened_channel_list.append(previous.to_flattened_name())
+            previous = _ChannelInfo(channel_name)
         else:
             # If the channel name ends in a valid number, we may need to flatten
             # this channel with subsequent channels in the x:y format.
@@ -74,55 +78,38 @@ def flatten_channel_string(channel_names):
             current_index_str = m.group(2)
             current_index = int(current_index_str)
 
-            if current_base_name == previous['base_name'] and (
-                (current_index == previous['end_index'] + 1 and
-                 previous['end_index'] >= previous['start_index']) or
-                (current_index == previous['end_index'] - 1 and
-                 previous['end_index'] <= previous['start_index'])):
+            if current_base_name == previous.base_name and (
+                (current_index == previous.end_index + 1 and
+                 previous.end_index >= previous.start_index) or
+                (current_index == previous.end_index - 1 and
+                 previous.end_index <= previous.start_index)):
                 # If the current channel name has the same base name as the
                 # previous and it's end index differs by 1, change the end
                 # index value. It gets flattened later.
-                previous['end_index'] = current_index
-                previous['end_index_str'] = current_index_str
+                previous.end_index = current_index
+                previous.end_index_str = current_index_str
             else:
                 # If the current channel name has the same base name as the
                 # previous or it's end index differs by more than 1, it doesn't
                 # get flattened with the previous channel.
-                flattened_channel_list.append(
-                    _channel_info_to_flattened_name(previous))
-                previous = {
-                    'base_name': current_base_name,
-                    'start_index': current_index,
-                    'start_index_str': current_index_str,
-                    'end_index': current_index,
-                    'end_index_str': current_index_str,
-                    }
+                flattened_channel_list.append(previous.to_flattened_name())
+                previous = _ChannelInfo(
+                    current_base_name, 
+                    current_index, 
+                    current_index_str, 
+                    current_index, 
+                    current_index_str
+                )
 
     # Convert the final channel dictionary to a flattened string
-    flattened_channel_list.append(
-        _channel_info_to_flattened_name(previous))
+    flattened_channel_list.append(previous.to_flattened_name())
 
     # Remove empty strings in list, convert to comma-delimited string, then trim
     # whitespace.
     return ','.join([_f for _f in flattened_channel_list if _f]).strip()
 
-    
-def _channel_info_to_flattened_name(channel_info):
-    """
-    Simple method to generate a flattened channel name.
-    """
-    if channel_info['start_index'] == -1:
-        return channel_info['base_name']
-    elif channel_info['start_index'] == channel_info['end_index']:
-        return '{}{}'.format(channel_info['base_name'],
-                               channel_info['start_index_str'])
-    else:
-        return '{}{}:{}'.format(channel_info['base_name'],
-                                   channel_info['start_index_str'],
-                                   channel_info['end_index_str'])
-
                                    
-def unflatten_channel_string(channel_names):
+def unflatten_channel_string(channel_names: str) -> List[str]:
     """
     Converts a comma-delimited list of channel names to a list of names.
 
@@ -138,13 +125,12 @@ def unflatten_channel_string(channel_names):
     where this approximation is a problem, we can revisit this in the future.
 
     Args:
-        channel_names (str): The list or range of physical or virtual channels.
+        channel_names: The list or range of physical or virtual channels.
         
     Returns:
-        List[str]: 
+        The list of physical or virtual channel names. 
         
-        The list of physical or virtual channel names. Each element of the 
-        list contains a single channel.
+        Each element of the list contains a single channel.
     """
     channel_list_to_return = []
     channel_list = [c for c in channel_names.strip().split(',') if c]

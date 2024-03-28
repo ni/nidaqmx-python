@@ -5,6 +5,7 @@
         get_argument_types,
         get_output_param_with_ivi_dance_mechanism,
         get_output_params,
+        INCLUDE_SIZE_HINT_FUNCTIONS,
     )
     from codegen.utilities.function_helpers import instantiate_explicit_output_param
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
@@ -19,7 +20,7 @@
                     cfunc.argtypes = [
                         ${', '.join(get_argument_types(function)) | wrap(24, 24)}]
 
-        temp_size = 0
+        temp_size = ${'size_hint' if function.function_name in INCLUDE_SIZE_HINT_FUNCTIONS else '0'}
         while True:
             ${instantiate_explicit_output_param(explicit_output_param)}
             size_or_code = cfunc(
