@@ -41,7 +41,7 @@ def _parse_version(version: str) -> Tuple[int, ...]:
         return tuple(int(part) for part in version.split("."))
     except ValueError as e:
         _logger.info("Failed to parse version.", exc_info=True)
-        raise click.ClickException(f"Invalid version format found:{str(e)}") from e
+        raise click.ClickException(f"Invalid version number '{version}'.") from e
 
 
 def _get_daqmx_installed_version() -> Optional[str]:
@@ -72,17 +72,17 @@ def _get_daqmx_installed_version() -> Optional[str]:
             return product_version
         return None
     except FileNotFoundError:
-        _logger.info("No existing NI-DAQmx installation found.", exc_info=False)
+        _logger.info("No existing NI-DAQmx installation found.")
         return None
     except PermissionError as e:
         _logger.info("Failed to read the registry key.", exc_info=True)
         raise click.ClickException(
-            f"Permission denied while trying to read the registry key"
+            f"Permission denied while getting the installed NI-DAQmx version.\nDetails: {e}"
         ) from e
     except OSError as e:
         _logger.info("Failed to read the registry key.", exc_info=True)
         raise click.ClickException(
-            f"An OS error occurred while trying to read the registry key"
+            f"An OS error occurred while getting the installed NI-DAQmx version.\nDetails: {e}"
         ) from e
 
 
@@ -108,8 +108,8 @@ def _multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> Gen
     finally:
         if delete:
             try:
-                os.unlink(temp_file.name)
                 _logger.debug("Deleting temp file: %s", temp_file.name)
+                os.unlink(temp_file.name)
             except ValueError as e:
                 _logger.info("Failed to delete temporary file.", exc_info=True)
                 raise click.ClickException(f"Failed to delete temporary file:{str(e)}") from e
@@ -137,7 +137,7 @@ def _load_data(json_data: str) -> Tuple[Optional[str], Optional[str]]:
         metadata = json.loads(json_data).get("Windows", [])
     except json.JSONDecodeError as e:
         _logger.info("Failed to parse the json data.", exc_info=True)
-        raise click.ClickException(f"Failed to parse the json data:{str(e)}") from e
+        raise click.ClickException(f"Failed to parse the driver metadata.\nDetails: {e}") from e
 
     for metadata_entry in metadata:
         location: Optional[str] = metadata_entry.get("Location")
@@ -155,14 +155,16 @@ def _get_driver_details() -> Tuple[Optional[str], Optional[str]]:
     """
     try:
         with pkg_resources.open_text(__package__, METADATA_FILE) as json_file:
-            _logger.debug("Opening the metadatafile %s.", METADATA_FILE)
+            _logger.debug("Opening the metadata file %s.", METADATA_FILE)
             location, version = _load_data(json_file.read())
         return location, version
 
+    except click.ClickException:
+        raise
     except Exception as e:
-        _logger.info("Failed to parse version.", exc_info=True)
+        _logger.info("Failed to get driver metadata.", exc_info=True)
         raise click.ClickException(
-            f"An error occurred while trying to fetch driver details:{str(e)}"
+            f"An error occurred while getting the driver metadata.\nDetails: {e}"
         ) from e
 
 
@@ -181,14 +183,14 @@ def _install_daqmx_driver(download_url: str) -> None:
     except subprocess.CalledProcessError as e:
         _logger.info("Failed to installed NI-DAQmx driver.", exc_info=True)
         raise click.ClickException(
-            f"An error occurred while installing NI-DAQmx driver. Command returned non-zero exit status."
+            f"An error occurred while installing the NI-DAQmx driver. Command returned non-zero exit status '{e.returncode}'."
         ) from e
     except urllib.error.URLError as e:
         _logger.info("Failed to download NI-DAQmx driver.", exc_info=True)
-        raise click.ClickException(f"Failed to download NI-DAQmx driver:{str(e)}") from e
+        raise click.ClickException(f"Failed to download the NI-DAQmx driver.\nDetails: {e}") from e
     except Exception as e:
-        _logger.info("Failed to download NI-DAQmx driver.", exc_info=True)
-        raise click.ClickException(f"Failed to install NI-DAQmx driver:{str(e)}") from e
+        _logger.info("Failed to install NI-DAQmx driver.", exc_info=True)
+        raise click.ClickException(f"Failed to install the NI-DAQmx driver.\nDetails: {e}") from e
 
 
 def _ask_user_confirmation(user_message: str) -> bool:
@@ -218,7 +220,7 @@ def _confirm_and_upgrade_daqmx_driver(
     installed_parts: Tuple[int, ...] = _parse_version(installed_version)
     if installed_parts >= latest_parts:
         print(
-            f"Installed NI-DAQmx version ({installed_version}) is up to date."
+            f"Installed NI-DAQmx version ({installed_version}) is up to date. (Expected {latest_version} or newer.)"
         )
         return
     is_upgrade = _ask_user_confirmation(
@@ -241,7 +243,7 @@ def _install_daqmx_windows_driver() -> None:
         if installed_version and latest_version:
             _confirm_and_upgrade_daqmx_driver(latest_version, installed_version, download_url)
         else:
-        _install_daqmx_driver(download_url)
+            _install_daqmx_driver(download_url)
 
 
 def installdriver() -> None:
@@ -254,9 +256,11 @@ def installdriver() -> None:
             _logger.info("Windows platform detected")
             _install_daqmx_windows_driver()
         else:
-            raise click.ClickException(f"installdriver command is supported only on Windows.")
+            raise click.ClickException(f"The 'installdriver' command is supported only on Windows.")
+    except click.ClickException:
+        raise
     except Exception as e:
-        _logger.info("Failed to download NI-DAQmx driver.", exc_info=True)
+        _logger.info("Failed to install driver.", exc_info=True)
         raise click.ClickException(
-            f"An error occurred during the installation of the driver :{str(e)}"
+            f"An error occurred during the installation of the NI-DAQmx driver.\nDetails: {e}"
         ) from e
