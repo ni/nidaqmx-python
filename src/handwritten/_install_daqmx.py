@@ -254,9 +254,11 @@ def installdriver() -> None:
             _logger.info("Windows platform detected")
             _install_daqmx_windows_driver()
         else:
-            raise click.ClickException(f"installdriver command is supported only on Windows.")
+            raise click.ClickException(f"The 'installdriver' command is supported only on Windows.")
+    except click.ClickException:
+        raise
     except Exception as e:
-        _logger.info("Failed to download NI-DAQmx driver.", exc_info=True)
+        _logger.info("Failed to install driver.", exc_info=True)
         raise click.ClickException(
-            f"An error occurred during the installation of the driver :{str(e)}"
+            f"An error occurred during the installation of the NI-DAQmx driver.\nDetails: {e}"
         ) from e
