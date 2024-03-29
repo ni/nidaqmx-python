@@ -181,14 +181,14 @@ def _install_daqmx_driver(download_url: str) -> None:
     except subprocess.CalledProcessError as e:
         _logger.info("Failed to installed NI-DAQmx driver.", exc_info=True)
         raise click.ClickException(
-            f"An error occurred while installing NI-DAQmx driver. Command returned non-zero exit status."
+            f"An error occurred while installing the NI-DAQmx driver. Command returned non-zero exit status '{e.returncode}'."
         ) from e
     except urllib.error.URLError as e:
         _logger.info("Failed to download NI-DAQmx driver.", exc_info=True)
-        raise click.ClickException(f"Failed to download NI-DAQmx driver:{str(e)}") from e
+        raise click.ClickException(f"Failed to download the NI-DAQmx driver.\nDetails: {e}") from e
     except Exception as e:
-        _logger.info("Failed to download NI-DAQmx driver.", exc_info=True)
-        raise click.ClickException(f"Failed to install NI-DAQmx driver:{str(e)}") from e
+        _logger.info("Failed to install NI-DAQmx driver.", exc_info=True)
+        raise click.ClickException(f"Failed to install the NI-DAQmx driver.\nDetails: {e}") from e
 
 
 def _ask_user_confirmation(user_message: str) -> bool:
