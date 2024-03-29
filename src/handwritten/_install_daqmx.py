@@ -70,6 +70,7 @@ def _get_daqmx_installed_version() -> Optional[str]:
                 product_version,
             )
             return product_version
+        return None
     except FileNotFoundError:
         _logger.info("No existing NI-DAQmx installation found.", exc_info=False)
         return None
@@ -144,7 +145,7 @@ def _load_data(json_data: str) -> Tuple[Optional[str], Optional[str]]:
         _logger.debug("From metadata file found location %s and version %s.", location, version)
         if location and version:
             return location, version
-    raise click.ClickException(f"Unable to fetch driver details:{str(e)}")
+    raise click.ClickException(f"Unable to fetch driver details")
 
 
 def _get_driver_details() -> Tuple[Optional[str], Optional[str]]:
@@ -234,9 +235,12 @@ def _install_daqmx_windows_driver() -> None:
     """
     installed_version = _get_daqmx_installed_version()
     download_url, latest_version = _get_driver_details()
-    if installed_version:
-        _confirm_and_upgrade_daqmx_driver(latest_version, installed_version, download_url)
+    if not download_url:
+        raise click.ClickException(f"Failed to fetch the download url.")
     else:
+        if installed_version and latest_version:
+            _confirm_and_upgrade_daqmx_driver(latest_version, installed_version, download_url)
+        else:
         _install_daqmx_driver(download_url)
 
 
