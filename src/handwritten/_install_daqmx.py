@@ -77,12 +77,12 @@ def _get_daqmx_installed_version() -> Optional[str]:
     except PermissionError as e:
         _logger.info("Failed to read the registry key.", exc_info=True)
         raise click.ClickException(
-            f"Permission denied while trying to read the registry key"
+            f"Permission denied while getting the installed NI-DAQmx version.\nDetails: {e}"
         ) from e
     except OSError as e:
         _logger.info("Failed to read the registry key.", exc_info=True)
         raise click.ClickException(
-            f"An OS error occurred while trying to read the registry key"
+            f"An OS error occurred while getting the installed NI-DAQmx version.\nDetails: {e}"
         ) from e
 
 
