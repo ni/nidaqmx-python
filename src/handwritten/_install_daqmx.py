@@ -159,6 +159,8 @@ def _get_driver_details() -> Tuple[Optional[str], Optional[str]]:
             location, version = _load_data(json_file.read())
         return location, version
 
+    except click.ClickException:
+        raise
     except Exception as e:
         _logger.info("Failed to get driver metadata.", exc_info=True)
         raise click.ClickException(
