@@ -112,7 +112,7 @@ def _multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> Gen
                 os.unlink(temp_file.name)
             except ValueError as e:
                 _logger.info("Failed to delete temporary file.", exc_info=True)
-                raise click.ClickException(f"Failed to delete temporary file:{str(e)}") from e
+                raise click.ClickException(f"Failed to delete temporary file '{temp_file.name}'.\nDetails: {e}") from e
 
 
 def _load_data(json_data: str) -> Tuple[Optional[str], Optional[str]]:
