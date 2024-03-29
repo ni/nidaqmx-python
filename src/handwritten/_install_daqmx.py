@@ -160,9 +160,9 @@ def _get_driver_details() -> Tuple[Optional[str], Optional[str]]:
         return location, version
 
     except Exception as e:
-        _logger.info("Failed to parse version.", exc_info=True)
+        _logger.info("Failed to get driver metadata.", exc_info=True)
         raise click.ClickException(
-            f"An error occurred while trying to fetch driver details:{str(e)}"
+            f"An error occurred while getting the driver metadata.\nDetails: {e}"
         ) from e
 
 
