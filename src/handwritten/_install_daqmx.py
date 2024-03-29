@@ -243,7 +243,7 @@ def _install_daqmx_windows_driver() -> None:
         if installed_version and latest_version:
             _confirm_and_upgrade_daqmx_driver(latest_version, installed_version, download_url)
         else:
-        _install_daqmx_driver(download_url)
+            _install_daqmx_driver(download_url)
 
 
 def installdriver() -> None:
