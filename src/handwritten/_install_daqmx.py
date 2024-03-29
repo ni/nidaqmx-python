@@ -155,7 +155,7 @@ def _get_driver_details() -> Tuple[Optional[str], Optional[str]]:
     """
     try:
         with pkg_resources.open_text(__package__, METADATA_FILE) as json_file:
-            _logger.debug("Opening the metadatafile %s.", METADATA_FILE)
+            _logger.debug("Opening the metadata file %s.", METADATA_FILE)
             location, version = _load_data(json_file.read())
         return location, version
 
