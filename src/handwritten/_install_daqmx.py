@@ -41,7 +41,7 @@ def _parse_version(version: str) -> Tuple[int, ...]:
         return tuple(int(part) for part in version.split("."))
     except ValueError as e:
         _logger.info("Failed to parse version.", exc_info=True)
-        raise click.ClickException(f"Invalid version format found:{str(e)}") from e
+        raise click.ClickException(f"Invalid version number '{version}'.") from e
 
 
 def _get_daqmx_installed_version() -> Optional[str]:
