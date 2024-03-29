@@ -137,7 +137,7 @@ def _load_data(json_data: str) -> Tuple[Optional[str], Optional[str]]:
         metadata = json.loads(json_data).get("Windows", [])
     except json.JSONDecodeError as e:
         _logger.info("Failed to parse the json data.", exc_info=True)
-        raise click.ClickException(f"Failed to parse the json data:{str(e)}") from e
+        raise click.ClickException(f"Failed to parse the driver metadata.\nDetails: {e}") from e
 
     for metadata_entry in metadata:
         location: Optional[str] = metadata_entry.get("Location")
