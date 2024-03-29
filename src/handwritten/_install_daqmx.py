@@ -49,6 +49,9 @@ def _get_daqmx_installed_version() -> Optional[str]:
     Check for existing installation of NI-DAQmx.
 
     """
+    if sys.platform != 'win32':
+        return None
+
     try:
         _logger.debug("Reading the registry entries to get installed DAQmx version")
         with winreg.OpenKeyEx(
