@@ -108,8 +108,8 @@ def _multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> Gen
     finally:
         if delete:
             try:
-                os.unlink(temp_file.name)
                 _logger.debug("Deleting temp file: %s", temp_file.name)
+                os.unlink(temp_file.name)
             except ValueError as e:
                 _logger.info("Failed to delete temporary file.", exc_info=True)
                 raise click.ClickException(f"Failed to delete temporary file:{str(e)}") from e
