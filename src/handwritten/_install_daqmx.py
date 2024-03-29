@@ -72,7 +72,7 @@ def _get_daqmx_installed_version() -> Optional[str]:
             return product_version
         return None
     except FileNotFoundError:
-        _logger.info("No existing NI-DAQmx installation found.", exc_info=False)
+        _logger.info("No existing NI-DAQmx installation found.")
         return None
     except PermissionError as e:
         _logger.info("Failed to read the registry key.", exc_info=True)
