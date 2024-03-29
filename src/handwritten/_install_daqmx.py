@@ -218,7 +218,7 @@ def _confirm_and_upgrade_daqmx_driver(
     installed_parts: Tuple[int, ...] = _parse_version(installed_version)
     if installed_parts >= latest_parts:
         print(
-            f"Installed NI-DAQmx version ({installed_version}) is up to date."
+            f"Installed NI-DAQmx version ({installed_version}) is up to date. (Expected {latest_version} or newer.)"
         )
         return
     is_upgrade = _ask_user_confirmation(
