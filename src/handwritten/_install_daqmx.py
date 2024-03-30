@@ -49,41 +49,42 @@ def _get_daqmx_installed_version() -> Optional[str]:
     Check for existing installation of NI-DAQmx.
 
     """
-    if sys.platform != 'win32':
+    if sys.platform.startswith("win"):
+        try:
+            _logger.debug("Reading the registry entries to get installed DAQmx version")
+            with winreg.OpenKeyEx(
+                winreg.HKEY_LOCAL_MACHINE,
+                r"SOFTWARE\National Instruments\NI-DAQmx\CurrentVersion",
+                0,
+                winreg.KEY_READ | winreg.KEY_WOW64_32KEY,
+            ) as daqmx_reg_key:
+                product_name = winreg.QueryValueEx(daqmx_reg_key, "ProductName")[0]
+                product_version = winreg.QueryValueEx(daqmx_reg_key, "Version")[0]
+    
+            if product_name == "NI-DAQmx":
+                _logger.info(
+                    "Found registry entries for Product Name: %s and version %s",
+                    product_name,
+                    product_version,
+                )
+                return product_version
+            return None
+        except FileNotFoundError:
+            _logger.info("No existing NI-DAQmx installation found.")
+            return None
+        except PermissionError as e:
+            _logger.info("Failed to read the registry key.", exc_info=True)
+            raise click.ClickException(
+                f"Permission denied while getting the installed NI-DAQmx version.\nDetails: {e}"
+            ) from e
+        except OSError as e:
+            _logger.info("Failed to read the registry key.", exc_info=True)
+            raise click.ClickException(
+                f"An OS error occurred while getting the installed NI-DAQmx version.\nDetails: {e}"
+            ) from e
+    else:
+        _logger.error("This function is only supported on Windows.")
         return None
-
-    try:
-        _logger.debug("Reading the registry entries to get installed DAQmx version")
-        with winreg.OpenKeyEx(
-            winreg.HKEY_LOCAL_MACHINE,
-            r"SOFTWARE\National Instruments\NI-DAQmx\CurrentVersion",
-            0,
-            winreg.KEY_READ | winreg.KEY_WOW64_32KEY,
-        ) as daqmx_reg_key:
-            product_name = winreg.QueryValueEx(daqmx_reg_key, "ProductName")[0]
-            product_version = winreg.QueryValueEx(daqmx_reg_key, "Version")[0]
-
-        if product_name == "NI-DAQmx":
-            _logger.info(
-                "Found registry entries for Product Name: %s and version %s",
-                product_name,
-                product_version,
-            )
-            return product_version
-        return None
-    except FileNotFoundError:
-        _logger.info("No existing NI-DAQmx installation found.")
-        return None
-    except PermissionError as e:
-        _logger.info("Failed to read the registry key.", exc_info=True)
-        raise click.ClickException(
-            f"Permission denied while getting the installed NI-DAQmx version.\nDetails: {e}"
-        ) from e
-    except OSError as e:
-        _logger.info("Failed to read the registry key.", exc_info=True)
-        raise click.ClickException(
-            f"An OS error occurred while getting the installed NI-DAQmx version.\nDetails: {e}"
-        ) from e
 
 
 # Creating a temp file that we then close and yield - this is used to allow subprocesses to access
@@ -112,7 +113,7 @@ def _multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> Gen
                 os.unlink(temp_file.name)
             except ValueError as e:
                 _logger.info("Failed to delete temporary file.", exc_info=True)
-                raise click.ClickException(f"Failed to delete temporary file:{str(e)}") from e
+                raise click.ClickException(f"Failed to delete temporary file '{temp_file.name}'.\nDetails: {e}") from e
 
 
 def _load_data(json_data: str) -> Tuple[Optional[str], Optional[str]]:
