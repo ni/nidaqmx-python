@@ -95,13 +95,13 @@ def _multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> Gen
 
     """
     try:
-        temp_file = tempfile.NamedTemporaryFile(suffix=suffix, delete=False, mode="w")
+        temp_file = tempfile.NamedTemporaryFile(suffix=suffix1, delete=False, mode="w")
         temp_file.close()
         _logger.debug("Created temp file: %s", temp_file.name)
     except Exception as e:
         _logger.info("Failed to create temporary file.", exc_info=True)
         raise click.ClickException(
-            f"An error occurred while trying to to create temporary file:{str(e)}"
+            f"Failed to create temporary file '{temp_file.name}'.\nDetails: {e}"
         ) from e
 
     try:
