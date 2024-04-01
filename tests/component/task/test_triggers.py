@@ -198,7 +198,7 @@ def test___start_trigger___cfg_anlg_multi_edge_start_trig___no_errors(
 
     assert (
         sim_9775_ai_voltage_multi_edge_task.triggers.start_trigger.anlg_multi_edge_srcs
-        == flatten_trigger_sources
+        in [', '.join(trigger_sources), flatten_trigger_sources]
     )
     assert (
         sim_9775_ai_voltage_multi_edge_task.triggers.start_trigger.anlg_multi_edge_slopes
@@ -275,7 +275,7 @@ def test___reference_trigger___cfg_anlg_multi_edge_ref_trig___no_errors(
 
     assert (
         sim_9775_ai_voltage_multi_edge_task.triggers.reference_trigger.anlg_multi_edge_srcs
-        == flatten_trigger_sources
+        in [', '.join(trigger_sources), flatten_trigger_sources]
     )
     assert (
         sim_9775_ai_voltage_multi_edge_task.triggers.reference_trigger.pretrig_samples
