@@ -23,7 +23,6 @@ _logger = logging.getLogger(__name__)
 METADATA_FILE = "_installer_metadata.json"
 
 
-
 def _parse_version(version: str) -> Tuple[int, ...]:
     """
     Split the version string into a tuple of integers.
@@ -60,7 +59,7 @@ def _get_daqmx_installed_version() -> Optional[str]:
             ) as daqmx_reg_key:
                 product_name = winreg.QueryValueEx(daqmx_reg_key, "ProductName")[0]
                 product_version = winreg.QueryValueEx(daqmx_reg_key, "Version")[0]
-    
+
             if product_name == "NI-DAQmx":
                 _logger.info(
                     "Found registry entries for Product Name: %s and version %s",
@@ -95,7 +94,7 @@ def _multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> Gen
 
     """
     try:
-        temp_file = tempfile.NamedTemporaryFile(suffix=suffix1, delete=False, mode="w")
+        temp_file = tempfile.NamedTemporaryFile(suffix=suffix, delete=False, mode="w")
         temp_file.close()
         _logger.debug("Created temp file: %s", temp_file.name)
     except Exception as e:
