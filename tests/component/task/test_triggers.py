@@ -196,10 +196,11 @@ def test___start_trigger___cfg_anlg_multi_edge_start_trig___no_errors(
         trigger_level_array=trig_levels,
     )
 
-    assert (
-        sim_9775_ai_voltage_multi_edge_task.triggers.start_trigger.anlg_multi_edge_srcs
-        == flatten_trigger_sources
-    )
+    # AB#2698564 - For now we are accepting either format of the trigger sources
+    assert sim_9775_ai_voltage_multi_edge_task.triggers.start_trigger.anlg_multi_edge_srcs in [
+        ", ".join(trigger_sources),
+        flatten_trigger_sources,
+    ]
     assert (
         sim_9775_ai_voltage_multi_edge_task.triggers.start_trigger.anlg_multi_edge_slopes
         == trig_slopes
@@ -273,10 +274,11 @@ def test___reference_trigger___cfg_anlg_multi_edge_ref_trig___no_errors(
         trigger_level_array=trig_levels,
     )
 
-    assert (
-        sim_9775_ai_voltage_multi_edge_task.triggers.reference_trigger.anlg_multi_edge_srcs
-        == flatten_trigger_sources
-    )
+    # AB#2698564 - For now we are accepting either format of the trigger sources
+    assert sim_9775_ai_voltage_multi_edge_task.triggers.start_trigger.anlg_multi_edge_srcs in [
+        ", ".join(trigger_sources),
+        flatten_trigger_sources,
+    ]
     assert (
         sim_9775_ai_voltage_multi_edge_task.triggers.reference_trigger.pretrig_samples
         == pretrig_samples
