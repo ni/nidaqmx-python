@@ -49,7 +49,9 @@ class BaseEventObserver(Generic[TEvent]):
         for i in range(count):
             remaining_time = max(0.0, timeout_time - time.monotonic())
             if not self._event_semaphore.acquire(timeout=remaining_time):
-                raise TimeoutError(f"Event observer did not observe the expected number of events. {i}/{count} events")
+                raise TimeoutError(
+                    f"Event observer did not observe the expected number of events. {i}/{count} events"
+                )
 
     def _invoke_side_effect(self) -> None:
         if isinstance(self._side_effect, BaseException):
