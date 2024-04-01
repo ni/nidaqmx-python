@@ -187,7 +187,7 @@ def test___shared_interpreter___run_multiple_acquisitions_with_events___callback
             )
             for i, device in enumerate(multi_threading_test_devices)
         ]
-        samples_per_chan = [1000 for _ in tasks]
+        samples_per_chan = [(100 * (i + 8)) for i in range(len(tasks))]
         _configure_timing(tasks, samples_per_chan)
         samples_acquired, done_events, done_statuses = _configure_events(tasks, samples_per_chan)
 
@@ -218,7 +218,7 @@ def test___shared_interpreter___unregister_events_during_other_acquisitions_with
             )
             for i, device in enumerate(multi_threading_test_devices)
         ]
-        samples_per_chan = [1000 for _ in tasks]
+        samples_per_chan = [(100 * (i + 8)) for i in range(len(tasks))]
         samples_per_chan[0] = 100
         _configure_timing(tasks, samples_per_chan)
         samples_acquired, done_events, done_statuses = _configure_events(tasks, samples_per_chan)
@@ -267,7 +267,8 @@ def _configure_events(
 
     samples_acquired = [0 for _ in tasks]
     done_events = [threading.Event() for _ in tasks]
-    done_statuses = [0 for _ in tasks]
+    # Set non-zero value to indicate that the Done event has not been received.
+    done_statuses = [-1 for _ in tasks]
 
     for i in range(len(tasks)):
 
