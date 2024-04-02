@@ -275,7 +275,7 @@ def test___reference_trigger___cfg_anlg_multi_edge_ref_trig___no_errors(
     )
 
     # AB#2698564 - For now we are accepting either format of the trigger sources
-    assert sim_9775_ai_voltage_multi_edge_task.triggers.start_trigger.anlg_multi_edge_srcs in [
+    assert sim_9775_ai_voltage_multi_edge_task.triggers.reference_trigger.anlg_multi_edge_srcs in [
         ", ".join(trigger_sources),
         flatten_trigger_sources,
     ]
