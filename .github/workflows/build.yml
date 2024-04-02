@@ -36,7 +36,7 @@ jobs:
       - name: Run mypy (Windows)
         run: |
           poetry run mypy generated/nidaqmx --platform win32
-          poetry run mypy tests --platform-win32
+          poetry run mypy tests --platform win32
       - name: Generate ni-daqmx files
         run: |
           rm -fr generated/nidaqmx
