@@ -11,7 +11,6 @@ import tempfile
 import traceback
 import urllib.request
 from typing import Generator, List, Optional, Tuple
-import importlib.resources as pkg_resources
 
 import click
 
@@ -87,7 +86,9 @@ def _get_daqmx_installed_version() -> Optional[str]:
 
 # Creating a temp file that we then close and yield - this is used to allow subprocesses to access
 @contextlib.contextmanager
-def _multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> Generator[str, None, None]:
+def _multi_access_temp_file(
+    *, suffix: str = ".exe", delete: bool = True
+) -> Generator[str, None, None]:
     """
     Context manager for creating a temporary file.
 
@@ -111,7 +112,9 @@ def _multi_access_temp_file(*, suffix: str = ".exe", delete: bool = True) -> Gen
                 os.unlink(temp_file.name)
             except ValueError as e:
                 _logger.info("Failed to delete temporary file.", exc_info=True)
-                raise click.ClickException(f"Failed to delete temporary file '{temp_file.name}'.\nDetails: {e}") from e
+                raise click.ClickException(
+                    f"Failed to delete temporary file '{temp_file.name}'.\nDetails: {e}"
+                ) from e
 
 
 def _load_data(json_data: str) -> Tuple[Optional[str], Optional[str]]:
@@ -224,7 +227,7 @@ def _confirm_and_upgrade_daqmx_driver(
         return
     is_upgrade = _ask_user_confirmation(
         f"Installed NI-DAQmx version is {installed_version}. Latest version available is {latest_version}. Do you want to upgrade?"
-        )
+    )
     if is_upgrade:
         _install_daqmx_driver(download_url)
 
