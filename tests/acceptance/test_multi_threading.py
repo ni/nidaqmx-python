@@ -267,7 +267,7 @@ def _configure_events(
 
     samples_acquired = [0 for _ in tasks]
     done_events = [threading.Event() for _ in tasks]
-    done_statuses = [0 for _ in tasks]
+    done_statuses = [-1 for _ in tasks]
 
     for i in range(len(tasks)):
 
