@@ -83,8 +83,7 @@ def _get_daqmx_installed_version() -> Optional[str]:
                 f"An OS error occurred while getting the installed NI-DAQmx version.\nDetails: {e}"
             ) from e
     else:
-        _logger.error("This function is only supported on Windows.")
-        return None
+        raise NotImplementedError("This function is only supported on Windows.")
 
 
 # Creating a temp file that we then close and yield - this is used to allow subprocesses to access
