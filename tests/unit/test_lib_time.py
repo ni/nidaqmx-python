@@ -274,7 +274,10 @@ def test___datetime_before_1904_with_femtoseconds___convert_to_timestamp___is_re
     ts = LibTimestamp.from_datetime(from_dt)
     roundtrip_dt = ts.to_datetime(tzinfo=timezone.utc)
 
-    assert ts.msb == JAN_01_1850_LIB.msb
+    if femtosecond:
+        assert ts.msb == JAN_01_1850_LIB.msb + 1
+    else:
+        assert ts.msb == JAN_01_1850_LIB.msb
     assert ts.lsb == subseconds
     # comparison is tricky since imprecision in the conversion to NI-BTF are
     # caught by the higher precision values in hightime, so we round here.
@@ -323,6 +326,9 @@ def test___datetime_before_1904_with_yoctoseconds___convert_to_timestamp___is_re
     ts = LibTimestamp.from_datetime(from_dt)
     to_dt = ts.to_datetime(tzinfo=timezone.utc)
 
-    assert ts.msb == JAN_01_1850_LIB.msb
+    if yoctosecond:
+        assert ts.msb == JAN_01_1850_LIB.msb + 1
+    else:
+        assert ts.msb == JAN_01_1850_LIB.msb
     assert ts.lsb == subseconds
     assert to_dt.yoctosecond == yoctosecond_round_trip
