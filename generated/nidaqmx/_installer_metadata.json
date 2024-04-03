@@ -1,8 +1,8 @@
 {
     "Windows": [
         {
-            "Version": "23.8.0",
-            "Location": "https://download.ni.com/support/nipkg/products/ni-d/ni-daqmx/23.8/online/ni-daqmx_23.8_online.exe",
+            "Version": "24.0.0",
+            "Location": "https://download.ni.com/support/nipkg/products/ni-d/ni-daqmx/24.0/online/ni-daqmx_24.0_online.exe",
             "supportedOS": [
                 "Windows 11",
                 "Windows Server 2022 64-bit",
@@ -14,8 +14,8 @@
     ],
     "Linux": [
         {
-            "Version": "23.8.0",
-            "Location": "https://download.ni.com/support/softlib/MasterRepository/LinuxDrivers2023Q4/NILinux2023Q4DeviceDrivers.zip",
+            "Version": "24.0.0",
+            "Location": "https://download.ni.com/support/softlib/MasterRepository/LinuxDrivers2024Q1/NILinux2024Q1DeviceDrivers.zip",
             "supportedOS": [
                 "ubuntu 20.04",
                 "ubuntu 22.00",
