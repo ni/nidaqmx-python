@@ -56,6 +56,9 @@ def test___done_event_registered___run_finite_acquisition___callback_invoked_onc
     assert all(e.status == 0 for e in event_observer.events)
 
 
+@pytest.mark.grpc_xfail(
+    reason="#559: Can't close tasks in an event callback when using gRPC", raises=AssertionError
+)
 def test___done_event_registered___call_clear_in_callback___stop_close_in_callback_with_success_status(
     sim_6363_device: nidaqmx.system.Device,
     init_kwargs: dict,
@@ -106,6 +109,9 @@ def test___done_event_registered___call_clear_in_callback___stop_close_in_callba
     assert len(warnings_record) == 1
 
 
+@pytest.mark.grpc_xfail(
+    reason="#559: Can't close tasks in an event callback when using gRPC", raises=AssertionError
+)
 def test___every_n_samples_event_registered___call_clear_in_callback___stop_close_in_callback_with_success_status(
     sim_6363_device: nidaqmx.system.Device,
     init_kwargs: dict,
