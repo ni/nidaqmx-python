@@ -8,7 +8,7 @@ import pytest
 import nidaqmx
 from nidaqmx.constants import AcquisitionType, EveryNSamplesEventType, Signal
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.errors import RpcError
+from nidaqmx.errors import DaqResourceWarning, RpcError
 from nidaqmx.task import _TaskEventType
 from tests._event_utils import (
     DoneEventObserver,
@@ -53,6 +53,104 @@ def test___done_event_registered___run_finite_acquisition___callback_invoked_onc
         event_observer.wait_for_events(timeout=100e-3)
     assert len(event_observer.events) == 1
     assert all(e.status == 0 for e in event_observer.events)
+
+
+def test___done_event_registered___call_clear_in_callback___stop_close_in_callback_with_success_status(
+    sim_6363_device: nidaqmx.system.Device,
+    init_kwargs: dict,
+) -> None:
+
+    # side_effect for callback
+    def _clear_task():
+        task.stop()
+        task.close()
+
+    try:
+        # We need to create our own task here because we need to call stop() and close() on it.
+        task: nidaqmx.Task = nidaqmx.Task(**init_kwargs)
+        task.ai_channels.add_ai_voltage_chan(
+            sim_6363_device.ai_physical_chans[0].name, max_val=10, min_val=-10
+        )
+    except nidaqmx.DaqError:
+        if task is not None:
+            task.close()
+        raise
+    event_observer = DoneEventObserver(side_effect=_clear_task)
+    task.register_done_event(event_observer.handle_done_event)
+    task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
+
+    task.start()
+    event_observer.wait_for_events(1)
+    # The side_effect is invoked after the semaphore is released, so we need to wait a bit for it
+    # to actually be called and stop and close the task
+    time.sleep(0.1)
+    # Ensure we get the expected exception and warning
+    with pytest.raises(nidaqmx.DaqError) as exc_info:
+        task.stop()
+    with pytest.warns(
+        DaqResourceWarning,
+        match="Attempted to close NI-DAQmx task",
+    ) as warnings_record:
+        task.close()
+
+    assert len(event_observer.events) == 1
+    assert event_observer.events[0].status == 0
+    assert exc_info.value.error_code == DAQmxErrors.INVALID_TASK
+    assert len(warnings_record) == 1
+
+
+def test___every_n_samples_event_registered___call_clear_in_callback___stop_close_in_callback_with_success_status(
+    sim_6363_device: nidaqmx.system.Device,
+    init_kwargs: dict,
+) -> None:
+
+    # side_effect for callback
+    def _clear_task():
+        nonlocal callback_call_number
+        if callback_call_number == 3:
+            task.stop()
+            task.close()
+        callback_call_number += 1
+
+    try:
+        # We need to create our own task here because we need to call stop() and close() on it.
+        task: nidaqmx.Task = nidaqmx.Task(**init_kwargs)
+        task.ai_channels.add_ai_voltage_chan(
+            sim_6363_device.ai_physical_chans[0].name, max_val=10, min_val=-10
+        )
+    except nidaqmx.DaqError:
+        if task is not None:
+            task.close()
+        raise
+    event_observer = EveryNSamplesEventObserver(side_effect=_clear_task)
+    task.register_every_n_samples_acquired_into_buffer_event(
+        100, event_observer.handle_every_n_samples_event
+    )
+    task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
+    callback_call_number = 0
+
+    task.start()
+    event_observer.wait_for_events(4)
+    # The side_effect is invoked after the semaphore is released, so we need to wait a bit for it
+    # to actually be called and stop and close the task
+    time.sleep(0.1)
+    # Ensure we get the expected exception and warning
+    with pytest.raises(nidaqmx.DaqError) as exc_info:
+        task.stop()
+    with pytest.warns(
+        DaqResourceWarning,
+        match="Attempted to close NI-DAQmx task",
+    ) as warnings_record:
+        task.close()
+
+    assert len(event_observer.events) == 4
+    assert [e.number_of_samples for e in event_observer.events] == [100, 100, 100, 100]
+    assert exc_info.value.error_code == DAQmxErrors.INVALID_TASK
+    assert len(warnings_record) == 1
 
 
 def test___every_n_samples_event_registered___run_finite_acquisition___callback_invoked_n_times_with_type_and_num_samples(
