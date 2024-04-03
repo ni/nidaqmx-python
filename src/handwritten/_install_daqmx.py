@@ -266,4 +266,3 @@ def installdriver() -> None:
         raise click.ClickException(
             f"An error occurred during the installation of the NI-DAQmx driver.\nDetails: {e}"
         ) from e
-
