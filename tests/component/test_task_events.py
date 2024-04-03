@@ -1,3 +1,4 @@
+import threading
 import time
 import traceback
 from logging import LogRecord
@@ -60,10 +61,15 @@ def test___done_event_registered___call_clear_in_callback___stop_close_in_callba
     init_kwargs: dict,
 ) -> None:
 
+    # We have to define and set this here because mypy will error if it is
+    # defined below with everything else: https://github.com/python/mypy/issues/7057
+    side_effect_semaphore = threading.Semaphore(value=0)
+
     # side_effect for callback
     def _clear_task():
         task.stop()
         task.close()
+        side_effect_semaphore.release()
 
     try:
         # We need to create our own task here because we need to call stop() and close() on it.
@@ -83,9 +89,7 @@ def test___done_event_registered___call_clear_in_callback___stop_close_in_callba
 
     task.start()
     event_observer.wait_for_events(1)
-    # The side_effect is invoked after the semaphore is released, so we need to wait a bit for it
-    # to actually be called and stop and close the task
-    time.sleep(0.1)
+    acquired = side_effect_semaphore.acquire(timeout=1.0)
     # Ensure we get the expected exception and warning
     with pytest.raises(nidaqmx.DaqError) as exc_info:
         task.stop()
@@ -95,6 +99,7 @@ def test___done_event_registered___call_clear_in_callback___stop_close_in_callba
     ) as warnings_record:
         task.close()
 
+    assert acquired
     assert len(event_observer.events) == 1
     assert event_observer.events[0].status == 0
     assert exc_info.value.error_code == DAQmxErrors.INVALID_TASK
@@ -106,13 +111,19 @@ def test___every_n_samples_event_registered___call_clear_in_callback___stop_clos
     init_kwargs: dict,
 ) -> None:
 
+    # We have to define and set this here because mypy will error if it is
+    # defined below with everything else: https://github.com/python/mypy/issues/7057
+    callback_call_number = 0
+    side_effect_semaphore = threading.Semaphore(value=0)
+
     # side_effect for callback
     def _clear_task():
         nonlocal callback_call_number
-        if callback_call_number == 3:
+        callback_call_number += 1
+        if callback_call_number == 4:
             task.stop()
             task.close()
-        callback_call_number += 1
+            side_effect_semaphore.release()
 
     try:
         # We need to create our own task here because we need to call stop() and close() on it.
@@ -131,13 +142,10 @@ def test___every_n_samples_event_registered___call_clear_in_callback___stop_clos
     task.timing.cfg_samp_clk_timing(
         rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
     )
-    callback_call_number = 0
 
     task.start()
     event_observer.wait_for_events(4)
-    # The side_effect is invoked after the semaphore is released, so we need to wait a bit for it
-    # to actually be called and stop and close the task
-    time.sleep(0.1)
+    acquired = side_effect_semaphore.acquire(timeout=1.0)
     # Ensure we get the expected exception and warning
     with pytest.raises(nidaqmx.DaqError) as exc_info:
         task.stop()
@@ -147,6 +155,7 @@ def test___every_n_samples_event_registered___call_clear_in_callback___stop_clos
     ) as warnings_record:
         task.close()
 
+    assert acquired
     assert len(event_observer.events) == 4
     assert [e.number_of_samples for e in event_observer.events] == [100, 100, 100, 100]
     assert exc_info.value.error_code == DAQmxErrors.INVALID_TASK
