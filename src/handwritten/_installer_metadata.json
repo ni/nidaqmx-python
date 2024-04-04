@@ -1,0 +1,29 @@
+{
+    "Windows": [
+        {
+            "Version": "24.0.0",
+            "Location": "https://download.ni.com/support/nipkg/products/ni-d/ni-daqmx/24.0/online/ni-daqmx_24.0_online.exe",
+            "supportedOS": [
+                "Windows 11",
+                "Windows Server 2022 64-bit",
+                "Windows 10 64-bit",
+                "Windows Server 2016 64-bit",
+                "Windows Server 2019 64-bit"
+            ]
+        }
+    ],
+    "Linux": [
+        {
+            "Version": "24.0.0",
+            "Location": "https://download.ni.com/support/softlib/MasterRepository/LinuxDrivers2024Q1/NILinux2024Q1DeviceDrivers.zip",
+            "supportedOS": [
+                "ubuntu 20.04",
+                "ubuntu 22.00",
+                "rhel 8",
+                "rhel 9",
+                "opensuse 15.4",
+                "opensuse 15.5"
+            ]
+        }
+    ]
+}
