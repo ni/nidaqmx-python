@@ -20,14 +20,13 @@ _YS_PER_FS = 10**9
 _EPOCH_1970 = ht_datetime(1970, 1, 1, tzinfo=timezone.utc)
 
 def convert_time_to_timestamp(dt: Union[std_datetime, ht_datetime], ts: Optional[GrpcTimestamp] = None) -> GrpcTimestamp:
-    seconds_since_1970 = int((dt - _EPOCH_1970).total_seconds())
-    # We need to add one more negative second if applicable to compensate for a non-zero microsecond.
-    if dt.microsecond and (dt < _EPOCH_1970):
-        seconds_since_1970 -=1
+    seconds_since_1970 = 0
+
     if ts is None:
         ts = GrpcTimestamp()
 
     if isinstance(dt, ht_datetime):
+        seconds_since_1970 = int((dt - _EPOCH_1970).precision_total_seconds())
         total_yoctoseconds = dt.yoctosecond
         total_yoctoseconds += dt.femtosecond * _YS_PER_FS
         total_yoctoseconds += dt.microsecond * _YS_PER_US
@@ -36,6 +35,7 @@ def convert_time_to_timestamp(dt: Union[std_datetime, ht_datetime], ts: Optional
         if remainder_yoctoseconds >= _YS_PER_NS / 2:
             nanos += 1
     else:
+        seconds_since_1970 = int((dt - _EPOCH_1970).total_seconds())
         nanos = dt.microsecond * _NS_PER_US
 
     ts.FromNanoseconds(seconds_since_1970 * _NS_PER_S + nanos)
