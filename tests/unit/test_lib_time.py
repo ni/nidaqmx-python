@@ -225,6 +225,8 @@ def test___datetime_before_1904_with_microseconds___convert_to_timestamp___is_re
     roundtrip_dt = to_ts.to_datetime(tzinfo=timezone.utc)
 
     if microsecond:
+        # with a change of non-zero subsecond value, the seconds value is off by 1
+        # because of negative seconds value
         assert to_ts.msb == JAN_01_1850_LIB.msb + 1
     else:
         assert to_ts.msb == JAN_01_1850_LIB.msb
@@ -275,6 +277,8 @@ def test___datetime_before_1904_with_femtoseconds___convert_to_timestamp___is_re
     roundtrip_dt = ts.to_datetime(tzinfo=timezone.utc)
 
     if femtosecond:
+        # with a change of non-zero subsecond value, the seconds value is off by 1
+        # because of negative seconds value
         assert ts.msb == JAN_01_1850_LIB.msb + 1
     else:
         assert ts.msb == JAN_01_1850_LIB.msb
@@ -327,6 +331,8 @@ def test___datetime_before_1904_with_yoctoseconds___convert_to_timestamp___is_re
     to_dt = ts.to_datetime(tzinfo=timezone.utc)
 
     if yoctosecond:
+        # with a change of non-zero subsecond value, the seconds value is off by 1
+        # because of negative seconds value
         assert ts.msb == JAN_01_1850_LIB.msb + 1
     else:
         assert ts.msb == JAN_01_1850_LIB.msb

@@ -242,6 +242,8 @@ def test___datetime_before_1970_with_microseconds___convert_to_timestamp___is_re
     roundtrip_dt = grpc_time.convert_timestamp_to_time(to_ts, tzinfo=timezone.utc)
 
     if microsecond:
+        # with a change of non-zero subsecond value, the seconds value is off by 1
+        # because of negative seconds value
         assert to_ts.seconds == JAN_01_1850_TIMESTAMP_1970_EPOCH + 1
     else:
         assert to_ts.seconds == JAN_01_1850_TIMESTAMP_1970_EPOCH
@@ -306,6 +308,8 @@ def test___datetime_before_1970_with_femtoseconds___convert_to_timestamp___is_re
     roundtrip_dt = grpc_time.convert_timestamp_to_time(to_ts, tzinfo=timezone.utc)
 
     if femtosecond:
+        # with a change of non-zero subsecond value, the seconds value is off by 1
+        # because of negative seconds value
         assert to_ts.seconds == JAN_01_1850_TIMESTAMP_1970_EPOCH + 1
     else:
         assert to_ts.seconds == JAN_01_1850_TIMESTAMP_1970_EPOCH
