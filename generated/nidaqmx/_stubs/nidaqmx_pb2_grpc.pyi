@@ -7,6 +7,7 @@ This file is generated from NI-DAQMX API metadata version 23.0.0
 Proto file for the NI-DAQMX Metadata
 ---------------------------------------------------------------------
 """
+
 import abc
 import collections.abc
 import grpc
@@ -14,12 +15,11 @@ import grpc.aio
 from nidaqmx._stubs import nidaqmx_pb2
 import typing
 
-_T = typing.TypeVar('_T')
+_T = typing.TypeVar("_T")
 
-class _MaybeAsyncIterator(collections.abc.AsyncIterator[_T], collections.abc.Iterator[_T], metaclass=abc.ABCMeta):
-    ...
+class _MaybeAsyncIterator(collections.abc.AsyncIterator[_T], collections.abc.Iterator[_T], metaclass=abc.ABCMeta): ...
 
-class _ServicerContext(grpc.ServicerContext, grpc.aio.ServicerContext):  # type: ignore
+class _ServicerContext(grpc.ServicerContext, grpc.aio.ServicerContext):  # type: ignore[misc, type-arg]
     ...
 
 class NiDAQmxStub:
@@ -28,1590 +28,1987 @@ class NiDAQmxStub:
         nidaqmx_pb2.AddCDAQSyncConnectionRequest,
         nidaqmx_pb2.AddCDAQSyncConnectionResponse,
     ]
+
     AddGlobalChansToTask: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.AddGlobalChansToTaskRequest,
         nidaqmx_pb2.AddGlobalChansToTaskResponse,
     ]
+
     AddNetworkDevice: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.AddNetworkDeviceRequest,
         nidaqmx_pb2.AddNetworkDeviceResponse,
     ]
+
     AreConfiguredCDAQSyncPortsDisconnected: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.AreConfiguredCDAQSyncPortsDisconnectedRequest,
         nidaqmx_pb2.AreConfiguredCDAQSyncPortsDisconnectedResponse,
     ]
+
     AutoConfigureCDAQSyncConnections: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.AutoConfigureCDAQSyncConnectionsRequest,
         nidaqmx_pb2.AutoConfigureCDAQSyncConnectionsResponse,
     ]
+
     CalculateReversePolyCoeff: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CalculateReversePolyCoeffRequest,
         nidaqmx_pb2.CalculateReversePolyCoeffResponse,
     ]
+
     CfgAnlgEdgeRefTrig: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgAnlgEdgeRefTrigRequest,
         nidaqmx_pb2.CfgAnlgEdgeRefTrigResponse,
     ]
+
     CfgAnlgEdgeStartTrig: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgAnlgEdgeStartTrigRequest,
         nidaqmx_pb2.CfgAnlgEdgeStartTrigResponse,
     ]
+
     CfgAnlgMultiEdgeRefTrig: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgAnlgMultiEdgeRefTrigRequest,
         nidaqmx_pb2.CfgAnlgMultiEdgeRefTrigResponse,
     ]
+
     CfgAnlgMultiEdgeStartTrig: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgAnlgMultiEdgeStartTrigRequest,
         nidaqmx_pb2.CfgAnlgMultiEdgeStartTrigResponse,
     ]
+
     CfgAnlgWindowRefTrig: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgAnlgWindowRefTrigRequest,
         nidaqmx_pb2.CfgAnlgWindowRefTrigResponse,
     ]
+
     CfgAnlgWindowStartTrig: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgAnlgWindowStartTrigRequest,
         nidaqmx_pb2.CfgAnlgWindowStartTrigResponse,
     ]
+
     CfgBurstHandshakingTimingExportClock: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgBurstHandshakingTimingExportClockRequest,
         nidaqmx_pb2.CfgBurstHandshakingTimingExportClockResponse,
     ]
+
     CfgBurstHandshakingTimingImportClock: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgBurstHandshakingTimingImportClockRequest,
         nidaqmx_pb2.CfgBurstHandshakingTimingImportClockResponse,
     ]
+
     CfgChangeDetectionTiming: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgChangeDetectionTimingRequest,
         nidaqmx_pb2.CfgChangeDetectionTimingResponse,
     ]
+
     CfgDigEdgeRefTrig: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgDigEdgeRefTrigRequest,
         nidaqmx_pb2.CfgDigEdgeRefTrigResponse,
     ]
+
     CfgDigEdgeStartTrig: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgDigEdgeStartTrigRequest,
         nidaqmx_pb2.CfgDigEdgeStartTrigResponse,
     ]
+
     CfgDigPatternRefTrig: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgDigPatternRefTrigRequest,
         nidaqmx_pb2.CfgDigPatternRefTrigResponse,
     ]
+
     CfgDigPatternStartTrig: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgDigPatternStartTrigRequest,
         nidaqmx_pb2.CfgDigPatternStartTrigResponse,
     ]
+
     CfgHandshakingTiming: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgHandshakingTimingRequest,
         nidaqmx_pb2.CfgHandshakingTimingResponse,
     ]
+
     CfgImplicitTiming: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgImplicitTimingRequest,
         nidaqmx_pb2.CfgImplicitTimingResponse,
     ]
+
     CfgInputBuffer: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgInputBufferRequest,
         nidaqmx_pb2.CfgInputBufferResponse,
     ]
+
     CfgOutputBuffer: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgOutputBufferRequest,
         nidaqmx_pb2.CfgOutputBufferResponse,
     ]
+
     CfgPipelinedSampClkTiming: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgPipelinedSampClkTimingRequest,
         nidaqmx_pb2.CfgPipelinedSampClkTimingResponse,
     ]
+
     CfgSampClkTiming: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgSampClkTimingRequest,
         nidaqmx_pb2.CfgSampClkTimingResponse,
     ]
+
     CfgTimeStartTrig: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgTimeStartTrigRequest,
         nidaqmx_pb2.CfgTimeStartTrigResponse,
     ]
+
     CfgWatchdogAOExpirStates: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgWatchdogAOExpirStatesRequest,
         nidaqmx_pb2.CfgWatchdogAOExpirStatesResponse,
     ]
+
     CfgWatchdogCOExpirStates: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgWatchdogCOExpirStatesRequest,
         nidaqmx_pb2.CfgWatchdogCOExpirStatesResponse,
     ]
+
     CfgWatchdogDOExpirStates: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgWatchdogDOExpirStatesRequest,
         nidaqmx_pb2.CfgWatchdogDOExpirStatesResponse,
     ]
+
     ClearTEDS: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ClearTEDSRequest,
         nidaqmx_pb2.ClearTEDSResponse,
     ]
+
     ClearTask: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ClearTaskRequest,
         nidaqmx_pb2.ClearTaskResponse,
     ]
+
     ConfigureLogging: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ConfigureLoggingRequest,
         nidaqmx_pb2.ConfigureLoggingResponse,
     ]
+
     ConfigureTEDS: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ConfigureTEDSRequest,
         nidaqmx_pb2.ConfigureTEDSResponse,
     ]
+
     ConnectTerms: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ConnectTermsRequest,
         nidaqmx_pb2.ConnectTermsResponse,
     ]
+
     ControlWatchdogTask: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ControlWatchdogTaskRequest,
         nidaqmx_pb2.ControlWatchdogTaskResponse,
     ]
+
     CreateAIAccel4WireDCVoltageChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIAccel4WireDCVoltageChanRequest,
         nidaqmx_pb2.CreateAIAccel4WireDCVoltageChanResponse,
     ]
+
     CreateAIAccelChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIAccelChanRequest,
         nidaqmx_pb2.CreateAIAccelChanResponse,
     ]
+
     CreateAIAccelChargeChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIAccelChargeChanRequest,
         nidaqmx_pb2.CreateAIAccelChargeChanResponse,
     ]
+
     CreateAIBridgeChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIBridgeChanRequest,
         nidaqmx_pb2.CreateAIBridgeChanResponse,
     ]
+
     CreateAIChargeChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIChargeChanRequest,
         nidaqmx_pb2.CreateAIChargeChanResponse,
     ]
+
     CreateAICurrentChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAICurrentChanRequest,
         nidaqmx_pb2.CreateAICurrentChanResponse,
     ]
+
     CreateAICurrentRMSChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAICurrentRMSChanRequest,
         nidaqmx_pb2.CreateAICurrentRMSChanResponse,
     ]
+
     CreateAIForceBridgePolynomialChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIForceBridgePolynomialChanRequest,
         nidaqmx_pb2.CreateAIForceBridgePolynomialChanResponse,
     ]
+
     CreateAIForceBridgeTableChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIForceBridgeTableChanRequest,
         nidaqmx_pb2.CreateAIForceBridgeTableChanResponse,
     ]
+
     CreateAIForceBridgeTwoPointLinChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIForceBridgeTwoPointLinChanRequest,
         nidaqmx_pb2.CreateAIForceBridgeTwoPointLinChanResponse,
     ]
+
     CreateAIForceIEPEChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIForceIEPEChanRequest,
         nidaqmx_pb2.CreateAIForceIEPEChanResponse,
     ]
+
     CreateAIFreqVoltageChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIFreqVoltageChanRequest,
         nidaqmx_pb2.CreateAIFreqVoltageChanResponse,
     ]
+
     CreateAIMicrophoneChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIMicrophoneChanRequest,
         nidaqmx_pb2.CreateAIMicrophoneChanResponse,
     ]
+
     CreateAIPosEddyCurrProxProbeChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIPosEddyCurrProxProbeChanRequest,
         nidaqmx_pb2.CreateAIPosEddyCurrProxProbeChanResponse,
     ]
+
     CreateAIPosLVDTChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIPosLVDTChanRequest,
         nidaqmx_pb2.CreateAIPosLVDTChanResponse,
     ]
+
     CreateAIPosRVDTChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIPosRVDTChanRequest,
         nidaqmx_pb2.CreateAIPosRVDTChanResponse,
     ]
+
     CreateAIPowerChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIPowerChanRequest,
         nidaqmx_pb2.CreateAIPowerChanResponse,
     ]
+
     CreateAIPressureBridgePolynomialChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIPressureBridgePolynomialChanRequest,
         nidaqmx_pb2.CreateAIPressureBridgePolynomialChanResponse,
     ]
+
     CreateAIPressureBridgeTableChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIPressureBridgeTableChanRequest,
         nidaqmx_pb2.CreateAIPressureBridgeTableChanResponse,
     ]
+
     CreateAIPressureBridgeTwoPointLinChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIPressureBridgeTwoPointLinChanRequest,
         nidaqmx_pb2.CreateAIPressureBridgeTwoPointLinChanResponse,
     ]
+
     CreateAIRTDChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIRTDChanRequest,
         nidaqmx_pb2.CreateAIRTDChanResponse,
     ]
+
     CreateAIResistanceChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIResistanceChanRequest,
         nidaqmx_pb2.CreateAIResistanceChanResponse,
     ]
+
     CreateAIRosetteStrainGageChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIRosetteStrainGageChanRequest,
         nidaqmx_pb2.CreateAIRosetteStrainGageChanResponse,
     ]
+
     CreateAIStrainGageChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIStrainGageChanRequest,
         nidaqmx_pb2.CreateAIStrainGageChanResponse,
     ]
+
     CreateAITempBuiltInSensorChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAITempBuiltInSensorChanRequest,
         nidaqmx_pb2.CreateAITempBuiltInSensorChanResponse,
     ]
+
     CreateAIThrmcplChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIThrmcplChanRequest,
         nidaqmx_pb2.CreateAIThrmcplChanResponse,
     ]
+
     CreateAIThrmstrChanIex: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIThrmstrChanIexRequest,
         nidaqmx_pb2.CreateAIThrmstrChanIexResponse,
     ]
+
     CreateAIThrmstrChanVex: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIThrmstrChanVexRequest,
         nidaqmx_pb2.CreateAIThrmstrChanVexResponse,
     ]
+
     CreateAITorqueBridgePolynomialChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAITorqueBridgePolynomialChanRequest,
         nidaqmx_pb2.CreateAITorqueBridgePolynomialChanResponse,
     ]
+
     CreateAITorqueBridgeTableChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAITorqueBridgeTableChanRequest,
         nidaqmx_pb2.CreateAITorqueBridgeTableChanResponse,
     ]
+
     CreateAITorqueBridgeTwoPointLinChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAITorqueBridgeTwoPointLinChanRequest,
         nidaqmx_pb2.CreateAITorqueBridgeTwoPointLinChanResponse,
     ]
+
     CreateAIVelocityIEPEChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIVelocityIEPEChanRequest,
         nidaqmx_pb2.CreateAIVelocityIEPEChanResponse,
     ]
+
     CreateAIVoltageChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIVoltageChanRequest,
         nidaqmx_pb2.CreateAIVoltageChanResponse,
     ]
+
     CreateAIVoltageChanWithExcit: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIVoltageChanWithExcitRequest,
         nidaqmx_pb2.CreateAIVoltageChanWithExcitResponse,
     ]
+
     CreateAIVoltageRMSChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIVoltageRMSChanRequest,
         nidaqmx_pb2.CreateAIVoltageRMSChanResponse,
     ]
+
     CreateAOCurrentChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAOCurrentChanRequest,
         nidaqmx_pb2.CreateAOCurrentChanResponse,
     ]
+
     CreateAOFuncGenChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAOFuncGenChanRequest,
         nidaqmx_pb2.CreateAOFuncGenChanResponse,
     ]
+
     CreateAOVoltageChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAOVoltageChanRequest,
         nidaqmx_pb2.CreateAOVoltageChanResponse,
     ]
+
     CreateCIAngEncoderChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIAngEncoderChanRequest,
         nidaqmx_pb2.CreateCIAngEncoderChanResponse,
     ]
+
     CreateCIAngVelocityChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIAngVelocityChanRequest,
         nidaqmx_pb2.CreateCIAngVelocityChanResponse,
     ]
+
     CreateCICountEdgesChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCICountEdgesChanRequest,
         nidaqmx_pb2.CreateCICountEdgesChanResponse,
     ]
+
     CreateCIDutyCycleChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIDutyCycleChanRequest,
         nidaqmx_pb2.CreateCIDutyCycleChanResponse,
     ]
+
     CreateCIFreqChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIFreqChanRequest,
         nidaqmx_pb2.CreateCIFreqChanResponse,
     ]
+
     CreateCIGPSTimestampChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIGPSTimestampChanRequest,
         nidaqmx_pb2.CreateCIGPSTimestampChanResponse,
     ]
+
     CreateCILinEncoderChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCILinEncoderChanRequest,
         nidaqmx_pb2.CreateCILinEncoderChanResponse,
     ]
+
     CreateCILinVelocityChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCILinVelocityChanRequest,
         nidaqmx_pb2.CreateCILinVelocityChanResponse,
     ]
+
     CreateCIPeriodChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIPeriodChanRequest,
         nidaqmx_pb2.CreateCIPeriodChanResponse,
     ]
+
     CreateCIPulseChanFreq: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIPulseChanFreqRequest,
         nidaqmx_pb2.CreateCIPulseChanFreqResponse,
     ]
+
     CreateCIPulseChanTicks: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIPulseChanTicksRequest,
         nidaqmx_pb2.CreateCIPulseChanTicksResponse,
     ]
+
     CreateCIPulseChanTime: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIPulseChanTimeRequest,
         nidaqmx_pb2.CreateCIPulseChanTimeResponse,
     ]
+
     CreateCIPulseWidthChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIPulseWidthChanRequest,
         nidaqmx_pb2.CreateCIPulseWidthChanResponse,
     ]
+
     CreateCISemiPeriodChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCISemiPeriodChanRequest,
         nidaqmx_pb2.CreateCISemiPeriodChanResponse,
     ]
+
     CreateCITwoEdgeSepChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCITwoEdgeSepChanRequest,
         nidaqmx_pb2.CreateCITwoEdgeSepChanResponse,
     ]
+
     CreateCOPulseChanFreq: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCOPulseChanFreqRequest,
         nidaqmx_pb2.CreateCOPulseChanFreqResponse,
     ]
+
     CreateCOPulseChanTicks: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCOPulseChanTicksRequest,
         nidaqmx_pb2.CreateCOPulseChanTicksResponse,
     ]
+
     CreateCOPulseChanTime: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCOPulseChanTimeRequest,
         nidaqmx_pb2.CreateCOPulseChanTimeResponse,
     ]
+
     CreateDIChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateDIChanRequest,
         nidaqmx_pb2.CreateDIChanResponse,
     ]
+
     CreateDOChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateDOChanRequest,
         nidaqmx_pb2.CreateDOChanResponse,
     ]
+
     CreateLinScale: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateLinScaleRequest,
         nidaqmx_pb2.CreateLinScaleResponse,
     ]
+
     CreateMapScale: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateMapScaleRequest,
         nidaqmx_pb2.CreateMapScaleResponse,
     ]
+
     CreatePolynomialScale: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreatePolynomialScaleRequest,
         nidaqmx_pb2.CreatePolynomialScaleResponse,
     ]
+
     CreateTEDSAIAccelChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIAccelChanRequest,
         nidaqmx_pb2.CreateTEDSAIAccelChanResponse,
     ]
+
     CreateTEDSAIBridgeChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIBridgeChanRequest,
         nidaqmx_pb2.CreateTEDSAIBridgeChanResponse,
     ]
+
     CreateTEDSAICurrentChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAICurrentChanRequest,
         nidaqmx_pb2.CreateTEDSAICurrentChanResponse,
     ]
+
     CreateTEDSAIForceBridgeChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIForceBridgeChanRequest,
         nidaqmx_pb2.CreateTEDSAIForceBridgeChanResponse,
     ]
+
     CreateTEDSAIForceIEPEChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIForceIEPEChanRequest,
         nidaqmx_pb2.CreateTEDSAIForceIEPEChanResponse,
     ]
+
     CreateTEDSAIMicrophoneChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIMicrophoneChanRequest,
         nidaqmx_pb2.CreateTEDSAIMicrophoneChanResponse,
     ]
+
     CreateTEDSAIPosLVDTChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIPosLVDTChanRequest,
         nidaqmx_pb2.CreateTEDSAIPosLVDTChanResponse,
     ]
+
     CreateTEDSAIPosRVDTChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIPosRVDTChanRequest,
         nidaqmx_pb2.CreateTEDSAIPosRVDTChanResponse,
     ]
+
     CreateTEDSAIPressureBridgeChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIPressureBridgeChanRequest,
         nidaqmx_pb2.CreateTEDSAIPressureBridgeChanResponse,
     ]
+
     CreateTEDSAIRTDChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIRTDChanRequest,
         nidaqmx_pb2.CreateTEDSAIRTDChanResponse,
     ]
+
     CreateTEDSAIResistanceChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIResistanceChanRequest,
         nidaqmx_pb2.CreateTEDSAIResistanceChanResponse,
     ]
+
     CreateTEDSAIStrainGageChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIStrainGageChanRequest,
         nidaqmx_pb2.CreateTEDSAIStrainGageChanResponse,
     ]
+
     CreateTEDSAIThrmcplChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIThrmcplChanRequest,
         nidaqmx_pb2.CreateTEDSAIThrmcplChanResponse,
     ]
+
     CreateTEDSAIThrmstrChanIex: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIThrmstrChanIexRequest,
         nidaqmx_pb2.CreateTEDSAIThrmstrChanIexResponse,
     ]
+
     CreateTEDSAIThrmstrChanVex: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIThrmstrChanVexRequest,
         nidaqmx_pb2.CreateTEDSAIThrmstrChanVexResponse,
     ]
+
     CreateTEDSAITorqueBridgeChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAITorqueBridgeChanRequest,
         nidaqmx_pb2.CreateTEDSAITorqueBridgeChanResponse,
     ]
+
     CreateTEDSAIVoltageChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIVoltageChanRequest,
         nidaqmx_pb2.CreateTEDSAIVoltageChanResponse,
     ]
+
     CreateTEDSAIVoltageChanWithExcit: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIVoltageChanWithExcitRequest,
         nidaqmx_pb2.CreateTEDSAIVoltageChanWithExcitResponse,
     ]
+
     CreateTableScale: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTableScaleRequest,
         nidaqmx_pb2.CreateTableScaleResponse,
     ]
+
     CreateTask: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTaskRequest,
         nidaqmx_pb2.CreateTaskResponse,
     ]
+
     CreateWatchdogTimerTask: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateWatchdogTimerTaskRequest,
         nidaqmx_pb2.CreateWatchdogTimerTaskResponse,
     ]
+
     CreateWatchdogTimerTaskEx: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateWatchdogTimerTaskExRequest,
         nidaqmx_pb2.CreateWatchdogTimerTaskExResponse,
     ]
+
     DeleteNetworkDevice: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.DeleteNetworkDeviceRequest,
         nidaqmx_pb2.DeleteNetworkDeviceResponse,
     ]
+
     DeleteSavedGlobalChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.DeleteSavedGlobalChanRequest,
         nidaqmx_pb2.DeleteSavedGlobalChanResponse,
     ]
+
     DeleteSavedScale: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.DeleteSavedScaleRequest,
         nidaqmx_pb2.DeleteSavedScaleResponse,
     ]
+
     DeleteSavedTask: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.DeleteSavedTaskRequest,
         nidaqmx_pb2.DeleteSavedTaskResponse,
     ]
+
     DeviceSupportsCal: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.DeviceSupportsCalRequest,
         nidaqmx_pb2.DeviceSupportsCalResponse,
     ]
+
     DisableRefTrig: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.DisableRefTrigRequest,
         nidaqmx_pb2.DisableRefTrigResponse,
     ]
+
     DisableStartTrig: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.DisableStartTrigRequest,
         nidaqmx_pb2.DisableStartTrigResponse,
     ]
+
     DisconnectTerms: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.DisconnectTermsRequest,
         nidaqmx_pb2.DisconnectTermsResponse,
     ]
+
     ExportSignal: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ExportSignalRequest,
         nidaqmx_pb2.ExportSignalResponse,
     ]
+
     GetAIChanCalCalDate: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetAIChanCalCalDateRequest,
         nidaqmx_pb2.GetAIChanCalCalDateResponse,
     ]
+
     GetAIChanCalExpDate: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetAIChanCalExpDateRequest,
         nidaqmx_pb2.GetAIChanCalExpDateResponse,
     ]
+
     GetAnalogPowerUpStates: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetAnalogPowerUpStatesRequest,
         nidaqmx_pb2.GetAnalogPowerUpStatesResponse,
     ]
+
     GetAnalogPowerUpStatesWithOutputType: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetAnalogPowerUpStatesWithOutputTypeRequest,
         nidaqmx_pb2.GetAnalogPowerUpStatesWithOutputTypeResponse,
     ]
+
     GetArmStartTrigTimestampVal: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetArmStartTrigTimestampValRequest,
         nidaqmx_pb2.GetArmStartTrigTimestampValResponse,
     ]
+
     GetArmStartTrigTrigWhen: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetArmStartTrigTrigWhenRequest,
         nidaqmx_pb2.GetArmStartTrigTrigWhenResponse,
     ]
+
     GetAutoConfiguredCDAQSyncConnections: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetAutoConfiguredCDAQSyncConnectionsRequest,
         nidaqmx_pb2.GetAutoConfiguredCDAQSyncConnectionsResponse,
     ]
+
     GetBufferAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetBufferAttributeUInt32Request,
         nidaqmx_pb2.GetBufferAttributeUInt32Response,
     ]
+
     GetCalInfoAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetCalInfoAttributeBoolRequest,
         nidaqmx_pb2.GetCalInfoAttributeBoolResponse,
     ]
+
     GetCalInfoAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetCalInfoAttributeDoubleRequest,
         nidaqmx_pb2.GetCalInfoAttributeDoubleResponse,
     ]
+
     GetCalInfoAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetCalInfoAttributeStringRequest,
         nidaqmx_pb2.GetCalInfoAttributeStringResponse,
     ]
+
     GetCalInfoAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetCalInfoAttributeUInt32Request,
         nidaqmx_pb2.GetCalInfoAttributeUInt32Response,
     ]
+
     GetChanAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetChanAttributeBoolRequest,
         nidaqmx_pb2.GetChanAttributeBoolResponse,
     ]
+
     GetChanAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetChanAttributeDoubleRequest,
         nidaqmx_pb2.GetChanAttributeDoubleResponse,
     ]
+
     GetChanAttributeDoubleArray: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetChanAttributeDoubleArrayRequest,
         nidaqmx_pb2.GetChanAttributeDoubleArrayResponse,
     ]
+
     GetChanAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetChanAttributeInt32Request,
         nidaqmx_pb2.GetChanAttributeInt32Response,
     ]
+
     GetChanAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetChanAttributeStringRequest,
         nidaqmx_pb2.GetChanAttributeStringResponse,
     ]
+
     GetChanAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetChanAttributeUInt32Request,
         nidaqmx_pb2.GetChanAttributeUInt32Response,
     ]
+
     GetDeviceAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDeviceAttributeBoolRequest,
         nidaqmx_pb2.GetDeviceAttributeBoolResponse,
     ]
+
     GetDeviceAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDeviceAttributeDoubleRequest,
         nidaqmx_pb2.GetDeviceAttributeDoubleResponse,
     ]
+
     GetDeviceAttributeDoubleArray: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDeviceAttributeDoubleArrayRequest,
         nidaqmx_pb2.GetDeviceAttributeDoubleArrayResponse,
     ]
+
     GetDeviceAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDeviceAttributeInt32Request,
         nidaqmx_pb2.GetDeviceAttributeInt32Response,
     ]
+
     GetDeviceAttributeInt32Array: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDeviceAttributeInt32ArrayRequest,
         nidaqmx_pb2.GetDeviceAttributeInt32ArrayResponse,
     ]
+
     GetDeviceAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDeviceAttributeStringRequest,
         nidaqmx_pb2.GetDeviceAttributeStringResponse,
     ]
+
     GetDeviceAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDeviceAttributeUInt32Request,
         nidaqmx_pb2.GetDeviceAttributeUInt32Response,
     ]
+
     GetDeviceAttributeUInt32Array: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDeviceAttributeUInt32ArrayRequest,
         nidaqmx_pb2.GetDeviceAttributeUInt32ArrayResponse,
     ]
+
     GetDigitalLogicFamilyPowerUpState: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDigitalLogicFamilyPowerUpStateRequest,
         nidaqmx_pb2.GetDigitalLogicFamilyPowerUpStateResponse,
     ]
+
     GetDigitalPowerUpStates: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDigitalPowerUpStatesRequest,
         nidaqmx_pb2.GetDigitalPowerUpStatesResponse,
     ]
+
     GetDigitalPullUpPullDownStates: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDigitalPullUpPullDownStatesRequest,
         nidaqmx_pb2.GetDigitalPullUpPullDownStatesResponse,
     ]
+
     GetDisconnectedCDAQSyncPorts: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDisconnectedCDAQSyncPortsRequest,
         nidaqmx_pb2.GetDisconnectedCDAQSyncPortsResponse,
     ]
+
     GetErrorString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetErrorStringRequest,
         nidaqmx_pb2.GetErrorStringResponse,
     ]
+
     GetExportedSignalAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetExportedSignalAttributeBoolRequest,
         nidaqmx_pb2.GetExportedSignalAttributeBoolResponse,
     ]
+
     GetExportedSignalAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetExportedSignalAttributeDoubleRequest,
         nidaqmx_pb2.GetExportedSignalAttributeDoubleResponse,
     ]
+
     GetExportedSignalAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetExportedSignalAttributeInt32Request,
         nidaqmx_pb2.GetExportedSignalAttributeInt32Response,
     ]
+
     GetExportedSignalAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetExportedSignalAttributeStringRequest,
         nidaqmx_pb2.GetExportedSignalAttributeStringResponse,
     ]
+
     GetExportedSignalAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetExportedSignalAttributeUInt32Request,
         nidaqmx_pb2.GetExportedSignalAttributeUInt32Response,
     ]
+
     GetExtCalLastDateAndTime: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetExtCalLastDateAndTimeRequest,
         nidaqmx_pb2.GetExtCalLastDateAndTimeResponse,
     ]
+
     GetFirstSampClkWhen: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetFirstSampClkWhenRequest,
         nidaqmx_pb2.GetFirstSampClkWhenResponse,
     ]
+
     GetFirstSampTimestampVal: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetFirstSampTimestampValRequest,
         nidaqmx_pb2.GetFirstSampTimestampValResponse,
     ]
+
     GetNthTaskChannel: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetNthTaskChannelRequest,
         nidaqmx_pb2.GetNthTaskChannelResponse,
     ]
+
     GetNthTaskDevice: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetNthTaskDeviceRequest,
         nidaqmx_pb2.GetNthTaskDeviceResponse,
     ]
+
     GetNthTaskReadChannel: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetNthTaskReadChannelRequest,
         nidaqmx_pb2.GetNthTaskReadChannelResponse,
     ]
+
     GetPersistedChanAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPersistedChanAttributeBoolRequest,
         nidaqmx_pb2.GetPersistedChanAttributeBoolResponse,
     ]
+
     GetPersistedChanAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPersistedChanAttributeStringRequest,
         nidaqmx_pb2.GetPersistedChanAttributeStringResponse,
     ]
+
     GetPersistedScaleAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPersistedScaleAttributeBoolRequest,
         nidaqmx_pb2.GetPersistedScaleAttributeBoolResponse,
     ]
+
     GetPersistedScaleAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPersistedScaleAttributeStringRequest,
         nidaqmx_pb2.GetPersistedScaleAttributeStringResponse,
     ]
+
     GetPersistedTaskAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPersistedTaskAttributeBoolRequest,
         nidaqmx_pb2.GetPersistedTaskAttributeBoolResponse,
     ]
+
     GetPersistedTaskAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPersistedTaskAttributeStringRequest,
         nidaqmx_pb2.GetPersistedTaskAttributeStringResponse,
     ]
+
     GetPhysicalChanAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeBoolRequest,
         nidaqmx_pb2.GetPhysicalChanAttributeBoolResponse,
     ]
+
     GetPhysicalChanAttributeBytes: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeBytesRequest,
         nidaqmx_pb2.GetPhysicalChanAttributeBytesResponse,
     ]
+
     GetPhysicalChanAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeDoubleRequest,
         nidaqmx_pb2.GetPhysicalChanAttributeDoubleResponse,
     ]
+
     GetPhysicalChanAttributeDoubleArray: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeDoubleArrayRequest,
         nidaqmx_pb2.GetPhysicalChanAttributeDoubleArrayResponse,
     ]
+
     GetPhysicalChanAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeInt32Request,
         nidaqmx_pb2.GetPhysicalChanAttributeInt32Response,
     ]
+
     GetPhysicalChanAttributeInt32Array: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeInt32ArrayRequest,
         nidaqmx_pb2.GetPhysicalChanAttributeInt32ArrayResponse,
     ]
+
     GetPhysicalChanAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeStringRequest,
         nidaqmx_pb2.GetPhysicalChanAttributeStringResponse,
     ]
+
     GetPhysicalChanAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeUInt32Request,
         nidaqmx_pb2.GetPhysicalChanAttributeUInt32Response,
     ]
+
     GetPhysicalChanAttributeUInt32Array: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeUInt32ArrayRequest,
         nidaqmx_pb2.GetPhysicalChanAttributeUInt32ArrayResponse,
     ]
+
     GetReadAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetReadAttributeBoolRequest,
         nidaqmx_pb2.GetReadAttributeBoolResponse,
     ]
+
     GetReadAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetReadAttributeDoubleRequest,
         nidaqmx_pb2.GetReadAttributeDoubleResponse,
     ]
+
     GetReadAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetReadAttributeInt32Request,
         nidaqmx_pb2.GetReadAttributeInt32Response,
     ]
+
     GetReadAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetReadAttributeStringRequest,
         nidaqmx_pb2.GetReadAttributeStringResponse,
     ]
+
     GetReadAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetReadAttributeUInt32Request,
         nidaqmx_pb2.GetReadAttributeUInt32Response,
     ]
+
     GetReadAttributeUInt64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetReadAttributeUInt64Request,
         nidaqmx_pb2.GetReadAttributeUInt64Response,
     ]
+
     GetRealTimeAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetRealTimeAttributeBoolRequest,
         nidaqmx_pb2.GetRealTimeAttributeBoolResponse,
     ]
+
     GetRealTimeAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetRealTimeAttributeInt32Request,
         nidaqmx_pb2.GetRealTimeAttributeInt32Response,
     ]
+
     GetRealTimeAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetRealTimeAttributeUInt32Request,
         nidaqmx_pb2.GetRealTimeAttributeUInt32Response,
     ]
+
     GetRefTrigTimestampVal: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetRefTrigTimestampValRequest,
         nidaqmx_pb2.GetRefTrigTimestampValResponse,
     ]
+
     GetScaleAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetScaleAttributeDoubleRequest,
         nidaqmx_pb2.GetScaleAttributeDoubleResponse,
     ]
+
     GetScaleAttributeDoubleArray: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetScaleAttributeDoubleArrayRequest,
         nidaqmx_pb2.GetScaleAttributeDoubleArrayResponse,
     ]
+
     GetScaleAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetScaleAttributeInt32Request,
         nidaqmx_pb2.GetScaleAttributeInt32Response,
     ]
+
     GetScaleAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetScaleAttributeStringRequest,
         nidaqmx_pb2.GetScaleAttributeStringResponse,
     ]
+
     GetSelfCalLastDateAndTime: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetSelfCalLastDateAndTimeRequest,
         nidaqmx_pb2.GetSelfCalLastDateAndTimeResponse,
     ]
+
     GetStartTrigTimestampVal: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetStartTrigTimestampValRequest,
         nidaqmx_pb2.GetStartTrigTimestampValResponse,
     ]
+
     GetStartTrigTrigWhen: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetStartTrigTrigWhenRequest,
         nidaqmx_pb2.GetStartTrigTrigWhenResponse,
     ]
+
     GetSyncPulseTimeWhen: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetSyncPulseTimeWhenRequest,
         nidaqmx_pb2.GetSyncPulseTimeWhenResponse,
     ]
+
     GetSystemInfoAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetSystemInfoAttributeStringRequest,
         nidaqmx_pb2.GetSystemInfoAttributeStringResponse,
     ]
+
     GetSystemInfoAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetSystemInfoAttributeUInt32Request,
         nidaqmx_pb2.GetSystemInfoAttributeUInt32Response,
     ]
+
     GetTaskAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTaskAttributeBoolRequest,
         nidaqmx_pb2.GetTaskAttributeBoolResponse,
     ]
+
     GetTaskAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTaskAttributeStringRequest,
         nidaqmx_pb2.GetTaskAttributeStringResponse,
     ]
+
     GetTaskAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTaskAttributeUInt32Request,
         nidaqmx_pb2.GetTaskAttributeUInt32Response,
     ]
+
     GetTimingAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeBoolRequest,
         nidaqmx_pb2.GetTimingAttributeBoolResponse,
     ]
+
     GetTimingAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeDoubleRequest,
         nidaqmx_pb2.GetTimingAttributeDoubleResponse,
     ]
+
     GetTimingAttributeExBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeExBoolRequest,
         nidaqmx_pb2.GetTimingAttributeExBoolResponse,
     ]
+
     GetTimingAttributeExDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeExDoubleRequest,
         nidaqmx_pb2.GetTimingAttributeExDoubleResponse,
     ]
+
     GetTimingAttributeExInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeExInt32Request,
         nidaqmx_pb2.GetTimingAttributeExInt32Response,
     ]
+
     GetTimingAttributeExString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeExStringRequest,
         nidaqmx_pb2.GetTimingAttributeExStringResponse,
     ]
+
     GetTimingAttributeExTimestamp: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeExTimestampRequest,
         nidaqmx_pb2.GetTimingAttributeExTimestampResponse,
     ]
+
     GetTimingAttributeExUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeExUInt32Request,
         nidaqmx_pb2.GetTimingAttributeExUInt32Response,
     ]
+
     GetTimingAttributeExUInt64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeExUInt64Request,
         nidaqmx_pb2.GetTimingAttributeExUInt64Response,
     ]
+
     GetTimingAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeInt32Request,
         nidaqmx_pb2.GetTimingAttributeInt32Response,
     ]
+
     GetTimingAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeStringRequest,
         nidaqmx_pb2.GetTimingAttributeStringResponse,
     ]
+
     GetTimingAttributeTimestamp: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeTimestampRequest,
         nidaqmx_pb2.GetTimingAttributeTimestampResponse,
     ]
+
     GetTimingAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeUInt32Request,
         nidaqmx_pb2.GetTimingAttributeUInt32Response,
     ]
+
     GetTimingAttributeUInt64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeUInt64Request,
         nidaqmx_pb2.GetTimingAttributeUInt64Response,
     ]
+
     GetTrigAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTrigAttributeBoolRequest,
         nidaqmx_pb2.GetTrigAttributeBoolResponse,
     ]
+
     GetTrigAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTrigAttributeDoubleRequest,
         nidaqmx_pb2.GetTrigAttributeDoubleResponse,
     ]
+
     GetTrigAttributeDoubleArray: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTrigAttributeDoubleArrayRequest,
         nidaqmx_pb2.GetTrigAttributeDoubleArrayResponse,
     ]
+
     GetTrigAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTrigAttributeInt32Request,
         nidaqmx_pb2.GetTrigAttributeInt32Response,
     ]
+
     GetTrigAttributeInt32Array: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTrigAttributeInt32ArrayRequest,
         nidaqmx_pb2.GetTrigAttributeInt32ArrayResponse,
     ]
+
     GetTrigAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTrigAttributeStringRequest,
         nidaqmx_pb2.GetTrigAttributeStringResponse,
     ]
+
     GetTrigAttributeTimestamp: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTrigAttributeTimestampRequest,
         nidaqmx_pb2.GetTrigAttributeTimestampResponse,
     ]
+
     GetTrigAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTrigAttributeUInt32Request,
         nidaqmx_pb2.GetTrigAttributeUInt32Response,
     ]
+
     GetWatchdogAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWatchdogAttributeBoolRequest,
         nidaqmx_pb2.GetWatchdogAttributeBoolResponse,
     ]
+
     GetWatchdogAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWatchdogAttributeDoubleRequest,
         nidaqmx_pb2.GetWatchdogAttributeDoubleResponse,
     ]
+
     GetWatchdogAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWatchdogAttributeInt32Request,
         nidaqmx_pb2.GetWatchdogAttributeInt32Response,
     ]
+
     GetWatchdogAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWatchdogAttributeStringRequest,
         nidaqmx_pb2.GetWatchdogAttributeStringResponse,
     ]
+
     GetWriteAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWriteAttributeBoolRequest,
         nidaqmx_pb2.GetWriteAttributeBoolResponse,
     ]
+
     GetWriteAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWriteAttributeDoubleRequest,
         nidaqmx_pb2.GetWriteAttributeDoubleResponse,
     ]
+
     GetWriteAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWriteAttributeInt32Request,
         nidaqmx_pb2.GetWriteAttributeInt32Response,
     ]
+
     GetWriteAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWriteAttributeStringRequest,
         nidaqmx_pb2.GetWriteAttributeStringResponse,
     ]
+
     GetWriteAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWriteAttributeUInt32Request,
         nidaqmx_pb2.GetWriteAttributeUInt32Response,
     ]
+
     GetWriteAttributeUInt64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWriteAttributeUInt64Request,
         nidaqmx_pb2.GetWriteAttributeUInt64Response,
     ]
+
     IsTaskDone: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.IsTaskDoneRequest,
         nidaqmx_pb2.IsTaskDoneResponse,
     ]
+
     LoadTask: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.LoadTaskRequest,
         nidaqmx_pb2.LoadTaskResponse,
     ]
+
     PerformBridgeOffsetNullingCalEx: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.PerformBridgeOffsetNullingCalExRequest,
         nidaqmx_pb2.PerformBridgeOffsetNullingCalExResponse,
     ]
+
     PerformBridgeShuntCalEx: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.PerformBridgeShuntCalExRequest,
         nidaqmx_pb2.PerformBridgeShuntCalExResponse,
     ]
+
     PerformStrainShuntCalEx: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.PerformStrainShuntCalExRequest,
         nidaqmx_pb2.PerformStrainShuntCalExResponse,
     ]
+
     PerformThrmcplLeadOffsetNullingCal: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.PerformThrmcplLeadOffsetNullingCalRequest,
         nidaqmx_pb2.PerformThrmcplLeadOffsetNullingCalResponse,
     ]
+
     ReadAnalogF64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadAnalogF64Request,
         nidaqmx_pb2.ReadAnalogF64Response,
     ]
+
     ReadAnalogScalarF64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadAnalogScalarF64Request,
         nidaqmx_pb2.ReadAnalogScalarF64Response,
     ]
+
     ReadBinaryI16: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadBinaryI16Request,
         nidaqmx_pb2.ReadBinaryI16Response,
     ]
+
     ReadBinaryI32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadBinaryI32Request,
         nidaqmx_pb2.ReadBinaryI32Response,
     ]
+
     ReadBinaryU16: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadBinaryU16Request,
         nidaqmx_pb2.ReadBinaryU16Response,
     ]
+
     ReadBinaryU32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadBinaryU32Request,
         nidaqmx_pb2.ReadBinaryU32Response,
     ]
+
     ReadCounterF64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterF64Request,
         nidaqmx_pb2.ReadCounterF64Response,
     ]
+
     ReadCounterF64Ex: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterF64ExRequest,
         nidaqmx_pb2.ReadCounterF64ExResponse,
     ]
+
     ReadCounterScalarF64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterScalarF64Request,
         nidaqmx_pb2.ReadCounterScalarF64Response,
     ]
+
     ReadCounterScalarU32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterScalarU32Request,
         nidaqmx_pb2.ReadCounterScalarU32Response,
     ]
+
     ReadCounterU32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterU32Request,
         nidaqmx_pb2.ReadCounterU32Response,
     ]
+
     ReadCounterU32Ex: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterU32ExRequest,
         nidaqmx_pb2.ReadCounterU32ExResponse,
     ]
+
     ReadCtrFreq: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrFreqRequest,
         nidaqmx_pb2.ReadCtrFreqResponse,
     ]
+
     ReadCtrFreqScalar: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrFreqScalarRequest,
         nidaqmx_pb2.ReadCtrFreqScalarResponse,
     ]
+
     ReadCtrTicks: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrTicksRequest,
         nidaqmx_pb2.ReadCtrTicksResponse,
     ]
+
     ReadCtrTicksScalar: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrTicksScalarRequest,
         nidaqmx_pb2.ReadCtrTicksScalarResponse,
     ]
+
     ReadCtrTime: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrTimeRequest,
         nidaqmx_pb2.ReadCtrTimeResponse,
     ]
+
     ReadCtrTimeScalar: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrTimeScalarRequest,
         nidaqmx_pb2.ReadCtrTimeScalarResponse,
     ]
+
     ReadDigitalLines: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadDigitalLinesRequest,
         nidaqmx_pb2.ReadDigitalLinesResponse,
     ]
+
     ReadDigitalScalarU32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadDigitalScalarU32Request,
         nidaqmx_pb2.ReadDigitalScalarU32Response,
     ]
+
     ReadDigitalU16: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadDigitalU16Request,
         nidaqmx_pb2.ReadDigitalU16Response,
     ]
+
     ReadDigitalU32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadDigitalU32Request,
         nidaqmx_pb2.ReadDigitalU32Response,
     ]
+
     ReadDigitalU8: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadDigitalU8Request,
         nidaqmx_pb2.ReadDigitalU8Response,
     ]
+
     ReadPowerBinaryI16: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadPowerBinaryI16Request,
         nidaqmx_pb2.ReadPowerBinaryI16Response,
     ]
+
     ReadPowerF64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadPowerF64Request,
         nidaqmx_pb2.ReadPowerF64Response,
     ]
+
     ReadPowerScalarF64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadPowerScalarF64Request,
         nidaqmx_pb2.ReadPowerScalarF64Response,
     ]
+
     ReadRaw: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadRawRequest,
         nidaqmx_pb2.ReadRawResponse,
     ]
+
     RegisterDoneEvent: grpc.UnaryStreamMultiCallable[
         nidaqmx_pb2.RegisterDoneEventRequest,
         nidaqmx_pb2.RegisterDoneEventResponse,
     ]
+
     RegisterEveryNSamplesEvent: grpc.UnaryStreamMultiCallable[
         nidaqmx_pb2.RegisterEveryNSamplesEventRequest,
         nidaqmx_pb2.RegisterEveryNSamplesEventResponse,
     ]
+
     RegisterSignalEvent: grpc.UnaryStreamMultiCallable[
         nidaqmx_pb2.RegisterSignalEventRequest,
         nidaqmx_pb2.RegisterSignalEventResponse,
     ]
+
     RemoveCDAQSyncConnection: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.RemoveCDAQSyncConnectionRequest,
         nidaqmx_pb2.RemoveCDAQSyncConnectionResponse,
     ]
+
     ReserveNetworkDevice: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReserveNetworkDeviceRequest,
         nidaqmx_pb2.ReserveNetworkDeviceResponse,
     ]
+
     ResetBufferAttribute: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetBufferAttributeRequest,
         nidaqmx_pb2.ResetBufferAttributeResponse,
     ]
+
     ResetChanAttribute: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetChanAttributeRequest,
         nidaqmx_pb2.ResetChanAttributeResponse,
     ]
+
     ResetDevice: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetDeviceRequest,
         nidaqmx_pb2.ResetDeviceResponse,
     ]
+
     ResetExportedSignalAttribute: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetExportedSignalAttributeRequest,
         nidaqmx_pb2.ResetExportedSignalAttributeResponse,
     ]
+
     ResetReadAttribute: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetReadAttributeRequest,
         nidaqmx_pb2.ResetReadAttributeResponse,
     ]
+
     ResetRealTimeAttribute: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetRealTimeAttributeRequest,
         nidaqmx_pb2.ResetRealTimeAttributeResponse,
     ]
+
     ResetTimingAttribute: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetTimingAttributeRequest,
         nidaqmx_pb2.ResetTimingAttributeResponse,
     ]
+
     ResetTimingAttributeEx: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetTimingAttributeExRequest,
         nidaqmx_pb2.ResetTimingAttributeExResponse,
     ]
+
     ResetTrigAttribute: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetTrigAttributeRequest,
         nidaqmx_pb2.ResetTrigAttributeResponse,
     ]
+
     ResetWatchdogAttribute: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetWatchdogAttributeRequest,
         nidaqmx_pb2.ResetWatchdogAttributeResponse,
     ]
+
     ResetWriteAttribute: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetWriteAttributeRequest,
         nidaqmx_pb2.ResetWriteAttributeResponse,
     ]
+
     RestoreLastExtCalConst: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.RestoreLastExtCalConstRequest,
         nidaqmx_pb2.RestoreLastExtCalConstResponse,
     ]
+
     SaveGlobalChan: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SaveGlobalChanRequest,
         nidaqmx_pb2.SaveGlobalChanResponse,
     ]
+
     SaveScale: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SaveScaleRequest,
         nidaqmx_pb2.SaveScaleResponse,
     ]
+
     SaveTask: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SaveTaskRequest,
         nidaqmx_pb2.SaveTaskResponse,
     ]
+
     SelfCal: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SelfCalRequest,
         nidaqmx_pb2.SelfCalResponse,
     ]
+
     SelfTestDevice: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SelfTestDeviceRequest,
         nidaqmx_pb2.SelfTestDeviceResponse,
     ]
+
     SetAIChanCalCalDate: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetAIChanCalCalDateRequest,
         nidaqmx_pb2.SetAIChanCalCalDateResponse,
     ]
+
     SetAIChanCalExpDate: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetAIChanCalExpDateRequest,
         nidaqmx_pb2.SetAIChanCalExpDateResponse,
     ]
+
     SetAnalogPowerUpStates: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetAnalogPowerUpStatesRequest,
         nidaqmx_pb2.SetAnalogPowerUpStatesResponse,
     ]
+
     SetAnalogPowerUpStatesWithOutputType: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetAnalogPowerUpStatesWithOutputTypeRequest,
         nidaqmx_pb2.SetAnalogPowerUpStatesWithOutputTypeResponse,
     ]
+
     SetArmStartTrigTrigWhen: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetArmStartTrigTrigWhenRequest,
         nidaqmx_pb2.SetArmStartTrigTrigWhenResponse,
     ]
+
     SetBufferAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetBufferAttributeUInt32Request,
         nidaqmx_pb2.SetBufferAttributeUInt32Response,
     ]
+
     SetCalInfoAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetCalInfoAttributeBoolRequest,
         nidaqmx_pb2.SetCalInfoAttributeBoolResponse,
     ]
+
     SetCalInfoAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetCalInfoAttributeDoubleRequest,
         nidaqmx_pb2.SetCalInfoAttributeDoubleResponse,
     ]
+
     SetCalInfoAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetCalInfoAttributeStringRequest,
         nidaqmx_pb2.SetCalInfoAttributeStringResponse,
     ]
+
     SetCalInfoAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetCalInfoAttributeUInt32Request,
         nidaqmx_pb2.SetCalInfoAttributeUInt32Response,
     ]
+
     SetChanAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetChanAttributeBoolRequest,
         nidaqmx_pb2.SetChanAttributeBoolResponse,
     ]
+
     SetChanAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetChanAttributeDoubleRequest,
         nidaqmx_pb2.SetChanAttributeDoubleResponse,
     ]
+
     SetChanAttributeDoubleArray: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetChanAttributeDoubleArrayRequest,
         nidaqmx_pb2.SetChanAttributeDoubleArrayResponse,
     ]
+
     SetChanAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetChanAttributeInt32Request,
         nidaqmx_pb2.SetChanAttributeInt32Response,
     ]
+
     SetChanAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetChanAttributeStringRequest,
         nidaqmx_pb2.SetChanAttributeStringResponse,
     ]
+
     SetChanAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetChanAttributeUInt32Request,
         nidaqmx_pb2.SetChanAttributeUInt32Response,
     ]
+
     SetDigitalLogicFamilyPowerUpState: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetDigitalLogicFamilyPowerUpStateRequest,
         nidaqmx_pb2.SetDigitalLogicFamilyPowerUpStateResponse,
     ]
+
     SetDigitalPowerUpStates: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetDigitalPowerUpStatesRequest,
         nidaqmx_pb2.SetDigitalPowerUpStatesResponse,
     ]
+
     SetDigitalPullUpPullDownStates: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetDigitalPullUpPullDownStatesRequest,
         nidaqmx_pb2.SetDigitalPullUpPullDownStatesResponse,
     ]
+
     SetExportedSignalAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetExportedSignalAttributeBoolRequest,
         nidaqmx_pb2.SetExportedSignalAttributeBoolResponse,
     ]
+
     SetExportedSignalAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetExportedSignalAttributeDoubleRequest,
         nidaqmx_pb2.SetExportedSignalAttributeDoubleResponse,
     ]
+
     SetExportedSignalAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetExportedSignalAttributeInt32Request,
         nidaqmx_pb2.SetExportedSignalAttributeInt32Response,
     ]
+
     SetExportedSignalAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetExportedSignalAttributeStringRequest,
         nidaqmx_pb2.SetExportedSignalAttributeStringResponse,
     ]
+
     SetExportedSignalAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetExportedSignalAttributeUInt32Request,
         nidaqmx_pb2.SetExportedSignalAttributeUInt32Response,
     ]
+
     SetFirstSampClkWhen: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetFirstSampClkWhenRequest,
         nidaqmx_pb2.SetFirstSampClkWhenResponse,
     ]
+
     SetReadAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetReadAttributeBoolRequest,
         nidaqmx_pb2.SetReadAttributeBoolResponse,
     ]
+
     SetReadAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetReadAttributeDoubleRequest,
         nidaqmx_pb2.SetReadAttributeDoubleResponse,
     ]
+
     SetReadAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetReadAttributeInt32Request,
         nidaqmx_pb2.SetReadAttributeInt32Response,
     ]
+
     SetReadAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetReadAttributeStringRequest,
         nidaqmx_pb2.SetReadAttributeStringResponse,
     ]
+
     SetReadAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetReadAttributeUInt32Request,
         nidaqmx_pb2.SetReadAttributeUInt32Response,
     ]
+
     SetReadAttributeUInt64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetReadAttributeUInt64Request,
         nidaqmx_pb2.SetReadAttributeUInt64Response,
     ]
+
     SetRealTimeAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetRealTimeAttributeBoolRequest,
         nidaqmx_pb2.SetRealTimeAttributeBoolResponse,
     ]
+
     SetRealTimeAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetRealTimeAttributeInt32Request,
         nidaqmx_pb2.SetRealTimeAttributeInt32Response,
     ]
+
     SetRealTimeAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetRealTimeAttributeUInt32Request,
         nidaqmx_pb2.SetRealTimeAttributeUInt32Response,
     ]
+
     SetScaleAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetScaleAttributeDoubleRequest,
         nidaqmx_pb2.SetScaleAttributeDoubleResponse,
     ]
+
     SetScaleAttributeDoubleArray: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetScaleAttributeDoubleArrayRequest,
         nidaqmx_pb2.SetScaleAttributeDoubleArrayResponse,
     ]
+
     SetScaleAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetScaleAttributeInt32Request,
         nidaqmx_pb2.SetScaleAttributeInt32Response,
     ]
+
     SetScaleAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetScaleAttributeStringRequest,
         nidaqmx_pb2.SetScaleAttributeStringResponse,
     ]
+
     SetStartTrigTrigWhen: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetStartTrigTrigWhenRequest,
         nidaqmx_pb2.SetStartTrigTrigWhenResponse,
     ]
+
     SetSyncPulseTimeWhen: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetSyncPulseTimeWhenRequest,
         nidaqmx_pb2.SetSyncPulseTimeWhenResponse,
     ]
+
     SetTimingAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeBoolRequest,
         nidaqmx_pb2.SetTimingAttributeBoolResponse,
     ]
+
     SetTimingAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeDoubleRequest,
         nidaqmx_pb2.SetTimingAttributeDoubleResponse,
     ]
+
     SetTimingAttributeExBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeExBoolRequest,
         nidaqmx_pb2.SetTimingAttributeExBoolResponse,
     ]
+
     SetTimingAttributeExDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeExDoubleRequest,
         nidaqmx_pb2.SetTimingAttributeExDoubleResponse,
     ]
+
     SetTimingAttributeExInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeExInt32Request,
         nidaqmx_pb2.SetTimingAttributeExInt32Response,
     ]
+
     SetTimingAttributeExString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeExStringRequest,
         nidaqmx_pb2.SetTimingAttributeExStringResponse,
     ]
+
     SetTimingAttributeExTimestamp: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeExTimestampRequest,
         nidaqmx_pb2.SetTimingAttributeExTimestampResponse,
     ]
+
     SetTimingAttributeExUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeExUInt32Request,
         nidaqmx_pb2.SetTimingAttributeExUInt32Response,
     ]
+
     SetTimingAttributeExUInt64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeExUInt64Request,
         nidaqmx_pb2.SetTimingAttributeExUInt64Response,
     ]
+
     SetTimingAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeInt32Request,
         nidaqmx_pb2.SetTimingAttributeInt32Response,
     ]
+
     SetTimingAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeStringRequest,
         nidaqmx_pb2.SetTimingAttributeStringResponse,
     ]
+
     SetTimingAttributeTimestamp: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeTimestampRequest,
         nidaqmx_pb2.SetTimingAttributeTimestampResponse,
     ]
+
     SetTimingAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeUInt32Request,
         nidaqmx_pb2.SetTimingAttributeUInt32Response,
     ]
+
     SetTimingAttributeUInt64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeUInt64Request,
         nidaqmx_pb2.SetTimingAttributeUInt64Response,
     ]
+
     SetTrigAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTrigAttributeBoolRequest,
         nidaqmx_pb2.SetTrigAttributeBoolResponse,
     ]
+
     SetTrigAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTrigAttributeDoubleRequest,
         nidaqmx_pb2.SetTrigAttributeDoubleResponse,
     ]
+
     SetTrigAttributeDoubleArray: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTrigAttributeDoubleArrayRequest,
         nidaqmx_pb2.SetTrigAttributeDoubleArrayResponse,
     ]
+
     SetTrigAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTrigAttributeInt32Request,
         nidaqmx_pb2.SetTrigAttributeInt32Response,
     ]
+
     SetTrigAttributeInt32Array: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTrigAttributeInt32ArrayRequest,
         nidaqmx_pb2.SetTrigAttributeInt32ArrayResponse,
     ]
+
     SetTrigAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTrigAttributeStringRequest,
         nidaqmx_pb2.SetTrigAttributeStringResponse,
     ]
+
     SetTrigAttributeTimestamp: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTrigAttributeTimestampRequest,
         nidaqmx_pb2.SetTrigAttributeTimestampResponse,
     ]
+
     SetTrigAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTrigAttributeUInt32Request,
         nidaqmx_pb2.SetTrigAttributeUInt32Response,
     ]
+
     SetWatchdogAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWatchdogAttributeBoolRequest,
         nidaqmx_pb2.SetWatchdogAttributeBoolResponse,
     ]
+
     SetWatchdogAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWatchdogAttributeDoubleRequest,
         nidaqmx_pb2.SetWatchdogAttributeDoubleResponse,
     ]
+
     SetWatchdogAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWatchdogAttributeInt32Request,
         nidaqmx_pb2.SetWatchdogAttributeInt32Response,
     ]
+
     SetWatchdogAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWatchdogAttributeStringRequest,
         nidaqmx_pb2.SetWatchdogAttributeStringResponse,
     ]
+
     SetWriteAttributeBool: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWriteAttributeBoolRequest,
         nidaqmx_pb2.SetWriteAttributeBoolResponse,
     ]
+
     SetWriteAttributeDouble: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWriteAttributeDoubleRequest,
         nidaqmx_pb2.SetWriteAttributeDoubleResponse,
     ]
+
     SetWriteAttributeInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWriteAttributeInt32Request,
         nidaqmx_pb2.SetWriteAttributeInt32Response,
     ]
+
     SetWriteAttributeString: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWriteAttributeStringRequest,
         nidaqmx_pb2.SetWriteAttributeStringResponse,
     ]
+
     SetWriteAttributeUInt32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWriteAttributeUInt32Request,
         nidaqmx_pb2.SetWriteAttributeUInt32Response,
     ]
+
     SetWriteAttributeUInt64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWriteAttributeUInt64Request,
         nidaqmx_pb2.SetWriteAttributeUInt64Response,
     ]
+
     StartNewFile: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.StartNewFileRequest,
         nidaqmx_pb2.StartNewFileResponse,
     ]
+
     StartTask: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.StartTaskRequest,
         nidaqmx_pb2.StartTaskResponse,
     ]
+
     StopTask: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.StopTaskRequest,
         nidaqmx_pb2.StopTaskResponse,
     ]
+
     TaskControl: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.TaskControlRequest,
         nidaqmx_pb2.TaskControlResponse,
     ]
+
     TristateOutputTerm: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.TristateOutputTermRequest,
         nidaqmx_pb2.TristateOutputTermResponse,
     ]
+
     UnregisterDoneEvent: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.UnregisterDoneEventRequest,
         nidaqmx_pb2.UnregisterDoneEventResponse,
     ]
+
     UnregisterEveryNSamplesEvent: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.UnregisterEveryNSamplesEventRequest,
         nidaqmx_pb2.UnregisterEveryNSamplesEventResponse,
     ]
+
     UnregisterSignalEvent: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.UnregisterSignalEventRequest,
         nidaqmx_pb2.UnregisterSignalEventResponse,
     ]
+
     UnreserveNetworkDevice: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.UnreserveNetworkDeviceRequest,
         nidaqmx_pb2.UnreserveNetworkDeviceResponse,
     ]
+
     WaitForNextSampleClock: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WaitForNextSampleClockRequest,
         nidaqmx_pb2.WaitForNextSampleClockResponse,
     ]
+
     WaitForValidTimestamp: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WaitForValidTimestampRequest,
         nidaqmx_pb2.WaitForValidTimestampResponse,
     ]
+
     WaitUntilTaskDone: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WaitUntilTaskDoneRequest,
         nidaqmx_pb2.WaitUntilTaskDoneResponse,
     ]
+
     WriteAnalogF64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteAnalogF64Request,
         nidaqmx_pb2.WriteAnalogF64Response,
     ]
+
     WriteAnalogScalarF64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteAnalogScalarF64Request,
         nidaqmx_pb2.WriteAnalogScalarF64Response,
     ]
+
     WriteBinaryI16: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteBinaryI16Request,
         nidaqmx_pb2.WriteBinaryI16Response,
     ]
+
     WriteBinaryI32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteBinaryI32Request,
         nidaqmx_pb2.WriteBinaryI32Response,
     ]
+
     WriteBinaryU16: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteBinaryU16Request,
         nidaqmx_pb2.WriteBinaryU16Response,
     ]
+
     WriteBinaryU32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteBinaryU32Request,
         nidaqmx_pb2.WriteBinaryU32Response,
     ]
+
     WriteCtrFreq: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrFreqRequest,
         nidaqmx_pb2.WriteCtrFreqResponse,
     ]
+
     WriteCtrFreqScalar: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrFreqScalarRequest,
         nidaqmx_pb2.WriteCtrFreqScalarResponse,
     ]
+
     WriteCtrTicks: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrTicksRequest,
         nidaqmx_pb2.WriteCtrTicksResponse,
     ]
+
     WriteCtrTicksScalar: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrTicksScalarRequest,
         nidaqmx_pb2.WriteCtrTicksScalarResponse,
     ]
+
     WriteCtrTime: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrTimeRequest,
         nidaqmx_pb2.WriteCtrTimeResponse,
     ]
+
     WriteCtrTimeScalar: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrTimeScalarRequest,
         nidaqmx_pb2.WriteCtrTimeScalarResponse,
     ]
+
     WriteDigitalLines: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteDigitalLinesRequest,
         nidaqmx_pb2.WriteDigitalLinesResponse,
     ]
+
     WriteDigitalScalarU32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteDigitalScalarU32Request,
         nidaqmx_pb2.WriteDigitalScalarU32Response,
     ]
+
     WriteDigitalU16: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteDigitalU16Request,
         nidaqmx_pb2.WriteDigitalU16Response,
     ]
+
     WriteDigitalU32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteDigitalU32Request,
         nidaqmx_pb2.WriteDigitalU32Response,
     ]
+
     WriteDigitalU8: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteDigitalU8Request,
         nidaqmx_pb2.WriteDigitalU8Response,
     ]
+
     WriteRaw: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteRawRequest,
         nidaqmx_pb2.WriteRawResponse,
     ]
+
     WriteToTEDSFromArray: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteToTEDSFromArrayRequest,
         nidaqmx_pb2.WriteToTEDSFromArrayResponse,
     ]
+
     WriteToTEDSFromFile: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteToTEDSFromFileRequest,
         nidaqmx_pb2.WriteToTEDSFromFileResponse,
@@ -1622,1590 +2019,1987 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.AddCDAQSyncConnectionRequest,
         nidaqmx_pb2.AddCDAQSyncConnectionResponse,
     ]
+
     AddGlobalChansToTask: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.AddGlobalChansToTaskRequest,
         nidaqmx_pb2.AddGlobalChansToTaskResponse,
     ]
+
     AddNetworkDevice: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.AddNetworkDeviceRequest,
         nidaqmx_pb2.AddNetworkDeviceResponse,
     ]
+
     AreConfiguredCDAQSyncPortsDisconnected: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.AreConfiguredCDAQSyncPortsDisconnectedRequest,
         nidaqmx_pb2.AreConfiguredCDAQSyncPortsDisconnectedResponse,
     ]
+
     AutoConfigureCDAQSyncConnections: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.AutoConfigureCDAQSyncConnectionsRequest,
         nidaqmx_pb2.AutoConfigureCDAQSyncConnectionsResponse,
     ]
+
     CalculateReversePolyCoeff: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CalculateReversePolyCoeffRequest,
         nidaqmx_pb2.CalculateReversePolyCoeffResponse,
     ]
+
     CfgAnlgEdgeRefTrig: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgAnlgEdgeRefTrigRequest,
         nidaqmx_pb2.CfgAnlgEdgeRefTrigResponse,
     ]
+
     CfgAnlgEdgeStartTrig: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgAnlgEdgeStartTrigRequest,
         nidaqmx_pb2.CfgAnlgEdgeStartTrigResponse,
     ]
+
     CfgAnlgMultiEdgeRefTrig: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgAnlgMultiEdgeRefTrigRequest,
         nidaqmx_pb2.CfgAnlgMultiEdgeRefTrigResponse,
     ]
+
     CfgAnlgMultiEdgeStartTrig: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgAnlgMultiEdgeStartTrigRequest,
         nidaqmx_pb2.CfgAnlgMultiEdgeStartTrigResponse,
     ]
+
     CfgAnlgWindowRefTrig: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgAnlgWindowRefTrigRequest,
         nidaqmx_pb2.CfgAnlgWindowRefTrigResponse,
     ]
+
     CfgAnlgWindowStartTrig: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgAnlgWindowStartTrigRequest,
         nidaqmx_pb2.CfgAnlgWindowStartTrigResponse,
     ]
+
     CfgBurstHandshakingTimingExportClock: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgBurstHandshakingTimingExportClockRequest,
         nidaqmx_pb2.CfgBurstHandshakingTimingExportClockResponse,
     ]
+
     CfgBurstHandshakingTimingImportClock: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgBurstHandshakingTimingImportClockRequest,
         nidaqmx_pb2.CfgBurstHandshakingTimingImportClockResponse,
     ]
+
     CfgChangeDetectionTiming: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgChangeDetectionTimingRequest,
         nidaqmx_pb2.CfgChangeDetectionTimingResponse,
     ]
+
     CfgDigEdgeRefTrig: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgDigEdgeRefTrigRequest,
         nidaqmx_pb2.CfgDigEdgeRefTrigResponse,
     ]
+
     CfgDigEdgeStartTrig: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgDigEdgeStartTrigRequest,
         nidaqmx_pb2.CfgDigEdgeStartTrigResponse,
     ]
+
     CfgDigPatternRefTrig: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgDigPatternRefTrigRequest,
         nidaqmx_pb2.CfgDigPatternRefTrigResponse,
     ]
+
     CfgDigPatternStartTrig: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgDigPatternStartTrigRequest,
         nidaqmx_pb2.CfgDigPatternStartTrigResponse,
     ]
+
     CfgHandshakingTiming: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgHandshakingTimingRequest,
         nidaqmx_pb2.CfgHandshakingTimingResponse,
     ]
+
     CfgImplicitTiming: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgImplicitTimingRequest,
         nidaqmx_pb2.CfgImplicitTimingResponse,
     ]
+
     CfgInputBuffer: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgInputBufferRequest,
         nidaqmx_pb2.CfgInputBufferResponse,
     ]
+
     CfgOutputBuffer: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgOutputBufferRequest,
         nidaqmx_pb2.CfgOutputBufferResponse,
     ]
+
     CfgPipelinedSampClkTiming: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgPipelinedSampClkTimingRequest,
         nidaqmx_pb2.CfgPipelinedSampClkTimingResponse,
     ]
+
     CfgSampClkTiming: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgSampClkTimingRequest,
         nidaqmx_pb2.CfgSampClkTimingResponse,
     ]
+
     CfgTimeStartTrig: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgTimeStartTrigRequest,
         nidaqmx_pb2.CfgTimeStartTrigResponse,
     ]
+
     CfgWatchdogAOExpirStates: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgWatchdogAOExpirStatesRequest,
         nidaqmx_pb2.CfgWatchdogAOExpirStatesResponse,
     ]
+
     CfgWatchdogCOExpirStates: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgWatchdogCOExpirStatesRequest,
         nidaqmx_pb2.CfgWatchdogCOExpirStatesResponse,
     ]
+
     CfgWatchdogDOExpirStates: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CfgWatchdogDOExpirStatesRequest,
         nidaqmx_pb2.CfgWatchdogDOExpirStatesResponse,
     ]
+
     ClearTEDS: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ClearTEDSRequest,
         nidaqmx_pb2.ClearTEDSResponse,
     ]
+
     ClearTask: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ClearTaskRequest,
         nidaqmx_pb2.ClearTaskResponse,
     ]
+
     ConfigureLogging: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ConfigureLoggingRequest,
         nidaqmx_pb2.ConfigureLoggingResponse,
     ]
+
     ConfigureTEDS: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ConfigureTEDSRequest,
         nidaqmx_pb2.ConfigureTEDSResponse,
     ]
+
     ConnectTerms: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ConnectTermsRequest,
         nidaqmx_pb2.ConnectTermsResponse,
     ]
+
     ControlWatchdogTask: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ControlWatchdogTaskRequest,
         nidaqmx_pb2.ControlWatchdogTaskResponse,
     ]
+
     CreateAIAccel4WireDCVoltageChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIAccel4WireDCVoltageChanRequest,
         nidaqmx_pb2.CreateAIAccel4WireDCVoltageChanResponse,
     ]
+
     CreateAIAccelChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIAccelChanRequest,
         nidaqmx_pb2.CreateAIAccelChanResponse,
     ]
+
     CreateAIAccelChargeChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIAccelChargeChanRequest,
         nidaqmx_pb2.CreateAIAccelChargeChanResponse,
     ]
+
     CreateAIBridgeChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIBridgeChanRequest,
         nidaqmx_pb2.CreateAIBridgeChanResponse,
     ]
+
     CreateAIChargeChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIChargeChanRequest,
         nidaqmx_pb2.CreateAIChargeChanResponse,
     ]
+
     CreateAICurrentChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAICurrentChanRequest,
         nidaqmx_pb2.CreateAICurrentChanResponse,
     ]
+
     CreateAICurrentRMSChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAICurrentRMSChanRequest,
         nidaqmx_pb2.CreateAICurrentRMSChanResponse,
     ]
+
     CreateAIForceBridgePolynomialChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIForceBridgePolynomialChanRequest,
         nidaqmx_pb2.CreateAIForceBridgePolynomialChanResponse,
     ]
+
     CreateAIForceBridgeTableChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIForceBridgeTableChanRequest,
         nidaqmx_pb2.CreateAIForceBridgeTableChanResponse,
     ]
+
     CreateAIForceBridgeTwoPointLinChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIForceBridgeTwoPointLinChanRequest,
         nidaqmx_pb2.CreateAIForceBridgeTwoPointLinChanResponse,
     ]
+
     CreateAIForceIEPEChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIForceIEPEChanRequest,
         nidaqmx_pb2.CreateAIForceIEPEChanResponse,
     ]
+
     CreateAIFreqVoltageChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIFreqVoltageChanRequest,
         nidaqmx_pb2.CreateAIFreqVoltageChanResponse,
     ]
+
     CreateAIMicrophoneChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIMicrophoneChanRequest,
         nidaqmx_pb2.CreateAIMicrophoneChanResponse,
     ]
+
     CreateAIPosEddyCurrProxProbeChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIPosEddyCurrProxProbeChanRequest,
         nidaqmx_pb2.CreateAIPosEddyCurrProxProbeChanResponse,
     ]
+
     CreateAIPosLVDTChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIPosLVDTChanRequest,
         nidaqmx_pb2.CreateAIPosLVDTChanResponse,
     ]
+
     CreateAIPosRVDTChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIPosRVDTChanRequest,
         nidaqmx_pb2.CreateAIPosRVDTChanResponse,
     ]
+
     CreateAIPowerChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIPowerChanRequest,
         nidaqmx_pb2.CreateAIPowerChanResponse,
     ]
+
     CreateAIPressureBridgePolynomialChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIPressureBridgePolynomialChanRequest,
         nidaqmx_pb2.CreateAIPressureBridgePolynomialChanResponse,
     ]
+
     CreateAIPressureBridgeTableChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIPressureBridgeTableChanRequest,
         nidaqmx_pb2.CreateAIPressureBridgeTableChanResponse,
     ]
+
     CreateAIPressureBridgeTwoPointLinChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIPressureBridgeTwoPointLinChanRequest,
         nidaqmx_pb2.CreateAIPressureBridgeTwoPointLinChanResponse,
     ]
+
     CreateAIRTDChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIRTDChanRequest,
         nidaqmx_pb2.CreateAIRTDChanResponse,
     ]
+
     CreateAIResistanceChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIResistanceChanRequest,
         nidaqmx_pb2.CreateAIResistanceChanResponse,
     ]
+
     CreateAIRosetteStrainGageChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIRosetteStrainGageChanRequest,
         nidaqmx_pb2.CreateAIRosetteStrainGageChanResponse,
     ]
+
     CreateAIStrainGageChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIStrainGageChanRequest,
         nidaqmx_pb2.CreateAIStrainGageChanResponse,
     ]
+
     CreateAITempBuiltInSensorChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAITempBuiltInSensorChanRequest,
         nidaqmx_pb2.CreateAITempBuiltInSensorChanResponse,
     ]
+
     CreateAIThrmcplChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIThrmcplChanRequest,
         nidaqmx_pb2.CreateAIThrmcplChanResponse,
     ]
+
     CreateAIThrmstrChanIex: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIThrmstrChanIexRequest,
         nidaqmx_pb2.CreateAIThrmstrChanIexResponse,
     ]
+
     CreateAIThrmstrChanVex: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIThrmstrChanVexRequest,
         nidaqmx_pb2.CreateAIThrmstrChanVexResponse,
     ]
+
     CreateAITorqueBridgePolynomialChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAITorqueBridgePolynomialChanRequest,
         nidaqmx_pb2.CreateAITorqueBridgePolynomialChanResponse,
     ]
+
     CreateAITorqueBridgeTableChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAITorqueBridgeTableChanRequest,
         nidaqmx_pb2.CreateAITorqueBridgeTableChanResponse,
     ]
+
     CreateAITorqueBridgeTwoPointLinChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAITorqueBridgeTwoPointLinChanRequest,
         nidaqmx_pb2.CreateAITorqueBridgeTwoPointLinChanResponse,
     ]
+
     CreateAIVelocityIEPEChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIVelocityIEPEChanRequest,
         nidaqmx_pb2.CreateAIVelocityIEPEChanResponse,
     ]
+
     CreateAIVoltageChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIVoltageChanRequest,
         nidaqmx_pb2.CreateAIVoltageChanResponse,
     ]
+
     CreateAIVoltageChanWithExcit: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIVoltageChanWithExcitRequest,
         nidaqmx_pb2.CreateAIVoltageChanWithExcitResponse,
     ]
+
     CreateAIVoltageRMSChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAIVoltageRMSChanRequest,
         nidaqmx_pb2.CreateAIVoltageRMSChanResponse,
     ]
+
     CreateAOCurrentChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAOCurrentChanRequest,
         nidaqmx_pb2.CreateAOCurrentChanResponse,
     ]
+
     CreateAOFuncGenChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAOFuncGenChanRequest,
         nidaqmx_pb2.CreateAOFuncGenChanResponse,
     ]
+
     CreateAOVoltageChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateAOVoltageChanRequest,
         nidaqmx_pb2.CreateAOVoltageChanResponse,
     ]
+
     CreateCIAngEncoderChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIAngEncoderChanRequest,
         nidaqmx_pb2.CreateCIAngEncoderChanResponse,
     ]
+
     CreateCIAngVelocityChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIAngVelocityChanRequest,
         nidaqmx_pb2.CreateCIAngVelocityChanResponse,
     ]
+
     CreateCICountEdgesChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCICountEdgesChanRequest,
         nidaqmx_pb2.CreateCICountEdgesChanResponse,
     ]
+
     CreateCIDutyCycleChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIDutyCycleChanRequest,
         nidaqmx_pb2.CreateCIDutyCycleChanResponse,
     ]
+
     CreateCIFreqChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIFreqChanRequest,
         nidaqmx_pb2.CreateCIFreqChanResponse,
     ]
+
     CreateCIGPSTimestampChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIGPSTimestampChanRequest,
         nidaqmx_pb2.CreateCIGPSTimestampChanResponse,
     ]
+
     CreateCILinEncoderChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCILinEncoderChanRequest,
         nidaqmx_pb2.CreateCILinEncoderChanResponse,
     ]
+
     CreateCILinVelocityChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCILinVelocityChanRequest,
         nidaqmx_pb2.CreateCILinVelocityChanResponse,
     ]
+
     CreateCIPeriodChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIPeriodChanRequest,
         nidaqmx_pb2.CreateCIPeriodChanResponse,
     ]
+
     CreateCIPulseChanFreq: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIPulseChanFreqRequest,
         nidaqmx_pb2.CreateCIPulseChanFreqResponse,
     ]
+
     CreateCIPulseChanTicks: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIPulseChanTicksRequest,
         nidaqmx_pb2.CreateCIPulseChanTicksResponse,
     ]
+
     CreateCIPulseChanTime: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIPulseChanTimeRequest,
         nidaqmx_pb2.CreateCIPulseChanTimeResponse,
     ]
+
     CreateCIPulseWidthChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCIPulseWidthChanRequest,
         nidaqmx_pb2.CreateCIPulseWidthChanResponse,
     ]
+
     CreateCISemiPeriodChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCISemiPeriodChanRequest,
         nidaqmx_pb2.CreateCISemiPeriodChanResponse,
     ]
+
     CreateCITwoEdgeSepChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCITwoEdgeSepChanRequest,
         nidaqmx_pb2.CreateCITwoEdgeSepChanResponse,
     ]
+
     CreateCOPulseChanFreq: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCOPulseChanFreqRequest,
         nidaqmx_pb2.CreateCOPulseChanFreqResponse,
     ]
+
     CreateCOPulseChanTicks: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCOPulseChanTicksRequest,
         nidaqmx_pb2.CreateCOPulseChanTicksResponse,
     ]
+
     CreateCOPulseChanTime: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateCOPulseChanTimeRequest,
         nidaqmx_pb2.CreateCOPulseChanTimeResponse,
     ]
+
     CreateDIChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateDIChanRequest,
         nidaqmx_pb2.CreateDIChanResponse,
     ]
+
     CreateDOChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateDOChanRequest,
         nidaqmx_pb2.CreateDOChanResponse,
     ]
+
     CreateLinScale: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateLinScaleRequest,
         nidaqmx_pb2.CreateLinScaleResponse,
     ]
+
     CreateMapScale: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateMapScaleRequest,
         nidaqmx_pb2.CreateMapScaleResponse,
     ]
+
     CreatePolynomialScale: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreatePolynomialScaleRequest,
         nidaqmx_pb2.CreatePolynomialScaleResponse,
     ]
+
     CreateTEDSAIAccelChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIAccelChanRequest,
         nidaqmx_pb2.CreateTEDSAIAccelChanResponse,
     ]
+
     CreateTEDSAIBridgeChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIBridgeChanRequest,
         nidaqmx_pb2.CreateTEDSAIBridgeChanResponse,
     ]
+
     CreateTEDSAICurrentChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAICurrentChanRequest,
         nidaqmx_pb2.CreateTEDSAICurrentChanResponse,
     ]
+
     CreateTEDSAIForceBridgeChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIForceBridgeChanRequest,
         nidaqmx_pb2.CreateTEDSAIForceBridgeChanResponse,
     ]
+
     CreateTEDSAIForceIEPEChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIForceIEPEChanRequest,
         nidaqmx_pb2.CreateTEDSAIForceIEPEChanResponse,
     ]
+
     CreateTEDSAIMicrophoneChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIMicrophoneChanRequest,
         nidaqmx_pb2.CreateTEDSAIMicrophoneChanResponse,
     ]
+
     CreateTEDSAIPosLVDTChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIPosLVDTChanRequest,
         nidaqmx_pb2.CreateTEDSAIPosLVDTChanResponse,
     ]
+
     CreateTEDSAIPosRVDTChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIPosRVDTChanRequest,
         nidaqmx_pb2.CreateTEDSAIPosRVDTChanResponse,
     ]
+
     CreateTEDSAIPressureBridgeChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIPressureBridgeChanRequest,
         nidaqmx_pb2.CreateTEDSAIPressureBridgeChanResponse,
     ]
+
     CreateTEDSAIRTDChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIRTDChanRequest,
         nidaqmx_pb2.CreateTEDSAIRTDChanResponse,
     ]
+
     CreateTEDSAIResistanceChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIResistanceChanRequest,
         nidaqmx_pb2.CreateTEDSAIResistanceChanResponse,
     ]
+
     CreateTEDSAIStrainGageChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIStrainGageChanRequest,
         nidaqmx_pb2.CreateTEDSAIStrainGageChanResponse,
     ]
+
     CreateTEDSAIThrmcplChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIThrmcplChanRequest,
         nidaqmx_pb2.CreateTEDSAIThrmcplChanResponse,
     ]
+
     CreateTEDSAIThrmstrChanIex: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIThrmstrChanIexRequest,
         nidaqmx_pb2.CreateTEDSAIThrmstrChanIexResponse,
     ]
+
     CreateTEDSAIThrmstrChanVex: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIThrmstrChanVexRequest,
         nidaqmx_pb2.CreateTEDSAIThrmstrChanVexResponse,
     ]
+
     CreateTEDSAITorqueBridgeChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAITorqueBridgeChanRequest,
         nidaqmx_pb2.CreateTEDSAITorqueBridgeChanResponse,
     ]
+
     CreateTEDSAIVoltageChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIVoltageChanRequest,
         nidaqmx_pb2.CreateTEDSAIVoltageChanResponse,
     ]
+
     CreateTEDSAIVoltageChanWithExcit: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTEDSAIVoltageChanWithExcitRequest,
         nidaqmx_pb2.CreateTEDSAIVoltageChanWithExcitResponse,
     ]
+
     CreateTableScale: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTableScaleRequest,
         nidaqmx_pb2.CreateTableScaleResponse,
     ]
+
     CreateTask: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateTaskRequest,
         nidaqmx_pb2.CreateTaskResponse,
     ]
+
     CreateWatchdogTimerTask: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateWatchdogTimerTaskRequest,
         nidaqmx_pb2.CreateWatchdogTimerTaskResponse,
     ]
+
     CreateWatchdogTimerTaskEx: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.CreateWatchdogTimerTaskExRequest,
         nidaqmx_pb2.CreateWatchdogTimerTaskExResponse,
     ]
+
     DeleteNetworkDevice: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.DeleteNetworkDeviceRequest,
         nidaqmx_pb2.DeleteNetworkDeviceResponse,
     ]
+
     DeleteSavedGlobalChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.DeleteSavedGlobalChanRequest,
         nidaqmx_pb2.DeleteSavedGlobalChanResponse,
     ]
+
     DeleteSavedScale: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.DeleteSavedScaleRequest,
         nidaqmx_pb2.DeleteSavedScaleResponse,
     ]
+
     DeleteSavedTask: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.DeleteSavedTaskRequest,
         nidaqmx_pb2.DeleteSavedTaskResponse,
     ]
+
     DeviceSupportsCal: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.DeviceSupportsCalRequest,
         nidaqmx_pb2.DeviceSupportsCalResponse,
     ]
+
     DisableRefTrig: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.DisableRefTrigRequest,
         nidaqmx_pb2.DisableRefTrigResponse,
     ]
+
     DisableStartTrig: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.DisableStartTrigRequest,
         nidaqmx_pb2.DisableStartTrigResponse,
     ]
+
     DisconnectTerms: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.DisconnectTermsRequest,
         nidaqmx_pb2.DisconnectTermsResponse,
     ]
+
     ExportSignal: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ExportSignalRequest,
         nidaqmx_pb2.ExportSignalResponse,
     ]
+
     GetAIChanCalCalDate: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetAIChanCalCalDateRequest,
         nidaqmx_pb2.GetAIChanCalCalDateResponse,
     ]
+
     GetAIChanCalExpDate: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetAIChanCalExpDateRequest,
         nidaqmx_pb2.GetAIChanCalExpDateResponse,
     ]
+
     GetAnalogPowerUpStates: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetAnalogPowerUpStatesRequest,
         nidaqmx_pb2.GetAnalogPowerUpStatesResponse,
     ]
+
     GetAnalogPowerUpStatesWithOutputType: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetAnalogPowerUpStatesWithOutputTypeRequest,
         nidaqmx_pb2.GetAnalogPowerUpStatesWithOutputTypeResponse,
     ]
+
     GetArmStartTrigTimestampVal: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetArmStartTrigTimestampValRequest,
         nidaqmx_pb2.GetArmStartTrigTimestampValResponse,
     ]
+
     GetArmStartTrigTrigWhen: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetArmStartTrigTrigWhenRequest,
         nidaqmx_pb2.GetArmStartTrigTrigWhenResponse,
     ]
+
     GetAutoConfiguredCDAQSyncConnections: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetAutoConfiguredCDAQSyncConnectionsRequest,
         nidaqmx_pb2.GetAutoConfiguredCDAQSyncConnectionsResponse,
     ]
+
     GetBufferAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetBufferAttributeUInt32Request,
         nidaqmx_pb2.GetBufferAttributeUInt32Response,
     ]
+
     GetCalInfoAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetCalInfoAttributeBoolRequest,
         nidaqmx_pb2.GetCalInfoAttributeBoolResponse,
     ]
+
     GetCalInfoAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetCalInfoAttributeDoubleRequest,
         nidaqmx_pb2.GetCalInfoAttributeDoubleResponse,
     ]
+
     GetCalInfoAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetCalInfoAttributeStringRequest,
         nidaqmx_pb2.GetCalInfoAttributeStringResponse,
     ]
+
     GetCalInfoAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetCalInfoAttributeUInt32Request,
         nidaqmx_pb2.GetCalInfoAttributeUInt32Response,
     ]
+
     GetChanAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetChanAttributeBoolRequest,
         nidaqmx_pb2.GetChanAttributeBoolResponse,
     ]
+
     GetChanAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetChanAttributeDoubleRequest,
         nidaqmx_pb2.GetChanAttributeDoubleResponse,
     ]
+
     GetChanAttributeDoubleArray: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetChanAttributeDoubleArrayRequest,
         nidaqmx_pb2.GetChanAttributeDoubleArrayResponse,
     ]
+
     GetChanAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetChanAttributeInt32Request,
         nidaqmx_pb2.GetChanAttributeInt32Response,
     ]
+
     GetChanAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetChanAttributeStringRequest,
         nidaqmx_pb2.GetChanAttributeStringResponse,
     ]
+
     GetChanAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetChanAttributeUInt32Request,
         nidaqmx_pb2.GetChanAttributeUInt32Response,
     ]
+
     GetDeviceAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDeviceAttributeBoolRequest,
         nidaqmx_pb2.GetDeviceAttributeBoolResponse,
     ]
+
     GetDeviceAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDeviceAttributeDoubleRequest,
         nidaqmx_pb2.GetDeviceAttributeDoubleResponse,
     ]
+
     GetDeviceAttributeDoubleArray: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDeviceAttributeDoubleArrayRequest,
         nidaqmx_pb2.GetDeviceAttributeDoubleArrayResponse,
     ]
+
     GetDeviceAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDeviceAttributeInt32Request,
         nidaqmx_pb2.GetDeviceAttributeInt32Response,
     ]
+
     GetDeviceAttributeInt32Array: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDeviceAttributeInt32ArrayRequest,
         nidaqmx_pb2.GetDeviceAttributeInt32ArrayResponse,
     ]
+
     GetDeviceAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDeviceAttributeStringRequest,
         nidaqmx_pb2.GetDeviceAttributeStringResponse,
     ]
+
     GetDeviceAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDeviceAttributeUInt32Request,
         nidaqmx_pb2.GetDeviceAttributeUInt32Response,
     ]
+
     GetDeviceAttributeUInt32Array: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDeviceAttributeUInt32ArrayRequest,
         nidaqmx_pb2.GetDeviceAttributeUInt32ArrayResponse,
     ]
+
     GetDigitalLogicFamilyPowerUpState: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDigitalLogicFamilyPowerUpStateRequest,
         nidaqmx_pb2.GetDigitalLogicFamilyPowerUpStateResponse,
     ]
+
     GetDigitalPowerUpStates: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDigitalPowerUpStatesRequest,
         nidaqmx_pb2.GetDigitalPowerUpStatesResponse,
     ]
+
     GetDigitalPullUpPullDownStates: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDigitalPullUpPullDownStatesRequest,
         nidaqmx_pb2.GetDigitalPullUpPullDownStatesResponse,
     ]
+
     GetDisconnectedCDAQSyncPorts: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetDisconnectedCDAQSyncPortsRequest,
         nidaqmx_pb2.GetDisconnectedCDAQSyncPortsResponse,
     ]
+
     GetErrorString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetErrorStringRequest,
         nidaqmx_pb2.GetErrorStringResponse,
     ]
+
     GetExportedSignalAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetExportedSignalAttributeBoolRequest,
         nidaqmx_pb2.GetExportedSignalAttributeBoolResponse,
     ]
+
     GetExportedSignalAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetExportedSignalAttributeDoubleRequest,
         nidaqmx_pb2.GetExportedSignalAttributeDoubleResponse,
     ]
+
     GetExportedSignalAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetExportedSignalAttributeInt32Request,
         nidaqmx_pb2.GetExportedSignalAttributeInt32Response,
     ]
+
     GetExportedSignalAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetExportedSignalAttributeStringRequest,
         nidaqmx_pb2.GetExportedSignalAttributeStringResponse,
     ]
+
     GetExportedSignalAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetExportedSignalAttributeUInt32Request,
         nidaqmx_pb2.GetExportedSignalAttributeUInt32Response,
     ]
+
     GetExtCalLastDateAndTime: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetExtCalLastDateAndTimeRequest,
         nidaqmx_pb2.GetExtCalLastDateAndTimeResponse,
     ]
+
     GetFirstSampClkWhen: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetFirstSampClkWhenRequest,
         nidaqmx_pb2.GetFirstSampClkWhenResponse,
     ]
+
     GetFirstSampTimestampVal: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetFirstSampTimestampValRequest,
         nidaqmx_pb2.GetFirstSampTimestampValResponse,
     ]
+
     GetNthTaskChannel: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetNthTaskChannelRequest,
         nidaqmx_pb2.GetNthTaskChannelResponse,
     ]
+
     GetNthTaskDevice: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetNthTaskDeviceRequest,
         nidaqmx_pb2.GetNthTaskDeviceResponse,
     ]
+
     GetNthTaskReadChannel: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetNthTaskReadChannelRequest,
         nidaqmx_pb2.GetNthTaskReadChannelResponse,
     ]
+
     GetPersistedChanAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPersistedChanAttributeBoolRequest,
         nidaqmx_pb2.GetPersistedChanAttributeBoolResponse,
     ]
+
     GetPersistedChanAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPersistedChanAttributeStringRequest,
         nidaqmx_pb2.GetPersistedChanAttributeStringResponse,
     ]
+
     GetPersistedScaleAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPersistedScaleAttributeBoolRequest,
         nidaqmx_pb2.GetPersistedScaleAttributeBoolResponse,
     ]
+
     GetPersistedScaleAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPersistedScaleAttributeStringRequest,
         nidaqmx_pb2.GetPersistedScaleAttributeStringResponse,
     ]
+
     GetPersistedTaskAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPersistedTaskAttributeBoolRequest,
         nidaqmx_pb2.GetPersistedTaskAttributeBoolResponse,
     ]
+
     GetPersistedTaskAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPersistedTaskAttributeStringRequest,
         nidaqmx_pb2.GetPersistedTaskAttributeStringResponse,
     ]
+
     GetPhysicalChanAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeBoolRequest,
         nidaqmx_pb2.GetPhysicalChanAttributeBoolResponse,
     ]
+
     GetPhysicalChanAttributeBytes: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeBytesRequest,
         nidaqmx_pb2.GetPhysicalChanAttributeBytesResponse,
     ]
+
     GetPhysicalChanAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeDoubleRequest,
         nidaqmx_pb2.GetPhysicalChanAttributeDoubleResponse,
     ]
+
     GetPhysicalChanAttributeDoubleArray: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeDoubleArrayRequest,
         nidaqmx_pb2.GetPhysicalChanAttributeDoubleArrayResponse,
     ]
+
     GetPhysicalChanAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeInt32Request,
         nidaqmx_pb2.GetPhysicalChanAttributeInt32Response,
     ]
+
     GetPhysicalChanAttributeInt32Array: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeInt32ArrayRequest,
         nidaqmx_pb2.GetPhysicalChanAttributeInt32ArrayResponse,
     ]
+
     GetPhysicalChanAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeStringRequest,
         nidaqmx_pb2.GetPhysicalChanAttributeStringResponse,
     ]
+
     GetPhysicalChanAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeUInt32Request,
         nidaqmx_pb2.GetPhysicalChanAttributeUInt32Response,
     ]
+
     GetPhysicalChanAttributeUInt32Array: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetPhysicalChanAttributeUInt32ArrayRequest,
         nidaqmx_pb2.GetPhysicalChanAttributeUInt32ArrayResponse,
     ]
+
     GetReadAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetReadAttributeBoolRequest,
         nidaqmx_pb2.GetReadAttributeBoolResponse,
     ]
+
     GetReadAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetReadAttributeDoubleRequest,
         nidaqmx_pb2.GetReadAttributeDoubleResponse,
     ]
+
     GetReadAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetReadAttributeInt32Request,
         nidaqmx_pb2.GetReadAttributeInt32Response,
     ]
+
     GetReadAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetReadAttributeStringRequest,
         nidaqmx_pb2.GetReadAttributeStringResponse,
     ]
+
     GetReadAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetReadAttributeUInt32Request,
         nidaqmx_pb2.GetReadAttributeUInt32Response,
     ]
+
     GetReadAttributeUInt64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetReadAttributeUInt64Request,
         nidaqmx_pb2.GetReadAttributeUInt64Response,
     ]
+
     GetRealTimeAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetRealTimeAttributeBoolRequest,
         nidaqmx_pb2.GetRealTimeAttributeBoolResponse,
     ]
+
     GetRealTimeAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetRealTimeAttributeInt32Request,
         nidaqmx_pb2.GetRealTimeAttributeInt32Response,
     ]
+
     GetRealTimeAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetRealTimeAttributeUInt32Request,
         nidaqmx_pb2.GetRealTimeAttributeUInt32Response,
     ]
+
     GetRefTrigTimestampVal: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetRefTrigTimestampValRequest,
         nidaqmx_pb2.GetRefTrigTimestampValResponse,
     ]
+
     GetScaleAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetScaleAttributeDoubleRequest,
         nidaqmx_pb2.GetScaleAttributeDoubleResponse,
     ]
+
     GetScaleAttributeDoubleArray: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetScaleAttributeDoubleArrayRequest,
         nidaqmx_pb2.GetScaleAttributeDoubleArrayResponse,
     ]
+
     GetScaleAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetScaleAttributeInt32Request,
         nidaqmx_pb2.GetScaleAttributeInt32Response,
     ]
+
     GetScaleAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetScaleAttributeStringRequest,
         nidaqmx_pb2.GetScaleAttributeStringResponse,
     ]
+
     GetSelfCalLastDateAndTime: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetSelfCalLastDateAndTimeRequest,
         nidaqmx_pb2.GetSelfCalLastDateAndTimeResponse,
     ]
+
     GetStartTrigTimestampVal: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetStartTrigTimestampValRequest,
         nidaqmx_pb2.GetStartTrigTimestampValResponse,
     ]
+
     GetStartTrigTrigWhen: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetStartTrigTrigWhenRequest,
         nidaqmx_pb2.GetStartTrigTrigWhenResponse,
     ]
+
     GetSyncPulseTimeWhen: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetSyncPulseTimeWhenRequest,
         nidaqmx_pb2.GetSyncPulseTimeWhenResponse,
     ]
+
     GetSystemInfoAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetSystemInfoAttributeStringRequest,
         nidaqmx_pb2.GetSystemInfoAttributeStringResponse,
     ]
+
     GetSystemInfoAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetSystemInfoAttributeUInt32Request,
         nidaqmx_pb2.GetSystemInfoAttributeUInt32Response,
     ]
+
     GetTaskAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTaskAttributeBoolRequest,
         nidaqmx_pb2.GetTaskAttributeBoolResponse,
     ]
+
     GetTaskAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTaskAttributeStringRequest,
         nidaqmx_pb2.GetTaskAttributeStringResponse,
     ]
+
     GetTaskAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTaskAttributeUInt32Request,
         nidaqmx_pb2.GetTaskAttributeUInt32Response,
     ]
+
     GetTimingAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeBoolRequest,
         nidaqmx_pb2.GetTimingAttributeBoolResponse,
     ]
+
     GetTimingAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeDoubleRequest,
         nidaqmx_pb2.GetTimingAttributeDoubleResponse,
     ]
+
     GetTimingAttributeExBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeExBoolRequest,
         nidaqmx_pb2.GetTimingAttributeExBoolResponse,
     ]
+
     GetTimingAttributeExDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeExDoubleRequest,
         nidaqmx_pb2.GetTimingAttributeExDoubleResponse,
     ]
+
     GetTimingAttributeExInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeExInt32Request,
         nidaqmx_pb2.GetTimingAttributeExInt32Response,
     ]
+
     GetTimingAttributeExString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeExStringRequest,
         nidaqmx_pb2.GetTimingAttributeExStringResponse,
     ]
+
     GetTimingAttributeExTimestamp: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeExTimestampRequest,
         nidaqmx_pb2.GetTimingAttributeExTimestampResponse,
     ]
+
     GetTimingAttributeExUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeExUInt32Request,
         nidaqmx_pb2.GetTimingAttributeExUInt32Response,
     ]
+
     GetTimingAttributeExUInt64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeExUInt64Request,
         nidaqmx_pb2.GetTimingAttributeExUInt64Response,
     ]
+
     GetTimingAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeInt32Request,
         nidaqmx_pb2.GetTimingAttributeInt32Response,
     ]
+
     GetTimingAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeStringRequest,
         nidaqmx_pb2.GetTimingAttributeStringResponse,
     ]
+
     GetTimingAttributeTimestamp: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeTimestampRequest,
         nidaqmx_pb2.GetTimingAttributeTimestampResponse,
     ]
+
     GetTimingAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeUInt32Request,
         nidaqmx_pb2.GetTimingAttributeUInt32Response,
     ]
+
     GetTimingAttributeUInt64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTimingAttributeUInt64Request,
         nidaqmx_pb2.GetTimingAttributeUInt64Response,
     ]
+
     GetTrigAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTrigAttributeBoolRequest,
         nidaqmx_pb2.GetTrigAttributeBoolResponse,
     ]
+
     GetTrigAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTrigAttributeDoubleRequest,
         nidaqmx_pb2.GetTrigAttributeDoubleResponse,
     ]
+
     GetTrigAttributeDoubleArray: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTrigAttributeDoubleArrayRequest,
         nidaqmx_pb2.GetTrigAttributeDoubleArrayResponse,
     ]
+
     GetTrigAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTrigAttributeInt32Request,
         nidaqmx_pb2.GetTrigAttributeInt32Response,
     ]
+
     GetTrigAttributeInt32Array: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTrigAttributeInt32ArrayRequest,
         nidaqmx_pb2.GetTrigAttributeInt32ArrayResponse,
     ]
+
     GetTrigAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTrigAttributeStringRequest,
         nidaqmx_pb2.GetTrigAttributeStringResponse,
     ]
+
     GetTrigAttributeTimestamp: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTrigAttributeTimestampRequest,
         nidaqmx_pb2.GetTrigAttributeTimestampResponse,
     ]
+
     GetTrigAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetTrigAttributeUInt32Request,
         nidaqmx_pb2.GetTrigAttributeUInt32Response,
     ]
+
     GetWatchdogAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWatchdogAttributeBoolRequest,
         nidaqmx_pb2.GetWatchdogAttributeBoolResponse,
     ]
+
     GetWatchdogAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWatchdogAttributeDoubleRequest,
         nidaqmx_pb2.GetWatchdogAttributeDoubleResponse,
     ]
+
     GetWatchdogAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWatchdogAttributeInt32Request,
         nidaqmx_pb2.GetWatchdogAttributeInt32Response,
     ]
+
     GetWatchdogAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWatchdogAttributeStringRequest,
         nidaqmx_pb2.GetWatchdogAttributeStringResponse,
     ]
+
     GetWriteAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWriteAttributeBoolRequest,
         nidaqmx_pb2.GetWriteAttributeBoolResponse,
     ]
+
     GetWriteAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWriteAttributeDoubleRequest,
         nidaqmx_pb2.GetWriteAttributeDoubleResponse,
     ]
+
     GetWriteAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWriteAttributeInt32Request,
         nidaqmx_pb2.GetWriteAttributeInt32Response,
     ]
+
     GetWriteAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWriteAttributeStringRequest,
         nidaqmx_pb2.GetWriteAttributeStringResponse,
     ]
+
     GetWriteAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWriteAttributeUInt32Request,
         nidaqmx_pb2.GetWriteAttributeUInt32Response,
     ]
+
     GetWriteAttributeUInt64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.GetWriteAttributeUInt64Request,
         nidaqmx_pb2.GetWriteAttributeUInt64Response,
     ]
+
     IsTaskDone: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.IsTaskDoneRequest,
         nidaqmx_pb2.IsTaskDoneResponse,
     ]
+
     LoadTask: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.LoadTaskRequest,
         nidaqmx_pb2.LoadTaskResponse,
     ]
+
     PerformBridgeOffsetNullingCalEx: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.PerformBridgeOffsetNullingCalExRequest,
         nidaqmx_pb2.PerformBridgeOffsetNullingCalExResponse,
     ]
+
     PerformBridgeShuntCalEx: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.PerformBridgeShuntCalExRequest,
         nidaqmx_pb2.PerformBridgeShuntCalExResponse,
     ]
+
     PerformStrainShuntCalEx: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.PerformStrainShuntCalExRequest,
         nidaqmx_pb2.PerformStrainShuntCalExResponse,
     ]
+
     PerformThrmcplLeadOffsetNullingCal: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.PerformThrmcplLeadOffsetNullingCalRequest,
         nidaqmx_pb2.PerformThrmcplLeadOffsetNullingCalResponse,
     ]
+
     ReadAnalogF64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadAnalogF64Request,
         nidaqmx_pb2.ReadAnalogF64Response,
     ]
+
     ReadAnalogScalarF64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadAnalogScalarF64Request,
         nidaqmx_pb2.ReadAnalogScalarF64Response,
     ]
+
     ReadBinaryI16: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadBinaryI16Request,
         nidaqmx_pb2.ReadBinaryI16Response,
     ]
+
     ReadBinaryI32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadBinaryI32Request,
         nidaqmx_pb2.ReadBinaryI32Response,
     ]
+
     ReadBinaryU16: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadBinaryU16Request,
         nidaqmx_pb2.ReadBinaryU16Response,
     ]
+
     ReadBinaryU32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadBinaryU32Request,
         nidaqmx_pb2.ReadBinaryU32Response,
     ]
+
     ReadCounterF64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterF64Request,
         nidaqmx_pb2.ReadCounterF64Response,
     ]
+
     ReadCounterF64Ex: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterF64ExRequest,
         nidaqmx_pb2.ReadCounterF64ExResponse,
     ]
+
     ReadCounterScalarF64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterScalarF64Request,
         nidaqmx_pb2.ReadCounterScalarF64Response,
     ]
+
     ReadCounterScalarU32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterScalarU32Request,
         nidaqmx_pb2.ReadCounterScalarU32Response,
     ]
+
     ReadCounterU32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterU32Request,
         nidaqmx_pb2.ReadCounterU32Response,
     ]
+
     ReadCounterU32Ex: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterU32ExRequest,
         nidaqmx_pb2.ReadCounterU32ExResponse,
     ]
+
     ReadCtrFreq: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrFreqRequest,
         nidaqmx_pb2.ReadCtrFreqResponse,
     ]
+
     ReadCtrFreqScalar: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrFreqScalarRequest,
         nidaqmx_pb2.ReadCtrFreqScalarResponse,
     ]
+
     ReadCtrTicks: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrTicksRequest,
         nidaqmx_pb2.ReadCtrTicksResponse,
     ]
+
     ReadCtrTicksScalar: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrTicksScalarRequest,
         nidaqmx_pb2.ReadCtrTicksScalarResponse,
     ]
+
     ReadCtrTime: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrTimeRequest,
         nidaqmx_pb2.ReadCtrTimeResponse,
     ]
+
     ReadCtrTimeScalar: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrTimeScalarRequest,
         nidaqmx_pb2.ReadCtrTimeScalarResponse,
     ]
+
     ReadDigitalLines: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadDigitalLinesRequest,
         nidaqmx_pb2.ReadDigitalLinesResponse,
     ]
+
     ReadDigitalScalarU32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadDigitalScalarU32Request,
         nidaqmx_pb2.ReadDigitalScalarU32Response,
     ]
+
     ReadDigitalU16: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadDigitalU16Request,
         nidaqmx_pb2.ReadDigitalU16Response,
     ]
+
     ReadDigitalU32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadDigitalU32Request,
         nidaqmx_pb2.ReadDigitalU32Response,
     ]
+
     ReadDigitalU8: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadDigitalU8Request,
         nidaqmx_pb2.ReadDigitalU8Response,
     ]
+
     ReadPowerBinaryI16: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadPowerBinaryI16Request,
         nidaqmx_pb2.ReadPowerBinaryI16Response,
     ]
+
     ReadPowerF64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadPowerF64Request,
         nidaqmx_pb2.ReadPowerF64Response,
     ]
+
     ReadPowerScalarF64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadPowerScalarF64Request,
         nidaqmx_pb2.ReadPowerScalarF64Response,
     ]
+
     ReadRaw: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadRawRequest,
         nidaqmx_pb2.ReadRawResponse,
     ]
+
     RegisterDoneEvent: grpc.aio.UnaryStreamMultiCallable[
         nidaqmx_pb2.RegisterDoneEventRequest,
         nidaqmx_pb2.RegisterDoneEventResponse,
     ]
+
     RegisterEveryNSamplesEvent: grpc.aio.UnaryStreamMultiCallable[
         nidaqmx_pb2.RegisterEveryNSamplesEventRequest,
         nidaqmx_pb2.RegisterEveryNSamplesEventResponse,
     ]
+
     RegisterSignalEvent: grpc.aio.UnaryStreamMultiCallable[
         nidaqmx_pb2.RegisterSignalEventRequest,
         nidaqmx_pb2.RegisterSignalEventResponse,
     ]
+
     RemoveCDAQSyncConnection: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.RemoveCDAQSyncConnectionRequest,
         nidaqmx_pb2.RemoveCDAQSyncConnectionResponse,
     ]
+
     ReserveNetworkDevice: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReserveNetworkDeviceRequest,
         nidaqmx_pb2.ReserveNetworkDeviceResponse,
     ]
+
     ResetBufferAttribute: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetBufferAttributeRequest,
         nidaqmx_pb2.ResetBufferAttributeResponse,
     ]
+
     ResetChanAttribute: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetChanAttributeRequest,
         nidaqmx_pb2.ResetChanAttributeResponse,
     ]
+
     ResetDevice: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetDeviceRequest,
         nidaqmx_pb2.ResetDeviceResponse,
     ]
+
     ResetExportedSignalAttribute: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetExportedSignalAttributeRequest,
         nidaqmx_pb2.ResetExportedSignalAttributeResponse,
     ]
+
     ResetReadAttribute: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetReadAttributeRequest,
         nidaqmx_pb2.ResetReadAttributeResponse,
     ]
+
     ResetRealTimeAttribute: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetRealTimeAttributeRequest,
         nidaqmx_pb2.ResetRealTimeAttributeResponse,
     ]
+
     ResetTimingAttribute: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetTimingAttributeRequest,
         nidaqmx_pb2.ResetTimingAttributeResponse,
     ]
+
     ResetTimingAttributeEx: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetTimingAttributeExRequest,
         nidaqmx_pb2.ResetTimingAttributeExResponse,
     ]
+
     ResetTrigAttribute: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetTrigAttributeRequest,
         nidaqmx_pb2.ResetTrigAttributeResponse,
     ]
+
     ResetWatchdogAttribute: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetWatchdogAttributeRequest,
         nidaqmx_pb2.ResetWatchdogAttributeResponse,
     ]
+
     ResetWriteAttribute: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ResetWriteAttributeRequest,
         nidaqmx_pb2.ResetWriteAttributeResponse,
     ]
+
     RestoreLastExtCalConst: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.RestoreLastExtCalConstRequest,
         nidaqmx_pb2.RestoreLastExtCalConstResponse,
     ]
+
     SaveGlobalChan: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SaveGlobalChanRequest,
         nidaqmx_pb2.SaveGlobalChanResponse,
     ]
+
     SaveScale: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SaveScaleRequest,
         nidaqmx_pb2.SaveScaleResponse,
     ]
+
     SaveTask: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SaveTaskRequest,
         nidaqmx_pb2.SaveTaskResponse,
     ]
+
     SelfCal: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SelfCalRequest,
         nidaqmx_pb2.SelfCalResponse,
     ]
+
     SelfTestDevice: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SelfTestDeviceRequest,
         nidaqmx_pb2.SelfTestDeviceResponse,
     ]
+
     SetAIChanCalCalDate: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetAIChanCalCalDateRequest,
         nidaqmx_pb2.SetAIChanCalCalDateResponse,
     ]
+
     SetAIChanCalExpDate: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetAIChanCalExpDateRequest,
         nidaqmx_pb2.SetAIChanCalExpDateResponse,
     ]
+
     SetAnalogPowerUpStates: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetAnalogPowerUpStatesRequest,
         nidaqmx_pb2.SetAnalogPowerUpStatesResponse,
     ]
+
     SetAnalogPowerUpStatesWithOutputType: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetAnalogPowerUpStatesWithOutputTypeRequest,
         nidaqmx_pb2.SetAnalogPowerUpStatesWithOutputTypeResponse,
     ]
+
     SetArmStartTrigTrigWhen: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetArmStartTrigTrigWhenRequest,
         nidaqmx_pb2.SetArmStartTrigTrigWhenResponse,
     ]
+
     SetBufferAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetBufferAttributeUInt32Request,
         nidaqmx_pb2.SetBufferAttributeUInt32Response,
     ]
+
     SetCalInfoAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetCalInfoAttributeBoolRequest,
         nidaqmx_pb2.SetCalInfoAttributeBoolResponse,
     ]
+
     SetCalInfoAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetCalInfoAttributeDoubleRequest,
         nidaqmx_pb2.SetCalInfoAttributeDoubleResponse,
     ]
+
     SetCalInfoAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetCalInfoAttributeStringRequest,
         nidaqmx_pb2.SetCalInfoAttributeStringResponse,
     ]
+
     SetCalInfoAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetCalInfoAttributeUInt32Request,
         nidaqmx_pb2.SetCalInfoAttributeUInt32Response,
     ]
+
     SetChanAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetChanAttributeBoolRequest,
         nidaqmx_pb2.SetChanAttributeBoolResponse,
     ]
+
     SetChanAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetChanAttributeDoubleRequest,
         nidaqmx_pb2.SetChanAttributeDoubleResponse,
     ]
+
     SetChanAttributeDoubleArray: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetChanAttributeDoubleArrayRequest,
         nidaqmx_pb2.SetChanAttributeDoubleArrayResponse,
     ]
+
     SetChanAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetChanAttributeInt32Request,
         nidaqmx_pb2.SetChanAttributeInt32Response,
     ]
+
     SetChanAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetChanAttributeStringRequest,
         nidaqmx_pb2.SetChanAttributeStringResponse,
     ]
+
     SetChanAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetChanAttributeUInt32Request,
         nidaqmx_pb2.SetChanAttributeUInt32Response,
     ]
+
     SetDigitalLogicFamilyPowerUpState: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetDigitalLogicFamilyPowerUpStateRequest,
         nidaqmx_pb2.SetDigitalLogicFamilyPowerUpStateResponse,
     ]
+
     SetDigitalPowerUpStates: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetDigitalPowerUpStatesRequest,
         nidaqmx_pb2.SetDigitalPowerUpStatesResponse,
     ]
+
     SetDigitalPullUpPullDownStates: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetDigitalPullUpPullDownStatesRequest,
         nidaqmx_pb2.SetDigitalPullUpPullDownStatesResponse,
     ]
+
     SetExportedSignalAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetExportedSignalAttributeBoolRequest,
         nidaqmx_pb2.SetExportedSignalAttributeBoolResponse,
     ]
+
     SetExportedSignalAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetExportedSignalAttributeDoubleRequest,
         nidaqmx_pb2.SetExportedSignalAttributeDoubleResponse,
     ]
+
     SetExportedSignalAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetExportedSignalAttributeInt32Request,
         nidaqmx_pb2.SetExportedSignalAttributeInt32Response,
     ]
+
     SetExportedSignalAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetExportedSignalAttributeStringRequest,
         nidaqmx_pb2.SetExportedSignalAttributeStringResponse,
     ]
+
     SetExportedSignalAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetExportedSignalAttributeUInt32Request,
         nidaqmx_pb2.SetExportedSignalAttributeUInt32Response,
     ]
+
     SetFirstSampClkWhen: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetFirstSampClkWhenRequest,
         nidaqmx_pb2.SetFirstSampClkWhenResponse,
     ]
+
     SetReadAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetReadAttributeBoolRequest,
         nidaqmx_pb2.SetReadAttributeBoolResponse,
     ]
+
     SetReadAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetReadAttributeDoubleRequest,
         nidaqmx_pb2.SetReadAttributeDoubleResponse,
     ]
+
     SetReadAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetReadAttributeInt32Request,
         nidaqmx_pb2.SetReadAttributeInt32Response,
     ]
+
     SetReadAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetReadAttributeStringRequest,
         nidaqmx_pb2.SetReadAttributeStringResponse,
     ]
+
     SetReadAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetReadAttributeUInt32Request,
         nidaqmx_pb2.SetReadAttributeUInt32Response,
     ]
+
     SetReadAttributeUInt64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetReadAttributeUInt64Request,
         nidaqmx_pb2.SetReadAttributeUInt64Response,
     ]
+
     SetRealTimeAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetRealTimeAttributeBoolRequest,
         nidaqmx_pb2.SetRealTimeAttributeBoolResponse,
     ]
+
     SetRealTimeAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetRealTimeAttributeInt32Request,
         nidaqmx_pb2.SetRealTimeAttributeInt32Response,
     ]
+
     SetRealTimeAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetRealTimeAttributeUInt32Request,
         nidaqmx_pb2.SetRealTimeAttributeUInt32Response,
     ]
+
     SetScaleAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetScaleAttributeDoubleRequest,
         nidaqmx_pb2.SetScaleAttributeDoubleResponse,
     ]
+
     SetScaleAttributeDoubleArray: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetScaleAttributeDoubleArrayRequest,
         nidaqmx_pb2.SetScaleAttributeDoubleArrayResponse,
     ]
+
     SetScaleAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetScaleAttributeInt32Request,
         nidaqmx_pb2.SetScaleAttributeInt32Response,
     ]
+
     SetScaleAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetScaleAttributeStringRequest,
         nidaqmx_pb2.SetScaleAttributeStringResponse,
     ]
+
     SetStartTrigTrigWhen: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetStartTrigTrigWhenRequest,
         nidaqmx_pb2.SetStartTrigTrigWhenResponse,
     ]
+
     SetSyncPulseTimeWhen: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetSyncPulseTimeWhenRequest,
         nidaqmx_pb2.SetSyncPulseTimeWhenResponse,
     ]
+
     SetTimingAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeBoolRequest,
         nidaqmx_pb2.SetTimingAttributeBoolResponse,
     ]
+
     SetTimingAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeDoubleRequest,
         nidaqmx_pb2.SetTimingAttributeDoubleResponse,
     ]
+
     SetTimingAttributeExBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeExBoolRequest,
         nidaqmx_pb2.SetTimingAttributeExBoolResponse,
     ]
+
     SetTimingAttributeExDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeExDoubleRequest,
         nidaqmx_pb2.SetTimingAttributeExDoubleResponse,
     ]
+
     SetTimingAttributeExInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeExInt32Request,
         nidaqmx_pb2.SetTimingAttributeExInt32Response,
     ]
+
     SetTimingAttributeExString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeExStringRequest,
         nidaqmx_pb2.SetTimingAttributeExStringResponse,
     ]
+
     SetTimingAttributeExTimestamp: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeExTimestampRequest,
         nidaqmx_pb2.SetTimingAttributeExTimestampResponse,
     ]
+
     SetTimingAttributeExUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeExUInt32Request,
         nidaqmx_pb2.SetTimingAttributeExUInt32Response,
     ]
+
     SetTimingAttributeExUInt64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeExUInt64Request,
         nidaqmx_pb2.SetTimingAttributeExUInt64Response,
     ]
+
     SetTimingAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeInt32Request,
         nidaqmx_pb2.SetTimingAttributeInt32Response,
     ]
+
     SetTimingAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeStringRequest,
         nidaqmx_pb2.SetTimingAttributeStringResponse,
     ]
+
     SetTimingAttributeTimestamp: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeTimestampRequest,
         nidaqmx_pb2.SetTimingAttributeTimestampResponse,
     ]
+
     SetTimingAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeUInt32Request,
         nidaqmx_pb2.SetTimingAttributeUInt32Response,
     ]
+
     SetTimingAttributeUInt64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTimingAttributeUInt64Request,
         nidaqmx_pb2.SetTimingAttributeUInt64Response,
     ]
+
     SetTrigAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTrigAttributeBoolRequest,
         nidaqmx_pb2.SetTrigAttributeBoolResponse,
     ]
+
     SetTrigAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTrigAttributeDoubleRequest,
         nidaqmx_pb2.SetTrigAttributeDoubleResponse,
     ]
+
     SetTrigAttributeDoubleArray: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTrigAttributeDoubleArrayRequest,
         nidaqmx_pb2.SetTrigAttributeDoubleArrayResponse,
     ]
+
     SetTrigAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTrigAttributeInt32Request,
         nidaqmx_pb2.SetTrigAttributeInt32Response,
     ]
+
     SetTrigAttributeInt32Array: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTrigAttributeInt32ArrayRequest,
         nidaqmx_pb2.SetTrigAttributeInt32ArrayResponse,
     ]
+
     SetTrigAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTrigAttributeStringRequest,
         nidaqmx_pb2.SetTrigAttributeStringResponse,
     ]
+
     SetTrigAttributeTimestamp: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTrigAttributeTimestampRequest,
         nidaqmx_pb2.SetTrigAttributeTimestampResponse,
     ]
+
     SetTrigAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetTrigAttributeUInt32Request,
         nidaqmx_pb2.SetTrigAttributeUInt32Response,
     ]
+
     SetWatchdogAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWatchdogAttributeBoolRequest,
         nidaqmx_pb2.SetWatchdogAttributeBoolResponse,
     ]
+
     SetWatchdogAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWatchdogAttributeDoubleRequest,
         nidaqmx_pb2.SetWatchdogAttributeDoubleResponse,
     ]
+
     SetWatchdogAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWatchdogAttributeInt32Request,
         nidaqmx_pb2.SetWatchdogAttributeInt32Response,
     ]
+
     SetWatchdogAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWatchdogAttributeStringRequest,
         nidaqmx_pb2.SetWatchdogAttributeStringResponse,
     ]
+
     SetWriteAttributeBool: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWriteAttributeBoolRequest,
         nidaqmx_pb2.SetWriteAttributeBoolResponse,
     ]
+
     SetWriteAttributeDouble: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWriteAttributeDoubleRequest,
         nidaqmx_pb2.SetWriteAttributeDoubleResponse,
     ]
+
     SetWriteAttributeInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWriteAttributeInt32Request,
         nidaqmx_pb2.SetWriteAttributeInt32Response,
     ]
+
     SetWriteAttributeString: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWriteAttributeStringRequest,
         nidaqmx_pb2.SetWriteAttributeStringResponse,
     ]
+
     SetWriteAttributeUInt32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWriteAttributeUInt32Request,
         nidaqmx_pb2.SetWriteAttributeUInt32Response,
     ]
+
     SetWriteAttributeUInt64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.SetWriteAttributeUInt64Request,
         nidaqmx_pb2.SetWriteAttributeUInt64Response,
     ]
+
     StartNewFile: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.StartNewFileRequest,
         nidaqmx_pb2.StartNewFileResponse,
     ]
+
     StartTask: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.StartTaskRequest,
         nidaqmx_pb2.StartTaskResponse,
     ]
+
     StopTask: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.StopTaskRequest,
         nidaqmx_pb2.StopTaskResponse,
     ]
+
     TaskControl: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.TaskControlRequest,
         nidaqmx_pb2.TaskControlResponse,
     ]
+
     TristateOutputTerm: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.TristateOutputTermRequest,
         nidaqmx_pb2.TristateOutputTermResponse,
     ]
+
     UnregisterDoneEvent: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.UnregisterDoneEventRequest,
         nidaqmx_pb2.UnregisterDoneEventResponse,
     ]
+
     UnregisterEveryNSamplesEvent: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.UnregisterEveryNSamplesEventRequest,
         nidaqmx_pb2.UnregisterEveryNSamplesEventResponse,
     ]
+
     UnregisterSignalEvent: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.UnregisterSignalEventRequest,
         nidaqmx_pb2.UnregisterSignalEventResponse,
     ]
+
     UnreserveNetworkDevice: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.UnreserveNetworkDeviceRequest,
         nidaqmx_pb2.UnreserveNetworkDeviceResponse,
     ]
+
     WaitForNextSampleClock: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WaitForNextSampleClockRequest,
         nidaqmx_pb2.WaitForNextSampleClockResponse,
     ]
+
     WaitForValidTimestamp: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WaitForValidTimestampRequest,
         nidaqmx_pb2.WaitForValidTimestampResponse,
     ]
+
     WaitUntilTaskDone: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WaitUntilTaskDoneRequest,
         nidaqmx_pb2.WaitUntilTaskDoneResponse,
     ]
+
     WriteAnalogF64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteAnalogF64Request,
         nidaqmx_pb2.WriteAnalogF64Response,
     ]
+
     WriteAnalogScalarF64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteAnalogScalarF64Request,
         nidaqmx_pb2.WriteAnalogScalarF64Response,
     ]
+
     WriteBinaryI16: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteBinaryI16Request,
         nidaqmx_pb2.WriteBinaryI16Response,
     ]
+
     WriteBinaryI32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteBinaryI32Request,
         nidaqmx_pb2.WriteBinaryI32Response,
     ]
+
     WriteBinaryU16: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteBinaryU16Request,
         nidaqmx_pb2.WriteBinaryU16Response,
     ]
+
     WriteBinaryU32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteBinaryU32Request,
         nidaqmx_pb2.WriteBinaryU32Response,
     ]
+
     WriteCtrFreq: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrFreqRequest,
         nidaqmx_pb2.WriteCtrFreqResponse,
     ]
+
     WriteCtrFreqScalar: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrFreqScalarRequest,
         nidaqmx_pb2.WriteCtrFreqScalarResponse,
     ]
+
     WriteCtrTicks: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrTicksRequest,
         nidaqmx_pb2.WriteCtrTicksResponse,
     ]
+
     WriteCtrTicksScalar: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrTicksScalarRequest,
         nidaqmx_pb2.WriteCtrTicksScalarResponse,
     ]
+
     WriteCtrTime: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrTimeRequest,
         nidaqmx_pb2.WriteCtrTimeResponse,
     ]
+
     WriteCtrTimeScalar: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrTimeScalarRequest,
         nidaqmx_pb2.WriteCtrTimeScalarResponse,
     ]
+
     WriteDigitalLines: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteDigitalLinesRequest,
         nidaqmx_pb2.WriteDigitalLinesResponse,
     ]
+
     WriteDigitalScalarU32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteDigitalScalarU32Request,
         nidaqmx_pb2.WriteDigitalScalarU32Response,
     ]
+
     WriteDigitalU16: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteDigitalU16Request,
         nidaqmx_pb2.WriteDigitalU16Response,
     ]
+
     WriteDigitalU32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteDigitalU32Request,
         nidaqmx_pb2.WriteDigitalU32Response,
     ]
+
     WriteDigitalU8: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteDigitalU8Request,
         nidaqmx_pb2.WriteDigitalU8Response,
     ]
+
     WriteRaw: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteRawRequest,
         nidaqmx_pb2.WriteRawResponse,
     ]
+
     WriteToTEDSFromArray: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteToTEDSFromArrayRequest,
         nidaqmx_pb2.WriteToTEDSFromArrayResponse,
     ]
+
     WriteToTEDSFromFile: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteToTEDSFromFileRequest,
         nidaqmx_pb2.WriteToTEDSFromFileResponse,
@@ -3218,2382 +4012,2779 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
         request: nidaqmx_pb2.AddCDAQSyncConnectionRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.AddCDAQSyncConnectionResponse, collections.abc.Awaitable[nidaqmx_pb2.AddCDAQSyncConnectionResponse]]: ...
+
     @abc.abstractmethod
     def AddGlobalChansToTask(
         self,
         request: nidaqmx_pb2.AddGlobalChansToTaskRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.AddGlobalChansToTaskResponse, collections.abc.Awaitable[nidaqmx_pb2.AddGlobalChansToTaskResponse]]: ...
+
     @abc.abstractmethod
     def AddNetworkDevice(
         self,
         request: nidaqmx_pb2.AddNetworkDeviceRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.AddNetworkDeviceResponse, collections.abc.Awaitable[nidaqmx_pb2.AddNetworkDeviceResponse]]: ...
+
     @abc.abstractmethod
     def AreConfiguredCDAQSyncPortsDisconnected(
         self,
         request: nidaqmx_pb2.AreConfiguredCDAQSyncPortsDisconnectedRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.AreConfiguredCDAQSyncPortsDisconnectedResponse, collections.abc.Awaitable[nidaqmx_pb2.AreConfiguredCDAQSyncPortsDisconnectedResponse]]: ...
+
     @abc.abstractmethod
     def AutoConfigureCDAQSyncConnections(
         self,
         request: nidaqmx_pb2.AutoConfigureCDAQSyncConnectionsRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.AutoConfigureCDAQSyncConnectionsResponse, collections.abc.Awaitable[nidaqmx_pb2.AutoConfigureCDAQSyncConnectionsResponse]]: ...
+
     @abc.abstractmethod
     def CalculateReversePolyCoeff(
         self,
         request: nidaqmx_pb2.CalculateReversePolyCoeffRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CalculateReversePolyCoeffResponse, collections.abc.Awaitable[nidaqmx_pb2.CalculateReversePolyCoeffResponse]]: ...
+
     @abc.abstractmethod
     def CfgAnlgEdgeRefTrig(
         self,
         request: nidaqmx_pb2.CfgAnlgEdgeRefTrigRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgAnlgEdgeRefTrigResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgAnlgEdgeRefTrigResponse]]: ...
+
     @abc.abstractmethod
     def CfgAnlgEdgeStartTrig(
         self,
         request: nidaqmx_pb2.CfgAnlgEdgeStartTrigRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgAnlgEdgeStartTrigResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgAnlgEdgeStartTrigResponse]]: ...
+
     @abc.abstractmethod
     def CfgAnlgMultiEdgeRefTrig(
         self,
         request: nidaqmx_pb2.CfgAnlgMultiEdgeRefTrigRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgAnlgMultiEdgeRefTrigResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgAnlgMultiEdgeRefTrigResponse]]: ...
+
     @abc.abstractmethod
     def CfgAnlgMultiEdgeStartTrig(
         self,
         request: nidaqmx_pb2.CfgAnlgMultiEdgeStartTrigRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgAnlgMultiEdgeStartTrigResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgAnlgMultiEdgeStartTrigResponse]]: ...
+
     @abc.abstractmethod
     def CfgAnlgWindowRefTrig(
         self,
         request: nidaqmx_pb2.CfgAnlgWindowRefTrigRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgAnlgWindowRefTrigResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgAnlgWindowRefTrigResponse]]: ...
+
     @abc.abstractmethod
     def CfgAnlgWindowStartTrig(
         self,
         request: nidaqmx_pb2.CfgAnlgWindowStartTrigRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgAnlgWindowStartTrigResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgAnlgWindowStartTrigResponse]]: ...
+
     @abc.abstractmethod
     def CfgBurstHandshakingTimingExportClock(
         self,
         request: nidaqmx_pb2.CfgBurstHandshakingTimingExportClockRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgBurstHandshakingTimingExportClockResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgBurstHandshakingTimingExportClockResponse]]: ...
+
     @abc.abstractmethod
     def CfgBurstHandshakingTimingImportClock(
         self,
         request: nidaqmx_pb2.CfgBurstHandshakingTimingImportClockRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgBurstHandshakingTimingImportClockResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgBurstHandshakingTimingImportClockResponse]]: ...
+
     @abc.abstractmethod
     def CfgChangeDetectionTiming(
         self,
         request: nidaqmx_pb2.CfgChangeDetectionTimingRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgChangeDetectionTimingResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgChangeDetectionTimingResponse]]: ...
+
     @abc.abstractmethod
     def CfgDigEdgeRefTrig(
         self,
         request: nidaqmx_pb2.CfgDigEdgeRefTrigRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgDigEdgeRefTrigResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgDigEdgeRefTrigResponse]]: ...
+
     @abc.abstractmethod
     def CfgDigEdgeStartTrig(
         self,
         request: nidaqmx_pb2.CfgDigEdgeStartTrigRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgDigEdgeStartTrigResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgDigEdgeStartTrigResponse]]: ...
+
     @abc.abstractmethod
     def CfgDigPatternRefTrig(
         self,
         request: nidaqmx_pb2.CfgDigPatternRefTrigRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgDigPatternRefTrigResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgDigPatternRefTrigResponse]]: ...
+
     @abc.abstractmethod
     def CfgDigPatternStartTrig(
         self,
         request: nidaqmx_pb2.CfgDigPatternStartTrigRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgDigPatternStartTrigResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgDigPatternStartTrigResponse]]: ...
+
     @abc.abstractmethod
     def CfgHandshakingTiming(
         self,
         request: nidaqmx_pb2.CfgHandshakingTimingRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgHandshakingTimingResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgHandshakingTimingResponse]]: ...
+
     @abc.abstractmethod
     def CfgImplicitTiming(
         self,
         request: nidaqmx_pb2.CfgImplicitTimingRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgImplicitTimingResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgImplicitTimingResponse]]: ...
+
     @abc.abstractmethod
     def CfgInputBuffer(
         self,
         request: nidaqmx_pb2.CfgInputBufferRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgInputBufferResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgInputBufferResponse]]: ...
+
     @abc.abstractmethod
     def CfgOutputBuffer(
         self,
         request: nidaqmx_pb2.CfgOutputBufferRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgOutputBufferResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgOutputBufferResponse]]: ...
+
     @abc.abstractmethod
     def CfgPipelinedSampClkTiming(
         self,
         request: nidaqmx_pb2.CfgPipelinedSampClkTimingRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgPipelinedSampClkTimingResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgPipelinedSampClkTimingResponse]]: ...
+
     @abc.abstractmethod
     def CfgSampClkTiming(
         self,
         request: nidaqmx_pb2.CfgSampClkTimingRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgSampClkTimingResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgSampClkTimingResponse]]: ...
+
     @abc.abstractmethod
     def CfgTimeStartTrig(
         self,
         request: nidaqmx_pb2.CfgTimeStartTrigRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgTimeStartTrigResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgTimeStartTrigResponse]]: ...
+
     @abc.abstractmethod
     def CfgWatchdogAOExpirStates(
         self,
         request: nidaqmx_pb2.CfgWatchdogAOExpirStatesRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgWatchdogAOExpirStatesResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgWatchdogAOExpirStatesResponse]]: ...
+
     @abc.abstractmethod
     def CfgWatchdogCOExpirStates(
         self,
         request: nidaqmx_pb2.CfgWatchdogCOExpirStatesRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgWatchdogCOExpirStatesResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgWatchdogCOExpirStatesResponse]]: ...
+
     @abc.abstractmethod
     def CfgWatchdogDOExpirStates(
         self,
         request: nidaqmx_pb2.CfgWatchdogDOExpirStatesRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CfgWatchdogDOExpirStatesResponse, collections.abc.Awaitable[nidaqmx_pb2.CfgWatchdogDOExpirStatesResponse]]: ...
+
     @abc.abstractmethod
     def ClearTEDS(
         self,
         request: nidaqmx_pb2.ClearTEDSRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ClearTEDSResponse, collections.abc.Awaitable[nidaqmx_pb2.ClearTEDSResponse]]: ...
+
     @abc.abstractmethod
     def ClearTask(
         self,
         request: nidaqmx_pb2.ClearTaskRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ClearTaskResponse, collections.abc.Awaitable[nidaqmx_pb2.ClearTaskResponse]]: ...
+
     @abc.abstractmethod
     def ConfigureLogging(
         self,
         request: nidaqmx_pb2.ConfigureLoggingRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ConfigureLoggingResponse, collections.abc.Awaitable[nidaqmx_pb2.ConfigureLoggingResponse]]: ...
+
     @abc.abstractmethod
     def ConfigureTEDS(
         self,
         request: nidaqmx_pb2.ConfigureTEDSRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ConfigureTEDSResponse, collections.abc.Awaitable[nidaqmx_pb2.ConfigureTEDSResponse]]: ...
+
     @abc.abstractmethod
     def ConnectTerms(
         self,
         request: nidaqmx_pb2.ConnectTermsRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ConnectTermsResponse, collections.abc.Awaitable[nidaqmx_pb2.ConnectTermsResponse]]: ...
+
     @abc.abstractmethod
     def ControlWatchdogTask(
         self,
         request: nidaqmx_pb2.ControlWatchdogTaskRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ControlWatchdogTaskResponse, collections.abc.Awaitable[nidaqmx_pb2.ControlWatchdogTaskResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIAccel4WireDCVoltageChan(
         self,
         request: nidaqmx_pb2.CreateAIAccel4WireDCVoltageChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIAccel4WireDCVoltageChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIAccel4WireDCVoltageChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIAccelChan(
         self,
         request: nidaqmx_pb2.CreateAIAccelChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIAccelChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIAccelChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIAccelChargeChan(
         self,
         request: nidaqmx_pb2.CreateAIAccelChargeChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIAccelChargeChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIAccelChargeChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIBridgeChan(
         self,
         request: nidaqmx_pb2.CreateAIBridgeChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIBridgeChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIBridgeChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIChargeChan(
         self,
         request: nidaqmx_pb2.CreateAIChargeChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIChargeChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIChargeChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAICurrentChan(
         self,
         request: nidaqmx_pb2.CreateAICurrentChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAICurrentChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAICurrentChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAICurrentRMSChan(
         self,
         request: nidaqmx_pb2.CreateAICurrentRMSChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAICurrentRMSChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAICurrentRMSChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIForceBridgePolynomialChan(
         self,
         request: nidaqmx_pb2.CreateAIForceBridgePolynomialChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIForceBridgePolynomialChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIForceBridgePolynomialChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIForceBridgeTableChan(
         self,
         request: nidaqmx_pb2.CreateAIForceBridgeTableChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIForceBridgeTableChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIForceBridgeTableChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIForceBridgeTwoPointLinChan(
         self,
         request: nidaqmx_pb2.CreateAIForceBridgeTwoPointLinChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIForceBridgeTwoPointLinChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIForceBridgeTwoPointLinChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIForceIEPEChan(
         self,
         request: nidaqmx_pb2.CreateAIForceIEPEChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIForceIEPEChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIForceIEPEChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIFreqVoltageChan(
         self,
         request: nidaqmx_pb2.CreateAIFreqVoltageChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIFreqVoltageChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIFreqVoltageChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIMicrophoneChan(
         self,
         request: nidaqmx_pb2.CreateAIMicrophoneChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIMicrophoneChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIMicrophoneChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIPosEddyCurrProxProbeChan(
         self,
         request: nidaqmx_pb2.CreateAIPosEddyCurrProxProbeChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIPosEddyCurrProxProbeChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIPosEddyCurrProxProbeChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIPosLVDTChan(
         self,
         request: nidaqmx_pb2.CreateAIPosLVDTChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIPosLVDTChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIPosLVDTChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIPosRVDTChan(
         self,
         request: nidaqmx_pb2.CreateAIPosRVDTChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIPosRVDTChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIPosRVDTChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIPowerChan(
         self,
         request: nidaqmx_pb2.CreateAIPowerChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIPowerChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIPowerChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIPressureBridgePolynomialChan(
         self,
         request: nidaqmx_pb2.CreateAIPressureBridgePolynomialChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIPressureBridgePolynomialChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIPressureBridgePolynomialChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIPressureBridgeTableChan(
         self,
         request: nidaqmx_pb2.CreateAIPressureBridgeTableChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIPressureBridgeTableChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIPressureBridgeTableChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIPressureBridgeTwoPointLinChan(
         self,
         request: nidaqmx_pb2.CreateAIPressureBridgeTwoPointLinChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIPressureBridgeTwoPointLinChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIPressureBridgeTwoPointLinChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIRTDChan(
         self,
         request: nidaqmx_pb2.CreateAIRTDChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIRTDChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIRTDChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIResistanceChan(
         self,
         request: nidaqmx_pb2.CreateAIResistanceChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIResistanceChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIResistanceChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIRosetteStrainGageChan(
         self,
         request: nidaqmx_pb2.CreateAIRosetteStrainGageChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIRosetteStrainGageChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIRosetteStrainGageChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIStrainGageChan(
         self,
         request: nidaqmx_pb2.CreateAIStrainGageChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIStrainGageChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIStrainGageChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAITempBuiltInSensorChan(
         self,
         request: nidaqmx_pb2.CreateAITempBuiltInSensorChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAITempBuiltInSensorChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAITempBuiltInSensorChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIThrmcplChan(
         self,
         request: nidaqmx_pb2.CreateAIThrmcplChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIThrmcplChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIThrmcplChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIThrmstrChanIex(
         self,
         request: nidaqmx_pb2.CreateAIThrmstrChanIexRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIThrmstrChanIexResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIThrmstrChanIexResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIThrmstrChanVex(
         self,
         request: nidaqmx_pb2.CreateAIThrmstrChanVexRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIThrmstrChanVexResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIThrmstrChanVexResponse]]: ...
+
     @abc.abstractmethod
     def CreateAITorqueBridgePolynomialChan(
         self,
         request: nidaqmx_pb2.CreateAITorqueBridgePolynomialChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAITorqueBridgePolynomialChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAITorqueBridgePolynomialChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAITorqueBridgeTableChan(
         self,
         request: nidaqmx_pb2.CreateAITorqueBridgeTableChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAITorqueBridgeTableChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAITorqueBridgeTableChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAITorqueBridgeTwoPointLinChan(
         self,
         request: nidaqmx_pb2.CreateAITorqueBridgeTwoPointLinChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAITorqueBridgeTwoPointLinChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAITorqueBridgeTwoPointLinChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIVelocityIEPEChan(
         self,
         request: nidaqmx_pb2.CreateAIVelocityIEPEChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIVelocityIEPEChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIVelocityIEPEChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIVoltageChan(
         self,
         request: nidaqmx_pb2.CreateAIVoltageChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIVoltageChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIVoltageChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIVoltageChanWithExcit(
         self,
         request: nidaqmx_pb2.CreateAIVoltageChanWithExcitRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIVoltageChanWithExcitResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIVoltageChanWithExcitResponse]]: ...
+
     @abc.abstractmethod
     def CreateAIVoltageRMSChan(
         self,
         request: nidaqmx_pb2.CreateAIVoltageRMSChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAIVoltageRMSChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAIVoltageRMSChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAOCurrentChan(
         self,
         request: nidaqmx_pb2.CreateAOCurrentChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAOCurrentChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAOCurrentChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAOFuncGenChan(
         self,
         request: nidaqmx_pb2.CreateAOFuncGenChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAOFuncGenChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAOFuncGenChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateAOVoltageChan(
         self,
         request: nidaqmx_pb2.CreateAOVoltageChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateAOVoltageChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateAOVoltageChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateCIAngEncoderChan(
         self,
         request: nidaqmx_pb2.CreateCIAngEncoderChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCIAngEncoderChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCIAngEncoderChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateCIAngVelocityChan(
         self,
         request: nidaqmx_pb2.CreateCIAngVelocityChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCIAngVelocityChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCIAngVelocityChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateCICountEdgesChan(
         self,
         request: nidaqmx_pb2.CreateCICountEdgesChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCICountEdgesChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCICountEdgesChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateCIDutyCycleChan(
         self,
         request: nidaqmx_pb2.CreateCIDutyCycleChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCIDutyCycleChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCIDutyCycleChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateCIFreqChan(
         self,
         request: nidaqmx_pb2.CreateCIFreqChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCIFreqChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCIFreqChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateCIGPSTimestampChan(
         self,
         request: nidaqmx_pb2.CreateCIGPSTimestampChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCIGPSTimestampChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCIGPSTimestampChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateCILinEncoderChan(
         self,
         request: nidaqmx_pb2.CreateCILinEncoderChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCILinEncoderChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCILinEncoderChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateCILinVelocityChan(
         self,
         request: nidaqmx_pb2.CreateCILinVelocityChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCILinVelocityChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCILinVelocityChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateCIPeriodChan(
         self,
         request: nidaqmx_pb2.CreateCIPeriodChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCIPeriodChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCIPeriodChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateCIPulseChanFreq(
         self,
         request: nidaqmx_pb2.CreateCIPulseChanFreqRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCIPulseChanFreqResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCIPulseChanFreqResponse]]: ...
+
     @abc.abstractmethod
     def CreateCIPulseChanTicks(
         self,
         request: nidaqmx_pb2.CreateCIPulseChanTicksRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCIPulseChanTicksResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCIPulseChanTicksResponse]]: ...
+
     @abc.abstractmethod
     def CreateCIPulseChanTime(
         self,
         request: nidaqmx_pb2.CreateCIPulseChanTimeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCIPulseChanTimeResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCIPulseChanTimeResponse]]: ...
+
     @abc.abstractmethod
     def CreateCIPulseWidthChan(
         self,
         request: nidaqmx_pb2.CreateCIPulseWidthChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCIPulseWidthChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCIPulseWidthChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateCISemiPeriodChan(
         self,
         request: nidaqmx_pb2.CreateCISemiPeriodChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCISemiPeriodChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCISemiPeriodChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateCITwoEdgeSepChan(
         self,
         request: nidaqmx_pb2.CreateCITwoEdgeSepChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCITwoEdgeSepChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCITwoEdgeSepChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateCOPulseChanFreq(
         self,
         request: nidaqmx_pb2.CreateCOPulseChanFreqRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCOPulseChanFreqResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCOPulseChanFreqResponse]]: ...
+
     @abc.abstractmethod
     def CreateCOPulseChanTicks(
         self,
         request: nidaqmx_pb2.CreateCOPulseChanTicksRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCOPulseChanTicksResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCOPulseChanTicksResponse]]: ...
+
     @abc.abstractmethod
     def CreateCOPulseChanTime(
         self,
         request: nidaqmx_pb2.CreateCOPulseChanTimeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateCOPulseChanTimeResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateCOPulseChanTimeResponse]]: ...
+
     @abc.abstractmethod
     def CreateDIChan(
         self,
         request: nidaqmx_pb2.CreateDIChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateDIChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateDIChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateDOChan(
         self,
         request: nidaqmx_pb2.CreateDOChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateDOChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateDOChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateLinScale(
         self,
         request: nidaqmx_pb2.CreateLinScaleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateLinScaleResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateLinScaleResponse]]: ...
+
     @abc.abstractmethod
     def CreateMapScale(
         self,
         request: nidaqmx_pb2.CreateMapScaleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateMapScaleResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateMapScaleResponse]]: ...
+
     @abc.abstractmethod
     def CreatePolynomialScale(
         self,
         request: nidaqmx_pb2.CreatePolynomialScaleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreatePolynomialScaleResponse, collections.abc.Awaitable[nidaqmx_pb2.CreatePolynomialScaleResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAIAccelChan(
         self,
         request: nidaqmx_pb2.CreateTEDSAIAccelChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAIAccelChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAIAccelChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAIBridgeChan(
         self,
         request: nidaqmx_pb2.CreateTEDSAIBridgeChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAIBridgeChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAIBridgeChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAICurrentChan(
         self,
         request: nidaqmx_pb2.CreateTEDSAICurrentChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAICurrentChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAICurrentChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAIForceBridgeChan(
         self,
         request: nidaqmx_pb2.CreateTEDSAIForceBridgeChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAIForceBridgeChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAIForceBridgeChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAIForceIEPEChan(
         self,
         request: nidaqmx_pb2.CreateTEDSAIForceIEPEChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAIForceIEPEChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAIForceIEPEChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAIMicrophoneChan(
         self,
         request: nidaqmx_pb2.CreateTEDSAIMicrophoneChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAIMicrophoneChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAIMicrophoneChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAIPosLVDTChan(
         self,
         request: nidaqmx_pb2.CreateTEDSAIPosLVDTChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAIPosLVDTChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAIPosLVDTChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAIPosRVDTChan(
         self,
         request: nidaqmx_pb2.CreateTEDSAIPosRVDTChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAIPosRVDTChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAIPosRVDTChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAIPressureBridgeChan(
         self,
         request: nidaqmx_pb2.CreateTEDSAIPressureBridgeChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAIPressureBridgeChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAIPressureBridgeChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAIRTDChan(
         self,
         request: nidaqmx_pb2.CreateTEDSAIRTDChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAIRTDChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAIRTDChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAIResistanceChan(
         self,
         request: nidaqmx_pb2.CreateTEDSAIResistanceChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAIResistanceChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAIResistanceChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAIStrainGageChan(
         self,
         request: nidaqmx_pb2.CreateTEDSAIStrainGageChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAIStrainGageChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAIStrainGageChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAIThrmcplChan(
         self,
         request: nidaqmx_pb2.CreateTEDSAIThrmcplChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAIThrmcplChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAIThrmcplChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAIThrmstrChanIex(
         self,
         request: nidaqmx_pb2.CreateTEDSAIThrmstrChanIexRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAIThrmstrChanIexResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAIThrmstrChanIexResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAIThrmstrChanVex(
         self,
         request: nidaqmx_pb2.CreateTEDSAIThrmstrChanVexRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAIThrmstrChanVexResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAIThrmstrChanVexResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAITorqueBridgeChan(
         self,
         request: nidaqmx_pb2.CreateTEDSAITorqueBridgeChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAITorqueBridgeChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAITorqueBridgeChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAIVoltageChan(
         self,
         request: nidaqmx_pb2.CreateTEDSAIVoltageChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAIVoltageChanResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAIVoltageChanResponse]]: ...
+
     @abc.abstractmethod
     def CreateTEDSAIVoltageChanWithExcit(
         self,
         request: nidaqmx_pb2.CreateTEDSAIVoltageChanWithExcitRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTEDSAIVoltageChanWithExcitResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTEDSAIVoltageChanWithExcitResponse]]: ...
+
     @abc.abstractmethod
     def CreateTableScale(
         self,
         request: nidaqmx_pb2.CreateTableScaleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTableScaleResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTableScaleResponse]]: ...
+
     @abc.abstractmethod
     def CreateTask(
         self,
         request: nidaqmx_pb2.CreateTaskRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateTaskResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateTaskResponse]]: ...
+
     @abc.abstractmethod
     def CreateWatchdogTimerTask(
         self,
         request: nidaqmx_pb2.CreateWatchdogTimerTaskRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateWatchdogTimerTaskResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateWatchdogTimerTaskResponse]]: ...
+
     @abc.abstractmethod
     def CreateWatchdogTimerTaskEx(
         self,
         request: nidaqmx_pb2.CreateWatchdogTimerTaskExRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.CreateWatchdogTimerTaskExResponse, collections.abc.Awaitable[nidaqmx_pb2.CreateWatchdogTimerTaskExResponse]]: ...
+
     @abc.abstractmethod
     def DeleteNetworkDevice(
         self,
         request: nidaqmx_pb2.DeleteNetworkDeviceRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.DeleteNetworkDeviceResponse, collections.abc.Awaitable[nidaqmx_pb2.DeleteNetworkDeviceResponse]]: ...
+
     @abc.abstractmethod
     def DeleteSavedGlobalChan(
         self,
         request: nidaqmx_pb2.DeleteSavedGlobalChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.DeleteSavedGlobalChanResponse, collections.abc.Awaitable[nidaqmx_pb2.DeleteSavedGlobalChanResponse]]: ...
+
     @abc.abstractmethod
     def DeleteSavedScale(
         self,
         request: nidaqmx_pb2.DeleteSavedScaleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.DeleteSavedScaleResponse, collections.abc.Awaitable[nidaqmx_pb2.DeleteSavedScaleResponse]]: ...
+
     @abc.abstractmethod
     def DeleteSavedTask(
         self,
         request: nidaqmx_pb2.DeleteSavedTaskRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.DeleteSavedTaskResponse, collections.abc.Awaitable[nidaqmx_pb2.DeleteSavedTaskResponse]]: ...
+
     @abc.abstractmethod
     def DeviceSupportsCal(
         self,
         request: nidaqmx_pb2.DeviceSupportsCalRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.DeviceSupportsCalResponse, collections.abc.Awaitable[nidaqmx_pb2.DeviceSupportsCalResponse]]: ...
+
     @abc.abstractmethod
     def DisableRefTrig(
         self,
         request: nidaqmx_pb2.DisableRefTrigRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.DisableRefTrigResponse, collections.abc.Awaitable[nidaqmx_pb2.DisableRefTrigResponse]]: ...
+
     @abc.abstractmethod
     def DisableStartTrig(
         self,
         request: nidaqmx_pb2.DisableStartTrigRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.DisableStartTrigResponse, collections.abc.Awaitable[nidaqmx_pb2.DisableStartTrigResponse]]: ...
+
     @abc.abstractmethod
     def DisconnectTerms(
         self,
         request: nidaqmx_pb2.DisconnectTermsRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.DisconnectTermsResponse, collections.abc.Awaitable[nidaqmx_pb2.DisconnectTermsResponse]]: ...
+
     @abc.abstractmethod
     def ExportSignal(
         self,
         request: nidaqmx_pb2.ExportSignalRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ExportSignalResponse, collections.abc.Awaitable[nidaqmx_pb2.ExportSignalResponse]]: ...
+
     @abc.abstractmethod
     def GetAIChanCalCalDate(
         self,
         request: nidaqmx_pb2.GetAIChanCalCalDateRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetAIChanCalCalDateResponse, collections.abc.Awaitable[nidaqmx_pb2.GetAIChanCalCalDateResponse]]: ...
+
     @abc.abstractmethod
     def GetAIChanCalExpDate(
         self,
         request: nidaqmx_pb2.GetAIChanCalExpDateRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetAIChanCalExpDateResponse, collections.abc.Awaitable[nidaqmx_pb2.GetAIChanCalExpDateResponse]]: ...
+
     @abc.abstractmethod
     def GetAnalogPowerUpStates(
         self,
         request: nidaqmx_pb2.GetAnalogPowerUpStatesRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetAnalogPowerUpStatesResponse, collections.abc.Awaitable[nidaqmx_pb2.GetAnalogPowerUpStatesResponse]]: ...
+
     @abc.abstractmethod
     def GetAnalogPowerUpStatesWithOutputType(
         self,
         request: nidaqmx_pb2.GetAnalogPowerUpStatesWithOutputTypeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetAnalogPowerUpStatesWithOutputTypeResponse, collections.abc.Awaitable[nidaqmx_pb2.GetAnalogPowerUpStatesWithOutputTypeResponse]]: ...
+
     @abc.abstractmethod
     def GetArmStartTrigTimestampVal(
         self,
         request: nidaqmx_pb2.GetArmStartTrigTimestampValRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetArmStartTrigTimestampValResponse, collections.abc.Awaitable[nidaqmx_pb2.GetArmStartTrigTimestampValResponse]]: ...
+
     @abc.abstractmethod
     def GetArmStartTrigTrigWhen(
         self,
         request: nidaqmx_pb2.GetArmStartTrigTrigWhenRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetArmStartTrigTrigWhenResponse, collections.abc.Awaitable[nidaqmx_pb2.GetArmStartTrigTrigWhenResponse]]: ...
+
     @abc.abstractmethod
     def GetAutoConfiguredCDAQSyncConnections(
         self,
         request: nidaqmx_pb2.GetAutoConfiguredCDAQSyncConnectionsRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetAutoConfiguredCDAQSyncConnectionsResponse, collections.abc.Awaitable[nidaqmx_pb2.GetAutoConfiguredCDAQSyncConnectionsResponse]]: ...
+
     @abc.abstractmethod
     def GetBufferAttributeUInt32(
         self,
         request: nidaqmx_pb2.GetBufferAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetBufferAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetBufferAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def GetCalInfoAttributeBool(
         self,
         request: nidaqmx_pb2.GetCalInfoAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetCalInfoAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.GetCalInfoAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def GetCalInfoAttributeDouble(
         self,
         request: nidaqmx_pb2.GetCalInfoAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetCalInfoAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.GetCalInfoAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def GetCalInfoAttributeString(
         self,
         request: nidaqmx_pb2.GetCalInfoAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetCalInfoAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetCalInfoAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def GetCalInfoAttributeUInt32(
         self,
         request: nidaqmx_pb2.GetCalInfoAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetCalInfoAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetCalInfoAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def GetChanAttributeBool(
         self,
         request: nidaqmx_pb2.GetChanAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetChanAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.GetChanAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def GetChanAttributeDouble(
         self,
         request: nidaqmx_pb2.GetChanAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetChanAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.GetChanAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def GetChanAttributeDoubleArray(
         self,
         request: nidaqmx_pb2.GetChanAttributeDoubleArrayRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetChanAttributeDoubleArrayResponse, collections.abc.Awaitable[nidaqmx_pb2.GetChanAttributeDoubleArrayResponse]]: ...
+
     @abc.abstractmethod
     def GetChanAttributeInt32(
         self,
         request: nidaqmx_pb2.GetChanAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetChanAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetChanAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def GetChanAttributeString(
         self,
         request: nidaqmx_pb2.GetChanAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetChanAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetChanAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def GetChanAttributeUInt32(
         self,
         request: nidaqmx_pb2.GetChanAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetChanAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetChanAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def GetDeviceAttributeBool(
         self,
         request: nidaqmx_pb2.GetDeviceAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetDeviceAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.GetDeviceAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def GetDeviceAttributeDouble(
         self,
         request: nidaqmx_pb2.GetDeviceAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetDeviceAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.GetDeviceAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def GetDeviceAttributeDoubleArray(
         self,
         request: nidaqmx_pb2.GetDeviceAttributeDoubleArrayRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetDeviceAttributeDoubleArrayResponse, collections.abc.Awaitable[nidaqmx_pb2.GetDeviceAttributeDoubleArrayResponse]]: ...
+
     @abc.abstractmethod
     def GetDeviceAttributeInt32(
         self,
         request: nidaqmx_pb2.GetDeviceAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetDeviceAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetDeviceAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def GetDeviceAttributeInt32Array(
         self,
         request: nidaqmx_pb2.GetDeviceAttributeInt32ArrayRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetDeviceAttributeInt32ArrayResponse, collections.abc.Awaitable[nidaqmx_pb2.GetDeviceAttributeInt32ArrayResponse]]: ...
+
     @abc.abstractmethod
     def GetDeviceAttributeString(
         self,
         request: nidaqmx_pb2.GetDeviceAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetDeviceAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetDeviceAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def GetDeviceAttributeUInt32(
         self,
         request: nidaqmx_pb2.GetDeviceAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetDeviceAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetDeviceAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def GetDeviceAttributeUInt32Array(
         self,
         request: nidaqmx_pb2.GetDeviceAttributeUInt32ArrayRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetDeviceAttributeUInt32ArrayResponse, collections.abc.Awaitable[nidaqmx_pb2.GetDeviceAttributeUInt32ArrayResponse]]: ...
+
     @abc.abstractmethod
     def GetDigitalLogicFamilyPowerUpState(
         self,
         request: nidaqmx_pb2.GetDigitalLogicFamilyPowerUpStateRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetDigitalLogicFamilyPowerUpStateResponse, collections.abc.Awaitable[nidaqmx_pb2.GetDigitalLogicFamilyPowerUpStateResponse]]: ...
+
     @abc.abstractmethod
     def GetDigitalPowerUpStates(
         self,
         request: nidaqmx_pb2.GetDigitalPowerUpStatesRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetDigitalPowerUpStatesResponse, collections.abc.Awaitable[nidaqmx_pb2.GetDigitalPowerUpStatesResponse]]: ...
+
     @abc.abstractmethod
     def GetDigitalPullUpPullDownStates(
         self,
         request: nidaqmx_pb2.GetDigitalPullUpPullDownStatesRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetDigitalPullUpPullDownStatesResponse, collections.abc.Awaitable[nidaqmx_pb2.GetDigitalPullUpPullDownStatesResponse]]: ...
+
     @abc.abstractmethod
     def GetDisconnectedCDAQSyncPorts(
         self,
         request: nidaqmx_pb2.GetDisconnectedCDAQSyncPortsRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetDisconnectedCDAQSyncPortsResponse, collections.abc.Awaitable[nidaqmx_pb2.GetDisconnectedCDAQSyncPortsResponse]]: ...
+
     @abc.abstractmethod
     def GetErrorString(
         self,
         request: nidaqmx_pb2.GetErrorStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetErrorStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetErrorStringResponse]]: ...
+
     @abc.abstractmethod
     def GetExportedSignalAttributeBool(
         self,
         request: nidaqmx_pb2.GetExportedSignalAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetExportedSignalAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.GetExportedSignalAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def GetExportedSignalAttributeDouble(
         self,
         request: nidaqmx_pb2.GetExportedSignalAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetExportedSignalAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.GetExportedSignalAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def GetExportedSignalAttributeInt32(
         self,
         request: nidaqmx_pb2.GetExportedSignalAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetExportedSignalAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetExportedSignalAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def GetExportedSignalAttributeString(
         self,
         request: nidaqmx_pb2.GetExportedSignalAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetExportedSignalAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetExportedSignalAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def GetExportedSignalAttributeUInt32(
         self,
         request: nidaqmx_pb2.GetExportedSignalAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetExportedSignalAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetExportedSignalAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def GetExtCalLastDateAndTime(
         self,
         request: nidaqmx_pb2.GetExtCalLastDateAndTimeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetExtCalLastDateAndTimeResponse, collections.abc.Awaitable[nidaqmx_pb2.GetExtCalLastDateAndTimeResponse]]: ...
+
     @abc.abstractmethod
     def GetFirstSampClkWhen(
         self,
         request: nidaqmx_pb2.GetFirstSampClkWhenRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetFirstSampClkWhenResponse, collections.abc.Awaitable[nidaqmx_pb2.GetFirstSampClkWhenResponse]]: ...
+
     @abc.abstractmethod
     def GetFirstSampTimestampVal(
         self,
         request: nidaqmx_pb2.GetFirstSampTimestampValRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetFirstSampTimestampValResponse, collections.abc.Awaitable[nidaqmx_pb2.GetFirstSampTimestampValResponse]]: ...
+
     @abc.abstractmethod
     def GetNthTaskChannel(
         self,
         request: nidaqmx_pb2.GetNthTaskChannelRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetNthTaskChannelResponse, collections.abc.Awaitable[nidaqmx_pb2.GetNthTaskChannelResponse]]: ...
+
     @abc.abstractmethod
     def GetNthTaskDevice(
         self,
         request: nidaqmx_pb2.GetNthTaskDeviceRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetNthTaskDeviceResponse, collections.abc.Awaitable[nidaqmx_pb2.GetNthTaskDeviceResponse]]: ...
+
     @abc.abstractmethod
     def GetNthTaskReadChannel(
         self,
         request: nidaqmx_pb2.GetNthTaskReadChannelRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetNthTaskReadChannelResponse, collections.abc.Awaitable[nidaqmx_pb2.GetNthTaskReadChannelResponse]]: ...
+
     @abc.abstractmethod
     def GetPersistedChanAttributeBool(
         self,
         request: nidaqmx_pb2.GetPersistedChanAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetPersistedChanAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.GetPersistedChanAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def GetPersistedChanAttributeString(
         self,
         request: nidaqmx_pb2.GetPersistedChanAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetPersistedChanAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetPersistedChanAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def GetPersistedScaleAttributeBool(
         self,
         request: nidaqmx_pb2.GetPersistedScaleAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetPersistedScaleAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.GetPersistedScaleAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def GetPersistedScaleAttributeString(
         self,
         request: nidaqmx_pb2.GetPersistedScaleAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetPersistedScaleAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetPersistedScaleAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def GetPersistedTaskAttributeBool(
         self,
         request: nidaqmx_pb2.GetPersistedTaskAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetPersistedTaskAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.GetPersistedTaskAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def GetPersistedTaskAttributeString(
         self,
         request: nidaqmx_pb2.GetPersistedTaskAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetPersistedTaskAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetPersistedTaskAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def GetPhysicalChanAttributeBool(
         self,
         request: nidaqmx_pb2.GetPhysicalChanAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetPhysicalChanAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.GetPhysicalChanAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def GetPhysicalChanAttributeBytes(
         self,
         request: nidaqmx_pb2.GetPhysicalChanAttributeBytesRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetPhysicalChanAttributeBytesResponse, collections.abc.Awaitable[nidaqmx_pb2.GetPhysicalChanAttributeBytesResponse]]: ...
+
     @abc.abstractmethod
     def GetPhysicalChanAttributeDouble(
         self,
         request: nidaqmx_pb2.GetPhysicalChanAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetPhysicalChanAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.GetPhysicalChanAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def GetPhysicalChanAttributeDoubleArray(
         self,
         request: nidaqmx_pb2.GetPhysicalChanAttributeDoubleArrayRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetPhysicalChanAttributeDoubleArrayResponse, collections.abc.Awaitable[nidaqmx_pb2.GetPhysicalChanAttributeDoubleArrayResponse]]: ...
+
     @abc.abstractmethod
     def GetPhysicalChanAttributeInt32(
         self,
         request: nidaqmx_pb2.GetPhysicalChanAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetPhysicalChanAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetPhysicalChanAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def GetPhysicalChanAttributeInt32Array(
         self,
         request: nidaqmx_pb2.GetPhysicalChanAttributeInt32ArrayRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetPhysicalChanAttributeInt32ArrayResponse, collections.abc.Awaitable[nidaqmx_pb2.GetPhysicalChanAttributeInt32ArrayResponse]]: ...
+
     @abc.abstractmethod
     def GetPhysicalChanAttributeString(
         self,
         request: nidaqmx_pb2.GetPhysicalChanAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetPhysicalChanAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetPhysicalChanAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def GetPhysicalChanAttributeUInt32(
         self,
         request: nidaqmx_pb2.GetPhysicalChanAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetPhysicalChanAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetPhysicalChanAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def GetPhysicalChanAttributeUInt32Array(
         self,
         request: nidaqmx_pb2.GetPhysicalChanAttributeUInt32ArrayRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetPhysicalChanAttributeUInt32ArrayResponse, collections.abc.Awaitable[nidaqmx_pb2.GetPhysicalChanAttributeUInt32ArrayResponse]]: ...
+
     @abc.abstractmethod
     def GetReadAttributeBool(
         self,
         request: nidaqmx_pb2.GetReadAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetReadAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.GetReadAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def GetReadAttributeDouble(
         self,
         request: nidaqmx_pb2.GetReadAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetReadAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.GetReadAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def GetReadAttributeInt32(
         self,
         request: nidaqmx_pb2.GetReadAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetReadAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetReadAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def GetReadAttributeString(
         self,
         request: nidaqmx_pb2.GetReadAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetReadAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetReadAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def GetReadAttributeUInt32(
         self,
         request: nidaqmx_pb2.GetReadAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetReadAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetReadAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def GetReadAttributeUInt64(
         self,
         request: nidaqmx_pb2.GetReadAttributeUInt64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetReadAttributeUInt64Response, collections.abc.Awaitable[nidaqmx_pb2.GetReadAttributeUInt64Response]]: ...
+
     @abc.abstractmethod
     def GetRealTimeAttributeBool(
         self,
         request: nidaqmx_pb2.GetRealTimeAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetRealTimeAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.GetRealTimeAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def GetRealTimeAttributeInt32(
         self,
         request: nidaqmx_pb2.GetRealTimeAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetRealTimeAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetRealTimeAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def GetRealTimeAttributeUInt32(
         self,
         request: nidaqmx_pb2.GetRealTimeAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetRealTimeAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetRealTimeAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def GetRefTrigTimestampVal(
         self,
         request: nidaqmx_pb2.GetRefTrigTimestampValRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetRefTrigTimestampValResponse, collections.abc.Awaitable[nidaqmx_pb2.GetRefTrigTimestampValResponse]]: ...
+
     @abc.abstractmethod
     def GetScaleAttributeDouble(
         self,
         request: nidaqmx_pb2.GetScaleAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetScaleAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.GetScaleAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def GetScaleAttributeDoubleArray(
         self,
         request: nidaqmx_pb2.GetScaleAttributeDoubleArrayRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetScaleAttributeDoubleArrayResponse, collections.abc.Awaitable[nidaqmx_pb2.GetScaleAttributeDoubleArrayResponse]]: ...
+
     @abc.abstractmethod
     def GetScaleAttributeInt32(
         self,
         request: nidaqmx_pb2.GetScaleAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetScaleAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetScaleAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def GetScaleAttributeString(
         self,
         request: nidaqmx_pb2.GetScaleAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetScaleAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetScaleAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def GetSelfCalLastDateAndTime(
         self,
         request: nidaqmx_pb2.GetSelfCalLastDateAndTimeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetSelfCalLastDateAndTimeResponse, collections.abc.Awaitable[nidaqmx_pb2.GetSelfCalLastDateAndTimeResponse]]: ...
+
     @abc.abstractmethod
     def GetStartTrigTimestampVal(
         self,
         request: nidaqmx_pb2.GetStartTrigTimestampValRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetStartTrigTimestampValResponse, collections.abc.Awaitable[nidaqmx_pb2.GetStartTrigTimestampValResponse]]: ...
+
     @abc.abstractmethod
     def GetStartTrigTrigWhen(
         self,
         request: nidaqmx_pb2.GetStartTrigTrigWhenRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetStartTrigTrigWhenResponse, collections.abc.Awaitable[nidaqmx_pb2.GetStartTrigTrigWhenResponse]]: ...
+
     @abc.abstractmethod
     def GetSyncPulseTimeWhen(
         self,
         request: nidaqmx_pb2.GetSyncPulseTimeWhenRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetSyncPulseTimeWhenResponse, collections.abc.Awaitable[nidaqmx_pb2.GetSyncPulseTimeWhenResponse]]: ...
+
     @abc.abstractmethod
     def GetSystemInfoAttributeString(
         self,
         request: nidaqmx_pb2.GetSystemInfoAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetSystemInfoAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetSystemInfoAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def GetSystemInfoAttributeUInt32(
         self,
         request: nidaqmx_pb2.GetSystemInfoAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetSystemInfoAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetSystemInfoAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def GetTaskAttributeBool(
         self,
         request: nidaqmx_pb2.GetTaskAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTaskAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.GetTaskAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def GetTaskAttributeString(
         self,
         request: nidaqmx_pb2.GetTaskAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTaskAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetTaskAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def GetTaskAttributeUInt32(
         self,
         request: nidaqmx_pb2.GetTaskAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTaskAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetTaskAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def GetTimingAttributeBool(
         self,
         request: nidaqmx_pb2.GetTimingAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTimingAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.GetTimingAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def GetTimingAttributeDouble(
         self,
         request: nidaqmx_pb2.GetTimingAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTimingAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.GetTimingAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def GetTimingAttributeExBool(
         self,
         request: nidaqmx_pb2.GetTimingAttributeExBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTimingAttributeExBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.GetTimingAttributeExBoolResponse]]: ...
+
     @abc.abstractmethod
     def GetTimingAttributeExDouble(
         self,
         request: nidaqmx_pb2.GetTimingAttributeExDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTimingAttributeExDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.GetTimingAttributeExDoubleResponse]]: ...
+
     @abc.abstractmethod
     def GetTimingAttributeExInt32(
         self,
         request: nidaqmx_pb2.GetTimingAttributeExInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTimingAttributeExInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetTimingAttributeExInt32Response]]: ...
+
     @abc.abstractmethod
     def GetTimingAttributeExString(
         self,
         request: nidaqmx_pb2.GetTimingAttributeExStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTimingAttributeExStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetTimingAttributeExStringResponse]]: ...
+
     @abc.abstractmethod
     def GetTimingAttributeExTimestamp(
         self,
         request: nidaqmx_pb2.GetTimingAttributeExTimestampRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTimingAttributeExTimestampResponse, collections.abc.Awaitable[nidaqmx_pb2.GetTimingAttributeExTimestampResponse]]: ...
+
     @abc.abstractmethod
     def GetTimingAttributeExUInt32(
         self,
         request: nidaqmx_pb2.GetTimingAttributeExUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTimingAttributeExUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetTimingAttributeExUInt32Response]]: ...
+
     @abc.abstractmethod
     def GetTimingAttributeExUInt64(
         self,
         request: nidaqmx_pb2.GetTimingAttributeExUInt64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTimingAttributeExUInt64Response, collections.abc.Awaitable[nidaqmx_pb2.GetTimingAttributeExUInt64Response]]: ...
+
     @abc.abstractmethod
     def GetTimingAttributeInt32(
         self,
         request: nidaqmx_pb2.GetTimingAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTimingAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetTimingAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def GetTimingAttributeString(
         self,
         request: nidaqmx_pb2.GetTimingAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTimingAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetTimingAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def GetTimingAttributeTimestamp(
         self,
         request: nidaqmx_pb2.GetTimingAttributeTimestampRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTimingAttributeTimestampResponse, collections.abc.Awaitable[nidaqmx_pb2.GetTimingAttributeTimestampResponse]]: ...
+
     @abc.abstractmethod
     def GetTimingAttributeUInt32(
         self,
         request: nidaqmx_pb2.GetTimingAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTimingAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetTimingAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def GetTimingAttributeUInt64(
         self,
         request: nidaqmx_pb2.GetTimingAttributeUInt64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTimingAttributeUInt64Response, collections.abc.Awaitable[nidaqmx_pb2.GetTimingAttributeUInt64Response]]: ...
+
     @abc.abstractmethod
     def GetTrigAttributeBool(
         self,
         request: nidaqmx_pb2.GetTrigAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTrigAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.GetTrigAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def GetTrigAttributeDouble(
         self,
         request: nidaqmx_pb2.GetTrigAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTrigAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.GetTrigAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def GetTrigAttributeDoubleArray(
         self,
         request: nidaqmx_pb2.GetTrigAttributeDoubleArrayRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTrigAttributeDoubleArrayResponse, collections.abc.Awaitable[nidaqmx_pb2.GetTrigAttributeDoubleArrayResponse]]: ...
+
     @abc.abstractmethod
     def GetTrigAttributeInt32(
         self,
         request: nidaqmx_pb2.GetTrigAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTrigAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetTrigAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def GetTrigAttributeInt32Array(
         self,
         request: nidaqmx_pb2.GetTrigAttributeInt32ArrayRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTrigAttributeInt32ArrayResponse, collections.abc.Awaitable[nidaqmx_pb2.GetTrigAttributeInt32ArrayResponse]]: ...
+
     @abc.abstractmethod
     def GetTrigAttributeString(
         self,
         request: nidaqmx_pb2.GetTrigAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTrigAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetTrigAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def GetTrigAttributeTimestamp(
         self,
         request: nidaqmx_pb2.GetTrigAttributeTimestampRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTrigAttributeTimestampResponse, collections.abc.Awaitable[nidaqmx_pb2.GetTrigAttributeTimestampResponse]]: ...
+
     @abc.abstractmethod
     def GetTrigAttributeUInt32(
         self,
         request: nidaqmx_pb2.GetTrigAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetTrigAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetTrigAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def GetWatchdogAttributeBool(
         self,
         request: nidaqmx_pb2.GetWatchdogAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetWatchdogAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.GetWatchdogAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def GetWatchdogAttributeDouble(
         self,
         request: nidaqmx_pb2.GetWatchdogAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetWatchdogAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.GetWatchdogAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def GetWatchdogAttributeInt32(
         self,
         request: nidaqmx_pb2.GetWatchdogAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetWatchdogAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetWatchdogAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def GetWatchdogAttributeString(
         self,
         request: nidaqmx_pb2.GetWatchdogAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetWatchdogAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetWatchdogAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def GetWriteAttributeBool(
         self,
         request: nidaqmx_pb2.GetWriteAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetWriteAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.GetWriteAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def GetWriteAttributeDouble(
         self,
         request: nidaqmx_pb2.GetWriteAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetWriteAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.GetWriteAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def GetWriteAttributeInt32(
         self,
         request: nidaqmx_pb2.GetWriteAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetWriteAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetWriteAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def GetWriteAttributeString(
         self,
         request: nidaqmx_pb2.GetWriteAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetWriteAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.GetWriteAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def GetWriteAttributeUInt32(
         self,
         request: nidaqmx_pb2.GetWriteAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetWriteAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.GetWriteAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def GetWriteAttributeUInt64(
         self,
         request: nidaqmx_pb2.GetWriteAttributeUInt64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.GetWriteAttributeUInt64Response, collections.abc.Awaitable[nidaqmx_pb2.GetWriteAttributeUInt64Response]]: ...
+
     @abc.abstractmethod
     def IsTaskDone(
         self,
         request: nidaqmx_pb2.IsTaskDoneRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.IsTaskDoneResponse, collections.abc.Awaitable[nidaqmx_pb2.IsTaskDoneResponse]]: ...
+
     @abc.abstractmethod
     def LoadTask(
         self,
         request: nidaqmx_pb2.LoadTaskRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.LoadTaskResponse, collections.abc.Awaitable[nidaqmx_pb2.LoadTaskResponse]]: ...
+
     @abc.abstractmethod
     def PerformBridgeOffsetNullingCalEx(
         self,
         request: nidaqmx_pb2.PerformBridgeOffsetNullingCalExRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.PerformBridgeOffsetNullingCalExResponse, collections.abc.Awaitable[nidaqmx_pb2.PerformBridgeOffsetNullingCalExResponse]]: ...
+
     @abc.abstractmethod
     def PerformBridgeShuntCalEx(
         self,
         request: nidaqmx_pb2.PerformBridgeShuntCalExRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.PerformBridgeShuntCalExResponse, collections.abc.Awaitable[nidaqmx_pb2.PerformBridgeShuntCalExResponse]]: ...
+
     @abc.abstractmethod
     def PerformStrainShuntCalEx(
         self,
         request: nidaqmx_pb2.PerformStrainShuntCalExRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.PerformStrainShuntCalExResponse, collections.abc.Awaitable[nidaqmx_pb2.PerformStrainShuntCalExResponse]]: ...
+
     @abc.abstractmethod
     def PerformThrmcplLeadOffsetNullingCal(
         self,
         request: nidaqmx_pb2.PerformThrmcplLeadOffsetNullingCalRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.PerformThrmcplLeadOffsetNullingCalResponse, collections.abc.Awaitable[nidaqmx_pb2.PerformThrmcplLeadOffsetNullingCalResponse]]: ...
+
     @abc.abstractmethod
     def ReadAnalogF64(
         self,
         request: nidaqmx_pb2.ReadAnalogF64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadAnalogF64Response, collections.abc.Awaitable[nidaqmx_pb2.ReadAnalogF64Response]]: ...
+
     @abc.abstractmethod
     def ReadAnalogScalarF64(
         self,
         request: nidaqmx_pb2.ReadAnalogScalarF64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadAnalogScalarF64Response, collections.abc.Awaitable[nidaqmx_pb2.ReadAnalogScalarF64Response]]: ...
+
     @abc.abstractmethod
     def ReadBinaryI16(
         self,
         request: nidaqmx_pb2.ReadBinaryI16Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadBinaryI16Response, collections.abc.Awaitable[nidaqmx_pb2.ReadBinaryI16Response]]: ...
+
     @abc.abstractmethod
     def ReadBinaryI32(
         self,
         request: nidaqmx_pb2.ReadBinaryI32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadBinaryI32Response, collections.abc.Awaitable[nidaqmx_pb2.ReadBinaryI32Response]]: ...
+
     @abc.abstractmethod
     def ReadBinaryU16(
         self,
         request: nidaqmx_pb2.ReadBinaryU16Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadBinaryU16Response, collections.abc.Awaitable[nidaqmx_pb2.ReadBinaryU16Response]]: ...
+
     @abc.abstractmethod
     def ReadBinaryU32(
         self,
         request: nidaqmx_pb2.ReadBinaryU32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadBinaryU32Response, collections.abc.Awaitable[nidaqmx_pb2.ReadBinaryU32Response]]: ...
+
     @abc.abstractmethod
     def ReadCounterF64(
         self,
         request: nidaqmx_pb2.ReadCounterF64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCounterF64Response, collections.abc.Awaitable[nidaqmx_pb2.ReadCounterF64Response]]: ...
+
     @abc.abstractmethod
     def ReadCounterF64Ex(
         self,
         request: nidaqmx_pb2.ReadCounterF64ExRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCounterF64ExResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadCounterF64ExResponse]]: ...
+
     @abc.abstractmethod
     def ReadCounterScalarF64(
         self,
         request: nidaqmx_pb2.ReadCounterScalarF64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCounterScalarF64Response, collections.abc.Awaitable[nidaqmx_pb2.ReadCounterScalarF64Response]]: ...
+
     @abc.abstractmethod
     def ReadCounterScalarU32(
         self,
         request: nidaqmx_pb2.ReadCounterScalarU32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCounterScalarU32Response, collections.abc.Awaitable[nidaqmx_pb2.ReadCounterScalarU32Response]]: ...
+
     @abc.abstractmethod
     def ReadCounterU32(
         self,
         request: nidaqmx_pb2.ReadCounterU32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCounterU32Response, collections.abc.Awaitable[nidaqmx_pb2.ReadCounterU32Response]]: ...
+
     @abc.abstractmethod
     def ReadCounterU32Ex(
         self,
         request: nidaqmx_pb2.ReadCounterU32ExRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCounterU32ExResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadCounterU32ExResponse]]: ...
+
     @abc.abstractmethod
     def ReadCtrFreq(
         self,
         request: nidaqmx_pb2.ReadCtrFreqRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCtrFreqResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadCtrFreqResponse]]: ...
+
     @abc.abstractmethod
     def ReadCtrFreqScalar(
         self,
         request: nidaqmx_pb2.ReadCtrFreqScalarRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCtrFreqScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadCtrFreqScalarResponse]]: ...
+
     @abc.abstractmethod
     def ReadCtrTicks(
         self,
         request: nidaqmx_pb2.ReadCtrTicksRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCtrTicksResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadCtrTicksResponse]]: ...
+
     @abc.abstractmethod
     def ReadCtrTicksScalar(
         self,
         request: nidaqmx_pb2.ReadCtrTicksScalarRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCtrTicksScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadCtrTicksScalarResponse]]: ...
+
     @abc.abstractmethod
     def ReadCtrTime(
         self,
         request: nidaqmx_pb2.ReadCtrTimeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCtrTimeResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadCtrTimeResponse]]: ...
+
     @abc.abstractmethod
     def ReadCtrTimeScalar(
         self,
         request: nidaqmx_pb2.ReadCtrTimeScalarRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCtrTimeScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadCtrTimeScalarResponse]]: ...
+
     @abc.abstractmethod
     def ReadDigitalLines(
         self,
         request: nidaqmx_pb2.ReadDigitalLinesRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadDigitalLinesResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadDigitalLinesResponse]]: ...
+
     @abc.abstractmethod
     def ReadDigitalScalarU32(
         self,
         request: nidaqmx_pb2.ReadDigitalScalarU32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadDigitalScalarU32Response, collections.abc.Awaitable[nidaqmx_pb2.ReadDigitalScalarU32Response]]: ...
+
     @abc.abstractmethod
     def ReadDigitalU16(
         self,
         request: nidaqmx_pb2.ReadDigitalU16Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadDigitalU16Response, collections.abc.Awaitable[nidaqmx_pb2.ReadDigitalU16Response]]: ...
+
     @abc.abstractmethod
     def ReadDigitalU32(
         self,
         request: nidaqmx_pb2.ReadDigitalU32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadDigitalU32Response, collections.abc.Awaitable[nidaqmx_pb2.ReadDigitalU32Response]]: ...
+
     @abc.abstractmethod
     def ReadDigitalU8(
         self,
         request: nidaqmx_pb2.ReadDigitalU8Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadDigitalU8Response, collections.abc.Awaitable[nidaqmx_pb2.ReadDigitalU8Response]]: ...
+
     @abc.abstractmethod
     def ReadPowerBinaryI16(
         self,
         request: nidaqmx_pb2.ReadPowerBinaryI16Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadPowerBinaryI16Response, collections.abc.Awaitable[nidaqmx_pb2.ReadPowerBinaryI16Response]]: ...
+
     @abc.abstractmethod
     def ReadPowerF64(
         self,
         request: nidaqmx_pb2.ReadPowerF64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadPowerF64Response, collections.abc.Awaitable[nidaqmx_pb2.ReadPowerF64Response]]: ...
+
     @abc.abstractmethod
     def ReadPowerScalarF64(
         self,
         request: nidaqmx_pb2.ReadPowerScalarF64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadPowerScalarF64Response, collections.abc.Awaitable[nidaqmx_pb2.ReadPowerScalarF64Response]]: ...
+
     @abc.abstractmethod
     def ReadRaw(
         self,
         request: nidaqmx_pb2.ReadRawRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadRawResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadRawResponse]]: ...
+
     @abc.abstractmethod
     def RegisterDoneEvent(
         self,
         request: nidaqmx_pb2.RegisterDoneEventRequest,
         context: _ServicerContext,
     ) -> typing.Union[collections.abc.Iterator[nidaqmx_pb2.RegisterDoneEventResponse], collections.abc.AsyncIterator[nidaqmx_pb2.RegisterDoneEventResponse]]: ...
+
     @abc.abstractmethod
     def RegisterEveryNSamplesEvent(
         self,
         request: nidaqmx_pb2.RegisterEveryNSamplesEventRequest,
         context: _ServicerContext,
     ) -> typing.Union[collections.abc.Iterator[nidaqmx_pb2.RegisterEveryNSamplesEventResponse], collections.abc.AsyncIterator[nidaqmx_pb2.RegisterEveryNSamplesEventResponse]]: ...
+
     @abc.abstractmethod
     def RegisterSignalEvent(
         self,
         request: nidaqmx_pb2.RegisterSignalEventRequest,
         context: _ServicerContext,
     ) -> typing.Union[collections.abc.Iterator[nidaqmx_pb2.RegisterSignalEventResponse], collections.abc.AsyncIterator[nidaqmx_pb2.RegisterSignalEventResponse]]: ...
+
     @abc.abstractmethod
     def RemoveCDAQSyncConnection(
         self,
         request: nidaqmx_pb2.RemoveCDAQSyncConnectionRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.RemoveCDAQSyncConnectionResponse, collections.abc.Awaitable[nidaqmx_pb2.RemoveCDAQSyncConnectionResponse]]: ...
+
     @abc.abstractmethod
     def ReserveNetworkDevice(
         self,
         request: nidaqmx_pb2.ReserveNetworkDeviceRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReserveNetworkDeviceResponse, collections.abc.Awaitable[nidaqmx_pb2.ReserveNetworkDeviceResponse]]: ...
+
     @abc.abstractmethod
     def ResetBufferAttribute(
         self,
         request: nidaqmx_pb2.ResetBufferAttributeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ResetBufferAttributeResponse, collections.abc.Awaitable[nidaqmx_pb2.ResetBufferAttributeResponse]]: ...
+
     @abc.abstractmethod
     def ResetChanAttribute(
         self,
         request: nidaqmx_pb2.ResetChanAttributeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ResetChanAttributeResponse, collections.abc.Awaitable[nidaqmx_pb2.ResetChanAttributeResponse]]: ...
+
     @abc.abstractmethod
     def ResetDevice(
         self,
         request: nidaqmx_pb2.ResetDeviceRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ResetDeviceResponse, collections.abc.Awaitable[nidaqmx_pb2.ResetDeviceResponse]]: ...
+
     @abc.abstractmethod
     def ResetExportedSignalAttribute(
         self,
         request: nidaqmx_pb2.ResetExportedSignalAttributeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ResetExportedSignalAttributeResponse, collections.abc.Awaitable[nidaqmx_pb2.ResetExportedSignalAttributeResponse]]: ...
+
     @abc.abstractmethod
     def ResetReadAttribute(
         self,
         request: nidaqmx_pb2.ResetReadAttributeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ResetReadAttributeResponse, collections.abc.Awaitable[nidaqmx_pb2.ResetReadAttributeResponse]]: ...
+
     @abc.abstractmethod
     def ResetRealTimeAttribute(
         self,
         request: nidaqmx_pb2.ResetRealTimeAttributeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ResetRealTimeAttributeResponse, collections.abc.Awaitable[nidaqmx_pb2.ResetRealTimeAttributeResponse]]: ...
+
     @abc.abstractmethod
     def ResetTimingAttribute(
         self,
         request: nidaqmx_pb2.ResetTimingAttributeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ResetTimingAttributeResponse, collections.abc.Awaitable[nidaqmx_pb2.ResetTimingAttributeResponse]]: ...
+
     @abc.abstractmethod
     def ResetTimingAttributeEx(
         self,
         request: nidaqmx_pb2.ResetTimingAttributeExRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ResetTimingAttributeExResponse, collections.abc.Awaitable[nidaqmx_pb2.ResetTimingAttributeExResponse]]: ...
+
     @abc.abstractmethod
     def ResetTrigAttribute(
         self,
         request: nidaqmx_pb2.ResetTrigAttributeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ResetTrigAttributeResponse, collections.abc.Awaitable[nidaqmx_pb2.ResetTrigAttributeResponse]]: ...
+
     @abc.abstractmethod
     def ResetWatchdogAttribute(
         self,
         request: nidaqmx_pb2.ResetWatchdogAttributeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ResetWatchdogAttributeResponse, collections.abc.Awaitable[nidaqmx_pb2.ResetWatchdogAttributeResponse]]: ...
+
     @abc.abstractmethod
     def ResetWriteAttribute(
         self,
         request: nidaqmx_pb2.ResetWriteAttributeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ResetWriteAttributeResponse, collections.abc.Awaitable[nidaqmx_pb2.ResetWriteAttributeResponse]]: ...
+
     @abc.abstractmethod
     def RestoreLastExtCalConst(
         self,
         request: nidaqmx_pb2.RestoreLastExtCalConstRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.RestoreLastExtCalConstResponse, collections.abc.Awaitable[nidaqmx_pb2.RestoreLastExtCalConstResponse]]: ...
+
     @abc.abstractmethod
     def SaveGlobalChan(
         self,
         request: nidaqmx_pb2.SaveGlobalChanRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SaveGlobalChanResponse, collections.abc.Awaitable[nidaqmx_pb2.SaveGlobalChanResponse]]: ...
+
     @abc.abstractmethod
     def SaveScale(
         self,
         request: nidaqmx_pb2.SaveScaleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SaveScaleResponse, collections.abc.Awaitable[nidaqmx_pb2.SaveScaleResponse]]: ...
+
     @abc.abstractmethod
     def SaveTask(
         self,
         request: nidaqmx_pb2.SaveTaskRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SaveTaskResponse, collections.abc.Awaitable[nidaqmx_pb2.SaveTaskResponse]]: ...
+
     @abc.abstractmethod
     def SelfCal(
         self,
         request: nidaqmx_pb2.SelfCalRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SelfCalResponse, collections.abc.Awaitable[nidaqmx_pb2.SelfCalResponse]]: ...
+
     @abc.abstractmethod
     def SelfTestDevice(
         self,
         request: nidaqmx_pb2.SelfTestDeviceRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SelfTestDeviceResponse, collections.abc.Awaitable[nidaqmx_pb2.SelfTestDeviceResponse]]: ...
+
     @abc.abstractmethod
     def SetAIChanCalCalDate(
         self,
         request: nidaqmx_pb2.SetAIChanCalCalDateRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetAIChanCalCalDateResponse, collections.abc.Awaitable[nidaqmx_pb2.SetAIChanCalCalDateResponse]]: ...
+
     @abc.abstractmethod
     def SetAIChanCalExpDate(
         self,
         request: nidaqmx_pb2.SetAIChanCalExpDateRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetAIChanCalExpDateResponse, collections.abc.Awaitable[nidaqmx_pb2.SetAIChanCalExpDateResponse]]: ...
+
     @abc.abstractmethod
     def SetAnalogPowerUpStates(
         self,
         request: nidaqmx_pb2.SetAnalogPowerUpStatesRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetAnalogPowerUpStatesResponse, collections.abc.Awaitable[nidaqmx_pb2.SetAnalogPowerUpStatesResponse]]: ...
+
     @abc.abstractmethod
     def SetAnalogPowerUpStatesWithOutputType(
         self,
         request: nidaqmx_pb2.SetAnalogPowerUpStatesWithOutputTypeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetAnalogPowerUpStatesWithOutputTypeResponse, collections.abc.Awaitable[nidaqmx_pb2.SetAnalogPowerUpStatesWithOutputTypeResponse]]: ...
+
     @abc.abstractmethod
     def SetArmStartTrigTrigWhen(
         self,
         request: nidaqmx_pb2.SetArmStartTrigTrigWhenRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetArmStartTrigTrigWhenResponse, collections.abc.Awaitable[nidaqmx_pb2.SetArmStartTrigTrigWhenResponse]]: ...
+
     @abc.abstractmethod
     def SetBufferAttributeUInt32(
         self,
         request: nidaqmx_pb2.SetBufferAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetBufferAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetBufferAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def SetCalInfoAttributeBool(
         self,
         request: nidaqmx_pb2.SetCalInfoAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetCalInfoAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.SetCalInfoAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def SetCalInfoAttributeDouble(
         self,
         request: nidaqmx_pb2.SetCalInfoAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetCalInfoAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.SetCalInfoAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def SetCalInfoAttributeString(
         self,
         request: nidaqmx_pb2.SetCalInfoAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetCalInfoAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.SetCalInfoAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def SetCalInfoAttributeUInt32(
         self,
         request: nidaqmx_pb2.SetCalInfoAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetCalInfoAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetCalInfoAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def SetChanAttributeBool(
         self,
         request: nidaqmx_pb2.SetChanAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetChanAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.SetChanAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def SetChanAttributeDouble(
         self,
         request: nidaqmx_pb2.SetChanAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetChanAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.SetChanAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def SetChanAttributeDoubleArray(
         self,
         request: nidaqmx_pb2.SetChanAttributeDoubleArrayRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetChanAttributeDoubleArrayResponse, collections.abc.Awaitable[nidaqmx_pb2.SetChanAttributeDoubleArrayResponse]]: ...
+
     @abc.abstractmethod
     def SetChanAttributeInt32(
         self,
         request: nidaqmx_pb2.SetChanAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetChanAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetChanAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def SetChanAttributeString(
         self,
         request: nidaqmx_pb2.SetChanAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetChanAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.SetChanAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def SetChanAttributeUInt32(
         self,
         request: nidaqmx_pb2.SetChanAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetChanAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetChanAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def SetDigitalLogicFamilyPowerUpState(
         self,
         request: nidaqmx_pb2.SetDigitalLogicFamilyPowerUpStateRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetDigitalLogicFamilyPowerUpStateResponse, collections.abc.Awaitable[nidaqmx_pb2.SetDigitalLogicFamilyPowerUpStateResponse]]: ...
+
     @abc.abstractmethod
     def SetDigitalPowerUpStates(
         self,
         request: nidaqmx_pb2.SetDigitalPowerUpStatesRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetDigitalPowerUpStatesResponse, collections.abc.Awaitable[nidaqmx_pb2.SetDigitalPowerUpStatesResponse]]: ...
+
     @abc.abstractmethod
     def SetDigitalPullUpPullDownStates(
         self,
         request: nidaqmx_pb2.SetDigitalPullUpPullDownStatesRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetDigitalPullUpPullDownStatesResponse, collections.abc.Awaitable[nidaqmx_pb2.SetDigitalPullUpPullDownStatesResponse]]: ...
+
     @abc.abstractmethod
     def SetExportedSignalAttributeBool(
         self,
         request: nidaqmx_pb2.SetExportedSignalAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetExportedSignalAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.SetExportedSignalAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def SetExportedSignalAttributeDouble(
         self,
         request: nidaqmx_pb2.SetExportedSignalAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetExportedSignalAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.SetExportedSignalAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def SetExportedSignalAttributeInt32(
         self,
         request: nidaqmx_pb2.SetExportedSignalAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetExportedSignalAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetExportedSignalAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def SetExportedSignalAttributeString(
         self,
         request: nidaqmx_pb2.SetExportedSignalAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetExportedSignalAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.SetExportedSignalAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def SetExportedSignalAttributeUInt32(
         self,
         request: nidaqmx_pb2.SetExportedSignalAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetExportedSignalAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetExportedSignalAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def SetFirstSampClkWhen(
         self,
         request: nidaqmx_pb2.SetFirstSampClkWhenRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetFirstSampClkWhenResponse, collections.abc.Awaitable[nidaqmx_pb2.SetFirstSampClkWhenResponse]]: ...
+
     @abc.abstractmethod
     def SetReadAttributeBool(
         self,
         request: nidaqmx_pb2.SetReadAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetReadAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.SetReadAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def SetReadAttributeDouble(
         self,
         request: nidaqmx_pb2.SetReadAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetReadAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.SetReadAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def SetReadAttributeInt32(
         self,
         request: nidaqmx_pb2.SetReadAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetReadAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetReadAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def SetReadAttributeString(
         self,
         request: nidaqmx_pb2.SetReadAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetReadAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.SetReadAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def SetReadAttributeUInt32(
         self,
         request: nidaqmx_pb2.SetReadAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetReadAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetReadAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def SetReadAttributeUInt64(
         self,
         request: nidaqmx_pb2.SetReadAttributeUInt64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetReadAttributeUInt64Response, collections.abc.Awaitable[nidaqmx_pb2.SetReadAttributeUInt64Response]]: ...
+
     @abc.abstractmethod
     def SetRealTimeAttributeBool(
         self,
         request: nidaqmx_pb2.SetRealTimeAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetRealTimeAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.SetRealTimeAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def SetRealTimeAttributeInt32(
         self,
         request: nidaqmx_pb2.SetRealTimeAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetRealTimeAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetRealTimeAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def SetRealTimeAttributeUInt32(
         self,
         request: nidaqmx_pb2.SetRealTimeAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetRealTimeAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetRealTimeAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def SetScaleAttributeDouble(
         self,
         request: nidaqmx_pb2.SetScaleAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetScaleAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.SetScaleAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def SetScaleAttributeDoubleArray(
         self,
         request: nidaqmx_pb2.SetScaleAttributeDoubleArrayRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetScaleAttributeDoubleArrayResponse, collections.abc.Awaitable[nidaqmx_pb2.SetScaleAttributeDoubleArrayResponse]]: ...
+
     @abc.abstractmethod
     def SetScaleAttributeInt32(
         self,
         request: nidaqmx_pb2.SetScaleAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetScaleAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetScaleAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def SetScaleAttributeString(
         self,
         request: nidaqmx_pb2.SetScaleAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetScaleAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.SetScaleAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def SetStartTrigTrigWhen(
         self,
         request: nidaqmx_pb2.SetStartTrigTrigWhenRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetStartTrigTrigWhenResponse, collections.abc.Awaitable[nidaqmx_pb2.SetStartTrigTrigWhenResponse]]: ...
+
     @abc.abstractmethod
     def SetSyncPulseTimeWhen(
         self,
         request: nidaqmx_pb2.SetSyncPulseTimeWhenRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetSyncPulseTimeWhenResponse, collections.abc.Awaitable[nidaqmx_pb2.SetSyncPulseTimeWhenResponse]]: ...
+
     @abc.abstractmethod
     def SetTimingAttributeBool(
         self,
         request: nidaqmx_pb2.SetTimingAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTimingAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.SetTimingAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def SetTimingAttributeDouble(
         self,
         request: nidaqmx_pb2.SetTimingAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTimingAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.SetTimingAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def SetTimingAttributeExBool(
         self,
         request: nidaqmx_pb2.SetTimingAttributeExBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTimingAttributeExBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.SetTimingAttributeExBoolResponse]]: ...
+
     @abc.abstractmethod
     def SetTimingAttributeExDouble(
         self,
         request: nidaqmx_pb2.SetTimingAttributeExDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTimingAttributeExDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.SetTimingAttributeExDoubleResponse]]: ...
+
     @abc.abstractmethod
     def SetTimingAttributeExInt32(
         self,
         request: nidaqmx_pb2.SetTimingAttributeExInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTimingAttributeExInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetTimingAttributeExInt32Response]]: ...
+
     @abc.abstractmethod
     def SetTimingAttributeExString(
         self,
         request: nidaqmx_pb2.SetTimingAttributeExStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTimingAttributeExStringResponse, collections.abc.Awaitable[nidaqmx_pb2.SetTimingAttributeExStringResponse]]: ...
+
     @abc.abstractmethod
     def SetTimingAttributeExTimestamp(
         self,
         request: nidaqmx_pb2.SetTimingAttributeExTimestampRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTimingAttributeExTimestampResponse, collections.abc.Awaitable[nidaqmx_pb2.SetTimingAttributeExTimestampResponse]]: ...
+
     @abc.abstractmethod
     def SetTimingAttributeExUInt32(
         self,
         request: nidaqmx_pb2.SetTimingAttributeExUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTimingAttributeExUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetTimingAttributeExUInt32Response]]: ...
+
     @abc.abstractmethod
     def SetTimingAttributeExUInt64(
         self,
         request: nidaqmx_pb2.SetTimingAttributeExUInt64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTimingAttributeExUInt64Response, collections.abc.Awaitable[nidaqmx_pb2.SetTimingAttributeExUInt64Response]]: ...
+
     @abc.abstractmethod
     def SetTimingAttributeInt32(
         self,
         request: nidaqmx_pb2.SetTimingAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTimingAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetTimingAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def SetTimingAttributeString(
         self,
         request: nidaqmx_pb2.SetTimingAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTimingAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.SetTimingAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def SetTimingAttributeTimestamp(
         self,
         request: nidaqmx_pb2.SetTimingAttributeTimestampRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTimingAttributeTimestampResponse, collections.abc.Awaitable[nidaqmx_pb2.SetTimingAttributeTimestampResponse]]: ...
+
     @abc.abstractmethod
     def SetTimingAttributeUInt32(
         self,
         request: nidaqmx_pb2.SetTimingAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTimingAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetTimingAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def SetTimingAttributeUInt64(
         self,
         request: nidaqmx_pb2.SetTimingAttributeUInt64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTimingAttributeUInt64Response, collections.abc.Awaitable[nidaqmx_pb2.SetTimingAttributeUInt64Response]]: ...
+
     @abc.abstractmethod
     def SetTrigAttributeBool(
         self,
         request: nidaqmx_pb2.SetTrigAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTrigAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.SetTrigAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def SetTrigAttributeDouble(
         self,
         request: nidaqmx_pb2.SetTrigAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTrigAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.SetTrigAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def SetTrigAttributeDoubleArray(
         self,
         request: nidaqmx_pb2.SetTrigAttributeDoubleArrayRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTrigAttributeDoubleArrayResponse, collections.abc.Awaitable[nidaqmx_pb2.SetTrigAttributeDoubleArrayResponse]]: ...
+
     @abc.abstractmethod
     def SetTrigAttributeInt32(
         self,
         request: nidaqmx_pb2.SetTrigAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTrigAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetTrigAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def SetTrigAttributeInt32Array(
         self,
         request: nidaqmx_pb2.SetTrigAttributeInt32ArrayRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTrigAttributeInt32ArrayResponse, collections.abc.Awaitable[nidaqmx_pb2.SetTrigAttributeInt32ArrayResponse]]: ...
+
     @abc.abstractmethod
     def SetTrigAttributeString(
         self,
         request: nidaqmx_pb2.SetTrigAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTrigAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.SetTrigAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def SetTrigAttributeTimestamp(
         self,
         request: nidaqmx_pb2.SetTrigAttributeTimestampRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTrigAttributeTimestampResponse, collections.abc.Awaitable[nidaqmx_pb2.SetTrigAttributeTimestampResponse]]: ...
+
     @abc.abstractmethod
     def SetTrigAttributeUInt32(
         self,
         request: nidaqmx_pb2.SetTrigAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetTrigAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetTrigAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def SetWatchdogAttributeBool(
         self,
         request: nidaqmx_pb2.SetWatchdogAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetWatchdogAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.SetWatchdogAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def SetWatchdogAttributeDouble(
         self,
         request: nidaqmx_pb2.SetWatchdogAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetWatchdogAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.SetWatchdogAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def SetWatchdogAttributeInt32(
         self,
         request: nidaqmx_pb2.SetWatchdogAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetWatchdogAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetWatchdogAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def SetWatchdogAttributeString(
         self,
         request: nidaqmx_pb2.SetWatchdogAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetWatchdogAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.SetWatchdogAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def SetWriteAttributeBool(
         self,
         request: nidaqmx_pb2.SetWriteAttributeBoolRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetWriteAttributeBoolResponse, collections.abc.Awaitable[nidaqmx_pb2.SetWriteAttributeBoolResponse]]: ...
+
     @abc.abstractmethod
     def SetWriteAttributeDouble(
         self,
         request: nidaqmx_pb2.SetWriteAttributeDoubleRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetWriteAttributeDoubleResponse, collections.abc.Awaitable[nidaqmx_pb2.SetWriteAttributeDoubleResponse]]: ...
+
     @abc.abstractmethod
     def SetWriteAttributeInt32(
         self,
         request: nidaqmx_pb2.SetWriteAttributeInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetWriteAttributeInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetWriteAttributeInt32Response]]: ...
+
     @abc.abstractmethod
     def SetWriteAttributeString(
         self,
         request: nidaqmx_pb2.SetWriteAttributeStringRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetWriteAttributeStringResponse, collections.abc.Awaitable[nidaqmx_pb2.SetWriteAttributeStringResponse]]: ...
+
     @abc.abstractmethod
     def SetWriteAttributeUInt32(
         self,
         request: nidaqmx_pb2.SetWriteAttributeUInt32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetWriteAttributeUInt32Response, collections.abc.Awaitable[nidaqmx_pb2.SetWriteAttributeUInt32Response]]: ...
+
     @abc.abstractmethod
     def SetWriteAttributeUInt64(
         self,
         request: nidaqmx_pb2.SetWriteAttributeUInt64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.SetWriteAttributeUInt64Response, collections.abc.Awaitable[nidaqmx_pb2.SetWriteAttributeUInt64Response]]: ...
+
     @abc.abstractmethod
     def StartNewFile(
         self,
         request: nidaqmx_pb2.StartNewFileRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.StartNewFileResponse, collections.abc.Awaitable[nidaqmx_pb2.StartNewFileResponse]]: ...
+
     @abc.abstractmethod
     def StartTask(
         self,
         request: nidaqmx_pb2.StartTaskRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.StartTaskResponse, collections.abc.Awaitable[nidaqmx_pb2.StartTaskResponse]]: ...
+
     @abc.abstractmethod
     def StopTask(
         self,
         request: nidaqmx_pb2.StopTaskRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.StopTaskResponse, collections.abc.Awaitable[nidaqmx_pb2.StopTaskResponse]]: ...
+
     @abc.abstractmethod
     def TaskControl(
         self,
         request: nidaqmx_pb2.TaskControlRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.TaskControlResponse, collections.abc.Awaitable[nidaqmx_pb2.TaskControlResponse]]: ...
+
     @abc.abstractmethod
     def TristateOutputTerm(
         self,
         request: nidaqmx_pb2.TristateOutputTermRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.TristateOutputTermResponse, collections.abc.Awaitable[nidaqmx_pb2.TristateOutputTermResponse]]: ...
+
     @abc.abstractmethod
     def UnregisterDoneEvent(
         self,
         request: nidaqmx_pb2.UnregisterDoneEventRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.UnregisterDoneEventResponse, collections.abc.Awaitable[nidaqmx_pb2.UnregisterDoneEventResponse]]: ...
+
     @abc.abstractmethod
     def UnregisterEveryNSamplesEvent(
         self,
         request: nidaqmx_pb2.UnregisterEveryNSamplesEventRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.UnregisterEveryNSamplesEventResponse, collections.abc.Awaitable[nidaqmx_pb2.UnregisterEveryNSamplesEventResponse]]: ...
+
     @abc.abstractmethod
     def UnregisterSignalEvent(
         self,
         request: nidaqmx_pb2.UnregisterSignalEventRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.UnregisterSignalEventResponse, collections.abc.Awaitable[nidaqmx_pb2.UnregisterSignalEventResponse]]: ...
+
     @abc.abstractmethod
     def UnreserveNetworkDevice(
         self,
         request: nidaqmx_pb2.UnreserveNetworkDeviceRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.UnreserveNetworkDeviceResponse, collections.abc.Awaitable[nidaqmx_pb2.UnreserveNetworkDeviceResponse]]: ...
+
     @abc.abstractmethod
     def WaitForNextSampleClock(
         self,
         request: nidaqmx_pb2.WaitForNextSampleClockRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WaitForNextSampleClockResponse, collections.abc.Awaitable[nidaqmx_pb2.WaitForNextSampleClockResponse]]: ...
+
     @abc.abstractmethod
     def WaitForValidTimestamp(
         self,
         request: nidaqmx_pb2.WaitForValidTimestampRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WaitForValidTimestampResponse, collections.abc.Awaitable[nidaqmx_pb2.WaitForValidTimestampResponse]]: ...
+
     @abc.abstractmethod
     def WaitUntilTaskDone(
         self,
         request: nidaqmx_pb2.WaitUntilTaskDoneRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WaitUntilTaskDoneResponse, collections.abc.Awaitable[nidaqmx_pb2.WaitUntilTaskDoneResponse]]: ...
+
     @abc.abstractmethod
     def WriteAnalogF64(
         self,
         request: nidaqmx_pb2.WriteAnalogF64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteAnalogF64Response, collections.abc.Awaitable[nidaqmx_pb2.WriteAnalogF64Response]]: ...
+
     @abc.abstractmethod
     def WriteAnalogScalarF64(
         self,
         request: nidaqmx_pb2.WriteAnalogScalarF64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteAnalogScalarF64Response, collections.abc.Awaitable[nidaqmx_pb2.WriteAnalogScalarF64Response]]: ...
+
     @abc.abstractmethod
     def WriteBinaryI16(
         self,
         request: nidaqmx_pb2.WriteBinaryI16Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteBinaryI16Response, collections.abc.Awaitable[nidaqmx_pb2.WriteBinaryI16Response]]: ...
+
     @abc.abstractmethod
     def WriteBinaryI32(
         self,
         request: nidaqmx_pb2.WriteBinaryI32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteBinaryI32Response, collections.abc.Awaitable[nidaqmx_pb2.WriteBinaryI32Response]]: ...
+
     @abc.abstractmethod
     def WriteBinaryU16(
         self,
         request: nidaqmx_pb2.WriteBinaryU16Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteBinaryU16Response, collections.abc.Awaitable[nidaqmx_pb2.WriteBinaryU16Response]]: ...
+
     @abc.abstractmethod
     def WriteBinaryU32(
         self,
         request: nidaqmx_pb2.WriteBinaryU32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteBinaryU32Response, collections.abc.Awaitable[nidaqmx_pb2.WriteBinaryU32Response]]: ...
+
     @abc.abstractmethod
     def WriteCtrFreq(
         self,
         request: nidaqmx_pb2.WriteCtrFreqRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteCtrFreqResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteCtrFreqResponse]]: ...
+
     @abc.abstractmethod
     def WriteCtrFreqScalar(
         self,
         request: nidaqmx_pb2.WriteCtrFreqScalarRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteCtrFreqScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteCtrFreqScalarResponse]]: ...
+
     @abc.abstractmethod
     def WriteCtrTicks(
         self,
         request: nidaqmx_pb2.WriteCtrTicksRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteCtrTicksResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteCtrTicksResponse]]: ...
+
     @abc.abstractmethod
     def WriteCtrTicksScalar(
         self,
         request: nidaqmx_pb2.WriteCtrTicksScalarRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteCtrTicksScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteCtrTicksScalarResponse]]: ...
+
     @abc.abstractmethod
     def WriteCtrTime(
         self,
         request: nidaqmx_pb2.WriteCtrTimeRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteCtrTimeResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteCtrTimeResponse]]: ...
+
     @abc.abstractmethod
     def WriteCtrTimeScalar(
         self,
         request: nidaqmx_pb2.WriteCtrTimeScalarRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteCtrTimeScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteCtrTimeScalarResponse]]: ...
+
     @abc.abstractmethod
     def WriteDigitalLines(
         self,
         request: nidaqmx_pb2.WriteDigitalLinesRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteDigitalLinesResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteDigitalLinesResponse]]: ...
+
     @abc.abstractmethod
     def WriteDigitalScalarU32(
         self,
         request: nidaqmx_pb2.WriteDigitalScalarU32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteDigitalScalarU32Response, collections.abc.Awaitable[nidaqmx_pb2.WriteDigitalScalarU32Response]]: ...
+
     @abc.abstractmethod
     def WriteDigitalU16(
         self,
         request: nidaqmx_pb2.WriteDigitalU16Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteDigitalU16Response, collections.abc.Awaitable[nidaqmx_pb2.WriteDigitalU16Response]]: ...
+
     @abc.abstractmethod
     def WriteDigitalU32(
         self,
         request: nidaqmx_pb2.WriteDigitalU32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteDigitalU32Response, collections.abc.Awaitable[nidaqmx_pb2.WriteDigitalU32Response]]: ...
+
     @abc.abstractmethod
     def WriteDigitalU8(
         self,
         request: nidaqmx_pb2.WriteDigitalU8Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteDigitalU8Response, collections.abc.Awaitable[nidaqmx_pb2.WriteDigitalU8Response]]: ...
+
     @abc.abstractmethod
     def WriteRaw(
         self,
         request: nidaqmx_pb2.WriteRawRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteRawResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteRawResponse]]: ...
+
     @abc.abstractmethod
     def WriteToTEDSFromArray(
         self,
         request: nidaqmx_pb2.WriteToTEDSFromArrayRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteToTEDSFromArrayResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteToTEDSFromArrayResponse]]: ...
+
     @abc.abstractmethod
     def WriteToTEDSFromFile(
         self,
