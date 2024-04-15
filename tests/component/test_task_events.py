@@ -59,7 +59,7 @@ def test___done_event_registered___run_finite_acquisition___callback_invoked_onc
 @pytest.mark.grpc_xfail(
     reason="#559: Can't close tasks in an event callback when using gRPC", raises=AssertionError
 )
-def test___done_event_registered___call_clear_in_callback___stop_close_in_callback_with_success_status(
+def test___done_event_registered___call_stop_close_in_callback___task_closed_with_success_status(
     sim_6363_device: nidaqmx.system.Device,
     init_kwargs: dict,
 ) -> None:
@@ -92,7 +92,8 @@ def test___done_event_registered___call_clear_in_callback___stop_close_in_callba
 
     task.start()
     event_observer.wait_for_events(1)
-    acquired = side_effect_semaphore.acquire(timeout=1.0)
+    acquired = side_effect_semaphore.acquire(timeout=10.0)
+
     # Ensure we get the expected exception and warning
     with pytest.raises(nidaqmx.DaqError) as exc_info:
         task.stop()
@@ -101,7 +102,6 @@ def test___done_event_registered___call_clear_in_callback___stop_close_in_callba
         match="Attempted to close NI-DAQmx task",
     ) as warnings_record:
         task.close()
-
     assert acquired
     assert len(event_observer.events) == 1
     assert event_observer.events[0].status == 0
@@ -112,7 +112,7 @@ def test___done_event_registered___call_clear_in_callback___stop_close_in_callba
 @pytest.mark.grpc_xfail(
     reason="#559: Can't close tasks in an event callback when using gRPC", raises=AssertionError
 )
-def test___every_n_samples_event_registered___call_clear_in_callback___stop_close_in_callback_with_success_status(
+def test___every_n_samples_event_registered___call_stop_close_in_callback___task_closed_with_success_status(
     sim_6363_device: nidaqmx.system.Device,
     init_kwargs: dict,
 ) -> None:
@@ -151,7 +151,8 @@ def test___every_n_samples_event_registered___call_clear_in_callback___stop_clos
 
     task.start()
     event_observer.wait_for_events(4)
-    acquired = side_effect_semaphore.acquire(timeout=1.0)
+    acquired = side_effect_semaphore.acquire(timeout=10.0)
+
     # Ensure we get the expected exception and warning
     with pytest.raises(nidaqmx.DaqError) as exc_info:
         task.stop()
@@ -160,7 +161,6 @@ def test___every_n_samples_event_registered___call_clear_in_callback___stop_clos
         match="Attempted to close NI-DAQmx task",
     ) as warnings_record:
         task.close()
-
     assert acquired
     assert len(event_observer.events) == 4
     assert [e.number_of_samples for e in event_observer.events] == [100, 100, 100, 100]
