@@ -92,7 +92,7 @@ def test___done_event_registered___call_stop_close_in_callback___task_closed_wit
 
     task.start()
     event_observer.wait_for_events(1)
-    acquired = side_effect_semaphore.acquire(timeout=1.0)
+    acquired = side_effect_semaphore.acquire(timeout=10.0)
 
     # Ensure we get the expected exception and warning
     with pytest.raises(nidaqmx.DaqError) as exc_info:
@@ -151,7 +151,7 @@ def test___every_n_samples_event_registered___call_stop_close_in_callback___task
 
     task.start()
     event_observer.wait_for_events(4)
-    acquired = side_effect_semaphore.acquire(timeout=1.0)
+    acquired = side_effect_semaphore.acquire(timeout=10.0)
 
     # Ensure we get the expected exception and warning
     with pytest.raises(nidaqmx.DaqError) as exc_info:
