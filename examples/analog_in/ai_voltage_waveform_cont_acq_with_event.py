@@ -5,17 +5,19 @@ a DAQmx device. It uses software events to ensure that the program does not beco
 unresponsive while waiting for samples to become available.
 """
 
+import pprint
+
 import nidaqmx
 from nidaqmx.constants import AcquisitionType
 
+pp = pprint.PrettyPrinter(indent=4, compact=True)
+
 with nidaqmx.Task() as task:
-    sample_size = 0
 
     def callback(task_handle, every_n_samples_event_type, number_of_samples, callback_data):
         """Callback function for reading singals."""
         print("Every N Samples callback invoked.")
-        global sample_size
-        sample_size += len(task.read(number_of_samples_per_channel=100))
+        pp.pprint(task.read(number_of_samples_per_channel=100))
 
         return 0
 
@@ -26,7 +28,6 @@ with nidaqmx.Task() as task:
     task.register_every_n_samples_acquired_into_buffer_event(100, callback)
     task.start()
 
-    input("Running task. Press Enter to stop and see number of accumulated samples.\n")
+    input("Running task. Press Enter to stop.\n")
 
     task.stop()
-    print(sample_size)
