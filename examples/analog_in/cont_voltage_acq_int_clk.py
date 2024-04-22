@@ -4,9 +4,13 @@ This example demonstrates how to acquire a continuous amount of data
 using the DAQ device's internal clock.
 """
 
+import pprint
+import time
+
 import nidaqmx
 from nidaqmx.constants import AcquisitionType
 
+pp = pprint.PrettyPrinter(indent=4, compact=True)
 
 with nidaqmx.Task() as task:
     task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
@@ -16,11 +20,12 @@ with nidaqmx.Task() as task:
     task.start()
 
     try:
-        print("Press Ctrl+C to stop")
+        print("Press Ctrl+C to stop.")
         while True:
-            print("Reading Data: ")
             data = task.read(number_of_samples_per_channel=100)
-            print(data)
+            print(f"Acquired data: {pp.pformat(data)}")
+            print("Press Ctrl+C to stop.")
+            time.sleep(0.5)
     except KeyboardInterrupt:
         pass
     finally:

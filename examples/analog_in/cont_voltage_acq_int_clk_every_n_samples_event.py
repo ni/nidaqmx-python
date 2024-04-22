@@ -1,11 +1,13 @@
-﻿"""Example of analog input voltage acquisition.
+﻿"""Example of analog input voltage acquisition with events.
 
-This example demonstrates how to continuously acquire buffered voltage measurements using
-a DAQmx device. It uses software events to ensure that the program does not become
-unresponsive while waiting for samples to become available.
+This example demonstrates how to use Every N Samples events to
+acquire a continuous amount of data using the DAQ device's
+internal clock. The Every N Samples events indicate when data is
+available from DAQmx.
 """
 
 import pprint
+import time
 
 import nidaqmx
 from nidaqmx.constants import AcquisitionType
@@ -18,6 +20,8 @@ with nidaqmx.Task() as task:
         """Callback function for reading singals."""
         print("Every N Samples callback invoked.")
         pp.pprint(task.read(number_of_samples_per_channel=100))
+        print("Press Enter to stop.")
+        time.sleep(0.5)
 
         return 0
 
