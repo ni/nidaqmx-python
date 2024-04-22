@@ -109,7 +109,6 @@ can be verified once that has been completed.
       ```
       * **Note:** For `<semver>` we prefer to use `0.0.0-devX` style versions rather than the alpha
       versions you get from use a poetry version bump rule, like `prepatch`.
-   * If updating a minor or major version, update `version` and `release` in `docs/conf.py`.
    * Add a section to `CHANGELOG.md` for the new version with empty subsections.
 
 # Updating gRPC stubs when the .proto file is modified
