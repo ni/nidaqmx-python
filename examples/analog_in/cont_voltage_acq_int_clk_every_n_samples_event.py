@@ -20,8 +20,6 @@ with nidaqmx.Task() as task:
         """Callback function for reading singals."""
         print("Every N Samples callback invoked.")
         pp.pprint(task.read(number_of_samples_per_channel=100))
-        print("Press Enter to stop.")
-        time.sleep(0.5)
 
         return 0
 
@@ -30,8 +28,10 @@ with nidaqmx.Task() as task:
         1000.0, sample_mode=AcquisitionType.CONTINUOUS, samps_per_chan=1000
     )
     task.register_every_n_samples_acquired_into_buffer_event(100, callback)
+    print("Starting task. Press Enter to stop.")
+    time.sleep(0.5)
     task.start()
 
-    input("Running task. Press Enter to stop.\n")
+    input("")
 
     task.stop()

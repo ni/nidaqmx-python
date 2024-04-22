@@ -20,7 +20,6 @@ with nidaqmx.Task() as task:
     task.start()
 
     try:
-        print("Press Ctrl+C to stop.")
         while True:
             data = task.read(number_of_samples_per_channel=100)
             print(f"Acquired data: {pp.pformat(data)}")
