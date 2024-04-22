@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nidaqmx"
-version = "0.9.1"
+version = "1.0.0-dev0"
 license = "MIT"
 description = "NI-DAQmx Python API"
 authors = ["NI <opensource@ni.com>"]
