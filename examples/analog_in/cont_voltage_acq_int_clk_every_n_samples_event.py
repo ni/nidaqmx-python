@@ -6,32 +6,36 @@ internal clock. The Every N Samples events indicate when data is
 available from DAQmx.
 """
 
-import pprint
-import time
-
 import nidaqmx
 from nidaqmx.constants import AcquisitionType
 
-pp = pprint.PrettyPrinter(indent=4, compact=True)
 
-with nidaqmx.Task() as task:
+def main():
+    """Continuously acquires data using an Every N Samples event."""
+    total_read = 0
+    with nidaqmx.Task() as task:
 
-    def callback(task_handle, every_n_samples_event_type, number_of_samples, callback_data):
-        """Callback function for reading singals."""
-        print("Every N Samples callback invoked.")
-        pp.pprint(task.read(number_of_samples_per_channel=number_of_samples))
+        def callback(task_handle, every_n_samples_event_type, number_of_samples, callback_data):
+            """Callback function for reading singals."""
+            nonlocal total_read
+            read = len(task.read(number_of_samples_per_channel=number_of_samples))
+            total_read += read
+            print(f"Acquired data: {read} samples. Total {total_read}.", end="\r")
 
-        return 0
+            return 0
 
-    task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
-    task.timing.cfg_samp_clk_timing(
-        1000.0, sample_mode=AcquisitionType.CONTINUOUS, samps_per_chan=50
-    )
-    task.register_every_n_samples_acquired_into_buffer_event(50, callback)
-    print("Starting task. Press Enter to stop.")
-    time.sleep(1.0)
-    task.start()
+        task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
+        task.timing.cfg_samp_clk_timing(
+            1000.0, sample_mode=AcquisitionType.CONTINUOUS, samps_per_chan=1000
+        )
+        task.register_every_n_samples_acquired_into_buffer_event(1000, callback)
+        task.start()
 
-    input("")
+        input("Running task. Press Enter to stop.\n")
 
-    task.stop()
+        task.stop()
+        print(f"\nAcquired {total_read} total samples.")
+
+
+if __name__ == "__main__":
+    main()
