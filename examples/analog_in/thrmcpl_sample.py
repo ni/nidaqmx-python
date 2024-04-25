@@ -13,4 +13,4 @@ with nidaqmx.Task() as task:
     )
 
     data = task.read()
-    print(f"Acquired data: {data}")
+    print(f"Acquired data: {data:f}")
