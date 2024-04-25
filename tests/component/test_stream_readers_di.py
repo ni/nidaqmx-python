@@ -174,8 +174,8 @@ def _get_expected_digital_port_data_sample_major(
 def _bool_array_to_int(bool_array: numpy.typing.NDArray[numpy.bool_]) -> int:
     result = 0
     # Simulated data is little-endian
-    for bit in reversed(bool_array):
-        result = (result << 1) | bit
+    for bit in bool_array[::-1]:
+        result = (result << 1) | int(bit)
     return result
 
 
@@ -394,7 +394,7 @@ def test___digital_multi_channel_reader___read_one_sample_multi_line___returns_v
         _read_and_copy(reader.read_one_sample_multi_line, sample) for _ in range(samples_to_read)
     ]
 
-    assert [_bool_array_to_int(sample) for sample in data] == _get_expected_digital_data(
+    assert [_bool_array_to_int(sample[:, 0]) for sample in data] == _get_expected_digital_data(
         num_channels, samples_to_read
     )
 
