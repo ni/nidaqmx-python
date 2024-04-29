@@ -26,15 +26,12 @@ with nidaqmx.Task() as task:
     task.timing.cfg_samp_clk_timing(sampling_rate, sample_mode=AcquisitionType.CONTINUOUS)
 
     try:
-        cycle = 1
         print("Generating voltage continuously. Press Ctrl+C to stop.")
-
         while True:
             data = create_sine_wave(
                 frequency=17.0, amplitude=1.0, sampling_rate=sampling_rate, duration=1.0
             )
             task.write(data)
-            cycle = cycle + 1
             if is_first_run:
                 is_first_run = False
                 task.start()
