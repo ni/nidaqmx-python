@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import contextlib
+import os
 import re
 import runpy
+import sys
 import warnings
 from pathlib import Path
 
@@ -29,6 +31,8 @@ def test___shipping_example___run___no_errors(example_path: Path, system):
                 )
     if example_path.name == "ci_pulse_freq.py":
         pytest.skip("Example times out if there is no signal.")
+    if example_path.name == "analog_out_helper.py":
+        pytest.skip("Helper for analog output.")
     if re.search(r"\binput\(|\bKeyboardInterrupt\b", example_source):
         pytest.skip("Example waits for keyboard input.")
     if example_path.name == "nidaqmx_warnings.py":
@@ -38,6 +42,12 @@ def test___shipping_example___run___no_errors(example_path: Path, system):
         context_manager = contextlib.nullcontext()
 
     with context_manager:
+        example_dir = os.path.dirname(os.path.abspath(example_path))
+        if example_dir not in sys.path:
+            # Solving ModuleNotFoundError.
+            # Add the example directory to sys.path so that the
+            # helper module can be found.
+            sys.path.append(example_dir)
         runpy.run_path(str(example_path))
 
 

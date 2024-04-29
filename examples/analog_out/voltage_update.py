@@ -10,4 +10,3 @@ with nidaqmx.Task() as task:
     task.ao_channels.add_ao_voltage_chan("Dev1/ao0")
 
     print(f"Generate {task.write(1.1)} voltage sample.")
-    task.stop()

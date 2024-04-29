@@ -1,48 +1,38 @@
 """Example of analog output voltage generation.
 
-This example demonstrates how to output a continuous periodic
-waveform with new data using an internal sample clock while
-the task is running.
+This example demonstrates how to continuously generate an
+analog output waveform by providing new data to the output buffer
+as the task is running.
+
+This example is useful if you want to generate a non-repeating waveform,
+make updates on-the-fly, or generate a frequency that is not an
+even divide-down of your sample clock. In this example,
+the default frequency value is 17.0 to demonstrate that non-regenerative output
+can be used to create a signal with a frequency that is not an even divide-down
+of your sample clock.
 """
 
-import time
-
-import numpy as np
+from analog_out_helper import create_sine_wave
 
 import nidaqmx
 from nidaqmx.constants import AcquisitionType, RegenerationMode
 
 
-def get_sine_wave_data(cycle):
-    """Generate a sine wave data."""
-    frequency = (10, 50)
-    amplitude = (1, 3)
-    sampling_rate = (100, 500)
-    duration = 1
-    selection = cycle % 2
-
-    # generate the time array
-    t = np.arange(0, duration, 1 / sampling_rate[selection])
-    # Generate the sine wave
-    data = amplitude[selection] * np.sin(2 * np.pi * frequency[selection] * t)
-    return data
-
-
 with nidaqmx.Task() as task:
     is_first_run = True
+    sampling_rate = 1000.0
     task.ao_channels.add_ao_voltage_chan("Dev1/ao0")
     task.out_stream.regen_mode = RegenerationMode.DONT_ALLOW_REGENERATION
-    task.timing.cfg_samp_clk_timing(
-        1000, sample_mode=AcquisitionType.CONTINUOUS, samps_per_chan=100
-    )
+    task.timing.cfg_samp_clk_timing(sampling_rate, sample_mode=AcquisitionType.CONTINUOUS)
 
     try:
         cycle = 1
-        print("Starting task. Press Ctrl+C to stop.")
-        time.sleep(1.0)
+        print("Generating voltage continuously. Press Ctrl+C to stop.")
 
         while True:
-            data = get_sine_wave_data(cycle)
+            data = create_sine_wave(
+                frequency=17.0, amplitude=1.0, sampling_rate=sampling_rate, duration=1.0
+            )
             task.write(data)
             cycle = cycle + 1
             if is_first_run:
