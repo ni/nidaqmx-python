@@ -28,7 +28,6 @@ def main():
     with nidaqmx.Task() as task:
         sampling_rate = 1000.0
 
-
         def callback(task_handle, every_n_samples_event_type, number_of_samples, callback_data):
             """Callback function for Transferred N samples."""
             nonlocal total_write
