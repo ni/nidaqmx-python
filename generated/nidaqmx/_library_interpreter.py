@@ -2,6 +2,7 @@
 
 import ctypes
 import logging
+import platform
 import warnings
 from typing import Optional
 
@@ -16,6 +17,7 @@ from nidaqmx._lib_time import AbsoluteTime
 
 
 _logger = logging.getLogger(__name__)
+_was_runtime_environment_set = None
 
 
 class LibraryEventHandler(BaseEventHandler):
@@ -43,7 +45,15 @@ class LibraryInterpreter(BaseInterpreter):
     __slots__ = ()
 
     def __init__(self):
-        pass
+        global _was_runtime_environment_set 
+        if _was_runtime_environment_set is None:
+            runtime_env = platform.python_implementation()
+            version = platform.python_version()
+            self.set_runtime_environment(
+                runtime_env,
+                version
+            )
+            _was_runtime_environment_set = True
 
     def add_cdaq_sync_connection(self, port_list):
         cfunc = lib_importer.windll.DAQmxAddCDAQSyncConnection
@@ -5286,6 +5296,18 @@ class LibraryInterpreter(BaseInterpreter):
 
         error_code = cfunc(
             task, attribute, ctypes.c_uint64(value))
+        self.check_for_error(error_code)
+
+    def set_runtime_environment(self, environment, environment_version):
+        cfunc = lib_importer.windll.DAQmxSetRuntimeEnvironment
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes_byte_str]
+
+        error_code = cfunc(
+            environment, environment_version)
         self.check_for_error(error_code)
 
     def set_scale_attribute_double(self, scale_name, attribute, value):

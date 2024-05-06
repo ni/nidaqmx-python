@@ -1531,6 +1531,10 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def set_runtime_environment(self, environment, environment_version):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def set_scale_attribute_double(self, scale_name, attribute, value):
         raise NotImplementedError
 

@@ -3063,6 +3063,13 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.SetReadAttributeUInt64Request(
                 task=task, attribute_raw=attribute, value=value))
 
+    def set_runtime_environment(self, environment, environment_version):
+        response = self._invoke(
+            self._client.SetRuntimeEnvironment,
+            grpc_types.SetRuntimeEnvironmentRequest(
+                environment=environment,
+                environment_version=environment_version))
+
     def set_scale_attribute_double(self, scale_name, attribute, value):
         response = self._invoke(
             self._client.SetScaleAttributeDouble,

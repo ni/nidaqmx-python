@@ -19,6 +19,7 @@
 
 import ctypes
 import logging
+import platform
 import warnings
 from typing import Optional
 
@@ -33,6 +34,7 @@ from nidaqmx._lib_time import AbsoluteTime
 
 
 _logger = logging.getLogger(__name__)
+_was_runtime_environment_set = None
 
 
 class LibraryEventHandler(BaseEventHandler):
@@ -60,7 +62,15 @@ class LibraryInterpreter(BaseInterpreter):
     __slots__ = ()
 
     def __init__(self):
-        pass
+        global _was_runtime_environment_set 
+        if _was_runtime_environment_set is None:
+            runtime_env = platform.python_implementation()
+            version = platform.python_version()
+            self.set_runtime_environment(
+                runtime_env,
+                version
+            )
+            _was_runtime_environment_set = True
 
 % for func in functions:
 <%
