@@ -41,7 +41,7 @@ def main():
         task.register_every_n_samples_transferred_from_buffer_event(1000, callback)
 
         actual_sampling_rate = task.timing.samp_clk_rate
-        print(f"Actual sampling rate: {actual_sampling_rate:.2f} S/s")
+        print(f"Actual sampling rate: {actual_sampling_rate:g} S/s")
 
         data = create_sine_wave(
             frequency=10.0, amplitude=1.0, sampling_rate=sampling_rate, duration=1.0
