@@ -39,7 +39,7 @@ def main():
         task.timing.cfg_samp_clk_timing(sampling_rate, sample_mode=AcquisitionType.CONTINUOUS)
 
         actual_sampling_rate = task.timing.samp_clk_rate
-        print(f"Actual sampling rate: {actual_sampling_rate} Hz")
+        print(f"Actual sampling rate: {actual_sampling_rate:.2f} S/s")
 
         try:
             full_cycle = 2.0

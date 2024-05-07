@@ -18,6 +18,6 @@ with nidaqmx.Task() as task:
 
     data = [5.0 * i / total_samples for i in range(total_samples)]
     number_of_samples_written = task.write(data, auto_start=True)
-    print(f"Generate {number_of_samples_written} voltage samples.")
+    print(f"Generating {number_of_samples_written} voltage samples.")
     task.wait_until_done()
     task.stop()
