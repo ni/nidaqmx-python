@@ -29,7 +29,7 @@ from typing import List
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
-from nidaqmx.errors import DaqError, DaqReadError, DaqWarning, DaqWriteError
+from nidaqmx.errors import DaqError, DaqFunctionNotSupportedError, DaqReadError, DaqWarning, DaqWriteError
 from nidaqmx._lib_time import AbsoluteTime
 
 
@@ -64,13 +64,20 @@ class LibraryInterpreter(BaseInterpreter):
     def __init__(self):
         global _was_runtime_environment_set 
         if _was_runtime_environment_set is None:
-            runtime_env = platform.python_implementation()
-            version = platform.python_version()
-            self.set_runtime_environment(
-                runtime_env,
-                version
-            )
-            _was_runtime_environment_set = True
+            try:
+                runtime_env = platform.python_implementation()
+                version = platform.python_version()
+                self.set_runtime_environment(
+                    runtime_env,
+                    version,
+                    '',
+                    ''
+                )
+            except DaqFunctionNotSupportedError:
+                pass
+            finally:
+                _was_runtime_environment_set = True
+
 
 % for func in functions:
 <%

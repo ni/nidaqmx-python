@@ -3063,13 +3063,6 @@ class GrpcStubInterpreter(BaseInterpreter):
             grpc_types.SetReadAttributeUInt64Request(
                 task=task, attribute_raw=attribute, value=value))
 
-    def set_runtime_environment(self, environment, environment_version):
-        response = self._invoke(
-            self._client.SetRuntimeEnvironment,
-            grpc_types.SetRuntimeEnvironmentRequest(
-                environment=environment,
-                environment_version=environment_version))
-
     def set_scale_attribute_double(self, scale_name, attribute, value):
         response = self._invoke(
             self._client.SetScaleAttributeDouble,
@@ -3580,6 +3573,10 @@ class GrpcStubInterpreter(BaseInterpreter):
         except grpc.RpcError:
             _logger.exception('Failed to get error string for error code %d.', error_code)
             return 'Failed to retrieve error description.'
+
+    def set_runtime_environment(
+            self, environment, environment_version, reserved_1, reserved_2):
+        raise NotImplementedError
 
 
 def _assign_numpy_array(numpy_array, grpc_array):

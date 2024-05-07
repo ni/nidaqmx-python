@@ -21936,6 +21936,7 @@ functions = {
     },
     'SetRuntimeEnvironment': {
         'calling_convention': 'StdCall',
+        'codegen_method': 'private',
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -21948,6 +21949,20 @@ functions = {
                 'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
                 'name': 'environmentVersion',
+                'python_data_type': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'name': 'reserved1',
+                'python_data_type': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'name': 'reserved2',
                 'python_data_type': 'str',
                 'type': 'const char[]'
             }

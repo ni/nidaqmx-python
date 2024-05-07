@@ -66,6 +66,7 @@ INTERPRETER_IGNORED_FUNCTIONS = [
 
 GRPC_INTERPRETER_IGNORED_FUNCTIONS = [
     "get_error_string",
+    "set_runtime_environment",
 ]
 
 LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [

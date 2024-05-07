@@ -224,6 +224,10 @@ class GrpcStubInterpreter(BaseInterpreter):
             _logger.exception('Failed to get error string for error code %d.', error_code)
             return 'Failed to retrieve error description.'
 
+    def set_runtime_environment(
+            self, environment, environment_version, reserved_1, reserved_2):
+        raise NotImplementedError
+
 
 def _assign_numpy_array(numpy_array, grpc_array):
     """
