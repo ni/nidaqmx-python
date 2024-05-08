@@ -1,4 +1,4 @@
-﻿"""Example for reading digital signal.
+﻿"""Example for reading digital signals.
 
 This example demonstrates how to read values from one or more
 digital input channels.

@@ -1,11 +1,11 @@
-﻿"""Example for reading digital signal.
+﻿"""Example for reading digital signals.
 
 This example demonstrates how to acquire a continuous digital
 waveform using the DAQ device's internal clock.
 """
 
 import nidaqmx
-from nidaqmx.constants import AcquisitionType, LineGrouping, READ_ALL_AVAILABLE
+from nidaqmx.constants import AcquisitionType, LineGrouping
 
 
 with nidaqmx.Task() as task:
@@ -17,7 +17,7 @@ with nidaqmx.Task() as task:
     try:
         total_read = 0
         while True:
-            data = task.read(READ_ALL_AVAILABLE)
+            data = task.read(number_of_samples_per_channel=4)
             read = len(data)
             total_read += read
             print(f"Acquired data: {read} samples. Total {total_read}.", end="\r")
