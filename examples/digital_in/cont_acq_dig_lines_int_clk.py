@@ -17,7 +17,7 @@ with nidaqmx.Task() as task:
     try:
         total_read = 0
         while True:
-            data = task.read(number_of_samples_per_channel=4)
+            data = task.read(number_of_samples_per_channel=1000)
             read = len(data)
             total_read += read
             print(f"Acquired data: {read} samples. Total {total_read}.", end="\r")
