@@ -1,4 +1,4 @@
-"""Example for generating digital signal.
+"""Example for generating digital signals.
 
 This example demonstrates how to output a continuous digital
 pattern using the DAQ device's clock.
