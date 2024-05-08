@@ -15,7 +15,8 @@ with nidaqmx.Task() as task:
         1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=len(data)
     )
 
-    number_of_samples_written = task.write(data, auto_start=True)
-    print(f"Generate {number_of_samples_written} voltage samples.")
+    number_of_samples_written = task.write(data)
+    task.start()
+    print(f"Generating {number_of_samples_written} voltage samples.")
     task.wait_until_done()
     task.stop()
