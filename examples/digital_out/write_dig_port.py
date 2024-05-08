@@ -12,8 +12,4 @@ with nidaqmx.Task() as task:
 
     task.do_channels.add_do_chan("Dev1/port0", line_grouping=LineGrouping.CHAN_FOR_ALL_LINES)
     task.write(data, auto_start=True)
-
-    while not task.is_task_done():
-        pass
-
     task.stop()
