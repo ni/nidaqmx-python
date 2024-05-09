@@ -50,14 +50,14 @@ def create_sine_wave_with_phase(
 
 
 def main():
-    """
-    Generate a continuous voltage waveform using an analog output channel of a NI-DAQmx device.
+    """Generate a continuous voltage waveform using an analog output channel of a NI-DAQmx device.
 
-    This function sets up a task to generate a continuous voltage waveform using the specified analog output channel
-    of a NI-DAQmx device. It configures the sampling rate, number of samples, and regeneration mode of the task.
-    It then enters a loop where it continuously generates a sine wave with a specified frequency, amplitude, and phase,
-    and writes the waveform to the analog output channel. The loop continues until the user interrupts the program
-    by pressing Ctrl+C.
+    This function sets up a task to generate a continuous voltage waveform using the specified
+    analog output channel of a NI-DAQmx device. It configures the sampling rate, number of samples,
+    and regeneration mode of the task. It then enters a loop where it continuously generates a
+    sine wave with a specified frequency, amplitude, and phase, and writes the waveform to the
+    analog output channel.
+    The loop continues until the user interrupts the program by pressing Ctrl+C.
 
     Args:
         None
