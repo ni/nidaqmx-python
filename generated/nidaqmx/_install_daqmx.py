@@ -26,6 +26,7 @@ _logger = logging.getLogger(__name__)
 
 METADATA_FILE = "_installer_metadata.json"
 
+
 def _get_linux_installation_commands(
     _directory_to_extract_to: str, dist_name: str, dist_version: str, _release_string: str
 ) -> List[List[str]]:
