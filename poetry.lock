@@ -139,6 +139,14 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "distro"
+version = "1.9.0"
+description = "Distro - an OS platform information API"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "docutils"
 version = "0.20.1"
 description = "Docutils -- Python Documentation Utilities"
@@ -976,7 +984,7 @@ grpc = ["grpcio", "protobuf"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "560bde06fd31aa0f7ffdb2cdfc7a9720a002d428ccf52d1676c657b2f3aaf6ae"
+content-hash = "3d1345aa9a53946ef175f5011b4d6151c75529f108f7d64c4255bfc2f11cac5f"
 
 [metadata.files]
 alabaster = [
@@ -1202,6 +1210,10 @@ deprecation = [
 distlib = [
     {file = "distlib-0.3.8-py2.py3-none-any.whl", hash = "sha256:034db59a0b96f8ca18035f36290806a9a6e6bd9d1ff91e45a7f172eb17e51784"},
     {file = "distlib-0.3.8.tar.gz", hash = "sha256:1530ea13e350031b6312d8580ddb6b27a104275a31106523b8f123787f494f64"},
+]
+distro = [
+    {file = "distro-1.9.0-py3-none-any.whl", hash = "sha256:7bffd925d65168f85027d8da9af6bddab658135b840670a223589bc0c8ef02b2"},
+    {file = "distro-1.9.0.tar.gz", hash = "sha256:2fa77c6fd8940f116ee1d6b94a2f90b13b5ea8d019b98bc8bafdcabcdd9bdbed"},
 ]
 docutils = [
     {file = "docutils-0.20.1-py3-none-any.whl", hash = "sha256:96f387a2c5562db4476f09f13bbab2192e764cac08ebbf3a34a95d9b1e4a59d6"},
