@@ -2,6 +2,7 @@
     "Windows": [
         {
             "Version": "24.0.0",
+            "Release": "2024Q1",
             "Location": "https://download.ni.com/support/nipkg/products/ni-d/ni-daqmx/24.0/online/ni-daqmx_24.0_online.exe",
             "supportedOS": [
                 "Windows 11",
@@ -15,10 +16,12 @@
     "Linux": [
         {
             "Version": "24.0.0",
+            "Release": "2024Q1",
+            "_comment": "Location url must be of the format 'https://download.ni.com/support/softlib/MasterRepository/LinuxDrivers<Release>/NILinux<Release>DeviceDrivers.zip'. Any change to the format will require a change in the code.",
             "Location": "https://download.ni.com/support/softlib/MasterRepository/LinuxDrivers2024Q1/NILinux2024Q1DeviceDrivers.zip",
             "supportedOS": [
                 "ubuntu 20.04",
-                "ubuntu 22.00",
+                "ubuntu 22.04",
                 "rhel 8",
                 "rhel 9",
                 "opensuse 15.4",
