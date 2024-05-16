@@ -9,23 +9,24 @@ import nidaqmx
 from nidaqmx.constants import CountDirection, Edge
 
 with nidaqmx.Task() as task:
-    task.ci_channels.add_ci_count_edges_chan(
+    channel = task.ci_channels.add_ci_count_edges_chan(
         "Dev1/ctr0",
         edge=Edge.RISING,
         initial_count=0,
         count_direction=CountDirection.COUNT_UP,
     )
+    channel.ci_count_edges_term = "/Dev1/PFI8"
 
     print("Continuously polling. Press Ctrl+C to stop.")
     task.start()
 
     try:
-        count = 0
+        edge_counts = 0
         while True:
-            count = task.read()
-            print(f"Acquired count: {count:n}", end="\r")
+            edge_counts = task.read()
+            print(f"Acquired count: {edge_counts:n}", end="\r")
     except KeyboardInterrupt:
         pass
     finally:
         task.stop()
-        print(f"\nAcquired {count:n} total counts.")
+        print(f"\nAcquired {edge_counts:n} total counts.")
