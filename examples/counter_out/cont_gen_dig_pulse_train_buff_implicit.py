@@ -17,7 +17,7 @@ with nidaqmx.Task() as task:
     duty_min = 0.5
     duty_max = 0.8
     duty_step = (duty_max - duty_min) / 1000
-    ctr_freq_data: CtrFreq = [CtrFreq(1000, (duty_min + duty_step * i)) for i in range(1000)]
+    ctr_freq_data = [CtrFreq(1000, (duty_min + duty_step * i)) for i in range(1000)]
 
     channel = task.co_channels.add_co_pulse_chan_freq(
         "Dev1/ctr0", idle_state=Level.LOW, initial_delay=0.0, freq=1.0, duty_cycle=0.5
