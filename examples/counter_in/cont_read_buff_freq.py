@@ -1,8 +1,8 @@
 """Example of counter input frequency acquisition.
 
-This example demonstrates how to continuously measure frequency using one
-counter on a Counter Input Channel. The Edge, Minimum Value and
-Maximum Value are all configurable.
+This example demonstrates how to continuously measure buffered frequency
+using one counter on a Counter Input Channel. The Edge, Minimum Value
+and Maximum Value are all configurable.
 """
 
 import nidaqmx
@@ -12,8 +12,8 @@ from nidaqmx.constants import AcquisitionType, Edge, FrequencyUnits
 with nidaqmx.Task() as task:
     channel = task.ci_channels.add_ci_freq_chan(
         "Dev1/ctr0",
-        min_val=100.0,
-        max_val=1000.0,
+        min_val=2.0,
+        max_val=100000.0,
         units=FrequencyUnits.HZ,
         edge=Edge.RISING,
     )

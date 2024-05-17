@@ -12,8 +12,8 @@ from nidaqmx.constants import Edge, FrequencyUnits
 with nidaqmx.Task() as task:
     channel = task.ci_channels.add_ci_freq_chan(
         "Dev1/ctr0",
-        min_val=100.0,
-        max_val=1000.0,
+        min_val=2.0,
+        max_val=100000.0,
         units=FrequencyUnits.HZ,
         edge=Edge.RISING,
     )

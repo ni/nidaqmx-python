@@ -8,7 +8,7 @@ from nidaqmx.constants import FrequencyUnits
 
 with nidaqmx.Task() as task:
     channel = task.ci_channels.add_ci_pulse_chan_freq(
-        "Dev1/ctr0", "", min_val=100.0, max_val=1000.0, units=FrequencyUnits.HZ
+        "Dev1/ctr0", "", min_val=2.0, max_val=100000.0, units=FrequencyUnits.HZ
     )
     channel.ci_pulse_freq_term = "/Dev1/PFI8"
 
