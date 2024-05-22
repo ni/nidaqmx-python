@@ -22,71 +22,12 @@ if sys.platform.startswith("win"):
 elif sys.platform.startswith("linux"):
     import distro
 
+from linux_installation_commands import _get_linux_installation_commands
+from linux_installation_commands import linux_commands
+
 _logger = logging.getLogger(__name__)
 
 METADATA_FILE = "_installer_metadata.json"
-
-
-def _get_linux_installation_commands(
-    _directory_to_extract_to: str, dist_name: str, dist_version: str, _release_string: str
-) -> List[List[str]]:
-    """
-    Get the installation commands for Linux based on the distribution.
-
-    """
-    if dist_name == "ubuntu":
-        # Remove "." from dist_version string. 20.04 -> 2004
-        _dist_version = dist_version.replace(".", "")
-        ubuntu_commands = [
-            ["sudo", "apt", "update"],
-            [
-                "sudo",
-                "apt",
-                "install",
-                f"{_directory_to_extract_to}/NILinux{_release_string}DeviceDrivers/ni-ubuntu{_dist_version}-drivers-{_release_string}.deb",
-            ],
-            ["sudo", "apt", "update"],
-            ["sudo", "apt", "install", "ni-daqmx"],
-            ["sudo", "dkms", "autoinstall"],
-        ]
-        return ubuntu_commands
-    elif dist_name == "opensuse":
-        _dist_version = dist_version.replace(".", "")
-        opensuse_commands = [
-            ["sudo", "zypper", "update"],
-            ["sudo", "zypper", "install", "insserv"],
-            [
-                "sudo",
-                "zypper",
-                "--no-gpg-checks",
-                "install",
-                f"{_directory_to_extract_to}/NILinux{_release_string}DeviceDrivers/ni-opensuse{_dist_version}-drivers-{_release_string}.rpm",
-            ],
-            ["sudo", "zypper", "refresh"],
-            ["sudo", "zypper", "install", "ni-daqmx"],
-            ["sudo", "dkms", "autoinstall"],
-        ]
-        return opensuse_commands
-    elif dist_name == "rhel":
-        # Only the major version is needed for rhel. 8.8 -> 8 or 9.2 -> 9
-        _dist_version = dist_version.split(".")[0]
-        redhat_commands = [
-            ["sudo", "yum", "update"],
-            ["sudo", "yum", "install", "chkconfig"],
-            [
-                "sudo",
-                "yum",
-                "install",
-                f"{_directory_to_extract_to}/NILinux{_release_string}DeviceDrivers/ni-rhel{_dist_version}-drivers-{_release_string}.rpm",
-            ],
-            ["sudo", "yum", "install", "ni-daqmx"],
-            ["sudo", "dkms", "autoinstall"],
-        ]
-        return redhat_commands
-
-    else:
-        raise click.ClickException(f"Unsupported distribution '{dist_name}'")
-
 
 def _parse_version(version: str) -> Tuple[int, ...]:
     """
@@ -149,16 +90,16 @@ def _get_daqmx_installed_version() -> Optional[str]:
     elif sys.platform.startswith("linux"):
         try:
             _logger.debug("Checking for installed NI-DAQmx version")
+            commands_info = linux_commands[distro.id()]
+            query_command = commands_info["get_daqmx_version"]
+            query_output = subprocess.run(
+                query_command, stdout=subprocess.PIPE
+            ).stdout.decode("utf-8")
+
             if distro.id() == "ubuntu":
-                dpkg_output = subprocess.run(
-                    ["dpkg", "-l", "ni-daqmx"], stdout=subprocess.PIPE
-                ).stdout.decode("utf-8")
-                version_match = re.search(r"ii\s+ni-daqmx\s+(\d+\.\d+\.\d+)", dpkg_output)
+                version_match = re.search(r"ii\s+ni-daqmx\s+(\d+\.\d+\.\d+)", query_output)
             elif distro.id() == "opensuse" or distro.id() == "rhel":
-                rpm_output = subprocess.run(
-                    ["rpm", "-q", "ni-daqmx"], stdout=subprocess.PIPE
-                ).stdout.decode("utf-8")
-                version_match = re.search(r"ni-daqmx-(\d+\.\d+\.\d+)", rpm_output)
+                version_match = re.search(r"ni-daqmx-(\d+\.\d+\.\d+)", query_output)
             else:
                 raise click.ClickException(f"Unsupported distribution '{distro.id()}'")
             if version_match:
@@ -475,14 +416,13 @@ def _install_daqmx_linux_driver() -> None:
     Install the NI-DAQmx driver on Linux.
 
     """
-
-    installed_version = _get_daqmx_installed_version()
-    download_url, latest_version, release, supported_os = _get_driver_details("Linux")
-
     try:
         _is_distribution_supported()
     except Exception as e:
         raise click.ClickException(f"Distribution not supported.\nDetails: {e}") from e
+
+    installed_version = _get_daqmx_installed_version()
+    download_url, latest_version, release, supported_os = _get_driver_details("Linux")
 
     if not download_url:
         raise click.ClickException(f"Failed to fetch the download url.")
