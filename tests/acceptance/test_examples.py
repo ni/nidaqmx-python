@@ -29,6 +29,8 @@ def test___shipping_example___run___no_errors(example_path: Path, system):
                 )
     if example_path.name == "read_pulse_freq.py":
         pytest.skip("Example times out if there is no signal.")
+    if example_path.name == "voltage_acq_int_clk_dig_start_ref.py":
+        pytest.skip("Example times out if there is no trigger signal.")
     if re.search(r"\binput\(|\bKeyboardInterrupt\b", example_source):
         pytest.skip("Example waits for keyboard input.")
     if example_path.name == "nidaqmx_warnings.py":
