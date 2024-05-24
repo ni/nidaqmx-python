@@ -1,4 +1,4 @@
-﻿"""Example of analog input voltage acquisition is triggered by a digital edge.
+﻿"""Example of analog input voltage acquisition with a digital start trigger.
 
 This example demonstrates how to acquire a continuous amount of
 data using an external sample clock, started by a digital edge.
@@ -14,7 +14,7 @@ def main():
     with nidaqmx.Task() as task:
 
         def callback(task_handle, every_n_samples_event_type, number_of_samples, callback_data):
-            """Callback function for reading singals."""
+            """Callback function for reading signals."""
             nonlocal total_read
             read = len(task.read(number_of_samples_per_channel=number_of_samples))
             total_read += read
