@@ -21,7 +21,7 @@ import nidaqmx
 from nidaqmx.constants import AcquisitionType, RegenerationMode
 
 
-def create_sine_wave_with_phase(
+def generate_sine_wave(
     frequency: float,
     amplitude: float,
     sampling_rate: float,
@@ -42,9 +42,9 @@ def create_sine_wave_with_phase(
         containing the generated data and the phase of the sine wave after generation.
     """
     duration_time = number_of_samples / sampling_rate
-    duration_radians = (duration_time / frequency) * 2 * np.pi
+    duration_radians = duration_time * 2 * np.pi
     phase_out = (phase_in + duration_radians) % (2 * np.pi)
-    t = np.linspace(phase_in, phase_out, number_of_samples)
+    t = np.linspace(phase_in, phase_in + duration_radians, number_of_samples, endpoint=False)
 
     return (amplitude * np.sin(frequency * t), phase_out)
 
@@ -77,23 +77,20 @@ def main():
         print(f"Actual sampling rate: {actual_sampling_rate:g} S/s")
 
         try:
-            phase_in = 0.0
-            phase_out = 0.0
+            phase = 0.0
             print("Generating voltage continuously. Press Ctrl+C to stop.")
             while True:
-                data, phase_out = create_sine_wave_with_phase(
+                data, phase = generate_sine_wave(
                     frequency=17.0,
                     amplitude=1.0,
                     sampling_rate=actual_sampling_rate,
-                    phase_in=phase_in,
+                    phase_in=phase,
                     number_of_samples=number_of_samples,
                 )
                 task.write(data)
                 if is_first_run:
                     is_first_run = False
                     task.start()
-
-                phase_in = phase_out
         except KeyboardInterrupt:
             pass
         finally:
