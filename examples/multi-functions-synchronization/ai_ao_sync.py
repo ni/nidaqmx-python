@@ -59,10 +59,10 @@ def main():
         return 0
 
     task_ai.ai_channels.add_ai_voltage_chan("Dev1/ai0")
-    task_ai.timing.cfg_samp_clk_timing(10000.0, sample_mode=AcquisitionType.CONTINUOUS)
+    task_ai.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.CONTINUOUS)
     task_ai.register_every_n_samples_acquired_into_buffer_event(1000, callback)
     task_ao.ao_channels.add_ao_voltage_chan("Dev1/ao0")
-    task_ao.timing.cfg_samp_clk_timing(5000.0, sample_mode=AcquisitionType.CONTINUOUS)
+    task_ao.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.CONTINUOUS)
     task_ao.triggers.start_trigger.cfg_dig_edge_start_trig("/Dev1/ai/StartTrigger")
 
     actual_sampling_rate = task_ao.timing.samp_clk_rate

@@ -17,7 +17,7 @@ def main():
     task_di = nidaqmx.Task()
 
     def callback(task_handle, every_n_samples_event_type, number_of_samples, callback_data):
-        """Callback function for reading singals."""
+        """Callback function for reading signals."""
         nonlocal total_ai_read
         nonlocal total_di_read
         ai_read = task_ai.read(number_of_samples_per_channel=1000)
@@ -29,10 +29,12 @@ def main():
         return 0
 
     task_ai.ai_channels.add_ai_voltage_chan("Dev1/ai0")
-    task_ai.timing.cfg_samp_clk_timing(10000.0, sample_mode=AcquisitionType.CONTINUOUS)
+    task_ai.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.CONTINUOUS)
     task_ai.register_every_n_samples_acquired_into_buffer_event(1000, callback)
     task_di.di_channels.add_di_chan("Dev1/port0", line_grouping=LineGrouping.CHAN_FOR_ALL_LINES)
-    task_di.timing.cfg_samp_clk_timing(10000.0, "/Dev1/ai/SampleClock", sample_mode=AcquisitionType.CONTINUOUS)
+    task_di.timing.cfg_samp_clk_timing(
+        1000.0, "/Dev1/ai/SampleClock", sample_mode=AcquisitionType.CONTINUOUS
+    )
 
     try:
         task_di.start()
