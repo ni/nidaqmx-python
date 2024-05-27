@@ -19,7 +19,7 @@ jobs:
       - name: Set up Poetry
         uses: Gr1N/setup-poetry@v8
         with:
-          poetry-version: "1.4.0"
+          poetry-version: "1.8.3"
       - name: Check Poetry version
         run: poetry --version
       - name: Install dependencies
