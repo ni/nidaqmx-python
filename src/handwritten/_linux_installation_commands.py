@@ -43,17 +43,17 @@ rpm_daqmx_version_command = ["rpm", "-q", "ni-daqmx"]
 # Mapping of distros to their command templates and version handlers
 linux_commands: Dict[str, Dict[str, Callable]] = {
     "ubuntu": {
-        "get_version": get_version_ubuntu,
+        "get_distro_version": get_version_ubuntu,
         "get_daqmx_version": debian_daqmx_version_command,
         "install": apt_install_commands,
     },
     "opensuse": {
-        "get_version": get_version_opensuse,
+        "get_distro_version": get_version_opensuse,
         "get_daqmx_version": rpm_daqmx_version_command,
         "install": zypper_install_commands,
     },
     "rhel": {
-        "get_version": get_version_rhel,
+        "get_distro_version": get_version_rhel,
         "get_daqmx_version": rpm_daqmx_version_command,
         "install": yum_install_commands,
     },
@@ -70,7 +70,7 @@ def _get_linux_installation_commands(
         raise click.ClickException("Unsupported distribution '{}'".format(dist_name))
 
     commands_info = linux_commands[dist_name]
-    version = commands_info["get_version"](dist_version)
+    version = commands_info["get_distro_version"](dist_version)
     install_commands = commands_info["install"]
 
     # Format commands with the provided variables
