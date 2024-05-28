@@ -22,8 +22,8 @@ if sys.platform.startswith("win"):
 elif sys.platform.startswith("linux"):
     import distro
 
-from linux_installation_commands import _get_linux_installation_commands
-from linux_installation_commands import linux_commands
+from nidaqmx._linux_installation_commands import _get_linux_installation_commands
+from nidaqmx._linux_installation_commands import linux_commands
 
 _logger = logging.getLogger(__name__)
 
