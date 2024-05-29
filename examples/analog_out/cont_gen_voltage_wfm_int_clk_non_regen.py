@@ -25,8 +25,8 @@ def generate_sine_wave(
     frequency: float,
     amplitude: float,
     sampling_rate: float,
-    phase_in: float,
     number_of_samples: int,
+    phase_in: float = 0.0,
 ) -> Tuple[numpy.typing.NDArray[numpy.double], float]:
     """Generates a sine wave with a specified phase.
 
@@ -34,8 +34,8 @@ def generate_sine_wave(
         frequency (float): Specifies the frequency of the sine wave.
         amplitude (float): Specifies the amplitude of the sine wave.
         sampling_rate (float): Specifies the sampling rate of the sine wave.
-        phase_in (float): Specifies the phase of the sine wave in radians.
         number_of_samples (int): Specifies the number of samples to generate.
+        phase_in (Optional[float]): Specifies the phase of the sine wave in radians.
 
     Returns:
         Tuple[numpy.typing.NDArray[numpy.double], float]: Indicates a tuple
@@ -84,8 +84,8 @@ def main():
                     frequency=17.0,
                     amplitude=1.0,
                     sampling_rate=actual_sampling_rate,
-                    phase_in=phase,
                     number_of_samples=number_of_samples,
+                    phase_in=phase,
                 )
                 task.write(data)
                 if is_first_run:
