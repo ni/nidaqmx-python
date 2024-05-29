@@ -23,15 +23,15 @@ def generate_sine_wave(
     """Generates a sine wave with a specified phase.
 
     Args:
-        frequency (float): Specifies the frequency of the sine wave.
-        amplitude (float): Specifies the amplitude of the sine wave.
-        sampling_rate (float): Specifies the sampling rate of the sine wave.
-        number_of_samples (int): Specifies the number of samples to generate.
-        phase_in (Optional[float]): Specifies the phase of the sine wave in radians.
+        frequency: Specifies the frequency of the sine wave.
+        amplitude: Specifies the amplitude of the sine wave.
+        sampling_rate: Specifies the sampling rate of the sine wave.
+        number_of_samples: Specifies the number of samples to generate.
+        phase_in: Specifies the phase of the sine wave in radians.
 
     Returns:
-        Tuple[numpy.typing.NDArray[numpy.double], float]: Indicates a tuple
-        containing the generated data and the phase of the sine wave after generation.
+        Indicates a tuple containing the generated data and the phase
+        of the sine wave after generation.
     """
     duration_time = number_of_samples / sampling_rate
     duration_radians = duration_time * 2 * np.pi
