@@ -17,8 +17,8 @@ def generate_sine_wave(
     frequency: float,
     amplitude: float,
     sampling_rate: float,
-    phase_in: float,
     number_of_samples: int,
+    phase_in: float = 0.0,
 ) -> Tuple[numpy.typing.NDArray[numpy.double], float]:
     """Generates a sine wave with a specified phase.
 
@@ -26,8 +26,8 @@ def generate_sine_wave(
         frequency (float): Specifies the frequency of the sine wave.
         amplitude (float): Specifies the amplitude of the sine wave.
         sampling_rate (float): Specifies the sampling rate of the sine wave.
-        phase_in (float): Specifies the phase of the sine wave in radians.
         number_of_samples (int): Specifies the number of samples to generate.
+        phase_in (Optional[float]): Specifies the phase of the sine wave in radians.
 
     Returns:
         Tuple[numpy.typing.NDArray[numpy.double], float]: Indicates a tuple
@@ -46,18 +46,16 @@ def main():
     with nidaqmx.Task() as task:
         sampling_rate = 1000.0
         number_of_samples = 1000
-        phase = 0.0
         task.ao_channels.add_ao_voltage_chan("Dev1/ao0")
         task.timing.cfg_samp_clk_timing(sampling_rate, sample_mode=AcquisitionType.CONTINUOUS)
 
         actual_sampling_rate = task.timing.samp_clk_rate
         print(f"Actual sampling rate: {actual_sampling_rate:g} S/s")
 
-        data, phase = generate_sine_wave(
+        data, _ = generate_sine_wave(
             frequency=10.0,
             amplitude=1.0,
             sampling_rate=actual_sampling_rate,
-            phase_in=phase,
             number_of_samples=number_of_samples,
         )
         task.write(data)
