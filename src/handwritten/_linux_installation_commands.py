@@ -67,7 +67,7 @@ def _get_linux_installation_commands(
 
     """
     if dist_name not in linux_commands:
-        raise click.ClickException("Unsupported distribution '{}'".format(dist_name))
+        raise click.ClickException(f"Unsupported distribution '{dist_name}'")
 
     commands_info = linux_commands[dist_name]
     version = commands_info["get_distro_version"](dist_version)
