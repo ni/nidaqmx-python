@@ -93,8 +93,8 @@ def _get_daqmx_installed_version() -> Optional[str]:
             commands_info = linux_commands[distro.id()]
             query_command = commands_info["get_daqmx_version"]
             query_output = subprocess.run(
-                query_command, stdout=subprocess.PIPE
-            ).stdout.decode("utf-8")
+                query_command, stdout=subprocess.PIPE, text=True
+            ).stdout
 
             if distro.id() == "ubuntu":
                 version_match = re.search(r"ii\s+ni-daqmx\s+(\d+\.\d+\.\d+)", query_output)
@@ -245,7 +245,7 @@ def _get_driver_details(
         ) from e
 
 
-def _install_daqmx_driver_windows(download_url: str) -> None:
+def _install_daqmx_driver_windows_core(download_url: str) -> None:
     """
     Download and launch NI-DAQmx Driver installation in an interactive mode
 
@@ -270,7 +270,7 @@ def _install_daqmx_driver_windows(download_url: str) -> None:
         raise click.ClickException(f"Failed to install the NI-DAQmx driver.\nDetails: {e}") from e
 
 
-def _install_daqmx_driver_linux(download_url: str, release: str) -> None:
+def _install_daqmx_driver_linux_core(download_url: str, release: str) -> None:
     """
     Download NI Linux Device Drivers and install NI-DAQmx on Linux OS
 
@@ -361,12 +361,12 @@ def _confirm_and_upgrade_daqmx_driver(
     )
     if is_upgrade:
         if sys.platform.startswith("win"):
-            _install_daqmx_driver_windows(download_url)
+            _install_daqmx_driver_windows_core(download_url)
         elif sys.platform.startswith("linux"):
-            _install_daqmx_driver_linux(download_url, release)
+            _install_daqmx_driver_linux_core(download_url, release)
 
 
-def _install_daqmx_windows_driver() -> None:
+def _install_daqmx_driver_windows() -> None:
     """
     Install the NI-DAQmx driver on Windows.
 
@@ -383,7 +383,7 @@ def _install_daqmx_windows_driver() -> None:
                 latest_version, installed_version, download_url, release
             )
         else:
-            _install_daqmx_driver_windows(download_url)
+            _install_daqmx_driver_windows_core(download_url)
 
 
 def _is_distribution_supported() -> None:
@@ -411,7 +411,7 @@ def _is_distribution_supported() -> None:
         raise NotImplementedError("This function is only supported on Linux.")
 
 
-def _install_daqmx_linux_driver() -> None:
+def _install_daqmx_driver_linux() -> None:
     """
     Install the NI-DAQmx driver on Linux.
 
@@ -434,7 +434,7 @@ def _install_daqmx_linux_driver() -> None:
                 latest_version, installed_version, download_url, release
             )
         else:
-            _install_daqmx_driver_linux(download_url, release)
+            _install_daqmx_driver_linux_core(download_url, release)
 
 
 def installdriver() -> None:
@@ -445,10 +445,10 @@ def installdriver() -> None:
     try:
         if sys.platform.startswith("win"):
             _logger.info("Windows platform detected")
-            _install_daqmx_windows_driver()
+            _install_daqmx_driver_windows()
         elif sys.platform.startswith("linux"):
             _logger.info("Linux platform detected")
-            _install_daqmx_linux_driver()
+            _install_daqmx_driver_linux()
         else:
             raise click.ClickException(
                 f"The 'installdriver' command is supported only on Windows and Linux."
