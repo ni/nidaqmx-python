@@ -30,7 +30,7 @@ def get_terminal_name_with_dev_prefix(task: nidaqmx.Task, terminal_name: str) ->
         ]:
             return f"/{device.name}/{terminal_name}"
 
-    return ""
+    raise RuntimeError("Suitable device not found in task.")
 
 
 def generate_sine_wave(
