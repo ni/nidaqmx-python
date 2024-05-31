@@ -18,9 +18,9 @@ def main():
         def callback(task_handle, every_n_samples_event_type, number_of_samples, callback_data):
             """Callback function for reading signals."""
             nonlocal total_read
-            read = len(task.read(number_of_samples_per_channel=number_of_samples))
-            total_read += read
-            print(f"Acquired data: {read} samples. Total {total_read}.", end="\r")
+            read = task.read(number_of_samples_per_channel=number_of_samples)
+            total_read += len(read)
+            print(f"Acquired data: {len(read)} samples. Total {total_read}.", end="\r")
 
             return 0
 
