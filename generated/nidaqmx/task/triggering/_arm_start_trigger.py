@@ -227,6 +227,15 @@ class ArmStartTrigger:
         self._interpreter.reset_trig_attribute(self._handle, 0x3135)
 
     @property
+    def timestamp_val(self):
+        """
+        datetime: Indicates the arm start trigger timestamp value.
+        """
+
+        val = self._interpreter.get_trig_attribute_timestamp(self._handle, 0x3134)
+        return val
+
+    @property
     def trig_type(self):
         """
         :class:`nidaqmx.constants.TriggerType`: Specifies the type of
