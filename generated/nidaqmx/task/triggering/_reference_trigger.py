@@ -911,6 +911,15 @@ class ReferenceTrigger:
         self._interpreter.reset_trig_attribute(self._handle, 0x3130)
 
     @property
+    def timestamp_val(self):
+        """
+        datetime: Indicates the reference trigger timestamp value.
+        """
+
+        val = self._interpreter.get_trig_attribute_timestamp(self._handle, 0x312f)
+        return val
+
+    @property
     def trig_type(self):
         """
         :class:`nidaqmx.constants.TriggerType`: Specifies the type of

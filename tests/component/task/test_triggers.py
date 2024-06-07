@@ -91,7 +91,9 @@ def test___start_trigger___wait_for_valid_timestamp___no_errors(
     ai_voltage_task.triggers.start_trigger.timestamp_enable = True
     ai_voltage_task.start()
 
-    ai_voltage_task.wait_for_valid_timestamp(TimestampEvent.START_TRIGGER)
+    timestamp = ai_voltage_task.wait_for_valid_timestamp(TimestampEvent.START_TRIGGER)
+
+    assert isinstance(timestamp, ht_datetime)
 
 
 def test___reference_trigger___wait_for_valid_timestamp___no_errors(
@@ -101,7 +103,9 @@ def test___reference_trigger___wait_for_valid_timestamp___no_errors(
     ai_voltage_task.triggers.reference_trigger.timestamp_enable = True
     ai_voltage_task.start()
 
-    ai_voltage_task.wait_for_valid_timestamp(TimestampEvent.REFERENCE_TRIGGER)
+    timestamp = ai_voltage_task.wait_for_valid_timestamp(TimestampEvent.REFERENCE_TRIGGER)
+
+    assert isinstance(timestamp, ht_datetime)
 
 
 def test___arm_start_trigger___wait_for_valid_timestamp___no_errors(
@@ -112,7 +116,9 @@ def test___arm_start_trigger___wait_for_valid_timestamp___no_errors(
     ci_count_edges_task.triggers.arm_start_trigger.timestamp_enable = True
     ci_count_edges_task.start()
 
-    ci_count_edges_task.wait_for_valid_timestamp(TimestampEvent.ARM_START_TRIGGER)
+    timestamp = ci_count_edges_task.wait_for_valid_timestamp(TimestampEvent.ARM_START_TRIGGER)
+
+    assert isinstance(timestamp, ht_datetime)
 
 
 def test___first_sample_trigger___wait_for_valid_timestamp___no_errors(
@@ -121,8 +127,9 @@ def test___first_sample_trigger___wait_for_valid_timestamp___no_errors(
     ai_voltage_task.timing.cfg_samp_clk_timing(1000)
     ai_voltage_task.start()
 
-    ai_voltage_task.wait_for_valid_timestamp(TimestampEvent.FIRST_SAMPLE)
+    timestamp = ai_voltage_task.wait_for_valid_timestamp(TimestampEvent.FIRST_SAMPLE)
 
+    assert isinstance(timestamp, ht_datetime)
     assert ai_voltage_task.timing.first_samp_timestamp_enable
     assert ai_voltage_task.timing.first_samp_timestamp_timescale == Timescale.USE_HOST
 

@@ -324,6 +324,62 @@ class Timing:
         self._interpreter.reset_timing_attribute(self._handle, 0x1304)
 
     @property
+    def first_samp_clk_offset(self):
+        """
+        float: Specifies, in seconds, the offset to apply to the
+            **first_samp_clk_when** value. This offset modifies when the
+            first sample clock occurs and is used to account for known
+            delays in the signal path.
+        """
+
+        val = self._interpreter.get_timing_attribute_double(self._handle, 0x31aa)
+        return val
+
+    @first_samp_clk_offset.setter
+    def first_samp_clk_offset(self, val):
+        self._interpreter.set_timing_attribute_double(self._handle, 0x31aa, val)
+
+    @first_samp_clk_offset.deleter
+    def first_samp_clk_offset(self):
+        self._interpreter.reset_timing_attribute(self._handle, 0x31aa)
+
+    @property
+    def first_samp_clk_timescale(self):
+        """
+        :class:`nidaqmx.constants.Timescale`: Specifies the timescale to
+            be used for the value of **first_samp_clk_when**.
+        """
+
+        val = self._interpreter.get_timing_attribute_int32(self._handle, 0x3183)
+        return Timescale(val)
+
+    @first_samp_clk_timescale.setter
+    def first_samp_clk_timescale(self, val):
+        val = val.value
+        self._interpreter.set_timing_attribute_int32(self._handle, 0x3183, val)
+
+    @first_samp_clk_timescale.deleter
+    def first_samp_clk_timescale(self):
+        self._interpreter.reset_timing_attribute(self._handle, 0x3183)
+
+    @property
+    def first_samp_clk_when(self):
+        """
+        datetime: Specifies the time of the first sample clock pulse.
+        """
+
+        val = self._interpreter.get_timing_attribute_timestamp(self._handle, 0x3182)
+        return val
+
+    @first_samp_clk_when.setter
+    def first_samp_clk_when(self, val):
+        self._interpreter.set_timing_attribute_timestamp(self._handle, 0x3182, val)
+
+    @first_samp_clk_when.deleter
+    def first_samp_clk_when(self):
+        self._interpreter.reset_timing_attribute(self._handle, 0x3182)
+
+    @property
     def first_samp_timestamp_enable(self):
         """
         bool: Specifies whether to enable the first sample timestamp.
@@ -358,6 +414,15 @@ class Timing:
     @first_samp_timestamp_timescale.deleter
     def first_samp_timestamp_timescale(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x313b)
+
+    @property
+    def first_samp_timestamp_val(self):
+        """
+        datetime: Indicates the timestamp of the first sample.
+        """
+
+        val = self._interpreter.get_timing_attribute_timestamp(self._handle, 0x313a)
+        return val
 
     @property
     def hshk_delay_after_xfer(self):
@@ -1084,6 +1149,23 @@ class Timing:
     @sync_pulse_time_timescale.deleter
     def sync_pulse_time_timescale(self):
         self._interpreter.reset_timing_attribute(self._handle, 0x3138)
+
+    @property
+    def sync_pulse_time_when(self):
+        """
+        datetime: Specifies the start time of the sync pulse.
+        """
+
+        val = self._interpreter.get_timing_attribute_timestamp(self._handle, 0x3137)
+        return val
+
+    @sync_pulse_time_when.setter
+    def sync_pulse_time_when(self, val):
+        self._interpreter.set_timing_attribute_timestamp(self._handle, 0x3137, val)
+
+    @sync_pulse_time_when.deleter
+    def sync_pulse_time_when(self):
+        self._interpreter.reset_timing_attribute(self._handle, 0x3137)
 
     @property
     def sync_pulse_type(self):
