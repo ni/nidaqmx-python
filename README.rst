@@ -60,32 +60,30 @@ Python:
 
 Getting Started
 ===============
+In order to use the **nidaqmx** package, you must have at least one DAQ (`Data Acquisition <https://www.ni.com/en/shop/data-acquisition.html>`_)
+device installed on your system. Both physical and simulated devices are supported. The examples below use an X Series DAQ device
+(e.g.: PXIe-6363, PCIe-6363, or USB-6363).
+You can use **NI MAX** or **NI Hardware Configuration Utility** to verify and configure your devices.
 
-In order to use the **nidaqmx** package, you must have at least one DAQ device installed on your
-machine. X series DAQ device (eg: PCIe-6363 or USB-6351) is recommended, physical or
-simulated devices are supported. You can use the **NI MAX** or **NI Hardware Configuration Utility**
-to verify and configure your devices.
+Finding and configuring device name in **NI MAX**:
 
-Verify and configure devices on **NI MAX**:
-
-.. image:: max_device_name.png
+.. image:: https://raw.githubusercontent.com/ni/nidaqmx-python/ca9b8554e351a45172a3490a4716a52d8af6e95e/max_device_name.png
   :alt: NI MAX Device Name
   :align: center
   :width: 800px
 
-Verify and configure devices on **NI Hardware Configuration Utility**:
 
-.. image:: hwcu_device_name.png
+Finding and configuring device name in **NI Hardware Configuration Utility**:
+
+.. image:: https://raw.githubusercontent.com/ni/nidaqmx-python/ca9b8554e351a45172a3490a4716a52d8af6e95e/hwcu_device_name.png
   :alt: NI HWCU Device Name
   :align: center
   :width: 800px
 
-Virtual channels and tasks are fundamental components of NI-DAQmx.
-
-Task in NI-DAQmx
-----------------
+Tasks in NI-DAQmx
+-----------------
 A task is a collection of one or more virtual channels with timing, triggering, and other properties.
-Refer to the `NI-DAQmx Task <https://www.ni.com/docs/en-US/bundle/ni-daqmx/page/tasksnidaqmx.html>`_ for more information.
+Refer to `NI-DAQmx Task <https://www.ni.com/docs/en-US/bundle/ni-daqmx/page/tasksnidaqmx.html>`_ for more information.
 
 Example code to create a task:
 
@@ -98,46 +96,47 @@ Example code to create a task:
 Virtual Channels in NI-DAQmx
 ----------------------------
 Virtual channels, or sometimes referred to generically as channels, are software entities that encapsulate the physical channel
-along with other channel specific information—range, terminal configuration, and custom scaling—that formats the data.
-Refer to the `NI-DAQmx Channel <https://www.ni.com/docs/en-US/bundle/ni-daqmx/page/chans.html>`_ for more information.
+along with other channel specific information (e.g.: range, terminal configuration, and custom scaling) that formats the data.
+A physical channel is a terminal or pin at which you can measure or generate an analog or digital signal.A single physical channel
+can include more than one terminal, as in the case of a differential analog input channel or a digital port of eight lines.
+Every physical channel on a device has a unique name (for instance, SC1Mod4/ai0, Dev2/ao5, and Dev6/ctr3) that follows the
+NI-DAQmx physical channel naming convention.
+Refer to `NI-DAQmx Channel <https://www.ni.com/docs/en-US/bundle/ni-daqmx/page/chans.html>`_ for more information.
 
-Example code to create a task to read data from an analog input channel:
+Example code that adds an analog input channel to a task, configures the range, and reads data.
 
 .. code-block:: python
 
   >>> import nidaqmx
   >>> with nidaqmx.Task() as task:
-  ...     ai_channel = task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
-  ...     ai_channel.ai_min = -10.0
-  ...     ai_channel.ai_max = 10.0
+  ...     task.ai_channels.add_ai_voltage_chan("Dev1/ai0", min_val=-10.0, max_val=10.0)
   ...     task.read()
   ...
+  AIChannel(name=Dev1/ai0)
   -0.14954069643238624
 
-Example code to create a task to read data from two analog input channels:
+Example code that adds multiple analog input channels to a task, configures their range, and reads data.
 
 .. code-block:: python
 
   >>> import nidaqmx
   >>> with nidaqmx.Task() as task:
-  ...     ai_channel_1 = task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
-  ...     ai_channel_2 = task.ai_channels.add_ai_voltage_chan("Dev1/ai1")
-  ...     ai_channel_1.ai_min = -5.0
-  ...     ai_channel_1.ai_max = 5.0
-  ...     ai_channel_2.ai_min = -10.0
-  ...     ai_channel_2.ai_max = 10.0
+  ...     task.ai_channels.add_ai_voltage_chan("Dev1/ai0", min_val=-5.0, max_val=5.0)
+  ...     task.ai_channels.add_ai_voltage_chan("Dev1/ai1", min_val=-10.0, max_val=10.0)
   ...     task.read()
   ...
+  AIChannel(name=Dev1/ai0)
+  AIChannel(name=Dev1/ai1)
   [-0.07477034821619312, 0.8642841883602405]
 
 Timing
 ------
-You can use software timing or hardware timing to control when a signal is generated. With hardware timing,
-a digital signal, such as a clock on your device, controls the rate of generation. With software timing,
-the rate at which the samples are generated is determined by the software and operating system instead of
-by the measurement device. A hardware clock can run much faster than a software loop. A hardware clock is
-also more accurate than a software loop.
-Refer to the `Timing, Hardware Versus Software <https://www.ni.com/docs/en-US/bundle/ni-daqmx/page/hardwresoftwretiming.html>`_ for more information.
+You can use software timing or hardware timing to control when a signal is acquired or generated.
+With hardware timing, a digital signal, such as a clock on your device, controls the rate of acquisition or generation.
+With software timing, the rate at which the samples are acquired or generated is determined by the software and operating system
+instead of by the measurement device. A hardware clock can run much faster than a software loop.
+A hardware clock is also more accurate than a software loop.
+Refer to `Timing, Hardware Versus Software <https://www.ni.com/docs/en-US/bundle/ni-daqmx/page/hardwresoftwretiming.html>`_ for more information.
 
 Example code to acquire finite amount of data using hardware timing:
 
@@ -158,7 +157,7 @@ TDMS Logging
 ------------
 Technical Data Management Streaming (TDMS) is a binary file format that allows for high-speed data logging.
 When you enable TDMS data logging, NI-DAQmx can stream data directly from the device buffer to the hard disk.
-Refer to the `TDMS Logging <https://www.ni.com/docs/en-US/bundle/ni-daqmx/page/datalogging.html>`_ for more information.
+Refer to `TDMS Logging <https://www.ni.com/docs/en-US/bundle/ni-daqmx/page/datalogging.html>`_ for more information.
 
 Example code to acquire finite amount of data and log it to a TDMS file:
 
@@ -176,11 +175,26 @@ Example code to acquire finite amount of data and log it to a TDMS file:
   AIChannel(name=Dev1/ai0)
   Acquired data: [-0.149693, 2.869503, 4.520249, 4.704886, 2.875912, -0.006104, -2.895596, -4.493698, -4.515671, -2.776574]
 
+To read the TDMS file, you can use the **npTDMS** third-party module.
+Refer to `npTDMS <https://pypi.org/project/npTDMS/>`_ for detailed usage.
+
+Example code to read the TDMS file created from example above and display the data:
+
+.. code-block:: python
+
+  >>> from nptdms import TdmsFile
+  >>> with TdmsFile.read("TestData.tdms") as tdms_file:
+  ...   for group in tdms_file.groups():
+  ...     for channel in group.channels():
+  ...       data = channel[:]
+  ...       print("data: [" + ", ".join(f"{value:f}" for value in data) + "]")
+  ...
+  data: [-0.149693, 2.869503, 4.520249, 4.704886, 2.875912, -0.006104, -2.895596, -4.493698, -4.515671, -2.776574]
+
 Plot Data
 ---------
-You can use the 3rd-party module **matplotlib.pyplot** to plot a waveform for the acquired data.
-For more information on how to use **matplotlib.pyplot** module, refer to the
-`Pyplot tutorial <https://matplotlib.org/stable/tutorials/pyplot.html#sphx-glr-tutorials-pyplot-py>`_.
+To visualize the acquired data as a waveform, you can use the **matplotlib.pyplot** third-party module.
+Refer to `Pyplot tutorial <https://matplotlib.org/stable/tutorials/pyplot.html#sphx-glr-tutorials-pyplot-py>`_ for detailed usage.
 
 Example code to plot waveform for acquired data using **matplotlib.pyplot** module:
 
@@ -195,7 +209,7 @@ Example code to plot waveform for acquired data using **matplotlib.pyplot** modu
   ...   data = task.read(READ_ALL_AVAILABLE)
   ...   plt.plot(data)
   ...   plt.ylabel('Amplitude')
-  ...   plt.title('waveform')
+  ...   plt.title('Waveform')
   ...   plt.show()
   ...
   AIChannel(name=Dev1/ai0)
@@ -203,7 +217,7 @@ Example code to plot waveform for acquired data using **matplotlib.pyplot** modu
   Text(0, 0.5, 'Amplitude')
   Text(0.5, 1.0, 'waveform')
 
-.. image:: waveform.png
+.. image:: https://raw.githubusercontent.com/ni/nidaqmx-python/ca9b8554e351a45172a3490a4716a52d8af6e95e/waveform.png
   :alt: Waveform
   :align: center
   :width: 400px
