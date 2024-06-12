@@ -49,6 +49,8 @@ toml = {version=">=0.10.2", optional=true}
 tzlocal = "^5.0"
 python-decouple = ">=3.8"
 click = ">=8.0.0"
+nptdms = "^1.9.0"
+matplotlib = {version=">=3.9.0", python = ">=3.9"}
 
 
 [tool.poetry.extras]
