@@ -103,7 +103,7 @@ Every physical channel on a device has a unique name (for instance, SC1Mod4/ai0,
 NI-DAQmx physical channel naming convention.
 Refer to `NI-DAQmx Channel <https://www.ni.com/docs/en-US/bundle/ni-daqmx/page/chans.html>`_ for more information.
 
-Example code that adds an analog input channel to a task, configures the range, and reads data.
+Example code that adds an analog input channel to a task, configures the range, and reads data:
 
 .. code-block:: python
 
@@ -115,7 +115,7 @@ Example code that adds an analog input channel to a task, configures the range, 
   AIChannel(name=Dev1/ai0)
   -0.14954069643238624
 
-Example code that adds multiple analog input channels to a task, configures their range, and reads data.
+Example code that adds multiple analog input channels to a task, configures their range, and reads data:
 
 .. code-block:: python
 
