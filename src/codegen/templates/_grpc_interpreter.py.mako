@@ -8,6 +8,7 @@
         get_response_parameters,
         is_event_register_function,
         GRPC_INTERPRETER_IGNORED_FUNCTIONS,
+        INCLUDE_SIZE_HINT_FUNCTIONS,
     )
     from codegen.utilities.function_helpers import order_function_parameters_by_optional
     from codegen.utilities.text_wrappers import wrap, docstring_wrap
@@ -24,6 +25,7 @@ import warnings
 from typing import Callable, Generic, Optional, TypeVar
 
 import google.protobuf.message
+from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
 import grpc
 import numpy
 
@@ -33,7 +35,7 @@ from nidaqmx._stubs import nidaqmx_pb2 as grpc_types
 from nidaqmx._stubs import nidaqmx_pb2_grpc as nidaqmx_grpc
 from nidaqmx._stubs import session_pb2 as session_grpc_types
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx._grpc_time import convert_time_to_timestamp
+from nidaqmx._grpc_time import convert_time_to_timestamp, convert_timestamp_to_time
 
 _logger = logging.getLogger(__name__)
 
@@ -189,6 +191,8 @@ class GrpcStubInterpreter(BaseInterpreter):
     params = get_params_for_function_signature(func)
     sorted_params = order_function_parameters_by_optional(params)
     parameter_signature = get_interpreter_parameter_signature(is_python_factory, sorted_params)
+    if func.function_name in INCLUDE_SIZE_HINT_FUNCTIONS:
+        parameter_signature = ", ".join([parameter_signature, "size_hint=0"])
     output_parameters = get_output_params(func)
 %>\
     %if (len(func.function_name) + len(parameter_signature)) > 68:
@@ -219,6 +223,10 @@ class GrpcStubInterpreter(BaseInterpreter):
         except grpc.RpcError:
             _logger.exception('Failed to get error string for error code %d.', error_code)
             return 'Failed to retrieve error description.'
+
+    def set_runtime_environment(
+            self, environment, environment_version, reserved_1, reserved_2):
+        raise NotImplementedError
 
 
 def _assign_numpy_array(numpy_array, grpc_array):

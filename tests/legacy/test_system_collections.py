@@ -1,13 +1,22 @@
 """Tests for validating systems collections."""
+
 import collections.abc
 
 import nidaqmx
 import nidaqmx.system
 from nidaqmx.system._collections.device_collection import DeviceCollection
-from nidaqmx.system._collections.persisted_channel_collection import PersistedChannelCollection
-from nidaqmx.system._collections.persisted_scale_collection import PersistedScaleCollection
-from nidaqmx.system._collections.persisted_task_collection import PersistedTaskCollection
-from nidaqmx.system._collections.physical_channel_collection import PhysicalChannelCollection
+from nidaqmx.system._collections.persisted_channel_collection import (
+    PersistedChannelCollection,
+)
+from nidaqmx.system._collections.persisted_scale_collection import (
+    PersistedScaleCollection,
+)
+from nidaqmx.system._collections.persisted_task_collection import (
+    PersistedTaskCollection,
+)
+from nidaqmx.system._collections.physical_channel_collection import (
+    PhysicalChannelCollection,
+)
 
 
 class TestSystemCollections:
@@ -61,9 +70,9 @@ class TestSystemCollections:
             # Test specific property on object.
             assert isinstance(global_channels[0].author, str)
 
-    def test_physical_channel_collection_property(self, any_x_series_device):
+    def test_physical_channel_collection_property(self, sim_6363_device):
         """Test to validate physical channel collection property."""
-        phys_chans = any_x_series_device.ai_physical_chans
+        phys_chans = sim_6363_device.ai_physical_chans
 
         assert isinstance(phys_chans, PhysicalChannelCollection)
         assert isinstance(phys_chans, collections.abc.Sequence)

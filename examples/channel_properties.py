@@ -1,4 +1,5 @@
 """Example for using channel properties."""
+
 import pprint
 
 import nidaqmx

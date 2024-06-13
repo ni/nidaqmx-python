@@ -1,4 +1,5 @@
 """Examples for hw timed power operation."""
+
 import pprint
 
 import nidaqmx

@@ -1,4 +1,5 @@
-"""Example for reading singals for every n samples."""
+"""Example for reading signals for every n samples."""
+
 import pprint
 
 import nidaqmx
@@ -15,7 +16,7 @@ with nidaqmx.Task() as task:
     samples = []
 
     def callback(task_handle, every_n_samples_event_type, number_of_samples, callback_data):
-        """Callback function for reading singals."""
+        """Callback function for reading signals."""
         print("Every N Samples callback invoked.")
 
         samples.extend(task.read(number_of_samples_per_channel=1000))

@@ -102,7 +102,7 @@ ${property_template.script_property(attribute)}\
             of the equation. For example, if index three of the list is
             9, the fourth term of the equation is 9y^3.
         """
-        forward_coeffs = numpy.float64(forward_coeffs)
+        forward_coeffs = numpy.array(forward_coeffs, dtype=numpy.float64)
 
         interpreter = utils._select_interpreter(grpc_options)
 
@@ -231,8 +231,8 @@ ${property_template.script_property(attribute)}\
         if reverse_coeffs is None:
             reverse_coeffs = []
 
-        forward_coeffs = numpy.float64(forward_coeffs)
-        reverse_coeffs = numpy.float64(reverse_coeffs)
+        forward_coeffs = numpy.array(forward_coeffs, dtype=numpy.float64)
+        reverse_coeffs = numpy.array(reverse_coeffs, dtype=numpy.float64)
 
         scale = Scale(scale_name, grpc_options=grpc_options)
 
@@ -278,8 +278,8 @@ ${property_template.script_property(attribute)}\
         if scaled_vals is None:
             scaled_vals = []
 
-        prescaled_vals = numpy.float64(prescaled_vals)
-        scaled_vals = numpy.float64(scaled_vals)
+        prescaled_vals = numpy.array(prescaled_vals, dtype=numpy.float64)
+        scaled_vals = numpy.array(scaled_vals, dtype=numpy.float64)
 
         scale = Scale(scale_name, grpc_options=grpc_options)
 
@@ -350,4 +350,4 @@ class _ScaleAlternateConstructor(Scale):
 
         # Use meta-programming to change the type of this object to Scale,
         # so the user isn't confused when doing introspection.
-        self.__class__ = Scale
+        self.__class__ = Scale  # type: ignore[assignment]

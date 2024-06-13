@@ -411,20 +411,43 @@ functions = {
     },
     'CfgAnlgMultiEdgeRefTrig': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'triggerSources',
+                'python_data_type': 'str',
+                'python_description': 'Is the name of a virtual channel or terminal where there is an analog signal to use as the source of the trigger.',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'numpy.int32',
                 'direction': 'in',
+                'enum': 'Slope1',
+                'is_list': True,
+                'is_optional_in_python': True,
                 'name': 'triggerSlopeArray',
+                'python_data_type': 'Slope',
+                'python_default_value': None,
+                'python_description': 'Specifies on which slope of the signal the Reference Trigger occurs.',
+                'python_type_annotation': 'Optional[List[nidaqmx.constants.Slope]]',
                 'size': {
                     'mechanism': 'len',
                     'value': 'arraySize'
@@ -432,8 +455,15 @@ functions = {
                 'type': 'const int32[]'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'in',
+                'is_list': True,
+                'is_optional_in_python': True,
                 'name': 'triggerLevelArray',
+                'python_data_type': 'float',
+                'python_default_value': None,
+                'python_description': 'Specifies at what threshold to trigger. Specify this value in the units of the measurement or generation. Use **slope** to specify on which slope to trigger at this threshold.',
+                'python_type_annotation': 'Optional[List[float]]',
                 'size': {
                     'mechanism': 'len',
                     'value': 'arraySize'
@@ -441,35 +471,64 @@ functions = {
                 'type': 'const float64[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'pretriggerSamples',
+                'python_data_type': 'int',
+                'python_description': 'Specifies the minimum number of samples to acquire per channel before recognizing the Reference Trigger. The number of post-trigger samples per channel is equal to **number of samples per channel** in the DAQmx Timing VI minus **pretrigger samples per channel**.',
+                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
                 'direction': 'in',
                 'name': 'arraySize',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             }
         ],
-        'python_codegen_method': 'no',
+        'python_class_name': 'ReferenceTrigger',
+        'python_description': 'Configures the task to stop the acquisition when the device acquires all pretrigger samples; any of the configured analog signals cross the respective levels you specified; and the device acquires all post-trigger samples. When you use a Reference Trigger, the default for the read RelativeTo property is First Pretrigger Sample with a read Offset of 0. Multi-edge triggering treats the specified triggers as if a logical OR is applied.',
         'returns': 'int32'
     },
     'CfgAnlgMultiEdgeStartTrig': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_char_p',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'triggerSources',
+                'python_data_type': 'str',
+                'python_description': 'Is the name of a virtual channel or terminal where there is an analog signal to use as the source of the trigger.',
+                'python_type_annotation': 'str',
                 'type': 'const char[]'
             },
             {
+                'ctypes_data_type': 'numpy.int32',
                 'direction': 'in',
+                'enum': 'Slope1',
+                'is_list': True,
+                'is_optional_in_python': False,
                 'name': 'triggerSlopeArray',
+                'python_data_type': 'Slope',
+                'python_description': 'Specifies on which slope of the signal to start acquiring or generating samples when the signal crosses **level**.',
+                'python_type_annotation': 'List[nidaqmx.constants.Slope]',
                 'size': {
                     'mechanism': 'len',
                     'value': 'arraySize'
@@ -477,8 +536,15 @@ functions = {
                 'type': 'const int32[]'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'in',
+                'is_list': True,
+                'is_optional_in_python': True,
                 'name': 'triggerLevelArray',
+                'python_data_type': 'float',
+                'python_default_value': None,
+                'python_description': 'Specifies at what threshold to start acquiring or generating samples. Specify this value in the units of the measurement or generation. Use **slope** to specify on which slope to trigger at this threshold.',
+                'python_type_annotation': 'Optional[List[float]]',
                 'size': {
                     'mechanism': 'len',
                     'value': 'arraySize'
@@ -488,10 +554,12 @@ functions = {
             {
                 'direction': 'in',
                 'name': 'arraySize',
-                'type': 'uInt32'
+                'type': 'uInt32',
+                'use_in_python_api': False
             }
         ],
-        'python_codegen_method': 'no',
+        'python_class_name': 'StartTrigger',
+        'python_description': 'Configures the task to start acquiring or generating samples when any of the configured analog signals cross the respective levels you specified. Multi-edge triggering treats the configured triggers as if a logical OR is applied.',
         'returns': 'int32'
     },
     'CfgAnlgWindowRefTrig': {
@@ -1453,7 +1521,7 @@ functions = {
             }
         ],
         'python_class_name': 'StartTrigger',
-        'python_description': 'New Start Trigger',
+        'python_description': 'Configures the task to start acquiring or generating samples at a specified time.',
         'returns': 'int32'
     },
     'CfgWatchdogAOExpirStates': {
@@ -1863,7 +1931,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -2027,7 +2095,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -2180,7 +2248,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -2310,7 +2378,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -2451,7 +2519,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -2558,7 +2626,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -2688,7 +2756,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -2818,7 +2886,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -3029,7 +3097,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -3240,7 +3308,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -3449,7 +3517,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -3602,7 +3670,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -3719,7 +3787,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -3849,7 +3917,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -3967,7 +4035,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -4131,7 +4199,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -4295,7 +4363,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -4375,7 +4443,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -4586,7 +4654,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -4797,7 +4865,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -5006,7 +5074,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -5148,7 +5216,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -5278,7 +5346,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -5364,13 +5432,14 @@ functions = {
             {
                 'ctypes_data_type': 'numpy.int32',
                 'direction': 'in',
+                'enum': 'StrainGageRosetteMeasurementType',
                 'has_explicit_buffer_size': True,
                 'is_list': True,
                 'is_optional_in_python': False,
                 'name': 'rosetteMeasTypes',
-                'python_data_type': 'int',
+                'python_data_type': 'StrainGageRosetteMeasurementType',
                 'python_description': 'Specifies information about the rosette configuration and measurements.',
-                'python_type_annotation': 'List[int]',
+                'python_type_annotation': 'List[nidaqmx.constants.StrainGageRosetteMeasurementType]',
                 'size': {
                     'mechanism': 'len',
                     'value': 'numRosetteMeasTypes'
@@ -5472,7 +5541,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -5657,7 +5726,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -5719,7 +5788,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -5849,7 +5918,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -6001,7 +6070,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -6164,7 +6233,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -6375,7 +6444,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -6586,7 +6655,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -6795,7 +6864,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -6948,7 +7017,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -7055,7 +7124,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -7208,7 +7277,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -7315,7 +7384,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ao_channel.AOChannel'
+            'python_data_type': 'nidaqmx.task.channels.AOChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -7410,7 +7479,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ao_channel.AOChannel'
+            'python_data_type': 'nidaqmx.task.channels.AOChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -7505,7 +7574,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ao_channel.AOChannel'
+            'python_data_type': 'nidaqmx.task.channels.AOChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -7600,7 +7669,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ci_channel.CIChannel'
+            'python_data_type': 'nidaqmx.task.channels.CIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -7741,7 +7810,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ci_channel.CIChannel'
+            'python_data_type': 'nidaqmx.task.channels.CIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -7859,7 +7928,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ci_channel.CIChannel'
+            'python_data_type': 'nidaqmx.task.channels.CIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -7944,7 +8013,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ci_channel.CIChannel'
+            'python_data_type': 'nidaqmx.task.channels.CIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -8039,7 +8108,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ci_channel.CIChannel'
+            'python_data_type': 'nidaqmx.task.channels.CIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -8180,7 +8249,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ci_channel.CIChannel'
+            'python_data_type': 'nidaqmx.task.channels.CIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -8265,7 +8334,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ci_channel.CIChannel'
+            'python_data_type': 'nidaqmx.task.channels.CIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -8406,7 +8475,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ci_channel.CIChannel'
+            'python_data_type': 'nidaqmx.task.channels.CIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -8524,7 +8593,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ci_channel.CIChannel'
+            'python_data_type': 'nidaqmx.task.channels.CIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -8665,7 +8734,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ci_channel.CIChannel'
+            'python_data_type': 'nidaqmx.task.channels.CIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -8749,7 +8818,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ci_channel.CIChannel'
+            'python_data_type': 'nidaqmx.task.channels.CIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -8832,7 +8901,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ci_channel.CIChannel'
+            'python_data_type': 'nidaqmx.task.channels.CIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -8916,7 +8985,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ci_channel.CIChannel'
+            'python_data_type': 'nidaqmx.task.channels.CIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -9023,7 +9092,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ci_channel.CIChannel'
+            'python_data_type': 'nidaqmx.task.channels.CIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -9118,7 +9187,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ci_channel.CIChannel'
+            'python_data_type': 'nidaqmx.task.channels.CIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -9237,7 +9306,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.co_channel.COChannel'
+            'python_data_type': 'nidaqmx.task.channels.COChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -9344,7 +9413,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.co_channel.COChannel'
+            'python_data_type': 'nidaqmx.task.channels.COChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -9449,7 +9518,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(counter, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.co_channel.COChannel'
+            'python_data_type': 'nidaqmx.task.channels.COChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -9556,7 +9625,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(lines, line_grouping, name_to_assign_to_lines)',
-            'python_data_type': 'nidaqmx._task_modules.channels.di_channel.DIChannel'
+            'python_data_type': 'nidaqmx.task.channels.DIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -9618,7 +9687,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(lines, line_grouping, name_to_assign_to_lines)',
-            'python_data_type': 'nidaqmx._task_modules.channels.do_channel.DOChannel'
+            'python_data_type': 'nidaqmx.task.channels.DOChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -9911,7 +9980,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -10041,7 +10110,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -10159,7 +10228,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -10289,7 +10358,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -10407,7 +10476,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -10537,7 +10606,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -10656,7 +10725,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -10797,7 +10866,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -10938,7 +11007,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -11056,7 +11125,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -11175,7 +11244,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -11305,7 +11374,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -11445,7 +11514,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -11563,7 +11632,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -11682,7 +11751,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -11812,7 +11881,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -11930,7 +11999,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -12037,7 +12106,7 @@ functions = {
             'description': 'Indicates the newly created channel object.',
             'direction': 'output',
             'python_adaptor': 'self._create_chan(physical_channel, name_to_assign_to_channel)',
-            'python_data_type': 'nidaqmx._task_modules.channels.ai_channel.AIChannel'
+            'python_data_type': 'nidaqmx.task.channels.AIChannel'
         },
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -12521,6 +12590,11 @@ functions = {
     },
     'DeviceSupportsCal': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -12543,7 +12617,8 @@ functions = {
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_class_name': 'Device',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'DisableRefTrig': {
@@ -12963,6 +13038,11 @@ functions = {
     'GetCalInfoAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -12994,6 +13074,11 @@ functions = {
     'GetCalInfoAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -13025,6 +13110,11 @@ functions = {
     'GetCalInfoAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -13067,6 +13157,11 @@ functions = {
     'GetCalInfoAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxGetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -14086,6 +14181,79 @@ functions = {
                 'type': 'uInt32'
             }
         ],
+        'python_codegen_method': 'CustomCode',
+        'returns': 'int32'
+    },
+    'GetExtCalLastDateAndTime': {
+        'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
+        'parameters': [
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'deviceName',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint',
+                'direction': 'out',
+                'is_optional_in_python': False,
+                'name': 'year',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
+                'type': 'uInt32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint',
+                'direction': 'out',
+                'is_optional_in_python': False,
+                'name': 'month',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
+                'type': 'uInt32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint',
+                'direction': 'out',
+                'is_optional_in_python': False,
+                'name': 'day',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
+                'type': 'uInt32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint',
+                'direction': 'out',
+                'is_optional_in_python': False,
+                'name': 'hour',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
+                'type': 'uInt32'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint',
+                'direction': 'out',
+                'is_optional_in_python': False,
+                'name': 'minute',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
+                'type': 'uInt32'
+            }
+        ],
+        'python_class_name': 'Device',
         'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
@@ -15404,6 +15572,11 @@ functions = {
     },
     'GetSelfCalLastDateAndTime': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -15466,7 +15639,8 @@ functions = {
                 'type': 'uInt32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_class_name': 'Device',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
     'GetStartTrigTimestampVal': {
@@ -18648,23 +18822,17 @@ functions = {
                 'type': 'float64'
             },
             {
-                'ctypes_data_type': 'ctypes.c_uint',
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
-                'is_optional_in_python': False,
                 'name': 'highTicks',
                 'python_data_type': 'int',
-                'python_description': '',
-                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_uint',
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'out',
-                'is_optional_in_python': False,
                 'name': 'lowTicks',
                 'python_data_type': 'int',
-                'python_description': '',
-                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
@@ -20268,6 +20436,30 @@ functions = {
         'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
+    'RestoreLastExtCalConst': {
+        'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
+        'parameters': [
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'is_optional_in_python': False,
+                'name': 'deviceName',
+                'python_data_type': 'str',
+                'python_description': '',
+                'python_type_annotation': 'str',
+                'type': 'const char[]',
+                'use_in_python_api': False
+            }
+        ],
+        'python_class_name': 'Device',
+        'python_description': 'Sets the self-calibration constants of the device to the external calibration constants. NI sets the external calibration constants at the factory, and those constants remain in effect until you perform a new external calibration on the device.',
+        'returns': 'int32'
+    },
     'SaveGlobalChan': {
         'calling_convention': 'StdCall',
         'handle_parameter': {
@@ -20691,6 +20883,11 @@ functions = {
     'SetCalInfoAttributeBool': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -20722,6 +20919,11 @@ functions = {
     'SetCalInfoAttributeDouble': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -20753,6 +20955,11 @@ functions = {
     'SetCalInfoAttributeString': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -20784,6 +20991,11 @@ functions = {
     'SetCalInfoAttributeUInt32': {
         'calling_convention': 'Cdecl',
         'cname': 'DAQmxSetCalInfoAttribute',
+        'handle_parameter': {
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'cvi_name': 'deviceName',
+            'python_accessor': 'self._name'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.c_char_p',
@@ -21717,6 +21929,42 @@ functions = {
                 'name': 'value',
                 'python_data_type': 'int',
                 'type': 'uInt32'
+            }
+        ],
+        'python_codegen_method': 'CustomCode',
+        'returns': 'int32'
+    },
+    'SetRuntimeEnvironment': {
+        'calling_convention': 'StdCall',
+        'codegen_method': 'private',
+        'parameters': [
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'name': 'environment',
+                'python_data_type': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'name': 'environmentVersion',
+                'python_data_type': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'name': 'reserved1',
+                'python_data_type': 'str',
+                'type': 'const char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'in',
+                'name': 'reserved2',
+                'python_data_type': 'str',
+                'type': 'const char[]'
             }
         ],
         'python_codegen_method': 'CustomCode',
@@ -23606,6 +23854,11 @@ functions = {
     },
     'WaitForValidTimestamp': {
         'calling_convention': 'StdCall',
+        'handle_parameter': {
+            'ctypes_data_type': 'lib_importer.task_handle',
+            'cvi_name': 'taskHandle',
+            'python_accessor': 'self._handle'
+        },
         'parameters': [
             {
                 'ctypes_data_type': 'ctypes.TaskHandle',
@@ -23644,14 +23897,15 @@ functions = {
                 'direction': 'out',
                 'is_optional_in_python': False,
                 'name': 'timestamp',
-                'python_data_type': 'DateTime',
+                'python_data_type': 'datetime',
                 'python_description': 'Specifies the timestamp type to wait on.',
-                'python_type_annotation': 'nidaqmx.constants.DateTime',
+                'python_type_annotation': 'datetime',
                 'type': 'CVIAbsoluteTime'
             }
         ],
-        'python_codegen_method': 'no',
-        'python_description': 'DAQmx Wait for Valid Timestamp',
+        'python_class_name': 'Task',
+        'python_codegen_method': 'CustomCode',
+        'python_description': 'Wait until the specified timestamp has a value. Use this function to ensure the timestamp has a valid value to prevent an error when querying a timestamp value.',
         'returns': 'int32'
     },
     'WaitUntilTaskDone': {
@@ -24520,23 +24774,17 @@ functions = {
                 'type': 'float64'
             },
             {
-                'ctypes_data_type': 'ctypes.c_uint',
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
-                'is_optional_in_python': False,
                 'name': 'highTicks',
                 'python_data_type': 'int',
-                'python_description': '',
-                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {
-                'ctypes_data_type': 'ctypes.c_uint',
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
-                'is_optional_in_python': False,
                 'name': 'lowTicks',
                 'python_data_type': 'int',
-                'python_description': '',
-                'python_type_annotation': 'int',
                 'type': 'uInt32'
             },
             {

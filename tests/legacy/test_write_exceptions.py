@@ -1,4 +1,5 @@
 """Tests for validating write error behavior."""
+
 import numpy
 import pytest
 

@@ -7,10 +7,6 @@ nidaqmx.task
 
 .. toctree::
    
-   channel
-   channel_collection
-   export_signals
-   in_stream
-   out_stream
-   timing
-   triggers
+   task_channels
+   task_collections
+   task_triggering

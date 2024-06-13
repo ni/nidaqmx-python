@@ -1,4 +1,5 @@
 """Tests for validating the container operations."""
+
 import random
 
 import pytest
@@ -14,12 +15,12 @@ class TestContainerOperations:
     """
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_concatenate_operations(self, task, any_x_series_device, seed):
+    def test_concatenate_operations(self, task, sim_6363_device, seed):
         """Test for concatenate operation."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        ai_phys_chans = random.sample(any_x_series_device.ai_physical_chans, 2)
+        ai_phys_chans = random.sample(sim_6363_device.ai_physical_chans, 2)
 
         ai_channel_1 = task.ai_channels.add_ai_voltage_chan(
             ai_phys_chans[0].name, max_val=5, min_val=-5
@@ -62,12 +63,12 @@ class TestContainerOperations:
         assert ai_channel_2.ai_min == -0.2
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_equality_operations(self, task, any_x_series_device, seed):
+    def test_equality_operations(self, task, sim_6363_device, seed):
         """Test for equality operation."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        ai_phys_chans = random.sample(any_x_series_device.ai_physical_chans, 2)
+        ai_phys_chans = random.sample(sim_6363_device.ai_physical_chans, 2)
 
         ai_channel_1 = task.ai_channels.add_ai_voltage_chan(
             ai_phys_chans[0].name, max_val=5, min_val=-5
@@ -81,12 +82,12 @@ class TestContainerOperations:
         assert ai_channel_1 != ai_channel_2
 
     @pytest.mark.parametrize("seed", [generate_random_seed()])
-    def test_hash_operations(self, generate_task, any_x_series_device, seed):
+    def test_hash_operations(self, generate_task, sim_6363_device, seed):
         """Test for hash operation."""
         # Reset the pseudorandom number generator with seed.
         random.seed(seed)
 
-        ai_phys_chans = random.sample(any_x_series_device.ai_physical_chans, 3)
+        ai_phys_chans = random.sample(sim_6363_device.ai_physical_chans, 3)
         task_1 = generate_task()
         task_2 = generate_task()
         ai_channel_1 = task_1.ai_channels.add_ai_voltage_chan(

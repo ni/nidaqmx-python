@@ -1,4 +1,5 @@
 """This contains the helper methods used in functions generation."""
+
 from copy import deepcopy
 
 from codegen.functions.function import Function
@@ -32,6 +33,15 @@ EXCLUDED_FUNCTIONS = [
     "SetDigitalLogicFamilyPowerUpState",
     "SetDigitalPowerUpStates",
     "SetDigitalPullUpPullDownStates",
+]
+
+FUNCTIONS_WITH_LIST_DEFAULT = [
+    "add_ai_force_bridge_polynomial_chan",
+    "add_ai_force_bridge_table_chan",
+    "add_ai_pressure_bridge_polynomial_chan",
+    "add_ai_pressure_bridge_table_chan",
+    "add_ai_torque_bridge_polynomial_chan",
+    "add_ai_torque_bridge_table_chan",
 ]
 
 
@@ -95,10 +105,15 @@ def get_parameter_signature(is_python_factory, sorted_params):
     if not is_python_factory:
         params_with_defaults.append("self")
     for param in sorted_params:
+        param_type = ""
+        param_default = param.default
+        if is_path_type(param):
+            param_type = ": Optional[Union[str, pathlib.PurePath]]"
+            param_default = "None"
         if param._optional:
-            params_with_defaults.append(f"{param.parameter_name}={param.default}")
+            params_with_defaults.append(f"{param.parameter_name}{param_type}={param_default}")
         else:
-            params_with_defaults.append(param.parameter_name)
+            params_with_defaults.append(f"{param.parameter_name}{param_type}")
 
     return ", ".join(params_with_defaults)
 
@@ -108,8 +123,14 @@ def get_parameters_docstring_lines_length(input_param):
     # The textwrap module leaves a minimum of 1 word on the first line. We need to
     # work around this if "param name" + "param data type docstring" is too long.
 
+    python_type_annotation = input_param.python_type_annotation
+    if is_path_type(input_param):
+        # file path parameter has type hints,
+        # does not need to specify type in docstring
+        python_type_annotation = ""
+
     # Script docstring on first line after param name and type if the following is True.
-    initial_len = 17 + len(input_param.parameter_name) + len(input_param.python_type_annotation)
+    initial_len = 17 + len(input_param.parameter_name) + len(python_type_annotation)
 
     # If length of whitespace + length of param name + length of data type docstring +
     # length of first word in docstring > docstring max line width.
@@ -126,12 +147,19 @@ def get_instantiation_lines(function_parameters):
     for param in function_parameters:
         if param.direction == "in":
             if param.is_list:
-                if param.is_enum:
-                    instantiation_lines.append(
-                        "{0} = {1}([p.value for p in {0}])".format(
-                            param.parameter_name, param.ctypes_data_type
+                if param.ctypes_data_type.startswith("numpy."):
+                    if param.is_enum:
+                        instantiation_lines.append(
+                            "{0} = numpy.array([p.value for p in {0}], dtype={1})".format(
+                                param.parameter_name, param.ctypes_data_type
+                            )
                         )
-                    )
+                    else:
+                        instantiation_lines.append(
+                            "{0} = numpy.array({0}, dtype={1})".format(
+                                param.parameter_name, param.ctypes_data_type
+                            )
+                        )
                 else:
                     instantiation_lines.append(
                         "{0} = {1}({0})".format(param.parameter_name, param.ctypes_data_type)
@@ -197,12 +225,17 @@ def to_param_argtype(parameter):
         if parameter.ctypes_data_type == "ctypes.TaskHandle":
             return "lib_importer.task_handle"
         elif parameter.python_data_type == "datetime":
-            return "_lib_time.AbsoluteTime"
+            if parameter.direction == "in":
+                return "AbsoluteTime"
+            else:
+                return f"ctypes.POINTER(AbsoluteTime)"
         elif parameter.direction == "in":
             # If is string input parameter, use separate custom
             # argtype to convert from unicode to bytes.
             if parameter.ctypes_data_type == "ctypes.c_char_p":
                 return "ctypes_byte_str"
+            elif parameter.python_data_type == "timestampEvent":
+                return "ctypes.c_int32"
             else:
                 return parameter.ctypes_data_type or parameter.python_data_type
         else:
@@ -241,6 +274,8 @@ def generate_function_call_args(function_metadata):
         if param.direction == "in":
             if param.is_enum and not param.is_list:
                 function_call_args.append(f"{param.parameter_name}.value")
+            elif is_path_type(param):
+                function_call_args.append(f"str({param.parameter_name})")
             else:
                 function_call_args.append(param.parameter_name)
         else:
@@ -264,3 +299,27 @@ def instantiate_explicit_output_param(param):
         )
     elif param.ctypes_data_type == "ctypes.c_char_p":
         return f"{param.parameter_name} = ctypes.create_string_buffer(temp_size)"
+
+
+def get_list_default_value(func, param):
+    """Gets the default value for list parameters."""
+    if func.function_name in FUNCTIONS_WITH_LIST_DEFAULT:
+        if param.parameter_name == "forward_coeffs":
+            return "[0.0, 50]"
+        elif param.parameter_name == "reverse_coeffs":
+            return "[0.0, 0.02]"
+        elif param.parameter_name == "electrical_vals":
+            return "[-2.0, 0.0, 2.0]"
+        elif param.parameter_name == "physical_vals":
+            return "[-100.0, 0.0, 100.0]"
+        else:
+            raise RuntimeError(
+                f'Unable to find parameter name while getting list default value for "{func.function_name}"'
+            )
+    else:
+        return "[]"
+
+
+def is_path_type(input_param):
+    """Check is the parameter a file path."""
+    return "file_path" in input_param.parameter_name and input_param.python_data_type == "str"

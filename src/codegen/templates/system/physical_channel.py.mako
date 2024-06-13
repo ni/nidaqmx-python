@@ -13,6 +13,7 @@
 
 import ctypes
 import numpy
+import pathlib
 
 from nidaqmx import utils
 from nidaqmx._bitfield_utils import enum_bitfield_to_list
@@ -21,6 +22,8 @@ from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
     ${', '.join([c for c in enums_used]) | wrap(4, 4)})
 %endif
+
+from typing import Optional, Union
 
 __all__ = ['PhysicalChannel']
 
@@ -94,4 +97,4 @@ class _PhysicalChannelAlternateConstructor(PhysicalChannel):
 
         # Use meta-programming to change the type of this object to PhysicalChannel,
         # so the user isn't confused when doing introspection.
-        self.__class__ = PhysicalChannel
+        self.__class__ = PhysicalChannel  # type: ignore[assignment]

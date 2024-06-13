@@ -3,7 +3,9 @@
 import codegen.metadata as scrapigen_metadata
 from codegen.properties.attribute import Attribute
 from codegen.utilities.helpers import camel_to_snake_case
-from codegen.utilities.interpreter_helpers import INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES
+from codegen.utilities.interpreter_helpers import (
+    INTERPRETER_CAMEL_TO_SNAKE_CASE_REGEXES,
+)
 
 EXCLUDED_ATTRIBUTES = [
     "AI_CHAN_CAL_HAS_VALID_CAL_INFO",
@@ -25,29 +27,9 @@ EXCLUDED_ATTRIBUTES = [
     "DI_PORTS",
     "DO_PORTS",
     "DO_LINES",
-    "EXT_CAL_LAST_TEMP",
-    "SELF_CAL_LAST_TEMP",
-    "CAL_ACC_CONNECTION_COUNT",
-    "CAL_RECOMMENDED_ACC_CONNECTION_COUNT_LIMIT",
-    "CAL_USER_DEFINED_INFO_MAX_SIZE",
-    "SELF_CAL_SUPPORTED",
-    "CAL_DEV_TEMP",
-    "CAL_USER_DEFINED_INFO",
     "CI_PHYSICAL_CHANS",
     "CO_PHYSICAL_CHANS",
-    "EXT_CAL_RECOMMENDED_INTERVAL",
-    "ARM_START_TRIG_TIMESTAMP_VAL",
-    "REF_TRIG_TIMESTAMP_VAL",
-    "START_TRIG_TIMESTAMP_VAL",
-    "FIRST_SAMP_CLK_OFFSET",
-    "FIRST_SAMP_CLK_TIMESCALE",
-    "FIRST_SAMP_CLK_WHEN",
-    "FIRST_SAMP_TIMESTAMP_VAL",
-    "SYNC_PULSE_TIME_WHEN",
     "TIMING_SYNC_PULSE_FORCE",
-    "ARM_START_TRIG_TIMESTAMP_VAL",
-    "REF_TRIG_TIMESTAMP_VAL",
-    "START_TRIG_TIMESTAMP_VAL",
 ]
 
 DEPRECATED_ATTRIBUTES = {
@@ -228,6 +210,7 @@ GENERIC_ATTRIBUTE_TYPE_MAP = {
     "int32[]": "int32_array",
     "uInt8[]": "bytes",
     "uInt32[]": "uint32_array",
+    "CVIAbsoluteTime": "timestamp",
 }
 
 GENERIC_ATTRIBUTE_GROUP_NAME_MAP = {
@@ -238,6 +221,8 @@ GENERIC_ATTRIBUTE_GROUP_NAME_MAP = {
     "Trigger": "trig",
     "PhysicalChannel": "physical_chan",
 }
+
+ATTRIBUTE_WITH_FILE_PATH_TYPE = ("logging_file_path",)
 
 
 def get_attributes(metadata, class_name):

@@ -1,5 +1,5 @@
 # Changelog
-* [0.9.1](#091)
+* [1.0.0](#100)
 * [0.9.0](#090)
 * [0.8.0](#080)
 * [0.7.0](#070)
@@ -19,7 +19,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 0.9.1
+## 1.0.0
 * ### Merged Pull Requests
     *  ...
 * ### Major Changes

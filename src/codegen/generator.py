@@ -1,4 +1,5 @@
 """Codegenerator for generating DAQmx functions."""
+
 import logging
 import os
 import os.path

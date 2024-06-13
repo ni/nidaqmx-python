@@ -11,6 +11,7 @@
 
 import deprecation
 
+from datetime import datetime
 from nidaqmx import utils
 from nidaqmx._bitfield_utils import enum_bitfield_to_list
 from nidaqmx.utils import unflatten_channel_string
@@ -139,6 +140,52 @@ class Device:
 
     # endregion
 
+    # region Calibration Info property
+
+    @property
+    def ext_cal_last_date_and_time(self):
+        """
+        datetime: Indicates the last date and time that the device underwent an
+        external calibration.
+        """
+
+        last_date_and_time = self._interpreter.get_ext_cal_last_date_and_time(self._name)
+
+        return datetime(
+            year=last_date_and_time[0],
+            month=last_date_and_time[1],
+            day=last_date_and_time[2],
+            hour=last_date_and_time[3],
+            minute=last_date_and_time[4]
+        )
+
+    @property
+    def self_cal_last_date_and_time(self):
+        """
+        datetime: Indicates the last date and time that the device underwent a
+        self-calibration.
+        """
+
+        last_date_and_time = self._interpreter.get_self_cal_last_date_and_time(self._name)
+
+        return datetime(
+            year=last_date_and_time[0],
+            month=last_date_and_time[1],
+            day=last_date_and_time[2],
+            hour=last_date_and_time[3],
+            minute=last_date_and_time[4]
+        )
+
+    @property
+    def device_supports_cal(self):
+        """
+        Indicates if the device supports calibration.
+        """
+
+        return self._interpreter.device_supports_cal(self._name)
+
+    # endregion
+
 <%namespace name="property_template" file="/property_template.py.mako"/>\
 %for attribute in attributes:
 ${property_template.script_property(attribute)}\
@@ -222,7 +269,6 @@ ${function_template.script_function(function_object)}
 
     # endregion
 
-
 class _DeviceAlternateConstructor(Device):
     """
     Provide an alternate constructor for the Device object.
@@ -244,4 +290,4 @@ class _DeviceAlternateConstructor(Device):
 
         # Use meta-programming to change the type of this object to Device,
         # so the user isn't confused when doing introspection.
-        self.__class__ = Device
+        self.__class__ = Device  # type: ignore[assignment]

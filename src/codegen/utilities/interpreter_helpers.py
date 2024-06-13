@@ -1,4 +1,5 @@
 """This contains the helper methods used in interpreter generation."""
+
 import re
 from copy import deepcopy
 
@@ -33,17 +34,6 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "GetAIChanCalExpDate",
     "SetAIChanCalCalDate",
     "SetAIChanCalExpDate",
-    # Calibration
-    "DeviceSupportsCal",
-    "GetCalInfoAttributeBool",
-    "GetCalInfoAttributeDouble",
-    "GetCalInfoAttributeString",
-    "GetCalInfoAttributeUInt32",
-    "GetSelfCalLastDateAndTime",
-    "SetCalInfoAttributeBool",
-    "SetCalInfoAttributeDouble",
-    "SetCalInfoAttributeString",
-    "SetCalInfoAttributeUInt32",
     # Real-time
     "GetRealTimeAttributeBool",
     "GetRealTimeAttributeInt32",
@@ -64,21 +54,19 @@ INTERPRETER_IGNORED_FUNCTIONS = [
     "GetSyncPulseTimeWhen",
     "GetTimingAttributeExTimestamp",
     "GetTimingAttributeTimestamp",
-    "GetTrigAttributeTimestamp",
     "SetArmStartTrigTrigWhen",
     "SetFirstSampClkWhen",
     "SetStartTrigTrigWhen",
     "SetSyncPulseTimeWhen",
     "SetTimingAttributeExTimestamp",
     "SetTimingAttributeTimestamp",
-    "SetTrigAttributeTimestamp",
-    "WaitForValidTimestamp",
     # Deprecated, not working
     "GetAnalogPowerUpStates",
 ]
 
 GRPC_INTERPRETER_IGNORED_FUNCTIONS = [
     "get_error_string",
+    "set_runtime_environment",
 ]
 
 LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
@@ -91,6 +79,11 @@ LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
 
 INCLUDE_SIZE_PARAMETER_IN_SIGNATURE_FUNCTIONS = [
     "get_analog_power_up_states_with_output_type",
+]
+
+INCLUDE_SIZE_HINT_FUNCTIONS = [
+    "get_read_attribute_string",
+    "get_write_attribute_string",
 ]
 
 MODIFIED_INTERPRETER_PARAMS = {
@@ -173,13 +166,13 @@ def generate_interpreter_function_call_args(function_metadata):
             else:
                 function_call_args.append(f"ctypes.byref({param.parameter_name})")
         elif param.direction == "in":
-            if (
+            if param.type == "CVIAbsoluteTime":
+                function_call_args.append(f"AbsoluteTime.from_datetime({param.parameter_name})")
+            elif (
                 param.parameter_name == "value"
                 and function_metadata.attribute_function_type == AttributeFunctionType.SET
             ):
                 function_call_args.append(type_cast_attribute_set_function_parameter(param))
-            elif param.type == "CVIAbsoluteTime":
-                function_call_args.append(f"AbsoluteTime.from_datetime({param.parameter_name})")
             else:
                 function_call_args.append(param.parameter_name)
 
@@ -258,6 +251,8 @@ def get_instantiation_lines_for_output(func):
                 instantiation_lines.append(
                     f"{param.parameter_name} = numpy.zeros(size, dtype={param.ctypes_data_type})"
                 )
+        elif param.type == "CVIAbsoluteTime":
+            instantiation_lines.append(f"{param.parameter_name} = AbsoluteTime()")
         else:
             instantiation_lines.append(f"{param.parameter_name} = {param.ctypes_data_type}()")
     for param in get_interpreter_in_out_params(func):
@@ -441,7 +436,7 @@ def get_return_values(func):
                 f"[{param.parameter_name}_element.value for {param.parameter_name}_element in {param.parameter_name}]"
             )
         elif param.ctypes_data_type == "ctypes.c_char_p":
-            return_values.append(f"{param.parameter_name}.value.decode('ascii')")
+            return_values.append(f"{param.parameter_name}.value.decode(lib_importer.encoding)")
         elif param.is_list:
             if is_read_write_function:
                 return_values.append(param.parameter_name)
@@ -449,6 +444,8 @@ def get_return_values(func):
                 return_values.append(f"{param.parameter_name}.tolist()")
         elif param.type == "TaskHandle":
             return_values.append(param.parameter_name)
+        elif param.type == "CVIAbsoluteTime":
+            return_values.append(f"{param.parameter_name}.to_datetime()")
         else:
             return_values.append(f"{param.parameter_name}.value")
     if func.is_init_method:
@@ -586,6 +583,8 @@ def get_response_parameters(func):
                 response_parameters.append(f"response.{name}_raw")
             elif parameter.is_list:
                 response_parameters.append(f"list(response.{name})")
+            elif parameter.type == "CVIAbsoluteTime":
+                response_parameters.append(f"convert_timestamp_to_time(response.{name})")
             else:
                 response_parameters.append(f"response.{name}")
     return ", ".join(response_parameters)
@@ -665,7 +664,7 @@ def get_read_array_parameters(func):
 def type_cast_attribute_set_function_parameter(param):
     """Type casting of attribute set parameter during c call."""
     if param.ctypes_data_type == "ctypes.c_char_p":
-        return f"{param.parameter_name}.encode('ascii')"
+        return f"{param.parameter_name}.encode(lib_importer.encoding)"
     if is_numpy_array_datatype(param):
         return f"{param.parameter_name}.ctypes.data_as(ctypes.c_void_p)"
     return f"{param.ctypes_data_type}({param.parameter_name})"

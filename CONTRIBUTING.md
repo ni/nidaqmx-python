@@ -47,6 +47,7 @@ requirements:
 Before running the regression tests, import the appropriate NI MAX configuration files:
 - ``tests\max_config\nidaqmxMaxConfig.ini``: Contains custom scales, global channels, simulated devices, 
   and tasks used by many regression tests.
+   - **Note:** On Linux, use ``tests\max_config\linux\nidaqmxMaxConfig.ini`` to avoid importing an unsupported device.
 - ``tests\max_config\examplesMaxConfig.ini``: Contains simulated devices used by the example programs.
   Importing this file is optional. It is used to run a subset of the example programs as test cases.
 
@@ -108,7 +109,6 @@ can be verified once that has been completed.
       ```
       * **Note:** For `<semver>` we prefer to use `0.0.0-devX` style versions rather than the alpha
       versions you get from use a poetry version bump rule, like `prepatch`.
-   * If updating a minor or major version, update `version` and `release` in `docs/conf.py`.
    * Add a section to `CHANGELOG.md` for the new version with empty subsections.
 
 # Updating gRPC stubs when the .proto file is modified

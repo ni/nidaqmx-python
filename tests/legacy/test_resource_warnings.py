@@ -1,4 +1,5 @@
 """Tests for validating resource warning behavior."""
+
 import pytest
 
 import nidaqmx

@@ -1,4 +1,5 @@
 """DAQmx code generator."""
+
 import logging
 import pathlib
 import sys
