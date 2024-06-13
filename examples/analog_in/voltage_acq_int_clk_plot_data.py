@@ -3,7 +3,7 @@
 This example demonstrates how to plot the acquired data.
 """
 
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plot
 
 import nidaqmx
 from nidaqmx.constants import READ_ALL_AVAILABLE, AcquisitionType
@@ -14,7 +14,7 @@ with nidaqmx.Task() as task:
 
     data = task.read(READ_ALL_AVAILABLE)
 
-    plt.plot(data)
-    plt.ylabel("Amplitude")
-    plt.title("Waveform")
-    plt.show()
+    plot.plot(data)
+    plot.ylabel("Amplitude")
+    plot.title("Waveform")
+    plot.show()
