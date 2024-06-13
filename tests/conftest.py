@@ -2,10 +2,12 @@
 from __future__ import annotations
 
 import contextlib
+import json
 import pathlib
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import ExitStack
 from enum import Enum
-from typing import Generator, List
+from typing import Generator, List, Callable
 
 import pytest
 
@@ -255,6 +257,14 @@ def test_assets_directory() -> pathlib.Path:
     return pathlib.Path(__file__).parent / "test_assets"
 
 
+@pytest.fixture
+def temp_directory(tmp_path: pathlib.Path) -> pathlib.Path:
+    """Create a temp directory to store discovery service key and registration files."""
+    discovery_service_temp_path = tmp_path / "disc_temp"
+    discovery_service_temp_path.mkdir()
+    return discovery_service_temp_path
+
+
 @pytest.fixture(scope="session")
 def grpc_server_process() -> Generator[GrpcServerProcess, None, None]:
     """Gets the grpc server process."""
@@ -263,6 +273,25 @@ def grpc_server_process() -> Generator[GrpcServerProcess, None, None]:
     with GrpcServerProcess() as proc:
         yield proc
 
+@pytest.fixture(scope="function")
+def generate_grpc_server_process(temp_directory: pathlib.Path) -> Generator[Callable[[], GrpcServerProcess], None, None]:
+    if grpc is None:
+        pytest.skip("The grpc module is not available.")
+    with ExitStack() as stack:
+        def create_grpc_server_process(port=31763) -> GrpcServerProcess:
+            config_file_content = {
+                "address": "[::1]",
+                "port": port,
+                "security": {
+                    "server_cert": "",
+                    "server_key": "",
+                    "root_cert": ""
+                }
+            }
+            temp_config_file_path = temp_directory / "temp_config.json"
+            temp_config_file_path.write_text(json.dumps(config_file_content))
+            return stack.enter_context(GrpcServerProcess(temp_config_file_path))
+        yield create_grpc_server_process
 
 @pytest.fixture(scope="function")
 def grpc_channel(request: pytest.FixtureRequest) -> grpc.Channel:
