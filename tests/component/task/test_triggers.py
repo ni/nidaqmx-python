@@ -5,7 +5,16 @@ import pytest
 from hightime import datetime as ht_datetime, timedelta as ht_timedelta
 
 import nidaqmx
-from nidaqmx.constants import DigitalPatternCondition, Edge, LineGrouping, Slope, Timescale, TimestampEvent, TriggerType, WindowTriggerCondition1
+from nidaqmx.constants import (
+    DigitalPatternCondition,
+    Edge,
+    LineGrouping,
+    Slope,
+    Timescale,
+    TimestampEvent,
+    TriggerType,
+    WindowTriggerCondition1,
+)
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.task import Task
 from nidaqmx.utils import flatten_channel_string
@@ -36,8 +45,11 @@ def sim_6363_ai_voltage_task(task, sim_6363_device) -> Task:
 @pytest.fixture()
 def sim_6535_di_single_line_task(task, sim_6535_device) -> Task:
     """Gets DI task."""
-    task.di_channels.add_di_chan(sim_6535_device.di_lines[0].name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES)
+    task.di_channels.add_di_chan(
+        sim_6535_device.di_lines[0].name, line_grouping=LineGrouping.CHAN_FOR_ALL_LINES
+    )
     return task
+
 
 @pytest.fixture()
 def sim_9775_ai_voltage_multi_edge_task(task, sim_9775_device) -> Task:
@@ -203,23 +215,27 @@ def test___start_trigger___cfg_anlg_window_start_trig___no_errors(
 
     sim_6363_ai_voltage_task.timing.cfg_samp_clk_timing(1000)
     sim_6363_ai_voltage_task.triggers.start_trigger.cfg_anlg_window_start_trig(
-        window_top=window_top, window_bottom=window_bottom, trigger_source=trig_src, trigger_when=trig_when
+        window_top=window_top,
+        window_bottom=window_bottom,
+        trigger_source=trig_src,
+        trigger_when=trig_when,
     )
 
     assert (
-        sim_6363_ai_voltage_task.triggers.start_trigger.anlg_win_src
-        == f"/{device_name}/{trig_src}"
+        sim_6363_ai_voltage_task.triggers.start_trigger.anlg_win_src == f"/{device_name}/{trig_src}"
     )
-    assert sim_6363_ai_voltage_task.triggers.start_trigger.anlg_win_top == pytest.approx(window_top, abs=0.001)
-    assert sim_6363_ai_voltage_task.triggers.start_trigger.anlg_win_btm == pytest.approx(window_bottom, abs=0.001)
-    assert sim_6363_ai_voltage_task.triggers.start_trigger.anlg_win_trig_when ==trig_when
+    assert sim_6363_ai_voltage_task.triggers.start_trigger.anlg_win_top == pytest.approx(
+        window_top, abs=0.001
+    )
+    assert sim_6363_ai_voltage_task.triggers.start_trigger.anlg_win_btm == pytest.approx(
+        window_bottom, abs=0.001
+    )
+    assert sim_6363_ai_voltage_task.triggers.start_trigger.anlg_win_trig_when == trig_when
 
 
 def test___start_trigger___disable___no_errors(
     sim_6363_ai_voltage_task: Task,
 ):
-    device_name = sim_6363_ai_voltage_task.devices[0].name
-
     sim_6363_ai_voltage_task.timing.cfg_samp_clk_timing(1000)
     sim_6363_ai_voltage_task.triggers.start_trigger.disable_start_trig()
 
@@ -229,8 +245,6 @@ def test___start_trigger___disable___no_errors(
 def test___reference_trigger___disable___no_errors(
     sim_6363_ai_voltage_task: Task,
 ):
-    device_name = sim_6363_ai_voltage_task.devices[0].name
-
     sim_6363_ai_voltage_task.timing.cfg_samp_clk_timing(1000)
     sim_6363_ai_voltage_task.triggers.reference_trigger.disable_ref_trig()
 
@@ -256,17 +270,25 @@ def test___reference_trigger___cfg_anlg_window_ref_trig___no_errors(
 
     sim_6363_ai_voltage_task.timing.cfg_samp_clk_timing(1000)
     sim_6363_ai_voltage_task.triggers.reference_trigger.cfg_anlg_window_ref_trig(
-        window_top=window_top, window_bottom=window_bottom, pretrigger_samples=pretrigger_samples, trigger_source=trig_src, trigger_when=trig_when
+        window_top=window_top,
+        window_bottom=window_bottom,
+        pretrigger_samples=pretrigger_samples,
+        trigger_source=trig_src,
+        trigger_when=trig_when,
     )
 
     assert (
         sim_6363_ai_voltage_task.triggers.reference_trigger.anlg_win_src
         == f"/{device_name}/{trig_src}"
     )
-    assert sim_6363_ai_voltage_task.triggers.reference_trigger.anlg_win_top == pytest.approx(window_top, abs=0.001)
-    assert sim_6363_ai_voltage_task.triggers.reference_trigger.anlg_win_btm == pytest.approx(window_bottom, abs=0.001)
+    assert sim_6363_ai_voltage_task.triggers.reference_trigger.anlg_win_top == pytest.approx(
+        window_top, abs=0.001
+    )
+    assert sim_6363_ai_voltage_task.triggers.reference_trigger.anlg_win_btm == pytest.approx(
+        window_bottom, abs=0.001
+    )
     assert sim_6363_ai_voltage_task.triggers.reference_trigger.pretrig_samples == pretrigger_samples
-    assert sim_6363_ai_voltage_task.triggers.reference_trigger.anlg_win_trig_when ==trig_when
+    assert sim_6363_ai_voltage_task.triggers.reference_trigger.anlg_win_trig_when == trig_when
 
 
 @pytest.mark.parametrize(
@@ -311,8 +333,12 @@ def test___start_trigger___cfg_anlg_multi_edge_start_trig___no_errors(
 @pytest.mark.parametrize(
     "trig_src, trig_pattern, trig_when",
     [
-        ("port1/line2, port1/line4", "XX", DigitalPatternCondition.PATTERN_MATCHES),
-        ("port1/line2, port1/line3, port1/line4", "XXX", DigitalPatternCondition.PATTERN_DOES_NOT_MATCH),
+        ("port1/line2, port1/line4", "1R", DigitalPatternCondition.PATTERN_MATCHES),
+        (
+            "port1/line2, port1/line3, port1/line4",
+            "0EF",
+            DigitalPatternCondition.PATTERN_DOES_NOT_MATCH,
+        ),
     ],
 )
 def test___start_trigger__cfg_dig_pattern_start_trig___no_errors(
@@ -328,10 +354,7 @@ def test___start_trigger__cfg_dig_pattern_start_trig___no_errors(
         trigger_when=trig_when,
     )
 
-    assert (
-        sim_6535_di_single_line_task.triggers.start_trigger.dig_pattern_src.name
-        == f"{trig_src}"
-    )
+    assert sim_6535_di_single_line_task.triggers.start_trigger.dig_pattern_src.name == f"{trig_src}"
     assert sim_6535_di_single_line_task.triggers.start_trigger.dig_pattern_pattern == trig_pattern
     assert sim_6535_di_single_line_task.triggers.start_trigger.dig_pattern_trig_when == trig_when
 
@@ -451,8 +474,13 @@ def test___reference_trigger___cfg_dig_edge_ref_trig___no_errors(
 @pytest.mark.parametrize(
     "trig_src, trig_pattern, pretrig_samples, trig_when",
     [
-        ("port1/line2, port1/line4", "XX", 10, DigitalPatternCondition.PATTERN_MATCHES),
-        ("port1/line2, port1/line3, port1/line4", "XXX", 20, DigitalPatternCondition.PATTERN_DOES_NOT_MATCH),
+        ("port1/line2, port1/line4", "1E", 10, DigitalPatternCondition.PATTERN_MATCHES),
+        (
+            "port1/line2, port1/line3, port1/line4",
+            "0RF",
+            20,
+            DigitalPatternCondition.PATTERN_DOES_NOT_MATCH,
+        ),
     ],
 )
 def test___reference_trigger__cfg_dig_pattern_ref_trig___no_errors(
@@ -474,6 +502,12 @@ def test___reference_trigger__cfg_dig_pattern_ref_trig___no_errors(
         sim_6535_di_single_line_task.triggers.reference_trigger.dig_pattern_src.name
         == f"{trig_src}"
     )
-    assert sim_6535_di_single_line_task.triggers.reference_trigger.dig_pattern_pattern == trig_pattern
-    assert sim_6535_di_single_line_task.triggers.reference_trigger.pretrig_samples == pretrig_samples
-    assert sim_6535_di_single_line_task.triggers.reference_trigger.dig_pattern_trig_when == trig_when
+    assert (
+        sim_6535_di_single_line_task.triggers.reference_trigger.dig_pattern_pattern == trig_pattern
+    )
+    assert (
+        sim_6535_di_single_line_task.triggers.reference_trigger.pretrig_samples == pretrig_samples
+    )
+    assert (
+        sim_6535_di_single_line_task.triggers.reference_trigger.dig_pattern_trig_when == trig_when
+    )
