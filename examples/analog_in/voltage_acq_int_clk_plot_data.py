@@ -1,8 +1,8 @@
 ﻿"""Example of generating visualizations for acquired data.
 
 This example demonstrates how to plot the acquired data.
-To run this example, matplotlib module is required to be installed.
-Run 'pip install matplotlib' to install matplotlib module.
+This example requires the matplotlib module.
+Run 'pip install matplotlib' to install the matplotlib module.
 """
 
 import matplotlib.pyplot as plot

@@ -2,8 +2,8 @@
 
 This example demonstrates how to log the acquired data to a TDMS file
 and then read the data from the file.
-To run this example, nptdms module is required to be installed.
-Run 'pip install nptdms' to install nptdms module.
+This example requires the nptdms module.
+Run 'pip install nptdms' to install the nptdms module.
 """
 
 import os
