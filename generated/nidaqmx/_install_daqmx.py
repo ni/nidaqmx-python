@@ -93,15 +93,14 @@ def _get_daqmx_installed_version() -> Optional[str]:
             commands_info = linux_commands[distro.id()]
             query_command = commands_info["get_daqmx_version"]
             query_output = subprocess.run(
-                query_command, stdout=subprocess.PIPE
-            ).stdout.decode("utf-8")
+                query_command, stdout=subprocess.PIPE, text=True
+            ).stdout
 
             if distro.id() == "ubuntu":
                 version_match = re.search(r"ii\s+ni-daqmx\s+(\d+\.\d+\.\d+)", query_output)
             elif distro.id() == "opensuse" or distro.id() == "rhel":
                 version_match = re.search(r"ni-daqmx-(\d+\.\d+\.\d+)", query_output)
-            else:
-                raise click.ClickException(f"Unsupported distribution '{distro.id()}'")
+
             if version_match:
                 installed_version = version_match.group(1)
                 _logger.info("Found installed NI-DAQmx version: %s", installed_version)
@@ -152,53 +151,35 @@ def _multi_access_temp_file(
                 ) from e
 
 
-@contextlib.contextmanager
-def _multi_access_temp_folder(*, delete: bool = True) -> Generator[str, None, None]:
-    """
-    Context manager for creating a temporary folder.
-
-    """
-    try:
-        temp_folder = tempfile.TemporaryDirectory()
-        _logger.debug("Created temp folder: %s", temp_folder.name)
-    except Exception as e:
-        _logger.info("Failed to create temporary folder.", exc_info=True)
-        raise click.ClickException(
-            f"Failed to create temporary folder '{temp_folder.name}'.\nDetails: {e}"
-        ) from e
-
-    try:
-        yield temp_folder.name
-    finally:
-        if delete:
-            try:
-                _logger.debug("Deleting temp folder: %s", temp_folder.name)
-                shutil.rmtree(temp_folder.name)
-            except ValueError as e:
-                _logger.info("Failed to delete temporary folder.", exc_info=True)
-                raise click.ClickException(
-                    f"Failed to delete temporary folder '{temp_folder.name}'.\nDetails: {e}"
-                ) from e
-
-
 def _load_data(
     json_data: str, platform: str
 ) -> Tuple[Optional[str], Optional[str], Optional[str], Optional[List[str]]]:
     """
     Load data from JSON string and extract Windows metadata.
 
-    >>> _load_data('{"Windows": [{"Location": "path/to/driver", "Version": "1.0", "Release": "2024Q1"}]}')
-    ('path/to/driver', '1.0')
-
-    >>> _load_data('{"Windows": [{"Location": "path/to/driver"}]}')
+    >>> json_data = '{"Windows": [{"Location": "path/to/windows/driver", "Version": "24.0", "Release": "2024Q1", "supportedOS": ["Windows 11"]}], "Linux": []}'
+    >>> _load_data(json_data, "Windows")
+    ('path/to/windows/driver', '24.0', '2024Q1', ['Windows 11'])
+    
+    >>> json_data = '{"Windows": [], "Linux": [{"Location": "path/to/linux/driver", "Version": "24.0", "Release": "2024Q1", "supportedOS": ["ubuntu 20.04 ", "rhel 9"]}]}'
+    >>> _load_data(json_data, "Linux")
+    ('path/to/linux/driver', '24.0', '2024Q1', ['ubuntu 20.04', 'rhel 9'])
+    
+    >>> json_data = '{"Windows": [{"Location": "path/to/windows/driver", "Version": "24.0", "Release": "2024Q1", "supportedOS": ["Windows 11"]}], "Linux": []}'
+    >>> _load_data(json_data, "Linux")
     Traceback (most recent call last):
-    ...
-    click.exceptions.ClickException: Unable to fetch driver details.
-
-    >>> _load_data('{"Linux": [{"Location": "path/to/driver", "Version": "1.0", "Release": "2024Q1"}]}')
+    click.exceptions.ClickException: Unable to fetch driver details
+    
+    >>> json_data = 'invalid json'
+    >>> _load_data(json_data, "Windows")
     Traceback (most recent call last):
-    ...
-    click.exceptions.ClickException: Unable to fetch driver details.
+    click.exceptions.ClickException: Failed to parse the driver metadata.
+    Details: Expecting value: line 1 column 1 (char 0)
+    
+    >>> json_data = '{"Windows": [{"Location": "path/to/windows/driver", "Version": "24.0", "Release": "2024Q1", "supportedOS": ["Windows 11"]}], "Linux": []}'
+    >>> _load_data(json_data, "macOS")
+    Traceback (most recent call last):
+    click.exceptions.ClickException: Unsupported os 'macOS'
 
     """
     try:
@@ -245,7 +226,7 @@ def _get_driver_details(
         ) from e
 
 
-def _install_daqmx_driver_windows(download_url: str) -> None:
+def _install_daqmx_driver_windows_core(download_url: str) -> None:
     """
     Download and launch NI-DAQmx Driver installation in an interactive mode
 
@@ -270,7 +251,7 @@ def _install_daqmx_driver_windows(download_url: str) -> None:
         raise click.ClickException(f"Failed to install the NI-DAQmx driver.\nDetails: {e}") from e
 
 
-def _install_daqmx_driver_linux(download_url: str, release: str) -> None:
+def _install_daqmx_driver_linux_core(download_url: str, release: str) -> None:
     """
     Download NI Linux Device Drivers and install NI-DAQmx on Linux OS
 
@@ -281,17 +262,17 @@ def _install_daqmx_driver_linux(download_url: str, release: str) -> None:
                 _logger.info("Downloading Driver to %s", temp_file)
                 urllib.request.urlretrieve(download_url, temp_file)
 
-                with _multi_access_temp_folder() as temp_folder:
-                    _directory_to_extract_to = temp_folder
+                with tempfile.TemporaryDirectory() as temp_folder:
+                    directory_to_extract_to = temp_folder
 
-                    _logger.info("Unzipping the downloaded file to %s", _directory_to_extract_to)
+                    _logger.info("Unzipping the downloaded file to %s", directory_to_extract_to)
 
                     with zipfile.ZipFile(temp_file, "r") as zip_ref:
-                        zip_ref.extractall(_directory_to_extract_to)
+                        zip_ref.extractall(directory_to_extract_to)
 
                     _logger.info("Installing NI-DAQmx")
                     for command in _get_linux_installation_commands(
-                        _directory_to_extract_to, distro.id(), distro.version(), release
+                        directory_to_extract_to, distro.id(), distro.version(), release
                     ):
                         print("\nRunning command:", " ".join(command))
                         subprocess.run(command, check=True)
@@ -361,12 +342,12 @@ def _confirm_and_upgrade_daqmx_driver(
     )
     if is_upgrade:
         if sys.platform.startswith("win"):
-            _install_daqmx_driver_windows(download_url)
+            _install_daqmx_driver_windows_core(download_url)
         elif sys.platform.startswith("linux"):
-            _install_daqmx_driver_linux(download_url, release)
+            _install_daqmx_driver_linux_core(download_url, release)
 
 
-def _install_daqmx_windows_driver() -> None:
+def _install_daqmx_driver_windows() -> None:
     """
     Install the NI-DAQmx driver on Windows.
 
@@ -383,7 +364,7 @@ def _install_daqmx_windows_driver() -> None:
                 latest_version, installed_version, download_url, release
             )
         else:
-            _install_daqmx_driver_windows(download_url)
+            _install_daqmx_driver_windows_core(download_url)
 
 
 def _is_distribution_supported() -> None:
@@ -411,7 +392,7 @@ def _is_distribution_supported() -> None:
         raise NotImplementedError("This function is only supported on Linux.")
 
 
-def _install_daqmx_linux_driver() -> None:
+def _install_daqmx_driver_linux() -> None:
     """
     Install the NI-DAQmx driver on Linux.
 
@@ -434,7 +415,7 @@ def _install_daqmx_linux_driver() -> None:
                 latest_version, installed_version, download_url, release
             )
         else:
-            _install_daqmx_driver_linux(download_url, release)
+            _install_daqmx_driver_linux_core(download_url, release)
 
 
 def installdriver() -> None:
@@ -445,10 +426,10 @@ def installdriver() -> None:
     try:
         if sys.platform.startswith("win"):
             _logger.info("Windows platform detected")
-            _install_daqmx_windows_driver()
+            _install_daqmx_driver_windows()
         elif sys.platform.startswith("linux"):
             _logger.info("Linux platform detected")
-            _install_daqmx_linux_driver()
+            _install_daqmx_driver_linux()
         else:
             raise click.ClickException(
                 f"The 'installdriver' command is supported only on Windows and Linux."
