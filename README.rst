@@ -72,7 +72,6 @@ Finding and configuring device name in **NI MAX**:
   :align: center
   :width: 800px
 
-
 Finding and configuring device name in **NI Hardware Configuration Utility**:
 
 .. image:: https://raw.githubusercontent.com/ni/nidaqmx-python/ca9b8554e351a45172a3490a4716a52d8af6e95e/hwcu_device_name.png
@@ -97,9 +96,9 @@ Virtual Channels in NI-DAQmx
 ----------------------------
 Virtual channels, or sometimes referred to generically as channels, are software entities that encapsulate the physical channel
 along with other channel specific information (e.g.: range, terminal configuration, and custom scaling) that formats the data.
-A physical channel is a terminal or pin at which you can measure or generate an analog or digital signal.A single physical channel
+A physical channel is a terminal or pin at which you can measure or generate an analog or digital signal. A single physical channel
 can include more than one terminal, as in the case of a differential analog input channel or a digital port of eight lines.
-Every physical channel on a device has a unique name (for instance, SC1Mod4/ai0, Dev2/ao5, and Dev6/ctr3) that follows the
+Every physical channel on a device has a unique name (for instance, cDAQ1Mod4/ai0, Dev2/ao5, and Dev6/ctr3) that follows the
 NI-DAQmx physical channel naming convention.
 Refer to `NI-DAQmx Channel <https://www.ni.com/docs/en-US/bundle/ni-daqmx/page/chans.html>`_ for more information.
 
@@ -168,7 +167,7 @@ Example code to acquire finite amount of data and log it to a TDMS file:
   >>> with nidaqmx.Task() as task:
   ...     task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
   ...     task.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=10)
-  ...     task._in_stream.configure_logging("TestData.tdms", LoggingMode.LOG_AND_READ, operation=LoggingOperation.CREATE_OR_REPLACE)
+  ...     task.in_stream.configure_logging("TestData.tdms", LoggingMode.LOG_AND_READ, operation=LoggingOperation.CREATE_OR_REPLACE)
   ...     data = task.read(READ_ALL_AVAILABLE)
   ...     print("Acquired data: [" + ", ".join(f"{value:f}" for value in data) + "]")
   ...
