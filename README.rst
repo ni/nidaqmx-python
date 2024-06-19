@@ -8,17 +8,17 @@ About
 
 The **nidaqmx** package contains an API (Application Programming Interface)
 for interacting with the NI-DAQmx driver. The package is implemented in Python.
-The package is implemented as a complex, 
-highly object-oriented wrapper around the NI-DAQmx C API using the 
+The package is implemented as a complex,
+highly object-oriented wrapper around the NI-DAQmx C API using the
 `ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
 
 **nidaqmx** supports all versions of the NI-DAQmx driver that ships with the C
 API. The C API is included in any version of the driver that supports it. The
 **nidaqmx** package does not require installation of the C header files.
 
-Some functions in the **nidaqmx** package may be unavailable with earlier 
-versions of the NI-DAQmx driver. Visit the 
-`ni.com/downloads <http://www.ni.com/downloads/>`_ to upgrade your version of 
+Some functions in the **nidaqmx** package may be unavailable with earlier
+versions of the NI-DAQmx driver. Visit the
+`ni.com/downloads <http://www.ni.com/downloads/>`_ to upgrade your version of
 NI-DAQmx.
 
 **nidaqmx** supports Windows and Linux operating systems where the NI-DAQmx
@@ -58,12 +58,177 @@ Python:
   provides an abstraction of NI-DAQmx in the ``nidaqmx`` module, which collides
   with this package's module name.
 
+Getting Started
+===============
+In order to use the **nidaqmx** package, you must have at least one DAQ (`Data Acquisition <https://www.ni.com/en/shop/data-acquisition.html>`_)
+device installed on your system. Both physical and simulated devices are supported. The examples below use an X Series DAQ device
+(e.g.: PXIe-6363, PCIe-6363, or USB-6363).
+You can use **NI MAX** or **NI Hardware Configuration Utility** to verify and configure your devices.
+
+Finding and configuring device name in **NI MAX**:
+
+.. image:: https://raw.githubusercontent.com/ni/nidaqmx-python/ca9b8554e351a45172a3490a4716a52d8af6e95e/max_device_name.png
+  :alt: NI MAX Device Name
+  :align: center
+  :width: 800px
+
+Finding and configuring device name in **NI Hardware Configuration Utility**:
+
+.. image:: https://raw.githubusercontent.com/ni/nidaqmx-python/ca9b8554e351a45172a3490a4716a52d8af6e95e/hwcu_device_name.png
+  :alt: NI HWCU Device Name
+  :align: center
+  :width: 800px
+
+Tasks in NI-DAQmx
+-----------------
+A task is a collection of one or more virtual channels with timing, triggering, and other properties.
+Refer to `NI-DAQmx Task <https://www.ni.com/docs/en-US/bundle/ni-daqmx/page/tasksnidaqmx.html>`_ for more information.
+
+Example code to create a task:
+
+.. code-block:: python
+
+  >>> import nidaqmx
+  >>> with nidaqmx.Task() as task:
+  ...     pass
+
+Virtual Channels in NI-DAQmx
+----------------------------
+Virtual channels, or sometimes referred to generically as channels, are software entities that encapsulate the physical channel
+along with other channel specific information (e.g.: range, terminal configuration, and custom scaling) that formats the data.
+A physical channel is a terminal or pin at which you can measure or generate an analog or digital signal. A single physical channel
+can include more than one terminal, as in the case of a differential analog input channel or a digital port of eight lines.
+Every physical channel on a device has a unique name (for instance, cDAQ1Mod4/ai0, Dev2/ao5, and Dev6/ctr3) that follows the
+NI-DAQmx physical channel naming convention.
+Refer to `NI-DAQmx Channel <https://www.ni.com/docs/en-US/bundle/ni-daqmx/page/chans.html>`_ for more information.
+
+Example code that adds an analog input channel to a task, configures the range, and reads data:
+
+.. code-block:: python
+
+  >>> import nidaqmx
+  >>> with nidaqmx.Task() as task:
+  ...     task.ai_channels.add_ai_voltage_chan("Dev1/ai0", min_val=-10.0, max_val=10.0)
+  ...     task.read()
+  ...
+  AIChannel(name=Dev1/ai0)
+  -0.14954069643238624
+
+Example code that adds multiple analog input channels to a task, configures their range, and reads data:
+
+.. code-block:: python
+
+  >>> import nidaqmx
+  >>> with nidaqmx.Task() as task:
+  ...     task.ai_channels.add_ai_voltage_chan("Dev1/ai0", min_val=-5.0, max_val=5.0)
+  ...     task.ai_channels.add_ai_voltage_chan("Dev1/ai1", min_val=-10.0, max_val=10.0)
+  ...     task.read()
+  ...
+  AIChannel(name=Dev1/ai0)
+  AIChannel(name=Dev1/ai1)
+  [-0.07477034821619312, 0.8642841883602405]
+
+Timing
+------
+You can use software timing or hardware timing to control when a signal is acquired or generated.
+With hardware timing, a digital signal, such as a clock on your device, controls the rate of acquisition or generation.
+With software timing, the rate at which the samples are acquired or generated is determined by the software and operating system
+instead of by the measurement device. A hardware clock can run much faster than a software loop.
+A hardware clock is also more accurate than a software loop.
+Refer to `Timing, Hardware Versus Software <https://www.ni.com/docs/en-US/bundle/ni-daqmx/page/hardwresoftwretiming.html>`_ for more information.
+
+Example code to acquire finite amount of data using hardware timing:
+
+.. code-block:: python
+
+  >>> import nidaqmx
+  >>> from nidaqmx.constants import AcquisitionType, READ_ALL_AVAILABLE
+  >>> with nidaqmx.Task() as task:
+  ...     task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
+  ...     task.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=10)
+  ...     data = task.read(READ_ALL_AVAILABLE)
+  ...     print("Acquired data: [" + ", ".join(f"{value:f}" for value in data) + "]")
+  ...
+  AIChannel(name=Dev1/ai0)
+  Acquired data: [-0.149693, 2.869503, 4.520249, 4.704886, 2.875912, -0.006104, -2.895596, -4.493698, -4.515671, -2.776574]
+
+TDMS Logging
+------------
+Technical Data Management Streaming (TDMS) is a binary file format that allows for high-speed data logging.
+When you enable TDMS data logging, NI-DAQmx can stream data directly from the device buffer to the hard disk.
+Refer to `TDMS Logging <https://www.ni.com/docs/en-US/bundle/ni-daqmx/page/datalogging.html>`_ for more information.
+
+Example code to acquire finite amount of data and log it to a TDMS file:
+
+.. code-block:: python
+
+  >>> import nidaqmx
+  >>> from nidaqmx.constants import AcquisitionType, LoggingMode, LoggingOperation, READ_ALL_AVAILABLE
+  >>> with nidaqmx.Task() as task:
+  ...     task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
+  ...     task.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=10)
+  ...     task.in_stream.configure_logging("TestData.tdms", LoggingMode.LOG_AND_READ, operation=LoggingOperation.CREATE_OR_REPLACE)
+  ...     data = task.read(READ_ALL_AVAILABLE)
+  ...     print("Acquired data: [" + ", ".join(f"{value:f}" for value in data) + "]")
+  ...
+  AIChannel(name=Dev1/ai0)
+  Acquired data: [-0.149693, 2.869503, 4.520249, 4.704886, 2.875912, -0.006104, -2.895596, -4.493698, -4.515671, -2.776574]
+
+To read the TDMS file, you can use the **npTDMS** third-party module.
+Refer to `npTDMS <https://pypi.org/project/npTDMS/>`_ for detailed usage.
+
+Example code to read the TDMS file created from example above and display the data:
+
+.. code-block:: python
+
+  >>> from nptdms import TdmsFile
+  >>> with TdmsFile.read("TestData.tdms") as tdms_file:
+  ...   for group in tdms_file.groups():
+  ...     for channel in group.channels():
+  ...       data = channel[:]
+  ...       print("data: [" + ", ".join(f"{value:f}" for value in data) + "]")
+  ...
+  data: [-0.149693, 2.869503, 4.520249, 4.704886, 2.875912, -0.006104, -2.895596, -4.493698, -4.515671, -2.776574]
+
+Plot Data
+---------
+To visualize the acquired data as a waveform, you can use the **matplotlib.pyplot** third-party module.
+Refer to `Pyplot tutorial <https://matplotlib.org/stable/tutorials/pyplot.html#sphx-glr-tutorials-pyplot-py>`_ for detailed usage.
+
+Example code to plot waveform for acquired data using **matplotlib.pyplot** module:
+
+.. code-block:: python
+
+  >>> import nidaqmx
+  >>> from nidaqmx.constants import AcquisitionType, READ_ALL_AVAILABLE
+  >>> import matplotlib.pyplot as plt
+  >>> with nidaqmx.Task() as task:
+  ...   task.ai_channels.add_ai_voltage_chan("Dev1/ai0")
+  ...   task.timing.cfg_samp_clk_timing(1000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=50)
+  ...   data = task.read(READ_ALL_AVAILABLE)
+  ...   plt.plot(data)
+  ...   plt.ylabel('Amplitude')
+  ...   plt.title('Waveform')
+  ...   plt.show()
+  ...
+  AIChannel(name=Dev1/ai0)
+  [<matplotlib.lines.Line2D object at 0x00000141D7043970>]
+  Text(0, 0.5, 'Amplitude')
+  Text(0.5, 1.0, 'waveform')
+
+.. image:: https://raw.githubusercontent.com/ni/nidaqmx-python/ca9b8554e351a45172a3490a4716a52d8af6e95e/waveform.png
+  :alt: Waveform
+  :align: center
+  :width: 400px
+
+For more information on how to use **nidaqmx** package, refer to **Usage** section below.
+
 .. _usage-section:
 
 Usage
 =====
-The following is a basic example of using an **nidaqmx.task.Task** object. 
-This example illustrates how the single, dynamic **nidaqmx.task.Task.read** 
+The following is a basic example of using an **nidaqmx.task.Task** object.
+This example illustrates how the single, dynamic **nidaqmx.task.Task.read**
 method returns the appropriate data type.
 
 .. code-block:: python
@@ -142,10 +307,12 @@ Following is an example of using an **nidaqmx.system.System** object.
   >>> isinstance(phys_chan.ai_term_cfgs[0], Enum)
   True
 
+You can find more examples in `nidaqmx-python examples <https://github.com/ni/nidaqmx-python/tree/master/examples>`_.
+
 Bugs / Feature Requests
 =======================
 
-To report a bug or submit a feature request, please use the 
+To report a bug or submit a feature request, please use the
 `GitHub issues page <https://github.com/ni/nidaqmx-python/issues>`_.
 
 Information to Include When Asking for Help
@@ -153,7 +320,7 @@ Information to Include When Asking for Help
 
 Please include **all** of the following information when opening an issue:
 
-- Detailed steps on how to reproduce the problem and full traceback, if 
+- Detailed steps on how to reproduce the problem and full traceback, if
   applicable.
 - The python version used::
 
@@ -163,8 +330,8 @@ Please include **all** of the following information when opening an issue:
 
   $ python -m pip list
 
-- The version of the NI-DAQmx driver used. Follow 
-  `this KB article <http://digital.ni.com/express.nsf/bycode/ex8amn>`_ 
+- The version of the NI-DAQmx driver used. Follow
+  `this KB article <http://digital.ni.com/express.nsf/bycode/ex8amn>`_
   to determine the version of NI-DAQmx you have installed.
 - The operating system and version, for example Windows 7, CentOS 7.2, ...
 
@@ -176,7 +343,7 @@ Documentation is available `here <http://nidaqmx-python.readthedocs.io>`_.
 Additional Documentation
 ========================
 
-Refer to the `NI-DAQmx Help <http://digital.ni.com/express.nsf/bycode/exagg4>`_ 
+Refer to the `NI-DAQmx Help <http://digital.ni.com/express.nsf/bycode/exagg4>`_
 for API-agnostic information about NI-DAQmx or measurement concepts.
 
 NI-DAQmx Help installs only with the full version of NI-DAQmx.
