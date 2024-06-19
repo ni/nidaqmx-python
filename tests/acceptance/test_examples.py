@@ -35,6 +35,8 @@ def test___shipping_example___run___no_errors(example_path: Path, system):
         pytest.skip("Example waits for keyboard input.")
     if re.search(r"\bmatplotlib\b", example_source):
         pytest.skip("Example plots waveform.")
+    if re.search(r"\bnptdms\b", example_source):
+        pytest.skip("Example performs TDMS logging.")
     if example_path.name == "nidaqmx_warnings.py":
         # Ignore warnings from this example.
         context_manager: contextlib.AbstractContextManager = warnings.catch_warnings(record=True)
