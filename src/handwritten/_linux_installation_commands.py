@@ -1,9 +1,15 @@
 import click
-from typing import List, Dict, Callable
+from typing import List, NamedTuple
+
+# Define a named tuple for Linux command configurations
+class LinuxCommands(NamedTuple):
+    get_distro_version: Callable[[str], str]
+    get_daqmx_version: List[str]
+    install: List[List[str]]
 
 def _get_version_ubuntu(dist_version: str) -> str:
     return dist_version.replace(".", "")
-    
+
 def _get_version_opensuse(dist_version: str) -> str:
     return dist_version.replace(".", "")
 
@@ -39,24 +45,23 @@ YUM_INSTALL_COMMANDS = [
 debian_daqmx_version_command = ["dpkg", "-l", "ni-daqmx"]
 rpm_daqmx_version_command = ["rpm", "-q", "ni-daqmx"]
 
-
-# Mapping of distros to their command templates and version handlers
-linux_commands: Dict[str, Dict[str, Callable]] = {
-    "ubuntu": {
-        "get_distro_version": _get_version_ubuntu,
-        "get_daqmx_version": debian_daqmx_version_command,
-        "install": APT_INSTALL_COMMANDS,
-    },
-    "opensuse": {
-        "get_distro_version": _get_version_opensuse,
-        "get_daqmx_version": rpm_daqmx_version_command,
-        "install": ZYPPER_INSTALL_COMMANDS,
-    },
-    "rhel": {
-        "get_distro_version": _get_version_rhel,
-        "get_daqmx_version": rpm_daqmx_version_command,
-        "install": YUM_INSTALL_COMMANDS,
-    },
+# Mapping of distros to their command templates and version handlers using named tuple
+linux_commands: Dict[str, LinuxCommands] = {
+    "ubuntu": LinuxCommands(
+        get_distro_version=_get_version_ubuntu,
+        get_daqmx_version=debian_daqmx_version_command,
+        install=APT_INSTALL_COMMANDS
+    ),
+    "opensuse": LinuxCommands(
+        get_distro_version=_get_version_opensuse,
+        get_daqmx_version=rpm_daqmx_version_command,
+        install=ZYPPER_INSTALL_COMMANDS
+    ),
+    "rhel": LinuxCommands(
+        get_distro_version=_get_version_rhel,
+        get_daqmx_version=rpm_daqmx_version_command,
+        install=YUM_INSTALL_COMMANDS
+    ),
 }
 
 def _get_linux_installation_commands(
@@ -65,13 +70,24 @@ def _get_linux_installation_commands(
     """
     Get the installation commands for Linux based on the distribution.
 
+    Args:
+        _directory_to_extract_to (str): The directory to extract to.
+        dist_name (str): The name of the distribution (e.g., "ubuntu").
+        dist_version (str): The version of the distribution.
+        _release_string (str): The release string.
+
+    Returns:
+        List[List[str]]: The list of formatted installation commands.
+
+    Raises:
+        click.ClickException: If the distribution is unsupported.
     """
     if dist_name not in linux_commands:
         raise click.ClickException(f"Unsupported distribution '{dist_name}'")
 
     commands_info = linux_commands[dist_name]
-    version = commands_info["get_distro_version"](dist_version)
-    install_commands = commands_info["install"]
+    version = commands_info.get_distro_version(dist_version)
+    install_commands = commands_info.install
 
     # Format commands with the provided variables
     formatted_commands = [
@@ -80,5 +96,3 @@ def _get_linux_installation_commands(
     ]
 
     return formatted_commands
-
-
