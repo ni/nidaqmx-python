@@ -22,12 +22,15 @@ if sys.platform.startswith("win"):
 elif sys.platform.startswith("linux"):
     import distro
 
-from nidaqmx._linux_installation_commands import _get_linux_installation_commands
-from nidaqmx._linux_installation_commands import linux_commands
+from nidaqmx._linux_installation_commands import (
+    _get_linux_installation_commands,
+    linux_commands,
+)
 
 _logger = logging.getLogger(__name__)
 
 METADATA_FILE = "_installer_metadata.json"
+
 
 def _parse_version(version: str) -> Tuple[int, ...]:
     """
@@ -92,22 +95,18 @@ def _get_daqmx_installed_version() -> Optional[str]:
             _logger.debug("Checking for installed NI-DAQmx version")
             commands_info = linux_commands[distro.id()]
             query_command = commands_info["get_daqmx_version"]
-            query_output = subprocess.run(
-                query_command, stdout=subprocess.PIPE, text=True
-            ).stdout
+            query_output = subprocess.run(query_command, stdout=subprocess.PIPE, text=True).stdout
 
             if distro.id() == "ubuntu":
                 version_match = re.search(r"ii\s+ni-daqmx\s+(\d+\.\d+\.\d+)", query_output)
             elif distro.id() == "opensuse" or distro.id() == "rhel":
                 version_match = re.search(r"ni-daqmx-(\d+\.\d+\.\d+)", query_output)
-
-            if version_match:
-                installed_version = version_match.group(1)
-                _logger.info("Found installed NI-DAQmx version: %s", installed_version)
-                return installed_version
             else:
-                _logger.info("No installed NI-DAQmx version found.")
-                return None
+                raise click.ClickException(f"Unsupported distribution '{distro.id()}'")
+
+            installed_version = version_match.group(1)
+            _logger.info("Found installed NI-DAQmx version: %s", installed_version)
+            return installed_version
 
         except subprocess.CalledProcessError as e:
             _logger.info("Failed to get installed NI-DAQmx version.", exc_info=True)
@@ -160,22 +159,22 @@ def _load_data(
     >>> json_data = '{"Windows": [{"Location": "path/to/windows/driver", "Version": "24.0", "Release": "2024Q1", "supportedOS": ["Windows 11"]}], "Linux": []}'
     >>> _load_data(json_data, "Windows")
     ('path/to/windows/driver', '24.0', '2024Q1', ['Windows 11'])
-    
+
     >>> json_data = '{"Windows": [], "Linux": [{"Location": "path/to/linux/driver", "Version": "24.0", "Release": "2024Q1", "supportedOS": ["ubuntu 20.04 ", "rhel 9"]}]}'
     >>> _load_data(json_data, "Linux")
     ('path/to/linux/driver', '24.0', '2024Q1', ['ubuntu 20.04', 'rhel 9'])
-    
+
     >>> json_data = '{"Windows": [{"Location": "path/to/windows/driver", "Version": "24.0", "Release": "2024Q1", "supportedOS": ["Windows 11"]}], "Linux": []}'
     >>> _load_data(json_data, "Linux")
     Traceback (most recent call last):
     click.exceptions.ClickException: Unable to fetch driver details
-    
+
     >>> json_data = 'invalid json'
     >>> _load_data(json_data, "Windows")
     Traceback (most recent call last):
     click.exceptions.ClickException: Failed to parse the driver metadata.
     Details: Expecting value: line 1 column 1 (char 0)
-    
+
     >>> json_data = '{"Windows": [{"Location": "path/to/windows/driver", "Version": "24.0", "Release": "2024Q1", "supportedOS": ["Windows 11"]}], "Linux": []}'
     >>> _load_data(json_data, "macOS")
     Traceback (most recent call last):
