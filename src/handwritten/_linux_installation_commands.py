@@ -65,8 +65,8 @@ rpm_daqmx_version_command = ["rpm", "-q", "ni-daqmx"]
 @dataclass
 class DistroInfo:
     get_distro_version: Callable[[str], str]
-    get_daqmx_version: Tuple[str, ...]
-    install_commands: Tuple[Tuple[str, ...], ...]
+    get_daqmx_version: List[str]
+    install_commands: List[List[str]]
 
 
 # Mapping of distros to their command templates and version handlers
