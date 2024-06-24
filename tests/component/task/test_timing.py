@@ -56,8 +56,8 @@ def test___timing___cfg_change_detection___sets_properties(
 @pytest.mark.parametrize(
     "clk_source, active_edge",
     [
-        ("/Dev1/PFI0", Edge.RISING),
-        ("/Dev1/PFI1", Edge.FALLING),
+        ("PFI5", Edge.RISING),
+        ("RTSI7", Edge.FALLING),
     ],
 )
 def test___timing___cfg_pipelined_samp_clk___sets_properties(
@@ -86,9 +86,9 @@ def test___timing___cfg_pipelined_samp_clk___sets_properties(
 @pytest.mark.parametrize(
     "clk_source, active_edge, pause_when, ready_event_active_level",
     [
-        ("/Dev1/PFI0", Edge.RISING, Level.HIGH, Polarity.ACTIVE_HIGH),
-        ("/Dev1/PFI1", Edge.FALLING, Level.HIGH, Polarity.ACTIVE_LOW),
-        ("/Dev1/PFI1", Edge.FALLING, Level.LOW, Polarity.ACTIVE_LOW),
+        ("PFI5", Edge.RISING, Level.HIGH, Polarity.ACTIVE_HIGH),
+        ("PFI5", Edge.FALLING, Level.HIGH, Polarity.ACTIVE_LOW),
+        ("RTSI7", Edge.FALLING, Level.LOW, Polarity.ACTIVE_LOW),
     ],
 )
 def test___timing___cfg_burst_handshaking_import_clock___sets_properties(
@@ -124,9 +124,9 @@ def test___timing___cfg_burst_handshaking_import_clock___sets_properties(
 @pytest.mark.parametrize(
     "clk_outp_term, clk_pulse_polarity, pause_when, ready_event_active_level",
     [
-        ("/Dev1/PFI0", Polarity.ACTIVE_HIGH, Level.HIGH, Polarity.ACTIVE_HIGH),
-        ("/Dev1/PFI1", Polarity.ACTIVE_HIGH, Level.HIGH, Polarity.ACTIVE_LOW),
-        ("/Dev1/PFI1", Polarity.ACTIVE_LOW, Level.LOW, Polarity.ACTIVE_LOW),
+        ("PFI0", Polarity.ACTIVE_HIGH, Level.HIGH, Polarity.ACTIVE_HIGH),
+        ("PFI1", Polarity.ACTIVE_HIGH, Level.HIGH, Polarity.ACTIVE_LOW),
+        ("PFI1", Polarity.ACTIVE_LOW, Level.LOW, Polarity.ACTIVE_LOW),
     ],
 )
 def test___timing___cfg_burst_handshaking_export_clock___sets_properties(
