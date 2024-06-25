@@ -984,7 +984,7 @@ grpc = ["grpcio", "protobuf"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "edf1252f2cf7e4606b5cb4f8f86c882cc87d1a14d799209e499856a6193cfc75"
+content-hash = "3d1345aa9a53946ef175f5011b4d6151c75529f108f7d64c4255bfc2f11cac5f"
 
 [metadata.files]
 alabaster = [
