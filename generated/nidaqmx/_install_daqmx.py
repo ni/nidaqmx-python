@@ -22,10 +22,10 @@ if sys.platform.startswith("win"):
 elif sys.platform.startswith("linux"):
     import distro
 
-from nidaqmx._linux_installation_commands import (
-    _get_linux_installation_commands,
-    linux_commands,
-)
+    from nidaqmx._linux_installation_commands import (
+        get_linux_installation_commands,
+        LINUX_COMMANDS,
+    )
 
 _logger = logging.getLogger(__name__)
 
@@ -93,7 +93,7 @@ def _get_daqmx_installed_version() -> Optional[str]:
     elif sys.platform.startswith("linux"):
         try:
             _logger.debug("Checking for installed NI-DAQmx version")
-            commands_info = linux_commands[distro.id()]
+            commands_info = LINUX_COMMANDS[distro.id()]
             query_command = commands_info["get_daqmx_version"]
             query_output = subprocess.run(query_command, stdout=subprocess.PIPE, text=True).stdout
 
@@ -270,7 +270,7 @@ def _install_daqmx_driver_linux_core(download_url: str, release: str) -> None:
                         zip_ref.extractall(directory_to_extract_to)
 
                     _logger.info("Installing NI-DAQmx")
-                    for command in _get_linux_installation_commands(
+                    for command in get_linux_installation_commands(
                         directory_to_extract_to, distro.id(), distro.version(), release
                     ):
                         print("\nRunning command:", " ".join(command))

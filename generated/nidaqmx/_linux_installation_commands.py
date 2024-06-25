@@ -17,79 +17,75 @@ def _get_version_rhel(dist_version: str) -> str:
 
 
 # Command templates
-APT_INSTALL_COMMANDS = [
-    ["sudo", "apt", "update"],
+_APT_INSTALL_COMMANDS = [
+    ["apt", "update"],
     [
-        "sudo",
         "apt",
         "install",
         "{directory}/NILinux{release}DeviceDrivers/ni-ubuntu{version}-drivers-{release}.deb",
     ],
-    ["sudo", "apt", "update"],
-    ["sudo", "apt", "install", "ni-daqmx"],
-    ["sudo", "dkms", "autoinstall"],
+    ["apt", "update"],
+    ["apt", "install", "ni-daqmx"],
+    ["dkms", "autoinstall"],
 ]
 
-ZYPPER_INSTALL_COMMANDS = [
-    ["sudo", "zypper", "update"],
-    ["sudo", "zypper", "install", "insserv"],
+_ZYPPER_INSTALL_COMMANDS = [
+    ["zypper", "update"],
+    ["zypper", "install", "insserv"],
     [
-        "sudo",
         "zypper",
         "--no-gpg-checks",
         "install",
         "{directory}/NILinux{release}DeviceDrivers/ni-opensuse{version}-drivers-{release}.rpm",
     ],
-    ["sudo", "zypper", "refresh"],
-    ["sudo", "zypper", "install", "ni-daqmx"],
-    ["sudo", "dkms", "autoinstall"],
+    ["zypper", "refresh"],
+    ["zypper", "install", "ni-daqmx"],
+    ["dkms", "autoinstall"],
 ]
 
-YUM_INSTALL_COMMANDS = [
-    ["sudo", "yum", "update"],
-    ["sudo", "yum", "install", "chkconfig"],
+_YUM_INSTALL_COMMANDS = [
+    ["yum", "update"],
+    ["yum", "install", "chkconfig"],
     [
-        "sudo",
         "yum",
         "install",
         "{directory}/NILinux{release}DeviceDrivers/ni-rhel{version}-drivers-{release}.rpm",
     ],
-    ["sudo", "yum", "install", "ni-daqmx"],
-    ["sudo", "dkms", "autoinstall"],
+    ["yum", "install", "ni-daqmx"],
+    ["dkms", "autoinstall"],
 ]
 
-debian_daqmx_version_command = ["dpkg", "-l", "ni-daqmx"]
-rpm_daqmx_version_command = ["rpm", "-q", "ni-daqmx"]
-
+_DEBIAN_DAQMX_VERSION_COMMAND = ["dpkg", "-l", "ni-daqmx"]
+_RPM_DAQMX_VERSION_COMMAND = ["rpm", "-q", "ni-daqmx"]
 
 @dataclass
 class DistroInfo:
     get_distro_version: Callable[[str], str]
-    get_daqmx_version: Tuple[str, ...]
-    install_commands: Tuple[Tuple[str, ...], ...]
+    get_daqmx_version: List[str]
+    install_commands: List[List[str]]
 
 
 # Mapping of distros to their command templates and version handlers
-linux_commands = {
-    "ubuntu": DistroInfo(_get_version_ubuntu, debian_daqmx_version_command, APT_INSTALL_COMMANDS),
+LINUX_COMMANDS = {
+    "ubuntu": DistroInfo(_get_version_ubuntu, _DEBIAN_DAQMX_VERSION_COMMAND, _APT_INSTALL_COMMANDS),
     "opensuse": DistroInfo(
-        _get_version_opensuse, rpm_daqmx_version_command, ZYPPER_INSTALL_COMMANDS
+        _get_version_opensuse, _RPM_DAQMX_VERSION_COMMAND, _ZYPPER_INSTALL_COMMANDS
     ),
-    "rhel": DistroInfo(_get_version_rhel, rpm_daqmx_version_command, YUM_INSTALL_COMMANDS),
+    "rhel": DistroInfo(_get_version_rhel, _RPM_DAQMX_VERSION_COMMAND, _YUM_INSTALL_COMMANDS),
 }
 
 
-def _get_linux_installation_commands(
+def get_linux_installation_commands(
     _directory_to_extract_to: str, dist_name: str, dist_version: str, _release_string: str
 ) -> List[List[str]]:
     """
     Get the installation commands for Linux based on the distribution.
 
     """
-    if dist_name not in linux_commands:
+    if dist_name not in LINUX_COMMANDS:
         raise click.ClickException(f"Unsupported distribution '{dist_name}'")
 
-    commands_info = linux_commands[dist_name]
+    commands_info = LINUX_COMMANDS[dist_name]
     version = commands_info.get_distro_version(dist_version)
     install_commands = commands_info.install_commands
 
@@ -105,7 +101,3 @@ def _get_linux_installation_commands(
     ]
 
     return formatted_commands
-
-
-if __name__ == "__main__":
-    print(_get_linux_installation_commands("/temp", "ubuntu", "20.04", "2024Q3"))
