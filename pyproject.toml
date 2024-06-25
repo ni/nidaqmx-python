@@ -51,7 +51,6 @@ python-decouple = ">=3.8"
 click = ">=8.0.0"
 distro = { version = ">=1.9.0", platform = "linux" }
 
-
 [tool.poetry.extras]
 docs = ["sphinx", "sphinx_rtd_theme", "toml"]
 grpc = ["grpcio", "protobuf"]
