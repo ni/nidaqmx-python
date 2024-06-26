@@ -64,6 +64,14 @@ grpcio-tools = [
 ]
 mypy-protobuf = ">=3.4"
 
+[tool.poetry.group.examples]
+# The "examples" group is optional because matplotlib does not distribute wheels for 32-bit Windows.
+optional = true
+
+[tool.poetry.group.examples.dependencies]
+matplotlib = {version=">=3.9.0", python = ">=3.9"}
+nptdms = ">=1.9.0"
+
 [tool.poetry.group.lint.dependencies]
 ni-python-styleguide = ">=0.4.1"
 mypy = ">=1.0"
