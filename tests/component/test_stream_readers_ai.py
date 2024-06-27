@@ -212,7 +212,8 @@ def test___analog_unscaled_reader___read_uint16___returns_valid_samples(
     expected_vals = [
         _get_voltage_code_offset_for_chan(chan_index) for chan_index in range(num_channels)
     ]
-    assert data == pytest.approx(expected_vals, abs=VOLTAGE_CODE_EPSILON)
+    # Promote to larger signed type to avoid overflow w/NumPy 2.0+.
+    assert data.astype(numpy.int32) == pytest.approx(expected_vals, abs=VOLTAGE_CODE_EPSILON)
 
 
 def test___analog_unscaled_reader___read_uint16___raises_error_with_correct_dtype(
@@ -278,7 +279,8 @@ def test___analog_unscaled_reader___read_uint32___returns_valid_samples(
     expected_vals = [
         _get_voltage_code_offset_for_chan(chan_index) for chan_index in range(num_channels)
     ]
-    assert data == pytest.approx(expected_vals, abs=VOLTAGE_CODE_EPSILON)
+    # Promote to larger signed type to avoid overflow w/NumPy 2.0+.
+    assert data.astype(numpy.int64) == pytest.approx(expected_vals, abs=VOLTAGE_CODE_EPSILON)
 
 
 def test___analog_unscaled_reader___read_uint32___raises_error_with_correct_dtype(

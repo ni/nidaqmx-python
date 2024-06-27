@@ -234,7 +234,7 @@ class Task:
         return self._export_signals
 
     @property
-    def in_stream(self) -> InStream: 
+    def in_stream(self) -> InStream:
         """
         Gets the read configurations for the task.
         """
@@ -253,7 +253,7 @@ class Task:
         Gets the timing configurations for the task.
         """
         return self._timing
-    
+
     @property
     def triggers(self) -> Triggers:
         """
@@ -405,7 +405,7 @@ class Task:
                 if some channels in the task have open thermocouple detection disabled.
                 If the input is empty, this VI attempts to calibrate all virtual channels in the task.
 
-            skip_unsupported_channels: specifies whether or not to skip channels that do not 
+            skip_unsupported_channels: specifies whether or not to skip channels that do not
                 support calibration.
                 If skip unsupported channels is TRUE, this VI calibrates only supported channels.
                 If FALSE, this VI calibrates the channels specified by channels. The default is FALSE.
@@ -426,18 +426,18 @@ class Task:
         calibration instructions.
 
         Args:
-            channel: Specifies a subset of virtual channels in the task that you 
+            channel: Specifies a subset of virtual channels in the task that you
                 want to calibrate. Use this input if you do not want to calibrate
                 all the channels in the task or if some channels in the task measure
-                non-bridge-based sensors. If the input is empty, this method attempts 
+                non-bridge-based sensors. If the input is empty, this method attempts
                 to calibrate all virtual channels in the task.
             shunt_resistor_value: Specifies the shunt resistance in ohms.
             shunt_resistor_location: Specifies the location of the shunt resistor.
             shunt_resistor_select: Specifies which shunt calibration switch to enable.
             shunt_resistor_source: Specifies which shunt to use.
-            skip_unsupported_channels: Specifies whether or not to skip channels that 
+            skip_unsupported_channels: Specifies whether or not to skip channels that
                 do not support calibration. If skip_unsupported_channels is True, this
-                method calibrates only supported channels. If False, this method calibrates 
+                method calibrates only supported channels. If False, this method calibrates
                 the channels specified by channels. The default is False.
         """
         self._interpreter.perform_strain_shunt_cal_ex(
@@ -457,10 +457,10 @@ class Task:
         calibration instructions.
 
         Args:
-            channel: Specifies a subset of virtual channels in the task that you 
+            channel: Specifies a subset of virtual channels in the task that you
                 want to calibrate. Use this input if you do not want to calibrate
                 all the channels in the task or if some channels in the task measure
-                non-bridge-based sensors. If the input is empty, this method attempts 
+                non-bridge-based sensors. If the input is empty, this method attempts
                 to calibrate all virtual channels in the task.
             shunt_resistor_value: Specifies the shunt resistance in ohms.
             shunt_resistor_location: Specifies the location of the shunt resistor.
@@ -469,23 +469,23 @@ class Task:
             bridge_resistance: Specifies the bridge resistance in ohms. A value of -1
                 means to use the nominal bridge resistance specified when you created
                 the virtual channel.
-            skip_unsupported_channels: Specifies whether or not to skip channels that 
+            skip_unsupported_channels: Specifies whether or not to skip channels that
                 do not support calibration. If skip_unsupported_channels is True, this
-                method calibrates only supported channels. If False, this method calibrates 
+                method calibrates only supported channels. If False, this method calibrates
                 the channels specified by channels. The default is False.
         """
         self._interpreter.perform_bridge_shunt_cal_ex(
             self._handle, channel, shunt_resistor_value,
             shunt_resistor_location.value, shunt_resistor_select.value,
             shunt_resistor_source.value, bridge_resistance,
-            skip_unsupported_channels) 
+            skip_unsupported_channels)
 
     def perform_thrmcpl_lead_offset_nulling_cal(self, channel="", skip_unsupported_channels=False):
         """
         Perform thermocouple lead offset nulling calibration on the channels in the task.
 
         This is to compensate for offsets introduced by open thermocouple detection.
-        Keep the measured temperature as constant as possible while performing this 
+        Keep the measured temperature as constant as possible while performing this
         adjustment.
 
         Args:
@@ -494,7 +494,7 @@ class Task:
                 if some channels in the task have open thermocouple detection disabled.
                 If the input is empty, this VI attempts to calibrate all virtual channels in the task.
 
-            skip_unsupported_channels: specifies whether or not to skip channels that do not 
+            skip_unsupported_channels: specifies whether or not to skip channels that do not
                 support calibration.
                 If skip unsupported channels is TRUE, this VI calibrates only supported channels.
                 If FALSE, this VI calibrates the channels specified by channels. The default is FALSE.
@@ -665,7 +665,7 @@ class Task:
                 return data[:samples_read].tolist()
 
         return data.tolist()
-    
+
     def _read_ctr_pulse(
         self,
         array_shape: Tuple[int, ...],
@@ -707,7 +707,7 @@ class Task:
 
         else:
             assert False, f"{meas_type} is not a counter pulse measurement type."
-        
+
         if num_samples_not_set and array_shape == (1,):
             return data[0]
 
@@ -1028,14 +1028,19 @@ class Task:
         Use this method to ensure the timestamp has a valid value to prevent an error when querying a timestamp value.
 
         Args:
-            timestamp_event(nidaqmx.constants.TimestampEvent): Specifies the timestamp type to wait on. 
+            timestamp_event(nidaqmx.constants.TimestampEvent): Specifies the timestamp type to wait on.
             timeout (float): Specifies the maximum amount of time in
                 seconds to wait for a valid timestamp.
                 This method returns an error if the time elapses. The
                 default is 10. If you set timeout (sec) to
                 nidaqmx.WAIT_INFINITELY, the method waits indefinitely.
+
+        Returns:
+            datetime:
+
+            The timestamp value of timestamp_event.
         """
-        self._interpreter.wait_for_valid_timestamp(self._handle, timestamp_event.value, timeout)
+        return self._interpreter.wait_for_valid_timestamp(self._handle, timestamp_event.value, timeout)
 
     def wait_until_done(self, timeout=10.0):
         """
@@ -1285,7 +1290,7 @@ class Task:
                 return self._interpreter.write_ctr_ticks(
                     self._handle, number_of_samples_per_channel, auto_start, timeout,
                     FillMode.GROUP_BY_CHANNEL.value, high_ticks, low_ticks)
-            
+
             else:
                 raise DaqError(
                     "Write failed, because the output type is not supported.\n\n"
@@ -1300,7 +1305,7 @@ class Task:
                 'task to which data can be written.',
                 DAQmxErrors.WRITE_NO_OUTPUT_CHANS_IN_TASK,
                 task_name=self.name)
-        
+
 
 class _TaskAlternateConstructor(Task):
     """

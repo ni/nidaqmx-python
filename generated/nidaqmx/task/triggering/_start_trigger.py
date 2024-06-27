@@ -918,6 +918,15 @@ class StartTrigger:
         self._interpreter.reset_trig_attribute(self._handle, 0x312d)
 
     @property
+    def timestamp_val(self):
+        """
+        datetime: Indicates the start trigger timestamp value.
+        """
+
+        val = self._interpreter.get_trig_attribute_timestamp(self._handle, 0x314b)
+        return val
+
+    @property
     def trig_type(self):
         """
         :class:`nidaqmx.constants.TriggerType`: Specifies the type of
