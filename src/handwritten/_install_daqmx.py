@@ -326,7 +326,7 @@ def _upgrade_daqmx_user_confirmation(
     installed_version: str,
     download_url: str,
     release: str,
-) -> None:
+) -> bool:
     """
     Confirm with the user and return the user response.
 
@@ -338,7 +338,7 @@ def _upgrade_daqmx_user_confirmation(
         print(
             f"Installed NI-DAQmx version ({installed_version}) is up to date. (Expected {latest_version} or newer.)"
         )
-        return
+        return False
     is_upgrade = _ask_user_confirmation(
         f"Installed NI-DAQmx version is {installed_version}. Latest version available is {latest_version}. Do you want to upgrade?"
     )
