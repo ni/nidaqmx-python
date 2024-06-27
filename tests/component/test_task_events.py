@@ -1,3 +1,4 @@
+import threading
 import time
 import traceback
 from logging import LogRecord
@@ -8,7 +9,7 @@ import pytest
 import nidaqmx
 from nidaqmx.constants import AcquisitionType, EveryNSamplesEventType, Signal
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.errors import RpcError
+from nidaqmx.errors import DaqResourceWarning, RpcError
 from nidaqmx.task import _TaskEventType
 from tests._event_utils import (
     DoneEventObserver,
@@ -53,6 +54,118 @@ def test___done_event_registered___run_finite_acquisition___callback_invoked_onc
         event_observer.wait_for_events(timeout=100e-3)
     assert len(event_observer.events) == 1
     assert all(e.status == 0 for e in event_observer.events)
+
+
+@pytest.mark.grpc_xfail(
+    reason="#559: Can't close tasks in an event callback when using gRPC", raises=AssertionError
+)
+def test___done_event_registered___call_stop_close_in_callback___task_closed_with_success_status(
+    sim_6363_device: nidaqmx.system.Device,
+    init_kwargs: dict,
+) -> None:
+
+    # We have to define and set this here because mypy will error if it is
+    # defined below with everything else: https://github.com/python/mypy/issues/7057
+    side_effect_semaphore = threading.Semaphore(value=0)
+
+    # side_effect for callback
+    def _clear_task():
+        task.stop()
+        task.close()
+        side_effect_semaphore.release()
+
+    try:
+        # We need to create our own task here because we need to call stop() and close() on it.
+        task: nidaqmx.Task = nidaqmx.Task(**init_kwargs)
+        task.ai_channels.add_ai_voltage_chan(
+            sim_6363_device.ai_physical_chans[0].name, max_val=10, min_val=-10
+        )
+    except nidaqmx.DaqError:
+        if task is not None:
+            task.close()
+        raise
+    event_observer = DoneEventObserver(side_effect=_clear_task)
+    task.register_done_event(event_observer.handle_done_event)
+    task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
+
+    task.start()
+    event_observer.wait_for_events(1)
+    acquired = side_effect_semaphore.acquire(timeout=10.0)
+
+    # Ensure we get the expected exception and warning
+    with pytest.raises(nidaqmx.DaqError) as exc_info:
+        task.stop()
+    with pytest.warns(
+        DaqResourceWarning,
+        match="Attempted to close NI-DAQmx task",
+    ) as warnings_record:
+        task.close()
+    assert acquired
+    assert len(event_observer.events) == 1
+    assert event_observer.events[0].status == 0
+    assert exc_info.value.error_code == DAQmxErrors.INVALID_TASK
+    assert len(warnings_record) == 1
+
+
+@pytest.mark.grpc_xfail(
+    reason="#559: Can't close tasks in an event callback when using gRPC", raises=AssertionError
+)
+def test___every_n_samples_event_registered___call_stop_close_in_callback___task_closed_with_success_status(
+    sim_6363_device: nidaqmx.system.Device,
+    init_kwargs: dict,
+) -> None:
+
+    # We have to define and set this here because mypy will error if it is
+    # defined below with everything else: https://github.com/python/mypy/issues/7057
+    callback_call_number = 0
+    side_effect_semaphore = threading.Semaphore(value=0)
+
+    # side_effect for callback
+    def _clear_task():
+        nonlocal callback_call_number
+        callback_call_number += 1
+        if callback_call_number == 4:
+            task.stop()
+            task.close()
+            side_effect_semaphore.release()
+
+    try:
+        # We need to create our own task here because we need to call stop() and close() on it.
+        task: nidaqmx.Task = nidaqmx.Task(**init_kwargs)
+        task.ai_channels.add_ai_voltage_chan(
+            sim_6363_device.ai_physical_chans[0].name, max_val=10, min_val=-10
+        )
+    except nidaqmx.DaqError:
+        if task is not None:
+            task.close()
+        raise
+    event_observer = EveryNSamplesEventObserver(side_effect=_clear_task)
+    task.register_every_n_samples_acquired_into_buffer_event(
+        100, event_observer.handle_every_n_samples_event
+    )
+    task.timing.cfg_samp_clk_timing(
+        rate=10000.0, sample_mode=AcquisitionType.FINITE, samps_per_chan=1000
+    )
+
+    task.start()
+    event_observer.wait_for_events(4)
+    acquired = side_effect_semaphore.acquire(timeout=10.0)
+
+    # Ensure we get the expected exception and warning
+    with pytest.raises(nidaqmx.DaqError) as exc_info:
+        task.stop()
+    with pytest.warns(
+        DaqResourceWarning,
+        match="Attempted to close NI-DAQmx task",
+    ) as warnings_record:
+        task.close()
+    assert acquired
+    assert len(event_observer.events) == 4
+    assert [e.number_of_samples for e in event_observer.events] == [100, 100, 100, 100]
+    assert exc_info.value.error_code == DAQmxErrors.INVALID_TASK
+    assert len(warnings_record) == 1
 
 
 def test___every_n_samples_event_registered___run_finite_acquisition___callback_invoked_n_times_with_type_and_num_samples(

@@ -19,6 +19,7 @@
 
 import ctypes
 import logging
+import platform
 import warnings
 from typing import Optional
 
@@ -28,11 +29,12 @@ from typing import List
 from nidaqmx._base_interpreter import BaseEventHandler, BaseInterpreter
 from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32, wrapped_ndpointer
 from nidaqmx.error_codes import DAQmxErrors, DAQmxWarnings
-from nidaqmx.errors import DaqError, DaqReadError, DaqWarning, DaqWriteError
+from nidaqmx.errors import DaqError, DaqFunctionNotSupportedError, DaqReadError, DaqWarning, DaqWriteError
 from nidaqmx._lib_time import AbsoluteTime
 
 
 _logger = logging.getLogger(__name__)
+_was_runtime_environment_set = None
 
 
 class LibraryEventHandler(BaseEventHandler):
@@ -60,7 +62,22 @@ class LibraryInterpreter(BaseInterpreter):
     __slots__ = ()
 
     def __init__(self):
-        pass
+        global _was_runtime_environment_set 
+        if _was_runtime_environment_set is None:
+            try:
+                runtime_env = platform.python_implementation()
+                version = platform.python_version()
+                self.set_runtime_environment(
+                    runtime_env,
+                    version,
+                    '',
+                    ''
+                )
+            except DaqFunctionNotSupportedError:
+                pass
+            finally:
+                _was_runtime_environment_set = True
+
 
 % for func in functions:
 <%

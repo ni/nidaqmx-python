@@ -27,10 +27,16 @@ def test___shipping_example___run___no_errors(example_path: Path, system):
                 pytest.skip(
                     f"Device {device_name} does not have physical channel {physical_channel_name}"
                 )
-    if example_path.name == "ci_pulse_freq.py":
+    if example_path.name == "read_pulse_freq.py":
         pytest.skip("Example times out if there is no signal.")
+    if example_path.name == "voltage_acq_int_clk_dig_start_ref.py":
+        pytest.skip("Example times out if there is no trigger signal.")
     if re.search(r"\binput\(|\bKeyboardInterrupt\b", example_source):
         pytest.skip("Example waits for keyboard input.")
+    if re.search(r"\bmatplotlib\b", example_source):
+        pytest.skip("Example plots waveform.")
+    if re.search(r"\bnptdms\b", example_source):
+        pytest.skip("Example performs TDMS logging.")
     if example_path.name == "nidaqmx_warnings.py":
         # Ignore warnings from this example.
         context_manager: contextlib.AbstractContextManager = warnings.catch_warnings(record=True)

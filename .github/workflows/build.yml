@@ -19,7 +19,7 @@ jobs:
       - name: Set up Poetry
         uses: Gr1N/setup-poetry@v8
         with:
-          poetry-version: "1.4.0"
+          poetry-version: "1.8.3"
       - name: Check Poetry version
         run: poetry --version
       - name: Install dependencies
@@ -29,10 +29,14 @@ jobs:
       - name: Run linters
         run: |
           poetry run ni-python-styleguide lint
-      - name: Run mypy
+      - name: Run mypy (Linux)
         run: |
           poetry run mypy generated/nidaqmx
           poetry run mypy tests
+      - name: Run mypy (Windows)
+        run: |
+          poetry run mypy generated/nidaqmx --platform win32
+          poetry run mypy tests --platform win32
       - name: Generate ni-daqmx files
         run: |
           rm -fr generated/nidaqmx
