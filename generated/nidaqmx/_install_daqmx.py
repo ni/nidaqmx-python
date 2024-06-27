@@ -360,6 +360,8 @@ def _is_distribution_supported() -> None:
         dist_name_and_version = dist_name + " " + dist_version
 
         download_url, latest_version, release, supported_os = _get_driver_details("Linux")
+        if supported_os is None:
+            raise ValueError("supported_os cannot be None")
 
         # Check if the platform is one of the supported ones
         if dist_name_and_version in supported_os:
