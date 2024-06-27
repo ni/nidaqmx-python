@@ -404,7 +404,7 @@ def _install_daqmx_driver():
             user_response = _upgrade_daqmx_user_confirmation(
                 latest_version, installed_version, download_url, release
             )
-        if installed_version is None or installed_version and user_response:
+        if installed_version is None or (installed_version and user_response):
             if platform == "Linux":
                 _install_daqmx_driver_linux_core(download_url, release)
             else:
