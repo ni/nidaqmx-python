@@ -23,8 +23,8 @@ elif sys.platform.startswith("linux"):
     import distro
 
     from nidaqmx._linux_installation_commands import (
-        get_linux_installation_commands,
         LINUX_COMMANDS,
+        get_linux_installation_commands,
     )
 
 _logger = logging.getLogger(__name__)
@@ -370,7 +370,6 @@ def _is_distribution_supported() -> None:
         raise NotImplementedError("This function is only supported on Linux.")
 
 
-
 def _install_daqmx_driver():
     """
     Install the NI-DAQmx driver.
@@ -392,10 +391,10 @@ def _install_daqmx_driver():
         raise click.ClickException(
             f"The 'installdriver' command is supported only on Windows and Linux."
         )
-    
+
     installed_version = _get_daqmx_installed_version()
     download_url, latest_version, release, supported_os = _get_driver_details(platform)
-    
+
     if not download_url:
         raise click.ClickException(f"Failed to fetch the download url.")
     if not release:
