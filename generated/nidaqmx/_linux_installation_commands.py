@@ -58,6 +58,9 @@ _YUM_INSTALL_COMMANDS = [
 _DEBIAN_DAQMX_VERSION_COMMAND = ["dpkg", "-l", "ni-daqmx"]
 _RPM_DAQMX_VERSION_COMMAND = ["rpm", "-q", "ni-daqmx"]
 
+ class GenericException(Exception):
+    pass
+
 @dataclass
 class DistroInfo:
     get_distro_version: Callable[[str], str]
@@ -83,7 +86,7 @@ def get_linux_installation_commands(
 
     """
     if dist_name not in LINUX_COMMANDS:
-        raise click.ClickException(f"Unsupported distribution '{dist_name}'")
+        raise GenericException(f"Unsupported distribution '{dist_name}'")
 
     commands_info = LINUX_COMMANDS[dist_name]
     version = commands_info.get_distro_version(dist_version)
