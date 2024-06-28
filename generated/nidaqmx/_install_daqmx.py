@@ -104,9 +104,12 @@ def _get_daqmx_installed_version() -> Optional[str]:
                 version_match = re.search(r"ni-daqmx-(\d+\.\d+\.\d+)", query_output)
             else:
                 raise click.ClickException(f"Unsupported distribution '{distribution}'")
-            installed_version = version_match.group(1)
-            _logger.info("Found installed NI-DAQmx version: %s", installed_version)
-            return installed_version
+            if version_match is None:
+                return None
+            else:
+                installed_version = version_match.group(1)
+                _logger.info("Found installed NI-DAQmx version: %s", installed_version)
+                return installed_version
 
         except subprocess.CalledProcessError as e:
             _logger.info("Failed to get installed NI-DAQmx version.", exc_info=True)
