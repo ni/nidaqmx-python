@@ -2679,7 +2679,7 @@ class GrpcStubInterpreter(BaseInterpreter):
         return response.voltage, response.current
 
     def read_raw(self, task, num_samps_per_chan, timeout, read_array):
-        _validate_array_dtype(read_array, numpy.generic)
+        _validate_array_dtype(read_array, numpy.uint8)
         response = self._invoke(
             self._client.ReadRaw,
             grpc_types.ReadRawRequest(

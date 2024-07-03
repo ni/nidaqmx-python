@@ -1488,6 +1488,13 @@ enums = {
                 'documentation': {
                     'description': ' '
                 },
+                'name': 'NEEDS_USB_SUPER_SPEED',
+                'value': -209889
+            },
+            {
+                'documentation': {
+                    'description': ' '
+                },
                 'name': 'REMOTE_SENSE',
                 'value': -209888
             },
@@ -16501,6 +16508,14 @@ enums = {
                 },
                 'name': 'TEST_SCALE_MODULE',
                 'value': 16181
+            },
+            {
+                'documentation': {
+                    'description': 'mioDAQ.'
+                },
+                'name': 'MIO_DAQ',
+                'python_name': 'MIODAQ',
+                'value': 16182
             },
             {
                 'documentation': {

@@ -13827,9 +13827,9 @@ functions = {
                 'direction': 'out',
                 'is_optional_in_python': False,
                 'name': 'logicFamily',
-                'python_data_type': 'int',
+                'python_data_type': 'LogicFamily',
                 'python_description': '',
-                'python_type_annotation': 'int',
+                'python_type_annotation': 'nidaqmx.constants.LogicFamily',
                 'type': 'int32'
             }
         ],
@@ -19462,30 +19462,53 @@ functions = {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'fillMode',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
                 'coerced': True,
+                'ctypes_data_type': 'numpy.generic',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'readArrayVoltage',
+                'python_data_type': 'object',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -19494,8 +19517,11 @@ functions = {
             },
             {
                 'coerced': True,
+                'ctypes_data_type': 'numpy.generic',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'readArrayCurrent',
+                'python_data_type': 'object',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -19503,26 +19529,38 @@ functions = {
                 'type': 'int16[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
                 'name': 'arraySizeInSamps',
+                'python_data_type': 'int',
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32',
         'timeout_error': 'DAQmxErrorSamplesNotYetAvailable'
     },
@@ -19530,29 +19568,52 @@ functions = {
         'calling_convention': 'StdCall',
         'parameters': [
             {
+                'ctypes_data_type': 'ctypes.TaskHandle',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'task',
+                'python_data_type': 'TaskHandle',
+                'python_description': '',
+                'python_type_annotation': 'TaskHandle',
                 'type': 'TaskHandle'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'numSampsPerChan',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_double',
                 'direction': 'in',
+                'is_optional_in_python': False,
                 'name': 'timeout',
+                'python_data_type': 'float',
+                'python_description': '',
+                'python_type_annotation': 'float',
                 'type': 'float64'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'in',
                 'enum': 'GroupBy',
+                'is_optional_in_python': False,
                 'name': 'fillMode',
+                'python_data_type': 'FillMode',
+                'python_description': '',
+                'python_type_annotation': 'nidaqmx.constants.FillMode',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'readArrayVoltage',
+                'python_data_type': 'float',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -19560,8 +19621,11 @@ functions = {
                 'type': 'float64[]'
             },
             {
+                'ctypes_data_type': 'numpy.float64',
                 'direction': 'out',
+                'is_list': True,
                 'name': 'readArrayCurrent',
+                'python_data_type': 'float',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInSamps'
@@ -19569,26 +19633,38 @@ functions = {
                 'type': 'float64[]'
             },
             {
+                'ctypes_data_type': 'ctypes.c_uint32',
                 'direction': 'in',
                 'name': 'arraySizeInSamps',
+                'python_data_type': 'int',
                 'type': 'uInt32'
             },
             {
+                'ctypes_data_type': 'ctypes.c_int',
                 'direction': 'out',
+                'is_optional_in_python': False,
                 'name': 'sampsPerChanRead',
+                'python_data_type': 'int',
+                'python_description': '',
+                'python_type_annotation': 'int',
                 'return_on_error_key': 'ni-samps-per-chan-read',
                 'type': 'int32'
             },
             {
+                'ctypes_data_type': 'c_bool32',
                 'direction': 'in',
                 'hardcoded_value': 'nullptr',
                 'include_in_proto': False,
+                'is_optional_in_python': False,
                 'name': 'reserved',
                 'pointer': True,
+                'python_data_type': 'bool',
+                'python_description': '',
+                'python_type_annotation': 'bool',
                 'type': 'bool32'
             }
         ],
-        'python_codegen_method': 'no',
+        'python_codegen_method': 'CustomCode',
         'returns': 'int32',
         'timeout_error': 'DAQmxErrorSamplesNotYetAvailable'
     },
@@ -19686,15 +19762,15 @@ functions = {
                 'type': 'float64'
             },
             {
-                'ctypes_data_type': 'numpy.generic',
+                'ctypes_data_type': 'numpy.uint8',
                 'direction': 'out',
                 'has_explicit_buffer_size': True,
                 'is_list': True,
                 'is_optional_in_python': False,
                 'name': 'readArray',
-                'python_data_type': 'dynamic',
+                'python_data_type': 'int',
                 'python_description': '',
-                'python_type_annotation': 'List[dynamic]',
+                'python_type_annotation': 'List[int]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInBytes'
