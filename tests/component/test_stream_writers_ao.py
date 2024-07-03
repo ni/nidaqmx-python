@@ -20,7 +20,7 @@ def _volts_to_codes(volts: float, max_code: int = 32767, max_voltage: float = 10
     return int(volts * max_code / max_voltage)
 
 
-VOLTAGE_EPSILON = 1e-3
+VOLTAGE_EPSILON = 1e-2
 # NOTE: You can't scale from volts to codes correctly without knowing the internal calibration
 # constants. The internal reference has a healthy amount of overrange to ensure we can calibrate to
 # device specifications. I've used 10.1 volts above to approximate that, but 100mv of accuracy is
