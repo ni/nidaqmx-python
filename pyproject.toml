@@ -50,6 +50,7 @@ tzlocal = "^5.0"
 python-decouple = ">=3.8"
 click = ">=8.0.0"
 distro = { version = ">=1.9.0", platform = "linux" }
+requests = ">=2.25.0"
 
 
 [tool.poetry.extras]
