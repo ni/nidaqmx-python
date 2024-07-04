@@ -19762,15 +19762,15 @@ functions = {
                 'type': 'float64'
             },
             {
-                'ctypes_data_type': 'numpy.uint8',
+                'ctypes_data_type': 'numpy.generic',
                 'direction': 'out',
                 'has_explicit_buffer_size': True,
                 'is_list': True,
                 'is_optional_in_python': False,
                 'name': 'readArray',
-                'python_data_type': 'int',
+                'python_data_type': 'dynamic',
                 'python_description': '',
-                'python_type_annotation': 'List[int]',
+                'python_type_annotation': 'List[dynamic]',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'arraySizeInBytes'
