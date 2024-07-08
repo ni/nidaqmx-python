@@ -517,6 +517,7 @@ class ProductCategory(Enum):
     FIELD_DAQ = 16151  #: FieldDAQ.
     TEST_SCALE_CHASSIS = 16180  #: TestScale chassis.
     TEST_SCALE_MODULE = 16181  #: TestScale I/O module.
+    MIODAQ = 16182  #: mioDAQ.
     UNKNOWN = 12588  #: Unknown category.
 
 
