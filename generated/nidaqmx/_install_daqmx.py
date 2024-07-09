@@ -11,7 +11,7 @@ import subprocess
 import sys
 import tempfile
 import traceback
-import urllib.request
+import requests
 import zipfile
 from typing import Generator, List, Optional, Tuple
 
@@ -237,7 +237,10 @@ def _install_daqmx_driver_windows_core(download_url: str) -> None:
     try:
         with _multi_access_temp_file() as temp_file:
             _logger.info("Downloading Driver to %s", temp_file)
-            urllib.request.urlretrieve(download_url, temp_file)
+            response = requests.get(download_url)
+            response.raise_for_status()
+            with open(temp_file, 'wb') as f:
+                f.write(response.content)
             _logger.info("Installing NI-DAQmx")
             subprocess.run([temp_file], shell=True, check=True)
     except subprocess.CalledProcessError as e:
@@ -245,7 +248,7 @@ def _install_daqmx_driver_windows_core(download_url: str) -> None:
         raise click.ClickException(
             f"An error occurred while installing the NI-DAQmx driver. Command returned non-zero exit status '{e.returncode}'."
         ) from e
-    except urllib.error.URLError as e:
+    except requests.RequestException as e:
         _logger.info("Failed to download NI-DAQmx driver.", exc_info=True)
         raise click.ClickException(f"Failed to download the NI-DAQmx driver.\nDetails: {e}") from e
     except Exception as e:
@@ -262,7 +265,10 @@ def _install_daqmx_driver_linux_core(download_url: str, release: str) -> None:
         try:
             with _multi_access_temp_file(suffix=".zip") as temp_file:
                 _logger.info("Downloading Driver to %s", temp_file)
-                urllib.request.urlretrieve(download_url, temp_file)
+                response = requests.get(download_url)
+                response.raise_for_status()
+                with open(temp_file, 'wb') as f:
+                    f.write(response.content)
 
                 with tempfile.TemporaryDirectory() as temp_folder:
                     directory_to_extract_to = temp_folder
@@ -292,7 +298,7 @@ def _install_daqmx_driver_linux_core(download_url: str, release: str) -> None:
             raise click.ClickException(
                 f"An error occurred while installing the NI-DAQmx driver. Command returned non-zero exit status '{e.returncode}'."
             ) from e
-        except urllib.error.URLError as e:
+        except requests.RequestException as e:
             _logger.info("Failed to download NI-DAQmx driver.", exc_info=True)
             raise click.ClickException(
                 f"Failed to download the NI-DAQmx driver.\nDetails: {e}"
