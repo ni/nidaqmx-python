@@ -1,11 +1,15 @@
+from typing import Callable
+
 from nidaqmx import Task
 from nidaqmx.constants import WatchdogAOExpirState, WatchdogCOExpirState
 from nidaqmx.system import Device
-from nidaqmx.system.watchdog import AOExpirationState, COExpirationState
+from nidaqmx.system.watchdog import AOExpirationState, COExpirationState, WatchdogTask
 
 
 def test___watchdog_task___cfg_watchdog_ao_expir_states___no_error(
-    generate_watchdog_task: Task, sim_9189_device: Device, sim_9263_device: Device
+    generate_watchdog_task: Callable[..., WatchdogTask],
+    sim_9189_device: Device,
+    sim_9263_device: Device,
 ):
     watchdog_task = generate_watchdog_task(f"{sim_9189_device.name}", timeout=0.8)
     expir_states = [
@@ -36,7 +40,9 @@ def test___watchdog_task___cfg_watchdog_ao_expir_states___no_error(
 
 
 def test___watchdog_task___cfg_watchdog_co_expir_states___no_error(
-    generate_watchdog_task: Task, sim_9189_device: Device, sim_9401_device: Device
+    generate_watchdog_task: Callable[..., WatchdogTask],
+    sim_9189_device: Device,
+    sim_9401_device: Device,
 ):
     watchdog_task = generate_watchdog_task(f"{sim_9189_device.name}", timeout=0.8)
     expir_states = [
@@ -62,7 +68,9 @@ def test___watchdog_task___cfg_watchdog_co_expir_states___no_error(
 
 
 def test___watchdog_task___clear_expiration___no_error(
-    generate_watchdog_task: Task, sim_9189_device: Device, sim_9263_device: Device
+    generate_watchdog_task: Callable[..., WatchdogTask],
+    sim_9189_device: Device,
+    sim_9263_device: Device,
 ):
     watchdog_task = generate_watchdog_task(f"{sim_9189_device.name}", timeout=0.8)
     expir_states = [

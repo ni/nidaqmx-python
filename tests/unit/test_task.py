@@ -43,7 +43,7 @@ def test___init_with_grpc_options___select_interpreter_called_with_grpc_options(
     task = Task(grpc_options=grpc_options)
 
     with task:
-        nidaqmx.utils._select_interpreter.mock.assert_called_with(grpc_options)
+        nidaqmx.utils._select_interpreter.mock.assert_called_with(grpc_options)  # type: ignore[attr-defined]
 
 
 def test___init_with_name_and_grpc_options___specified_name_saved(
