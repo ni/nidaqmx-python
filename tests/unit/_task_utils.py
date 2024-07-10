@@ -1,7 +1,6 @@
 """Task helper functions."""
 
-from collections.abc import Iterable
-from typing import Dict
+from typing import Dict, Iterable
 from unittest.mock import Mock
 
 from pytest_mock import MockerFixture
