@@ -136,7 +136,7 @@ def test___ai_task___get_string_property___returns_default_value(ai_task: Task):
     raises=DaqError,
 )
 def test___ai_task___set_string_property___returns_assigned_value(ai_task: Task):
-    ai_task.in_stream.logging_file_path = "TestData.tdms"
+    ai_task.in_stream.logging_file_path = "TestData.tdms"  # type: ignore[assignment] # https://github.com/ni/nidaqmx-python/issues/613
 
     assert ai_task.in_stream.logging_file_path == pathlib.Path("TestData.tdms")
 
@@ -156,7 +156,7 @@ def test___ai_task___set_string_property_none___returns_default_value(ai_task: T
     raises=DaqError,
 )
 def test___ai_task___reset_string_property___returns_default_value(ai_task: Task):
-    ai_task.in_stream.logging_file_path = "TestData.tdms"
+    ai_task.in_stream.logging_file_path = "TestData.tdms"  # type: ignore[assignment] # https://github.com/ni/nidaqmx-python/issues/613
 
     del ai_task.in_stream.logging_file_path
 

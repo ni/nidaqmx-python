@@ -6,6 +6,7 @@ import numpy
 import pytest
 
 import nidaqmx
+import nidaqmx.system
 from nidaqmx.constants import LineGrouping
 from nidaqmx.stream_writers import DigitalMultiChannelWriter, DigitalSingleChannelWriter
 from nidaqmx.utils import flatten_channel_string

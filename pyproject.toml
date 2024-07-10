@@ -127,6 +127,7 @@ requires = ["poetry>=1.2"]
 build-backend = "poetry.masonry.api"
 
 [tool.mypy]
+files = "generated/,tests/"
 check_untyped_defs = true
 namespace_packages = true
 plugins = "numpy.typing.mypy_plugin"

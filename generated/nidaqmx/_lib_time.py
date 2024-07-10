@@ -4,6 +4,7 @@ import ctypes
 import functools
 from datetime import timezone
 from datetime import datetime as std_datetime
+from datetime import tzinfo as dt_tzinfo
 from hightime import datetime as ht_datetime
 from hightime import timedelta as ht_timedelta
 from typing import Optional, Union
@@ -54,7 +55,7 @@ class AbsoluteTime(ctypes.Structure):
 
         return AbsoluteTime(lsb=lsb, msb=seconds_since_1904)
 
-    def to_datetime(self, tzinfo: Optional[timezone] = None) -> ht_datetime:
+    def to_datetime(self, tzinfo: Optional[dt_tzinfo] = None) -> ht_datetime:
         total_yoctoseconds = int(
             round(AbsoluteTime._YS_PER_S * self.lsb / AbsoluteTime._NUM_SUBSECONDS)
         )

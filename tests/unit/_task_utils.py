@@ -1,6 +1,6 @@
 """Task helper functions."""
 
-from typing import Dict, Sequence
+from typing import Dict, Iterable
 from unittest.mock import Mock
 
 from pytest_mock import MockerFixture
@@ -42,7 +42,7 @@ def register_event_handler(mocker: MockerFixture, task: Task, event_type: _TaskE
 
 
 def register_event_handlers(
-    mocker: MockerFixture, task: Task, event_types: Sequence[_TaskEventType]
+    mocker: MockerFixture, task: Task, event_types: Iterable[_TaskEventType]
 ) -> Dict[_TaskEventType, Mock]:
     """Register mock event handlers and return a dictionary mapping event name -> handler."""
     return {

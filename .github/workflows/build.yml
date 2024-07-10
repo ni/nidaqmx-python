@@ -27,16 +27,11 @@ jobs:
           python -m pip install --upgrade pip
           poetry install --all-extras
       - name: Run linters
-        run: |
-          poetry run ni-python-styleguide lint
+        run: poetry run ni-python-styleguide lint
       - name: Run mypy (Linux)
-        run: |
-          poetry run mypy generated/nidaqmx
-          poetry run mypy tests
+        run: poetry run mypy
       - name: Run mypy (Windows)
-        run: |
-          poetry run mypy generated/nidaqmx --platform win32
-          poetry run mypy tests --platform win32
+        run: poetry run mypy --platform win32
       - name: Generate ni-daqmx files
         run: |
           rm -fr generated/nidaqmx

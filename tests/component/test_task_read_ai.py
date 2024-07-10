@@ -3,6 +3,7 @@ from typing import List
 import pytest
 
 import nidaqmx
+import nidaqmx.system
 from nidaqmx.constants import AcquisitionType
 
 

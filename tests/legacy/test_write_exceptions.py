@@ -4,6 +4,7 @@ import numpy
 import pytest
 
 import nidaqmx
+import nidaqmx.stream_writers
 from nidaqmx.constants import AcquisitionType, BusType, RegenerationMode
 from nidaqmx.error_codes import DAQmxErrors
 

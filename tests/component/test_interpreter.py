@@ -38,7 +38,7 @@ def test___grpc_channel_with_errors___get_error_string___returns_failed_to_retri
 @pytest.mark.grpc_only(reason="Tests gRPC-specific error message lookup")
 @pytest.mark.parametrize("error_code", list(_ERROR_MESSAGES))
 def test___error_code_with_hardcoded_error_message___get_error_string___returns_hardcoded_error_message(
-    interpreter: BaseInterpreter, error_code: int
+    interpreter: BaseInterpreter, error_code: DAQmxErrors
 ) -> None:
     error_message = interpreter.get_error_string(error_code)
 

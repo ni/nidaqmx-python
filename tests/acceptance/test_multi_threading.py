@@ -114,7 +114,7 @@ def test___multiple_tasks___get_set_float_and_string_properties___no_errors(
     futures = []
     for i in range(num_tasks):
         task = generate_task()
-        task.ai_channels.add_ai_voltage_chan(
+        channel = task.ai_channels.add_ai_voltage_chan(
             multi_threading_test_devices[i].ai_physical_chans[0].name, min_val=-1.0, max_val=1.0
         )
         tasks.append(task)
@@ -123,7 +123,7 @@ def test___multiple_tasks___get_set_float_and_string_properties___no_errors(
                 _get_set_property_thread_main,
                 start_barrier,
                 stop_semaphore,
-                task,
+                channel,
                 "ai_max",
                 [1.0, 2.0, 5.0, 10.0],
             )
@@ -132,7 +132,7 @@ def test___multiple_tasks___get_set_float_and_string_properties___no_errors(
                 _get_set_property_thread_main,
                 start_barrier,
                 stop_semaphore,
-                task,
+                channel,
                 "description",
                 ["ABC", "DEF", "GHI", "JKL"],
             )

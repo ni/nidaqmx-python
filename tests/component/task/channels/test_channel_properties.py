@@ -7,7 +7,7 @@ from nidaqmx.constants import (
     RTDType,
     VoltageUnits,
 )
-from nidaqmx.scale import Scale
+from nidaqmx.system.storage import PersistedScale
 from nidaqmx.task.channels import AIChannel, CIChannel
 
 
@@ -211,7 +211,7 @@ def test___channel_with_scale___get_scale_property___shared_interpreter(
 
 @pytest.mark.scale_name("polynomial_scale")
 def test___channel_with_scale___set_scale_property___returns_assigned_scale(
-    ai_voltage_chan_with_scale: AIChannel, persisted_scale: Scale
+    ai_voltage_chan_with_scale: AIChannel, persisted_scale: PersistedScale
 ):
     ai_voltage_chan_with_scale.ai_custom_scale = persisted_scale.load()
 

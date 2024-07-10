@@ -29,7 +29,11 @@ through our [GitHub issues page](http://github.com/ni/nidaqmx-python/issues).
    > The codegen scripts require Python 3.8 or later.
 8. Run all the regression tests again (including the tests you just added), and confirm that they all
 pass.
-9. Send a GitHub Pull Request to the main repository's master branch. GitHub Pull Requests are the
+9. Run `poetry run ni-python-styleguide lint` to check that the updated code follows NI's Python coding
+conventions. If this reports errors, first run `poetry run ni-python-styleguide fix` in order to sort
+imports and format the code with Black, then manually fix any remaining errors.
+10. Run `poetry run mypy` to statically type-check the updated code.
+11. Send a GitHub Pull Request to the main repository's master branch. GitHub Pull Requests are the
 expected method of code collaboration on this project.
 
 # Testing

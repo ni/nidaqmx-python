@@ -6,7 +6,7 @@ import contextlib
 import pathlib
 from concurrent.futures import ThreadPoolExecutor
 from enum import Enum
-from typing import TYPE_CHECKING, Generator, List
+from typing import TYPE_CHECKING, Callable, Generator, List
 
 import pytest
 
@@ -454,7 +454,7 @@ def init_kwargs(request):
 
 
 @pytest.fixture(scope="function")
-def task(request, generate_task):
+def task(request, generate_task) -> nidaqmx.Task:
     """Gets a task instance.
 
     The closure of task objects will be done by this fixture once the test is complete.
@@ -466,7 +466,7 @@ def task(request, generate_task):
 
 
 @pytest.fixture(scope="function")
-def generate_task(init_kwargs):
+def generate_task(init_kwargs) -> Generator[Callable[..., nidaqmx.Task], None, None]:
     """Gets a factory function which can be used to generate new tasks.
 
     The closure of task objects will be done by this fixture once the test is complete.
@@ -475,14 +475,14 @@ def generate_task(init_kwargs):
     """
     with contextlib.ExitStack() as stack:
 
-        def _create_task(task_name=""):
+        def _create_task(task_name: str = ""):
             return stack.enter_context(nidaqmx.Task(new_task_name=task_name, **init_kwargs))
 
         yield _create_task
 
 
 @pytest.fixture(scope="function")
-def persisted_task(request, system: nidaqmx.system.System):
+def persisted_task(request, system: nidaqmx.system.System) -> nidaqmx.system.storage.PersistedTask:
     """Gets the persisted task based on the task name."""
     task_name = _get_marker_value(request, "task_name")
 
@@ -497,7 +497,9 @@ def persisted_task(request, system: nidaqmx.system.System):
 
 
 @pytest.fixture(scope="function")
-def persisted_scale(request, system: nidaqmx.system.System):
+def persisted_scale(
+    request, system: nidaqmx.system.System
+) -> nidaqmx.system.storage.PersistedScale:
     """Gets the persisted scale based on the scale name."""
     scale_name = _get_marker_value(request, "scale_name")
     if scale_name in system.scales:
@@ -510,7 +512,9 @@ def persisted_scale(request, system: nidaqmx.system.System):
 
 
 @pytest.fixture(scope="function")
-def persisted_channel(request, system: nidaqmx.system.System):
+def persisted_channel(
+    request, system: nidaqmx.system.System
+) -> nidaqmx.system.storage.PersistedChannel:
     """Gets the persisted channel based on the channel name."""
     channel_name = _get_marker_value(request, "channel_name")
 
@@ -535,7 +539,9 @@ def watchdog_task(request, sim_6363_device, generate_watchdog_task) -> nidaqmx.s
 
 
 @pytest.fixture(scope="function")
-def generate_watchdog_task(init_kwargs):
+def generate_watchdog_task(
+    init_kwargs,
+) -> Generator[Callable[..., nidaqmx.system.WatchdogTask], None, None]:
     """Gets a factory function which can be used to generate new watchdog tasks.
 
     The closure of task objects will be done by this fixture once the test is complete.
@@ -544,7 +550,7 @@ def generate_watchdog_task(init_kwargs):
     """
     with contextlib.ExitStack() as stack:
 
-        def _create_task(device_name, task_name="", timeout=0.5):
+        def _create_task(device_name: str, task_name: str = "", timeout: float = 0.5):
             return stack.enter_context(
                 nidaqmx.system.WatchdogTask(device_name, task_name, timeout, **init_kwargs)
             )
