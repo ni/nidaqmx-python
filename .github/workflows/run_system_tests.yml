@@ -38,8 +38,8 @@ jobs:
           done
         if: always() && runner.os != 'Windows'
       - name: Upload test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: test_results
+          name: test_results_system_${{ matrix.configuration }}
           path: test_results/*.xml
         if: always()
