@@ -6,6 +6,7 @@ import numpy
 import pytest
 
 import nidaqmx
+import nidaqmx.system
 from nidaqmx.constants import AcquisitionType
 from nidaqmx.stream_writers import CounterWriter
 from nidaqmx.types import CtrFreq, CtrTick, CtrTime

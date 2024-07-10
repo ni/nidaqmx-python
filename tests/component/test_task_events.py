@@ -7,6 +7,7 @@ from typing import List
 import pytest
 
 import nidaqmx
+import nidaqmx.system
 from nidaqmx.constants import AcquisitionType, EveryNSamplesEventType, Signal
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import DaqResourceWarning, RpcError

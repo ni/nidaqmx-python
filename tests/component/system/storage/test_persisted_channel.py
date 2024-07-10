@@ -1,6 +1,7 @@
 import pytest
 
 import nidaqmx
+import nidaqmx.system
 from nidaqmx.system.storage import PersistedChannel
 
 

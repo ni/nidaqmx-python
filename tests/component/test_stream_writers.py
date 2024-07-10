@@ -4,6 +4,7 @@ import numpy
 import pytest
 
 import nidaqmx
+import nidaqmx.system
 from nidaqmx.stream_writers import AnalogMultiChannelWriter, AnalogSingleChannelWriter
 
 

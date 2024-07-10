@@ -7,6 +7,7 @@ import numpy.typing
 import pytest
 
 import nidaqmx
+import nidaqmx.system
 from nidaqmx.stream_readers import (
     AnalogMultiChannelReader,
     AnalogSingleChannelReader,

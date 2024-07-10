@@ -2,6 +2,7 @@ import numpy
 import pytest
 
 import nidaqmx
+import nidaqmx.system
 
 
 @pytest.fixture(params=[1, 2])

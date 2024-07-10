@@ -4,6 +4,7 @@ import numpy
 import pytest
 
 import nidaqmx
+import nidaqmx.system
 from nidaqmx.constants import AcquisitionType
 
 # With a simulated X Series, setting ai_max/min to +/-2.5 V coerces the hardware range
