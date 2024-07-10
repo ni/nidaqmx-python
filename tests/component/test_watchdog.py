@@ -1,6 +1,5 @@
 from typing import Callable
 
-from nidaqmx import Task
 from nidaqmx.constants import WatchdogAOExpirState, WatchdogCOExpirState
 from nidaqmx.system import Device
 from nidaqmx.system.watchdog import AOExpirationState, COExpirationState, WatchdogTask
