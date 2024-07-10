@@ -32,8 +32,7 @@ pass.
 9. Run `poetry run ni-python-styleguide lint` to check that the updated code follows NI's Python coding
 conventions. If this reports errors, first run `poetry run ni-python-styleguide fix` in order to sort
 imports and format the code with Black, then manually fix any remaining errors.
-10. Run `poetry run mypy generated/nidaqmx` and `poetry run mypy tests` to statically type-check the
-updated code.
+10. Run `poetry run mypy` to statically type-check the updated code.
 11. Send a GitHub Pull Request to the main repository's master branch. GitHub Pull Requests are the
 expected method of code collaboration on this project.
 
