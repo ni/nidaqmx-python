@@ -1,4 +1,5 @@
 # Changelog
+* [1.1.0](#110)
 * [1.0.0](#100)
 * [0.9.0](#090)
 * [0.8.0](#080)
@@ -19,13 +20,43 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.1.0
+* ### Merged Pull Requests
+    * ...
+
+* ### Resolved Issues
+    * ...
+
+* ### Known Issues
+    * ...
+
 ## 1.0.0
 * ### Merged Pull Requests
-    *  ...
+    * Add support for strain calibration (#468 #469)
+    * Add support for DAQmx calibration info properties (#473)
+    * Add support for WaitForValidTimestamp to nidaqmx-python (#479)
+    * Fix raw-read Function Names Spacing Issue (#492)
+    * Update libtime (#504)
+    * Update AI Bridge Default Argument Values (#509)
+    * Improve error reporting in some cases (#550)
+    * Automate Driver Install Experience within nidaqmx Module (#512 #582)
+    * Rewrote examples (#566 #575 #573 #581 #583 #587 #570 #589 #592 #594)
+
+* ### Resolved Issues
+    * [38: No spacing in raw-read function names](https://github.com/ni/nidaqmx-python/issues/38)
+    * [384: Support internationalization](https://github.com/ni/nidaqmx-python/issues/384)
+    * [392: Indexing PhysicalChannelCollection fails for slices and strings containing a list/range of channels](https://github.com/ni/nidaqmx-python/issues/392)
+    * [482: Default argument values for bridge create channel functions are unusable](https://github.com/ni/nidaqmx-python/issues/482)
+
 * ### Major Changes
     * Add support for strain calibration (offset nulling and shunt calibration)
+    * Add support for DAQmx calibration info properties
+    * Add support for WaitForValidTimestamp
     * Fix naming issues:
         * Rename `ShuntCalSelect.AAND_B` to `A_AND_B`.
+    * Automate Driver Install Experience within nidaqmx Module
+    * Update libtime to accept time before 1970
+
 * ### Known Issues
     * ...
 
@@ -72,7 +103,7 @@ All notable changes to this project will be documented in this file.
         * Added multiple test cases to improve the overall test coverage.
 
 * ### Known Issues
-   * Comparisons between DAQmx object instances do not take gRPC remoting into account. For example, `Device("Dev1")` refers to a local device and `Device("Dev1", grpc_options=...)` refers to a remote device, but they are considered equal. Likewise, two instances of `Device("Dev1", grpc_options=...)` with different remote hosts are considered equal. 
+   * Comparisons between DAQmx object instances do not take gRPC remoting into account. For example, `Device("Dev1")` refers to a local device and `Device("Dev1", grpc_options=...)` refers to a remote device, but they are considered equal. Likewise, two instances of `Device("Dev1", grpc_options=...)` with different remote hosts are considered equal.
 
 ## 0.7.0
 
