@@ -32,15 +32,7 @@ All notable changes to this project will be documented in this file.
 
 ## 1.0.0
 * ### Merged Pull Requests
-    * Add support for strain calibration (#468 #469)
-    * Add support for DAQmx calibration info properties (#473)
-    * Add support for WaitForValidTimestamp to nidaqmx-python (#479)
-    * Fix raw-read Function Names Spacing Issue (#492)
-    * Update libtime (#504)
-    * Update AI Bridge Default Argument Values (#509)
-    * Improve error reporting in some cases (#550)
-    * Automate Driver Install Experience within nidaqmx Module (#512 #582)
-    * Rewrote examples (#566 #575 #573 #581 #583 #587 #570 #589 #592 #594)
+    * [Full changelog: 0.9.0...1.0.0](https://github.com/ni/nidaqmx-python/compare/0.9.0...1.0.0)
 
 * ### Resolved Issues
     * [38: No spacing in raw-read function names](https://github.com/ni/nidaqmx-python/issues/38)
