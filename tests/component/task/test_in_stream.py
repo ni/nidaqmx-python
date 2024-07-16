@@ -1,3 +1,4 @@
+import pathlib
 import time
 
 import numpy
@@ -5,7 +6,7 @@ import pytest
 
 import nidaqmx
 import nidaqmx.system
-from nidaqmx.constants import AcquisitionType
+from nidaqmx.constants import AcquisitionType, LoggingMode, LoggingOperation
 
 # With a simulated X Series, setting ai_max/min to +/-2.5 V coerces the hardware range
 # to +/-5 V and generates a noisy sine wave with range +/-2.5 V (raw: about +/-16383).
@@ -16,6 +17,12 @@ SINE_RAW_MAX = 16383
 SINE_RAW_MIN = -16384
 FULLSCALE_RAW_MAX = 36767
 FULLSCALE_RAW_MIN = -36768
+
+
+@pytest.fixture()
+def ai_task(task, sim_6363_device):
+    task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
+    return task
 
 
 @pytest.fixture(params=[1, 2, 3])
@@ -186,3 +193,29 @@ def test___odd_sized_array___read_into___returns_whole_samples_and_clears_paddin
     assert samples_read == 9
     assert (SINE_RAW_MIN <= data[:-1]).all() and (data[:-1] <= SINE_RAW_MAX).all()
     assert data[-1] == 0  # not FULLSCALE_RAW_MIN
+
+
+def test___valid_path___configure_logging___returns_assigned_values(ai_task: nidaqmx.Task):
+    expected_file_path = "Testing File.tdms"
+    expected_group_name = "Task"
+    expected_logging_mode = LoggingMode.LOG_AND_READ
+    expected_logging_operation = LoggingOperation.CREATE_OR_REPLACE
+
+    ai_task.in_stream.configure_logging(
+        expected_file_path,
+        logging_mode=expected_logging_mode,
+        group_name=expected_group_name,
+        operation=expected_logging_operation,
+    )
+
+    assert ai_task.in_stream.logging_file_path == pathlib.Path(expected_file_path)
+    assert ai_task.in_stream.logging_mode == expected_logging_mode
+    assert ai_task.in_stream.logging_tdms_group_name == expected_group_name
+    assert ai_task.in_stream.logging_tdms_operation == expected_logging_operation
+
+
+def test___valid_path___start_new_file___returns_assigned_value(ai_task: nidaqmx.Task):
+    expected_file_path = "Testing File.tdms"
+    ai_task.in_stream.start_new_file(expected_file_path)
+
+    assert ai_task.in_stream.logging_file_path == pathlib.Path(expected_file_path)
