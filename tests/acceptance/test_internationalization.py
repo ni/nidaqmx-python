@@ -5,11 +5,11 @@ from typing import Any, Dict, List, Optional, Union
 import pytest
 
 from nidaqmx._lib import lib_importer
+from nidaqmx.constants import LoggingMode, LoggingOperation
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import DaqError
 from nidaqmx.system import Device
 from nidaqmx.task import Task
-from nidaqmx.constants import LoggingMode, LoggingOperation
 
 
 @pytest.fixture()
@@ -95,7 +95,12 @@ def test___supported_encoding___configure_logging___returns_assigned_values(
     expected_logging_mode = LoggingMode.LOG_AND_READ
     expected_logging_operation = LoggingOperation.CREATE_OR_REPLACE
 
-    ai_task.in_stream.configure_logging(file_path, logging_mode=expected_logging_mode, group_name=expected_group_name, operation=expected_logging_operation)
+    ai_task.in_stream.configure_logging(
+        file_path,
+        logging_mode=expected_logging_mode,
+        group_name=expected_group_name,
+        operation=expected_logging_operation,
+    )
 
     assert ai_task.in_stream.logging_file_path == pathlib.Path(file_path)
     assert ai_task.in_stream.logging_mode == expected_logging_mode
