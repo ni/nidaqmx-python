@@ -17,7 +17,6 @@ class TestWriteExceptions:
     loopback routes on the device.
     """
 
-    @pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.2 or later")
     def test_overwrite(self, task, real_x_series_device):
         """Test to validate overwrite functionality."""
         # USB streaming is very tricky.
@@ -68,7 +67,6 @@ class TestWriteExceptions:
         # need to get into the nitty gritty device details on how much.
         assert timeout_exception.value.samps_per_chan_written > 0
 
-    @pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.2 or later")
     def test_overwrite_during_prime(self, task, real_x_series_device):
         """Test to validate overwrite functionality during prime."""
         # USB streaming is very tricky.

@@ -38,9 +38,6 @@ def test___self_test_device___no_errors(sim_6363_device: Device) -> None:
     sim_6363_device.self_test_device()
 
 
-@pytest.mark.grpc_xfail(
-    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
-)
 def test___restore_last_ext_cal_const___no_errors(sim_6363_device: Device) -> None:
     sim_6363_device.restore_last_ext_cal_const()
 

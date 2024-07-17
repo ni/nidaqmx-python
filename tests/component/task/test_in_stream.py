@@ -196,10 +196,6 @@ def test___odd_sized_array___read_into___returns_whole_samples_and_clears_paddin
     assert data[-1] == 0  # not FULLSCALE_RAW_MIN
 
 
-@pytest.mark.grpc_xfail(
-    reason="AB#2393811: DAQmxGetLoggingFilePath returns kErrorNULLPtr (-200604) when called from grpc-device.",
-    raises=DaqError,
-)
 def test___valid_path___configure_logging___returns_assigned_values(ai_task: nidaqmx.Task):
     expected_file_path = "Testing File.tdms"
     expected_group_name = "Task"
@@ -219,10 +215,6 @@ def test___valid_path___configure_logging___returns_assigned_values(ai_task: nid
     assert ai_task.in_stream.logging_tdms_operation == expected_logging_operation
 
 
-@pytest.mark.grpc_xfail(
-    reason="AB#2393811: DAQmxGetLoggingFilePath returns kErrorNULLPtr (-200604) when called from grpc-device.",
-    raises=DaqError,
-)
 def test___valid_path___start_new_file___returns_assigned_value(ai_task: nidaqmx.Task):
     expected_file_path = "Testing File.tdms"
     ai_task.in_stream.start_new_file(expected_file_path)

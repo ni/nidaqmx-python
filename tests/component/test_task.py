@@ -61,9 +61,6 @@ def test___tasks_with_different_names___hash___not_equal(generate_task):
     assert hash(task1) != hash(task2)
 
 
-@pytest.mark.grpc_xfail(
-    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
-)
 @pytest.mark.device_name("bridgeTester")
 @pytest.mark.parametrize("skip_unsupported_channels", [True, False])
 def test___arguments_specified___perform_bridge_offset_nulling_cal___no_errors(
@@ -74,9 +71,6 @@ def test___arguments_specified___perform_bridge_offset_nulling_cal___no_errors(
     )
 
 
-@pytest.mark.grpc_xfail(
-    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
-)
 @pytest.mark.device_name("bridgeTester")
 def test___default_arguments___perform_bridge_offset_nulling_cal___no_errors(
     ai_bridge_task: nidaqmx.Task,
@@ -85,9 +79,6 @@ def test___default_arguments___perform_bridge_offset_nulling_cal___no_errors(
 
 
 @pytest.mark.device_name("bridgeTester")
-@pytest.mark.grpc_xfail(
-    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
-)
 @pytest.mark.parametrize(
     "shunt_resistor_value, shunt_resistor_location, shunt_resistor_select, shunt_resistor_source, bridge_resistance, skip_unsupported_channels",
     [
@@ -122,9 +113,6 @@ def test___perform_bridge_shunt_cal___no_errors(
 
 
 @pytest.mark.device_name("bridgeTester")
-@pytest.mark.grpc_xfail(
-    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
-)
 def test___perform_bridge_shunt_cal_default___no_errors(
     ai_bridge_task: nidaqmx.Task,
 ) -> None:
@@ -136,9 +124,6 @@ def test___perform_bridge_shunt_cal_default___no_errors(
 
 
 @pytest.mark.device_name("bridgeTester")
-@pytest.mark.grpc_xfail(
-    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
-)
 @pytest.mark.parametrize(
     "shunt_resistor_value, shunt_resistor_location, shunt_resistor_select, shunt_resistor_source, skip_unsupported_channels",
     [
@@ -171,9 +156,6 @@ def test___perform_strain_shunt_cal___no_errors(
 
 
 @pytest.mark.device_name("bridgeTester")
-@pytest.mark.grpc_xfail(
-    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
-)
 def test___perform_strain_shunt_cal_default___no_errors(
     ai_strain_gage_task: nidaqmx.Task,
 ) -> None:
@@ -184,9 +166,6 @@ def test___perform_strain_shunt_cal_default___no_errors(
             raise
 
 
-@pytest.mark.grpc_xfail(
-    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
-)
 @pytest.mark.device_name("cDAQ1Mod2")
 @pytest.mark.parametrize("skip_unsupported_channels", [True, False])
 def test___arguments_specified___perform_thrmcpl_lead_offset_nulling_cal___no_errors(
@@ -197,9 +176,6 @@ def test___arguments_specified___perform_thrmcpl_lead_offset_nulling_cal___no_er
     )
 
 
-@pytest.mark.grpc_xfail(
-    reason="Requires NI gRPC Device Server version 2.5 or later", raises=RpcError
-)
 @pytest.mark.device_name("cDAQ1Mod2")
 def test___default_arguments___perform_thrmcpl_lead_offset_nulling_cal___no_errors(
     ai_thermocouple_task: nidaqmx.Task,
