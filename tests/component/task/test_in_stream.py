@@ -7,7 +7,6 @@ import pytest
 import nidaqmx
 import nidaqmx.system
 from nidaqmx.constants import AcquisitionType, LoggingMode, LoggingOperation
-from nidaqmx.errors import DaqError
 
 # With a simulated X Series, setting ai_max/min to +/-2.5 V coerces the hardware range
 # to +/-5 V and generates a noisy sine wave with range +/-2.5 V (raw: about +/-16383).

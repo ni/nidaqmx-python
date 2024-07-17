@@ -7,7 +7,6 @@ import nidaqmx
 import nidaqmx.stream_readers
 from nidaqmx.constants import AcquisitionType, BusType, Level, TaskMode
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.errors import RpcError
 
 
 class TestReadExceptions:

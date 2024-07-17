@@ -1,6 +1,3 @@
-import pytest
-
-from nidaqmx.errors import RpcError
 from nidaqmx.system import Device
 
 

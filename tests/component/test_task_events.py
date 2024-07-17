@@ -10,7 +10,7 @@ import nidaqmx
 import nidaqmx.system
 from nidaqmx.constants import AcquisitionType, EveryNSamplesEventType, Signal
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.errors import DaqResourceWarning, RpcError
+from nidaqmx.errors import DaqResourceWarning
 from nidaqmx.task import _TaskEventType
 from tests._event_utils import (
     DoneEventObserver,

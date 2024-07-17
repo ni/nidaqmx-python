@@ -3,7 +3,6 @@ import pathlib
 import pytest
 
 from nidaqmx.constants import OverwriteMode, ReadRelativeTo
-from nidaqmx.errors import DaqError
 from nidaqmx.task import Task
 
 

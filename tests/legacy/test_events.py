@@ -6,7 +6,6 @@ import time
 import pytest
 
 from nidaqmx.constants import AcquisitionType
-from nidaqmx.errors import RpcError
 from tests.helpers import generate_random_seed
 
 
