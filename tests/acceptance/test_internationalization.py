@@ -47,10 +47,6 @@ def test___supported_encoding___reset_nonexistent_device___returns_error_with_de
     assert exc_info.value.error_code == DAQmxErrors.INVALID_DEVICE_ID
 
 
-@pytest.mark.grpc_xfail(
-    reason="AB#2393811: DAQmxGetLoggingFilePath returns kErrorNULLPtr (-200604) when called from grpc-device.",
-    raises=DaqError,
-)
 @pytest.mark.parametrize(
     "file_path, supported_encodings",
     [
@@ -71,10 +67,6 @@ def test___supported_encoding___logging_file_path___returns_assigned_value(
     assert ai_task.in_stream.logging_file_path == pathlib.Path(file_path)
 
 
-@pytest.mark.grpc_xfail(
-    reason="AB#2393811: DAQmxGetLoggingFilePath returns kErrorNULLPtr (-200604) when called from grpc-device.",
-    raises=DaqError,
-)
 @pytest.mark.parametrize(
     "file_path, supported_encodings",
     [
@@ -96,10 +88,6 @@ def test___supported_encoding___configure_logging___returns_assigned_values(
     assert ai_task.in_stream.logging_file_path == pathlib.Path(file_path)
 
 
-@pytest.mark.grpc_xfail(
-    reason="AB#2393811: DAQmxGetLoggingFilePath returns kErrorNULLPtr (-200604) when called from grpc-device.",
-    raises=DaqError,
-)
 @pytest.mark.parametrize(
     "file_path, supported_encodings",
     [

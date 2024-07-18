@@ -770,7 +770,6 @@ class TestPowerRead(TestDAQmxIOBase):
         # We aren't validating data, just assuring that it doesn't fail.
         values_read = task.read(number_of_samples_per_channel=10)  # noqa: F841
 
-    @pytest.mark.grpc_xfail(reason="Requires NI gRPC Device Server version 2.2 or later")
     @pytest.mark.parametrize("seed", [generate_random_seed()])
     def test_mixed_chans_with_power(self, task, sim_ts_power_device, sim_ts_voltage_device, seed):
         """Test to validate mixed channels with power."""

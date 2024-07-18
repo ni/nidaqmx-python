@@ -6,7 +6,6 @@ import time
 import pytest
 
 from nidaqmx.constants import AcquisitionType
-from nidaqmx.errors import RpcError
 from tests.helpers import generate_random_seed
 
 
@@ -16,9 +15,6 @@ class TestEvents:
     This validate the NI-DAQmx events functionality in the Python NI-DAQmx API.
     """
 
-    @pytest.mark.grpc_xfail(
-        reason="Requires NI gRPC Device Server version 2.2 or later", raises=RpcError
-    )
     @pytest.mark.parametrize("seed", [generate_random_seed()])
     def test_every_n_samples_event(self, task, sim_6363_device, seed):
         """Test for validating every n samples event."""
