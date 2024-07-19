@@ -445,7 +445,7 @@ def test___digital_multi_channel_writer___write_one_sample_multi_line_jagged___u
     _start_do_task(task, is_port=True, num_chans=task.number_of_channels)
     writer = DigitalMultiChannelWriter(task.out_stream)
     num_channels = task.number_of_channels
-    samples_to_write = 256
+    samples_to_write = 0xA5
 
     # "sweep" up to the final value, the only one we'll validate
     for datum in _get_digital_data(num_channels * 32, samples_to_write):
