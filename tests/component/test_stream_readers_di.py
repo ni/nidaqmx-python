@@ -9,10 +9,7 @@ import pytest
 import nidaqmx
 import nidaqmx.system
 from nidaqmx.constants import LineGrouping
-from nidaqmx.stream_readers import (
-    DigitalMultiChannelReader,
-    DigitalSingleChannelReader,
-)
+from nidaqmx.stream_readers import DigitalMultiChannelReader, DigitalSingleChannelReader
 from nidaqmx.utils import flatten_channel_string
 
 
@@ -397,6 +394,25 @@ def test___digital_multi_channel_reader___read_one_sample_multi_line___returns_v
 
     assert [_bool_array_to_int(sample[:, 0]) for sample in data] == _get_expected_digital_data(
         num_channels, samples_to_read
+    )
+
+
+def test___digital_multi_channel_reader___read_one_sample_multi_line_jagged___returns_valid_samples(
+    di_multi_channel_port_uint32_task: nidaqmx.Task,
+) -> None:
+    reader = DigitalMultiChannelReader(di_multi_channel_port_uint32_task.in_stream)
+    num_channels = di_multi_channel_port_uint32_task.number_of_channels
+    samples_to_read = 256
+    sample = numpy.full((num_channels, 32), False, dtype=numpy.bool_)
+
+    data = [
+        _read_and_copy(reader.read_one_sample_multi_line, sample) for _ in range(samples_to_read)
+    ]
+
+    assert [
+        [_bool_array_to_int(sample[chan, :]) for chan in range(num_channels)] for sample in data
+    ] == _get_expected_digital_port_data_sample_major(
+        di_multi_channel_port_uint32_task, samples_to_read
     )
 
 
