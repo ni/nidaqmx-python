@@ -1,25 +1,51 @@
-===========  =================================================================================================================================
-Info         Contains a Python API for interacting with NI-DAQmx. See `GitHub <https://github.com/ni/nidaqmx-python/>`_ for the latest source.
-Author       National Instruments
-===========  =================================================================================================================================
++------------+-----------------------------------------------------------+
+| **Info**   | Contains a Python API for interacting with NI-DAQmx. See  | 
+|            | `GitHub <https://github.com/ni/nidaqmx-python/>`_ for the |
+|            | latest source.                                            |
++------------+-----------------------------------------------------------+
+| **Author** | National Instruments                                      |
++------------+-----------------------------------------------------------+
+
+.. contents:: Table of Contents
+   :depth: 1
+   :backlinks: none
 
 About
 =====
 
 The **nidaqmx** package contains an API (Application Programming Interface)
-for interacting with the NI-DAQmx driver. The package is implemented in Python.
-The package is implemented as a complex,
-highly object-oriented wrapper around the NI-DAQmx C API using the
+for interacting with the NI-DAQmx driver.
+
+Documentation
+-------------
+
+You can find the latest API documentation for the **nidaqmx** package on
+`Read the Docs <http://nidaqmx-python.readthedocs.io/en/latest>`_.
+
+Refer to the `NI-DAQmx Help <http://digital.ni.com/express.nsf/bycode/exagg4>`_
+for API-agnostic information about NI-DAQmx or measurement concepts. NI-DAQmx
+Help also installs locally with the full version of NI-DAQmx.
+
+Implementation
+--------------
+
+The package is implemented in Python as a complex, highly object-oriented
+wrapper around the NI-DAQmx C API using the
 `ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
 
+Supported NI-DAQmx Driver Versions
+----------------------------------
+
 **nidaqmx** supports all versions of the NI-DAQmx driver that ships with the C
-API. The C API is included in any version of the driver that supports it. The
-**nidaqmx** package does not require installation of the C header files.
+API. The **nidaqmx** package does not require installation of the C header
+files.
 
 Some functions in the **nidaqmx** package may be unavailable with earlier
-versions of the NI-DAQmx driver. Visit the
-`ni.com/downloads <http://www.ni.com/downloads/>`_ to upgrade your version of
-NI-DAQmx.
+versions of the NI-DAQmx driver. Refer to the Installation section for details
+on how to install the latest version of the NI-DAQmx driver.
+
+Operating System Support
+------------------------
 
 **nidaqmx** supports Windows and Linux operating systems where the NI-DAQmx
 driver is supported. Refer to
@@ -27,43 +53,53 @@ driver is supported. Refer to
 for which versions of the driver support your hardware on a given operating
 system.
 
+Python Version Support
+----------------------
+
 **nidaqmx** supports CPython 3.8+ and PyPy3.
 
 Installation
 ============
 
-Running **nidaqmx** requires NI-DAQmx to be installed. Visit
-`ni.com/downloads <http://www.ni.com/downloads/>`_ to download the latest
+**nidaqmx** can be installed with `pip <http://pypi.python.org/pypi/pip>`_ from
+`pypi <https://pypi.org/project/nidaqmx/>`_::
+
+  $ python -m pip install nidaqmx
+
+Automatic Driver Installation
+-----------------------------
+
+Running **nidaqmx** requires NI-DAQmx to be installed. The **nidaqmx** module
+ships with a command-line interface (CLI) to streamline the installation
+experience. You can install the NI-DAQmx driver using the following command::
+
+  $ python -m nidaqmx installdriver
+
+On Windows, this command will download an online streaming installer from
+ni.com. On Linux, this will download the repository registration package for
+your Linux distribution and install the driver using your package manager. For
+more details on what versions are being installed, refer to the
+`_installer_metadata.json <https://github.com/ni/nidaqmx-python/blob/master/generated/nidaqmx/_installer_metadata.json>`_
+on GitHub that is distributed with the **nidaqmx** package.
+
+Manual Driver Installation
+--------------------------
+
+Visit `ni.com/downloads <http://www.ni.com/downloads/>`_ to download the latest
 version of NI-DAQmx. None of the recommended **Additional items** are required
 for **nidaqmx** to function, and they can be removed to minimize installation
 size. It is recommended you continue to install the **NI Certificates** package
 to allow your Operating System to trust NI built binaries, improving your
 software and hardware installation experience.
 
-**nidaqmx** can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
-
-  $ python -m pip install nidaqmx
-
-Similar Packages
-================
-
-There are similar packages available that also provide NI-DAQmx functionality in
-Python:
-
-- `daqmx <https://pypi.org/project/daqmx/>`_
-  (`slightlynybbled/daqmx on GitHub <https://github.com/slightlynybbled/daqmx>`_)
-  provides an abstraction of NI-DAQmx in the ``ni`` module.
-
-- PyLibNIDAQmx (`pearu/pylibnidaqmx on GitHub <https://github.com/pearu/pylibnidaqmx>`_)
-  provides an abstraction of NI-DAQmx in the ``nidaqmx`` module, which collides
-  with this package's module name.
-
 Getting Started
 ===============
-In order to use the **nidaqmx** package, you must have at least one DAQ (`Data Acquisition <https://www.ni.com/en/shop/data-acquisition.html>`_)
-device installed on your system. Both physical and simulated devices are supported. The examples below use an X Series DAQ device
-(e.g.: PXIe-6363, PCIe-6363, or USB-6363).
-You can use **NI MAX** or **NI Hardware Configuration Utility** to verify and configure your devices.
+In order to use the **nidaqmx** package, you must have at least one DAQ
+(`Data Acquisition <https://www.ni.com/en/shop/data-acquisition.html>`_) device
+installed on your system. Both physical and simulated devices are supported. The
+examples below use an X Series DAQ device (e.g.: PXIe-6363, PCIe-6363, or
+USB-6363). You can use **NI MAX** or **NI Hardware Configuration Utility** to
+verify and configure your devices.
 
 Finding and configuring device name in **NI MAX**:
 
@@ -79,8 +115,18 @@ Finding and configuring device name in **NI Hardware Configuration Utility**:
   :align: center
   :width: 800px
 
-Tasks in NI-DAQmx
------------------
+Python Examples
+===============
+
+You can find a variety of examples in the GitHub repository in the
+`nidaqmx-python examples <https://github.com/ni/nidaqmx-python/tree/master/examples>`_
+directory.
+
+Core Concepts in NI-DAQmx
+=========================
+
+Tasks
+-----
 A task is a collection of one or more virtual channels with timing, triggering, and other properties.
 Refer to `NI-DAQmx Task <https://www.ni.com/docs/en-US/bundle/ni-daqmx/page/tasksnidaqmx.html>`_ for more information.
 
@@ -92,8 +138,8 @@ Example code to create a task:
   >>> with nidaqmx.Task() as task:
   ...     pass
 
-Virtual Channels in NI-DAQmx
-----------------------------
+Virtual Channels
+----------------
 Virtual channels, or sometimes referred to generically as channels, are software entities that encapsulate the physical channel
 along with other channel specific information (e.g.: range, terminal configuration, and custom scaling) that formats the data.
 A physical channel is a terminal or pin at which you can measure or generate an analog or digital signal. A single physical channel
@@ -307,8 +353,6 @@ Following is an example of using an **nidaqmx.system.System** object.
   >>> isinstance(phys_chan.ai_term_cfgs[0], Enum)
   True
 
-You can find more examples in `nidaqmx-python examples <https://github.com/ni/nidaqmx-python/tree/master/examples>`_.
-
 Bugs / Feature Requests
 =======================
 
@@ -334,19 +378,6 @@ Please include **all** of the following information when opening an issue:
   `this KB article <http://digital.ni.com/express.nsf/bycode/ex8amn>`_
   to determine the version of NI-DAQmx you have installed.
 - The operating system and version, for example Windows 7, CentOS 7.2, ...
-
-Documentation
-=============
-
-Documentation is available `here <http://nidaqmx-python.readthedocs.io>`_.
-
-Additional Documentation
-========================
-
-Refer to the `NI-DAQmx Help <http://digital.ni.com/express.nsf/bycode/exagg4>`_
-for API-agnostic information about NI-DAQmx or measurement concepts.
-
-NI-DAQmx Help installs only with the full version of NI-DAQmx.
 
 License
 =======
