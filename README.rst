@@ -13,36 +13,36 @@
 About
 =====
 
-The **nidaqmx** package contains an API (Application Programming Interface)
-for interacting with the NI-DAQmx driver.
+The **nidaqmx** package allows you to develop instrumentation, acquisition, and 
+control applications with NI data acquisition (DAQ) devices in Python.
 
 Documentation
 -------------
 
 You can find the latest API documentation for the **nidaqmx** package on
-`Read the Docs <http://nidaqmx-python.readthedocs.io/en/latest>`_.
+`Read the Docs <http://nidaqmx-python.readthedocs.io/en/stable>`_.
 
-Refer to the `NI-DAQmx Help <http://digital.ni.com/express.nsf/bycode/exagg4>`_
-for API-agnostic information about NI-DAQmx or measurement concepts. NI-DAQmx
-Help also installs locally with the full version of NI-DAQmx.
+Refer to the
+`NI-DAQmx User Manual <https://www.ni.com/docs/en-US/bundle/ni-daqmx/>`_ for
+an overview of NI-DAQmx, key concepts, and measuremnent fundamentals. The
+NI-DAQmx Help also installs locally with the full version of NI-DAQmx. Refer to
+`this Knowledge Base (KB) <http://digital.ni.com/express.nsf/bycode/exagg4>`_
+for more information.
 
 Implementation
 --------------
 
-The package is implemented in Python as a complex, highly object-oriented
-wrapper around the NI-DAQmx C API using the
-`ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
+The package is implemented in Python as an object-oriented wrapper around the
+NI-DAQmx C API using the
+`ctypes <https://docs.python.org/3/library/ctypes.html>`_ Python library.
 
 Supported NI-DAQmx Driver Versions
 ----------------------------------
 
-**nidaqmx** supports all versions of the NI-DAQmx driver that ships with the C
-API. The **nidaqmx** package does not require installation of the C header
-files.
-
-Some functions in the **nidaqmx** package may be unavailable with earlier
-versions of the NI-DAQmx driver. Refer to the Installation section for details
-on how to install the latest version of the NI-DAQmx driver.
+**nidaqmx** supports all versions of NI-DAQmx. Some functions in the **nidaqmx**
+package may be unavailable with earlier versions of the NI-DAQmx driver. Refer
+to the Installation section for details on how to install the latest version of
+the NI-DAQmx driver.
 
 Operating System Support
 ------------------------
@@ -61,8 +61,8 @@ Python Version Support
 Installation
 ============
 
-**nidaqmx** can be installed with `pip <http://pypi.python.org/pypi/pip>`_ from
-`pypi <https://pypi.org/project/nidaqmx/>`_::
+You can use `pip <http://pypi.python.org/pypi/pip>`_ to download **nidaqmx** from
+`PyPI <https://pypi.org/project/nidaqmx/>`_ and install it::
 
   $ python -m pip install nidaqmx
 
@@ -75,12 +75,9 @@ experience. You can install the NI-DAQmx driver using the following command::
 
   $ python -m nidaqmx installdriver
 
-On Windows, this command will download an online streaming installer from
-ni.com. On Linux, this will download the repository registration package for
-your Linux distribution and install the driver using your package manager. For
-more details on what versions are being installed, refer to the
-`_installer_metadata.json <https://github.com/ni/nidaqmx-python/blob/master/generated/nidaqmx/_installer_metadata.json>`_
-on GitHub that is distributed with the **nidaqmx** package.
+On Windows, this command will download and launch an online streaming installer
+from ni.com. On Linux, this will download the repository registration package
+for your Linux distribution and install the driver using your package manager.
 
 Manual Driver Installation
 --------------------------
@@ -120,9 +117,14 @@ Python Examples
 
 You can find a variety of examples in the GitHub repository in the
 `nidaqmx-python examples <https://github.com/ni/nidaqmx-python/tree/master/examples>`_
-directory.
+directory. For best results, use the examples corresponding to the version of
+**nidaqmx** that you are using. For example, if you are using version 1.0.0,
+check out the
+`examples directory in the 1.0.0 tag <https://github.com/ni/nidaqmx-python/tree/1.0.0/examples>`_.
+Newer examples may demonstate features that are not available in older versions
+of **nidaqmx**.
 
-Core Concepts in NI-DAQmx
+Key Concepts in NI-DAQmx
 =========================
 
 Tasks
