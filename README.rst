@@ -24,7 +24,7 @@ You can find the latest API documentation for the **nidaqmx** package on
 
 Refer to the
 `NI-DAQmx User Manual <https://www.ni.com/docs/en-US/bundle/ni-daqmx/>`_ for
-an overview of NI-DAQmx, key concepts, and measuremnent fundamentals. The
+an overview of NI-DAQmx, key concepts, and measurement fundamentals. The
 NI-DAQmx Help also installs locally with the full version of NI-DAQmx. Refer to
 `this Knowledge Base (KB) <http://digital.ni.com/express.nsf/bycode/exagg4>`_
 for more information.
@@ -121,7 +121,7 @@ directory. For best results, use the examples corresponding to the version of
 **nidaqmx** that you are using. For example, if you are using version 1.0.0,
 check out the
 `examples directory in the 1.0.0 tag <https://github.com/ni/nidaqmx-python/tree/1.0.0/examples>`_.
-Newer examples may demonstate features that are not available in older versions
+Newer examples may demonstrate features that are not available in older versions
 of **nidaqmx**.
 
 Key Concepts in NI-DAQmx
