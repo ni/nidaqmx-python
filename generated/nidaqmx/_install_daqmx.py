@@ -337,8 +337,8 @@ def _upgrade_daqmx_user_confirmation(
 
     """
     _logger.debug("Entering _upgrade_daqmx_user_confirmation")
-    installed_parts: Tuple[int, ...] = _parse_version(installed_version)
-    latest_parts: Tuple[int, ...] = _parse_version(latest_version)
+    installed_parts = _parse_version(installed_version)
+    latest_parts = _parse_version(latest_version)
     if installed_parts >= latest_parts:
         print(
             f"Installed NI-DAQmx version ({installed_version}) is up to date. (Expected {latest_version} ({release}) or newer.)"
