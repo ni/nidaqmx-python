@@ -328,9 +328,8 @@ def _ask_user_confirmation(user_message: str) -> bool:
 
 
 def _upgrade_daqmx_user_confirmation(
-    latest_version: str,
     installed_version: str,
-    download_url: str,
+    latest_version: str,
     release: str,
 ) -> bool:
     """
@@ -338,17 +337,31 @@ def _upgrade_daqmx_user_confirmation(
 
     """
     _logger.debug("Entering _upgrade_daqmx_user_confirmation")
-    latest_parts: Tuple[int, ...] = _parse_version(latest_version)
-    installed_parts: Tuple[int, ...] = _parse_version(installed_version)
+    installed_parts = _parse_version(installed_version)
+    latest_parts = _parse_version(latest_version)
     if installed_parts >= latest_parts:
         print(
-            f"Installed NI-DAQmx version ({installed_version}) is up to date. (Expected {latest_version} or newer.)"
+            f"Installed NI-DAQmx version ({installed_version}) is up to date. (Expected {latest_version} ({release}) or newer.)"
         )
         return False
     is_upgrade = _ask_user_confirmation(
-        f"Installed NI-DAQmx version is {installed_version}. Latest version available is {latest_version}. Do you want to upgrade?"
+        f"Installed NI-DAQmx version is {installed_version}. Latest version available is {latest_version} ({release}). Do you want to upgrade?"
     )
     return is_upgrade
+
+
+def _fresh_install_daqmx_user_confirmation(
+    latest_version: str,
+    release: str,
+) -> bool:
+    """
+    Confirm with the user and return the user response.
+
+    """
+    _logger.debug("Entering _fresh_install_daqmx_user_confirmation")
+    return _ask_user_confirmation(
+        f"Latest NI-DAQmx version available is {latest_version} ({release}). Do you want to install?"
+    )
 
 
 def _is_distribution_supported() -> None:
@@ -401,18 +414,23 @@ def _install_daqmx_driver():
         )
 
     installed_version = _get_daqmx_installed_version()
-    download_url, latest_version, release, supported_os = _get_driver_details(platform)
+    download_url, latest_version, release, _ = _get_driver_details(platform)
 
     if not download_url:
         raise click.ClickException(f"Failed to fetch the download url.")
-    if not release:
+    if not release or not latest_version:
         raise click.ClickException(f"Failed to fetch the release version string.")
     else:
-        if installed_version and latest_version:
+        if installed_version:
             user_response = _upgrade_daqmx_user_confirmation(
-                latest_version, installed_version, download_url, release
+                installed_version, latest_version, release
             )
-        if installed_version is None or (installed_version and user_response):
+        else:
+            user_response = _fresh_install_daqmx_user_confirmation(
+                latest_version, release
+            )
+
+        if user_response:
             if platform == "Linux":
                 _install_daqmx_driver_linux_core(download_url, release)
             else:
