@@ -84,9 +84,18 @@ $ poetry install -E docs
 $ poetry run sphinx-build -b html docs docs\_build
 ```
 
+# Branching Policy
+
+Active development for the next release occurs on the `master` branch. 
+
+During finalization, we create a release branch (e.g. `releases/1.2`) in order to control which changes target the imminent
+release vs. the next release after that. Changes that are intended for both the imminent release and subsequent releases
+should be made in the `master` branch and cherry-picked into the release branch. Changes that only apply to the imminent
+release (such as version numbers) may be made directly in the release branch.
+
 # Release Process
 
-1. Ensure your git `HEAD` is at the latest version of `master` branch with no pending changes.
+1. Ensure your git `HEAD` is at the latest version of the `master` or appropriate `releases/*` branch with no pending changes.
 2. Note the version currently being released by running:
    ```sh
    $ poetry version
