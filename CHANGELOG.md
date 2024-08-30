@@ -42,7 +42,9 @@ All notable changes to this project will be documented in this file.
     * [623: installdriver CLI doesn't prompt or indicate what versions are being downloaded/installed on a clean system](https://github.com/ni/nidaqmx-python/issues/623)
 
 * ### Known Issues
-    * ...
+    * [613: InStream.logging_file_path setter type hint is not effective](https://github.com/ni/nidaqmx-python/issues/613)
+    * [620: InStream.get_channels_buffer_size uses wrong encoding](https://github.com/ni/nidaqmx-python/issues/620)
+    * [621: InStream.get_channels_buffer_size should not be public](https://github.com/ni/nidaqmx-python/issues/621)
 
 ## 1.0.0
 * ### Merged Pull Requests
