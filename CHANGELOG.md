@@ -1,5 +1,6 @@
 # Changelog
 * [1.1.0](#110)
+* [1.0.1](#101)
 * [1.0.0](#100)
 * [0.9.0](#090)
 * [0.8.0](#080)
@@ -26,6 +27,19 @@ All notable changes to this project will be documented in this file.
 
 * ### Resolved Issues
     * ...
+
+* ### Known Issues
+    * ...
+
+## 1.0.1
+* ### Merged Pull Requests
+    * [Full changelog: 1.0.0...1.0.1](https://github.com/ni/nidaqmx-python/compare/1.0.0...1.0.1)
+
+* ### Resolved Issues
+    * [540: Task.wait_for_valid_timestamp doesn't return the timestamp](https://github.com/ni/nidaqmx-python/issues/540)
+    * [606: CERTIFICATE_VERIFY_FAILED occurs when executing installdriver command on Windows system](https://github.com/ni/nidaqmx-python/issues/606)
+    * [615: Onboard device memory overflow](https://github.com/ni/nidaqmx-python/issues/615)
+    * [623: installdriver CLI doesn't prompt or indicate what versions are being downloaded/installed on a clean system](https://github.com/ni/nidaqmx-python/issues/623)
 
 * ### Known Issues
     * ...
