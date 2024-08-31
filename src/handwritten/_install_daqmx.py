@@ -7,13 +7,14 @@ import os
 import pathlib
 import re
 import shutil
-import subprocess
+import subprocess  # nosec: B404
 import sys
 import tempfile
 import traceback
 import requests
 import zipfile
 from typing import Generator, List, Optional, Tuple
+from urllib.parse import urlparse
 
 import click
 
@@ -30,6 +31,7 @@ elif sys.platform.startswith("linux"):
 _logger = logging.getLogger(__name__)
 
 METADATA_FILE = "_installer_metadata.json"
+_NETWORK_TIMEOUT_IN_SECONDS = 60
 
 
 def _parse_version(version: str) -> Tuple[int, ...]:
@@ -96,7 +98,8 @@ def _get_daqmx_installed_version() -> Optional[str]:
             _logger.debug("Checking for installed NI-DAQmx version")
             commands_info = LINUX_COMMANDS[distribution]
             query_command = commands_info.get_daqmx_version
-            query_output = subprocess.run(query_command, stdout=subprocess.PIPE, text=True).stdout
+            # Run the package query command defined by _linux_installation_commands.py.
+            query_output = subprocess.run(query_command, stdout=subprocess.PIPE, text=True).stdout  # nosec: B603
 
             if distribution == "ubuntu":
                 version_match = re.search(r"ii\s+ni-daqmx\s+(\d+\.\d+\.\d+)", query_output)
@@ -233,16 +236,17 @@ def _install_daqmx_driver_windows_core(download_url: str) -> None:
     Download and launch NI-DAQmx Driver installation in an interactive mode
 
     """
-    temp_file = None
+    _validate_download_url(download_url)
     try:
         with _multi_access_temp_file() as temp_file:
             _logger.info("Downloading Driver to %s", temp_file)
-            response = requests.get(download_url)
+            response = requests.get(download_url, timeout=_NETWORK_TIMEOUT_IN_SECONDS)
             response.raise_for_status()
             with open(temp_file, 'wb') as f:
                 f.write(response.content)
             _logger.info("Installing NI-DAQmx")
-            subprocess.run([temp_file], shell=True, check=True)
+            # Run the installer that we just downloaded from https://download.ni.com.
+            subprocess.run([temp_file], shell=True, check=True)  # nosec: B602
     except subprocess.CalledProcessError as e:
         _logger.info("Failed to install NI-DAQmx driver.", exc_info=True)
         raise click.ClickException(
@@ -262,10 +266,11 @@ def _install_daqmx_driver_linux_core(download_url: str, release: str) -> None:
 
     """
     if sys.platform.startswith("linux"):
+        _validate_download_url(download_url)
         try:
             with _multi_access_temp_file(suffix=".zip") as temp_file:
                 _logger.info("Downloading Driver to %s", temp_file)
-                response = requests.get(download_url)
+                response = requests.get(download_url, timeout=_NETWORK_TIMEOUT_IN_SECONDS)
                 response.raise_for_status()
                 with open(temp_file, 'wb') as f:
                     f.write(response.content)
@@ -283,7 +288,10 @@ def _install_daqmx_driver_linux_core(download_url: str, release: str) -> None:
                         directory_to_extract_to, distro.id(), distro.version(), release
                     ):
                         print("\nRunning command:", " ".join(command))
-                        subprocess.run(command, check=True)
+                        # Run the commands defined in
+                        # _linux_installation_commands.py to install the package
+                        # that we just downloaded from https://download.ni.com.
+                        subprocess.run(command, check=True)  # nosec: B603
 
             # Check if the installation was successful
             if not _get_daqmx_installed_version():
@@ -310,6 +318,13 @@ def _install_daqmx_driver_linux_core(download_url: str, release: str) -> None:
             ) from e
     else:
         raise NotImplementedError("This function is only supported on Linux.")
+
+
+def _validate_download_url(download_url: str) -> None:
+    """Velidate that the download URL uses https and points to a trusted site."""
+    parsed_url = urlparse(download_url)
+    if parsed_url.scheme != "https" or parsed_url.netloc != "download.ni.com":
+        raise click.ClickException(f"Unsupported download URL: {download_url}")
 
 
 def _ask_user_confirmation(user_message: str) -> bool:
