@@ -75,6 +75,7 @@ matplotlib = {version=">=3.9.0", python = ">=3.9"}
 nptdms = ">=1.9.0"
 
 [tool.poetry.group.lint.dependencies]
+bandit = { version = ">=1.7", extras = ["toml"] }
 ni-python-styleguide = ">=0.4.1"
 mypy = ">=1.0"
 types-protobuf = "^4.21"
@@ -149,3 +150,8 @@ module = [
   "nidaqmx.*",
 ]
 ignore_missing_imports = true
+
+[tool.bandit]
+skips = [
+  "B101", # assert_used
+]
