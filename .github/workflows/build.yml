@@ -12,7 +12,7 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v4
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           # The codegen scripts require Python 3.8 or later.
           python-version: "3.8"
