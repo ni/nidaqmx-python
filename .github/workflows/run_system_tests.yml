@@ -20,7 +20,7 @@ jobs:
     timeout-minutes: 90
     steps:
       - name: Check out repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Import DAQmx config
         run: C:\nidaqmxconfig\targets\win64U\x64\msvc-14.0\release\nidaqmxconfig.exe --eraseconfig --import tests\max_config\nidaqmxMaxConfig.ini
       - name: Install dependencies

@@ -10,14 +10,14 @@ jobs:
       - ubuntu-latest
     steps:
       - name: Check out repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           # The codegen scripts require Python 3.8 or later.
           python-version: "3.8"
       - name: Set up Poetry
-        uses: Gr1N/setup-poetry@v8
+        uses: Gr1N/setup-poetry@v9
         with:
           poetry-version: "1.8.3"
       - name: Check Poetry version
