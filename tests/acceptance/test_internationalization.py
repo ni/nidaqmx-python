@@ -4,7 +4,7 @@ from typing import Any, Dict, List, Optional, Union
 
 import pytest
 
-from nidaqmx._lib import lib_importer
+from nidaqmx._lib import lib_importer, get_encoding_from_locale
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import DaqError
 from nidaqmx.system import Device
@@ -20,7 +20,7 @@ def ai_task(task, sim_6363_device):
 def _get_encoding(obj: Union[Task, Dict[str, Any]]) -> Optional[str]:
     if getattr(obj, "_grpc_options", None) or (isinstance(obj, dict) and "grpc_options" in obj):
         # gRPC server limited to MBCS encoding
-        return locale.getlocale()[1]
+        return get_encoding_from_locale()
     else:
         return lib_importer.encoding
 
