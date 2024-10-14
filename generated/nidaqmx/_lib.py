@@ -120,7 +120,7 @@ compatibility because uInt32 and void* are the same size for 32-bit applications
 """
 
 
-def get_encoding_from_locale():
+def get_encoding_from_locale() -> str:
     """
     Gets the current locale encoding handling cases where it is unset.
     """

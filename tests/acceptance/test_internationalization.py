@@ -1,4 +1,3 @@
-import locale
 import pathlib
 from typing import Any, Dict, List, Optional, Union
 
