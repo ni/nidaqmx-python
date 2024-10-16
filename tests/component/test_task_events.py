@@ -613,7 +613,7 @@ def test___event_callback_that_raises_exceptions___run_finite_acquisition___exce
 
 
 def _exception_matches(e1: BaseException, e2: BaseException) -> bool:
-    return type(e1) == type(e2) and e1.args == e2.args
+    return type(e1) is type(e2) and e1.args == e2.args
 
 
 def _get_exception(record: LogRecord) -> BaseException:
