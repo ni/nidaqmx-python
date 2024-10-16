@@ -80,7 +80,7 @@ nptdms = ">=1.9.0"
 bandit = { version = ">=1.7", extras = ["toml"] }
 ni-python-styleguide = ">=0.4.1"
 mypy = ">=1.0"
-types-protobuf = "^4.21"
+types-protobuf = ">=4.21"
 types-requests = ">=2.25.0"
 grpc-stubs = "^1.53"
 
