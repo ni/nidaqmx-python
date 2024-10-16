@@ -2447,13 +2447,13 @@ virtualenv = ">=20.26.6"
 
 [[package]]
 name = "types-protobuf"
-version = "4.25.0.20240417"
+version = "5.28.0.20240924"
 description = "Typing stubs for protobuf"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "types-protobuf-4.25.0.20240417.tar.gz", hash = "sha256:c34eff17b9b3a0adb6830622f0f302484e4c089f533a46e3f147568313544352"},
-    {file = "types_protobuf-4.25.0.20240417-py3-none-any.whl", hash = "sha256:e9b613227c2127e3d4881d75d93c93b4d6fd97b5f6a099a0b654a05351c8685d"},
+    {file = "types-protobuf-5.28.0.20240924.tar.gz", hash = "sha256:d181af8a256e5a91ce8d5adb53496e880efd9144c7d54483e3653332b60296f0"},
+    {file = "types_protobuf-5.28.0.20240924-py3-none-any.whl", hash = "sha256:5cecf612ccdefb7dc95f7a51fb502902f20fc2e6681cd500184aaa1b3931d6a7"},
 ]
 
 [[package]]
@@ -2573,4 +2573,4 @@ grpc = ["grpcio", "protobuf"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "0c9aa6f412f1e3bd9bf1d07e776ee108db87c11a1c695a15a3b423035d8f8e12"
+content-hash = "21117d099dd86a9804ed665204bda77ad25089e925caf11d8462b5f0378f2b79"
