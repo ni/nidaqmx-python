@@ -1,5 +1,6 @@
 # Changelog
 * [1.1.0](#110)
+* [1.0.2](#102)
 * [1.0.1](#101)
 * [1.0.0](#100)
 * [0.9.0](#090)
@@ -27,6 +28,16 @@ All notable changes to this project will be documented in this file.
 
 * ### Resolved Issues
     * ...
+
+* ### Known Issues
+    * ...
+
+## 1.0.2
+* ### Merged Pull Requests
+    * [Full changelog: 1.0.1...1.0.2](https://github.com/ni/nidaqmx-python/compare/1.0.1...1.0.2)
+
+* ### Resolved Issues
+    * [644: nidaqmx doesn't support Python 3.13+](https://github.com/ni/nidaqmx-python/issues/644)
 
 * ### Known Issues
     * ...
