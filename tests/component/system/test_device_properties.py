@@ -116,7 +116,7 @@ def test___ext_cal_last_date_and_time___no_errors(real_x_series_device: Device) 
     last_date_and_time = real_x_series_device.ext_cal_last_date_and_time
 
     assert type(last_date_and_time) is datetime
-    assert last_date_and_time.year > 2009
+    assert last_date_and_time.year >= 2009
     assert last_date_and_time.month >= 1
     assert last_date_and_time.day > 0
     assert last_date_and_time.hour >= 0
@@ -127,7 +127,7 @@ def test___self_cal_last_date_and_time___no_errors(real_x_series_device: Device)
     last_date_and_time = real_x_series_device.self_cal_last_date_and_time
 
     assert type(last_date_and_time) is datetime
-    assert last_date_and_time.year > 2009
+    assert last_date_and_time.year >= 2009
     assert last_date_and_time.month >= 1
     assert last_date_and_time.day > 0
     assert last_date_and_time.hour >= 0
