@@ -18,14 +18,15 @@ from nidaqmx.constants import (
     ExcitationVoltageOrCurrent, FilterResponse, FilterType,
     ForceIEPESensorSensitivityUnits, ForceUnits, FrequencyUnits, Impedance1,
     InputDataTransferCondition, LVDTSensitivityUnits, LengthUnits,
-    PowerIdleOutputBehavior, PowerOutputState, PressureUnits, RTDType,
-    RVDTSensitivityUnits, RawDataCompressionType, ResistanceConfiguration,
-    ResistanceUnits, ResolutionType, ScaleType, Sense, SensorPowerCfg,
-    SensorPowerType, ShuntCalSelect, SoundPressureUnits, SourceSelection,
-    StrainGageBridgeType, StrainGageRosetteMeasurementType,
-    StrainGageRosetteType, StrainUnits, TemperatureUnits,
-    TerminalConfiguration, ThermocoupleType, TorqueUnits, UsageTypeAI,
-    VelocityIEPESensorSensitivityUnits, VelocityUnits, VoltageUnits)
+    PowerIdleOutputBehavior, PowerOutputState, PowerUnits, PressureUnits,
+    RTDType, RVDTSensitivityUnits, RawDataCompressionType,
+    ResistanceConfiguration, ResistanceUnits, ResolutionType, ScaleType,
+    Sense, SensorPowerCfg, SensorPowerType, ShuntCalSelect,
+    SoundPressureUnits, SourceSelection, StrainGageBridgeType,
+    StrainGageRosetteMeasurementType, StrainGageRosetteType, StrainUnits,
+    TemperatureUnits, TerminalConfiguration, ThermocoupleType, TorqueUnits,
+    UsageTypeAI, VelocityIEPESensorSensitivityUnits, VelocityUnits,
+    VoltageUnits)
 
 
 class AIChannel(Channel):
@@ -881,6 +882,90 @@ class AIChannel(Channel):
     @ai_bridge_units.deleter
     def ai_bridge_units(self):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x2f92)
+
+    @property
+    def ai_calculated_power_current_max(self):
+        """
+        float: Specifies the current maximum value you expect to
+            measure. This value is in the units you specify with a units
+            property. When you query this property, it returns the
+            coerced current maximum value that the device can measure
+            with the current settings.
+        """
+
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31ef)
+        return val
+
+    @ai_calculated_power_current_max.setter
+    def ai_calculated_power_current_max(self, val):
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31ef, val)
+
+    @ai_calculated_power_current_max.deleter
+    def ai_calculated_power_current_max(self):
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31ef)
+
+    @property
+    def ai_calculated_power_current_min(self):
+        """
+        float: Specifies the current minimum value you expect to
+            measure. This value is in the units you specify with a units
+            property. When you query this property, it returns the
+            coerced current minimum value that the device can measure
+            with the current settings.
+        """
+
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31f0)
+        return val
+
+    @ai_calculated_power_current_min.setter
+    def ai_calculated_power_current_min(self, val):
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31f0, val)
+
+    @ai_calculated_power_current_min.deleter
+    def ai_calculated_power_current_min(self):
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31f0)
+
+    @property
+    def ai_calculated_power_voltage_max(self):
+        """
+        float: Specifies the voltage maximum value you expect to
+            measure. This value is in the units you specify with a units
+            property. When you query this property, it returns the
+            coerced voltage maximum value that the device can measure
+            with the current settings.
+        """
+
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31ed)
+        return val
+
+    @ai_calculated_power_voltage_max.setter
+    def ai_calculated_power_voltage_max(self, val):
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31ed, val)
+
+    @ai_calculated_power_voltage_max.deleter
+    def ai_calculated_power_voltage_max(self):
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31ed)
+
+    @property
+    def ai_calculated_power_voltage_min(self):
+        """
+        float: Specifies the voltage minimum value you expect to
+            measure. This value is in the units you specify with a units
+            property. When you query this property, it returns the
+            coerced voltage minimum value that the device can measure
+            with the current settings.
+        """
+
+        val = self._interpreter.get_chan_attribute_double(self._handle, self._name, 0x31ee)
+        return val
+
+    @ai_calculated_power_voltage_min.setter
+    def ai_calculated_power_voltage_min(self, val):
+        self._interpreter.set_chan_attribute_double(self._handle, self._name, 0x31ee, val)
+
+    @ai_calculated_power_voltage_min.deleter
+    def ai_calculated_power_voltage_min(self):
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31ee)
 
     @property
     def ai_charge_units(self):
@@ -2411,6 +2496,25 @@ class AIChannel(Channel):
         self._interpreter.reset_chan_attribute(self._handle, self._name, 0x3191)
 
     @property
+    def ai_power_units(self):
+        """
+        :class:`nidaqmx.constants.PowerUnits`: Specifies the units to
+            use to return power measurements from the channel.
+        """
+
+        val = self._interpreter.get_chan_attribute_int32(self._handle, self._name, 0x31ec)
+        return PowerUnits(val)
+
+    @ai_power_units.setter
+    def ai_power_units(self, val):
+        val = val.value
+        self._interpreter.set_chan_attribute_int32(self._handle, self._name, 0x31ec, val)
+
+    @ai_power_units.deleter
+    def ai_power_units(self):
+        self._interpreter.reset_chan_attribute(self._handle, self._name, 0x31ec)
+
+    @property
     def ai_pressure_units(self):
         """
         :class:`nidaqmx.constants.PressureUnits`: Specifies  in which
@@ -3563,8 +3667,8 @@ class AIChannel(Channel):
         """
         :class:`nidaqmx.constants.Sense`: Specifies whether to use local
             or remote sense to sense the output voltage. DAQmx Read
-            (Power) will return remote or local voltage based on the
-            Remote Sense attribute value. Reading this property will
+            (Power Supply) will return remote or local voltage based on
+            the Remote Sense attribute value. Reading this property will
             return the user-defined value.
         """
 

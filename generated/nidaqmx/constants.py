@@ -415,6 +415,7 @@ class LoggingOperation(Enum):
 
 
 class LogicFamily(Enum):
+    ONE_POINT_EIGHT_V = 16184  #: Compatible with 1.8 V CMOS signals.
     TWO_POINT_FIVE_V = 14620  #: Compatible with 2.5 V CMOS signals.
     THREE_POINT_THREE_V = 14621  #: Compatible with LVTTL signals.
     FIVE_V = 14619  #: Compatible with TTL and 5 V CMOS signals.
@@ -471,6 +472,11 @@ class PowerOutputState(Enum):
     CONSTANT_CURRENT = 15501  #: Power output is maintaining a constant current by adjusting the voltage.
     OVERVOLTAGE = 15502  #: Voltage output has exceeded its limit.
     OUTPUT_DISABLED = 15503  #: Power output is disabled.
+
+
+class PowerUnits(Enum):
+    WATTS = 16203  #: Watts.
+    FROM_CUSTOM_SCALE = 10065  #: Units a custom scale specifies. If you select this value, you must specify a custom scale name.
 
 
 class PowerUpChannelType(Enum):

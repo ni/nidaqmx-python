@@ -16922,9 +16922,150 @@ attributes = {
             'name': 'PWR_REMOTE_SENSE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'Sense',
-            'python_description': 'Specifies whether to use local or remote sense to sense the output voltage. DAQmx Read (Power) will return remote or local voltage based on the Remote Sense attribute value. Reading this property will return the user-defined value.',
+            'python_description': 'Specifies whether to use local or remote sense to sense the output voltage. DAQmx Read (Power Supply) will return remote or local voltage based on the Remote Sense attribute value. Reading this property will return the user-defined value.',
             'resettable': True,
             'type': 'int32'
+        },
+        12780: {
+            'access': 'read-write',
+            'c_function_name': 'AIPowerUnits',
+            'calling_convention': 'StdCall',
+            'ctypes_data_type': 'ctypes.c_int',
+            'enum': 'PowerUnits',
+            'handle_parameters': {
+                'channelHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'channel'
+                },
+                'taskHandle': {
+                    'accessor': 'self._handle',
+                    'ctypes_data_type': 'lib_importer.task_handle',
+                    'cvi_name': 'taskHandle'
+                }
+            },
+            'has_explicit_read_buffer_size': False,
+            'has_explicit_write_buffer_size': False,
+            'is_list': False,
+            'is_python_object': False,
+            'name': 'AI_POWER_UNITS',
+            'python_class_name': 'AIChannel',
+            'python_data_type': 'PowerUnits',
+            'python_description': 'Specifies the units to use to return power measurements from the channel.',
+            'resettable': True,
+            'type': 'int32'
+        },
+        12781: {
+            'access': 'read-write',
+            'c_function_name': 'AICalculatedPowerVoltageMax',
+            'calling_convention': 'StdCall',
+            'ctypes_data_type': 'ctypes.c_double',
+            'handle_parameters': {
+                'channelHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'channel'
+                },
+                'taskHandle': {
+                    'accessor': 'self._handle',
+                    'ctypes_data_type': 'lib_importer.task_handle',
+                    'cvi_name': 'taskHandle'
+                }
+            },
+            'has_explicit_read_buffer_size': False,
+            'has_explicit_write_buffer_size': False,
+            'is_list': False,
+            'is_python_object': False,
+            'name': 'AI_CALCULATED_POWER_VOLTAGE_MAX',
+            'python_class_name': 'AIChannel',
+            'python_data_type': 'float',
+            'python_description': 'Specifies the voltage maximum value you expect to measure. This value is in the units you specify with a units property. When you query this property, it returns the coerced voltage maximum value that the device can measure with the current settings.',
+            'resettable': True,
+            'type': 'float64'
+        },
+        12782: {
+            'access': 'read-write',
+            'c_function_name': 'AICalculatedPowerVoltageMin',
+            'calling_convention': 'StdCall',
+            'ctypes_data_type': 'ctypes.c_double',
+            'handle_parameters': {
+                'channelHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'channel'
+                },
+                'taskHandle': {
+                    'accessor': 'self._handle',
+                    'ctypes_data_type': 'lib_importer.task_handle',
+                    'cvi_name': 'taskHandle'
+                }
+            },
+            'has_explicit_read_buffer_size': False,
+            'has_explicit_write_buffer_size': False,
+            'is_list': False,
+            'is_python_object': False,
+            'name': 'AI_CALCULATED_POWER_VOLTAGE_MIN',
+            'python_class_name': 'AIChannel',
+            'python_data_type': 'float',
+            'python_description': 'Specifies the voltage minimum value you expect to measure. This value is in the units you specify with a units property. When you query this property, it returns the coerced voltage minimum value that the device can measure with the current settings.',
+            'resettable': True,
+            'type': 'float64'
+        },
+        12783: {
+            'access': 'read-write',
+            'c_function_name': 'AICalculatedPowerCurrentMax',
+            'calling_convention': 'StdCall',
+            'ctypes_data_type': 'ctypes.c_double',
+            'handle_parameters': {
+                'channelHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'channel'
+                },
+                'taskHandle': {
+                    'accessor': 'self._handle',
+                    'ctypes_data_type': 'lib_importer.task_handle',
+                    'cvi_name': 'taskHandle'
+                }
+            },
+            'has_explicit_read_buffer_size': False,
+            'has_explicit_write_buffer_size': False,
+            'is_list': False,
+            'is_python_object': False,
+            'name': 'AI_CALCULATED_POWER_CURRENT_MAX',
+            'python_class_name': 'AIChannel',
+            'python_data_type': 'float',
+            'python_description': 'Specifies the current maximum value you expect to measure. This value is in the units you specify with a units property. When you query this property, it returns the coerced current maximum value that the device can measure with the current settings.',
+            'resettable': True,
+            'type': 'float64'
+        },
+        12784: {
+            'access': 'read-write',
+            'c_function_name': 'AICalculatedPowerCurrentMin',
+            'calling_convention': 'StdCall',
+            'ctypes_data_type': 'ctypes.c_double',
+            'handle_parameters': {
+                'channelHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'channel'
+                },
+                'taskHandle': {
+                    'accessor': 'self._handle',
+                    'ctypes_data_type': 'lib_importer.task_handle',
+                    'cvi_name': 'taskHandle'
+                }
+            },
+            'has_explicit_read_buffer_size': False,
+            'has_explicit_write_buffer_size': False,
+            'is_list': False,
+            'is_python_object': False,
+            'name': 'AI_CALCULATED_POWER_CURRENT_MIN',
+            'python_class_name': 'AIChannel',
+            'python_data_type': 'float',
+            'python_description': 'Specifies the current minimum value you expect to measure. This value is in the units you specify with a units property. When you query this property, it returns the coerced current minimum value that the device can measure with the current settings.',
+            'resettable': True,
+            'type': 'float64'
         }
     },
     'Device': {
@@ -22572,6 +22713,31 @@ attributes = {
             'python_name': 'ai_sensor_power_overcurrent',
             'resettable': False,
             'type': 'bool32'
+        },
+        12779: {
+            'access': 'read-write',
+            'c_function_name': 'PhysicalChanDigPortLogicFamily',
+            'calling_convention': 'StdCall',
+            'ctypes_data_type': 'ctypes.c_int',
+            'enum': 'LogicFamily',
+            'handle_parameters': {
+                'genericNameHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'name'
+                }
+            },
+            'has_explicit_read_buffer_size': False,
+            'has_explicit_write_buffer_size': False,
+            'is_list': False,
+            'is_python_object': False,
+            'name': 'PHYSICAL_CHAN_DIG_PORT_LOGIC_FAMILY',
+            'python_class_name': 'PhysicalChannel',
+            'python_data_type': 'LogicFamily',
+            'python_description': 'Specifies the digital port logic family to use for acquisition and generation. A logic family corresponds to voltage thresholds that are compatible with a group of voltage standards. Refer to the device documentation for information on the logic high and logic low voltages for these logic families.',
+            'python_name': 'dig_port_logic_family',
+            'resettable': True,
+            'type': 'int32'
         }
     },
     'Read': {
