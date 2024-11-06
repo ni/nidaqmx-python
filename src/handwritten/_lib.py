@@ -120,6 +120,14 @@ compatibility because uInt32 and void* are the same size for 32-bit applications
 """
 
 
+def get_encoding_from_locale() -> str:
+    """
+    Gets the current locale encoding handling cases where it is unset.
+    """
+    _, encoding = locale.getlocale()
+    return encoding or 'ascii'
+
+
 class DaqLibImporter:
     """
     Encapsulates NI-DAQmx library importing and handle type parsing logic.
@@ -157,7 +165,7 @@ class DaqLibImporter:
         if self._encoding is None:
             self._import_lib()
         return self._encoding
-        
+
     def _import_lib(self):
         """
         Determines the location of and loads the NI-DAQmx CAI DLL.
@@ -185,7 +193,7 @@ class DaqLibImporter:
                 try: 
                     if nidaqmx_c_library=="nicaiu":
                         windll, cdll = _load_lib("nicaiu")
-                        encoding = locale.getlocale()[1]
+                        encoding = get_encoding_from_locale()
                     elif nidaqmx_c_library=="nicai_utf8":
                         windll, cdll = _load_lib("nicai_utf8")
                         encoding = 'utf-8'  
@@ -201,7 +209,7 @@ class DaqLibImporter:
                     # Fallback to nicaiu.dll if nicai_utf8.dll cannot be loaded
                     try:
                         windll, cdll = _load_lib("nicaiu")
-                        encoding = locale.getlocale()[1]
+                        encoding = get_encoding_from_locale()
                     except (OSError, WindowsError) as e:
                         raise DaqNotFoundError(_DAQ_NOT_FOUND_MESSAGE) from e       
         elif sys.platform.startswith('linux'):
@@ -209,7 +217,7 @@ class DaqLibImporter:
             if library_path is not None:
                 cdll = ctypes.cdll.LoadLibrary(library_path)
                 windll = cdll
-                encoding = locale.getlocale()[1]
+                encoding = get_encoding_from_locale()
             else:
                 raise DaqNotFoundError(_DAQ_NOT_FOUND_MESSAGE)
         else:
