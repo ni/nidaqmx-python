@@ -39,6 +39,7 @@ All notable changes to this project will be documented in this file.
 * ### Resolved Issues
     * [644: nidaqmx doesn't support Python 3.13+](https://github.com/ni/nidaqmx-python/issues/644)
     * [641: No devices found](https://github.com/ni/nidaqmx-python/issues/641)
+        * Fall back to ASCII encoding if the system locale is not set.
 
 * ### Known Issues
     * [639: first_samp_timestamp_val property does not work because LibraryInterpreter is missing a method](https://github.com/ni/nidaqmx-python/issues/639)
