@@ -16312,24 +16312,6 @@ enums = {
             }
         ]
     },
-    'PowerUnits': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Watts.'
-                },
-                'name': 'WATTS',
-                'value': 16203
-            },
-            {
-                'documentation': {
-                    'description': ' Units a custom scale specifies. If you select this value, you must specify a  custom scale name.'
-                },
-                'name': 'FROM_CUSTOM_SCALE',
-                'value': 10065
-            }
-        ]
-    },
     'PowerUpChannelType': {
         'values': [
             {

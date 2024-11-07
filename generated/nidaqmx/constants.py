@@ -474,11 +474,6 @@ class PowerOutputState(Enum):
     OUTPUT_DISABLED = 15503  #: Power output is disabled.
 
 
-class PowerUnits(Enum):
-    WATTS = 16203  #: Watts.
-    FROM_CUSTOM_SCALE = 10065  #: Units a custom scale specifies. If you select this value, you must specify a custom scale name.
-
-
 class PowerUpChannelType(Enum):
     CHANNEL_VOLTAGE = 0  #: Voltage Channel
     CHANNEL_CURRENT = 1  #: Current Channel
