@@ -16922,7 +16922,7 @@ attributes = {
             'name': 'PWR_REMOTE_SENSE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'Sense',
-            'python_description': 'Specifies whether to use local or remote sense to sense the output voltage. DAQmx Read (Power) will return remote or local voltage based on the Remote Sense attribute value. Reading this property will return the user-defined value.',
+            'python_description': 'Specifies whether to use local or remote sense to sense the output voltage. DAQmx Read (Power Supply) will return remote or local voltage based on the Remote Sense attribute value. Reading this property will return the user-defined value.',
             'resettable': True,
             'type': 'int32'
         }
@@ -22572,6 +22572,31 @@ attributes = {
             'python_name': 'ai_sensor_power_overcurrent',
             'resettable': False,
             'type': 'bool32'
+        },
+        12779: {
+            'access': 'read-write',
+            'c_function_name': 'PhysicalChanDigPortLogicFamily',
+            'calling_convention': 'StdCall',
+            'ctypes_data_type': 'ctypes.c_int',
+            'enum': 'LogicFamily',
+            'handle_parameters': {
+                'genericNameHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'name'
+                }
+            },
+            'has_explicit_read_buffer_size': False,
+            'has_explicit_write_buffer_size': False,
+            'is_list': False,
+            'is_python_object': False,
+            'name': 'PHYSICAL_CHAN_DIG_PORT_LOGIC_FAMILY',
+            'python_class_name': 'PhysicalChannel',
+            'python_data_type': 'LogicFamily',
+            'python_description': 'Specifies the digital port logic family to use for acquisition and generation. A logic family corresponds to voltage thresholds that are compatible with a group of voltage standards. Refer to the device documentation for information on the logic high and logic low voltages for these logic families.',
+            'python_name': 'dig_port_logic_family',
+            'resettable': True,
+            'type': 'int32'
         }
     },
     'Read': {

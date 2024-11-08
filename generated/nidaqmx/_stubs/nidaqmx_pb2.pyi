@@ -3409,6 +3409,7 @@ class _PhysicalChannelInt32AttributeEnumTypeWrapper(google.protobuf.internal.enu
     PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_TERM_CFGS: _PhysicalChannelInt32Attribute.ValueType  # 9026
     PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AO_TERM_CFGS: _PhysicalChannelInt32Attribute.ValueType  # 10659
     PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_POWER_CONTROL_TYPE: _PhysicalChannelInt32Attribute.ValueType  # 12654
+    PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_DIG_PORT_LOGIC_FAMILY: _PhysicalChannelInt32Attribute.ValueType  # 12779
 
 class PhysicalChannelInt32Attribute(_PhysicalChannelInt32Attribute, metaclass=_PhysicalChannelInt32AttributeEnumTypeWrapper): ...
 
@@ -3416,6 +3417,7 @@ PHYSICALCHANNEL_INT32_ATTRIBUTE_UNSPECIFIED: PhysicalChannelInt32Attribute.Value
 PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_TERM_CFGS: PhysicalChannelInt32Attribute.ValueType  # 9026
 PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AO_TERM_CFGS: PhysicalChannelInt32Attribute.ValueType  # 10659
 PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_AI_POWER_CONTROL_TYPE: PhysicalChannelInt32Attribute.ValueType  # 12654
+PHYSICALCHANNEL_ATTRIBUTE_PHYSICAL_CHAN_DIG_PORT_LOGIC_FAMILY: PhysicalChannelInt32Attribute.ValueType  # 12779
 global___PhysicalChannelInt32Attribute = PhysicalChannelInt32Attribute
 
 class _PhysicalChannelBoolAttribute:
@@ -3463,6 +3465,7 @@ class _PhysicalChannelResetAttributeEnumTypeWrapper(google.protobuf.internal.enu
     PHYSICALCHANNEL_RESET_ATTRIBUTE_PHYSICAL_CHAN_AI_POWER_CONTROL_VOLTAGE: _PhysicalChannelResetAttribute.ValueType  # 12652
     PHYSICALCHANNEL_RESET_ATTRIBUTE_PHYSICAL_CHAN_AI_POWER_CONTROL_ENABLE: _PhysicalChannelResetAttribute.ValueType  # 12653
     PHYSICALCHANNEL_RESET_ATTRIBUTE_PHYSICAL_CHAN_AI_POWER_CONTROL_TYPE: _PhysicalChannelResetAttribute.ValueType  # 12654
+    PHYSICALCHANNEL_RESET_ATTRIBUTE_PHYSICAL_CHAN_DIG_PORT_LOGIC_FAMILY: _PhysicalChannelResetAttribute.ValueType  # 12779
 
 class PhysicalChannelResetAttribute(_PhysicalChannelResetAttribute, metaclass=_PhysicalChannelResetAttributeEnumTypeWrapper): ...
 
@@ -3472,6 +3475,7 @@ PHYSICALCHANNEL_RESET_ATTRIBUTE_AO_POWER_AMP_CHANNEL_ENABLE: PhysicalChannelRese
 PHYSICALCHANNEL_RESET_ATTRIBUTE_PHYSICAL_CHAN_AI_POWER_CONTROL_VOLTAGE: PhysicalChannelResetAttribute.ValueType  # 12652
 PHYSICALCHANNEL_RESET_ATTRIBUTE_PHYSICAL_CHAN_AI_POWER_CONTROL_ENABLE: PhysicalChannelResetAttribute.ValueType  # 12653
 PHYSICALCHANNEL_RESET_ATTRIBUTE_PHYSICAL_CHAN_AI_POWER_CONTROL_TYPE: PhysicalChannelResetAttribute.ValueType  # 12654
+PHYSICALCHANNEL_RESET_ATTRIBUTE_PHYSICAL_CHAN_DIG_PORT_LOGIC_FAMILY: PhysicalChannelResetAttribute.ValueType  # 12779
 global___PhysicalChannelResetAttribute = PhysicalChannelResetAttribute
 
 class _PhysicalChannelDoubleAttribute:
@@ -6210,6 +6214,7 @@ class _LogicFamily:
 class _LogicFamilyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_LogicFamily.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     LOGIC_FAMILY_UNSPECIFIED: _LogicFamily.ValueType  # 0
+    LOGIC_FAMILY_1POINT_8_V: _LogicFamily.ValueType  # 16184
     LOGIC_FAMILY_2POINT_5_V: _LogicFamily.ValueType  # 14620
     LOGIC_FAMILY_3POINT_3_V: _LogicFamily.ValueType  # 14621
     LOGIC_FAMILY_5_V: _LogicFamily.ValueType  # 14619
@@ -6217,6 +6222,7 @@ class _LogicFamilyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._En
 class LogicFamily(_LogicFamily, metaclass=_LogicFamilyEnumTypeWrapper): ...
 
 LOGIC_FAMILY_UNSPECIFIED: LogicFamily.ValueType  # 0
+LOGIC_FAMILY_1POINT_8_V: LogicFamily.ValueType  # 16184
 LOGIC_FAMILY_2POINT_5_V: LogicFamily.ValueType  # 14620
 LOGIC_FAMILY_3POINT_3_V: LogicFamily.ValueType  # 14621
 LOGIC_FAMILY_5_V: LogicFamily.ValueType  # 14619
@@ -6591,6 +6597,35 @@ STRAIN_GAGE_BRIDGE_TYPE1_HALF_BRIDGE_II: StrainGageBridgeType1.ValueType  # 1018
 STRAIN_GAGE_BRIDGE_TYPE1_QUARTER_BRIDGE_I: StrainGageBridgeType1.ValueType  # 10271
 STRAIN_GAGE_BRIDGE_TYPE1_QUARTER_BRIDGE_II: StrainGageBridgeType1.ValueType  # 10272
 global___StrainGageBridgeType1 = StrainGageBridgeType1
+
+class _StrainGageRosetteMeasurementType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _StrainGageRosetteMeasurementTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StrainGageRosetteMeasurementType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_UNSPECIFIED: _StrainGageRosetteMeasurementType.ValueType  # 0
+    STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_PRINCIPAL_STRAIN_1: _StrainGageRosetteMeasurementType.ValueType  # 15971
+    STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_PRINCIPAL_STRAIN_2: _StrainGageRosetteMeasurementType.ValueType  # 15972
+    STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_PRINCIPAL_STRAIN_ANGLE: _StrainGageRosetteMeasurementType.ValueType  # 15973
+    STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_CARTESIAN_STRAIN_X: _StrainGageRosetteMeasurementType.ValueType  # 15974
+    STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_CARTESIAN_STRAIN_Y: _StrainGageRosetteMeasurementType.ValueType  # 15975
+    STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_CARTESIAN_SHEAR_STRAIN_XY: _StrainGageRosetteMeasurementType.ValueType  # 15976
+    STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_MAX_SHEAR_STRAIN: _StrainGageRosetteMeasurementType.ValueType  # 15977
+    STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_MAX_SHEAR_STRAIN_ANGLE: _StrainGageRosetteMeasurementType.ValueType  # 15978
+
+class StrainGageRosetteMeasurementType(_StrainGageRosetteMeasurementType, metaclass=_StrainGageRosetteMeasurementTypeEnumTypeWrapper): ...
+
+STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_UNSPECIFIED: StrainGageRosetteMeasurementType.ValueType  # 0
+STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_PRINCIPAL_STRAIN_1: StrainGageRosetteMeasurementType.ValueType  # 15971
+STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_PRINCIPAL_STRAIN_2: StrainGageRosetteMeasurementType.ValueType  # 15972
+STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_PRINCIPAL_STRAIN_ANGLE: StrainGageRosetteMeasurementType.ValueType  # 15973
+STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_CARTESIAN_STRAIN_X: StrainGageRosetteMeasurementType.ValueType  # 15974
+STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_CARTESIAN_STRAIN_Y: StrainGageRosetteMeasurementType.ValueType  # 15975
+STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_CARTESIAN_SHEAR_STRAIN_XY: StrainGageRosetteMeasurementType.ValueType  # 15976
+STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_MAX_SHEAR_STRAIN: StrainGageRosetteMeasurementType.ValueType  # 15977
+STRAIN_GAGE_ROSETTE_MEASUREMENT_TYPE_MAX_SHEAR_STRAIN_ANGLE: StrainGageRosetteMeasurementType.ValueType  # 15978
+global___StrainGageRosetteMeasurementType = StrainGageRosetteMeasurementType
 
 class _StrainGageRosetteType:
     ValueType = typing.NewType("ValueType", builtins.int)
@@ -7290,6 +7325,7 @@ class _ChannelInt32AttributeValuesEnumTypeWrapper(google.protobuf.internal.enum_
     CHANNEL_INT32_LENGTH_UNITS4_FROM_CUSTOM_SCALE: _ChannelInt32AttributeValues.ValueType  # 10065
     CHANNEL_INT32_LEVEL1_HIGH: _ChannelInt32AttributeValues.ValueType  # 10192
     CHANNEL_INT32_LEVEL1_LOW: _ChannelInt32AttributeValues.ValueType  # 10214
+    CHANNEL_INT32_LOGIC_FAMILY_1POINT_8_V: _ChannelInt32AttributeValues.ValueType  # 16184
     CHANNEL_INT32_LOGIC_FAMILY_2POINT_5_V: _ChannelInt32AttributeValues.ValueType  # 14620
     CHANNEL_INT32_LOGIC_FAMILY_3POINT_3_V: _ChannelInt32AttributeValues.ValueType  # 14621
     CHANNEL_INT32_LOGIC_FAMILY_5_V: _ChannelInt32AttributeValues.ValueType  # 14619
@@ -7671,6 +7707,7 @@ CHANNEL_INT32_LENGTH_UNITS4_FEET: ChannelInt32AttributeValues.ValueType  # 10380
 CHANNEL_INT32_LENGTH_UNITS4_FROM_CUSTOM_SCALE: ChannelInt32AttributeValues.ValueType  # 10065
 CHANNEL_INT32_LEVEL1_HIGH: ChannelInt32AttributeValues.ValueType  # 10192
 CHANNEL_INT32_LEVEL1_LOW: ChannelInt32AttributeValues.ValueType  # 10214
+CHANNEL_INT32_LOGIC_FAMILY_1POINT_8_V: ChannelInt32AttributeValues.ValueType  # 16184
 CHANNEL_INT32_LOGIC_FAMILY_2POINT_5_V: ChannelInt32AttributeValues.ValueType  # 14620
 CHANNEL_INT32_LOGIC_FAMILY_3POINT_3_V: ChannelInt32AttributeValues.ValueType  # 14621
 CHANNEL_INT32_LOGIC_FAMILY_5_V: ChannelInt32AttributeValues.ValueType  # 14619
@@ -7939,6 +7976,7 @@ class _DeviceInt32AttributeValuesEnumTypeWrapper(google.protobuf.internal.enum_t
     DEVICE_INT32_PRODUCT_CATEGORY_FIELD_DAQ: _DeviceInt32AttributeValues.ValueType  # 16151
     DEVICE_INT32_PRODUCT_CATEGORY_TEST_SCALE_CHASSIS: _DeviceInt32AttributeValues.ValueType  # 16180
     DEVICE_INT32_PRODUCT_CATEGORY_TEST_SCALE_MODULE: _DeviceInt32AttributeValues.ValueType  # 16181
+    DEVICE_INT32_PRODUCT_CATEGORY_MIO_DAQ: _DeviceInt32AttributeValues.ValueType  # 16182
     DEVICE_INT32_PRODUCT_CATEGORY_UNKNOWN: _DeviceInt32AttributeValues.ValueType  # 12588
     DEVICE_INT32_TRIGGER_USAGE_ADVANCE: _DeviceInt32AttributeValues.ValueType  # 12488
     DEVICE_INT32_TRIGGER_USAGE_PAUSE: _DeviceInt32AttributeValues.ValueType  # 12489
@@ -8073,6 +8111,7 @@ DEVICE_INT32_PRODUCT_CATEGORY_SC_EXPRESS: DeviceInt32AttributeValues.ValueType  
 DEVICE_INT32_PRODUCT_CATEGORY_FIELD_DAQ: DeviceInt32AttributeValues.ValueType  # 16151
 DEVICE_INT32_PRODUCT_CATEGORY_TEST_SCALE_CHASSIS: DeviceInt32AttributeValues.ValueType  # 16180
 DEVICE_INT32_PRODUCT_CATEGORY_TEST_SCALE_MODULE: DeviceInt32AttributeValues.ValueType  # 16181
+DEVICE_INT32_PRODUCT_CATEGORY_MIO_DAQ: DeviceInt32AttributeValues.ValueType  # 16182
 DEVICE_INT32_PRODUCT_CATEGORY_UNKNOWN: DeviceInt32AttributeValues.ValueType  # 12588
 DEVICE_INT32_TRIGGER_USAGE_ADVANCE: DeviceInt32AttributeValues.ValueType  # 12488
 DEVICE_INT32_TRIGGER_USAGE_PAUSE: DeviceInt32AttributeValues.ValueType  # 12489
@@ -8204,6 +8243,10 @@ class _PhysicalChannelInt32AttributeValuesEnumTypeWrapper(google.protobuf.intern
     PHYSICALCHANNEL_INT32_CO_OUTPUT_TYPE_PULSE_TIME: _PhysicalChannelInt32AttributeValues.ValueType  # 10269
     PHYSICALCHANNEL_INT32_CO_OUTPUT_TYPE_PULSE_FREQ: _PhysicalChannelInt32AttributeValues.ValueType  # 10119
     PHYSICALCHANNEL_INT32_CO_OUTPUT_TYPE_PULSE_TICKS: _PhysicalChannelInt32AttributeValues.ValueType  # 10268
+    PHYSICALCHANNEL_INT32_LOGIC_FAMILY_1POINT_8_V: _PhysicalChannelInt32AttributeValues.ValueType  # 16184
+    PHYSICALCHANNEL_INT32_LOGIC_FAMILY_2POINT_5_V: _PhysicalChannelInt32AttributeValues.ValueType  # 14620
+    PHYSICALCHANNEL_INT32_LOGIC_FAMILY_3POINT_3_V: _PhysicalChannelInt32AttributeValues.ValueType  # 14621
+    PHYSICALCHANNEL_INT32_LOGIC_FAMILY_5_V: _PhysicalChannelInt32AttributeValues.ValueType  # 14619
     PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_ALTITUDE: _PhysicalChannelInt32AttributeValues.ValueType  # 15997
     PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_LONGITUDE: _PhysicalChannelInt32AttributeValues.ValueType  # 15998
     PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_LATITUDE: _PhysicalChannelInt32AttributeValues.ValueType  # 15999
@@ -8278,6 +8321,10 @@ PHYSICALCHANNEL_INT32_CI_MEASUREMENT_TYPE_GPS_TIMESTAMP: PhysicalChannelInt32Att
 PHYSICALCHANNEL_INT32_CO_OUTPUT_TYPE_PULSE_TIME: PhysicalChannelInt32AttributeValues.ValueType  # 10269
 PHYSICALCHANNEL_INT32_CO_OUTPUT_TYPE_PULSE_FREQ: PhysicalChannelInt32AttributeValues.ValueType  # 10119
 PHYSICALCHANNEL_INT32_CO_OUTPUT_TYPE_PULSE_TICKS: PhysicalChannelInt32AttributeValues.ValueType  # 10268
+PHYSICALCHANNEL_INT32_LOGIC_FAMILY_1POINT_8_V: PhysicalChannelInt32AttributeValues.ValueType  # 16184
+PHYSICALCHANNEL_INT32_LOGIC_FAMILY_2POINT_5_V: PhysicalChannelInt32AttributeValues.ValueType  # 14620
+PHYSICALCHANNEL_INT32_LOGIC_FAMILY_3POINT_3_V: PhysicalChannelInt32AttributeValues.ValueType  # 14621
+PHYSICALCHANNEL_INT32_LOGIC_FAMILY_5_V: PhysicalChannelInt32AttributeValues.ValueType  # 14619
 PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_ALTITUDE: PhysicalChannelInt32AttributeValues.ValueType  # 15997
 PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_LONGITUDE: PhysicalChannelInt32AttributeValues.ValueType  # 15998
 PHYSICALCHANNEL_INT32_NAV_MEASUREMENT_TYPE_LATITUDE: PhysicalChannelInt32AttributeValues.ValueType  # 15999
@@ -9168,7 +9215,7 @@ class CfgAnlgMultiEdgeRefTrigRequest(google.protobuf.message.Message):
     @property
     def task(self) -> session_pb2.Session: ...
     @property
-    def trigger_slope_array(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
+    def trigger_slope_array(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___Slope1.ValueType]: ...
     @property
     def trigger_level_array(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
     def __init__(
@@ -9176,7 +9223,7 @@ class CfgAnlgMultiEdgeRefTrigRequest(google.protobuf.message.Message):
         *,
         task: session_pb2.Session | None = ...,
         trigger_sources: builtins.str = ...,
-        trigger_slope_array: collections.abc.Iterable[builtins.int] | None = ...,
+        trigger_slope_array: collections.abc.Iterable[global___Slope1.ValueType] | None = ...,
         trigger_level_array: collections.abc.Iterable[builtins.float] | None = ...,
         pretrigger_samples: builtins.int = ...,
     ) -> None: ...
@@ -9212,7 +9259,7 @@ class CfgAnlgMultiEdgeStartTrigRequest(google.protobuf.message.Message):
     @property
     def task(self) -> session_pb2.Session: ...
     @property
-    def trigger_slope_array(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
+    def trigger_slope_array(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___Slope1.ValueType]: ...
     @property
     def trigger_level_array(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
     def __init__(
@@ -9220,7 +9267,7 @@ class CfgAnlgMultiEdgeStartTrigRequest(google.protobuf.message.Message):
         *,
         task: session_pb2.Session | None = ...,
         trigger_sources: builtins.str = ...,
-        trigger_slope_array: collections.abc.Iterable[builtins.int] | None = ...,
+        trigger_slope_array: collections.abc.Iterable[global___Slope1.ValueType] | None = ...,
         trigger_level_array: collections.abc.Iterable[builtins.float] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["task", b"task"]) -> builtins.bool: ...
@@ -12231,7 +12278,7 @@ class CreateAIRosetteStrainGageChanRequest(google.protobuf.message.Message):
     @property
     def task(self) -> session_pb2.Session: ...
     @property
-    def rosette_meas_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]: ...
+    def rosette_meas_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___StrainGageRosetteMeasurementType.ValueType]: ...
     def __init__(
         self,
         *,
@@ -12243,7 +12290,7 @@ class CreateAIRosetteStrainGageChanRequest(google.protobuf.message.Message):
         rosette_type: global___StrainGageRosetteType.ValueType = ...,
         rosette_type_raw: builtins.int = ...,
         gage_orientation: builtins.float = ...,
-        rosette_meas_types: collections.abc.Iterable[builtins.int] | None = ...,
+        rosette_meas_types: collections.abc.Iterable[global___StrainGageRosetteMeasurementType.ValueType] | None = ...,
         strain_config: global___StrainGageBridgeType1.ValueType = ...,
         strain_config_raw: builtins.int = ...,
         voltage_excit_source: global___ExcitationSource.ValueType = ...,

@@ -8,7 +8,7 @@ from nidaqmx import utils
 from nidaqmx._bitfield_utils import enum_bitfield_to_list
 from nidaqmx.utils import unflatten_channel_string
 from nidaqmx.constants import (
-    AOPowerUpOutputBehavior, AcquisitionType, SensorPowerType,
+    AOPowerUpOutputBehavior, AcquisitionType, LogicFamily, SensorPowerType,
     TerminalConfiguration, UsageTypeAI, UsageTypeAO, UsageTypeCI, UsageTypeCO,
     WriteBasicTEDSOptions, _TermCfg)
 
@@ -506,6 +506,53 @@ class PhysicalChannel:
 
         val = self._interpreter.get_physical_chan_attribute_int32_array(self._name, 0x2fe0)
         return [AcquisitionType(e) for e in val]
+
+    @property
+    def dig_port_logic_family(self):
+        """
+        :class:`nidaqmx.constants.LogicFamily`: Specifies the digital
+            port logic family to use for acquisition and generation. A
+            logic family corresponds to voltage thresholds that are
+            compatible with a group of voltage standards. Refer to the
+            device documentation for information on the logic high and
+            logic low voltages for these logic families.
+        """
+
+        val = self._interpreter.get_physical_chan_attribute_int32(self._name, 0x31eb)
+        return LogicFamily(val)
+
+    @dig_port_logic_family.setter
+    def dig_port_logic_family(self, val):
+        from nidaqmx._library_interpreter import LibraryInterpreter
+        from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
+        if not isinstance(self._interpreter, LibraryInterpreter):
+            raise NotImplementedError
+        val = val.value
+        cfunc = lib_importer.windll.DAQmxSetPhysicalChanDigPortLogicFamily
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes.c_int]
+        error_code = cfunc(
+            self._name, val)
+        self._interpreter.check_for_error(error_code)
+
+    @dig_port_logic_family.deleter
+    def dig_port_logic_family(self):
+        from nidaqmx._library_interpreter import LibraryInterpreter
+        from nidaqmx._lib import lib_importer, ctypes_byte_str, c_bool32
+        if not isinstance(self._interpreter, LibraryInterpreter):
+            raise NotImplementedError
+        cfunc = lib_importer.windll.DAQmxResetPhysicalChanDigPortLogicFamily
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str]
+        error_code = cfunc(
+            self._name)
+        self._interpreter.check_for_error(error_code)
 
     @property
     def do_port_width(self):

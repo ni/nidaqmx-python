@@ -415,6 +415,7 @@ class LoggingOperation(Enum):
 
 
 class LogicFamily(Enum):
+    ONE_POINT_EIGHT_V = 16184  #: Compatible with 1.8 V CMOS signals.
     TWO_POINT_FIVE_V = 14620  #: Compatible with 2.5 V CMOS signals.
     THREE_POINT_THREE_V = 14621  #: Compatible with LVTTL signals.
     FIVE_V = 14619  #: Compatible with TTL and 5 V CMOS signals.

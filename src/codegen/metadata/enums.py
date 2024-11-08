@@ -1488,6 +1488,55 @@ enums = {
                 'documentation': {
                     'description': ' '
                 },
+                'name': 'ATTR_NOT_SUPPORTED_USE_PHYSICAL_CHANNEL_PROPERTY',
+                'value': -209896
+            },
+            {
+                'documentation': {
+                    'description': ' '
+                },
+                'name': 'AI_CALCULATED_POWER_MIN_MAX_ATTR_NOT_SUPPORTED',
+                'value': -209895
+            },
+            {
+                'documentation': {
+                    'description': ' '
+                },
+                'name': 'AI_MIN_MAX_ATTR_WRITE_NOT_SUPPORTED_FOR_CALC_POWER',
+                'value': -209894
+            },
+            {
+                'documentation': {
+                    'description': ' '
+                },
+                'name': 'POWER_VOLTAGE_AND_CURRENT_CONFIGURATION_MISMATCH',
+                'value': -209893
+            },
+            {
+                'documentation': {
+                    'description': ' '
+                },
+                'name': 'VOLTAGE_AND_CURRENT_CHANNELS_NOT_SAME_DEVICE',
+                'value': -209892
+            },
+            {
+                'documentation': {
+                    'description': ' '
+                },
+                'name': 'VOLTAGE_AND_CURRENT_CHANNEL_COUNT_MISMATCH',
+                'value': -209891
+            },
+            {
+                'documentation': {
+                    'description': ' '
+                },
+                'name': 'BREAKPOINT_MODES_INCONSISTENT',
+                'value': -209890
+            },
+            {
+                'documentation': {
+                    'description': ' '
+                },
                 'name': 'NEEDS_USB_SUPER_SPEED',
                 'value': -209889
             },
@@ -15887,6 +15936,14 @@ enums = {
     },
     'LogicFamily': {
         'values': [
+            {
+                'documentation': {
+                    'description': 'Compatible with 1.8 V CMOS signals.'
+                },
+                'name': '1POINT_8_V',
+                'python_name': 'ONE_POINT_EIGHT_V',
+                'value': 16184
+            },
             {
                 'documentation': {
                     'description': 'Compatible with 2.5 V CMOS signals.'

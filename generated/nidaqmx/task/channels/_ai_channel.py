@@ -3563,8 +3563,8 @@ class AIChannel(Channel):
         """
         :class:`nidaqmx.constants.Sense`: Specifies whether to use local
             or remote sense to sense the output voltage. DAQmx Read
-            (Power) will return remote or local voltage based on the
-            Remote Sense attribute value. Reading this property will
+            (Power Supply) will return remote or local voltage based on
+            the Remote Sense attribute value. Reading this property will
             return the user-defined value.
         """
 
