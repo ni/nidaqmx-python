@@ -1488,6 +1488,20 @@ enums = {
                 'documentation': {
                     'description': ' '
                 },
+                'name': 'PROPERTY_NOT_SPECD_FOR_ENTIRE_PORT',
+                'value': -209898
+            },
+            {
+                'documentation': {
+                    'description': ' '
+                },
+                'name': 'CANNOT_SET_PROPERTY_WHEN_DA_QMX_TASK_RUNNING',
+                'value': -209897
+            },
+            {
+                'documentation': {
+                    'description': ' '
+                },
                 'name': 'ATTR_NOT_SUPPORTED_USE_PHYSICAL_CHANNEL_PROPERTY',
                 'value': -209896
             },
