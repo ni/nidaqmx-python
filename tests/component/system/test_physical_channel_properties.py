@@ -2,7 +2,7 @@ import numpy
 import pytest
 
 from nidaqmx import DaqError
-from nidaqmx.constants import TerminalConfiguration, UsageTypeAI
+from nidaqmx.constants import LogicFamily, TerminalConfiguration, UsageTypeAI
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system import PhysicalChannel
 from tests.helpers import configure_teds
@@ -81,6 +81,21 @@ def test___physical_channel_with_teds___get_uint32_property___returns_configured
         sim_6363_device.ai_physical_chans["ai0"], voltage_teds_file_path
     ) as phys_chan:
         assert phys_chan.teds_mfg_id == 17
+
+
+def test___physical_channel___get_int32_property___returns_value():
+    phys_chans = PhysicalChannel("mioDAQ/port0")
+
+    assert phys_chans.dig_port_logic_family in LogicFamily
+
+
+@pytest.mark.library_only(
+    reason="AB#2375679: gRPC interpreter doesn't support setting physical channel property."
+)
+def test___physical_channel___set_int32_property___success():
+    phys_chans = PhysicalChannel("mioDAQ/port0")
+
+    phys_chans.dig_port_logic_family = LogicFamily.ONE_POINT_EIGHT_V
 
 
 VALUES_IN_TED = [
