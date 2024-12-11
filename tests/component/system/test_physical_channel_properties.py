@@ -90,7 +90,7 @@ def test___physical_channel___get_int32_property___returns_value():
 
 
 @pytest.mark.library_only(
-    reason="gRPC interpreter doesn't support setting physical channel property."
+    reason="AB#2375679: gRPC interpreter doesn't support setting physical channel property."
 )
 def test___physical_channel___set_int32_property___success():
     phys_chans = PhysicalChannel("mioDAQ/port0")
