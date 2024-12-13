@@ -1,5 +1,6 @@
-import pytest
 import weakref
+
+import pytest
 
 import nidaqmx
 import nidaqmx.system

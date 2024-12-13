@@ -1,7 +1,7 @@
-import pytest
 import weakref
-
 from typing import Callable
+
+import pytest
 
 from nidaqmx.constants import WatchdogAOExpirState, WatchdogCOExpirState
 from nidaqmx.system import Device
@@ -130,4 +130,6 @@ def test___watchdog_expiration_states___set_nonexistent_property___raises_except
     watchdog_task.cfg_watchdog_ao_expir_states(expir_states)
 
     with pytest.raises(AttributeError):
-        watchdog_task.expiration_states[sim_9263_device.ao_physical_chans[0].name].nonexistent_property = "foo"
+        watchdog_task.expiration_states[
+            sim_9263_device.ao_physical_chans[0].name
+        ].nonexistent_property = "foo"
