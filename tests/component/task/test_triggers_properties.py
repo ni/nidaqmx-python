@@ -164,29 +164,29 @@ def test___ai_voltage_time_aware_task___reset_timestamp_property___returns_defau
 
 def test___trigger___set_nonexistent_property___raises_exception(task: Task):
     with pytest.raises(AttributeError):
-        task.triggers.nonexistent_property = "foo" # type: ignore[attr-defined]
+        task.triggers.nonexistent_property = "foo"  # type: ignore[attr-defined]
 
 
 def test___arm_start_trigger___set_nonexistent_property___raises_exception(task: Task):
     with pytest.raises(AttributeError):
-        task.triggers.arm_start_trigger.nonexistent_property = "foo" # type: ignore[attr-defined]
+        task.triggers.arm_start_trigger.nonexistent_property = "foo"  # type: ignore[attr-defined]
 
 
 def test___handshake_trigger___set_nonexistent_property___raises_exception(task: Task):
     with pytest.raises(AttributeError):
-        task.triggers.handshake_trigger.nonexistent_property = "foo" # type: ignore[attr-defined]
+        task.triggers.handshake_trigger.nonexistent_property = "foo"  # type: ignore[attr-defined]
 
 
 def test___pause_trigger___set_nonexistent_property___raises_exception(task: Task):
     with pytest.raises(AttributeError):
-        task.triggers.pause_trigger.nonexistent_property = "foo" # type: ignore[attr-defined]
+        task.triggers.pause_trigger.nonexistent_property = "foo"  # type: ignore[attr-defined]
 
 
 def test___reference_trigger___set_nonexistent_property___raises_exception(task: Task):
     with pytest.raises(AttributeError):
-        task.triggers.reference_trigger.nonexistent_property = "foo" # type: ignore[attr-defined]
+        task.triggers.reference_trigger.nonexistent_property = "foo"  # type: ignore[attr-defined]
 
 
 def test___start_trigger___set_nonexistent_property___raises_exception(task: Task):
     with pytest.raises(AttributeError):
-        task.triggers.start_trigger.nonexistent_property = "foo" # type: ignore[attr-defined]
+        task.triggers.start_trigger.nonexistent_property = "foo"  # type: ignore[attr-defined]

@@ -160,4 +160,4 @@ def test___timing___cfg_burst_handshaking_export_clock___sets_properties(
 
 def test___timing___set_nonexistent_property___raises_exception(task: Task):
     with pytest.raises(AttributeError):
-        task.timing.nonexistent_property = "foo" # type: ignore[attr-defined]
+        task.timing.nonexistent_property = "foo"  # type: ignore[attr-defined]

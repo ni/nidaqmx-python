@@ -39,4 +39,4 @@ def test___get_devices___shared_interpreter(ai_task: Task):
 
 def test___task___set_nonexistent_property___raises_exception(task: Task):
     with pytest.raises(AttributeError):
-        task.nonexistent_property = "foo" # type: ignore[attr-defined]
+        task.nonexistent_property = "foo"  # type: ignore[attr-defined]
