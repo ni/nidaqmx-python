@@ -28,6 +28,8 @@ class Triggers:
     """
     Represents the trigger configurations for a DAQmx task.
     """
+    __slots__ = ('_handle', '_interpreter', '_arm_start_trigger', '_handshake_trigger', '_pause_trigger', '_reference_trigger', '_start_trigger')
+
     def __init__(self, task_handle, interpreter):
         self._handle = task_handle
         self._interpreter = interpreter

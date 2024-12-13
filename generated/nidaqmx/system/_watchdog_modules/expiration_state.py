@@ -10,6 +10,8 @@ class ExpirationState:
     """
     Represents a DAQmx Watchdog expiration state.
     """
+    __slots__ = ('_handle', '_physical_channel', '_interpreter')
+
     def __init__(self, task_handle, physical_channel, interpreter):
         self._handle = task_handle
         self._physical_channel = physical_channel        

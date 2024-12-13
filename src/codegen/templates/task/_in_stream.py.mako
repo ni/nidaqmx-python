@@ -27,6 +27,8 @@ class InStream:
     used in conjunction with reader classes to read samples from an
     NI-DAQmx task.
     """
+    __slots__ = ('_task', '_handle', '_interpreter', '_timeout')
+
     def __init__(self, task, interpreter):
         self._task = task
         self._handle = task._handle

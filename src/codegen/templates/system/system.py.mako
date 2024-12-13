@@ -40,6 +40,7 @@ class System:
     operations on DAQ hardware, and creates classes from which you can get
     information about the hardware.
     """
+    __slots__ = ('_interpreter')
 
     def __init__(self, grpc_options=None):
         """

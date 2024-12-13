@@ -1,3 +1,6 @@
+import pytest
+import weakref
+
 from typing import Callable
 
 from nidaqmx.constants import WatchdogAOExpirState, WatchdogCOExpirState
@@ -88,3 +91,43 @@ def test___watchdog_task___clear_expiration___no_error(
     watchdog_task.start()
 
     watchdog_task.clear_expiration()
+
+
+def test___watchdog_task___create_weakref___succeeds(
+    generate_watchdog_task: Callable[..., WatchdogTask],
+    sim_9189_device: Device,
+):
+    watchdog_task = generate_watchdog_task(f"{sim_9189_device.name}", timeout=0.8)
+    ref = weakref.ref(watchdog_task)
+    watchdog_task2 = ref()
+    assert watchdog_task is watchdog_task2
+
+
+def test___watchdog_task___set_nonexistent_property___raises_exception(
+    generate_watchdog_task: Callable[..., WatchdogTask],
+    sim_9189_device: Device,
+):
+    watchdog_task = generate_watchdog_task(f"{sim_9189_device.name}", timeout=0.8)
+
+    with pytest.raises(AttributeError):
+        watchdog_task.nonexistent_property = "foo"
+
+
+def test___watchdog_expiration_states___set_nonexistent_property___raises_exception(
+    generate_watchdog_task: Callable[..., WatchdogTask],
+    sim_9189_device: Device,
+    sim_9263_device: Device,
+):
+    watchdog_task = generate_watchdog_task(f"{sim_9189_device.name}", timeout=0.8)
+    expir_states = [
+        AOExpirationState(
+            physical_channel=sim_9263_device.ao_physical_chans[0].name,
+            expiration_state=0.0,
+            output_type=WatchdogAOExpirState.VOLTAGE,
+        )
+    ]
+
+    watchdog_task.cfg_watchdog_ao_expir_states(expir_states)
+
+    with pytest.raises(AttributeError):
+        watchdog_task.expiration_states[sim_9263_device.ao_physical_chans[0].name].nonexistent_property = "foo"
