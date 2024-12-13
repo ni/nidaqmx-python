@@ -223,4 +223,4 @@ def test___valid_path___start_new_file___returns_assigned_value(ai_task: nidaqmx
 
 def test___in_stream___set_nonexistent_property___raises_exception(task: nidaqmx.Task):
     with pytest.raises(AttributeError):
-        task.in_stream.nonexistent_property = "foo"
+        task.in_stream.nonexistent_property = "foo" # type: ignore[attr-defined]

@@ -51,4 +51,4 @@ def test___odd_sized_array___write___returns_whole_samples(
 
 def test___out_stream___set_nonexistent_property___raises_exception(task: nidaqmx.Task):
     with pytest.raises(AttributeError):
-        task.out_stream.nonexistent_property = "foo"
+        task.out_stream.nonexistent_property = "foo" # type: ignore[attr-defined]

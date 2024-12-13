@@ -205,8 +205,3 @@ def test___task___create_weakref___succeeds(task: nidaqmx.Task):
     ref = weakref.ref(task)
     task2 = ref()
     assert task is task2
-
-
-def test___task___set_nonexistent_property___raises_exception(task: nidaqmx.Task):
-    with pytest.raises(AttributeError):
-        task.nonexistent_property = "foo"

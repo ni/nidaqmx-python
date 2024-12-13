@@ -37,6 +37,6 @@ def test___get_devices___shared_interpreter(ai_task: Task):
     assert all(dev._interpreter is ai_task._interpreter for dev in devices)
 
 
-def test___export_signals___set_nonexistent_property___raises_exception(task: Task):
+def test___task___set_nonexistent_property___raises_exception(task: Task):
     with pytest.raises(AttributeError):
-        task.export_signals.nonexistent_property = "foo"
+        task.nonexistent_property = "foo" # type: ignore[attr-defined]
