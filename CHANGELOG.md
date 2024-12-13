@@ -27,7 +27,7 @@ All notable changes to this project will be documented in this file.
     * ...
 
 * ### Resolved Issues
-    * ...
+    *  [656: Missing usage of slots in classes with DAQmx attributes](https://github.com/ni/nidaqmx-python/issues/656)
 
 * ### Major Changes
     * Added support for mioDAQ configurable digital voltage.
