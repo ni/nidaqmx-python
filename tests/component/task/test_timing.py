@@ -156,3 +156,8 @@ def test___timing___cfg_burst_handshaking_export_clock___sets_properties(
         sim_6535_di_single_line_task.export_signals.rdy_for_xfer_event_lvl_active_lvl
         == ready_event_active_level
     )
+
+
+def test___timing___set_nonexistent_property___raises_exception(task: Task):
+    with pytest.raises(AttributeError):
+        task.timing.nonexistent_property = "foo"  # type: ignore[attr-defined]

@@ -21,6 +21,8 @@ class HandshakeTrigger:
     """
     Represents the handshake trigger configurations for a DAQmx task.
     """
+    __slots__ = ('_handle', '_interpreter')
+
     def __init__(self, task_handle, interpreter):
         self._handle = task_handle
         self._interpreter = interpreter

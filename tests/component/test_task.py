@@ -1,3 +1,5 @@
+import weakref
+
 import pytest
 
 import nidaqmx
@@ -197,3 +199,9 @@ def test___task___add_global_channels___adds_to_channel_names(task: nidaqmx.Task
     task.add_global_channels([persisted_channel, persisted_channel2])
 
     assert task.channel_names == [persisted_channel.name, persisted_channel2.name]
+
+
+def test___task___create_weakref___succeeds(task: nidaqmx.Task):
+    ref = weakref.ref(task)
+    task2 = ref()
+    assert task is task2

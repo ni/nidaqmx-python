@@ -55,6 +55,10 @@ class Task:
     """
     Represents a DAQmx Task.
     """
+    __slots__ = ('_handle', '_close_on_exit', '_saved_name', '_grpc_options', '_event_handlers', '_interpreter',
+                 '_ai_channels', '_ao_channels', '_ci_channels', '_co_channels', '_di_channels', '_do_channels',
+                 '_export_signals', '_in_stream', '_timing', '_triggers', '_out_stream', '_event_handler_lock',
+                 '__weakref__')
 
     def __init__(self, new_task_name='', *, grpc_options=None):
         """

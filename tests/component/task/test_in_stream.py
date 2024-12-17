@@ -219,3 +219,8 @@ def test___valid_path___start_new_file___returns_assigned_value(ai_task: nidaqmx
     ai_task.in_stream.start_new_file(expected_file_path)
 
     assert ai_task.in_stream.logging_file_path == pathlib.Path(expected_file_path)
+
+
+def test___in_stream___set_nonexistent_property___raises_exception(task: nidaqmx.Task):
+    with pytest.raises(AttributeError):
+        task.in_stream.nonexistent_property = "foo"  # type: ignore[attr-defined]

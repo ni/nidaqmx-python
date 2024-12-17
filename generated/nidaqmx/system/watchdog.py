@@ -21,6 +21,8 @@ class WatchdogTask:
     """
     Represents the watchdog configurations for a DAQmx task.
     """
+    __slots__ = ('_handle', '_close_on_exit', '_saved_name', '_interpreter', '_expiration_states', '__weakref__')
+
     def __init__(self, device_name, task_name='', timeout=10, grpc_options=None):
         """
         Creates and configures a task that controls the watchdog timer of a
