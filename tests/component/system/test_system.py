@@ -5,8 +5,8 @@ import pytest
 import nidaqmx
 from nidaqmx.constants import PowerUpChannelType
 from nidaqmx.error_codes import DAQmxErrors
-from nidaqmx.types import AOPowerUpState
 from nidaqmx.system import System
+from nidaqmx.types import AOPowerUpState
 
 
 def test___get_analog_power_up_states_with_output_type___returns_power_up_states(system):
