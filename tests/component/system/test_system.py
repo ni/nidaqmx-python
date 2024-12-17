@@ -123,6 +123,6 @@ def test_invalid_power_up_states___set_analog_power_up_states___throws_invalid_a
     assert exc_info.value.error_code == DAQmxErrors.INVALID_ATTRIBUTE_VALUE
 
 
-def test___system___set_nonexistent_property___raises_exception(system):
+def test___system___set_nonexistent_property___raises_exception(system: nidaqmx.system.System):
     with pytest.raises(AttributeError):
-        system.nonexistent_property = "foo"
+        system.nonexistent_property = "foo"  # type: ignore[attr-defined]

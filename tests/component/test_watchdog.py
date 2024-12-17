@@ -126,7 +126,6 @@ def test___watchdog_expiration_states___set_nonexistent_property___raises_except
             output_type=WatchdogAOExpirState.VOLTAGE,
         )
     ]
-
     watchdog_task.cfg_watchdog_ao_expir_states(expir_states)
 
     with pytest.raises(AttributeError):
