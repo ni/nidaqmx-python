@@ -6,6 +6,7 @@ import nidaqmx
 from nidaqmx.constants import PowerUpChannelType
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.types import AOPowerUpState
+from nidaqmx.system import System
 
 
 def test___get_analog_power_up_states_with_output_type___returns_power_up_states(system):
@@ -123,6 +124,6 @@ def test_invalid_power_up_states___set_analog_power_up_states___throws_invalid_a
     assert exc_info.value.error_code == DAQmxErrors.INVALID_ATTRIBUTE_VALUE
 
 
-def test___system___set_nonexistent_property___raises_exception(system: nidaqmx.system.System):
+def test___system___set_nonexistent_property___raises_exception(system: System):
     with pytest.raises(AttributeError):
         system.nonexistent_property = "foo"  # type: ignore[attr-defined]
