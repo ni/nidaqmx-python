@@ -22,4 +22,3 @@ with nidaqmx.Task("ni") as task:
     plot.ylabel("Amplitude")
     plot.title("Waveform")
     plot.show()
-
