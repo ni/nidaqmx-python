@@ -10,7 +10,7 @@ from nidaqmx.constants import LineGrouping
 with nidaqmx.Task() as task:
     data = [True, False, True, False]
 
-    task.do_channels.add_do_chan("Dev1/port0/line0:3", line_grouping=LineGrouping.CHAN_PER_LINE)
+    task.do_channels.add_do_chan("Dev11/port0/line0:3", line_grouping=LineGrouping.CHAN_PER_LINE)
     task.start()
     task.write(data)
     task.stop()
