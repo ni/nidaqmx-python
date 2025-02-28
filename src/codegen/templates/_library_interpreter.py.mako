@@ -62,7 +62,7 @@ class LibraryInterpreter(BaseInterpreter):
     __slots__ = ()
 
     def __init__(self):
-        global _was_runtime_environment_set 
+        global _was_runtime_environment_set
         if _was_runtime_environment_set is None:
             try:
                 runtime_env = platform.python_implementation()
@@ -155,6 +155,37 @@ class LibraryInterpreter(BaseInterpreter):
             _logger.error('Failed to get extended error info. DAQmxGetExtendedErrorInfo returned error code %d.', query_error_code)
             return 'Failed to retrieve error description.'
         return error_buffer.value.decode(lib_importer.encoding)
+
+    ## DAQmxReadIDPinMemory returns the size if given a null pointer.
+    ## So, we read 1st time to get the size, then read 2nd time to get the data.
+    def read_id_pin_memory(self, device_name, id_pin_name):
+        data_length_read = ctypes.c_uint()
+        format_code = ctypes.c_uint()
+
+        cfunc = lib_importer.windll.DAQmxReadIDPinMemory
+        if cfunc.argtypes is None:
+            with cfunc.arglock:
+                if cfunc.argtypes is None:
+                    cfunc.argtypes = [
+                        ctypes_byte_str, ctypes_byte_str,
+                        wrapped_ndpointer(dtype=numpy.uint8, flags=('C','W')),
+                        ctypes.c_uint, ctypes.POINTER(ctypes.c_uint),
+                        ctypes.POINTER(ctypes.c_uint)]
+
+        array_size = cfunc(
+            device_name, id_pin_name, None, 0,
+            ctypes.byref(data_length_read), ctypes.byref(format_code))
+
+        if array_size < 0:
+            self.check_for_error(array_size)
+
+        data = numpy.zeros(array_size, dtype=numpy.uint8)
+
+        error_code = cfunc(
+            device_name, id_pin_name, data, array_size,
+            ctypes.byref(data_length_read), ctypes.byref(format_code))
+        self.check_for_error(error_code)
+        return data.tolist(), data_length_read.value, format_code.value
 
     ## The metadata for 'read_power_binary_i16' function is not available in daqmxAPISharp.json file.
     def read_power_binary_i16(
