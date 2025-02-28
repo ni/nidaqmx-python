@@ -1254,9 +1254,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.ReadAnalogF64Response,
     ]
 
+    BeginReadAnalogF64: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadAnalogF64Request,
+        nidaqmx_pb2.BeginReadAnalogF64Response,
+    ]
+
     ReadAnalogScalarF64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadAnalogScalarF64Request,
         nidaqmx_pb2.ReadAnalogScalarF64Response,
+    ]
+
+    BeginReadAnalogScalarF64: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadAnalogScalarF64Request,
+        nidaqmx_pb2.BeginReadAnalogScalarF64Response,
     ]
 
     ReadBinaryI16: grpc.UnaryUnaryMultiCallable[
@@ -1264,9 +1274,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.ReadBinaryI16Response,
     ]
 
+    BeginReadBinaryI16: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadBinaryI16Request,
+        nidaqmx_pb2.BeginReadBinaryI16Response,
+    ]
+
     ReadBinaryI32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadBinaryI32Request,
         nidaqmx_pb2.ReadBinaryI32Response,
+    ]
+
+    BeginReadBinaryI32: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadBinaryI32Request,
+        nidaqmx_pb2.BeginReadBinaryI32Response,
     ]
 
     ReadBinaryU16: grpc.UnaryUnaryMultiCallable[
@@ -1274,9 +1294,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.ReadBinaryU16Response,
     ]
 
+    BeginReadBinaryU16: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadBinaryU16Request,
+        nidaqmx_pb2.BeginReadBinaryU16Response,
+    ]
+
     ReadBinaryU32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadBinaryU32Request,
         nidaqmx_pb2.ReadBinaryU32Response,
+    ]
+
+    BeginReadBinaryU32: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadBinaryU32Request,
+        nidaqmx_pb2.BeginReadBinaryU32Response,
     ]
 
     ReadCounterF64: grpc.UnaryUnaryMultiCallable[
@@ -1284,9 +1314,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.ReadCounterF64Response,
     ]
 
+    BeginReadCounterF64: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCounterF64Request,
+        nidaqmx_pb2.BeginReadCounterF64Response,
+    ]
+
     ReadCounterF64Ex: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterF64ExRequest,
         nidaqmx_pb2.ReadCounterF64ExResponse,
+    ]
+
+    BeginReadCounterF64Ex: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCounterF64ExRequest,
+        nidaqmx_pb2.BeginReadCounterF64ExResponse,
     ]
 
     ReadCounterScalarF64: grpc.UnaryUnaryMultiCallable[
@@ -1294,9 +1334,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.ReadCounterScalarF64Response,
     ]
 
+    BeginReadCounterScalarF64: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCounterScalarF64Request,
+        nidaqmx_pb2.BeginReadCounterScalarF64Response,
+    ]
+
     ReadCounterScalarU32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterScalarU32Request,
         nidaqmx_pb2.ReadCounterScalarU32Response,
+    ]
+
+    BeginReadCounterScalarU32: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCounterScalarU32Request,
+        nidaqmx_pb2.BeginReadCounterScalarU32Response,
     ]
 
     ReadCounterU32: grpc.UnaryUnaryMultiCallable[
@@ -1304,9 +1354,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.ReadCounterU32Response,
     ]
 
+    BeginReadCounterU32: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCounterU32Request,
+        nidaqmx_pb2.BeginReadCounterU32Response,
+    ]
+
     ReadCounterU32Ex: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterU32ExRequest,
         nidaqmx_pb2.ReadCounterU32ExResponse,
+    ]
+
+    BeginReadCounterU32Ex: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCounterU32ExRequest,
+        nidaqmx_pb2.BeginReadCounterU32ExResponse,
     ]
 
     ReadCtrFreq: grpc.UnaryUnaryMultiCallable[
@@ -1314,9 +1374,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.ReadCtrFreqResponse,
     ]
 
+    BeginReadCtrFreq: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCtrFreqRequest,
+        nidaqmx_pb2.BeginReadCtrFreqResponse,
+    ]
+
     ReadCtrFreqScalar: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrFreqScalarRequest,
         nidaqmx_pb2.ReadCtrFreqScalarResponse,
+    ]
+
+    BeginReadCtrFreqScalar: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCtrFreqScalarRequest,
+        nidaqmx_pb2.BeginReadCtrFreqScalarResponse,
     ]
 
     ReadCtrTicks: grpc.UnaryUnaryMultiCallable[
@@ -1324,9 +1394,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.ReadCtrTicksResponse,
     ]
 
+    BeginReadCtrTicks: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCtrTicksRequest,
+        nidaqmx_pb2.BeginReadCtrTicksResponse,
+    ]
+
     ReadCtrTicksScalar: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrTicksScalarRequest,
         nidaqmx_pb2.ReadCtrTicksScalarResponse,
+    ]
+
+    BeginReadCtrTicksScalar: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCtrTicksScalarRequest,
+        nidaqmx_pb2.BeginReadCtrTicksScalarResponse,
     ]
 
     ReadCtrTime: grpc.UnaryUnaryMultiCallable[
@@ -1334,9 +1414,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.ReadCtrTimeResponse,
     ]
 
+    BeginReadCtrTime: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCtrTimeRequest,
+        nidaqmx_pb2.BeginReadCtrTimeResponse,
+    ]
+
     ReadCtrTimeScalar: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrTimeScalarRequest,
         nidaqmx_pb2.ReadCtrTimeScalarResponse,
+    ]
+
+    BeginReadCtrTimeScalar: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCtrTimeScalarRequest,
+        nidaqmx_pb2.BeginReadCtrTimeScalarResponse,
     ]
 
     ReadDigitalLines: grpc.UnaryUnaryMultiCallable[
@@ -1344,9 +1434,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.ReadDigitalLinesResponse,
     ]
 
+    BeginReadDigitalLines: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadDigitalLinesRequest,
+        nidaqmx_pb2.BeginReadDigitalLinesResponse,
+    ]
+
     ReadDigitalScalarU32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadDigitalScalarU32Request,
         nidaqmx_pb2.ReadDigitalScalarU32Response,
+    ]
+
+    BeginReadDigitalScalarU32: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadDigitalScalarU32Request,
+        nidaqmx_pb2.BeginReadDigitalScalarU32Response,
     ]
 
     ReadDigitalU16: grpc.UnaryUnaryMultiCallable[
@@ -1354,9 +1454,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.ReadDigitalU16Response,
     ]
 
+    BeginReadDigitalU16: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadDigitalU16Request,
+        nidaqmx_pb2.BeginReadDigitalU16Response,
+    ]
+
     ReadDigitalU32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadDigitalU32Request,
         nidaqmx_pb2.ReadDigitalU32Response,
+    ]
+
+    BeginReadDigitalU32: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadDigitalU32Request,
+        nidaqmx_pb2.BeginReadDigitalU32Response,
     ]
 
     ReadDigitalU8: grpc.UnaryUnaryMultiCallable[
@@ -1364,9 +1474,24 @@ class NiDAQmxStub:
         nidaqmx_pb2.ReadDigitalU8Response,
     ]
 
+    BeginReadDigitalU8: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadDigitalU8Request,
+        nidaqmx_pb2.BeginReadDigitalU8Response,
+    ]
+
+    ReadIDPinMemory: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.ReadIDPinMemoryRequest,
+        nidaqmx_pb2.ReadIDPinMemoryResponse,
+    ]
+
     ReadPowerBinaryI16: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadPowerBinaryI16Request,
         nidaqmx_pb2.ReadPowerBinaryI16Response,
+    ]
+
+    BeginReadPowerBinaryI16: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadPowerBinaryI16Request,
+        nidaqmx_pb2.BeginReadPowerBinaryI16Response,
     ]
 
     ReadPowerF64: grpc.UnaryUnaryMultiCallable[
@@ -1374,14 +1499,29 @@ class NiDAQmxStub:
         nidaqmx_pb2.ReadPowerF64Response,
     ]
 
+    BeginReadPowerF64: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadPowerF64Request,
+        nidaqmx_pb2.BeginReadPowerF64Response,
+    ]
+
     ReadPowerScalarF64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadPowerScalarF64Request,
         nidaqmx_pb2.ReadPowerScalarF64Response,
     ]
 
+    BeginReadPowerScalarF64: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadPowerScalarF64Request,
+        nidaqmx_pb2.BeginReadPowerScalarF64Response,
+    ]
+
     ReadRaw: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadRawRequest,
         nidaqmx_pb2.ReadRawResponse,
+    ]
+
+    BeginReadRaw: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadRawRequest,
+        nidaqmx_pb2.BeginReadRawResponse,
     ]
 
     RegisterDoneEvent: grpc.UnaryStreamMultiCallable[
@@ -1904,6 +2044,11 @@ class NiDAQmxStub:
         nidaqmx_pb2.WaitForNextSampleClockResponse,
     ]
 
+    BeginWaitForNextSampleClock: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWaitForNextSampleClockRequest,
+        nidaqmx_pb2.BeginWaitForNextSampleClockResponse,
+    ]
+
     WaitForValidTimestamp: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WaitForValidTimestampRequest,
         nidaqmx_pb2.WaitForValidTimestampResponse,
@@ -1919,9 +2064,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.WriteAnalogF64Response,
     ]
 
+    BeginWriteAnalogF64: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteAnalogF64Request,
+        nidaqmx_pb2.BeginWriteAnalogF64Response,
+    ]
+
     WriteAnalogScalarF64: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteAnalogScalarF64Request,
         nidaqmx_pb2.WriteAnalogScalarF64Response,
+    ]
+
+    BeginWriteAnalogScalarF64: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteAnalogScalarF64Request,
+        nidaqmx_pb2.BeginWriteAnalogScalarF64Response,
     ]
 
     WriteBinaryI16: grpc.UnaryUnaryMultiCallable[
@@ -1929,9 +2084,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.WriteBinaryI16Response,
     ]
 
+    BeginWriteBinaryI16: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteBinaryI16Request,
+        nidaqmx_pb2.BeginWriteBinaryI16Response,
+    ]
+
     WriteBinaryI32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteBinaryI32Request,
         nidaqmx_pb2.WriteBinaryI32Response,
+    ]
+
+    BeginWriteBinaryI32: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteBinaryI32Request,
+        nidaqmx_pb2.BeginWriteBinaryI32Response,
     ]
 
     WriteBinaryU16: grpc.UnaryUnaryMultiCallable[
@@ -1939,9 +2104,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.WriteBinaryU16Response,
     ]
 
+    BeginWriteBinaryU16: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteBinaryU16Request,
+        nidaqmx_pb2.BeginWriteBinaryU16Response,
+    ]
+
     WriteBinaryU32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteBinaryU32Request,
         nidaqmx_pb2.WriteBinaryU32Response,
+    ]
+
+    BeginWriteBinaryU32: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteBinaryU32Request,
+        nidaqmx_pb2.BeginWriteBinaryU32Response,
     ]
 
     WriteCtrFreq: grpc.UnaryUnaryMultiCallable[
@@ -1949,9 +2124,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.WriteCtrFreqResponse,
     ]
 
+    BeginWriteCtrFreq: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteCtrFreqRequest,
+        nidaqmx_pb2.BeginWriteCtrFreqResponse,
+    ]
+
     WriteCtrFreqScalar: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrFreqScalarRequest,
         nidaqmx_pb2.WriteCtrFreqScalarResponse,
+    ]
+
+    BeginWriteCtrFreqScalar: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteCtrFreqScalarRequest,
+        nidaqmx_pb2.BeginWriteCtrFreqScalarResponse,
     ]
 
     WriteCtrTicks: grpc.UnaryUnaryMultiCallable[
@@ -1959,9 +2144,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.WriteCtrTicksResponse,
     ]
 
+    BeginWriteCtrTicks: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteCtrTicksRequest,
+        nidaqmx_pb2.BeginWriteCtrTicksResponse,
+    ]
+
     WriteCtrTicksScalar: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrTicksScalarRequest,
         nidaqmx_pb2.WriteCtrTicksScalarResponse,
+    ]
+
+    BeginWriteCtrTicksScalar: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteCtrTicksScalarRequest,
+        nidaqmx_pb2.BeginWriteCtrTicksScalarResponse,
     ]
 
     WriteCtrTime: grpc.UnaryUnaryMultiCallable[
@@ -1969,9 +2164,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.WriteCtrTimeResponse,
     ]
 
+    BeginWriteCtrTime: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteCtrTimeRequest,
+        nidaqmx_pb2.BeginWriteCtrTimeResponse,
+    ]
+
     WriteCtrTimeScalar: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrTimeScalarRequest,
         nidaqmx_pb2.WriteCtrTimeScalarResponse,
+    ]
+
+    BeginWriteCtrTimeScalar: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteCtrTimeScalarRequest,
+        nidaqmx_pb2.BeginWriteCtrTimeScalarResponse,
     ]
 
     WriteDigitalLines: grpc.UnaryUnaryMultiCallable[
@@ -1979,9 +2184,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.WriteDigitalLinesResponse,
     ]
 
+    BeginWriteDigitalLines: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteDigitalLinesRequest,
+        nidaqmx_pb2.BeginWriteDigitalLinesResponse,
+    ]
+
     WriteDigitalScalarU32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteDigitalScalarU32Request,
         nidaqmx_pb2.WriteDigitalScalarU32Response,
+    ]
+
+    BeginWriteDigitalScalarU32: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteDigitalScalarU32Request,
+        nidaqmx_pb2.BeginWriteDigitalScalarU32Response,
     ]
 
     WriteDigitalU16: grpc.UnaryUnaryMultiCallable[
@@ -1989,9 +2204,19 @@ class NiDAQmxStub:
         nidaqmx_pb2.WriteDigitalU16Response,
     ]
 
+    BeginWriteDigitalU16: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteDigitalU16Request,
+        nidaqmx_pb2.BeginWriteDigitalU16Response,
+    ]
+
     WriteDigitalU32: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteDigitalU32Request,
         nidaqmx_pb2.WriteDigitalU32Response,
+    ]
+
+    BeginWriteDigitalU32: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteDigitalU32Request,
+        nidaqmx_pb2.BeginWriteDigitalU32Response,
     ]
 
     WriteDigitalU8: grpc.UnaryUnaryMultiCallable[
@@ -1999,9 +2224,24 @@ class NiDAQmxStub:
         nidaqmx_pb2.WriteDigitalU8Response,
     ]
 
+    BeginWriteDigitalU8: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteDigitalU8Request,
+        nidaqmx_pb2.BeginWriteDigitalU8Response,
+    ]
+
+    WriteIDPinMemory: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.WriteIDPinMemoryRequest,
+        nidaqmx_pb2.WriteIDPinMemoryResponse,
+    ]
+
     WriteRaw: grpc.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteRawRequest,
         nidaqmx_pb2.WriteRawResponse,
+    ]
+
+    BeginWriteRaw: grpc.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteRawRequest,
+        nidaqmx_pb2.BeginWriteRawResponse,
     ]
 
     WriteToTEDSFromArray: grpc.UnaryUnaryMultiCallable[
@@ -3245,9 +3485,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.ReadAnalogF64Response,
     ]
 
+    BeginReadAnalogF64: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadAnalogF64Request,
+        nidaqmx_pb2.BeginReadAnalogF64Response,
+    ]
+
     ReadAnalogScalarF64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadAnalogScalarF64Request,
         nidaqmx_pb2.ReadAnalogScalarF64Response,
+    ]
+
+    BeginReadAnalogScalarF64: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadAnalogScalarF64Request,
+        nidaqmx_pb2.BeginReadAnalogScalarF64Response,
     ]
 
     ReadBinaryI16: grpc.aio.UnaryUnaryMultiCallable[
@@ -3255,9 +3505,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.ReadBinaryI16Response,
     ]
 
+    BeginReadBinaryI16: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadBinaryI16Request,
+        nidaqmx_pb2.BeginReadBinaryI16Response,
+    ]
+
     ReadBinaryI32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadBinaryI32Request,
         nidaqmx_pb2.ReadBinaryI32Response,
+    ]
+
+    BeginReadBinaryI32: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadBinaryI32Request,
+        nidaqmx_pb2.BeginReadBinaryI32Response,
     ]
 
     ReadBinaryU16: grpc.aio.UnaryUnaryMultiCallable[
@@ -3265,9 +3525,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.ReadBinaryU16Response,
     ]
 
+    BeginReadBinaryU16: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadBinaryU16Request,
+        nidaqmx_pb2.BeginReadBinaryU16Response,
+    ]
+
     ReadBinaryU32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadBinaryU32Request,
         nidaqmx_pb2.ReadBinaryU32Response,
+    ]
+
+    BeginReadBinaryU32: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadBinaryU32Request,
+        nidaqmx_pb2.BeginReadBinaryU32Response,
     ]
 
     ReadCounterF64: grpc.aio.UnaryUnaryMultiCallable[
@@ -3275,9 +3545,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.ReadCounterF64Response,
     ]
 
+    BeginReadCounterF64: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCounterF64Request,
+        nidaqmx_pb2.BeginReadCounterF64Response,
+    ]
+
     ReadCounterF64Ex: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterF64ExRequest,
         nidaqmx_pb2.ReadCounterF64ExResponse,
+    ]
+
+    BeginReadCounterF64Ex: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCounterF64ExRequest,
+        nidaqmx_pb2.BeginReadCounterF64ExResponse,
     ]
 
     ReadCounterScalarF64: grpc.aio.UnaryUnaryMultiCallable[
@@ -3285,9 +3565,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.ReadCounterScalarF64Response,
     ]
 
+    BeginReadCounterScalarF64: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCounterScalarF64Request,
+        nidaqmx_pb2.BeginReadCounterScalarF64Response,
+    ]
+
     ReadCounterScalarU32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterScalarU32Request,
         nidaqmx_pb2.ReadCounterScalarU32Response,
+    ]
+
+    BeginReadCounterScalarU32: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCounterScalarU32Request,
+        nidaqmx_pb2.BeginReadCounterScalarU32Response,
     ]
 
     ReadCounterU32: grpc.aio.UnaryUnaryMultiCallable[
@@ -3295,9 +3585,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.ReadCounterU32Response,
     ]
 
+    BeginReadCounterU32: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCounterU32Request,
+        nidaqmx_pb2.BeginReadCounterU32Response,
+    ]
+
     ReadCounterU32Ex: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCounterU32ExRequest,
         nidaqmx_pb2.ReadCounterU32ExResponse,
+    ]
+
+    BeginReadCounterU32Ex: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCounterU32ExRequest,
+        nidaqmx_pb2.BeginReadCounterU32ExResponse,
     ]
 
     ReadCtrFreq: grpc.aio.UnaryUnaryMultiCallable[
@@ -3305,9 +3605,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.ReadCtrFreqResponse,
     ]
 
+    BeginReadCtrFreq: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCtrFreqRequest,
+        nidaqmx_pb2.BeginReadCtrFreqResponse,
+    ]
+
     ReadCtrFreqScalar: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrFreqScalarRequest,
         nidaqmx_pb2.ReadCtrFreqScalarResponse,
+    ]
+
+    BeginReadCtrFreqScalar: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCtrFreqScalarRequest,
+        nidaqmx_pb2.BeginReadCtrFreqScalarResponse,
     ]
 
     ReadCtrTicks: grpc.aio.UnaryUnaryMultiCallable[
@@ -3315,9 +3625,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.ReadCtrTicksResponse,
     ]
 
+    BeginReadCtrTicks: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCtrTicksRequest,
+        nidaqmx_pb2.BeginReadCtrTicksResponse,
+    ]
+
     ReadCtrTicksScalar: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrTicksScalarRequest,
         nidaqmx_pb2.ReadCtrTicksScalarResponse,
+    ]
+
+    BeginReadCtrTicksScalar: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCtrTicksScalarRequest,
+        nidaqmx_pb2.BeginReadCtrTicksScalarResponse,
     ]
 
     ReadCtrTime: grpc.aio.UnaryUnaryMultiCallable[
@@ -3325,9 +3645,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.ReadCtrTimeResponse,
     ]
 
+    BeginReadCtrTime: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCtrTimeRequest,
+        nidaqmx_pb2.BeginReadCtrTimeResponse,
+    ]
+
     ReadCtrTimeScalar: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadCtrTimeScalarRequest,
         nidaqmx_pb2.ReadCtrTimeScalarResponse,
+    ]
+
+    BeginReadCtrTimeScalar: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadCtrTimeScalarRequest,
+        nidaqmx_pb2.BeginReadCtrTimeScalarResponse,
     ]
 
     ReadDigitalLines: grpc.aio.UnaryUnaryMultiCallable[
@@ -3335,9 +3665,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.ReadDigitalLinesResponse,
     ]
 
+    BeginReadDigitalLines: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadDigitalLinesRequest,
+        nidaqmx_pb2.BeginReadDigitalLinesResponse,
+    ]
+
     ReadDigitalScalarU32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadDigitalScalarU32Request,
         nidaqmx_pb2.ReadDigitalScalarU32Response,
+    ]
+
+    BeginReadDigitalScalarU32: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadDigitalScalarU32Request,
+        nidaqmx_pb2.BeginReadDigitalScalarU32Response,
     ]
 
     ReadDigitalU16: grpc.aio.UnaryUnaryMultiCallable[
@@ -3345,9 +3685,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.ReadDigitalU16Response,
     ]
 
+    BeginReadDigitalU16: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadDigitalU16Request,
+        nidaqmx_pb2.BeginReadDigitalU16Response,
+    ]
+
     ReadDigitalU32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadDigitalU32Request,
         nidaqmx_pb2.ReadDigitalU32Response,
+    ]
+
+    BeginReadDigitalU32: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadDigitalU32Request,
+        nidaqmx_pb2.BeginReadDigitalU32Response,
     ]
 
     ReadDigitalU8: grpc.aio.UnaryUnaryMultiCallable[
@@ -3355,9 +3705,24 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.ReadDigitalU8Response,
     ]
 
+    BeginReadDigitalU8: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadDigitalU8Request,
+        nidaqmx_pb2.BeginReadDigitalU8Response,
+    ]
+
+    ReadIDPinMemory: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.ReadIDPinMemoryRequest,
+        nidaqmx_pb2.ReadIDPinMemoryResponse,
+    ]
+
     ReadPowerBinaryI16: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadPowerBinaryI16Request,
         nidaqmx_pb2.ReadPowerBinaryI16Response,
+    ]
+
+    BeginReadPowerBinaryI16: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadPowerBinaryI16Request,
+        nidaqmx_pb2.BeginReadPowerBinaryI16Response,
     ]
 
     ReadPowerF64: grpc.aio.UnaryUnaryMultiCallable[
@@ -3365,14 +3730,29 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.ReadPowerF64Response,
     ]
 
+    BeginReadPowerF64: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadPowerF64Request,
+        nidaqmx_pb2.BeginReadPowerF64Response,
+    ]
+
     ReadPowerScalarF64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadPowerScalarF64Request,
         nidaqmx_pb2.ReadPowerScalarF64Response,
     ]
 
+    BeginReadPowerScalarF64: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadPowerScalarF64Request,
+        nidaqmx_pb2.BeginReadPowerScalarF64Response,
+    ]
+
     ReadRaw: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.ReadRawRequest,
         nidaqmx_pb2.ReadRawResponse,
+    ]
+
+    BeginReadRaw: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginReadRawRequest,
+        nidaqmx_pb2.BeginReadRawResponse,
     ]
 
     RegisterDoneEvent: grpc.aio.UnaryStreamMultiCallable[
@@ -3895,6 +4275,11 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.WaitForNextSampleClockResponse,
     ]
 
+    BeginWaitForNextSampleClock: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWaitForNextSampleClockRequest,
+        nidaqmx_pb2.BeginWaitForNextSampleClockResponse,
+    ]
+
     WaitForValidTimestamp: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WaitForValidTimestampRequest,
         nidaqmx_pb2.WaitForValidTimestampResponse,
@@ -3910,9 +4295,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.WriteAnalogF64Response,
     ]
 
+    BeginWriteAnalogF64: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteAnalogF64Request,
+        nidaqmx_pb2.BeginWriteAnalogF64Response,
+    ]
+
     WriteAnalogScalarF64: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteAnalogScalarF64Request,
         nidaqmx_pb2.WriteAnalogScalarF64Response,
+    ]
+
+    BeginWriteAnalogScalarF64: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteAnalogScalarF64Request,
+        nidaqmx_pb2.BeginWriteAnalogScalarF64Response,
     ]
 
     WriteBinaryI16: grpc.aio.UnaryUnaryMultiCallable[
@@ -3920,9 +4315,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.WriteBinaryI16Response,
     ]
 
+    BeginWriteBinaryI16: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteBinaryI16Request,
+        nidaqmx_pb2.BeginWriteBinaryI16Response,
+    ]
+
     WriteBinaryI32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteBinaryI32Request,
         nidaqmx_pb2.WriteBinaryI32Response,
+    ]
+
+    BeginWriteBinaryI32: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteBinaryI32Request,
+        nidaqmx_pb2.BeginWriteBinaryI32Response,
     ]
 
     WriteBinaryU16: grpc.aio.UnaryUnaryMultiCallable[
@@ -3930,9 +4335,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.WriteBinaryU16Response,
     ]
 
+    BeginWriteBinaryU16: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteBinaryU16Request,
+        nidaqmx_pb2.BeginWriteBinaryU16Response,
+    ]
+
     WriteBinaryU32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteBinaryU32Request,
         nidaqmx_pb2.WriteBinaryU32Response,
+    ]
+
+    BeginWriteBinaryU32: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteBinaryU32Request,
+        nidaqmx_pb2.BeginWriteBinaryU32Response,
     ]
 
     WriteCtrFreq: grpc.aio.UnaryUnaryMultiCallable[
@@ -3940,9 +4355,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.WriteCtrFreqResponse,
     ]
 
+    BeginWriteCtrFreq: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteCtrFreqRequest,
+        nidaqmx_pb2.BeginWriteCtrFreqResponse,
+    ]
+
     WriteCtrFreqScalar: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrFreqScalarRequest,
         nidaqmx_pb2.WriteCtrFreqScalarResponse,
+    ]
+
+    BeginWriteCtrFreqScalar: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteCtrFreqScalarRequest,
+        nidaqmx_pb2.BeginWriteCtrFreqScalarResponse,
     ]
 
     WriteCtrTicks: grpc.aio.UnaryUnaryMultiCallable[
@@ -3950,9 +4375,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.WriteCtrTicksResponse,
     ]
 
+    BeginWriteCtrTicks: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteCtrTicksRequest,
+        nidaqmx_pb2.BeginWriteCtrTicksResponse,
+    ]
+
     WriteCtrTicksScalar: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrTicksScalarRequest,
         nidaqmx_pb2.WriteCtrTicksScalarResponse,
+    ]
+
+    BeginWriteCtrTicksScalar: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteCtrTicksScalarRequest,
+        nidaqmx_pb2.BeginWriteCtrTicksScalarResponse,
     ]
 
     WriteCtrTime: grpc.aio.UnaryUnaryMultiCallable[
@@ -3960,9 +4395,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.WriteCtrTimeResponse,
     ]
 
+    BeginWriteCtrTime: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteCtrTimeRequest,
+        nidaqmx_pb2.BeginWriteCtrTimeResponse,
+    ]
+
     WriteCtrTimeScalar: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteCtrTimeScalarRequest,
         nidaqmx_pb2.WriteCtrTimeScalarResponse,
+    ]
+
+    BeginWriteCtrTimeScalar: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteCtrTimeScalarRequest,
+        nidaqmx_pb2.BeginWriteCtrTimeScalarResponse,
     ]
 
     WriteDigitalLines: grpc.aio.UnaryUnaryMultiCallable[
@@ -3970,9 +4415,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.WriteDigitalLinesResponse,
     ]
 
+    BeginWriteDigitalLines: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteDigitalLinesRequest,
+        nidaqmx_pb2.BeginWriteDigitalLinesResponse,
+    ]
+
     WriteDigitalScalarU32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteDigitalScalarU32Request,
         nidaqmx_pb2.WriteDigitalScalarU32Response,
+    ]
+
+    BeginWriteDigitalScalarU32: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteDigitalScalarU32Request,
+        nidaqmx_pb2.BeginWriteDigitalScalarU32Response,
     ]
 
     WriteDigitalU16: grpc.aio.UnaryUnaryMultiCallable[
@@ -3980,9 +4435,19 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.WriteDigitalU16Response,
     ]
 
+    BeginWriteDigitalU16: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteDigitalU16Request,
+        nidaqmx_pb2.BeginWriteDigitalU16Response,
+    ]
+
     WriteDigitalU32: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteDigitalU32Request,
         nidaqmx_pb2.WriteDigitalU32Response,
+    ]
+
+    BeginWriteDigitalU32: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteDigitalU32Request,
+        nidaqmx_pb2.BeginWriteDigitalU32Response,
     ]
 
     WriteDigitalU8: grpc.aio.UnaryUnaryMultiCallable[
@@ -3990,9 +4455,24 @@ class NiDAQmxAsyncStub:
         nidaqmx_pb2.WriteDigitalU8Response,
     ]
 
+    BeginWriteDigitalU8: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteDigitalU8Request,
+        nidaqmx_pb2.BeginWriteDigitalU8Response,
+    ]
+
+    WriteIDPinMemory: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.WriteIDPinMemoryRequest,
+        nidaqmx_pb2.WriteIDPinMemoryResponse,
+    ]
+
     WriteRaw: grpc.aio.UnaryUnaryMultiCallable[
         nidaqmx_pb2.WriteRawRequest,
         nidaqmx_pb2.WriteRawResponse,
+    ]
+
+    BeginWriteRaw: grpc.aio.UnaryUnaryMultiCallable[
+        nidaqmx_pb2.BeginWriteRawRequest,
+        nidaqmx_pb2.BeginWriteRawResponse,
     ]
 
     WriteToTEDSFromArray: grpc.aio.UnaryUnaryMultiCallable[
@@ -5729,11 +6209,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.ReadAnalogF64Response, collections.abc.Awaitable[nidaqmx_pb2.ReadAnalogF64Response]]: ...
 
     @abc.abstractmethod
+    def BeginReadAnalogF64(
+        self,
+        request: nidaqmx_pb2.BeginReadAnalogF64Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadAnalogF64Response, collections.abc.Awaitable[nidaqmx_pb2.BeginReadAnalogF64Response]]: ...
+
+    @abc.abstractmethod
     def ReadAnalogScalarF64(
         self,
         request: nidaqmx_pb2.ReadAnalogScalarF64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadAnalogScalarF64Response, collections.abc.Awaitable[nidaqmx_pb2.ReadAnalogScalarF64Response]]: ...
+
+    @abc.abstractmethod
+    def BeginReadAnalogScalarF64(
+        self,
+        request: nidaqmx_pb2.BeginReadAnalogScalarF64Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadAnalogScalarF64Response, collections.abc.Awaitable[nidaqmx_pb2.BeginReadAnalogScalarF64Response]]: ...
 
     @abc.abstractmethod
     def ReadBinaryI16(
@@ -5743,11 +6237,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.ReadBinaryI16Response, collections.abc.Awaitable[nidaqmx_pb2.ReadBinaryI16Response]]: ...
 
     @abc.abstractmethod
+    def BeginReadBinaryI16(
+        self,
+        request: nidaqmx_pb2.BeginReadBinaryI16Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadBinaryI16Response, collections.abc.Awaitable[nidaqmx_pb2.BeginReadBinaryI16Response]]: ...
+
+    @abc.abstractmethod
     def ReadBinaryI32(
         self,
         request: nidaqmx_pb2.ReadBinaryI32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadBinaryI32Response, collections.abc.Awaitable[nidaqmx_pb2.ReadBinaryI32Response]]: ...
+
+    @abc.abstractmethod
+    def BeginReadBinaryI32(
+        self,
+        request: nidaqmx_pb2.BeginReadBinaryI32Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadBinaryI32Response, collections.abc.Awaitable[nidaqmx_pb2.BeginReadBinaryI32Response]]: ...
 
     @abc.abstractmethod
     def ReadBinaryU16(
@@ -5757,11 +6265,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.ReadBinaryU16Response, collections.abc.Awaitable[nidaqmx_pb2.ReadBinaryU16Response]]: ...
 
     @abc.abstractmethod
+    def BeginReadBinaryU16(
+        self,
+        request: nidaqmx_pb2.BeginReadBinaryU16Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadBinaryU16Response, collections.abc.Awaitable[nidaqmx_pb2.BeginReadBinaryU16Response]]: ...
+
+    @abc.abstractmethod
     def ReadBinaryU32(
         self,
         request: nidaqmx_pb2.ReadBinaryU32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadBinaryU32Response, collections.abc.Awaitable[nidaqmx_pb2.ReadBinaryU32Response]]: ...
+
+    @abc.abstractmethod
+    def BeginReadBinaryU32(
+        self,
+        request: nidaqmx_pb2.BeginReadBinaryU32Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadBinaryU32Response, collections.abc.Awaitable[nidaqmx_pb2.BeginReadBinaryU32Response]]: ...
 
     @abc.abstractmethod
     def ReadCounterF64(
@@ -5771,11 +6293,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.ReadCounterF64Response, collections.abc.Awaitable[nidaqmx_pb2.ReadCounterF64Response]]: ...
 
     @abc.abstractmethod
+    def BeginReadCounterF64(
+        self,
+        request: nidaqmx_pb2.BeginReadCounterF64Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadCounterF64Response, collections.abc.Awaitable[nidaqmx_pb2.BeginReadCounterF64Response]]: ...
+
+    @abc.abstractmethod
     def ReadCounterF64Ex(
         self,
         request: nidaqmx_pb2.ReadCounterF64ExRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCounterF64ExResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadCounterF64ExResponse]]: ...
+
+    @abc.abstractmethod
+    def BeginReadCounterF64Ex(
+        self,
+        request: nidaqmx_pb2.BeginReadCounterF64ExRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadCounterF64ExResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginReadCounterF64ExResponse]]: ...
 
     @abc.abstractmethod
     def ReadCounterScalarF64(
@@ -5785,11 +6321,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.ReadCounterScalarF64Response, collections.abc.Awaitable[nidaqmx_pb2.ReadCounterScalarF64Response]]: ...
 
     @abc.abstractmethod
+    def BeginReadCounterScalarF64(
+        self,
+        request: nidaqmx_pb2.BeginReadCounterScalarF64Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadCounterScalarF64Response, collections.abc.Awaitable[nidaqmx_pb2.BeginReadCounterScalarF64Response]]: ...
+
+    @abc.abstractmethod
     def ReadCounterScalarU32(
         self,
         request: nidaqmx_pb2.ReadCounterScalarU32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCounterScalarU32Response, collections.abc.Awaitable[nidaqmx_pb2.ReadCounterScalarU32Response]]: ...
+
+    @abc.abstractmethod
+    def BeginReadCounterScalarU32(
+        self,
+        request: nidaqmx_pb2.BeginReadCounterScalarU32Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadCounterScalarU32Response, collections.abc.Awaitable[nidaqmx_pb2.BeginReadCounterScalarU32Response]]: ...
 
     @abc.abstractmethod
     def ReadCounterU32(
@@ -5799,11 +6349,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.ReadCounterU32Response, collections.abc.Awaitable[nidaqmx_pb2.ReadCounterU32Response]]: ...
 
     @abc.abstractmethod
+    def BeginReadCounterU32(
+        self,
+        request: nidaqmx_pb2.BeginReadCounterU32Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadCounterU32Response, collections.abc.Awaitable[nidaqmx_pb2.BeginReadCounterU32Response]]: ...
+
+    @abc.abstractmethod
     def ReadCounterU32Ex(
         self,
         request: nidaqmx_pb2.ReadCounterU32ExRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCounterU32ExResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadCounterU32ExResponse]]: ...
+
+    @abc.abstractmethod
+    def BeginReadCounterU32Ex(
+        self,
+        request: nidaqmx_pb2.BeginReadCounterU32ExRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadCounterU32ExResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginReadCounterU32ExResponse]]: ...
 
     @abc.abstractmethod
     def ReadCtrFreq(
@@ -5813,11 +6377,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.ReadCtrFreqResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadCtrFreqResponse]]: ...
 
     @abc.abstractmethod
+    def BeginReadCtrFreq(
+        self,
+        request: nidaqmx_pb2.BeginReadCtrFreqRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadCtrFreqResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginReadCtrFreqResponse]]: ...
+
+    @abc.abstractmethod
     def ReadCtrFreqScalar(
         self,
         request: nidaqmx_pb2.ReadCtrFreqScalarRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCtrFreqScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadCtrFreqScalarResponse]]: ...
+
+    @abc.abstractmethod
+    def BeginReadCtrFreqScalar(
+        self,
+        request: nidaqmx_pb2.BeginReadCtrFreqScalarRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadCtrFreqScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginReadCtrFreqScalarResponse]]: ...
 
     @abc.abstractmethod
     def ReadCtrTicks(
@@ -5827,11 +6405,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.ReadCtrTicksResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadCtrTicksResponse]]: ...
 
     @abc.abstractmethod
+    def BeginReadCtrTicks(
+        self,
+        request: nidaqmx_pb2.BeginReadCtrTicksRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadCtrTicksResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginReadCtrTicksResponse]]: ...
+
+    @abc.abstractmethod
     def ReadCtrTicksScalar(
         self,
         request: nidaqmx_pb2.ReadCtrTicksScalarRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCtrTicksScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadCtrTicksScalarResponse]]: ...
+
+    @abc.abstractmethod
+    def BeginReadCtrTicksScalar(
+        self,
+        request: nidaqmx_pb2.BeginReadCtrTicksScalarRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadCtrTicksScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginReadCtrTicksScalarResponse]]: ...
 
     @abc.abstractmethod
     def ReadCtrTime(
@@ -5841,11 +6433,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.ReadCtrTimeResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadCtrTimeResponse]]: ...
 
     @abc.abstractmethod
+    def BeginReadCtrTime(
+        self,
+        request: nidaqmx_pb2.BeginReadCtrTimeRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadCtrTimeResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginReadCtrTimeResponse]]: ...
+
+    @abc.abstractmethod
     def ReadCtrTimeScalar(
         self,
         request: nidaqmx_pb2.ReadCtrTimeScalarRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadCtrTimeScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadCtrTimeScalarResponse]]: ...
+
+    @abc.abstractmethod
+    def BeginReadCtrTimeScalar(
+        self,
+        request: nidaqmx_pb2.BeginReadCtrTimeScalarRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadCtrTimeScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginReadCtrTimeScalarResponse]]: ...
 
     @abc.abstractmethod
     def ReadDigitalLines(
@@ -5855,11 +6461,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.ReadDigitalLinesResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadDigitalLinesResponse]]: ...
 
     @abc.abstractmethod
+    def BeginReadDigitalLines(
+        self,
+        request: nidaqmx_pb2.BeginReadDigitalLinesRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadDigitalLinesResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginReadDigitalLinesResponse]]: ...
+
+    @abc.abstractmethod
     def ReadDigitalScalarU32(
         self,
         request: nidaqmx_pb2.ReadDigitalScalarU32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadDigitalScalarU32Response, collections.abc.Awaitable[nidaqmx_pb2.ReadDigitalScalarU32Response]]: ...
+
+    @abc.abstractmethod
+    def BeginReadDigitalScalarU32(
+        self,
+        request: nidaqmx_pb2.BeginReadDigitalScalarU32Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadDigitalScalarU32Response, collections.abc.Awaitable[nidaqmx_pb2.BeginReadDigitalScalarU32Response]]: ...
 
     @abc.abstractmethod
     def ReadDigitalU16(
@@ -5869,11 +6489,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.ReadDigitalU16Response, collections.abc.Awaitable[nidaqmx_pb2.ReadDigitalU16Response]]: ...
 
     @abc.abstractmethod
+    def BeginReadDigitalU16(
+        self,
+        request: nidaqmx_pb2.BeginReadDigitalU16Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadDigitalU16Response, collections.abc.Awaitable[nidaqmx_pb2.BeginReadDigitalU16Response]]: ...
+
+    @abc.abstractmethod
     def ReadDigitalU32(
         self,
         request: nidaqmx_pb2.ReadDigitalU32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadDigitalU32Response, collections.abc.Awaitable[nidaqmx_pb2.ReadDigitalU32Response]]: ...
+
+    @abc.abstractmethod
+    def BeginReadDigitalU32(
+        self,
+        request: nidaqmx_pb2.BeginReadDigitalU32Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadDigitalU32Response, collections.abc.Awaitable[nidaqmx_pb2.BeginReadDigitalU32Response]]: ...
 
     @abc.abstractmethod
     def ReadDigitalU8(
@@ -5883,11 +6517,32 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.ReadDigitalU8Response, collections.abc.Awaitable[nidaqmx_pb2.ReadDigitalU8Response]]: ...
 
     @abc.abstractmethod
+    def BeginReadDigitalU8(
+        self,
+        request: nidaqmx_pb2.BeginReadDigitalU8Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadDigitalU8Response, collections.abc.Awaitable[nidaqmx_pb2.BeginReadDigitalU8Response]]: ...
+
+    @abc.abstractmethod
+    def ReadIDPinMemory(
+        self,
+        request: nidaqmx_pb2.ReadIDPinMemoryRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.ReadIDPinMemoryResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadIDPinMemoryResponse]]: ...
+
+    @abc.abstractmethod
     def ReadPowerBinaryI16(
         self,
         request: nidaqmx_pb2.ReadPowerBinaryI16Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadPowerBinaryI16Response, collections.abc.Awaitable[nidaqmx_pb2.ReadPowerBinaryI16Response]]: ...
+
+    @abc.abstractmethod
+    def BeginReadPowerBinaryI16(
+        self,
+        request: nidaqmx_pb2.BeginReadPowerBinaryI16Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadPowerBinaryI16Response, collections.abc.Awaitable[nidaqmx_pb2.BeginReadPowerBinaryI16Response]]: ...
 
     @abc.abstractmethod
     def ReadPowerF64(
@@ -5897,6 +6552,13 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.ReadPowerF64Response, collections.abc.Awaitable[nidaqmx_pb2.ReadPowerF64Response]]: ...
 
     @abc.abstractmethod
+    def BeginReadPowerF64(
+        self,
+        request: nidaqmx_pb2.BeginReadPowerF64Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadPowerF64Response, collections.abc.Awaitable[nidaqmx_pb2.BeginReadPowerF64Response]]: ...
+
+    @abc.abstractmethod
     def ReadPowerScalarF64(
         self,
         request: nidaqmx_pb2.ReadPowerScalarF64Request,
@@ -5904,11 +6566,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.ReadPowerScalarF64Response, collections.abc.Awaitable[nidaqmx_pb2.ReadPowerScalarF64Response]]: ...
 
     @abc.abstractmethod
+    def BeginReadPowerScalarF64(
+        self,
+        request: nidaqmx_pb2.BeginReadPowerScalarF64Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadPowerScalarF64Response, collections.abc.Awaitable[nidaqmx_pb2.BeginReadPowerScalarF64Response]]: ...
+
+    @abc.abstractmethod
     def ReadRaw(
         self,
         request: nidaqmx_pb2.ReadRawRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.ReadRawResponse, collections.abc.Awaitable[nidaqmx_pb2.ReadRawResponse]]: ...
+
+    @abc.abstractmethod
+    def BeginReadRaw(
+        self,
+        request: nidaqmx_pb2.BeginReadRawRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginReadRawResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginReadRawResponse]]: ...
 
     @abc.abstractmethod
     def RegisterDoneEvent(
@@ -6639,6 +7315,13 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.WaitForNextSampleClockResponse, collections.abc.Awaitable[nidaqmx_pb2.WaitForNextSampleClockResponse]]: ...
 
     @abc.abstractmethod
+    def BeginWaitForNextSampleClock(
+        self,
+        request: nidaqmx_pb2.BeginWaitForNextSampleClockRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWaitForNextSampleClockResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginWaitForNextSampleClockResponse]]: ...
+
+    @abc.abstractmethod
     def WaitForValidTimestamp(
         self,
         request: nidaqmx_pb2.WaitForValidTimestampRequest,
@@ -6660,11 +7343,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.WriteAnalogF64Response, collections.abc.Awaitable[nidaqmx_pb2.WriteAnalogF64Response]]: ...
 
     @abc.abstractmethod
+    def BeginWriteAnalogF64(
+        self,
+        request: nidaqmx_pb2.BeginWriteAnalogF64Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteAnalogF64Response, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteAnalogF64Response]]: ...
+
+    @abc.abstractmethod
     def WriteAnalogScalarF64(
         self,
         request: nidaqmx_pb2.WriteAnalogScalarF64Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteAnalogScalarF64Response, collections.abc.Awaitable[nidaqmx_pb2.WriteAnalogScalarF64Response]]: ...
+
+    @abc.abstractmethod
+    def BeginWriteAnalogScalarF64(
+        self,
+        request: nidaqmx_pb2.BeginWriteAnalogScalarF64Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteAnalogScalarF64Response, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteAnalogScalarF64Response]]: ...
 
     @abc.abstractmethod
     def WriteBinaryI16(
@@ -6674,11 +7371,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.WriteBinaryI16Response, collections.abc.Awaitable[nidaqmx_pb2.WriteBinaryI16Response]]: ...
 
     @abc.abstractmethod
+    def BeginWriteBinaryI16(
+        self,
+        request: nidaqmx_pb2.BeginWriteBinaryI16Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteBinaryI16Response, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteBinaryI16Response]]: ...
+
+    @abc.abstractmethod
     def WriteBinaryI32(
         self,
         request: nidaqmx_pb2.WriteBinaryI32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteBinaryI32Response, collections.abc.Awaitable[nidaqmx_pb2.WriteBinaryI32Response]]: ...
+
+    @abc.abstractmethod
+    def BeginWriteBinaryI32(
+        self,
+        request: nidaqmx_pb2.BeginWriteBinaryI32Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteBinaryI32Response, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteBinaryI32Response]]: ...
 
     @abc.abstractmethod
     def WriteBinaryU16(
@@ -6688,11 +7399,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.WriteBinaryU16Response, collections.abc.Awaitable[nidaqmx_pb2.WriteBinaryU16Response]]: ...
 
     @abc.abstractmethod
+    def BeginWriteBinaryU16(
+        self,
+        request: nidaqmx_pb2.BeginWriteBinaryU16Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteBinaryU16Response, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteBinaryU16Response]]: ...
+
+    @abc.abstractmethod
     def WriteBinaryU32(
         self,
         request: nidaqmx_pb2.WriteBinaryU32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteBinaryU32Response, collections.abc.Awaitable[nidaqmx_pb2.WriteBinaryU32Response]]: ...
+
+    @abc.abstractmethod
+    def BeginWriteBinaryU32(
+        self,
+        request: nidaqmx_pb2.BeginWriteBinaryU32Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteBinaryU32Response, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteBinaryU32Response]]: ...
 
     @abc.abstractmethod
     def WriteCtrFreq(
@@ -6702,11 +7427,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.WriteCtrFreqResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteCtrFreqResponse]]: ...
 
     @abc.abstractmethod
+    def BeginWriteCtrFreq(
+        self,
+        request: nidaqmx_pb2.BeginWriteCtrFreqRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteCtrFreqResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteCtrFreqResponse]]: ...
+
+    @abc.abstractmethod
     def WriteCtrFreqScalar(
         self,
         request: nidaqmx_pb2.WriteCtrFreqScalarRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteCtrFreqScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteCtrFreqScalarResponse]]: ...
+
+    @abc.abstractmethod
+    def BeginWriteCtrFreqScalar(
+        self,
+        request: nidaqmx_pb2.BeginWriteCtrFreqScalarRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteCtrFreqScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteCtrFreqScalarResponse]]: ...
 
     @abc.abstractmethod
     def WriteCtrTicks(
@@ -6716,11 +7455,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.WriteCtrTicksResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteCtrTicksResponse]]: ...
 
     @abc.abstractmethod
+    def BeginWriteCtrTicks(
+        self,
+        request: nidaqmx_pb2.BeginWriteCtrTicksRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteCtrTicksResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteCtrTicksResponse]]: ...
+
+    @abc.abstractmethod
     def WriteCtrTicksScalar(
         self,
         request: nidaqmx_pb2.WriteCtrTicksScalarRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteCtrTicksScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteCtrTicksScalarResponse]]: ...
+
+    @abc.abstractmethod
+    def BeginWriteCtrTicksScalar(
+        self,
+        request: nidaqmx_pb2.BeginWriteCtrTicksScalarRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteCtrTicksScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteCtrTicksScalarResponse]]: ...
 
     @abc.abstractmethod
     def WriteCtrTime(
@@ -6730,11 +7483,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.WriteCtrTimeResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteCtrTimeResponse]]: ...
 
     @abc.abstractmethod
+    def BeginWriteCtrTime(
+        self,
+        request: nidaqmx_pb2.BeginWriteCtrTimeRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteCtrTimeResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteCtrTimeResponse]]: ...
+
+    @abc.abstractmethod
     def WriteCtrTimeScalar(
         self,
         request: nidaqmx_pb2.WriteCtrTimeScalarRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteCtrTimeScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteCtrTimeScalarResponse]]: ...
+
+    @abc.abstractmethod
+    def BeginWriteCtrTimeScalar(
+        self,
+        request: nidaqmx_pb2.BeginWriteCtrTimeScalarRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteCtrTimeScalarResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteCtrTimeScalarResponse]]: ...
 
     @abc.abstractmethod
     def WriteDigitalLines(
@@ -6744,11 +7511,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.WriteDigitalLinesResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteDigitalLinesResponse]]: ...
 
     @abc.abstractmethod
+    def BeginWriteDigitalLines(
+        self,
+        request: nidaqmx_pb2.BeginWriteDigitalLinesRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteDigitalLinesResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteDigitalLinesResponse]]: ...
+
+    @abc.abstractmethod
     def WriteDigitalScalarU32(
         self,
         request: nidaqmx_pb2.WriteDigitalScalarU32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteDigitalScalarU32Response, collections.abc.Awaitable[nidaqmx_pb2.WriteDigitalScalarU32Response]]: ...
+
+    @abc.abstractmethod
+    def BeginWriteDigitalScalarU32(
+        self,
+        request: nidaqmx_pb2.BeginWriteDigitalScalarU32Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteDigitalScalarU32Response, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteDigitalScalarU32Response]]: ...
 
     @abc.abstractmethod
     def WriteDigitalU16(
@@ -6758,11 +7539,25 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.WriteDigitalU16Response, collections.abc.Awaitable[nidaqmx_pb2.WriteDigitalU16Response]]: ...
 
     @abc.abstractmethod
+    def BeginWriteDigitalU16(
+        self,
+        request: nidaqmx_pb2.BeginWriteDigitalU16Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteDigitalU16Response, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteDigitalU16Response]]: ...
+
+    @abc.abstractmethod
     def WriteDigitalU32(
         self,
         request: nidaqmx_pb2.WriteDigitalU32Request,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteDigitalU32Response, collections.abc.Awaitable[nidaqmx_pb2.WriteDigitalU32Response]]: ...
+
+    @abc.abstractmethod
+    def BeginWriteDigitalU32(
+        self,
+        request: nidaqmx_pb2.BeginWriteDigitalU32Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteDigitalU32Response, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteDigitalU32Response]]: ...
 
     @abc.abstractmethod
     def WriteDigitalU8(
@@ -6772,11 +7567,32 @@ class NiDAQmxServicer(metaclass=abc.ABCMeta):
     ) -> typing.Union[nidaqmx_pb2.WriteDigitalU8Response, collections.abc.Awaitable[nidaqmx_pb2.WriteDigitalU8Response]]: ...
 
     @abc.abstractmethod
+    def BeginWriteDigitalU8(
+        self,
+        request: nidaqmx_pb2.BeginWriteDigitalU8Request,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteDigitalU8Response, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteDigitalU8Response]]: ...
+
+    @abc.abstractmethod
+    def WriteIDPinMemory(
+        self,
+        request: nidaqmx_pb2.WriteIDPinMemoryRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.WriteIDPinMemoryResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteIDPinMemoryResponse]]: ...
+
+    @abc.abstractmethod
     def WriteRaw(
         self,
         request: nidaqmx_pb2.WriteRawRequest,
         context: _ServicerContext,
     ) -> typing.Union[nidaqmx_pb2.WriteRawResponse, collections.abc.Awaitable[nidaqmx_pb2.WriteRawResponse]]: ...
+
+    @abc.abstractmethod
+    def BeginWriteRaw(
+        self,
+        request: nidaqmx_pb2.BeginWriteRawRequest,
+        context: _ServicerContext,
+    ) -> typing.Union[nidaqmx_pb2.BeginWriteRawResponse, collections.abc.Awaitable[nidaqmx_pb2.BeginWriteRawResponse]]: ...
 
     @abc.abstractmethod
     def WriteToTEDSFromArray(

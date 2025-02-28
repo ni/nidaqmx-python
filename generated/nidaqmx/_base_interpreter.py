@@ -1311,6 +1311,10 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def read_id_pin_memory(self, device_name, id_pin_name):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def read_power_binary_i16(
             self, task, num_samps_per_chan, timeout, fill_mode,
             read_array_voltage, read_array_current):
@@ -1815,6 +1819,10 @@ class BaseInterpreter(abc.ABC):
     def write_digital_u8(
             self, task, num_samps_per_chan, auto_start, timeout, data_layout,
             write_array):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def write_id_pin_memory(self, device_name, id_pin_name, data, format_code):
         raise NotImplementedError
 
     @abc.abstractmethod
