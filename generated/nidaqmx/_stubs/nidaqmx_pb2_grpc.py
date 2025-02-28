@@ -1244,135 +1244,275 @@ class NiDAQmxStub(object):
                 request_serializer=nidaqmx__pb2.ReadAnalogF64Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadAnalogF64Response.FromString,
                 )
+        self.BeginReadAnalogF64 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadAnalogF64',
+                request_serializer=nidaqmx__pb2.BeginReadAnalogF64Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadAnalogF64Response.FromString,
+                )
         self.ReadAnalogScalarF64 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadAnalogScalarF64',
                 request_serializer=nidaqmx__pb2.ReadAnalogScalarF64Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadAnalogScalarF64Response.FromString,
+                )
+        self.BeginReadAnalogScalarF64 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadAnalogScalarF64',
+                request_serializer=nidaqmx__pb2.BeginReadAnalogScalarF64Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadAnalogScalarF64Response.FromString,
                 )
         self.ReadBinaryI16 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadBinaryI16',
                 request_serializer=nidaqmx__pb2.ReadBinaryI16Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadBinaryI16Response.FromString,
                 )
+        self.BeginReadBinaryI16 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadBinaryI16',
+                request_serializer=nidaqmx__pb2.BeginReadBinaryI16Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadBinaryI16Response.FromString,
+                )
         self.ReadBinaryI32 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadBinaryI32',
                 request_serializer=nidaqmx__pb2.ReadBinaryI32Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadBinaryI32Response.FromString,
+                )
+        self.BeginReadBinaryI32 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadBinaryI32',
+                request_serializer=nidaqmx__pb2.BeginReadBinaryI32Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadBinaryI32Response.FromString,
                 )
         self.ReadBinaryU16 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadBinaryU16',
                 request_serializer=nidaqmx__pb2.ReadBinaryU16Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadBinaryU16Response.FromString,
                 )
+        self.BeginReadBinaryU16 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadBinaryU16',
+                request_serializer=nidaqmx__pb2.BeginReadBinaryU16Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadBinaryU16Response.FromString,
+                )
         self.ReadBinaryU32 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadBinaryU32',
                 request_serializer=nidaqmx__pb2.ReadBinaryU32Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadBinaryU32Response.FromString,
+                )
+        self.BeginReadBinaryU32 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadBinaryU32',
+                request_serializer=nidaqmx__pb2.BeginReadBinaryU32Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadBinaryU32Response.FromString,
                 )
         self.ReadCounterF64 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadCounterF64',
                 request_serializer=nidaqmx__pb2.ReadCounterF64Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadCounterF64Response.FromString,
                 )
+        self.BeginReadCounterF64 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadCounterF64',
+                request_serializer=nidaqmx__pb2.BeginReadCounterF64Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadCounterF64Response.FromString,
+                )
         self.ReadCounterF64Ex = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadCounterF64Ex',
                 request_serializer=nidaqmx__pb2.ReadCounterF64ExRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadCounterF64ExResponse.FromString,
+                )
+        self.BeginReadCounterF64Ex = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadCounterF64Ex',
+                request_serializer=nidaqmx__pb2.BeginReadCounterF64ExRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadCounterF64ExResponse.FromString,
                 )
         self.ReadCounterScalarF64 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadCounterScalarF64',
                 request_serializer=nidaqmx__pb2.ReadCounterScalarF64Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadCounterScalarF64Response.FromString,
                 )
+        self.BeginReadCounterScalarF64 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadCounterScalarF64',
+                request_serializer=nidaqmx__pb2.BeginReadCounterScalarF64Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadCounterScalarF64Response.FromString,
+                )
         self.ReadCounterScalarU32 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadCounterScalarU32',
                 request_serializer=nidaqmx__pb2.ReadCounterScalarU32Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadCounterScalarU32Response.FromString,
+                )
+        self.BeginReadCounterScalarU32 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadCounterScalarU32',
+                request_serializer=nidaqmx__pb2.BeginReadCounterScalarU32Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadCounterScalarU32Response.FromString,
                 )
         self.ReadCounterU32 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadCounterU32',
                 request_serializer=nidaqmx__pb2.ReadCounterU32Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadCounterU32Response.FromString,
                 )
+        self.BeginReadCounterU32 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadCounterU32',
+                request_serializer=nidaqmx__pb2.BeginReadCounterU32Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadCounterU32Response.FromString,
+                )
         self.ReadCounterU32Ex = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadCounterU32Ex',
                 request_serializer=nidaqmx__pb2.ReadCounterU32ExRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadCounterU32ExResponse.FromString,
+                )
+        self.BeginReadCounterU32Ex = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadCounterU32Ex',
+                request_serializer=nidaqmx__pb2.BeginReadCounterU32ExRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadCounterU32ExResponse.FromString,
                 )
         self.ReadCtrFreq = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadCtrFreq',
                 request_serializer=nidaqmx__pb2.ReadCtrFreqRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadCtrFreqResponse.FromString,
                 )
+        self.BeginReadCtrFreq = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadCtrFreq',
+                request_serializer=nidaqmx__pb2.BeginReadCtrFreqRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadCtrFreqResponse.FromString,
+                )
         self.ReadCtrFreqScalar = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadCtrFreqScalar',
                 request_serializer=nidaqmx__pb2.ReadCtrFreqScalarRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadCtrFreqScalarResponse.FromString,
+                )
+        self.BeginReadCtrFreqScalar = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadCtrFreqScalar',
+                request_serializer=nidaqmx__pb2.BeginReadCtrFreqScalarRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadCtrFreqScalarResponse.FromString,
                 )
         self.ReadCtrTicks = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadCtrTicks',
                 request_serializer=nidaqmx__pb2.ReadCtrTicksRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadCtrTicksResponse.FromString,
                 )
+        self.BeginReadCtrTicks = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadCtrTicks',
+                request_serializer=nidaqmx__pb2.BeginReadCtrTicksRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadCtrTicksResponse.FromString,
+                )
         self.ReadCtrTicksScalar = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadCtrTicksScalar',
                 request_serializer=nidaqmx__pb2.ReadCtrTicksScalarRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadCtrTicksScalarResponse.FromString,
+                )
+        self.BeginReadCtrTicksScalar = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadCtrTicksScalar',
+                request_serializer=nidaqmx__pb2.BeginReadCtrTicksScalarRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadCtrTicksScalarResponse.FromString,
                 )
         self.ReadCtrTime = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadCtrTime',
                 request_serializer=nidaqmx__pb2.ReadCtrTimeRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadCtrTimeResponse.FromString,
                 )
+        self.BeginReadCtrTime = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadCtrTime',
+                request_serializer=nidaqmx__pb2.BeginReadCtrTimeRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadCtrTimeResponse.FromString,
+                )
         self.ReadCtrTimeScalar = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadCtrTimeScalar',
                 request_serializer=nidaqmx__pb2.ReadCtrTimeScalarRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadCtrTimeScalarResponse.FromString,
+                )
+        self.BeginReadCtrTimeScalar = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadCtrTimeScalar',
+                request_serializer=nidaqmx__pb2.BeginReadCtrTimeScalarRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadCtrTimeScalarResponse.FromString,
                 )
         self.ReadDigitalLines = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadDigitalLines',
                 request_serializer=nidaqmx__pb2.ReadDigitalLinesRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadDigitalLinesResponse.FromString,
                 )
+        self.BeginReadDigitalLines = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadDigitalLines',
+                request_serializer=nidaqmx__pb2.BeginReadDigitalLinesRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadDigitalLinesResponse.FromString,
+                )
         self.ReadDigitalScalarU32 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadDigitalScalarU32',
                 request_serializer=nidaqmx__pb2.ReadDigitalScalarU32Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadDigitalScalarU32Response.FromString,
+                )
+        self.BeginReadDigitalScalarU32 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadDigitalScalarU32',
+                request_serializer=nidaqmx__pb2.BeginReadDigitalScalarU32Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadDigitalScalarU32Response.FromString,
                 )
         self.ReadDigitalU16 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadDigitalU16',
                 request_serializer=nidaqmx__pb2.ReadDigitalU16Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadDigitalU16Response.FromString,
                 )
+        self.BeginReadDigitalU16 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadDigitalU16',
+                request_serializer=nidaqmx__pb2.BeginReadDigitalU16Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadDigitalU16Response.FromString,
+                )
         self.ReadDigitalU32 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadDigitalU32',
                 request_serializer=nidaqmx__pb2.ReadDigitalU32Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadDigitalU32Response.FromString,
+                )
+        self.BeginReadDigitalU32 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadDigitalU32',
+                request_serializer=nidaqmx__pb2.BeginReadDigitalU32Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadDigitalU32Response.FromString,
                 )
         self.ReadDigitalU8 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadDigitalU8',
                 request_serializer=nidaqmx__pb2.ReadDigitalU8Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadDigitalU8Response.FromString,
                 )
+        self.BeginReadDigitalU8 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadDigitalU8',
+                request_serializer=nidaqmx__pb2.BeginReadDigitalU8Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadDigitalU8Response.FromString,
+                )
+        self.ReadIDPinMemory = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/ReadIDPinMemory',
+                request_serializer=nidaqmx__pb2.ReadIDPinMemoryRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.ReadIDPinMemoryResponse.FromString,
+                )
         self.ReadPowerBinaryI16 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadPowerBinaryI16',
                 request_serializer=nidaqmx__pb2.ReadPowerBinaryI16Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadPowerBinaryI16Response.FromString,
+                )
+        self.BeginReadPowerBinaryI16 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadPowerBinaryI16',
+                request_serializer=nidaqmx__pb2.BeginReadPowerBinaryI16Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadPowerBinaryI16Response.FromString,
                 )
         self.ReadPowerF64 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadPowerF64',
                 request_serializer=nidaqmx__pb2.ReadPowerF64Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadPowerF64Response.FromString,
                 )
+        self.BeginReadPowerF64 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadPowerF64',
+                request_serializer=nidaqmx__pb2.BeginReadPowerF64Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadPowerF64Response.FromString,
+                )
         self.ReadPowerScalarF64 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadPowerScalarF64',
                 request_serializer=nidaqmx__pb2.ReadPowerScalarF64Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadPowerScalarF64Response.FromString,
                 )
+        self.BeginReadPowerScalarF64 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadPowerScalarF64',
+                request_serializer=nidaqmx__pb2.BeginReadPowerScalarF64Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadPowerScalarF64Response.FromString,
+                )
         self.ReadRaw = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/ReadRaw',
                 request_serializer=nidaqmx__pb2.ReadRawRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.ReadRawResponse.FromString,
+                )
+        self.BeginReadRaw = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginReadRaw',
+                request_serializer=nidaqmx__pb2.BeginReadRawRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginReadRawResponse.FromString,
                 )
         self.RegisterDoneEvent = channel.unary_stream(
                 '/nidaqmx_grpc.NiDAQmx/RegisterDoneEvent',
@@ -1894,6 +2034,11 @@ class NiDAQmxStub(object):
                 request_serializer=nidaqmx__pb2.WaitForNextSampleClockRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WaitForNextSampleClockResponse.FromString,
                 )
+        self.BeginWaitForNextSampleClock = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWaitForNextSampleClock',
+                request_serializer=nidaqmx__pb2.BeginWaitForNextSampleClockRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWaitForNextSampleClockResponse.FromString,
+                )
         self.WaitForValidTimestamp = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WaitForValidTimestamp',
                 request_serializer=nidaqmx__pb2.WaitForValidTimestampRequest.SerializeToString,
@@ -1909,90 +2054,185 @@ class NiDAQmxStub(object):
                 request_serializer=nidaqmx__pb2.WriteAnalogF64Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteAnalogF64Response.FromString,
                 )
+        self.BeginWriteAnalogF64 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteAnalogF64',
+                request_serializer=nidaqmx__pb2.BeginWriteAnalogF64Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteAnalogF64Response.FromString,
+                )
         self.WriteAnalogScalarF64 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteAnalogScalarF64',
                 request_serializer=nidaqmx__pb2.WriteAnalogScalarF64Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteAnalogScalarF64Response.FromString,
+                )
+        self.BeginWriteAnalogScalarF64 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteAnalogScalarF64',
+                request_serializer=nidaqmx__pb2.BeginWriteAnalogScalarF64Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteAnalogScalarF64Response.FromString,
                 )
         self.WriteBinaryI16 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteBinaryI16',
                 request_serializer=nidaqmx__pb2.WriteBinaryI16Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteBinaryI16Response.FromString,
                 )
+        self.BeginWriteBinaryI16 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteBinaryI16',
+                request_serializer=nidaqmx__pb2.BeginWriteBinaryI16Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteBinaryI16Response.FromString,
+                )
         self.WriteBinaryI32 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteBinaryI32',
                 request_serializer=nidaqmx__pb2.WriteBinaryI32Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteBinaryI32Response.FromString,
+                )
+        self.BeginWriteBinaryI32 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteBinaryI32',
+                request_serializer=nidaqmx__pb2.BeginWriteBinaryI32Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteBinaryI32Response.FromString,
                 )
         self.WriteBinaryU16 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteBinaryU16',
                 request_serializer=nidaqmx__pb2.WriteBinaryU16Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteBinaryU16Response.FromString,
                 )
+        self.BeginWriteBinaryU16 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteBinaryU16',
+                request_serializer=nidaqmx__pb2.BeginWriteBinaryU16Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteBinaryU16Response.FromString,
+                )
         self.WriteBinaryU32 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteBinaryU32',
                 request_serializer=nidaqmx__pb2.WriteBinaryU32Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteBinaryU32Response.FromString,
+                )
+        self.BeginWriteBinaryU32 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteBinaryU32',
+                request_serializer=nidaqmx__pb2.BeginWriteBinaryU32Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteBinaryU32Response.FromString,
                 )
         self.WriteCtrFreq = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteCtrFreq',
                 request_serializer=nidaqmx__pb2.WriteCtrFreqRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteCtrFreqResponse.FromString,
                 )
+        self.BeginWriteCtrFreq = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteCtrFreq',
+                request_serializer=nidaqmx__pb2.BeginWriteCtrFreqRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteCtrFreqResponse.FromString,
+                )
         self.WriteCtrFreqScalar = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteCtrFreqScalar',
                 request_serializer=nidaqmx__pb2.WriteCtrFreqScalarRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteCtrFreqScalarResponse.FromString,
+                )
+        self.BeginWriteCtrFreqScalar = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteCtrFreqScalar',
+                request_serializer=nidaqmx__pb2.BeginWriteCtrFreqScalarRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteCtrFreqScalarResponse.FromString,
                 )
         self.WriteCtrTicks = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteCtrTicks',
                 request_serializer=nidaqmx__pb2.WriteCtrTicksRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteCtrTicksResponse.FromString,
                 )
+        self.BeginWriteCtrTicks = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteCtrTicks',
+                request_serializer=nidaqmx__pb2.BeginWriteCtrTicksRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteCtrTicksResponse.FromString,
+                )
         self.WriteCtrTicksScalar = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteCtrTicksScalar',
                 request_serializer=nidaqmx__pb2.WriteCtrTicksScalarRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteCtrTicksScalarResponse.FromString,
+                )
+        self.BeginWriteCtrTicksScalar = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteCtrTicksScalar',
+                request_serializer=nidaqmx__pb2.BeginWriteCtrTicksScalarRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteCtrTicksScalarResponse.FromString,
                 )
         self.WriteCtrTime = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteCtrTime',
                 request_serializer=nidaqmx__pb2.WriteCtrTimeRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteCtrTimeResponse.FromString,
                 )
+        self.BeginWriteCtrTime = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteCtrTime',
+                request_serializer=nidaqmx__pb2.BeginWriteCtrTimeRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteCtrTimeResponse.FromString,
+                )
         self.WriteCtrTimeScalar = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteCtrTimeScalar',
                 request_serializer=nidaqmx__pb2.WriteCtrTimeScalarRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteCtrTimeScalarResponse.FromString,
+                )
+        self.BeginWriteCtrTimeScalar = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteCtrTimeScalar',
+                request_serializer=nidaqmx__pb2.BeginWriteCtrTimeScalarRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteCtrTimeScalarResponse.FromString,
                 )
         self.WriteDigitalLines = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteDigitalLines',
                 request_serializer=nidaqmx__pb2.WriteDigitalLinesRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteDigitalLinesResponse.FromString,
                 )
+        self.BeginWriteDigitalLines = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteDigitalLines',
+                request_serializer=nidaqmx__pb2.BeginWriteDigitalLinesRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteDigitalLinesResponse.FromString,
+                )
         self.WriteDigitalScalarU32 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteDigitalScalarU32',
                 request_serializer=nidaqmx__pb2.WriteDigitalScalarU32Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteDigitalScalarU32Response.FromString,
+                )
+        self.BeginWriteDigitalScalarU32 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteDigitalScalarU32',
+                request_serializer=nidaqmx__pb2.BeginWriteDigitalScalarU32Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteDigitalScalarU32Response.FromString,
                 )
         self.WriteDigitalU16 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteDigitalU16',
                 request_serializer=nidaqmx__pb2.WriteDigitalU16Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteDigitalU16Response.FromString,
                 )
+        self.BeginWriteDigitalU16 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteDigitalU16',
+                request_serializer=nidaqmx__pb2.BeginWriteDigitalU16Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteDigitalU16Response.FromString,
+                )
         self.WriteDigitalU32 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteDigitalU32',
                 request_serializer=nidaqmx__pb2.WriteDigitalU32Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteDigitalU32Response.FromString,
+                )
+        self.BeginWriteDigitalU32 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteDigitalU32',
+                request_serializer=nidaqmx__pb2.BeginWriteDigitalU32Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteDigitalU32Response.FromString,
                 )
         self.WriteDigitalU8 = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteDigitalU8',
                 request_serializer=nidaqmx__pb2.WriteDigitalU8Request.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteDigitalU8Response.FromString,
                 )
+        self.BeginWriteDigitalU8 = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteDigitalU8',
+                request_serializer=nidaqmx__pb2.BeginWriteDigitalU8Request.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteDigitalU8Response.FromString,
+                )
+        self.WriteIDPinMemory = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/WriteIDPinMemory',
+                request_serializer=nidaqmx__pb2.WriteIDPinMemoryRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.WriteIDPinMemoryResponse.FromString,
+                )
         self.WriteRaw = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteRaw',
                 request_serializer=nidaqmx__pb2.WriteRawRequest.SerializeToString,
                 response_deserializer=nidaqmx__pb2.WriteRawResponse.FromString,
+                )
+        self.BeginWriteRaw = channel.unary_unary(
+                '/nidaqmx_grpc.NiDAQmx/BeginWriteRaw',
+                request_serializer=nidaqmx__pb2.BeginWriteRawRequest.SerializeToString,
+                response_deserializer=nidaqmx__pb2.BeginWriteRawResponse.FromString,
                 )
         self.WriteToTEDSFromArray = channel.unary_unary(
                 '/nidaqmx_grpc.NiDAQmx/WriteToTEDSFromArray',
@@ -3485,7 +3725,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginReadAnalogF64(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ReadAnalogScalarF64(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginReadAnalogScalarF64(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3497,7 +3749,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginReadBinaryI16(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ReadBinaryI32(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginReadBinaryI32(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3509,7 +3773,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginReadBinaryU16(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ReadBinaryU32(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginReadBinaryU32(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3521,7 +3797,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginReadCounterF64(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ReadCounterF64Ex(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginReadCounterF64Ex(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3533,7 +3821,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginReadCounterScalarF64(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ReadCounterScalarU32(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginReadCounterScalarU32(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3545,7 +3845,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginReadCounterU32(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ReadCounterU32Ex(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginReadCounterU32Ex(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3557,7 +3869,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginReadCtrFreq(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ReadCtrFreqScalar(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginReadCtrFreqScalar(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3569,7 +3893,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginReadCtrTicks(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ReadCtrTicksScalar(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginReadCtrTicksScalar(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3581,7 +3917,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginReadCtrTime(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ReadCtrTimeScalar(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginReadCtrTimeScalar(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3593,7 +3941,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginReadDigitalLines(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ReadDigitalScalarU32(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginReadDigitalScalarU32(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3605,7 +3965,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginReadDigitalU16(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ReadDigitalU32(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginReadDigitalU32(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3617,7 +3989,25 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginReadDigitalU8(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ReadIDPinMemory(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ReadPowerBinaryI16(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginReadPowerBinaryI16(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3629,13 +4019,31 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginReadPowerF64(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ReadPowerScalarF64(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginReadPowerScalarF64(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ReadRaw(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginReadRaw(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -4265,6 +4673,12 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginWaitForNextSampleClock(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def WaitForValidTimestamp(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -4283,7 +4697,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginWriteAnalogF64(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def WriteAnalogScalarF64(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginWriteAnalogScalarF64(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -4295,7 +4721,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginWriteBinaryI16(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def WriteBinaryI32(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginWriteBinaryI32(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -4307,7 +4745,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginWriteBinaryU16(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def WriteBinaryU32(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginWriteBinaryU32(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -4319,7 +4769,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginWriteCtrFreq(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def WriteCtrFreqScalar(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginWriteCtrFreqScalar(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -4331,7 +4793,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginWriteCtrTicks(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def WriteCtrTicksScalar(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginWriteCtrTicksScalar(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -4343,7 +4817,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginWriteCtrTime(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def WriteCtrTimeScalar(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginWriteCtrTimeScalar(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -4355,7 +4841,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginWriteDigitalLines(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def WriteDigitalScalarU32(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginWriteDigitalScalarU32(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -4367,7 +4865,19 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginWriteDigitalU16(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def WriteDigitalU32(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginWriteDigitalU32(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -4379,7 +4889,25 @@ class NiDAQmxServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def BeginWriteDigitalU8(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def WriteIDPinMemory(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def WriteRaw(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BeginWriteRaw(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -5630,135 +6158,275 @@ def add_NiDAQmxServicer_to_server(servicer, server):
                     request_deserializer=nidaqmx__pb2.ReadAnalogF64Request.FromString,
                     response_serializer=nidaqmx__pb2.ReadAnalogF64Response.SerializeToString,
             ),
+            'BeginReadAnalogF64': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadAnalogF64,
+                    request_deserializer=nidaqmx__pb2.BeginReadAnalogF64Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadAnalogF64Response.SerializeToString,
+            ),
             'ReadAnalogScalarF64': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadAnalogScalarF64,
                     request_deserializer=nidaqmx__pb2.ReadAnalogScalarF64Request.FromString,
                     response_serializer=nidaqmx__pb2.ReadAnalogScalarF64Response.SerializeToString,
+            ),
+            'BeginReadAnalogScalarF64': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadAnalogScalarF64,
+                    request_deserializer=nidaqmx__pb2.BeginReadAnalogScalarF64Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadAnalogScalarF64Response.SerializeToString,
             ),
             'ReadBinaryI16': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadBinaryI16,
                     request_deserializer=nidaqmx__pb2.ReadBinaryI16Request.FromString,
                     response_serializer=nidaqmx__pb2.ReadBinaryI16Response.SerializeToString,
             ),
+            'BeginReadBinaryI16': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadBinaryI16,
+                    request_deserializer=nidaqmx__pb2.BeginReadBinaryI16Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadBinaryI16Response.SerializeToString,
+            ),
             'ReadBinaryI32': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadBinaryI32,
                     request_deserializer=nidaqmx__pb2.ReadBinaryI32Request.FromString,
                     response_serializer=nidaqmx__pb2.ReadBinaryI32Response.SerializeToString,
+            ),
+            'BeginReadBinaryI32': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadBinaryI32,
+                    request_deserializer=nidaqmx__pb2.BeginReadBinaryI32Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadBinaryI32Response.SerializeToString,
             ),
             'ReadBinaryU16': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadBinaryU16,
                     request_deserializer=nidaqmx__pb2.ReadBinaryU16Request.FromString,
                     response_serializer=nidaqmx__pb2.ReadBinaryU16Response.SerializeToString,
             ),
+            'BeginReadBinaryU16': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadBinaryU16,
+                    request_deserializer=nidaqmx__pb2.BeginReadBinaryU16Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadBinaryU16Response.SerializeToString,
+            ),
             'ReadBinaryU32': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadBinaryU32,
                     request_deserializer=nidaqmx__pb2.ReadBinaryU32Request.FromString,
                     response_serializer=nidaqmx__pb2.ReadBinaryU32Response.SerializeToString,
+            ),
+            'BeginReadBinaryU32': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadBinaryU32,
+                    request_deserializer=nidaqmx__pb2.BeginReadBinaryU32Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadBinaryU32Response.SerializeToString,
             ),
             'ReadCounterF64': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadCounterF64,
                     request_deserializer=nidaqmx__pb2.ReadCounterF64Request.FromString,
                     response_serializer=nidaqmx__pb2.ReadCounterF64Response.SerializeToString,
             ),
+            'BeginReadCounterF64': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadCounterF64,
+                    request_deserializer=nidaqmx__pb2.BeginReadCounterF64Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadCounterF64Response.SerializeToString,
+            ),
             'ReadCounterF64Ex': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadCounterF64Ex,
                     request_deserializer=nidaqmx__pb2.ReadCounterF64ExRequest.FromString,
                     response_serializer=nidaqmx__pb2.ReadCounterF64ExResponse.SerializeToString,
+            ),
+            'BeginReadCounterF64Ex': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadCounterF64Ex,
+                    request_deserializer=nidaqmx__pb2.BeginReadCounterF64ExRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadCounterF64ExResponse.SerializeToString,
             ),
             'ReadCounterScalarF64': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadCounterScalarF64,
                     request_deserializer=nidaqmx__pb2.ReadCounterScalarF64Request.FromString,
                     response_serializer=nidaqmx__pb2.ReadCounterScalarF64Response.SerializeToString,
             ),
+            'BeginReadCounterScalarF64': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadCounterScalarF64,
+                    request_deserializer=nidaqmx__pb2.BeginReadCounterScalarF64Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadCounterScalarF64Response.SerializeToString,
+            ),
             'ReadCounterScalarU32': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadCounterScalarU32,
                     request_deserializer=nidaqmx__pb2.ReadCounterScalarU32Request.FromString,
                     response_serializer=nidaqmx__pb2.ReadCounterScalarU32Response.SerializeToString,
+            ),
+            'BeginReadCounterScalarU32': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadCounterScalarU32,
+                    request_deserializer=nidaqmx__pb2.BeginReadCounterScalarU32Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadCounterScalarU32Response.SerializeToString,
             ),
             'ReadCounterU32': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadCounterU32,
                     request_deserializer=nidaqmx__pb2.ReadCounterU32Request.FromString,
                     response_serializer=nidaqmx__pb2.ReadCounterU32Response.SerializeToString,
             ),
+            'BeginReadCounterU32': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadCounterU32,
+                    request_deserializer=nidaqmx__pb2.BeginReadCounterU32Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadCounterU32Response.SerializeToString,
+            ),
             'ReadCounterU32Ex': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadCounterU32Ex,
                     request_deserializer=nidaqmx__pb2.ReadCounterU32ExRequest.FromString,
                     response_serializer=nidaqmx__pb2.ReadCounterU32ExResponse.SerializeToString,
+            ),
+            'BeginReadCounterU32Ex': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadCounterU32Ex,
+                    request_deserializer=nidaqmx__pb2.BeginReadCounterU32ExRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadCounterU32ExResponse.SerializeToString,
             ),
             'ReadCtrFreq': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadCtrFreq,
                     request_deserializer=nidaqmx__pb2.ReadCtrFreqRequest.FromString,
                     response_serializer=nidaqmx__pb2.ReadCtrFreqResponse.SerializeToString,
             ),
+            'BeginReadCtrFreq': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadCtrFreq,
+                    request_deserializer=nidaqmx__pb2.BeginReadCtrFreqRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadCtrFreqResponse.SerializeToString,
+            ),
             'ReadCtrFreqScalar': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadCtrFreqScalar,
                     request_deserializer=nidaqmx__pb2.ReadCtrFreqScalarRequest.FromString,
                     response_serializer=nidaqmx__pb2.ReadCtrFreqScalarResponse.SerializeToString,
+            ),
+            'BeginReadCtrFreqScalar': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadCtrFreqScalar,
+                    request_deserializer=nidaqmx__pb2.BeginReadCtrFreqScalarRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadCtrFreqScalarResponse.SerializeToString,
             ),
             'ReadCtrTicks': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadCtrTicks,
                     request_deserializer=nidaqmx__pb2.ReadCtrTicksRequest.FromString,
                     response_serializer=nidaqmx__pb2.ReadCtrTicksResponse.SerializeToString,
             ),
+            'BeginReadCtrTicks': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadCtrTicks,
+                    request_deserializer=nidaqmx__pb2.BeginReadCtrTicksRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadCtrTicksResponse.SerializeToString,
+            ),
             'ReadCtrTicksScalar': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadCtrTicksScalar,
                     request_deserializer=nidaqmx__pb2.ReadCtrTicksScalarRequest.FromString,
                     response_serializer=nidaqmx__pb2.ReadCtrTicksScalarResponse.SerializeToString,
+            ),
+            'BeginReadCtrTicksScalar': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadCtrTicksScalar,
+                    request_deserializer=nidaqmx__pb2.BeginReadCtrTicksScalarRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadCtrTicksScalarResponse.SerializeToString,
             ),
             'ReadCtrTime': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadCtrTime,
                     request_deserializer=nidaqmx__pb2.ReadCtrTimeRequest.FromString,
                     response_serializer=nidaqmx__pb2.ReadCtrTimeResponse.SerializeToString,
             ),
+            'BeginReadCtrTime': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadCtrTime,
+                    request_deserializer=nidaqmx__pb2.BeginReadCtrTimeRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadCtrTimeResponse.SerializeToString,
+            ),
             'ReadCtrTimeScalar': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadCtrTimeScalar,
                     request_deserializer=nidaqmx__pb2.ReadCtrTimeScalarRequest.FromString,
                     response_serializer=nidaqmx__pb2.ReadCtrTimeScalarResponse.SerializeToString,
+            ),
+            'BeginReadCtrTimeScalar': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadCtrTimeScalar,
+                    request_deserializer=nidaqmx__pb2.BeginReadCtrTimeScalarRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadCtrTimeScalarResponse.SerializeToString,
             ),
             'ReadDigitalLines': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadDigitalLines,
                     request_deserializer=nidaqmx__pb2.ReadDigitalLinesRequest.FromString,
                     response_serializer=nidaqmx__pb2.ReadDigitalLinesResponse.SerializeToString,
             ),
+            'BeginReadDigitalLines': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadDigitalLines,
+                    request_deserializer=nidaqmx__pb2.BeginReadDigitalLinesRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadDigitalLinesResponse.SerializeToString,
+            ),
             'ReadDigitalScalarU32': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadDigitalScalarU32,
                     request_deserializer=nidaqmx__pb2.ReadDigitalScalarU32Request.FromString,
                     response_serializer=nidaqmx__pb2.ReadDigitalScalarU32Response.SerializeToString,
+            ),
+            'BeginReadDigitalScalarU32': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadDigitalScalarU32,
+                    request_deserializer=nidaqmx__pb2.BeginReadDigitalScalarU32Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadDigitalScalarU32Response.SerializeToString,
             ),
             'ReadDigitalU16': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadDigitalU16,
                     request_deserializer=nidaqmx__pb2.ReadDigitalU16Request.FromString,
                     response_serializer=nidaqmx__pb2.ReadDigitalU16Response.SerializeToString,
             ),
+            'BeginReadDigitalU16': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadDigitalU16,
+                    request_deserializer=nidaqmx__pb2.BeginReadDigitalU16Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadDigitalU16Response.SerializeToString,
+            ),
             'ReadDigitalU32': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadDigitalU32,
                     request_deserializer=nidaqmx__pb2.ReadDigitalU32Request.FromString,
                     response_serializer=nidaqmx__pb2.ReadDigitalU32Response.SerializeToString,
+            ),
+            'BeginReadDigitalU32': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadDigitalU32,
+                    request_deserializer=nidaqmx__pb2.BeginReadDigitalU32Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadDigitalU32Response.SerializeToString,
             ),
             'ReadDigitalU8': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadDigitalU8,
                     request_deserializer=nidaqmx__pb2.ReadDigitalU8Request.FromString,
                     response_serializer=nidaqmx__pb2.ReadDigitalU8Response.SerializeToString,
             ),
+            'BeginReadDigitalU8': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadDigitalU8,
+                    request_deserializer=nidaqmx__pb2.BeginReadDigitalU8Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadDigitalU8Response.SerializeToString,
+            ),
+            'ReadIDPinMemory': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReadIDPinMemory,
+                    request_deserializer=nidaqmx__pb2.ReadIDPinMemoryRequest.FromString,
+                    response_serializer=nidaqmx__pb2.ReadIDPinMemoryResponse.SerializeToString,
+            ),
             'ReadPowerBinaryI16': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadPowerBinaryI16,
                     request_deserializer=nidaqmx__pb2.ReadPowerBinaryI16Request.FromString,
                     response_serializer=nidaqmx__pb2.ReadPowerBinaryI16Response.SerializeToString,
+            ),
+            'BeginReadPowerBinaryI16': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadPowerBinaryI16,
+                    request_deserializer=nidaqmx__pb2.BeginReadPowerBinaryI16Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadPowerBinaryI16Response.SerializeToString,
             ),
             'ReadPowerF64': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadPowerF64,
                     request_deserializer=nidaqmx__pb2.ReadPowerF64Request.FromString,
                     response_serializer=nidaqmx__pb2.ReadPowerF64Response.SerializeToString,
             ),
+            'BeginReadPowerF64': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadPowerF64,
+                    request_deserializer=nidaqmx__pb2.BeginReadPowerF64Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadPowerF64Response.SerializeToString,
+            ),
             'ReadPowerScalarF64': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadPowerScalarF64,
                     request_deserializer=nidaqmx__pb2.ReadPowerScalarF64Request.FromString,
                     response_serializer=nidaqmx__pb2.ReadPowerScalarF64Response.SerializeToString,
             ),
+            'BeginReadPowerScalarF64': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadPowerScalarF64,
+                    request_deserializer=nidaqmx__pb2.BeginReadPowerScalarF64Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadPowerScalarF64Response.SerializeToString,
+            ),
             'ReadRaw': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadRaw,
                     request_deserializer=nidaqmx__pb2.ReadRawRequest.FromString,
                     response_serializer=nidaqmx__pb2.ReadRawResponse.SerializeToString,
+            ),
+            'BeginReadRaw': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginReadRaw,
+                    request_deserializer=nidaqmx__pb2.BeginReadRawRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginReadRawResponse.SerializeToString,
             ),
             'RegisterDoneEvent': grpc.unary_stream_rpc_method_handler(
                     servicer.RegisterDoneEvent,
@@ -6280,6 +6948,11 @@ def add_NiDAQmxServicer_to_server(servicer, server):
                     request_deserializer=nidaqmx__pb2.WaitForNextSampleClockRequest.FromString,
                     response_serializer=nidaqmx__pb2.WaitForNextSampleClockResponse.SerializeToString,
             ),
+            'BeginWaitForNextSampleClock': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWaitForNextSampleClock,
+                    request_deserializer=nidaqmx__pb2.BeginWaitForNextSampleClockRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWaitForNextSampleClockResponse.SerializeToString,
+            ),
             'WaitForValidTimestamp': grpc.unary_unary_rpc_method_handler(
                     servicer.WaitForValidTimestamp,
                     request_deserializer=nidaqmx__pb2.WaitForValidTimestampRequest.FromString,
@@ -6295,90 +6968,185 @@ def add_NiDAQmxServicer_to_server(servicer, server):
                     request_deserializer=nidaqmx__pb2.WriteAnalogF64Request.FromString,
                     response_serializer=nidaqmx__pb2.WriteAnalogF64Response.SerializeToString,
             ),
+            'BeginWriteAnalogF64': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteAnalogF64,
+                    request_deserializer=nidaqmx__pb2.BeginWriteAnalogF64Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteAnalogF64Response.SerializeToString,
+            ),
             'WriteAnalogScalarF64': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteAnalogScalarF64,
                     request_deserializer=nidaqmx__pb2.WriteAnalogScalarF64Request.FromString,
                     response_serializer=nidaqmx__pb2.WriteAnalogScalarF64Response.SerializeToString,
+            ),
+            'BeginWriteAnalogScalarF64': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteAnalogScalarF64,
+                    request_deserializer=nidaqmx__pb2.BeginWriteAnalogScalarF64Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteAnalogScalarF64Response.SerializeToString,
             ),
             'WriteBinaryI16': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteBinaryI16,
                     request_deserializer=nidaqmx__pb2.WriteBinaryI16Request.FromString,
                     response_serializer=nidaqmx__pb2.WriteBinaryI16Response.SerializeToString,
             ),
+            'BeginWriteBinaryI16': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteBinaryI16,
+                    request_deserializer=nidaqmx__pb2.BeginWriteBinaryI16Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteBinaryI16Response.SerializeToString,
+            ),
             'WriteBinaryI32': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteBinaryI32,
                     request_deserializer=nidaqmx__pb2.WriteBinaryI32Request.FromString,
                     response_serializer=nidaqmx__pb2.WriteBinaryI32Response.SerializeToString,
+            ),
+            'BeginWriteBinaryI32': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteBinaryI32,
+                    request_deserializer=nidaqmx__pb2.BeginWriteBinaryI32Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteBinaryI32Response.SerializeToString,
             ),
             'WriteBinaryU16': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteBinaryU16,
                     request_deserializer=nidaqmx__pb2.WriteBinaryU16Request.FromString,
                     response_serializer=nidaqmx__pb2.WriteBinaryU16Response.SerializeToString,
             ),
+            'BeginWriteBinaryU16': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteBinaryU16,
+                    request_deserializer=nidaqmx__pb2.BeginWriteBinaryU16Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteBinaryU16Response.SerializeToString,
+            ),
             'WriteBinaryU32': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteBinaryU32,
                     request_deserializer=nidaqmx__pb2.WriteBinaryU32Request.FromString,
                     response_serializer=nidaqmx__pb2.WriteBinaryU32Response.SerializeToString,
+            ),
+            'BeginWriteBinaryU32': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteBinaryU32,
+                    request_deserializer=nidaqmx__pb2.BeginWriteBinaryU32Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteBinaryU32Response.SerializeToString,
             ),
             'WriteCtrFreq': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteCtrFreq,
                     request_deserializer=nidaqmx__pb2.WriteCtrFreqRequest.FromString,
                     response_serializer=nidaqmx__pb2.WriteCtrFreqResponse.SerializeToString,
             ),
+            'BeginWriteCtrFreq': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteCtrFreq,
+                    request_deserializer=nidaqmx__pb2.BeginWriteCtrFreqRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteCtrFreqResponse.SerializeToString,
+            ),
             'WriteCtrFreqScalar': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteCtrFreqScalar,
                     request_deserializer=nidaqmx__pb2.WriteCtrFreqScalarRequest.FromString,
                     response_serializer=nidaqmx__pb2.WriteCtrFreqScalarResponse.SerializeToString,
+            ),
+            'BeginWriteCtrFreqScalar': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteCtrFreqScalar,
+                    request_deserializer=nidaqmx__pb2.BeginWriteCtrFreqScalarRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteCtrFreqScalarResponse.SerializeToString,
             ),
             'WriteCtrTicks': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteCtrTicks,
                     request_deserializer=nidaqmx__pb2.WriteCtrTicksRequest.FromString,
                     response_serializer=nidaqmx__pb2.WriteCtrTicksResponse.SerializeToString,
             ),
+            'BeginWriteCtrTicks': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteCtrTicks,
+                    request_deserializer=nidaqmx__pb2.BeginWriteCtrTicksRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteCtrTicksResponse.SerializeToString,
+            ),
             'WriteCtrTicksScalar': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteCtrTicksScalar,
                     request_deserializer=nidaqmx__pb2.WriteCtrTicksScalarRequest.FromString,
                     response_serializer=nidaqmx__pb2.WriteCtrTicksScalarResponse.SerializeToString,
+            ),
+            'BeginWriteCtrTicksScalar': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteCtrTicksScalar,
+                    request_deserializer=nidaqmx__pb2.BeginWriteCtrTicksScalarRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteCtrTicksScalarResponse.SerializeToString,
             ),
             'WriteCtrTime': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteCtrTime,
                     request_deserializer=nidaqmx__pb2.WriteCtrTimeRequest.FromString,
                     response_serializer=nidaqmx__pb2.WriteCtrTimeResponse.SerializeToString,
             ),
+            'BeginWriteCtrTime': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteCtrTime,
+                    request_deserializer=nidaqmx__pb2.BeginWriteCtrTimeRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteCtrTimeResponse.SerializeToString,
+            ),
             'WriteCtrTimeScalar': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteCtrTimeScalar,
                     request_deserializer=nidaqmx__pb2.WriteCtrTimeScalarRequest.FromString,
                     response_serializer=nidaqmx__pb2.WriteCtrTimeScalarResponse.SerializeToString,
+            ),
+            'BeginWriteCtrTimeScalar': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteCtrTimeScalar,
+                    request_deserializer=nidaqmx__pb2.BeginWriteCtrTimeScalarRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteCtrTimeScalarResponse.SerializeToString,
             ),
             'WriteDigitalLines': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteDigitalLines,
                     request_deserializer=nidaqmx__pb2.WriteDigitalLinesRequest.FromString,
                     response_serializer=nidaqmx__pb2.WriteDigitalLinesResponse.SerializeToString,
             ),
+            'BeginWriteDigitalLines': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteDigitalLines,
+                    request_deserializer=nidaqmx__pb2.BeginWriteDigitalLinesRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteDigitalLinesResponse.SerializeToString,
+            ),
             'WriteDigitalScalarU32': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteDigitalScalarU32,
                     request_deserializer=nidaqmx__pb2.WriteDigitalScalarU32Request.FromString,
                     response_serializer=nidaqmx__pb2.WriteDigitalScalarU32Response.SerializeToString,
+            ),
+            'BeginWriteDigitalScalarU32': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteDigitalScalarU32,
+                    request_deserializer=nidaqmx__pb2.BeginWriteDigitalScalarU32Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteDigitalScalarU32Response.SerializeToString,
             ),
             'WriteDigitalU16': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteDigitalU16,
                     request_deserializer=nidaqmx__pb2.WriteDigitalU16Request.FromString,
                     response_serializer=nidaqmx__pb2.WriteDigitalU16Response.SerializeToString,
             ),
+            'BeginWriteDigitalU16': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteDigitalU16,
+                    request_deserializer=nidaqmx__pb2.BeginWriteDigitalU16Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteDigitalU16Response.SerializeToString,
+            ),
             'WriteDigitalU32': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteDigitalU32,
                     request_deserializer=nidaqmx__pb2.WriteDigitalU32Request.FromString,
                     response_serializer=nidaqmx__pb2.WriteDigitalU32Response.SerializeToString,
+            ),
+            'BeginWriteDigitalU32': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteDigitalU32,
+                    request_deserializer=nidaqmx__pb2.BeginWriteDigitalU32Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteDigitalU32Response.SerializeToString,
             ),
             'WriteDigitalU8': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteDigitalU8,
                     request_deserializer=nidaqmx__pb2.WriteDigitalU8Request.FromString,
                     response_serializer=nidaqmx__pb2.WriteDigitalU8Response.SerializeToString,
             ),
+            'BeginWriteDigitalU8': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteDigitalU8,
+                    request_deserializer=nidaqmx__pb2.BeginWriteDigitalU8Request.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteDigitalU8Response.SerializeToString,
+            ),
+            'WriteIDPinMemory': grpc.unary_unary_rpc_method_handler(
+                    servicer.WriteIDPinMemory,
+                    request_deserializer=nidaqmx__pb2.WriteIDPinMemoryRequest.FromString,
+                    response_serializer=nidaqmx__pb2.WriteIDPinMemoryResponse.SerializeToString,
+            ),
             'WriteRaw': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteRaw,
                     request_deserializer=nidaqmx__pb2.WriteRawRequest.FromString,
                     response_serializer=nidaqmx__pb2.WriteRawResponse.SerializeToString,
+            ),
+            'BeginWriteRaw': grpc.unary_unary_rpc_method_handler(
+                    servicer.BeginWriteRaw,
+                    request_deserializer=nidaqmx__pb2.BeginWriteRawRequest.FromString,
+                    response_serializer=nidaqmx__pb2.BeginWriteRawResponse.SerializeToString,
             ),
             'WriteToTEDSFromArray': grpc.unary_unary_rpc_method_handler(
                     servicer.WriteToTEDSFromArray,
@@ -10583,6 +11351,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginReadAnalogF64(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadAnalogF64',
+            nidaqmx__pb2.BeginReadAnalogF64Request.SerializeToString,
+            nidaqmx__pb2.BeginReadAnalogF64Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ReadAnalogScalarF64(request,
             target,
             options=(),
@@ -10596,6 +11381,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/ReadAnalogScalarF64',
             nidaqmx__pb2.ReadAnalogScalarF64Request.SerializeToString,
             nidaqmx__pb2.ReadAnalogScalarF64Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginReadAnalogScalarF64(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadAnalogScalarF64',
+            nidaqmx__pb2.BeginReadAnalogScalarF64Request.SerializeToString,
+            nidaqmx__pb2.BeginReadAnalogScalarF64Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -10617,6 +11419,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginReadBinaryI16(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadBinaryI16',
+            nidaqmx__pb2.BeginReadBinaryI16Request.SerializeToString,
+            nidaqmx__pb2.BeginReadBinaryI16Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ReadBinaryI32(request,
             target,
             options=(),
@@ -10630,6 +11449,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/ReadBinaryI32',
             nidaqmx__pb2.ReadBinaryI32Request.SerializeToString,
             nidaqmx__pb2.ReadBinaryI32Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginReadBinaryI32(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadBinaryI32',
+            nidaqmx__pb2.BeginReadBinaryI32Request.SerializeToString,
+            nidaqmx__pb2.BeginReadBinaryI32Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -10651,6 +11487,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginReadBinaryU16(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadBinaryU16',
+            nidaqmx__pb2.BeginReadBinaryU16Request.SerializeToString,
+            nidaqmx__pb2.BeginReadBinaryU16Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ReadBinaryU32(request,
             target,
             options=(),
@@ -10664,6 +11517,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/ReadBinaryU32',
             nidaqmx__pb2.ReadBinaryU32Request.SerializeToString,
             nidaqmx__pb2.ReadBinaryU32Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginReadBinaryU32(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadBinaryU32',
+            nidaqmx__pb2.BeginReadBinaryU32Request.SerializeToString,
+            nidaqmx__pb2.BeginReadBinaryU32Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -10685,6 +11555,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginReadCounterF64(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadCounterF64',
+            nidaqmx__pb2.BeginReadCounterF64Request.SerializeToString,
+            nidaqmx__pb2.BeginReadCounterF64Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ReadCounterF64Ex(request,
             target,
             options=(),
@@ -10698,6 +11585,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/ReadCounterF64Ex',
             nidaqmx__pb2.ReadCounterF64ExRequest.SerializeToString,
             nidaqmx__pb2.ReadCounterF64ExResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginReadCounterF64Ex(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadCounterF64Ex',
+            nidaqmx__pb2.BeginReadCounterF64ExRequest.SerializeToString,
+            nidaqmx__pb2.BeginReadCounterF64ExResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -10719,6 +11623,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginReadCounterScalarF64(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadCounterScalarF64',
+            nidaqmx__pb2.BeginReadCounterScalarF64Request.SerializeToString,
+            nidaqmx__pb2.BeginReadCounterScalarF64Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ReadCounterScalarU32(request,
             target,
             options=(),
@@ -10732,6 +11653,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/ReadCounterScalarU32',
             nidaqmx__pb2.ReadCounterScalarU32Request.SerializeToString,
             nidaqmx__pb2.ReadCounterScalarU32Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginReadCounterScalarU32(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadCounterScalarU32',
+            nidaqmx__pb2.BeginReadCounterScalarU32Request.SerializeToString,
+            nidaqmx__pb2.BeginReadCounterScalarU32Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -10753,6 +11691,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginReadCounterU32(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadCounterU32',
+            nidaqmx__pb2.BeginReadCounterU32Request.SerializeToString,
+            nidaqmx__pb2.BeginReadCounterU32Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ReadCounterU32Ex(request,
             target,
             options=(),
@@ -10766,6 +11721,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/ReadCounterU32Ex',
             nidaqmx__pb2.ReadCounterU32ExRequest.SerializeToString,
             nidaqmx__pb2.ReadCounterU32ExResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginReadCounterU32Ex(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadCounterU32Ex',
+            nidaqmx__pb2.BeginReadCounterU32ExRequest.SerializeToString,
+            nidaqmx__pb2.BeginReadCounterU32ExResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -10787,6 +11759,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginReadCtrFreq(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadCtrFreq',
+            nidaqmx__pb2.BeginReadCtrFreqRequest.SerializeToString,
+            nidaqmx__pb2.BeginReadCtrFreqResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ReadCtrFreqScalar(request,
             target,
             options=(),
@@ -10800,6 +11789,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/ReadCtrFreqScalar',
             nidaqmx__pb2.ReadCtrFreqScalarRequest.SerializeToString,
             nidaqmx__pb2.ReadCtrFreqScalarResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginReadCtrFreqScalar(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadCtrFreqScalar',
+            nidaqmx__pb2.BeginReadCtrFreqScalarRequest.SerializeToString,
+            nidaqmx__pb2.BeginReadCtrFreqScalarResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -10821,6 +11827,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginReadCtrTicks(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadCtrTicks',
+            nidaqmx__pb2.BeginReadCtrTicksRequest.SerializeToString,
+            nidaqmx__pb2.BeginReadCtrTicksResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ReadCtrTicksScalar(request,
             target,
             options=(),
@@ -10834,6 +11857,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/ReadCtrTicksScalar',
             nidaqmx__pb2.ReadCtrTicksScalarRequest.SerializeToString,
             nidaqmx__pb2.ReadCtrTicksScalarResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginReadCtrTicksScalar(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadCtrTicksScalar',
+            nidaqmx__pb2.BeginReadCtrTicksScalarRequest.SerializeToString,
+            nidaqmx__pb2.BeginReadCtrTicksScalarResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -10855,6 +11895,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginReadCtrTime(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadCtrTime',
+            nidaqmx__pb2.BeginReadCtrTimeRequest.SerializeToString,
+            nidaqmx__pb2.BeginReadCtrTimeResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ReadCtrTimeScalar(request,
             target,
             options=(),
@@ -10868,6 +11925,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/ReadCtrTimeScalar',
             nidaqmx__pb2.ReadCtrTimeScalarRequest.SerializeToString,
             nidaqmx__pb2.ReadCtrTimeScalarResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginReadCtrTimeScalar(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadCtrTimeScalar',
+            nidaqmx__pb2.BeginReadCtrTimeScalarRequest.SerializeToString,
+            nidaqmx__pb2.BeginReadCtrTimeScalarResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -10889,6 +11963,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginReadDigitalLines(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadDigitalLines',
+            nidaqmx__pb2.BeginReadDigitalLinesRequest.SerializeToString,
+            nidaqmx__pb2.BeginReadDigitalLinesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ReadDigitalScalarU32(request,
             target,
             options=(),
@@ -10902,6 +11993,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/ReadDigitalScalarU32',
             nidaqmx__pb2.ReadDigitalScalarU32Request.SerializeToString,
             nidaqmx__pb2.ReadDigitalScalarU32Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginReadDigitalScalarU32(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadDigitalScalarU32',
+            nidaqmx__pb2.BeginReadDigitalScalarU32Request.SerializeToString,
+            nidaqmx__pb2.BeginReadDigitalScalarU32Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -10923,6 +12031,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginReadDigitalU16(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadDigitalU16',
+            nidaqmx__pb2.BeginReadDigitalU16Request.SerializeToString,
+            nidaqmx__pb2.BeginReadDigitalU16Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ReadDigitalU32(request,
             target,
             options=(),
@@ -10936,6 +12061,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/ReadDigitalU32',
             nidaqmx__pb2.ReadDigitalU32Request.SerializeToString,
             nidaqmx__pb2.ReadDigitalU32Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginReadDigitalU32(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadDigitalU32',
+            nidaqmx__pb2.BeginReadDigitalU32Request.SerializeToString,
+            nidaqmx__pb2.BeginReadDigitalU32Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -10957,6 +12099,40 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginReadDigitalU8(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadDigitalU8',
+            nidaqmx__pb2.BeginReadDigitalU8Request.SerializeToString,
+            nidaqmx__pb2.BeginReadDigitalU8Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ReadIDPinMemory(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/ReadIDPinMemory',
+            nidaqmx__pb2.ReadIDPinMemoryRequest.SerializeToString,
+            nidaqmx__pb2.ReadIDPinMemoryResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ReadPowerBinaryI16(request,
             target,
             options=(),
@@ -10970,6 +12146,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/ReadPowerBinaryI16',
             nidaqmx__pb2.ReadPowerBinaryI16Request.SerializeToString,
             nidaqmx__pb2.ReadPowerBinaryI16Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginReadPowerBinaryI16(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadPowerBinaryI16',
+            nidaqmx__pb2.BeginReadPowerBinaryI16Request.SerializeToString,
+            nidaqmx__pb2.BeginReadPowerBinaryI16Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -10991,6 +12184,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginReadPowerF64(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadPowerF64',
+            nidaqmx__pb2.BeginReadPowerF64Request.SerializeToString,
+            nidaqmx__pb2.BeginReadPowerF64Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ReadPowerScalarF64(request,
             target,
             options=(),
@@ -11008,6 +12218,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginReadPowerScalarF64(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadPowerScalarF64',
+            nidaqmx__pb2.BeginReadPowerScalarF64Request.SerializeToString,
+            nidaqmx__pb2.BeginReadPowerScalarF64Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ReadRaw(request,
             target,
             options=(),
@@ -11021,6 +12248,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/ReadRaw',
             nidaqmx__pb2.ReadRawRequest.SerializeToString,
             nidaqmx__pb2.ReadRawResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginReadRaw(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginReadRaw',
+            nidaqmx__pb2.BeginReadRawRequest.SerializeToString,
+            nidaqmx__pb2.BeginReadRawResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -12793,6 +14037,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginWaitForNextSampleClock(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWaitForNextSampleClock',
+            nidaqmx__pb2.BeginWaitForNextSampleClockRequest.SerializeToString,
+            nidaqmx__pb2.BeginWaitForNextSampleClockResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def WaitForValidTimestamp(request,
             target,
             options=(),
@@ -12844,6 +14105,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginWriteAnalogF64(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteAnalogF64',
+            nidaqmx__pb2.BeginWriteAnalogF64Request.SerializeToString,
+            nidaqmx__pb2.BeginWriteAnalogF64Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def WriteAnalogScalarF64(request,
             target,
             options=(),
@@ -12857,6 +14135,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/WriteAnalogScalarF64',
             nidaqmx__pb2.WriteAnalogScalarF64Request.SerializeToString,
             nidaqmx__pb2.WriteAnalogScalarF64Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginWriteAnalogScalarF64(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteAnalogScalarF64',
+            nidaqmx__pb2.BeginWriteAnalogScalarF64Request.SerializeToString,
+            nidaqmx__pb2.BeginWriteAnalogScalarF64Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -12878,6 +14173,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginWriteBinaryI16(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteBinaryI16',
+            nidaqmx__pb2.BeginWriteBinaryI16Request.SerializeToString,
+            nidaqmx__pb2.BeginWriteBinaryI16Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def WriteBinaryI32(request,
             target,
             options=(),
@@ -12891,6 +14203,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/WriteBinaryI32',
             nidaqmx__pb2.WriteBinaryI32Request.SerializeToString,
             nidaqmx__pb2.WriteBinaryI32Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginWriteBinaryI32(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteBinaryI32',
+            nidaqmx__pb2.BeginWriteBinaryI32Request.SerializeToString,
+            nidaqmx__pb2.BeginWriteBinaryI32Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -12912,6 +14241,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginWriteBinaryU16(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteBinaryU16',
+            nidaqmx__pb2.BeginWriteBinaryU16Request.SerializeToString,
+            nidaqmx__pb2.BeginWriteBinaryU16Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def WriteBinaryU32(request,
             target,
             options=(),
@@ -12925,6 +14271,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/WriteBinaryU32',
             nidaqmx__pb2.WriteBinaryU32Request.SerializeToString,
             nidaqmx__pb2.WriteBinaryU32Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginWriteBinaryU32(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteBinaryU32',
+            nidaqmx__pb2.BeginWriteBinaryU32Request.SerializeToString,
+            nidaqmx__pb2.BeginWriteBinaryU32Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -12946,6 +14309,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginWriteCtrFreq(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteCtrFreq',
+            nidaqmx__pb2.BeginWriteCtrFreqRequest.SerializeToString,
+            nidaqmx__pb2.BeginWriteCtrFreqResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def WriteCtrFreqScalar(request,
             target,
             options=(),
@@ -12959,6 +14339,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/WriteCtrFreqScalar',
             nidaqmx__pb2.WriteCtrFreqScalarRequest.SerializeToString,
             nidaqmx__pb2.WriteCtrFreqScalarResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginWriteCtrFreqScalar(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteCtrFreqScalar',
+            nidaqmx__pb2.BeginWriteCtrFreqScalarRequest.SerializeToString,
+            nidaqmx__pb2.BeginWriteCtrFreqScalarResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -12980,6 +14377,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginWriteCtrTicks(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteCtrTicks',
+            nidaqmx__pb2.BeginWriteCtrTicksRequest.SerializeToString,
+            nidaqmx__pb2.BeginWriteCtrTicksResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def WriteCtrTicksScalar(request,
             target,
             options=(),
@@ -12993,6 +14407,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/WriteCtrTicksScalar',
             nidaqmx__pb2.WriteCtrTicksScalarRequest.SerializeToString,
             nidaqmx__pb2.WriteCtrTicksScalarResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginWriteCtrTicksScalar(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteCtrTicksScalar',
+            nidaqmx__pb2.BeginWriteCtrTicksScalarRequest.SerializeToString,
+            nidaqmx__pb2.BeginWriteCtrTicksScalarResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -13014,6 +14445,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginWriteCtrTime(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteCtrTime',
+            nidaqmx__pb2.BeginWriteCtrTimeRequest.SerializeToString,
+            nidaqmx__pb2.BeginWriteCtrTimeResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def WriteCtrTimeScalar(request,
             target,
             options=(),
@@ -13027,6 +14475,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/WriteCtrTimeScalar',
             nidaqmx__pb2.WriteCtrTimeScalarRequest.SerializeToString,
             nidaqmx__pb2.WriteCtrTimeScalarResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginWriteCtrTimeScalar(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteCtrTimeScalar',
+            nidaqmx__pb2.BeginWriteCtrTimeScalarRequest.SerializeToString,
+            nidaqmx__pb2.BeginWriteCtrTimeScalarResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -13048,6 +14513,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginWriteDigitalLines(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteDigitalLines',
+            nidaqmx__pb2.BeginWriteDigitalLinesRequest.SerializeToString,
+            nidaqmx__pb2.BeginWriteDigitalLinesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def WriteDigitalScalarU32(request,
             target,
             options=(),
@@ -13061,6 +14543,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/WriteDigitalScalarU32',
             nidaqmx__pb2.WriteDigitalScalarU32Request.SerializeToString,
             nidaqmx__pb2.WriteDigitalScalarU32Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginWriteDigitalScalarU32(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteDigitalScalarU32',
+            nidaqmx__pb2.BeginWriteDigitalScalarU32Request.SerializeToString,
+            nidaqmx__pb2.BeginWriteDigitalScalarU32Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -13082,6 +14581,23 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginWriteDigitalU16(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteDigitalU16',
+            nidaqmx__pb2.BeginWriteDigitalU16Request.SerializeToString,
+            nidaqmx__pb2.BeginWriteDigitalU16Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def WriteDigitalU32(request,
             target,
             options=(),
@@ -13095,6 +14611,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/WriteDigitalU32',
             nidaqmx__pb2.WriteDigitalU32Request.SerializeToString,
             nidaqmx__pb2.WriteDigitalU32Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginWriteDigitalU32(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteDigitalU32',
+            nidaqmx__pb2.BeginWriteDigitalU32Request.SerializeToString,
+            nidaqmx__pb2.BeginWriteDigitalU32Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -13116,6 +14649,40 @@ class NiDAQmx(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def BeginWriteDigitalU8(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteDigitalU8',
+            nidaqmx__pb2.BeginWriteDigitalU8Request.SerializeToString,
+            nidaqmx__pb2.BeginWriteDigitalU8Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def WriteIDPinMemory(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/WriteIDPinMemory',
+            nidaqmx__pb2.WriteIDPinMemoryRequest.SerializeToString,
+            nidaqmx__pb2.WriteIDPinMemoryResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def WriteRaw(request,
             target,
             options=(),
@@ -13129,6 +14696,23 @@ class NiDAQmx(object):
         return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/WriteRaw',
             nidaqmx__pb2.WriteRawRequest.SerializeToString,
             nidaqmx__pb2.WriteRawResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BeginWriteRaw(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidaqmx_grpc.NiDAQmx/BeginWriteRaw',
+            nidaqmx__pb2.BeginWriteRawRequest.SerializeToString,
+            nidaqmx__pb2.BeginWriteRawResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
