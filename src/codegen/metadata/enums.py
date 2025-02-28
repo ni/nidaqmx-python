@@ -292,6 +292,13 @@ enums = {
                 },
                 'name': 'POWER',
                 'value': 16201
+            },
+            {
+                'documentation': {
+                    'description': 'Calculated power measurement.'
+                },
+                'name': 'CALCULATED_POWER',
+                'value': 16204
             }
         ]
     },
@@ -1484,6 +1491,48 @@ enums = {
     },
     'DAQmxErrors': {
         'values': [
+            {
+                'documentation': {
+                    'description': ' '
+                },
+                'name': 'ID_PIN_NO_EEPROM',
+                'value': -209904
+            },
+            {
+                'documentation': {
+                    'description': ' '
+                },
+                'name': 'ID_PIN_NAME_INVALID',
+                'value': -209903
+            },
+            {
+                'documentation': {
+                    'description': ' '
+                },
+                'name': 'ID_PIN_DATA_WRITE_ERROR',
+                'value': -209902
+            },
+            {
+                'documentation': {
+                    'description': ' '
+                },
+                'name': 'ID_PIN_UNSUPPORTED_FORMAT_CODE',
+                'value': -209901
+            },
+            {
+                'documentation': {
+                    'description': ' '
+                },
+                'name': 'ID_PIN_DATA_TOO_LARGE',
+                'value': -209900
+            },
+            {
+                'documentation': {
+                    'description': ' '
+                },
+                'name': 'ID_PIN_UNSUPPORTED_FAMILY_CODE',
+                'value': -209899
+            },
             {
                 'documentation': {
                     'description': ' '
@@ -15565,6 +15614,26 @@ enums = {
                 },
                 'name': 'WAIT_FOR_HANDSHAKE_TRIGGER_DEASSERT',
                 'value': 12551
+            }
+        ]
+    },
+    'IDPinStatus': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'xx No memory is connected to ID Pin.',
+                    'python_description': 'No memory is connected to ID Pin.'
+                },
+                'name': 'MEMORY_NOT_PRESENT',
+                'value': 16205
+            },
+            {
+                'documentation': {
+                    'description': 'xx The memory is connected to ID Pin.',
+                    'python_description': 'The memory is connected to ID Pin.'
+                },
+                'name': 'MEMORY_PRESENT',
+                'value': 16206
             }
         ]
     },

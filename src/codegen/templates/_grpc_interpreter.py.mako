@@ -224,6 +224,20 @@ class GrpcStubInterpreter(BaseInterpreter):
             _logger.exception('Failed to get error string for error code %d.', error_code)
             return 'Failed to retrieve error description.'
 
+    ## DAQmxReadIDPinMemory returns the size if given a 0 for arraySize.
+    ## So, we read 1st time to get the size, then read 2nd time to get the data.
+    def read_id_pin_memory(self, device_name, id_pin_name):
+        response = self._invoke(
+            self._client.ReadIDPinMemory,
+            grpc_types.ReadIDPinMemoryRequest(device_name=device_name, id_pin_name=id_pin_name, array_size=0))
+        if response.status <= 0:
+            self._check_for_error_from_response(response.status)
+        response = self._invoke(
+            self._client.ReadIDPinMemory,
+            grpc_types.ReadIDPinMemoryRequest(device_name=device_name, id_pin_name=id_pin_name, array_size=response.status))
+        self._check_for_error_from_response(response.status)
+        return list(response.data), response.data_length_read, response.format_code
+
     def set_runtime_environment(
             self, environment, environment_version, reserved_1, reserved_2):
         raise NotImplementedError

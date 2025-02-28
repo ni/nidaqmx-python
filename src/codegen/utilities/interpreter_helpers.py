@@ -66,11 +66,13 @@ INTERPRETER_IGNORED_FUNCTIONS = [
 
 GRPC_INTERPRETER_IGNORED_FUNCTIONS = [
     "get_error_string",
+    "read_id_pin_memory",
     "set_runtime_environment",
 ]
 
 LIBRARY_INTERPRETER_IGNORED_FUNCTIONS = [
     "get_error_string",
+    "read_id_pin_memory",
     "read_power_binary_i16",
     "read_power_f64",
     "read_raw",
