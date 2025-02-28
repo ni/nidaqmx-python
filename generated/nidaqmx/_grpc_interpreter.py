@@ -3533,6 +3533,13 @@ class GrpcStubInterpreter(BaseInterpreter):
                 write_array=write_array.tobytes()))
         return response.samps_per_chan_written
 
+    def write_id_pin_memory(self, device_name, id_pin_name, data, format_code):
+        response = self._invoke(
+            self._client.WriteIDPinMemory,
+            grpc_types.WriteIDPinMemoryRequest(
+                device_name=device_name, id_pin_name=id_pin_name,
+                data=data.tobytes(), format_code=format_code))
+
     def write_raw(self, task, num_samps, auto_start, timeout, write_array):
         _validate_array_dtype(write_array, numpy.generic)
         response = self._invoke(
@@ -3573,6 +3580,18 @@ class GrpcStubInterpreter(BaseInterpreter):
         except grpc.RpcError:
             _logger.exception('Failed to get error string for error code %d.', error_code)
             return 'Failed to retrieve error description.'
+
+    def read_id_pin_memory(self, device_name, id_pin_name):
+        response = self._invoke(
+            self._client.ReadIDPinMemory,
+            grpc_types.ReadIDPinMemoryRequest(device_name=device_name, id_pin_name=id_pin_name, array_size=0))
+        if response.status <= 0:
+            self._check_for_error_from_response(response.status)
+        response = self._invoke(
+            self._client.ReadIDPinMemory,
+            grpc_types.ReadIDPinMemoryRequest(device_name=device_name, id_pin_name=id_pin_name, array_size=response.status))
+        self._check_for_error_from_response(response.status)
+        return list(response.data), response.data_length_read, response.format_code
 
     def set_runtime_environment(
             self, environment, environment_version, reserved_1, reserved_2):

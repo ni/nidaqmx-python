@@ -1,4 +1,5 @@
 import collections
+import typing
 
 # region Task Counter IO namedtuples
 
@@ -54,3 +55,15 @@ CDAQSyncConnection = collections.namedtuple(
 
 # endregion
 
+# region ID Pin namedtuples
+
+class IDPinContents(typing.NamedTuple):
+    """IDPinContents represent the contents of the memory connected to the ID pin."""
+
+    data: list[int]
+    """The binary data stored on the memory connected to the ID pin."""
+
+    format_code: int
+    """The format code of the binary data."""
+
+# endregion
