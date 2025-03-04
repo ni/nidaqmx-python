@@ -1,3 +1,5 @@
+import sys
+
 import numpy
 import pytest
 
@@ -83,12 +85,14 @@ def test___physical_channel_with_teds___get_uint32_property___returns_configured
         assert phys_chan.teds_mfg_id == 17
 
 
+@pytest.mark.skipif(not sys.platform.startswith("win"), reason="mioDAQ support Windows-only")
 def test___physical_channel___get_int32_property___returns_value():
     phys_chans = PhysicalChannel("mioDAQ/port0")
 
     assert phys_chans.dig_port_logic_family in LogicFamily
 
 
+@pytest.mark.skipif(not sys.platform.startswith("win"), reason="mioDAQ support Windows-only")
 @pytest.mark.library_only(
     reason="AB#2375679: gRPC interpreter doesn't support setting physical channel property."
 )
