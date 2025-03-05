@@ -31,6 +31,7 @@ All notable changes to this project will be documented in this file.
 
 * ### Major Changes
     * Added support for mioDAQ configurable digital voltage.
+    * Added support for mioDAQ ID Pin.
     * Removed support for Python 3.8.
 
 * ### Known Issues
