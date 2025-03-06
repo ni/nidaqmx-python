@@ -1,17 +1,12 @@
 from __future__ import annotations
 
-import sys
 from tzlocal import get_localzone
 from datetime import timezone
 from datetime import tzinfo as dt_tzinfo
 from datetime import datetime as std_datetime
 from hightime import datetime as ht_datetime
 from typing import Optional, Union
-
-if sys.version_info >= (3, 9):
-    from zoneinfo import ZoneInfo
-else:
-    from backports.zoneinfo import ZoneInfo
+from zoneinfo import ZoneInfo
 
 # theoretically the same as astimezone(), but with support for dates before 1970
 def _convert_to_desired_timezone(expected_time_utc: Union[std_datetime, ht_datetime], tzinfo: Optional[dt_tzinfo] = None) -> Union[std_datetime, ht_datetime]:

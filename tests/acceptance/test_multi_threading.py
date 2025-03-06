@@ -1,7 +1,6 @@
 import concurrent.futures
 import functools
 import random
-import sys
 import threading
 import time
 from concurrent.futures import Future, ThreadPoolExecutor
@@ -165,11 +164,7 @@ def _check_for_exceptions(futures: Sequence[Future]) -> None:
 
 
 def _release_n(semaphore: Semaphore, n: int) -> None:
-    if sys.version_info < (3, 9):
-        for i in range(n):
-            semaphore.release()
-    else:
-        semaphore.release(n)
+    semaphore.release(n)
 
 
 def test___shared_interpreter___run_multiple_acquisitions_with_events___callbacks_invoked(
