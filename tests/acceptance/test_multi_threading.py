@@ -1,7 +1,6 @@
 import concurrent.futures
 import functools
 import random
-import sys
 import threading
 import time
 from concurrent.futures import Future, ThreadPoolExecutor
@@ -50,7 +49,7 @@ def test___single_task___get_set_float_properties___no_errors(
 
     start_barrier.wait(timeout=TIMEOUT)
     time.sleep(RUN_TIME)
-    _release_n(stop_semaphore, num_channels)
+    stop_semaphore.release(num_channels)
 
     concurrent.futures.wait(futures)
     _check_for_exceptions(futures)
@@ -92,7 +91,7 @@ def test___single_task___get_set_float_and_string_properties___no_errors(
 
     start_barrier.wait(timeout=TIMEOUT)
     time.sleep(RUN_TIME)
-    _release_n(stop_semaphore, num_channels)
+    stop_semaphore.release(num_channels)
 
     concurrent.futures.wait(futures)
     _check_for_exceptions(futures)
@@ -139,7 +138,7 @@ def test___multiple_tasks___get_set_float_and_string_properties___no_errors(
 
     start_barrier.wait(timeout=TIMEOUT)
     time.sleep(RUN_TIME)
-    _release_n(stop_semaphore, num_tasks)
+    stop_semaphore.release(num_tasks)
 
     concurrent.futures.wait(futures)
     _check_for_exceptions(futures)
@@ -162,14 +161,6 @@ def _get_set_property_thread_main(
 def _check_for_exceptions(futures: Sequence[Future]) -> None:
     for future in futures:
         _ = future.result()
-
-
-def _release_n(semaphore: Semaphore, n: int) -> None:
-    if sys.version_info < (3, 9):
-        for i in range(n):
-            semaphore.release()
-    else:
-        semaphore.release(n)
 
 
 def test___shared_interpreter___run_multiple_acquisitions_with_events___callbacks_invoked(

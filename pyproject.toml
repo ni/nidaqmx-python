@@ -18,7 +18,6 @@ classifiers = [
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -32,9 +31,9 @@ exclude = ["nidaqmx/tests"]
 packages = [{ include = "nidaqmx", from = "generated" }]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 numpy = [
-  {version = ">=1.22", python = ">=3.8,<3.12"},
+  {version = ">=1.22", python = ">=3.9,<3.12"},
   {version = ">=1.26", python = ">=3.12,<3.13"},
   {version = ">=2.1", python = "^3.13"},
 ]
@@ -63,7 +62,7 @@ grpc = ["grpcio", "protobuf"]
 click = "^8.1"
 Mako = "^1.2"
 grpcio-tools = [
-  {version = "1.49.1", python = ">=3.8,<3.12"},
+  {version = "1.49.1", python = ">=3.9,<3.12"},
   {version = "1.59.0", python = ">=3.12,<3.13"},
   {version = "1.67.0", python = "^3.13"},
 ]

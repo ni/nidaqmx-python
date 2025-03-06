@@ -1,5 +1,5 @@
-import sys
 from datetime import datetime as std_datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 import pytest
 from hightime import datetime as ht_datetime
@@ -18,11 +18,6 @@ try:
     import nidaqmx._stubs.nidaqmx_pb2 as nidaqmx_pb2
 except ImportError:
     pass
-
-if sys.version_info >= (3, 9):
-    from zoneinfo import ZoneInfo
-else:
-    from backports.zoneinfo import ZoneInfo
 
 
 @pytest.mark.parametrize("from_dt", [(JAN_01_2002_DATETIME), (JAN_01_2002_HIGHTIME)])
