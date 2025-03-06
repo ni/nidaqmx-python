@@ -1,6 +1,7 @@
 import random
 from copy import copy
 from datetime import datetime as std_datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 import pytest
 from hightime import datetime as ht_datetime
@@ -17,7 +18,6 @@ from tests.unit._time_utils import (
     JAN_01_2002_HIGHTIME,
     JAN_01_2002_TIMESTAMP_1904_EPOCH,
 )
-from zoneinfo import ZoneInfo
 
 JAN_01_2002_LIB = LibTimestamp(lsb=0, msb=JAN_01_2002_TIMESTAMP_1904_EPOCH)
 JAN_01_1904_LIB = LibTimestamp(lsb=0, msb=JAN_01_1904_TIMESTAMP_1904_EPOCH)
