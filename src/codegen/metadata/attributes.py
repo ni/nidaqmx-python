@@ -19619,6 +19619,122 @@ attributes = {
             'python_object_type': 'Device',
             'resettable': False,
             'type': 'char[]'
+        },
+        12785: {
+            'access': 'read',
+            'c_function_name': 'DevIDPinPinNames',
+            'calling_convention': 'StdCall',
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'handle_parameters': {
+                'deviceHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'deviceName'
+                }
+            },
+            'has_explicit_read_buffer_size': True,
+            'has_explicit_write_buffer_size': True,
+            'is_list': True,
+            'is_python_object': False,
+            'name': 'ID_PIN_PIN_NAMES',
+            'python_class_name': 'Device',
+            'python_data_type': 'str',
+            'python_description': 'Indicates the names of all the ID Pins on this device.',
+            'resettable': False,
+            'type': 'char[]'
+        },
+        12786: {
+            'access': 'read',
+            'c_function_name': 'DevIDPinPinStatuses',
+            'calling_convention': 'StdCall',
+            'ctypes_data_type': 'numpy.int32',
+            'enum': 'IDPinStatus',
+            'handle_parameters': {
+                'deviceHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'deviceName'
+                }
+            },
+            'has_explicit_read_buffer_size': True,
+            'has_explicit_write_buffer_size': True,
+            'is_list': True,
+            'is_python_object': False,
+            'name': 'ID_PIN_PIN_STATUSES',
+            'python_class_name': 'Device',
+            'python_data_type': 'IDPinStatus',
+            'python_description': 'Indicates status of each ID Pin.',
+            'resettable': False,
+            'type': 'int32[]'
+        },
+        12787: {
+            'access': 'read',
+            'c_function_name': 'DevIDPinMemFamilyCodes',
+            'calling_convention': 'StdCall',
+            'ctypes_data_type': 'numpy.uint32',
+            'handle_parameters': {
+                'deviceHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'deviceName'
+                }
+            },
+            'has_explicit_read_buffer_size': True,
+            'has_explicit_write_buffer_size': True,
+            'is_list': True,
+            'is_python_object': False,
+            'name': 'ID_PIN_MEM_FAMILY_CODES',
+            'python_class_name': 'Device',
+            'python_data_type': 'int',
+            'python_description': 'Indicates the family code of the memory connected to each ID Pin. Each list element corresponds to an ID Pin. The list contains 0 for each ID Pin with no memory connected.',
+            'resettable': False,
+            'type': 'uInt32[]'
+        },
+        12788: {
+            'access': 'read',
+            'c_function_name': 'DevIDPinMemSerialNums',
+            'calling_convention': 'StdCall',
+            'ctypes_data_type': 'ctypes.c_char_p',
+            'handle_parameters': {
+                'deviceHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'deviceName'
+                }
+            },
+            'has_explicit_read_buffer_size': True,
+            'has_explicit_write_buffer_size': True,
+            'is_list': True,
+            'is_python_object': False,
+            'name': 'ID_PIN_MEM_SERIAL_NUMS',
+            'python_class_name': 'Device',
+            'python_data_type': 'str',
+            'python_description': 'Indicates the serial number of the memory connected to each ID Pin. Each list element corresponds to an ID Pin. The list contains an empty string for each ID Pin with no memory connected.',
+            'resettable': False,
+            'type': 'char[]'
+        },
+        12789: {
+            'access': 'read',
+            'c_function_name': 'DevIDPinMemSizes',
+            'calling_convention': 'StdCall',
+            'ctypes_data_type': 'numpy.uint32',
+            'handle_parameters': {
+                'deviceHandle': {
+                    'accessor': 'self._name',
+                    'ctypes_data_type': 'ctypes.c_char_p',
+                    'cvi_name': 'deviceName'
+                }
+            },
+            'has_explicit_read_buffer_size': True,
+            'has_explicit_write_buffer_size': True,
+            'is_list': True,
+            'is_python_object': False,
+            'name': 'ID_PIN_MEM_SIZES',
+            'python_class_name': 'Device',
+            'python_data_type': 'int',
+            'python_description': 'Indicates the size in bytes of the memory connected to each ID Pin. Each list element corresponds to an ID Pin. The list contains 0 for each ID Pin with no memory connected.',
+            'resettable': False,
+            'type': 'uInt32[]'
         }
     },
     'ExportSignal': {

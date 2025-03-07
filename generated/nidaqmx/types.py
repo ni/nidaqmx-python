@@ -54,3 +54,9 @@ CDAQSyncConnection = collections.namedtuple(
 
 # endregion
 
+# region ID Pin namedtuples
+
+IDPinMemory = collections.namedtuple(
+    'IDPinMemory', ['data', 'format_code'])
+
+# endregion

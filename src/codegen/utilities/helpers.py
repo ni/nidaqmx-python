@@ -19,6 +19,7 @@ PascalTokenSubstitution = namedtuple(
 SPECIAL_CASE_PASCAL_TOKENS = [
     # NI uses UInt, not Uint, and never U_INT when converting to snake.
     PascalTokenSubstitution("Uint", "UInt"),
+    PascalTokenSubstitution("Id", "ID"),
 ]
 
 NAME_CHANGE_SET = {

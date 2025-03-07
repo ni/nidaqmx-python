@@ -1,9 +1,10 @@
+import sys
 from datetime import datetime
 
 import pytest
 
 from nidaqmx import DaqError
-from nidaqmx.constants import BusType, TriggerUsage
+from nidaqmx.constants import BusType, IDPinStatus, TriggerUsage
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.system import Device
 
@@ -201,3 +202,38 @@ def test___self_cal_supported___no_errors(real_x_series_device: Device) -> None:
     is_cal_supported = real_x_series_device.self_cal_supported
 
     assert is_cal_supported is True
+
+
+@pytest.mark.skipif(not sys.platform.startswith("win"), reason="mioDAQ support Windows-only")
+def test___id_pin_mem_serial_nums___no_errors(sim_6423_device: Device) -> None:
+    mem_serial_nums = sim_6423_device.id_pin_mem_serial_nums
+
+    assert mem_serial_nums == ["", ""]
+
+
+@pytest.mark.skipif(not sys.platform.startswith("win"), reason="mioDAQ support Windows-only")
+def test___id_pin_mem_family_codes___no_errors(sim_6423_device: Device) -> None:
+    mem_family_codes = sim_6423_device.id_pin_mem_family_codes
+
+    assert mem_family_codes == [0, 0]
+
+
+@pytest.mark.skipif(not sys.platform.startswith("win"), reason="mioDAQ support Windows-only")
+def test___id_pin_mem_sizes___no_errors(sim_6423_device: Device) -> None:
+    mem_sizes = sim_6423_device.id_pin_mem_sizes
+
+    assert mem_sizes == [0, 0]
+
+
+@pytest.mark.skipif(not sys.platform.startswith("win"), reason="mioDAQ support Windows-only")
+def test___id_pin_pin_names___no_errors(sim_6423_device: Device) -> None:
+    pin_names = sim_6423_device.id_pin_pin_names
+
+    assert pin_names == ["id0", "id1"]
+
+
+@pytest.mark.skipif(not sys.platform.startswith("win"), reason="mioDAQ support Windows-only")
+def test___id_pin_pin_statuses___no_errors(sim_6423_device: Device) -> None:
+    pin_statuses = sim_6423_device.id_pin_pin_statuses
+
+    assert pin_statuses == [IDPinStatus.MEMORY_NOT_PRESENT, IDPinStatus.MEMORY_NOT_PRESENT]
