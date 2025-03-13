@@ -35,10 +35,6 @@ def test___grpc_channel_with_errors___get_error_string___returns_failed_to_retri
     assert error_message.startswith("Failed to retrieve error description.")
 
 
-@pytest.mark.xfail(
-    reason="Error message differs slightly (extra new line) in the newer version of the driver. "
-    "Temporary xfail this until we update the driver and hardcoded error message. AB#3050498"
-)
 @pytest.mark.grpc_only(reason="Tests gRPC-specific error message lookup")
 @pytest.mark.parametrize("error_code", list(_ERROR_MESSAGES))
 def test___error_code_with_hardcoded_error_message___get_error_string___returns_hardcoded_error_message(
