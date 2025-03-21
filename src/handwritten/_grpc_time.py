@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from datetime import timezone
 from datetime import datetime as std_datetime
 from datetime import tzinfo as dt_tzinfo
