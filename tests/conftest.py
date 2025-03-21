@@ -193,6 +193,12 @@ def sim_6363_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
 
 
 @pytest.fixture(scope="function")
+def sim_6423_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
+    """Gets simulated 6423 device information."""
+    return _device_by_product_type("USB-6423", DeviceType.SIMULATED, system)
+
+
+@pytest.fixture(scope="function")
 def sim_6535_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets simulated 6535 device information."""
     return _device_by_product_type("PCIe-6535", DeviceType.SIMULATED, system)

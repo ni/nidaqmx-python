@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+option cc_enable_arenas = true;
+option csharp_namespace = "NationalInstruments.DataMonikers";
+
+package ni.data_monikers;
+
+import "google/protobuf/any.proto";
+
+service DataMoniker {
+  rpc BeginSidebandStream(BeginMonikerSidebandStreamRequest) returns (BeginMonikerSidebandStreamResponse) {};
+  rpc StreamReadWrite(stream MonikerWriteRequest) returns (stream MonikerReadResponse) {};
+  rpc StreamRead(MonikerList) returns (stream MonikerReadResponse) {};
+  rpc StreamWrite(stream MonikerWriteRequest) returns (stream StreamWriteResponse) {};
+}
+
+enum SidebandStrategy
+{
+  UNKNOWN = 0;
+  GRPC = 1;
+  SHARED_MEMORY = 2;
+  DOUBLE_BUFFERED_SHARED_MEMORY = 3;
+  SOCKETS = 4;
+  SOCKETS_LOW_LATENCY = 5;
+  HYPERVISOR_SOCKETS = 6;
+  RDMA = 7;
+  RDMA_LOW_LATENCY = 8;
+}
+
+message BeginMonikerSidebandStreamRequest {
+  SidebandStrategy strategy = 1;
+  MonikerList monikers = 2;
+}
+
+message BeginMonikerSidebandStreamResponse {
+  SidebandStrategy strategy = 1;
+  string connection_url = 2;
+  string sideband_identifier = 3;
+  sint64 buffer_size = 4;
+}
+
+message Moniker {
+  string service_location = 1;
+  string data_source = 2;
+  int64 data_instance = 3;
+}
+
+message MonikerWriteRequest {
+  oneof write_data {
+    MonikerList monikers = 1;
+    MonikerValues data = 2;
+  }
+}
+
+message MonikerReadResponse {
+  MonikerValues data = 1;
+}
+
+message MonikerList {
+  repeated Moniker read_monikers = 2;
+  repeated Moniker write_monikers = 3;
+}
+
+message MonikerValues {
+  repeated google.protobuf.Any values = 1;
+}
+
+message SidebandWriteRequest {
+  bool cancel = 1;
+  MonikerValues values = 2;
+}
+
+message SidebandReadResponse {
+  bool cancel = 1;
+  MonikerValues values = 2;
+}
+
+message StreamWriteResponse {
+}
