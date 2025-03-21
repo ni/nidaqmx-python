@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import pathlib
-from typing import Any, Dict, List, Optional, Union
+from typing import Any
 
 import pytest
 

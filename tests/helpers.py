@@ -1,9 +1,10 @@
 """This contains the helpers methods used in the DAQmx tests."""
 
 from __future__ import annotations
+
 import contextlib
 import pathlib
-from typing import Generator, Optional, Union
+from typing import Generator
 
 from nidaqmx.system.physical_channel import PhysicalChannel
 

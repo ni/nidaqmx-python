@@ -1,9 +1,9 @@
 from __future__ import annotations
+
 import threading
 import time
 import traceback
 from logging import LogRecord
-from typing import List
 
 import pytest
 

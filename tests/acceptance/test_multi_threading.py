@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import concurrent.futures
 import functools
 import random
@@ -7,7 +8,7 @@ import time
 from concurrent.futures import Future, ThreadPoolExecutor
 from contextlib import ExitStack
 from threading import Barrier, Semaphore
-from typing import Any, Callable, List, Sequence, Tuple
+from typing import Any, Callable, Sequence
 
 import pytest
 

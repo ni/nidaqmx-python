@@ -1,7 +1,8 @@
 from __future__ import annotations
+
 import threading
 import time
-from typing import Callable, Generic, List, NamedTuple, Optional, TypeVar, Union
+from typing import Callable, Generic, NamedTuple, TypeVar, Union
 
 
 class DoneEvent(NamedTuple):

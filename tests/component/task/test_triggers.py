@@ -1,6 +1,6 @@
 from __future__ import annotations
+
 from datetime import timezone
-from typing import List
 
 import pytest
 from hightime import datetime as ht_datetime, timedelta as ht_timedelta

@@ -1,7 +1,7 @@
 from __future__ import annotations
+
 import ctypes
 import math
-from typing import List, Union
 
 import numpy
 import numpy.typing

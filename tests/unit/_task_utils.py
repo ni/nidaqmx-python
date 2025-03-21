@@ -1,7 +1,8 @@
 """Task helper functions."""
 
 from __future__ import annotations
-from typing import Dict, Iterable
+
+from typing import Iterable
 from unittest.mock import Mock
 
 from pytest_mock import MockerFixture

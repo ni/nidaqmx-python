@@ -6,7 +6,7 @@ import contextlib
 import pathlib
 from concurrent.futures import ThreadPoolExecutor
 from enum import Enum
-from typing import TYPE_CHECKING, Callable, Generator, List
+from typing import TYPE_CHECKING, Callable, Generator
 
 import pytest
 

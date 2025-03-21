@@ -1,7 +1,8 @@
 from __future__ import annotations
+
 import ctypes
 import math
-from typing import Callable, List
+from typing import Callable
 
 import numpy
 import pytest

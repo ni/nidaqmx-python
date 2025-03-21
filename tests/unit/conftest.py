@@ -1,6 +1,7 @@
 """Fixtures used in the DAQmx unit tests."""
 
 from __future__ import annotations
+
 from typing import Generator
 from unittest.mock import Mock
 
