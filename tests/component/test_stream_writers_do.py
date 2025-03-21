@@ -216,24 +216,24 @@ def _get_digital_data_for_sample(num_lines: int, sample_number: int) -> int:
     return result & line_mask
 
 
-def _get_digital_data(num_lines: int, num_samples: int) -> List[int]:
+def _get_digital_data(num_lines: int, num_samples: int) -> list[int]:
     return [
         _get_digital_data_for_sample(num_lines, sample_number)
         for sample_number in range(num_samples)
     ]
 
 
-def _get_digital_port_data_for_sample(task: nidaqmx.Task, sample_number: int) -> List[int]:
+def _get_digital_port_data_for_sample(task: nidaqmx.Task, sample_number: int) -> list[int]:
     return [
         _get_digital_data_for_sample(chan.do_num_lines, sample_number) for chan in task.channels
     ]
 
 
-def _get_digital_port_data_port_major(task: nidaqmx.Task, num_samples: int) -> List[List[int]]:
+def _get_digital_port_data_port_major(task: nidaqmx.Task, num_samples: int) -> list[list[int]]:
     return [_get_digital_data(chan.do_num_lines, num_samples) for chan in task.channels]
 
 
-def _get_digital_port_data_sample_major(task: nidaqmx.Task, num_samples: int) -> List[List[int]]:
+def _get_digital_port_data_sample_major(task: nidaqmx.Task, num_samples: int) -> list[list[int]]:
     result = _get_digital_port_data_port_major(task, num_samples)
     return numpy.transpose(result).tolist()
 

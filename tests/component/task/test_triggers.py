@@ -303,8 +303,8 @@ def test___reference_trigger___cfg_anlg_window_ref_trig___no_errors(
 )
 def test___start_trigger___cfg_anlg_multi_edge_start_trig___no_errors(
     sim_9775_ai_voltage_multi_edge_task: Task,
-    trig_slopes: List[Slope],
-    trig_levels: List[float],
+    trig_slopes: list[Slope],
+    trig_levels: list[float],
 ):
     trigger_sources = ["cdaqTesterMod3/ai0", "cdaqTesterMod3/ai1"]
     flatten_trigger_sources = flatten_channel_string([s for s in trigger_sources])
@@ -409,8 +409,8 @@ def test___reference_trigger___cfg_anlg_edge_ref_trig___no_errors(
 def test___reference_trigger___cfg_anlg_multi_edge_ref_trig___no_errors(
     sim_9775_ai_voltage_multi_edge_task: Task,
     pretrig_samples: int,
-    trig_slopes: List[Slope],
-    trig_levels: List[float],
+    trig_slopes: list[Slope],
+    trig_levels: list[float],
 ):
     trigger_sources = ["cdaqTesterMod3/ai0", "cdaqTesterMod3/ai1"]
     flatten_trigger_sources = flatten_channel_string([s for s in trigger_sources])

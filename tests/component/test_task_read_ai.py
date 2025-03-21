@@ -154,7 +154,7 @@ def test___analog_multi_channel_finite___read_too_many_sample___returns_valid_2d
     _assert_equal_2d(data, expected, abs=VOLTAGE_EPSILON)
 
 
-def _assert_equal_2d(data: List[List[float]], expected: List[List[float]], abs: float) -> None:
+def _assert_equal_2d(data: list[list[float]], expected: list[list[float]], abs: float) -> None:
     # pytest.approx() does not support nested data structures.
     assert len(data) == len(expected)
     for i in range(len(data)):
@@ -187,7 +187,7 @@ def pwr_single_channel_task(
 
 @pytest.fixture
 def pwr_multi_channel_task(
-    task: nidaqmx.Task, sim_ts_power_devices: List[nidaqmx.system.Device]
+    task: nidaqmx.Task, sim_ts_power_devices: list[nidaqmx.system.Device]
 ) -> nidaqmx.Task:
     for chan_index, sim_ts_power_device in enumerate(sim_ts_power_devices):
         task.ai_channels.add_ai_power_chan(

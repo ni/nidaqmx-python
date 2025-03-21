@@ -81,7 +81,7 @@ def test___events_registered_and_multiple_errors_raised___close___task_resources
 
 
 def _assert_task_resources_cleaned_up(
-    task: Task, interpreter: Mock, event_handlers: Dict[_TaskEventType, Mock]
+    task: Task, interpreter: Mock, event_handlers: dict[_TaskEventType, Mock]
 ) -> None:
     interpreter.clear_task.assert_called_once_with("MyTaskHandle")
     assert task._handle is None

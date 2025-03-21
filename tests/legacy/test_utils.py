@@ -28,7 +28,7 @@ class TestUtils:
 
     def test_empty_flatten_flatten_and_unflatten(self):
         """Test to validate flatten and unflatten empty channel."""
-        unflattened_channels: List[str] = []
+        unflattened_channels: list[str] = []
         flattened_channels = ""
         assert flatten_channel_string(unflattened_channels) == flattened_channels
         assert unflatten_channel_string(flattened_channels) == unflattened_channels

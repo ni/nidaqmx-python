@@ -44,7 +44,7 @@ def register_event_handler(mocker: MockerFixture, task: Task, event_type: _TaskE
 
 def register_event_handlers(
     mocker: MockerFixture, task: Task, event_types: Iterable[_TaskEventType]
-) -> Dict[_TaskEventType, Mock]:
+) -> dict[_TaskEventType, Mock]:
     """Register mock event handlers and return a dictionary mapping event name -> handler."""
     return {
         event_type: register_event_handler(mocker, task, event_type) for event_type in event_types

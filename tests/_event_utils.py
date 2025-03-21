@@ -31,15 +31,15 @@ SideEffect = Union[Callable[[], None], BaseException]
 class BaseEventObserver(Generic[TEvent]):
     """Base class for event observers."""
 
-    def __init__(self, side_effect: Optional[SideEffect] = None):
+    def __init__(self, side_effect: SideEffect | None = None):
         """Initializes the BaseEventObserver."""
         self._lock = threading.Lock()
         self._event_semaphore = threading.Semaphore(value=0)
-        self._events: List[TEvent] = []
+        self._events: list[TEvent] = []
         self._side_effect = side_effect
 
     @property
-    def events(self) -> List[TEvent]:
+    def events(self) -> list[TEvent]:
         """Returns the list of observed events."""
         with self._lock:
             return self._events[:]
