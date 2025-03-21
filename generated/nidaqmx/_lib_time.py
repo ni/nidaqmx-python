@@ -35,7 +35,7 @@ class AbsoluteTime(ctypes.Structure):
 
 
     @classmethod
-    def from_datetime(cls, dt: Union[std_datetime, ht_datetime]) -> AbsoluteTime:
+    def from_datetime(cls, dt: std_datetime | ht_datetime) -> AbsoluteTime:
         seconds_since_1904 = 0
 
         # Convert the subseconds.
@@ -55,7 +55,7 @@ class AbsoluteTime(ctypes.Structure):
 
         return AbsoluteTime(lsb=lsb, msb=seconds_since_1904)
 
-    def to_datetime(self, tzinfo: Optional[dt_tzinfo] = None) -> ht_datetime:
+    def to_datetime(self, tzinfo: dt_tzinfo | None = None) -> ht_datetime:
         total_yoctoseconds = int(
             round(AbsoluteTime._YS_PER_S * self.lsb / AbsoluteTime._NUM_SUBSECONDS)
         )

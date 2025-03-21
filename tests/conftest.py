@@ -66,10 +66,10 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
 
         grpc_only = metafunc.definition.get_closest_marker("grpc_only")
         library_only = metafunc.definition.get_closest_marker("library_only")
-        params: List[_pytest.mark.structures.ParameterSet] = []
+        params: list[_pytest.mark.structures.ParameterSet] = []
 
         if not grpc_only:
-            library_marks: List[pytest.MarkDecorator] = []
+            library_marks: list[pytest.MarkDecorator] = []
             library_skip = metafunc.definition.get_closest_marker("library_skip")
             if library_skip:
                 library_marks.append(pytest.mark.skip(*library_skip.args, **library_skip.kwargs))
@@ -79,7 +79,7 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
             params.append(pytest.param("library_init_kwargs", marks=library_marks))
 
         if not library_only:
-            grpc_marks: List[pytest.MarkDecorator] = []
+            grpc_marks: list[pytest.MarkDecorator] = []
             grpc_skip = metafunc.definition.get_closest_marker("grpc_skip")
             if grpc_skip:
                 grpc_marks.append(pytest.mark.skip(*grpc_skip.args, **grpc_skip.kwargs))
@@ -284,7 +284,7 @@ def sim_ts_voltage_device(sim_ts_chassis: nidaqmx.system.Device) -> nidaqmx.syst
 
 
 @pytest.fixture(scope="function")
-def sim_ts_power_devices(sim_ts_chassis: nidaqmx.system.Device) -> List[nidaqmx.system.Device]:
+def sim_ts_power_devices(sim_ts_chassis: nidaqmx.system.Device) -> list[nidaqmx.system.Device]:
     """Gets simulated power devices information."""
     devices = []
     for device in sim_ts_chassis.chassis_module_devices:
@@ -347,7 +347,7 @@ def sim_velocity_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
 
 
 @pytest.fixture(scope="function")
-def multi_threading_test_devices(system: nidaqmx.system.System) -> List[nidaqmx.system.Device]:
+def multi_threading_test_devices(system: nidaqmx.system.System) -> list[nidaqmx.system.Device]:
     """Gets multi threading test devices information."""
     devices = []
     for device in system.devices:
@@ -389,7 +389,7 @@ def test_assets_directory() -> pathlib.Path:
 
 
 @pytest.fixture(scope="session")
-def grpc_server_process() -> Generator[GrpcServerProcess, None, None]:
+def grpc_server_process() -> Generator[GrpcServerProcess]:
     """Gets the grpc server process."""
     if grpc is None:
         pytest.skip("The grpc module is not available.")
@@ -409,7 +409,7 @@ def grpc_channel(request: pytest.FixtureRequest) -> grpc.Channel:
 @pytest.fixture(scope="session")
 def shared_grpc_channel(
     grpc_server_process: GrpcServerProcess,
-) -> Generator[grpc.Channel, None, None]:
+) -> Generator[grpc.Channel]:
     """Gets the shared gRPC channel."""
     with grpc.insecure_channel(f"localhost:{grpc_server_process.server_port}") as channel:
         yield channel
@@ -418,7 +418,7 @@ def shared_grpc_channel(
 @pytest.fixture(scope="function")
 def temporary_grpc_channel(
     request: pytest.FixtureRequest, grpc_server_process: GrpcServerProcess
-) -> Generator[grpc.Channel, None, None]:
+) -> Generator[grpc.Channel]:
     """Gets a temporary gRPC channel (not shared with other tests)."""
     marker = request.node.get_closest_marker("temporary_grpc_channel")
     options = marker.kwargs.get("options", None)
@@ -466,7 +466,7 @@ def task(request, generate_task) -> nidaqmx.Task:
 
 
 @pytest.fixture(scope="function")
-def generate_task(init_kwargs) -> Generator[Callable[..., nidaqmx.Task], None, None]:
+def generate_task(init_kwargs) -> Generator[Callable[..., nidaqmx.Task]]:
     """Gets a factory function which can be used to generate new tasks.
 
     The closure of task objects will be done by this fixture once the test is complete.
@@ -541,7 +541,7 @@ def watchdog_task(request, sim_6363_device, generate_watchdog_task) -> nidaqmx.s
 @pytest.fixture(scope="function")
 def generate_watchdog_task(
     init_kwargs,
-) -> Generator[Callable[..., nidaqmx.system.WatchdogTask], None, None]:
+) -> Generator[Callable[..., nidaqmx.system.WatchdogTask]]:
     """Gets a factory function which can be used to generate new watchdog tasks.
 
     The closure of task objects will be done by this fixture once the test is complete.
@@ -569,7 +569,7 @@ def _get_marker_value(request, marker_name, default=None):
 
 
 @pytest.fixture(scope="function")
-def thread_pool_executor() -> Generator[ThreadPoolExecutor, None, None]:
+def thread_pool_executor() -> Generator[ThreadPoolExecutor]:
     """Creates a thread pool executor.
 
     When the test completes, this fixture shuts down the thread pool executor. If any futures are
