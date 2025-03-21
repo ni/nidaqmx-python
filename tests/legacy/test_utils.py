@@ -1,5 +1,6 @@
 """Tests for validating utilities functionality."""
 
+from __future__ import annotations
 from typing import List
 
 from nidaqmx.utils import flatten_channel_string, unflatten_channel_string
