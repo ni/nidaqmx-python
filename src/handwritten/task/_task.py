@@ -603,7 +603,7 @@ class Task:
         # Determine the array shape and size to create
         if number_of_channels > 1:
             if not num_samples_not_set:
-                array_shape: Tuple[int, ...] = (
+                array_shape: tuple[int, ...] = (
                     number_of_channels, number_of_samples_per_channel
                 )
             else:
@@ -674,13 +674,13 @@ class Task:
 
     def _read_ctr_pulse(
         self,
-        array_shape: Tuple[int, ...],
+        array_shape: tuple[int, ...],
         meas_type: UsageTypeCI,
         number_of_channels: int,
         number_of_samples_per_channel: int,
         num_samples_not_set: bool,
         timeout: float,
-    ) -> Union[CtrFreq, CtrTick, CtrTime, List[CtrFreq], List[CtrTick], List[CtrTime]]:
+    ) -> CtrFreq | CtrTick | CtrTime | list[CtrFreq] | list[CtrTick] | list[CtrTime]:
         if meas_type == UsageTypeCI.PULSE_FREQ:
             frequencies = numpy.zeros(array_shape, dtype=numpy.float64)
             duty_cycles = numpy.zeros(array_shape, dtype=numpy.float64)
@@ -689,7 +689,7 @@ class Task:
                 self._handle, number_of_samples_per_channel, timeout,
                 FillMode.GROUP_BY_CHANNEL.value, frequencies, duty_cycles)
 
-            data: Union[List[CtrFreq], List[CtrTick], List[CtrTime]] = [
+            data: list[CtrFreq] | list[CtrTick] | list[CtrTime] = [
                 CtrFreq(freq=f, duty_cycle=d) for f, d in zip(frequencies, duty_cycles)
             ]
 
@@ -729,11 +729,11 @@ class Task:
 
     def _read_power(
         self,
-        array_shape: Tuple[int, ...],
+        array_shape: tuple[int, ...],
         number_of_channels: int,
         number_of_samples_per_channel: int,
         timeout: float,
-    ) -> Union[PowerMeasurement, List[PowerMeasurement], List[List[PowerMeasurement]]]:
+    ) -> PowerMeasurement | list[PowerMeasurement] | list[list[PowerMeasurement]]:
         voltages = numpy.zeros(array_shape, dtype=numpy.float64)
         currents = numpy.zeros(array_shape, dtype=numpy.float64)
 
