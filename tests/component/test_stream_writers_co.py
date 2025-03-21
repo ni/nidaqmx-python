@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 import ctypes
 import math
-from typing import Callable, List
+from typing import Callable
 
 import numpy
 import pytest
@@ -77,7 +79,7 @@ def ci_freq_loopback_task(
     return task
 
 
-def _get_counter_freq_data(num_samples: int) -> List[CtrFreq]:
+def _get_counter_freq_data(num_samples: int) -> list[CtrFreq]:
     frequencies = numpy.linspace(START_FREQUENCY, END_FREQUENCY, num_samples)
     duty_cycles = numpy.linspace(START_DUTY_CYCLE, END_DUTY_CYCLE, num_samples)
 

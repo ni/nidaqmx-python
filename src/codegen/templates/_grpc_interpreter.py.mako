@@ -22,7 +22,7 @@ import logging
 import threading
 import typing
 import warnings
-from typing import Callable, Generic, Optional, TypeVar
+from typing import Callable, Generic, TypeVar
 
 import google.protobuf.message
 from google.protobuf.timestamp_pb2 import Timestamp as GrpcTimestamp
@@ -69,7 +69,7 @@ class GrpcEventHandler(BaseEventHandler, Generic[TEventResponse]):
         self._interpreter = interpreter
         self._event_stream = event_stream
         self._event_callback = event_callback
-        self._event_stream_exception: Optional[Exception] = None
+        self._event_stream_exception: Exception | None = None
         self._thread = threading.Thread(target=self._thread_main, name=f"nidaqmx {event_name} thread")
 
         self._thread.start()

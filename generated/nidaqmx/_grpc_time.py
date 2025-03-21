@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from datetime import timezone
 from datetime import datetime as std_datetime
 from datetime import tzinfo as dt_tzinfo
@@ -20,7 +22,7 @@ _YS_PER_FS = 10**9
 
 _EPOCH_1970 = ht_datetime(1970, 1, 1, tzinfo=timezone.utc)
 
-def convert_time_to_timestamp(dt: Union[std_datetime, ht_datetime], ts: Optional[GrpcTimestamp] = None) -> GrpcTimestamp:
+def convert_time_to_timestamp(dt: std_datetime | ht_datetime, ts: GrpcTimestamp | None = None) -> GrpcTimestamp:
     seconds_since_1970 = 0
 
     if ts is None:
@@ -42,7 +44,7 @@ def convert_time_to_timestamp(dt: Union[std_datetime, ht_datetime], ts: Optional
     ts.FromNanoseconds(seconds_since_1970 * _NS_PER_S + nanos)
     return ts
 
-def convert_timestamp_to_time(ts: GrpcTimestamp, tzinfo: Optional[dt_tzinfo] = None) -> ht_datetime:
+def convert_timestamp_to_time(ts: GrpcTimestamp, tzinfo: dt_tzinfo | None = None) -> ht_datetime:
     total_nanos = ts.ToNanoseconds()
     seconds, nanos = divmod(total_nanos, _NS_PER_S)
     # Convert the nanoseconds to yoctoseconds.

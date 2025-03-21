@@ -1,4 +1,3 @@
-
 from nidaqmx import utils
 
 __all__ = ['PersistedChannel']

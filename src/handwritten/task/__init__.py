@@ -1,4 +1,3 @@
-
 from nidaqmx.task._task import (
     Task, _TaskEventType, _TaskAlternateConstructor
 )

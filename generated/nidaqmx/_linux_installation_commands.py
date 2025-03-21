@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 from typing import Callable, Dict, List, Tuple
 
@@ -58,8 +60,8 @@ _RPM_DAQMX_VERSION_COMMAND = ["rpm", "-q", "ni-daqmx"]
 @dataclass
 class DistroInfo:
     get_distro_version: Callable[[str], str]
-    get_daqmx_version: List[str]
-    install_commands: List[List[str]]
+    get_daqmx_version: list[str]
+    install_commands: list[list[str]]
 
 
 # Mapping of distros to their command templates and version handlers
@@ -74,7 +76,7 @@ LINUX_COMMANDS = {
 
 def get_linux_installation_commands(
     _directory_to_extract_to: str, dist_name: str, dist_version: str, _release_string: str
-) -> List[List[str]]:
+) -> list[list[str]]:
     """
     Get the installation commands for Linux based on the distribution.
 

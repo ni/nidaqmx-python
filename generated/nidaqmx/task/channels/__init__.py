@@ -1,4 +1,3 @@
-
 from nidaqmx.task.channels._channel import Channel
 from nidaqmx.task.channels._ai_channel import AIChannel
 from nidaqmx.task.channels._ao_channel import AOChannel

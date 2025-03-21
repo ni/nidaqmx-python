@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 import ctypes
 import math
-from typing import Callable, List, TypeVar
+from typing import Callable, TypeVar
 
 import numpy
 import numpy.typing
@@ -149,7 +151,7 @@ def _get_expected_digital_data_for_sample(num_lines: int, sample_number: int) ->
     return result & line_mask
 
 
-def _get_expected_digital_data(num_lines: int, num_samples: int) -> List[int]:
+def _get_expected_digital_data(num_lines: int, num_samples: int) -> list[int]:
     return [
         _get_expected_digital_data_for_sample(num_lines, sample_number)
         for sample_number in range(num_samples)
@@ -158,13 +160,13 @@ def _get_expected_digital_data(num_lines: int, num_samples: int) -> List[int]:
 
 def _get_expected_digital_port_data_port_major(
     task: nidaqmx.Task, num_samples: int
-) -> List[List[int]]:
+) -> list[list[int]]:
     return [_get_expected_digital_data(chan.di_num_lines, num_samples) for chan in task.channels]
 
 
 def _get_expected_digital_port_data_sample_major(
     task: nidaqmx.Task, num_samples: int
-) -> List[List[int]]:
+) -> list[list[int]]:
     result = _get_expected_digital_port_data_port_major(task, num_samples)
     return numpy.transpose(result).tolist()
 
