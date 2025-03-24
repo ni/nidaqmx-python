@@ -22,9 +22,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.2.0
+* ### Merged Pull Requests
+    * [Full changelog: 1.1.0...1.2.0](https://github.com/ni/nidaqmx-python/compare/1.1.0...1.2.0)
+
+* ### Resolved Issues
+    * ...
+
+* ### Major Changes
+    * ...
+
+* ### Known Issues
+    * ...
+
 ## 1.1.0
 * ### Merged Pull Requests
-    * ...
+    * [Full changelog: 1.0.0...1.1.0](https://github.com/ni/nidaqmx-python/compare/1.0.0...1.1.0)
 
 * ### Resolved Issues
     *  [656: Missing usage of slots in classes with DAQmx attributes](https://github.com/ni/nidaqmx-python/issues/656)
