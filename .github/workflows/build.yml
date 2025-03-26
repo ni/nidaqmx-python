@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           # The codegen scripts require Python 3.9 or later.
-          python-version: "3.9"
+          python-version: "3.13"
       - name: Set up Poetry
         uses: Gr1N/setup-poetry@v9
         with:
