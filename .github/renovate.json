@@ -1,0 +1,10 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "branchPrefix": "users/renovate/",
+  "extends": [
+    "config:recommended", 
+    ":maintainLockFilesWeekly",
+    ":automergePatch",
+    "schedule:automergeDaily"
+  ]
+}
