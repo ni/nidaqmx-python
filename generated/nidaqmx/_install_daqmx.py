@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import contextlib
 import errno
 import importlib.resources as pkg_resources
@@ -34,7 +36,7 @@ METADATA_FILE = "_installer_metadata.json"
 _NETWORK_TIMEOUT_IN_SECONDS = 60
 
 
-def _parse_version(version: str) -> Tuple[int, ...]:
+def _parse_version(version: str) -> tuple[int, ...]:
     """
     Split the version string into a tuple of integers.
 
@@ -54,7 +56,7 @@ def _parse_version(version: str) -> Tuple[int, ...]:
         raise click.ClickException(f"Invalid version number '{version}'.") from e
 
 
-def _get_daqmx_installed_version() -> Optional[str]:
+def _get_daqmx_installed_version() -> str | None:
     """
     Check for existing installation of NI-DAQmx.
 
@@ -127,7 +129,7 @@ def _get_daqmx_installed_version() -> Optional[str]:
 @contextlib.contextmanager
 def _multi_access_temp_file(
     *, suffix: str = ".exe", delete: bool = True
-) -> Generator[str, None, None]:
+) -> Generator[str]:
     """
     Context manager for creating a temporary file.
 
@@ -158,7 +160,7 @@ def _multi_access_temp_file(
 
 def _load_data(
     json_data: str, platform: str
-) -> Tuple[Optional[str], Optional[str], Optional[str], Optional[List[str]]]:
+) -> tuple[str | None, str | None, str | None, list[str] | None]:
     """
     Load data from JSON string and extract Windows metadata.
 
@@ -199,10 +201,10 @@ def _load_data(
         raise click.ClickException(f"Failed to parse the driver metadata.\nDetails: {e}") from e
 
     for metadata_entry in metadata:
-        location: Optional[str] = metadata_entry.get("Location")
-        version: Optional[str] = metadata_entry.get("Version")
-        release: Optional[str] = metadata_entry.get("Release")
-        supported_os: Optional[List[str]] = metadata_entry.get("supportedOS")
+        location: str | None = metadata_entry.get("Location")
+        version: str | None = metadata_entry.get("Version")
+        release: str | None = metadata_entry.get("Release")
+        supported_os: list[str] | None = metadata_entry.get("supportedOS")
         _logger.debug("From metadata file found location %s and version %s.", location, version)
         if location and version:
             return location, version, release, supported_os
@@ -211,7 +213,7 @@ def _load_data(
 
 def _get_driver_details(
     platform: str,
-) -> Tuple[Optional[str], Optional[str], Optional[str], Optional[List[str]]]:
+) -> tuple[str | None, str | None, str | None, list[str] | None]:
     """
     Parse the JSON data and retrieve the download link and version information.
 

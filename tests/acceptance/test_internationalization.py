@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 import pathlib
-from typing import Any, Dict, List, Optional, Union
+from typing import Any
 
 import pytest
 
@@ -16,7 +18,7 @@ def ai_task(task, sim_6363_device):
     return task
 
 
-def _get_encoding(obj: Union[Task, Dict[str, Any]]) -> Optional[str]:
+def _get_encoding(obj: Task | dict[str, Any]) -> str | None:
     if getattr(obj, "_grpc_options", None) or (isinstance(obj, dict) and "grpc_options" in obj):
         # gRPC server limited to MBCS encoding
         return get_encoding_from_locale()
@@ -35,7 +37,7 @@ def _get_encoding(obj: Union[Task, Dict[str, Any]]) -> Optional[str]:
     ],
 )
 def test___supported_encoding___reset_nonexistent_device___returns_error_with_device_name(
-    init_kwargs: Dict[str, Any], device_name: str, supported_encodings: List[str]
+    init_kwargs: dict[str, Any], device_name: str, supported_encodings: list[str]
 ):
     if _get_encoding(init_kwargs) not in supported_encodings:
         pytest.skip("requires compatible encoding")
@@ -57,7 +59,7 @@ def test___supported_encoding___reset_nonexistent_device___returns_error_with_de
     ],
 )
 def test___supported_encoding___logging_file_path___returns_assigned_value(
-    ai_task: Task, file_path: str, supported_encodings: List[str]
+    ai_task: Task, file_path: str, supported_encodings: list[str]
 ):
     if _get_encoding(ai_task) not in supported_encodings:
         pytest.skip("requires compatible encoding")
@@ -77,7 +79,7 @@ def test___supported_encoding___logging_file_path___returns_assigned_value(
     ],
 )
 def test___supported_encoding___configure_logging___returns_assigned_values(
-    ai_task: Task, file_path: str, supported_encodings: List[str]
+    ai_task: Task, file_path: str, supported_encodings: list[str]
 ):
     if _get_encoding(ai_task) not in supported_encodings:
         pytest.skip("requires compatible encoding")
@@ -98,7 +100,7 @@ def test___supported_encoding___configure_logging___returns_assigned_values(
     ],
 )
 def test___supported_encoding___start_new_file___returns_assigned_value(
-    ai_task: Task, file_path: str, supported_encodings: List[str]
+    ai_task: Task, file_path: str, supported_encodings: list[str]
 ):
     if _get_encoding(ai_task) not in supported_encodings:
         pytest.skip("requires compatible encoding")

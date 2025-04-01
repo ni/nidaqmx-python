@@ -1,6 +1,7 @@
+from __future__ import annotations
+
 import ctypes
 import math
-from typing import List, Union
 
 import numpy
 import numpy.typing
@@ -341,7 +342,7 @@ def pwr_single_channel_task(
 
 @pytest.fixture
 def pwr_multi_channel_task(
-    task: nidaqmx.Task, sim_ts_power_devices: List[nidaqmx.system.Device]
+    task: nidaqmx.Task, sim_ts_power_devices: list[nidaqmx.system.Device]
 ) -> nidaqmx.Task:
     for chan_index, sim_ts_power_device in enumerate(sim_ts_power_devices):
         task.ai_channels.add_ai_power_chan(
@@ -537,9 +538,9 @@ def test___power_binary_reader___read_many_sample___returns_valid_samples(
 def test___power_binary_reader___read_many_sample_with_wrong_dtype___raises_error_with_correct_dtype(
     pwr_multi_channel_task: nidaqmx.Task,
     voltage_dtype: numpy.typing.DTypeLike,
-    voltage_default: Union[float, int],
+    voltage_default: float | int,
     current_dtype: numpy.typing.DTypeLike,
-    current_default: Union[float, int],
+    current_default: float | int,
 ) -> None:
     reader = PowerBinaryReader(pwr_multi_channel_task.in_stream)
     num_channels = pwr_multi_channel_task.number_of_channels

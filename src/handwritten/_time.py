@@ -9,7 +9,7 @@ from typing import Optional, Union
 from zoneinfo import ZoneInfo
 
 # theoretically the same as astimezone(), but with support for dates before 1970
-def _convert_to_desired_timezone(expected_time_utc: Union[std_datetime, ht_datetime], tzinfo: Optional[dt_tzinfo] = None) -> Union[std_datetime, ht_datetime]:
+def _convert_to_desired_timezone(expected_time_utc: std_datetime | ht_datetime, tzinfo: dt_tzinfo | None = None) -> std_datetime | ht_datetime:
     # if timezone matches, no need to do conversion
     if expected_time_utc.tzinfo is tzinfo:
         return expected_time_utc

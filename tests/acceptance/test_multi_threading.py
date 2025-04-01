@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import concurrent.futures
 import functools
 import random
@@ -6,7 +8,7 @@ import time
 from concurrent.futures import Future, ThreadPoolExecutor
 from contextlib import ExitStack
 from threading import Barrier, Semaphore
-from typing import Any, Callable, List, Sequence, Tuple
+from typing import Any, Callable, Sequence
 
 import pytest
 
@@ -149,7 +151,7 @@ def _get_set_property_thread_main(
     stop_semaphore: Semaphore,
     channel: AIChannel,
     property_name: str,
-    property_values: List[Any],
+    property_values: list[Any],
 ) -> None:
     start_barrier.wait(timeout=TIMEOUT)
     while not stop_semaphore.acquire(timeout=0.0):
@@ -238,7 +240,7 @@ def _create_ai_task_with_shared_interpreter(
     return task
 
 
-def _configure_timing(tasks: List[Task], samples_per_chan: List[int]) -> None:
+def _configure_timing(tasks: list[Task], samples_per_chan: list[int]) -> None:
     assert len(tasks) == len(samples_per_chan)
 
     for i in range(len(tasks)):
@@ -248,8 +250,8 @@ def _configure_timing(tasks: List[Task], samples_per_chan: List[int]) -> None:
 
 
 def _configure_events(
-    tasks: List[Task], samples_per_chan: List[int]
-) -> Tuple[List[int], List[threading.Event], List[int]]:
+    tasks: list[Task], samples_per_chan: list[int]
+) -> tuple[list[int], list[threading.Event], list[int]]:
     assert len(tasks) == len(samples_per_chan)
 
     samples_acquired = [0 for _ in tasks]

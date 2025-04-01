@@ -1,8 +1,9 @@
+from __future__ import annotations
+
 import threading
 import time
 import traceback
 from logging import LogRecord
-from typing import List
 
 import pytest
 
@@ -623,7 +624,7 @@ def _get_exception(record: LogRecord) -> BaseException:
 
 def _wait_for_log_records(
     caplog: pytest.LogCaptureFixture, message_substring: str, expected_count: int, timeout=10.0
-) -> List[LogRecord]:
+) -> list[LogRecord]:
     start_time = time.time()
     while time.time() - start_time < timeout:
         matching_records = [

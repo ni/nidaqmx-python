@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 import pathlib
-from typing import List
 
 import pytest
 
@@ -380,8 +381,8 @@ def test___task___add_ai_force_bridge_polynomial_chan___sets_channel_attributes(
     sim_bridge_device: Device,
     bridge_config: BridgeConfiguration,
     nominal_bridge_resistance: float,
-    forward_coeffs: List[float],
-    reverse_coeffs: List[float],
+    forward_coeffs: list[float],
+    reverse_coeffs: list[float],
 ) -> None:
     chan: AIChannel = task.ai_channels.add_ai_force_bridge_polynomial_chan(
         sim_bridge_device.ai_physical_chans[0].name,
@@ -410,8 +411,8 @@ def test___task___add_ai_force_bridge_table_chan___sets_channel_attributes(
     sim_bridge_device: Device,
     bridge_config: BridgeConfiguration,
     nominal_bridge_resistance: float,
-    electrical_vals: List[float],
-    physical_vals: List[float],
+    electrical_vals: list[float],
+    physical_vals: list[float],
 ) -> None:
     chan: AIChannel = task.ai_channels.add_ai_force_bridge_table_chan(
         sim_bridge_device.ai_physical_chans[0].name,

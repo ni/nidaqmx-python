@@ -1,4 +1,3 @@
-
 from nidaqmx import task
 from nidaqmx import utils
 

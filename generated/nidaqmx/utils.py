@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import re
 from dataclasses import dataclass
 from typing import List, Optional
@@ -37,7 +39,7 @@ class _ChannelInfo:
             return f"{self.base_name}{self.start_index_str}:{self.end_index_str}"
 
 
-def flatten_channel_string(channel_names: List[str]) -> str:
+def flatten_channel_string(channel_names: list[str]) -> str:
     """
     Converts a list of channel names to a comma-delimited list of names.
 
@@ -109,7 +111,7 @@ def flatten_channel_string(channel_names: List[str]) -> str:
     return ','.join([_f for _f in flattened_channel_list if _f]).strip()
 
                                    
-def unflatten_channel_string(channel_names: str) -> List[str]:
+def unflatten_channel_string(channel_names: str) -> list[str]:
     """
     Converts a comma-delimited list of channel names to a list of names.
 
@@ -197,8 +199,8 @@ def unflatten_channel_string(channel_names: str) -> List[str]:
 
 
 def _select_interpreter(
-    grpc_options: Optional[GrpcSessionOptions] = None,
-    interpreter: Optional[BaseInterpreter] = None
+    grpc_options: GrpcSessionOptions | None = None,
+    interpreter: BaseInterpreter | None = None
 ) -> BaseInterpreter:
     if interpreter:
         return interpreter
