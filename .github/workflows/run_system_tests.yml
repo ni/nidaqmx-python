@@ -23,6 +23,13 @@ jobs:
         uses: actions/checkout@v4
       - name: Import DAQmx config
         run: C:\nidaqmxconfig\targets\win64U\x64\msvc-14.0\release\nidaqmxconfig.exe --eraseconfig --import tests\max_config\nidaqmxMaxConfig.ini
+      - name: Cache virtualenvs
+        uses: actions/cache@v4
+        with:
+          path: |
+            .venv
+            .tox
+          key: run-system-tests-${{ runner.os }}-${{ matrix.configuration }}-${{ hashFiles('poetry.lock') }}
       - name: Install dependencies
         run: poetry install
       - name: Run system tests
