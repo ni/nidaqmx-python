@@ -28,12 +28,29 @@ jobs:
           poetry-version: "1.8.3"
       - name: Check Poetry version
         run: poetry --version
+      - name: Restore cached virtualenv (main only)
+        uses: actions/cache/restore@v4
+        id: restore-nidaqmx-main-only
+        with:
+          path: .venv
+          key: nidaqmx-main-only-${{ runner.os }}-py${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
       - name: Install main package dependencies
         run: |
           python -m pip install --upgrade pip
           poetry install --only main
       - name: check installdriver subcommand can be invoked
         run: poetry run nidaqmx installdriver --help
+      - name: Save cached virtualenv (main only)
+        uses: actions/cache/save@v4
+        if: steps.restore-nidaqmx-main-only.outputs.cache-hit != 'true'
+        with:
+          path: .venv
+          key: ${{ steps.restore-nidaqmx-main-only.outputs.cache-primary-key }}
+      - name: Cache virtualenv (with dev dependencies)
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: nidaqmx-with-dev-${{ runner.os }}-py${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
       - name: Install dev dependencies
         run: poetry install
       - name: Run unit tests
