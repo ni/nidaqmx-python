@@ -1,7 +1,5 @@
 +------------+-----------------------------------------------------------+
-| **Info**   | Contains a Python API for interacting with NI-DAQmx. See  | 
-|            | `GitHub <https://github.com/ni/nidaqmx-python/>`_ for the |
-|            | latest source.                                            |
+| **Info**   | NI-DAQmx API for Python                                   | 
 +------------+-----------------------------------------------------------+
 | **Author** | National Instruments                                      |
 +------------+-----------------------------------------------------------+
@@ -14,7 +12,8 @@ About
 =====
 
 The **nidaqmx** package allows you to develop instrumentation, acquisition, and 
-control applications with NI data acquisition (DAQ) devices in Python.
+control applications with NI data acquisition (DAQ) devices in Python. NI
+created and supports this package.
 
 Documentation
 -------------
