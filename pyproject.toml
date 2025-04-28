@@ -82,8 +82,7 @@ ni-python-styleguide = ">=0.4.1"
 mypy = ">=1.0"
 types-protobuf = ">=4.21"
 types-requests = ">=2.25.0"
-grpc-stubs = "^1.53"
-
+types-grpcio = ">=1.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = ">=7.2"
