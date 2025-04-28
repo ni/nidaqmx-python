@@ -62,7 +62,7 @@ class GrpcEventHandler(BaseEventHandler, Generic[TEventResponse]):
         self,
         event_name: str,
         interpreter: GrpcStubInterpreter,
-        event_stream: grpc.CallIterator[TEventResponse],
+        event_stream: grpc._CallIterator[TEventResponse],
         event_callback: Callable[[TEventResponse], None],
     ) -> None:
         self._event_name = event_name

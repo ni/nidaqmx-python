@@ -664,20 +664,6 @@ unicode = ["unicodedata2 (>=15.1.0)"]
 woff = ["brotli (>=1.0.1)", "brotlicffi (>=0.8.0)", "zopfli (>=0.1.4)"]
 
 [[package]]
-name = "grpc-stubs"
-version = "1.53.0.5"
-description = "Mypy stubs for gRPC"
-optional = false
-python-versions = ">=3.6"
-files = [
-    {file = "grpc-stubs-1.53.0.5.tar.gz", hash = "sha256:3e1b642775cbc3e0c6332cfcedfccb022176db87e518757bef3a1241397be406"},
-    {file = "grpc_stubs-1.53.0.5-py3-none-any.whl", hash = "sha256:04183fb65a1b166a1febb9627e3d9647d3926ccc2dfe049fe7b6af243428dbe1"},
-]
-
-[package.dependencies]
-grpcio = "*"
-
-[[package]]
 name = "grpcio"
 version = "1.71.0"
 description = "HTTP/2-based RPC framework"
@@ -2452,6 +2438,20 @@ virtualenv = ">=20.29.1"
 test = ["devpi-process (>=1.0.2)", "pytest (>=8.3.4)", "pytest-mock (>=3.14)"]
 
 [[package]]
+name = "types-grpcio"
+version = "1.0.0.20250426"
+description = "Typing stubs for grpcio"
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "types_grpcio-1.0.0.20250426-py3-none-any.whl", hash = "sha256:7931b4ec0bedb8af7c53910ed54edeb8be964251ecf0c4f0234f95e472a90ce3"},
+    {file = "types_grpcio-1.0.0.20250426.tar.gz", hash = "sha256:a079034b1c32520b1218bd50187539352b8ff495cf9b91a7c98772a3baf5f1d1"},
+]
+
+[package.dependencies]
+types-protobuf = "*"
+
+[[package]]
 name = "types-protobuf"
 version = "5.29.1.20250403"
 description = "Typing stubs for protobuf"
@@ -2578,4 +2578,4 @@ grpc = ["grpcio", "protobuf"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "4b7c6903a3bf6d9e0d254370e90f636a01c9a5bbb2ca9b9d5d89eb50fce3edf2"
+content-hash = "dad86e4d157651379c51a35f0fbfe22c34dbe6de8e209477ea97633beb6c916a"
