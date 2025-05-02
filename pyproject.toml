@@ -70,7 +70,6 @@ optional = true
 
 [tool.poetry.group.docs.dependencies]
 Sphinx = { version = ">=8.2", python = "^3.11" }
-sphinx-click = ">=4.1.0"
 sphinx-rtd-theme = ">=1.0.0"
 toml = ">=0.10.2"
 
