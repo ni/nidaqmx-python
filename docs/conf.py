@@ -14,8 +14,9 @@ sys.path.insert(0, os.path.abspath("../"))
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.coverage",
-    "sphinx.ext.viewcode",
+    "sphinx.ext.intersphinx",
     "sphinx.ext.napoleon",
+    "sphinx.ext.viewcode",
 ]
 
 source_suffix = ".rst"
@@ -44,6 +45,10 @@ pygments_style = "sphinx"
 
 todo_include_todos = False
 
+intersphinx_mapping = {
+    "numpy": ("https://numpy.org/doc/stable/", None),
+    "python": ("https://docs.python.org/3", None),
+}
 
 # -- Options for HTML output ----------------------------------------------
 
