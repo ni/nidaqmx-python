@@ -4,28 +4,32 @@ version = "1.2.0-dev0"
 license = "MIT"
 description = "NI-DAQmx Python API"
 authors = ["NI <opensource@ni.com>"]
-maintainers = ["Zach Hindes <zach.hindes@ni.com>", "Maxx Boehme <maxx.boehme@ni.com>", "Brad Keryan <brad.keryan@ni.com>"]
+maintainers = [
+  "Zach Hindes <zach.hindes@ni.com>",
+  "Maxx Boehme <maxx.boehme@ni.com>",
+  "Brad Keryan <brad.keryan@ni.com>",
+]
 readme = "README.rst"
 repository = "https://github.com/ni/nidaqmx-python"
 documentation = "https://nidaqmx-python.readthedocs.io"
 keywords = ["nidaqmx", "nidaq", "daqmx", "daq"]
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
-    "Intended Audience :: Developers",
-    "Intended Audience :: Manufacturing",
-    "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: Microsoft :: Windows",
-    "Operating System :: POSIX",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-    "Programming Language :: Python :: Implementation :: CPython",
-    "Programming Language :: Python :: Implementation :: PyPy",
-    "Topic :: System :: Hardware :: Hardware Drivers"
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Manufacturing",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Topic :: System :: Hardware :: Hardware Drivers",
 ]
 exclude = ["nidaqmx/tests"]
 packages = [{ include = "nidaqmx", from = "generated" }]
@@ -33,20 +37,14 @@ packages = [{ include = "nidaqmx", from = "generated" }]
 [tool.poetry.dependencies]
 python = "^3.9"
 numpy = [
-  {version = ">=1.22", python = ">=3.9,<3.12"},
-  {version = ">=1.26", python = ">=3.12,<3.13"},
-  {version = ">=2.1", python = "^3.13"},
+  { version = ">=1.22", python = ">=3.9,<3.12" },
+  { version = ">=1.26", python = ">=3.12,<3.13" },
+  { version = ">=2.1", python = "^3.13" },
 ]
 deprecation = ">=2.1"
-# Documentation, must be in main dependencies (but optional) list for
-# readthedocs integration.
-# See https://github.com/readthedocs/readthedocs.org/issues/4912.
-Sphinx = {version=">=5.0", optional=true}
-sphinx_rtd_theme = {version=">=1.0", optional=true}
-grpcio = {version=">=1.49.0,<2.0", optional=true}
-protobuf = {version=">=4.21", optional=true}
+grpcio = { version = ">=1.49.0,<2.0", optional = true }
+protobuf = { version = ">=4.21", optional = true }
 hightime = "^0.2.2"
-toml = {version=">=0.10.2", optional=true}
 tzlocal = "^5.0"
 python-decouple = ">=3.8"
 click = ">=8.0.0"
@@ -55,25 +53,32 @@ requests = ">=2.25.0"
 
 
 [tool.poetry.extras]
-docs = ["sphinx", "sphinx_rtd_theme", "toml"]
 grpc = ["grpcio", "protobuf"]
 
 [tool.poetry.group.codegen.dependencies]
 click = "^8.1"
 Mako = "^1.2"
 grpcio-tools = [
-  {version = "1.49.1", python = ">=3.9,<3.12"},
-  {version = "1.59.0", python = ">=3.12,<3.13"},
-  {version = "1.67.0", python = "^3.13"},
+  { version = "1.49.1", python = ">=3.9,<3.12" },
+  { version = "1.59.0", python = ">=3.12,<3.13" },
+  { version = "1.67.0", python = "^3.13" },
 ]
 mypy-protobuf = ">=3.4"
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+Sphinx = { version = ">=8.2", python = "^3.11" }
+sphinx-rtd-theme = ">=1.0.0"
+toml = ">=0.10.2"
 
 [tool.poetry.group.examples]
 # The "examples" group is optional because matplotlib does not distribute wheels for 32-bit Windows.
 optional = true
 
 [tool.poetry.group.examples.dependencies]
-matplotlib = {version=">=3.9.0", python = ">=3.9"}
+matplotlib = { version = ">=3.9.0", python = ">=3.9" }
 nptdms = ">=1.9.0"
 
 [tool.poetry.group.lint.dependencies]
