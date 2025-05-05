@@ -1,0 +1,5 @@
+python-nidaqmx (1.2.0) unstable; urgency=medium
+
+  * Starting debian packaging
+
+ -- Cedric Boudinet <boudinpg@gmail.com>  Mon, 06 Jan 2025 12:47:31 +0100

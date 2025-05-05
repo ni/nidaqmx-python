@@ -1,0 +1,20 @@
+Source: python-nidaqmx
+Section: python
+Priority: optional
+Maintainer: "Cedric Boudinet" <boudinpg@gmail.com>
+Build-Depends:
+ python3-all,
+ pybuild-plugin-pyproject,
+ python3-deprecation,
+ python3-pytest-mock,
+ python3-pykka,
+ python3-tzlocal,
+ python3-decouple,
+ python3-hightime
+
+Package: python3-nidaqmx
+Architecture: all
+Depends:
+ python3-numpy
+Description: NI-DAQmx Python API
+
