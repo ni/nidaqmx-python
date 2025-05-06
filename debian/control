@@ -4,13 +4,15 @@ Priority: optional
 Maintainer: "Cedric Boudinet" <boudinpg@gmail.com>
 Build-Depends:
  python3-all,
+ dh-python,
  pybuild-plugin-pyproject,
  python3-deprecation,
  python3-pytest-mock,
  python3-pykka,
  python3-tzlocal,
  python3-decouple,
- python3-hightime
+ python3-hightime,
+ python3-poetry,
 
 Package: python3-nidaqmx
 Architecture: all
