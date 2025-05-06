@@ -179,7 +179,7 @@ def _bool_array_to_int(bool_array: numpy.typing.NDArray[numpy.bool_]) -> int:
     return result
 
 
-_D = TypeVar("_D", bound=numpy.generic, covariant=True)
+_D = TypeVar("_D", bound=numpy.generic)
 
 
 def _read_and_copy(
