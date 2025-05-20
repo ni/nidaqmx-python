@@ -28,7 +28,7 @@ All notable changes to this project will be documented in this file.
     * [Full changelog: 1.1.0...1.2.0](https://github.com/ni/nidaqmx-python/compare/1.1.0...1.2.0)
 
 * ### Resolved Issues
-    * ...
+    * Fix PEP 660 builds by setting `build-system` to use `poetry-core`
 
 * ### Major Changes
     * Removed the `docs` extra and converted it to a Poetry dependency group.
