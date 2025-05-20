@@ -8,6 +8,7 @@
 
 import numpy
 
+from nidaqmx.errors import DaqFunctionNotSupportedError
 from nidaqmx.task.channels._ai_channel import AIChannel
 from nidaqmx.task.collections._channel_collection import ChannelCollection
 from nidaqmx.utils import unflatten_channel_string
@@ -41,18 +42,28 @@ class AIChannelCollection(ChannelCollection):
 
             Specifies the newly created AIChannel object.
         """
-        if name_to_assign_to_channel:
-            num_channels = len(unflatten_channel_string(physical_channel))
+        # Attempt to retrieve the last created channel name. This is only supported on DAQmx 24Q3+ with the library
+        # interpreter.
+        virtual_channel_name = None
+        try:
+            virtual_channel_name = self._interpreter.internal_get_last_created_chan()
+        except (NotImplementedError, DaqFunctionNotSupportedError):
+            pass
 
-            if num_channels > 1:
-                name = '{}0:{}'.format(
-                    name_to_assign_to_channel, num_channels-1)
+        # Fallback implementation is sometimes incorrect.
+        if virtual_channel_name is None:
+            if name_to_assign_to_channel:
+                num_channels = len(unflatten_channel_string(physical_channel))
+
+                if num_channels > 1:
+                    virtual_channel_name = '{}0:{}'.format(
+                        name_to_assign_to_channel, num_channels-1)
+                else:
+                    virtual_channel_name = name_to_assign_to_channel
             else:
-                name = name_to_assign_to_channel
-        else:
-            name = physical_channel
+                virtual_channel_name = physical_channel
 
-        return AIChannel(self._handle, name, self._interpreter)
+        return AIChannel(self._handle, virtual_channel_name, self._interpreter)
 
 <%namespace name="function_template" file="/function_template.py.mako"/>\
 %for function_object in functions:

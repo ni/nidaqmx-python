@@ -383,3 +383,12 @@ def test___task___add_ci_two_edge_sep_chan___sets_channel_attributes(
     assert chan.ci_meas_type == UsageTypeCI.PULSE_WIDTH_DIGITAL_TWO_EDGE_SEPARATION
     assert chan.ci_two_edge_sep_first_edge == first_edge
     assert chan.ci_two_edge_sep_second_edge == second_edge
+
+
+def test___task___add_ci_chans___sets_channel_name(
+    task: Task,
+    sim_6363_device: Device,
+) -> None:
+    chan: CIChannel = task.ci_channels.add_ci_count_edges_chan(sim_6363_device.ci_physical_chans[0].name, name_to_assign_to_channel="myChan")
+
+    assert chan.name == "myChan"

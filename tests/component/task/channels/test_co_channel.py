@@ -98,3 +98,12 @@ def test___task___add_co_pulse_chan_time___sets_channel_attributes(
     assert chan.co_pulse_time_initial_delay == initial_delay
     assert chan.co_pulse_low_time == low_time
     assert chan.co_pulse_high_time == high_time
+
+
+def test___task___add_co_chans___sets_channel_name(
+    task: Task,
+    sim_6363_device: Device,
+) -> None:
+    chan: COChannel = task.co_channels.add_co_pulse_chan_freq(sim_6363_device.co_physical_chans[0].name, name_to_assign_to_channel="myChan")
+
+    assert chan.name == "myChan"
