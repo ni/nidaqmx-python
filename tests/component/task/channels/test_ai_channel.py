@@ -1298,7 +1298,9 @@ def test___task___add_teds_ai_voltage_chan_with_excit___raises_teds_sensor_not_d
 
 
 # For more extensive virtual channel name testing, refer to test_di_channel.py
-@pytest.mark.library_only(reason="Internal method we use for retrieving a channel name isn't supported on gRPC",)
+@pytest.mark.library_only(
+    reason="Internal method we use for retrieving a channel name isn't supported on gRPC",
+)
 def test___task___add_ai_chans___sets_channel_name(
     task: Task,
     sim_6363_device: Device,
@@ -1306,6 +1308,8 @@ def test___task___add_ai_chans___sets_channel_name(
     if System.local().driver_version < (24, 5, 0):
         pytest.xfail("The fix for this test requires DAQmx 24.5.0 and later")
 
-    chan: AIChannel = task.ai_channels.add_ai_voltage_chan(f"{sim_6363_device.name}/ai0:3", name_to_assign_to_channel="myChan09")
+    chan: AIChannel = task.ai_channels.add_ai_voltage_chan(
+        f"{sim_6363_device.name}/ai0:3", name_to_assign_to_channel="myChan09"
+    )
 
     assert unflatten_channel_string(chan.name) == unflatten_channel_string("myChan09:12")

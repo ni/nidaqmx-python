@@ -105,6 +105,8 @@ def test___task___add_co_chans___sets_channel_name(
     task: Task,
     sim_6363_device: Device,
 ) -> None:
-    chan: COChannel = task.co_channels.add_co_pulse_chan_freq(sim_6363_device.co_physical_chans[0].name, name_to_assign_to_channel="myChan")
+    chan: COChannel = task.co_channels.add_co_pulse_chan_freq(
+        sim_6363_device.co_physical_chans[0].name, name_to_assign_to_channel="myChan"
+    )
 
     assert chan.name == "myChan"

@@ -390,6 +390,8 @@ def test___task___add_ci_chans___sets_channel_name(
     task: Task,
     sim_6363_device: Device,
 ) -> None:
-    chan: CIChannel = task.ci_channels.add_ci_count_edges_chan(sim_6363_device.ci_physical_chans[0].name, name_to_assign_to_channel="myChan")
+    chan: CIChannel = task.ci_channels.add_ci_count_edges_chan(
+        sim_6363_device.ci_physical_chans[0].name, name_to_assign_to_channel="myChan"
+    )
 
     assert chan.name == "myChan"
