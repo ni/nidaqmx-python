@@ -4,7 +4,7 @@ from nidaqmx import Task
 from nidaqmx.constants import ChannelType, LineGrouping
 from nidaqmx.system import Device, System
 from nidaqmx.task.channels import DIChannel
-from nidaqmx.utils import flatten_channel_string
+from nidaqmx.utils import flatten_channel_string, unflatten_channel_string
 
 
 @pytest.mark.parametrize(
@@ -50,8 +50,8 @@ def test___task___add_di_chan_chan_per_line___sets_channel_attributes(
 @pytest.mark.parametrize(
     "phys_chan_list, line_grouping, name_to_assign_to_lines, expected_virtual_channel_name, qualify_expected_virtual_channel_name, xfail_if_old",
     [
-        (["port0/line0"],                LineGrouping.CHAN_PER_LINE,      "", "", False, False),
-        (["port0/line0"],                LineGrouping.CHAN_FOR_ALL_LINES, "", "", False, False),
+        (["port0/line0"],                LineGrouping.CHAN_PER_LINE,      "", "port0/line0", True, False),
+        (["port0/line0"],                LineGrouping.CHAN_FOR_ALL_LINES, "", "port0/line0", True, False),
         (["port0/line0", "port0/line1"], LineGrouping.CHAN_PER_LINE,      "", "port0/line0:1", True, False),
         (["port0/line0", "port0/line1"], LineGrouping.CHAN_FOR_ALL_LINES, "", "port0/line0...", True, False),
         (["port0/line0"],                LineGrouping.CHAN_PER_LINE,      "myChan", "myChan", False, False),
@@ -60,8 +60,8 @@ def test___task___add_di_chan_chan_per_line___sets_channel_attributes(
         (["port0/line0:7"],              LineGrouping.CHAN_FOR_ALL_LINES, "myChan", "myChan", False, False),
         (["port0/line0:7"],              LineGrouping.CHAN_FOR_ALL_LINES, "myChan0", "myChan0", False, False),
         # All of these tests cases will fail if the driver version is older than 24.5.0 or if you're using gRPC (which we skip entirely here)
-        (["port0/line0"],                LineGrouping.CHAN_PER_LINE,      " ", "", False, True),
-        (["port0/line0"],                LineGrouping.CHAN_FOR_ALL_LINES, " ", "", False, True),
+        (["port0/line0"],                LineGrouping.CHAN_PER_LINE,      " ", "port0/line0", True, True),
+        (["port0/line0"],                LineGrouping.CHAN_FOR_ALL_LINES, " ", "port0/line0", True, True),
         (["port0/line0"],                LineGrouping.CHAN_PER_LINE,      " myChan ", "myChan", False, True),
         (["port0/line0"],                LineGrouping.CHAN_FOR_ALL_LINES, " myChan ", "myChan", False, True),
         (["port0/line0:7"],              LineGrouping.CHAN_PER_LINE,      "myChan0", "myChan0:7", False, True),
@@ -79,7 +79,7 @@ def test___task___add_di_chan_chan_per_line___sets_channel_attributes(
         (["port0/line0:7"],              LineGrouping.CHAN_PER_LINE,      "myFirstChan0:9", "myFirstChan0:7", False, True),
         (["port0/line0:7"],              LineGrouping.CHAN_FOR_ALL_LINES, "myFirstChan0:9", "myFirstChan0", False, True),
         (["port0/line0:7"],              LineGrouping.CHAN_PER_LINE,      "myFirstChan0:6, mySecondChan, myThirdChan", "myFirstChan0:6, mySecondChan", False, True),
-        (["port0/line0:7"],              LineGrouping.CHAN_PER_LINE,      "myFirstChan0:5, mySecondChan0:5", "myFirstChan0:5, mySecondChan0:1:7", False, True),
+        (["port0/line0:7"],              LineGrouping.CHAN_PER_LINE,      "myFirstChan0:5, mySecondChan0:5", "myFirstChan0:5, mySecondChan0:1", False, True),
     ],
 )
 def test___task___add_di_chans___sets_channel_name(
@@ -101,10 +101,9 @@ def test___task___add_di_chans___sets_channel_name(
         line_grouping=line_grouping,
         name_to_assign_to_lines=name_to_assign_to_lines,)
 
+    # If a user doesn't specify a virtual channel name, DAQmx will use the physical channel name, which we now need to
+    # fully quality.
     if qualify_expected_virtual_channel_name:
         expected_virtual_channel_name = f"{sim_6363_device.name}/{expected_virtual_channel_name}"
 
-    if expected_virtual_channel_name:
-        assert chan.name == expected_virtual_channel_name
-    else:
-        assert chan.name == qualified_physical_channel_name
+    assert unflatten_channel_string(chan.name) == unflatten_channel_string(expected_virtual_channel_name)

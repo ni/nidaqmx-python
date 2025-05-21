@@ -385,6 +385,7 @@ def test___task___add_ci_two_edge_sep_chan___sets_channel_attributes(
     assert chan.ci_two_edge_sep_second_edge == second_edge
 
 
+# For more extensive virtual channel name testing, refer to test_di_channel.py
 def test___task___add_ci_chans___sets_channel_name(
     task: Task,
     sim_6363_device: Device,

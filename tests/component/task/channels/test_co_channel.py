@@ -100,6 +100,7 @@ def test___task___add_co_pulse_chan_time___sets_channel_attributes(
     assert chan.co_pulse_high_time == high_time
 
 
+# For more extensive virtual channel name testing, refer to test_di_channel.py
 def test___task___add_co_chans___sets_channel_name(
     task: Task,
     sim_6363_device: Device,
