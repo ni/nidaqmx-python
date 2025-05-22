@@ -47,16 +47,17 @@ def test___task___add_do_chan_chan_per_line___sets_channel_attributes(
 
 
 # For more extensive virtual channel name testing, refer to test_di_channel.py
-@pytest.mark.library_only(
-    reason="Internal method we use for retrieving a channel name isn't supported on gRPC",
+@pytest.mark.skipif(
+    System.local().driver_version < (24, 5, 0),
+    reason="The fix for this test requires DAQmx 24.5.0 and later",
 )
-def test___task___add_do_chans___sets_channel_name(
+@pytest.mark.library_only(
+    reason="The fix for this test isn't supported on gRPC",
+)
+def test___task___add_do_chans_with_name___sets_channel_name(
     task: Task,
     sim_6363_device: Device,
 ) -> None:
-    if System.local().driver_version < (24, 5, 0):
-        pytest.xfail("The fix for this test requires DAQmx 24.5.0 and later")
-
     chan: DOChannel = task.do_channels.add_do_chan(
         f"{sim_6363_device.name}/port0/line0:7",
         line_grouping=LineGrouping.CHAN_PER_LINE,
