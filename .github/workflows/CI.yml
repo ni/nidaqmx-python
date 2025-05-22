@@ -28,3 +28,6 @@ jobs:
     uses: ./.github/workflows/report_test_results.yml
     needs: [run_unit_tests, run_system_tests]
     if: always()
+    permissions:
+      checks: write
+      pull-requests: write
