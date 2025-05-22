@@ -16,3 +16,6 @@ jobs:
   run_ci:
     name: Run CI
     uses: ./.github/workflows/CI.yml
+    permissions:
+      checks: write
+      pull-requests: write
