@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file.
 
 * ### Resolved Issues
     * Fix PEP 660 builds by setting `build-system` to use `poetry-core`
+    * [579: nidaqmx does not generate numbered virtual channel names correctly](https://github.com/ni/nidaqmx-python/issues/579)
 
 * ### Major Changes
     * Removed the `docs` extra and converted it to a Poetry dependency group.

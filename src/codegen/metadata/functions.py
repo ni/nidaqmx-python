@@ -17186,6 +17186,32 @@ functions = {
         'python_codegen_method': 'CustomCode',
         'returns': 'int32'
     },
+    'InternalGetLastCreatedChan': {
+        'calling_convention': 'StdCall',
+        'codegen_method': 'private',
+        'parameters': [
+            {
+                'ctypes_data_type': 'ctypes.c_char_p',
+                'direction': 'out',
+                'name': 'value',
+                'python_data_type': 'str',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'size'
+                },
+                'type': 'char[]'
+            },
+            {
+                'ctypes_data_type': 'ctypes.c_uint32',
+                'direction': 'in',
+                'name': 'size',
+                'python_data_type': 'int',
+                'type': 'uInt32'
+            }
+        ],
+        'python_codegen_method': 'CustomCode',
+        'returns': 'int32'
+    },
     'IsTaskDone': {
         'calling_convention': 'StdCall',
         'handle_parameter': {

@@ -242,6 +242,9 @@ class GrpcStubInterpreter(BaseInterpreter):
             self, environment, environment_version, reserved_1, reserved_2):
         raise NotImplementedError
 
+    def internal_get_last_created_chan(self):
+        raise NotImplementedError
+
 
 def _assign_numpy_array(numpy_array, grpc_array):
     """

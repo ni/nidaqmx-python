@@ -34,8 +34,9 @@ from nidaqmx.constants import (
 )
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import DaqError
-from nidaqmx.system import Device
+from nidaqmx.system import Device, System
 from nidaqmx.task.channels import AIChannel
+from nidaqmx.utils import unflatten_channel_string
 from tests.helpers import configure_teds
 
 
@@ -1294,3 +1295,22 @@ def test___task___add_teds_ai_voltage_chan_with_excit___raises_teds_sensor_not_d
             )
 
     assert exc_info.value.error_code == DAQmxErrors.TEDS_SENSOR_NOT_DETECTED
+
+
+# For more extensive virtual channel name testing, refer to test_di_channel.py
+@pytest.mark.skipif(
+    System.local().driver_version < (24, 5, 0),
+    reason="The fix for this test requires DAQmx 24.5.0 and later",
+)
+@pytest.mark.grpc_xfail(
+    reason="The fix for this test isn't supported on gRPC",
+)
+def test___task___add_ai_chans_with_name___sets_channel_name(
+    task: Task,
+    sim_6363_device: Device,
+) -> None:
+    chan: AIChannel = task.ai_channels.add_ai_voltage_chan(
+        f"{sim_6363_device.name}/ai0:3", name_to_assign_to_channel="myChan09"
+    )
+
+    assert unflatten_channel_string(chan.name) == unflatten_channel_string("myChan09:12")

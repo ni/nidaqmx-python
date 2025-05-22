@@ -1169,6 +1169,10 @@ class BaseInterpreter(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def internal_get_last_created_chan(self):
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def is_task_done(self, task):
         raise NotImplementedError
 
