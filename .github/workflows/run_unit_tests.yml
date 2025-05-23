@@ -25,7 +25,7 @@ jobs:
       - name: Set up Poetry
         uses: ni/python-actions/setup-poetry@v0.1.0
       - name: Restore cached virtualenv (main only)
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
         id: restore-nidaqmx-main-only
         with:
           path: .venv
@@ -37,13 +37,13 @@ jobs:
       - name: check installdriver subcommand can be invoked
         run: poetry run nidaqmx installdriver --help
       - name: Save cached virtualenv (main only)
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
         if: steps.restore-nidaqmx-main-only.outputs.cache-hit != 'true'
         with:
           path: .venv
           key: ${{ steps.restore-nidaqmx-main-only.outputs.cache-primary-key }}
       - name: Cache virtualenv (with dev dependencies)
-        uses: actions/cache@v4
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
         with:
           path: .venv
           key: nidaqmx-with-dev-${{ runner.os }}-py${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}

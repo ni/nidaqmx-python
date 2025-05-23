@@ -17,7 +17,7 @@ jobs:
       - name: Set up Poetry
         uses: ni/python-actions/setup-poetry@v0.1.0
       - name: Cache virtualenvs
-        uses: actions/cache@v4
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
         with:
           path: |
             .venv
