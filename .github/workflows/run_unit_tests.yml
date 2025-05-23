@@ -52,7 +52,7 @@ jobs:
       - name: Run unit tests
         run: poetry run pytest -v --cov=generated/nidaqmx --junitxml=test_results/unit-${{ matrix.os }}-py${{ matrix.python-version }}.xml tests/unit
       - name: Upload test results
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: test_results_unit_${{ matrix.os }}_py${{ matrix.python-version }}
           path: test_results/*.xml
