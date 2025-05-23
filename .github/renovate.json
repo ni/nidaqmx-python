@@ -5,6 +5,7 @@
     "config:recommended", 
     ":maintainLockFilesWeekly",
     ":automergePatch",
-    "schedule:automergeDaily"
+    "schedule:automergeDaily",
+    "helpers:pinGitHubActionDigestsToSemver"
   ]
 }
