@@ -141,6 +141,7 @@ plugins = "numpy.typing.mypy_plugin"
 warn_redundant_casts = true
 warn_unreachable = true
 warn_unused_configs = true
+warn_unused_ignores = true
 
 [[tool.mypy.overrides]]
 module = [
@@ -156,6 +157,11 @@ module = [
   "nidaqmx.*",
 ]
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# mypy-protobuf codegen has some unused ignores.
+module = ["nidaqmx._stubs.*"]
+warn_unused_ignores = false
 
 [tool.bandit]
 skips = [
