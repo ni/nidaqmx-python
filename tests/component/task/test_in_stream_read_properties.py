@@ -1,7 +1,6 @@
 import pathlib
 
 import pytest
-
 from nidaqmx.constants import OverwriteMode, ReadRelativeTo
 from nidaqmx.task import Task
 
@@ -127,7 +126,7 @@ def test___ai_task___get_string_property___returns_default_value(ai_task: Task):
 
 
 def test___ai_task___set_string_property___returns_assigned_value(ai_task: Task):
-    ai_task.in_stream.logging_file_path = "TestData.tdms"  # type: ignore[assignment] # https://github.com/ni/nidaqmx-python/issues/613
+    ai_task.in_stream.logging_file_path = "TestData.tdms"
 
     assert ai_task.in_stream.logging_file_path == pathlib.Path("TestData.tdms")
 
@@ -139,7 +138,7 @@ def test___ai_task___set_string_property_none___returns_default_value(ai_task: T
 
 
 def test___ai_task___reset_string_property___returns_default_value(ai_task: Task):
-    ai_task.in_stream.logging_file_path = "TestData.tdms"  # type: ignore[assignment] # https://github.com/ni/nidaqmx-python/issues/613
+    ai_task.in_stream.logging_file_path = "TestData.tdms"
 
     del ai_task.in_stream.logging_file_path
 
