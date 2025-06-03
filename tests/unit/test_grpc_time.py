@@ -120,7 +120,7 @@ def test___grpc_response_before_1970___convert_to_timestamp___succeeds(response_
 )
 def test___utc_datetime___convert_to_timestamp_with_dst___is_reversible(date):
     # we use a location that has daylight savings date change on the dates above
-    target_timezone: ZoneInfo = ZoneInfo("America/Los_Angeles")  # type: ignore # ZoneInfo is a concrete class that takes in abstract tzinfo
+    target_timezone = ZoneInfo("America/Los_Angeles")
     astimezone_date = date.astimezone(target_timezone)
 
     to_ts = grpc_time.convert_time_to_timestamp(date)

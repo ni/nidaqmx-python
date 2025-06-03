@@ -5,8 +5,8 @@ from zoneinfo import ZoneInfo
 
 import pytest
 from hightime import datetime as ht_datetime
-
 from nidaqmx._lib_time import AbsoluteTime as LibTimestamp
+
 from tests.unit._time_utils import (
     JAN_01_1850_DATETIME,
     JAN_01_1850_HIGHTIME,
@@ -97,7 +97,7 @@ def test___utc_datetime_before_1904___convert_to_timestamp___is_reversible(from_
 )
 def test___utc_datetime___convert_to_timestamp_with_dst___is_reversible(date):
     # we use a location that has daylight savings date change on the dates above
-    target_timezone: ZoneInfo = ZoneInfo("America/Los_Angeles")  # type: ignore # ZoneInfo is a concrete class that takes in abstract tzinfo
+    target_timezone = ZoneInfo("America/Los_Angeles")
     astimezone_date = date.astimezone(target_timezone)
 
     to_ts = LibTimestamp.from_datetime(date)
