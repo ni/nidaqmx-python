@@ -2431,13 +2431,13 @@ test = ["devpi-process (>=1.0.2)", "pytest (>=8.3.4)", "pytest-mock (>=3.14)"]
 
 [[package]]
 name = "types-grpcio"
-version = "1.0.0.20250525"
+version = "1.0.0.20250603"
 description = "Typing stubs for grpcio"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "types_grpcio-1.0.0.20250525-py3-none-any.whl", hash = "sha256:9ecada39bda35a445829f6f02ef86297d48c5aa0f8cffadb645929489cfb8fe4"},
-    {file = "types_grpcio-1.0.0.20250525.tar.gz", hash = "sha256:09e1474e424bab14cadcb1d6cf523c1abd94b1a2f2ca4588ec1322982bf7e043"},
+    {file = "types_grpcio-1.0.0.20250603-py3-none-any.whl", hash = "sha256:4ef6a79d5f50d942d48eeb1cdfc2147fff722e74fd4b29598fbefb6dcf39c159"},
+    {file = "types_grpcio-1.0.0.20250603.tar.gz", hash = "sha256:27e83fba0471d705ec54a60dbc50d3d8cc988aa38477644da8bc6173531d0c1a"},
 ]
 
 [[package]]
