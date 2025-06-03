@@ -4,6 +4,7 @@ import weakref
 from typing import Callable
 
 import pytest
+
 from nidaqmx.constants import WatchdogAOExpirState, WatchdogCOExpirState
 from nidaqmx.system import Device
 from nidaqmx.system.watchdog import (

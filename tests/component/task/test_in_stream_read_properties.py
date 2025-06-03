@@ -1,6 +1,7 @@
 import pathlib
 
 import pytest
+
 from nidaqmx.constants import OverwriteMode, ReadRelativeTo
 from nidaqmx.task import Task
 

@@ -5,8 +5,8 @@ from zoneinfo import ZoneInfo
 
 import pytest
 from hightime import datetime as ht_datetime
-from nidaqmx._lib_time import AbsoluteTime as LibTimestamp
 
+from nidaqmx._lib_time import AbsoluteTime as LibTimestamp
 from tests.unit._time_utils import (
     JAN_01_1850_DATETIME,
     JAN_01_1850_HIGHTIME,

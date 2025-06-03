@@ -4,6 +4,7 @@ import pathlib
 from typing import Any
 
 import pytest
+
 from nidaqmx._lib import get_encoding_from_locale, lib_importer
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import DaqError
