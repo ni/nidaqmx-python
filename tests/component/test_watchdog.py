@@ -7,7 +7,12 @@ import pytest
 
 from nidaqmx.constants import WatchdogAOExpirState, WatchdogCOExpirState
 from nidaqmx.system import Device
-from nidaqmx.system.watchdog import AOExpirationState, COExpirationState, WatchdogTask
+from nidaqmx.system.watchdog import (
+    AOExpirationState,
+    COExpirationState,
+    ExpirationState,
+    WatchdogTask,
+)
 
 
 def test___watchdog_task___cfg_watchdog_ao_expir_states___no_error(
@@ -129,8 +134,9 @@ def test___watchdog_expiration_states___set_nonexistent_property___raises_except
         )
     ]
     watchdog_task.cfg_watchdog_ao_expir_states(expir_states)
+    expir_state: ExpirationState = watchdog_task.expiration_states[
+        sim_9263_device.ao_physical_chans[0].name
+    ]
 
     with pytest.raises(AttributeError):
-        watchdog_task.expiration_states[
-            sim_9263_device.ao_physical_chans[0].name
-        ].nonexistent_property = "foo"  # type: ignore[attr-defined]
+        expir_state.nonexistent_property = "foo"  # type: ignore[attr-defined]

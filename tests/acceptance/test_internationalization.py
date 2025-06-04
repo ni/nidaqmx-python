@@ -5,7 +5,7 @@ from typing import Any
 
 import pytest
 
-from nidaqmx._lib import lib_importer, get_encoding_from_locale
+from nidaqmx._lib import get_encoding_from_locale, lib_importer
 from nidaqmx.error_codes import DAQmxErrors
 from nidaqmx.errors import DaqError
 from nidaqmx.system import Device
@@ -63,7 +63,7 @@ def test___supported_encoding___logging_file_path___returns_assigned_value(
 ):
     if _get_encoding(ai_task) not in supported_encodings:
         pytest.skip("requires compatible encoding")
-    ai_task.in_stream.logging_file_path = file_path  # type: ignore[assignment] # https://github.com/ni/nidaqmx-python/issues/613
+    ai_task.in_stream.logging_file_path = file_path
 
     assert ai_task.in_stream.logging_file_path == pathlib.Path(file_path)
 
