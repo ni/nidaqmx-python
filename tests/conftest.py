@@ -9,7 +9,6 @@ from enum import Enum
 from typing import TYPE_CHECKING, Callable, Generator
 
 import pytest
-
 import nidaqmx.system
 from nidaqmx._base_interpreter import BaseInterpreter
 from nidaqmx.constants import ProductCategory, UsageTypeAI
@@ -104,6 +103,7 @@ def _x_series_device(
     device_type: DeviceType,
     system: nidaqmx.system.System,
     sampling_type: SamplingType = SamplingType.ANY,
+    line_number: int = 8,
 ) -> nidaqmx.system.Device:
     for device in system.devices:
         device_type_match = (
@@ -127,7 +127,7 @@ def _x_series_device(
             and device.product_category == ProductCategory.X_SERIES_DAQ
             and len(device.ao_physical_chans) >= 2
             and len(device.ai_physical_chans) >= 4
-            and len(device.do_lines) >= 8
+            and len(device.do_lines) >= line_number
             and len(device.di_lines) == len(device.do_lines)
             and len(device.ci_physical_chans) >= 4
         ):
@@ -178,6 +178,12 @@ def _cdaq_module_by_product_type(
 def real_x_series_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets real X Series device information."""
     return _x_series_device(DeviceType.REAL, system)
+
+
+@pytest.fixture(scope="function")
+def real_x_series_device_32dio(system: nidaqmx.system.System) -> nidaqmx.system.Device:
+    """Gets real 32 DIO X Series device information."""
+    return _x_series_device(DeviceType.REAL, system, 32)
 
 
 @pytest.fixture(scope="function")

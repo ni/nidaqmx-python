@@ -149,11 +149,11 @@ def di_multi_line_loopback_task(
 
 @pytest.fixture
 def di_port0_loopback_task(
-    generate_task: Callable[[], nidaqmx.Task], real_x_series_device: nidaqmx.system.Device
+    generate_task: Callable[[], nidaqmx.Task], real_x_series_device_32dio: nidaqmx.system.Device
 ) -> nidaqmx.Task:
     task = generate_task()
     task.di_channels.add_di_chan(
-        real_x_series_device.di_ports[0].name,
+        real_x_series_device_32dio.di_ports[0].name,
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     _start_di_task(task)
@@ -162,11 +162,11 @@ def di_port0_loopback_task(
 
 @pytest.fixture
 def di_port1_loopback_task(
-    generate_task: Callable[[], nidaqmx.Task], real_x_series_device: nidaqmx.system.Device
+    generate_task: Callable[[], nidaqmx.Task], real_x_series_device_32dio: nidaqmx.system.Device
 ) -> nidaqmx.Task:
     task = generate_task()
     task.di_channels.add_di_chan(
-        real_x_series_device.di_ports[1].name,
+        real_x_series_device_32dio.di_ports[1].name,
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     _start_di_task(task)
@@ -175,11 +175,11 @@ def di_port1_loopback_task(
 
 @pytest.fixture
 def di_port2_loopback_task(
-    generate_task: Callable[[], nidaqmx.Task], real_x_series_device: nidaqmx.system.Device
+    generate_task: Callable[[], nidaqmx.Task], real_x_series_device_32dio: nidaqmx.system.Device
 ) -> nidaqmx.Task:
     task = generate_task()
     task.di_channels.add_di_chan(
-        real_x_series_device.di_ports[2].name,
+        real_x_series_device_32dio.di_ports[2].name,
         line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
     )
     _start_di_task(task)
@@ -451,10 +451,10 @@ def test___digital_multi_channel_writer___write_one_sample_multi_line_jagged___u
     di_port1_loopback_task: nidaqmx.Task,
     di_port2_loopback_task: nidaqmx.Task,
     generate_task: Callable[[], nidaqmx.Task],
-    real_x_series_device: nidaqmx.system.Device,
+    real_x_series_device_32dio: nidaqmx.system.Device,
 ) -> None:
     task = generate_task()
-    for port in real_x_series_device.do_ports:
+    for port in real_x_series_device_32dio.do_ports:
         task.do_channels.add_do_chan(
             port.name,
             line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
