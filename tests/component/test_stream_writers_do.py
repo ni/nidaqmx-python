@@ -149,6 +149,19 @@ def di_multi_line_loopback_task(
 
 @pytest.fixture
 def di_port0_loopback_task(
+    generate_task: Callable[[], nidaqmx.Task], real_x_series_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    task = generate_task()
+    task.di_channels.add_di_chan(
+        real_x_series_device.di_ports[0].name,
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    _start_di_task(task)
+    return task
+    
+    
+@pytest.fixture
+def di_port0_loopback_task_32dio(
     generate_task: Callable[[], nidaqmx.Task], real_x_series_device_32dio: nidaqmx.system.Device
 ) -> nidaqmx.Task:
     task = generate_task()
@@ -162,6 +175,19 @@ def di_port0_loopback_task(
 
 @pytest.fixture
 def di_port1_loopback_task(
+    generate_task: Callable[[], nidaqmx.Task], real_x_series_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    task = generate_task()
+    task.di_channels.add_di_chan(
+        real_x_series_device.di_ports[1].name,
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    _start_di_task(task)
+    return task
+    
+    
+@pytest.fixture
+def di_port1_loopback_task_32dio(
     generate_task: Callable[[], nidaqmx.Task], real_x_series_device_32dio: nidaqmx.system.Device
 ) -> nidaqmx.Task:
     task = generate_task()
@@ -175,6 +201,19 @@ def di_port1_loopback_task(
 
 @pytest.fixture
 def di_port2_loopback_task(
+    generate_task: Callable[[], nidaqmx.Task], real_x_series_device: nidaqmx.system.Device
+) -> nidaqmx.Task:
+    task = generate_task()
+    task.di_channels.add_di_chan(
+        real_x_series_device.di_ports[2].name,
+        line_grouping=LineGrouping.CHAN_FOR_ALL_LINES,
+    )
+    _start_di_task(task)
+    return task
+    
+    
+@pytest.fixture
+def di_port2_loopback_task_32dio(
     generate_task: Callable[[], nidaqmx.Task], real_x_series_device_32dio: nidaqmx.system.Device
 ) -> nidaqmx.Task:
     task = generate_task()
@@ -447,9 +486,9 @@ def test___digital_multi_channel_writer___write_one_sample_multi_line___updates_
 
 
 def test___digital_multi_channel_writer___write_one_sample_multi_line_jagged___updates_output(
-    di_port0_loopback_task: nidaqmx.Task,
-    di_port1_loopback_task: nidaqmx.Task,
-    di_port2_loopback_task: nidaqmx.Task,
+    di_port0_loopback_task_32dio: nidaqmx.Task,
+    di_port1_loopback_task_32dio: nidaqmx.Task,
+    di_port2_loopback_task_32dio: nidaqmx.Task,
     generate_task: Callable[[], nidaqmx.Task],
     real_x_series_device_32dio: nidaqmx.system.Device,
 ) -> None:
@@ -469,9 +508,9 @@ def test___digital_multi_channel_writer___write_one_sample_multi_line_jagged___u
         data_to_write = _int_to_bool_array(num_channels * 32, datum).reshape((num_channels, 32))
         writer.write_one_sample_multi_line(data_to_write)
 
-    assert di_port0_loopback_task.read() == datum & 0xFFFFFFFF
-    assert di_port1_loopback_task.read() == (datum >> 32) & 0xFF
-    assert di_port2_loopback_task.read() == (datum >> 64) & 0xFF
+    assert di_port0_loopback_task_32dio.read() == datum & 0xFFFFFFFF
+    assert di_port1_loopback_task_32dio.read() == (datum >> 32) & 0xFF
+    assert di_port2_loopback_task_32dio.read() == (datum >> 64) & 0xFF
 
 
 def test___digital_multi_channel_writer___write_one_sample_multi_line_with_wrong_dtype___raises_error_with_correct_dtype(
