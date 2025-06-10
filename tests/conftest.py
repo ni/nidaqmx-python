@@ -184,7 +184,7 @@ def real_x_series_device(system: nidaqmx.system.System) -> nidaqmx.system.Device
 @pytest.fixture(scope="function")
 def real_x_series_device_32dio(system: nidaqmx.system.System) -> nidaqmx.system.Device:
     """Gets real 32 DIO X Series device information."""
-    return _x_series_device(DeviceType.REAL, system, sampling_type=SamplingType.ANY, 32)
+    return _x_series_device(DeviceType.REAL, system, sampling_type=SamplingType.ANY, line_number=32)
 
 
 @pytest.fixture(scope="function")
