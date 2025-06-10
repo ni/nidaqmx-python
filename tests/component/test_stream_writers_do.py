@@ -158,8 +158,8 @@ def di_port0_loopback_task(
     )
     _start_di_task(task)
     return task
-    
-    
+
+
 @pytest.fixture
 def di_port0_loopback_task_32dio(
     generate_task: Callable[[], nidaqmx.Task], real_x_series_device_32dio: nidaqmx.system.Device
@@ -184,8 +184,8 @@ def di_port1_loopback_task(
     )
     _start_di_task(task)
     return task
-    
-    
+
+
 @pytest.fixture
 def di_port1_loopback_task_32dio(
     generate_task: Callable[[], nidaqmx.Task], real_x_series_device_32dio: nidaqmx.system.Device
@@ -210,8 +210,8 @@ def di_port2_loopback_task(
     )
     _start_di_task(task)
     return task
-    
-    
+
+
 @pytest.fixture
 def di_port2_loopback_task_32dio(
     generate_task: Callable[[], nidaqmx.Task], real_x_series_device_32dio: nidaqmx.system.Device
