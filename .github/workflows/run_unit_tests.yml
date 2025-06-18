@@ -19,11 +19,11 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Set up Python ${{ matrix.python-version }}
-        uses: ni/python-actions/setup-python@97860b52be87c788fb6df812bd8d1ca68c7aa885 # v0.3.0
+        uses: ni/python-actions/setup-python@a3bfe1baa6062fd6157683651d653d527967d4d4 # v0.3.1
         with:
           python-version: ${{ matrix.python-version }}
       - name: Set up Poetry
-        uses: ni/python-actions/setup-poetry@97860b52be87c788fb6df812bd8d1ca68c7aa885 # v0.3.0
+        uses: ni/python-actions/setup-poetry@a3bfe1baa6062fd6157683651d653d527967d4d4 # v0.3.1
       - name: Restore cached virtualenv (main only)
         uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         id: restore-nidaqmx-main-only
