@@ -42,5 +42,12 @@
         function_call_args.append(hex(attribute.id))
         function_call_args.append('val')
     %>\
+    %if attribute.name == "ai_conv_rate":
+        if self._active_devs:
+            self._interpreter.set_timing_attribute_ex_double(self._handle, self._active_devs, 0x1848, val)
+        else:
+            self._interpreter.set_${generic_attribute_func}(${', '.join(function_call_args)})
+    %else:
         self._interpreter.set_${generic_attribute_func}(${', '.join(function_call_args)})
+    %endif
 </%def>

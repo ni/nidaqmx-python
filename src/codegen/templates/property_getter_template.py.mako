@@ -45,7 +45,14 @@
     %endif
 %endif
 \
+%if attribute.name == "ai_conv_rate":
+        if self._active_devs:
+            val = self._interpreter.get_timing_attribute_ex_double(self._handle, self._active_devs, 0x1848)
+        else:
+            val = self._interpreter.get_${generic_attribute_func}(${', '.join(function_call_args)})
+%else:
         val = self._interpreter.get_${generic_attribute_func}(${', '.join(function_call_args)})
+%endif
 \
 ## Script return call.
     %if attribute.bitfield_enum is not None:

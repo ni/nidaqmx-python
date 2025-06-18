@@ -15,5 +15,12 @@
             function_call_args.append("\"\"")
         function_call_args.append(hex(attribute.id))
     %>\
+    %if attribute.name == "ai_conv_rate":
+        if self._active_devs:
+            self._interpreter.reset_timing_attribute_ex(self._handle, self._active_devs, 0x1848)
+        else:
+            self._interpreter.reset_${generic_attribute_func}(${', '.join(function_call_args)})
+    %else:
         self._interpreter.reset_${generic_attribute_func}(${', '.join(function_call_args)})
+    %endif
 </%def>
