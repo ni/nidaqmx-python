@@ -229,6 +229,7 @@ ACTIVE_DEVS_SUPPORTED_ATTRIBUTES = [
     "ai_conv_rate",
 ]
 
+
 def get_attributes(metadata, class_name):
     """Converts the scrapigen metadata into a list of attributes."""
     attributes_metadata = []
