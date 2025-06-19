@@ -24,11 +24,15 @@ class Timing:
     """
     Represents the timing configurations for a DAQmx task.
     """
-    __slots__ = ('_handle', '_interpreter')
+    __slots__ = ('_handle', '_interpreter', '_active_devs')
 
-    def __init__(self, task_handle, interpreter):
+    def __init__(self, task_handle, interpreter, active_devs=None):
         self._handle = task_handle
         self._interpreter = interpreter
+        self._active_devs = active_devs
+
+    def __getitem__(self, dev):
+        return Timing(self._handle, self._interpreter, active_devs=dev)
 
 <%namespace name="property_template" file="/property_template.py.mako"/>\
 %for attribute in attributes:

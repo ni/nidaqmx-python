@@ -12,11 +12,15 @@ class Timing:
     """
     Represents the timing configurations for a DAQmx task.
     """
-    __slots__ = ('_handle', '_interpreter')
+    __slots__ = ('_handle', '_interpreter', '_active_devs')
 
-    def __init__(self, task_handle, interpreter):
+    def __init__(self, task_handle, interpreter, active_devs=None):
         self._handle = task_handle
         self._interpreter = interpreter
+        self._active_devs = active_devs
+
+    def __getitem__(self, dev):
+        return Timing(self._handle, self._interpreter, active_devs=dev)
 
     @property
     def ai_conv_active_edge(self):
@@ -147,16 +151,25 @@ class Timing:
             input section of multiplexed devices.
         """
 
-        val = self._interpreter.get_timing_attribute_double(self._handle, 0x1848)
+        if self._active_devs:
+            val = self._interpreter.get_timing_attribute_ex_double(self._handle, self._active_devs, 0x1848)
+        else:
+            val = self._interpreter.get_timing_attribute_double(self._handle, 0x1848)
         return val
 
     @ai_conv_rate.setter
     def ai_conv_rate(self, val):
-        self._interpreter.set_timing_attribute_double(self._handle, 0x1848, val)
+        if self._active_devs:
+            self._interpreter.set_timing_attribute_ex_double(self._handle, self._active_devs, 0x1848, val)
+        else:
+            self._interpreter.set_timing_attribute_double(self._handle, 0x1848, val)
 
     @ai_conv_rate.deleter
     def ai_conv_rate(self):
-        self._interpreter.reset_timing_attribute(self._handle, 0x1848)
+        if self._active_devs:
+            self._interpreter.reset_timing_attribute_ex(self._handle, self._active_devs, 0x1848)
+        else:
+            self._interpreter.reset_timing_attribute(self._handle, 0x1848)
 
     @property
     def ai_conv_src(self):
