@@ -1,6 +1,6 @@
 <%def name="script_property_setter(attribute)">\
 <%
-        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type, ATTRIBUTE_WITH_FILE_PATH_TYPE
+        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type, ATTRIBUTE_WITH_FILE_PATH_TYPE, ACTIVE_DEVS_SUPPORTED_ATTRIBUTES
     %>\
     @${attribute.name}.setter
     %if attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
@@ -34,6 +34,8 @@
 <%
         mapped_func_type = get_generic_attribute_function_type(attribute)
         generic_attribute_func = get_generic_attribute_function_name(attribute) + "_" + mapped_func_type
+        if attribute.name in ACTIVE_DEVS_SUPPORTED_ATTRIBUTES:
+            generic_attribute_func_ex = get_generic_attribute_function_name(attribute) + "_ex" + "_" + mapped_func_type
         function_call_args = []
         for handle_parameter in attribute.handle_parameters:
             function_call_args.append(handle_parameter.accessor)
@@ -41,10 +43,13 @@
             function_call_args.append("\"\"")
         function_call_args.append(hex(attribute.id))
         function_call_args.append('val')
+        if attribute.name in ACTIVE_DEVS_SUPPORTED_ATTRIBUTES:
+            function_call_args_ex = function_call_args.copy()
+            function_call_args_ex.insert(1, "self._active_devs")
     %>\
-    %if attribute.name == "ai_conv_rate":
+    %if attribute.name in ACTIVE_DEVS_SUPPORTED_ATTRIBUTES:
         if self._active_devs:
-            self._interpreter.set_timing_attribute_ex_double(self._handle, self._active_devs, 0x1848, val)
+            self._interpreter.set_${generic_attribute_func_ex}(${', '.join(function_call_args_ex)})
         else:
             self._interpreter.set_${generic_attribute_func}(${', '.join(function_call_args)})
     %else:

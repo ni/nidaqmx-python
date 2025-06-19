@@ -1,7 +1,7 @@
 <%def name="script_property_getter(attribute)">\
 <%
         from codegen.utilities.text_wrappers import docstring_wrap
-        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type, ATTRIBUTE_WITH_FILE_PATH_TYPE
+        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type, ATTRIBUTE_WITH_FILE_PATH_TYPE, ACTIVE_DEVS_SUPPORTED_ATTRIBUTES
     %>\
     %if attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
     @property
@@ -21,6 +21,8 @@
 <%
     mapped_func_type = get_generic_attribute_function_type(attribute)
     generic_attribute_func = get_generic_attribute_function_name(attribute) + "_" + mapped_func_type
+    if attribute.name in ACTIVE_DEVS_SUPPORTED_ATTRIBUTES:
+        generic_attribute_func_ex = get_generic_attribute_function_name(attribute) + "_ex" + "_" + mapped_func_type
     object_type = attribute.object_type
     if attribute.has_alternate_constructor:
         object_type = "_" + attribute.object_type + "AlternateConstructor"
@@ -31,6 +33,9 @@
     if attribute.python_class_name == "Watchdog":
         function_call_args.append("\"\"")
     function_call_args.append(hex(attribute.id))
+    if attribute.name in ACTIVE_DEVS_SUPPORTED_ATTRIBUTES:
+        function_call_args_ex = function_call_args.copy()
+        function_call_args_ex.insert(1, "self._active_devs")
 %>
 ## For read/write string attributes in InStream and OutStream, buffer_size is passed as an argument.
 %if attribute.access == "read" or attribute.access == "write":
@@ -45,9 +50,9 @@
     %endif
 %endif
 \
-%if attribute.name == "ai_conv_rate":
+%if attribute.name in ACTIVE_DEVS_SUPPORTED_ATTRIBUTES:
         if self._active_devs:
-            val = self._interpreter.get_timing_attribute_ex_double(self._handle, self._active_devs, 0x1848)
+            val = self._interpreter.get_${generic_attribute_func_ex}(${', '.join(function_call_args_ex)})
         else:
             val = self._interpreter.get_${generic_attribute_func}(${', '.join(function_call_args)})
 %else:
