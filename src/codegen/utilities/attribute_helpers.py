@@ -225,10 +225,6 @@ GENERIC_ATTRIBUTE_GROUP_NAME_MAP = {
 
 ATTRIBUTE_WITH_FILE_PATH_TYPE = ("logging_file_path",)
 
-ACTIVE_DEVS_SUPPORTED_ATTRIBUTES = [
-    "ai_conv_rate",
-]
-
 
 def get_attributes(metadata, class_name):
     """Converts the scrapigen metadata into a list of attributes."""
