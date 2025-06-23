@@ -44,6 +44,14 @@ class Timing:
         else: 
             raise TypeError(f"Invalid active_devs input: {dev!r} (type: {type(dev).__name__}). Expected str or Device.")
 
+    def _raise_device_context_not_supported_error(self):
+        raise DaqError(
+            'Operation must be performed on the entire task. It cannot be '
+            'performed only on specific devices in the task. Do not use the '
+            'indexer, Item property in Visual Basic, or index operator in '
+            'C++ to specify device names when performing this operation.',
+            DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT)
+
 <%namespace name="property_template" file="/property_template.py.mako"/>\
 %for attribute in attributes:
 ${property_template.script_property(attribute)}\

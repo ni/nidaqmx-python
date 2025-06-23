@@ -48,11 +48,18 @@
             function_call_args_ex = function_call_args.copy()
             function_call_args_ex.insert(1, "self._active_devs")
     %>\
-    %if attribute.name in active_devs_supported_attributes:
+    %if attribute.python_class_name == "Timing":
+        %if attribute.name in active_devs_supported_attributes:
         if self._active_devs:
             self._interpreter.set_${generic_attribute_func_ex}(${', '.join(function_call_args_ex)})
         else:
             self._interpreter.set_${generic_attribute_func}(${', '.join(function_call_args)})
+        %else:
+        if self._active_devs == None:
+            self._interpreter.set_${generic_attribute_func}(${', '.join(function_call_args)})
+        else:
+            self._raise_device_context_not_supported_error()
+        %endif
     %else:
         self._interpreter.set_${generic_attribute_func}(${', '.join(function_call_args)})
     %endif

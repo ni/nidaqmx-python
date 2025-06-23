@@ -51,11 +51,18 @@
     %endif
 %endif
 \
-%if attribute.name in active_devs_supported_attributes:
+%if attribute.python_class_name == "Timing":
+    %if attribute.name in active_devs_supported_attributes:
         if self._active_devs:
             val = self._interpreter.get_${generic_attribute_func_ex}(${', '.join(function_call_args_ex)})
         else:
             val = self._interpreter.get_${generic_attribute_func}(${', '.join(function_call_args)})
+    %else:
+        if self._active_devs == None:
+            val = self._interpreter.get_${generic_attribute_func}(${', '.join(function_call_args)})
+        else:
+            self._raise_device_context_not_supported_error()
+    %endif
 %else:
         val = self._interpreter.get_${generic_attribute_func}(${', '.join(function_call_args)})
 %endif
