@@ -293,3 +293,15 @@ def get_generic_attribute_function_type(attribute):
     if attribute.bitfield_enum:
         return mapped_attribute_type.strip("_array")
     return mapped_attribute_type
+
+
+def get_advanced_attribute_function_name(filter_name=None):
+    """Gets the advanced attribute function name."""
+    attributes = []
+    metadata = scrapigen_metadata.attributes
+    for group_name, group_attributes in metadata.items():
+        for id, attribute_data in group_attributes.items():
+            lv_filter = attribute_data.get("lv_filter")
+            if lv_filter and filter_name in lv_filter:
+                attributes.append(attribute_data["name"].lower())
+    return attributes

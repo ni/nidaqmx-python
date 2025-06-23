@@ -1,6 +1,6 @@
 <%def name="script_property_setter(attribute)">\
 <%
-        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type, ATTRIBUTE_WITH_FILE_PATH_TYPE, ACTIVE_DEVS_SUPPORTED_ATTRIBUTES
+        from codegen.utilities.attribute_helpers import get_generic_attribute_function_name, get_generic_attribute_function_type, get_advanced_attribute_function_name, ATTRIBUTE_WITH_FILE_PATH_TYPE
     %>\
     @${attribute.name}.setter
     %if attribute.name in ATTRIBUTE_WITH_FILE_PATH_TYPE:
@@ -32,9 +32,10 @@
 \
 ## Script interpreter call.
 <%
+        active_devs_supported_attributes = get_advanced_attribute_function_name("Advanced:Timing (Active Device)")
         mapped_func_type = get_generic_attribute_function_type(attribute)
         generic_attribute_func = get_generic_attribute_function_name(attribute) + "_" + mapped_func_type
-        if attribute.name in ACTIVE_DEVS_SUPPORTED_ATTRIBUTES:
+        if attribute.name in active_devs_supported_attributes:
             generic_attribute_func_ex = get_generic_attribute_function_name(attribute) + "_ex" + "_" + mapped_func_type
         function_call_args = []
         for handle_parameter in attribute.handle_parameters:
@@ -43,11 +44,11 @@
             function_call_args.append("\"\"")
         function_call_args.append(hex(attribute.id))
         function_call_args.append('val')
-        if attribute.name in ACTIVE_DEVS_SUPPORTED_ATTRIBUTES:
+        if attribute.name in active_devs_supported_attributes:
             function_call_args_ex = function_call_args.copy()
             function_call_args_ex.insert(1, "self._active_devs")
     %>\
-    %if attribute.name in ACTIVE_DEVS_SUPPORTED_ATTRIBUTES:
+    %if attribute.name in active_devs_supported_attributes:
         if self._active_devs:
             self._interpreter.set_${generic_attribute_func_ex}(${', '.join(function_call_args_ex)})
         else:
