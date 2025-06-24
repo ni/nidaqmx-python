@@ -23,7 +23,7 @@ except ImportError:
 
 if TYPE_CHECKING:
     # Not public yet: https://github.com/pytest-dev/pytest/issues/7469
-    import _pytest.mark.structures
+    import _pytest.mark.structures  # noqa: I300
 
 
 class Error(Exception):
