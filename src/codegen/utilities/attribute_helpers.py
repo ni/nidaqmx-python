@@ -291,13 +291,15 @@ def get_generic_attribute_function_type(attribute):
     return mapped_attribute_type
 
 
-def get_advanced_attribute_function_name(filter_name=None):
-    """Gets the advanced attribute function name."""
-    attributes = []
+def has_attribute_with_filter(attribute, group_name, filter_name):
+    """Checks if the given attribute in the group has the specified filter name in its lv_filter."""
     metadata = scrapigen_metadata.attributes
-    for group_name, group_attributes in metadata.items():
-        for id, attribute_data in group_attributes.items():
-            lv_filter = attribute_data.get("lv_filter")
-            if lv_filter and filter_name in lv_filter:
-                attributes.append(attribute_data["name"].lower())
-    return attributes
+    group_attributes = metadata.get(group_name)
+    if not group_attributes:
+        return False
+    attribute_data = group_attributes.get(attribute.id)
+    if attribute_data:
+        lv_filter = attribute_data.get("lv_filter")
+        if lv_filter and filter_name in lv_filter:
+            return True
+    return False

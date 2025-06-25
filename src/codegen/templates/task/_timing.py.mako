@@ -47,9 +47,7 @@ class Timing:
     def _raise_device_context_not_supported_error(self):
         raise DaqError(
             'Operation must be performed on the entire task. It cannot be '
-            'performed only on specific devices in the task. Do not use the '
-            'indexer, Item property in Visual Basic, or index operator in '
-            'C++ to specify device names when performing this operation.',
+            'performed only on specific devices in the task.',
             DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT)
 
 <%namespace name="property_template" file="/property_template.py.mako"/>\

@@ -35,9 +35,7 @@ class Timing:
     def _raise_device_context_not_supported_error(self):
         raise DaqError(
             'Operation must be performed on the entire task. It cannot be '
-            'performed only on specific devices in the task. Do not use the '
-            'indexer, Item property in Visual Basic, or index operator in '
-            'C++ to specify device names when performing this operation.',
+            'performed only on specific devices in the task.',
             DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT)
 
     @property
@@ -339,26 +337,23 @@ class Timing:
             that contains a list or range of digital lines or ports.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_string(self._handle, 0x2196)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_string(self._handle, 0x2196)
         return _PhysicalChannelAlternateConstructor(val, self._interpreter)
 
     @change_detect_di_falling_edge_physical_chans.setter
     def change_detect_di_falling_edge_physical_chans(self, val):
         val = val.name
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_string(self._handle, 0x2196, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_string(self._handle, 0x2196, val)
 
     @change_detect_di_falling_edge_physical_chans.deleter
     def change_detect_di_falling_edge_physical_chans(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x2196)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x2196)
 
     @property
     def change_detect_di_rising_edge_physical_chans(self):
@@ -370,26 +365,23 @@ class Timing:
             that contains a list or range of digital lines or ports.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_string(self._handle, 0x2195)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_string(self._handle, 0x2195)
         return _PhysicalChannelAlternateConstructor(val, self._interpreter)
 
     @change_detect_di_rising_edge_physical_chans.setter
     def change_detect_di_rising_edge_physical_chans(self, val):
         val = val.name
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_string(self._handle, 0x2195, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_string(self._handle, 0x2195, val)
 
     @change_detect_di_rising_edge_physical_chans.deleter
     def change_detect_di_rising_edge_physical_chans(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x2195)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x2195)
 
     @property
     def change_detect_di_tristate(self):
@@ -408,25 +400,22 @@ class Timing:
             output-only lines.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_bool(self._handle, 0x2efa)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_bool(self._handle, 0x2efa)
         return val
 
     @change_detect_di_tristate.setter
     def change_detect_di_tristate(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_bool(self._handle, 0x2efa, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_bool(self._handle, 0x2efa, val)
 
     @change_detect_di_tristate.deleter
     def change_detect_di_tristate(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x2efa)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x2efa)
 
     @property
     def delay_from_samp_clk_delay(self):
@@ -494,25 +483,22 @@ class Timing:
             delays in the signal path.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_double(self._handle, 0x31aa)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_double(self._handle, 0x31aa)
         return val
 
     @first_samp_clk_offset.setter
     def first_samp_clk_offset(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_double(self._handle, 0x31aa, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_double(self._handle, 0x31aa, val)
 
     @first_samp_clk_offset.deleter
     def first_samp_clk_offset(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x31aa)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x31aa)
 
     @property
     def first_samp_clk_timescale(self):
@@ -521,26 +507,23 @@ class Timing:
             be used for the value of **first_samp_clk_when**.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_int32(self._handle, 0x3183)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_int32(self._handle, 0x3183)
         return Timescale(val)
 
     @first_samp_clk_timescale.setter
     def first_samp_clk_timescale(self, val):
         val = val.value
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_int32(self._handle, 0x3183, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_int32(self._handle, 0x3183, val)
 
     @first_samp_clk_timescale.deleter
     def first_samp_clk_timescale(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x3183)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x3183)
 
     @property
     def first_samp_clk_when(self):
@@ -548,25 +531,22 @@ class Timing:
         datetime: Specifies the time of the first sample clock pulse.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_timestamp(self._handle, 0x3182)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_timestamp(self._handle, 0x3182)
         return val
 
     @first_samp_clk_when.setter
     def first_samp_clk_when(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_timestamp(self._handle, 0x3182, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_timestamp(self._handle, 0x3182, val)
 
     @first_samp_clk_when.deleter
     def first_samp_clk_when(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x3182)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x3182)
 
     @property
     def first_samp_timestamp_enable(self):
@@ -574,25 +554,22 @@ class Timing:
         bool: Specifies whether to enable the first sample timestamp.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_bool(self._handle, 0x3139)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_bool(self._handle, 0x3139)
         return val
 
     @first_samp_timestamp_enable.setter
     def first_samp_timestamp_enable(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_bool(self._handle, 0x3139, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_bool(self._handle, 0x3139, val)
 
     @first_samp_timestamp_enable.deleter
     def first_samp_timestamp_enable(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x3139)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x3139)
 
     @property
     def first_samp_timestamp_timescale(self):
@@ -601,26 +578,23 @@ class Timing:
             be used for the first sample timestamp.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_int32(self._handle, 0x313b)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_int32(self._handle, 0x313b)
         return Timescale(val)
 
     @first_samp_timestamp_timescale.setter
     def first_samp_timestamp_timescale(self, val):
         val = val.value
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_int32(self._handle, 0x313b, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_int32(self._handle, 0x313b, val)
 
     @first_samp_timestamp_timescale.deleter
     def first_samp_timestamp_timescale(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x313b)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x313b)
 
     @property
     def first_samp_timestamp_val(self):
@@ -628,10 +602,9 @@ class Timing:
         datetime: Indicates the timestamp of the first sample.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_timestamp(self._handle, 0x313a)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_timestamp(self._handle, 0x313a)
         return val
 
     @property
@@ -641,25 +614,22 @@ class Timing:
             cycle before starting a new handshake cycle.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_double(self._handle, 0x22c2)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_double(self._handle, 0x22c2)
         return val
 
     @hshk_delay_after_xfer.setter
     def hshk_delay_after_xfer(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_double(self._handle, 0x22c2, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_double(self._handle, 0x22c2, val)
 
     @hshk_delay_after_xfer.deleter
     def hshk_delay_after_xfer(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x22c2)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x22c2)
 
     @property
     def hshk_sample_input_data_when(self):
@@ -669,26 +639,23 @@ class Timing:
             the data from the peripheral device.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_int32(self._handle, 0x22c4)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_int32(self._handle, 0x22c4)
         return SampleInputDataWhen(val)
 
     @hshk_sample_input_data_when.setter
     def hshk_sample_input_data_when(self, val):
         val = val.value
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_int32(self._handle, 0x22c4, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_int32(self._handle, 0x22c4, val)
 
     @hshk_sample_input_data_when.deleter
     def hshk_sample_input_data_when(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x22c4)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x22c4)
 
     @property
     def hshk_start_cond(self):
@@ -698,26 +665,23 @@ class Timing:
             the task starts.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_int32(self._handle, 0x22c3)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_int32(self._handle, 0x22c3)
         return HandshakeStartCondition(val)
 
     @hshk_start_cond.setter
     def hshk_start_cond(self, val):
         val = val.value
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_int32(self._handle, 0x22c3, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_int32(self._handle, 0x22c3, val)
 
     @hshk_start_cond.deleter
     def hshk_start_cond(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x22c3)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x22c3)
 
     @property
     def implicit_underflow_behavior(self):
@@ -727,26 +691,23 @@ class Timing:
             empty.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_int32(self._handle, 0x2efd)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_int32(self._handle, 0x2efd)
         return UnderflowBehavior(val)
 
     @implicit_underflow_behavior.setter
     def implicit_underflow_behavior(self, val):
         val = val.value
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_int32(self._handle, 0x2efd, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_int32(self._handle, 0x2efd, val)
 
     @implicit_underflow_behavior.deleter
     def implicit_underflow_behavior(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x2efd)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x2efd)
 
     @property
     def master_timebase_rate(self):
@@ -754,25 +715,22 @@ class Timing:
         float: Specifies the rate of the Master Timebase.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_double(self._handle, 0x1495)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_double(self._handle, 0x1495)
         return val
 
     @master_timebase_rate.setter
     def master_timebase_rate(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_double(self._handle, 0x1495, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_double(self._handle, 0x1495, val)
 
     @master_timebase_rate.deleter
     def master_timebase_rate(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x1495)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x1495)
 
     @property
     def master_timebase_src(self):
@@ -782,25 +740,22 @@ class Timing:
             the onboard 20MHz Timebase or the RTSI7 terminal.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_string(self._handle, 0x1343)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_string(self._handle, 0x1343)
         return val
 
     @master_timebase_src.setter
     def master_timebase_src(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_string(self._handle, 0x1343, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_string(self._handle, 0x1343, val)
 
     @master_timebase_src.deleter
     def master_timebase_src(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x1343)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x1343)
 
     @property
     def ref_clk_rate(self):
@@ -808,25 +763,22 @@ class Timing:
         float: Specifies the frequency of the Reference Clock.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_double(self._handle, 0x1315)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_double(self._handle, 0x1315)
         return val
 
     @ref_clk_rate.setter
     def ref_clk_rate(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_double(self._handle, 0x1315, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_double(self._handle, 0x1315, val)
 
     @ref_clk_rate.deleter
     def ref_clk_rate(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x1315)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x1315)
 
     @property
     def ref_clk_src(self):
@@ -835,25 +787,22 @@ class Timing:
             Reference Clock.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_string(self._handle, 0x1316)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_string(self._handle, 0x1316)
         return val
 
     @ref_clk_src.setter
     def ref_clk_src(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_string(self._handle, 0x1316, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_string(self._handle, 0x1316, val)
 
     @ref_clk_src.deleter
     def ref_clk_src(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x1316)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x1316)
 
     @property
     def samp_clk_active_edge(self):
@@ -864,26 +813,23 @@ class Timing:
             a periodic clock.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_int32(self._handle, 0x1301)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_int32(self._handle, 0x1301)
         return Edge(val)
 
     @samp_clk_active_edge.setter
     def samp_clk_active_edge(self, val):
         val = val.value
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_int32(self._handle, 0x1301, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_int32(self._handle, 0x1301, val)
 
     @samp_clk_active_edge.deleter
     def samp_clk_active_edge(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x1301)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x1301)
 
     @property
     def samp_clk_dig_fltr_enable(self):
@@ -892,25 +838,22 @@ class Timing:
             signal.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_bool(self._handle, 0x221e)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_bool(self._handle, 0x221e)
         return val
 
     @samp_clk_dig_fltr_enable.setter
     def samp_clk_dig_fltr_enable(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_bool(self._handle, 0x221e, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_bool(self._handle, 0x221e, val)
 
     @samp_clk_dig_fltr_enable.deleter
     def samp_clk_dig_fltr_enable(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x221e)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x221e)
 
     @property
     def samp_clk_dig_fltr_min_pulse_width(self):
@@ -919,25 +862,22 @@ class Timing:
             recognizes.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_double(self._handle, 0x221f)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_double(self._handle, 0x221f)
         return val
 
     @samp_clk_dig_fltr_min_pulse_width.setter
     def samp_clk_dig_fltr_min_pulse_width(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_double(self._handle, 0x221f, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_double(self._handle, 0x221f, val)
 
     @samp_clk_dig_fltr_min_pulse_width.deleter
     def samp_clk_dig_fltr_min_pulse_width(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x221f)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x221f)
 
     @property
     def samp_clk_dig_fltr_timebase_rate(self):
@@ -947,25 +887,22 @@ class Timing:
             the filter.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_double(self._handle, 0x2221)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_double(self._handle, 0x2221)
         return val
 
     @samp_clk_dig_fltr_timebase_rate.setter
     def samp_clk_dig_fltr_timebase_rate(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_double(self._handle, 0x2221, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_double(self._handle, 0x2221, val)
 
     @samp_clk_dig_fltr_timebase_rate.deleter
     def samp_clk_dig_fltr_timebase_rate(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x2221)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x2221)
 
     @property
     def samp_clk_dig_fltr_timebase_src(self):
@@ -974,25 +911,22 @@ class Timing:
             timebase of the pulse width filter.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_string(self._handle, 0x2220)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_string(self._handle, 0x2220)
         return val
 
     @samp_clk_dig_fltr_timebase_src.setter
     def samp_clk_dig_fltr_timebase_src(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_string(self._handle, 0x2220, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_string(self._handle, 0x2220, val)
 
     @samp_clk_dig_fltr_timebase_src.deleter
     def samp_clk_dig_fltr_timebase_src(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x2220)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x2220)
 
     @property
     def samp_clk_dig_sync_enable(self):
@@ -1002,25 +936,22 @@ class Timing:
             device.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_bool(self._handle, 0x2222)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_bool(self._handle, 0x2222)
         return val
 
     @samp_clk_dig_sync_enable.setter
     def samp_clk_dig_sync_enable(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_bool(self._handle, 0x2222, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_bool(self._handle, 0x2222, val)
 
     @samp_clk_dig_sync_enable.deleter
     def samp_clk_dig_sync_enable(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x2222)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x2222)
 
     @property
     def samp_clk_max_rate(self):
@@ -1033,10 +964,9 @@ class Timing:
             sampling devices.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_double(self._handle, 0x22c8)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_double(self._handle, 0x22c8)
         return val
 
     @property
@@ -1047,26 +977,23 @@ class Timing:
             device can handle them.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_int32(self._handle, 0x2efc)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_int32(self._handle, 0x2efc)
         return OverflowBehavior(val)
 
     @samp_clk_overrun_behavior.setter
     def samp_clk_overrun_behavior(self, val):
         val = val.value
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_int32(self._handle, 0x2efc, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_int32(self._handle, 0x2efc, val)
 
     @samp_clk_overrun_behavior.deleter
     def samp_clk_overrun_behavior(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x2efc)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x2efc)
 
     @property
     def samp_clk_rate(self):
@@ -1076,25 +1003,22 @@ class Timing:
             set this input to the maximum expected rate of that clock.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_double(self._handle, 0x1344)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_double(self._handle, 0x1344)
         return val
 
     @samp_clk_rate.setter
     def samp_clk_rate(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_double(self._handle, 0x1344, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_double(self._handle, 0x1344, val)
 
     @samp_clk_rate.deleter
     def samp_clk_rate(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x1344)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x1344)
 
     @property
     def samp_clk_src(self):
@@ -1103,25 +1027,22 @@ class Timing:
             Clock.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_string(self._handle, 0x1852)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_string(self._handle, 0x1852)
         return val
 
     @samp_clk_src.setter
     def samp_clk_src(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_string(self._handle, 0x1852, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_string(self._handle, 0x1852, val)
 
     @samp_clk_src.deleter
     def samp_clk_src(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x1852)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x1852)
 
     @property
     def samp_clk_term(self):
@@ -1132,10 +1053,9 @@ class Timing:
             **samp_clk_src**.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_string(self._handle, 0x2f1b)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_string(self._handle, 0x2f1b)
         return val
 
     @property
@@ -1147,26 +1067,23 @@ class Timing:
             Timebase is not a periodic clock.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_int32(self._handle, 0x18ec)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_int32(self._handle, 0x18ec)
         return Edge(val)
 
     @samp_clk_timebase_active_edge.setter
     def samp_clk_timebase_active_edge(self, val):
         val = val.value
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_int32(self._handle, 0x18ec, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_int32(self._handle, 0x18ec, val)
 
     @samp_clk_timebase_active_edge.deleter
     def samp_clk_timebase_active_edge(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x18ec)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x18ec)
 
     @property
     def samp_clk_timebase_div(self):
@@ -1175,25 +1092,22 @@ class Timing:
             to produce a single Sample Clock pulse.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_uint32(self._handle, 0x18eb)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_uint32(self._handle, 0x18eb)
         return val
 
     @samp_clk_timebase_div.setter
     def samp_clk_timebase_div(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_uint32(self._handle, 0x18eb, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_uint32(self._handle, 0x18eb, val)
 
     @samp_clk_timebase_div.deleter
     def samp_clk_timebase_div(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x18eb)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x18eb)
 
     @property
     def samp_clk_timebase_master_timebase_div(self):
@@ -1203,25 +1117,22 @@ class Timing:
             Timebase.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_uint32(self._handle, 0x1305)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_uint32(self._handle, 0x1305)
         return val
 
     @samp_clk_timebase_master_timebase_div.setter
     def samp_clk_timebase_master_timebase_div(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_uint32(self._handle, 0x1305, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_uint32(self._handle, 0x1305, val)
 
     @samp_clk_timebase_master_timebase_div.deleter
     def samp_clk_timebase_master_timebase_div(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x1305)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x1305)
 
     @property
     def samp_clk_timebase_rate(self):
@@ -1233,25 +1144,22 @@ class Timing:
             parameters.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_double(self._handle, 0x1303)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_double(self._handle, 0x1303)
         return val
 
     @samp_clk_timebase_rate.setter
     def samp_clk_timebase_rate(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_double(self._handle, 0x1303, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_double(self._handle, 0x1303, val)
 
     @samp_clk_timebase_rate.deleter
     def samp_clk_timebase_rate(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x1303)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x1303)
 
     @property
     def samp_clk_timebase_src(self):
@@ -1260,25 +1168,22 @@ class Timing:
             Clock Timebase.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_string(self._handle, 0x1308)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_string(self._handle, 0x1308)
         return val
 
     @samp_clk_timebase_src.setter
     def samp_clk_timebase_src(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_string(self._handle, 0x1308, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_string(self._handle, 0x1308, val)
 
     @samp_clk_timebase_src.deleter
     def samp_clk_timebase_src(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x1308)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x1308)
 
     @property
     def samp_clk_timebase_term(self):
@@ -1289,10 +1194,9 @@ class Timing:
             with **samp_clk_timebase_src**.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_string(self._handle, 0x2f1c)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_string(self._handle, 0x2f1c)
         return val
 
     @property
@@ -1303,26 +1207,23 @@ class Timing:
             empty. In either case, the sample clock does not stop.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_int32(self._handle, 0x2961)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_int32(self._handle, 0x2961)
         return UnderflowBehavior(val)
 
     @samp_clk_underflow_behavior.setter
     def samp_clk_underflow_behavior(self, val):
         val = val.value
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_int32(self._handle, 0x2961, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_int32(self._handle, 0x2961, val)
 
     @samp_clk_underflow_behavior.deleter
     def samp_clk_underflow_behavior(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x2961)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x2961)
 
     @property
     def samp_clk_write_wfm_use_initial_wfm_dt(self):
@@ -1332,25 +1233,22 @@ class Timing:
             waveform input for Output tasks.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_bool(self._handle, 0x30fc)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_bool(self._handle, 0x30fc)
         return val
 
     @samp_clk_write_wfm_use_initial_wfm_dt.setter
     def samp_clk_write_wfm_use_initial_wfm_dt(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_bool(self._handle, 0x30fc, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_bool(self._handle, 0x30fc, val)
 
     @samp_clk_write_wfm_use_initial_wfm_dt.deleter
     def samp_clk_write_wfm_use_initial_wfm_dt(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x30fc)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x30fc)
 
     @property
     def samp_quant_samp_mode(self):
@@ -1360,26 +1258,23 @@ class Timing:
             continuously acquires or generates samples.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_int32(self._handle, 0x1300)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_int32(self._handle, 0x1300)
         return AcquisitionType(val)
 
     @samp_quant_samp_mode.setter
     def samp_quant_samp_mode(self, val):
         val = val.value
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_int32(self._handle, 0x1300, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_int32(self._handle, 0x1300, val)
 
     @samp_quant_samp_mode.deleter
     def samp_quant_samp_mode(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x1300)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x1300)
 
     @property
     def samp_quant_samp_per_chan(self):
@@ -1391,25 +1286,22 @@ class Timing:
             determine the buffer size.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_uint64(self._handle, 0x1310)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_uint64(self._handle, 0x1310)
         return val
 
     @samp_quant_samp_per_chan.setter
     def samp_quant_samp_per_chan(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_uint64(self._handle, 0x1310, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_uint64(self._handle, 0x1310, val)
 
     @samp_quant_samp_per_chan.deleter
     def samp_quant_samp_per_chan(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x1310)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x1310)
 
     @property
     def samp_timing_engine(self):
@@ -1417,25 +1309,22 @@ class Timing:
         int: Specifies which timing engine to use for the task.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_uint32(self._handle, 0x2a26)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_uint32(self._handle, 0x2a26)
         return val
 
     @samp_timing_engine.setter
     def samp_timing_engine(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_uint32(self._handle, 0x2a26, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_uint32(self._handle, 0x2a26, val)
 
     @samp_timing_engine.deleter
     def samp_timing_engine(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x2a26)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x2a26)
 
     @property
     def samp_timing_type(self):
@@ -1444,26 +1333,23 @@ class Timing:
             of sample timing to use for the task.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_int32(self._handle, 0x1347)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_int32(self._handle, 0x1347)
         return SampleTimingType(val)
 
     @samp_timing_type.setter
     def samp_timing_type(self, val):
         val = val.value
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_int32(self._handle, 0x1347, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_int32(self._handle, 0x1347, val)
 
     @samp_timing_type.deleter
     def samp_timing_type(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x1347)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x1347)
 
     @property
     def simultaneous_ao_enable(self):
@@ -1473,25 +1359,22 @@ class Timing:
             when you write a sample to that channel.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_bool(self._handle, 0x21a0)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_bool(self._handle, 0x21a0)
         return val
 
     @simultaneous_ao_enable.setter
     def simultaneous_ao_enable(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_bool(self._handle, 0x21a0, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_bool(self._handle, 0x21a0, val)
 
     @simultaneous_ao_enable.deleter
     def simultaneous_ao_enable(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x21a0)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x21a0)
 
     @property
     def sync_clk_interval(self):
@@ -1503,25 +1386,22 @@ class Timing:
             for information about how to calculate this value.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_uint32(self._handle, 0x2f7e)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_uint32(self._handle, 0x2f7e)
         return val
 
     @sync_clk_interval.setter
     def sync_clk_interval(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_uint32(self._handle, 0x2f7e, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_uint32(self._handle, 0x2f7e, val)
 
     @sync_clk_interval.deleter
     def sync_clk_interval(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x2f7e)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x2f7e)
 
     @property
     def sync_pulse_min_delay_to_start(self):
@@ -1531,25 +1411,22 @@ class Timing:
             before the task starts.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_double(self._handle, 0x223f)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_double(self._handle, 0x223f)
         return val
 
     @sync_pulse_min_delay_to_start.setter
     def sync_pulse_min_delay_to_start(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_double(self._handle, 0x223f, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_double(self._handle, 0x223f, val)
 
     @sync_pulse_min_delay_to_start.deleter
     def sync_pulse_min_delay_to_start(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x223f)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x223f)
 
     @property
     def sync_pulse_reset_delay(self):
@@ -1563,25 +1440,22 @@ class Timing:
             to the resulting value.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_double(self._handle, 0x2f7d)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_double(self._handle, 0x2f7d)
         return val
 
     @sync_pulse_reset_delay.setter
     def sync_pulse_reset_delay(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_double(self._handle, 0x2f7d, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_double(self._handle, 0x2f7d, val)
 
     @sync_pulse_reset_delay.deleter
     def sync_pulse_reset_delay(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x2f7d)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x2f7d)
 
     @property
     def sync_pulse_reset_time(self):
@@ -1594,10 +1468,9 @@ class Timing:
             **sync_pulse_reset_delay** to the resulting value.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_double(self._handle, 0x2f7c)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_double(self._handle, 0x2f7c)
         return val
 
     @property
@@ -1608,25 +1481,22 @@ class Timing:
             clock dividers and the ADCs/DACs on the device.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_string(self._handle, 0x223d)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_string(self._handle, 0x223d)
         return val
 
     @sync_pulse_src.setter
     def sync_pulse_src(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_string(self._handle, 0x223d, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_string(self._handle, 0x223d, val)
 
     @sync_pulse_src.deleter
     def sync_pulse_src(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x223d)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x223d)
 
     @property
     def sync_pulse_sync_time(self):
@@ -1636,10 +1506,9 @@ class Timing:
             pulse.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_double(self._handle, 0x223e)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_double(self._handle, 0x223e)
         return val
 
     @property
@@ -1650,10 +1519,9 @@ class Timing:
             name of the source terminal.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_string(self._handle, 0x2f85)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_string(self._handle, 0x2f85)
         return val
 
     @property
@@ -1663,26 +1531,23 @@ class Timing:
             be used for timestamps for a sync pulse.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_int32(self._handle, 0x3138)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_int32(self._handle, 0x3138)
         return Timescale(val)
 
     @sync_pulse_time_timescale.setter
     def sync_pulse_time_timescale(self, val):
         val = val.value
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_int32(self._handle, 0x3138, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_int32(self._handle, 0x3138, val)
 
     @sync_pulse_time_timescale.deleter
     def sync_pulse_time_timescale(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x3138)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x3138)
 
     @property
     def sync_pulse_time_when(self):
@@ -1690,25 +1555,22 @@ class Timing:
         datetime: Specifies the start time of the sync pulse.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_timestamp(self._handle, 0x3137)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_timestamp(self._handle, 0x3137)
         return val
 
     @sync_pulse_time_when.setter
     def sync_pulse_time_when(self, val):
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_timestamp(self._handle, 0x3137, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_timestamp(self._handle, 0x3137, val)
 
     @sync_pulse_time_when.deleter
     def sync_pulse_time_when(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x3137)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x3137)
 
     @property
     def sync_pulse_type(self):
@@ -1717,26 +1579,23 @@ class Timing:
             sync pulse used in the task.
         """
 
-        if self._active_devs == None:
-            val = self._interpreter.get_timing_attribute_int32(self._handle, 0x3136)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        val = self._interpreter.get_timing_attribute_int32(self._handle, 0x3136)
         return SyncPulseType(val)
 
     @sync_pulse_type.setter
     def sync_pulse_type(self, val):
         val = val.value
-        if self._active_devs == None:
-            self._interpreter.set_timing_attribute_int32(self._handle, 0x3136, val)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.set_timing_attribute_int32(self._handle, 0x3136, val)
 
     @sync_pulse_type.deleter
     def sync_pulse_type(self):
-        if self._active_devs == None:
-            self._interpreter.reset_timing_attribute(self._handle, 0x3136)
-        else:
+        if self._active_devs:
             self._raise_device_context_not_supported_error()
+        self._interpreter.reset_timing_attribute(self._handle, 0x3136)
 
     def cfg_burst_handshaking_timing_export_clock(
             self, sample_clk_rate, sample_clk_outp_term,
