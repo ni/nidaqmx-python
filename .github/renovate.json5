@@ -1,0 +1,41 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "branchPrefix": "users/renovate/",
+  "timezone": "US/Central",
+  "extends": [
+    "config:recommended",
+    "helpers:pinGitHubActionDigestsToSemver",
+    ":enableVulnerabilityAlerts"
+  ],
+  "packageRules": [
+    {
+      // Update GitHub Actions on weekends.
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions",
+      "groupSlug": "github",
+      "schedule": [
+        "* * * * 0,6"
+      ]
+    },
+    {
+      // Update Python packages on weekends, separate from lockFileMaintenance.
+      "matchCategories": ["python"],
+      "matchUpdateTypes": ["major", "minor", "patch", "rollback", "replacement"],
+      "groupName": "Python packages",
+      "groupSlug": "python",
+      "schedule": [
+        "* * * * 0,6"
+      ]
+    }
+  ],
+  "lockFileMaintenance": {
+    // Maintain lock files on early Tuesday mornings. This is primarily to
+    // update indirect dependencies that aren't handled by the Python packages
+    // group.
+    "enabled": true,
+    "schedule": [
+      "* 0-3 * * 2"
+    ]
+  },
+  "osvVulnerabilityAlerts": true
+}
