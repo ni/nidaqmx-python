@@ -33,6 +33,7 @@ All notable changes to this project will be documented in this file.
 
 * ### Major Changes
     * Removed the `docs` extra and converted it to a Poetry dependency group.
+    * Updated hightime dependency from `^0.2.2` to `>=0.2.2` to allow for newer versions.
 
 * ### Known Issues
     * ...
