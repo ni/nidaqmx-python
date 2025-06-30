@@ -16,6 +16,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Buffer'
+            ],
             'name': 'INPUT_BUF_SIZE',
             'python_class_name': 'InStream',
             'python_data_type': 'int',
@@ -39,6 +42,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Buffer'
+            ],
             'name': 'OUTPUT_BUF_SIZE',
             'python_class_name': 'OutStream',
             'python_data_type': 'int',
@@ -62,6 +68,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Buffer'
+            ],
             'name': 'INPUT_ONBRD_BUF_SIZE',
             'python_class_name': 'InStream',
             'python_data_type': 'int',
@@ -85,6 +94,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Buffer'
+            ],
             'name': 'OUTPUT_ONBRD_BUF_SIZE',
             'python_class_name': 'OutStream',
             'python_data_type': 'int',
@@ -110,6 +122,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Calibration Info'
+            ],
             'name': 'SELF_CAL_SUPPORTED',
             'python_class_name': 'Device',
             'python_data_type': 'bool',
@@ -133,6 +148,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Calibration Info'
+            ],
             'name': 'CAL_USER_DEFINED_INFO',
             'python_class_name': 'Device',
             'python_data_type': 'str',
@@ -156,6 +174,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Calibration Info'
+            ],
             'name': 'SELF_CAL_LAST_TEMP',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -179,6 +200,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Calibration Info'
+            ],
             'name': 'EXT_CAL_LAST_TEMP',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -202,6 +226,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Calibration Info'
+            ],
             'name': 'EXT_CAL_RECOMMENDED_INTERVAL',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -225,6 +252,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Calibration Info'
+            ],
             'name': 'CAL_USER_DEFINED_INFO_MAX_SIZE',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -248,6 +278,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Calibration Info'
+            ],
             'name': 'CAL_DEV_TEMP',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -271,6 +304,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Calibration Info'
+            ],
             'name': 'CAL_ACC_CONNECTION_COUNT',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -294,6 +330,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Calibration Info'
+            ],
             'name': 'CAL_RECOMMENDED_ACC_CONNECTION_COUNT_LIMIT',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -325,6 +364,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_RAW_SAMP_JUSTIFICATION',
             'python_class_name': 'AIChannel',
             'python_data_type': 'DataJustification1',
@@ -353,6 +395,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_IMPEDANCE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'Impedance1',
@@ -383,6 +428,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_COUPLING',
             'python_class_name': 'AIChannel',
             'python_data_type': 'Coupling1',
@@ -411,6 +459,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DITHER_ENABLE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -440,6 +491,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_CFG',
             'python_class_name': 'AIChannel',
             'python_data_type': 'BridgeConfiguration1',
@@ -468,6 +522,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_SHUNT_CAL_ENABLE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -496,6 +553,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_AC_EXCIT_FREQ',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -524,6 +584,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_AC_EXCIT_SYNC_ENABLE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -552,6 +615,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_GAIN',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -580,6 +646,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_LOAD_IMPEDANCE',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -608,6 +677,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_DAC_REF_CONN_TO_GND',
             'python_class_name': 'AOChannel',
             'python_data_type': 'bool',
@@ -637,6 +709,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_DAC_REF_SRC',
             'python_class_name': 'AOChannel',
             'python_data_type': 'SourceSelection',
@@ -665,6 +740,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_REGLITCH_ENABLE',
             'python_class_name': 'AOChannel',
             'python_data_type': 'bool',
@@ -694,6 +772,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_DATA_XFER_MECH',
             'python_class_name': 'AOChannel',
             'python_data_type': 'DataTransferMechanism',
@@ -723,6 +804,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_CTR_TIMEBASE_ACTIVE_EDGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'Edge1',
@@ -751,6 +835,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_CTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -780,6 +867,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FREQ_MEAS_METH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'CounterFrequencyMethod',
@@ -808,6 +898,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FREQ_MEAS_TIME',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -836,6 +929,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FREQ_DIV',
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
@@ -864,6 +960,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT',
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
@@ -893,6 +992,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_OUTPUT_STATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'Level1',
@@ -921,6 +1023,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TC_REACHED',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -950,6 +1055,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_DATA_XFER_MECH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'DataTransferMechanism',
@@ -978,6 +1086,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_COUNT',
             'python_class_name': 'COChannel',
             'python_data_type': 'int',
@@ -1007,6 +1118,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_OUTPUT_STATE',
             'python_class_name': 'COChannel',
             'python_data_type': 'Level1',
@@ -1035,6 +1149,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_AUTO_INCR_CNT',
             'python_class_name': 'COChannel',
             'python_data_type': 'int',
@@ -1063,6 +1180,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_PULSE_TICKS_INITIAL_DELAY',
             'python_class_name': 'COChannel',
             'python_data_type': 'int',
@@ -1091,6 +1211,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_PULSE_FREQ_INITIAL_DELAY',
             'python_class_name': 'COChannel',
             'python_data_type': 'float',
@@ -1119,6 +1242,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_CTR_TIMEBASE_SRC',
             'python_class_name': 'COChannel',
             'python_data_type': 'str',
@@ -1148,6 +1274,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_CTR_TIMEBASE_ACTIVE_EDGE',
             'python_class_name': 'COChannel',
             'python_data_type': 'Edge1',
@@ -1177,6 +1306,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_ACCEL_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'AccelUnits2',
@@ -1205,6 +1337,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_ACCEL_SENSITIVITY',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -1234,6 +1369,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_MEAS_TYPE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'AIMeasurementType',
@@ -1263,6 +1401,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_DIR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'CountDirection1',
@@ -1292,6 +1433,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_ACTIVE_EDGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'Edge1',
@@ -1320,6 +1464,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_INITIAL_CNT',
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
@@ -1349,6 +1496,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CURRENT_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'CurrentUnits1',
@@ -1377,6 +1527,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DI_INVERT_LINES',
             'python_class_name': 'DIChannel',
             'python_data_type': 'bool',
@@ -1406,6 +1559,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FREQ_STARTING_EDGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'Edge1',
@@ -1435,6 +1591,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_FREQ_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'FrequencyUnits',
@@ -1463,6 +1622,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_FREQ_HYST',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -1491,6 +1653,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_FREQ_THRESH_VOLTAGE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -1520,6 +1685,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_WIDTH_UNITS',
             'python_class_name': 'CIChannel',
             'python_data_type': 'TimeUnits3',
@@ -1549,6 +1717,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_WIDTH_STARTING_EDGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'Edge1',
@@ -1578,6 +1749,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_FIRST_EDGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'Edge1',
@@ -1607,6 +1781,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_SECOND_EDGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'Edge1',
@@ -1636,6 +1813,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PERIOD_STARTING_EDGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'Edge1',
@@ -1664,6 +1844,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ANG_ENCODER_PULSES_PER_REV',
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
@@ -1693,6 +1876,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_RVDT_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'AngleUnits1',
@@ -1721,6 +1907,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ANG_ENCODER_INITIAL_ANGLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -1749,6 +1938,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_Z_INDEX_VAL',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -1778,6 +1970,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_Z_INDEX_PHASE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'EncoderZIndexPhase1',
@@ -1806,6 +2001,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_Z_INDEX_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -1834,6 +2032,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_RVDT_SENSITIVITY',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -1863,6 +2064,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_LVDT_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'LengthUnits2',
@@ -1891,6 +2095,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_LIN_ENCODER_DIST_PER_PULSE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -1919,6 +2126,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_LIN_ENCODER_INITIAL_POS',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -1947,6 +2157,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_LVDT_SENSITIVITY',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -1976,6 +2189,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_RESISTANCE_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'ResistanceUnits1',
@@ -2005,6 +2221,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_STRAIN_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'StrainUnits1',
@@ -2034,6 +2253,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_STRAIN_GAGE_CFG',
             'python_class_name': 'AIChannel',
             'python_data_type': 'StrainGageBridgeType1',
@@ -2062,6 +2284,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_STRAIN_GAGE_GAGE_FACTOR',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -2090,6 +2315,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_STRAIN_GAGE_POISSON_RATIO',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -2118,6 +2346,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_RTD_A',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -2146,6 +2377,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_RTD_B',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -2174,6 +2408,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_RTD_C',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -2202,6 +2439,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_RTD_R0',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -2231,6 +2471,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_RTD_TYPE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'RTDType1',
@@ -2260,6 +2503,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_TEMP_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'TemperatureUnits1',
@@ -2288,6 +2534,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_THRMCPL_CJC_CHAN',
             'python_class_name': 'AIChannel',
             'python_data_type': 'Channel',
@@ -2327,6 +2576,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_THRMCPL_CJC_SRC',
             'python_class_name': 'AIChannel',
             'python_data_type': 'CJCSource1',
@@ -2355,6 +2607,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_THRMCPL_CJC_VAL',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -2384,6 +2639,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_THRMCPL_TYPE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'ThermocoupleType1',
@@ -2412,6 +2670,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_THRMSTR_R1',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -2441,6 +2702,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_GPS_SYNC_METHOD',
             'python_class_name': 'CIChannel',
             'python_data_type': 'GpsSignalType1',
@@ -2469,6 +2733,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_GPS_SYNC_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -2498,6 +2765,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_VOLTAGE_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'VoltageUnits1',
@@ -2527,6 +2797,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_TERM_CFG',
             'python_class_name': 'AIChannel',
             'python_data_type': 'InputTermCfg',
@@ -2556,6 +2829,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_OUTPUT_TYPE',
             'python_class_name': 'AOChannel',
             'python_data_type': 'AOOutputChannelType',
@@ -2585,6 +2861,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_CURRENT_UNITS',
             'python_class_name': 'AOChannel',
             'python_data_type': 'CurrentUnits1',
@@ -2613,6 +2892,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_INVERT_LINES',
             'python_class_name': 'DOChannel',
             'python_data_type': 'bool',
@@ -2642,6 +2924,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_OUTPUT_DRIVE_TYPE',
             'python_class_name': 'DOChannel',
             'python_data_type': 'DigitalDriveType',
@@ -2670,6 +2955,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_PULSE_HIGH_TICKS',
             'python_class_name': 'COChannel',
             'python_data_type': 'int',
@@ -2699,6 +2987,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_PULSE_IDLE_STATE',
             'python_class_name': 'COChannel',
             'python_data_type': 'Level1',
@@ -2727,6 +3018,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_PULSE_LOW_TICKS',
             'python_class_name': 'COChannel',
             'python_data_type': 'int',
@@ -2755,6 +3049,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_PULSE_DUTY_CYC',
             'python_class_name': 'COChannel',
             'python_data_type': 'float',
@@ -2783,6 +3080,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_PULSE_FREQ',
             'python_class_name': 'COChannel',
             'python_data_type': 'float',
@@ -2812,6 +3112,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_VOLTAGE_UNITS',
             'python_class_name': 'AOChannel',
             'python_data_type': 'VoltageUnits2',
@@ -2840,6 +3143,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_MAX',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -2868,6 +3174,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_MIN',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -2896,6 +3205,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_CUSTOM_SCALE_NAME',
             'python_class_name': 'AOChannel',
             'python_data_type': 'Scale',
@@ -2927,6 +3239,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_OUTPUT_IMPEDANCE',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -2956,6 +3271,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_SOUND_PRESSURE_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'SoundPressureUnits1',
@@ -2984,6 +3302,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_MICROPHONE_SENSITIVITY',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -3013,6 +3334,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_AUTO_ZERO_MODE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'AutoZeroType1',
@@ -3042,6 +3366,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_RESOLUTION_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'ResolutionType1',
@@ -3070,6 +3397,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_RESOLUTION',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -3098,6 +3428,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_MAX',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -3126,6 +3459,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_MIN',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -3154,6 +3490,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CUSTOM_SCALE_NAME',
             'python_class_name': 'AIChannel',
             'python_data_type': 'Scale',
@@ -3186,6 +3525,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_VOLTAGE_ACRMS_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'VoltageUnits1',
@@ -3215,6 +3557,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CURRENT_ACRMS_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'CurrentUnits1',
@@ -3243,6 +3588,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_NOM_RESISTANCE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -3271,6 +3619,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_INITIAL_VOLTAGE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -3299,6 +3650,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_LEAD_WIRE_RESISTANCE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -3327,6 +3681,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_BALANCE_COARSE_POT',
             'python_class_name': 'AIChannel',
             'python_data_type': 'int',
@@ -3356,6 +3713,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CURRENT_SHUNT_LOC',
             'python_class_name': 'AIChannel',
             'python_data_type': 'CurrentShuntResistorLocation1',
@@ -3384,6 +3744,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CURRENT_SHUNT_RESISTANCE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -3413,6 +3776,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_EXCIT_SRC',
             'python_class_name': 'AIChannel',
             'python_data_type': 'ExcitationSource',
@@ -3441,6 +3807,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_EXCIT_VAL',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -3470,6 +3839,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_EXCIT_VOLTAGE_OR_CURRENT',
             'python_class_name': 'AIChannel',
             'python_data_type': 'ExcitationVoltageOrCurrent',
@@ -3499,6 +3871,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_EXCIT_D_COR_AC',
             'python_class_name': 'AIChannel',
             'python_data_type': 'ExcitationDCorAC',
@@ -3527,6 +3902,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_EXCIT_USE_FOR_SCALING',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -3555,6 +3933,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_ATTEN',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -3583,6 +3964,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_LOWPASS_ENABLE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -3611,6 +3995,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_LOWPASS_CUTOFF_FREQ',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -3639,6 +4026,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_HIGHPASS_ENABLE',
             'python_data_type': 'bool',
             'python_description': 'Enables the filter.  Set to false to bypass the filter if supported.',
@@ -3666,6 +4056,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_HIGHPASS_CUTOFF_FREQ',
             'python_data_type': 'float',
             'python_description': 'The frequency corresponding to the -3dB cutoff of the filter in Hz.',
@@ -3694,6 +4087,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_HIGHPASS_TYPE',
             'python_data_type': 'FilterType1',
             'python_description': 'The type of filter.',
@@ -3721,6 +4117,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_HIGHPASS_ORDER',
             'python_data_type': 'int',
             'python_description': 'The filter order.',
@@ -3748,6 +4147,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BANDPASS_ENABLE',
             'python_data_type': 'bool',
             'python_description': 'Enables the filter.  Set to false to bypass the filter if supported.',
@@ -3775,6 +4177,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BANDPASS_CENTER_FREQ',
             'python_data_type': 'float',
             'python_description': 'The center frequency of the filter in Hz.',
@@ -3803,6 +4208,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BANDPASS_TYPE',
             'python_data_type': 'FilterType1',
             'python_description': 'The type of filter.',
@@ -3830,6 +4238,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BANDPASS_WIDTH',
             'python_data_type': 'float',
             'python_description': 'The 3dB width of the filter in Hz.',
@@ -3857,6 +4268,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_NOTCH_CENTER_FREQ',
             'python_data_type': 'float',
             'python_description': 'The center frequency of the filter in Hz.',
@@ -3885,6 +4299,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_NOTCH_TYPE',
             'python_data_type': 'FilterType1',
             'python_description': 'The type of filter.',
@@ -3912,6 +4329,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_NOTCH_WIDTH',
             'python_data_type': 'float',
             'python_description': 'The 3dB width of the filter in Hz.',
@@ -3939,6 +4359,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_RNG_HIGH',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -3967,6 +4390,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_RNG_LOW',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -3995,6 +4421,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_GAIN',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -4023,6 +4452,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_SAMP_AND_HOLD_ENABLE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -4052,6 +4484,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DATA_XFER_MECH',
             'python_class_name': 'AIChannel',
             'python_data_type': 'DataTransferMechanism',
@@ -4081,6 +4516,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_RESOLUTION_UNITS',
             'python_class_name': 'AOChannel',
             'python_data_type': 'ResolutionType1',
@@ -4109,6 +4547,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_RESOLUTION',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -4137,6 +4578,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_DAC_RNG_LOW',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -4165,6 +4609,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_DAC_RNG_HIGH',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -4193,6 +4640,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_DAC_REF_ALLOW_CONN_TO_GND',
             'python_class_name': 'AOChannel',
             'python_data_type': 'bool',
@@ -4221,6 +4671,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_DAC_REF_VAL',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -4249,6 +4702,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_USE_ONLY_ON_BRD_MEM',
             'python_class_name': 'AOChannel',
             'python_data_type': 'bool',
@@ -4278,6 +4734,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_DATA_XFER_REQ_COND',
             'python_class_name': 'AOChannel',
             'python_data_type': 'OutputDataTransferCondition',
@@ -4307,6 +4766,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CHAN_TYPE',
             'python_class_name': 'Channel',
             'python_data_type': 'ChannelType',
@@ -4336,6 +4798,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_RESISTANCE_CFG',
             'python_class_name': 'AIChannel',
             'python_data_type': 'ResistanceConfiguration',
@@ -4364,6 +4829,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_EXCIT_ACTUAL_VAL',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -4393,6 +4861,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_LOWPASS_SWITCH_CAP_CLK_SRC',
             'python_class_name': 'AIChannel',
             'python_data_type': 'SourceSelection',
@@ -4421,6 +4892,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_LOWPASS_SWITCH_CAP_EXT_CLK_FREQ',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -4449,6 +4923,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_LOWPASS_SWITCH_CAP_EXT_CLK_DIV',
             'python_class_name': 'AIChannel',
             'python_data_type': 'int',
@@ -4477,6 +4954,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_LOWPASS_SWITCH_CAP_OUT_CLK_DIV',
             'python_class_name': 'AIChannel',
             'python_data_type': 'int',
@@ -4506,6 +4986,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DATA_XFER_REQ_COND',
             'python_class_name': 'AIChannel',
             'python_data_type': 'InputDataTransferCondition',
@@ -4534,6 +5017,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_MEM_MAP_ENABLE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -4563,6 +5049,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_TERM_CFG',
             'python_class_name': 'AOChannel',
             'python_data_type': 'OutputTermCfg',
@@ -4591,6 +5080,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_MEM_MAP_ENABLE',
             'python_class_name': 'AOChannel',
             'python_data_type': 'bool',
@@ -4619,6 +5111,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DI_TRISTATE',
             'python_class_name': 'DIChannel',
             'python_data_type': 'bool',
@@ -4647,6 +5142,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_MAX',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -4675,6 +5173,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_MIN',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -4703,6 +5204,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_CUSTOM_SCALE_NAME',
             'python_class_name': 'CIChannel',
             'python_data_type': 'Scale',
@@ -4735,6 +5239,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_MEAS_TYPE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'CIMeasurementType',
@@ -4764,6 +5271,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FREQ_UNITS',
             'python_class_name': 'CIChannel',
             'python_data_type': 'FrequencyUnits3',
@@ -4792,6 +5302,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FREQ_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -4821,6 +5334,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PERIOD_UNITS',
             'python_class_name': 'CIChannel',
             'python_data_type': 'TimeUnits3',
@@ -4849,6 +5365,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PERIOD_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -4878,6 +5397,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ANG_ENCODER_UNITS',
             'python_class_name': 'CIChannel',
             'python_data_type': 'AngleUnits2',
@@ -4907,6 +5429,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_LIN_ENCODER_UNITS',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LengthUnits3',
@@ -4935,6 +5460,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_WIDTH_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -4964,6 +5492,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_UNITS',
             'python_class_name': 'CIChannel',
             'python_data_type': 'TimeUnits3',
@@ -4992,6 +5523,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_FIRST_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -5020,6 +5554,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_SECOND_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -5049,6 +5586,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_SEMI_PERIOD_UNITS',
             'python_class_name': 'CIChannel',
             'python_data_type': 'TimeUnits3',
@@ -5077,6 +5617,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_SEMI_PERIOD_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -5105,6 +5648,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_CTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -5133,6 +5679,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_CTR_TIMEBASE_MASTER_TIMEBASE_DIV',
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
@@ -5162,6 +5711,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_OUTPUT_TYPE',
             'python_class_name': 'COChannel',
             'python_data_type': 'COOutputType',
@@ -5190,6 +5742,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_PULSE_HIGH_TIME',
             'python_class_name': 'COChannel',
             'python_data_type': 'float',
@@ -5218,6 +5773,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_PULSE_LOW_TIME',
             'python_class_name': 'COChannel',
             'python_data_type': 'float',
@@ -5246,6 +5804,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_PULSE_TIME_INITIAL_DELAY',
             'python_class_name': 'COChannel',
             'python_data_type': 'float',
@@ -5274,6 +5835,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_CTR_TIMEBASE_RATE',
             'python_class_name': 'COChannel',
             'python_data_type': 'float',
@@ -5302,6 +5866,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_CTR_TIMEBASE_MASTER_TIMEBASE_DIV',
             'python_class_name': 'COChannel',
             'python_data_type': 'int',
@@ -5330,6 +5897,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -5358,6 +5928,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_THRMSTR_A',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -5386,6 +5959,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_THRMSTR_C',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -5414,6 +5990,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_THRMSTR_B',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -5443,6 +6022,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_AC_EXCIT_WIRE_MODE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'ACExcitWireMode',
@@ -5472,6 +6054,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_PULSE_FREQ_UNITS',
             'python_class_name': 'COChannel',
             'python_data_type': 'FrequencyUnits2',
@@ -5501,6 +6086,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_PULSE_TIME_UNITS',
             'python_class_name': 'COChannel',
             'python_data_type': 'TimeUnits2',
@@ -5529,6 +6117,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_PULSE_TERM',
             'python_class_name': 'COChannel',
             'python_data_type': 'str',
@@ -5557,6 +6148,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_TRISTATE',
             'python_class_name': 'DOChannel',
             'python_data_type': 'bool',
@@ -5585,6 +6179,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_BALANCE_FINE_POT',
             'python_class_name': 'AIChannel',
             'python_data_type': 'int',
@@ -5613,6 +6210,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'PHYSICAL_CHAN_NAME',
             'python_class_name': 'Channel',
             'python_data_type': 'PhysicalChannel',
@@ -5644,6 +6244,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_FORCE_READ_FROM_CHAN',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -5672,6 +6275,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_PULSE_DONE',
             'python_class_name': 'COChannel',
             'python_data_type': 'bool',
@@ -5700,6 +6306,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CHAN_DESCR',
             'python_class_name': 'Channel',
             'python_data_type': 'str',
@@ -5730,6 +6339,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PERIOD_MEAS_METH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'CounterFrequencyMethod',
@@ -5758,6 +6370,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PERIOD_MEAS_TIME',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -5786,6 +6401,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PERIOD_DIV',
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
@@ -5814,6 +6432,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DEV_SCALING_COEFF',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -5842,6 +6463,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_DEV_SCALING_COEFF',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -5870,6 +6494,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_NUM_POSSIBLY_INVALID_SAMPS',
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
@@ -5898,6 +6525,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_SHUNT_CAL_GAIN_ADJUST',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -5926,6 +6556,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DI_NUM_LINES',
             'python_class_name': 'DIChannel',
             'python_data_type': 'int',
@@ -5954,6 +6587,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_NUM_LINES',
             'python_class_name': 'DOChannel',
             'python_data_type': 'int',
@@ -5982,6 +6618,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_EXCIT_USE_MULTIPLEXED',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -6010,6 +6649,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_INPUT_SRC',
             'python_class_name': 'AIChannel',
             'python_data_type': 'str',
@@ -6039,6 +6681,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_LVDT_SENSITIVITY_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'LVDTSensitivityUnits1',
@@ -6068,6 +6713,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_RVDT_SENSITIVITY_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'RVDTSensitivityUnits1',
@@ -6097,6 +6745,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_ACCEL_SENSITIVITY_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'AccelSensitivityUnits1',
@@ -6125,6 +6776,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_A_INPUT_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -6153,6 +6807,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_B_INPUT_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -6181,6 +6838,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_Z_INPUT_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -6209,6 +6869,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_DUP_COUNT_PREVENT',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -6239,6 +6902,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_SHUNT_CAL_SELECT',
             'python_class_name': 'AIChannel',
             'python_data_type': 'ShuntCalSelect',
@@ -6267,6 +6933,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DI_DIG_FLTR_ENABLE',
             'python_class_name': 'DIChannel',
             'python_data_type': 'bool',
@@ -6295,6 +6964,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DI_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'DIChannel',
             'python_data_type': 'float',
@@ -6323,6 +6995,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_TEDS_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'str',
@@ -6351,6 +7026,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_DIR_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -6380,6 +7058,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_DECODING_TYPE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'EncoderType2',
@@ -6408,6 +7089,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FREQ_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -6436,6 +7120,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FREQ_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -6464,6 +7151,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FREQ_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -6492,6 +7182,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FREQ_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -6520,6 +7213,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FREQ_DIG_SYNC_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -6548,6 +7244,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PERIOD_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -6576,6 +7275,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PERIOD_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -6604,6 +7306,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PERIOD_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -6632,6 +7337,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PERIOD_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -6660,6 +7368,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PERIOD_DIG_SYNC_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -6688,6 +7399,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_DIR_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -6716,6 +7430,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_DIR_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -6744,6 +7461,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_DIR_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -6772,6 +7492,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_DIR_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -6800,6 +7523,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_DIR_DIG_SYNC_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -6828,6 +7554,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -6856,6 +7585,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -6884,6 +7616,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -6912,6 +7647,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -6940,6 +7678,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_DIG_SYNC_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -6968,6 +7709,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_A_INPUT_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -6996,6 +7740,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_A_INPUT_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -7024,6 +7771,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_A_INPUT_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -7052,6 +7802,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_A_INPUT_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -7080,6 +7833,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_A_INPUT_DIG_SYNC_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -7108,6 +7864,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_B_INPUT_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -7136,6 +7895,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_B_INPUT_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -7164,6 +7926,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_B_INPUT_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -7192,6 +7957,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_B_INPUT_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -7220,6 +7988,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_B_INPUT_DIG_SYNC_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -7248,6 +8019,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_Z_INPUT_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -7276,6 +8050,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_Z_INPUT_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -7304,6 +8081,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_Z_INPUT_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -7332,6 +8112,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_Z_INPUT_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -7360,6 +8143,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_Z_INPUT_DIG_SYNC_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -7388,6 +8174,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_WIDTH_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -7416,6 +8205,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_WIDTH_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -7444,6 +8236,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_WIDTH_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -7472,6 +8267,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_WIDTH_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -7500,6 +8298,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_WIDTH_DIG_SYNC_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -7528,6 +8329,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_FIRST_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -7556,6 +8360,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_FIRST_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -7584,6 +8391,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_FIRST_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -7612,6 +8422,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_FIRST_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -7640,6 +8453,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_FIRST_DIG_SYNC_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -7668,6 +8484,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_SECOND_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -7696,6 +8515,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_SECOND_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -7724,6 +8546,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_SECOND_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -7752,6 +8577,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_SECOND_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -7780,6 +8608,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_SECOND_DIG_SYNC_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -7808,6 +8639,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_SEMI_PERIOD_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -7836,6 +8670,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_SEMI_PERIOD_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -7864,6 +8701,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_SEMI_PERIOD_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -7892,6 +8732,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_SEMI_PERIOD_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -7920,6 +8763,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_SEMI_PERIOD_DIG_SYNC_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -7948,6 +8794,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PRESCALER',
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
@@ -7976,6 +8825,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_SOUND_PRESSURE_MAX_SOUND_PRESSURE_LVL',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -8005,6 +8857,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_IDLE_OUTPUT_BEHAVIOR',
             'python_class_name': 'AOChannel',
             'python_data_type': 'AOIdleOutputBehavior',
@@ -8033,6 +8888,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_ENHANCED_IMAGE_REJECTION_ENABLE',
             'python_class_name': 'AOChannel',
             'python_data_type': 'bool',
@@ -8061,6 +8919,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_DAC_REF_EXT_SRC',
             'python_class_name': 'AOChannel',
             'python_data_type': 'str',
@@ -8090,6 +8951,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_DAC_OFFSET_SRC',
             'python_class_name': 'AOChannel',
             'python_data_type': 'SourceSelection',
@@ -8118,6 +8982,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_DAC_OFFSET_EXT_SRC',
             'python_class_name': 'AOChannel',
             'python_data_type': 'str',
@@ -8146,6 +9013,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_DAC_OFFSET_VAL',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -8175,6 +9045,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DI_DATA_XFER_MECH',
             'python_class_name': 'DIChannel',
             'python_data_type': 'DataTransferMechanism',
@@ -8204,6 +9077,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DI_DATA_XFER_REQ_COND',
             'python_class_name': 'DIChannel',
             'python_data_type': 'InputDataTransferCondition',
@@ -8232,6 +9108,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_USE_ONLY_ON_BRD_MEM',
             'python_class_name': 'DOChannel',
             'python_data_type': 'bool',
@@ -8261,6 +9140,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_DATA_XFER_MECH',
             'python_class_name': 'DOChannel',
             'python_data_type': 'DataTransferMechanism',
@@ -8290,6 +9172,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_DATA_XFER_REQ_COND',
             'python_class_name': 'DOChannel',
             'python_data_type': 'OutputDataTransferCondition',
@@ -8318,6 +9203,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_PRESCALER',
             'python_class_name': 'COChannel',
             'python_data_type': 'int',
@@ -8346,6 +9234,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_CTR_TIMEBASE_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -8374,6 +9265,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_CTR_TIMEBASE_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -8402,6 +9296,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_CTR_TIMEBASE_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -8430,6 +9327,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_CTR_TIMEBASE_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -8458,6 +9358,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_CTR_TIMEBASE_DIG_SYNC_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -8486,6 +9389,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_CTR_TIMEBASE_DIG_FLTR_ENABLE',
             'python_class_name': 'COChannel',
             'python_data_type': 'bool',
@@ -8514,6 +9420,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_CTR_TIMEBASE_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'COChannel',
             'python_data_type': 'float',
@@ -8542,6 +9451,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_CTR_TIMEBASE_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'COChannel',
             'python_data_type': 'str',
@@ -8570,6 +9482,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_CTR_TIMEBASE_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'COChannel',
             'python_data_type': 'float',
@@ -8598,6 +9513,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_CTR_TIMEBASE_DIG_SYNC_ENABLE',
             'python_class_name': 'COChannel',
             'python_data_type': 'bool',
@@ -8626,6 +9544,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_ENHANCED_ALIAS_REJECTION_ENABLE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -8642,6 +9563,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CHAN_CAL_HAS_VALID_CAL_INFO',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -8658,6 +9582,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CHAN_CAL_ENABLE_CAL',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -8674,6 +9601,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CHAN_CAL_APPLY_CAL_IF_EXP',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -8691,6 +9621,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CHAN_CAL_SCALE_TYPE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'ScaleType3',
@@ -8707,6 +9640,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CHAN_CAL_TABLE_PRE_SCALED_VALS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -8723,6 +9659,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CHAN_CAL_TABLE_SCALED_VALS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -8739,6 +9678,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CHAN_CAL_POLY_FORWARD_COEFF',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -8755,6 +9697,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CHAN_CAL_POLY_REVERSE_COEFF',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -8771,6 +9716,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CHAN_CAL_VERIF_REF_VALS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -8787,6 +9735,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CHAN_CAL_VERIF_ACQ_VALS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -8803,6 +9754,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CHAN_CAL_OPERATOR_NAME',
             'python_class_name': 'AIChannel',
             'python_data_type': 'str',
@@ -8819,6 +9773,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CHAN_CAL_DESC',
             'python_class_name': 'AIChannel',
             'python_data_type': 'str',
@@ -8848,6 +9805,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TIMESTAMP_UNITS',
             'python_class_name': 'CIChannel',
             'python_data_type': 'TimeUnits',
@@ -8876,6 +9836,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TIMESTAMP_INITIAL_SECONDS',
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
@@ -8905,6 +9868,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_RAW_DATA_COMPRESSION_TYPE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'RawDataCompressionType',
@@ -8933,6 +9899,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_LOSSY_LSB_REMOVAL_COMPRESSED_SAMP_SIZE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'int',
@@ -8961,6 +9930,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_RAW_SAMP_SIZE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'int',
@@ -8990,6 +9962,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_SEMI_PERIOD_STARTING_EDGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'Edge1',
@@ -9018,6 +9993,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_RDY_FOR_NEW_VAL',
             'python_class_name': 'COChannel',
             'python_data_type': 'bool',
@@ -9046,6 +10024,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CHAN_IS_GLOBAL',
             'python_class_name': 'Channel',
             'python_data_type': 'bool',
@@ -9075,6 +10056,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DATA_XFER_CUSTOM_THRESHOLD',
             'python_class_name': 'AIChannel',
             'python_data_type': 'int',
@@ -9104,6 +10088,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DI_ACQUIRE_ON',
             'python_class_name': 'DIChannel',
             'python_data_type': 'SampleClockActiveOrInactiveEdgeSelection',
@@ -9133,6 +10120,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_LINE_STATES_PAUSED_STATE',
             'python_class_name': 'DOChannel',
             'python_data_type': 'DigitalLineState',
@@ -9162,6 +10152,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_LINE_STATES_DONE_STATE',
             'python_class_name': 'DOChannel',
             'python_data_type': 'DigitalLineState',
@@ -9191,6 +10184,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_GENERATE_ON',
             'python_class_name': 'DOChannel',
             'python_data_type': 'SampleClockActiveOrInactiveEdgeSelection',
@@ -9219,6 +10215,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DI_MEM_MAP_ENABLE',
             'python_class_name': 'DIChannel',
             'python_data_type': 'bool',
@@ -9247,6 +10246,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_MEM_MAP_ENABLE',
             'python_class_name': 'DOChannel',
             'python_data_type': 'bool',
@@ -9276,6 +10278,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DI_LOGIC_FAMILY',
             'python_class_name': 'DIChannel',
             'python_data_type': 'LogicFamily',
@@ -9305,6 +10310,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_LOGIC_FAMILY',
             'python_class_name': 'DOChannel',
             'python_data_type': 'LogicFamily',
@@ -9334,6 +10342,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_LINE_STATES_START_STATE',
             'python_class_name': 'DOChannel',
             'python_data_type': 'DigitalLineState',
@@ -9362,6 +10373,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_IS_TEDS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -9391,6 +10405,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_VOLTAGE_DB_REF',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -9419,6 +10436,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_SOUND_PRESSURE_DB_REF',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -9447,6 +10467,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_ACCEL_DB_REF',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -9476,6 +10499,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_THRMCPL_SCALE_TYPE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'ScaleType2',
@@ -9505,6 +10531,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_CONSTRAINED_GEN_MODE',
             'python_class_name': 'COChannel',
             'python_data_type': 'ConstrainedGenMode',
@@ -9534,6 +10563,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_ADC_TIMING_MODE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'ADCTimingMode',
@@ -9563,6 +10595,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_FUNC_GEN_TYPE',
             'python_class_name': 'AOChannel',
             'python_data_type': 'FuncGenType',
@@ -9591,6 +10626,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_FUNC_GEN_FREQ',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -9619,6 +10657,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_FUNC_GEN_AMPLITUDE',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -9647,6 +10688,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_FUNC_GEN_OFFSET',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -9675,6 +10719,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_FUNC_GEN_SQUARE_DUTY_CYCLE',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -9703,6 +10750,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_VOLTAGE_CURRENT_LIMIT',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -9732,6 +10782,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_FUNC_GEN_MODULATION_TYPE',
             'python_class_name': 'AOChannel',
             'python_data_type': 'ModulationType',
@@ -9760,6 +10813,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_FUNC_GEN_FM_DEVIATION',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -9788,6 +10844,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_OVERCURRENT_LIMIT',
             'python_class_name': 'DOChannel',
             'python_data_type': 'float',
@@ -9816,6 +10875,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_OVERCURRENT_AUTO_REENABLE',
             'python_class_name': 'DOChannel',
             'python_data_type': 'bool',
@@ -9844,6 +10906,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_OVERCURRENT_REENABLE_PERIOD',
             'python_class_name': 'DOChannel',
             'python_data_type': 'float',
@@ -9872,6 +10937,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_PROBE_ATTEN',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -9900,6 +10968,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DC_OFFSET',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -9928,6 +10999,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_USB_XFER_REQ_SIZE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'int',
@@ -9956,6 +11030,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_USB_XFER_REQ_SIZE',
             'python_class_name': 'AOChannel',
             'python_data_type': 'int',
@@ -9984,6 +11061,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DI_USB_XFER_REQ_SIZE',
             'python_class_name': 'DIChannel',
             'python_data_type': 'int',
@@ -10012,6 +11092,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_USB_XFER_REQ_SIZE',
             'python_class_name': 'DOChannel',
             'python_data_type': 'int',
@@ -10040,6 +11123,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_USB_XFER_REQ_SIZE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
@@ -10068,6 +11154,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_USB_XFER_REQ_SIZE',
             'python_class_name': 'COChannel',
             'python_data_type': 'int',
@@ -10096,6 +11185,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_EDDY_CURRENT_PROX_PROBE_SENSITIVITY',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -10126,6 +11218,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_EDDY_CURRENT_PROX_PROBE_SENSITIVITY_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'EddyCurrentProxProbeSensitivityUnits',
@@ -10156,6 +11251,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_EDDY_CURRENT_PROX_PROBE_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'LengthUnits2',
@@ -10185,6 +11283,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_ENABLE_INITIAL_DELAY_ON_RETRIGGER',
             'python_class_name': 'COChannel',
             'python_data_type': 'bool',
@@ -10213,6 +11314,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_USE_ONLY_ON_BRD_MEM',
             'python_class_name': 'COChannel',
             'python_data_type': 'bool',
@@ -10242,6 +11346,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_DATA_XFER_MECH',
             'python_class_name': 'COChannel',
             'python_data_type': 'DataTransferMechanism',
@@ -10271,6 +11378,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_DATA_XFER_REQ_COND',
             'python_class_name': 'COChannel',
             'python_data_type': 'OutputDataTransferCondition',
@@ -10299,6 +11409,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FREQ_ENABLE_AVERAGING',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -10327,6 +11440,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PERIOD_ENABLE_AVERAGING',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -10355,6 +11471,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_MEM_MAP_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -10383,6 +11502,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_MEM_MAP_ENABLE',
             'python_class_name': 'COChannel',
             'python_data_type': 'bool',
@@ -10411,6 +11533,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DI_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'DIChannel',
             'python_data_type': 'str',
@@ -10439,6 +11564,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DI_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'DIChannel',
             'python_data_type': 'float',
@@ -10467,6 +11595,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DI_DIG_SYNC_ENABLE',
             'python_class_name': 'DIChannel',
             'python_data_type': 'bool',
@@ -10496,6 +11627,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_DATA_XFER_REQ_COND',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputDataTransferCondition',
@@ -10524,6 +11658,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DI_DIG_FLTR_ENABLE_BUS_MODE',
             'python_class_name': 'DIChannel',
             'python_data_type': 'bool',
@@ -10552,6 +11689,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_FREQ_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -10581,6 +11721,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_FREQ_START_EDGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'Edge1',
@@ -10610,6 +11753,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_FREQ_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -10638,6 +11784,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_FREQ_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -10666,6 +11815,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_FREQ_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -10694,6 +11846,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_FREQ_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -10722,6 +11877,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_FREQ_DIG_SYNC_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -10751,6 +11909,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_FREQ_UNITS',
             'python_class_name': 'CIChannel',
             'python_data_type': 'FrequencyUnits2',
@@ -10779,6 +11940,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TIME_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -10808,6 +11972,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TIME_START_EDGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'Edge1',
@@ -10837,6 +12004,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TIME_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -10865,6 +12035,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TIME_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -10893,6 +12066,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TIME_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -10921,6 +12097,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TIME_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -10949,6 +12128,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TIME_DIG_SYNC_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -10978,6 +12160,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TIME_UNITS',
             'python_class_name': 'CIChannel',
             'python_data_type': 'TimeUnits2',
@@ -11006,6 +12191,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TICKS_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -11035,6 +12223,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TICKS_START_EDGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'Edge1',
@@ -11064,6 +12255,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TICKS_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -11092,6 +12286,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TICKS_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -11120,6 +12317,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TICKS_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -11148,6 +12348,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TICKS_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -11176,6 +12379,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TICKS_DIG_SYNC_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -11204,6 +12410,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_ADC_CUSTOM_TIMING_MODE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'int',
@@ -11232,6 +12441,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_OPEN_THRMCPL_DETECT_ENABLE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -11261,6 +12473,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_FORCE_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'ForceUnits',
@@ -11290,6 +12505,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_PRESSURE_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'PressureUnits',
@@ -11319,6 +12537,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_TORQUE_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'TorqueUnits',
@@ -11347,6 +12568,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_SHUNT_CAL_SHUNT_CAL_A_RESISTANCE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -11375,6 +12599,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_SHUNT_CAL_SHUNT_CAL_A_ACTUAL_RESISTANCE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -11403,6 +12630,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_SHUNT_CAL_SHUNT_CAL_B_RESISTANCE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -11431,6 +12661,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_SHUNT_CAL_SHUNT_CAL_B_ACTUAL_RESISTANCE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -11459,6 +12692,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_FORCE_IEPE_SENSOR_SENSITIVITY',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -11488,6 +12724,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_FORCE_IEPE_SENSOR_SENSITIVITY_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'ForceIEPESensorSensitivityUnits',
@@ -11516,6 +12755,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_INITIAL_RATIO',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -11545,6 +12787,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_ELECTRICAL_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'BridgeElectricalUnits',
@@ -11574,6 +12819,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_PHYSICAL_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'BridgePhysicalUnits',
@@ -11603,6 +12851,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_SCALE_TYPE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'ScaleType4',
@@ -11631,6 +12882,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_TWO_POINT_LIN_FIRST_ELECTRICAL_VAL',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -11659,6 +12913,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_TWO_POINT_LIN_FIRST_PHYSICAL_VAL',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -11687,6 +12944,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_TWO_POINT_LIN_SECOND_ELECTRICAL_VAL',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -11715,6 +12975,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_TWO_POINT_LIN_SECOND_PHYSICAL_VAL',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -11743,6 +13006,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_TABLE_ELECTRICAL_VALS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -11771,6 +13037,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_TABLE_PHYSICAL_VALS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -11799,6 +13068,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_POLY_FORWARD_COEFF',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -11827,6 +13099,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_POLY_REVERSE_COEFF',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -11856,6 +13131,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'BridgeUnits',
@@ -11884,6 +13162,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_RESET_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -11912,6 +13193,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_RESET_RESET_COUNT',
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
@@ -11941,6 +13225,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_RESET_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -11970,6 +13257,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_RESET_ACTIVE_EDGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'Edge1',
@@ -11998,6 +13288,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_RESET_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -12026,6 +13319,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_RESET_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -12054,6 +13350,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_RESET_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -12082,6 +13381,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_RESET_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -12110,6 +13412,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_RESET_DIG_SYNC_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -12138,6 +13443,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_THRMCPL_LEAD_OFFSET_VOLTAGE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -12166,6 +13474,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_REMOVE_FILTER_DELAY',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -12194,6 +13505,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_FILTER_DELAY',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -12222,6 +13536,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_AVERAGING_WIN_SIZE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'int',
@@ -12251,6 +13568,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_VELOCITY_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'VelocityUnits',
@@ -12279,6 +13599,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_VELOCITY_IEPE_SENSOR_DB_REF',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -12307,6 +13630,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_VELOCITY_IEPE_SENSOR_SENSITIVITY',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -12336,6 +13662,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_VELOCITY_IEPE_SENSOR_SENSITIVITY_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'VelocityIEPESensorSensitivityUnits',
@@ -12364,6 +13693,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_STRAIN_GAGE_FORCE_READ_FROM_CHAN',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -12393,6 +13725,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_ROSETTE_STRAIN_GAGE_STRAIN_CHANS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'str',
@@ -12421,6 +13756,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_ROSETTE_STRAIN_GAGE_ORIENTATION',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -12451,6 +13789,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_ROSETTE_STRAIN_GAGE_ROSETTE_MEAS_TYPE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'StrainGageRosetteMeasurementType',
@@ -12480,6 +13821,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_ROSETTE_STRAIN_GAGE_ROSETTE_TYPE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'StrainGageRosetteType',
@@ -12508,6 +13852,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_USB_XFER_REQ_COUNT',
             'python_class_name': 'AIChannel',
             'python_data_type': 'int',
@@ -12536,6 +13883,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_USB_XFER_REQ_COUNT',
             'python_class_name': 'AOChannel',
             'python_data_type': 'int',
@@ -12564,6 +13914,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DI_USB_XFER_REQ_COUNT',
             'python_class_name': 'DIChannel',
             'python_data_type': 'int',
@@ -12592,6 +13945,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'DO_USB_XFER_REQ_COUNT',
             'python_class_name': 'DOChannel',
             'python_data_type': 'int',
@@ -12620,6 +13976,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_USB_XFER_REQ_COUNT',
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
@@ -12648,6 +14007,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CO_USB_XFER_REQ_COUNT',
             'python_class_name': 'COChannel',
             'python_data_type': 'int',
@@ -12676,6 +14038,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TIMESTAMP_TERM',
             'python_data_type': 'str',
             'python_description': 'Specifies the input terminal of the signal to measure.',
@@ -12704,6 +14069,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TIMESTAMP_EDGE',
             'python_data_type': 'Edge1',
             'python_description': 'Indicates the edge of the input terminal to timestamp in a streaming task.',
@@ -12732,6 +14100,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TIMESTAMP_TIMESCALE',
             'python_data_type': 'Timescale',
             'python_description': 'Indicates the timescale that will be used when returning time to a user.',
@@ -12747,6 +14118,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'NAV_CUSTOM_SCALE_NAME',
             'python_data_type': 'Scale',
             'python_description': 'Specifies the name of a custom scale for the channel.',
@@ -12765,6 +14139,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'NAV_MEAS_TYPE',
             'python_data_type': 'NavMeasurementType',
             'python_description': 'Indicates the measurement to take with the channel.',
@@ -12781,6 +14158,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'NAV_ALT_UNITS',
             'python_data_type': 'LengthUnits4',
             'python_description': 'Specifies the units to use to return altitude measurements from the channel.',
@@ -12797,6 +14177,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'NAV_LAT_UNITS',
             'python_data_type': 'AngleUnits3',
             'python_description': 'Specifies the units to use to return latitude measurements from the channel.',
@@ -12813,6 +14196,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'NAV_LONG_UNITS',
             'python_data_type': 'AngleUnits3',
             'python_description': 'Specifies the units to use to return longitude measurements from the channel.',
@@ -12829,6 +14215,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'NAV_SPEED_OVER_GROUND_UNITS',
             'python_data_type': 'VelocityUnits2',
             'python_description': 'Specifies the units to use to return speed over ground measurements from the channel.',
@@ -12845,6 +14234,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'NAV_TRACK_UNITS',
             'python_data_type': 'AngleUnits1',
             'python_description': 'Specifies the units to use to return track measurements from the channel.',
@@ -12861,6 +14253,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'NAV_VERT_VELOCITY_UNITS',
             'python_data_type': 'VelocityUnits2',
             'python_description': 'Specifies the units to use to return vertical velocity measurements from the channel.',
@@ -12877,6 +14272,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'NAV_TIMESTAMP_UNITS',
             'python_data_type': 'TimeUnits',
             'python_description': 'Specifies the units to use to return timestamp measurements.',
@@ -12893,6 +14291,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'NAV_TIMESTAMP_TIMESCALE',
             'python_data_type': 'Timescale',
             'python_description': 'Indicates the timescale that will be used when returning time to a user.',
@@ -12921,6 +14322,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_FILTER_DELAY_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'DigitalWidthUnits4',
@@ -12949,6 +14353,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_FILTER_DELAY_ADJUSTMENT',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -12977,6 +14384,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_FILTER_DELAY_ADJUSTMENT',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -13005,6 +14415,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_FILTER_DELAY',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -13034,6 +14447,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_FILTER_DELAY_UNITS',
             'python_class_name': 'AOChannel',
             'python_data_type': 'DigitalWidthUnits4',
@@ -13062,6 +14478,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_DUTY_CYCLE_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -13090,6 +14509,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_DUTY_CYCLE_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -13118,6 +14540,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_DUTY_CYCLE_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -13146,6 +14571,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_DUTY_CYCLE_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -13174,6 +14602,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_DUTY_CYCLE_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -13203,6 +14634,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_DUTY_CYCLE_STARTING_EDGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'Edge1',
@@ -13232,6 +14666,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_SAMP_CLK_OVERRUN_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'SampClkOverrunBehavior',
@@ -13260,6 +14697,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_SAMP_CLK_OVERRUN_SENTINEL_VAL',
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
@@ -13288,6 +14728,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_MAX_MEAS_PERIOD',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -13317,6 +14760,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FREQ_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -13346,6 +14792,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FREQ_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -13375,6 +14824,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PERIOD_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -13404,6 +14856,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PERIOD_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -13433,6 +14888,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -13462,6 +14920,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -13491,6 +14952,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_DIR_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -13520,6 +14984,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_DIR_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -13549,6 +15016,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_RESET_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -13578,6 +15048,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_RESET_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -13607,6 +15080,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_DUTY_CYCLE_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -13636,6 +15112,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_DUTY_CYCLE_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -13665,6 +15144,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_A_INPUT_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -13694,6 +15176,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_A_INPUT_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -13723,6 +15208,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_B_INPUT_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -13752,6 +15240,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_B_INPUT_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -13781,6 +15272,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_Z_INPUT_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -13810,6 +15304,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_ENCODER_Z_INPUT_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -13839,6 +15336,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_WIDTH_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -13868,6 +15368,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_WIDTH_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -13897,6 +15400,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_FIRST_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -13926,6 +15432,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_FIRST_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -13955,6 +15464,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_SECOND_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -13984,6 +15496,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_TWO_EDGE_SEP_SECOND_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -14013,6 +15528,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_SEMI_PERIOD_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -14042,6 +15560,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_SEMI_PERIOD_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -14071,6 +15592,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_FREQ_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -14100,6 +15624,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_FREQ_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -14129,6 +15656,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TIME_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -14158,6 +15688,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TIME_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -14187,6 +15720,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TICKS_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -14216,6 +15752,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PULSE_TICKS_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -14244,6 +15783,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_THRESH_VOLTAGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -14273,6 +15815,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_EXCIT_IDLE_OUTPUT_BEHAVIOR',
             'python_class_name': 'AIChannel',
             'python_data_type': 'ExcitationIdleOutputBehavior',
@@ -14301,6 +15846,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DIG_FLTR_ENABLE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -14330,6 +15878,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DIG_FLTR_TYPE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'FilterType2',
@@ -14359,6 +15910,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DIG_FLTR_RESPONSE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'FilterResponse',
@@ -14387,6 +15941,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DIG_FLTR_ORDER',
             'python_class_name': 'AIChannel',
             'python_data_type': 'int',
@@ -14415,6 +15972,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DIG_FLTR_LOWPASS_CUTOFF_FREQ',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -14443,6 +16003,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DIG_FLTR_HIGHPASS_CUTOFF_FREQ',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -14471,6 +16034,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DIG_FLTR_BANDPASS_CENTER_FREQ',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -14499,6 +16065,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DIG_FLTR_BANDPASS_WIDTH',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -14527,6 +16096,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DIG_FLTR_NOTCH_CENTER_FREQ',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -14555,6 +16127,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DIG_FLTR_NOTCH_WIDTH',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -14583,6 +16158,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DIG_FLTR_COEFF',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -14612,6 +16190,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_SHUNT_CAL_SHUNT_CAL_A_SRC',
             'python_class_name': 'AIChannel',
             'python_data_type': 'BridgeShuntCalSource',
@@ -14641,6 +16222,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_ANG_ENCODER_UNITS',
             'python_class_name': 'CIChannel',
             'python_data_type': 'AngularVelocityUnits',
@@ -14669,6 +16253,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_ANG_ENCODER_PULSES_PER_REV',
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
@@ -14698,6 +16285,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_LIN_ENCODER_UNITS',
             'python_class_name': 'CIChannel',
             'python_data_type': 'VelocityUnits',
@@ -14726,6 +16316,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_LIN_ENCODER_DIST_PER_PULSE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -14755,6 +16348,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_ENCODER_DECODING_TYPE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'EncoderType2',
@@ -14783,6 +16379,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_ENCODER_A_INPUT_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -14813,6 +16412,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_ENCODER_A_INPUT_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -14843,6 +16445,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_ENCODER_A_INPUT_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -14872,6 +16477,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_ENCODER_A_INPUT_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -14901,6 +16509,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_ENCODER_A_INPUT_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -14930,6 +16541,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_ENCODER_A_INPUT_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -14959,6 +16573,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_ENCODER_A_INPUT_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -14988,6 +16605,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_ENCODER_B_INPUT_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -15018,6 +16638,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_ENCODER_B_INPUT_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -15048,6 +16671,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_ENCODER_B_INPUT_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -15077,6 +16703,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_ENCODER_B_INPUT_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -15106,6 +16735,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_ENCODER_B_INPUT_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -15135,6 +16767,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_ENCODER_B_INPUT_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -15164,6 +16799,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_ENCODER_B_INPUT_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -15193,6 +16831,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_MEAS_TIME',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -15221,6 +16862,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_VELOCITY_DIV',
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
@@ -15249,6 +16893,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_GATE_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -15277,6 +16924,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_GATE_TERM',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -15306,6 +16956,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_GATE_TERM_CFG',
             'python_class_name': 'CIChannel',
             'python_data_type': 'InputTermCfg2',
@@ -15335,6 +16988,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_GATE_LOGIC_LVL_BEHAVIOR',
             'python_class_name': 'CIChannel',
             'python_data_type': 'LogicLvlBehavior',
@@ -15363,6 +17019,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_GATE_DIG_FLTR_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -15391,6 +17050,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_GATE_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -15419,6 +17081,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_GATE_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'CIChannel',
             'python_data_type': 'str',
@@ -15447,6 +17112,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_GATE_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -15476,6 +17144,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_GATE_WHEN',
             'python_class_name': 'CIChannel',
             'python_data_type': 'Level1',
@@ -15505,6 +17176,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_BRIDGE_SHUNT_CAL_SHUNT_CAL_B_SRC',
             'python_class_name': 'AIChannel',
             'python_data_type': 'BridgeShuntCalSource',
@@ -15534,6 +17208,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_EXCIT_SENSE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'Sense',
@@ -15562,6 +17239,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_OPEN_CHAN_DETECT_ENABLE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -15591,6 +17271,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CHARGE_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'ChargeUnits',
@@ -15619,6 +17302,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_ACCEL_CHARGE_SENSITIVITY',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -15648,6 +17334,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_ACCEL_CHARGE_SENSITIVITY_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'AccelChargeSensitivityUnits',
@@ -15676,6 +17365,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_ACCEL_4_WIRE_DC_VOLTAGE_SENSITIVITY',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -15705,6 +17397,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_ACCEL_4_WIRE_DC_VOLTAGE_SENSITIVITY_UNITS',
             'python_class_name': 'AIChannel',
             'python_data_type': 'AccelSensitivityUnits1',
@@ -15733,6 +17428,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_DATA_XFER_MAX_RATE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -15762,6 +17460,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CHAN_SYNC_UNLOCK_BEHAVIOR',
             'python_class_name': 'Channel',
             'python_data_type': 'SyncUnlockBehavior',
@@ -15791,6 +17492,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_CHOP_ENABLE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -15819,6 +17523,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_SENSOR_POWER_VOLTAGE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -15848,6 +17555,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_SENSOR_POWER_CFG',
             'python_class_name': 'AIChannel',
             'python_data_type': 'SensorPowerCfg',
@@ -15877,6 +17587,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_SENSOR_POWER_TYPE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'SensorPowerType',
@@ -15905,6 +17618,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_FILTER_ENABLE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -15933,6 +17649,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_FILTER_FREQ',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -15962,6 +17681,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_FILTER_RESPONSE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'FilterResponse1',
@@ -15990,6 +17712,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_FILTER_ORDER',
             'python_class_name': 'AIChannel',
             'python_data_type': 'int',
@@ -16018,6 +17743,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_INPUT_LIMITS_FAULT_DETECT_UPPER_LIMIT',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -16046,6 +17774,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_INPUT_LIMITS_FAULT_DETECT_LOWER_LIMIT',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -16074,6 +17805,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_INPUT_LIMITS_FAULT_DETECT_ENABLE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -16102,6 +17836,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_POWER_SUPPLY_FAULT_DETECT_ENABLE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -16130,6 +17867,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AI_OVERCURRENT_DETECT_ENABLE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -16158,6 +17898,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FREQ_THRESH_VOLTAGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -16186,6 +17929,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FREQ_HYST',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -16214,6 +17960,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PERIOD_THRESH_VOLTAGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -16242,6 +17991,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_PERIOD_HYST',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -16270,6 +18022,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_THRESH_VOLTAGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -16298,6 +18053,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_HYST',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -16326,6 +18084,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_DIR_THRESH_VOLTAGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -16354,6 +18115,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_DIR_HYST',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -16382,6 +18146,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_RESET_THRESH_VOLTAGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -16410,6 +18177,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_COUNT_RESET_HYST',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -16438,6 +18208,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_GATE_THRESH_VOLTAGE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -16466,6 +18239,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_COUNT_EDGES_GATE_HYST',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -16494,6 +18270,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FILTER_ENABLE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'bool',
@@ -16522,6 +18301,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FILTER_FREQ',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -16551,6 +18333,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FILTER_RESPONSE',
             'python_class_name': 'CIChannel',
             'python_data_type': 'FilterResponse1',
@@ -16579,6 +18364,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FILTER_ORDER',
             'python_class_name': 'CIChannel',
             'python_data_type': 'int',
@@ -16607,6 +18395,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FILTER_DELAY',
             'python_class_name': 'CIChannel',
             'python_data_type': 'float',
@@ -16636,6 +18427,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'CI_FILTER_DELAY_UNITS',
             'python_class_name': 'CIChannel',
             'python_data_type': 'DigitalWidthUnits4',
@@ -16664,6 +18458,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_FUNC_GEN_START_PHASE',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -16692,6 +18489,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'AO_COMMON_MODE_OFFSET',
             'python_class_name': 'AOChannel',
             'python_data_type': 'float',
@@ -16720,6 +18520,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'PWR_VOLTAGE_SETPOINT',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -16748,6 +18551,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'PWR_CURRENT_SETPOINT',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -16776,6 +18582,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'PWR_OUTPUT_ENABLE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'bool',
@@ -16805,6 +18614,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'PWR_OUTPUT_STATE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'PowerOutputState',
@@ -16834,6 +18646,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'PWR_IDLE_OUTPUT_BEHAVIOR',
             'python_class_name': 'AIChannel',
             'python_data_type': 'PowerIdleOutputBehavior',
@@ -16862,6 +18677,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'PWR_VOLTAGE_DEV_SCALING_COEFF',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -16890,6 +18708,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'PWR_CURRENT_DEV_SCALING_COEFF',
             'python_class_name': 'AIChannel',
             'python_data_type': 'float',
@@ -16919,6 +18740,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Channel'
+            ],
             'name': 'PWR_REMOTE_SENSE',
             'python_class_name': 'AIChannel',
             'python_data_type': 'Sense',
@@ -16944,6 +18768,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'PRODUCT_TYPE',
             'python_class_name': 'Device',
             'python_data_type': 'str',
@@ -16967,6 +18794,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'SERIAL_NUM',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -16990,6 +18820,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'IS_SIMULATED',
             'python_class_name': 'Device',
             'python_data_type': 'bool',
@@ -17013,6 +18846,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'PRODUCT_NUM',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -17036,6 +18872,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': True,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_PHYSICAL_CHANS',
             'python_class_name': 'Device',
             'python_data_type': 'PhysicalChannel',
@@ -17061,6 +18900,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': True,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AO_PHYSICAL_CHANS',
             'python_class_name': 'Device',
             'python_data_type': 'PhysicalChannel',
@@ -17086,6 +18928,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': True,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'DI_LINES',
             'python_class_name': 'Device',
             'python_data_type': 'PhysicalChannel',
@@ -17111,6 +18956,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': True,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'DI_PORTS',
             'python_class_name': 'Device',
             'python_data_type': 'PhysicalChannel',
@@ -17136,6 +18984,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': True,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'DO_LINES',
             'python_class_name': 'Device',
             'python_data_type': 'PhysicalChannel',
@@ -17161,6 +19012,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': True,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'DO_PORTS',
             'python_class_name': 'Device',
             'python_data_type': 'PhysicalChannel',
@@ -17186,6 +19040,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': True,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CI_PHYSICAL_CHANS',
             'python_class_name': 'Device',
             'python_data_type': 'PhysicalChannel',
@@ -17211,6 +19068,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': True,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CO_PHYSICAL_CHANS',
             'python_class_name': 'Device',
             'python_data_type': 'PhysicalChannel',
@@ -17237,6 +19097,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'BUS_TYPE',
             'python_class_name': 'Device',
             'python_data_type': 'BusType',
@@ -17260,6 +19123,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'PCI_BUS_NUM',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -17283,6 +19149,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'PCI_DEV_NUM',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -17306,6 +19175,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'PXI_CHASSIS_NUM',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -17329,6 +19201,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'PXI_SLOT_NUM',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -17352,6 +19227,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NUM_DMA_CHANS',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -17375,6 +19253,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'ANLG_TRIG_SUPPORTED',
             'python_class_name': 'Device',
             'python_data_type': 'bool',
@@ -17398,6 +19279,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'DIG_TRIG_SUPPORTED',
             'python_class_name': 'Device',
             'python_data_type': 'bool',
@@ -17423,6 +19307,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_TRIG_USAGE',
             'python_class_name': 'Device',
             'python_data_type': 'TriggerUsage',
@@ -17448,6 +19335,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AO_TRIG_USAGE',
             'python_class_name': 'Device',
             'python_data_type': 'TriggerUsage',
@@ -17473,6 +19363,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'DI_TRIG_USAGE',
             'python_class_name': 'Device',
             'python_data_type': 'TriggerUsage',
@@ -17498,6 +19391,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'DO_TRIG_USAGE',
             'python_class_name': 'Device',
             'python_data_type': 'TriggerUsage',
@@ -17523,6 +19419,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CI_TRIG_USAGE',
             'python_class_name': 'Device',
             'python_data_type': 'TriggerUsage',
@@ -17548,6 +19447,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CO_TRIG_USAGE',
             'python_class_name': 'Device',
             'python_data_type': 'TriggerUsage',
@@ -17571,6 +19473,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_MAX_SINGLE_CHAN_RATE',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -17594,6 +19499,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_MAX_MULTI_CHAN_RATE',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -17617,6 +19525,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_MIN_RATE',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -17640,6 +19551,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_SIMULTANEOUS_SAMPLING_SUPPORTED',
             'python_class_name': 'Device',
             'python_data_type': 'bool',
@@ -17663,6 +19577,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_VOLTAGE_RNGS',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -17686,6 +19603,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_CURRENT_RNGS',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -17709,6 +19629,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_FREQ_RNGS',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -17732,6 +19655,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_GAINS',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -17757,6 +19683,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_COUPLINGS',
             'python_class_name': 'Device',
             'python_data_type': 'Coupling1',
@@ -17780,6 +19709,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_LOWPASS_CUTOFF_FREQ_DISCRETE_VALS',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -17803,6 +19735,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AO_SAMP_CLK_SUPPORTED',
             'python_class_name': 'Device',
             'python_data_type': 'bool',
@@ -17826,6 +19761,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AO_MAX_RATE',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -17849,6 +19787,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AO_MIN_RATE',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -17872,6 +19813,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'DI_MAX_RATE',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -17895,6 +19839,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'DO_MAX_RATE',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -17918,6 +19865,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AO_VOLTAGE_RNGS',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -17941,6 +19891,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AO_CURRENT_RNGS',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -17964,6 +19917,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AO_GAINS',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -17987,6 +19943,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CI_SAMP_CLK_SUPPORTED',
             'python_class_name': 'Device',
             'python_data_type': 'bool',
@@ -18010,6 +19969,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CI_MAX_SIZE',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -18033,6 +19995,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CI_MAX_TIMEBASE',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -18056,6 +20021,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CO_MAX_SIZE',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -18079,6 +20047,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CO_MAX_TIMEBASE',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -18103,6 +20074,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'PRODUCT_CATEGORY',
             'python_class_name': 'Device',
             'python_data_type': 'ProductCategory',
@@ -18126,6 +20100,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': True,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CHASSIS_MODULE_DEV_NAMES',
             'python_class_name': 'Device',
             'python_data_type': 'Device',
@@ -18152,6 +20129,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'COMPACT_DAQ_CHASSIS_DEV_NAME',
             'python_class_name': 'Device',
             'python_data_type': 'Device',
@@ -18178,6 +20158,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'COMPACT_DAQ_SLOT_NUM',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -18201,6 +20184,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_VOLTAGE_INT_EXCIT_DISCRETE_VALS',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -18224,6 +20210,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_VOLTAGE_INT_EXCIT_RANGE_VALS',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -18247,6 +20236,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_CURRENT_INT_EXCIT_DISCRETE_VALS',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -18270,6 +20262,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_LOWPASS_CUTOFF_FREQ_RANGE_VALS',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -18293,6 +20288,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_RESISTANCE_RNGS',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -18316,6 +20314,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'TERMINALS',
             'python_class_name': 'Device',
             'python_data_type': 'str',
@@ -18339,6 +20340,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CARRIER_SERIAL_NUM',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -18362,6 +20366,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'TCPIP_HOSTNAME',
             'python_class_name': 'Device',
             'python_data_type': 'str',
@@ -18385,6 +20392,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'TCPIP_ETHERNET_IP',
             'python_class_name': 'Device',
             'python_data_type': 'str',
@@ -18408,6 +20418,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'TCPIP_WIRELESS_IP',
             'python_class_name': 'Device',
             'python_data_type': 'str',
@@ -18431,6 +20444,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CO_SAMP_CLK_SUPPORTED',
             'python_class_name': 'Device',
             'python_data_type': 'bool',
@@ -18454,6 +20470,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'ACCESSORY_PRODUCT_TYPES',
             'python_class_name': 'Device',
             'python_data_type': 'str',
@@ -18477,6 +20496,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'ACCESSORY_PRODUCT_NUMS',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -18500,6 +20522,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'ACCESSORY_SERIAL_NUMS',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -18523,6 +20548,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_BRIDGE_RNGS',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -18547,6 +20575,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_SUPPORTED_MEAS_TYPES',
             'python_class_name': 'Device',
             'python_data_type': 'AIMeasurementType',
@@ -18572,6 +20603,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AO_SUPPORTED_OUTPUT_TYPES',
             'python_class_name': 'Device',
             'python_data_type': 'AOOutputChannelType',
@@ -18597,6 +20631,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CI_SUPPORTED_MEAS_TYPES',
             'python_class_name': 'Device',
             'python_data_type': 'CIMeasurementType',
@@ -18622,6 +20659,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CO_SUPPORTED_OUTPUT_TYPES',
             'python_class_name': 'Device',
             'python_data_type': 'COOutputType',
@@ -18646,6 +20686,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'TEDS_HWTEDS_SUPPORTED',
             'python_class_name': 'Device',
             'python_data_type': 'bool',
@@ -18671,6 +20714,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_SAMP_MODES',
             'python_class_name': 'Device',
             'python_data_type': 'AcquisitionType',
@@ -18695,6 +20741,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AO_SAMP_MODES',
             'python_class_name': 'Device',
             'python_data_type': 'AcquisitionType',
@@ -18719,6 +20768,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CI_SAMP_MODES',
             'python_class_name': 'Device',
             'python_data_type': 'AcquisitionType',
@@ -18743,6 +20795,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CO_SAMP_MODES',
             'python_class_name': 'Device',
             'python_data_type': 'AcquisitionType',
@@ -18766,6 +20821,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'TIME_TRIG_SUPPORTED',
             'python_class_name': 'Device',
             'python_data_type': 'bool',
@@ -18789,6 +20847,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CI_CURRENT_UTC_OFFSET',
             'python_data_type': 'int',
             'python_description': 'Indicates the current UTC offset. This is used to convert from TAI to UTC time. TAI Time + UTC Offset = UTC.',
@@ -18811,6 +20872,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'CI_UTC_OFFSET_READY',
             'python_data_type': 'bool',
             'python_description': 'Indicates whether the device has the information necessary to scale time from UTC to TAI .',
@@ -18833,6 +20897,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': True,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_PHYSICAL_CHANS',
             'python_data_type': 'PhysicalChannel',
             'python_description': 'Indicates an list containing the names of the navigation physical channels available on the device .',
@@ -18858,6 +20925,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_SUPPORTED_MEAS_TYPES',
             'python_data_type': 'NavMeasurementType',
             'python_description': 'Indicates the measurement types supported by the physical channels of the device.',
@@ -18881,6 +20951,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_TRIG_USAGE',
             'python_data_type': 'TriggerUsage',
             'python_description': 'Indicates the trigger types supported by the device for a given measurement type.',
@@ -18904,6 +20977,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_MODE',
             'python_data_type': 'NavMode',
             'python_description': 'Indicates the mode of the navigation device. Changing this property will cause running tasks to abort. This property is persistent.',
@@ -18926,6 +21002,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_PRESET_LAT',
             'python_data_type': 'float',
             'python_description': 'Indicates the latitude location in degrees of the device to be used in stationary with preset location mode. This property is set by a user who knows the location and does not need a survey to occur. This property is persistent and will only take effect when the device is in stationary with preset mode.',
@@ -18948,6 +21027,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_PRESET_LONG',
             'python_data_type': 'float',
             'python_description': 'Indicates the longitude location in degrees of the device to be used in stationary with preset location mode. This property is set by a user who knows the location and does not need a survey to occur. This property is persistent and will only take effect when the device is in stationary with preset mode.',
@@ -18970,6 +21052,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_PRESET_ALT',
             'python_data_type': 'float',
             'python_description': 'Indicates the altitude location in meters of the device to be used in stationary with preset location mode. This property is set by a user who knows the location and does not want a survey to occur. This property is persistent and will only take effect when the device is in stationary with preset mode.',
@@ -18993,6 +21078,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_ALT_REF',
             'python_data_type': 'AltRef',
             'python_description': 'Specifies the method to use to calculate altitude. This property is persistent.',
@@ -19015,6 +21103,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_PPS_COMPEN',
             'python_data_type': 'float',
             'python_description': 'Indicates in seconds the delay for the PPS (Pulse Per Second). To compensate for antenna delay, the amount should be negative. This property is persistent.',
@@ -19037,6 +21128,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_NUM_SURVEY_FIXES',
             'python_data_type': 'int',
             'python_description': 'Indicates the number of fixes for a survey. The number of fixes is the same as seconds assuming the devices never loses a fix. This property is persistent.',
@@ -19059,6 +21153,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_REMAINING_SURVEY_FIXES',
             'python_data_type': 'int',
             'python_description': 'Indicates the remaining number of fixes left for the survey. If a devices loses a fix, then it will pause the survey until it obtains a fix again and continues from where it left off.',
@@ -19081,6 +21178,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_HAS_FIX',
             'python_data_type': 'bool',
             'python_description': 'Indicates whether the device currently has a fix.',
@@ -19104,6 +21204,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_ANT_STATUS',
             'python_data_type': 'AntStatus',
             'python_description': 'Indicates the status of the antenna.',
@@ -19126,6 +21229,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_UTC_OFFSET_READY',
             'python_data_type': 'bool',
             'python_description': 'Indicates whether the device has the information necessary to scale time from UTC to TAI.',
@@ -19148,6 +21254,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_CURRENT_UTC_OFFSET',
             'python_data_type': 'int',
             'python_description': 'Indicates the current UTC offset. This is used to convert from TAI to UTC time. TAI Time + UTC Offset = UTC.',
@@ -19170,6 +21279,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_NUM_SATS',
             'python_data_type': 'int',
             'python_description': 'Indicates the current UTC offset. This is used to convert from TAI to UTC time. TAI Time + UTC Offset = UTC.',
@@ -19192,6 +21304,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_PDOP',
             'python_data_type': 'float',
             'python_description': 'Position dilution of precision.',
@@ -19214,6 +21329,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_HDOP',
             'python_data_type': 'float',
             'python_description': 'Horizontal dilution of precision.',
@@ -19236,6 +21354,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NAV_VDOP',
             'python_data_type': 'float',
             'python_description': 'Vertical dilution of precision.',
@@ -19258,6 +21379,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_DIG_FLTR_LOWPASS_CUTOFF_FREQ_DISCRETE_VALS',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -19281,6 +21405,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_DIG_FLTR_LOWPASS_CUTOFF_FREQ_RANGE_VALS',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -19305,6 +21432,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_DIG_FLTR_TYPES',
             'python_class_name': 'Device',
             'python_data_type': 'FilterType2',
@@ -19328,6 +21458,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_CHARGE_RNGS',
             'python_class_name': 'Device',
             'python_data_type': 'float',
@@ -19351,6 +21484,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NUM_TIME_TRIGS',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -19374,6 +21510,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'NUM_TIMESTAMP_ENGINES',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -19397,6 +21536,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'COMPACT_RIO_CHASSIS_DEV_NAME',
             'python_class_name': 'Device',
             'python_data_type': 'Device',
@@ -19423,6 +21565,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'COMPACT_RIO_SLOT_NUM',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -19446,6 +21591,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_NUM_SAMP_TIMING_ENGINES',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -19469,6 +21617,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AI_NUM_SYNC_PULSE_SRCS',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -19492,6 +21643,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AO_NUM_SAMP_TIMING_ENGINES',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -19515,6 +21669,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'AO_NUM_SYNC_PULSE_SRCS',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -19538,6 +21695,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'DI_NUM_SAMP_TIMING_ENGINES',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -19561,6 +21721,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'DO_NUM_SAMP_TIMING_ENGINES',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -19584,6 +21747,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'FIELD_DAQ_DEV_NAME',
             'python_class_name': 'Device',
             'python_data_type': 'Device',
@@ -19610,6 +21776,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': True,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'FIELD_DAQ_BANK_DEV_NAMES',
             'python_class_name': 'Device',
             'python_data_type': 'Device',
@@ -19636,6 +21805,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'ID_PIN_PIN_NAMES',
             'python_class_name': 'Device',
             'python_data_type': 'str',
@@ -19660,6 +21832,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'ID_PIN_PIN_STATUSES',
             'python_class_name': 'Device',
             'python_data_type': 'IDPinStatus',
@@ -19683,6 +21858,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'ID_PIN_MEM_FAMILY_CODES',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -19706,6 +21884,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'ID_PIN_MEM_SERIAL_NUMS',
             'python_class_name': 'Device',
             'python_data_type': 'str',
@@ -19729,6 +21910,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Device'
+            ],
             'name': 'ID_PIN_MEM_SIZES',
             'python_class_name': 'Device',
             'python_data_type': 'int',
@@ -19754,6 +21938,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'START_TRIG_DELAY',
             'python_data_type': 'float',
             'python_description': 'blah blah',
@@ -19776,6 +21963,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'START_TRIG_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -19800,6 +21990,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'START_TRIG_PULSE_POLARITY',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'Polarity2',
@@ -19823,6 +22016,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'START_TRIG_PULSE_WIDTH',
             'python_data_type': 'float',
             'python_description': 'blah blah',
@@ -19845,6 +22041,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'REF_TRIG_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -19869,6 +22068,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'REF_TRIG_PULSE_POLARITY',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'Polarity2',
@@ -19893,6 +22095,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'START_TRIG_PULSE_WIDTH_UNITS',
             'python_data_type': 'DigitalWidthUnits1',
             'python_description': 'The units of the width attribute',
@@ -19915,6 +22120,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'RDY_FOR_START_EVENT_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -19938,6 +22146,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'PAUSE_TRIG_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -19962,6 +22173,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'PAUSE_TRIG_LVL_ACTIVE_LVL',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'Polarity2',
@@ -19986,6 +22200,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'RDY_FOR_REF_EVENT_PULSE_POLARITY',
             'python_data_type': 'Polarity2',
             'python_description': 'blah blah',
@@ -20009,6 +22226,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'RDY_FOR_REF_EVENT_PULSE_WIDTH_UNITS',
             'python_data_type': 'DigitalWidthUnits1',
             'python_description': 'The units of the width attribute',
@@ -20031,6 +22251,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'RDY_FOR_REF_EVENT_PULSE_WIDTH',
             'python_data_type': 'float',
             'python_description': 'blah blah',
@@ -20053,6 +22276,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'DATA_ACTIVE_EVENT_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -20077,6 +22303,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'DATA_ACTIVE_EVENT_LVL_ACTIVE_LVL',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'Polarity2',
@@ -20100,6 +22329,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'ADV_TRIG_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -20124,6 +22356,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'ADV_TRIG_PULSE_POLARITY',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'Polarity2',
@@ -20148,6 +22383,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'ADV_TRIG_PULSE_WIDTH_UNITS',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'DigitalWidthUnits3',
@@ -20171,6 +22409,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'ADV_TRIG_PULSE_WIDTH',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'float',
@@ -20194,6 +22435,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'ADV_CMPLT_EVENT_ENABLE',
             'python_data_type': 'bool',
             'python_description': 'blah blah',
@@ -20216,6 +22460,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'ADV_CMPLT_EVENT_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -20240,6 +22487,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'ADV_CMPLT_EVENT_PULSE_POLARITY',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'Polarity2',
@@ -20264,6 +22514,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'ADV_CMPLT_EVENT_PULSE_WIDTH_UNITS',
             'python_data_type': 'DigitalWidthUnits1',
             'python_description': 'The units of the width attribute',
@@ -20286,6 +22539,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'ADV_CMPLT_EVENT_PULSE_WIDTH',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'float',
@@ -20309,6 +22565,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': '20_MHZ_TIMEBASE_DIVIDE_DOWN_BY_N',
             'python_data_type': 'int',
             'python_description': 'blah blah',
@@ -20331,6 +22590,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': '20_MHZ_TIMEBASE_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -20356,6 +22618,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': '20_MHZ_TIMEBASE_PULSE_POLARITY',
             'python_data_type': 'Polarity2',
             'python_description': 'blah blah',
@@ -20379,6 +22644,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': '20_MHZ_TIMEBASE_PULSE_WIDTH_UNITS',
             'python_data_type': 'DigitalWidthUnits1',
             'python_description': 'The units of the width attribute',
@@ -20401,6 +22669,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': '20_MHZ_TIMEBASE_PULSE_WIDTH',
             'python_data_type': 'float',
             'python_description': 'blah blah',
@@ -20423,6 +22694,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'SAMP_CLK_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -20447,6 +22721,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'SAMP_CLK_PULSE_POLARITY',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'Polarity2',
@@ -20471,6 +22748,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'SAMP_CLK_PULSE_WIDTH_UNITS',
             'python_data_type': 'DigitalWidthUnits1',
             'python_description': 'The units of the width attribute',
@@ -20493,6 +22773,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'SAMP_CLK_PULSE_WIDTH',
             'python_data_type': 'float',
             'python_description': 'blah blah',
@@ -20515,6 +22798,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'AI_CONV_CLK_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -20539,6 +22825,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'AI_CONV_CLK_PULSE_POLARITY',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'Polarity2',
@@ -20563,6 +22852,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'AI_CONV_CLK_PULSE_WIDTH_UNITS',
             'python_data_type': 'DigitalWidthUnits1',
             'python_description': 'Specifies the units of **ai_conv_clk_pulse_width**.',
@@ -20585,6 +22877,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'AI_CONV_CLK_PULSE_WIDTH',
             'python_data_type': 'float',
             'python_description': 'Specifies the width of an exported AI Convert Clock pulse, in units specfied with **ai_conv_clk_pulse_width_units**.',
@@ -20608,6 +22903,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'FREQ_OUT_CLK_PULSE_POLARITY',
             'python_data_type': 'Polarity2',
             'python_description': 'blah blah',
@@ -20631,6 +22929,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'FREQ_OUT_CLK_PULSE_WIDTH_UNITS',
             'python_data_type': 'DigitalWidthUnits1',
             'python_description': 'The units of the width attribute',
@@ -20653,6 +22954,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'FREQ_OUT_CLK_PULSE_WIDTH',
             'python_data_type': 'float',
             'python_description': 'blah blah',
@@ -20675,6 +22979,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'CTR_OUT_EVENT_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -20699,6 +23006,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'CTR_OUT_EVENT_PULSE_POLARITY',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'Polarity2',
@@ -20723,6 +23033,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'CTR_OUT_EVENT_PULSE_WIDTH_UNITS',
             'python_data_type': 'DigitalWidthUnits1',
             'python_description': 'The units of the width attribute',
@@ -20745,6 +23058,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'CTR_OUT_EVENT_PULSE_WIDTH',
             'python_data_type': 'float',
             'python_description': 'blah blah',
@@ -20768,6 +23084,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'REF_CLK_PULSE_POLARITY',
             'python_data_type': 'Polarity2',
             'python_description': 'blah blah',
@@ -20791,6 +23110,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'REF_CLK_PULSE_WIDTH_UNITS',
             'python_data_type': 'DigitalWidthUnits1',
             'python_description': 'The units of the width attribute',
@@ -20813,6 +23135,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'REF_CLK_PULSE_WIDTH',
             'python_data_type': 'float',
             'python_description': 'blah blah',
@@ -20836,6 +23161,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'START_TRIG_OUTPUT_BEHAVIOR',
             'python_data_type': 'ExportActions',
             'python_description': 'The behavior of the output signal',
@@ -20859,6 +23187,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'START_TRIG_TOGGLE_INITIAL_STATE',
             'python_data_type': 'Level1',
             'python_description': 'The initial level of the output toggle',
@@ -20882,6 +23213,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'START_TRIG_DELAY_UNITS',
             'python_data_type': 'DigitalWidthUnits1',
             'python_description': 'blah blah',
@@ -20905,6 +23239,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'CTR_OUT_EVENT_OUTPUT_BEHAVIOR',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'ExportActions2',
@@ -20929,6 +23266,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'CTR_OUT_EVENT_LVL_POLARITY',
             'python_data_type': 'Polarity2',
             'python_description': 'blah blah',
@@ -20952,6 +23292,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'RDY_FOR_START_EVENT_LVL_ACTIVE_LVL',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'Polarity2',
@@ -20975,6 +23318,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'ADV_CMPLT_EVENT_DELAY',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'float',
@@ -20999,6 +23345,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'CTR_OUT_EVENT_TOGGLE_IDLE_STATE',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'Level1',
@@ -21023,6 +23372,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'SAMP_CLK_OUTPUT_BEHAVIOR',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'ExportActions3',
@@ -21046,6 +23398,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'AI_HOLD_CMPLT_EVENT_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -21070,6 +23425,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'AI_HOLD_CMPLT_EVENT_PULSE_POLARITY',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'Polarity2',
@@ -21093,6 +23451,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'SAMP_CLK_TIMEBASE_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -21116,6 +23477,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'CHANGE_DETECT_EVENT_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -21139,6 +23503,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'DIVIDED_SAMP_CLK_TIMEBASE_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -21162,6 +23529,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'WATCHDOG_EXPIRED_EVENT_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -21185,6 +23555,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'SAMP_CLK_DELAY_OFFSET',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'float',
@@ -21208,6 +23581,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'SYNC_PULSE_EVENT_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -21231,6 +23607,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': '10_MHZ_REF_CLK_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -21255,6 +23634,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'RDY_FOR_XFER_EVENT_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -21279,6 +23661,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'RDY_FOR_XFER_EVENT_LVL_ACTIVE_LVL',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'Polarity2',
@@ -21302,6 +23687,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'HSHK_EVENT_OUTPUT_TERM',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'str',
@@ -21326,6 +23714,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'HSHK_EVENT_OUTPUT_BEHAVIOR',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'ExportActions5',
@@ -21349,6 +23740,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'HSHK_EVENT_DELAY',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'float',
@@ -21373,6 +23767,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'HSHK_EVENT_INTERLOCKED_ASSERTED_LVL',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'Level1',
@@ -21396,6 +23793,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'HSHK_EVENT_INTERLOCKED_ASSERT_ON_START',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'bool',
@@ -21419,6 +23819,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'HSHK_EVENT_INTERLOCKED_DEASSERT_DELAY',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'float',
@@ -21443,6 +23846,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'HSHK_EVENT_PULSE_POLARITY',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'Polarity2',
@@ -21466,6 +23872,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'HSHK_EVENT_PULSE_WIDTH',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'float',
@@ -21490,6 +23899,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'CHANGE_DETECT_EVENT_PULSE_POLARITY',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'Polarity2',
@@ -21514,6 +23926,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'RDY_FOR_XFER_EVENT_DEASSERT_COND',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'DeassertCondition',
@@ -21537,6 +23952,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Export Signal'
+            ],
             'name': 'RDY_FOR_XFER_EVENT_DEASSERT_COND_CUSTOM_THRESHOLD',
             'python_class_name': 'ExportSignals',
             'python_data_type': 'int',
@@ -21555,6 +23973,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Advanced:Persisted Channel'
+            ],
             'name': 'ACTIVE_CHAN',
             'python_data_type': 'Channel',
             'python_description': 'Specifies the saved global channel to which subsequent properties apply.',
@@ -21573,6 +23994,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Persisted Channel'
+            ],
             'name': 'AUTHOR',
             'python_class_name': 'SavedChannelInfo',
             'python_data_type': 'str',
@@ -21589,6 +24013,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Persisted Channel'
+            ],
             'name': 'ALLOW_INTERACTIVE_EDITING',
             'python_class_name': 'SavedChannelInfo',
             'python_data_type': 'bool',
@@ -21605,6 +24032,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Persisted Channel'
+            ],
             'name': 'ALLOW_INTERACTIVE_DELETION',
             'python_class_name': 'SavedChannelInfo',
             'python_data_type': 'bool',
@@ -21623,6 +24053,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Advanced:Persisted Scale'
+            ],
             'name': 'ACTIVE_SCALE',
             'python_data_type': 'Scale',
             'python_description': 'Specifies the saved custom scale to which subsequent properties apply.',
@@ -21640,6 +24073,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Persisted Scale'
+            ],
             'name': 'AUTHOR',
             'python_class_name': 'SavedScaleInfo',
             'python_data_type': 'str',
@@ -21656,6 +24092,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Persisted Scale'
+            ],
             'name': 'ALLOW_INTERACTIVE_EDITING',
             'python_class_name': 'SavedScaleInfo',
             'python_data_type': 'bool',
@@ -21672,6 +24111,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Persisted Scale'
+            ],
             'name': 'ALLOW_INTERACTIVE_DELETION',
             'python_class_name': 'SavedScaleInfo',
             'python_data_type': 'bool',
@@ -21690,6 +24132,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Persisted Task'
+            ],
             'name': 'ACTIVE_TASK',
             'python_data_type': 'str',
             'python_description': 'Specifies the saved task to which subsequent properties apply.',
@@ -21705,6 +24150,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Persisted Task'
+            ],
             'name': 'AUTHOR',
             'python_class_name': 'SavedTaskInfo',
             'python_data_type': 'str',
@@ -21721,6 +24169,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Persisted Task'
+            ],
             'name': 'ALLOW_INTERACTIVE_EDITING',
             'python_class_name': 'SavedTaskInfo',
             'python_data_type': 'bool',
@@ -21737,6 +24188,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Persisted Task'
+            ],
             'name': 'ALLOW_INTERACTIVE_DELETION',
             'python_class_name': 'SavedTaskInfo',
             'python_data_type': 'bool',
@@ -21762,6 +24216,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_TEDS_MFG_ID',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'int',
@@ -21786,6 +24243,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_TEDS_MODEL_NUM',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'int',
@@ -21810,6 +24270,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_TEDS_SERIAL_NUM',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'int',
@@ -21834,6 +24297,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_TEDS_VERSION_NUM',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'int',
@@ -21858,6 +24324,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_TEDS_VERSION_LETTER',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'str',
@@ -21882,6 +24351,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_TEDS_BIT_STREAM',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'int',
@@ -21906,6 +24378,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_TEDS_TEMPLATE_I_DS',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'int',
@@ -21932,6 +24407,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_AI_TERM_CFGS',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'InputTermCfg',
@@ -21958,6 +24436,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_AO_TERM_CFGS',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'OutputTermCfg',
@@ -21982,6 +24463,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_DI_PORT_WIDTH',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'int',
@@ -22006,6 +24490,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_DI_SAMP_CLK_SUPPORTED',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
@@ -22030,6 +24517,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_DI_CHANGE_DETECT_SUPPORTED',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
@@ -22054,6 +24544,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_DO_PORT_WIDTH',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'int',
@@ -22078,6 +24571,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_DO_SAMP_CLK_SUPPORTED',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
@@ -22102,6 +24598,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_AO_MANUAL_CONTROL_ENABLE',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
@@ -22126,6 +24625,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_AO_MANUAL_CONTROL_AMPLITUDE',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'float',
@@ -22150,6 +24652,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_AO_MANUAL_CONTROL_FREQ',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'float',
@@ -22174,6 +24679,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_AO_MANUAL_CONTROL_SHORT_DETECTED',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
@@ -22199,6 +24707,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_AI_SUPPORTED_MEAS_TYPES',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'AIMeasurementType',
@@ -22223,6 +24734,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_AI_INPUT_SRCS',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'str',
@@ -22248,6 +24762,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_AO_SUPPORTED_OUTPUT_TYPES',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'AOOutputChannelType',
@@ -22273,6 +24790,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_CI_SUPPORTED_MEAS_TYPES',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'CIMeasurementType',
@@ -22298,6 +24818,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_CO_SUPPORTED_OUTPUT_TYPES',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'COOutputType',
@@ -22323,6 +24846,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_DI_SAMP_MODES',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'AcquisitionType',
@@ -22348,6 +24874,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_DO_SAMP_MODES',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'AcquisitionType',
@@ -22373,6 +24902,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_NAV_SUPPORTED_MEAS_TYPES',
             'python_data_type': 'NavMeasurementType',
             'python_description': 'Indicates the measurement types supported by the channel.',
@@ -22396,6 +24928,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_AO_SUPPORTED_POWER_UP_OUTPUT_TYPES',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'AOPowerUpOutputBehavior',
@@ -22420,6 +24955,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'AO_POWER_AMP_CHANNEL_ENABLE',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
@@ -22443,6 +24981,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'AO_POWER_AMP_SCALING_COEFF',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'float',
@@ -22466,6 +25007,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'AO_POWER_AMP_OVERCURRENT',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
@@ -22489,6 +25033,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'AO_POWER_AMP_GAIN',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'float',
@@ -22512,6 +25059,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'AO_POWER_AMP_OFFSET',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'float',
@@ -22535,6 +25085,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_AI_POWER_CONTROL_VOLTAGE',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'float',
@@ -22559,6 +25112,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_AI_POWER_CONTROL_ENABLE',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
@@ -22584,6 +25140,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_AI_POWER_CONTROL_TYPE',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'SensorPowerType',
@@ -22609,6 +25168,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_AI_SENSOR_POWER_TYPES',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'SensorPowerType',
@@ -22633,6 +25195,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_AI_SENSOR_POWER_VOLTAGE_RANGE_VALS',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'float',
@@ -22657,6 +25222,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_AI_SENSOR_POWER_OPEN_CHAN',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
@@ -22681,6 +25249,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_AI_SENSOR_POWER_OVERCURRENT',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'bool',
@@ -22706,6 +25277,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Physical Channel'
+            ],
             'name': 'PHYSICAL_CHAN_DIG_PORT_LOGIC_FAMILY',
             'python_class_name': 'PhysicalChannel',
             'python_data_type': 'LogicFamily',
@@ -22733,6 +25307,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'OVERWRITE',
             'python_class_name': 'InStream',
             'python_data_type': 'OverwriteMode1',
@@ -22756,6 +25333,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'READ_ALL_AVAIL_SAMP',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -22779,6 +25359,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'CURR_READ_POS',
             'python_class_name': 'InStream',
             'python_data_type': 'int',
@@ -22802,6 +25385,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'AVAIL_SAMP_PER_CHAN',
             'python_class_name': 'InStream',
             'python_data_type': 'int',
@@ -22825,6 +25411,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'CHANNELS_TO_READ',
             'python_class_name': 'InStream',
             'python_data_type': 'Channel',
@@ -22858,6 +25447,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'AUTO_START',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -22882,6 +25474,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'RELATIVE_TO',
             'python_class_name': 'InStream',
             'python_data_type': 'ReadRelativeTo',
@@ -22905,6 +25500,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'OFFSET',
             'python_class_name': 'InStream',
             'python_data_type': 'int',
@@ -22928,6 +25526,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'TOTAL_SAMP_PER_CHAN_ACQUIRED',
             'python_class_name': 'InStream',
             'python_data_type': 'int',
@@ -22951,6 +25552,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'OVERLOADED_CHANS_EXIST',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -22974,6 +25578,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'OVERLOADED_CHANS',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -22997,6 +25604,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'RAW_DATA_WIDTH',
             'python_class_name': 'InStream',
             'python_data_type': 'int',
@@ -23020,6 +25630,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'NUM_CHANS',
             'python_class_name': 'InStream',
             'python_data_type': 'int',
@@ -23043,6 +25656,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'DIGITAL_LINES_BYTES_PER_CHAN',
             'python_class_name': 'InStream',
             'python_data_type': 'int',
@@ -23067,6 +25683,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'CHANGE_DETECT_HAS_OVERFLOWED',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -23092,6 +25711,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'WAIT_MODE',
             'python_class_name': 'InStream',
             'python_data_type': 'WaitMode',
@@ -23115,6 +25737,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'SLEEP_TIME',
             'python_class_name': 'InStream',
             'python_data_type': 'float',
@@ -23138,6 +25763,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'OVERCURRENT_CHANS_EXIST',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -23161,6 +25789,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'OVERCURRENT_CHANS',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -23184,6 +25815,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'OPEN_CURRENT_LOOP_CHANS_EXIST',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -23207,6 +25841,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'OPEN_CURRENT_LOOP_CHANS',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -23230,6 +25867,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'OPEN_THRMCPL_CHANS_EXIST',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -23253,6 +25893,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'OPEN_THRMCPL_CHANS',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -23276,6 +25919,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'COMMON_MODE_RANGE_ERROR_CHANS_EXIST',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -23299,6 +25945,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'COMMON_MODE_RANGE_ERROR_CHANS',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -23322,6 +25971,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'LOGGING_FILE_PATH',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -23346,6 +25998,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'LOGGING_MODE',
             'python_class_name': 'InStream',
             'python_data_type': 'LoggingMode',
@@ -23369,6 +26024,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'LOGGING_TDMS_GROUP_NAME',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -23393,6 +26051,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'LOGGING_TDMS_OPERATION',
             'python_class_name': 'InStream',
             'python_data_type': 'LoggingOperation',
@@ -23416,6 +26077,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'ACCESSORY_INSERTION_OR_REMOVAL_DETECTED',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -23439,6 +26103,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'DEVS_WITH_INSERTED_OR_REMOVED_ACCESSORIES',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -23462,6 +26129,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'LOGGING_FILE_WRITE_SIZE',
             'python_class_name': 'InStream',
             'python_data_type': 'int',
@@ -23485,6 +26155,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'LOGGING_FILE_PREALLOCATION_SIZE',
             'python_class_name': 'InStream',
             'python_data_type': 'int',
@@ -23508,6 +26181,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'LOGGING_PAUSE',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -23531,6 +26207,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'LOGGING_SAMPS_PER_FILE',
             'python_class_name': 'InStream',
             'python_data_type': 'int',
@@ -23554,6 +26233,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'NAV_FIX_LOST',
             'python_data_type': 'bool',
             'python_description': 'Indicates whether or not the fix was lost since the last read time the fix lost property was read.',
@@ -23576,6 +26258,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'OVERTEMPERATURE_CHANS_EXIST',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -23599,6 +26284,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'OVERTEMPERATURE_CHANS',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -23622,6 +26310,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'EXCIT_FAULT_CHANS_EXIST',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -23645,6 +26336,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'EXCIT_FAULT_CHANS',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -23668,6 +26362,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'OPEN_CHANS_EXIST',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -23691,6 +26388,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'OPEN_CHANS',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -23714,6 +26414,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'OPEN_CHANS_DETAILS',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -23737,6 +26440,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'PLL_UNLOCKED_CHANS_EXIST',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -23760,6 +26466,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'PLL_UNLOCKED_CHANS',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -23783,6 +26492,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'SYNC_UNLOCKED_CHANS_EXIST',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -23806,6 +26518,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'SYNC_UNLOCKED_CHANS',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -23829,6 +26544,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'INPUT_LIMITS_FAULT_CHANS_EXIST',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -23852,6 +26570,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'INPUT_LIMITS_FAULT_CHANS',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -23875,6 +26596,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'POWER_SUPPLY_FAULT_CHANS_EXIST',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -23898,6 +26622,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'POWER_SUPPLY_FAULT_CHANS',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -23921,6 +26648,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'REMOTE_SENSE_ERROR_CHANS_EXIST',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -23944,6 +26674,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'REMOTE_SENSE_ERROR_CHANS',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -23967,6 +26700,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'AUX_POWER_ERROR_CHANS_EXIST',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -23990,6 +26726,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'AUX_POWER_ERROR_CHANS',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -24013,6 +26752,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'REVERSE_VOLTAGE_ERROR_CHANS_EXIST',
             'python_class_name': 'InStream',
             'python_data_type': 'bool',
@@ -24036,6 +26778,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Read'
+            ],
             'name': 'REVERSE_VOLTAGE_ERROR_CHANS',
             'python_class_name': 'InStream',
             'python_data_type': 'str',
@@ -24054,6 +26799,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Real-Time'
+            ],
             'name': 'NUM_OF_WARMUP_ITERS',
             'python_class_name': 'SinglePoint',
             'python_data_type': 'int',
@@ -24070,6 +26818,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Real-Time'
+            ],
             'name': 'CONV_LATE_ERRORS_TO_WARNINGS',
             'python_class_name': 'SinglePoint',
             'python_data_type': 'bool',
@@ -24087,6 +26838,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Real-Time'
+            ],
             'name': 'WAIT_FOR_NEXT_SAMP_CLK_WAIT_MODE',
             'python_class_name': 'SinglePoint',
             'python_data_type': 'WaitMode3',
@@ -24103,6 +26857,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Real-Time'
+            ],
             'name': 'REPORT_MISSED_SAMP',
             'python_class_name': 'SinglePoint',
             'python_data_type': 'bool',
@@ -24120,6 +26877,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Real-Time'
+            ],
             'name': 'WRITE_RECOVERY_MODE',
             'python_class_name': 'SinglePoint',
             'python_data_type': 'WaitMode4',
@@ -24145,6 +26905,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Scale'
+            ],
             'name': 'DESCR',
             'python_class_name': 'Scale',
             'python_data_type': 'str',
@@ -24169,6 +26932,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Scale'
+            ],
             'name': 'LIN_SLOPE',
             'python_class_name': 'Scale',
             'python_data_type': 'float',
@@ -24192,6 +26958,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Scale'
+            ],
             'name': 'LIN_Y_INTERCEPT',
             'python_class_name': 'Scale',
             'python_data_type': 'float',
@@ -24215,6 +26984,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Scale'
+            ],
             'name': 'MAP_SCALED_MAX',
             'python_class_name': 'Scale',
             'python_data_type': 'float',
@@ -24238,6 +27010,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Scale'
+            ],
             'name': 'MAP_SCALED_MIN',
             'python_class_name': 'Scale',
             'python_data_type': 'float',
@@ -24261,6 +27036,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Scale'
+            ],
             'name': 'MAP_PRE_SCALED_MAX',
             'python_class_name': 'Scale',
             'python_data_type': 'float',
@@ -24284,6 +27062,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Scale'
+            ],
             'name': 'MAP_PRE_SCALED_MIN',
             'python_class_name': 'Scale',
             'python_data_type': 'float',
@@ -24307,6 +27088,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Scale'
+            ],
             'name': 'POLY_FORWARD_COEFF',
             'python_class_name': 'Scale',
             'python_data_type': 'float',
@@ -24330,6 +27114,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Scale'
+            ],
             'name': 'POLY_REVERSE_COEFF',
             'python_class_name': 'Scale',
             'python_data_type': 'float',
@@ -24353,6 +27140,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Scale'
+            ],
             'name': 'TABLE_SCALED_VALS',
             'python_class_name': 'Scale',
             'python_data_type': 'float',
@@ -24376,6 +27166,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Scale'
+            ],
             'name': 'TABLE_PRE_SCALED_VALS',
             'python_class_name': 'Scale',
             'python_data_type': 'float',
@@ -24400,6 +27193,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Scale'
+            ],
             'name': 'PRE_SCALED_UNITS',
             'python_class_name': 'Scale',
             'python_data_type': 'UnitsPreScaled',
@@ -24423,6 +27219,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Scale'
+            ],
             'name': 'SCALED_UNITS',
             'python_class_name': 'Scale',
             'python_data_type': 'str',
@@ -24447,6 +27246,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Scale'
+            ],
             'name': 'TYPE',
             'python_class_name': 'Scale',
             'python_data_type': 'ScaleType',
@@ -24468,6 +27270,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'System'
+            ],
             'name': 'GLOBAL_CHANS',
             'python_class_name': 'DaqSystem',
             'python_data_type': 'Channel',
@@ -24489,6 +27294,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': True,
+            'lv_filter': [
+                'System'
+            ],
             'name': 'SCALES',
             'python_class_name': 'DaqSystem',
             'python_data_type': 'Scale',
@@ -24509,6 +27317,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'System'
+            ],
             'name': 'TASKS',
             'python_class_name': 'DaqSystem',
             'python_data_type': 'str',
@@ -24527,6 +27338,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'System'
+            ],
             'name': 'NIDAQ_MAJOR_VERSION',
             'python_class_name': 'DaqSystem',
             'python_data_type': 'int',
@@ -24545,6 +27359,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'System'
+            ],
             'name': 'NIDAQ_MINOR_VERSION',
             'python_class_name': 'DaqSystem',
             'python_data_type': 'int',
@@ -24563,6 +27380,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': True,
+            'lv_filter': [
+                'System'
+            ],
             'name': 'DEV_NAMES',
             'python_class_name': 'DaqSystem',
             'python_data_type': 'Device',
@@ -24583,6 +27403,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'System'
+            ],
             'name': 'NIDAQ_UPDATE_VERSION',
             'python_class_name': 'DaqSystem',
             'python_data_type': 'int',
@@ -24601,6 +27424,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Task'
+            ],
             'name': 'CHANNELS',
             'python_data_type': 'Channel',
             'python_description': 'Indicates the names of all virtual channels in the task.',
@@ -24619,6 +27445,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Task'
+            ],
             'name': 'COMPLETE',
             'python_class_name': 'Task',
             'python_data_type': 'bool',
@@ -24635,6 +27464,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Task'
+            ],
             'name': 'NAME',
             'python_data_type': 'str',
             'python_description': 'Indicates the name of the task.',
@@ -24650,6 +27482,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Task'
+            ],
             'name': 'NUM_CHANS',
             'python_data_type': 'int',
             'python_description': 'Indicates the number of virtual channels in the task.',
@@ -24665,6 +27500,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': True,
+            'lv_filter': [
+                'Task'
+            ],
             'name': 'DEVICES',
             'python_class_name': 'Task',
             'python_data_type': 'Device',
@@ -24683,6 +27521,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Task'
+            ],
             'name': 'NUM_DEVICES',
             'python_data_type': 'int',
             'python_description': 'Indicates the number of devices in the task.',
@@ -24708,6 +27549,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_QUANT_SAMP_MODE',
             'python_class_name': 'Timing',
             'python_data_type': 'AcquisitionType',
@@ -24732,6 +27576,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_ACTIVE_EDGE',
             'python_class_name': 'Timing',
             'python_data_type': 'Edge1',
@@ -24755,6 +27602,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_TIMEBASE_RATE',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -24779,6 +27629,10 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing',
+                'Advanced:Timing (Active Device)'
+            ],
             'name': 'DELAY_FROM_SAMP_CLK_DELAY_UNITS',
             'python_class_name': 'Timing',
             'python_data_type': 'DigitalWidthUnits2',
@@ -24802,6 +27656,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_TIMEBASE_MASTER_TIMEBASE_DIV',
             'python_class_name': 'Timing',
             'python_data_type': 'int',
@@ -24825,6 +27682,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_TIMEBASE_SRC',
             'python_class_name': 'Timing',
             'python_data_type': 'str',
@@ -24848,6 +27708,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_QUANT_SAMP_PER_CHAN',
             'python_class_name': 'Timing',
             'python_data_type': 'int',
@@ -24871,6 +27734,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'REF_CLK_RATE',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -24894,6 +27760,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'REF_CLK_SRC',
             'python_class_name': 'Timing',
             'python_data_type': 'str',
@@ -24917,6 +27786,10 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing',
+                'Advanced:Timing (Active Device)'
+            ],
             'name': 'DELAY_FROM_SAMP_CLK_DELAY',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -24940,6 +27813,10 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing',
+                'Advanced:Timing (Active Device)'
+            ],
             'name': 'AI_CONV_TIMEBASE_DIV',
             'python_class_name': 'Timing',
             'python_data_type': 'int',
@@ -24964,6 +27841,10 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing',
+                'Advanced:Timing (Active Device)'
+            ],
             'name': 'AI_CONV_TIMEBASE_SRC',
             'python_class_name': 'Timing',
             'python_data_type': 'MIOAIConvertTbSrc',
@@ -24987,6 +27868,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'MASTER_TIMEBASE_SRC',
             'python_class_name': 'Timing',
             'python_data_type': 'str',
@@ -25010,6 +27894,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_RATE',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -25034,6 +27921,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_TIMING_TYPE',
             'python_class_name': 'Timing',
             'python_data_type': 'SampleTimingType',
@@ -25057,6 +27947,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'MASTER_TIMEBASE_RATE',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -25080,6 +27973,10 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing',
+                'Advanced:Timing (Active Device)'
+            ],
             'name': 'AI_CONV_SRC',
             'python_class_name': 'Timing',
             'python_data_type': 'str',
@@ -25103,6 +28000,10 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing',
+                'Advanced:Timing (Active Device)'
+            ],
             'name': 'AI_CONV_RATE',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -25126,6 +28027,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_SRC',
             'python_class_name': 'Timing',
             'python_data_type': 'str',
@@ -25150,6 +28054,10 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing',
+                'Advanced:Timing (Active Device)'
+            ],
             'name': 'AI_CONV_ACTIVE_EDGE',
             'python_class_name': 'Timing',
             'python_data_type': 'Edge1',
@@ -25173,6 +28081,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_TIMEBASE_DIV',
             'python_class_name': 'Timing',
             'python_data_type': 'int',
@@ -25197,6 +28108,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_TIMEBASE_ACTIVE_EDGE',
             'python_class_name': 'Timing',
             'python_data_type': 'Edge1',
@@ -25220,6 +28134,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'CHANGE_DETECT_DI_RISING_EDGE_PHYSICAL_CHANS',
             'python_class_name': 'Timing',
             'python_data_type': 'PhysicalChannel',
@@ -25245,6 +28162,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'CHANGE_DETECT_DI_FALLING_EDGE_PHYSICAL_CHANS',
             'python_class_name': 'Timing',
             'python_data_type': 'PhysicalChannel',
@@ -25270,6 +28190,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'ON_DEMAND_SIMULTANEOUS_AO_ENABLE',
             'python_class_name': 'Timing',
             'python_data_type': 'bool',
@@ -25294,6 +28217,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_DIG_FLTR_ENABLE',
             'python_class_name': 'Timing',
             'python_data_type': 'bool',
@@ -25317,6 +28243,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -25340,6 +28269,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'Timing',
             'python_data_type': 'str',
@@ -25363,6 +28295,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -25386,6 +28321,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_DIG_SYNC_ENABLE',
             'python_class_name': 'Timing',
             'python_data_type': 'bool',
@@ -25409,6 +28347,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SYNC_PULSE_SRC',
             'python_class_name': 'Timing',
             'python_data_type': 'str',
@@ -25432,6 +28373,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SYNC_PULSE_SYNC_TIME',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -25455,6 +28399,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SYNC_PULSE_MIN_DELAY_TO_START',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -25478,6 +28425,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'HSHK_DELAY_AFTER_XFER',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -25502,6 +28452,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'HSHK_START_COND',
             'python_class_name': 'Timing',
             'python_data_type': 'HandshakeStartCondition',
@@ -25526,6 +28479,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'HSHK_SAMPLE_INPUT_DATA_WHEN',
             'python_class_name': 'Timing',
             'python_data_type': 'SampleInputDataWhen',
@@ -25549,6 +28505,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_MAX_RATE',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -25572,6 +28531,10 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing',
+                'Advanced:Timing (Active Device)'
+            ],
             'name': 'AI_CONV_MAX_RATE',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -25596,6 +28559,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_UNDERFLOW_BEHAVIOR',
             'python_class_name': 'Timing',
             'python_data_type': 'UnderflowBehavior',
@@ -25619,6 +28585,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_TIMING_ENGINE',
             'python_class_name': 'Timing',
             'python_data_type': 'int',
@@ -25642,6 +28611,10 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing',
+                'Advanced:Timing (Active Device)'
+            ],
             'name': 'AI_CONV_DIG_FLTR_ENABLE',
             'python_class_name': 'Timing',
             'python_data_type': 'bool',
@@ -25665,6 +28638,10 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing',
+                'Advanced:Timing (Active Device)'
+            ],
             'name': 'AI_CONV_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -25688,6 +28665,10 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing',
+                'Advanced:Timing (Active Device)'
+            ],
             'name': 'AI_CONV_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'Timing',
             'python_data_type': 'str',
@@ -25711,6 +28692,10 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing',
+                'Advanced:Timing (Active Device)'
+            ],
             'name': 'AI_CONV_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -25734,6 +28719,10 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing',
+                'Advanced:Timing (Active Device)'
+            ],
             'name': 'AI_CONV_DIG_SYNC_ENABLE',
             'python_class_name': 'Timing',
             'python_data_type': 'bool',
@@ -25757,6 +28746,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'CHANGE_DETECT_DI_TRISTATE',
             'python_class_name': 'Timing',
             'python_data_type': 'bool',
@@ -25781,6 +28773,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_OVERRUN_BEHAVIOR',
             'python_class_name': 'Timing',
             'python_data_type': 'OverflowBehavior',
@@ -25805,6 +28800,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'IMPLICIT_UNDERFLOW_BEHAVIOR',
             'python_class_name': 'Timing',
             'python_data_type': 'UnderflowBehavior',
@@ -25828,6 +28826,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_TERM',
             'python_class_name': 'Timing',
             'python_data_type': 'str',
@@ -25851,6 +28852,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_TIMEBASE_TERM',
             'python_class_name': 'Timing',
             'python_data_type': 'str',
@@ -25874,6 +28878,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SYNC_PULSE_RESET_TIME',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -25897,6 +28904,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SYNC_PULSE_RESET_DELAY',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -25920,6 +28930,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SYNC_CLK_INTERVAL',
             'python_class_name': 'Timing',
             'python_data_type': 'int',
@@ -25943,6 +28956,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SYNC_PULSE_TERM',
             'python_class_name': 'Timing',
             'python_data_type': 'str',
@@ -25966,6 +28982,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'TIMING_SYNC_PULSE_FORCE',
             'python_class_name': 'Timing',
             'python_data_type': 'bool',
@@ -25989,6 +29008,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SAMP_CLK_WRITE_WFM_USE_INITIAL_WFM_DT',
             'python_class_name': 'Timing',
             'python_data_type': 'bool',
@@ -26013,6 +29035,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SYNC_PULSE_TYPE',
             'python_class_name': 'Timing',
             'python_data_type': 'SyncPulseType',
@@ -26036,6 +29061,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SYNC_PULSE_TIME_WHEN',
             'python_class_name': 'Timing',
             'python_data_type': 'datetime',
@@ -26060,6 +29088,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'SYNC_PULSE_TIME_TIMESCALE',
             'python_class_name': 'Timing',
             'python_data_type': 'Timescale2',
@@ -26083,6 +29114,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'FIRST_SAMP_TIMESTAMP_ENABLE',
             'python_class_name': 'Timing',
             'python_data_type': 'bool',
@@ -26106,6 +29140,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'FIRST_SAMP_TIMESTAMP_VAL',
             'python_class_name': 'Timing',
             'python_data_type': 'datetime',
@@ -26130,6 +29167,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'FIRST_SAMP_TIMESTAMP_TIMESCALE',
             'python_class_name': 'Timing',
             'python_data_type': 'Timescale2',
@@ -26153,6 +29193,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'FIRST_SAMP_CLK_WHEN',
             'python_class_name': 'Timing',
             'python_data_type': 'datetime',
@@ -26177,6 +29220,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'FIRST_SAMP_CLK_TIMESCALE',
             'python_class_name': 'Timing',
             'python_data_type': 'Timescale2',
@@ -26200,6 +29246,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Timing'
+            ],
             'name': 'FIRST_SAMP_CLK_OFFSET',
             'python_class_name': 'Timing',
             'python_data_type': 'float',
@@ -26219,6 +29268,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_ADV_TRIG_EDGE',
             'python_data_type': 'Edge1',
             'python_description': '(Deprecated) Specifies on which edge of a digital signal to advance to the next entry in a scan list.',
@@ -26234,6 +29286,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_ADV_TRIG_SRC',
             'python_data_type': 'str',
             'python_description': '(Deprecated) Specifies the name of a terminal where there is a digital signal to use as the source of the Advance Trigger.',
@@ -26250,6 +29305,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ADV_TRIG_TYPE',
             'python_data_type': 'TriggerType5',
             'python_description': '(Deprecated) Specifies the type of trigger to use to advance to the next entry in a switch scan list.',
@@ -26273,6 +29331,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'PAUSE_TRIG_TYPE',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'TriggerType6',
@@ -26297,6 +29358,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_LVL_PAUSE_TRIG_HYST',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
@@ -26321,6 +29385,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_LVL_PAUSE_TRIG_LVL',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
@@ -26345,6 +29412,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_LVL_PAUSE_TRIG_SRC',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'str',
@@ -26370,6 +29440,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_LVL_PAUSE_TRIG_WHEN',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'ActiveLevel',
@@ -26394,6 +29467,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_PAUSE_TRIG_SRC',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'str',
@@ -26419,6 +29495,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_PAUSE_TRIG_WHEN',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'WindowTriggerCondition2',
@@ -26443,6 +29522,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_PAUSE_TRIG_BTM',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
@@ -26467,6 +29549,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_PAUSE_TRIG_TOP',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
@@ -26491,6 +29576,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_LVL_PAUSE_TRIG_SRC',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'str',
@@ -26516,6 +29604,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_LVL_PAUSE_TRIG_WHEN',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'Level1',
@@ -26541,6 +29632,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'START_TRIG_TYPE',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'TriggerType10',
@@ -26565,6 +29659,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_START_TRIG_HYST',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
@@ -26589,6 +29686,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_START_TRIG_LVL',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
@@ -26614,6 +29714,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_START_TRIG_SLOPE',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'Slope1',
@@ -26638,6 +29741,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_START_TRIG_SRC',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
@@ -26662,6 +29768,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_START_TRIG_SRC',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
@@ -26687,6 +29796,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_START_TRIG_WHEN',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'WindowTriggerCondition1',
@@ -26711,6 +29823,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_START_TRIG_BTM',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
@@ -26735,6 +29850,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_START_TRIG_TOP',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
@@ -26760,6 +29878,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_START_TRIG_EDGE',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'Edge1',
@@ -26784,6 +29905,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_START_TRIG_SRC',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
@@ -26808,6 +29932,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_PATTERN_START_TRIG_SRC',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'PhysicalChannel',
@@ -26835,6 +29962,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_PATTERN_START_TRIG_WHEN',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'DigitalPatternCondition1',
@@ -26860,6 +29990,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ARM_START_TRIG_TYPE',
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'TriggerType4',
@@ -26885,6 +30018,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_ARM_START_TRIG_EDGE',
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'Edge1',
@@ -26909,6 +30045,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_ARM_START_TRIG_SRC',
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'str',
@@ -26934,6 +30073,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'REF_TRIG_TYPE',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'TriggerType8',
@@ -26958,6 +30100,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_REF_TRIG_HYST',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
@@ -26982,6 +30127,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_REF_TRIG_LVL',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
@@ -27007,6 +30155,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_REF_TRIG_SLOPE',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'Slope1',
@@ -27031,6 +30182,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_REF_TRIG_SRC',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
@@ -27055,6 +30209,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_REF_TRIG_SRC',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
@@ -27080,6 +30237,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_REF_TRIG_WHEN',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'WindowTriggerCondition1',
@@ -27104,6 +30264,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_REF_TRIG_BTM',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
@@ -27128,6 +30291,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_REF_TRIG_TOP',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
@@ -27153,6 +30319,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_REF_TRIG_EDGE',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'Edge1',
@@ -27177,6 +30346,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_REF_TRIG_SRC',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
@@ -27201,6 +30373,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_PATTERN_REF_TRIG_SRC',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'PhysicalChannel',
@@ -27228,6 +30403,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_PATTERN_REF_TRIG_WHEN',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'DigitalPatternCondition1',
@@ -27252,6 +30430,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'REF_TRIG_PRETRIG_SAMPLES',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'int',
@@ -27276,6 +30457,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'REF_TRIG_DELAY',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
@@ -27300,6 +30484,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'START_TRIG_DELAY',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
@@ -27325,6 +30512,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_REF_TRIG_COUPLING',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'Coupling2',
@@ -27350,6 +30540,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'START_TRIG_DELAY_UNITS',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'DigitalWidthUnits1',
@@ -27374,6 +30567,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'START_TRIG_RETRIGGERABLE',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'bool',
@@ -27398,6 +30594,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': True,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_PATTERN_PAUSE_TRIG_SRC',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'PhysicalChannel',
@@ -27425,6 +30624,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_PATTERN_PAUSE_TRIG_WHEN',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'DigitalPatternCondition1',
@@ -27449,6 +30651,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_PATTERN_START_TRIG_PATTERN',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
@@ -27473,6 +30678,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_PATTERN_REF_TRIG_PATTERN',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
@@ -27497,6 +30705,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_PATTERN_PAUSE_TRIG_PATTERN',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'str',
@@ -27521,6 +30732,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_START_TRIG_DIG_FLTR_ENABLE',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'bool',
@@ -27545,6 +30759,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_START_TRIG_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
@@ -27569,6 +30786,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_START_TRIG_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
@@ -27593,6 +30813,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_START_TRIG_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
@@ -27617,6 +30840,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_START_TRIG_DIG_SYNC_ENABLE',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'bool',
@@ -27641,6 +30867,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_LVL_PAUSE_TRIG_DIG_FLTR_ENABLE',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'bool',
@@ -27665,6 +30894,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_LVL_PAUSE_TRIG_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
@@ -27689,6 +30921,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_LVL_PAUSE_TRIG_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'str',
@@ -27713,6 +30948,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_LVL_PAUSE_TRIG_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
@@ -27737,6 +30975,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_LVL_PAUSE_TRIG_DIG_SYNC_ENABLE',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'bool',
@@ -27761,6 +31002,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_ARM_START_TRIG_DIG_FLTR_ENABLE',
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'bool',
@@ -27785,6 +31029,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_ARM_START_TRIG_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'float',
@@ -27809,6 +31056,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_ARM_START_TRIG_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'str',
@@ -27833,6 +31083,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_ARM_START_TRIG_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'float',
@@ -27857,6 +31110,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_ARM_START_TRIG_DIG_SYNC_ENABLE',
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'bool',
@@ -27882,6 +31138,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_START_TRIG_COUPLING',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'Coupling2',
@@ -27907,6 +31166,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_START_TRIG_COUPLING',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'Coupling2',
@@ -27932,6 +31194,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_REF_TRIG_COUPLING',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'Coupling2',
@@ -27957,6 +31222,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_LVL_PAUSE_TRIG_COUPLING',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'Coupling2',
@@ -27982,6 +31250,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_PAUSE_TRIG_COUPLING',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'Coupling2',
@@ -27999,6 +31270,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_ADV_TRIG_DIG_FLTR_ENABLE',
             'python_data_type': 'bool',
             'python_description': '(Deprecated) Specifies whether to apply the pulse width filter to the signal.',
@@ -28022,6 +31296,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'HSHK_TRIG_TYPE',
             'python_class_name': 'HandshakeTrigger',
             'python_data_type': 'TriggerType9',
@@ -28046,6 +31323,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'INTERLOCKED_HSHK_TRIG_SRC',
             'python_class_name': 'HandshakeTrigger',
             'python_data_type': 'str',
@@ -28071,6 +31351,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'INTERLOCKED_HSHK_TRIG_ASSERTED_LVL',
             'python_class_name': 'HandshakeTrigger',
             'python_data_type': 'Level1',
@@ -28095,6 +31378,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'REF_TRIG_AUTO_TRIG_ENABLE',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
@@ -28119,6 +31405,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'REF_TRIG_AUTO_TRIGGERED',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
@@ -28143,6 +31432,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_REF_TRIG_DIG_FLTR_ENABLE',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
@@ -28167,6 +31459,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_REF_TRIG_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
@@ -28191,6 +31486,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_REF_TRIG_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
@@ -28215,6 +31513,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_REF_TRIG_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
@@ -28239,6 +31540,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'DIG_EDGE_REF_TRIG_DIG_SYNC_ENABLE',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
@@ -28263,6 +31567,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_START_TRIG_DIG_FLTR_ENABLE',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'bool',
@@ -28287,6 +31594,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_START_TRIG_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
@@ -28311,6 +31621,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_START_TRIG_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
@@ -28335,6 +31648,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_START_TRIG_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
@@ -28359,6 +31675,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_START_TRIG_DIG_SYNC_ENABLE',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'bool',
@@ -28383,6 +31702,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_REF_TRIG_DIG_FLTR_ENABLE',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
@@ -28407,6 +31729,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_REF_TRIG_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
@@ -28431,6 +31756,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_REF_TRIG_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
@@ -28455,6 +31783,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_REF_TRIG_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
@@ -28479,6 +31810,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_EDGE_REF_TRIG_DIG_SYNC_ENABLE',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
@@ -28503,6 +31837,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_REF_TRIG_DIG_FLTR_ENABLE',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
@@ -28527,6 +31864,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_REF_TRIG_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
@@ -28551,6 +31891,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_REF_TRIG_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
@@ -28575,6 +31918,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_REF_TRIG_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
@@ -28599,6 +31945,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_REF_TRIG_DIG_SYNC_ENABLE',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
@@ -28623,6 +31972,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_LVL_PAUSE_TRIG_DIG_FLTR_ENABLE',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'bool',
@@ -28647,6 +31999,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_LVL_PAUSE_TRIG_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
@@ -28671,6 +32026,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_LVL_PAUSE_TRIG_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'str',
@@ -28695,6 +32053,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_LVL_PAUSE_TRIG_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
@@ -28719,6 +32080,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_LVL_PAUSE_TRIG_DIG_SYNC_ENABLE',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'bool',
@@ -28743,6 +32107,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_PAUSE_TRIG_DIG_FLTR_ENABLE',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'bool',
@@ -28767,6 +32134,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_PAUSE_TRIG_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
@@ -28791,6 +32161,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_PAUSE_TRIG_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'str',
@@ -28815,6 +32188,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_PAUSE_TRIG_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'float',
@@ -28839,6 +32215,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_PAUSE_TRIG_DIG_SYNC_ENABLE',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'bool',
@@ -28863,6 +32242,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_START_TRIG_DIG_FLTR_ENABLE',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'bool',
@@ -28887,6 +32269,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_START_TRIG_DIG_FLTR_MIN_PULSE_WIDTH',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
@@ -28911,6 +32296,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_START_TRIG_DIG_FLTR_TIMEBASE_SRC',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
@@ -28935,6 +32323,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_START_TRIG_DIG_FLTR_TIMEBASE_RATE',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
@@ -28959,6 +32350,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_WIN_START_TRIG_DIG_SYNC_ENABLE',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'bool',
@@ -28983,6 +32377,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'START_TRIG_TERM',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
@@ -29007,6 +32404,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'REF_TRIG_TERM',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
@@ -29031,6 +32431,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'PAUSE_TRIG_TERM',
             'python_class_name': 'PauseTrigger',
             'python_data_type': 'str',
@@ -29055,6 +32458,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ARM_START_TERM',
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'str',
@@ -29080,6 +32486,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'TRIGGER_SYNC_TYPE',
             'python_class_name': 'Triggers',
             'python_data_type': 'SyncType',
@@ -29104,6 +32513,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'TIME_START_TRIG_SRC',
             'python_data_type': 'str',
             'python_description': 'Indicates the terminal to be used for start time triggering ',
@@ -29127,6 +32539,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'START_TRIG_TIMESCALE',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'Timescale2',
@@ -29151,6 +32566,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'START_TRIG_TRIG_WHEN',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'datetime',
@@ -29175,6 +32593,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'START_TRIG_TRIG_WIN',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
@@ -29199,6 +32620,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'START_TRIG_RETRIGGER_WIN',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
@@ -29223,6 +32647,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'START_TRIG_MAX_NUM_TRIGS_TO_DETECT',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'int',
@@ -29247,6 +32674,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'REF_TRIG_RETRIGGERABLE',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
@@ -29271,6 +32701,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'REF_TRIG_TRIG_WIN',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
@@ -29295,6 +32728,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'REF_TRIG_RETRIGGER_WIN',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
@@ -29319,6 +32755,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'REF_TRIG_MAX_NUM_TRIGS_TO_DETECT',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'int',
@@ -29343,6 +32782,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_MULTI_EDGE_START_TRIG_SRCS',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'str',
@@ -29368,6 +32810,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_MULTI_EDGE_START_TRIG_SLOPES',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'Slope1',
@@ -29392,6 +32837,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_MULTI_EDGE_START_TRIG_LVLS',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
@@ -29416,6 +32864,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_MULTI_EDGE_START_TRIG_HYSTS',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'float',
@@ -29441,6 +32892,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_MULTI_EDGE_START_TRIG_COUPLINGS',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'Coupling2',
@@ -29465,6 +32919,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_MULTI_EDGE_REF_TRIG_SRCS',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'str',
@@ -29490,6 +32947,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_MULTI_EDGE_REF_TRIG_SLOPES',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'Slope1',
@@ -29514,6 +32974,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_MULTI_EDGE_REF_TRIG_LVLS',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
@@ -29538,6 +33001,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_MULTI_EDGE_REF_TRIG_HYSTS',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'float',
@@ -29563,6 +33029,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ANLG_MULTI_EDGE_REF_TRIG_COUPLINGS',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'Coupling2',
@@ -29588,6 +33057,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'START_TRIG_TIMESTAMP_TIMESCALE',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'Timescale2',
@@ -29612,6 +33084,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'REF_TRIG_TIMESTAMP_ENABLE',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'bool',
@@ -29636,6 +33111,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'REF_TRIG_TIMESTAMP_VAL',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'datetime',
@@ -29661,6 +33139,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'REF_TRIG_TIMESTAMP_TIMESCALE',
             'python_class_name': 'ReferenceTrigger',
             'python_data_type': 'Timescale2',
@@ -29685,6 +33166,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ARM_START_TRIG_TRIG_WHEN',
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'datetime',
@@ -29710,6 +33194,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ARM_START_TRIG_TIMESCALE',
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'Timescale2',
@@ -29734,6 +33221,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ARM_START_TRIG_TIMESTAMP_ENABLE',
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'bool',
@@ -29758,6 +33248,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ARM_START_TRIG_TIMESTAMP_VAL',
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'datetime',
@@ -29783,6 +33276,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'ARM_START_TRIG_TIMESTAMP_TIMESCALE',
             'python_class_name': 'ArmStartTrigger',
             'python_data_type': 'Timescale2',
@@ -29807,6 +33303,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'START_TRIG_TIMESTAMP_ENABLE',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'bool',
@@ -29831,6 +33330,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Trigger'
+            ],
             'name': 'START_TRIG_TIMESTAMP_VAL',
             'python_class_name': 'StartTrigger',
             'python_data_type': 'datetime',
@@ -29858,6 +33360,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Watchdog'
+            ],
             'name': 'EXPIR_TRIG_TYPE',
             'python_class_name': 'Watchdog',
             'python_data_type': 'TriggerType4',
@@ -29882,6 +33387,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Watchdog'
+            ],
             'name': 'DIG_EDGE_WATCHDOG_EXPIR_TRIG_SRC',
             'python_class_name': 'Watchdog',
             'python_data_type': 'str',
@@ -29907,6 +33415,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Watchdog'
+            ],
             'name': 'DIG_EDGE_WATCHDOG_EXPIR_TRIG_EDGE',
             'python_class_name': 'Watchdog',
             'python_data_type': 'Edge1',
@@ -29937,6 +33448,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Watchdog Expiration States'
+            ],
             'name': 'DO_EXPIR_STATE',
             'python_class_name': 'ExpirationState',
             'python_data_type': 'DigitalLineState',
@@ -29961,6 +33475,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Watchdog'
+            ],
             'name': 'HAS_EXPIRED',
             'python_class_name': 'Watchdog',
             'python_data_type': 'bool',
@@ -29985,6 +33502,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Watchdog'
+            ],
             'name': 'TIMEOUT',
             'python_class_name': 'Watchdog',
             'python_data_type': 'float',
@@ -30008,6 +33528,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Watchdog'
+            ],
             'name': 'EXPIR_TRIG_TRIG_ON_NETWORK_CONN_LOSS',
             'python_class_name': 'Watchdog',
             'python_data_type': 'bool',
@@ -30037,6 +33560,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Watchdog Expiration States'
+            ],
             'name': 'AO_OUTPUT_TYPE',
             'python_class_name': 'ExpirationState',
             'python_data_type': 'WatchdogAOExpirState',
@@ -30065,6 +33591,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Watchdog Expiration States'
+            ],
             'name': 'AO_EXPIR_STATE',
             'python_class_name': 'ExpirationState',
             'python_data_type': 'float',
@@ -30095,6 +33624,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Advanced:Watchdog Expiration States'
+            ],
             'name': 'CO_EXPIR_STATE',
             'python_class_name': 'ExpirationState',
             'python_data_type': 'WatchdogCOExpirState',
@@ -30122,6 +33654,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'REGEN_MODE',
             'python_class_name': 'OutStream',
             'python_data_type': 'RegenerationMode1',
@@ -30145,6 +33680,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'CURR_WRITE_POS',
             'python_class_name': 'OutStream',
             'python_data_type': 'int',
@@ -30168,6 +33706,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'SPACE_AVAIL',
             'python_class_name': 'OutStream',
             'python_data_type': 'int',
@@ -30192,6 +33733,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'RELATIVE_TO',
             'python_class_name': 'OutStream',
             'python_data_type': 'WriteRelativeTo',
@@ -30215,6 +33759,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'OFFSET',
             'python_class_name': 'OutStream',
             'python_data_type': 'int',
@@ -30238,6 +33785,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'TOTAL_SAMP_PER_CHAN_GENERATED',
             'python_class_name': 'OutStream',
             'python_data_type': 'int',
@@ -30261,6 +33811,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'RAW_DATA_WIDTH',
             'python_class_name': 'OutStream',
             'python_data_type': 'int',
@@ -30284,6 +33837,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'NUM_CHANS',
             'python_class_name': 'OutStream',
             'python_data_type': 'int',
@@ -30307,6 +33863,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'DIGITAL_LINES_BYTES_PER_CHAN',
             'python_class_name': 'OutStream',
             'python_data_type': 'int',
@@ -30332,6 +33891,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'WAIT_MODE',
             'python_class_name': 'OutStream',
             'python_data_type': 'WaitMode2',
@@ -30355,6 +33917,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'SLEEP_TIME',
             'python_class_name': 'OutStream',
             'python_data_type': 'float',
@@ -30378,6 +33943,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'NEXT_WRITE_IS_LAST',
             'python_class_name': 'DaqStream',
             'python_data_type': 'bool',
@@ -30401,6 +33969,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'OVERCURRENT_CHANS_EXIST',
             'python_class_name': 'OutStream',
             'python_data_type': 'bool',
@@ -30424,6 +33995,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'OVERCURRENT_CHANS',
             'python_class_name': 'OutStream',
             'python_data_type': 'str',
@@ -30447,6 +34021,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'OPEN_CURRENT_LOOP_CHANS_EXIST',
             'python_class_name': 'OutStream',
             'python_data_type': 'bool',
@@ -30470,6 +34047,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'OPEN_CURRENT_LOOP_CHANS',
             'python_class_name': 'OutStream',
             'python_data_type': 'str',
@@ -30493,6 +34073,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'POWER_SUPPLY_FAULT_CHANS_EXIST',
             'python_class_name': 'OutStream',
             'python_data_type': 'bool',
@@ -30516,6 +34099,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'POWER_SUPPLY_FAULT_CHANS',
             'python_class_name': 'OutStream',
             'python_data_type': 'str',
@@ -30539,6 +34125,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'OVERTEMPERATURE_CHANS_EXIST',
             'python_class_name': 'OutStream',
             'python_data_type': 'bool',
@@ -30562,6 +34151,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'ACCESSORY_INSERTION_OR_REMOVAL_DETECTED',
             'python_class_name': 'OutStream',
             'python_data_type': 'bool',
@@ -30585,6 +34177,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'DEVS_WITH_INSERTED_OR_REMOVED_ACCESSORIES',
             'python_class_name': 'OutStream',
             'python_data_type': 'str',
@@ -30608,6 +34203,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'OVERTEMPERATURE_CHANS',
             'python_class_name': 'OutStream',
             'python_data_type': 'str',
@@ -30631,6 +34229,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'OVERLOADED_CHANS_EXIST',
             'python_class_name': 'OutStream',
             'python_data_type': 'bool',
@@ -30654,6 +34255,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'OVERLOADED_CHANS',
             'python_class_name': 'OutStream',
             'python_data_type': 'str',
@@ -30677,6 +34281,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'EXTERNAL_OVERVOLTAGE_CHANS_EXIST',
             'python_class_name': 'OutStream',
             'python_data_type': 'bool',
@@ -30700,6 +34307,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'EXTERNAL_OVERVOLTAGE_CHANS',
             'python_class_name': 'OutStream',
             'python_data_type': 'str',
@@ -30723,6 +34333,9 @@ attributes = {
             'has_explicit_write_buffer_size': False,
             'is_list': False,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'SYNC_UNLOCKED_CHANS_EXIST',
             'python_class_name': 'OutStream',
             'python_data_type': 'bool',
@@ -30746,6 +34359,9 @@ attributes = {
             'has_explicit_write_buffer_size': True,
             'is_list': True,
             'is_python_object': False,
+            'lv_filter': [
+                'Write'
+            ],
             'name': 'SYNC_UNLOCKED_CHANS',
             'python_class_name': 'OutStream',
             'python_data_type': 'str',
