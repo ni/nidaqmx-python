@@ -220,6 +220,12 @@ def sim_9189_device(system: nidaqmx.system.System) -> nidaqmx.system.Device:
 
 
 @pytest.fixture(scope="function")
+def sim_9205_device(sim_9189_device: nidaqmx.system.Device) -> nidaqmx.system.Device:
+    """Gets device information for a simulated 9205 device within a 9185."""
+    return _cdaq_module_by_product_type("NI 9205", sim_9189_device)
+
+
+@pytest.fixture(scope="function")
 def sim_time_aware_9215_device(sim_9189_device: nidaqmx.system.Device) -> nidaqmx.system.Device:
     """Gets device information for a simulated 9215 device within a 9185."""
     return _cdaq_module_by_product_type("NI 9215", sim_9189_device)
