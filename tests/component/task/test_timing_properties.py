@@ -1,7 +1,7 @@
 import pytest
 
 from nidaqmx import DaqError
-from nidaqmx.constants import AcquisitionType, SampleTimingType
+from nidaqmx.constants import AcquisitionType, SampleTimingType, Edge
 from nidaqmx.error_codes import DAQmxErrors
 
 
@@ -135,6 +135,12 @@ def test___timing___get_enum_property___returns_value(task, sim_6363_device):
     assert task.timing.samp_quant_samp_mode == AcquisitionType.CONTINUOUS
 
 
+def test___timing___get_enum_property_with_device_context___returns_value(task, sim_9205_device):
+    task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
+
+    assert task.timing[sim_9205_device].ai_conv_active_edge == Edge.RISING
+
+
 def test___timing___get_enum_property_with_device_context___throws_daqerror(task, sim_6363_device):
     task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
     task.timing.cfg_samp_clk_timing(1000, sample_mode=AcquisitionType.CONTINUOUS)
@@ -153,6 +159,16 @@ def test___timing___set_enum_property___returns_assigned_value(task, sim_6363_de
     assert task.timing.samp_quant_samp_mode == AcquisitionType.FINITE
 
 
+def test___timing___set_enum_property_with_device_context___returns_assigned_value(
+    task, sim_9205_device
+):
+    task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
+
+    task.timing[sim_9205_device].ai_conv_active_edge = Edge.FALLING
+
+    assert task.timing[sim_9205_device].ai_conv_active_edge == Edge.FALLING
+
+
 def test___timing___set_enum_property_with_device_context___throw_daqerror(task, sim_6363_device):
     task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
     task.timing.cfg_samp_clk_timing(1000, sample_mode=AcquisitionType.CONTINUOUS)
@@ -169,6 +185,18 @@ def test___timing___reset_enum_property___returns_default_value(task, sim_6363_d
     del task.timing.samp_quant_samp_mode
 
     assert task.timing.samp_quant_samp_mode == AcquisitionType.CONTINUOUS
+
+
+def test___timing___reset_enum_property_with_device_context___returns_default_value(
+    task, sim_9205_device
+):
+    task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
+    default_value = task.timing[sim_9205_device].ai_conv_active_edge
+    task.timing[sim_9205_device].ai_conv_active_edge = Edge.FALLING
+
+    del task.timing[sim_9205_device].ai_conv_active_edge
+
+    assert task.timing[sim_9205_device].ai_conv_active_edge == default_value
 
 
 def test___timing___reset_enum_property_with_device_context___throws_daqerror(
@@ -275,6 +303,12 @@ def test___timing___get_uint32_property___returns_value(task, sim_6363_device):
     assert task.timing.samp_clk_timebase_div == 100000
 
 
+def test___timing___get_uint32_property_with_device_context___returns_value(task, sim_9205_device):
+    task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
+
+    assert task.timing[sim_9205_device].ai_conv_timebase_div == 1121
+
+
 def test___timing___get_uint32_property_with_device_context___throws_daqerror(
     task, sim_6363_device
 ):
@@ -293,6 +327,16 @@ def test___timing___set_uint32_property___returns_assigned_value(task, sim_6363_
     task.timing.samp_clk_timebase_div = 500
 
     assert task.timing.samp_clk_timebase_div == 500
+
+
+def test___timing___set_uint32_property_with_device_context___returns_assigned_value(
+    task, sim_9205_device
+):
+    task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
+
+    task.timing[sim_9205_device].ai_conv_timebase_div = 1150
+
+    assert task.timing[sim_9205_device].ai_conv_timebase_div == 1150
 
 
 def test___timing___set_uint32_property_with_device_context___throws_daqerror(
@@ -316,6 +360,18 @@ def test___timing___reset_uint32_property___returns_default_value(task, sim_6363
     del task.timing.samp_clk_timebase_div
 
     assert task.timing.samp_clk_timebase_div == default_value
+
+
+def test___timing___reset_uint32_property_with_device_context___returns_default_value(
+    task, sim_9205_device
+):
+    task.ai_channels.add_ai_voltage_chan(sim_9205_device.ai_physical_chans[0].name)
+    default_value = task.timing[sim_9205_device].ai_conv_timebase_div
+    task.timing[sim_9205_device].ai_conv_timebase_div = 1150
+
+    del task.timing[sim_9205_device].ai_conv_timebase_div
+
+    assert task.timing[sim_9205_device].ai_conv_timebase_div == default_value
 
 
 def test___timing___reset_uint32_property_with_device_context___throws_daqerror(
