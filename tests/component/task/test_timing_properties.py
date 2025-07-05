@@ -261,7 +261,6 @@ def test___timing___reset_float64_property_with_device_context___throws_daqerror
     task, sim_6363_device
 ):
     task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
-    default_value = task.timing.samp_clk_rate
     task.timing.cfg_samp_clk_timing(10000)
 
     with pytest.raises(DaqError) as e:
@@ -323,7 +322,6 @@ def test___timing___reset_uint32_property_with_device_context___throws_daqerror(
     task, sim_6363_device
 ):
     task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
-    default_value = task.timing.samp_clk_timebase_div
     task.timing.cfg_samp_clk_timing(10000)
 
     with pytest.raises(DaqError) as e:
@@ -381,7 +379,6 @@ def test___timing___reset_uint64_property_with_device_context___throws_daqerror(
     task, sim_6363_device
 ):
     task.ai_channels.add_ai_voltage_chan(sim_6363_device.ai_physical_chans[0].name)
-    default_value = task.timing.samp_quant_samp_per_chan
     task.timing.cfg_samp_clk_timing(1000, samps_per_chan=10000)
 
     with pytest.raises(DaqError) as e:
