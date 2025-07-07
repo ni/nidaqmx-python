@@ -27,13 +27,13 @@ dev = ["backports.zoneinfo", "freezegun (>=1.0,<2.0)", "jinja2 (>=3.0)", "pytest
 
 [[package]]
 name = "bandit"
-version = "1.8.5"
+version = "1.8.6"
 description = "Security oriented static analyser for python code."
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "bandit-1.8.5-py3-none-any.whl", hash = "sha256:cb2e57524e99e33ced48833c6cc9c12ac78ae970bb6a450a83c4b506ecc1e2f9"},
-    {file = "bandit-1.8.5.tar.gz", hash = "sha256:db812e9c39b8868c0fed5278b77fffbbaba828b4891bc80e34b9c50373201cfd"},
+    {file = "bandit-1.8.6-py3-none-any.whl", hash = "sha256:3348e934d736fcdb68b6aa4030487097e23a501adf3e7827b63658df464dddd0"},
+    {file = "bandit-1.8.6.tar.gz", hash = "sha256:dbfe9c25fc6961c2078593de55fd19f2559f9e45b99f1272341f5b95dea4e56b"},
 ]
 
 [package.dependencies]
@@ -2453,24 +2453,24 @@ test = ["devpi-process (>=1.0.2)", "pytest (>=8.3.4)", "pytest-mock (>=3.14)"]
 
 [[package]]
 name = "types-grpcio"
-version = "1.0.0.20250603"
+version = "1.0.0.20250703"
 description = "Typing stubs for grpcio"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "types_grpcio-1.0.0.20250603-py3-none-any.whl", hash = "sha256:4ef6a79d5f50d942d48eeb1cdfc2147fff722e74fd4b29598fbefb6dcf39c159"},
-    {file = "types_grpcio-1.0.0.20250603.tar.gz", hash = "sha256:27e83fba0471d705ec54a60dbc50d3d8cc988aa38477644da8bc6173531d0c1a"},
+    {file = "types_grpcio-1.0.0.20250703-py3-none-any.whl", hash = "sha256:78d1bfc33b58a56697ef99e666e34be4c6887631341c75fdd28d58587aef5d9f"},
+    {file = "types_grpcio-1.0.0.20250703.tar.gz", hash = "sha256:baf100184e5353cb60f045fb4fd47f37a360bedf0f19581535e4c3a3a1f7912b"},
 ]
 
 [[package]]
 name = "types-protobuf"
-version = "6.30.2.20250516"
+version = "6.30.2.20250703"
 description = "Typing stubs for protobuf"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "types_protobuf-6.30.2.20250516-py3-none-any.whl", hash = "sha256:8c226d05b5e8b2623111765fa32d6e648bbc24832b4c2fddf0fa340ba5d5b722"},
-    {file = "types_protobuf-6.30.2.20250516.tar.gz", hash = "sha256:aecd1881770a9bb225ede66872ef7f0da4505edd0b193108edd9892e48d49a41"},
+    {file = "types_protobuf-6.30.2.20250703-py3-none-any.whl", hash = "sha256:fa5aff9036e9ef432d703abbdd801b436a249b6802e4df5ef74513e272434e57"},
+    {file = "types_protobuf-6.30.2.20250703.tar.gz", hash = "sha256:609a974754bbb71fa178fc641f51050395e8e1849f49d0420a6281ed8d1ddf46"},
 ]
 
 [[package]]
