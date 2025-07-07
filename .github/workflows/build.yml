@@ -12,13 +12,13 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Set up Python
-        uses: ni/python-actions/setup-python@49cd7a9a4098c459b90ba97e8e56bf5cd80997bb # v0.4.0
+        uses: ni/python-actions/setup-python@5286c12d65d90b2ea738bd57d452dc4366497581 # v0.4.1
         id: setup-python
         with:
           # The codegen scripts require Python 3.9 or later.
           python-version: "3.9"
       - name: Set up Poetry
-        uses: ni/python-actions/setup-poetry@49cd7a9a4098c459b90ba97e8e56bf5cd80997bb # v0.4.0
+        uses: ni/python-actions/setup-poetry@5286c12d65d90b2ea738bd57d452dc4366497581 # v0.4.1
       - name: Cache virtualenv (all extras)
         uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
