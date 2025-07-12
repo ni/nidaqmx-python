@@ -1,7 +1,7 @@
 import pytest
 
 from nidaqmx import DaqError
-from nidaqmx.constants import AcquisitionType, SampleTimingType, Edge
+from nidaqmx.constants import AcquisitionType, Edge, SampleTimingType
 from nidaqmx.error_codes import DAQmxErrors
 
 
@@ -19,6 +19,7 @@ def test___timing___get_boolean_property_with_device_context___throw_daqerror(
 
     with pytest.raises(DaqError) as e:
         task.timing[sim_6363_device].simultaneous_ao_enable
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
@@ -39,6 +40,7 @@ def test___timing___set_boolean_property_with_device_context___throw_daqerror(
 
     with pytest.raises(DaqError) as e:
         task.timing[sim_6363_device].simultaneous_ao_enable = True
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
@@ -61,6 +63,7 @@ def test___timing___reset_boolean_property_with_device_context___throw_daqerror(
 
     with pytest.raises(DaqError) as e:
         del task.timing[sim_6363_device].simultaneous_ao_enable
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
@@ -77,6 +80,7 @@ def test___timing___get_string_property_with_device_context___throw_daqerror(tas
 
     with pytest.raises(DaqError) as e:
         _ = task.timing[sim_6363_device].samp_clk_src
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
@@ -95,6 +99,7 @@ def test___timing___set_string_property_with_device_context___throw_daqerror(tas
 
     with pytest.raises(DaqError) as e:
         task.timing[sim_6363_device].samp_clk_src = "PFI0"
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
@@ -115,6 +120,7 @@ def test___timing___reset_string_property_with_device_context___throw_daqerror(
 
     with pytest.raises(DaqError) as e:
         del task.timing[sim_6363_device].samp_clk_src
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
@@ -147,6 +153,7 @@ def test___timing___get_enum_property_with_device_context___throws_daqerror(task
 
     with pytest.raises(DaqError) as e:
         _ = task.timing[sim_6363_device].samp_quant_samp_mode
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
@@ -175,6 +182,7 @@ def test___timing___set_enum_property_with_device_context___throw_daqerror(task,
 
     with pytest.raises(DaqError) as e:
         task.timing[sim_6363_device].samp_quant_samp_mode = AcquisitionType.FINITE
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
@@ -207,6 +215,7 @@ def test___timing___reset_enum_property_with_device_context___throws_daqerror(
 
     with pytest.raises(DaqError) as e:
         del task.timing[sim_6363_device].samp_quant_samp_mode
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
@@ -231,6 +240,7 @@ def test___timing___get_float64_property_with_device_context___throws_daqerror(
 
     with pytest.raises(DaqError) as e:
         _ = task.timing[sim_6363_device].samp_clk_rate
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
@@ -260,6 +270,7 @@ def test___timing___set_float64_property_with_device_context___throws_daqerror(
 
     with pytest.raises(DaqError) as e:
         task.timing[sim_6363_device].samp_clk_rate = 2000
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
@@ -293,6 +304,7 @@ def test___timing___reset_float64_property_with_device_context___throws_daqerror
 
     with pytest.raises(DaqError) as e:
         del task.timing[sim_6363_device].samp_clk_rate
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
@@ -317,6 +329,7 @@ def test___timing___get_uint32_property_with_device_context___throws_daqerror(
 
     with pytest.raises(DaqError) as e:
         _ = task.timing[sim_6363_device].samp_clk_timebase_div
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
@@ -347,6 +360,7 @@ def test___timing___set_uint32_property_with_device_context___throws_daqerror(
 
     with pytest.raises(DaqError) as e:
         task.timing[sim_6363_device].samp_clk_timebase_div = 500
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
@@ -382,6 +396,7 @@ def test___timing___reset_uint32_property_with_device_context___throws_daqerror(
 
     with pytest.raises(DaqError) as e:
         del task.timing[sim_6363_device].samp_clk_timebase_div
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
@@ -400,6 +415,7 @@ def test___timing___get_uint64_property_with_device_context___throws_daqerror(
 
     with pytest.raises(DaqError) as e:
         _ = task.timing[sim_6363_device].samp_quant_samp_per_chan
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
@@ -418,6 +434,7 @@ def test___timing___set_uint64_property_with_device_context___throws_daqerror(
 
     with pytest.raises(DaqError) as e:
         task.timing[sim_6363_device].samp_quant_samp_per_chan = 10000
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
@@ -439,6 +456,7 @@ def test___timing___reset_uint64_property_with_device_context___throws_daqerror(
 
     with pytest.raises(DaqError) as e:
         del task.timing[sim_6363_device].samp_quant_samp_per_chan
+
     assert e.value.error_type == DAQmxErrors.M_STUDIO_OPERATION_DOES_NOT_SUPPORT_DEVICE_CONTEXT
 
 
