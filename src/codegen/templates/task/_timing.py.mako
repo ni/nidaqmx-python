@@ -45,7 +45,7 @@ class Timing:
             raise DaqError( 
                 f"Cannot set active device '{dev}' because active device '{self._active_devs}' is already set.",
                 DAQmxErrors.UNKNOWN)
-        if isinstance(dev, str) or isinstance(dev, Device):
+        if isinstance(dev, (str, Device)):
             return Timing(self._handle, self._interpreter, active_devs=dev)
         else:
             raise TypeError(f"Invalid active_devs input: {dev!r} (type: {type(dev).__name__}). Expected str or Device.")
